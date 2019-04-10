@@ -400,6 +400,7 @@ tests/libs/zbxalgo/.deps
 tests/libs/zbxalgo/Makefile
 tests/libs/zbxalgo/Makefile.in
 tests/libs/zbxalgo/evaluate
+tests/libs/zbxalgo/queue
 tests/libs/zbxcommon/..........[!!-~][ZBXNEXT-4724]
 tests/libs/zbxcommon/.deps
 tests/libs/zbxcommon/ADFGIJLPST
@@ -486,5 +487,6 @@ tests/zabbix_server/preprocessor/.deps
 tests/zabbix_server/preprocessor/ADFGIJLPST
 tests/zabbix_server/preprocessor/Makefile
 tests/zabbix_server/preprocessor/Makefile.in
+tests/zabbix_server/preprocessor/item_preproc_xpath
 tests/zabbix_server/preprocessor/zbx_item_preproc
 /zabbix-*.tar.gz
