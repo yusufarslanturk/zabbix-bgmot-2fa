@@ -1114,7 +1114,7 @@ define('NAME_DELIMITER', ': ');
 
 define('UNKNOWN_VALUE', '');
 
-// End of line sequence
+// End of line sequence.
 define('ZBX_EOL_LF',	0);
 define('ZBX_EOL_CRLF',	1);
 
