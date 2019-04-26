@@ -107,13 +107,21 @@ static int	get_dmi_info(char *buf, int bufsize, int flags)
 
 	if (-1 != (fd = open(SYS_TABLE_FILE, O_RDONLY)))
 	{
+		int	smbuf_offset = 0;
+		ssize_t	nbytes;
+
 		if (-1 == fstat(fd, &file_buf))
 			goto close;
 
 		smbuf = (unsigned char *)zbx_malloc(NULL, file_buf.st_size);
 
-		if (-1 == (ssize_t)(smbios_len = read(fd, smbuf, file_buf.st_size)))
-			goto clean;
+		while (0 != (nbytes = read(fd, smbuf + smbuf_offset, file_buf.st_size - smbuf_offset)))
+		{
+			if (-1 == nbytes)
+				goto clean;
+
+			smbios_len += (size_t)nbytes;
+		}
 	}
 	else if (-1 != (fd = open(DEV_MEM, O_RDONLY)))
 	{
