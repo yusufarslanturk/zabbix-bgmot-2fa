@@ -2423,6 +2423,10 @@ button {
 			background-color: $transparent;
 		}
 	}
+
+	&.hidden {
+		display: none;
+	}
 }
 
 .btn-search {

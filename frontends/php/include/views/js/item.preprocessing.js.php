@@ -251,9 +251,12 @@
 
 				var sortable_count = $preprocessing.find('li.sortable').length;
 
+				if (sortable_count > 1) {
+					$('#preproc_test_all').removeClass('hidden');
+				}
+
 				if (sortable_count == 1) {
 					$preprocessing.find('div.<?= ZBX_STYLE_DRAG_ICON ?>').addClass('<?= ZBX_STYLE_DISABLED ?>');
-					$('#preproc_test_all').prop('disabled', false);
 				}
 				else if (sortable_count > 1) {
 					$preprocessing
@@ -283,9 +286,12 @@
 
 				var sortable_count = $preprocessing.find('li.sortable').length;
 
+				if (sortable_count < 2) {
+					$('#preproc_test_all').addClass('hidden');
+				}
+
 				if (sortable_count == 0) {
 					$('.preprocessing-list-head').hide();
-					$('#preproc_test_all').prop('disabled', true);
 				}
 				else if (sortable_count == 1) {
 					$preprocessing
