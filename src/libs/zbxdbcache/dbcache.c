@@ -2417,11 +2417,13 @@ static void	DCmass_proxy_add_history(ZBX_DC_HISTORY *history, int history_num)
 			case ITEM_VALUE_TYPE_UINT64:
 			case ITEM_VALUE_TYPE_STR:
 			case ITEM_VALUE_TYPE_TEXT:
-			case ITEM_VALUE_TYPE_NONE:
 				if (0 != (h->flags & ZBX_DC_FLAG_META))
 					h_meta_num++;
 				else
 					h_num++;
+				break;
+			case ITEM_VALUE_TYPE_NONE:
+				h_num++;
 				break;
 			default:
 				THIS_SHOULD_NEVER_HAPPEN;
