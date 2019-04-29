@@ -634,8 +634,18 @@ static void	preprocessor_enqueue(zbx_preprocessing_manager_t *manager, zbx_prepr
 
 	if (NULL == item || 0 == item->preproc_ops_num || NULL == value->result || 0 == ISSET_VALUE(value->result))
 	{
-		state = REQUEST_STATE_DONE;
+		zbx_preproc_history_t	*vault;
 
+		if (ITEM_STATE_NOTSUPPORTED == value->state &&
+				NULL != (vault = (zbx_preproc_history_t *)zbx_hashset_search(&manager->history_cache,
+				&value->itemid)))
+		{
+			zbx_vector_ptr_clear_ext(&vault->history, (zbx_clean_func_t)zbx_preproc_op_history_free);
+			zbx_vector_ptr_destroy(&vault->history);
+			zbx_hashset_remove_direct(&manager->history_cache, vault);
+		}
+
+		state = REQUEST_STATE_DONE;
 		if (NULL == manager->queue.head)
 		{
 			/* queue is empty and item is done, it can be flushed */
