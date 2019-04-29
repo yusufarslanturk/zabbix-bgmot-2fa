@@ -115,7 +115,10 @@ class CFormElement extends CElement {
 			],
 			'CDropdownElement'			=> '/select[@name]',
 			'CCheckboxElement'			=> '/input[@name][@type="checkbox" or @type="radio"]',
-			'CMultiselectElement'		=> '/div[@class="multiselect-control"]',
+			'CMultiselectElement'		=> [
+				'/div[@class="multiselect-control"]',
+				'/div/div[@class="multiselect-control"]' // TODO: remove after fix DEV-1071
+			],
 			'CSegmentedRadioElement'	=> [
 				'/ul[@class="radio-list-control"]',
 				'/div/ul[@class="radio-list-control"]',

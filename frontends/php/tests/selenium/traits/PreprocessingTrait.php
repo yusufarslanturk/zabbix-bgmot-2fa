@@ -192,4 +192,35 @@ trait PreprocessingTrait {
 
 		return $steps;
 	}
+
+	/**
+	 * Get preprocessing steps and convert them to data.
+	 *
+	 * @return array
+	 */
+	private function listPreprocessingSteps() {
+		$steps = $this->getPreprocessingSteps(true);
+		$data = [];
+
+		foreach ($steps as $i => $step) {
+			$values = [];
+			foreach ($step as $control) {
+				$field = $control['field'];
+
+				if ($control['element'] === null) {
+					continue;
+				}
+
+				$value = call_user_func_array([$control['element'], $field['value'][0]],
+						array_key_exists('params', $field['value']) ? $field['value']['params'] : []
+				);
+
+				$values[$field['name']] = $value;
+			}
+
+			$data[] = $values;
+		}
+
+		return $data;
+	}
 }
