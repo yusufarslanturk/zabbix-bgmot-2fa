@@ -2163,6 +2163,8 @@ try_again:
 
 	for (i = 0; i < data_num; i++)
 	{
+		size_t	last_offset;
+
 		if (SUCCEED != errcodes[i])
 			continue;
 
@@ -2180,8 +2182,6 @@ try_again:
 		zbx_json_addobject(j, NULL);
 		zbx_json_adduint64(j, ZBX_PROTO_TAG_ID, hd->id);
 		zbx_json_adduint64(j, ZBX_PROTO_TAG_ITEMID, dc_items[i].itemid);
-		zbx_json_adduint64(j, ZBX_PROTO_TAG_CLOCK, hd->clock);
-		zbx_json_adduint64(j, ZBX_PROTO_TAG_NS, hd->ns);
 
 		if (0 != hd->timestamp)
 			zbx_json_adduint64(j, ZBX_PROTO_TAG_LOGTIMESTAMP, hd->timestamp);
@@ -2201,13 +2201,23 @@ try_again:
 		if (0 != hd->state)
 			zbx_json_adduint64(j, ZBX_PROTO_TAG_STATE, hd->state);
 
+		last_offset = j->buffer_offset;
+
 		if (0 == (PROXY_HISTORY_FLAG_NOVALUE & hd->flags))
+		{
 			zbx_json_addstring(j, ZBX_PROTO_TAG_VALUE, &string_buffer[hd->pvalue], ZBX_JSON_TYPE_STRING);
+		}
 
 		if (0 != (PROXY_HISTORY_FLAG_META & hd->flags))
 		{
 			zbx_json_adduint64(j, ZBX_PROTO_TAG_LASTLOGSIZE, hd->lastlogsize);
 			zbx_json_adduint64(j, ZBX_PROTO_TAG_MTIME, hd->mtime);
+		}
+
+		if (last_offset != j->buffer_offset)
+		{
+			zbx_json_adduint64(j, ZBX_PROTO_TAG_CLOCK, hd->clock);
+			zbx_json_adduint64(j, ZBX_PROTO_TAG_NS, hd->ns);
 		}
 
 		zbx_json_close(j);
