@@ -241,6 +241,7 @@ static zbx_uint32_t	preprocessor_create_task(zbx_preprocessing_manager_t *manage
 	return zbx_preprocessor_pack_task(task, request->value.itemid, request->value_type, request->value.ts, &value,
 			phistory, request->steps, request->steps_num);
 }
+
 /******************************************************************************
  *                                                                            *
  * Function: preprocessor_set_request_state_done                              *
