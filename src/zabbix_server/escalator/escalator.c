@@ -82,8 +82,8 @@ static void	add_message_alert(const DB_EVENT *event, const DB_EVENT *r_event, zb
 		zbx_uint64_t userid, zbx_uint64_t mediatypeid, const char *subject, const char *message,
 		zbx_uint64_t ackid);
 
-int	get_trigger_permission(zbx_uint64_t userid, const DB_EVENT *event);
-int	get_item_permission(zbx_uint64_t userid, zbx_uint64_t itemid);
+static int	get_trigger_permission(zbx_uint64_t userid, const DB_EVENT *event);
+static int	get_item_permission(zbx_uint64_t userid, zbx_uint64_t itemid);
 
 /******************************************************************************
  *                                                                            *
@@ -281,7 +281,7 @@ static int	check_tag_based_permission(zbx_uint64_t userid, zbx_vector_uint64_t *
  *                   or permission otherwise                                  *
  *                                                                            *
  ******************************************************************************/
-int	get_trigger_permission(zbx_uint64_t userid, const DB_EVENT *event)
+static int	get_trigger_permission(zbx_uint64_t userid, const DB_EVENT *event)
 {
 	int			perm = PERM_DENY;
 	DB_RESULT		result;
@@ -338,7 +338,7 @@ out:
  *                   or permission otherwise                                  *
  *                                                                            *
  ******************************************************************************/
-int	get_item_permission(zbx_uint64_t userid, zbx_uint64_t itemid)
+static int	get_item_permission(zbx_uint64_t userid, zbx_uint64_t itemid)
 {
 	DB_RESULT		result;
 	DB_ROW			row;

@@ -16,12 +16,9 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
+#ifndef ITEM_PREPROC_TEST_H
+#define ITEM_PREPROC_TEST_H
 
-#ifndef ZABBIX_MOCK_DB_H
-#define ZABBIX_MOCK_DB_H
+int	zbx_jsonpath_next(const char *path, const char **pnext, zbx_strloc_t *loc, int *type);
 
-
-void	zbx_mockdb_init(void);
-void	zbx_mockdb_destroy(void);
-
-#endif /* BUILD_TESTS_ZBXMOCKDB_H_ */
+#endif
