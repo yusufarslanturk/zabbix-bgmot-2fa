@@ -253,9 +253,11 @@ static zbx_uint32_t	preprocessor_create_task(zbx_preprocessing_manager_t *manage
  *                                                                            *
  ******************************************************************************/
 static	void	preprocessor_set_request_state_done(zbx_preprocessing_manager_t *manager,
-		zbx_preprocessing_request_t *request, zbx_list_item_t *queue_item)
+		zbx_preprocessing_request_t *request, const zbx_list_item_t *queue_item)
 {
 	zbx_item_link_t	*index;
+
+	request->state = REQUEST_STATE_DONE;
 
 	/* value processed - the pending value can now be processed */
 	if (NULL != request->pending)
@@ -266,8 +268,6 @@ static	void	preprocessor_set_request_state_done(zbx_preprocessing_manager_t *man
 	{
 		zbx_hashset_remove_direct(&manager->linked_items, index);
 	}
-
-	request->state = REQUEST_STATE_DONE;
 }
 
 /******************************************************************************
