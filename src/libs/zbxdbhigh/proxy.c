@@ -2191,6 +2191,12 @@ try_again:
 
 		hd = &data[i];
 
+		if (PROXY_HISTORY_FLAG_NOVALUE == (hd->flags & (PROXY_HISTORY_FLAG_NOVALUE | PROXY_HISTORY_FLAG_META))
+				&& FAIL == zbx_is_counted_in_item_queue(dc_items[i].type, dc_items[i].key_orig))
+		{
+			continue;
+		}
+
 		if (0 == *records_num)
 			zbx_json_addarray(j, ZBX_PROTO_TAG_HISTORY_DATA);
 
