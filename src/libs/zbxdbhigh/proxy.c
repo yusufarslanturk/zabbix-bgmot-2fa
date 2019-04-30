@@ -2032,7 +2032,7 @@ try_again:
  *                                                                            *
  ******************************************************************************/
 static void	proxy_get_history_data(struct zbx_json *j, zbx_uint64_t *lastid, zbx_uint64_t *id, int *records_num,
-		int *more)
+		int *more, zbx_hashset_t *itemids_added)
 {
 	typedef struct
 	{
@@ -2089,6 +2089,9 @@ try_again:
 
 	while (NULL != (row = DBfetch(result)))
 	{
+		unsigned char	flags;
+		zbx_uint64_t	itemid;
+
 		ZBX_STR2UINT64(*lastid, row[0]);
 
 		if (1 < *lastid - *id)
@@ -2112,45 +2115,57 @@ try_again:
 			}
 		}
 
-		if (data_alloc == data_num)
+		ZBX_STR2UINT64(itemid, row[1]);
+		ZBX_STR2UCHAR(flags, row[12]);
+
+		/* Items without value and meta information are sent to server only to update their nextchecks */
+		/* for administrator queue report. Sending multiple updates of the same item in one batch is   */
+		/* redundant and can be skipped.                                                               */
+		if (PROXY_HISTORY_FLAG_NOVALUE != (flags & (PROXY_HISTORY_FLAG_NOVALUE | PROXY_HISTORY_FLAG_META)) ||
+				NULL == zbx_hashset_search(itemids_added, &itemid))
 		{
-			data_alloc += 8;
-			data = (zbx_history_data_t *)zbx_realloc(data, sizeof(zbx_history_data_t) * data_alloc);
-			itemids = (zbx_uint64_t *)zbx_realloc(itemids, sizeof(zbx_uint64_t) * data_alloc);
+			if (data_alloc == data_num)
+			{
+				data_alloc += 8;
+				data = (zbx_history_data_t *)zbx_realloc(data, sizeof(zbx_history_data_t) * data_alloc);
+				itemids = (zbx_uint64_t *)zbx_realloc(itemids, sizeof(zbx_uint64_t) * data_alloc);
+			}
+
+			itemids[data_num] = itemid;
+
+			hd = &data[data_num++];
+
+			hd->id = *lastid;
+			hd->clock = atoi(row[2]);
+			hd->ns = atoi(row[3]);
+			hd->timestamp = atoi(row[4]);
+			hd->severity = atoi(row[6]);
+			hd->logeventid = atoi(row[8]);
+			ZBX_STR2UCHAR(hd->state, row[9]);
+			ZBX_STR2UINT64(hd->lastlogsize, row[10]);
+			hd->mtime = atoi(row[11]);
+			hd->flags = flags;
+
+			len1 = strlen(row[5]) + 1;
+			len2 = strlen(row[7]) + 1;
+
+			if (string_buffer_alloc < string_buffer_offset + len1 + len2)
+			{
+				while (string_buffer_alloc < string_buffer_offset + len1 + len2)
+					string_buffer_alloc += ZBX_KIBIBYTE;
+
+				string_buffer = (char *)zbx_realloc(string_buffer, string_buffer_alloc);
+			}
+
+			hd->psource = string_buffer_offset;
+			memcpy(&string_buffer[string_buffer_offset], row[5], len1);
+			string_buffer_offset += len1;
+			hd->pvalue = string_buffer_offset;
+			memcpy(&string_buffer[string_buffer_offset], row[7], len2);
+			string_buffer_offset += len2;
+
+			zbx_hashset_insert(itemids_added, &itemid, sizeof(itemid));
 		}
-
-		ZBX_STR2UINT64(itemids[data_num], row[1]);
-
-		hd = &data[data_num++];
-
-		hd->id = *lastid;
-		hd->clock = atoi(row[2]);
-		hd->ns = atoi(row[3]);
-		hd->timestamp = atoi(row[4]);
-		hd->severity = atoi(row[6]);
-		hd->logeventid = atoi(row[8]);
-		ZBX_STR2UCHAR(hd->state, row[9]);
-		ZBX_STR2UINT64(hd->lastlogsize, row[10]);
-		hd->mtime = atoi(row[11]);
-		ZBX_STR2UCHAR(hd->flags, row[12]);
-
-		len1 = strlen(row[5]) + 1;
-		len2 = strlen(row[7]) + 1;
-
-		if (string_buffer_alloc < string_buffer_offset + len1 + len2)
-		{
-			while (string_buffer_alloc < string_buffer_offset + len1 + len2)
-				string_buffer_alloc += ZBX_KIBIBYTE;
-
-			string_buffer = (char *)zbx_realloc(string_buffer, string_buffer_alloc);
-		}
-
-		hd->psource = string_buffer_offset;
-		memcpy(&string_buffer[string_buffer_offset], row[5], len1);
-		string_buffer_offset += len1;
-		hd->pvalue = string_buffer_offset;
-		memcpy(&string_buffer[string_buffer_offset], row[7], len2);
-		string_buffer_offset += len2;
 
 		*id = *lastid;
 	}
@@ -2250,8 +2265,11 @@ int	proxy_get_hist_data(struct zbx_json *j, zbx_uint64_t *lastid, int *more)
 {
 	int		records_num = 0;
 	zbx_uint64_t	id;
+	zbx_hashset_t	itemids_added;
 
 	proxy_get_lastid("proxy_history", "history_lastid", &id);
+
+	zbx_hashset_create(&itemids_added, 1000, ZBX_DEFAULT_UINT64_HASH_FUNC, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 
 	/* get history data in batches by ZBX_MAX_HRECORDS records and stop if: */
 	/*   1) there are no more data to read                                  */
@@ -2259,7 +2277,7 @@ int	proxy_get_hist_data(struct zbx_json *j, zbx_uint64_t *lastid, int *more)
 	/*   3) we have gathered more than half of the maximum packet size      */
 	while (ZBX_DATA_JSON_BATCH_LIMIT > j->buffer_offset)
 	{
-		proxy_get_history_data(j, lastid, &id, &records_num, more);
+		proxy_get_history_data(j, lastid, &id, &records_num, more, &itemids_added);
 
 		if (ZBX_PROXY_DATA_DONE == *more || ZBX_MAX_HRECORDS_TOTAL <= records_num)
 			break;
@@ -2267,6 +2285,8 @@ int	proxy_get_hist_data(struct zbx_json *j, zbx_uint64_t *lastid, int *more)
 
 	if (0 != records_num)
 		zbx_json_close(j);
+
+	zbx_hashset_destroy(&itemids_added);
 
 	return records_num;
 }
