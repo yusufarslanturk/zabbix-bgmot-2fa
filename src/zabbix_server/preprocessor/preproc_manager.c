@@ -241,7 +241,17 @@ static zbx_uint32_t	preprocessor_create_task(zbx_preprocessing_manager_t *manage
 	return zbx_preprocessor_pack_task(task, request->value.itemid, request->value_type, request->value.ts, &value,
 			phistory, request->steps, request->steps_num);
 }
-
+/******************************************************************************
+ *                                                                            *
+ * Function: preprocessor_set_request_state_done                              *
+ *                                                                            *
+ * Purpose: set request state to done and handle linked items                 *
+ *                                                                            *
+ * Parameters: manager    - [IN] preprocessing manager                        *
+ *             request    - [IN] preprocessing request                        *
+ *             queue_item - [IN] queued item                                  *
+ *                                                                            *
+ ******************************************************************************/
 static	void	preprocessor_set_request_state_done(zbx_preprocessing_manager_t *manager,
 		zbx_preprocessing_request_t *request, zbx_list_item_t *queue_item)
 {
@@ -278,7 +288,6 @@ static void	*preprocessor_get_next_task(zbx_preprocessing_manager_t *manager, zb
 	zbx_preprocessing_request_t		*request = NULL;
 	void					*task = NULL;
 	zbx_preprocessing_direct_request_t	*direct_request;
-	zbx_preproc_history_t			*vault;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
 
@@ -300,8 +309,10 @@ static void	*preprocessor_get_next_task(zbx_preprocessing_manager_t *manager, zb
 
 		if (ITEM_STATE_NOTSUPPORTED == request->value.state)
 		{
-			if (NULL != (vault = (zbx_preproc_history_t *) zbx_hashset_search(
-					&manager->history_cache, &request->value.itemid)))
+			zbx_preproc_history_t	*vault;
+
+			if (NULL != (vault = (zbx_preproc_history_t *) zbx_hashset_search(&manager->history_cache,
+					&request->value.itemid)))
 			{
 				zbx_vector_ptr_clear_ext(&vault->history,
 						(zbx_clean_func_t) zbx_preproc_op_history_free);
@@ -669,6 +680,7 @@ static void	preprocessor_enqueue(zbx_preprocessing_manager_t *manager, zbx_prepr
 			(NULL == value->result || 0 == ISSET_VALUE(value->result))))
 	{
 		state = REQUEST_STATE_DONE;
+
 		if (NULL == manager->queue.head)
 		{
 			/* queue is empty and item is done, it can be flushed */
