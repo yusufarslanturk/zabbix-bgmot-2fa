@@ -2225,9 +2225,7 @@ try_again:
 		last_offset = j->buffer_offset;
 
 		if (0 == (PROXY_HISTORY_FLAG_NOVALUE & hd->flags))
-		{
 			zbx_json_addstring(j, ZBX_PROTO_TAG_VALUE, &string_buffer[hd->pvalue], ZBX_JSON_TYPE_STRING);
-		}
 
 		if (0 != (PROXY_HISTORY_FLAG_META & hd->flags))
 		{
