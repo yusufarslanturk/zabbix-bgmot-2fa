@@ -235,7 +235,7 @@ static unsigned char	poller_by_item(unsigned char type, const char *key)
 
 /******************************************************************************
  *                                                                            *
- * Function: is_counted_in_item_queue                                         *
+ * Function: zbx_is_counted_in_item_queue                                     *
  *                                                                            *
  * Purpose: determine whether the given item type is counted in item queue    *
  *                                                                            *
