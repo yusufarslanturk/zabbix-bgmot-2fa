@@ -712,6 +712,8 @@ const char	*zbx_item_logtype_string(unsigned char logtype);
 #define PROXY_HISTORY_FLAG_META		0x01
 #define PROXY_HISTORY_FLAG_NOVALUE	0x02
 
+#define PROXY_HISTORY_MASK_NOVALUE	(PROXY_HISTORY_FLAG_META | PROXY_HISTORY_FLAG_NOVALUE)
+
 /* global correlation constants */
 #define ZBX_CORRELATION_ENABLED				0
 #define ZBX_CORRELATION_DISABLED			1

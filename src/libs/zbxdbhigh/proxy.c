@@ -2061,7 +2061,7 @@ static void	proxy_get_history_data(struct zbx_json *j, zbx_uint64_t *lastid, zbx
 	static zbx_uint64_t		*itemids = NULL;
 	static zbx_history_data_t	*data = NULL;
 	static size_t			data_alloc = 0;
-	size_t				data_num = 0, i;
+	size_t				data_num = 0, fetch_num = 0, i;
 	DC_ITEM				*dc_items;
 	int				*errcodes, retries = 1, records_num_last = *records_num;
 	zbx_history_data_t		*hd;
@@ -2121,7 +2121,7 @@ try_again:
 		/* Items without value and meta information are sent to server only to update their nextchecks */
 		/* for administrator queue report. Sending multiple updates of the same item in one batch is   */
 		/* redundant and can be skipped.                                                               */
-		if (PROXY_HISTORY_FLAG_NOVALUE != (flags & (PROXY_HISTORY_FLAG_NOVALUE | PROXY_HISTORY_FLAG_META)) ||
+		if (PROXY_HISTORY_FLAG_NOVALUE != (flags & PROXY_HISTORY_MASK_NOVALUE) ||
 				NULL == zbx_hashset_search(itemids_added, &itemid))
 		{
 			if (data_alloc == data_num)
@@ -2168,96 +2168,103 @@ try_again:
 		}
 
 		*id = *lastid;
+		fetch_num++;
 	}
 	DBfree_result(result);
 
-	dc_items = (DC_ITEM *)zbx_malloc(NULL, (sizeof(DC_ITEM) + sizeof(int)) * data_num);
-	errcodes = (int *)(dc_items + data_num);
-
-	DCconfig_get_items_by_itemids(dc_items, itemids, errcodes, data_num);
-
-	for (i = 0; i < data_num; i++)
+	if (0 != data_num)
 	{
-		size_t	last_offset;
+		dc_items = (DC_ITEM *)zbx_malloc(NULL, (sizeof(DC_ITEM) + sizeof(int)) * data_num);
+		errcodes = (int *)(dc_items + data_num);
 
-		if (SUCCEED != errcodes[i])
-			continue;
+		DCconfig_get_items_by_itemids(dc_items, itemids, errcodes, data_num);
 
-		if (ITEM_STATUS_ACTIVE != dc_items[i].status)
-			continue;
-
-		if (HOST_STATUS_MONITORED != dc_items[i].host.status)
-			continue;
-
-		hd = &data[i];
-
-		if (PROXY_HISTORY_FLAG_NOVALUE == (hd->flags & (PROXY_HISTORY_FLAG_NOVALUE | PROXY_HISTORY_FLAG_META))
-				&& FAIL == zbx_is_counted_in_item_queue(dc_items[i].type, dc_items[i].key_orig))
+		for (i = 0; i < data_num; i++)
 		{
-			continue;
+			size_t	last_offset;
+
+			if (SUCCEED != errcodes[i])
+				continue;
+
+			if (ITEM_STATUS_ACTIVE != dc_items[i].status)
+				continue;
+
+			if (HOST_STATUS_MONITORED != dc_items[i].host.status)
+				continue;
+
+			hd = &data[i];
+
+			if (PROXY_HISTORY_FLAG_NOVALUE == (hd->flags & PROXY_HISTORY_MASK_NOVALUE)
+					&& FAIL == zbx_is_counted_in_item_queue(dc_items[i].type, dc_items[i].key_orig))
+			{
+				continue;
+			}
+
+			if (0 == *records_num)
+				zbx_json_addarray(j, ZBX_PROTO_TAG_HISTORY_DATA);
+
+			zbx_json_addobject(j, NULL);
+			zbx_json_adduint64(j, ZBX_PROTO_TAG_ID, hd->id);
+			zbx_json_adduint64(j, ZBX_PROTO_TAG_ITEMID, dc_items[i].itemid);
+
+			if (0 != hd->timestamp)
+				zbx_json_adduint64(j, ZBX_PROTO_TAG_LOGTIMESTAMP, hd->timestamp);
+
+			if ('\0' != string_buffer[hd->psource])
+			{
+				zbx_json_addstring(j, ZBX_PROTO_TAG_LOGSOURCE, &string_buffer[hd->psource],
+						ZBX_JSON_TYPE_STRING);
+			}
+
+			if (0 != hd->severity)
+				zbx_json_adduint64(j, ZBX_PROTO_TAG_LOGSEVERITY, hd->severity);
+
+			if (0 != hd->logeventid)
+				zbx_json_adduint64(j, ZBX_PROTO_TAG_LOGEVENTID, hd->logeventid);
+
+			if (0 != hd->state)
+				zbx_json_adduint64(j, ZBX_PROTO_TAG_STATE, hd->state);
+
+			last_offset = j->buffer_offset;
+
+			if (0 == (PROXY_HISTORY_FLAG_NOVALUE & hd->flags))
+			{
+				zbx_json_addstring(j, ZBX_PROTO_TAG_VALUE, &string_buffer[hd->pvalue],
+						ZBX_JSON_TYPE_STRING);
+			}
+
+			if (0 != (PROXY_HISTORY_FLAG_META & hd->flags))
+			{
+				zbx_json_adduint64(j, ZBX_PROTO_TAG_LASTLOGSIZE, hd->lastlogsize);
+				zbx_json_adduint64(j, ZBX_PROTO_TAG_MTIME, hd->mtime);
+			}
+
+			if (last_offset != j->buffer_offset)
+			{
+				zbx_json_adduint64(j, ZBX_PROTO_TAG_CLOCK, hd->clock);
+				zbx_json_adduint64(j, ZBX_PROTO_TAG_NS, hd->ns);
+			}
+
+			zbx_json_close(j);
+
+			(*records_num)++;
+
+			/* stop gathering data to avoid exceeding the maximum packet size */
+			if (ZBX_DATA_JSON_RECORD_LIMIT < j->buffer_offset)
+			{
+				/* rollback lastid and id to the last added itemid */
+				*lastid = hd->id;
+				*id = hd->id;
+
+				*more = ZBX_PROXY_DATA_MORE;
+				break;
+			}
 		}
-
-		if (0 == *records_num)
-			zbx_json_addarray(j, ZBX_PROTO_TAG_HISTORY_DATA);
-
-		zbx_json_addobject(j, NULL);
-		zbx_json_adduint64(j, ZBX_PROTO_TAG_ID, hd->id);
-		zbx_json_adduint64(j, ZBX_PROTO_TAG_ITEMID, dc_items[i].itemid);
-
-		if (0 != hd->timestamp)
-			zbx_json_adduint64(j, ZBX_PROTO_TAG_LOGTIMESTAMP, hd->timestamp);
-
-		if ('\0' != string_buffer[hd->psource])
-		{
-			zbx_json_addstring(j, ZBX_PROTO_TAG_LOGSOURCE, &string_buffer[hd->psource],
-					ZBX_JSON_TYPE_STRING);
-		}
-
-		if (0 != hd->severity)
-			zbx_json_adduint64(j, ZBX_PROTO_TAG_LOGSEVERITY, hd->severity);
-
-		if (0 != hd->logeventid)
-			zbx_json_adduint64(j, ZBX_PROTO_TAG_LOGEVENTID, hd->logeventid);
-
-		if (0 != hd->state)
-			zbx_json_adduint64(j, ZBX_PROTO_TAG_STATE, hd->state);
-
-		last_offset = j->buffer_offset;
-
-		if (0 == (PROXY_HISTORY_FLAG_NOVALUE & hd->flags))
-			zbx_json_addstring(j, ZBX_PROTO_TAG_VALUE, &string_buffer[hd->pvalue], ZBX_JSON_TYPE_STRING);
-
-		if (0 != (PROXY_HISTORY_FLAG_META & hd->flags))
-		{
-			zbx_json_adduint64(j, ZBX_PROTO_TAG_LASTLOGSIZE, hd->lastlogsize);
-			zbx_json_adduint64(j, ZBX_PROTO_TAG_MTIME, hd->mtime);
-		}
-
-		if (last_offset != j->buffer_offset)
-		{
-			zbx_json_adduint64(j, ZBX_PROTO_TAG_CLOCK, hd->clock);
-			zbx_json_adduint64(j, ZBX_PROTO_TAG_NS, hd->ns);
-		}
-
-		zbx_json_close(j);
-
-		(*records_num)++;
-
-		/* stop gathering data to avoid exceeding the maximum packet size */
-		if (ZBX_DATA_JSON_RECORD_LIMIT < j->buffer_offset)
-		{
-			/* rollback lastid and id to the last added itemid */
-			*lastid = hd->id;
-			*id = hd->id;
-
-			*more = ZBX_PROXY_DATA_MORE;
-			break;
-		}
+		DCconfig_clean_items(dc_items, errcodes, data_num);
+		zbx_free(dc_items);
 	}
-	DCconfig_clean_items(dc_items, errcodes, data_num);
-	zbx_free(dc_items);
 
-	if (ZBX_MAX_HRECORDS == data_num)
+	if (ZBX_MAX_HRECORDS == fetch_num)
 		*more = ZBX_PROXY_DATA_MORE;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%d selected:" ZBX_FS_SIZE_T " lastid:" ZBX_FS_UI64 " more:%d size:"
