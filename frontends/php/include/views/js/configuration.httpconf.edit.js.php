@@ -13,7 +13,7 @@
 				->setAttribute('placeholder', _('name'))
 				->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
 			'&rArr;',
-			(new CTextBox('pairs[#{pair.id}][value]', '#{pair.value}'))
+			(new CTextBox('pairs[#{pair.id}][value]', '#{pair.value}', false, '#{maxlength}'))
 				->setAttribute('data-type', 'value')
 				->setAttribute('placeholder', _('value'))
 				->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
@@ -50,7 +50,8 @@
 		function renderPairRow(formid, pair) {
 			var parent,
 				target = jQuery(getDomTargetIdForRowInsert(pair.type), jQuery('#'+formid)),
-				pair_row = jQuery(rowTemplate.evaluate({'pair': pair}));
+				maxLength = pair.type === 'headers' ? 1000 : 255,
+				pair_row = jQuery(rowTemplate.evaluate({pair: pair, maxlength: maxLength}));
 
 			if (!target.parents('.pair-container').hasClass('pair-container-sortable')) {
 				pair_row.find('.<?= ZBX_STYLE_DRAG_ICON ?>').remove();
@@ -218,11 +219,11 @@
 					.on('change', function(e) {
 						if (e.target.value == <?= HTTPTEST_STEP_RETRIEVE_MODE_HEADERS ?>) {
 							post_fields.addClass('disabled');
-							post_field_inputs.attr('disabled', 'disabled');
+							post_field_inputs.prop('disabled', true);
 						}
 						else {
 							post_fields.removeClass('disabled');
-							post_field_inputs.removeAttr('disabled');
+							post_field_inputs.prop('disabled', false);
 							pairManager.refresh();
 						}
 					})
@@ -481,10 +482,10 @@
 			var httpFieldsDisabled = ($(this).val() == <?= HTTPTEST_AUTH_NONE ?>);
 
 			$('#http_user')
-				.attr('disabled', httpFieldsDisabled)
+				.prop('disabled', httpFieldsDisabled)
 				.closest('li').toggle(!httpFieldsDisabled);
 			$('#http_password')
-				.attr('disabled', httpFieldsDisabled)
+				.prop('disabled', httpFieldsDisabled)
 				.closest('li').toggle(!httpFieldsDisabled);
 		});
 
