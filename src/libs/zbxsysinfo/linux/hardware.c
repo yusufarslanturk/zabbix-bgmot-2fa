@@ -103,7 +103,7 @@ static int	get_dmi_info(char *buf, int bufsize, int flags)
 	static long	pagesize = 0;
 	static int	smbios_status = SMBIOS_STATUS_UNKNOWN;
 	static size_t	smbios_len, smbios;	/* length and address of SMBIOS table (if found) */
-	zbx_stat_t	file_buf;
+	struct stat	file_buf;
 
 	if (-1 != (fd = open(SYS_TABLE_FILE, O_RDONLY)))
 	{
