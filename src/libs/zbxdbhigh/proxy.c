@@ -2208,7 +2208,7 @@ static int	proxy_add_hist_data(struct zbx_json *j, int records_num, const DC_ITE
 	int				i;
 	const zbx_history_data_t	*hd;
 
-	for (i = 0; i < records->values_num; i++)
+	for (i = records->values_num - 1; i >= 0; i--)
 	{
 		hd = (const zbx_history_data_t *)records->values[i];
 		*lastid = hd->id;
@@ -2317,22 +2317,12 @@ int	proxy_get_hist_data(struct zbx_json *j, zbx_uint64_t *lastid, int *more)
 		zbx_vector_ptr_reserve(&records, data_num);
 
 		/* filter out duplicate novalue updates */
-		for (i = 0; i < data_num; i++)
+		for (i = data_num - 1; i >= 0; i--)
 		{
 			if (PROXY_HISTORY_FLAG_NOVALUE == (data[i].flags & PROXY_HISTORY_MASK_NOVALUE))
 			{
 				if (NULL != zbx_hashset_search(&itemids_added, &data[i].itemid))
-				{
-					int	k;
-
-					for (k = 0; data[i].itemid != data[k].itemid; k++);
-
-					/* update novalue clock to the latest for correct queue calculation */
-					if (data[k].clock < data[i].clock)
-						data[k].clock = data[i].clock;
-
 					continue;
-				}
 
 				zbx_hashset_insert(&itemids_added, &data[i].itemid, sizeof(data[i].itemid));
 			}
@@ -2370,6 +2360,7 @@ int	proxy_get_hist_data(struct zbx_json *j, zbx_uint64_t *lastid, int *more)
 
 		zbx_vector_uint64_clear(&itemids);
 		zbx_vector_ptr_clear(&records);
+		zbx_hashset_clear(&itemids_added);
 		id = *lastid;
 	}
 
