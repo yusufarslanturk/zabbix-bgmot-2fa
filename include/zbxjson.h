@@ -116,6 +116,7 @@
 #define ZBX_PROTO_TAG_SENDTO		"sendto"
 #define ZBX_PROTO_TAG_SUBJECT		"subject"
 #define ZBX_PROTO_TAG_MESSAGE		"message"
+#define ZBX_PROTO_TAG_PREVIOUS		"previous"
 
 #define ZBX_PROTO_VALUE_FAILED		"failed"
 #define ZBX_PROTO_VALUE_SUCCESS		"success"

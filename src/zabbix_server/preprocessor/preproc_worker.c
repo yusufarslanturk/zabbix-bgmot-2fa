@@ -394,15 +394,13 @@ static int	worker_item_preproc_test(unsigned char value_type, zbx_variant_t *val
 		if (FAIL == (ret = zbx_item_preproc(value_type, value, ts, op, &history_value, &history_ts, error)))
 		{
 			results[i].action = op->error_handler;
+			results[i].error = zbx_strdup(NULL, *error);
 			ret = zbx_item_preproc_handle_error(value, op, error);
 		}
 		else
-			results[i].action = ZBX_PREPROC_FAIL_DEFAULT;
-
-		if (NULL != *error)
 		{
-			results[i].error = zbx_strdup(NULL, *error);
-			ret = FAIL;
+			results[i].action = ZBX_PREPROC_FAIL_DEFAULT;
+			results[i].error = NULL;
 		}
 
 		if (SUCCEED != ret)
@@ -413,7 +411,6 @@ static int	worker_item_preproc_test(unsigned char value_type, zbx_variant_t *val
 		}
 
 		zbx_variant_set_variant(&results[i].value, value);
-		results[i].error = NULL;
 
 		if (ZBX_VARIANT_NONE != history_value.type)
 		{

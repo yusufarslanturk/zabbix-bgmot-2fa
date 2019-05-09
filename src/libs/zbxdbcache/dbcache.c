@@ -1736,40 +1736,8 @@ static int	dc_history_set_value(ZBX_DC_HISTORY *hdata, unsigned char value_type,
 	int	ret;
 	char	*errmsg = NULL;
 
-	switch (value_type)
+	if (FAIL == zbx_variant_to_value_type(value, value_type, &errmsg))
 	{
-		case ITEM_VALUE_TYPE_FLOAT:
-			if (SUCCEED == (ret = zbx_variant_convert(value, ZBX_VARIANT_DBL)))
-			{
-				if (FAIL == (ret = zbx_validate_value_dbl(value->data.dbl)))
-				{
-					errmsg = zbx_dsprintf(NULL, "Value " ZBX_FS_DBL " is too small or too large.",
-							value->data.dbl);
-				}
-			}
-			break;
-		case ITEM_VALUE_TYPE_UINT64:
-			ret = zbx_variant_convert(value, ZBX_VARIANT_UI64);
-			break;
-		case ITEM_VALUE_TYPE_STR:
-		case ITEM_VALUE_TYPE_TEXT:
-		case ITEM_VALUE_TYPE_LOG:
-			ret = zbx_variant_convert(value, ZBX_VARIANT_STR);
-			break;
-		default:
-			THIS_SHOULD_NEVER_HAPPEN;
-			return FAIL;
-	}
-
-	if (FAIL == ret)
-	{
-		if (NULL == errmsg)
-		{
-			errmsg = zbx_dsprintf(NULL, "Value \"%s\" of type \"%s\" is not suitable for"
-				" value type \"%s\"", zbx_variant_value_desc(value),
-				zbx_variant_type_desc(value), zbx_item_value_type_string(value_type));
-		}
-
 		dc_history_set_error(hdata, errmsg);
 		return FAIL;
 	}
