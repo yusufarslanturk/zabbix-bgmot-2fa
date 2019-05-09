@@ -2131,11 +2131,11 @@ try_again:
 		hd->id = id;
 		ZBX_STR2UINT64(hd->itemid, row[1]);
 		ZBX_STR2UCHAR(hd->flags, row[12]);
+		hd->clock = atoi(row[2]);
+		hd->ns = atoi(row[3]);
 
 		if (PROXY_HISTORY_FLAG_NOVALUE != (hd->flags & PROXY_HISTORY_MASK_NOVALUE))
 		{
-			hd->clock = atoi(row[2]);
-			hd->ns = atoi(row[3]);
 			ZBX_STR2UCHAR(hd->state, row[9]);
 
 			if (0 == (hd->flags & PROXY_HISTORY_FLAG_NOVALUE))
@@ -2234,14 +2234,13 @@ static int	proxy_add_hist_data(struct zbx_json *j, int records_num, const DC_ITE
 		zbx_json_addobject(j, NULL);
 		zbx_json_adduint64(j, ZBX_PROTO_TAG_ID, hd->id);
 		zbx_json_adduint64(j, ZBX_PROTO_TAG_ITEMID, hd->itemid);
+		zbx_json_adduint64(j, ZBX_PROTO_TAG_CLOCK, hd->clock);
+		zbx_json_adduint64(j, ZBX_PROTO_TAG_NS, hd->ns);
 
 		if (PROXY_HISTORY_FLAG_NOVALUE != (hd->flags & PROXY_HISTORY_MASK_NOVALUE))
 		{
 			if (0 != hd->state)
 				zbx_json_adduint64(j, ZBX_PROTO_TAG_STATE, hd->state);
-
-			zbx_json_adduint64(j, ZBX_PROTO_TAG_CLOCK, hd->clock);
-			zbx_json_adduint64(j, ZBX_PROTO_TAG_NS, hd->ns);
 
 			if (0 == (hd->flags & PROXY_HISTORY_FLAG_NOVALUE))
 			{
@@ -2323,7 +2322,18 @@ int	proxy_get_hist_data(struct zbx_json *j, zbx_uint64_t *lastid, int *more)
 			if (PROXY_HISTORY_FLAG_NOVALUE == (data[i].flags & PROXY_HISTORY_MASK_NOVALUE))
 			{
 				if (NULL != zbx_hashset_search(&itemids_added, &data[i].itemid))
+				{
+					int	k;
+
+					for (k = 0; data[i].itemid != data[k].itemid; k++);
+
+					/* update novalue clock to the latest for correct queue calculation */
+					if (data[k].clock < data[i].clock)
+						data[k].clock = data[i].clock;
+
 					continue;
+				}
+
 				zbx_hashset_insert(&itemids_added, &data[i].itemid, sizeof(data[i].itemid));
 			}
 			zbx_vector_ptr_append(&records, &data[i]);
