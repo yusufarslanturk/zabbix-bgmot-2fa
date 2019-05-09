@@ -810,7 +810,7 @@ $form_list->addRow((new CLabel(_('Trend storage period'), 'trends'))->setAsteris
 	]))->addStyle('display: flex;'),
 	'row_trends'
 );
- 
+
 $form_list->addRow(_('Log time format'),
 		(new CTextBox('logtimefmt', $data['logtimefmt'], $readonly, 64))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH),
 		'row_logtimefmt'
