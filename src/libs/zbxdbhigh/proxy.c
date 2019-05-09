@@ -2309,10 +2309,10 @@ int	proxy_get_hist_data(struct zbx_json *j, zbx_uint64_t *lastid, int *more)
 	/*   1) there are no more data to read                                  */
 	/*   2) we have retrieved more than the total maximum number of records */
 	/*   3) we have gathered more than half of the maximum packet size      */
-	while (ZBX_DATA_JSON_BATCH_LIMIT > j->buffer_offset && ZBX_MAX_HRECORDS_TOTAL > records_num)
+	while (ZBX_DATA_JSON_BATCH_LIMIT > j->buffer_offset && ZBX_MAX_HRECORDS_TOTAL > records_num &&
+			0 != (data_num = proxy_get_history_data(id, &data, &data_alloc, &string_buffer,
+					&string_buffer_alloc, more)))
 	{
-		data_num = proxy_get_history_data(id, &data, &data_alloc, &string_buffer, &string_buffer_alloc, more);
-
 		zbx_vector_uint64_reserve(&itemids, data_num);
 		zbx_vector_ptr_reserve(&records, data_num);
 
@@ -2326,32 +2326,24 @@ int	proxy_get_hist_data(struct zbx_json *j, zbx_uint64_t *lastid, int *more)
 
 				zbx_hashset_insert(&itemids_added, &data[i].itemid, sizeof(data[i].itemid));
 			}
+
 			zbx_vector_ptr_append(&records, &data[i]);
 			zbx_vector_uint64_append(&itemids, data[i].itemid);
 		}
 
 		/* append history records to json */
-		if (0 != itemids.values_num)
-		{
-			if (itemids.values_num > items_alloc)
-			{
-				items_alloc = itemids.values_num;
-				dc_items = (DC_ITEM *)zbx_realloc(dc_items, items_alloc * sizeof(DC_ITEM));
-				errcodes = (int *)zbx_realloc(errcodes, items_alloc * sizeof(int));
-			}
 
-			DCconfig_get_items_by_itemids(dc_items, itemids.values, errcodes, itemids.values_num);
-
-			records_num = proxy_add_hist_data(j, records_num, dc_items, errcodes, &records, string_buffer,
-					lastid);
-			DCconfig_clean_items(dc_items, errcodes, itemids.values_num);
-		}
-		else
+		if (itemids.values_num > items_alloc)
 		{
-			/* batch contains only novalue updates, update lastid */
-			if (0 != data_num)
-				*lastid = data[data_num - 1].id;
+			items_alloc = itemids.values_num;
+			dc_items = (DC_ITEM *)zbx_realloc(dc_items, items_alloc * sizeof(DC_ITEM));
+			errcodes = (int *)zbx_realloc(errcodes, items_alloc * sizeof(int));
 		}
+
+		DCconfig_get_items_by_itemids(dc_items, itemids.values, errcodes, itemids.values_num);
+
+		records_num = proxy_add_hist_data(j, records_num, dc_items, errcodes, &records, string_buffer, lastid);
+		DCconfig_clean_items(dc_items, errcodes, itemids.values_num);
 
 		/* got less data than requested - either no more data to read or the history is full of */
 		/* holes. In this case send retrieved data before attempting to read/wait for more data */
