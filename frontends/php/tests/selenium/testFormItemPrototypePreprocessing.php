@@ -1755,28 +1755,12 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 					]);
 					$this->assertEquals($options['type'], $db_type);
 
-					switch ($options['type']) {
-						case 'Custom multiplier':
-						case 'Right trim':
-						case 'Left trim':
-						case 'Trim':
-						case 'XML XPath':
-						case 'JSONPath':
-						case 'Matches regular expression':
-						case 'Does not match regular expression':
-						case 'Check for error in JSON':
-						case 'Check for error in XML':
-						case 'Discard unchanged with heartbeat':
-						case 'Prometheus to JSON':
-							$this->assertEquals($options['parameter_1'], $db_params[$key]);
-							break;
-						case 'Regular expression':
-						case 'In range':
-						case 'Check for error using regular expression':
-						case 'Prometheus pattern':
-							$params = $options['parameter_1']."\n".$options['parameter_2'];
-							$this->assertEquals($params, $db_params[$key]);
-							break;
+					if (in_array($type, ['Regular expression', 'In range', 'Check for error using regular expression', 'Prometheus pattern'])){
+						$params = $options['parameter_1']."\n".$options['parameter_2'];
+						$this->assertEquals($params, $db_params[$key]);
+					}
+					else {
+						$this->assertEquals($options['parameter_1'], $db_params[$key]);
 					}
 				}
 				break;
@@ -1908,25 +1892,17 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 
 			$this->assertEquals($expected, $rows[$i + 1]);
 
-			switch ($options['type']) {
-				case 'Regular expression':
-				case 'JSONPath':
-				case 'Does not match regular expression':
-					// Check preprocessing in frontend.
-					$this->assertTrue($steps[$i]['on_fail']->isSelected());
-					$this->assertTrue($steps[$i]['on_fail']->isEnabled());
-					break;
-				case 'Check for error in JSON':
-				case 'Discard unchanged with heartbeat':
-					// Check pre-processing error handler type in DB.
-					$this->assertFalse($steps[$i]['on_fail']->isEnabled());
-					$this->assertFalse($steps[$i]['on_fail']->isSelected());
-
-					$this->assertTrue($steps[$i]['error_handler'] === null || !$steps[$i]['error_handler']->isVisible());
-					$this->assertTrue($steps[$i]['error_handler_params'] === null
-							|| !$steps[$i]['error_handler_params']->isVisible()
-					);
-					break;
+			if (in_array($options['type'], ['Check for error in JSON', 'Discard unchanged with heartbeat'])){
+				$this->assertFalse($steps[$i]['on_fail']->isEnabled());
+				$this->assertFalse($steps[$i]['on_fail']->isSelected());
+				$this->assertTrue($steps[$i]['error_handler'] === null || !$steps[$i]['error_handler']->isVisible());
+				$this->assertTrue($steps[$i]['error_handler_params'] === null
+					|| !$steps[$i]['error_handler_params']->isVisible()
+				);
+			}
+			else {
+				$this->assertTrue($steps[$i]['on_fail']->isSelected());
+				$this->assertTrue($steps[$i]['on_fail']->isEnabled());
 			}
 		}
 	}

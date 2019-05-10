@@ -199,10 +199,8 @@ trait PreprocessingTrait {
 	 * @return array
 	 */
 	private function listPreprocessingSteps() {
-		$steps = $this->getPreprocessingSteps(true);
 		$data = [];
-
-		foreach ($steps as $i => $step) {
+		foreach ($this->getPreprocessingSteps(true) as $i => $step) {
 			$values = [];
 			foreach ($step as $control) {
 				$field = $control['field'];
