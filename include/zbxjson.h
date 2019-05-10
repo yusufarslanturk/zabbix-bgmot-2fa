@@ -109,14 +109,15 @@
 #define ZBX_PROTO_TAG_ACTION			"action"
 #define ZBX_PROTO_TAG_FAILED			"failed"
 #define ZBX_PROTO_TAG_RESULT			"result"
-#define ZBX_PROTO_TAG_LINE_RAW		"line_raw"
-#define ZBX_PROTO_TAG_LABELS		"labels"
-#define ZBX_PROTO_TAG_HELP		"help"
-#define ZBX_PROTO_TAG_MEDIATYPEID	"mediatypeid"
-#define ZBX_PROTO_TAG_SENDTO		"sendto"
-#define ZBX_PROTO_TAG_SUBJECT		"subject"
-#define ZBX_PROTO_TAG_MESSAGE		"message"
-#define ZBX_PROTO_TAG_PREVIOUS		"previous"
+#define ZBX_PROTO_TAG_LINE_RAW			"line_raw"
+#define ZBX_PROTO_TAG_LABELS			"labels"
+#define ZBX_PROTO_TAG_HELP			"help"
+#define ZBX_PROTO_TAG_MEDIATYPEID		"mediatypeid"
+#define ZBX_PROTO_TAG_SENDTO			"sendto"
+#define ZBX_PROTO_TAG_SUBJECT			"subject"
+#define ZBX_PROTO_TAG_MESSAGE			"message"
+#define ZBX_PROTO_TAG_PREVIOUS			"previous"
+#define ZBX_PROTO_TAG_SINGLE			"single"
 
 #define ZBX_PROTO_VALUE_FAILED		"failed"
 #define ZBX_PROTO_VALUE_SUCCESS		"success"
@@ -218,6 +219,7 @@ int		zbx_json_count(const struct zbx_json_parse *jp);
 const char	*zbx_json_decodevalue(const char *p, char *string, size_t size, zbx_json_type_t *type);
 const char	*zbx_json_decodevalue_dyn(const char *p, char **string, size_t *string_alloc, zbx_json_type_t *type);
 void		zbx_json_escape(char **string);
+const char	*zbx_json_decodevalue_dyn(const char *p, char **string, size_t *string_alloc, int *type);
 
 int	zbx_json_path_check(const char *path, char * error, size_t errlen);
 int	zbx_json_path_open(const struct zbx_json_parse *jp, const char *path, struct zbx_json_parse *out);

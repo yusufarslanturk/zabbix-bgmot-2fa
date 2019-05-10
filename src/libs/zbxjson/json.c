@@ -1008,8 +1008,16 @@ const char	*zbx_json_pair_next(const struct zbx_json_parse *jp, const char *p, c
 	if (NULL == (p = zbx_json_next(jp, p)))
 		return NULL;
 
-	if (ZBX_JSON_TYPE_STRING != __zbx_json_type(p))
-		return NULL;
+	switch (__zbx_json_type(p))
+	{
+		case ZBX_JSON_TYPE_STRING:
+		case ZBX_JSON_TYPE_NULL:
+		case ZBX_JSON_TYPE_TRUE:
+		case ZBX_JSON_TYPE_FALSE:
+			break;
+		default:
+			return NULL;
+	}
 
 	if (NULL == (p = zbx_json_copy_string(p, name, len)))
 		return NULL;
