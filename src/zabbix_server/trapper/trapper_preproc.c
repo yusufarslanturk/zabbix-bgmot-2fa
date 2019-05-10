@@ -193,6 +193,129 @@ out:
 
 /******************************************************************************
  *                                                                            *
+ * Function: zbx_trapper_preproc_test_execute                                 *
+ *                                                                            *
+ * Purpose: executes preprocessing test request                               *
+ *                                                                            *
+ * Parameters: jp    - [IN] the request                                       *
+ *             json  - [OUT] the output json                                  *
+ *             error - [OUT] the error message                                *
+ *                                                                            *
+ * Return value: SUCCEED - the request was executed successfully              *
+ *               FAIL    - otherwise                                          *
+ *                                                                            *
+ * Comments: This function will fail if the request format is not valid or    *
+ *           there was connection (to preprocessing manager) error.           *
+ *           Any errors in the preprocessing itself are reported in output    *
+ *           json and success is returned.                                    *
+ *                                                                            *
+ ******************************************************************************/
+int	zbx_trapper_preproc_test_run(const struct zbx_json_parse *jp, struct zbx_json *json, char **error)
+{
+	char			*values[2] = {NULL, NULL}, *preproc_error = NULL;
+	int			ret = FAIL, i, values_num;
+	unsigned char		value_type;
+	zbx_vector_ptr_t	steps, results, history;
+	zbx_timespec_t		ts[2];
+	zbx_preproc_result_t	*result;
+
+	zbx_vector_ptr_create(&steps);
+	zbx_vector_ptr_create(&results);
+	zbx_vector_ptr_create(&history);
+
+	if (FAIL == trapper_parse_preproc_test(jp, values, ts, &values_num, &value_type, &steps, error))
+		goto out;
+
+	for (i = 0; i < values_num; i++)
+	{
+		zbx_vector_ptr_clear_ext(&results, (zbx_clean_func_t)zbx_preproc_result_free);
+		if (FAIL == zbx_preprocessor_test(value_type, values[i], &ts[i], &steps, &results, &history,
+				&preproc_error, error) || NULL != preproc_error)
+		{
+			break;
+		}
+
+		result = (zbx_preproc_result_t *)results.values[results.values_num - 1];
+		if (ZBX_VARIANT_NONE != result->value.type &&
+				FAIL == zbx_variant_to_value_type(&result->value, value_type, &preproc_error))
+		{
+			break;
+		}
+	}
+
+	zbx_json_addstring(json, ZBX_PROTO_TAG_RESPONSE, "success", ZBX_JSON_TYPE_STRING);
+	zbx_json_addobject(json, ZBX_PROTO_TAG_DATA);
+
+	if (i + 1 < values_num)
+		zbx_json_addstring(json, ZBX_PROTO_TAG_PREVIOUS, "true", ZBX_JSON_TYPE_INT);
+
+	zbx_json_addarray(json, ZBX_PROTO_TAG_STEPS);
+	for (i = 0; i < results.values_num; i++)
+	{
+		zbx_preproc_result_t	*result = (zbx_preproc_result_t *)results.values[i];
+
+		zbx_json_addobject(json, NULL);
+
+		if (NULL != result->error)
+			zbx_json_addstring(json, ZBX_PROTO_TAG_ERROR, result->error, ZBX_JSON_TYPE_STRING);
+
+		if (ZBX_PREPROC_FAIL_DEFAULT != result->action)
+			zbx_json_adduint64(json, ZBX_PROTO_TAG_ACTION, result->action);
+
+		if (i == results.values_num - 1 && NULL != result->error)
+		{
+			if (ZBX_PREPROC_FAIL_SET_ERROR == result->action)
+				zbx_json_addstring(json, ZBX_PROTO_TAG_FAILED, preproc_error, ZBX_JSON_TYPE_STRING);
+		}
+
+		if (ZBX_VARIANT_NONE != result->value.type)
+		{
+			zbx_json_addstring(json, ZBX_PROTO_TAG_RESULT, zbx_variant_value_desc(&result->value),
+					ZBX_JSON_TYPE_STRING);
+		}
+		else if (NULL == result->error || ZBX_PREPROC_FAIL_DISCARD_VALUE == result->action)
+			zbx_json_addstring(json, ZBX_PROTO_TAG_RESULT, NULL, ZBX_JSON_TYPE_NULL);
+
+		zbx_json_close(json);
+	}
+	zbx_json_close(json);
+
+	if (NULL == preproc_error)
+	{
+		zbx_preproc_result_t	*result = (zbx_preproc_result_t *)results.values[results.values_num - 1];
+
+		if (ZBX_VARIANT_NONE != result->value.type)
+		{
+			zbx_json_addstring(json, ZBX_PROTO_TAG_RESULT, zbx_variant_value_desc(&result->value),
+					ZBX_JSON_TYPE_STRING);
+		}
+		else
+			zbx_json_addstring(json, ZBX_PROTO_TAG_RESULT, NULL, ZBX_JSON_TYPE_NULL);
+	}
+	else
+		zbx_json_addstring(json, ZBX_PROTO_TAG_FAILED, preproc_error, ZBX_JSON_TYPE_STRING);
+
+	ret = SUCCEED;
+out:
+
+	for (i = 0; i < values_num; i++)
+		zbx_free(values[i]);
+
+	zbx_free(preproc_error);
+	zbx_free(error);
+
+	zbx_vector_ptr_clear_ext(&history, (zbx_clean_func_t)zbx_preproc_op_history_free);
+	zbx_vector_ptr_destroy(&history);
+	zbx_vector_ptr_clear_ext(&results, (zbx_clean_func_t)zbx_preproc_result_free);
+	zbx_vector_ptr_destroy(&results);
+	zbx_vector_ptr_clear_ext(&steps, (zbx_clean_func_t)zbx_preproc_op_free);
+	zbx_vector_ptr_destroy(&steps);
+
+	return ret;
+}
+
+/******************************************************************************
+ *                                                                            *
  * Function: zbx_trapper_preproc_test                                         *
  *                                                                            *
  * Purpose: processes preprocessing test request                              *
@@ -211,116 +334,23 @@ out:
  ******************************************************************************/
 int	zbx_trapper_preproc_test(zbx_socket_t *sock, const struct zbx_json_parse *jp)
 {
-	char			*values[2] = {NULL, NULL}, *preproc_error = NULL, *error = NULL;
-	int			ret = FAIL, i, values_num;
-	unsigned char		value_type;
-	zbx_vector_ptr_t	steps, results, history;
-	struct zbx_json		json;
-	zbx_timespec_t		ts[2];
-	zbx_preproc_result_t	*result;
+	char		*error = NULL;
+	int		ret = FAIL;
+	struct zbx_json	json;
 
-	zbx_vector_ptr_create(&steps);
-	zbx_vector_ptr_create(&results);
-	zbx_vector_ptr_create(&history);
+	zbx_json_init(&json, 1024);
 
-	if (FAIL == trapper_parse_preproc_test(jp, values, ts, &values_num, &value_type, &steps, &error))
-		goto out;
-
-	for (i = 0; i < values_num; i++)
+	if (SUCCEED == (ret = zbx_trapper_preproc_test_run(jp, &json, &error)))
 	{
-		zbx_vector_ptr_clear_ext(&results, (zbx_clean_func_t)zbx_preproc_result_free);
-		if (FAIL == zbx_preprocessor_test(value_type, values[i], &ts[i], &steps, &results, &history,
-				&preproc_error, &error) || NULL != preproc_error)
-		{
-			break;
-		}
-
-		result = (zbx_preproc_result_t *)results.values[results.values_num - 1];
-		if (ZBX_VARIANT_NONE != result->value.type &&
-				FAIL == zbx_variant_to_value_type(&result->value, value_type, &preproc_error))
-		{
-			break;
-		}
-	}
-
-	zbx_json_init(&json, results.values_num * 256);
-
-	zbx_json_addstring(&json, ZBX_PROTO_TAG_RESPONSE, "success", ZBX_JSON_TYPE_STRING);
-	zbx_json_addobject(&json, ZBX_PROTO_TAG_DATA);
-
-	if (i + 1 < values_num)
-		zbx_json_addstring(&json, ZBX_PROTO_TAG_PREVIOUS, "true", ZBX_JSON_TYPE_INT);
-
-	zbx_json_addarray(&json, ZBX_PROTO_TAG_STEPS);
-	for (i = 0; i < results.values_num; i++)
-	{
-		zbx_preproc_result_t	*result = (zbx_preproc_result_t *)results.values[i];
-
-		zbx_json_addobject(&json, NULL);
-
-		if (NULL != result->error)
-			zbx_json_addstring(&json, ZBX_PROTO_TAG_ERROR, result->error, ZBX_JSON_TYPE_STRING);
-
-		if (ZBX_PREPROC_FAIL_DEFAULT != result->action)
-			zbx_json_adduint64(&json, ZBX_PROTO_TAG_ACTION, result->action);
-
-		if (i == results.values_num - 1 && NULL != result->error)
-		{
-			if (ZBX_PREPROC_FAIL_SET_ERROR == result->action)
-				zbx_json_addstring(&json, ZBX_PROTO_TAG_FAILED, preproc_error, ZBX_JSON_TYPE_STRING);
-		}
-
-		if (ZBX_VARIANT_NONE != result->value.type)
-		{
-			zbx_json_addstring(&json, ZBX_PROTO_TAG_RESULT, zbx_variant_value_desc(&result->value),
-					ZBX_JSON_TYPE_STRING);
-		}
-		else if (NULL == result->error || ZBX_PREPROC_FAIL_DISCARD_VALUE == result->action)
-			zbx_json_addstring(&json, ZBX_PROTO_TAG_RESULT, NULL, ZBX_JSON_TYPE_NULL);
-
-		zbx_json_close(&json);
-	}
-	zbx_json_close(&json);
-
-	if (NULL == preproc_error)
-	{
-		zbx_preproc_result_t	*result = (zbx_preproc_result_t *)results.values[results.values_num - 1];
-
-		if (ZBX_VARIANT_NONE != result->value.type)
-		{
-			zbx_json_addstring(&json, ZBX_PROTO_TAG_RESULT, zbx_variant_value_desc(&result->value),
-					ZBX_JSON_TYPE_STRING);
-		}
-		else
-			zbx_json_addstring(&json, ZBX_PROTO_TAG_RESULT, NULL, ZBX_JSON_TYPE_NULL);
+		zbx_tcp_send_bytes_to(sock, json.buffer, json.buffer_size, CONFIG_TIMEOUT);
 	}
 	else
-		zbx_json_addstring(&json, ZBX_PROTO_TAG_FAILED, preproc_error, ZBX_JSON_TYPE_STRING);
-
-	zbx_tcp_send_bytes_to(sock, json.buffer, json.buffer_size, CONFIG_TIMEOUT);
-
-	zbx_json_free(&json);
-
-	ret = SUCCEED;
-out:
-	if (FAIL == ret)
 	{
 		zbx_send_response(sock, ret, error, CONFIG_TIMEOUT);
 		zbx_free(error);
 	}
 
-	for (i = 0; i < values_num; i++)
-		zbx_free(values[i]);
-
-	zbx_free(preproc_error);
-	zbx_free(error);
-
-	zbx_vector_ptr_clear_ext(&history, (zbx_clean_func_t)zbx_preproc_op_history_free);
-	zbx_vector_ptr_destroy(&history);
-	zbx_vector_ptr_clear_ext(&results, (zbx_clean_func_t)zbx_preproc_result_free);
-	zbx_vector_ptr_destroy(&results);
-	zbx_vector_ptr_clear_ext(&steps, (zbx_clean_func_t)zbx_preproc_op_free);
-	zbx_vector_ptr_destroy(&steps);
+	zbx_json_free(&json);
 
 	return ret;
 }
