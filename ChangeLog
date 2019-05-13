@@ -5,6 +5,7 @@ New features:
 
 Bug fixes:
 ..F....... [ZBX-10729] fixed map element link coloring when linked problem is acknowledged (miks)
+..F....... [ZBX-16007] fixed trigger list checkboxes when filtering by single host (talbergs)
 ..F....... [ZBX-15871] fixed problem events to be filtered by "suppressed" instead of "related to maintenance" (talbergs)
 ..F....... [ZBX-16011] made "Test all steps" button be available only when at least 2 preprocessing steps are created (miks)
 ...G...PS. [ZBX-10550] added warnings when Zabbix components have different versions (akozlovs)
