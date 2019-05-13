@@ -354,8 +354,6 @@ class CMapHelper {
 
 					$trigger = zbx_array_merge($link_trigger, $linktrigger_info[$link_trigger['triggerid']]);
 
-					$triggers[$id] = zbx_array_merge($link_trigger, $linktrigger_info[$link_trigger['triggerid']]);
-
 					if ($trigger['status'] == TRIGGER_STATUS_ENABLED
 							&& $trigger['value'] == TRIGGER_VALUE_TRUE
 							&& $trigger['priority'] >= $max_severity) {
