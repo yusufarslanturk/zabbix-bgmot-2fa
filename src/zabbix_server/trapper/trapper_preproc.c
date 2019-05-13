@@ -189,9 +189,16 @@ static int	trapper_parse_preproc_test(const struct zbx_json_parse *jp, char **va
 	ret = SUCCEED;
 out:
 	if (FAIL == ret)
+	{
 		zbx_vector_ptr_clear_ext(steps, (zbx_clean_func_t)zbx_preproc_op_free);
+		zbx_free(values[0]);
+		zbx_free(values[1]);
+
+	}
 
 	zbx_free(value);
+	zbx_free(step_params);
+	zbx_free(error_handler_params);
 
 	return ret;
 }
@@ -218,7 +225,7 @@ out:
 int	zbx_trapper_preproc_test_run(const struct zbx_json_parse *jp, struct zbx_json *json, char **error)
 {
 	char			*values[2] = {NULL, NULL}, *preproc_error = NULL;
-	int			ret = FAIL, i, values_num, single;
+	int			ret = FAIL, i, values_num = 0, single;
 	unsigned char		value_type;
 	zbx_vector_ptr_t	steps, results, history;
 	zbx_timespec_t		ts[2];
