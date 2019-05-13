@@ -109,9 +109,9 @@ void	zbx_mock_test_entry(void **state)
 
 	returned_ret = zbx_trapper_preproc_test_run(&jp, &out, &error);
 	if (FAIL == returned_ret)
-		printf("Error: %s\n", error);
+		printf("zbx_trapper_preproc_test_run error: %s\n", error);
 	else
-		printf("Output: %s\n", out.buffer);
+		printf("zbx_trapper_preproc_test_run output: %s\n", out.buffer);
 
 	expected_ret = zbx_mock_str_to_return_code(zbx_mock_get_parameter_string("out.return"));
 	zbx_mock_assert_result_eq("Return value", expected_ret, returned_ret);
