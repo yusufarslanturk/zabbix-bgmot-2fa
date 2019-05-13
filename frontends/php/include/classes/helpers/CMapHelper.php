@@ -344,7 +344,7 @@ class CMapHelper {
 				$color = $link['color'];
 				$linktriggers = $link['linktriggers'];
 				order_result($linktriggers, 'triggerid');
-				$max_severity = 0;
+				$max_severity = $options['severity_min'];
 
 				foreach ($linktriggers as $link_trigger) {
 					if ($link_trigger['triggerid'] == 0
