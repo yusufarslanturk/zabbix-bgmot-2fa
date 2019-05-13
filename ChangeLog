@@ -3,6 +3,7 @@ Changes for 4.2.2rc1
 New features:
 
 Bug fixes:
+..F....... [ZBX-16011] made "Test all steps" button be available only when at least 2 preprocessing steps are created (miks)
 ..F....... [ZBX-15905] added versioning of browser cached files (ashubin, gcalenko)
 ........S. [ZBX-15956] reduced configuration cache fragmentation when reloading time based triggers (vso)
 ........S. [ZBX-15998] improved performance of "Remove host", "Remove from host group", "Unlink from template" operations when processing network discovery events and using MySQL database (vso)
