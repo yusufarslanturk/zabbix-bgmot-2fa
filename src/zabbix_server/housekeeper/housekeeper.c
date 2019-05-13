@@ -488,6 +488,7 @@ static void	hk_history_update(zbx_hk_history_rule_t *rules, int now)
 static void	hk_history_delete_queue_prepare_all(zbx_hk_history_rule_t *rules, int now)
 {
 	zbx_hk_history_rule_t	*rule;
+	unsigned char		items_update = 0;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
 
@@ -498,12 +499,18 @@ static void	hk_history_delete_queue_prepare_all(zbx_hk_history_rule_t *rules, in
 		{
 			if (0 == rule->item_cache.num_slots)
 				hk_history_prepare(rule);
+
+			items_update = 1;
 		}
 		else if (0 != rule->item_cache.num_slots)
 			hk_history_release(rule);
 	}
 
-	hk_history_update(rules, now);
+	/* Since we maintain two separate global period settings - for history and for trends */
+	/* we need to scan items table if either of these is off. Thus setting both global periods */
+	/* to override is very beneficial for performance. */
+	if (0 != items_update)
+		hk_history_update(rules, now);	/* scan items and update min_clock using per item settings */
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
 }
