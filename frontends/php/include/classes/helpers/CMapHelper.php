@@ -207,11 +207,7 @@ class CMapHelper {
 	 * @param int   $options['severity_min']  Minimum severity.
 	 */
 	protected static function resolveMapState(array &$sysmap, array $areas, array $options) {
-		$map_info_options = [
-			'severity_min' => array_key_exists('severity_min', $options) ? $options['severity_min'] : null
-		];
-
-		$map_info = getSelementsInfo($sysmap, $map_info_options);
+		$map_info = getSelementsInfo($sysmap, ['severity_min' => $options['severity_min']]);
 		processAreasCoordinates($sysmap, $areas, $map_info);
 
 		// Adding element names and removing inaccessible triggers from readable elements.
