@@ -602,6 +602,18 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 				[
 					'expected' => TEST_GOOD,
 					'fields' =>[
+						'Name' => 'Add JavaScript multiline preprocessing',
+						'Key' => 'item.javascript.multiline.preprocessing'
+					],
+					'preprocessing' => [
+						['type' => 'JavaScript', 'parameter_1' => "Test line 1\nTest line 2\nTest line 3"]
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' =>[
 						'Name' => 'Add all preprocessing',
 						'Key' => 'item.all.preprocessing'
 					],
@@ -614,7 +626,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 						['type' => 'Boolean to decimal'],
 						['type' => 'Octal to decimal'],
 						['type' => 'Hexadecimal to decimal'],
-//						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
+						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
 						['type' => 'Simple change'],
 						['type' => 'In range', 'parameter_1' => '-5', 'parameter_2' => '9.5'],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '5'],
@@ -637,6 +649,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 						['type' => 'JSONPath', 'parameter_1' => '3c!@#$%^&*()-='],
 						['type' => 'Custom multiplier', 'parameter_1' => '4e+10'],
 						['type' => 'Regular expression', 'parameter_1' => '5d!@#$%^&*()-=', 'parameter_2' => '6e!@#$%^&*()-='],
+						['type' => 'JavaScript', 'parameter_1' => '5d!@#$%^&*()-='],
 						['type' => 'Matches regular expression', 'parameter_1' => '7f!@#$%^&*()-='],
 						['type' => 'Does not match regular expression', 'parameter_1' => '8g!@#$%^&*()-='],
 						['type' => 'Check for error in JSON', 'parameter_1' => '9h!@#$%^&*()-='],
@@ -676,6 +689,8 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 						['type' => 'Hexadecimal to decimal'],
 						['type' => 'In range', 'parameter_1' => '-5.5', 'parameter_2' => '10'],
 						['type' => 'In range', 'parameter_1' => '-5.5', 'parameter_2' => '10'],
+						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
+						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
 						['type' => 'Matches regular expression', 'parameter_1' => 'test_expression'],
 						['type' => 'Matches regular expression', 'parameter_1' => 'test_expression'],
 						['type' => 'Does not match regular expression', 'parameter_1' => 'not_expression'],
@@ -707,6 +722,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 						['type' => 'In range', 'parameter_1' => '{$FROM}', 'parameter_2' => '{$TO}'],
 						['type' => 'Matches regular expression', 'parameter_1' => '{$EXPRESSION}(.*)'],
 						['type' => 'Does not match regular expression', 'parameter_1' => '{$REGEXP}(.+)'],
+						['type' => 'JavaScript', 'parameter_1' => '{$JAVASCRIPT}'],
 						['type' => 'Check for error in JSON', 'parameter_1' => '{$USERMACRO}'],
 						['type' => 'Check for error in XML', 'parameter_1' => '/tmp/{$PATH}'],
 						['type' => 'Check for error using regular expression', 'parameter_1' => '^{$REGEXP}(.+)', 'parameter_2' => '\0'],

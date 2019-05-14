@@ -267,13 +267,25 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 				[
 					'expected' => TEST_GOOD,
 					'fields' =>[
+						'Name' => 'Add JavaScript multiline preprocessing',
+						'Key' => 'item.javascript.multiline.preprocessing'
+					],
+					'preprocessing' => [
+						['type' => 'JavaScript', 'parameter_1' => "Test line 1\nTest line 2\nTest line 3"]
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' =>[
 						'Name' => 'LLD all preprocessing steps',
 						'Key' => 'lld-all-preprocessing-steps'
 					],
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => 'expression', 'parameter_2' => '\1'],
 						['type' => 'JSONPath', 'parameter_1' => '$.data.test'],
-//						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
+						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
 						['type' => 'Does not match regular expression', 'parameter_1' => 'Pattern'],
 						['type' => 'Check for error in JSON', 'parameter_1' => '$.new.path'],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '30']
@@ -294,6 +306,8 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'JSONPath', 'parameter_1' => '$.data.test2'],
 						['type' => 'Does not match regular expression', 'parameter_1' => 'Pattern1'],
 						['type' => 'Does not match regular expression', 'parameter_1' => 'Pattern2'],
+						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
+						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
 						['type' => 'Check for error in JSON', 'parameter_1' => '$.new.path1'],
 						['type' => 'Check for error in JSON', 'parameter_1' => '$.new.path2']
 					]
@@ -310,6 +324,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'Regular expression', 'parameter_1' => '1a!@#$%^&*()-=', 'parameter_2' => '2b!@#$%^&*()-='],
 						['type' => 'JSONPath', 'parameter_1' => '3c!@#$%^&*()-='],
 						['type' => 'Does not match regular expression', 'parameter_1' => '4d!@#$%^&*()-='],
+						['type' => 'JavaScript', 'parameter_1' => '5d!@#$%^&*()-='],
 						['type' => 'Check for error in JSON', 'parameter_1' => '5e!@#$%^&*()-=']
 					]
 				]
@@ -325,6 +340,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'Regular expression', 'parameter_1' => '{$PATTERN}', 'parameter_2' => '{$OUTPUT}'],
 						['type' => 'JSONPath', 'parameter_1' => '{$PATH}'],
 						['type' => 'Does not match regular expression', 'parameter_1' => '{$PATTERN2}'],
+						['type' => 'JavaScript', 'parameter_1' => '{$JAVASCRIPT}'],
 						['type' => 'Check for error in JSON', 'parameter_1' => '{$PATH2}'],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '{$HEARTBEAT}']
 					]
