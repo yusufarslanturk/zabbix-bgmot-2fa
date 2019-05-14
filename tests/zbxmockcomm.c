@@ -27,6 +27,7 @@ static zbx_mock_handle_t	fragments;
 
 int	__wrap_connect(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len);
 ssize_t	__wrap_read(int fd, void *buf, size_t nbytes);
+int	__wrap_open(int fd, int flags);
 
 int	__wrap_connect(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len)
 {

@@ -25,6 +25,8 @@
 
 int	__wrap_stat(const char *pathname, struct stat *buf);
 int	__wrap___xstat(int ver, const char *pathname, struct stat *buf);
+int	__wrap_fstat(struct stat *stat_buf);
+int	__wrap___fxstat(int __ver, int __fildes, struct stat *__stat_buf);
 
 int	__wrap_stat(const char *pathname, struct stat *buf)
 {
