@@ -1419,6 +1419,7 @@ done:
 				zbx_binary_heap_remove_direct(&config->pqueue, proxy->hostid);
 				proxy->location = ZBX_LOC_NOWHERE;
 			}
+			proxy->last_version_error_time = time(NULL);
 		}
 		else if (NULL != (proxy = (ZBX_DC_PROXY *)zbx_hashset_search(&config->proxies, &hostid)))
 		{
@@ -9009,6 +9010,7 @@ static void	DCget_proxy(DC_PROXY *dst_proxy, const ZBX_DC_PROXY *src_proxy)
 	dst_proxy->version = src_proxy->version;
 	dst_proxy->lastaccess = src_proxy->lastaccess;
 	dst_proxy->auto_compress = src_proxy->auto_compress;
+	dst_proxy->last_version_error_time = src_proxy->last_version_error_time;
 
 	if (NULL != (host = (const ZBX_DC_HOST *)zbx_hashset_search(&config->hosts, &src_proxy->hostid)))
 	{
@@ -11838,6 +11840,12 @@ void	zbx_dc_update_proxy(zbx_proxy_diff_t *diff)
 			else
 				diff->flags &= (~ZBX_FLAGS_PROXY_DIFF_UPDATE_COMPRESS);
 		}
+		if (0 != (diff->flags & ZBX_FLAGS_PROXY_DIFF_UPDATE_LASTERROR))
+		{
+			if (proxy-> last_version_error_time != diff->last_version_error_time)
+				proxy->last_version_error_time = diff->last_version_error_time;
+			diff->flags &= (~ZBX_FLAGS_PROXY_DIFF_UPDATE_LASTERROR);
+		}
 	}
 
 	UNLOCK_CACHE;
@@ -12070,3 +12078,7 @@ void	zbx_dc_get_item_tags_by_functionids(const zbx_uint64_t *functionids, size_t
 
 	UNLOCK_CACHE;
 }
+
+#ifdef HAVE_TESTS
+#	include "../../../tests/libs/zbxdbcache/dc_item_poller_type_update_test.c"
+#endif
