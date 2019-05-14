@@ -428,7 +428,7 @@ class CElement extends CBaseElement implements IWaitable {
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritdocWeb driver should not be accessed directly from test cases.
 	 */
 	public function getReadyCondition() {
 		return $this->getClickableCondition();
@@ -467,6 +467,62 @@ class CElement extends CBaseElement implements IWaitable {
 	 */
 	public function waitUntilSelected() {
 		CElementQuery::wait()->until(WebDriverExpectedCondition::elementToBeSelected($this));
+
+		return $this;
+	}
+
+	/**
+	 * Detect element by its tag or class.
+	 *
+	 * @param type $options
+	 */
+	public function detect($options = []) {
+
+		$tag = $this->getTagName();
+		if ($tag === 'textarea' ) {
+			return $this->asElement($options);
+		}
+
+		if ($tag === 'select') {
+			return $this->asDropdown($options);
+		}
+
+		if ($tag === 'table') {
+			return $this->asTable($options);
+		}
+
+		if ($tag === 'input') {
+			$type = $this->getAttribute('type');
+			if ($type === 'checkbox' || $type === 'radio') {
+				return $this->asCheckbox($options);
+			}
+			else {
+				return $this->asElement($options);
+			}
+		}
+
+		$class = explode(' ', $this->getAttribute('class'));
+		if (in_array('multiselect-control', $class)) {
+			return $this->asMultiselect($options);
+		}
+
+		if (in_array('radio-list-control', $class)) {
+			return $this->asSegmentedRadio($options);
+		}
+
+		if (in_array('checkbox-list', $class)) {
+			return $this->asCheckboxList($options);
+		}
+
+		if (in_array('range-control', $class)) {
+			return $this->asRangeControl($options);
+		}
+
+		if (in_array('multilineinput-control', $class)) {
+			return $this->asMultiline($options);
+		}
+
+		self::addWarning('No specific element was detected');
 
 		return $this;
 	}

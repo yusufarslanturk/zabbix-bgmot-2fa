@@ -45,13 +45,14 @@ trait PreprocessingTrait {
 			],
 			[
 				'name'		=> 'parameter_1',
-				'selector'	=> 'xpath:.//input[contains(@id, "_params_0")]',
-				'value'		=> ['getAttribute', 'params' => ['value']]
+				'selector'	=> 'xpath:.//input[contains(@id, "_params_0")]|.//div[contains(@id, "_params_0")]',
+				'detect'	=> true,
+				'value'		=> ['getValue']
 			],
 			[
 				'name'		=> 'parameter_2',
 				'selector'	=> 'xpath:.//input[contains(@id, "_params_1")]',
-				'value'		=> ['getAttribute', 'params' => ['value']]
+				'value'		=> ['getValue']
 			],
 			[
 				'name'		=> 'on_fail',
@@ -68,7 +69,7 @@ trait PreprocessingTrait {
 			[
 				'name'		=> 'error_handler_params',
 				'selector'	=> 'xpath:.//input[contains(@id, "_error_handler_params")]',
-				'value'		=> ['getAttribute', 'params' => ['value']]
+				'value'		=> ['getValue']
 			]
 		];
 	}
@@ -88,7 +89,12 @@ trait PreprocessingTrait {
 			$query->cast($field['class']);
 		}
 
-		return $query->one(false);
+		$element = $query->one(false);
+		if ($element !== null && array_key_exists('detect', $field) && $field['detect']) {
+			$element = $element->detect();
+		}
+
+		return $element;
 	}
 
 	/**

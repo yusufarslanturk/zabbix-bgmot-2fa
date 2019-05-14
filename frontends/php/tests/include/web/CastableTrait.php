@@ -198,4 +198,15 @@ trait CastableTrait {
 	public function asBaseType($options = []) {
 		return $this->cast('RemoteWebElement', $options);
 	}
+
+	/**
+	 * Cast object to Multiline element.
+	 *
+	 * @param array $options    additional casting options
+	 *
+	 * @return CMultilineElement
+	 */
+	public function asMultiline($options = []) {
+		return $this->cast('CMultilineElement', $options);
+	}
 }
