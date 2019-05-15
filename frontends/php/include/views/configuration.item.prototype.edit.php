@@ -651,44 +651,42 @@ $delayFlexTable->addRow([(new CButton('interval_add', _('Add')))
 	->addClass(ZBX_STYLE_BTN_LINK)
 	->addClass('element-table-add')]);
 
-$form_list->addRow(_('Custom intervals'),
-	(new CDiv($delayFlexTable))
-		->addClass(ZBX_STYLE_TABLE_FORMS_SEPARATOR)
-		->setAttribute('style', 'min-width: '.ZBX_TEXTAREA_STANDARD_WIDTH.'px;'),
-	'row_flex_intervals'
-);
-
-$form_list->addRow((new CLabel(_('History storage period'), 'history'))->setAsteriskMark(),
-	(new CDiv([
-		(new CRadioButtonList('history_mode', (int) $data['history_mode']))
-			->addValue(_('Do not keep history'), ITEM_STORAGE_OFF)
-			->addValue(_('Storage period'), ITEM_STORAGE_CUSTOM)
-			->setModern(true),
-		(new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
-		(new CTextBox('history', $data['history']))
-			->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
-			->setAriaRequired()
-	]))->addStyle('display: flex;')
-);
-
-$form_list->addRow((new CLabel(_('Trend storage period'), 'trends'))->setAsteriskMark(),
-	(new CDiv([
-		(new CRadioButtonList('trends_mode', (int) $data['trends_mode']))
-			->addValue(_('Do not keep history'), ITEM_STORAGE_OFF)
-			->addValue(_('Storage period'), ITEM_STORAGE_CUSTOM)
-			->setModern(true),
-		(new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
-		(new CTextBox('trends', $data['trends']))
-			->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
-			->setAriaRequired()
-	]))->addStyle('display: flex;'),
-	'row_trends'
-);
-
-$form_list->addRow(_('Log time format'),
-	(new CTextBox('logtimefmt', $data['logtimefmt'], $readonly, 64))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH),
-	'row_logtimefmt'
-);
+$form_list
+	->addRow(_('Custom intervals'),
+		(new CDiv($delayFlexTable))
+			->addClass(ZBX_STYLE_TABLE_FORMS_SEPARATOR)
+			->setAttribute('style', 'min-width: '.ZBX_TEXTAREA_STANDARD_WIDTH.'px;'),
+		'row_flex_intervals'
+	)
+	->addRow((new CLabel(_('History storage period'), 'history'))->setAsteriskMark(),
+		(new CDiv([
+			(new CRadioButtonList('history_mode', (int) $data['history_mode']))
+				->addValue(_('Do not keep history'), ITEM_STORAGE_OFF)
+				->addValue(_('Storage period'), ITEM_STORAGE_CUSTOM)
+				->setModern(true),
+			(new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
+			(new CTextBox('history', $data['history']))
+				->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
+				->setAriaRequired()
+		]))->addStyle('display: flex;')
+	)
+	->addRow((new CLabel(_('Trend storage period'), 'trends'))->setAsteriskMark(),
+		(new CDiv([
+			(new CRadioButtonList('trends_mode', (int) $data['trends_mode']))
+				->addValue(_('Do not keep history'), ITEM_STORAGE_OFF)
+				->addValue(_('Storage period'), ITEM_STORAGE_CUSTOM)
+				->setModern(true),
+			(new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
+			(new CTextBox('trends', $data['trends']))
+				->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
+				->setAriaRequired()
+		]))->addStyle('display: flex;'),
+		'row_trends'
+	)
+	->addRow(_('Log time format'),
+		(new CTextBox('logtimefmt', $data['logtimefmt'], $readonly, 64))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH),
+		'row_logtimefmt'
+	);
 
 // Append valuemap to form list.
 if ($readonly) {
