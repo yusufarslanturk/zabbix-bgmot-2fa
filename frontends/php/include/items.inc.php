@@ -938,7 +938,9 @@ function makeItemTemplatePrefix($itemid, array $parent_templates, $flag) {
 				->setArgument('filter_set', 1);
 		}
 
-		$name = (new CLink(CHtml::encode($template['name']), $url))->addClass(ZBX_STYLE_LINK_ALT);
+		$name = (new CLink(CHtml::encode($template['name']), $url))
+			->addClass(ZBX_STYLE_LINK_ALT)
+			->onClick('javascript: chkbxRange.clearSelectedOnFilterChange();');
 	}
 	else {
 		$name = new CSpan(CHtml::encode($template['name']));
