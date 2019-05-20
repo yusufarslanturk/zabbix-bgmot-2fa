@@ -485,6 +485,7 @@ foreach ($subfiltersList as $name) {
 	}
 }
 
+$filter_groupids = getRequest('filter_groupids', []);
 $filter_hostids = getRequest('filter_hostids');
 if (!hasRequest('form') && $filter_hostids) {
 	if (!isset($host)) {
