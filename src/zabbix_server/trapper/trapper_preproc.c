@@ -192,7 +192,6 @@ out:
 		zbx_vector_ptr_clear_ext(steps, (zbx_clean_func_t)zbx_preproc_op_free);
 		zbx_free(values[0]);
 		zbx_free(values[1]);
-
 	}
 
 	zbx_free(step_params);
@@ -310,7 +309,6 @@ int	zbx_trapper_preproc_test_run(const struct zbx_json_parse *jp, struct zbx_jso
 
 	ret = SUCCEED;
 out:
-
 	for (i = 0; i < values_num; i++)
 		zbx_free(values[i]);
 
