@@ -239,10 +239,13 @@ int	zbx_trapper_preproc_test_run(const struct zbx_json_parse *jp, struct zbx_jso
 	{
 		zbx_vector_ptr_clear_ext(&results, (zbx_clean_func_t)zbx_preproc_result_free);
 		if (FAIL == zbx_preprocessor_test(value_type, values[i], &ts[i], &steps, &results, &history,
-				&preproc_error, error) || NULL != preproc_error)
+				&preproc_error, error))
 		{
-			break;
+			goto out;
 		}
+
+		if (NULL != preproc_error)
+			break;
 
 		if (0 == single)
 		{
