@@ -47,14 +47,12 @@
 static int	trapper_parse_preproc_test(const struct zbx_json_parse *jp, char **values, zbx_timespec_t *ts,
 		int *values_num, unsigned char *value_type, zbx_vector_ptr_t *steps, int *single, char **error)
 {
-	char			buffer[MAX_STRING_LEN], *value = NULL, *ptr,  *step_params = NULL,
-				*error_handler_params = NULL;
-	const char		*pnext;
+	char			buffer[MAX_STRING_LEN], *step_params = NULL, *error_handler_params = NULL;
+	const char		*ptr;
 	zbx_user_t		user;
-	int			ret = FAIL, index = 0, delay;
+	int			ret = FAIL;
 	struct zbx_json_parse	jp_data, jp_history, jp_steps, jp_step;
 	size_t			size;
-	unsigned char		step_type, error_handler;
 	zbx_timespec_t		ts_now;
 
 	if (FAIL == zbx_json_value_by_name(jp, ZBX_PROTO_TAG_SID, buffer, sizeof(buffer)) ||
@@ -86,49 +84,49 @@ static int	trapper_parse_preproc_test(const struct zbx_json_parse *jp, char **va
 	if (SUCCEED == zbx_json_brackets_by_name(&jp_data, ZBX_PROTO_TAG_HISTORY, &jp_history))
 	{
 		size = 0;
-		if (FAIL == zbx_json_value_by_name_dyn(&jp_history, ZBX_PROTO_TAG_VALUE, &values[index], &size))
+		if (FAIL == zbx_json_value_by_name_dyn(&jp_history, ZBX_PROTO_TAG_VALUE, values, &size))
 		{
 			*error = zbx_strdup(NULL, "Missing history value field.");
 			goto out;
 		}
+		(*values_num)++;
 
-		size = 0;
-		if (FAIL == zbx_json_value_by_name_dyn(&jp_history, ZBX_PROTO_TAG_TIMESTAMP, &value, &size))
+		if (FAIL == zbx_json_value_by_name(&jp_history, ZBX_PROTO_TAG_TIMESTAMP, buffer, sizeof(buffer)))
 		{
 			*error = zbx_strdup(NULL, "Missing history timestamp field.");
 			goto out;
 		}
 
-		if (0 != strncmp(value, "now", ZBX_CONST_STRLEN("now")))
+		if (0 != strncmp(buffer, "now", ZBX_CONST_STRLEN("now")))
 		{
-			*error = zbx_dsprintf(NULL, "invalid history value timestamp: %s", value);
+			*error = zbx_dsprintf(NULL, "invalid history value timestamp: %s", buffer);
 			goto out;
 		}
 
-		ts[index] = ts_now;
-		ptr = value + ZBX_CONST_STRLEN("now");
+		ts[0] = ts_now;
+		ptr = buffer + ZBX_CONST_STRLEN("now");
 
 		if ('\0' != *ptr)
 		{
+			int	delay;
+
 			if ('-' != *ptr || FAIL == is_time_suffix(ptr + 1, &delay, strlen(ptr + 1)))
 			{
-				*error = zbx_dsprintf(NULL, "invalid history value timestamp: %s", value);
+				*error = zbx_dsprintf(NULL, "invalid history value timestamp: %s", buffer);
 				goto out;
 			}
 
-			ts[index].sec -= delay;
+			ts[0].sec -= delay;
 		}
-		index++;
 	}
 
 	size = 0;
-	if (FAIL == zbx_json_value_by_name_dyn(&jp_data, ZBX_PROTO_TAG_VALUE, &values[index], &size))
+	if (FAIL == zbx_json_value_by_name_dyn(&jp_data, ZBX_PROTO_TAG_VALUE, &values[*values_num], &size))
 	{
 		*error = zbx_strdup(NULL, "Missing value field.");
 		goto out;
 	}
-	ts[index] = ts_now;
-	*values_num = index + 1;
+	ts[(*values_num)++] = ts_now;
 
 	if (FAIL == zbx_json_brackets_by_name(&jp_data, ZBX_PROTO_TAG_STEPS, &jp_steps))
 	{
@@ -136,11 +134,12 @@ static int	trapper_parse_preproc_test(const struct zbx_json_parse *jp, char **va
 		goto out;
 	}
 
-	for (pnext = NULL; NULL != (pnext = zbx_json_next(&jp_steps, pnext));)
+	for (ptr = NULL; NULL != (ptr = zbx_json_next(&jp_steps, ptr));)
 	{
 		zbx_preproc_op_t	*step;
+		unsigned char		step_type, error_handler;
 
-		if (FAIL == zbx_json_brackets_open(pnext, &jp_step))
+		if (FAIL == zbx_json_brackets_open(ptr, &jp_step))
 		{
 			*error = zbx_strdup(NULL, "Cannot parse preprocessing step.");
 			goto out;
@@ -196,7 +195,6 @@ out:
 
 	}
 
-	zbx_free(value);
 	zbx_free(step_params);
 	zbx_free(error_handler_params);
 
