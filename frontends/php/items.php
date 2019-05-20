@@ -2053,6 +2053,9 @@ else {
 
 	$data['trigger_parent_templates'] = getTriggerParentTemplates($data['itemTriggers'], ZBX_FLAG_DISCOVERY_NORMAL);
 
+	sort($filter_hostids);
+	$data['checkbox_hash'] = crc32(implode('', $filter_hostids));
+
 	// render view
 	$itemView = new CView('configuration.item.list', $data);
 	$itemView->render();

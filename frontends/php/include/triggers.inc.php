@@ -2500,9 +2500,7 @@ function makeTriggerTemplatePrefix($triggerid, array $parent_templates, $flag) {
 					->setArgument('filter_set', 1);
 			}
 
-			$name = (new CLink(CHtml::encode($template['name']), $url))
-				->addClass(ZBX_STYLE_LINK_ALT)
-				->onClick('javascript: chkbxRange.clearSelectedOnFilterChange();');
+			$name = (new CLink(CHtml::encode($template['name']), $url))->addClass(ZBX_STYLE_LINK_ALT);
 		}
 		else {
 			$name = new CSpan(CHtml::encode($template['name']));

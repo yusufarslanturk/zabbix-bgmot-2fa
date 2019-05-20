@@ -965,6 +965,9 @@ else {
 		$single_selected_hostid = reset($filter_hostids);
 	}
 
+	sort($filter_hostids);
+	$checkbox_hash = crc32(implode('', $filter_hostids));
+
 	$data = [
 		'config' => $config,
 		'config_priorities' => $config_priorities,
@@ -985,6 +988,7 @@ else {
 		'filter_inherited' => $filter_inherited,
 		'filter_discovered' => $filter_discovered,
 		'filter_dependent' => $filter_dependent,
+		'checkbox_hash' => $checkbox_hash,
 		'show_info_column' => $show_info_column,
 		'show_value_column' => $show_value_column,
 		'single_selected_hostid' => $single_selected_hostid,
