@@ -63,7 +63,9 @@ int	__wrap_zbx_preprocessor_test(unsigned char value_type, const char *value, co
 
 	/* copy output history */
 	zbx_vector_ptr_clear_ext(history, (zbx_clean_func_t)zbx_preproc_op_history_free);
-	zbx_vector_ptr_append_array(history, history_out.values, history_out.values_num);
+
+	if (0 != history_out.values_num)
+		zbx_vector_ptr_append_array(history, history_out.values, history_out.values_num);
 
 	/* copy results */
 	for (i = 0; i < results_num; i++)
