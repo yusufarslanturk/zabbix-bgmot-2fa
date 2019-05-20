@@ -349,7 +349,7 @@ out:
 int	zbx_trapper_preproc_test(zbx_socket_t *sock, const struct zbx_json_parse *jp)
 {
 	char		*error = NULL;
-	int		ret = FAIL;
+	int		ret;
 	struct zbx_json	json;
 
 	zbx_json_init(&json, 1024);
