@@ -264,7 +264,7 @@ int	zbx_trapper_preproc_test_run(const struct zbx_json_parse *jp, struct zbx_jso
 	zbx_json_addarray(json, ZBX_PROTO_TAG_STEPS);
 	for (i = 0; i < results.values_num; i++)
 	{
-		zbx_preproc_result_t	*result = (zbx_preproc_result_t *)results.values[i];
+		result = (zbx_preproc_result_t *)results.values[i];
 
 		zbx_json_addobject(json, NULL);
 
@@ -294,7 +294,7 @@ int	zbx_trapper_preproc_test_run(const struct zbx_json_parse *jp, struct zbx_jso
 
 	if (NULL == preproc_error)
 	{
-		zbx_preproc_result_t	*result = (zbx_preproc_result_t *)results.values[results.values_num - 1];
+		result = (zbx_preproc_result_t *)results.values[results.values_num - 1];
 
 		if (ZBX_VARIANT_NONE != result->value.type)
 		{
