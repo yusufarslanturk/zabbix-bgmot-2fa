@@ -409,7 +409,7 @@ $item_form_list
 				->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 				->setAriaRequired()
 		]))
-			->addStyle('display: flex;')
+			->addClass('wrap-multiple-controls')
 			->setId('history_div')
 	)
 	// Append trends to form list.
@@ -427,7 +427,7 @@ $item_form_list
 				->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 				->setAriaRequired()
 		]))
-			->addStyle('display: flex;')
+			->addClass('wrap-multiple-controls')
 			->setId('trends_div')
 	);
 
