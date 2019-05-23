@@ -668,7 +668,7 @@ $form_list
 			(new CTextBox('history', $data['history']))
 				->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 				->setAriaRequired()
-		]))->addStyle('display: flex;')
+		]))->addClass('wrap-multiple-controls')
 	)
 	->addRow((new CLabel(_('Trend storage period'), 'trends'))->setAsteriskMark(),
 		(new CDiv([
@@ -680,7 +680,7 @@ $form_list
 			(new CTextBox('trends', $data['trends']))
 				->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 				->setAriaRequired()
-		]))->addStyle('display: flex;'),
+		]))->addClass('wrap-multiple-controls'),
 		'row_trends'
 	)
 	->addRow(_('Log time format'),

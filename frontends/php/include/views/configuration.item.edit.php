@@ -774,7 +774,7 @@ $form_list->addRow((new CLabel(_('History storage period'), 'history'))->setAste
 			->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 			->setAriaRequired(),
 		$keep_history_hint
-	]))->addStyle('display: flex;')
+	]))->addClass('wrap-multiple-controls')
 );
 
 // Append trend storage to form list.
@@ -808,7 +808,7 @@ $form_list
 				->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 				->setAriaRequired(),
 			$keep_trend_hint
-		]))->addStyle('display: flex;'),
+		]))->addClass('wrap-multiple-controls'),
 		'row_trends'
 	)
 	->addRow(_('Log time format'),

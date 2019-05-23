@@ -1804,6 +1804,10 @@ output {
 				padding-right: 0;
 			}
 		}
+	
+		.wrap-multiple-controls {
+			display: flex;
+		}
 
 		.table-forms-separator {
 			.radio-segmented + .multiselect-wrapper {
