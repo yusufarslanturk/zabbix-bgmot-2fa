@@ -158,5 +158,6 @@ tests/libs/zbxdbcache/is_item_processed_by_server
 tests/zabbix_server/preprocessor/item_preproc_xpath
 tests/zabbix_server/preprocessor/zbx_item_preproc
 tests/zabbix_server/trapper/zbx_trapper_preproc_test_run
+tests/zabbix_server/preprocessor/zbx_item_preproc_jsonpath
 /zabbix-*.tar.gz
 .vscode
