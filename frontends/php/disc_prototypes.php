@@ -1259,7 +1259,8 @@ if (isset($_REQUEST['form'])) {
 	$data['preprocessing_types'] = CItemPrototype::$supported_preprocessing_types;
 	$data['trends_default'] = DB::getDefault('items', 'trends');
 
-	if ((string) $data['history'] === (string) ITEM_NO_STORAGE_VALUE) {
+	$history_in_seconds = timeUnitToSeconds($data['history']);
+	if ($history_in_seconds !== null && $history_in_seconds == ITEM_NO_STORAGE_VALUE) {
 		$data['history_mode'] = getRequest('history_mode', ITEM_STORAGE_OFF);
 		$data['history'] = DB::getDefault('items', 'history');
 	}
@@ -1267,7 +1268,8 @@ if (isset($_REQUEST['form'])) {
 		$data['history_mode'] = getRequest('history_mode', ITEM_STORAGE_CUSTOM);
 	}
 
-	if ((string) $data['trends'] === (string) ITEM_NO_STORAGE_VALUE) {
+	$trends_in_seconds = timeUnitToSeconds($data['trends']);
+	if ($trends_in_seconds !== null && $trends_in_seconds == ITEM_NO_STORAGE_VALUE) {
 		$data['trends_mode'] = getRequest('trends_mode', ITEM_STORAGE_OFF);
 		$data['trends'] = DB::getDefault('items', 'trends');
 	}
