@@ -243,14 +243,14 @@ void	__zbx_mock_assert_json_eq(const char *file, int line, const char *prefix_ms
 		_FAIL(file, line, prefix_msg, "Did not expect key \"%s\"", pair_returned->first);
 	}
 
-	for (i = 0; i <  props_expected.values_num; i++)
+	for (i = 0; i < props_expected.values_num; i++)
 	{
 		zbx_free(props_expected.values[i].first);
 		zbx_free(props_expected.values[i].second);
 	}
 	zbx_vector_ptr_pair_destroy(&props_expected);
 
-	for (i = 0; i <  props_returned.values_num; i++)
+	for (i = 0; i < props_returned.values_num; i++)
 	{
 		zbx_free(props_returned.values[i].first);
 		zbx_free(props_returned.values[i].second);
