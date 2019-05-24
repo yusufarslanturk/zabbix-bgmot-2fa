@@ -1347,6 +1347,7 @@ static int	lld_items_preproc_step_validate(const zbx_lld_item_preproc_t * pp, zb
 	char		param1[ITEM_PREPROC_PARAMS_LEN * ZBX_MAX_BYTES_IN_UTF8_CHAR + 1], *param2;
 	const char*	regexp_err = NULL;
 	zbx_uint64_t	value_ui64;
+	zbx_jsonpath_t	jsonpath;
 
 	*err = '\0';
 
@@ -1381,7 +1382,10 @@ static int	lld_items_preproc_step_validate(const zbx_lld_item_preproc_t * pp, zb
 		case ZBX_PREPROC_JSONPATH:
 			/* break; is not missing here */
 		case ZBX_PREPROC_ERROR_FIELD_JSON:
-			ret = zbx_json_path_check(pp->params, err, sizeof(err));
+			if (FAIL == (ret = zbx_jsonpath_compile(pp->params, &jsonpath)))
+				zbx_strlcpy(err, zbx_json_strerror(), sizeof(err));
+			else
+				zbx_jsonpath_clear(&jsonpath);
 			break;
 		case ZBX_PREPROC_XPATH:
 			/* break; is not missing here */
