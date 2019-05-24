@@ -35,13 +35,8 @@ trait PreprocessingTrait {
 			[
 				'name'		=> 'type',
 				'selector'	=> 'xpath:.//select[contains(@id, "_type")]',
-				'class'		=> 'CDropdownElement',
-				'value'		=> ['getText']
-			],
-			[
-				'name'		=> 'type',
-				'selector'	=> 'xpath:.//input[contains(@id, "_type_name")]',
-				'value'		=> ['getAttribute', 'params' => ['value']]
+				'detect'	=> true,
+				'value'		=> ['getValue']
 			],
 			[
 				'name'		=> 'parameter_1',
@@ -106,9 +101,6 @@ trait PreprocessingTrait {
 		$rows = $this->query('class:preprocessing-list-item')->count() + 1;
 		$add = $this->query('id:param_add')->one();
 		$fields = self::getPreprocessingFieldDescriptors();
-
-		// Forcing removing of input field descriptor used in items inherited from templates.
-		unset($fields[1]);
 
 		foreach ($steps as $options) {
 			$add->click();

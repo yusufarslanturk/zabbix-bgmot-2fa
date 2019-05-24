@@ -52,6 +52,7 @@ class CMultilineElement extends CElement {
 	 */
 	public function edit() {
 		$this->query('xpath:.//button[@type="button"]')->one()->click();
+		
 		return $this->query('xpath://div[@id="overlay_dialogue"]')->waitUntilVisible()->asOverlayDialog()->one()->waitUntilReady();
 	}
 
@@ -64,6 +65,7 @@ class CMultilineElement extends CElement {
 		$dialog = $this->edit();
 		$dialog->query('xpath:.//textarea[@class="multilineinput-textarea"]')->one()->clear();
 		$dialog->query('button:Apply')->one()->click();
+		
 		return $this;
 	}
 
@@ -90,27 +92,28 @@ class CMultilineElement extends CElement {
 		$dialog->query('xpath:.//textarea[@class="multilineinput-textarea"]')->one()->overwrite($text);
 		$dialog->query('button:Apply')->one()->click();
 		$dialog->waitUntilNotPresent();
+		
 		return $this;
 	}
-
+	
 	/**
 	 * @inheritdoc
 	 */
 	public function type($text) {
-		throw new Exception('Method "type" is not supported for multiline elements.');
+		self::onNotSupportedMethod(__FUNCTION__);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
 	public function sendKeys($text) {
-		throw new Exception('Method "sendKeys" is not supported for multiline elements.');
+		self::onNotSupportedMethod(__FUNCTION__);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
 	public function selectValue() {
-		throw new Exception('Method "selectValue" is not supported for multiline elements.');
+		self::onNotSupportedMethod(__FUNCTION__);
 	}
 }

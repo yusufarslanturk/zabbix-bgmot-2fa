@@ -428,7 +428,7 @@ class CElement extends CBaseElement implements IWaitable {
 	}
 
 	/**
-	 * @inheritdocWeb driver should not be accessed directly from test cases.
+	 * @inheritdoc
 	 */
 	public function getReadyCondition() {
 		return $this->getClickableCondition();
@@ -475,6 +475,8 @@ class CElement extends CBaseElement implements IWaitable {
 	 * Detect element by its tag or class.
 	 *
 	 * @param type $options
+	 * 
+	 * 
 	 */
 	public function detect($options = []) {
 
@@ -525,5 +527,16 @@ class CElement extends CBaseElement implements IWaitable {
 		self::addWarning('No specific element was detected');
 
 		return $this;
+	}
+	
+	/**
+	 * Throw error for not supported method invocation.
+	 *
+	 * @param string $method    method name
+	 *
+	 * @throws Exception
+	 */
+	public static function onNotSupportedMethod($method) {
+		throw new Exception('Method "'.$method.'" is not supported by "'.static::class.'" class elements.');
 	}
 }
