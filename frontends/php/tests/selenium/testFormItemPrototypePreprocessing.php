@@ -39,7 +39,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item empty multiplier',
 						'Key' => 'item-empty-multiplier'
 					],
@@ -52,7 +52,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item string multiplier',
 						'Key' => 'item-string-multiplier'
 					],
@@ -65,7 +65,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item multiplier comma',
 						'Key' => 'item-comma-multiplier'
 					],
@@ -78,7 +78,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item multiplier symbol',
 						'Key' => 'item-symbol-multiplier'
 					],
@@ -92,7 +92,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item right trim',
 						'Key' => 'item-empty-right-trim'
 					],
@@ -105,7 +105,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item left trim',
 						'Key' => 'item-empty-left-trim'
 					],
@@ -118,7 +118,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item trim',
 						'Key' => 'item-empty-trim'
 					],
@@ -132,7 +132,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item XML XPath',
 						'Key' => 'item-empty-xpath'
 					],
@@ -145,7 +145,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item JSONPath',
 						'Key' => 'item-empty-jsonpath'
 					],
@@ -159,7 +159,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item empty regular expression',
 						'Key' => 'item-empty-both-parameters'
 					],
@@ -172,7 +172,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item empty regular expression',
 						'Key' => 'item-empty-first-parameter'
 					],
@@ -185,7 +185,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item empty regular expression',
 						'Key' => 'item-empty-second-parameter'
 					],
@@ -199,7 +199,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item two delta',
 						'Key' => 'item-two-delta'
 					],
@@ -213,7 +213,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item two delta per second',
 						'Key' => 'item-two-delta-per-second'
 					],
@@ -227,7 +227,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item two different delta',
 						'Key' => 'item-two-different-delta'
 					],
@@ -242,7 +242,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item empty JavaScript',
 						'Key' => 'item-empty-javascript'
 					],
@@ -256,7 +256,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'In range empty',
 						'Key' => 'in-range-empty'
 					],
@@ -269,7 +269,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'In range letters string',
 						'Key' => 'in-range-letters-string'
 					],
@@ -282,7 +282,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'In range symbols',
 						'Key' => 'in-range-symbols'
 					],
@@ -295,7 +295,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'In range comma',
 						'Key' => 'in-range-comma'
 					],
@@ -308,7 +308,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'In range wrong interval',
 						'Key' => 'in-range-wrong-interval'
 					],
@@ -321,7 +321,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'In range negative float',
 						'Key' => 'in-range-negative-float'
 					],
@@ -334,7 +334,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'In range zero',
 						'Key' => 'in-range-zero'
 					],
@@ -347,7 +347,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Matches regular expression empty',
 						'Key' => 'matches-regular-expression-empty'
 					],
@@ -360,7 +360,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Does not match regular expression empty',
 						'Key' => 'does-not-match-regular-expression-empty'
 					],
@@ -374,7 +374,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item error JSON empty',
 						'Key' => 'item-error-json-empty'
 					],
@@ -387,7 +387,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item error XML empty',
 						'Key' => 'item-error-xml-empty'
 					],
@@ -401,7 +401,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item error REGEXP both params empty',
 						'Key' => 'item-error-regexp-both-empty'
 					],
@@ -414,7 +414,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item error REGEXP first parameter empty',
 						'Key' => 'item-error-regexp-first-empty'
 					],
@@ -427,7 +427,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item error REGEXP second parameter empty',
 						'Key' => 'item-error-regexp-second-empty'
 					],
@@ -441,7 +441,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item two discard uncahnged',
 						'Key' => 'item-two-discard-uncahnged'
 					],
@@ -455,7 +455,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item two different throttlings',
 						'Key' => 'item-two-different-throttlings'
 					],
@@ -469,7 +469,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item two equal discard unchanged with heartbeat',
 						'Key' => 'item-two-equal-discard-uncahnged-with-heartbeat'
 					],
@@ -483,7 +483,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item two different discard unchanged with heartbeat',
 						'Key' => 'item-two-different-discard-uncahnged-with-heartbeat'
 					],
@@ -497,7 +497,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Discard unchanged with heartbeat empty',
 						'Key' => 'discard-uncahnged-with-heartbeat-empty'
 					],
@@ -510,7 +510,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Discard unchanged with heartbeat symbols',
 						'Key' => 'discard-uncahnged-with-heartbeat-symbols'
 					],
@@ -523,7 +523,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Discard unchanged with heartbeat sletters string',
 						'Key' => 'discard-uncahnged-with-heartbeat-letters-string'
 					],
@@ -536,7 +536,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Discard unchanged with heartbeat comma',
 						'Key' => 'discard-uncahnged-with-heartbeat-comma'
 					],
@@ -549,7 +549,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Discard unchanged with heartbeat dot',
 						'Key' => 'discard-uncahnged-with-heartbeat-dot'
 					],
@@ -562,7 +562,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Discard unchanged with heartbeat negative',
 						'Key' => 'discard-uncahnged-with-heartbeat-negative'
 					],
@@ -575,7 +575,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Discard unchanged with heartbeat zero',
 						'Key' => 'discard-uncahnged-with-heartbeat-zero'
 					],
@@ -588,7 +588,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Discard unchanged with heartbeat maximum',
 						'Key' => 'discard-uncahnged-with-heartbeat-max'
 					],
@@ -601,7 +601,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Add JavaScript multiline preprocessing',
 						'Key' => 'item.javascript.multiline.preprocessing'
 					],
@@ -613,7 +613,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Add all preprocessing',
 						'Key' => 'item.all.preprocessing'
 					],
@@ -637,7 +637,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Add symblos preprocessing',
 						'Key' => 'item.symbols.preprocessing'
 					],
@@ -661,7 +661,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Add the same preprocessing',
 						'Key' => 'item.theSamePpreprocessing'
 					],
@@ -707,7 +707,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item with preprocessing rule with user macro',
 						'Key' => 'item-user-macro'
 					],
@@ -746,7 +746,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus empty first parameter',
 						'Key' => 'prometeus-empty-first-parameter'
 					],
@@ -759,7 +759,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Prometheus space in pattern',
 						'Key' => 'prometheus-space-in-pattern'
 					],
@@ -772,7 +772,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Prometheus only digits in pattern',
 						'Key' => 'prometheus-digits-in-pattern'
 					],
@@ -785,7 +785,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus first parameter starts with digits',
 						'Key' => 'prometeus-digits-first-parameter'
 					],
@@ -798,7 +798,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus wrong equals operator',
 						'Key' => 'rometeus-wrong-equals-operator'
 					],
@@ -811,7 +811,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus unsupported operator >',
 						'Key' => 'prometeus-unsupported-operator-1'
 					],
@@ -824,7 +824,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus unsupported operator <',
 						'Key' => 'prometeus-unsupported-operator-2'
 					],
@@ -837,7 +837,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus unsupported operator !==',
 						'Key' => 'prometeus-unsupported-operator-3'
 					],
@@ -850,7 +850,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus unsupported operator >=',
 						'Key' => 'prometeus-unsupported-operator-4'
 					],
@@ -863,7 +863,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus unsupported operator =<',
 						'Key' => 'prometeus-unsupported-operator-5'
 					],
@@ -876,7 +876,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus unsupported label operator !=',
 						'Key' => 'prometeus-unsupported-label-operator-1'
 					],
@@ -889,7 +889,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus unsupported label operator !~',
 						'Key' => 'prometeus-unsupported-label-operator-2'
 					],
@@ -902,7 +902,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus duplicate metric condition',
 						'Key' => 'duplicate-metric-condition'
 					],
@@ -915,7 +915,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item duplicate Prometeus steps',
 						'Key' => 'duplicate-prometheus-steps'
 					],
@@ -929,7 +929,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus wrong second parameter - space',
 						'Key' => 'wrong-second-parameter-space'
 					],
@@ -942,7 +942,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus wrong second parameter - quotes',
 						'Key' => 'wrong-second-parameter-quotes'
 					],
@@ -956,7 +956,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus wrong second parameter - triangle quotes',
 						'Key' => 'wrong-second-parameter-triangle-quotes'
 					],
@@ -970,7 +970,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus wrong second parameter - slash',
 						'Key' => 'wrong-second-parameter-slash'
 					],
@@ -984,7 +984,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus wrong second parameter - digits',
 						'Key' => 'wrong-second-parameter-digits'
 					],
@@ -998,7 +998,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus wrong first parameter - pipe',
 						'Key' => 'wrong-second-parameter-pipe'
 					],
@@ -1012,7 +1012,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus wrong first parameter - slash',
 						'Key' => 'wrong-second-parameter-slash'
 					],
@@ -1027,7 +1027,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter starts with digits',
 						'Key' => 'json-prometeus-digits-first-parameter'
 					],
@@ -1040,7 +1040,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON wrong equals operator',
 						'Key' => 'json-prometeus-wrong-equals-operator'
 					],
@@ -1053,7 +1053,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported operator >',
 						'Key' => 'json-prometeus-unsupported-operator-1'
 					],
@@ -1066,7 +1066,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported operator <',
 						'Key' => 'json-prometeus-unsupported-operator-2'
 					],
@@ -1079,7 +1079,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported operator !==',
 						'Key' => 'json-prometeus-unsupported-operator-3'
 					],
@@ -1092,7 +1092,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported operator >=',
 						'Key' => 'json-prometeus-unsupported-operator-4'
 					],
@@ -1105,7 +1105,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported operator =<',
 						'Key' => 'json-prometeus-unsupported-operator-5'
 					],
@@ -1118,7 +1118,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported label operator !=',
 						'Key' => 'json-prometeus-unsupported-label-operator-1'
 					],
@@ -1131,7 +1131,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported label operator !~',
 						'Key' => 'json-prometeus-unsupported-label-operator-2'
 					],
@@ -1144,7 +1144,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON duplicate metric condition',
 						'Key' => 'json-duplicate-metric-condition'
 					],
@@ -1157,7 +1157,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON wrong parameter - space',
 						'Key' => 'json-wrong-parameter-space'
 					],
@@ -1170,7 +1170,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON wrong parameter - slash',
 						'Key' => 'json-wrong-parameter-slash'
 					],
@@ -1184,7 +1184,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometheus to JSON wrong parameter - digits',
 						'Key' => 'json-wrong-parameter-digits'
 					],
@@ -1198,7 +1198,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometheus to JSON wrong first parameter - pipe',
 						'Key' => 'json-wrong-parameter-pipe'
 					],
@@ -1212,7 +1212,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometheus to JSON wrong first parameter - slash',
 						'Key' => 'json-wrong-parameter-slash'
 					],
@@ -1226,7 +1226,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item duplicate Prometeus to JSON steps',
 						'Key' => 'duplicate-prometheus-to-json-steps'
 					],
@@ -1241,7 +1241,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus empty second parameter',
 						'Key' => 'prometeus-empty-second-parameter'
 					],
@@ -1253,7 +1253,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus both parameters present',
 						'Key' => 'prometeus-both-parameters-present'
 					],
@@ -1265,7 +1265,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus first parameter +inf',
 						'Key' => 'prometeus-plus-inf'
 					],
@@ -1277,7 +1277,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus first parameter inf',
 						'Key' => 'prometeus-inf'
 					],
@@ -1289,7 +1289,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus first parameter -inf',
 						'Key' => 'prometeus-negative-inf'
 					],
@@ -1301,7 +1301,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus first parameter nan',
 						'Key' => 'prometeus-nan'
 					],
@@ -1313,7 +1313,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus first parameter exp',
 						'Key' => 'prometeus-exp'
 					],
@@ -1325,7 +1325,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus first parameter ==1',
 						'Key' => 'prometeus-neutral-digit'
 					],
@@ -1337,7 +1337,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus first parameters ==+1',
 						'Key' => 'prometeus-positive-digit'
 					],
@@ -1349,7 +1349,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus first parameters ==-1',
 						'Key' => 'prometeus-negative-digit'
 					],
@@ -1361,7 +1361,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus label operator =',
 						'Key' => 'prometeus-label-operator-equal-strong'
 					],
@@ -1373,7 +1373,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus label operator =~',
 						'Key' => 'prometeus-label-operator-contains'
 					],
@@ -1385,7 +1385,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Trailing spaces',
 						'Key' => 'prometeus-space-in-parameters'
 					],
@@ -1397,7 +1397,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus slashes in pattern',
 						'Key' => 'prometeus-slashes-pattern'
 					],
@@ -1409,7 +1409,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus user macros in parameters',
 						'Key' => 'prometeus-macros-1'
 					],
@@ -1421,7 +1421,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus user macros in parameters',
 						'Key' => 'prometeus-macros-2'
 					],
@@ -1433,7 +1433,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus user macros in parameters',
 						'Key' => 'prometeus-macros-3'
 					],
@@ -1445,7 +1445,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus user macros in parameters',
 						'Key' => 'prometeus-macros-4'
 					],
@@ -1457,7 +1457,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus LLD macro in parameters 1',
 						'Key' => 'wrong-parameters-macro-1'
 					],
@@ -1470,7 +1470,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus LLD macro in parameters 2',
 						'Key' => 'wrong-parameters-macro-2'
 					],
@@ -1484,7 +1484,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON empty first parameter',
 						'Key' => 'json-prometeus-empty-first-parameter'
 					],
@@ -1497,7 +1497,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter +inf',
 						'Key' => 'json-prometeus-plus-inf'
 					],
@@ -1509,7 +1509,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter inf',
 						'Key' => 'json-prometeus-inf'
 					],
@@ -1521,7 +1521,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter -inf',
 						'Key' => 'json-prometeus-negative-inf'
 					],
@@ -1533,7 +1533,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter nan',
 						'Key' => 'json-prometeus-nan'
 					],
@@ -1545,7 +1545,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter exp',
 						'Key' => 'json-prometeus-exp'
 					],
@@ -1557,7 +1557,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter ==1',
 						'Key' => 'json-prometeus-neutral-digit'
 					],
@@ -1569,7 +1569,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameters ==+1',
 						'Key' => 'json-prometeus-positive-digit'
 					],
@@ -1581,7 +1581,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameters ==-1',
 						'Key' => 'json-prometeus-negative-digit'
 					],
@@ -1593,7 +1593,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON label operator =',
 						'Key' => 'json-prometeus-label-operator-equal-strong'
 					],
@@ -1605,7 +1605,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON label operator =~',
 						'Key' => 'json-prometeus-label-operator-contains'
 					],
@@ -1617,7 +1617,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Trailing spaces',
 						'Key' => 'json-prometeus-space-in-parameter'
 					],
@@ -1629,7 +1629,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON slashes in pattern',
 						'Key' => 'json-prometeus-slashes-pattern'
 					],
@@ -1641,7 +1641,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON user macros in parameter',
 						'Key' => 'json-prometeus-macros-1'
 					],
@@ -1653,7 +1653,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON user macros in parameter',
 						'Key' => 'json-prometeus-macros-2'
 					],
@@ -1665,7 +1665,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON user macros in parameters',
 						'Key' => 'json-prometeus-macros-3'
 					],
@@ -1677,7 +1677,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON user macros in parameters',
 						'Key' => 'json-prometeus-macros-4'
 					],
@@ -1689,7 +1689,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometheus to JSON LLD macro in parameter 1 ',
 						'Key' => 'json-parameter-macro-1'
 					],
@@ -1702,7 +1702,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 						[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to Json LLD macro in parameter 2',
 						'Key' => 'json-parameters-macro-2'
 					],
@@ -1928,7 +1928,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			// 'Set value to' validation.
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set value empty',
 					'Key' => 'set-value-empty'
 				],
@@ -1939,7 +1939,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set value number',
 					'Key' => 'set-value-number'
 				],
@@ -1950,7 +1950,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set value string',
 					'Key' => 'set-value-string'
 				],
@@ -1961,7 +1961,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set value special-symbols',
 					'Key' => 'set-value-special-symbols'
 				],
@@ -1973,7 +1973,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			// 'Set error to' validation.
 			[
 				'expected' => TEST_BAD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set error empty',
 					'Key' => 'set-error-empty'
 				],
@@ -1985,7 +1985,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set error string',
 					'Key' => 'set-error-string'
 				],
@@ -1996,7 +1996,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set error number',
 					'Key' => 'set-error-number'
 				],
@@ -2007,7 +2007,7 @@ class testFormItemPrototypePreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set error special symbols',
 					'Key' => 'set-error-special-symbols'
 				],

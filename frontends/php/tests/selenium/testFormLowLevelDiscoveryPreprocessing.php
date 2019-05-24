@@ -37,7 +37,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 				// Validation. Regular expression.
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD empty regular expression',
 						'Key' => 'lld-empty-both-parameters',
 					],
@@ -50,7 +50,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD empty pattern of regular expression',
 						'Key' => 'lld-empty-first-parameter',
 					],
@@ -63,7 +63,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD empty output of regular expression',
 						'Key' => 'lld-empty-second-parameter',
 					],
@@ -77,7 +77,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD JSONPath empty',
 						'Key' => 'lld-empty-jsonpath'
 					],
@@ -91,7 +91,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item empty JavaScript',
 						'Key' => 'item-empty-javascript',
 					],
@@ -105,7 +105,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD Does not match regular expression empty',
 						'Key' => 'lld-does-not-match-regular-expression-empty',
 					],
@@ -119,7 +119,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD error JSON empty',
 						'Key' => 'lld-error-json-empty'
 					],
@@ -133,7 +133,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD two equal discard unchanged with heartbeat',
 						'Key' => 'lld-two-equal-discard-uncahnged-with-heartbeat'
 					],
@@ -147,7 +147,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD two different discard unchanged with heartbeat',
 						'Key' => 'lld-two-different-discard-uncahnged-with-heartbeat'
 					],
@@ -161,7 +161,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD Discard unchanged with heartbeat empty',
 						'Key' => 'lld-discard-uncahnged-with-heartbeat-empty'
 					],
@@ -174,7 +174,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD Discard unchanged with heartbeat symbols',
 						'Key' => 'lld-discard-uncahnged-with-heartbeat-symbols'
 					],
@@ -187,7 +187,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD Discardunchanged with heartbeat letters string',
 						'Key' => 'lld-discard-uncahnged-with-heartbeat-letters-string'
 					],
@@ -200,7 +200,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD Discard unchanged with heartbeat comma',
 						'Key' => 'lld-discard-uncahnged-with-heartbeat-comma',
 					],
@@ -213,7 +213,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD Discard unchanged with heartbeat dot',
 						'Key' => 'lld-discard-uncahnged-with-heartbeat-dot',
 					],
@@ -226,7 +226,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD Discard unchanged with heartbeat negative',
 						'Key' => 'lld-discard-uncahnged-with-heartbeat-negative',
 					],
@@ -239,7 +239,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD Discard unchanged with heartbeat zero',
 						'Key' => 'lld-discard-uncahnged-with-heartbeat-zero'
 					],
@@ -252,7 +252,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD Discard unchanged with heartbeat maximum',
 						'Key' => 'lld-uncahnged-with-heartbeat-max'
 					],
@@ -266,7 +266,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Add JavaScript multiline preprocessing',
 						'Key' => 'item.javascript.multiline.preprocessing'
 					],
@@ -278,7 +278,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD all preprocessing steps',
 						'Key' => 'lld-all-preprocessing-steps'
 					],
@@ -295,7 +295,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD double preprocessing steps',
 						'Key' => 'lld-double-preprocessing-steps'
 					],
@@ -316,7 +316,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD symbols preprocessing steps',
 						'Key' => 'lld-symbols-preprocessing-steps'
 					],
@@ -332,7 +332,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'LLD user macros preprocessing steps',
 						'Key' => 'lld-macros-preprocessing-steps'
 					],
@@ -364,7 +364,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter starts with digits',
 						'Key' => 'json-prometeus-digits-first-parameter',
 					],
@@ -377,7 +377,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON wrong equals operator',
 						'Key' => 'json-prometeus-wrong-equals-operator',
 					],
@@ -390,7 +390,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported operator >',
 						'Key' => 'json-prometeus-unsupported-operator-1',
 					],
@@ -403,7 +403,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported operator <',
 						'Key' => 'json-prometeus-unsupported-operator-2',
 					],
@@ -416,7 +416,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported operator !==',
 						'Key' => 'json-prometeus-unsupported-operator-3',
 					],
@@ -429,7 +429,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported operator >=',
 						'Key' => 'json-prometeus-unsupported-operator-4',
 					],
@@ -442,7 +442,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported operator =<',
 						'Key' => 'json-prometeus-unsupported-operator-5',
 					],
@@ -455,7 +455,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported label operator !=',
 						'Key' => 'json-prometeus-unsupported-label-operator-1',
 					],
@@ -468,7 +468,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON unsupported label operator !~',
 						'Key' => 'json-prometeus-unsupported-label-operator-2',
 					],
@@ -481,7 +481,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON duplicate metric condition',
 						'Key' => 'json-duplicate-metric-condition',
 					],
@@ -494,7 +494,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON wrong parameter - space',
 						'Key' => 'json-wrong-parameter-space',
 					],
@@ -507,7 +507,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON wrong parameter - slash',
 						'Key' => 'json-wrong-parameter-slash',
 					],
@@ -521,7 +521,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometheus to JSON wrong parameter - digits',
 						'Key' => 'json-wrong-parameter-digits',
 					],
@@ -535,7 +535,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometheus to JSON wrong first parameter - pipe',
 						'Key' => 'json-wrong-parameter-pipe',
 					],
@@ -549,7 +549,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometheus to JSON wrong first parameter - slash',
 						'Key' => 'json-wrong-parameter-slash',
 					],
@@ -563,7 +563,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometheus to JSON wrong first parameter - LLD macro',
 						'Key' => 'json-wrong-first-parameter-macro',
 					],
@@ -577,7 +577,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item duplicate Prometeus to JSON steps',
 						'Key' => 'duplicate-prometheus-to-json-steps',
 					],
@@ -592,7 +592,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON empty first parameter',
 						'Key' => 'json-prometeus-empty-first-parameter',
 					],
@@ -605,7 +605,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter +inf',
 						'Key' => 'json-prometeus-plus-inf',
 					],
@@ -617,7 +617,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter inf',
 						'Key' => 'json-prometeus-inf',
 					],
@@ -629,7 +629,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter -inf',
 						'Key' => 'json-prometeus-negative-inf',
 					],
@@ -641,7 +641,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter nan',
 						'Key' => 'json-prometeus-nan',
 					],
@@ -653,7 +653,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter exp',
 						'Key' => 'json-prometeus-exp',
 					],
@@ -665,7 +665,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameter ==1',
 						'Key' => 'json-prometeus-neutral-digit',
 					],
@@ -677,7 +677,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameters ==+1',
 						'Key' => 'json-prometeus-positive-digit',
 					],
@@ -689,7 +689,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON first parameters ==-1',
 						'Key' => 'json-prometeus-negative-digit',
 					],
@@ -701,7 +701,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON label operator =',
 						'Key' => 'json-prometeus-label-operator-equal-strong',
 					],
@@ -713,7 +713,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON label operator =~',
 						'Key' => 'json-prometeus-label-operator-contains',
 					],
@@ -725,7 +725,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Trailing spaces',
 						'Key' => 'json-prometeus-space-in-parameter',
 					],
@@ -737,7 +737,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON slashes in pattern',
 						'Key' => 'json-prometeus-slashes-pattern',
 					],
@@ -749,7 +749,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON user macros in parameter',
 						'Key' => 'json-prometeus-macros-1',
 					],
@@ -761,7 +761,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON user macros in parameter',
 						'Key' => 'json-prometeus-macros-2',
 					],
@@ -773,7 +773,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON user macros in parameters',
 						'Key' => 'json-prometeus-macros-3',
 					],
@@ -785,7 +785,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' =>[
+					'fields' => [
 						'Name' => 'Item Prometeus to JSON user macros in parameters',
 						'Key' => 'json-prometeus-macros-4',
 					],
@@ -1004,7 +1004,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			// 'Set value to' validation.
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set value empty',
 					'Key' => 'set-value-empty'
 				],
@@ -1015,7 +1015,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set value number',
 					'Key' => 'set-value-number'
 				],
@@ -1026,7 +1026,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set value string',
 					'Key' => 'set-value-string'
 				],
@@ -1037,7 +1037,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set value special-symbols',
 					'Key' => 'set-value-special-symbols'
 				],
@@ -1049,7 +1049,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			// 'Set error to' validation.
 			[
 				'expected' => TEST_BAD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set error empty',
 					'Key' => 'set-error-empty'
 				],
@@ -1061,7 +1061,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set error string',
 					'Key' => 'set-error-string'
 				],
@@ -1072,7 +1072,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set error number',
 					'Key' => 'set-error-number'
 				],
@@ -1083,7 +1083,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 			],
 			[
 				'expected' => TEST_GOOD,
-				'fields' =>[
+				'fields' => [
 					'Name' => 'Set error special symbols',
 					'Key' => 'set-error-special-symbols'
 				],
