@@ -52,7 +52,7 @@ class CMultilineElement extends CElement {
 	 */
 	public function edit() {
 		$this->query('xpath:.//button[@type="button"]')->one()->click();
-		
+
 		return $this->query('xpath://div[@id="overlay_dialogue"]')->waitUntilVisible()->asOverlayDialog()->one()->waitUntilReady();
 	}
 
@@ -65,7 +65,7 @@ class CMultilineElement extends CElement {
 		$dialog = $this->edit();
 		$dialog->query('xpath:.//textarea[@class="multilineinput-textarea"]')->one()->clear();
 		$dialog->query('button:Apply')->one()->click();
-		
+
 		return $this;
 	}
 
@@ -92,10 +92,10 @@ class CMultilineElement extends CElement {
 		$dialog->query('xpath:.//textarea[@class="multilineinput-textarea"]')->one()->overwrite($text);
 		$dialog->query('button:Apply')->one()->click();
 		$dialog->waitUntilNotPresent();
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @inheritdoc
 	 */

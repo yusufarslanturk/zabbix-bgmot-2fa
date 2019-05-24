@@ -475,8 +475,8 @@ class CElement extends CBaseElement implements IWaitable {
 	 * Detect element by its tag or class.
 	 *
 	 * @param type $options
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public function detect($options = []) {
 
@@ -528,7 +528,7 @@ class CElement extends CBaseElement implements IWaitable {
 
 		return $this;
 	}
-	
+
 	/**
 	 * Throw error for not supported method invocation.
 	 *
