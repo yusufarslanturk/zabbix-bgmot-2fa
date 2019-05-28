@@ -1,3 +1,10 @@
+Changes for 4.2.3rc1
+
+New features:
+
+Bug fixes:
+
+--------------------------------------------------------------------------------
 Changes for 4.2.2
 
 4.2.2rc1 was released as 4.2.2 without any changes
@@ -383,6 +390,13 @@ Changes for 4.2.0alpha1
 New features:
 A.F.I...S. [ZBXNEXT-4853,ZBXNEXT-517] added ability to send email messages in HTML format on demand (MVekslers, vasilijs)
 ..F.....S. [ZBXNEXT-1282,ZBXNEXT-4730] added changes to introduce regex based matching for auto-registration (vasilijs, viktors)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.9rc1
+
+New features:
+
+Bug fixes:
 
 --------------------------------------------------------------------------------
 Changes for 4.0.8
@@ -2820,6 +2834,14 @@ A......... [ZBX-10049] fixed optional field validation in drule.update API metho
 ..F....... [ZBX-9989] optimized SQL queries for graphs building (Gunars, Sasha)
 
 --------------------------------------------------------------------------------
+Changes for 3.0.29rc1
+
+New features:
+
+Bug fixes:
+
+--------------------------------------------------------------------------------
+
 Changes for 3.0.28
 
 3.0.28rc1 was released as 3.0.28 without any changes
