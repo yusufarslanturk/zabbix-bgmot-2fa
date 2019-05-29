@@ -9,7 +9,7 @@
 **
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
 **
 ** You should have received a copy of the GNU General Public License
@@ -17,24 +17,22 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-#ifndef ZABBIX_VERSION_H
-#define ZABBIX_VERSION_H
+#include "zbxmocktest.h"
+#include "zbxmockdata.h"
+#include "zbxmockassert.h"
 
-#define ZBX_STR2(str)	#str
-#define ZBX_STR(str)	ZBX_STR2(str)
+#include "common.h"
+#include "zbxjson.h"
 
-#define APPLICATION_NAME	"Zabbix Agent"
-#define ZABBIX_REVDATE		"27 May 2019"
-#define ZABBIX_VERSION_MAJOR	4
-#define ZABBIX_VERSION_MINOR	2
-#define ZABBIX_VERSION_PATCH	3
-#define ZABBIX_VERSION_REVISION	{ZABBIX_REVISION}
-#ifdef _WINDOWS
-#	define ZABBIX_VERSION_RC_NUM	{ZABBIX_RC_NUM}
-#endif
-#define ZABBIX_VERSION_RC	"rc1"
-#define ZABBIX_VERSION		ZBX_STR(ZABBIX_VERSION_MAJOR) "." ZBX_STR(ZABBIX_VERSION_MINOR) "." \
-				ZBX_STR(ZABBIX_VERSION_PATCH) ZABBIX_VERSION_RC
-#define ZABBIX_REVISION		ZBX_STR(ZABBIX_VERSION_REVISION)
+const char	*zbx_mock_json_type_to_str(int type)
+{
+	static const char *json_types[] = {
+			"ZBX_JSON_TYPE_UNKNOWN", "ZBX_JSON_TYPE_STRING", "ZBX_JSON_TYPE_INT",
+			"ZBX_JSON_TYPE_ARRAY", "ZBX_JSON_TYPE_OBJECT", "ZBX_JSON_TYPE_NULL",
+			"ZBX_JSON_TYPE_TRUE", "ZBX_JSON_TYPE_FALSE"};
 
-#endif
+	if (0 > type || ZBX_JSON_TYPE_FALSE < type)
+		fail_msg("Unknown json type: %d", type);
+
+	return json_types[type];
+}

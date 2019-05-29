@@ -17,24 +17,9 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-#ifndef ZABBIX_VERSION_H
-#define ZABBIX_VERSION_H
+#ifndef ZABBIX_MOCK_JSON_H
+#define ZABBIX_MOCK_JSON_H
 
-#define ZBX_STR2(str)	#str
-#define ZBX_STR(str)	ZBX_STR2(str)
-
-#define APPLICATION_NAME	"Zabbix Agent"
-#define ZABBIX_REVDATE		"27 May 2019"
-#define ZABBIX_VERSION_MAJOR	4
-#define ZABBIX_VERSION_MINOR	2
-#define ZABBIX_VERSION_PATCH	3
-#define ZABBIX_VERSION_REVISION	{ZABBIX_REVISION}
-#ifdef _WINDOWS
-#	define ZABBIX_VERSION_RC_NUM	{ZABBIX_RC_NUM}
-#endif
-#define ZABBIX_VERSION_RC	"rc1"
-#define ZABBIX_VERSION		ZBX_STR(ZABBIX_VERSION_MAJOR) "." ZBX_STR(ZABBIX_VERSION_MINOR) "." \
-				ZBX_STR(ZABBIX_VERSION_PATCH) ZABBIX_VERSION_RC
-#define ZABBIX_REVISION		ZBX_STR(ZABBIX_VERSION_REVISION)
+const char	*zbx_mock_json_type_to_str(int type);
 
 #endif
