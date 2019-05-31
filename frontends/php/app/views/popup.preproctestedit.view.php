@@ -123,7 +123,7 @@ if ($data['show_final_result']) {
 		_('Result'),
 		new CDiv(),
 		'final-result'
-	);	
+	);
 }
 
 $form
