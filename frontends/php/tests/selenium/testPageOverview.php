@@ -18,7 +18,7 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-require_once dirname(__FILE__) . '/../include/CLegacyWebTest.php';
+require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
 
 /**
  * @backup problem
@@ -533,7 +533,7 @@ class testPageOverview extends CLegacyWebTest {
 
 		// Filter options.
 		if (array_key_exists('triggers_status', $data)) {
-			$this->zbxTestClickXpath('//ul[@id="show_triggers"]//label[text()="' . $data['triggers_status'] . '"]');
+			$this->zbxTestClickXpath('//ul[@id="show_triggers"]//label[text()="'.$data['triggers_status'].'"]');
 		}
 
 		if (array_key_exists('ack_status', $data)) {
@@ -563,12 +563,12 @@ class testPageOverview extends CLegacyWebTest {
 				foreach ($data['applications'] as $key => $value) {
 					switch ($key) {
 						case 'app_group':
-							$this->zbxTestClickXpathWait('//div[@id="overlay_dialogue"]//select[@name="groupid"]' .
-									'//option[text()="' . $value . '"]');
+							$this->zbxTestClickXpathWait('//div[@id="overlay_dialogue"]//select[@name="groupid"]'.
+									'//option[text()="'.$value.'"]');
 							break;
 						case 'app_host':
-							$this->zbxTestClickXpathWait('//div[@id="overlay_dialogue"]//select[@name="hostid"]' .
-									'//option[text()="' . $value . '"]');
+							$this->zbxTestClickXpathWait('//div[@id="overlay_dialogue"]//select[@name="hostid"]'.
+									'//option[text()="'.$value.'"]');
 							break;
 						case 'application':
 							$this->zbxTestClickLinkTextWait($value);
@@ -606,7 +606,7 @@ class testPageOverview extends CLegacyWebTest {
 		$tabel_id = $this->zbxTestGetAttributeValue('//table[@class="list-table"]', 'id');
 		$this->zbxTestClickButtonText('Apply');
 		$this->zbxTestWaitForPageToLoad();
-		$this->zbxTestWaitUntilElementPresent(WebDriverBy::xpath('//table[@class="list-table"][not(@id="' . $tabel_id . '")]'));
+		$this->zbxTestWaitUntilElementPresent(WebDriverBy::xpath('//table[@class="list-table"][not(@id="'.$tabel_id.'")]'));
 
 		// Check  the result in frontend.
 		$this->zbxTestDropdownAssertSelected('type', $main_filter['type']);
@@ -646,14 +646,14 @@ class testPageOverview extends CLegacyWebTest {
 
 	private function checkResultsInTable($location, $thead, $tbody) {
 		foreach ($thead as $column) {
-			$this->zbxTestAssertElementPresentXpath('//th//div[@class="vertical_rotation_inner"][text()="' . $column . '"]');
+			$this->zbxTestAssertElementPresentXpath('//th//div[@class="vertical_rotation_inner"][text()="'.$column.'"]');
 		}
 		foreach ($tbody as $row) {
 			if ($location === 'Top') {
-				$this->zbxTestAssertElementPresentXpath('//table[@class="list-table"]//th[1][text()="' . $row . '"]');
+				$this->zbxTestAssertElementPresentXpath('//table[@class="list-table"]//th[1][text()="'.$row.'"]');
 			}
 			else {
-				$this->zbxTestAssertElementPresentXpath('//table[@class="list-table"]//th[1]/a[text()="' . $row . '"]');
+				$this->zbxTestAssertElementPresentXpath('//table[@class="list-table"]//th[1]/a[text()="'.$row.'"]');
 			}
 		}
 
@@ -722,7 +722,7 @@ class testPageOverview extends CLegacyWebTest {
 		$this->assertEquals($data['links_text'], $get_links_text);
 
 		foreach ($data['links'] as $link) {
-			$this->zbxTestAssertElementPresentXpath('//ul[contains(@class, "action-menu")]//a[contains(@href, "' . $link . '")]');
+			$this->zbxTestAssertElementPresentXpath('//ul[contains(@class, "action-menu")]//a[contains(@href, "'.$link.'")]');
 		}
 	}
 
@@ -756,7 +756,8 @@ class testPageOverview extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//button[contains(@class, 'btn-max')]", 'title', 'Fullscreen');
 			$this->zbxTestAssertElementPresentXpath("//header");
 			$this->zbxTestAssertElementPresentXpath("//div[@class='header-title table']");
-		} catch (Exception $e) {
+		}
+		catch (Exception $e) {
 			// Reset fullscreen/kiosk mode.
 			$this->zbxTestLogin('overview.php?fullscreen=0');
 			$this->zbxTestCheckHeader('Overview');
