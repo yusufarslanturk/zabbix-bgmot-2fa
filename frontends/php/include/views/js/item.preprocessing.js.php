@@ -254,12 +254,12 @@
 				var sortable_count = $preprocessing.find('li.sortable').length;
 
 				if (sortable_count == 1) {
+					$('#preproc_test_all').show();
 					$preprocessing
 						.sortable('disable')
 						.find('div.<?= ZBX_STYLE_DRAG_ICON ?>').addClass('<?= ZBX_STYLE_DISABLED ?>');
 				}
 				else if (sortable_count > 1) {
-					$('#preproc_test_all').show();
 					$preprocessing
 						.sortable('enable')
 						.find('div.<?= ZBX_STYLE_DRAG_ICON ?>').removeClass('<?= ZBX_STYLE_DISABLED ?>');
@@ -288,10 +288,10 @@
 				var sortable_count = $preprocessing.find('li.sortable').length;
 
 				if (sortable_count == 0) {
+					$('#preproc_test_all').hide();
 					$('.preprocessing-list-head').hide();
 				}
 				else if (sortable_count == 1) {
-					$('#preproc_test_all').hide();
 					$preprocessing
 						.sortable('disable')
 						.find('div.<?= ZBX_STYLE_DRAG_ICON ?>').addClass('<?= ZBX_STYLE_DISABLED ?>');
