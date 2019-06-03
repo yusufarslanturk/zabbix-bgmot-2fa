@@ -1514,7 +1514,7 @@ elseif (((hasRequest('action') && getRequest('action') === 'itemprototype.massup
 	$data['jmx_endpoint'] = ZBX_DEFAULT_JMX_ENDPOINT;
 
 	$history_in_seconds = timeUnitToSeconds($data['history']);
-	if ($history_in_seconds !== null && $history_in_seconds == ITEM_NO_STORAGE_VALUE) {
+	if (!getRequest('form_refresh') && $history_in_seconds !== null && $history_in_seconds == ITEM_NO_STORAGE_VALUE) {
 		$data['history_mode'] = getRequest('history_mode', ITEM_STORAGE_OFF);
 		$data['history'] = DB::getDefault('items', 'history');
 	}
@@ -1523,7 +1523,7 @@ elseif (((hasRequest('action') && getRequest('action') === 'itemprototype.massup
 	}
 
 	$trends_in_seconds = timeUnitToSeconds($data['trends']);
-	if ($trends_in_seconds !== null && $trends_in_seconds == ITEM_NO_STORAGE_VALUE) {
+	if (!getRequest('form_refresh') && $trends_in_seconds !== null && $trends_in_seconds == ITEM_NO_STORAGE_VALUE) {
 		$data['trends_mode'] = getRequest('trends_mode', ITEM_STORAGE_OFF);
 		$data['trends'] = DB::getDefault('items', 'trends');
 	}
