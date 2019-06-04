@@ -1502,8 +1502,7 @@ class testFormWeb extends CLegacyWebTest {
 				$this->zbxTestWaitUntilElementNotVisible(WebDriverBy::xpath("//div[@id='overlay_bg']"));
 
 				if (isset($item['remove'])) {
-					$this->zbxTestClickXpathWait('//table[contains(@class, "httpconf-steps-dynamic-row")]//button[contains(@class,'
-							.'"element-table-remove")]');
+					$this->zbxTestClickXpathWait('//table[contains(@class, "httpconf-steps-dynamic-row")]//button[contains(@class,"element-table-remove")]');
 				}
 			}
 		}
