@@ -215,7 +215,10 @@ class CControllerPopupPreprocTestSend extends CControllerPopupPreprocTest {
 			}
 			unset($step);
 
-			if ($this->show_final_result) {
+			if (array_key_exists('previous', $result) && $result['previous'] === true) {
+				error(_s('Incorrect value for "%1$s" field.', _('Previous value')));
+			}
+			elseif ($this->show_final_result) {
 				if (array_key_exists('result', $result)) {
 					$output['final'] = [
 						'action' => _s('Result converted to %1$s', itemValueTypeString($data['value_type'])),
@@ -236,10 +239,6 @@ class CControllerPopupPreprocTestSend extends CControllerPopupPreprocTest {
 						->addClass(ZBX_STYLE_GREY)
 						->toString();
 				}
-			}
-
-			if (array_key_exists('previous', $result) && $result['previous'] === true) {
-				error($result['error']);
 			}
 
 			$output['steps'] = $data['steps'];
