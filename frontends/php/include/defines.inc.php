@@ -19,8 +19,8 @@
 **/
 
 
-define('ZABBIX_VERSION',		'4.2.3rc1');
-define('ZABBIX_API_VERSION',	'4.2.3');
+define('ZABBIX_VERSION',		'4.2.4rc1');
+define('ZABBIX_API_VERSION',	'4.2.4');
 define('ZABBIX_EXPORT_VERSION',	'4.2');
 define('ZABBIX_DB_VERSION',	4020000);
 
@@ -1574,6 +1574,7 @@ define('ZBX_STYLE_ICON_INFO', 'icon-info');
 define('ZBX_STYLE_ICON_INVISIBLE', 'icon-invisible');
 define('ZBX_STYLE_ICON_MAINT', 'icon-maint');
 define('ZBX_STYLE_ICON_WZRD_ACTION', 'icon-wzrd-action');
+define('ZBX_STYLE_ICON_NONE', 'icon-none');
 define('ZBX_STYLE_ACTION_COMMAND', 'icon-action-command');
 define('ZBX_STYLE_ACTION_ICON_CLOSE', 'icon-action-close');
 define('ZBX_STYLE_ACTION_ICON_MSG', 'icon-action-msg');
