@@ -96,7 +96,6 @@ function itemPreprocessingTest(form) {
 
 			if (typeof ret.messages !== 'undefined') {
 				jQuery(ret.messages).insertBefore(jQuery(form));
-				jQuery(form).parent().find('.link-action').click();
 			}
 
 			if (typeof ret.final !== 'undefined') {
