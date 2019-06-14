@@ -3463,10 +3463,7 @@ static int	process_services(const zbx_vector_ptr_t *services, const char *ip, zb
 				service->port, service->status, service->value);
 
 		if (0 == service->dcheckid)
-		{
-			services_num = i;
 			break;
-		}
 
 		zbx_vector_uint64_append(&dcheckids, service->dcheckid);
 	}
@@ -3499,6 +3496,8 @@ static int	process_services(const zbx_vector_ptr_t *services, const char *ip, zb
 
 		goto fail;
 	}
+
+	services_num = i;
 
 	if (0 == *processed_num && 0 == ip_idx)
 	{
