@@ -253,12 +253,12 @@ class testFormItemPreprocessingTest extends CWebTest {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Name' => 'Item Preprocessing Test with previous value 1',
-						'Key' => 'item-preprocessing-test-prev-value-1'
+						'Name' => 'Item Preprocessing Test with previous value 2',
+						'Key' => 'item-preprocessing-test-prev-value-2'
 					],
 					'preprocessing' => [
-						['type' => 'Simple change'],
-						['type' => 'Discard unchanged'],
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
+						['type' => 'Change per second'],
 					],
 					'action' => 'Test'
 				]
