@@ -31,7 +31,7 @@ class testFormItemPreprocessingTest extends CWebTest {
 
 	use PreprocessingTrait;
 
-	public static function getTestData() {
+	public static function getTestSingleStepData() {
 		return [
 			[
 				[
@@ -64,14 +64,30 @@ class testFormItemPreprocessingTest extends CWebTest {
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
 						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system', 'parameter_2' => 'label_name'],
 						['type' => 'Prometheus to JSON', 'parameter_1' => '']
-					]
+					],
+					'action' => 'Test'
+				]
+			],
+						[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test success empty parameters',
+						'Key' => 'item-preprocessing-test-success-empty-params'
+					],
+					'preprocessing' => [
+						['type' => 'In range', 'parameter_1' => '1', 'parameter_2' => ''],
+						['type' => 'In range', 'parameter_1' => '', 'parameter_2' => '2'],
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu', 'parameter_2' => '']
+					],
+					'action' => 'Cancel'
 				]
 			],
 			[
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Name' => 'Item Preprocessing Test Validation',
+						'Name' => 'Item Preprocessing Test empty parameters Validation',
 						'Key' => 'item-preprocessing-test-validation'
 					],
 					'preprocessing' => [
@@ -88,20 +104,49 @@ class testFormItemPreprocessingTest extends CWebTest {
 						['type' => 'Does not match regular expression', 'parameter_1' => ''],
 						['type' => 'Check for error in JSON', 'parameter_1' => ''],
 						['type' => 'Check for error in XML', 'parameter_1' => ''],
-						['type' => 'Check for error using regular expression', 'parameter_1' => ''],
+						['type' => 'Check for error using regular expression', 'parameter_1' => '', 'parameter_2' => ''],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => ''],
 						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => ''],
 					],
 					'error' => 'Incorrect value for field "params":'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test Validation empty second parameter',
+						'Key' => 'item-preprocessing-test-validation-second-parameter'
+					],
+					'preprocessing' => [
+						['type' => 'Regular expression', 'parameter_1' => '1', 'parameter_2' => ''],
+						['type' => 'Check for error using regular expression', 'parameter_1' => 'path', 'parameter_2' => '']
+
+					],
+					'error' => 'Incorrect value for field "params": second parameter is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test Validation empty first parameter',
+						'Key' => 'item-preprocessing-test-validation-first-parameter'
+					],
+					'preprocessing' => [
+						['type' => 'Regular expression', 'parameter_1' => '', 'parameter_2' => '1'],
+						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => 'label'],
+					],
+					'error' => 'Incorrect value for field "params": first parameter is expected.'
 				]
 			]
 		];
 	}
 
 	/**
-	 * @dataProvider getTestData
+	 * @dataProvider getTestSingleStepData
 	 */
-	public function testFormItemPreprocessingTest_Test($data) {
+	public function testFormItemPreprocessingTest_TestSingleStep($data) {
 		$this->page->login()->open('items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID);
 		$this->query('button:Create item')->waitUntilPresent()->one()->click();
 
@@ -112,19 +157,18 @@ class testFormItemPreprocessingTest extends CWebTest {
 			$this->addPreprocessingSteps([$step]);
 			$this->query('name:preprocessing['.$i.'][test]')->waitUntilPresent()->one()->click();
 			$dialog = $this->query('id:overlay_dialogue')->waitUntilPresent()->asOverlayDialog()->one()->waitUntilReady();
-
-
 			switch ($data['expected']) {
 				case TEST_BAD:
 					$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
 					$this->assertTrue($message->isBad());
-					// Workaround for single step which has different message (ask Valdis).
+					// Workaround for single step which has different message.
 					if ($step['type']=== 'Discard unchanged with heartbeat'){
 						$this->assertTrue($message->hasLine('Invalid parameter "params":'));
 					}
 					else {
-					$this->assertTrue($message->hasLine($data['error']));
+						$this->assertTrue($message->hasLine($data['error']));
 					}
+					$dialog->close();
 					break;
 				case TEST_GOOD:
 					$form = $this->query('id:preprocessing-test-form')->waitUntilPresent()->asForm()->one();
@@ -152,9 +196,10 @@ class testFormItemPreprocessingTest extends CWebTest {
 
 					$table = $form->getField('Preprocessing steps')->asTable();
 					$this->assertEquals('1: '.$step['type'], $table->getRow(0)->getText());
+
+					$this->chooseDialogActions($data);
 					break;
 			}
-			$dialog->close();
 		}
 	}
 
@@ -175,7 +220,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 						['type' => 'XML XPath', 'parameter_1' => 'path'],
 						['type' => 'JSONPath', 'parameter_1' => 'path'],
 						['type' => 'Custom multiplier', 'parameter_1' => '123'],
-						['type' => 'Change per second'],
 						['type' => 'Boolean to decimal'],
 						['type' => 'Octal to decimal'],
 						['type' => 'Hexadecimal to decimal'],
@@ -186,73 +230,124 @@ class testFormItemPreprocessingTest extends CWebTest {
 						['type' => 'Check for error in JSON', 'parameter_1' => 'path'],
 						['type' => 'Check for error in XML', 'parameter_1' => 'path'],
 						['type' => 'Check for error using regular expression', 'parameter_1' => 'path', 'parameter_2' => 'output'],
-						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
-						['type' => 'Prometheus to JSON', 'parameter_1' => '']
-					]
+						['type' => 'Prometheus to JSON', 'parameter_1' => 'json']
+					],
+					'action' => 'Cancel'
 				]
 			],
-//			[
-//				[
-//					'expected' => TEST_BAD,
-//					'fields' => [
-//						'Name' => 'Item Preprocessing Test Repeated steps',
-//						'Key' => 'item-preprocessing-test-repeated'
-//					],
-//					'preprocessing' => [
-//						['type' => 'Simple change'],
-//						['type' => 'Change per second'],
-//						['type' => 'Discard unchanged'],
-//						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
-//						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system', 'parameter_2' => 'label_name'],
-//						['type' => 'Prometheus to JSON', 'parameter_1' => '']
-//					],
-//					'error' => 'Only one change step is allowed.'
-//				]
-//			],
-//			//			[
-//				[
-//					'expected' => TEST_BAD,
-//					'fields' => [
-//						'Name' => 'Item Preprocessing Test Repeated steps',
-//						'Key' => 'item-preprocessing-test-repeated'
-//					],
-//					'preprocessing' => [
-//						['type' => 'Discard unchanged'],
-//						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
-//						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system', 'parameter_2' => 'label_name'],
-//						['type' => 'Prometheus to JSON', 'parameter_1' => '']
-//					],
-//					'error' => '    Only one throttling step is allowed.'
-//				]
-//			],
-//			[
-//				[
-//					'expected' => TEST_BAD,
-//					'fields' => [
-//						'Name' => 'Item Preprocessing Test Validation',
-//						'Key' => 'item-preprocessing-test-validation'
-//					],
-//					'preprocessing' => [
-//						['type' => 'Regular expression', 'parameter_1' => '', 'parameter_2' => ''],
-//						['type' => 'Trim', 'parameter_1' => ''],
-//						['type' => 'Right trim', 'parameter_1' => ''],
-//						['type' => 'Left trim', 'parameter_1' => ''],
-//						['type' => 'XML XPath', 'parameter_1' => ''],
-//						['type' => 'JSONPath', 'parameter_1' => ''],
-//						['type' => 'Custom multiplier', 'parameter_1' => ''],
-//						['type' => 'JavaScript', 'parameter_1' => ''],
-//						['type' => 'In range', 'parameter_1' => '', 'parameter_2' => ''],
-//						['type' => 'Matches regular expression', 'parameter_1' => ''],
-//						['type' => 'Does not match regular expression', 'parameter_1' => ''],
-//						['type' => 'Check for error in JSON', 'parameter_1' => ''],
-//						['type' => 'Check for error in XML', 'parameter_1' => ''],
-//						['type' => 'Check for error using regular expression', 'parameter_1' => ''],
-//						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => ''],
-//						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => ''],
-//					],
-//					'error' => 'Incorrect value for field "params":'
-//				]
-//			]
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test with previous value 1',
+						'Key' => 'item-preprocessing-test-prev-value-1'
+					],
+					'preprocessing' => [
+						['type' => 'Simple change'],
+						['type' => 'Discard unchanged']
+					],
+					'action' => 'Test'
+				]
+			],
+						[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test with previous value 1',
+						'Key' => 'item-preprocessing-test-prev-value-1'
+					],
+					'preprocessing' => [
+						['type' => 'Simple change'],
+						['type' => 'Discard unchanged'],
+					],
+					'action' => 'Test'
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test success empty parameters',
+						'Key' => 'item-preprocessing-test-success-empty-params'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => ''],
+						['type' => 'In range', 'parameter_1' => '1', 'parameter_2' => ''],
+						['type' => 'In range', 'parameter_1' => '', 'parameter_2' => '2']
+					],
+					'action' => 'Close'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test Repeated Change steps',
+						'Key' => 'item-preprocessing-test-repeated-change'
+					],
+					'preprocessing' => [
+						['type' => 'Simple change'],
+						['type' => 'Change per second']
+					],
+					'error' => 'Only one change step is allowed.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test Repeated Throttling steps',
+						'Key' => 'item-preprocessing-test-repeated-throttling'
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged'],
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1']
+					],
+					'error' => 'Only one throttling step is allowed.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test Repeated Prometheus steps',
+						'Key' => 'item-preprocessing-test-repeated-throttling'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system', 'parameter_2' => 'label_name'],
+						['type' => 'Prometheus to JSON', 'parameter_1' => '']
+					],
+					'error' => 'Only one Prometheus step is allowed.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test Validation',
+						'Key' => 'item-preprocessing-test-validation'
+					],
+					'preprocessing' => [
+						['type' => 'Regular expression', 'parameter_1' => '', 'parameter_2' => ''],
+						['type' => 'Trim', 'parameter_1' => ''],
+						['type' => 'Right trim', 'parameter_1' => ''],
+						['type' => 'Left trim', 'parameter_1' => ''],
+						['type' => 'XML XPath', 'parameter_1' => ''],
+						['type' => 'JSONPath', 'parameter_1' => ''],
+						['type' => 'Custom multiplier', 'parameter_1' => ''],
+						['type' => 'JavaScript', 'parameter_1' => ''],
+						['type' => 'In range', 'parameter_1' => '', 'parameter_2' => ''],
+						['type' => 'Matches regular expression', 'parameter_1' => ''],
+						['type' => 'Does not match regular expression', 'parameter_1' => ''],
+						['type' => 'Check for error in JSON', 'parameter_1' => ''],
+						['type' => 'Check for error in XML', 'parameter_1' => ''],
+						['type' => 'Check for error using regular expression', 'parameter_1' => '', 'parameter_2' => ''],
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => ''],
+						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => ''],
+					],
+					'error' => 'Incorrect value for field "params":'
+				]
+			]
 		];
 	}
 
@@ -286,11 +381,20 @@ class testFormItemPreprocessingTest extends CWebTest {
 					$time = $dialog->query('id:time')->one();
 					$this->assertTrue($time->getAttribute('readonly') !== null);
 
+					$prev_time = $dialog->query('id:prev_time')->one();
+
+					$types = [
+						'Discard unchanged with heartbeat',
+						'Simple change',
+						'Change per second',
+						'Discard unchanged'
+					];
+
 					$prev_value = $dialog->query('id:prev_value')->asMultiline()->one();
-					$this->assertTrue($prev_value->isEnabled());
+					$this->assertTrue($prev_value->isEnabled(in_array($step['type'], $types)));
 
 					$prev_time = $dialog->query('id:prev_time')->one();
-					$this->assertTrue($prev_time->isEnabled());
+					$this->assertTrue($prev_time->isEnabled(in_array($step['type'], $types)));
 
 					$radio = $form->getField('End of line sequence');
 					$this->assertTrue($radio->isEnabled());
@@ -299,7 +403,46 @@ class testFormItemPreprocessingTest extends CWebTest {
 					foreach ($data['preprocessing'] as $i => $step) {
 						$this->assertEquals(($i+1).': '.$step['type'], $table->getRow($i)->getText());
 					}
+					$this->chooseDialogActions($data);
 					break;
+		}
+	}
+
+	private function chooseDialogActions($data){
+		$dialog = $this->query('id:overlay_dialogue')->waitUntilPresent()->asOverlayDialog()->one()->waitUntilReady();
+		$form = $this->query('id:preprocessing-test-form')->waitUntilPresent()->asForm()->one();
+		if ($data['action'] === 'Test') {
+
+			$value_string = '123';
+			$prev_value_string = '100';
+			$prev_time_string  = 'now-1s';
+
+			$container_current = $form->getFieldContainer('Value');
+			$container_current->query('id:value')->asMultiline()->one()->fill($value_string);
+
+			$container_prev = $form->getFieldContainer('Previous value');
+			$prev_value = $container_prev->query('id:prev_value')->asMultiline()->one();
+			$prev_time = $container_prev->query('id:prev_time')->one();
+
+			if ($prev_value->isEnabled(true) & $prev_time->isEnabled(true)) {
+				$prev_value->fill($prev_value_string);
+				$prev_time->fill($prev_time_string);
+			}
+			$form->getField('End of line sequence')->fill('CRLF');
+			$form->submit();
+
+			// Check Zabbix server down message.
+			$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
+			$this->assertTrue($message->isBad());
+			$this->assertTrue($message->hasLine('Connection to Zabbix server "localhost" refused. Possible reasons:'));
+			$dialog->close();
+		}
+		elseif ($data['action'] === 'Cancel') {
+			$dialog->query('button:Cancel')->one()->click();
+			$dialog->waitUntilNotPresent();
+		}
+		else {
+			$dialog->close();
 		}
 	}
 }
