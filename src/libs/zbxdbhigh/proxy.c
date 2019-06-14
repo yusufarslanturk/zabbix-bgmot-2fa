@@ -3793,44 +3793,6 @@ json_parse_return:
 
 /******************************************************************************
  *                                                                            *
- * Function: process_discovery_data                                           *
- *                                                                            *
- * Purpose: update discovery data, received from proxy                        *
- *                                                                            *
- * Parameters: jp           - [IN] JSON with historical data                  *
- *             ts           - [IN] timestamp when the proxy connection was    *
- *                                 established                                *
- *             error        - [OUT] address of a pointer to the info string   *
- *                                  (should be freed by the caller)           *
- *                                                                            *
- * Return value:  SUCCEED - processed successfully                            *
- *                FAIL - an error occurred                                    *
- *                                                                            *
- ******************************************************************************/
-int	process_discovery_data(struct zbx_json_parse *jp, zbx_timespec_t *ts, char **error)
-{
-	int			ret;
-	struct zbx_json_parse	jp_data;
-
-	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
-
-	log_client_timediff(LOG_LEVEL_DEBUG, jp, ts);
-
-	if (SUCCEED != (ret = zbx_json_brackets_by_name(jp, ZBX_PROTO_TAG_DATA, &jp_data)))
-	{
-		*error = zbx_strdup(*error, zbx_json_strerror());
-		goto out;
-	}
-
-	ret = process_discovery_data_contents(&jp_data, error);
-out:
-	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_result_string(ret));
-
-	return ret;
-}
-
-/******************************************************************************
- *                                                                            *
  * Function: process_auto_registration_contents                               *
  *                                                                            *
  * Purpose: parse auto registration data contents and process it              *
