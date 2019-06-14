@@ -89,7 +89,7 @@ class CMultilineElement extends CElement {
 	 */
 	public function overwrite($text) {
 		$dialog = $this->edit();
-		$dialog->query('xpath:.//textarea[@class="multilineinput-textarea"]')->waitUntilVisible()->one()->overwrite($text);
+		$dialog->query('xpath:.//textarea[@class="multilineinput-textarea"]')->one()->overwrite($text);
 		$dialog->query('button:Apply')->one()->click();
 		$dialog->waitUntilNotPresent();
 
