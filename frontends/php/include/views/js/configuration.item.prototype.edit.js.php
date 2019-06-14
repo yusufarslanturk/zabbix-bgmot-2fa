@@ -64,23 +64,26 @@ zbx_subarray_push($this->data['valueTypeVisibility'], ITEM_VALUE_TYPE_UINT64, 'v
 			.trigger('change');
 
 		// Whenever non-numeric type is changed back to numeric type, set the default value in "trends" field.
-		$('#value_type').on('focus', function () {
-			old_value = $(this).val();
-		}).change(function() {
-			var new_value = $(this).val(),
-				trends = $('#trends');
+		$('#value_type')
+			.change(function() {
+				var new_value = $(this).val(),
+					old_value = $(this).data('old-value'),
+					trends = $('#trends');
 
-			if ((old_value == <?= ITEM_VALUE_TYPE_STR ?> || old_value == <?= ITEM_VALUE_TYPE_LOG ?>
-					|| old_value == <?= ITEM_VALUE_TYPE_TEXT ?>)
-					&& (new_value == <?= ITEM_VALUE_TYPE_FLOAT ?>
-					|| new_value == <?= ITEM_VALUE_TYPE_UINT64 ?>)
-					&& trends.val() == 0) {
-				trends.val('<?= $this->data['trends_default'] ?>');
-				$('#trends_mode_1').prop('checked', true);
-			}
+				if ((old_value == <?= ITEM_VALUE_TYPE_STR ?> || old_value == <?= ITEM_VALUE_TYPE_LOG ?>
+						|| old_value == <?= ITEM_VALUE_TYPE_TEXT ?>)
+						&& (new_value == <?= ITEM_VALUE_TYPE_FLOAT ?>
+						|| new_value == <?= ITEM_VALUE_TYPE_UINT64 ?>)) {
+					if (trends.val() == 0) {
+						trends.val('<?= $this->data['trends_default'] ?>');
+					}
+					$('#trends_mode_1').prop('checked', true);
+				}
 
-			$('#trends_mode').trigger('change');
-		});
+				$('#trends_mode').trigger('change');
+				$(this).data('old-value', new_value);
+			})
+			.data('old-value', $('#value_type').val());
 
 		$('#history_mode')
 			.change(function() {
