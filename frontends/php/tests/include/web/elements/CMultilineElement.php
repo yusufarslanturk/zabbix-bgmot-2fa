@@ -53,7 +53,7 @@ class CMultilineElement extends CElement {
 	public function edit() {
 		$this->query('xpath:.//button[@type="button"]')->one()->click();
 
-		return $this->query('xpath://div[@id="overlay_dialogue"]')->waitUntilVisible()->asOverlayDialog()->one()->waitUntilReady();
+		return $this->query('xpath://div[contains(@class, "multilineinput-modal")]')->waitUntilVisible()->asOverlayDialog()->one()->waitUntilReady();
 	}
 
 	/**
@@ -89,7 +89,7 @@ class CMultilineElement extends CElement {
 	 */
 	public function overwrite($text) {
 		$dialog = $this->edit();
-		$dialog->query('xpath:.//textarea[@class="multilineinput-textarea"]')->one()->overwrite($text);
+		$dialog->query('xpath:.//textarea[@class="multilineinput-textarea"]')->waitUntilVisible()->one()->overwrite($text);
 		$dialog->query('button:Apply')->one()->click();
 		$dialog->waitUntilNotPresent();
 
