@@ -3736,6 +3736,7 @@ void	zbx_update_env(double time_now)
 	}
 }
 
+#if !defined(_WINDOWS)
 /******************************************************************************
  *                                                                            *
  * Function: zbx_variant_to_value_type                                        *
@@ -3792,3 +3793,4 @@ int	zbx_variant_to_value_type(zbx_variant_t *value, unsigned char value_type, ch
 
 	return ret;
 }
+#endif
