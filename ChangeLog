@@ -1,6 +1,8 @@
-Changes for 4.2.3rc1
+Changes for 4.2.4rc1
 
 New features:
+..F.....S. [ZBXNEXT-5124,ZBX-15827] extended preprocessing steps with final result row; improved input validation in preprocessing steps (miks, wiper)
+.......PS. [ZBXNEXT-2880] added access to vmware datastore at vmware vCenter level (MVekslers)
 ..F....... [ZBXNEXT-5163] added display of maintenance information in Configuration section for hosts in maitenance (vasilijs)
 ..F....... [ZBXNEXT-5036] added preloader for popup menus (ashubin)
 ...G...... [ZBXNEXT-287] added SSL support for agent HTTP checks (asestakovs)
@@ -8,9 +10,13 @@ New features:
 
 Bug fixes:
 ..F....... [ZBX-16217] fixed value trim in multiline input (miks)
+...G...... [ZBX-16218] fixed zabbix_sender does not clean up its semaphores (akozlovs)
+..F....... [ZBX-16152] fixed not data loss on saving host prototypes by user with insufficient permissions (averza)
+..F....... [ZBX-16126] fixed checkbox selection on navigate to inherited template in triggers and items (talbergs)
+..F....... [ZBX-15952] fixed errors when trying to create a graph widget for key system.cpu.util[,iowait] with Y axis placed on the left side of the graph (vasilijs)
 ...G...PS. [ZBX-15899] added output sanitization to prevent invalid UTF-8 sequences in regexp-based text replacement (Andris)
 ..F....... [ZBX-16073] fixed horizontal scrolling in map (vasilijs)
-........S. [ZBX-15943] fixed discovered hosts are not removed from table 'dhosts' after removing and adding the corresponding discovery check (akozlovs)
+........S. [ZBX-15943] fixed discovered hosts are not removed from table "dhosts" after removing and adding the corresponding discovery check (akozlovs)
 ..F....... [ZBX-15875] fixed colors for the multiselect disabled elements (ashubin)
 ..F....... [ZBX-10948] 'IT Services --> Service Time --> Note' infinite stretching (rlataria)
 ..F....... [ZBX-15585] fixed web scenarios pair manager issue when fields are duplicating on post type toggle (talbergs)
@@ -34,6 +40,12 @@ A.F....... [ZBX-15049] fixed to host group limited global scripts to be usable i
 ..F....... [ZBX-15778] fixed wrong filtering by "Age less than" and "Show suppressed problems" in trigger overview (vasilijs)
 ........S. [ZBX-16150] fixed inactive, unmounted, unaccessible VMware datastore causes unknown column nan insertion in field list (akozlovs)
 A......... [ZBX-16122] fixed api validation of trigger dependency (averza)
+
+--------------------------------------------------------------------------------
+Changes for 4.2.3
+
+Bug fixes:
+..F....... [ZBX-15905] reverted changes that introduced error with write permissions in assets directory (gcalenko)
 
 --------------------------------------------------------------------------------
 Changes for 4.2.2
@@ -423,18 +435,21 @@ A.F.I...S. [ZBXNEXT-4853,ZBXNEXT-517] added ability to send email messages in HT
 ..F.....S. [ZBXNEXT-1282,ZBXNEXT-4730] added changes to introduce regex based matching for auto-registration (vasilijs, viktors)
 
 --------------------------------------------------------------------------------
-Changes for 4.0.9rc1
+Changes for 4.0.10rc1
 
 New features:
+.......PS. [ZBXNEXT-2880] added access to vmware datastore at vmware vCenter level (MVekslers)
 ..F....... [ZBXNEXT-5163] added display of maintenance information in Configuration section for hosts in maitenance (vasilijs)
 ..F....... [ZBXNEXT-5036] added preloader for popup menus (ashubin)
 ...G...... [ZBXNEXT-287] added SSL support for agent HTTP checks (asestakovs)
 ...G...PS. [ZBXNEXT-5179] added option to specify absolute path in LoadModule; thanks to Glebs Ivanovskis for the patch (asestakovs)
 
 Bug fixes:
+..F....... [ZBX-16152] fixed not data loss on saving host prototypes by user with insufficient permissions (averza)
+..F....... [ZBX-15952] fixed errors when trying to create a graph widget for key system.cpu.util[,iowait] with Y axis placed on the left side of the graph (vasilijs)
 ...G...PS. [ZBX-15899] added output sanitization to prevent invalid UTF-8 sequences in regexp-based text replacement (Andris)
 ..F....... [ZBX-16073] fixed horizontal scrolling in map (vasilijs)
-........S. [ZBX-15943] fixed discovered hosts are not removed from table 'dhosts' after removing and adding the corresponding discovery check (akozlovs)
+........S. [ZBX-15943] fixed discovered hosts are not removed from table "dhosts" after removing and adding the corresponding discovery check (akozlovs)
 ..F....... [ZBX-15875] fixed colors for the multiselect disabled elements (ashubin)
 ..F....... [ZBX-10948] 'IT Services --> Service Time --> Note' infinite stretching (rlataria)
 ...G...... [ZBX-16142] fixed missing sys/ioctl.h from src/libs/zbxsysinfo/openbsd/net.c; thanks to Andrea Biscuola for the patch (akozlovs)
@@ -457,6 +472,12 @@ A.F....... [ZBX-15049] fixed to host group limited global scripts to be usable i
 ..F....... [ZBX-15585] fixed web scenarios pair manager issue when fields are duplicating on post type toggle (talbergs)
 ........S. [ZBX-16150] fixed inactive, unmounted, unaccessible VMware datastore causes unknown column nan insertion in field list (akozlovs)
 A......... [ZBX-16122] fixed api validation of trigger dependency (averza)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.9
+
+Bug fixes:
+..F....... [ZBX-15905] reverted changes that introduced error with write permissions in assets directory (gcalenko)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.8
