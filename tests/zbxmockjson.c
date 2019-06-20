@@ -113,7 +113,7 @@ static void	json_flatten_object(struct zbx_json_parse *jp, const char *prefix, z
 {
 	const char	*pnext = NULL;
 	char		*path = NULL, key[MAX_STRING_LEN];
-	size_t		path_alloc = 0, path_offset = 0;
+	size_t		path_alloc = 0, path_offset;
 
 	while (NULL != (pnext = zbx_json_pair_next(jp, pnext, key, sizeof(key))))
 	{
@@ -130,10 +130,9 @@ static void	json_flatten_object(struct zbx_json_parse *jp, const char *prefix, z
 
 static void	json_flatten_array(struct zbx_json_parse *jp, const char *parent, zbx_vector_ptr_pair_t *props)
 {
-	const char		*pnext;
-	char			*path, *value = NULL;
-	int			index = 0;
-
+	const char	*pnext;
+	char		*path, *value = NULL;
+	int		index = 0;
 
 	for (pnext = NULL; NULL != (pnext = zbx_json_next(jp, pnext));)
 	{
