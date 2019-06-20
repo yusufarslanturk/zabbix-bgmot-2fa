@@ -229,6 +229,8 @@ static int	worker_item_preproc_execute(unsigned char value_type, zbx_variant_t *
 		{
 			results[i].action = op->error_handler;
 			ret = zbx_item_preproc_handle_error(value, op, error);
+			zbx_variant_clear(&history_value);
+			break;
 		}
 		else
 			results[i].action = ZBX_PREPROC_FAIL_DEFAULT;
@@ -254,7 +256,6 @@ static int	worker_item_preproc_execute(unsigned char value_type, zbx_variant_t *
 
 		if (SUCCEED != ret)
 		{
-			zbx_variant_clear(&history_value);
 			break;
 		}
 
