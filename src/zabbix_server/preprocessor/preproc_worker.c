@@ -456,7 +456,7 @@ ZBX_THREAD_ENTRY(preprocessing_worker_thread, args)
 
 	update_selfmon_counter(ZBX_PROCESS_STATE_BUSY);
 
-	for (;;)
+	while (ZBX_IS_RUNNING())
 	{
 		update_selfmon_counter(ZBX_PROCESS_STATE_IDLE);
 
@@ -482,7 +482,10 @@ ZBX_THREAD_ENTRY(preprocessing_worker_thread, args)
 		zbx_ipc_message_clean(&message);
 	}
 
-	zbx_es_destroy(&es_engine);
+	zbx_setproctitle("%s #%d [terminated]", get_process_type_string(process_type), process_num);
 
-	return 0;
+	while (1)
+		zbx_sleep(SEC_PER_MIN);
+
+	zbx_es_destroy(&es_engine);
 }
