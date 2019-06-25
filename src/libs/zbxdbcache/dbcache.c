@@ -3154,7 +3154,6 @@ void	zbx_log_sync_history_cache_progress(void)
  ******************************************************************************/
 void	zbx_sync_history_cache(int *values_num, int *triggers_num, int *more)
 {
-	const char	*__function_name = "zbx_sync_history_cache";
 	sigset_t	orig_mask, mask;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() history_num:%d", __func__, cache->history_num);
