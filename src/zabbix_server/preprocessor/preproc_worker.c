@@ -441,7 +441,7 @@ ZBX_THREAD_ENTRY(preprocessing_worker_thread, args)
 
 	if (FAIL == zbx_ipc_socket_open(&socket, ZBX_IPC_SERVICE_PREPROCESSING, SEC_PER_MIN, &error))
 	{
-		zabbix_log(LOG_LEVEL_CRIT, "cannozbx_item_preproct connect to preprocessing service: %s", error);
+		zabbix_log(LOG_LEVEL_CRIT, "cannot connect to preprocessing service: %s", error);
 		zbx_free(error);
 		exit(EXIT_FAILURE);
 	}
