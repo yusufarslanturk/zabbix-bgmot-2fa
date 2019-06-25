@@ -18,6 +18,7 @@
 **/
 
 #include "common.h"
+#include "daemon.h"
 #include "db.h"
 #include "log.h"
 #include "zbxipcservice.h"
