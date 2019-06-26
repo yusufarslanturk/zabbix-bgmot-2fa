@@ -241,7 +241,7 @@ static int	worker_item_preproc_execute(unsigned char value_type, zbx_variant_t *
 				/* result history is kept to report results of steps before failing step, */
 				/* which means it can be omitted for the last step.                       */
 				if (i != steps_num - 1)
-					zbx_variant_copy(&history_value_local.value, &value_num);
+					zbx_variant_copy(&results[i].value, value);
 				else
 					zbx_variant_set_none(&results[i].value);
 			}

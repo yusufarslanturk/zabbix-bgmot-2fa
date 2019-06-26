@@ -411,7 +411,7 @@ static int	item_preproc_delta(unsigned char value_type, zbx_variant_t *value, co
 
 	*history_ts = *ts;
 	zbx_variant_clear(history_value);
-	zbx_variant_copy(&history_value->value, &value_num);
+	zbx_variant_copy(history_value, &value_num);
 	zbx_variant_clear(&value_num);
 
 	return SUCCEED;
@@ -1315,16 +1315,8 @@ out:
 static int	item_preproc_get_error_from_json(const zbx_variant_t *value, const char *params, char **error)
 {
 	zbx_variant_t		value_str;
-	char			err[MAX_STRING_LEN];
 	int			ret;
-	struct zbx_json_parse	jp, jp_out;
-	size_t			data_alloc = 0;
-
-	if (FAIL == zbx_json_path_check(params, err, sizeof(err)))
-	{
-		*error = zbx_strdup(*error, err);
-		return FAIL;
-	}
+	struct zbx_json_parse	jp;
 
 	zbx_variant_copy(&value_str, value);
 
@@ -1334,14 +1326,21 @@ static int	item_preproc_get_error_from_json(const zbx_variant_t *value, const ch
 		goto out;
 	}
 
-	if (FAIL == zbx_json_open(value->data.str, &jp) || FAIL == zbx_json_path_open(&jp, params, &jp_out))
+	if (FAIL == zbx_json_open(value->data.str, &jp))
 		goto out;
 
-	zbx_json_value_dyn(&jp_out, error, &data_alloc);
+	if (FAIL == (ret = zbx_jsonpath_query(&jp, params, error)))
+	{
+		*error = zbx_strdup(NULL, zbx_json_strerror());
+		goto out;
+	}
 
-	zbx_lrtrim(*error, " \t\n\r");
-	if ('\0' == **error)
-		zbx_free(*error);
+	if (NULL != *error)
+	{
+		zbx_lrtrim(*error, " \t\n\r");
+		if ('\0' == **error)
+			zbx_free(*error);
+	}
 out:
 	zbx_variant_clear(&value_str);
 

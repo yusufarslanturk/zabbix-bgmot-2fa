@@ -1533,10 +1533,6 @@ zbx_uint32_t	zbx_variant_data_bin_get(const void *bin, void **data);
 int	zbx_validate_value_dbl(double value);
 int	zbx_variant_compare(const zbx_variant_t *value1, const zbx_variant_t *value2);
 
-zbx_variant_data_bin_t	*zbx_variant_data_bin_copy(const zbx_variant_data_bin_t *bin);
-zbx_variant_data_bin_t	*zbx_variant_data_bin_create(const void *data, zbx_uint32_t size);
-zbx_uint32_t	zbx_variant_data_bin_get(const zbx_variant_data_bin_t *bin, void **data);
-
 void	zbx_update_env(double time_now);
 
 #define ZBX_DATA_SESSION_TOKEN_SIZE	(MD5_DIGEST_SIZE * 2)

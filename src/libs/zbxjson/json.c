@@ -1293,23 +1293,3 @@ out:
 	zbx_jsonpath_clear(&jsonpath);
 	return ret;
 }
-
-/******************************************************************************
- *                                                                            *
- * Function: zbx_json_value_dyn                                               *
- *                                                                            *
- * Purpose: return json fragment or value located at json parse location      *
- *                                                                            *
- ******************************************************************************/
-void	zbx_json_value_dyn(const struct zbx_json_parse *jp, char **string, size_t *string_alloc)
-{
-	if (NULL == zbx_json_decodevalue_dyn(jp->start, string, string_alloc, NULL))
-	{
-		size_t	len = jp->end - jp->start + 2;
-
-		if (*string_alloc < len)
-			*string = (char *)zbx_realloc(*string, len);
-
-		zbx_strlcpy(*string, jp->start, len);
-	}
-}
