@@ -588,7 +588,7 @@ static int	get_proxyconfig_table_items(zbx_uint64_t proxy_hostid, struct zbx_jso
 		if (0 == items.values_num)
 		{
 			THIS_SHOULD_NEVER_HAPPEN;
-			break;
+			exit(EXIT_FAILURE);
 		}
 
 		zbx_vector_ptr_sort(&items, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC);
