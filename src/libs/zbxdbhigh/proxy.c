@@ -471,7 +471,7 @@ static int	get_proxyconfig_table_items(zbx_uint64_t proxy_hostid, struct zbx_jso
 {
 	char			*sql = NULL;
 	size_t			sql_alloc = 4 * ZBX_KIBIBYTE, sql_offset = 0;
-	int			f, fld, fld_type = -1, fld_key = -1, fld_master, ret = SUCCEED;
+	int			f, fld, fld_type = -1, fld_key = -1, fld_master = -1, ret = SUCCEED;
 	DB_RESULT		result;
 	DB_ROW			row;
 	zbx_hashset_t		proxy_items;
@@ -583,6 +583,12 @@ static int	get_proxyconfig_table_items(zbx_uint64_t proxy_hostid, struct zbx_jso
 		{
 			if (NULL == zbx_hashset_search(&proxy_items, &proxy_item->master_itemid))
 				zbx_vector_ptr_append(&items, proxy_item);
+		}
+
+		if (0 == items.values_num)
+		{
+			THIS_SHOULD_NEVER_HAPPEN;
+			break;
 		}
 
 		zbx_vector_ptr_sort(&items, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC);
