@@ -548,7 +548,6 @@ static int	get_proxyconfig_table_items(zbx_uint64_t proxy_hostid, struct zbx_jso
 		if (SUCCEED == is_item_processed_by_server(atoi(row[fld_type]), row[fld_key]))
 			continue;
 
-		fld = 0;
 		if (SUCCEED != DBis_null(row[fld_master]))
 		{
 			zbx_proxy_item_config_t	proxy_item_local, *proxy_item;
