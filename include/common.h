@@ -1531,7 +1531,6 @@ void	*zbx_variant_data_bin_create(const void *data, zbx_uint32_t size);
 zbx_uint32_t	zbx_variant_data_bin_get(const void *bin, void **data);
 
 int	zbx_validate_value_dbl(double value);
-int	zbx_variant_compare(const zbx_variant_t *value1, const zbx_variant_t *value2);
 
 void	zbx_update_env(double time_now);
 
