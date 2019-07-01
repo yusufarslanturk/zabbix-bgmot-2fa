@@ -1649,6 +1649,9 @@ static int	process_proxyconfig_table(const ZBX_TABLE *table, struct zbx_json_par
 		}
 	}
 
+	if (0 != ins.values_num && SUCCEED != zbx_db_insert_execute(&db_insert))
+		goto clean;
+
 	if (16 < sql_offset)	/* in ORACLE always present begin..end; */
 	{
 		DBend_multiple_update(&sql, &sql_alloc, &sql_offset);
@@ -1657,14 +1660,14 @@ static int	process_proxyconfig_table(const ZBX_TABLE *table, struct zbx_json_par
 			goto clean;
 	}
 
-	ret = (0 == ins.values_num ? SUCCEED : zbx_db_insert_execute(&db_insert));
-
 	if (0 != availability_hostids.values_num)
 	{
 		zbx_vector_uint64_sort(&availability_hostids, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 		zbx_vector_uint64_uniq(&availability_hostids, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 		DCtouch_hosts_availability(&availability_hostids);
 	}
+
+	ret = SUCCEED;
 clean:
 	if (0 != ins.values_num)
 	{
