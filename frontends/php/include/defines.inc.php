@@ -18,9 +18,8 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-
-define('ZABBIX_VERSION',		'4.2.2rc1');
-define('ZABBIX_API_VERSION',	'4.2.2');
+define('ZABBIX_VERSION',		'4.2.5rc1');
+define('ZABBIX_API_VERSION',	'4.2.5');
 define('ZABBIX_EXPORT_VERSION',	'4.2');
 define('ZABBIX_DB_VERSION',	4020000);
 
@@ -106,10 +105,6 @@ define('EXTACK_OPTION_BOTH',	2);
 define('TRIGGERS_OPTION_RECENT_PROBLEM',	1);
 define('TRIGGERS_OPTION_ALL',				2);
 define('TRIGGERS_OPTION_IN_PROBLEM',		3);
-
-define('ZBX_ACK_STS_ANY',				1);
-define('ZBX_ACK_STS_WITH_UNACK',		2);
-define('ZBX_ACK_STS_WITH_LAST_UNACK',	3);
 
 define('ZBX_FONT_NAME', 'DejaVuSans');
 
@@ -1585,6 +1580,7 @@ define('ZBX_STYLE_ICON_INFO', 'icon-info');
 define('ZBX_STYLE_ICON_INVISIBLE', 'icon-invisible');
 define('ZBX_STYLE_ICON_MAINT', 'icon-maint');
 define('ZBX_STYLE_ICON_WZRD_ACTION', 'icon-wzrd-action');
+define('ZBX_STYLE_ICON_NONE', 'icon-none');
 define('ZBX_STYLE_ACTION_COMMAND', 'icon-action-command');
 define('ZBX_STYLE_ACTION_ICON_CLOSE', 'icon-action-close');
 define('ZBX_STYLE_ACTION_ICON_MSG', 'icon-action-msg');

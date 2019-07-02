@@ -19,7 +19,7 @@ dnl
 
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([Zabbix],[4.2.2rc1])
+AC_INIT([Zabbix],[4.2.5rc1])
 AC_CONFIG_SRCDIR(src/zabbix_server/server.c)
 AM_INIT_AUTOMAKE([subdir-objects])
 
@@ -1737,6 +1737,8 @@ SERVER_LIBS="$SERVER_LIBS $LIBCURL_LIBS"
 
 PROXY_LDFLAGS="$PROXY_LDFLAGS $LIBCURL_LDFLAGS"
 PROXY_LIBS="$PROXY_LIBS $LIBCURL_LIBS"
+
+AM_CONDITIONAL(HAVE_LIBCURL, test "x$found_curl" = "xyes")
 
 dnl Starting from 2.0 agent can do web monitoring
 AGENT_LDFLAGS="$AGENT_LDFLAGS $LIBCURL_LDFLAGS"

@@ -242,7 +242,8 @@ typedef enum
 	ITEM_VALUE_TYPE_UINT64,
 	ITEM_VALUE_TYPE_TEXT,
 	/* the number of defined value types */
-	ITEM_VALUE_TYPE_MAX
+	ITEM_VALUE_TYPE_MAX,
+	ITEM_VALUE_TYPE_NONE,
 }
 zbx_item_value_type_t;
 const char	*zbx_item_value_type_string(zbx_item_value_type_t value_type);
@@ -711,6 +712,8 @@ const char	*zbx_item_logtype_string(unsigned char logtype);
 #define PROXY_HISTORY_FLAG_META		0x01
 #define PROXY_HISTORY_FLAG_NOVALUE	0x02
 
+#define PROXY_HISTORY_MASK_NOVALUE	(PROXY_HISTORY_FLAG_META | PROXY_HISTORY_FLAG_NOVALUE)
+
 /* global correlation constants */
 #define ZBX_CORRELATION_ENABLED				0
 #define ZBX_CORRELATION_DISABLED			1
@@ -1112,7 +1115,7 @@ int	is_ip(const char *ip);
 
 int	zbx_validate_hostname(const char *hostname);
 
-void	zbx_on_exit(void); /* calls exit() at the end! */
+void	zbx_on_exit(int ret); /* calls exit() at the end! */
 void	zbx_backtrace(void);
 
 int	int_in_list(char *list, int value);
@@ -1540,5 +1543,7 @@ char	*zbx_create_token(zbx_uint64_t seed);
 
 #define ZBX_PROBLEM_SUPPRESSED_FALSE	0
 #define ZBX_PROBLEM_SUPPRESSED_TRUE	1
+
+int	zbx_variant_to_value_type(zbx_variant_t *value, unsigned char value_type, char **errmsg);
 
 #endif
