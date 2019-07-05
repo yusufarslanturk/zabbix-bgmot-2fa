@@ -385,8 +385,6 @@ else {
 }
 
 // Set sub-groups of selected groups.
-$filter_groupids = getSubGroups(getRequest('filter_groupids', []));
-
 if (!empty($hosts)) {
 	$host = reset($hosts);
 	$_REQUEST['filter_hostids'] = [$host['hostid']];
@@ -489,6 +487,7 @@ foreach ($subfiltersList as $name) {
 	}
 }
 
+$filter_groupids = getSubGroups(getRequest('filter_groupids', []));
 $filter_hostids = getRequest('filter_hostids');
 if (!hasRequest('form') && $filter_hostids) {
 	if (!isset($host)) {
