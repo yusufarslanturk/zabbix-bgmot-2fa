@@ -106,7 +106,7 @@ class testFormItemPreprocessingTest extends CWebTest {
 						['type' => 'Check for error in XML', 'parameter_1' => ''],
 						['type' => 'Check for error using regular expression', 'parameter_1' => '', 'parameter_2' => ''],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => ''],
-						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => ''],
+						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => '']
 					],
 					'error' => 'Incorrect value for field "params":'
 				]
@@ -135,7 +135,7 @@ class testFormItemPreprocessingTest extends CWebTest {
 					],
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => '', 'parameter_2' => '1'],
-						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => 'label'],
+						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => 'label']
 					],
 					'error' => 'Incorrect value for field "params": first parameter is expected.'
 				]
@@ -153,14 +153,17 @@ class testFormItemPreprocessingTest extends CWebTest {
 		$form = $this->query('name:itemForm')->waitUntilPresent()->asForm()->one();
 		$form->fill($data['fields']);
 		$form->selectTab('Preprocessing');
+
 		foreach ($data['preprocessing'] as $i => $step) {
 			$this->addPreprocessingSteps([$step]);
 			$this->query('name:preprocessing['.$i.'][test]')->waitUntilPresent()->one()->click();
 			$dialog = $this->query('id:overlay_dialogue')->waitUntilPresent()->asOverlayDialog()->one()->waitUntilReady();
+
 			switch ($data['expected']) {
 				case TEST_BAD:
 					$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
 					$this->assertTrue($message->isBad());
+
 					// Workaround for single step which has different message.
 					if ($step['type']=== 'Discard unchanged with heartbeat'){
 						$this->assertTrue($message->hasLine('Invalid parameter "params":'));
@@ -168,12 +171,13 @@ class testFormItemPreprocessingTest extends CWebTest {
 					else {
 						$this->assertTrue($message->hasLine($data['error']));
 					}
+
 					$dialog->close();
 					break;
+
 				case TEST_GOOD:
 					$form = $this->query('id:preprocessing-test-form')->waitUntilPresent()->asForm()->one();
-					$header = $dialog->query('id:dashbrd-widget-head-title-preprocessing-test')->waitUntilPresent()->one();
-					$this->assertEquals('Test item preprocessing', $header->getText());
+					$this->assertEquals('Test item preprocessing', $dialog->getTitle());
 
 					$time = $dialog->query('id:time')->one();
 					$this->assertTrue($time->getAttribute('readonly') !== null);
@@ -258,7 +262,7 @@ class testFormItemPreprocessingTest extends CWebTest {
 					],
 					'preprocessing' => [
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
-						['type' => 'Change per second'],
+						['type' => 'Change per second']
 					],
 					'action' => 'Test'
 				]
@@ -343,7 +347,7 @@ class testFormItemPreprocessingTest extends CWebTest {
 						['type' => 'Check for error in XML', 'parameter_1' => ''],
 						['type' => 'Check for error using regular expression', 'parameter_1' => '', 'parameter_2' => ''],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => ''],
-						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => ''],
+						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => '']
 					],
 					'error' => 'Incorrect value for field "params":'
 				]
@@ -361,50 +365,51 @@ class testFormItemPreprocessingTest extends CWebTest {
 		$form = $this->query('name:itemForm')->waitUntilPresent()->asForm()->one();
 		$form->fill($data['fields']);
 		$form->selectTab('Preprocessing');
+
 		foreach ($data['preprocessing'] as $i => $step) {
 			$this->addPreprocessingSteps([$step]);
 		}
+
 		$this->query('button:Test all steps')->waitUntilPresent()->one()->click();
 		$dialog = $this->query('id:overlay_dialogue')->waitUntilPresent()->asOverlayDialog()->one()->waitUntilReady();
 
 		switch ($data['expected']) {
-				case TEST_BAD:
-					$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
-					$this->assertTrue($message->isBad());
-					$this->assertTrue($message->hasLine($data['error']));
-					break;
-				case TEST_GOOD:
-					$form = $this->query('id:preprocessing-test-form')->waitUntilPresent()->asForm()->one();
-					$header = $dialog->query('id:dashbrd-widget-head-title-preprocessing-test')->waitUntilPresent()->one();
-					$this->assertEquals('Test item preprocessing', $header->getText());
+			case TEST_BAD:
+				$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
+				$this->assertTrue($message->isBad());
+				$this->assertTrue($message->hasLine($data['error']));
+				break;
 
-					$time = $dialog->query('id:time')->one();
-					$this->assertTrue($time->getAttribute('readonly') !== null);
+			case TEST_GOOD:
+				$form = $this->query('id:preprocessing-test-form')->waitUntilPresent()->asForm()->one();
+				$this->assertEquals('Test item preprocessing', $dialog->getTitle());
 
-					$prev_time = $dialog->query('id:prev_time')->one();
+				$time = $dialog->query('id:time')->one();
+				$this->assertTrue($time->getAttribute('readonly') !== null);
 
-					$types = [
-						'Discard unchanged with heartbeat',
-						'Simple change',
-						'Change per second',
-						'Discard unchanged'
-					];
+				$types = [
+					'Discard unchanged with heartbeat',
+					'Simple change',
+					'Change per second',
+					'Discard unchanged'
+				];
 
-					$prev_value = $dialog->query('id:prev_value')->asMultiline()->one();
-					$this->assertTrue($prev_value->isEnabled(in_array($step['type'], $types)));
+				$prev_value = $dialog->query('id:prev_value')->asMultiline()->one();
+				$this->assertTrue($prev_value->isEnabled(in_array($step['type'], $types)));
 
-					$prev_time = $dialog->query('id:prev_time')->one();
-					$this->assertTrue($prev_time->isEnabled(in_array($step['type'], $types)));
+				$prev_time = $dialog->query('id:prev_time')->one();
+				$this->assertTrue($prev_time->isEnabled(in_array($step['type'], $types)));
 
-					$radio = $form->getField('End of line sequence');
-					$this->assertTrue($radio->isEnabled());
+				$radio = $form->getField('End of line sequence');
+				$this->assertTrue($radio->isEnabled());
 
-					$table = $form->getField('Preprocessing steps')->asTable();
-					foreach ($data['preprocessing'] as $i => $step) {
-						$this->assertEquals(($i+1).': '.$step['type'], $table->getRow($i)->getText());
-					}
-					$this->chooseDialogActions($data);
-					break;
+				$table = $form->getField('Preprocessing steps')->asTable();
+				foreach ($data['preprocessing'] as $i => $step) {
+					$this->assertEquals(($i+1).': '.$step['type'], $table->getRow($i)->getText());
+				}
+
+				$this->chooseDialogActions($data);
+				break;
 		}
 	}
 
@@ -424,7 +429,7 @@ class testFormItemPreprocessingTest extends CWebTest {
 			$prev_value = $container_prev->query('id:prev_value')->asMultiline()->one();
 			$prev_time = $container_prev->query('id:prev_time')->one();
 
-			if ($prev_value->isEnabled(true) & $prev_time->isEnabled(true)) {
+			if ($prev_value->isEnabled(true) && $prev_time->isEnabled(true)) {
 				$prev_value->fill($prev_value_string);
 				$prev_time->fill($prev_time_string);
 			}
