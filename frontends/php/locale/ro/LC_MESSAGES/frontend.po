@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 01:44+0300\n"
+"POT-Creation-Date: 2019-06-17 13:11+0300\n"
 "PO-Revision-Date: 2017-03-19 02:15+0300\n"
 "Last-Translator: Silviu <silviubv@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -50,7 +50,7 @@ msgstr ""
 #: include/forms.inc.php:1467
 #: include/views/configuration.host.discovery.edit.php:747
 #: include/views/js/configuration.host.discovery.edit.js.php:52
-#: include/views/js/item.preprocessing.js.php:162
+#: include/views/js/item.preprocessing.js.php:164
 msgid "$.path.to.node"
 msgstr ""
 
@@ -310,12 +310,12 @@ msgstr "5 secunde"
 msgid "500 latest values"
 msgstr "500 ultimele valori"
 
-#: app/views/popup.preproctestedit.view.js.php:124
-#: app/views/popup.preproctestedit.view.js.php:135
+#: app/views/popup.preproctestedit.view.js.php:34
+#: app/views/popup.preproctestedit.view.js.php:41
 msgid "<empty string>"
 msgstr ""
 
-#: include/forms.inc.php:1515 include/views/js/item.preprocessing.js.php:211
+#: include/forms.inc.php:1515 include/views/js/item.preprocessing.js.php:213
 msgid "<label name>"
 msgstr ""
 
@@ -324,8 +324,8 @@ msgid "<manual>"
 msgstr "<manual>"
 
 #: include/forms.inc.php:1513 include/forms.inc.php:1521
-#: include/views/js/item.preprocessing.js.php:209
-#: include/views/js/item.preprocessing.js.php:218
+#: include/views/js/item.preprocessing.js.php:211
+#: include/views/js/item.preprocessing.js.php:220
 msgid "<metric name>{<label name>=\"<label value>\", ...} == <value>"
 msgstr ""
 
@@ -442,7 +442,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:638
 #: include/views/configuration.host.edit.php:546
 #: include/views/configuration.host.massupdate.php:216
-#: include/views/configuration.host.prototype.edit.php:255
+#: include/views/configuration.host.prototype.edit.php:256
 #: include/views/configuration.httpconf.edit.php:202
 #: include/views/configuration.item.edit.php:686
 #: include/views/configuration.item.massupdate.php:343
@@ -642,9 +642,9 @@ msgstr "Activ până la"
 #: include/views/configuration.host.list.php:89
 #: include/views/configuration.host.massupdate.php:56
 #: include/views/configuration.host.massupdate.php:210
-#: include/views/configuration.host.prototype.edit.php:209
-#: include/views/configuration.host.prototype.edit.php:308
-#: include/views/configuration.host.prototype.edit.php:444
+#: include/views/configuration.host.prototype.edit.php:210
+#: include/views/configuration.host.prototype.edit.php:309
+#: include/views/configuration.host.prototype.edit.php:445
 #: include/views/configuration.httpconf.edit.php:122
 #: include/views/configuration.httpconf.edit.php:140
 #: include/views/configuration.httpconf.edit.php:208
@@ -1067,7 +1067,7 @@ msgstr ""
 #: include/views/configuration.host.list.php:173
 #: include/views/configuration.host.list.php:382
 #: include/views/configuration.item.edit.php:871
-#: include/views/configuration.item.list.php:68
+#: include/views/configuration.item.list.php:69
 #: include/views/configuration.item.massupdate.php:521
 #: include/views/configuration.item.prototype.edit.php:724
 #: include/views/configuration.item.prototype.list.php:58
@@ -1270,7 +1270,7 @@ msgstr "Autentificare"
 
 #: include/views/configuration.host.edit.php:673
 #: include/views/configuration.host.massupdate.php:159
-#: include/views/configuration.host.prototype.edit.php:327
+#: include/views/configuration.host.prototype.edit.php:328
 msgid "Authentication algorithm"
 msgstr "Algoritm de autentificare"
 
@@ -1357,7 +1357,7 @@ msgstr ""
 #: include/views/configuration.action.edit.php:1075
 #: include/views/configuration.host.edit.php:714
 #: include/views/configuration.host.massupdate.php:196
-#: include/views/configuration.host.prototype.edit.php:367
+#: include/views/configuration.host.prototype.edit.php:368
 msgid "Automatic"
 msgstr "Automată"
 
@@ -1523,7 +1523,7 @@ msgid "CERT"
 msgstr ""
 
 #: app/views/monitoring.widget.problems.view.php:93
-#: include/classes/graph/CSvgGraph.php:1002
+#: include/classes/graph/CSvgGraph.php:977
 #: include/classes/screens/CScreenEvents.php:116
 #: include/classes/screens/CScreenProblem.php:991
 #: include/classes/screens/CScreenProblem.php:1150 include/events.inc.php:340
@@ -1546,7 +1546,7 @@ msgstr ""
 msgid "CPU utilisation percentage. Returns float"
 msgstr ""
 
-#: app/views/popup.preproctestedit.view.php:102
+#: app/views/popup.preproctestedit.view.php:103
 msgid "CRLF"
 msgstr ""
 
@@ -1686,7 +1686,7 @@ msgstr "Nu se poate adăuga prototipul serverului"
 msgid "Cannot add image"
 msgstr "Nu se poate adăuga imaginea"
 
-#: items.php:930
+#: items.php:931
 msgid "Cannot add item"
 msgstr "Nu se poate adăuga elementul"
 
@@ -1770,7 +1770,7 @@ msgstr ""
 msgid "Cannot add template"
 msgstr "Nu se poate adăuga șablonul"
 
-#: app/controllers/CControllerPopupTriggerWizard.php:204 triggers.php:295
+#: app/controllers/CControllerPopupTriggerWizard.php:204 triggers.php:296
 msgid "Cannot add trigger"
 msgstr "Nu se poate adăuga trigger-ul"
 
@@ -1811,7 +1811,7 @@ msgstr ""
 msgid "Cannot call method \"%1$s.%2$s\" without parameters."
 msgstr ""
 
-#: httpconf.php:196 httpconf.php:509 items.php:979 items.php:1388
+#: httpconf.php:196 httpconf.php:509 items.php:980 items.php:1389
 msgid "Cannot clear history"
 msgstr "Nu se poate șterge istoricul"
 
@@ -1857,14 +1857,14 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: items.php:1344
+#: items.php:1345
 msgid "Cannot copy item"
 msgid_plural "Cannot copy items"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: triggers.php:593
+#: triggers.php:594
 msgid "Cannot copy trigger"
 msgid_plural "Cannot copy triggers"
 msgstr[0] ""
@@ -2033,7 +2033,7 @@ msgstr "Nu se poate șterge imaginea"
 msgid "Cannot delete inventory."
 msgstr "Nu se poate șterge inventarul."
 
-#: items.php:531
+#: items.php:532
 msgid "Cannot delete item"
 msgstr "Nu se poate șterge elementul"
 
@@ -2045,7 +2045,7 @@ msgstr "Nu se poate șterge prototipul itemului"
 msgid "Cannot delete item prototypes"
 msgstr "Nu se pot şterge prototipurile de element"
 
-#: items.php:1398
+#: items.php:1399
 msgid "Cannot delete items"
 msgstr "Nu se pot șterge elementele"
 
@@ -2160,7 +2160,7 @@ msgstr ""
 msgid "Cannot delete templated web scenario \"%1$s\"."
 msgstr "Nu se poate șterge scenariul web \"%1$s\" bazat pe un șablon."
 
-#: triggers.php:408
+#: triggers.php:409
 msgid "Cannot delete trigger"
 msgstr "Nu se poate șterge trigger-ul"
 
@@ -2172,7 +2172,7 @@ msgstr "Nu se poate șterge prototipul trigger-ului"
 msgid "Cannot delete trigger prototypes"
 msgstr "Nu se pot şterge prototipurile triggerilor"
 
-#: triggers.php:607
+#: triggers.php:608
 msgid "Cannot delete triggers"
 msgstr "Nu se pot șterge triggerii"
 
@@ -2221,7 +2221,7 @@ msgstr[0] "Nu se poate dezactiva serverul"
 msgstr[1] "Nu se pot dezactiva servererele"
 msgstr[2] "Nu se pot dezactiva servererele"
 
-#: applications.php:174 items.php:1304
+#: applications.php:174 items.php:1305
 msgid "Cannot disable item"
 msgid_plural "Cannot disable items"
 msgstr[0] "Nu se poate dezactiva elementul"
@@ -2235,7 +2235,7 @@ msgstr[0] "Nu se poate dezactiva tipul media"
 msgstr[1] "Nu se poate dezactiva tipul media"
 msgstr[2] "Nu se poate dezactiva tipul media"
 
-#: triggers.php:545
+#: triggers.php:546
 msgid "Cannot disable trigger"
 msgid_plural "Cannot disable triggers"
 msgstr[0] "Nu se poate dezactiva triggerul"
@@ -2293,7 +2293,7 @@ msgstr[0] "Nu se poate activa srverul"
 msgstr[1] "Nu se pot activa serverele"
 msgstr[2] "Nu se pot activa serverele"
 
-#: applications.php:173 items.php:1303
+#: applications.php:173 items.php:1304
 msgid "Cannot enable item"
 msgid_plural "Cannot enable items"
 msgstr[0] "Nu se poate activa elementul"
@@ -2307,7 +2307,7 @@ msgstr[0] "Nu se poate activa tipul media"
 msgstr[1] "Nu se poate activa tipurile media"
 msgstr[2] "Nu se poate activa tipul media"
 
-#: triggers.php:544
+#: triggers.php:545
 msgid "Cannot enable trigger"
 msgid_plural "Cannot enable triggers"
 msgstr[0] "Nu se poate activa trigger-ul"
@@ -2597,7 +2597,7 @@ msgstr ""
 msgid "Cannot send command, check connection with Zabbix server \"%1$s\"."
 msgstr "Nu se poate trimite comanda, verificați conexiunea cu serverul Zabbix \"%1$s\"."
 
-#: host_discovery.php:305 host_discovery.php:634 items.php:947 items.php:1410
+#: host_discovery.php:305 host_discovery.php:634 items.php:948 items.php:1411
 msgid "Cannot send request"
 msgstr ""
 
@@ -2895,7 +2895,7 @@ msgstr "Nu se poate actualiza imaginea"
 msgid "Cannot update interface for discovered host \"%1$s\"."
 msgstr "Nu se poate actualiza interfața pentru serverul detectat \"%1$s\"."
 
-#: items.php:933
+#: items.php:934
 msgid "Cannot update item"
 msgstr "Nu se poate actualiza elementul"
 
@@ -2911,7 +2911,7 @@ msgstr[2] "Nu se poate actualiza prototipul item"
 msgid "Cannot update item prototypes"
 msgstr ""
 
-#: items.php:1280
+#: items.php:1281
 msgid "Cannot update items"
 msgstr "Nu se pot actualiza elementele"
 
@@ -2988,8 +2988,8 @@ msgstr ""
 msgid "Cannot update templates on discovered host \"%1$s\"."
 msgstr "Nu se poate actualiza șablonul pentru serverul detectat \"%1$s\"."
 
-#: app/controllers/CControllerPopupTriggerWizard.php:188 triggers.php:393
-#: triggers.php:511
+#: app/controllers/CControllerPopupTriggerWizard.php:188 triggers.php:394
+#: triggers.php:512
 msgid "Cannot update trigger"
 msgstr "Nu se poate actualiza trigger-ul"
 
@@ -3048,11 +3048,11 @@ msgstr ""
 msgid "Catalan (ca_ES)"
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:909
+#: include/classes/items/CHelpItems.php:929
 msgid "Catches all SNMP traps that match regex. If regexp is unspecified, catches any trap."
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:905
+#: include/classes/items/CHelpItems.php:925
 msgid "Catches all SNMP traps that were not caught by any of snmptrap[] items."
 msgstr ""
 
@@ -3067,8 +3067,8 @@ msgstr ""
 #: include/views/configuration.host.edit.php:796
 #: include/views/configuration.host.massupdate.php:253
 #: include/views/configuration.host.massupdate.php:261
-#: include/views/configuration.host.prototype.edit.php:380
-#: include/views/configuration.host.prototype.edit.php:396
+#: include/views/configuration.host.prototype.edit.php:381
+#: include/views/configuration.host.prototype.edit.php:397
 msgid "Certificate"
 msgstr ""
 
@@ -3150,7 +3150,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:793
 #: include/views/configuration.host.discovery.list.php:175
 #: include/views/configuration.item.edit.php:933
-#: include/views/configuration.item.list.php:243
+#: include/views/configuration.item.list.php:244
 msgid "Check now"
 msgstr ""
 
@@ -3259,7 +3259,7 @@ msgid "Clear"
 msgstr "Șterge"
 
 #: include/views/configuration.httpconf.list.php:167
-#: include/views/configuration.item.list.php:244
+#: include/views/configuration.item.list.php:245
 msgid "Clear history"
 msgstr ""
 
@@ -3299,7 +3299,7 @@ msgstr "Ceas"
 #: include/views/configuration.host.discovery.edit.php:790
 #: include/views/configuration.host.edit.php:831
 #: include/views/configuration.hostgroups.edit.php:58
-#: include/views/configuration.host.prototype.edit.php:436
+#: include/views/configuration.host.prototype.edit.php:437
 #: include/views/configuration.httpconf.edit.php:237
 #: include/views/configuration.item.edit.php:930
 #: include/views/configuration.item.prototype.edit.php:767
@@ -3474,7 +3474,7 @@ msgstr ""
 msgid "Configuration"
 msgstr "Configurare"
 
-#: include/classes/items/CHelpItems.php:991
+#: include/classes/items/CHelpItems.php:1011
 msgid "Configuration cache statistics. Cache - buffer (modes: pfree, total, used, free)."
 msgstr "Statistici configurare cache. Cache - buffer (moduri: pfree, total, used, free)."
 
@@ -3721,7 +3721,7 @@ msgstr ""
 
 #: include/views/configuration.host.edit.php:784
 #: include/views/configuration.host.massupdate.php:256
-#: include/views/configuration.host.prototype.edit.php:384
+#: include/views/configuration.host.prototype.edit.php:385
 msgid "Connections from host"
 msgstr ""
 
@@ -3731,7 +3731,7 @@ msgstr ""
 
 #: include/views/configuration.host.edit.php:776
 #: include/views/configuration.host.massupdate.php:249
-#: include/views/configuration.host.prototype.edit.php:376
+#: include/views/configuration.host.prototype.edit.php:377
 msgid "Connections to host"
 msgstr ""
 
@@ -3851,8 +3851,8 @@ msgstr "Coordonate"
 
 #: include/views/configuration.copy.elements.php:73
 #: include/views/configuration.graph.list.php:150
-#: include/views/configuration.item.list.php:247
-#: include/views/configuration.triggers.list.php:330 jsLoader.php:184
+#: include/views/configuration.item.list.php:248
+#: include/views/configuration.triggers.list.php:331 jsLoader.php:184
 msgid "Copy"
 msgstr "Copiază"
 
@@ -4175,7 +4175,7 @@ msgstr "Eticheta personalizată pentru harta \"%2$s\" elementele de tipul \"%1$s
 msgid "Custom multiplier"
 msgstr "Multiplicator personalizat"
 
-#: app/views/popup.preproctestedit.view.js.php:143 include/forms.inc.php:1402
+#: app/views/popup.preproctestedit.view.js.php:169 include/forms.inc.php:1402
 #: include/forms.inc.php:1577 include/views/js/item.preprocessing.js.php:35
 msgid "Custom on fail"
 msgstr ""
@@ -4313,7 +4313,7 @@ msgstr "Linie întreruptă"
 msgid "Data"
 msgstr "Date"
 
-#: include/classes/items/CHelpItems.php:1035
+#: include/classes/items/CHelpItems.php:1055
 msgid "Data cache statistics. Cache - one of values (modes: all, float, uint, str, log, text), history (modes: pfree, total, used, free), trend (modes: pfree, total, used, free), text (modes: pfree, total, used, free)."
 msgstr "Date statistice cache. Cache - una din valorile (moduri: all, float, uint, str, log, text), istoric (modes: pfree, total, used, free), trend (modes: pfree, total, used, free), text (modes: pfree, total, used, free)."
 
@@ -4547,12 +4547,12 @@ msgstr "Întârziat de către"
 #: include/views/configuration.host.list.php:432
 #: include/views/configuration.host.prototype.list.php:158
 #: include/views/configuration.httpconf.list.php:170
-#: include/views/configuration.item.list.php:249
+#: include/views/configuration.item.list.php:250
 #: include/views/configuration.item.prototype.list.php:175
 #: include/views/configuration.maintenance.list.php:109
 #: include/views/configuration.template.list.php:283
 #: include/views/configuration.trigger.prototype.list.php:163
-#: include/views/configuration.triggers.list.php:332
+#: include/views/configuration.triggers.list.php:333
 #: include/views/monitoring.screen.list.php:119
 #: include/views/monitoring.slideconf.list.php:97
 #: include/views/monitoring.sysmap.list.php:92 jsLoader.php:113
@@ -4613,7 +4613,7 @@ msgstr "Ștergere prototip de grafic?"
 msgid "Delete graph?"
 msgstr "Ștergere element grafic?"
 
-#: include/views/configuration.item.list.php:245
+#: include/views/configuration.item.list.php:246
 msgid "Delete history of selected items?"
 msgstr "Ștergere istoric pentru itemi selectați?"
 
@@ -4711,7 +4711,7 @@ msgstr "Ștergere grupuri selectate?"
 msgid "Delete selected host groups?"
 msgstr "Ștergere grupuri de servere selectate?"
 
-#: include/views/configuration.host.prototype.edit.php:428
+#: include/views/configuration.host.prototype.edit.php:429
 msgid "Delete selected host prototype?"
 msgstr "Ștergere prototipuri de servere selectați?"
 
@@ -4735,7 +4735,7 @@ msgstr "Ștergere imagine selectată?"
 msgid "Delete selected item prototypes?"
 msgstr "Ștergere elemente prototip selectațe?"
 
-#: include/views/configuration.item.list.php:249
+#: include/views/configuration.item.list.php:250
 msgid "Delete selected items?"
 msgstr "Ștergere elementele selectate?"
 
@@ -4787,7 +4787,7 @@ msgstr "Ștergere șabloane selectate?"
 msgid "Delete selected trigger prototypes?"
 msgstr "Ștergere prototipuri de trigger selectați?"
 
-#: include/views/configuration.triggers.list.php:332
+#: include/views/configuration.triggers.list.php:333
 msgid "Delete selected triggers?"
 msgstr "Ștergere triggeri selectați?"
 
@@ -4894,7 +4894,7 @@ msgstr ""
 #: app/views/popup.generic.php:289 include/triggers.inc.php:2724
 #: include/views/configuration.services.edit.php:152
 #: include/views/configuration.trigger.prototype.list.php:81
-#: include/views/configuration.triggers.list.php:237
+#: include/views/configuration.triggers.list.php:238
 msgid "Depends on"
 msgstr "Depinde de"
 
@@ -4978,8 +4978,8 @@ msgstr ""
 #: include/views/configuration.host.discovery.list.php:172
 #: include/views/configuration.host.list.php:429
 #: include/views/configuration.httpconf.list.php:166
-#: include/views/configuration.item.list.php:242
-#: include/views/configuration.triggers.list.php:329
+#: include/views/configuration.item.list.php:243
+#: include/views/configuration.triggers.list.php:330
 msgid "Disable"
 msgstr "Dezactivare"
 
@@ -5037,7 +5037,7 @@ msgstr "Dezactivare grupuri selectate?"
 msgid "Disable selected hosts?"
 msgstr "Dezactivare servere selectate?"
 
-#: include/views/configuration.item.list.php:242
+#: include/views/configuration.item.list.php:243
 msgid "Disable selected items?"
 msgstr "Dezactivare itemi selectaţi?"
 
@@ -5045,7 +5045,7 @@ msgstr "Dezactivare itemi selectaţi?"
 msgid "Disable selected media types?"
 msgstr "Dezactivare elemente media selectate?"
 
-#: include/views/configuration.triggers.list.php:329
+#: include/views/configuration.triggers.list.php:330
 msgid "Disable selected triggers?"
 msgstr "Dezactivare triggeri selectați?"
 
@@ -5077,7 +5077,7 @@ msgstr ""
 #: include/views/configuration.host.list.php:245
 #: include/views/configuration.host.massupdate.php:107
 #: include/views/configuration.host.massupdate.php:194
-#: include/views/configuration.host.prototype.edit.php:365
+#: include/views/configuration.host.prototype.edit.php:366
 #: include/views/js/monitoring.sysmaps.js.php:232
 msgid "Disabled"
 msgstr "Dezactivat"
@@ -5095,7 +5095,7 @@ msgstr ""
 msgid "Discard unchanged with heartbeat"
 msgstr ""
 
-#: app/views/popup.preproctestedit.view.js.php:104 include/forms.inc.php:1556
+#: app/views/popup.preproctestedit.view.js.php:147 include/forms.inc.php:1556
 #: include/views/js/item.preprocessing.js.php:37
 msgid "Discard value"
 msgstr ""
@@ -5689,8 +5689,8 @@ msgstr ""
 #: include/views/configuration.host.discovery.list.php:169
 #: include/views/configuration.host.list.php:428
 #: include/views/configuration.httpconf.list.php:165
-#: include/views/configuration.item.list.php:241
-#: include/views/configuration.triggers.list.php:328
+#: include/views/configuration.item.list.php:242
+#: include/views/configuration.triggers.list.php:329
 msgid "Enable"
 msgstr "Activare"
 
@@ -5768,7 +5768,7 @@ msgstr "Activare grupuri selectate?"
 msgid "Enable selected hosts?"
 msgstr "Activare servere selectate?"
 
-#: include/views/configuration.item.list.php:241
+#: include/views/configuration.item.list.php:242
 msgid "Enable selected items?"
 msgstr "Activare itemi selectați?"
 
@@ -5776,7 +5776,7 @@ msgstr "Activare itemi selectați?"
 msgid "Enable selected media types?"
 msgstr "Activare elemente de tip media selectate?"
 
-#: include/views/configuration.triggers.list.php:328
+#: include/views/configuration.triggers.list.php:329
 msgid "Enable selected triggers?"
 msgstr "Activare triggeri selectați?"
 
@@ -5832,11 +5832,11 @@ msgstr "Activat"
 #: app/views/administration.proxy.list.php:66
 #: include/views/configuration.host.edit.php:821
 #: include/views/configuration.host.massupdate.php:299
-#: include/views/configuration.host.prototype.edit.php:421
+#: include/views/configuration.host.prototype.edit.php:422
 msgid "Encryption"
 msgstr ""
 
-#: app/views/popup.preproctestedit.view.php:99
+#: app/views/popup.preproctestedit.view.php:100
 msgid "End of line sequence"
 msgstr ""
 
@@ -6049,7 +6049,7 @@ msgstr "Export în CSV"
 #: include/views/administration.general.iconmap.edit.php:55
 #: include/views/administration.general.regularexpressions.edit.php:50
 #: include/views/administration.general.regularexpressions.edit.php:128
-#: include/views/configuration.item.list.php:139
+#: include/views/configuration.item.list.php:140
 #: include/views/configuration.trigger.prototype.edit.php:162
 #: include/views/configuration.trigger.prototype.edit.php:173
 #: include/views/configuration.trigger.prototype.edit.php:272
@@ -6059,7 +6059,7 @@ msgstr "Export în CSV"
 #: include/views/configuration.triggers.edit.php:194
 #: include/views/configuration.triggers.edit.php:296
 #: include/views/configuration.triggers.edit.php:391
-#: include/views/configuration.triggers.list.php:198
+#: include/views/configuration.triggers.list.php:199
 #: include/views/js/configuration.triggers.edit.js.php:21
 #: trigger_prototypes.php:38 trigger_prototypes.php:49 triggers.php:46
 #: triggers.php:57
@@ -6858,7 +6858,7 @@ msgstr "Nume grup"
 msgid "Group prototype cannot be based on a discovered host group \"%1$s\"."
 msgstr "Grupul prototip nu se poate baza pe un grup server detectat \"%1$s\"."
 
-#: include/views/configuration.host.prototype.edit.php:217
+#: include/views/configuration.host.prototype.edit.php:218
 msgid "Group prototypes"
 msgstr "Prototipuri grup"
 
@@ -6873,8 +6873,8 @@ msgstr "Grupare după"
 #: include/views/administration.users.edit.php:80
 #: include/views/administration.users.list.php:87
 #: include/views/configuration.host.edit.php:73
-#: include/views/configuration.host.prototype.edit.php:183
-#: include/views/configuration.host.prototype.edit.php:219
+#: include/views/configuration.host.prototype.edit.php:184
+#: include/views/configuration.host.prototype.edit.php:220
 #: include/views/configuration.template.edit.php:89
 #: include/views/conf.import.php:28
 msgid "Groups"
@@ -7032,14 +7032,14 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:56
 #: include/forms.inc.php:438 include/forms.inc.php:872
 #: include/views/administration.general.housekeeper.edit.php:117
-#: include/views/configuration.item.list.php:65
+#: include/views/configuration.item.list.php:66
 #: include/views/configuration.item.prototype.list.php:55 items.php:304
 #: jsLoader.php:258 latest.php:407 latest.php:544 latest.php:696
 msgid "History"
 msgstr "Istoric"
 
 #: httpconf.php:189 httpconf.php:196 httpconf.php:497 httpconf.php:509
-#: items.php:972 items.php:979 items.php:1376 items.php:1388
+#: items.php:973 items.php:980 items.php:1377 items.php:1389
 msgid "History cleared"
 msgstr "Istoric șters"
 
@@ -7111,8 +7111,8 @@ msgstr "Aliniere orizontală"
 #: include/views/configuration.host.prototype.edit.php:169
 #: include/views/configuration.httpconf.list.php:49
 #: include/views/configuration.httpconf.list.php:86
-#: include/views/configuration.item.list.php:60
-#: include/views/configuration.triggers.list.php:196
+#: include/views/configuration.item.list.php:61
+#: include/views/configuration.triggers.list.php:197
 #: include/views/inventory.host.list.php:64
 #: include/views/inventory.host.view.php:150
 #: include/views/inventory.host.view.php:172
@@ -7124,7 +7124,7 @@ msgstr "Aliniere orizontală"
 #: include/views/monitoring.screen.constructor.edit.php:524
 #: include/views/monitoring.screen.php:78
 #: include/views/monitoring.slides.php:75
-#: include/views/reports.toptriggers.php:79 items.php:972 items.php:1375
+#: include/views/reports.toptriggers.php:79 items.php:973 items.php:1376
 #: jsLoader.php:168 latest.php:404 latest.php:421 queue.php:263
 #: report2.php:408 report2.php:430
 #, fuzzy
@@ -7548,7 +7548,7 @@ msgstr ""
 #: include/views/configuration.action.edit.php:2156
 #: include/views/configuration.host.edit.php:671
 #: include/views/configuration.host.massupdate.php:296
-#: include/views/configuration.host.prototype.edit.php:342
+#: include/views/configuration.host.prototype.edit.php:343
 msgid "IPMI"
 msgstr "IPMI"
 
@@ -7755,6 +7755,7 @@ msgid "Inaccessible graph"
 msgstr ""
 
 #: app/controllers/CControllerDashboardWidgetEdit.php:239
+#: host_prototypes.php:354
 msgid "Inaccessible group"
 msgstr ""
 
@@ -8676,6 +8677,7 @@ msgstr ""
 msgid "Incorrect value \"%1$s\" in field \"%2$s\" for media type \"%3$s\"."
 msgstr ""
 
+#: app/controllers/CControllerPopupPreprocTestSend.php:219
 #: include/classes/validators/CNewValidator.php:117
 #: include/classes/validators/CNewValidator.php:130
 #: include/classes/validators/CNewValidator.php:143
@@ -8692,11 +8694,11 @@ msgstr ""
 #: app/controllers/CControllerPopupHttpStep.php:98
 #: app/controllers/CControllerPopupMedia.php:94
 #: app/controllers/CControllerPopupMedia.php:105
-#: app/controllers/CControllerPopupPreprocTestSend.php:71
-#: app/controllers/CControllerPopupPreprocTestSend.php:79
-#: app/controllers/CControllerPopupPreprocTestSend.php:84
-#: app/controllers/CControllerPopupPreprocTestSend.php:89
-#: app/controllers/CControllerPopupPreprocTestSend.php:94 correlation.php:227
+#: app/controllers/CControllerPopupPreprocTestSend.php:78
+#: app/controllers/CControllerPopupPreprocTestSend.php:86
+#: app/controllers/CControllerPopupPreprocTestSend.php:91
+#: app/controllers/CControllerPopupPreprocTestSend.php:96
+#: app/controllers/CControllerPopupPreprocTestSend.php:101 correlation.php:227
 #: correlation.php:237 correlation.php:243 correlation.php:263
 #: correlation.php:267 correlation.php:280
 #: include/classes/api/services/CAction.php:1741
@@ -8909,12 +8911,12 @@ msgstr "Indoneză (id_ID)"
 #: include/views/configuration.hostgroups.list.php:61
 #: include/views/configuration.host.list.php:184
 #: include/views/configuration.httpconf.list.php:96
-#: include/views/configuration.item.list.php:70
+#: include/views/configuration.item.list.php:71
 #: include/views/configuration.trigger.prototype.edit.php:175
 #: include/views/configuration.trigger.prototype.edit.php:369
 #: include/views/configuration.triggers.edit.php:196
 #: include/views/configuration.triggers.edit.php:393
-#: include/views/configuration.triggers.list.php:200 latest.php:414
+#: include/views/configuration.triggers.list.php:201 latest.php:414
 msgid "Info"
 msgstr "Info"
 
@@ -9059,7 +9061,7 @@ msgstr "Internet Explorer"
 #: include/views/configuration.host.discovery.list.php:57
 #: include/views/configuration.httpconf.list.php:90
 #: include/views/configuration.item.edit.php:686
-#: include/views/configuration.item.list.php:64
+#: include/views/configuration.item.list.php:65
 #: include/views/configuration.item.massupdate.php:341
 #: include/views/configuration.item.prototype.edit.php:614
 #: include/views/configuration.item.prototype.list.php:54
@@ -9155,8 +9157,8 @@ msgstr ""
 #: disc_prototypes.php:404 disc_prototypes.php:409 disc_prototypes.php:422
 #: disc_prototypes.php:754 disc_prototypes.php:759 disc_prototypes.php:772
 #: host_discovery.php:332 host_discovery.php:337 host_discovery.php:350
-#: items.php:583 items.php:588 items.php:601 items.php:1005 items.php:1010
-#: items.php:1023
+#: items.php:584 items.php:589 items.php:602 items.php:1006 items.php:1011
+#: items.php:1024
 #, c-format
 msgid "Invalid interval \"%1$s\"."
 msgstr ""
@@ -9367,7 +9369,7 @@ msgstr "Numele \"%s\" este invalid. Caracterele permise: \"a-z\" și \".\"."
 
 #: include/menu.inc.php:124 include/views/configuration.host.edit.php:772
 #: include/views/configuration.host.massupdate.php:298
-#: include/views/configuration.host.prototype.edit.php:372
+#: include/views/configuration.host.prototype.edit.php:373
 msgid "Inventory"
 msgstr "Inventar"
 
@@ -9396,7 +9398,7 @@ msgstr "Problemă"
 #: app/views/administration.proxy.edit.php:111
 #: include/views/configuration.host.edit.php:812
 #: include/views/configuration.host.massupdate.php:275
-#: include/views/configuration.host.prototype.edit.php:410
+#: include/views/configuration.host.prototype.edit.php:411
 msgid "Issuer"
 msgstr ""
 
@@ -9422,8 +9424,8 @@ msgstr "Italiană (it)"
 #: include/views/configuration.item.massupdate.php:576
 #: include/views/monitoring.screen.constructor.edit.php:258
 #: include/views/monitoring.screen.constructor.edit.php:427
-#: include/views/monitoring.screen.constructor.edit.php:787 items.php:971
-#: items.php:1375
+#: include/views/monitoring.screen.constructor.edit.php:787 items.php:972
+#: items.php:1376
 msgid "Item"
 msgstr "Item"
 
@@ -9469,11 +9471,11 @@ msgstr "Itemul \"%1$s\" pe \"%2$s\": aplicația \"%3$s\" nu există."
 msgid "Item \"%1$s:%2$s\" has invalid port: \"%3$s\"."
 msgstr "Itemul \"%1$s:%2$s\" are un port invalid: \"%3$s\"."
 
-#: items.php:930
+#: items.php:931
 msgid "Item added"
 msgstr "Item adăugat"
 
-#: items.php:1343
+#: items.php:1344
 msgid "Item copied"
 msgid_plural "Items copied"
 msgstr[0] ""
@@ -9484,18 +9486,18 @@ msgstr[2] ""
 msgid "Item count"
 msgstr "Numărătoare item"
 
-#: items.php:531
+#: items.php:532
 msgid "Item deleted"
 msgstr "Item șters"
 
-#: applications.php:171 items.php:1301
+#: applications.php:171 items.php:1302
 msgid "Item disabled"
 msgid_plural "Items disabled"
 msgstr[0] "Element dezactivat"
 msgstr[1] "Elemente dezactivate"
 msgstr[2] "Elemente dezactivate"
 
-#: applications.php:170 items.php:1300
+#: applications.php:170 items.php:1301
 msgid "Item enabled"
 msgid_plural "Items enabled"
 msgstr[0] "Item activat"
@@ -9575,7 +9577,7 @@ msgstr "Prototipuri item șterse"
 msgid "Item prototypes updated"
 msgstr ""
 
-#: items.php:933
+#: items.php:934
 msgid "Item updated"
 msgstr "Item actualizat"
 
@@ -9657,11 +9659,11 @@ msgstr "Item cu cheia \"%1$s\" deja există pe \"%2$s\"."
 #: include/views/configuration.template.list.php:137
 #: include/views/configuration.template.list.php:239
 #: include/views/conf.import.php:34 include/views/inventory.host.view.php:155
-#: include/views/inventory.host.view.php:174 items.php:1727 queue.php:109
+#: include/views/inventory.host.view.php:174 items.php:1728 queue.php:109
 msgid "Items"
 msgstr "Itemi"
 
-#: items.php:1398
+#: items.php:1399
 msgid "Items deleted"
 msgstr "Itemi ștersi"
 
@@ -9673,7 +9675,7 @@ msgstr "Lista itemi"
 msgid "Items location"
 msgstr ""
 
-#: items.php:1280
+#: items.php:1281
 msgid "Items updated"
 msgstr "Itemi actualizați"
 
@@ -9757,7 +9759,7 @@ msgid "Japanese (ja_JP)"
 msgstr "Japoneză (ja_JP)"
 
 #: include/forms.inc.php:1498 include/items.inc.php:1754
-#: include/views/js/item.preprocessing.js.php:195
+#: include/views/js/item.preprocessing.js.php:197
 msgid "JavaScript"
 msgstr ""
 
@@ -9790,7 +9792,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:67
 #: include/views/configuration.host.discovery.list.php:56
 #: include/views/configuration.item.edit.php:106
-#: include/views/configuration.item.list.php:63
+#: include/views/configuration.item.list.php:64
 #: include/views/configuration.item.prototype.edit.php:92
 #: include/views/configuration.item.prototype.list.php:53
 #: include/views/js/configuration.discovery.edit.js.php:79 items.php:49
@@ -9847,7 +9849,7 @@ msgstr "Autentificare LDAP reusită "
 msgid "LDAP settings"
 msgstr ""
 
-#: app/views/popup.preproctestedit.view.php:101
+#: app/views/popup.preproctestedit.view.php:102
 msgid "LF"
 msgstr ""
 
@@ -10080,7 +10082,7 @@ msgid "Link indicators"
 msgstr "Indicatori de legătură"
 
 #: include/views/configuration.host.edit.php:613
-#: include/views/configuration.host.prototype.edit.php:313
+#: include/views/configuration.host.prototype.edit.php:314
 #: include/views/configuration.template.edit.php:413
 msgid "Link new templates"
 msgstr "Leagă noi șabloane"
@@ -10116,8 +10118,8 @@ msgstr ""
 
 #: include/views/configuration.host.edit.php:583
 #: include/views/configuration.host.edit.php:642
-#: include/views/configuration.host.prototype.edit.php:244
-#: include/views/configuration.host.prototype.edit.php:283
+#: include/views/configuration.host.prototype.edit.php:245
+#: include/views/configuration.host.prototype.edit.php:284
 #: include/views/configuration.template.edit.php:382
 #: include/views/configuration.template.edit.php:419
 #: include/views/configuration.template.list.php:81
@@ -10330,11 +10332,11 @@ msgstr "Macro-ul \"%1$s\" nu este unic."
 msgid "Macro with hostmacroid \"%1$s\" does not exist."
 msgstr "Nu există macro cu hostmacroid \"%1$s\"."
 
-#: app/views/popup.preproctestedit.view.php:108 include/html.inc.php:768
+#: app/views/popup.preproctestedit.view.php:109 include/html.inc.php:768
 #: include/views/administration.general.macros.edit.php:25
 #: include/views/administration.general.macros.edit.php:80
 #: include/views/configuration.host.edit.php:706
-#: include/views/configuration.host.prototype.edit.php:359
+#: include/views/configuration.host.prototype.edit.php:360
 #: include/views/configuration.template.edit.php:445
 msgid "Macros"
 msgstr "Macro-uri"
@@ -10439,7 +10441,7 @@ msgstr "Lipsește parametrul obligatoriu."
 #: include/views/configuration.action.edit.php:1074
 #: include/views/configuration.host.edit.php:713
 #: include/views/configuration.host.massupdate.php:195
-#: include/views/configuration.host.prototype.edit.php:366
+#: include/views/configuration.host.prototype.edit.php:367
 msgid "Manual"
 msgstr "Manual"
 
@@ -10570,11 +10572,11 @@ msgstr "Mască"
 
 #: include/classes/screens/CScreenProblem.php:1111
 #: include/views/configuration.host.list.php:431
-#: include/views/configuration.item.list.php:248
+#: include/views/configuration.item.list.php:249
 #: include/views/configuration.item.prototype.list.php:174
 #: include/views/configuration.template.list.php:282
 #: include/views/configuration.trigger.prototype.list.php:162
-#: include/views/configuration.triggers.list.php:331
+#: include/views/configuration.triggers.list.php:332
 msgid "Mass update"
 msgstr "Masă zctualizată"
 
@@ -11043,7 +11045,7 @@ msgstr ""
 #: app/views/popup.httpstep.php:40 app/views/popup.httpstep.php:65
 #: app/views/popup.httpstep.php:91 app/views/popup.httpstep.php:115
 #: app/views/popup.httpstep.php:134
-#: app/views/popup.preproctestedit.view.php:52
+#: app/views/popup.preproctestedit.view.php:53
 #: app/views/popup.triggerwizard.php:68 correlation.php:35
 #: disc_prototypes.php:42 graphs.php:44 host_discovery.php:48 httpconf.php:42
 #: include/classes/screens/CScreenHttpTest.php:116
@@ -11087,8 +11089,8 @@ msgstr ""
 #: include/views/configuration.host.list.php:102
 #: include/views/configuration.host.list.php:172
 #: include/views/configuration.host.massupdate.php:216
-#: include/views/configuration.host.prototype.edit.php:227
-#: include/views/configuration.host.prototype.edit.php:255
+#: include/views/configuration.host.prototype.edit.php:228
+#: include/views/configuration.host.prototype.edit.php:256
 #: include/views/configuration.host.prototype.list.php:53
 #: include/views/configuration.httpconf.edit.php:59
 #: include/views/configuration.httpconf.edit.php:119
@@ -11098,8 +11100,8 @@ msgstr ""
 #: include/views/configuration.item.edit.php:63
 #: include/views/configuration.item.edit.php:144
 #: include/views/configuration.item.edit.php:236
-#: include/views/configuration.item.list.php:61
-#: include/views/configuration.item.list.php:139
+#: include/views/configuration.item.list.php:62
+#: include/views/configuration.item.list.php:140
 #: include/views/configuration.item.massupdate.php:152
 #: include/views/configuration.item.prototype.edit.php:49
 #: include/views/configuration.item.prototype.edit.php:129
@@ -11123,7 +11125,7 @@ msgstr ""
 #: include/views/configuration.triggers.edit.php:77
 #: include/views/configuration.triggers.edit.php:563
 #: include/views/configuration.triggers.list.php:58
-#: include/views/configuration.triggers.list.php:197
+#: include/views/configuration.triggers.list.php:198
 #: include/views/configuration.triggers.massupdate.php:86
 #: include/views/configuration.triggers.massupdate.php:98
 #: include/views/inventory.host.list.php:66
@@ -11474,8 +11476,8 @@ msgstr "Nicio regulă de detecție IDs dată."
 #: include/views/configuration.host.edit.php:788
 #: include/views/configuration.host.massupdate.php:251
 #: include/views/configuration.host.massupdate.php:259
-#: include/views/configuration.host.prototype.edit.php:378
-#: include/views/configuration.host.prototype.edit.php:388
+#: include/views/configuration.host.prototype.edit.php:379
+#: include/views/configuration.host.prototype.edit.php:389
 msgid "No encryption"
 msgstr ""
 
@@ -11768,7 +11770,7 @@ msgstr "Nicio permisiune de acces la sistem."
 #: include/classes/helpers/CMapHelper.php:81
 #: include/classes/screens/CScreenHistory.php:139
 #: include/classes/screens/CScreenHttpTestDetails.php:46
-#: include/func.inc.php:1767 items.php:1503 items.php:1700 services.php:84
+#: include/func.inc.php:1767 items.php:1504 items.php:1701 services.php:84
 msgid "No permissions to referred object or it does not exist!"
 msgstr "Nicio permisiune la obiectul menționat sau acesta nu există!"
 
@@ -11814,11 +11816,11 @@ msgstr "Niciun ecran adăugat."
 msgid "No script specified for action operation command."
 msgstr "Nu a fost specificat niciun script pentru comanda de acțiune a operațiunii."
 
-#: triggers.php:597
+#: triggers.php:598
 msgid "No target selected"
 msgstr "Nu a fost selectată nicio țintă"
 
-#: graphs.php:391 items.php:1348
+#: graphs.php:391 items.php:1349
 msgid "No target selected."
 msgstr "Nu a fost selectată nicio țintă."
 
@@ -11831,7 +11833,7 @@ msgstr "Niciun trigger cu triggerid \"%1$s\"."
 msgid "No triggers defined."
 msgstr "Niciun trigger definit."
 
-#: app/views/popup.preproctestedit.view.js.php:130
+#: app/views/popup.preproctestedit.view.js.php:38
 msgid "No value"
 msgstr ""
 
@@ -11970,7 +11972,7 @@ msgstr "Noiembrie"
 msgid "Number of CPUs. Returns integer"
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:939
+#: include/classes/items/CHelpItems.php:959
 msgid "Number of enabled items on the host."
 msgstr ""
 
@@ -11982,25 +11984,25 @@ msgstr ""
 msgid "Number of items (enabled/disabled/not supported)"
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:963
+#: include/classes/items/CHelpItems.php:983
 msgid "Number of items in Zabbix database."
 msgstr "Număr de itemuri in baza de date Zabbix."
 
-#: include/classes/items/CHelpItems.php:983
+#: include/classes/items/CHelpItems.php:1003
 msgid "Number of items in proxy history that are not yet sent to the server"
 msgstr "Număr de itemuri în istoricul proxy care nu au fost încă trimise către server"
 
-#: include/classes/items/CHelpItems.php:987
+#: include/classes/items/CHelpItems.php:1007
 msgid "Number of items in the queue which are delayed by from to to seconds, inclusive."
 msgstr "Număr de itemi in coadă care sunt întârziați de la pâna la secunde, inclusiv."
 
 #: include/classes/items/CHelpItems.php:349
 #: include/classes/items/CHelpItems.php:659
-#: include/classes/items/CHelpItems.php:1003
+#: include/classes/items/CHelpItems.php:1023
 msgid "Number of items in the queue which are delayed in Zabbix server or proxy by \"from\" till \"to\" seconds, inclusive."
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:959
+#: include/classes/items/CHelpItems.php:979
 msgid "Number of monitored hosts"
 msgstr "Număr de servere monitorizate"
 
@@ -12017,15 +12019,15 @@ msgstr ""
 msgid "Number of problems and expand most critical one"
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:743
+#: include/classes/items/CHelpItems.php:763
 msgid "Number of processor cores on VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Numărul miezului procesorului pe VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor nume server"
 
-#: include/classes/items/CHelpItems.php:747
+#: include/classes/items/CHelpItems.php:767
 msgid "Number of processor threads on VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Număr threaduri procesor pe VMware hypervisor, <url> - VMware service URL, <uuid> - nume server VMware hypervisor "
 
-#: include/classes/items/CHelpItems.php:811
+#: include/classes/items/CHelpItems.php:831
 msgid "Number of processors on VMware virtual machine, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Numărul de procesoare pe mașina virtuală VMware, <url> - VMware service URL, <uuid> - VMware numne server mașină virtuală"
 
@@ -12050,15 +12052,15 @@ msgstr "Număr de pași"
 msgid "Number of triggers (enabled/disabled [problem/ok])"
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:1015
+#: include/classes/items/CHelpItems.php:1035
 msgid "Number of triggers in Zabbix database."
 msgstr "Numărul triggerilor din baza de date Zabbix."
 
-#: include/classes/items/CHelpItems.php:967
+#: include/classes/items/CHelpItems.php:987
 msgid "Number of unsupported items in Zabbix database."
 msgstr "Numărul itemilor nesuportați în baza de date Zabbix."
 
-#: include/classes/items/CHelpItems.php:943
+#: include/classes/items/CHelpItems.php:963
 msgid "Number of unsupported items on the host."
 msgstr ""
 
@@ -12071,35 +12073,35 @@ msgstr "Numărul de utilizatori (online)"
 msgid "Number of users logged in. Returns integer"
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:919
+#: include/classes/items/CHelpItems.php:939
 msgid "Number of values stored in table HISTORY."
 msgstr "Numărul valorilor stocate în tabela HISTORY."
 
-#: include/classes/items/CHelpItems.php:923
+#: include/classes/items/CHelpItems.php:943
 msgid "Number of values stored in table HISTORY_LOG."
 msgstr "Numărul valorilor stocate în tabela HISTORY_LOG."
 
-#: include/classes/items/CHelpItems.php:927
+#: include/classes/items/CHelpItems.php:947
 msgid "Number of values stored in table HISTORY_STR."
 msgstr "Numărul valorilor stocate în tabela HISTORY_STR."
 
-#: include/classes/items/CHelpItems.php:931
+#: include/classes/items/CHelpItems.php:951
 msgid "Number of values stored in table HISTORY_TEXT."
 msgstr "Numărul valorilor stocate în tabela HISTORY_TEXT."
 
-#: include/classes/items/CHelpItems.php:935
+#: include/classes/items/CHelpItems.php:955
 msgid "Number of values stored in table HISTORY_UINT."
 msgstr "Numărul valorilor stocate în tabela HISTORY_UINT."
 
-#: include/classes/items/CHelpItems.php:1007
+#: include/classes/items/CHelpItems.php:1027
 msgid "Number of values stored in table TRENDS."
 msgstr "Numărul valorilor stocate în tabela TRENDS."
 
-#: include/classes/items/CHelpItems.php:1011
+#: include/classes/items/CHelpItems.php:1031
 msgid "Number of values stored in table TRENDS_UINT."
 msgstr "Numărul valorilor stocate în tabela TRENDS_UINT."
 
-#: include/classes/items/CHelpItems.php:799
+#: include/classes/items/CHelpItems.php:819
 msgid "Number of virtual machines on VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Numărul mașinilor virtuale pe VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor nume server"
 
@@ -12771,7 +12773,7 @@ msgid "POP"
 msgstr "POP"
 
 #: app/views/monitoring.widget.problems.view.php:93 chart5.php:199
-#: include/classes/graph/CSvgGraph.php:997
+#: include/classes/graph/CSvgGraph.php:972
 #: include/classes/screens/CScreenEvents.php:116
 #: include/classes/screens/CScreenProblem.php:991
 #: include/classes/screens/CScreenProblem.php:1150 include/events.inc.php:340
@@ -12801,16 +12803,16 @@ msgstr ""
 #: include/views/configuration.host.massupdate.php:252
 #: include/views/configuration.host.massupdate.php:260
 #: include/views/configuration.host.massupdate.php:270
-#: include/views/configuration.host.prototype.edit.php:379
-#: include/views/configuration.host.prototype.edit.php:392
-#: include/views/configuration.host.prototype.edit.php:405
+#: include/views/configuration.host.prototype.edit.php:380
+#: include/views/configuration.host.prototype.edit.php:393
+#: include/views/configuration.host.prototype.edit.php:406
 msgid "PSK"
 msgstr ""
 
 #: app/views/administration.proxy.edit.php:101
 #: include/views/configuration.host.edit.php:801
 #: include/views/configuration.host.massupdate.php:264
-#: include/views/configuration.host.prototype.edit.php:400
+#: include/views/configuration.host.prototype.edit.php:401
 msgid "PSK identity"
 msgstr ""
 
@@ -12905,7 +12907,7 @@ msgstr "Pasiv"
 #: include/views/configuration.host.discovery.edit.php:511
 #: include/views/configuration.host.edit.php:679
 #: include/views/configuration.host.massupdate.php:180
-#: include/views/configuration.host.prototype.edit.php:338
+#: include/views/configuration.host.prototype.edit.php:339
 #: include/views/configuration.httpconf.edit.php:166
 #: include/views/configuration.item.edit.php:334
 #: include/views/configuration.item.edit.php:585
@@ -13143,7 +13145,7 @@ msgstr ""
 msgid "Preprocessing"
 msgstr ""
 
-#: app/views/popup.preproctestedit.view.php:114
+#: app/views/popup.preproctestedit.view.php:115
 #: include/views/configuration.host.discovery.edit.php:777
 #: include/views/configuration.item.edit.php:919
 #: include/views/configuration.item.massupdate.php:324
@@ -13152,12 +13154,12 @@ msgstr ""
 msgid "Preprocessing steps"
 msgstr ""
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:71
-#: app/controllers/CControllerPopupPreprocTestSend.php:79
-#: app/controllers/CControllerPopupPreprocTestSend.php:84
-#: app/controllers/CControllerPopupPreprocTestSend.php:89
-#: app/controllers/CControllerPopupPreprocTestSend.php:94
-#: app/views/popup.preproctestedit.view.php:92
+#: app/controllers/CControllerPopupPreprocTestSend.php:78
+#: app/controllers/CControllerPopupPreprocTestSend.php:86
+#: app/controllers/CControllerPopupPreprocTestSend.php:91
+#: app/controllers/CControllerPopupPreprocTestSend.php:96
+#: app/controllers/CControllerPopupPreprocTestSend.php:101
+#: app/views/popup.preproctestedit.view.php:93
 msgid "Prev. time"
 msgstr ""
 
@@ -13172,7 +13174,8 @@ msgstr "Previzualizare"
 msgid "Previous month"
 msgstr ""
 
-#: app/views/popup.preproctestedit.view.php:87
+#: app/controllers/CControllerPopupPreprocTestSend.php:219
+#: app/views/popup.preproctestedit.view.php:88
 msgid "Previous value"
 msgstr ""
 
@@ -13250,7 +13253,7 @@ msgstr "Fișier cheie privată"
 
 #: include/views/configuration.host.edit.php:674
 #: include/views/configuration.host.massupdate.php:166
-#: include/views/configuration.host.prototype.edit.php:331
+#: include/views/configuration.host.prototype.edit.php:332
 msgid "Privilege level"
 msgstr "Nivel privilegiat"
 
@@ -13266,10 +13269,10 @@ msgstr "Nivel privilegiat"
 #: include/classes/widgets/forms/CWidgetFormProblems.php:198
 #: include/classes/widgets/forms/CWidgetFormProblems.php:199
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:364
-#: include/views/configuration.item.list.php:167
+#: include/views/configuration.item.list.php:168
 #: include/views/configuration.trigger.prototype.list.php:129
 #: include/views/configuration.triggers.list.php:85
-#: include/views/configuration.triggers.list.php:294
+#: include/views/configuration.triggers.list.php:295
 #: include/views/js/monitoring.sysmaps.js.php:221
 msgid "Problem"
 msgstr "Problemă"
@@ -13492,7 +13495,7 @@ msgid "Queue of items to be updated"
 msgstr ""
 
 #: app/views/monitoring.widget.problems.view.php:79
-#: include/classes/graph/CSvgGraph.php:993
+#: include/classes/graph/CSvgGraph.php:968
 #: include/classes/screens/CScreenEvents.php:121
 #: include/classes/screens/CScreenProblem.php:977
 #: include/classes/screens/CScreenProblem.php:1138 include/events.inc.php:345
@@ -13587,9 +13590,9 @@ msgstr "Destinatar (descrescător)"
 
 #: include/classes/screens/CScreenProblem.php:1048
 #: include/views/administration.users.edit.php:377
-#: include/views/configuration.item.list.php:168
+#: include/views/configuration.item.list.php:169
 #: include/views/configuration.trigger.prototype.list.php:130
-#: include/views/configuration.triggers.list.php:295
+#: include/views/configuration.triggers.list.php:296
 msgid "Recovery"
 msgstr "Recuperare"
 
@@ -13907,7 +13910,7 @@ msgstr ""
 msgid "Request body type"
 msgstr ""
 
-#: host_discovery.php:305 host_discovery.php:634 items.php:947 items.php:1410
+#: host_discovery.php:305 host_discovery.php:634 items.php:948 items.php:1411
 msgid "Request sent successfully"
 msgstr ""
 
@@ -13930,7 +13933,7 @@ msgstr "Permisiuni server necesare"
 msgid "Required performance (vps)"
 msgstr "Performanță necesară (vps)"
 
-#: include/classes/items/CHelpItems.php:995
+#: include/classes/items/CHelpItems.php:1015
 msgid "Required performance of the Zabbix server, in new values per second expected."
 msgstr "Performanță necesară a serverului Zabbix, în noile valori pe secundă așteptate."
 
@@ -14024,7 +14027,8 @@ msgstr "Cod de răspuns"
 msgid "Response time"
 msgstr "Timp de răspuns"
 
-#: app/views/popup.preproctestedit.view.php:53
+#: app/views/popup.preproctestedit.view.php:54
+#: app/views/popup.preproctestedit.view.php:123
 #: app/views/popup.testtriggerexpr.php:48
 #: app/views/popup.testtriggerexpr.php:94 app/views/popup.triggerexpr.php:160
 #: include/classes/debug/CProfiler.php:183
@@ -14032,6 +14036,11 @@ msgstr "Timp de răspuns"
 #: include/views/administration.general.regularexpressions.edit.php:128
 msgid "Result"
 msgstr "Rezultat"
+
+#: app/controllers/CControllerPopupPreprocTestSend.php:224
+#, c-format
+msgid "Result converted to %1$s"
+msgstr ""
 
 #: include/regexp.inc.php:226 include/views/js/adm.regexprs.edit.js.php:149
 msgid "Result is FALSE"
@@ -14061,15 +14070,15 @@ msgstr ""
 msgid "Retry"
 msgstr "Reîncearcă"
 
-#: include/classes/items/CHelpItems.php:1055
+#: include/classes/items/CHelpItems.php:1075
 msgid "Return a JSON object describing the MBean objects or their attributes. Can be used for LLD."
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:1041
+#: include/classes/items/CHelpItems.php:1061
 msgid "Return first column of the first row of the SQL query result."
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:1051
+#: include/classes/items/CHelpItems.php:1071
 msgid "Return value of an attribute of MBean object."
 msgstr ""
 
@@ -14079,23 +14088,23 @@ msgstr "Redă răspuns la ping ICMP în secunde. Exemplu: 0.02"
 
 #: include/classes/items/CHelpItems.php:345
 #: include/classes/items/CHelpItems.php:655
-#: include/classes/items/CHelpItems.php:999
+#: include/classes/items/CHelpItems.php:1019
 msgid "Returns a JSON object containing Zabbix server or proxy internal metrics."
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:951
+#: include/classes/items/CHelpItems.php:971
 msgid "Returns a JSON object describing the host network interfaces configured in Zabbix. Can be used for LLD."
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:955
+#: include/classes/items/CHelpItems.php:975
 msgid "Returns availability of a particular type of checks on the host. Value of this item corresponds to availability icons in the host list. Valid types are: agent, snmp, ipmi, jmx."
 msgstr "Redă valabilitatera unor tipuri personalizate de verificări ale serverului. Vlaorea acestui item corespunde la valabilitatea iconițelor din lista serverului. Tipurile valabile sunt: agent, snmp, ipmi, jmx."
 
-#: include/classes/items/CHelpItems.php:947
+#: include/classes/items/CHelpItems.php:967
 msgid "Returns current maintenance status of the host."
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:971
+#: include/classes/items/CHelpItems.php:991
 msgid "Returns information associated with Zabbix Java gateway. Valid params are: ping, version."
 msgstr "Redă informații asociate cu portul Java Zabbix. Parametri valabili sunt: ping, version."
 
@@ -14950,7 +14959,8 @@ msgstr "Sesiune terminată, relogare, va rog."
 msgid "Set custom time period"
 msgstr ""
 
-#: app/views/popup.preproctestedit.view.js.php:116 include/forms.inc.php:1558
+#: app/controllers/CControllerPopupPreprocTestSend.php:231
+#: app/views/popup.preproctestedit.view.js.php:159 include/forms.inc.php:1558
 #: include/views/js/item.preprocessing.js.php:39
 msgid "Set error to"
 msgstr ""
@@ -14959,7 +14969,7 @@ msgstr ""
 msgid "Set host inventory mode"
 msgstr ""
 
-#: app/views/popup.preproctestedit.view.js.php:110 include/forms.inc.php:1557
+#: app/views/popup.preproctestedit.view.js.php:153 include/forms.inc.php:1557
 #: include/views/js/item.preprocessing.js.php:38
 msgid "Set value to"
 msgstr ""
@@ -14992,13 +15002,13 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormProblems.php:197
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:351
 #: include/events.inc.php:167 include/triggers.inc.php:1214
-#: include/views/configuration.item.list.php:139
+#: include/views/configuration.item.list.php:140
 #: include/views/configuration.trigger.prototype.edit.php:65
 #: include/views/configuration.trigger.prototype.list.php:50
 #: include/views/configuration.trigger.prototype.massupdate.php:46
 #: include/views/configuration.triggers.edit.php:92
 #: include/views/configuration.triggers.list.php:61
-#: include/views/configuration.triggers.list.php:194
+#: include/views/configuration.triggers.list.php:195
 #: include/views/configuration.triggers.massupdate.php:48
 #: include/views/reports.toptriggers.php:66
 #: include/views/reports.toptriggers.php:79
@@ -15434,7 +15444,7 @@ msgstr "Începe la"
 msgid "Starting TLS failed."
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:915
+#: include/classes/items/CHelpItems.php:935
 msgid "Startup time of Zabbix server, Unix timestamp."
 msgstr "Timp de început a serverului Zabbix, Unix timestamp."
 
@@ -15485,11 +15495,11 @@ msgstr ""
 #: include/views/configuration.host.massupdate.php:103
 #: include/views/configuration.httpconf.list.php:27
 #: include/views/configuration.httpconf.list.php:95
-#: include/views/configuration.item.list.php:69
-#: include/views/configuration.item.list.php:139
+#: include/views/configuration.item.list.php:70
+#: include/views/configuration.item.list.php:140
 #: include/views/configuration.item.massupdate.php:423
 #: include/views/configuration.triggers.list.php:74
-#: include/views/configuration.triggers.list.php:199 srv_status.php:146
+#: include/views/configuration.triggers.list.php:200 srv_status.php:146
 msgid "Status"
 msgstr "Stare"
 
@@ -15607,7 +15617,7 @@ msgstr "Subiect"
 #: app/views/administration.proxy.edit.php:114
 #: include/views/configuration.host.edit.php:816
 #: include/views/configuration.host.massupdate.php:278
-#: include/views/configuration.host.prototype.edit.php:415
+#: include/views/configuration.host.prototype.edit.php:416
 msgctxt "encryption certificate"
 msgid "Subject"
 msgstr ""
@@ -15820,7 +15830,7 @@ msgstr ""
 #: include/views/configuration.trigger.prototype.massupdate.php:180
 #: include/views/configuration.triggers.edit.php:555
 #: include/views/configuration.triggers.list.php:135
-#: include/views/configuration.triggers.list.php:201
+#: include/views/configuration.triggers.list.php:202
 #: include/views/configuration.triggers.massupdate.php:76
 #: include/views/configuration.triggers.massupdate.php:160
 msgid "Tags"
@@ -15969,7 +15979,7 @@ msgstr "Șablon cu același nume vizibil \"%s\" există deja."
 #: include/views/configuration.host.list.php:108
 #: include/views/configuration.host.list.php:180
 #: include/views/configuration.host.massupdate.php:295
-#: include/views/configuration.host.prototype.edit.php:320
+#: include/views/configuration.host.prototype.edit.php:321
 #: include/views/configuration.host.prototype.list.php:54
 #: include/views/configuration.template.edit.php:22
 #: include/views/configuration.template.list.php:101
@@ -15991,7 +16001,7 @@ msgstr ""
 #: app/views/administration.authentication.edit.php:151
 #: app/views/administration.mediatype.list.php:134
 #: app/views/popup.mediatypetest.edit.php:61
-#: app/views/popup.preproctestedit.view.php:176
+#: app/views/popup.preproctestedit.view.php:185
 #: app/views/popup.testtriggerexpr.php:116 include/forms.inc.php:1598
 #: include/views/administration.general.regularexpressions.edit.php:139
 #: include/views/configuration.trigger.prototype.edit.php:239
@@ -16022,7 +16032,7 @@ msgstr "Date test"
 msgid "Test expressions"
 msgstr "Expresii test"
 
-#: app/controllers/CControllerPopupPreprocTestEdit.php:109
+#: app/controllers/CControllerPopupPreprocTestEdit.php:110
 msgid "Test item preprocessing"
 msgstr ""
 
@@ -16224,7 +16234,7 @@ msgstr "Până când"
 #: app/controllers/CControllerPopupTriggerExpr.php:174
 #: app/views/monitoring.widget.actionlog.view.php:29
 #: app/views/monitoring.widget.problems.view.php:36
-#: app/views/popup.preproctestedit.view.php:80
+#: app/views/popup.preproctestedit.view.php:81
 #: app/views/popup.triggerexpr.php:128 app/views/popup.triggerexpr.php:132
 #: include/actions.inc.php:1775 include/actions.inc.php:1829
 #: include/actions.inc.php:1910 include/actions.inc.php:1994
@@ -16255,11 +16265,11 @@ msgstr "Timp (ascendent)"
 msgid "Time (descending)"
 msgstr "Timp (descendent)"
 
-#: include/classes/items/CHelpItems.php:975
+#: include/classes/items/CHelpItems.php:995
 msgid "Time a particular Zabbix process or a group of processes (identified by <type> and <mode>) spent in <state> in percentage."
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:979
+#: include/classes/items/CHelpItems.php:999
 msgid "Time of proxy last access. Name - proxy name. Param - lastaccess. Unix timestamp."
 msgstr "Timpul ultimei accesări proxy. Nume - nume proxy. Parametrul - ultima accesare. Unix timestamp."
 
@@ -16364,7 +16374,7 @@ msgstr ""
 msgid "Transaction has not been closed. Aborting..."
 msgstr "Tranzacția nu s-a închis. Renunțare ..."
 
-#: include/classes/items/CHelpItems.php:1045
+#: include/classes/items/CHelpItems.php:1065
 msgid "Transform SQL query result into a JSON object for low-level discovery."
 msgstr ""
 
@@ -16414,7 +16424,7 @@ msgstr "Perioadă trend a stocării"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:57
 #: include/forms.inc.php:457 include/forms.inc.php:877
 #: include/views/administration.general.housekeeper.edit.php:135
-#: include/views/configuration.item.list.php:66
+#: include/views/configuration.item.list.php:67
 #: include/views/configuration.item.prototype.list.php:56 items.php:305
 #: latest.php:408
 msgid "Trends"
@@ -16453,7 +16463,7 @@ msgstr ""
 msgid "Trigger \"%1$s\" depends on trigger \"%2$s\", which does not exist."
 msgstr "Triggerul \"%1$s\" depinde de trigger \"%2$s\", care nu există."
 
-#: triggers.php:295
+#: triggers.php:296
 msgid "Trigger added"
 msgstr "Trigger adăugat"
 
@@ -16461,7 +16471,7 @@ msgstr "Trigger adăugat"
 msgid "Trigger cannot be dependent on a trigger that is inherited from it."
 msgstr "Triggerul nu poate depinde de un trigger care este moștenit de la el."
 
-#: triggers.php:592
+#: triggers.php:593
 msgid "Trigger copied"
 msgid_plural "Triggers copied"
 msgstr[0] ""
@@ -16472,7 +16482,7 @@ msgstr[2] ""
 msgid "Trigger data storage period"
 msgstr ""
 
-#: triggers.php:408
+#: triggers.php:409
 msgid "Trigger deleted"
 msgstr "Trigger șters"
 
@@ -16484,7 +16494,7 @@ msgstr ""
 msgid "Trigger details"
 msgstr ""
 
-#: triggers.php:542
+#: triggers.php:543
 msgid "Trigger disabled"
 msgid_plural "Triggers disabled"
 msgstr[0] "Trigger dezactivat"
@@ -16497,7 +16507,7 @@ msgstr[2] "Triggeri dezactivați"
 msgid "Trigger displaying options"
 msgstr "Opțiuni de afișare trigger"
 
-#: triggers.php:541
+#: triggers.php:542
 msgid "Trigger enabled"
 msgid_plural "Triggers enabled"
 msgstr[0] "Trigger activat"
@@ -16644,7 +16654,7 @@ msgstr ""
 msgid "Trigger tags"
 msgstr ""
 
-#: triggers.php:393 triggers.php:511
+#: triggers.php:394 triggers.php:512
 msgid "Trigger updated"
 msgstr "Trigger actualizat"
 
@@ -16658,8 +16668,8 @@ msgstr "Trigger actualizat"
 #: include/views/configuration.host.edit.php:355
 #: include/views/configuration.host.list.php:175
 #: include/views/configuration.host.list.php:394
-#: include/views/configuration.item.list.php:62
-#: include/views/configuration.item.list.php:186
+#: include/views/configuration.item.list.php:63
+#: include/views/configuration.item.list.php:187
 #: include/views/configuration.template.edit.php:175
 #: include/views/configuration.template.list.php:138
 #: include/views/configuration.template.list.php:247
@@ -16670,11 +16680,11 @@ msgstr "Trigger actualizat"
 #: include/views/inventory.host.view.php:175
 #: include/views/js/monitoring.sysmaps.js.php:143
 #: include/views/monitoring.overview.items.php:56
-#: include/views/monitoring.overview.triggers.php:93 triggers.php:662
+#: include/views/monitoring.overview.triggers.php:93 triggers.php:663
 msgid "Triggers"
 msgstr "Triggeri"
 
-#: triggers.php:607
+#: triggers.php:608
 msgid "Triggers deleted"
 msgstr "Triggeri șterși"
 
@@ -16742,7 +16752,7 @@ msgstr ""
 #: include/views/configuration.item.edit.php:73
 #: include/views/configuration.item.edit.php:78
 #: include/views/configuration.item.edit.php:686
-#: include/views/configuration.item.list.php:67
+#: include/views/configuration.item.list.php:68
 #: include/views/configuration.item.massupdate.php:41
 #: include/views/configuration.item.massupdate.php:340
 #: include/views/configuration.item.prototype.edit.php:59
@@ -17011,7 +17021,7 @@ msgid "Unlimited"
 msgstr ""
 
 #: include/views/configuration.host.edit.php:564
-#: include/views/configuration.host.prototype.edit.php:272
+#: include/views/configuration.host.prototype.edit.php:273
 #: include/views/configuration.template.edit.php:363
 msgid "Unlink"
 msgstr "Dezleagă"
@@ -17137,7 +17147,7 @@ msgstr "Sus"
 #: include/views/configuration.host.edit.php:829
 #: include/views/configuration.hostgroups.edit.php:57
 #: include/views/configuration.host.massupdate.php:308
-#: include/views/configuration.host.prototype.edit.php:434
+#: include/views/configuration.host.prototype.edit.php:435
 #: include/views/configuration.httpconf.edit.php:253
 #: include/views/configuration.item.edit.php:952
 #: include/views/configuration.item.massupdate.php:579
@@ -17224,7 +17234,7 @@ msgstr "Hărți de nivel superior"
 msgid "Uptime"
 msgstr "Timp de la pornire"
 
-#: include/classes/items/CHelpItems.php:1019
+#: include/classes/items/CHelpItems.php:1039
 msgid "Uptime of Zabbix server process in seconds."
 msgstr "Timpul de la pornire al procesului serverului Zabbix în secunde."
 
@@ -17504,7 +17514,7 @@ msgstr ""
 #: app/views/administration.mediatype.list.php:94 disc_prototypes.php:259
 #: host_discovery.php:208 include/views/configuration.host.edit.php:675
 #: include/views/configuration.host.massupdate.php:173
-#: include/views/configuration.host.prototype.edit.php:335
+#: include/views/configuration.host.prototype.edit.php:336
 #: include/views/general.login.php:60 index.php:33 items.php:254
 msgid "Username"
 msgstr "Nume utilizator"
@@ -17529,7 +17539,7 @@ msgstr "Utilizatori"
 msgid "Users unblocked"
 msgstr "Utilizatori deblocați"
 
-#: include/classes/items/CHelpItems.php:1031
+#: include/classes/items/CHelpItems.php:1051
 msgid "VMware cache statistics. Valid modes are: total, free, pfree, used and pused."
 msgstr "Statistici cache VMware. Moduri valide sunt: total, free, pfree, used and pused."
 
@@ -17537,87 +17547,104 @@ msgstr "Statistici cache VMware. Moduri valide sunt: total, free, pfree, used an
 msgid "VMware cluster status, <url> - VMware service URL, <name> - VMware cluster name"
 msgstr "Stare cluster VMware, <url> - VMware service URL, <name> - VMware cluster name"
 
-#: include/classes/items/CHelpItems.php:723
+#: include/classes/items/CHelpItems.php:715
+#: include/classes/items/CHelpItems.php:739
 msgid "VMware datastore capacity statistics in bytes or in percentage from total. Returns integer for bytes; float for percentage"
+msgstr ""
+
+#: include/classes/items/CHelpItems.php:723
+msgid "VMware datastore hypervisors list, <url> - VMware service URL, <datastore> - datastore name"
+msgstr ""
+
+#: include/classes/items/CHelpItems.php:711
+msgid "VMware datastore read statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
+msgstr ""
+
+#: include/classes/items/CHelpItems.php:719
+msgid "VMware datastore write statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
 msgstr ""
 
 #: include/classes/items/CHelpItems.php:703
 msgid "VMware event log, <url> - VMware service URL, <mode> - all (default), skip - skip processing of older data"
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:759
+#: include/classes/items/CHelpItems.php:779
 msgid "VMware hypervisor BIOS uuid, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Hipervizor VMware  BIOS uuid, <url> - VMware serviciu URL, <uuid> - VMware nume server hipervizor"
 
-#: include/classes/items/CHelpItems.php:767
+#: include/classes/items/CHelpItems.php:787
 msgid "VMware hypervisor ballooned memory size, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Mărime memorie umflată hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:711
+#: include/classes/items/CHelpItems.php:727
 msgid "VMware hypervisor cluster name, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Nume cluster hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:719
+#: include/classes/items/CHelpItems.php:735
 msgid "VMware hypervisor datastore read statistics, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <datastore> - datastore name, <mode> - latency"
 msgstr "Statistici citire stocare date hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware, <datastore> - nume stocare date, <mode> - latență"
 
-#: include/classes/items/CHelpItems.php:727
+#: include/classes/items/CHelpItems.php:743
 msgid "VMware hypervisor datastore write statistics, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <datastore> - datastore name, <mode> - latency"
 msgstr "Statistici scriere stocare date hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware, <datastore> - nume stocare date, <mode> - latență"
 
-#: include/classes/items/CHelpItems.php:755
+#: include/classes/items/CHelpItems.php:747
+msgid "VMware hypervisor datastores list, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
+msgstr ""
+
+#: include/classes/items/CHelpItems.php:775
 msgid "VMware hypervisor model, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Model hipervizor VMware, <url> - VMware serviciu URL, <uuid> - VMware nume server hipervizor"
 
-#: include/classes/items/CHelpItems.php:731
+#: include/classes/items/CHelpItems.php:751
 msgid "VMware hypervisor name, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Nume hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:775
+#: include/classes/items/CHelpItems.php:795
 msgid "VMware hypervisor network input statistics, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <mode> - bps"
 msgstr "Statistici intrări în rețea hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware, <mode> - bps"
 
-#: include/classes/items/CHelpItems.php:779
+#: include/classes/items/CHelpItems.php:799
 msgid "VMware hypervisor network output statistics, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <mode> - bps"
 msgstr "Statistici ieșiri din rețea hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware, <mode> - bps"
 
-#: include/classes/items/CHelpItems.php:783
+#: include/classes/items/CHelpItems.php:803
 msgid "VMware hypervisor performance counter, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <path> - performance counter path, <instance> - performance counter instance"
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:735
+#: include/classes/items/CHelpItems.php:755
 msgid "VMware hypervisor processor frequency, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Frecvență procesor hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:739
+#: include/classes/items/CHelpItems.php:759
 msgid "VMware hypervisor processor model, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Model procesor hipervizor VMware, <url> - VMware serviciu URL, <uuid> - VMware nume server hipervizor"
 
-#: include/classes/items/CHelpItems.php:715
+#: include/classes/items/CHelpItems.php:731
 msgid "VMware hypervisor processor usage in Hz, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Folosire procesor în HZ hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:787
+#: include/classes/items/CHelpItems.php:807
 msgid "VMware hypervisor status, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Stare hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:751
+#: include/classes/items/CHelpItems.php:771
 msgid "VMware hypervisor total memory size, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Mărime memorie totală hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:791
+#: include/classes/items/CHelpItems.php:811
 msgid "VMware hypervisor uptime, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Perioadă de funcționare neîntreruptă hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:771
+#: include/classes/items/CHelpItems.php:791
 msgid "VMware hypervisor used memory size, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Mărime memorie folosită hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:763
+#: include/classes/items/CHelpItems.php:783
 msgid "VMware hypervisor vendor name, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Nume vânzător hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:795
+#: include/classes/items/CHelpItems.php:815
 msgid "VMware hypervisor version, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "Versiune hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
@@ -17625,99 +17652,99 @@ msgstr "Versiune hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume s
 msgid "VMware service full name, <url> - VMware service URL"
 msgstr "Nume întreg serviciu VMware, <url> - serviciu URL VMware"
 
-#: include/classes/items/CHelpItems.php:803
+#: include/classes/items/CHelpItems.php:823
 msgid "VMware service version, <url> - VMware service URL"
 msgstr "Versiune serviciu VMware, <url> - serviciu URL VMware"
 
-#: include/classes/items/CHelpItems.php:827
+#: include/classes/items/CHelpItems.php:847
 msgid "VMware virtual machine ballooned memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Mărime memorie umflată mașină hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:875
+#: include/classes/items/CHelpItems.php:895
 msgid "VMware virtual machine committed storage space, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Spațiu de stocare angajat mașină virtuală hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:831
+#: include/classes/items/CHelpItems.php:851
 msgid "VMware virtual machine compressed memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Mărime memorie comprimată mașină virtuală, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:891
+#: include/classes/items/CHelpItems.php:911
 msgid "VMware virtual machine disk device read statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance, <mode> - bps/ops - bytes/operations per second"
 msgstr "Statistici de citire echipamente disc mașină virtuală, <url> - serviciu URL VMware, <uuid> - nume server mașină virtuală VMware, <instance> - exemplu echipament disc, <mode> - bps/ops - bytes/operațiune pe secundă"
 
-#: include/classes/items/CHelpItems.php:895
+#: include/classes/items/CHelpItems.php:915
 msgid "VMware virtual machine disk device write statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance, <mode> - bps/ops - bytes/operations per second"
 msgstr "Statistici de scriere echipamente disc mașină virtuală, <url> - serviciu URL VMware, <uuid> - nume server mașină virtuală VMware, <instance> - exemplu echipament disc, <mode> - bps/ops - bytes/operațiune pe secundă"
 
-#: include/classes/items/CHelpItems.php:899
+#: include/classes/items/CHelpItems.php:919
 msgid "VMware virtual machine file system statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <fsname> - file system name, <mode> - total/free/used/pfree/pused"
 msgstr "Statistici sistem fișiere mașină virtuală VMware, <url> - serviciu URL VMware, <uuid> - nume server mașină virtuală VMware, <fsname> - nume sistem fișiere, <mode> - total/free/used/pfree/pused"
 
-#: include/classes/items/CHelpItems.php:847
+#: include/classes/items/CHelpItems.php:867
 msgid "VMware virtual machine guest memory usage, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Folosire memorie oaspete mașină virtuală VMware, <url> - serviciu URL VMware, <uuid> - nume server mașină virtual VMware"
 
-#: include/classes/items/CHelpItems.php:851
+#: include/classes/items/CHelpItems.php:871
 msgid "VMware virtual machine host memory usage, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Folosire memorie gazdă mașină virtuală VMware, <url> - serviciu URL VMware, <uuid> - nume server mașină virtual VMware"
 
-#: include/classes/items/CHelpItems.php:823
+#: include/classes/items/CHelpItems.php:843
 msgid "VMware virtual machine hypervisor name, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Folosire memorie gazdă mașină virtuală VMware, <url> - serviciu URL VMware, <uuid> - nume server mașină virtual VMware"
 
-#: include/classes/items/CHelpItems.php:807
+#: include/classes/items/CHelpItems.php:827
 msgid "VMware virtual machine name, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Nume mașină virtuală VMware, <url> - serviciu URL VMware, <uuid> - nume server mașină virtual VMware"
 
-#: include/classes/items/CHelpItems.php:859
+#: include/classes/items/CHelpItems.php:879
 msgid "VMware virtual machine network interface input statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - network interface instance, <mode> - bps/pps - bytes/packets per second"
 msgstr "Statistici de intrare interfață de rețea mașină virtuală, <url> - serviciu URL VMware, <uuid> - nume server mașină virtuală VMware, <instance> - exemplu interfață rețea, <mode> - bps/ops - bytes/pachete pe secundă"
 
-#: include/classes/items/CHelpItems.php:863
+#: include/classes/items/CHelpItems.php:883
 msgid "VMware virtual machine network interface output statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - network interface instance, <mode> - bps/pps - bytes/packets per second"
 msgstr "Statistici de ieșire interfață de rețea mașină virtuală, <url> - serviciu URL VMware, <uuid> - nume server mașină virtuală VMware, <instance> - exemplu interfață rețea, <mode> - bps/ops - bytes/pachete pe secundă"
 
-#: include/classes/items/CHelpItems.php:867
+#: include/classes/items/CHelpItems.php:887
 msgid "VMware virtual machine performance counter, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <path> - performance counter path, <instance> - performance counter instance"
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:871
+#: include/classes/items/CHelpItems.php:891
 msgid "VMware virtual machine power state, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Stare putere mașină virtuală VMware, <url> - serviciu URL VMware, <uuid> - nume server mașină virtual VMware"
 
-#: include/classes/items/CHelpItems.php:835
+#: include/classes/items/CHelpItems.php:855
 msgid "VMware virtual machine private memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Mărime memorie privată mașină virtuală, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:815
+#: include/classes/items/CHelpItems.php:835
 msgid "VMware virtual machine processor ready time ms, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr ""
 
-#: include/classes/items/CHelpItems.php:819
+#: include/classes/items/CHelpItems.php:839
 msgid "VMware virtual machine processor usage in Hz, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Folosire procesor mașină virtuală VMware în Hz, <url> - serviciu URL VMware, <uuid> - nume server mașină virtual VMware"
 
-#: include/classes/items/CHelpItems.php:839
+#: include/classes/items/CHelpItems.php:859
 msgid "VMware virtual machine shared memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Mărime memorie în share mașină virtuală, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:843
+#: include/classes/items/CHelpItems.php:863
 msgid "VMware virtual machine swapped memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Mărime memorie în swap mașină virtuală, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:855
+#: include/classes/items/CHelpItems.php:875
 msgid "VMware virtual machine total memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Mărime memorie totală mașină virtuală, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:879
+#: include/classes/items/CHelpItems.php:899
 msgid "VMware virtual machine uncommitted storage space, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Spațiu de stocare neangajat mașină virtuală hipervizor VMware, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:883
+#: include/classes/items/CHelpItems.php:903
 msgid "VMware virtual machine unshared storage space, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Spaîiu de depozitare fără share mașină virtuală, <url> - serviciu URL VMware, <uuid> - nume server hipervizor VMware"
 
-#: include/classes/items/CHelpItems.php:887
+#: include/classes/items/CHelpItems.php:907
 msgid "VMware virtual machine uptime, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "Perioadă de funcționare fără oprire mașină virtuală VMware, <url> - serviciu URL VMware, <uuid> - nume server mașină virtual VMware"
 
@@ -17730,7 +17757,7 @@ msgstr ""
 #: app/views/monitoring.widget.plaintext.view.php:46
 #: app/views/popup.httpstep.php:65 app/views/popup.httpstep.php:91
 #: app/views/popup.httpstep.php:115 app/views/popup.httpstep.php:134
-#: app/views/popup.preproctestedit.view.php:74
+#: app/views/popup.preproctestedit.view.php:75
 #: app/views/popup.testtriggerexpr.php:30 include/blocks.inc.php:427
 #: include/classes/graphdraw/CPieGraphDraw.php:343
 #: include/classes/screens/CScreenEvents.php:32
@@ -17754,7 +17781,7 @@ msgstr ""
 #: include/views/configuration.template.massupdate.php:148
 #: include/views/configuration.trigger.prototype.massupdate.php:84
 #: include/views/configuration.triggers.list.php:81
-#: include/views/configuration.triggers.list.php:195
+#: include/views/configuration.triggers.list.php:196
 #: include/views/configuration.triggers.massupdate.php:86
 #: include/views/hostmacros.php:50 include/views/monitoring.history.php:145
 #: include/views/monitoring.history.php:262
@@ -17811,11 +17838,11 @@ msgstr "Valoarea \"%2$s\" din \"%1$s\" are prea multe cifre înaintea punctului 
 msgid "Value \"%2$s\" of \"%1$s\" is too long: it cannot have more than %3$s digits before the decimal point and more than %4$s digits after the decimal point."
 msgstr "Valoarea \"%2$s\" din \"%1$s\" este prea lungă: nu pate avea mai mult de %3$s cifre înainte de punctul zecimal și mai mult de %4$s cifre după punctul zecimal."
 
-#: include/classes/items/CHelpItems.php:1027
+#: include/classes/items/CHelpItems.php:1047
 msgid "Value cache effectiveness. Valid parameters are: requests, hits and misses."
 msgstr "Valoare eficacitate cache. Parametri valizi sunt: cereri, lovituri, eșuări."
 
-#: include/classes/items/CHelpItems.php:1023
+#: include/classes/items/CHelpItems.php:1043
 msgid "Value cache statistics. Valid modes are: total, free, pfree, used and pused."
 msgstr "Statistici valori cache. Moduri valide sunt: total, free, pfree, used and pused."
 
@@ -18113,7 +18140,7 @@ msgstr "Fără probleme"
 msgid "Without triggers"
 msgstr "Fără triggeri"
 
-#: include/views/configuration.item.list.php:59
+#: include/views/configuration.item.list.php:60
 #: include/views/configuration.item.prototype.list.php:51
 msgid "Wizard"
 msgstr "Expert"
@@ -18220,7 +18247,7 @@ msgstr ""
 msgid "XML is empty"
 msgstr ""
 
-#: include/forms.inc.php:1462 include/views/js/item.preprocessing.js.php:155
+#: include/forms.inc.php:1462 include/views/js/item.preprocessing.js.php:157
 msgid "XPath"
 msgstr ""
 
@@ -18583,8 +18610,8 @@ msgstr ""
 msgid "a numeric value is expected"
 msgstr ""
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:72
-#: app/controllers/CControllerPopupPreprocTestSend.php:85
+#: app/controllers/CControllerPopupPreprocTestSend.php:79
+#: app/controllers/CControllerPopupPreprocTestSend.php:92
 msgid "a relative time is expected"
 msgstr ""
 
@@ -18959,7 +18986,7 @@ msgstr ""
 msgid "equals"
 msgstr ""
 
-#: include/views/js/item.preprocessing.js.php:360
+#: include/views/js/item.preprocessing.js.php:362
 msgid "error message"
 msgstr ""
 
@@ -19172,7 +19199,7 @@ msgstr ""
 msgid "left"
 msgstr ""
 
-#: include/forms.inc.php:1456 include/views/js/item.preprocessing.js.php:148
+#: include/forms.inc.php:1456 include/views/js/item.preprocessing.js.php:150
 msgid "list of characters"
 msgstr ""
 
@@ -19238,7 +19265,7 @@ msgstr ""
 #: include/graphs.inc.php:80
 #: include/views/js/configuration.graph.edit.js.php:51
 #: include/views/js/configuration.graph.edit.js.php:59
-#: include/views/js/item.preprocessing.js.php:177
+#: include/views/js/item.preprocessing.js.php:179
 msgid "max"
 msgstr "max"
 
@@ -19263,7 +19290,7 @@ msgstr ""
 #: include/graphs.inc.php:78
 #: include/views/js/configuration.graph.edit.js.php:49
 #: include/views/js/configuration.graph.edit.js.php:57
-#: include/views/js/item.preprocessing.js.php:176
+#: include/views/js/item.preprocessing.js.php:178
 msgid "min"
 msgstr "min"
 
@@ -19368,7 +19395,7 @@ msgstr "neselectat"
 msgid "now() - Number of seconds since the Epoch"
 msgstr ""
 
-#: include/forms.inc.php:1448 include/views/js/item.preprocessing.js.php:140
+#: include/forms.inc.php:1448 include/views/js/item.preprocessing.js.php:142
 msgid "number"
 msgstr ""
 
@@ -19426,7 +19453,7 @@ msgstr ""
 msgid "on"
 msgstr "pornit"
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:80
+#: app/controllers/CControllerPopupPreprocTestSend.php:87
 msgid "only one time unit is allowed"
 msgstr ""
 
@@ -19434,13 +19461,13 @@ msgstr ""
 msgid "other"
 msgstr "altul"
 
-#: include/forms.inc.php:1474 include/views/js/item.preprocessing.js.php:170
+#: include/forms.inc.php:1474 include/views/js/item.preprocessing.js.php:172
 msgid "output"
 msgstr ""
 
 #: include/forms.inc.php:1473 include/forms.inc.php:1487
-#: include/views/js/item.preprocessing.js.php:169
-#: include/views/js/item.preprocessing.js.php:184
+#: include/views/js/item.preprocessing.js.php:171
+#: include/views/js/item.preprocessing.js.php:186
 msgid "pattern"
 msgstr ""
 
@@ -19498,7 +19525,7 @@ msgctxt "second short"
 msgid "s"
 msgstr "s"
 
-#: include/forms.inc.php:1499 include/views/js/item.preprocessing.js.php:196
+#: include/forms.inc.php:1499 include/views/js/item.preprocessing.js.php:198
 msgid "script"
 msgstr ""
 
@@ -19511,7 +19538,7 @@ msgstr ""
 msgid "second parameter is expected"
 msgstr ""
 
-#: include/forms.inc.php:1492 include/views/js/item.preprocessing.js.php:190
+#: include/forms.inc.php:1492 include/views/js/item.preprocessing.js.php:192
 msgid "seconds"
 msgstr ""
 
@@ -19547,7 +19574,7 @@ msgstr "descriere scurtă"
 msgid "should be empty"
 msgstr ""
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:95
+#: app/controllers/CControllerPopupPreprocTestSend.php:102
 msgid "should be less than current time"
 msgstr ""
 
@@ -19733,7 +19760,7 @@ msgstr ""
 msgid "unknown"
 msgstr "necunoscut"
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:90
+#: app/controllers/CControllerPopupPreprocTestSend.php:97
 msgid "unsupported time suffix"
 msgstr ""
 
@@ -19743,9 +19770,9 @@ msgstr ""
 
 #: app/views/monitoring.problem.view.js.php:26
 #: app/views/monitoring.problem.view.php:244
-#: app/views/popup.preproctestedit.view.js.php:181
-#: app/views/popup.preproctestedit.view.js.php:192
-#: app/views/popup.preproctestedit.view.php:40
+#: app/views/popup.preproctestedit.view.js.php:209
+#: app/views/popup.preproctestedit.view.js.php:220
+#: app/views/popup.preproctestedit.view.php:41
 #: include/classes/widgets/CWidgetHelper.php:404
 #: include/classes/widgets/CWidgetHelper.php:449
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:174
@@ -19775,7 +19802,7 @@ msgstr ""
 #: include/views/js/configuration.template.list.js.php:11
 #: include/views/js/configuration.triggers.list.js.php:11
 #: include/views/js/hostmacros.js.php:11
-#: include/views/js/item.preprocessing.js.php:354
+#: include/views/js/item.preprocessing.js.php:356
 msgid "value"
 msgstr "valoare"
 

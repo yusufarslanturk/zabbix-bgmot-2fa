@@ -749,6 +749,7 @@ int	get_proxyconfig_data(zbx_uint64_t proxy_hostid, struct zbx_json *j, char **e
 	zbx_vector_uint64_create(&hosts);
 	zbx_vector_uint64_create(&httptests);
 
+	DBbegin();
 	get_proxy_monitored_hosts(proxy_hostid, &hosts);
 	get_proxy_monitored_httptests(proxy_hostid, &httptests);
 
@@ -766,6 +767,7 @@ int	get_proxyconfig_data(zbx_uint64_t proxy_hostid, struct zbx_json *j, char **e
 
 	ret = SUCCEED;
 out:
+	DBcommit();
 	zbx_vector_uint64_destroy(&httptests);
 	zbx_vector_uint64_destroy(&hosts);
 

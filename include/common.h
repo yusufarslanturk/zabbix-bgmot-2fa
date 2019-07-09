@@ -941,8 +941,6 @@ int	is_int_prefix(const char *c);
 int	is_uint_n_range(const char *str, size_t n, void *value, size_t size, zbx_uint64_t min, zbx_uint64_t max);
 int	is_hex_n_range(const char *str, size_t n, void *value, size_t size, zbx_uint64_t min, zbx_uint64_t max);
 
-unsigned char	zbx_time2bool(const char *value_raw);
-
 #define ZBX_SIZE_T_MAX	(~(size_t)0)
 
 #define is_ushort(str, value) \
@@ -1117,7 +1115,7 @@ int	is_ip(const char *ip);
 
 int	zbx_validate_hostname(const char *hostname);
 
-void	zbx_on_exit(void); /* calls exit() at the end! */
+void	zbx_on_exit(int ret); /* calls exit() at the end! */
 void	zbx_backtrace(void);
 
 int	int_in_list(char *list, int value);
@@ -1545,5 +1543,7 @@ char	*zbx_create_token(zbx_uint64_t seed);
 
 #define ZBX_PROBLEM_SUPPRESSED_FALSE	0
 #define ZBX_PROBLEM_SUPPRESSED_TRUE	1
+
+int	zbx_variant_to_value_type(zbx_variant_t *value, unsigned char value_type, char **errmsg);
 
 #endif
