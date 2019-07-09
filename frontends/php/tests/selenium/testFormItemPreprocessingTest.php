@@ -218,25 +218,23 @@ class testFormItemPreprocessingTest extends CWebTest {
 					],
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => 'expression', 'parameter_2' => 'test output'],
-						['type' => 'Trim', 'parameter_1' => '1a2b3c'],
-						['type' => 'Right trim', 'parameter_1' => 'abc'],
-						['type' => 'Left trim', 'parameter_1' => 'def'],
-						['type' => 'XML XPath', 'parameter_1' => 'path'],
-						['type' => 'JSONPath', 'parameter_1' => 'path'],
-						['type' => 'Custom multiplier', 'parameter_1' => '123'],
-						['type' => 'Boolean to decimal'],
-						['type' => 'Octal to decimal'],
-						['type' => 'Hexadecimal to decimal'],
-						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
-						['type' => 'In range', 'parameter_1' => '-5', 'parameter_2' => '9.5'],
-						['type' => 'Matches regular expression', 'parameter_1' => 'expression'],
-						['type' => 'Does not match regular expression', 'parameter_1' => 'expression'],
-						['type' => 'Check for error in JSON', 'parameter_1' => 'path'],
-						['type' => 'Check for error in XML', 'parameter_1' => 'path'],
-						['type' => 'Check for error using regular expression', 'parameter_1' => 'path', 'parameter_2' => 'output'],
-						['type' => 'Prometheus to JSON', 'parameter_1' => 'json']
+						['type' => 'Trim', 'parameter_1' => '1a2b3c']
 					],
 					'action' => 'Cancel'
+				]
+			],
+						[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test no previous value',
+						'Key' => 'item-preprocessing-test-no-prev-value'
+					],
+					'preprocessing' => [
+						['type' => 'Right trim', 'parameter_1' => 'abc'],
+						['type' => 'Left trim', 'parameter_1' => 'def']
+					],
+					'action' => 'Test'
 				]
 			],
 			[
@@ -348,6 +346,37 @@ class testFormItemPreprocessingTest extends CWebTest {
 						['type' => 'Check for error using regular expression', 'parameter_1' => '', 'parameter_2' => ''],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => ''],
 						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => '']
+					],
+					'error' => 'Incorrect value for field "params":'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test Validation Empty second step parameter',
+						'Key' => 'item-preprocessing-test-validation'
+					],
+					'preprocessing' => [
+						['type' => 'Regular expression', 'parameter_1' => 'expr', 'parameter_2' => 'output'],
+						['type' => 'Trim', 'parameter_1' => '']
+					],
+					'error' => 'Incorrect value for field "params":'
+				]
+			],
+						[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Preprocessing Test Validation Empty fifth step parameter',
+						'Key' => 'item-preprocessing-test-validation'
+					],
+					'preprocessing' => [
+						['type' => 'Right trim', 'parameter_1' => '1'],
+						['type' => 'Left trim', 'parameter_1' => '2'],
+						['type' => 'Custom multiplier', 'parameter_1' => '10'],
+						['type' => 'JavaScript', 'parameter_1' => 'Script'],
+						['type' => 'Check for error in XML', 'parameter_1' => '']
 					],
 					'error' => 'Incorrect value for field "params":'
 				]
