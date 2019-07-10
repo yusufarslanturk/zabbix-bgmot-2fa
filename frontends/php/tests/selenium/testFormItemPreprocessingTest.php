@@ -246,7 +246,8 @@ class testFormItemPreprocessingTest extends CWebTest {
 					],
 					'preprocessing' => [
 						['type' => 'Simple change'],
-						['type' => 'Discard unchanged']
+						['type' => 'Discard unchanged'],
+						['type' => 'In range', 'parameter_1' => '1', 'parameter_2' => ''],
 					],
 					'action' => 'Test'
 				]
@@ -395,7 +396,7 @@ class testFormItemPreprocessingTest extends CWebTest {
 		$form->fill($data['fields']);
 		$form->selectTab('Preprocessing');
 
-		foreach ($data['preprocessing'] as $i => $step) {
+		foreach ($data['preprocessing'] as $step) {
 			$this->addPreprocessingSteps([$step]);
 		}
 
@@ -416,18 +417,12 @@ class testFormItemPreprocessingTest extends CWebTest {
 				$time = $dialog->query('id:time')->one();
 				$this->assertTrue($time->getAttribute('readonly') !== null);
 
-				$types = [
-					'Discard unchanged with heartbeat',
-					'Simple change',
-					'Change per second',
-					'Discard unchanged'
-				];
-
 				$prev_value = $dialog->query('id:prev_value')->asMultiline()->one();
-				$this->assertTrue($prev_value->isEnabled(in_array($step['type'], $types)));
+				$this->assertTrue($prev_value->isEnabled($this->hasChangeSteps($data)));
 
 				$prev_time = $dialog->query('id:prev_time')->one();
-				$this->assertTrue($prev_time->isEnabled(in_array($step['type'], $types)));
+				$this->assertTrue($prev_time->isEnabled($this->hasChangeSteps($data)));
+
 
 				$radio = $form->getField('End of line sequence');
 				$this->assertTrue($radio->isEnabled());
@@ -442,41 +437,59 @@ class testFormItemPreprocessingTest extends CWebTest {
 		}
 	}
 
+	private function hasChangeSteps($data){
+		$types = [
+					'Discard unchanged with heartbeat',
+					'Simple change',
+					'Change per second',
+					'Discard unchanged'
+				];
+
+		foreach ($data['preprocessing'] as $step) {
+			if(in_array($step['type'], $types)){
+				return true;
+				break;
+			}
+		}
+		return false;
+	}
+
 	private function chooseDialogActions($data){
 		$dialog = $this->query('id:overlay_dialogue')->waitUntilPresent()->asOverlayDialog()->one()->waitUntilReady();
 		$form = $this->query('id:preprocessing-test-form')->waitUntilPresent()->asForm()->one();
-		if ($data['action'] === 'Test') {
+		switch ($data['action']) {
+				case 'Test':
+					$value_string = '123';
+					$prev_value_string = '100';
+					$prev_time_string  = 'now-1s';
 
-			$value_string = '123';
-			$prev_value_string = '100';
-			$prev_time_string  = 'now-1s';
+					$container_current = $form->getFieldContainer('Value');
+					$container_current->query('id:value')->asMultiline()->one()->fill($value_string);
 
-			$container_current = $form->getFieldContainer('Value');
-			$container_current->query('id:value')->asMultiline()->one()->fill($value_string);
+					$container_prev = $form->getFieldContainer('Previous value');
+					$prev_value = $container_prev->query('id:prev_value')->asMultiline()->one();
+					$prev_time = $container_prev->query('id:prev_time')->one();
 
-			$container_prev = $form->getFieldContainer('Previous value');
-			$prev_value = $container_prev->query('id:prev_value')->asMultiline()->one();
-			$prev_time = $container_prev->query('id:prev_time')->one();
+					if ($prev_value->isEnabled(true) && $prev_time->isEnabled(true)) {
+						$prev_value->fill($prev_value_string);
+						$prev_time->fill($prev_time_string);
+					}
+					$form->getField('End of line sequence')->fill('CRLF');
+					$form->submit();
 
-			if ($prev_value->isEnabled(true) && $prev_time->isEnabled(true)) {
-				$prev_value->fill($prev_value_string);
-				$prev_time->fill($prev_time_string);
-			}
-			$form->getField('End of line sequence')->fill('CRLF');
-			$form->submit();
+					// Check Zabbix server down message.
+					$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
+					$this->assertTrue($message->isBad());
+					$this->assertTrue($message->hasLine('Connection to Zabbix server "localhost" refused. Possible reasons:'));
+					$dialog->close();
+					break;
+				case 'Cancel':
+					$dialog->query('button:Cancel')->one()->click();
+					$dialog->waitUntilNotPresent();
+					break;
+				default:
+					$dialog->close();
 
-			// Check Zabbix server down message.
-			$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
-			$this->assertTrue($message->isBad());
-			$this->assertTrue($message->hasLine('Connection to Zabbix server "localhost" refused. Possible reasons:'));
-			$dialog->close();
-		}
-		elseif ($data['action'] === 'Cancel') {
-			$dialog->query('button:Cancel')->one()->click();
-			$dialog->waitUntilNotPresent();
-		}
-		else {
-			$dialog->close();
 		}
 	}
 }
