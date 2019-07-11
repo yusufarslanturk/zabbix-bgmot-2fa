@@ -31,6 +31,13 @@ class testFormItemPreprocessingTest extends CWebTest {
 
 	use PreprocessingTrait;
 
+	public $chage_types = [
+				'Discard unchanged with heartbeat',
+				'Simple change',
+				'Change per second',
+				'Discard unchanged'
+			];
+
 	public static function getTestSingleStepData() {
 		return [
 			[
@@ -147,63 +154,15 @@ class testFormItemPreprocessingTest extends CWebTest {
 	 * @dataProvider getTestSingleStepData
 	 */
 	public function testFormItemPreprocessingTest_TestSingleStep($data) {
-		$this->page->login()->open('items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID);
-		$this->query('button:Create item')->waitUntilPresent()->one()->click();
-
-		$form = $this->query('name:itemForm')->waitUntilPresent()->asForm()->one();
-		$form->fill($data['fields']);
-		$form->selectTab('Preprocessing');
+		$this->openPreprocessing($data);
 
 		foreach ($data['preprocessing'] as $i => $step) {
 			$this->addPreprocessingSteps([$step]);
-			$this->query('name:preprocessing['.$i.'][test]')->waitUntilPresent()->one()->click();
-			$dialog = $this->query('id:overlay_dialogue')->waitUntilPresent()->asOverlayDialog()->one()->waitUntilReady();
 
-			switch ($data['expected']) {
-				case TEST_BAD:
-					$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
-					$this->assertTrue($message->isBad());
+			$button = 'name:preprocessing['.$i.'][test]';
 
-					// Workaround for single step which has different message.
-					if ($step['type']=== 'Discard unchanged with heartbeat'){
-						$this->assertTrue($message->hasLine('Invalid parameter "params":'));
-					}
-					else {
-						$this->assertTrue($message->hasLine($data['error']));
-					}
-
-					$dialog->close();
-					break;
-
-				case TEST_GOOD:
-					$form = $this->query('id:preprocessing-test-form')->waitUntilPresent()->asForm()->one();
-					$this->assertEquals('Test item preprocessing', $dialog->getTitle());
-
-					$time = $dialog->query('id:time')->one();
-					$this->assertTrue($time->getAttribute('readonly') !== null);
-
-					$types = [
-						'Discard unchanged with heartbeat',
-						'Simple change',
-						'Change per second',
-						'Discard unchanged'
-					];
-
-					$prev_value = $dialog->query('id:prev_value')->asMultiline()->one();
-					$this->assertTrue($prev_value->isEnabled(in_array($step['type'], $types)));
-
-					$prev_time = $dialog->query('id:prev_time')->one();
-					$this->assertTrue($prev_time->isEnabled(in_array($step['type'], $types)));
-
-					$radio = $form->getField('End of line sequence');
-					$this->assertTrue($radio->isEnabled());
-
-					$table = $form->getField('Preprocessing steps')->asTable();
-					$this->assertEquals('1: '.$step['type'], $table->getRow(0)->getText());
-
-					$this->chooseDialogActions($data);
-					break;
-			}
+			$expression = in_array($step['type'], $this->chage_types);
+			$this->checkTestOverlay($data, $button, 'TestSingleStep', $step, $expression);
 		}
 	}
 
@@ -389,25 +348,42 @@ class testFormItemPreprocessingTest extends CWebTest {
 	 * @dataProvider getTestAllStepsData
 	 */
 	public function testFormItemPreprocessingTest_TestAllSteps($data) {
-		$this->page->login()->open('items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID);
-		$this->query('button:Create item')->waitUntilPresent()->one()->click();
-
-		$form = $this->query('name:itemForm')->waitUntilPresent()->asForm()->one();
-		$form->fill($data['fields']);
-		$form->selectTab('Preprocessing');
+		$this->openPreprocessing($data);
 
 		foreach ($data['preprocessing'] as $step) {
 			$this->addPreprocessingSteps([$step]);
 		}
 
-		$this->query('button:Test all steps')->waitUntilPresent()->one()->click();
+		$button = 'button:Test all steps';
+		$expression = $this->hasChangeSteps($data);
+		$this->checkTestOverlay($data, $button, 'TestAllSteps', $step, $expression);
+	}
+
+	private function openPreprocessing($data) {
+		$this->page->login()->open('items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID);
+		$this->query('button:Create item')->waitUntilPresent()->one()->click();
+		$form = $this->query('name:itemForm')->waitUntilPresent()->asForm()->one();
+		$form->fill($data['fields']);
+		$form->selectTab('Preprocessing');
+	}
+
+	private function checkTestOverlay($data, $button, $case, $step, $expression) {
+		$this->query($button)->waitUntilPresent()->one()->click();
 		$dialog = $this->query('id:overlay_dialogue')->waitUntilPresent()->asOverlayDialog()->one()->waitUntilReady();
 
 		switch ($data['expected']) {
 			case TEST_BAD:
 				$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
 				$this->assertTrue($message->isBad());
-				$this->assertTrue($message->hasLine($data['error']));
+
+				// Workaround for single step which has different message.
+				if ($step['type']=== 'Discard unchanged with heartbeat' && $case === 'TestSingleStep'){
+					$this->assertTrue($message->hasLine('Invalid parameter "params":'));
+				}
+				else {
+					$this->assertTrue($message->hasLine($data['error']));
+				}
+				$dialog->close();
 				break;
 
 			case TEST_GOOD:
@@ -418,18 +394,25 @@ class testFormItemPreprocessingTest extends CWebTest {
 				$this->assertTrue($time->getAttribute('readonly') !== null);
 
 				$prev_value = $dialog->query('id:prev_value')->asMultiline()->one();
-				$this->assertTrue($prev_value->isEnabled($this->hasChangeSteps($data)));
-
 				$prev_time = $dialog->query('id:prev_time')->one();
-				$this->assertTrue($prev_time->isEnabled($this->hasChangeSteps($data)));
 
+				$this->assertTrue($prev_value->isEnabled($expression));
+				$this->assertTrue($prev_time->isEnabled($expression));
 
 				$radio = $form->getField('End of line sequence');
 				$this->assertTrue($radio->isEnabled());
 
 				$table = $form->getField('Preprocessing steps')->asTable();
-				foreach ($data['preprocessing'] as $i => $step) {
-					$this->assertEquals(($i+1).': '.$step['type'], $table->getRow($i)->getText());
+
+				switch ($case) {
+					case 'TestSingleStep':
+					$this->assertEquals('1: '.$step['type'], $table->getRow(0)->getText());
+						break;
+					case 'TestAllSteps':
+					foreach ($data['preprocessing'] as $i => $step) {
+						$this->assertEquals(($i+1).': '.$step['type'], $table->getRow($i)->getText());
+					}
+						break;
 				}
 
 				$this->chooseDialogActions($data);
@@ -438,15 +421,8 @@ class testFormItemPreprocessingTest extends CWebTest {
 	}
 
 	private function hasChangeSteps($data){
-		$types = [
-					'Discard unchanged with heartbeat',
-					'Simple change',
-					'Change per second',
-					'Discard unchanged'
-				];
-
 		foreach ($data['preprocessing'] as $step) {
-			if(in_array($step['type'], $types)){
+			if(in_array($step['type'], $this->chage_types)){
 				return true;
 				break;
 			}
@@ -489,7 +465,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 					break;
 				default:
 					$dialog->close();
-
 		}
 	}
 }
