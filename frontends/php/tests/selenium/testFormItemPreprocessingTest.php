@@ -160,7 +160,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			$this->addPreprocessingSteps([$step]);
 
 			$button = 'name:preprocessing['.$i.'][test]';
-
 			$expression = in_array($step['type'], $this->chage_types);
 			$this->checkTestOverlay($data, $button, 'TestSingleStep', $step, $expression);
 		}
@@ -406,12 +405,12 @@ class testFormItemPreprocessingTest extends CWebTest {
 
 				switch ($case) {
 					case 'TestSingleStep':
-					$this->assertEquals('1: '.$step['type'], $table->getRow(0)->getText());
+						$this->assertEquals('1: '.$step['type'], $table->getRow(0)->getText());
 						break;
 					case 'TestAllSteps':
-					foreach ($data['preprocessing'] as $i => $step) {
-						$this->assertEquals(($i+1).': '.$step['type'], $table->getRow($i)->getText());
-					}
+						foreach ($data['preprocessing'] as $i => $step) {
+							$this->assertEquals(($i+1).': '.$step['type'], $table->getRow($i)->getText());
+						}
 						break;
 				}
 
@@ -420,9 +419,12 @@ class testFormItemPreprocessingTest extends CWebTest {
 		}
 	}
 
+	/**
+	 * Check if preprocessing steps contain Change or Throttling values.
+	 */
 	private function hasChangeSteps($data){
 		foreach ($data['preprocessing'] as $step) {
-			if(in_array($step['type'], $this->chage_types)){
+			if (in_array($step['type'], $this->chage_types)) {
 				return true;
 				break;
 			}
@@ -434,37 +436,39 @@ class testFormItemPreprocessingTest extends CWebTest {
 		$dialog = $this->query('id:overlay_dialogue')->waitUntilPresent()->asOverlayDialog()->one()->waitUntilReady();
 		$form = $this->query('id:preprocessing-test-form')->waitUntilPresent()->asForm()->one();
 		switch ($data['action']) {
-				case 'Test':
-					$value_string = '123';
-					$prev_value_string = '100';
-					$prev_time_string  = 'now-1s';
+			case 'Test':
+				$value_string = '123';
+				$prev_value_string = '100';
+				$prev_time_string  = 'now-1s';
 
-					$container_current = $form->getFieldContainer('Value');
-					$container_current->query('id:value')->asMultiline()->one()->fill($value_string);
+				$container_current = $form->getFieldContainer('Value');
+				$container_current->query('id:value')->asMultiline()->one()->fill($value_string);
 
-					$container_prev = $form->getFieldContainer('Previous value');
-					$prev_value = $container_prev->query('id:prev_value')->asMultiline()->one();
-					$prev_time = $container_prev->query('id:prev_time')->one();
+				$container_prev = $form->getFieldContainer('Previous value');
+				$prev_value = $container_prev->query('id:prev_value')->asMultiline()->one();
+				$prev_time = $container_prev->query('id:prev_time')->one();
 
-					if ($prev_value->isEnabled(true) && $prev_time->isEnabled(true)) {
-						$prev_value->fill($prev_value_string);
-						$prev_time->fill($prev_time_string);
-					}
-					$form->getField('End of line sequence')->fill('CRLF');
-					$form->submit();
+				if ($prev_value->isEnabled(true) && $prev_time->isEnabled(true)) {
+					$prev_value->fill($prev_value_string);
+					$prev_time->fill($prev_time_string);
+				}
+				$form->getField('End of line sequence')->fill('CRLF');
+				$form->submit();
 
-					// Check Zabbix server down message.
-					$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
-					$this->assertTrue($message->isBad());
-					$this->assertTrue($message->hasLine('Connection to Zabbix server "localhost" refused. Possible reasons:'));
-					$dialog->close();
-					break;
-				case 'Cancel':
-					$dialog->query('button:Cancel')->one()->click();
-					$dialog->waitUntilNotPresent();
-					break;
-				default:
-					$dialog->close();
+				// Check Zabbix server down message.
+				$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
+				$this->assertTrue($message->isBad());
+				$this->assertTrue($message->hasLine('Connection to Zabbix server "localhost" refused. Possible reasons:'));
+				$dialog->close();
+				break;
+
+			case 'Cancel':
+				$dialog->query('button:Cancel')->one()->click();
+				$dialog->waitUntilNotPresent();
+				break;
+
+			default:
+				$dialog->close();
 		}
 	}
 }
