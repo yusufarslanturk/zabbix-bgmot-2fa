@@ -2182,8 +2182,9 @@ class CMacrosResolver extends CMacrosResolverGeneral {
 
 						// Add host reference for macro without numeric index.
 						if (array_key_exists(1, $hosts_by_nr)) {
-							$hosts_by_nr[0] = $hosts_by_nr[1];
+							$hosts_by_nr[''] = $hosts_by_nr[1];
 						}
+						unset($hosts_by_nr[0]);
 					}
 					break;
 
