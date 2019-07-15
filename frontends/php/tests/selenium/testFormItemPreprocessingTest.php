@@ -43,10 +43,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test',
-						'Key' => 'item-preprocessing-test'
-					],
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => 'expression', 'parameter_2' => 'test output'],
 						['type' => 'Trim', 'parameter_1' => '1a2b3c'],
@@ -78,10 +74,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 						[
 				[
 					'expected' => TEST_GOOD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test success empty parameters',
-						'Key' => 'item-preprocessing-test-success-empty-params'
-					],
 					'preprocessing' => [
 						['type' => 'In range', 'parameter_1' => '1', 'parameter_2' => ''],
 						['type' => 'In range', 'parameter_1' => '', 'parameter_2' => '2'],
@@ -93,10 +85,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test empty parameters Validation',
-						'Key' => 'item-preprocessing-test-validation'
-					],
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => '', 'parameter_2' => ''],
 						['type' => 'Trim', 'parameter_1' => ''],
@@ -121,10 +109,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test Validation empty second parameter',
-						'Key' => 'item-preprocessing-test-validation-second-parameter'
-					],
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => '1', 'parameter_2' => ''],
 						['type' => 'Check for error using regular expression', 'parameter_1' => 'path', 'parameter_2' => '']
@@ -136,10 +120,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test Validation empty first parameter',
-						'Key' => 'item-preprocessing-test-validation-first-parameter'
-					],
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => '', 'parameter_2' => '1'],
 						['type' => 'Prometheus pattern', 'parameter_1' => '', 'parameter_2' => 'label']
@@ -167,10 +147,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test',
-						'Key' => 'item-preprocessing-test'
-					],
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => 'expression', 'parameter_2' => 'test output'],
 						['type' => 'Trim', 'parameter_1' => '1a2b3c']
@@ -181,10 +157,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 						[
 				[
 					'expected' => TEST_GOOD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test no previous value',
-						'Key' => 'item-preprocessing-test-no-prev-value'
-					],
 					'preprocessing' => [
 						['type' => 'Right trim', 'parameter_1' => 'abc'],
 						['type' => 'Left trim', 'parameter_1' => 'def']
@@ -195,10 +167,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test with previous value 1',
-						'Key' => 'item-preprocessing-test-prev-value-1'
-					],
 					'preprocessing' => [
 						['type' => 'Simple change'],
 						['type' => 'Discard unchanged'],
@@ -210,10 +178,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 						[
 				[
 					'expected' => TEST_GOOD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test with previous value 2',
-						'Key' => 'item-preprocessing-test-prev-value-2'
-					],
 					'preprocessing' => [
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
 						['type' => 'Change per second']
@@ -224,10 +188,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test success empty parameters',
-						'Key' => 'item-preprocessing-test-success-empty-params'
-					],
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => ''],
 						['type' => 'In range', 'parameter_1' => '1', 'parameter_2' => ''],
@@ -239,10 +199,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test Repeated Change steps',
-						'Key' => 'item-preprocessing-test-repeated-change'
-					],
 					'preprocessing' => [
 						['type' => 'Simple change'],
 						['type' => 'Change per second']
@@ -253,10 +209,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test Repeated Throttling steps',
-						'Key' => 'item-preprocessing-test-repeated-throttling'
-					],
 					'preprocessing' => [
 						['type' => 'Discard unchanged'],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1']
@@ -267,10 +219,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test Repeated Prometheus steps',
-						'Key' => 'item-preprocessing-test-repeated-throttling'
-					],
 					'preprocessing' => [
 						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system', 'parameter_2' => 'label_name'],
 						['type' => 'Prometheus to JSON', 'parameter_1' => '']
@@ -281,10 +229,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test Validation',
-						'Key' => 'item-preprocessing-test-validation'
-					],
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => '', 'parameter_2' => ''],
 						['type' => 'Trim', 'parameter_1' => ''],
@@ -309,10 +253,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test Validation Empty second step parameter',
-						'Key' => 'item-preprocessing-test-validation'
-					],
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => 'expr', 'parameter_2' => 'output'],
 						['type' => 'Trim', 'parameter_1' => '']
@@ -323,10 +263,6 @@ class testFormItemPreprocessingTest extends CWebTest {
 						[
 				[
 					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Item Preprocessing Test Validation Empty fifth step parameter',
-						'Key' => 'item-preprocessing-test-validation'
-					],
 					'preprocessing' => [
 						['type' => 'Right trim', 'parameter_1' => '1'],
 						['type' => 'Left trim', 'parameter_1' => '2'],
@@ -361,10 +297,8 @@ class testFormItemPreprocessingTest extends CWebTest {
 	}
 
 	private function openPreprocessing($data) {
-		$this->page->login()->open('items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID);
-		$this->query('button:Create item')->waitUntilPresent()->one()->click();
+		$this->page->login()->open('items.php?form=create&hostid='.self::HOST_ID);
 		$form = $this->query('name:itemForm')->waitUntilPresent()->asForm()->one();
-		$form->fill($data['fields']);
 		$form->selectTab('Preprocessing');
 	}
 
