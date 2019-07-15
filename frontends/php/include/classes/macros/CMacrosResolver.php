@@ -1676,10 +1676,7 @@ class CMacrosResolver extends CMacrosResolverGeneral {
 				'\)}{1})/Uux';
 
 		if (preg_match_all($pattern, $label, $matches) !== false && array_key_exists('macros', $matches)) {
-			/*
-			 * Macros with reference '0' are not supported. In case if macro reference is not used, $replaceHosts[1]
-			 * should be utilized which is equal to $replaceHosts[0] at this point.
-			 */
+			// $replaceHosts with key '0' is used for macros without reference.
 			if ($replaceHosts !== null && array_key_exists(0, $replaceHosts)) {
 				$replaceHosts[''] = $replaceHosts[0];
 				unset($replaceHosts[0]);
@@ -2205,7 +2202,7 @@ class CMacrosResolver extends CMacrosResolverGeneral {
 				case SYSMAP_ELEMENT_TYPE_HOST:
 					if (array_key_exists($elementid, $hosts)) {
 						$host = $hosts[$elementid];
-						$hosts_by_nr = ['' => $host];
+						$hosts_by_nr = [0 => $host];
 					}
 					break;
 			}
