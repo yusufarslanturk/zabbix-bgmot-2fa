@@ -1680,7 +1680,7 @@ class CMacrosResolver extends CMacrosResolverGeneral {
 			 * Macros with reference '0' are not supported. In case if macro reference is not used, $replaceHosts[1]
 			 * should be utilized which is equal to $replaceHosts[0] at this point.
 			 */
-			if (array_key_exists(0, $replaceHosts)) {
+			if ($replaceHosts !== null && array_key_exists(0, $replaceHosts)) {
 				$replaceHosts[''] = $replaceHosts[0];
 				unset($replaceHosts[0]);
 			}
