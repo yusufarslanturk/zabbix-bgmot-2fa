@@ -1419,7 +1419,12 @@ static int	jsonpath_extract_value(const struct zbx_json_parse *jp, const char *p
 		goto out;
 
 	if (NULL == zbx_json_decodevalue_dyn(jp_child.start, &data, &data_alloc, NULL))
-		goto out;
+	{
+		size_t	len = jp_child.end - jp_child.start + 2;
+
+		data = (char *)zbx_malloc(NULL, len);
+		zbx_strlcpy(data, jp_child.start, len);
+	}
 
 	zbx_variant_set_str(value, data);
 	ret = SUCCEED;
