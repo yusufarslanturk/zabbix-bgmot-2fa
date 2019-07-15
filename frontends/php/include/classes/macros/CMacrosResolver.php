@@ -1676,6 +1676,15 @@ class CMacrosResolver extends CMacrosResolverGeneral {
 				'\)}{1})/Uux';
 
 		if (preg_match_all($pattern, $label, $matches) !== false && array_key_exists('macros', $matches)) {
+			/*
+			 * Macros with reference '0' are not supported. In case if macro reference is not used, $replaceHosts[1]
+			 * should be utilized which is equal to $replaceHosts[0] at this point.
+			 */
+			if (array_key_exists(0, $replaceHosts)) {
+				$replaceHosts[''] = $replaceHosts[0];
+				unset($replaceHosts[0]);
+			}
+
 			// For each functional macro.
 			foreach ($matches['macros'] as $expr) {
 				$macro = $expr;
@@ -2182,9 +2191,8 @@ class CMacrosResolver extends CMacrosResolverGeneral {
 
 						// Add host reference for macro without numeric index.
 						if (array_key_exists(1, $hosts_by_nr)) {
-							$hosts_by_nr[''] = $hosts_by_nr[1];
+							$hosts_by_nr[0] = $hosts_by_nr[1];
 						}
-						unset($hosts_by_nr[0]);
 					}
 					break;
 
