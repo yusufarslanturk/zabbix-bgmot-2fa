@@ -20,13 +20,19 @@
 
 require_once dirname(__FILE__).'/../include/CWebTest.php';
 require_once dirname(__FILE__).'/../../include/items.inc.php';
-require_once dirname(__FILE__).'/traits/PreprocessingTrait.php';
+require_once dirname(__FILE__).'/TestFormPreprocessing.php';
 
 /**
  * @backup items
  */
-class testFormItemPreprocessing extends CWebTest {
+class testFormItemPreprocessing extends TestFormPreprocessing {
 	const HOST_ID = 40001;		//'Simple form test host'
+
+	public $link = 'items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID;
+	public $ready_link = 'items.php?form=update&hostid='.self::HOST_ID.'&itemid=';
+	public $selector = 'Create item';
+	public $success_message = 'Item added';
+	public $fail_message = 'Cannot add item';
 
 	use PreprocessingTrait;
 
@@ -734,7 +740,7 @@ class testFormItemPreprocessing extends CWebTest {
 	 * @dataProvider getCreateAllStepsData
 	 */
 	public function testFormItemPreprocessing_CreateAllSteps($data) {
-		$this->executeCreate($data);
+		$this->executeCreate($data, $this->link, $this->selector, $this->success_message, $this->ready_link, $this->fail_message  );
 	}
 
 	public static function getCreatePrometheusData() {
@@ -1706,76 +1712,7 @@ class testFormItemPreprocessing extends CWebTest {
 	 * @dataProvider getCreatePrometheusData
 	 */
 	public function testFormItemPreprocessing_CreatePrometheus($data) {
-		$this->executeCreate($data);
-	}
-
-	private function executeCreate($data) {
-		if ($data['expected'] === TEST_BAD) {
-			$sql_items = 'SELECT * FROM items ORDER BY itemid';
-			$old_hash = CDBHelper::getHash($sql_items);
-		}
-		$this->page->login()->open('items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID);
-		$this->query('button:Create item')->waitUntilPresent()->one()->click();
-
-		$form = $this->query('name:itemForm')->waitUntilPresent()->asForm()->one();
-		$form->fill($data['fields']);
-		$form->selectTab('Preprocessing');
-		$this->addPreprocessingSteps($data['preprocessing']);
-		$form->submit();
-
-		$this->page->waitUntilReady();
-		$message = CMessageElement::find()->one();
-
-		switch ($data['expected']) {
-			case TEST_GOOD:
-				$this->assertTrue($message->isGood());
-				$this->assertEquals('Item added', $message->getTitle());
-
-				// Check result in frontend form.
-				$id = CDBHelper::getValue('SELECT itemid FROM items WHERE key_='.zbx_dbstr($data['fields']['Key']));
-				$this->page->open('items.php?form=update&hostid='.self::HOST_ID.'&itemid='.$id);
-				$form->selectTab('Preprocessing');
-				// Check for Trailing spaces case.
-				if ($data['fields']['Name'] === 'Trailing spaces'){
-					$data['preprocessing'][0]['parameter_1'] = trim($data['preprocessing'][0]['parameter_1']);
-					if (array_key_exists('parameter_2', $data['preprocessing'][0])){
-						$data['preprocessing'][0]['parameter_2'] = trim($data['preprocessing'][0]['parameter_2']);
-					}
-				}
-				$this->assertPreprocessingSteps($data['preprocessing']);
-				break;
-
-				// Check results in DB.
-				foreach ($data['preprocessing'] as $key => $options) {
-					// The array of allowed types must be synced with CItem::$supported_preprocessing_types.
-					$db_type = get_preprocessing_types($type[$key], false, [ZBX_PREPROC_REGSUB, ZBX_PREPROC_TRIM,
-						ZBX_PREPROC_RTRIM, ZBX_PREPROC_LTRIM, ZBX_PREPROC_XPATH, ZBX_PREPROC_JSONPATH,
-						ZBX_PREPROC_MULTIPLIER, ZBX_PREPROC_DELTA_VALUE, ZBX_PREPROC_DELTA_SPEED, ZBX_PREPROC_BOOL2DEC,
-						ZBX_PREPROC_OCT2DEC, ZBX_PREPROC_HEX2DEC, ZBX_PREPROC_VALIDATE_RANGE,
-						ZBX_PREPROC_VALIDATE_REGEX, ZBX_PREPROC_VALIDATE_NOT_REGEX, ZBX_PREPROC_ERROR_FIELD_JSON,
-						ZBX_PREPROC_ERROR_FIELD_XML, ZBX_PREPROC_ERROR_FIELD_REGEX, ZBX_PREPROC_THROTTLE_VALUE,
-						ZBX_PREPROC_THROTTLE_TIMED_VALUE, ZBX_PREPROC_PROMETHEUS_PATTERN, ZBX_PREPROC_PROMETHEUS_TO_JSON
-					]);
-					$this->assertEquals($options['type'], $db_type);
-
-					if (in_array($type, ['Regular expression', 'In range', 'Check for error using regular expression', 'Prometheus pattern'])){
-						$params = $options['parameter_1']."\n".$options['parameter_2'];
-						$this->assertEquals($params, $db_params[$key]);
-					}
-					else {
-						$this->assertEquals($options['parameter_1'], $db_params[$key]);
-					}
-				}
-				break;
-
-			case TEST_BAD:
-				$this->assertTrue($message->isBad());
-				$this->assertEquals('Cannot add item', $message->getTitle());
-				$this->assertTrue($message->hasLine($data['error']));
-				// Check that DB hash is not changed.
-				$this->assertEquals($old_hash, CDBHelper::getHash($sql_items));
-				break;
-		}
+		$this->executeCreate($data, $this->link, $this->selector, $this->success_message, $this->ready_link, $this->fail_message  );
 	}
 
 	/**
@@ -1826,305 +1763,18 @@ class testFormItemPreprocessing extends CWebTest {
 		}
 	}
 
-	public static function getCustomOnFailData() {
-		$options = [
-			ZBX_PREPROC_FAIL_DISCARD_VALUE	=> 'Discard value',
-			ZBX_PREPROC_FAIL_SET_VALUE		=> 'Set value to',
-			ZBX_PREPROC_FAIL_SET_ERROR		=> 'Set error to'
-		];
-
-		$data = [];
-		foreach ($options as $value => $label) {
-			$item = [
-				'item_fields' => [
-					'Name' => 'LLD Preprocessing '.$label,
-					'Key' => 'lld-preprocessing-steps-discard-on-fail'.$value
-				],
-				'preprocessing' => [
-					[
-						'type' => 'Regular expression',
-						'parameter_1' => 'expression',
-						'parameter_2' => '\1',
-						'on_fail' => true
-					],
-					[
-						'type' => 'JSONPath',
-						'parameter_1' => '$.data.test',
-						'on_fail' => true
-					],
-					[
-						'type' => 'Does not match regular expression',
-						'parameter_1' => 'Pattern',
-						'on_fail' => true
-					],
-					[
-						'type' => 'Check for error in JSON',
-						'parameter_1' => '$.new.path'
-					],
-					[
-						'type' => 'Discard unchanged with heartbeat',
-						'parameter_1' => '30'
-					]
-				],
-				'value' => $value
-			];
-
-			foreach ($item['preprocessing'] as &$step) {
-				if (!array_key_exists('on_fail', $step) || !$step['on_fail']) {
-					continue;
-				}
-
-				$step['error_handler'] = $label;
-
-				if ($value !== ZBX_PREPROC_FAIL_DISCARD_VALUE) {
-					$step['error_handler_params'] = 'handler parameter';
-				}
-			}
-
-			$data[] = [$item];
-		}
-
-		return $data;
-	}
-
 	/**
-	 * Check Custom on fail checkbox.
-	 *
 	 * @dataProvider getCustomOnFailData
 	 */
 	public function testFormItemPreprocessing_CustomOnFail($data) {
-		$this->page->login()->open('items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID);
-		$this->query('button:Create item')->one()->click();
-
-		$form = $this->query('name:itemForm')->asForm()->one();
-		$form->fill($data['item_fields']);
-
-		$form->selectTab('Preprocessing');
-		$this->addPreprocessingSteps($data['preprocessing']);
-		$steps = $this->getPreprocessingSteps();
-
-		foreach ($data['preprocessing'] as $i => $options) {
-			if ($options['type'] === 'Check for error in JSON'
-					|| $options['type'] === 'Discard unchanged with heartbeat') {
-
-				$this->assertFalse($steps[$i]['on_fail']->isEnabled());
-			}
-		}
-
-		$form->submit();
-		$this->page->waitUntilReady();
-
-		// Check message title and if message is positive.
-		$message = CMessageElement::find()->one();
-		$this->assertTrue($message->isGood());
-		$this->assertEquals('Item added', $message->getTitle());
-
-		// Get item data from DB.
-		$db_item = CDBHelper::getRow('SELECT name,key_,itemid FROM items where key_='.
-				zbx_dbstr($data['item_fields']['Key'])
-		);
-		$this->assertEquals($db_item['name'], $data['item_fields']['Name']);
-		$itemid = $db_item['itemid'];
-
-		// Check saved pre-processing.
-		$this->page->open('items.php?form=update&hostid=10084&itemid='.$itemid);
-		$form->selectTab('Preprocessing');
-		$steps = $this->assertPreprocessingSteps($data['preprocessing']);
-
-		$rows = [];
-		foreach (CDBHelper::getAll('SELECT step, error_handler FROM item_preproc WHERE itemid='.$itemid) as $row) {
-			$rows[$row['step']] = $row['error_handler'];
-		}
-
-		foreach ($data['preprocessing'] as $i => $options) {
-			// Validate preprocessing step in DB.
-			$expected = (!array_key_exists('on_fail', $options) || !$options['on_fail'])
-					? ZBX_PREPROC_FAIL_DEFAULT : $data['value'];
-
-			$this->assertEquals($expected, $rows[$i + 1]);
-
-			if (in_array($options['type'], ['Check for error in JSON', 'Discard unchanged with heartbeat'])){
-				$this->assertFalse($steps[$i]['on_fail']->isEnabled());
-				$this->assertFalse($steps[$i]['on_fail']->isSelected());
-				$this->assertTrue($steps[$i]['error_handler'] === null || !$steps[$i]['error_handler']->isVisible());
-				$this->assertTrue($steps[$i]['error_handler_params'] === null
-					|| !$steps[$i]['error_handler_params']->isVisible()
-				);
-			}
-			else {
-				$this->assertTrue($steps[$i]['on_fail']->isSelected());
-				$this->assertTrue($steps[$i]['on_fail']->isEnabled());
-			}
-		}
-	}
-
-	public static function getCustomOnFailValidationData() {
-		$cases = [
-			// 'Set value to' validation.
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set value empty',
-					'Key' => 'set-value-empty'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set value to',
-					'error_handler_params' => ''
-				]
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set value number',
-					'Key' => 'set-value-number'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set value to',
-					'error_handler_params' => '500'
-				]
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set value string',
-					'Key' => 'set-value-string'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set error to',
-					'error_handler_params' => 'String'
-				]
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set value special-symbols',
-					'Key' => 'set-value-special-symbols'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set value to',
-					'error_handler_params' => '!@#$%^&*()_+<>,.\/'
-				]
-			],
-			// 'Set error to' validation.
-			[
-				'expected' => TEST_BAD,
-				'fields' => [
-					'Name' => 'Set error empty',
-					'Key' => 'set-error-empty'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set error to',
-					'error_handler_params' => ''
-				],
-				'error_details' => 'Incorrect value for field "error_handler_params": cannot be empty.'
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set error string',
-					'Key' => 'set-error-string'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set error to',
-					'error_handler_params' => 'Test error'
-				]
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set error number',
-					'Key' => 'set-error-number'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set error to',
-					'error_handler_params' => '999'
-				]
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set error special symbols',
-					'Key' => 'set-error-special-symbols'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set error to',
-					'error_handler_params' => '!@#$%^&*()_+<>,.\/'
-				]
-			]
-		];
-
-		$data = [];
-		$preprocessing = [
-			[
-				'type' => 'Regular expression',
-				'parameter_1' => 'expression',
-				'parameter_2' => '\1',
-				'on_fail' => true
-			],
-			[
-				'type' => 'JSONPath',
-				'parameter_1' => '$.data.test',
-				'on_fail' => true
-			],
-			[
-				'type' => 'Does not match regular expression',
-				'parameter_1' => 'Pattern',
-				'on_fail' => true
-			]
-		];
-
-		foreach ($cases as $case) {
-			$case['preprocessing'] = [];
-			foreach ($preprocessing as $step) {
-				$case['preprocessing'][] = array_merge($step, $case['custom_on_fail']);
-			}
-
-			$data[] = [$case];
-		}
-
-		return $data;
+		$ready_link = 'items.php?form=update&itemid=';
+		$this->executeCustomOnFail($data, $this->link, $this->selector, $this->success_message, $ready_link);
 	}
 
 	/**
 	 * @dataProvider getCustomOnFailValidationData
 	 */
 	public function testFormItemPreprocessing_CustomOnFailValidation($data) {
-		$this->page->login()->open('items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID);
-		$this->query('button:Create item')->one()->click();
-
-		$form = $this->query('name:itemForm')->asForm()->one();
-		$form->fill($data['fields']);
-		$form->selectTab('Preprocessing');
-		$this->addPreprocessingSteps($data['preprocessing']);
-		$form->submit();
-		$this->page->waitUntilReady();
-
-		// Get global message.
-		$message = CMessageElement::find()->one();
-
-		switch ($data['expected']) {
-			case TEST_GOOD:
-				// Check if message is positive.
-				$this->assertTrue($message->isGood());
-				// Check message title.
-				$this->assertEquals('Item added', $message->getTitle());
-				// Check the results in DB.
-				$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM items WHERE key_='.
-						zbx_dbstr($data['fields']['Key']))
-				);
-				break;
-
-			case TEST_BAD:
-				// Check if message is negative.
-				$this->assertTrue($message->isBad());
-				// Check message title.
-				$this->assertEquals('Cannot add item', $message->getTitle());
-				$this->assertTrue($message->hasLine($data['error_details']));
-				// Check that DB.
-				$this->assertEquals(0, CDBHelper::getCount('SELECT * FROM items where key_ = '.
-						zbx_dbstr($data['fields']['Key']))
-				);
-				break;
-		}
+		$this->executeCustomOnFailValidation($data, $this->link, $this->selector, $this->success_message, $this->fail_message  );
 	}
 }

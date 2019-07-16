@@ -20,16 +20,20 @@
 
 require_once dirname(__FILE__).'/../include/CWebTest.php';
 require_once dirname(__FILE__).'/../../include/items.inc.php';
-require_once dirname(__FILE__).'/traits/PreprocessingTrait.php';
+require_once dirname(__FILE__).'/TestFormPreprocessing.php';
 
 /**
  * @backup items
  */
-class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
+class testFormLowLevelDiscoveryPreprocessing extends TestFormPreprocessing {
 
 	const HOST_ID = 40001;
 
-	use PreprocessingTrait;
+	public $link = 'host_discovery.php?hostid='.self::HOST_ID;
+	public $ready_link = 'host_discovery.php?form=update&itemid=';
+	public $selector = 'Create discovery rule';
+	public $success_message = 'Discovery rule created';
+	public $fail_message = 'Cannot add discovery rule';
 
 	public static function getCreateAllStepsData() {
 		return [
@@ -44,7 +48,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Regular expression']
 					],
-					'error_details' => 'Incorrect value for field "params": first parameter is expected.'
+					'error' => 'Incorrect value for field "params": first parameter is expected.'
 				]
 			],
 			[
@@ -57,7 +61,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_2' => 'test output']
 					],
-					'error_details' => 'Incorrect value for field "params": first parameter is expected.'
+					'error' => 'Incorrect value for field "params": first parameter is expected.'
 				]
 			],
 			[
@@ -70,7 +74,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Regular expression', 'parameter_1' => 'expression'],
 					],
-					'error_details' => 'Incorrect value for field "params": second parameter is expected.'
+					'error' => 'Incorrect value for field "params": second parameter is expected.'
 				]
 			],
 			// Validation. JSONPath.
@@ -84,7 +88,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'JSONPath']
 					],
-					'error_details' => 'Incorrect value for field "params": cannot be empty.'
+					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
 			],
 			// Custom scripts. JavaScript.
@@ -98,7 +102,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'JavaScript']
 					],
-					'error_details' => 'Incorrect value for field "params": cannot be empty.'
+					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
 			],
 			// Validation. Regular expressions matching.
@@ -112,7 +116,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Does not match regular expression']
 					],
-					'error_details' => 'Incorrect value for field "params": cannot be empty.'
+					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
 			],
 			// Validation. Error in JSON.
@@ -126,7 +130,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Check for error in JSON']
 					],
-					'error_details' => 'Incorrect value for field "params": cannot be empty.'
+					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
 			],
 			// Validation. Throttling.
@@ -141,7 +145,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1']
 					],
-					'error_details' => 'Only one throttling step is allowed.'
+					'error' => 'Only one throttling step is allowed.'
 				]
 			],
 			[
@@ -155,7 +159,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '2']
 					],
-					'error_details' => 'Only one throttling step is allowed.'
+					'error' => 'Only one throttling step is allowed.'
 				]
 			],
 			[
@@ -168,7 +172,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Discard unchanged with heartbeat']
 					],
-					'error_details' => 'Invalid parameter "params": cannot be empty.'
+					'error' => 'Invalid parameter "params": cannot be empty.'
 				]
 			],
 			[
@@ -181,7 +185,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '3g!@#$%^&*()-=']
 					],
-					'error_details' => 'Invalid parameter "params": a time unit is expected.'
+					'error' => 'Invalid parameter "params": a time unit is expected.'
 				]
 			],
 			[
@@ -194,7 +198,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => 'abc']
 					],
-					'error_details' => 'Invalid parameter "params": a time unit is expected.'
+					'error' => 'Invalid parameter "params": a time unit is expected.'
 				]
 			],
 			[
@@ -207,7 +211,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1,5']
 					],
-					'error_details' => 'Invalid parameter "params": a time unit is expected.'
+					'error' => 'Invalid parameter "params": a time unit is expected.'
 				]
 			],
 			[
@@ -220,7 +224,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1.5']
 					],
-					'error_details' => 'Invalid parameter "params": a time unit is expected.'
+					'error' => 'Invalid parameter "params": a time unit is expected.'
 				]
 			],
 			[
@@ -233,7 +237,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '-3']
 					],
-					'error_details' => 'Invalid parameter "params": value must be one of 1-788400000.'
+					'error' => 'Invalid parameter "params": value must be one of 1-788400000.'
 				]
 			],
 			[
@@ -246,7 +250,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '0']
 					],
-					'error_details' => 'Invalid parameter "params": value must be one of 1-788400000.'
+					'error' => 'Invalid parameter "params": value must be one of 1-788400000.'
 				]
 			],
 			[
@@ -259,7 +263,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '788400001']
 					],
-					'error_details' => 'Invalid parameter "params": value must be one of 1-788400000.'
+					'error' => 'Invalid parameter "params": value must be one of 1-788400000.'
 				]
 			],
 			// Successful creation of LLD with preprocessing steps.
@@ -350,12 +354,10 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 	}
 
 	/**
-	 *  Test creation of a discovery rule with Preprocessing steps.
-	 *
 	 * @dataProvider getCreateAllStepsData
 	 */
 	public function testFormLowLevelDiscoveryPreprocessing_CreateAllSteps($data) {
-		$this->executeCreate($data);
+		$this->executeCreate($data, $this->link, $this->selector, $this->success_message, $this->ready_link, $this->fail_message);
 	}
 
 	public static function getCreatePrometheusData() {
@@ -371,7 +373,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '1name_of_metric']
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -384,7 +386,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}=1']
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -397,7 +399,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}>1'],
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -410,7 +412,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}<1'],
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -423,7 +425,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}!==1'],
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -436,7 +438,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}>=1'],
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -449,7 +451,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}=<1'],
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -462,7 +464,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{label_name!="regex_pattern"}'],
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -475,7 +477,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{label_name!~"<regex>"}'],
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -488,7 +490,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => 'cpu_system{__name__="metric_name"}'],
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -501,7 +503,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON',  'parameter_1' => 'cpu usage_system']
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -515,7 +517,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'Prometheus to JSON',  'parameter_1' => 'cpu\\']
 
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -529,7 +531,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'Prometheus to JSON',  'parameter_1' => '123']
 
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -543,7 +545,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'Prometheus to JSON', 'parameter_1' => 'metric==1e|5']
 
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -557,7 +559,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{label="value\"}']
 
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -571,7 +573,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{#METRICNAME}==1']
 
 					],
-					'error_details' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
 				]
 			],
 			[
@@ -585,7 +587,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 						['type' => 'Prometheus to JSON', 'parameter_1' => 'cpu_usage_system_1'],
 						['type' => 'Prometheus to JSON', 'parameter_1' => 'cpu_usage_system_1']
 					],
-					'error_details' => 'Only one Prometheus step is allowed.'
+					'error' => 'Only one Prometheus step is allowed.'
 				]
 			],
 			// Successful Prometheus to JSON creation.
@@ -599,7 +601,7 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '']
 					],
-					'error_details' => 'Incorrect value for field "params": first parameter is expected.'
+					'error' => 'Incorrect value for field "params": first parameter is expected.'
 				]
 			],
 			[
@@ -798,374 +800,23 @@ class testFormLowLevelDiscoveryPreprocessing extends CWebTest {
 	}
 
 	/**
-	 *  Test creation of a discovery rule with Prometheus Preprocessing steps.
-	 *
 	 * @dataProvider getCreatePrometheusData
 	 */
 	public function testFormLowLevelDiscoveryPreprocessing_CreatePrometheus($data) {
-		$this->executeCreate($data);
-	}
-
-	private function executeCreate($data) {
-		if ($data['expected'] === TEST_BAD) {
-			$sql_items = 'SELECT * FROM items ORDER BY itemid';
-			$old_hash = CDBHelper::getHash($sql_items);
-		}
-
-		$this->page->login()->open('host_discovery.php?hostid='.self::HOST_ID);
-		$this->query('button:Create discovery rule')->one()->click();
-
-		$form = $this->query('name:itemForm')->asForm()->one();
-		$form->fill($data['fields']);
-		$form->selectTab('Preprocessing');
-		$this->addPreprocessingSteps($data['preprocessing']);
-		$form->submit();
-
-		$this->page->waitUntilReady();
-		// Get global message.
-		$message = CMessageElement::find()->one();
-
-		switch ($data['expected']) {
-			case TEST_GOOD:
-				// Check if message is positive.
-				$this->assertTrue($message->isGood());
-				// Check message title.
-				$this->assertEquals('Discovery rule created', $message->getTitle());
-
-				// Check result in frontend form.
-				$id = CDBHelper::getValue('SELECT itemid FROM items WHERE key_='.zbx_dbstr($data['fields']['Key']));
-				$this->page->open('host_discovery.php?form=update&itemid='.$id);
-				$form->selectTab('Preprocessing');
-				// Check for Trailing spaces case.
-				if ($data['fields']['Name'] === 'Trailing spaces'){
-					$data['preprocessing'][0]['parameter_1'] = trim($data['preprocessing'][0]['parameter_1']);
-					if (array_key_exists('parameter_2', $data['preprocessing'][0])){
-						$data['preprocessing'][0]['parameter_2'] = trim($data['preprocessing'][0]['parameter_2']);
-					}
-				}
-				$this->assertPreprocessingSteps($data['preprocessing']);
-				break;
-
-			case TEST_BAD:
-				// Check if message is negative.
-				$this->assertTrue($message->isBad());
-				// Check message title.
-				$this->assertEquals('Cannot add discovery rule', $message->getTitle());
-				$this->assertTrue($message->hasLine($data['error_details']));
-
-				// Check that DB hash is not changed.
-				$this->assertEquals($old_hash, CDBHelper::getHash($sql_items));
-				break;
-		}
-	}
-
-	public static function getCustomOnFailData() {
-		$options = [
-			ZBX_PREPROC_FAIL_DISCARD_VALUE	=> 'Discard value',
-			ZBX_PREPROC_FAIL_SET_VALUE		=> 'Set value to',
-			ZBX_PREPROC_FAIL_SET_ERROR		=> 'Set error to'
-		];
-
-		$data = [];
-		foreach ($options as $value => $label) {
-			$item = [
-				'lld_fields' => [
-					'Name' => 'LLD Preprocessing '.$label,
-					'Key' => 'lld-preprocessing-steps-discard-on-fail'.$value
-				],
-				'preprocessing' => [
-					[
-						'type' => 'Regular expression',
-						'parameter_1' => 'expression',
-						'parameter_2' => '\1',
-						'on_fail' => true
-					],
-					[
-						'type' => 'JSONPath',
-						'parameter_1' => '$.data.test',
-						'on_fail' => true
-					],
-					[
-						'type' => 'Does not match regular expression',
-						'parameter_1' => 'Pattern',
-						'on_fail' => true
-					],
-					[
-						'type' => 'Check for error in JSON',
-						'parameter_1' => '$.new.path'
-					],
-					[
-						'type' => 'Discard unchanged with heartbeat',
-						'parameter_1' => '30'
-					]
-				],
-				'value' => $value
-			];
-
-			foreach ($item['preprocessing'] as &$step) {
-				if (!array_key_exists('on_fail', $step) || !$step['on_fail']) {
-					continue;
-				}
-
-				$step['error_handler'] = $label;
-
-				if ($value !== ZBX_PREPROC_FAIL_DISCARD_VALUE) {
-					$step['error_handler_params'] = 'handler parameter';
-				}
-			}
-
-			$data[] = [$item];
-		}
-
-		return $data;
+		$this->executeCreate($data, $this->link, $this->selector, $this->success_message, $this->ready_link, $this->fail_message);
 	}
 
 	/**
-	 * Check Custom on fail checkbox.
-	 *
 	 * @dataProvider getCustomOnFailData
 	 */
 	public function testFormLowLevelDiscoveryPreprocessing_CustomOnFail($data) {
-		$this->page->login()->open('host_discovery.php?hostid='.self::HOST_ID);
-		$this->query('button:Create discovery rule')->one()->click();
-
-		$form = $this->query('name:itemForm')->asForm()->one();
-		$form->fill($data['lld_fields']);
-
-		$form->selectTab('Preprocessing');
-		$this->addPreprocessingSteps($data['preprocessing']);
-		$steps = $this->getPreprocessingSteps();
-
-		foreach ($data['preprocessing'] as $i => $options) {
-			if ($options['type'] === 'Check for error in JSON'
-					|| $options['type'] === 'Discard unchanged with heartbeat') {
-
-				$this->assertFalse($steps[$i]['on_fail']->isEnabled());
-			}
-		}
-
-		$form->submit();
-		$this->page->waitUntilReady();
-
-		// Check message title and if message is positive.
-		$message = CMessageElement::find()->one();
-		$this->assertTrue($message->isGood());
-		$this->assertEquals('Discovery rule created', $message->getTitle());
-
-		// Get item data from DB.
-		$db_item = CDBHelper::getRow('SELECT name,key_,itemid FROM items where key_='.
-				zbx_dbstr($data['lld_fields']['Key'])
-		);
-		$this->assertEquals($db_item['name'], $data['lld_fields']['Name']);
-		$itemid = $db_item['itemid'];
-
-		// Check saved pre-processing.
-		$this->page->open('host_discovery.php?form=update&itemid='.$itemid);
-		$form->selectTab('Preprocessing');
-		$steps = $this->assertPreprocessingSteps($data['preprocessing']);
-
-		$rows = [];
-		foreach (CDBHelper::getAll('SELECT step, error_handler FROM item_preproc WHERE itemid='.$itemid) as $row) {
-			$rows[$row['step']] = $row['error_handler'];
-		}
-
-		foreach ($data['preprocessing'] as $i => $options) {
-			// Validate preprocessing step in DB.
-			$expected = (!array_key_exists('on_fail', $options) || !$options['on_fail'])
-					? ZBX_PREPROC_FAIL_DEFAULT : $data['value'];
-
-			$this->assertEquals($expected, $rows[$i + 1]);
-
-			switch ($options['type']) {
-				case 'Regular expression':
-				case 'JSONPath':
-				case 'Does not match regular expression':
-					// Check preprocessing in frontend.
-					$this->assertTrue($steps[$i]['on_fail']->isSelected());
-					$this->assertTrue($steps[$i]['on_fail']->isEnabled());
-					break;
-				case 'Check for error in JSON':
-				case 'Discard unchanged with heartbeat':
-					// Check pre-processing error handler type in DB.
-					$this->assertFalse($steps[$i]['on_fail']->isEnabled());
-					$this->assertFalse($steps[$i]['on_fail']->isSelected());
-
-					$this->assertTrue($steps[$i]['error_handler'] === null || !$steps[$i]['error_handler']->isVisible());
-					$this->assertTrue($steps[$i]['error_handler_params'] === null
-							|| !$steps[$i]['error_handler_params']->isVisible()
-					);
-					break;
-			}
-		}
-	}
-
-	public static function getCustomOnFailValidationData() {
-		$cases = [
-			// 'Set value to' validation.
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set value empty',
-					'Key' => 'set-value-empty'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set value to',
-					'error_handler_params' => ''
-				]
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set value number',
-					'Key' => 'set-value-number'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set value to',
-					'error_handler_params' => '500'
-				]
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set value string',
-					'Key' => 'set-value-string'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set error to',
-					'error_handler_params' => 'String'
-				]
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set value special-symbols',
-					'Key' => 'set-value-special-symbols'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set value to',
-					'error_handler_params' => '!@#$%^&*()_+<>,.\/'
-				]
-			],
-			// 'Set error to' validation.
-			[
-				'expected' => TEST_BAD,
-				'fields' => [
-					'Name' => 'Set error empty',
-					'Key' => 'set-error-empty'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set error to',
-					'error_handler_params' => ''
-				],
-				'error_details' => 'Incorrect value for field "error_handler_params": cannot be empty.'
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set error string',
-					'Key' => 'set-error-string'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set error to',
-					'error_handler_params' => 'Test error'
-				]
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set error number',
-					'Key' => 'set-error-number'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set error to',
-					'error_handler_params' => '999'
-				]
-			],
-			[
-				'expected' => TEST_GOOD,
-				'fields' => [
-					'Name' => 'Set error special symbols',
-					'Key' => 'set-error-special-symbols'
-				],
-				'custom_on_fail' => [
-					'error_handler' => 'Set error to',
-					'error_handler_params' => '!@#$%^&*()_+<>,.\/'
-				]
-			]
-		];
-
-		$data = [];
-		$preprocessing = [
-			[
-				'type' => 'Regular expression',
-				'parameter_1' => 'expression',
-				'parameter_2' => '\1',
-				'on_fail' => true
-			],
-			[
-				'type' => 'JSONPath',
-				'parameter_1' => '$.data.test',
-				'on_fail' => true
-			],
-			[
-				'type' => 'Does not match regular expression',
-				'parameter_1' => 'Pattern',
-				'on_fail' => true
-			]
-		];
-
-		foreach ($cases as $case) {
-			$case['preprocessing'] = [];
-			foreach ($preprocessing as $step) {
-				$case['preprocessing'][] = array_merge($step, $case['custom_on_fail']);
-			}
-
-			$data[] = [$case];
-		}
-
-		return $data;
+		$this->executeCustomOnFail($data, $this->link, $this->selector, $this->success_message, $this->ready_link);
 	}
 
 	/**
 	 * @dataProvider getCustomOnFailValidationData
 	 */
 	public function testFormLowLevelDiscoveryPreprocessing_CustomOnFailValidation($data) {
-		$this->page->login()->open('host_discovery.php?hostid='.self::HOST_ID);
-		$this->query('button:Create discovery rule')->one()->click();
-
-		$form = $this->query('name:itemForm')->asForm()->one();
-		$form->fill($data['fields']);
-		$form->selectTab('Preprocessing');
-		$this->addPreprocessingSteps($data['preprocessing']);
-		$form->submit();
-		$this->page->waitUntilReady();
-
-		// Get global message.
-		$message = CMessageElement::find()->one();
-
-		switch ($data['expected']) {
-			case TEST_GOOD:
-				// Check if message is positive.
-				$this->assertTrue($message->isGood());
-				// Check message title.
-				$this->assertEquals('Discovery rule created', $message->getTitle());
-				// Check the results in DB.
-				$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM items WHERE key_='.
-						zbx_dbstr($data['fields']['Key']))
-				);
-				break;
-
-			case TEST_BAD:
-				// Check if message is negative.
-				$this->assertTrue($message->isBad());
-				// Check message title.
-				$this->assertEquals('Cannot add discovery rule', $message->getTitle());
-				$this->assertTrue($message->hasLine($data['error_details']));
-				// Check that DB.
-				$this->assertEquals(0, CDBHelper::getCount('SELECT * FROM items where key_ = '.
-						zbx_dbstr($data['fields']['Key']))
-				);
-				break;
-		}
+		$this->executeCustomOnFailValidation($data, $this->link, $this->selector, $this->success_message, $this->fail_message);
 	}
 }
