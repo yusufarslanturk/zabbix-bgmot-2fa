@@ -1089,7 +1089,7 @@ static int	compare_nth_field(const ZBX_FIELD **fields, const char *rec_data, int
 static int	process_proxyconfig_table(const ZBX_TABLE *table, struct zbx_json_parse *jp_obj,
 		zbx_vector_uint64_t *del, char **error)
 {
-	int			f, fields_count, i, ret = FAIL, id_field_nr = 0, move_out = 0,
+	int			f, fields_count, ret = FAIL, id_field_nr = 0, move_out = 0,
 				move_field_nr = 0;
 	const ZBX_FIELD		*fields[ZBX_MAX_FIELDS];
 	struct zbx_json_parse	jp_data, jp_row;
@@ -1361,12 +1361,7 @@ static int	process_proxyconfig_table(const ZBX_TABLE *table, struct zbx_json_par
 	/* copy IDs of records to be deleted from hash set to vector */
 	zbx_hashset_iter_reset(&h_del, &iter);
 	while (NULL != (p_recid = (uint64_t *)zbx_hashset_iter_next(&iter)))
-	{
 		zbx_vector_uint64_append(del, *p_recid);
-		/* force index field update for removed records to avoid potential conflicts */
-		if (1 == move_out)
-			zbx_vector_uint64_append(&moves, *p_recid);
-	}
 	zbx_vector_uint64_sort(del, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 
 	zbx_vector_uint64_sort(&ins, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
@@ -1380,39 +1375,54 @@ static int	process_proxyconfig_table(const ZBX_TABLE *table, struct zbx_json_par
 			/* Making the 'hostid, templateid' combination unique to avoid collisions when new records */
 			/* are inserted and existing ones are updated is a bit complex. Let's take a simpler approach */
 			/* - delete affected old records and insert the new ones. */
-			for (i = 0; i < moves.values_num; i++)
+			if (0 != moves.values_num)
 			{
-				zbx_vector_uint64_append(del, moves.values[i]);
-				zbx_vector_uint64_append(&ins, moves.values[i]);
+				zbx_vector_uint64_append_array(&ins, moves.values, moves.values_num);
+				zbx_vector_uint64_sort(&ins, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
+				zbx_vector_uint64_append_array(del, moves.values, moves.values_num);
+				zbx_vector_uint64_sort(del, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 			}
 
-			if (0 < moves.values_num)
+			if (0 != del->values_num)
 			{
-				zbx_vector_uint64_clear(&moves);
-				zbx_vector_uint64_sort(del, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
-				zbx_vector_uint64_sort(&ins, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
+				sql_offset = 0;
+				zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, "delete from %s where", table->table);
+				DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, table->recid, del->values,
+						del->values_num);
+
+				if (ZBX_DB_OK > DBexecute("%s", sql))
+					goto clean2;
+
+				zbx_vector_uint64_clear(del);
 			}
 		}
-
-		/* special preprocessing for 'globalmacro', 'hostmacro', 'items', 'drules', 'regexps' and 'httptest' */
-		/* tables to eliminate conflicts */
-		/* in the 'macro', 'hostid,macro', 'hostid,key_', 'name', 'name' and 'hostid,name' unique indices */
-		if (0 < moves.values_num)
+		else
 		{
-			sql_offset = 0;
-#ifdef HAVE_MYSQL
-			zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, "update %s set %s=concat('#',%s) where",
-					table->table, fields[move_field_nr]->name, table->recid);
-#else
-			zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, "update %s set %s='#'||%s where",
-					table->table, fields[move_field_nr]->name, table->recid);
-#endif
-			zbx_vector_uint64_sort(&moves, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
-			DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, table->recid, moves.values,
-					moves.values_num);
+			/* force index field update for removed records to avoid potential conflicts */
+			if (0 != del->values_num)
+				zbx_vector_uint64_append_array(&moves, del->values, del->values_num);
 
-			if (ZBX_DB_OK > DBexecute("%s", sql))
-				goto clean2;
+			/* special preprocessing for 'globalmacro', 'hostmacro', 'items', 'drules', 'regexps' and  */
+			/* 'httptest' tables to eliminate conflicts in the 'macro', 'hostid,macro', 'hostid,key_', */
+			/* 'name', 'name' and 'hostid,name' unique indices */
+			if (0 < moves.values_num)
+			{
+				sql_offset = 0;
+#ifdef HAVE_MYSQL
+				zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
+						"update %s set %s=concat('#',%s) where",
+						table->table, fields[move_field_nr]->name, table->recid);
+#else
+				zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, "update %s set %s='#'||%s where",
+						table->table, fields[move_field_nr]->name, table->recid);
+#endif
+				zbx_vector_uint64_sort(&moves, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
+				DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, table->recid, moves.values,
+						moves.values_num);
+
+				if (ZBX_DB_OK > DBexecute("%s", sql))
+					goto clean2;
+			}
 		}
 	}
 
