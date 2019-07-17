@@ -25,10 +25,10 @@ require_once dirname(__FILE__).'/TestInheritancePreprocessing.php';
  *
  * @backup items
  */
-class testInheritanceDiscoveryRulePreprocessing extends TestInheritancePreprocessing {
+class testInheritanceItemPrototypePreprocessing extends TestInheritancePreprocessing {
 
-	const TEMPLATE_ID	= 15000;		// 'Inheritance test template'
-	const HOST_ID		= 15001;		// 'Template inheritance test host'
+	const TEMPL_DISCOVERY_RULE_ID = 15011;	// 'testInheritanceDiscoveryRule'
+	const HOST_DISCOVERY_RULE_ID	 = 15016;	// 'Template inheritance test host -> testInheritanceDiscoveryRule'
 
 	/**
 	 * Data provider for Preprocessing inheritance test.
@@ -67,6 +67,42 @@ class testInheritanceDiscoveryRulePreprocessing extends TestInheritancePreproces
 					[
 						'type' => 'Discard unchanged with heartbeat',
 						'parameter_1' => '30'
+					],
+					[
+						'type' => 'Right trim',
+						'parameter_1' => '5'
+					],
+					[
+						'type' => 'Custom multiplier',
+						'parameter_1' => '10',
+						'on_fail' => false
+					],
+					[
+						'type' => 'Simple change',
+						'on_fail' => false
+					],
+					[
+						'type' => 'Octal to decimal',
+						'on_fail' => true,
+						'error_handler' => 'Set error to',
+						'error_handler_params' => 'Custom_text'
+					],
+//					[
+//						'type' => 'JavaScript',
+//						'parameter_1' => "  Test line 1\n  Test line 2\nTest line 3  "
+//					],
+					[
+						'type' => 'Check for error using regular expression',
+						'parameter_1' => 'expression',
+						'parameter_2' => '\0'
+					],
+					[
+						'type' => 'Prometheus pattern',
+						'parameter_1' => 'cpu_usage_system',
+						'parameter_2' => 'label_name',
+						'on_fail' => true,
+						'error_handler' => 'Set error to',
+						'error_handler_params' => 'Custom_text'
 					]
 				]
 			]
@@ -76,16 +112,16 @@ class testInheritanceDiscoveryRulePreprocessing extends TestInheritancePreproces
 	/**
 	 * @dataProvider getPreprocessingData
 	 */
-	public function testInheritanceDiscoveryRulePreprocessing_PreprocessingInheritanceFromTemplate($preprocessing) {
+	public function testInheritanceItemPrototypePreprocessing_PreprocessingInheritanceFromTemplate($preprocessing) {
 		$fields = [
-			'Name' => 'Templated LLD with Preprocessing steps',
-			'Key' => 'templated-lld-with-preprocessing-steps'
+			'Name' => 'Templated item prototype with Preprocessing steps',
+			'Key' => 'templated-item-proto-with-preprocessing-steps'
 		];
 
-		$link = 'host_discovery.php?hostid='.self::TEMPLATE_ID;
-		$ready_link = 'host_discovery.php?hostid='.self::HOST_ID;
-		$selector = 'Create discovery rule';
-		$success_message = 'Discovery rule created';
+		$link = 'disc_prototypes.php?parent_discoveryid='.self::TEMPL_DISCOVERY_RULE_ID;
+		$ready_link = 'disc_prototypes.php?parent_discoveryid='.self::HOST_DISCOVERY_RULE_ID;
+		$selector = 'Create item prototype';
+		$success_message = 'Item prototype added';
 
 		$this->executeTestInheritance($preprocessing, $link, $selector, $fields, $success_message, $ready_link);
 	}
