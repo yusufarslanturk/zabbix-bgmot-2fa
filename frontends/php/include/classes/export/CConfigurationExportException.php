@@ -1,3 +1,4 @@
+<?php
 /*
 ** Zabbix
 ** Copyright (C) 2001-2019 Zabbix SIA
@@ -17,9 +18,9 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-#include "jsonpath_next_test.h"
 
-int	zbx_jsonpath_next(const char *path, const char **pnext, zbx_strloc_t *loc, int *type)
-{
-	return jsonpath_next(path, pnext, loc, type);
+/**
+ * This class is used internally by the CConfigurationExport class.
+ */
+class CConfigurationExportException extends Exception {
 }
