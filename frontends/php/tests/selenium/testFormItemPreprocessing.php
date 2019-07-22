@@ -24,7 +24,9 @@ require_once dirname(__FILE__).'/TestFormPreprocessing.php';
  * @backup items
  */
 class testFormItemPreprocessing extends TestFormPreprocessing {
-	const HOST_ID = 40001;		//'Simple form test host'
+	const HOST_ID = 40001;							//'Simple form test host'
+	const INHERITANCE_TEMPLATE_ID	= 15000;		// 'Inheritance test template'
+	const INHERITANCE_HOST_ID		= 15001;		// 'Template inheritance test host'
 
 	public $link = 'items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID;
 	public $ready_link = 'items.php?form=update&hostid='.self::HOST_ID.'&itemid=';
@@ -1774,5 +1776,101 @@ class testFormItemPreprocessing extends TestFormPreprocessing {
 	 */
 	public function testFormItemPreprocessing_CustomOnFailValidation($data) {
 		$this->executeCustomOnFailValidation($data, $this->link, $this->selector, $this->success_message, $this->fail_message  );
+	}
+
+	/**
+	 * Data provider for Preprocessing inheritance test.
+	 *
+	 * @return array
+	 */
+	public function getPreprocessingData() {
+		return [
+			[
+				[
+					[
+						'type' => 'Regular expression',
+						'parameter_1' => 'expression',
+						'parameter_2' => '\1',
+						'on_fail' => true,
+						'error_handler' => 'Discard value'
+					],
+					[
+						'type' => 'JSONPath',
+						'parameter_1' => '$.data.test',
+						'on_fail' => true,
+						'error_handler' => 'Set value to',
+						'error_handler_params' => 'Custom_text'
+					],
+					[
+						'type' => 'Does not match regular expression',
+						'parameter_1' => 'Pattern',
+						'on_fail' => true,
+						'error_handler' => 'Set error to',
+						'error_handler_params' => 'Custom_text'
+					],
+					[
+						'type' => 'Check for error in JSON',
+						'parameter_1' => '$.new.path'
+					],
+					[
+						'type' => 'Discard unchanged with heartbeat',
+						'parameter_1' => '30'
+					],
+					[
+						'type' => 'Right trim',
+						'parameter_1' => '5'
+					],
+					[
+						'type' => 'Custom multiplier',
+						'parameter_1' => '10',
+						'on_fail' => false
+					],
+					[
+						'type' => 'Simple change',
+						'on_fail' => false
+					],
+					[
+						'type' => 'Octal to decimal',
+						'on_fail' => true,
+						'error_handler' => 'Set error to',
+						'error_handler_params' => 'Custom_text'
+					],
+//					[
+//						'type' => 'JavaScript',
+//						'parameter_1' => "  Test line 1\n  Test line 2\nTest line 3  "
+//					],
+					[
+						'type' => 'Check for error using regular expression',
+						'parameter_1' => 'expression',
+						'parameter_2' => '\0'
+					],
+					[
+						'type' => 'Prometheus pattern',
+						'parameter_1' => 'cpu_usage_system',
+						'parameter_2' => 'label_name',
+						'on_fail' => true,
+						'error_handler' => 'Set error to',
+						'error_handler_params' => 'Custom_text'
+					]
+				]
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider getPreprocessingData
+	 */
+	public function testFormItemPreprocessing_PreprocessingInheritanceFromTemplate($preprocessing) {
+		$fields = [
+			'Name' => 'Templated item with Preprocessing steps',
+			'Key' => 'templated-item-with-preprocessing-steps'
+		];
+
+		$link = 'items.php?filter_set=1&filter_hostids[0]='.self::INHERITANCE_TEMPLATE_ID;
+		$ready_link = 'items.php?filter_set=1&filter_hostids[0]='.self::INHERITANCE_HOST_ID;
+		$selector = 'Create item';
+		$success_message = 'Item added';
+
+		$this->executeTestInheritance($preprocessing, $link, $selector, $fields, $success_message, $ready_link);
 	}
 }

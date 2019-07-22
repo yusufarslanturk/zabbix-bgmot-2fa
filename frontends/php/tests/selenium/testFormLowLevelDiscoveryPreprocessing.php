@@ -26,6 +26,8 @@ require_once dirname(__FILE__).'/TestFormPreprocessing.php';
 class testFormLowLevelDiscoveryPreprocessing extends TestFormPreprocessing {
 
 	const HOST_ID = 40001;
+	const INHERITANCE_TEMPLATE_ID	= 15000;		// 'Inheritance test template'
+	const INHERITANCE_HOST_ID		= 15001;		// 'Template inheritance test host'
 
 	public $link = 'host_discovery.php?hostid='.self::HOST_ID;
 	public $ready_link = 'host_discovery.php?form=update&itemid=';
@@ -816,5 +818,65 @@ class testFormLowLevelDiscoveryPreprocessing extends TestFormPreprocessing {
 	 */
 	public function testFormLowLevelDiscoveryPreprocessing_CustomOnFailValidation($data) {
 		$this->executeCustomOnFailValidation($data, $this->link, $this->selector, $this->success_message, $this->fail_message);
+	}
+
+	/**
+	 * Data provider for Preprocessing inheritance test.
+	 *
+	 * @return array
+	 */
+	public function getPreprocessingData() {
+		return [
+			[
+				[
+					[
+						'type' => 'Regular expression',
+						'parameter_1' => 'expression',
+						'parameter_2' => '\1',
+						'on_fail' => true,
+						'error_handler' => 'Discard value'
+					],
+					[
+						'type' => 'JSONPath',
+						'parameter_1' => '$.data.test',
+						'on_fail' => true,
+						'error_handler' => 'Set value to',
+						'error_handler_params' => 'Custom_text'
+					],
+					[
+						'type' => 'Does not match regular expression',
+						'parameter_1' => 'Pattern',
+						'on_fail' => true,
+						'error_handler' => 'Set error to',
+						'error_handler_params' => 'Custom_text'
+					],
+					[
+						'type' => 'Check for error in JSON',
+						'parameter_1' => '$.new.path'
+					],
+					[
+						'type' => 'Discard unchanged with heartbeat',
+						'parameter_1' => '30'
+					]
+				]
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider getPreprocessingData
+	 */
+	public function testFormLowLevelDiscoveryPreprocessing_PreprocessingInheritanceFromTemplate($preprocessing) {
+		$fields = [
+			'Name' => 'Templated LLD with Preprocessing steps',
+			'Key' => 'templated-lld-with-preprocessing-steps'
+		];
+
+		$link = 'host_discovery.php?hostid='.self::INHERITANCE_TEMPLATE_ID;
+		$ready_link = 'host_discovery.php?hostid='.self::INHERITANCE_HOST_ID;
+		$selector = 'Create discovery rule';
+		$success_message = 'Discovery rule created';
+
+		$this->executeTestInheritance($preprocessing, $link, $selector, $fields, $success_message, $ready_link);
 	}
 }
