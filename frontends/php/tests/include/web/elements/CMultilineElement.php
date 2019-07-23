@@ -116,4 +116,14 @@ class CMultilineElement extends CElement {
 	public function selectValue() {
 		self::onNotSupportedMethod(__FUNCTION__);
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function isEnabled($enabled = true) {
+		$classes = explode(' ', $this->getAttribute('class'));
+
+		return (parent::isEnabled($enabled)
+				&& !in_array('multilineinput-readonly', $classes));
+	}
 }
