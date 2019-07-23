@@ -413,7 +413,7 @@ class TestFormPreprocessing extends CWebTest {
 
 			foreach (['parameter_1', 'parameter_2'] as $param) {
 				if (array_key_exists($param, $options)) {
-					$this->assertNotNull($step[$param]->getAttribute('readonly'));
+					$this->assertFalse($step[$param]->detect()->isEnabled());
 				}
 			}
 

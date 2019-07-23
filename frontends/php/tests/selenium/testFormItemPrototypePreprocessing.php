@@ -1797,10 +1797,10 @@ class testFormItemPrototypePreprocessing extends testFormPreprocessing {
 						'error_handler' => 'Set error to',
 						'error_handler_params' => 'Custom_text'
 					],
-//					[
-//						'type' => 'JavaScript',
-//						'parameter_1' => "  Test line 1\n  Test line 2\nTest line 3  "
-//					],
+					[
+						'type' => 'JavaScript',
+						'parameter_1' => "  Test line 1\n  Test line 2\nTest line 3  "
+					],
 					[
 						'type' => 'Check for error using regular expression',
 						'parameter_1' => 'expression',
