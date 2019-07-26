@@ -212,8 +212,7 @@ abstract class CBaseElement extends RemoteWebElement {
 	 * @inheritdoc
 	 */
 	public function isEnabled($enabled = true) {
-		return ((parent::isEnabled()
-				&& (parent::getAttribute('readonly') === null)) === $enabled);
+		return (parent::isEnabled() === $enabled);
 	}
 
 	/**
