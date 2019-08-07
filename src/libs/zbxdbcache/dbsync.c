@@ -3487,15 +3487,17 @@ int	zbx_dbsync_compare_item_preprocs(zbx_dbsync_t *sync)
 
 	if (NULL == (result = DBselect(
 			"select pp.item_preprocid,pp.itemid,pp.type,pp.params,pp.step,i.hostid,pp.error_handler,"
-				"pp.error_handler_params"
+				"pp.error_handler_params,i.type,i.key_,h.proxy_hostid"
 			" from item_preproc pp,items i,hosts h"
 			" where pp.itemid=i.itemid"
 				" and i.hostid=h.hostid"
-				" and h.proxy_hostid is null"
-				" and h.status in (%d,%d)"
+				" and (h.proxy_hostid is null"
+					" or i.type in (%d,%d,%d))"
+				" and h.status<>%d"
 				" and i.flags<>%d"
 			" order by pp.itemid",
-			HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED, ZBX_FLAG_DISCOVERY_PROTOTYPE)))
+			ITEM_TYPE_INTERNAL, ITEM_TYPE_AGGREGATE, ITEM_TYPE_CALCULATED,
+			HOST_STATUS_TEMPLATE, ZBX_FLAG_DISCOVERY_PROTOTYPE)))
 	{
 		return FAIL;
 	}
@@ -3514,6 +3516,12 @@ int	zbx_dbsync_compare_item_preprocs(zbx_dbsync_t *sync)
 	while (NULL != (dbrow = DBfetch(result)))
 	{
 		unsigned char	tag = ZBX_DBSYNC_ROW_NONE;
+		unsigned char	type;
+
+		type = ZBX_STR2UCHAR(type, row[8]);
+		if (SUCCEED != DBis_null(row[10]) && SUCCEED != is_item_processed_by_server(type, row[9]))
+			continue;
+
 		ZBX_STR2UINT64(rowid, dbrow[0]);
 		zbx_hashset_insert(&ids, &rowid, sizeof(rowid));
 
