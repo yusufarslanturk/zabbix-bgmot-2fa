@@ -762,25 +762,6 @@ static int	get_proxyconfig_table(zbx_uint64_t proxy_hostid, struct zbx_json *j, 
 		zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset, " where");
 		DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, "t.hostid", hosts->values, hosts->values_num);
 	}
-	else if (0 == strcmp(table->table, "item_preproc"))
-	{
-		zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
-				",items i,hosts r"
-				" where t.itemid=i.itemid"
-					" and i.hostid=r.hostid"
-					" and r.proxy_hostid=" ZBX_FS_UI64
-					" and r.status in (%d,%d)"
-					" and i.flags<>%d"
-					" and i.type in (%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d)",
-				proxy_hostid,
-				HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED,
-				ZBX_FLAG_DISCOVERY_PROTOTYPE,
-				ITEM_TYPE_ZABBIX, ITEM_TYPE_ZABBIX_ACTIVE, ITEM_TYPE_SNMPv1, ITEM_TYPE_SNMPv2c,
-				ITEM_TYPE_SNMPv3, ITEM_TYPE_IPMI, ITEM_TYPE_TRAPPER, ITEM_TYPE_SIMPLE,
-				ITEM_TYPE_HTTPTEST, ITEM_TYPE_EXTERNAL, ITEM_TYPE_DB_MONITOR, ITEM_TYPE_SSH,
-				ITEM_TYPE_TELNET, ITEM_TYPE_JMX, ITEM_TYPE_SNMPTRAP, ITEM_TYPE_INTERNAL,
-				ITEM_TYPE_HTTPAGENT, ITEM_TYPE_DEPENDENT);
-	}
 	else if (0 == strcmp(table->table, "drules"))
 	{
 		zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
