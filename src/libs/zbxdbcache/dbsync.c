@@ -3518,7 +3518,7 @@ int	zbx_dbsync_compare_item_preprocs(zbx_dbsync_t *sync)
 		unsigned char	tag = ZBX_DBSYNC_ROW_NONE;
 		unsigned char	type;
 
-		type = ZBX_STR2UCHAR(type, row[8]);
+		ZBX_STR2UCHAR(type, row[8]);
 		if (SUCCEED != DBis_null(row[10]) && SUCCEED != is_item_processed_by_server(type, row[9]))
 			continue;
 
