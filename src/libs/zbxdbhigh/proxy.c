@@ -616,7 +616,7 @@ static int	get_proxyconfig_table_items(zbx_uint64_t proxy_hostid, struct zbx_jso
 	DBfree_result(result);
 
 	zbx_hashset_iter_reset(&itemids_added, &iter);
-	while (NULL != (pitemid  = (zbx_uint64_t *)zbx_hashset_iter_next(&iter)))
+	while (NULL != (pitemid = (zbx_uint64_t *)zbx_hashset_iter_next(&iter)))
 		zbx_vector_uint64_append(itemids, *pitemid);
 	zbx_vector_uint64_sort(itemids, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 skip_data:
@@ -643,11 +643,11 @@ skip_data:
 static int	get_proxyconfig_table_items_ext(const zbx_vector_uint64_t *itemids, struct zbx_json *j,
 		const ZBX_TABLE *table)
 {
-	char			*sql = NULL;
-	size_t			sql_alloc = 4 * ZBX_KIBIBYTE, sql_offset = 0, filter_offset;
-	int			f, ret = SUCCEED, i;
-	DB_RESULT		result;
-	DB_ROW			row;
+	char		*sql = NULL;
+	size_t		sql_alloc = 4 * ZBX_KIBIBYTE, sql_offset = 0, filter_offset;
+	int		f, ret = SUCCEED, i;
+	DB_RESULT	result;
+	DB_ROW		row;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() table:%s", __func__, table->table);
 
@@ -676,7 +676,7 @@ static int	get_proxyconfig_table_items_ext(const zbx_vector_uint64_t *itemids, s
 
 	zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, " from %s t where", table->table);
 	filter_offset = sql_offset;
-	for (i = 0; i < itemids->values_num; i+= ZBX_MAX_IDS_PER_SELECT)
+	for (i = 0; i < itemids->values_num; i += ZBX_MAX_IDS_PER_SELECT)
 	{
 		int	values_num;
 		values_num = MIN(i + ZBX_MAX_IDS_PER_SELECT, itemids->values_num) - i;
@@ -697,7 +697,6 @@ static int	get_proxyconfig_table_items_ext(const zbx_vector_uint64_t *itemids, s
 		DBfree_result(result);
 		sql_offset = filter_offset;
 	}
-
 skip_data:
 	zbx_free(sql);
 
