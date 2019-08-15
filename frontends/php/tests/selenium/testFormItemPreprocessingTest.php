@@ -302,6 +302,14 @@ class testFormItemPreprocessingTest extends CWebTest {
 		$form->selectTab('Preprocessing');
 	}
 
+	/**
+	 * Check preprocessing steps testing result.
+	 *
+	 * @param array $data				data provider
+	 * @param string $selector			locator of preprocessing "Test" button
+	 * @param boolean $prev_enabled		state of fields "Previous value" and "Prev.time", disabled or enabled
+	 * @param int $id					index of preprocessing step
+	 */
 	private function checkTestOverlay($data, $selector, $prev_enabled, $id = null) {
 		$this->query($selector)->waitUntilPresent()->one()->click();
 		$dialog = $this->query('id:overlay_dialogue')->waitUntilPresent()->asOverlayDialog()->one()->waitUntilReady();
@@ -378,7 +386,7 @@ class testFormItemPreprocessingTest extends CWebTest {
 				$form->submit();
 
 				// Check Zabbix server down message.
-				$message = $dialog->query('tag:output')->waitUntilPresent()->asMessage()->one();
+				$message = $form->getOverlayMessage();
 				$this->assertTrue($message->isBad());
 				$this->assertTrue($message->hasLine('Connection to Zabbix server "localhost" refused. Possible reasons:'));
 				$dialog->close();
