@@ -103,7 +103,7 @@ function getUserFormData($userId, array $config, $isProfile = false) {
 			$data['messages']['enabled'] = 0;
 		}
 		if (!isset($data['messages']['sounds.recovery'])) {
-			$data['messages']['sounds.recovery'] = 'alarm_ok.wav';
+			$data['messages']['sounds.recovery'] = 'alarm_ok.mp3';
 		}
 		if (!isset($data['messages']['triggers.recovery'])) {
 			$data['messages']['triggers.recovery'] = 0;
@@ -1627,7 +1627,7 @@ function getItemPreprocessing(CForm $form, array $preprocessing, $readonly, arra
 			(new CDiv(
 				(new CButton('preproc_test_all', _('Test all steps')))
 					->addClass(ZBX_STYLE_BTN_LINK)
-					->addStyle(($i > 1) ? null : 'display: none')
+					->addStyle(($i > 0) ? null : 'display: none')
 			))->addClass('step-action')
 		]))->addClass('preprocessing-list-foot')
 	);

@@ -1282,8 +1282,8 @@ static int	dbsync_compare_item(const ZBX_DC_ITEM *item, const DB_ROW dbrow)
 	ZBX_DC_DEPENDENTITEM	*depitem;
 	ZBX_DC_HOST		*host;
 	ZBX_DC_HTTPITEM		*httpitem;
-	unsigned char		value_type, type, history, trends;
-	int			history_sec = 0;
+	unsigned char		value_type, type;
+	int			history_sec, trends_sec;
 
 	if (FAIL == dbsync_compare_uint64(dbrow[1], item->hostid))
 		return FAIL;
@@ -1316,20 +1316,13 @@ static int	dbsync_compare_item(const ZBX_DC_ITEM *item, const DB_ROW dbrow)
 	if (FAIL == dbsync_compare_uint64(dbrow[25], item->interfaceid))
 		return FAIL;
 
-	if (ZBX_HK_OPTION_ENABLED == dbsync_env.cache->config->hk.history_global)
-	{
-		history = (0 != dbsync_env.cache->config->hk.history);
+	if (SUCCEED != is_time_suffix(dbrow[31], &history_sec, ZBX_LENGTH_UNLIMITED))
+		history_sec = ZBX_HK_PERIOD_MAX;
+
+	if (0 != history_sec && ZBX_HK_OPTION_ENABLED == dbsync_env.cache->config->hk.history_global)
 		history_sec = dbsync_env.cache->config->hk.history;
-	}
-	else
-	{
-		if (SUCCEED != is_time_suffix(dbrow[31], &history_sec, ZBX_LENGTH_UNLIMITED))
-			return FAIL;
 
-		history = zbx_time2bool(dbrow[31]);
-	}
-
-	if (item->history != history)
+	if (item->history != (0 != history_sec))
 		return FAIL;
 
 	if (history_sec != item->history_sec)
@@ -1357,12 +1350,13 @@ static int	dbsync_compare_item(const ZBX_DC_ITEM *item, const DB_ROW dbrow)
 		if (NULL == numitem)
 			return FAIL;
 
-		if (ZBX_HK_OPTION_ENABLED == dbsync_env.cache->config->hk.trends_global)
-			trends = (0 != dbsync_env.cache->config->hk.trends);
-		else
-			trends = zbx_time2bool(dbrow[32]);
+		if (SUCCEED != is_time_suffix(dbrow[32], &trends_sec, ZBX_LENGTH_UNLIMITED))
+			trends_sec = ZBX_HK_PERIOD_MAX;
 
-		if (trends != numitem->trends)
+		if (0 != trends_sec && ZBX_HK_OPTION_ENABLED == dbsync_env.cache->config->hk.trends_global)
+			trends_sec = dbsync_env.cache->config->hk.trends;
+
+		if (numitem->trends != (0 != trends_sec))
 			return FAIL;
 
 		if (FAIL == dbsync_compare_str(dbrow[35], numitem->units))
@@ -3493,15 +3487,18 @@ int	zbx_dbsync_compare_item_preprocs(zbx_dbsync_t *sync)
 
 	if (NULL == (result = DBselect(
 			"select pp.item_preprocid,pp.itemid,pp.type,pp.params,pp.step,i.hostid,pp.error_handler,"
-				"pp.error_handler_params"
+				"pp.error_handler_params,i.type,i.key_,h.proxy_hostid"
 			" from item_preproc pp,items i,hosts h"
 			" where pp.itemid=i.itemid"
 				" and i.hostid=h.hostid"
-				" and h.proxy_hostid is null"
+				" and (h.proxy_hostid is null"
+					" or i.type in (%d,%d,%d))"
 				" and h.status in (%d,%d)"
 				" and i.flags<>%d"
 			" order by pp.itemid",
-			HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED, ZBX_FLAG_DISCOVERY_PROTOTYPE)))
+			ITEM_TYPE_INTERNAL, ITEM_TYPE_AGGREGATE, ITEM_TYPE_CALCULATED,
+			HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED,
+			ZBX_FLAG_DISCOVERY_PROTOTYPE)))
 	{
 		return FAIL;
 	}
@@ -3520,6 +3517,12 @@ int	zbx_dbsync_compare_item_preprocs(zbx_dbsync_t *sync)
 	while (NULL != (dbrow = DBfetch(result)))
 	{
 		unsigned char	tag = ZBX_DBSYNC_ROW_NONE;
+		unsigned char	type;
+
+		ZBX_STR2UCHAR(type, dbrow[8]);
+		if (SUCCEED != DBis_null(dbrow[10]) && SUCCEED != is_item_processed_by_server(type, dbrow[9]))
+			continue;
+
 		ZBX_STR2UINT64(rowid, dbrow[0]);
 		zbx_hashset_insert(&ids, &rowid, sizeof(rowid));
 
