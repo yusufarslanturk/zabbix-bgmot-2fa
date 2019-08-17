@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-11 01:44+0300\n"
+"POT-Creation-Date: 2019-08-18 01:44+0300\n"
 "PO-Revision-Date: 2013-10-10 08:26+0300\n"
 "Last-Translator: richlv <richlv@nakts.net>\n"
 "Language-Team: none\n"
@@ -447,21 +447,21 @@ msgstr ""
 msgid "Action"
 msgstr "Tindakan"
 
-#: include/classes/api/services/CAction.php:2823
-#: include/classes/api/services/CAction.php:2841
-#: include/classes/api/services/CAction.php:3018
-#: include/classes/api/services/CAction.php:3051
+#: include/classes/api/services/CAction.php:2829
+#: include/classes/api/services/CAction.php:2847
+#: include/classes/api/services/CAction.php:3024
+#: include/classes/api/services/CAction.php:3057
 #, c-format
 msgid "Action \"%1$s\" already exists."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2894
-#: include/classes/api/services/CAction.php:3095
+#: include/classes/api/services/CAction.php:2900
+#: include/classes/api/services/CAction.php:3101
 #, c-format
 msgid "Action \"%1$s\" no operations defined."
 msgstr ""
 
-#: actionconf.php:233
+#: actionconf.php:232
 msgid "Action added"
 msgstr "Aksi ditambahkan"
 
@@ -469,16 +469,16 @@ msgstr "Aksi ditambahkan"
 msgid "Action condition value must be empty."
 msgstr ""
 
-#: actionconf.php:257
+#: actionconf.php:254
 msgid "Action deleted"
 msgstr "Aksi dihapus"
 
-#: actionconf.php:503
+#: actionconf.php:500
 msgid "Action disabled"
 msgid_plural "Actions disabled"
 msgstr[0] ""
 
-#: actionconf.php:502
+#: actionconf.php:499
 msgid "Action enabled"
 msgid_plural "Actions enabled"
 msgstr[0] ""
@@ -1583,11 +1583,11 @@ msgstr ""
 msgid "Cannot add a non-numeric item \"%1$s\" to graph prototype \"%2$s\"."
 msgstr ""
 
-#: actionconf.php:234
+#: actionconf.php:233
 msgid "Cannot add action"
 msgstr "Tidak dapat menambah aksi"
 
-#: actionconf.php:320
+#: actionconf.php:317
 msgid "Cannot add action condition"
 msgstr ""
 
@@ -1883,7 +1883,7 @@ msgstr ""
 msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "Tidak dapat menghapus user Zabbix internal \"%1$s\", coba non-aktifkan user tersebut."
 
-#: actionconf.php:257
+#: actionconf.php:254
 msgid "Cannot delete action"
 msgstr "Tidak dapat menghapus aksi"
 
@@ -1946,7 +1946,7 @@ msgstr[0] "Tidak dapat menghapus grup"
 msgid "Cannot delete host"
 msgstr "Tidak dapat menghapus host"
 
-#: include/classes/api/services/CHost.php:1219
+#: include/classes/api/services/CHost.php:1223
 #, c-format
 msgid "Cannot delete host because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must contain at least one host or host group."
@@ -1974,7 +1974,7 @@ msgstr "Tidak dapat menghapus peta ikon"
 msgid "Cannot delete image"
 msgstr "Tidak dapat menghapus gambar"
 
-#: include/classes/api/services/CHost.php:1024
+#: include/classes/api/services/CHost.php:1028
 msgid "Cannot delete inventory."
 msgstr "Tidak dapat menghapus inventaris."
 
@@ -2031,7 +2031,7 @@ msgstr[0] "Tidak dapat menghapus script"
 msgid "Cannot delete scripts. Script \"%1$s\" is used in action operation \"%2$s\"."
 msgstr "Tidak dapat menghapus script. Script %1$s\" sedang digunakan pada operasi aksi \"%2$s\"."
 
-#: actionconf.php:525
+#: actionconf.php:519
 msgid "Cannot delete selected actions"
 msgstr "Tidak dapat menghapus aksi yang dipilih"
 
@@ -2123,7 +2123,7 @@ msgstr[0] "Tidak dapat menghapus nilai peta"
 msgid "Cannot delete web scenario"
 msgstr ""
 
-#: actionconf.php:514
+#: actionconf.php:508
 msgid "Cannot disable action"
 msgid_plural "Cannot disable actions"
 msgstr[0] ""
@@ -2178,7 +2178,7 @@ msgstr ""
 msgid "Cannot display more than one item with type \"Graph sum\"."
 msgstr ""
 
-#: actionconf.php:513
+#: actionconf.php:507
 msgid "Cannot enable action"
 msgid_plural "Cannot enable actions"
 msgstr[0] ""
@@ -2365,7 +2365,7 @@ msgstr "Tidak dapat memformat Tree. Periksa struktur logika dalam service link."
 msgid "Cannot format tree."
 msgstr "Tidak dapat memformat tree."
 
-#: include/classes/api/services/CTemplate.php:840
+#: include/classes/api/services/CTemplate.php:841
 msgid "Cannot have empty visible template name."
 msgstr ""
 
@@ -2395,12 +2395,12 @@ msgstr "Tidak dapat menyertakan tampilan file \"%s\"."
 msgid "Cannot insert trigger expression"
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1002
+#: include/classes/api/services/CHost.php:1006
 msgid "Cannot link template"
 msgstr "Tidak dapat menghubungkan template"
 
-#: include/classes/api/services/CTemplate.php:927
-#: include/classes/api/services/CTemplate.php:941
+#: include/classes/api/services/CTemplate.php:928
+#: include/classes/api/services/CTemplate.php:942
 msgid "Cannot link template."
 msgstr ""
 
@@ -2408,11 +2408,11 @@ msgstr ""
 msgid "Cannot logout."
 msgstr "Tidak bisa logout."
 
-#: include/classes/api/services/CHost.php:860
+#: include/classes/api/services/CHost.php:864
 msgid "Cannot mass update host name."
 msgstr "Tidak dapat perbarui nama host secara masal."
 
-#: include/classes/api/services/CTemplate.php:1065
+#: include/classes/api/services/CTemplate.php:1066
 msgid "Cannot mass update template name."
 msgstr ""
 
@@ -2420,7 +2420,7 @@ msgstr ""
 msgid "Cannot mass update visible host name."
 msgstr "Tidak dapat perbarui nama host yang tampil secara masal."
 
-#: include/classes/api/services/CTemplate.php:1030
+#: include/classes/api/services/CTemplate.php:1031
 msgid "Cannot mass update visible template name."
 msgstr ""
 
@@ -2496,7 +2496,7 @@ msgstr ""
 msgid "Cannot send request: %1$s."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2857
+#: include/classes/api/services/CAction.php:2863
 #, c-format
 msgid "Cannot set \"%1$s\" for action \"%2$s\"."
 msgstr ""
@@ -2542,9 +2542,9 @@ msgstr ""
 msgid "Cannot set \"templateid\" for screen \"%1$s\"."
 msgstr "Tidak dapat merubah \"templateid\" untuk layar \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:911
-#: include/classes/api/services/CHost.php:1780
-#: include/classes/api/services/CHost.php:1924
+#: include/classes/api/services/CHost.php:915
+#: include/classes/api/services/CHost.php:1786
+#: include/classes/api/services/CHost.php:1932
 msgid "Cannot set inventory fields for disabled inventory."
 msgstr ""
 
@@ -2578,12 +2578,12 @@ msgstr ""
 msgid "Cannot unlink and clear discovery rules"
 msgstr "Tidak dapat membatalkan hubungan dan membersihkan aturan discovery"
 
-#: include/classes/api/services/CHost.php:977
+#: include/classes/api/services/CHost.php:981
 msgid "Cannot unlink template"
 msgstr "Tidak dapat membatalkan hubungan template"
 
-#: include/classes/api/services/CTemplate.php:892
-#: include/classes/api/services/CTemplate.php:915
+#: include/classes/api/services/CTemplate.php:893
+#: include/classes/api/services/CTemplate.php:916
 msgid "Cannot unlink template."
 msgstr ""
 
@@ -2592,8 +2592,8 @@ msgstr ""
 msgid "Cannot unlink trigger \"%s\", it has items from template that is left linked to host."
 msgstr "Tidak dapat membatalkan hubungan trigger \"%s\", memiliki item dari template yang tersisa ke host yang terhubung."
 
-#: include/classes/api/services/CAction.php:2997
-#: include/classes/api/services/CAction.php:3002
+#: include/classes/api/services/CAction.php:3003
+#: include/classes/api/services/CAction.php:3008
 #, c-format
 msgid "Cannot update \"%1$s\" for action \"%2$s\"."
 msgstr ""
@@ -2633,7 +2633,7 @@ msgstr ""
 msgid "Cannot update \"%1$s\" for trigger prototype \"%2$s\"."
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1903
+#: include/classes/api/services/CHost.php:1909
 #, c-format
 msgid "Cannot update \"%2$s\" for a discovered host \"%1$s\"."
 msgstr ""
@@ -2815,8 +2815,8 @@ msgstr "Tidak dapat perbarui peta jaringan"
 msgid "Cannot update proxy"
 msgstr "Tidak dapat perbarui proxy"
 
-#: include/classes/api/services/CProxy.php:702
-#: include/classes/api/services/CProxy.php:820
+#: include/classes/api/services/CProxy.php:703
+#: include/classes/api/services/CProxy.php:822
 #, c-format
 msgid "Cannot update proxy for discovered host \"%1$s\"."
 msgstr ""
@@ -2860,8 +2860,8 @@ msgstr ""
 msgid "Cannot update templates"
 msgstr ""
 
-#: include/classes/api/services/CTemplate.php:791
-#: include/classes/api/services/CTemplate.php:1125
+#: include/classes/api/services/CTemplate.php:792
+#: include/classes/api/services/CTemplate.php:1127
 #, c-format
 msgid "Cannot update templates on discovered host \"%1$s\"."
 msgstr ""
@@ -3285,7 +3285,7 @@ msgstr "Komersial"
 msgid "Compact view"
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2715
+#: include/classes/api/services/CAction.php:2721
 msgid "Comparing several triggers with \"and\" is not allowed."
 msgstr ""
 
@@ -3301,7 +3301,7 @@ msgstr ""
 msgid "Condition"
 msgstr "Kondisi"
 
-#: include/classes/api/services/CAction.php:2714
+#: include/classes/api/services/CAction.php:2720
 #, c-format
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for action \"%1$s\"."
 msgstr ""
@@ -3316,7 +3316,7 @@ msgstr ""
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for discovery rule \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2713
+#: include/classes/api/services/CAction.php:2719
 #, c-format
 msgid "Condition \"%2$s\" used in formula \"%3$s\" for action \"%1$s\" is not defined."
 msgstr ""
@@ -4117,7 +4117,7 @@ msgid "DNS name"
 msgstr "Nama DNS"
 
 #: app/views/report.services.php:34 include/forms.inc.php:2213
-#: include/maintenances.inc.php:33 report4.php:107
+#: include/maintenances.inc.php:33 report4.php:111
 msgid "Daily"
 msgstr "Harian"
 
@@ -4274,7 +4274,7 @@ msgstr "Tanggal HW pemeliharaan habis"
 msgid "Date HW purchased"
 msgstr "Tanggal HW dibeli"
 
-#: app/views/report.services.php:69 report4.php:179
+#: app/views/report.services.php:69 report4.php:183
 msgid "Day"
 msgstr "Hari"
 
@@ -4715,7 +4715,7 @@ msgstr ""
 msgid "Deleted"
 msgstr "Dihapus"
 
-#: include/classes/api/services/CHost.php:1371
+#: include/classes/api/services/CHost.php:1375
 #, c-format
 msgid "Deleted: Host \"%1$s\"."
 msgstr "Dihapus: Host \"%1$s\"."
@@ -4725,7 +4725,7 @@ msgstr "Dihapus: Host \"%1$s\"."
 msgid "Deleted: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr ""
 
-#: include/classes/api/services/CTemplate.php:721
+#: include/classes/api/services/CTemplate.php:722
 #, c-format
 msgid "Deleted: Template \"%1$s\"."
 msgstr "Dihapus : Template \"%1$s\"."
@@ -5277,14 +5277,14 @@ msgstr "Duplikasi dependensi pada trigger \"%1$s\"."
 msgid "Duplicate dependencies in trigger prototype \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1716
-#: include/classes/api/services/CHost.php:1954
+#: include/classes/api/services/CHost.php:1722
+#: include/classes/api/services/CHost.php:1962
 #, c-format
 msgid "Duplicate host. Host with the same host name \"%s\" already exists in data."
 msgstr "Duplikasi host. Host dengan nama \"%s\" sudah ada dalam data."
 
-#: include/classes/api/services/CHost.php:1723
-#: include/classes/api/services/CHost.php:1974
+#: include/classes/api/services/CHost.php:1729
+#: include/classes/api/services/CHost.php:1982
 #, c-format
 msgid "Duplicate host. Host with the same visible name \"%s\" already exists in data."
 msgstr "Duplikasi host. Host dengan nama tampil \"%s\" sudah ada dalam data."
@@ -5480,7 +5480,7 @@ msgstr ""
 msgid "Empty correlation ID."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2745
+#: include/classes/api/services/CAction.php:2751
 #, c-format
 msgid "Empty filter condition formula ID for action \"%1$s\"."
 msgstr ""
@@ -5495,12 +5495,12 @@ msgstr ""
 msgid "Empty filter condition macro for discovery rule \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2750
+#: include/classes/api/services/CAction.php:2756
 #, c-format
 msgid "Empty filter condition operator for action \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2734
+#: include/classes/api/services/CAction.php:2740
 #, c-format
 msgid "Empty filter condition type for action \"%1$s\"."
 msgstr ""
@@ -5511,7 +5511,7 @@ msgstr ""
 #: include/classes/api/services/CDRule.php:187
 #: include/classes/api/services/CDRule.php:313
 #: include/classes/api/services/CHostInterface.php:383
-#: include/classes/api/services/CHost.php:1183
+#: include/classes/api/services/CHost.php:1187
 #: include/classes/api/services/CHostPrototype.php:875
 #: include/classes/api/services/CImage.php:451
 #: include/classes/api/services/CMaintenance.php:512
@@ -5527,7 +5527,7 @@ msgstr ""
 #: include/classes/api/services/CService.php:366
 #: include/classes/api/services/CService.php:430
 #: include/classes/api/services/CService.php:498
-#: include/classes/api/services/CTemplate.php:586
+#: include/classes/api/services/CTemplate.php:587
 #: include/classes/api/services/CTrigger.php:678
 #: include/classes/api/services/CTrigger.php:802
 #: include/classes/api/services/CUserMacro.php:600
@@ -6028,7 +6028,7 @@ msgstr ""
 msgid "Failed to update dashboard"
 msgstr ""
 
-#: include/classes/api/services/CTemplate.php:535
+#: include/classes/api/services/CTemplate.php:536
 msgid "Failed to update template."
 msgstr ""
 
@@ -6071,14 +6071,14 @@ msgid "Field \"%1$s\" cannot be set to NULL."
 msgstr ""
 
 #: app/controllers/CControllerPopupTriggerWizard.php:226
-#: include/classes/api/services/CAction.php:1709
+#: include/classes/api/services/CAction.php:1715
 #: include/classes/api/services/CDRule.php:196
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:521
 #: include/classes/api/services/CDRule.php:531
 #: include/classes/api/services/CHostGroup.php:911
 #: include/classes/api/services/CHost.php:773
-#: include/classes/api/services/CTemplate.php:819
+#: include/classes/api/services/CTemplate.php:820
 #: include/classes/api/services/CTriggerGeneral.php:237
 #: include/classes/validators/CNewValidator.php:255
 #: include/validate.inc.php:300
@@ -6130,7 +6130,7 @@ msgstr ""
 msgid "Field \"%1$s\" must be missing."
 msgstr ""
 
-#: include/classes/api/services/CTemplate.php:424
+#: include/classes/api/services/CTemplate.php:426
 msgid "Field \"host\" is mandatory."
 msgstr ""
 
@@ -6325,7 +6325,7 @@ msgstr "Jumat"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:86
 #: include/views/configuration.services.edit.php:245
 #: include/views/configuration.services.edit.php:291
-#: include/views/js/monitoring.sysmaps.js.php:668 report4.php:195
+#: include/views/js/monitoring.sysmaps.js.php:668 report4.php:199
 #: services.php:47 services.php:182
 msgid "From"
 msgstr "Dari"
@@ -7012,8 +7012,8 @@ msgid "Host"
 msgid_plural "Hosts"
 msgstr[0] "Host"
 
-#: include/classes/api/services/CHost.php:873
-#: include/classes/api/services/CTemplate.php:457
+#: include/classes/api/services/CHost.php:877
+#: include/classes/api/services/CTemplate.php:458
 #: include/classes/import/importers/CHostImporter.php:60
 #, c-format
 msgid "Host \"%1$s\" already exists."
@@ -7021,8 +7021,8 @@ msgstr "Host \"%1$s\" sudah ada."
 
 #: include/classes/api/services/CHostGroup.php:1457
 #: include/classes/api/services/CHost.php:836
-#: include/classes/api/services/CHost.php:1699
-#: include/classes/api/services/CHost.php:1880
+#: include/classes/api/services/CHost.php:1705
+#: include/classes/api/services/CHost.php:1886
 #, c-format
 msgid "Host \"%1$s\" cannot be without host group."
 msgstr ""
@@ -7283,25 +7283,25 @@ msgstr "Host diperbarui"
 msgid "Host with ID \"%1$s\" is not available."
 msgstr ""
 
-#: include/classes/api/services/CTemplate.php:1091
+#: include/classes/api/services/CTemplate.php:1092
 #, c-format
 msgid "Host with the same name \"%1$s\" already exists."
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1811
-#: include/classes/api/services/CHost.php:2035
+#: include/classes/api/services/CHost.php:1817
+#: include/classes/api/services/CHost.php:2043
 #, c-format
 msgid "Host with the same name \"%s\" already exists."
 msgstr "Host dengan nama yang sama \"%s\" sudah ada."
 
-#: include/classes/api/services/CTemplate.php:483
-#: include/classes/api/services/CTemplate.php:1056
+#: include/classes/api/services/CTemplate.php:484
+#: include/classes/api/services/CTemplate.php:1057
 #, c-format
 msgid "Host with the same visible name \"%1$s\" already exists."
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1817
-#: include/classes/api/services/CHost.php:2042
+#: include/classes/api/services/CHost.php:1823
+#: include/classes/api/services/CHost.php:2050
 #, c-format
 msgid "Host with the same visible name \"%s\" already exists."
 msgstr "Host dengan nama tampil yang sama \"%s\" sudah ada."
@@ -7662,7 +7662,8 @@ msgstr ""
 
 #: app/controllers/CControllerDashboardView.php:400
 #: include/actions.inc.php:2077 include/actions.inc.php:2100
-#: include/actions.inc.php:2105 include/views/monitoring.screen.edit.php:88
+#: include/actions.inc.php:2105 include/events.inc.php:224
+#: include/views/monitoring.screen.edit.php:88
 #: include/views/monitoring.slideconf.edit.php:78
 #: include/views/monitoring.sysmap.edit.php:76
 msgid "Inaccessible user"
@@ -7767,7 +7768,7 @@ msgstr "Komunitas SNMP salah."
 msgid "Incorrect acceptable SLA for service \"%1$s\"."
 msgstr "SLA yang dapat diterima untuk service \"%1$s\" salah."
 
-#: include/classes/api/services/CAction.php:3164
+#: include/classes/api/services/CAction.php:3170
 msgid "Incorrect acknowledgement action operationid."
 msgstr ""
 
@@ -7775,7 +7776,7 @@ msgstr ""
 msgid "Incorrect action condition discovery check."
 msgstr "Aksi kondisi pemeriksa penemuan salah."
 
-#: include/classes/api/services/CAction.php:3240
+#: include/classes/api/services/CAction.php:3246
 msgid "Incorrect action condition discovery check. Discovery check does not exist or you have no access to it."
 msgstr "Aksi kondisi pemeriksa penemuan salah. Pemeriksa penemuan tidak ada atau Anda tidak memiliki akses untuk itu."
 
@@ -7783,7 +7784,7 @@ msgstr "Aksi kondisi pemeriksa penemuan salah. Pemeriksa penemuan tidak ada atau
 msgid "Incorrect action condition discovery object."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:3237
+#: include/classes/api/services/CAction.php:3243
 msgid "Incorrect action condition discovery rule. Discovery rule does not exist or you have no access to it."
 msgstr "Aksi kondisi aturan penemuan salah. Aturan penemuan tidak ada atau Anda tidak memiliki akses untuk itu."
 
@@ -7795,11 +7796,11 @@ msgstr "Aksi kondisi status penemuan salah."
 msgid "Incorrect action condition event type."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:3225
+#: include/classes/api/services/CAction.php:3231
 msgid "Incorrect action condition host group. Host group does not exist or you have no access to it."
 msgstr "Aksi kondisi grup host salah. Grup host tidak ada atau Anda tidak memiliki akses untuk itu."
 
-#: include/classes/api/services/CAction.php:3228
+#: include/classes/api/services/CAction.php:3234
 msgid "Incorrect action condition host. Host does not exist or you have no access to it."
 msgstr "Aksi kondisi host salah. Host tidak ada atau Anda tidak memiliki akses untuk itu."
 
@@ -7808,11 +7809,11 @@ msgstr "Aksi kondisi host salah. Host tidak ada atau Anda tidak memiliki akses u
 msgid "Incorrect action condition port \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:3243
+#: include/classes/api/services/CAction.php:3249
 msgid "Incorrect action condition proxy. Proxy does not exist or you have no access to it."
 msgstr "Aksi kondisi proxy salah. Proxy tidak ada atau Anda tidak memiliki akses untuk itu."
 
-#: include/classes/api/services/CAction.php:3231
+#: include/classes/api/services/CAction.php:3237
 msgid "Incorrect action condition template. Template does not exist or you have no access to it."
 msgstr "Aksi kondisi template salah. Template tidak ada atau Anda tidak memiliki akses untuk itu."
 
@@ -7820,7 +7821,7 @@ msgstr "Aksi kondisi template salah. Template tidak ada atau Anda tidak memiliki
 msgid "Incorrect action condition trigger severity."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:3234
+#: include/classes/api/services/CAction.php:3240
 msgid "Incorrect action condition trigger. Trigger does not exist or you have no access to it."
 msgstr "Aksi kondisi trigger salah. Trigger tidak ada atau Anda tidak memiliki akses untuk itu."
 
@@ -7828,56 +7829,56 @@ msgstr "Aksi kondisi trigger salah. Trigger tidak ada atau Anda tidak memiliki a
 msgid "Incorrect action condition type."
 msgstr "Aksi kondisi tipe salah."
 
-#: include/classes/api/services/CAction.php:1882
+#: include/classes/api/services/CAction.php:1888
 msgid "Incorrect action operation command type."
 msgstr "Aksi operasi tipe perintah salah."
 
-#: include/classes/api/services/CAction.php:2031
+#: include/classes/api/services/CAction.php:2037
 msgid "Incorrect action operation condition acknowledge type."
 msgstr "Kesalahan aksi kondisi pengoperasian tipe pemberitahuan."
 
-#: include/classes/api/services/CAction.php:2036
+#: include/classes/api/services/CAction.php:2042
 msgid "Incorrect action operation condition type."
 msgstr "Kesalahan aksi operasi tipe kondisi."
 
-#: include/classes/api/services/CAction.php:1726
 #: include/classes/api/services/CAction.php:1732
+#: include/classes/api/services/CAction.php:1738
 msgid "Incorrect action operation escalation step values."
 msgstr "Kesalahan aksi operasi nilai langkah eskalasi."
 
-#: include/classes/api/services/CAction.php:1995
+#: include/classes/api/services/CAction.php:2001
 msgid "Incorrect action operation host group. Host group does not exist or you have no access to this host group."
 msgstr "Kesalahan aksi operasi grup host. Grup host tidak ada atau Anda tidak memiliki akses ke grup host ini."
 
-#: include/classes/api/services/CAction.php:1998
+#: include/classes/api/services/CAction.php:2004
 msgid "Incorrect action operation host. Host does not exist or you have no access to this host."
 msgstr "Kesalahan aksi operasi host. Host tidak ada atau Anda tidak memiliki akses ke host ini."
 
-#: include/classes/api/services/CAction.php:1889
-#: include/classes/api/services/CAction.php:1898
+#: include/classes/api/services/CAction.php:1895
+#: include/classes/api/services/CAction.php:1904
 #, c-format
 msgid "Incorrect action operation port \"%s\"."
 msgstr "Kesalahan aksi operasi port \"%s\"."
 
-#: include/classes/api/services/CAction.php:2001
+#: include/classes/api/services/CAction.php:2007
 msgid "Incorrect action operation template. Template does not exist or you have no access to this template."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:1749
+#: include/classes/api/services/CAction.php:1755
 #, c-format
 msgid "Incorrect action operation type \"%1$s\" for event source \"%2$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2007
+#: include/classes/api/services/CAction.php:2013
 msgid "Incorrect action operation user group. User group does not exist or you have no access to this user group."
 msgstr "Kesalahan aksi operasi grup user. Grup user tidak ada atau Anda tidak memiliki akses ke grup user ini."
 
-#: include/classes/api/services/CAction.php:2004
+#: include/classes/api/services/CAction.php:2010
 msgid "Incorrect action operation user. User does not exist or you have no access to this user."
 msgstr "Kesalahan aksi operasi user. User tidak ada atau Anda tidak memiliki akses ke user ini."
 
-#: include/classes/api/services/CAction.php:3108
-#: include/classes/api/services/CAction.php:3126
+#: include/classes/api/services/CAction.php:3114
+#: include/classes/api/services/CAction.php:3132
 msgid "Incorrect action operationid."
 msgstr "Kesalahan akasi operasi id."
 
@@ -7974,26 +7975,26 @@ msgstr ""
 msgid "Incorrect calculate SLA value for service \"%1$s\"."
 msgstr "Kesalahan hitung nilai SLA untuk service \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:856
-#: include/classes/api/services/CHost.php:1687
-#: include/classes/api/services/CHost.php:1948
+#: include/classes/api/services/CHost.php:859
+#: include/classes/api/services/CHost.php:1693
+#: include/classes/api/services/CHost.php:1956
 #, c-format
 msgid "Incorrect characters used for host name \"%s\"."
 msgstr "Kesalahan karakter yang digunakan untuk nama host \"%s\"."
 
-#: include/classes/api/services/CProxy.php:623
-#: include/classes/api/services/CProxy.php:736
+#: include/classes/api/services/CProxy.php:624
+#: include/classes/api/services/CProxy.php:738
 #, c-format
 msgid "Incorrect characters used for proxy name \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CTemplate.php:434
-#: include/classes/api/services/CTemplate.php:1099
+#: include/classes/api/services/CTemplate.php:436
+#: include/classes/api/services/CTemplate.php:1102
 #, c-format
 msgid "Incorrect characters used for template name \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2707
+#: include/classes/api/services/CAction.php:2713
 #, c-format
 msgid "Incorrect conditions for action \"%1$s\"."
 msgstr ""
@@ -8007,7 +8008,7 @@ msgstr ""
 msgid "Incorrect correlation ID."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2712
+#: include/classes/api/services/CAction.php:2718
 #, c-format
 msgid "Incorrect custom expression \"%2$s\" for action \"%1$s\": %3$s."
 msgstr ""
@@ -8057,7 +8058,7 @@ msgstr ""
 msgid "Incorrect file upload."
 msgstr "Kesalahan file upload."
 
-#: include/classes/api/services/CAction.php:2746
+#: include/classes/api/services/CAction.php:2752
 #, c-format
 msgid "Incorrect filter condition formula ID for action \"%1$s\"."
 msgstr ""
@@ -8077,8 +8078,8 @@ msgstr ""
 msgid "Incorrect filter condition macro for discovery rule \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:1649
-#: include/classes/api/services/CAction.php:2751
+#: include/classes/api/services/CAction.php:1655
+#: include/classes/api/services/CAction.php:2757
 #, c-format
 msgid "Incorrect filter condition operator for action \"%1$s\"."
 msgstr ""
@@ -8088,8 +8089,8 @@ msgstr ""
 msgid "Incorrect filter condition operator for discovery rule \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:1642
-#: include/classes/api/services/CAction.php:2735
+#: include/classes/api/services/CAction.php:1648
+#: include/classes/api/services/CAction.php:2741
 #, c-format
 msgid "Incorrect filter condition type for action \"%1$s\"."
 msgstr ""
@@ -8128,21 +8129,21 @@ msgstr "Kesalahan grup host."
 msgid "Incorrect image index."
 msgstr "Kesalahan indeks gambar."
 
-#: include/classes/api/services/CAction.php:2900
-#: include/classes/api/services/CAction.php:2912
-#: include/classes/api/services/CAction.php:2924
+#: include/classes/api/services/CAction.php:2906
+#: include/classes/api/services/CAction.php:2918
+#: include/classes/api/services/CAction.php:2930
 #: include/classes/api/services/CHost.php:842
-#: include/classes/api/services/CHost.php:1681
-#: include/classes/api/services/CHost.php:1867
+#: include/classes/api/services/CHost.php:1687
+#: include/classes/api/services/CHost.php:1873
 #: include/classes/api/services/CImage.php:463
 #: include/classes/api/services/CImage.php:504
-#: include/classes/api/services/CProxy.php:618
-#: include/classes/api/services/CProxy.php:682
-#: include/classes/api/services/CProxy.php:725
-#: include/classes/api/services/CProxy.php:747
+#: include/classes/api/services/CProxy.php:619
+#: include/classes/api/services/CProxy.php:683
+#: include/classes/api/services/CProxy.php:727
+#: include/classes/api/services/CProxy.php:749
 #: include/classes/api/services/CScreen.php:454
-#: include/classes/api/services/CTemplate.php:429
-#: include/classes/api/services/CTemplate.php:566
+#: include/classes/api/services/CTemplate.php:431
+#: include/classes/api/services/CTemplate.php:567
 #: include/classes/api/services/CTemplateScreen.php:596
 msgid "Incorrect input parameters."
 msgstr ""
@@ -8157,13 +8158,13 @@ msgstr "Kesalahan parameter interface DNS \"%s\" yang disediakan."
 msgid "Incorrect interface port \"%s\" provided."
 msgstr "Kesalahan port interface \"%s\" yang disediakan."
 
-#: include/classes/api/services/CHost.php:1786
-#: include/classes/api/services/CHost.php:1930
+#: include/classes/api/services/CHost.php:1792
+#: include/classes/api/services/CHost.php:1938
 #, c-format
 msgid "Incorrect inventory field \"%s\"."
 msgstr "Kesalahan field inventori \"%s\"."
 
-#: include/classes/api/services/CAction.php:1985
+#: include/classes/api/services/CAction.php:1991
 msgid "Incorrect inventory mode in action operation."
 msgstr ""
 
@@ -8260,21 +8261,21 @@ msgstr ""
 msgid "Incorrect object value."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2818
+#: include/classes/api/services/CAction.php:2824
 #, c-format
 msgid "Incorrect parameter for action \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:1060
+#: include/classes/api/services/CAction.php:1066
 msgid "Incorrect parameter for operations."
 msgstr "Kesalahan parameter untuk operasi."
 
-#: include/classes/api/services/CAction.php:2987
+#: include/classes/api/services/CAction.php:2993
 #, c-format
 msgid "Incorrect parameters for action update method \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:1022
+#: include/classes/api/services/CAction.php:1028
 msgid "Incorrect parameters for condition."
 msgstr "Kesalahan parameter untuk kondisi."
 
@@ -8353,8 +8354,8 @@ msgstr ""
 msgid "Incorrect source value."
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1758
-#: include/classes/api/services/CHost.php:1898
+#: include/classes/api/services/CHost.php:1764
+#: include/classes/api/services/CHost.php:1904
 #, c-format
 msgid "Incorrect status for host \"%1$s\"."
 msgstr ""
@@ -8417,7 +8418,7 @@ msgstr ""
 msgid "Incorrect trigger prototype expression. Trigger prototype expression elements should not belong to a template and a host simultaneously."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2700
+#: include/classes/api/services/CAction.php:2706
 #, c-format
 msgid "Incorrect type of calculation for action \"%1$s\"."
 msgstr ""
@@ -8461,12 +8462,12 @@ msgid "Incorrect user group."
 msgstr "Kesalahan grup user."
 
 #: app/controllers/CControllerPopupGeneric.php:402
-#: include/classes/api/services/CAction.php:822
-#: include/classes/api/services/CAction.php:865
-#: include/classes/api/services/CAction.php:939
-#: include/classes/api/services/CAction.php:1847
-#: include/classes/api/services/CAction.php:2864
-#: include/classes/api/services/CAction.php:3009
+#: include/classes/api/services/CAction.php:827
+#: include/classes/api/services/CAction.php:870
+#: include/classes/api/services/CAction.php:944
+#: include/classes/api/services/CAction.php:1853
+#: include/classes/api/services/CAction.php:2870
+#: include/classes/api/services/CAction.php:3015
 #: include/classes/api/services/CDRule.php:237
 #: include/classes/api/services/CDRule.php:244
 #: include/classes/api/services/CDRule.php:292
@@ -8493,7 +8494,7 @@ msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
 msgstr ""
 
 #: app/controllers/CControllerAuthenticationUpdate.php:134
-#: include/classes/api/services/CAction.php:1780
+#: include/classes/api/services/CAction.php:1786
 #: include/classes/api/services/CScreenItem.php:576
 #: include/validate.inc.php:351
 #, c-format
@@ -8572,10 +8573,10 @@ msgstr ""
 #: app/controllers/CControllerPopupPreprocTestSend.php:101 correlation.php:227
 #: correlation.php:237 correlation.php:243 correlation.php:263
 #: correlation.php:267 correlation.php:280
-#: include/classes/api/services/CAction.php:1741
-#: include/classes/api/services/CAction.php:1915
-#: include/classes/api/services/CAction.php:1991
-#: include/classes/api/services/CAction.php:2953
+#: include/classes/api/services/CAction.php:1747
+#: include/classes/api/services/CAction.php:1921
+#: include/classes/api/services/CAction.php:1997
+#: include/classes/api/services/CAction.php:2959
 #: include/classes/api/services/CCorrelation.php:1045
 #: include/classes/api/services/CCorrelation.php:1080
 #: include/classes/api/services/CCorrelation.php:1101
@@ -8605,18 +8606,18 @@ msgstr ""
 #: include/classes/api/services/CEvent.php:780
 #: include/classes/api/services/CEvent.php:837
 #: include/classes/api/services/CHost.php:800
-#: include/classes/api/services/CHost.php:1585
-#: include/classes/api/services/CHost.php:1591
-#: include/classes/api/services/CHost.php:1606
-#: include/classes/api/services/CHost.php:1612
-#: include/classes/api/services/CHost.php:1617
-#: include/classes/api/services/CHost.php:1623
-#: include/classes/api/services/CHost.php:1631
-#: include/classes/api/services/CHost.php:1637
-#: include/classes/api/services/CHost.php:1646
-#: include/classes/api/services/CHost.php:1652
-#: include/classes/api/services/CHost.php:1752
-#: include/classes/api/services/CHost.php:1892
+#: include/classes/api/services/CHost.php:1589
+#: include/classes/api/services/CHost.php:1595
+#: include/classes/api/services/CHost.php:1610
+#: include/classes/api/services/CHost.php:1616
+#: include/classes/api/services/CHost.php:1621
+#: include/classes/api/services/CHost.php:1627
+#: include/classes/api/services/CHost.php:1635
+#: include/classes/api/services/CHost.php:1641
+#: include/classes/api/services/CHost.php:1650
+#: include/classes/api/services/CHost.php:1656
+#: include/classes/api/services/CHost.php:1758
+#: include/classes/api/services/CHost.php:1898
 #: include/classes/api/services/CHttpTest.php:957
 #: include/classes/api/services/CHttpTest.php:1053
 #: include/classes/api/services/CItemGeneral.php:216
@@ -8695,10 +8696,10 @@ msgstr ""
 #: include/classes/api/services/CProxy.php:565
 #: include/classes/api/services/CProxy.php:578
 #: include/classes/api/services/CProxy.php:584
-#: include/classes/api/services/CProxy.php:660
-#: include/classes/api/services/CProxy.php:668
-#: include/classes/api/services/CProxy.php:783
-#: include/classes/api/services/CProxy.php:791
+#: include/classes/api/services/CProxy.php:661
+#: include/classes/api/services/CProxy.php:669
+#: include/classes/api/services/CProxy.php:785
+#: include/classes/api/services/CProxy.php:793
 #: include/classes/api/services/CScreen.php:422
 #: include/classes/api/services/CScreen.php:428
 #: include/classes/api/services/CTriggerGeneral.php:242
@@ -8759,8 +8760,8 @@ msgstr ""
 msgid "Incorrect value used for PSK field. It should consist of an even number of hexadecimal characters."
 msgstr ""
 
-#: include/classes/api/services/CProxy.php:645
-#: include/classes/api/services/CProxy.php:775
+#: include/classes/api/services/CProxy.php:646
+#: include/classes/api/services/CProxy.php:777
 #, c-format
 msgid "Incorrect value used for proxy status \"%1$s\"."
 msgstr ""
@@ -9255,7 +9256,7 @@ msgstr "Pemberian nama view \"%s\" tidak sah. Karakter yang dibolehkan: \"a-z\" 
 msgid "Inventory"
 msgstr "Inventaris"
 
-#: include/classes/api/services/CHost.php:1043
+#: include/classes/api/services/CHost.php:1047
 #, c-format
 msgid "Inventory disabled for host \"%1$s\"."
 msgstr ""
@@ -10227,7 +10228,7 @@ msgstr "Makro diperbarui"
 #: include/views/monitoring.hostscreen.php:57
 #: include/views/monitoring.overview.items.php:45
 #: include/views/monitoring.overview.triggers.php:82
-#: include/views/monitoring.slides.php:83 report2.php:185 report4.php:128
+#: include/views/monitoring.slides.php:83 report2.php:185 report4.php:132
 #: srv_status.php:167
 msgid "Main filter"
 msgstr ""
@@ -10531,7 +10532,7 @@ msgid "Media"
 msgstr "Media"
 
 #: app/views/administration.mediatype.edit.php:182 include/audit.inc.php:26
-#: report4.php:99
+#: report4.php:103
 msgid "Media type"
 msgstr "Tipe media"
 
@@ -10806,12 +10807,12 @@ msgstr "Pemantauan"
 msgid "Monospace"
 msgstr ""
 
-#: app/views/report.services.php:67 include/forms.inc.php:2290 report4.php:166
+#: app/views/report.services.php:67 include/forms.inc.php:2290 report4.php:170
 msgid "Month"
 msgstr "Bulan"
 
 #: app/views/report.services.php:36 include/forms.inc.php:2215
-#: include/maintenances.inc.php:37 report4.php:109
+#: include/maintenances.inc.php:37 report4.php:113
 msgid "Monthly"
 msgstr "Bulanan"
 
@@ -10863,7 +10864,7 @@ msgstr "NNTP"
 msgid "NTLM"
 msgstr ""
 
-#: actionconf.php:36 actionconf.php:239 adm.regexps.php:36 adm.regexps.php:158
+#: actionconf.php:36 adm.regexps.php:36 adm.regexps.php:158
 #: adm.regexps.php:189 app/controllers/CControllerPopupGeneric.php:71
 #: app/controllers/CControllerPopupGeneric.php:83
 #: app/controllers/CControllerPopupGeneric.php:95
@@ -11203,9 +11204,9 @@ msgstr ""
 msgid "No \"%1$s\" given for template screen."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2758
-#: include/classes/api/services/CAction.php:2878
-#: include/classes/api/services/CAction.php:3071
+#: include/classes/api/services/CAction.php:2764
+#: include/classes/api/services/CAction.php:2884
+#: include/classes/api/services/CAction.php:3077
 #, c-format
 msgid "No \"%2$s\" given for a filter condition of action \"%1$s\"."
 msgstr ""
@@ -11215,7 +11216,7 @@ msgstr ""
 msgid "No \"%2$s\" given for a filter condition of discovery rule \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2719
+#: include/classes/api/services/CAction.php:2725
 #, c-format
 msgid "No \"%2$s\" given for the filter of action \"%1$s\"."
 msgstr ""
@@ -11261,13 +11262,13 @@ msgstr ""
 msgid "No applications found."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:1812
+#: include/classes/api/services/CAction.php:1818
 #, fuzzy, c-format
 msgid "No authentication type specified for action operation command \"%s\"."
 msgstr "Tidak ada tipe otentikasi yang spesifik untuk aksi operasi perintah \"%s\"."
 
-#: include/classes/api/services/CAction.php:1822
-#: include/classes/api/services/CAction.php:1857
+#: include/classes/api/services/CAction.php:1828
+#: include/classes/api/services/CAction.php:1863
 #, fuzzy, c-format
 msgid "No authentication user name specified for action operation command \"%s\"."
 msgstr "Tidak ada otentikasi nama user yang spesifik untuk aksi operasi perintah \"%s\"."
@@ -11276,11 +11277,11 @@ msgstr "Tidak ada otentikasi nama user yang spesifik untuk aksi operasi perintah
 msgid "No authentication user name specified."
 msgstr "Tidak ada otentikasi nama user yang spesifik."
 
-#: include/classes/api/services/CAction.php:1793
+#: include/classes/api/services/CAction.php:1799
 msgid "No command specified for action operation."
 msgstr "Tidak ada perintah yang spesifik untuk aksi operasi."
 
-#: include/classes/api/services/CAction.php:1787
+#: include/classes/api/services/CAction.php:1793
 msgid "No command type specified for action operation."
 msgstr "Tidak ada tipe perintah yang spesifik untuk aksi operasi."
 
@@ -11338,7 +11339,7 @@ msgstr "Tidak ada aturan ID yang diberikan pada discovery."
 msgid "No encryption"
 msgstr ""
 
-#: include/classes/api/services/CAction.php:1802
+#: include/classes/api/services/CAction.php:1808
 #, fuzzy, c-format
 msgid "No execution target specified for action operation command \"%s\"."
 msgstr "Tidak ada sasaran eksekusi yang spesifik untuk aksi operasi perintah \"%s\"."
@@ -11414,19 +11415,19 @@ msgstr "Tidak ada interface yang ditemukan"
 msgid "No interface found."
 msgstr "Tidak ada interface yang ditemukan."
 
-#: include/classes/api/services/CProxy.php:653
-#: include/classes/api/services/CProxy.php:830
+#: include/classes/api/services/CProxy.php:654
+#: include/classes/api/services/CProxy.php:832
 #, c-format
 msgid "No interface provided for proxy \"%s\"."
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1765
-#: include/classes/api/services/CHost.php:1941
+#: include/classes/api/services/CHost.php:1771
+#: include/classes/api/services/CHost.php:1949
 #, c-format
 msgid "No interfaces for host \"%s\"."
 msgstr "Tidak ada interface untuk host \"%s\"."
 
-#: include/classes/api/services/CAction.php:1980
+#: include/classes/api/services/CAction.php:1986
 msgid "No inventory mode specified for action operation."
 msgstr ""
 
@@ -11498,9 +11499,9 @@ msgstr "Tidak ada izin untuk akses sistem."
 #: app/controllers/CControllerWidgetPlainTextView.php:78
 #: app/views/monitoring.widget.graph.view.php:23 disc_prototypes.php:1251
 #: disc_prototypes.php:1496 host_discovery.php:664
-#: include/classes/api/services/CAction.php:1615
-#: include/classes/api/services/CAction.php:1992
-#: include/classes/api/services/CAction.php:2969
+#: include/classes/api/services/CAction.php:1621
+#: include/classes/api/services/CAction.php:1998
+#: include/classes/api/services/CAction.php:2975
 #: include/classes/api/services/CApplication.php:304
 #: include/classes/api/services/CApplication.php:340
 #: include/classes/api/services/CApplication.php:454
@@ -11545,10 +11546,10 @@ msgstr "Tidak ada izin untuk akses sistem."
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
 #: include/classes/api/services/CHostInterface.php:653
-#: include/classes/api/services/CHost.php:1152
-#: include/classes/api/services/CHost.php:1187
-#: include/classes/api/services/CHost.php:1741
-#: include/classes/api/services/CHost.php:1873
+#: include/classes/api/services/CHost.php:1156
+#: include/classes/api/services/CHost.php:1191
+#: include/classes/api/services/CHost.php:1747
+#: include/classes/api/services/CHost.php:1879
 #: include/classes/api/services/CHostPrototype.php:353
 #: include/classes/api/services/CHostPrototype.php:399
 #: include/classes/api/services/CHostPrototype.php:420
@@ -11589,9 +11590,9 @@ msgstr "Tidak ada izin untuk akses sistem."
 #: include/classes/api/services/CProxy.php:163
 #: include/classes/api/services/CProxy.php:253
 #: include/classes/api/services/CProxy.php:415
-#: include/classes/api/services/CProxy.php:696
-#: include/classes/api/services/CProxy.php:729
-#: include/classes/api/services/CProxy.php:814
+#: include/classes/api/services/CProxy.php:697
+#: include/classes/api/services/CProxy.php:731
+#: include/classes/api/services/CProxy.php:816
 #: include/classes/api/services/CScreenItem.php:396
 #: include/classes/api/services/CScreenItem.php:443
 #: include/classes/api/services/CScreen.php:770
@@ -11603,8 +11604,8 @@ msgstr "Tidak ada izin untuk akses sistem."
 #: include/classes/api/services/CService.php:989
 #: include/classes/api/services/CService.php:1013
 #: include/classes/api/services/CTask.php:136
-#: include/classes/api/services/CTemplate.php:759
-#: include/classes/api/services/CTemplate.php:781
+#: include/classes/api/services/CTemplate.php:760
+#: include/classes/api/services/CTemplate.php:782
 #: include/classes/api/services/CTemplateScreen.php:631
 #: include/classes/api/services/CTemplateScreen.php:682
 #: include/classes/api/services/CTemplateScreen.php:745
@@ -11633,7 +11634,7 @@ msgstr "Tidak ada izin untuk akses sistem."
 msgid "No permissions to referred object or it does not exist!"
 msgstr "Tidak ada izin untuk objek yang dirujuk atau objek tidak ada!"
 
-#: include/classes/api/services/CAction.php:1840
+#: include/classes/api/services/CAction.php:1846
 #, fuzzy, c-format
 msgid "No private key file specified for action operation command \"%s\"."
 msgstr "Tidak ada file kunci pribadi yang dispesifikasikan untuk aksi operasi perintah \"%s\"."
@@ -11646,7 +11647,7 @@ msgstr "Tidak ada file kunci pribadi yang dispesifikasikan."
 msgid "No proxy"
 msgstr "Tidak ada proxy"
 
-#: include/classes/api/services/CAction.php:1832
+#: include/classes/api/services/CAction.php:1838
 #, fuzzy, c-format
 msgid "No public key file specified for action operation command \"%s\"."
 msgstr "Tidak ada file kunci pribadi yang dispesifikasikan untuk aksi operasi perintah \"%s\"."
@@ -11655,7 +11656,7 @@ msgstr "Tidak ada file kunci pribadi yang dispesifikasikan untuk aksi operasi pe
 msgid "No public key file specified."
 msgstr "Tidak file kunci publik yang dispesifikasikan."
 
-#: include/classes/api/services/CAction.php:1764
+#: include/classes/api/services/CAction.php:1770
 msgid "No recipients for action operation message."
 msgstr "Tidak ada penerima untuk aksi operasi pesan."
 
@@ -11671,7 +11672,7 @@ msgstr "Tidak ada ID layar yang disediakan untuk element layar."
 msgid "No screens added."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:1867
+#: include/classes/api/services/CAction.php:1873
 msgid "No script specified for action operation command."
 msgstr "Tidak ada skrip yang dispesifikasikan untuk aksi operasi perintah."
 
@@ -11808,7 +11809,7 @@ msgstr "Tidak ada yang dilakukan."
 msgid "Notification report"
 msgstr "Laporan notifikasi"
 
-#: include/menu.inc.php:171 report4.php:65
+#: include/menu.inc.php:171 report4.php:69
 msgid "Notifications"
 msgstr "Notifikasi"
 
@@ -12233,7 +12234,7 @@ msgstr "Opera"
 msgid "Operating system information. Returns string"
 msgstr ""
 
-#: actionconf.php:405 correlation.php:317
+#: actionconf.php:402 correlation.php:317
 #, c-format
 msgid "Operation \"%s\" already exists."
 msgstr "Operasi \"%s\" sudah ada."
@@ -12252,11 +12253,11 @@ msgstr "Kondisi operasi"
 msgid "Operation details"
 msgstr "Detail operasi"
 
-#: include/classes/api/services/CAction.php:1953
+#: include/classes/api/services/CAction.php:1959
 msgid "Operation has no group to operate."
 msgstr "Operasi tidak memiliki grup untuk beroperasi."
 
-#: include/classes/api/services/CAction.php:1965
+#: include/classes/api/services/CAction.php:1971
 msgid "Operation has no template to operate."
 msgstr "Operasi tidak memiliki template untuk beroperasi."
 
@@ -12833,7 +12834,7 @@ msgstr ""
 #: include/views/configuration.item.massupdate.php:342
 #: include/views/configuration.item.prototype.edit.php:614
 #: include/views/configuration.item.prototype.massupdate.php:339
-#: include/views/configuration.maintenance.edit.php:77 report4.php:104
+#: include/views/configuration.maintenance.edit.php:77 report4.php:108
 #: srv_status.php:170
 msgid "Period"
 msgstr "Periode"
@@ -13265,8 +13266,8 @@ msgstr ""
 msgid "Proxy \"%1$s\" is used by discovery rule \"%2$s\"."
 msgstr "Proxy \"%1$s\"  sedang digunakan oleh aturan discovery \"%2$s\"."
 
-#: include/classes/api/services/CProxy.php:637
-#: include/classes/api/services/CProxy.php:762
+#: include/classes/api/services/CProxy.php:638
+#: include/classes/api/services/CProxy.php:764
 #, c-format
 msgid "Proxy \"%s\" already exists."
 msgstr "Proxy \"%s\" sudah ada."
@@ -13852,17 +13853,17 @@ msgstr ""
 msgid "Resolved by correlation rule."
 msgstr ""
 
+#: app/views/monitoring.widget.problems.view.php:143
+#: include/classes/screens/CScreenHostTriggers.php:249
+#: include/classes/screens/CScreenProblem.php:1018
+msgid "Resolved by inaccessible user."
+msgstr ""
+
 #: app/views/monitoring.widget.problems.view.php:142
 #: include/classes/screens/CScreenHostTriggers.php:248
 #: include/classes/screens/CScreenProblem.php:1017
 #, c-format
 msgid "Resolved by user \"%1$s\"."
-msgstr ""
-
-#: app/views/monitoring.widget.problems.view.php:143
-#: include/classes/screens/CScreenHostTriggers.php:249
-#: include/classes/screens/CScreenProblem.php:1018
-msgid "Resolved by user."
 msgstr ""
 
 #: include/views/administration.auditlogs.list.php:52
@@ -14579,7 +14580,7 @@ msgstr ""
 msgid "Selected"
 msgstr "Dipilih"
 
-#: actionconf.php:525
+#: actionconf.php:519
 msgid "Selected actions deleted"
 msgstr "Aksi yang dipilih dihapus"
 
@@ -15257,7 +15258,7 @@ msgstr ""
 msgid "Spanish (es_ES)"
 msgstr "Spanish (es_ES)"
 
-#: include/classes/api/services/CAction.php:1877
+#: include/classes/api/services/CAction.php:1883
 msgid "Specified script does not exist or you do not have rights on it for action operation command."
 msgstr "Skrip yang dispesifikasikan tidak ada atau Anda tidak memiliki hak atasnya untuk perintah aksi operasi."
 
@@ -15735,8 +15736,8 @@ msgstr "Telnet"
 msgid "Template"
 msgstr "Template"
 
-#: include/classes/api/services/CHost.php:884
-#: include/classes/api/services/CTemplate.php:447
+#: include/classes/api/services/CHost.php:888
+#: include/classes/api/services/CTemplate.php:448
 #: include/classes/import/importers/CTemplateImporter.php:72
 #, c-format
 msgid "Template \"%1$s\" already exists."
@@ -15744,7 +15745,7 @@ msgstr "Template \"%1$s\" sudah ada."
 
 #: include/classes/api/services/CHostGroup.php:1462
 #: include/classes/api/services/CTemplate.php:391
-#: include/classes/api/services/CTemplate.php:1023
+#: include/classes/api/services/CTemplate.php:1024
 #, c-format
 msgid "Template \"%1$s\" cannot be without host group."
 msgstr ""
@@ -15804,25 +15805,25 @@ msgstr "Template diperbarui"
 msgid "Template value"
 msgstr ""
 
-#: include/classes/api/services/CTemplate.php:1078
+#: include/classes/api/services/CTemplate.php:1079
 #, c-format
 msgid "Template with the same name \"%1$s\" already exists."
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1832
-#: include/classes/api/services/CHost.php:2060
+#: include/classes/api/services/CHost.php:1838
+#: include/classes/api/services/CHost.php:2068
 #, c-format
 msgid "Template with the same name \"%s\" already exists."
 msgstr "Template dengan nama yang sama \"%s\" sudah ada."
 
-#: include/classes/api/services/CTemplate.php:470
-#: include/classes/api/services/CTemplate.php:1043
+#: include/classes/api/services/CTemplate.php:471
+#: include/classes/api/services/CTemplate.php:1044
 #, c-format
 msgid "Template with the same visible name \"%1$s\" already exists."
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1838
-#: include/classes/api/services/CHost.php:2068
+#: include/classes/api/services/CHost.php:1844
+#: include/classes/api/services/CHost.php:2076
 #, c-format
 msgid "Template with the same visible name \"%s\" already exists."
 msgstr "Template dengan visible name yang sama \"%s\" sudah ada."
@@ -16080,7 +16081,7 @@ msgstr "Kamis"
 
 #: app/views/report.services.php:68
 #: include/views/configuration.services.edit.php:252
-#: include/views/configuration.services.edit.php:305 report4.php:195
+#: include/views/configuration.services.edit.php:305 report4.php:199
 #: services.php:48 services.php:191
 msgid "Till"
 msgstr "Hingga"
@@ -16929,7 +16930,7 @@ msgstr "Tidak mendukung import ekstensi file \"%1$s\"."
 msgid "Unsupported import format \"%1$s\"."
 msgstr "Tidak mendukung format import \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2759
+#: include/classes/api/services/CAction.php:2765
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for a filter condition of action \"%1$s\"."
 msgstr ""
@@ -16939,7 +16940,7 @@ msgstr ""
 msgid "Unsupported parameter \"%2$s\" for a filter condition of discovery rule \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2720
+#: include/classes/api/services/CAction.php:2726
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for the filter of action \"%1$s\"."
 msgstr ""
@@ -17113,8 +17114,8 @@ msgstr ""
 
 #: httpconf.php:59 include/actions.inc.php:1775 include/actions.inc.php:1829
 #: include/actions.inc.php:2044 include/audit.inc.php:24
-#: include/classes/setup/CSetupWizard.php:245 include/events.inc.php:224
-#: include/hosts.inc.php:61 include/views/administration.auditlogs.list.php:26
+#: include/classes/setup/CSetupWizard.php:245 include/hosts.inc.php:61
+#: include/views/administration.auditlogs.list.php:26
 #: include/views/administration.auditlogs.list.php:71
 #: include/views/administration.users.edit.php:453
 #: include/views/configuration.action.edit.php:698
@@ -17802,7 +17803,7 @@ msgstr ""
 msgid "Visible name"
 msgstr "Nama terlihat"
 
-#: include/classes/api/services/CHost.php:1966
+#: include/classes/api/services/CHost.php:1974
 msgid "Visible name cannot be empty if host name is missing."
 msgstr "Nama terlihat tidak boleh kosong jika nama hostnya hilang."
 
@@ -17907,7 +17908,7 @@ msgid "Wednesday"
 msgstr "Rabu"
 
 #: app/views/report.services.php:35 include/forms.inc.php:2214
-#: include/maintenances.inc.php:35 report4.php:108
+#: include/maintenances.inc.php:35 report4.php:112
 msgid "Weekly"
 msgstr "Mingguan"
 
@@ -18002,8 +18003,8 @@ msgstr "Tulis"
 msgid "Wrong fields for dependency for service \"%1$s\"."
 msgstr "Field salah untuk dependensi untuk service \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:1675
-#: include/classes/api/services/CHost.php:1861
+#: include/classes/api/services/CHost.php:1681
+#: include/classes/api/services/CHost.php:1867
 #, c-format
 msgid "Wrong fields for host \"%1$s\"."
 msgstr "Field yang salah untuk host \"%1$s\"."
@@ -18162,11 +18163,11 @@ msgid "YYYY-MM-DDThh:mm:ssZ"
 msgstr ""
 
 #: app/views/report.services.php:47 app/views/report.services.php:66
-#: report4.php:120 report4.php:154
+#: report4.php:124 report4.php:158
 msgid "Year"
 msgstr "Tahun"
 
-#: app/views/report.services.php:37 report4.php:110
+#: app/views/report.services.php:37 report4.php:114
 msgid "Yearly"
 msgstr "Tahunan"
 
@@ -18221,12 +18222,12 @@ msgstr "Anda tidak dapat menentukan host untuk operasi."
 msgid "You did not specify host group for operation."
 msgstr "Anda tidak dapat menentukan grup host untuk operasi."
 
-#: include/classes/api/services/CAction.php:1937
+#: include/classes/api/services/CAction.php:1943
 #, c-format
 msgid "You did not specify targets for action operation command \"%s\"."
 msgstr "Anda tidak dapat menentukan target untuk perintah aksi operasi \"%s\"."
 
-#: include/classes/api/services/CAction.php:1931
+#: include/classes/api/services/CAction.php:1937
 #, fuzzy, c-format
 msgid "You did not specify targets for action operation global script \"%s\"."
 msgstr "Anda tidak dapat menentukan target untuk skrip global aksi operasi \"%s\"."
@@ -18244,10 +18245,10 @@ msgstr "Anda tidak dapat menentukan target untuk skrip global aksi operasi \"%s\
 #: include/classes/api/services/CScript.php:555
 #: include/classes/api/services/CTask.php:104
 #: include/classes/api/services/CTemplate.php:411
-#: include/classes/api/services/CTemplate.php:561
-#: include/classes/api/services/CTemplate.php:598
-#: include/classes/api/services/CTemplate.php:1015
-#: include/classes/api/services/CTemplate.php:1120
+#: include/classes/api/services/CTemplate.php:562
+#: include/classes/api/services/CTemplate.php:599
+#: include/classes/api/services/CTemplate.php:1016
+#: include/classes/api/services/CTemplate.php:1122
 #: include/classes/api/services/CUserMacro.php:266
 #: include/classes/api/services/CUserMacro.php:350
 #: include/classes/api/services/CUserMacro.php:443
@@ -18518,7 +18519,7 @@ msgstr "agen"
 #: include/views/configuration.triggers.list.php:152
 #: include/views/js/configuration.graph.edit.js.php:55 report2.php:237
 #: report2.php:256 report2.php:288 report2.php:321 report2.php:363
-#: report2.php:382 report4.php:87 report4.php:289
+#: report2.php:382 report4.php:91 report4.php:293
 msgid "all"
 msgstr "semua"
 
@@ -18550,7 +18551,7 @@ msgstr ""
 msgid "an empty string is expected"
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1618
+#: include/classes/api/services/CHost.php:1622
 msgid "an even number of hexadecimal characters is expected"
 msgstr ""
 
@@ -18643,7 +18644,7 @@ msgstr ""
 #: app/controllers/CControllerPopupMedia.php:105 correlation.php:227
 #: correlation.php:237 correlation.php:243 correlation.php:263
 #: correlation.php:267 correlation.php:280
-#: include/classes/api/services/CAction.php:1915
+#: include/classes/api/services/CAction.php:1921
 #: include/classes/api/services/CCorrelation.php:1045
 #: include/classes/api/services/CCorrelation.php:1080
 #: include/classes/api/services/CCorrelation.php:1101
@@ -18657,8 +18658,8 @@ msgstr ""
 #: include/classes/api/services/CDRule.php:357
 #: include/classes/api/services/CDRule.php:540
 #: include/classes/api/services/CEvent.php:780
-#: include/classes/api/services/CHost.php:1606
-#: include/classes/api/services/CHost.php:1612
+#: include/classes/api/services/CHost.php:1610
+#: include/classes/api/services/CHost.php:1616
 #: include/classes/api/services/CItemGeneral.php:484
 #: include/classes/api/services/CItemGeneral.php:511
 #: include/classes/api/services/CItemGeneral.php:517
@@ -18848,7 +18849,7 @@ msgstr ""
 msgid "error message"
 msgstr ""
 
-#: include/classes/api/services/CAction.php:1720
+#: include/classes/api/services/CAction.php:1726
 msgid "esc_step_from and esc_step_to must be set together."
 msgstr "esc_stem_from dan esc_step_to harus ditentukan bersama."
 
@@ -19156,7 +19157,7 @@ msgstr "min"
 msgid "min() - Minimum value for period T"
 msgstr ""
 
-#: include/classes/api/services/CHost.php:1624
+#: include/classes/api/services/CHost.php:1628
 #, c-format
 msgid "minimum length is %1$s characters"
 msgstr ""
@@ -19408,10 +19409,10 @@ msgstr ""
 msgid "short description"
 msgstr "penjelasan singkat"
 
-#: include/classes/api/services/CHost.php:1631
-#: include/classes/api/services/CHost.php:1637
-#: include/classes/api/services/CHost.php:1646
-#: include/classes/api/services/CHost.php:1652
+#: include/classes/api/services/CHost.php:1635
+#: include/classes/api/services/CHost.php:1641
+#: include/classes/api/services/CHost.php:1650
+#: include/classes/api/services/CHost.php:1656
 #: include/classes/api/services/CHttpTest.php:957
 #: include/classes/api/services/CHttpTest.php:1053
 #: include/classes/api/services/CItemGeneral.php:498
@@ -19423,8 +19424,8 @@ msgstr "penjelasan singkat"
 #: include/classes/api/services/CItemGeneral.php:2184
 #: include/classes/api/services/CMaintenance.php:472
 #: include/classes/api/services/CMaintenance.php:675
-#: include/classes/api/services/CProxy.php:661
-#: include/classes/api/services/CProxy.php:784
+#: include/classes/api/services/CProxy.php:662
+#: include/classes/api/services/CProxy.php:786
 #: include/classes/api/services/CTriggerGeneral.php:548
 #: include/classes/api/services/CTriggerGeneral.php:574
 #: include/classes/api/services/CTriggerGeneral.php:793
@@ -19595,8 +19596,8 @@ msgstr ""
 
 #: include/classes/api/services/CEvent.php:738
 #: include/classes/api/services/CEvent.php:838
-#: include/classes/api/services/CHost.php:1586
-#: include/classes/api/services/CHost.php:1592
+#: include/classes/api/services/CHost.php:1590
+#: include/classes/api/services/CHost.php:1596
 #: include/classes/api/services/CItemGeneral.php:1303
 #: include/classes/api/services/CItemGeneral.php:1564
 #: include/classes/api/services/CItemGeneral.php:1590
@@ -19700,8 +19701,8 @@ msgid "value is too long"
 msgstr ""
 
 #: include/classes/api/services/CHost.php:801
-#: include/classes/api/services/CHost.php:1753
-#: include/classes/api/services/CHost.php:1893
+#: include/classes/api/services/CHost.php:1759
+#: include/classes/api/services/CHost.php:1899
 #: include/classes/api/services/CMapElement.php:86
 #: include/classes/api/services/CMap.php:675
 #: include/classes/api/services/CMap.php:681

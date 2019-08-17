@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-11 01:44+0300\n"
+"POT-Creation-Date: 2019-08-18 01:44+0300\n"
 "PO-Revision-Date: 2019-02-03 00:51+0300\n"
 "Last-Translator: Alexey <dotneft@gmail.com>\n"
 "Language-Team: Zabbix translation team\n"
@@ -480,21 +480,21 @@ msgstr "Подтвержденные РЕШЁННЫЕ события"
 msgid "Action"
 msgstr "Действие"
 
-#: include/classes/api/services/CAction.php:2823
-#: include/classes/api/services/CAction.php:2841
-#: include/classes/api/services/CAction.php:3018
-#: include/classes/api/services/CAction.php:3051
+#: include/classes/api/services/CAction.php:2829
+#: include/classes/api/services/CAction.php:2847
+#: include/classes/api/services/CAction.php:3024
+#: include/classes/api/services/CAction.php:3057
 #, c-format
 msgid "Action \"%1$s\" already exists."
 msgstr "Действие \"%1$s\" уже существует."
 
-#: include/classes/api/services/CAction.php:2894
-#: include/classes/api/services/CAction.php:3095
+#: include/classes/api/services/CAction.php:2900
+#: include/classes/api/services/CAction.php:3101
 #, c-format
 msgid "Action \"%1$s\" no operations defined."
 msgstr "В действии \"%1$s\" нет заданных операций."
 
-#: actionconf.php:233
+#: actionconf.php:232
 msgid "Action added"
 msgstr "Действие добавлено"
 
@@ -502,18 +502,18 @@ msgstr "Действие добавлено"
 msgid "Action condition value must be empty."
 msgstr "Значение условия действия должно быть пустым."
 
-#: actionconf.php:257
+#: actionconf.php:254
 msgid "Action deleted"
 msgstr "Действие удалено"
 
-#: actionconf.php:503
+#: actionconf.php:500
 msgid "Action disabled"
 msgid_plural "Actions disabled"
 msgstr[0] "Действие деактивировано"
 msgstr[1] "Действий деактивировано"
 msgstr[2] "Действия деактивированы"
 
-#: actionconf.php:502
+#: actionconf.php:499
 msgid "Action enabled"
 msgid_plural "Actions enabled"
 msgstr[0] "Действие активировано"
@@ -1625,11 +1625,11 @@ msgstr "Не удалось добавить не числовой элемен�
 msgid "Cannot add a non-numeric item \"%1$s\" to graph prototype \"%2$s\"."
 msgstr "Не удалось добавить не числовой элемент данных \"%1$s\" к прототипу графика \"%2$s\"."
 
-#: actionconf.php:234
+#: actionconf.php:233
 msgid "Cannot add action"
 msgstr "Не удалось добавить действие"
 
-#: actionconf.php:320
+#: actionconf.php:317
 msgid "Cannot add action condition"
 msgstr "Не удалось добавить условие действия"
 
@@ -1931,7 +1931,7 @@ msgstr "Не удалось создать виджет: %1$s."
 msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "Невозможно удалить внутреннего пользователя Zabbix \"%1$s\", попробуйте отключить его."
 
-#: actionconf.php:257
+#: actionconf.php:254
 msgid "Cannot delete action"
 msgstr "Не удалось удалить действие"
 
@@ -1998,7 +1998,7 @@ msgstr[2] "Не удалось удалить группы"
 msgid "Cannot delete host"
 msgstr "Не удалось удалить узел сети"
 
-#: include/classes/api/services/CHost.php:1219
+#: include/classes/api/services/CHost.php:1223
 #, c-format
 msgid "Cannot delete host because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must contain at least one host or host group."
@@ -2030,7 +2030,7 @@ msgstr "Не удалось удалить соответствие иконок
 msgid "Cannot delete image"
 msgstr "Не удалось удалить изображение"
 
-#: include/classes/api/services/CHost.php:1024
+#: include/classes/api/services/CHost.php:1028
 msgid "Cannot delete inventory."
 msgstr "Не удалось удалить инвентарные данные."
 
@@ -2095,7 +2095,7 @@ msgstr[2] "Не удалось удалить скрипт"
 msgid "Cannot delete scripts. Script \"%1$s\" is used in action operation \"%2$s\"."
 msgstr "Не удалось удалить скрипты. Скрипт \"%1$s\" используется в операции действия \"%2$s\"."
 
-#: actionconf.php:525
+#: actionconf.php:519
 msgid "Cannot delete selected actions"
 msgstr "Не удалось удалить выбранные действия"
 
@@ -2189,7 +2189,7 @@ msgstr[2] "Не удалось удалить преобразование зн�
 msgid "Cannot delete web scenario"
 msgstr "Не удалось удалить веб-сценарий"
 
-#: actionconf.php:514
+#: actionconf.php:508
 msgid "Cannot disable action"
 msgid_plural "Cannot disable actions"
 msgstr[0] "Не удалось деактивировать действие"
@@ -2261,7 +2261,7 @@ msgstr "Не удалось отобразить очередь элементо
 msgid "Cannot display more than one item with type \"Graph sum\"."
 msgstr "Невозможно отобразить более одного элемента данных с типом \"Суммарный график\"."
 
-#: actionconf.php:513
+#: actionconf.php:507
 msgid "Cannot enable action"
 msgid_plural "Cannot enable actions"
 msgstr[0] "Не удалось активировать действие"
@@ -2465,7 +2465,7 @@ msgstr "Не удалось построить дерево. Проверьте 
 msgid "Cannot format tree."
 msgstr "Не удалось построить дерево."
 
-#: include/classes/api/services/CTemplate.php:840
+#: include/classes/api/services/CTemplate.php:841
 msgid "Cannot have empty visible template name."
 msgstr "Видимое имя шаблона не может быть пустым."
 
@@ -2499,12 +2499,12 @@ msgstr "Не удалось включить файл представления
 msgid "Cannot insert trigger expression"
 msgstr "Не удалось вставить выражение триггера"
 
-#: include/classes/api/services/CHost.php:1002
+#: include/classes/api/services/CHost.php:1006
 msgid "Cannot link template"
 msgstr "Не удалось присоединить шаблон"
 
-#: include/classes/api/services/CTemplate.php:927
-#: include/classes/api/services/CTemplate.php:941
+#: include/classes/api/services/CTemplate.php:928
+#: include/classes/api/services/CTemplate.php:942
 msgid "Cannot link template."
 msgstr "Не удалось присоединить шаблон."
 
@@ -2512,11 +2512,11 @@ msgstr "Не удалось присоединить шаблон."
 msgid "Cannot logout."
 msgstr "Не удалось выполнить выход."
 
-#: include/classes/api/services/CHost.php:860
+#: include/classes/api/services/CHost.php:864
 msgid "Cannot mass update host name."
 msgstr "Невозможно массово обновить имя узла сети."
 
-#: include/classes/api/services/CTemplate.php:1065
+#: include/classes/api/services/CTemplate.php:1066
 msgid "Cannot mass update template name."
 msgstr "Невозможно массово обновить имя шаблона."
 
@@ -2524,7 +2524,7 @@ msgstr "Невозможно массово обновить имя шаблон
 msgid "Cannot mass update visible host name."
 msgstr "Невозможно массово обновить видимое имя узла сети."
 
-#: include/classes/api/services/CTemplate.php:1030
+#: include/classes/api/services/CTemplate.php:1031
 msgid "Cannot mass update visible template name."
 msgstr "Невозможно массово обновить видимое имя шаблона."
 
@@ -2600,7 +2600,7 @@ msgstr "Не удалось отправить запрос"
 msgid "Cannot send request: %1$s."
 msgstr "Не удалось отправить запрос: %1$s."
 
-#: include/classes/api/services/CAction.php:2857
+#: include/classes/api/services/CAction.php:2863
 #, c-format
 msgid "Cannot set \"%1$s\" for action \"%2$s\"."
 msgstr "Не удалось установить \"%1$s\" для действия \"%2$s\"."
@@ -2646,9 +2646,9 @@ msgstr "Не удалось установить поле \"templateid\" для 
 msgid "Cannot set \"templateid\" for screen \"%1$s\"."
 msgstr "Не удалось установить \"templateid\" для комплексного экрана \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:911
-#: include/classes/api/services/CHost.php:1780
-#: include/classes/api/services/CHost.php:1924
+#: include/classes/api/services/CHost.php:915
+#: include/classes/api/services/CHost.php:1786
+#: include/classes/api/services/CHost.php:1932
 msgid "Cannot set inventory fields for disabled inventory."
 msgstr "Невозможно задать поля инвентарных данных при отключенной инвентаризации."
 
@@ -2682,12 +2682,12 @@ msgstr "Не удалось отсоединить и очистить груп�
 msgid "Cannot unlink and clear discovery rules"
 msgstr "Не удалось отсоединить и очистить правила обнаружения"
 
-#: include/classes/api/services/CHost.php:977
+#: include/classes/api/services/CHost.php:981
 msgid "Cannot unlink template"
 msgstr "Не удалось отсоединить шаблон"
 
-#: include/classes/api/services/CTemplate.php:892
-#: include/classes/api/services/CTemplate.php:915
+#: include/classes/api/services/CTemplate.php:893
+#: include/classes/api/services/CTemplate.php:916
 msgid "Cannot unlink template."
 msgstr "Не удалось отсоединить шаблон."
 
@@ -2696,8 +2696,8 @@ msgstr "Не удалось отсоединить шаблон."
 msgid "Cannot unlink trigger \"%s\", it has items from template that is left linked to host."
 msgstr "Не удалось отсоединить триггер \"%s\", он содержит элементы данных из шаблона, которые остаются присоединенными к узлу сети."
 
-#: include/classes/api/services/CAction.php:2997
-#: include/classes/api/services/CAction.php:3002
+#: include/classes/api/services/CAction.php:3003
+#: include/classes/api/services/CAction.php:3008
 #, c-format
 msgid "Cannot update \"%1$s\" for action \"%2$s\"."
 msgstr "Не удалось обновить \"%1$s\" для действия \"%2$s\"."
@@ -2737,7 +2737,7 @@ msgstr "Не удалось обновить \"%1$s\" для триггера \"
 msgid "Cannot update \"%1$s\" for trigger prototype \"%2$s\"."
 msgstr "Не удалось обновить \"%1$s\" для прототипа триггера \"%2$s\"."
 
-#: include/classes/api/services/CHost.php:1903
+#: include/classes/api/services/CHost.php:1909
 #, c-format
 msgid "Cannot update \"%2$s\" for a discovered host \"%1$s\"."
 msgstr "Не удалось обновить \"%1$s\" у обнаруженного узла сети \"%2$s\"."
@@ -2925,8 +2925,8 @@ msgstr "Не удалось обновить карту сети"
 msgid "Cannot update proxy"
 msgstr "Не удалось обновить прокси"
 
-#: include/classes/api/services/CProxy.php:702
-#: include/classes/api/services/CProxy.php:820
+#: include/classes/api/services/CProxy.php:703
+#: include/classes/api/services/CProxy.php:822
 #, c-format
 msgid "Cannot update proxy for discovered host \"%1$s\"."
 msgstr "Не удалось обновить прокси для обнаруженного узла сети \"%1$s\"."
@@ -2970,8 +2970,8 @@ msgstr "Не удалось обновить шаблонные группы э�
 msgid "Cannot update templates"
 msgstr ""
 
-#: include/classes/api/services/CTemplate.php:791
-#: include/classes/api/services/CTemplate.php:1125
+#: include/classes/api/services/CTemplate.php:792
+#: include/classes/api/services/CTemplate.php:1127
 #, c-format
 msgid "Cannot update templates on discovered host \"%1$s\"."
 msgstr "Не удалось обновить шаблоны для обнаруженного узла сети \"%1$s\"."
@@ -3397,7 +3397,7 @@ msgstr "Коммерческие"
 msgid "Compact view"
 msgstr "Компактный вид"
 
-#: include/classes/api/services/CAction.php:2715
+#: include/classes/api/services/CAction.php:2721
 msgid "Comparing several triggers with \"and\" is not allowed."
 msgstr "Сравнение нескольких триггеров с условием \"и\" запрещено."
 
@@ -3413,7 +3413,7 @@ msgstr "Одновременные сессии"
 msgid "Condition"
 msgstr "Условие"
 
-#: include/classes/api/services/CAction.php:2714
+#: include/classes/api/services/CAction.php:2720
 #, c-format
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for action \"%1$s\"."
 msgstr "Условие \"%2$s\" не используется в формуле \"%3$s\" действия \"%1$s\"."
@@ -3428,7 +3428,7 @@ msgstr "Условие \"%2$s\" не используется в формуле 
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for discovery rule \"%1$s\"."
 msgstr "Условие \"%2$s\" не используется в формуле \"%3$s\" правила обнаружения \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2713
+#: include/classes/api/services/CAction.php:2719
 #, c-format
 msgid "Condition \"%2$s\" used in formula \"%3$s\" for action \"%1$s\" is not defined."
 msgstr "Условие \"%2$s\" используемое в формуле \"%3$s\" действия \"%1$s\" не определено."
@@ -4234,7 +4234,7 @@ msgid "DNS name"
 msgstr "DNS имя"
 
 #: app/views/report.services.php:34 include/forms.inc.php:2213
-#: include/maintenances.inc.php:33 report4.php:107
+#: include/maintenances.inc.php:33 report4.php:111
 msgid "Daily"
 msgstr "Ежедневно"
 
@@ -4393,7 +4393,7 @@ msgstr "Дата окончания обслуживания HW"
 msgid "Date HW purchased"
 msgstr "Дата покупки HW"
 
-#: app/views/report.services.php:69 report4.php:179
+#: app/views/report.services.php:69 report4.php:183
 msgid "Day"
 msgstr "День"
 
@@ -4836,7 +4836,7 @@ msgstr "Удалить веб-сценарий?"
 msgid "Deleted"
 msgstr "Удален"
 
-#: include/classes/api/services/CHost.php:1371
+#: include/classes/api/services/CHost.php:1375
 #, c-format
 msgid "Deleted: Host \"%1$s\"."
 msgstr "Удалено: Узел сети \"%1$s\"."
@@ -4846,7 +4846,7 @@ msgstr "Удалено: Узел сети \"%1$s\"."
 msgid "Deleted: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr "Удалено: Прототип узлов сети \"%1$s\" из \"%2$s\"."
 
-#: include/classes/api/services/CTemplate.php:721
+#: include/classes/api/services/CTemplate.php:722
 #, c-format
 msgid "Deleted: Template \"%1$s\"."
 msgstr "Удалено: Шаблон \"%1$s\"."
@@ -5402,14 +5402,14 @@ msgstr "Дублирующиеся зависимости в триггере \"
 msgid "Duplicate dependencies in trigger prototype \"%1$s\"."
 msgstr "Дубликат зависимостей в прототипе триггеров \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:1716
-#: include/classes/api/services/CHost.php:1954
+#: include/classes/api/services/CHost.php:1722
+#: include/classes/api/services/CHost.php:1962
 #, c-format
 msgid "Duplicate host. Host with the same host name \"%s\" already exists in data."
 msgstr "Дубликат узла сети. Узел сети с таким же именем \"%s\" уже существует в данных."
 
-#: include/classes/api/services/CHost.php:1723
-#: include/classes/api/services/CHost.php:1974
+#: include/classes/api/services/CHost.php:1729
+#: include/classes/api/services/CHost.php:1982
 #, c-format
 msgid "Duplicate host. Host with the same visible name \"%s\" already exists in data."
 msgstr "Дубликат узла сети. Узел сети с таким же видимым именем \"%s\" уже существует в данных."
@@ -5605,7 +5605,7 @@ msgstr ""
 msgid "Empty correlation ID."
 msgstr "Пустой ID корреляции."
 
-#: include/classes/api/services/CAction.php:2745
+#: include/classes/api/services/CAction.php:2751
 #, c-format
 msgid "Empty filter condition formula ID for action \"%1$s\"."
 msgstr "Пустой ID формулы условия фильтра для действия \"%1$s\"."
@@ -5620,12 +5620,12 @@ msgstr "Пустой ID формулы условия фильтра для пр
 msgid "Empty filter condition macro for discovery rule \"%1$s\"."
 msgstr "Пустой макрос условия фильтра для правила обнаружения \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2750
+#: include/classes/api/services/CAction.php:2756
 #, c-format
 msgid "Empty filter condition operator for action \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2734
+#: include/classes/api/services/CAction.php:2740
 #, c-format
 msgid "Empty filter condition type for action \"%1$s\"."
 msgstr ""
@@ -5636,7 +5636,7 @@ msgstr ""
 #: include/classes/api/services/CDRule.php:187
 #: include/classes/api/services/CDRule.php:313
 #: include/classes/api/services/CHostInterface.php:383
-#: include/classes/api/services/CHost.php:1183
+#: include/classes/api/services/CHost.php:1187
 #: include/classes/api/services/CHostPrototype.php:875
 #: include/classes/api/services/CImage.php:451
 #: include/classes/api/services/CMaintenance.php:512
@@ -5652,7 +5652,7 @@ msgstr ""
 #: include/classes/api/services/CService.php:366
 #: include/classes/api/services/CService.php:430
 #: include/classes/api/services/CService.php:498
-#: include/classes/api/services/CTemplate.php:586
+#: include/classes/api/services/CTemplate.php:587
 #: include/classes/api/services/CTrigger.php:678
 #: include/classes/api/services/CTrigger.php:802
 #: include/classes/api/services/CUserMacro.php:600
@@ -6154,7 +6154,7 @@ msgstr "Ошибка при разборе URL."
 msgid "Failed to update dashboard"
 msgstr "Ошибка при обновлении панели"
 
-#: include/classes/api/services/CTemplate.php:535
+#: include/classes/api/services/CTemplate.php:536
 msgid "Failed to update template."
 msgstr "Ошибка при обновлении шаблона."
 
@@ -6197,14 +6197,14 @@ msgid "Field \"%1$s\" cannot be set to NULL."
 msgstr "Поле \"%1$s\" не может быть NULL."
 
 #: app/controllers/CControllerPopupTriggerWizard.php:226
-#: include/classes/api/services/CAction.php:1709
+#: include/classes/api/services/CAction.php:1715
 #: include/classes/api/services/CDRule.php:196
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:521
 #: include/classes/api/services/CDRule.php:531
 #: include/classes/api/services/CHostGroup.php:911
 #: include/classes/api/services/CHost.php:773
-#: include/classes/api/services/CTemplate.php:819
+#: include/classes/api/services/CTemplate.php:820
 #: include/classes/api/services/CTriggerGeneral.php:237
 #: include/classes/validators/CNewValidator.php:255
 #: include/validate.inc.php:300
@@ -6256,7 +6256,7 @@ msgstr "Поле \"%1$s\" обязательно у типа оповещени�
 msgid "Field \"%1$s\" must be missing."
 msgstr "Поле \"%1$s\" должно быть пропущено."
 
-#: include/classes/api/services/CTemplate.php:424
+#: include/classes/api/services/CTemplate.php:426
 msgid "Field \"host\" is mandatory."
 msgstr "Поле \"host\" является обязательным."
 
@@ -6451,7 +6451,7 @@ msgstr "Пятница"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:86
 #: include/views/configuration.services.edit.php:245
 #: include/views/configuration.services.edit.php:291
-#: include/views/js/monitoring.sysmaps.js.php:668 report4.php:195
+#: include/views/js/monitoring.sysmaps.js.php:668 report4.php:199
 #: services.php:47 services.php:182
 msgid "From"
 msgstr "От"
@@ -7143,8 +7143,8 @@ msgstr[0] "Узел сети"
 msgstr[1] "Узлы сети"
 msgstr[2] "Узлы сети"
 
-#: include/classes/api/services/CHost.php:873
-#: include/classes/api/services/CTemplate.php:457
+#: include/classes/api/services/CHost.php:877
+#: include/classes/api/services/CTemplate.php:458
 #: include/classes/import/importers/CHostImporter.php:60
 #, c-format
 msgid "Host \"%1$s\" already exists."
@@ -7152,8 +7152,8 @@ msgstr "Узел сети \"%1$s\" уже существует."
 
 #: include/classes/api/services/CHostGroup.php:1457
 #: include/classes/api/services/CHost.php:836
-#: include/classes/api/services/CHost.php:1699
-#: include/classes/api/services/CHost.php:1880
+#: include/classes/api/services/CHost.php:1705
+#: include/classes/api/services/CHost.php:1886
 #, c-format
 msgid "Host \"%1$s\" cannot be without host group."
 msgstr "Узел сети \"%1$s\" не может быть без группы узлов сети."
@@ -7420,25 +7420,25 @@ msgstr "Узел сети обновлен"
 msgid "Host with ID \"%1$s\" is not available."
 msgstr "Узел сети с ID \"%1$s\" недоступен."
 
-#: include/classes/api/services/CTemplate.php:1091
+#: include/classes/api/services/CTemplate.php:1092
 #, c-format
 msgid "Host with the same name \"%1$s\" already exists."
 msgstr "Узел сети с таким же именем \"%1$s\" уже существует."
 
-#: include/classes/api/services/CHost.php:1811
-#: include/classes/api/services/CHost.php:2035
+#: include/classes/api/services/CHost.php:1817
+#: include/classes/api/services/CHost.php:2043
 #, c-format
 msgid "Host with the same name \"%s\" already exists."
 msgstr "Узел сети с таким же именем \"%s\" уже существует."
 
-#: include/classes/api/services/CTemplate.php:483
-#: include/classes/api/services/CTemplate.php:1056
+#: include/classes/api/services/CTemplate.php:484
+#: include/classes/api/services/CTemplate.php:1057
 #, c-format
 msgid "Host with the same visible name \"%1$s\" already exists."
 msgstr "Узел сети с таким же видимым именем \"%1$s\" уже существует."
 
-#: include/classes/api/services/CHost.php:1817
-#: include/classes/api/services/CHost.php:2042
+#: include/classes/api/services/CHost.php:1823
+#: include/classes/api/services/CHost.php:2050
 #, c-format
 msgid "Host with the same visible name \"%s\" already exists."
 msgstr "Узел сети с таким же видимым именем \"%s\" уже существует."
@@ -7799,7 +7799,8 @@ msgstr "Недоступный триггер"
 
 #: app/controllers/CControllerDashboardView.php:400
 #: include/actions.inc.php:2077 include/actions.inc.php:2100
-#: include/actions.inc.php:2105 include/views/monitoring.screen.edit.php:88
+#: include/actions.inc.php:2105 include/events.inc.php:224
+#: include/views/monitoring.screen.edit.php:88
 #: include/views/monitoring.slideconf.edit.php:78
 #: include/views/monitoring.sysmap.edit.php:76
 msgid "Inaccessible user"
@@ -7904,7 +7905,7 @@ msgstr "Некорректное SNMP community."
 msgid "Incorrect acceptable SLA for service \"%1$s\"."
 msgstr "Некорректное значение допустимого SLA для услуги \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:3164
+#: include/classes/api/services/CAction.php:3170
 msgid "Incorrect acknowledgement action operationid."
 msgstr "Некорректный operationid операции подтверждения."
 
@@ -7912,7 +7913,7 @@ msgstr "Некорректный operationid операции подтвержд
 msgid "Incorrect action condition discovery check."
 msgstr "Некорректная проверка обнаружения в условии действия."
 
-#: include/classes/api/services/CAction.php:3240
+#: include/classes/api/services/CAction.php:3246
 msgid "Incorrect action condition discovery check. Discovery check does not exist or you have no access to it."
 msgstr "Некорректная проверка обнаружения в условии действия. Проверка обнаружения не существует или у вас нет прав доступа к ней."
 
@@ -7920,7 +7921,7 @@ msgstr "Некорректная проверка обнаружения в ус
 msgid "Incorrect action condition discovery object."
 msgstr "Некорректный объект обнаружения в условии действия."
 
-#: include/classes/api/services/CAction.php:3237
+#: include/classes/api/services/CAction.php:3243
 msgid "Incorrect action condition discovery rule. Discovery rule does not exist or you have no access to it."
 msgstr "Некорректное правило обнаружения в условии действия. Правило обнаружения не существует или у вас нет прав доступа к нему."
 
@@ -7932,11 +7933,11 @@ msgstr "Некорректное состояние обнаружения в у
 msgid "Incorrect action condition event type."
 msgstr "Некорректный тип события в условии действия."
 
-#: include/classes/api/services/CAction.php:3225
+#: include/classes/api/services/CAction.php:3231
 msgid "Incorrect action condition host group. Host group does not exist or you have no access to it."
 msgstr "Некорректная группа узлов сети в условии действия. Группа узлов сети не существует или у вас нет прав доступа к ней."
 
-#: include/classes/api/services/CAction.php:3228
+#: include/classes/api/services/CAction.php:3234
 msgid "Incorrect action condition host. Host does not exist or you have no access to it."
 msgstr "Некорректный узел сети в условии действия. Узел сети не существует или у вас нет прав доступа к нему."
 
@@ -7945,11 +7946,11 @@ msgstr "Некорректный узел сети в условии дейст�
 msgid "Incorrect action condition port \"%1$s\"."
 msgstr "Некорректный порт \"%1$s\" в условии действия."
 
-#: include/classes/api/services/CAction.php:3243
+#: include/classes/api/services/CAction.php:3249
 msgid "Incorrect action condition proxy. Proxy does not exist or you have no access to it."
 msgstr "Некорректный прокси в условии действия. Прокси не существует или у вас нет прав доступа к нему."
 
-#: include/classes/api/services/CAction.php:3231
+#: include/classes/api/services/CAction.php:3237
 msgid "Incorrect action condition template. Template does not exist or you have no access to it."
 msgstr "Некорректный шаблон в условии действия. Шаблон не существует или у вас нет прав доступа к нему."
 
@@ -7957,7 +7958,7 @@ msgstr "Некорректный шаблон в условии действия
 msgid "Incorrect action condition trigger severity."
 msgstr "Некорректная важность триггера в условии действия."
 
-#: include/classes/api/services/CAction.php:3234
+#: include/classes/api/services/CAction.php:3240
 msgid "Incorrect action condition trigger. Trigger does not exist or you have no access to it."
 msgstr "Некорректный триггер в условии действия. Триггер не существует или у вас нет прав доступа к нему."
 
@@ -7965,56 +7966,56 @@ msgstr "Некорректный триггер в условии действи
 msgid "Incorrect action condition type."
 msgstr "Некорректный тип условия действия."
 
-#: include/classes/api/services/CAction.php:1882
+#: include/classes/api/services/CAction.php:1888
 msgid "Incorrect action operation command type."
 msgstr "Некорректный тип команды в операции действия."
 
-#: include/classes/api/services/CAction.php:2031
+#: include/classes/api/services/CAction.php:2037
 msgid "Incorrect action operation condition acknowledge type."
 msgstr "Некорректный тип подтверждения для условия в операции действия."
 
-#: include/classes/api/services/CAction.php:2036
+#: include/classes/api/services/CAction.php:2042
 msgid "Incorrect action operation condition type."
 msgstr "Некорректный тип условия в операции действия."
 
-#: include/classes/api/services/CAction.php:1726
 #: include/classes/api/services/CAction.php:1732
+#: include/classes/api/services/CAction.php:1738
 msgid "Incorrect action operation escalation step values."
 msgstr "Некорректные значения шага эскалации для операции действия."
 
-#: include/classes/api/services/CAction.php:1995
+#: include/classes/api/services/CAction.php:2001
 msgid "Incorrect action operation host group. Host group does not exist or you have no access to this host group."
 msgstr "Некорректная группа узлов сети в операции действия. Группа узлов сети не существует или у вас нет прав доступа к этой группе узлов сети."
 
-#: include/classes/api/services/CAction.php:1998
+#: include/classes/api/services/CAction.php:2004
 msgid "Incorrect action operation host. Host does not exist or you have no access to this host."
 msgstr "Некорректный узел сети для операции действия. Узел сети не существует или у вас нет к нему доступа."
 
-#: include/classes/api/services/CAction.php:1889
-#: include/classes/api/services/CAction.php:1898
+#: include/classes/api/services/CAction.php:1895
+#: include/classes/api/services/CAction.php:1904
 #, c-format
 msgid "Incorrect action operation port \"%s\"."
 msgstr "Некорректный порт \"%s\" в операции действия."
 
-#: include/classes/api/services/CAction.php:2001
+#: include/classes/api/services/CAction.php:2007
 msgid "Incorrect action operation template. Template does not exist or you have no access to this template."
 msgstr "Некорректный шаблон в операции действия. Шаблон не существует или у вас нет прав доступа к этому шаблону."
 
-#: include/classes/api/services/CAction.php:1749
+#: include/classes/api/services/CAction.php:1755
 #, c-format
 msgid "Incorrect action operation type \"%1$s\" for event source \"%2$s\"."
 msgstr "Некорректный тип операции действия \"%1$s\" для источника событий \"%2$s\"."
 
-#: include/classes/api/services/CAction.php:2007
+#: include/classes/api/services/CAction.php:2013
 msgid "Incorrect action operation user group. User group does not exist or you have no access to this user group."
 msgstr "Некорректная группа пользователей для операции действия. Группа пользователей не существует или у вас нет к ней доступа."
 
-#: include/classes/api/services/CAction.php:2004
+#: include/classes/api/services/CAction.php:2010
 msgid "Incorrect action operation user. User does not exist or you have no access to this user."
 msgstr "Некорректный пользователь для операции действия. Пользователь не существует или у вас нет к нему доступа."
 
-#: include/classes/api/services/CAction.php:3108
-#: include/classes/api/services/CAction.php:3126
+#: include/classes/api/services/CAction.php:3114
+#: include/classes/api/services/CAction.php:3132
 msgid "Incorrect action operationid."
 msgstr "Некорректный operationid действия."
 
@@ -8111,26 +8112,26 @@ msgstr "Некорректное значение массового опрос�
 msgid "Incorrect calculate SLA value for service \"%1$s\"."
 msgstr "Некорректное вычисляемое значение SLA для услуги \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:856
-#: include/classes/api/services/CHost.php:1687
-#: include/classes/api/services/CHost.php:1948
+#: include/classes/api/services/CHost.php:859
+#: include/classes/api/services/CHost.php:1693
+#: include/classes/api/services/CHost.php:1956
 #, c-format
 msgid "Incorrect characters used for host name \"%s\"."
 msgstr "Использованы некорректные символы в имени узла сети \"%s\"."
 
-#: include/classes/api/services/CProxy.php:623
-#: include/classes/api/services/CProxy.php:736
+#: include/classes/api/services/CProxy.php:624
+#: include/classes/api/services/CProxy.php:738
 #, c-format
 msgid "Incorrect characters used for proxy name \"%1$s\"."
 msgstr "Использованы некорректные символы в имени прокси \"%1$s\"."
 
-#: include/classes/api/services/CTemplate.php:434
-#: include/classes/api/services/CTemplate.php:1099
+#: include/classes/api/services/CTemplate.php:436
+#: include/classes/api/services/CTemplate.php:1102
 #, c-format
 msgid "Incorrect characters used for template name \"%1$s\"."
 msgstr "Использованы некорректные символы в имени шаблона \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2707
+#: include/classes/api/services/CAction.php:2713
 #, c-format
 msgid "Incorrect conditions for action \"%1$s\"."
 msgstr "Некорректные условия в действии \"%1$s\"."
@@ -8144,7 +8145,7 @@ msgstr "Некорректные условия в правиле обнаруж
 msgid "Incorrect correlation ID."
 msgstr "Некорректный ID корреляции."
 
-#: include/classes/api/services/CAction.php:2712
+#: include/classes/api/services/CAction.php:2718
 #, c-format
 msgid "Incorrect custom expression \"%2$s\" for action \"%1$s\": %3$s."
 msgstr "Некорректное пользовательское выражение \"%2$s\" для действия \"%1$s\": %3$s."
@@ -8194,7 +8195,7 @@ msgstr "Некорректные поля для карты сети."
 msgid "Incorrect file upload."
 msgstr "Некорректный загружаемый файл."
 
-#: include/classes/api/services/CAction.php:2746
+#: include/classes/api/services/CAction.php:2752
 #, c-format
 msgid "Incorrect filter condition formula ID for action \"%1$s\"."
 msgstr "Некорректный ID формулы условия фильтра для действия \"%1$s\"."
@@ -8214,8 +8215,8 @@ msgstr "Задан некорректный ID формулы условия ф�
 msgid "Incorrect filter condition macro for discovery rule \"%1$s\"."
 msgstr "Некорректный макрос условия фильтра для правила обнаружения \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:1649
-#: include/classes/api/services/CAction.php:2751
+#: include/classes/api/services/CAction.php:1655
+#: include/classes/api/services/CAction.php:2757
 #, c-format
 msgid "Incorrect filter condition operator for action \"%1$s\"."
 msgstr "Некорректный оператор условия фильтра для действия \"%1$s\"."
@@ -8225,8 +8226,8 @@ msgstr "Некорректный оператор условия фильтра 
 msgid "Incorrect filter condition operator for discovery rule \"%1$s\"."
 msgstr "Некорректный оператор условия фильтра для правила обнаружения \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:1642
-#: include/classes/api/services/CAction.php:2735
+#: include/classes/api/services/CAction.php:1648
+#: include/classes/api/services/CAction.php:2741
 #, c-format
 msgid "Incorrect filter condition type for action \"%1$s\"."
 msgstr "Некорректный тип условия фильтра для действия \"%1$s\"."
@@ -8265,21 +8266,21 @@ msgstr "Некорректная группа узлов сети."
 msgid "Incorrect image index."
 msgstr "Некорректный индекс изображения."
 
-#: include/classes/api/services/CAction.php:2900
-#: include/classes/api/services/CAction.php:2912
-#: include/classes/api/services/CAction.php:2924
+#: include/classes/api/services/CAction.php:2906
+#: include/classes/api/services/CAction.php:2918
+#: include/classes/api/services/CAction.php:2930
 #: include/classes/api/services/CHost.php:842
-#: include/classes/api/services/CHost.php:1681
-#: include/classes/api/services/CHost.php:1867
+#: include/classes/api/services/CHost.php:1687
+#: include/classes/api/services/CHost.php:1873
 #: include/classes/api/services/CImage.php:463
 #: include/classes/api/services/CImage.php:504
-#: include/classes/api/services/CProxy.php:618
-#: include/classes/api/services/CProxy.php:682
-#: include/classes/api/services/CProxy.php:725
-#: include/classes/api/services/CProxy.php:747
+#: include/classes/api/services/CProxy.php:619
+#: include/classes/api/services/CProxy.php:683
+#: include/classes/api/services/CProxy.php:727
+#: include/classes/api/services/CProxy.php:749
 #: include/classes/api/services/CScreen.php:454
-#: include/classes/api/services/CTemplate.php:429
-#: include/classes/api/services/CTemplate.php:566
+#: include/classes/api/services/CTemplate.php:431
+#: include/classes/api/services/CTemplate.php:567
 #: include/classes/api/services/CTemplateScreen.php:596
 msgid "Incorrect input parameters."
 msgstr "Некорректные входные параметры."
@@ -8294,13 +8295,13 @@ msgstr "Для интерфейса указан некорректный пар
 msgid "Incorrect interface port \"%s\" provided."
 msgstr "Для интерфейса указан некорректный порт \"%s\"."
 
-#: include/classes/api/services/CHost.php:1786
-#: include/classes/api/services/CHost.php:1930
+#: include/classes/api/services/CHost.php:1792
+#: include/classes/api/services/CHost.php:1938
 #, c-format
 msgid "Incorrect inventory field \"%s\"."
 msgstr "Некорректное поле \"%s\" инвентарных данных."
 
-#: include/classes/api/services/CAction.php:1985
+#: include/classes/api/services/CAction.php:1991
 msgid "Incorrect inventory mode in action operation."
 msgstr "Некорректный режим инвентарных данных в операции действия."
 
@@ -8397,21 +8398,21 @@ msgstr "Некорректный метод \"%1$s.%2$s\"."
 msgid "Incorrect object value."
 msgstr "Некорректное значение объекта."
 
-#: include/classes/api/services/CAction.php:2818
+#: include/classes/api/services/CAction.php:2824
 #, c-format
 msgid "Incorrect parameter for action \"%1$s\"."
 msgstr "Некорректный параметр для действия \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:1060
+#: include/classes/api/services/CAction.php:1066
 msgid "Incorrect parameter for operations."
 msgstr "Некорректный параметр для операций."
 
-#: include/classes/api/services/CAction.php:2987
+#: include/classes/api/services/CAction.php:2993
 #, c-format
 msgid "Incorrect parameters for action update method \"%1$s\"."
 msgstr "Некорректные параметры для метода обновления действия \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:1022
+#: include/classes/api/services/CAction.php:1028
 msgid "Incorrect parameters for condition."
 msgstr "Некорректные параметры для условии."
 
@@ -8490,8 +8491,8 @@ msgstr "Некорректный порядок сортировки у услу
 msgid "Incorrect source value."
 msgstr "Некорректное значение источника."
 
-#: include/classes/api/services/CHost.php:1758
-#: include/classes/api/services/CHost.php:1898
+#: include/classes/api/services/CHost.php:1764
+#: include/classes/api/services/CHost.php:1904
 #, c-format
 msgid "Incorrect status for host \"%1$s\"."
 msgstr "Некорректное состояние для узла сети \"%1$s\"."
@@ -8554,7 +8555,7 @@ msgstr "Некорректное выражение прототипа триг�
 msgid "Incorrect trigger prototype expression. Trigger prototype expression elements should not belong to a template and a host simultaneously."
 msgstr "Некорректное выражение прототипа триггеров. Элементы выражения прототипа триггеров не должны быть от шаблона и узла сети одновременно."
 
-#: include/classes/api/services/CAction.php:2700
+#: include/classes/api/services/CAction.php:2706
 #, c-format
 msgid "Incorrect type of calculation for action \"%1$s\"."
 msgstr "Некорректный тип вычисления для действия \"%1$s\"."
@@ -8598,12 +8599,12 @@ msgid "Incorrect user group."
 msgstr "Некорректная группа пользователей."
 
 #: app/controllers/CControllerPopupGeneric.php:402
-#: include/classes/api/services/CAction.php:822
-#: include/classes/api/services/CAction.php:865
-#: include/classes/api/services/CAction.php:939
-#: include/classes/api/services/CAction.php:1847
-#: include/classes/api/services/CAction.php:2864
-#: include/classes/api/services/CAction.php:3009
+#: include/classes/api/services/CAction.php:827
+#: include/classes/api/services/CAction.php:870
+#: include/classes/api/services/CAction.php:944
+#: include/classes/api/services/CAction.php:1853
+#: include/classes/api/services/CAction.php:2870
+#: include/classes/api/services/CAction.php:3015
 #: include/classes/api/services/CDRule.php:237
 #: include/classes/api/services/CDRule.php:244
 #: include/classes/api/services/CDRule.php:292
@@ -8630,7 +8631,7 @@ msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
 msgstr "Некорректное значение \"%1$s\" для \"%2$s\" поля."
 
 #: app/controllers/CControllerAuthenticationUpdate.php:134
-#: include/classes/api/services/CAction.php:1780
+#: include/classes/api/services/CAction.php:1786
 #: include/classes/api/services/CScreenItem.php:576
 #: include/validate.inc.php:351
 #, c-format
@@ -8709,10 +8710,10 @@ msgstr ""
 #: app/controllers/CControllerPopupPreprocTestSend.php:101 correlation.php:227
 #: correlation.php:237 correlation.php:243 correlation.php:263
 #: correlation.php:267 correlation.php:280
-#: include/classes/api/services/CAction.php:1741
-#: include/classes/api/services/CAction.php:1915
-#: include/classes/api/services/CAction.php:1991
-#: include/classes/api/services/CAction.php:2953
+#: include/classes/api/services/CAction.php:1747
+#: include/classes/api/services/CAction.php:1921
+#: include/classes/api/services/CAction.php:1997
+#: include/classes/api/services/CAction.php:2959
 #: include/classes/api/services/CCorrelation.php:1045
 #: include/classes/api/services/CCorrelation.php:1080
 #: include/classes/api/services/CCorrelation.php:1101
@@ -8742,18 +8743,18 @@ msgstr ""
 #: include/classes/api/services/CEvent.php:780
 #: include/classes/api/services/CEvent.php:837
 #: include/classes/api/services/CHost.php:800
-#: include/classes/api/services/CHost.php:1585
-#: include/classes/api/services/CHost.php:1591
-#: include/classes/api/services/CHost.php:1606
-#: include/classes/api/services/CHost.php:1612
-#: include/classes/api/services/CHost.php:1617
-#: include/classes/api/services/CHost.php:1623
-#: include/classes/api/services/CHost.php:1631
-#: include/classes/api/services/CHost.php:1637
-#: include/classes/api/services/CHost.php:1646
-#: include/classes/api/services/CHost.php:1652
-#: include/classes/api/services/CHost.php:1752
-#: include/classes/api/services/CHost.php:1892
+#: include/classes/api/services/CHost.php:1589
+#: include/classes/api/services/CHost.php:1595
+#: include/classes/api/services/CHost.php:1610
+#: include/classes/api/services/CHost.php:1616
+#: include/classes/api/services/CHost.php:1621
+#: include/classes/api/services/CHost.php:1627
+#: include/classes/api/services/CHost.php:1635
+#: include/classes/api/services/CHost.php:1641
+#: include/classes/api/services/CHost.php:1650
+#: include/classes/api/services/CHost.php:1656
+#: include/classes/api/services/CHost.php:1758
+#: include/classes/api/services/CHost.php:1898
 #: include/classes/api/services/CHttpTest.php:957
 #: include/classes/api/services/CHttpTest.php:1053
 #: include/classes/api/services/CItemGeneral.php:216
@@ -8832,10 +8833,10 @@ msgstr ""
 #: include/classes/api/services/CProxy.php:565
 #: include/classes/api/services/CProxy.php:578
 #: include/classes/api/services/CProxy.php:584
-#: include/classes/api/services/CProxy.php:660
-#: include/classes/api/services/CProxy.php:668
-#: include/classes/api/services/CProxy.php:783
-#: include/classes/api/services/CProxy.php:791
+#: include/classes/api/services/CProxy.php:661
+#: include/classes/api/services/CProxy.php:669
+#: include/classes/api/services/CProxy.php:785
+#: include/classes/api/services/CProxy.php:793
 #: include/classes/api/services/CScreen.php:422
 #: include/classes/api/services/CScreen.php:428
 #: include/classes/api/services/CTriggerGeneral.php:242
@@ -8896,8 +8897,8 @@ msgstr "Некорректное значение для поля \"%1$s\": не
 msgid "Incorrect value used for PSK field. It should consist of an even number of hexadecimal characters."
 msgstr "Использовано некорректное значение в поле PSK. Оно должно состоять из четного количества шестнадцатеричных символов."
 
-#: include/classes/api/services/CProxy.php:645
-#: include/classes/api/services/CProxy.php:775
+#: include/classes/api/services/CProxy.php:646
+#: include/classes/api/services/CProxy.php:777
 #, c-format
 msgid "Incorrect value used for proxy status \"%1$s\"."
 msgstr "Использовано некорректное значение для состояния прокси \"%1$s\"."
@@ -9392,7 +9393,7 @@ msgstr "Получено ошибочное имя представления \"
 msgid "Inventory"
 msgstr "Инвентаризация"
 
-#: include/classes/api/services/CHost.php:1043
+#: include/classes/api/services/CHost.php:1047
 #, c-format
 msgid "Inventory disabled for host \"%1$s\"."
 msgstr "Инвентарные данные деактивированы для узла сети \"%1$s\"."
@@ -10384,7 +10385,7 @@ msgstr "Макросы обновлены"
 #: include/views/monitoring.hostscreen.php:57
 #: include/views/monitoring.overview.items.php:45
 #: include/views/monitoring.overview.triggers.php:82
-#: include/views/monitoring.slides.php:83 report2.php:185 report4.php:128
+#: include/views/monitoring.slides.php:83 report2.php:185 report4.php:132
 #: srv_status.php:167
 msgid "Main filter"
 msgstr "Основной фильтр"
@@ -10690,7 +10691,7 @@ msgid "Media"
 msgstr "Оповещения"
 
 #: app/views/administration.mediatype.edit.php:182 include/audit.inc.php:26
-#: report4.php:99
+#: report4.php:103
 msgid "Media type"
 msgstr "Способ оповещений"
 
@@ -10971,12 +10972,12 @@ msgstr "Мониторинг"
 msgid "Monospace"
 msgstr "Моноширинный"
 
-#: app/views/report.services.php:67 include/forms.inc.php:2290 report4.php:166
+#: app/views/report.services.php:67 include/forms.inc.php:2290 report4.php:170
 msgid "Month"
 msgstr "Месяц"
 
 #: app/views/report.services.php:36 include/forms.inc.php:2215
-#: include/maintenances.inc.php:37 report4.php:109
+#: include/maintenances.inc.php:37 report4.php:113
 msgid "Monthly"
 msgstr "Ежемесячно"
 
@@ -11028,7 +11029,7 @@ msgstr "NNTP"
 msgid "NTLM"
 msgstr "NTLM"
 
-#: actionconf.php:36 actionconf.php:239 adm.regexps.php:36 adm.regexps.php:158
+#: actionconf.php:36 adm.regexps.php:36 adm.regexps.php:158
 #: adm.regexps.php:189 app/controllers/CControllerPopupGeneric.php:71
 #: app/controllers/CControllerPopupGeneric.php:83
 #: app/controllers/CControllerPopupGeneric.php:95
@@ -11368,9 +11369,9 @@ msgstr "Не указан \"%1$s\" для комплексного экрана.
 msgid "No \"%1$s\" given for template screen."
 msgstr "Не указан \"%1$s\" для шаблона комплексного экрана."
 
-#: include/classes/api/services/CAction.php:2758
-#: include/classes/api/services/CAction.php:2878
-#: include/classes/api/services/CAction.php:3071
+#: include/classes/api/services/CAction.php:2764
+#: include/classes/api/services/CAction.php:2884
+#: include/classes/api/services/CAction.php:3077
 #, c-format
 msgid "No \"%2$s\" given for a filter condition of action \"%1$s\"."
 msgstr "Не указано \"%2$s\" для условия фильтра действия \"%1$s\"."
@@ -11380,7 +11381,7 @@ msgstr "Не указано \"%2$s\" для условия фильтра дей
 msgid "No \"%2$s\" given for a filter condition of discovery rule \"%1$s\"."
 msgstr "Не указано \"%2$s\" для условия фильтра правила обнаружения \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2719
+#: include/classes/api/services/CAction.php:2725
 #, c-format
 msgid "No \"%2$s\" given for the filter of action \"%1$s\"."
 msgstr "Не указан \"%2$s\" для фильтра в действии \"%1$s\"."
@@ -11426,13 +11427,13 @@ msgstr "Интерфейсы агента не найдены."
 msgid "No applications found."
 msgstr "Группы элементов данных не найдены."
 
-#: include/classes/api/services/CAction.php:1812
+#: include/classes/api/services/CAction.php:1818
 #, c-format
 msgid "No authentication type specified for action operation command \"%s\"."
 msgstr "В операции действия для команды \"%s\" не указан тип аутентификации."
 
-#: include/classes/api/services/CAction.php:1822
-#: include/classes/api/services/CAction.php:1857
+#: include/classes/api/services/CAction.php:1828
+#: include/classes/api/services/CAction.php:1863
 #, c-format
 msgid "No authentication user name specified for action operation command \"%s\"."
 msgstr "В операции действия для команды \"%s\" не указано имя пользователя для аутентификации."
@@ -11441,11 +11442,11 @@ msgstr "В операции действия для команды \"%s\" не �
 msgid "No authentication user name specified."
 msgstr "Для аутентификации не указано имя пользователя."
 
-#: include/classes/api/services/CAction.php:1793
+#: include/classes/api/services/CAction.php:1799
 msgid "No command specified for action operation."
 msgstr "Для операции действия не указана команда."
 
-#: include/classes/api/services/CAction.php:1787
+#: include/classes/api/services/CAction.php:1793
 msgid "No command type specified for action operation."
 msgstr "Для операции действия не указан тип команды."
 
@@ -11503,7 +11504,7 @@ msgstr "ID правил обнаружения не указаны."
 msgid "No encryption"
 msgstr "Без шифрования"
 
-#: include/classes/api/services/CAction.php:1802
+#: include/classes/api/services/CAction.php:1808
 #, c-format
 msgid "No execution target specified for action operation command \"%s\"."
 msgstr "Не указана цель для выполнения команды \"%s\" в операции действия."
@@ -11579,19 +11580,19 @@ msgstr "Интерфейс не найден"
 msgid "No interface found."
 msgstr "Интерфейс не найден."
 
-#: include/classes/api/services/CProxy.php:653
-#: include/classes/api/services/CProxy.php:830
+#: include/classes/api/services/CProxy.php:654
+#: include/classes/api/services/CProxy.php:832
 #, c-format
 msgid "No interface provided for proxy \"%s\"."
 msgstr "Не указан интерфейс для прокси \"%s\"."
 
-#: include/classes/api/services/CHost.php:1765
-#: include/classes/api/services/CHost.php:1941
+#: include/classes/api/services/CHost.php:1771
+#: include/classes/api/services/CHost.php:1949
 #, c-format
 msgid "No interfaces for host \"%s\"."
 msgstr "Нет интерфейсов для узла сети \"%s\"."
 
-#: include/classes/api/services/CAction.php:1980
+#: include/classes/api/services/CAction.php:1986
 msgid "No inventory mode specified for action operation."
 msgstr "Не указан режим инвентарных данных для операции действия."
 
@@ -11663,9 +11664,9 @@ msgstr "Нет прав доступа в систему."
 #: app/controllers/CControllerWidgetPlainTextView.php:78
 #: app/views/monitoring.widget.graph.view.php:23 disc_prototypes.php:1251
 #: disc_prototypes.php:1496 host_discovery.php:664
-#: include/classes/api/services/CAction.php:1615
-#: include/classes/api/services/CAction.php:1992
-#: include/classes/api/services/CAction.php:2969
+#: include/classes/api/services/CAction.php:1621
+#: include/classes/api/services/CAction.php:1998
+#: include/classes/api/services/CAction.php:2975
 #: include/classes/api/services/CApplication.php:304
 #: include/classes/api/services/CApplication.php:340
 #: include/classes/api/services/CApplication.php:454
@@ -11710,10 +11711,10 @@ msgstr "Нет прав доступа в систему."
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
 #: include/classes/api/services/CHostInterface.php:653
-#: include/classes/api/services/CHost.php:1152
-#: include/classes/api/services/CHost.php:1187
-#: include/classes/api/services/CHost.php:1741
-#: include/classes/api/services/CHost.php:1873
+#: include/classes/api/services/CHost.php:1156
+#: include/classes/api/services/CHost.php:1191
+#: include/classes/api/services/CHost.php:1747
+#: include/classes/api/services/CHost.php:1879
 #: include/classes/api/services/CHostPrototype.php:353
 #: include/classes/api/services/CHostPrototype.php:399
 #: include/classes/api/services/CHostPrototype.php:420
@@ -11754,9 +11755,9 @@ msgstr "Нет прав доступа в систему."
 #: include/classes/api/services/CProxy.php:163
 #: include/classes/api/services/CProxy.php:253
 #: include/classes/api/services/CProxy.php:415
-#: include/classes/api/services/CProxy.php:696
-#: include/classes/api/services/CProxy.php:729
-#: include/classes/api/services/CProxy.php:814
+#: include/classes/api/services/CProxy.php:697
+#: include/classes/api/services/CProxy.php:731
+#: include/classes/api/services/CProxy.php:816
 #: include/classes/api/services/CScreenItem.php:396
 #: include/classes/api/services/CScreenItem.php:443
 #: include/classes/api/services/CScreen.php:770
@@ -11768,8 +11769,8 @@ msgstr "Нет прав доступа в систему."
 #: include/classes/api/services/CService.php:989
 #: include/classes/api/services/CService.php:1013
 #: include/classes/api/services/CTask.php:136
-#: include/classes/api/services/CTemplate.php:759
-#: include/classes/api/services/CTemplate.php:781
+#: include/classes/api/services/CTemplate.php:760
+#: include/classes/api/services/CTemplate.php:782
 #: include/classes/api/services/CTemplateScreen.php:631
 #: include/classes/api/services/CTemplateScreen.php:682
 #: include/classes/api/services/CTemplateScreen.php:745
@@ -11798,7 +11799,7 @@ msgstr "Нет прав доступа в систему."
 msgid "No permissions to referred object or it does not exist!"
 msgstr "Нет прав доступа к запрашиваемому объекту или он не существует!"
 
-#: include/classes/api/services/CAction.php:1840
+#: include/classes/api/services/CAction.php:1846
 #, c-format
 msgid "No private key file specified for action operation command \"%s\"."
 msgstr "Не указан файл приватного ключа для команды \"%s\" в операции действия."
@@ -11811,7 +11812,7 @@ msgstr "Файл приватного ключа не указан."
 msgid "No proxy"
 msgstr "Без прокси"
 
-#: include/classes/api/services/CAction.php:1832
+#: include/classes/api/services/CAction.php:1838
 #, c-format
 msgid "No public key file specified for action operation command \"%s\"."
 msgstr "Не указан файл публичного ключа для команды \"%s\" в операции действия."
@@ -11820,7 +11821,7 @@ msgstr "Не указан файл публичного ключа для ком
 msgid "No public key file specified."
 msgstr "Файл публичного ключа не указан."
 
-#: include/classes/api/services/CAction.php:1764
+#: include/classes/api/services/CAction.php:1770
 msgid "No recipients for action operation message."
 msgstr "Нет получателей сообщения в операции действия."
 
@@ -11836,7 +11837,7 @@ msgstr "Не указан ID комплексного экрана для эле
 msgid "No screens added."
 msgstr "Комплексные экраны не добавлены."
 
-#: include/classes/api/services/CAction.php:1867
+#: include/classes/api/services/CAction.php:1873
 msgid "No script specified for action operation command."
 msgstr "Не указан скрипт для команды в операции действия."
 
@@ -11973,7 +11974,7 @@ msgstr "Нечего делать."
 msgid "Notification report"
 msgstr "Отчет об оповещениях"
 
-#: include/menu.inc.php:171 report4.php:65
+#: include/menu.inc.php:171 report4.php:69
 msgid "Notifications"
 msgstr "Оповещения"
 
@@ -12400,7 +12401,7 @@ msgstr "Opera"
 msgid "Operating system information. Returns string"
 msgstr "Информация об операционной системе. Возвращает строку"
 
-#: actionconf.php:405 correlation.php:317
+#: actionconf.php:402 correlation.php:317
 #, c-format
 msgid "Operation \"%s\" already exists."
 msgstr "Операция \"%s\" уже существует."
@@ -12419,11 +12420,11 @@ msgstr "Условие операции"
 msgid "Operation details"
 msgstr "Детали операции"
 
-#: include/classes/api/services/CAction.php:1953
+#: include/classes/api/services/CAction.php:1959
 msgid "Operation has no group to operate."
 msgstr "Операция не имеет группу для функционирования."
 
-#: include/classes/api/services/CAction.php:1965
+#: include/classes/api/services/CAction.php:1971
 msgid "Operation has no template to operate."
 msgstr "Операция не имеет шаблон для функционирования."
 
@@ -13000,7 +13001,7 @@ msgstr "Выполнение DNS запроса. Возвращает строк
 #: include/views/configuration.item.massupdate.php:342
 #: include/views/configuration.item.prototype.edit.php:614
 #: include/views/configuration.item.prototype.massupdate.php:339
-#: include/views/configuration.maintenance.edit.php:77 report4.php:104
+#: include/views/configuration.maintenance.edit.php:77 report4.php:108
 #: srv_status.php:170
 msgid "Period"
 msgstr "Период"
@@ -13432,8 +13433,8 @@ msgstr "Прокси \"%1$s\" используется действием \"%2$s
 msgid "Proxy \"%1$s\" is used by discovery rule \"%2$s\"."
 msgstr "Прокси \"%1$s\" используется правилом обнаружения \"%2$s\"."
 
-#: include/classes/api/services/CProxy.php:637
-#: include/classes/api/services/CProxy.php:762
+#: include/classes/api/services/CProxy.php:638
+#: include/classes/api/services/CProxy.php:764
 #, c-format
 msgid "Proxy \"%s\" already exists."
 msgstr "Прокси \"%s\" уже существует."
@@ -14023,18 +14024,18 @@ msgstr "Решено правилом корреляции \"%1$s\"."
 msgid "Resolved by correlation rule."
 msgstr "Решено правилом корреляции."
 
+#: app/views/monitoring.widget.problems.view.php:143
+#: include/classes/screens/CScreenHostTriggers.php:249
+#: include/classes/screens/CScreenProblem.php:1018
+msgid "Resolved by inaccessible user."
+msgstr ""
+
 #: app/views/monitoring.widget.problems.view.php:142
 #: include/classes/screens/CScreenHostTriggers.php:248
 #: include/classes/screens/CScreenProblem.php:1017
 #, c-format
 msgid "Resolved by user \"%1$s\"."
 msgstr "Решено пользователем \"%1$s\"."
-
-#: app/views/monitoring.widget.problems.view.php:143
-#: include/classes/screens/CScreenHostTriggers.php:249
-#: include/classes/screens/CScreenProblem.php:1018
-msgid "Resolved by user."
-msgstr "Решено пользователем."
 
 #: include/views/administration.auditlogs.list.php:52
 #: include/views/administration.auditlogs.list.php:73
@@ -14752,7 +14753,7 @@ msgstr "Выберите виджет"
 msgid "Selected"
 msgstr "Выбранные"
 
-#: actionconf.php:525
+#: actionconf.php:519
 msgid "Selected actions deleted"
 msgstr "Выбранные действия удалены"
 
@@ -15430,7 +15431,7 @@ msgstr "Тип источника"
 msgid "Spanish (es_ES)"
 msgstr "Испанский (es_ES)"
 
-#: include/classes/api/services/CAction.php:1877
+#: include/classes/api/services/CAction.php:1883
 msgid "Specified script does not exist or you do not have rights on it for action operation command."
 msgstr "Указанный скрипт не существует или вы не имеете к нему прав доступа в команде операции действия."
 
@@ -15908,8 +15909,8 @@ msgstr "Telnet"
 msgid "Template"
 msgstr "Шаблон"
 
-#: include/classes/api/services/CHost.php:884
-#: include/classes/api/services/CTemplate.php:447
+#: include/classes/api/services/CHost.php:888
+#: include/classes/api/services/CTemplate.php:448
 #: include/classes/import/importers/CTemplateImporter.php:72
 #, c-format
 msgid "Template \"%1$s\" already exists."
@@ -15917,7 +15918,7 @@ msgstr "Шаблон \"%1$s\" уже существует."
 
 #: include/classes/api/services/CHostGroup.php:1462
 #: include/classes/api/services/CTemplate.php:391
-#: include/classes/api/services/CTemplate.php:1023
+#: include/classes/api/services/CTemplate.php:1024
 #, c-format
 msgid "Template \"%1$s\" cannot be without host group."
 msgstr "Шаблон \"%1$s\" не может быть без группы узлов сети."
@@ -15977,25 +15978,25 @@ msgstr "Шаблон обновлен"
 msgid "Template value"
 msgstr "Значение шаблона"
 
-#: include/classes/api/services/CTemplate.php:1078
+#: include/classes/api/services/CTemplate.php:1079
 #, c-format
 msgid "Template with the same name \"%1$s\" already exists."
 msgstr "Шаблон с таким же именем \"%1$s\" уже существует."
 
-#: include/classes/api/services/CHost.php:1832
-#: include/classes/api/services/CHost.php:2060
+#: include/classes/api/services/CHost.php:1838
+#: include/classes/api/services/CHost.php:2068
 #, c-format
 msgid "Template with the same name \"%s\" already exists."
 msgstr "Шаблон с таким же именем \"%s\" уже существует."
 
-#: include/classes/api/services/CTemplate.php:470
-#: include/classes/api/services/CTemplate.php:1043
+#: include/classes/api/services/CTemplate.php:471
+#: include/classes/api/services/CTemplate.php:1044
 #, c-format
 msgid "Template with the same visible name \"%1$s\" already exists."
 msgstr "Шаблон с таким же видимым именем \"%1$s\" уже существует."
 
-#: include/classes/api/services/CHost.php:1838
-#: include/classes/api/services/CHost.php:2068
+#: include/classes/api/services/CHost.php:1844
+#: include/classes/api/services/CHost.php:2076
 #, c-format
 msgid "Template with the same visible name \"%s\" already exists."
 msgstr "Шаблон с таким же видимым именем \"%s\" уже существует."
@@ -16257,7 +16258,7 @@ msgstr "Четверг"
 
 #: app/views/report.services.php:68
 #: include/views/configuration.services.edit.php:252
-#: include/views/configuration.services.edit.php:305 report4.php:195
+#: include/views/configuration.services.edit.php:305 report4.php:199
 #: services.php:48 services.php:191
 msgid "Till"
 msgstr "До"
@@ -17114,7 +17115,7 @@ msgstr "Неподдерживаемое расширение файла имп�
 msgid "Unsupported import format \"%1$s\"."
 msgstr "Неподдерживаемый формат импорта \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2759
+#: include/classes/api/services/CAction.php:2765
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for a filter condition of action \"%1$s\"."
 msgstr "Неподдерживаемый параметр \"%2$s\" для действия условия фильтра \"%1$s\"."
@@ -17124,7 +17125,7 @@ msgstr "Неподдерживаемый параметр \"%2$s\" для дей
 msgid "Unsupported parameter \"%2$s\" for a filter condition of discovery rule \"%1$s\"."
 msgstr "Неподдерживаемый параметр \"%2$s\" для правила обнаружения условия фильтра \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2720
+#: include/classes/api/services/CAction.php:2726
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for the filter of action \"%1$s\"."
 msgstr "Неподдерживаемый параметр \"%2$s\" для фильтра в действии \"%1$s\"."
@@ -17298,8 +17299,8 @@ msgstr "Используется в элементах данных"
 
 #: httpconf.php:59 include/actions.inc.php:1775 include/actions.inc.php:1829
 #: include/actions.inc.php:2044 include/audit.inc.php:24
-#: include/classes/setup/CSetupWizard.php:245 include/events.inc.php:224
-#: include/hosts.inc.php:61 include/views/administration.auditlogs.list.php:26
+#: include/classes/setup/CSetupWizard.php:245 include/hosts.inc.php:61
+#: include/views/administration.auditlogs.list.php:26
 #: include/views/administration.auditlogs.list.php:71
 #: include/views/administration.users.edit.php:453
 #: include/views/configuration.action.edit.php:698
@@ -17993,7 +17994,7 @@ msgstr "Размер виртуального пространства в бай
 msgid "Visible name"
 msgstr "Видимое имя"
 
-#: include/classes/api/services/CHost.php:1966
+#: include/classes/api/services/CHost.php:1974
 msgid "Visible name cannot be empty if host name is missing."
 msgstr "Видимое имя не может быть пустым, если имя узла сети не заполнено."
 
@@ -18102,7 +18103,7 @@ msgid "Wednesday"
 msgstr "Среда"
 
 #: app/views/report.services.php:35 include/forms.inc.php:2214
-#: include/maintenances.inc.php:35 report4.php:108
+#: include/maintenances.inc.php:35 report4.php:112
 msgid "Weekly"
 msgstr "Еженедельно"
 
@@ -18197,8 +18198,8 @@ msgstr "Запись"
 msgid "Wrong fields for dependency for service \"%1$s\"."
 msgstr "Ошибочные поля для зависимости услуги \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:1675
-#: include/classes/api/services/CHost.php:1861
+#: include/classes/api/services/CHost.php:1681
+#: include/classes/api/services/CHost.php:1867
 #, c-format
 msgid "Wrong fields for host \"%1$s\"."
 msgstr "Ошибочные поля для узла сети \"%1$s\"."
@@ -18357,11 +18358,11 @@ msgid "YYYY-MM-DDThh:mm:ssZ"
 msgstr "YYYY-MM-DDThh:mm:ssZ"
 
 #: app/views/report.services.php:47 app/views/report.services.php:66
-#: report4.php:120 report4.php:154
+#: report4.php:124 report4.php:158
 msgid "Year"
 msgstr "Год"
 
-#: app/views/report.services.php:37 report4.php:110
+#: app/views/report.services.php:37 report4.php:114
 msgid "Yearly"
 msgstr "Ежегодно"
 
@@ -18416,12 +18417,12 @@ msgstr "Вы не указали узел сети для операции."
 msgid "You did not specify host group for operation."
 msgstr "Вы не указали группу узлов сети для операции."
 
-#: include/classes/api/services/CAction.php:1937
+#: include/classes/api/services/CAction.php:1943
 #, c-format
 msgid "You did not specify targets for action operation command \"%s\"."
 msgstr "Вы не указали цели для команды \"%s\" в операции действия."
 
-#: include/classes/api/services/CAction.php:1931
+#: include/classes/api/services/CAction.php:1937
 #, c-format
 msgid "You did not specify targets for action operation global script \"%s\"."
 msgstr "Вы не указали цели глобального скрипта \"%s\" в операции действия."
@@ -18439,10 +18440,10 @@ msgstr "Вы не указали цели глобального скрипта 
 #: include/classes/api/services/CScript.php:555
 #: include/classes/api/services/CTask.php:104
 #: include/classes/api/services/CTemplate.php:411
-#: include/classes/api/services/CTemplate.php:561
-#: include/classes/api/services/CTemplate.php:598
-#: include/classes/api/services/CTemplate.php:1015
-#: include/classes/api/services/CTemplate.php:1120
+#: include/classes/api/services/CTemplate.php:562
+#: include/classes/api/services/CTemplate.php:599
+#: include/classes/api/services/CTemplate.php:1016
+#: include/classes/api/services/CTemplate.php:1122
 #: include/classes/api/services/CUserMacro.php:266
 #: include/classes/api/services/CUserMacro.php:350
 #: include/classes/api/services/CUserMacro.php:443
@@ -18713,7 +18714,7 @@ msgstr "агент"
 #: include/views/configuration.triggers.list.php:152
 #: include/views/js/configuration.graph.edit.js.php:55 report2.php:237
 #: report2.php:256 report2.php:288 report2.php:321 report2.php:363
-#: report2.php:382 report4.php:87 report4.php:289
+#: report2.php:382 report4.php:91 report4.php:293
 msgid "all"
 msgstr "все"
 
@@ -18745,7 +18746,7 @@ msgstr "ожидается массив или строка символов"
 msgid "an empty string is expected"
 msgstr "ожидается пустая строка"
 
-#: include/classes/api/services/CHost.php:1618
+#: include/classes/api/services/CHost.php:1622
 msgid "an even number of hexadecimal characters is expected"
 msgstr "ожидается четное количество шестнадцатеричных символов"
 
@@ -18838,7 +18839,7 @@ msgstr "нельзя изменить"
 #: app/controllers/CControllerPopupMedia.php:105 correlation.php:227
 #: correlation.php:237 correlation.php:243 correlation.php:263
 #: correlation.php:267 correlation.php:280
-#: include/classes/api/services/CAction.php:1915
+#: include/classes/api/services/CAction.php:1921
 #: include/classes/api/services/CCorrelation.php:1045
 #: include/classes/api/services/CCorrelation.php:1080
 #: include/classes/api/services/CCorrelation.php:1101
@@ -18852,8 +18853,8 @@ msgstr "нельзя изменить"
 #: include/classes/api/services/CDRule.php:357
 #: include/classes/api/services/CDRule.php:540
 #: include/classes/api/services/CEvent.php:780
-#: include/classes/api/services/CHost.php:1606
-#: include/classes/api/services/CHost.php:1612
+#: include/classes/api/services/CHost.php:1610
+#: include/classes/api/services/CHost.php:1616
 #: include/classes/api/services/CItemGeneral.php:484
 #: include/classes/api/services/CItemGeneral.php:511
 #: include/classes/api/services/CItemGeneral.php:517
@@ -19043,7 +19044,7 @@ msgstr "равно"
 msgid "error message"
 msgstr ""
 
-#: include/classes/api/services/CAction.php:1720
+#: include/classes/api/services/CAction.php:1726
 msgid "esc_step_from and esc_step_to must be set together."
 msgstr "esc_step_from и esc_step_to должны устанавливаться одновременно."
 
@@ -19351,7 +19352,7 @@ msgstr "мин"
 msgid "min() - Minimum value for period T"
 msgstr "min() - Минимальное значение за период Т"
 
-#: include/classes/api/services/CHost.php:1624
+#: include/classes/api/services/CHost.php:1628
 #, c-format
 msgid "minimum length is %1$s characters"
 msgstr "минимальная длина %1$s символов"
@@ -19603,10 +19604,10 @@ msgstr "выбрано"
 msgid "short description"
 msgstr "краткое описание"
 
-#: include/classes/api/services/CHost.php:1631
-#: include/classes/api/services/CHost.php:1637
-#: include/classes/api/services/CHost.php:1646
-#: include/classes/api/services/CHost.php:1652
+#: include/classes/api/services/CHost.php:1635
+#: include/classes/api/services/CHost.php:1641
+#: include/classes/api/services/CHost.php:1650
+#: include/classes/api/services/CHost.php:1656
 #: include/classes/api/services/CHttpTest.php:957
 #: include/classes/api/services/CHttpTest.php:1053
 #: include/classes/api/services/CItemGeneral.php:498
@@ -19618,8 +19619,8 @@ msgstr "краткое описание"
 #: include/classes/api/services/CItemGeneral.php:2184
 #: include/classes/api/services/CMaintenance.php:472
 #: include/classes/api/services/CMaintenance.php:675
-#: include/classes/api/services/CProxy.php:661
-#: include/classes/api/services/CProxy.php:784
+#: include/classes/api/services/CProxy.php:662
+#: include/classes/api/services/CProxy.php:786
 #: include/classes/api/services/CTriggerGeneral.php:548
 #: include/classes/api/services/CTriggerGeneral.php:574
 #: include/classes/api/services/CTriggerGeneral.php:793
@@ -19790,8 +19791,8 @@ msgstr "неожиданный текст \"%1$s\""
 
 #: include/classes/api/services/CEvent.php:738
 #: include/classes/api/services/CEvent.php:838
-#: include/classes/api/services/CHost.php:1586
-#: include/classes/api/services/CHost.php:1592
+#: include/classes/api/services/CHost.php:1590
+#: include/classes/api/services/CHost.php:1596
 #: include/classes/api/services/CItemGeneral.php:1303
 #: include/classes/api/services/CItemGeneral.php:1564
 #: include/classes/api/services/CItemGeneral.php:1590
@@ -19895,8 +19896,8 @@ msgid "value is too long"
 msgstr "значение слишком длинное"
 
 #: include/classes/api/services/CHost.php:801
-#: include/classes/api/services/CHost.php:1753
-#: include/classes/api/services/CHost.php:1893
+#: include/classes/api/services/CHost.php:1759
+#: include/classes/api/services/CHost.php:1899
 #: include/classes/api/services/CMapElement.php:86
 #: include/classes/api/services/CMap.php:675
 #: include/classes/api/services/CMap.php:681

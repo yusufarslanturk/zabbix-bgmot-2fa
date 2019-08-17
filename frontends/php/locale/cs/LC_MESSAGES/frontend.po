@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-11 01:44+0300\n"
+"POT-Creation-Date: 2019-08-18 01:44+0300\n"
 "PO-Revision-Date: 2019-03-27 22:31+0300\n"
 "Last-Translator: Oleksiy <zalex_ua@i.ua>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -480,21 +480,21 @@ msgstr "Potvrzené VYŘEŠENÉ události"
 msgid "Action"
 msgstr "Akce"
 
-#: include/classes/api/services/CAction.php:2823
-#: include/classes/api/services/CAction.php:2841
-#: include/classes/api/services/CAction.php:3018
-#: include/classes/api/services/CAction.php:3051
+#: include/classes/api/services/CAction.php:2829
+#: include/classes/api/services/CAction.php:2847
+#: include/classes/api/services/CAction.php:3024
+#: include/classes/api/services/CAction.php:3057
 #, c-format
 msgid "Action \"%1$s\" already exists."
 msgstr "Akce \"%1$s\" již existuje."
 
-#: include/classes/api/services/CAction.php:2894
-#: include/classes/api/services/CAction.php:3095
+#: include/classes/api/services/CAction.php:2900
+#: include/classes/api/services/CAction.php:3101
 #, c-format
 msgid "Action \"%1$s\" no operations defined."
 msgstr "Pro akci \"%1$s\" není definována operace."
 
-#: actionconf.php:233
+#: actionconf.php:232
 msgid "Action added"
 msgstr "Akce byla přidána"
 
@@ -502,18 +502,18 @@ msgstr "Akce byla přidána"
 msgid "Action condition value must be empty."
 msgstr "Hodnoty podmínek musí být prázdné."
 
-#: actionconf.php:257
+#: actionconf.php:254
 msgid "Action deleted"
 msgstr "Akce byla smazána"
 
-#: actionconf.php:503
+#: actionconf.php:500
 msgid "Action disabled"
 msgid_plural "Actions disabled"
 msgstr[0] "Akce vypnutá"
 msgstr[1] "Akce vypnuty"
 msgstr[2] "Akce vypnuty"
 
-#: actionconf.php:502
+#: actionconf.php:499
 msgid "Action enabled"
 msgid_plural "Actions enabled"
 msgstr[0] "Akce zapnuta"
@@ -1625,11 +1625,11 @@ msgstr "Není možné přidat nečíselnou položku \"%1$s\" do grafu \"%2$s\"."
 msgid "Cannot add a non-numeric item \"%1$s\" to graph prototype \"%2$s\"."
 msgstr "Není možné přidat nečíselnou položku \"%1$s\" k prototypu grafu \"%2$s\"."
 
-#: actionconf.php:234
+#: actionconf.php:233
 msgid "Cannot add action"
 msgstr "Nelze přidat akci"
 
-#: actionconf.php:320
+#: actionconf.php:317
 msgid "Cannot add action condition"
 msgstr "Není možné přidat podmínku akce"
 
@@ -1931,7 +1931,7 @@ msgstr "Nelze vytvořit widget: %1$s."
 msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "Není možné smazat interního Zabbix uživatele \"%1$s\", zkuste ho vypnout."
 
-#: actionconf.php:257
+#: actionconf.php:254
 msgid "Cannot delete action"
 msgstr "Nelze smazat akci"
 
@@ -1998,7 +1998,7 @@ msgstr[2] "Nelze smazat skupinu"
 msgid "Cannot delete host"
 msgstr "Nelze smazat hostitele"
 
-#: include/classes/api/services/CHost.php:1219
+#: include/classes/api/services/CHost.php:1223
 #, c-format
 msgid "Cannot delete host because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must contain at least one host or host group."
@@ -2030,7 +2030,7 @@ msgstr "Není možné smazat mapu ikon"
 msgid "Cannot delete image"
 msgstr "Nelze smazat obrázek"
 
-#: include/classes/api/services/CHost.php:1024
+#: include/classes/api/services/CHost.php:1028
 msgid "Cannot delete inventory."
 msgstr "Není možné smazat inventář."
 
@@ -2095,7 +2095,7 @@ msgstr[2] "Nelze smazat skript"
 msgid "Cannot delete scripts. Script \"%1$s\" is used in action operation \"%2$s\"."
 msgstr "Není možné smazat skripty. Skript \"%1$s\" se používá v operaci akce \"%2$s\"."
 
-#: actionconf.php:525
+#: actionconf.php:519
 msgid "Cannot delete selected actions"
 msgstr "Není možné smazat označené akce"
 
@@ -2189,7 +2189,7 @@ msgstr[2] "Nelze smazat mapu hodnot"
 msgid "Cannot delete web scenario"
 msgstr "Není možné smazat web scénář"
 
-#: actionconf.php:514
+#: actionconf.php:508
 msgid "Cannot disable action"
 msgid_plural "Cannot disable actions"
 msgstr[0] "Není možné vypnout akci"
@@ -2261,7 +2261,7 @@ msgstr "Není možné zobrazit frontu položek."
 msgid "Cannot display more than one item with type \"Graph sum\"."
 msgstr "Není možné zobrazit víc jak jednu položku s typem \"Souhrn grafu\"."
 
-#: actionconf.php:513
+#: actionconf.php:507
 msgid "Cannot enable action"
 msgid_plural "Cannot enable actions"
 msgstr[0] "Není možné vypnout akci"
@@ -2465,7 +2465,7 @@ msgstr "Nelze formátovat strom. Zkontrolujte logickou struktůru v servisních 
 msgid "Cannot format tree."
 msgstr "Nelze formátovat strom."
 
-#: include/classes/api/services/CTemplate.php:840
+#: include/classes/api/services/CTemplate.php:841
 msgid "Cannot have empty visible template name."
 msgstr "Není možné mít prázdné zobrazované jméno šablony."
 
@@ -2499,12 +2499,12 @@ msgstr "Není možné vložit view soubor \"%s\"."
 msgid "Cannot insert trigger expression"
 msgstr "Není možné vložit výraz spouštěče"
 
-#: include/classes/api/services/CHost.php:1002
+#: include/classes/api/services/CHost.php:1006
 msgid "Cannot link template"
 msgstr "Není možné nalinkovat šablonu"
 
-#: include/classes/api/services/CTemplate.php:927
-#: include/classes/api/services/CTemplate.php:941
+#: include/classes/api/services/CTemplate.php:928
+#: include/classes/api/services/CTemplate.php:942
 msgid "Cannot link template."
 msgstr "Není možné nalinkovat šablonu."
 
@@ -2512,11 +2512,11 @@ msgstr "Není možné nalinkovat šablonu."
 msgid "Cannot logout."
 msgstr "Odhlášení není možné."
 
-#: include/classes/api/services/CHost.php:860
+#: include/classes/api/services/CHost.php:864
 msgid "Cannot mass update host name."
 msgstr "Není možné hromadně aktualizovat jméno hosta."
 
-#: include/classes/api/services/CTemplate.php:1065
+#: include/classes/api/services/CTemplate.php:1066
 msgid "Cannot mass update template name."
 msgstr "Není možné hromadně aktualizovat jméno šablony."
 
@@ -2524,7 +2524,7 @@ msgstr "Není možné hromadně aktualizovat jméno šablony."
 msgid "Cannot mass update visible host name."
 msgstr "Není možné hromadně aktualizovat zobrazované jméno hosta."
 
-#: include/classes/api/services/CTemplate.php:1030
+#: include/classes/api/services/CTemplate.php:1031
 msgid "Cannot mass update visible template name."
 msgstr "Není možné hromadně aktualizovat zobrazované jméno šablony."
 
@@ -2600,7 +2600,7 @@ msgstr "Nejde poslat požadavek"
 msgid "Cannot send request: %1$s."
 msgstr "Nejde poslat požadavek: %1$s."
 
-#: include/classes/api/services/CAction.php:2857
+#: include/classes/api/services/CAction.php:2863
 #, c-format
 msgid "Cannot set \"%1$s\" for action \"%2$s\"."
 msgstr "Nelze nastavit \"%1$s\" pro akci \"%2$s\"."
@@ -2646,9 +2646,9 @@ msgstr "Není možné nastavit \"templateid\" pro prototyp aplikace v prototypu 
 msgid "Cannot set \"templateid\" for screen \"%1$s\"."
 msgstr "Nelze nastavit \"templateid\" pro obrazovku \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:911
-#: include/classes/api/services/CHost.php:1780
-#: include/classes/api/services/CHost.php:1924
+#: include/classes/api/services/CHost.php:915
+#: include/classes/api/services/CHost.php:1786
+#: include/classes/api/services/CHost.php:1932
 msgid "Cannot set inventory fields for disabled inventory."
 msgstr "Nelze nastavit inventární pole pro zakázaný inventář."
 
@@ -2682,12 +2682,12 @@ msgstr "Není možné zrušit připojení a smazat aplikace."
 msgid "Cannot unlink and clear discovery rules"
 msgstr "Není možné zrušit propojení a smazat objevovací pravidla"
 
-#: include/classes/api/services/CHost.php:977
+#: include/classes/api/services/CHost.php:981
 msgid "Cannot unlink template"
 msgstr "Nelze odpojit šablonu"
 
-#: include/classes/api/services/CTemplate.php:892
-#: include/classes/api/services/CTemplate.php:915
+#: include/classes/api/services/CTemplate.php:893
+#: include/classes/api/services/CTemplate.php:916
 msgid "Cannot unlink template."
 msgstr "Není možné zrušit linkování šablony."
 
@@ -2696,8 +2696,8 @@ msgstr "Není možné zrušit linkování šablony."
 msgid "Cannot unlink trigger \"%s\", it has items from template that is left linked to host."
 msgstr "Není možné zrušit propojení spouštěče \"%s\", protože obsahuje položky ze šablony, která je propojená s hostem."
 
-#: include/classes/api/services/CAction.php:2997
-#: include/classes/api/services/CAction.php:3002
+#: include/classes/api/services/CAction.php:3003
+#: include/classes/api/services/CAction.php:3008
 #, c-format
 msgid "Cannot update \"%1$s\" for action \"%2$s\"."
 msgstr "Nelze aktualizovat \"%1$s\" pro akci \"%2$s\"."
@@ -2737,7 +2737,7 @@ msgstr "Nelze aktualizovat \"%1$s\" pro spouštěč \"%2$s\"."
 msgid "Cannot update \"%1$s\" for trigger prototype \"%2$s\"."
 msgstr "Nelze aktualizovat \"%1$s\" pro prototyp spouštěče \"%2$s\"."
 
-#: include/classes/api/services/CHost.php:1903
+#: include/classes/api/services/CHost.php:1909
 #, c-format
 msgid "Cannot update \"%2$s\" for a discovered host \"%1$s\"."
 msgstr "Není možné aktualizovat \"%2$s\" pro objeveného hosta \"%1$s\"."
@@ -2925,8 +2925,8 @@ msgstr "Nelze upravit síťovou mapu"
 msgid "Cannot update proxy"
 msgstr "Nelze upravit proxy"
 
-#: include/classes/api/services/CProxy.php:702
-#: include/classes/api/services/CProxy.php:820
+#: include/classes/api/services/CProxy.php:703
+#: include/classes/api/services/CProxy.php:822
 #, c-format
 msgid "Cannot update proxy for discovered host \"%1$s\"."
 msgstr "Není možné aktualizovat proxy pro objeveného hosta \"%1$s\"."
@@ -2970,8 +2970,8 @@ msgstr "Není možné aktualizovat aplikace patřící šabloně."
 msgid "Cannot update templates"
 msgstr "Nelze aktualizovat šablony"
 
-#: include/classes/api/services/CTemplate.php:791
-#: include/classes/api/services/CTemplate.php:1125
+#: include/classes/api/services/CTemplate.php:792
+#: include/classes/api/services/CTemplate.php:1127
 #, c-format
 msgid "Cannot update templates on discovered host \"%1$s\"."
 msgstr "Není možné aktualizovat šablony pro objeveného hosta \"%1$s\"."
@@ -3397,7 +3397,7 @@ msgstr "Komerční"
 msgid "Compact view"
 msgstr "Celkový pohled"
 
-#: include/classes/api/services/CAction.php:2715
+#: include/classes/api/services/CAction.php:2721
 msgid "Comparing several triggers with \"and\" is not allowed."
 msgstr "Porovnání více spouštěčů pomocí \"and\" není dovoleno."
 
@@ -3413,7 +3413,7 @@ msgstr "Souběžné relace"
 msgid "Condition"
 msgstr "Podmínka"
 
-#: include/classes/api/services/CAction.php:2714
+#: include/classes/api/services/CAction.php:2720
 #, c-format
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for action \"%1$s\"."
 msgstr "Podmínka \"%2$s\" není použitá ve formuli \"%3$s\" pro akci \"%1$s\"."
@@ -3428,7 +3428,7 @@ msgstr "Podmínka \"%2$s\" se nepoužívá ve vzorci \"%3$s\" pro korelaci \"%1$
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for discovery rule \"%1$s\"."
 msgstr "Podmínka \"%2$s\" použitá ve formuli \"%3$s\" pro akci \"%1$s\" není definovaná."
 
-#: include/classes/api/services/CAction.php:2713
+#: include/classes/api/services/CAction.php:2719
 #, c-format
 msgid "Condition \"%2$s\" used in formula \"%3$s\" for action \"%1$s\" is not defined."
 msgstr "Podmínka \"%2$s\" použitá ve formuli \"%3$s\" pro akci \"%1$s\" není definovaná."
@@ -4234,7 +4234,7 @@ msgid "DNS name"
 msgstr "Jméno DNS"
 
 #: app/views/report.services.php:34 include/forms.inc.php:2213
-#: include/maintenances.inc.php:33 report4.php:107
+#: include/maintenances.inc.php:33 report4.php:111
 msgid "Daily"
 msgstr "Denně"
 
@@ -4393,7 +4393,7 @@ msgstr "Datum vypršení údržby HW"
 msgid "Date HW purchased"
 msgstr "Datum koupě HW"
 
-#: app/views/report.services.php:69 report4.php:179
+#: app/views/report.services.php:69 report4.php:183
 msgid "Day"
 msgstr "Den"
 
@@ -4836,7 +4836,7 @@ msgstr "Smazat web scénář?"
 msgid "Deleted"
 msgstr "Smazán"
 
-#: include/classes/api/services/CHost.php:1371
+#: include/classes/api/services/CHost.php:1375
 #, c-format
 msgid "Deleted: Host \"%1$s\"."
 msgstr "Smazané: Host \"%1$s\"."
@@ -4846,7 +4846,7 @@ msgstr "Smazané: Host \"%1$s\"."
 msgid "Deleted: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr "Smazané: Prototyp hosta \"%1$s\" na \"%2$s\"."
 
-#: include/classes/api/services/CTemplate.php:721
+#: include/classes/api/services/CTemplate.php:722
 #, c-format
 msgid "Deleted: Template \"%1$s\"."
 msgstr "Smazané: Šablona \"%1$s\"."
@@ -5402,14 +5402,14 @@ msgstr "Kopírovat závislosti ve spouštěči \"%1$s\"."
 msgid "Duplicate dependencies in trigger prototype \"%1$s\"."
 msgstr "Duplicita závislosti v prototypu spouštěče \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:1716
-#: include/classes/api/services/CHost.php:1954
+#: include/classes/api/services/CHost.php:1722
+#: include/classes/api/services/CHost.php:1962
 #, c-format
 msgid "Duplicate host. Host with the same host name \"%s\" already exists in data."
 msgstr "Kopírování hosta. Host se stejným jménem \"%s\" již existuje."
 
-#: include/classes/api/services/CHost.php:1723
-#: include/classes/api/services/CHost.php:1974
+#: include/classes/api/services/CHost.php:1729
+#: include/classes/api/services/CHost.php:1982
 #, c-format
 msgid "Duplicate host. Host with the same visible name \"%s\" already exists in data."
 msgstr "Kopírování hosta. Host se stejným zobrazovaným jménem \"%s\" již existuje v datech."
@@ -5605,7 +5605,7 @@ msgstr "Prázdná barva."
 msgid "Empty correlation ID."
 msgstr "Prázdné ID korelace."
 
-#: include/classes/api/services/CAction.php:2745
+#: include/classes/api/services/CAction.php:2751
 #, c-format
 msgid "Empty filter condition formula ID for action \"%1$s\"."
 msgstr "Prázdná filtrovací podmínka ID vzorce pro akci \"%1$s\"."
@@ -5620,12 +5620,12 @@ msgstr "Prázdná filtrovací podmínka ID vzorce pro objevovací pravidlo \"%1$
 msgid "Empty filter condition macro for discovery rule \"%1$s\"."
 msgstr "Prázdná filtrovací podmínka makra pro objevovací pravidlo \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2750
+#: include/classes/api/services/CAction.php:2756
 #, c-format
 msgid "Empty filter condition operator for action \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CAction.php:2734
+#: include/classes/api/services/CAction.php:2740
 #, c-format
 msgid "Empty filter condition type for action \"%1$s\"."
 msgstr ""
@@ -5636,7 +5636,7 @@ msgstr ""
 #: include/classes/api/services/CDRule.php:187
 #: include/classes/api/services/CDRule.php:313
 #: include/classes/api/services/CHostInterface.php:383
-#: include/classes/api/services/CHost.php:1183
+#: include/classes/api/services/CHost.php:1187
 #: include/classes/api/services/CHostPrototype.php:875
 #: include/classes/api/services/CImage.php:451
 #: include/classes/api/services/CMaintenance.php:512
@@ -5652,7 +5652,7 @@ msgstr ""
 #: include/classes/api/services/CService.php:366
 #: include/classes/api/services/CService.php:430
 #: include/classes/api/services/CService.php:498
-#: include/classes/api/services/CTemplate.php:586
+#: include/classes/api/services/CTemplate.php:587
 #: include/classes/api/services/CTrigger.php:678
 #: include/classes/api/services/CTrigger.php:802
 #: include/classes/api/services/CUserMacro.php:600
@@ -6154,7 +6154,7 @@ msgstr "Adresa URL nebyla úspěšně analyzována."
 msgid "Failed to update dashboard"
 msgstr "Nepodařilo se aktualizovat dashboard"
 
-#: include/classes/api/services/CTemplate.php:535
+#: include/classes/api/services/CTemplate.php:536
 msgid "Failed to update template."
 msgstr "Nepodařilo se aktualizovat šablony."
 
@@ -6197,14 +6197,14 @@ msgid "Field \"%1$s\" cannot be set to NULL."
 msgstr "Pole \"%1$s\" nemůže být nastavené na NULL."
 
 #: app/controllers/CControllerPopupTriggerWizard.php:226
-#: include/classes/api/services/CAction.php:1709
+#: include/classes/api/services/CAction.php:1715
 #: include/classes/api/services/CDRule.php:196
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:521
 #: include/classes/api/services/CDRule.php:531
 #: include/classes/api/services/CHostGroup.php:911
 #: include/classes/api/services/CHost.php:773
-#: include/classes/api/services/CTemplate.php:819
+#: include/classes/api/services/CTemplate.php:820
 #: include/classes/api/services/CTriggerGeneral.php:237
 #: include/classes/validators/CNewValidator.php:255
 #: include/validate.inc.php:300
@@ -6256,7 +6256,7 @@ msgstr "Položka \"%1$s\" je nutné pro typ médií \"%2$s\"."
 msgid "Field \"%1$s\" must be missing."
 msgstr "Pole \"%1$s\" musí chybět."
 
-#: include/classes/api/services/CTemplate.php:424
+#: include/classes/api/services/CTemplate.php:426
 msgid "Field \"host\" is mandatory."
 msgstr "Pole \"host\" je vyžadované."
 
@@ -6451,7 +6451,7 @@ msgstr "Pátek"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:86
 #: include/views/configuration.services.edit.php:245
 #: include/views/configuration.services.edit.php:291
-#: include/views/js/monitoring.sysmaps.js.php:668 report4.php:195
+#: include/views/js/monitoring.sysmaps.js.php:668 report4.php:199
 #: services.php:47 services.php:182
 msgid "From"
 msgstr "Od"
@@ -7143,8 +7143,8 @@ msgstr[0] "Hostitel"
 msgstr[1] "Hostitelé"
 msgstr[2] "Hostitelé"
 
-#: include/classes/api/services/CHost.php:873
-#: include/classes/api/services/CTemplate.php:457
+#: include/classes/api/services/CHost.php:877
+#: include/classes/api/services/CTemplate.php:458
 #: include/classes/import/importers/CHostImporter.php:60
 #, c-format
 msgid "Host \"%1$s\" already exists."
@@ -7152,8 +7152,8 @@ msgstr "Host \"%1$s\" již existuje."
 
 #: include/classes/api/services/CHostGroup.php:1457
 #: include/classes/api/services/CHost.php:836
-#: include/classes/api/services/CHost.php:1699
-#: include/classes/api/services/CHost.php:1880
+#: include/classes/api/services/CHost.php:1705
+#: include/classes/api/services/CHost.php:1886
 #, c-format
 msgid "Host \"%1$s\" cannot be without host group."
 msgstr "Host \"%1$s\" nemůže být bez hostitelské skupiny."
@@ -7420,25 +7420,25 @@ msgstr "Host byl aktualizován"
 msgid "Host with ID \"%1$s\" is not available."
 msgstr "Host s ID \"%1$s\" není dostupný."
 
-#: include/classes/api/services/CTemplate.php:1091
+#: include/classes/api/services/CTemplate.php:1092
 #, c-format
 msgid "Host with the same name \"%1$s\" already exists."
 msgstr "Host se stejným jménem \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHost.php:1811
-#: include/classes/api/services/CHost.php:2035
+#: include/classes/api/services/CHost.php:1817
+#: include/classes/api/services/CHost.php:2043
 #, c-format
 msgid "Host with the same name \"%s\" already exists."
 msgstr "Host s stejným jménem \"%s\" již existuje."
 
-#: include/classes/api/services/CTemplate.php:483
-#: include/classes/api/services/CTemplate.php:1056
+#: include/classes/api/services/CTemplate.php:484
+#: include/classes/api/services/CTemplate.php:1057
 #, c-format
 msgid "Host with the same visible name \"%1$s\" already exists."
 msgstr "Host se stejným viditelným jménem \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHost.php:1817
-#: include/classes/api/services/CHost.php:2042
+#: include/classes/api/services/CHost.php:1823
+#: include/classes/api/services/CHost.php:2050
 #, c-format
 msgid "Host with the same visible name \"%s\" already exists."
 msgstr "Host se stejným viditelným jménem \"%s\" již existuje."
@@ -7799,7 +7799,8 @@ msgstr "Nedostupný spouštěč"
 
 #: app/controllers/CControllerDashboardView.php:400
 #: include/actions.inc.php:2077 include/actions.inc.php:2100
-#: include/actions.inc.php:2105 include/views/monitoring.screen.edit.php:88
+#: include/actions.inc.php:2105 include/events.inc.php:224
+#: include/views/monitoring.screen.edit.php:88
 #: include/views/monitoring.slideconf.edit.php:78
 #: include/views/monitoring.sysmap.edit.php:76
 msgid "Inaccessible user"
@@ -7904,7 +7905,7 @@ msgstr "Nesprávná SNMP komunita."
 msgid "Incorrect acceptable SLA for service \"%1$s\"."
 msgstr "Neplatná akceptovatelná SLA pro službu \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:3164
+#: include/classes/api/services/CAction.php:3170
 msgid "Incorrect acknowledgement action operationid."
 msgstr "Neplatné potvrzení akce operace ID."
 
@@ -7912,7 +7913,7 @@ msgstr "Neplatné potvrzení akce operace ID."
 msgid "Incorrect action condition discovery check."
 msgstr "Nesprávná podmínka zjišťování stavu akce."
 
-#: include/classes/api/services/CAction.php:3240
+#: include/classes/api/services/CAction.php:3246
 msgid "Incorrect action condition discovery check. Discovery check does not exist or you have no access to it."
 msgstr "Nesprávná podmínka zjišťování stavu akce. Kontrola stavu neexistuje nebo k ní nemáte přístup."
 
@@ -7920,7 +7921,7 @@ msgstr "Nesprávná podmínka zjišťování stavu akce. Kontrola stavu neexistu
 msgid "Incorrect action condition discovery object."
 msgstr "Nesprávná podmínka zjišťování stavu objektu."
 
-#: include/classes/api/services/CAction.php:3237
+#: include/classes/api/services/CAction.php:3243
 msgid "Incorrect action condition discovery rule. Discovery rule does not exist or you have no access to it."
 msgstr "Nesprávná podmínka stavu pravidla nálezu. Pravidlo nálezu neexistuje nebo k němu nemáte přístup."
 
@@ -7932,11 +7933,11 @@ msgstr "Neplatná podmínka akce pro stav nálezu."
 msgid "Incorrect action condition event type."
 msgstr "Neplatná podmínka akce pro typ události."
 
-#: include/classes/api/services/CAction.php:3225
+#: include/classes/api/services/CAction.php:3231
 msgid "Incorrect action condition host group. Host group does not exist or you have no access to it."
 msgstr "Neplatná podmínka akce pro skupinu hostů. Skupina neexistuje nebo k ní nemáte přístup."
 
-#: include/classes/api/services/CAction.php:3228
+#: include/classes/api/services/CAction.php:3234
 msgid "Incorrect action condition host. Host does not exist or you have no access to it."
 msgstr "Neplatná podmínka pro akci hosta. Host neexistuje nebo k němu nemáte přístup."
 
@@ -7945,11 +7946,11 @@ msgstr "Neplatná podmínka pro akci hosta. Host neexistuje nebo k němu nemáte
 msgid "Incorrect action condition port \"%1$s\"."
 msgstr "Neplatná podmínka pro akci portu \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:3243
+#: include/classes/api/services/CAction.php:3249
 msgid "Incorrect action condition proxy. Proxy does not exist or you have no access to it."
 msgstr "Neplatná podmínka pro akci proxy. Proxy neexistuje nebo k ní nemáte přístup."
 
-#: include/classes/api/services/CAction.php:3231
+#: include/classes/api/services/CAction.php:3237
 msgid "Incorrect action condition template. Template does not exist or you have no access to it."
 msgstr "Neplatná podmínka pro akci šablony. Šablona neexistuje nebo ní nemáte přístup."
 
@@ -7957,7 +7958,7 @@ msgstr "Neplatná podmínka pro akci šablony. Šablona neexistuje nebo ní nem�
 msgid "Incorrect action condition trigger severity."
 msgstr "Neplatná podmínka pro akci závažného spuštění."
 
-#: include/classes/api/services/CAction.php:3234
+#: include/classes/api/services/CAction.php:3240
 msgid "Incorrect action condition trigger. Trigger does not exist or you have no access to it."
 msgstr "Neplatná podmínka pro akci spouštěče. Spouštěč neexistuje nebo k němu nemáte přístup."
 
@@ -7965,56 +7966,56 @@ msgstr "Neplatná podmínka pro akci spouštěče. Spouštěč neexistuje nebo k
 msgid "Incorrect action condition type."
 msgstr "Neplatná akce pro typ podmínky."
 
-#: include/classes/api/services/CAction.php:1882
+#: include/classes/api/services/CAction.php:1888
 msgid "Incorrect action operation command type."
 msgstr "Neplatná podmínka pro akci typu příkaz."
 
-#: include/classes/api/services/CAction.php:2031
+#: include/classes/api/services/CAction.php:2037
 msgid "Incorrect action operation condition acknowledge type."
 msgstr "Neplatná operace pro podmínku daného typu."
 
-#: include/classes/api/services/CAction.php:2036
+#: include/classes/api/services/CAction.php:2042
 msgid "Incorrect action operation condition type."
 msgstr "Neplatná operace pro daný typ podmínky."
 
-#: include/classes/api/services/CAction.php:1726
 #: include/classes/api/services/CAction.php:1732
+#: include/classes/api/services/CAction.php:1738
 msgid "Incorrect action operation escalation step values."
 msgstr "Neplatná operace pro stupně eskalace."
 
-#: include/classes/api/services/CAction.php:1995
+#: include/classes/api/services/CAction.php:2001
 msgid "Incorrect action operation host group. Host group does not exist or you have no access to this host group."
 msgstr "Neplatná operace skupiny. Skupina neexistuje nebo k ní nemáte přístup."
 
-#: include/classes/api/services/CAction.php:1998
+#: include/classes/api/services/CAction.php:2004
 msgid "Incorrect action operation host. Host does not exist or you have no access to this host."
 msgstr "Neplatná operace hosta. Host neexistuje nebo k němu nemáte přístup."
 
-#: include/classes/api/services/CAction.php:1889
-#: include/classes/api/services/CAction.php:1898
+#: include/classes/api/services/CAction.php:1895
+#: include/classes/api/services/CAction.php:1904
 #, c-format
 msgid "Incorrect action operation port \"%s\"."
 msgstr "Neplatná operace portu \"%s\"."
 
-#: include/classes/api/services/CAction.php:2001
+#: include/classes/api/services/CAction.php:2007
 msgid "Incorrect action operation template. Template does not exist or you have no access to this template."
 msgstr "Neplatná operace šablony. Šablona neexistuje nebo k ní nemáte přístup."
 
-#: include/classes/api/services/CAction.php:1749
+#: include/classes/api/services/CAction.php:1755
 #, c-format
 msgid "Incorrect action operation type \"%1$s\" for event source \"%2$s\"."
 msgstr "Nesprávná operace typu \"%1$s\" pro zdroj události \"%2$s\"."
 
-#: include/classes/api/services/CAction.php:2007
+#: include/classes/api/services/CAction.php:2013
 msgid "Incorrect action operation user group. User group does not exist or you have no access to this user group."
 msgstr "Neplatná operace skupiny. Skupina neexistuje nebo k ní nemáte přístup."
 
-#: include/classes/api/services/CAction.php:2004
+#: include/classes/api/services/CAction.php:2010
 msgid "Incorrect action operation user. User does not exist or you have no access to this user."
 msgstr "Neplatná operace uživatele. Uživatel neexistuje nebo k němu nemáte přístup."
 
-#: include/classes/api/services/CAction.php:3108
-#: include/classes/api/services/CAction.php:3126
+#: include/classes/api/services/CAction.php:3114
+#: include/classes/api/services/CAction.php:3132
 msgid "Incorrect action operationid."
 msgstr "Neplatné akce operace ID."
 
@@ -8111,26 +8112,26 @@ msgstr "Neplatná hromadná hodnota pro rozhraní."
 msgid "Incorrect calculate SLA value for service \"%1$s\"."
 msgstr "Nesprávně vypočítaná hodnota SLA pro službu \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:856
-#: include/classes/api/services/CHost.php:1687
-#: include/classes/api/services/CHost.php:1948
+#: include/classes/api/services/CHost.php:859
+#: include/classes/api/services/CHost.php:1693
+#: include/classes/api/services/CHost.php:1956
 #, c-format
 msgid "Incorrect characters used for host name \"%s\"."
 msgstr "Nesprávné znaky použité pro jméno hosta \"%s\"."
 
-#: include/classes/api/services/CProxy.php:623
-#: include/classes/api/services/CProxy.php:736
+#: include/classes/api/services/CProxy.php:624
+#: include/classes/api/services/CProxy.php:738
 #, c-format
 msgid "Incorrect characters used for proxy name \"%1$s\"."
 msgstr "Nesprávné znaky použité pro jméno proxy \"%1$s\"."
 
-#: include/classes/api/services/CTemplate.php:434
-#: include/classes/api/services/CTemplate.php:1099
+#: include/classes/api/services/CTemplate.php:436
+#: include/classes/api/services/CTemplate.php:1102
 #, c-format
 msgid "Incorrect characters used for template name \"%1$s\"."
 msgstr "Nesprávné znaky použité pro jméno šablony \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2707
+#: include/classes/api/services/CAction.php:2713
 #, c-format
 msgid "Incorrect conditions for action \"%1$s\"."
 msgstr "Nesprávné podmínky pro akci \"%1$s\"."
@@ -8144,7 +8145,7 @@ msgstr "Nesprávné podmínky pro pravidlo nálezu \"%1$s\"."
 msgid "Incorrect correlation ID."
 msgstr "Nesprávná korelace ID."
 
-#: include/classes/api/services/CAction.php:2712
+#: include/classes/api/services/CAction.php:2718
 #, c-format
 msgid "Incorrect custom expression \"%2$s\" for action \"%1$s\": %3$s."
 msgstr "Nesprávně nastavený výraz \"%2$s\" pro akci \"%1$s\": %3$s."
@@ -8194,7 +8195,7 @@ msgstr "Neplatné pole pro sysmap."
 msgid "Incorrect file upload."
 msgstr "Nahraný neplatný soubor."
 
-#: include/classes/api/services/CAction.php:2746
+#: include/classes/api/services/CAction.php:2752
 #, c-format
 msgid "Incorrect filter condition formula ID for action \"%1$s\"."
 msgstr "Nesprávná podmínka filtru ID pro akci \"%1$s\"."
@@ -8214,8 +8215,8 @@ msgstr "Nesprávný filtr korelace ID je uveden pro korelaci \"%1$s\"."
 msgid "Incorrect filter condition macro for discovery rule \"%1$s\"."
 msgstr "Nesprávné nastavení filtru makra pravidlo nálezu \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:1649
-#: include/classes/api/services/CAction.php:2751
+#: include/classes/api/services/CAction.php:1655
+#: include/classes/api/services/CAction.php:2757
 #, c-format
 msgid "Incorrect filter condition operator for action \"%1$s\"."
 msgstr "Nesprávné nastavení filtru operátora pro akci \"%1$s\"."
@@ -8225,8 +8226,8 @@ msgstr "Nesprávné nastavení filtru operátora pro akci \"%1$s\"."
 msgid "Incorrect filter condition operator for discovery rule \"%1$s\"."
 msgstr "Nesprávné nastavení filtru operátora pro pravidlo nálezu \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:1642
-#: include/classes/api/services/CAction.php:2735
+#: include/classes/api/services/CAction.php:1648
+#: include/classes/api/services/CAction.php:2741
 #, c-format
 msgid "Incorrect filter condition type for action \"%1$s\"."
 msgstr "Nesprávné nastavení filtru pro akci \"%1$s\"."
@@ -8265,21 +8266,21 @@ msgstr "Neplatná skupina."
 msgid "Incorrect image index."
 msgstr "Neplatný obrázkový index."
 
-#: include/classes/api/services/CAction.php:2900
-#: include/classes/api/services/CAction.php:2912
-#: include/classes/api/services/CAction.php:2924
+#: include/classes/api/services/CAction.php:2906
+#: include/classes/api/services/CAction.php:2918
+#: include/classes/api/services/CAction.php:2930
 #: include/classes/api/services/CHost.php:842
-#: include/classes/api/services/CHost.php:1681
-#: include/classes/api/services/CHost.php:1867
+#: include/classes/api/services/CHost.php:1687
+#: include/classes/api/services/CHost.php:1873
 #: include/classes/api/services/CImage.php:463
 #: include/classes/api/services/CImage.php:504
-#: include/classes/api/services/CProxy.php:618
-#: include/classes/api/services/CProxy.php:682
-#: include/classes/api/services/CProxy.php:725
-#: include/classes/api/services/CProxy.php:747
+#: include/classes/api/services/CProxy.php:619
+#: include/classes/api/services/CProxy.php:683
+#: include/classes/api/services/CProxy.php:727
+#: include/classes/api/services/CProxy.php:749
 #: include/classes/api/services/CScreen.php:454
-#: include/classes/api/services/CTemplate.php:429
-#: include/classes/api/services/CTemplate.php:566
+#: include/classes/api/services/CTemplate.php:431
+#: include/classes/api/services/CTemplate.php:567
 #: include/classes/api/services/CTemplateScreen.php:596
 msgid "Incorrect input parameters."
 msgstr "Nesprávné vstupní parametry."
@@ -8294,13 +8295,13 @@ msgstr "Neplatný parametr DNS pro rozhraní \"%s\"."
 msgid "Incorrect interface port \"%s\" provided."
 msgstr "Poskytnuto neplatné rozhraní pro port \"%s\"."
 
-#: include/classes/api/services/CHost.php:1786
-#: include/classes/api/services/CHost.php:1930
+#: include/classes/api/services/CHost.php:1792
+#: include/classes/api/services/CHost.php:1938
 #, c-format
 msgid "Incorrect inventory field \"%s\"."
 msgstr "Neplatné pole inventáře \"%s\"."
 
-#: include/classes/api/services/CAction.php:1985
+#: include/classes/api/services/CAction.php:1991
 msgid "Incorrect inventory mode in action operation."
 msgstr "Neplatný mód inventáře v akci."
 
@@ -8397,21 +8398,21 @@ msgstr "Neplatná metoda \"%1$s.%2$s\"."
 msgid "Incorrect object value."
 msgstr "Neplatná hodnota objektu."
 
-#: include/classes/api/services/CAction.php:2818
+#: include/classes/api/services/CAction.php:2824
 #, c-format
 msgid "Incorrect parameter for action \"%1$s\"."
 msgstr "Neplatný parametr pro akci \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:1060
+#: include/classes/api/services/CAction.php:1066
 msgid "Incorrect parameter for operations."
 msgstr "Neplatný parametr pro operaci."
 
-#: include/classes/api/services/CAction.php:2987
+#: include/classes/api/services/CAction.php:2993
 #, c-format
 msgid "Incorrect parameters for action update method \"%1$s\"."
 msgstr "Neplatné parametry pro aktualizaci metody \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:1022
+#: include/classes/api/services/CAction.php:1028
 msgid "Incorrect parameters for condition."
 msgstr "Neplatné parametry pro podmínku."
 
@@ -8490,8 +8491,8 @@ msgstr "Neplatné pořadí řazení pro službu \"%1$s\"."
 msgid "Incorrect source value."
 msgstr "Neplatná hodnota zdroje."
 
-#: include/classes/api/services/CHost.php:1758
-#: include/classes/api/services/CHost.php:1898
+#: include/classes/api/services/CHost.php:1764
+#: include/classes/api/services/CHost.php:1904
 #, c-format
 msgid "Incorrect status for host \"%1$s\"."
 msgstr "Neplatný stav pro hosta \"%1$s\"."
@@ -8554,7 +8555,7 @@ msgstr "Neplatný výraz prototypu spouštěče. Host \"%1$s\" neexistuje nebo n
 msgid "Incorrect trigger prototype expression. Trigger prototype expression elements should not belong to a template and a host simultaneously."
 msgstr "Neplatný výraz prototypu spouštěče. Elementy výrazu prototypu spouštěče by neměly patřit šabloně a hostu zároveň."
 
-#: include/classes/api/services/CAction.php:2700
+#: include/classes/api/services/CAction.php:2706
 #, c-format
 msgid "Incorrect type of calculation for action \"%1$s\"."
 msgstr "Neplatný typ kalkulace pro akci \"%1$s\"."
@@ -8598,12 +8599,12 @@ msgid "Incorrect user group."
 msgstr "Neplatná skupina uživatelů."
 
 #: app/controllers/CControllerPopupGeneric.php:402
-#: include/classes/api/services/CAction.php:822
-#: include/classes/api/services/CAction.php:865
-#: include/classes/api/services/CAction.php:939
-#: include/classes/api/services/CAction.php:1847
-#: include/classes/api/services/CAction.php:2864
-#: include/classes/api/services/CAction.php:3009
+#: include/classes/api/services/CAction.php:827
+#: include/classes/api/services/CAction.php:870
+#: include/classes/api/services/CAction.php:944
+#: include/classes/api/services/CAction.php:1853
+#: include/classes/api/services/CAction.php:2870
+#: include/classes/api/services/CAction.php:3015
 #: include/classes/api/services/CDRule.php:237
 #: include/classes/api/services/CDRule.php:244
 #: include/classes/api/services/CDRule.php:292
@@ -8630,7 +8631,7 @@ msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
 msgstr "Neplatná hodnota \"%1$s\" pro pole \"%2$s\"."
 
 #: app/controllers/CControllerAuthenticationUpdate.php:134
-#: include/classes/api/services/CAction.php:1780
+#: include/classes/api/services/CAction.php:1786
 #: include/classes/api/services/CScreenItem.php:576
 #: include/validate.inc.php:351
 #, c-format
@@ -8709,10 +8710,10 @@ msgstr "Nesprávná hodnota pro pole \"%1$s\"."
 #: app/controllers/CControllerPopupPreprocTestSend.php:101 correlation.php:227
 #: correlation.php:237 correlation.php:243 correlation.php:263
 #: correlation.php:267 correlation.php:280
-#: include/classes/api/services/CAction.php:1741
-#: include/classes/api/services/CAction.php:1915
-#: include/classes/api/services/CAction.php:1991
-#: include/classes/api/services/CAction.php:2953
+#: include/classes/api/services/CAction.php:1747
+#: include/classes/api/services/CAction.php:1921
+#: include/classes/api/services/CAction.php:1997
+#: include/classes/api/services/CAction.php:2959
 #: include/classes/api/services/CCorrelation.php:1045
 #: include/classes/api/services/CCorrelation.php:1080
 #: include/classes/api/services/CCorrelation.php:1101
@@ -8742,18 +8743,18 @@ msgstr "Nesprávná hodnota pro pole \"%1$s\"."
 #: include/classes/api/services/CEvent.php:780
 #: include/classes/api/services/CEvent.php:837
 #: include/classes/api/services/CHost.php:800
-#: include/classes/api/services/CHost.php:1585
-#: include/classes/api/services/CHost.php:1591
-#: include/classes/api/services/CHost.php:1606
-#: include/classes/api/services/CHost.php:1612
-#: include/classes/api/services/CHost.php:1617
-#: include/classes/api/services/CHost.php:1623
-#: include/classes/api/services/CHost.php:1631
-#: include/classes/api/services/CHost.php:1637
-#: include/classes/api/services/CHost.php:1646
-#: include/classes/api/services/CHost.php:1652
-#: include/classes/api/services/CHost.php:1752
-#: include/classes/api/services/CHost.php:1892
+#: include/classes/api/services/CHost.php:1589
+#: include/classes/api/services/CHost.php:1595
+#: include/classes/api/services/CHost.php:1610
+#: include/classes/api/services/CHost.php:1616
+#: include/classes/api/services/CHost.php:1621
+#: include/classes/api/services/CHost.php:1627
+#: include/classes/api/services/CHost.php:1635
+#: include/classes/api/services/CHost.php:1641
+#: include/classes/api/services/CHost.php:1650
+#: include/classes/api/services/CHost.php:1656
+#: include/classes/api/services/CHost.php:1758
+#: include/classes/api/services/CHost.php:1898
 #: include/classes/api/services/CHttpTest.php:957
 #: include/classes/api/services/CHttpTest.php:1053
 #: include/classes/api/services/CItemGeneral.php:216
@@ -8832,10 +8833,10 @@ msgstr "Nesprávná hodnota pro pole \"%1$s\"."
 #: include/classes/api/services/CProxy.php:565
 #: include/classes/api/services/CProxy.php:578
 #: include/classes/api/services/CProxy.php:584
-#: include/classes/api/services/CProxy.php:660
-#: include/classes/api/services/CProxy.php:668
-#: include/classes/api/services/CProxy.php:783
-#: include/classes/api/services/CProxy.php:791
+#: include/classes/api/services/CProxy.php:661
+#: include/classes/api/services/CProxy.php:669
+#: include/classes/api/services/CProxy.php:785
+#: include/classes/api/services/CProxy.php:793
 #: include/classes/api/services/CScreen.php:422
 #: include/classes/api/services/CScreen.php:428
 #: include/classes/api/services/CTriggerGeneral.php:242
@@ -8896,8 +8897,8 @@ msgstr "Neplatná hodnota pro pole \"%1$s\": nemůže být prázdné."
 msgid "Incorrect value used for PSK field. It should consist of an even number of hexadecimal characters."
 msgstr "Neplatná hodnota používaná pro pole PSK. To by mělo obsahovat sudý počet hexadecimálních znaků."
 
-#: include/classes/api/services/CProxy.php:645
-#: include/classes/api/services/CProxy.php:775
+#: include/classes/api/services/CProxy.php:646
+#: include/classes/api/services/CProxy.php:777
 #, c-format
 msgid "Incorrect value used for proxy status \"%1$s\"."
 msgstr "Neplatná hodnota použitá pro proxy stav \"%1$s\"."
@@ -9392,7 +9393,7 @@ msgstr "Neplatné view jméno pro \"%s\". Povolené znaky: \"a-z\" a \".\"."
 msgid "Inventory"
 msgstr "Inventář"
 
-#: include/classes/api/services/CHost.php:1043
+#: include/classes/api/services/CHost.php:1047
 #, c-format
 msgid "Inventory disabled for host \"%1$s\"."
 msgstr "Inventář vypnutý pro hosta \"%1$s\"."
@@ -10384,7 +10385,7 @@ msgstr "Makra byla aktualizována"
 #: include/views/monitoring.hostscreen.php:57
 #: include/views/monitoring.overview.items.php:45
 #: include/views/monitoring.overview.triggers.php:82
-#: include/views/monitoring.slides.php:83 report2.php:185 report4.php:128
+#: include/views/monitoring.slides.php:83 report2.php:185 report4.php:132
 #: srv_status.php:167
 msgid "Main filter"
 msgstr "Hlavní filtr"
@@ -10690,7 +10691,7 @@ msgid "Media"
 msgstr "Média"
 
 #: app/views/administration.mediatype.edit.php:182 include/audit.inc.php:26
-#: report4.php:99
+#: report4.php:103
 msgid "Media type"
 msgstr "Typ média"
 
@@ -10971,12 +10972,12 @@ msgstr "Sledování"
 msgid "Monospace"
 msgstr "Monospace"
 
-#: app/views/report.services.php:67 include/forms.inc.php:2290 report4.php:166
+#: app/views/report.services.php:67 include/forms.inc.php:2290 report4.php:170
 msgid "Month"
 msgstr "Měsíc"
 
 #: app/views/report.services.php:36 include/forms.inc.php:2215
-#: include/maintenances.inc.php:37 report4.php:109
+#: include/maintenances.inc.php:37 report4.php:113
 msgid "Monthly"
 msgstr "Měsíčně"
 
@@ -11028,7 +11029,7 @@ msgstr "NNTP"
 msgid "NTLM"
 msgstr "NTLM"
 
-#: actionconf.php:36 actionconf.php:239 adm.regexps.php:36 adm.regexps.php:158
+#: actionconf.php:36 adm.regexps.php:36 adm.regexps.php:158
 #: adm.regexps.php:189 app/controllers/CControllerPopupGeneric.php:71
 #: app/controllers/CControllerPopupGeneric.php:83
 #: app/controllers/CControllerPopupGeneric.php:95
@@ -11368,9 +11369,9 @@ msgstr "Žádné \"%1$s\" dané pro obrazovku."
 msgid "No \"%1$s\" given for template screen."
 msgstr "Žádné \"%1$s\" dané pro šablonu obrazovky."
 
-#: include/classes/api/services/CAction.php:2758
-#: include/classes/api/services/CAction.php:2878
-#: include/classes/api/services/CAction.php:3071
+#: include/classes/api/services/CAction.php:2764
+#: include/classes/api/services/CAction.php:2884
+#: include/classes/api/services/CAction.php:3077
 #, c-format
 msgid "No \"%2$s\" given for a filter condition of action \"%1$s\"."
 msgstr "Žádné \"%2$s\" dané pro filtrovací podmínku akcie \"%1$s\"."
@@ -11380,7 +11381,7 @@ msgstr "Žádné \"%2$s\" dané pro filtrovací podmínku akcie \"%1$s\"."
 msgid "No \"%2$s\" given for a filter condition of discovery rule \"%1$s\"."
 msgstr "Žádné \"%2$s\" dané pro filtrovací podmínku objevovacího pravidla \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2719
+#: include/classes/api/services/CAction.php:2725
 #, c-format
 msgid "No \"%2$s\" given for the filter of action \"%1$s\"."
 msgstr "Žádné \"%2$s\" dané pro filtr akcie \"%1$s\"."
@@ -11426,13 +11427,13 @@ msgstr "Nenalezené žádné rozhraní agenta."
 msgid "No applications found."
 msgstr "Nenalezená žádná aplikace."
 
-#: include/classes/api/services/CAction.php:1812
+#: include/classes/api/services/CAction.php:1818
 #, c-format
 msgid "No authentication type specified for action operation command \"%s\"."
 msgstr "Není specifikovaný typ autentizace pro příkaz akce \"%s\"."
 
-#: include/classes/api/services/CAction.php:1822
-#: include/classes/api/services/CAction.php:1857
+#: include/classes/api/services/CAction.php:1828
+#: include/classes/api/services/CAction.php:1863
 #, c-format
 msgid "No authentication user name specified for action operation command \"%s\"."
 msgstr "Není specifikované uživatelské jméno autentizace pro příkaz akce \"%s\"."
@@ -11441,11 +11442,11 @@ msgstr "Není specifikované uživatelské jméno autentizace pro příkaz akce 
 msgid "No authentication user name specified."
 msgstr "Není specifikované uživatelské jméno autentizace."
 
-#: include/classes/api/services/CAction.php:1793
+#: include/classes/api/services/CAction.php:1799
 msgid "No command specified for action operation."
 msgstr "Není specifikovaný příkaz akce."
 
-#: include/classes/api/services/CAction.php:1787
+#: include/classes/api/services/CAction.php:1793
 msgid "No command type specified for action operation."
 msgstr "Není specifikovaný typ akce."
 
@@ -11503,7 +11504,7 @@ msgstr "Žádné stanovené ID objevovacího pravidla."
 msgid "No encryption"
 msgstr "Bez šifrování"
 
-#: include/classes/api/services/CAction.php:1802
+#: include/classes/api/services/CAction.php:1808
 #, c-format
 msgid "No execution target specified for action operation command \"%s\"."
 msgstr "Žádný cíl spuštění není specifikovaný pro akci příkazu \"%s\"."
@@ -11579,19 +11580,19 @@ msgstr "Nenalezené žádné rozhraní"
 msgid "No interface found."
 msgstr "Nenalezené žádné rozhraní."
 
-#: include/classes/api/services/CProxy.php:653
-#: include/classes/api/services/CProxy.php:830
+#: include/classes/api/services/CProxy.php:654
+#: include/classes/api/services/CProxy.php:832
 #, c-format
 msgid "No interface provided for proxy \"%s\"."
 msgstr "Žádné neposkytnuté rozhraní pro proxy \"%s\"."
 
-#: include/classes/api/services/CHost.php:1765
-#: include/classes/api/services/CHost.php:1941
+#: include/classes/api/services/CHost.php:1771
+#: include/classes/api/services/CHost.php:1949
 #, c-format
 msgid "No interfaces for host \"%s\"."
 msgstr "Žádné rozhraní pro host \"%s\"."
 
-#: include/classes/api/services/CAction.php:1980
+#: include/classes/api/services/CAction.php:1986
 msgid "No inventory mode specified for action operation."
 msgstr "Žádný režim inventář určený pro akci provoz."
 
@@ -11663,9 +11664,9 @@ msgstr "Žádné oprávnění pro přístup do systému."
 #: app/controllers/CControllerWidgetPlainTextView.php:78
 #: app/views/monitoring.widget.graph.view.php:23 disc_prototypes.php:1251
 #: disc_prototypes.php:1496 host_discovery.php:664
-#: include/classes/api/services/CAction.php:1615
-#: include/classes/api/services/CAction.php:1992
-#: include/classes/api/services/CAction.php:2969
+#: include/classes/api/services/CAction.php:1621
+#: include/classes/api/services/CAction.php:1998
+#: include/classes/api/services/CAction.php:2975
 #: include/classes/api/services/CApplication.php:304
 #: include/classes/api/services/CApplication.php:340
 #: include/classes/api/services/CApplication.php:454
@@ -11710,10 +11711,10 @@ msgstr "Žádné oprávnění pro přístup do systému."
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
 #: include/classes/api/services/CHostInterface.php:653
-#: include/classes/api/services/CHost.php:1152
-#: include/classes/api/services/CHost.php:1187
-#: include/classes/api/services/CHost.php:1741
-#: include/classes/api/services/CHost.php:1873
+#: include/classes/api/services/CHost.php:1156
+#: include/classes/api/services/CHost.php:1191
+#: include/classes/api/services/CHost.php:1747
+#: include/classes/api/services/CHost.php:1879
 #: include/classes/api/services/CHostPrototype.php:353
 #: include/classes/api/services/CHostPrototype.php:399
 #: include/classes/api/services/CHostPrototype.php:420
@@ -11754,9 +11755,9 @@ msgstr "Žádné oprávnění pro přístup do systému."
 #: include/classes/api/services/CProxy.php:163
 #: include/classes/api/services/CProxy.php:253
 #: include/classes/api/services/CProxy.php:415
-#: include/classes/api/services/CProxy.php:696
-#: include/classes/api/services/CProxy.php:729
-#: include/classes/api/services/CProxy.php:814
+#: include/classes/api/services/CProxy.php:697
+#: include/classes/api/services/CProxy.php:731
+#: include/classes/api/services/CProxy.php:816
 #: include/classes/api/services/CScreenItem.php:396
 #: include/classes/api/services/CScreenItem.php:443
 #: include/classes/api/services/CScreen.php:770
@@ -11768,8 +11769,8 @@ msgstr "Žádné oprávnění pro přístup do systému."
 #: include/classes/api/services/CService.php:989
 #: include/classes/api/services/CService.php:1013
 #: include/classes/api/services/CTask.php:136
-#: include/classes/api/services/CTemplate.php:759
-#: include/classes/api/services/CTemplate.php:781
+#: include/classes/api/services/CTemplate.php:760
+#: include/classes/api/services/CTemplate.php:782
 #: include/classes/api/services/CTemplateScreen.php:631
 #: include/classes/api/services/CTemplateScreen.php:682
 #: include/classes/api/services/CTemplateScreen.php:745
@@ -11798,7 +11799,7 @@ msgstr "Žádné oprávnění pro přístup do systému."
 msgid "No permissions to referred object or it does not exist!"
 msgstr "Žádné oprávnění k odkazovanému objektu nebo objekt neexistuje!"
 
-#: include/classes/api/services/CAction.php:1840
+#: include/classes/api/services/CAction.php:1846
 #, c-format
 msgid "No private key file specified for action operation command \"%s\"."
 msgstr "Žádný specifikovaný soubor se soukromým klíčem pro akci příkazu \"%s\"."
@@ -11811,7 +11812,7 @@ msgstr "Žádný specifikovaný soubor se soukromým klíčem."
 msgid "No proxy"
 msgstr "Žádné proxy"
 
-#: include/classes/api/services/CAction.php:1832
+#: include/classes/api/services/CAction.php:1838
 #, c-format
 msgid "No public key file specified for action operation command \"%s\"."
 msgstr "Žádný specifikovaný soubor s veřejným klíčem pro akci příkazu \"%s\"."
@@ -11820,7 +11821,7 @@ msgstr "Žádný specifikovaný soubor s veřejným klíčem pro akci příkazu 
 msgid "No public key file specified."
 msgstr "Žádný specifikovaný soubor s veřejným klíčem."
 
-#: include/classes/api/services/CAction.php:1764
+#: include/classes/api/services/CAction.php:1770
 msgid "No recipients for action operation message."
 msgstr "Žádný příjemce pro operaci odeslání zprávy."
 
@@ -11836,7 +11837,7 @@ msgstr "Žádné ID obrazovky pro obrazovkový element."
 msgid "No screens added."
 msgstr "Žádné obrazovky nebyly přidané."
 
-#: include/classes/api/services/CAction.php:1867
+#: include/classes/api/services/CAction.php:1873
 msgid "No script specified for action operation command."
 msgstr "Není specifikovaný skript pro akci příkazu."
 
@@ -11973,7 +11974,7 @@ msgstr "Nic na vykonání."
 msgid "Notification report"
 msgstr "Protokol zpráv"
 
-#: include/menu.inc.php:171 report4.php:65
+#: include/menu.inc.php:171 report4.php:69
 msgid "Notifications"
 msgstr "Zprávy"
 
@@ -12400,7 +12401,7 @@ msgstr "Opera"
 msgid "Operating system information. Returns string"
 msgstr "Informace operačního systému. Návratová hodnota řetězec"
 
-#: actionconf.php:405 correlation.php:317
+#: actionconf.php:402 correlation.php:317
 #, c-format
 msgid "Operation \"%s\" already exists."
 msgstr "Operace \"%s\" již existuje."
@@ -12419,11 +12420,11 @@ msgstr "Podmínka operace"
 msgid "Operation details"
 msgstr "Podrobnosti operace"
 
-#: include/classes/api/services/CAction.php:1953
+#: include/classes/api/services/CAction.php:1959
 msgid "Operation has no group to operate."
 msgstr "Operace nemá skupinu na vykonání."
 
-#: include/classes/api/services/CAction.php:1965
+#: include/classes/api/services/CAction.php:1971
 msgid "Operation has no template to operate."
 msgstr "Operace nemá šablonu na vykonání."
 
@@ -13000,7 +13001,7 @@ msgstr "Vykonat DNS dotaz. Vrátí řetězec s požadovaným typem informace"
 #: include/views/configuration.item.massupdate.php:342
 #: include/views/configuration.item.prototype.edit.php:614
 #: include/views/configuration.item.prototype.massupdate.php:339
-#: include/views/configuration.maintenance.edit.php:77 report4.php:104
+#: include/views/configuration.maintenance.edit.php:77 report4.php:108
 #: srv_status.php:170
 msgid "Period"
 msgstr "Období"
@@ -13432,8 +13433,8 @@ msgstr "Proxy \"%1$s\" je používána akcí \"%2$s\"."
 msgid "Proxy \"%1$s\" is used by discovery rule \"%2$s\"."
 msgstr "Proxy \"%1$s\" je použitá objevovacím pravidlem \"%2$s\"."
 
-#: include/classes/api/services/CProxy.php:637
-#: include/classes/api/services/CProxy.php:762
+#: include/classes/api/services/CProxy.php:638
+#: include/classes/api/services/CProxy.php:764
 #, c-format
 msgid "Proxy \"%s\" already exists."
 msgstr "Proxy \"%s\" již existuje."
@@ -14023,18 +14024,18 @@ msgstr "Vyřešená korelační pravidla \"%1$s\"."
 msgid "Resolved by correlation rule."
 msgstr "Vyřešená korelační pravidla."
 
+#: app/views/monitoring.widget.problems.view.php:143
+#: include/classes/screens/CScreenHostTriggers.php:249
+#: include/classes/screens/CScreenProblem.php:1018
+msgid "Resolved by inaccessible user."
+msgstr ""
+
 #: app/views/monitoring.widget.problems.view.php:142
 #: include/classes/screens/CScreenHostTriggers.php:248
 #: include/classes/screens/CScreenProblem.php:1017
 #, c-format
 msgid "Resolved by user \"%1$s\"."
 msgstr "Vyřešeno uživatelem \"%1$s\"."
-
-#: app/views/monitoring.widget.problems.view.php:143
-#: include/classes/screens/CScreenHostTriggers.php:249
-#: include/classes/screens/CScreenProblem.php:1018
-msgid "Resolved by user."
-msgstr "Vyřešeno uživatelem."
 
 #: include/views/administration.auditlogs.list.php:52
 #: include/views/administration.auditlogs.list.php:73
@@ -14752,7 +14753,7 @@ msgstr "Vyber prvek"
 msgid "Selected"
 msgstr "Vybrané"
 
-#: actionconf.php:525
+#: actionconf.php:519
 msgid "Selected actions deleted"
 msgstr "Označené akce smazané"
 
@@ -15430,7 +15431,7 @@ msgstr "Typ zdroje"
 msgid "Spanish (es_ES)"
 msgstr "Španělsky (es_ES)"
 
-#: include/classes/api/services/CAction.php:1877
+#: include/classes/api/services/CAction.php:1883
 msgid "Specified script does not exist or you do not have rights on it for action operation command."
 msgstr "Specifikovaný skript neexistuje nebo nemáte práva na jeho vykonání."
 
@@ -15908,8 +15909,8 @@ msgstr "Telnet"
 msgid "Template"
 msgstr "Šablona"
 
-#: include/classes/api/services/CHost.php:884
-#: include/classes/api/services/CTemplate.php:447
+#: include/classes/api/services/CHost.php:888
+#: include/classes/api/services/CTemplate.php:448
 #: include/classes/import/importers/CTemplateImporter.php:72
 #, c-format
 msgid "Template \"%1$s\" already exists."
@@ -15917,7 +15918,7 @@ msgstr "Šablona \"%1$s\" již existuje."
 
 #: include/classes/api/services/CHostGroup.php:1462
 #: include/classes/api/services/CTemplate.php:391
-#: include/classes/api/services/CTemplate.php:1023
+#: include/classes/api/services/CTemplate.php:1024
 #, c-format
 msgid "Template \"%1$s\" cannot be without host group."
 msgstr "Template \"%1$s\" nemůže být bez hostitelské skupiny."
@@ -15977,25 +15978,25 @@ msgstr "Šablona byla aktualizována"
 msgid "Template value"
 msgstr "Šablona hodnota"
 
-#: include/classes/api/services/CTemplate.php:1078
+#: include/classes/api/services/CTemplate.php:1079
 #, c-format
 msgid "Template with the same name \"%1$s\" already exists."
 msgstr "Šablona se stejným jménem \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHost.php:1832
-#: include/classes/api/services/CHost.php:2060
+#: include/classes/api/services/CHost.php:1838
+#: include/classes/api/services/CHost.php:2068
 #, c-format
 msgid "Template with the same name \"%s\" already exists."
 msgstr "Šablona se stejným jménem \"%s\" již existuje."
 
-#: include/classes/api/services/CTemplate.php:470
-#: include/classes/api/services/CTemplate.php:1043
+#: include/classes/api/services/CTemplate.php:471
+#: include/classes/api/services/CTemplate.php:1044
 #, c-format
 msgid "Template with the same visible name \"%1$s\" already exists."
 msgstr "Šablona se stejným viditelným jménem \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHost.php:1838
-#: include/classes/api/services/CHost.php:2068
+#: include/classes/api/services/CHost.php:1844
+#: include/classes/api/services/CHost.php:2076
 #, c-format
 msgid "Template with the same visible name \"%s\" already exists."
 msgstr "Šablona se stejným zobrazovaným jménem \"%s\" již existuje."
@@ -16257,7 +16258,7 @@ msgstr "Čtvrtek"
 
 #: app/views/report.services.php:68
 #: include/views/configuration.services.edit.php:252
-#: include/views/configuration.services.edit.php:305 report4.php:195
+#: include/views/configuration.services.edit.php:305 report4.php:199
 #: services.php:48 services.php:191
 msgid "Till"
 msgstr "Do"
@@ -17114,7 +17115,7 @@ msgstr "Neplatný typ souboru na import \"%1$s\"."
 msgid "Unsupported import format \"%1$s\"."
 msgstr "Neplatný formát importu \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2759
+#: include/classes/api/services/CAction.php:2765
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for a filter condition of action \"%1$s\"."
 msgstr "Nepodporovaný parametr \"%2$s\" pro filtrovací podmínku akcie \"%1$s\"."
@@ -17124,7 +17125,7 @@ msgstr "Nepodporovaný parametr \"%2$s\" pro filtrovací podmínku akcie \"%1$s\
 msgid "Unsupported parameter \"%2$s\" for a filter condition of discovery rule \"%1$s\"."
 msgstr "Nepodporovaný parametr \"%2$s\" pro filtrovací podmínku objevovacího pravidla \"%1$s\"."
 
-#: include/classes/api/services/CAction.php:2720
+#: include/classes/api/services/CAction.php:2726
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for the filter of action \"%1$s\"."
 msgstr "Nepodporovaný parametr \"%2$s\" pro filtr akce \"%1$s\"."
@@ -17298,8 +17299,8 @@ msgstr "Použité v položkách"
 
 #: httpconf.php:59 include/actions.inc.php:1775 include/actions.inc.php:1829
 #: include/actions.inc.php:2044 include/audit.inc.php:24
-#: include/classes/setup/CSetupWizard.php:245 include/events.inc.php:224
-#: include/hosts.inc.php:61 include/views/administration.auditlogs.list.php:26
+#: include/classes/setup/CSetupWizard.php:245 include/hosts.inc.php:61
+#: include/views/administration.auditlogs.list.php:26
 #: include/views/administration.auditlogs.list.php:71
 #: include/views/administration.users.edit.php:453
 #: include/views/configuration.action.edit.php:698
@@ -17993,7 +17994,7 @@ msgstr "Virtuální velikost prostoru v bytech nebo v procentech z celkového po
 msgid "Visible name"
 msgstr "Zobrazované jméno"
 
-#: include/classes/api/services/CHost.php:1966
+#: include/classes/api/services/CHost.php:1974
 msgid "Visible name cannot be empty if host name is missing."
 msgstr "Zobrazované jméno nemůže být prázdné když jméno hostu chybí."
 
@@ -18102,7 +18103,7 @@ msgid "Wednesday"
 msgstr "Středa"
 
 #: app/views/report.services.php:35 include/forms.inc.php:2214
-#: include/maintenances.inc.php:35 report4.php:108
+#: include/maintenances.inc.php:35 report4.php:112
 msgid "Weekly"
 msgstr "Týdně"
 
@@ -18197,8 +18198,8 @@ msgstr "Zápis"
 msgid "Wrong fields for dependency for service \"%1$s\"."
 msgstr "Nesprávné pole pro závislost na službě \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:1675
-#: include/classes/api/services/CHost.php:1861
+#: include/classes/api/services/CHost.php:1681
+#: include/classes/api/services/CHost.php:1867
 #, c-format
 msgid "Wrong fields for host \"%1$s\"."
 msgstr "Nesprávné pole pro hosta \"%1$s\"."
@@ -18357,11 +18358,11 @@ msgid "YYYY-MM-DDThh:mm:ssZ"
 msgstr "YYYY-MM-DDThh:mm:ssZ"
 
 #: app/views/report.services.php:47 app/views/report.services.php:66
-#: report4.php:120 report4.php:154
+#: report4.php:124 report4.php:158
 msgid "Year"
 msgstr "Rok"
 
-#: app/views/report.services.php:37 report4.php:110
+#: app/views/report.services.php:37 report4.php:114
 msgid "Yearly"
 msgstr "Ročně"
 
@@ -18416,12 +18417,12 @@ msgstr "Nespecifikovali jste hosta pro operaci."
 msgid "You did not specify host group for operation."
 msgstr "Nespecifikovali jste skupinu pro operaci."
 
-#: include/classes/api/services/CAction.php:1937
+#: include/classes/api/services/CAction.php:1943
 #, c-format
 msgid "You did not specify targets for action operation command \"%s\"."
 msgstr "Nespecifikovali jste cíle pro akci příkazu \"%s\"."
 
-#: include/classes/api/services/CAction.php:1931
+#: include/classes/api/services/CAction.php:1937
 #, c-format
 msgid "You did not specify targets for action operation global script \"%s\"."
 msgstr "Nespecifikovali jste cíle pro akci globálního skriptu \"%s\"."
@@ -18439,10 +18440,10 @@ msgstr "Nespecifikovali jste cíle pro akci globálního skriptu \"%s\"."
 #: include/classes/api/services/CScript.php:555
 #: include/classes/api/services/CTask.php:104
 #: include/classes/api/services/CTemplate.php:411
-#: include/classes/api/services/CTemplate.php:561
-#: include/classes/api/services/CTemplate.php:598
-#: include/classes/api/services/CTemplate.php:1015
-#: include/classes/api/services/CTemplate.php:1120
+#: include/classes/api/services/CTemplate.php:562
+#: include/classes/api/services/CTemplate.php:599
+#: include/classes/api/services/CTemplate.php:1016
+#: include/classes/api/services/CTemplate.php:1122
 #: include/classes/api/services/CUserMacro.php:266
 #: include/classes/api/services/CUserMacro.php:350
 #: include/classes/api/services/CUserMacro.php:443
@@ -18713,7 +18714,7 @@ msgstr "agent"
 #: include/views/configuration.triggers.list.php:152
 #: include/views/js/configuration.graph.edit.js.php:55 report2.php:237
 #: report2.php:256 report2.php:288 report2.php:321 report2.php:363
-#: report2.php:382 report4.php:87 report4.php:289
+#: report2.php:382 report4.php:91 report4.php:293
 msgid "all"
 msgstr "vše"
 
@@ -18745,7 +18746,7 @@ msgstr "řada či znakový řetězec je očekáván"
 msgid "an empty string is expected"
 msgstr "prázdný řetězec je očekávan"
 
-#: include/classes/api/services/CHost.php:1618
+#: include/classes/api/services/CHost.php:1622
 msgid "an even number of hexadecimal characters is expected"
 msgstr "je očekáván sudý počet hexadecimálních znaků"
 
@@ -18838,7 +18839,7 @@ msgstr "nemůže být změněno"
 #: app/controllers/CControllerPopupMedia.php:105 correlation.php:227
 #: correlation.php:237 correlation.php:243 correlation.php:263
 #: correlation.php:267 correlation.php:280
-#: include/classes/api/services/CAction.php:1915
+#: include/classes/api/services/CAction.php:1921
 #: include/classes/api/services/CCorrelation.php:1045
 #: include/classes/api/services/CCorrelation.php:1080
 #: include/classes/api/services/CCorrelation.php:1101
@@ -18852,8 +18853,8 @@ msgstr "nemůže být změněno"
 #: include/classes/api/services/CDRule.php:357
 #: include/classes/api/services/CDRule.php:540
 #: include/classes/api/services/CEvent.php:780
-#: include/classes/api/services/CHost.php:1606
-#: include/classes/api/services/CHost.php:1612
+#: include/classes/api/services/CHost.php:1610
+#: include/classes/api/services/CHost.php:1616
 #: include/classes/api/services/CItemGeneral.php:484
 #: include/classes/api/services/CItemGeneral.php:511
 #: include/classes/api/services/CItemGeneral.php:517
@@ -19043,7 +19044,7 @@ msgstr "rovná se"
 msgid "error message"
 msgstr "chybová zpráva"
 
-#: include/classes/api/services/CAction.php:1720
+#: include/classes/api/services/CAction.php:1726
 msgid "esc_step_from and esc_step_to must be set together."
 msgstr "esc_step_from a esc_step_to musí být nastaveny společně."
 
@@ -19351,7 +19352,7 @@ msgstr "min"
 msgid "min() - Minimum value for period T"
 msgstr "min() - Minimální hodnota pro periodu T"
 
-#: include/classes/api/services/CHost.php:1624
+#: include/classes/api/services/CHost.php:1628
 #, c-format
 msgid "minimum length is %1$s characters"
 msgstr "minimální délka je %1$s znaků"
@@ -19603,10 +19604,10 @@ msgstr "vybrané"
 msgid "short description"
 msgstr "krátký popis"
 
-#: include/classes/api/services/CHost.php:1631
-#: include/classes/api/services/CHost.php:1637
-#: include/classes/api/services/CHost.php:1646
-#: include/classes/api/services/CHost.php:1652
+#: include/classes/api/services/CHost.php:1635
+#: include/classes/api/services/CHost.php:1641
+#: include/classes/api/services/CHost.php:1650
+#: include/classes/api/services/CHost.php:1656
 #: include/classes/api/services/CHttpTest.php:957
 #: include/classes/api/services/CHttpTest.php:1053
 #: include/classes/api/services/CItemGeneral.php:498
@@ -19618,8 +19619,8 @@ msgstr "krátký popis"
 #: include/classes/api/services/CItemGeneral.php:2184
 #: include/classes/api/services/CMaintenance.php:472
 #: include/classes/api/services/CMaintenance.php:675
-#: include/classes/api/services/CProxy.php:661
-#: include/classes/api/services/CProxy.php:784
+#: include/classes/api/services/CProxy.php:662
+#: include/classes/api/services/CProxy.php:786
 #: include/classes/api/services/CTriggerGeneral.php:548
 #: include/classes/api/services/CTriggerGeneral.php:574
 #: include/classes/api/services/CTriggerGeneral.php:793
@@ -19790,8 +19791,8 @@ msgstr "neočekávaný text \"%1$s\""
 
 #: include/classes/api/services/CEvent.php:738
 #: include/classes/api/services/CEvent.php:838
-#: include/classes/api/services/CHost.php:1586
-#: include/classes/api/services/CHost.php:1592
+#: include/classes/api/services/CHost.php:1590
+#: include/classes/api/services/CHost.php:1596
 #: include/classes/api/services/CItemGeneral.php:1303
 #: include/classes/api/services/CItemGeneral.php:1564
 #: include/classes/api/services/CItemGeneral.php:1590
@@ -19895,8 +19896,8 @@ msgid "value is too long"
 msgstr "hodnota je příliš dlouhá"
 
 #: include/classes/api/services/CHost.php:801
-#: include/classes/api/services/CHost.php:1753
-#: include/classes/api/services/CHost.php:1893
+#: include/classes/api/services/CHost.php:1759
+#: include/classes/api/services/CHost.php:1899
 #: include/classes/api/services/CMapElement.php:86
 #: include/classes/api/services/CMap.php:675
 #: include/classes/api/services/CMap.php:681
