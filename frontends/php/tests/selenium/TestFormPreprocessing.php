@@ -30,53 +30,1762 @@ class TestFormPreprocessing extends CWebTest {
 
 	use PreprocessingTrait;
 
-	/**
-	 * Check creating items or LLD rules with preprocessing steps.
+	public $link;
+	public $ready_link;
+	public $success_message;
+	public $button;
+	public $fail_message;
+
+	/*
+	 * Preprocessing validation data for Item and Item prototype.
 	 */
-	protected function executeCreate($data, $link, $selector, $success_message, $ready_link, $fail_message) {
-		if ($data['expected'] === TEST_BAD) {
-			$sql_items = 'SELECT * FROM items ORDER BY itemid';
-			$old_hash = CDBHelper::getHash($sql_items);
-		}
-		$this->page->login()->open($link);
-		$this->query('button:'.$selector)->waitUntilPresent()->one()->click();
+	public function getItemPreprocessingValidationData() {
+		return array_merge($this->getPreprocessingValidationData(), [
+			// Text. Trim.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Right trim',
+						'Key' => 'empty-right-trim'
+					],
+					'preprocessing' => [
+						['type' => 'Right trim']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Left trim',
+						'Key' => 'empty-left-trim'
+					],
+					'preprocessing' => [
+						['type' => 'Left trim']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Trim',
+						'Key' => 'empty-trim'
+					],
+					'preprocessing' => [
+						['type' => 'Trim']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			// Structured data. XML XPath.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'XML XPath',
+						'Key' => 'empty-xpath'
+					],
+					'preprocessing' => [
+						['type' => 'XML XPath']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			// Arithmetic. Custom multiplier.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Empty multiplier',
+						'Key' => 'empty-multiplier'
+					],
+					'preprocessing' => [
+						['type' => 'Custom multiplier']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'String multiplier',
+						'Key' => 'string-multiplier'
+					],
+					'preprocessing' => [
+						['type' => 'Custom multiplier', 'parameter_1' => 'abc']
+					],
+					'error' => 'Incorrect value for field "params": a numeric value is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Multiplier comma',
+						'Key' => 'comma-multiplier'
+					],
+					'preprocessing' => [
+						['type' => 'Custom multiplier', 'parameter_1' => '0,0']
+					],
+					'error' => 'Incorrect value for field "params": a numeric value is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Multiplier symbols',
+						'Key' => 'symbols-multiplier'
+					],
+					'preprocessing' => [
+						['type' => 'Custom multiplier', 'parameter_1' => '1a!@#$%^&*()-=']
+					],
+					'error' => 'Incorrect value for field "params": a numeric value is expected.'
+				]
+			],
+			// Change. Simple change, Change per second
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Two delta',
+						'Key' => 'two-delta'
+					],
+					'preprocessing' => [
+						['type' => 'Simple change'],
+						['type' => 'Simple change']
+					],
+					'error' => 'Only one change step is allowed.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Two delta per second',
+						'Key' => 'two-delta-per-second'
+					],
+					'preprocessing' => [
+						['type' => 'Change per second'],
+						['type' => 'Change per second']
+					],
+					'error' => 'Only one change step is allowed.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Two different delta',
+						'Key' => 'two-different-delta'
+					],
+					'preprocessing' => [
+						['type' => 'Simple change'],
+						['type' => 'Change per second']
+					],
+					'error' => 'Only one change step is allowed.'
+				]
+			],
+			// Validation. In range.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'In range empty',
+						'Key' => 'in-range-empty'
+					],
+					'preprocessing' => [
+						['type' => 'In range']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'In range letters string',
+						'Key' => 'in-range-letters-string'
+					],
+					'preprocessing' => [
+						['type' => 'In range', 'parameter_1' => 'abc', 'parameter_2' => 'def']
+					],
+					'error' => 'Incorrect value for field "params": a numeric value is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'In range symbols',
+						'Key' => 'in-range-symbols'
+					],
+					'preprocessing' => [
+						['type' => 'In range', 'parameter_1' => '1a!@#$%^&*()-=', 'parameter_2' => '2b!@#$%^&*()-=']
+					],
+					'error' => 'Incorrect value for field "params": a numeric value is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'In range comma',
+						'Key' => 'in-range-comma'
+					],
+					'preprocessing' => [
+						['type' => 'In range', 'parameter_1' => '1,5', 'parameter_2' => '-3,5']
+					],
+					'error' => 'Incorrect value for field "params": a numeric value is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'In range wrong interval',
+						'Key' => 'in-range-wrong-interval'
+					],
+					'preprocessing' => [
+						['type' => 'In range', 'parameter_1' => '8', 'parameter_2' => '-8']
+					],
+					'error' => 'Incorrect value for field "params": "min" value must be less than or equal to "max" value.'
+				]
+			],
+			// Validation. Matches regular expression.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Matches regular expression empty',
+						'Key' => 'matches-regular-expression-empty'
+					],
+					'preprocessing' => [
+						['type' => 'Matches regular expression']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			// Validation. Check for error in XML.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item error XML empty',
+						'Key' => 'item-error-xml-empty'
+					],
+					'preprocessing' => [
+						['type' => 'Check for error in XML']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			// Validation. Check for error using regular expression.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item error REGEXP both params empty',
+						'Key' => 'item-error-regexp-both-empty'
+					],
+					'preprocessing' => [
+						['type' => 'Check for error using regular expression']
+					],
+					'error' => 'Incorrect value for field "params": first parameter is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item error REGEXP first parameter empty',
+						'Key' => 'item-error-regexp-first-empty'
+					],
+					'preprocessing' => [
+						['type' => 'Check for error using regular expression', 'parameter_2' => 'test']
+					],
+					'error' => 'Incorrect value for field "params": first parameter is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item error REGEXP second parameter empty',
+						'Key' => 'item-error-regexp-second-empty'
+					],
+					'preprocessing' => [
+						['type' => 'Check for error using regular expression', 'parameter_1' => 'test']
+					],
+					'error' => 'Incorrect value for field "params": second parameter is expected.'
+				]
+			],
+			// Throttling. Discard unchanged.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item two discard uncahnged',
+						'Key' => 'item-two-discard-uncahnged'
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged'],
+						['type' => 'Discard unchanged']
+					],
+					'error' => 'Only one throttling step is allowed.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item two different throttlings',
+						'Key' => 'item-two-different-throttlings'
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged'],
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1']
+					],
+					'error' => 'Only one throttling step is allowed.'
+				]
+			]
+		]);
+	}
+
+	/*
+	 * Preprocessing validation data for item, item prototype and LLD.
+	 */
+	public static function getPreprocessingValidationData() {
+		return [
+			// Text. Regular expression.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Empty regular expression',
+						'Key' => 'Empty-both-parameters',
+					],
+					'preprocessing' => [
+						['type' => 'Regular expression']
+					],
+					'error' => 'Incorrect value for field "params": first parameter is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Empty pattern of regular expression',
+						'Key' => 'empty-first-parameter',
+					],
+					'preprocessing' => [
+						['type' => 'Regular expression', 'parameter_2' => 'test output']
+					],
+					'error' => 'Incorrect value for field "params": first parameter is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Empty output of regular expression',
+						'Key' => 'empty-second-parameter',
+					],
+					'preprocessing' => [
+						['type' => 'Regular expression', 'parameter_1' => 'expression'],
+					],
+					'error' => 'Incorrect value for field "params": second parameter is expected.'
+				]
+			],
+			// Structured data. JSONPath.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'JSONPath empty',
+						'Key' => 'empty-jsonpath'
+					],
+					'preprocessing' => [
+						['type' => 'JSONPath']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			// Custom scripts. JavaScript.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Empty JavaScript',
+						'Key' => 'item-empty-javascript',
+					],
+					'preprocessing' => [
+						['type' => 'JavaScript']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			// Validation. Does not match regular expression
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Does not match regular expression empty',
+						'Key' => 'does-not-match-regular-expression-empty',
+					],
+					'preprocessing' => [
+						['type' => 'Does not match regular expression']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			// Validation. Check for error in JSON.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Error JSON empty',
+						'Key' => 'error-json-empty'
+					],
+					'preprocessing' => [
+						['type' => 'Check for error in JSON']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
+				]
+			],
+			// Throttling. Discard unchanged with heartbeat
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Two equal discard unchanged with heartbeat',
+						'Key' => 'two-equal-discard-uncahnged-with-heartbeat'
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1']
+					],
+					'error' => 'Only one throttling step is allowed.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Two different discard unchanged with heartbeat',
+						'Key' => 'two-different-discard-uncahnged-with-heartbeat'
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1'],
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '2']
+					],
+					'error' => 'Only one throttling step is allowed.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Discard unchanged with heartbeat empty',
+						'Key' => 'discard-uncahnged-with-heartbeat-empty'
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged with heartbeat']
+					],
+					'error' => 'Invalid parameter "params": cannot be empty.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Discard unchanged with heartbeat symbols',
+						'Key' => 'discard-uncahnged-with-heartbeat-symbols'
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '3g!@#$%^&*()-=']
+					],
+					'error' => 'Invalid parameter "params": a time unit is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Discardunchanged with heartbeat letters string',
+						'Key' => 'discard-uncahnged-with-heartbeat-letters-string'
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => 'abc']
+					],
+					'error' => 'Invalid parameter "params": a time unit is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Discard unchanged with heartbeat comma',
+						'Key' => 'discard-uncahnged-with-heartbeat-comma',
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1,5']
+					],
+					'error' => 'Invalid parameter "params": a time unit is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Discard unchanged with heartbeat dot',
+						'Key' => 'discard-uncahnged-with-heartbeat-dot',
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '1.5']
+					],
+					'error' => 'Invalid parameter "params": a time unit is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Discard unchanged with heartbeat negative',
+						'Key' => 'discard-uncahnged-with-heartbeat-negative',
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '-3']
+					],
+					'error' => 'Invalid parameter "params": value must be one of 1-788400000.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Discard unchanged with heartbeat zero',
+						'Key' => 'discard-uncahnged-with-heartbeat-zero'
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '0']
+					],
+					'error' => 'Invalid parameter "params": value must be one of 1-788400000.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Discard unchanged with heartbeat maximum',
+						'Key' => 'uncahnged-with-heartbeat-max'
+					],
+					'preprocessing' => [
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '788400001']
+					],
+					'error' => 'Invalid parameter "params": value must be one of 1-788400000.'
+				]
+			]
+		];
+	}
+
+	/*
+	 * Preprocessing data for item and item prototype successful creation.
+	 */
+	public static function getItemPreprocessingCreateData() {
+		return [
+			// In range.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'In range negative float',
+						'Key' => 'in-range-negative-float'
+					],
+					'preprocessing' => [
+						['type' => 'In range', 'parameter_1' => '-3.5', 'parameter_2' => '-1.5']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'In range zero',
+						'Key' => 'in-range-zero'
+					],
+					'preprocessing' => [
+						['type' => 'In range', 'parameter_1' => '0', 'parameter_2' => '0']
+					]
+				]
+			],
+			// JavaScript.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Add JavaScript multiline preprocessing',
+						'Key' => 'item.javascript.multiline.preprocessing'
+					],
+					'preprocessing' => [
+						['type' => 'JavaScript', 'parameter_1' => "  Test line 1\nTest line 2\nTest line 3  "]
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Add all preprocessing',
+						'Key' => 'item.all.preprocessing'
+					],
+					'preprocessing' => [
+						['type' => 'Right trim', 'parameter_1' => 'abc'],
+						['type' => 'Left trim', 'parameter_1' => 'def'],
+						['type' => 'Trim', 'parameter_1' => '1a2b3c'],
+						['type' => 'Custom multiplier', 'parameter_1' => '123'],
+						['type' => 'Regular expression', 'parameter_1' => 'expression', 'parameter_2' => 'test output'],
+						['type' => 'Boolean to decimal'],
+						['type' => 'Octal to decimal'],
+						['type' => 'Hexadecimal to decimal'],
+						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
+						['type' => 'Simple change'],
+						['type' => 'In range', 'parameter_1' => '-5', 'parameter_2' => '9.5'],
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '5'],
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system', 'parameter_2' => 'label_name']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Add symblos preprocessing',
+						'Key' => 'item.symbols.preprocessing'
+					],
+					'preprocessing' => [
+						['type' => 'Right trim', 'parameter_1' => '1a!@#$%^&*()-='],
+						['type' => 'Left trim', 'parameter_1' => '2b!@#$%^&*()-='],
+						['type' => 'Trim', 'parameter_1' => '3c!@#$%^&*()-='],
+						['type' => 'XML XPath', 'parameter_1' => '3c!@#$%^&*()-='],
+						['type' => 'JSONPath', 'parameter_1' => '3c!@#$%^&*()-='],
+						['type' => 'Custom multiplier', 'parameter_1' => '4e+10'],
+						['type' => 'Regular expression', 'parameter_1' => '5d!@#$%^&*()-=', 'parameter_2' => '6e!@#$%^&*()-='],
+						['type' => 'JavaScript', 'parameter_1' => '5d!@#$%^&*()-='],
+						['type' => 'Matches regular expression', 'parameter_1' => '7f!@#$%^&*()-='],
+						['type' => 'Does not match regular expression', 'parameter_1' => '8g!@#$%^&*()-='],
+						['type' => 'Check for error in JSON', 'parameter_1' => '9h!@#$%^&*()-='],
+						['type' => 'Check for error in XML', 'parameter_1' => '0i!@#$%^&*()-='],
+						['type' => 'Check for error using regular expression', 'parameter_1' => '1j!@#$%^&*()-=', 'parameter_2' => '2k!@#$%^&*()-=']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Add the same preprocessing',
+						'Key' => 'item.theSamePpreprocessing'
+					],
+					'preprocessing' => [
+						['type' => 'Change per second'],
+						['type' => 'Right trim', 'parameter_1' => 'abc'],
+						['type' => 'Right trim', 'parameter_1' => 'abc'],
+						['type' => 'Left trim', 'parameter_1' => 'def'],
+						['type' => 'Left trim', 'parameter_1' => 'def'],
+						['type' => 'Trim', 'parameter_1' => '1a2b3c'],
+						['type' => 'Trim', 'parameter_1' => '1a2b3c'],
+						['type' => 'XML XPath', 'parameter_1' => '1a2b3c'],
+						['type' => 'XML XPath', 'parameter_1' => '1a2b3c'],
+						['type' => 'JSONPath', 'parameter_1' => '1a2b3c'],
+						['type' => 'JSONPath', 'parameter_1' => '1a2b3c'],
+						['type' => 'Custom multiplier', 'parameter_1' => '123'],
+						['type' => 'Custom multiplier', 'parameter_1' => '123'],
+						['type' => 'Regular expression', 'parameter_1' => 'expression', 'parameter_2' => 'test output'],
+						['type' => 'Regular expression', 'parameter_1' => 'expression', 'parameter_2' => 'test output'],
+						['type' => 'Boolean to decimal'],
+						['type' => 'Boolean to decimal'],
+						['type' => 'Octal to decimal'],
+						['type' => 'Octal to decimal'],
+						['type' => 'Hexadecimal to decimal'],
+						['type' => 'Hexadecimal to decimal'],
+						['type' => 'In range', 'parameter_1' => '-5.5', 'parameter_2' => '10'],
+						['type' => 'In range', 'parameter_1' => '-5.5', 'parameter_2' => '10'],
+						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
+						['type' => 'JavaScript', 'parameter_1' => 'Test JavaScript'],
+						['type' => 'Matches regular expression', 'parameter_1' => 'test_expression'],
+						['type' => 'Matches regular expression', 'parameter_1' => 'test_expression'],
+						['type' => 'Does not match regular expression', 'parameter_1' => 'not_expression'],
+						['type' => 'Does not match regular expression', 'parameter_1' => 'not_expression'],
+						['type' => 'Check for error in JSON', 'parameter_1' => '/path'],
+						['type' => 'Check for error in JSON', 'parameter_1' => '/path'],
+						['type' => 'Check for error in XML', 'parameter_1' => '/path/xml'],
+						['type' => 'Check for error in XML', 'parameter_1' => '/path/xml'],
+						['type' => 'Check for error using regular expression', 'parameter_1' => 'regexp', 'parameter_2' => '\1'],
+						['type' => 'Check for error using regular expression', 'parameter_1' => 'regexp', 'parameter_2' => '\1']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item with preprocessing rule with user macro',
+						'Key' => 'item-user-macro'
+					],
+					'preprocessing' => [
+						['type' => 'Regular expression', 'parameter_1' => '{$DELIM}(.*)', 'parameter_2' => '\1'],
+						['type' => 'Trim', 'parameter_1' => '{$DELIM}'],
+						['type' => 'Right trim', 'parameter_1' => '{$MACRO}'],
+						['type' => 'Left trim', 'parameter_1' => '{$USER}'],
+						['type' => 'XML XPath', 'parameter_1' => 'number(/values/Item/value[../key=\'{$DELIM}\'])'],
+						['type' => 'JSONPath', 'parameter_1' => '$.data[\'{$KEY}\']'],
+						['type' => 'Custom multiplier', 'parameter_1' => '{$VALUE}'],
+						['type' => 'In range', 'parameter_1' => '{$FROM}', 'parameter_2' => '{$TO}'],
+						['type' => 'Matches regular expression', 'parameter_1' => '{$EXPRESSION}(.*)'],
+						['type' => 'Does not match regular expression', 'parameter_1' => '{$REGEXP}(.+)'],
+						['type' => 'JavaScript', 'parameter_1' => '{$JAVASCRIPT}'],
+						['type' => 'Check for error in JSON', 'parameter_1' => '{$USERMACRO}'],
+						['type' => 'Check for error in XML', 'parameter_1' => '/tmp/{$PATH}'],
+						['type' => 'Check for error using regular expression', 'parameter_1' => '^{$REGEXP}(.+)', 'parameter_2' => '\0'],
+						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '{$SECONDS}'],
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{$PATTERN}']
+					]
+				]
+			]
+		];
+	}
+
+	/*
+	 * "Prometheus to JSON" data for item, item prototype and LLD.
+	 */
+	public static function getPrometheustoJSONData() {
+		return [
+			// Prometheus to JSON validation.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON first parameter starts with digits',
+						'Key' => 'json-prometeus-digits-first-parameter'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '1name_of_metric']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON wrong equals operator',
+						'Key' => 'json-prometeus-wrong-equals-operator'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}=1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON unsupported operator >',
+						'Key' => 'json-prometeus-unsupported-operator-1'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}>1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON unsupported operator <',
+						'Key' => 'json-prometeus-unsupported-operator-2'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}<1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON unsupported operator !==',
+						'Key' => 'json-prometeus-unsupported-operator-3'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}!==1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON unsupported operator >=',
+						'Key' => 'json-prometeus-unsupported-operator-4'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}>=1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON unsupported operator =<',
+						'Key' => 'json-prometeus-unsupported-operator-5'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}=<1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON unsupported label operator !=',
+						'Key' => 'json-prometeus-unsupported-label-operator-1'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{label_name!="regex_pattern"}']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON unsupported label operator !~',
+						'Key' => 'json-prometeus-unsupported-label-operator-2'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{label_name!~"<regex>"}']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON duplicate metric condition',
+						'Key' => 'json-duplicate-metric-condition'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => 'cpu_system{__name__="metric_name"}']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON wrong parameter - space',
+						'Key' => 'json-wrong-parameter-space'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON',  'parameter_1' => 'cpu usage_system']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON wrong parameter - slash',
+						'Key' => 'json-wrong-parameter-slash'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON',  'parameter_1' => 'cpu\\']
+
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometheus to JSON wrong parameter - digits',
+						'Key' => 'json-wrong-parameter-digits'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON',  'parameter_1' => '123']
+
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometheus to JSON wrong first parameter - pipe',
+						'Key' => 'json-wrong-parameter-pipe'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => 'metric==1e|5']
+
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometheus to JSON wrong first parameter - slash',
+						'Key' => 'json-wrong-parameter-slash'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{label="value\"}']
+
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item duplicate Prometeus to JSON steps',
+						'Key' => 'duplicate-prometheus-to-json-steps'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => 'cpu_usage_system_1'],
+						['type' => 'Prometheus to JSON', 'parameter_1' => 'cpu_usage_system_1']
+					],
+					'error' => 'Only one Prometheus step is allowed.'
+				]
+			],
+			// Successful Prometheus to JSON creation.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON empty first parameter',
+						'Key' => 'json-prometeus-empty-first-parameter'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '']
+					],
+					'error' => 'Incorrect value for field "params": first parameter is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON first parameter +inf',
+						'Key' => 'json-prometeus-plus-inf'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => 'cpu_usage_system==+inf']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON first parameter inf',
+						'Key' => 'json-prometeus-inf'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__="metric_name"}==inf']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON first parameter -inf',
+						'Key' => 'json-prometeus-negative-inf'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__=~"<regex>"}==-inf']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON first parameter nan',
+						'Key' => 'json-prometeus-nan'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__="metric_name"}==nan']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON first parameter exp',
+						'Key' => 'json-prometeus-exp'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => 'cpu_usage_system==3.5180e+11']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON first parameter ==1',
+						'Key' => 'json-prometeus-neutral-digit'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__="metric_name"}==1']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON first parameters ==+1',
+						'Key' => 'json-prometeus-positive-digit'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__="metric_name"}==+1']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON first parameters ==-1',
+						'Key' => 'json-prometeus-negative-digit'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__="metric_name"}==-1']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON label operator =',
+						'Key' => 'json-prometeus-label-operator-equal-strong'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{label_name="name"}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON label operator =~',
+						'Key' => 'json-prometeus-label-operator-contains'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{label_name=~"name"}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON slashes in pattern',
+						'Key' => 'json-prometeus-slashes-pattern'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{label="value\\\\"}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON user macros in parameter',
+						'Key' => 'json-prometeus-macros-1'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{$METRIC_NAME}==1']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON user macros in parameter',
+						'Key' => 'json-prometeus-macros-2'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{__name__="{$METRIC_NAME}"}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON user macros in parameters',
+						'Key' => 'json-prometeus-macros-3'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{{$LABEL_NAME}="<label value>"}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus to JSON user macros in parameters',
+						'Key' => 'json-prometeus-macros-4'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '{label_name="{$LABEL_VALUE}"}']
+					]
+				]
+			]
+		];
+	}
+
+	/*
+	 * Prometheus data for item and item prototype (included preprocessing step "Prometheus pattern").
+	 */
+	public function getPrometheusData() {
+		return array_merge($this->getPrometheustoJSONData(), [
+			// Prometheus pattern validation.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus empty first parameter',
+						'Key' => 'prometeus-empty-first-parameter'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern']
+					],
+					'error' => 'Incorrect value for field "params": first parameter is expected.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Prometheus space in pattern',
+						'Key' => 'prometheus-space-in-pattern'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu usage_metric'],
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Prometheus only digits in pattern',
+						'Key' => 'prometheus-digits-in-pattern'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '1223'],
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus first parameter starts with digits',
+						'Key' => 'prometeus-digits-first-parameter'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '1name_of_metric']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus wrong equals operator',
+						'Key' => 'rometeus-wrong-equals-operator'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__=~"<regex>"}=1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus unsupported operator >',
+						'Key' => 'prometeus-unsupported-operator-1'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__=~"<regex>"}>1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus unsupported operator <',
+						'Key' => 'prometeus-unsupported-operator-2'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__=~"<regex>"}<1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus unsupported operator !==',
+						'Key' => 'prometeus-unsupported-operator-3'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__=~"<regex>"}!==1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus unsupported operator >=',
+						'Key' => 'prometeus-unsupported-operator-4'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__=~"<regex>"}>=1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus unsupported operator =<',
+						'Key' => 'prometeus-unsupported-operator-5'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__=~"<regex>"}=<1']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus unsupported label operator !=',
+						'Key' => 'prometeus-unsupported-label-operator-1'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{label_name!="regex_pattern"}']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus unsupported label operator !~',
+						'Key' => 'prometeus-unsupported-label-operator-2'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{label_name!~"<regex>"}']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus duplicate metric condition',
+						'Key' => 'duplicate-metric-condition'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_system{__name__="metric_name"}']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item duplicate Prometeus steps',
+						'Key' => 'duplicate-prometheus-steps'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system'],
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system']
+					],
+					'error' => 'Only one Prometheus step is allowed.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus wrong second parameter - space',
+						'Key' => 'wrong-second-parameter-space'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern',  'parameter_1' => 'cpu_usage_system', 'parameter_2' => 'label name']
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus output.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus wrong second parameter - quotes',
+						'Key' => 'wrong-second-parameter-quotes'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern',  'parameter_1' => 'cpu_usage_system', 'parameter_2' => '"label_name"']
+
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus output.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus wrong second parameter - triangle quotes',
+						'Key' => 'wrong-second-parameter-triangle-quotes'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern',  'parameter_1' => 'cpu_usage_system', 'parameter_2' => '<label_name>']
+
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus output.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus wrong second parameter - slash',
+						'Key' => 'wrong-second-parameter-slash'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern',  'parameter_1' => 'cpu_usage_system', 'parameter_2' => '\0']
+
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus output.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus wrong second parameter - digits',
+						'Key' => 'wrong-second-parameter-digits'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern',  'parameter_1' => 'cpu_usage_system', 'parameter_2' => '123']
+
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus output.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus wrong first parameter - pipe',
+						'Key' => 'wrong-second-parameter-pipe'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => 'metric==1e|5']
+
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Item Prometeus wrong first parameter - slash',
+						'Key' => 'wrong-second-parameter-slash'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{label="value\"}']
+
+					],
+					'error' => 'Incorrect value for field "params": invalid Prometheus pattern.'
+				]
+			],
+			// Successful Prometheus pattern creation.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus empty second parameter',
+						'Key' => 'prometeus-empty-second-parameter'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus both parameters present',
+						'Key' => 'prometeus-both-parameters-present'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system', 'parameter_2' => 'label_name']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus first parameter +inf',
+						'Key' => 'prometeus-plus-inf'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system==+inf']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus first parameter inf',
+						'Key' => 'prometeus-inf'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__="metric_name"}==inf']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus first parameter -inf',
+						'Key' => 'prometeus-negative-inf'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__=~"<regex>"}==-inf']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus first parameter nan',
+						'Key' => 'prometeus-nan'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__="metric_name"}==nan']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus first parameter exp',
+						'Key' => 'prometeus-exp'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => 'cpu_usage_system==3.5180e+11']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus first parameter ==1',
+						'Key' => 'prometeus-neutral-digit'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__="metric_name"}==1']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus first parameters ==+1',
+						'Key' => 'prometeus-positive-digit'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__="metric_name"}==+1']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus first parameters ==-1',
+						'Key' => 'prometeus-negative-digit'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__="metric_name"}==-1']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus label operator =',
+						'Key' => 'prometeus-label-operator-equal-strong'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{label_name="name"}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus label operator =~',
+						'Key' => 'prometeus-label-operator-contains'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{label_name=~"name"}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus slashes in pattern',
+						'Key' => 'prometeus-slashes-pattern'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{label="value\\\\"}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus user macros in parameters',
+						'Key' => 'prometeus-macros-1'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{$METRIC_NAME}==1', 'parameter_2' => '{$LABEL_NAME}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus user macros in parameters',
+						'Key' => 'prometeus-macros-2'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__="{$METRIC_NAME}"}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus user macros in parameters',
+						'Key' => 'prometeus-macros-3'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{{$LABEL_NAME}="<label value>"}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item Prometeus user macros in parameters',
+						'Key' => 'prometeus-macros-4'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '{label_name="{$LABEL_VALUE}"}']
+					]
+				]
+			]
+		]);
+	}
+
+	/**
+	 * Add item and preprocessing steps.
+	 */
+	protected function addItemWithPreprocessing($data) {
+		$this->page->login()->open($this->link);
+		$this->query('button:'.$this->button)->waitUntilPresent()->one()->click();
 
 		$form = $this->query('name:itemForm')->waitUntilPresent()->asForm()->one();
 		$form->fill($data['fields']);
 		$form->selectTab('Preprocessing');
 		$this->addPreprocessingSteps($data['preprocessing']);
-		$form->submit();
 
+		return $form;
+	}
+
+	/**
+	 * Check creating items, item prototypes or LLD rules with preprocessing steps.
+	 */
+	protected function executeCreate($data) {
+		if ($data['expected'] === TEST_BAD) {
+			$sql_items = 'SELECT * FROM items ORDER BY itemid';
+			$old_hash = CDBHelper::getHash($sql_items);
+		}
+
+		$form = $this->addItemWithPreprocessing($data);
+
+		$form->submit();
 		$this->page->waitUntilReady();
 		$message = CMessageElement::find()->one();
 
 		switch ($data['expected']) {
 			case TEST_GOOD:
 				$this->assertTrue($message->isGood());
-				$this->assertEquals($success_message, $message->getTitle());
+				$this->assertEquals($this->success_message, $message->getTitle());
 
 				// Check result in frontend form.
 				$id = CDBHelper::getValue('SELECT itemid FROM items WHERE key_='.zbx_dbstr($data['fields']['Key']));
-				$this->page->open($ready_link.$id);
+				$this->page->open($this->ready_link.$id);
 				$form->selectTab('Preprocessing');
-				// Check for Trailing spaces case.
-				if ($data['fields']['Name'] === 'Trailing spaces'){
-					$data['preprocessing'][0]['parameter_1'] = trim($data['preprocessing'][0]['parameter_1']);
-					if (array_key_exists('parameter_2', $data['preprocessing'][0])){
-						$data['preprocessing'][0]['parameter_2'] = trim($data['preprocessing'][0]['parameter_2']);
-					}
-				}
 				$this->assertPreprocessingSteps($data['preprocessing']);
 				break;
 
 			case TEST_BAD:
 				$this->assertTrue($message->isBad());
-				$this->assertEquals($fail_message, $message->getTitle());
+				$this->assertEquals($this->fail_message, $message->getTitle());
 				$this->assertTrue($message->hasLine($data['error']));
 				// Check that DB hash is not changed.
 				$this->assertEquals($old_hash, CDBHelper::getHash($sql_items));
 				break;
 		}
+	}
+
+	/*
+	 * Preprocessing steps with spaces in fields for item, item prortotype and LLD.
+	 */
+	public static function getPreprocessingTrailingSpacesData() {
+		return [
+			[
+				[
+					'fields' => [
+						'Name' => 'Prometheus to JSON trailing spaces',
+						'Key' => 'json-prometeus-space-in-parameter'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus to JSON', 'parameter_1' => '  metric  ']
+					]
+				]
+			]
+		];
+	}
+
+	/*
+	 * Additional preprocessing data with spaces in fields for item and item prortotype.
+	 */
+	public function getItemPreprocessingTrailingSpacesData() {
+		return array_merge($this->getPreprocessingTrailingSpacesData(), [
+			[
+				[
+					'fields' => [
+						'Name' => 'Prometheus pattern trailing spaces',
+						'Key' => 'prometeus-space-in-parameters'
+					],
+					'preprocessing' => [
+						['type' => 'Prometheus pattern', 'parameter_1' => '  metric  ', 'parameter_2' => '  output  ']
+					]
+				]
+			]
+		]);
+	}
+
+	/**
+	 * Check spaces in preprocessing steps.
+	 */
+	protected function checkTrailingSpaces($data) {
+		$form = $this->addItemWithPreprocessing($data);
+
+		$form->submit();
+		$this->page->waitUntilReady();
+		$message = CMessageElement::find()->one();
+		$this->assertTrue($message->isGood());
+		$this->assertEquals($this->success_message, $message->getTitle());
+
+		// Remove spaces.
+		foreach ($data['preprocessing'] as $i => $options) {
+			$data['preprocessing'][$i]['parameter_1'] = trim($options['parameter_1']);
+			if (array_key_exists('parameter_2', $options)){
+				$data['preprocessing'][$i]['parameter_2'] = trim($options['parameter_2']);
+			}
+		}
+
+		// Check result in frontend form.
+		$id = CDBHelper::getValue('SELECT itemid FROM items WHERE key_='.zbx_dbstr($data['fields']['Key']));
+		$this->page->open($this->ready_link.$id);
+		$form->selectTab('Preprocessing');
+		$this->assertPreprocessingSteps($data['preprocessing']);
 	}
 
 	public static function getCustomOnFailData() {
@@ -90,8 +1799,8 @@ class TestFormPreprocessing extends CWebTest {
 		foreach ($options as $value => $label) {
 			$item = [
 				'fields' => [
-					'Name' => 'LLD Preprocessing '.$label,
-					'Key' => 'lld-preprocessing-steps-discard-on-fail'.$value
+					'Name' => 'Preprocessing '.$label,
+					'Key' => 'preprocessing-steps-discard-on-fail'.$value
 				],
 				'preprocessing' => [
 					[
@@ -141,23 +1850,14 @@ class TestFormPreprocessing extends CWebTest {
 	}
 
 	/**
-	 * Check Custom on fail checkbox.
+	 * Check "Custom on fail" fields and checkbox state.
 	 */
-	public function executeCustomOnFail($data, $link, $selector, $success_message, $ready_link) {
-		$this->page->login()->open($link);
-		$this->query('button:'.$selector)->one()->click();
-
-		$form = $this->query('name:itemForm')->asForm()->one();
-		$form->fill($data['fields']);
-
-		$form->selectTab('Preprocessing');
-		$this->addPreprocessingSteps($data['preprocessing']);
+	public function executeCustomOnFail($data) {
+		$form = $this->addItemWithPreprocessing($data);
 		$steps = $this->getPreprocessingSteps();
 
 		foreach ($data['preprocessing'] as $i => $options) {
-			if ($options['type'] === 'Check for error in JSON'
-					|| $options['type'] === 'Discard unchanged with heartbeat') {
-
+			if (in_array($options['type'], ['Check for error in JSON', 'Discard unchanged with heartbeat'])) {
 				$this->assertFalse($steps[$i]['on_fail']->isEnabled());
 			}
 		}
@@ -165,36 +1865,29 @@ class TestFormPreprocessing extends CWebTest {
 		$form->submit();
 		$this->page->waitUntilReady();
 
-		// Check message title and if message is positive.
+		// Check successful message.
 		$message = CMessageElement::find()->one();
 		$this->assertTrue($message->isGood());
-		$this->assertEquals($success_message, $message->getTitle());
+		$this->assertEquals($this->success_message, $message->getTitle());
 
-		// Get item data from DB.
-		$db_item = CDBHelper::getRow('SELECT name,key_,itemid FROM items where key_='.
-				zbx_dbstr($data['fields']['Key'])
-		);
-		$this->assertEquals($db_item['name'], $data['fields']['Name']);
-		$itemid = $db_item['itemid'];
-
-		// Check saved pre-processing.
-		$this->page->open($ready_link.$itemid);
+		// Check saved preprocessing.
+		$item_id = CDBHelper::getValue('SELECT itemid FROM items WHERE key_='.zbx_dbstr($data['fields']['Key']));
+		$this->page->open($this->ready_link.$item_id);
 		$form->selectTab('Preprocessing');
 		$steps = $this->assertPreprocessingSteps($data['preprocessing']);
 
 		$rows = [];
-		foreach (CDBHelper::getAll('SELECT step, error_handler FROM item_preproc WHERE itemid='.$itemid) as $row) {
+		foreach (CDBHelper::getAll('SELECT step, error_handler FROM item_preproc WHERE itemid='.$item_id) as $row) {
 			$rows[$row['step']] = $row['error_handler'];
 		}
 
 		foreach ($data['preprocessing'] as $i => $options) {
-			// Validate preprocessing step in DB.
+			// Check "Custom on fail" value in DB.
 			$expected = (!array_key_exists('on_fail', $options) || !$options['on_fail'])
 					? ZBX_PREPROC_FAIL_DEFAULT : $data['value'];
-
 			$this->assertEquals($expected, $rows[$i + 1]);
 
-			if (in_array($options['type'], ['Check for error in JSON', 'Discard unchanged with heartbeat'])){
+			if (in_array($options['type'], ['Check for error in JSON', 'Discard unchanged with heartbeat'])) {
 				$this->assertFalse($steps[$i]['on_fail']->isEnabled());
 				$this->assertFalse($steps[$i]['on_fail']->isSelected());
 				$this->assertTrue($steps[$i]['error_handler'] === null || !$steps[$i]['error_handler']->isVisible());
@@ -267,7 +1960,7 @@ class TestFormPreprocessing extends CWebTest {
 					'error_handler' => 'Set error to',
 					'error_handler_params' => ''
 				],
-				'error_details' => 'Incorrect value for field "error_handler_params": cannot be empty.'
+				'error' => 'Incorrect value for field "error_handler_params": cannot be empty.'
 			],
 			[
 				'expected' => TEST_GOOD,
@@ -336,78 +2029,120 @@ class TestFormPreprocessing extends CWebTest {
 		return $data;
 	}
 
-	/**
-	 * Check Custom on fail validation.
+	/*
+	 * Inheritance of preprocessing steps for Item, Item prototype and LLD.
 	 */
-	public function executeCustomOnFailValidation($data, $link, $selector, $success_message, $fail_message) {
-		$this->page->login()->open($link);
-		$this->query('button:'.$selector)->one()->click();
+	public static function getInheritancePreprocessing() {
+		return [
+			[
+				[
+					'fields' => [
+						'Name' => 'Templated Preprocessing steps',
+						'Key' => 'templated-preprocessing-steps'
+					],
+					'preprocessing' => [
+						[
+							'type' => 'Regular expression',
+							'parameter_1' => 'expression',
+							'parameter_2' => '\1',
+							'on_fail' => true,
+							'error_handler' => 'Discard value'
+						],
+						[
+							'type' => 'JSONPath',
+							'parameter_1' => '$.data.test',
+							'on_fail' => true,
+							'error_handler' => 'Set value to',
+							'error_handler_params' => 'Custom_text'
+						],
+						[
+							'type' => 'Does not match regular expression',
+							'parameter_1' => 'Pattern',
+							'on_fail' => true,
+							'error_handler' => 'Set error to',
+							'error_handler_params' => 'Custom_text'
+						],
+						[
+							'type' => 'Check for error in JSON',
+							'parameter_1' => '$.new.path'
+						],
+						[
+							'type' => 'Discard unchanged with heartbeat',
+							'parameter_1' => '30'
+						],
+						[
+							'type' => 'JavaScript',
+							'parameter_1' => "  Test line 1\n  Test line 2\nTest line 3  "
+						]
+					]
+				]
+			]
+		];
+	}
 
-		$form = $this->query('name:itemForm')->asForm()->one();
-		$form->fill($data['fields']);
-		$form->selectTab('Preprocessing');
-		$this->addPreprocessingSteps($data['preprocessing']);
-		$form->submit();
-		$this->page->waitUntilReady();
+	/*
+	 * Inheritance of preprocessing steps for item and item prortotype.
+	 */
+	public function getItemInheritancePreprocessing() {
+		$data = $this->getInheritancePreprocessing();
+		$data[0][0]['preprocessing'] =  array_merge($data[0][0]['preprocessing'], [
+					[
+						'type' => 'Right trim',
+						'parameter_1' => '5'
+					],
+					[
+						'type' => 'Custom multiplier',
+						'parameter_1' => '10',
+						'on_fail' => false
+					],
+					[
+						'type' => 'Simple change',
+						'on_fail' => false
+					],
+					[
+						'type' => 'Octal to decimal',
+						'on_fail' => true,
+						'error_handler' => 'Set error to',
+						'error_handler_params' => 'Custom_text'
+					],
+					[
+						'type' => 'Check for error using regular expression',
+						'parameter_1' => 'expression',
+						'parameter_2' => '\0'
+					],
+					[
+						'type' => 'Prometheus pattern',
+						'parameter_1' => 'cpu_usage_system',
+						'parameter_2' => 'label_name',
+						'on_fail' => true,
+						'error_handler' => 'Set error to',
+						'error_handler_params' => 'Custom_text'
+					]
+		]);
 
-		// Get global message.
-		$message = CMessageElement::find()->one();
-
-		switch ($data['expected']) {
-			case TEST_GOOD:
-				// Check if message is positive.
-				$this->assertTrue($message->isGood());
-				// Check message title.
-				$this->assertEquals($success_message, $message->getTitle());
-				// Check the results in DB.
-				$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM items WHERE key_='.
-						zbx_dbstr($data['fields']['Key']))
-				);
-				break;
-
-			case TEST_BAD:
-				// Check if message is negative.
-				$this->assertTrue($message->isBad());
-				// Check message title.
-				$this->assertEquals($fail_message, $message->getTitle());
-				$this->assertTrue($message->hasLine($data['error_details']));
-				// Check that DB.
-				$this->assertEquals(0, CDBHelper::getCount('SELECT * FROM items where key_ = '.
-						zbx_dbstr($data['fields']['Key']))
-				);
-				break;
-		}
+		return $data;
 	}
 
 	/**
 	 * Check inheritance of preprocessing steps in items or LLD rules.
 	 */
-	protected function executeTestInheritance($preprocessing, $link, $selector, $fields, $success_message, $ready_link) {
+	protected function executePreprocessingInheritance($data, $host_link) {
 		// Create item on template.
-		$this->page->login()->open($link);
-		$this->query('button:'.$selector)->waitUntilPresent()->one()->click();
-
-		$form = $this->query('name:itemForm')->waitUntilPresent()->asForm()->one();
-		$form->fill($fields);
-
-		$form->selectTab('Preprocessing');
-		$this->addPreprocessingSteps($preprocessing);
+		$form = $this->addItemWithPreprocessing($data);
 		$form->submit();
 		$this->page->waitUntilReady();
 
 		$message = CMessageElement::find()->one();
 		$this->assertTrue($message->isGood());
-		$this->assertEquals($success_message, $message->getTitle());
+		$this->assertEquals($this->success_message, $message->getTitle());
 
 		// Check preprocessing steps on host.
-		$this->page->open($ready_link);
-		$this->query('link:'.$fields['Name'])->one()->click();
-		$this->page->waitUntilReady();
-
+		$this->page->open($host_link);
+		$this->query('link:'.$data['fields']['Name'])->waitUntilPresent()->one()->click();
 		$form->selectTab('Preprocessing');
-		$steps = $this->assertPreprocessingSteps($preprocessing);
+		$steps = $this->assertPreprocessingSteps($data['preprocessing']);
 
-		foreach ($preprocessing as $i => $options) {
+		foreach ($data['preprocessing'] as $i => $options) {
 			$step = $steps[$i];
 			$this->assertNotNull($step['type']->getAttribute('readonly'));
 
