@@ -624,19 +624,6 @@ class TestFormPreprocessing extends CWebTest {
 					]
 				]
 			],
-			// JavaScript.
-			[
-				[
-					'expected' => TEST_GOOD,
-					'fields' => [
-						'Name' => 'Add JavaScript multiline preprocessing',
-						'Key' => 'item.javascript.multiline.preprocessing'
-					],
-					'preprocessing' => [
-						['type' => 'JavaScript', 'parameter_1' => "  Test line 1\nTest line 2\nTest line 3  "]
-					]
-				]
-			],
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -755,6 +742,29 @@ class TestFormPreprocessing extends CWebTest {
 						['type' => 'Check for error using regular expression', 'parameter_1' => '^{$REGEXP}(.+)', 'parameter_2' => '\0'],
 						['type' => 'Discard unchanged with heartbeat', 'parameter_1' => '{$SECONDS}'],
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{$PATTERN}']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Name' => 'Item with spaces in preprocessing',
+						'Key' => 'item-spaces-preprocessing'
+					],
+					'preprocessing' => [
+						['type' => 'Regular expression', 'parameter_1' => '  pattern    ', 'parameter_2' => '   \1   '],
+						['type' => 'Right trim', 'parameter_1' => '    22   '],
+						['type' => 'Left trim', 'parameter_1' => '   33  '],
+						['type' => 'Trim', 'parameter_1' => '   0    '],
+						['type' => 'XML XPath', 'parameter_1' => '   number(/values/Item)    '],
+						['type' => 'JSONPath', 'parameter_1' => '    $.data.key    '],
+						['type' => 'Matches regular expression', 'parameter_1' => '  expression    '],
+						['type' => 'Does not match regular expression', 'parameter_1' => '   not_expression   '],
+						['type' => 'JavaScript', 'parameter_1' => "   Test line 1  \n   Test line 2 \n   Test line  3   \n   \n "],
+						['type' => 'Check for error in JSON', 'parameter_1' => '   $.error     '],
+						['type' => 'Check for error in XML', 'parameter_1' => '   /tmp/path/   '],
+						['type' => 'Check for error using regular expression', 'parameter_1' => '   expression    ', 'parameter_2' => '    0      ']
 					]
 				]
 			]
@@ -1724,7 +1734,7 @@ class TestFormPreprocessing extends CWebTest {
 	}
 
 	/*
-	 * Preprocessing steps with spaces in fields for item, item prortotype and LLD.
+	 * Preprocessing steps with spaces in fields for item, item prototype and LLD.
 	 */
 	public static function getPreprocessingTrailingSpacesData() {
 		return [
@@ -1743,7 +1753,7 @@ class TestFormPreprocessing extends CWebTest {
 	}
 
 	/*
-	 * Additional preprocessing data with spaces in fields for item and item prortotype.
+	 * Additional preprocessing data with spaces in fields for item and item prototype.
 	 */
 	public function getItemPreprocessingTrailingSpacesData() {
 		return array_merge($this->getPreprocessingTrailingSpacesData(), [
@@ -1755,6 +1765,28 @@ class TestFormPreprocessing extends CWebTest {
 					],
 					'preprocessing' => [
 						['type' => 'Prometheus pattern', 'parameter_1' => '  metric  ', 'parameter_2' => '  output  ']
+					]
+				]
+			],
+			[
+				[
+					'fields' => [
+						'Name' => 'Custom multiplier trailing spaces',
+						'Key' => 'Custom-multiplier-spaces-in-parameter'
+					],
+					'preprocessing' => [
+						['type' => 'Custom multiplier', 'parameter_1' => '  2  ']
+					]
+				]
+			],
+			[
+				[
+					'fields' => [
+						'Name' => 'In range trailing spaces',
+						'Key' => 'in-range-spaces-in-parameter'
+					],
+					'preprocessing' => [
+						['type' => 'In range', 'parameter_1' => '  5  ', 'parameter_2' => '  10  ']
 					]
 				]
 			]
@@ -1871,13 +1903,13 @@ class TestFormPreprocessing extends CWebTest {
 		$this->assertEquals($this->success_message, $message->getTitle());
 
 		// Check saved preprocessing.
-		$item_id = CDBHelper::getValue('SELECT itemid FROM items WHERE key_='.zbx_dbstr($data['fields']['Key']));
-		$this->page->open($this->ready_link.$item_id);
+		$itemid = CDBHelper::getValue('SELECT itemid FROM items WHERE key_='.zbx_dbstr($data['fields']['Key']));
+		$this->page->open($this->ready_link.$itemid);
 		$form->selectTab('Preprocessing');
 		$steps = $this->assertPreprocessingSteps($data['preprocessing']);
 
 		$rows = [];
-		foreach (CDBHelper::getAll('SELECT step, error_handler FROM item_preproc WHERE itemid='.$item_id) as $row) {
+		foreach (CDBHelper::getAll('SELECT step, error_handler FROM item_preproc WHERE itemid='.$itemid) as $row) {
 			$rows[$row['step']] = $row['error_handler'];
 		}
 

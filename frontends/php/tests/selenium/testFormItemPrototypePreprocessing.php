@@ -48,7 +48,6 @@ class testFormItemPrototypePreprocessing extends testFormPreprocessing {
 					],
 					'preprocessing' => [
 						['type' => 'Prometheus pattern', 'parameter_1' => '{#METRICNAME}==1', 'parameter_2' => '{#LABELNAME}']
-
 					]
 				]
 			],
@@ -61,7 +60,6 @@ class testFormItemPrototypePreprocessing extends testFormPreprocessing {
 					],
 					'preprocessing' => [
 						['type' => 'Prometheus pattern', 'parameter_1' => '{__name__="{#METRICNAME}"}', 'parameter_2' => '{#LABELNAME}']
-
 					]
 				]
 			],
@@ -74,7 +72,6 @@ class testFormItemPrototypePreprocessing extends testFormPreprocessing {
 					],
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{#METRICNAME}==1']
-
 					]
 				]
 			],
@@ -87,7 +84,6 @@ class testFormItemPrototypePreprocessing extends testFormPreprocessing {
 					],
 					'preprocessing' => [
 						['type' => 'Prometheus to JSON', 'parameter_1' => '{label_name="{#LABELVALUE}"}']
-
 					]
 				]
 			]

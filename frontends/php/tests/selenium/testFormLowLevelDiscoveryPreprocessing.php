@@ -44,11 +44,15 @@ class testFormLowLevelDiscoveryPreprocessing extends TestFormPreprocessing {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Name' => 'Add JavaScript multiline preprocessing',
-						'Key' => 'item.javascript.multiline.preprocessing'
+						'Name' => 'Add spaces preprocessing',
+						'Key' => 'item.spaces.preprocessing'
 					],
 					'preprocessing' => [
-						['type' => 'JavaScript', 'parameter_1' => "  Test line 1\nTest line 2\nTest line 3   "]
+						['type' => 'Regular expression', 'parameter_1' => '       expression       ', 'parameter_2' => '   \1     '],
+						['type' => 'JSONPath', 'parameter_1' => '    $.data.test      '],
+						['type' => 'JavaScript', 'parameter_1' => "  Test line 1\n   Test line   2\n   Test line 3   "],
+						['type' => 'Does not match regular expression', 'parameter_1' => '    Pattern     '],
+						['type' => 'Check for error in JSON', 'parameter_1' => '    $.new.path    '],
 					]
 				]
 			],
@@ -150,7 +154,6 @@ class testFormLowLevelDiscoveryPreprocessing extends TestFormPreprocessing {
 	 * @dataProvider getLLDPreprocessingCreateData
 	 * @dataProvider getLLDPrometheusData
 	 * @dataProvider getCustomOnFailValidationData
-	 *
 	 */
 	public function testFormLowLevelDiscoveryPreprocessing_CreateAllSteps($data) {
 		$this->executeCreate($data);
