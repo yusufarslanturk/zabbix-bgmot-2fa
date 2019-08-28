@@ -18,7 +18,7 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-require_once dirname(__FILE__).'/TestFormPreprocessing.php';
+require_once dirname(__FILE__).'/common/testFormPreprocessing.php';
 
 /**
  * Test the creation of inheritance of new objects on a previously linked template.
@@ -27,7 +27,7 @@ require_once dirname(__FILE__).'/TestFormPreprocessing.php';
  */
 class testFormItemPrototypePreprocessing extends testFormPreprocessing {
 
-	const DISCOVERY_RULE_ID = 33800;			//'Simple form test host' => 'testFormDiscoveryRule'
+	const DISCOVERY_RULE_ID = 33800;			// 'Simple form test host' => 'testFormDiscoveryRule'
 	const TEMPL_DISCOVERY_RULE_ID = 15011;	// 'testInheritanceDiscoveryRule'
 	const HOST_DISCOVERY_RULE_ID	 = 15016;	// 'Template inheritance test host -> testInheritanceDiscoveryRule'
 
@@ -101,7 +101,7 @@ class testFormItemPrototypePreprocessing extends testFormPreprocessing {
 	}
 
 	/**
-	 * @dataProvider getCustomOnFailData
+	 * @dataProvider getItemCustomOnFailData
 	 */
 	public function testFormItemPrototypePreprocessing_CustomOnFail($data) {
 		$this->executeCustomOnFail($data);

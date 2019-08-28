@@ -18,12 +18,12 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-require_once dirname(__FILE__).'/TestFormPreprocessing.php';
+require_once dirname(__FILE__).'/common/testFormPreprocessing.php';
 
 /**
  * @backup items
  */
-class testFormLowLevelDiscoveryPreprocessing extends TestFormPreprocessing {
+class testFormLowLevelDiscoveryPreprocessing extends testFormPreprocessing {
 
 	const HOST_ID = 40001;
 	const INHERITANCE_TEMPLATE_ID	= 15000;		// 'Inheritance test template'
@@ -150,7 +150,7 @@ class testFormLowLevelDiscoveryPreprocessing extends TestFormPreprocessing {
 	}
 
 	/**
-	 * @dataProvider getPreprocessingValidationData
+	 * @dataProvider getCommonPreprocessingValidationData
 	 * @dataProvider getLLDPreprocessingCreateData
 	 * @dataProvider getLLDPrometheusData
 	 * @dataProvider getCustomOnFailValidationData
@@ -167,14 +167,14 @@ class testFormLowLevelDiscoveryPreprocessing extends TestFormPreprocessing {
 	}
 
 	/**
-	 * @dataProvider getCustomOnFailData
+	 * @dataProvider getCommonCustomOnFailData
 	 */
 	public function testFormLowLevelDiscoveryPreprocessing_CustomOnFail($data) {
 		$this->executeCustomOnFail($data);
 	}
 
 	/**
-	 * @dataProvider getInheritancePreprocessing
+	 * @dataProvider getCommonInheritancePreprocessing
 	 */
 	public function testFormLowLevelDiscoveryPreprocessing_PreprocessingInheritanceFromTemplate($data) {
 		$this->link = 'host_discovery.php?hostid='.self::INHERITANCE_TEMPLATE_ID;

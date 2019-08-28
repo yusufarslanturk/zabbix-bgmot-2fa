@@ -18,13 +18,13 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-require_once dirname(__FILE__).'/TestFormPreprocessing.php';
+require_once dirname(__FILE__).'/common/testFormPreprocessing.php';
 
 /**
  * @backup items
  */
-class testFormItemPreprocessing extends TestFormPreprocessing {
-	const HOST_ID = 40001;							//'Simple form test host'
+class testFormItemPreprocessing extends testFormPreprocessing {
+	const HOST_ID = 40001;							// 'Simple form test host'
 	const INHERITANCE_TEMPLATE_ID	= 15000;		// 'Inheritance test template'
 	const INHERITANCE_HOST_ID		= 15001;		// 'Template inheritance test host'
 
@@ -134,7 +134,7 @@ class testFormItemPreprocessing extends TestFormPreprocessing {
 		$original_steps = $this->listPreprocessingSteps();
 		// Open copied item form, get steps text and compare to original.
 		$this->page->open('items.php?filter_set=1&filter_hostids[0]='.self::HOST_ID);
-		$this->query('link:'.$preprocessing_item_name)->one()->click();
+		$this->query('link', $preprocessing_item_name)->one()->click();
 		$form = $this->query('name:itemForm')->waitUntilPresent()->asForm()->one();
 		$this->assertEquals($preprocessing_item_name, $form->getField('Name')->getValue());
 		$this->assertEquals($preprocessing_item_key, $form->getField('Key')->getValue());
@@ -149,7 +149,7 @@ class testFormItemPreprocessing extends TestFormPreprocessing {
 	}
 
 	/**
-	 * @dataProvider getCustomOnFailData
+	 * @dataProvider getItemCustomOnFailData
 	 */
 	public function testFormItemPreprocessing_CustomOnFail($data) {
 		$this->executeCustomOnFail($data);

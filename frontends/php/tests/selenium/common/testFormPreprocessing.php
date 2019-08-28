@@ -19,14 +19,14 @@
 **/
 require_once 'vendor/autoload.php';
 
-require_once dirname(__FILE__).'/../include/CWebTest.php';
-require_once dirname(__FILE__).'/../../include/items.inc.php';
-require_once dirname(__FILE__).'/traits/PreprocessingTrait.php';
+require_once dirname(__FILE__).'/../../include/CWebTest.php';
+require_once dirname(__FILE__).'/../../../include/items.inc.php';
+require_once dirname(__FILE__).'/../traits/PreprocessingTrait.php';
 
 /**
  * Base class for Preprocessing tests.
  */
-class TestFormPreprocessing extends CWebTest {
+abstract class testFormPreprocessing extends CWebTest {
 
 	use PreprocessingTrait;
 
@@ -40,7 +40,7 @@ class TestFormPreprocessing extends CWebTest {
 	 * Preprocessing validation data for Item and Item prototype.
 	 */
 	public function getItemPreprocessingValidationData() {
-		return array_merge($this->getPreprocessingValidationData(), [
+		return array_merge($this->getCommonPreprocessingValidationData(), [
 			// Text. Trim.
 			[
 				[
@@ -360,7 +360,7 @@ class TestFormPreprocessing extends CWebTest {
 	/*
 	 * Preprocessing validation data for item, item prototype and LLD.
 	 */
-	public static function getPreprocessingValidationData() {
+	public static function getCommonPreprocessingValidationData() {
 		return [
 			// Text. Regular expression.
 			[
@@ -1736,7 +1736,7 @@ class TestFormPreprocessing extends CWebTest {
 	/*
 	 * Preprocessing steps with spaces in fields for item, item prototype and LLD.
 	 */
-	public static function getPreprocessingTrailingSpacesData() {
+	public static function getCommonPreprocessingTrailingSpacesData() {
 		return [
 			[
 				[
@@ -1756,7 +1756,7 @@ class TestFormPreprocessing extends CWebTest {
 	 * Additional preprocessing data with spaces in fields for item and item prototype.
 	 */
 	public function getItemPreprocessingTrailingSpacesData() {
-		return array_merge($this->getPreprocessingTrailingSpacesData(), [
+		return array_merge($this->getCommonPreprocessingTrailingSpacesData(), [
 			[
 				[
 					'fields' => [
@@ -1806,12 +1806,14 @@ class TestFormPreprocessing extends CWebTest {
 		$this->assertEquals($this->success_message, $message->getTitle());
 
 		// Remove spaces.
-		foreach ($data['preprocessing'] as $i => $options) {
-			$data['preprocessing'][$i]['parameter_1'] = trim($options['parameter_1']);
-			if (array_key_exists('parameter_2', $options)){
-				$data['preprocessing'][$i]['parameter_2'] = trim($options['parameter_2']);
+		foreach ($data['preprocessing'] as $i => &$options) {
+			foreach (['parameter_1', 'parameter_2'] as $parameter) {
+				if (array_key_exists($parameter, $options)) {
+					$options[$parameter] = trim($options[$parameter]);
+				}
 			}
 		}
+		unset($options);
 
 		// Check result in frontend form.
 		$id = CDBHelper::getValue('SELECT itemid FROM items WHERE key_='.zbx_dbstr($data['fields']['Key']));
@@ -1820,7 +1822,10 @@ class TestFormPreprocessing extends CWebTest {
 		$this->assertPreprocessingSteps($data['preprocessing']);
 	}
 
-	public static function getCustomOnFailData() {
+	/*
+	 * Preprocessing steps with Custom on fail checks for item, item prototype and LLD.
+	 */
+	public static function getCommonCustomOnFailData() {
 		$options = [
 			ZBX_PREPROC_FAIL_DISCARD_VALUE	=> 'Discard value',
 			ZBX_PREPROC_FAIL_SET_VALUE		=> 'Set value to',
@@ -1829,7 +1834,7 @@ class TestFormPreprocessing extends CWebTest {
 
 		$data = [];
 		foreach ($options as $value => $label) {
-			$item = [
+			$case = [
 				'fields' => [
 					'Name' => 'Preprocessing '.$label,
 					'Key' => 'preprocessing-steps-discard-on-fail'.$value
@@ -1847,6 +1852,10 @@ class TestFormPreprocessing extends CWebTest {
 						'on_fail' => true
 					],
 					[
+						'type' => 'JavaScript',
+						'parameter_1' => 'Test Java Script'
+					],
+					[
 						'type' => 'Does not match regular expression',
 						'parameter_1' => 'Pattern',
 						'on_fail' => true
@@ -1858,27 +1867,109 @@ class TestFormPreprocessing extends CWebTest {
 					[
 						'type' => 'Discard unchanged with heartbeat',
 						'parameter_1' => '30'
+					],
+					[
+						'type' => 'Prometheus to JSON',
+						'parameter_1' => 'metric',
+						'on_fail' => true
 					]
 				],
+				'label' => $label,
 				'value' => $value
 			];
 
-			foreach ($item['preprocessing'] as &$step) {
-				if (!array_key_exists('on_fail', $step) || !$step['on_fail']) {
-					continue;
-				}
-
-				$step['error_handler'] = $label;
-
-				if ($value !== ZBX_PREPROC_FAIL_DISCARD_VALUE) {
-					$step['error_handler_params'] = 'handler parameter';
-				}
-			}
-
-			$data[] = [$item];
+			$data[] = [self::appendErrorHandler($case)];
 		}
 
 		return $data;
+	}
+
+	/*
+	 * Preprocessing steps with Custom on fail checks for item and item prototype.
+	 */
+	public function getItemCustomOnFailData() {
+		$data = [];
+
+		foreach($this->getCommonCustomOnFailData() as $packed) {
+			$case = $packed[0];
+			$case['preprocessing'] = array_merge($case['preprocessing'], [
+				[
+					'type' => 'Trim',
+					'parameter_1' => '111'
+				],
+				[
+					'type' => 'Right trim',
+					'parameter_1' => '333'
+				],
+				[
+					'type' => 'Left trim',
+					'parameter_1' => '555'
+				],
+				[
+					'type' => 'XML XPath',
+					'parameter_1' => 'path',
+					'on_fail' => true
+				],
+				[
+					'type' => 'JSONPath',
+					'parameter_1' => 'JSON path',
+					'on_fail' => true
+				],
+				[
+					'type' => 'Custom multiplier',
+					'parameter_1' => '2',
+					'on_fail' => true
+				],
+				[
+					'type' => 'Change per second',
+					'on_fail' => true
+				],
+				[
+					'type' => 'Boolean to decimal',
+					'on_fail' => true
+				],
+				[
+					'type' => 'Matches regular expression',
+					'parameter_1' => 'regular expression',
+					'on_fail' => true
+				],
+				[
+					'type' => 'Check for error in XML',
+					'parameter_1' => 'XML',
+				],
+				[
+					'type' => 'Check for error using regular expression',
+					'parameter_1' => 'expression',
+					'parameter_2' => 'output',
+				]
+			]);
+
+			$data[] = [self::appendErrorHandler($case)];
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Function for adding handler parameter to case.
+	 */
+	public static function appendErrorHandler($case) {
+		foreach ($case['preprocessing'] as &$preprocessing) {
+			if (!array_key_exists('on_fail', $preprocessing)
+				|| !$preprocessing['on_fail']) {
+				continue;
+			}
+
+			$preprocessing['error_handler'] = $case['label'];
+
+			if ($case['value'] !== ZBX_PREPROC_FAIL_DISCARD_VALUE) {
+				$preprocessing['error_handler_params'] = 'handler parameter'.
+					microtime();
+			}
+		}
+		unset($preprocessing);
+
+		return $case;
 	}
 
 	/**
@@ -1889,9 +1980,16 @@ class TestFormPreprocessing extends CWebTest {
 		$steps = $this->getPreprocessingSteps();
 
 		foreach ($data['preprocessing'] as $i => $options) {
-			if (in_array($options['type'], ['Check for error in JSON', 'Discard unchanged with heartbeat'])) {
-				$this->assertFalse($steps[$i]['on_fail']->isEnabled());
-			}
+			$this->assertNotEquals(in_array($options['type'], [
+				'Trim',
+				'Right trim',
+				'Left trim',
+				'JavaScript',
+				'Check for error in JSON',
+				'Check for error in XML',
+				'Check for error using regular expression',
+				'Discard unchanged with heartbeat',
+			]), $steps[$i]['on_fail']->isEnabled());
 		}
 
 		$form->submit();
@@ -1917,9 +2015,19 @@ class TestFormPreprocessing extends CWebTest {
 			// Check "Custom on fail" value in DB.
 			$expected = (!array_key_exists('on_fail', $options) || !$options['on_fail'])
 					? ZBX_PREPROC_FAIL_DEFAULT : $data['value'];
+
 			$this->assertEquals($expected, $rows[$i + 1]);
 
-			if (in_array($options['type'], ['Check for error in JSON', 'Discard unchanged with heartbeat'])) {
+			if (in_array($options['type'], [
+				'Trim',
+				'Right trim',
+				'Left trim',
+				'JavaScript',
+				'Check for error in JSON',
+				'Check for error in XML',
+				'Check for error using regular expression',
+				'Discard unchanged with heartbeat',
+			])) {
 				$this->assertFalse($steps[$i]['on_fail']->isEnabled());
 				$this->assertFalse($steps[$i]['on_fail']->isSelected());
 				$this->assertTrue($steps[$i]['error_handler'] === null || !$steps[$i]['error_handler']->isVisible());
@@ -2064,7 +2172,7 @@ class TestFormPreprocessing extends CWebTest {
 	/*
 	 * Inheritance of preprocessing steps for Item, Item prototype and LLD.
 	 */
-	public static function getInheritancePreprocessing() {
+	public static function getCommonInheritancePreprocessing() {
 		return [
 			[
 				[
@@ -2116,7 +2224,7 @@ class TestFormPreprocessing extends CWebTest {
 	 * Inheritance of preprocessing steps for item and item prortotype.
 	 */
 	public function getItemInheritancePreprocessing() {
-		$data = $this->getInheritancePreprocessing();
+		$data = $this->getCommonInheritancePreprocessing();
 		$data[0][0]['preprocessing'] =  array_merge($data[0][0]['preprocessing'], [
 					[
 						'type' => 'Right trim',
@@ -2170,7 +2278,8 @@ class TestFormPreprocessing extends CWebTest {
 
 		// Check preprocessing steps on host.
 		$this->page->open($host_link);
-		$this->query('link:'.$data['fields']['Name'])->waitUntilPresent()->one()->click();
+		$this->query('link', $data['fields']['Name'])->waitUntilPresent()->one()->click();
+
 		$form->selectTab('Preprocessing');
 		$steps = $this->assertPreprocessingSteps($data['preprocessing']);
 
