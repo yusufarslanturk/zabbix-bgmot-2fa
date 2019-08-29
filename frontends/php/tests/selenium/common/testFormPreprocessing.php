@@ -1911,11 +1911,6 @@ abstract class testFormPreprocessing extends CWebTest {
 					'on_fail' => true
 				],
 				[
-					'type' => 'JSONPath',
-					'parameter_1' => 'JSON path',
-					'on_fail' => true
-				],
-				[
 					'type' => 'Custom multiplier',
 					'parameter_1' => '2',
 					'on_fail' => true
