@@ -495,7 +495,7 @@
 				}
 
 				if (type === 'headers') {
-					e.new_node.querySelector('[data-type="value"]').setAttribute('maxlength', 1000);
+					e.new_node.querySelector('[data-type="value"]').setAttribute('maxlength', 2000);
 				}
 			});
 
@@ -820,7 +820,7 @@
 
 			if (type === 'headers') {
 				$node.on('dynamic_rows.beforeadd', function(e, dynamic_rows) {
-					e.new_node.querySelector('[data-type="value"]').setAttribute('maxlength', 1000);
+					e.new_node.querySelector('[data-type="value"]').setAttribute('maxlength', 2000);
 				});
 			}
 
