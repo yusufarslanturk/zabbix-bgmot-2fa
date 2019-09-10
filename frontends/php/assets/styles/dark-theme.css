@@ -4396,7 +4396,8 @@ ul.checkbox-list.col-3 > li {
     padding-right: 5px; }
   .preprocessing-list input[type=text],
   .preprocessing-list select {
-    width: 100%; }
+    width: 100%;
+    min-width: 0; }
   .preprocessing-list input[type=text]:not(:last-of-type),
   .preprocessing-list .btn-link:not(:last-of-type) {
     margin-right: 10px; }
@@ -4941,6 +4942,10 @@ table.preprocessing-test-results .rel-container {
 
 #preprocessing-test-form .table-forms-separator {
   margin-top: -2px; }
+
+#preprocessing_div {
+  display: block;
+  max-width: 940px; }
 
 .list-table thead th {
   border-color: #404040; }
