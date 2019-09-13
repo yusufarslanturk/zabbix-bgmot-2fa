@@ -6156,6 +6156,7 @@ ul.checkbox-list {
 	input[type=text],
 	select {
 		width: 100%;
+		min-width: 0; // https://stackoverflow.com/a/43361500
 	}
 
 	input[type=text],
@@ -6836,6 +6837,11 @@ table.preprocessing-test-results {
 	.table-forms-separator {
 		margin-top: -2px;
 	}
+}
+
+#preprocessing_div {
+	display: block;
+	max-width: 940px;
 }
 
 @if $theme_name == 'dev' {
