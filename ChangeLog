@@ -2,7 +2,7 @@ Changes for 4.2.7rc1
 
 New features:
 .......PS. [ZBX-16511] added source IP address to unknown request log warning message (atumilovics)
-A......... [ZBX-3783] add strict validation of input parameters in valuemap.get() method (Sasha)
+A......... [ZBX-3783] added strict validation of input parameters in valuemap.get() method (Sasha)
 .......PS. [ZBXNEXT-4920] increased received packet size to 1GB (akozlovs)
 
 Bug fixes:
@@ -560,7 +560,7 @@ A.F.I...S. [ZBXNEXT-4853,ZBXNEXT-517] added ability to send email messages in HT
 Changes for 4.0.13rc1
 
 New features:
-A......... [ZBX-3783] add strict validation of input parameters in valuemap.get() method (Sasha)
+A......... [ZBX-3783] added strict validation of input parameters in valuemap.get() method (Sasha)
 .......PS. [ZBXNEXT-4920] increased received packet size to 1GB (akozlovs)
 
 Bug fixes:
