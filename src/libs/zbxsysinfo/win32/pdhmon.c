@@ -122,14 +122,10 @@ out:
 
 int	PERF_COUNTER(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
-	const char	*__function_name = "PERF_COUNTER";
-
-	return perf_counter_ex(__function_name, request, result, PERF_COUNTER_LANG_DEFAULT);
+	return perf_counter_ex(__func__, request, result, PERF_COUNTER_LANG_DEFAULT);
 }
 
 int	PERF_COUNTER_EN(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
-	const char	*__function_name = "PERF_COUNTER_EN";
-
-	return perf_counter_ex(__function_name, request, result, PERF_COUNTER_LANG_EN);
+	return perf_counter_ex(__func__, request, result, PERF_COUNTER_LANG_EN);
 }
