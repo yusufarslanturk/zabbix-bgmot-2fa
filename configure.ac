@@ -1593,6 +1593,9 @@ ZBXGET_LIBS="$ZBXGET_LIBS $ZLIB_LIBS $LIBPTHREAD_LIBS"
 SENDER_LDFLAGS="$SENDER_LDFLAGS $ZLIB_LDFLAGS $LIBPTHREAD_LDFLAGS"
 SENDER_LIBS="$SENDER_LIBS $ZLIB_LIBS $LIBPTHREAD_LIBS"
 
+ZBXES_LDFLAGS="$ZBXES_LIBS $LIBPTHREAD_LDFLAGS"
+ZBXES_LIBS="$ZBXES_LIBS $LIBPTHREAD_LDFLAGS"
+
 AM_CONDITIONAL(HAVE_IPMI, [test "x$have_ipmi" = "xyes"])
 AM_CONDITIONAL(HAVE_LIBXML2, test "x$have_libxml2" = "xyes")
 
@@ -1763,6 +1766,9 @@ dnl Starting from 2.0 agent can do web monitoring
 AGENT_LDFLAGS="$AGENT_LDFLAGS $LIBCURL_LDFLAGS"
 AGENT_LIBS="$AGENT_LIBS $LIBCURL_LIBS"
 
+ZBXES_LDFLAGS="$ZBXES_LDFLAGS $LIBCURL_LDFLAGS"
+ZBXES_LIBS="$ZBXES_LIBS $LIBCURL_LIBS"
+
 dnl Check for libpcre, used by Zabbix for regular expressions
 if test "x$server" = "xyes" || test "x$proxy" = "xyes" || test "x$agent" = "xyes" || test "x$agent2" = "xyes"; then
 	LIBPCRE_CHECK_CONFIG([no])
@@ -1851,6 +1857,9 @@ AC_SUBST(ZBXGET_LIBS)
 
 AC_SUBST(SENDER_LDFLAGS)
 AC_SUBST(SENDER_LIBS)
+
+AC_SUBST(ZBXES_LDFLAGS)
+AC_SUBST(ZBXES_LIBS)
 
 AC_SUBST(SERVER_CONFIG_FILE)
 AC_SUBST(PROXY_CONFIG_FILE)
@@ -1963,6 +1972,7 @@ AC_OUTPUT([
 	src/zabbix_agent/Makefile
 	src/zabbix_agent/logfiles/Makefile
 	src/zabbix_get/Makefile
+	src/zabbix_es/Makefile
 	src/zabbix_sender/Makefile
 	src/zabbix_server/Makefile
 	src/zabbix_server/alerter/Makefile

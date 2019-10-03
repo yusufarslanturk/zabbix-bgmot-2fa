@@ -30,9 +30,9 @@ if AGENT
 AGENT_SUBDIRS = \
 	zabbix_agent \
 	zabbix_get \
-	zabbix_sender
-endif
-
+	zabbix_sender \
+	zabbix_es
+else
 if AGENT2
 if !AGENT 
 AGENT_SUBDIRS = zabbix_agent
