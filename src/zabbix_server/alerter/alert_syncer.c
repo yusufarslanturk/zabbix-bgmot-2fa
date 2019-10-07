@@ -610,62 +610,75 @@ static int	am_db_flush_results(zbx_am_db_t *amdb)
 	{
 		int 		i;
 		char		*sql;
-		size_t		sql_alloc = results_num * 128, sql_offset = 0;
+		size_t		sql_alloc = results_num * 128, sql_offset;
 		zbx_db_insert_t	db_event, db_problem;
 
 		sql = (char *)zbx_malloc(NULL, sql_alloc);
 
-		DBbegin();
-		DBbegin_multiple_update(&sql, &sql_alloc, &sql_offset);
-		zbx_db_insert_prepare(&db_event, "event_tag", "eventtagid", "eventid", "tag", "value", NULL);
-		zbx_db_insert_prepare(&db_problem, "problem_tag", "problemtagid", "eventid", "tag", "value", NULL);
+		do {
+			sql_offset = 0;
+
+			DBbegin();
+			DBbegin_multiple_update(&sql, &sql_alloc, &sql_offset);
+			zbx_db_insert_prepare(&db_event, "event_tag", "eventtagid", "eventid", "tag", "value", NULL);
+			zbx_db_insert_prepare(&db_problem, "problem_tag", "problemtagid", "eventid", "tag", "value",
+					NULL);
+
+			for (i = 0; i < results_num; i++)
+			{
+				zbx_am_db_mediatype_t	*mediatype;
+				zbx_am_result_t		*result = results[i];
+
+				zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
+						"update alerts set status=%d,retries=%d",
+						result->status, result->retries);
+
+				if (NULL != result->error)
+				{
+					char	*error_esc;
+					error_esc = DBdyn_escape_field("alerts", "error", result->error);
+					zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, ",error='%s'", error_esc);
+					zbx_free(error_esc);
+				}
+				else
+					zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset, ",error=''");
+
+				zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, " where alertid=" ZBX_FS_UI64 ";\n",
+						result->alertid);
+
+				if (NULL != (mediatype = zbx_hashset_search(&amdb->mediatypes, &result->mediatypeid)) &&
+						0 != mediatype->process_tags && NULL != result->value)
+				{
+					am_db_update_event_tags(&db_event, &db_problem, result->eventid, result->value);
+				}
+
+				DBexecute_overflowed_sql(&sql, &sql_alloc, &sql_offset);
+			}
+
+			DBend_multiple_update(&sql, &sql_alloc, &sql_offset);
+			if (16 < sql_offset)
+				DBexecute("%s", sql);
+
+			zbx_db_insert_autoincrement(&db_event, "eventtagid");
+			zbx_db_insert_execute(&db_event);
+			zbx_db_insert_clean(&db_event);
+
+			zbx_db_insert_autoincrement(&db_problem, "problemtagid");
+			zbx_db_insert_execute(&db_problem);
+			zbx_db_insert_clean(&db_problem);
+
+		}
+		while (ZBX_DB_DOWN == DBcommit());
 
 		for (i = 0; i < results_num; i++)
 		{
-			zbx_am_db_mediatype_t	*mediatype;
-			zbx_am_result_t		*result = results[i];
-
-			zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
-					"update alerts set status=%d,retries=%d", result->status, result->retries);
-			if (NULL != result->error)
-			{
-				char	*error_esc;
-				error_esc = DBdyn_escape_field("alerts", "error", result->error);
-				zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, ",error='%s'", error_esc);
-				zbx_free(error_esc);
-			}
-			else
-				zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset, ",error=''");
-
-			zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, " where alertid=" ZBX_FS_UI64 ";\n",
-					result->alertid);
-
-			if (NULL != (mediatype = zbx_hashset_search(&amdb->mediatypes, &result->mediatypeid)) &&
-					0 != mediatype->process_tags && NULL != result->value)
-			{
-				am_db_update_event_tags(&db_event, &db_problem, result->eventid, result->value);
-			}
-
-			DBexecute_overflowed_sql(&sql, &sql_alloc, &sql_offset);
+			zbx_am_result_t	*result = results[i];
 
 			zbx_free(result->value);
 			zbx_free(result->error);
 			zbx_free(result);
 		}
 
-		DBend_multiple_update(&sql, &sql_alloc, &sql_offset);
-		if (16 < sql_offset)
-			DBexecute("%s", sql);
-
-		zbx_db_insert_autoincrement(&db_event, "eventtagid");
-		zbx_db_insert_execute(&db_event);
-		zbx_db_insert_clean(&db_event);
-
-		zbx_db_insert_autoincrement(&db_problem, "problemtagid");
-		zbx_db_insert_execute(&db_problem);
-		zbx_db_insert_clean(&db_problem);
-
-		DBcommit();
 		zbx_free(sql);
 	}
 
