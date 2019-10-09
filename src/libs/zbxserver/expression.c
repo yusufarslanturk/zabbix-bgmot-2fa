@@ -1763,6 +1763,7 @@ static int	get_autoreg_value_by_event(const DB_EVENT *event, char **replace_to, 
 #define MVAR_EVENT_NAME			MVAR_EVENT "NAME}"
 #define MVAR_EVENT_STATUS		MVAR_EVENT "STATUS}"
 #define MVAR_EVENT_TAGS			MVAR_EVENT "TAGS}"
+#define MVAR_EVENT_TAGS_PREFIX		MVAR_EVENT "TAGS."
 #define MVAR_EVENT_TIME			MVAR_EVENT "TIME}"
 #define MVAR_EVENT_VALUE		MVAR_EVENT "VALUE}"
 #define MVAR_EVENT_SEVERITY		MVAR_EVENT "SEVERITY}"
@@ -2392,6 +2393,28 @@ static void	get_event_value(const char *macro, const DB_EVENT *event, char **rep
 		{
 			if (FAIL == get_trigger_severity_name(event->severity, replace_to))
 				*replace_to = zbx_strdup(*replace_to, "unknown");
+		}
+		else if (0 == strncmp(macro, MVAR_EVENT_TAGS_PREFIX, ZBX_CONST_STRLEN(MVAR_EVENT_TAGS_PREFIX)))
+		{
+			char	*name;
+
+			if (SUCCEED == zbx_str_extract(macro + ZBX_CONST_STRLEN(MVAR_EVENT_TAGS_PREFIX),
+					strlen(macro) - ZBX_CONST_STRLEN(MVAR_EVENT_TAGS_PREFIX) - 1, &name))
+			{
+				int	i;
+
+				for (i = 0; i < event->tags.values_num; i++)
+				{
+					zbx_tag_t	*tag = (zbx_tag_t *)event->tags.values[i];
+
+					if (0 == strcmp(name, tag->tag))
+					{
+						*replace_to = zbx_strdup(*replace_to, tag->value);
+						break;
+					}
+				}
+				zbx_free(name);
+			}
 		}
 	}
 }

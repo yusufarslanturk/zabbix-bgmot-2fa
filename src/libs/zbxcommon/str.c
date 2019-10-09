@@ -5202,6 +5202,7 @@ void	zbx_trim_float(char *str)
  *                                                                            *
  * Return value: The protocol version if it was successfully extracted,       *
  *               otherwise -1                                                 *
+ *                                                                            *
  ******************************************************************************/
 int	zbx_get_component_version(char *value)
 {
@@ -5217,3 +5218,72 @@ int	zbx_get_component_version(char *value)
 
 	return ZBX_COMPONENT_VERSION(atoi(value), atoi(pminor));
 }
+
+/******************************************************************************
+ *                                                                            *
+ * Function: zbx_str_extract                                                  *
+ *                                                                            *
+ * Purpose: extracts value from a string, unquoting if necessary              *
+ *                                                                            *
+ * Parameters:                                                                *
+ *    text  - [IN] the text containing value to extract                       *
+ *    len   - [IN] length of the value to extract                             *
+ *    value - [OUT] the extracted value                                       *
+ *                                                                            *
+ * Return value: SUCCEED - the value was extracted successfully               *
+ *               FAIL    - otherwise                                          *
+ *                                                                            *
+ * Comments: When unquoting value only " and \ character escapes are accepted.*
+ *                                                                            *
+ ******************************************************************************/
+int	zbx_str_extract(const char *text, int len, char **value)
+{
+	char		*tmp, *out;
+	const char	*in;
+
+	tmp = zbx_malloc(NULL, len + 1);
+	if (0 == len)
+	{
+		*tmp = '\0';
+		*value = tmp;
+		return SUCCEED;
+	}
+
+	if ('"' != *text)
+	{
+		memcpy(tmp, text, len);
+		tmp[len] = '\0';
+		*value = tmp;
+		return SUCCEED;
+	}
+
+	if (2 > len)
+		goto fail;
+
+	for (out = tmp, in = text + 1; '"' != *in; in++)
+	{
+		if (in - text >= len - 1)
+			goto fail;
+
+		if ('\\' == *in)
+		{
+			if (++in - text >= len - 1)
+				goto fail;
+
+			if ('"' != *in && '\\' != *in)
+				goto fail;
+		}
+		*out++ = *in;
+	}
+
+	if (in - text != len - 1)
+		goto fail;
+
+	*out = '\0';
+	*value = tmp;
+	return SUCCEED;
+fail:
+	zbx_free(tmp);
+	return FAIL;
+}
+
