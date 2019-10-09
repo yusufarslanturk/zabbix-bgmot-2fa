@@ -764,9 +764,11 @@ static void	am_db_update_watchdog(zbx_am_db_t *amdb)
 				" and u.usrgrpid=c.alert_usrgrpid"
 				" and m.mediatypeid=mt.mediatypeid"
 				" and m.active=%d"
-				" and mt.status=%d",
+				" and mt.status=%d"
+				" and mt.type<>%d",
 				MEDIA_STATUS_ACTIVE,
-				MEDIA_TYPE_STATUS_ACTIVE);
+				MEDIA_TYPE_STATUS_ACTIVE,
+				MEDIA_TYPE_WEBHOOK);
 
 	zbx_vector_uint64_create(&mediatypeids);
 	zbx_vector_ptr_create(&medias);
