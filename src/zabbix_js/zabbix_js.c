@@ -45,6 +45,7 @@ const char	*help_message[] = {
 	"  -i,--input input-file        Specify input parameter file name",
 	"  -p,--param  input-param      Specify input parameter",
 	"  -l,--loglevel log-level      Specify log level",
+	"  -t,--timeout timeout         Specify timeout in seconds",
 	NULL	/* end of text */
 };
 
@@ -56,11 +57,12 @@ struct zbx_option	longopts[] =
 	{"input",			1,	NULL,	'i'},
 	{"param",			1,	NULL,	'p'},
 	{"loglevel",			1,	NULL,	'l'},
+	{"timeout",			1,	NULL,	't'},
 	{NULL}
 };
 
 /* short options */
-static char	shortopts[] = "s:i:p:hl:";
+static char	shortopts[] = "s:i:p:hl:t:";
 
 /* end of COMMAND LINE OPTIONS */
 
@@ -101,7 +103,7 @@ static char    *read_file(const char *filename, char **error)
 	return data;
 }
 
-static char	*execute_script(const char *script, const char *param, char **error)
+static char	*execute_script(const char *script, const char *param, int timeout, char **error)
 {
 	zbx_es_t	es;
 	char		*code = NULL;
@@ -114,6 +116,9 @@ static char	*execute_script(const char *script, const char *param, char **error)
 		*error = zbx_dsprintf(NULL, "cannot initialize scripting environment: %s", errmsg);
 		return NULL;
 	}
+
+	if (0 != timeout)
+		zbx_es_set_timeout(&es, timeout);
 
 	if (FAIL == zbx_es_compile(&es, script, &code, &size, &errmsg))
 	{
@@ -154,7 +159,7 @@ out:
  ******************************************************************************/
 int	main(int argc, char **argv)
 {
-	int	ret = FAIL, loglevel = LOG_LEVEL_WARNING;
+	int	ret = FAIL, loglevel = LOG_LEVEL_WARNING, timeout = 0;
 	char	*script_file = NULL, *input_file = NULL, *param = NULL, ch, *script = NULL, *error = NULL,
 		*result = NULL;
 
@@ -179,6 +184,9 @@ int	main(int argc, char **argv)
 				break;
 			case 'l':
 				loglevel = atoi(zbx_optarg);
+				break;
+			case 't':
+				timeout = atoi(zbx_optarg);
 				break;
 			case 'h':
 				ret = SUCCEED;
@@ -237,7 +245,7 @@ int	main(int argc, char **argv)
 		}
 	}
 
-	if (NULL == (result = execute_script(script, param, &error)))
+	if (NULL == (result = execute_script(script, param, timeout, &error)))
 	{
 		zbx_error("error executing script:\n%s", error);
 		goto out;
