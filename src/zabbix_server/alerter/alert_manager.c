@@ -1104,7 +1104,10 @@ static void	am_queue_watchdog_alerts(zbx_am_t *manager)
 	while (NULL != (media = (zbx_am_media_t *)zbx_hashset_iter_next(&iter)))
 	{
 		if (NULL == (mediatype = am_get_mediatype(manager, media->mediatypeid)))
+		{
+			zabbix_log(LOG_LEVEL_DEBUG, "cannot find media type with id " ZBX_FS_UI64, media->mediatypeid);
 			continue;
+		}
 
 		mediatype->refcount++;
 
@@ -1316,7 +1319,7 @@ static void	am_sync_watchdog(zbx_am_t *manager, zbx_am_media_t **medias, int med
 	zbx_vector_ptr_t	media_new;
 	static int		old_count = -1;
 
-	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
+	zabbix_log(LOG_LEVEL_DEBUG, "In %s() recipients:%d", __func__, medias_num);
 
 	zbx_hashset_create(&mediaids, 100, ZBX_DEFAULT_UINT64_HASH_FUNC, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 	zbx_vector_ptr_create(&media_new);
@@ -1670,7 +1673,11 @@ static void	am_update_mediatypes(zbx_am_t *manager, zbx_ipc_message_t *message)
 	zbx_am_db_mediatype_t	**mediatypes;
 	int			mediatypes_num, i;
 
+	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
+
 	zbx_alerter_deserialize_mediatypes(message->data, &mediatypes, &mediatypes_num);
+
+	zabbix_log(LOG_LEVEL_DEBUG, "update %d media types", mediatypes_num);
 
 	for (i = 0; i < mediatypes_num; i++)
 	{
@@ -1686,6 +1693,8 @@ static void	am_update_mediatypes(zbx_am_t *manager, zbx_ipc_message_t *message)
 		zbx_free(mt);
 	}
 	zbx_free(mediatypes);
+
+	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
 }
 
 /******************************************************************************

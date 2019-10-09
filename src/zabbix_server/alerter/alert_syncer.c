@@ -784,21 +784,22 @@ static void	am_db_update_watchdog(zbx_am_db_t *amdb)
 	}
 	DBfree_result(result);
 
-	if (0 == medias.values_num)
-		goto out;
 
 	/* update media types used for watchdog alerts */
 
-	zbx_vector_uint64_sort(&mediatypeids, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
-	zbx_vector_uint64_uniq(&mediatypeids, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
-	am_db_update_mediatypes(amdb, mediatypeids.values, mediatypeids.values_num, &mediatypes);
-
-	if (0 != mediatypes.values_num)
+	if (0 != mediatypeids.values_num)
 	{
-		data_len = zbx_alerter_serialize_mediatypes(&data, (zbx_am_db_mediatype_t **)mediatypes.values,
-				mediatypes.values_num);
-		zbx_ipc_socket_write(&amdb->am, ZBX_IPC_ALERTER_MEDIATYPES, data, data_len);
-		zbx_free(data);
+		zbx_vector_uint64_sort(&mediatypeids, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
+		zbx_vector_uint64_uniq(&mediatypeids, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
+		am_db_update_mediatypes(amdb, mediatypeids.values, mediatypeids.values_num, &mediatypes);
+
+		if (0 != mediatypes.values_num)
+		{
+			data_len = zbx_alerter_serialize_mediatypes(&data, (zbx_am_db_mediatype_t **)mediatypes.values,
+					mediatypes.values_num);
+			zbx_ipc_socket_write(&amdb->am, ZBX_IPC_ALERTER_MEDIATYPES, data, data_len);
+			zbx_free(data);
+		}
 	}
 
 	data_len = zbx_alerter_serialize_medias(&data, (zbx_am_media_t **)medias.values, medias.values_num);
@@ -808,7 +809,6 @@ static void	am_db_update_watchdog(zbx_am_db_t *amdb)
 	medias_num = medias.values_num;
 
 	zbx_vector_ptr_clear_ext(&medias, (zbx_clean_func_t)zbx_am_media_free);
-out:
 	zbx_vector_ptr_destroy(&mediatypes);
 	zbx_vector_uint64_destroy(&mediatypeids);
 	zbx_vector_ptr_destroy(&medias);
