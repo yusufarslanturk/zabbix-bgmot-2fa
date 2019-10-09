@@ -26,8 +26,8 @@
 #include "mutexs.h"
 
 const char	*progname = NULL;
-const char	title_message[] = "zabbix_es";
-const char	syslog_app_name[] = "zabbix_es";
+const char	title_message[] = "zabbix_js";
+const char	syslog_app_name[] = "zabbix_js";
 const char	*usage_message[] = {
 	"-s script-file", "[-i input-file]", "[-p input-param]", NULL,
 	"-l log-level", NULL,
@@ -123,7 +123,7 @@ static char	*execute_script(const char *script, const char *param, char **error)
 
 	if (FAIL == zbx_es_execute(&es, script, code, size, param, &result, &errmsg))
 	{
-		*error = zbx_dsprintf("cannot execute script: %s", errmsg);
+		*error = zbx_dsprintf(NULL, "cannot execute script: %s", errmsg);
 		goto out;
 	}
 out:
@@ -242,8 +242,8 @@ int	main(int argc, char **argv)
 		zbx_error("error executing script:\n%s", error);
 		goto out;
 	}
-
-	printf("%s\n", result);
+	ret = SUCCEED;
+	printf("\n%s\n", result);
 out:
 	zbx_free(result);
 	zbx_free(error);

@@ -1,10 +1,10 @@
 ## Process this file with automake to produce Makefile.in
 
-bin_PROGRAMS = zabbix_es
+bin_PROGRAMS = zabbix_js
 
-zabbix_es_SOURCES = zabbix_es.c
+zabbix_js_SOURCES = zabbix_js.c
 
-zabbix_es_LDADD = \
+zabbix_js_LDADD = \
 	$(top_srcdir)/src/libs/zbxlog/libzbxlog.a \
 	$(top_srcdir)/src/libs/zbxembed/libzbxembed.a \
 	$(top_srcdir)/src/libs/zbxjson/libzbxjson.a \
@@ -19,6 +19,6 @@ zabbix_es_LDADD = \
 	$(top_srcdir)/src/libs/zbxcrypto/libzbxcrypto.a \
 	$(top_srcdir)/src/libs/zbxcompress/libzbxcompress.a
 	
-zabbix_es_LDADD += @ZBXES_LIBS@
+zabbix_js_LDADD += @ZBXJS_LIBS@
 
-zabbix_es_LDFLAGS = @ZBXES_LDFLAGS@
+zabbix_js_LDFLAGS = @ZBXJS_LDFLAGS@

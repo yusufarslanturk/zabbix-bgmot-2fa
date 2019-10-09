@@ -8,7 +8,8 @@ DIST_SUBDIRS = \
 	zabbix_sender \
 	zabbix_proxy \
 	zabbix_server \
-	zabbix_java
+	zabbix_java \
+	zabbix_js
 
 if AGENT
 COMMON_SUBDIRS = libs
@@ -31,7 +32,7 @@ AGENT_SUBDIRS = \
 	zabbix_agent \
 	zabbix_get \
 	zabbix_sender \
-	zabbix_es
+	zabbix_js
 else
 if AGENT2
 if !AGENT 
