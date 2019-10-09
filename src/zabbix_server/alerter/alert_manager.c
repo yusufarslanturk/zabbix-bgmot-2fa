@@ -59,7 +59,6 @@ extern unsigned char	process_type, program_type;
 extern int		server_num, process_num;
 
 extern int	CONFIG_ALERTER_FORKS;
-extern int	CONFIG_CONFSYNCER_FREQUENCY;
 extern char	*CONFIG_ALERT_SCRIPTS_PATH;
 
 /*
@@ -1251,7 +1250,8 @@ static void	am_db_update_alert(zbx_am_t *manager, zbx_am_alert_t *alert, int sta
 			zbx_am_result_t	update_local = {
 					.alertid = alert->alertid,
 					.eventid = alert->eventid,
-					.mediatypeid = alert->mediatypeid
+					.mediatypeid = alert->mediatypeid,
+					.source = ZBX_ALERTPOOL_SOURCE(alert->alertpoolid)
 			};
 
 			result = (zbx_am_result_t *)zbx_hashset_insert(&manager->results, &update_local,

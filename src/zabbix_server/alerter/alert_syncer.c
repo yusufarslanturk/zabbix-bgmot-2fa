@@ -483,7 +483,7 @@ static void	am_db_update_event_tags(zbx_db_insert_t *db_event, zbx_db_insert_t *
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() eventid:" ZBX_FS_UI64 " tags:%s", __func__, eventid, params);
 
-	result = DBselect("select e.source,p.eventid"
+	result = DBselect("select e.eventid,p.eventid"
 			" from events e left join problem p"
 				" on p.eventid=e.eventid"
 			" where e.eventid=" ZBX_FS_UI64, eventid);
@@ -491,12 +491,6 @@ static void	am_db_update_event_tags(zbx_db_insert_t *db_event, zbx_db_insert_t *
 	if (NULL == (row = DBfetch(result)))
 	{
 		zabbix_log(LOG_LEVEL_DEBUG, "cannot add event tags: event " ZBX_FS_UI64 " was removed", eventid);
-		goto out;
-	}
-
-	if (EVENT_SOURCE_TRIGGERS != atoi(row[0]))
-	{
-		zabbix_log(LOG_LEVEL_DEBUG, "tags can be added only for problem trigger events");
 		goto out;
 	}
 
@@ -646,10 +640,14 @@ static int	am_db_flush_results(zbx_am_db_t *amdb)
 				zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, " where alertid=" ZBX_FS_UI64 ";\n",
 						result->alertid);
 
-				if (NULL != (mediatype = zbx_hashset_search(&amdb->mediatypes, &result->mediatypeid)) &&
-						0 != mediatype->process_tags && NULL != result->value)
+				if (EVENT_SOURCE_TRIGGERS == result->source && NULL != result->value)
 				{
-					am_db_update_event_tags(&db_event, &db_problem, result->eventid, result->value);
+					mediatype = zbx_hashset_search(&amdb->mediatypes, &result->mediatypeid);
+					if (NULL != mediatype && 0 != mediatype->process_tags)
+					{
+						am_db_update_event_tags(&db_event, &db_problem, result->eventid,
+								result->value);
+					}
 				}
 
 				DBexecute_overflowed_sql(&sql, &sql_alloc, &sql_offset);
