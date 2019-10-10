@@ -34,6 +34,13 @@ if ($data['type'] == MEDIA_TYPE_WEBHOOK) {
 		$i++;
 	}
 
+	$form_list->addRow(new CLabel(_('Response')),
+		(new CTextArea(''))
+			->setId('webhook_response')
+			->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
+			->setReadonly(true)
+	);
+
 	if (!$i) {
 		$form_list->addRow(_('Webhook does not have parameters.'));
 	}

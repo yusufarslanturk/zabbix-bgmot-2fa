@@ -62,6 +62,19 @@ function mediatypeTestSend(formname) {
 
 			$form_fields.prop('disabled', false);
 
+			var response = ret.response,
+				$resp = jQuery('#webhook_response', form);
+
+			if ($resp.length) {
+				try {
+					response = _json_stringify(response, undefined, 2);
+				} catch (error) {
+					response = error;
+				}
+
+				$resp.val(response);
+			}
+
 			jQuery('.preloader').remove();
 			$submit_btn
 				.prop('disabled', false)

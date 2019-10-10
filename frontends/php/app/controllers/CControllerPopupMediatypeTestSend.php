@@ -145,6 +145,7 @@ class CControllerPopupMediatypeTestSend extends CController {
 
 		if (($messages = getMessages($result, $msg_title)) !== null) {
 			$output['messages'] = $messages->toString();
+			$output['response'] = $result;
 		}
 
 		$this->setResponse((new CControllerResponseData(['main_block' => CJs::encodeJson($output)]))->disableView());
