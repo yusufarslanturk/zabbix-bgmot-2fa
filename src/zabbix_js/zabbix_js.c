@@ -43,7 +43,7 @@ const char	*help_message[] = {
 	"General options:",
 	"  -s,--script script-file      Specify script file name",
 	"  -i,--input input-file        Specify input parameter file name",
-	"  -p,--param  input-param      Specify input parameter",
+	"  -p,--param input-param       Specify input parameter",
 	"  -l,--loglevel log-level      Specify log level",
 	"  -t,--timeout timeout         Specify timeout in seconds",
 	NULL	/* end of text */
