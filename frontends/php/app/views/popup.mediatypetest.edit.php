@@ -35,10 +35,19 @@ if ($data['type'] == MEDIA_TYPE_WEBHOOK) {
 	}
 
 	$form_list->addRow(new CLabel(_('Response')),
-		(new CTextArea(''))
-			->setId('webhook_response')
-			->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
-			->setReadonly(true)
+		[
+			(new CTextArea(''))
+				->setId('webhook_response_value')
+				->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
+				->setReadonly(true),
+			(new CRadioButtonList('webhook_response_type', 'null'))
+				->addValue(_('JSON'), 'object')
+				->addValue(_('String'), 'string')
+				->addValue(_('Boolean'), 'boolean')
+				->addValue(_('Null'), 'NULL')
+				->setReadonly(true)
+				->setModern(true)
+		]
 	);
 
 	if (!$i) {
