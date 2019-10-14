@@ -483,7 +483,7 @@ static void	am_db_update_event_tags(zbx_db_insert_t *db_event, zbx_db_insert_t *
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() eventid:" ZBX_FS_UI64 " tags:%s", __func__, eventid, params);
 
-	result = DBselect("select e.eventid,p.eventid"
+	result = DBselect("select p.eventid"
 			" from events e left join problem p"
 				" on p.eventid=e.eventid"
 			" where e.eventid=" ZBX_FS_UI64, eventid);
@@ -494,7 +494,7 @@ static void	am_db_update_event_tags(zbx_db_insert_t *db_event, zbx_db_insert_t *
 		goto out;
 	}
 
-	if (SUCCEED != DBis_null(row[1]))
+	if (SUCCEED != DBis_null(row[0]))
 		problem = 1;
 
 	if (FAIL == zbx_json_open(params, &jp))
@@ -664,7 +664,6 @@ static int	am_db_flush_results(zbx_am_db_t *amdb)
 			zbx_db_insert_autoincrement(&db_problem, "problemtagid");
 			zbx_db_insert_execute(&db_problem);
 			zbx_db_insert_clean(&db_problem);
-
 		}
 		while (ZBX_DB_DOWN == DBcommit());
 
