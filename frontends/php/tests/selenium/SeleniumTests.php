@@ -23,6 +23,7 @@ require_once dirname(__FILE__).'/testPageDashboard.php';
 require_once dirname(__FILE__).'/testPageDashboardWidgets.php';
 require_once dirname(__FILE__).'/testPageOverview.php';
 require_once dirname(__FILE__).'/testPageLatestData.php';
+require_once dirname(__FILE__).'/testPageLatestDataItemDescription.php';
 require_once dirname(__FILE__).'/testPageWeb.php';
 require_once dirname(__FILE__).'/testPageProblems.php';
 require_once dirname(__FILE__).'/testPageScreens.php';
@@ -167,6 +168,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testPageTriggers');
 		$suite->addTestSuite('testPageTriggerPrototypes');
 		$suite->addTestSuite('testPageLatestData');
+		$suite->addTestSuite('testPageLatestDataItemDescription');
 		$suite->addTestSuite('testPageLowLevelDiscovery');
 		$suite->addTestSuite('testPageMaintenance');
 		$suite->addTestSuite('testPageMaps');
