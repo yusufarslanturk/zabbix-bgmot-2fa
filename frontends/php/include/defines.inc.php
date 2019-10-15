@@ -1792,6 +1792,7 @@ define('ZBX_STYLE_COLUMN_50', 'column-50');
 define('ZBX_STYLE_COLUMN_75', 'column-75');
 define('ZBX_STYLE_COLUMN_90', 'column-90');
 define('ZBX_STYLE_COLUMN_95', 'column-95');
+
 // column visual options
 define('ZBX_STYLE_COLUMN_CENTER', 'column-center');
 define('ZBX_STYLE_COLUMN_MIDDLE', 'column-middle');

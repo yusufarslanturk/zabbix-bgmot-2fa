@@ -4556,6 +4556,13 @@ $form-icon-btn: (
 		@extend %webkit-scrollbar;
 	}
 
+	.hintbox-description {
+		overflow: auto;
+		max-height: 240px;
+		max-width: 800px;
+		@extend %webkit-scrollbar;
+	}
+
 	.msg-bad,
 	.msg-good,
 	.msg-warning {
