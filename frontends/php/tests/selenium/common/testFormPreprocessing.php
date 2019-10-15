@@ -81,20 +81,6 @@ abstract class testFormPreprocessing extends CWebTest {
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
 			],
-			// Structured data. XML XPath.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'XML XPath',
-						'Key' => 'empty-xpath'
-					],
-					'preprocessing' => [
-						['type' => 'XML XPath']
-					],
-					'error' => 'Incorrect value for field "params": cannot be empty.'
-				]
-			],
 			// Arithmetic. Custom multiplier.
 			[
 				[
@@ -400,6 +386,20 @@ abstract class testFormPreprocessing extends CWebTest {
 						['type' => 'Regular expression', 'parameter_1' => 'expression'],
 					],
 					'error' => 'Incorrect value for field "params": second parameter is expected.'
+				]
+			],
+			// Structured data. XML XPath.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'XML XPath',
+						'Key' => 'empty-xpath'
+					],
+					'preprocessing' => [
+						['type' => 'XML XPath']
+					],
+					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
 			],
 			// Structured data. JSONPath.
