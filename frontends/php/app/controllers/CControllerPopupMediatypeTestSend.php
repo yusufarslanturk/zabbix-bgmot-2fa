@@ -151,7 +151,7 @@ class CControllerPopupMediatypeTestSend extends CController {
 			$value = json_decode($result);
 			$decoded = (json_last_error() === JSON_ERROR_NONE);
 			$output['response'] = [
-				'type' => $decoded ? gettype($value) : 'string',
+				'type' => $decoded ? 'object' : 'string',
 				'value' => $decoded ? $value : $result
 			];
 		}

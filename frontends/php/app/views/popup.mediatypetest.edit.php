@@ -43,8 +43,6 @@ if ($data['type'] == MEDIA_TYPE_WEBHOOK) {
 			(new CRadioButtonList('webhook_response_type', 'null'))
 				->addValue(_('JSON'), 'object')
 				->addValue(_('String'), 'string')
-				->addValue(_('Boolean'), 'boolean')
-				->addValue(_('Null'), 'NULL')
 				->setReadonly(true)
 				->setModern(true)
 		]
