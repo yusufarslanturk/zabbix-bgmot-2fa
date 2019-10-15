@@ -241,7 +241,10 @@ function make_event_details($event, $backurl) {
 
 	$table
 		->addRow([_('Tags'), $tags[$event['eventid']]])
-		->addRow([_('Description'), zbx_str2links($event['comments'])]);
+		->addRow([
+			_('Description'),
+			(new CDiv(zbx_str2links($event['comments'])))->addStyle('max-width: '.ZBX_DESCRIPTION_MAX_WIDTH.'px')
+		]);
 
 	return $table;
 }

@@ -1364,6 +1364,8 @@ define('ZBX_ACTION_ADD',		0);
 define('ZBX_ACTION_REPLACE',	1);
 define('ZBX_ACTION_REMOVE',		2);
 
+define('ZBX_DESCRIPTION_MAX_WIDTH', 800);
+
 // Maximum width for popups in Actions column for problems.
 define('ZBX_ACTIONS_POPUP_MAX_WIDTH',			800);
 
