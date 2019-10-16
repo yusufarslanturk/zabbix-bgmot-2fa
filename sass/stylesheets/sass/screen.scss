@@ -1754,7 +1754,7 @@ output {
 	@extend .multiselect-suggest;
 }
 
-.available {
+.multiselect-available {
 	position: absolute;
 	z-index: 20000;
 	border: 1px solid $action-border-color;
