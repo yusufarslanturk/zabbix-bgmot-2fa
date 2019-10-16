@@ -249,7 +249,7 @@ function getUniqueId() {
 }
 
 /**
- * Color palette object used for geting different colors from color palette.
+ * Color palette object used for getting different colors from color palette.
  */
 var colorPalette = (function() {
 	'use strict';

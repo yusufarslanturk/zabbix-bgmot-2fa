@@ -749,7 +749,7 @@ class CIntegrationTest extends CAPITest {
 			throw $exception;
 		}
 
-		$this->fail('Data requested from '.$method.' API is not present withing specified interval. Params used:'.
+		$this->fail('Data requested from '.$method.' API is not present within specified interval. Params used:'.
 				"\n".json_encode($params)
 		);
 	}

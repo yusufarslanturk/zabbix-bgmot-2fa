@@ -2937,7 +2937,7 @@ class CAction extends CApiService {
 			}
 		}
 
-		// Validate conditions and operations in regard to whats in database now.
+		// Validate conditions and operations in regard to what's in database now.
 		if ($conditionsToValidate) {
 			$this->validateConditionsPermissions($conditionsToValidate);
 		}
@@ -3277,7 +3277,7 @@ class CAction extends CApiService {
 	 * @throws APIException if the user doesn't have write permissions for the given host groups
 	 *
 	 * @param array $groupids
-	 * @param tring $error
+	 * @param string $error
 	 */
 	private function checkHostGroupsPermissions(array $groupids, $error) {
 		if ($groupids) {
@@ -3301,7 +3301,7 @@ class CAction extends CApiService {
 	 * @throws APIException if the user doesn't have write permissions for the given hosts
 	 *
 	 * @param array $hostids
-	 * @param tring $error
+	 * @param string $error
 	 */
 	private function checkHostsPermissions(array $hostids, $error) {
 		if ($hostids) {
