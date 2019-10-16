@@ -1102,7 +1102,8 @@ output {
     .multiselect .multiselect-list li {
       display: inline-block;
       margin: 2px 14px 0 0;
-      white-space: nowrap; }
+      white-space: nowrap;
+      cursor: default; }
       .multiselect .multiselect-list li .subfilter-enabled {
         padding: 0 9px 0 4px;
         line-height: 18px; }
@@ -1169,11 +1170,8 @@ output {
 
 .available {
   position: absolute;
-  z-index: 1000;
-  margin-top: 1px;
+  z-index: 20000;
   border: 1px solid #ccd5d9;
-  border-top: none;
-  max-height: 400px;
   overflow-y: auto;
   -webkit-box-shadow: 0 6px 10px 0 rgba(118, 141, 153, 0.5);
   -moz-box-shadow: 0 6px 10px 0 rgba(118, 141, 153, 0.5);
