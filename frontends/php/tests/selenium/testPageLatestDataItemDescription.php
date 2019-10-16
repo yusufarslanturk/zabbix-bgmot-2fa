@@ -34,53 +34,35 @@ class testPageLatestDataItemDescription extends CWebTest {
 			[
 				[
 					'Item name' => 'item_testPageHistory_CheckLayout_Log_2',
-					'Description' => 'Non-clickable description',
-					'Icon' => true
+					'description' => 'Non-clickable description'
 				]
 			],
 			// Item with only 1 url in description.
 			[
 				[
 					'Item name' => 'item_testPageHistory_CheckLayout_Eventlog',
-					'URLs' => [
-						'https://zabbix.com'
-					],
-					'Icon' => true
+					'description' => 'https://zabbix.com'
 				]
 			],
 			// Item with text and url in description.
 			[
 				[
 					'Item name' => 'item_testPageHistory_CheckLayout_Eventlog_2',
-					'Description' => 'The following url should be clickable: ',
-					'URLs' => [
-						'https://zabbix.com'
-					],
-					'Icon' => true
+					'description' => 'The following url should be clickable: https://zabbix.com'
 				]
 			],
 			// Item with multiple urls in description.
 			[
 				[
 					'Item name' => 'item_testPageHistory_CheckLayout_Character',
-					'URLs' => [
-						'https://zabbix.com',
-						'https://www.zabbix.com/career',
-						'https://www.zabbix.com/contact'
-					],
-					'Icon' => true
+					'description' => 'http://zabbix.com https://www.zabbix.com/career https://www.zabbix.com/contact'
 				]
 			],
 			// Item with text and 2 urls in description.
 			[
 				[
 					'Item name' => 'item_testPageHistory_CheckLayout_Text',
-					'Description' => 'These urls should be clickable: ',
-					'URLs' => [
-						'https://zabbix.com',
-						'https://www.zabbix.com/career'
-					],
-					'Icon' => true
+					'description' => 'These urls should be clickable: https://zabbix.com https://www.zabbix.com/career',
 				]
 			]
 		];
@@ -89,43 +71,36 @@ class testPageLatestDataItemDescription extends CWebTest {
 	/**
 	 * @dataProvider getLatestData
 	 */
-	public function testHostAvailabilityWidget_Create($data) {
+	public function testPageLatestDataItemDescription_Create($data) {
 		// Open Latest data for host 'testPageHistory_CheckLayout'
 		$this->page->login()->open('latest.php?hostids%5B%5D=15003&application=&select=&show_without_data=1&filter_set=1');
-		$output = $this->query('class:overflow-ellipsis')->asTable()->one();
+		$table = $this->query('class:list-table')->asTable()->one();
 
 		// Find rows from the data provider and click on the description icon if such should persist.
-		foreach ($output->getRows() as $row) {
-			if ($row->query("xpath:.//span[text()='".$data['Item name']."']")->count() === 1) {
-				if (CTestArrayHelper::get($data,'Icon', false)) {
+		foreach ($table->getRows() as $row) {
+			if ($row->query('xpath:.//span[text()="'.$data['Item name'].'"]')->count() === 1) {
+				if (CTestArrayHelper::get($data,'description', false)) {
 					$row->query('class:icon-description')->one()->click()->waitUntilReady();
-					// Construct the expected content of the tooltip from the urls and descriptions in data provider.
-					$expected = null;
-					if (array_key_exists('Description', $data)) {
-						$expected = $data['Description'];
-					}
-					if (array_key_exists('URLs', $data)) {
-						$expected = $expected.$data['URLs'][0];
-						if (sizeof($data['URLs']) > 1) {
-							for ($i = 1; $i < sizeof($data['URLs']); $i++) {
-								$expected = $expected.' '.$data['URLs'][$i];
-							}
-						}
-						// Verify that each of the urls is clickable.
-						foreach ($data['URLs'] as $url) {
-							$this->assertTrue($this->query("xpath://div[@class = 'overlay-dialogue']/a[@href='".$url."']")->one()->isClickable());
-						}
-					}
+					$overlay = $this->query('xpath://div[@class="overlay-dialogue"]')->one();
+
 					// Verify the real description with the expected one.
-					$this->assertEquals($expected, $this->query("xpath://div[@class = 'overlay-dialogue']")->one()->getText());
+					$this->assertEquals($data['description'], $overlay->getText());
+
+					// Get urls form description.
+					$urls = [];
+					preg_match_all('/https?:\/\/\S+/', $data['description'], $urls);
+					// Verify that each of the urls is clickable.
+					foreach ($urls[0] as $url) {
+						$this->assertTrue($overlay->query('xpath:./a[@href="'.$url.'"]')->one()->isClickable());
+					}
 
 					// Verify that the tool-tip can be closed.
-					$this->query("xpath://div[@class = 'overlay-dialogue']/button[@title='Close']")->one()->click();
-					$this->assertTrue($this->query("xpath://div[@class = 'overlay-dialogue']")->count() === 0);
+					$overlay->query('xpath:./button[@title="Close"]')->one()->click();
+					$this->assertFalse($overlay->isDisplayed());
 				}
 				// If the item has no description the description icon should not be there.
 				else {
-					$this->assertTrue($row->query("xpath:.//span[contains(@class, 'icon-description')]")->count() === 0);
+					$this->assertTrue($row->query('class:icon-description')->count() === 0);
 				}
 			}
 		}
