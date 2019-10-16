@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"zabbix.com/internal/agent"
+	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/zbxcomms"
 )
@@ -15,8 +16,8 @@ import (
 // Plugin -
 type Plugin struct {
 	plugin.Base
-	timeout   time.Duration
 	localAddr net.Addr
+	options   plugin.Options
 }
 
 type queue struct {
@@ -42,7 +43,7 @@ var impl Plugin
 func (p *Plugin) getRemoteZabbixStats(addr string, req []byte) ([]byte, error) {
 	var parse response
 
-	resp, err := zbxcomms.Exchange(addr, &p.localAddr, p.timeout, req)
+	resp, err := zbxcomms.Exchange(addr, &p.localAddr, time.Duration(p.options.Timeout)*time.Second, req)
 
 	if err != nil {
 		return nil, fmt.Errorf("Cannot obtain internal statistics: %s", err)
@@ -132,8 +133,10 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 }
 
 // Configure -
-func (p *Plugin) Configure(options map[string]string) {
-	p.timeout = time.Second * time.Duration(agent.Options.Timeout)
+func (p *Plugin) Configure(options interface{}) {
+	if err := conf.Unmarshal(options, &p.options); err != nil {
+		p.Warningf("cannot unmarshal configuration options: %s", err)
+	}
 	p.localAddr = &net.TCPAddr{IP: net.ParseIP(agent.Options.SourceIP), Port: 0}
 }
 

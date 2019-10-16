@@ -28,6 +28,7 @@ import (
 	"time"
 
 	"zabbix.com/internal/agent"
+	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/itemutil"
 	"zabbix.com/pkg/log"
 	"zabbix.com/pkg/plugin"
@@ -168,10 +169,10 @@ func (p *mockRunnerWatcherPlugin) watched() []*plugin.Request {
 type mockConfiguratorPlugin struct {
 	plugin.Base
 	mockPlugin
-	options map[string]string
+	options interface{}
 }
 
-func (p *mockConfiguratorPlugin) Configure(options map[string]string) {
+func (p *mockConfiguratorPlugin) Configure(options interface{}) {
 	p.call("$configure")
 }
 
@@ -540,7 +541,7 @@ func (t *mockWatcherTask) GlobalRegexp() plugin.RegexpMatcher {
 type mockConfigerTask struct {
 	taskBase
 	sink    chan performer
-	options map[string]string
+	options interface{}
 }
 
 func (t *mockConfigerTask) perform(s Scheduler) {
@@ -1688,11 +1689,14 @@ func TestPassiveRunner(t *testing.T) {
 func TestConfigurator(t *testing.T) {
 	_ = log.Open(log.Console, log.Debug, "", 0)
 
-	options := map[string]map[string]string{
-		"Debug1": map[string]string{"delay": "5"},
-		"Debug2": map[string]string{"delay": "30"},
-		"Debug3": map[string]string{"delay": "60"},
-	}
+	options := make(map[string]interface{})
+	opt1 := map[string]string{"delay": "5"}
+	options["Debug1"], _ = conf.Marshal(&opt1)
+	opt2 := map[string]string{"delay": "30"}
+	options["Debug2"], _ = conf.Marshal(&opt2)
+	opt3 := map[string]string{"delay": "60"}
+	options["Debug3"], _ = conf.Marshal(&opt3)
+
 	agent.Options.Plugins = options
 
 	manager := mockManager{sink: make(chan performer, 10)}

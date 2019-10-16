@@ -25,20 +25,29 @@ import (
 	"time"
 	"unsafe"
 
-	"zabbix.com/internal/agent"
+	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/glexpr"
 	"zabbix.com/pkg/itemutil"
 	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/zbxlib"
 )
 
+type Options struct {
+	Common            plugin.Options
+	MaxLinesPerSecond int
+}
+
 // Plugin -
 type Plugin struct {
 	plugin.Base
+	options Options
 }
 
-func (p *Plugin) Configure(options map[string]string) {
-	zbxlib.SetMaxLinesPerSecond(agent.Options.MaxLinesPerSecond)
+func (p *Plugin) Configure(options interface{}) {
+	if err := conf.Unmarshal(options, &p.options); err != nil {
+		p.Warningf("cannot unmarshal configuration options: %s", err)
+	}
+	zbxlib.SetMaxLinesPerSecond(p.options.MaxLinesPerSecond)
 }
 
 type metadata struct {

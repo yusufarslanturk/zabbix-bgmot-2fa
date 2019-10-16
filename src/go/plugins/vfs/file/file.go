@@ -21,9 +21,8 @@ package file
 
 import (
 	"errors"
-	"time"
 
-	"zabbix.com/internal/agent"
+	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/std"
 )
@@ -31,7 +30,7 @@ import (
 // Plugin -
 type Plugin struct {
 	plugin.Base
-	timeout time.Duration
+	options plugin.Options
 }
 
 var impl Plugin
@@ -56,8 +55,10 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	}
 }
 
-func (p *Plugin) Configure(options map[string]string) {
-	p.timeout = time.Duration(agent.Options.Timeout) * time.Second
+func (p *Plugin) Configure(options interface{}) {
+	if err := conf.Unmarshal(options, &p.options); err != nil {
+		p.Warningf("cannot unmarshal configuration options: %s", err)
+	}
 }
 
 var stdOs std.Os

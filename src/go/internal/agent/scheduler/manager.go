@@ -25,11 +25,11 @@ import (
 	"fmt"
 	"math"
 	"sort"
-	"strconv"
 	"time"
 
 	"zabbix.com/internal/agent"
 	"zabbix.com/internal/monitor"
+	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/glexpr"
 	"zabbix.com/pkg/itemutil"
 	"zabbix.com/pkg/log"
@@ -289,6 +289,10 @@ run:
 	monitor.Unregister()
 }
 
+type pluginCapacity struct {
+	Capacity int `conf:"optional"`
+}
+
 func (m *Manager) init() {
 	m.input = make(chan interface{}, 10)
 	m.pluginQueue = make(pluginHeap, 0, len(plugin.Metrics))
@@ -308,15 +312,20 @@ func (m *Manager) init() {
 	for _, metric := range metrics {
 		if metric.Plugin != pagent.impl {
 			capacity := metric.Plugin.Capacity()
-			if options, ok := agent.Options.Plugins[metric.Plugin.Name()]; ok {
-				if cap, ok := options["Capacity"]; ok {
-					var err error
-					if capacity, err = strconv.Atoi(cap); err != nil {
-						log.Warningf("invalid configuration parameter Plugins.%s.Capacity value '%s', using default %d",
-							metric.Plugin.Name(), cap, plugin.DefaultCapacity)
+			var opts pluginCapacity
+			optsRaw := agent.Options.Plugins[metric.Plugin.Name()]
+			if optsRaw != nil {
+				if err := conf.Unmarshal(optsRaw, &opts, false); err != nil {
+					log.Warningf("invalid plugin %s configuration: %s", metric.Plugin.Name(), err)
+					log.Warningf("using default plugin capacity settings: %d", plugin.DefaultCapacity)
+					capacity = plugin.DefaultCapacity
+				} else {
+					if opts.Capacity != 0 {
+						capacity = opts.Capacity
 					}
 				}
 			}
+
 			if capacity > metric.Plugin.Capacity() {
 				log.Warningf("lowering the plugin %s capacity to %d as the configured capacity %d exceeds limits",
 					metric.Plugin.Name(), metric.Plugin.Capacity(), capacity)

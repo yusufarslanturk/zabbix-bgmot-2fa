@@ -106,11 +106,16 @@ func (t *collectorTask) perform(s Scheduler) {
 
 func (t *collectorTask) reschedule(now time.Time) (err error) {
 	collector, _ := t.plugin.impl.(plugin.Collector)
-	period := collector.Period()
+	period := int64(collector.Period())
 	if period == 0 {
 		return fmt.Errorf("invalid collector interval 0 seconds")
 	}
-	t.scheduled = time.Unix(now.Unix()+int64(t.seed)%int64(period)+1, priorityCollectorTaskNs)
+	seconds := now.Unix()
+	nextcheck := period*(seconds/period) + int64(t.seed)%period
+	for nextcheck <= seconds {
+		nextcheck += period
+	}
+	t.scheduled = time.Unix(nextcheck, priorityCollectorTaskNs)
 	return
 }
 
@@ -407,7 +412,7 @@ func (t *watcherTask) GlobalRegexp() plugin.RegexpMatcher {
 
 type configuratorTask struct {
 	taskBase
-	options map[string]string
+	options interface{}
 }
 
 func (t *configuratorTask) perform(s Scheduler) {

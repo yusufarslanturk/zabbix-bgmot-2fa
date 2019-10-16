@@ -24,25 +24,33 @@ import (
 	"time"
 
 	"zabbix.com/internal/agent"
+	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/zbxcmd"
 )
 
+type Options struct {
+	Common               plugin.Options
+	enableRemoteCommands int
+}
+
 // Plugin -
 type Plugin struct {
 	plugin.Base
-	enableRemoteCommands int
+	options Options
 }
 
 var impl Plugin
 
-func (p *Plugin) Configure(options map[string]string) {
-	p.enableRemoteCommands = agent.Options.EnableRemoteCommands
+func (p *Plugin) Configure(options interface{}) {
+	if err := conf.Unmarshal(options, &p.options); err != nil {
+		p.Warningf("cannot unmarshal configuration options: %s", err)
+	}
 }
 
 // Export -
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
-	if p.enableRemoteCommands != 1 {
+	if p.options.enableRemoteCommands != 1 {
 		return nil, fmt.Errorf("Remote commands are not enabled.")
 	}
 

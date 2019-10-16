@@ -52,7 +52,7 @@ type Watcher interface {
 
 // Configurator - interface for plugin configuration in agent conf files
 type Configurator interface {
-	Configure(options map[string]string)
+	Configure(options interface{})
 }
 
 type ResultWriter interface {
@@ -112,4 +112,8 @@ type Request struct {
 	Delay       string  `json:"delay"`
 	LastLogsize *uint64 `json:"lastlogsize"`
 	Mtime       *int    `json:"mtime"`
+}
+
+type Options struct {
+	Timeout int
 }

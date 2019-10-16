@@ -20,17 +20,21 @@
 package empty
 
 import (
-	"strconv"
-
+	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/std"
 )
 
+type Options struct {
+	Common   plugin.Options
+	Interval int
+}
+
 // Plugin -
 type Plugin struct {
 	plugin.Base
-	interval int
-	counter  int
+	counter int
+	options Options
 }
 
 var impl Plugin
@@ -48,21 +52,20 @@ func (p *Plugin) Collect() error {
 }
 
 func (p *Plugin) Period() int {
-	return p.interval
+	p.Debugf("period: interval=%d", p.options.Interval)
+	return p.options.Interval
 }
 
-func (p *Plugin) Configure(options map[string]string) {
-	p.Debugf("configure")
-	p.interval = 10
-	if options != nil {
-		if val, ok := options["Interval"]; ok {
-			p.interval, _ = strconv.Atoi(val)
-		}
+func (p *Plugin) Configure(options interface{}) {
+	p.options.Interval = 10
+	if err := conf.Unmarshal(options, &p.options); err != nil {
+		p.Warningf("cannot unmarshal configuration options: %s", err)
 	}
+	p.Debugf("configure: interval=%d", p.options.Interval)
 }
 
 func init() {
 	stdOs = std.NewOs()
-	impl.interval = 1
+	impl.options.Interval = 1
 	plugin.RegisterMetrics(&impl, "DebugCollector", "debug.collector", "Returns empty value.")
 }
