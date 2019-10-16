@@ -883,7 +883,7 @@
 		});
 
 		/**
-		 * Compact affected widgets removing empty space between them when possible. Additionally buid overlap array
+		 * Compact affected widgets removing empty space between them when possible. Additionally build overlap array
 		 * which will contain maximal coordinate occupied by widgets on every opposite axis line.
 		 */
 		affected.each(function(box) {

@@ -1686,7 +1686,7 @@ class testDiscoveryRule extends CAPITest {
 				],
 				'expected_error' => null
 			],
-			'Test successful update by not chaning existing records by giving lld_macro_pathid and same lld_macro' => [
+			'Test successful update by not changing existing records by giving lld_macro_pathid and same lld_macro' => [
 				'discoveryrule' => [
 					'itemid' => '110007',
 					'lld_macro_paths' => [
