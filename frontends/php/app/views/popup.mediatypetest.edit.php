@@ -34,19 +34,17 @@ if ($data['type'] == MEDIA_TYPE_WEBHOOK) {
 		$i++;
 	}
 
-	$form_list->addRow(new CLabel(_('Response')),
-		[
-			(new CTextArea(''))
-				->setId('webhook_response_value')
-				->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
-				->setReadonly(true),
-			(new CRadioButtonList('webhook_response_type', 'null'))
-				->addValue(_('JSON'), 'object')
-				->addValue(_('String'), 'string')
-				->setReadonly(true)
-				->setModern(true)
-		]
-	);
+	$form_list->addRow(new CLabel(_('Response')), [
+		(new CTextArea(''))
+			->setId('webhook_response_value')
+			->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
+			->setReadonly(true),
+		(new CRadioButtonList('webhook_response_type', 'null'))
+			->addValue(_('JSON'), 'object')
+			->addValue(_('String'), 'string')
+			->setReadonly(true)
+			->setModern(true)
+	]);
 
 	if (!$i) {
 		$form_list->addRow(_('Webhook does not have parameters.'));
