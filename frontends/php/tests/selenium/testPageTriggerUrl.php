@@ -55,7 +55,7 @@ class testPageTriggerUrl extends CWebTest {
 
 		$table = $widget->getContent()->asTable();
 		// Get row of trigger "1_trigger_Not_classified".
-		$row = $table->getRows()->get(3);
+		$row = $table->findRow('Triggers', '1_trigger_Not_classified');
 		// Open trigger context menu.
 		$row->query('xpath://td[contains(@class, "na-bg")]')->one()->click();
 		$this->checkTriggerUrl();
@@ -67,9 +67,8 @@ class testPageTriggerUrl extends CWebTest {
 	public function testPageTriggerUrl_ProblemsPage() {
 		$this->page->login()->open('zabbix.php?action=problem.view');
 		$table = $this->query('class:list-table')->asTable()->one();
-		$row = $table->findRow('Problem', $this->trigger);
 		// Open trigger context menu.
-		$row->query('link', $this->trigger)->one()->click();
+		$table->query('link', $this->trigger)->one()->click();
 		$this->checkTriggerUrl();
 	}
 
@@ -81,7 +80,7 @@ class testPageTriggerUrl extends CWebTest {
 
 		$table = $this->query('class:list-table')->asTable()->one();
 		// Get row of trigger "1_trigger_Not_classified".
-		$row = $table->getRows()->get(3);
+		$row = $table->findRow('Triggers', '1_trigger_Not_classified');
 
 		// Open trigger context menu.
 		$row->query('xpath://td[contains(@class, "na-bg")]')->one()->click();
@@ -108,14 +107,14 @@ class testPageTriggerUrl extends CWebTest {
 
 		$table = $this->query('class:list-table')->asTable()->one();
 		// Get row of trigger "1_trigger_Average".
-		$row = $table->getRows()->get(0);
+		$row = $table->findRow('Triggers', '1_trigger_Average');
 
 		// Open trigger context menu.
 		$row->query('xpath://td[contains(@class, "normal-bg")]')->one()->click();
 		$popup = CPopupMenuElement::find()->waitUntilVisible()->one();
 
 		// Make sure trigger url not visible, when EVENT.ID macro can't be resolved.
-		$this->assertEquals(['TRIGGER', 'HISTORY'], $popup->getTitlesText());
+		$this->assertEquals(['TRIGGER', 'HISTORY'], $popup->getTitles()->asText());
 
 		// Reset filter.
 		$form->query('button:Reset')->one()->click();
@@ -141,14 +140,14 @@ class testPageTriggerUrl extends CWebTest {
 
 		$table = $this->query('class:list-table')->asTable()->one();
 		// Get row of trigger "3_trigger_Disaster".
-		$row = $table->getRows()->get(0);
+		$row = $table->findRow('Triggers', '3_trigger_Disaster');
 
 		// Open trigger context menu.
 		$row->query('xpath://td[contains(@class, "normal-bg")]')->one()->click();
 		$popup = CPopupMenuElement::find()->waitUntilVisible()->one();
 
 		// Make sure trigger url is visible.
-		$this->assertEquals(['TRIGGER', 'LINKS', 'HISTORY'], $popup->getTitlesText());
+		$this->assertTrue($popup->hasTitles(['TRIGGER', 'LINKS', 'HISTORY']));
 		$popup->fill('Trigger URL');
 		// Check opened page.
 		$this->assertEquals('Triggers', $this->query('tag:h1')->waitUntilVisible()->one()->getText());
@@ -165,7 +164,7 @@ class testPageTriggerUrl extends CWebTest {
 				CXPathHelper::escapeQuotes($name).']/../../..')->one()->waitUntilPresent();
 		$table = $screen_item->query('class:list-table')->asTable()->one();
 		// Get row of trigger "1_trigger_Not_classified".
-		$row = $table->getRows()->get(3);
+		$row = $table->findRow('Triggers', '1_trigger_Not_classified');
 
 		// Open trigger context menu.
 		$row->query('xpath://td[contains(@class, "na-bg")]')->one()->click();
@@ -214,17 +213,17 @@ class testPageTriggerUrl extends CWebTest {
 	/**
 	 * Follow trigger url and check opened page.
 	 *
-	 * @param boolean $popup_menu		context menu or overlay dialogue
+	 * @param boolean $popup_menu		trigger context menu popup exist
 	 */
 	private function checkTriggerUrl($popup_menu = true) {
 		if ($popup_menu) {
 			// Check trigger popup menu.
 			$popup = CPopupMenuElement::find()->waitUntilVisible()->one();
-			$this->assertEquals(['TRIGGER', 'LINKS', 'HISTORY'], $popup->getTitlesText());
+			$this->assertTrue($popup->hasTitles(['TRIGGER', 'LINKS', 'HISTORY']));
 			$popup->fill('Trigger URL');
 		}
 		else {
-			// Follow trigger link in overlay dialogue..
+			// Follow trigger link in overlay dialogue.
 			$hintbox = $this->query('xpath://div[@class="overlay-dialogue"]')->one();
 			$hintbox->query('link', $this->url)->one()->click();
 		}
