@@ -110,6 +110,7 @@ require_once dirname(__FILE__).'/testFormSysmap.php';
 require_once dirname(__FILE__).'/testFormTrigger.php';
 require_once dirname(__FILE__).'/testFormTriggerTags.php';
 require_once dirname(__FILE__).'/testFormTemplate.php';
+require_once dirname(__FILE__).'/testFormTemplateMacros.php';
 require_once dirname(__FILE__).'/testFormTemplateTags.php';
 require_once dirname(__FILE__).'/testFormTriggerPrototype.php';
 require_once dirname(__FILE__).'/testFormUser.php';
@@ -233,6 +234,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testFormScreen');
 		$suite->addTestSuite('testFormSysmap');
 		$suite->addTestSuite('testFormTemplate');
+		$suite->addTestSuite('testFormTemplateMacros');
 		$suite->addTestSuite('testFormTemplateTags');
 		$suite->addTestSuite('testFormTrigger');
 		$suite->addTestSuite('testFormTriggerTags');
