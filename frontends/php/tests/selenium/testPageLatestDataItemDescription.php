@@ -71,38 +71,38 @@ class testPageLatestDataItemDescription extends CWebTest {
 	/**
 	 * @dataProvider getLatestData
 	 */
-	public function testPageLatestDataItemDescription_Create($data) {
+	public function testPageLatestDataItemDescription_checkItemDescription($data) {
 		// Open Latest data for host 'testPageHistory_CheckLayout'
 		$this->page->login()->open('latest.php?hostids%5B%5D=15003&application=&select=&show_without_data=1&filter_set=1');
 		$table = $this->query('class:list-table')->asTable()->one();
 
 		// Find rows from the data provider and click on the description icon if such should persist.
-		foreach ($table->getRows() as $row) {
-			if ($row->query('xpath:.//span[text()="'.$data['Item name'].'"]')->count() === 1) {
-				if (CTestArrayHelper::get($data,'description', false)) {
-					$row->query('class:icon-description')->one()->click()->waitUntilReady();
-					$overlay = $this->query('xpath://div[@class="overlay-dialogue"]')->one();
+		$xpath = './/div[@class="action-container"]/span[text()='.
+				CXPathHelper::escapeQuotes($data['Item name']).']/../..';
+		$row = $table->query('xpath', $xpath)->asTableRow(['parent' => $table])->one();
 
-					// Verify the real description with the expected one.
-					$this->assertEquals($data['description'], $overlay->getText());
+		if (CTestArrayHelper::get($data,'description', false)) {
+			$row->query('class:icon-description')->one()->click()->waitUntilReady();
+			$overlay = $this->query('xpath://div[@class="overlay-dialogue"]')->one();
 
-					// Get urls form description.
-					$urls = [];
-					preg_match_all('/https?:\/\/\S+/', $data['description'], $urls);
-					// Verify that each of the urls is clickable.
-					foreach ($urls[0] as $url) {
-						$this->assertTrue($overlay->query('xpath:./a[@href="'.$url.'"]')->one()->isClickable());
-					}
+			// Verify the real description with the expected one.
+			$this->assertEquals($data['description'], $overlay->getText());
 
-					// Verify that the tool-tip can be closed.
-					$overlay->query('xpath:./button[@title="Close"]')->one()->click();
-					$this->assertFalse($overlay->isDisplayed());
-				}
-				// If the item has no description the description icon should not be there.
-				else {
-					$this->assertTrue($row->query('class:icon-description')->count() === 0);
-				}
+			// Get urls form description.
+			$urls = [];
+			preg_match_all('/https?:\/\/\S+/', $data['description'], $urls);
+			// Verify that each of the urls is clickable.
+			foreach ($urls[0] as $url) {
+				$this->assertTrue($overlay->query('xpath:./a[@href="'.$url.'"]')->one()->isClickable());
 			}
+
+			// Verify that the tool-tip can be closed.
+			$overlay->query('xpath:./button[@title="Close"]')->one()->click();
+			$this->assertFalse($overlay->isDisplayed());
+		}
+		// If the item has no description the description icon should not be there.
+		else {
+			$this->assertTrue($row->query('class:icon-description')->count() === 0);
 		}
 	}
 }
