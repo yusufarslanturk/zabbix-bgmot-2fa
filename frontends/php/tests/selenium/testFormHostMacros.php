@@ -28,9 +28,30 @@ class testFormHostMacros extends testFormMacros {
 	use MacrosTrait;
 
 	/**
+	* The id of the host for updating macros.
+	*
+	* @var string
+	*/
+	protected $hostid = '20006';
+
+	/**
+	* The name of the host for updating macros.
+	*
+	* @var string
+	*/
+	protected $host_name = 'Host for trigger description macros';
+
+	/**
 	 * @dataProvider getCreateCommonMacrosData
 	 */
 	public function testFormHostMacros_Create($data) {
 		$this->checkCreate($data, 'host');
+	}
+
+	/**
+	 * @dataProvider getUpdateCommonMacrosData
+	 */
+	public function testFormHostMacros_Update($data) {
+		$this->checkUpdate($data, 'host', $this->hostid, $this->host_name);
 	}
 }

@@ -28,9 +28,30 @@ class testFormTemplateMacros extends testFormMacros {
 	use MacrosTrait;
 
 	/**
+	* The id of the template for updating macros.
+	*
+	* @var string
+	*/
+	protected $templateid = '40000';
+
+	/**
+	* The name of the template for updating macros.
+	*
+	* @var string
+	*/
+	protected $template_name = 'Form test template';
+
+	/**
 	 * @dataProvider getCreateCommonMacrosData
 	 */
 	public function testFormTemplateMacros_Create($data) {
 		$this->checkCreate($data, 'template');
+	}
+
+	/**
+	 * @dataProvider getUpdateCommonMacrosData
+	 */
+	public function testFormTemplateMacros_Update($data) {
+		$this->checkUpdate($data, 'template', $this->templateid, $this->template_name);
 	}
 }
