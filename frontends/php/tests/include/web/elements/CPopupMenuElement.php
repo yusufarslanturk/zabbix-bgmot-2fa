@@ -59,15 +59,6 @@ class CPopupMenuElement extends CElement {
 	}
 
 	/**
-	 * Get titles text of popup.
-	 *
-	 * @return array
-	 */
-	public function getTitlesText() {
-		return $this->query('xpath:.//h3')->all()->asText();
-	}
-
-	/**
 	 * Get collection of menu items.
 	 *
 	 * @return CElementCollection
