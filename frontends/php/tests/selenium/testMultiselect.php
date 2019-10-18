@@ -23,18 +23,21 @@ require_once dirname(__FILE__).'/../include/CWebTest.php';
 class testMultiselect extends CWebTest {
 
 	public function testMultiselect_SuggestExisting() {
-		$this->checkSuggest('zabbix.php?action=problem.view',
-			'zbx_filter', 'Host groups', 'z', 'multiselect-suggest');
+		$this->checkSuggest('zabbix.php?action=problem.view', 'zbx_filter',
+			'Host groups', 'z', 'multiselect-suggest'
+		);
 	}
 
 	public function testMultiselect_SuggestNoMatches() {
-		$this->checkSuggest('zabbix.php?action=problem.view',
-			'zbx_filter', 'Host groups', 'QQQ', 'multiselect-matches');
+		$this->checkSuggest('zabbix.php?action=problem.view','zbx_filter',
+			'Host groups', 'QQQ', 'multiselect-matches'
+		);
 	}
 
 	public function testMultiselect_SuggestCreateNew() {
-		$this->checkSuggest('hosts.php?form=create',
-			'hostsForm', 'Groups', 'QQQwww', 'multiselect-suggest');
+		$this->checkSuggest('hosts.php?form=create', 'hostsForm',
+			'Groups', 'QQQwww', 'multiselect-suggest'
+		);
 	}
 
 	public function checkSuggest($link, $query, $name, $string, $class) {
@@ -46,13 +49,16 @@ class testMultiselect extends CWebTest {
 		$element->type($string);
 		$this->query('class', $class)->waitUntilVisible();
 
-		$this->assertScreenshotExcept($element->parents('class:table-forms')->one(), [$element], $string);
+		$this->assertScreenshotExcept($element->parents('class:table-forms')->one(),
+			[$element], $string
+		);
 	}
 
 	public function testMultiselect_SuggestInOverlay() {
 		$this->page->login()->open('zabbix.php?action=dashboard.list');
 		$this->query('button:Create dashboard')->one()->click();
-		$dialog = $this->query('id:overlay_dialogue')->waitUntilVisible()->asOverlayDialog()->one()->waitUntilReady();
+		$dialog = $this->query('id:overlay_dialogue')->waitUntilVisible()
+			->asOverlayDialog()->one()->waitUntilReady();
 		$this->assertEquals('Dashboard properties', $dialog->getTitle());
 		$dialog->close();
 		$dashboard = CDashboardElement::find()->one();
