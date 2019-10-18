@@ -87,8 +87,10 @@ class testPageTriggerUrl extends CWebTest {
 		$this->checkTriggerUrl();
 	}
 
-	/*
+	/**
 	 * Check resolved trigger context menu on overview page, when {EVENT.ID} macro can't be resolved.
+	 *
+	 * @on-after resetFilter
 	 */
 	public function testPageTriggerUrl_OverviewPageResolvedTrigger() {
 		$filter = [
@@ -115,10 +117,10 @@ class testPageTriggerUrl extends CWebTest {
 
 		// Make sure trigger url not visible, when EVENT.ID macro can't be resolved.
 		$this->assertEquals(['TRIGGER', 'HISTORY'], $popup->getTitles()->asText());
+	}
 
-		// Reset filter.
-		$form->query('button:Reset')->one()->click();
-		$this->page->waitUntilReady();
+	public function resetFilter() {
+		DBexecute('DELETE FROM profiles WHERE idx LIKE \'%web.overview.filter%\'');
 	}
 
 	/*
