@@ -78,6 +78,7 @@ class CPage {
 		);
 
 		CElementQuery::setPage($this);
+		$this->setViewport(self::DEFAULT_PAGE_WIDTH, self::DEFAULT_PAGE_HEIGHT);
 	}
 
 	/**
