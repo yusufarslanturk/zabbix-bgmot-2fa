@@ -232,7 +232,7 @@ out:
   name: 'VALUE'
   return: SUCCEED
 ---
-test case: 'Success: {ABC.EFG}' 
+test case: 'Success: {ABC.EFG}'
 in:
   expression: '{ABC.EFG}'
 out:
@@ -241,85 +241,85 @@ out:
   macro: 'ABC.EFG'
   return: SUCCEED
 ---
-test case: 'Failure: {}' 
+test case: 'Failure: {}'
 in:
   expression: '{}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {abc}' 
+test case: 'Failure: {abc}'
 in:
   expression: '{abc}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {ABC }' 
+test case: 'Failure: {ABC }'
 in:
   expression: '{ABC }'
 out:
   return: FAIL
 ---
-test case: "Failure: {ABC.'xyz'}" 
+test case: "Failure: {ABC.'xyz'}"
 in:
   expression: "{ABC.'xyz'}"
 out:
   return: FAIL
 ---
-test case: 'Failure: {ABC."xyz}' 
+test case: 'Failure: {ABC."xyz}'
 in:
   expression: '{ABC."xyz}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {ABC.""}' 
+test case: 'Failure: {ABC.""}'
 in:
   expression: '{ABC.""}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {ABC."xyz" }' 
+test case: 'Failure: {ABC."xyz" }'
 in:
   expression: '{ABC."xyz" }'
 out:
   return: FAIL
 ---
-test case: 'Failure: {ABC. "xyz"}' 
+test case: 'Failure: {ABC. "xyz"}'
 in:
   expression: '{ABC. "xyz"}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {ABC."xyz".EFG}' 
+test case: 'Failure: {ABC."xyz".EFG}'
 in:
   expression: '{ABC."xyz".EFG}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {ABC."x\yz"}' 
+test case: 'Failure: {ABC."x\yz"}'
 in:
   expression: '{ABC."x\yz"}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {ABC.x-z}' 
+test case: 'Failure: {ABC.x-z}'
 in:
   expression: '{ABC.x-z}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {ABC.}' 
+test case: 'Failure: {ABC.}'
 in:
   expression: '{ABC.}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {ABC..XYZ}' 
+test case: 'Failure: {ABC..XYZ}'
 in:
   expression: '{ABC..XYZ}'
 out:
   return: FAIL
 ---
-test case: 'Success: {ABC.xyz}' 
+test case: 'Success: {ABC.xyz}'
 in:
   expression: '{ABC.xyz}'
 out:
@@ -328,7 +328,7 @@ out:
   macro: 'ABC.xyz'
   return: SUCCEED
 ---
-test case: 'Success: {ABC.DEF.xyz}' 
+test case: 'Success: {ABC.DEF.xyz}'
 in:
   expression: '{ABC.DEF.xyz}'
 out:
@@ -337,7 +337,7 @@ out:
   macro: 'ABC.DEF.xyz'
   return: SUCCEED
 ---
-test case: 'Success: {ABC."xyz"}' 
+test case: 'Success: {ABC."xyz"}'
 in:
   expression: '{ABC."xyz"}'
 out:
@@ -346,7 +346,7 @@ out:
   macro: 'ABC."xyz"'
   return: SUCCEED
 ---
-test case: 'Success: {ABC."x-z"}' 
+test case: 'Success: {ABC."x-z"}'
 in:
   expression: '{ABC."x-z"}'
 out:
@@ -355,7 +355,7 @@ out:
   macro: 'ABC."x-z"'
   return: SUCCEED
 ---
-test case: 'Success: {ABC."x\\/z"}' 
+test case: 'Success: {ABC."x\\/z"}'
 in:
   expression: '{ABC."x\\/z"}'
 out:
@@ -364,7 +364,7 @@ out:
   macro: 'ABC."x\\/z"'
   return: SUCCEED
 ---
-test case: 'Success: {M123}' 
+test case: 'Success: {M123}'
 in:
   expression: '{M123}'
 out:
@@ -373,7 +373,7 @@ out:
   macro: 'M123'
   return: SUCCEED
 ---
-test case: 'Success: {ABC."x\"\"z"}' 
+test case: 'Success: {ABC."x\"\"z"}'
 in:
   expression: '{ABC."x\"\"z"}'
 out:
@@ -382,7 +382,7 @@ out:
   macro: 'ABC."x\"\"z"'
   return: SUCCEED
 ---
-test case: 'Success: {{ABC.xyz}.regsub((.*),\1)}' 
+test case: 'Success: {{ABC.xyz}.regsub((.*),\1)}'
 in:
   expression: '{{ABC.xyz}.regsub("(.*)",\1)}'
 out:
@@ -393,25 +393,25 @@ out:
   param: '("(.*)",\1)'
   return: SUCCEED
 ---
-test case: 'Failure: {{#ABC.xyz}.regsub((.*),\1)}' 
+test case: 'Failure: {{#ABC.xyz}.regsub((.*),\1)}'
 in:
   expression: '{{#ABC.xyz}.regsub("(.*)",\1)}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {$ABC.xyz}' 
+test case: 'Failure: {$ABC.xyz}'
 in:
   expression: '{$ABC.xyz}'
 out:
   return: FAIL
 ---
-test case: 'Failure: {.ABC}' 
+test case: 'Failure: {.ABC}'
 in:
   expression: '{.ABC}'
 out:
   return: FAIL
 ---
-test case: 'Success: {M_1.M_2.M_3}' 
+test case: 'Success: {M_1.M_2.M_3}'
 in:
   expression: '{M_1.M_2.M_3}'
 out:
@@ -420,4 +420,3 @@ out:
   macro: 'M_1.M_2.M_3'
   return: SUCCEED
 ...
-

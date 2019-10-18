@@ -5286,4 +5286,3 @@ fail:
 	zbx_free(tmp);
 	return FAIL;
 }
-
