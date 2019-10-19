@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-13 01:43+0300\n"
+"POT-Creation-Date: 2019-10-20 01:43+0300\n"
 "PO-Revision-Date: 2014-04-13 14:05+0300\n"
 "Last-Translator: Mohammad <mohammadsharifi666@gmail.com>\n"
 "Language-Team: none\n"
@@ -243,7 +243,7 @@ msgstr "(بدون پروکسی)"
 msgid "0 - use default port"
 msgstr ""
 
-#: include/triggers.inc.php:1847
+#: include/triggers.inc.php:1875
 msgid "0 or 1"
 msgstr "0 یا 1"
 
@@ -898,7 +898,7 @@ msgstr ""
 msgid "All templates"
 msgstr ""
 
-#: include/triggers.inc.php:1242
+#: include/triggers.inc.php:1270
 #: include/views/configuration.trigger.prototype.edit.php:489
 #: include/views/configuration.trigger.prototype.massupdate.php:58
 #: include/views/configuration.triggers.edit.php:516
@@ -918,7 +918,7 @@ msgstr "هاست ها مجاز"
 msgid "Alternatively, you can install it manually:"
 msgstr ""
 
-#: include/triggers.inc.php:1310
+#: include/triggers.inc.php:1338
 #: include/views/configuration.action.edit.php:112
 #: include/views/configuration.action.edit.php:1146
 #: include/views/configuration.correlation.edit.php:94
@@ -1090,7 +1090,7 @@ msgstr "اندازه ناحیه"
 msgid "Area type"
 msgstr "نوع ناحیه"
 
-#: include/items.inc.php:1729
+#: include/items.inc.php:1723
 msgid "Arithmetic"
 msgstr ""
 
@@ -1427,7 +1427,7 @@ msgstr ""
 msgid "Bold line"
 msgstr "خط‌ توپر"
 
-#: include/items.inc.php:1742
+#: include/items.inc.php:1736
 msgid "Boolean to decimal"
 msgstr ""
 
@@ -2951,7 +2951,7 @@ msgstr ""
 msgid "Certificate"
 msgstr ""
 
-#: include/items.inc.php:1733 include/items.inc.php:1737 latest.php:412
+#: include/items.inc.php:1727 include/items.inc.php:1731 latest.php:412
 #: latest.php:425
 msgctxt "noun"
 msgid "Change"
@@ -2972,7 +2972,7 @@ msgstr ""
 msgid "Change password"
 msgstr "تغییر رمز عبور"
 
-#: include/items.inc.php:1738
+#: include/items.inc.php:1732
 msgid "Change per second"
 msgstr ""
 
@@ -3014,15 +3014,15 @@ msgstr "بررسی از قبل وجود دارد"
 msgid "Check expression part starting from \"%1$s\"."
 msgstr "بخش عبارت بررسی از \"%1$s\" شروع می‌شود."
 
-#: include/items.inc.php:1770
+#: include/items.inc.php:1764
 msgid "Check for error in JSON"
 msgstr ""
 
-#: include/items.inc.php:1774
+#: include/items.inc.php:1768
 msgid "Check for error in XML"
 msgstr ""
 
-#: include/items.inc.php:1778
+#: include/items.inc.php:1772
 msgid "Check for error using regular expression"
 msgstr ""
 
@@ -4035,7 +4035,7 @@ msgstr "برچسب سفارشی"
 msgid "Custom label for map \"%2$s\" elements of type \"%1$s\" may not be empty."
 msgstr ""
 
-#: include/items.inc.php:1730
+#: include/items.inc.php:1724
 msgid "Custom multiplier"
 msgstr "تکثیر کننده سفارشی"
 
@@ -4054,7 +4054,7 @@ msgstr "صفحات نمایش سفارشی"
 msgid "Custom script"
 msgstr "اسکریپت سفارشی"
 
-#: include/items.inc.php:1753
+#: include/items.inc.php:1747
 msgid "Custom scripts"
 msgstr ""
 
@@ -4744,7 +4744,7 @@ msgstr "رد کردن"
 msgid "Dependencies"
 msgstr "وابستگی‌ها"
 
-#: include/triggers.inc.php:2725
+#: include/triggers.inc.php:2724
 msgid "Dependent"
 msgstr "وابسته"
 
@@ -4752,7 +4752,7 @@ msgstr "وابسته"
 msgid "Dependent item"
 msgstr ""
 
-#: app/views/popup.generic.php:289 include/triggers.inc.php:2725
+#: app/views/popup.generic.php:289 include/triggers.inc.php:2724
 #: include/views/configuration.services.edit.php:152
 #: include/views/configuration.trigger.prototype.list.php:81
 #: include/views/configuration.triggers.list.php:238
@@ -4919,7 +4919,7 @@ msgstr ""
 #: include/discovery.inc.php:108 include/hosts.inc.php:1299
 #: include/html.inc.php:331 include/httptest.inc.php:46
 #: include/items.inc.php:140 include/items.inc.php:143
-#: include/items.inc.php:187 include/triggers.inc.php:2175
+#: include/items.inc.php:187 include/triggers.inc.php:2203
 #: include/users.inc.php:86
 #: include/views/administration.general.other.edit.php:57
 #: include/views/administration.usergroups.list.php:44
@@ -4948,11 +4948,11 @@ msgstr "غیرفعال‌شده"
 msgid "Disaster"
 msgstr "حادثه بد"
 
-#: include/items.inc.php:1782
+#: include/items.inc.php:1776
 msgid "Discard unchanged"
 msgstr ""
 
-#: include/items.inc.php:1786
+#: include/items.inc.php:1780
 msgid "Discard unchanged with heartbeat"
 msgstr ""
 
@@ -5169,7 +5169,7 @@ msgstr ""
 msgid "Do you wish to replace the conditional expression?"
 msgstr ""
 
-#: include/items.inc.php:1766
+#: include/items.inc.php:1760
 msgid "Does not match regular expression"
 msgstr ""
 
@@ -5680,7 +5680,7 @@ msgstr ""
 #: auditlogs.php:144 include/discovery.inc.php:107 include/html.inc.php:327
 #: include/httptest.inc.php:45 include/items.inc.php:140
 #: include/items.inc.php:143 include/items.inc.php:184
-#: include/triggers.inc.php:1247 include/triggers.inc.php:2172
+#: include/triggers.inc.php:1275 include/triggers.inc.php:2200
 #: include/views/administration.usergroups.edit.php:73
 #: include/views/administration.usergroups.edit.php:88
 #: include/views/administration.usergroups.edit.php:89
@@ -5791,7 +5791,7 @@ msgstr ""
 msgid "Event details"
 msgstr "جزئیات رویداد"
 
-#: include/triggers.inc.php:1237
+#: include/triggers.inc.php:1265
 msgid "Event generation"
 msgstr "تولید رویداد"
 
@@ -5871,7 +5871,7 @@ msgstr "اجرا روی"
 msgid "Executed"
 msgstr ""
 
-#: include/items.inc.php:1671
+#: include/items.inc.php:1665
 #: include/views/configuration.host.discovery.edit.php:516
 #: include/views/configuration.item.edit.php:627
 #: include/views/configuration.item.prototype.edit.php:558
@@ -6296,7 +6296,7 @@ msgstr "برای میهمان ، کلمه عبور باید خالی باشد"
 msgid "Form data"
 msgstr ""
 
-#: include/items.inc.php:1675 include/views/configuration.item.edit.php:643
+#: include/items.inc.php:1669 include/views/configuration.item.edit.php:643
 #: include/views/configuration.item.prototype.edit.php:572
 msgid "Formula"
 msgstr ""
@@ -6405,7 +6405,7 @@ msgid "Get content of web page. Returns web page source as text"
 msgstr ""
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:49
-#: include/triggers.inc.php:1393
+#: include/triggers.inc.php:1421
 msgid "Given expression is not a macro"
 msgstr ""
 
@@ -6853,7 +6853,7 @@ msgstr "ارتفاع"
 msgid "Help"
 msgstr "راهنما"
 
-#: include/items.inc.php:1750
+#: include/items.inc.php:1744
 msgid "Hexadecimal to decimal"
 msgstr ""
 
@@ -6975,7 +6975,7 @@ msgstr "ردیف کردن افقی"
 #: include/classes/widgets/forms/CWidgetFormProblems.php:200
 #: include/classes/widgets/forms/CWidgetFormProblems.php:201
 #: include/hostgroups.inc.php:248 include/maps.inc.php:24
-#: include/triggers.inc.php:1205
+#: include/triggers.inc.php:1233
 #: include/views/configuration.application.list.php:35
 #: include/views/configuration.application.list.php:62
 #: include/views/configuration.graph.list.php:51
@@ -7310,8 +7310,8 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormProblems.php:66
 #: include/classes/widgets/forms/CWidgetFormWeb.php:49
 #: include/forms.inc.php:376 include/forms.inc.php:827
-#: include/items.inc.php:1179 include/menu.inc.php:134
-#: include/menu.inc.php:198 include/triggers.inc.php:902
+#: include/items.inc.php:1182 include/menu.inc.php:134
+#: include/menu.inc.php:198 include/triggers.inc.php:934
 #: include/views/configuration.copy.elements.php:58
 #: include/views/configuration.graph.list.php:86
 #: include/views/configuration.host.discovery.list.php:55
@@ -7610,7 +7610,7 @@ msgstr "در نگهداری"
 msgid "In progress"
 msgstr "در حال پیشرفت"
 
-#: include/items.inc.php:1758
+#: include/items.inc.php:1752
 msgid "In range"
 msgstr ""
 
@@ -7632,7 +7632,7 @@ msgid "Inaccessible item"
 msgstr ""
 
 #: include/classes/screens/CScreenProblem.php:414
-#: include/hostgroups.inc.php:288 include/triggers.inc.php:2327
+#: include/hostgroups.inc.php:288 include/triggers.inc.php:2355
 #: include/views/configuration.host.list.php:235
 #: include/views/inventory.host.view.php:36
 msgid "Inaccessible maintenance"
@@ -7645,11 +7645,11 @@ msgstr ""
 
 #: include/graphs.inc.php:271 include/hosts.inc.php:658
 #: include/hosts.inc.php:827 include/httptest.inc.php:209
-#: include/items.inc.php:896 include/triggers.inc.php:2466
+#: include/items.inc.php:896 include/triggers.inc.php:2494
 msgid "Inaccessible template"
 msgstr ""
 
-#: include/triggers.inc.php:2695 include/triggers.inc.php:2703
+#: include/triggers.inc.php:2694 include/triggers.inc.php:2702
 msgid "Inaccessible trigger"
 msgstr ""
 
@@ -8090,7 +8090,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:50
 #: include/classes/triggers/CTextTriggerConstructor.php:113
-#: include/triggers.inc.php:1394
+#: include/triggers.inc.php:1422
 msgid "Incorrect function is used"
 msgstr ""
 
@@ -8181,7 +8181,7 @@ msgid "Incorrect item prototype ID \"%1$s\" provided for screen element."
 msgstr ""
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:51
-#: include/triggers.inc.php:1395
+#: include/triggers.inc.php:1423
 msgid "Incorrect item value type"
 msgstr ""
 
@@ -9510,7 +9510,7 @@ msgstr ""
 #: app/views/search.php:60 app/views/search.php:64 app/views/search.php:185
 #: app/views/search.php:208 app/views/search.php:212
 #: include/classes/widgets/forms/CWidgetFormPlainText.php:31
-#: include/html.inc.php:378 include/items.inc.php:1160
+#: include/html.inc.php:378 include/items.inc.php:1163
 #: include/views/configuration.application.list.php:64
 #: include/views/configuration.application.list.php:108
 #: include/views/configuration.graph.edit.php:428
@@ -9602,7 +9602,7 @@ msgstr ""
 msgid "JSON-rpc version is not specified."
 msgstr ""
 
-#: include/items.inc.php:1726
+#: include/items.inc.php:1720
 #: include/views/configuration.host.discovery.edit.php:714
 msgid "JSONPath"
 msgstr ""
@@ -9629,7 +9629,7 @@ msgstr ""
 msgid "Japanese (ja_JP)"
 msgstr ""
 
-#: include/forms.inc.php:1498 include/items.inc.php:1754
+#: include/forms.inc.php:1498 include/items.inc.php:1748
 #: include/views/js/item.preprocessing.js.php:197
 msgid "JavaScript"
 msgstr ""
@@ -9896,7 +9896,7 @@ msgstr "چپ"
 msgid "Left Y"
 msgstr ""
 
-#: include/items.inc.php:1718
+#: include/items.inc.php:1712
 msgid "Left trim"
 msgstr ""
 
@@ -10456,7 +10456,7 @@ msgstr ""
 msgid "Master item"
 msgstr ""
 
-#: include/items.inc.php:1762
+#: include/items.inc.php:1756
 msgid "Matches regular expression"
 msgstr ""
 
@@ -10834,7 +10834,7 @@ msgstr ""
 msgid "Multiple"
 msgstr ""
 
-#: include/triggers.inc.php:1238
+#: include/triggers.inc.php:1266
 msgid "Multiple PROBLEM events"
 msgstr "رویدادهای مشکلات چندگانه"
 
@@ -11124,7 +11124,7 @@ msgstr ""
 #: include/classes/screens/CScreenProblem.php:1080
 #: include/classes/screens/CScreenProblem.php:1183 include/events.inc.php:176
 #: include/events.inc.php:376 include/events.inc.php:601
-#: include/triggers.inc.php:1244 include/triggers.inc.php:1249
+#: include/triggers.inc.php:1272 include/triggers.inc.php:1277
 #: include/views/administration.users.list.php:111
 #: include/views/administration.users.list.php:115
 #: include/views/configuration.host.prototype.list.php:126
@@ -11726,7 +11726,7 @@ msgid "None"
 msgstr "هیچکدام"
 
 #: app/views/popup.generic.php:534 include/graphs.inc.php:24
-#: include/items.inc.php:158 include/triggers.inc.php:1237
+#: include/items.inc.php:158 include/triggers.inc.php:1265
 #: include/views/configuration.triggers.list.php:70
 #: include/views/monitoring.history.php:224
 msgid "Normal"
@@ -11960,20 +11960,20 @@ msgstr ""
 msgid "Number or percentage of inodes. Returns integer for number; float for percentage"
 msgstr ""
 
-#: include/items.inc.php:1741 include/items.inc.php:1745
-#: include/items.inc.php:1749
+#: include/items.inc.php:1735 include/items.inc.php:1739
+#: include/items.inc.php:1743
 msgid "Numeral systems"
 msgstr ""
 
 #: include/forms.inc.php:352 include/items.inc.php:127
-#: include/triggers.inc.php:1845 include/views/configuration.item.edit.php:663
+#: include/triggers.inc.php:1873 include/views/configuration.item.edit.php:663
 #: include/views/configuration.item.massupdate.php:267
 #: include/views/configuration.item.prototype.edit.php:591
 #: include/views/configuration.item.prototype.massupdate.php:262
 msgid "Numeric (float)"
 msgstr "عددی(شناور)"
 
-#: include/triggers.inc.php:1846
+#: include/triggers.inc.php:1874
 msgid "Numeric (integer)"
 msgstr ""
 
@@ -12042,7 +12042,7 @@ msgstr "سیستم عامل(خلاصه)"
 msgid "Oct"
 msgstr ""
 
-#: include/items.inc.php:1746
+#: include/items.inc.php:1740
 msgid "Octal to decimal"
 msgstr ""
 
@@ -12282,7 +12282,7 @@ msgstr ""
 #: app/views/monitoring.problem.view.php:228
 #: include/classes/widgets/forms/CWidgetFormProblems.php:95
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:379
-#: include/triggers.inc.php:1310
+#: include/triggers.inc.php:1338
 #: include/views/configuration.action.edit.php:113
 #: include/views/configuration.action.edit.php:1147
 #: include/views/configuration.correlation.edit.php:95
@@ -13135,7 +13135,7 @@ msgstr ""
 msgid "Problem display"
 msgstr "نمایش مشکل"
 
-#: include/triggers.inc.php:1230
+#: include/triggers.inc.php:1258
 #: include/views/js/configuration.triggers.edit.js.php:20
 msgid "Problem expression"
 msgstr ""
@@ -13201,15 +13201,15 @@ msgstr ""
 msgid "Process CPU utilisation percentage. Returns float"
 msgstr ""
 
-#: include/items.inc.php:1789 include/items.inc.php:1793
+#: include/items.inc.php:1783 include/items.inc.php:1787
 msgid "Prometheus"
 msgstr ""
 
-#: include/items.inc.php:1790
+#: include/items.inc.php:1784
 msgid "Prometheus pattern"
 msgstr ""
 
-#: include/items.inc.php:1794
+#: include/items.inc.php:1788
 msgid "Prometheus to JSON"
 msgstr ""
 
@@ -13441,7 +13441,7 @@ msgstr ""
 msgid "Recovery"
 msgstr "بازیابی"
 
-#: include/triggers.inc.php:1234
+#: include/triggers.inc.php:1262
 #: include/views/configuration.trigger.prototype.edit.php:273
 #: include/views/configuration.trigger.prototype.edit.php:355
 #: include/views/configuration.triggers.edit.php:297
@@ -13499,7 +13499,7 @@ msgstr ""
 msgid "Regular"
 msgstr ""
 
-#: include/audit.inc.php:49 include/items.inc.php:1706
+#: include/audit.inc.php:49 include/items.inc.php:1700
 #: include/views/configuration.host.discovery.edit.php:638
 msgid "Regular expression"
 msgstr "عبارت منظم"
@@ -13971,7 +13971,7 @@ msgstr "راست"
 msgid "Right Y"
 msgstr ""
 
-#: include/items.inc.php:1714
+#: include/items.inc.php:1708
 msgid "Right trim"
 msgstr ""
 
@@ -14161,7 +14161,7 @@ msgstr "عامل SNMPv3"
 msgid "SQL count: %1$s (selects: %2$s | executes: %3$s)"
 msgstr ""
 
-#: include/items.inc.php:1673
+#: include/items.inc.php:1667
 #: include/views/configuration.host.discovery.edit.php:523
 #: include/views/configuration.item.edit.php:635
 #: include/views/configuration.item.prototype.edit.php:565
@@ -14841,7 +14841,7 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormProblems.php:196
 #: include/classes/widgets/forms/CWidgetFormProblems.php:197
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:351
-#: include/events.inc.php:167 include/triggers.inc.php:1215
+#: include/events.inc.php:167 include/triggers.inc.php:1243
 #: include/views/configuration.item.list.php:140
 #: include/views/configuration.trigger.prototype.edit.php:65
 #: include/views/configuration.trigger.prototype.list.php:50
@@ -15041,7 +15041,7 @@ msgstr ""
 msgid "Simple"
 msgstr "ساده"
 
-#: include/items.inc.php:1734
+#: include/items.inc.php:1728
 msgid "Simple change"
 msgstr ""
 
@@ -15439,7 +15439,7 @@ msgstr ""
 msgid "Straight"
 msgstr "مستقیم"
 
-#: include/items.inc.php:1721 include/items.inc.php:1725
+#: include/items.inc.php:1715 include/items.inc.php:1719
 msgid "Structured data"
 msgstr ""
 
@@ -15900,8 +15900,8 @@ msgid "Test subject"
 msgstr ""
 
 #: include/forms.inc.php:355 include/items.inc.php:133
-#: include/items.inc.php:1705 include/items.inc.php:1709
-#: include/items.inc.php:1713 include/items.inc.php:1717
+#: include/items.inc.php:1699 include/items.inc.php:1703
+#: include/items.inc.php:1707 include/items.inc.php:1711
 #: include/views/configuration.item.edit.php:666
 #: include/views/configuration.item.massupdate.php:270
 #: include/views/configuration.item.prototype.edit.php:594
@@ -16056,7 +16056,7 @@ msgstr ""
 msgid "Threshold"
 msgstr ""
 
-#: include/items.inc.php:1781 include/items.inc.php:1785
+#: include/items.inc.php:1775 include/items.inc.php:1779
 msgid "Throttling"
 msgstr ""
 
@@ -16281,7 +16281,7 @@ msgstr "روندها"
 #: app/views/popup.services.php:44 include/actions.inc.php:46
 #: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:481
 #: include/events.inc.php:229 include/maps.inc.php:26
-#: include/triggers.inc.php:1209
+#: include/triggers.inc.php:1237
 #: include/views/configuration.services.edit.php:87
 #: include/views/configuration.services.edit.php:117
 #: include/views/configuration.services.parent.list.php:35
@@ -16499,7 +16499,7 @@ msgstr ""
 #: app/views/monitoring.problem.view.php:145 app/views/search.php:36
 #: app/views/search.php:67 app/views/search.php:71 app/views/search.php:185
 #: app/views/search.php:215 app/views/search.php:219 include/forms.inc.php:441
-#: include/html.inc.php:392 include/triggers.inc.php:876
+#: include/html.inc.php:392 include/triggers.inc.php:908
 #: include/views/configuration.action.list.php:32
 #: include/views/configuration.host.discovery.list.php:53
 #: include/views/configuration.host.edit.php:355
@@ -16529,7 +16529,7 @@ msgstr ""
 msgid "Triggers top 100"
 msgstr "100 هشدار بالا"
 
-#: include/items.inc.php:1710
+#: include/items.inc.php:1704
 msgid "Trim"
 msgstr ""
 
@@ -16800,7 +16800,7 @@ msgstr "واحدها"
 #: include/items.inc.php:169 include/maintenances.inc.php:39
 #: include/maps.inc.php:39 include/regexp.inc.php:236
 #: include/screens.inc.php:57 include/triggers.inc.php:120
-#: include/triggers.inc.php:242 include/triggers.inc.php:2172
+#: include/triggers.inc.php:242 include/triggers.inc.php:2200
 #: include/users.inc.php:66 include/users.inc.php:89
 #: include/views/configuration.action.edit.php:493
 #: include/views/configuration.triggers.list.php:71
@@ -16826,12 +16826,12 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:48
 #: app/controllers/CControllerPopupTriggerExpr.php:535
-#: include/triggers.inc.php:1392
+#: include/triggers.inc.php:1420
 msgid "Unknown host item, no such item in selected host"
 msgstr ""
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:47
-#: include/triggers.inc.php:1391
+#: include/triggers.inc.php:1419
 msgid "Unknown host, no such host present in system"
 msgstr ""
 
@@ -16849,7 +16849,7 @@ msgstr ""
 msgid "Unknown step failed: %1$s"
 msgstr ""
 
-#: include/items.inc.php:1330
+#: include/items.inc.php:1324
 msgid "Unknown value type"
 msgstr ""
 
@@ -17581,9 +17581,9 @@ msgstr ""
 msgid "VMware virtual machine uptime, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr ""
 
-#: include/items.inc.php:1757 include/items.inc.php:1761
-#: include/items.inc.php:1765 include/items.inc.php:1769
-#: include/items.inc.php:1773 include/items.inc.php:1777
+#: include/items.inc.php:1751 include/items.inc.php:1755
+#: include/items.inc.php:1759 include/items.inc.php:1763
+#: include/items.inc.php:1767 include/items.inc.php:1771
 msgid "Validation"
 msgstr ""
 
@@ -18055,7 +18055,7 @@ msgstr ""
 msgid "X2"
 msgstr ""
 
-#: include/items.inc.php:1722
+#: include/items.inc.php:1716
 msgid "XML XPath"
 msgstr ""
 
@@ -18167,7 +18167,7 @@ msgstr "سالانه"
 #: include/classes/screens/CScreenProblem.php:1080
 #: include/classes/screens/CScreenProblem.php:1183 include/events.inc.php:176
 #: include/events.inc.php:376 include/events.inc.php:601
-#: include/triggers.inc.php:1243 include/triggers.inc.php:1248
+#: include/triggers.inc.php:1271 include/triggers.inc.php:1276
 #: include/views/administration.general.valuemapping.list.php:65
 #: include/views/administration.users.list.php:109
 #: include/views/configuration.host.prototype.list.php:126
