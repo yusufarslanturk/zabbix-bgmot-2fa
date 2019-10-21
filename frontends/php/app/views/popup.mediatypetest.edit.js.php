@@ -73,7 +73,7 @@ function mediatypeTestSend(formname) {
 
 				jQuery('#webhook_response_value', form).val(value);
 				jQuery('#webhook_response_type input', form).removeAttr('checked')
-					.filter(`[value="${type}"]`).attr('checked', true);
+					.filter('[value="' + type + '"]').attr('checked', true);
 			}
 
 			jQuery('.preloader').remove();
