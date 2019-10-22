@@ -75,17 +75,36 @@ trait MacrosTrait {
 	}
 
 	/**
+	 * Remove macros rows.
+	 *
+	 * @return array
+	 */
+	public function removeMacros() {
+		return $this->getMacrosTable()->clear();
+	}
+
+	/**
 	 * Check if values of macros inputs match data from data provider.
 	 *
 	 * @param array $data    macros element values
 	 */
-	public function assertMacros($data) {
+	public function assertMacros($data = []) {
 		$rows = [];
 		foreach ($data as $i => $values) {
-			$rows[$i] = [
-				'Macro' => CTestArrayHelper::get($values, 'Macro', ''),
-				'Value' => CTestArrayHelper::get($values, 'Value', ''),
-				'Description' => CTestArrayHelper::get($values, 'Description', ''),
+			if (CTestArrayHelper::get($values, 'action') !== USER_ACTION_REMOVE) {
+				$rows[$i] = [
+					'Macro' => CTestArrayHelper::get($values, 'Macro', ''),
+					'Value' => CTestArrayHelper::get($values, 'Value', ''),
+					'Description' => CTestArrayHelper::get($values, 'Description', ''),
+				];
+			}
+		}
+
+		if (!$rows) {
+			$rows[] = [
+				'Macro' => '',
+				'Value' => '',
+				'Description' => ''
 			];
 		}
 

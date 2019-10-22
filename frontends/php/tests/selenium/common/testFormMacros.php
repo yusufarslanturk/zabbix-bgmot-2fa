@@ -29,6 +29,12 @@ abstract class testFormMacros extends CWebTest {
 
 	use MacrosTrait;
 
+	const SQL_HOSTS = 'SELECT * FROM hosts ORDER BY hostid';
+
+	public static function getOldHash() {
+		return $old_hash = CDBHelper::getHash(self::SQL_HOSTS);
+	}
+
 	public static function getCreateCommonMacrosData() {
 		return [
 			[
@@ -133,10 +139,7 @@ abstract class testFormMacros extends CWebTest {
 	/**
 	 * Test creating of host with Macros.
 	 */
-	protected function checkCreate($data, $host_type) {
-		$sql_hosts = "SELECT * FROM hosts ORDER BY hostid";
-		$old_hash = CDBHelper::getHash($sql_hosts);
-
+	protected function checkCreate($host_type, $data) {
 		$this->page->login()->open($host_type.'s.php?form=create');
 		$form = $this->query('name:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
 
@@ -145,35 +148,7 @@ abstract class testFormMacros extends CWebTest {
 			'Groups' => 'Zabbix servers'
 		]);
 
-		$form->selectTab('Macros');
-		$this->fillMacros($data['macros']);
-		$form->submit();
-
-		$message = CMessageElement::find()->one();
-		switch ($data['expected']) {
-			case TEST_GOOD:
-				$this->assertTrue($message->isGood());
-				$this->assertEquals(ucfirst($host_type).' added', $message->getTitle());
-				$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM hosts WHERE host='.zbx_dbstr($data['Name'])));
-				// Check the results in form.
-				$this->checkMacrosFields($data, $host_type);
-				break;
-			case TEST_BAD:
-				$this->assertTrue($message->isBad());
-				$this->assertEquals('Cannot add '.$host_type, $message->getTitle());
-				$this->assertTrue($message->hasLine($data['error_details']));
-				// Check that DB hash is not changed.
-				$this->assertEquals($old_hash, CDBHelper::getHash($sql_hosts));
-				break;
-		}
-	}
-
-	private function checkMacrosFields($data, $host_type) {
-		$id = CDBHelper::getValue('SELECT hostid FROM hosts WHERE host='.zbx_dbstr($data['Name']));
-		$this->page->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
-		$form = $this->query('id:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
-		$form->selectTab('Macros');
-		$this->assertMacros($data['macros']);
+		$this->checkMacros(' added', $data['Name'], $host_type, $data, $id = null, 'Cannot add ');
 	}
 
 	public static function getUpdateCommonMacrosData() {
@@ -312,13 +287,31 @@ abstract class testFormMacros extends CWebTest {
 	/**
 	 * Test creating of host with Macros.
 	 */
-	protected function checkUpdate($data, $host_type, $id, $hostname) {
-		$sql_hosts = "SELECT * FROM hosts ORDER BY hostid";
-		$old_hash = CDBHelper::getHash($sql_hosts);
+	protected function checkUpdate($host_type, $data, $id, $hostname) {
+		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
+		$this->checkMacros(' updated', $hostname, $host_type, $data, $id, 'Cannot update ');
+	}
 
+	/**
+	 * Test removing Macros from host.
+	 */
+	protected function checkRemove($host_type, $id, $hostname) {
 		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
 		$form = $this->query('name:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
+		$form->selectTab('Macros');
+		$this->removeMacros();
+		$form->submit();
 
+		$message = CMessageElement::find()->one();
+		$this->assertTrue($message->isGood());
+		$this->assertEquals(ucfirst($host_type).' updated', $message->getTitle());
+		$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM hosts WHERE host='.zbx_dbstr($hostname)));
+		// Check the results in form.
+		$this->checkMacrosFields($host_type, null, $id);
+	}
+
+	private function checkMacros($action, $name, $host_type, $data, $id, $error_message) {
+		$form = $this->query('name:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
 		$form->selectTab('Macros');
 		$this->fillMacros($data['macros']);
 		$form->submit();
@@ -327,25 +320,35 @@ abstract class testFormMacros extends CWebTest {
 		switch ($data['expected']) {
 			case TEST_GOOD:
 				$this->assertTrue($message->isGood());
-				$this->assertEquals(ucfirst($host_type).' updated', $message->getTitle());
-				$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM hosts WHERE host='.zbx_dbstr($hostname)));
+				$this->assertEquals(ucfirst($host_type).$action, $message->getTitle());
+				$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM hosts WHERE host='.zbx_dbstr($name)));
 				// Check the results in form.
-				$this->checkUpdatedMacrosFields($data, $host_type, $id);
+				$this->checkMacrosFields($host_type, $data, $id);
 				break;
 			case TEST_BAD:
 				$this->assertTrue($message->isBad());
-				$this->assertEquals('Cannot update '.$host_type, $message->getTitle());
+				$this->assertEquals($error_message.$host_type, $message->getTitle());
 				$this->assertTrue($message->hasLine($data['error_details']));
 				// Check that DB hash is not changed.
-				$this->assertEquals($old_hash, CDBHelper::getHash($sql_hosts));
+				$this->assertEquals($this->getOldHash(), CDBHelper::getHash(self::SQL_HOSTS));
 				break;
 		}
 	}
 
-	private function checkUpdatedMacrosFields($data, $host_type, $id) {
+	private function checkMacrosFields($host_type, $data = null, $id = null) {
+		if ($id === null) {
+			$id = CDBHelper::getValue('SELECT hostid FROM hosts WHERE host='.zbx_dbstr($data['Name']));
+		}
+
 		$this->page->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
 		$form = $this->query('id:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
 		$form->selectTab('Macros');
-		$this->assertMacros($data['macros']);
+
+		if ($data !== null) {
+			$this->assertMacros($data['macros']);
+		}
+		else {
+			$this->assertMacros();
+		}
 	}
 }

@@ -32,26 +32,44 @@ class testFormHostMacros extends testFormMacros {
 	*
 	* @var string
 	*/
-	protected $hostid = '20006';
+	protected $hostid_update = '20006';
 
 	/**
 	* The name of the host for updating macros.
 	*
 	* @var string
 	*/
-	protected $host_name = 'Host for trigger description macros';
+	protected $host_name_update = 'Host for trigger description macros';
+
+	/**
+	* The id of the host for removing macros.
+	*
+	* @var string
+	*/
+	protected $hostid_remove = '99154';
+
+	/**
+	* The name of the host for removing macros.
+	*
+	* @var string
+	*/
+	protected $host_name_remove = 'Host for macros delete';
 
 	/**
 	 * @dataProvider getCreateCommonMacrosData
 	 */
 	public function testFormHostMacros_Create($data) {
-		$this->checkCreate($data, 'host');
+		$this->checkCreate('host', $data);
 	}
 
 	/**
 	 * @dataProvider getUpdateCommonMacrosData
 	 */
 	public function testFormHostMacros_Update($data) {
-		$this->checkUpdate($data, 'host', $this->hostid, $this->host_name);
+		$this->checkUpdate('host', $data, $this->hostid_update, $this->host_name_update);
+	}
+
+	public function testFormHostMacros_Remove() {
+		$this->checkRemove('host', $this->hostid_remove, $this->host_name_remove);
 	}
 }

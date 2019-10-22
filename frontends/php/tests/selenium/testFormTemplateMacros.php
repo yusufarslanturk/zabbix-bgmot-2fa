@@ -32,26 +32,44 @@ class testFormTemplateMacros extends testFormMacros {
 	*
 	* @var string
 	*/
-	protected $templateid = '40000';
+	protected $templateid_update = '40000';
 
 	/**
 	* The name of the template for updating macros.
 	*
 	* @var string
 	*/
-	protected $template_name = 'Form test template';
+	protected $template_name_update = 'Form test template';
+
+	/**
+	* The id of the template for removing macros.
+	*
+	* @var string
+	*/
+	protected $templateid_remove = '99016';
+
+	/**
+	* The name of the template for removing macros.
+	*
+	* @var string
+	*/
+	protected $template_name_remove = 'Template to test graphs';
 
 	/**
 	 * @dataProvider getCreateCommonMacrosData
 	 */
 	public function testFormTemplateMacros_Create($data) {
-		$this->checkCreate($data, 'template');
+		$this->checkCreate('template', $data);
 	}
 
 	/**
 	 * @dataProvider getUpdateCommonMacrosData
 	 */
 	public function testFormTemplateMacros_Update($data) {
-		$this->checkUpdate($data, 'template', $this->templateid, $this->template_name);
+		$this->checkUpdate('template', $data, $this->templateid_update, $this->template_name_update);
+	}
+
+	public function testFormHTemplateMacros_Remove() {
+		$this->checkRemove('template', $this->templateid_remove, $this->template_name_remove);
 	}
 }
