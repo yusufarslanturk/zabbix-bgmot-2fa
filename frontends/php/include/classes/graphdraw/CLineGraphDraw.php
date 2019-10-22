@@ -1217,9 +1217,9 @@ class CLineGraphDraw extends CGraphDraw {
 	/**
 	 * Draw start or end date (and time) label.
 	 *
-	 * @param int $value		Unix time.
-	 * @param string $format	Date time format.
-	 * @param int $position		Position on X axis.
+	 * @param int $value        Unix time.
+	 * @param string $format    Date time format.
+	 * @param int $position     Position on X axis.
 	 */
 	private function drawStartEndTimePeriod($value, $format, $position) {
 		$point = zbx_date2str(_($format), $value);

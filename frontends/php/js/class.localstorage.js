@@ -114,17 +114,17 @@ ZBX_LocalStorage.prototype.addKey = function(relative_key) {
  */
 ZBX_LocalStorage.prototype.freeSession = function(store, sessionid) {
 	var len = store.length,
-		mathces = [],
+		matches = [],
 		abs_key;
 
 	for (var i = 0; i < len; i++) {
 		abs_key = store.key(i);
 		if (abs_key.match('^' + sessionid)) {
-			mathces.push(abs_key);
+			matches.push(abs_key);
 		}
 	}
 
-	mathces.forEach(function(abs_key) {
+	matches.forEach(function(abs_key) {
 		store.removeItem(abs_key);
 	});
 };

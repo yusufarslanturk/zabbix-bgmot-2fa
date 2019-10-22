@@ -1230,8 +1230,8 @@ class CWidgetHelper {
 					'row: ".'.ZBX_STYLE_LIST_ACCORDION_ITEM.'",'.
 					'dataCallback: function(data) {'.
 						'data.color = function(num) {'.
-							'var palete = '.CWidgetFieldGraphDataSet::DEFAULT_COLOR_PALETE.';'.
-							'return palete[num % palete.length];'.
+							'var palette = '.CWidgetFieldGraphDataSet::DEFAULT_COLOR_PALETTE.';'.
+							'return palette[num % palette.length];'.
 						'} (data.rowNum);'.
 						'return data;'.
 					'}'.
