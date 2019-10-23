@@ -267,6 +267,7 @@ int	VFS_DEV_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result);
 int	VFS_FS_INODE(AGENT_REQUEST *request, AGENT_RESULT *result);
 int	VFS_FS_SIZE(AGENT_REQUEST *request, AGENT_RESULT *result);
 int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result);
+int	VFS_FS_GET(AGENT_REQUEST *request, AGENT_RESULT *result);
 int	VM_MEMORY_SIZE(AGENT_REQUEST *request, AGENT_RESULT *result);
 
 #ifdef _WINDOWS
@@ -301,7 +302,20 @@ typedef struct
 }
 MODE_FUNCTION;
 
+typedef struct
+{
+	char		fsname[MAX_STRING_LEN];
+	char		fstype[MAX_STRING_LEN];
+	zbx_uint64_t	total;
+	zbx_uint64_t	not_used;
+	zbx_uint64_t	used;
+	double		pfree;
+	double		pused;
+}
+zbx_mpoint_t;
+
 int	zbx_execute_threaded_metric(zbx_metric_func_t metric_func, AGENT_REQUEST *request, AGENT_RESULT *result);
+void	zbx_mpoints_free(zbx_mpoint_t *mpoint);
 
 /* the fields used by proc queries */
 #define ZBX_SYSINFO_PROC_NONE		0x0000

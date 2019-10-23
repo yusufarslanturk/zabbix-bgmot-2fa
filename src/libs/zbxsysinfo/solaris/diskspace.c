@@ -231,3 +231,96 @@ int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	return SYSINFO_RET_OK;
 }
+
+static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result)
+{
+	struct mnttab		mt;
+	FILE			*f;
+	struct zbx_json		j;
+	zbx_uint64_t		total, not_used, used;
+	double			pfree, pused;
+	char 			*error;
+	zbx_vector_ptr_t	mntpoints;
+	zbx_mpoint_t		*mntpoint;
+	int			ret = SYSINFO_RET_FAIL;
+	char 			*mpoint;
+
+	/* opening the mounted filesystems file */
+	if (NULL == (f = fopen("/etc/mnttab", "r")))
+	{
+		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Cannot open /etc/mnttab: %s", zbx_strerror(errno)));
+		return SYSINFO_RET_FAIL;
+	}
+
+	zbx_vector_ptr_create(&mntpoints);
+
+	/* fill mnttab structure from file */
+	while (-1 != getmntent(f, &mt))
+	{
+		mpoint = mt.mnt_mountp;
+		if (SYSINFO_RET_OK != get_fs_size_stat(mpoint, &total, &not_used, &used, &pfree, &pused,&error))
+		{
+			zbx_free(error);
+			continue;
+		}
+		mntpoint = (zbx_mpoint_t *)zbx_malloc(NULL, sizeof(zbx_mpoint_t));
+		zbx_strlcpy(mntpoint->fsname, mpoint, MAX_STRING_LEN);
+		zbx_strlcpy(mntpoint->fstype, mt.mnt_fstype, MAX_STRING_LEN);
+		mntpoint->total = total;
+		mntpoint->used = used;
+		mntpoint->not_used = not_used;
+		mntpoint->pfree = pfree;
+		mntpoint->pused = pused;
+
+		zbx_vector_ptr_append(&mntpoints, mntpoint);
+	}
+	zbx_fclose(f);
+
+	if (NULL == (f = fopen("/etc/mnttab", "r")))
+	{
+		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Cannot open /etc/mnttab: %s", zbx_strerror(errno)));
+		goto out;
+	}
+
+	zbx_json_initarray(&j, ZBX_JSON_STAT_BUF_LEN);
+
+	/* fill mnttab structure from file */
+	while (-1 != getmntent(f, &mt))
+	{
+		int idx;
+		mpoint = mt.mnt_mountp;
+
+		if (FAIL != (idx = zbx_vector_ptr_search(&mntpoints, mpoint, ZBX_DEFAULT_STR_COMPARE_FUNC)))
+		{
+			mntpoint = (zbx_mpoint_t *)mntpoints.values[idx];
+			zbx_json_addobject(&j, NULL);
+			zbx_json_addstring(&j, "fsname", mntpoint->fsname, ZBX_JSON_TYPE_STRING);
+			zbx_json_addstring(&j, "fstype", mntpoint->fstype, ZBX_JSON_TYPE_STRING);
+			zbx_json_adduint64(&j, "total", mntpoint->total);
+			zbx_json_adduint64(&j, "free", mntpoint->not_used);
+			zbx_json_adduint64(&j, "used", mntpoint->used);
+			zbx_json_addfloat(&j, "pfree", mntpoint->pfree);
+			zbx_json_addfloat(&j, "pused", mntpoint->pused);
+			zbx_json_close(&j);
+		}
+	}
+	zbx_fclose(f);
+
+	zbx_json_close(&j);
+
+	SET_STR_RESULT(result, zbx_strdup(NULL, j.buffer));
+
+	zbx_json_free(&j);
+	ret = SYSINFO_RET_OK;
+out:
+	zbx_vector_ptr_clear_ext(&mntpoints, (zbx_clean_func_t)zbx_mpoints_free);
+	zbx_vector_ptr_destroy(&mntpoints);
+
+	return ret;
+}
+int	VFS_FS_GET(AGENT_REQUEST *request, AGENT_RESULT *result)
+{
+	return zbx_execute_threaded_metric(vfs_fs_get, request, result);
+
+}
+
