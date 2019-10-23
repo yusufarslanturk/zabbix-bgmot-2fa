@@ -2812,7 +2812,8 @@ int	substitute_simple_macros(zbx_uint64_t *actionid, const DB_EVENT *event, cons
 				pos = token.loc.r + 1;
 				continue;
 			case ZBX_TOKEN_MACRO:
-				if (0 == (indexed_macro = is_indexed_macro(*data, &token)))
+				if (0 == (indexed_macro = is_indexed_macro(*data, &token)) ||
+					NULL == (m = macro_in_list(*data, token.loc, ex_macros, &N_functionid)))
 				{
 					/* Theoretically we could do m = macro_in_list() here as well to validate */
 					/* token and get unindexed macro equivalent, but it will be a double work */
@@ -2821,11 +2822,6 @@ int	substitute_simple_macros(zbx_uint64_t *actionid, const DB_EVENT *event, cons
 					m = *data + token.loc.l;
 					c = (*data)[token.loc.r + 1];
 					(*data)[token.loc.r + 1] = '\0';
-				}
-				else if (NULL == (m = macro_in_list(*data, token.loc, ex_macros, &N_functionid)))
-				{
-					pos = token.loc.r + 1;
-					continue;
 				}
 				break;
 			case ZBX_TOKEN_FUNC_MACRO:

@@ -419,4 +419,13 @@ out:
   token_type: ZBX_TOKEN_MACRO
   macro: 'M_1.M_2.M_3'
   return: SUCCEED
+---
+test case: 'Success: {EVENT.TAGS.TAG123}'
+in:
+  expression: '{EVENT.TAGS.TAG123}'
+out:
+  token: '{EVENT.TAGS.TAG123}'
+  token_type: ZBX_TOKEN_MACRO
+  macro: 'EVENT.TAGS.TAG123'
+  return: SUCCEED
 ...
