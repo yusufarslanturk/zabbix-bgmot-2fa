@@ -20,6 +20,7 @@
 #include "common.h"
 #include "sysinfo.h"
 #include "zbxjson.h"
+#include "zbxalgo.h"
 
 typedef struct
 {
@@ -34,7 +35,7 @@ typedef struct
 }
 zbx_wmpoint_t;
 
-static int	get_fs_size_stat(const char *fs, zbx_uint64_t *total, zbx_uint64_t *free,
+static int	get_fs_size_stat(const char *fs, zbx_uint64_t *total, zbx_uint64_t *not_used,
 		zbx_uint64_t *used, double *pfree, double *pused, char **error)
 {
 	wchar_t 	*wpath;
@@ -50,7 +51,7 @@ static int	get_fs_size_stat(const char *fs, zbx_uint64_t *total, zbx_uint64_t *f
 	zbx_free(wpath);
 
 	*total = totalBytes.QuadPart;
-	*free = freeBytes.QuadPart;
+	*not_used = freeBytes.QuadPart;
 	*used = totalBytes.QuadPart - freeBytes.QuadPart;
 	*pfree = (double)(__int64)freeBytes.QuadPart * 100. / (double)(__int64)totalBytes.QuadPart;
 	*pused = (double)((__int64)totalBytes.QuadPart - (__int64)freeBytes.QuadPart) * 100. /
@@ -64,7 +65,6 @@ static int	vfs_fs_size(AGENT_REQUEST *request, AGENT_RESULT *result, HANDLE time
 {
 	char		*path, *mode;
 	char		*error;
-	ULARGE_INTEGER	freeBytes, totalBytes;
 	zbx_uint64_t	total, used, free;
 	double		pused,pfree;
 
@@ -216,11 +216,11 @@ static void	add_fs_to_json(wchar_t *path, struct zbx_json *j, const char *fsname
 	{
 		if (NULL == mntpoints)
 		{
-			zbx_json_adduint64(&j, "total", total);
-			zbx_json_adduint64(&j, "free", not_used);
-			zbx_json_adduint64(&j, "used", used);
-			zbx_json_addfloat(&j, "pfree", pfree);
-			zbx_json_addfloat(&j, "pused", pused);
+			zbx_json_adduint64(j, "total", total);
+			zbx_json_adduint64(j, "free", not_used);
+			zbx_json_adduint64(j, "used", used);
+			zbx_json_addfloat(j, "pfree", pfree);
+			zbx_json_addfloat(j, "pused", pused);
 		}
 		else
 		{
@@ -235,7 +235,7 @@ static void	add_fs_to_json(wchar_t *path, struct zbx_json *j, const char *fsname
 	if (NULL == mntpoints)
 		zbx_json_close(j);
 	else
-		zbx_vector_ptr_append(&mntpoints, mntpoint);
+		zbx_vector_ptr_append(mntpoints, mntpoint);
 
 	zbx_free(long_path);
 }
@@ -329,7 +329,7 @@ static void	zbx_wmpoints_free(zbx_wmpoint_t *mpoint)
 	zbx_free(mpoint);
 }
 
-static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result)
+static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result,  HANDLE timeout_event)
 {
 	wchar_t			*buffer = NULL, volume_name[MAX_PATH + 1], *p;
 	DWORD			size_dw;
@@ -341,7 +341,10 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result)
 	zbx_wmpoint_t		*mntpoint;
 	int			i;
 	char 			*mpoint;
-	size_t			sz;
+
+	/* 'timeout_event' argument is here to make the vfs_fs_size() prototype as required by */
+	/* zbx_execute_threaded_metric() on MS Windows */
+	ZBX_UNUSED(timeout_event);
 
 	/* make an initial call to GetLogicalDriveStrings() to get the necessary size into the dwSize variable */
 	if (0 == (size_dw = GetLogicalDriveStrings(0, buffer)))
@@ -413,6 +416,7 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result)
 						if (FAIL != (idx = zbx_vector_ptr_search(&mntpoints,
 									mpoint, ZBX_DEFAULT_STR_COMPARE_FUNC)))
 						{
+							mntpoint = (zbx_wmpoint_t *)mntpoints.values[idx];
 							zbx_json_addobject(&j, NULL);
 							zbx_json_addstring(&j, "fsname", mntpoint->fsname,
 									ZBX_JSON_TYPE_STRING);
@@ -466,5 +470,4 @@ out:
 int	VFS_FS_GET(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
 	return zbx_execute_threaded_metric(vfs_fs_get, request, result);
-
 }
