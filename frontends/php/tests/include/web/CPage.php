@@ -243,6 +243,9 @@ class CPage {
 		}
 	}
 
+	/**
+	 * Setting "frozen" viewport size.
+	 */
 	public function updateViewport() {
 		try {
 			if (!$this->driver->executeScript('return !!window.chrome;')) {
@@ -268,6 +271,9 @@ class CPage {
 		return true;
 	}
 
+	/**
+	 * Resetting viewport size to default.
+	 */
 	public function resetViewport() {
 		if ($this->viewportUpdated === false) {
 			return;
