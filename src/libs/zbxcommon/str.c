@@ -5227,7 +5227,8 @@ int	zbx_get_component_version(char *value)
  *                                                                            *
  * Parameters:                                                                *
  *    text  - [IN] the text containing value to extract                       *
- *    len   - [IN] length of the value to extract                             *
+ *    len   - [IN] length (in bytes) of the value to extract. It can be 0.    *
+ *            It can be 0. It must not exceed length of 'text' string.        *
  *    value - [OUT] the extracted value                                       *
  *                                                                            *
  * Return value: SUCCEED - the value was extracted successfully               *
@@ -5236,12 +5237,13 @@ int	zbx_get_component_version(char *value)
  * Comments: When unquoting value only " and \ character escapes are accepted.*
  *                                                                            *
  ******************************************************************************/
-int	zbx_str_extract(const char *text, int len, char **value)
+int	zbx_str_extract(const char *text, size_t len, char **value)
 {
 	char		*tmp, *out;
 	const char	*in;
 
 	tmp = zbx_malloc(NULL, len + 1);
+
 	if (0 == len)
 	{
 		*tmp = '\0';
@@ -5262,12 +5264,12 @@ int	zbx_str_extract(const char *text, int len, char **value)
 
 	for (out = tmp, in = text + 1; '"' != *in; in++)
 	{
-		if (in - text >= len - 1)
+		if ((size_t)(in - text) >= len - 1)
 			goto fail;
 
 		if ('\\' == *in)
 		{
-			if (++in - text >= len - 1)
+			if ((size_t)(++in - text) >= len - 1)
 				goto fail;
 
 			if ('"' != *in && '\\' != *in)
@@ -5276,7 +5278,7 @@ int	zbx_str_extract(const char *text, int len, char **value)
 		*out++ = *in;
 	}
 
-	if (in - text != len - 1)
+	if ((size_t)(in - text) != len - 1)
 		goto fail;
 
 	*out = '\0';
