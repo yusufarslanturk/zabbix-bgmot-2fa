@@ -3370,10 +3370,11 @@ static int	zbx_token_parse_objectid(const char *expression, const char *macro, z
  *             segment    - [IN] the segment start                            *
  *             strict     - [OUT] 1 - macro contains only standard characters *
  *                                    (upper case alphanumeric characters,    *
- *                                     dosts and underscores)                 *
+ *                                     dots and underscores)                  *
  *                                0 - the last segment contains lowercase or  *
- *                                    quoted charactesr                       *
- *             next       - [OUT] the offset of next character after segment  *
+ *                                    quoted characters                       *
+ *             next       - [OUT] offset of the next character after the      *
+ *                                segment                                     *
  *                                                                            *
  * Return value: SUCCEED - the segment was parsed successfully                *
  *               FAIL    - otherwise                                          *
