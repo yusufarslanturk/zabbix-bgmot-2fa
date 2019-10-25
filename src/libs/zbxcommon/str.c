@@ -3781,7 +3781,7 @@ static int	zbx_token_parse_nested_macro(const char *expression, const char *macr
 
 	if ('#' == macro[2])
 	{
-		/* find the end of the nested macro by validating its name until the closing bracket } */
+		/* find the end of the nested macro by validating its name until the closing bracket '}' */
 		for (ptr = macro + 3; '}' != *ptr; ptr++)
 		{
 			if ('\0' == *ptr)
@@ -5228,7 +5228,7 @@ int	zbx_get_component_version(char *value)
  *                                                                            *
  * Parameters:                                                                *
  *    text  - [IN] the text containing value to extract                       *
- *    len   - [IN] length (in bytes) of the value to extract. It can be 0.    *
+ *    len   - [IN] length (in bytes) of the value to extract.                 *
  *            It can be 0. It must not exceed length of 'text' string.        *
  *    value - [OUT] the extracted value                                       *
  *                                                                            *
