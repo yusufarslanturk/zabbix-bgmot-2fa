@@ -452,11 +452,11 @@ function getSystemStatusTotals(array $data, array $severity_names) {
 		foreach ($group['stats'] as $severity => $stat) {
 			$groups_totals[0]['stats'][$severity]['count'] += $stat['count'];
 			foreach ($stat['problems'] as $problem) {
-				$groups_totals[0]['stats'][$severity]['problems'][] = $problem;
+				$groups_totals[0]['stats'][$severity]['problems'][$problem['eventid']] = $problem;
 			}
 			$groups_totals[0]['stats'][$severity]['count_unack'] += $stat['count_unack'];
 			foreach ($stat['problems_unack'] as $problem) {
-				$groups_totals[0]['stats'][$severity]['problems_unack'][] = $problem;
+				$groups_totals[0]['stats'][$severity]['problems_unack'][$problem['eventid']] = $problem;
 			}
 		}
 	}
