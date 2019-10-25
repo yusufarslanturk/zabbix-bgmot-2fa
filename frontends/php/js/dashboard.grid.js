@@ -3587,8 +3587,7 @@
 				})
 					.done(function(response) {
 						data.dialogue['widget_type'] = response.type;
-					},
-					success: function(resp) {
+
 						/*
 						 * Set the 'sticked-to-top' class before updating the body for it's mutation handler
 						 * to have actual data for the popup positioning.
@@ -3622,21 +3621,6 @@
 							$('.dialogue-widget-save', footer).prop('disabled', false);
 						}
 
-						if (data.dialogue['widget_type'] === 'svggraph') {
-							jQuery('[data-dialogueid="widgetConfg"]').addClass('sticked-to-top');
-						}
-						else {
-							jQuery('[data-dialogueid="widgetConfg"]').removeClass('sticked-to-top');
-						}
-
-						// Enable save button after successful form update.
-						$('.dialogue-widget-save', footer).prop('disabled', false);
-					},
-					complete: function() {
-						if (data.dialogue.widget === null
-								&& !findEmptyPosition($this, data, data.dialogue.widget_type)) {
-							showMessageExhausted(data);
-						}
 						overlayDialogueOnLoad(true, jQuery('[data-dialogueid="widgetConfg"]'));
 					});
 			});
