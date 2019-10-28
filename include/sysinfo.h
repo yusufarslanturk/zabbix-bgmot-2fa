@@ -314,6 +314,19 @@ typedef struct
 }
 zbx_mpoint_t;
 
+#define ZBX_SYSYNFO_FSNAME_MACRO_TAG		"{#FSNAME}"
+#define ZBX_SYSYNFO_FSTYPE_MACRO_TAG		"{#FSTYPE}"
+#define ZBX_SYSYNFO_FSDRIVETYPE_MACRO_TAG	"{#FSDRIVETYPE}"
+
+#define ZBX_SYSYNFO_FSNAME_TAG			"fsname"
+#define ZBX_SYSYNFO_FSTYPE_TAG			"fstype"
+#define ZBX_SYSYNFO_FSDRIVETYPE_TAG		"fsdrivetype"
+#define ZBX_SYSYNFO_TOTAL_TAG			"total"
+#define ZBX_SYSYNFO_FREE_TAG			"free"
+#define ZBX_SYSYNFO_USED_TAG			"used"
+#define ZBX_SYSYNFO_PFREE_TAG			"pfree"
+#define ZBX_SYSYNFO_PUSED_TAG			"pused"
+
 int	zbx_execute_threaded_metric(zbx_metric_func_t metric_func, AGENT_REQUEST *request, AGENT_RESULT *result);
 void	zbx_mpoints_free(zbx_mpoint_t *mpoint);
 

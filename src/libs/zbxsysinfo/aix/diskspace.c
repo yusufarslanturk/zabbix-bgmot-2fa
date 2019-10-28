@@ -253,8 +253,10 @@ int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
 	for (i = 0, vm = vms; i < rc; i++)
 	{
 		zbx_json_addobject(&j, NULL);
-		zbx_json_addstring(&j, "{#FSNAME}", (char *)vm + vm->vmt_data[VMT_STUB].vmt_off, ZBX_JSON_TYPE_STRING);
-		zbx_json_addstring(&j, "{#FSTYPE}", zbx_get_vfs_name_by_type(vm->vmt_gfstype), ZBX_JSON_TYPE_STRING);
+		zbx_json_addstring(&j, ZBX_SYSYNFO_FSNAME_MACRO_TAG, (char *)vm + vm->vmt_data[VMT_STUB].vmt_off,
+				ZBX_JSON_TYPE_STRING);
+		zbx_json_addstring(&j, ZBX_SYSYNFO_FSTYPE_MACRO_TAG, zbx_get_vfs_name_by_type(vm->vmt_gfstype),
+				ZBX_JSON_TYPE_STRING);
 		zbx_json_close(&j);
 
 		/* go to the next vmount structure */
@@ -346,13 +348,13 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result)
 		{
 			mntpoint = (zbx_mpoint_t *)mntpoints.values[idx];
 			zbx_json_addobject(&j, NULL);
-			zbx_json_addstring(&j, "fsname", mntpoint->fsname, ZBX_JSON_TYPE_STRING);
-			zbx_json_addstring(&j, "fstype", mntpoint->fstype, ZBX_JSON_TYPE_STRING);
-			zbx_json_adduint64(&j, "total", mntpoint->total);
-			zbx_json_adduint64(&j, "free", mntpoint->not_used);
-			zbx_json_adduint64(&j, "used", mntpoint->used);
-			zbx_json_addfloat(&j, "pfree", mntpoint->pfree);
-			zbx_json_addfloat(&j, "pused", mntpoint->pused);
+			zbx_json_addstring(&j, ZBX_SYSYNFO_FSNAME_TAG, mntpoint->fsname, ZBX_JSON_TYPE_STRING);
+			zbx_json_addstring(&j, ZBX_SYSYNFO_FSTYPE_TAG, mntpoint->fstype, ZBX_JSON_TYPE_STRING);
+			zbx_json_adduint64(&j, ZBX_SYSYNFO_TOTAL_TAG, mntpoint->total);
+			zbx_json_adduint64(&j, ZBX_SYSYNFO_FREE_TAG, mntpoint->not_used);
+			zbx_json_adduint64(&j, ZBX_SYSYNFO_USED_TAG, mntpoint->used);
+			zbx_json_addfloat(&j, ZBX_SYSYNFO_PFREE_TAG, mntpoint->pfree);
+			zbx_json_addfloat(&j, ZBX_SYSYNFO_PUSED_TAG, mntpoint->pused);
 			zbx_json_close(&j);
 		}
 

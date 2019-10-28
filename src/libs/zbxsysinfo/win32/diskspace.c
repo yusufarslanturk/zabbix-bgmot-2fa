@@ -216,11 +216,11 @@ static void	add_fs_to_json(wchar_t *path, struct zbx_json *j, const char *fsname
 	{
 		if (NULL == mntpoints)
 		{
-			zbx_json_adduint64(j, "total", total);
-			zbx_json_adduint64(j, "free", not_used);
-			zbx_json_adduint64(j, "used", used);
-			zbx_json_addfloat(j, "pfree", pfree);
-			zbx_json_addfloat(j, "pused", pused);
+			zbx_json_adduint64(j, ZBX_SYSYNFO_TOTAL_TAG, total);
+			zbx_json_adduint64(j, ZBX_SYSYNFO_FREE_TAG, not_used);
+			zbx_json_adduint64(j, ZBX_SYSYNFO_USED_TAG, used);
+			zbx_json_addfloat(j, ZBX_SYSYNFO_PFREE_TAG, pfree);
+			zbx_json_addfloat(j, ZBX_SYSYNFO_PUSED_TAG, pused);
 		}
 		else
 		{
@@ -270,7 +270,8 @@ int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	/* add drive letters */
 	for (p = buffer, sz = wcslen(p); sz > 0; p += sz + 1, sz = wcslen(p))
-		add_fs_to_json(p, &j, "{#FSNAME}", "{#FSTYPE}", "{#FSDRIVETYPE}", 0, NULL);
+		add_fs_to_json(p, &j, ZBX_SYSYNFO_FSNAME_MACRO_TAG, ZBX_SYSYNFO_FSTYPE_MACRO_TAG,
+				ZBX_SYSYNFO_FSDRIVETYPE_MACRO_TAG, 0, NULL);
 
 	if (INVALID_HANDLE_VALUE == (volume = FindFirstVolume(volume_name, ARRSIZE(volume_name))))
 	{
@@ -299,7 +300,8 @@ int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
 		{
 			/* add mount point folder paths but skip drive letters */
 			if (3 < sz)
-				add_fs_to_json(p, &j, "{#FSNAME}", "{#FSTYPE}", "{#FSDRIVETYPE}", 0, NULL);
+				add_fs_to_json(p, &j, ZBX_SYSYNFO_FSNAME_MACRO_TAG, ZBX_SYSYNFO_FSTYPE_MACRO_TAG,
+						ZBX_SYSYNFO_FSDRIVETYPE_MACRO_TAG, 0, NULL);
 		}
 
 	} while (FALSE != FindNextVolume(volume, volume_name, ARRSIZE(volume_name)));
@@ -369,7 +371,8 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result,  HANDLE time
 	/* add drive letters */
 	for (p = buffer, sz = wcslen(p); sz > 0; p += sz + 1, sz = wcslen(p))
 	{
-		add_fs_to_json(p, &j, "fsname", "fstype", "fsdrivetype", 1, NULL);
+		add_fs_to_json(p, &j, ZBX_SYSYNFO_FSNAME_TAG, ZBX_SYSYNFO_FSTYPE_TAG,
+				ZBX_SYSYNFO_FSDRIVETYPE_TAG, 1, NULL);
 	}
 
 	for (i = 0; i < 2; i++)
@@ -418,17 +421,17 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result,  HANDLE time
 						{
 							mntpoint = (zbx_wmpoint_t *)mntpoints.values[idx];
 							zbx_json_addobject(&j, NULL);
-							zbx_json_addstring(&j, "fsname", mntpoint->fsname,
-									ZBX_JSON_TYPE_STRING);
-							zbx_json_addstring(&j, "fstype", mntpoint->fstype,
-									ZBX_JSON_TYPE_STRING);
-							zbx_json_addstring(&j, "fsdrivetype", mntpoint->fsdrivetype,
-									ZBX_JSON_TYPE_STRING);
-							zbx_json_adduint64(&j, "total", mntpoint->total);
-							zbx_json_adduint64(&j, "free", mntpoint->not_used);
-							zbx_json_adduint64(&j, "used", mntpoint->used);
-							zbx_json_addfloat(&j, "pfree", mntpoint->pfree);
-							zbx_json_addfloat(&j, "pused", mntpoint->pused);
+							zbx_json_addstring(&j, ZBX_SYSYNFO_FSNAME_TAG,
+									mntpoint->fsname, ZBX_JSON_TYPE_STRING);
+							zbx_json_addstring(&j, ZBX_SYSYNFO_FSTYPE_TAG,
+									mntpoint->fstype, ZBX_JSON_TYPE_STRING);
+							zbx_json_addstring(&j, ZBX_SYSYNFO_FSDRIVETYPE_TAG,
+									mntpoint->fsdrivetype, ZBX_JSON_TYPE_STRING);
+							zbx_json_adduint64(&j, ZBX_SYSYNFO_TOTAL_TAG, mntpoint->total);
+							zbx_json_adduint64(&j, ZBX_SYSYNFO_FREE_TAG, mntpoint->not_used);
+							zbx_json_adduint64(&j, ZBX_SYSYNFO_USED_TAG, mntpoint->used);
+							zbx_json_addfloat(&j, ZBX_SYSYNFO_PFREE_TAG, mntpoint->pfree);
+							zbx_json_addfloat(&j, ZBX_SYSYNFO_PUSED_TAG, mntpoint->pused);
 							zbx_json_close(&j);
 						}
 						zbx_free(mpoint);
