@@ -35,7 +35,7 @@ void	zbx_mock_test_entry(void **state)
 	text = zbx_mock_get_parameter_string("in.text");
 	len = zbx_mock_get_parameter_string("in.len");
 	expected_ret = zbx_mock_str_to_return_code(zbx_mock_get_parameter_string("out.return"));
-	returned_ret = zbx_str_extract(text, atoi(len), &returned_value);
+	returned_ret = zbx_str_extract(text, (size_t)atoi(len), &returned_value);
 
 	zbx_mock_assert_result_eq("zbx_str_extract() return", expected_ret, returned_ret);
 
