@@ -161,7 +161,7 @@ func read(r io.Reader, pending []byte) ([]byte, error) {
 	}
 
 	flags := s[4]
-	if 0 == flags&tcpProtocol {
+	if 0 == (flags & tcpProtocol) {
 		return nil, fmt.Errorf("Message is using unsupported protocol version.")
 	}
 
@@ -175,12 +175,12 @@ func read(r io.Reader, pending []byte) ([]byte, error) {
 		return nil, fmt.Errorf("Message is longer than expected.")
 	}
 
-	if 1 == flags&zlibCompress {
+	if 0 != (flags & zlibCompress) {
 		reservedSize = binary.LittleEndian.Uint32(s[9:13])
 	}
 
 	if int(expectedSize) == total-headerSize {
-		if 1 == flags&zlibCompress {
+		if 0 != (flags & zlibCompress) {
 			return uncompress(s[headerSize:total], reservedSize)
 		}
 		return s[headerSize:total], nil
@@ -210,7 +210,7 @@ func read(r io.Reader, pending []byte) ([]byte, error) {
 		return nil, fmt.Errorf("Message size is shorted or longer than expected.")
 	}
 
-	if 1 == flags&zlibCompress {
+	if 0 != (flags & zlibCompress) {
 		return uncompress(s[:total], reservedSize)
 	}
 	return s[:total], nil
