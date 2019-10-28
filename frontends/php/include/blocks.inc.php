@@ -450,13 +450,17 @@ function getSystemStatusTotals(array $data, array $severity_names) {
 
 	foreach ($data['groups'] as $group) {
 		foreach ($group['stats'] as $severity => $stat) {
-			$groups_totals[0]['stats'][$severity]['count'] += $stat['count'];
 			foreach ($stat['problems'] as $problem) {
-				$groups_totals[0]['stats'][$severity]['problems'][$problem['eventid']] = $problem;
+				if (!array_key_exists($problem['eventid'], $groups_totals[0]['stats'][$severity]['problems'])) {
+					$groups_totals[0]['stats'][$severity]['count'] += 1;
+					$groups_totals[0]['stats'][$severity]['problems'][$problem['eventid']] = $problem;
+				}
 			}
-			$groups_totals[0]['stats'][$severity]['count_unack'] += $stat['count_unack'];
 			foreach ($stat['problems_unack'] as $problem) {
-				$groups_totals[0]['stats'][$severity]['problems_unack'][$problem['eventid']] = $problem;
+				if (!array_key_exists($problem['eventid'], $groups_totals[0]['stats'][$severity]['problems_unack'])) {
+					$groups_totals[0]['stats'][$severity]['count_unack'] += 1;
+					$groups_totals[0]['stats'][$severity]['problems_unack'][$problem['eventid']] = $problem;
+				}
 			}
 		}
 	}
