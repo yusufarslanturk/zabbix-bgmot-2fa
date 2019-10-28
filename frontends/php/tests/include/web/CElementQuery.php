@@ -467,7 +467,7 @@ class CElementQuery implements IWaitable {
 				'/ul[@class="radio-list-control"]',
 				'/div/ul[@class="radio-list-control"]' // TODO: remove after fix DEV-1071.
 			],
-			'CCheckboxListElement'		=> '/ul[@class="checkbox-list col-3"]',
+			'CCheckboxListElement'		=> '/ul[@class="checkbox-list columns-3"]',
 			'CTableElement'				=> [
 				'/table',
 				'/*[@class="table-forms-separator"]/table'

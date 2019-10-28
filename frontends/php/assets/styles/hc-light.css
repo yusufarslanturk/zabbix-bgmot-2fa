@@ -4594,30 +4594,22 @@ svg {
     .list-vertical-accordion .list-accordion-item-closed .list-accordion-item-body {
       display: none; }
 
-ul.checkbox-list {
-  line-height: 20px;
-  display: flex;
-  flex-wrap: wrap; }
-  ul.checkbox-list > li {
-    ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-    -webkit-box-flex: 0; }
-
-ul.checkbox-list.col-3 > li {
-  display: inline-block;
-  -ms-flex: 0 0 33.33333%;
-  flex: 0 0 33.33333%;
-  max-width: 33.33333%; }
+.checkbox-list li {
+  margin-top: 4px; }
 
 .columns-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  /**
-   * Dynamically generated classes, e.g. .column-50.
-   */ }
+  flex-wrap: wrap; }
   .columns-wrapper [class^=column-] {
     -webkit-box-flex: 0; }
+  .columns-wrapper.columns-2 > div, .columns-wrapper.columns-2 > li {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%; }
+  .columns-wrapper.columns-3 > div, .columns-wrapper.columns-3 > li {
+    -ms-flex: 0 0 33.33333%;
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%; }
   .columns-wrapper .column-5 {
     -ms-flex: 0 0 5%;
     flex: 0 0 5%;
