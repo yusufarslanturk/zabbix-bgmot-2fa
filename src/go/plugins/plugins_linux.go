@@ -20,13 +20,17 @@
 package plugins
 
 import (
-	_ "zabbix.com/plugins/kernel"
-	_ "zabbix.com/plugins/net/netif"
-	_ "zabbix.com/plugins/proc"
-	_ "zabbix.com/plugins/system/cpucollector"
-	_ "zabbix.com/plugins/system/uname"
-	_ "zabbix.com/plugins/system/uptime"
-	_ "zabbix.com/plugins/systemd"
-	_ "zabbix.com/plugins/vfs/dev"
-	_ "zabbix.com/plugins/vfs/file"
+	_ "zabbix/plugins/kernel"
+	_ "zabbix/plugins/log"
+	_ "zabbix/plugins/net/netif"
+	_ "zabbix/plugins/proc"
+	_ "zabbix/plugins/system/cpucollector"
+	_ "zabbix/plugins/system/uname"
+	_ "zabbix/plugins/system/uptime"
+	_ "zabbix/plugins/systemd"
+	_ "zabbix/plugins/vfs/dev"
+	_ "zabbix/plugins/vfs/file"
+	_ "zabbix/plugins/zabbix/async"
+	_ "zabbix/plugins/zabbix/stats"
+	_ "zabbix/plugins/zabbix/sync"
 )
