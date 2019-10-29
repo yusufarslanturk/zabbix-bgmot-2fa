@@ -2233,12 +2233,12 @@ INSERT INTO hosts (hostid, host, name, status, available, description, maintenan
 INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (99055, 99135, 50016);
 INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (55045, 99135, 1, '127.0.0.1', '', '1', '10050', '1');
 
---testProblemsBySeverityWidget
+-- testProblemsBySeverityWidget
 INSERT INTO dashboard (dashboardid, name, userid, private) VALUES (102, 'Dashboard for Problems by severity', 1, 1);
 INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (103, 102, 'problemsbysv', 'Reference widget', 0, 0, 12, 5);
-INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (104, 102, 'problemsbysv', 'Reference widget to delete', 0, 5, 12, 5);
+INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (104, 102, 'problemsbysv', 'Reference PBS widget to delete', 0, 5, 12, 5);
 INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (105, 102, 'problemsbysv', 'Totals reference widget', 12, 0, 12, 5);
 INSERT INTO widget_field (widgetid, widget_fieldid, type, name, value_int) VALUES (105, 136, 0, 'show_type', 1);
-INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (106, 102, 'problemsbysv', 'Totals reference widget to delete',12, 5, 12, 5);
+INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (106, 102, 'problemsbysv', 'Totals reference PBS widget to delete',12, 5, 12, 5);
 INSERT INTO widget_field (widgetid, widget_fieldid, type, name, value_int) VALUES (106, 137, 0, 'show_type', 1);
 INSERT INTO widget_field (widgetid, widget_fieldid, type, name, value_int) VALUES (106, 138, 0, 'layout', 1);

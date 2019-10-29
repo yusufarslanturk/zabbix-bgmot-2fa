@@ -31,21 +31,12 @@ class testProblemsBySeverityWidget extends CWebTest {
 	 * SQL query to get widget and widget_field tables to compare hash values, but without widget_fieldid
 	 * because it can change.
 	 */
-	private $sql;
-
-	/**
-	 * Overriden constructor.
-	 */
-	public function __construct($name = null, array $data = [], $data_name = '') {
-		parent::__construct($name, $data, $data_name);
-
-		$this->sql = 'SELECT wf.widgetid, wf.type, wf.name, wf.value_int, wf.value_str, wf.value_groupid, wf.value_hostid,'.
+	private $sql = 'SELECT wf.widgetid, wf.type, wf.name, wf.value_int, wf.value_str, wf.value_groupid, wf.value_hostid,'.
 			' wf.value_itemid, wf.value_graphid, wf.value_sysmapid, w.widgetid, w.dashboardid, w.type, w.name, w.x, w.y,'.
 			' w.width, w.height'.
 			' FROM widget_field wf'.
 			' INNER JOIN widget w'.
 			' ON w.widgetid=wf.widgetid ORDER BY wf.widgetid, wf.name, wf.value_int, wf.value_groupid';
-	}
 
 	public function getCreateWidgetData() {
 		return [
@@ -79,21 +70,17 @@ class testProblemsBySeverityWidget extends CWebTest {
 						'Type' => 'Problems by severity',
 						'Name' => 'Show only hosts with problems filtered by severity',
 						'Refresh interval' => '1 minute',
-						'Hide groups without problems' => true
-					],
-					'Severity' => [
-						'Information',
-						'Warning',
-						'Disaster'
+						'Hide groups without problems' => true,
+						'Severity' => ['Disaster', 'Warning', 'Information']
 					],
 					'expected' => [
 						'Group to check Overview' => [
-							'Disaster' => 1,
-							'Warning' => 1,
-							'Information' => 1
+							'Disaster' => '1',
+							'Warning' => '1',
+							'Information' => '1'
 						],
 						'Zabbix servers' => [
-							'Warning' => 5
+							'Warning' => '5'
 						]
 					]
 				]
@@ -120,28 +107,28 @@ class testProblemsBySeverityWidget extends CWebTest {
 					],
 					'expected' => [
 						'Another group to check Overview' => [
-							'Average' => '0 of 1'
+							'Average' => "0 of 1"
 						],
 						'Group to check Overview' => [
-							'Disaster' => '1'."\n".'of 1',
-							'High' => '1'."\n".'of 1',
-							'Average' => '1'."\n".'of 2',
-							'Warning' => '1'."\n".'of 1',
-							'Information' => '0 of 1',
-							'Not classified' => '1'."\n".'of 1'
+							'Disaster' => "1\nof 1",
+							'High' => "1\nof 1",
+							'Average' => "1\nof 2",
+							'Warning' => "1\nof 1",
+							'Information' => "0 of 1",
+							'Not classified' => "1\nof 1"
 						],
 						'Group to check triggers filtering' => [
-							'Average' => '1'."\n".'of 1'
+							'Average' => "1\nof 1"
 						],
 						'Host group for suppression' => [
-							'Average' => '1'."\n".'of 1'
+							'Average' => "1\nof 1"
 						],
 						'Host group for tag permissions' => [
-							'Not classified' => '2'."\n".'of 2'
+							'Not classified' => "2\nof 2"
 						],
 						'Zabbix servers' => [
-							'Average' => '1'."\n".'of 1',
-							'Warning' => '5'."\n".'of 5'
+							'Average' => "1\nof 1",
+							'Warning' => "5\nof 5"
 						]
 					]
 				]
@@ -152,19 +139,16 @@ class testProblemsBySeverityWidget extends CWebTest {
 					'fields' => [
 						'Type' => 'Problems by severity',
 						'Name' => 'Show only "Zabbix servers" and "Another group to check Overview" problems',
-						'Host groups' => [
-							'Zabbix servers',
-							'Another group to check Overview'
-						],
+						'Host groups' => ['Zabbix servers', 'Another group to check Overview'],
 						'Show operational data' => 'With problem name',
 					],
 					'expected' => [
 						'Another group to check Overview' => [
-							'Average' => 1
+							'Average' => '1'
 						],
 						'Zabbix servers' => [
-							'Average' => 1,
-							'Warning' => 5
+							'Average' => '1',
+							'Warning' => '5'
 						]
 					],
 					'check pop-up' => true
@@ -176,11 +160,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 					'fields' => [
 						'Type' => 'Problems by severity',
 						'Name' => 'Exclude "Zabbix servers"',
-						'Exclude host groups' => [
-							'Zabbix servers',
-							'Empty group',
-							'Group to check Overview'
-						]
+						'Exclude host groups' => ['Zabbix servers', 'Empty group', 'Group to check Overview']
 					]
 				]
 			],
@@ -190,28 +170,21 @@ class testProblemsBySeverityWidget extends CWebTest {
 					'fields' => [
 						'Type' => 'Problems by severity',
 						'Name' => 'Display only "1_Host_to_check_Monitoring_Overview"',
-						'Problem display' => 'Separated'
-					],
-					'select host' => [
-						'Host group' => 'Group to check Overview',
-						'Host' => '1_Host_to_check_Monitoring_Overview',
-					],
-					'Severity' => [
-						'Not classified',
-						'Information',
-						'Warning',
-						'Average',
-						'High',
-						'Disaster'
+						'Problem display' => 'Separated',
+						'Severity' => ['Disaster', 'High', 'Average', 'Warning', 'Information', 'Not classified'],
+						'Hosts' => [
+							'values' => ['1_Host_to_check_Monitoring_Overview'],
+							'context' => 'Group to check Overview'
+						]
 					],
 					'expected' => [
 						'Group to check Overview' => [
-							'Disaster' => '1'."\n".'of 1',
-							'High' => '1'."\n".'of 1',
-							'Average' => '1'."\n".'of 1',
-							'Warning' => '1'."\n".'of 1',
-							'Information' => '0 of 1',
-							'Not classified' => '1'."\n".'of 1'
+							'Disaster' => "1\nof 1",
+							'High' => "1\nof 1",
+							'Average' => "1\nof 1",
+							'Warning' => "1\nof 1",
+							'Information' => "0 of 1",
+							'Not classified' => "1\nof 1"
 						]
 					]
 				]
@@ -227,7 +200,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 					],
 					'expected' => [
 						'Zabbix servers' => [
-							'Warning' => '1'."\n".'of 1'
+							'Warning' => "1\nof 1"
 						]
 					]
 				]
@@ -257,56 +230,26 @@ class testProblemsBySeverityWidget extends CWebTest {
 					],
 					'expected' => [
 						'Group to check Overview' => [
-							'Disaster' => 1,
-							'High' => 1,
-							'Average' => 1,
-							'Warning' => 1,
-							'Not classified' => 1
+							'Disaster' => '1',
+							'High' => '1',
+							'Average' => '1',
+							'Warning' => '1',
+							'Not classified' => '1'
 						],
 						'Group to check triggers filtering' => [
-							'Average' => 1
+							'Average' => '1'
 						],
 						'Host group for tag permissions' => [
-							'Not classified' => 2
+							'Not classified' => '2'
 						],
 						'Zabbix servers' => [
-							'Average' => 1,
-							'Warning' => 5
+							'Average' => '1',
+							'Warning' => '5'
 						]
 					]
 				]
-			]
-		];
-	}
-
-	/**
-	 * @dataProvider getCreateWidgetData
-	 */
-	public function testProblemsBySeverityWidget_Create($data) {
-		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=102');
-		$dashboard = CDashboardElement::find()->one();
-		$old_widget_count = $dashboard->getWidgets()->count();
-
-		// Add a widget.
-		$dialogue = $dashboard->edit()->addWidget();
-		$form = $dialogue->asForm();
-		$header = CTestArrayHelper::get($data['fields'], 'Name', 'Problems by severity');
-		$this->fillFormAndSaveDashboard($dashboard, $form, $data, $header);
-		$widget = $dashboard->getWidget($header);
-
-		$this->checkDashboardUpdateMessage();
-		$this->assertEquals($old_widget_count + 1, $dashboard->getWidgets()->count());
-		$this->verifyWidgetContent($data, $widget);
-
-		// Check the content of the overlay pop-up if needed.
-		if (CTestArrayHelper::get($data, 'check pop-up', false)) {
-			$this->verifyPopupContent($data,$widget,'Host groups');
-		}
-	}
-
-	public function getCreateTotalsWidgetData() {
-		return [
-			// Create a widget with default values.
+			],
+						// Totals: Create a widget with default values.
 			[
 				[
 					'fields' => [
@@ -326,7 +269,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 					'check disabled field' => true
 				]
 			],
-			// Create a widget with selected 'show supprossed problems and ''show operational data' option and removed 'show timeline' option.
+			// Totals: Create a widget with selected 'show supprossed problems and ''show operational data' option and removed 'show timeline' option.
 			[
 				[
 					'fields' => [
@@ -349,7 +292,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 					'check pop-up' => true
 				]
 			],
-			// Create a widget that shows only problems with Disaster, Warning and Information severities with Vertical layout.
+			// Totals: Create a widget that shows only problems with Disaster, Warning and Information severities with Vertical layout.
 			[
 				[
 					'fields' => [
@@ -357,21 +300,17 @@ class testProblemsBySeverityWidget extends CWebTest {
 						'Name' => 'Totals: Show only hosts with problems filtered by severity',
 						'Refresh interval' => '1 minute',
 						'Show' => 'Totals',
-						'Layout' => 'Vertical'
-					],
-					'Severity' => [
-						'Information',
-						'Warning',
-						'Disaster'
+						'Layout' => 'Vertical',
+						'Severity' => ['Information', 'Warning', 'Disaster']
 					],
 					'expected' => [
-						'Disaster' => 1,
-						'Warning' => 6,
-						'Information' => 1
+						'Disaster' => '1',
+						'Warning' => '6',
+						'Information' => '1'
 					]
 				]
 			],
-			// Create a widget with 'Zabbix servers' and 'Another group to check Overview' host group problems.
+			// Totals: Create a widget with 'Zabbix servers' and 'Another group to check Overview' host group problems.
 			[
 				[
 					'fields' => [
@@ -379,10 +318,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 						'Name' => 'Totals: Show only "Zabbix servers" and "Another group to check Overview" problems',
 						'Show' => 'Totals',
 						'Layout' => 'Horizontal',
-						'Host groups' => [
-							'Zabbix servers',
-							'Another group to check Overview'
-						]
+						'Host groups' => ['Zabbix servers', 'Another group to check Overview']
 					],
 					'expected' => [
 						'Average' => '2',
@@ -390,7 +326,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 					]
 				]
 			],
-			// Create a widget that excludes several host groups and displays unacknowledged problems separately.
+			// Totals: Create a widget that excludes several host groups and displays unacknowledged problems separately.
 			[
 				[
 					'fields' => [
@@ -399,40 +335,30 @@ class testProblemsBySeverityWidget extends CWebTest {
 						'Show' => 'Totals',
 						'Layout' => 'Vertical',
 						'Problem display' => 'Separated',
-						'Exclude host groups' => [
-							'Zabbix servers',
-							'Group to check triggers filtering'
-						]
+						'Exclude host groups' => ['Zabbix servers', 'Group to check triggers filtering']
 					],
 					'expected' => [
-						'Disaster' => '1'."\n".'of 1',
-						'High' => '1'."\n".'of 1',
-						'Average' => '1'."\n".'of 3',
-						'Warning' => '1'."\n".'of 1',
-						'Information' => '0 of 1',
-						'Not classified' => '3'."\n".'of 3',
+						'Disaster' => "1\nof 1",
+						'High' => "1\nof 1",
+						'Average' => "1\nof 3",
+						'Warning' => "1\nof 1",
+						'Information' => "0 of 1",
+						'Not classified' => "3\nof 3"
 					]
 				]
 			],
-			// Create a widget that shows only '1_Hos_to_check_Monitoring_Overview' host problems.
+			// Totals: Create a widget that shows only '1_Hos_to_check_Monitoring_Overview' host problems.
 			[
 				[
 					'fields' => [
 						'Type' => 'Problems by severity',
 						'Name' => 'Totals: Display only "1_Host_to_check_Monitoring_Overview"',
-						'Show' => 'Totals'
-					],
-					'select host' => [
-						'Host group' => 'Group to check Overview',
-						'Host' => '1_Host_to_check_Monitoring_Overview',
-					],
-					'Severity' => [
-						'Not classified',
-						'Information',
-						'Warning',
-						'Average',
-						'High',
-						'Disaster'
+						'Show' => 'Totals',
+						'Severity' => ['Not classified', 'Information', 'Warning', 'Average', 'High', 'Disaster'],
+						'Hosts' => [
+							'values' => ['1_Host_to_check_Monitoring_Overview'],
+							'context' => 'Group to check Overview'
+						]
 					],
 					'expected' => [
 						'Disaster' => '1',
@@ -444,7 +370,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 					]
 				]
 			],
-			// Create a widget that shows only problems that contain 'Test trigger with tag'.
+			// Totals: Create a widget that shows only problems that contain 'Test trigger with tag'.
 			[
 				[
 					'fields' => [
@@ -458,7 +384,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 					]
 				]
 			],
-			// Create a widget that shows only unaknowledged problems.
+			// Totals: Create a widget that shows only unaknowledged problems.
 			[
 				[
 					'fields' => [
@@ -482,9 +408,9 @@ class testProblemsBySeverityWidget extends CWebTest {
 	}
 
 	/**
-	 * @dataProvider getCreateTotalsWidgetData
+	 * @dataProvider getCreateWidgetData
 	 */
-	public function testProblemsBySeverityWidget_TotalsCreate($data) {
+	public function testProblemsBySeverityWidget_Create($data) {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=102');
 		$dashboard = CDashboardElement::find()->one();
 		$old_widget_count = $dashboard->getWidgets()->count();
@@ -498,16 +424,29 @@ class testProblemsBySeverityWidget extends CWebTest {
 
 		$this->checkDashboardUpdateMessage();
 		$this->assertEquals($old_widget_count + 1, $dashboard->getWidgets()->count());
-		$this->verifyTotalsWidgetContent($data,$header);
-
+		$show = CTestArrayHelper::get($data['fields'], 'Show', 'Host groups');
+		if ($show === 'Host groups') {
+			$this->checkWidgetContent($data, $widget);
+		}
+		else {
+			$this->checkTotalsWidgetContent($data, $widget);
+		}
 		// Check the content of the overlay pop-up if needed.
 		if (CTestArrayHelper::get($data, 'check pop-up', false)) {
-			$this->verifyPopupContent($data,$widget,'Totals');
+			$this->verifyPopupContent($data, $widget, $show);
 		}
 	}
 
 	public function getUpdateWidgetData() {
 		return [
+			// Update widget to have a default name.
+			[
+				[
+					'fields' => [
+						'Name' => ''
+					]
+				]
+			],
 			// Hide host groups without problems and remove timeline.
 			[
 				[
@@ -520,7 +459,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 					],
 					'expected' => [
 						'Another group to check Overview' => [
-							'Average' => 1
+							'Average' => '1'
 						],
 						'Group to check Overview' => [
 							'Disaster' => '1',
@@ -531,7 +470,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 							'Not classified' => '1'
 						],
 						'Group to check triggers filtering' => [
-							'Average' => 1
+							'Average' => '1'
 						],
 						'Host group for tag permissions' => [
 							'Not classified' => '2'
@@ -551,26 +490,24 @@ class testProblemsBySeverityWidget extends CWebTest {
 						'Name' => 'Show only average problems including suppressed ones',
 						'Hide groups without problems' => true,
 						'Show suppressed problems' => true,
-						'Problem display' => 'Separated'
-					],
-					'Severity' => [
-						'Average'
+						'Problem display' => 'Separated',
+						'Severity' => ['Average']
 					],
 					'expected' => [
 						'Another group to check Overview' => [
-							'Average' => '0 of 1'
+							'Average' => "0 of 1"
 						],
 						'Group to check Overview' => [
-							'Average' => '1'."\n".'of 2'
+							'Average' => "1\nof 2"
 						],
 						'Group to check triggers filtering' => [
-							'Average' => '1'."\n".'of 1'
+							'Average' => "1\nof 1"
 						],
 						'Host group for suppression' => [
-							'Average' => '1'."\n".'of 1'
+							'Average' => "1\nof 1"
 						],
 						'Zabbix servers' => [
-							'Average' => '1'."\n".'of 1'
+							'Average' => "1\nof 1"
 						]
 					]
 				]
@@ -585,21 +522,21 @@ class testProblemsBySeverityWidget extends CWebTest {
 					],
 					'expected' => [
 						'Group to check Overview' => [
-							'Disaster' => 1,
-							'High' => 1,
-							'Average' => 1,
-							'Warning' => 1,
-							'Not classified' => 1
+							'Disaster' => '1',
+							'High' => '1',
+							'Average' => '1',
+							'Warning' => '1',
+							'Not classified' => '1'
 						],
 						'Group to check triggers filtering' => [
-							'Average' => 1
+							'Average' => '1'
 						],
 						'Host group for tag permissions' => [
-							'Not classified' => 2
+							'Not classified' => '2'
 						],
 						'Zabbix servers' => [
-							'Average' => 1,
-							'Warning' => 5
+							'Average' => '1',
+							'Warning' => '5'
 						]
 					],
 					'check pop-up' => true
@@ -629,13 +566,11 @@ class testProblemsBySeverityWidget extends CWebTest {
 				[
 					'fields' => [
 						'Name' => 'Return "Zabbix servers" and "Another group to check Overview" problems',
-						'Host groups' => [
-							'Zabbix servers'
+						'Host groups' => ['Zabbix servers'],
+						'Hosts' => [
+							'values' => ['Empty host'],
+							'context' => 'Empty group'
 						]
-					],
-					'select host' => [
-						'Host group' => 'Empty group',
-						'Host' => 'Empty host'
 					],
 					'expected' => [],
 					'empty output' => true
@@ -646,9 +581,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 				[
 					'fields' => [
 						'Name' => 'Exclude "Group to check Overview"',
-						'Exclude host groups' => [
-							'Group to check Overview'
-						]
+						'Exclude host groups' => ['Group to check Overview']
 					],
 					'expected' => [
 						'Another group to check Overview' => [
@@ -671,11 +604,11 @@ class testProblemsBySeverityWidget extends CWebTest {
 			[
 				[
 					'fields' => [
-						'Name' => 'Return "ЗАББИКС Сервер" problems'
-					],
-					'select host' => [
-						'Host group' => 'Zabbix servers',
-						'Host' => 'ЗАББИКС Сервер'
+						'Name' => 'Return "ЗАББИКС Сервер" problems',
+						'Hosts' => [
+							'values' => ['ЗАББИКС Сервер'],
+							'context' => 'Zabbix servers'
+						]
 					],
 					'expected' => [
 						'Zabbix servers' => [
@@ -690,22 +623,14 @@ class testProblemsBySeverityWidget extends CWebTest {
 				[
 					'fields' => [
 						'Name' => 'Display ЗАББИКС Сервер problems with excluded "Zabbix servers"',
-						'Exclude host groups' => [
-							'Zabbix servers'
-						]
+						'Exclude host groups' => ['Zabbix servers'],
+						'Hosts' => [
+							'values' => ['ЗАББИКС Сервер'],
+							'context' => 'Zabbix servers'
+						],
+						'Severity' => ['Disaster', 'High', 'Average', 'Warning', 'Information', 'Not classified']
 					],
-					'select host' => [
-						'Host group' => 'Zabbix servers',
-						'Host' => 'ЗАББИКС Сервер'
-					],
-					'Severity' => [
-						'Not classified',
-						'Information',
-						'Warning',
-						'Average',
-						'High',
-						'Disaster'
-					],
+
 					'expected' => [],
 					'empty output' => true
 				]
@@ -725,11 +650,8 @@ class testProblemsBySeverityWidget extends CWebTest {
 				[
 					'fields' => [
 						'Name' => 'Display only warning and information problems containing "_trigger_',
-						'Problem' => '_trigger_'
-					],
-					'Severity' => [
-						'Information',
-						'Warning'
+						'Problem' => '_trigger_',
+						'Severity' => ['Warning', 'Information']
 					],
 					'expected' => [
 						'Group to check Overview' => [
@@ -746,13 +668,11 @@ class testProblemsBySeverityWidget extends CWebTest {
 					'fields' => [
 						'Name' => 'Totals: separately show average problems including suppressed ones',
 						'Show suppressed problems' => true,
-						'Problem display' => 'Separated'
-					],
-					'Severity' => [
-						'Average'
+						'Problem display' => 'Separated',
+						'Severity' => ['Average']
 					],
 					'expected' => [
-						'Average' => '4'."\n".'of 6'
+						'Average' => "4\nof 6"
 					]
 				]
 			],
@@ -768,12 +688,12 @@ class testProblemsBySeverityWidget extends CWebTest {
 
 					],
 					'expected' => [
-						'Disaster' => 1,
-						'High' => 1,
-						'Average' => 3,
-						'Warning' => 6,
-						'Information' => 0,
-						'Not classified' => 3
+						'Disaster' => '1',
+						'High' => '1',
+						'Average' => '3',
+						'Warning' => '6',
+						'Information' => '0',
+						'Not classified' => '3'
 					],
 					'check pop-up' => true,
 					'rows count' => 3
@@ -803,13 +723,11 @@ class testProblemsBySeverityWidget extends CWebTest {
 					'widget to update' => 'Totals reference widget',
 					'fields' => [
 						'Name' => 'Return "Zabbix servers" and "Another group to check Overview" problems',
-						'Host groups' => [
-							'Zabbix servers'
+						'Host groups' => ['Zabbix servers'],
+						'Hosts' => [
+							'values' => ['Empty host'],
+							'context' => 'Empty group'
 						]
-					],
-					'select host' => [
-						'Host group' => 'Empty group',
-						'Host' => 'Empty host'
 					],
 					'expected' => []
 				]
@@ -820,9 +738,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 					'widget to update' => 'Totals reference widget',
 					'fields' => [
 						'Name' => 'Totals: Exclude "Group to check Overview"',
-						'Exclude host groups' => [
-							'Group to check Overview'
-						]
+						'Exclude host groups' => ['Group to check Overview']
 					],
 					'expected' => [
 						'Average' => '3',
@@ -836,11 +752,11 @@ class testProblemsBySeverityWidget extends CWebTest {
 				[
 					'widget to update' => 'Totals reference widget',
 					'fields' => [
-						'Name' => 'Totals: Return "ЗАББИКС Сервер" problems'
-					],
-					'select host' => [
-						'Host group' => 'Zabbix servers',
-						'Host' => 'ЗАББИКС Сервер'
+						'Name' => 'Totals: Return "ЗАББИКС Сервер" problems',
+						'Hosts' => [
+							'values' => ['ЗАББИКС Сервер'],
+							'context' => 'Zabbix servers'
+						]
 					],
 					'expected' => [
 						'Average' => '1',
@@ -854,21 +770,12 @@ class testProblemsBySeverityWidget extends CWebTest {
 					'widget to update' => 'Totals reference widget',
 					'fields' => [
 						'Name' => 'Totals: Display ЗАББИКС Сервер problems with excluded "Zabbix servers"',
-						'Exclude host groups' => [
-							'Zabbix servers'
+						'Exclude host groups' => ['Zabbix servers'],
+						'Severity' => ['Not classified', 'Information', 'Warning', 'Average', 'High', 'Disaster'],
+						'Hosts' => [
+							'values' => ['ЗАББИКС Сервер'],
+							'context' => 'Zabbix servers'
 						]
-					],
-					'select host' => [
-						'Host group' => 'Zabbix servers',
-						'Host' => 'ЗАББИКС Сервер'
-					],
-					'Severity' => [
-						'Not classified',
-						'Information',
-						'Warning',
-						'Average',
-						'High',
-						'Disaster'
 					],
 					'expected' => []
 				]
@@ -890,11 +797,8 @@ class testProblemsBySeverityWidget extends CWebTest {
 					'widget to update' => 'Totals reference widget',
 					'fields' => [
 						'Name' => 'Totals: Display only warning and information problems containing "_trigger_',
-						'Problem' => '_trigger_'
-					],
-					'Severity' => [
-						'Information',
-						'Warning'
+						'Problem' => '_trigger_',
+						'Severity' => ['Information', 'Warning']
 					],
 					'expected' => [
 						'Warning' => '1',
@@ -944,7 +848,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 		$dashboard = CDashboardElement::find()->one();
 		$dashboard->edit();
 		// Select the widget to update
-		if (CTestArrayHelper::get($data,'widget to update', 'Reference widget') === 'Reference widget') {
+		if (CTestArrayHelper::get($data, 'widget to update', 'Reference widget') === 'Reference widget') {
 			$form = $dashboard->getWidget('Reference widget')->edit();
 		}
 		else {
@@ -955,23 +859,23 @@ class testProblemsBySeverityWidget extends CWebTest {
 		$header = ($data['fields']['Name'] === '') ? 'Problems by severity' : $data['fields']['Name'];
 
 		$this->fillFormAndSaveDashboard($dashboard, $form, $data, $header);
-		$widget = $dashboard->getWidget(CTestArrayHelper::get($data['fields'], 'Name', 'Problems by severity'));
+		$widget = $dashboard->getWidget($header);
 
 		$this->checkDashboardUpdateMessage();
 
-		if ((CTestArrayHelper::get($data,'widget to update', 'Reference widget') === 'Reference widget' &&
-				CTestArrayHelper::get($data['fields'],'Show', 'Host groups') === 'Host groups')||
-				(CTestArrayHelper::get($data,'widget to update', 'Reference widget') === 'Totals reference widget' &&
-				CTestArrayHelper::get($data['fields'],'Show', 'Totals') === 'Host groups')) {
-			$this->verifyWidgetContent($data, $widget);
+		if ((CTestArrayHelper::get($data, 'widget to update', 'Reference widget') === 'Reference widget' &&
+				CTestArrayHelper::get($data['fields'], 'Show', 'Host groups') === 'Host groups')||
+				(CTestArrayHelper::get($data, 'widget to update', 'Reference widget') === 'Totals reference widget' &&
+				CTestArrayHelper::get($data['fields'], 'Show', 'Totals') === 'Host groups')) {
+			$this->checkWidgetContent($data, $widget);
 			if (CTestArrayHelper::get($data, 'check pop-up', false)) {
-				$this->verifyPopupContent($data,$widget,'Host groups');
+				$this->verifyPopupContent($data, $widget, 'Host groups');
 			}
 		}
 		else {
-			$this->verifyTotalsWidgetContent($data, $header);
+			$this->checkTotalsWidgetContent($data, $widget);
 			if (CTestArrayHelper::get($data, 'check pop-up', false)) {
-				$this->verifyPopupContent($data,$widget,'Totals');
+				$this->verifyPopupContent($data, $widget, 'Totals');
 			}
 		}
 	}
@@ -1009,14 +913,14 @@ class testProblemsBySeverityWidget extends CWebTest {
 				[
 					'existing_widget' => 'Reference widget',
 					'save_widget' => false,
-					'save dashboard' => true
+					'save_dashboard' => true
 				]
 			],
 			// Cancel create widget.
 			[
 				[
 					'save_widget' => true,
-					'save dashboard' => false
+					'save_dashboard' => false
 				]
 			],
 			[
@@ -1035,16 +939,15 @@ class testProblemsBySeverityWidget extends CWebTest {
 		$old_hash = CDBHelper::getHash($this->sql);
 
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=102');
-		$dashboard = CDashboardElement::find()->one();
+		$dashboard = CDashboardElement::find()->one()->edit();
 
 		// Start updating or creating a widget.
 		if (CTestArrayHelper::get($data, 'existing_widget', false)) {
-			$dashboard->edit();
 			$widget = $dashboard->getWidget($data['existing_widget']);
 			$form = $widget->edit();
 		}
 		else {
-			$overlay = $dashboard->edit()->addWidget();
+			$overlay = $dashboard->addWidget();
 			$form = $overlay->asForm();
 			$form->getField('Type')->fill('Problems by severity');
 			$widget = $dashboard->getWidgets()->last();
@@ -1084,32 +987,26 @@ class testProblemsBySeverityWidget extends CWebTest {
 	}
 
 	public function testProblemsBySeverityWidget_Delete() {
-		foreach (['Reference widget to delete', 'Totals reference widget to delete'] as $name) {
+		foreach (['Reference PBS widget to delete', 'Totals reference PBS widget to delete'] as $name) {
 			$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=102');
 			$dashboard = CDashboardElement::find()->one()->edit();
 			$widget = $dashboard->getWidget($name);
-			$widget->query("xpath:.//button[@title='Delete']")->one()->click();
+			$widget->delete();
 			$this->page->waitUntilReady();
-
 			$dashboard->save();
 			// Check that Dashboard has been saved
 			$this->checkDashboardUpdateMessage();
 			// Confirm that widget is not present on dashboard.
-			$this->assertTrue($dashboard->query('xpath:.//div[contains(@class,"dashbrd-grid-widget-head")]/h4[text()='.
+			$this->assertTrue($dashboard->query('xpath:.//div[contains(@class, "dashbrd-grid-widget-head")]/h4[text()='.
 					CXPathHelper::escapeQuotes($name).']')->count() === 0);
+			$widget_sql = 'SELECT * FROM widget_field wf LEFT JOIN widget w ON w.widgetid=wf.widgetid'.
+				' WHERE w.name = '.zbx_dbstr($name);
+			$this->assertEquals(0, CDBHelper::getCount($widget_sql));
 		}
 	}
 
 	private function fillFormAndSaveDashboard($dashboard, $form, $data, $header) {
 		$form->fill($data['fields']);
-		if (array_key_exists('Severity', $data)) {
-			$severities = $form->getField('Severity')->waitUntilVisible();
-			$severities->fill($data['Severity']);
-		}
-		if (array_key_exists('select host', $data)) {
-			$hosts = $form->getField('Hosts')->asMultiselect();
-			$hosts->select($data['select host']['Host'], $data['select host']['Host group']);
-		}
 		if (CTestArrayHelper::get($data, 'check disabled field', false)) {
 			if (CTestArrayHelper::get($data['fields'], 'Show', 'Host groups') === 'Totals') {
 				$this->assertTrue($form->getField('Layout')->isEnabled());
@@ -1126,64 +1023,49 @@ class testProblemsBySeverityWidget extends CWebTest {
 		$dashboard->save();
 	}
 
-	private function verifyWidgetContent($data, $widget) {
-		$dashboard = CDashboardElement::find()->one();
+	private function checkWidgetContent($data, $widget) {
 		$table = $widget->getContent()->asTable();
 		// Defining expected results in case if no filterint is applied.
 		$default_values = [
 			'values' => [
 				'Another group to check Overview' => [
-					'Average' => 1
+					'Average' => '1'
 				],
 				'Group to check Overview' => [
-					'Disaster' => 1,
-					'High' => 1,
-					'Average' => 2,
-					'Warning' => 1,
-					'Information' => 1,
-					'Not classified' => 1
+					'Disaster' => '1',
+					'High' => '1',
+					'Average' => '2',
+					'Warning' => '1',
+					'Information' => '1',
+					'Not classified' => '1'
 				],
 				'Group to check triggers filtering' => [
-					'Average' => 1
+					'Average' => '1'
 				],
 				'Host group for tag permissions' => [
-					'Not classified' => 2
+					'Not classified' => '2'
 				],
 				'Zabbix servers' => [
-					'Average' => 1,
-					'Warning' => 5
+					'Average' => '1',
+					'Warning' => '5'
 				],
 				'Host group for suppression' => [
-					'Average' => 1
+					'Average' => '1'
 				]
 			],
-			'table_headers' => [
-				'Host group',
-				'Disaster',
-				'High',
-				'Average',
-				'Warning',
-				'Information',
-				'Not classified'
-			]
+			'Severity' => ['Disaster', 'High', 'Average', 'Warning', 'Information', 'Not classified']
 		];
 
 		// Check that only chosen severities are returned in the output if 'Severity' filter is used.
-		if (!array_key_exists('Severity', $data)) {
-			$this->assertSame($default_values['table_headers'], $table->getHeadersText());
-		}
-		else {
-			foreach ($data['Severity'] as $used_severity) {
-				$this->assertContains($used_severity, $table->getHeadersText());
-			}
-			$unused_severities = array_diff($default_values['table_headers'], $data['Severity']);
+		$table_headers = CTestArrayHelper::get($data, 'fields.Severity', false) ? $data['fields']['Severity'] : $default_values['Severity'];
+		array_unshift($table_headers, 'Host group');
+		$this->assertEquals($table_headers, $table->getHeadersText());
 
-			foreach ($unused_severities as $unused_severity) {
-				if ($unused_severity === 'Host group') {
-					continue;
-				}
-				$this->assertNotContains($unused_severity,$table->getHeadersText());
-			}
+		// Check that nothing is returned in the widget if such outcome is expected.
+		if (CTestArrayHelper::get($data, 'empty output', false)) {
+			$this->assertTrue($widget->query('class:nothing-to-show')->one()->isTextPresent('No data found.'));
+
+			return;
 		}
 
 		$content = $table->index('Host group');
@@ -1201,13 +1083,9 @@ class testProblemsBySeverityWidget extends CWebTest {
 			}
 		}
 
-		// Check that nothing is returned in the widget if such outcome is expected.
-		if (CTestArrayHelper::get($data, 'empty output', false)) {
-			$this->assertTrue($widget->query("xpath:.//td[text()='No data found.']")->count() === 1);
-		}
-		// Check that only selected host groups are returned when 'Hide groups without problems', 'Host groups' or 'Hosts' are specified.
-		elseif (CTestArrayHelper::get($data['fields'], 'Hide groups without problems', false) ||
-				array_key_exists ('Host groups', $data['fields']) || array_key_exists('select host', $data)) {
+		// Check that only selected host groups are returned when 'Hide groups without values', 'Host groups' or 'Hosts' are specified.
+		if (CTestArrayHelper::get($data['fields'], 'Hide groups without problems', false) ||
+				array_key_exists('Host groups', $data['fields']) || array_key_exists('Hosts', $data['fields'])) {
 			$this->assertEquals(count($expected), count($content));
 		}
 
@@ -1227,10 +1105,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 		}
 	}
 
-	private function verifyTotalsWidgetContent($data,$header) {
-		// Get widget content.
-		$dashboard = CDashboardElement::find()->one();
-		$widget = $dashboard->getWidget($header);
+	private function checkTotalsWidgetContent($data, $widget) {
 		$content = $widget->getContent()->asTable();
 
 		// Verify that layout is correct.
@@ -1256,7 +1131,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 		// Get the count of problems for each severity that is returned by the widget.
 		foreach ($classes as $key => $class) {
 			$xpath = 'xpath:.//div[@class='.CXPathHelper::escapeQuotes($class).']/span';
-			if (array_key_exists('Severity', $data) && !array_key_exists($key, $data['Severity'])) {
+			if (array_key_exists('Severity', $data['fields']) && !array_key_exists($key, $data['fields']['Severity'])) {
 				continue;
 			}
 			$results[$key] = $widget->query($xpath)->one()->getText();
@@ -1272,57 +1147,55 @@ class testProblemsBySeverityWidget extends CWebTest {
 		}
 	}
 
-	private function verifyPopupContent($data,$widget,$show){
-			$expected_popup = [
-				"fields" => [
-					"Time" => "2017-10-23 12:33:48",
-					"Host" => "ЗАББИКС Сервер",
-					"Problem" => "Test trigger to check tag filter on problem page",
-					"Ack" => 'No'
-				],
-				"Tags" => [
-					'Database',
-					'Service: abc',
-					'service: abcdef'
-				],
-				"rows count" => [
-					'Host groups' => 1,
-					'Totals' => 6 // 5 problems + 1 time period (with timeline) or 6 problems (without timeline but with suppressed problem)
-				]
-			];
-			if (array_key_exists('rows count', $data)) {
-				$rows_count = CTestArrayHelper::get($data, 'rows count');
-			}
-			else {
-				$rows_count = CTestArrayHelper::get($expected_popup['rows count'], $show);
-			}
-			// Open the pop-up for severity "Average"
-			if ($show === 'Host groups') {
-				$widget->query("xpath:.//div[@class='dashbrd-grid-widget-content']//a[text()='Zabbix servers']/../../td[@class='average-bg']/span/a")->one()->click();
-			}
-			else {
-				$widget->query("xpath:.//div[@class='average-bg']//a[@data-hintbox-static='1']")->one()->click();
-			}
-			$popup = $this->query("xpath://div[@class='overlay-dialogue']//table")->asTable()->one();
-			$this->assertTrue($popup->getRows()->count() === $rows_count);
+	private function verifyPopupContent($data, $widget, $show){
+		$expected_popup = [
+			'fields' => [
+				'Time' => '2017-10-23 12:33:48',
+				'Host' => 'ЗАББИКС Сервер',
+				'Problem' => 'Test trigger to check tag filter on problem page',
+				'Ack' => 'No'
+			],
+			'Tags' => ['Database', 'Service: abc', 'service: abcdef'],
+			'rows count' => [
+				'Host groups' => 1,
+				'Totals' => 6 // 5 problems + 1 time period (with timeline) or 6 problems (without timeline but with suppressed problem)
+			]
+		];
+		if (array_key_exists('rows count', $data)) {
+			$rows_count = CTestArrayHelper::get($data, 'rows count');
+		}
+		else {
+			$rows_count = CTestArrayHelper::get($expected_popup['rows count'], $show);
+		}
+		// Open the pop-up for severity "Average"
+		if ($show === 'Host groups') {
+			$table = $widget->getContent()->asTable();
+			$hostgroup_row = $table->findRow('Host group', 'Zabbix servers');
+			$hostgroup_row->query('xpath:.//td[@class="average-bg"]/span/a')->one()->click();
+		}
+		else {
+			$widget->query('xpath:.//div[@class="average-bg"]//a[@data-hintbox-static="1"]')->one()->click();
+		}
+		$popup = $this->query('xpath://div[@class="overlay-dialogue"]//table')->asTable()->one();
+		$this->assertTrue($popup->getRows()->count() === $rows_count);
 
-			$row = $popup->findRow('Problem', $expected_popup['fields']['Problem'])->asTableRow();
-			foreach ($expected_popup['fields'] as $name => $value) {
-				$this->assertEquals($value,$row->getColumn($name)->getText());
-			}
-			foreach ($expected_popup['Tags'] as $tag) {
-				$tag_array = $row->getColumn('Tags')->getText();
-				$this->assertContains($tag, $tag_array);
-			}
-			if (CTestArrayHelper::get($data['fields'], 'Show operational data', 'None') === 'Separately') {
-				$this->assertEquals('*UNKNOWN*',$row->getColumn('Operational data')->getText());
-			}
-			else {
-				$this->assertTrue($row->getColumn('Operational data') === null);
-			}
-			if (CTestArrayHelper::get($data['fields'], 'Show timeline', true)) {
-				$this->assertEquals($rows_count,$popup->query("xpath:.//td[@class='timeline-date']")->all()->count());
-			}
+		$row = $popup->findRow('Problem', $expected_popup['fields']['Problem'])->asTableRow();
+		foreach ($expected_popup['fields'] as $name => $value) {
+			$this->assertEquals($value, $row->getColumn($name)->getText());
+		}
+		foreach ($expected_popup['Tags'] as $tag) {
+			$tag_array = $row->getColumn('Tags')->getText();
+			$this->assertContains($tag, $tag_array);
+		}
+		if (CTestArrayHelper::get($data['fields'], 'Show operational data', 'None') === 'Separately') {
+			$this->assertEquals('*UNKNOWN*', $row->getColumn('Operational data')->getText());
+		}
+		else {
+			$this->assertTrue($row->getColumn('Operational data') === null);
+		}
+		if (CTestArrayHelper::get($data['fields'], 'Show timeline', true)) {
+			$this->assertEquals($rows_count, $popup->query('xpath:.//td[@class="timeline-date"]')->all()->count());
+		}
 	}
 
 	private function checkDashboardUpdateMessage() {
