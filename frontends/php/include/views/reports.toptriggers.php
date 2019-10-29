@@ -21,7 +21,6 @@
 
 $filterForm = new CFilter(new CUrl('toptriggers.php'));
 
-//// severities
 $severities = [];
 foreach (range(TRIGGER_SEVERITY_NOT_CLASSIFIED, TRIGGER_SEVERITY_COUNT - 1) as $severity) {
 	$severities[] = [
