@@ -169,7 +169,8 @@ $mediatypes = API::Mediatype()->get([
  */
 $event_details_url = (new CUrl($page['file']))
 	->setArgument('triggerid', getRequest('triggerid'))
-	->setArgument('eventid', getRequest('eventid'));
+	->setArgument('eventid', getRequest('eventid'))
+	->getUrl();
 
 $event_tab = (new CDiv([
 	new CDiv([
