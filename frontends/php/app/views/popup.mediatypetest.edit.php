@@ -39,19 +39,13 @@ if ($data['type'] == MEDIA_TYPE_WEBHOOK) {
 	}
 
 	$form_list
-		->addRow(new CLabel(_('Response')),
+		->addRow(new CLabel(_('Response')), [
 			(new CTextArea(''))
 				->setId('webhook_response_value')
 				->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
-				->setEnabled(false)
-		)
-		->addRow('',
-			(new CRadioButtonList('webhook_response_type', 'null'))
-				->addValue(_('JSON'), 'object')
-				->addValue(_('String'), 'string')
-				->setReadonly(true)
-				->setModern(true)
-		);
+				->setEnabled(false),
+			(new CDiv(''))->setId('webhook_response_type')
+		]);
 }
 else {
 	$form_list

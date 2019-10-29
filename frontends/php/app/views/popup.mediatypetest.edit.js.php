@@ -63,17 +63,8 @@ function mediatypeTestSend(formname) {
 			$form_fields.prop('disabled', false);
 
 			if ('response' in ret) {
-				try {
-					type = ret.response.type;
-					value = _json_stringify(ret.response.value, undefined, 2);
-				} catch (error) {
-					value = error;
-					type = 'string';
-				}
-
-				jQuery('#webhook_response_value', form).val(value);
-				jQuery('#webhook_response_type input', form).removeAttr('checked')
-					.filter('[value="' + type + '"]').attr('checked', true);
+				jQuery('#webhook_response_value', form).val(ret.response.value);
+				jQuery('#webhook_response_type', form).text(ret.response.type);
 			}
 
 			jQuery('.preloader').remove();
