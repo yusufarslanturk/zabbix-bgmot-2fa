@@ -30,51 +30,42 @@ class testHostAvailabilityWidget extends CWebTest {
 	 * SQL query to get widget and widget_field tables to compare hash values, but without widget_fieldid
 	 * because it can change.
 	 */
-	private $sql;
-
-	/**
-	 * Overriden constructor.
-	 */
-	public function __construct($name = null, array $data = [], $data_name = '') {
-		parent::__construct($name, $data, $data_name);
-
-		$this->sql = 'SELECT wf.widgetid, wf.type, wf.name, wf.value_int, wf.value_str, wf.value_groupid, wf.value_hostid,'.
+	private $sql = 'SELECT wf.widgetid, wf.type, wf.name, wf.value_int, wf.value_str, wf.value_groupid, wf.value_hostid,'.
 			' wf.value_itemid, wf.value_graphid, wf.value_sysmapid, w.widgetid, w.dashboardid, w.type, w.name, w.x, w.y,'.
 			' w.width, w.height'.
 			' FROM widget_field wf'.
 			' INNER JOIN widget w'.
 			' ON w.widgetid=wf.widgetid ORDER BY wf.widgetid, wf.name, wf.value_int, wf.value_groupid';
-	}
 
 	public static function getCreateWidgetData() {
 		return [
-			// Create a Host availability widget with default values.
+			// Create a Host availability widget with default values for Zabbix agent interface.
 			[
 				[
 					'fields' => [
-						'Type' => 'Host availability'
+						'Type' => 'Host availability',
+						'Name' => 'Single interface widget - default',
+						'Interface type' => ['Zabbix agent']
 					]
 				]
 			],
-			// Create a Host availability widget specifying every parameter.
+			// Create a Host availability widget for Zabbix agent interface specifying every parameter.
 			[
 				[
 					'fields' => [
 						'Type' => 'Host availability',
 						'Name' => 'Show hosts in maintenance',
 						'Refresh interval' => '1 minute',
-						'Host groups' => [
-							'Group for Host availability widget',
-							'Group in maintenance for Host availability widget'
-						],
+						'Host groups' => ['Group for Host availability widget', 'Group in maintenance for Host availability widget'],
 						'Layout' => 'Horizontal',
+						'Interface type' => ['Zabbix agent'],
 						'Show hosts in maintenance' => true
 					],
 					'expected_values' => [
-						'total' => 6,
-						'available' => 2,
-						'not available' => 2,
-						'unknown' => 2
+						'Total' => '6',
+						'Available' => '2',
+						'Not available' => '2',
+						'Unknown' => '2'
 					]
 				]
 			],
@@ -85,34 +76,190 @@ class testHostAvailabilityWidget extends CWebTest {
 						'Type' => 'Host availability',
 						'Name' => 'Dont show hosts in maintenance',
 						'Refresh interval' => '10 minutes',
-						'Host groups' => [
-							'Group for Host availability widget',
-							'Group in maintenance for Host availability widget'
-						],
+						'Host groups' => ['Group for Host availability widget', 'Group in maintenance for Host availability widget'],
 						'Layout' => 'Horizontal',
+						'Interface type' => ['Zabbix agent'],
 						'Show hosts in maintenance' => false
 					],
 					'expected_values' => [
-						'total' => 3,
-						'available' => 1,
-						'not available' => 1,
-						'unknown' => 1
+						'Total' => '3',
+						'Available' => '1',
+						'Not available' => '1',
+						'Unknown' => '1'
 					]
 				]
 			],
-			// Create a Host availability widget with vertical layout.
+			// Create a Host availability widget that displays only IPMI interfaces including the ones in maintenance.
 			[
 				[
 					'fields' => [
 						'Type' => 'Host availability',
-						'Name' => 'Vertical host availability widget',
+						'Name' => 'Host availability widget - IPMI with maintenance',
 						'Refresh interval' => '10 seconds',
-						'Layout' => 'Vertical',
+						'Interface type' => ['IPMI'],
 						'Show hosts in maintenance' => true
+					],
+					'expected_values' => [
+						'Total' => '7',
+						'Available' => '2',
+						'Not available' => '2',
+						'Unknown' => '3'
 					],
 					'interval_in_seconds' => true
 				]
+			],
+			// Create a Host availability widget that displays SNMP interface.
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability',
+						'Name' => 'Host availability widget - SNMP',
+						'Refresh interval' => '2 minutes',
+						'Interface type' => ['SNMP'],
+						'Layout' => 'Vertical'
+					],
+					'expected_values' => [
+						'Total' => '5',
+						'Available' => '1',
+						'Not available' => '1',
+						'Unknown' => '3'
+					]
+				]
+			],
+			// Create a Host availability widget that displays JMX interface.
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability',
+						'Name' => 'Host availability widget - JMX',
+						'Refresh interval' => '10 minutes',
+						'Interface type' => ['JMX']
+					],
+					'expected_values' => [
+						'Total' => '6',
+						'Available' => '1',
+						'Not available' => '1',
+						'Unknown' => '4'
+					]
+				]
+			],
+			// Create a Host availability widget with default values.
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability'
+					]
+				]
+			],
+			// Create a Host availability widget with all 4 interfaces selected.
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability',
+						'Name' => 'All interfaces selected',
+						'Layout' => 'Vertical',
+						'Interface type' => ['Zabbix agent', 'SNMP', 'JMX', 'IPMI']
+					],
+				]
+			],
+			// Create a Host availability widget that displays JMX interface.
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability',
+						'Name' => 'HA widget - show hosts in maintenance SNMP + JMX + IPMI',
+						'Refresh interval' => '1 minute',
+						'Show hosts in maintenance' => true,
+						'Interface type' => ['SNMP', 'JMX', 'IPMI']
+					],
+					'expected_values' => [
+						'SNMP' => [
+							'Available' => '2',
+							'Not available' => '2',
+							'Unknown' => '3',
+							'Total' => '7'
+						],
+						'JMX' => [
+							'Available' => '2',
+							'Not available' => '2',
+							'Unknown' => '4',
+							'Total' => '8'
+						],
+						'IPMI' => [
+							'Available' => '2',
+							'Not available' => '2',
+							'Unknown' => '3',
+							'Total' => '7'
+						]
+					]
+				]
+			],
+			// Create a Host availability widget with Vertical layout that displays SNMP, JMX and IPMI interfaces.
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability',
+						'Name' => 'Vertical HA widget - SNMP + JMX + IPMI',
+						'Refresh interval' => '10 minutes',
+						'Layout' => 'Vertical',
+						'Interface type' => ['SNMP', 'JMX', 'IPMI']
+					],
+					'expected_values' => [
+						'SNMP' => [
+							'Available' => '1',
+							'Not available' => '1',
+							'Unknown' => '3',
+							'Total' => '5'
+						],
+						'JMX' => [
+							'Available' => '1',
+							'Not available' => '1',
+							'Unknown' => '4',
+							'Total' => '6'
+						],
+						'IPMI' => [
+							'Available' => '1',
+							'Not available' => '1',
+							'Unknown' => '3',
+							'Total' => '5'
+						]
+					]
+				]
+			],
+			// HA widget that displays SNMP, JMX and SNMP interfaces for host group with only Zabbix agent interfaces.
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability',
+						'Name' => 'Misconfiguration - zeros should be returned',
+						'Refresh interval' => '1 minute',
+						'Host groups' => ['Group to check Overview'],
+						'Interface type' => ['SNMP', 'JMX', 'IPMI'],
+						'Show hosts in maintenance' => true
+					],
+					'expected_values' => [
+						'SNMP' => [
+							'Available' => '0',
+							'Not available' => '0',
+							'Unknown' => '0',
+							'Total' => '0'
+						],
+						'JMX' => [
+							'Available' => '0',
+							'Not available' => '0',
+							'Unknown' => '0',
+							'Total' => '0'
+						],
+						'IPMI' => [
+							'Available' => '0',
+							'Not available' => '0',
+							'Unknown' => '0',
+							'Total' => '0'
+						]
+					]
+				]
 			]
+
 		];
 	}
 
@@ -142,7 +289,13 @@ class testHostAvailabilityWidget extends CWebTest {
 
 		// Check that widget has been added.
 		$this->verifyRefreshInterval($data, $header);
-		$this->verifyWidgetContent($data, $header);
+		// Verify widget content depending on the number of interaces displayed (single or multiple)
+		if (array_key_exists('Interface type', $data['fields']) && count($data['fields']['Interface type']) === 1) {
+			$this->checkWidgetContent($data, $header);
+		}
+		else {
+			$this->checkMultipleInterfacesWidgetContent($data, $header);
+		}
 	}
 
 	public static function getUpdateWidgetData() {
@@ -153,16 +306,15 @@ class testHostAvailabilityWidget extends CWebTest {
 					'fields' => [
 						'Name' => 'Should return zeros',
 						'Refresh interval' => '1 minute',
-						'Host groups' => [
-							'Group in maintenance for Host availability widget'
-						],
+						'Host groups' => ['Group in maintenance for Host availability widget'],
+						'Interface type' => ['Zabbix agent'],
 						'Show hosts in maintenance' => false
 					],
 					'expected_values' => [
-						'total' => 0,
-						'available' => 0,
-						'not available' => 0,
-						'unknown' => 0
+						'Total' => '0',
+						'Available' => '0',
+						'Not available' => '0',
+						'Unknown' => '0'
 					]
 				]
 			],
@@ -173,16 +325,15 @@ class testHostAvailabilityWidget extends CWebTest {
 						'Type' => 'Host availability',
 						'Name' => 'Return hosts in maintenance',
 						'Refresh interval' => '10 seconds',
-						'Host groups' => [
-							'Group in maintenance for Host availability widget'
-						],
+						'Host groups' => ['Group in maintenance for Host availability widget'],
+						'Interface type' => ['Zabbix agent'],
 						'Show hosts in maintenance' => true
 					],
 					'expected_values' => [
-						'total' => 3,
-						'available' => 1,
-						'not available' => 1,
-						'unknown' => 1
+						'Total' => '3',
+						'Available' => '1',
+						'Not available' => '1',
+						'Unknown' => '1'
 					],
 					'interval_in_seconds' => true
 				]
@@ -194,7 +345,8 @@ class testHostAvailabilityWidget extends CWebTest {
 						'Type' => 'Host availability',
 						'Name' => 'Layout is now vertical',
 						'Refresh interval' => '2 minutes',
-						'Layout' => 'Vertical'
+						'Layout' => 'Vertical',
+						'Interface type' => ['Zabbix agent']
 					]
 				]
 			],
@@ -204,18 +356,94 @@ class testHostAvailabilityWidget extends CWebTest {
 					'fields' => [
 						'Type' => 'Host availability',
 						'Name' => '',
-						'Refresh interval' => 'Default (15 minutes)'
+						'Refresh interval' => 'Default (15 minutes)',
+						'Interface type' => ['Zabbix agent']
 					]
 				]
 			],
-			// Update the show hosts in maintenance option without defining host groups.
+			// Update the widget to show hosts in maintenance option without defining host groups.
 			[
 				[
 					'fields' => [
 						'Type' => 'Host availability',
 						'Name' => 'Show completely all hosts',
 						'Refresh interval' => 'No refresh',
+						'Interface type' => ['Zabbix agent'],
 						'Show hosts in maintenance' => true
+					]
+				]
+			],
+			// Update the widget to display host availability for 2 interface types including hosts in maintenance.
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability',
+						'Name' => 'Show completely all hosts for Zabbixagent and SNMP',
+						'Refresh interval' => '10 seconds',
+						'Interface type' => ['Zabbix agent', 'SNMP'],
+						'Show hosts in maintenance' => true
+					]
+				]
+			],
+			// Update the widget to display host availability for 3 interface types excluding hosts in maintenance.
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability',
+						'Name' => 'Show hosts for Zabbix agent, SNMP and JMX',
+						'Refresh interval' => '2 minutes',
+						'Interface type' => ['Zabbix agent', 'SNMP', 'JMX']
+					]
+				]
+			],
+			// Update the widget to display host availability for all interfaces including hosts in maintenance. Layout = Vertical
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability',
+						'Name' => 'Show completely all hosts for all interfaces',
+						'Refresh interval' => '2 minutes',
+						'Interface type' => ['Zabbix agent', 'SNMP', 'JMX', 'IPMI'],
+						'Show hosts in maintenance' => true,
+						'Layout' => 'Vertical'
+					]
+				]
+			],
+			// Display host availability for all interfaces for 2 host groups.
+			[
+				[
+					'fields' => [
+						'Type' => 'Host availability',
+						'Name' => 'Show all hosts for all interfaces of 2 groups',
+						'Refresh interval' => '10 minutes',
+						'Host groups' => ['Group for Host availability widget', 'Group in maintenance for Host availability widget'],
+						'Show hosts in maintenance' => true
+					],
+					'expected_values' => [
+						'Zabbix agent' => [
+							'Available' => '2',
+							'Not available' => '2',
+							'Unknown' => '2',
+							'Total' => '6'
+						],
+						'SNMP' => [
+							'Available' => '2',
+							'Not available' => '2',
+							'Unknown' => '0',
+							'Total' => '4'
+						],
+						'JMX' => [
+							'Available' => '2',
+							'Not available' => '2',
+							'Unknown' => '0',
+							'Total' => '4'
+						],
+						'IPMI' => [
+							'Available' => '2',
+							'Not available' => '2',
+							'Unknown' => '0',
+							'Total' => '4'
+						]
 					]
 				]
 			]
@@ -229,7 +457,7 @@ class testHostAvailabilityWidget extends CWebTest {
 	public function testHostAvailabilityWidget_Update($data) {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=101');
 		$dashboard = CDashboardElement::find()->one();
-		$form = $dashboard->getWidget('Reference widget')->edit();
+		$form = $dashboard->getWidget('Reference HA widget')->edit();
 
 		// Update the widget.
 		$header = ($data['fields']['Name'] === '') ? 'Host availability' : $data['fields']['Name'];
@@ -245,7 +473,13 @@ class testHostAvailabilityWidget extends CWebTest {
 		$this->checkDashboardUpdateMessage();
 		// Check that widget has been added.
 		$this->verifyRefreshInterval($data, $header);
-		$this->verifyWidgetContent($data, $header);
+		// Verify widget content depending on the number of interaces displayed (single or multiple)
+		if (array_key_exists('Interface type', $data['fields']) && count($data['fields']['Interface type']) === 1) {
+			$this->checkWidgetContent($data, $header);
+		}
+		else {
+			$this->checkMultipleInterfacesWidgetContent($data, $header);
+		}
 	}
 
 	public function testHostAvailabilityWidget_SimpleUpdate() {
@@ -254,11 +488,11 @@ class testHostAvailabilityWidget extends CWebTest {
 		// Open a dashboard widget and then save it without applying any changes
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=101');
 		$dashboard = CDashboardElement::find()->one();
-		$form = $dashboard->getWidget('Reference widget')->edit();
+		$form = $dashboard->getWidget('Reference HA widget')->edit();
 		$form->submit();
 		$this->page->waitUntilReady();
 
-		$dashboard->getWidget('Reference widget');
+		$dashboard->getWidget('Reference HA widget');
 		$dashboard->save();
 
 		// Check that Dashboard has been saved and that there are no changes made to the widgets.
@@ -272,23 +506,23 @@ class testHostAvailabilityWidget extends CWebTest {
 			// Cancel update widget.
 			[
 				[
-					'existing_widget' => 'Reference widget',
+					'existing_widget' => 'Reference HA widget',
 					'save_widget' => true,
 					'save_dashboard' => false
 				]
 			],
 			[
 				[
-					'existing_widget' => 'Reference widget',
+					'existing_widget' => 'Reference HA widget',
 					'save_widget' => false,
-					'save dashboard' => true
+					'save_dashboard' => true
 				]
 			],
 			// Cancel create widget.
 			[
 				[
 					'save_widget' => true,
-					'save dashboard' => false
+					'save_dashboard' => false
 				]
 			],
 			[
@@ -359,7 +593,7 @@ class testHostAvailabilityWidget extends CWebTest {
 	}
 
 	public function testHostAvailabilityWidget_Delete() {
-		$name = 'Reference widget to delete';
+		$name = 'Reference HA widget to delete';
 
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=101');
 		$dashboard = CDashboardElement::find()->one()->edit();
@@ -380,59 +614,140 @@ class testHostAvailabilityWidget extends CWebTest {
 		$this->assertEquals('Dashboard updated', $message->getTitle());
 	}
 
-	private function verifyWidgetContent($data,$header) {
+	private function checkWidgetContent($data, $header) {
+		// Get widget content.
+		$dashboard = CDashboardElement::find()->one();
+		$widget = $dashboard->getWidget($header);
+
+		// Verify that layout is correct.
+		if (CTestArrayHelper::get($data['fields'], 'Layout', 'Horizontal') === 'Horizontal') {
+			$this->assertEquals($widget->query('class:totals-list-horizontal')->count(), 1);
+			$this->assertEquals($widget->query('class:totals-list-vertical')->count(), 0);
+		}
+		else {
+			$this->assertEquals($widget->query('class:totals-list-horizontal')->count(), 0);
+			$this->assertEquals($widget->query('class:totals-list-vertical')->count(), 1);
+		}
+
+		$results = [];
+		$classes = [
+			'Available' => 'host-avail-true',
+			'Not available' => 'host-avail-false',
+			'Unknown' => 'host-avail-unknown',
+			'Total' => 'host-avail-total'
+		];
+
+		// Get the count of hosts in each state that is returned by the widget.
+		foreach ($classes as $key => $class) {
+			$xpath = 'xpath:.//div[@class='.CXPathHelper::escapeQuotes($class).']/span';
+			$results[$key] = $widget->query($xpath)->one()->getText();
+		}
+
+		// If expected values defined in Data provider, verify that they match the values shown in the widget.
+		if (CTestArrayHelper::get($data, 'expected_values', false)) {
+			$this->AssertEquals($data['expected_values'], $results);
+		}
+		// Else get expected values from DB.
+		else {
+			$interface = $data['fields']['Interface type'][0];
+			$db_values = $this->getExpectedResultsFromDB($data, $interface);
+			// Verify that values from the widget match values from DB.
+			$this->assertEquals($db_values, $results);
+		}
+	}
+
+	private function checkMultipleInterfacesWidgetContent($data,$header) {
+		$reference_data = [
+			'interface type' => ['Zabbix agent', 'SNMP', 'JMX', 'IPMI'],
+			'interface status' => ['Available', 'Not available', 'Unknown', 'Total']
+		];
 		// Get widget content.
 		$dashboard = CDashboardElement::find()->one();
 		$widget = $dashboard->getWidget($header);
 		$content = $widget->getContent()->asTable();
 
-		// Verify that layout is correct.
+		$expected_interfaces = CTestArrayHelper::get($data['fields'], 'Interface type', false) ? $data['fields']['Interface type'] : $reference_data['interface type'];
+		$headers = $content->getHeadersText();
+		// Exclude the 1st header that is always empty from the list of actual headers.
+		unset($headers[0]);
+		// Check widget content based on its Layout parameter.
 		if (CTestArrayHelper::get($data['fields'], 'Layout', 'Horizontal') === 'Horizontal') {
-			$this->assertEquals($content->getRows()->count(), 1);
-		}
-		else {
-			$this->assertEquals($content->getRows()->count(), 4);
-		}
-
-		$results = [];
-		$classes = [
-			'available' => 'host-avail-true',
-			'not available' => 'host-avail-false',
-			'unknown' => 'host-avail-unknown',
-			'total' => 'host-avail-total'
-		];
-
-		// Get the count of hosts in each state that is returned by the widget.
-		foreach ($classes as $key => $class) {
-			$xpath = 'xpath:.//td[@class='.CXPathHelper::escapeQuotes($class).']/span';
-			$results[$key] = $content->query($xpath)->one()->getText();
-		}
-
-		// If expected values defined in Data provider, verify that they match the values shown in the widget.
-		if (CTestArrayHelper::get($data, 'expected_values', false)) {
-			$this->AssertEquals($results, $data['expected_values']);
-		}
-		// Else get expected values from DB.
-		else {
-			// Select all host esntries that are not templates or proxies and that are not host prototypes.
-			$total_sql = 'SELECT hostid FROM hosts WHERE status IN (0,1) AND flags != 2';
-
-			// Filter out hosts in maintenence if the flag 'Show hosts in maintenance' is not set.
-			if (CTestArrayHelper::get($data['fields'], 'Show hosts in maintenance', false) === false) {
-				$total_sql = $total_sql.' AND maintenance_status = 0';
+			$this->assertSame($reference_data['interface status'], array_values($headers));
+			// Index table with widget content by interface type, that is located in a column with a blank name.
+			$rows = $content->index('');
+			// Obtain values for each interface type and compare them with expected ones.
+			if (array_key_exists('expected_values', $data)) {
+				foreach ($data['expected_values'] as $interface_name => $expected_values) {
+					$this->findTableRowAndCompare($rows, $interface_name, $expected_values);
+				}
 			}
-
-			// 'Available' flag values: 0 - unknown, 1 - available, 2 - not available.
-			$db_values = [
-				'available' => CDBHelper::getCount($total_sql.' AND available = 1'),
-				'not available' => CDBHelper::getCount($total_sql.' AND available = 2'),
-				'unknown' => CDBHelper::getCount($total_sql.' AND available = 0'),
-				'total' => CDBHelper::getCount($total_sql)
-			];
-
-			// Verify that values from the widget match values from DB.
-			$this->AssertEquals($results, $db_values);
+			else {
+				// Take expected values from DB and compare with values obtained from the widget.
+				$check_interfaces = CTestArrayHelper::get($data, 'Interface type', $reference_data['interface type']);
+				foreach ($check_interfaces as $interface_name) {
+					$expected_values = $this->getExpectedResultsFromDB($data, $interface_name);
+					$this->findTableRowAndCompare($rows, $interface_name, $expected_values);
+				}
+			}
 		}
+		else {
+			$this->assertSame($expected_interfaces, array_values($headers));
+			// Index table with widget content by interface status, that is located in a column with a blank name.
+			$rows = $content->index('');
+			$expected = [];
+			// Convert the expected data to the desired format.
+			if (array_key_exists('expected_values', $data)) {
+				// Convert the expected data to "interface status value" format.
+				foreach ($data['expected_values'] as $expected_interface => $statuses) {
+					foreach ($statuses as $expected_status => $expected_value) {
+						array_push($expected, $expected_interface.' '.$expected_status.' '.$expected_value);
+					}
+				}
+			}
+			else {
+				// Take expected values from DB and convert it to desired format.
+				$check_interfaces = CTestArrayHelper::get($data, 'Interface type', $reference_data['interface type']);
+				foreach ($check_interfaces as $expected_interface) {
+					$expected_values = $this->getExpectedResultsFromDB($data, $expected_interface);
+					foreach ($expected_values as $expected_status => $expected_value){
+						array_push($expected, $expected_interface.' '.$expected_status.' '.$expected_value);
+					}
+				}
+			}
+			// Convert results obtained from the widget to the desired format and compare with expected results.
+			$this->convertAndCompareActualResults($rows, $expected);
+		}
+	}
+
+	private function findTableRowAndCompare($rows, $interface_name, $expected_values) {
+		foreach ($rows as $row) {
+			/**
+			 * In the array  obtained from the widget the name of the interface is placed as the 1st array
+			 * element with a blank array key, followed by interface statuses and their values. So to compare
+			 * the values of arrays, after selecting the row, this row needs to be written in a separate
+			 * variable, and the 1st element of this variable needs to be unset before making the comparison.
+			 */
+			if ($interface_name === $row['']) {
+				unset($row['']);
+				$this->assertTrue($row == $expected_values);
+			}
+		continue;
+		}
+	}
+
+	private function convertAndCompareActualResults($rows, $expected) {
+		$actual = [];
+		// Convert the actual data to "interface status value" format.
+		foreach ($rows as $real_status => $real_values) {
+			// Remove the elements with status from sub-arrays, they are placed in an element with a blank key.
+			unset($real_values['']);
+			foreach ($real_values as $real_interface => $real_value) {
+				array_push($actual, $real_interface.' '.$real_status.' '.$real_value);
+			}
+		}
+		sort($expected);
+		sort($actual);
+		$this->assertTrue($expected === $actual);
 	}
 
 	private function verifyRefreshInterval($data, $header) {
@@ -448,5 +763,37 @@ class testHostAvailabilityWidget extends CWebTest {
 			'10 minutes' => 600
 		];
 		$this->assertEquals($widget->getRefreshInterval(), $mapping[$refresh]);
+	}
+
+	private function getExpectedResultsFromDB($data, $interface) {
+		$db_interfaces = [
+			'type' => [
+				'Zabbix agent' => 1,
+				'SNMP' => 2,
+				'IPMI' => 3,
+				'JMX' => 4
+			],
+			'column' => [
+				'Zabbix agent' => 'available',
+				'SNMP' => 'snmp_available',
+				'IPMI' => 'ipmi_available',
+				'JMX' => 'jmx_available'
+			]
+		];
+		// Select certain type of interfaces for host entries that are not templates or proxies and that are not host prototypes.
+		$total_sql = 'select distinct(hostid) from interface where type = '.$db_interfaces['type'][$interface].' and hostid in (select hostid from hosts where status IN (0,1) AND flags != 2';
+		// Filter out hosts in maintenence if the flag 'Show hosts in maintenance' is not set.
+		if (CTestArrayHelper::get($data['fields'], 'Show hosts in maintenance', false) === false) {
+			$total_sql = $total_sql.' AND maintenance_status = 0';
+		}
+
+		// 'Available' flag values: 0 - unknown, 1 - available, 2 - not available.
+		$db_values = [
+			'Available' => CDBHelper::getCount($total_sql.' AND '.$db_interfaces['column'][$interface].' = 1)'),
+			'Not available' => CDBHelper::getCount($total_sql.' AND '.$db_interfaces['column'][$interface].' = 2)'),
+			'Unknown' => CDBHelper::getCount($total_sql.' AND '.$db_interfaces['column'][$interface].' = 0)'),
+			'Total' => CDBHelper::getCount($total_sql.')')
+		];
+		return $db_values;
 	}
 }
