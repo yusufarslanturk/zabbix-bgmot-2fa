@@ -188,21 +188,21 @@ class testPageReportsAudit extends CLegacyWebTest {
 		$this->page->login()->open('adm.macros.php');
 		$form = $this->query('name:macrosForm')->asForm()->one();
 		$macros_table = $this->query('id:tbl_macros')->asMultifieldTable([
-            'mapping' => [
-                'Macro' => [
-                    'selector' => 'xpath:./textarea',
-                    'class' => 'CElement'
-                ],
-                'Value' => [
-                    'selector' => 'xpath:./textarea',
-                    'class' => 'CElement'
-                ],
-                'Description' => [
-                    'selector' => 'xpath:./textarea',
-                    'class' => 'CElement'
-                ]
-            ]
-        ])->one();
+			'mapping' => [
+				'Macro' => [
+					'selector' => 'xpath:./textarea',
+					'class' => 'CElement'
+				],
+				'Value' => [
+					'selector' => 'xpath:./textarea',
+					'class' => 'CElement'
+				],
+				'Description' => [
+					'selector' => 'xpath:./textarea',
+					'class' => 'CElement'
+				]
+			]
+		])->one();
 		$macros_table->updateRow(0, ['Description' => 'New Updated Description']);
 		$form->submit();
 		$message = CMessageElement::find()->waitUntilVisible()->one();
