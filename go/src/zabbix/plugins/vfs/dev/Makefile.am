@@ -4,4 +4,5 @@ clean:
 	go clean
 
 check:
-	go test
+	GOPATH="${GOPATH}" go test
+
