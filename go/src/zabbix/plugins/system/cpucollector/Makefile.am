@@ -5,4 +5,3 @@ clean:
 
 check:
 	GOPATH="${GOPATH}" go test
-

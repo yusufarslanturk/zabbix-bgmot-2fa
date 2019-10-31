@@ -13,4 +13,3 @@ clean:
 
 check:
 	CGO_LDFLAGS="${CGO_LDFLAGS}" GOPATH="${GOPATH}" go test
-
