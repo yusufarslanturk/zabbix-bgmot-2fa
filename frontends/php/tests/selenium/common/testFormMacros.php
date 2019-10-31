@@ -137,7 +137,7 @@ abstract class testFormMacros extends CWebTest {
 	}
 
 	/**
-	 * Test creating of host with Macros.
+	 * Test creating of host or template with Macros.
 	 */
 	protected function checkCreate($host_type, $data) {
 		$this->page->login()->open($host_type.'s.php?form=create');
@@ -285,7 +285,7 @@ abstract class testFormMacros extends CWebTest {
 	}
 
 	/**
-	 * Test creating of host with Macros.
+	 * Test updating of host or template with Macros.
 	 */
 	protected function checkUpdate($host_type, $data, $id, $hostname) {
 		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
@@ -293,7 +293,7 @@ abstract class testFormMacros extends CWebTest {
 	}
 
 	/**
-	 * Test removing Macros from host.
+	 * Test removing Macros from host or template.
 	 */
 	protected function checkRemove($host_type, $id, $hostname) {
 		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');

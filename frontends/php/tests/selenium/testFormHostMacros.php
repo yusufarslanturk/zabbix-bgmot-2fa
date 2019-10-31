@@ -46,14 +46,14 @@ class testFormHostMacros extends testFormMacros {
 	*
 	* @var string
 	*/
-	protected $hostid_remove = '99154';
+	protected $hostid_remove = '30010';
 
 	/**
 	* The name of the host for removing macros.
 	*
 	* @var string
 	*/
-	protected $host_name_remove = 'Host for macros delete';
+	protected $host_name_remove = 'Host for macros remove';
 
 	/**
 	 * @dataProvider getCreateCommonMacrosData
