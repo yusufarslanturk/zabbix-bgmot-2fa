@@ -180,4 +180,52 @@ class testPageReportsAudit extends CLegacyWebTest {
 		$this->zbxTestCheckHeader('Audit log');
 	}
 
+	/**
+	* @backup-once globalmacro
+	*/
+	public function testPageReportsAudit_UpdateMacroDescription() {
+		// Update Macro description.
+		$this->page->login()->open('adm.macros.php');
+		$form = $this->query('name:macrosForm')->asForm()->one();
+		$macros_table = $this->query('id:tbl_macros')->asMultifieldTable([
+            'mapping' => [
+                'Macro' => [
+                    'selector' => 'xpath:./textarea',
+                    'class' => 'CElement'
+                ],
+                'Value' => [
+                    'selector' => 'xpath:./textarea',
+                    'class' => 'CElement'
+                ],
+                'Description' => [
+                    'selector' => 'xpath:./textarea',
+                    'class' => 'CElement'
+                ]
+            ]
+        ])->one();
+		$macros_table->updateRow(0, ['Description' => 'New Updated Description']);
+		$form->submit();
+		$message = CMessageElement::find()->waitUntilVisible()->one();
+		$this->assertTrue($message->isGood());
+		$this->assertEquals('Macros updated', $message->getTitle());
+
+		// Check Audit record about global macro update.
+		$this->page->open('auditlogs.php');
+		$rows = $this->query('class:list-table')->asTable()->one()->getRows();
+		// Get first row data.
+		$row = $rows->get(0);
+
+		$audit = [
+			'User' => 'Admin',
+			'Resource' => 'Macro',
+			'Action' => 'Updated',
+			'ID' => 11,
+			'Details' => "globalmacro.description: => New Updated Description"
+		];
+
+		foreach ($audit as $column => $value) {
+			$text = $row->getColumnData($column, $value);
+			$this->assertEquals($value, $text);
+		}
+	}
 }
