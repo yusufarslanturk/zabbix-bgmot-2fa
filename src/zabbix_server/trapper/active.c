@@ -755,8 +755,7 @@ int	send_list_of_active_checks_json(zbx_socket_t *sock, struct zbx_json_parse *j
 
 	zabbix_log(LOG_LEVEL_DEBUG, "%s() sending [%s]", __func__, json.buffer);
 
-	zbx_alarm_on(CONFIG_TIMEOUT);
-	if (SUCCEED != zbx_tcp_send(sock, json.buffer))
+	if (SUCCEED != zbx_tcp_send_ext(sock, json.buffer, strlen(json.buffer), sock->protocol, CONFIG_TIMEOUT))
 		strscpy(error, zbx_socket_strerror());
 	else
 		ret = SUCCEED;
