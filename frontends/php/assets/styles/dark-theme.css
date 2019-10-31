@@ -4651,10 +4651,12 @@ svg {
   .columns-wrapper [class^=column-] {
     -webkit-box-flex: 0; }
   .columns-wrapper.columns-2 > div, .columns-wrapper.columns-2 > li {
+    display: block;
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
     max-width: 50%; }
   .columns-wrapper.columns-3 > div, .columns-wrapper.columns-3 > li {
+    display: block;
     -ms-flex: 0 0 33.33333%;
     flex: 0 0 33.33333%;
     max-width: 33.33333%; }
