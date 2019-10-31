@@ -2534,8 +2534,12 @@ static int	zbx_verify_issuer_subject(const zbx_tls_context_t *tls_ctx, const cha
 	X509			*cert;
 #endif
 
-	if ((NULL == issuer || '\0' != *issuer) && (NULL == subject || '\0' != *subject))
+	if ((NULL == issuer || '\0' == *issuer) && (NULL == subject || '\0' == *subject))
 		return SUCCEED;
+
+	tls_issuer[0] = '\0';
+	tls_subject[0] = '\0';
+
 #if defined(HAVE_POLARSSL)
 	if (NULL == (cert = ssl_get_peer_cert(tls_ctx->ctx)))
 	{
@@ -4494,6 +4498,7 @@ int	zbx_tls_connect(zbx_socket_t *s, unsigned int tls_connect, const char *tls_a
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():SUCCEED (established %s %s)", __func__,
 			SSL_get_version(s->tls_ctx->ctx), SSL_get_cipher(s->tls_ctx->ctx));
+	psk_for_cb = NULL;
 
 	return SUCCEED;
 
@@ -4505,6 +4510,8 @@ out:	/* an error occurred */
 out1:
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s error:'%s'", __func__, zbx_result_string(ret),
 			ZBX_NULL2EMPTY_STR(*error));
+	psk_for_cb = NULL;
+
 	return ret;
 }
 #endif

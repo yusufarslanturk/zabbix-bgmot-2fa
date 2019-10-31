@@ -19,9 +19,9 @@ dnl
 
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([Zabbix],[4.4.0])
+AC_INIT([Zabbix],[4.4.2rc1])
 AC_CONFIG_SRCDIR(src/zabbix_server/server.c)
-AM_INIT_AUTOMAKE([subdir-objects])
+AM_INIT_AUTOMAKE([subdir-objects  filename-length-max=99])
 
 AC_MSG_NOTICE([Configuring $PACKAGE_NAME $PACKAGE_VERSION])
 
@@ -1685,7 +1685,7 @@ SENDER_LIBS="$SENDER_LIBS $TLS_LIBS"
 
 if test "x$agent2" = "xyes"; then
 	AC_CHECK_PROGS([GO], [go], [no])
-	if test "x$go" = "xno"; then
+	if test "x$GO" = "xno"; then
 		AC_MSG_ERROR([Unable to find "go" executable in path])
 	fi
 fi
@@ -1881,7 +1881,6 @@ dnl *                 Output configuration results                  *
 dnl *                                                               *
 dnl *****************************************************************
 
-sinclude([conf_tests.m4])
 m4_ifdef([CONF_TESTS],[CONF_TESTS(ZBXCMOCKA)])
 
 AC_OUTPUT([
