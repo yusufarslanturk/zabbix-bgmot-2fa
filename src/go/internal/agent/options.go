@@ -52,7 +52,6 @@ type AgentOptions struct {
 	StatusPort           int      `conf:"optional,range=1024:32767"`
 	SourceIP             string   `conf:"optional"`
 	Server               string   `conf:"optional"`
-	MaxLinesPerSecond    int      `conf:"optional,range=1:1000,default=20"`
 	UserParameter        []string `conf:"optional"`
 	UnsafeUserParameters int      `conf:"optional,range=0:1,default=0"`
 	ControlSocket        string   `conf:"optional"`
