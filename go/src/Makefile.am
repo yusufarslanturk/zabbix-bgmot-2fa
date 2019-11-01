@@ -27,7 +27,7 @@ clean:
 install:
 	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" GOPATH="${GOPATH}" \
 		go install -mod vendor -ldflags="${GOLDFLAGS}" ./...
-	test -f "$(DESTDIR)@AGENT2_CONFIG_FILE@" || cp "../../conf/zabbix_agent2.conf" "$(DESTDIR)@AGENT2_CONFIG_FILE@"
+	test -f "$(DESTDIR)@AGENT2_CONFIG_FILE@" || cp "conf/zabbix_agent2.conf" "$(DESTDIR)@AGENT2_CONFIG_FILE@"
 
 check:
 	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" go test -mod vendor ./...
