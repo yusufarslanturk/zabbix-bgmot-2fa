@@ -335,7 +335,7 @@ jQuery(function($) {
 
 						/*
 						 * Indicates a false click on an available list, but not on some actual item.
-						 * In such case the "focusout" event (IE11) of the search input should not be processed.
+						 * In such case the "focusout" event (IE) of the search input should not be processed.
 						 */
 						available_false_click: false
 					}
