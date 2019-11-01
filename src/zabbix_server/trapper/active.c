@@ -759,7 +759,6 @@ int	send_list_of_active_checks_json(zbx_socket_t *sock, struct zbx_json_parse *j
 		strscpy(error, zbx_socket_strerror());
 	else
 		ret = SUCCEED;
-	zbx_alarm_off();
 
 	zbx_json_free(&json);
 
