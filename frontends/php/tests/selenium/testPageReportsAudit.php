@@ -220,7 +220,7 @@ class testPageReportsAudit extends CLegacyWebTest {
 			'Resource' => 'Macro',
 			'Action' => 'Updated',
 			'ID' => 11,
-			'Details' => "globalmacro.description: => New Updated Description"
+			'Details' => "globalmacro.description: Test description 1 => New Updated Description"
 		];
 
 		foreach ($audit as $column => $value) {
