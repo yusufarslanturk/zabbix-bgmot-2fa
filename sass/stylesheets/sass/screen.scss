@@ -229,7 +229,9 @@ pre {
 
 %space-pre-wrap {
 	white-space: pre-wrap;
-	word-wrap: break-word;
+	word-break: break-all;  // For the Internet Explorer.
+	word-break: break-word; // Override for the other browsers.
+	overflow-wrap: break-word;
 }
 
 .top-nav-container {
@@ -1464,7 +1466,7 @@ output {
 %timeline-dot {
 	content: '';
 	position: absolute;
-	z-index: 100;
+	z-index: 1;
 	display: block;
 	width: 4px;
 	height: 4px;
@@ -3559,6 +3561,8 @@ $form-icon-btn: (
 .dashbrd-grid-widget-content {
 	flex-grow: 1;
 	margin-top: 2rem;
+	box-sizing: border-box;
+	height: calc(100% - 2rem);
 	padding-bottom: 8px;
 	overflow: auto;
 	border: 1px solid $ui-border-color;
@@ -3619,6 +3623,7 @@ $form-icon-btn: (
 
 		.dashbrd-grid-widget-content {
 			margin-top: 0;
+			height: 100%;
 			padding-top: 8px;
 		}
 
@@ -4568,6 +4573,13 @@ $form-icon-btn: (
 		max-height: calc(100vh - 190px);
 		max-width: 45vw;
 		white-space: nowrap;
+		@extend %webkit-scrollbar;
+	}
+
+	.hintbox-description {
+		overflow: auto;
+		max-height: 240px;
+		max-width: 800px;
 		@extend %webkit-scrollbar;
 	}
 
@@ -6427,6 +6439,11 @@ tr.cursor-move {
 	display: inline;
 }
 
+// Dashboard widget: URL
+.widget-url {
+	display: block;
+}
+
 // Analog Clock
 .clock {
 	padding: 0 10px;
@@ -6629,33 +6646,15 @@ svg {
 	}
 }
 
-ul.checkbox-list {
-	line-height: 20px;
-	display: flex;
-	flex-wrap: wrap;
-	> li {
-		ms-flex: 0 0 100%;
-		flex: 0 0 100%;
-		max-width: 100%;
-		-webkit-box-flex: 0;
+.checkbox-list {
+	li {
+		margin-top: 4px;
 	}
 }
-
-@each $num, $width in (
-	3: 33.33333%
-) {
-	ul.checkbox-list.col-#{$num} > li {
-		display: inline-block;
-		-ms-flex: 0 0 $width;
-		flex: 0 0 $width;
-		max-width: $width;
-	}
-}
-
 
 .columns-wrapper {
-
-	$columns: (
+	$column-count: (2, 3);
+	$column-size: (
 		5: 5%,
 		10: 10%,
 		15: 15%,
@@ -6676,10 +6675,33 @@ ul.checkbox-list {
 		-webkit-box-flex: 0;
 	}
 
-	/**
-	 * Dynamically generated classes, e.g. .column-50.
-	 */
-	@each $class, $width in $columns {
+	// Dynamically generated classes for the columns count:
+	//  .columns-2
+	//  .columns-3
+	@each $count in $column-count {
+		&.columns-#{$count} > {
+			div, li {
+				display: block;
+				-ms-flex: 0 0 (100% / $count);
+				flex: 0 0 (100% / $count);
+				max-width: (100% / $count);
+			}
+		}
+	}
+
+	// Dynamically generated classes for the column width:
+	//  .column-5
+	//  .column-10
+	//  .column-15
+	//  .column-20
+	//  .column-33
+	//  .column-35
+	//  .column-40
+	//  .column-50
+	//  .column-75
+	//  .column-90
+	//  .column-95
+	@each $class, $width in $column-size {
 		.column-#{$class} {
 			-ms-flex: 0 0 $width;
 			flex: 0 0 $width;
@@ -7497,7 +7519,6 @@ table.preprocessing-test-results {
 		background: $host-avail-total-bg-color;
 	}
 }
-
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 
