@@ -315,7 +315,8 @@ class CMultiselectElement extends CElement {
 			return false;
 		}
 
-		if (($this->query('class:multiselect')->one()->getAttribute('aria-disabled') === 'true') === $enabled) {
+		$multiselect = $this->query('class:multiselect')->one(false);
+		if ($multiselect && ($multiselect->getAttribute('aria-disabled') === 'true') === $enabled) {
 			return false;
 		}
 
