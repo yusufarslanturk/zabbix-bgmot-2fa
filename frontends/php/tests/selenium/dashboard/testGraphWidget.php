@@ -1678,9 +1678,7 @@ class testGraphWidget extends CWebTest {
 
 		if (array_key_exists('Problems', $data)) {
 			$form->selectTab('Problems');
-//			CMultiselectElement::setDefaultFillMode(CMultiselectElement::MODE_SELECT);
 			$form->fill(CTestArrayHelper::get($data['Problems'], 'fields', []));
-//			CMultiselectElement::setDefaultFillMode(CMultiselectElement::MODE_TYPE);
 
 			if (array_key_exists('tags', $data['Problems'])) {
 				$this->setTags($data['Problems']['tags'], 'id:tags_table_tags');
