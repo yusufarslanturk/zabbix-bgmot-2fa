@@ -1013,20 +1013,41 @@ int	parse_host_key(char *exp, char **host, char **key)
  *                                                                            *
  * Parameters: src - [IN] null terminated source string                       *
  *             charlist - [IN] null terminated to-be-escaped character list   *
+ *             mode     - [IN] escaping mode                                  *
  *                                                                            *
  * Return value: size of the escaped string                                   *
  *                                                                            *
  * Author: Alexander Vladishev                                                *
  *                                                                            *
  ******************************************************************************/
-size_t	zbx_get_escape_string_len(const char *src, const char *charlist)
+size_t	zbx_get_escape_string_len(const char *src, const char *charlist, zbx_string_escape_mode_t mode)
 {
 	size_t	sz = 0;
 
-	for (; '\0' != *src; src++, sz++)
+	if (STRING_ESCAPE_MODE_NO_DOUBLE_ESCAPE == mode)
 	{
-		if (NULL != strchr(charlist, *src))
+		int i;
+
+		for (i = strlen(src) - 1; 0 <= i; i--)
+		{
 			sz++;
+
+			if (NULL != strchr(charlist, src[i]))
+			{
+				sz++;
+
+				if (0 < i && '\\' == src[i-1])
+					i--;
+			}
+		}
+	}
+	else
+	{
+		for (; '\0' != *src; src++, sz++)
+		{
+			if (NULL != strchr(charlist, *src))
+				sz++;
+		}
 	}
 
 	return sz;
@@ -1040,30 +1061,52 @@ size_t	zbx_get_escape_string_len(const char *src, const char *charlist)
  *                                                                            *
  * Parameters: src - [IN] null terminated source string                       *
  *             charlist - [IN] null terminated to-be-escaped character list   *
+ *             mode     - [IN] escaping mode                                  *
  *                                                                            *
  * Return value: the escaped string                                           *
  *                                                                            *
  * Author: Alexander Vladishev                                                *
  *                                                                            *
  ******************************************************************************/
-char	*zbx_dyn_escape_string(const char *src, const char *charlist)
+char	*zbx_dyn_escape_string(const char *src, const char *charlist, zbx_string_escape_mode_t mode)
 {
 	size_t	sz;
 	char	*d, *dst = NULL;
 
-	sz = zbx_get_escape_string_len(src, charlist) + 1;
-
+	sz = zbx_get_escape_string_len(src, charlist, mode) + 1;
 	dst = (char *)zbx_malloc(dst, sz);
 
-	for (d = dst; '\0' != *src; src++)
+	if (STRING_ESCAPE_MODE_NO_DOUBLE_ESCAPE == mode)
 	{
-		if (NULL != strchr(charlist, *src))
-			*d++ = '\\';
+		int i;
 
-		*d++ = *src;
+		d = dst + sz - 1;
+		*d-- = '\0';
+
+		for (i = strlen(src) - 1; 0 <= i; i--)
+		{
+			*d-- = src[i];
+
+			if (NULL != strchr(charlist, src[i]))
+			{
+				*d-- = '\\';
+
+				if (0 < i && '\\' == src[i-1])
+					i--;
+			}
+		}
 	}
+	else
+	{
+		for (d = dst; '\0' != *src; src++)
+		{
+			if (NULL != strchr(charlist, *src))
+				*d++ = '\\';
 
-	*d = '\0';
+			*d++ = *src;
+		}
+		*d = '\0';
+	}
 
 	return dst;
 }
@@ -2967,7 +3010,7 @@ int	zbx_function_param_quote(char **param, int forced)
 	if (0 != (sz_src = strlen(*param)) && '\\' == (*param)[sz_src - 1])
 		return FAIL;
 
-	sz_dst = zbx_get_escape_string_len(*param, "\"") + 3;
+	sz_dst = zbx_get_escape_string_len(*param, "\"", STRING_ESCAPE_MODE_REGULAR) + 3;
 
 	*param = (char *)zbx_realloc(*param, sz_dst);
 

@@ -904,6 +904,13 @@ typedef enum
 }
 zbx_httptest_auth_t;
 
+typedef enum
+{
+	STRING_ESCAPE_MODE_REGULAR = 0,
+	STRING_ESCAPE_MODE_NO_DOUBLE_ESCAPE
+}
+zbx_string_escape_mode_t;
+
 #define ZBX_TASK_FLAG_MULTIPLE_AGENTS	0x01
 #define ZBX_TASK_FLAG_FOREGROUND	0x02
 
@@ -1015,8 +1022,8 @@ int	replace_key_params_dyn(char **data, int key_type, replace_key_param_f cb, vo
 void	remove_param(char *param, int num);
 int	get_key_param(char *param, int num, char *buf, size_t max_len);
 int	num_key_param(char *param);
-size_t	zbx_get_escape_string_len(const char *src, const char *charlist);
-char	*zbx_dyn_escape_string(const char *src, const char *charlist);
+size_t	zbx_get_escape_string_len(const char *src, const char *charlist, zbx_string_escape_mode_t mode);
+char	*zbx_dyn_escape_string(const char *src, const char *charlist, zbx_string_escape_mode_t mode);
 
 typedef struct zbx_custom_interval	zbx_custom_interval_t;
 int	zbx_interval_preproc(const char *interval_str, int *simple_interval, zbx_custom_interval_t **custom_intervals,
@@ -1337,6 +1344,7 @@ int	zbx_strcmp_natural(const char *s1, const char *s2);
 #define ZBX_TOKEN_XPATH		0x080000
 #define ZBX_TOKEN_REGEXP_OUTPUT	0x100000
 #define ZBX_TOKEN_PROMETHEUS	0x200000
+#define ZBX_TOKEN_JSONPATH	0x400000
 
 /* location of a substring */
 typedef struct

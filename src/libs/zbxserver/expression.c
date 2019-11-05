@@ -5505,7 +5505,7 @@ static int	process_lld_macro_token(char **data, zbx_token_t *token, int flags, c
 	{
 		char	*replace_to_esc;
 
-		replace_to_esc = zbx_dyn_escape_string(replace_to, "\\");
+		replace_to_esc = zbx_dyn_escape_string(replace_to, "\\", STRING_ESCAPE_MODE_REGULAR);
 		zbx_free(replace_to);
 		replace_to = replace_to_esc;
 	}
@@ -5517,9 +5517,69 @@ static int	process_lld_macro_token(char **data, zbx_token_t *token, int flags, c
 	{
 		char	*replace_to_esc;
 
-		replace_to_esc = zbx_dyn_escape_string(replace_to, "\\\n\"");
+		replace_to_esc = zbx_dyn_escape_string(replace_to, "\\\n\"", STRING_ESCAPE_MODE_REGULAR);
 		zbx_free(replace_to);
 		replace_to = replace_to_esc;
+	}
+	else if (0 != (flags & ZBX_TOKEN_JSONPATH) && ZBX_TOKEN_LLD_MACRO == token->type)
+	{
+		char	*replace_to_esc;
+
+		if (0 == token->loc.l && '\0' == c)
+		{
+			/* macro is the only part of statement */
+			replace_to_esc = zbx_dyn_escape_string(replace_to, "\\", STRING_ESCAPE_MODE_NO_DOUBLE_ESCAPE);
+			zbx_free(replace_to);
+			replace_to = replace_to_esc;
+		}
+		else if (FAIL == is_double(replace_to))
+		{
+			size_t alloc_len = 0;
+			int offset;
+			char prev = '\0';
+
+			for (offset = token->loc.l - 1; 0 < offset; offset--)
+			{
+				if (!isspace((*data)[offset]))
+				{
+					prev = (*data)[offset];
+					break;
+				}
+			}
+
+			offset = 0;
+
+			switch(prev)
+			{
+			case '.':
+			case ']':
+				/* wrap string value: <value> => ['<value>'] */
+				replace_to_esc = zbx_dyn_escape_string(replace_to, "\'\\", STRING_ESCAPE_MODE_NO_DOUBLE_ESCAPE);
+				zbx_free(replace_to);
+				zbx_snprintf_alloc(&replace_to, &alloc_len, (size_t*)&offset, "[\'%s\']", replace_to_esc);
+				zbx_free(replace_to_esc);
+				break;
+			case '[':
+			case '=':
+			case '~':
+			case '>':
+			case '<':
+				/* wrap string value: <value> => '<value>' */
+				replace_to_esc = zbx_dyn_escape_string(replace_to, "\'\\", STRING_ESCAPE_MODE_NO_DOUBLE_ESCAPE);
+				zbx_free(replace_to);
+				zbx_snprintf_alloc(&replace_to, &alloc_len, (size_t*)&offset, "\'%s\'", replace_to_esc);
+				zbx_free(replace_to_esc);
+				break;
+			case '\'':
+				replace_to_esc = zbx_dyn_escape_string(replace_to, "\'\\", STRING_ESCAPE_MODE_NO_DOUBLE_ESCAPE);
+				zbx_free(replace_to);
+				replace_to = replace_to_esc;
+				break;
+			default:
+				break;
+			}
+
+		}
 	}
 
 	if (NULL != replace_to)

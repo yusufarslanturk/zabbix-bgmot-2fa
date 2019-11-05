@@ -1005,7 +1005,7 @@ int	quote_key_param(char **param, int forced)
 	if (0 != (sz_src = strlen(*param)) && '\\' == (*param)[sz_src - 1])
 		return FAIL;
 
-	sz_dst = zbx_get_escape_string_len(*param, "\"") + 3;
+	sz_dst = zbx_get_escape_string_len(*param, "\"", STRING_ESCAPE_MODE_REGULAR) + 3;
 
 	*param = (char *)zbx_realloc(*param, sz_dst);
 

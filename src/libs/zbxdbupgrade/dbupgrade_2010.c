@@ -1476,7 +1476,7 @@ static int	DBpatch_2010176(void)
 
 	while (SUCCEED == ret && NULL != (row = DBfetch(result)))
 	{
-		name = zbx_dyn_escape_string(row[1], "/\\");
+		name = zbx_dyn_escape_string(row[1], "/\\", STRING_ESCAPE_MODE_REGULAR);
 
 		if (0 != strcmp(name, row[1]))
 		{
