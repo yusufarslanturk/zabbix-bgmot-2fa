@@ -1,11 +1,10 @@
 ## Process this file with automake to produce Makefile.in
 
-## Process this file with automake to produce Makefile.in
 BUILD_TIME=`date +%H:%M:%S`
 BUILD_DATE=`date +"%b %_d %Y"`
 GOOS=`go env GOOS`
 GOARCH=`go env GOARCH`
-PKG=zabbix/pkg/version
+PKG=zabbix.com/pkg/version
 
 GOLDFLAGS = -X ${PKG}.titleMessage=zabbix_agentd
 GOLDFLAGS += -X '${PKG}.compileDate=${BUILD_DATE}'
