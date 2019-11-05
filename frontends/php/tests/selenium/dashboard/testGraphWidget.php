@@ -1331,10 +1331,6 @@ class testGraphWidget extends CWebTest {
 							'Show problems' => true,
 							'Selected items only' => false,
 							'Problem hosts' => ['Simple form test host', 'ЗАББИКС Сервер'],
-//							'Problem hosts' => [
-//								'values' => ['Simple form test host', 'ЗАББИКС Сервер'],
-//								'context' => 'Zabbix servers'
-//							],
 							'Severity' => ['Information', 'Average'],
 							'Problem' => '2_trigger_*',
 							'Tags' => 'Or'
@@ -1396,6 +1392,7 @@ class testGraphWidget extends CWebTest {
 		$form = $this->openGraphWidget();
 
 		$this->fillForm($data, $form);
+		$form->parents('class:overlay-dialogue-body')->one()->query('tag:output')->asMessage()->waitUntilNotVisible();
 		$form->submit();
 		$this->saveGraphWidget(CTestArrayHelper::get($data, 'main_fields.Name', 'Graph'));
 
@@ -1632,6 +1629,7 @@ class testGraphWidget extends CWebTest {
 		$form = $this->openGraphWidget('Test cases for update');
 
 		$this->fillForm($data, $form);
+		$form->parents('class:overlay-dialogue-body')->one()->query('tag:output')->asMessage()->waitUntilNotVisible();
 		$form->submit();
 		$this->saveGraphWidget(CTestArrayHelper::get($data, 'main_fields.Name', 'Test cases for update'));
 
