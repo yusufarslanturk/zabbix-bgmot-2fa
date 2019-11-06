@@ -6,12 +6,12 @@ GOOS=`go env GOOS`
 GOARCH=`go env GOARCH`
 PKG=zabbix.com/pkg/version
 
-GOLDFLAGS = -X ${PKG}.titleMessage=zabbix_agentd
+GOLDFLAGS = -X ${PKG}.titleMessage=zabbix_agent2
 GOLDFLAGS += -X '${PKG}.compileDate=${BUILD_DATE}'
 GOLDFLAGS += -X ${PKG}.compileTime=${BUILD_TIME}
 GOLDFLAGS += -X ${PKG}.compileOs=${GOOS}
 GOLDFLAGS += -X ${PKG}.compileArch=${GOARCH}
-GOLDFLAGS += -X ${PKG}.compileMode=daemon
+# GOLDFLAGS += -X ${PKG}.compileMode=daemon
 GOLDFLAGS += -X main.confDefault=${AGENT2_CONFIG_FILE}
 
 all: build
