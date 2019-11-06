@@ -37,5 +37,6 @@ unsigned char	zbx_mock_str_to_variant(const char *str);
 void	zbx_mock_str_to_token_type(const char *str, int *out);
 int	zbx_mock_str_to_item_type(const char *str);
 int	zbx_mock_str_to_family(const char *str);
+zbx_string_escape_mode_t	zbx_mock_str_to_string_escape_mode(const char *str);
 
 #endif
