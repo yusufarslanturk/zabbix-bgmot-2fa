@@ -193,3 +193,4 @@ bin/zabbix_get
 bin/zabbix_sender
 .cproject
 etc/agent.conf
+sbin/zabbix_agent2
