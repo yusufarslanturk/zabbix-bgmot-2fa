@@ -24,7 +24,7 @@ clean:
 	rm -rf ../bin/zabbix_agent2 ../bin/mock_server
 
 install:
-	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" GOPATH="${GOPATH}" \
+	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" \
 		go install -mod vendor -ldflags="${GOLDFLAGS}" ./...
 	test -f "$(DESTDIR)@AGENT2_CONFIG_FILE@" || cp "conf/zabbix_agent2.conf" "$(DESTDIR)@AGENT2_CONFIG_FILE@"
 
