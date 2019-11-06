@@ -183,11 +183,15 @@ class CCheckBox extends CInput {
 		 * implemented, this code will change.
 		 */
 		$hidden = '';
-		if ($this->readonly && $this->enabled && $this->checked) {
-			$hidden = (new CVar($this->getName(), $this->value, $this->getId()))
-				->setEnabled(true)
-				->toString();
-			$this->removeId();
+		if ($this->readonly && $this->enabled) {
+			if ($this->checked) {
+				$hidden = (new CVar($this->getName(), $this->value, $this->getId()))
+					->setEnabled(true)
+					->toString();
+				$this->removeId();
+			}
+
+			$this->setEnabled(false);
 		}
 
 		return $hidden.parent::toString($destroy).$label->toString();
