@@ -29,43 +29,6 @@ package zbxlib
 #include "module.h"
 typedef int (*zbx_agent_check_t)(AGENT_REQUEST *request, AGENT_RESULT *result);
 
-int	SYSTEM_LOCALTIME(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	NET_DNS(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	NET_DNS_RECORD(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_BOOTTIME(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	WEB_PAGE_GET(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	WEB_PAGE_PERF(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	NET_TCP_LISTEN(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	NET_TCP_PORT(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	CHECK_SERVICE(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	CHECK_SERVICE_PERF(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	NET_UDP_LISTEN(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	GET_SENSOR(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_CPU_LOAD(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_CPU_SWITCHES(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_CPU_INTR(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_HW_CHASSIS(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_HW_CPU(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_HW_DEVICES(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_HW_MACADDR(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_SW_OS(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_SW_PACKAGES(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_SWAP_IN(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_SWAP_OUT(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_SWAP_SIZE(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	SYSTEM_USERS_NUM(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	VFS_DIR_COUNT(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	VFS_DIR_SIZE(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	VFS_FILE_MD5SUM(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	VFS_FILE_REGMATCH(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	VFS_FS_INODE(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	VFS_FS_SIZE(AGENT_REQUEST *request, AGENT_RESULT *result);
-int	VM_MEMORY_SIZE(AGENT_REQUEST *request, AGENT_RESULT *result);
-
 static int execute_check(const char *key, zbx_agent_check_t check_func, char **value, char **error)
 {
 	int ret = FAIL;

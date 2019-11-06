@@ -1907,6 +1907,7 @@ AC_OUTPUT([
 	database/sqlite3/Makefile
 	misc/Makefile
 	src/Makefile
+	src/go/Makefile
 	src/libs/Makefile
 	src/libs/zbxlog/Makefile
 	src/libs/zbxalgo/Makefile
@@ -1985,8 +1986,6 @@ AC_OUTPUT([
 	src/zabbix_proxy/taskmanager/Makefile
 	src/zabbix_java/Makefile
 	man/Makefile
-	go/Makefile
-	go/src/Makefile
 	])
 
 dnl The following variables use autoconf variables such as
