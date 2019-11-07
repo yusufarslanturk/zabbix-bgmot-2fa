@@ -349,7 +349,13 @@ jQuery(function($) {
 				css: ms.options.styles
 			}));
 
-			var $selected_div = $('<div>', {'class': 'selected'}),
+			var $selected_div = $('<div>', {'class': 'selected'}).on('click', function() {
+					/*
+					 * Focus without options because here it don't matter.
+					 * Click used instead focus because in patternselect listen only click.
+					 */
+					$('input[type="text"]', $obj).click().focus();
+				}),
 				$selected_ul = $('<ul>', {'class': 'multiselect-list'});
 
 			$obj.append($selected_div.append($selected_ul));
@@ -367,7 +373,6 @@ jQuery(function($) {
 					if (isSearchFieldVisible($obj) && ms.options.selectedLimit != 1) {
 						$obj.addClass('active');
 						$('.selected li.selected', $obj).removeClass('selected');
-						$('input[type="text"]', $obj).focus();
 					}
 				});
 
@@ -396,6 +401,8 @@ jQuery(function($) {
 				}
 
 				popup_button.on('click', function(event) {
+					// Click used instead focus because in patternselect listen only click.
+					$('input[type="text"]', $obj).click();
 					return PopUp('popup.generic', ms.options.popup.parameters, null, event.target);
 				});
 
@@ -612,17 +619,17 @@ jQuery(function($) {
 							break;
 					}
 				})
-				.on('focusin', function() {
+				.on('focusin', function($event) {
 					$obj.addClass('active');
 				})
-				.on('focusout', function() {
+				.on('focusout', function($event) {
 					if (ms.values.available_false_click) {
 						ms.values.available_false_click = false;
-						$('input[type="text"]', $obj).focus();
+						$('input[type="text"]', $obj)[0].focus({preventScroll:true});
 					}
 					else {
 						$obj.removeClass('active');
-						$('.selected li:selected', $obj).removeClass('selected');
+						$('.selected li.selected', $obj).removeClass('selected');
 						cleanSearchInput($obj);
 						hideAvailable($obj);
 					}
@@ -654,7 +661,7 @@ jQuery(function($) {
 		addSelected($obj, ms.values.available[id]);
 
 		if (isSearchFieldVisible($obj)) {
-			$('input[type="text"]', $obj).focus();
+			$('input[type="text"]', $obj)[0].focus({preventScroll:true});
 		}
 
 		$obj.trigger('change', ms);
@@ -699,7 +706,7 @@ jQuery(function($) {
 								if (!ms.options.disabled && !item_disabled) {
 									removeSelected($obj, item.id);
 									if (isSearchFieldVisible($obj)) {
-										$('input[type="text"]', $obj).focus();
+										$('input[type="text"]', $obj)[0].focus({preventScroll:true});
 									}
 
 									$obj.trigger('change', ms);
@@ -711,7 +718,6 @@ jQuery(function($) {
 					if (isSearchFieldVisible($obj) && ms.options.selectedLimit != 1) {
 						$('.selected li.selected', $obj).removeClass('selected');
 						$(this).addClass('selected');
-						$('input[type="text"]', $obj).focus();
 					}
 				});
 
@@ -858,7 +864,7 @@ jQuery(function($) {
 					text: ms.options.labels['No matches found']
 				})
 					.on('click', function() {
-						$('input[type="text"]', $obj).focus();
+						$('input[type="text"]', $obj)[0].focus({preventScroll:true});
 					});
 
 			ms.values.available_div.append(div);
@@ -896,7 +902,7 @@ jQuery(function($) {
 					text: ms.options.labels['More matches found...']
 				})
 					.on('click', function() {
-						$('input[type="text"]', $obj).focus();
+						$('input[type="text"]', $obj)[0].focus({preventScroll:true});
 					});
 
 			ms.values.available_div.prepend(div);

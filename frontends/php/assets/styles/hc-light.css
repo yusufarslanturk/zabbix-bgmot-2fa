@@ -1059,14 +1059,15 @@ output {
 .multiselect-control {
   position: relative;
   vertical-align: top;
-  display: inline-block;
-  white-space: nowrap; }
+  white-space: nowrap;
+  display: flex; }
 
 .multiselect {
-  position: relative;
   margin-right: 3px;
   min-height: 24px;
-  white-space: normal; }
+  white-space: normal;
+  display: flex;
+  flex-direction: column; }
   .multiselect.active {
     border-color: #000; }
   .multiselect input[type="text"] {
@@ -1128,18 +1129,7 @@ output {
     bottom: 0;
     z-index: -1; }
 
-.multiselect-collapsed.multiselect-control, .list-vertical-accordion .multiselect-control.list-accordion-item-closed,
-.multiselect-collapsed .multiselect,
-.list-vertical-accordion .list-accordion-item-closed .multiselect {
-  overflow: hidden;
-  max-height: 24px; }
-  .multiselect-collapsed.multiselect-control input[type="text"], .list-vertical-accordion .multiselect-control.list-accordion-item-closed input[type="text"],
-  .multiselect-collapsed .multiselect input[type="text"],
-  .list-vertical-accordion .list-accordion-item-closed .multiselect input[type="text"] {
-    display: none; }
-
 .multiselect-button, .multiselect {
-  display: inline-block;
   vertical-align: top; }
 
 .multiselect-suggest, .multiselect-matches {
@@ -4605,10 +4595,13 @@ svg {
   .list-vertical-accordion .list-accordion-item-head,
   .list-vertical-accordion .list-accordion-item-body {
     padding-bottom: 2px; }
-  .list-vertical-accordion .list-accordion-item-closed {
-    height: 30px; }
-    .list-vertical-accordion .list-accordion-item-closed .list-accordion-item-body {
-      display: none; }
+  .list-vertical-accordion .list-accordion-item-closed .multiselect {
+    height: 24px;
+    overflow: hidden; }
+  .list-vertical-accordion .list-accordion-item-closed .list-accordion-item-head {
+    margin-bottom: 5px; }
+  .list-vertical-accordion .list-accordion-item-closed .list-accordion-item-body {
+    display: none; }
 
 .checkbox-list li {
   margin-top: 4px; }
