@@ -2542,7 +2542,7 @@ int	zbx_dbsync_compare_actions(zbx_dbsync_t *sync)
  *                                                                            *
  * Function: dbsync_compare_action_op                                         *
  *                                                                            *
- * Purpose: compares action opereation class and flushes update row if        *
+ * Purpose: compares action operation class and flushes update row if         *
  *          necessary                                                         *
  *                                                                            *
  * Parameter: sync     - [OUT] the changeset                                  *

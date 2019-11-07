@@ -928,6 +928,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 	if (SUCCEED != zbx_coredump_disable())
 	{
 		zabbix_log(LOG_LEVEL_CRIT, "cannot disable core dump, exiting...");
+		zbx_free_service_resources(FAIL);
 		exit(EXIT_FAILURE);
 	}
 #endif
@@ -935,6 +936,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 	if (FAIL == zbx_load_modules(CONFIG_LOAD_MODULE_PATH, CONFIG_LOAD_MODULE, CONFIG_TIMEOUT, 1))
 	{
 		zabbix_log(LOG_LEVEL_CRIT, "loading modules failed, exiting...");
+		zbx_free_service_resources(FAIL);
 		exit(EXIT_FAILURE);
 	}
 #endif
@@ -943,6 +945,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 		if (FAIL == zbx_tcp_listen(&listen_sock, CONFIG_LISTEN_IP, (unsigned short)CONFIG_LISTEN_PORT))
 		{
 			zabbix_log(LOG_LEVEL_CRIT, "listener failed: %s", zbx_socket_strerror());
+			zbx_free_service_resources(FAIL);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -951,6 +954,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 	{
 		zabbix_log(LOG_LEVEL_CRIT, "cannot initialize collector: %s", error);
 		zbx_free(error);
+		zbx_free_service_resources(FAIL);
 		exit(EXIT_FAILURE);
 	}
 
@@ -959,6 +963,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 	{
 		zabbix_log(LOG_LEVEL_CRIT, "cannot initialize performance counter collector: %s", error);
 		zbx_free(error);
+		zbx_free_service_resources(FAIL);
 		exit(EXIT_FAILURE);
 	}
 
@@ -979,6 +984,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 	{
 		zabbix_log(LOG_LEVEL_CRIT, "Too many agent threads. Please reduce the StartAgents configuration"
 				" parameter or the number of active servers in ServerActive configuration parameter.");
+		zbx_free_service_resources(FAIL);
 		exit(EXIT_FAILURE);
 	}
 #endif
