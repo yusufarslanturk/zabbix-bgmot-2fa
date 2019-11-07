@@ -26,7 +26,8 @@
 
 void	zbx_mock_test_entry(void **state)
 {
-	const char	*src, *actual_result, *expected_result, *escape_chars;
+	const char		*src, *expected_result, *escape_chars;
+	char			*actual_result;
 	zbx_string_escape_mode_t mode;
 
 	ZBX_UNUSED(state);
@@ -37,8 +38,11 @@ void	zbx_mock_test_entry(void **state)
 	mode = zbx_mock_str_to_string_escape_mode(zbx_mock_get_parameter_string("in.mode"));
 
 	actual_result = zbx_dyn_escape_string(src, escape_chars, mode);
+
 	if (0 != strcmp(expected_result, actual_result))
 	{
 		fail_msg("Actual: \"%s\" != expected: \"%s\"", actual_result, expected_result);
 	}
+
+	zbx_free(actual_result);
 }
