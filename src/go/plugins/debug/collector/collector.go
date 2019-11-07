@@ -26,7 +26,7 @@ import (
 )
 
 type Options struct {
-	Common   plugin.Options
+	Common   plugin.CommonOptions
 	Interval int
 }
 

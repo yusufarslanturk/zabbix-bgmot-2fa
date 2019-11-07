@@ -264,23 +264,22 @@ run:
 				}
 				cleaned = now
 			}
-		case v := <-m.input:
-			if v == nil {
+		case u := <-m.input:
+			if u == nil {
 				break run
 			}
-			switch v.(type) {
+			switch v := u.(type) {
 			case *updateRequest:
-				m.processUpdateRequest(v.(*updateRequest), time.Now())
+				m.processUpdateRequest(v, time.Now())
 				m.processQueue(time.Now())
 			case performer:
-				m.processFinishRequest(v.(performer))
+				m.processFinishRequest(v)
 				m.processQueue(time.Now())
 			case *queryRequest:
-				r := v.(*queryRequest)
-				if response, err := m.processQuery(r); err != nil {
-					r.sink <- "cannot process request: " + err.Error()
+				if response, err := m.processQuery(v); err != nil {
+					v.sink <- "cannot process request: " + err.Error()
 				} else {
-					r.sink <- response
+					v.sink <- response
 				}
 			}
 		}

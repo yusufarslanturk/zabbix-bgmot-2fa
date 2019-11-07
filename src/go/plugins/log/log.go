@@ -33,7 +33,7 @@ import (
 )
 
 type Options struct {
-	Common            plugin.Options
+	Common            plugin.CommonOptions
 	MaxLinesPerSecond int
 }
 

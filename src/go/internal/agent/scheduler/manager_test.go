@@ -245,7 +245,7 @@ func (m *mockManager) mockTasks() {
 		tasks := p.tasks
 		p.tasks = make(performerHeap, 0, len(tasks))
 		for j, task := range tasks {
-			switch task.(type) {
+			switch t := task.(type) {
 			case *collectorTask:
 				collector := p.impl.(plugin.Collector)
 				mockTask := &mockCollectorTask{
@@ -260,24 +260,23 @@ func (m *mockManager) mockTasks() {
 				}
 				p.enqueueTask(mockTask)
 			case *exporterTask:
-				e := task.(*exporterTask)
 				mockTask := &mockExporterTask{
 					exporterTask: exporterTask{
 						taskBase: taskBase{
 							plugin:    task.getPlugin(),
-							scheduled: getNextcheck(e.item.delay, m.now).Add(priorityExporterTaskNs),
+							scheduled: getNextcheck(t.item.delay, m.now).Add(priorityExporterTaskNs),
 							index:     -1,
 							active:    task.isActive(),
 							recurring: true,
 						},
-						item:   e.item,
-						client: e.client,
-						meta:   e.meta,
+						item:   t.item,
+						client: t.client,
+						meta:   t.meta,
 					},
 					sink: m.sink,
 				}
 				p.enqueueTask(mockTask)
-				m.clients[index[e]].exporters[e.item.itemid] = mockTask
+				m.clients[index[t]].exporters[t.item.itemid] = mockTask
 			case *starterTask:
 				mockTask := &mockStarterTask{
 					taskBase: taskBase{
@@ -301,7 +300,6 @@ func (m *mockManager) mockTasks() {
 				}
 				p.enqueueTask(mockTask)
 			case *watcherTask:
-				w := task.(*watcherTask)
 				mockTask := &mockWatcherTask{
 					taskBase: taskBase{
 						plugin:    task.getPlugin(),
@@ -310,12 +308,11 @@ func (m *mockManager) mockTasks() {
 						active:    task.isActive(),
 					},
 					sink:     m.sink,
-					requests: w.requests,
-					client:   w.client,
+					requests: t.requests,
+					client:   t.client,
 				}
 				p.enqueueTask(mockTask)
 			case *configuratorTask:
-				c := task.(*configuratorTask)
 				mockTask := &mockConfigerTask{
 					taskBase: taskBase{
 						plugin:    task.getPlugin(),
@@ -323,7 +320,7 @@ func (m *mockManager) mockTasks() {
 						index:     -1,
 						active:    task.isActive(),
 					},
-					options: c.options,
+					options: t.options,
 					sink:    m.sink,
 				}
 				p.enqueueTask(mockTask)

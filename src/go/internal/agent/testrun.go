@@ -57,16 +57,16 @@ func CheckMetric(metric string) (err error) {
 		conf.Configure(PluginOptions(acc.Name()))
 	}
 
-	var v interface{}
-	if v, err = exporter.Export(key, params, nil); err != nil {
+	var u interface{}
+	if u, err = exporter.Export(key, params, nil); err != nil {
 		return
 	}
 
-	switch v.(type) {
+	switch v := u.(type) {
 	case string:
-		fmt.Printf("%-46s[s|%s]\n", metric, v.(string))
+		fmt.Printf("%-46s[s|%s]\n", metric, v)
 	case *string:
-		fmt.Printf("%-46s[s|%s]\n", metric, *v.(*string))
+		fmt.Printf("%-46s[s|%s]\n", metric, *v)
 	case int, int8, int16, int32, int64:
 		fmt.Printf("%-46s[i|%v]\n", metric, v)
 	case uint, uint8, uint16, uint32, uint64:
