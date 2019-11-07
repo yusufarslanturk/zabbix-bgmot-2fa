@@ -27,7 +27,6 @@ import (
 	"unsafe"
 
 	"zabbix.com/internal/agent"
-	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/glexpr"
 	"zabbix.com/pkg/log"
 	"zabbix.com/pkg/plugin"
@@ -224,16 +223,9 @@ func (c *client) addRequest(p *pluginAgent, r *plugin.Request, sink plugin.Resul
 	// handle configurator interface for inactive plugins
 	if _, ok := p.impl.(plugin.Configurator); ok && agent.Options.Plugins != nil {
 		if p.refcount == 0 {
-			// inject common options into plugin options
-			opts := agent.Options.Plugins[p.impl.Name()]
-			common := plugin.Options{
-				Timeout: agent.Options.Timeout,
-			}
-			raw, _ := conf.Marshal(&common)
-			opts, _ = conf.Set(opts, "Common", raw)
 			task := &configuratorTask{
 				taskBase: taskBase{plugin: p, active: true},
-				options:  opts,
+				options:  agent.PluginOptions(p.impl.Name()),
 			}
 			_ = task.reschedule(now)
 			tasks = append(tasks, task)

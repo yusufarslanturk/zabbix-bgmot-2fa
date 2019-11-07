@@ -480,7 +480,7 @@ func Unmarshal(node interface{}, v interface{}, args ...interface{}) (err error)
 		root = node.(*Node)
 		root.markUsed(false)
 	default:
-		return errors.New("Invalid input parameter")
+		return fmt.Errorf("Invalid input parameter of type %T", node)
 	}
 
 	if !strict {

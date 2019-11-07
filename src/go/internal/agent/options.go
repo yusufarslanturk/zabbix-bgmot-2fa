@@ -28,6 +28,8 @@ import (
 	"strings"
 	"unicode"
 
+	"zabbix.com/pkg/conf"
+	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/tls"
 )
 
@@ -54,8 +56,6 @@ type AgentOptions struct {
 	MaxLinesPerSecond    int      `conf:"optional,range=1:1000,default=20"`
 	UserParameter        []string `conf:"optional"`
 	UnsafeUserParameters int      `conf:"optional,range=0:1,default=0"`
-	LogRemoteCommands    int      `conf:"optional,range=0:1,default=0"`
-	EnableRemoteCommands int      `conf:"optional,range=0:1,default=0"`
 	ControlSocket        string   `conf:"optional"`
 	Alias                []string `conf:"optional"`
 	TLSConnect           string   `conf:"optional"`
@@ -216,4 +216,15 @@ func GetTLSConfig(options *AgentOptions) (cfg *tls.Config, err error) {
 	}
 
 	return c, nil
+}
+
+func PluginOptions(name string) (options interface{}) {
+	// inject common options into plugin options
+	options = Options.Plugins[name]
+	common := plugin.CommonOptions{
+		Timeout: Options.Timeout,
+	}
+	raw, _ := conf.Marshal(&common)
+	options, _ = conf.Set(options, "Common", raw)
+	return
 }

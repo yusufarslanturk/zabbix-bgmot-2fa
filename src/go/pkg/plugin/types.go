@@ -114,6 +114,10 @@ type Request struct {
 	Mtime       *int    `json:"mtime"`
 }
 
-type Options struct {
+type CommonOptions struct {
 	Timeout int
+}
+
+type Options struct {
+	Common CommonOptions
 }

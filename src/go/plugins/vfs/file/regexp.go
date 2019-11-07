@@ -130,7 +130,7 @@ func (p *Plugin) exportRegexp(params []string) (result interface{}, err error) {
 	curline = 0
 	for scanner.Scan() {
 		elapsed := time.Since(start)
-		if elapsed.Seconds() > float64(p.options.Timeout) {
+		if elapsed.Seconds() > float64(p.options.Common.Timeout) {
 			return nil, errors.New("Timeout while processing item.")
 		}
 
