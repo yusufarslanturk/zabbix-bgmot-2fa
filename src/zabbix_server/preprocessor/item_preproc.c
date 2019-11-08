@@ -2000,7 +2000,8 @@ static int	item_preproc_csv_to_json(zbx_variant_t *value, const char *params, ch
 			char	*data_next = data + quote_sz;
 			size_t	char_sz;
 
-			char_sz = zbx_utf8_char_len(data_next);
+			if (0 == (char_sz = zbx_utf8_char_len(data_next)))
+				continue;	/* invalid UTF-8 */
 
 			if (char_sz == quote_sz && 0 == memcmp(data_next, quote, quote_sz))
 			{
