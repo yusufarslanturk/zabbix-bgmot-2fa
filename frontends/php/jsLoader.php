@@ -320,8 +320,9 @@ $tranStrings = [
 		'S_MINUTE_SHORT' => _x('m', 'minute short')
 	],
 	'common.js' => [
-		'Cancel' => _('Cancel')
-	],
+		'Cancel' => _('Cancel'),
+		'Cannot load macros' => _('Cannot load macros')
+	]
 ];
 
 $js = '';

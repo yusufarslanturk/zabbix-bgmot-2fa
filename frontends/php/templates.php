@@ -42,7 +42,6 @@ $fields = [
 	'templates'			=> [T_ZBX_INT, O_OPT, null,		DB_ID,	null],
 	'linked_templates'	=> [T_ZBX_INT, O_OPT, null,		DB_ID,	null],
 	'add_templates'		=> [T_ZBX_INT, O_OPT, null,		DB_ID,	null],
-	'add_template' 		=> [T_ZBX_STR, O_OPT, null,		null,	null],
 	'templateid'		=> [T_ZBX_INT, O_OPT, P_SYS,		DB_ID,	'isset({form}) && {form} == "update"'],
 	'template_name'		=> [T_ZBX_STR, O_OPT, null,		NOT_EMPTY, 'isset({add}) || isset({update})', _('Template name')],
 	'visiblename'		=> [T_ZBX_STR, O_OPT, null,		null,	'isset({add}) || isset({update})'],
@@ -110,8 +109,6 @@ if (getRequest('templateid')) {
 	}
 }
 
-$templateIds = getRequest('templates', []);
-
 $tags = getRequest('tags', []);
 foreach ($tags as $key => $tag) {
 	// remove empty new tag lines
@@ -129,25 +126,20 @@ foreach ($tags as $key => $tag) {
 	}
 }
 
-// remove inherited macros data (actions: 'add', 'update' and 'form')
-if (hasRequest('macros')) {
-	$_REQUEST['macros'] = cleanInheritedMacros($_REQUEST['macros']);
+// Remove inherited macros data (actions: 'add', 'update' and 'form').
+$macros = cleanInheritedMacros(getRequest('macros', []));
 
-	// remove empty new macro lines
-	foreach ($_REQUEST['macros'] as $idx => $macro) {
-		if (!array_key_exists('hostmacroid', $macro) && $macro['macro'] === '' && $macro['value'] === ''
-				&& $macro['description'] === '') {
-			unset($_REQUEST['macros'][$idx]);
-		}
+// Remove empty new macro lines.
+foreach ($macros as $idx => $macro) {
+	if (!array_key_exists('hostmacroid', $macro) && $macro['macro'] === '' && $macro['value'] === ''
+			&& $macro['description'] === '') {
+		unset($macros[$idx]);
 	}
 }
 
 /*
  * Actions
  */
-if (hasRequest('add_template') && hasRequest('add_templates')) {
-	$_REQUEST['templates'] = array_merge($templateIds, $_REQUEST['add_templates']);
-}
 if (hasRequest('unlink') || hasRequest('unlink_and_clear')) {
 	$unlinkTemplates = [];
 
@@ -416,11 +408,11 @@ elseif (hasRequest('add') || hasRequest('update')) {
 			$groups = array_merge($groups, $new_groupid['groupids']);
 		}
 
-		// linked templates
-		$linkedTemplates = getRequest('templates', []);
+		// Linked templates.
 		$templates = [];
-		foreach ($linkedTemplates as $linkedTemplateId) {
-			$templates[] = ['templateid' => $linkedTemplateId];
+
+		foreach (array_merge(getRequest('templates', []), getRequest('add_templates', [])) as $templateid) {
+			$templates[] = ['templateid' => $templateid];
 		}
 
 		$templatesClear = getRequest('clear_templates', []);
@@ -433,7 +425,7 @@ elseif (hasRequest('add') || hasRequest('update')) {
 			'name' => getRequest('visiblename', ''),
 			'groups' => zbx_toObject($groups, 'groupid'),
 			'templates' => $templates,
-			'macros' => getRequest('macros', []),
+			'macros' => $macros,
 			'tags' => $tags,
 			'description' => getRequest('description', '')
 		];
@@ -676,10 +668,14 @@ elseif (hasRequest('form')) {
 		'form' => getRequest('form'),
 		'templateid' => getRequest('templateid', 0),
 		'linked_templates' => getRequest('templates', []),
+		'add_templates' => getRequest('add_templates', []),
 		'original_templates' => [],
 		'parent_templates' => [],
 		'tags' => $tags,
-		'show_inherited_macros' => getRequest('show_inherited_macros', 0)
+		'show_inherited_macros' => getRequest('show_inherited_macros', 0),
+		'readonly' => false,
+		'form_refresh' => getRequest('form_refresh', 0),
+		'macros' => $macros
 	];
 
 	if ($data['templateid'] != 0) {
@@ -687,7 +683,6 @@ elseif (hasRequest('form')) {
 			'output' => API_OUTPUT_EXTEND,
 			'selectGroups' => API_OUTPUT_EXTEND,
 			'selectParentTemplates' => ['templateid', 'name'],
-			'selectMacros' => API_OUTPUT_EXTEND,
 			'selectTags' => ['tag', 'value'],
 			'templateids' => $data['templateid']
 		]);
@@ -716,18 +711,27 @@ elseif (hasRequest('form')) {
 		CArrayHelper::sort($data['tags'], ['tag', 'value']);
 	}
 
-	$templateIds = getRequest('templates', hasRequest('form_refresh') ? [] : $data['original_templates']);
+	$templateids = getRequest('templates', hasRequest('form_refresh') ? [] : $data['original_templates']);
 
 	// Get linked templates.
-	$data['linkedTemplates'] = API::Template()->get([
+	$templates = API::Template()->get([
 		'output' => ['templateid', 'name'],
-		'templateids' => $templateIds,
+		'templateids' => array_merge($templateids, $data['add_templates']),
 		'preservekeys' => true
 	]);
 
+	$data['linkedTemplates'] = array_intersect_key($templates, array_flip($templateids));
+	CArrayHelper::sort($data['linkedTemplates'], ['name']);
+
+	$data['add_templates'] = array_intersect_key($templates, array_flip($data['add_templates']));
+	foreach ($data['add_templates'] as &$template) {
+		$template = CArrayHelper::renameKeys($template, ['templateid' => 'id']);
+	}
+	unset($template);
+
 	$data['writable_templates'] = API::Template()->get([
 		'output' => ['templateid'],
-		'templateids' => $templateIds,
+		'templateids' => $templateids,
 		'editable' => true,
 		'preservekeys' => true
 	]);

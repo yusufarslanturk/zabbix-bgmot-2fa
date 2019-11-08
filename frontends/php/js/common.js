@@ -110,6 +110,42 @@ function is_array(obj) {
 	return (obj != null) && (typeof obj == 'object') && ('splice' in obj) && ('join' in obj);
 }
 
+/**
+ * Cleans the array deleting undefined values.
+ *
+ * @param {typeof} deleteValue
+ *
+ * @returns {object}
+ */
+Array.prototype.clean = function(deleteValue) {
+	for (var i = 0; i < this.length; i++) {
+		if (this[i] == deleteValue) {
+			this.splice(i, 1);
+			i--;
+		}
+	}
+
+	return this;
+};
+
+/**
+ * Custom method to check if arrays are different.
+ *
+ * @param {Array} arr
+ *
+ * @returns {Array}
+ */
+Array.prototype.diff = function (arr) {
+	// Merge the arrays.
+	var mergedArr = this.concat(arr);
+
+	// Get the elements which are unique in the array and return the diff array.
+	return mergedArr.filter(function (e) {
+		// Check if the element is appearing only once.
+		return (mergedArr.indexOf(e) === mergedArr.lastIndexOf(e));
+	});
+};
+
 function addListener(element, eventname, expression, bubbling) {
 	bubbling = bubbling || false;
 	element = $(element);

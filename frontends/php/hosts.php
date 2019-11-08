@@ -64,7 +64,6 @@ $fields = [
 									null
 								],
 	'templates' =>				[T_ZBX_INT, O_OPT, null,			DB_ID,		null],
-	'add_template' =>			[T_ZBX_STR, O_OPT, null,			null,		null],
 	'add_templates' =>			[T_ZBX_INT, O_OPT, null,			DB_ID,		null],
 	'templates_rem' =>			[T_ZBX_STR, O_OPT, P_SYS|P_ACT,		null,		null],
 	'clear_templates' =>		[T_ZBX_INT, O_OPT, null,			DB_ID,		null],
@@ -245,10 +244,10 @@ foreach ($tags as $key => $tag) {
 	}
 }
 
-// remove inherited macros data (actions: 'add', 'update' and 'form')
+// Remove inherited macros data (actions: 'add', 'update' and 'form').
 $macros = cleanInheritedMacros(getRequest('macros', []));
 
-// remove empty new macro lines
+// Remove empty new macro lines.
 foreach ($macros as $idx => $macro) {
 	if (!array_key_exists('hostmacroid', $macro) && $macro['macro'] === '' && $macro['value'] === ''
 			&& $macro['description'] === '') {
@@ -259,10 +258,6 @@ foreach ($macros as $idx => $macro) {
 /*
  * Actions
  */
-if (hasRequest('add_template') && hasRequest('add_templates')) {
-	$_REQUEST['templates'] = getRequest('templates', []);
-	$_REQUEST['templates'] = array_merge($_REQUEST['templates'], $_REQUEST['add_templates']);
-}
 if (hasRequest('unlink') || hasRequest('unlink_and_clear')) {
 	$_REQUEST['clear_templates'] = getRequest('clear_templates', []);
 
@@ -598,11 +593,11 @@ elseif (hasRequest('add') || hasRequest('update')) {
 			];
 		}
 		else {
-			// templates
+			// Linked templates.
 			$templates = [];
 
-			foreach (getRequest('templates', []) as $templateId) {
-				$templates[] = ['templateid' => $templateId];
+			foreach (array_merge(getRequest('templates', []), getRequest('add_templates', [])) as $templateid) {
+				$templates[] = ['templateid' => $templateid];
 			}
 
 			// interfaces
@@ -960,6 +955,7 @@ elseif (hasRequest('form')) {
 		'hostid' => getRequest('hostid', 0),
 		'clone_hostid' => getRequest('clone_hostid', 0),
 		'flags' => getRequest('flags', ZBX_FLAG_DISCOVERY_NORMAL),
+		'form_refresh' => getRequest('form_refresh', 0),
 
 		// Host
 		'host' => getRequest('host', ''),
@@ -972,6 +968,7 @@ elseif (hasRequest('form')) {
 
 		// Templates
 		'templates' => getRequest('templates', []),
+		'add_templates' => getRequest('add_templates', []),
 		'clear_templates' => getRequest('clear_templates', []),
 		'original_templates' => [],
 		'linked_templates' => [],
@@ -1015,7 +1012,6 @@ elseif (hasRequest('form')) {
 				],
 				'selectGroups' => ['groupid'],
 				'selectParentTemplates' => ['templateid'],
-				'selectMacros' => ['hostmacroid', 'macro', 'value', 'description'],
 				'selectDiscoveryRule' => ['itemid', 'name'],
 				'selectHostDiscovery' => ['parent_hostid'],
 				'selectInventory' => API_OUTPUT_EXTEND,
@@ -1055,9 +1051,6 @@ elseif (hasRequest('form')) {
 
 			// Tags
 			$data['tags'] = $dbHost['tags'];
-
-			// Macros
-			$data['macros'] = $dbHost['macros'];
 
 			// Interfaces
 			foreach ($data['interfaces'] as &$interface) {
@@ -1139,6 +1132,8 @@ elseif (hasRequest('form')) {
 		$groups = getRequest('groups', []);
 	}
 
+	$data['readonly'] = ($data['flags'] == ZBX_FLAG_DISCOVERY_CREATED);
+
 	if ($data['hostid'] != 0) {
 		// get items that populate host inventory fields
 		$data['inventory_items'] = API::Item()->get([
@@ -1181,20 +1176,6 @@ elseif (hasRequest('form')) {
 	}
 	else {
 		CArrayHelper::sort($data['tags'], ['tag', 'value']);
-	}
-
-	// macros
-	if ($data['show_inherited_macros']) {
-		$data['macros'] = mergeInheritedMacros($data['macros'], getInheritedMacros($data['templates']));
-	}
-	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
-
-	if (!$data['macros'] && $data['flags'] != ZBX_FLAG_DISCOVERY_CREATED) {
-		$macro = ['macro' => '', 'value' => '', 'description' => ''];
-		if ($data['show_inherited_macros']) {
-			$macro['type'] = ZBX_PROPERTY_OWN;
-		}
-		$data['macros'][] = $macro;
 	}
 
 	$groupids = [];
@@ -1247,19 +1228,30 @@ elseif (hasRequest('form')) {
 	}
 	CArrayHelper::sort($data['groups_ms'], ['name']);
 
-	if ($data['templates']) {
-		$data['linked_templates'] = API::Template()->get([
+	if ($data['templates'] || $data['add_templates']) {
+		$templates = API::Template()->get([
 			'output' => ['templateid', 'name'],
-			'templateids' => $data['templates']
-		]);
-		CArrayHelper::sort($data['linked_templates'], ['name']);
-
-		$data['writable_templates'] = API::Template()->get([
-			'output' => ['templateid'],
-			'templateids' => $data['templates'],
-			'editable' => true,
+			'templateids' => array_merge($data['templates'], $data['add_templates']),
 			'preservekeys' => true
 		]);
+
+		$data['linked_templates'] = array_intersect_key($templates, array_flip($data['templates']));
+		CArrayHelper::sort($data['linked_templates'], ['name']);
+
+		$data['add_templates'] = array_intersect_key($templates, array_flip($data['add_templates']));
+		foreach ($data['add_templates'] as &$template) {
+			$template = CArrayHelper::renameKeys($template, ['templateid' => 'id']);
+		}
+		unset($template);
+
+		if ($data['templates']) {
+			$data['writable_templates'] = API::Template()->get([
+				'output' => ['templateid'],
+				'templateids' => $data['templates'],
+				'editable' => true,
+				'preservekeys' => true
+			]);
+		}
 	}
 
 	$hostView = new CView('configuration.host.edit', $data);

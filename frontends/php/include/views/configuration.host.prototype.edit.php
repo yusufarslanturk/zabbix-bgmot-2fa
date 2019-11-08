@@ -31,7 +31,8 @@ $widget = (new CWidget())
 	->setTitle(_('Host prototypes'))
 	->addItem(get_header_host_table('hosts', $discoveryRule['hostid'], $discoveryRule['itemid']));
 
-$divTabs = new CTabView();
+$divTabs = (new CTabView())->onTabChange('hostmacros.tabChange(ui.newTab.index());');
+
 if (!hasRequest('form_refresh')) {
 	$divTabs->setSelected(0);
 }
@@ -230,7 +231,7 @@ if ($hostPrototype['templateid']) {
 		->setHeader([_('Name')]);
 
 	foreach ($hostPrototype['templates'] as $template) {
-		$tmplList->addVar('templates['.$template['templateid'].']', $template['templateid']);
+		$tmplList->addItem((new CVar('templates['.$template['templateid'].']', $template['templateid']))->removeId());
 
 		if (array_key_exists($template['templateid'], $hostPrototype['writable_templates'])) {
 			$template_link = (new CLink($template['name'],
@@ -283,26 +284,35 @@ else {
 		$disableids[] = $template['templateid'];
 	}
 
-	$linkedTemplateTable->addRow([
-		(new CSimpleButton(_('Add')))
-			->onClick('return PopUp("popup.generic",'.CJs::encodeJson([
-				'dstfrm' => $frmHost->getName(),
-				'dstfld1' => $frmHost->getName(),
+	$add_templates_ms = (new CMultiSelect([
+		'name' => 'add_templates[]',
+		'object_name' => 'templates',
+		'data' => $hostPrototype['add_templates'],
+		'popup' => [
+			'parameters' => [
 				'srctbl' => 'templates',
 				'srcfld1' => 'hostid',
-				'templated_hosts' => '1',
-				'popup_type' => 'templates',
-				'multiselect' => 1,
+				'srcfld2' => 'host',
+				'dstfrm' => $frmHost->getName(),
+				'dstfld1' => 'add_templates_',
 				'disableids' => $disableids
-			]).', null, this);')
-			->addClass(ZBX_STYLE_BTN_LINK)
-	]);
+			]
+		]
+	]))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH);
 
-	$tmplList->addRow(_('Linked templates'),
-		(new CDiv($linkedTemplateTable))
-			->addClass(ZBX_STYLE_TABLE_FORMS_SEPARATOR)
-			->setAttribute('style', 'min-width: '.ZBX_TEXTAREA_BIG_WIDTH.'px;')
-	);
+	$tmplList
+		->addRow(_('Linked templates'),
+			(new CDiv($linkedTemplateTable))
+				->addClass(ZBX_STYLE_TABLE_FORMS_SEPARATOR)
+				->setAttribute('style', 'min-width: '.ZBX_TEXTAREA_BIG_WIDTH.'px;')
+		)
+		->addRow((new CLabel(_('Link new templates'), 'add_templates__ms')),
+			(new CDiv(
+				(new CTable())->addRow([$add_templates_ms])
+			))
+				->addClass(ZBX_STYLE_TABLE_FORMS_SEPARATOR)
+				->setAttribute('style', 'min-width: '.ZBX_TEXTAREA_BIG_WIDTH.'px;')
+		);
 }
 
 $divTabs->addTab('templateTab', _('Templates'), $tmplList);
@@ -330,21 +340,14 @@ if ($parentHost['status'] != HOST_STATUS_TEMPLATE) {
 	$divTabs->addTab('ipmiTab', _('IPMI'), $ipmiList);
 
 	// macros
-	$macros = $parentHost['macros'];
-	if ($data['show_inherited_macros']) {
-		$macros = mergeInheritedMacros($macros,
-			getInheritedMacros(zbx_objectValues($hostPrototype['templates'], 'templateid'))
-		);
-	}
-	$macros = array_values(order_macros($macros, 'macro'));
-
-	$macrosView = new CView('hostmacros', [
-		'macros' => $macros,
-		'show_inherited_macros' => $data['show_inherited_macros'],
-		'is_template' => false,
-		'readonly' => true
-	]);
-	$divTabs->addTab('macroTab', _('Macros'), $macrosView->render());
+	$divTabs->addTab('macroTab', _('Macros'), (new CFormList('macrosFormList'))
+		->addRow(null, (new CRadioButtonList('show_inherited_macros', (int) $data['show_inherited_macros']))
+			->addValue(_('Host macros'), 0)
+			->addValue(_('Inherited and host macros'), 1)
+			->setModern(true)
+		)
+		->addRow(null, null, 'macros_container')
+	);
 }
 
 $inventoryFormList = (new CFormList('inventorylist'))
@@ -436,5 +439,25 @@ else {
 
 $frmHost->addItem($divTabs);
 $widget->addItem($frmHost);
+// Create namespace for host macros list and prepare the collected data for JS.
+zbx_add_post_js(
+	'var hostmacros = hostmacros || {};'.
+
+	'hostmacros.data = {'.
+		'tab_id: "macroTab",'.
+		(($hostPrototype['templateid'] == 0) ? '': 'ms_id: "'.$add_templates_ms->getId().'",').
+		'form_id: "'.$frmHost->getId().'",'.
+		'templateids: '.CJs::encodeJson(
+			array_map('strval', zbx_objectValues($data['host_prototype']['templates'], 'templateid'))
+		).','.
+		'add_templates: '.CJs::encodeJson(array_keys($data['host_prototype']['add_templates'])).','.
+		'hostid: "'.$data['parent_hostid'].'",'.
+		'show_inherited_macros: '.$data['show_inherited_macros'].','.
+		'readonly: '.(int) $data['readonly'].','.
+		'form_refresh: '.$data['form_refresh'].
+	'};'
+);
+
+zbx_add_post_js(file_get_contents(dirname(__FILE__).'/js/hostmacros.js'));
 
 return $widget;
