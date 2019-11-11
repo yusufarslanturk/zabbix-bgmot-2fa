@@ -148,7 +148,7 @@ hostmacros.loadMacros = function() {
 				}
 			}
 			else {
-				if (typeof response.messages !== undefined) {
+				if (typeof response.messages !== 'undefined') {
 					/*
 					 * If message box (with or without details exists) add messages to it. If not, create new message
 					 * box without title because those runtime errors like undefined indexes don't have a title.
@@ -193,7 +193,7 @@ hostmacros.loadMacros = function() {
 				}
 
 				// Display debug after loaded content if it is enabled for user.
-				if (typeof response.debug !== undefined) {
+				if (typeof response.debug !== 'undefined') {
 					$container.append(response.debug);
 
 					// Stylize the debug with corret margin inside the block.
