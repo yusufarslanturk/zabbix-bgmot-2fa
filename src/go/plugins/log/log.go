@@ -33,8 +33,7 @@ import (
 )
 
 type Options struct {
-	Common            plugin.CommonOptions
-	MaxLinesPerSecond int
+	MaxLinesPerSecond int `conf:"range=1:1000,default=20"`
 }
 
 // Plugin -
@@ -43,11 +42,19 @@ type Plugin struct {
 	options Options
 }
 
-func (p *Plugin) Configure(options interface{}) {
+func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
 	if err := conf.Unmarshal(options, &p.options); err != nil {
 		p.Warningf("cannot unmarshal configuration options: %s", err)
 	}
 	zbxlib.SetMaxLinesPerSecond(p.options.MaxLinesPerSecond)
+}
+
+func (p *Plugin) Validate(options interface{}) (err error) {
+	var o Options
+	if err = conf.Unmarshal(options, &o); err != nil {
+		return
+	}
+	return
 }
 
 type metadata struct {

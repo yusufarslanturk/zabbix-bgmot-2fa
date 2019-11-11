@@ -47,19 +47,6 @@ func (n *Node) get(name string) (node *Node) {
 	return nil
 }
 
-// getOrAdd returns child node by name or creates new one
-func (n *Node) getOrAdd(name string) (node *Node) {
-	if node = n.get(name); node == nil {
-		node = &Node{
-			name:   string(name),
-			values: make([][]byte, 0),
-			nodes:  make([]*Node, 0),
-		}
-		n.nodes = append(n.nodes, node)
-	}
-	return
-}
-
 // add appends new child node
 func (n *Node) add(name []byte, value []byte, lineNum int) {
 	var node *Node

@@ -22,11 +22,9 @@ package empty
 import (
 	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/plugin"
-	"zabbix.com/pkg/std"
 )
 
 type Options struct {
-	Common   plugin.CommonOptions
 	Interval int
 }
 
@@ -38,7 +36,6 @@ type Plugin struct {
 }
 
 var impl Plugin
-var stdOs std.Os
 
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
 	p.Debugf("export %s%v", key, params)
@@ -56,16 +53,15 @@ func (p *Plugin) Period() int {
 	return p.options.Interval
 }
 
-func (p *Plugin) Configure(options interface{}) {
+func (p *Plugin) Configure(global *plugin.GlobalOptions, private interface{}) {
 	p.options.Interval = 10
-	if err := conf.Unmarshal(options, &p.options); err != nil {
+	if err := conf.Unmarshal(private, &p.options); err != nil {
 		p.Warningf("cannot unmarshal configuration options: %s", err)
 	}
 	p.Debugf("configure: interval=%d", p.options.Interval)
 }
 
 func init() {
-	stdOs = std.NewOs()
 	impl.options.Interval = 1
 	plugin.RegisterMetrics(&impl, "DebugCollector", "debug.collector", "Returns empty value.")
 }

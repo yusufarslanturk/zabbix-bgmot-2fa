@@ -172,8 +172,12 @@ type mockConfiguratorPlugin struct {
 	options interface{}
 }
 
-func (p *mockConfiguratorPlugin) Configure(options interface{}) {
+func (p *mockConfiguratorPlugin) Configure(global *plugin.GlobalOptions, options interface{}) {
 	p.call("$configure")
+}
+
+func (p *mockConfiguratorPlugin) Validate(options interface{}) (err error) {
+	return
 }
 
 type resultCacheMock struct {
@@ -538,11 +542,11 @@ func (t *mockWatcherTask) GlobalRegexp() plugin.RegexpMatcher {
 type mockConfigerTask struct {
 	taskBase
 	sink    chan performer
-	options interface{}
+	options *agent.AgentOptions
 }
 
 func (t *mockConfigerTask) perform(s Scheduler) {
-	t.plugin.impl.(plugin.Configurator).Configure(t.options)
+	t.plugin.impl.(plugin.Configurator).Configure(agent.GlobalOptions(t.options), t.options.Plugins[t.plugin.name()])
 	t.sink <- t
 }
 
@@ -613,7 +617,7 @@ func TestTaskCreate(t *testing.T) {
 		plugin.RegisterMetrics(p, name, name, "Debug.")
 	}
 
-	manager, _ := NewManager(agent.Options)
+	manager, _ := NewManager(&agent.Options)
 
 	items := []*clientItem{
 		&clientItem{itemid: 1, delay: "151", key: "debug1"},
@@ -666,7 +670,7 @@ func TestTaskUpdate(t *testing.T) {
 		plugin.RegisterMetrics(p, name, name, "Debug.")
 	}
 
-	manager, _ := NewManager(agent.Options)
+	manager, _ := NewManager(&agent.Options)
 
 	items := []*clientItem{
 		&clientItem{itemid: 1, delay: "151", key: "debug1"},
@@ -734,7 +738,7 @@ func TestTaskUpdateInvalidInterval(t *testing.T) {
 		plugin.RegisterMetrics(p, name, name, "Debug.")
 	}
 
-	manager, _ := NewManager(agent.Options)
+	manager, _ := NewManager(&agent.Options)
 
 	items := []*clientItem{
 		&clientItem{itemid: 1, delay: "151", key: "debug1"},
@@ -790,7 +794,7 @@ func TestTaskDelete(t *testing.T) {
 		plugin.RegisterMetrics(p, name, name, "Debug.")
 	}
 
-	manager, _ := NewManager(agent.Options)
+	manager, _ := NewManager(&agent.Options)
 
 	items := []*clientItem{
 		&clientItem{itemid: 1, delay: "151", key: "debug1"},
@@ -1683,18 +1687,23 @@ func TestPassiveRunner(t *testing.T) {
 	manager.checkPluginTimeline(t, plugins, calls, 1)
 }
 
+type configuratorOption struct {
+	Params interface{} `conf:"optional"`
+}
+
 func TestConfigurator(t *testing.T) {
 	_ = log.Open(log.Console, log.Debug, "", 0)
 
-	options := make(map[string]interface{})
-	opt1 := map[string]string{"delay": "5"}
-	options["Debug1"], _ = conf.Marshal(&opt1)
-	opt2 := map[string]string{"delay": "30"}
-	options["Debug2"], _ = conf.Marshal(&opt2)
-	opt3 := map[string]string{"delay": "60"}
-	options["Debug3"], _ = conf.Marshal(&opt3)
+	var opt1, opt2, opt3 configuratorOption
+	_ = conf.Unmarshal([]byte("Delay=5"), &opt1)
+	_ = conf.Unmarshal([]byte("Delay=30"), &opt2)
+	_ = conf.Unmarshal([]byte("Delay=60"), &opt3)
 
-	agent.Options.Plugins = options
+	agent.Options.Plugins = map[string]interface{}{
+		"Debug1": opt1.Params,
+		"Debug2": opt2.Params,
+		"Debug3": opt3.Params,
+	}
 
 	manager := mockManager{sink: make(chan performer, 10)}
 	plugin.ClearRegistry()
@@ -1704,7 +1713,7 @@ func TestConfigurator(t *testing.T) {
 		plugins[i] = &mockConfiguratorPlugin{
 			Base:       plugin.Base{},
 			mockPlugin: mockPlugin{now: &manager.now},
-			options:    options[name]}
+			options:    agent.Options.Plugins[name]}
 		plugin.RegisterMetrics(plugins[i], name, name, "Debug.")
 	}
 	manager.mockInit(t)

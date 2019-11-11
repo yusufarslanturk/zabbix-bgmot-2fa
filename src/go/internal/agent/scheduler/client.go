@@ -225,7 +225,7 @@ func (c *client) addRequest(p *pluginAgent, r *plugin.Request, sink plugin.Resul
 		if p.refcount == 0 {
 			task := &configuratorTask{
 				taskBase: taskBase{plugin: p, active: true},
-				options:  agent.PluginOptions(p.impl.Name()),
+				options:  &agent.Options,
 			}
 			_ = task.reschedule(now)
 			tasks = append(tasks, task)

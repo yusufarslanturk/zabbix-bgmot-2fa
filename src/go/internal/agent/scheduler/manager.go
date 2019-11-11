@@ -434,13 +434,26 @@ func (m *Manager) Query(command string) (status string) {
 	return <-request.sink
 }
 
-func (m *Manager) configure(options agent.AgentOptions) error {
+func (m *Manager) validatePlugins(options *agent.AgentOptions) (err error) {
+	for _, p := range plugin.Plugins {
+		if c, ok := p.(plugin.Configurator); ok {
+			if err = c.Validate(options.Plugins[p.Name()]); err != nil {
+				return fmt.Errorf("invalid plugin %s configuration: %s", p.Name(), err)
+			}
+		}
+	}
+	return
+}
+
+func (m *Manager) configure(options *agent.AgentOptions) error {
 	return m.loadAlias(options)
 }
 
-func NewManager(options agent.AgentOptions) (*Manager, error) {
+func NewManager(options *agent.AgentOptions) (mannager *Manager, err error) {
 	var m Manager
 	m.init()
-	err := m.configure(options)
-	return &m, err
+	if err = m.validatePlugins(options); err != nil {
+		return
+	}
+	return &m, m.configure(options)
 }

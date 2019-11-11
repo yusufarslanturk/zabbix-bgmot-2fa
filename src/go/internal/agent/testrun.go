@@ -54,7 +54,7 @@ func CheckMetric(metric string) (err error) {
 
 	var conf plugin.Configurator
 	if conf, ok = acc.(plugin.Configurator); ok {
-		conf.Configure(PluginOptions(acc.Name()))
+		conf.Configure(GlobalOptions(&Options), Options.Plugins[acc.Name()])
 	}
 
 	var u interface{}

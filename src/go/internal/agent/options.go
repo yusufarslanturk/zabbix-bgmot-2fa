@@ -28,7 +28,6 @@ import (
 	"strings"
 	"unicode"
 
-	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/tls"
 )
@@ -218,13 +217,10 @@ func GetTLSConfig(options *AgentOptions) (cfg *tls.Config, err error) {
 	return c, nil
 }
 
-func PluginOptions(name string) (options interface{}) {
-	// inject common options into plugin options
-	options = Options.Plugins[name]
-	common := plugin.CommonOptions{
-		Timeout: Options.Timeout,
+func GlobalOptions(all *AgentOptions) (options *plugin.GlobalOptions) {
+	options = &plugin.GlobalOptions{
+		Timeout:  Options.Timeout,
+		SourceIP: Options.SourceIP,
 	}
-	raw, _ := conf.Marshal(&common)
-	options, _ = conf.Set(options, "Common", raw)
 	return
 }

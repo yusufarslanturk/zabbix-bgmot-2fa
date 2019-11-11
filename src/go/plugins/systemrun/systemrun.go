@@ -29,7 +29,7 @@ import (
 )
 
 type Options struct {
-	Common               plugin.CommonOptions
+	Timeout              int `conf:"optional"`
 	LogRemoteCommands    int `conf:"optional,range=0:1,default=0"`
 	EnableRemoteCommands int `conf:"optional,range=0:1,default=0"`
 }
@@ -42,10 +42,21 @@ type Plugin struct {
 
 var impl Plugin
 
-func (p *Plugin) Configure(options interface{}) {
+func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
 	if err := conf.Unmarshal(options, &p.options); err != nil {
 		p.Warningf("cannot unmarshal configuration options: %s", err)
 	}
+	if p.options.Timeout == 0 {
+		p.options.Timeout = global.Timeout
+	}
+}
+
+func (p *Plugin) Validate(options interface{}) (err error) {
+	var o Options
+	if err = conf.Unmarshal(options, &o); err != nil {
+		return
+	}
+	return
 }
 
 // Export -
@@ -69,7 +80,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	}
 
 	if len(params) == 1 || params[1] == "" || params[1] == "wait" {
-		stdoutStderr, err := zbxcmd.Execute(params[0], time.Second*time.Duration(p.options.Common.Timeout))
+		stdoutStderr, err := zbxcmd.Execute(params[0], time.Second*time.Duration(p.options.Timeout))
 		if err != nil {
 			return nil, err
 		}

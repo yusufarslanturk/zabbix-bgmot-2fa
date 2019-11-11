@@ -27,10 +27,14 @@ import (
 	"zabbix.com/pkg/std"
 )
 
+type Options struct {
+	Timeout int `conf:"optional"`
+}
+
 // Plugin -
 type Plugin struct {
 	plugin.Base
-	options plugin.Options
+	options Options
 }
 
 var impl Plugin
@@ -55,10 +59,21 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	}
 }
 
-func (p *Plugin) Configure(options interface{}) {
+func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
 	if err := conf.Unmarshal(options, &p.options); err != nil {
 		p.Warningf("cannot unmarshal configuration options: %s", err)
 	}
+	if p.options.Timeout == 0 {
+		p.options.Timeout = global.Timeout
+	}
+}
+
+func (p *Plugin) Validate(options interface{}) (err error) {
+	var o Options
+	if err = conf.Unmarshal(options, &o); err != nil {
+		return
+	}
+	return
 }
 
 var stdOs std.Os

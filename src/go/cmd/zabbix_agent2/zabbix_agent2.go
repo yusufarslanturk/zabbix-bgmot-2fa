@@ -427,7 +427,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if manager, err = scheduler.NewManager(agent.Options); err != nil {
+	if manager, err = scheduler.NewManager(&agent.Options); err != nil {
 		log.Critf("cannot create scheduling manager: %s", err)
 		os.Exit(1)
 	}

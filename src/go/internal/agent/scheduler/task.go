@@ -25,6 +25,7 @@ import (
 	"reflect"
 	"time"
 
+	"zabbix.com/internal/agent"
 	"zabbix.com/pkg/itemutil"
 	"zabbix.com/pkg/log"
 	"zabbix.com/pkg/plugin"
@@ -412,14 +413,14 @@ func (t *watcherTask) GlobalRegexp() plugin.RegexpMatcher {
 
 type configuratorTask struct {
 	taskBase
-	options interface{}
+	options *agent.AgentOptions
 }
 
 func (t *configuratorTask) perform(s Scheduler) {
 	log.Tracef("plugin %s: executing configurator task", t.plugin.name())
 	go func() {
 		config, _ := t.plugin.impl.(plugin.Configurator)
-		config.Configure(t.options)
+		config.Configure(agent.GlobalOptions(t.options), t.options.Plugins[t.plugin.name()])
 		s.FinishTask(t)
 	}()
 }

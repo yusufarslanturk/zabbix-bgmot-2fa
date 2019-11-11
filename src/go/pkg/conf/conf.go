@@ -309,7 +309,6 @@ func assignValues(v interface{}, root *Node) (err error) {
 	default:
 		return errors.New("output variable must be a pointer to a structure")
 	}
-
 	return root.checkUsage()
 }
 
@@ -457,14 +456,21 @@ func Unmarshal(node interface{}, v interface{}, args ...interface{}) (err error)
 	if len(args) > 0 {
 		var ok bool
 		if strict, ok = args[0].(bool); !ok {
-			return errors.New("Invalid output third parameter")
+			return errors.New("Invalid mode parameter")
 		}
 	}
 
 	var root *Node
-	switch node.(type) {
+	switch u := node.(type) {
+	case nil:
+		root = &Node{
+			name:   "",
+			used:   false,
+			values: make([][]byte, 0),
+			nodes:  make([]*Node, 0),
+			parent: nil,
+			line:   0}
 	case []byte:
-		data, _ := node.([]byte)
 		root = &Node{
 			name:   "",
 			used:   false,
@@ -473,14 +479,14 @@ func Unmarshal(node interface{}, v interface{}, args ...interface{}) (err error)
 			parent: nil,
 			line:   0}
 
-		if err = parseConfig(root, data); err != nil {
+		if err = parseConfig(root, u); err != nil {
 			return fmt.Errorf("Cannot read configuration: %s", err.Error())
 		}
 	case *Node:
-		root = node.(*Node)
+		root = u
 		root.markUsed(false)
 	default:
-		return fmt.Errorf("Invalid input parameter of type %T", node)
+		return errors.New("Invalid input parameter")
 	}
 
 	if !strict {
@@ -508,34 +514,6 @@ func Load(filename string, v interface{}) (err error) {
 	}
 
 	return Unmarshal(buf.Bytes(), v)
-}
-
-func Set(r interface{}, name string, o interface{}) (out interface{}, err error) {
-	var root, node *Node
-	var ok bool
-	if node, ok = o.(*Node); !ok {
-		return nil, errors.New("Invalid input parameter")
-	}
-	if r == nil {
-		root = &Node{
-			values: make([][]byte, 0),
-			nodes:  make([]*Node, 0),
-		}
-	} else {
-		if root, ok = r.(*Node); !ok {
-			return nil, errors.New("Invalid input parameter")
-		}
-	}
-
-	node.name = name
-	for i := range root.nodes {
-		if root.nodes[i].name == name {
-			root.nodes[i] = node
-			return
-		}
-	}
-	root.nodes = append(root.nodes, node)
-	return root, nil
 }
 
 var stdOs std.Os

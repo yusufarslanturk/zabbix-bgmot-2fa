@@ -22,7 +22,6 @@
 package conf
 
 import (
-	"fmt"
 	"reflect"
 	"strings"
 	"testing"
@@ -372,212 +371,23 @@ func TestRecursiveInclude(t *testing.T) {
 	}
 }
 
-func dumpNode(node *Node, prefix string) {
-	fmt.Printf("%s[%s]\n", prefix, node.name)
-	prefix += "    "
-	for _, value := range node.values {
-		fmt.Printf("%s%s\n", prefix, value)
-	}
-
-	for _, child := range node.nodes {
-		dumpNode(child, prefix)
-	}
-}
-
-func TestMarshal(t *testing.T) {
-	type Nested struct {
-		Id   uint64
-		Name string
-	}
-
-	type Wrapped struct {
-		Id   uint64
-		Name string
-		Desc *string
-		Obj  []int
-		Tags map[string]Nested
-	}
-
-	s := "placeholder"
-	in := Wrapped{
-		Id:   1,
-		Name: "object",
-		Desc: &s,
-		Obj:  []int{1, 2, 3, 5, 8},
-		Tags: map[string]Nested{"a": Nested{2, "child object"}, "b": Nested{3, "another child object"}},
-	}
-
-	var out Wrapped
-	r, _ := Marshal(&in)
-	Unmarshal(r, &out)
-
-	if !reflect.DeepEqual(in, out) {
-		t.Errorf("Expected %+v while got %+v", in, out)
-	}
-}
-
-func TestSet(t *testing.T) {
-	type Common struct {
-		Timeout  int
-		Capacity int
-	}
+func TestEmptyOptional(t *testing.T) {
 	type Options struct {
-		Plugins map[string]interface{}
+		Text *string `conf:"optional"`
 	}
-
-	type PluginOptions struct {
-		Common
-		Id uint64
-	}
-
-	input := `
-	Plugins.Test.Id = 1
-	Plugins.Test.Name = TestPlugin
-	`
 
 	var options Options
-	if err := Unmarshal([]byte(input), &options); err != nil {
-		t.Errorf("Expected success while got error: %s", err)
-	}
-
-	o := options.Plugins["Test"]
-	common := Common{
-		Timeout:  10,
-		Capacity: 100,
-	}
-	v, err := Marshal(&common)
-	if err != nil {
-		t.Errorf("Failed marshaling common options: %s", err)
-	}
-
-	if o, err = Set(o, "Common", v); err != nil {
-		t.Errorf("Failed setting common options: %s", err)
-	}
-
-	var p PluginOptions
-	if err := Unmarshal(o, &p, false); err != nil {
-		t.Errorf("Failed unmarshaling plugin options: %s", err)
-	}
-
-	expected := PluginOptions{
-		Common: Common{
-			Timeout:  10,
-			Capacity: 100,
-		},
-		Id: 1,
-	}
-
-	if !reflect.DeepEqual(expected, p) {
-		t.Errorf("Expected %+v while got %+v", expected, p)
-	}
-
+	var expected Options = Options{nil}
+	checkUnmarshal(t, nil, &expected, &options)
 }
 
-func TestSetEmpty(t *testing.T) {
-	type Common struct {
-		Timeout  int
-		Capacity int
-	}
+func TestEmptyMandatory(t *testing.T) {
 	type Options struct {
-		Plugins map[string]interface{}
+		Text *string
 	}
-
-	type PluginOptions struct {
-		Common
-		Id   uint64 `conf:"optional"`
-		Name string `conf:"optional"`
-	}
-
-	input := `
-	Plugins.Test.Id = 1
-	Plugins.Test.Name = TestPlugin
-	`
-
 	var options Options
-	if err := Unmarshal([]byte(input), &options); err != nil {
-		t.Errorf("Expected success while got error: %s", err)
-	}
 
-	var o interface{}
-	common := Common{
-		Timeout:  10,
-		Capacity: 100,
-	}
-	v, err := Marshal(&common)
-	if err != nil {
-		t.Errorf("Failed marshaling common options: %s", err)
-	}
-
-	if o, err = Set(o, "Common", v); err != nil {
-		t.Errorf("Failed setting common options: %s", err)
-	}
-
-	var p PluginOptions
-	if err := Unmarshal(o, &p); err != nil {
-		t.Errorf("Failed unmarshaling plugin options: %s", err)
-	}
-
-	expected := PluginOptions{
-		Common: Common{
-			Timeout:  10,
-			Capacity: 100,
-		},
-	}
-
-	if !reflect.DeepEqual(expected, p) {
-		t.Errorf("Expected %+v while got %+v", expected, p)
-	}
-}
-
-func TestInterface(t *testing.T) {
-	type Options struct {
-		LogFile  string
-		LogLevel int
-		Timeout  int
-		Plugins  map[string]interface{}
-	}
-
-	type RedisSession struct {
-		Address string
-		Port    int `conf:"default=10001"`
-	}
-	type RedisOptions struct {
-		Enable   int
-		Sessions map[string]RedisSession
-	}
-
-	input := `
-		LogFile = /tmp/log
-		LogLevel = 3
-		Timeout = 10
-		Plugins.Log.MaxLinesPerSecond = 25
-		Plugins.SystemRun.EnableRemoteCommands = 1
-		Plugins.Redis.Enable = 1
-		Plugins.Redis.Sessions.Server1.Address = 127.0.0.1
-		Plugins.Redis.Sessions.Server2.Address = 127.0.0.2
-		Plugins.Redis.Sessions.Server2.Port = 10002
-		Plugins.Redis.Sessions.Server3.Address = 127.0.0.3
-		Plugins.Redis.Sessions.Server3.Port = 10003
-	`
-
-	var o Options
-	if err := Unmarshal([]byte(input), &o); err != nil {
-		t.Errorf("Failed unmarshaling options: %s", err)
-	}
-
-	var returnedOpts RedisOptions
-	Unmarshal(o.Plugins["Redis"], &returnedOpts)
-
-	expectedOpts := RedisOptions{
-		Enable: 1,
-		Sessions: map[string]RedisSession{
-			"Server1": RedisSession{"127.0.0.1", 10001},
-			"Server2": RedisSession{"127.0.0.2", 10002},
-			"Server3": RedisSession{"127.0.0.3", 10003},
-		},
-	}
-
-	if !reflect.DeepEqual(expectedOpts, returnedOpts) {
-		t.Errorf("Expected %+v while got %+v", expectedOpts, returnedOpts)
+	if err := Unmarshal(nil, &options); err == nil {
+		t.Errorf("Expected error while got success")
 	}
 }
