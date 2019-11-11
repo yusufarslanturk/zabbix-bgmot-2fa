@@ -61,6 +61,10 @@ func (p *Plugin) Configure(global *plugin.GlobalOptions, private interface{}) {
 	p.Debugf("configure: interval=%d", p.options.Interval)
 }
 
+func (p *Plugin) Validate(private interface{}) (err error) {
+	return
+}
+
 func init() {
 	impl.options.Interval = 1
 	plugin.RegisterMetrics(&impl, "DebugCollector", "debug.collector", "Returns empty value.")
