@@ -20,10 +20,10 @@
 package plugins
 
 import (
-	_ "zabbix/plugins/log"
-	_ "zabbix/plugins/systemrun"
-	_ "zabbix/plugins/windows/eventlog"
-	_ "zabbix/plugins/zabbix/async"
-	_ "zabbix/plugins/zabbix/stats"
-	_ "zabbix/plugins/zabbix/sync"
+	_ "zabbix.com/plugins/log"
+	_ "zabbix.com/plugins/systemrun"
+	_ "zabbix.com/plugins/windows/eventlog"
+	_ "zabbix.com/plugins/zabbix/async"
+	_ "zabbix.com/plugins/zabbix/stats"
+	_ "zabbix.com/plugins/zabbix/sync"
 )

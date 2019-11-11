@@ -26,7 +26,8 @@ import (
 	"strings"
 	"time"
 	"unsafe"
-	"zabbix/pkg/log"
+
+	"zabbix.com/pkg/log"
 
 	"golang.org/x/sys/windows"
 )

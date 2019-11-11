@@ -28,7 +28,8 @@ import (
 	"os"
 	"syscall"
 	"time"
-	"zabbix/pkg/log"
+
+	"zabbix.com/pkg/log"
 )
 
 func New(path string) (conn *Conn, err error) {

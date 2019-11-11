@@ -27,21 +27,21 @@ package zbxlib
 #include "../src/zabbix_agent/metrics.h"
 
 #cgo LDFLAGS: -Wl,--start-group
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/misc.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/str.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/file.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/alias.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/fatal.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/threads.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/iprange.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/md5.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/sysinfo.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/vector.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/zbxregexp.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/algodefs.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/logfiles.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/sysinfo_system.o
-#cgo LDFLAGS: ${SRCDIR}/../../../../win64/eventlog.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/misc.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/str.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/file.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/alias.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/fatal.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/threads.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/iprange.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/md5.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/sysinfo.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/vector.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/zbxregexp.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/algodefs.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/logfiles.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/sysinfo_system.o
+#cgo LDFLAGS: ${SRCDIR}/../../../../build/mingw/output/eventlog.o
 #cgo LDFLAGS: -lpcre -lDbghelp -lpsapi -lws2_32 -lWevtapi
 #cgo LDFLAGS: -Wl,--end-group
 

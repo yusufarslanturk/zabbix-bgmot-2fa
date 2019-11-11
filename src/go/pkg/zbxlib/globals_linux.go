@@ -23,24 +23,24 @@ package zbxlib
 
 /*
 #cgo LDFLAGS: -Wl,--start-group
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/zabbix_agent/logfiles/libzbxlogfiles.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxcomms/libzbxcomms.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxcommon/libzbxcommon.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxcrypto/libzbxcrypto.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxsys/libzbxsys.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxnix/libzbxnix.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxconf/libzbxconf.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxhttp/libzbxhttp.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxcompress/libzbxcompress.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxregexp/libzbxregexp.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxsysinfo/libzbxagentsysinfo.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxsysinfo/common/libcommonsysinfo.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxsysinfo/simple/libsimplesysinfo.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxsysinfo/linux/libspechostnamesysinfo.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxsysinfo/linux/libspecsysinfo.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxexec/libzbxexec.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxalgo/libzbxalgo.a
-#cgo LDFLAGS: ${SRCDIR}/../../../../../src/libs/zbxjson/libzbxjson.a
+#cgo LDFLAGS: ${SRCDIR}/../../../zabbix_agent/logfiles/libzbxlogfiles.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxcomms/libzbxcomms.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxcommon/libzbxcommon.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxcrypto/libzbxcrypto.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxsys/libzbxsys.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxnix/libzbxnix.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxconf/libzbxconf.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxhttp/libzbxhttp.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxcompress/libzbxcompress.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxregexp/libzbxregexp.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxsysinfo/libzbxagentsysinfo.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxsysinfo/common/libcommonsysinfo.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxsysinfo/simple/libsimplesysinfo.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxsysinfo/linux/libspechostnamesysinfo.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxsysinfo/linux/libspecsysinfo.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxexec/libzbxexec.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxalgo/libzbxalgo.a
+#cgo LDFLAGS: ${SRCDIR}/../../../libs/zbxjson/libzbxjson.a
 #cgo LDFLAGS: -lz -lpcre -lresolv
 #cgo LDFLAGS: -Wl,--end-group
 

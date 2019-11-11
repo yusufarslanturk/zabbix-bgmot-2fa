@@ -22,7 +22,6 @@
 package pidfile
 
 import (
-	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -31,7 +30,7 @@ import (
 
 func createPidFile(pid int, path string) (file *os.File, err error) {
 	if path == "" {
-		return nil, errors.New("cannot create empty pid file")
+		path = "/tmp/zabbix_agent2.pid"
 	}
 
 	flockT := syscall.Flock_t{

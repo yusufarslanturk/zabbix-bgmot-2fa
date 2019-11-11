@@ -40,6 +40,7 @@ import (
 	"zabbix.com/internal/monitor"
 	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/log"
+	"zabbix.com/pkg/pidfile"
 	"zabbix.com/pkg/tls"
 	"zabbix.com/pkg/version"
 	"zabbix.com/pkg/zbxlib"
