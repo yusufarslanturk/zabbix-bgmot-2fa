@@ -2028,7 +2028,7 @@ class testGraphWidget extends CWebTest {
 		// Check that widget is not present on dashboard and in DB.
 		$this->assertTrue($dashboard->query('xpath:.//div[contains(@class, "dashbrd-grid-widget-head")]/h4[text()='.
 				CXPathHelper::escapeQuotes($name).']')->one(false) === null);
-		$sql = 'SELECT * FROM widget_field wf LEFT JOIN widget w ON w.widgetid = wf.widgetid'.
+		$sql = 'SELECT * FROM widget_field wf LEFT JOIN widget w ON w.widgetid=wf.widgetid'.
 				' WHERE w.name='.zbx_dbstr($name);
 		$this->assertEquals(0, CDBHelper::getCount($sql));
 	}
