@@ -209,7 +209,7 @@ class CElementQuery implements IWaitable {
 	public static function getDriver() {
 		if (self::$page === null) {
 			return null;
-	}
+		}
 
 		return self::$page->getDriver();
 	}
