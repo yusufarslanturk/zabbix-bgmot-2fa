@@ -17,7 +17,7 @@ In my case I see membership information as an array of records with format 'CN=<
 
 ## Usage
 
-To use the feature implemented by this Repository you must install Zabbix server from sources. Follow this [instructions]() but in step '1 Download the source archive' download from this link https://github.com/BGmot/zabbix/archive/release/4.2-bg.zip
+To use the feature implemented by this Repository you must install Zabbix server from sources. Follow this [instructions](https://www.zabbix.com/documentation/4.2/manual/installation/install) but in step '1 Download the source archive' download from this link https://github.com/BGmot/zabbix/archive/release/4.2-bg.zip
 
 ## Issues
 
