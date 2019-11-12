@@ -2,38 +2,48 @@
 
 BUILDDIR := $(subst /,\,$(CURDIR))
 TOPDIR := $(BUILDDIR)\..\..
+OUTPUTDIR := output
 
-TARGETDIR = $(TOPDIR)\go\src\zabbix\cmd\zabbix_agent2
-TARGET=$(TARGETDIR)\zabbix_agent2.exe
+MODULEDIR = $(TOPDIR)\src\go
+TARGETDIR = $(TOPDIR)\src\go\cmd\zabbix_agent2
+TARGETPKG=zabbix.com/cmd/zabbix_agent2
 
 CC = gcc
 
 OBJS = \
-	threads.o \
-	str.o \
-	misc.o \
-	fatal.o \
-	iprange.o \
-	md5.o \
-	sysinfo.o \
-	vector.o \
-	zbxregexp.o \
-	logfiles.o \
-	file.o \
-	alias.o \
-	algodefs.o \
-	sysinfo_system.o \
-	eventlog.o
+	$(OUTPUTDIR)\threads.o \
+	$(OUTPUTDIR)\str.o \
+	$(OUTPUTDIR)\misc.o \
+	$(OUTPUTDIR)\fatal.o \
+	$(OUTPUTDIR)\iprange.o \
+	$(OUTPUTDIR)\md5.o \
+	$(OUTPUTDIR)\sysinfo.o \
+	$(OUTPUTDIR)\vector.o \
+	$(OUTPUTDIR)\zbxregexp.o \
+	$(OUTPUTDIR)\logfiles.o \
+	$(OUTPUTDIR)\file.o \
+	$(OUTPUTDIR)\alias.o \
+	$(OUTPUTDIR)\algodefs.o \
+	$(OUTPUTDIR)\sysinfo_system.o \
+	$(OUTPUTDIR)\eventlog.o
 
-CFLAGS := $(CFLAGS) -O2 -g -DUNICODE -DHAVE_STDINT_H=1 -I$(TOPDIR)\include -I$(TOPDIR)\build\win32\include
+CFLAGS := $(CFLAGS) -O2 -g -DUNICODE -DHAVE_STDINT_H=1 -I$(TOPDIR)\include -I$(TOPDIR)\build\win32\include -I$(TOPDIR)\build\mingw
 GOPATH := $(GOPATH);$(TOPDIR)\go
 CGO_CFLAGS := $(CGO_CFLAGS) $(CFLAGS) 
+
+
+ifeq ("$(ARCH)", "")
+	ARCH := $(PROCESSOR_ARCHITECTURE)
+endif
 
 ifeq ("$(ARCH)", "x86")
 	CFLAGS := $(CFLAGS) -m32
 	CGO_CFLAGS := $(CGO_CFLAGS) -m32
 	GOARCH := 386
+	TARGETBIN=$(TOPDIR)\bin\win32\zabbix_agent2.exe
+
 else
+	TARGETBIN=$(TOPDIR)\bin\win64\zabbix_agent2.exe
 	GOARCH :=
 endif
 
@@ -59,65 +69,65 @@ endif
 #CGO_LDFLAGS := $(CGO_LDFLAGS) -Wl,--start-group -lpcre -lDbghelp -lpsapi -Wl,--end-group
 
 
-all: $(TARGET)
+all: $(TARGETBIN)
 
-misc.o: $(TOPDIR)\src\libs\zbxcommon\misc.c
+$(OUTPUTDIR)\misc.o: $(TOPDIR)\src\libs\zbxcommon\misc.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-iprange.o: $(TOPDIR)\src\libs\zbxcommon\iprange.c
+$(OUTPUTDIR)\iprange.o: $(TOPDIR)\src\libs\zbxcommon\iprange.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-str.o: $(TOPDIR)\src\libs\zbxcommon\str.c
+$(OUTPUTDIR)\str.o: $(TOPDIR)\src\libs\zbxcommon\str.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-file.o: $(TOPDIR)\src\libs\zbxcommon\file.c
+$(OUTPUTDIR)\file.o: $(TOPDIR)\src\libs\zbxcommon\file.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-alias.o: $(TOPDIR)\src\libs\zbxcommon\alias.c
+$(OUTPUTDIR)\alias.o: $(TOPDIR)\src\libs\zbxcommon\alias.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-fatal.o: $(TOPDIR)\src\libs\zbxwin32\fatal.c
+$(OUTPUTDIR)\fatal.o: $(TOPDIR)\src\libs\zbxwin32\fatal.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-threads.o: $(TOPDIR)\src\libs\zbxsys\threads.c
+$(OUTPUTDIR)\threads.o: $(TOPDIR)\src\libs\zbxsys\threads.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-md5.o: $(TOPDIR)\src\libs\zbxcrypto\md5.c
+$(OUTPUTDIR)\md5.o: $(TOPDIR)\src\libs\zbxcrypto\md5.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-sysinfo.o: $(TOPDIR)\src\libs\zbxsysinfo\sysinfo.c
+$(OUTPUTDIR)\sysinfo.o: $(TOPDIR)\src\libs\zbxsysinfo\sysinfo.c
 	$(CC) $(CFLAGS) -DWITH_COMMON_METRICS -c $^ -o $@
 
-sysinfo_system.o: $(TOPDIR)\src\libs\zbxsysinfo\common\system.c
+$(OUTPUTDIR)\sysinfo_system.o: $(TOPDIR)\src\libs\zbxsysinfo\common\system.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-sysinfo_net.o: $(TOPDIR)\src\libs\zbxsysinfo\common\net.c
+$(OUTPUTDIR)\sysinfo_net.o: $(TOPDIR)\src\libs\zbxsysinfo\common\net.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-vector.o: $(TOPDIR)\src\libs\zbxalgo\vector.c
+$(OUTPUTDIR)\vector.o: $(TOPDIR)\src\libs\zbxalgo\vector.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-algodefs.o: $(TOPDIR)\src\libs\zbxalgo\algodefs.c
+$(OUTPUTDIR)\algodefs.o: $(TOPDIR)\src\libs\zbxalgo\algodefs.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-zbxregexp.o: $(TOPDIR)\src\libs\zbxregexp\zbxregexp.c
+$(OUTPUTDIR)\zbxregexp.o: $(TOPDIR)\src\libs\zbxregexp\zbxregexp.c
 	$(CC) $(CFLAGS) -DPCRE_STATIC -c $^ -o $@
 
-logfiles.o: $(TOPDIR)\src\zabbix_agent\logfiles\logfiles.c
+$(OUTPUTDIR)\logfiles.o: $(TOPDIR)\src\zabbix_agent\logfiles\logfiles.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-eventlog.o: $(TOPDIR)\src\zabbix_agent\eventlog.c
+$(OUTPUTDIR)\eventlog.o: $(TOPDIR)\src\zabbix_agent\eventlog.c
 	$(CC) $(CFLAGS) -c $^ -I$(TOPDIR)\go\win64 -o $@
 
 
 .FORCE:
-$(TARGET): $(OBJS) .FORCE
-	cd $(TARGETDIR)
+$(TARGETBIN): $(OBJS) .FORCE
 	set CGO_CFLAGS=$(CGO_CFLAGS)
 	set CGO_LDFLAGS=$(CGO_LDFLAGS)
 	set GOARCH=$(GOARCH)
 	set CGO_ENABLED=1
-	go build
+	cd $(MODULEDIR)
+	go build -mod vendor -o $(TARGETBIN) zabbix.com/cmd/zabbix_agent2
 
 clean:
-	del $(TOPDIR)\include\config.h "$(TARGET)" $(OBJS) 2>NUL
+	del $(TOPDIR)\include\config.h "$(TARGETBIN)" $(OBJS) 2>NUL
