@@ -20,7 +20,7 @@
 #ifndef ZABBIX_EVENTLOG_H
 #define ZABBIX_EVENTLOG_H
 
-#if !defined(_WINDOWS) && !defined(__MINGW__)
+#if !defined(_WINDOWS) && !defined(__MINGW32__)
 #	error "This module is only available for Windows OS"
 #endif
 

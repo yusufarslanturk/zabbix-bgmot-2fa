@@ -1137,7 +1137,7 @@ static int	need_meta_update(ZBX_ACTIVE_METRIC *metric, zbx_uint64_t lastlogsize_
 	return ret;
 }
 
-#if !defined(_WINDOWS) && !defined(__MINGW__)
+#if !defined(_WINDOWS) && !defined(__MINGW32__)
 static int	process_eventlog_check(char *server, unsigned short port, zbx_vector_ptr_t *regexps,
 		ZBX_ACTIVE_METRIC *metric, zbx_process_value_func_t process_value_cb, zbx_uint64_t *lastlogsize_sent,
 		char **error)

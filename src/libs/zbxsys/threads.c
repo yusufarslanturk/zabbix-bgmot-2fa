@@ -21,7 +21,7 @@
 #include "log.h"
 #include "threads.h"
 
-#if defined(_WINDOWS) || defined(__MINGW__)
+#if defined(_WINDOWS) || defined(__MINGW32__)
 int	zbx_win_exception_filter(unsigned int code, struct _EXCEPTION_POINTERS *ep);
 
 static ZBX_THREAD_ENTRY(zbx_win_thread_entry, args)
@@ -118,7 +118,7 @@ void	zbx_child_fork(pid_t *pid)
  ******************************************************************************/
 void	zbx_thread_start(ZBX_THREAD_ENTRY_POINTER(handler), zbx_thread_args_t *thread_args, ZBX_THREAD_HANDLE *thread)
 {
-#if defined(_WINDOWS) || defined(__MINGW__)
+#if defined(_WINDOWS) || defined(__MINGW32__)
 	unsigned		thrdaddr;
 
 	thread_args->entry = handler;
@@ -165,7 +165,7 @@ int	zbx_thread_wait(ZBX_THREAD_HANDLE thread)
 {
 	int	status = 0;	/* significant 8 bits of the status */
 
-#if defined(_WINDOWS) || defined(__MINGW__)
+#if defined(_WINDOWS) || defined(__MINGW32__)
 	DWORD	dwstatus;
 
 	if (WAIT_OBJECT_0 != WaitForSingleObject(thread, INFINITE))
@@ -243,7 +243,7 @@ static void	threads_kill(ZBX_THREAD_HANDLE *threads, int threads_num, int ret)
 void	zbx_threads_wait(ZBX_THREAD_HANDLE *threads, const int *threads_flags, int threads_num, int ret)
 {
 	int		i;
-#if !defined(_WINDOWS) && !defined(__MINGW__)
+#if !defined(_WINDOWS) && !defined(__MINGW32__)
 	sigset_t	set;
 
 	/* ignore SIGCHLD signals in order for zbx_sleep() to work */
@@ -285,7 +285,7 @@ void	zbx_threads_wait(ZBX_THREAD_HANDLE *threads, const int *threads_flags, int 
 
 long int	zbx_get_thread_id(void)
 {
-#if defined(_WINDOWS) || defined(__MINGW__)
+#if defined(_WINDOWS) || defined(__MINGW32__)
 	return (long int)GetCurrentThreadId();
 #else
 	return (long int)getpid();
