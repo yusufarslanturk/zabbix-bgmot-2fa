@@ -13,7 +13,7 @@ import (
 )
 
 type Options struct {
-	Timeout  int    `conf:"optional"`
+	Timeout  int    `conf:"optional,range=1:30,default=3"`
 	SourceIP string `conf:"optional"`
 }
 

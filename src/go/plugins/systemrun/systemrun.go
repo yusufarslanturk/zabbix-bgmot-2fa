@@ -29,7 +29,7 @@ import (
 )
 
 type Options struct {
-	Timeout              int `conf:"optional"`
+	Timeout              int `conf:"optional,range=1:30,default=3"`
 	LogRemoteCommands    int `conf:"optional,range=0:1,default=0"`
 	EnableRemoteCommands int `conf:"optional,range=0:1,default=0"`
 }
