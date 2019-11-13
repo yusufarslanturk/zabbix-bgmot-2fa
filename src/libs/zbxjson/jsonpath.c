@@ -2349,6 +2349,86 @@ static int	jsonpath_format_query_result(const zbx_vector_str_t *objects, zbx_jso
 
 /******************************************************************************
  *                                                                            *
+ * Function: jsonpath_dyn_escape_string                                       *
+ *                                                                            *
+ * Purpose: escape characters in the source string if not already escaped     *
+ *                                                                            *
+ * Parameters: src      - [IN/OUT] null terminated source string              *
+ *             charlist - [IN] null terminated character list to escape       *
+ *             head     - [IN] string to append to the front                  *
+ *             tail     - [IN] string to append to the end                    *
+ *                                                                            *
+ ******************************************************************************/
+static void	jsonpath_dyn_escape_string(char **src, const char *charlist,
+		const char *head, const char *tail)
+{
+	size_t	sz = 0, len;
+	int	i, h_l = 0, t_l = 0;
+	char	*d, *dst = NULL;
+
+	len = strlen(*src);
+
+	/* calculate length */
+	for (i = len - 1; 0 <= i; i--)
+	{
+		sz++;
+
+		if (NULL != strchr(charlist, (*src)[i]))
+		{
+			sz++;
+
+			if (0 < i && '\\' == (*src)[i-1])
+				i--;
+		}
+	}
+
+	if (NULL != head)
+		h_l = strlen(head);
+
+	if (NULL != tail)
+		t_l = strlen(tail);
+
+	sz += h_l;
+	sz += t_l;
+
+	if (sz == len)
+		return;
+
+	/* escape specified characters */
+	sz++;
+	dst = (char *)zbx_malloc(dst, sz);
+
+	dst[sz - 1] = '\0';
+	d = dst + sz - t_l - 1;
+
+	/* append head and tail */
+	if (NULL != head)
+		memcpy(dst, head, t_l);
+
+	if (NULL != tail)
+		memcpy(d, tail, t_l);
+
+	d -= 1;
+
+	for (i = strlen(*src) - 1; 0 <= i; i--)
+	{
+		*d-- = (*src)[i];
+
+		if (NULL != strchr(charlist, (*src)[i]))
+		{
+			*d-- = '\\';
+
+			if (0 < i && '\\' == (*src)[i-1])
+				i--;
+		}
+	}
+
+	zbx_free(*src);
+	*src = dst;
+}
+
+/******************************************************************************
+ *                                                                            *
  * Function: zbx_jsonpath_clear                                               *
  *                                                                            *
  ******************************************************************************/
@@ -2512,4 +2592,119 @@ int	zbx_jsonpath_query(const struct zbx_json_parse *jp, const char *path, char *
 	zbx_jsonpath_clear(&jsonpath);
 
 	return ret;
+}
+
+/******************************************************************************
+ *                                                                            *
+ * Function: zbx_jsonpath_substitute_macro                                    *
+ *                                                                            *
+ * Purpose: perform jsonpath query macro substitution                         *
+ *                                                                            *
+ * Parameters: path        - [IN] the jsonpath expression                     *
+ *             macro_start - [IN] macro start offset in jsonpath expression   *
+ *             macro_end   - [IN] macro end offset in jsonpath expression     *
+ *             macro_value - [IN/OUT] macro value with escaping               *
+ *                                                                            *
+ ******************************************************************************/
+void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_end, char **replace_to)
+{
+	char	prev_character = '\0', next_character = '\0', quote = '\0', esc = 0;
+	int	offset, i;
+
+	if (0 == macro_start && '\0' == path[macro_end])
+		return; /* macro is the only part of statement - keep as-is */
+
+	if (FAIL != is_double(*replace_to))
+		return; /* nothing to escape for number */
+
+	/* get previous and next characters from the expression ignoring whitespaces */
+	for (offset = macro_start - 1; 0 < offset; offset--)
+	{
+		if (!isspace(path[offset]))
+		{
+			prev_character = path[offset];
+			break;
+		}
+	}
+	for (offset = macro_end; '\0' != path[offset]; offset++)
+	{
+		if (!isspace(path[offset]))
+		{
+			next_character = path[offset];
+			break;
+		}
+	}
+
+	for (i = 0; '\0' != path[i]; i++)
+	{
+		if (i == macro_start)
+		{
+			const char *escape_caharacters = "\\";
+
+			if ('\0' != quote)
+			{
+				/* macro is inside quoted statement */
+				escape_caharacters = '\'' == quote ? "\\\'" : "\\\"";
+			}
+			else
+			{
+				if ('[' == prev_character && ']' == next_character)
+				{
+					/* if macro is inside square brackets - value is quoted and escaped */
+					jsonpath_dyn_escape_string(replace_to, "\\\'", "\'", "\'");
+					break;
+				}
+
+				/* if macro has non-alphanumeric characters, */
+				/* enclose quoted escaped macro value in square brackets */
+				esc = 0;
+
+				for (i = 0; i < strlen(*replace_to); i++)
+				{
+					if (0 == isalnum((*replace_to)[i]))
+					{
+						esc = 1;
+						break;
+					}
+				}
+
+				if (0 != esc)
+				{
+					if ('.' == prev_character || ']' == prev_character)
+						jsonpath_dyn_escape_string(replace_to, "\\\'",
+								"[\'", "\']");
+					else
+						jsonpath_dyn_escape_string(replace_to, "\\\'",
+								"\'", "\'");
+					break;
+				}
+			}
+
+			jsonpath_dyn_escape_string(replace_to, escape_caharacters, NULL, NULL);
+			break;
+		}
+
+		if (0 < i && '\\' != path[i-1])
+		{
+			if ('\\' == path[i])
+			{
+				esc = 1; /* next character escaping */
+				continue;
+			}
+			else
+				esc = 0; /* escape only one character next to backslash */
+		}
+
+		if ('\'' == path[i] || '\"' == path[i])
+		{
+			if (0 == esc)
+			{
+				/* ignore escaped quotes */
+				if ('\0' == quote)
+					quote = path[i]; /* beginning of quoted part */
+				else
+					quote = '\0'; /* end of quoted part */
+			}
+		}
+	}
 }

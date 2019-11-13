@@ -23,24 +23,46 @@
 #include "zbxmockutil.h"
 
 #include "common.h"
+#include "zbxjson.h"
+#include "../../../src/libs/zbxjson/jsonpath.h"
 
 void	zbx_mock_test_entry(void **state)
 {
-	const char		*src, *expected_result, *escape_chars;
-	char			*actual_result;
+	const char		*path, *macro, *value, *expected_result;
+	char			*actual_result, *macro_value;
+	size_t			alloc_len = 0, offset = 0;
+	int			l, r;
+	size_t			data_alloc, data_len;
 
 	ZBX_UNUSED(state);
 
-	src = zbx_mock_get_parameter_string("in.data");
+	path = zbx_mock_get_parameter_string("in.path");
+	value = zbx_mock_get_parameter_string("in.value");
 	expected_result = zbx_mock_get_parameter_string("out.result");
-	escape_chars = zbx_mock_get_parameter_string("in.escape_chars");
 
-	actual_result = zbx_dyn_escape_string(src, escape_chars);
+	macro_value = strstr(path, "{#");
+
+	if (NULL == macro_value)
+		fail_msg("No macro in source path");
+
+	l = macro_value - path;
+	r = strstr(macro_value, "}") - path;
+
+	macro_value = NULL;
+	zbx_strcpy_alloc(&macro_value, &alloc_len, &offset, value);
+	alloc_len = offset = 0;
+	zbx_strcpy_alloc(&actual_result, &alloc_len, &offset, path);
+
+	zbx_jsonpath_substitute_macro(actual_result, l, r + 1, &macro_value);
+
+	offset = alloc_len = strlen(path) + 1;
+	zbx_replace_mem_dyn(&actual_result, &offset, &alloc_len, l, r - l + 1, macro_value, strlen(macro_value));
 
 	if (0 != strcmp(expected_result, actual_result))
 	{
 		fail_msg("Actual: \"%s\" != expected: \"%s\"", actual_result, expected_result);
 	}
 
+	zbx_free(macro_value);
 	zbx_free(actual_result);
 }

@@ -330,22 +330,3 @@ int	zbx_mock_str_to_family(const char *str)
 	fail_msg("Unknown family \"%s\"", str);
 	return AF_UNSPEC;
 }
-
-/******************************************************************************
- *                                                                            *
- * Function: zbx_mock_str_to_string_escape_mode                               *
- *                                                                            *
- * Purpose: converts string escaping mode from text                           *
- *                                                                            *
- ******************************************************************************/
-zbx_string_escape_mode_t	zbx_mock_str_to_string_escape_mode(const char *str)
-{
-	if (0 == strcmp(str, "STRING_ESCAPE_MODE_NO_DOUBLE_ESCAPE"))
-		return STRING_ESCAPE_MODE_NO_DOUBLE_ESCAPE;
-
-	if (0 == strcmp(str, "STRING_ESCAPE_MODE_REGULAR"))
-		return STRING_ESCAPE_MODE_REGULAR;
-
-	fail_msg("Unknown string escape mode \"%s\"", str);
-	return STRING_ESCAPE_MODE_REGULAR;
-}

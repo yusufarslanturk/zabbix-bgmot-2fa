@@ -3,7 +3,6 @@ test case: double quotes
 in:
   data: '-"value"-'
   escape_chars: '\"'
-  mode: STRING_ESCAPE_MODE_REGULAR
 out:
   result: '-\"value\"-'
 ---
@@ -11,15 +10,6 @@ test case: backslash
 in:
   data: '\value\'
   escape_chars: '\"'
-  mode: STRING_ESCAPE_MODE_REGULAR
 out:
   result: '\\value\\'
----
-test case: no double quoting
-in:
-  data: '*value* with escaped \"double quotes\"'
-  escape_chars: '*"'
-  mode: STRING_ESCAPE_MODE_NO_DOUBLE_ESCAPE
-out:
-  result: '\*value\* with escaped \"double quotes\"'
 ...

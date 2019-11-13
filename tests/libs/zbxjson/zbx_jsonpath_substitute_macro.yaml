@@ -1,0 +1,134 @@
+---
+test case: macro contains full JsonPath expression
+in:
+  path: '{#M}'
+  value: '$.a.b.c'
+out:
+  result: '$.a.b.c'
+---
+test case: macro backslashes
+in:
+  path: '$.a.{#M}.c'
+  value: '\'
+out:
+  result: '$.a.[''\\''].c'
+---
+test case: macro quotes
+in:
+  path: '$.a.{#M}.c'
+  value: '"'
+out:
+  result: '$.a.[''"''].c'
+---
+test case: number substitution as index
+in:
+  path: '$.[{#M}].id'
+  value: '1'
+out:
+  result: '$.[1].id'
+---
+test case: number substitution in expression
+in:
+  path: '$..book[?(@.price < {#M})]'
+  value: '15.05'
+out:
+  result: '$..book[?(@.price < 15.05)]'
+---
+test case: element name in square brackets
+in:
+  path: '$.[{#M}]'
+  value: 'name'
+out:
+  result: '$.[''name'']'
+---
+test case: quoted element name in square brackets
+in:
+  path: '$.[{#M}]'
+  value: '''name'''
+out:
+  result: '$.[''\''name\'''']'
+---
+test case: element name with escape sequences in square brackets
+in:
+  path: '$.[{#M}]'
+  value: 'lorem\ipsum'
+out:
+  result: '$.[''lorem\\ipsum'']'
+---
+test case: element name with special characters in square brackets
+in:
+  path: '$.[{#M}]'
+  value: 'lorem_ipsum'
+out:
+  result: '$.[''lorem_ipsum'']'
+---
+test case: macro as index expression
+in:
+  path: '$.{#M}.id'
+  value: '[1]'
+out:
+  result: '$.[''[1]''].id'
+---
+test case: asterisk macro
+in:
+  path: '$.{#M}.value'
+  value: '*'
+out:
+  result: '$.[''*''].value'
+---
+test case: macro asterisk in square brackets
+in:
+  path: '$.[{#M}].name'
+  value: '*'
+out:
+  result: '$.[''*''].name'
+---
+test case: path in macro
+in:
+  path: '$.{#M}.id'
+  value: 'a.b.c'
+out:
+  result: '$.[''a.b.c''].id'
+---
+test case: path without special characters
+in:
+  path: '$.{#M}.id'
+  value: 'test'
+out:
+  result: '$.test.id'
+---
+test case: path with special characters
+in:
+  path: '$.{#M}.id'
+  value: 'path.with\special.characters'
+out:
+  result: '$.[''path.with\\special.characters''].id'
+---
+test case: path with double quote
+in:
+  path: '$.{#M}.id'
+  value: 'lorem"ipsum'
+out:
+  result: '$.[''lorem"ipsum''].id'
+---
+test case: macro in the middle of string
+in:
+  path: '$.[''a\''b''][''_{#M}_'']'
+  value: 'special\-''name'''
+out:
+  result: '$.[''a\''b''][''_special\\-\''name\''_'']'
+---
+test case: macro in the middle of string double quotes
+in:
+  path: '$.[''a\''b''][''_{#M}_'']'
+  value: 'special\-"name"'
+out:
+  result: '$.[''a\''b''][''_special\\-"name"_'']'
+---
+test case: macro in expression
+in:
+  path: '$.[?(@.name == {#M})].id.first()'
+  value: 'special\-"name"'
+out:
+  result: '$.[?(@.name == ''special\\-"name"'')].id.first()'
+...

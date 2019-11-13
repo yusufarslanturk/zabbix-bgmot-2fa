@@ -243,5 +243,6 @@ zbx_jsonpath_t;
 void	zbx_jsonpath_clear(zbx_jsonpath_t *jsonpath);
 int	zbx_jsonpath_compile(const char *path, zbx_jsonpath_t *jsonpath);
 int	zbx_jsonpath_query(const struct zbx_json_parse *jp, const char *path, char **output);
+void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_end, char **replace_to);
 
 #endif /* ZABBIX_ZJSON_H */
