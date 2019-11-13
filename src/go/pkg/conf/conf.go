@@ -446,7 +446,7 @@ func parseConfig(root *Node, data []byte) (err error) {
 // The third is optional 'strict' parameter that forces strict validation of configuration
 // and structure fields (enabled by efault). When disabled it will unmarshal part of
 // configuration into incomplete target structures.
-func Unmarshal(node interface{}, v interface{}, args ...interface{}) (err error) {
+func Unmarshal(data interface{}, v interface{}, args ...interface{}) (err error) {
 	rv := reflect.ValueOf(v)
 	if rv.Kind() != reflect.Ptr || rv.IsNil() {
 		return errors.New("Invalid output parameter")
@@ -461,7 +461,7 @@ func Unmarshal(node interface{}, v interface{}, args ...interface{}) (err error)
 	}
 
 	var root *Node
-	switch u := node.(type) {
+	switch u := data.(type) {
 	case nil:
 		root = &Node{
 			name:   "",
