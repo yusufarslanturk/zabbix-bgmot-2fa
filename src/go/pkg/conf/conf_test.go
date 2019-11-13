@@ -391,3 +391,56 @@ func TestEmptyMandatory(t *testing.T) {
 		t.Errorf("Expected error while got success")
 	}
 }
+
+func TestInterface(t *testing.T) {
+	type Options struct {
+		LogFile  string
+		LogLevel int
+		Timeout  int
+		Plugins  map[string]interface{}
+	}
+
+	type RedisSession struct {
+		Address string
+		Port    int `conf:"default=10001"`
+	}
+	type RedisOptions struct {
+		Enable   int
+		Sessions map[string]RedisSession
+	}
+
+	input := `
+		LogFile = /tmp/log
+		LogLevel = 3
+		Timeout = 10
+		Plugins.Log.MaxLinesPerSecond = 25
+		Plugins.SystemRun.EnableRemoteCommands = 1
+		Plugins.Redis.Enable = 1
+		Plugins.Redis.Sessions.Server1.Address = 127.0.0.1
+		Plugins.Redis.Sessions.Server2.Address = 127.0.0.2
+		Plugins.Redis.Sessions.Server2.Port = 10002
+		Plugins.Redis.Sessions.Server3.Address = 127.0.0.3
+		Plugins.Redis.Sessions.Server3.Port = 10003
+	`
+
+	var o Options
+	if err := Unmarshal([]byte(input), &o); err != nil {
+		t.Errorf("Failed unmarshaling options: %s", err)
+	}
+
+	var returnedOpts RedisOptions
+	_ = Unmarshal(o.Plugins["Redis"], &returnedOpts)
+
+	expectedOpts := RedisOptions{
+		Enable: 1,
+		Sessions: map[string]RedisSession{
+			"Server1": RedisSession{"127.0.0.1", 10001},
+			"Server2": RedisSession{"127.0.0.2", 10002},
+			"Server3": RedisSession{"127.0.0.3", 10003},
+		},
+	}
+
+	if !reflect.DeepEqual(expectedOpts, returnedOpts) {
+		t.Errorf("Expected %+v while got %+v", expectedOpts, returnedOpts)
+	}
+}
