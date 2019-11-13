@@ -987,7 +987,7 @@ ret:
  *                                                                            *
  ******************************************************************************/
 static int	process_value(const char *server, unsigned short port, const char *host, const char *key,
-		const char *value, unsigned char state, zbx_uint64_t *lastlogsize, const int *mtime,
+		const char *value, unsigned char state, zbx_uint64_t *lastlogsize, int *mtime,
 		unsigned long *timestamp, const char *source, unsigned short *severity, unsigned long *logeventid,
 		unsigned char flags)
 {
@@ -1144,6 +1144,7 @@ static int	process_eventlog_check(char *server, unsigned short port, zbx_vector_
 {
 	ZBX_UNUSED(server);
 	ZBX_UNUSED(port);
+	ZBX_UNUSED(regexps);
 	ZBX_UNUSED(metric);
 	ZBX_UNUSED(process_value_cb);
 	ZBX_UNUSED(lastlogsize_sent);
