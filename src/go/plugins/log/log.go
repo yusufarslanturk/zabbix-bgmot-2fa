@@ -49,12 +49,9 @@ func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
 	zbxlib.SetMaxLinesPerSecond(p.options.MaxLinesPerSecond)
 }
 
-func (p *Plugin) Validate(options interface{}) (err error) {
+func (p *Plugin) Validate(options interface{}) error {
 	var o Options
-	if err = conf.Unmarshal(options, &o); err != nil {
-		return
-	}
-	return
+	return conf.Unmarshal(options, &o)
 }
 
 type metadata struct {

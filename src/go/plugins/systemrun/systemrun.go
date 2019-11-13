@@ -51,12 +51,10 @@ func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
 	}
 }
 
-func (p *Plugin) Validate(options interface{}) (err error) {
+func (p *Plugin) Validate(options interface{}) error {
 	var o Options
-	if err = conf.Unmarshal(options, &o); err != nil {
-		return
-	}
-	return
+
+	return conf.Unmarshal(options, &o)
 }
 
 // Export -
