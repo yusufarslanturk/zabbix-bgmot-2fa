@@ -25,7 +25,7 @@
 #include "winmeta.h"
 #include <strsafe.h>
 #include "eventlog.h"
-
+#include <delayimp.h>
 
 #define	DEFAULT_EVENT_CONTENT_SIZE 256
 
@@ -79,6 +79,37 @@ static const wchar_t	*RENDER_ITEMS[] = {
 #endif
 
 extern int	CONFIG_EVENTLOG_MAX_LINES_PER_SECOND;
+
+LONG WINAPI	DelayLoadDllExceptionFilter(PEXCEPTION_POINTERS excpointers)
+{
+	LONG		disposition = EXCEPTION_EXECUTE_HANDLER;
+	PDelayLoadInfo	delayloadinfo = (PDelayLoadInfo)(excpointers->ExceptionRecord->ExceptionInformation[0]);
+
+	switch (excpointers->ExceptionRecord->ExceptionCode)
+	{
+		case VcppException(ERROR_SEVERITY_ERROR, ERROR_MOD_NOT_FOUND):
+			zabbix_log(LOG_LEVEL_DEBUG, "function %s was not found in %s",
+					delayloadinfo->dlp.szProcName, delayloadinfo->szDll);
+			break;
+		case VcppException(ERROR_SEVERITY_ERROR, ERROR_PROC_NOT_FOUND):
+			if (delayloadinfo->dlp.fImportByName)
+			{
+				zabbix_log(LOG_LEVEL_DEBUG, "function %s was not found in %s",
+						delayloadinfo->dlp.szProcName, delayloadinfo->szDll);
+			}
+			else
+			{
+				zabbix_log(LOG_LEVEL_DEBUG, "function ordinal %d was not found in %s",
+						delayloadinfo->dlp.dwOrdinal, delayloadinfo->szDll);
+			}
+			break;
+		default:
+			disposition = EXCEPTION_CONTINUE_SEARCH;
+			break;
+	}
+
+	return disposition;
+}
 
 /* open event logger and return number of records */
 static int	zbx_open_eventlog(LPCTSTR wsource, HANDLE *eventlog_handle, zbx_uint64_t *FirstID,

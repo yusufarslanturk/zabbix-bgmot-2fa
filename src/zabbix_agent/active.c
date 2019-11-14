@@ -25,10 +25,6 @@
 #include "log.h"
 #include "sysinfo.h"
 #include "logfiles/logfiles.h"
-#ifdef _WINDOWS
-#	include "eventlog.h"
-#	include <delayimp.h>
-#endif
 #include "comms.h"
 #include "threads.h"
 #include "zbxjson.h"
@@ -52,39 +48,6 @@ static ZBX_THREAD_LOCAL zbx_vector_ptr_t	active_metrics;
 static ZBX_THREAD_LOCAL zbx_vector_ptr_t	regexps;
 static ZBX_THREAD_LOCAL char			*session_token;
 static ZBX_THREAD_LOCAL zbx_uint64_t		last_valueid = 0;
-
-#ifdef _WINDOWS
-LONG WINAPI	DelayLoadDllExceptionFilter(PEXCEPTION_POINTERS excpointers)
-{
-	LONG		disposition = EXCEPTION_EXECUTE_HANDLER;
-	PDelayLoadInfo	delayloadinfo = (PDelayLoadInfo)(excpointers->ExceptionRecord->ExceptionInformation[0]);
-
-	switch (excpointers->ExceptionRecord->ExceptionCode)
-	{
-		case VcppException(ERROR_SEVERITY_ERROR, ERROR_MOD_NOT_FOUND):
-			zabbix_log(LOG_LEVEL_DEBUG, "function %s was not found in %s",
-					delayloadinfo->dlp.szProcName, delayloadinfo->szDll);
-			break;
-		case VcppException(ERROR_SEVERITY_ERROR, ERROR_PROC_NOT_FOUND):
-			if (delayloadinfo->dlp.fImportByName)
-			{
-				zabbix_log(LOG_LEVEL_DEBUG, "function %s was not found in %s",
-						delayloadinfo->dlp.szProcName, delayloadinfo->szDll);
-			}
-			else
-			{
-				zabbix_log(LOG_LEVEL_DEBUG, "function ordinal %d was not found in %s",
-						delayloadinfo->dlp.dwOrdinal, delayloadinfo->szDll);
-			}
-			break;
-		default:
-			disposition = EXCEPTION_CONTINUE_SEARCH;
-			break;
-	}
-
-	return disposition;
-}
-#endif
 
 static void	init_active_metrics(void)
 {

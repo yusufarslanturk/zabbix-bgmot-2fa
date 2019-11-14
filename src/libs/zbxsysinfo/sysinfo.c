@@ -1045,7 +1045,7 @@ zbx_uint64_t	get_kstat_numeric_value(const kstat_named_t *kn)
 }
 #endif
 
-#if !defined(WINDOWS) && !defined(__MINGW32__)
+#if !defined(_WINDOWS) && !defined(__MINGW32__)
 /******************************************************************************
  *                                                                            *
  * Function: serialize_agent_result                                           *
