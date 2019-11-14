@@ -79,7 +79,7 @@ func registerMetric(plugin Accessor, name string, key string, description string
 			}
 		case "Start", "Stop":
 			if _, ok := plugin.(Runner); !ok {
-				panic(fmt.Sprintf(`the "%s" pluginhas  %s method, but does not implement Runner interface`, name, method.Name))
+				panic(fmt.Sprintf(`the "%s" plugin has %s method, but does not implement Runner interface`, name, method.Name))
 			}
 		}
 	}
