@@ -28,7 +28,8 @@ import (
 )
 
 type Options struct {
-	Timeout int `conf:"optional,range=1:30"`
+	Timeout  int `conf:"optional,range=1:30"`
+	Capacity int `conf:"optional,range=1:100"`
 }
 
 // Plugin -

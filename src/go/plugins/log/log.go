@@ -34,6 +34,7 @@ import (
 
 type Options struct {
 	MaxLinesPerSecond int `conf:"range=1:1000,default=20"`
+	Capacity          int `conf:"optional,range=1:100"`
 }
 
 // Plugin -
