@@ -25,16 +25,22 @@ import (
 	"time"
 	"unsafe"
 
-	"zabbix.com/internal/agent"
+	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/glexpr"
 	"zabbix.com/pkg/itemutil"
 	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/zbxlib"
 )
 
+type Options struct {
+	MaxLinesPerSecond int `conf:"range=1:1000,default=20"`
+	Capacity          int `conf:"optional,range=1:100"`
+}
+
 // Plugin -
 type Plugin struct {
 	plugin.Base
+	options Options
 }
 
 type metadata struct {
@@ -44,9 +50,16 @@ type metadata struct {
 	lastcheck time.Time
 }
 
-func (p *Plugin) Configure(options map[string]string) {
-	// TODO: change to plugin specific configuration
-	zbxlib.SetEventlogMaxLinesPerSecond(agent.Options.MaxLinesPerSecond)
+func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
+	if err := conf.Unmarshal(options, &p.options); err != nil {
+		p.Warningf("cannot unmarshal configuration options: %s", err)
+	}
+	zbxlib.SetEventlogMaxLinesPerSecond(p.options.MaxLinesPerSecond)
+}
+
+func (p *Plugin) Validate(options interface{}) error {
+	var o Options
+	return conf.Unmarshal(options, &o)
 }
 
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
