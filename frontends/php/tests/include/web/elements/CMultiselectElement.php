@@ -213,7 +213,8 @@ class CMultiselectElement extends CElement {
 			$text = [$text];
 		}
 
-		$input = $this->query('xpath:.//input[not(@type="hidden")]|textarea')->one();
+		$input = $this->query('xpath:.//input[not(@type="hidden")]')->one();
+		$id = CXPathHelper::escapeQuotes($this->query('class:multiselect')->one()->getAttribute('id'));
 		foreach ($text as $value) {
 			$input->overwrite($value)->fireEvent();
 
@@ -224,8 +225,9 @@ class CMultiselectElement extends CElement {
 			$content = CXPathHelper::escapeQuotes($value);
 			try {
 				$element = $this->query('xpath', implode('|', [
-					'.//ul[@class="multiselect-suggest"]/li[@data-label='.$content.']',
-					'.//ul[@class="multiselect-suggest"]/li[contains(@class, "suggest-new")]/span[text()='.$content.']'
+					'//div[@data-opener='.$id.']/ul[@class="multiselect-suggest"]/li[@data-label='.$content.']',
+					'//div[@data-opener='.$id.']/ul[@class="multiselect-suggest"]/li[contains(@class, "suggest-new")]'.
+					'/span[text()='.$content.']'
 				]))->waitUntilPresent();
 			}
 			catch (NoSuchElementException $exception) {
