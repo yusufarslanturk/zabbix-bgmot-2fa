@@ -213,7 +213,7 @@ class CMultiselectElement extends CElement {
 			$text = [$text];
 		}
 
-		$input = $this->query('xpath:.//input[not(@type="hidden")]')->one();
+		$input = $this->query('xpath:.//input[not(@type="hidden")]|textarea')->one();
 		$id = CXPathHelper::escapeQuotes($this->query('class:multiselect')->one()->getAttribute('id'));
 		foreach ($text as $value) {
 			$input->overwrite($value)->fireEvent();
