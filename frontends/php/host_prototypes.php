@@ -279,7 +279,7 @@ if (hasRequest('form')) {
 		],
 		'show_inherited_macros' => getRequest('show_inherited_macros', 0),
 		'readonly' => true,
-		'form_refresh' => getRequest('form_refresh', 0),
+		'form_refresh' => getRequest('form_refresh', 0), // TODO VM: maybe this can be removed.
 		'groups' => [],
 		// Parent discovery rules.
 		'templates' => []
@@ -310,6 +310,7 @@ if (hasRequest('form')) {
 		'output' => API_OUTPUT_EXTEND,
 		'selectGroups' => ['groupid', 'name'],
 		'selectInterfaces' => API_OUTPUT_EXTEND,
+		'selectMacros' => ['macro', 'value', 'description'],
 		'hostids' => $discoveryRule['hostid'],
 		'templated_hosts' => true
 	]);
@@ -387,6 +388,16 @@ if (hasRequest('form')) {
 
 	// Order linked templates.
 	CArrayHelper::sort($data['host_prototype']['templates'], ['name']);
+
+	// TODO VM: This should be in controller, not view, but but there should be a better place for it.
+	// macros
+	$data['macros'] = $data['parent_host']['macros'];
+	if ($data['show_inherited_macros']) {
+		$macros = mergeInheritedMacros($data['macros'],
+			getInheritedMacros(zbx_objectValues($data['host_prototype']['templates'], 'templateid'))
+		);
+	}
+	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
 
 	// render view
 	$itemView = new CView('configuration.host.prototype.edit', $data);

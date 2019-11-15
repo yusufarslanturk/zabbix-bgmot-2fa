@@ -31,7 +31,7 @@ $widget = (new CWidget())
 	->setTitle(_('Host prototypes'))
 	->addItem(get_header_host_table('hosts', $discoveryRule['hostid'], $discoveryRule['itemid']));
 
-$divTabs = (new CTabView())->onTabChange('hostmacros.tabChange(ui.newTab.index());');
+$divTabs = new CTabView();
 
 if (!hasRequest('form_refresh')) {
 	$divTabs->setSelected(0);
@@ -340,13 +340,18 @@ if ($parentHost['status'] != HOST_STATUS_TEMPLATE) {
 	$divTabs->addTab('ipmiTab', _('IPMI'), $ipmiList);
 
 	// macros
+	$macros_table_view = (new CView('hostmacros.list.html', [
+		'macros' => $data['macros'],
+		'show_inherited_macros' => $data['show_inherited_macros'],
+		'readonly' => $data['readonly']
+	]));
 	$divTabs->addTab('macroTab', _('Macros'), (new CFormList('macrosFormList'))
 		->addRow(null, (new CRadioButtonList('show_inherited_macros', (int) $data['show_inherited_macros']))
 			->addValue(_('Host macros'), 0)
 			->addValue(_('Inherited and host macros'), 1)
 			->setModern(true)
 		)
-		->addRow(null, null, 'macros_container')
+		->addRow(null, $macros_table_view->render(), 'macros_container')
 	);
 }
 
@@ -439,25 +444,5 @@ else {
 
 $frmHost->addItem($divTabs);
 $widget->addItem($frmHost);
-// Create namespace for host macros list and prepare the collected data for JS.
-zbx_add_post_js(
-	'var hostmacros = hostmacros || {};'.
-
-	'hostmacros.data = {'.
-		'tab_id: "macroTab",'.
-		(($hostPrototype['templateid'] == 0) ? '': 'ms_id: "'.$add_templates_ms->getId().'",').
-		'form_id: "'.$frmHost->getId().'",'.
-		'templateids: '.CJs::encodeJson(
-			array_map('strval', zbx_objectValues($data['host_prototype']['templates'], 'templateid'))
-		).','.
-		'add_templates: '.CJs::encodeJson(array_keys($data['host_prototype']['add_templates'])).','.
-		'hostid: "'.$data['parent_hostid'].'",'.
-		'show_inherited_macros: '.$data['show_inherited_macros'].','.
-		'readonly: '.(int) $data['readonly'].','.
-		'form_refresh: '.$data['form_refresh'].
-	'};'
-);
-
-zbx_add_post_js(file_get_contents(dirname(__FILE__).'/js/hostmacros.js'));
 
 return $widget;

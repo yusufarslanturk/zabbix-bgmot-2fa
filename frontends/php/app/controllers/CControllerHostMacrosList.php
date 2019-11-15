@@ -23,14 +23,11 @@ class CControllerHostMacrosList extends CController {
 
 	protected function checkInput() {
 		$fields = [
-			'hostid'				=> 'db hosts.hostid',
-			'form_id'				=> 'required|string',
 			'macros'				=> 'array',
 			'show_inherited_macros' => 'required|in 0,1',
 			'templateids'			=> 'array_db hosts.hostid',
 			'add_templates'			=> 'array_db hosts.hostid',
-			'readonly'				=> 'required|in 0,1',
-			'form_refresh'			=> 'int32'
+			'readonly'				=> 'required|in 0,1'
 		];
 
 		$ret = $this->validateInput($fields);
@@ -49,45 +46,22 @@ class CControllerHostMacrosList extends CController {
 	}
 
 	protected function doAction() {
-		$hostid = $this->getInput('hostid', 0);
-		$readonly = (bool) $this->getInput('readonly', 0);
 		$macros = $this->getInput('macros', []);
 		$show_inherited_macros = (bool) $this->getInput('show_inherited_macros', 0);
-		$form_id = $this->getInput('form_id');
-		$host = [];
+		$readonly = (bool) $this->getInput('readonly', 0);
 
 		if ($macros) {
 			$macros = cleanInheritedMacros($macros);
 
 			// Remove empty new macro lines.
 			foreach ($macros as $idx => $macro) {
+				// TODO VM: remove 'hostmacroid' check. Otherwise it may keep fully empty rows.(Be carefull of ZBX-5071)
+				//			same applies to hosts.php, triggers.php
 				if (!array_key_exists('hostmacroid', $macro) && $macro['macro'] === '' && $macro['value'] === ''
 						&& $macro['description'] === '') {
 					unset($macros[$idx]);
 				}
 			}
-		}
-
-		if (($hostid != 0 && !$this->getInput('macros', []) && $this->getInput('form_refresh', 0) == 0) || $readonly) {
-			if ($form_id === 'templatesForm') {
-				$templates = API::Template()->get([
-					'output' => [],
-					'selectMacros' => ['hostmacroid', 'macro', 'value', 'description'],
-					'templateids' => $hostid
-				]);
-				$host = reset($templates);
-			}
-			else {
-				$hosts = API::Host()->get([
-					'output' => ($form_id === 'hostsForm') ? ['flags'] : [],
-					'selectMacros' => ['hostmacroid', 'macro', 'value', 'description'],
-					'hostids' => $hostid,
-					'templated_hosts' => ($form_id === 'hostPrototypeForm') ? true : null
-				]);
-				$host = reset($hosts);
-			}
-
-			$macros = $host['macros'];
 		}
 
 		if ($show_inherited_macros) {
@@ -100,8 +74,8 @@ class CControllerHostMacrosList extends CController {
 			$macros = array_values(order_macros($macros, 'macro'));
 		}
 
-		if (!$macros && $form_id !== 'hostPrototypeForm'
-				&& (!array_key_exists('flags', $host) || $host['flags'] != ZBX_FLAG_DISCOVERY_CREATED)) {
+		// TODO VM: in 'hostPrototypeForm' macro form also should be readonly.
+		if (!$macros && !$readonly) {
 			$macro = ['macro' => '', 'value' => '', 'description' => ''];
 			if ($show_inherited_macros) {
 				$macro['type'] = ZBX_PROPERTY_OWN;
@@ -110,9 +84,9 @@ class CControllerHostMacrosList extends CController {
 		}
 
 		$data = [
-			'readonly' => $readonly,
 			'macros' => $macros,
 			'show_inherited_macros' => $show_inherited_macros,
+			'readonly' => $readonly,
 			'user' => [
 				'debug_mode' => $this->getDebugMode()
 			]

@@ -674,7 +674,7 @@ elseif (hasRequest('form')) {
 		'tags' => $tags,
 		'show_inherited_macros' => getRequest('show_inherited_macros', 0),
 		'readonly' => false,
-		'form_refresh' => getRequest('form_refresh', 0),
+		'form_refresh' => getRequest('form_refresh', 0), // TODO VM: probably can be removed.
 		'macros' => $macros
 	];
 
@@ -683,6 +683,7 @@ elseif (hasRequest('form')) {
 			'output' => API_OUTPUT_EXTEND,
 			'selectGroups' => API_OUTPUT_EXTEND,
 			'selectParentTemplates' => ['templateid', 'name'],
+			'selectMacros' => API_OUTPUT_EXTEND,
 			'selectTags' => ['tag', 'value'],
 			'templateids' => $data['templateid']
 		]);
@@ -695,6 +696,7 @@ elseif (hasRequest('form')) {
 
 		if (!hasRequest('form_refresh')) {
 			$data['tags'] = $data['dbTemplate']['tags'];
+			$data['macros'] = $data['dbTemplate']['macros'];
 		}
 	}
 
@@ -709,6 +711,24 @@ elseif (hasRequest('form')) {
 	}
 	else {
 		CArrayHelper::sort($data['tags'], ['tag', 'value']);
+	}
+
+	// macros
+	if ($data['show_inherited_macros']) {
+		// TODO VM: tripplecheck, if this is correct aray to use.
+		$data['macros'] = mergeInheritedMacros($data['macros'], getInheritedMacros(
+			array_merge($data['linked_templates'], $data['add_templates'])
+		));
+	}
+
+	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
+
+	if (!$data['macros']) {
+		$macro = ['macro' => '', 'value' => '', 'description' => ''];
+		if ($data['show_inherited_macros']) {
+			$macro['type'] = ZBX_PROPERTY_OWN;
+		}
+		$data['macros'][] = $macro;
 	}
 
 	$templateids = getRequest('templates', hasRequest('form_refresh') ? [] : $data['original_templates']);

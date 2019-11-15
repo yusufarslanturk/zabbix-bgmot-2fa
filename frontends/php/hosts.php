@@ -1012,6 +1012,7 @@ elseif (hasRequest('form')) {
 				],
 				'selectGroups' => ['groupid'],
 				'selectParentTemplates' => ['templateid'],
+				'selectMacros' => ['hostmacroid', 'macro', 'value', 'description'],
 				'selectDiscoveryRule' => ['itemid', 'name'],
 				'selectHostDiscovery' => ['parent_hostid'],
 				'selectInventory' => API_OUTPUT_EXTEND,
@@ -1051,6 +1052,9 @@ elseif (hasRequest('form')) {
 
 			// Tags
 			$data['tags'] = $dbHost['tags'];
+
+			// Macros
+			$data['macros'] = $dbHost['macros'];
 
 			// Interfaces
 			foreach ($data['interfaces'] as &$interface) {
@@ -1176,6 +1180,26 @@ elseif (hasRequest('form')) {
 	}
 	else {
 		CArrayHelper::sort($data['tags'], ['tag', 'value']);
+	}
+
+	// macros
+	if ($data['show_inherited_macros']) {
+		// TODO VM: this array is already merged below, maybe code should be rearranged.
+		// TODO VM: check for duplicates. And ake sure no entry is missed due to same keys.
+		$data['macros'] = mergeInheritedMacros($data['macros'], getInheritedMacros(
+			array_merge($data['templates'], $data['add_templates'])
+		));
+	}
+
+	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
+
+	// TODO VM: maybe this can be moved to hostmacros.lis.html.php? Unfortunately propper place most likely is controller after all.
+	if (!$data['macros'] && !$data['readonly']) {
+		$macro = ['macro' => '', 'value' => '', 'description' => ''];
+		if ($data['show_inherited_macros']) {
+			$macro['type'] = ZBX_PROPERTY_OWN;
+		}
+		$data['macros'][] = $macro;
 	}
 
 	$groupids = [];

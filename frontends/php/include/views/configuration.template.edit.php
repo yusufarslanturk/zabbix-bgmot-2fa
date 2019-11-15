@@ -27,7 +27,7 @@ if ($data['form'] !== 'clone' && $data['form'] !== 'full_clone') {
 	$widget->addItem(get_header_host_table('', $data['templateid']));
 }
 
-$divTabs = (new CTabView())->onTabChange('hostmacros.tabChange(ui.newTab.index());');
+$divTabs = new CTabView();
 
 if (!hasRequest('form_refresh')) {
 	$divTabs->setSelected(0);
@@ -413,15 +413,21 @@ $tags_view = new CView('configuration.tags.tab', [
 	'readonly' => $data['readonly']
 ]);
 
-$divTabs
-	->addTab('tags-tab', _('Tags'), $tags_view->render())
-	->addTab('macroTab', _('Macros'), (new CFormList('macrosFormList'))
+$divTabs->addTab('tags-tab', _('Tags'), $tags_view->render());
+
+// macros
+$macros_table_view = (new CView('hostmacros.list.html', [
+	'macros' => $data['macros'],
+	'show_inherited_macros' => $data['show_inherited_macros'],
+	'readonly' => $data['readonly']
+]));
+$divTabs->addTab('macroTab', _('Macros'), (new CFormList('macrosFormList'))
 		->addRow(null, (new CRadioButtonList('show_inherited_macros', (int) $data['show_inherited_macros']))
 			->addValue(_('Template macros'), 0)
 			->addValue(_('Inherited and template macros'), 1)
 			->setModern(true)
 		)
-		->addRow(null, null, 'macros_container')
+		->addRow(null, $macros_table_view->render(), 'macros_container')
 );
 
 // footer
@@ -452,29 +458,5 @@ else {
 $frmHost->addItem($divTabs);
 
 $widget->addItem($frmHost);
-
-// Convert IDs to strings to avoid potential problems in JS arrays.
-$templateids = array_keys($templateids);
-$templateids = array_map('strval', $templateids);
-
-// Create namespace for host macros list and prepare the collected data for JS.
-zbx_add_post_js(
-	'var hostmacros = hostmacros || {};'.
-
-	'hostmacros.data = {'.
-		'tab_id: "macroTab",'.
-		'ms_id: "'.$add_templates_ms->getId().'",'.
-		'form_id: "'.$frmHost->getId().'",'.
-		'templateids: '.CJs::encodeJson($templateids).','.
-		'add_templates: '.CJs::encodeJson(array_keys($data['add_templates'])).','.
-		'hostid: "'.$data['templateid'].'",'.
-		'macros: '.CJs::encodeJson($data['macros']).','.
-		'show_inherited_macros: '.$data['show_inherited_macros'].','.
-		'readonly: '.(int) $data['readonly'].','.
-		'form_refresh: '.$data['form_refresh'].
-	'};'
-);
-
-zbx_add_post_js(file_get_contents(dirname(__FILE__).'/js/hostmacros.js'));
 
 return $widget;
