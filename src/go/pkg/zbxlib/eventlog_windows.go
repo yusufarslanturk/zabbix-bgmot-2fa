@@ -20,7 +20,7 @@
 package zbxlib
 
 /*
-#cgo CFLAGS: -I${SRCDIR}/../../../../../include
+#cgo CFLAGS: -I${SRCDIR}/../../../../../include -I${SRCDIR}/../../../../../build/win32/include
 
 #include "common.h"
 #include "sysinfo.h"
