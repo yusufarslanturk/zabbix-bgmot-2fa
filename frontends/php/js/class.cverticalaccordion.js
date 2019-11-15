@@ -69,11 +69,13 @@ jQuery(function ($) {
 			var accordion = $(this),
 				options = accordion.data('options');
 
-			$('.' + options['active_class'], accordion)
-				.removeClass(options['active_class'])
-				.addClass(options['closed_class']);
+			$('.' + options['active_class'], accordion).each(function() {
+				$(this)
+					.removeClass(options['active_class'])
+					.addClass(options['closed_class']);
 
-			$('textarea', accordion).scrollTop(0);
+				accordion.trigger('collapse', {section: $(this)});
+			});
 
 			$(options['handler'], accordion).attr('title', t('S_EXPAND'));
 		},
@@ -89,6 +91,9 @@ jQuery(function ($) {
 			section
 				.removeClass(options['closed_class'])
 				.addClass(options['active_class']);
+
+			accordion.trigger('expand', {section: section});
+
 			handler.attr('title', t('S_COLLAPSE'));
 		}
 	};

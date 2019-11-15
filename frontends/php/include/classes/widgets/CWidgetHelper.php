@@ -1272,9 +1272,15 @@ class CWidgetHelper {
 				'});',
 
 			// Intialize vertical accordion.
-			'jQuery("#data_sets").zbx_vertical_accordion({'.
-				'handler: ".'.ZBX_STYLE_COLOR_PREVIEW_BOX.'"'.
-			'});',
+			'jQuery("#data_sets")'.
+				'.on("focus", ".'.CMultiSelect::ZBX_STYLE_CLASS.' input.input", function() {'.
+					'jQuery("#data_sets").zbx_vertical_accordion("expandNth",'.
+						'jQuery(this).closest(".'.ZBX_STYLE_LIST_ACCORDION_ITEM.'").index());'.
+					'})'.
+				'.on("collapse", function(event, data) {'.
+					'jQuery("textarea, .multiselect", data.section).scrollTop(0);'.
+				'})'.
+				'.zbx_vertical_accordion({handler: ".'.ZBX_STYLE_COLOR_PREVIEW_BOX.'"});',
 
 			// Initialize rangeControl UI elements.
 			'jQuery(".'.CRangeControl::ZBX_STYLE_CLASS.'", jQuery("#data_sets")).rangeControl();',
@@ -1283,34 +1289,10 @@ class CWidgetHelper {
 			'jQuery("#data_sets").on("click", "'.implode(', ', [
 				'.'.ZBX_STYLE_LIST_ACCORDION_ITEM_CLOSED.' .'.CPatternSelect::ZBX_STYLE_CLASS,
 				'.'.ZBX_STYLE_LIST_ACCORDION_ITEM_CLOSED.' .'.ZBX_STYLE_BTN_GREY
-			]).'", function($event) {'.
+			]).'", function(event) {'.
 				'var index = jQuery(this).closest(".'.ZBX_STYLE_LIST_ACCORDION_ITEM.'").index();'.
 				'jQuery("#data_sets").zbx_vertical_accordion("expandNth", index);'.
-				'jQuery($event.currentTarget).find("input.input").focus();'.
-			'});',
-
-			// If user press TAB on color-preview element we cancel event and manually set focus to input.
-			'document.querySelector("#data_sets").addEventListener("keydown", function(event) {'.
-				'var KEY_TAB = 9;'.
-				'if (event.which === KEY_TAB) {'.
-					'var index = jQuery(event.target).closest(".'.ZBX_STYLE_LIST_ACCORDION_ITEM.'").index();'.
-					'if (jQuery(event.target).is("button.'.ZBX_STYLE_COLOR_PREVIEW_BOX.'")'.
-							'|| jQuery(event.target).is("button.'.ZBX_STYLE_BTN_GREY.'")) {'.
-						'if (event.shiftKey && jQuery(event.target).is("button.'.ZBX_STYLE_COLOR_PREVIEW_BOX.'")) {'.
-							'index = ((index > 0) ? index : 1) - 1;'.
-						'}'.
-						'else {'.
-						'	if (!jQuery(event.target).is("button.'.ZBX_STYLE_BTN_GREY.'")) {'.
-								'event.preventDefault();'.
-								'jQuery(event.target)'.
-									'.closest(".column-50")'.
-									'.find("input.input")[0]'.
-									'.focus({preventScroll:true});'.
-							'}'.
-						'}'.
-						'jQuery("#data_sets").zbx_vertical_accordion("expandNth", index);'.
-					'}'.
-				'}'.
+				'jQuery(event.currentTarget).find("input.input").focus();'.
 			'});',
 
 			// Initialize pattern fields.

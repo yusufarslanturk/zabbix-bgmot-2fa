@@ -1618,22 +1618,19 @@ output {
 }
 
 .multiselect-control {
+	display: flex;
 	position: relative;
 	vertical-align: top;
 	white-space: nowrap;
-	display: flex;
-
 }
 
 .multiselect {
 	@extend %form-input-style;
-	@extend .multiselect-button;
+	display: flex;
+	flex-direction: column;
 	margin-right: 3px;
 	min-height: 24px;
 	white-space: normal;
-
-	display: flex;
-	flex-direction: column;
 
 	&.active {
 		border-color: $form-border-focus-color;
@@ -6627,6 +6624,7 @@ svg {
 	}
 
 	.list-accordion-item-closed {
+
 		.multiselect {
 			height: 24px;
 			overflow: hidden;

@@ -1072,17 +1072,17 @@ output {
     vertical-align: middle; }
 
 .multiselect-control {
+  display: flex;
   position: relative;
   vertical-align: top;
-  white-space: nowrap;
-  display: flex; }
+  white-space: nowrap; }
 
 .multiselect {
+  display: flex;
+  flex-direction: column;
   margin-right: 3px;
   min-height: 24px;
-  white-space: normal;
-  display: flex;
-  flex-direction: column; }
+  white-space: normal; }
   .multiselect.active {
     border-color: #02659f; }
   .multiselect input[type="text"] {
@@ -1144,7 +1144,7 @@ output {
     bottom: 0;
     z-index: -1; }
 
-.multiselect-button, .multiselect {
+.multiselect-button {
   vertical-align: top; }
 
 .multiselect-suggest, .multiselect-matches {
