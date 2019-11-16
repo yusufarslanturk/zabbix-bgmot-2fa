@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-10 01:42+0200\n"
+"POT-Creation-Date: 2019-11-17 01:42+0200\n"
 "PO-Revision-Date: 2017-10-11 11:47+0300\n"
 "Last-Translator: 岂几 <tom3000@126.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -4424,7 +4424,7 @@ msgstr "被延迟由于"
 #: app/views/administration.script.edit.php:131
 #: app/views/administration.script.list.php:113
 #: app/views/administration.user.edit.php:447
-#: app/views/administration.user.list.php:201
+#: app/views/administration.user.list.php:202
 #: app/views/monitoring.dashboard.list.php:76
 #: include/classes/html/CButtonDelete.php:25
 #: include/classes/widgets/CWidgetHelper.php:639
@@ -4691,7 +4691,7 @@ msgstr "删除所选的触发器?"
 msgid "Delete selected user?"
 msgstr "删除所选的用户?"
 
-#: app/views/administration.user.list.php:201
+#: app/views/administration.user.list.php:202
 msgid "Delete selected users?"
 msgstr "删除所选的用户?"
 
@@ -4947,8 +4947,8 @@ msgstr "禁用所选定的web场景？"
 #: app/views/administration.mediatype.list.php:48
 #: app/views/administration.mediatype.list.php:122
 #: app/views/administration.user.edit.php:224
-#: app/views/administration.user.list.php:188
-#: app/views/administration.user.list.php:190 auditlogs.php:147
+#: app/views/administration.user.list.php:189
+#: app/views/administration.user.list.php:191 auditlogs.php:147
 #: include/discovery.inc.php:108 include/hosts.inc.php:1321
 #: include/html.inc.php:331 include/httptest.inc.php:47
 #: include/items.inc.php:140 include/items.inc.php:143
@@ -5706,8 +5706,8 @@ msgstr "启用trapping"
 #: app/views/administration.mediatype.list.php:47
 #: app/views/administration.mediatype.list.php:118
 #: app/views/administration.user.edit.php:218
-#: app/views/administration.user.list.php:187
-#: app/views/administration.user.list.php:191 app/views/popup.media.php:74
+#: app/views/administration.user.list.php:188
+#: app/views/administration.user.list.php:192 app/views/popup.media.php:74
 #: app/views/popup.triggerwizard.php:128 auditlogs.php:144
 #: include/discovery.inc.php:107 include/html.inc.php:327
 #: include/httptest.inc.php:46 include/items.inc.php:140
@@ -6107,7 +6107,7 @@ msgstr "字段 \"%1$s\"不能被设置为空"
 #: include/classes/api/services/CHost.php:850
 #: include/classes/api/services/CTemplate.php:820
 #: include/classes/api/services/CTriggerGeneral.php:237
-#: include/classes/validators/CNewValidator.php:255
+#: include/classes/validators/CNewValidator.php:256
 #: include/validate.inc.php:300
 #, c-format
 msgid "Field \"%1$s\" is mandatory."
@@ -6458,7 +6458,7 @@ msgstr "全局脚本"
 msgid "Global value"
 msgstr "全局值"
 
-#: include/classes/html/CDashboardWidgetMap.php:227
+#: include/classes/html/CDashboardWidgetMap.php:223
 #, c-format
 msgid "Go back to %1$s"
 msgstr "返回 %1$s"
@@ -7667,28 +7667,28 @@ msgstr ""
 msgid "Inaccessible discovery rule"
 msgstr ""
 
-#: app/controllers/CControllerDashboardWidgetEdit.php:300
+#: app/controllers/CControllerDashboardWidgetEdit.php:303
 msgid "Inaccessible graph"
 msgstr "不能访问的图表"
 
-#: app/controllers/CControllerDashboardWidgetEdit.php:302
+#: app/controllers/CControllerDashboardWidgetEdit.php:305
 msgid "Inaccessible graph prototype"
 msgstr ""
 
-#: app/controllers/CControllerDashboardWidgetEdit.php:297
+#: app/controllers/CControllerDashboardWidgetEdit.php:300
 #: host_prototypes.php:347
 msgid "Inaccessible group"
 msgstr "不能访问的组"
 
-#: app/controllers/CControllerDashboardWidgetEdit.php:298
+#: app/controllers/CControllerDashboardWidgetEdit.php:301
 msgid "Inaccessible host"
 msgstr "无法访问的主机"
 
-#: app/controllers/CControllerDashboardWidgetEdit.php:299
+#: app/controllers/CControllerDashboardWidgetEdit.php:302
 msgid "Inaccessible item"
 msgstr "无法访问的项"
 
-#: app/controllers/CControllerDashboardWidgetEdit.php:301
+#: app/controllers/CControllerDashboardWidgetEdit.php:304
 msgid "Inaccessible item prototype"
 msgstr ""
 
@@ -7699,7 +7699,7 @@ msgstr ""
 msgid "Inaccessible maintenance"
 msgstr "无法访问的维护"
 
-#: app/controllers/CControllerDashboardWidgetEdit.php:115
+#: app/controllers/CControllerDashboardWidgetEdit.php:118
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:85
 msgid "Inaccessible map"
 msgstr "无法访问的拓扑图"
@@ -8544,10 +8544,10 @@ msgstr "错误的用户群组."
 #: include/classes/validators/CNewValidator.php:142
 #: include/classes/validators/CNewValidator.php:158
 #: include/classes/validators/CNewValidator.php:172
-#: include/classes/validators/CNewValidator.php:191
-#: include/classes/validators/CNewValidator.php:207
-#: include/classes/validators/CNewValidator.php:223
-#: include/classes/validators/CNewValidator.php:242
+#: include/classes/validators/CNewValidator.php:192
+#: include/classes/validators/CNewValidator.php:208
+#: include/classes/validators/CNewValidator.php:224
+#: include/classes/validators/CNewValidator.php:243
 #: include/validate.inc.php:355
 #, c-format
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
@@ -8612,8 +8612,8 @@ msgstr "\"%2$s\" 中 媒体值 \"%3$s\" 的 \"%1$s\" 值错误。"
 #: include/classes/validators/CNewValidator.php:130
 #: include/classes/validators/CNewValidator.php:143
 #: include/classes/validators/CNewValidator.php:159
-#: include/classes/validators/CNewValidator.php:192
-#: include/classes/validators/CNewValidator.php:243
+#: include/classes/validators/CNewValidator.php:193
+#: include/classes/validators/CNewValidator.php:244
 #: include/validate.inc.php:358
 #, c-format
 msgid "Incorrect value for \"%1$s\" field."
@@ -8812,8 +8812,8 @@ msgstr "\"%1$s\" 字段的值不正确。"
 #: include/classes/import/CConfigurationImport.php:2762
 #: include/classes/validators/CNewValidator.php:91
 #: include/classes/validators/CNewValidator.php:101
-#: include/classes/validators/CNewValidator.php:266
-#: include/classes/validators/CNewValidator.php:278
+#: include/classes/validators/CNewValidator.php:267
+#: include/classes/validators/CNewValidator.php:279
 #: include/screens.inc.php:300 include/screens.inc.php:314
 #: include/screens.inc.php:429 include/screens.inc.php:443
 #: include/sounds.inc.php:112 include/validate.inc.php:346 usergrps.php:318
@@ -10322,7 +10322,7 @@ msgstr "宏已更新"
 msgid "Main filter"
 msgstr "主过滤器"
 
-#: app/views/layout.htmlpage.menu.php:97
+#: app/views/layout.htmlpage.menu.php:99
 msgid "Main navigation"
 msgstr "主导航栏"
 
@@ -10716,7 +10716,7 @@ msgstr ""
 
 #: app/views/monitoring.acknowledge.edit.php:26
 #: app/views/monitoring.widget.actionlog.view.php:33
-#: app/views/popup.mediatypetest.edit.php:58 include/actions.inc.php:1752
+#: app/views/popup.mediatypetest.edit.php:67 include/actions.inc.php:1752
 #: include/actions.inc.php:2021 include/actions.inc.php:2125
 #: include/classes/screens/CScreenActions.php:115
 #: include/views/administration.auditacts.list.php:60
@@ -14005,6 +14005,10 @@ msgstr "用户解决\"%1$s\"。"
 msgid "Resource"
 msgstr "资源"
 
+#: app/views/popup.mediatypetest.edit.php:42
+msgid "Response"
+msgstr ""
+
 #: include/classes/screens/CScreenHttpTestDetails.php:85
 msgid "Response code"
 msgstr "响应代码"
@@ -14012,6 +14016,14 @@ msgstr "响应代码"
 #: httpdetails.php:167 include/classes/screens/CScreenHttpTestDetails.php:84
 msgid "Response time"
 msgstr "响应时间"
+
+#: app/controllers/CControllerPopupMediatypeTestSend.php:154
+msgid "Response type: JSON"
+msgstr ""
+
+#: app/controllers/CControllerPopupMediatypeTestSend.php:154
+msgid "Response type: String"
+msgstr ""
 
 #: app/views/popup.preproctestedit.view.php:61
 #: app/views/popup.preproctestedit.view.php:137
@@ -14758,7 +14770,7 @@ msgid "Send only to"
 msgstr "仅送到"
 
 #: app/views/administration.user.edit.php:214 app/views/popup.media.php:57
-#: app/views/popup.media.php:64 app/views/popup.mediatypetest.edit.php:44
+#: app/views/popup.media.php:64 app/views/popup.mediatypetest.edit.php:53
 msgid "Send to"
 msgstr "收件人"
 
@@ -15178,7 +15190,7 @@ msgstr "登录"
 msgid "Sign in with HTTP"
 msgstr "使用 HTTP 登录"
 
-#: app/views/layout.htmlpage.menu.php:78
+#: app/views/layout.htmlpage.menu.php:81
 msgid "Sign out"
 msgstr "退出"
 
@@ -15594,7 +15606,7 @@ msgstr "结构化数据"
 msgid "Style"
 msgstr "风格"
 
-#: app/views/layout.htmlpage.menu.php:104
+#: app/views/layout.htmlpage.menu.php:106
 msgid "Sub navigation"
 msgstr "子导航"
 
@@ -15602,7 +15614,7 @@ msgstr "子导航"
 msgid "Subfilter"
 msgstr ""
 
-#: app/views/popup.mediatypetest.edit.php:52
+#: app/views/popup.mediatypetest.edit.php:61
 #: include/views/administration.auditacts.list.php:86
 #: include/views/configuration.action.edit.php:785
 #: include/views/configuration.action.edit.php:1535
@@ -15997,7 +16009,7 @@ msgstr ""
 #: app/controllers/CControllerPopupTestTriggerExpr.php:147
 #: app/views/administration.authentication.edit.php:151
 #: app/views/administration.mediatype.list.php:127
-#: app/views/popup.mediatypetest.edit.php:82
+#: app/views/popup.mediatypetest.edit.php:91
 #: app/views/popup.preproctestedit.view.php:199
 #: app/views/popup.testtriggerexpr.php:116 include/forms.inc.php:1463
 #: include/views/administration.general.regularexpressions.edit.php:139
@@ -16925,11 +16937,11 @@ msgstr "未确认的 RESOLVED 事件"
 msgid "Unacknowledged only"
 msgstr "仅未确认的"
 
-#: app/views/administration.user.list.php:200
+#: app/views/administration.user.list.php:201
 msgid "Unblock"
 msgstr "解锁"
 
-#: app/views/administration.user.list.php:200
+#: app/views/administration.user.list.php:201
 msgid "Unblock selected users?"
 msgstr "解除锁定所选的用户?"
 
@@ -18599,7 +18611,7 @@ msgstr "预先设定的布尔值"
 #: include/classes/api/services/CUser.php:661
 #: include/classes/import/validators/CXmlValidatorGeneral.php:202
 #: include/classes/validators/CApiInputValidator.php:254
-#: include/classes/validators/CNewValidator.php:278
+#: include/classes/validators/CNewValidator.php:279
 msgid "a character string is expected"
 msgstr "请在字符串中指定"
 
@@ -18642,7 +18654,7 @@ msgstr "一个数值预计"
 msgid "a relative time is expected"
 msgstr ""
 
-#: include/classes/validators/CNewValidator.php:266
+#: include/classes/validators/CNewValidator.php:267
 msgid "a time is expected"
 msgstr "a 预计时间"
 
