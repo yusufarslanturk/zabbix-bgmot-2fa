@@ -2264,9 +2264,6 @@
 					return $.Deferred().reject();
 				}
 				else {
-					// No errors, proceed with update.
-					overlayDialogueDestroy('widgetConfg');
-
 					// Set view mode of a reusable widget early to escape focus flickering.
 					if (widget !== null && widget['type'] === type) {
 						setWidgetViewMode(widget, view_mode);
@@ -2299,6 +2296,8 @@
 				});
 			})
 			.then(function(response) {
+				overlayDialogueDestroy('widgetConfg');
+
 				var configuration = {};
 				if ('configuration' in response) {
 					configuration = response['configuration'];
