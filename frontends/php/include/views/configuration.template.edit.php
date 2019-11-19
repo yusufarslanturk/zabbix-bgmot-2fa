@@ -339,7 +339,7 @@ $linkedTemplateTable = (new CTable())
 	->setHeader([_('Name'), _('Action')])
 	->addStyle('width: 100%;');
 
-foreach ($data['linkedTemplates'] as $template) {
+foreach ($data['linked_templates'] as $template) {
 	$tmplList->addItem((new CVar('templates['.$template['templateid'].']', $template['templateid']))->removeId());
 
 	if (array_key_exists($template['templateid'], $data['writable_templates'])) {

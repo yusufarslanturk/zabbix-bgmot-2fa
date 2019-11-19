@@ -667,10 +667,9 @@ elseif (hasRequest('form')) {
 	$data = [
 		'form' => getRequest('form'),
 		'templateid' => getRequest('templateid', 0),
-		'linked_templates' => getRequest('templates', []),
 		'add_templates' => getRequest('add_templates', []),
 		'original_templates' => [],
-		'parent_templates' => [],
+		'parent_templates' => [], // TODO VM: unused; remove
 		'tags' => $tags,
 		'show_inherited_macros' => getRequest('show_inherited_macros', 0),
 		'readonly' => false,
@@ -689,7 +688,7 @@ elseif (hasRequest('form')) {
 		]);
 		$data['dbTemplate'] = reset($dbTemplates);
 
-		$data['original_templates'] = [];
+		$data['original_templates'] = []; // TODO VM: already defined as empty; remove it.
 		foreach ($data['dbTemplate']['parentTemplates'] as $parentTemplate) {
 			$data['original_templates'][$parentTemplate['templateid']] = $parentTemplate['templateid'];
 		}
@@ -713,14 +712,6 @@ elseif (hasRequest('form')) {
 		CArrayHelper::sort($data['tags'], ['tag', 'value']);
 	}
 
-	// macros
-	if ($data['show_inherited_macros']) {
-		// TODO VM: tripplecheck, if this is correct aray to use.
-		$data['macros'] = mergeInheritedMacros($data['macros'], getInheritedMacros(
-			array_merge($data['linked_templates'], $data['add_templates'])
-		));
-	}
-
 	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
 
 	if (!$data['macros']) {
@@ -731,17 +722,17 @@ elseif (hasRequest('form')) {
 		$data['macros'][] = $macro;
 	}
 
-	$templateids = getRequest('templates', hasRequest('form_refresh') ? [] : $data['original_templates']);
+	$data['linked_templates'] = getRequest('templates', hasRequest('form_refresh') ? [] : $data['original_templates']);
 
 	// Get linked templates.
 	$templates = API::Template()->get([
 		'output' => ['templateid', 'name'],
-		'templateids' => array_merge($templateids, $data['add_templates']),
+		'templateids' => array_merge($data['linked_templates'], $data['add_templates']),
 		'preservekeys' => true
 	]);
 
-	$data['linkedTemplates'] = array_intersect_key($templates, array_flip($templateids));
-	CArrayHelper::sort($data['linkedTemplates'], ['name']);
+	$data['linked_templates'] = array_intersect_key($templates, array_flip($data['linked_templates']));
+	CArrayHelper::sort($data['linked_templates'], ['name']);
 
 	$data['add_templates'] = array_intersect_key($templates, array_flip($data['add_templates']));
 	foreach ($data['add_templates'] as &$template) {
@@ -751,12 +742,15 @@ elseif (hasRequest('form')) {
 
 	$data['writable_templates'] = API::Template()->get([
 		'output' => ['templateid'],
-		'templateids' => $templateids,
+		'templateids' => array_keys($data['linked_templates']),
 		'editable' => true,
 		'preservekeys' => true
 	]);
 
-	CArrayHelper::sort($data['linkedTemplates'], ['name']);
+	// macros
+	if ($data['show_inherited_macros']) {
+		$data['macros'] = mergeInheritedMacros($data['macros'], getInheritedMacros(array_keys($templates)));
+	}
 
 	$groups = [];
 
@@ -821,6 +815,12 @@ elseif (hasRequest('form')) {
 		}
 	}
 	CArrayHelper::sort($data['groups_ms'], ['name']);
+
+	// This data is used in common.template.edit.js.php.
+	$data['macros_tab'] = [
+		'add_templates' => array_map('strval', array_keys($data['add_templates'])),
+		'linked_templates' => array_map('strval', array_keys($data['linked_templates']))
+	];
 
 	$view = new CView('configuration.template.edit', $data);
 }

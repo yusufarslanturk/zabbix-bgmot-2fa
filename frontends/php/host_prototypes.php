@@ -305,6 +305,9 @@ if (hasRequest('form')) {
 		array_flip($data['host_prototype']['templates'])
 	);
 
+	// Order linked templates.
+	CArrayHelper::sort($data['host_prototype']['templates'], ['name']);
+
 	// add parent host
 	$parentHost = API::Host()->get([
 		'output' => API_OUTPUT_EXTEND,
@@ -386,18 +389,20 @@ if (hasRequest('form')) {
 		]);
 	}
 
-	// Order linked templates.
-	CArrayHelper::sort($data['host_prototype']['templates'], ['name']);
-
 	// TODO VM: This should be in controller, not view, but but there should be a better place for it.
 	// macros
 	$data['macros'] = $data['parent_host']['macros'];
 	if ($data['show_inherited_macros']) {
-		$macros = mergeInheritedMacros($data['macros'],
-			getInheritedMacros(zbx_objectValues($data['host_prototype']['templates'], 'templateid'))
-		);
+		$macros = mergeInheritedMacros($data['macros'],getInheritedMacros($templateids));
 	}
+	// TODO VM: why it it here, but not in other controllers? (it was moved form original view of prototype)
 	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
+
+	// This data is used in common.template.edit.js.php.
+	$data['macros_tab'] = [
+		'add_templates' => array_map('strval', array_keys($data['host_prototype']['add_templates'])),
+		'linked_templates' => array_map('strval', $templateids)
+	];
 
 	// render view
 	$itemView = new CView('configuration.host.prototype.edit', $data);

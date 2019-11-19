@@ -19,7 +19,6 @@
 **/
 
 
-// TODO VM: (bug) templated host prototype is not working.
 // TODO VM: do we really need this readonly check?
 if (!$data['readonly']) {
 	?>
@@ -226,7 +225,7 @@ if (!$data['readonly']) {
 			// Some rows may have been removed, but JS likes to create empty indexes. Avoid that by cleaning the array.
 			macros.clean(undefined);
 
-			// TODO VM: why on empty arrya values are not cleared?
+			// TODO VM: why on empty array values are not cleared?
 			// TODO VM: why on many values only one is remembered?
 			return macros;
 		}
@@ -237,12 +236,7 @@ if (!$data['readonly']) {
 				$ms = $('#add_templates_'),
 				$show_inherited_macros = $('input[name="show_inherited_macros"]'),
 				$form = $show_inherited_macros.closest('form'),
-				add_templates = <?= // This should be done differently!
-					CJs::encodeJson(array_map('strval',
-						array_key_exists('host_prototype', $data)
-							? array_keys($data['host_prototype']['add_templates'])
-							: array_keys($data['add_templates'])
-					)) ?>,
+				add_templates = <?= CJs::encodeJson($data['macros_tab']['add_templates']) ?>,
 				readonly = <?= (int) $data['readonly'] ?>;
 
 			if (readonly === 0) {
@@ -274,14 +268,7 @@ if (!$data['readonly']) {
 					data: {
 						macros: getMacros($form),
 						show_inherited_macros: show_inherited_macros_value,
-						templateids: <?= // TODO VM: this should be done differently!
-							CJs::encodeJson(array_map('strval',
-								(array_key_exists('host_prototype', $data)
-									? zbx_objectValues($data['host_prototype']['templates'], 'templateid')
-									: array_key_exists('templates', $data)
-										? $data['templates']
-										: $data['linked_templates']) // TODO VM: not sure, if linked templates should be used at all.
-							)) ?>,
+						templateids: <?= CJs::encodeJson($data['macros_tab']['linked_templates']) ?>,
 						add_templates: add_templates,
 						readonly: readonly
 					},

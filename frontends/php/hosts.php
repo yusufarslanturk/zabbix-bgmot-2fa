@@ -1278,6 +1278,13 @@ elseif (hasRequest('form')) {
 		}
 	}
 
+	// TODO VM: macros are shown for original templates without account, that some templates may have be deleted. (in all files)
+	// This data is used in common.template.edit.js.php.
+	$data['macros_tab'] = [
+		'add_templates' => array_map('strval', array_keys($data['add_templates'])),
+		'linked_templates' => array_map('strval', $data['templates']) // TODO VM: change to $data['linked_templates']
+	];
+
 	$hostView = new CView('configuration.host.edit', $data);
 }
 else {
