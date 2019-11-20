@@ -26,11 +26,11 @@ OBJS = \
 	$(OUTPUTDIR)\algodefs.o \
 	$(OUTPUTDIR)\sysinfo_system.o \
 	$(OUTPUTDIR)\eventlog.o
-
+	
 CFLAGS := $(CFLAGS) -O2 -g -DUNICODE -DHAVE_STDINT_H=1 -I$(TOPDIR)\include -I$(TOPDIR)\build\win32\include -I$(TOPDIR)\build\mingw
 GOPATH := $(GOPATH);$(TOPDIR)\go
 CGO_CFLAGS := $(CGO_CFLAGS) $(CFLAGS) 
-
+TAGS :=
 
 ifeq ("$(ARCH)", "")
 	ARCH := $(PROCESSOR_ARCHITECTURE)
@@ -54,6 +54,8 @@ ifneq ("$(OPENSSL)", "")
 		LDFLAGS := $(LDFLAGS) -L$(OPENSSL)\lib
 		CGO_CFLAGS := $(CGO_CFLAGS) -I$(OPENSSL)\include
 		CGO_LDFLAGS := $(CGO_LDFLAGS) -L$(OPENSSL)\lib
+		TAGS += openssl
+		OBJS += $(OUTPUTDIR)\tls_version.o
 	endif
 endif
 
@@ -63,11 +65,6 @@ ifneq ("$(PCRE)", "")
 	CGO_CFLAGS := $(CGO_CFLAGS) -I$(PCRE)\include
 	CGO_LDFLAGS := $(CGO_LDFLAGS) -L$(PCRE)\lib
 endif
-
-#CGO_LDFLAGS := $(CGO_LDFLAGS) -Wl,--start-group $(patsubst %,$(BUILDDIR)\\%,$(OBJS)) -lpcre -lDbghelp -lpsapi -Wl,--end-group
-
-#CGO_LDFLAGS := $(CGO_LDFLAGS) -Wl,--start-group -lpcre -lDbghelp -lpsapi -Wl,--end-group
-
 
 all: $(TARGETBIN)
 
@@ -84,6 +81,9 @@ $(OUTPUTDIR)\file.o: $(TOPDIR)\src\libs\zbxcommon\file.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 $(OUTPUTDIR)\alias.o: $(TOPDIR)\src\libs\zbxcommon\alias.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+$(OUTPUTDIR)\tls_version.o: $(TOPDIR)\src\libs\zbxcrypto\tls_version.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 $(OUTPUTDIR)\fatal.o: $(TOPDIR)\src\libs\zbxwin32\fatal.c
@@ -127,7 +127,7 @@ $(TARGETBIN): $(OBJS) .FORCE
 	set GOARCH=$(GOARCH)
 	set CGO_ENABLED=1
 	cd $(MODULEDIR)
-	go build -mod vendor -o $(TARGETBIN) zabbix.com/cmd/zabbix_agent2
+	go build -mod vendor -tags "$(TAGS)" -o $(TARGETBIN) zabbix.com/cmd/zabbix_agent2
 
 clean:
 	del $(TOPDIR)\include\config.h "$(TARGETBIN)" $(OBJS) 2>NUL
