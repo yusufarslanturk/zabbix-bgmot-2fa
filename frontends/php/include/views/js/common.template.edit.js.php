@@ -61,7 +61,7 @@ if (!$data['readonly']) {
 			(new CRow([
 				(new CCol(
 					(new CTextAreaFlexible('macros[#{rowNum}][description]', '', ['add_post_js' => false]))
-						->setMaxlength(DB::getFieldLength('globalmacro' , 'description'))
+						->setMaxlength(DB::getFieldLength('globalmacro', 'description'))
 						->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 						->setAttribute('placeholder', _('description'))
 				))->addClass(ZBX_STYLE_TEXTAREA_FLEXIBLE_PARENT)->setColSpan(8),
@@ -77,10 +77,6 @@ if (!$data['readonly']) {
 						->addClass('macro')
 						->setWidth(ZBX_TEXTAREA_MACRO_WIDTH)
 						->setAttribute('placeholder', '{$MACRO}')
-//					// TODO VM: why this was removed?
-//					$data['show_inherited_macros']
-//						? new CInput('hidden', 'macros[#{rowNum}][type]', 2)
-//						: null
 				]))->addClass(ZBX_STYLE_TEXTAREA_FLEXIBLE_PARENT),
 				'&rArr;',
 				(new CCol(
@@ -90,7 +86,7 @@ if (!$data['readonly']) {
 				))->addClass(ZBX_STYLE_TEXTAREA_FLEXIBLE_PARENT),
 				(new CCol(
 					(new CTextAreaFlexible('macros[#{rowNum}][description]', '', ['add_post_js' => false]))
-						->setMaxlength(DB::getFieldLength('globalmacro' , 'description'))
+						->setMaxlength(DB::getFieldLength('globalmacro', 'description'))
 						->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH)
 						->setAttribute('placeholder', _('description'))
 				))->addClass(ZBX_STYLE_TEXTAREA_FLEXIBLE_PARENT),
