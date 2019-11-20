@@ -130,6 +130,7 @@ require_once dirname(__FILE__).'/testInheritanceItemPrototype.php';
 require_once dirname(__FILE__).'/testInheritanceTriggerPrototype.php';
 require_once dirname(__FILE__).'/testInheritanceGraphPrototype.php';
 require_once dirname(__FILE__).'/testInheritanceHostPrototype.php';
+require_once dirname(__FILE__).'/testMultiselect.php';
 require_once dirname(__FILE__).'/testTagBasedPermissions.php';
 require_once dirname(__FILE__).'/testTemplateInheritance.php';
 require_once dirname(__FILE__).'/testTriggerDependencies.php';
@@ -139,6 +140,7 @@ require_once dirname(__FILE__).'/testUrlUserPermissions.php';
 require_once dirname(__FILE__).'/testZBX6339.php';
 require_once dirname(__FILE__).'/testZBX6648.php';
 require_once dirname(__FILE__).'/testZBX6663.php';
+require_once dirname(__FILE__).'/dashboard/testGraphWidget.php';
 
 class SeleniumTests {
 	public static function suite() {
@@ -256,6 +258,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testInheritanceHostPrototype');
 		$suite->addTestSuite('testInheritanceItemPrototype');
 		$suite->addTestSuite('testInheritanceTriggerPrototype');
+		$suite->addTestSuite('testMultiselect');
 		$suite->addTestSuite('testTagBasedPermissions');
 		$suite->addTestSuite('testTemplateInheritance');
 		$suite->addTestSuite('testTriggerDependencies');
@@ -265,6 +268,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testZBX6339');
 		$suite->addTestSuite('testZBX6648');
 		$suite->addTestSuite('testZBX6663');
+		$suite->addTestSuite('testGraphWidget');
 
 		return $suite;
 	}

@@ -1924,9 +1924,17 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 									*mtime_sent = *mtime;
 
 								(*s_count)--;
+								zbx_free(item_value);
 							}
+							else
+							{
+								zbx_free(item_value);
 
-							zbx_free(item_value);
+								/* Sending of buffer failed. */
+								/* Try to resend it in the next check. */
+								ret = SUCCEED;
+								goto out;
+							}
 						}
 					}
 					else	/* log.count[] or logrt.count[] */
@@ -2010,9 +2018,17 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 									*mtime_sent = *mtime;
 
 								(*s_count)--;
+								zbx_free(item_value);
 							}
+							else
+							{
+								zbx_free(item_value);
 
-							zbx_free(item_value);
+								/* Sending of buffer failed. */
+								/* Try to resend it in the next check. */
+								ret = SUCCEED;
+								goto out;
+							}
 						}
 					}
 					else	/* log.count[] or logrt.count[] */
@@ -3297,7 +3313,7 @@ static int	init_max_lines_per_sec(int is_count_item, const AGENT_REQUEST *reques
 static int	init_max_delay(int is_count_item, const AGENT_REQUEST *request, float *max_delay, char **error)
 {
 	const char	*max_delay_str;
-	float		max_delay_tmp;
+	double		max_delay_tmp;
 	int		max_delay_par_nr;
 
 	/* <maxdelay> is parameter 6 for log[], logrt[], but parameter 5 for log.count[], logrt.count[] */
@@ -3313,13 +3329,13 @@ static int	init_max_delay(int is_count_item, const AGENT_REQUEST *request, float
 		return SUCCEED;
 	}
 
-	if (SUCCEED != is_double(max_delay_str) || 0.0f > (max_delay_tmp = (float)atof(max_delay_str)))
+	if (SUCCEED != is_double(max_delay_str, &max_delay_tmp) || 0.0 > max_delay_tmp)
 	{
 		*error = zbx_dsprintf(*error, "Invalid %s parameter.", (5 == max_delay_par_nr) ? "sixth" : "seventh");
 		return FAIL;
 	}
 
-	*max_delay = max_delay_tmp;
+	*max_delay = (float)max_delay_tmp;
 	return SUCCEED;
 }
 
