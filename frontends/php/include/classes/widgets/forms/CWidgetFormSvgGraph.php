@@ -489,7 +489,7 @@ class CWidgetFormSvgGraph extends CWidgetForm {
 			if ($compare && $lefty_min !== '' && $lefty_max !== ''
 					&& bccomp($lefty_min, $lefty_max, 4) >= 0) {
 				$errors[] = _s('Invalid parameter "%1$s": %2$s.', _('Max'),
-					_('Y axis MAX value must be greater than Y axis MIN value')
+					_('Left Y axis MAX value must be greater than Y axis MIN value')
 				);
 			}
 		}
@@ -513,7 +513,7 @@ class CWidgetFormSvgGraph extends CWidgetForm {
 			if ($compare && $righty_min !== '' && $righty_max !== ''
 					&& bccomp($righty_min, $righty_max, 4) >= 0) {
 				$errors[] = _s('Invalid parameter "%1$s": %2$s.', _('Max'),
-					_('Y axis MAX value must be greater than Y axis MIN value')
+					_('Right Y axis MAX value must be greater than Y axis MIN value')
 				);
 			}
 		}
