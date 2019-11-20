@@ -254,7 +254,8 @@ jQuery(function($) {
 	 * @param string options['data'][prefix]		(optional)
 	 * @param bool   options['data'][inaccessible]	(optional)
 	 * @param bool   options['data'][disabled]		(optional)
-	 * @param array  options['excludeids']			an array of excluded ids (optional)
+	 * @param string options['placeholder']			set custom placeholder (optional)
+	 * @param array  options['excludeids']			the list of excluded ids (optional)
 	 * @param string options['defaultValue']		default value for input element (optional)
 	 * @param bool   options['disabled']			turn on/off readonly state (optional)
 	 * @param bool   options['addNew']				allow user to create new names (optional)
@@ -286,7 +287,8 @@ jQuery(function($) {
 					'new': t('new'),
 					'Select': t('Select')
 				},
-				data: {},
+				placeholder: t('type here to search'),
+				data: [],
 				only_hostid: 0,
 				excludeids: [],
 				addNew: false,
@@ -419,8 +421,8 @@ jQuery(function($) {
 				'id': $label.length ? $label.attr('for') : null,
 				'class': 'input',
 				'type': 'text',
-				'placeholder': ms.options.labels['type here to search'],
-				'aria-label': ($label.length ? $label.text() + '. ' : '') + ms.options.labels['type here to search'],
+				'placeholder': ms.options.placeholder,
+				'aria-label': ($label.length ? $label.text() + '. ' : '') + ms.options.placeholder,
 				'aria-required': ms.options.required_str
 			})
 				.on('keyup', function(e) {
@@ -443,10 +445,12 @@ jQuery(function($) {
 					var search = $input.val();
 
 					if (search !== '') {
+						search = search.trim();
+
 						$('.selected li.selected', $obj).removeClass('selected');
+					}
 
-						search = search.replace(/^\s+|\s+$/g, '');
-
+					if (search !== '') {
 						/*
 						 * Strategy:
 						 * 1. Load the cached result set if such exists for the given term and show the list.
@@ -476,7 +480,7 @@ jQuery(function($) {
 									.then(function(response) {
 										ms.values.searches[search] = response.result;
 
-										if (search === $input.val().replace(/^\s+|\s+$/g, '')) {
+										if (search === $input.val().trim()) {
 											ms.values.search = search;
 											loadAvailable($obj);
 											showAvailable($obj);
@@ -933,6 +937,9 @@ jQuery(function($) {
 		$obj.parents().add(window).one('scroll', hide_handler);
 		$(window).one('resize', hide_handler);
 
+		// For auto-test purposes.
+		$available.attr('data-opener', $obj.attr('id'));
+
 		var obj_offset = $obj.offset(),
 			obj_padding_y = $obj.outerHeight() - $obj.height(),
 			// Subtract 1px for borders of the input and available container to overlap.
@@ -998,7 +1005,9 @@ jQuery(function($) {
 		$obj.parents().add(window).off('scroll', hide_handler);
 		$(window).off('resize', hide_handler);
 
-		$available.removeData(['obj', 'hide_handler']);
+		$available
+			.removeData(['obj', 'hide_handler'])
+			.removeAttr('data-opener');
 	}
 
 	function cleanAvailable($obj) {
@@ -1092,8 +1101,8 @@ jQuery(function($) {
 			$obj.removeClass('search-disabled')
 				.find('input[type="text"]')
 				.attr({
-					placeholder: ms.options.labels['type here to search'],
-					'aria-label': ($label.length ? $label.text() + '. ' : '') + ms.options.labels['type here to search'],
+					placeholder: ms.options.placeholder,
+					'aria-label': ($label.length ? $label.text() + '. ' : '') + ms.options.placeholder,
 					readonly: false
 				});
 		}
