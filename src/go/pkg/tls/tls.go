@@ -22,6 +22,8 @@ package tls
 /*
 #cgo CFLAGS: -I${SRCDIR}/../../../../include
 
+#cgo openssl LDFLAGS: -lssl -lcrypto
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

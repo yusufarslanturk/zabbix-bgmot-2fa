@@ -29,7 +29,6 @@ OBJS = \
 	
 CFLAGS := $(CFLAGS) -O2 -g -DUNICODE -DHAVE_STDINT_H=1 -I$(TOPDIR)\include -I$(TOPDIR)\build\win32\include -I$(TOPDIR)\build\mingw
 GOPATH := $(GOPATH);$(TOPDIR)\go
-CGO_CFLAGS := $(CGO_CFLAGS) $(CFLAGS) 
 TAGS :=
 
 ifeq ("$(ARCH)", "")
@@ -52,8 +51,6 @@ ifneq ("$(OPENSSL)", "")
 	ifneq (,$(wildcard $(OPENSSL)))
 		CFLAGS := $(CFLAGS) -I$(OPENSSL)\include
 		LDFLAGS := $(LDFLAGS) -L$(OPENSSL)\lib
-		CGO_CFLAGS := $(CGO_CFLAGS) -I$(OPENSSL)\include
-		CGO_LDFLAGS := $(CGO_LDFLAGS) -L$(OPENSSL)\lib
 		TAGS += openssl
 		OBJS += $(OUTPUTDIR)\tls_version.o
 	endif
@@ -62,9 +59,10 @@ endif
 ifneq ("$(PCRE)", "")
 	CFLAGS := $(CFLAGS) -I$(PCRE)\include
 	LDFLAGS := $(LDFLAGS) -L$(PCRE)\lib
-	CGO_CFLAGS := $(CGO_CFLAGS) -I$(PCRE)\include
-	CGO_LDFLAGS := $(CGO_LDFLAGS) -L$(PCRE)\lib
 endif
+
+CGO_CFLAGS += $(CFLAGS) 
+CGO_LDFLAGS += $(LDFLAGS) 
 
 all: $(TARGETBIN)
 
