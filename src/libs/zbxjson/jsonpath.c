@@ -2636,7 +2636,7 @@ void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_
 	{
 		macro_type = ZBX_JSONPATH_MACRO_CONTENTS_ALPHA_NUMERIC;
 
-		for (i = 0; i < strlen(*macro_value); i++)
+		for (i = 0; i < (int)strlen(*macro_value); i++)
 		{
 			if (0 == isalnum((*macro_value)[i]))
 			{
