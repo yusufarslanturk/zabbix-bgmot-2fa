@@ -55,8 +55,6 @@ class CControllerHostMacrosList extends CController {
 
 			// Remove empty new macro lines.
 			foreach ($macros as $idx => $macro) {
-				// TODO VM: remove 'hostmacroid' check. Otherwise it may keep fully empty rows.(Be carefull of ZBX-5071)
-				//			same applies to hosts.php, triggers.php
 				if (!array_key_exists('hostmacroid', $macro) && $macro['macro'] === '' && $macro['value'] === ''
 						&& $macro['description'] === '') {
 					unset($macros[$idx]);
@@ -74,7 +72,6 @@ class CControllerHostMacrosList extends CController {
 			$macros = array_values(order_macros($macros, 'macro'));
 		}
 
-		// TODO VM: in 'hostPrototypeForm' macro form also should be readonly.
 		if (!$macros && !$readonly) {
 			$macro = ['macro' => '', 'value' => '', 'description' => ''];
 			if ($show_inherited_macros) {

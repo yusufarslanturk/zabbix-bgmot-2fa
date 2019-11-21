@@ -669,7 +669,6 @@ elseif (hasRequest('form')) {
 		'templateid' => getRequest('templateid', 0),
 		'add_templates' => getRequest('add_templates', []),
 		'original_templates' => [],
-		'parent_templates' => [], // TODO VM: unused; remove
 		'tags' => $tags,
 		'show_inherited_macros' => getRequest('show_inherited_macros', 0),
 		'readonly' => false,
@@ -688,7 +687,6 @@ elseif (hasRequest('form')) {
 		]);
 		$data['dbTemplate'] = reset($dbTemplates);
 
-		$data['original_templates'] = []; // TODO VM: already defined as empty; remove it.
 		foreach ($data['dbTemplate']['parentTemplates'] as $parentTemplate) {
 			$data['original_templates'][$parentTemplate['templateid']] = $parentTemplate['templateid'];
 		}

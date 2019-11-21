@@ -389,7 +389,7 @@ if (hasRequest('form')) {
 		]);
 	}
 
-	// TODO VM: This should be in controller, not view, but but there should be a better place for it.
+	// TODO VM: This should be in controller, not view, but there should be a better place for it.
 	// macros
 	$data['macros'] = $data['parent_host']['macros'];
 	if ($data['show_inherited_macros']) {

@@ -221,8 +221,6 @@ if (!$data['readonly']) {
 			// Some rows may have been removed, but JS likes to create empty indexes. Avoid that by cleaning the array.
 			macros.clean(undefined);
 
-			// TODO VM: why on empty array values are not cleared?
-			// TODO VM: why on many values only one is remembered?
 			return macros;
 		}
 
@@ -398,10 +396,9 @@ if (!$data['readonly']) {
 
 							$container.empty().append(response.body);
 
-							// TODO VM: change to full PHP if
-							if (<?= (int) $data['readonly'] ?> == 0) {
+							<?php if (!$data['readonly']): ?>
 								processHostMacrosListTable(show_inherited_macros_value);
-							}
+							<?php endif ?>
 
 							// Display debug after loaded content if it is enabled for user.
 							if (typeof response.debug !== 'undefined') {

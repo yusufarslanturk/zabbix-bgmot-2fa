@@ -1184,8 +1184,7 @@ elseif (hasRequest('form')) {
 
 	// macros
 	if ($data['show_inherited_macros']) {
-		// TODO VM: this array is already merged below, maybe code should be rearranged.
-		// TODO VM: check for duplicates. And ake sure no entry is missed due to same keys.
+		// TODO VM: check for duplicates. And make sure no entry is missed due to same keys.
 		$data['macros'] = mergeInheritedMacros($data['macros'], getInheritedMacros(
 			array_merge($data['templates'], $data['add_templates'])
 		));
@@ -1193,7 +1192,6 @@ elseif (hasRequest('form')) {
 
 	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
 
-	// TODO VM: maybe this can be moved to hostmacros.lis.html.php? Unfortunately propper place most likely is controller after all.
 	if (!$data['macros'] && !$data['readonly']) {
 		$macro = ['macro' => '', 'value' => '', 'description' => ''];
 		if ($data['show_inherited_macros']) {
@@ -1278,11 +1276,10 @@ elseif (hasRequest('form')) {
 		}
 	}
 
-	// TODO VM: macros are shown for original templates without account, that some templates may have be deleted. (in all files)
 	// This data is used in common.template.edit.js.php.
 	$data['macros_tab'] = [
 		'add_templates' => array_map('strval', array_keys($data['add_templates'])),
-		'linked_templates' => array_map('strval', $data['templates']) // TODO VM: change to $data['linked_templates']
+		'linked_templates' => array_map('strval', array_keys($data['linked_templates']))
 	];
 
 	$hostView = new CView('configuration.host.edit', $data);
