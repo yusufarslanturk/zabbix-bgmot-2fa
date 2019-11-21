@@ -43,6 +43,15 @@ typedef struct
 }
 zbx_jsonpath_token_def_t;
 
+typedef enum
+{
+	ZBX_JSONPATH_MACRO_CONTENTS_EMPTY,
+	ZBX_JSONPATH_MACRO_CONTENTS_NUMBER,
+	ZBX_JSONPATH_MACRO_CONTENTS_ALPHA_NUMERIC,
+	ZBX_JSONPATH_MACRO_CONTENTS_SPECIAL
+}
+zbx_jsonpath_macro_contents_t;
+
 /* define token groups and precedence */
 static zbx_jsonpath_token_def_t	jsonpath_tokens[] = {
 	{0, 0},
@@ -678,7 +687,7 @@ static int	jsonpath_parse_expression(const char *expression, zbx_jsonpath_t *jso
 	zbx_jsonpath_token_t		*optoken;
 	zbx_vector_ptr_t		output, operators;
 	zbx_strloc_t			loc = {0, 0};
-	zbx_jsonpath_token_type_t	token_type;
+	zbx_jsonpath_token_type_t	token_type = ZBX_JSONPATH_TOKEN_PATH_ABSOLUTE;
 	zbx_jsonpath_token_group_t	prev_group = ZBX_JSONPATH_TOKEN_GROUP_NONE;
 
 	if ('(' != *expression)
@@ -2461,7 +2470,7 @@ void	zbx_jsonpath_clear(zbx_jsonpath_t *jsonpath)
 int	zbx_jsonpath_compile(const char *path, zbx_jsonpath_t *jsonpath)
 {
 	int				ret = FAIL;
-	const char			*ptr = path, *next;
+	const char			*ptr = path, *next = path + 1;
 	zbx_jsonpath_segment_type_t	segment_type, last_segment_type = ZBX_JSONPATH_SEGMENT_UNKNOWN;
 	zbx_jsonpath_t			jpquery;
 
@@ -2606,105 +2615,111 @@ int	zbx_jsonpath_query(const struct zbx_json_parse *jp, const char *path, char *
  *             macro_value - [IN/OUT] macro value with escaping               *
  *                                                                            *
  ******************************************************************************/
-void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_end, char **replace_to)
+void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_end, char **macro_value)
 {
-	char	prev_character = '\0', next_character = '\0', quote = '\0', esc = 0;
-	int	offset, i;
+	char	prev_character = '\0', quote = '\0', esc = 0, in_expression = 0;
+	int	i;
+	zbx_jsonpath_macro_contents_t	macro_type;
 
 	if (0 == macro_start && '\0' == path[macro_end])
-		return; /* macro is the only part of statement - keep as-is */
+		return;	/* macro is the only part of statement - keep as-is */
 
-	if (FAIL != is_double(*replace_to))
-		return; /* nothing to escape for number */
-
-	/* get previous and next characters from the expression ignoring whitespaces */
-	for (offset = macro_start - 1; 0 < offset; offset--)
+	if (0 == strlen(*macro_value))
 	{
-		if (!isspace(path[offset]))
-		{
-			prev_character = path[offset];
-			break;
-		}
+		macro_type = ZBX_JSONPATH_MACRO_CONTENTS_EMPTY;
 	}
-	for (offset = macro_end; '\0' != path[offset]; offset++)
+	else if (FAIL != is_double(*macro_value))
 	{
-		if (!isspace(path[offset]))
+		macro_type = ZBX_JSONPATH_MACRO_CONTENTS_NUMBER;
+	}
+	else
+	{
+		macro_type = ZBX_JSONPATH_MACRO_CONTENTS_ALPHA_NUMERIC;
+
+		for (i = 0; i < strlen(*macro_value); i++)
 		{
-			next_character = path[offset];
-			break;
+			if (0 == isalnum((*macro_value)[i]))
+			{
+				macro_type = ZBX_JSONPATH_MACRO_CONTENTS_SPECIAL;
+				break;
+			}
 		}
 	}
 
 	for (i = 0; '\0' != path[i]; i++)
 	{
-		if (i == macro_start)
+		if (i == macro_start) /* macro substitution point reached */
 		{
-			const char *escape_caharacters = "\\";
+			const char *escape_characters = "\'\\";
+
+			if ('$' == prev_character )	/* ${#M}.id */
+			{
+				if (ZBX_JSONPATH_MACRO_CONTENTS_NUMBER == macro_type)
+					jsonpath_dyn_escape_string(macro_value, "", "[", "]");
+				else if (ZBX_JSONPATH_MACRO_CONTENTS_ALPHA_NUMERIC == macro_type ||
+						ZBX_JSONPATH_MACRO_CONTENTS_SPECIAL == macro_type)
+					jsonpath_dyn_escape_string(macro_value, escape_characters, "['", "']");
+
+				break;
+			}
+
+			if ('.' == prev_character)	/* $.{#M}.id */
+			{
+				if (ZBX_JSONPATH_MACRO_CONTENTS_NUMBER == macro_type)
+					jsonpath_dyn_escape_string(macro_value, "", "[", "]");
+				else if (ZBX_JSONPATH_MACRO_CONTENTS_SPECIAL == macro_type)
+					jsonpath_dyn_escape_string(macro_value, escape_characters, "['", "']");
+
+				break;
+			}
+
+			/* $.[{#M}] or $..book[?({#M}==@.category)] */
+			if ('[' == prev_character || 0 < in_expression)
+			{
+				if (ZBX_JSONPATH_MACRO_CONTENTS_NUMBER != macro_type)
+					jsonpath_dyn_escape_string(macro_value, escape_characters, "'", "'");
+
+				break;
+			}
 
 			if ('\0' != quote)
 			{
 				/* macro is inside quoted statement */
-				escape_caharacters = '\'' == quote ? "\\\'" : "\\\"";
-			}
-			else
-			{
-				if ('[' == prev_character && ']' == next_character)
-				{
-					/* if macro is inside square brackets - value is quoted and escaped */
-					jsonpath_dyn_escape_string(replace_to, "\\\'", "\'", "\'");
-					break;
-				}
-
-				/* if macro has non-alphanumeric characters, */
-				/* enclose quoted escaped macro value in square brackets */
-				esc = 0;
-
-				for (i = 0; i < strlen(*replace_to); i++)
-				{
-					if (0 == isalnum((*replace_to)[i]))
-					{
-						esc = 1;
-						break;
-					}
-				}
-
-				if (0 != esc)
-				{
-					if ('.' == prev_character || ']' == prev_character)
-						jsonpath_dyn_escape_string(replace_to, "\\\'",
-								"[\'", "\']");
-					else
-						jsonpath_dyn_escape_string(replace_to, "\\\'",
-								"\'", "\'");
-					break;
-				}
+				escape_characters = '\'' == quote ? "\\\'" : "\\\"";
 			}
 
-			jsonpath_dyn_escape_string(replace_to, escape_caharacters, NULL, NULL);
+			jsonpath_dyn_escape_string(macro_value, escape_characters, NULL, NULL);
 			break;
 		}
+
+		if (!isspace(path[i]))
+			prev_character = path[i];
 
 		if (0 < i && '\\' != path[i-1])
 		{
 			if ('\\' == path[i])
 			{
-				esc = 1; /* next character escaping */
+				esc = 1;	/* next character escaping */
 				continue;
 			}
 			else
-				esc = 0; /* escape only one character next to backslash */
+				esc = 0;	/* escape only one character next to backslash */
 		}
 
-		if ('\'' == path[i] || '\"' == path[i])
+		if (0 == esc && ('\'' == path[i] || '\"' == path[i]))	/* ignore escaped quotes */
 		{
-			if (0 == esc)
-			{
-				/* ignore escaped quotes */
-				if ('\0' == quote)
-					quote = path[i]; /* beginning of quoted part */
-				else
-					quote = '\0'; /* end of quoted part */
-			}
+			if ('\0' == quote)
+				quote = path[i];	/* beginning of quoted part */
+			else
+				quote = '\0';	/* end of quoted part */
+		}
+
+		if ('\0' == quote)	/* macro might be substituted in nested expressions */
+		{
+			if ('(' == path[i])
+				in_expression++;
+			else if (')' == path[i])
+				in_expression--;
 		}
 	}
 }

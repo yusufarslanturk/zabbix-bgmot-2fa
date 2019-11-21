@@ -6,61 +6,12 @@ in:
 out:
   result: '$.a.b.c'
 ---
-test case: macro backslashes
+test case: macro at the beginning of expression
 in:
-  path: '$.a.{#M}.c'
-  value: '\'
+  path: '{#M}.id'
+  value: '$.a'
 out:
-  result: '$.a.[''\\''].c'
----
-test case: macro quotes
-in:
-  path: '$.a.{#M}.c'
-  value: '"'
-out:
-  result: '$.a.[''"''].c'
----
-test case: number substitution as index
-in:
-  path: '$.[{#M}].id'
-  value: '1'
-out:
-  result: '$.[1].id'
----
-test case: number substitution in expression
-in:
-  path: '$..book[?(@.price < {#M})]'
-  value: '15.05'
-out:
-  result: '$..book[?(@.price < 15.05)]'
----
-test case: element name in square brackets
-in:
-  path: '$.[{#M}]'
-  value: 'name'
-out:
-  result: '$.[''name'']'
----
-test case: quoted element name in square brackets
-in:
-  path: '$.[{#M}]'
-  value: '''name'''
-out:
-  result: '$.[''\''name\'''']'
----
-test case: element name with escape sequences in square brackets
-in:
-  path: '$.[{#M}]'
-  value: 'lorem\ipsum'
-out:
-  result: '$.[''lorem\\ipsum'']'
----
-test case: element name with special characters in square brackets
-in:
-  path: '$.[{#M}]'
-  value: 'lorem_ipsum'
-out:
-  result: '$.[''lorem_ipsum'']'
+  result: '$.a.id'
 ---
 test case: macro as index expression
 in:
@@ -69,66 +20,549 @@ in:
 out:
   result: '$.[''[1]''].id'
 ---
-test case: asterisk macro
+test case: macro between dots $.{#M}.test
 in:
-  path: '$.{#M}.value'
-  value: '*'
+  path: '$.{#M}.id'
+  value: '[1]'
 out:
-  result: '$.[''*''].value'
+  result: '$.[''[1]''].id'
 ---
-test case: macro asterisk in square brackets
+test case: macro (<empty>) between dots $.{#M}.id
 in:
-  path: '$.[{#M}].name'
-  value: '*'
+  path: '$.{#M}.id'
+  value: ''
 out:
-  result: '$.[''*''].name'
+  result: '$..id'
 ---
-test case: path in macro
+test case: macro (a) between dots $.{#M}.id
+in:
+  path: '$.{#M}.id'
+  value: 'a'
+out:
+  result: '$.a.id'
+---
+test case: macro (a.b.c) between dots $.{#M}.id
 in:
   path: '$.{#M}.id'
   value: 'a.b.c'
 out:
   result: '$.[''a.b.c''].id'
 ---
-test case: path without special characters
+test case: macro ('a.b.c') between dots $.{#M}.id
 in:
   path: '$.{#M}.id'
-  value: 'test'
+  value: '''a.b.c'''
 out:
-  result: '$.test.id'
+  result: '$.[''\''a.b.c\''''].id'
 ---
-test case: path with special characters
+test case: macro ("a.b.c") between dots $.{#M}.id
 in:
   path: '$.{#M}.id'
-  value: 'path.with\special.characters'
+  value: '"a.b.c"'
 out:
-  result: '$.[''path.with\\special.characters''].id'
+  result: '$.[''"a.b.c"''].id'
 ---
-test case: path with double quote
+test case: macro (a'c) between dots $.{#M}.id
 in:
   path: '$.{#M}.id'
-  value: 'lorem"ipsum'
+  value: 'a''c'
 out:
-  result: '$.[''lorem"ipsum''].id'
+  result: '$.[''a\''c''].id'
 ---
-test case: macro in the middle of string
+test case: macro (*) between dots $.{#M}.id
 in:
-  path: '$.[''a\''b''][''_{#M}_'']'
-  value: 'special\-''name'''
+  path: '$.{#M}.id'
+  value: '*'
 out:
-  result: '$.[''a\''b''][''_special\\-\''name\''_'']'
+  result: '$.[''*''].id'
 ---
-test case: macro in the middle of string double quotes
+test case: macro (\) between dots $.{#M}.id
 in:
-  path: '$.[''a\''b''][''_{#M}_'']'
-  value: 'special\-"name"'
+  path: '$.{#M}.id'
+  value: '\'
 out:
-  result: '$.[''a\''b''][''_special\\-"name"_'']'
+  result: '$.[''\\''].id'
 ---
-test case: macro in expression
+test case: macro (5) between dots $.{#M}.id
 in:
-  path: '$.[?(@.name == {#M})].id.first()'
-  value: 'special\-"name"'
+  path: '$.{#M}.id'
+  value: '5'
 out:
-  result: '$.[?(@.name == ''special\\-"name"'')].id.first()'
+  result: '$.[5].id'
+---
+test case: macro (a) in expression after dot $..book[?(@.{#M}<10)]
+in:
+  path: '$..book[?(@.{#M}<10)]'
+  value: 'a'
+out:
+  result: '$..book[?(@.a<10)]'
+---
+test case: macro (a.b.c) in expression after dot $..book[?(@.{#M}<10)]
+in:
+  path: '$..book[?(@.{#M}<10)]'
+  value: 'a.b.c'
+out:
+  result: '$..book[?(@.[''a.b.c'']<10)]'
+---
+test case: macro ('a.b.c') in expression after dot $..book[?(@.{#M}<10)]
+in:
+  path: '$..book[?(@.{#M}<10)]'
+  value: '''a.b.c'''
+out:
+  result: '$..book[?(@.[''\''a.b.c\'''']<10)]'
+---
+test case: macro ("a.b.c") in expression after dot $..book[?(@.{#M}<10)]
+in:
+  path: '$..book[?(@.{#M}<10)]'
+  value: '"a.b.c"'
+out:
+  result: '$..book[?(@.[''"a.b.c"'']<10)]'
+---
+test case: macro (a'c) in expression after dot $..book[?(@.{#M}<10)]
+in:
+  path: '$..book[?(@.{#M}<10)]'
+  value: 'a''c'
+out:
+  result: '$..book[?(@.[''a\''c'']<10)]'
+---
+test case: macro (*) in expression after dot $..book[?(@.{#M}<10)]
+in:
+  path: '$..book[?(@.{#M}<10)]'
+  value: '*'
+out:
+  result: '$..book[?(@.[''*'']<10)]'
+---
+test case: macro (\) in expression after dot $..book[?(@.{#M}<10)]
+in:
+  path: '$..book[?(@.{#M}<10)]'
+  value: '\'
+out:
+  result: '$..book[?(@.[''\\'']<10)]'
+---
+test case: macro (5) in expression after dot $..book[?(@.{#M}<10)]
+in:
+  path: '$..book[?(@.{#M}<10)]'
+  value: '5'
+out:
+  result: '$..book[?(@.[5]<10)]'
+---
+test case: macro (<empty>) after square bracket $.[{#M}]
+in:
+  path: '$.[{#M}]'
+  value: ''
+out:
+  result: '$.['''']'
+---
+test case: macro (a) after square bracket $.[{#M}]
+in:
+  path: '$.[{#M}]'
+  value: 'a'
+out:
+  result: '$.[''a'']'
+---
+test case: macro (a.b.c) after square bracket $.[{#M}]
+in:
+  path: '$.[{#M}]'
+  value: 'a.b.c'
+out:
+  result: '$.[''a.b.c'']'
+---
+test case: macro ('a.b.c') after square bracket $.[{#M}]
+in:
+  path: '$.[{#M}]'
+  value: '''a.b.c'''
+out:
+  result: '$.[''\''a.b.c\'''']'
+---
+test case: macro ("a.b.c") after square bracket $.[{#M}]
+in:
+  path: '$.[{#M}]'
+  value: '"a.b.c"'
+out:
+  result: '$.[''"a.b.c"'']'
+---
+test case: macro (a’c) after square bracket $.[{#M}]
+in:
+  path: '$.[{#M}]'
+  value: 'a''c'
+out:
+  result: '$.[''a\''c'']'
+---
+test case: macro (*) after square bracket $.[{#M}]
+in:
+  path: '$.[{#M}]'
+  value: '*'
+out:
+  result: '$.[''*'']'
+---
+test case: macro (a\b) after square bracket $.[{#M}]
+in:
+  path: '$.[{#M}]'
+  value: 'a\b'
+out:
+  result: '$.[''a\\b'']'
+---
+test case: macro (5) after square bracket $.[{#M}]
+in:
+  path: '$.[{#M}]'
+  value: '5'
+out:
+  result: '$.[5]'
+---
+test case: macro (a) after square bracket $..book[?({#M}==@.category)]
+in:
+  path: '$..book[?({#M}==@.category)]'
+  value: 'a'
+out:
+  result: '$..book[?(''a''==@.category)]'
+---
+test case: macro (a.b.c) after square bracket $..book[?({#M}==@.category)]
+in:
+  path: '$..book[?({#M}==@.category)]'
+  value: 'a.b.c'
+out:
+  result: '$..book[?(''a.b.c''==@.category)]'
+---
+test case: macro ('a.b.c') after square bracket $..book[?({#M}==@.category)]
+in:
+  path: '$..book[?({#M}==@.category)]'
+  value: '''a.b.c'''
+out:
+  result: '$..book[?(''\''a.b.c\''''==@.category)]'
+---
+test case: macro ("a.b.c") after square bracket $..book[?({#M}==@.category)]
+in:
+  path: '$..book[?({#M}==@.category)]'
+  value: '"a.b.c"'
+out:
+  result: '$..book[?(''"a.b.c"''==@.category)]'
+---
+test case: macro (a'c) after square bracket $..book[?({#M}==@.category)]
+in:
+  path: '$..book[?({#M}==@.category)]'
+  value: 'a''c'
+out:
+  result: '$..book[?(''a\''c''==@.category)]'
+---
+test case: macro (*) after square bracket $..book[?({#M}==@.category)]
+in:
+  path: '$..book[?({#M}==@.category)]'
+  value: '*'
+out:
+  result: '$..book[?(''*''==@.category)]'
+---
+test case: macro (\) after square bracket $..book[?({#M}==@.category)]
+in:
+  path: '$..book[?({#M}==@.category)]'
+  value: '\'
+out:
+  result: '$..book[?(''\\''==@.category)]'
+---
+test case: macro (5) after square bracket $..book[?({#M}==@.category)]
+in:
+  path: '$..book[?({#M}==@.category)]'
+  value: '5'
+out:
+  result: '$..book[?(5==@.category)]'
+---
+test case: macro (a) in expression right operand $..book[?(@.category=={#M})]
+in:
+  path: '$..book[?(@.category=={#M})]'
+  value: 'a'
+out:
+  result: '$..book[?(@.category==''a'')]'
+---
+test case: macro (a.b.c) in expression right operand $..book[?(@.category=={#M})]
+in:
+  path: '$..book[?(@.category=={#M})]'
+  value: 'a.b.c'
+out:
+  result: '$..book[?(@.category==''a.b.c'')]'
+---
+test case: macro ('a.b.c') in expression right operand $..book[?(@.category=={#M})]
+in:
+  path: '$..book[?(@.category=={#M})]'
+  value: '''a.b.c'''
+out:
+  result: '$..book[?(@.category==''\''a.b.c\'''')]'
+---
+test case: macro ("a.b.c") in expression right operand $..book[?(@.category=={#M})]
+in:
+  path: '$..book[?(@.category=={#M})]'
+  value: '"a.b.c"'
+out:
+  result: '$..book[?(@.category==''"a.b.c"'')]'
+---
+test case: macro (a'c) in expression right operand $..book[?(@.category=={#M})]
+in:
+  path: '$..book[?(@.category=={#M})]'
+  value: 'a''c'
+out:
+  result: '$..book[?(@.category==''a\''c'')]'
+---
+test case: macro (*) in expression right operand $..book[?(@.category=={#M})]
+in:
+  path: '$..book[?(@.category=={#M})]'
+  value: '*'
+out:
+  result: '$..book[?(@.category==''*'')]'
+---
+test case: macro (\) in expression right operand $..book[?(@.category=={#M})]
+in:
+  path: '$..book[?(@.category=={#M})]'
+  value: '\'
+out:
+  result: '$..book[?(@.category==''\\'')]'
+---
+test case: macro (5) in expression right operand $..book[?(@.category=={#M})]
+in:
+  path: '$..book[?(@.category=={#M})]'
+  value: '5'
+out:
+  result: '$..book[?(@.category==5)]'
+---
+test case: macro (a) in expression right operand $..book[?(@.a < {#M})]
+in:
+  path: '$..book[?(@.a < {#M})]'
+  value: 'a'
+out:
+  result: '$..book[?(@.a < ''a'')]'
+---
+test case: macro (a.b.c) in expression right operand $..book[?(@.a < {#M})]
+in:
+  path: '$..book[?(@.a < {#M})]'
+  value: 'a.b.c'
+out:
+  result: '$..book[?(@.a < ''a.b.c'')]'
+---
+test case: macro ('a.b.c') in expression right operand $..book[?(@.a < {#M})]
+in:
+  path: '$..book[?(@.a < {#M})]'
+  value: '''a.b.c'''
+out:
+  result: '$..book[?(@.a < ''\''a.b.c\'''')]'
+---
+test case: macro ("a.b.c") in expression right operand $..book[?(@.a < {#M})]
+in:
+  path: '$..book[?(@.a < {#M})]'
+  value: '"a.b.c"'
+out:
+  result: '$..book[?(@.a < ''"a.b.c"'')]'
+---
+test case: macro (a'c) in expression right operand $..book[?(@.a < {#M})]
+in:
+  path: '$..book[?(@.a < {#M})]'
+  value: 'a''c'
+out:
+  result: '$..book[?(@.a < ''a\''c'')]'
+---
+test case: macro (*) in expression right operand $..book[?(@.a < {#M})]
+in:
+  path: '$..book[?(@.a < {#M})]'
+  value: '*'
+out:
+  result: '$..book[?(@.a < ''*'')]'
+---
+test case: macro (a\b) in expression right operand $..book[?(@.a < {#M})]
+in:
+  path: '$..book[?(@.a < {#M})]'
+  value: 'a\b'
+out:
+  result: '$..book[?(@.a < ''a\\b'')]'
+---
+test case: macro (5) in expression right operand $..book[?(@.a < {#M})]
+in:
+  path: '$..book[?(@.a < {#M})]'
+  value: '5'
+out:
+  result: '$..book[?(@.a < 5)]'
+---
+test case: macro (5) in expression right operand $..book[(@.length-{#M})]
+in:
+  path: '$..book[(@.length-{#M})]'
+  value: '5'
+out:
+  result: '$..book[(@.length-5)]'
+---
+test case: macro (<empty>) in quoted string $.['_{#M}_']
+in:
+  path: '$.[''_{#M}_'']'
+  value: ''
+out:
+  result: '$.[''__'']'
+---
+test case: macro (a) in quoted string $.['_{#M}_']
+in:
+  path: '$.[''_{#M}_'']'
+  value: 'a'
+out:
+  result: '$.[''_a_'']'
+---
+test case: macro (a.b.c) in quoted string $.['_{#M}_']
+in:
+  path: '$.[''_{#M}_'']'
+  value: 'a.b.c'
+out:
+  result: '$.[''_a.b.c_'']'
+---
+test case: macro ('a.b.c') in quoted string $.['_{#M}_']
+in:
+  path: '$.[''_{#M}_'']'
+  value: '''a.b.c'''
+out:
+  result: '$.[''_\''a.b.c\''_'']'
+---
+test case: macro ("a.b.c") in quoted string $.['_{#M}_']
+in:
+  path: '$.[''_{#M}_'']'
+  value: '"a.b.c"'
+out:
+  result: '$.[''_"a.b.c"_'']'
+---
+test case: macro (a'c) in quoted string $.['_{#M}_']
+in:
+  path: '$.[''_{#M}_'']'
+  value: 'a''c'
+out:
+  result: '$.[''_a\''c_'']'
+---
+test case: macro (*) in quoted string $.['_{#M}_']
+in:
+  path: '$.[''_{#M}_'']'
+  value: '*'
+out:
+  result: '$.[''_*_'']'
+---
+test case: macro (a\b) in quoted string $.['_{#M}_']
+in:
+  path: '$.[''_{#M}_'']'
+  value: 'a\b'
+out:
+  result: '$.[''_a\\b_'']'
+---
+test case: macro (5) in quoted string $.['_{#M}_']
+in:
+  path: '$.[''_{#M}_'']'
+  value: '5'
+out:
+  result: '$.[''_5_'']'
+---
+test case: macro (<empty>) in quoted string $.["_{#M}_"]
+in:
+  path: '$.["_{#M}_"]'
+  value: ''
+out:
+  result: '$.["__"]'
+---
+test case: macro (a) in quoted string $.["_{#M}_"]
+in:
+  path: '$.["_{#M}_"]'
+  value: 'a'
+out:
+  result: '$.["_a_"]'
+---
+test case: macro (a.b.c) in quoted string $.["_{#M}_"]
+in:
+  path: '$.["_{#M}_"]'
+  value: 'a.b.c'
+out:
+  result: '$.["_a.b.c_"]'
+---
+test case: macro ('a.b.c') in quoted string $.["_{#M}_"]
+in:
+  path: '$.["_{#M}_"]'
+  value: '''a.b.c'''
+out:
+  result: '$.["_''a.b.c''_"]'
+---
+test case: macro ("a.b.c") in quoted string $.["_{#M}_"]
+in:
+  path: '$.["_{#M}_"]'
+  value: '"a.b.c"'
+out:
+  result: '$.["_\"a.b.c\"_"]'
+---
+test case: macro (a'c) in quoted string $.["_{#M}_"]
+in:
+  path: '$.["_{#M}_"]'
+  value: 'a''c'
+out:
+  result: '$.["_a''c_"]'
+---
+test case: macro (*) in quoted string $.["_{#M}_"]
+in:
+  path: '$.["_{#M}_"]'
+  value: '*'
+out:
+  result: '$.["_*_"]'
+---
+test case: macro (a\b) in quoted string $.["_{#M}_"]
+in:
+  path: '$.["_{#M}_"]'
+  value: 'a\b'
+out:
+  result: '$.["_a\\b_"]'
+---
+test case: macro (5) in quoted string $.["_{#M}_"]
+in:
+  path: '$.["_{#M}_"]'
+  value: '5'
+out:
+  result: '$.["_5_"]'
+---
+test case: macro (a) at statement beginning ${#M}
+in:
+  path: '${#M}'
+  value: 'a'
+out:
+  result: '$[''a'']'
+---
+test case: macro (a.b.c) at statement beginning ${#M}
+in:
+  path: '${#M}'
+  value: 'a.b.c'
+out:
+  result: '$[''a.b.c'']'
+---
+test case: macro ('a.b.c') at statement beginning ${#M}
+in:
+  path: '${#M}'
+  value: '''a.b.c'''
+out:
+  result: '$[''\''a.b.c\'''']'
+---
+test case: macro ("a.b.c") at statement beginning ${#M}
+in:
+  path: '${#M}'
+  value: '"a.b.c"'
+out:
+  result: '$[''"a.b.c"'']'
+---
+test case: macro (a'c) at statement beginning ${#M}
+in:
+  path: '${#M}'
+  value: 'a''c'
+out:
+  result: '$[''a\''c'']'
+---
+test case: macro (*) at statement beginning ${#M}
+in:
+  path: '${#M}'
+  value: '*'
+out:
+  result: '$[''*'']'
+---
+test case: macro (a\b) at statement beginning ${#M}
+in:
+  path: '${#M}'
+  value: 'a\b'
+out:
+  result: '$[''a\\b'']'
+---
+test case: macro (5) at statement beginning ${#M}
+in:
+  path: '${#M}'
+  value: '5'
+out:
+  result: '$[5]'
 ...
