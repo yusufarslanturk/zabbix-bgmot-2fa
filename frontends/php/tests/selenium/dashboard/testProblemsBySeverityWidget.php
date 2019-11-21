@@ -24,7 +24,6 @@ require_once dirname(__FILE__).'/../../include/CWebTest.php';
  * @backup widget
  * @backup profiles
  */
-
 class testProblemsBySeverityWidget extends CWebTest {
 
 	/*
@@ -140,7 +139,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 						'Type' => 'Problems by severity',
 						'Name' => 'Show only "Zabbix servers" and "Another group to check Overview" problems',
 						'Host groups' => ['Zabbix servers', 'Another group to check Overview'],
-						'Show operational data' => 'With problem name',
+						'Show operational data' => 'With problem name'
 					],
 					'expected' => [
 						'Another group to check Overview' => [
@@ -863,10 +862,10 @@ class testProblemsBySeverityWidget extends CWebTest {
 
 		$this->checkDashboardUpdateMessage();
 
-		if ((CTestArrayHelper::get($data, 'widget to update', 'Reference widget') === 'Reference widget' &&
-				CTestArrayHelper::get($data['fields'], 'Show', 'Host groups') === 'Host groups')||
-				(CTestArrayHelper::get($data, 'widget to update', 'Reference widget') === 'Totals reference widget' &&
-				CTestArrayHelper::get($data['fields'], 'Show', 'Totals') === 'Host groups')) {
+		if ((CTestArrayHelper::get($data, 'widget to update', 'Reference widget') === 'Reference widget'
+				&& CTestArrayHelper::get($data['fields'], 'Show', 'Host groups') === 'Host groups')
+				|| (CTestArrayHelper::get($data, 'widget to update', 'Reference widget') === 'Totals reference widget'
+				&& CTestArrayHelper::get($data['fields'], 'Show', 'Totals') === 'Host groups')) {
 			$this->checkWidgetContent($data, $widget);
 			if (CTestArrayHelper::get($data, 'check pop-up', false)) {
 				$this->verifyPopupContent($data, $widget, 'Host groups');
@@ -1000,7 +999,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			$this->assertTrue($dashboard->query('xpath:.//div[contains(@class, "dashbrd-grid-widget-head")]/h4[text()='.
 					CXPathHelper::escapeQuotes($name).']')->count() === 0);
 			$widget_sql = 'SELECT * FROM widget_field wf LEFT JOIN widget w ON w.widgetid=wf.widgetid'.
-				' WHERE w.name = '.zbx_dbstr($name);
+					' WHERE w.name='.zbx_dbstr($name);
 			$this->assertEquals(0, CDBHelper::getCount($widget_sql));
 		}
 	}
@@ -1084,8 +1083,8 @@ class testProblemsBySeverityWidget extends CWebTest {
 		}
 
 		// Check that only selected host groups are returned when 'Hide groups without values', 'Host groups' or 'Hosts' are specified.
-		if (CTestArrayHelper::get($data['fields'], 'Hide groups without problems', false) ||
-				array_key_exists('Host groups', $data['fields']) || array_key_exists('Hosts', $data['fields'])) {
+		if (CTestArrayHelper::get($data['fields'], 'Hide groups without problems', false)
+				|| array_key_exists('Host groups', $data['fields']) || array_key_exists('Hosts', $data['fields'])) {
 			$this->assertEquals(count($expected), count($content));
 		}
 
@@ -1106,8 +1105,6 @@ class testProblemsBySeverityWidget extends CWebTest {
 	}
 
 	private function checkTotalsWidgetContent($data, $widget) {
-		$content = $widget->getContent()->asTable();
-
 		// Verify that layout is correct.
 		if (CTestArrayHelper::get($data['fields'], 'Layout', 'Horizontal') === 'Horizontal') {
 			$this->assertEquals($widget->query('class:totals-list-horizontal')->count(), 1);
@@ -1137,7 +1134,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			$results[$key] = $widget->query($xpath)->one()->getText();
 		}
 
-		foreach ($results  as $severity => $value ) {
+		foreach ($results as $severity => $value) {
 			if (array_key_exists($severity, $data['expected'])) {
 				$this->assertEquals($data['expected'][$severity], $value);
 			}
