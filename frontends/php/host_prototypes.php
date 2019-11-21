@@ -389,13 +389,12 @@ if (hasRequest('form')) {
 		]);
 	}
 
-	// TODO VM: This should be in controller, not view, but there should be a better place for it.
 	// macros
 	$data['macros'] = $data['parent_host']['macros'];
 	if ($data['show_inherited_macros']) {
 		$macros = mergeInheritedMacros($data['macros'],getInheritedMacros($templateids));
 	}
-	// TODO VM: why it it here, but not in other controllers? (it was moved form original view of prototype)
+	// TODO VM: why it is here, but not in other controllers? (it was moved form original view of prototype)
 	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
 
 	// This data is used in common.template.edit.js.php.
