@@ -58,15 +58,13 @@ class CFormList extends CList {
 			$this->addItem([
 				(new CDiv(SPACE))->addClass(ZBX_STYLE_TABLE_FORMS_TD_LEFT),
 				(new CDiv($label))->addClass(ZBX_STYLE_TABLE_FORMS_TD_RIGHT)],
-				$class, $id
-			);
+				$class, $id);
 		}
 		else {
 			$this->addItem([
 				(new CDiv($label))->addClass(ZBX_STYLE_TABLE_FORMS_TD_LEFT),
 				(new CDiv($description))->addClass(ZBX_STYLE_TABLE_FORMS_TD_RIGHT)],
-				$class, $id
-			);
+				$class, $id);
 		}
 
 		return $this;
