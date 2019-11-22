@@ -1052,6 +1052,7 @@ char	*zbx_dyn_escape_string(const char *src, const char *charlist)
 	char	*d, *dst = NULL;
 
 	sz = zbx_get_escape_string_len(src, charlist) + 1;
+
 	dst = (char *)zbx_malloc(dst, sz);
 
 	for (d = dst; '\0' != *src; src++)

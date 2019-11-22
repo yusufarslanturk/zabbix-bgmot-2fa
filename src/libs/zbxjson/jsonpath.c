@@ -46,7 +46,8 @@ zbx_jsonpath_token_def_t;
 typedef enum
 {
 	ZBX_JSONPATH_MACRO_CONTENTS_EMPTY,
-	ZBX_JSONPATH_MACRO_CONTENTS_NUMBER,
+	ZBX_JSONPATH_MACRO_CONTENTS_INT,
+	ZBX_JSONPATH_MACRO_CONTENTS_FLOAT,
 	ZBX_JSONPATH_MACRO_CONTENTS_ALPHA_NUMERIC,
 	ZBX_JSONPATH_MACRO_CONTENTS_SPECIAL
 }
@@ -2617,8 +2618,10 @@ int	zbx_jsonpath_query(const struct zbx_json_parse *jp, const char *path, char *
  ******************************************************************************/
 void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_end, char **macro_value)
 {
-	char	prev_character = '\0', quote = '\0', esc = 0, in_expression = 0;
-	int	i;
+	char				prev_character = '\0', quote = '\0', esc = 0, in_expression = 0;
+	const char			*escape_characters;
+	int				i;
+	zbx_uint64_t			num;
 	zbx_jsonpath_macro_contents_t	macro_type;
 
 	if (0 == macro_start && '\0' == path[macro_end])
@@ -2628,15 +2631,22 @@ void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_
 	{
 		macro_type = ZBX_JSONPATH_MACRO_CONTENTS_EMPTY;
 	}
-	else if (FAIL != is_double(*macro_value))
+	else if (SUCCEED == is_uint64((*macro_value), &num) ||
+			('-' == *macro_value[0] && SUCCEED == is_uint64((*macro_value)+1, &num)))
 	{
-		macro_type = ZBX_JSONPATH_MACRO_CONTENTS_NUMBER;
+		macro_type = ZBX_JSONPATH_MACRO_CONTENTS_INT;
+	}
+	else if (SUCCEED == jsonpath_parse_number(*macro_value, &i))
+	{
+		macro_type = ZBX_JSONPATH_MACRO_CONTENTS_FLOAT;
 	}
 	else
 	{
+		int len = (int)strlen(*macro_value);
+
 		macro_type = ZBX_JSONPATH_MACRO_CONTENTS_ALPHA_NUMERIC;
 
-		for (i = 0; i < (int)strlen(*macro_value); i++)
+		for (i = 0; i < len; i++)
 		{
 			if (0 == isalnum((*macro_value)[i]))
 			{
@@ -2648,16 +2658,47 @@ void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_
 
 	for (i = 0; '\0' != path[i]; i++)
 	{
-		if (i == macro_start) /* macro substitution point reached */
+		if (i != macro_start)
 		{
-			const char *escape_characters = '\"' == quote ? "\"\\" : "\'\\";
+			if (!isspace(path[i]))
+				prev_character = path[i];
 
-			if ('$' == prev_character )	/* ${#M}.id */
+			if (0 < i && '\\' != path[i-1])
 			{
-				if (ZBX_JSONPATH_MACRO_CONTENTS_NUMBER == macro_type)
+				if ('\\' == path[i])
+				{
+					esc = 1;	/* next character escaping */
+					continue;
+				}
+				else
+					esc = 0;	/* escape only one character next to backslash */
+			}
+
+			if (0 == esc && ('\'' == path[i] || '\"' == path[i]))	/* ignore escaped quotes */
+				quote = ('\0' == quote) ? path[i] : '\0';
+
+			if ('\0' == quote)	/* macro might be substituted in nested expressions */
+			{
+				if ('(' == path[i])
+					in_expression++;
+				else if (')' == path[i])
+					in_expression--;
+			}
+			continue;
+		}
+
+		/* macro substitution point reached */
+		escape_characters = '\"' == quote ? "\"\\" : "\'\\";
+
+		if ('\0' == quote)
+		{
+			if ('$' == prev_character)	/* ${#M}.id */
+			{
+				if (ZBX_JSONPATH_MACRO_CONTENTS_INT == macro_type)
 					jsonpath_dyn_escape_string(macro_value, "", "[", "]");
 				else if (ZBX_JSONPATH_MACRO_CONTENTS_ALPHA_NUMERIC == macro_type ||
-						ZBX_JSONPATH_MACRO_CONTENTS_SPECIAL == macro_type)
+						ZBX_JSONPATH_MACRO_CONTENTS_SPECIAL == macro_type ||
+						ZBX_JSONPATH_MACRO_CONTENTS_FLOAT == macro_type)
 					jsonpath_dyn_escape_string(macro_value, escape_characters, "['", "']");
 
 				break;
@@ -2665,69 +2706,34 @@ void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_
 
 			if ('.' == prev_character)	/* $.{#M}.id */
 			{
-				if (ZBX_JSONPATH_MACRO_CONTENTS_NUMBER == macro_type)
+				if (ZBX_JSONPATH_MACRO_CONTENTS_INT == macro_type)
 					jsonpath_dyn_escape_string(macro_value, "", "[", "]");
-				else if (ZBX_JSONPATH_MACRO_CONTENTS_SPECIAL == macro_type)
+				else if (ZBX_JSONPATH_MACRO_CONTENTS_SPECIAL == macro_type ||
+						ZBX_JSONPATH_MACRO_CONTENTS_FLOAT == macro_type)
 					jsonpath_dyn_escape_string(macro_value, escape_characters, "['", "']");
 
 				break;
 			}
 
-			/* $.[{#M}] */
-			if ('[' == prev_character)
+			if ('[' == prev_character)	/* $.[{#M}] */
 			{
-				if (ZBX_JSONPATH_MACRO_CONTENTS_NUMBER != macro_type)
+				if (ZBX_JSONPATH_MACRO_CONTENTS_INT != macro_type)
 					jsonpath_dyn_escape_string(macro_value, escape_characters, "'", "'");
 
 				break;
 			}
 
-			/* $..book[?('{#M}'==@.category)] */
-			if (0 < in_expression)
+			if (0 < in_expression)	/* $[?({#M} == 5)].id */
 			{
-				if (ZBX_JSONPATH_MACRO_CONTENTS_NUMBER != macro_type)
-				{
-					if (prev_character != quote)
-						jsonpath_dyn_escape_string(macro_value, escape_characters, "'", "'");
-					else
-						jsonpath_dyn_escape_string(macro_value, escape_characters, NULL, NULL);
-				}
+				if (ZBX_JSONPATH_MACRO_CONTENTS_INT != macro_type &&
+						ZBX_JSONPATH_MACRO_CONTENTS_FLOAT != macro_type)
+					jsonpath_dyn_escape_string(macro_value, escape_characters, "'", "'");
 
 				break;
 			}
-
-			jsonpath_dyn_escape_string(macro_value, escape_characters, NULL, NULL);
-			break;
 		}
 
-		if (!isspace(path[i]))
-			prev_character = path[i];
-
-		if (0 < i && '\\' != path[i-1])
-		{
-			if ('\\' == path[i])
-			{
-				esc = 1;	/* next character escaping */
-				continue;
-			}
-			else
-				esc = 0;	/* escape only one character next to backslash */
-		}
-
-		if (0 == esc && ('\'' == path[i] || '\"' == path[i]))	/* ignore escaped quotes */
-		{
-			if ('\0' == quote)
-				quote = path[i];	/* beginning of quoted part */
-			else
-				quote = '\0';	/* end of quoted part */
-		}
-
-		if ('\0' == quote)	/* macro might be substituted in nested expressions */
-		{
-			if ('(' == path[i])
-				in_expression++;
-			else if (')' == path[i])
-				in_expression--;
-		}
+		jsonpath_dyn_escape_string(macro_value, escape_characters, NULL, NULL);
+		break;
 	}
 }
