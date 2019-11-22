@@ -2650,7 +2650,7 @@ void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_
 	{
 		if (i == macro_start) /* macro substitution point reached */
 		{
-			const char *escape_characters = "\'\\";
+			const char *escape_characters = '\"' == quote ? "\"\\" : "\'\\";
 
 			if ('$' == prev_character )	/* ${#M}.id */
 			{
@@ -2673,8 +2673,8 @@ void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_
 				break;
 			}
 
-			/* $.[{#M}] or $..book[?({#M}==@.category)] */
-			if ('[' == prev_character || 0 < in_expression)
+			/* $.[{#M}] */
+			if ('[' == prev_character)
 			{
 				if (ZBX_JSONPATH_MACRO_CONTENTS_NUMBER != macro_type)
 					jsonpath_dyn_escape_string(macro_value, escape_characters, "'", "'");
@@ -2682,10 +2682,18 @@ void	zbx_jsonpath_substitute_macro(const char *path, int macro_start, int macro_
 				break;
 			}
 
-			if ('\0' != quote)
+			/* $..book[?('{#M}'==@.category)] */
+			if (0 < in_expression)
 			{
-				/* macro is inside quoted statement */
-				escape_characters = '\'' == quote ? "\\\'" : "\\\"";
+				if (ZBX_JSONPATH_MACRO_CONTENTS_NUMBER != macro_type)
+				{
+					if (prev_character != quote)
+						jsonpath_dyn_escape_string(macro_value, escape_characters, "'", "'");
+					else
+						jsonpath_dyn_escape_string(macro_value, escape_characters, NULL, NULL);
+				}
+
+				break;
 			}
 
 			jsonpath_dyn_escape_string(macro_value, escape_characters, NULL, NULL);

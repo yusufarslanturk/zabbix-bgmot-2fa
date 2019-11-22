@@ -565,4 +565,116 @@ in:
   value: '5'
 out:
   result: '$[5]'
+---
+test case: macro (a) in expression right operand single quoted $..book[?(@.a < '{#M}')]
+in:
+  path: '$..book[?(@.a < ''{#M}'')]'
+  value: 'a'
+out:
+  result: '$..book[?(@.a < ''a'')]'
+---
+test case: macro (a.b.c) in expression right operand single quoted $..book[?(@.a < '{#M}')]
+in:
+  path: '$..book[?(@.a < ''{#M}'')]'
+  value: 'a.b.c'
+out:
+  result: '$..book[?(@.a < ''a.b.c'')]'
+---
+test case: macro ('a.b.c') in expression right operand single quoted $..book[?(@.a < '{#M}')]
+in:
+  path: '$..book[?(@.a < ''{#M}'')]'
+  value: '''a.b.c'''
+out:
+  result: '$..book[?(@.a < ''\''a.b.c\'''')]'
+---
+test case: macro ("a.b.c") in expression right operand single quoted $..book[?(@.a < '{#M}')]
+in:
+  path: '$..book[?(@.a < ''{#M}'')]'
+  value: '"a.b.c"'
+out:
+  result: '$..book[?(@.a < ''"a.b.c"'')]'
+---
+test case: macro (a'c) in expression right operand single quoted $..book[?(@.a < '{#M}')]
+in:
+  path: '$..book[?(@.a < ''{#M}'')]'
+  value: 'a''c'
+out:
+  result: '$..book[?(@.a < ''a\''c'')]'
+---
+test case: macro (*) in expression right operand single quoted $..book[?(@.a < '{#M}')]
+in:
+  path: '$..book[?(@.a < ''{#M}'')]'
+  value: '*'
+out:
+  result: '$..book[?(@.a < ''*'')]'
+---
+test case: macro (a\b) in expression right operand single quoted $..book[?(@.a < '{#M}')]
+in:
+  path: '$..book[?(@.a < ''{#M}'')]'
+  value: 'a\b'
+out:
+  result: '$..book[?(@.a < ''a\\b'')]'
+---
+test case: macro (5) in expression right operand single quoted $..book[?(@.a < '{#M}')]
+in:
+  path: '$..book[?(@.a < ''{#M}'')]'
+  value: '5'
+out:
+  result: '$..book[?(@.a < ''5'')]'
+---
+test case: macro (a) in expression right operand double quoted $..book[?(@.a < "{#M}")]
+in:
+  path: '$..book[?(@.a < "{#M}")]'
+  value: 'a'
+out:
+  result: '$..book[?(@.a < "a")]'
+---
+test case: macro (a.b.c) in expression right operand double quoted $..book[?(@.a < "{#M}")]
+in:
+  path: '$..book[?(@.a < "{#M}")]'
+  value: 'a.b.c'
+out:
+  result: '$..book[?(@.a < "a.b.c")]'
+---
+test case: macro ('a.b.c') in expression right operand double quoted $..book[?(@.a < "{#M}")]
+in:
+  path: '$..book[?(@.a < "{#M}")]'
+  value: '''a.b.c'''
+out:
+  result: '$..book[?(@.a < "''a.b.c''")]'
+---
+test case: macro ("a.b.c") in expression right operand double quoted $..book[?(@.a < "{#M}")]
+in:
+  path: '$..book[?(@.a < "{#M}")]'
+  value: '"a.b.c"'
+out:
+  result: '$..book[?(@.a < "\"a.b.c\"")]'
+---
+test case: macro (a'c) in expression right operand double quoted $..book[?(@.a < "{#M}")]
+in:
+  path: '$..book[?(@.a < "{#M}")]'
+  value: 'a''c'
+out:
+  result: '$..book[?(@.a < "a''c")]'
+---
+test case: macro (*) in expression right operand double quoted $..book[?(@.a < "{#M}")]
+in:
+  path: '$..book[?(@.a < "{#M}")]'
+  value: '*'
+out:
+  result: '$..book[?(@.a < "*")]'
+---
+test case: macro (a\b) in expression right operand double quoted $..book[?(@.a < "{#M}")]
+in:
+  path: '$..book[?(@.a < "{#M}")]'
+  value: 'a\b'
+out:
+  result: '$..book[?(@.a < "a\\b")]'
+---
+test case: macro (5) in expression right operand double quoted $..book[?(@.a < "{#M}")]
+in:
+  path: '$..book[?(@.a < "{#M}")]'
+  value: '5'
+out:
+  result: '$..book[?(@.a < "5")]'
 ...

@@ -28,11 +28,10 @@
 
 void	zbx_mock_test_entry(void **state)
 {
-	const char		*path, *macro, *value, *expected_result;
+	const char		*path, *value, *expected_result;
 	char			*actual_result, *macro_value;
 	size_t			alloc_len = 0, offset = 0;
 	int			l, r;
-	size_t			data_alloc, data_len;
 
 	ZBX_UNUSED(state);
 
