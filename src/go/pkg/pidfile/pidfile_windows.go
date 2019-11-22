@@ -22,7 +22,6 @@ package pidfile
 import (
 	"fmt"
 	"os"
-	"syscall"
 )
 
 func createPidFile(pid int, path string) (file *os.File, err error) {
@@ -32,4 +31,3 @@ func createPidFile(pid int, path string) (file *os.File, err error) {
 
 	return
 }
-
