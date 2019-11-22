@@ -26,13 +26,10 @@ import (
 )
 
 func createPidFile(pid int, path string) (file *os.File, err error) {
-	if path == "" {
-		return nil, nil
-	}
-
-	if file, err = os.OpenFile(path, os.O_WRONLY|os.O_CREATE|syscall.O_CLOEXEC, 0644); nil != err {
-		return nil, fmt.Errorf("cannot open PID file [%s]: %s", path, err.Error())
+	if path != "" {
+		return nil, fmt.Errorf("cannot use PID file [%s]: unsupported configuration option for Windows", path)
 	}
 
 	return
 }
+
