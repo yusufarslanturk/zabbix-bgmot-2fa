@@ -128,4 +128,5 @@ $(TARGETBIN): $(OBJS) .FORCE
 	go build -mod vendor -tags "$(TAGS)" -o $(TARGETBIN) zabbix.com/cmd/zabbix_agent2
 
 clean:
+	go clean -cache
 	del $(TOPDIR)\include\config.h "$(TARGETBIN)" $(OBJS) 2>NUL
