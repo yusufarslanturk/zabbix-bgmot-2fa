@@ -672,7 +672,6 @@ elseif (hasRequest('form')) {
 		'tags' => $tags,
 		'show_inherited_macros' => getRequest('show_inherited_macros', 0),
 		'readonly' => false,
-		'form_refresh' => getRequest('form_refresh', 0), // TODO VM: probably can be removed.
 		'macros' => $macros
 	];
 
@@ -710,16 +709,6 @@ elseif (hasRequest('form')) {
 		CArrayHelper::sort($data['tags'], ['tag', 'value']);
 	}
 
-	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
-
-	if (!$data['macros']) {
-		$macro = ['macro' => '', 'value' => '', 'description' => ''];
-		if ($data['show_inherited_macros']) {
-			$macro['type'] = ZBX_PROPERTY_OWN;
-		}
-		$data['macros'][] = $macro;
-	}
-
 	$data['linked_templates'] = getRequest('templates', hasRequest('form_refresh') ? [] : $data['original_templates']);
 
 	// Get linked templates.
@@ -745,9 +734,21 @@ elseif (hasRequest('form')) {
 		'preservekeys' => true
 	]);
 
-	// macros
+	// Add inherited macros to template macros.
 	if ($data['show_inherited_macros']) {
 		$data['macros'] = mergeInheritedMacros($data['macros'], getInheritedMacros(array_keys($templates)));
+	}
+
+	// Sort only after inherited macros are added. Otherwise the list will look chaotic.
+	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
+
+	// The empty inputs will not be shown if there are inherited macros, for example.
+	if (!$data['macros']) {
+		$macro = ['macro' => '', 'value' => '', 'description' => ''];
+		if ($data['show_inherited_macros']) {
+			$macro['type'] = ZBX_PROPERTY_OWN;
+		}
+		$data['macros'][] = $macro;
 	}
 
 	$groups = [];

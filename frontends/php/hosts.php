@@ -955,7 +955,6 @@ elseif (hasRequest('form')) {
 		'hostid' => getRequest('hostid', 0),
 		'clone_hostid' => getRequest('clone_hostid', 0),
 		'flags' => getRequest('flags', ZBX_FLAG_DISCOVERY_NORMAL),
-		'form_refresh' => getRequest('form_refresh', 0),
 
 		// Host
 		'host' => getRequest('host', ''),
@@ -1182,14 +1181,14 @@ elseif (hasRequest('form')) {
 		CArrayHelper::sort($data['tags'], ['tag', 'value']);
 	}
 
-	// macros
+	// Add inherited macros to host macros.
 	if ($data['show_inherited_macros']) {
-		// TODO VM: check for duplicates. And make sure no entry is missed due to same keys.
 		$data['macros'] = mergeInheritedMacros($data['macros'], getInheritedMacros(
 			array_merge($data['templates'], $data['add_templates'])
 		));
 	}
 
+	// Sort only after inherited macros are added. Otherwise the list will look chaotic.
 	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
 
 	if (!$data['macros'] && !$data['readonly']) {

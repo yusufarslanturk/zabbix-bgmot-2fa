@@ -279,7 +279,6 @@ if (hasRequest('form')) {
 		],
 		'show_inherited_macros' => getRequest('show_inherited_macros', 0),
 		'readonly' => true,
-		'form_refresh' => getRequest('form_refresh', 0), // TODO VM: maybe this can be removed.
 		'groups' => [],
 		// Parent discovery rules.
 		'templates' => []
@@ -389,12 +388,13 @@ if (hasRequest('form')) {
 		]);
 	}
 
-	// macros
+	// Add inherited macros to host macros.
 	$data['macros'] = $data['parent_host']['macros'];
 	if ($data['show_inherited_macros']) {
-		$macros = mergeInheritedMacros($data['macros'],getInheritedMacros($templateids));
+		$data['macros'] = mergeInheritedMacros($data['macros'], getInheritedMacros(array_keys($templates)));
 	}
-	// TODO VM: why it is here, but not in other controllers? (it was moved form original view of prototype)
+
+	// Sort only after inherited macros are added. Otherwise the list will look chaotic.
 	$data['macros'] = array_values(order_macros($data['macros'], 'macro'));
 
 	// This data is used in common.template.edit.js.php.
