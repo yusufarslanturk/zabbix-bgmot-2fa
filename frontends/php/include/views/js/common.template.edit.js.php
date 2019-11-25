@@ -331,9 +331,9 @@ if (!$data['readonly']) {
 						 */
 						if ($msg_box.length > 0) {
 							// The details box may not exist on page.
-							var $details = $($msg_box).find('.msg-details-border');
+							var $details_border = $($msg_box).find('.msg-details-border');
 
-							if ($details.length > 0) {
+							if ($details_border.length > 0) {
 								/*
 								 * Find and add data source "ajax" to the <li> elements, so that in next AJAX request
 								 * they are overwritten.
@@ -342,12 +342,12 @@ if (!$data['readonly']) {
 								$li.data('source', 'ajax');
 
 								// Remove messages that were added in previous AJAX request.
-								$('> li', $details).filter(function() {
+								$('> li', $details_border).filter(function() {
 									return ($(this).data('source') === 'ajax');
 								}).remove();
 
 								// Append loaded message list (<li> elements) to existing details box list.
-								$details.append($li);
+								$details_border.append($li);
 							}
 							else {
 								/*
@@ -423,7 +423,6 @@ if (!$data['readonly']) {
 									else {
 										// Remove messages that were added in previous AJAX request.
 										$('li', $details).filter(function() {
-											console.log('remove from details')
 											return ($(this).data('source') === 'ajax');
 										}).remove();
 
@@ -445,7 +444,6 @@ if (!$data['readonly']) {
 									$li.data('source', 'ajax');
 
 									$('li', $msg_box).filter(function() {
-										console.log($(this));
 										return ($(this).data('source') === 'ajax');
 									}).remove();
 
@@ -481,6 +479,13 @@ if (!$data['readonly']) {
 						}
 						else {
 							// Clean leftover messages that came from the AJAX request.
+							if ($msg_box.length > 0) {
+								$details = $($msg_box).find('.msg-details');
+
+								$('li', $details).filter(function() {
+									return ($(this).data('source') === 'ajax');
+								}).remove();
+							}
 						}
 
 						$container.empty().append(response.body);
