@@ -37,6 +37,8 @@ type process struct {
 	Handle uintptr
 }
 
+const STILL_ACTIVE = 259
+
 func Execute(s string, timeout time.Duration) (string, error) {
 	cmd := exec.Command("cmd", "/C", s)
 
@@ -57,7 +59,7 @@ func Execute(s string, timeout time.Duration) (string, error) {
 	}
 
 	if _, err := windows.SetInformationJobObject(job, windows.JobObjectExtendedLimitInformation,
-		uintptr(unsafe.Pointer(&info)), uint32(unsafe.Sizeof(info))); err != nil {
+		uintptr(unsafe.Pointer(&info)), (uint32(unsafe.Sizeof(info))+7)&(^uint32(7))); err != nil {
 		return "", err
 	}
 
@@ -68,7 +70,11 @@ func Execute(s string, timeout time.Duration) (string, error) {
 	}
 
 	if err = windows.AssignProcessToJobObject(job, windows.Handle((*process)(unsafe.Pointer(cmd.Process)).Handle)); err != nil {
-		return "", err
+		var rc uint32
+		rcerr := windows.GetExitCodeProcess(windows.Handle((*process)(unsafe.Pointer(cmd.Process)).Handle), &rc)
+		if rcerr != nil || rc == STILL_ACTIVE {
+			return "", err
+		}
 	}
 
 	t := time.AfterFunc(timeout, func() {
