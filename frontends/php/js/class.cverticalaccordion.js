@@ -21,11 +21,11 @@
 /**
  * JQuery class that adds interactivity of vertical accordion for CList element.
  *
- * @event collapse - Event fires when accordion section is collapsed
- * @property {object} section - section object
+ * @event collapse - Event fires when accordion section is collapsed.
+ * @property {object} section - section object.
  *
- * @event expand - Event fires when accordion section is expended
- * @property {object} section - section object
+ * @event expand - Event fires when accordion section is expanded.
+ * @property {object} section - section object.
  */
 jQuery(function($) {
 	"use strict";
