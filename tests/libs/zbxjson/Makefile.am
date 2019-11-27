@@ -3,8 +3,7 @@ noinst_PROGRAMS = \
 	zbx_json_decodevalue \
 	zbx_json_decodevalue_dyn \
 	zbx_jsonpath_compile \
-	zbx_jsonpath_query \
-	zbx_jsonpath_substitute_macro
+	zbx_jsonpath_query
 
 JSON_LIBS = \
 	$(top_srcdir)/tests/libzbxmocktest.a \
@@ -121,23 +120,3 @@ endif
 endif
 
 zbx_jsonpath_query_CFLAGS = -I@top_srcdir@/tests
-
-# zbx_jsonpath_substitute_macro
-
-zbx_jsonpath_substitute_macro_SOURCES = \
-	zbx_jsonpath_substitute_macro.c \
-	../../zbxmocktest.h
-
-zbx_jsonpath_substitute_macro_LDADD = $(JSON_LIBS)
-
-if SERVER
-zbx_jsonpath_substitute_macro_LDADD += @SERVER_LIBS@
-zbx_jsonpath_substitute_macro_LDFLAGS = @SERVER_LDFLAGS@
-else
-if PROXY
-zbx_jsonpath_substitute_macro_LDADD += @PROXY_LIBS@
-zbx_jsonpath_substitute_macro_LDFLAGS = @PROXY_LDFLAGS@
-endif
-endif
-
-zbx_jsonpath_substitute_macro_CFLAGS = -I@top_srcdir@/tests
