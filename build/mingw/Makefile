@@ -64,6 +64,8 @@ endif
 CGO_CFLAGS += $(CFLAGS) 
 CGO_LDFLAGS += $(LDFLAGS) 
 
+GOLDFLAGS += -X main.confDefault=zabbix_agent2.win.conf
+
 all: $(TARGETBIN)
 
 $(OUTPUTDIR)\misc.o: $(TOPDIR)\src\libs\zbxcommon\misc.c
@@ -125,7 +127,7 @@ $(TARGETBIN): $(OBJS) .FORCE
 	set GOARCH=$(GOARCH)
 	set CGO_ENABLED=1
 	cd $(MODULEDIR)
-	go build -mod vendor -tags "$(TAGS)" -o $(TARGETBIN) zabbix.com/cmd/zabbix_agent2
+	go build -mod vendor -tags "$(TAGS)" -ldflags="$(GOLDFLAGS)" -o $(TARGETBIN) zabbix.com/cmd/zabbix_agent2
 
 clean:
 	go clean -cache
