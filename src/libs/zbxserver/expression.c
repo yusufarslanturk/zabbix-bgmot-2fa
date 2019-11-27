@@ -5523,7 +5523,11 @@ static int	process_lld_macro_token(char **data, zbx_token_t *token, int flags, c
 	}
 	else if (0 != (flags & ZBX_TOKEN_JSONPATH) && ZBX_TOKEN_LLD_MACRO == token->type)
 	{
-		zbx_jsonpath_substitute_macro(*data, l, r + 1, &replace_to);
+		char	*replace_to_esc;
+
+		replace_to_esc = zbx_dyn_escape_string(replace_to, "\\\"");
+		zbx_free(replace_to);
+		replace_to = replace_to_esc;
 	}
 
 	if (NULL != replace_to)

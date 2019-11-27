@@ -139,7 +139,6 @@ tests/libs/zbxjson/zbx_json_decodevalue
 tests/libs/zbxjson/zbx_json_decodevalue_dyn
 tests/libs/zbxjson/zbx_jsonpath_compile
 tests/libs/zbxjson/zbx_jsonpath_query
-tests/libs/zbxjson/zbx_jsonpath_substitute_macro
 tests/libs/zbxprometheus/prometheus_filter_init
 tests/libs/zbxprometheus/prometheus_parse_row
 tests/libs/zbxprometheus/zbx_prometheus_pattern
