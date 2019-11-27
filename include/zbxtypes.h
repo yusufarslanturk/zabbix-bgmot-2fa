@@ -30,16 +30,21 @@
 #	endif
 #endif
 
-#define	ZBX_FS_DBL		"%lf"
-#define	ZBX_FS_DBL_EXT(p)	"%." #p "lf"
-
-#define ZBX_PTR_SIZE		sizeof(void *)
+#if defined(_WINDOWS)
+#	define zbx_open(pathname, flags)	__zbx_open(pathname, flags | O_BINARY)
+#	define PATH_SEPARATOR	'\\'
+#elif defined(__MINGW32__)
+#	define zbx_open(pathname, flags)	open(pathname, flags | O_BINARY)
+#	define PATH_SEPARATOR	'\\'
+#else
+#	define zbx_open(pathname, flags)	open(pathname, flags)
+#	define PATH_SEPARATOR	'/'
+#endif
 
 #if defined(_WINDOWS)
 #	include <strsafe.h>
 
 #	define zbx_stat(path, buf)		__zbx_stat(path, buf)
-#	define zbx_open(pathname, flags)	__zbx_open(pathname, flags | O_BINARY)
 
 #	ifndef __UINT64_C
 #		define __UINT64_C(x)	x
@@ -69,19 +74,13 @@ typedef unsigned __int32	zbx_uint32_t;
 typedef uint32_t		zbx_uint32_t;
 #	endif
 
-#	ifndef PATH_SEPARATOR
-#		define PATH_SEPARATOR	'\\'
-#	endif
-
 #	define strcasecmp	lstrcmpiA
 
 typedef __int64	zbx_offset_t;
 #	define zbx_lseek(fd, offset, whence)	_lseeki64(fd, (zbx_offset_t)(offset), whence)
 
 #else	/* _WINDOWS */
-
 #	define zbx_stat(path, buf)		stat(path, buf)
-#	define zbx_open(pathname, flags)	open(pathname, flags)
 
 #	ifndef __UINT64_C
 #		ifdef UINT64_C
@@ -145,11 +144,12 @@ typedef __int64	zbx_offset_t;
 #		endif
 #	endif
 
-typedef uint32_t	zbx_uint32_t;
+#define	ZBX_FS_DBL		"%lf"
+#define	ZBX_FS_DBL_EXT(p)	"%." #p "lf"
 
-#	ifndef PATH_SEPARATOR
-#		define PATH_SEPARATOR	'/'
-#	endif
+#define ZBX_PTR_SIZE		sizeof(void *)
+
+typedef uint32_t	zbx_uint32_t;
 
 typedef off_t	zbx_offset_t;
 #	define zbx_lseek(fd, offset, whence)	lseek(fd, (zbx_offset_t)(offset), whence)
