@@ -140,7 +140,7 @@ static int	split_filename(const char *filename, char **directory, char **filenam
 		goto out;
 	}
 
-#ifdef _WINDOWS
+#if defined(_WINDOWS) || defined(__MINGW32__)
 	/* special processing for Windows, since directory name cannot be simply separated from file name regexp */
 	for (sz = strlen(filename) - 1, separator = &filename[sz]; separator >= filename; separator--)
 	{
@@ -1693,7 +1693,7 @@ static int	make_logfile_list(unsigned char flags, const char *filename, int mtim
 		{
 			/* do not make logrt[] and logrt.count[] items NOTSUPPORTED if there are no matching log */
 			/* files or they are not accessible (can happen during a rotation), just log the problem */
-#ifdef _WINDOWS
+#if defined(_WINDOWS) || defined(__MINGW32__)
 			zabbix_log(LOG_LEVEL_WARNING, "there are no recently modified files matching \"%s\" in \"%s\"",
 					filename_regexp, directory);
 
