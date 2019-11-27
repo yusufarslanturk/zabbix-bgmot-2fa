@@ -69,9 +69,14 @@ func Execute(s string, timeout time.Duration) (string, error) {
 		return "", fmt.Errorf("Cannot execute command: %s", err)
 	}
 
-	if err = windows.AssignProcessToJobObject(job, windows.Handle((*process)(unsafe.Pointer(cmd.Process)).Handle)); err != nil {
+	processHandle := windows.Handle((*process)(unsafe.Pointer(cmd.Process)).Handle)
+	if err = windows.AssignProcessToJobObject(job, processHandle); err != nil {
+		// There is possible race condition when the started process has finished before
+		// assigning it to job. While it's possible to start process suspended, currently
+		// windows library does not provide normal way to resume it.
+		// As a workaround check for process exit code and fail only it's still running.
 		var rc uint32
-		rcerr := windows.GetExitCodeProcess(windows.Handle((*process)(unsafe.Pointer(cmd.Process)).Handle), &rc)
+		rcerr := windows.GetExitCodeProcess(processHandle, &rc)
 		if rcerr != nil || rc == STILL_ACTIVE {
 			return "", err
 		}
