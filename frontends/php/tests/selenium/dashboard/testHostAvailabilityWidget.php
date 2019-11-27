@@ -205,23 +205,25 @@ class testHostAvailabilityWidget extends CWebTest {
 						'Interface type' => ['SNMP', 'JMX', 'IPMI']
 					],
 					'expected_values' => [
-						'SNMP' => [
-							'Available' => '1',
-							'Not available' => '1',
-							'Unknown' => '3',
-							'Total' => '5'
+						'Available' => [
+							'SNMP' => '1',
+							'JMX' => '1',
+							'IPMI' => '1'
 						],
-						'JMX' => [
-							'Available' => '1',
-							'Not available' => '1',
-							'Unknown' => '4',
-							'Total' => '6'
+						'Not available' => [
+							'SNMP' => '1',
+							'JMX' => '1',
+							'IPMI' => '1'
 						],
-						'IPMI' => [
-							'Available' => '1',
-							'Not available' => '1',
-							'Unknown' => '3',
-							'Total' => '5'
+						'Unknown' => [
+							'SNMP' => '3',
+							'JMX' => '4',
+							'IPMI' => '3'
+						],
+						'Total' => [
+							'SNMP' => '5',
+							'JMX' => '6',
+							'IPMI' => '5'
 						]
 					]
 				]
@@ -666,72 +668,45 @@ class testHostAvailabilityWidget extends CWebTest {
 		$widget = $dashboard->getWidget($header);
 		$content = $widget->getContent()->asTable();
 
-		$expected_interfaces = CTestArrayHelper::get($data['fields'], 'Interface type', false) ? $data['fields']['Interface type'] : $reference_data['interface type'];
+		$interfaces = CTestArrayHelper::get($data, 'fields.Interface type', $reference_data['interface type']);
 		$headers = $content->getHeadersText();
 		// Exclude the 1st header that is always empty from the list of actual headers.
 		unset($headers[0]);
+
+		// Index table with widget content by interface type, that is located in a column with a blank name.
+		$rows = $content->index('');
 		// Check widget content based on its Layout parameter.
 		if (CTestArrayHelper::get($data['fields'], 'Layout', 'Horizontal') === 'Horizontal') {
 			$this->assertSame($reference_data['interface status'], array_values($headers));
-			// Index table with widget content by interface type, that is located in a column with a blank name.
-			$rows = $content->index('');
 			// Obtain values for each interface type and compare them with expected ones.
 			if (array_key_exists('expected_values', $data)) {
-				foreach ($data['expected_values'] as $interface_name => $expected_values) {
-					$this->findTableRowAndCompare($rows, $interface_name, $expected_values);
-				}
+				$this->assertEquals($data['expected_values'], $rows);
 			}
 			else {
 				// Take expected values from DB and compare with values obtained from the widget.
-				$check_interfaces = CTestArrayHelper::get($data, 'Interface type', $reference_data['interface type']);
-				foreach ($check_interfaces as $interface_name) {
-					$expected_values = $this->getExpectedResultsFromDB($data, $interface_name);
-					$this->findTableRowAndCompare($rows, $interface_name, $expected_values);
+				foreach ($interfaces as $interface) {
+					$expected_values = $this->getExpectedResultsFromDB($data, $interface);
+					$this->assertEquals($rows[$interface], $expected_values);
 				}
 			}
 		}
 		else {
-			$this->assertSame($expected_interfaces, array_values($headers));
-			// Index table with widget content by interface status, that is located in a column with a blank name.
-			$rows = $content->index('');
-			$expected = [];
-			// Convert the expected data to the desired format.
+			$this->assertSame($interfaces, array_values($headers));
 			if (array_key_exists('expected_values', $data)) {
-				// Convert the expected data to "interface status value" format.
-				foreach ($data['expected_values'] as $expected_interface => $statuses) {
-					foreach ($statuses as $expected_status => $expected_value) {
-						array_push($expected, $expected_interface.' '.$expected_status.' '.$expected_value);
-					}
-				}
+				$this->assertEquals($data['expected_values'], $rows);
 			}
 			else {
+				$expected = [];
 				// Take expected values from DB and convert it to desired format.
-				$check_interfaces = CTestArrayHelper::get($data, 'Interface type', $reference_data['interface type']);
-				foreach ($check_interfaces as $expected_interface) {
+				foreach ($interfaces as $expected_interface) {
 					$expected_values = $this->getExpectedResultsFromDB($data, $expected_interface);
 					foreach ($expected_values as $expected_status => $expected_value){
 						array_push($expected, $expected_interface.' '.$expected_status.' '.$expected_value);
 					}
 				}
+				// Convert results obtained from the widget to the desired format and compare with expected results.
+				$this->convertAndCompareActualResults($rows, $expected);
 			}
-			// Convert results obtained from the widget to the desired format and compare with expected results.
-			$this->convertAndCompareActualResults($rows, $expected);
-		}
-	}
-
-	private function findTableRowAndCompare($rows, $interface_name, $expected_values) {
-		foreach ($rows as $row) {
-			/**
-			 * In the array  obtained from the widget the name of the interface is placed as the 1st array
-			 * element with a blank array key, followed by interface statuses and their values. So to compare
-			 * the values of arrays, after selecting the row, this row needs to be written in a separate
-			 * variable, and the 1st element of this variable needs to be unset before making the comparison.
-			 */
-			if ($interface_name === $row['']) {
-				unset($row['']);
-				$this->assertTrue($row == $expected_values);
-			}
-		continue;
 		}
 	}
 
