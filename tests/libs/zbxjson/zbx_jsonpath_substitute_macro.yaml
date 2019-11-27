@@ -1,0 +1,113 @@
+---
+test case: macro contains full JsonPath expression
+in:
+  path: '{#M}'
+  value: '$.a.b.c'
+out:
+  result: '$.a.b.c'
+---
+test case: macro as index
+in:
+  path: '$.[{#M}]'
+  value: '5'
+out:
+  result: '$.[5]'
+---
+test case: macro as element name
+in:
+  path: '$.{#M}.id'
+  value: 'abc'
+out:
+  result: '$.abc.id'
+---
+test case: macro as unescaped text (single quotes)
+in:
+  path: '$.[''{#M}'']'
+  value: 'some \\ "special" \\ value'
+out:
+  result: '$.[''some \\ "special" \\ value'']'
+---
+test case: macro as escaped text (double quotes)
+in:
+  path: '$.["{#M}"]'
+  value: 'some \ "special" \ value'
+out:
+  result: '$.["some \\ \"special\" \\ value"]'
+---
+test case: macro as escaped text part $.["''"].["a ''{#M}'' b"]
+in:
+  path: '$.["''"].["a ''{#M}'' b"]'
+  value: 'some \ "special" \ value'
+out:
+  result: '$.["''"].["a ''some \\ \"special\" \\ value'' b"]'
+---
+test case: macro as escaped text part $.["''\""].["a \"{#M}\" b"]
+in:
+  path: '$.["''\""].["a \"{#M}\" b"]'
+  value: 'some \ "special" \ value'
+out:
+  result: '$.["''\""].["a \"some \\ \"special\" \\ value\" b"]'
+---
+test case: macro in filter expression $.tags[{#M}:]
+in:
+  path: '$.tags[{#M}:]'
+  value: '12'
+out:
+  result: '$.tags[12:]'
+---
+test case: macro in filter expression $.tags[:{#M}]
+in:
+  path: '$.tags[:{#M}]'
+  value: '12'
+out:
+  result: '$.tags[:12]'
+---
+test case: macro in filter expression $.tags[{#M}:34]
+in:
+  path: '$.tags[{#M}:34]'
+  value: '12'
+out:
+  result: '$.tags[12:34]'
+---
+test case: macro in filter expression $.tags[12:{#M}]
+in:
+  path: '$.tags[12:{#M}]'
+  value: '34'
+out:
+  result: '$.tags[12:34]'
+---
+test case: macro in index list $.books[0, {#M}, 7].title
+in:
+  path: '$.books[0, {#M}, 7].title'
+  value: '5'
+out:
+  result: '$.books[0, 5, 7].title'
+---
+test case: macro in subexpression $.books[?(@.category == $.{#M})].title
+in:
+  path: '$.books[?(@.category == $.{#M})].title'
+  value: 'name'
+out:
+  result: '$.books[?(@.category == $.name)].title'
+---
+test case: macro in subexpression $[?({#M} < 7)].id
+in:
+  path: '$[?({#M} < 7)].id'
+  value: '5'
+out:
+  result: '$[?(5 < 7)].id'
+---
+test case: quoted macro in subexpression $[?(@.["{#M}"] < 7)].id
+in:
+  path: '$[?(@.["{#M}"] < 7)].id'
+  value: '"special\value"'
+out:
+  result: '$[?(@.["\"special\\value\""] < 7)].id'
+---
+test case: non-quoted macro in subexpression $[?(@.['{#M}'] < 7)].id
+in:
+  path: '$[?(@.[''{#M}''] < 7)].id'
+  value: '"special\\value"'
+out:
+  result: '$[?(@.[''"special\\value"''] < 7)].id'
+...
