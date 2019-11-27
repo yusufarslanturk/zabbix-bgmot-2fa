@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"os/exec"
 	"strings"
+	"syscall"
 	"time"
 	"unsafe"
 
@@ -37,49 +38,41 @@ type process struct {
 	Handle uintptr
 }
 
-const STILL_ACTIVE = 259
+var ntResumeProcess *syscall.Proc
 
-func Execute(s string, timeout time.Duration) (string, error) {
+func Execute(s string, timeout time.Duration) (out string, err error) {
 	cmd := exec.Command("cmd", "/C", s)
 
 	var b bytes.Buffer
 	cmd.Stdout = &b
 	cmd.Stderr = &b
 
-	job, err := windows.CreateJobObject(nil, nil)
-	if err != nil {
-		return "", err
+	var job windows.Handle
+	if job, err = windows.CreateJobObject(nil, nil); err != nil {
+		return
 	}
 	defer windows.CloseHandle(job)
 
-	info := windows.JOBOBJECT_EXTENDED_LIMIT_INFORMATION{
-		BasicLimitInformation: windows.JOBOBJECT_BASIC_LIMIT_INFORMATION{
-			LimitFlags: windows.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE,
-		},
+	cmd.SysProcAttr = &windows.SysProcAttr{
+		CreationFlags: windows.CREATE_SUSPENDED,
 	}
-
-	if _, err := windows.SetInformationJobObject(job, windows.JobObjectExtendedLimitInformation,
-		uintptr(unsafe.Pointer(&info)), (uint32(unsafe.Sizeof(info))+7)&(^uint32(7))); err != nil {
-		return "", err
-	}
-
-	err = cmd.Start()
-
-	if err != nil {
+	if err = cmd.Start(); err != nil {
 		return "", fmt.Errorf("Cannot execute command: %s", err)
 	}
 
 	processHandle := windows.Handle((*process)(unsafe.Pointer(cmd.Process)).Handle)
-	if err = windows.AssignProcessToJobObject(job, processHandle); err != nil {
-		// There is possible race condition when the started process has finished before
-		// assigning it to job. While it's possible to start process suspended, currently
-		// windows library does not provide normal way to resume it.
-		// As a workaround check for process exit code and fail only it's still running.
-		var rc uint32
-		rcerr := windows.GetExitCodeProcess(processHandle, &rc)
-		if rcerr != nil || rc == STILL_ACTIVE {
-			return "", err
+
+	defer func() {
+		if cmd.ProcessState == nil {
+			log.Warningf("attempting to terminate process because normal processing was interrupted by error: %s", err)
+			windows.TerminateProcess(processHandle, 0)
+			_ = cmd.Wait()
 		}
+	}()
+
+	if err = windows.AssignProcessToJobObject(job, processHandle); err != nil {
+		log.Warningf("cannot assign process to a job: %s", err)
+		return
 	}
 
 	t := time.AfterFunc(timeout, func() {
@@ -87,6 +80,12 @@ func Execute(s string, timeout time.Duration) (string, error) {
 			log.Warningf("failed to kill [%s]: %s", s, err)
 		}
 	})
+
+	var rc uintptr
+	if rc, _, err = ntResumeProcess.Call(uintptr(processHandle)); int32(rc) < 0 {
+		log.Warningf("cannot resume process: %s", err)
+		return
+	}
 
 	_ = cmd.Wait()
 
@@ -111,4 +110,10 @@ func ExecuteBackground(s string) error {
 	go func() { _ = cmd.Wait() }()
 
 	return nil
+}
+
+func init() {
+	dll := syscall.MustLoadDLL("ntdll.dll")
+	defer dll.Release()
+	ntResumeProcess = dll.MustFindProc("NtResumeProcess")
 }
