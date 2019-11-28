@@ -135,7 +135,7 @@ func processMetricsCommand(c *remotecontrol.Client, params []string) (err error)
 }
 
 func processVersionCommand(c *remotecontrol.Client, params []string) (err error) {
-	data := version.Short()
+	data := version.Long()
 	return c.Reply(data)
 }
 
