@@ -54,30 +54,30 @@ typedef struct
 	int state;
 	zbx_uint64_t lastlogsize;
 }
-log_value_t;
+eventlog_value_t;
 
 typedef struct
 {
 	zbx_vector_ptr_t values;
 	int slots;
 }
-log_result_t, *log_result_lp_t;
+eventlog_result_t, *eventlog_result_lp_t;
 
-static log_result_t *new_log_result(int slots)
+static eventlog_result_t *new_eventlog_result(int slots)
 {
-	log_result_t *result;
+	eventlog_result_t *result;
 
-	result = (log_result_t *)zbx_malloc(NULL, sizeof(log_result_t));
+	result = (eventlog_result_t *)zbx_malloc(NULL, sizeof(eventlog_result_t));
 	zbx_vector_ptr_create(&result->values);
 	result->slots = slots;
 	return result;
 }
 
-static void add_log_value(log_result_t *result, const char *value, const char *source, int logeventid, int severity,
+static void add_eventlog_value(eventlog_result_t *result, const char *value, const char *source, int logeventid, int severity,
 	int timestamp, int state, zbx_uint64_t lastlogsize)
 {
-	log_value_t *log;
-	log = (log_value_t *)zbx_malloc(NULL, sizeof(log_value_t));
+	eventlog_value_t *log;
+	log = (eventlog_value_t *)zbx_malloc(NULL, sizeof(eventlog_value_t));
 	log->value = zbx_strdup(NULL, value);
 	log->source = zbx_strdup(NULL, source);
 	log->logeventid = logeventid;
@@ -88,15 +88,15 @@ static void add_log_value(log_result_t *result, const char *value, const char *s
 	zbx_vector_ptr_append(&result->values, log);
 }
 
-static int get_eventlog_value(log_result_t *result, int index, char **value, char **source, int *logeventid,
+static int get_eventlog_value(eventlog_result_t *result, int index, char **value, char **source, int *logeventid,
 	 int *severity, int *timestamp, int *state, zbx_uint64_t *lastlogsize)
 {
-	log_value_t *log;
+	eventlog_value_t *log;
 
 	if (index == result->values.values_num)
 		return FAIL;
 
-	log = (log_value_t *)result->values.values[index];
+	log = (eventlog_value_t *)result->values.values[index];
 	*value = log->value;
 	*source = log->source;
 	*logeventid = log->logeventid;
@@ -107,16 +107,16 @@ static int get_eventlog_value(log_result_t *result, int index, char **value, cha
 	return SUCCEED;
 }
 
-static void free_log_value(log_value_t *log)
+static void free_eventlog_value(eventlog_value_t *log)
 {
 	zbx_free(log->value);
 	zbx_free(log->source);
 	zbx_free(log);
 }
 
-static void free_log_result(log_result_t *result)
+static void free_eventlog_result(eventlog_result_t *result)
 {
-	zbx_vector_ptr_clear_ext(&result->values, (zbx_clean_func_t)free_log_value);
+	zbx_vector_ptr_clear_ext(&result->values, (zbx_clean_func_t)free_eventlog_value);
 	zbx_vector_ptr_destroy(&result->values);
 	zbx_free(result);
 }
@@ -126,11 +126,11 @@ int	process_eventlog_value_cb(const char *server, unsigned short port, const cha
 		unsigned long *timestamp, const char *source, unsigned short *severity, unsigned long *logeventid,
 		unsigned char flags)
 {
-	log_result_t *result = (log_result_t *)server;
+	eventlog_result_t *result = (eventlog_result_t *)server;
 	if (result->values.values_num == result->slots)
 		return FAIL;
 
-	add_log_value(result, value, source, *logeventid, *severity, *timestamp, state, *lastlogsize);
+	add_eventlog_value(result, value, source, *logeventid, *severity, *timestamp, state, *lastlogsize);
 	return SUCCEED;
 }
 */
@@ -167,7 +167,7 @@ func ProcessEventLogCheck(data unsafe.Pointer, item *EventLogItem, refresh int, 
 	C.metric_get_meta(C.ZBX_ACTIVE_METRIC_LP(data), &clastLogsizeSent, &cmtime)
 	clastLogsizeLast = clastLogsizeSent
 
-	result := C.new_log_result(C.int(item.Output.PersistSlotsAvailable()))
+	result := C.new_eventlog_result(C.int(item.Output.PersistSlotsAvailable()))
 
 	var cerrmsg *C.char
 	ret := C.process_eventlog_check(C.char_lp_t(unsafe.Pointer(result)), 0, C.zbx_vector_ptr_lp_t(cblob),
@@ -211,7 +211,7 @@ func ProcessEventLogCheck(data unsafe.Pointer, item *EventLogItem, refresh int, 
 		}
 		item.Results = append(item.Results, &r)
 	}
-	C.free_log_result(result)
+	C.free_eventlog_result(result)
 
 	if ret == C.FAIL {
 		C.metric_set_unsupported(C.ZBX_ACTIVE_METRIC_LP(data))
