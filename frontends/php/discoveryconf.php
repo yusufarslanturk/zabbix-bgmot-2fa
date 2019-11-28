@@ -75,7 +75,7 @@ $_REQUEST['dchecks'] = getRequest('dchecks', []);
 /*
  * Permissions
  */
-if (isset($_REQUEST['druleid'])) {
+if (hasRequest('druleid')) {
 	$dbDRule = API::DRule()->get([
 		'druleids' => getRequest('druleid'),
 		'output' => ['name', 'proxy_hostid', 'iprange', 'delay', 'status'],
@@ -92,7 +92,7 @@ if (isset($_REQUEST['druleid'])) {
 }
 
 // ajax
-if (isset($_REQUEST['output']) && $_REQUEST['output'] == 'ajax') {
+if (hasRequest('output') && getRequest('output') === 'ajax') {
 	$ajaxResponse = new CAjaxResponse;
 
 	if (isset($_REQUEST['ajaxaction']) && $_REQUEST['ajaxaction'] == 'validate') {
@@ -178,7 +178,7 @@ if (hasRequest('add') || hasRequest('update')) {
 	}
 	show_messages($result, $messageSuccess, $messageFailed);
 }
-elseif (isset($_REQUEST['delete']) && isset($_REQUEST['druleid'])) {
+elseif (hasRequest('delete') && hasRequest('druleid')) {
 	$result = API::DRule()->delete([$_REQUEST['druleid']]);
 
 	if ($result) {
@@ -242,7 +242,7 @@ if (hasRequest('action') && hasRequest('g_druleid') && !$result) {
 /*
  * Display
  */
-if (isset($_REQUEST['form'])) {
+if (hasRequest('form')) {
 	$data = [
 		'druleid' => getRequest('druleid'),
 		'drule' => [],
