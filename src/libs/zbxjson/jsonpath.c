@@ -678,7 +678,7 @@ static int	jsonpath_parse_expression(const char *expression, zbx_jsonpath_t *jso
 	zbx_jsonpath_token_t		*optoken;
 	zbx_vector_ptr_t		output, operators;
 	zbx_strloc_t			loc = {0, 0};
-	zbx_jsonpath_token_type_t	token_type = ZBX_JSONPATH_TOKEN_PATH_ABSOLUTE;
+	zbx_jsonpath_token_type_t	token_type;
 	zbx_jsonpath_token_group_t	prev_group = ZBX_JSONPATH_TOKEN_GROUP_NONE;
 
 	if ('(' != *expression)
@@ -2381,7 +2381,7 @@ void	zbx_jsonpath_clear(zbx_jsonpath_t *jsonpath)
 int	zbx_jsonpath_compile(const char *path, zbx_jsonpath_t *jsonpath)
 {
 	int				ret = FAIL;
-	const char			*ptr = path, *next = path + 1;
+	const char			*ptr = path, *next;
 	zbx_jsonpath_segment_type_t	segment_type, last_segment_type = ZBX_JSONPATH_SEGMENT_UNKNOWN;
 	zbx_jsonpath_t			jpquery;
 
