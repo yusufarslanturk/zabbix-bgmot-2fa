@@ -400,7 +400,7 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result,  HANDLE time
 			}
 			else
 			{
-				// add drive letters with sizes to array
+				/* add drive letters with sizes to array */
 				add_fs_to_vector(&mntpoints,p,1);
 			}
 		}
