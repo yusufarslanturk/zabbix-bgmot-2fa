@@ -120,7 +120,6 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 			results[i].Error = r.Error
 			results[i].Ts = r.Ts
 			results[i].LastLogsize = &r.LastLogsize
-			results[i].Mtime = &r.Mtime
 			results[i].Persistent = true
 		}
 		return results, nil
