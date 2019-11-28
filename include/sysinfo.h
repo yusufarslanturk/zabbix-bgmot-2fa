@@ -314,18 +314,18 @@ typedef struct
 }
 zbx_mpoint_t;
 
-#define ZBX_SYSYNFO_FSNAME_MACRO_TAG		"{#FSNAME}"
-#define ZBX_SYSYNFO_FSTYPE_MACRO_TAG		"{#FSTYPE}"
-#define ZBX_SYSYNFO_FSDRIVETYPE_MACRO_TAG	"{#FSDRIVETYPE}"
+#define ZBX_LLD_MACRO_FSNAME		"{#FSNAME}"
+#define ZBX_LLD_MACRO_FSTYPE		"{#FSTYPE}"
+#define ZBX_LLD_MACRO_FSDRIVETYPE	"{#FSDRIVETYPE}"
 
-#define ZBX_SYSYNFO_FSNAME_TAG			"fsname"
-#define ZBX_SYSYNFO_FSTYPE_TAG			"fstype"
-#define ZBX_SYSYNFO_FSDRIVETYPE_TAG		"fsdrivetype"
-#define ZBX_SYSYNFO_TOTAL_TAG			"total"
-#define ZBX_SYSYNFO_FREE_TAG			"free"
-#define ZBX_SYSYNFO_USED_TAG			"used"
-#define ZBX_SYSYNFO_PFREE_TAG			"pfree"
-#define ZBX_SYSYNFO_PUSED_TAG			"pused"
+#define ZBX_SYSINFO_TAG_FSNAME			"fsname"
+#define ZBX_SYSINFO_TAG_FSTYPE			"fstype"
+#define ZBX_SYSINFO_TAG_FSDRIVETYPE		"fsdrivetype"
+#define ZBX_SYSINFO_TAG_TOTAL			"total"
+#define ZBX_SYSINFO_TAG_FREE			"free"
+#define ZBX_SYSINFO_TAG_USED			"used"
+#define ZBX_SYSINFO_TAG_PFREE			"pfree"
+#define ZBX_SYSINFO_TAG_PUSED			"pused"
 
 int	zbx_execute_threaded_metric(zbx_metric_func_t metric_func, AGENT_REQUEST *request, AGENT_RESULT *result);
 void	zbx_mpoints_free(zbx_mpoint_t *mpoint);

@@ -38,6 +38,7 @@ static int	get_fs_size_stat(const char *fs, zbx_uint64_t *total, zbx_uint64_t *f
 	if (0 != ZBX_STATFS(fs, &s))
 	{
 		*error = zbx_dsprintf(NULL, "Cannot obtain filesystem information: %s", zbx_strerror(errno));
+		zabbix_log(LOG_LEVEL_DEBUG,"%s failed with error: %s",__func__, *error);
 		return SYSINFO_RET_FAIL;
 	}
 
@@ -213,8 +214,8 @@ int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
 	while (NULL != (mt = getmntent(f)))
 	{
 		zbx_json_addobject(&j, NULL);
-		zbx_json_addstring(&j, ZBX_SYSYNFO_FSNAME_MACRO_TAG, mt->mnt_dir, ZBX_JSON_TYPE_STRING);
-		zbx_json_addstring(&j, ZBX_SYSYNFO_FSTYPE_MACRO_TAG, mt->mnt_type, ZBX_JSON_TYPE_STRING);
+		zbx_json_addstring(&j, ZBX_LLD_MACRO_FSNAME, mt->mnt_dir, ZBX_JSON_TYPE_STRING);
+		zbx_json_addstring(&j, ZBX_LLD_MACRO_FSTYPE, mt->mnt_type, ZBX_JSON_TYPE_STRING);
 		zbx_json_close(&j);
 	}
 
@@ -292,13 +293,13 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result)
 		{
 			mntpoint = (zbx_mpoint_t *)mntpoints.values[idx];
 			zbx_json_addobject(&j, NULL);
-			zbx_json_addstring(&j, ZBX_SYSYNFO_FSNAME_TAG, mntpoint->fsname, ZBX_JSON_TYPE_STRING);
-			zbx_json_addstring(&j, ZBX_SYSYNFO_FSTYPE_TAG, mntpoint->fstype, ZBX_JSON_TYPE_STRING);
-			zbx_json_adduint64(&j, ZBX_SYSYNFO_TOTAL_TAG, mntpoint->total);
-			zbx_json_adduint64(&j, ZBX_SYSYNFO_FREE_TAG, mntpoint->not_used);
-			zbx_json_adduint64(&j, ZBX_SYSYNFO_USED_TAG, mntpoint->used);
-			zbx_json_addfloat(&j, ZBX_SYSYNFO_PFREE_TAG, mntpoint->pfree);
-			zbx_json_addfloat(&j, ZBX_SYSYNFO_PUSED_TAG, mntpoint->pused);
+			zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSNAME, mntpoint->fsname, ZBX_JSON_TYPE_STRING);
+			zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSTYPE, mntpoint->fstype, ZBX_JSON_TYPE_STRING);
+			zbx_json_adduint64(&j, ZBX_SYSINFO_TAG_TOTAL, mntpoint->total);
+			zbx_json_adduint64(&j, ZBX_SYSINFO_TAG_FREE, mntpoint->not_used);
+			zbx_json_adduint64(&j, ZBX_SYSINFO_TAG_USED, mntpoint->used);
+			zbx_json_addfloat(&j, ZBX_SYSINFO_TAG_PFREE, mntpoint->pfree);
+			zbx_json_addfloat(&j, ZBX_SYSINFO_TAG_PUSED, mntpoint->pused);
 			zbx_json_close(&j);
 		}
 	}
