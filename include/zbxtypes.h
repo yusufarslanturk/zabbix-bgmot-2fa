@@ -144,11 +144,6 @@ typedef __int64	zbx_offset_t;
 #		endif
 #	endif
 
-#define	ZBX_FS_DBL		"%lf"
-#define	ZBX_FS_DBL_EXT(p)	"%." #p "lf"
-
-#define ZBX_PTR_SIZE		sizeof(void *)
-
 typedef uint32_t	zbx_uint32_t;
 
 typedef off_t	zbx_offset_t;
@@ -156,6 +151,10 @@ typedef off_t	zbx_offset_t;
 
 #endif	/* _WINDOWS */
 
+#define	ZBX_FS_DBL		"%lf"
+#define	ZBX_FS_DBL_EXT(p)	"%." #p "lf"
+
+#define ZBX_PTR_SIZE		sizeof(void *)
 #define ZBX_FS_SIZE_T		ZBX_FS_UI64
 #define ZBX_FS_SSIZE_T		ZBX_FS_I64
 #define ZBX_FS_TIME_T		ZBX_FS_I64
