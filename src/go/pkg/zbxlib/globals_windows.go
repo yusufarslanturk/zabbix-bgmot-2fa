@@ -88,34 +88,6 @@ char	*strerror_from_system(unsigned long error)
 	return utf8_string;
 }
 
-char	*strerror_from_module(unsigned long error, const wchar_t *module)
-{
-	size_t		offset = 0;
-	wchar_t		wide_string[ZBX_MESSAGE_BUF_SIZE];
-	HMODULE		hmodule;
-	static __thread char	utf8_string[ZBX_MESSAGE_BUF_SIZE];
-
-	*utf8_string = '\0';
-	hmodule = GetModuleHandle(module);
-
-	offset += zbx_snprintf(utf8_string, sizeof(utf8_string), "[0x%08lX] ", error);
-
-	if (0 == FormatMessage(FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_IGNORE_INSERTS, hmodule, error,
-			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), wide_string, sizeof(wide_string), NULL))
-	{
-		zbx_snprintf(utf8_string + offset, sizeof(utf8_string) - offset,
-				"unable to find message text: %s", strerror_from_system(GetLastError()));
-
-		return utf8_string;
-	}
-
-	zbx_unicode_to_utf8_static(wide_string, utf8_string + offset, (int)(sizeof(utf8_string) - offset));
-
-	zbx_rtrim(utf8_string, "\r\n ");
-
-	return utf8_string;
-}
-
 int	PERF_COUNTER(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
 	SET_MSG_RESULT(result, zbx_strdup(NULL, "Not supported."));
