@@ -43,7 +43,7 @@ ifeq ("$(ARCH)", "x86")
 
 else
 	TARGETBIN=$(TOPDIR)\bin\win64\zabbix_agent2.exe
-	GOARCH :=
+	GOARCH := amd64
 endif
 
 ifneq ("$(OPENSSL)", "")
