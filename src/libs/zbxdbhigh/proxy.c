@@ -3212,8 +3212,7 @@ static int	parse_history_data_row_hostkey(const struct zbx_json_parse *jp_row, z
  *                                                                            *
  ******************************************************************************/
 static int	parse_history_data(struct zbx_json_parse *jp_data, const char **pnext, zbx_agent_value_t *values,
-		zbx_host_key_t *hostkeys, int *values_num, int *parsed_num, zbx_timespec_t *unique_shift,
-		char **error)
+		zbx_host_key_t *hostkeys, int *values_num, int *parsed_num, zbx_timespec_t *unique_shift)
 {
 	struct zbx_json_parse	jp_row;
 	int			ret = FAIL;
@@ -3237,7 +3236,7 @@ static int	parse_history_data(struct zbx_json_parse *jp_data, const char **pnext
 	{
 		if (FAIL == zbx_json_brackets_open(*pnext, &jp_row))
 		{
-			*error = zbx_strdup(*error, zbx_json_strerror());
+			zabbix_log(LOG_LEVEL_WARNING, "%s", zbx_json_strerror());
 			goto out;
 		}
 
@@ -3580,10 +3579,10 @@ static int	sender_item_validator(DC_ITEM *item, zbx_socket_t *sock, void *args, 
 	return rights->value;
 }
 
-static int	process_history_data_by_keys(zbx_socket_t *sock, zbx_client_item_validator_t validator_func,
+static void	process_history_data_by_keys(zbx_socket_t *sock, zbx_client_item_validator_t validator_func,
 		void *validator_args, char **info, struct zbx_json_parse *jp_data, const char *token)
 {
-	int			ret, values_num, read_num, processed_num = 0, total_num = 0, i;
+	int			values_num, read_num, processed_num = 0, total_num = 0, i;
 	zbx_timespec_t		unique_shift = {0, 0};
 	const char		*pnext = NULL;
 	char			*error = NULL;
@@ -3602,7 +3601,7 @@ static int	process_history_data_by_keys(zbx_socket_t *sock, zbx_client_item_vali
 	memset(hostkeys, 0, sizeof(zbx_host_key_t) * ZBX_HISTORY_VALUES_MAX);
 
 	while (SUCCEED == parse_history_data(jp_data, &pnext, values, hostkeys, &values_num, &read_num,
-			&unique_shift, &error) && 0 != values_num)
+			&unique_shift) && 0 != values_num)
 	{
 		DCconfig_get_items_by_keys(items, hostkeys, errcodes, values_num);
 
@@ -3662,19 +3661,8 @@ static int	process_history_data_by_keys(zbx_socket_t *sock, zbx_client_item_vali
 	zbx_free(hostkeys);
 	zbx_free(items);
 
-	if (NULL == error)
-	{
-		ret = SUCCEED;
-		*info = zbx_dsprintf(*info, "processed: %d; failed: %d; total: %d; seconds spent: " ZBX_FS_DBL,
-				processed_num, total_num - processed_num, total_num, zbx_time() - sec);
-	}
-	else
-	{
-		zbx_free(*info);
-		*info = error;
-	}
-
-	return ret;
+	*info = zbx_dsprintf(*info, "processed: %d; failed: %d; total: %d; seconds spent: " ZBX_FS_DBL,
+			processed_num, total_num - processed_num, total_num, zbx_time() - sec);
 }
 
 /******************************************************************************
@@ -3759,7 +3747,7 @@ static int	process_client_history_data(zbx_socket_t *sock, struct zbx_json_parse
 		}
 	}
 	else
-		ret = process_history_data_by_keys(sock, validator_func, validator_args, info, &jp_data, token);
+		process_history_data_by_keys(sock, validator_func, validator_args, info, &jp_data, token);
 out:
 	zbx_free(token);
 
