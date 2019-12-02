@@ -26,7 +26,7 @@ OBJS = \
 	$(OUTPUTDIR)\algodefs.o \
 	$(OUTPUTDIR)\sysinfo_system.o \
 	$(OUTPUTDIR)\eventlog.o
-	
+
 CFLAGS := $(CFLAGS) -O2 -g -DUNICODE -DHAVE_STDINT_H=1 -I$(TOPDIR)\include -I$(TOPDIR)\build\win32\include -I$(TOPDIR)\build\mingw
 GOPATH := $(GOPATH);$(TOPDIR)\go
 TAGS :=
@@ -61,8 +61,8 @@ ifneq ("$(PCRE)", "")
 	LDFLAGS := $(LDFLAGS) -L$(PCRE)\lib
 endif
 
-CGO_CFLAGS += $(CFLAGS) 
-CGO_LDFLAGS += $(LDFLAGS) 
+CGO_CFLAGS += $(CFLAGS)
+CGO_LDFLAGS += $(LDFLAGS)
 
 PKG=zabbix.com/pkg/version
 
@@ -130,15 +130,15 @@ $(TARGETBIN): $(OBJS) .FORCE
 	set CGO_LDFLAGS=$(CGO_LDFLAGS)
 	set GOARCH=$(GOARCH)
 	set CGO_ENABLED=1
-	
+
 	for /F "usebackq tokens=1,2 delims==" %%i in (`wmic os get LocalDateTime /VALUE 2^>NUL`) do if '.%%i.'=='.LocalDateTime.' set ldt=%%j
 	set BUILD_DATE=%ldt:~0,4%-%ldt:~4,2%-%ldt:~6,2%
 	set BUILD_TIME=%ldt:~8,2%:%ldt:~10,2%:%ldt:~12,2%
-	
+
 	set GOLDFLAGS=$(GOLDFLAGS) -X $(PKG).compileDate=%BUILD_DATE%
 	set GOLDFLAGS=%GOLDFLAGS% -X $(PKG).compileTime=%BUILD_TIME%
 	cd $(MODULEDIR)
-	
+
 	go build -mod vendor -tags "$(TAGS)" -ldflags="%GOLDFLAGS%" -o $(TARGETBIN) zabbix.com/cmd/zabbix_agent2
 
 clean:
