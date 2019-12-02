@@ -25,9 +25,9 @@
 
 typedef struct
 {
-	char		fsname[MAX_STRING_LEN];
-	char		fstype[MAX_STRING_LEN];
-	char		fsdrivetype[MAX_STRING_LEN];
+	char		*fsname;
+	char		*fstype;
+	char		*fsdrivetype;
 	zbx_uint64_t	total;
 	zbx_uint64_t	not_used;
 	zbx_uint64_t	used;
@@ -35,6 +35,35 @@ typedef struct
 	double		pused;
 }
 zbx_wmpoint_t;
+
+#define zbx_wcsdup(old, str)		zbx_wcsdup2(__FILE__, __LINE__, old, str)
+
+static wchar_t	*zbx_wcsdup2(const char *filename, int line, wchar_t *old, const wchar_t *str)
+{
+	int	retry;
+	wchar_t	*ptr = NULL;
+
+	zbx_free(old);
+
+	for (retry = 10; 0 < retry && NULL == ptr; ptr = wcsdup(str), retry--)
+		;
+
+	if (NULL != ptr)
+		return ptr;
+
+	zabbix_log(LOG_LEVEL_CRIT, "[file:%s,line:%d] zbx_wcsdup: out of memory. Requested " ZBX_FS_SIZE_T " bytes.",
+			filename, line, (zbx_fs_size_t)((wcslen(str) + 1) * sizeof(wchar_t)));
+
+	exit(EXIT_FAILURE);
+}
+
+static int	wmpoint_compare_func(const void *d1, const void *d2)
+{
+	const zbx_wmpoint_t	*m1 = *(const zbx_wmpoint_t **)d1;
+	const zbx_wmpoint_t	*m2 = *(const zbx_wmpoint_t **)d2;
+
+	return strcmp(m1->fsname, m2->fsname);
+}
 
 static int	get_fs_size_stat(const char *fs, zbx_uint64_t *total, zbx_uint64_t *not_used,
 		zbx_uint64_t *used, double *pfree, double *pused, char **error)
@@ -144,54 +173,14 @@ static const char	*get_drive_type_string(UINT type)
 	}
 }
 
-static void	add_fs_to_json(zbx_wmpoint_t *mntpoint, struct zbx_json *j, const char *fsname_tag,
-		const char *fstype_tag,	const char *fsdrivetype_tag, int metrics)
+static void	get_fs_data(const wchar_t* path, char **fsname, char **fstype, char **fsdrivetype)
 {
-	zbx_json_addobject(j, NULL);
-	zbx_json_addstring(j, fsname_tag, mntpoint->fsname, ZBX_JSON_TYPE_STRING);
-	zbx_json_addstring(j, fstype_tag, mntpoint->fstype, ZBX_JSON_TYPE_STRING);
-	zbx_json_addstring(j, fsdrivetype_tag, mntpoint->fsdrivetype, ZBX_JSON_TYPE_STRING);
+	wchar_t	fs_name[MAX_PATH + 1], *long_path = NULL;
+	size_t	sz;
 
-	if (1 == metrics)
-	{
-		zbx_json_adduint64(j, ZBX_SYSINFO_TAG_TOTAL, mntpoint->total);
-		zbx_json_adduint64(j, ZBX_SYSINFO_TAG_FREE, mntpoint->not_used);
-		zbx_json_adduint64(j, ZBX_SYSINFO_TAG_USED, mntpoint->used);
-		zbx_json_addfloat(j, ZBX_SYSINFO_TAG_PFREE, mntpoint->pfree);
-		zbx_json_addfloat(j, ZBX_SYSINFO_TAG_PUSED, mntpoint->pused);
-	}
-
-	zbx_json_close(j);
-}
-
-static void	add_fs_to_vector(zbx_vector_ptr_t *mntpoints, wchar_t *path, int metrics)
-{
-	wchar_t		fs_name[MAX_PATH + 1], *long_path = NULL;
-	char		*utf8;
-	size_t		sz;
-	zbx_wmpoint_t	*mntpoint;
-	zbx_uint64_t	total, not_used, used;
-	double		pfree, pused;
-	char 		*error;
-
-
-	utf8 = zbx_unicode_to_utf8(path);
-	sz = strlen(utf8);
-
-	if (0 < sz && '\\' == utf8[--sz])
-		utf8[sz] = '\0';
-
-	if (0 != metrics && SYSINFO_RET_OK != get_fs_size_stat(utf8, &total, &not_used, &used, &pfree, &pused,&error))
-	{
-		zbx_free(error);
-		zbx_free(utf8);
-		return;
-	}
-
-	mntpoint = (zbx_wmpoint_t *)zbx_malloc(NULL, sizeof(zbx_wmpoint_t));
-	zbx_strlcpy(mntpoint->fsname, utf8, MAX_STRING_LEN);
-
-	zbx_free(utf8);
+	*fsname = zbx_unicode_to_utf8(path);
+	if (0 < (sz = strlen(*fsname)) && '\\' == (*fsname)[--sz])
+		(*fsname)[sz] = '\0';
 
 	/* add \\?\ prefix if path exceeds MAX_PATH */
 	if (MAX_PATH < (sz = wcslen(path) + 1) && 0 != wcsncmp(path, L"\\\\?\\", 4))
@@ -209,74 +198,85 @@ static void	add_fs_to_vector(zbx_vector_ptr_t *mntpoints, wchar_t *path, int met
 	}
 
 	if (FALSE != GetVolumeInformation(path, NULL, 0, NULL, NULL, NULL, fs_name, ARRSIZE(fs_name)))
-	{
-		utf8 = zbx_unicode_to_utf8(fs_name);
-		zbx_strlcpy(mntpoint->fstype, utf8, MAX_STRING_LEN);
-		zbx_free(utf8);
-	}
+		*fstype = zbx_unicode_to_utf8(fs_name);
 	else
-		zbx_strlcpy(mntpoint->fstype, "UNKNOWN", MAX_STRING_LEN);
+		*fstype = zbx_strdup(NULL, "UNKNOWN");
 
-	zbx_strlcpy(mntpoint->fsdrivetype, get_drive_type_string(GetDriveType(path)), MAX_STRING_LEN);
-
-	if (0 != metrics)
-	{
-		mntpoint->total = total;
-		mntpoint->not_used = not_used;
-		mntpoint->used = used;
-		mntpoint->pfree = pfree;
-		mntpoint->pused = pused;
-	}
-	zbx_vector_ptr_append(mntpoints, mntpoint);
+	*fsdrivetype = zbx_strdup(NULL, get_drive_type_string(GetDriveType(path)));
 
 	zbx_free(long_path);
 }
 
+static int	add_fs_to_vector(zbx_vector_ptr_t *mntpoints, wchar_t *path, char **error)
+{
+	zbx_wmpoint_t	*mntpoint;
+	zbx_uint64_t	total, not_used, used;
+	double		pfree, pused;
+	char 		*fsname = NULL, *fstype = NULL, *fsdrivetype = NULL;
+
+	get_fs_data(path, &fsname, &fstype, &fsdrivetype);
+
+	if (SYSINFO_RET_OK != get_fs_size_stat(fsname, &total, &not_used, &used, &pfree, &pused, error))
+	{
+		zbx_free(fsname);
+		zbx_free(fstype);
+		zbx_free(fsdrivetype);
+		return FAIL;
+	}
+
+	mntpoint = (zbx_wmpoint_t *)zbx_malloc(NULL, sizeof(zbx_wmpoint_t));
+	mntpoint->fsname = fsname;
+	mntpoint->fstype = fstype;
+	mntpoint->fsdrivetype = fsdrivetype;
+	mntpoint->total = total;
+	mntpoint->not_used = not_used;
+	mntpoint->used = used;
+	mntpoint->pfree = pfree;
+	mntpoint->pused = pused;
+	zbx_vector_ptr_append(mntpoints, mntpoint);
+
+	return SUCCEED;
+}
+
 static void	zbx_wmpoints_free(zbx_wmpoint_t *mpoint)
 {
+	zbx_free(mpoint->fsname);
+	zbx_free(mpoint->fstype);
+	zbx_free(mpoint->fsdrivetype);
 	zbx_free(mpoint);
 }
 
-int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
+static int	get_mount_paths(zbx_vector_ptr_t *mount_paths, char **error)
 {
-	wchar_t			*buffer = NULL, volume_name[MAX_PATH + 1], *p;
-	DWORD			size_dw;
-	size_t			sz;
-	struct zbx_json		j;
-	HANDLE			volume;
-	int			ret;
-	zbx_vector_ptr_t	mntpoints;
-	zbx_wmpoint_t		*mntpoint;
-	int 			i;
+	wchar_t	*buffer = NULL, volume_name[MAX_PATH + 1], *p;
+	DWORD	size_dw, last_error;
+	HANDLE	volume = INVALID_HANDLE_VALUE;
+	size_t	sz;
+	int	ret = FAIL;
 
 	/* make an initial call to GetLogicalDriveStrings() to get the necessary size into the dwSize variable */
 	if (0 == (size_dw = GetLogicalDriveStrings(0, buffer)))
 	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot obtain necessary buffer size from system."));
-		return SYSINFO_RET_FAIL;
+		*error = zbx_strdup(*error, "Cannot obtain necessary buffer size from system.");
+		return FAIL;
 	}
-
-	zbx_vector_ptr_create(&mntpoints);
-	zbx_json_initarray(&j, ZBX_JSON_STAT_BUF_LEN);
 
 	buffer = (wchar_t *)zbx_malloc(buffer, (size_dw + 1) * sizeof(wchar_t));
 
 	/* make a second call to GetLogicalDriveStrings() to get the actual data we require */
 	if (0 == (size_dw = GetLogicalDriveStrings(size_dw, buffer)))
 	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot obtain a list of filesystems."));
-		ret = SYSINFO_RET_FAIL;
+		*error = zbx_strdup(*error, "Cannot obtain necessary buffer size from system.");
 		goto out;
 	}
 
 	/* add drive letters */
 	for (p = buffer, sz = wcslen(p); sz > 0; p += sz + 1, sz = wcslen(p))
-		add_fs_to_vector(&mntpoints,p,1);
+		zbx_vector_ptr_append(mount_paths, zbx_wcsdup(NULL, p));
 
 	if (INVALID_HANDLE_VALUE == (volume = FindFirstVolume(volume_name, ARRSIZE(volume_name))))
 	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot find a volume."));
-		ret = SYSINFO_RET_FAIL;
+		*error = zbx_strdup(*error, "Cannot find a volume.");
 		goto out;
 	}
 
@@ -285,16 +285,10 @@ int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
 	{
 		while (FALSE == GetVolumePathNamesForVolumeName(volume_name, buffer, size_dw, &size_dw))
 		{
-			DWORD last_error;
-
-			last_error = GetLastError();
-
-			if (ERROR_MORE_DATA != last_error)
+			if (ERROR_MORE_DATA != (last_error = GetLastError()))
 			{
-				FindVolumeClose(volume);
-				SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Cannot obtain a list of filesystems: %s",
-						strerror_from_system(last_error)));
-				ret = SYSINFO_RET_FAIL;
+				*error = zbx_dsprintf(*error, "Cannot obtain a list of filesystems: %s",
+						strerror_from_system(last_error));
 				goto out;
 			}
 
@@ -305,51 +299,87 @@ int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
 		{
 			/* add mount point folder paths but skip drive letters */
 			if (3 < sz)
-				add_fs_to_vector(&mntpoints,p,1);
+				zbx_vector_ptr_append(mount_paths, zbx_wcsdup(NULL, p));
 		}
 
 	} while (FALSE != FindNextVolume(volume, volume_name, ARRSIZE(volume_name)));
 
-	for (i = 0; i < mntpoints.values_num; i++)
+	if (ERROR_NO_MORE_FILES != (last_error = GetLastError()))
 	{
-		mntpoint = (zbx_wmpoint_t *)mntpoints.values[i];
-		add_fs_to_json(mntpoint, &j, ZBX_LLD_MACRO_FSNAME, ZBX_LLD_MACRO_FSTYPE, ZBX_LLD_MACRO_FSDRIVETYPE, 0);
+		*error = zbx_dsprintf(*error, "Cannot obtain complete list of filesystems.",
+				strerror_from_system(last_error));
+		goto out;
 	}
 
-	if (ERROR_NO_MORE_FILES != GetLastError())
-	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot obtain complete list of filesystems."));
-		ret = SYSINFO_RET_FAIL;
-	}
-	else
-	{
-		zbx_json_close(&j);
-		SET_STR_RESULT(result, zbx_strdup(NULL, j.buffer));
-		ret = SYSINFO_RET_OK;
-	}
-
-	FindVolumeClose(volume);
+	ret = SUCCEED;
 out:
-	zbx_json_free(&j);
+	if (INVALID_HANDLE_VALUE != volume)
+		FindVolumeClose(volume);
+
 	zbx_free(buffer);
-	zbx_vector_ptr_clear_ext(&mntpoints, (zbx_clean_func_t)zbx_wmpoints_free);
-	zbx_vector_ptr_destroy(&mntpoints);
+	return ret;
+}
+
+int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
+{
+	struct zbx_json		j;
+	int 			i, ret = SYSINFO_RET_FAIL;
+	zbx_vector_ptr_t	mount_paths;
+	char			*error = NULL, *fsname, *fstype, *fsdrivetype;
+
+	zbx_vector_ptr_create(&mount_paths);
+	if (FAIL == get_mount_paths(&mount_paths, &error))
+	{
+		SET_MSG_RESULT(result, error);
+		goto out;
+	}
+
+	zbx_json_initarray(&j, ZBX_JSON_STAT_BUF_LEN);
+
+	for (i = 0; i < mount_paths.values_num; i++)
+	{
+		get_fs_data(mount_paths.values[i], &fsname, &fstype, &fsdrivetype);
+
+		zbx_json_addobject(&j, NULL);
+		zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSNAME, fsname, ZBX_JSON_TYPE_STRING);
+		zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSTYPE, fstype, ZBX_JSON_TYPE_STRING);
+		zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSDRIVETYPE, fsdrivetype, ZBX_JSON_TYPE_STRING);
+		zbx_json_close(&j);
+
+		zbx_free(fsname);
+		zbx_free(fstype);
+		zbx_free(fsdrivetype);
+	}
+
+	zbx_json_close(&j);
+
+	SET_STR_RESULT(result, zbx_strdup(NULL, j.buffer));
+	ret = SYSINFO_RET_OK;
+out:
+	zbx_vector_ptr_clear_ext(&mount_paths, (zbx_clean_func_t)zbx_ptr_free);
+	zbx_vector_ptr_destroy(&mount_paths);
+
+	zbx_json_free(&j);
 
 	return ret;
 }
 
 static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result,  HANDLE timeout_event)
 {
-	wchar_t			*buffer = NULL, volume_name[MAX_PATH + 1], *p;
-	DWORD			size_dw;
 	size_t			sz;
 	struct zbx_json		j;
-	HANDLE			volume;
-	int			ret;
 	zbx_vector_ptr_t	mntpoints;
-	zbx_wmpoint_t		*mntpoint;
-	int			i;
-	char 			*mpoint;
+	zbx_wmpoint_t		*mpoint;
+	int			i, ret = SYSINFO_RET_FAIL;
+	char 			*error = NULL;
+	zbx_vector_ptr_t	mount_paths;
+
+	zbx_vector_ptr_create(&mount_paths);
+	if (FAIL == get_mount_paths(&mount_paths, &error))
+	{
+		SET_MSG_RESULT(result, error);
+		goto out;
+	}
 
 	/* 'timeout_event' argument is here to make the vfs_fs_size() prototype as required by */
 	/* zbx_execute_threaded_metric() on MS Windows */
@@ -357,136 +387,57 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result,  HANDLE time
 	zbx_json_initarray(&j, ZBX_JSON_STAT_BUF_LEN);
 	zbx_vector_ptr_create(&mntpoints);
 
-	for (i = 0; i < 2; i++)
+	for (i = 0; i < mount_paths.values_num; i++)
 	{
-		/* make an initial call to GetLogicalDriveStrings() to get the necessary size into the dwSize variable */
-		if (0 == (size_dw = GetLogicalDriveStrings(0, buffer)))
+		if (FAIL == add_fs_to_vector(&mntpoints, mount_paths.values[i], &error))
 		{
-			SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot obtain necessary buffer size from system."));
-			ret = SYSINFO_RET_FAIL;
+			SET_MSG_RESULT(result, error);
 			goto out;
 		}
-
-		buffer = (wchar_t *)zbx_malloc(buffer, (size_dw + 1) * sizeof(wchar_t));
-
-		/* make a second call to GetLogicalDriveStrings() to get the actual data we require */
-		if (0 == (size_dw = GetLogicalDriveStrings(size_dw, buffer)))
-		{
-			SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot obtain a list of filesystems."));
-			ret = SYSINFO_RET_FAIL;
-			goto out;
-		}
-
-		/* add drive letters */
-		for (p = buffer, sz = wcslen(p); sz > 0; p += sz + 1, sz = wcslen(p))
-		{
-			int idx;
-
-			if (0 != i)
-			{
-				mpoint = zbx_unicode_to_utf8(p);
-				sz = strlen(mpoint);
-
-				if (0 < sz && '\\' == mpoint[--sz])
-					mpoint[sz] = '\0';
-				if (FAIL != (idx = zbx_vector_ptr_search(&mntpoints,
-						mpoint, ZBX_DEFAULT_STR_COMPARE_FUNC)))
-				{
-					mntpoint = (zbx_wmpoint_t *)mntpoints.values[idx];
-					add_fs_to_json(mntpoint, &j, ZBX_SYSINFO_TAG_FSNAME, ZBX_SYSINFO_TAG_FSTYPE,
-							ZBX_SYSINFO_TAG_FSDRIVETYPE, 1);
-				}
-				zbx_free(mpoint);
-			}
-			else
-			{
-				/* add drive letters with sizes to array */
-				add_fs_to_vector(&mntpoints,p,1);
-			}
-		}
-
-		if (INVALID_HANDLE_VALUE == (volume = FindFirstVolume(volume_name, ARRSIZE(volume_name))))
-		{
-			SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot find a volume."));
-			ret = SYSINFO_RET_FAIL;
-			goto out;
-		}
-
-		/* search volumes for mount point folder paths */
-		do
-		{
-			while (FALSE == GetVolumePathNamesForVolumeName(volume_name, buffer, size_dw, &size_dw))
-			{
-				DWORD last_error;
-
-				last_error = GetLastError();
-
-				if (ERROR_MORE_DATA != last_error)
-				{
-					FindVolumeClose(volume);
-					SET_MSG_RESULT(result, zbx_dsprintf(NULL,
-							"Cannot obtain a list of filesystems: %s",
-							strerror_from_system(last_error)));
-					ret = SYSINFO_RET_FAIL;
-					goto out;
-				}
-
-				buffer = (wchar_t*)zbx_realloc(buffer, size_dw * sizeof(wchar_t));
-			}
-
-			for (p = buffer, sz = wcslen(p); sz > 0; p += sz + 1, sz = wcslen(p))
-			{
-				int idx;
-
-				/* add mount point folder paths but skip drive letters */
-				if (3 < sz)
-				{
-					if (0 != i)
-					{
-						mpoint = zbx_unicode_to_utf8(p);
-						sz = strlen(mpoint);
-
-						if (0 < sz && '\\' == mpoint[--sz])
-							mpoint[sz] = '\0';
-
-						if (FAIL != (idx = zbx_vector_ptr_search(&mntpoints,
-									mpoint, ZBX_DEFAULT_STR_COMPARE_FUNC)))
-						{
-							mntpoint = (zbx_wmpoint_t *)mntpoints.values[idx];
-							add_fs_to_json(mntpoint, &j, ZBX_SYSINFO_TAG_FSNAME,
-									ZBX_SYSINFO_TAG_FSTYPE,
-									ZBX_SYSINFO_TAG_FSDRIVETYPE, 1);
-						}
-						zbx_free(mpoint);
-					}
-					else
-						add_fs_to_vector(&mntpoints,p,1);
-				}
-			}
-
-		} while (FALSE != FindNextVolume(volume, volume_name, ARRSIZE(volume_name)));
-
-		if (0 != i)
-		{
-			if (ERROR_NO_MORE_FILES != GetLastError())
-			{
-				SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot obtain complete list of filesystems."));
-				ret = SYSINFO_RET_FAIL;
-			}
-			else
-			{
-				zbx_json_close(&j);
-				SET_STR_RESULT(result, zbx_strdup(NULL, j.buffer));
-				ret = SYSINFO_RET_OK;
-			}
-		}
-
-		FindVolumeClose(volume);
-		zbx_free(buffer);
 	}
+
+	zbx_vector_ptr_clear_ext(&mount_paths, (zbx_clean_func_t)zbx_ptr_free);
+	if (FAIL == get_mount_paths(&mount_paths, &error))
+	{
+		SET_MSG_RESULT(result, error);
+		goto out;
+	}
+
+	for (i = 0; i < mount_paths.values_num; i++)
+	{
+		zbx_wmpoint_t	mpoint_local;
+		int		idx;
+
+		mpoint_local.fsname = zbx_unicode_to_utf8(mount_paths.values[i]);
+		if (0 < (sz = strlen(mpoint_local.fsname)) && '\\' == mpoint_local.fsname[--sz])
+			mpoint_local.fsname[sz] = '\0';
+
+		if (FAIL != (idx = zbx_vector_ptr_search(&mntpoints, &mpoint_local, wmpoint_compare_func)))
+		{
+			mpoint = (zbx_wmpoint_t *)mntpoints.values[idx];
+			zbx_json_addobject(&j, NULL);
+			zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSNAME, mpoint->fsname, ZBX_JSON_TYPE_STRING);
+			zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSTYPE, mpoint->fstype, ZBX_JSON_TYPE_STRING);
+			zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSDRIVETYPE, mpoint->fsdrivetype, ZBX_JSON_TYPE_STRING);
+			zbx_json_adduint64(&j, ZBX_SYSINFO_TAG_TOTAL, mpoint->total);
+			zbx_json_adduint64(&j, ZBX_SYSINFO_TAG_FREE, mpoint->not_used);
+			zbx_json_adduint64(&j, ZBX_SYSINFO_TAG_USED, mpoint->used);
+			zbx_json_addfloat(&j, ZBX_SYSINFO_TAG_PFREE, mpoint->pfree);
+			zbx_json_addfloat(&j, ZBX_SYSINFO_TAG_PUSED, mpoint->pused);
+			zbx_json_close(&j);
+		}
+		zbx_free(mpoint_local.fsname);
+	}
+
+	zbx_json_close(&j);
+
+	SET_STR_RESULT(result, zbx_strdup(NULL, j.buffer));
+	ret = SYSINFO_RET_OK;
 out:
+	zbx_vector_ptr_clear_ext(&mount_paths, (zbx_clean_func_t)zbx_ptr_free);
+	zbx_vector_ptr_destroy(&mount_paths);
+
 	zbx_json_free(&j);
-	zbx_free(buffer);
 	zbx_vector_ptr_clear_ext(&mntpoints, (zbx_clean_func_t)zbx_wmpoints_free);
 	zbx_vector_ptr_destroy(&mntpoints);
 
