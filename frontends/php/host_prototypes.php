@@ -399,8 +399,8 @@ if (hasRequest('form')) {
 
 	// This data is used in common.template.edit.js.php.
 	$data['macros_tab'] = [
-		'add_templates' => array_map('strval', array_keys($data['host_prototype']['add_templates'])),
-		'linked_templates' => array_map('strval', $templateids)
+		'linked_templates' => array_map('strval', $templateids),
+		'add_templates' => array_map('strval', array_keys($data['host_prototype']['add_templates']))
 	];
 
 	// render view

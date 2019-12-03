@@ -26,7 +26,6 @@ class CControllerHostMacrosList extends CController {
 			'macros'				=> 'array',
 			'show_inherited_macros' => 'required|in 0,1',
 			'templateids'			=> 'array_db hosts.hostid',
-			'add_templates'			=> 'array_db hosts.hostid',
 			'readonly'				=> 'required|in 0,1'
 		];
 
@@ -63,9 +62,7 @@ class CControllerHostMacrosList extends CController {
 		}
 
 		if ($show_inherited_macros) {
-			$macros = mergeInheritedMacros($macros, getInheritedMacros(
-				array_merge($this->getInput('templateids', []), $this->getInput('add_templates', []))
-			));
+			$macros = mergeInheritedMacros($macros, getInheritedMacros($this->getInput('templateids', [])));
 		}
 
 		if ($macros) {

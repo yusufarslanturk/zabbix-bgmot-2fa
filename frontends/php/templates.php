@@ -817,8 +817,8 @@ elseif (hasRequest('form')) {
 
 	// This data is used in common.template.edit.js.php.
 	$data['macros_tab'] = [
-		'add_templates' => array_map('strval', array_keys($data['add_templates'])),
-		'linked_templates' => array_map('strval', array_keys($data['linked_templates']))
+		'linked_templates' => array_map('strval', array_keys($data['linked_templates'])),
+		'add_templates' => array_map('strval', array_keys($data['add_templates']))
 	];
 
 	$view = new CView('configuration.template.edit', $data);

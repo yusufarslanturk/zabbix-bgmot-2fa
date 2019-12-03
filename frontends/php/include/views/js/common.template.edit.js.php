@@ -101,13 +101,6 @@ if (!$data['readonly']) {
 	</script>
 	<script type="text/javascript">
 		function processHostMacrosListTable(show_inherited_macros) {
-			/*
-			 * If show_inherited_macros comes as string for some reason, convert it to number and then to boolean.
-			 * Otherwise "0" converts to true.
-			 * https://www.w3schools.com/js/tryit.asp?filename=tryjs_type_convert_string_0
-			 */
-			show_inherited_macros = Boolean(Number(show_inherited_macros));
-
 			jQuery('#tbl_macros')
 				.dynamicRows({
 					remove_next_sibling: show_inherited_macros,
@@ -231,11 +224,12 @@ if (!$data['readonly']) {
 			$ms = $('#add_templates_'),
 			$show_inherited_macros = $('input[name="show_inherited_macros"]'),
 			$form = $show_inherited_macros.closest('form'),
+			linked_templates = <?= CJs::encodeJson($data['macros_tab']['linked_templates']) ?>,
 			add_templates = <?= CJs::encodeJson($data['macros_tab']['add_templates']) ?>,
 			readonly = <?= (int) $data['readonly'] ?>;
 
-		if (readonly === 0) {
-			processHostMacrosListTable(<?= (int) $data['show_inherited_macros'] ?>);
+		if (!readonly) {
+			processHostMacrosListTable($show_inherited_macros.val() == 1);
 		}
 
 		$('#tabs').on('tabsactivate', function(event, ui) {
@@ -255,29 +249,27 @@ if (!$data['readonly']) {
 			}
 
 			var url = new Curl('zabbix.php'),
-				show_inherited_macros_value = $(this).val();
+				macros = getMacros($form),
+				show_inherited_macros = $(this).val() == 1;
 
 			url.setArgument('action', 'hostmacros.list');
 
-			$.ajax({
+			// DEV-1276 replace with this: $container.addClass('is-loading');
+			$container.empty().append(
+				$('<span></span>').addClass('preloader').css({'display': 'inline-block'})
+			);
+
+			$.ajax(url.getUrl(), {
 				data: {
-					macros: getMacros($form),
-					show_inherited_macros: show_inherited_macros_value,
-					templateids: <?= CJs::encodeJson($data['macros_tab']['linked_templates']) ?>,
-					add_templates: add_templates,
+					macros: macros,
+					show_inherited_macros: show_inherited_macros ? 1 : 0,
+					templateids: linked_templates.concat(add_templates),
 					readonly: readonly
 				},
-				url: url.getUrl(),
 				dataType: 'json',
-				method: 'POST',
-				beforeSend: function() {
-					$container.empty().append(
-						$('<span></span>').addClass('preloader').css({'display': 'inline-block'})
-					);
-
-					// DEV-1276 replace with this: $container.addClass('is-loading');
-				},
-				success: function(response) {
+				method: 'POST'
+			})
+				.done(function(response) {
 					if (typeof response === 'object' && 'errors' in response) {
 						$container.append(response.errors);
 					}
@@ -288,9 +280,9 @@ if (!$data['readonly']) {
 
 						$container.append(response.body);
 
-						<?php if (!$data['readonly']): ?>
-							processHostMacrosListTable(show_inherited_macros_value);
-						<?php endif ?>
+						if (!readonly) {
+							processHostMacrosListTable(show_inherited_macros);
+						}
 
 						// Display debug after loaded content if it is enabled for user.
 						if (typeof response.debug !== 'undefined') {
@@ -300,14 +292,11 @@ if (!$data['readonly']) {
 							$('.debug-output', $container).css({margin: '10px 13px 0 0'});
 						}
 					}
-				},
-				complete: function() {
-					// Due to possible errors, the loader may stay on page. Remove it once request has been completed.
-					$container.find('.preloader').remove();
-
+				})
+				.always(function() {
 					// DEV-1276 replace with this: $container.removeClass('is-loading');
-				}
-			});
+					$container.find('.preloader').remove();
+				});
 		});
 	});
 </script>
