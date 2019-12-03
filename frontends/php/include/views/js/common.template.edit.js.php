@@ -236,7 +236,7 @@ if (!$data['readonly']) {
 			if (ui.newPanel.attr('id') === 'macroTab') {
 				var add_templates_tmp = getAddTemplates($ms);
 
-				if (add_templates.diff(add_templates_tmp).length > 0) {
+				if (add_templates.xor(add_templates_tmp).length > 0) {
 					add_templates = add_templates_tmp;
 					$show_inherited_macros.trigger('change');
 				}

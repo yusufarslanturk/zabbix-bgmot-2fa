@@ -111,20 +111,17 @@ function is_array(obj) {
 }
 
 /**
- * Custom method to check if arrays are different.
+ * Get elements existing exclusively in one of both arrays.
  *
  * @param {Array} arr
  *
  * @returns {Array}
  */
-Array.prototype.diff = function (arr) {
-	// Merge the arrays.
-	var mergedArr = this.concat(arr);
+Array.prototype.xor = function(arr) {
+	var merged_arr = this.concat(arr);
 
-	// Get the elements which are unique in the array and return the diff array.
-	return mergedArr.filter(function (e) {
-		// Check if the element is appearing only once.
-		return (mergedArr.indexOf(e) === mergedArr.lastIndexOf(e));
+	return merged_arr.filter(function(e) {
+		return (merged_arr.indexOf(e) === merged_arr.lastIndexOf(e));
 	});
 };
 
