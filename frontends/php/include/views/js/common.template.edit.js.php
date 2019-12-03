@@ -288,8 +288,8 @@ if (!$data['readonly']) {
 						if (typeof response.debug !== 'undefined') {
 							$container.append(response.debug);
 
-							// Stylize the debug with corret margin inside the block.
-							$('.debug-output', $container).css({margin: '10px 13px 0 0'});
+							// Override margin for inline usage.
+							$('.debug-output', $container).css('margin', '10px 0');
 						}
 					}
 				})
