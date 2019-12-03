@@ -208,4 +208,4 @@ else {
 	}
 }
 
-return $table;
+echo $table;

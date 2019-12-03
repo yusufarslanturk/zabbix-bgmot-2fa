@@ -701,18 +701,18 @@ if (!$data['readonly']) {
 /*
  * Macros
  */
-$macros_table_view = (new CView('hostmacros.list.html', [
-	'macros' => $data['macros'],
-	'show_inherited_macros' => $data['show_inherited_macros'],
-	'readonly' => $data['readonly']
-]));
-$divTabs->addTab('macroTab', _('Macros'), (new CFormList('macrosFormList'))
-	->addRow(null, (new CRadioButtonList('show_inherited_macros', (int) $data['show_inherited_macros']))
-		->addValue(_('Host macros'), 0)
-		->addValue(_('Inherited and host macros'), 1)
-		->setModern(true)
-	)
-	->addRow(null, $macros_table_view->render(), 'macros_container')
+$divTabs->addTab('macroTab', _('Macros'),
+	(new CFormList('macrosFormList'))
+		->addRow(null, (new CRadioButtonList('show_inherited_macros', (int) $data['show_inherited_macros']))
+			->addValue(_('Host macros'), 0)
+			->addValue(_('Inherited and host macros'), 1)
+			->setModern(true)
+		)
+		->addRow(null, new CObject((new CView('hostmacros.list.html', [
+			'macros' => $data['macros'],
+			'show_inherited_macros' => $data['show_inherited_macros'],
+			'readonly' => $data['readonly']
+		]))->getOutput()), 'macros_container')
 );
 
 $inventoryFormList = new CFormList('inventorylist');
