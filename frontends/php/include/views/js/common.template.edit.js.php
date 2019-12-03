@@ -209,22 +209,19 @@ if (!$data['readonly']) {
 	 */
 	function getMacros($form) {
 		var $macros = $form.find('input[name^="macros"], textarea[name^="macros"]'),
-			macros = [];
+			macros = {};
 
 		// Find the correct macro inputs and prepare to submit them via AJAX. matches[1] - index, matches[2] field name.
 		$macros.each(function() {
 			var $this = jQuery(this),
 				matches = $this.attr('name').match(/macros\[(\d+)\]\[(\w+)\]/);
 
-			if (typeof macros[matches[1]] === 'undefined') {
+			if (!macros.hasOwnProperty(matches[1])) {
 				macros[matches[1]] = new Object();
 			}
 
 			macros[matches[1]][matches[2]] = $this.val();
 		});
-
-		// Some rows may have been removed, but JS likes to create empty indexes. Avoid that by cleaning the array.
-		macros.clean(undefined);
 
 		return macros;
 	}

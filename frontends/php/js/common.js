@@ -111,24 +111,6 @@ function is_array(obj) {
 }
 
 /**
- * Cleans the array deleting undefined values.
- *
- * @param {typeof} deleteValue
- *
- * @returns {object}
- */
-Array.prototype.clean = function(deleteValue) {
-	for (var i = 0; i < this.length; i++) {
-		if (this[i] == deleteValue) {
-			this.splice(i, 1);
-			i--;
-		}
-	}
-
-	return this;
-};
-
-/**
  * Custom method to check if arrays are different.
  *
  * @param {Array} arr
