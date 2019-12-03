@@ -250,10 +250,6 @@ if (!$data['readonly']) {
 		});
 
 		$show_inherited_macros.on('change', function() {
-			if (!$(this).is(':checked')) {
-				return;
-			}
-
 			var url = new Curl('zabbix.php'),
 				show_inherited_macros_value = $(this).val();
 
