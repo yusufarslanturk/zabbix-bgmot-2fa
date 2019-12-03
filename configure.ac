@@ -688,7 +688,7 @@ LDFLAGS="$saved_LDFLAGS"
 
 AC_MSG_CHECKING(for '__thread' compiler support)
 AC_TRY_COMPILE([#include <stdio.h>],[static __thread int a = 0;],
-AC_DEFINE(HAVE_THREAD_LOCAL,1,[Define to 1 if copiler option '__thread' supported.])
+AC_DEFINE(HAVE_THREAD_LOCAL,1,[Define to 1 if compiler keyword '__thread' supported.])
 AC_MSG_RESULT(yes),
 AC_MSG_RESULT(no)
 HAVE_THREAD_LOCAL="no")
