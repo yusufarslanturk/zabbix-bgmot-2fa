@@ -276,7 +276,10 @@ class testProblemsBySeverityWidget extends CWebTest {
 					]
 				]
 			],
-			// Totals: Create a widget with selected 'show supprossed problems and ''show operational data' option and removed 'show timeline' option.
+			/*
+			 * Totals: Create a widget with selected 'show supprossed problems and ''show operational data' option
+			 * and removed 'show timeline' option.
+			 */
 			[
 				[
 					'fields' => [
@@ -440,7 +443,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 		else {
 			$this->checkTotalsWidgetContent($data, $widget);
 		}
-		// Check the content of the overlay pop-up if needed.
+		// Check the content of details hintbox for Host "ЗАББИКС Сервер" and severity "Average" if needed.
 		if (CTestArrayHelper::get($data, 'check.pop-up', false)) {
 			$this->checkPopupContent($data, $widget, $show);
 		}
@@ -1168,6 +1171,10 @@ class testProblemsBySeverityWidget extends CWebTest {
 		}
 	}
 
+	/*
+	 * This function checks problem details hintbox content for Host "ЗАББИКС Сервер" and severity "Average".
+	 * Only the number of problems and the values for one speciffic problem are checked.
+	 */
 	private function checkPopupContent($data, $widget, $show){
 		$expected_popup = [
 			'fields' => [
@@ -1183,7 +1190,9 @@ class testProblemsBySeverityWidget extends CWebTest {
 			]
 		];
 
-		$rows_count = (CTestArrayHelper::get($data, 'check.rows', false)) ? CTestArrayHelper::get($data['check'], 'rows') : CTestArrayHelper::get($expected_popup['rows'], $show);
+		$rows_count = (CTestArrayHelper::get($data, 'check.rows', false))
+				? CTestArrayHelper::get($data['check'], 'rows')
+				: CTestArrayHelper::get($expected_popup['rows'], $show);
 
 		// Open the pop-up for severity "Average"
 		if ($show === 'Host groups') {
