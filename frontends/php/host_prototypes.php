@@ -320,9 +320,6 @@ if (hasRequest('form')) {
 		'hostids' => $discoveryRule['hostid'],
 		'templated_hosts' => true
 	]);
-
-	$data['parent_hostid'] = $discoveryRule['hostid'];
-
 	$parentHost = reset($parentHost);
 	$data['parent_host'] = $parentHost;
 
