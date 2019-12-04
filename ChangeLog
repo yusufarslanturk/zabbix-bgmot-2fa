@@ -1,3 +1,23 @@
+Changes for 4.4.4rc1
+
+New features:
+
+Bug fixes:
+..F....... [ZBX-16852] fixed graph widget multiselect collapse (ashubin, rlataria)
+..F....... [ZBX-16649] fixed flexible textarea behavior (averza, vasilijs)
+
+--------------------------------------------------------------------------------
+Changes for 4.4.3
+
+Bug fixes:
+...G...PS. [ZBX-16988] fixed agent memory leak (atumilovics)
+
+--------------------------------------------------------------------------------
+Changes for 4.4.2
+
+4.4.2rc2 was released as 4.4.2 without any changes
+
+--------------------------------------------------------------------------------
 Changes for 4.4.2rc2
 
 Bug fixes:
@@ -902,6 +922,18 @@ Changes for 4.2.0alpha1
 New features:
 A.F.I...S. [ZBXNEXT-4853,ZBXNEXT-517] added ability to send email messages in HTML format on demand (MVekslers, vasilijs)
 ..F.....S. [ZBXNEXT-1282,ZBXNEXT-4730] added changes to introduce regex based matching for auto-registration (vasilijs, viktors)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.16rc1
+
+New features:
+
+Bug fixes:
+
+--------------------------------------------------------------------------------
+Changes for 4.0.15
+
+4.0.15rc2 was released as 4.0.15 without any changes
 
 --------------------------------------------------------------------------------
 Changes for 4.0.15rc2

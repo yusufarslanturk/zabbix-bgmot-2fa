@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-17 01:42+0200\n"
+"POT-Creation-Date: 2019-12-01 01:42+0200\n"
 "PO-Revision-Date: 2019-03-19 12:53+0300\n"
 "Last-Translator: Oleksiy <zalex_ua@i.ua>\n"
 "Language-Team: \n"
@@ -1108,7 +1108,7 @@ msgstr "April"
 msgid "Are you sure you want perform this action?"
 msgstr "Are you sure you want perform this action?"
 
-#: include/views/js/administration.general.macros.edit.js.php:58
+#: include/views/js/administration.general.macros.edit.js.php:73
 msgid "Are you sure you want to delete"
 msgstr "Are you sure you want to delete"
 
@@ -3035,7 +3035,7 @@ msgstr "Change"
 #: include/classes/screens/CScreenBuilder.php:499
 #: include/classes/screens/CScreenMap.php:45
 #: include/views/configuration.services.edit.php:62
-#: include/views/hostmacros.php:127 include/views/js/hostmacros.js.php:113
+#: include/views/hostmacros.php:127 include/views/js/hostmacros.js.php:128
 msgctxt "verb"
 msgid "Change"
 msgstr "Change"
@@ -8693,10 +8693,9 @@ msgstr "Incorrect value for \"%1$s\" field."
 #: app/controllers/CControllerPopupPreprocTestSend.php:96
 #: app/controllers/CControllerPopupPreprocTestSend.php:101
 #: app/controllers/CControllerPopupTriggerWizard.php:134
-#: app/controllers/CControllerUserUpdateGeneral.php:98
-#: app/controllers/CControllerWidgetNavTreeItemUpdate.php:41
-#: correlation.php:227 correlation.php:237 correlation.php:243
-#: correlation.php:263 correlation.php:267 correlation.php:280
+#: app/controllers/CControllerUserUpdateGeneral.php:98 correlation.php:227
+#: correlation.php:237 correlation.php:243 correlation.php:263
+#: correlation.php:267 correlation.php:280
 #: include/classes/api/services/CAction.php:1747
 #: include/classes/api/services/CAction.php:1921
 #: include/classes/api/services/CAction.php:1997
@@ -11056,9 +11055,8 @@ msgstr "NTLM"
 #: app/controllers/CControllerPopupGeneric.php:307
 #: app/controllers/CControllerPopupGeneric.php:319
 #: app/controllers/CControllerPopupTriggerWizard.php:134
-#: app/controllers/CControllerWidgetNavTreeItemEdit.php:64
-#: app/controllers/CControllerWidgetNavTreeItemUpdate.php:41
-#: applications.php:37 app/views/administration.mediatype.edit.php:44
+#: app/controllers/CControllerWidgetNavTreeItemEdit.php:64 applications.php:37
+#: app/views/administration.mediatype.edit.php:44
 #: app/views/administration.mediatype.edit.php:145
 #: app/views/administration.mediatype.list.php:39
 #: app/views/administration.mediatype.list.php:65
@@ -11657,7 +11655,7 @@ msgstr "No permissions for system access."
 #: app/controllers/CControllerDashboardShareUpdate.php:92
 #: app/controllers/CControllerDashboardView.php:195
 #: app/controllers/CControllerDashboardView.php:231
-#: app/controllers/CControllerExportXml.php:134
+#: app/controllers/CControllerExportXml.php:109
 #: app/controllers/CControllerMenuPopup.php:76
 #: app/controllers/CControllerMenuPopup.php:106
 #: app/controllers/CControllerMenuPopup.php:190
@@ -13868,7 +13866,7 @@ msgstr "Remote command"
 #: include/views/js/configuration.template.list.js.php:14
 #: include/views/js/configuration.triggers.list.js.php:14
 #: include/views/js/hostmacros.js.php:19 include/views/js/hostmacros.js.php:75
-#: include/views/js/hostmacros.js.php:124
+#: include/views/js/hostmacros.js.php:139
 #: include/views/js/item.preprocessing.js.php:28
 #: include/views/js/monitoring.screen.edit.js.php:24
 #: include/views/js/monitoring.screen.edit.js.php:58
@@ -18929,10 +18927,9 @@ msgstr "cannot be changed"
 #: app/controllers/CControllerPopupMedia.php:99
 #: app/controllers/CControllerPopupMedia.php:110
 #: app/controllers/CControllerPopupTriggerWizard.php:134
-#: app/controllers/CControllerUserUpdateGeneral.php:98
-#: app/controllers/CControllerWidgetNavTreeItemUpdate.php:41
-#: correlation.php:227 correlation.php:237 correlation.php:243
-#: correlation.php:263 correlation.php:267 correlation.php:280
+#: app/controllers/CControllerUserUpdateGeneral.php:98 correlation.php:227
+#: correlation.php:237 correlation.php:243 correlation.php:263
+#: correlation.php:267 correlation.php:280
 #: include/classes/api/services/CAction.php:1921
 #: include/classes/api/services/CAutoregistration.php:151
 #: include/classes/api/services/CCorrelation.php:1045
@@ -19411,7 +19408,7 @@ msgstr "m/d h:i A"
 msgid "macro is empty"
 msgstr "macro is empty"
 
-#: include/views/js/administration.general.macros.edit.js.php:58
+#: include/views/js/administration.general.macros.edit.js.php:73
 msgid "macro(s)"
 msgstr "macro(s)"
 

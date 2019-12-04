@@ -100,20 +100,33 @@ if (!$data['readonly']) {
 		?>
 	</script>
 	<script type="text/javascript">
+		function initHostMacrosFields($parent) {
+			jQuery('.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', $parent).not('.initialized-field').each(function() {
+				var $obj = jQuery(this);
+
+				$obj.addClass('initialized-field');
+
+				if ($obj.hasClass('macro')) {
+					$obj.on('change keydown', function(e) {
+						if (e.type === 'change' || e.which === 13) {
+							macroToUpperCase(this);
+							$obj.textareaFlexible();
+						}
+					});
+				}
+
+				$obj.textareaFlexible();
+			});
+		}
+
 		function processHostMacrosListTable(show_inherited_macros) {
 			jQuery('#tbl_macros')
 				.dynamicRows({
 					remove_next_sibling: show_inherited_macros,
 					template: show_inherited_macros ? '#macro-row-tmpl-inherited' : '#macro-row-tmpl'
 				})
-				.on('blur', '.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', function() {
-					if (jQuery(this).hasClass('macro')) {
-						macroToUpperCase(this);
-					}
-					jQuery(this).trigger('input');
-				})
 				.on('click', 'button.element-table-add', function() {
-					jQuery('#tbl_macros .<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>').textareaFlexible();
+					initHostMacrosFields(jQuery('#tbl_macros'));
 				})
 				.on('click', 'button.element-table-change', function() {
 					var macroNum = jQuery(this).attr('id').split('_')[1];
@@ -123,10 +136,12 @@ if (!$data['readonly']) {
 							.val(jQuery('#macros_' + macroNum + '_type').val() & (~<?= ZBX_PROPERTY_OWN ?>));
 						jQuery('#macros_' + macroNum + '_value')
 							.prop('readonly', true)
-							.val(jQuery('#macros_' + macroNum + '_inherited_value').val());
+							.val(jQuery('#macros_' + macroNum + '_inherited_value').val())
+							.trigger('input');
 						jQuery('#macros_' + macroNum + '_description')
 							.prop('readonly', true)
-							.val(jQuery('#macros_' + macroNum + '_inherited_description').val());
+							.val(jQuery('#macros_' + macroNum + '_inherited_description').val())
+							.trigger('input');
 						jQuery('#macros_' + macroNum + '_change')
 							.text(<?= CJs::encodeJson(_x('Change', 'verb')) ?>);
 					}
@@ -143,8 +158,7 @@ if (!$data['readonly']) {
 					}
 				});
 
-				// Must execute flexible textarea script when macros list is loaded for the first time.
-				jQuery('#tbl_macros .<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>').textareaFlexible();
+			initHostMacrosFields(jQuery('#tbl_macros'));
 
 			jQuery('form[name="hostsForm"], form[name="templatesForm"]').submit(function() {
 				jQuery('input.macro').each(function() {
