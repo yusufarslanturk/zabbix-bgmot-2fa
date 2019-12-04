@@ -231,7 +231,7 @@ if ($hostPrototype['templateid']) {
 		->setHeader([_('Name')]);
 
 	foreach ($hostPrototype['templates'] as $template) {
-		$tmplList->addVar('templates['.$template['templateid'].']', $template['templateid']);
+		$tmplList->addItem((new CVar('templates['.$template['templateid'].']', $template['templateid']))->removeId());
 
 		if (array_key_exists($template['templateid'], $hostPrototype['writable_templates'])) {
 			$template_link = (new CLink($template['name'],
@@ -259,7 +259,7 @@ else {
 		->setHeader([_('Name'), _('Action')]);
 
 	foreach ($hostPrototype['templates'] as $template) {
-		$tmplList->addVar('templates['.$template['templateid'].']', $template['templateid']);
+		$tmplList->addItem((new CVar('templates['.$template['templateid'].']', $template['templateid']))->removeId());
 
 		if (array_key_exists($template['templateid'], $hostPrototype['writable_templates'])) {
 			$template_link = (new CLink($template['name'],
