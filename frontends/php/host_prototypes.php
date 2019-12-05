@@ -272,8 +272,8 @@ if (hasRequest('form')) {
 			'host' => getRequest('host'),
 			'name' => getRequest('name'),
 			'status' => getRequest('status', HOST_STATUS_NOT_MONITORED),
-			'templates' => getRequest('templates', []),
-			'add_templates' => getRequest('add_templates', []),
+			'templates' => [],
+			'add_templates' => [],
 			'inventory_mode' => getRequest('inventory_mode', $config['default_inventory_mode']),
 			'groupPrototypes' => getRequest('group_prototypes', [])
 		],
@@ -285,25 +285,21 @@ if (hasRequest('form')) {
 	];
 
 	// Add already linked and new templates.
-	if ($data['host_prototype']['templates'] || $data['host_prototype']['add_templates']) {
+	$templates = [];
+	$request_templates = getRequest('templates', []);
+	$request_add_templates = getRequest('add_templates', []);
+
+	if ($request_templates || $request_add_templates) {
 		$templates = API::Template()->get([
 			'output' => ['templateid', 'name'],
-			'templateids' => array_merge(
-				$data['host_prototype']['templates'],
-				$data['host_prototype']['add_templates']
-			),
+			'templateids' => array_merge($request_templates, $request_add_templates),
 			'preservekeys' => true
 		]);
 
-		$data['host_prototype']['templates'] = array_intersect_key($templates,
-			array_flip($data['host_prototype']['templates'])
-		);
-
+		$data['host_prototype']['templates'] = array_intersect_key($templates, array_flip($request_templates));
 		CArrayHelper::sort($data['host_prototype']['templates'], ['name']);
 
-		$data['host_prototype']['add_templates'] = array_intersect_key($templates,
-			array_flip($data['host_prototype']['add_templates'])
-		);
+		$data['host_prototype']['add_templates'] = array_intersect_key($templates, array_flip($request_add_templates));
 
 		foreach ($data['host_prototype']['add_templates'] as &$template) {
 			$template = CArrayHelper::renameKeys($template, ['templateid' => 'id']);
