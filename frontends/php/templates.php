@@ -667,7 +667,8 @@ elseif (hasRequest('form')) {
 	$data = [
 		'form' => getRequest('form'),
 		'templateid' => getRequest('templateid', 0),
-		'add_templates' => getRequest('add_templates', []),
+		'linked_templates' => [],
+		'add_templates' => [],
 		'original_templates' => [],
 		'tags' => $tags,
 		'show_inherited_macros' => getRequest('show_inherited_macros', 0),
@@ -709,23 +710,28 @@ elseif (hasRequest('form')) {
 		CArrayHelper::sort($data['tags'], ['tag', 'value']);
 	}
 
-	$data['linked_templates'] = getRequest('templates', hasRequest('form_refresh') ? [] : $data['original_templates']);
+	// Add already linked and new templates.
+	$templates = [];
+	$request_linked_templates = getRequest('templates', hasRequest('form_refresh') ? [] : $data['original_templates']);
+	$request_add_templates = getRequest('add_templates', []);
 
-	// Get linked templates.
-	$templates = API::Template()->get([
-		'output' => ['templateid', 'name'],
-		'templateids' => array_merge($data['linked_templates'], $data['add_templates']),
-		'preservekeys' => true
-	]);
+	if ($request_linked_templates || $request_add_templates) {
+		$templates = API::Template()->get([
+			'output' => ['templateid', 'name'],
+			'templateids' => array_merge($request_linked_templates, $request_add_templates),
+			'preservekeys' => true
+		]);
 
-	$data['linked_templates'] = array_intersect_key($templates, array_flip($data['linked_templates']));
-	CArrayHelper::sort($data['linked_templates'], ['name']);
+		$data['linked_templates'] = array_intersect_key($templates, array_flip($request_linked_templates));
+		CArrayHelper::sort($data['linked_templates'], ['name']);
 
-	$data['add_templates'] = array_intersect_key($templates, array_flip($data['add_templates']));
-	foreach ($data['add_templates'] as &$template) {
-		$template = CArrayHelper::renameKeys($template, ['templateid' => 'id']);
+		$data['add_templates'] = array_intersect_key($templates, array_flip($request_add_templates));
+
+		foreach ($data['add_templates'] as &$template) {
+			$template = CArrayHelper::renameKeys($template, ['templateid' => 'id']);
+		}
+		unset($template);
 	}
-	unset($template);
 
 	$data['writable_templates'] = API::Template()->get([
 		'output' => ['templateid'],
