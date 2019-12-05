@@ -108,6 +108,6 @@ trait MacrosTrait {
 			];
 		}
 
-		$this->assertEquals($rows, $this->getMacros(), 'Macros on a page does not match tags in data provider.');
+		$this->assertEquals($rows, $this->getMacros(), 'Macros on a page does not match macros in data provider.');
 	}
 }

@@ -19,8 +19,11 @@
 **/
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
+require_once dirname(__FILE__).'/traits/MacrosTrait.php';
 
 class testPageReportsAudit extends CLegacyWebTest {
+
+	use MacrosTrait;
 
 	private $actions = [
 		-1 => 'All',
@@ -187,23 +190,16 @@ class testPageReportsAudit extends CLegacyWebTest {
 		// Update Macro description.
 		$this->page->login()->open('adm.macros.php');
 		$form = $this->query('name:macrosForm')->asForm()->one();
-		$macros_table = $this->query('id:tbl_macros')->asMultifieldTable([
-			'mapping' => [
-				'Macro' => [
-					'selector' => 'xpath:./textarea',
-					'class' => 'CElement'
-				],
-				'Value' => [
-					'selector' => 'xpath:./textarea',
-					'class' => 'CElement'
-				],
-				'Description' => [
-					'selector' => 'xpath:./textarea',
-					'class' => 'CElement'
-				]
+
+		$macros = [
+			[
+				'action' => USER_ACTION_UPDATE,
+				'index' => 0,
+				'Description' => 'New Updated Description'
 			]
-		])->one();
-		$macros_table->updateRow(0, ['Description' => 'New Updated Description']);
+		];
+
+		$this->fillMacros($macros);
 		$form->submit();
 		$message = CMessageElement::find()->waitUntilVisible()->one();
 		$this->assertTrue($message->isGood());

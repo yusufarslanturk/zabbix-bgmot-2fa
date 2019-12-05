@@ -31,8 +31,8 @@ abstract class testFormMacros extends CWebTest {
 
 	const SQL_HOSTS = 'SELECT * FROM hosts ORDER BY hostid';
 
-	public static function getOldHash() {
-		return $old_hash = CDBHelper::getHash(self::SQL_HOSTS);
+	public static function getHash() {
+		return CDBHelper::getHash(self::SQL_HOSTS);
 	}
 
 	public static function getCreateCommonMacrosData() {
@@ -148,7 +148,7 @@ abstract class testFormMacros extends CWebTest {
 			'Groups' => 'Zabbix servers'
 		]);
 
-		$this->checkMacros(' added', $data['Name'], $host_type, $data, $id = null, 'Cannot add ');
+		$this->checkMacros(' added', $data['Name'], $host_type, $data, 'Cannot add ');
 	}
 
 	public static function getUpdateCommonMacrosData() {
@@ -287,15 +287,19 @@ abstract class testFormMacros extends CWebTest {
 	/**
 	 * Test updating of host or template with Macros.
 	 */
-	protected function checkUpdate($host_type, $data, $id, $hostname) {
+	protected function checkUpdate($host_type, $data, $hostname) {
+		$id = CDBHelper::getValue('SELECT hostid FROM hosts WHERE host='.zbx_dbstr($hostname));
+
 		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
-		$this->checkMacros(' updated', $hostname, $host_type, $data, $id, 'Cannot update ');
+		$this->checkMacros(' updated', $hostname, $host_type, $data, 'Cannot update ');
 	}
 
 	/**
 	 * Test removing Macros from host or template.
 	 */
-	protected function checkRemove($host_type, $id, $hostname) {
+	protected function checkRemove($host_type, $hostname) {
+		$id = CDBHelper::getValue('SELECT hostid FROM hosts WHERE host='.zbx_dbstr($hostname));
+
 		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
 		$form = $this->query('name:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
 		$form->selectTab('Macros');
@@ -307,10 +311,17 @@ abstract class testFormMacros extends CWebTest {
 		$this->assertEquals(ucfirst($host_type).' updated', $message->getTitle());
 		$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM hosts WHERE host='.zbx_dbstr($hostname)));
 		// Check the results in form.
-		$this->checkMacrosFields($host_type, null, $id);
+		$this->checkMacrosFields($host_type, null, $hostname);
 	}
 
-	private function checkMacros($action, $name, $host_type, $data, $id, $error_message) {
+	/**
+	 * Check adding and saving macros in host or template form.
+	 */
+	private function checkMacros($action, $name, $host_type, $data, $error_message) {
+		if ($data['expected'] === TEST_BAD) {
+			$old_hash = $this->getHash();
+		}
+
 		$form = $this->query('name:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
 		$form->selectTab('Macros');
 		$this->fillMacros($data['macros']);
@@ -323,22 +334,23 @@ abstract class testFormMacros extends CWebTest {
 				$this->assertEquals(ucfirst($host_type).$action, $message->getTitle());
 				$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM hosts WHERE host='.zbx_dbstr($name)));
 				// Check the results in form.
-				$this->checkMacrosFields($host_type, $data, $id);
+				$this->checkMacrosFields($host_type, $data, $name);
 				break;
 			case TEST_BAD:
 				$this->assertTrue($message->isBad());
 				$this->assertEquals($error_message.$host_type, $message->getTitle());
 				$this->assertTrue($message->hasLine($data['error_details']));
 				// Check that DB hash is not changed.
-				$this->assertEquals($this->getOldHash(), CDBHelper::getHash(self::SQL_HOSTS));
+				$this->assertEquals($old_hash, CDBHelper::getHash(self::SQL_HOSTS));
 				break;
 		}
 	}
 
-	private function checkMacrosFields($host_type, $data = null, $id = null) {
-		if ($id === null) {
-			$id = CDBHelper::getValue('SELECT hostid FROM hosts WHERE host='.zbx_dbstr($data['Name']));
-		}
+	/**
+	 * Checking saved macros in host or template form.
+	 */
+	private function checkMacrosFields($host_type, $data = null, $name) {
+		$id = CDBHelper::getValue('SELECT hostid FROM hosts WHERE host='.zbx_dbstr($name));
 
 		$this->page->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
 		$form = $this->query('id:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
