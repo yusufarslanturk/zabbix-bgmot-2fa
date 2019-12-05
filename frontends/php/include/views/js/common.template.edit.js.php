@@ -19,8 +19,8 @@
 **/
 
 
-if (!$data['readonly']) {
-	?>
+?>
+<?php if (!$data['readonly']): ?>
 	<script type="text/x-jquery-tmpl" id="macro-row-tmpl-inherited">
 		<?= (new CRow([
 				(new CCol([
@@ -100,7 +100,7 @@ if (!$data['readonly']) {
 		?>
 	</script>
 	<script type="text/javascript">
-		function initHostMacrosFields($parent) {
+		function initHostMacroFields($parent) {
 			jQuery('.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', $parent).not('.initialized-field').each(function() {
 				var $obj = jQuery(this);
 
@@ -119,14 +119,14 @@ if (!$data['readonly']) {
 			});
 		}
 
-		function processHostMacrosListTable(show_inherited_macros) {
-			jQuery('#tbl_macros')
+		function initHostMacroTable($parent, show_inherited_macros) {
+			$parent
 				.dynamicRows({
 					remove_next_sibling: show_inherited_macros,
 					template: show_inherited_macros ? '#macro-row-tmpl-inherited' : '#macro-row-tmpl'
 				})
 				.on('click', 'button.element-table-add', function() {
-					initHostMacrosFields(jQuery('#tbl_macros'));
+					initHostMacroFields($parent);
 				})
 				.on('click', 'button.element-table-change', function() {
 					var macroNum = jQuery(this).attr('id').split('_')[1];
@@ -158,13 +158,7 @@ if (!$data['readonly']) {
 					}
 				});
 
-			initHostMacrosFields(jQuery('#tbl_macros'));
-
-			jQuery('form[name="hostsForm"], form[name="templatesForm"]').submit(function() {
-				jQuery('input.macro').each(function() {
-					macroToUpperCase(this);
-				});
-			});
+			initHostMacroFields($parent);
 		}
 
 		function macroToUpperCase(element) {
@@ -182,9 +176,8 @@ if (!$data['readonly']) {
 			}
 		}
 	</script>
-	<?php
-}
-?>
+<?php endif ?>
+
 <script type="text/javascript">
 	/**
 	 * Collects IDs selected in "Add templates" multiselect.
@@ -212,7 +205,7 @@ if (!$data['readonly']) {
 	 *
 	 * @param {jQuery} $form  jQuery object for host edit form.
 	 *
-	 * @return {Array}        List of all host macros in the form.
+	 * @returns {Array}        List of all host macros in the form.
 	 */
 	function getMacros($form) {
 		var $macros = $form.find('input[name^="macros"], textarea[name^="macros"]'),
@@ -239,20 +232,25 @@ if (!$data['readonly']) {
 			$show_inherited_macros = $('input[name="show_inherited_macros"]'),
 			$form = $show_inherited_macros.closest('form'),
 			linked_templates = <?= CJs::encodeJson($data['macros_tab']['linked_templates']) ?>,
-			add_templates = <?= CJs::encodeJson($data['macros_tab']['add_templates']) ?>,
-			readonly = <?= (int) $data['readonly'] ?>;
+			add_templates = <?= CJs::encodeJson($data['macros_tab']['add_templates']) ?>;
 
-		if (!readonly) {
-			processHostMacrosListTable($show_inherited_macros.val() == 1);
-		}
+		$('#tabs').on('tabscreate tabsactivate', function(event, ui) {
+			var panel = (event.type === 'tabscreate') ? ui.panel : ui.newPanel;
 
-		$('#tabs').on('tabsactivate', function(event, ui) {
-			if (ui.newPanel.attr('id') === 'macroTab') {
-				var add_templates_tmp = getAddTemplates($ms);
+			if (panel.attr('id') === 'macroTab') {
+				<?php if ($data['readonly']): ?>
+					$('.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', '#tbl_macros').textareaFlexible();
+				<?php else: ?>
+					initHostMacroTable($('#tbl_macros'), $show_inherited_macros.val() == 1);
+				<?php endif ?>
 
-				if (add_templates.xor(add_templates_tmp).length > 0) {
-					add_templates = add_templates_tmp;
-					$show_inherited_macros.trigger('change');
+				if (event.type === 'tabsactivate') {
+					var add_templates_tmp = getAddTemplates($ms);
+
+					if (add_templates.xor(add_templates_tmp).length > 0) {
+						add_templates = add_templates_tmp;
+						$show_inherited_macros.trigger('change');
+					}
 				}
 			}
 		});
@@ -278,7 +276,7 @@ if (!$data['readonly']) {
 					macros: macros,
 					show_inherited_macros: show_inherited_macros ? 1 : 0,
 					templateids: linked_templates.concat(add_templates),
-					readonly: readonly
+					readonly: <?= (int) $data['readonly'] ?>
 				},
 				dataType: 'json',
 				method: 'POST'
@@ -294,9 +292,11 @@ if (!$data['readonly']) {
 
 						$container.append(response.body);
 
-						if (!readonly) {
-							processHostMacrosListTable(show_inherited_macros);
-						}
+						<?php if ($data['readonly']): ?>
+							$('.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', '#tbl_macros').textareaFlexible();
+						<?php else: ?>
+							initHostMacroTable($('#tbl_macros'), show_inherited_macros);
+						<?php endif ?>
 
 						// Display debug after loaded content if it is enabled for user.
 						if (typeof response.debug !== 'undefined') {
