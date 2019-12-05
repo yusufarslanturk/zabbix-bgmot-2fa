@@ -2368,6 +2368,10 @@
 
 					widget['header'] = name;
 					widget['fields'] = fields;
+					widget['preloader_timeout'] = 100;
+
+					// Set preloader to widget contant after overlayDialogueDestroy as fast as we can.
+					startPreloader(widget);
 
 					// View mode was just set after the overlayDialogueDestroy was called in first 'then' section.
 
