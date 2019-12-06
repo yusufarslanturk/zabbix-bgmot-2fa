@@ -1597,7 +1597,9 @@
 		}
 	}
 
-	function startPreloader(widget) {
+	function startPreloader(widget, timeout) {
+		timeout = timeout || widget['preloader_timeout'];
+
 		if (typeof widget['preloader_timeoutid'] !== 'undefined' || typeof widget['preloader_div'] !== 'undefined') {
 			return;
 		}
@@ -1607,7 +1609,7 @@
 
 			showPreloader(widget);
 			widget['content_body'].stop(true, true).fadeTo(widget['preloader_fadespeed'], 0.4);
-		}, widget['preloader_timeout']);
+		}, timeout);
 	}
 
 	function stopPreloader(widget) {
@@ -2368,10 +2370,9 @@
 
 					widget['header'] = name;
 					widget['fields'] = fields;
-					widget['preloader_timeout'] = 100;
 
 					// Set preloader to widget content after overlayDialogueDestroy as fast as we can.
-					startPreloader(widget);
+					startPreloader(widget, 100);
 
 					// View mode was just set after the overlayDialogueDestroy was called in first 'then' section.
 
