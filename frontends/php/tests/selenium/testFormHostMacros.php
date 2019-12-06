@@ -58,4 +58,8 @@ class testFormHostMacros extends testFormMacros {
 	public function testFormHostMacros_Remove() {
 		$this->checkRemove('host', $this->host_name_remove);
 	}
+
+	public function testFormHostMacros_ChangeRemoveInheritedMacro() {
+		$this->checkChangeRemoveInheritedMacro('host');
+	}
 }

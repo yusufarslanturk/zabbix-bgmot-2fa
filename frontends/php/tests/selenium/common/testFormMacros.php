@@ -17,6 +17,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
+
 require_once 'vendor/autoload.php';
 
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
@@ -315,6 +316,68 @@ abstract class testFormMacros extends CWebTest {
 	}
 
 	/**
+	 * Test changing or resetting global macro on host or template.
+	 */
+	protected function checkChangeRemoveInheritedMacro($host_type) {
+		$host = [
+			ucfirst($host_type).' name' => 'With edited global macro',
+			'Groups' => 'Zabbix servers'
+		];
+
+		$this->page->login()->open($host_type.'s.php?form=create');
+		$form = $this->query('name:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
+		$form->fill($host);
+
+		$form->selectTab('Macros');
+
+		// Check inherited macros before editing.
+		$this->checkInheritedMacrosFrontendAndDB($host_type);
+
+		$edited_macros = [
+			[
+				'Macro' => '{$1}',
+				'Value' => 'New updated Numeric macro 1',
+				'Description' => 'New updated Test description 2'
+			]
+		];
+
+		$count = count($edited_macros);
+		// Change macro.
+		for ($i = 0; $i < $count; $i += 1) {
+			$this->query('id:macros_'.$i.'_change')->one()->click();
+			$this->query('id:macros_'.$i.'_value')->one()->fill($edited_macros[$i]['Value']);
+			$this->query('id:macros_'.$i.'_description')->one()->fill($edited_macros[$i]['Description']);
+		}
+
+		$form->submit();
+
+		// Check saved edited macros in host/template form.
+		$id = CDBHelper::getValue('SELECT hostid FROM hosts WHERE host='.zbx_dbstr($host[ucfirst($host_type).' name']));
+		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
+		$form->selectTab('Macros');
+		$this->assertMacros($edited_macros);
+
+		// Remove edited macro and reset to global.
+		$this->query('id:show_inherited_macros')->waitUntilPresent()
+			->asSegmentedRadio()->one()->fill('Inherited and '.$host_type.' macros');
+
+		for ($i = 0; $i < $count; $i += 1) {
+			$this->query('id:macros_'.$i.'_change')->one()->click();
+		}
+
+		$form->submit();
+
+		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
+		$form->selectTab('Macros');
+
+		$edited_macros = [];
+		$this->assertMacros($edited_macros);
+
+		// Check inherited macros again after remove.
+		$this->checkInheritedMacrosFrontendAndDB($host_type);
+	}
+
+	/**
 	 * Check adding and saving macros in host or template form.
 	 */
 	private function checkMacros($action, $name, $host_type, $data, $error_message) {
@@ -362,5 +425,39 @@ abstract class testFormMacros extends CWebTest {
 		else {
 			$this->assertMacros();
 		}
+	}
+
+	private function checkInheritedMacrosFrontendAndDB($host_type) {
+		$this->query('id:show_inherited_macros')->waitUntilPresent()
+			->asSegmentedRadio()->one()->fill('Inherited and '.$host_type.' macros');
+		// Create two macros arrays: from DB and from Frontend form.
+		$macros = [
+			'database' => CDBHelper::getAll('SELECT macro, value, description FROM globalmacro'),
+			'frontend' => []
+		];
+
+		// Write macros rows from Frontend to array.
+		$table = $this->query('id:tbl_macros')->asTable()->one();
+		$count = $table->getRows()->count() - 1;
+		for ($i = 0; $i < $count; $i += 2) {
+			$macro = [];
+			$row = $table->getRow($i);
+			$macro['macro'] = $row->query('xpath:./td[1]/textarea')->one()->getValue();
+			$macro['value'] = $row->query('xpath:./td[3]/textarea')->one()->getValue();
+			$macro['description'] = $table->getRow($i + 1)->query('tag:textarea')->one()->getValue();
+
+			$macros['frontend'][] = $macro;
+		}
+
+		// Sort arrays by Macros.
+		foreach ($macros as &$array) {
+			usort($array, function ($a, $b) {
+				return strcmp($a['macro'], $b['macro']);
+			});
+		}
+		unset($array);
+
+		// Compare macros from DB with macros from Frontend.
+		$this->assertEquals($macros['database'], $macros['frontend']);
 	}
 }
