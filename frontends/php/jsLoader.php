@@ -91,6 +91,7 @@ $availableJScripts = [
 	'class.csvggraph.js' => '',
 	'class.ctree.js' => '',
 	'class.curl.js' => '',
+	'class.overlaycollection.js' => '',
 	'class.cverticalaccordion.js' => '',
 	'class.mapWidget.js' => '',
 	'class.svg.canvas.js' => 'vector/',
@@ -333,6 +334,7 @@ if (empty($_GET['files'])) {
 		'jquery-ui.js',
 		'common.js',
 		'class.cdebug.js',
+		'class.overlaycollection.js',
 		'class.cdate.js',
 		'class.cookie.js',
 		'class.curl.js',
@@ -382,6 +384,20 @@ foreach ($files as $file) {
 	}
 }
 
+if (in_array('prototype.js', $files)) {
+	// This takes care of the Array toJSON incompatibility with JSON.stringify.
+	$js .=
+		'var _json_stringify = JSON.stringify;'.
+		'JSON.stringify = function(value) {'.
+			'var _array_tojson = Array.prototype.toJSON,'.
+				'ret;'.
+			'delete Array.prototype.toJSON;'.
+			'ret = _json_stringify(value);'.
+			'Array.prototype.toJSON = _array_tojson;'.
+			'return ret;'.
+		'};';
+}
+
 $etag = md5($js);
 /**
  * strpos function allow to check ETag value to fix cases when web server compression is used:
@@ -395,20 +411,6 @@ if (array_key_exists('HTTP_IF_NONE_MATCH', $_SERVER) && strpos($_SERVER['HTTP_IF
 	header('HTTP/1.1 304 Not Modified');
 	header('ETag: "'.$etag.'"');
 	exit;
-}
-
-if (in_array('prototype.js', $files)) {
-	// This takes care of the Array toJSON incompatibility with JSON.stringify.
-	$js .=
-		'var _json_stringify = JSON.stringify;'.
-		'JSON.stringify = function(value) {'.
-			'var _array_tojson = Array.prototype.toJSON,'.
-				'ret;'.
-			'delete Array.prototype.toJSON;'.
-			'ret = _json_stringify(value);'.
-			'Array.prototype.toJSON = _array_tojson;'.
-			'return ret;'.
-		'};';
 }
 
 header('Content-Type: application/javascript; charset=UTF-8');

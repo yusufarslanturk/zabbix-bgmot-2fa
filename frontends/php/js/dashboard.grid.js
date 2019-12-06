@@ -1480,15 +1480,6 @@
 					.toggleClass('resizing-top', data['resizing_top'])
 					.toggleClass('resizing-left', data['resizing_left']);
 
-				// Hack for Safari to manually accept parent container height in pixels on widget resize.
-				if (SF) {
-					$.each(data['widgets'], function() {
-						if (this.type === 'clock' || this.type === 'sysmap') {
-							this.content_body.find(':first').height(this.content_body.height());
-						}
-					});
-				}
-
 				/*
 				 * 1. Prevent physically resizing widgets beyond the allowed limits.
 				 * 2. Prevent browser's vertical scrollbar from appearing when resizing right size of the widgets.
@@ -1538,15 +1529,6 @@
 				stopWidgetPositioning($obj, data, widget);
 
 				widget['container'].removeAttr('style');
-
-				// Hack for Safari to manually accept parent container height in pixels when done widget snapping to grid.
-				if (SF) {
-					$.each(data['widgets'], function() {
-						if (this.type === 'clock' || this.type === 'sysmap') {
-							this.content_body.find(':first').height(this.content_body.height());
-						}
-					});
-				}
 
 				if (widget['iterator']) {
 					alignIteratorContents($obj, data, widget, widget['pos']);
@@ -2157,6 +2139,7 @@
 		}
 
 		startPreloader(widget);
+		$('#dashbrd-save').prop('disabled', true);
 
 		widget['updating_content'] = true;
 
@@ -2193,6 +2176,7 @@
 				}
 
 				doAction('onContentUpdated', $obj, data, null);
+				$('#dashbrd-save').prop('disabled', false);
 			})
 			.then(function() {
 				// Separate 'then' section allows to execute scripts added by widgets in previous section first.
@@ -2220,6 +2204,11 @@
 			});
 	}
 
+	/**
+	 * @param {object} $obj
+	 * @param {object} data
+	 * @param {object} widget
+	 */
 	function updateWidgetConfig($obj, data, widget) {
 		if (data['options']['updating_config']) {
 			// Waiting for another AJAX request to either complete of fail.
@@ -2261,18 +2250,25 @@
 			ajax_data['fields'] = JSON.stringify(fields);
 		}
 
-		$.ajax({
+		var $save_btn = data.dialogue.div.find('.dialogue-widget-save'),
+			overlay = overlays_stack.getById('widgetConfg');
+
+		$save_btn.prop('disabled', true);
+		overlay.xhr = $.ajax({
 			url: url.getUrl(),
 			method: 'POST',
 			dataType: 'json',
 			data: ajax_data
-		})
+		});
+
+		overlay.xhr
 			.then(function(response) {
 				if (typeof(response.errors) !== 'undefined') {
 					// Error returned. Remove previous errors.
 
 					$('.msg-bad', data.dialogue['body']).remove();
 					data.dialogue['body'].prepend(response.errors);
+					$save_btn.prop('disabled', false);
 
 					return $.Deferred().reject();
 				}
@@ -2427,6 +2423,7 @@
 				data['options']['updated'] = true;
 			})
 			.always(function() {
+				$save_btn.prop('disabled', true);
 				delete data['options']['updating_config'];
 			});
 	}
@@ -2982,7 +2979,7 @@
 	function updateWidgetDynamic($obj, data, widget) {
 		// This function may be called for widget that is not in data['widgets'] array yet.
 		if (typeof widget['fields']['dynamic'] !== 'undefined') {
-			if (widget['fields']['dynamic'] === '1' && data['dashboard']['dynamic']['has_dynamic_widgets'] === true) {
+			if (widget['fields']['dynamic'] == 1 && data['dashboard']['dynamic']['has_dynamic_widgets'] === true) {
 				widget['dynamic'] = {
 					'hostid': data['dashboard']['dynamic']['hostid'],
 					'groupid': data['dashboard']['dynamic']['groupid']
@@ -3565,6 +3562,12 @@
 					data: ajax_data,
 					dataType: 'json',
 					beforeSend: function() {
+						/*
+						 * Clear the 'sticked-to-top' class before updating the body for it's mutation handler
+						 * to center the popup while the widget form is being loaded.
+						 */
+						jQuery('[data-dialogueid="widgetConfg"]').removeClass('sticked-to-top');
+
 						body.empty()
 							.append($('<div>')
 								// The smallest possible size of configuration dialog.
@@ -3581,6 +3584,15 @@
 				})
 					.done(function(response) {
 						data.dialogue['widget_type'] = response.type;
+
+						/*
+						 * Set the 'sticked-to-top' class before updating the body for it's mutation handler
+						 * to have actual data for the popup positioning.
+						 */
+						if (response.options.stick_to_top) {
+							jQuery('[data-dialogueid="widgetConfg"]').addClass('sticked-to-top');
+						}
+
 						body.empty();
 						body.append(response.body);
 						if (typeof response.debug !== 'undefined') {
@@ -3604,13 +3616,6 @@
 						else {
 							// Enable save button after successful form update.
 							$('.dialogue-widget-save', footer).prop('disabled', false);
-						}
-
-						if (data.dialogue['widget_type'] === 'svggraph') {
-							jQuery('[data-dialogueid="widgetConfg"]').addClass('sticked-to-top');
-						}
-						else {
-							jQuery('[data-dialogueid="widgetConfg"]').removeClass('sticked-to-top');
 						}
 
 						overlayDialogueOnLoad(true, jQuery('[data-dialogueid="widgetConfg"]'));

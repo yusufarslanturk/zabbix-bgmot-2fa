@@ -15,7 +15,7 @@
 			(new CCol(
 				(new CTextAreaFlexible('macros[#{rowNum}][description]', '', ['add_post_js' => false]))
 					->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH)
-					->setMaxlength(DB::getFieldLength('globalmacro' , 'description'))
+					->setMaxlength(DB::getFieldLength('globalmacro', 'description'))
 					->setAttribute('placeholder', _('description'))
 			))->addClass(ZBX_STYLE_TEXTAREA_FLEXIBLE_PARENT),
 			(new CCol(
@@ -31,6 +31,25 @@
 
 <script type="text/javascript">
 	jQuery(function($) {
+		function init_fields($parent) {
+			$('.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', $parent).not('.initialized-field').each(function() {
+				var $obj = $(this);
+
+				$obj.addClass('initialized-field');
+
+				if ($obj.hasClass('macro')) {
+					$obj.on('change keydown', function(e) {
+						if (e.type === 'change' || e.which === 13) {
+							macroToUpperCase(this);
+							$obj.textareaFlexible();
+						}
+					});
+				}
+
+				$obj.textareaFlexible();
+			});
+		}
+
 		$('#tbl_macros')
 			.on('click', 'button.element-table-remove', function() {
 				// check if the macro has an hidden ID element, if it does - increment the deleted macro counter
@@ -42,14 +61,10 @@
 			})
 			.dynamicRows({template: '#macro-row-tmpl'})
 			.on('click', 'button.element-table-add', function() {
-				$('#tbl_macros .<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>').textareaFlexible();
-			})
-			.on('blur', '.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', function() {
-				if ($(this).hasClass('macro')) {
-					macroToUpperCase(this);
-				}
-				$(this).trigger('input');
+				init_fields($('#tbl_macros'));
 			});
+
+		init_fields($('#tbl_macros'));
 
 		$('#update').click(function() {
 			var removedCount = $(this).data('removedCount');
