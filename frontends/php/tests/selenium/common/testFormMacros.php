@@ -316,7 +316,7 @@ abstract class testFormMacros extends CWebTest {
 	}
 
 	/**
-	 * Test changing or resetting global macro on host or template.
+	 * Test changing and resetting global macro on host or template.
 	 */
 	protected function checkChangeRemoveInheritedMacro($host_type) {
 		$host = [
@@ -427,6 +427,9 @@ abstract class testFormMacros extends CWebTest {
 		}
 	}
 
+	/**
+	 * Check host/template inherited macros in form matching with global macros in DB .
+	 */
 	private function checkInheritedMacrosFrontendAndDB($host_type) {
 		$this->query('id:show_inherited_macros')->waitUntilPresent()
 			->asSegmentedRadio()->one()->fill('Inherited and '.$host_type.' macros');
