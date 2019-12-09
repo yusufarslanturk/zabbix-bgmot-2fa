@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-09 12:45+0200\n"
-"PO-Revision-Date: 2019-12-09 09:46+0300\n"
-"Last-Translator: Anonymous Pootle User\n"
+"PO-Revision-Date: 2019-12-09 10:56+0300\n"
+"Last-Translator: Yurii <jurijs.klopovskis@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1575877608.000000\n"
+"X-POOTLE-MTIME: 1575881762.000000\n"
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -1519,7 +1519,7 @@ msgstr "Ширина рамки"
 
 #: app/controllers/CControllerUserUpdateGeneral.php:93
 msgid "Both passwords must be equal."
-msgstr ""
+msgstr "Пароли должны совпадать."
 
 #: include/views/js/monitoring.sysmaps.js.php:18
 #: include/views/js/monitoring.sysmaps.js.php:119
