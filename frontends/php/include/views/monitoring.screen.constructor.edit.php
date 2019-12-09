@@ -140,7 +140,7 @@ if ($resourceType == SCREEN_RESOURCE_GRAPH) {
 					'srcfld2' => 'name',
 					'dstfrm' => $form->getName(),
 					'dstfld1' => 'resourceid'
-				], $this->data['screen']['templateid'] ? [
+				], array_key_exists('templateid', $data['screen']) ? [
 					'templated_hosts' => '1',
 					'hostid' => $data['screen']['templateid']
 				] : [
@@ -198,7 +198,7 @@ elseif ($resourceType == SCREEN_RESOURCE_LLD_GRAPH) {
 						'srcfld2' => 'name',
 						'dstfrm' => $form->getName(),
 						'dstfld1' => 'resourceid'
-					], $this->data['screen']['templateid'] ? [
+					], array_key_exists('templateid', $data['screen']) ? [
 						'templated_hosts' => '1',
 						'hostid' => $data['screen']['templateid']
 					] : [
