@@ -50,11 +50,11 @@ func (p *pool) UpdateAccessTime() {
 
 // Thread-safe structure for manage connections.
 type connPools struct {
-	g         sync.Mutex
-	m         sync.Mutex
-	pools     map[connId]*pool
-	keepAlive time.Duration
-	timeout   time.Duration
+	sync.Mutex
+	poolsMutex sync.Mutex
+	pools      map[connId]*pool
+	keepAlive  time.Duration
+	timeout    time.Duration
 }
 
 // NewConnPools initializes connPools structure and runs Go Routine that watches for unused connections.
@@ -67,7 +67,7 @@ func NewConnPools(keepAlive, timeout time.Duration) *connPools {
 
 	// Repeatedly check for unused connections and close them.
 	go func() {
-		for range time.Tick(time.Second) {
+		for range time.Tick(10 * time.Second) {
 			if err := pools.closeUnused(); err != nil {
 				log.Errf("[%s] Error occurred while closing pool: %s", pluginName, err.Error())
 			}
@@ -78,11 +78,9 @@ func NewConnPools(keepAlive, timeout time.Duration) *connPools {
 }
 
 // create creates a new connection with given URI and password.
-func (c *connPools) create(uri URI) (conn *radix.Pool, err error) {
-	c.m.Lock()
-	defer c.m.Unlock()
-
-	cid := createConnectionId(uri)
+func (c *connPools) create(uri URI, cid connId) (conn *radix.Pool, err error) {
+	c.poolsMutex.Lock()
+	defer c.poolsMutex.Unlock()
 
 	if _, ok := c.pools[cid]; ok {
 		// Should never happen.
@@ -120,8 +118,8 @@ func (c *connPools) create(uri URI) (conn *radix.Pool, err error) {
 
 // get returns a connection with given cid if it exists and also updates lastTimeAccess, otherwise returns nil.
 func (c *connPools) get(cid connId) *radix.Pool {
-	c.m.Lock()
-	defer c.m.Unlock()
+	c.poolsMutex.Lock()
+	defer c.poolsMutex.Unlock()
 
 	if pool, ok := c.pools[cid]; ok {
 		pool.UpdateAccessTime()
@@ -135,8 +133,8 @@ func (c *connPools) get(cid connId) *radix.Pool {
 func (c *connPools) closeUnused() (err error) {
 	var uri URI
 
-	c.m.Lock()
-	defer c.m.Unlock()
+	c.poolsMutex.Lock()
+	defer c.poolsMutex.Unlock()
 
 	for cid, pool := range c.pools {
 		if time.Since(pool.lastTimeAccess) > time.Duration(c.keepAlive)*time.Second {
@@ -154,14 +152,15 @@ func (c *connPools) closeUnused() (err error) {
 
 // GetConnection returns an existing connection or creates a new one.
 func (c *connPools) GetConnection(uri URI) (conn *radix.Pool, err error) {
-	c.g.Lock()
-	defer c.g.Unlock()
-
 	cid := createConnectionId(uri)
+
+	c.Lock()
+	defer c.Unlock()
+
 	conn = c.get(cid)
 
 	if conn == nil {
-		conn, err = c.create(uri)
+		conn, err = c.create(uri, cid)
 	}
 
 	return

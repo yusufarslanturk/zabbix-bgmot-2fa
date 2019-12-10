@@ -51,7 +51,7 @@ func (p *Plugin) configHandler(conn redisConn, params []string) (interface{}, er
 	}
 
 	if strings.ContainsAny(pattern, globChars) {
-		jsonRes, err := json.MarshalIndent(res, "", "\t")
+		jsonRes, err := json.Marshal(res)
 		if err != nil {
 			p.Errf(err.Error())
 			return nil, errorCannotMarshalJson

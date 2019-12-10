@@ -130,7 +130,7 @@ func (p *Plugin) infoHandler(conn redisConn, params []string) (interface{}, erro
 		return nil, errorCannotParseData
 	}
 
-	jsonRes, err := json.MarshalIndent(redisInfo, "", "\t")
+	jsonRes, err := json.Marshal(redisInfo)
 	if err != nil {
 		p.Errf(err.Error())
 		return nil, errorCannotMarshalJson

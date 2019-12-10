@@ -66,9 +66,9 @@ func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
 		p.options.Timeout = global.Timeout
 	}
 
-	for name, session := range p.options.Sessions {
+	for _, session := range p.options.Sessions {
 		if session.Uri == "" {
-			p.options.Sessions[name].Uri = p.options.Uri
+			session.Uri = p.options.Uri
 		}
 	}
 

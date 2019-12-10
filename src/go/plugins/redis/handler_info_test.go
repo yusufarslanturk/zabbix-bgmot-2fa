@@ -211,23 +211,14 @@ func TestPlugin_infoHandler(t *testing.T) {
 			"Default section should be used if it is not explicitly specified",
 			&impl,
 			args{conn: conn, params: []string{"", ""}},
-			`{
-	"DefaultSection": {
-		"test": "111"
-	}
-}`,
+			`{"DefaultSection":{"test":"111"}}`,
 			false,
 		},
 		{
 			"Should fetch specified section and return marshalled result",
 			&impl,
 			args{conn: conn, params: []string{"", "COMMONSECTION"}},
-			`{
-	"CommonSection": {
-		"bar": "0.00",
-		"foo": "123"
-	}
-}`,
+			`{"CommonSection":{"bar":"0.00","foo":"123"}}`,
 			false,
 		},
 		{

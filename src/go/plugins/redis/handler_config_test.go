@@ -64,10 +64,7 @@ func TestPlugin_configHandler(t *testing.T) {
 			"Pattern * should be used if it is not explicitly specified",
 			&impl,
 			args{conn: conn, params: []string{""}},
-			`{
-	"param1": "foo",
-	"param2": "bar"
-}`,
+			`{"param1":"foo","param2":"bar"}`,
 			false,
 		},
 		{

@@ -33,14 +33,14 @@ const (
 	errorUnsupportedMetric = zabbixError("Unsupported metric.")
 	errorInvalidFormat     = zabbixError("Invalid format.")
 	errorEmptyResult       = zabbixError("Empty result.")
-	errorUnknownSession    = zabbixError("Session identifier does not exist.")
+	errorUnknownSession    = zabbixError("Unknown session.")
 )
 
 // formatZabbixError formats a given error text. It capitalizes the first letter and adds a dot to the end.
 // TBD: move to the agent's core
 func formatZabbixError(errText string) string {
 	if errText[len(errText)-1:] != "." {
-		errText = errText + "."
+		errText += "."
 	}
 
 	return strings.Title(errText)
