@@ -83,7 +83,7 @@ $template_form_list
 			->setChecked(array_key_exists('description', $data['visible'])),
 		(new CTextArea('description', $data['description']))
 			->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
-			->setMaxlength(DB::getFieldLength('hosts' , 'description'))
+			->setMaxlength(DB::getFieldLength('hosts', 'description'))
 	);
 
 /*
@@ -95,7 +95,7 @@ $new_template_table = (new CTable())
 	->addRow([
 		(new CMultiSelect([
 			'name' => 'linked_templates[]',
-			'object_name' => 'linked_templates',
+			'object_name' => 'templates',
 			'data' => $data['linked_templates'],
 			'popup' => [
 				'parameters' => [

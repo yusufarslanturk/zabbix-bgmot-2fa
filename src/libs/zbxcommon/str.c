@@ -21,7 +21,7 @@
 #include "threads.h"
 #include "module.h"
 
-#include "../zbxcrypto/tls.h"
+#include "zbxcrypto.h"
 
 #ifdef HAVE_ICONV
 #	include <iconv.h>
@@ -1364,14 +1364,6 @@ const char	*zbx_interface_type_string(zbx_interface_type_t type)
 	}
 }
 
-const int	INTERFACE_TYPE_PRIORITY[INTERFACE_TYPE_COUNT] =
-{
-	INTERFACE_TYPE_AGENT,
-	INTERFACE_TYPE_SNMP,
-	INTERFACE_TYPE_JMX,
-	INTERFACE_TYPE_IPMI
-};
-
 const char	*zbx_sysinfo_ret_string(int ret)
 {
 	switch (ret)
@@ -1582,7 +1574,7 @@ const char	*zbx_event_value_string(unsigned char source, unsigned char object, u
 	return "unknown";
 }
 
-#ifdef _WINDOWS
+#if defined(_WINDOWS) || defined(__MINGW32__)
 static int	get_codepage(const char *encoding, unsigned int *codepage)
 {
 	typedef struct
@@ -1755,7 +1747,7 @@ void	zbx_strupper(char *str)
 		*str = toupper(*str);
 }
 
-#ifdef _WINDOWS
+#if defined(_WINDOWS) || defined(__MINGW32__)
 #include "log.h"
 char	*convert_to_utf8(char *in, size_t in_size, const char *encoding)
 {
