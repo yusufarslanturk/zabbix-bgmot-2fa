@@ -118,7 +118,7 @@
         url = params.url+&quot;/&quot;+params.eventid+&quot;?identifierType=alias&quot;;&#13;
         resp = req.Get(url);&#13;
         resp = JSON.parse(resp);&#13;
-        result.tags.issue_key = params.web+&quot;/alert/detail/&quot;+resp.data.id+&quot;/details&quot;;&#13;
+        result.tags.opsgenie_issue_key = params.web+&quot;/alert/detail/&quot;+resp.data.id+&quot;/details&quot;;&#13;
     }&#13;
 &#13;
 } catch (error) {&#13;
@@ -130,12 +130,14 @@
 return JSON.stringify(result);&#13;
 </script>
             <process_tags>YES</process_tags>
-            <event_menu_url>{EVENT.TAGS.issue_key}</event_menu_url>
+            <event_menu_url>{EVENT.TAGS.opsgenie_issue_key}</event_menu_url>
             <event_menu_name>Alert in Opsgenie</event_menu_name>
             <description>Please refer to https://docs.opsgenie.com/docs/alert-api and https://www.zabbix.com/documentation/current/manual/config/notifications/media/webhook#example_scripts.&#13;
   &#13;
 Set global macro {$ZABBIX.URL} with your Zabbix server URL.&#13;
-Add dedicated user with media type &quot;Opsgenie&quot; and API Key into &quot;Send to&quot; field for an integration on a service.&#13;
+Add dedicated user with media type &quot;Opsgenie&quot;.&#13;
+Change the values of the variables url (https://api.opsgenie.com/v2/alerts or https://api.eu.opsgenie.com/v2/alerts) , &#13;
+web (for example, https://myzabbix.app.opsgenie.com), token.
 </description>
         </media_type>
     </media_types>
