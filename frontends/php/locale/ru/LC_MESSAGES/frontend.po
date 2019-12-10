@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-09 12:45+0200\n"
-"PO-Revision-Date: 2019-12-09 10:56+0300\n"
-"Last-Translator: Yurii <jurijs.klopovskis@zabbix.com>\n"
+"PO-Revision-Date: 2019-12-10 10:03+0300\n"
+"Last-Translator: Alexey <dotneft@gmail.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1575881762.000000\n"
+"X-POOTLE-MTIME: 1575965025.000000\n"
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -204,7 +204,7 @@ msgstr[2] "%1$s секунд"
 #: jsLoader.php:236
 #, c-format
 msgid "%1$s symbols remaining"
-msgstr ""
+msgstr "осталось %1$s символов"
 
 #: app/views/monitoring.widget.problems.view.php:280
 #, c-format
@@ -315,11 +315,11 @@ msgstr "500 последних значений"
 #: app/views/popup.preproctestedit.view.js.php:34
 #: app/views/popup.preproctestedit.view.js.php:41
 msgid "<empty string>"
-msgstr ""
+msgstr "<пустая строка>"
 
 #: include/forms.inc.php:1361 include/views/js/item.preprocessing.js.php:244
 msgid "<label name>"
-msgstr ""
+msgstr "<имя метки>"
 
 #: include/views/monitoring.sysmap.edit.php:116
 msgid "<manual>"
@@ -329,7 +329,7 @@ msgstr "<вручную>"
 #: include/views/js/item.preprocessing.js.php:242
 #: include/views/js/item.preprocessing.js.php:251
 msgid "<metric name>{<label name>=\"<label value>\", ...} == <value>"
-msgstr ""
+msgstr "<имя метрики>{<имя метки>=\"<значение метки>\", ...} == <значение>"
 
 #: app/views/administration.script.edit.php:39
 msgid "<sub-menu/sub-menu/...>script"
@@ -857,7 +857,7 @@ msgstr "Интерфейс Агента или SNMP или JMX или IPMI"
 
 #: include/classes/widgets/CWidgetHelper.php:1107
 msgid "Aggregate"
-msgstr ""
+msgstr "Агрегация"
 
 #: include/classes/items/CHelpItems.php:669
 msgid "Aggregate checks do not require any agent running on a host being monitored. Zabbix server collects aggregate information by doing direct database queries. See Zabbix Manual."
@@ -865,11 +865,11 @@ msgstr "Агрегативные проверки не требуют налич
 
 #: include/classes/widgets/CWidgetHelper.php:1080
 msgid "Aggregation function"
-msgstr ""
+msgstr "Функция агрегации"
 
 #: include/classes/widgets/CWidgetHelper.php:1098
 msgid "Aggregation interval"
-msgstr ""
+msgstr "Интервал агрегации"
 
 #: include/actions.inc.php:2148
 msgid "Alert message"
@@ -1193,7 +1193,7 @@ msgstr "В %1$s:%2$s на %3$s день каждый %4$s"
 
 #: include/forms.inc.php:2304
 msgid "At (hour:minute)"
-msgstr ""
+msgstr "В (час:минута)"
 
 #: include/classes/api/services/CMaintenance.php:279
 #: include/classes/api/services/CMaintenance.php:664
@@ -1439,7 +1439,7 @@ msgstr "Фоновое изображение"
 #: include/classes/widgets/CWidgetHelper.php:766
 #: include/classes/widgets/CWidgetHelper.php:1011
 msgid "Bar"
-msgstr ""
+msgstr "Столбчатый"
 
 #: app/views/administration.authentication.edit.php:98
 msgid "Base DN"
@@ -1583,11 +1583,11 @@ msgstr "Утилизация CPU в процентах. Возвращает ч�
 
 #: app/views/popup.preproctestedit.view.php:117
 msgid "CRLF"
-msgstr ""
+msgstr "CRLF"
 
 #: include/items.inc.php:1724
 msgid "CSV to JSON"
-msgstr ""
+msgstr "CSV в JSON"
 
 #: include/views/configuration.services.edit.php:82 services.php:40
 msgid "Calculate SLA, acceptable SLA (in %)"
@@ -1831,7 +1831,7 @@ msgstr "Не удалось добавить веб-сценарий"
 
 #: jsLoader.php:134
 msgid "Cannot add widget: not enough free space on the dashboard."
-msgstr ""
+msgstr "Не удалось добавить виджет: не хватает свободного места на ПАНЕЛИ."
 
 #: jsLoader.php:123
 msgid "Cannot add widgets in kiosk mode"
@@ -1887,7 +1887,7 @@ msgstr "Не возможно подключиться к базе данных.
 
 #: include/views/js/configuration.httpconf.edit.js.php:80
 msgid "Cannot convert POST data:"
-msgstr ""
+msgstr "Не удалось выполнить конвертацию POST данных:"
 
 #: graphs.php:387
 msgid "Cannot copy graph"
@@ -2211,12 +2211,11 @@ msgid "Cannot delete triggers"
 msgstr "Не удалось удалить триггеры"
 
 #: app/controllers/CControllerUserDelete.php:59
-#, fuzzy
 msgid "Cannot delete user"
 msgid_plural "Cannot delete users"
 msgstr[0] "Не удалось удалить пользователя"
 msgstr[1] "Не удалось удалить пользователя"
-msgstr[2] "Не удалось удалить пользователя"
+msgstr[2] "Не удалось удалить пользователей"
 
 #: adm.valuemapping.php:108
 msgid "Cannot delete value map"
@@ -2691,14 +2690,14 @@ msgstr "Не удалось переключить узел сети на инт
 #: app/controllers/CControllerPopupMediatypeTestEdit.php:71
 #: app/controllers/CControllerPopupMediatypeTestSend.php:76
 msgid "Cannot test disabled media type."
-msgstr ""
+msgstr "Не удалось протестировать деактивированный способ оповещения."
 
 #: app/controllers/CControllerUserUnblock.php:78
 msgid "Cannot unblock user"
 msgid_plural "Cannot unblock users"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Не удалось разблокировать пользователя"
+msgstr[1] "Не удалось разблокировать пользователя"
+msgstr[2] "Не удалось разблокировать пользователей"
 
 #: include/classes/api/services/CHostGeneral.php:555
 msgid "Cannot unlink and clear Web scenarios."
@@ -2995,7 +2994,7 @@ msgstr "Не удалось обновить шаблонные группы э�
 
 #: templates.php:372
 msgid "Cannot update templates"
-msgstr ""
+msgstr "Не удалось обновить шаблоны"
 
 #: include/classes/api/services/CTemplate.php:793
 #: include/classes/api/services/CTemplate.php:1128
@@ -3102,7 +3101,7 @@ msgstr "Изменить"
 
 #: app/views/administration.autoreg.edit.php:87
 msgid "Change PSK"
-msgstr ""
+msgstr "Изменить PSK"
 
 #: app/views/administration.authentication.edit.php:72
 #: app/views/administration.mediatype.edit.php:129
@@ -3154,15 +3153,15 @@ msgstr "Проверьте часть выражения начиная с \"%1$
 
 #: include/items.inc.php:1768
 msgid "Check for error in JSON"
-msgstr "Проверьте на ошибку в JSON"
+msgstr "Проверка на ошибку в JSON"
 
 #: include/items.inc.php:1772
 msgid "Check for error in XML"
-msgstr "Проверьте на ошибку в XML"
+msgstr "Проверка на ошибку в XML"
 
 #: include/items.inc.php:1776
 msgid "Check for error using regular expression"
-msgstr "Проверьте на ошибку при использовании регулярного выражения"
+msgstr "Проверка на ошибку с использованием регулярного выражения"
 
 #: include/views/configuration.host.discovery.edit.php:803
 #: include/views/configuration.host.discovery.list.php:175
@@ -3287,11 +3286,11 @@ msgstr "Очистить при отсоединении"
 
 #: jsLoader.php:127
 msgid "Click and drag to desired size."
-msgstr ""
+msgstr "Нажмите и переместите до желаемого размера."
 
 #: jsLoader.php:237
 msgid "Click to view or edit"
-msgstr ""
+msgstr "Нажмите для просмотра или изменения"
 
 #: include/classes/widgets/CWidgetConfig.php:34 include/screens.inc.php:28
 msgid "Clock"
@@ -3970,7 +3969,7 @@ msgstr "Создать панель"
 
 #: jsLoader.php:265
 msgid "Create dependent discovery rule"
-msgstr ""
+msgstr "Создать зависимое правило обнаружения"
 
 #: jsLoader.php:264
 msgid "Create dependent item"
@@ -4189,7 +4188,7 @@ msgstr "Пользовательский множитель"
 #: app/views/popup.preproctestedit.view.js.php:169 include/forms.inc.php:1248
 #: include/forms.inc.php:1442 include/views/js/item.preprocessing.js.php:35
 msgid "Custom on fail"
-msgstr ""
+msgstr "Пользовательское при ошибке"
 
 #: screens.php:27
 msgid "Custom screens"
@@ -4203,7 +4202,7 @@ msgstr "Пользовательский скрипт"
 
 #: include/items.inc.php:1751
 msgid "Custom scripts"
-msgstr ""
+msgstr "Пользовательские скрипты"
 
 #: include/views/administration.general.triggerSeverity.edit.php:87
 msgid "Custom severity names affect all locales and require manual translation!"
@@ -4428,16 +4427,16 @@ msgstr "За день до вчера"
 
 #: include/forms.inc.php:2212 include/forms.inc.php:2273
 msgid "Day of month"
-msgstr ""
+msgstr "День месяца"
 
 #: include/forms.inc.php:2114 include/forms.inc.php:2213
 #: include/forms.inc.php:2221
 msgid "Day of week"
-msgstr ""
+msgstr "День недели"
 
 #: include/forms.inc.php:2322
 msgid "Days"
-msgstr ""
+msgstr "Дни"
 
 #: include/html.inc.php:960 include/html.inc.php:964
 msgid "Debug"
@@ -5100,16 +5099,16 @@ msgstr "Чрезвычайная"
 
 #: include/items.inc.php:1780
 msgid "Discard unchanged"
-msgstr ""
+msgstr "Отбрасывать не изменившееся"
 
 #: include/items.inc.php:1784
 msgid "Discard unchanged with heartbeat"
-msgstr ""
+msgstr "Отбрасывать не изменившееся с периодическим контролем"
 
 #: app/views/popup.preproctestedit.view.js.php:147 include/forms.inc.php:1421
 #: include/views/js/item.preprocessing.js.php:37
 msgid "Discard value"
-msgstr ""
+msgstr "Отбрасывать значение"
 
 #: include/discovery.inc.php:138 include/forms.inc.php:544
 #: include/views/configuration.triggers.list.php:144
@@ -5129,7 +5128,7 @@ msgstr "Обнаруженное устройство"
 
 #: include/forms.inc.php:325
 msgid "Discovered items"
-msgstr ""
+msgstr "Обнаруженные элементы данных"
 
 #: app/views/search.php:38 app/views/search.php:78 app/views/search.php:79
 #: app/views/search.php:185 app/views/search.php:230 app/views/search.php:231
@@ -5199,7 +5198,7 @@ msgstr "Правило обнаружения \"%1$s\" уже существуе
 #: include/classes/api/services/CDiscoveryRule.php:1620
 #, c-format
 msgid "Discovery rule \"%1$s\" cannot be copied without its master item."
-msgstr ""
+msgstr "Правило обнаружения \"%1$s\" нельзя скопировать без его мастер элемента данных."
 
 #: include/classes/api/services/CDRule.php:835
 #: include/classes/api/services/CDRule.php:852
@@ -5299,7 +5298,7 @@ msgstr "Отображено с %1$s до %2$s из %3$s найденных"
 
 #: include/classes/widgets/views/widget.svggraph.form.view.php:269
 msgid "Displaying options"
-msgstr ""
+msgstr "Опции отображения"
 
 #: include/services.inc.php:26
 msgid "Do not calculate"
@@ -5310,14 +5309,14 @@ msgstr "Без вычисления"
 #: include/views/configuration.item.prototype.edit.php:668
 #: include/views/configuration.item.prototype.massupdate.php:404
 msgid "Do not keep history"
-msgstr ""
+msgstr "Не хранить историю"
 
 #: include/views/configuration.item.edit.php:809
 #: include/views/configuration.item.massupdate.php:425
 #: include/views/configuration.item.prototype.edit.php:680
 #: include/views/configuration.item.prototype.massupdate.php:422
 msgid "Do not keep trends"
-msgstr ""
+msgstr "Не хранить динамику изменения"
 
 #: jsLoader.php:146 jsLoader.php:268
 msgid "Do you wish to replace the conditional expression?"
@@ -5325,7 +5324,7 @@ msgstr "Вы хотите заменить условие выражения?"
 
 #: include/items.inc.php:1764
 msgid "Does not match regular expression"
-msgstr ""
+msgstr "Не совпадает с регулярным выражением"
 
 #: include/graphs.inc.php:61 include/views/js/monitoring.sysmaps.js.php:696
 #: include/views/js/monitoring.sysmaps.js.php:784
@@ -5440,12 +5439,12 @@ msgstr "Дубликат имени важности \"%s\"."
 #: include/classes/api/services/CTriggerGeneral.php:504
 #, c-format
 msgid "Duplicate trigger prototype with name \"%1$s\"."
-msgstr ""
+msgstr "Дубликат прототипа триггеров с именем \"%1$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:498
 #, c-format
 msgid "Duplicate trigger with name \"%1$s\"."
-msgstr ""
+msgstr "Дубликат триггера с именем \"%1$s\"."
 
 #: include/classes/api/services/CMap.php:735
 #: include/classes/api/services/CMap.php:1199
@@ -5500,7 +5499,7 @@ msgstr "У каждого URL должно быть уникальное имя.
 
 #: include/classes/widgets/CWidgetHelper.php:1112
 msgid "Each item"
-msgstr ""
+msgstr "Каждый элемент данных"
 
 #: app/views/administration.user.edit.php:272
 #: include/views/configuration.action.edit.php:506
@@ -5621,7 +5620,7 @@ msgstr "Пустое имя прототипа группы элементов �
 
 #: include/classes/validators/CColorValidator.php:33
 msgid "Empty colour."
-msgstr ""
+msgstr "Пустой цвет."
 
 #: include/classes/api/services/CCorrelation.php:699
 msgid "Empty correlation ID."
@@ -5645,12 +5644,12 @@ msgstr "Пустой макрос условия фильтра для прав�
 #: include/classes/api/services/CAction.php:2756
 #, c-format
 msgid "Empty filter condition operator for action \"%1$s\"."
-msgstr ""
+msgstr "Пустой оператор условия фильтрации для действия \"%1$s\"."
 
 #: include/classes/api/services/CAction.php:2740
 #, c-format
 msgid "Empty filter condition type for action \"%1$s\"."
-msgstr ""
+msgstr "Пустой тип условия фильтрации для действия \"%1$s\"."
 
 #: include/classes/api/services/CCorrelation.php:516
 #: include/classes/api/services/CCorrelation.php:693
@@ -5872,11 +5871,11 @@ msgstr "Шифрование"
 
 #: app/views/administration.autoreg.edit.php:50
 msgid "Encryption level"
-msgstr ""
+msgstr "Уровень шифрования"
 
 #: app/views/popup.preproctestedit.view.php:114
 msgid "End of line sequence"
-msgstr ""
+msgstr "Конец строки"
 
 #: include/locales.inc.php:52
 msgid "English (en_GB)"
@@ -5984,11 +5983,11 @@ msgstr "События и оповещения"
 
 #: include/forms.inc.php:2095
 msgid "Every day(s)"
-msgstr ""
+msgstr "Каждый день(и)"
 
 #: include/forms.inc.php:2108
 msgid "Every week(s)"
-msgstr ""
+msgstr "Каждую неделю(и)"
 
 #: app/views/popup.triggerwizard.php:50 app/views/popup.triggerwizard.php:101
 msgid "Exclude"
@@ -6012,7 +6011,7 @@ msgstr "Ошибка выполнения SQL [%1$s] в [%2$s]."
 
 #: include/classes/items/CHelpItems.php:345
 msgid "Execute WMI query and return the JSON document with all selected objects"
-msgstr ""
+msgstr "Выполнение запроса WMI и получение JSON документа со всеми выбранными объектами"
 
 #: include/classes/items/CHelpItems.php:341
 #: include/classes/items/CHelpItems.php:655
@@ -6127,7 +6126,7 @@ msgstr "Конструктор выражения"
 #: include/forms.inc.php:1849 include/forms.inc.php:1855
 #: include/forms.inc.php:1864
 msgid "Expression syntax error."
-msgstr ""
+msgstr "Ошибка в синтаксисе выражения."
 
 #: include/views/administration.general.regularexpressions.edit.php:49
 #: include/views/administration.general.regularexpressions.edit.php:128
@@ -6927,7 +6926,7 @@ msgstr "H:i:s"
 
 #: app/views/administration.mediatype.edit.php:197
 msgid "HTML"
-msgstr ""
+msgstr "HTML"
 
 #: include/discovery.inc.php:51
 #: include/views/js/configuration.discovery.edit.js.php:204
@@ -7209,7 +7208,7 @@ msgstr "Узел сети добавлен"
 
 #: include/classes/widgets/CWidgetConfig.php:42
 msgid "Host availability"
-msgstr ""
+msgstr "Доступность узлов сети"
 
 #: include/classes/api/services/CHostInterface.php:819
 msgid "Host cannot have more than one default interface of the same type."
@@ -7524,7 +7523,7 @@ msgstr "Узлы сети обновлены"
 
 #: include/forms.inc.php:2324
 msgid "Hours"
-msgstr ""
+msgstr "Часы"
 
 #: include/html.inc.php:769
 #: include/views/administration.general.housekeeper.edit.php:25
@@ -7735,7 +7734,7 @@ msgstr "Ошибка при загрузке изображения [%1$s] в [%
 #: include/classes/helpers/CUploadFile.php:129
 #, c-format
 msgid "Image size must be less than %s."
-msgstr ""
+msgstr "Размер изображения должен быть меньше %s."
 
 #: adm.images.php:58
 msgid "Image updated"
@@ -7795,12 +7794,12 @@ msgstr "В работе"
 
 #: include/items.inc.php:1756
 msgid "In range"
-msgstr ""
+msgstr "В диапазоне"
 
 #: include/views/configuration.host.edit.php:62
 #: include/views/configuration.host.list.php:217
 msgid "Inaccessible discovery rule"
-msgstr ""
+msgstr "Недоступное правило обнаружения"
 
 #: app/controllers/CControllerDashboardWidgetEdit.php:303
 msgid "Inaccessible graph"
@@ -7808,7 +7807,7 @@ msgstr "Недоступный график"
 
 #: app/controllers/CControllerDashboardWidgetEdit.php:305
 msgid "Inaccessible graph prototype"
-msgstr ""
+msgstr "Недоступный прототип графиков"
 
 #: app/controllers/CControllerDashboardWidgetEdit.php:300
 #: host_prototypes.php:347
@@ -7825,14 +7824,14 @@ msgstr "Недоступный элемент данных"
 
 #: app/controllers/CControllerDashboardWidgetEdit.php:304
 msgid "Inaccessible item prototype"
-msgstr ""
+msgstr "Недоступный прототип элементов данных"
 
 #: include/classes/screens/CScreenProblem.php:416
 #: include/hostgroups.inc.php:288 include/triggers.inc.php:2372
 #: include/views/configuration.host.list.php:238
 #: include/views/inventory.host.view.php:36
 msgid "Inaccessible maintenance"
-msgstr ""
+msgstr "Недоступное обслуживание"
 
 #: app/controllers/CControllerDashboardWidgetEdit.php:118
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:85
@@ -7864,7 +7863,7 @@ msgstr "Включено"
 
 #: app/views/administration.mediatype.edit.php:230
 msgid "Include event menu entry"
-msgstr ""
+msgstr "Включить запись меню события"
 
 #: include/views/administration.usergroups.edit.php:163
 #: include/views/administration.usergroups.edit.php:252
@@ -8394,7 +8393,7 @@ msgstr "Указан некорректный тип элемента данны
 
 #: include/forms.inc.php:1522
 msgid "Incorrect list of items."
-msgstr ""
+msgstr "Некорректный список элементов данных."
 
 #: maintenance.php:297
 msgid "Incorrect maintenance - date must be between 1970.01.01 and 2038.01.18"
@@ -8752,7 +8751,7 @@ msgstr "Некорректное значение \"%1$s\" в поле \"%2$s\" 
 #: include/validate.inc.php:358
 #, c-format
 msgid "Incorrect value for \"%1$s\" field."
-msgstr ""
+msgstr "Некорректное значение для \"%1$s\" поля."
 
 #: app/controllers/CControllerAuthenticationUpdate.php:95
 #: app/controllers/CControllerAuthenticationUpdate.php:127
@@ -9005,7 +9004,7 @@ msgstr "Информация о службе. Возвращает число с
 
 #: include/views/configuration.triggers.list.php:137
 msgid "Inherited"
-msgstr ""
+msgstr "Унаследованные"
 
 #: include/views/hostmacros.php:221
 msgid "Inherited and host macros"
@@ -9017,11 +9016,11 @@ msgstr "Унаследованные и макросы из шаблонов"
 
 #: include/views/configuration.tags.tab.php:122
 msgid "Inherited and trigger tags"
-msgstr ""
+msgstr "Унаследованные и собственные теги"
 
 #: include/forms.inc.php:309 include/forms.inc.php:494
 msgid "Inherited items"
-msgstr ""
+msgstr "Унаследованные элементы данных"
 
 #: app/views/popup.triggerexpr.php:180
 msgid "Insert"
@@ -9062,7 +9061,7 @@ msgstr "Интерфейс используется элементами дан�
 
 #: include/classes/widgets/forms/CWidgetFormHostAvail.php:39
 msgid "Interface type"
-msgstr ""
+msgstr "Типы интерфейсов"
 
 #: include/classes/api/services/CHostInterface.php:275
 #, c-format
@@ -9547,7 +9546,7 @@ msgstr "Элемент данных \"%1$s\" уже существует у \"%2
 #: include/items.inc.php:540
 #, c-format
 msgid "Item \"%1$s\" cannot be copied without its master item."
-msgstr ""
+msgstr "Нельзя скопировать элемент данных \"%1$s\" без его мастер элемента данных."
 
 #: include/classes/api/services/CItem.php:943
 #, c-format
@@ -9680,7 +9679,7 @@ msgstr "Прототип элементов данных удален"
 
 #: disc_prototypes.php:1189
 msgid "Item prototypes updated"
-msgstr ""
+msgstr "Прототипы элементов данных обновлены"
 
 #: items.php:958
 msgid "Item updated"
@@ -9820,7 +9819,7 @@ msgstr "JSON данные"
 #: include/classes/api/services/CItemGeneral.php:2330
 #: include/classes/api/services/CItemGeneral.php:2359
 msgid "JSON is expected"
-msgstr ""
+msgstr "ожидался JSON"
 
 #: include/classes/validators/CNewValidator.php:101
 msgid "JSON string is expected"
@@ -9846,7 +9845,7 @@ msgstr "Версия JSON-rpc не указана."
 #: include/items.inc.php:1720
 #: include/views/configuration.host.discovery.edit.php:718
 msgid "JSONPath"
-msgstr ""
+msgstr "JSONPath"
 
 #: include/func.inc.php:236
 msgid "Jan"
@@ -9864,7 +9863,7 @@ msgstr "Японский (ja_JP)"
 #: app/views/administration.mediatype.edit.php:209 include/forms.inc.php:1344
 #: include/items.inc.php:1752 include/views/js/item.preprocessing.js.php:228
 msgid "JavaScript"
-msgstr ""
+msgstr "JavaScript"
 
 #: include/func.inc.php:242
 msgid "Jul"
@@ -9893,7 +9892,7 @@ msgstr "Период сохранения потерянных ресурсов"
 #: include/views/configuration.item.edit.php:324
 #: include/views/configuration.item.prototype.edit.php:306
 msgid "Kerberos"
-msgstr ""
+msgstr "Kerberos"
 
 #: app/controllers/CControllerPopupGeneric.php:210
 #: app/controllers/CControllerPopupGeneric.php:221
@@ -9961,16 +9960,16 @@ msgstr "Настройки LDAP"
 
 #: app/views/popup.preproctestedit.view.php:116
 msgid "LF"
-msgstr ""
+msgstr "LF"
 
 #: include/views/configuration.host.discovery.edit.php:718
 msgid "LLD macro"
-msgstr ""
+msgstr "LLD макрос"
 
 #: include/views/configuration.host.discovery.edit.php:776
 #: include/views/configuration.host.discovery.edit.php:791
 msgid "LLD macros"
-msgstr ""
+msgstr "LLD макросы"
 
 #: include/maps.inc.php:45 include/views/configuration.action.edit.php:51
 #: include/views/configuration.action.edit.php:1100
@@ -9994,7 +9993,7 @@ msgstr "Язык"
 #: include/classes/api/services/CUser.php:549
 #, c-format
 msgid "Language \"%1$s\" is not supported."
-msgstr ""
+msgstr "Язык \"%1$s\" не поддерживается."
 
 #: include/func.inc.php:1645
 msgctxt "page navigation"
@@ -10127,7 +10126,7 @@ msgstr "Латышский (lv_LV)"
 #: include/classes/widgets/forms/CWidgetFormHostAvail.php:48
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:95
 msgid "Layout"
-msgstr ""
+msgstr "Размещение"
 
 #: include/classes/widgets/CWidgetHelper.php:732
 #: include/classes/widgets/CWidgetHelper.php:807
@@ -10513,7 +10512,7 @@ msgstr "Период обслуживания"
 
 #: include/forms.inc.php:2318
 msgid "Maintenance period length"
-msgstr ""
+msgstr "Длительность периода обслуживания"
 
 #: include/views/configuration.maintenance.edit.php:24
 #: include/views/configuration.maintenance.list.php:22
@@ -10708,7 +10707,7 @@ msgstr "Основной элемент данных"
 
 #: include/items.inc.php:1760
 msgid "Matches regular expression"
-msgstr ""
+msgstr "Совпадение регулярному выражению"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:140
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:213
@@ -10821,11 +10820,11 @@ msgstr "В типе оповещений пропущены параметры: 
 #: app/controllers/CControllerPopupMediatypeTestSend.php:40
 #: app/controllers/CControllerPopupMediatypeTestSend.php:136
 msgid "Media type test failed."
-msgstr ""
+msgstr "Ошибка при тестировании способа оповещения."
 
 #: app/controllers/CControllerPopupMediatypeTestSend.php:133
 msgid "Media type test successful."
-msgstr ""
+msgstr "Успешное тестирование способа оповещения."
 
 #: app/controllers/CControllerMediatypeUpdate.php:167
 msgid "Media type updated"
@@ -10869,11 +10868,11 @@ msgstr "Память используемая процессом в байтах
 
 #: app/views/administration.mediatype.edit.php:245
 msgid "Menu entry URL"
-msgstr ""
+msgstr "URL записи меню"
 
 #: app/views/administration.mediatype.edit.php:236
 msgid "Menu entry name"
-msgstr ""
+msgstr "Имя записи меню"
 
 #: app/views/monitoring.acknowledge.edit.php:26
 #: app/views/monitoring.widget.actionlog.view.php:33
@@ -10891,7 +10890,7 @@ msgstr "Сообщение"
 
 #: app/views/administration.mediatype.edit.php:195
 msgid "Message format"
-msgstr ""
+msgstr "Формат сообщения"
 
 #: app/views/administration.user.edit.php:358
 #: app/views/administration.user.edit.php:366
@@ -10976,7 +10975,7 @@ msgstr[2] "Минимально отображаемым периодом явл
 
 #: include/forms.inc.php:2326
 msgid "Minutes"
-msgstr ""
+msgstr "Минуты"
 
 #: include/classes/api/services/CGraphGeneral.php:74
 msgid "Missing \"gitemid\" field for item."
@@ -11354,7 +11353,7 @@ msgstr "Группа узлов нового события"
 
 #: include/correlation.inc.php:50 include/correlation.inc.php:202
 msgid "New event tag name"
-msgstr ""
+msgstr "Имя тега нового события"
 
 #: include/correlation.inc.php:54
 msgid "New event tag value"
@@ -11378,7 +11377,7 @@ msgstr "Новые триггера"
 
 #: jsLoader.php:130
 msgid "Next page"
-msgstr ""
+msgstr "Следующая страница"
 
 #: include/classes/setup/CSetupWizard.php:118
 #: include/classes/setup/CSetupWizard.php:264
@@ -11953,7 +11952,7 @@ msgstr "Триггеры не заданы."
 
 #: app/views/popup.preproctestedit.view.js.php:38
 msgid "No value"
-msgstr ""
+msgstr "Значение отсутствует"
 
 #: include/classes/validators/CApiInputValidator.php:806
 msgid "Non-boolean flags are deprecated."
@@ -12045,7 +12044,7 @@ msgstr "Не классифицировано"
 
 #: include/forms.inc.php:310 include/forms.inc.php:491
 msgid "Not inherited items"
-msgstr ""
+msgstr "Без унаследованных элементов данных"
 
 #: include/items.inc.php:159 include/items.inc.php:184
 msgid "Not supported"
@@ -12125,7 +12124,7 @@ msgstr "Количество элементов данных в очереди, 
 #: include/classes/items/CHelpItems.php:663
 #: include/classes/items/CHelpItems.php:1027
 msgid "Number of items in the queue which are delayed in Zabbix server or proxy by \"from\" till \"to\" seconds, inclusive."
-msgstr ""
+msgstr "Количество элементов данных в очереди, которые задерживаются на Zabbix сервере или прокси \"от\" и \"до\" секунд, включительно."
 
 #: include/classes/items/CHelpItems.php:983
 msgid "Number of monitored hosts"
@@ -12346,7 +12345,7 @@ msgstr "Ok"
 
 #: include/correlation.inc.php:49 include/correlation.inc.php:197
 msgid "Old event tag name"
-msgstr ""
+msgstr "Имя тега старого события"
 
 #: include/correlation.inc.php:53
 msgid "Old event tag value"
@@ -12436,7 +12435,7 @@ msgstr "Подсчитываются только элементы данных 
 
 #: include/classes/api/services/CItemGeneral.php:1494
 msgid "Only one Prometheus step is allowed."
-msgstr ""
+msgstr "Только один шаг Prometheus разрешен."
 
 #: include/classes/api/services/CItemGeneral.php:1462
 msgid "Only one change step is allowed."
@@ -12449,7 +12448,7 @@ msgstr "Только одна проверка может быть уникал�
 #: include/classes/api/services/CItemGeneral.php:1439
 #: include/classes/api/services/CItemGeneral.php:1484
 msgid "Only one throttling step is allowed."
-msgstr ""
+msgstr "Только один шаг троттлинга разрешен."
 
 #: app/views/monitoring.acknowledge.edit.php:49
 msgid "Only selected problem"
@@ -12543,7 +12542,7 @@ msgstr "Тип операции"
 #: include/views/configuration.triggers.edit.php:89
 #: include/views/configuration.triggers.list.php:200
 msgid "Operational data"
-msgstr ""
+msgstr "Оперативные данные"
 
 #: include/views/configuration.action.edit.php:567
 #: include/views/configuration.action.edit.php:1260
@@ -12787,11 +12786,11 @@ msgstr "Поддержка PHP gd FreeType отсутствует."
 
 #: include/classes/setup/CFrontendSetup.php:481
 msgid "PHP gd GIF image support missing."
-msgstr ""
+msgstr "Поддержка PHP gd GIF изображений отсутствует."
 
 #: include/classes/setup/CFrontendSetup.php:477
 msgid "PHP gd GIF support"
-msgstr ""
+msgstr "Поддержка PHP gd GIF"
 
 #: include/classes/setup/CFrontendSetup.php:464
 msgid "PHP gd JPEG image support missing."
@@ -12998,7 +12997,7 @@ msgstr "Родительская услуга IT"
 
 #: include/views/configuration.tags.tab.php:38
 msgid "Parent templates"
-msgstr ""
+msgstr "Родительские шаблоны"
 
 #: include/views/configuration.trigger.prototype.edit.php:57
 #: include/views/configuration.triggers.edit.php:68
@@ -13298,7 +13297,7 @@ msgstr "Шаги предобработки"
 #: app/controllers/CControllerPopupPreprocTestSend.php:101
 #: app/views/popup.preproctestedit.view.php:107
 msgid "Prev. time"
-msgstr ""
+msgstr "Пред. время"
 
 #: include/views/administration.general.iconmap.edit.php:77
 #: include/views/administration.general.iconmap.edit.php:110
@@ -13313,12 +13312,12 @@ msgstr "Предыдущий месяц"
 
 #: jsLoader.php:129
 msgid "Previous page"
-msgstr ""
+msgstr "Предыдущая страница"
 
 #: app/controllers/CControllerPopupPreprocTestSend.php:219
 #: app/views/popup.preproctestedit.view.php:102
 msgid "Previous value"
-msgstr ""
+msgstr "Предыдущее значение"
 
 #: include/func.inc.php:2666
 msgid "Previous week"
@@ -13496,19 +13495,19 @@ msgstr "Утилизация CPU процесса в процентах. Воз�
 
 #: app/views/administration.mediatype.edit.php:224
 msgid "Process tags"
-msgstr ""
+msgstr "Обработка тегов"
 
 #: include/items.inc.php:1787 include/items.inc.php:1791
 msgid "Prometheus"
-msgstr ""
+msgstr "Prometheus"
 
 #: include/items.inc.php:1788
 msgid "Prometheus pattern"
-msgstr ""
+msgstr "Шаблон Prometheus"
 
 #: include/items.inc.php:1792
 msgid "Prometheus to JSON"
-msgstr ""
+msgstr "Prometheus в JSON"
 
 #: include/views/monitoring.screen.list.php:90
 #: include/views/monitoring.slideconf.list.php:74
@@ -13754,7 +13753,7 @@ msgstr "Выражение восстановления"
 #: include/forms.inc.php:1897 include/forms.inc.php:1903
 #: include/forms.inc.php:1912
 msgid "Recovery expression syntax error."
-msgstr ""
+msgstr "Ошибка в синтаксисе выражения восстановления."
 
 #: include/views/configuration.action.edit.php:1860
 msgid "Recovery operations"
@@ -13798,7 +13797,7 @@ msgstr "Обновление неподдерживаемых элементов
 
 #: include/forms.inc.php:541
 msgid "Regular"
-msgstr ""
+msgstr "Обычные"
 
 #: include/audit.inc.php:49 include/items.inc.php:1700
 #: include/views/configuration.host.discovery.edit.php:641
@@ -13841,11 +13840,11 @@ msgstr "Регулярные выражения"
 
 #: include/forms.inc.php:326
 msgid "Regular items"
-msgstr ""
+msgstr "Обычные элементы данных"
 
 #: jsLoader.php:126
 msgid "Release to create a new widget."
-msgstr ""
+msgstr "Отпустите, чтобы создался новый виджет."
 
 #: include/views/general.login.php:67
 msgid "Remember me for 30 days"
@@ -14153,7 +14152,7 @@ msgstr "Решено правилом корреляции."
 #: include/classes/screens/CScreenHostTriggers.php:249
 #: include/classes/screens/CScreenProblem.php:1037
 msgid "Resolved by inaccessible user."
-msgstr ""
+msgstr "Решено недоступным пользователем."
 
 #: app/views/monitoring.widget.problems.view.php:144
 #: include/classes/screens/CScreenHostTriggers.php:248
@@ -14170,7 +14169,7 @@ msgstr "Ресурс"
 
 #: app/views/popup.mediatypetest.edit.php:42
 msgid "Response"
-msgstr ""
+msgstr "Ответ"
 
 #: include/classes/screens/CScreenHttpTestDetails.php:85
 msgid "Response code"
@@ -14182,11 +14181,11 @@ msgstr "Время ответа"
 
 #: app/controllers/CControllerPopupMediatypeTestSend.php:154
 msgid "Response type: JSON"
-msgstr ""
+msgstr "Тип ответа: JSON"
 
 #: app/controllers/CControllerPopupMediatypeTestSend.php:154
 msgid "Response type: String"
-msgstr ""
+msgstr "Тип ответа: Строка"
 
 #: app/views/popup.preproctestedit.view.php:61
 #: app/views/popup.preproctestedit.view.php:137
@@ -14201,7 +14200,7 @@ msgstr "Результат"
 #: app/controllers/CControllerPopupPreprocTestSend.php:224
 #, c-format
 msgid "Result converted to %1$s"
-msgstr ""
+msgstr "Результат сконвертирован в %1$s"
 
 #: include/regexp.inc.php:226 include/views/js/adm.regexprs.edit.js.php:149
 msgid "Result is FALSE"
@@ -14233,11 +14232,11 @@ msgstr "Повтор"
 
 #: include/classes/items/CHelpItems.php:1083
 msgid "Return a JSON array with LLD macros describing the MBean objects or their attributes. Can be used for LLD."
-msgstr ""
+msgstr "Возвращает JSON массив с LLD макросами, которые описывают MBean объекты и их атрибуты. Можно использовать для LLD."
 
 #: include/classes/items/CHelpItems.php:1087
 msgid "Return a JSON array with MBean objects or their attributes. Compared to jmx.discovery it does not define LLD macros. Can be used for LLD."
-msgstr ""
+msgstr "Возвращает JSON массив с MBean объектами и их атрибутами. В сравнении с jmx.discovery этот ключ не задает LLD макросы. Можно использовать для LLD."
 
 #: include/classes/items/CHelpItems.php:1065
 msgid "Return first column of the first row of the SQL query result."
@@ -14253,13 +14252,13 @@ msgstr "Получение времени ответа на ICMP ping в сек�
 
 #: include/classes/items/CHelpItems.php:975
 msgid "Returns a JSON array describing the host network interfaces configured in Zabbix. Can be used for LLD."
-msgstr ""
+msgstr "Возвращает JSON массив, который описывает сетевые интерфейсы узла сети в Zabbix. Можно использовать в LLD."
 
 #: include/classes/items/CHelpItems.php:349
 #: include/classes/items/CHelpItems.php:659
 #: include/classes/items/CHelpItems.php:1023
 msgid "Returns a JSON object containing Zabbix server or proxy internal metrics."
-msgstr ""
+msgstr "Получение JSON объекта, который содержит внутренние метрики Zabbix сервера или прокси."
 
 #: include/classes/items/CHelpItems.php:979
 msgid "Returns availability of a particular type of checks on the host. Value of this item corresponds to availability icons in the host list. Valid types are: agent, snmp, ipmi, jmx."
@@ -14973,7 +14972,7 @@ msgstr "Раздельно"
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:115
 #: include/classes/widgets/forms/CWidgetFormProblems.php:160
 msgid "Separately"
-msgstr ""
+msgstr "Раздельно"
 
 #: include/forms.inc.php:2181 include/func.inc.php:124
 #: include/func.inc.php:261 jsLoader.php:161
@@ -15117,7 +15116,7 @@ msgstr "Задать пользовательский период времен�
 #: app/views/popup.preproctestedit.view.js.php:159 include/forms.inc.php:1423
 #: include/views/js/item.preprocessing.js.php:39
 msgid "Set error to"
-msgstr ""
+msgstr "Задать ошибку в"
 
 #: include/actions.inc.php:1112
 msgid "Set host inventory mode"
@@ -15126,19 +15125,19 @@ msgstr "Установить режим инвентарных данных уз
 #: app/views/popup.preproctestedit.view.js.php:153 include/forms.inc.php:1422
 #: include/views/js/item.preprocessing.js.php:38
 msgid "Set value to"
-msgstr ""
+msgstr "Задать значение в"
 
 #: include/classes/validators/CLdapAuthValidator.php:77
 msgid "Setting LDAP dereferencing mode failed."
-msgstr ""
+msgstr "Не удалось задать режим разыменовывания LDAP."
 
 #: include/classes/validators/CLdapAuthValidator.php:74
 msgid "Setting LDAP protocol failed."
-msgstr ""
+msgstr "Не удалось задать LDAP протокол."
 
 #: include/classes/validators/CLdapAuthValidator.php:76
 msgid "Setting LDAP referrals to \"Off\" failed."
-msgstr ""
+msgstr "Не удалось задать LDAP referral значением \"Off\"."
 
 #: app/controllers/CControllerPopupGeneric.php:156
 #: app/controllers/CControllerPopupGeneric.php:170
@@ -15242,7 +15241,7 @@ msgstr "Показывать детали"
 
 #: include/classes/widgets/CWidgetHelper.php:52
 msgid "Show header"
-msgstr ""
+msgstr "Отображение заголовка"
 
 #: include/classes/widgets/forms/CWidgetFormHostAvail.php:62
 #: include/classes/widgets/forms/CWidgetFormWeb.php:58
@@ -15274,7 +15273,7 @@ msgstr "Отображать строки"
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:113
 #: include/classes/widgets/forms/CWidgetFormProblems.php:158
 msgid "Show operational data"
-msgstr ""
+msgstr "Отображение операционных данных"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:308
 msgid "Show problems"
@@ -15604,7 +15603,7 @@ msgstr "Начинать в"
 
 #: include/classes/validators/CLdapAuthValidator.php:75
 msgid "Starting TLS failed."
-msgstr ""
+msgstr "Инициализация TLS не удалась."
 
 #: include/classes/items/CHelpItems.php:939
 msgid "Startup time of Zabbix server, Unix timestamp."
@@ -15755,7 +15754,7 @@ msgstr "Остановить"
 #: include/views/configuration.item.prototype.massupdate.php:405
 #: include/views/configuration.item.prototype.massupdate.php:423
 msgid "Storage period"
-msgstr ""
+msgstr "Период хранения"
 
 #: include/hosts.inc.php:35
 msgid "Straight"
@@ -15776,7 +15775,7 @@ msgstr "Поднавигация"
 
 #: include/forms.inc.php:334
 msgid "Subfilter"
-msgstr ""
+msgstr "Подфильтр"
 
 #: app/views/popup.mediatypetest.edit.php:61
 #: include/views/administration.auditacts.list.php:86
@@ -16073,7 +16072,7 @@ msgstr "Шаблон добавлен"
 
 #: include/views/conf.import.php:98
 msgid "Template and host properties that are inherited through template linkage will be unlinked and cleared."
-msgstr ""
+msgstr "Свойства шаблона и узла сети, которые наследуются через присоединенный шаблон будут отсоединены и очищены."
 
 #: include/classes/api/services/CHostBase.php:260
 msgid "Template cannot be linked to another template more than once even through other templates."
@@ -16171,7 +16170,7 @@ msgstr "Шаблоны \"%1$s\" отсоединены от узлов сети 
 
 #: templates.php:366
 msgid "Templates updated"
-msgstr ""
+msgstr "Шаблоны обновлены"
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:147
 #: app/views/administration.authentication.edit.php:151
@@ -16190,7 +16189,7 @@ msgstr "Тест"
 
 #: include/forms.inc.php:1493
 msgid "Test all steps"
-msgstr ""
+msgstr "Тест всех шагов"
 
 #: app/views/administration.authentication.edit.php:122
 msgid "Test authentication"
@@ -16210,11 +16209,11 @@ msgstr "Тест выражений"
 
 #: app/controllers/CControllerPopupPreprocTestEdit.php:110
 msgid "Test item preprocessing"
-msgstr ""
+msgstr "Тестирование предобработки элемента данных"
 
 #: app/controllers/CControllerPopupMediatypeTestEdit.php:75
 msgid "Test media type"
-msgstr ""
+msgstr "Тестирование способа оповещения"
 
 #: adm.regexps.php:37
 #: include/views/administration.general.regularexpressions.edit.php:119
@@ -16223,7 +16222,7 @@ msgstr "Тестовая строка"
 
 #: app/controllers/CControllerPopupMediatypeTestEdit.php:79
 msgid "Test subject"
-msgstr ""
+msgstr "Тестовая тема"
 
 #: include/forms.inc.php:201 include/items.inc.php:133
 #: include/items.inc.php:1699 include/items.inc.php:1703
@@ -16348,7 +16347,7 @@ msgstr "Это поле автоматически заполняется эле
 
 #: app/controllers/CControllerPopupMediatypeTestEdit.php:80
 msgid "This is the test message from Zabbix"
-msgstr ""
+msgstr "Это тестовое сообщение от Zabbix"
 
 #: include/func.inc.php:2673 srv_status.php:41
 msgid "This month"
@@ -16388,7 +16387,7 @@ msgstr "Порог"
 
 #: include/items.inc.php:1779 include/items.inc.php:1783
 msgid "Throttling"
-msgstr ""
+msgstr "Троттлинг"
 
 #: include/func.inc.php:216
 msgid "Thu"
@@ -16552,7 +16551,7 @@ msgstr "Всего затрачено времени: %1$s"
 
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:78
 msgid "Totals"
-msgstr ""
+msgstr "Общее количество"
 
 #: include/page_footer.php:46
 msgid "Transaction has not been closed. Aborting..."
@@ -16560,11 +16559,11 @@ msgstr "Транзакция не была закрыта. Откат..."
 
 #: include/classes/items/CHelpItems.php:1069
 msgid "Transform SQL query result into a JSON array for low-level discovery."
-msgstr ""
+msgstr "Преобразование результата SQL запроса в JSON массив для низкоуровневого обнаружения."
 
 #: include/classes/items/CHelpItems.php:1073
 msgid "Transform SQL query result into a JSON array."
-msgstr ""
+msgstr "Преобразование результата SQL запроса в JSON массив."
 
 #: include/classes/widgets/CWidgetHelper.php:724
 #: include/classes/widgets/CWidgetHelper.php:768
@@ -16653,7 +16652,7 @@ msgstr "Триггер \"%1$s\" зависит от триггера \"%2$s\", �
 
 #: app/controllers/CControllerMenuPopup.php:568
 msgid "Trigger URL"
-msgstr ""
+msgstr "URL триггера"
 
 #: triggers.php:299
 msgid "Trigger added"
@@ -16839,7 +16838,7 @@ msgstr "Состояние триггера \"Проблема\""
 
 #: include/views/configuration.tags.tab.php:121
 msgid "Trigger tags"
-msgstr ""
+msgstr "Теги триггера"
 
 #: triggers.php:401 triggers.php:519
 msgid "Trigger updated"
@@ -17003,7 +17002,7 @@ msgstr "Тип информации должен быть \"Числовой (ц
 
 #: include/forms.inc.php:683
 msgid "Types"
-msgstr ""
+msgstr "Типы"
 
 #: include/translateDefines.inc.php:25
 #: include/views/js/adm.regexprs.edit.js.php:167
@@ -17438,7 +17437,7 @@ msgstr "Использовать массовые запросы"
 #: adm.triggerdisplayoptions.php:31
 #: include/views/administration.general.trigger.options.edit.php:37
 msgid "Use custom event status colours"
-msgstr ""
+msgstr "Использование пользовательских цветов событий"
 
 #: app/views/administration.user.edit.php:214 app/views/popup.media.php:73
 msgid "Use if severity"
@@ -17521,12 +17520,11 @@ msgid "User cannot change their user type."
 msgstr "Пользователь не может изменить себе тип пользователя."
 
 #: app/controllers/CControllerUserDelete.php:56
-#, fuzzy
 msgid "User deleted"
 msgid_plural "Users deleted"
 msgstr[0] "Пользователь удален"
-msgstr[1] "Пользователь удален"
-msgstr[2] "Пользователь удален"
+msgstr[1] "Пользователя удалено"
+msgstr[2] "Пользователей удалено"
 
 #: app/views/administration.script.edit.php:77
 #: app/views/administration.script.list.php:60
@@ -17683,9 +17681,9 @@ msgstr "Тип пользователя"
 #: app/controllers/CControllerUserUnblock.php:75
 msgid "User unblocked"
 msgid_plural "Users unblocked"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Пользователь разблокирован"
+msgstr[1] "Пользователя разблокировано"
+msgstr[2] "Пользователей разблокировано"
 
 #: app/controllers/CControllerUserProfileUpdate.php:114
 #: app/controllers/CControllerUserUpdate.php:118
@@ -17747,19 +17745,19 @@ msgstr "Статистика пространства на VMware хранили
 
 #: include/classes/items/CHelpItems.php:727
 msgid "VMware datastore hypervisors list, <url> - VMware service URL, <datastore> - datastore name"
-msgstr ""
+msgstr "Список гипервизоров хранилища VMware, <url> - URL службы VMware, <datastore> - имя хранилища"
 
 #: include/classes/items/CHelpItems.php:715
 msgid "VMware datastore read statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
-msgstr ""
+msgstr "Статистика чтения хранилища VMware, <url> - URL службы VMware, <datastore> - имя хранилища, <mode> - latency/maxlatency - среднее или максимальное"
 
 #: include/classes/items/CHelpItems.php:723
 msgid "VMware datastore write statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
-msgstr ""
+msgstr "Статистика записи на хранилище VMware, <url> - URL службы VMware, <datastore> - имя хранилища, <mode> - latency/maxlatency - среднее или максимальное"
 
 #: include/classes/items/CHelpItems.php:707
 msgid "VMware event log, <url> - VMware service URL, <mode> - all (default), skip - skip processing of older data"
-msgstr ""
+msgstr "Журнал событий VMware, <url> - URL службы VMware, <mode> - all (по умолчанию), skip - пропуск обработки устаревших данных"
 
 #: include/classes/items/CHelpItems.php:783
 msgid "VMware hypervisor BIOS uuid, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -17783,7 +17781,7 @@ msgstr "Статистика записи в хранилище данных г�
 
 #: include/classes/items/CHelpItems.php:751
 msgid "VMware hypervisor datastores list, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr ""
+msgstr "Список гипервизоров хранилища VMware, <url> - URL службы VMware, <datastore> - имя хранилища"
 
 #: include/classes/items/CHelpItems.php:779
 msgid "VMware hypervisor model, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -17945,7 +17943,7 @@ msgstr "Время работы виртуальной машины VMware, <url
 #: include/items.inc.php:1763 include/items.inc.php:1767
 #: include/items.inc.php:1771 include/items.inc.php:1775
 msgid "Validation"
-msgstr ""
+msgstr "Валидация"
 
 #: app/views/administration.mediatype.edit.php:146
 #: app/views/monitoring.widget.plaintext.view.php:46
@@ -18082,15 +18080,15 @@ msgstr "Значение любого счетчика производител�
 
 #: include/correlation.inc.php:227
 msgid "Value of new event tag"
-msgstr ""
+msgstr "Значение тега нового события"
 
 #: include/correlation.inc.php:212 include/correlation.inc.php:220
 msgid "Value of old event tag"
-msgstr ""
+msgstr "Значение тега старого события"
 
 #: include/actions.inc.php:333
 msgid "Value of tag"
-msgstr ""
+msgstr "Значение тега"
 
 #: include/classes/graphdraw/CPieGraphDraw.php:357
 msgid "Value: no data"
@@ -18188,7 +18186,7 @@ msgstr "Предупреждение"
 
 #: jsLoader.php:149
 msgid "Warning message"
-msgstr ""
+msgstr "Предупреждающее сообщение"
 
 #: jsLoader.php:220
 msgid "We are sorry, the maximum possible number of elements to remember has been reached."
@@ -18270,11 +18268,11 @@ msgstr "Веб-сценарии"
 
 #: include/media.inc.php:27
 msgid "Webhook"
-msgstr ""
+msgstr "Webhook"
 
 #: app/views/popup.mediatypetest.edit.php:38
 msgid "Webhook does not have parameters."
-msgstr ""
+msgstr "Webhook не содержит параметров."
 
 #: include/func.inc.php:215
 msgid "Wed"
@@ -18305,7 +18303,7 @@ msgstr "Когда активен"
 
 #: jsLoader.php:132
 msgid "Widget is too small for the specified number of columns and rows."
-msgstr ""
+msgstr "Виджет слишком маленький для указанного количества колонок и строк."
 
 #: graphs.php:45 include/classes/widgets/CWidgetHelper.php:718
 #: include/classes/widgets/CWidgetHelper.php:751
@@ -18339,17 +18337,17 @@ msgstr "Со cбором данных"
 
 #: include/views/configuration.triggers.list.php:151
 msgid "With dependencies"
-msgstr ""
+msgstr "С зависимостями"
 
 #: include/forms.inc.php:1387 include/views/js/item.preprocessing.js.php:262
 msgid "With header row"
-msgstr ""
+msgstr "Со строкой заголовка"
 
 #: app/views/monitoring.problem.view.php:295
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:116
 #: include/classes/widgets/forms/CWidgetFormProblems.php:161
 msgid "With problem name"
-msgstr ""
+msgstr "С именем проблемы"
 
 #: app/views/monitoring.widget.problemhosts.view.php:29
 msgid "With problems"
@@ -18358,7 +18356,7 @@ msgstr "С проблемами"
 #: include/forms.inc.php:290 include/forms.inc.php:519
 #: include/forms.inc.php:708
 msgid "With triggers"
-msgstr ""
+msgstr "С триггерами"
 
 #: app/views/monitoring.widget.problemhosts.view.php:28
 msgid "Without problems"
@@ -18366,7 +18364,7 @@ msgstr "Без проблем"
 
 #: include/forms.inc.php:291 include/forms.inc.php:516
 msgid "Without triggers"
-msgstr ""
+msgstr "Без триггеров"
 
 #: include/views/configuration.item.list.php:60
 #: include/views/configuration.item.prototype.list.php:51
@@ -18476,11 +18474,11 @@ msgstr "XML пустой"
 
 #: include/classes/api/services/CItemGeneral.php:2315
 msgid "XML is expected"
-msgstr ""
+msgstr "Ожидался XML"
 
 #: include/forms.inc.php:1308 include/views/js/item.preprocessing.js.php:188
 msgid "XPath"
-msgstr ""
+msgstr "XPath"
 
 #: include/views/js/monitoring.sysmaps.js.php:246
 #: include/views/js/monitoring.sysmaps.js.php:381
@@ -18494,7 +18492,7 @@ msgstr "МАКС значение оси Y"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:492
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:516
 msgid "Y axis MAX value must be greater than Y axis MIN value"
-msgstr ""
+msgstr "МАКС значение оси Y должно быть больше чем МИН значение оси Y"
 
 #: include/classes/api/services/CGraphGeneral.php:314
 #: include/classes/graphdraw/CLineGraphDraw.php:714
@@ -18654,7 +18652,7 @@ msgstr "У вас нет полномочий для создания польз
 
 #: jsLoader.php:124
 msgid "You do not have permissions to edit dashboard"
-msgstr ""
+msgstr "У вас нет полномочий на редактирование ПАНЕЛИ"
 
 #: include/func.inc.php:1782
 msgid "You have no permissions to access this page."
@@ -18821,7 +18819,7 @@ msgstr "ожидается строка символов"
 
 #: include/classes/validators/CApiInputValidator.php:571
 msgid "a floating point value is expected"
-msgstr ""
+msgstr "ожидается значение с плавающей точкой"
 
 #: include/classes/validators/CApiInputValidator.php:295
 msgid "a hexadecimal colour code (6 symbols) is expected"
@@ -18829,7 +18827,7 @@ msgstr "ожидается код цвета в шестнадцатерично
 
 #: include/classes/validators/CApiInputValidator.php:1284
 msgid "a low-level discovery macro is expected"
-msgstr ""
+msgstr "ожидается макрос низкоуровневого обнаружения"
 
 #: include/classes/validators/CApiInputValidator.php:742
 #: include/classes/validators/CApiInputValidator.php:1181
@@ -18856,7 +18854,7 @@ msgstr "ожидается цифровое значение"
 #: app/controllers/CControllerPopupPreprocTestSend.php:79
 #: app/controllers/CControllerPopupPreprocTestSend.php:92
 msgid "a relative time is expected"
-msgstr ""
+msgstr "ожидается относительное время"
 
 #: include/classes/validators/CNewValidator.php:267
 msgid "a time is expected"
@@ -18889,7 +18887,7 @@ msgstr "abschange() - Разница по модулю между последн
 
 #: include/forms.inc.php:334
 msgid "affects only filtered data"
-msgstr ""
+msgstr "влияет только на отфильтрованные данные"
 
 #: include/hosts.inc.php:462
 msgid "agent"
@@ -18961,11 +18959,11 @@ msgstr "ожидается время указанное явно"
 
 #: include/classes/validators/CApiInputValidator.php:441
 msgid "an integer is expected"
-msgstr ""
+msgstr "ожидается целое число"
 
 #: include/classes/validators/CApiInputValidator.php:480
 msgid "an unsigned integer is expected"
-msgstr ""
+msgstr "ожидается целое положительное число"
 
 #: include/views/monitoring.history.php:163
 msgid "as Blue"
@@ -19126,7 +19124,7 @@ msgstr "не удалось выполнить Scroll API запрос, данн
 
 #: include/classes/api/services/CDiscoveryRule.php:1445
 msgid "cannot update property for templated discovery rule"
-msgstr ""
+msgstr "не удалось обновить свойство у правила обнаружения из шаблона"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:260
 msgid "change() - Difference between last and previous value"
@@ -19162,7 +19160,7 @@ msgstr "содержит"
 
 #: include/graphs.inc.php:100
 msgid "count"
-msgstr ""
+msgstr "количество"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:265
 msgid "count() - Number of successfully retrieved values V (which fulfill operator O) for period T"
@@ -19222,7 +19220,7 @@ msgstr "по убыванию"
 #: include/views/js/administration.general.macros.edit.js.php:19
 #: include/views/js/hostmacros.js.php:44 include/views/js/hostmacros.js.php:72
 msgid "description"
-msgstr ""
+msgstr "описание"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:271
 msgid "diff() - Difference between last and preceding values (1 - true, 0 - false)"
@@ -19269,7 +19267,7 @@ msgstr "равно"
 
 #: include/views/js/item.preprocessing.js.php:402
 msgid "error message"
-msgstr ""
+msgstr "сообщение об ошибке"
 
 #: include/classes/api/services/CAction.php:1726
 msgid "esc_step_from and esc_step_to must be set together."
@@ -19303,7 +19301,7 @@ msgstr "четвёртый"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:338
 msgid "fuzzytime() - Difference between item value (as timestamp) and Zabbix server timestamp is less than or equal to T seconds (1 - true, 0 - false)"
-msgstr ""
+msgstr "fuzzytime() - Разница между значением элемента данных (в виде отметки времени) и отметкой времени Zabbix сервера меньше чем или равна T секундам (1 - правда, 0 - ложь)"
 
 #: include/views/configuration.item.edit.php:759
 #: include/views/configuration.item.edit.php:761
@@ -19388,12 +19386,12 @@ msgstr "внутренний"
 
 #: include/classes/api/services/CItemGeneral.php:1528
 msgid "invalid Prometheus output"
-msgstr ""
+msgstr "ошибочный вывод Prometheus"
 
 #: include/classes/api/services/CItemGeneral.php:1521
 #: include/classes/api/services/CItemGeneral.php:1536
 msgid "invalid Prometheus pattern"
-msgstr ""
+msgstr "ошибочный шаблон Prometheus"
 
 #: include/classes/parsers/CIPRangeParser.php:135
 #, c-format
@@ -19460,7 +19458,7 @@ msgstr "элемент данных деактивирован"
 #: include/classes/widgets/CWidgetHelper.php:613
 #: include/classes/widgets/CWidgetHelper.php:968
 msgid "item pattern"
-msgstr ""
+msgstr "шаблон элементов данных"
 
 #: include/classes/parsers/CItemKey.php:120
 msgid "key is empty"
@@ -19642,7 +19640,7 @@ msgstr "новый"
 
 #: include/views/configuration.correlation.edit.php:142
 msgid "new event tag name"
-msgstr ""
+msgstr "имя тега нового события"
 
 #: include/classes/graphdraw/CLineGraphDraw.php:1935
 #: include/classes/graphdraw/CPieGraphDraw.php:359
@@ -19713,7 +19711,7 @@ msgstr "выкл"
 
 #: include/views/configuration.correlation.edit.php:145
 msgid "old event tag name"
-msgstr ""
+msgstr "имя тега старого события"
 
 #: app/views/administration.user.edit.php:249
 #: include/classes/setup/CFrontendSetup.php:312
@@ -19738,7 +19736,7 @@ msgstr "в"
 
 #: app/controllers/CControllerPopupPreprocTestSend.php:87
 msgid "only one time unit is allowed"
-msgstr ""
+msgstr "разрешено только одно преобразование времени"
 
 #: include/views/configuration.httpconf.edit.php:94
 msgid "other"
@@ -19811,7 +19809,7 @@ msgstr "с"
 #: app/views/administration.mediatype.edit.php:210 include/forms.inc.php:1345
 #: include/views/js/item.preprocessing.js.php:229
 msgid "script"
-msgstr ""
+msgstr "скрипт"
 
 #: include/forms.inc.php:2225 include/maintenances.inc.php:112
 msgctxt "adjective"
@@ -19825,7 +19823,7 @@ msgstr "ожидается второй параметр"
 
 #: include/forms.inc.php:1338 include/views/js/item.preprocessing.js.php:223
 msgid "seconds"
-msgstr ""
+msgstr "секунд"
 
 #: include/classes/html/CActionButtonList.php:116
 msgid "selected"
@@ -19863,7 +19861,7 @@ msgstr "должно быть пустым"
 
 #: app/controllers/CControllerPopupPreprocTestSend.php:102
 msgid "should be less than current time"
-msgstr ""
+msgstr "должно быть меньше чем текущее время"
 
 #: include/views/monitoring.sysmap.edit.php:120
 msgid "show icon mappings"
@@ -19886,7 +19884,7 @@ msgstr "strlen() - Длина последнего (наиболее новог�
 
 #: include/graphs.inc.php:102
 msgid "sum"
-msgstr ""
+msgstr "сумма"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:317
 msgid "sum() - Sum of values of a period T"
@@ -19958,7 +19956,7 @@ msgstr "третий"
 
 #: include/classes/api/services/CItemGeneral.php:1566
 msgid "third parameter is expected"
-msgstr ""
+msgstr "ожидается третий параметр"
 
 #: jsLoader.php:224
 msgid "time shift"
@@ -19977,7 +19975,7 @@ msgstr "timeleft() - Время достижения порога вычисле
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:505
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:509
 msgid "too many decimal places"
-msgstr ""
+msgstr "слишком много десятичных точек"
 
 #: include/classes/api/services/CMap.php:849
 #: include/classes/api/services/CMap.php:1313 include/events.inc.php:34
@@ -20004,20 +20002,20 @@ msgstr "начните печатать для поиска"
 
 #: include/classes/validators/CApiInputValidator.php:1662
 msgid "unacceptable URL"
-msgstr ""
+msgstr "неприемлемый URL"
 
 #: include/classes/import/validators/C44XmlValidator.php:2245
 #: include/classes/import/validators/CXmlValidatorGeneral.php:231
 #, c-format
 msgid "unexpected constant \"%1$s\""
-msgstr ""
+msgstr "неожиданная константа \"%1$s\""
 
 #: include/classes/export/CConfigurationExportBuilder.php:104
 #: include/classes/import/converters/CConstantImportConverter.php:60
 #: include/classes/import/validators/C44XmlValidator.php:2216
 #, c-format
 msgid "unexpected constant value \"%1$s\""
-msgstr ""
+msgstr "неожиданное значение константы \"%1$s\""
 
 #: include/classes/parsers/CItemKey.php:172
 msgid "unexpected end of key"
@@ -20074,7 +20072,7 @@ msgstr "неизвестно"
 
 #: app/controllers/CControllerPopupPreprocTestSend.php:97
 msgid "unsupported time suffix"
-msgstr ""
+msgstr "неподдерживаемый суффикс времени"
 
 #: include/classes/import/validators/CXmlValidator.php:70
 msgid "unsupported version number"
@@ -20121,7 +20119,7 @@ msgstr "значение"
 #: include/classes/api/services/CDiscoveryRule.php:1359
 #, c-format
 msgid "value \"%1$s\" already exists"
-msgstr ""
+msgstr "значение \"%1$s\" уже существует"
 
 #: include/classes/import/CConfigurationImport.php:845
 #: include/classes/import/CConfigurationImport.php:883
@@ -20171,20 +20169,20 @@ msgstr "значение должно быть одно из %1$s"
 
 #: include/classes/api/services/CItemGeneral.php:1574
 msgid "value of first parameter is too long"
-msgstr ""
+msgstr "значение первого параметра слишком длинное"
 
 #: include/correlation.inc.php:215
 msgid "value of new event tag"
-msgstr ""
+msgstr "значение тега нового события"
 
 #: include/classes/api/services/CItemGeneral.php:1580
 msgid "value of second parameter is too long"
-msgstr ""
+msgstr "значение второго параметра слишком длинное"
 
 #: include/classes/api/services/CItemGeneral.php:1591
 #, c-format
 msgid "value of third parameter must be one of %1$s"
-msgstr ""
+msgstr "значением третьего параметра должно быть %1$s"
 
 #: include/actions.inc.php:568 include/actions.inc.php:586
 #: include/actions.inc.php:731 include/actions.inc.php:749
