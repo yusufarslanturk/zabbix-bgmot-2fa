@@ -2206,6 +2206,11 @@
 			});
 	}
 
+	/**
+	 * @param {object} $obj
+	 * @param {object} data
+	 * @param {object} widget
+	 */
 	function updateWidgetConfig($obj, data, widget) {
 		if (data['options']['updating_config']) {
 			// Waiting for another AJAX request to either complete of fail.
@@ -2247,21 +2252,25 @@
 			ajax_data['fields'] = JSON.stringify(fields);
 		}
 
-		$('.dialogue-widget-save', data.dialogue.div).prop('disabled', true);
+		var $save_btn = data.dialogue.div.find('.dialogue-widget-save'),
+			overlay = overlays_stack.getById('widgetConfg');
 
-		$.ajax({
+		$save_btn.prop('disabled', true);
+		overlay.xhr = $.ajax({
 			url: url.getUrl(),
 			method: 'POST',
 			dataType: 'json',
 			data: ajax_data
-		})
+		});
+
+		overlay.xhr
 			.then(function(response) {
 				if (typeof(response.errors) !== 'undefined') {
 					// Error returned. Remove previous errors.
 
 					$('.msg-bad', data.dialogue['body']).remove();
 					data.dialogue['body'].prepend(response.errors);
-					$('.dialogue-widget-save', data.dialogue.div).prop('disabled', false);
+					$save_btn.prop('disabled', false);
 
 					return $.Deferred().reject();
 				}
@@ -2418,6 +2427,7 @@
 				data['options']['updated'] = true;
 			})
 			.always(function() {
+				$save_btn.prop('disabled', false);
 				delete data['options']['updating_config'];
 			});
 	}
