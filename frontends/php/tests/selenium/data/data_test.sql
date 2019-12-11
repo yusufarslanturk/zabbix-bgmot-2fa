@@ -2234,8 +2234,8 @@ INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (99055, 99135, 50
 INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (55045, 99135, 1, '127.0.0.1', '', '1', '10050', '1');
 
 -- testHostMacros
-INSERT INTO hostmacro (hostmacroid, hostid, macro, value, description) VALUES (1172, 20006, '{$MACRO1}', '', '');
-INSERT INTO hostmacro (hostmacroid, hostid, macro, value, description) VALUES (1173, 20006, '{$MACRO2}', '', '');
+INSERT INTO hostmacro (hostmacroid, hostid, macro, value, description) VALUES (1180, 20006, '{$MACRO1}', '', '');
+INSERT INTO hostmacro (hostmacroid, hostid, macro, value, description) VALUES (1181, 20006, '{$MACRO2}', '', '');
 
 INSERT INTO hosts (hostid, host, name, status, description) VALUES (30010, 'Host for macros remove', 'Host for macros remove', 0, '');
 INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (90900, 30010, 4);

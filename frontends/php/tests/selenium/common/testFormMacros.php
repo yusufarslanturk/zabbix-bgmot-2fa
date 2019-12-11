@@ -331,7 +331,7 @@ abstract class testFormMacros extends CWebTest {
 		$form->selectTab('Macros');
 
 		// Check inherited macros before editing.
-		$this->checkInheritedMacrosFrontendAndDB($host_type);
+		$this->checkInheritedGloablMacros($host_type);
 
 		$edited_macros = [
 			[
@@ -353,7 +353,7 @@ abstract class testFormMacros extends CWebTest {
 
 		// Check saved edited macros in host/template form.
 		$id = CDBHelper::getValue('SELECT hostid FROM hosts WHERE host='.zbx_dbstr($host[ucfirst($host_type).' name']));
-		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
+		$this->page->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
 		$form->selectTab('Macros');
 		$this->assertMacros($edited_macros);
 
@@ -367,14 +367,13 @@ abstract class testFormMacros extends CWebTest {
 
 		$form->submit();
 
-		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
+		$this->page->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
 		$form->selectTab('Macros');
 
-		$edited_macros = [];
-		$this->assertMacros($edited_macros);
+		$this->assertMacros();
 
 		// Check inherited macros again after remove.
-		$this->checkInheritedMacrosFrontendAndDB($host_type);
+		$this->checkInheritedGloablMacros($host_type);
 	}
 
 	/**
@@ -428,9 +427,10 @@ abstract class testFormMacros extends CWebTest {
 	}
 
 	/**
-	 * Check host/template inherited macros in form matching with global macros in DB .
+	 * Check host/template inherited macros in form matching with global macros in DB,
+	 * if there is no any host/template defined macros.
 	 */
-	private function checkInheritedMacrosFrontendAndDB($host_type) {
+	private function checkInheritedGloablMacros($host_type) {
 		$this->query('id:show_inherited_macros')->waitUntilPresent()
 			->asSegmentedRadio()->one()->fill('Inherited and '.$host_type.' macros');
 		// Create two macros arrays: from DB and from Frontend form.
