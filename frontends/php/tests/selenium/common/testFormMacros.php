@@ -331,7 +331,7 @@ abstract class testFormMacros extends CWebTest {
 		$form->selectTab('Macros');
 
 		// Check inherited macros before editing.
-		$this->checkInheritedGloablMacros($host_type);
+		$this->checkInheritedGlobalMacros($host_type);
 
 		$edited_macros = [
 			[
@@ -373,7 +373,7 @@ abstract class testFormMacros extends CWebTest {
 		$this->assertMacros();
 
 		// Check inherited macros again after remove.
-		$this->checkInheritedGloablMacros($host_type);
+		$this->checkInheritedGlobalMacros($host_type);
 	}
 
 	/**
@@ -430,7 +430,7 @@ abstract class testFormMacros extends CWebTest {
 	 * Check host/template inherited macros in form matching with global macros in DB,
 	 * if there is no any host/template defined macros.
 	 */
-	private function checkInheritedGloablMacros($host_type) {
+	private function checkInheritedGlobalMacros($host_type) {
 		$this->query('id:show_inherited_macros')->waitUntilPresent()
 			->asSegmentedRadio()->one()->fill('Inherited and '.$host_type.' macros');
 		// Create two macros arrays: from DB and from Frontend form.
