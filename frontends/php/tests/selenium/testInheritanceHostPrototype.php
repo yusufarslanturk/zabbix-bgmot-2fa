@@ -125,6 +125,12 @@ class testInheritanceHostPrototype extends CLegacyWebTest {
 		// Compare macros from DB with macros from Frontend.
 		$this->assertEquals($macros['database'], $macros['frontend']);
 
+		// Check layout at Host Inventory tab.
+		$this->zbxTestTabSwitch('Inventory');
+		for ($i = 0; $i < 3; $i++) {
+			$this->zbxTestAssertElementPresentXpath('//input[@id="inventory_mode_'.$i.'"][@disabled]');
+		}
+
 		// Check layout at Encryption tab.
 		$this->zbxTestTabSwitch('Encryption');
 		foreach (['tls_connect_0', 'tls_connect_1', 'tls_connect_2', 'tls_in_none', 'tls_in_cert', 'tls_in_psk'] as $id) {
