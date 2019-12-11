@@ -356,7 +356,6 @@ int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	SET_STR_RESULT(result, zbx_strdup(NULL, j.buffer));
 	ret = SYSINFO_RET_OK;
-
 out:
 	zbx_vector_ptr_clear_ext(&mount_paths, (zbx_clean_func_t)zbx_ptr_free);
 	zbx_vector_ptr_destroy(&mount_paths);
