@@ -328,22 +328,23 @@ int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
 	char			*error = NULL, *fsname, *fstype, *fsdrivetype;
 
 	zbx_vector_ptr_create(&mount_paths);
+	zbx_json_initarray(&j, ZBX_JSON_STAT_BUF_LEN);
+
 	if (FAIL == get_mount_paths(&mount_paths, &error))
 	{
 		SET_MSG_RESULT(result, error);
 		goto out;
 	}
 
-	zbx_json_initarray(&j, ZBX_JSON_STAT_BUF_LEN);
 
 	for (i = 0; i < mount_paths.values_num; i++)
 	{
 		get_fs_data(mount_paths.values[i], &fsname, &fstype, &fsdrivetype);
 
 		zbx_json_addobject(&j, NULL);
-		zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSNAME, fsname, ZBX_JSON_TYPE_STRING);
-		zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSTYPE, fstype, ZBX_JSON_TYPE_STRING);
-		zbx_json_addstring(&j, ZBX_SYSINFO_TAG_FSDRIVETYPE, fsdrivetype, ZBX_JSON_TYPE_STRING);
+		zbx_json_addstring(&j, ZBX_LLD_MACRO_FSNAME, fsname, ZBX_JSON_TYPE_STRING);
+		zbx_json_addstring(&j, ZBX_LLD_MACRO_FSTYPE, fstype, ZBX_JSON_TYPE_STRING);
+		zbx_json_addstring(&j, ZBX_LLD_MACRO_FSDRIVETYPE, fsdrivetype, ZBX_JSON_TYPE_STRING);
 		zbx_json_close(&j);
 
 		zbx_free(fsname);
@@ -355,6 +356,7 @@ int	VFS_FS_DISCOVERY(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	SET_STR_RESULT(result, zbx_strdup(NULL, j.buffer));
 	ret = SYSINFO_RET_OK;
+
 out:
 	zbx_vector_ptr_clear_ext(&mount_paths, (zbx_clean_func_t)zbx_ptr_free);
 	zbx_vector_ptr_destroy(&mount_paths);
@@ -375,6 +377,8 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result,  HANDLE time
 	zbx_vector_ptr_t	mount_paths;
 
 	zbx_vector_ptr_create(&mount_paths);
+	zbx_json_initarray(&j, ZBX_JSON_STAT_BUF_LEN);
+
 	if (FAIL == get_mount_paths(&mount_paths, &error))
 	{
 		SET_MSG_RESULT(result, error);
@@ -384,15 +388,14 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result,  HANDLE time
 	/* 'timeout_event' argument is here to make the vfs_fs_size() prototype as required by */
 	/* zbx_execute_threaded_metric() on MS Windows */
 	ZBX_UNUSED(timeout_event);
-	zbx_json_initarray(&j, ZBX_JSON_STAT_BUF_LEN);
 	zbx_vector_ptr_create(&mntpoints);
 
 	for (i = 0; i < mount_paths.values_num; i++)
 	{
 		if (FAIL == add_fs_to_vector(&mntpoints, mount_paths.values[i], &error))
 		{
-			SET_MSG_RESULT(result, error);
-			goto out;
+			zabbix_log(LOG_LEVEL_DEBUG, "%s", error);
+			continue;
 		}
 	}
 
