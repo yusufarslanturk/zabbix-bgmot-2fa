@@ -30,22 +30,18 @@ This guide describes how to integrate your Zabbix 4.4 installation with Mattermo
 
 [![](images/thumb.20.png?raw=true)](images/20.png)
 [![](images/thumb.19.png?raw=true)](images/19.png)
-[![](images/thumb.18.png?raw=true)](images/18.png)
-[![](images/thumb.17.png?raw=true)](images/17.png)
 
 5\. The bot can already send messages to **public channels** and **user channels** (direct messages). To send it to a **private channel**, add it as a member.
 
 [![](images/thumb.14.png?raw=true)](images/14.png)
 [![](images/thumb.13.png?raw=true)](images/13.png)
-[![](images/thumb.12.png?raw=true)](images/12.png)
-[![](images/thumb.11.png?raw=true)](images/11.png)
 
 
 ## Zabbix Webhook configuration
 
 ### Create a global macro
 
-1\. Before setting up **Webhook**, you need to setup the global macro **{$ZABBIX.URL}**, which must contain the **URL** to the **Zabbix frontend**.
+1\. Before setting up the **Webhook**, you need to setup the global macro **{$ZABBIX.URL}**, which must contain the **URL** to the **Zabbix frontend**.
 
 [![](images/thumb.10.png?raw=true)](images/10.png)
 
