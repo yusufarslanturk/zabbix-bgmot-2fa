@@ -1,1 +1,1 @@
-..F....... [ZBX-16866] fixed graph widget axis error messages making them more distinguishable from left and right and fixed validation of graph widget overrides showing a different error message than data set (Ivo)
+..F....... [ZBX-16866] fixed indistinguishable validation messages for graph axis and unified graph validation messages in overrides (Ivo)
