@@ -3204,8 +3204,6 @@ static int	parse_history_data_row_hostkey(const struct zbx_json_parse *jp_row, z
  *             parsed_num   - [OUT] the number of values parsed               *
  *             unique_shift - [IN/OUT] auto increment nanoseconds to ensure   *
  *                                     unique value of timestamps             *
- *             info         - [OUT] address of a pointer to the info          *
- *                                  string (should be freed by the caller)    *
  *                                                                            *
  * Return value:  SUCCEED - values were parsed successfully                   *
  *                FAIL    - an error occurred                                 *
