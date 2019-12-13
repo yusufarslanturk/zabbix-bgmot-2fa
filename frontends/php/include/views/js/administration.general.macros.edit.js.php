@@ -31,7 +31,7 @@
 
 <script type="text/javascript">
 	jQuery(function($) {
-		function initHostMacroFields($parent) {
+		function initMacroFields($parent) {
 			$('.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', $parent).not('.initialized-field').each(function() {
 				var $obj = $(this);
 
@@ -61,10 +61,10 @@
 			})
 			.dynamicRows({template: '#macro-row-tmpl'})
 			.on('click', 'button.element-table-add', function() {
-				initHostMacroFields($('#tbl_macros'));
+				initMacroFields($('#tbl_macros'));
 			});
 
-		initHostMacroFields($('#tbl_macros'));
+		initMacroFields($('#tbl_macros'));
 
 		$('#update').click(function() {
 			var removedCount = $(this).data('removedCount');

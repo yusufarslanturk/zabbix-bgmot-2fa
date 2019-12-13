@@ -100,7 +100,7 @@
 		?>
 	</script>
 	<script type="text/javascript">
-		function initHostMacroFields($parent) {
+		function initMacroFields($parent) {
 			jQuery('.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', $parent).not('.initialized-field').each(function() {
 				var $obj = jQuery(this);
 
@@ -119,14 +119,14 @@
 			});
 		}
 
-		function initHostMacroTable($parent, show_inherited_macros) {
+		function initMacroTable($parent, show_inherited_macros) {
 			$parent
 				.dynamicRows({
 					remove_next_sibling: show_inherited_macros,
 					template: show_inherited_macros ? '#macro-row-tmpl-inherited' : '#macro-row-tmpl'
 				})
 				.on('click', 'button.element-table-add', function() {
-					initHostMacroFields($parent);
+					initMacroFields($parent);
 				})
 				.on('click', 'button.element-table-change', function() {
 					var macroNum = jQuery(this).attr('id').split('_')[1];
@@ -158,7 +158,7 @@
 					}
 				});
 
-			initHostMacroFields($parent);
+			initMacroFields($parent);
 		}
 
 		function macroToUpperCase(element) {
@@ -232,17 +232,14 @@
 			$show_inherited_macros = $('input[name="show_inherited_macros"]'),
 			$form = $show_inherited_macros.closest('form'),
 			linked_templates = <?= CJs::encodeJson($data['macros_tab']['linked_templates']) ?>,
-			add_templates = <?= CJs::encodeJson($data['macros_tab']['add_templates']) ?>;
+			add_templates = <?= CJs::encodeJson($data['macros_tab']['add_templates']) ?>,
+			macros_initialized = false;
 
 		$('#tabs').on('tabscreate tabsactivate', function(event, ui) {
 			var panel = (event.type === 'tabscreate') ? ui.panel : ui.newPanel;
 
 			if (panel.attr('id') === 'macroTab') {
-				<?php if ($data['readonly']): ?>
-					$('.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', '#tbl_macros').textareaFlexible();
-				<?php else: ?>
-					initHostMacroTable($('#tbl_macros'), $show_inherited_macros.val() == 1);
-				<?php endif ?>
+				// Please note that macro initialization must take place once and only when the tab is visible.
 
 				if (event.type === 'tabsactivate') {
 					var add_templates_tmp = getAddTemplates($ms);
@@ -250,8 +247,22 @@
 					if (add_templates.xor(add_templates_tmp).length > 0) {
 						add_templates = add_templates_tmp;
 						$show_inherited_macros.trigger('change');
+						macros_initialized = true;
 					}
 				}
+
+				if (macros_initialized) {
+					return;
+				}
+
+				// Initialize macros.
+				<?php if ($data['readonly']): ?>
+					$('.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', '#tbl_macros').textareaFlexible();
+				<?php else: ?>
+					initMacroTable($('#tbl_macros'), $show_inherited_macros.val() == 1);
+				<?php endif ?>
+
+				macros_initialized = true;
 			}
 		});
 
@@ -292,10 +303,11 @@
 
 						$container.append(response.body);
 
+						// Initialize macros.
 						<?php if ($data['readonly']): ?>
 							$('.<?= ZBX_STYLE_TEXTAREA_FLEXIBLE ?>', '#tbl_macros').textareaFlexible();
 						<?php else: ?>
-							initHostMacroTable($('#tbl_macros'), show_inherited_macros);
+							initMacroTable($('#tbl_macros'), show_inherited_macros);
 						<?php endif ?>
 
 						// Display debug after loaded content if it is enabled for user.
