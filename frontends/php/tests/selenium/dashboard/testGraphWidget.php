@@ -934,7 +934,7 @@ class testGraphWidget extends CWebTest {
 							]
 						]
 					],
-					'error' => 'Invalid parameter "Overrides/2": the parameter "hosts" is missing.'
+					'error' => 'Invalid parameter "Overrides/2/hosts": cannot be empty.'
 				]
 			],
 			[
@@ -952,7 +952,7 @@ class testGraphWidget extends CWebTest {
 							]
 						]
 					],
-					'error' => 'Invalid parameter "Overrides/2": the parameter "hosts" is missing.'
+					'error' => 'Invalid parameter "Overrides/2/hosts": cannot be empty.'
 				]
 			],
 			[
@@ -970,7 +970,7 @@ class testGraphWidget extends CWebTest {
 							]
 						]
 					],
-					'error' => 'Invalid parameter "Overrides/2": the parameter "items" is missing.'
+					'error' => 'Invalid parameter "Overrides/2/items": cannot be empty.'
 				]
 			],
 			[
@@ -1061,7 +1061,7 @@ class testGraphWidget extends CWebTest {
 					'Overrides' => [
 						'item' => '*',
 					],
-					'error' => 'Invalid parameter "Overrides/1": the parameter "hosts" is missing.'
+					'error' => 'Invalid parameter "Overrides/1/hosts": cannot be empty.'
 				]
 			],
 			[
@@ -1073,7 +1073,7 @@ class testGraphWidget extends CWebTest {
 					'Overrides' => [
 						'host' => '*'
 					],
-					'error' => 'Invalid parameter "Overrides/1": the parameter "items" is missing.'
+					'error' => 'Invalid parameter "Overrides/1/items": cannot be empty.'
 				]
 			],
 			[
@@ -1121,7 +1121,7 @@ class testGraphWidget extends CWebTest {
 						'host' => '',
 						'item' => ''
 					],
-					'error' => 'Invalid parameter "Overrides/1": the parameter "hosts" is missing.'
+					'error' => 'Invalid parameter "Overrides/1/hosts": cannot be empty.'
 				]
 			],
 			[
@@ -1130,7 +1130,7 @@ class testGraphWidget extends CWebTest {
 					'Overrides' => [
 						'host' => ''
 					],
-					'error' => 'Invalid parameter "Overrides/1": the parameter "hosts" is missing.'
+					'error' => 'Invalid parameter "Overrides/1/hosts": cannot be empty.'
 				]
 			],
 			[
@@ -1139,7 +1139,7 @@ class testGraphWidget extends CWebTest {
 					'Overrides' => [
 						'item' => '',
 					],
-					'error' => 'Invalid parameter "Overrides/1": the parameter "items" is missing.'
+					'error' => 'Invalid parameter "Overrides/1/items": cannot be empty.'
 				]
 			]
 		]);
