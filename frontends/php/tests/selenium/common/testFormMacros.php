@@ -20,13 +20,13 @@
 
 require_once 'vendor/autoload.php';
 
-require_once dirname(__FILE__).'/../../include/CWebTest.php';
+require_once dirname(__FILE__).'/../../include/CLegacyWebTest.php';
 require_once dirname(__FILE__).'/../traits/MacrosTrait.php';
 
 /**
  * Base class for Macros tests.
  */
-abstract class testFormMacros extends CWebTest {
+abstract class testFormMacros extends CLegacyWebTest {
 
 	use MacrosTrait;
 
@@ -46,39 +46,39 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'Macro' => '{$1234}',
-							'Value' => '!@#$%^&*()_+/*',
-							'Description' => '!@#$%^&*()_+/*',
+							'macro' => '{$1234}',
+							'value' => '!@#$%^&*()_+/*',
+							'description' => '!@#$%^&*()_+/*',
 						],
 						[
-							'Macro' => '{$MACRO1}',
-							'Value' => 'Value_1',
-							'Description' => 'Test macro Description 1'
+							'macro' => '{$MACRO1}',
+							'value' => 'Value_1',
+							'description' => 'Test macro Description 1'
 						],
 						[
-							'Macro' => '{$MACRO3}',
-							'Value' => '',
-							'Description' => '',
+							'macro' => '{$MACRO3}',
+							'value' => '',
+							'description' => '',
 						],
 						[
-							'Macro' => '{$MACRO4}',
-							'Value' => 'Value',
-							'Description' => '',
+							'macro' => '{$MACRO4}',
+							'value' => 'value',
+							'description' => '',
 						],
 						[
-							'Macro' => '{$MACRO5}',
-							'Value' => '',
-							'Description' => 'DESCRIPTION',
+							'macro' => '{$MACRO5}',
+							'value' => '',
+							'description' => 'DESCRIPTION',
 						],
 						[
-							'Macro' => '{$MACRO6}',
-							'Value' => 'Значение',
-							'Description' => 'Описание',
+							'macro' => '{$MACRO6}',
+							'value' => 'Значение',
+							'description' => 'Описание',
 						],
 						[
-							'Macro' => '{$MACRO:A}',
-							'Value' => '{$MACRO:A}',
-							'Description' => '{$MACRO:A}',
+							'macro' => '{$MACRO:A}',
+							'value' => '{$MACRO:A}',
+							'description' => '{$MACRO:A}',
 						]
 					]
 				]
@@ -91,7 +91,7 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'Macro' => '{MACRO}',
+							'macro' => '{MACRO}',
 						]
 					],
 					'error_details' => 'Invalid macro "{MACRO}": incorrect syntax near "MACRO}".'
@@ -105,9 +105,9 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'Macro' => '',
-							'Value' => 'Macro_Value',
-							'Description' => 'Macro Description'
+							'macro' => '',
+							'value' => 'Macro_Value',
+							'description' => 'Macro Description'
 						]
 					],
 					'error_details' => 'Invalid macro "": macro is empty.'
@@ -121,14 +121,14 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'Macro' => '{$MACRO}',
-							'Value' => 'Macro_Value_1',
-							'Description' => 'Macro Description_1'
+							'macro' => '{$MACRO}',
+							'value' => 'Macro_Value_1',
+							'description' => 'Macro Description_1'
 						],
 						[
-							'Macro' => '{$MACRO}',
-							'Value' => 'Macro_Value_2',
-							'Description' => 'Macro Description_2'
+							'macro' => '{$MACRO}',
+							'value' => 'Macro_Value_2',
+							'description' => 'Macro Description_2'
 						]
 					],
 					'error_details' => 'Macro "{$MACRO}" is not unique.'
@@ -140,7 +140,7 @@ abstract class testFormMacros extends CWebTest {
 	/**
 	 * Test creating of host or template with Macros.
 	 */
-	protected function checkCreate($host_type, $data) {
+	protected function checkCreate($data, $host_type = 'host') {
 		$this->page->login()->open($host_type.'s.php?form=create');
 		$form = $this->query('name:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
 
@@ -161,16 +161,16 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'Macro' => '{$UPDATED_MACRO1}',
-							'Value' => 'updated value1',
-							'Description' => 'updated description 1',
+							'macro' => '{$UPDATED_MACRO1}',
+							'value' => 'updated value1',
+							'description' => 'updated description 1',
 						],
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 1,
-							'Macro' => '{$UPDATED_MACRO2}',
-							'Value' => 'Updated value 2',
-							'Description' => 'Updated description 2',
+							'macro' => '{$UPDATED_MACRO2}',
+							'value' => 'Updated value 2',
+							'description' => 'Updated description 2',
 						]
 					]
 				]
@@ -182,21 +182,21 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'Macro' => '{$UPDATED_MACRO1}',
-							'Value' => '',
-							'Description' => '',
+							'macro' => '{$UPDATED_MACRO1}',
+							'value' => '',
+							'description' => '',
 						],
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 1,
-							'Macro' => '{$UPDATED_MACRO2}',
-							'Value' => 'Updated Value 2',
-							'Description' => '',
+							'macro' => '{$UPDATED_MACRO2}',
+							'value' => 'Updated Value 2',
+							'description' => '',
 						],
 						[
-							'Macro' => '{$UPDATED_MACRO3}',
-							'Value' => '',
-							'Description' => 'Updated Description 3',
+							'macro' => '{$UPDATED_MACRO3}',
+							'value' => '',
+							'description' => 'Updated Description 3',
 						]
 					]
 				]
@@ -208,23 +208,23 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'Macro' => '{$MACRO:A}',
-							'Value' => '{$MACRO:B}',
-							'Description' => '{$MACRO:C}',
+							'macro' => '{$MACRO:A}',
+							'value' => '{$MACRO:B}',
+							'description' => '{$MACRO:C}',
 						],
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 1,
-							'Macro' => '{$UPDATED_MACRO_1}',
-							'Value' => '',
-							'Description' => 'DESCRIPTION',
+							'macro' => '{$UPDATED_MACRO_1}',
+							'value' => '',
+							'description' => 'DESCRIPTION',
 						],
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 2,
-							'Macro' => '{$UPDATED_MACRO_2}',
-							'Value' => 'Значение',
-							'Description' => 'Описание',
+							'macro' => '{$UPDATED_MACRO_2}',
+							'value' => 'Значение',
+							'description' => 'Описание',
 						]
 					]
 				]
@@ -237,7 +237,7 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'Macro' => '{MACRO}',
+							'macro' => '{MACRO}',
 						]
 					],
 					'error_details' => 'Invalid macro "{MACRO}": incorrect syntax near "MACRO}".'
@@ -251,9 +251,9 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'Macro' => '',
-							'Value' => 'Macro_Value',
-							'Description' => 'Macro Description'
+							'macro' => '',
+							'value' => 'Macro_Value',
+							'description' => 'Macro Description'
 						]
 					],
 					'error_details' => 'Invalid macro "": macro is empty.'
@@ -267,16 +267,16 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'Macro' => '{$MACRO}',
-							'Value' => 'Macro_Value_1',
-							'Description' => 'Macro Description_1'
+							'macro' => '{$MACRO}',
+							'value' => 'Macro_Value_1',
+							'description' => 'Macro Description_1'
 						],
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 1,
-							'Macro' => '{$MACRO}',
-							'Value' => 'Macro_Value_2',
-							'Description' => 'Macro Description_2'
+							'macro' => '{$MACRO}',
+							'value' => 'Macro_Value_2',
+							'description' => 'Macro Description_2'
 						]
 					],
 					'error_details' => 'Macro "{$MACRO}" is not unique.'
@@ -288,7 +288,7 @@ abstract class testFormMacros extends CWebTest {
 	/**
 	 * Test updating of host or template with Macros.
 	 */
-	protected function checkUpdate($host_type, $data, $hostname) {
+	protected function checkUpdate($data, $hostname, $host_type = 'host') {
 		$id = CDBHelper::getValue('SELECT hostid FROM hosts WHERE host='.zbx_dbstr($hostname));
 
 		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
@@ -298,7 +298,7 @@ abstract class testFormMacros extends CWebTest {
 	/**
 	 * Test removing Macros from host or template.
 	 */
-	protected function checkRemove($host_type, $hostname) {
+	protected function checkRemove($hostname, $host_type = 'host') {
 		$id = CDBHelper::getValue('SELECT hostid FROM hosts WHERE host='.zbx_dbstr($hostname));
 
 		$this->page->login()->open($host_type.'s.php?form=update&'.$host_type.'id='.$id.'&groupid=0');
@@ -318,7 +318,7 @@ abstract class testFormMacros extends CWebTest {
 	/**
 	 * Test changing and resetting global macro on host or template.
 	 */
-	protected function checkChangeRemoveInheritedMacro($host_type) {
+	protected function checkChangeRemoveInheritedMacro($host_type = 'host') {
 		$host = [
 			ucfirst($host_type).' name' => 'With edited global macro',
 			'Groups' => 'Zabbix servers'
@@ -331,13 +331,15 @@ abstract class testFormMacros extends CWebTest {
 		$form->selectTab('Macros');
 
 		// Check inherited macros before editing.
-		$this->checkInheritedGlobalMacros($host_type);
+		$this->query('id:show_inherited_macros')->waitUntilPresent()
+			->asSegmentedRadio()->one()->fill('Inherited and '.$host_type.' macros');
+		$this->checkInheritedGlobalMacros();
 
 		$edited_macros = [
 			[
-				'Macro' => '{$1}',
-				'Value' => 'New updated Numeric macro 1',
-				'Description' => 'New updated Test description 2'
+				'macro' => '{$1}',
+				'value' => 'New updated Numeric macro 1',
+				'description' => 'New updated Test description 2'
 			]
 		];
 
@@ -345,8 +347,8 @@ abstract class testFormMacros extends CWebTest {
 		// Change macro.
 		for ($i = 0; $i < $count; $i += 1) {
 			$this->query('id:macros_'.$i.'_change')->one()->click();
-			$this->query('id:macros_'.$i.'_value')->one()->fill($edited_macros[$i]['Value']);
-			$this->query('id:macros_'.$i.'_description')->one()->fill($edited_macros[$i]['Description']);
+			$this->query('id:macros_'.$i.'_value')->one()->fill($edited_macros[$i]['value']);
+			$this->query('id:macros_'.$i.'_description')->one()->fill($edited_macros[$i]['description']);
 		}
 
 		$form->submit();
@@ -373,7 +375,9 @@ abstract class testFormMacros extends CWebTest {
 		$this->assertMacros();
 
 		// Check inherited macros again after remove.
-		$this->checkInheritedGlobalMacros($host_type);
+		$this->query('id:show_inherited_macros')->waitUntilPresent()
+			->asSegmentedRadio()->one()->fill('Inherited and '.$host_type.' macros');
+		$this->checkInheritedGlobalMacros();
 	}
 
 	/**
@@ -418,21 +422,15 @@ abstract class testFormMacros extends CWebTest {
 		$form = $this->query('id:'.$host_type.'sForm')->waitUntilPresent()->asForm()->one();
 		$form->selectTab('Macros');
 
-		if ($data !== null) {
-			$this->assertMacros($data['macros']);
-		}
-		else {
-			$this->assertMacros();
-		}
+		$this->assertMacros(($data !== null) ? $data['macros'] : []);
 	}
 
 	/**
 	 * Check host/template inherited macros in form matching with global macros in DB,
 	 * if there is no any host/template defined macros.
 	 */
-	private function checkInheritedGlobalMacros($host_type) {
-		$this->query('id:show_inherited_macros')->waitUntilPresent()
-			->asSegmentedRadio()->one()->fill('Inherited and '.$host_type.' macros');
+	public function checkInheritedGlobalMacros() {
+
 		// Create two macros arrays: from DB and from Frontend form.
 		$macros = [
 			'database' => CDBHelper::getAll('SELECT macro, value, description FROM globalmacro'),

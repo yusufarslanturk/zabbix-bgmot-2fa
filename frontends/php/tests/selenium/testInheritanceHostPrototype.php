@@ -18,14 +18,16 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
+require_once dirname(__FILE__).'/common/testFormMacros.php';
 
 /**
  * Test the creation of inheritance of new objects on a previously linked template.
  *
  * @backup hosts
  */
-class testInheritanceHostPrototype extends CLegacyWebTest {
+class testInheritanceHostPrototype extends testFormMacros {
+
+	use MacrosTrait;
 
 	public static function getLayoutData() {
 		return [
@@ -95,35 +97,8 @@ class testInheritanceHostPrototype extends CLegacyWebTest {
 		$this->zbxTestClickXpath('//label[@for="show_inherited_macros_1"]');
 		$this->zbxTestWaitForPageToLoad();
 
-		// Create two macros arrays: from DB and from Frontend form.
-		$macros = [
-			'database' => CDBHelper::getAll('SELECT macro, value, description FROM globalmacro'),
-			'frontend' => []
-		];
-
-		// Write macros rows from Frontend to array.
-		$table = $this->query('id:tbl_macros')->asTable()->one();
-		$count = $table->getRows()->count();
-		for ($i = 0; $i < $count; $i += 2) {
-			$macro = [];
-			$row = $table->getRow($i);
-			$macro['macro'] = $row->query('xpath:./td[1]/textarea')->one()->getValue();
-			$macro['value'] = $row->query('xpath:./td[3]/textarea')->one()->getValue();
-			$macro['description'] = $table->getRow($i + 1)->query('tag:textarea')->one()->getValue();
-
-			$macros['frontend'][] = $macro;
-		}
-
-		// Sort arrays by Macros.
-		foreach ($macros as &$array) {
-			usort($array, function ($a, $b) {
-				return strcmp($a['macro'], $b['macro']);
-			});
-		}
-		unset($array);
-
-		// Compare macros from DB with macros from Frontend.
-		$this->assertEquals($macros['database'], $macros['frontend']);
+		// Check inherited macros in form matching with DB.
+		$this->checkInheritedGlobalMacros();
 
 		// Check layout at Host Inventory tab.
 		$this->zbxTestTabSwitch('Inventory');

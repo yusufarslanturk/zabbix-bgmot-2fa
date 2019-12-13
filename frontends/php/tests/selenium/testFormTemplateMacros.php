@@ -45,18 +45,18 @@ class testFormTemplateMacros extends testFormMacros {
 	 * @dataProvider getCreateCommonMacrosData
 	 */
 	public function testFormTemplateMacros_Create($data) {
-		$this->checkCreate('template', $data);
+		$this->checkCreate($data, 'template');
 	}
 
 	/**
 	 * @dataProvider getUpdateCommonMacrosData
 	 */
 	public function testFormTemplateMacros_Update($data) {
-		$this->checkUpdate('template', $data, $this->template_name_update);
+		$this->checkUpdate($data, $this->template_name_update, 'template');
 	}
 
 	public function testFormTemplateMacros_Remove() {
-		$this->checkRemove('template', $this->template_name_remove);
+		$this->checkRemove($this->template_name_remove, 'template');
 	}
 
 	public function testFormTemplateMacros_ChangeRemoveInheritedMacro() {

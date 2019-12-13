@@ -28,38 +28,38 @@ class testFormHostMacros extends testFormMacros {
 	use MacrosTrait;
 
 	/**
-	* The name of the host for updating macros, id=20006.
-	*
-	* @var string
-	*/
+	 * The name of the host for updating macros, id=20006.
+	 *
+	 * @var string
+	 */
 	protected $host_name_update = 'Host for trigger description macros';
 
 	/**
-	* The name of the host for removing macros, id=30010.
-	*
-	* @var string
-	*/
+	 * The name of the host for removing macros, id=30010.
+	 *
+	 * @var string
+	 */
 	protected $host_name_remove = 'Host for macros remove';
 
 	/**
 	 * @dataProvider getCreateCommonMacrosData
 	 */
 	public function testFormHostMacros_Create($data) {
-		$this->checkCreate('host', $data);
+		$this->checkCreate($data);
 	}
 
 	/**
 	 * @dataProvider getUpdateCommonMacrosData
 	 */
 	public function testFormHostMacros_Update($data) {
-		$this->checkUpdate('host', $data, $this->host_name_update);
+		$this->checkUpdate($data, $this->host_name_update);
 	}
 
 	public function testFormHostMacros_Remove() {
-		$this->checkRemove('host', $this->host_name_remove);
+		$this->checkRemove($this->host_name_remove);
 	}
 
 	public function testFormHostMacros_ChangeRemoveInheritedMacro() {
-		$this->checkChangeRemoveInheritedMacro('host');
+		$this->checkChangeRemoveInheritedMacro();
 	}
 }
