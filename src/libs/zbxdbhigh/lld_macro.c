@@ -84,7 +84,7 @@ int	zbx_lld_macro_paths_get(zbx_uint64_t lld_ruleid, zbx_vector_ptr_t *lld_macro
 	}
 	DBfree_result(result);
 
-	zbx_vector_ptr_sort((zbx_vector_ptr_t *)lld_macro_paths, zbx_lld_macro_paths_compare);
+	zbx_vector_ptr_sort(lld_macro_paths, zbx_lld_macro_paths_compare);
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_result_string(ret));
 
