@@ -25,23 +25,32 @@ require_once dirname(__FILE__).'/../../include/CWebTest.php';
  */
 trait MacrosTrait {
 
+	protected $table_selector = 'id:tbl_macros';
+
+	public function setTableSelector($selector) {
+		$this->table_selector = $selector;
+	}
+
 	/**
 	 * Get macros table element with mapping set.
 	 *
 	 * @return CMultifieldTable
 	 */
-	protected function getMacrosTable() {
+	protected function getMacrosTable($value_column = 'Value') {
 		return $this->query('id:tbl_macros')->asMultifieldTable([
 			'mapping' => [
 				'Macro' => [
+					'name' => 'macro',
 					'selector' => 'xpath:./textarea',
 					'class' => 'CElement'
 				],
-				'Value' => [
+				$value_column => [
+					'name' => 'value',
 					'selector' => 'xpath:./textarea',
 					'class' => 'CElement'
 				],
 				'Description' => [
+					'name' => 'description',
 					'selector' => 'xpath:./textarea',
 					'class' => 'CElement'
 				]
@@ -90,21 +99,21 @@ trait MacrosTrait {
 	 */
 	public function assertMacros($data = []) {
 		$rows = [];
-		foreach ($data as $i => $values) {
+		foreach ($data as $values) {
 			if (CTestArrayHelper::get($values, 'action') !== USER_ACTION_REMOVE) {
-				$rows[$i] = [
-					'Macro' => CTestArrayHelper::get($values, 'Macro', ''),
-					'Value' => CTestArrayHelper::get($values, 'Value', ''),
-					'Description' => CTestArrayHelper::get($values, 'Description', ''),
+				$rows[] = [
+					'macro' => CTestArrayHelper::get($values, 'macro', ''),
+					'value' => CTestArrayHelper::get($values, 'value', ''),
+					'description' => CTestArrayHelper::get($values, 'description', ''),
 				];
 			}
 		}
 
 		if (!$rows) {
 			$rows[] = [
-				'Macro' => '',
-				'Value' => '',
-				'Description' => ''
+				'macro' => '',
+				'value' => '',
+				'description' => ''
 			];
 		}
 

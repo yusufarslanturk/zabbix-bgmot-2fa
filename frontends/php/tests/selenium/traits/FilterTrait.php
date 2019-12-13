@@ -25,6 +25,12 @@ require_once dirname(__FILE__).'/../../include/CWebTest.php';
  */
 trait FilterTrait {
 
+	protected $filter_selector = 'id:filter-tags';
+
+	public function setFilterSelector($selector) {
+		$this->filter_selector = $selector;
+	}
+
 	/**
 	 * Get tag table element with mapping set.
 	 *
@@ -32,8 +38,8 @@ trait FilterTrait {
 	 *
 	 * @return CMultifieldTable
 	 */
-	protected function getTagTable($selector = 'id:filter-tags') {
-		return $this->query($selector)->asMultifieldTable([
+	protected function getTagTable() {
+		return $this->query($this->filter_selector)->asMultifieldTable([
 			'mapping' => [
 				[
 					'name' => 'name',
@@ -62,8 +68,8 @@ trait FilterTrait {
 	 *
 	 * @return CMultifieldTablelement
 	 */
-	public function setTags($tags, $selector = 'id:filter-tags') {
-		$table = $this->getTagTable($selector);
+	public function setTags($tags) {
+		$table = $this->getTagTable();
 
 		foreach ($tags as $i => $tag) {
 			if ($i === 0) {
@@ -82,8 +88,8 @@ trait FilterTrait {
 	 *
 	 * @return array
 	 */
-	public function getTags($selector = 'id:filter-tags') {
-		return $this->getTagTable($selector)->getValue();
+	public function getTags() {
+		return $this->getTagTable()->getValue();
 	}
 
 	/**
@@ -91,16 +97,16 @@ trait FilterTrait {
 	 *
 	 * @param array $data    tag element values
 	 */
-	public function assertTags($data, $selector = 'id:filter-tags') {
+	public function assertTags($data) {
 		$rows = [];
-		foreach ($data as $i => $values) {
-			$rows[$i] = [
+		foreach ($data as $values) {
+			$rows[] = [
 				'name' => CTestArrayHelper::get($values, 'name', ''),
 				'value' => CTestArrayHelper::get($values, 'value', ''),
 				'operator' => CTestArrayHelper::get($values, 'operator', 'Contains')
 			];
 		}
 
-		$this->assertEquals($rows, $this->getTags($selector), 'Tags on a page does not match tags in data provider.');
+		$this->assertEquals($rows, $this->getTags(), 'Tags on a page does not match tags in data provider.');
 	}
 }
