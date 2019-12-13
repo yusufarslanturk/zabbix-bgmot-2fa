@@ -19,7 +19,7 @@
 **/
 
 
-include('include/views/js/administration.general.triggerSeverity.js.php');
+include('include/views/js/administration.general.trigseverity.js.php');
 
 $widget = (new CWidget())
 	->setTitle(_('Trigger severities'))
