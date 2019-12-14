@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-09 12:45+0200\n"
+"POT-Creation-Date: 2019-12-15 01:44+0200\n"
 "PO-Revision-Date: 2019-12-09 09:47+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -792,7 +792,7 @@ msgstr "歷時少於"
 msgid "Age less than %s"
 msgstr "歷時少於%s"
 
-#: app/views/administration.script.list.php:78 app/views/popup.generic.php:593
+#: app/views/administration.script.list.php:78 app/views/popup.generic.php:598
 #: include/items.inc.php:347 include/views/configuration.httpconf.edit.php:100
 msgid "Agent"
 msgstr "端點代理程式"
@@ -1370,7 +1370,7 @@ msgid "Available"
 msgstr "可用"
 
 #: adm.triggerseverities.php:37 adm.triggerseverities.php:38
-#: include/views/administration.general.triggerSeverity.edit.php:62
+#: include/views/administration.general.trigseverity.edit.php:62
 msgid "Average"
 msgstr "一般嚴重"
 
@@ -1592,7 +1592,7 @@ msgstr ""
 #: include/views/conf.import.php:127
 #: include/views/js/administration.general.housekeeper.edit.js.php:40
 #: include/views/js/administration.general.trigger.options.js.php:21
-#: include/views/js/administration.general.triggerSeverity.js.php:13
+#: include/views/js/administration.general.trigseverity.js.php:13
 #: include/views/js/configuration.action.edit.js.php:76
 #: include/views/js/configuration.discovery.edit.js.php:147
 #: include/views/js/configuration.discovery.edit.js.php:607
@@ -3687,7 +3687,7 @@ msgstr ""
 #: include/views/administration.general.regularexpressions.edit.php:33
 #: include/views/administration.general.regularexpressions.list.php:32
 #: include/views/administration.general.trigger.options.edit.php:33
-#: include/views/administration.general.triggerSeverity.edit.php:33
+#: include/views/administration.general.trigseverity.edit.php:33
 #: include/views/administration.general.valuemapping.edit.php:33
 #: include/views/administration.general.valuemapping.list.php:35
 #: include/views/administration.general.workingtime.edit.php:31
@@ -4091,7 +4091,7 @@ msgstr "自訂腳本"
 msgid "Custom scripts"
 msgstr ""
 
-#: include/views/administration.general.triggerSeverity.edit.php:87
+#: include/views/administration.general.trigseverity.edit.php:87
 msgid "Custom severity names affect all locales and require manual translation!"
 msgstr "自訂的嚴重性的名稱影響所有的語系而必須手動翻譯!"
 
@@ -4213,7 +4213,7 @@ msgstr "資料"
 msgid "Data cache statistics. Cache - one of values (modes: all, float, uint, str, log, text), history (modes: pfree, total, used, free), trend (modes: pfree, total, used, free), text (modes: pfree, total, used, free)."
 msgstr ""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:2727
+#: include/classes/graphdraw/CLineGraphDraw.php:2735
 #: include/classes/graphdraw/CPieGraphDraw.php:808
 #, c-format
 msgid "Data from %1$s. Generated in %2$s sec."
@@ -4787,7 +4787,7 @@ msgstr "相依"
 msgid "Dependent item"
 msgstr ""
 
-#: app/views/popup.generic.php:289 include/triggers.inc.php:2741
+#: app/views/popup.generic.php:294 include/triggers.inc.php:2741
 #: include/views/configuration.services.edit.php:152
 #: include/views/configuration.trigger.prototype.list.php:82
 #: include/views/configuration.triggers.list.php:241
@@ -4976,7 +4976,7 @@ msgid "Disabled"
 msgstr "停用的"
 
 #: adm.triggerseverities.php:41 adm.triggerseverities.php:42
-#: include/views/administration.general.triggerSeverity.edit.php:78
+#: include/views/administration.general.trigseverity.edit.php:78
 msgid "Disaster"
 msgstr "災難"
 
@@ -5945,7 +5945,7 @@ msgctxt "maintenance status"
 msgid "Expired"
 msgstr "過期的"
 
-#: app/views/popup.generic.php:504 include/graphs.inc.php:27
+#: app/views/popup.generic.php:509 include/graphs.inc.php:27
 msgid "Exploded"
 msgstr "Exploded"
 
@@ -6792,8 +6792,8 @@ msgstr "群組"
 msgid "H:i"
 msgstr "H:i"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1419
-#: include/classes/graphdraw/CLineGraphDraw.php:1426
+#: include/classes/graphdraw/CLineGraphDraw.php:1421
+#: include/classes/graphdraw/CLineGraphDraw.php:1428
 #: include/translateDefines.inc.php:34
 msgid "H:i:s"
 msgstr "H:i:s"
@@ -6917,7 +6917,7 @@ msgid "Hierarchy"
 msgstr ""
 
 #: adm.triggerseverities.php:39 adm.triggerseverities.php:40
-#: include/views/administration.general.triggerSeverity.edit.php:70
+#: include/views/administration.general.trigseverity.edit.php:70
 msgid "High"
 msgstr "嚴重"
 
@@ -8608,7 +8608,7 @@ msgstr ""
 msgid "Incorrect value \"%1$s\" in field \"%2$s\" for media type \"%3$s\"."
 msgstr ""
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:219
+#: app/controllers/CControllerPopupPreprocTestSend.php:229
 #: include/classes/validators/CNewValidator.php:117
 #: include/classes/validators/CNewValidator.php:130
 #: include/classes/validators/CNewValidator.php:143
@@ -8816,7 +8816,7 @@ msgstr ""
 #: include/classes/validators/CNewValidator.php:279
 #: include/screens.inc.php:300 include/screens.inc.php:314
 #: include/screens.inc.php:429 include/screens.inc.php:443
-#: include/sounds.inc.php:112 include/validate.inc.php:346 usergrps.php:318
+#: include/sounds.inc.php:113 include/validate.inc.php:346 usergrps.php:318
 #: usergrps.php:358 usergrps.php:361
 #, c-format
 msgid "Incorrect value for field \"%1$s\": %2$s."
@@ -8860,7 +8860,7 @@ msgstr "資訊"
 
 #: adm.triggerseverities.php:33 adm.triggerseverities.php:34
 #: include/items.inc.php:31
-#: include/views/administration.general.triggerSeverity.edit.php:46
+#: include/views/administration.general.trigseverity.edit.php:46
 msgid "Information"
 msgstr "資訊"
 
@@ -10219,7 +10219,7 @@ msgstr "失去"
 msgid "Low-level discovery rule in \"not supported\" state"
 msgstr ""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1387
+#: include/classes/graphdraw/CLineGraphDraw.php:1389
 msgid "M"
 msgstr ""
 
@@ -11834,7 +11834,7 @@ msgstr ""
 msgid "None"
 msgstr "無"
 
-#: app/views/popup.generic.php:507 include/graphs.inc.php:24
+#: app/views/popup.generic.php:512 include/graphs.inc.php:24
 #: include/items.inc.php:158 include/triggers.inc.php:1282
 #: include/views/configuration.triggers.list.php:71
 #: include/views/monitoring.history.php:224
@@ -11877,7 +11877,7 @@ msgid "Not available"
 msgstr "不可用"
 
 #: adm.triggerseverities.php:31 adm.triggerseverities.php:32
-#: include/views/administration.general.triggerSeverity.edit.php:37
+#: include/views/administration.general.trigseverity.edit.php:37
 msgid "Not classified"
 msgstr "未分類"
 
@@ -12991,7 +12991,7 @@ msgstr "許可權只能被指派予用戶群組"
 msgid "Persian (fa_IR)"
 msgstr "波斯語 (fa_IR)"
 
-#: app/views/popup.generic.php:501 include/graphs.inc.php:26
+#: app/views/popup.generic.php:506 include/graphs.inc.php:26
 msgid "Pie"
 msgstr "Pie"
 
@@ -13151,7 +13151,7 @@ msgstr ""
 msgid "Previous page"
 msgstr ""
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:219
+#: app/controllers/CControllerPopupPreprocTestSend.php:229
 #: app/views/popup.preproctestedit.view.php:102
 msgid "Previous value"
 msgstr ""
@@ -13939,22 +13939,22 @@ msgstr "重設"
 
 #: include/views/js/administration.general.housekeeper.edit.js.php:37
 #: include/views/js/administration.general.trigger.options.js.php:18
-#: include/views/js/administration.general.triggerSeverity.js.php:10
+#: include/views/js/administration.general.trigseverity.js.php:10
 msgid "Reset all fields to default values?"
 msgstr "重設所有的欄位為預設值?"
 
 #: include/views/js/administration.general.housekeeper.edit.js.php:36
 #: include/views/js/administration.general.trigger.options.js.php:17
-#: include/views/js/administration.general.triggerSeverity.js.php:9
+#: include/views/js/administration.general.trigseverity.js.php:9
 msgid "Reset confirmation"
 msgstr "重設確認"
 
 #: include/views/administration.general.housekeeper.edit.php:157
 #: include/views/administration.general.trigger.options.edit.php:102
-#: include/views/administration.general.triggerSeverity.edit.php:96
+#: include/views/administration.general.trigseverity.edit.php:96
 #: include/views/js/administration.general.housekeeper.edit.js.php:46
 #: include/views/js/administration.general.trigger.options.js.php:27
-#: include/views/js/administration.general.triggerSeverity.js.php:19
+#: include/views/js/administration.general.trigseverity.js.php:19
 msgid "Reset defaults"
 msgstr "重設預設"
 
@@ -14030,7 +14030,7 @@ msgstr ""
 msgid "Result"
 msgstr "結果"
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:224
+#: app/controllers/CControllerPopupPreprocTestSend.php:234
 #, c-format
 msgid "Result converted to %1$s"
 msgstr ""
@@ -14662,7 +14662,7 @@ msgid "Security name"
 msgstr ""
 
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:97
-#: app/views/monitoring.problem.view.php:132 app/views/popup.generic.php:621
+#: app/views/monitoring.problem.view.php:132 app/views/popup.generic.php:626
 #: app/views/popup.services.php:128 app/views/popup.triggerexpr.php:65
 #: include/classes/html/CMultiSelect.php:79
 #: include/classes/widgets/CWidgetHelper.php:333
@@ -14823,13 +14823,13 @@ msgid "Serif"
 msgstr ""
 
 #: app/controllers/CControllerWidgetClockView.php:85
-#: app/views/administration.script.list.php:81 app/views/popup.generic.php:596
+#: app/views/administration.script.list.php:81 app/views/popup.generic.php:601
 #: include/classes/screens/CScreenClock.php:83
 #: include/views/configuration.host.list.php:137 queue.php:167
 msgid "Server"
 msgstr "伺服器"
 
-#: app/views/administration.script.list.php:84 app/views/popup.generic.php:599
+#: app/views/administration.script.list.php:84 app/views/popup.generic.php:604
 msgid "Server (proxy)"
 msgstr ""
 
@@ -14943,7 +14943,7 @@ msgstr "連線期已中斷, 請重連."
 msgid "Set custom time period"
 msgstr ""
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:231
+#: app/controllers/CControllerPopupPreprocTestSend.php:241
 #: app/views/popup.preproctestedit.view.js.php:159 include/forms.inc.php:1423
 #: include/views/js/item.preprocessing.js.php:39
 msgid "Set error to"
@@ -15413,7 +15413,7 @@ msgstr ""
 msgid "Speed"
 msgstr "速度"
 
-#: app/views/popup.generic.php:498 include/graphs.inc.php:25
+#: app/views/popup.generic.php:503 include/graphs.inc.php:25
 #: include/views/monitoring.history.php:225
 msgid "Stacked"
 msgstr "層積的"
@@ -16447,7 +16447,7 @@ msgstr "趨勢"
 #: app/controllers/CControllerPopupTriggerWizard.php:221
 #: app/controllers/CControllerPopupTriggerWizard.php:293
 #: app/views/popup.services.php:44 include/actions.inc.php:46
-#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:486
+#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:488
 #: include/events.inc.php:236 include/maps.inc.php:26
 #: include/triggers.inc.php:1254
 #: include/views/configuration.services.edit.php:87
@@ -16638,8 +16638,8 @@ msgid "Trigger recovery expression must contain at least one host:key reference.
 msgstr ""
 
 #: include/html.inc.php:776
-#: include/views/administration.general.triggerSeverity.edit.php:25
-#: include/views/administration.general.triggerSeverity.edit.php:93
+#: include/views/administration.general.trigseverity.edit.php:25
+#: include/views/administration.general.trigseverity.edit.php:93
 msgid "Trigger severities"
 msgstr "觸發器嚴重性"
 
@@ -17137,7 +17137,7 @@ msgstr "上"
 #: include/views/administration.general.other.edit.php:73
 #: include/views/administration.general.regularexpressions.edit.php:144
 #: include/views/administration.general.trigger.options.edit.php:101
-#: include/views/administration.general.triggerSeverity.edit.php:95
+#: include/views/administration.general.trigseverity.edit.php:95
 #: include/views/administration.general.valuemapping.edit.php:105
 #: include/views/administration.general.workingtime.edit.php:44
 #: include/views/administration.usergroups.edit.php:278
@@ -17984,7 +17984,7 @@ msgstr "W"
 
 #: adm.triggerseverities.php:35 adm.triggerseverities.php:36
 #: include/items.inc.php:33
-#: include/views/administration.general.triggerSeverity.edit.php:54
+#: include/views/administration.general.trigseverity.edit.php:54
 #: include/views/general.warning.php:21
 msgid "Warning"
 msgstr "警告"
@@ -18301,7 +18301,7 @@ msgid "Y axis MAX value must be greater than Y axis MIN value"
 msgstr ""
 
 #: include/classes/api/services/CGraphGeneral.php:314
-#: include/classes/graphdraw/CLineGraphDraw.php:714
+#: include/classes/graphdraw/CLineGraphDraw.php:716
 msgid "Y axis MAX value must be greater than Y axis MIN value."
 msgstr "Y axis MAX value must be greater than Y axis MIN value."
 
@@ -18699,9 +18699,9 @@ msgstr ""
 msgid "agent"
 msgstr "端點代理程式"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1860
+#: include/classes/graphdraw/CLineGraphDraw.php:1862
 #: include/classes/html/CSeverity.php:80
-#: include/classes/pagefilter/CPageFilter.php:767
+#: include/classes/pagefilter/CPageFilter.php:772
 #: include/classes/screens/CScreenHostgroupTriggers.php:109
 #: include/classes/screens/CScreenHostgroupTriggers.php:110
 #: include/classes/screens/CScreenHostTriggers.php:109
@@ -18806,8 +18806,8 @@ msgstr "自動登錄"
 msgid "auto-registered host"
 msgstr "自動登錄之主機"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1842
-#: include/classes/graphdraw/CLineGraphDraw.php:1864
+#: include/classes/graphdraw/CLineGraphDraw.php:1844
+#: include/classes/graphdraw/CLineGraphDraw.php:1866
 #: include/classes/graphdraw/CPieGraphDraw.php:338 include/graphs.inc.php:85
 #: include/graphs.inc.php:98
 #: include/views/js/configuration.graph.edit.js.php:50
@@ -18998,7 +18998,7 @@ msgstr ""
 msgid "days"
 msgstr "日"
 
-#: include/classes/pagefilter/CPageFilter.php:654
+#: include/classes/pagefilter/CPageFilter.php:659
 #: include/classes/setup/CSetupWizard.php:306
 #: include/classes/widgets/CWidgetHelper.php:61
 #: include/views/js/monitoring.slideconf.edit.js.php:14
@@ -19270,7 +19270,7 @@ msgstr ""
 msgid "key is empty"
 msgstr "鍵值為空白"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1840
+#: include/classes/graphdraw/CLineGraphDraw.php:1842
 #: include/classes/graphdraw/CPieGraphDraw.php:333 include/forms.inc.php:2228
 #: include/graphs.inc.php:82 include/graphs.inc.php:106
 #: include/maintenances.inc.php:115
@@ -19282,7 +19282,7 @@ msgstr "最新"
 msgid "last() - Last (most recent) T value"
 msgstr ""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1977
+#: include/classes/graphdraw/CLineGraphDraw.php:1979
 msgid "left"
 msgstr ""
 
@@ -19316,9 +19316,9 @@ msgctxt "month short"
 msgid "m"
 msgstr "m"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1387
-#: include/classes/graphdraw/CLineGraphDraw.php:1395
-#: include/classes/graphdraw/CLineGraphDraw.php:1402
+#: include/classes/graphdraw/CLineGraphDraw.php:1389
+#: include/classes/graphdraw/CLineGraphDraw.php:1397
+#: include/classes/graphdraw/CLineGraphDraw.php:1404
 msgid "m-d"
 msgstr ""
 
@@ -19346,8 +19346,8 @@ msgid "matches"
 msgstr "符合的"
 
 #: include/classes/api/services/CItemGeneral.php:1417
-#: include/classes/graphdraw/CLineGraphDraw.php:1843
-#: include/classes/graphdraw/CLineGraphDraw.php:1857
+#: include/classes/graphdraw/CLineGraphDraw.php:1845
+#: include/classes/graphdraw/CLineGraphDraw.php:1859
 #: include/classes/graphdraw/CPieGraphDraw.php:329 include/forms.inc.php:1327
 #: include/graphs.inc.php:80 include/graphs.inc.php:96
 #: include/views/js/configuration.graph.edit.js.php:51
@@ -19371,8 +19371,8 @@ msgid "maximum number of dependency levels reached"
 msgstr ""
 
 #: include/classes/api/services/CItemGeneral.php:1417
-#: include/classes/graphdraw/CLineGraphDraw.php:1841
-#: include/classes/graphdraw/CLineGraphDraw.php:1854
+#: include/classes/graphdraw/CLineGraphDraw.php:1843
+#: include/classes/graphdraw/CLineGraphDraw.php:1856
 #: include/classes/graphdraw/CPieGraphDraw.php:325 include/forms.inc.php:1326
 #: include/graphs.inc.php:78 include/graphs.inc.php:94
 #: include/views/js/configuration.graph.edit.js.php:49
@@ -19448,7 +19448,7 @@ msgstr "新的"
 msgid "new event tag name"
 msgstr ""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1935
+#: include/classes/graphdraw/CLineGraphDraw.php:1937
 #: include/classes/graphdraw/CPieGraphDraw.php:359
 msgid "no data"
 msgstr "没有數據"
@@ -19472,8 +19472,8 @@ msgstr "非在"
 
 #: app/controllers/CControllerDashboardView.php:134
 #: hostinventoriesoverview.php:75
-#: include/classes/pagefilter/CPageFilter.php:713
-#: include/classes/pagefilter/CPageFilter.php:767 include/forms.inc.php:980
+#: include/classes/pagefilter/CPageFilter.php:718
+#: include/classes/pagefilter/CPageFilter.php:772 include/forms.inc.php:980
 #: include/views/monitoring.screen.php:63 slides.php:191
 msgid "not selected"
 msgstr "非所選的"
@@ -19588,7 +19588,7 @@ msgstr "正則表示式"
 msgid "remember selected"
 msgstr "記住所選的"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1977
+#: include/classes/graphdraw/CLineGraphDraw.php:1979
 msgid "right"
 msgstr ""
 

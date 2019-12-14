@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-09 12:45+0200\n"
+"POT-Creation-Date: 2019-12-15 01:44+0200\n"
 "PO-Revision-Date: 2019-12-09 09:46+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -789,7 +789,7 @@ msgstr "표시시간"
 msgid "Age less than %s"
 msgstr "표시시간 %s"
 
-#: app/views/administration.script.list.php:78 app/views/popup.generic.php:593
+#: app/views/administration.script.list.php:78 app/views/popup.generic.php:598
 #: include/items.inc.php:347 include/views/configuration.httpconf.edit.php:100
 msgid "Agent"
 msgstr "에이전트"
@@ -1366,7 +1366,7 @@ msgid "Available"
 msgstr "감시 중"
 
 #: adm.triggerseverities.php:37 adm.triggerseverities.php:38
-#: include/views/administration.general.triggerSeverity.edit.php:62
+#: include/views/administration.general.trigseverity.edit.php:62
 msgid "Average"
 msgstr "가벼운 장애"
 
@@ -1588,7 +1588,7 @@ msgstr "삭제할 수 없습니다"
 #: include/views/conf.import.php:127
 #: include/views/js/administration.general.housekeeper.edit.js.php:40
 #: include/views/js/administration.general.trigger.options.js.php:21
-#: include/views/js/administration.general.triggerSeverity.js.php:13
+#: include/views/js/administration.general.trigseverity.js.php:13
 #: include/views/js/configuration.action.edit.js.php:76
 #: include/views/js/configuration.discovery.edit.js.php:147
 #: include/views/js/configuration.discovery.edit.js.php:607
@@ -3679,7 +3679,7 @@ msgstr "포함"
 #: include/views/administration.general.regularexpressions.edit.php:33
 #: include/views/administration.general.regularexpressions.list.php:32
 #: include/views/administration.general.trigger.options.edit.php:33
-#: include/views/administration.general.triggerSeverity.edit.php:33
+#: include/views/administration.general.trigseverity.edit.php:33
 #: include/views/administration.general.valuemapping.edit.php:33
 #: include/views/administration.general.valuemapping.list.php:35
 #: include/views/administration.general.workingtime.edit.php:31
@@ -4083,7 +4083,7 @@ msgstr "커스텀스크립트"
 msgid "Custom scripts"
 msgstr ""
 
-#: include/views/administration.general.triggerSeverity.edit.php:87
+#: include/views/administration.general.trigseverity.edit.php:87
 msgid "Custom severity names affect all locales and require manual translation!"
 msgstr "커스텀 심각도의 이름은 모두 언어에 영향을 받기 때문에, 복수 언어를 이용하는 경우엔 수동으로 번역을 해 주십시오!"
 
@@ -4205,7 +4205,7 @@ msgstr "데이터"
 msgid "Data cache statistics. Cache - one of values (modes: all, float, uint, str, log, text), history (modes: pfree, total, used, free), trend (modes: pfree, total, used, free), text (modes: pfree, total, used, free)."
 msgstr "데이터캐쉬 통계. cache - values (mode: all, float, uint, str, log, text), history (mode: pfree, total, used, free), trend (mode: pfree, total, used, free), text (mode: pfree, total, used, free)."
 
-#: include/classes/graphdraw/CLineGraphDraw.php:2727
+#: include/classes/graphdraw/CLineGraphDraw.php:2735
 #: include/classes/graphdraw/CPieGraphDraw.php:808
 #, c-format
 msgid "Data from %1$s. Generated in %2$s sec."
@@ -4779,7 +4779,7 @@ msgstr "의존처"
 msgid "Dependent item"
 msgstr "의존 아이템"
 
-#: app/views/popup.generic.php:289 include/triggers.inc.php:2741
+#: app/views/popup.generic.php:294 include/triggers.inc.php:2741
 #: include/views/configuration.services.edit.php:152
 #: include/views/configuration.trigger.prototype.list.php:82
 #: include/views/configuration.triggers.list.php:241
@@ -4968,7 +4968,7 @@ msgid "Disabled"
 msgstr "비활성"
 
 #: adm.triggerseverities.php:41 adm.triggerseverities.php:42
-#: include/views/administration.general.triggerSeverity.edit.php:78
+#: include/views/administration.general.trigseverity.edit.php:78
 msgid "Disaster"
 msgstr "심각한 장애"
 
@@ -5938,7 +5938,7 @@ msgctxt "maintenance status"
 msgid "Expired"
 msgstr "메인터넌스 기간의 종료"
 
-#: app/views/popup.generic.php:504 include/graphs.inc.php:27
+#: app/views/popup.generic.php:509 include/graphs.inc.php:27
 msgid "Exploded"
 msgstr "분해도 그래프"
 
@@ -6784,8 +6784,8 @@ msgstr "그룹"
 msgid "H:i"
 msgstr "H:i"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1419
-#: include/classes/graphdraw/CLineGraphDraw.php:1426
+#: include/classes/graphdraw/CLineGraphDraw.php:1421
+#: include/classes/graphdraw/CLineGraphDraw.php:1428
 #: include/translateDefines.inc.php:34
 msgid "H:i:s"
 msgstr "H:i:s"
@@ -6909,7 +6909,7 @@ msgid "Hierarchy"
 msgstr "단계"
 
 #: adm.triggerseverities.php:39 adm.triggerseverities.php:40
-#: include/views/administration.general.triggerSeverity.edit.php:70
+#: include/views/administration.general.trigseverity.edit.php:70
 msgid "High"
 msgstr "중증 장애"
 
@@ -8599,7 +8599,7 @@ msgstr "상관관계 \"%3$s\"의 필드 \"%2$s\"의 값 \"%1$s\"이 올바르지
 msgid "Incorrect value \"%1$s\" in field \"%2$s\" for media type \"%3$s\"."
 msgstr "미디어 타입 \"%3$s\"를 위한 필드 \"%2$s\"내의 값 \"%1$s\"가 올바르지 않습니다."
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:219
+#: app/controllers/CControllerPopupPreprocTestSend.php:229
 #: include/classes/validators/CNewValidator.php:117
 #: include/classes/validators/CNewValidator.php:130
 #: include/classes/validators/CNewValidator.php:143
@@ -8807,7 +8807,7 @@ msgstr ""
 #: include/classes/validators/CNewValidator.php:279
 #: include/screens.inc.php:300 include/screens.inc.php:314
 #: include/screens.inc.php:429 include/screens.inc.php:443
-#: include/sounds.inc.php:112 include/validate.inc.php:346 usergrps.php:318
+#: include/sounds.inc.php:113 include/validate.inc.php:346 usergrps.php:318
 #: usergrps.php:358 usergrps.php:361
 #, c-format
 msgid "Incorrect value for field \"%1$s\": %2$s."
@@ -8851,7 +8851,7 @@ msgstr "정보"
 
 #: adm.triggerseverities.php:33 adm.triggerseverities.php:34
 #: include/items.inc.php:31
-#: include/views/administration.general.triggerSeverity.edit.php:46
+#: include/views/administration.general.trigseverity.edit.php:46
 msgid "Information"
 msgstr "정보"
 
@@ -10210,7 +10210,7 @@ msgstr "불명"
 msgid "Low-level discovery rule in \"not supported\" state"
 msgstr "Low-level 디스커버리가 \"취득불가\" 상태"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1387
+#: include/classes/graphdraw/CLineGraphDraw.php:1389
 msgid "M"
 msgstr "M"
 
@@ -11823,7 +11823,7 @@ msgstr "boolean이 아닌 플래그는 폐지될 예정입니다."
 msgid "None"
 msgstr "없음"
 
-#: app/views/popup.generic.php:507 include/graphs.inc.php:24
+#: app/views/popup.generic.php:512 include/graphs.inc.php:24
 #: include/items.inc.php:158 include/triggers.inc.php:1282
 #: include/views/configuration.triggers.list.php:71
 #: include/views/monitoring.history.php:224
@@ -11866,7 +11866,7 @@ msgid "Not available"
 msgstr "미감시"
 
 #: adm.triggerseverities.php:31 adm.triggerseverities.php:32
-#: include/views/administration.general.triggerSeverity.edit.php:37
+#: include/views/administration.general.trigseverity.edit.php:37
 msgid "Not classified"
 msgstr "미분류"
 
@@ -12980,7 +12980,7 @@ msgstr "권한은 사용자그룹만 할당할 수 있습니다."
 msgid "Persian (fa_IR)"
 msgstr "페르시아어 (fa_IR)"
 
-#: app/views/popup.generic.php:501 include/graphs.inc.php:26
+#: app/views/popup.generic.php:506 include/graphs.inc.php:26
 msgid "Pie"
 msgstr "원 그래프"
 
@@ -13140,7 +13140,7 @@ msgstr "저번 달"
 msgid "Previous page"
 msgstr ""
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:219
+#: app/controllers/CControllerPopupPreprocTestSend.php:229
 #: app/views/popup.preproctestedit.view.php:102
 msgid "Previous value"
 msgstr ""
@@ -13928,22 +13928,22 @@ msgstr "리셋"
 
 #: include/views/js/administration.general.housekeeper.edit.js.php:37
 #: include/views/js/administration.general.trigger.options.js.php:18
-#: include/views/js/administration.general.triggerSeverity.js.php:10
+#: include/views/js/administration.general.trigseverity.js.php:10
 msgid "Reset all fields to default values?"
 msgstr "모든 필드를 기본값으로 되돌리시겠습니까?"
 
 #: include/views/js/administration.general.housekeeper.edit.js.php:36
 #: include/views/js/administration.general.trigger.options.js.php:17
-#: include/views/js/administration.general.triggerSeverity.js.php:9
+#: include/views/js/administration.general.trigseverity.js.php:9
 msgid "Reset confirmation"
 msgstr "리셋 확인"
 
 #: include/views/administration.general.housekeeper.edit.php:157
 #: include/views/administration.general.trigger.options.edit.php:102
-#: include/views/administration.general.triggerSeverity.edit.php:96
+#: include/views/administration.general.trigseverity.edit.php:96
 #: include/views/js/administration.general.housekeeper.edit.js.php:46
 #: include/views/js/administration.general.trigger.options.js.php:27
-#: include/views/js/administration.general.triggerSeverity.js.php:19
+#: include/views/js/administration.general.trigseverity.js.php:19
 msgid "Reset defaults"
 msgstr "기본값으로 설정"
 
@@ -14019,7 +14019,7 @@ msgstr ""
 msgid "Result"
 msgstr "결과"
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:224
+#: app/controllers/CControllerPopupPreprocTestSend.php:234
 #, c-format
 msgid "Result converted to %1$s"
 msgstr ""
@@ -14651,7 +14651,7 @@ msgid "Security name"
 msgstr "보안 이름"
 
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:97
-#: app/views/monitoring.problem.view.php:132 app/views/popup.generic.php:621
+#: app/views/monitoring.problem.view.php:132 app/views/popup.generic.php:626
 #: app/views/popup.services.php:128 app/views/popup.triggerexpr.php:65
 #: include/classes/html/CMultiSelect.php:79
 #: include/classes/widgets/CWidgetHelper.php:333
@@ -14812,13 +14812,13 @@ msgid "Serif"
 msgstr "Serif"
 
 #: app/controllers/CControllerWidgetClockView.php:85
-#: app/views/administration.script.list.php:81 app/views/popup.generic.php:596
+#: app/views/administration.script.list.php:81 app/views/popup.generic.php:601
 #: include/classes/screens/CScreenClock.php:83
 #: include/views/configuration.host.list.php:137 queue.php:167
 msgid "Server"
 msgstr "서버"
 
-#: app/views/administration.script.list.php:84 app/views/popup.generic.php:599
+#: app/views/administration.script.list.php:84 app/views/popup.generic.php:604
 msgid "Server (proxy)"
 msgstr "서버 (프록시)"
 
@@ -14932,7 +14932,7 @@ msgstr "세션이 끊겼습니다. 다시 로그인하여 주십시오."
 msgid "Set custom time period"
 msgstr "시간범위의 커스터마이즈"
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:231
+#: app/controllers/CControllerPopupPreprocTestSend.php:241
 #: app/views/popup.preproctestedit.view.js.php:159 include/forms.inc.php:1423
 #: include/views/js/item.preprocessing.js.php:39
 msgid "Set error to"
@@ -15402,7 +15402,7 @@ msgstr "값을 표시하기 위해 몇가지 필터조건을 지정해 주십시
 msgid "Speed"
 msgstr "속도"
 
-#: app/views/popup.generic.php:498 include/graphs.inc.php:25
+#: app/views/popup.generic.php:503 include/graphs.inc.php:25
 #: include/views/monitoring.history.php:225
 msgid "Stacked"
 msgstr "누적 그래프"
@@ -16436,7 +16436,7 @@ msgstr "트렌드"
 #: app/controllers/CControllerPopupTriggerWizard.php:221
 #: app/controllers/CControllerPopupTriggerWizard.php:293
 #: app/views/popup.services.php:44 include/actions.inc.php:46
-#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:486
+#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:488
 #: include/events.inc.php:236 include/maps.inc.php:26
 #: include/triggers.inc.php:1254
 #: include/views/configuration.services.edit.php:87
@@ -16627,8 +16627,8 @@ msgid "Trigger recovery expression must contain at least one host:key reference.
 msgstr "트리거 복구조건식에는 적어도 하나의 host:key에 참조가 필요합니다."
 
 #: include/html.inc.php:776
-#: include/views/administration.general.triggerSeverity.edit.php:25
-#: include/views/administration.general.triggerSeverity.edit.php:93
+#: include/views/administration.general.trigseverity.edit.php:25
+#: include/views/administration.general.trigseverity.edit.php:93
 msgid "Trigger severities"
 msgstr "트리거 심각도"
 
@@ -17126,7 +17126,7 @@ msgstr "Up"
 #: include/views/administration.general.other.edit.php:73
 #: include/views/administration.general.regularexpressions.edit.php:144
 #: include/views/administration.general.trigger.options.edit.php:101
-#: include/views/administration.general.triggerSeverity.edit.php:95
+#: include/views/administration.general.trigseverity.edit.php:95
 #: include/views/administration.general.valuemapping.edit.php:105
 #: include/views/administration.general.workingtime.edit.php:44
 #: include/views/administration.usergroups.edit.php:278
@@ -17973,7 +17973,7 @@ msgstr "W"
 
 #: adm.triggerseverities.php:35 adm.triggerseverities.php:36
 #: include/items.inc.php:33
-#: include/views/administration.general.triggerSeverity.edit.php:54
+#: include/views/administration.general.trigseverity.edit.php:54
 #: include/views/general.warning.php:21
 msgid "Warning"
 msgstr "경고"
@@ -18290,7 +18290,7 @@ msgid "Y axis MAX value must be greater than Y axis MIN value"
 msgstr ""
 
 #: include/classes/api/services/CGraphGeneral.php:314
-#: include/classes/graphdraw/CLineGraphDraw.php:714
+#: include/classes/graphdraw/CLineGraphDraw.php:716
 msgid "Y axis MAX value must be greater than Y axis MIN value."
 msgstr "Y축의 최댓값은 Y축의 최솟값보다도 큰 숫자로 설정해주십시오."
 
@@ -18688,9 +18688,9 @@ msgstr ""
 msgid "agent"
 msgstr "에이전트"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1860
+#: include/classes/graphdraw/CLineGraphDraw.php:1862
 #: include/classes/html/CSeverity.php:80
-#: include/classes/pagefilter/CPageFilter.php:767
+#: include/classes/pagefilter/CPageFilter.php:772
 #: include/classes/screens/CScreenHostgroupTriggers.php:109
 #: include/classes/screens/CScreenHostgroupTriggers.php:110
 #: include/classes/screens/CScreenHostTriggers.php:109
@@ -18795,8 +18795,8 @@ msgstr "자동 등록"
 msgid "auto-registered host"
 msgstr "자동등록 호스트"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1842
-#: include/classes/graphdraw/CLineGraphDraw.php:1864
+#: include/classes/graphdraw/CLineGraphDraw.php:1844
+#: include/classes/graphdraw/CLineGraphDraw.php:1866
 #: include/classes/graphdraw/CPieGraphDraw.php:338 include/graphs.inc.php:85
 #: include/graphs.inc.php:98
 #: include/views/js/configuration.graph.edit.js.php:50
@@ -18988,7 +18988,7 @@ msgstr "dayofweek() - 요일 (월요일 - 1, 일요일 - 7)"
 msgid "days"
 msgstr "일"
 
-#: include/classes/pagefilter/CPageFilter.php:654
+#: include/classes/pagefilter/CPageFilter.php:659
 #: include/classes/setup/CSetupWizard.php:306
 #: include/classes/widgets/CWidgetHelper.php:61
 #: include/views/js/monitoring.slideconf.edit.js.php:14
@@ -19260,7 +19260,7 @@ msgstr ""
 msgid "key is empty"
 msgstr "키가 설정되지 않았습니다."
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1840
+#: include/classes/graphdraw/CLineGraphDraw.php:1842
 #: include/classes/graphdraw/CPieGraphDraw.php:333 include/forms.inc.php:2228
 #: include/graphs.inc.php:82 include/graphs.inc.php:106
 #: include/maintenances.inc.php:115
@@ -19272,7 +19272,7 @@ msgstr "최신값"
 msgid "last() - Last (most recent) T value"
 msgstr "last() - 최신값"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1977
+#: include/classes/graphdraw/CLineGraphDraw.php:1979
 msgid "left"
 msgstr "왼쪽"
 
@@ -19306,9 +19306,9 @@ msgctxt "month short"
 msgid "m"
 msgstr "m"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1387
-#: include/classes/graphdraw/CLineGraphDraw.php:1395
-#: include/classes/graphdraw/CLineGraphDraw.php:1402
+#: include/classes/graphdraw/CLineGraphDraw.php:1389
+#: include/classes/graphdraw/CLineGraphDraw.php:1397
+#: include/classes/graphdraw/CLineGraphDraw.php:1404
 msgid "m-d"
 msgstr "m/d"
 
@@ -19336,8 +19336,8 @@ msgid "matches"
 msgstr "일치한다"
 
 #: include/classes/api/services/CItemGeneral.php:1417
-#: include/classes/graphdraw/CLineGraphDraw.php:1843
-#: include/classes/graphdraw/CLineGraphDraw.php:1857
+#: include/classes/graphdraw/CLineGraphDraw.php:1845
+#: include/classes/graphdraw/CLineGraphDraw.php:1859
 #: include/classes/graphdraw/CPieGraphDraw.php:329 include/forms.inc.php:1327
 #: include/graphs.inc.php:80 include/graphs.inc.php:96
 #: include/views/js/configuration.graph.edit.js.php:51
@@ -19361,8 +19361,8 @@ msgid "maximum number of dependency levels reached"
 msgstr "의존 레벨 수가 최대수에 도달하였습니다"
 
 #: include/classes/api/services/CItemGeneral.php:1417
-#: include/classes/graphdraw/CLineGraphDraw.php:1841
-#: include/classes/graphdraw/CLineGraphDraw.php:1854
+#: include/classes/graphdraw/CLineGraphDraw.php:1843
+#: include/classes/graphdraw/CLineGraphDraw.php:1856
 #: include/classes/graphdraw/CPieGraphDraw.php:325 include/forms.inc.php:1326
 #: include/graphs.inc.php:78 include/graphs.inc.php:94
 #: include/views/js/configuration.graph.edit.js.php:49
@@ -19438,7 +19438,7 @@ msgstr "신규"
 msgid "new event tag name"
 msgstr ""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1935
+#: include/classes/graphdraw/CLineGraphDraw.php:1937
 #: include/classes/graphdraw/CPieGraphDraw.php:359
 msgid "no data"
 msgstr "데이터 없음"
@@ -19462,8 +19462,8 @@ msgstr "범위 밖"
 
 #: app/controllers/CControllerDashboardView.php:134
 #: hostinventoriesoverview.php:75
-#: include/classes/pagefilter/CPageFilter.php:713
-#: include/classes/pagefilter/CPageFilter.php:767 include/forms.inc.php:980
+#: include/classes/pagefilter/CPageFilter.php:718
+#: include/classes/pagefilter/CPageFilter.php:772 include/forms.inc.php:980
 #: include/views/monitoring.screen.php:63 slides.php:191
 msgid "not selected"
 msgstr "선택되지 않음"
@@ -19578,7 +19578,7 @@ msgstr "정규 표현"
 msgid "remember selected"
 msgstr "선택상태를 보존"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1977
+#: include/classes/graphdraw/CLineGraphDraw.php:1979
 msgid "right"
 msgstr "오른쪽"
 

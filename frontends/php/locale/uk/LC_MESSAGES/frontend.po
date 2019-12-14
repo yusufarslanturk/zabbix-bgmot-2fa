@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-09 12:45+0200\n"
-"PO-Revision-Date: 2019-12-09 09:47+0300\n"
-"Last-Translator: Anonymous Pootle User\n"
+"POT-Creation-Date: 2019-12-15 01:44+0200\n"
+"PO-Revision-Date: 2019-12-11 09:17+0300\n"
+"Last-Translator: Oleksii <oleksii.zagorskyi@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1575877623.000000\n"
+"X-POOTLE-MTIME: 1576048662.000000\n"
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -825,7 +825,7 @@ msgstr "З віком менше ніж"
 msgid "Age less than %s"
 msgstr "З віком менше ніж %s"
 
-#: app/views/administration.script.list.php:78 app/views/popup.generic.php:593
+#: app/views/administration.script.list.php:78 app/views/popup.generic.php:598
 #: include/items.inc.php:347 include/views/configuration.httpconf.edit.php:100
 msgid "Agent"
 msgstr "Агент"
@@ -857,7 +857,7 @@ msgstr "Інтерфейс Агента або SNMP або JMX або IPMI"
 
 #: include/classes/widgets/CWidgetHelper.php:1107
 msgid "Aggregate"
-msgstr ""
+msgstr "Агрегація"
 
 #: include/classes/items/CHelpItems.php:669
 msgid "Aggregate checks do not require any agent running on a host being monitored. Zabbix server collects aggregate information by doing direct database queries. See Zabbix Manual."
@@ -865,11 +865,11 @@ msgstr "Агреговані перевірки не потребують ная
 
 #: include/classes/widgets/CWidgetHelper.php:1080
 msgid "Aggregation function"
-msgstr ""
+msgstr "Функція агрегації"
 
 #: include/classes/widgets/CWidgetHelper.php:1098
 msgid "Aggregation interval"
-msgstr ""
+msgstr "Інтервал агрегації"
 
 #: include/actions.inc.php:2148
 msgid "Alert message"
@@ -1193,7 +1193,7 @@ msgstr "О %1$s:%2$s на %3$s день кожний %4$s"
 
 #: include/forms.inc.php:2304
 msgid "At (hour:minute)"
-msgstr ""
+msgstr "Об (година:хвилина)"
 
 #: include/classes/api/services/CMaintenance.php:279
 #: include/classes/api/services/CMaintenance.php:664
@@ -1408,7 +1408,7 @@ msgid "Available"
 msgstr "Доступний"
 
 #: adm.triggerseverities.php:37 adm.triggerseverities.php:38
-#: include/views/administration.general.triggerSeverity.edit.php:62
+#: include/views/administration.general.trigseverity.edit.php:62
 msgid "Average"
 msgstr "Середня"
 
@@ -1439,7 +1439,7 @@ msgstr "Фонове зображення"
 #: include/classes/widgets/CWidgetHelper.php:766
 #: include/classes/widgets/CWidgetHelper.php:1011
 msgid "Bar"
-msgstr ""
+msgstr "Стовпцями"
 
 #: app/views/administration.authentication.edit.php:98
 msgid "Base DN"
@@ -1519,7 +1519,7 @@ msgstr "Ширина рамки"
 
 #: app/controllers/CControllerUserUpdateGeneral.php:93
 msgid "Both passwords must be equal."
-msgstr ""
+msgstr "Обидва паролі мають співпадати."
 
 #: include/views/js/monitoring.sysmaps.js.php:18
 #: include/views/js/monitoring.sysmaps.js.php:119
@@ -1583,11 +1583,11 @@ msgstr "Утилізація CPU у відсотках. Повертає дро�
 
 #: app/views/popup.preproctestedit.view.php:117
 msgid "CRLF"
-msgstr ""
+msgstr "CRLF"
 
 #: include/items.inc.php:1724
 msgid "CSV to JSON"
-msgstr ""
+msgstr "CSV в JSON"
 
 #: include/views/configuration.services.edit.php:82 services.php:40
 msgid "Calculate SLA, acceptable SLA (in %)"
@@ -1630,7 +1630,7 @@ msgstr "Неможливо видалити"
 #: include/views/conf.import.php:127
 #: include/views/js/administration.general.housekeeper.edit.js.php:40
 #: include/views/js/administration.general.trigger.options.js.php:21
-#: include/views/js/administration.general.triggerSeverity.js.php:13
+#: include/views/js/administration.general.trigseverity.js.php:13
 #: include/views/js/configuration.action.edit.js.php:76
 #: include/views/js/configuration.discovery.edit.js.php:147
 #: include/views/js/configuration.discovery.edit.js.php:607
@@ -3797,7 +3797,7 @@ msgstr "Містить"
 #: include/views/administration.general.regularexpressions.edit.php:33
 #: include/views/administration.general.regularexpressions.list.php:32
 #: include/views/administration.general.trigger.options.edit.php:33
-#: include/views/administration.general.triggerSeverity.edit.php:33
+#: include/views/administration.general.trigseverity.edit.php:33
 #: include/views/administration.general.valuemapping.edit.php:33
 #: include/views/administration.general.valuemapping.list.php:35
 #: include/views/administration.general.workingtime.edit.php:31
@@ -4205,7 +4205,7 @@ msgstr "Користувацький скрипт"
 msgid "Custom scripts"
 msgstr "Довільні скрипти"
 
-#: include/views/administration.general.triggerSeverity.edit.php:87
+#: include/views/administration.general.trigseverity.edit.php:87
 msgid "Custom severity names affect all locales and require manual translation!"
 msgstr "Імена користувацьких важливостей впливають на всі мови і потребують ручного перекладу!"
 
@@ -4329,7 +4329,7 @@ msgstr "Дані"
 msgid "Data cache statistics. Cache - one of values (modes: all, float, uint, str, log, text), history (modes: pfree, total, used, free), trend (modes: pfree, total, used, free), text (modes: pfree, total, used, free)."
 msgstr "Статистика кешу даних. Cache - одне із значень (режими: all, float, uint, str, log, text), history (режими: pfree, total, used, free), trends (режими: pfree, total, used, free), text (режими: pfree, total, used, free)."
 
-#: include/classes/graphdraw/CLineGraphDraw.php:2727
+#: include/classes/graphdraw/CLineGraphDraw.php:2735
 #: include/classes/graphdraw/CPieGraphDraw.php:808
 #, c-format
 msgid "Data from %1$s. Generated in %2$s sec."
@@ -4905,7 +4905,7 @@ msgstr "Залежність"
 msgid "Dependent item"
 msgstr "Залежний елемент даних"
 
-#: app/views/popup.generic.php:289 include/triggers.inc.php:2741
+#: app/views/popup.generic.php:294 include/triggers.inc.php:2741
 #: include/views/configuration.services.edit.php:152
 #: include/views/configuration.trigger.prototype.list.php:82
 #: include/views/configuration.triggers.list.php:241
@@ -5094,7 +5094,7 @@ msgid "Disabled"
 msgstr "Дезактивовано"
 
 #: adm.triggerseverities.php:41 adm.triggerseverities.php:42
-#: include/views/administration.general.triggerSeverity.edit.php:78
+#: include/views/administration.general.trigseverity.edit.php:78
 msgid "Disaster"
 msgstr "Критична"
 
@@ -6069,7 +6069,7 @@ msgctxt "maintenance status"
 msgid "Expired"
 msgstr "Завершено"
 
-#: app/views/popup.generic.php:504 include/graphs.inc.php:27
+#: app/views/popup.generic.php:509 include/graphs.inc.php:27
 msgid "Exploded"
 msgstr "Розширений круговий"
 
@@ -6919,8 +6919,8 @@ msgstr "Групи"
 msgid "H:i"
 msgstr "H:i"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1419
-#: include/classes/graphdraw/CLineGraphDraw.php:1426
+#: include/classes/graphdraw/CLineGraphDraw.php:1421
+#: include/classes/graphdraw/CLineGraphDraw.php:1428
 #: include/translateDefines.inc.php:34
 msgid "H:i:s"
 msgstr "H:i:s"
@@ -7044,7 +7044,7 @@ msgid "Hierarchy"
 msgstr "Ієрархія"
 
 #: adm.triggerseverities.php:39 adm.triggerseverities.php:40
-#: include/views/administration.general.triggerSeverity.edit.php:70
+#: include/views/administration.general.trigseverity.edit.php:70
 msgid "High"
 msgstr "Висока"
 
@@ -8742,7 +8742,7 @@ msgstr "Некоректне значення \"%1$s\" в полі \"%2$s\" дл
 msgid "Incorrect value \"%1$s\" in field \"%2$s\" for media type \"%3$s\"."
 msgstr "Некоректне значення \"%1$s\" в полі \"%2$s\" для методу повідомлень \"%3$s\"."
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:219
+#: app/controllers/CControllerPopupPreprocTestSend.php:229
 #: include/classes/validators/CNewValidator.php:117
 #: include/classes/validators/CNewValidator.php:130
 #: include/classes/validators/CNewValidator.php:143
@@ -8950,7 +8950,7 @@ msgstr "Некоректне значення для поля \"%1$s\"."
 #: include/classes/validators/CNewValidator.php:279
 #: include/screens.inc.php:300 include/screens.inc.php:314
 #: include/screens.inc.php:429 include/screens.inc.php:443
-#: include/sounds.inc.php:112 include/validate.inc.php:346 usergrps.php:318
+#: include/sounds.inc.php:113 include/validate.inc.php:346 usergrps.php:318
 #: usergrps.php:358 usergrps.php:361
 #, c-format
 msgid "Incorrect value for field \"%1$s\": %2$s."
@@ -8994,7 +8994,7 @@ msgstr "Інфо"
 
 #: adm.triggerseverities.php:33 adm.triggerseverities.php:34
 #: include/items.inc.php:31
-#: include/views/administration.general.triggerSeverity.edit.php:46
+#: include/views/administration.general.trigseverity.edit.php:46
 msgid "Information"
 msgstr "Інформація"
 
@@ -10373,7 +10373,7 @@ msgstr "Втрачено"
 msgid "Low-level discovery rule in \"not supported\" state"
 msgstr "Правило низькорівневого виявлення в стані \"не підтримується\""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1387
+#: include/classes/graphdraw/CLineGraphDraw.php:1389
 msgid "M"
 msgstr "M"
 
@@ -11996,7 +11996,7 @@ msgstr "Не логічні атрибути більше не використ�
 msgid "None"
 msgstr "Немає"
 
-#: app/views/popup.generic.php:507 include/graphs.inc.php:24
+#: app/views/popup.generic.php:512 include/graphs.inc.php:24
 #: include/items.inc.php:158 include/triggers.inc.php:1282
 #: include/views/configuration.triggers.list.php:71
 #: include/views/monitoring.history.php:224
@@ -12039,7 +12039,7 @@ msgid "Not available"
 msgstr "Недоступний"
 
 #: adm.triggerseverities.php:31 adm.triggerseverities.php:32
-#: include/views/administration.general.triggerSeverity.edit.php:37
+#: include/views/administration.general.trigseverity.edit.php:37
 msgid "Not classified"
 msgstr "Не класифіковано"
 
@@ -13155,7 +13155,7 @@ msgstr "Права доступу можуть бути призначені т�
 msgid "Persian (fa_IR)"
 msgstr "Персидська (fa_IR)"
 
-#: app/views/popup.generic.php:501 include/graphs.inc.php:26
+#: app/views/popup.generic.php:506 include/graphs.inc.php:26
 msgid "Pie"
 msgstr "Круговий"
 
@@ -13315,7 +13315,7 @@ msgstr "Попередній місяць"
 msgid "Previous page"
 msgstr ""
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:219
+#: app/controllers/CControllerPopupPreprocTestSend.php:229
 #: app/views/popup.preproctestedit.view.php:102
 msgid "Previous value"
 msgstr "Попереднє значення"
@@ -14107,22 +14107,22 @@ msgstr "Скинути"
 
 #: include/views/js/administration.general.housekeeper.edit.js.php:37
 #: include/views/js/administration.general.trigger.options.js.php:18
-#: include/views/js/administration.general.triggerSeverity.js.php:10
+#: include/views/js/administration.general.trigseverity.js.php:10
 msgid "Reset all fields to default values?"
 msgstr "Скинути всі поля в значення по замовчуванню?"
 
 #: include/views/js/administration.general.housekeeper.edit.js.php:36
 #: include/views/js/administration.general.trigger.options.js.php:17
-#: include/views/js/administration.general.triggerSeverity.js.php:9
+#: include/views/js/administration.general.trigseverity.js.php:9
 msgid "Reset confirmation"
 msgstr "Скинути підтвердження"
 
 #: include/views/administration.general.housekeeper.edit.php:157
 #: include/views/administration.general.trigger.options.edit.php:102
-#: include/views/administration.general.triggerSeverity.edit.php:96
+#: include/views/administration.general.trigseverity.edit.php:96
 #: include/views/js/administration.general.housekeeper.edit.js.php:46
 #: include/views/js/administration.general.trigger.options.js.php:27
-#: include/views/js/administration.general.triggerSeverity.js.php:19
+#: include/views/js/administration.general.trigseverity.js.php:19
 msgid "Reset defaults"
 msgstr "Скинути по замовчуванню"
 
@@ -14198,7 +14198,7 @@ msgstr ""
 msgid "Result"
 msgstr "Результат"
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:224
+#: app/controllers/CControllerPopupPreprocTestSend.php:234
 #, c-format
 msgid "Result converted to %1$s"
 msgstr ""
@@ -14832,7 +14832,7 @@ msgid "Security name"
 msgstr "Ім'я безпеки"
 
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:97
-#: app/views/monitoring.problem.view.php:132 app/views/popup.generic.php:621
+#: app/views/monitoring.problem.view.php:132 app/views/popup.generic.php:626
 #: app/views/popup.services.php:128 app/views/popup.triggerexpr.php:65
 #: include/classes/html/CMultiSelect.php:79
 #: include/classes/widgets/CWidgetHelper.php:333
@@ -14993,13 +14993,13 @@ msgid "Serif"
 msgstr "Serif"
 
 #: app/controllers/CControllerWidgetClockView.php:85
-#: app/views/administration.script.list.php:81 app/views/popup.generic.php:596
+#: app/views/administration.script.list.php:81 app/views/popup.generic.php:601
 #: include/classes/screens/CScreenClock.php:83
 #: include/views/configuration.host.list.php:137 queue.php:167
 msgid "Server"
 msgstr "Сервер"
 
-#: app/views/administration.script.list.php:84 app/views/popup.generic.php:599
+#: app/views/administration.script.list.php:84 app/views/popup.generic.php:604
 msgid "Server (proxy)"
 msgstr "Сервер (проксі)"
 
@@ -15113,7 +15113,7 @@ msgstr "Сесія завершилась, будь-ласка повторно 
 msgid "Set custom time period"
 msgstr "Задати користувацький період часу"
 
-#: app/controllers/CControllerPopupPreprocTestSend.php:231
+#: app/controllers/CControllerPopupPreprocTestSend.php:241
 #: app/views/popup.preproctestedit.view.js.php:159 include/forms.inc.php:1423
 #: include/views/js/item.preprocessing.js.php:39
 msgid "Set error to"
@@ -15583,7 +15583,7 @@ msgstr "Вкажіть якусь умову в фільтрі щоб бачит
 msgid "Speed"
 msgstr "Швидкість"
 
-#: app/views/popup.generic.php:498 include/graphs.inc.php:25
+#: app/views/popup.generic.php:503 include/graphs.inc.php:25
 #: include/views/monitoring.history.php:225
 msgid "Stacked"
 msgstr "Накладається шарами в стек"
@@ -16621,7 +16621,7 @@ msgstr "Динаміка"
 #: app/controllers/CControllerPopupTriggerWizard.php:221
 #: app/controllers/CControllerPopupTriggerWizard.php:293
 #: app/views/popup.services.php:44 include/actions.inc.php:46
-#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:486
+#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:488
 #: include/events.inc.php:236 include/maps.inc.php:26
 #: include/triggers.inc.php:1254
 #: include/views/configuration.services.edit.php:87
@@ -16820,8 +16820,8 @@ msgid "Trigger recovery expression must contain at least one host:key reference.
 msgstr "Вираз відновлення тригера повинен містити принаймні одне посилання на хост:ключ."
 
 #: include/html.inc.php:776
-#: include/views/administration.general.triggerSeverity.edit.php:25
-#: include/views/administration.general.triggerSeverity.edit.php:93
+#: include/views/administration.general.trigseverity.edit.php:25
+#: include/views/administration.general.trigseverity.edit.php:93
 msgid "Trigger severities"
 msgstr "Важливість тригера"
 
@@ -17319,7 +17319,7 @@ msgstr "Доступний"
 #: include/views/administration.general.other.edit.php:73
 #: include/views/administration.general.regularexpressions.edit.php:144
 #: include/views/administration.general.trigger.options.edit.php:101
-#: include/views/administration.general.triggerSeverity.edit.php:95
+#: include/views/administration.general.trigseverity.edit.php:95
 #: include/views/administration.general.valuemapping.edit.php:105
 #: include/views/administration.general.workingtime.edit.php:44
 #: include/views/administration.usergroups.edit.php:278
@@ -18176,7 +18176,7 @@ msgstr "Ср"
 
 #: adm.triggerseverities.php:35 adm.triggerseverities.php:36
 #: include/items.inc.php:33
-#: include/views/administration.general.triggerSeverity.edit.php:54
+#: include/views/administration.general.trigseverity.edit.php:54
 #: include/views/general.warning.php:21
 msgid "Warning"
 msgstr "Попередження"
@@ -18497,7 +18497,7 @@ msgid "Y axis MAX value must be greater than Y axis MIN value"
 msgstr "Вісь Y МАКС значення має бути більшим ніж вісь Y МІН значення"
 
 #: include/classes/api/services/CGraphGeneral.php:314
-#: include/classes/graphdraw/CLineGraphDraw.php:714
+#: include/classes/graphdraw/CLineGraphDraw.php:716
 msgid "Y axis MAX value must be greater than Y axis MIN value."
 msgstr "МАКС значення вісі Y має бути більшим ніж МІН значення вісі Y."
 
@@ -18895,9 +18895,9 @@ msgstr ""
 msgid "agent"
 msgstr "агент"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1860
+#: include/classes/graphdraw/CLineGraphDraw.php:1862
 #: include/classes/html/CSeverity.php:80
-#: include/classes/pagefilter/CPageFilter.php:767
+#: include/classes/pagefilter/CPageFilter.php:772
 #: include/classes/screens/CScreenHostgroupTriggers.php:109
 #: include/classes/screens/CScreenHostgroupTriggers.php:110
 #: include/classes/screens/CScreenHostTriggers.php:109
@@ -19002,8 +19002,8 @@ msgstr "автореєстрація"
 msgid "auto-registered host"
 msgstr "автоматично зареєстрований вузел мережі"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1842
-#: include/classes/graphdraw/CLineGraphDraw.php:1864
+#: include/classes/graphdraw/CLineGraphDraw.php:1844
+#: include/classes/graphdraw/CLineGraphDraw.php:1866
 #: include/classes/graphdraw/CPieGraphDraw.php:338 include/graphs.inc.php:85
 #: include/graphs.inc.php:98
 #: include/views/js/configuration.graph.edit.js.php:50
@@ -19194,7 +19194,7 @@ msgstr "dayofweek() - День тижня"
 msgid "days"
 msgstr "днів"
 
-#: include/classes/pagefilter/CPageFilter.php:654
+#: include/classes/pagefilter/CPageFilter.php:659
 #: include/classes/setup/CSetupWizard.php:306
 #: include/classes/widgets/CWidgetHelper.php:61
 #: include/views/js/monitoring.slideconf.edit.js.php:14
@@ -19466,7 +19466,7 @@ msgstr ""
 msgid "key is empty"
 msgstr "ключ пустий"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1840
+#: include/classes/graphdraw/CLineGraphDraw.php:1842
 #: include/classes/graphdraw/CPieGraphDraw.php:333 include/forms.inc.php:2228
 #: include/graphs.inc.php:82 include/graphs.inc.php:106
 #: include/maintenances.inc.php:115
@@ -19478,7 +19478,7 @@ msgstr "ост."
 msgid "last() - Last (most recent) T value"
 msgstr "last() - Останнє (найбільш недавнє) значення Т"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1977
+#: include/classes/graphdraw/CLineGraphDraw.php:1979
 msgid "left"
 msgstr "зліва"
 
@@ -19512,9 +19512,9 @@ msgctxt "month short"
 msgid "m"
 msgstr "м"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1387
-#: include/classes/graphdraw/CLineGraphDraw.php:1395
-#: include/classes/graphdraw/CLineGraphDraw.php:1402
+#: include/classes/graphdraw/CLineGraphDraw.php:1389
+#: include/classes/graphdraw/CLineGraphDraw.php:1397
+#: include/classes/graphdraw/CLineGraphDraw.php:1404
 msgid "m-d"
 msgstr "m-d"
 
@@ -19542,8 +19542,8 @@ msgid "matches"
 msgstr "співпадає"
 
 #: include/classes/api/services/CItemGeneral.php:1417
-#: include/classes/graphdraw/CLineGraphDraw.php:1843
-#: include/classes/graphdraw/CLineGraphDraw.php:1857
+#: include/classes/graphdraw/CLineGraphDraw.php:1845
+#: include/classes/graphdraw/CLineGraphDraw.php:1859
 #: include/classes/graphdraw/CPieGraphDraw.php:329 include/forms.inc.php:1327
 #: include/graphs.inc.php:80 include/graphs.inc.php:96
 #: include/views/js/configuration.graph.edit.js.php:51
@@ -19567,8 +19567,8 @@ msgid "maximum number of dependency levels reached"
 msgstr "досягнуто максимальну кількість рівнів залежності"
 
 #: include/classes/api/services/CItemGeneral.php:1417
-#: include/classes/graphdraw/CLineGraphDraw.php:1841
-#: include/classes/graphdraw/CLineGraphDraw.php:1854
+#: include/classes/graphdraw/CLineGraphDraw.php:1843
+#: include/classes/graphdraw/CLineGraphDraw.php:1856
 #: include/classes/graphdraw/CPieGraphDraw.php:325 include/forms.inc.php:1326
 #: include/graphs.inc.php:78 include/graphs.inc.php:94
 #: include/views/js/configuration.graph.edit.js.php:49
@@ -19644,7 +19644,7 @@ msgstr "новий"
 msgid "new event tag name"
 msgstr ""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1935
+#: include/classes/graphdraw/CLineGraphDraw.php:1937
 #: include/classes/graphdraw/CPieGraphDraw.php:359
 msgid "no data"
 msgstr "немає даних"
@@ -19668,8 +19668,8 @@ msgstr "не в"
 
 #: app/controllers/CControllerDashboardView.php:134
 #: hostinventoriesoverview.php:75
-#: include/classes/pagefilter/CPageFilter.php:713
-#: include/classes/pagefilter/CPageFilter.php:767 include/forms.inc.php:980
+#: include/classes/pagefilter/CPageFilter.php:718
+#: include/classes/pagefilter/CPageFilter.php:772 include/forms.inc.php:980
 #: include/views/monitoring.screen.php:63 slides.php:191
 msgid "not selected"
 msgstr "не обрано"
@@ -19784,7 +19784,7 @@ msgstr "регулярний вираз"
 msgid "remember selected"
 msgstr "запам'ятати обране"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1977
+#: include/classes/graphdraw/CLineGraphDraw.php:1979
 msgid "right"
 msgstr "справа"
 
