@@ -150,7 +150,7 @@ A......... [ZBX-16562] fixed configuration.export method in API improperly forma
 .........T [ZBX-16770] fixed value mapping in Template Net HP Comware HH3C SNMP (vitaly)
 .......... [ZBX-16481] fixed spelling issues in the code (arimdjonoks)
 .......PS. [ZBX-16746] fixed support of libcurl version less than 7.38 for Kerberos authentification (akozlovs)
-........S. [ZBX-16650] fgixed empty transaction to database in LLD worker (akozlovs)
+........S. [ZBX-16650] fixed empty transaction to database in LLD worker (akozlovs)
 .......PS. [ZBX-16368] fixed fping double call (akozlovs)
 ...G...PS. [ZBX-16317] fixed log.h is not self-sufficient (akozlovs)
 ...G...PS. [ZBX-16750] fixed broken validation of peer certificate issuer and subject strings in TLS connect, fixed logging (Andris)
