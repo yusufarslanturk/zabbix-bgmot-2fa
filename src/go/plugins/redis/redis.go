@@ -74,7 +74,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		}
 	} else {
 		// Use the default URI if the first param is omitted.
-		uri, err = parseUri(p.options.Uri)
+		uri, err = newUriWithCreds(p.options.Uri, p.options.Password)
 	}
 
 	if err != nil {
