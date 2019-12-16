@@ -29,7 +29,7 @@ import (
 const globChars = "*?[]!"
 
 // configHandler gets an output of 'CONFIG GET [pattern]' command and returns it in JSON format or as a single-value.
-func (p *Plugin) configHandler(conn redisConn, params []string) (interface{}, error) {
+func (p *Plugin) configHandler(conn redisClient, params []string) (interface{}, error) {
 	var (
 		pattern string
 		res     map[string]string
@@ -41,7 +41,7 @@ func (p *Plugin) configHandler(conn redisConn, params []string) (interface{}, er
 		pattern = "*"
 	}
 
-	if err := conn.Do(radix.Cmd(&res, "CONFIG", "GET", pattern)); err != nil {
+	if err := conn.Query(radix.Cmd(&res, "CONFIG", "GET", pattern)); err != nil {
 		p.Errf(err.Error())
 		return nil, errorCannotFetchData
 	}

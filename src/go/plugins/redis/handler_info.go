@@ -107,7 +107,7 @@ func parseRedisInfo(info string) (res redisInfo, err error) {
 }
 
 // infoHandler gets an output of 'INFO' command, parses it and returns it in JSON format.
-func (p *Plugin) infoHandler(conn redisConn, params []string) (interface{}, error) {
+func (p *Plugin) infoHandler(conn redisClient, params []string) (interface{}, error) {
 	var (
 		res     string
 		section infoSection
@@ -119,7 +119,7 @@ func (p *Plugin) infoHandler(conn redisConn, params []string) (interface{}, erro
 		section = "default"
 	}
 
-	if err := conn.Do(radix.Cmd(&res, "INFO", string(section))); err != nil {
+	if err := conn.Query(radix.Cmd(&res, "INFO", string(section))); err != nil {
 		p.Errf(err.Error())
 		return nil, errorCannotFetchData
 	}

@@ -72,7 +72,7 @@ func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
 		}
 	}
 
-	p.connections = NewConnPools(
+	p.connMgr = NewConnManager(
 		time.Duration(p.options.KeepAlive)*time.Second,
 		time.Duration(p.options.Timeout)*time.Second)
 }

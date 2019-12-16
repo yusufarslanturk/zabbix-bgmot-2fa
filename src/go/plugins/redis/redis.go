@@ -44,11 +44,11 @@ var maxParams = map[string]int{
 // Plugin inherits plugin.Base and store plugin-specific data.
 type Plugin struct {
 	plugin.Base
-	connections *connPools
-	options     PluginOptions
+	connMgr *connManager
+	options PluginOptions
 }
 
-type handler func(conn redisConn, params []string) (res interface{}, err error)
+type handler func(conn redisClient, params []string) (res interface{}, err error)
 
 // impl is the pointer to the plugin implementation.
 var impl Plugin
@@ -102,7 +102,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		return nil, errorTooManyParameters
 	}
 
-	conn, err := p.connections.GetConnection(uri)
+	conn, err := p.connMgr.GetConnection(uri)
 	if err != nil {
 		// Special logic of processing connection errors is used if redis.ping is requested
 		// because it must return pingFailed if any error occurred.

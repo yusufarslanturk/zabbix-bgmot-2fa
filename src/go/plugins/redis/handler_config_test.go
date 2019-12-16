@@ -31,7 +31,7 @@ import (
 func TestPlugin_configHandler(t *testing.T) {
 	impl.Configure(&plugin.GlobalOptions{}, nil)
 
-	conn := radix.Stub("", "", func(args []string) interface{} {
+	stubConn := radix.Stub("", "", func(args []string) interface{} {
 		switch strings.ToLower(args[2]) {
 		case "param1":
 			return map[string]string{"param1": "foo"}
@@ -47,10 +47,14 @@ func TestPlugin_configHandler(t *testing.T) {
 		}
 	})
 
-	defer conn.Close()
+	defer stubConn.Close()
+
+	conn := &redisConnStub{
+		client: stubConn,
+	}
 
 	type args struct {
-		conn   redisConn
+		conn   redisClient
 		params []string
 	}
 	tests := []struct {

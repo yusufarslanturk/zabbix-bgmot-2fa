@@ -29,10 +29,10 @@ const (
 )
 
 // pingHandler executes 'PING' command and returns pingOk if a connection is alive or pingFailed otherwise.
-func (p *Plugin) pingHandler(conn redisConn, params []string) (interface{}, error) {
+func (p *Plugin) pingHandler(conn redisClient, params []string) (interface{}, error) {
 	var res string
 
-	if _ = conn.Do(radix.Cmd(&res, "PING")); res != "PONG" {
+	if _ = conn.Query(radix.Cmd(&res, "PING")); res != "PONG" {
 		return pingFailed, nil
 	}
 

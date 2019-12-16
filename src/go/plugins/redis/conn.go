@@ -27,64 +27,82 @@ import (
 	"zabbix.com/pkg/log"
 )
 
-const poolSize = 1
-
 const clientName = "zbx_monitor"
-
-type redisConn interface {
-	Do(a radix.Action) error
-}
 
 type connId [sha512.Size]byte
 
-type pool struct {
-	conn           *radix.Pool
+type redisClient interface {
+	Query(cmd radix.CmdAction) error
+}
+
+type redisConn struct {
+	client         radix.Client
 	uri            URI
 	lastTimeAccess time.Time
 }
 
-// UpdateAccessTime updates the last time pool was accessed.
-func (p *pool) UpdateAccessTime() {
-	p.lastTimeAccess = time.Now()
+// Query runs a bulk command (pipeline): sets a client name at first and then runs a given command.
+func (r *redisConn) Query(cmd radix.CmdAction) error {
+	return r.client.Do(radix.Pipeline(
+		radix.Cmd(nil, "CLIENT", "SETNAME", clientName),
+		cmd),
+	)
+}
+
+// Fake connection just for test purposes.
+type redisConnStub struct {
+	client radix.Client
+}
+
+// Query is the wrapper for radix.Client's Do() function.
+func (r *redisConnStub) Query(cmd radix.CmdAction) error {
+	return r.client.Do(cmd)
+}
+
+// updateAccessTime updates the last time a connection was accessed.
+func (r *redisConn) updateAccessTime() {
+	r.lastTimeAccess = time.Now()
 }
 
 // Thread-safe structure for manage connections.
-type connPools struct {
+type connManager struct {
 	sync.Mutex
-	poolsMutex sync.Mutex
-	pools      map[connId]*pool
-	keepAlive  time.Duration
-	timeout    time.Duration
+	connMutex   sync.Mutex
+	connections map[connId]*redisConn
+	keepAlive   time.Duration
+	timeout     time.Duration
 }
 
-// NewConnPools initializes connPools structure and runs Go Routine that watches for unused connections.
-func NewConnPools(keepAlive, timeout time.Duration) *connPools {
-	pools := &connPools{
-		pools:     make(map[connId]*pool),
-		keepAlive: keepAlive,
-		timeout:   timeout,
+// NewConnManager initializes connManager structure and runs Go Routine that watches for unused connections.
+func NewConnManager(keepAlive, timeout time.Duration) *connManager {
+	connMgr := &connManager{
+		connections: make(map[connId]*redisConn),
+		keepAlive:   keepAlive,
+		timeout:     timeout,
 	}
 
 	// Repeatedly check for unused connections and close them.
 	go func() {
 		for range time.Tick(10 * time.Second) {
-			if err := pools.closeUnused(); err != nil {
-				log.Errf("[%s] Error occurred while closing pool: %s", pluginName, err.Error())
+			if err := connMgr.closeUnused(); err != nil {
+				log.Errf("[%s] Error occurred while closing connection: %s", pluginName, err.Error())
 			}
 		}
 	}()
 
-	return pools
+	return connMgr
 }
 
-// create creates a new connection with given URI and password.
-func (c *connPools) create(uri URI, cid connId) (conn *radix.Pool, err error) {
-	c.poolsMutex.Lock()
-	defer c.poolsMutex.Unlock()
+// create creates a new connection with a given URI and password.
+func (c *connManager) create(uri URI, cid connId) (*redisConn, error) {
+	const poolSize = 1
 
-	if _, ok := c.pools[cid]; ok {
+	c.connMutex.Lock()
+	defer c.connMutex.Unlock()
+
+	if _, ok := c.connections[cid]; ok {
 		// Should never happen.
-		panic("pool already exists")
+		panic("connection already exists")
 	}
 
 	// AuthConnFunc is used as radix.ConnFunc to perform AUTH and set timeout
@@ -95,52 +113,47 @@ func (c *connPools) create(uri URI, cid connId) (conn *radix.Pool, err error) {
 		)
 	}
 
-	conn, err = radix.NewPool(uri.Scheme(), uri.Addr(), poolSize, radix.PoolConnFunc(AuthConnFunc))
+	client, err := radix.NewPool(uri.Scheme(), uri.Addr(), poolSize, radix.PoolConnFunc(AuthConnFunc))
 	if err != nil {
 		return nil, err
 	}
 
-	err = conn.Do(radix.Cmd(nil, "CLIENT", "SETNAME", clientName))
-	if err != nil {
-		return nil, err
-	}
-
-	c.pools[cid] = &pool{
-		conn:           conn,
+	c.connections[cid] = &redisConn{
+		client:         client,
 		uri:            uri,
 		lastTimeAccess: time.Now(),
 	}
 
 	log.Debugf("[%s] Created new connection: %s", pluginName, uri.Addr())
 
-	return conn, nil
+	return c.connections[cid], nil
 }
 
 // get returns a connection with given cid if it exists and also updates lastTimeAccess, otherwise returns nil.
-func (c *connPools) get(cid connId) *radix.Pool {
-	c.poolsMutex.Lock()
-	defer c.poolsMutex.Unlock()
+func (c *connManager) get(cid connId) *redisConn {
+	c.connMutex.Lock()
+	defer c.connMutex.Unlock()
 
-	if pool, ok := c.pools[cid]; ok {
-		pool.UpdateAccessTime()
-		return pool.conn
+	if conn, ok := c.connections[cid]; ok {
+		conn.updateAccessTime()
+		return conn
 	}
 
 	return nil
 }
 
 // CloseUnused closes each connection that has not been accessed at least within the keepalive interval.
-func (c *connPools) closeUnused() (err error) {
+func (c *connManager) closeUnused() (err error) {
 	var uri URI
 
-	c.poolsMutex.Lock()
-	defer c.poolsMutex.Unlock()
+	c.connMutex.Lock()
+	defer c.connMutex.Unlock()
 
-	for cid, pool := range c.pools {
-		if time.Since(pool.lastTimeAccess) > c.keepAlive {
-			if err = pool.conn.Close(); err == nil {
-				uri = pool.uri
-				delete(c.pools, cid)
+	for cid, conn := range c.connections {
+		if time.Since(conn.lastTimeAccess) > c.keepAlive {
+			if err = conn.client.Close(); err == nil {
+				uri = conn.uri
+				delete(c.connections, cid)
 				log.Debugf("[%s] Closed unused connection: %s", pluginName, uri.Addr())
 			}
 		}
@@ -151,7 +164,7 @@ func (c *connPools) closeUnused() (err error) {
 }
 
 // GetConnection returns an existing connection or creates a new one.
-func (c *connPools) GetConnection(uri URI) (conn *radix.Pool, err error) {
+func (c *connManager) GetConnection(uri URI) (conn *redisConn, err error) {
 	cid := createConnectionId(uri)
 
 	c.Lock()

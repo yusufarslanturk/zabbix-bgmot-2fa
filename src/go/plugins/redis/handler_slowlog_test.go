@@ -91,14 +91,18 @@ func Test_getLastSlowlogId(t *testing.T) {
 func TestPlugin_slowlogHandler(t *testing.T) {
 	impl.Configure(&plugin.GlobalOptions{}, nil)
 
-	conn := radix.Stub("", "", func(args []string) interface{} {
+	stubConn := radix.Stub("", "", func(args []string) interface{} {
 		return errors.New("cannot fetch data")
 	})
 
-	defer conn.Close()
+	defer stubConn.Close()
+
+	conn := &redisConnStub{
+		client: stubConn,
+	}
 
 	type args struct {
-		conn   redisConn
+		conn   redisClient
 		params []string
 	}
 	tests := []struct {

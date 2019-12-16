@@ -30,23 +30,35 @@ import (
 func TestPlugin_pingHandler(t *testing.T) {
 	impl.Configure(&plugin.GlobalOptions{}, nil)
 
-	conn := radix.Stub("", "", func(args []string) interface{} {
+	stubConn := radix.Stub("", "", func(args []string) interface{} {
 		return "PONG"
 	})
-	defer conn.Close()
+	defer stubConn.Close()
 
-	brokenConn := radix.Stub("", "", func(args []string) interface{} {
+	conn := &redisConnStub{
+		client: stubConn,
+	}
+
+	brokenStubConn := radix.Stub("", "", func(args []string) interface{} {
 		return ""
 	})
-	defer brokenConn.Close()
+	defer brokenStubConn.Close()
 
-	closedConn := radix.Stub("", "", func(args []string) interface{} {
+	brokenConn := &redisConnStub{
+		client: brokenStubConn,
+	}
+
+	closedStubConn := radix.Stub("", "", func(args []string) interface{} {
 		return ""
 	})
-	closedConn.Close()
+	closedStubConn.Close()
+
+	closedConn := &redisConnStub{
+		client: closedStubConn,
+	}
 
 	type args struct {
-		conn   redisConn
+		conn   redisClient
 		params []string
 	}
 	tests := []struct {
