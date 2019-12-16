@@ -368,7 +368,7 @@ A......... [ZBX-16562] fixed configuration.export method in API improperly forma
 ...G...... [ZBX-15675] added support for more than 64 CPUs in Windows agent (kalimulin)
 .......... [ZBX-16481] fixed spelling issues in the code (arimdjonoks)
 .........T [ZBX-16770] fixed value mapping in Template Net HP Comware HH3C SNMP (vitaly)
-........S. [ZBX-16650] fgixed empty transaction to database in LLD worker (akozlovs)
+........S. [ZBX-16650] fixed empty transaction to database in LLD worker (akozlovs)
 ...G...PS. [ZBX-16534] fixed stdout and stderr redirection after external log rotation (akozlovs)
 .......PS. [ZBX-16368] fixed fping double call (akozlovs)
 ...G...PS. [ZBX-16317] fixed log.h is not self-sufficient (akozlovs)
