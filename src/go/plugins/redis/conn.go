@@ -137,7 +137,7 @@ func (c *connPools) closeUnused() (err error) {
 	defer c.poolsMutex.Unlock()
 
 	for cid, pool := range c.pools {
-		if time.Since(pool.lastTimeAccess) > time.Duration(c.keepAlive)*time.Second {
+		if time.Since(pool.lastTimeAccess) > c.keepAlive {
 			if err = pool.conn.Close(); err == nil {
 				uri = pool.uri
 				delete(c.pools, cid)
