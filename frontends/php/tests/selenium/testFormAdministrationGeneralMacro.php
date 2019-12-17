@@ -447,9 +447,9 @@ class testFormAdministrationGeneralMacro extends CLegacyWebTest {
 		$count = CDBHelper::getCount(
 			'SELECT globalmacroid FROM globalmacro'.
 			' WHERE globalmacroid='.$this->oldGlobalMacroId.
-				' AND macro='.zbx_dbstr($this->updMacro).
-					' AND value='.zbx_dbstr($this->updValue).
-						' AND description='.zbx_dbstr($this->updDescription)
+			' AND macro='.zbx_dbstr($this->updMacro).
+			' AND value='.zbx_dbstr($this->updValue).
+			' AND description='.zbx_dbstr($this->updDescription)
 		);
 		$this->assertEquals(1, $count,
 				'Chuck Norris: Value of the macro has not been updated in the DB.'.

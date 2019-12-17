@@ -20,13 +20,13 @@
 
 require_once 'vendor/autoload.php';
 
-require_once dirname(__FILE__).'/../../include/CLegacyWebTest.php';
+require_once dirname(__FILE__).'/../../include/CWebTest.php';
 require_once dirname(__FILE__).'/../traits/MacrosTrait.php';
 
 /**
  * Base class for Macros tests.
  */
-abstract class testFormMacros extends CLegacyWebTest {
+abstract class testFormMacros extends CWebTest {
 
 	use MacrosTrait;
 
@@ -430,7 +430,6 @@ abstract class testFormMacros extends CLegacyWebTest {
 	 * if there is no any host/template defined macros.
 	 */
 	public function checkInheritedGlobalMacros() {
-
 		// Create two macros arrays: from DB and from Frontend form.
 		$macros = [
 			'database' => CDBHelper::getAll('SELECT macro, value, description FROM globalmacro'),
