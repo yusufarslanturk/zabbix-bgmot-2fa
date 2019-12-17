@@ -1597,7 +1597,9 @@
 		}
 	}
 
-	function startPreloader(widget) {
+	function startPreloader(widget, timeout) {
+		timeout = timeout || widget['preloader_timeout'];
+
 		if (typeof widget['preloader_timeoutid'] !== 'undefined' || typeof widget['preloader_div'] !== 'undefined') {
 			return;
 		}
@@ -1607,7 +1609,7 @@
 
 			showPreloader(widget);
 			widget['content_body'].stop(true, true).fadeTo(widget['preloader_fadespeed'], 0.4);
-		}, widget['preloader_timeout']);
+		}, timeout);
 	}
 
 	function stopPreloader(widget) {
@@ -2273,9 +2275,6 @@
 					return $.Deferred().reject();
 				}
 				else {
-					// No errors, proceed with update.
-					overlayDialogueDestroy('widgetConfg');
-
 					// Set view mode of a reusable widget early to escape focus flickering.
 					if (widget !== null && widget['type'] === type) {
 						setWidgetViewMode(widget, view_mode);
@@ -2308,6 +2307,8 @@
 				});
 			})
 			.then(function(response) {
+				overlayDialogueDestroy('widgetConfg');
+
 				var configuration = {};
 				if ('configuration' in response) {
 					configuration = response['configuration'];
@@ -2379,6 +2380,9 @@
 					widget['header'] = name;
 					widget['fields'] = fields;
 
+					// Set preloader to widget content after overlayDialogueDestroy as fast as we can.
+					startPreloader(widget, 100);
+
 					// View mode was just set after the overlayDialogueDestroy was called in first 'then' section.
 
 					applyWidgetConfiguration($obj, data, widget, configuration);
@@ -2423,7 +2427,7 @@
 				data['options']['updated'] = true;
 			})
 			.always(function() {
-				$save_btn.prop('disabled', true);
+				$save_btn.prop('disabled', false);
 				delete data['options']['updating_config'];
 			});
 	}
