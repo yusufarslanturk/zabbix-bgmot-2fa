@@ -1,3 +1,5 @@
+// +build windows
+
 /*
 ** Zabbix
 ** Copyright (C) 2001-2019 Zabbix SIA
@@ -17,14 +19,18 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package plugins
+package file
 
 import (
-	_ "zabbix.com/plugins/log"
-	_ "zabbix.com/plugins/systemrun"
-	_ "zabbix.com/plugins/vfs/file"
-	_ "zabbix.com/plugins/windows/eventlog"
-	_ "zabbix.com/plugins/zabbix/async"
-	_ "zabbix.com/plugins/zabbix/stats"
-	_ "zabbix.com/plugins/zabbix/sync"
+	"golang.org/x/sys/windows"
 )
+
+type FILE_BASIC_INFO struct {
+	CreationTime   windows.Filetime
+	LastAccessTime windows.Filetime
+	LastWriteTime  windows.Filetime
+	ChangeTime     windows.Filetime
+	FileAttributes uint32
+	// padding
+	_ uint32
+}
