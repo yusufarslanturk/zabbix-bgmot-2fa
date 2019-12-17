@@ -93,10 +93,10 @@ func NewConnManager(keepAlive, timeout time.Duration) *connManager {
 	return connMgr
 }
 
+const poolSize = 1
+
 // create creates a new connection with a given URI and password.
 func (c *connManager) create(uri URI, cid connId) (*redisConn, error) {
-	const poolSize = 1
-
 	c.connMutex.Lock()
 	defer c.connMutex.Unlock()
 

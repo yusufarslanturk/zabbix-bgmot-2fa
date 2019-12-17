@@ -51,11 +51,6 @@ type PluginOptions struct {
 	Sessions map[string]*Session `conf:"optional"`
 }
 
-const (
-	DefaultPort    = "6379"
-	MaxAuthPassLen = 512
-)
-
 // Configure implements the Configurator interface.
 // Initializes configuration structures.
 func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
@@ -76,6 +71,8 @@ func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
 		time.Duration(p.options.KeepAlive)*time.Second,
 		time.Duration(p.options.Timeout)*time.Second)
 }
+
+const MaxAuthPassLen = 512
 
 // Validate implements the Configurator interface.
 // Returns an error if validation of a plugin's configuration is failed.

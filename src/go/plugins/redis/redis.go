@@ -64,7 +64,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	if len(params) > 0 && len(params[0]) > 0 {
 		if isLooksLikeUri(params[0]) {
 			// Use the URI from key
-			uri, err = parseUri(params[0])
+			uri, err = newUriWithCreds(params[0], p.options.Password)
 		} else {
 			if _, ok := p.options.Sessions[params[0]]; !ok {
 				return nil, errorUnknownSession

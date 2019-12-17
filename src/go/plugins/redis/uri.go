@@ -66,6 +66,8 @@ func newUriWithCreds(uri string, password string) (res URI, err error) {
 	return
 }
 
+const DefaultPort = "6379"
+
 // parseUri splits a given URI to scheme, host:port/socket, password and returns a URI structure.
 // It uses DefaultPort if URI does not consist of port. The only allowed schemes are: tcp and unix.
 // If an error occurs it returns error and an empty structure.
