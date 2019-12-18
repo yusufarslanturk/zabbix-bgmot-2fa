@@ -21,7 +21,6 @@ package netif
 
 import (
 	"fmt"
-	"math"
 	"unsafe"
 
 	"golang.org/x/sys/windows"
@@ -40,7 +39,7 @@ func getDevList() (result []msgIfDiscovery, err error) {
 	}
 
 	result = make([]msgIfDiscovery, 0, table.NumEntries)
-	rows := (*[math.MaxInt32]win32.MIB_IF_ROW2)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
+	rows := (*[1 << 16]win32.MIB_IF_ROW2)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
 	for i := range rows {
 		result = append(result, msgIfDiscovery{windows.UTF16ToString(rows[i].Description[:])})
 	}
