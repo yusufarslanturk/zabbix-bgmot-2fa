@@ -21,10 +21,11 @@ package netif
 
 import (
 	"bufio"
-	"encoding/json"
 	"fmt"
 	"strconv"
 	"strings"
+
+	"zabbix.com/pkg/std"
 )
 
 var mapNetStatIn = map[string]uint{
@@ -113,8 +114,8 @@ loop:
 }
 
 func getDevList() (netInterfaces []msgIfDiscovery, err error) {
-	var f stdOs.File
-	if file, err = stdOs.Open("/proc/net/dev"); err != nil {
+	var f std.File
+	if f, err = stdOs.Open("/proc/net/dev"); err != nil {
 		return
 	}
 	defer f.Close()
@@ -122,7 +123,7 @@ func getDevList() (netInterfaces []msgIfDiscovery, err error) {
 	for sLines := bufio.NewScanner(f); sLines.Scan(); {
 		dev := strings.Split(sLines.Text(), ":")
 		if len(dev) > 1 {
-			netInterfaces = append(netInterfaces, msgIfDiscovery{ strings.TrimSpace(dev[0])})
+			netInterfaces = append(netInterfaces, msgIfDiscovery{strings.TrimSpace(dev[0])})
 		}
 	}
 
