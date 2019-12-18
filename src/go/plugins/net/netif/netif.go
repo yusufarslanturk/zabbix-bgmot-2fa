@@ -20,6 +20,7 @@
 package netif
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"zabbix.com/pkg/plugin"
@@ -41,6 +42,10 @@ const (
 	dirOut
 )
 
+type msgIfDiscovery struct {
+	Ifname string `json:"{#IFNAME}"`
+}
+
 // Export -
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
 	var direction dirFlag
@@ -51,7 +56,15 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		if len(params) > 0 {
 			return nil, fmt.Errorf("Too many parameters.")
 		}
-		return getDevList()
+		var devices []msgIfDiscovery
+		if devices, err = getDevList(); err != nil {
+			return
+		}
+		var b []byte
+		if b, err = json.Marshal(devices); err != nil {
+			return
+		}
+		return string(b), nil
 	case "net.if.collisions":
 		if len(params) > 1 {
 			return nil, fmt.Errorf("Too many parameters.")

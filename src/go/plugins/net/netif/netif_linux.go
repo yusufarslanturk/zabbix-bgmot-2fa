@@ -27,10 +27,6 @@ import (
 	"strings"
 )
 
-type msgIfDiscovery struct {
-	Ifname string `json:"{#IFNAME}"`
-}
-
 var mapNetStatIn = map[string]uint{
 	"bytes":      0,
 	"packets":    1,
@@ -116,39 +112,19 @@ loop:
 	return
 }
 
-func getDevList() (string, error) {
-	var netInterfaces []msgIfDiscovery
-	var netInterface msgIfDiscovery
-	var result string
-
-	file, err := stdOs.Open("/proc/net/dev")
-
-	if err != nil {
-		return "", fmt.Errorf("Cannot open /proc/net/dev: %s", err)
+func getDevList() (netInterfaces []msgIfDiscovery, err error) {
+	var f stdOs.File
+	if file, err = stdOs.Open("/proc/net/dev"); err != nil {
+		return
 	}
+	defer f.Close()
 
-	defer file.Close()
-
-	for sLines := bufio.NewScanner(file); sLines.Scan(); {
+	for sLines := bufio.NewScanner(f); sLines.Scan(); {
 		dev := strings.Split(sLines.Text(), ":")
-
 		if len(dev) > 1 {
-			netInterface.Ifname = strings.TrimSpace(dev[0])
-			netInterfaces = append(netInterfaces, netInterface)
+			netInterfaces = append(netInterfaces, msgIfDiscovery{ strings.TrimSpace(dev[0])})
 		}
 	}
 
-	if len(netInterfaces) > 0 {
-		req, err := json.Marshal(netInterfaces)
-
-		if err != nil {
-			return "", fmt.Errorf("Cannot obtain network interfaces from /proc/net/dev: %s", err)
-		}
-
-		result = string(req)
-	} else {
-		result = "[]"
-	}
-
-	return result, nil
+	return netInterfaces, nil
 }
