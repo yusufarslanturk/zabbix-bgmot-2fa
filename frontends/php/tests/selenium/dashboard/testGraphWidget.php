@@ -606,7 +606,7 @@ class testGraphWidget extends CWebTest {
 					'Axes' => [
 						'id:lefty_min' => 'abc'
 					],
-					'error' => 'Invalid parameter "Min": a number is expected.'
+					'error' => 'Invalid parameter "Left Y/Min": a number is expected.'
 				]
 			],
 			[
@@ -614,7 +614,7 @@ class testGraphWidget extends CWebTest {
 					'Axes' => [
 						'id:lefty_max' => 'abc'
 					],
-					'error' => 'Invalid parameter "Max": a number is expected.'
+					'error' => 'Invalid parameter "Left Y/Max": a number is expected.'
 				]
 			],
 			[
@@ -623,7 +623,7 @@ class testGraphWidget extends CWebTest {
 						'id:lefty_min' => '10',
 						'id:lefty_max' => '5'
 					],
-					'error' => 'Invalid parameter "Max": Left Y axis MAX value must be greater than Y axis MIN value.'
+					'error' => 'Invalid parameter "Left Y/Max": Y axis MAX value must be greater than Y axis MIN value.'
 				]
 			],
 			[
@@ -632,7 +632,7 @@ class testGraphWidget extends CWebTest {
 						'id:lefty_min' => '-5',
 						'id:lefty_max' => '-10'
 					],
-					'error' => 'Invalid parameter "Max": Left Y axis MAX value must be greater than Y axis MIN value.'
+					'error' => 'Invalid parameter "Left Y/Max": Y axis MAX value must be greater than Y axis MIN value.'
 				]
 			],
 			// Change default Y-axis option on Right.
@@ -646,7 +646,7 @@ class testGraphWidget extends CWebTest {
 					'Axes' => [
 						'id:righty_min' => 'abc'
 					],
-					'error' => 'Invalid parameter "Min": a number is expected.'
+					'error' => 'Invalid parameter "Right Y/Min": a number is expected.'
 				]
 			],
 			[
@@ -659,7 +659,7 @@ class testGraphWidget extends CWebTest {
 					'Axes' => [
 						'id:righty_max' => 'abc'
 					],
-					'error' => 'Invalid parameter "Max": a number is expected.'
+					'error' => 'Invalid parameter "Right Y/Max": a number is expected.'
 				]
 			],
 			[
@@ -673,7 +673,7 @@ class testGraphWidget extends CWebTest {
 						'id:righty_min' => '10',
 						'id:righty_max' => '5'
 					],
-					'error' => 'Invalid parameter "Max": Right Y axis MAX value must be greater than Y axis MIN value.'
+					'error' => 'Invalid parameter "Right Y/Max": Y axis MAX value must be greater than Y axis MIN value.'
 				]
 			],
 			[
@@ -687,7 +687,7 @@ class testGraphWidget extends CWebTest {
 						'id:righty_min' => '-5',
 						'id:righty_max' => '-10'
 					],
-					'error' => 'Invalid parameter "Max": Right Y axis MAX value must be greater than Y axis MIN value.'
+					'error' => 'Invalid parameter "Right Y/Max": Y axis MAX value must be greater than Y axis MIN value.'
 				]
 			],
 			// Both axes validation.
@@ -708,8 +708,8 @@ class testGraphWidget extends CWebTest {
 						'id:righty_max' => 'abc'
 					],
 					'error' => [
-						'Invalid parameter "Max": a number is expected.',
-						'Invalid parameter "Max": a number is expected.'
+						'Invalid parameter "Left Y/Max": a number is expected.',
+						'Invalid parameter "Right Y/Max": a number is expected.'
 					]
 				]
 			],
@@ -732,8 +732,8 @@ class testGraphWidget extends CWebTest {
 						'id:righty_max' => '5'
 					],
 					'error' => [
-						'Invalid parameter "Max": Left Y axis MAX value must be greater than Y axis MIN value.',
-						'Invalid parameter "Max": Right Y axis MAX value must be greater than Y axis MIN value.'
+						'Invalid parameter "Left Y/Max": Y axis MAX value must be greater than Y axis MIN value.',
+						'Invalid parameter "Right Y/Max": Y axis MAX value must be greater than Y axis MIN value.'
 					]
 				]
 			],
@@ -756,10 +756,10 @@ class testGraphWidget extends CWebTest {
 						'id:righty_max' => '('
 					],
 					'error' => [
-						'Invalid parameter "Min": a number is expected.',
-						'Invalid parameter "Min": a number is expected.',
-						'Invalid parameter "Max": a number is expected.',
-						'Invalid parameter "Max": a number is expected.'
+						'Invalid parameter "Left Y/Min": a number is expected.',
+						'Invalid parameter "Left Y/Max": a number is expected.',
+						'Invalid parameter "Right Y/Min": a number is expected.',
+						'Invalid parameter "Right Y/Max": a number is expected.'
 					]
 				]
 			]
