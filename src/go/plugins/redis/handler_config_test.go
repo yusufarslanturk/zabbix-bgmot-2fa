@@ -49,7 +49,7 @@ func TestPlugin_configHandler(t *testing.T) {
 
 	defer stubConn.Close()
 
-	conn := &redisConnStub{
+	conn := &redisConn{
 		client: stubConn,
 	}
 

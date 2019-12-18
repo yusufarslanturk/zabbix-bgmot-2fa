@@ -35,7 +35,7 @@ func TestPlugin_pingHandler(t *testing.T) {
 	})
 	defer stubConn.Close()
 
-	conn := &redisConnStub{
+	conn := &redisConn{
 		client: stubConn,
 	}
 
@@ -44,7 +44,7 @@ func TestPlugin_pingHandler(t *testing.T) {
 	})
 	defer brokenStubConn.Close()
 
-	brokenConn := &redisConnStub{
+	brokenConn := &redisConn{
 		client: brokenStubConn,
 	}
 
@@ -53,7 +53,7 @@ func TestPlugin_pingHandler(t *testing.T) {
 	})
 	closedStubConn.Close()
 
-	closedConn := &redisConnStub{
+	closedConn := &redisConn{
 		client: closedStubConn,
 	}
 

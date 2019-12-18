@@ -27,8 +27,6 @@ import (
 	"zabbix.com/pkg/log"
 )
 
-const clientName = "zbx_monitor"
-
 type connId [sha512.Size]byte
 
 type redisClient interface {
@@ -41,21 +39,8 @@ type redisConn struct {
 	lastTimeAccess time.Time
 }
 
-// Query runs a bulk command (pipeline): sets a client name at first and then runs a given command.
+// Query wraps the radix.Client.Do function.
 func (r *redisConn) Query(cmd radix.CmdAction) error {
-	return r.client.Do(radix.Pipeline(
-		radix.Cmd(nil, "CLIENT", "SETNAME", clientName),
-		cmd),
-	)
-}
-
-// Fake connection just for test purposes.
-type redisConnStub struct {
-	client radix.Client
-}
-
-// Query is the wrapper for radix.Client's Do() function.
-func (r *redisConnStub) Query(cmd radix.CmdAction) error {
 	return r.client.Do(cmd)
 }
 
