@@ -27,14 +27,17 @@ trait FilterTrait {
 
 	protected $filter_selector = 'id:filter-tags';
 
+	/**
+	 * Set custom selector for filter table.
+	 *
+	 * @param string $selector    filter table selector
+	 */
 	public function setFilterSelector($selector) {
 		$this->filter_selector = $selector;
 	}
 
 	/**
 	 * Get tag table element with mapping set.
-	 *
-	 * @param type	  $selector	   tags table selector
 	 *
 	 * @return CMultifieldTable
 	 */
@@ -63,8 +66,7 @@ trait FilterTrait {
 	/**
 	 * Add new tag, select tag operator, name and value.
 	 *
-	 * @param array   $tags        tag operator, name and value
-	 * @param type	  $selector	   tags table selector
+	 * @param array   $tags   tag operator, name and value
 	 *
 	 * @return CMultifieldTablelement
 	 */

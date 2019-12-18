@@ -27,12 +27,19 @@ trait MacrosTrait {
 
 	protected $table_selector = 'id:tbl_macros';
 
+	/**
+	 * Set custom selector for macros table.
+	 *
+	 * @param string $selector    macros table selector
+	 */
 	public function setTableSelector($selector) {
 		$this->table_selector = $selector;
 	}
 
 	/**
 	 * Get macros table element with mapping set.
+	 *
+	 * @param string $value_column    value column header
 	 *
 	 * @return CMultifieldTable
 	 */

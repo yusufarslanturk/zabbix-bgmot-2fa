@@ -27,6 +27,11 @@ trait TagTrait {
 
 	protected $table_selector = 'id:tags-table';
 
+	/**
+	 * Set custom selector for tag table.
+	 *
+	 * @param string $selector    tag table selector
+	 */
 	public function setTableSelector($selector) {
 		$this->table_selector = $selector;
 	}
