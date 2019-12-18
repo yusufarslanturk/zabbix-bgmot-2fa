@@ -65,9 +65,7 @@ class CControllerHostMacrosList extends CController {
 			$macros = mergeInheritedMacros($macros, getInheritedMacros($this->getInput('templateids', [])));
 		}
 
-		if ($macros) {
-			$macros = array_values(order_macros($macros, 'macro'));
-		}
+		$macros = array_values(order_macros($macros, 'macro'));
 
 		if (!$macros && !$readonly) {
 			$macro = ['macro' => '', 'value' => '', 'description' => ''];
