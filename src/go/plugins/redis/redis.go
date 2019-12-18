@@ -123,5 +123,5 @@ func init() {
 		keyInfo, "Returns output of INFO command.",
 		keyPing, "Test if connection is alive or not.",
 		keyConfig, "Returns configuration parameters of Redis server.",
-		keySlowlog, "Returns the number of slow log entries since Redis was started.")
+		keySlowlog, "Returns the number of slow log entries since Redis has been started.")
 }

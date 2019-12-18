@@ -27,6 +27,8 @@ import (
 	"zabbix.com/pkg/log"
 )
 
+const clientName = "zbx_monitor"
+
 type connId [sha512.Size]byte
 
 type redisClient interface {
@@ -91,11 +93,17 @@ func (c *connManager) create(uri URI, cid connId) (*redisConn, error) {
 	}
 
 	// AuthConnFunc is used as radix.ConnFunc to perform AUTH and set timeout
-	AuthConnFunc := func(scheme, addr string) (radix.Conn, error) {
-		return radix.Dial(scheme, addr,
+	AuthConnFunc := func(scheme, addr string) (conn radix.Conn, err error) {
+		conn, err = radix.Dial(scheme, addr,
 			radix.DialTimeout(c.timeout),
-			radix.DialAuthPass(uri.Password()),
-		)
+			radix.DialAuthPass(uri.Password()))
+
+		// Set name for connection. It will be showed in "client list" output.
+		if err == nil {
+			err = conn.Do(radix.Cmd(nil, "CLIENT", "SETNAME", clientName))
+		}
+
+		return
 	}
 
 	client, err := radix.NewPool(uri.Scheme(), uri.Addr(), poolSize, radix.PoolConnFunc(AuthConnFunc))
