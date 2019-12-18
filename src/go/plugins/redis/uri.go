@@ -123,5 +123,5 @@ func validateUri(uri string) (err error) {
 
 // isUri returns true if s is URI or false if not
 func isLooksLikeUri(s string) bool {
-	return strings.Contains(s, "://")
+	return strings.Contains(s, "tcp://") || strings.Contains(s, "unix:/")
 }

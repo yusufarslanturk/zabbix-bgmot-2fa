@@ -313,7 +313,7 @@ func Test_validateUri(t *testing.T) {
 		},
 		{
 			"Should fail when a malformed URI is given",
-			args{"foobar"},
+			args{"tcp:/localhost:6379"},
 			true,
 		},
 	}
@@ -336,13 +336,18 @@ func Test_isLooksLikeUri(t *testing.T) {
 		want bool
 	}{
 		{
-			"Should return true if it is URI",
-			args{"unix:///var/run/redis.sock"},
+			"Should return true if it is URI with tcp scheme",
+			args{"tcp://localhost:6379"},
+			true,
+		},
+		{
+			"Should return true if it is URI with unix scheme",
+			args{"unix:/var/run/redis.sock"},
 			true,
 		},
 		{
 			"Should return false if it is not URI",
-			args{"//foobar:/"},
+			args{"testSession"},
 			false,
 		},
 	}
