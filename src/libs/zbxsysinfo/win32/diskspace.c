@@ -394,6 +394,7 @@ static int	vfs_fs_get(AGENT_REQUEST *request, AGENT_RESULT *result,  HANDLE time
 		if (FAIL == add_fs_to_vector(&mntpoints, mount_paths.values[i], &error))
 		{
 			zabbix_log(LOG_LEVEL_DEBUG, "%s", error);
+			zbx_free(error);
 			continue;
 		}
 	}
