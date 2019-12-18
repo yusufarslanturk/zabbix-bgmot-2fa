@@ -34,6 +34,16 @@ const (
 	fileBasicInfo = 0 // FILE_BASIC_INFO
 )
 
+type FILE_BASIC_INFO struct {
+	CreationTime   windows.Filetime
+	LastAccessTime windows.Filetime
+	LastWriteTime  windows.Filetime
+	ChangeTime     windows.Filetime
+	FileAttributes uint32
+	// padding
+	_ uint32
+}
+
 // Export -
 func (p *Plugin) exportTime(params []string) (result interface{}, err error) {
 	if len(params) > 2 || len(params) == 0 {
