@@ -190,6 +190,7 @@ int	main(int argc, char **argv)
 				break;
 			case 'h':
 				ret = SUCCEED;
+				ZBX_FALLTHROUGH;
 			default:
 				usage();
 				goto out;

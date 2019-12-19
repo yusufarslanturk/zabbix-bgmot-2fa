@@ -33,7 +33,8 @@ AGENT_SUBDIRS = \
 	zabbix_get \
 	zabbix_sender \
 	zabbix_js
-else
+endif
+
 if AGENT2
 if !AGENT 
 AGENT_SUBDIRS = zabbix_agent
