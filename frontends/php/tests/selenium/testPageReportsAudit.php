@@ -189,13 +189,13 @@ class testPageReportsAudit extends CLegacyWebTest {
 	public function testPageReportsAudit_UpdateMacroDescription() {
 		// Update Macro description.
 		$this->page->login()->open('adm.macros.php');
-		$form = $this->query('name:macrosForm')->asForm()->one();
+		$form = $this->query('name:macrosForm')->waitUntilVisible()->asForm()->one();
 
 		$macros = [
 			[
 				'action' => USER_ACTION_UPDATE,
 				'index' => 0,
-				'Description' => 'New Updated Description'
+				'description' => 'New Updated Description'
 			]
 		];
 
