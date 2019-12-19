@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-15 01:44+0200\n"
-"PO-Revision-Date: 2019-12-13 06:14+0300\n"
+"PO-Revision-Date: 2019-12-19 05:37+0300\n"
 "Last-Translator: Atsushi <a.tanaka77@gmail.com>\n"
 "Language-Team: Zabbix\n"
 "Language: ja\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1576210473.000000\n"
+"X-POOTLE-MTIME: 1576726674.000000\n"
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -13880,7 +13880,7 @@ msgstr "リクエストボディのタイプ"
 
 #: host_discovery.php:309 host_discovery.php:647 items.php:972 items.php:1447
 msgid "Request sent successfully"
-msgstr "リスエストが送信できました"
+msgstr "リクエストを送信しました"
 
 #: include/views/configuration.host.discovery.edit.php:145
 #: include/views/configuration.item.edit.php:183
@@ -17543,7 +17543,7 @@ msgstr "VMwareデータストアのバイト単位かトータルからのパー
 
 #: include/classes/items/CHelpItems.php:727
 msgid "VMware datastore hypervisors list, <url> - VMware service URL, <datastore> - datastore name"
-msgstr "VMwareデータストアのハイパーバイザーのリスト、<url> - VMwareサービスURL>、<datastore> - データストア名"
+msgstr "VMwareデータストアのハイパーバイザーのリスト、<url> - VMwareサービスURL、<datastore> - データストア名"
 
 #: include/classes/items/CHelpItems.php:715
 msgid "VMware datastore read statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
