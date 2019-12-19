@@ -65,7 +65,6 @@ type MIB_IFROW struct {
 
 type MIB_IFTABLE struct {
 	NumEntries uint32
-	_          [4]byte
 	Table      [ANY_SIZE]MIB_IFROW
 }
 
@@ -125,4 +124,18 @@ type MIB_IF_TABLE2 struct {
 	NumEntries uint32
 	_          [4]byte
 	Table      [ANY_SIZE]MIB_IF_ROW2
+}
+
+type MIB_IPADDRROW struct {
+	Addr      uint32
+	Index     uint32
+	Mask      uint32
+	BCastAddr uint32
+	ReasmSize uint32
+	_         uint16
+	_         uint16
+}
+type MIB_IPADDRTABLE struct {
+	NumEntries uint32
+	Table      [ANY_SIZE]MIB_IPADDRROW
 }

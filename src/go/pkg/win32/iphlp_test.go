@@ -13,33 +13,32 @@ import (
 func TestGetIfTable(t *testing.T) {
 	//	var table MIB_IFTABLE
 	//	var buf []byte
-	var size uint32
 
-	ok, err := GetIfTable(nil, &size, false)
+	size, err := GetIfTable(nil, 0, false)
 
 	if err != nil {
 		t.Errorf("%s", err)
 		return
 	}
 
-	if !ok {
+	if size > 0 {
 		fmt.Printf("size: %d\n", size)
 	}
 
 	buf := make([]byte, size)
 	table := (*MIB_IFTABLE)(unsafe.Pointer(&buf[0]))
-	ok, err = GetIfTable(table, &size, false)
+	size2, err2 := GetIfTable(table, size, false)
 
-	if err != nil {
+	if err2 != nil {
 		t.Errorf("%s", err)
 		return
 	}
 
-	if !ok {
-		fmt.Printf("size: %d\n", size)
+	if size2 > size {
+		fmt.Printf("size: %d\n", size2)
 	} else {
 		fmt.Printf("entries: %d\n", table.NumEntries)
-		rows := (*[math.MaxInt32]MIB_IFROW)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
+		rows := (*[1 << 10]MIB_IFROW)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
 
 		for i := range rows {
 			row := &rows[i]
@@ -67,4 +66,33 @@ func TestGetIfTable2(t *testing.T) {
 	}
 
 	FreeMibTable(table)
+}
+
+func TestGetIpAddrTable(t *testing.T) {
+	size, err := GetIpAddrTable(nil, 0, false)
+
+	if err != nil {
+		t.Errorf("%s", err)
+		return
+	}
+
+	if size > 0 {
+		fmt.Printf("size: %d\n", size)
+	}
+
+	buf := make([]byte, size)
+	table := (*MIB_IPADDRTABLE)(unsafe.Pointer(&buf[0]))
+	size2, err2 := GetIpAddrTable(table, size, false)
+
+	if err2 != nil {
+		t.Errorf("%s", err)
+		return
+	}
+
+	if size2 > size {
+		t.Errorf("New returned size %d is not equal to the requested %d", size2, size)
+		t.Fail()
+	}
+
+	fmt.Printf("entries: %d\n", table.NumEntries)
 }
