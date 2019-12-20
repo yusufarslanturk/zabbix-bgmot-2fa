@@ -21,14 +21,15 @@
 
 package netif
 
-import "fmt"
+import (
+	"fmt"
 
-func getNetStats(networkIf string, statName string, dir dirFlag) (result uint64, err error) {
-	err = fmt.Errorf("Unsupported metric.")
-	return
+	"zabbix.com/pkg/plugin"
+)
+
+func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
+	return nil, fmt.Errorf("Unsupported metric.")
 }
 
-func getDevList() (string, error) {
-
-	return "", fmt.Errorf("Unsupported metric.")
+func init() {
 }

@@ -4,7 +4,6 @@ package win32
 
 import (
 	"fmt"
-	"math"
 	"syscall"
 	"testing"
 	"unsafe"
@@ -39,7 +38,7 @@ func TestGetIfTable(t *testing.T) {
 		fmt.Printf("size: %d\n", size)
 	} else {
 		fmt.Printf("entries: %d\n", table.NumEntries)
-		rows := (*[math.MaxInt32]MIB_IFROW)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
+		rows := (*[1 << 16]MIB_IFROW)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
 
 		for i := range rows {
 			row := &rows[i]
@@ -59,7 +58,7 @@ func TestGetIfTable2(t *testing.T) {
 
 	fmt.Printf("entries: %d\n", table.NumEntries)
 
-	rows := (*[math.MaxInt32]MIB_IF_ROW2)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
+	rows := (*[1 << 16]MIB_IF_ROW2)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
 
 	for i := range rows {
 		row := &rows[i]

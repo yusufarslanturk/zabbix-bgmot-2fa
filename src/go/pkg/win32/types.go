@@ -65,7 +65,6 @@ type MIB_IFROW struct {
 
 type MIB_IFTABLE struct {
 	NumEntries uint32
-	_          [4]byte
 	Table      [ANY_SIZE]MIB_IFROW
 }
 
