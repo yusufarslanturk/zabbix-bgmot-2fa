@@ -23,12 +23,17 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net"
 	"unsafe"
 
 	"golang.org/x/sys/windows"
 	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/std"
 	"zabbix.com/pkg/win32"
+)
+
+const (
+	errorEmptyIpTable = "Empty IP address table returned."
 )
 
 func (p *Plugin) getNetStats(networkIf string, statName string, dir dirFlag) (result uint64, err error) {
@@ -41,19 +46,97 @@ func (p *Plugin) getDevDiscovery() (devices []msgIfDiscovery, err error) {
 	if table, err = win32.GetIfTable2(); err != nil {
 		return
 	}
+	defer win32.FreeMibTable(table)
 
 	devices = make([]msgIfDiscovery, 0, table.NumEntries)
 	rows := (*[1 << 16]win32.MIB_IF_ROW2)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
 	for i := range rows {
 		devices = append(devices, msgIfDiscovery{windows.UTF16ToString(rows[i].Description[:])})
 	}
-	win32.FreeMibTable(table)
 
 	return
 }
 
+func (p *Plugin) getIfType(iftype uint32) string {
+	switch iftype {
+	case windows.IF_TYPE_OTHER:
+		return "Other"
+	case windows.IF_TYPE_ETHERNET_CSMACD:
+		return "Ethernet"
+	case windows.IF_TYPE_ISO88025_TOKENRING:
+		return "Token Ring"
+	case windows.IF_TYPE_PPP:
+		return "PPP"
+	case windows.IF_TYPE_SOFTWARE_LOOPBACK:
+		return "Software Loopback"
+	case windows.IF_TYPE_ATM:
+		return "ATM"
+	case windows.IF_TYPE_IEEE80211:
+		return "IEEE 802.11 Wireless"
+	case windows.IF_TYPE_TUNNEL:
+		return "Tunnel type encapsulation"
+	case windows.IF_TYPE_IEEE1394:
+		return "IEEE 1394 Firewire"
+	default:
+		return "unknown"
+	}
+}
+
+func (p *Plugin) getAdminStatus(status int32) string {
+	switch status {
+	case 0:
+		return "disabled"
+	case 1:
+		return "enabled"
+	default:
+		return "unknown"
+	}
+}
+
+func (p *Plugin) getIP(index uint32, ips []win32.MIB_IPADDRROW) string {
+	for i := range ips {
+		if ips[i].Index == index {
+			b := (*[4]byte)(unsafe.Pointer(&ips[i].Addr))
+			ip := net.IPv4(b[0], b[1], b[2], b[3])
+			return fmt.Sprintf(" %-15s", ip.String())
+		}
+	}
+	return " -"
+}
+
 func (p *Plugin) getDevList() (devices string, err error) {
-	err = fmt.Errorf("Not implemented.")
+	var ifTable *win32.MIB_IF_TABLE2
+	if ifTable, err = win32.GetIfTable2(); err != nil {
+		return
+	}
+	defer win32.FreeMibTable(ifTable)
+	ifs := (*[1 << 16]win32.MIB_IF_ROW2)(unsafe.Pointer(&ifTable.Table[0]))[:ifTable.NumEntries:ifTable.NumEntries]
+
+	var ipTable *win32.MIB_IPADDRTABLE
+	var sizeIn, sizeOut uint32
+	if sizeOut, err = win32.GetIpAddrTable(nil, 0, false); err != nil {
+		return
+	}
+	if sizeOut == 0 {
+		return "", errors.New(errorEmptyIpTable)
+	}
+	for sizeOut > sizeIn {
+		sizeIn = sizeOut
+		buf := make([]byte, sizeIn)
+		ipTable = (*win32.MIB_IPADDRTABLE)(unsafe.Pointer(&buf[0]))
+		if sizeOut, err = win32.GetIpAddrTable(ipTable, sizeIn, false); err != nil {
+			return
+		}
+	}
+	ips := (*[1 << 16]win32.MIB_IPADDRROW)(unsafe.Pointer(&ipTable.Table[0]))[:ipTable.NumEntries:ipTable.NumEntries]
+
+	for i := range ifs {
+		devices += fmt.Sprintf("%-25s", p.getIfType(ifs[i].Type))
+		devices += fmt.Sprintf(" %-8s", p.getAdminStatus(ifs[i].AdminStatus))
+		devices += p.getIP(ifs[i].InterfaceIndex, ips)
+		devices += fmt.Sprintf(" %s\n", windows.UTF16ToString(ifs[i].Description[:]))
+	}
+
 	return
 }
 
