@@ -37,11 +37,7 @@ func TestGetIfTable(t *testing.T) {
 		fmt.Printf("size: %d\n", size2)
 	} else {
 		fmt.Printf("entries: %d\n", table.NumEntries)
-<<<<<<< HEAD
 		rows := (*[1 << 16]MIB_IFROW)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
-=======
-		rows := (*[1 << 10]MIB_IFROW)(unsafe.Pointer(&table.Table[0]))[:table.NumEntries:table.NumEntries]
->>>>>>> b721558fa48a55298e59f4e19187818da0f285f9
 
 		for i := range rows {
 			row := &rows[i]
