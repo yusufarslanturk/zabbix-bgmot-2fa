@@ -34,11 +34,106 @@ import (
 
 const (
 	errorEmptyIpTable = "Empty IP address table returned."
+	errorCannotFindIf = "Cannot obtain network interface information."
 )
 
-func (p *Plugin) getNetStats(networkIf string, statName string, dir dirFlag) (result uint64, err error) {
-	err = fmt.Errorf("Not implemented.")
+func (p *Plugin) nToIP(addr uint32) net.IP {
+	b := (*[4]byte)(unsafe.Pointer(&addr))
+	return net.IPv4(b[0], b[1], b[2], b[3])
+}
+
+func (p *Plugin) getIfRowByIP(ipaddr string, ifs []win32.MIB_IF_ROW2) (row *win32.MIB_IF_ROW2) {
+	var ip net.IP
+	if ip = net.ParseIP(ipaddr); ip == nil {
+		return
+	}
+
+	var ipTable *win32.MIB_IPADDRTABLE
+	var sizeIn, sizeOut uint32
+	var err error
+	if sizeOut, err = win32.GetIpAddrTable(nil, 0, false); err != nil {
+		return
+	}
+	if sizeOut == 0 {
+		return
+	}
+	for sizeOut > sizeIn {
+		sizeIn = sizeOut
+		buf := make([]byte, sizeIn)
+		ipTable = (*win32.MIB_IPADDRTABLE)(unsafe.Pointer(&buf[0]))
+		if sizeOut, err = win32.GetIpAddrTable(ipTable, sizeIn, false); err != nil {
+			return
+		}
+	}
+	ips := (*[1 << 16]win32.MIB_IPADDRROW)(unsafe.Pointer(&ipTable.Table[0]))[:ipTable.NumEntries:ipTable.NumEntries]
+
+	for i := range ips {
+		if ip.Equal(p.nToIP(ips[i].Addr)) {
+			for j := range ifs {
+				if ifs[j].InterfaceIndex == ips[i].Index {
+					return &ifs[j]
+				}
+			}
+		}
+	}
 	return
+}
+
+func (p *Plugin) getNetStats(networkIf string, statName string, dir dirFlag) (result uint64, err error) {
+	var ifTable *win32.MIB_IF_TABLE2
+	if ifTable, err = win32.GetIfTable2(); err != nil {
+		return
+	}
+	defer win32.FreeMibTable(ifTable)
+	ifs := (*[1 << 16]win32.MIB_IF_ROW2)(unsafe.Pointer(&ifTable.Table[0]))[:ifTable.NumEntries:ifTable.NumEntries]
+
+	var row *win32.MIB_IF_ROW2
+	for i := range ifs {
+		if networkIf == windows.UTF16ToString(ifs[i].Description[:]) {
+			row = &ifs[i]
+		}
+	}
+	if row == nil {
+		row = p.getIfRowByIP(networkIf, ifs)
+	}
+	if row == nil {
+		return 0, errors.New(errorCannotFindIf)
+	}
+
+	var value uint64
+	switch statName {
+	case "bytes":
+		if dir|dirIn != 0 {
+			value += row.InOctets
+		}
+		if dir|dirOut != 0 {
+			value += row.OutOctets
+		}
+	case "packets":
+		if dir|dirIn != 0 {
+			value += row.InUcastPkts
+		}
+		if dir|dirOut != 0 {
+			value += row.OutUcastPkts
+		}
+	case "errors":
+		if dir|dirIn != 0 {
+			value += row.InErrors
+		}
+		if dir|dirOut != 0 {
+			value += row.OutErrors
+		}
+	case "dropped":
+		if dir|dirIn != 0 {
+			value += row.InDiscards
+		}
+		if dir|dirOut != 0 {
+			value += row.OutDiscards
+		}
+	default:
+		return 0, errors.New(errorInvalidSecondParam)
+	}
+	return value, nil
 }
 
 func (p *Plugin) getDevDiscovery() (devices []msgIfDiscovery, err error) {
@@ -53,7 +148,6 @@ func (p *Plugin) getDevDiscovery() (devices []msgIfDiscovery, err error) {
 	for i := range rows {
 		devices = append(devices, msgIfDiscovery{windows.UTF16ToString(rows[i].Description[:])})
 	}
-
 	return
 }
 
@@ -96,9 +190,7 @@ func (p *Plugin) getAdminStatus(status int32) string {
 func (p *Plugin) getIP(index uint32, ips []win32.MIB_IPADDRROW) string {
 	for i := range ips {
 		if ips[i].Index == index {
-			b := (*[4]byte)(unsafe.Pointer(&ips[i].Addr))
-			ip := net.IPv4(b[0], b[1], b[2], b[3])
-			return fmt.Sprintf(" %-15s", ip.String())
+			return fmt.Sprintf(" %-15s", p.nToIP(ips[i].Addr))
 		}
 	}
 	return " -"
