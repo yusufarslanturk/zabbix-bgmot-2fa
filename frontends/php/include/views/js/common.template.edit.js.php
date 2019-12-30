@@ -277,7 +277,6 @@
 
 			url.setArgument('action', 'hostmacros.list');
 
-			// DEV-1276 replace with this: $container.addClass('is-loading');
 			$container.empty().append(
 				$('<span></span>').addClass('preloader').css({'display': 'inline-block'})
 			);
@@ -320,7 +319,6 @@
 					}
 				})
 				.always(function() {
-					// DEV-1276 replace with this: $container.removeClass('is-loading');
 					$container.find('.preloader').remove();
 				});
 		});
