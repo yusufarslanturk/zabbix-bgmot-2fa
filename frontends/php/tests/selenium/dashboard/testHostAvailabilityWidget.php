@@ -660,8 +660,7 @@ class testHostAvailabilityWidget extends CWebTest {
 		}
 		// Else get expected values from DB.
 		else {
-			$interface = $data['fields']['Interface type'];
-			$db_values = $this->getExpectedInterfaceCountFromDB($data, $interface);
+			$db_values = $this->getExpectedInterfaceCountFromDB($data, $data['fields']['Interface type']);
 			// Verify that values from the widget match values from DB.
 			$this->assertEquals($db_values, $results);
 		}
@@ -673,36 +672,38 @@ class testHostAvailabilityWidget extends CWebTest {
 	 */
 	private function checkMultipleInterfacesWidgetContent($data, $header) {
 		$default_interfaces = [
-			'interface type' => ['Zabbix agent', 'SNMP', 'JMX', 'IPMI'],
-			'interface status' => ['Available', 'Not available', 'Unknown', 'Total']
+			'type' => ['Zabbix agent', 'SNMP', 'JMX', 'IPMI'],
+			'status' => ['Available', 'Not available', 'Unknown', 'Total']
 		];
 		// Get widget content.
 		$dashboard = CDashboardElement::find()->one();
 		$widget = $dashboard->getWidget($header);
 		$content = $widget->getContent()->asTable();
 
-		$interfaces = CTestArrayHelper::get($data, 'fields.Interface type', $default_interfaces['interface type']);
+		$interfaces = CTestArrayHelper::get($data, 'fields.Interface type', $default_interfaces['type']);
 		// Index table with widget content by interface type, that is located in a column with a blank name.
 		$rows = $content->index('');
 		$table_headers = $content->getHeadersText();
 		// Exclude the 1st header that is always empty from the list of actual headers.
-		unset($table_headers[0]);
-		// Check widget content based on its Layout parameter.
+		array_shift($table_headers);
+
 		if (CTestArrayHelper::get($data['fields'], 'Layout', 'Horizontal') === 'Horizontal') {
-			$reference_headers = $default_interfaces['interface status'];
-			$obtained_headers = $interfaces;
+			$column_headers = $default_interfaces['status'];
+			$row_headers = $interfaces;
 		}
 		else {
-			$reference_headers = $interfaces;
-			$obtained_headers = array_keys($rows);
+			$column_headers = $interfaces;
+			$row_headers = $default_interfaces['status'];
 		}
-		$this->assertSame($reference_headers, array_values($table_headers));
+		$this->assertSame($column_headers, $table_headers);
+
+		// Check widget content based on its Layout parameter.
 		if (array_key_exists('expected_values', $data)) {
 			$this->assertEquals($data['expected_values'], $rows);
 		}
 		else {
 			// Take reference values from DB takin into account widget layout parameter.
-			foreach ($obtained_headers as $header) {
+			foreach ($row_headers as $header) {
 				$db_values = $this->getExpectedInterfaceCountFromDB($data, $header);
 				$this->assertEquals($rows[$header], $db_values);
 			}
@@ -767,7 +768,7 @@ class testHostAvailabilityWidget extends CWebTest {
 				'Total' => CDBHelper::getCount($total_sql.')')
 			];
 		}
-		// Construct sql for horizontal widget layout.
+		// Construct sql for vertical widget layout.
 		else {
 			// Filter out hosts in maintenence if the flag 'Show hosts in maintenance' is not set.
 			if (CTestArrayHelper::get($data['fields'], 'Show hosts in maintenance', false) === false) {
@@ -796,6 +797,7 @@ class testHostAvailabilityWidget extends CWebTest {
 				];
 			}
 		}
+
 		return $db_values;
 	}
 }
