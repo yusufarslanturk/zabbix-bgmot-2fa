@@ -29,6 +29,8 @@ import (
 	"os"
 	"syscall"
 	"time"
+
+	"golang.org/x/sys/unix"
 )
 
 // mocked os functionality
@@ -102,8 +104,8 @@ func (o *mockOs) Stat(name string) (os.FileInfo, error) {
 		fs.modTime = o.ftimes[name].ModTime
 		fs.name = name
 		fs.size = int64(len(data))
-		fs.sys.Atim.Sec = o.ftimes[name].acTime
-		fs.sys.Ctim.Sec = o.ftimes[name].chTime
+		fs.sys.Atim.Sec = unix.NsecToTimespec(o.ftimes[name].acTime * 1e9).Sec
+		fs.sys.Ctim.Sec = unix.NsecToTimespec(o.ftimes[name].chTime * 1e9).Sec
 
 		return &fs, nil
 	}
