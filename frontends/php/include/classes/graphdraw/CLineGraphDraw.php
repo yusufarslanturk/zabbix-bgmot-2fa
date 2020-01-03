@@ -365,7 +365,7 @@ class CLineGraphDraw extends CGraphDraw {
 						}
 
 						$dy = $var[$ci] - $var[$first_idx];
-						$var[$ci - ($dx - $cj)] = bcadd($var[$first_idx] , bcdiv(($cj * $dy) , $dx));
+						$var[$ci - ($dx - $cj)] = bcadd($var[$first_idx], bcdiv(($cj * $dy), $dx));
 					}
 				}
 			}
@@ -419,10 +419,12 @@ class CLineGraphDraw extends CGraphDraw {
 						foreach (['min', 'max', 'avg'] as $var_name) {
 							$shift_var_name = 'shift_'.$var_name;
 							$curr_shift = &$curr_data[$shift_var_name];
-							$curr_var = &$curr_data[$var_name];
 							$prev_shift = &$prev_data[$shift_var_name];
 							$prev_var = &$prev_data[$var_name];
-							$curr_shift[$ci] = $prev_var[$ci] + $prev_shift[$ci];
+
+							$prev_var_ci = ($prev_var === null) ? 0 : $prev_var[$ci];
+							$prev_shift_ci = ($prev_shift === null) ? 0 : $prev_shift[$ci];
+							$curr_shift[$ci] = $prev_var_ci + $prev_shift_ci;
 						}
 					}
 					break;
@@ -2629,7 +2631,13 @@ class CLineGraphDraw extends CGraphDraw {
 					$draw = true;
 				}
 				else {
-					$diff = abs($data['clock'][$i] - $data['clock'][$j]);
+					if ($data['clock'] === null) {
+						$diff = 0;
+					}
+					else {
+						$diff = abs($data['clock'][$i] - $data['clock'][$j]);
+					}
+
 					$cell = ($this->to_time - $this->from_time) / $this->sizeX;
 
 					if ($cell > $delay) {
