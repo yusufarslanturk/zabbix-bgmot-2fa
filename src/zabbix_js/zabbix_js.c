@@ -65,11 +65,12 @@ struct zbx_option	longopts[] =
 	{"loglevel",			1,	NULL,	'l'},
 	{"timeout",			1,	NULL,	't'},
 	{"help",			0,	NULL,	'h'},
+	{"version",			0,	NULL,	'V'},
 	{NULL}
 };
 
 /* short options */
-static char	shortopts[] = "s:i:p:hl:t";
+static char	shortopts[] = "s:i:p:hVl:t";
 
 /* end of COMMAND LINE OPTIONS */
 
@@ -201,6 +202,10 @@ int	main(int argc, char **argv)
 				break;
 			case 'h':
 				help();
+				ret = SUCCEED;
+				goto clean;
+			case 'V':
+				version();
 				ret = SUCCEED;
 				goto clean;
 			default:
