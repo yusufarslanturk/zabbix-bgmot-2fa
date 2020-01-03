@@ -46,6 +46,7 @@ const char	*help_message[] = {
 	"  -p,--param input-param       Specify input parameter",
 	"  -l,--loglevel log-level      Specify log level",
 	"  -t,--timeout timeout         Specify timeout in seconds",
+	"  -h --help                    Display this help message",
 	"",
 	"Example:",
 	"  zabbix_js -s script-file.js -p example",
@@ -239,7 +240,11 @@ int	main(int argc, char **argv)
 
 	if (NULL == (script = read_file(script_file, &error)))
 	{
-		zbx_error("cannot read script file: %s", error);
+		if (NULL != error)
+			zbx_error("cannot read script file: %s", error);
+		else
+			zbx_error("cannot use empty script file");
+
 		goto out;
 	}
 
