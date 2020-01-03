@@ -25,7 +25,7 @@
 #include "zbxembed.h"
 #include "mutexs.h"
 
-const char	*progname = NULL;
+const char	*progname;
 const char	title_message[] = "zabbix_js";
 const char	syslog_app_name[] = "zabbix_js";
 const char	*usage_message[] = {
@@ -35,7 +35,7 @@ const char	*usage_message[] = {
 	NULL	/* end of text */
 };
 
-unsigned char	program_type	= ZBX_PROGRAM_TYPE_GET;
+unsigned char	program_type;
 
 const char	*help_message[] = {
 	"Execute script using Zabbix embedded scripting engine.",
@@ -46,6 +46,9 @@ const char	*help_message[] = {
 	"  -p,--param input-param       Specify input parameter",
 	"  -l,--loglevel log-level      Specify log level",
 	"  -t,--timeout timeout         Specify timeout in seconds",
+	"",
+	"Example:",
+	"  zabbix_js -s script-file.js -p example",
 	NULL	/* end of text */
 };
 
@@ -58,11 +61,12 @@ struct zbx_option	longopts[] =
 	{"param",			1,	NULL,	'p'},
 	{"loglevel",			1,	NULL,	'l'},
 	{"timeout",			1,	NULL,	't'},
+	{"help",			0,	NULL,	'h'},
 	{NULL}
 };
 
 /* short options */
-static char	shortopts[] = "s:i:p:hl:t:";
+static char	shortopts[] = "s:i:p:hl:t";
 
 /* end of COMMAND LINE OPTIONS */
 
@@ -83,7 +87,7 @@ char	*CONFIG_TLS_PSK_FILE		= NULL;
 int	CONFIG_PASSIVE_FORKS		= 0;	/* not used in zabbix_js, just for linking with tls.c */
 int	CONFIG_ACTIVE_FORKS		= 0;	/* not used in zabbix_js, just for linking with tls.c */
 
-static char    *read_file(const char *filename, char **error)
+static char	*read_file(const char *filename, char **error)
 {
 	char	buffer[4096];
 	int	n, fd;
@@ -206,8 +210,9 @@ int	main(int argc, char **argv)
 				timeout = atoi(zbx_optarg);
 				break;
 			case 'h':
+				help();
 				ret = SUCCEED;
-				ZBX_FALLTHROUGH;
+				goto out;
 			default:
 				usage();
 				goto out;
