@@ -29,9 +29,10 @@ const char	*progname;
 const char	title_message[] = "zabbix_js";
 const char	syslog_app_name[] = "zabbix_js";
 const char	*usage_message[] = {
-	"-s script-file", "[-i input-file]", "[-p input-param]", NULL,
-	"-l log-level", NULL,
+	"-s script-file", "-p input-param", "[-l log-level]", "[-t timeout]", NULL,
+	"-s script-file", "-i input-file", "[-l log-level]", "[-t timeout]", NULL,
 	"-h", NULL,
+	"-V", NULL,
 	NULL	/* end of text */
 };
 
@@ -41,7 +42,7 @@ const char	*help_message[] = {
 	"Execute script using Zabbix embedded scripting engine.",
 	"",
 	"General options:",
-	"  -s,--script script-file      Specify the filename of script to execute. Specify - for"
+	"  -s,--script script-file      Specify the filename of script to execute. Specify - for",
 	"                               standard input.",
 	"  -i,--input input-file        Specify input parameter file name. Specify - for",
 	"                               standard input.",
@@ -49,6 +50,7 @@ const char	*help_message[] = {
 	"  -l,--loglevel log-level      Specify log level",
 	"  -t,--timeout timeout         Specify timeout in seconds",
 	"  -h --help                    Display this help message",
+	"  -V --version                 Display version number",
 	"",
 	"Example:",
 	"  zabbix_js -s script-file.js -p example",
