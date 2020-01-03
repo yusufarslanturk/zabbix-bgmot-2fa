@@ -247,7 +247,11 @@ int	main(int argc, char **argv)
 	{
 		if (NULL == (param = read_file(input_file, &error)))
 		{
-			zbx_error("cannot read input file: %s", error);
+			if (NULL != error)
+				zbx_error("cannot read input file: %s", error);
+			else
+				zbx_error("cannot use empty input file");
+
 			goto out;
 		}
 	}
