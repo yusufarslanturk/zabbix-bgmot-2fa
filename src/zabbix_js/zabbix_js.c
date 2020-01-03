@@ -165,19 +165,6 @@ out:
 	return result;
 }
 
-/******************************************************************************
- *                                                                            *
- * Function: main                                                             *
- *                                                                            *
- * Purpose: main function                                                     *
- *                                                                            *
- * Parameters:                                                                *
- *                                                                            *
- * Return value:                                                              *
- *                                                                            *
- * Comments:                                                                  *
- *                                                                            *
- ******************************************************************************/
 int	main(int argc, char **argv)
 {
 	int	ret = FAIL, loglevel = LOG_LEVEL_WARNING, timeout = 0;
@@ -250,13 +237,10 @@ int	main(int argc, char **argv)
 		goto out;
 	}
 
-	if (NULL != script_file)
+	if (NULL == (script = read_file(script_file, &error)))
 	{
-		if (NULL == (script = read_file(script_file, &error)))
-		{
-			zbx_error("cannot read script file: %s", error);
-			goto out;
-		}
+		zbx_error("cannot read script file: %s", error);
+		goto out;
 	}
 
 	if (NULL != input_file)
