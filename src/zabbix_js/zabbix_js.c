@@ -41,8 +41,10 @@ const char	*help_message[] = {
 	"Execute script using Zabbix embedded scripting engine.",
 	"",
 	"General options:",
-	"  -s,--script script-file      Specify script file name",
-	"  -i,--input input-file        Specify input parameter file name",
+	"  -s,--script script-file      Specify the filename of script to execute. Specify - for"
+	"                               standard input.",
+	"  -i,--input input-file        Specify input parameter file name. Specify - for",
+	"                               standard input.",
 	"  -p,--param input-param       Specify input parameter",
 	"  -l,--loglevel log-level      Specify log level",
 	"  -t,--timeout timeout         Specify timeout in seconds",
