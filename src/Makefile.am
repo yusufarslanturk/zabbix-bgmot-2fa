@@ -31,8 +31,7 @@ if AGENT
 AGENT_SUBDIRS = \
 	zabbix_agent \
 	zabbix_get \
-	zabbix_sender \
-	zabbix_js
+	zabbix_sender
 endif
 
 if AGENT2
@@ -45,7 +44,8 @@ endif
 
 if SERVER
 SERVER_SUBDIRS = \
-	zabbix_server
+	zabbix_server \
+	zabbix_js
 endif
 
 if PROXY
@@ -69,7 +69,8 @@ PROXY_SUBDIRS = \
 	zabbix_server/odbc \
 	zabbix_server/scripts \
 	zabbix_server/preprocessor \
-	zabbix_proxy
+	zabbix_proxy \
+	zabbix_js
 	
 endif
 endif
