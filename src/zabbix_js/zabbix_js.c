@@ -200,42 +200,42 @@ int	main(int argc, char **argv)
 			case 'h':
 				help();
 				ret = SUCCEED;
-				goto out;
+				goto clean;
 			default:
 				usage();
-				goto out;
+				goto clean;
 		}
 	}
 
 	if (SUCCEED != zbx_locks_create(&error))
 	{
 		zbx_error("cannot create locks: %s", error);
-		goto out;
+		goto clean;
 	}
 
 	if (SUCCEED != zabbix_open_log(LOG_TYPE_UNDEFINED, loglevel, NULL, &error))
 	{
 		zbx_error("cannot open log: %s", error);
-		goto out;
+		goto clean;
 	}
 
 
 	if (NULL == script_file || (NULL == input_file && NULL == param))
 	{
 		usage();
-		goto out;
+		goto close;
 	}
 
 	if (NULL != input_file && NULL != param)
 	{
 		zbx_error("input and script options are mutually exclusive");
-		goto out;
+		goto close;
 	}
 
 	if (0 == strcmp(script_file, "-") && NULL != input_file && 0 == strcmp(input_file, "-"))
 	{
 		zbx_error("cannot read script and input parameters from standard input at the same time");
-		goto out;
+		goto close;
 	}
 
 	if (NULL == (script = read_file(script_file, &error)))
@@ -245,7 +245,7 @@ int	main(int argc, char **argv)
 		else
 			zbx_error("cannot use empty script file");
 
-		goto out;
+		goto close;
 	}
 
 	if (NULL != input_file)
@@ -257,23 +257,26 @@ int	main(int argc, char **argv)
 			else
 				zbx_error("cannot use empty input file");
 
-			goto out;
+			goto close;
 		}
 	}
 
 	if (NULL == (result = execute_script(script, param, timeout, &error)))
 	{
 		zbx_error("error executing script:\n%s", error);
-		goto out;
+		goto close;
 	}
 	ret = SUCCEED;
 	printf("\n%s\n", result);
-out:
+close:
+	zabbix_close_log();
+clean:
 	zbx_free(result);
 	zbx_free(error);
 	zbx_free(script);
 	zbx_free(script_file);
 	zbx_free(input_file);
 	zbx_free(param);
+
 	return SUCCEED == ret ? EXIT_SUCCESS : EXIT_FAILURE;
 }
