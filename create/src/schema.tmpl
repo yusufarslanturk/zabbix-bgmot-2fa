@@ -637,6 +637,11 @@ FIELD		|ldap_configured		|t_integer		|'0'	|NOT NULL	|ZBX_NODATA
 FIELD		|ldap_case_sensitive	|t_integer	|'1'	|NOT NULL	|ZBX_NODATA
 FIELD		|db_extension	|t_varchar(32)	|''	|NOT NULL	|ZBX_NODATA
 FIELD		|autoreg_tls_accept	|t_integer	|'1'	|NOT NULL	|ZBX_PROXY,ZBX_NODATA
+FIELD		|2fa_type	|t_integer	|'0'	|NOT NULL	|ZBX_NODATA
+FIELD		|2fa_duo_api_hostname|t_varchar(255)	|''	|NOT NULL	|ZBX_NODATA
+FIELD		|2fa_duo_integration_key|t_varchar(255)	|''	|NOT NULL	|ZBX_NODATA
+FIELD		|2fa_duo_secret_key|t_varchar(255)	|''	|NOT NULL	|ZBX_NODATA
+FIELD		|2fa_duo_a_key|t_varchar(40)	|''	|NOT NULL	|ZBX_NODATA
 INDEX		|1		|alert_usrgrpid
 INDEX		|2		|discovery_groupid
 
