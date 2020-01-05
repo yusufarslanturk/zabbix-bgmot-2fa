@@ -1,0 +1,11 @@
+<iframe id="duo_iframe">
+</iframe>
+<style>
+  #duo_iframe {
+    width: 100%;
+    min-width: 304px;
+    max-width: 620px;
+    height: 330px;
+    border: none;
+  }
+</style>
