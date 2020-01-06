@@ -123,6 +123,7 @@ func (p *Plugin) getDevDiscovery() (netInterfaces []msgIfDiscovery, err error) {
 	}
 	defer f.Close()
 
+	netInterfaces = make([]msgIfDiscovery, 0)
 	for sLines := bufio.NewScanner(f); sLines.Scan(); {
 		dev := strings.Split(sLines.Text(), ":")
 		if len(dev) > 1 {
