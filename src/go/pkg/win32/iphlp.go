@@ -71,8 +71,8 @@ func FreeMibTable(table *MIB_IF_TABLE2) {
 	_, _, _ = syscall.Syscall(freeMibTable, 1, uintptr(unsafe.Pointer(table)), 0, 0)
 }
 
-// GetIpAddrTable calls win32 GetIpAddrTable function. It will return false without error
-// if the buffer size is not large enough. In this case the requested
+// GetIpAddrTable calls win32 GetIpAddrTable function. Check if the returned size was less or equal to input size
+// to determine if the buffer was large enough for the address table.
 func GetIpAddrTable(table *MIB_IPADDRTABLE, sizeIn uint32, order bool) (sizeOut uint32, err error) {
 	sizeOut = sizeIn
 	ret, _, syserr := syscall.Syscall(getIpAddrTable, 3, uintptr(unsafe.Pointer(table)),
