@@ -21,7 +21,6 @@ package netif
 
 import (
 	"zabbix.com/pkg/plugin"
-	"zabbix.com/pkg/std"
 )
 
 const (
@@ -37,7 +36,6 @@ type Plugin struct {
 }
 
 var impl Plugin
-var stdOs std.Os
 
 type dirFlag uint8
 

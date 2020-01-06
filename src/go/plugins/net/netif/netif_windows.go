@@ -28,7 +28,6 @@ import (
 
 	"golang.org/x/sys/windows"
 	"zabbix.com/pkg/plugin"
-	"zabbix.com/pkg/std"
 	"zabbix.com/pkg/win32"
 )
 
@@ -103,31 +102,31 @@ func (p *Plugin) getNetStats(networkIf string, statName string, dir dirFlag) (re
 	var value uint64
 	switch statName {
 	case "bytes":
-		if dir|dirIn != 0 {
+		if dir&dirIn != 0 {
 			value += row.InOctets
 		}
-		if dir|dirOut != 0 {
+		if dir&dirOut != 0 {
 			value += row.OutOctets
 		}
 	case "packets":
-		if dir|dirIn != 0 {
-			value += row.InUcastPkts
+		if dir&dirIn != 0 {
+			value += row.InUcastPkts + row.InNUcastPkts
 		}
-		if dir|dirOut != 0 {
-			value += row.OutUcastPkts
+		if dir&dirOut != 0 {
+			value += row.OutUcastPkts + row.OutNUcastPkts
 		}
 	case "errors":
-		if dir|dirIn != 0 {
+		if dir&dirIn != 0 {
 			value += row.InErrors
 		}
-		if dir|dirOut != 0 {
+		if dir&dirOut != 0 {
 			value += row.OutErrors
 		}
 	case "dropped":
-		if dir|dirIn != 0 {
-			value += row.InDiscards
+		if dir&dirIn != 0 {
+			value += row.InDiscards + row.InUnknownProtos
 		}
-		if dir|dirOut != 0 {
+		if dir&dirOut != 0 {
 			value += row.OutDiscards
 		}
 	default:
@@ -285,8 +284,6 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 }
 
 func init() {
-	stdOs = std.NewOs()
-
 	plugin.RegisterMetrics(&impl, "NetIf",
 		"net.if.list", "Returns a list of network interfaces in text format.",
 		"net.if.in", "Returns incoming traffic statistics on network interface.",

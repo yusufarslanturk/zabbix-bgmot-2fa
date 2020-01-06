@@ -36,6 +36,8 @@ const (
 	errorCannotOpenNetDev = "Cannot open /proc/net/dev: %s"
 )
 
+var stdOs std.Os
+
 var mapNetStatIn = map[string]uint{
 	"bytes":      0,
 	"packets":    1,
