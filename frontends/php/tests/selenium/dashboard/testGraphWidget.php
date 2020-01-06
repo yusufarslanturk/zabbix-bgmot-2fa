@@ -103,13 +103,13 @@ class testGraphWidget extends CWebTest {
 		$form = $overlay->asForm();
 		$element = $overlay->query('id:svg-graph-preview')->one();
 
-		$tabs = ['Data set', 'Displaying options', 'Time period', 'Overrides'];
+		$tabs = ['Data set', 'Displaying options', 'Time period', 'Axes', 'Legend', 'Problems', 'Overrides'];
 		foreach ($tabs as $tab) {
 			$form->selectTab($tab);
 			if ($tab === 'Overrides') {
-				$form->query('button:Add new override')->one()->click();
+				$button = $form->query('button:Add new override')->one()->click();
 				// Remove focus on button element.
-				$overlay->click();
+				$this->page->getDriver()->executeScript('arguments[0].style.borderRadius=0;arguments[0].blur();', [$button]);
 			}
 
 			$this->assertScreenshotExcept($overlay, [$element], 'tab_'.$tab);
