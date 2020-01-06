@@ -17,25 +17,10 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package zabbixsync
+package zabbixasync
 
-import (
-	"zabbix.com/pkg/plugin"
-	"zabbix.com/pkg/zbxlib"
-)
-
-// Plugin -
-type Plugin struct {
-	plugin.Base
-}
-
-var impl Plugin
-
-func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
-	return zbxlib.ExecuteCheck(key, params)
-}
-
-func init() {
-	plugin.RegisterMetrics(&impl, "ZabbixSync", getMetrics()...)
-	impl.SetCapacity(1)
+func getMetrics() []string {
+	return []string{
+		"system.localtime", "Returns system local time.",
+	}
 }
