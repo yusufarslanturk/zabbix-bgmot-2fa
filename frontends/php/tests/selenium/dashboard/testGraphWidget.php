@@ -98,9 +98,9 @@ class testGraphWidget extends CWebTest {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
 		$dashboard = CDashboardElement::find()->one()->edit();
 		$overlay = $dashboard->addWidget();
-		// Remove focus on select element.
-		$overlay->click();
 		$form = $overlay->asForm();
+		// Remove focus from select element.
+		$form->getField('Type')->removeFocus();
 		$element = $overlay->query('id:svg-graph-preview')->one();
 
 		$tabs = ['Data set', 'Displaying options', 'Time period', 'Axes', 'Legend', 'Problems', 'Overrides'];
@@ -108,8 +108,9 @@ class testGraphWidget extends CWebTest {
 			$form->selectTab($tab);
 			if ($tab === 'Overrides') {
 				$button = $form->query('button:Add new override')->one()->click();
-				// Remove focus on button element.
-				$this->page->getDriver()->executeScript('arguments[0].style.borderRadius=0;arguments[0].blur();', [$button]);
+				// Remove focus and border radius from button element.
+				$button->removeFocus();
+				$this->page->getDriver()->executeScript('arguments[0].style.borderRadius=0;', [$button]);
 			}
 
 			$this->assertScreenshotExcept($overlay, [$element], 'tab_'.$tab);
