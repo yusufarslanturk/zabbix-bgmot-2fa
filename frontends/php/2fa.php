@@ -151,7 +151,7 @@ $data = [
 $data['title'] = twofa2str($config['2fa_type']);
 
 // render view
-$view = new CView('administration.2fa.edit', $data);
+$view = new CView('administration.twofa.edit', $data);
 $view->render();
 $view->show();
 
