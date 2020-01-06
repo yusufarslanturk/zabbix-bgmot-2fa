@@ -41,17 +41,21 @@ func GetAllowedPeers(options *agent.AgentOptions) (allowedPeers *AllowedPeers, e
 		opts := strings.Split(options.Server, ",")
 		for _, o := range opts {
 			peer := strings.Trim(o, " \t")
-			if _, peerNet, err := net.ParseCIDR(peer); nil == err && !ap.isPresent(peerNet) {
-				ap.nets = append(ap.nets, peerNet)
-				maskLeadSize, maskTotalOnes := peerNet.Mask.Size()
-				if 0 == maskLeadSize && 128 == maskTotalOnes {
-					_, peerNet, _ = net.ParseCIDR("0.0.0.0/0")
-					if !ap.isPresent(peerNet) {
-						ap.nets = append(ap.nets, peerNet)
+			if _, peerNet, err := net.ParseCIDR(peer); nil == err {
+				if !ap.isPresent(peerNet) {
+					ap.nets = append(ap.nets, peerNet)
+					maskLeadSize, maskTotalOnes := peerNet.Mask.Size()
+					if 0 == maskLeadSize && 128 == maskTotalOnes {
+						_, peerNet, _ = net.ParseCIDR("0.0.0.0/0")
+						if !ap.isPresent(peerNet) {
+							ap.nets = append(ap.nets, peerNet)
+						}
 					}
 				}
-			} else if peerip := net.ParseIP(peer); nil != peerip && !ap.isPresent(peerip) {
-				ap.ips = append(ap.ips, peerip)
+			} else if peerip := net.ParseIP(peer); nil != peerip {
+				if !ap.isPresent(peerip) {
+					ap.ips = append(ap.ips, peerip)
+				}
 			} else if !ap.isPresent(peer) {
 				ap.names = append(ap.names, peer)
 			}
@@ -84,8 +88,8 @@ func (ap *AllowedPeers) CheckPeer(ip net.IP) bool {
 func (ap *AllowedPeers) isPresent(value interface{}) bool {
 	switch v := value.(type) {
 	case *net.IPNet:
-		for _, v := range ap.nets {
-			if v.Contains(v.IP) {
+		for _, va := range ap.nets {
+			if va.Contains(v.IP) {
 				return true
 			}
 		}
