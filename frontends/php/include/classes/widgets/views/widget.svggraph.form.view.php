@@ -89,8 +89,8 @@ $scripts[] =
 			'data = {'.
 				'uniqueid: 0,'.
 				'preview: 1,'.
-				'content_width: $preview.width(),'.
-				'content_height: $preview.height() - 10'.
+				'content_width: Math.floor($preview.width()),'.
+				'content_height: Math.floor($preview.height()) - 10'.
 			'};'.
 		'url.setArgument("action", "widget.svggraph.view");'.
 
@@ -260,7 +260,7 @@ $jq_templates['tag-row-tmpl'] = CWidgetHelper::getTagsTemplate($fields['tags']);
 $tab_overrides = (new CFormList())
 	->addRow(CWidgetHelper::getLabel($fields['or']), CWidgetHelper::getGraphOverride($fields['or'], $form_name));
 
-$scripts[] = CWidgetHelper::getGraphOverrideJavascript($fields['or'], $form_name);
+$scripts[] = CWidgetHelper::getGraphOverrideJavascript($fields['or']);
 $jq_templates['overrides-row'] = CWidgetHelper::getGraphOverrideTemplate($fields['or'], $form_name);
 
 // Create CTabView.

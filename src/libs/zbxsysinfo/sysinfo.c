@@ -126,6 +126,7 @@ int	add_metric(ZBX_METRIC *metric, char *error, size_t max_error_len)
 	return SUCCEED;
 }
 
+#if !defined(__MINGW32__)
 int	add_user_parameter(const char *itemkey, char *command, char *error, size_t max_error_len)
 {
 	int		ret;
@@ -159,6 +160,7 @@ int	add_user_parameter(const char *itemkey, char *command, char *error, size_t m
 
 	return ret;
 }
+#endif
 
 void	init_metrics(void)
 {
@@ -668,6 +670,8 @@ int	set_result_type(AGENT_RESULT *result, int value_type, char *c)
 
 	switch (value_type)
 	{
+		double	dbl_tmp;
+
 		case ITEM_VALUE_TYPE_UINT64:
 			zbx_trim_integer(c);
 			del_zeros(c);
@@ -681,9 +685,9 @@ int	set_result_type(AGENT_RESULT *result, int value_type, char *c)
 		case ITEM_VALUE_TYPE_FLOAT:
 			zbx_trim_float(c);
 
-			if (SUCCEED == is_double(c))
+			if (SUCCEED == is_double(c, &dbl_tmp))
 			{
-				SET_DBL_RESULT(result, atof(c));
+				SET_DBL_RESULT(result, dbl_tmp);
 				ret = SUCCEED;
 			}
 			break;
@@ -774,10 +778,8 @@ static double	*get_result_dbl_value(AGENT_RESULT *result)
 	{
 		zbx_trim_float(result->str);
 
-		if (SUCCEED != is_double(result->str))
+		if (SUCCEED != is_double(result->str, &value))
 			return NULL;
-
-		value = atof(result->str);
 
 		SET_DBL_RESULT(result, value);
 	}
@@ -785,10 +787,8 @@ static double	*get_result_dbl_value(AGENT_RESULT *result)
 	{
 		zbx_trim_float(result->text);
 
-		if (SUCCEED != is_double(result->text))
+		if (SUCCEED != is_double(result->text, &value))
 			return NULL;
-
-		value = atof(result->text);
 
 		SET_DBL_RESULT(result, value);
 	}
@@ -1043,7 +1043,7 @@ zbx_uint64_t	get_kstat_numeric_value(const kstat_named_t *kn)
 }
 #endif
 
-#ifndef _WINDOWS
+#if !defined(_WINDOWS) && !defined(__MINGW32__)
 /******************************************************************************
  *                                                                            *
  * Function: serialize_agent_result                                           *

@@ -50,6 +50,12 @@ trait PreprocessingTrait {
 				'value'		=> ['getValue']
 			],
 			[
+				'name'		=> 'parameter_3',
+				'selector'	=> 'xpath:.//input[contains(@id, "_params_2")]',
+				'detect'	=> true,
+				'value'		=> ['getValue']
+			],
+			[
 				'name'		=> 'on_fail',
 				'selector'	=> 'xpath:.//input[contains(@id, "_on_fail")]',
 				'class'		=> 'CCheckboxElement',
@@ -75,7 +81,7 @@ trait PreprocessingTrait {
 	 * @param Element $container    container element
 	 * @param array   $field        field description
 	 *
-	 * @return Element|null
+	 * @return CElement|CNullElement
 	 */
 	protected static function getPreprocessingField($container, $field) {
 		$query = $container->query($field['selector']);
@@ -85,7 +91,7 @@ trait PreprocessingTrait {
 		}
 
 		$element = $query->one(false);
-		if ($element !== null && array_key_exists('detect', $field) && $field['detect']) {
+		if ($element->isValid() && array_key_exists('detect', $field) && $field['detect']) {
 			$element = $element->detect();
 		}
 
@@ -135,7 +141,7 @@ trait PreprocessingTrait {
 			foreach ($fields as $field) {
 				$key = $field['name'];
 
-				if (isset($preprocessing[$key]) && (!$extended || $preprocessing[$key]['element'] !== null)) {
+				if (isset($preprocessing[$key]) && (!$extended || $preprocessing[$key]['element']->isValid())) {
 					continue;
 				}
 
@@ -167,7 +173,7 @@ trait PreprocessingTrait {
 					continue;
 				}
 
-				if ($control['element'] === null) {
+				if (!$control['element']->isValid()) {
 					$this->fail('Field "'.$field['name'].'" is not present.');
 				}
 
@@ -203,7 +209,7 @@ trait PreprocessingTrait {
 			foreach ($step as $control) {
 				$field = $control['field'];
 
-				if ($control['element'] === null) {
+				if (!$control['element']->isValid()) {
 					continue;
 				}
 

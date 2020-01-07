@@ -630,7 +630,7 @@ ZABBIX.apps.map = (function($) {
 					event.preventDefault();
 					event.stopPropagation();
 
-					// Recreate menu everytime due copy/paste function availability changes.
+					// Recreate menu every time due copy/paste function availability changes.
 					if (item_data.popupid) {
 						$('#' + item_data.popupid).filter('.menu-popup').remove();
 					}
@@ -1506,9 +1506,6 @@ ZABBIX.apps.map = (function($) {
 
 						$('#link-connect-to').show();
 						this.form.show();
-
-						// resize multiselect
-						$('.multiselect').multiSelect('resize');
 					}
 
 					// only one shape is selected
@@ -2332,7 +2329,10 @@ ZABBIX.apps.map = (function($) {
 					this.data.inherited_label = null;
 				}
 
-				if (this.data.label_type == CMap.LABEL_TYPE_NAME) {
+				if (this.data.label_type == CMap.LABEL_TYPE_LABEL) {
+					this.data.inherited_label = this.data.label;
+				}
+				else if (this.data.label_type == CMap.LABEL_TYPE_NAME) {
 					if (this.data.elementtype != Selement.TYPE_IMAGE) {
 						this.data.inherited_label = this.data.elements[0].elementName;
 					}
@@ -2524,7 +2524,7 @@ ZABBIX.apps.map = (function($) {
 			getDimensions: Shape.prototype.getDimensions,
 
 			/**
-			 * Updates element icon and height/witdh in case element is area type.
+			 * Updates element icon and height/width in case element is area type.
 			 */
 			updateIcon: function() {
 				var oldIconClass = this.domNode.get(0).className.match(/sysmap_iconid_\d+/);
