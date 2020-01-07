@@ -110,7 +110,7 @@ class testGraphWidget extends CWebTest {
 				$this->page->getDriver()->executeScript('arguments[0].style.borderRadius=0;', [$button]);
 			}
 
-			$this->pgae->removeFocus();
+			$this->page->removeFocus();
 			$this->assertScreenshotExcept($overlay, [$element], 'tab_'.$tab);
 		}
 	}
