@@ -41,8 +41,6 @@ type MockOs interface {
 
 type fileTime struct {
 	ModTime time.Time
-	acTime  int64
-	chTime  int64
 }
 
 type mockOs struct {
@@ -104,8 +102,12 @@ func (o *mockOs) Stat(name string) (os.FileInfo, error) {
 		fs.modTime = o.ftimes[name].ModTime
 		fs.name = name
 		fs.size = int64(len(data))
-		fs.sys.Atim.Sec = unix.NsecToTimespec(o.ftimes[name].acTime * 1e9).Sec
-		fs.sys.Ctim.Sec = unix.NsecToTimespec(o.ftimes[name].chTime * 1e9).Sec
+		a, err := unix.TimeToTimespec(o.ftimes[name].ModTime)
+		if err != nil {
+			return nil, err
+		}
+		fs.sys.Atim.Sec = a.Sec
+		fs.sys.Ctim.Sec = a.Sec
 
 		return &fs, nil
 	}
@@ -135,8 +137,6 @@ func (o *mockOs) MockFile(path string, data []byte) {
 	o.files[path] = data
 	var ft fileTime
 	ft.ModTime = time.Now()
-	ft.acTime = ft.ModTime.Unix()
-	ft.chTime = ft.ModTime.Unix()
 	o.ftimes[path] = ft
 }
 
