@@ -289,12 +289,7 @@ class testHostAvailabilityWidget extends CWebTest {
 		// Check that widget has been added.
 		$this->checkRefreshInterval($data, $header);
 		// Verify widget content depending on the number of interfaces displayed (single or multiple)
-		if (array_key_exists('Interface type', $data['fields']) && !is_array($data['fields']['Interface type'])) {
-			$this->checkWidgetContent($data, $header);
-		}
-		else {
-			$this->checkMultipleInterfacesWidgetContent($data, $header);
-		}
+		$this->checkWidgetContent($data, $header);
 	}
 
 	public static function getUpdateWidgetData() {
@@ -478,12 +473,7 @@ class testHostAvailabilityWidget extends CWebTest {
 		// Check that widget has been added.
 		$this->checkRefreshInterval($data, $header);
 		// Verify widget content depending on the number of interfaces displayed (single or multiple)
-		if (array_key_exists('Interface type', $data['fields']) && !is_array($data['fields']['Interface type'])) {
-			$this->checkWidgetContent($data, $header);
-		}
-		else {
-			$this->checkMultipleInterfacesWidgetContent($data, $header);
-		}
+		$this->checkWidgetContent($data, $header);
 	}
 
 	public function testHostAvailabilityWidget_SimpleUpdate() {
@@ -602,14 +592,14 @@ class testHostAvailabilityWidget extends CWebTest {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=101');
 		$dashboard = CDashboardElement::find()->one()->edit();
 		$widget = $dashboard->getWidget($name);
-		$widget->delete();
+		$dashboard->deleteWidget($name);
 		$this->page->waitUntilReady();
 
 		$dashboard->save();
 		// Check that Dashboard has been saved
 		$this->checkDashboardUpdateMessage();
-		// Confirm that widget is not present on dashboard.
-		$this->assertTrue($dashboard->getWidget($name, false) === null);
+		// Confirm that widget is not present on dashboard
+		$this->assertFalse($dashboard->getWidget($name, false)->isValid());
 		// Check that widget is removed from DB.
 		$widget_sql = 'SELECT * FROM widget_field wf LEFT JOIN widget w ON w.widgetid=wf.widgetid WHERE w.name='.zbx_dbstr($name);
 		$this->assertEquals(0, CDBHelper::getCount($widget_sql));
@@ -621,11 +611,20 @@ class testHostAvailabilityWidget extends CWebTest {
 		$this->assertEquals('Dashboard updated', $message->getTitle());
 	}
 
+	private function checkWidgetContent($data,$header) {
+		if (array_key_exists('Interface type', $data['fields']) && !is_array($data['fields']['Interface type'])) {
+			$this->checkSingleInterfaceWidgetContent($data, $header);
+		}
+		else {
+			$this->checkMultipleInterfacesWidgetContent($data, $header);
+		}
+	}
+
 	/*
 	 * Function that compares the data returned in the widget with values in dataprovider or with values taken from DB,
 	 * if only 1 interface is returned in the widget.
 	 */
-	private function checkWidgetContent($data, $header) {
+	private function checkSingleinterfaceWidgetContent($data, $header) {
 		// Get widget content.
 		$dashboard = CDashboardElement::find()->one();
 		$widget = $dashboard->getWidget($header);
