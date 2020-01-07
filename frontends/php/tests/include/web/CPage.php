@@ -434,7 +434,7 @@ class CPage {
 	 */
 	public function removeFocus() {
 		try {
-			$this->driver->executeScript('return document.activeElement.blur();');
+			$this->driver->executeScript('document.activeElement.blur();');
 		} catch (Exception $ex) {
 			// Code is not missing here.
 		}
