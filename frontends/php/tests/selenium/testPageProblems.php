@@ -407,4 +407,52 @@ class testPageProblems extends CLegacyWebTest {
 		$this->zbxTestClickXpathWait('//tbody/tr/td[8]/div/span[contains(@class, "icon-invisible")]');
 		$this->zbxTestAssertElementText('//div[@data-hintboxid]', 'Suppressed till: 2021-05-18 12:17 Maintenance: Maintenance for suppression test');
 	}
+
+	public function problemLinkData() {
+		return [
+			// Check tag priority.
+			[
+				[
+					'problem' => '1_trigger_High',
+					'tags' => 'webhook: 1',
+					'links' => [
+						'Problems' => 'zabbix.php?action=problem.view&filter_triggerids%5B%5D=100035&filter_set=1',
+						'Configuration' => 'triggers.php?form=update&triggerid=100035',
+						'Trigger URL' => 'triggers.php?form=update&triggerid=100035',
+						'Webhook url for all' => 'zabbix.php?action=mediatype.edit&mediatypeid=101',
+						'Unique webhook tag' => 'zabbix.php?action=mediatype.list&ddreset=1',
+						'1_item' => 'history.php?action=showgraph&itemids%5B%5D=99086'
+					]
+				]
+			],
+			[
+				[
+					'problem' => 'Test trigger with tag',
+					'tag' => 'Service: abc',
+					'links' => [
+						'Problems' => 'zabbix.php?action=problem.view&filter_triggerids%5B%5D=99251&filter_set=1',
+						'Configuration' => 'triggers.php?form=update&triggerid=99251',
+						'Webhook url for all' => 'zabbix.php?action=mediatype.edit&mediatypeid=101',
+						'Number of processes' => 'history.php?action=showgraph&itemids%5B%5D=29192'
+					]
+				]
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider problemLinkData
+	 * Function that checks the links in the Problem pop-up window.
+	 */
+	public function testPageProblems_ProblemLinks($data) {
+		$this->page->login()->open('zabbix.php?action=problem.view&ddreset=1');
+		$this->query('button:Reset')->one()->click();
+		$this->page->waitUntilReady();
+		$this->query('xpath:.//a[text()="'.$data['problem'].'"]')->one()->waitUntilClickable()->click();
+		$popup = CPopupMenuElement::find()->waitUntilVisible()->one();
+
+		foreach($data['links'] as $label => $url) {
+			$this->assertContains($url, $popup->query('xpath:.//li/a[text()="'.$label.'"]')->one()->getAttribute('href'));
+		}
+	}
 }

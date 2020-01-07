@@ -72,7 +72,8 @@ class testPageAdministrationMediaTypes extends CWebTest {
 					'filter' => [
 						'Status' => 'Enabled'
 					],
-					'result' => ['Email', 'Mattermost', 'Opsgenie', 'Pushover', 'SMS']
+					'result' => ['Email', 'Mattermost', 'Opsgenie', 'Pushover', 'Reference webhook', 'SMS',
+							'URL test webhook', 'Webhook to delete']
 				]
 			],
 			[
@@ -442,6 +443,20 @@ class testPageAdministrationMediaTypes extends CWebTest {
 						'Connection refused'
 					]
 				]
+			],
+			// 	Webhook media type.
+			[
+				[
+					'name' => 'Reference webhook',
+					'error' => [
+						'Connection to Zabbix server "localhost" refused. Possible reasons:',
+						'1. Incorrect server IP/DNS in the "zabbix.conf.php";',
+						'2. Security environment (for example, SELinux) is blocking the connection;',
+						'3. Zabbix server daemon not running;',
+						'4. Firewall is blocking TCP connection.',
+						'Connection refused'
+					]
+				]
 			]
 		];
 	}
@@ -462,6 +477,12 @@ class testPageAdministrationMediaTypes extends CWebTest {
 		$dialog = $this->query('id:overlay_dialogue')->asOverlayDialog()->one()->waitUntilReady();
 		$this->assertEquals('Test media type', $dialog->getTitle());
 		$form = $dialog->asForm();
+		$fields = ($data['name'] === 'Reference webhook') ? ['URL', 'To', 'Subject', 'Message', 'Response'] :
+			['Send to', 'Subject', 'Message'];
+		$this->assertEquals($fields, $form->getLabels()->asText());
+		if ($data['name'] === 'Reference webhook') {
+			$this->assertTrue($form->getField('Response')->isEnabled(false));
+		}
 
 		// Fill and submit testing form.
 		if (array_key_exists('form', $data)) {
@@ -478,6 +499,9 @@ class testPageAdministrationMediaTypes extends CWebTest {
 		}
 		else {
 			$this->assertTrue($message->hasLine($data['error']));
+		}
+		if ($data['name'] === 'Reference webhook') {
+			$this->assertEquals($form->query('id:webhook_response_type')->one()->getText(), 'Response type: String');
 		}
 	}
 
