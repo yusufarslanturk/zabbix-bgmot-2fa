@@ -25,6 +25,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"syscall"
 	"unsafe"
 
 	"golang.org/x/sys/windows"
@@ -53,27 +54,39 @@ func (p *Plugin) exportTime(params []string) (result interface{}, err error) {
 		return nil, errors.New("Invalid first parameter.")
 	}
 
-	var f *os.File
-	if f, err = os.Open(params[0]); err != nil {
-		return nil, fmt.Errorf("Cannot open file: %s", err)
-	}
-	defer f.Close()
-
-	var bi FILE_BASIC_INFO
-	err = windows.GetFileInformationByHandleEx(windows.Handle(f.Fd()), fileBasicInfo, (*byte)(unsafe.Pointer(&bi)),
-		uint32(unsafe.Sizeof(bi)))
-
-	if err != nil {
-		return nil, fmt.Errorf("Cannot obtain file information: %s", err)
-	}
-
 	if len(params) == 1 || params[1] == "" || params[1] == "modify" {
-		return bi.LastWriteTime.Nanoseconds() / 1e9, nil
+		if fi, ferr := os.Stat(params[0]); ferr != nil {
+			return nil, fmt.Errorf("Cannot stat file: %s", ferr)
+		} else {
+			return fi.ModTime().Unix(), nil
+		}
 	} else if params[1] == "access" {
-		return bi.LastAccessTime.Nanoseconds() / 1e9, nil
+		if fi, ferr := os.Stat(params[0]); ferr != nil {
+			return nil, fmt.Errorf("Cannot stat file: %s", ferr)
+		} else {
+			if stat, ok := fi.Sys().(*syscall.Win32FileAttributeData); !ok {
+				return nil, errors.New("Invalid system data returned by stat.")
+			} else {
+				return stat.LastAccessTime.Nanoseconds() / 1e9, nil
+			}
+		}
 	} else if params[1] == "change" {
+		var f *os.File
+		if f, err = os.Open(params[0]); err != nil {
+			return nil, fmt.Errorf("Cannot open file: %s", err)
+		}
+		defer f.Close()
+
+		var bi FILE_BASIC_INFO
+		err = windows.GetFileInformationByHandleEx(windows.Handle(f.Fd()), fileBasicInfo, (*byte)(unsafe.Pointer(&bi)),
+			uint32(unsafe.Sizeof(bi)))
+
+		if err != nil {
+			return nil, fmt.Errorf("Cannot obtain file information: %s", err)
+		}
 		return bi.ChangeTime.Nanoseconds() / 1e9, nil
 	} else {
 		return nil, errors.New("Invalid second parameter.")
 	}
+
 }
