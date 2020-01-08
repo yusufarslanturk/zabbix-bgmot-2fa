@@ -611,7 +611,7 @@ class testHostAvailabilityWidget extends CWebTest {
 		$this->assertEquals('Dashboard updated', $message->getTitle());
 	}
 
-	private function checkWidgetContent($data,$header) {
+	private function checkWidgetContent($data, $header) {
 		if (array_key_exists('Interface type', $data['fields']) && !is_array($data['fields']['Interface type'])) {
 			$this->checkSingleInterfaceWidgetContent($data, $header);
 		}
