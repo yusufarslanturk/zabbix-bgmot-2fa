@@ -43,6 +43,7 @@ class CImportDataAdapterTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($adapter->getScreens(), []);
 		$this->assertEquals($adapter->getImages(), []);
 		$this->assertEquals($adapter->getMaps(), []);
+		$this->assertEquals($adapter->getMediaTypes(), []);
 	}
 
 	public function testGetGroups() {
@@ -2069,6 +2070,71 @@ class CImportDataAdapterTest extends PHPUnit_Framework_TestCase {
 		]);
 	}
 
+	public function testGetMediaTypes() {
+		$adapter = $this->getAdapter($this->getMediaTypeXml());
+
+		$this->assertEquals($adapter->getMediaTypes(), [
+			[
+				'name' => 'Email',
+				'type' => '0',
+				'smtp_server' => 'mail.example.com',
+				'smtp_helo' => 'example.com',
+				'smtp_email' => 'zabbix@example.com',
+				'content_type' => '0',
+				'smtp_port' => '25',
+				'smtp_security' => '0',
+				'smtp_verify_host' => '0',
+				'smtp_verify_peer' => '0',
+				'smtp_authentication' => '0',
+				'username' => '',
+				'parameters' => '',
+				'gsm_modem' => '',
+				'status' => '0',
+				'attempt_interval' => '10s',
+				'script' => '',
+				'timeout' => '30s',
+				'process_tags' => '0',
+				'show_event_menu' => '1',
+				'event_menu_url' => '',
+				'event_menu_name' => '',
+				'description' => '',
+				'passwd' => '',
+				'exec_path' => '',
+				'maxsessions' => '1',
+				'maxattempts' => '3'
+			],
+			[
+				'name' => 'SMS',
+				'type' => '2',
+				'gsm_modem' => '/dev/ttyS0',
+				'smtp_server' => '',
+				'smtp_port' => '25',
+				'smtp_helo' => '',
+				'smtp_email' => '',
+				'smtp_security' => '0',
+				'smtp_verify_host' => '0',
+				'smtp_verify_peer' => '0',
+				'smtp_authentication' => '0',
+				'username' => '',
+				'content_type' => '1',
+				'parameters' => '',
+				'status' => '0',
+				'attempt_interval' => '10s',
+				'script' => '',
+				'timeout' => '30s',
+				'process_tags' => '0',
+				'show_event_menu' => '1',
+				'event_menu_url' => '',
+				'event_menu_name' => '',
+				'description' => '',
+				'passwd' => '',
+				'exec_path' => '',
+				'maxsessions' => '1',
+				'maxattempts' => '3'
+			]
+		]);
+	}
+
 	public function testConversion() {
 		$adapter = $this->getAdapter($this->get18Xml());
 
@@ -3069,6 +3135,10 @@ class CImportDataAdapterTest extends PHPUnit_Framework_TestCase {
 		return $this->getFile('screen.xml');
 	}
 
+	protected function getMediaTypeXml() {
+		return $this->getFile('mediatype.xml');
+	}
+
 	protected function get10Xml() {
 		return $this->getFile('schema_1.0.xml');
 	}
@@ -3080,5 +3150,4 @@ class CImportDataAdapterTest extends PHPUnit_Framework_TestCase {
 
 		return $this->sources[$name];
 	}
-
 }
