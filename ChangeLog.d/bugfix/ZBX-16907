@@ -1,1 +1,1 @@
-.......PS. [ZBX-16907] fixed duplicate entry errors on 32-bit architecture during item application discovery (mabele)
+.......PS. [ZBX-16907] icmppingloss counting all after first 400 ping responses as lost (mabele)
