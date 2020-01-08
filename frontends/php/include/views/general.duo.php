@@ -48,7 +48,7 @@ $server = $config['2fa_duo_api_hostname'];
 			->setAttribute('type', 'text/javascript')
 			->setAttribute('src', 'js/Duo-Web-v2.js'),
                 (new CTag('link', true))
-			->setAttribute('href', 'styles/Duo-Frame.css')
+			->setAttribute('href', 'assets/styles/Duo-Frame.css')
 			->setAttribute('rel', 'stylesheet')
 			->setAttribute('type', 'text/css'),
 		(new CTag('iframe', true))
