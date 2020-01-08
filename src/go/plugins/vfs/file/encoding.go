@@ -25,7 +25,7 @@ package file
 //   return iconv(cd, &inbuf, inbytesleft, &outbuf, outbytesleft);
 // }
 //
-// #cgo LDFLAGS: -liconv
+// #cgo windows LDFLAGS: -liconv
 import "C"
 
 import (
