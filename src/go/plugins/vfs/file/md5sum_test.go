@@ -39,10 +39,10 @@ func TestFileMd5sum(t *testing.T) {
 	if result, err := impl.Export("vfs.file.md5sum", []string{"text.txt"}, nil); err != nil {
 		t.Errorf("vfs.file.md5sum returned error %s", err.Error())
 	} else {
-		if crc, ok := result.(string); !ok {
+		if md5sum, ok := result.(string); !ok {
 			t.Errorf("vfs.file.md5sum returned unexpected value type %s", reflect.TypeOf(result).Kind())
 		} else {
-			if crc != "81dc9bdb52d04dc20036dbd8313ed055" {
+			if md5sum != "81dc9bdb52d04dc20036dbd8313ed055" {
 				t.Errorf("vfs.file.md5sum returned invalid result")
 			}
 		}
