@@ -22,13 +22,11 @@
 package netif
 
 import (
-	"fmt"
-
 	"zabbix.com/pkg/plugin"
 )
 
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
-	return nil, fmt.Errorf("Unsupported metric.")
+	return nil, plugin.UnsupportedMetricError
 }
 
 func init() {
