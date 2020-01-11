@@ -1,13 +1,14 @@
 #!/bin/bash
 
-set +ev
+set -x
+set -e
 
 DB_USERNAME=zabbix
 DB_PASSWORD=zabbix
 TMPDIR=/tmp/`date +%s`
 VERSION=4.4.4
 BGVERSION=4.4.4-bg-2fa
-ZABBIX_INSTALL_PATH=/usr/share/zabbix/
+ZABBIX_INSTALL_PATH=/usr/share/zabbix
 ZABBIX_INSTALLED_VERSION=`grep ZABBIX_VERSION ${ZABBIX_INSTALL_PATH}/include/defines.inc.php | cut -d\' -f 4`
 
 if [ "$VERSION" != "$ZABBIX_INSTALLED_VERSION" ]
@@ -31,9 +32,9 @@ else
   mysql -u $DB_USERNAME -p${DB_PASSWORD} zabbix < bg-scripts/db-update.sql
   if [ "$?" -eq "0" ]
   then
-    'Database was successfully patched.'
+    echo 'Database was successfully patched.'
   else
-    'Failure to patch Database. Aborting...'
+    echo 'Failure to patch Database. Aborting...'
     exit -1
   fi
 fi
