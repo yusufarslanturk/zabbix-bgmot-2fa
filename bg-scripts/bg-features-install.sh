@@ -1,13 +1,12 @@
 #!/bin/bash
 
 set -x
-set -e
 
 DB_USERNAME=zabbix
 DB_PASSWORD=zabbix
 TMPDIR=/tmp/`date +%s`
 VERSION=4.4.4
-BGVERSION=4.4.4-bg-2fa
+BGVERSION=4.4.4-bg
 ZABBIX_INSTALL_PATH=/usr/share/zabbix
 ZABBIX_INSTALLED_VERSION=`grep ZABBIX_VERSION ${ZABBIX_INSTALL_PATH}/include/defines.inc.php | cut -d\' -f 4`
 
