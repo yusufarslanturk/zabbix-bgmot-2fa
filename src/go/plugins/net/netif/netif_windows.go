@@ -41,15 +41,9 @@ func (p *Plugin) nToIP(addr uint32) net.IP {
 	return net.IPv4(b[0], b[1], b[2], b[3])
 }
 
-func (p *Plugin) getIfRowByIP(ipaddr string, ifs []win32.MIB_IF_ROW2) (row *win32.MIB_IF_ROW2) {
-	var ip net.IP
-	if ip = net.ParseIP(ipaddr); ip == nil {
-		return
-	}
-
+func (p *Plugin) getIpAddrTable() (addrs []win32.MIB_IPADDRROW, err error) {
 	var ipTable *win32.MIB_IPADDRTABLE
 	var sizeIn, sizeOut uint32
-	var err error
 	if sizeOut, err = win32.GetIpAddrTable(nil, 0, false); err != nil {
 		return
 	}
@@ -64,7 +58,20 @@ func (p *Plugin) getIfRowByIP(ipaddr string, ifs []win32.MIB_IF_ROW2) (row *win3
 			return
 		}
 	}
-	ips := (*[1 << 16]win32.MIB_IPADDRROW)(unsafe.Pointer(&ipTable.Table[0]))[:ipTable.NumEntries:ipTable.NumEntries]
+	return (*[1 << 16]win32.MIB_IPADDRROW)(unsafe.Pointer(&ipTable.Table[0]))[:ipTable.NumEntries:ipTable.NumEntries], nil
+}
+
+func (p *Plugin) getIfRowByIP(ipaddr string, ifs []win32.MIB_IF_ROW2) (row *win32.MIB_IF_ROW2) {
+	var ip net.IP
+	if ip = net.ParseIP(ipaddr); ip == nil {
+		return
+	}
+
+	var err error
+	var ips []win32.MIB_IPADDRROW
+	if ips, err = p.getIpAddrTable(); err != nil {
+		return
+	}
 
 	for i := range ips {
 		if ip.Equal(p.nToIP(ips[i].Addr)) {
@@ -84,6 +91,7 @@ func (p *Plugin) getNetStats(networkIf string, statName string, dir dirFlag) (re
 		return
 	}
 	defer win32.FreeMibTable(ifTable)
+
 	ifs := (*[1 << 16]win32.MIB_IF_ROW2)(unsafe.Pointer(&ifTable.Table[0]))[:ifTable.NumEntries:ifTable.NumEntries]
 
 	var row *win32.MIB_IF_ROW2
@@ -204,23 +212,10 @@ func (p *Plugin) getDevList() (devices string, err error) {
 	defer win32.FreeMibTable(ifTable)
 	ifs := (*[1 << 16]win32.MIB_IF_ROW2)(unsafe.Pointer(&ifTable.Table[0]))[:ifTable.NumEntries:ifTable.NumEntries]
 
-	var ipTable *win32.MIB_IPADDRTABLE
-	var sizeIn, sizeOut uint32
-	if sizeOut, err = win32.GetIpAddrTable(nil, 0, false); err != nil {
+	var ips []win32.MIB_IPADDRROW
+	if ips, err = p.getIpAddrTable(); err != nil {
 		return
 	}
-	if sizeOut == 0 {
-		return "", errors.New(errorEmptyIpTable)
-	}
-	for sizeOut > sizeIn {
-		sizeIn = sizeOut
-		buf := make([]byte, sizeIn)
-		ipTable = (*win32.MIB_IPADDRTABLE)(unsafe.Pointer(&buf[0]))
-		if sizeOut, err = win32.GetIpAddrTable(ipTable, sizeIn, false); err != nil {
-			return
-		}
-	}
-	ips := (*[1 << 16]win32.MIB_IPADDRROW)(unsafe.Pointer(&ipTable.Table[0]))[:ipTable.NumEntries:ipTable.NumEntries]
 
 	for i := range ifs {
 		devices += fmt.Sprintf("%-25s", p.getIfType(ifs[i].Type))
