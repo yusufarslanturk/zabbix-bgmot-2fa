@@ -90,6 +90,7 @@ func (p *Plugin) getNetStats(networkIf string, statName string, dir dirFlag) (re
 	for i := range ifs {
 		if networkIf == windows.UTF16ToString(ifs[i].Description[:]) {
 			row = &ifs[i]
+			break
 		}
 	}
 	if row == nil {
