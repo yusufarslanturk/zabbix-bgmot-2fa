@@ -251,7 +251,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		}
 		return string(b), nil
 	case "net.if.list":
-		if len(params) > 1 {
+		if len(params) > 0 {
 			return nil, errors.New(errorTooManyParams)
 		}
 		return p.getDevList()
