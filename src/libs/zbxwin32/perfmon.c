@@ -380,7 +380,8 @@ int	init_builtin_counter_indexes(void)
 
 		for (i = 0; i < ARRSIZE(builtin_counter_map); i++)
 		{
-			if (0 == wcscmp(builtin_counter_map[i].eng_name, counter_text))
+			if (0 == builtin_counter_map[i].pdhIndex &&
+					0 == wcscmp(builtin_counter_map[i].eng_name, counter_text))
 			{
 				builtin_counter_map[i].pdhIndex = counter_index;
 				break;
