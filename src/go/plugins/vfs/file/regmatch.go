@@ -29,47 +29,6 @@ import (
 	"time"
 )
 
-/*
-func (p *Plugin) executeRegmatch(line []byte, rx *regexp.Regexp) (result string, match bool) {
-	matches := rx.FindSubmatchIndex(line)
-	if len(matches) == 0 {
-		return "", false
-	}
-	if len(output) == 0 {
-		return string(line), true
-	}
-
-	buf := &bytes.Buffer{}
-	for len(output) > 0 {
-		pos := bytes.Index(output, []byte{'\\'})
-		if pos == -1 || pos == len(output)-1 {
-			break
-		}
-		_, _ = buf.Write(output[:pos])
-		switch output[pos+1] {
-		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
-			i := output[pos+1] - '0'
-			if len(matches) >= int(i)*2+2 {
-				if matches[i*2] != -1 {
-					_, _ = buf.Write(line[matches[i*2]:matches[i*2+1]])
-				}
-			}
-			pos++
-		case '@':
-			_, _ = buf.Write(line[matches[0]:matches[1]])
-			pos++
-		case '\\':
-			_ = buf.WriteByte('\\')
-			pos++
-		default:
-			_ = buf.WriteByte('\\')
-		}
-		output = output[pos+1:]
-	}
-	_, _ = buf.Write(output)
-	return buf.String(), true
-}
-*/
 func (p *Plugin) exportRegmatch(params []string) (result interface{}, err error) {
 	var startline, endline, curline uint64
 
@@ -110,11 +69,6 @@ func (p *Plugin) exportRegmatch(params []string) (result interface{}, err error)
 		return nil, errors.New("Start line parameter must not exceed end line.")
 	}
 	
-	/*var rx *regexp.Regexp
-	if rx, err = regexp.Compile(params[1]); err != nil {
-		return nil, errors.New("Invalid first parameter.")
-	}*/
-
 	file, err := stdOs.Open(params[0])
 	if err != nil {
 		return nil, fmt.Errorf("Cannot open file %s: %s", params[0], err)
@@ -133,8 +87,7 @@ func (p *Plugin) exportRegmatch(params []string) (result interface{}, err error)
 
 		curline++
 		if curline >= startline {
-			//if _, ok := p.executeRegmatch(decode(encoder, scanner.Bytes()), rx); ok {
-				if match, _ :=regexp.Match(params[1],decode(encoder, scanner.Bytes())); match {
+			if match, _ :=regexp.Match(params[1],decode(encoder, scanner.Bytes())); match {
 				ret = 1
 			}
 		}
