@@ -2073,65 +2073,53 @@ class CImportDataAdapterTest extends PHPUnit_Framework_TestCase {
 	public function testGetMediaTypes() {
 		$adapter = $this->getAdapter($this->getMediaTypeXml());
 
+		$defaults = DB::getDefaults('media_type');
+		unset($defaults['exec_params']);
+
 		$this->assertEquals($adapter->getMediaTypes(), [
 			[
 				'name' => 'Email',
-				'type' => '0',
+				'type' => (string) CXmlConstantValue::MEDIA_TYPE_EMAIL,
 				'smtp_server' => 'mail.example.com',
 				'smtp_helo' => 'example.com',
 				'smtp_email' => 'zabbix@example.com',
-				'content_type' => '0',
-				'smtp_port' => '25',
-				'smtp_security' => '0',
-				'smtp_verify_host' => '0',
-				'smtp_verify_peer' => '0',
-				'smtp_authentication' => '0',
-				'username' => '',
-				'parameters' => '',
-				'gsm_modem' => '',
-				'status' => '0',
-				'attempt_interval' => '10s',
-				'script' => '',
-				'timeout' => '30s',
-				'process_tags' => '0',
-				'show_event_menu' => '1',
-				'event_menu_url' => '',
-				'event_menu_name' => '',
-				'description' => '',
-				'passwd' => '',
-				'exec_path' => '',
-				'maxsessions' => '1',
-				'maxattempts' => '3'
-			],
+				'parameters' => ''
+			] + $defaults,
+			[
+				'name' => 'Script',
+				'type' => (string) CXmlConstantValue::MEDIA_TYPE_SCRIPT,
+				'exec_path' => 'script.sh',
+				'exec_params' => ''
+			] + $defaults,
 			[
 				'name' => 'SMS',
-				'type' => '2',
+				'type' => (string) CXmlConstantValue::MEDIA_TYPE_SMS,
 				'gsm_modem' => '/dev/ttyS0',
-				'smtp_server' => '',
-				'smtp_port' => '25',
-				'smtp_helo' => '',
-				'smtp_email' => '',
-				'smtp_security' => '0',
-				'smtp_verify_host' => '0',
-				'smtp_verify_peer' => '0',
-				'smtp_authentication' => '0',
-				'username' => '',
-				'content_type' => '1',
-				'parameters' => '',
-				'status' => '0',
-				'attempt_interval' => '10s',
-				'script' => '',
-				'timeout' => '30s',
-				'process_tags' => '0',
-				'show_event_menu' => '1',
-				'event_menu_url' => '',
-				'event_menu_name' => '',
-				'description' => '',
-				'passwd' => '',
-				'exec_path' => '',
-				'maxsessions' => '1',
-				'maxattempts' => '3'
-			]
+				'parameters' => ''
+			] + $defaults,
+			[
+				'name' => 'Webhook',
+				'type' => (string) CXmlConstantValue::MEDIA_TYPE_WEBHOOK,
+				'parameters' => [
+					[
+						'name' => 'URL',
+						'value' => ''
+					],
+					[
+						'name' => 'To',
+						'value' => '{ALERT.SENDTO}'
+					],
+					[
+						'name' => 'Subject',
+						'value' => '{ALERT.SUBJECT}'
+					],
+					[
+						'name' => 'Message',
+						'value' => '{ALERT.MESSAGE}'
+					],
+				],
+				'script' => 'return true;'
+			] + $defaults
 		]);
 	}
 
