@@ -55,6 +55,8 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		return p.exportTime(params)
 	case "vfs.file.regexp":
 		return p.exportRegexp(params)
+	case "vfs.file.regmatch":
+		return p.exportRegmatch(params)
 	default:
 		return nil, errors.New("Unsupported metric.")
 	}
@@ -84,5 +86,6 @@ func init() {
 		"vfs.file.exists", "Returns if file exists or not.",
 		"vfs.file.time", "Returns file time information.",
 		"vfs.file.size", "Returns file size.",
-		"vfs.file.regexp", "Find string in a file.")
+		"vfs.file.regexp", "Find string in a file.",
+		"vfs.file.regmatch", "Find string in a file.")
 }
