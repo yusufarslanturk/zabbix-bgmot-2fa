@@ -23,8 +23,6 @@ package win32
 
 import (
 	"syscall"
-
-	"golang.org/x/sys/windows"
 )
 
 type Hlib syscall.Handle
@@ -35,38 +33,6 @@ const (
 	IF_MAX_STRING_SIZE         = 256
 	IF_MAX_PHYS_ADDRESS_LENGTH = 32
 )
-
-type MIB_IFROW struct {
-	Name            [windows.MAX_INTERFACE_NAME_LEN]uint16
-	Index           uint32
-	Type            uint32
-	Mtu             uint32
-	Speed           uint32
-	PhysAddrLen     uint32
-	PhysAddr        [windows.MAXLEN_PHYSADDR]byte
-	AdminStatus     uint32
-	OperStatus      uint32
-	LastChange      uint32
-	InOctets        uint32
-	InUcastPkts     uint32
-	InNUcastPkts    uint32
-	InDiscards      uint32
-	InErrors        uint32
-	InUnknownProtos uint32
-	OutOctets       uint32
-	OutUcastPkts    uint32
-	OutNUcastPkts   uint32
-	OutDiscards     uint32
-	OutErrors       uint32
-	OutQLen         uint32
-	DescrLen        uint32
-	Descr           [windows.MAXLEN_IFDESCR]byte
-}
-
-type MIB_IFTABLE struct {
-	NumEntries uint32
-	Table      [ANY_SIZE]MIB_IFROW
-}
 
 type GUID struct {
 	Data1 uint32

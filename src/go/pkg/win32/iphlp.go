@@ -31,7 +31,6 @@ import (
 var (
 	hIphlp Hlib
 
-	getIfTable     uintptr
 	getIfTable2    uintptr
 	freeMibTable   uintptr
 	getIpAddrTable uintptr
@@ -40,23 +39,9 @@ var (
 func init() {
 	hIphlp = mustLoadLibrary("iphlpapi.dll")
 
-	getIfTable = hIphlp.mustGetProcAddress("GetIfTable")
 	getIfTable2 = hIphlp.mustGetProcAddress("GetIfTable2")
 	freeMibTable = hIphlp.mustGetProcAddress("FreeMibTable")
 	getIpAddrTable = hIphlp.mustGetProcAddress("GetIpAddrTable")
-}
-
-func GetIfTable(table *MIB_IFTABLE, sizeIn uint32, order bool) (sizeOut uint32, err error) {
-	sizeOut = sizeIn
-	ret, _, syserr := syscall.Syscall(getIfTable, 3, uintptr(unsafe.Pointer(table)),
-		uintptr(unsafe.Pointer(&sizeOut)), bool2uintptr(order))
-
-	if ret != windows.NO_ERROR {
-		if syscall.Errno(ret) != syscall.ERROR_INSUFFICIENT_BUFFER {
-			return 0, syserr
-		}
-	}
-	return
 }
 
 func GetIfTable2() (table *MIB_IF_TABLE2, err error) {
