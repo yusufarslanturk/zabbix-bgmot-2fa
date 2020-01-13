@@ -41,8 +41,8 @@ var testCases = []testCase{
 		"3001:0db8:0000:0000:0000:ff00:0042:8329,2101:0db8:0000:0000:0000:ff00:0042:8329,2001:0db9:0000:0000:0000:ff00:0042:8329," +
 			"2001:0db8:0100:0000:0000:ff00:0042:8329,2001:0db8:0000:0001:0000:ff00:0042:8329,2001:0db8:0000:0000:0000:ff10:0042:8329," +
 			"2001:0db8:0000:0000:0000:ff00:0043:8329", true},
-	/*{10, "IPv6 compatible peer is connected", "::127.2.0.1", "127.2.0.1", false},
-	{11, "IPv6 compatible expanded peer is connected", "0:0:0:0:0:0:7F00:0001", "127.0.0.1", false},*/
+	{10, "IPv6 compatible peer is connected", "::127.2.0.1", "127.2.0.1", true},
+	{11, "IPv6 compatible expanded peer is connected", "0:0:0:0:0:0:7F00:0001", "127.0.0.1", true},
 	{12, "IPv6 mapped peer is connected", "::ffff:127.0.0.1", "127.0.0.1", false},
 	{13, "IPv6 mapped peer expanded is connected", "0:0:0:0:0:FFFF:7F00:0001", "127.0.0.1", false},
 	{14, "IPv6 compatible peer mismatch IP", "::127.2.0.1", "127.1.0.1", true},
@@ -56,8 +56,8 @@ var testCases = []testCase{
 	{22, "IPv6 mapped expanded is connected mismatch", "FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:7F00:0001", "127.0.0.1", true},
 	{23, "IPv6 local ip mismatch IPv4 local IP", "::1", "127.0.0.1", true},
 	{24, "IPv4 local IP expected, but IPv6 local IP expanded connected", "0:0:0:0:0:0:0:0001", "127.0.0.1", true},
-	/*{25, "IPv4 compatible peer is connected", "127.2.0.1", "::127.2.0.1", false},
-	{26, "IPv4 compatible expanded peer is connected", "127.0.0.1", "0:0:0:0:0:0:7F00:0001", false},*/
+	{25, "IPv4 compatible peer is connected", "127.2.0.1", "::127.2.0.1", true},
+	{26, "IPv4 compatible expanded peer is connected", "127.0.0.1", "0:0:0:0:0:0:7F00:0001", true},
 	{27, "IPv4 mapped peer is connected", "127.0.0.1", "::ffff:127.0.0.1", false},
 	{28, "IPv4 mapped peer expanded is connected", "127.0.0.1", "0:0:0:0:0:FFFF:7F00:0001", false},
 	{29, "IPv4 compatible peer mismatch IP", "127.1.0.1", "::127.2.0.1", true},
@@ -75,7 +75,7 @@ var testCases = []testCase{
 	{41, "Compare all 4 octets sanity check", "127.0.0.1", "127.0.0.0/32", true},
 	{42, "IPv4 does not match address that is not compatible or mapped", "2001:0db8:0000:0000:0000:ff00:0042:8329", "127.0.0.0/0", true},
 	{43, "IPv4 does not match address that is not compatible or mapped 2", "0:0:0:0:0:ff00:0042:8329", "127.0.0.0/0", true},
-	/*{44, "IPv4 match address that is compatible or mapped", "::1", "127.0.0.0/0", false},*/
+	{44, "IPv4 match address that is compatible or mapped", "::1", "127.0.0.0/0", true},
 	{45, "Compare only first 96 bits", "0:0:0:0:0:0:0:0001", "0:0:0:0:0:0:ffff:ffff/96", false},
 	{46, "Compare 128 bits", "0:0:0:0:0:0:0:0001", "0:0:0:0:0:0:ffff:ffff/128", true},
 	{47, "Compare only the first 3 octets where the first one does not match", "128.0.0.1", "127.0.0.1/24", true},
@@ -95,9 +95,9 @@ var testCases = []testCase{
 	{57, "Long list of allowed peers but there is match", "127.2.1.5",
 		"localhost,127.0.0.2,127.0.0.0/24,0000:0000:0000:0000:0000:0000:127.0.0.1,::FFFF:127.0.0.1,0000:0000:0000:0000:0000:0000:0000:0003," +
 			"::127.0.0.1,::127.0.0.1/128,::1,::1/96,::,::/0,0.0.0.0/0,0000:0000:0000:0000:0000:0000:0000:0000/0", false},
-	/*{58, "Long list of allowed peers but there is match IPv6", "2001:0db8:0000:0000:0000:ff00:0042:8329",
-	"localhost,127.0.0.2,127.0.0.0/24,0000:0000:0000:0000:0000:0000:127.0.0.1,::FFFF:127.0.0.1,0000:0000:0000:0000:0000:0000:0000:0003," +
-		"::127.0.0.1,::127.0.0.1/128,::1,::1/96,::,::/0,0.0.0.0/0,0000:0000:0000:0000:0000:0000:0000:0000/0", false},*/
+	{58, "Long list of allowed peers but there is match IPv6", "2001:0db8:0000:0000:0000:ff00:0042:8329",
+		"localhost,127.0.0.2,127.0.0.0/24,0000:0000:0000:0000:0000:0000:127.0.0.1,::FFFF:127.0.0.1,0000:0000:0000:0000:0000:0000:0000:0003," +
+			"::127.0.0.1,::127.0.0.1/128,::1,::1/96,::,::/0,0.0.0.0/0,0000:0000:0000:0000:0000:0000:0000:0000/0", false},
 	{59, "IPv6 unspecified address in list, connection from IPv6", "::1", "::", true},
 	{60, "IPv6 unspecified address in list, connection from IPv4", "127.0.0.1", "::", true},
 }
