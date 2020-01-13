@@ -357,7 +357,8 @@ class JMXItemChecker extends ItemChecker
 				{
 					logger.trace("looking for attributes of primitive types");
 					String descr = (attrInfo.getName().equals(attrInfo.getDescription()) ? null : attrInfo.getDescription());
-					findPrimitiveAttributes(counters, name, descr, attrInfo.getName(), values.get(attrInfo.getName()));
+					getAttributeFields(counters, name, descr, attrInfo.getName(), values.get(attrInfo.getName()),
+						propertiesAsMacros);
 				}
 				catch (Exception e)
 				{
