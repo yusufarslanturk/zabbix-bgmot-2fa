@@ -235,7 +235,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	switch key {
 	case "net.if.discovery":
 		if len(params) > 0 {
-			return nil, errors.New(errorTooManyParams)
+			return nil, errors.New(errorParametersNotAllowed)
 		}
 		var devices []msgIfDiscovery
 		if devices, err = p.getDevDiscovery(); err != nil {
@@ -248,7 +248,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		return string(b), nil
 	case "net.if.list":
 		if len(params) > 0 {
-			return nil, errors.New(errorTooManyParams)
+			return nil, errors.New(errorParametersNotAllowed)
 		}
 		return p.getDevList()
 	case "net.if.in":

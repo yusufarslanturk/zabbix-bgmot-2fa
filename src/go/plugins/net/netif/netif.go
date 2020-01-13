@@ -24,10 +24,11 @@ import (
 )
 
 const (
-	errorInvalidSecondParam = "Invalid second parameter."
-	errorEmptyIfName        = "Network interface name cannot be empty."
-	errorTooManyParams      = "Too many parameters."
-	errorUnsupportedMetric  = "Unsupported metric."
+	errorInvalidSecondParam   = "Invalid second parameter."
+	errorEmptyIfName          = "Network interface name cannot be empty."
+	errorTooManyParams        = "Too many parameters."
+	errorUnsupportedMetric    = "Unsupported metric."
+	errorParametersNotAllowed = "Item does not allow parameters."
 )
 
 // Plugin -
