@@ -20,8 +20,6 @@
 package file
 
 import (
-	"errors"
-
 	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/std"
@@ -58,7 +56,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	case "vfs.file.regmatch":
 		return p.exportRegmatch(params)
 	default:
-		return nil, errors.New("Unsupported metric.")
+		return nil, plugin.UnsupportedMetricError
 	}
 }
 

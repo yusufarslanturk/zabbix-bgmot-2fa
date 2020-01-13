@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-05 01:44+0200\n"
+"POT-Creation-Date: 2020-01-12 01:48+0200\n"
 "PO-Revision-Date: 2019-12-09 09:46+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -33,10 +33,12 @@ msgstr "\"%1$s\" 로 지정해 주세요"
 msgid "\"%1$s\" value must be less than or equal to \"%2$s\" value"
 msgstr ""
 
-#: include/classes/api/services/CMaintenance.php:353
-#: include/classes/api/services/CMaintenance.php:358
-#: include/classes/api/services/CMaintenance.php:569
-#: include/classes/api/services/CMaintenance.php:583 maintenance.php:139
+#: include/classes/api/services/CMaintenance.php:351
+#: include/classes/api/services/CMaintenance.php:356
+#: include/classes/api/services/CMaintenance.php:389
+#: include/classes/api/services/CMaintenance.php:578
+#: include/classes/api/services/CMaintenance.php:594
+#: include/classes/api/services/CMaintenance.php:657 maintenance.php:139
 #: maintenance.php:145 services.php:182 services.php:191
 #, c-format
 msgid "\"%s\" must be between 1970.01.01 and 2038.01.18."
@@ -66,7 +68,7 @@ msgid "%1$d day"
 msgid_plural "%1$d days"
 msgstr[0] "%1$d 일"
 
-#: jsLoader.php:254
+#: jsLoader.php:255
 #, c-format
 msgctxt "screen reader"
 msgid "%1$d matches for %2$s found"
@@ -127,8 +129,8 @@ msgstr[0] "메세지 %1$s건"
 #: include/classes/widgets/CWidgetConfig.php:162
 #: include/classes/widgets/CWidgetConfig.php:163
 #: include/classes/widgets/CWidgetConfig.php:164
-#: include/classes/widgets/CWidgetConfig.php:165 jsLoader.php:295
-#: jsLoader.php:296 jsLoader.php:297 jsLoader.php:298
+#: include/classes/widgets/CWidgetConfig.php:165 jsLoader.php:296
+#: jsLoader.php:297 jsLoader.php:298 jsLoader.php:299
 #, c-format
 msgid "%1$s minute"
 msgid_plural "%1$s minutes"
@@ -140,7 +142,7 @@ msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
 msgstr[0] "%2$s대 중 %1$s대의 요소에서 장애발생중"
 
-#: jsLoader.php:255
+#: jsLoader.php:256
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s preselected, use down,up arrow keys and enter to select"
@@ -168,14 +170,14 @@ msgstr[0] "%1$s 의 재시도 가능"
 
 #: app/views/administration.user.edit.php:365
 #: include/classes/widgets/CWidgetConfig.php:160
-#: include/classes/widgets/CWidgetConfig.php:161 jsLoader.php:293
-#: jsLoader.php:294
+#: include/classes/widgets/CWidgetConfig.php:161 jsLoader.php:294
+#: jsLoader.php:295
 #, c-format
 msgid "%1$s second"
 msgid_plural "%1$s seconds"
 msgstr[0] "%1$s 초"
 
-#: jsLoader.php:236
+#: jsLoader.php:237
 #, c-format
 msgid "%1$s symbols remaining"
 msgstr ""
@@ -193,13 +195,13 @@ msgctxt "screen reader"
 msgid "%1$s, Severity, %2$s"
 msgstr "%1$s의 심각도는, %2$s"
 
-#: jsLoader.php:249
+#: jsLoader.php:250
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, read only"
 msgstr "%1$s는 읽기전용 입니다."
 
-#: jsLoader.php:299
+#: jsLoader.php:300
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, selected"
@@ -355,7 +357,7 @@ msgstr[0] "어카운트가 %1$s초 블록되었습니다."
 msgid "Ack"
 msgstr "인지"
 
-#: app/views/monitoring.acknowledge.edit.php:72 jsLoader.php:259
+#: app/views/monitoring.acknowledge.edit.php:72 jsLoader.php:260
 msgid "Acknowledge"
 msgstr "인지"
 
@@ -405,7 +407,7 @@ msgstr "대응 완료된 해결 이벤트"
 #: include/views/configuration.action.edit.php:1877
 #: include/views/configuration.action.edit.php:1971
 #: include/views/configuration.action.edit.php:1993
-#: include/views/configuration.action.edit.php:2138
+#: include/views/configuration.action.edit.php:2137
 #: include/views/configuration.correlation.edit.php:48
 #: include/views/configuration.correlation.edit.php:218
 #: include/views/configuration.graph.edit.php:351
@@ -510,7 +512,7 @@ msgstr "액션을 갱신하였습니다"
 #: include/views/configuration.action.list.php:23
 #: include/views/monitoring.screen.list.php:81
 #: include/views/monitoring.slideconf.list.php:66
-#: include/views/monitoring.sysmap.list.php:61 jsLoader.php:258
+#: include/views/monitoring.sysmap.list.php:61 jsLoader.php:259
 #: tr_events.php:187
 msgid "Actions"
 msgstr "액션"
@@ -527,16 +529,16 @@ msgctxt "maintenance status"
 msgid "Active"
 msgstr "활성"
 
-#: include/classes/api/services/CMaintenance.php:353
-#: include/classes/api/services/CMaintenance.php:569
+#: include/classes/api/services/CMaintenance.php:351
+#: include/classes/api/services/CMaintenance.php:578
 #: include/views/configuration.maintenance.edit.php:54
 #: include/views/configuration.maintenance.list.php:72 maintenance.php:45
 #: maintenance.php:139
 msgid "Active since"
 msgstr "시작시간"
 
-#: include/classes/api/services/CMaintenance.php:358
-#: include/classes/api/services/CMaintenance.php:583
+#: include/classes/api/services/CMaintenance.php:356
+#: include/classes/api/services/CMaintenance.php:594
 #: include/views/configuration.maintenance.edit.php:60
 #: include/views/configuration.maintenance.list.php:73 maintenance.php:48
 #: maintenance.php:145
@@ -556,9 +558,9 @@ msgstr "종료시간"
 #: app/views/dashboard.sharing.edit.php:49
 #: app/views/hostmacros.list.html.php:204
 #: app/views/monitoring.problem.view.php:210
-#: app/views/monitoring.problem.view.php:257 app/views/popup.httpstep.php:68
-#: app/views/popup.httpstep.php:94 app/views/popup.httpstep.php:118
-#: app/views/popup.httpstep.php:137 app/views/popup.httpstep.php:176
+#: app/views/monitoring.problem.view.php:257 app/views/popup.httpstep.php:69
+#: app/views/popup.httpstep.php:95 app/views/popup.httpstep.php:119
+#: app/views/popup.httpstep.php:138 app/views/popup.httpstep.php:177
 #: app/views/popup.media.php:48 app/views/popup.media.php:111
 #: app/views/popup.triggerwizard.php:104 app/views/popup.triggerwizard.php:138
 #: include/classes/widgets/CWidgetHelper.php:484 include/forms.inc.php:1487
@@ -586,8 +588,8 @@ msgstr "종료시간"
 #: include/views/configuration.action.edit.php:1843
 #: include/views/configuration.action.edit.php:1975
 #: include/views/configuration.action.edit.php:1997
-#: include/views/configuration.action.edit.php:2328
-#: include/views/configuration.action.edit.php:2375
+#: include/views/configuration.action.edit.php:2327
+#: include/views/configuration.action.edit.php:2374
 #: include/views/configuration.application.edit.php:60
 #: include/views/configuration.correlation.edit.php:197
 #: include/views/configuration.correlation.edit.php:255
@@ -687,7 +689,7 @@ msgstr "종료시간"
 #: include/views/monitoring.sysmap.edit.php:294
 #: include/views/monitoring.sysmap.edit.php:330
 #: include/views/monitoring.sysmap.edit.php:398 jsLoader.php:117
-#: jsLoader.php:311
+#: jsLoader.php:312
 msgid "Add"
 msgstr "추가"
 
@@ -699,7 +701,7 @@ msgstr "새로운 위젯을 추가"
 msgid "Add child"
 msgstr "하위 추가"
 
-#: jsLoader.php:313
+#: jsLoader.php:314
 msgid "Add child element"
 msgstr "하위 요소 추가"
 
@@ -707,7 +709,7 @@ msgstr "하위 요소 추가"
 msgid "Add host"
 msgstr "호스트 추가"
 
-#: jsLoader.php:314
+#: jsLoader.php:315
 msgid "Add multiple maps"
 msgstr "복수의 맵을 추가"
 
@@ -749,7 +751,7 @@ msgstr "위젯을 추가"
 msgid "Added"
 msgstr "추가"
 
-#: jsLoader.php:247
+#: jsLoader.php:248
 #, c-format
 msgctxt "screen reader"
 msgid "Added, %1$s"
@@ -859,7 +861,7 @@ msgstr "그리드에 정렬하기"
 #: include/views/administration.general.gui.edit.php:44
 #: include/views/configuration.action.edit.php:767
 #: include/views/configuration.action.edit.php:1517
-#: include/views/configuration.action.edit.php:2287
+#: include/views/configuration.action.edit.php:2286
 #: include/views/monitoring.sysmap.edit.php:213
 msgid "All"
 msgstr "모두"
@@ -946,7 +948,7 @@ msgstr "And"
 
 #: app/views/monitoring.problem.view.php:227
 #: include/classes/widgets/forms/CWidgetFormProblems.php:94
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:379
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:383
 #: include/views/configuration.action.edit.php:111
 #: include/views/configuration.action.edit.php:1143
 #: include/views/configuration.correlation.edit.php:93
@@ -1060,7 +1062,7 @@ msgstr "어플리케이션"
 #: include/views/js/monitoring.sysmaps.js.php:534
 #: include/views/js/monitoring.sysmaps.js.php:629
 #: include/views/js/monitoring.sysmaps.js.php:729 jsLoader.php:116
-#: jsLoader.php:238 jsLoader.php:310
+#: jsLoader.php:239 jsLoader.php:311
 msgid "Apply"
 msgstr "적용"
 
@@ -1151,7 +1153,7 @@ msgid "At (hour:minute)"
 msgstr ""
 
 #: include/classes/api/services/CMaintenance.php:279
-#: include/classes/api/services/CMaintenance.php:664
+#: include/classes/api/services/CMaintenance.php:686
 #: include/views/configuration.maintenance.edit.php:233
 msgid "At least one host group or host must be selected."
 msgstr "적어도 1개의 호스트 그룹 혹은 호스트가 선택되어 있을 필요가 있습니다."
@@ -1160,10 +1162,10 @@ msgstr "적어도 1개의 호스트 그룹 혹은 호스트가 선택되어 있�
 msgid "At least one interface must exist."
 msgstr "최소 하나 이상의 인터페이스가 존재해야 합니다."
 
-#: include/classes/api/services/CMaintenance.php:369
-#: include/classes/api/services/CMaintenance.php:374
-#: include/classes/api/services/CMaintenance.php:601
-#: include/classes/api/services/CMaintenance.php:609
+#: include/classes/api/services/CMaintenance.php:367
+#: include/classes/api/services/CMaintenance.php:375
+#: include/classes/api/services/CMaintenance.php:614
+#: include/classes/api/services/CMaintenance.php:622
 msgid "At least one maintenance period must be created."
 msgstr "최소 하나 이상의 메인터넌스 기간을 작성할 필요가 있습니다."
 
@@ -1193,7 +1195,7 @@ msgstr "최소 하나 이상의 갱신시 실행내용이나 메세지가 필요
 
 #: include/views/configuration.action.edit.php:754
 #: include/views/configuration.action.edit.php:1501
-#: include/views/configuration.action.edit.php:2262
+#: include/views/configuration.action.edit.php:2261
 msgid "At least one user or user group must be selected."
 msgstr "최소 하나 이상의 유저 혹은 유저 그룹을 선택할 필요가 있습니다."
 
@@ -1255,7 +1257,7 @@ msgstr "인증에 실패하였습니다 : %1$s"
 
 #: include/views/configuration.action.edit.php:946
 #: include/views/configuration.action.edit.php:1731
-#: include/views/configuration.action.edit.php:2191
+#: include/views/configuration.action.edit.php:2190
 #: include/views/configuration.host.discovery.edit.php:481
 #: include/views/configuration.item.edit.php:601
 #: include/views/configuration.item.massupdate.php:283
@@ -1291,8 +1293,8 @@ msgid "Authentication settings updated"
 msgstr "인증 설정을 갱신하였습니다"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:55
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:155
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:228
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:157
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:232
 msgctxt "history source selection method"
 msgid "Auto"
 msgstr "자동"
@@ -1433,14 +1435,14 @@ msgstr "차단됨"
 msgid "Blue"
 msgstr "Blue"
 
-#: app/views/popup.httpstep.php:155
+#: app/views/popup.httpstep.php:156
 #: include/views/configuration.host.discovery.edit.php:254
 #: include/views/configuration.item.edit.php:292
 #: include/views/configuration.item.prototype.edit.php:274
 msgid "Body"
 msgstr "Body"
 
-#: app/views/popup.httpstep.php:157
+#: app/views/popup.httpstep.php:158
 #: include/views/configuration.host.discovery.edit.php:256
 #: include/views/configuration.item.edit.php:294
 #: include/views/configuration.item.prototype.edit.php:276
@@ -1561,7 +1563,7 @@ msgstr "달력"
 msgid "Callback"
 msgstr "콜백"
 
-#: jsLoader.php:250
+#: jsLoader.php:251
 msgctxt "screen reader"
 msgid "Can not be removed"
 msgstr "삭제할 수 없습니다"
@@ -1579,7 +1581,7 @@ msgstr "삭제할 수 없습니다"
 #: include/views/configuration.action.edit.php:1225
 #: include/views/configuration.action.edit.php:1245
 #: include/views/configuration.action.edit.php:1848
-#: include/views/configuration.action.edit.php:2331
+#: include/views/configuration.action.edit.php:2330
 #: include/views/configuration.maintenance.edit.php:147
 #: include/views/configuration.services.parent.list.php:85
 #: include/views/conf.import.php:127
@@ -1593,7 +1595,7 @@ msgstr "삭제할 수 없습니다"
 #: include/views/js/configuration.discovery.edit.js.php:708
 #: include/views/js/conf.import.js.php:16
 #: include/views/monitoring.slideconf.edit.php:277 jsLoader.php:119
-#: jsLoader.php:137 jsLoader.php:239 jsLoader.php:312 jsLoader.php:324
+#: jsLoader.php:137 jsLoader.php:240 jsLoader.php:313 jsLoader.php:325
 msgid "Cancel"
 msgstr "취소"
 
@@ -1906,7 +1908,7 @@ msgstr "템플릿을 작성할 수 없습니다."
 msgid "Cannot create the configuration file."
 msgstr "설정 파일을 작성할 수 없습니다."
 
-#: include/classes/api/services/CDashboard.php:389
+#: include/classes/api/services/CDashboard.php:388
 #, c-format
 msgid "Cannot create widget: %1$s."
 msgstr "위젯을 작성할 수 없습니다 : %1$s。"
@@ -1983,7 +1985,7 @@ msgid "Cannot delete host because maintenance \"%1$s\" must contain at least one
 msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must contain at least one host or host group."
 msgstr[0] ""
 
-#: include/classes/api/services/CHostGroup.php:1537
+#: include/classes/api/services/CHostGroup.php:1532
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
@@ -2057,7 +2059,7 @@ msgid "Cannot delete script"
 msgid_plural "Cannot delete scripts"
 msgstr[0] "스크립트를 삭제할 수 없습니다"
 
-#: include/classes/api/services/CScript.php:589
+#: include/classes/api/services/CScript.php:594
 #, c-format
 msgid "Cannot delete scripts. Script \"%1$s\" is used in action operation \"%2$s\"."
 msgstr "스크립트를 삭제할 수 없습니다. 스크립트 \"%1$s\"는 실행하는 액션 \"%2$s\"에서 이용되고 있습니다."
@@ -2094,7 +2096,7 @@ msgstr ""
 msgid "Cannot delete templated graph."
 msgstr ""
 
-#: include/classes/api/services/CHostPrototype.php:1084
+#: include/classes/api/services/CHostPrototype.php:1092
 msgid "Cannot delete templated host prototype."
 msgstr "템플릿 호스트 프로토타입을 삭제할 수 없습니다."
 
@@ -2573,6 +2575,10 @@ msgstr "비활성의 상태의 인벤토리 항목은 설정할 수 없습니다
 msgid "Cannot set resource ID for screen element."
 msgstr "스크린의 요소의 리소스ID를 설정할 수 없습니다."
 
+#: jsLoader.php:215
+msgid "Cannot support notification audio for this device."
+msgstr ""
+
 #: include/classes/api/services/CHostInterface.php:244
 msgid "Cannot switch host for interface."
 msgstr "인터페이스를 위한 호스트를 변경할 수 없습니다."
@@ -2690,7 +2696,7 @@ msgstr "템플릿스크린\"%1$s\"의 \"templateid\"를 갱신할 수 없습니�
 msgid "Cannot update a discovered graph."
 msgstr "발견된 그래프를 갱신할 수 없습니다"
 
-#: include/classes/api/services/CHostGroup.php:837
+#: include/classes/api/services/CHostGroup.php:832
 msgid "Cannot update a discovered host group."
 msgstr "발견된 호스트 그룹을 갱신할 수 없습니다"
 
@@ -2757,9 +2763,9 @@ msgstr "그래프 프로토타입을 갱신할 수 없습니다"
 msgid "Cannot update group"
 msgstr "그룹을 갱신할 수 없습니다"
 
-#: include/classes/api/services/CHostGroup.php:1043
-#: include/classes/api/services/CHostGroup.php:1147
-#: include/classes/api/services/CHostGroup.php:1283
+#: include/classes/api/services/CHostGroup.php:1038
+#: include/classes/api/services/CHostGroup.php:1142
+#: include/classes/api/services/CHostGroup.php:1278
 #, c-format
 msgid "Cannot update groups for discovered host \"%1$s\"."
 msgstr "발견된 호스트 \"%1$s\"의 그룹을 갱신할 수 없습니다"
@@ -3146,7 +3152,7 @@ msgstr "템플릿 %1$s에 모순되는 내용이 존재합니다."
 msgid "Circular template linkage is not allowed."
 msgstr "템플릿의 모순된 링크는 할 수 없습니다."
 
-#: jsLoader.php:216
+#: jsLoader.php:217
 msgid "Clear"
 msgstr "클리어"
 
@@ -3169,7 +3175,7 @@ msgstr "링크 삭제시 클리어"
 msgid "Click and drag to desired size."
 msgstr ""
 
-#: jsLoader.php:237
+#: jsLoader.php:238
 msgid "Click to view or edit"
 msgstr ""
 
@@ -3183,7 +3189,7 @@ msgstr "시각"
 #: include/views/administration.general.iconmap.edit.php:134
 #: include/views/administration.general.regularexpressions.edit.php:146
 #: include/views/administration.general.valuemapping.edit.php:107
-#: include/views/configuration.action.edit.php:2364
+#: include/views/configuration.action.edit.php:2363
 #: include/views/configuration.application.edit.php:52
 #: include/views/configuration.correlation.edit.php:277
 #: include/views/configuration.discovery.edit.php:135
@@ -3201,7 +3207,7 @@ msgstr "시각"
 #: include/views/configuration.triggers.edit.php:629
 #: include/views/monitoring.screen.edit.php:222
 #: include/views/monitoring.slideconf.edit.php:275
-#: include/views/monitoring.sysmap.edit.php:389 jsLoader.php:261
+#: include/views/monitoring.sysmap.edit.php:389 jsLoader.php:262
 msgid "Clone"
 msgstr "복제"
 
@@ -3210,7 +3216,7 @@ msgstr "복제"
 #: include/views/js/monitoring.sysmaps.js.php:541
 #: include/views/js/monitoring.sysmaps.js.php:636
 #: include/views/js/monitoring.sysmaps.js.php:733 jsLoader.php:138
-#: jsLoader.php:233 jsLoader.php:317
+#: jsLoader.php:234 jsLoader.php:318
 msgid "Close"
 msgstr "닫기"
 
@@ -3234,8 +3240,8 @@ msgid "Close problem"
 msgstr "장애의 클로즈"
 
 #: include/classes/html/CCollapsibleUiWidget.php:55
-#: include/classes/widgets/CWidgetHelper.php:945 jsLoader.php:227
-#: jsLoader.php:232
+#: include/classes/widgets/CWidgetHelper.php:945 jsLoader.php:228
+#: jsLoader.php:233
 msgid "Collapse"
 msgstr "축소"
 
@@ -3290,8 +3296,8 @@ msgstr "커맨드"
 #: include/views/configuration.action.edit.php:1006
 #: include/views/configuration.action.edit.php:1781
 #: include/views/configuration.action.edit.php:1790
-#: include/views/configuration.action.edit.php:2240
-#: include/views/configuration.action.edit.php:2249
+#: include/views/configuration.action.edit.php:2239
+#: include/views/configuration.action.edit.php:2248
 msgid "Commands"
 msgstr "커맨드"
 
@@ -3359,7 +3365,7 @@ msgid "Conditions duplicates for correlation \"%1$s\"."
 msgstr "상관관계 \"%1$s\"의 실행조건이 중복되어 있습니다."
 
 #: include/menu.inc.php:177 include/views/inventory.host.view.php:181
-#: jsLoader.php:260
+#: jsLoader.php:261
 msgid "Configuration"
 msgstr "설정"
 
@@ -3471,7 +3477,7 @@ msgid "Configuration of screens"
 msgstr "스크린 설정"
 
 #: app/controllers/CControllerScriptEdit.php:155
-#: app/controllers/CControllerScriptList.php:153
+#: app/controllers/CControllerScriptList.php:151
 msgid "Configuration of scripts"
 msgstr "스크립트 설정"
 
@@ -3844,11 +3850,11 @@ msgstr "상관관계의 작성"
 msgid "Create dashboard"
 msgstr "대시보드의 작성"
 
-#: jsLoader.php:265
+#: jsLoader.php:266
 msgid "Create dependent discovery rule"
 msgstr ""
 
-#: jsLoader.php:264
+#: jsLoader.php:265
 msgid "Create dependent item"
 msgstr "의존 아이템의 작성"
 
@@ -3949,7 +3955,7 @@ msgstr "맵 작성"
 msgid "Create media type"
 msgstr "연락 방법 작성"
 
-#: include/views/conf.import.php:25 jsLoader.php:262
+#: include/views/conf.import.php:25 jsLoader.php:263
 msgid "Create new"
 msgstr "새 작성"
 
@@ -3973,7 +3979,7 @@ msgstr "슬라이드 쇼 작성"
 msgid "Create template"
 msgstr "템플릿 작성"
 
-#: include/views/configuration.triggers.list.php:168 jsLoader.php:263
+#: include/views/configuration.triggers.list.php:168 jsLoader.php:264
 msgid "Create trigger"
 msgstr "트리거 작성"
 
@@ -4073,7 +4079,7 @@ msgstr "커스텀 스크린"
 
 #: include/views/configuration.action.edit.php:923
 #: include/views/configuration.action.edit.php:1681
-#: include/views/configuration.action.edit.php:2159
+#: include/views/configuration.action.edit.php:2158
 msgid "Custom script"
 msgstr "커스텀스크립트"
 
@@ -4147,17 +4153,17 @@ msgstr "Dark"
 msgid "Dashboard"
 msgstr "대쉬보드"
 
-#: include/classes/api/services/CDashboard.php:436
+#: include/classes/api/services/CDashboard.php:435
 #, c-format
 msgid "Dashboard \"%1$s\" already exists."
 msgstr "대시보드 \"%1$s\"는 이미 존재합니다."
 
-#: include/classes/api/services/CDashboard.php:559
+#: include/classes/api/services/CDashboard.php:558
 #, c-format
 msgid "Dashboard \"%1$s\" cell X - %2$s Y - %3$s is already taken."
 msgstr "대시보드 \"%1$s\"의 셀 X - %2$s Y - %3$s 는 사용중입니다."
 
-#: include/classes/api/services/CDashboard.php:572
+#: include/classes/api/services/CDashboard.php:571
 #, c-format
 msgid "Dashboard \"%1$s\" widget in cell X - %2$s Y - %3$s is out of bounds."
 msgstr "대시보드 \"%1$s\"의 셀 X - %2$s Y - %3$s 의 위젯은 범위 밖입니다."
@@ -4272,6 +4278,8 @@ msgstr "데이터베이스 타입"
 msgid "Database user"
 msgstr "데이터베이스 유저"
 
+#: include/classes/api/services/CMaintenance.php:390
+#: include/classes/api/services/CMaintenance.php:657
 #: include/forms.inc.php:2210 include/forms.inc.php:2295 maintenance.php:50
 msgid "Date"
 msgstr "날짜"
@@ -4365,7 +4373,7 @@ msgstr "기본 호스트 인벤토리 모드"
 msgid "Default login form"
 msgstr "기본 로그인 화면"
 
-#: include/views/configuration.action.edit.php:2296
+#: include/views/configuration.action.edit.php:2295
 msgid "Default media type"
 msgstr "기본 미디어 타입"
 
@@ -4375,7 +4383,7 @@ msgstr "기본 미디어 타입"
 #: include/views/configuration.action.edit.php:1531
 #: include/views/configuration.action.edit.php:1821
 #: include/views/configuration.action.edit.php:1872
-#: include/views/configuration.action.edit.php:2303
+#: include/views/configuration.action.edit.php:2302
 msgid "Default message"
 msgstr "디폴트 메시지"
 
@@ -4444,7 +4452,7 @@ msgstr "연장 시간"
 #: include/views/monitoring.screen.list.php:126
 #: include/views/monitoring.slideconf.list.php:97
 #: include/views/monitoring.sysmap.list.php:99 jsLoader.php:120
-#: jsLoader.php:266
+#: jsLoader.php:267
 msgid "Delete"
 msgstr "삭제"
 
@@ -4469,7 +4477,7 @@ msgstr "템플릿과 데이터를 삭제하시겠습니까? (경고: 링크되�
 msgid "Delete application?"
 msgstr "어플리케이션을 삭제하시겠습니까?"
 
-#: include/views/configuration.action.edit.php:2366
+#: include/views/configuration.action.edit.php:2365
 msgid "Delete current action?"
 msgstr "현재 액션을 삭제하시겠습니까?"
 
@@ -4477,7 +4485,7 @@ msgstr "현재 액션을 삭제하시겠습니까?"
 msgid "Delete current correlation?"
 msgstr "현재의 상관관계를 삭제하시겠습니다?"
 
-#: jsLoader.php:267
+#: jsLoader.php:268
 msgid "Delete dashboard?"
 msgstr "대시보드를 삭제하시겠습니까?"
 
@@ -4739,7 +4747,7 @@ msgstr "삭제"
 msgid "Deleted: Host \"%1$s\"."
 msgstr "삭제: 호스트\"%1$s\"."
 
-#: include/classes/api/services/CHostPrototype.php:952
+#: include/classes/api/services/CHostPrototype.php:960
 #, c-format
 msgid "Deleted: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr "삭제: \"%2$s\" 호스트 프로토타입\"%1$s\"."
@@ -5155,7 +5163,7 @@ msgstr "누계 그래프 표시"
 
 #: app/views/search.php:124 app/views/search.php:180 app/views/search.php:254
 #: include/actions.inc.php:1775 include/actions.inc.php:1847
-#: include/actions.inc.php:1938 include/func.inc.php:1658 jsLoader.php:320
+#: include/actions.inc.php:1938 include/func.inc.php:1658 jsLoader.php:321
 #: queue.php:302
 #, c-format
 msgid "Displaying %1$s of %2$s found"
@@ -5188,7 +5196,7 @@ msgstr ""
 msgid "Do not keep trends"
 msgstr ""
 
-#: jsLoader.php:146 jsLoader.php:268
+#: jsLoader.php:146 jsLoader.php:269
 msgid "Do you wish to replace the conditional expression?"
 msgstr "조건식을 치환하시겠습니까?"
 
@@ -5384,7 +5392,7 @@ msgstr ""
 #: include/views/js/configuration.discovery.edit.js.php:7
 #: include/views/js/monitoring.sysmaps.js.php:750
 #: include/views/js/monitoring.sysmaps.js.php:765 jsLoader.php:118
-#: jsLoader.php:306
+#: jsLoader.php:307
 msgid "Edit"
 msgstr "편집"
 
@@ -5404,11 +5412,11 @@ msgstr "스크린 변경"
 msgid "Edit slide show"
 msgstr "슬라이드 쇼 변경"
 
-#: jsLoader.php:309
+#: jsLoader.php:310
 msgid "Edit tree element"
 msgstr "트리 요소의 변경"
 
-#: jsLoader.php:269
+#: jsLoader.php:270
 msgid "Edit trigger"
 msgstr "트리거의 변경"
 
@@ -5530,7 +5538,7 @@ msgstr ""
 #: include/classes/api/services/CHost.php:1264
 #: include/classes/api/services/CHostPrototype.php:888
 #: include/classes/api/services/CImage.php:451
-#: include/classes/api/services/CMaintenance.php:512
+#: include/classes/api/services/CMaintenance.php:521
 #: include/classes/api/services/CMap.php:555
 #: include/classes/api/services/CMap.php:581
 #: include/classes/api/services/CMap.php:1022
@@ -5891,7 +5899,7 @@ msgstr "WMI쿼리를 실행하여 처음의 검색결과를 리턴. 리퀘스트
 #: app/views/administration.script.list.php:58
 #: include/views/configuration.action.edit.php:936
 #: include/views/configuration.action.edit.php:1712
-#: include/views/configuration.action.edit.php:2182
+#: include/views/configuration.action.edit.php:2181
 msgid "Execute on"
 msgstr "다음 실행"
 
@@ -5912,8 +5920,8 @@ msgid "Execution confirmation"
 msgstr "실행 확인"
 
 #: include/classes/html/CCollapsibleUiWidget.php:60
-#: include/classes/widgets/CWidgetHelper.php:945 jsLoader.php:228
-#: jsLoader.php:231
+#: include/classes/widgets/CWidgetHelper.php:945 jsLoader.php:229
+#: jsLoader.php:232
 msgid "Expand"
 msgstr "전개"
 
@@ -6096,7 +6104,7 @@ msgstr "항목 \"%1$s\"는 NULL로 설정할 수 없습니다."
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:521
 #: include/classes/api/services/CDRule.php:531
-#: include/classes/api/services/CHostGroup.php:954
+#: include/classes/api/services/CHostGroup.php:949
 #: include/classes/api/services/CHost.php:850
 #: include/classes/api/services/CTemplate.php:821
 #: include/classes/api/services/CTriggerGeneral.php:237
@@ -6293,7 +6301,7 @@ msgstr "고정"
 msgid "Flexible"
 msgstr "예외 설정"
 
-#: app/views/popup.httpstep.php:148
+#: app/views/popup.httpstep.php:149
 #: include/views/configuration.host.discovery.edit.php:244
 #: include/views/configuration.item.edit.php:282
 #: include/views/configuration.item.prototype.edit.php:264
@@ -6314,7 +6322,7 @@ msgstr "폰트 색상"
 msgid "Font size"
 msgstr "폰트 사이즈"
 
-#: app/views/popup.httpstep.php:80
+#: app/views/popup.httpstep.php:81
 msgid "Form data"
 msgstr "폼 데이터"
 
@@ -6438,7 +6446,7 @@ msgstr "글로벌 정규표현 \"%1$s\" 는 존재하지 않습니다."
 
 #: include/views/configuration.action.edit.php:926
 #: include/views/configuration.action.edit.php:1684
-#: include/views/configuration.action.edit.php:2162
+#: include/views/configuration.action.edit.php:2161
 msgid "Global script"
 msgstr "글로벌 스크립트"
 
@@ -6455,7 +6463,7 @@ msgstr "글로벌 값"
 msgid "Go back to %1$s"
 msgstr "%1$s에 돌아감"
 
-#: jsLoader.php:274
+#: jsLoader.php:275
 msgid "Go to"
 msgstr "다음 페이지로 이동"
 
@@ -6594,7 +6602,7 @@ msgstr "그래프 프로토타입를 찾을 수 없습니다."
 msgid "Graph prototype updated"
 msgstr "그래프 프로토타입을 갱신하였습니다"
 
-#: include/classes/api/services/CDashboard.php:782
+#: include/classes/api/services/CDashboard.php:781
 #, c-format
 msgid "Graph prototype with ID \"%1$s\" is not available."
 msgstr "ID \"%1$s\"의 그래프의 프로토타입은 사용할 수 없습니다."
@@ -6628,7 +6636,7 @@ msgstr "그래프 종류"
 msgid "Graph updated"
 msgstr "그래프를 갱신하였습니다"
 
-#: include/classes/api/services/CDashboard.php:765
+#: include/classes/api/services/CDashboard.php:764
 #, c-format
 msgid "Graph with ID \"%1$s\" is not available."
 msgstr "ID \"%1$s\"의 그래프는 사용할 수 없습니다."
@@ -6662,7 +6670,7 @@ msgstr "같은 이름에 다른 타입의 그래프가 존재합니다."
 #: include/views/conf.import.php:37 include/views/inventory.host.view.php:141
 #: include/views/inventory.host.view.php:165
 #: include/views/inventory.host.view.php:176
-#: include/views/monitoring.charts.php:63 jsLoader.php:275
+#: include/views/monitoring.charts.php:63 jsLoader.php:276
 msgid "Graphs"
 msgstr "그래프"
 
@@ -6713,7 +6721,7 @@ msgstr "그룹"
 msgid "Group \"%1$s\" cannot be deleted, because it is used by a host prototype."
 msgstr "호스트 프로토타입에서 이용되고 있기 때문에 그룹\"%1$s\"은 삭제할 수 없습니다."
 
-#: include/classes/api/services/CHostGroup.php:804
+#: include/classes/api/services/CHostGroup.php:799
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used in a correlation condition."
 msgstr "상관관계의 조건에서 사용되고 있는 그룹 \"%1$s\"은 삭제할 수 없습니다."
@@ -6751,7 +6759,7 @@ msgstr "디스커버리에서 발견한 호스트 \"%1$s\" 그룹."
 msgid "Group name"
 msgstr "그룹 이름"
 
-#: include/classes/api/services/CHostPrototype.php:1042
+#: include/classes/api/services/CHostPrototype.php:1050
 #, c-format
 msgid "Group prototype cannot be based on a discovered host group \"%1$s\"."
 msgstr "그룹 프로토타입에 발견된 호스트용의 그룹 \"%1$s\"을이용하는 것은 할 수 없습니다."
@@ -6846,7 +6854,7 @@ msgstr "하드웨어 (전체설명)"
 msgid "Hardware sensor reading. Returns float"
 msgstr "하드웨어 센서 읽기. float를 리턴."
 
-#: app/views/popup.httpstep.php:128 app/views/popup.httpstep.php:156
+#: app/views/popup.httpstep.php:129 app/views/popup.httpstep.php:157
 #: include/views/configuration.host.discovery.edit.php:197
 #: include/views/configuration.host.discovery.edit.php:255
 #: include/views/configuration.httpconf.edit.php:132
@@ -6933,7 +6941,7 @@ msgstr "행을 강조표시"
 #: include/views/administration.general.housekeeper.edit.php:117
 #: include/views/configuration.item.list.php:66
 #: include/views/configuration.item.prototype.list.php:55 items.php:312
-#: jsLoader.php:276 latest.php:408 latest.php:545 latest.php:702
+#: jsLoader.php:277 latest.php:408 latest.php:545 latest.php:702
 msgid "History"
 msgstr "이력"
 
@@ -7039,7 +7047,7 @@ msgstr[0] "호스트"
 msgid "Host \"%1$s\" already exists."
 msgstr "호스트 \"%1$s\"는 이미 존재합니다."
 
-#: include/classes/api/services/CHostGroup.php:1500
+#: include/classes/api/services/CHostGroup.php:1495
 #: include/classes/api/services/CHost.php:913
 #: include/classes/api/services/CHost.php:1772
 #: include/classes/api/services/CHost.php:1953
@@ -7121,7 +7129,7 @@ msgstr "호스트 그룹"
 msgid "Host group \"%1$s\" already exists."
 msgstr "호스트 그룹\"%1$s\"는 모두 존재합니다."
 
-#: include/classes/api/services/CHostGroup.php:788
+#: include/classes/api/services/CHostGroup.php:784
 #, c-format
 msgid "Host group \"%1$s\" cannot be deleted, because it is used in a global script."
 msgstr "글로벌 스크립트에 이용되고 있기 때문에 호스트그룹 \"%1$s\"를 삭제할 수 없습니다."
@@ -7145,8 +7153,8 @@ msgstr "호스트 그룹의 장애"
 msgid "Host group label type"
 msgstr "호스트 그룹의 라벨타입"
 
-#: include/classes/api/services/CDashboard.php:697
-#: include/classes/api/services/CScript.php:454
+#: include/classes/api/services/CDashboard.php:696
+#: include/classes/api/services/CScript.php:459
 #: include/classes/api/services/CUserGroup.php:445
 #, c-format
 msgid "Host group with ID \"%1$s\" is not available."
@@ -7192,7 +7200,7 @@ msgstr "호스트 인터페이스"
 #: app/views/monitoring.problem.view.php:282 hostinventories.php:26
 #: include/views/common.filter.trigger.php:123
 #: include/views/inventory.host.list.php:23
-#: include/views/inventory.host.view.php:223 jsLoader.php:277
+#: include/views/inventory.host.view.php:223 jsLoader.php:278
 msgid "Host inventory"
 msgstr "호스트 인벤토리"
 
@@ -7285,7 +7293,7 @@ msgstr "호스트 프로토타입을 삭제하였습니다"
 msgid "Host router"
 msgstr "호스트 라우터"
 
-#: host_screen.php:27 jsLoader.php:278
+#: host_screen.php:27 jsLoader.php:279
 msgid "Host screens"
 msgstr "호스트 스크린"
 
@@ -7306,7 +7314,7 @@ msgstr "호스트의 갱신에 실패하였습니다."
 msgid "Host updated"
 msgstr "호스트를 갱신하였습니다"
 
-#: include/classes/api/services/CDashboard.php:714
+#: include/classes/api/services/CDashboard.php:713
 #, c-format
 msgid "Host with ID \"%1$s\" is not available."
 msgstr "ID \"%1$s\"의 호스트는 사용할 수 없습니다."
@@ -7447,7 +7455,7 @@ msgstr "IP주소의 범위 \"%1$s\"가 주소제한 \"%2$s\"을 초과합니다.
 #: include/hosts.inc.php:471 include/items.inc.php:350
 #: include/views/configuration.action.edit.php:922
 #: include/views/configuration.action.edit.php:1680
-#: include/views/configuration.action.edit.php:2158
+#: include/views/configuration.action.edit.php:2157
 #: include/views/configuration.host.edit.php:675
 #: include/views/configuration.host.massupdate.php:298
 #: include/views/configuration.host.prototype.edit.php:340
@@ -7465,7 +7473,7 @@ msgstr "IPMI 에이전트"
 msgid "IPMI interfaces"
 msgstr "IPMI 인터페이스"
 
-#: include/classes/api/services/CScript.php:378
+#: include/classes/api/services/CScript.php:383
 msgid "IPMI scripts can be executed only by server."
 msgstr "IPMI스크립트는 서버에서만 실행가능합니다."
 
@@ -8330,8 +8338,8 @@ msgstr "액션 갱신 메소드 \"%1$s\"의 파라미터가 올바르지 않습�
 msgid "Incorrect parameters for condition."
 msgstr "액션의 실행조건의 파라미터가 올바르지 않습니다."
 
-#: include/classes/api/services/CMaintenance.php:327
-#: include/classes/api/services/CMaintenance.php:522
+#: include/classes/api/services/CMaintenance.php:325
+#: include/classes/api/services/CMaintenance.php:531
 msgid "Incorrect parameters for maintenance."
 msgstr "메인터넌스의 파라미터가 올바르지 않습니다."
 
@@ -8612,8 +8620,7 @@ msgstr ""
 
 #: app/controllers/CControllerAuthenticationUpdate.php:95
 #: app/controllers/CControllerAuthenticationUpdate.php:127
-#: app/controllers/CControllerPopupHttpStep.php:92
-#: app/controllers/CControllerPopupHttpStep.php:98
+#: app/controllers/CControllerPopupHttpStep.php:94
 #: app/controllers/CControllerPopupMedia.php:99
 #: app/controllers/CControllerPopupMedia.php:110
 #: app/controllers/CControllerPopupPreprocTestSend.php:78
@@ -8723,8 +8730,8 @@ msgstr ""
 #: include/classes/api/services/CItem.php:834
 #: include/classes/api/services/CItemPrototype.php:958
 #: include/classes/api/services/CItemPrototype.php:966
-#: include/classes/api/services/CMaintenance.php:472
-#: include/classes/api/services/CMaintenance.php:675
+#: include/classes/api/services/CMaintenance.php:481
+#: include/classes/api/services/CMaintenance.php:697
 #: include/classes/api/services/CMapElement.php:85
 #: include/classes/api/services/CMapElement.php:106
 #: include/classes/api/services/CMapElement.php:125
@@ -8885,7 +8892,7 @@ msgid "Insert"
 msgstr "삽입"
 
 #: include/views/configuration.trigger.prototype.edit.php:121
-#: include/views/configuration.triggers.edit.php:146 jsLoader.php:270
+#: include/views/configuration.triggers.edit.php:146 jsLoader.php:271
 msgid "Insert expression"
 msgstr "조건식의 삽입"
 
@@ -8972,7 +8979,7 @@ msgstr "내부 데이터의 보존기간"
 #: include/classes/api/services/CTriggerGeneral.php:1557
 #: include/classes/core/CJsonRpc.php:205
 #: include/classes/import/validators/CXmlValidatorGeneral.php:160
-#: include/classes/widgets/fields/CWidgetField.php:102
+#: include/classes/widgets/fields/CWidgetField.php:103
 msgid "Internal error."
 msgstr "내부 에러."
 
@@ -9150,6 +9157,7 @@ msgstr "파라미터의 수가 올바르지 않습니다."
 #: app/controllers/CControllerDashboardUpdate.php:134
 #: app/controllers/CControllerDashboardUpdate.php:142
 #: app/controllers/CControllerDashboardUpdate.php:149
+#: app/controllers/CControllerPopupHttpStep.php:100
 #: include/classes/api/services/CAutoregistration.php:145
 #: include/classes/api/services/CAutoregistration.php:151
 #: include/classes/api/services/CAutoregistration.php:158
@@ -9233,13 +9241,13 @@ msgstr "파라미터의 수가 올바르지 않습니다."
 #: include/classes/validators/CApiInputValidator.php:1625
 #: include/classes/validators/CApiInputValidator.php:1652
 #: include/classes/validators/CApiInputValidator.php:1662
-#: include/classes/widgets/fields/CWidgetFieldGraphOverride.php:115
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:481
+#: include/classes/widgets/fields/CWidgetFieldGraphOverride.php:130
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:485
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:491
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:505
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:509
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:515
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:499
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:513
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:519
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:527
 #, c-format
 msgid "Invalid parameter \"%1$s\": %2$s."
 msgstr "파라미터 \"%1$s\"가 올바르지 않습니다 : %2$s."
@@ -9390,7 +9398,7 @@ msgstr "이탈리아어 (it_IT)"
 msgid "Item"
 msgstr "아이템"
 
-#: include/classes/api/services/CHostPrototype.php:986
+#: include/classes/api/services/CHostPrototype.php:994
 #: include/classes/api/services/CItem.php:51
 #, c-format
 msgid "Item \"%1$s\" already exists on \"%2$s\", inherited from another template."
@@ -9508,7 +9516,7 @@ msgid "Item prototype updated"
 msgid_plural "Item prototypes updated"
 msgstr[0] "아이템 프로토타입을 갱신하였습니다"
 
-#: include/classes/api/services/CDashboard.php:748
+#: include/classes/api/services/CDashboard.php:747
 #, c-format
 msgid "Item prototype with ID \"%1$s\" is not available."
 msgstr "ID \"%1$s\"의 아이템의 프로토타입은 사용할 수 없습니다."
@@ -9559,7 +9567,7 @@ msgstr "아이템은 갱신되지 않습니다. 갱신시간에 최소 하나 �
 msgid "Item will not be refreshed. Update interval should be between 1s and 1d. Also Scheduled/Flexible intervals can be used."
 msgstr "아이템은 갱신되지 않습니다. 갱신간격은 1s ~ 1d간격으로 지정해야 합니다. 또 정기설정이나 예외설정의 갱신간격도 사용 가능합니다."
 
-#: include/classes/api/services/CDashboard.php:731
+#: include/classes/api/services/CDashboard.php:730
 #, c-format
 msgid "Item with ID \"%1$s\" is not available."
 msgstr "ID \"%1$s\"의 아이템은 사용할 수 없습니다."
@@ -9765,7 +9773,7 @@ msgstr "키\"%1$s\"가 <grpmax|grpmin|grpsum|grpavg>[\"Host group(s)\", \"Item k
 
 #: include/views/configuration.action.edit.php:985
 #: include/views/configuration.action.edit.php:1770
-#: include/views/configuration.action.edit.php:2227
+#: include/views/configuration.action.edit.php:2226
 #: include/views/js/common.item.edit.js.php:226
 msgid "Key passphrase"
 msgstr "키의 패스프레이즈"
@@ -9915,11 +9923,11 @@ msgstr "최근 변경 (내림차순)"
 msgid "Last check"
 msgstr "최근 검사"
 
-#: jsLoader.php:281
+#: jsLoader.php:282
 msgid "Last hour graph"
 msgstr "최근 1시간의 그래프"
 
-#: jsLoader.php:282
+#: jsLoader.php:283
 msgid "Last month graph"
 msgstr "최근 1개월의 그래프"
 
@@ -9942,18 +9950,18 @@ msgstr "최신 데이터 수신시각 (경과시간)"
 msgid "Last value"
 msgstr "최근 값"
 
-#: jsLoader.php:283
+#: jsLoader.php:284
 msgid "Last week graph"
 msgstr "최근 1주일의 그래프"
 
 #: app/views/search.php:29 app/views/search.php:100 app/views/search.php:130
 #: app/views/search.php:162 include/menu.inc.php:68
-#: include/views/inventory.host.view.php:127 jsLoader.php:279 latest.php:26
+#: include/views/inventory.host.view.php:127 jsLoader.php:280 latest.php:26
 #: latest.php:307
 msgid "Latest data"
 msgstr "최근 데이터"
 
-#: jsLoader.php:280
+#: jsLoader.php:281
 msgid "Latest values"
 msgstr "최근 값"
 
@@ -9985,6 +9993,11 @@ msgid "Left"
 msgstr "왼쪽"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:115
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:128
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:143
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:485
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:491
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:499
 msgid "Left Y"
 msgstr "좌측 Y"
 
@@ -10329,16 +10342,16 @@ msgstr "메인 네비게이션"
 msgid "Maintenance"
 msgstr "메인터넌스"
 
-#: include/classes/api/services/CMaintenance.php:333
-#: include/classes/api/services/CMaintenance.php:347
-#: include/classes/api/services/CMaintenance.php:556
-#: include/classes/api/services/CMaintenance.php:693
+#: include/classes/api/services/CMaintenance.php:331
+#: include/classes/api/services/CMaintenance.php:345
+#: include/classes/api/services/CMaintenance.php:565
+#: include/classes/api/services/CMaintenance.php:715
 #, c-format
 msgid "Maintenance \"%1$s\" already exists."
 msgstr "메인터넌스\"%1$s\"는 이미 존재합니다."
 
-#: include/classes/api/services/CMaintenance.php:363
-#: include/classes/api/services/CMaintenance.php:594
+#: include/classes/api/services/CMaintenance.php:361
+#: include/classes/api/services/CMaintenance.php:607
 msgid "Maintenance \"Active since\" value cannot be bigger than \"Active till\"."
 msgstr "메인터넌스 기간의 \"시작 시간\" 은 \"종료 시간\" 보다 큰 값으로 지정할 수 없습니다."
 
@@ -10476,7 +10489,7 @@ msgstr "맵 형태"
 msgid "Map update failed."
 msgstr "맵 갱신에 실패하였습니다."
 
-#: include/classes/api/services/CDashboard.php:799
+#: include/classes/api/services/CDashboard.php:798
 #, c-format
 msgid "Map with ID \"%1$s\" is not available."
 msgstr "ID \"%1$s\"의 맵은 사용할 수 없습니다."
@@ -10553,12 +10566,14 @@ msgstr "마스터 아이템"
 msgid "Matches regular expression"
 msgstr ""
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:140
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:213
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:485
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:141
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:143
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:216
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:218
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:491
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:509
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:515
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:499
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:519
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:527
 msgid "Max"
 msgstr "최대치"
 
@@ -10588,7 +10603,7 @@ msgstr "OS가 지원하고 있는 최대 프로세스 수. integer를 리턴"
 
 #: app/controllers/CControllerTimeSelectorUpdate.php:241
 #: include/classes/mvc/CController.php:208
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:446
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:450
 #: include/validate.inc.php:475
 #, c-format
 msgid "Maximum time period to display is %1$s day."
@@ -10720,7 +10735,7 @@ msgstr ""
 #: include/views/configuration.action.edit.php:789
 #: include/views/configuration.action.edit.php:1540
 #: include/views/configuration.action.edit.php:1830
-#: include/views/configuration.action.edit.php:2312
+#: include/views/configuration.action.edit.php:2311
 msgid "Message"
 msgstr "메시지"
 
@@ -10755,9 +10770,11 @@ msgid "Middle"
 msgstr "가운데"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:126
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:199
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:481
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:505
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:128
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:201
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:203
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:485
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:513
 msgid "Min"
 msgstr "최소치"
 
@@ -10800,7 +10817,7 @@ msgstr "최소 심각도"
 
 #: app/controllers/CControllerTimeSelectorUpdate.php:236
 #: include/classes/mvc/CController.php:201
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:441
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:445
 #: include/validate.inc.php:468
 #, c-format
 msgid "Minimum time period to display is %1$s minute."
@@ -10906,11 +10923,11 @@ msgstr "월"
 msgid "Monthly"
 msgstr "월간"
 
-#: include/classes/html/CMultiSelect.php:76 jsLoader.php:243
+#: include/classes/html/CMultiSelect.php:76 jsLoader.php:244
 msgid "More matches found..."
 msgstr "조건에 일치하는 데이터가 더 존재합니다..."
 
-#: jsLoader.php:253
+#: jsLoader.php:254
 #, c-format
 msgctxt "screen reader"
 msgid "More than %1$d matches for %2$s found"
@@ -10990,9 +11007,9 @@ msgstr "NTLM"
 #: app/views/dashboard.properties.edit.php:50
 #: app/views/monitoring.dashboard.list.php:53
 #: app/views/monitoring.widget.plaintext.view.php:44
-#: app/views/popup.httpstep.php:40 app/views/popup.httpstep.php:65
-#: app/views/popup.httpstep.php:91 app/views/popup.httpstep.php:115
-#: app/views/popup.httpstep.php:134
+#: app/views/popup.httpstep.php:41 app/views/popup.httpstep.php:66
+#: app/views/popup.httpstep.php:92 app/views/popup.httpstep.php:116
+#: app/views/popup.httpstep.php:135
 #: app/views/popup.preproctestedit.view.php:60
 #: app/views/popup.triggerwizard.php:77 correlation.php:35
 #: disc_prototypes.php:44 graphs.php:44 host_discovery.php:48 httpconf.php:42
@@ -11151,8 +11168,8 @@ msgstr "없음"
 #: include/views/configuration.action.edit.php:1157
 #: include/views/configuration.action.edit.php:1346
 #: include/views/configuration.action.edit.php:1664
-#: include/views/configuration.action.edit.php:2142
-#: include/views/configuration.action.edit.php:2343
+#: include/views/configuration.action.edit.php:2141
+#: include/views/configuration.action.edit.php:2342
 #: include/views/configuration.discovery.edit.php:73
 #: include/views/configuration.maintenance.edit.php:123
 msgid "New"
@@ -11500,7 +11517,7 @@ msgstr "이미지는 존재하지 않습니다"
 #: include/views/configuration.item.massupdate.php:77
 #: include/views/configuration.item.prototype.edit.php:443
 #: include/views/configuration.item.prototype.massupdate.php:74
-#: jsLoader.php:303
+#: jsLoader.php:304
 msgid "No interface found"
 msgstr "인터페이스를 찾을 수 없습니다."
 
@@ -11554,7 +11571,7 @@ msgstr "스크린의 요소에 맵ID가 설정되어 있지 않습니다"
 msgid "No maps added."
 msgstr "맵이 추가되어 있지 않습니다."
 
-#: include/classes/html/CMultiSelect.php:75 jsLoader.php:242
+#: include/classes/html/CMultiSelect.php:75 jsLoader.php:243
 msgid "No matches found"
 msgstr "조건에 일치하는 데이터가 없습니다"
 
@@ -11607,9 +11624,9 @@ msgstr "시스템 액세스 권한이 없습니다."
 #: include/classes/api/services/CCorrelation.php:673
 #: include/classes/api/services/CCorrelation.php:717
 #: include/classes/api/services/CCorrelation.php:927
-#: include/classes/api/services/CDashboard.php:372
-#: include/classes/api/services/CDashboard.php:397
-#: include/classes/api/services/CDashboard.php:1237
+#: include/classes/api/services/CDashboard.php:371
+#: include/classes/api/services/CDashboard.php:396
+#: include/classes/api/services/CDashboard.php:1236
 #: include/classes/api/services/CDiscoveryRule.php:526
 #: include/classes/api/services/CDiscoveryRule.php:627
 #: include/classes/api/services/CDiscoveryRule.php:663
@@ -11631,12 +11648,12 @@ msgstr "시스템 액세스 권한이 없습니다."
 #: include/classes/api/services/CHostBase.php:49
 #: include/classes/api/services/CHostGeneral.php:56
 #: include/classes/api/services/CHostGroup.php:736
-#: include/classes/api/services/CHostGroup.php:845
-#: include/classes/api/services/CHostGroup.php:1084
-#: include/classes/api/services/CHostGroup.php:1115
-#: include/classes/api/services/CHostGroup.php:1216
-#: include/classes/api/services/CHostGroup.php:1338
-#: include/classes/api/services/CHostGroup.php:1358
+#: include/classes/api/services/CHostGroup.php:840
+#: include/classes/api/services/CHostGroup.php:1079
+#: include/classes/api/services/CHostGroup.php:1110
+#: include/classes/api/services/CHostGroup.php:1211
+#: include/classes/api/services/CHostGroup.php:1333
+#: include/classes/api/services/CHostGroup.php:1353
 #: include/classes/api/services/CHostInterface.php:239
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
@@ -11648,9 +11665,9 @@ msgstr "시스템 액세스 권한이 없습니다."
 #: include/classes/api/services/CHostPrototype.php:369
 #: include/classes/api/services/CHostPrototype.php:415
 #: include/classes/api/services/CHostPrototype.php:436
-#: include/classes/api/services/CHostPrototype.php:1011
-#: include/classes/api/services/CHostPrototype.php:1033
-#: include/classes/api/services/CHostPrototype.php:1067
+#: include/classes/api/services/CHostPrototype.php:1019
+#: include/classes/api/services/CHostPrototype.php:1041
+#: include/classes/api/services/CHostPrototype.php:1075
 #: include/classes/api/services/CHttpTest.php:446
 #: include/classes/api/services/CHttpTest.php:539
 #: include/classes/api/services/CHttpTest.php:626
@@ -11669,10 +11686,10 @@ msgstr "시스템 액세스 권한이 없습니다."
 #: include/classes/api/services/CMaintenance.php:263
 #: include/classes/api/services/CMaintenance.php:292
 #: include/classes/api/services/CMaintenance.php:305
-#: include/classes/api/services/CMaintenance.php:545
-#: include/classes/api/services/CMaintenance.php:623
-#: include/classes/api/services/CMaintenance.php:710
-#: include/classes/api/services/CMaintenance.php:728
+#: include/classes/api/services/CMaintenance.php:554
+#: include/classes/api/services/CMaintenance.php:636
+#: include/classes/api/services/CMaintenance.php:732
+#: include/classes/api/services/CMaintenance.php:750
 #: include/classes/api/services/CMapElement.php:190
 #: include/classes/api/services/CMapElement.php:321
 #: include/classes/api/services/CMap.php:567
@@ -11692,10 +11709,10 @@ msgstr "시스템 액세스 권한이 없습니다."
 #: include/classes/api/services/CScreenItem.php:442
 #: include/classes/api/services/CScreen.php:742
 #: include/classes/api/services/CScreen.php:1210
-#: include/classes/api/services/CScript.php:345
-#: include/classes/api/services/CScript.php:572
-#: include/classes/api/services/CScript.php:617
-#: include/classes/api/services/CScript.php:626
+#: include/classes/api/services/CScript.php:350
+#: include/classes/api/services/CScript.php:577
+#: include/classes/api/services/CScript.php:622
+#: include/classes/api/services/CScript.php:631
 #: include/classes/api/services/CService.php:988
 #: include/classes/api/services/CService.php:1012
 #: include/classes/api/services/CTask.php:136
@@ -11755,7 +11772,7 @@ msgstr "공개키 파일이 설정되어 있지 않습니다"
 msgid "No recipients for action operation message."
 msgstr "실행하는 액션의 메시지에 송신처가 설정되어 있지 않습니다"
 
-#: include/classes/widgets/CWidgetConfig.php:159 jsLoader.php:292
+#: include/classes/widgets/CWidgetConfig.php:159 jsLoader.php:293
 msgid "No refresh"
 msgstr "새로고침 없음"
 
@@ -11989,7 +12006,7 @@ msgstr "VMware 하이퍼바이저 상의 프로세서 스레드 수, <url> - VMw
 msgid "Number of processors on VMware virtual machine, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "VMware가상 머신 상의 프로세서 수, <url> - VMware서비스URL, <uuid> - VMware가상 머신의 호스트 이름"
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:288
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:292
 msgid "Number of rows"
 msgstr "행의 수"
 
@@ -12204,7 +12221,7 @@ msgstr "한번"
 msgid "One"
 msgstr "1개"
 
-#: include/classes/api/services/CHostGroup.php:1226
+#: include/classes/api/services/CHostGroup.php:1221
 msgid "One of the objects is left without a host group."
 msgstr "호스트 그룹이 설정되지 않은 오브젝트가 남아있습니다"
 
@@ -12301,7 +12318,7 @@ msgstr "최고관리자만 값의 맵을 작성할 수 있습니다."
 msgid "Only super admins can delete value maps."
 msgstr "최고관리자만 값의 맵을 삭제할 수 있습니다."
 
-#: include/classes/api/services/CDashboard.php:463
+#: include/classes/api/services/CDashboard.php:462
 msgid "Only super admins can set dashboard owner."
 msgstr "최고관리자만 대시보드의 권한을 설정할 수 있습니다."
 
@@ -12346,7 +12363,7 @@ msgstr "액션의 실행조건"
 
 #: include/views/configuration.action.edit.php:1237
 #: include/views/configuration.action.edit.php:1838
-#: include/views/configuration.action.edit.php:2325
+#: include/views/configuration.action.edit.php:2324
 msgid "Operation details"
 msgstr "실행내용의 상세 정보"
 
@@ -12379,8 +12396,8 @@ msgstr ""
 #: include/views/configuration.action.edit.php:567
 #: include/views/configuration.action.edit.php:1260
 #: include/views/configuration.action.edit.php:1351
-#: include/views/configuration.action.edit.php:2319
-#: include/views/configuration.action.edit.php:2341
+#: include/views/configuration.action.edit.php:2318
+#: include/views/configuration.action.edit.php:2340
 #: include/views/configuration.action.list.php:74
 #: include/views/configuration.correlation.edit.php:242
 #: include/views/configuration.correlation.edit.php:267
@@ -12398,7 +12415,7 @@ msgstr "옵션"
 
 #: app/views/monitoring.problem.view.php:228
 #: include/classes/widgets/forms/CWidgetFormProblems.php:95
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:380
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:384
 #: include/triggers.inc.php:1355
 #: include/views/configuration.action.edit.php:113
 #: include/views/configuration.action.edit.php:1145
@@ -12551,7 +12568,7 @@ msgstr "아이템 이력의 보존기간을 덮어쓰기"
 msgid "Override item trend period"
 msgstr "아이템 트렌드의 보존기간을 덮어쓰기"
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:411
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:415
 #: include/classes/widgets/views/widget.svggraph.form.view.php:274
 msgid "Overrides"
 msgstr "오버라이드"
@@ -12840,7 +12857,7 @@ msgstr "상위 트리거"
 msgid "Parent web scenarios"
 msgstr "상위 Web시나리오"
 
-#: app/views/popup.httpstep.php:53
+#: app/views/popup.httpstep.php:54
 #: include/views/configuration.host.discovery.edit.php:80
 #: include/views/configuration.item.edit.php:118
 #: include/views/configuration.item.prototype.edit.php:101
@@ -12872,8 +12889,8 @@ msgstr "패시브"
 #: include/views/configuration.action.edit.php:979
 #: include/views/configuration.action.edit.php:1726
 #: include/views/configuration.action.edit.php:1758
-#: include/views/configuration.action.edit.php:2195
-#: include/views/configuration.action.edit.php:2222
+#: include/views/configuration.action.edit.php:2194
+#: include/views/configuration.action.edit.php:2221
 #: include/views/configuration.host.discovery.edit.php:293
 #: include/views/configuration.host.discovery.edit.php:483
 #: include/views/configuration.host.discovery.edit.php:512
@@ -13061,7 +13078,7 @@ msgstr "호스트 인벤토리 필드의 자동설정"
 #: host_discovery.php:111 include/classes/setup/CSetupWizard.php:279
 #: include/forms.inc.php:318 include/views/configuration.action.edit.php:993
 #: include/views/configuration.action.edit.php:1773
-#: include/views/configuration.action.edit.php:2234
+#: include/views/configuration.action.edit.php:2233
 #: include/views/configuration.host.discovery.edit.php:470
 #: include/views/configuration.host.edit.php:119
 #: include/views/configuration.host.edit.php:205
@@ -13092,11 +13109,11 @@ msgstr "포르투갈어 (pt_BR)"
 msgid "Portuguese (pt_PT)"
 msgstr "포르투갈어 (pt_PT)"
 
-#: app/views/popup.httpstep.php:85
+#: app/views/popup.httpstep.php:86
 msgid "Post fields"
 msgstr "포스트 필드"
 
-#: app/views/popup.httpstep.php:79
+#: app/views/popup.httpstep.php:80
 msgid "Post type"
 msgstr "포스트 형식"
 
@@ -13214,7 +13231,7 @@ msgstr "비공개"
 
 #: include/views/configuration.action.edit.php:972
 #: include/views/configuration.action.edit.php:1750
-#: include/views/configuration.action.edit.php:2215
+#: include/views/configuration.action.edit.php:2214
 #: include/views/configuration.host.discovery.edit.php:506
 #: include/views/configuration.item.edit.php:620
 #: include/views/configuration.item.massupdate.php:307
@@ -13240,7 +13257,7 @@ msgstr "특권 레벨"
 #: include/classes/widgets/forms/CWidgetFormProblems.php:75
 #: include/classes/widgets/forms/CWidgetFormProblems.php:203
 #: include/classes/widgets/forms/CWidgetFormProblems.php:204
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:365
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:369
 #: include/views/configuration.item.list.php:168
 #: include/views/configuration.trigger.prototype.list.php:130
 #: include/views/configuration.triggers.list.php:86
@@ -13265,7 +13282,7 @@ msgid "Problem expression"
 msgstr "장애의 조건식"
 
 #: include/classes/widgets/CWidgetConfig.php:46
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:339
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:343
 msgid "Problem hosts"
 msgstr "장애발생 호스트"
 
@@ -13311,7 +13328,7 @@ msgstr "자식에 하나라도 문제가 발생한 경우 장애로 검사"
 #: include/maps.inc.php:389 include/maps.inc.php:470 include/maps.inc.php:482
 #: include/maps.inc.php:558 include/maps.inc.php:570 include/menu.inc.php:52
 #: include/views/common.filter.trigger.php:42
-#: include/views/inventory.host.view.php:135 jsLoader.php:284 report2.php:455
+#: include/views/inventory.host.view.php:135 jsLoader.php:285 report2.php:455
 msgid "Problems"
 msgstr "장애"
 
@@ -13434,7 +13451,7 @@ msgstr "공개"
 
 #: include/views/configuration.action.edit.php:951
 #: include/views/configuration.action.edit.php:1727
-#: include/views/configuration.action.edit.php:2196
+#: include/views/configuration.action.edit.php:2195
 #: include/views/configuration.host.discovery.edit.php:484
 #: include/views/configuration.item.edit.php:590
 #: include/views/configuration.item.massupdate.php:287
@@ -13445,7 +13462,7 @@ msgstr "공개키"
 
 #: include/views/configuration.action.edit.php:964
 #: include/views/configuration.action.edit.php:1741
-#: include/views/configuration.action.edit.php:2207
+#: include/views/configuration.action.edit.php:2206
 #: include/views/configuration.host.discovery.edit.php:499
 #: include/views/configuration.item.edit.php:613
 #: include/views/configuration.item.massupdate.php:300
@@ -13454,7 +13471,7 @@ msgstr "공개키"
 msgid "Public key file"
 msgstr "공개키 파일"
 
-#: app/views/popup.httpstep.php:59
+#: app/views/popup.httpstep.php:60
 #: include/views/configuration.host.discovery.edit.php:105
 #: include/views/configuration.item.edit.php:143
 #: include/views/configuration.item.prototype.edit.php:125
@@ -13482,7 +13499,7 @@ msgstr "해결됨"
 msgid "RMCP+"
 msgstr "RMCP+"
 
-#: app/views/popup.httpstep.php:81
+#: app/views/popup.httpstep.php:82
 #: include/views/configuration.host.discovery.edit.php:167
 #: include/views/configuration.item.edit.php:205
 #: include/views/configuration.item.massupdate.php:116
@@ -13491,7 +13508,7 @@ msgstr "RMCP+"
 msgid "Raw data"
 msgstr "로우 데이터"
 
-#: app/views/popup.httpstep.php:105
+#: app/views/popup.httpstep.php:106
 msgid "Raw post"
 msgstr "로우 포스트"
 
@@ -13608,11 +13625,11 @@ msgid "Refresh"
 msgstr "새로고침"
 
 #: include/classes/widgets/forms/CWidgetForm.php:53 include/html.inc.php:192
-#: jsLoader.php:285
+#: jsLoader.php:286
 msgid "Refresh interval"
 msgstr "새로고침 간격"
 
-#: jsLoader.php:286
+#: jsLoader.php:287
 msgid "Refresh interval multiplier"
 msgstr "새로고침 간격의 곱수"
 
@@ -13807,7 +13824,7 @@ msgstr "원격 명령"
 #: include/views/monitoring.sysmap.constructor.php:43
 #: include/views/monitoring.sysmap.edit.php:242
 #: include/views/monitoring.sysmap.edit.php:260 jsLoader.php:199
-#: jsLoader.php:307
+#: jsLoader.php:308
 msgid "Remove"
 msgstr "삭제"
 
@@ -13839,7 +13856,7 @@ msgctxt "screen reader"
 msgid "Remove, %1$s"
 msgstr "%1$s의 삭제"
 
-#: jsLoader.php:248
+#: jsLoader.php:249
 #, c-format
 msgctxt "screen reader"
 msgid "Removed, %1$s"
@@ -13919,14 +13936,14 @@ msgstr "Zabbix서버의 요구 퍼포먼스를 1초간격으로 기대되는 값
 msgid "Required server performance, new values per second"
 msgstr "1초간의 감시항목수(Zabbix서버의 요구 퍼포먼스)"
 
-#: app/views/popup.httpstep.php:170
+#: app/views/popup.httpstep.php:171
 #: include/views/configuration.host.discovery.edit.php:237
 #: include/views/configuration.item.edit.php:275
 #: include/views/configuration.item.prototype.edit.php:257
 msgid "Required status codes"
 msgstr "요구 스테이터스 코드"
 
-#: app/views/popup.httpstep.php:165
+#: app/views/popup.httpstep.php:166
 msgid "Required string"
 msgstr "요구문자열"
 
@@ -14044,7 +14061,7 @@ msgstr "결과가 TRUE"
 msgid "Result type"
 msgstr "결과 타입"
 
-#: app/views/popup.httpstep.php:153
+#: app/views/popup.httpstep.php:154
 #: include/views/configuration.host.discovery.edit.php:252
 #: include/views/configuration.item.edit.php:290
 #: include/views/configuration.item.prototype.edit.php:272
@@ -14118,7 +14135,12 @@ msgstr "ICMP ping 패킷의 실패율을 리턴."
 msgid "Right"
 msgstr "오른쪽"
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:188
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:190
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:203
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:218
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:513
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:519
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:527
 msgid "Right Y"
 msgstr "우측 Y"
 
@@ -14336,7 +14358,7 @@ msgstr "SQL의 실행에 실패하였습니다 \"%1$s\"."
 #: include/discovery.inc.php:47
 #: include/views/configuration.action.edit.php:924
 #: include/views/configuration.action.edit.php:1682
-#: include/views/configuration.action.edit.php:2160
+#: include/views/configuration.action.edit.php:2159
 #: include/views/js/configuration.discovery.edit.js.php:216
 msgid "SSH"
 msgstr "SSH"
@@ -14541,7 +14563,7 @@ msgstr "스크린"
 msgid "Script"
 msgstr "스크립트"
 
-#: include/classes/api/services/CScript.php:512
+#: include/classes/api/services/CScript.php:517
 #, c-format
 msgid "Script \"%1$s\" already exists."
 msgstr "스크립트 \"%1$s\"은 이미 존재합니다."
@@ -14555,7 +14577,7 @@ msgid "Script deleted"
 msgid_plural "Scripts deleted"
 msgstr[0] "스크립트를 삭제하였습니다"
 
-#: include/classes/api/services/CScript.php:472
+#: include/classes/api/services/CScript.php:477
 #, c-format
 msgid "Script menu path \"%1$s\" already used in script name \"%2$s\"."
 msgstr "스크립트의 메뉴 경로 \"%1$s\"는 스크립트 이름 \"%2$s\"에 이미 이용되고 있습니다."
@@ -14564,11 +14586,11 @@ msgstr "스크립트의 메뉴 경로 \"%1$s\"는 스크립트 이름 \"%2$s\"�
 #: app/views/administration.mediatype.list.php:83
 #: include/views/configuration.action.edit.php:931
 #: include/views/configuration.action.edit.php:1706
-#: include/views/configuration.action.edit.php:2166
+#: include/views/configuration.action.edit.php:2165
 msgid "Script name"
 msgstr "스크립트 이름"
 
-#: include/classes/api/services/CScript.php:478
+#: include/classes/api/services/CScript.php:483
 #, c-format
 msgid "Script name \"%1$s\" already used in menu path for script \"%2$s\"."
 msgstr "스크립트 이름 \"%1$s\"은 스크립트\"%2$s\"의 메뉴 경로에 이미 이용되고 있습니다."
@@ -14594,7 +14616,7 @@ msgstr "스크립트를 갱신하였습니다"
 #: app/controllers/CControllerPopupScriptExec.php:58
 #: app/views/administration.script.edit.php:25
 #: app/views/administration.script.list.php:27 include/menu.inc.php:288
-#: jsLoader.php:287
+#: jsLoader.php:288
 msgid "Scripts"
 msgstr "스크립트"
 
@@ -14670,7 +14692,7 @@ msgstr "보안 이름"
 #: include/views/configuration.action.edit.php:269
 #: include/views/configuration.action.edit.php:912
 #: include/views/configuration.action.edit.php:1698
-#: include/views/configuration.action.edit.php:2177
+#: include/views/configuration.action.edit.php:2176
 #: include/views/configuration.graph.edit.php:188
 #: include/views/configuration.graph.edit.php:270
 #: include/views/configuration.item.edit.php:94
@@ -14684,7 +14706,7 @@ msgstr "보안 이름"
 #: include/views/monitoring.screen.constructor.edit.php:298
 #: include/views/monitoring.screen.constructor.edit.php:315
 #: include/views/monitoring.screen.constructor.edit.php:373
-#: include/views/monitoring.screen.constructor.edit.php:634 jsLoader.php:246
+#: include/views/monitoring.screen.constructor.edit.php:634 jsLoader.php:247
 #: latest.php:358
 msgid "Select"
 msgstr "선택"
@@ -14722,17 +14744,17 @@ msgstr "선택한 상관관계를 삭제하였습니다"
 msgid "Selected elements"
 msgstr "선택한 요소"
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:326
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:330
 msgid "Selected items only"
 msgstr "선택한 아이템만"
 
-#: jsLoader.php:251
+#: jsLoader.php:252
 #, c-format
 msgctxt "screen reader"
 msgid "Selected, %1$s in position %2$d of %3$d"
 msgstr "%3$d의 %2$d위치에 있는 %1$s를 선택하였습니다"
 
-#: jsLoader.php:252
+#: jsLoader.php:253
 #, c-format
 msgctxt "screen reader"
 msgid "Selected, %1$s, read only, in position %2$d of %3$d"
@@ -14756,7 +14778,7 @@ msgstr "사용자에게 메시지를 송신"
 
 #: include/views/configuration.action.edit.php:780
 #: include/views/configuration.action.edit.php:1530
-#: include/views/configuration.action.edit.php:2299
+#: include/views/configuration.action.edit.php:2298
 msgid "Send only to"
 msgstr "다른 미디어만 사용"
 
@@ -14767,13 +14789,13 @@ msgstr "수신처"
 
 #: include/views/configuration.action.edit.php:755
 #: include/views/configuration.action.edit.php:1504
-#: include/views/configuration.action.edit.php:2268
+#: include/views/configuration.action.edit.php:2267
 msgid "Send to User groups"
 msgstr "유저 그룹에게 송신"
 
 #: include/views/configuration.action.edit.php:760
 #: include/views/configuration.action.edit.php:1509
-#: include/views/configuration.action.edit.php:2276
+#: include/views/configuration.action.edit.php:2275
 msgid "Send to Users"
 msgstr "사용자에게 송신"
 
@@ -14981,7 +15003,7 @@ msgstr "LDAP 리페럴을 \"OFF\"로 설정하는데 실패하였습니다."
 #: include/classes/widgets/forms/CWidgetFormProblems.php:84
 #: include/classes/widgets/forms/CWidgetFormProblems.php:201
 #: include/classes/widgets/forms/CWidgetFormProblems.php:202
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:352
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:356
 #: include/events.inc.php:174 include/triggers.inc.php:1260
 #: include/views/configuration.item.list.php:140
 #: include/views/configuration.trigger.prototype.edit.php:72
@@ -15028,7 +15050,7 @@ msgstr "도형"
 
 #: include/views/monitoring.screen.edit.php:215
 #: include/views/monitoring.slideconf.edit.php:268
-#: include/views/monitoring.sysmap.edit.php:382 jsLoader.php:271
+#: include/views/monitoring.sysmap.edit.php:382 jsLoader.php:272
 msgid "Sharing"
 msgstr "공유"
 
@@ -15055,8 +15077,8 @@ msgstr "단축"
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:76
 #: include/classes/widgets/forms/CWidgetFormProblems.php:33
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:115
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:188
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:261
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:190
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:265
 #: include/classes/widgets/forms/CWidgetFormTrigOver.php:31
 #: include/views/common.filter.trigger.php:39
 #: include/views/js/monitoring.sysmaps.js.php:75 report2.php:480
@@ -15082,7 +15104,7 @@ msgstr "히스토리가 없는 아이템 보이기"
 
 #: include/classes/widgets/forms/CWidgetFormGraph.php:74
 #: include/classes/widgets/forms/CWidgetFormGraphPrototype.php:74
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:275
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:279
 #: include/views/configuration.graph.edit.php:100
 msgid "Show legend"
 msgstr "범례 보이기"
@@ -15103,7 +15125,7 @@ msgstr "표시할 행 수"
 msgid "Show operational data"
 msgstr ""
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:308
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:312
 msgid "Show problems"
 msgstr "장애의 표시"
 
@@ -15324,7 +15346,7 @@ msgstr "슬라이드"
 msgid "Slovak (sk_SK)"
 msgstr "슬로바키아어 (sk_SK)"
 
-#: jsLoader.php:217
+#: jsLoader.php:218
 msgid "Snooze"
 msgstr "스누즈"
 
@@ -15444,8 +15466,8 @@ msgstr "Zabbix서버의 기동시각, UNIX 타임스탬프."
 msgid "State"
 msgstr "스테이터스"
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:156
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:229
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:158
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:233
 msgctxt "history source selection method"
 msgid "Static"
 msgstr "고정"
@@ -15552,11 +15574,11 @@ msgstr "스텝\"%1$s\" [%3$s의 %2$s] 실패: %4$s"
 msgid "Step duration"
 msgstr "스텝 지속기간"
 
-#: app/controllers/CControllerPopupHttpStep.php:142
+#: app/controllers/CControllerPopupHttpStep.php:145
 msgid "Step of web scenario"
 msgstr "Web시나리오 스텝"
 
-#: app/controllers/CControllerPopupHttpStep.php:106
+#: app/controllers/CControllerPopupHttpStep.php:110
 #, c-format
 msgid "Step with name \"%1$s\" already exists."
 msgstr "\"%1$s\"의 이름를 지닌 스텝이 이미 존재합니다."
@@ -15610,7 +15632,7 @@ msgstr ""
 #: include/views/configuration.action.edit.php:785
 #: include/views/configuration.action.edit.php:1535
 #: include/views/configuration.action.edit.php:1825
-#: include/views/configuration.action.edit.php:2307
+#: include/views/configuration.action.edit.php:2306
 msgid "Subject"
 msgstr "제목"
 
@@ -15622,7 +15644,7 @@ msgctxt "encryption certificate"
 msgid "Subject"
 msgstr "서브젝트"
 
-#: jsLoader.php:288
+#: jsLoader.php:289
 msgid "Submap"
 msgstr "서브맵"
 
@@ -15809,7 +15831,7 @@ msgstr "태그 값"
 #: include/classes/screens/CScreenProblem.php:937
 #: include/classes/screens/CScreenProblem.php:1192
 #: include/classes/widgets/forms/CWidgetFormProblems.php:93
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:378
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:382
 #: include/events.inc.php:243 include/events.inc.php:472
 #: include/views/administration.usergroups.edit.php:184
 #: include/views/configuration.host.edit.php:698
@@ -15837,7 +15859,7 @@ msgstr "태그"
 
 #: include/views/configuration.action.edit.php:890
 #: include/views/configuration.action.edit.php:1660
-#: include/views/configuration.action.edit.php:2138
+#: include/views/configuration.action.edit.php:2137
 #: include/views/configuration.copy.elements.php:64
 #: include/views/configuration.trigger.prototype.edit.php:182
 #: include/views/configuration.trigger.prototype.edit.php:377
@@ -15851,7 +15873,7 @@ msgstr "대상"
 
 #: include/views/configuration.action.edit.php:886
 #: include/views/configuration.action.edit.php:1656
-#: include/views/configuration.action.edit.php:2134
+#: include/views/configuration.action.edit.php:2133
 msgid "Target list"
 msgstr "대상 리스트"
 
@@ -15862,7 +15884,7 @@ msgstr "대상 종류"
 #: include/discovery.inc.php:61
 #: include/views/configuration.action.edit.php:925
 #: include/views/configuration.action.edit.php:1683
-#: include/views/configuration.action.edit.php:2161
+#: include/views/configuration.action.edit.php:2160
 #: include/views/js/configuration.discovery.edit.js.php:217
 msgid "Telnet"
 msgstr "Telnet"
@@ -15882,7 +15904,7 @@ msgstr "템플릿"
 msgid "Template \"%1$s\" already exists."
 msgstr "템플릿\"%1$s\"은 이미 존재합니다."
 
-#: include/classes/api/services/CHostGroup.php:1505
+#: include/classes/api/services/CHostGroup.php:1500
 #: include/classes/api/services/CTemplate.php:391
 #: include/classes/api/services/CTemplate.php:1025
 #, c-format
@@ -16299,7 +16321,7 @@ msgid "Time zone for PHP is not set (configuration parameter \"date.timezone\").
 msgstr "PHP의 타임존이 설정되어 있지 않습니다 (\"date.timezone\"설정파라미터)."
 
 #: app/views/administration.mediatype.edit.php:220
-#: app/views/popup.httpstep.php:160
+#: app/views/popup.httpstep.php:161
 #: include/views/configuration.host.discovery.edit.php:159
 #: include/views/configuration.httpconf.edit.php:196
 #: include/views/configuration.item.edit.php:197
@@ -16323,7 +16345,7 @@ msgstr "타임 스탬프"
 msgid "To"
 msgstr "종료"
 
-#: jsLoader.php:302
+#: jsLoader.php:303
 msgid "To set a host interface select a single item type for all items"
 msgstr "모든 아이템은 하나의 호스트 인터페이스를 선택할 필요가 있습니다"
 
@@ -16454,7 +16476,7 @@ msgstr "트렌드"
 #: include/views/configuration.triggers.massupdate.php:159
 #: include/views/js/monitoring.sysmaps.js.php:70
 #: include/views/js/monitoring.sysmaps.js.php:706
-#: include/views/reports.toptriggers.php:80 jsLoader.php:187 jsLoader.php:289
+#: include/views/reports.toptriggers.php:80 jsLoader.php:187 jsLoader.php:290
 #: services.php:357
 msgid "Trigger"
 msgstr "트리거"
@@ -16644,11 +16666,11 @@ msgstr "트리거 심각도"
 msgid "Trigger severity"
 msgstr "트리거 심각도"
 
-#: jsLoader.php:272
+#: jsLoader.php:273
 msgid "Trigger status \"OK\""
 msgstr "트리거의 상태 \"정상\""
 
-#: jsLoader.php:273
+#: jsLoader.php:274
 msgid "Trigger status \"Problem\""
 msgstr "트리거의 상태 \"장애\""
 
@@ -16745,7 +16767,7 @@ msgstr "2개의 타입요소를 선택할 필요가 있습니다"
 #: include/views/administration.general.image.list.php:30
 #: include/views/configuration.action.edit.php:918
 #: include/views/configuration.action.edit.php:1702
-#: include/views/configuration.action.edit.php:2154
+#: include/views/configuration.action.edit.php:2153
 #: include/views/configuration.graph.edit.php:337
 #: include/views/configuration.host.discovery.edit.php:54
 #: include/views/configuration.host.discovery.edit.php:59
@@ -16825,7 +16847,7 @@ msgstr ""
 msgid "UNKNOWN"
 msgstr "알 수 없음"
 
-#: app/views/popup.httpstep.php:47 app/views/popup.triggerwizard.php:124
+#: app/views/popup.httpstep.php:48 app/views/popup.triggerwizard.php:124
 #: disc_prototypes.php:215 host_discovery.php:159
 #: include/classes/widgets/CWidgetConfig.php:52
 #: include/classes/widgets/forms/CWidgetFormUrl.php:31
@@ -16840,7 +16862,7 @@ msgstr "알 수 없음"
 #: include/views/configuration.triggers.edit.php:542
 #: include/views/js/monitoring.sysmaps.js.php:253
 #: include/views/monitoring.screen.constructor.edit.php:777
-#: include/views/monitoring.sysmap.edit.php:230 items.php:210 jsLoader.php:290
+#: include/views/monitoring.sysmap.edit.php:230 items.php:210 jsLoader.php:291
 msgid "URL"
 msgstr "URL"
 
@@ -16886,7 +16908,7 @@ msgid "URL should have both \"name\" and \"url\" fields for map \"%1$s\"."
 msgstr "맵 \"%1$s\"의 URL에는 \"name\"과 \"url\" 필드가 둘다 필요합니다."
 
 #: include/views/js/monitoring.sysmaps.js.php:250
-#: include/views/monitoring.sysmap.edit.php:281 jsLoader.php:291
+#: include/views/monitoring.sysmap.edit.php:281 jsLoader.php:292
 msgid "URLs"
 msgstr "URL"
 
@@ -16938,8 +16960,8 @@ msgstr "블록을 해제"
 msgid "Unblock selected users?"
 msgstr "선택한 사용자의 블록을 해제하시겠습니까?"
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:154
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:227
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:156
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:231
 #: include/views/configuration.item.edit.php:679
 #: include/views/configuration.item.massupdate.php:276
 #: include/views/configuration.item.prototype.edit.php:604
@@ -17070,7 +17092,7 @@ msgstr "링크삭제: \"%2$s\"의 아이템 프로토타입\"%1$s\"."
 msgid "Unlinked: Web scenario \"%1$s\" on \"%2$s\"."
 msgstr "링크삭제: \"%2$s\"의 Web시나리오\"%1$s\"."
 
-#: jsLoader.php:215
+#: jsLoader.php:216
 msgid "Unmute"
 msgstr "음소거 해제"
 
@@ -17123,7 +17145,7 @@ msgstr "Up"
 #: app/views/administration.user.edit.php:466
 #: app/views/dashboard.sharing.edit.php:100
 #: app/views/monitoring.acknowledge.edit.php:87
-#: app/views/popup.httpstep.php:176 app/views/popup.media.php:111
+#: app/views/popup.httpstep.php:177 app/views/popup.media.php:111
 #: app/views/popup.triggerwizard.php:138
 #: include/views/administration.auditlogs.list.php:47
 #: include/views/administration.general.gui.edit.php:68
@@ -17140,8 +17162,8 @@ msgstr "Up"
 #: include/views/administration.usergroups.edit.php:278
 #: include/views/configuration.action.edit.php:1242
 #: include/views/configuration.action.edit.php:1843
-#: include/views/configuration.action.edit.php:2328
-#: include/views/configuration.action.edit.php:2363
+#: include/views/configuration.action.edit.php:2327
+#: include/views/configuration.action.edit.php:2362
 #: include/views/configuration.application.edit.php:50
 #: include/views/configuration.correlation.edit.php:276
 #: include/views/configuration.discovery.edit.php:133
@@ -17190,7 +17212,7 @@ msgstr "기존설정을 덮어씌움"
 msgid "Update interval"
 msgstr "갱신 간격"
 
-#: include/views/configuration.action.edit.php:2352
+#: include/views/configuration.action.edit.php:2351
 msgid "Update operations"
 msgstr "갱신시 실행내용"
 
@@ -17402,8 +17424,8 @@ msgstr "맵 \"%2$s\"의 유저 그룹의 공유에는 파라미터 :%1$s 가 필
 msgid "User group sharing is missing parameters: %1$s for screen \"%2$s\"."
 msgstr "스크린 \"%2$s\"의 유저 그룹에서의 공유는 파라미터:%1$s 가 필수입니다."
 
-#: include/classes/api/services/CDashboard.php:531
-#: include/classes/api/services/CScript.php:418
+#: include/classes/api/services/CDashboard.php:530
+#: include/classes/api/services/CScript.php:423
 #: include/classes/api/services/CUser.php:515
 #, c-format
 msgid "User group with ID \"%1$s\" is not available."
@@ -17436,7 +17458,7 @@ msgstr "유저 메뉴"
 #: disc_prototypes.php:85 host_discovery.php:78
 #: include/views/configuration.action.edit.php:956
 #: include/views/configuration.action.edit.php:1733
-#: include/views/configuration.action.edit.php:2199
+#: include/views/configuration.action.edit.php:2198
 #: include/views/configuration.host.discovery.edit.php:285
 #: include/views/configuration.host.discovery.edit.php:494
 #: include/views/configuration.item.edit.php:331
@@ -17500,7 +17522,7 @@ msgid "User updated"
 msgstr "사용자를 갱신하였습니다"
 
 #: app/controllers/CControllerDashboardPropertiesCheck.php:73
-#: include/classes/api/services/CDashboard.php:492
+#: include/classes/api/services/CDashboard.php:491
 #: include/classes/api/services/CUserGroup.php:402
 #, c-format
 msgid "User with ID \"%1$s\" is not available."
@@ -17757,8 +17779,8 @@ msgstr ""
 #: app/views/administration.mediatype.edit.php:146
 #: app/views/hostmacros.list.html.php:46
 #: app/views/monitoring.widget.plaintext.view.php:46
-#: app/views/popup.httpstep.php:65 app/views/popup.httpstep.php:91
-#: app/views/popup.httpstep.php:115 app/views/popup.httpstep.php:134
+#: app/views/popup.httpstep.php:66 app/views/popup.httpstep.php:92
+#: app/views/popup.httpstep.php:116 app/views/popup.httpstep.php:135
 #: app/views/popup.preproctestedit.view.php:89
 #: app/views/popup.testtriggerexpr.php:30 include/blocks.inc.php:615
 #: include/classes/graphdraw/CPieGraphDraw.php:346
@@ -17910,7 +17932,7 @@ msgstr "값"
 msgid "Values without names are not allowed in form fields."
 msgstr "폼 필드에서는 이름을 반드시 입력해주십시오."
 
-#: app/views/popup.httpstep.php:109
+#: app/views/popup.httpstep.php:110
 #: include/views/configuration.httpconf.edit.php:114
 msgid "Variables"
 msgstr "변수"
@@ -17996,7 +18018,7 @@ msgstr "경고"
 msgid "Warning message"
 msgstr ""
 
-#: jsLoader.php:220
+#: jsLoader.php:221
 msgid "We are sorry, the maximum possible number of elements to remember has been reached."
 msgstr "요소를 보존가능한 최대치에 도달하였습니다."
 
@@ -18248,7 +18270,7 @@ msgstr "URL필드의 값이 올바르지 않습니다."
 msgid "X"
 msgstr "X"
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:261
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:265
 msgid "X-Axis"
 msgstr "X축"
 
@@ -18293,8 +18315,8 @@ msgstr "Y"
 msgid "Y axis MAX value"
 msgstr "Y축 최댓값"
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:492
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:516
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:500
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:528
 msgid "Y axis MAX value must be greater than Y axis MIN value"
 msgstr ""
 
@@ -18432,12 +18454,12 @@ msgstr "액션 클로벌 스크립트 \"%s\"의 타겟이 지정되어 있지 �
 #: include/classes/api/services/CHost.php:868
 #: include/classes/api/services/CIconMap.php:178
 #: include/classes/api/services/CIconMap.php:249
-#: include/classes/api/services/CMaintenance.php:505
-#: include/classes/api/services/CMaintenance.php:919
-#: include/classes/api/services/CMaintenance.php:931
-#: include/classes/api/services/CScript.php:236
-#: include/classes/api/services/CScript.php:313
-#: include/classes/api/services/CScript.php:555
+#: include/classes/api/services/CMaintenance.php:514
+#: include/classes/api/services/CMaintenance.php:939
+#: include/classes/api/services/CMaintenance.php:951
+#: include/classes/api/services/CScript.php:241
+#: include/classes/api/services/CScript.php:318
+#: include/classes/api/services/CScript.php:560
 #: include/classes/api/services/CTask.php:104
 #: include/classes/api/services/CTemplate.php:411
 #: include/classes/api/services/CTemplate.php:563
@@ -18509,7 +18531,7 @@ msgstr "ZABBIX 유저"
 #: include/discovery.inc.php:56 include/items.inc.php:86
 #: include/views/configuration.action.edit.php:940
 #: include/views/configuration.action.edit.php:1716
-#: include/views/configuration.action.edit.php:2186
+#: include/views/configuration.action.edit.php:2185
 #: include/views/js/configuration.discovery.edit.js.php:218
 msgid "Zabbix agent"
 msgstr "ZABBIX 에이전트"
@@ -18542,7 +18564,7 @@ msgstr "Zabbix의 로그인 화면"
 #: include/classes/setup/CSetupWizard.php:320
 #: include/views/configuration.action.edit.php:942
 #: include/views/configuration.action.edit.php:1718
-#: include/views/configuration.action.edit.php:2188
+#: include/views/configuration.action.edit.php:2187
 msgid "Zabbix server"
 msgstr "Zabbix 서버"
 
@@ -18560,7 +18582,7 @@ msgstr ""
 #: app/views/administration.script.edit.php:51 include/actions.inc.php:902
 #: include/views/configuration.action.edit.php:941
 #: include/views/configuration.action.edit.php:1717
-#: include/views/configuration.action.edit.php:2187
+#: include/views/configuration.action.edit.php:2186
 msgid "Zabbix server (proxy)"
 msgstr "Zabbix 서버 (프록시)"
 
@@ -18638,7 +18660,6 @@ msgstr ""
 msgid "a number is expected"
 msgstr "숫자로 지정해주세요"
 
-#: app/controllers/CControllerPopupHttpStep.php:98
 #: include/classes/validators/CApiInputValidator.php:446
 #: include/classes/validators/CApiInputValidator.php:485
 #: include/classes/validators/CApiInputValidator.php:752
@@ -18675,7 +18696,7 @@ msgstr "기간을 지정해주세요"
 msgid "a time range is expected"
 msgstr "시간범위를 지정해주세요"
 
-#: app/controllers/CControllerPopupHttpStep.php:92
+#: app/controllers/CControllerPopupHttpStep.php:94
 #: include/classes/validators/CApiInputValidator.php:1434
 #: include/validate.inc.php:227 include/validate.inc.php:590
 msgid "a time unit is expected"
@@ -18792,7 +18813,7 @@ msgstr "빨강"
 msgid "ascending"
 msgstr "오름차순"
 
-#: include/classes/widgets/fields/CWidgetFieldGraphOverride.php:116
+#: include/classes/widgets/fields/CWidgetFieldGraphOverride.php:131
 msgid "at least one override option must be specified"
 msgstr "적어도 1개의 오버라이드 옵션을 지정할 필요가 있습니다"
 
@@ -18833,9 +18854,9 @@ msgid "both username and password should be either present or empty"
 msgstr "유저명과 비밀번호를 양쪽에 지정하거나 비워둘 필요가 있습니다"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:127
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:141
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:200
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:214
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:142
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:202
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:217
 msgid "calculated"
 msgstr "계산"
 
@@ -18944,7 +18965,7 @@ msgstr "\"%1$s\"에서 시작되는 조건식을 확인해주세요."
 msgid "circular item dependency is not allowed"
 msgstr "모순된 아이템의 의존관계는 허가되지 않습니다."
 
-#: jsLoader.php:223
+#: jsLoader.php:224
 msgid "colour"
 msgstr "색상"
 
@@ -19149,7 +19170,7 @@ msgstr "호스트가 비활성"
 
 #: include/classes/widgets/CWidgetHelper.php:593
 #: include/classes/widgets/CWidgetHelper.php:950
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:340
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:344
 msgid "host pattern"
 msgstr "호스트 패턴"
 
@@ -19307,7 +19328,7 @@ msgstr "logsource() - 최신 로그의 소스 파라미터 T와의 매칭 (1 - �
 msgid "low-level discovery rule"
 msgstr "low-level 디스커버리 룰"
 
-#: include/func.inc.php:624 jsLoader.php:111 jsLoader.php:145 jsLoader.php:321
+#: include/func.inc.php:624 jsLoader.php:111 jsLoader.php:145 jsLoader.php:322
 msgctxt "minute short"
 msgid "m"
 msgstr "m"
@@ -19435,7 +19456,7 @@ msgstr "적어도 하나 이상의 LLD 매크로를 포함할 필요가 있습�
 msgid "name"
 msgstr "이름"
 
-#: include/classes/html/CMultiSelect.php:78 jsLoader.php:245
+#: include/classes/html/CMultiSelect.php:78 jsLoader.php:246
 msgid "new"
 msgstr "신규"
 
@@ -19553,7 +19574,7 @@ msgstr "그 외"
 msgid "output"
 msgstr "출력"
 
-#: app/views/popup.httpstep.php:168 include/forms.inc.php:1319
+#: app/views/popup.httpstep.php:169 include/forms.inc.php:1319
 #: include/forms.inc.php:1333 include/views/js/item.preprocessing.js.php:202
 #: include/views/js/item.preprocessing.js.php:217
 msgid "pattern"
@@ -19567,7 +19588,7 @@ msgstr "percentile() - 기간 T의 퍼센테일 P"
 msgid "prev() - Previous value"
 msgstr "prev() - 이전 값"
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:366
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:370
 msgid "problem pattern"
 msgstr "장애 패턴"
 
@@ -19600,7 +19621,7 @@ msgstr "오른쪽"
 #: include/views/configuration.services.parent.list.php:42
 #: include/views/configuration.services.parent.list.php:45
 #: include/views/configuration.services.parent.list.php:47
-#: include/views/configuration.services.parent.list.php:48 jsLoader.php:308
+#: include/views/configuration.services.parent.list.php:48 jsLoader.php:309
 msgid "root"
 msgstr "root"
 
@@ -19654,8 +19675,8 @@ msgstr "짧은 설명"
 #: include/classes/api/services/CItemGeneral.php:1627
 #: include/classes/api/services/CItemGeneral.php:1655
 #: include/classes/api/services/CItemGeneral.php:2237
-#: include/classes/api/services/CMaintenance.php:472
-#: include/classes/api/services/CMaintenance.php:675
+#: include/classes/api/services/CMaintenance.php:481
+#: include/classes/api/services/CMaintenance.php:697
 #: include/classes/api/services/CMediatype.php:785
 #: include/classes/api/services/CProxy.php:662
 #: include/classes/api/services/CProxy.php:786
@@ -19740,7 +19761,7 @@ msgstr "템플릿ID \"%1$s\"가 %2$s번 사용되고 있습니다"
 #: app/controllers/CControllerDashboardUpdate.php:143
 #: app/controllers/CControllerDashboardUpdate.php:150
 #: include/classes/api/services/CAutoregistration.php:145
-#: include/classes/api/services/CDashboard.php:389
+#: include/classes/api/services/CDashboard.php:388
 #: include/classes/api/services/CDiscoveryRule.php:1480
 #: include/classes/api/services/CDiscoveryRule.php:1488
 #: include/classes/api/services/CHttpTest.php:742
@@ -19765,7 +19786,7 @@ msgstr "제3"
 msgid "third parameter is expected"
 msgstr ""
 
-#: jsLoader.php:224
+#: jsLoader.php:225
 msgid "time shift"
 msgstr "타임시프트"
 
@@ -19777,10 +19798,10 @@ msgstr "time() - 현재시간"
 msgid "timeleft() - Time to reach threshold estimated based on period T"
 msgstr "timeleft() - 기간T를 기준으로 하여 지정한 값에 도달하기 까지의 시간"
 
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:481
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:485
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:505
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:509
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:486
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:492
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:514
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:520
 msgid "too many decimal places"
 msgstr ""
 
@@ -19803,7 +19824,7 @@ msgid "trigger with linkages cannot be moved to another template or host"
 msgstr "링크가 있는 트리거는 다른 템플릿이나 호스트로 이동할 수 없습니다"
 
 #: app/views/layout.htmlpage.menu.php:32
-#: include/classes/html/CMultiSelect.php:77 jsLoader.php:244
+#: include/classes/html/CMultiSelect.php:77 jsLoader.php:245
 msgid "type here to search"
 msgstr "검색 문자열을 입력"
 
@@ -19893,8 +19914,8 @@ msgstr "지원되지 않는 버전의 번호입니다."
 #: app/views/popup.preproctestedit.view.php:47
 #: include/classes/widgets/CWidgetHelper.php:467
 #: include/classes/widgets/CWidgetHelper.php:512
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:174
-#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:247
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:176
+#: include/classes/widgets/forms/CWidgetFormSvgGraph.php:251
 #: include/forms.inc.php:2355
 #: include/views/administration.general.macros.edit.php:54
 #: include/views/administration.usergroups.edit.php:247
@@ -19960,6 +19981,7 @@ msgstr "값 %1$s는 이미 존재합니다"
 msgid "value is too long"
 msgstr "값이 너무 깁니다"
 
+#: app/controllers/CControllerPopupHttpStep.php:101
 #: include/classes/api/services/CHost.php:878
 #: include/classes/api/services/CHost.php:1826
 #: include/classes/api/services/CHost.php:1966
