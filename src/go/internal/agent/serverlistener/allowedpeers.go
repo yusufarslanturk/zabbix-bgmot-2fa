@@ -89,7 +89,9 @@ func (ap *AllowedPeers) isPresent(value interface{}) bool {
 	switch v := value.(type) {
 	case *net.IPNet:
 		for _, va := range ap.nets {
-			if va.Contains(v.IP) {
+			maskLeadSize, _ := va.Mask.Size()
+			maskLeadSizeNew, _ := v.Mask.Size()
+			if maskLeadSize <= maskLeadSizeNew && va.Contains(v.IP) {
 				return true
 			}
 		}
