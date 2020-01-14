@@ -20,7 +20,7 @@ The Zabbix Agent's configuration file is used to configure plugins.
 **Plugins.Redis.Uri** — Uri to connect.  
 *Default value:* tcp://localhost:6379  
 *Limits:*
-- Must matche the URI format.
+- Must match the URI format.
 - The only supported schemas: "tcp" and "unix".
   
 *Examples:*
@@ -37,7 +37,7 @@ The Zabbix Agent's configuration file is used to configure plugins.
 *Limits:* 60-900
 
 **Plugins.Redis.Timeout** — The maximum time for waiting when a request has to be done.  
-*Default value:* equals the global timeout.  
+*Default value:* equals the global Timeout configuration parameter.  
 *Limits:* 1-30
 
 ### Authentication
