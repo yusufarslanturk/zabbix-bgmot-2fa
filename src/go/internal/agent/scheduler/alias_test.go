@@ -79,7 +79,7 @@ func TestGetAlias(t *testing.T) {
 		for _, result := range results {
 			t.Run(result.input, func(t *testing.T) {
 				t.Logf("result.input: %s", result.input)
-				key := manager.getAlias(result.input)
+				key := manager.aliases.Get(result.input)
 				if !result.fail {
 					if key != result.key {
 						t.Errorf("Expected key '%s' while got '%s'", result.key, key)

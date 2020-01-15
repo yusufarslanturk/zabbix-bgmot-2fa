@@ -226,7 +226,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		}
 	}
 
-	if path, tmperr := pdh.ConvertPath(params[0]); err != nil {
+	if path, tmperr := pdh.ConvertPath(params[0]); tmperr != nil {
 		p.Debugf("cannot convert performance counter path: %s", tmperr)
 		return nil, errors.New("Invalid performance counter path.")
 	} else {
