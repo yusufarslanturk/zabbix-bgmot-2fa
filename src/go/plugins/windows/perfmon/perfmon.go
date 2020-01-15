@@ -95,6 +95,10 @@ func (p *Plugin) Collect() (err error) {
 	p.mutex.Lock()
 	defer p.mutex.Unlock()
 
+	if len(p.counters) == 0 {
+		return
+	}
+
 	if p.collectError = win32.PdhCollectQueryData(p.query); p.collectError != nil {
 		return p.collectError
 	}
