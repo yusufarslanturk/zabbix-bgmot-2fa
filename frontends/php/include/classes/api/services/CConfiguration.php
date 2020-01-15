@@ -180,6 +180,9 @@ class CConfiguration extends CApiService {
 		// Normalize array keys.
 		$data = (new CArrayKeysImportConverter($schema))->convert($data);
 
+		// Additional converter.
+		$data = (new CAdditionalImportConverter($schema))->convert($data);
+
 		$adapter = new CImportDataAdapter();
 		$adapter->load($data);
 
