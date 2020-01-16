@@ -21,7 +21,7 @@ package alias
 
 import (
 	"fmt"
-	"regexp"
+	"strings"
 
 	"zabbix.com/internal/agent"
 )
@@ -29,21 +29,17 @@ import (
 // addPerfCounterAliases adds performance counter metrics defined by PerfCounter,
 // PerfCounterEn parameters as aliases to perf_counter, perf_counter_en metrics.
 func (m *Manager) addPerfCounterAliases(key string, aliases []string) (err error) {
-	var re *regexp.Regexp
-	if re, err = regexp.Compile(`^([^, ]+) *, *"(.*)" *, *([0-9]+)$`); err != nil {
-		return
-	}
 	for _, data := range aliases {
-		s := re.FindStringSubmatch(data)
-		if len(s) != 4 {
+		s := strings.SplitN(data, ",", 2)
+		if len(s) != 2 {
 			return fmt.Errorf(`cannot add performance counter alias "%s"`, data)
 		}
 		for _, alias := range m.aliases {
-			if alias.name == s[1] {
-				return fmt.Errorf("failed to add Alias \"%s\": duplicate name", s[1])
+			if alias.name == s[0] {
+				return fmt.Errorf("failed to add Alias \"%s\": duplicate name", s[0])
 			}
 		}
-		m.aliases = append(m.aliases, keyAlias{name: s[1], key: fmt.Sprintf("%s[%s,%s]", key, s[2], s[3])})
+		m.aliases = append(m.aliases, keyAlias{name: s[0], key: fmt.Sprintf("%s[%s]", key, s[1])})
 	}
 	return nil
 }
