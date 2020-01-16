@@ -26,7 +26,9 @@ import (
 	"zabbix.com/internal/agent"
 )
 
-func (m *Manager) loadPerfCounterAliases(key string, aliases []string) (err error) {
+// addPerfCounterAliases adds performance counter metrics defined by PerfCounter,
+// PerfCounterEn parameters as aliases to perf_counter, perf_counter_en metrics.
+func (m *Manager) addPerfCounterAliases(key string, aliases []string) (err error) {
 	var re *regexp.Regexp
 	if re, err = regexp.Compile(`^([^, ]+) *, *"(.*)" *, *([0-9]+)$`); err != nil {
 		return
@@ -41,20 +43,19 @@ func (m *Manager) loadPerfCounterAliases(key string, aliases []string) (err erro
 				return fmt.Errorf("failed to add Alias \"%s\": duplicate name", s[1])
 			}
 		}
-		fmt.Printf("ADDING: %s\n", fmt.Sprintf("%s[%s,%s]", key, s[2], s[3]))
 		m.aliases = append(m.aliases, keyAlias{name: s[1], key: fmt.Sprintf("%s[%s,%s]", key, s[2], s[3])})
 	}
 	return nil
 }
 
 func (m *Manager) initialize(options *agent.AgentOptions) (err error) {
-	if err = m.loadAliases(options.Alias); err != nil {
+	if err = m.addAliases(options.Alias); err != nil {
 		return
 	}
-	if err = m.loadPerfCounterAliases("perf_counter", options.PerfCounter); err != nil {
+	if err = m.addPerfCounterAliases("perf_counter", options.PerfCounter); err != nil {
 		return
 	}
-	if err = m.loadPerfCounterAliases("perf_counter_en", options.PerfCounterEn); err != nil {
+	if err = m.addPerfCounterAliases("perf_counter_en", options.PerfCounterEn); err != nil {
 		return
 	}
 	return

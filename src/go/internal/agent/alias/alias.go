@@ -35,7 +35,7 @@ type Manager struct {
 	aliases []keyAlias
 }
 
-func (m *Manager) loadAliases(aliases []string) (err error) {
+func (m *Manager) addAliases(aliases []string) (err error) {
 	for _, data := range aliases {
 		var name, key string
 		if name, key, err = itemutil.ParseAlias(data); err != nil {

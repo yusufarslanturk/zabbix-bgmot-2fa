@@ -26,5 +26,5 @@ import (
 )
 
 func (m *Manager) initialize(options *agent.AgentOptions) (err error) {
-	return m.loadAliases(options.Alias)
+	return m.addAliases(options.Alias)
 }
