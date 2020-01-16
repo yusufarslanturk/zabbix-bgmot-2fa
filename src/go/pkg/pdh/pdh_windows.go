@@ -59,22 +59,6 @@ var sysCounters []sysCounter = []sysCounter{
 
 const HKEY_PERFORMANCE_TEXT = 0x80000050
 
-const (
-	PDH_CSTATUS_VALID_DATA   = 0x00000000
-	PDH_CSTATUS_NEW_DATA     = 0x00000001
-	PDH_CSTATUS_INVALID_DATA = 0xC0000BBA
-
-	PDH_MORE_DATA    = 0x800007D2
-	PDH_NO_DATA      = 0x800007D5
-	PDH_INVALID_DATA = 0xc0000bc6
-
-	PDH_FMT_DOUBLE   = 0x00000200
-	PDH_FMT_LARGE    = 0x00000400
-	PDH_FMT_NOCAP100 = 0x00008000
-
-	PDH_MAX_COUNTER_NAME = 1024
-)
-
 func nextField(buf []uint16) (field []uint16, left []uint16) {
 	start := -1
 	for i, c := range buf {
@@ -175,29 +159,12 @@ func GetCounterInt64(path string) (value *int64, err error) {
 	return win32.PdhGetFormattedCounterValueInt64(counter)
 }
 
-/*
-func getCounterName(index int64) (name string, err error) {
-	size := uint32(PDH_MAX_COUNTER_NAME)
-	buf := make([]uint16, size)
-	var ret uintptr
-	ret, _, err = pdhLookupPerfNameByIndex.Call(0, uintptr(index), uintptr(unsafe.Pointer(&buf[0])),
-		uintptr(unsafe.Pointer(&size)))
-	if syscall.Errno(ret) != windows.ERROR_SUCCESS {
-		return "", pdhError(ret)
-	}
-	return windows.UTF16ToString(buf), nil
-}
-*/
-
 func ConvertPath(path string) (outPath string, err error) {
 	var elements *win32.PDH_COUNTER_PATH_ELEMENTS
 	if elements, err = win32.PdhParseCounterPath(path); err != nil {
 		return
 	}
 
-	// The returned element names are stored in the overallocated memory after the structure -
-	// so in the buf slice. To find the string index in buf slice calculate the memory offset
-	// of string from the start of the structure and divide with 2 (width of the slice element).
 	bufObject := (*[1 << 16]uint16)(unsafe.Pointer(elements.ObjectName))[:win32.PDH_MAX_COUNTER_NAME:win32.PDH_MAX_COUNTER_NAME]
 	bufCounter := (*[1 << 16]uint16)(unsafe.Pointer(elements.ObjectName))[:win32.PDH_MAX_COUNTER_NAME:win32.PDH_MAX_COUNTER_NAME]
 	objectName := windows.UTF16ToString(bufObject)

@@ -44,8 +44,6 @@ var (
 	pdhRemoveCounter            uintptr
 )
 
-const HKEY_PERFORMANCE_TEXT = 0x80000050
-
 const (
 	PDH_CSTATUS_VALID_DATA   = 0x00000000
 	PDH_CSTATUS_NEW_DATA     = 0x00000001
