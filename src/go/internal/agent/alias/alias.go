@@ -55,8 +55,10 @@ func NewManager(options *agent.AgentOptions) (m *Manager, err error) {
 	m = &Manager{
 		aliases: make([]keyAlias, 0),
 	}
-	if err = m.initialize(options); err != nil {
-		return nil, err
+	if options != nil {
+		if err = m.initialize(options); err != nil {
+			return nil, err
+		}
 	}
 	return
 }
