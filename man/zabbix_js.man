@@ -33,7 +33,7 @@
 .
 .  hy \\n(HY
 ..
-.TH ZABBIX_JS 1 "2019\-01\-29" Zabbix
+.TH ZABBIX_JS 8 "2019\-01\-29" Zabbix
 .SH NAME
 zabbix_js \- Zabbix JS utility
 .SH SYNOPSIS
@@ -60,7 +60,7 @@ zabbix_js \- Zabbix JS utility
 .B zabbix_js \-V
 .SH DESCRIPTION
 .B zabbix_js
-is a command line utility that can be used for embedded script testing. 
+is a command line utility that can be used for embedded script testing.
 .SH OPTIONS
 .IP "\fB\-s\fR, \fB\-\-script\fR \fIscript\-file\fR"
 Specify the file name of the script to execute. If '-' is specified as file name, the script will be read from stdin.
