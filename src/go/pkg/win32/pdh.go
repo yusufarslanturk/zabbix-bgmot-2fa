@@ -128,7 +128,7 @@ func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER) (value *float64, er
 	ret, _, _ := syscall.Syscall6(pdhGetFormattedCounterValue, 6, uintptr(counter),
 		uintptr(PDH_FMT_DOUBLE|PDH_FMT_NOCAP100), 0, uintptr(unsafe.Pointer(&pdhValue)), 0, 0)
 	if syscall.Errno(ret) != windows.ERROR_SUCCESS {
-		if ret == PDH_INVALID_DATA {
+		if ret == PDH_INVALID_DATA || ret == PDH_CSTATUS_INVALID_DATA {
 			return nil, nil
 		}
 		return nil, newPdhError(ret)
@@ -141,7 +141,7 @@ func PdhGetFormattedCounterValueInt64(counter PDH_HCOUNTER) (value *int64, err e
 	ret, _, _ := syscall.Syscall6(pdhGetFormattedCounterValue, 6, uintptr(counter), uintptr(PDH_FMT_LARGE), 0,
 		uintptr(unsafe.Pointer(&pdhValue)), 0, 0)
 	if syscall.Errno(ret) != windows.ERROR_SUCCESS {
-		if ret == PDH_INVALID_DATA {
+		if ret == PDH_INVALID_DATA || ret == PDH_CSTATUS_INVALID_DATA {
 			return nil, nil
 		}
 		return nil, newPdhError(ret)

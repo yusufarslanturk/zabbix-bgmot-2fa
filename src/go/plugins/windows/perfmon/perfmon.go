@@ -188,7 +188,10 @@ func (c *perfCounter) getHistory(interval int) (value interface{}, err error) {
 			num++
 		}
 	}
-	return total / num, nil
+	if num != 0 {
+		return total / num, nil
+	}
+	return nil, nil
 }
 
 // Export -
