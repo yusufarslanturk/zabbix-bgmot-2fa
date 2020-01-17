@@ -33,7 +33,7 @@
 .
 .  hy \\n(HY
 ..
-.TH ZABBIX_JS 8 "2019\-01\-29" Zabbix
+.TH ZABBIX_JS 1 "2019\-01\-29" Zabbix
 .SH NAME
 zabbix_js \- Zabbix JS utility
 .SH SYNOPSIS
@@ -85,7 +85,7 @@ Documentation
 .PP
 .BR zabbix_agentd (8),
 .BR zabbix_proxy (8),
-.BR zabbix_sender (8),
+.BR zabbix_sender (1),
 .BR zabbix_server (8),
-.BR zabbix_get (8),
+.BR zabbix_get (1),
 .BR zabbix_agent2 (8)
