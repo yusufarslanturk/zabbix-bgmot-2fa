@@ -1706,7 +1706,7 @@ class CMacrosResolver extends CMacrosResolverGeneral {
 	 *
 	 * @return string
 	 */
-	public function resolveMapLabelMacros($label, $replaceHosts = []) {
+	public function resolveMapLabelMacros($label, array $replaceHosts = []) {
 		$pattern = '/(?P<macros>{'.
 				'('.ZBX_PREG_HOST_FORMAT.($replaceHosts
 						? '|({('.self::PATTERN_HOST_INTERNAL.')'.self::PATTERN_MACRO_PARAM.'})' : '').'):'.
