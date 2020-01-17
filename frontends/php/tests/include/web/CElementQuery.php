@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -382,7 +382,7 @@ class CElementQuery implements IWaitable {
 		$driver = static::getDriver();
 
 		return function () use ($driver) {
-			return $driver->executeScript('return document.readyState;') == 'complete';
+			return $driver->executeScript('return document.readyState === \'complete\' && (window.jQuery||{active:0}).active === 0;');
 		};
 	}
 
