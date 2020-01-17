@@ -1,4 +1,4 @@
-Start URL macro. Copied from an-ext.tmac for portability
+.\" Start URL macro. Copied from an-ext.tmac for portability
 .de UR
 .  ds m1 \\$1\"
 .  nh
