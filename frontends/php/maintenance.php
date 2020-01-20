@@ -270,7 +270,7 @@ elseif (hasRequest('add_timeperiod') && hasRequest('new_timeperiod')) {
 			$new_timeperiod['day'] = 0;
 		}
 		else {
-			$new_timeperiod['every'] = 0;
+			$new_timeperiod['every'] = 1;
 			$new_timeperiod['dayofweek'] = 0;
 		}
 	}
