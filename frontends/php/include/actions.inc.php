@@ -1511,6 +1511,49 @@ function getEventsActions(array $events, array $r_events = []) {
 		])
 		: [];
 
+	// failed
+	$q = 'SELECT
+			count(a.alertid) as count, a.eventid
+		FROM alerts a
+		WHERE a.status = 2
+		AND '.dbConditionId('a.eventid', array_keys($alert_eventids)).'
+		GROUP BY a.eventid
+		';
+
+	$s = DBselect($q);
+	$x = DBfetchArray($s);
+	t($x, API::Alert()->get([
+			'countOutput' => true,
+			'output' => ['eventid'],
+			'eventids' => array_keys($alert_eventids)
+		]));
+
+	// new or in progress
+	$q = 'SELECT
+			count(a.alertid) as count, a.eventid
+		FROM alerts a
+		WHERE a.status IN (0,3)
+		AND '.dbConditionId('a.eventid', array_keys($alert_eventids)).'
+		GROUP BY a.eventid
+		';
+
+	$s = DBselect($q);
+	$x = DBfetchArray($s);
+	t($x);
+
+	// correct count (all statuses)
+	$q = 'SELECT
+			a.eventid,
+			count(a.alertid)
+		FROM alerts a
+		WHERE '.dbConditionId('a.eventid', array_keys($alert_eventids)).'
+		GROUP BY a.eventid
+		';
+
+	$s = DBselect($q);
+	$x = DBfetchArray($s);
+	t($x);
+
 	// Create array of actions for each event.
 	foreach ($events as $event) {
 		$event_actions = getSingleEventActions($event, $r_events, $alerts);
@@ -1527,7 +1570,9 @@ function getEventsActions(array $events, array $r_events = []) {
 	return [
 		'data' => $actions,
 		'mediatypeids' => $mediatypeids,
-		'userids' => $userids
+		'userids' => $userids,
+		/* 'mediatypeids' => [], //$mediatypeids, */
+		/* 'userids' => [], //$userids */
 	];
 }
 
