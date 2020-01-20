@@ -570,18 +570,18 @@ int	init_builtin_counter_indexes(void)
 	}
 
 	zbx_free(eng_names);
-out:
-#define CHECK_COUNTER_INDICES(index_map)\
-	if (SUCCEED == ret)\
-	{\
-		for (i = 0; i < ARRSIZE(index_map); i++)\
-		{\
-			if (0 == index_map[i].pdhIndex)\
-			{\
-				ret = FAIL;\
-				break;\
-			}\
-		}\
+
+#define CHECK_COUNTER_INDICES(index_map)								\
+	for (i = 0; i < ARRSIZE(index_map); i++)							\
+	{												\
+		if (0 == index_map[i].pdhIndex)								\
+		{											\
+			char	*counter;								\
+													\
+			counter = zbx_unicode_to_utf8(index_map[i].eng_name);				\
+			zabbix_log(LOG_LEVEL_ERR, "Failed to initialize builtin counter: %s", counter);	\
+			zbx_free(counter);								\
+		}											\
 	}
 
 	/* check if all builtin counter indices are filled */
@@ -589,7 +589,7 @@ out:
 	CHECK_COUNTER_INDICES(builtin_counter_map);
 
 #undef CHECK_COUNTER_INDICES
-
+out:
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_result_string(ret));
 
 	return ret;
