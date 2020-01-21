@@ -20,6 +20,7 @@
 package uname
 
 import (
+	"errors"
 	"fmt"
 	"syscall"
 )
