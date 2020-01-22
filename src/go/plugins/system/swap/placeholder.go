@@ -1,4 +1,4 @@
-// +build windows
+// +build !windows
 
 /*
 ** Zabbix
@@ -20,31 +20,3 @@
 **/
 
 package win32
-
-import "syscall"
-
-func mustLoadLibrary(name string) Hlib {
-	if handle, err := syscall.LoadLibrary(name); err != nil {
-		panic(err.Error())
-	} else {
-		return Hlib(handle)
-	}
-}
-
-func (h Hlib) mustGetProcAddress(name string) uintptr {
-	if addr, err := syscall.GetProcAddress(syscall.Handle(h), name); err != nil {
-		panic(err.Error())
-	} else {
-		return addr
-	}
-}
-
-func bool2uintptr(value bool) uintptr {
-	if value {
-		return 1
-	}
-	return 0
-}
-
-func init() {
-}
