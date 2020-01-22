@@ -1,5 +1,3 @@
-// +build windows
-
 /*
 ** Zabbix
 ** Copyright (C) 2001-2020 Zabbix SIA
@@ -104,4 +102,16 @@ type MIB_IPADDRROW struct {
 type MIB_IPADDRTABLE struct {
 	NumEntries uint32
 	Table      [ANY_SIZE]MIB_IPADDRROW
+}
+
+type MEMORYSTATUSEX struct {
+	Length               uint32
+	MemoryLoad           uint32
+	TotalPhys            uint64
+	AvailPhys            uint64
+	TotalPageFile        uint64
+	AvailPageFile        uint64
+	TotalVirtual         uint64
+	AvailVirtual         uint64
+	AvailExtendedVirtual uint64
 }
