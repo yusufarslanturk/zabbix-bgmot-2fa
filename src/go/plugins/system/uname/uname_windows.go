@@ -53,6 +53,17 @@ func getHostname(params []string) (uname string, err error) {
 	}
 }
 
+func getArch() string {
+	switch runtime.GOARCH {
+	case "386":
+		return "x86"
+	case "amd64":
+		return "x64"
+	default:
+		return runtime.GOARCH
+	}
+}
+
 func getValue(u interface{}, def string) string {
 	if v, ok := u.(string); ok {
 		return v
@@ -77,7 +88,7 @@ func getUname(params []string) (hostname string, err error) {
 	if m["CSDVersion"] != nil {
 		hostname += " " + getValue(m["Caption"], "<unknown csd version>")
 	}
-	hostname += " " + runtime.GOARCH
+	hostname += " " + getArch()
 	return
 }
 
@@ -86,5 +97,5 @@ func getSwArch(params []string) (swarch string, err error) {
 		return "", errors.New("Too many parameters.")
 	}
 
-	return runtime.GOARCH, nil
+	return getArch(), nil
 }
