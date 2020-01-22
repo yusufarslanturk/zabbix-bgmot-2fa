@@ -34,6 +34,21 @@ const (
 	IF_MAX_PHYS_ADDRESS_LENGTH = 32
 )
 
+const (
+	MIB_TCP_STATE_CLOSED     uint32 = 1
+	MIB_TCP_STATE_LISTEN     uint32 = 2
+	MIB_TCP_STATE_SYN_SENT   uint32 = 3
+	MIB_TCP_STATE_SYN_RCVD   uint32 = 4
+	MIB_TCP_STATE_ESTAB      uint32 = 5
+	MIB_TCP_STATE_FIN_WAIT1  uint32 = 6
+	MIB_TCP_STATE_FIN_WAIT2  uint32 = 7
+	MIB_TCP_STATE_CLOSE_WAIT uint32 = 8
+	MIB_TCP_STATE_CLOSING    uint32 = 9
+	MIB_TCP_STATE_LAST_ACK   uint32 = 10
+	MIB_TCP_STATE_TIME_WAIT  uint32 = 11
+	MIB_TCP_STATE_DELETE_TCB uint32 = 12
+)
+
 type GUID struct {
 	Data1 uint32
 	Data2 uint16
@@ -104,4 +119,17 @@ type MIB_IPADDRROW struct {
 type MIB_IPADDRTABLE struct {
 	NumEntries uint32
 	Table      [ANY_SIZE]MIB_IPADDRROW
+}
+
+type MIB_TCPROW struct {
+	State      uint32
+	LocalAddr  uint32
+	LocalPort  uint32
+	RemoteAddr uint32
+	RemotePort uint32
+}
+
+type MIB_TCPTABLE struct {
+	NumEntries uint32
+	Table      [ANY_SIZE]MIB_TCPROW
 }
