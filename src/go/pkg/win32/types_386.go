@@ -1,3 +1,5 @@
+// +build windows
+
 /*
 ** Zabbix
 ** Copyright (C) 2001-2020 Zabbix SIA
@@ -17,15 +19,18 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package plugins
+package win32
 
-import (
-	_ "zabbix.com/plugins/log"
-	_ "zabbix.com/plugins/net/netif"
-	_ "zabbix.com/plugins/proc"
-	_ "zabbix.com/plugins/systemrun"
-	_ "zabbix.com/plugins/vfs/file"
-	_ "zabbix.com/plugins/windows/eventlog"
-	_ "zabbix.com/plugins/zabbix/async"
-	_ "zabbix.com/plugins/zabbix/stats"
-)
+type PROCESS_MEMORY_COUNTERS_EX struct {
+	Cb                         uint32
+	PageFaultCount             uint32
+	PeakWorkingSetSize         uint32
+	WorkingSetSize             uint32
+	QuotaPeakPagedPoolUsage    uint32
+	QuotaPagedPoolUsage        uint32
+	QuotaPeakNonPagedPoolUsage uint32
+	QuotaNonPagedPoolUsage     uint32
+	PagefileUsage              uint32
+	PeakPagefileUsage          uint32
+	PrivateUsage               uint32
+}

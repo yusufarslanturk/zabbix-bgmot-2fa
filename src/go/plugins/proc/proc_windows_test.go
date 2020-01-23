@@ -17,15 +17,19 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package plugins
+package proc
 
 import (
-	_ "zabbix.com/plugins/log"
-	_ "zabbix.com/plugins/net/netif"
-	_ "zabbix.com/plugins/proc"
-	_ "zabbix.com/plugins/systemrun"
-	_ "zabbix.com/plugins/vfs/file"
-	_ "zabbix.com/plugins/windows/eventlog"
-	_ "zabbix.com/plugins/zabbix/async"
-	_ "zabbix.com/plugins/zabbix/stats"
+	"fmt"
+	"testing"
 )
+
+func TestProcNum(t *testing.T) {
+	var p Plugin
+
+	ret, err := p.exportProcNum([]string{"code.exe", "wiper"})
+
+	fmt.Println(ret, err)
+
+	t.Fail()
+}

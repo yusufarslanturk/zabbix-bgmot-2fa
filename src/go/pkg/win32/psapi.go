@@ -1,3 +1,5 @@
+// +build windows
+
 /*
 ** Zabbix
 ** Copyright (C) 2001-2020 Zabbix SIA
@@ -17,32 +19,30 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package proc
+package win32
 
-type procQuery struct {
-	name    string
-	user    string
-	cmdline string
-}
-
-const (
-	procInfoPid = 1 << iota
-	procInfoName
-	procInfoUser
-	procInfoCmdline
+import (
+	"syscall"
+	"unsafe"
 )
 
-type procInfo struct {
-	pid     int64
-	name    string
-	userid  int64
-	cmdline string
-	arg0    string
+var (
+	hPsapi Hlib
+
+	getProcessMemoryInfo uintptr
+)
+
+func init() {
+	hPsapi = mustLoadLibrary("psapi.dll")
+
+	getProcessMemoryInfo = hPsapi.mustGetProcAddress("GetProcessMemoryInfo")
 }
 
-type cpuUtil struct {
-	utime   uint64
-	stime   uint64
-	started uint64
-	err     error
+func GetProcessMemoryInfo(proc syscall.Handle, mem *PROCESS_MEMORY_COUNTERS_EX, cb uint32) (err error) {
+	mem.Cb = uint32(unsafe.Sizeof(*mem))
+	ret, _, syserr := syscall.Syscall(getProcessMemoryInfo, 3, uintptr(proc), uintptr(unsafe.Pointer(mem)), uintptr(cb))
+	if ret == 0 {
+		return syserr
+	}
+	return
 }

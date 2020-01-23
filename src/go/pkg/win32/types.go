@@ -105,3 +105,31 @@ type MIB_IPADDRTABLE struct {
 	NumEntries uint32
 	Table      [ANY_SIZE]MIB_IPADDRROW
 }
+
+type MEMORYSTATUSEX struct {
+	Length               uint32
+	MemoryLoad           uint32
+	TotalPhys            uint64
+	AvailPhys            uint64
+	TotalPageFile        uint64
+	AvailPageFile        uint64
+	TotalVirtual         uint64
+	AvailVirtual         uint64
+	AvailExtendedVirtual uint64
+}
+
+const (
+	GR_GDIOBJECTS       = 0
+	GR_GDIOBJECTS_PEAK  = 2
+	GR_USEROBJECTS      = 1
+	GR_USEROBJECTS_PEAK = 4
+)
+
+type IO_COUNTERS struct {
+	ReadOperationCount uint64
+	WriteOperationCount uint64
+	OtherOperationCount uint64
+	ReadTransferCount uint64
+	WriteTransferCount uint64
+	OtherTransferCount uint64
+}
