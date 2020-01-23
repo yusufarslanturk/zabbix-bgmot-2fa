@@ -46,9 +46,10 @@ import (
 	"zabbix.com/pkg/zbxlib"
 )
 
+const hostNameLen = 128
+
 func configDefault(taskManager scheduler.Scheduler, o *agent.AgentOptions) error {
 	var err error
-	const hostNameLen = 128
 
 	if len(o.Hostname) == 0 {
 		var hostnameItem string
@@ -84,16 +85,34 @@ func configDefault(taskManager scheduler.Scheduler, o *agent.AgentOptions) error
 		if len(o.HostnameItem) != 0 {
 			log.Warningf("both \"Hostname\" and \"HostnameItem\" configuration parameter defined, using \"Hostname\"")
 		}
-
-		if len(o.Hostname) > hostNameLen {
-			return fmt.Errorf("invalid \"Hostname\" configuration parameter: configuration parameter cannot be longer than %d characters", hostNameLen)
-		}
-		if err = agent.CheckHostname(o.Hostname); nil != err {
-			return fmt.Errorf("invalid \"Hostname\" configuration parameter: %s", err.Error())
-		}
 	}
 
 	return nil
+}
+
+func configValidate(o *agent.AgentOptions) {
+	var err error
+	var exit bool = false
+
+	if len(o.Hostname) > hostNameLen {
+		log.Critf("invalid \"Hostname\" configuration parameter: configuration parameter cannot be longer than %d characters", hostNameLen)
+		exit = true
+	}
+	if err = agent.CheckHostname(o.Hostname); nil != err {
+		log.Critf("invalid \"Hostname\" configuration parameter: %s", err.Error())
+		exit = true
+	}
+	if len(o.HostMetadata) > 0 && len(o.HostMetadata) > serverconnector.HostMetadataLen {
+		log.Critf("the value of \"HostMetadata\" configuration parameter cannot be longer than %d characters", serverconnector.HostMetadataLen)
+		exit = true
+	}
+	if len(o.HostInterface) > serverconnector.HostInterfaceLen {
+		log.Critf("the value of \"HostInterface\" configuration parameter cannot be longer than %d characters", serverconnector.HostInterfaceLen)
+		exit = true
+	}
+	if exit {
+		os.Exit(1)
+	}
 }
 
 var manager *scheduler.Manager
@@ -411,6 +430,8 @@ func main() {
 		log.Critf("cannot process configuration: %s", err)
 		os.Exit(1)
 	}
+
+	configValidate(&agent.Options)
 
 	serverConnectors = make([]*serverconnector.Connector, len(addresses))
 
