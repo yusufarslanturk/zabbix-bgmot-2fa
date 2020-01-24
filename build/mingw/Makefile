@@ -15,6 +15,7 @@ OBJS = \
 	$(OUTPUTDIR)\str.o \
 	$(OUTPUTDIR)\misc.o \
 	$(OUTPUTDIR)\fatal.o \
+	$(OUTPUTDIR)\disk.o \
 	$(OUTPUTDIR)\iprange.o \
 	$(OUTPUTDIR)\md5.o \
 	$(OUTPUTDIR)\sysinfo.o \
@@ -26,7 +27,8 @@ OBJS = \
 	$(OUTPUTDIR)\algodefs.o \
 	$(OUTPUTDIR)\sysinfo_system.o \
 	$(OUTPUTDIR)\sysinfo_dns.o \
-	$(OUTPUTDIR)\eventlog.o 
+	$(OUTPUTDIR)\sysinfo_dir.o \
+	$(OUTPUTDIR)\eventlog.o
 
 CFLAGS := $(CFLAGS) -O2 -g -DUNICODE -DHAVE_STDINT_H=1 -I$(TOPDIR)\include -I$(TOPDIR)\build\win32\include -I$(TOPDIR)\build\mingw
 GOPATH := $(GOPATH);$(TOPDIR)\go
@@ -95,6 +97,9 @@ $(OUTPUTDIR)\tls_version.o: $(TOPDIR)\src\libs\zbxcrypto\tls_version.c
 $(OUTPUTDIR)\fatal.o: $(TOPDIR)\src\libs\zbxwin32\fatal.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
+$(OUTPUTDIR)\disk.o: $(TOPDIR)\src\libs\zbxwin32\disk.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+
 $(OUTPUTDIR)\threads.o: $(TOPDIR)\src\libs\zbxsys\threads.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
@@ -108,6 +113,9 @@ $(OUTPUTDIR)\sysinfo_system.o: $(TOPDIR)\src\libs\zbxsysinfo\common\system.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 $(OUTPUTDIR)\sysinfo_dns.o: $(TOPDIR)\src\libs\zbxsysinfo\common\dns.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+$(OUTPUTDIR)\sysinfo_dir.o: $(TOPDIR)\src\libs\zbxsysinfo\common\dir.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 $(OUTPUTDIR)\vector.o: $(TOPDIR)\src\libs\zbxalgo\vector.c
