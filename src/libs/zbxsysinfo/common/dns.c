@@ -24,15 +24,15 @@
 #include "log.h"
 #include "cfg.h"
 
-#include "net.h"
+#include "dns.h"
 #include "zbxalgo.h"
 
-#ifdef _WINDOWS
+#if defined(_WINDOWS) || defined(__MINGW32__)
 #	include <windns.h>
 #	pragma comment(lib, "Dnsapi.lib") /* add the library for DnsQuery function */
 #endif
 
-#if defined(HAVE_RES_QUERY) || defined(_WINDOWS)
+#if defined(HAVE_RES_QUERY) || defined(_WINDOWS) || defined(__MINGW32__)
 
 static const char	*decode_type(int q_type)
 {
@@ -82,7 +82,7 @@ static const char	*decode_type(int q_type)
 	}
 }
 
-#if !defined(_WINDOWS)
+#if !defined(_WINDOWS) && !defined(__MINGW32__)
 static char	*get_name(unsigned char *msg, unsigned char *msg_end, unsigned char **msg_ptr)
 {
 	int		res;
@@ -95,10 +95,10 @@ static char	*get_name(unsigned char *msg, unsigned char *msg_end, unsigned char 
 
 	return buffer;
 }
-#endif	/* !defined(_WINDOWS) */
+#endif	/* !defined(_WINDOWS) && !defined(__MINGW32__)*/
 
 /* Replace zbx_inet_ntop with inet_ntop in case of drop Windows XP/W2k3 support */
-#if defined(_WINDOWS)
+#if defined(_WINDOWS) || defined(__MINGW32__)
 const char *zbx_inet_ntop(int af, const void *src, char *dst, size_t size)
 {
 	struct sockaddr_storage ss;
@@ -122,11 +122,11 @@ const char *zbx_inet_ntop(int af, const void *src, char *dst, size_t size)
 	return (0 == WSAAddressToStringA((struct sockaddr *)&ss, sizeof(ss), NULL, dst, &s))? dst : NULL;
 }
 #endif
-#endif	/* defined(HAVE_RES_QUERY) || defined(_WINDOWS) */
+#endif	/* defined(HAVE_RES_QUERY) || defined(_WINDOWS) || defined(__MINGW32__) */
 
 static int	dns_query(AGENT_REQUEST *request, AGENT_RESULT *result, int short_answer)
 {
-#if defined(HAVE_RES_QUERY) || defined(_WINDOWS)
+#if defined(HAVE_RES_QUERY) || defined(_WINDOWS) || defined(__MINGW32__)
 
 	size_t			offset = 0;
 	int			res, type, retrans, retry, use_tcp, i, ret = SYSINFO_RET_FAIL, ip_type = AF_INET;
@@ -134,7 +134,7 @@ static int	dns_query(AGENT_REQUEST *request, AGENT_RESULT *result, int short_ans
 				tmp[MAX_STRING_LEN];
 	struct in_addr		inaddr;
 	struct in6_addr		in6addr;
-#ifndef _WINDOWS
+#if !defined(_WINDOWS) && !defined(__MINGW32__)
 #if defined(HAVE_RES_NINIT) && !defined(_AIX)
 	/* It seems that on some AIX systems with no updates installed res_ninit() can */
 	/* corrupt stack (see ZBX-14559). Use res_init() on AIX. */
@@ -179,7 +179,7 @@ static int	dns_query(AGENT_REQUEST *request, AGENT_RESULT *result, int short_ans
 		{"MG",		T_MG},
 		{"MR",		T_MR},
 		{"NULL",	T_NULL},
-#ifndef _WINDOWS
+#if !defined(_WINDOWS) && !defined(__MINGW32__)
 		{"WKS",		T_WKS},
 #endif
 		{"PTR",		T_PTR},
@@ -191,7 +191,7 @@ static int	dns_query(AGENT_REQUEST *request, AGENT_RESULT *result, int short_ans
 		{NULL}
 	};
 
-#ifdef _WINDOWS
+#if defined(_WINDOWS) || defined(__MINGW32__)
 	PDNS_RECORD	pQueryResults, pDnsRecord;
 	wchar_t		*wzone;
 	char		tmp2[MAX_STRING_LEN];
@@ -223,7 +223,7 @@ static int	dns_query(AGENT_REQUEST *request, AGENT_RESULT *result, int short_ans
 	answer_t;
 
 	answer_t	answer;
-#endif	/* _WINDOWS */
+#endif	/* defined(_WINDOWS) || defined(__MINGW32__) */
 	zbx_vector_str_t	answers;
 
 	*buffer = '\0';
@@ -237,7 +237,7 @@ static int	dns_query(AGENT_REQUEST *request, AGENT_RESULT *result, int short_ans
 	ip = get_rparam(request, 0);
 	zone_str = get_rparam(request, 1);
 
-#ifndef _WINDOWS
+#if !defined(_WINDOWS) && !defined(__MINGW32__)
 	memset(&hint, '\0', sizeof(hint));
 	hint.ai_family = PF_UNSPEC;
 	hint.ai_flags = AI_NUMERICHOST;
@@ -307,7 +307,7 @@ static int	dns_query(AGENT_REQUEST *request, AGENT_RESULT *result, int short_ans
 		return SYSINFO_RET_FAIL;
 	}
 
-#ifdef _WINDOWS
+#if defined(_WINDOWS) || defined(__MINGW32__)
 	options = DNS_QUERY_STANDARD | DNS_QUERY_BYPASS_CACHE;
 	if (0 != use_tcp)
 		options |= DNS_QUERY_USE_TCP_ONLY;
@@ -452,7 +452,7 @@ static int	dns_query(AGENT_REQUEST *request, AGENT_RESULT *result, int short_ans
 		offset = 0;
 		*buffer = '\0';
 	}
-#else	/* not _WINDOWS */
+#else	/* !defined(_WINDOWS) && !defined(__MINGW32__) */
 #if defined(HAVE_RES_NINIT) && !defined(_AIX)
 	memset(&res_state_local, 0, sizeof(res_state_local));
 	if (-1 == res_ninit(&res_state_local))	/* initialize always, settings might have changed */
@@ -871,7 +871,7 @@ static int	dns_query(AGENT_REQUEST *request, AGENT_RESULT *result, int short_ans
 		offset = 0;
 		*buffer = '\0';
 	}
-#endif	/* _WINDOWS */
+#endif	/* defined(_WINDOWS) || defined(__MINGW32__) */
 
 	zbx_vector_str_sort(&answers, ZBX_DEFAULT_STR_COMPARE_FUNC);
 
@@ -887,7 +887,7 @@ static int	dns_query(AGENT_REQUEST *request, AGENT_RESULT *result, int short_ans
 clean:
 	zbx_vector_str_clear_ext(&answers, zbx_str_free);
 	zbx_vector_str_destroy(&answers);
-#ifdef _WINDOWS
+#if defined(_WINDOWS) || defined(__MINGW32__)
 clean_dns:
 	if (DNS_RCODE_NOERROR == res)
 		DnsRecordListFree(pQueryResults, DnsFreeRecordList);
@@ -895,11 +895,11 @@ clean_dns:
 
 	return ret;
 
-#else	/* both HAVE_RES_QUERY and _WINDOWS not defined */
+#else	/* all HAVE_RES_QUERY and _WINDOWS and __MINGW32__not defined */
 
 	return SYSINFO_RET_FAIL;
 
-#endif	/* defined(HAVE_RES_QUERY) || defined(_WINDOWS) */
+#endif	/* defined(HAVE_RES_QUERY) || defined(_WINDOWS) || defined(__MINGW32__)*/
 }
 
 int	NET_DNS(AGENT_REQUEST *request, AGENT_RESULT *result)
