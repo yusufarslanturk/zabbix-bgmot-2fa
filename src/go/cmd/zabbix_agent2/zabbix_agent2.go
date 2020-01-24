@@ -424,6 +424,6 @@ func fatalExit(message string, err error) {
 		message = fmt.Sprintf("%s: ", message)
 	}
 
-	fmt.Fprintf(os.Stderr, "zabbix_agent2 ERROR: %s%s\n", message, err.Error())
+	fmt.Fprintf(os.Stderr, "zabbix_agent2 [%d] ERROR: %s%s\n", os.Getpid(), message, err.Error())
 	os.Exit(1)
 }
