@@ -25,7 +25,8 @@ OBJS = \
 	$(OUTPUTDIR)\alias.o \
 	$(OUTPUTDIR)\algodefs.o \
 	$(OUTPUTDIR)\sysinfo_system.o \
-	$(OUTPUTDIR)\eventlog.o
+	$(OUTPUTDIR)\sysinfo_dns.o \
+	$(OUTPUTDIR)\eventlog.o 
 
 CFLAGS := $(CFLAGS) -O2 -g -DUNICODE -DHAVE_STDINT_H=1 -I$(TOPDIR)\include -I$(TOPDIR)\build\win32\include -I$(TOPDIR)\build\mingw
 GOPATH := $(GOPATH);$(TOPDIR)\go
@@ -106,7 +107,7 @@ $(OUTPUTDIR)\sysinfo.o: $(TOPDIR)\src\libs\zbxsysinfo\sysinfo.c
 $(OUTPUTDIR)\sysinfo_system.o: $(TOPDIR)\src\libs\zbxsysinfo\common\system.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-$(OUTPUTDIR)\sysinfo_net.o: $(TOPDIR)\src\libs\zbxsysinfo\common\net.c
+$(OUTPUTDIR)\sysinfo_dns.o: $(TOPDIR)\src\libs\zbxsysinfo\common\dns.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 $(OUTPUTDIR)\vector.o: $(TOPDIR)\src\libs\zbxalgo\vector.c
