@@ -38,7 +38,7 @@ In my case I see membership information as an array of records with format 'CN=<
 ### Installation
 There are two ways to install this code:
 1. fresh install from sources using this repository, follow [this guide](https://www.zabbix.com/documentation/current/manual/installation/install)
-2. if you already have Zabbix server installed (WebUI and MySQL DB on the same host) then login into the Zabbix server as `root`, download this script
+2. if you already have Zabbix server installed (WebUI and MySQL DB on the same host) then login into the Zabbix server as `root`, download this script (pay attention that version of your Zabbix Server - 4.4.4 in this example - matches this repository version/tag - 4.4.4-bg):
 ```
 curl -L -o bg-features-install.sh https://github.com/BGmot/zabbix/raw/4.4.4-bg/bg-scripts/bg-features-install.sh
 ```
