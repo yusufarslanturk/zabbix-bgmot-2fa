@@ -22,6 +22,7 @@ package services
 import (
 	"encoding/json"
 	"errors"
+	"strings"
 	"syscall"
 	"unsafe"
 
@@ -152,6 +153,22 @@ func openService(m *mgr.Mgr, name string) (s *mgr.Service, err error) {
 	return &mgr.Service{Name: name, Handle: h}, nil
 }
 
+// openServiceEx opens service by its name or display name
+func openServiceEx(m *mgr.Mgr, name string) (s *mgr.Service, err error) {
+	s, err = openService(m, name)
+	if err == nil {
+		return
+	}
+	if err.(syscall.Errno) != windows.ERROR_SERVICE_DOES_NOT_EXIST {
+		return
+	}
+	wname, err := win32.GetServiceKeyName(syscall.Handle(m.Handle), name)
+	if err != nil {
+		return
+	}
+	return openService(m, wname)
+}
+
 func (p *Plugin) exportServiceDiscovery(params []string) (result interface{}, err error) {
 	if len(params) > 0 {
 		return nil, errors.New("Too many parameters.")
@@ -237,6 +254,8 @@ func (p *Plugin) exportServiceInfo(params []string) (result interface{}, err err
 	param := infoParamState
 	if len(params) == 2 {
 		switch params[1] {
+		case "state", "":
+			param = infoParamState
 		case "displayname":
 			param = infoParamDisplayName
 		case "path":
@@ -258,20 +277,9 @@ func (p *Plugin) exportServiceInfo(params []string) (result interface{}, err err
 	}
 	defer m.Disconnect()
 
-	service, err := openService(m, params[0])
+	service, err := openServiceEx(m, params[0])
 	if err != nil {
-		if err.(syscall.Errno) != windows.ERROR_SERVICE_DOES_NOT_EXIST {
-			return
-		}
-		var name string
-		name, err = win32.GetServiceKeyName(syscall.Handle(m.Handle), params[0])
-		if err != nil {
-			return
-		}
-		service, err = openService(m, name)
-		if err != nil {
-			return
-		}
+		return
 	}
 	defer service.Close()
 
@@ -312,11 +320,179 @@ func (p *Plugin) exportServiceInfo(params []string) (result interface{}, err err
 }
 
 func (p *Plugin) exportServiceState(params []string) (result interface{}, err error) {
-	return nil, errors.New("Not implemented.")
+	if len(params) > 1 {
+		return nil, errors.New("Too many parameters.")
+	}
+	if len(params) == 0 || params[0] == "" {
+		return nil, errors.New("Invalid first parameter.")
+	}
+
+	m, err := openScManager()
+	if err != nil {
+		return
+	}
+	defer m.Disconnect()
+
+	service, err := openServiceEx(m, params[0])
+	if err != nil {
+		return
+	}
+	defer service.Close()
+
+	status, err := service.Query()
+	if err != nil {
+		return nil, err
+	}
+	state, _ := serviceState(status.State)
+	return state, nil
 }
 
+const (
+	stateFlagStopped = 1 << iota
+	stateFlagStartPending
+	stateFlagStopPending
+	stateFlagRunning
+	stateFlagContinuePending
+	stateFlagPausePending
+	stateFlagPaused
+	stateFlagStarted = stateFlagStartPending | stateFlagStopPending | stateFlagRunning | stateFlagContinuePending |
+		stateFlagPausePending | stateFlagPaused
+	stateFlagAll = stateFlagStarted | stateFlagStopped
+)
+
 func (p *Plugin) exportServices(params []string) (result interface{}, err error) {
-	return nil, errors.New("Not implemented.")
+	if len(params) > 3 {
+		return nil, errors.New("Too many parameters.")
+	}
+	var typeFilter *uint32
+	if len(params) > 0 && params[0] != "all" && params[0] != "" {
+		var tmp uint32
+		switch params[0] {
+		case "automatic":
+			tmp = mgr.StartAutomatic
+		case "manual":
+			tmp = mgr.StartManual
+		case "disabled":
+			tmp = mgr.StartDisabled
+		default:
+			return nil, errors.New("Invalid first parameter.")
+		}
+		typeFilter = &tmp
+	}
+
+	stateFilter := stateFlagAll
+	if len(params) > 1 {
+		switch params[1] {
+		case "stopped":
+			stateFilter = stateFlagStopped
+		case "started":
+			stateFilter = stateFlagStarted
+		case "start_pending":
+			stateFilter = stateFlagStartPending
+		case "stop_pending":
+			stateFilter = stateFlagStopPending
+		case "running":
+			stateFilter = stateFlagRunning
+		case "continue_pending":
+			stateFilter = stateFlagContinuePending
+		case "pause_pending":
+			stateFilter = stateFlagPausePending
+		case "paused":
+			stateFilter = stateFlagPaused
+		default:
+			return nil, errors.New("Invalid second parameter.")
+		}
+	}
+
+	excludeFilter := make(map[string]bool)
+	if len(params) > 2 {
+		for _, name := range strings.Split(params[2], ",") {
+			excludeFilter[strings.Trim(name, " ")] = true
+		}
+	}
+
+	m, err := openScManager()
+	if err != nil {
+		return nil, err
+	}
+	defer m.Disconnect()
+
+	names, err := m.ListServices()
+	if err != nil {
+		return
+	}
+
+	services := make([]string, 0)
+	for _, name := range names {
+		if len(excludeFilter) != 0 {
+			if _, ok := excludeFilter[name]; ok {
+				continue
+			}
+		}
+
+		if typeFilter != nil || stateFilter != stateFlagAll {
+			service, err := openService(m, name)
+			if err != nil {
+				p.Debugf(`cannot open service "%s": %s`, name, err)
+				continue
+			}
+			defer service.Close()
+
+			if typeFilter != nil {
+				cfg, err := service.Config()
+				if err != nil {
+					p.Debugf(`cannot obtain service "%s" configuration: %s`, name, err)
+					continue
+				}
+				if cfg.StartType != *typeFilter {
+					continue
+				}
+			}
+			if stateFilter != stateFlagAll {
+				status, err := service.Query()
+				if err != nil {
+					p.Debugf(`cannot obtain service "%s" status: %s`, name, err)
+					continue
+				}
+				switch status.State {
+				case svc.Running:
+					if stateFilter&stateFlagRunning == 0 {
+						continue
+					}
+				case svc.Paused:
+					if stateFilter&stateFlagPaused == 0 {
+						continue
+					}
+				case svc.StartPending:
+					if stateFilter&stateFlagStartPending == 0 {
+						continue
+					}
+				case svc.PausePending:
+					if stateFilter&stateFlagPausePending == 0 {
+						continue
+					}
+				case svc.ContinuePending:
+					if stateFilter&stateFlagContinuePending == 0 {
+						continue
+					}
+				case svc.StopPending:
+					if stateFilter&stateFlagStopPending == 0 {
+						continue
+					}
+				case svc.Stopped:
+					if stateFilter&stateFlagStopped == 0 {
+						continue
+					}
+				}
+			}
+		}
+		services = append(services, name)
+	}
+
+	if len(services) == 0 {
+		return "0", nil
+	}
+	return strings.Join(services, "\r\n") + "\r\n", nil
 }
 
 // Export -
@@ -326,7 +502,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		return p.exportServiceDiscovery(params)
 	case "service.info":
 		return p.exportServiceInfo(params)
-	case "service_info":
+	case "service_state":
 		return p.exportServiceState(params)
 	case "services":
 		return p.exportServices(params)
@@ -340,6 +516,7 @@ func init() {
 	plugin.RegisterMetrics(&impl, "WindowsServices",
 		"service.discovery", "List of Windows services for low-level discovery.",
 		"service.info", "Information about a service.",
+		"service_state", "Returns service state.",
 		"services", "Filtered list of Windows sercices.",
 	)
 }
