@@ -29,6 +29,7 @@ import (
 	"golang.org/x/sys/windows/svc"
 	"golang.org/x/sys/windows/svc/mgr"
 	"zabbix.com/pkg/plugin"
+	"zabbix.com/pkg/win32"
 )
 
 // Plugin -
@@ -57,6 +58,7 @@ const (
 	startupTypeManual
 	startupTypeDisabled
 	startupTypeUnknown
+	startupTypeTrigger
 )
 
 func startupName(startup int) string {
@@ -128,16 +130,36 @@ func serviceState(state svc.State) (code int, name string) {
 	}
 }
 
-func (p *Plugin) exportServiceDiscovery(params []string) (result interface{}, err error) {
-	if len(params) > 0 {
-		return nil, errors.New("Too many parameters.")
-	}
-	// manually open connection because mgr.Connect() uses SC_MANAGER_ALL_ACCESS
+// openScManager function is replacement for mgr.Connect() to open service manager with lower access rights.
+func openScManager() (m *mgr.Mgr, err error) {
 	h, err := windows.OpenSCManager(nil, nil, windows.GENERIC_READ)
 	if err != nil {
 		return nil, err
 	}
-	m := &mgr.Mgr{Handle: h}
+	return &mgr.Mgr{Handle: h}, nil
+}
+
+// openService is replacement for Mgr.OpenService() to open service with lower access rights.
+func openService(m *mgr.Mgr, name string) (s *mgr.Service, err error) {
+	wname, err := syscall.UTF16PtrFromString(name)
+	if err != nil {
+		return
+	}
+	h, err := windows.OpenService(m.Handle, wname, uint32(windows.SERVICE_QUERY_CONFIG|windows.SERVICE_QUERY_STATUS))
+	if err != nil {
+		return
+	}
+	return &mgr.Service{Name: name, Handle: h}, nil
+}
+
+func (p *Plugin) exportServiceDiscovery(params []string) (result interface{}, err error) {
+	if len(params) > 0 {
+		return nil, errors.New("Too many parameters.")
+	}
+	m, err := openScManager()
+	if err != nil {
+		return nil, err
+	}
 	defer m.Disconnect()
 
 	names, err := m.ListServices()
@@ -147,14 +169,11 @@ func (p *Plugin) exportServiceDiscovery(params []string) (result interface{}, er
 
 	services := make([]serviceDiscovery, 0)
 	for _, name := range names {
-		// manually open service because Mgr.OpenService() uses SERVICE_ALL_ACCESS
-		accessFlags := uint32(windows.SERVICE_QUERY_CONFIG | windows.SERVICE_QUERY_STATUS)
-		h, serr := windows.OpenService(m.Handle, syscall.StringToUTF16Ptr(name), accessFlags)
+		service, serr := openService(m, name)
 		if serr != nil {
 			p.Debugf(`cannot open service "%s": %s`, name, serr)
 			continue
 		}
-		service := &mgr.Service{Name: name, Handle: h}
 		defer service.Close()
 
 		cfg, err := service.Config()
@@ -198,7 +217,101 @@ func (p *Plugin) exportServiceDiscovery(params []string) (result interface{}, er
 	return string(b), nil
 }
 
+const (
+	infoParamState = iota
+	infoParamDisplayName
+	infoParamPath
+	infoParamUser
+	infoParamStartup
+	infoParamDescription
+)
+
 func (p *Plugin) exportServiceInfo(params []string) (result interface{}, err error) {
+	if len(params) > 2 {
+		return nil, errors.New("Too many parameters.")
+	}
+	if len(params) == 0 || params[0] == "" {
+		return nil, errors.New("Invalid first parameter.")
+	}
+
+	param := infoParamState
+	if len(params) == 2 {
+		switch params[1] {
+		case "displayname":
+			param = infoParamDisplayName
+		case "path":
+			param = infoParamPath
+		case "user":
+			param = infoParamUser
+		case "startup":
+			param = infoParamStartup
+		case "description":
+			param = infoParamDescription
+		default:
+			return nil, errors.New("Invalid second parameter.")
+		}
+	}
+
+	m, err := openScManager()
+	if err != nil {
+		return
+	}
+	defer m.Disconnect()
+
+	service, err := openService(m, params[0])
+	if err != nil {
+		if err.(syscall.Errno) != windows.ERROR_SERVICE_DOES_NOT_EXIST {
+			return
+		}
+		var name string
+		name, err = win32.GetServiceKeyName(syscall.Handle(m.Handle), params[0])
+		if err != nil {
+			return
+		}
+		service, err = openService(m, name)
+		if err != nil {
+			return
+		}
+	}
+	defer service.Close()
+
+	if param == infoParamState {
+		status, err := service.Query()
+		if err != nil {
+			return nil, err
+		}
+		state, _ := serviceState(status.State)
+		return state, nil
+	} else {
+		cfg, err := service.Config()
+		if err != nil {
+			return nil, err
+		}
+		switch param {
+		case infoParamDisplayName:
+			return cfg.DisplayName, nil
+		case infoParamPath:
+			return cfg.BinaryPathName, nil
+		case infoParamUser:
+			return cfg.ServiceStartName, nil
+		case infoParamStartup:
+			if cfg.StartType == mgr.StartDisabled {
+				return startupTypeDisabled, nil
+			} else {
+				startup, trigger := startupType(service, &cfg)
+				if trigger != 0 {
+					startup += startupTypeTrigger
+				}
+				return startup, nil
+			}
+		case infoParamDescription:
+			return cfg.Description, nil
+		}
+	}
+	return
+}
+
+func (p *Plugin) exportServiceState(params []string) (result interface{}, err error) {
 	return nil, errors.New("Not implemented.")
 }
 
@@ -213,6 +326,8 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		return p.exportServiceDiscovery(params)
 	case "service.info":
 		return p.exportServiceInfo(params)
+	case "service_info":
+		return p.exportServiceState(params)
 	case "services":
 		return p.exportServices(params)
 	default:
