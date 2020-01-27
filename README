@@ -36,6 +36,11 @@ In my case I see membership information as an array of records with format 'CN=<
 3.5) A user is created belonging to Zabbix User Groups found in 3.3) with 'User type' defined for matched 'AD group'. If multiple AD Groups found then the highest level of 'User type' applied.
 
 ### Installation
+Very quick way to see this code in action is to deploy a Docker container using one of these images:
+- [zabbix-appliance-alpine](https://hub.docker.com/repository/docker/bgmot42/zabbix-appliance-alpine)
+- [zabbix-appliance-ubuntu](https://hub.docker.com/repository/docker/bgmot42/zabbix-appliance-ubuntu)
+- [zabbix-appliance-centos](https://hub.docker.com/repository/docker/bgmot42/zabbix-appliance-centos)
+
 There are two ways to install this code:
 1. fresh install from sources using this repository, follow [this guide](https://www.zabbix.com/documentation/current/manual/installation/install)
 2. if you already have Zabbix server installed (WebUI and MySQL DB on the same host) then login into the Zabbix server as `root`, download this script (pay attention that version of your Zabbix Server - 4.4.4 in this example - matches this repository version/tag - 4.4.4-bg):
