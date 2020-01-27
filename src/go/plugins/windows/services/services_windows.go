@@ -319,34 +319,6 @@ func (p *Plugin) exportServiceInfo(params []string) (result interface{}, err err
 	return
 }
 
-func (p *Plugin) exportServiceState(params []string) (result interface{}, err error) {
-	if len(params) > 1 {
-		return nil, errors.New("Too many parameters.")
-	}
-	if len(params) == 0 || params[0] == "" {
-		return nil, errors.New("Invalid first parameter.")
-	}
-
-	m, err := openScManager()
-	if err != nil {
-		return
-	}
-	defer m.Disconnect()
-
-	service, err := openServiceEx(m, params[0])
-	if err != nil {
-		return
-	}
-	defer service.Close()
-
-	status, err := service.Query()
-	if err != nil {
-		return nil, err
-	}
-	state, _ := serviceState(status.State)
-	return state, nil
-}
-
 const (
 	stateFlagStopped = 1 << iota
 	stateFlagStartPending
@@ -502,8 +474,6 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		return p.exportServiceDiscovery(params)
 	case "service.info":
 		return p.exportServiceInfo(params)
-	case "service_state":
-		return p.exportServiceState(params)
 	case "services":
 		return p.exportServices(params)
 	default:
@@ -516,7 +486,6 @@ func init() {
 	plugin.RegisterMetrics(&impl, "WindowsServices",
 		"service.discovery", "List of Windows services for low-level discovery.",
 		"service.info", "Information about a service.",
-		"service_state", "Returns service state.",
 		"services", "Filtered list of Windows sercices.",
 	)
 }
