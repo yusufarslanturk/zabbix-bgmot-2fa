@@ -398,11 +398,8 @@ func main() {
 	farewell := fmt.Sprintf("Zabbix Agent 2 stopped. (%s)", version.Long())
 	log.Infof(farewell)
 
-	if foregroundFlag {
-		if agent.Options.LogType != "console" {
-			fmt.Println(farewell)
-		}
-		fmt.Println("Press Ctrl+C to exit.")
+	if foregroundFlag && agent.Options.LogType != "console" {
+		fmt.Println(farewell)
 	}
 }
 
@@ -411,7 +408,10 @@ func fatalExit(message string, err error) {
 		var r = ([]rune)(message)
 
 		if unicode.IsLower(r[0]) && unicode.IsLetter(r[0]) {
-			log.Critf("%s: %s", message, err)
+			if agent.Options.LogType == "file" {
+				log.Critf("%s: %s", message, err)
+			}
+
 			r[0] = unicode.ToUpper(r[0])
 			message = string(r)
 		}
