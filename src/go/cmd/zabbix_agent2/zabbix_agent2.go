@@ -27,7 +27,6 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
-	"unicode"
 
 	"zabbix.com/internal/agent"
 	"zabbix.com/internal/agent/remotecontrol"
@@ -233,22 +232,22 @@ func main() {
 		}
 	}
 
-	if err := ConfigDefault(manager, &agent.Options); err != nil {
-		fatalExit("Cannot process configuration", err)
+	if err := configDefault(manager, &agent.Options); err != nil {
+		fatalExit("cannot process configuration", err)
 	}
 
-	if err := ConfigValidate(agent.Options); err != nil {
-		fatalExit("Cannot validate configuration", err)
+	if err := configValidate(agent.Options); err != nil {
+		fatalExit("cannot validate configuration", err)
 	}
 
 	if argTest || argPrint {
 		if err := log.Open(log.Console, log.Warning, "", 0); err != nil {
-			fatalExit("Cannot initialize logger", err)
+			fatalExit("cannot initialize logger", err)
 		}
 
 		if argTest {
 			if err := agent.CheckMetric(testFlag); err != nil {
-				fatalExit("", err)
+				fatalExit("cannot execute metric", err)
 			}
 		} else {
 			agent.CheckMetrics()
@@ -294,7 +293,7 @@ func main() {
 	}
 
 	if err := log.Open(logType, logLevel, agent.Options.LogFile, agent.Options.LogFileSize); err != nil {
-		fatalExit("Cannot initialize logger", err)
+		fatalExit("cannot initialize logger", err)
 	}
 
 	zbxlib.SetLogLevel(logLevel)
@@ -304,7 +303,7 @@ func main() {
 
 	addresses, err := serverconnector.ParseServerActive()
 	if err != nil {
-		fatalExit("", err)
+		fatalExit("cannot parse the \"ServerActive\" parameter", err)
 	}
 
 	if tlsConfig, err := agent.GetTLSConfig(&agent.Options); err != nil {
@@ -318,7 +317,7 @@ func main() {
 	}
 
 	if pidFile, err = pidfile.New(agent.Options.PidFile); err != nil {
-		fatalExit("", err)
+		fatalExit("cannot initialize PID file", err)
 	}
 	defer pidFile.Delete()
 
@@ -336,7 +335,7 @@ func main() {
 	if 0 != len(agent.Options.Server) {
 		var listenIPs []string
 		if listenIPs, err = serverlistener.ParseListenIP(&agent.Options); err != nil {
-			fatalExit("", err)
+			fatalExit("cannot parse \"ListenIP\" parameter", err)
 		}
 		for i := 0; i < len(listenIPs); i++ {
 			listener := serverlistener.New(i, manager, listenIPs[i], &agent.Options)
@@ -404,21 +403,16 @@ func main() {
 }
 
 func fatalExit(message string, err error) {
-	if len(message) != 0 {
-		var r = ([]rune)(message)
-
-		if unicode.IsLower(r[0]) && unicode.IsLetter(r[0]) {
-			if agent.Options.LogType == "file" {
-				log.Critf("%s: %s", message, err)
-			}
-
-			r[0] = unicode.ToUpper(r[0])
-			message = string(r)
-		}
-
-		message = fmt.Sprintf("%s: ", message)
+	if len(message) == 0 {
+		message = fmt.Sprintf("%s", err.Error())
+	} else {
+		message = fmt.Sprintf("%s: %s", message, err.Error())
 	}
 
-	fmt.Fprintf(os.Stderr, "zabbix_agent2 [%d]: ERROR: %s%s\n", os.Getpid(), message, err.Error())
+	if agent.Options.LogType == "file" {
+		log.Critf("%s", message)
+	}
+
+	fmt.Fprintf(os.Stderr, "zabbix_agent2 [%d]: ERROR: %s\n", os.Getpid(), message)
 	os.Exit(1)
 }

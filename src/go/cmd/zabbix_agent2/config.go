@@ -31,7 +31,7 @@ import (
 
 const hostNameLen = 128
 
-func ConfigDefault(taskManager scheduler.Scheduler, options *agent.AgentOptions) error {
+func configDefault(taskManager scheduler.Scheduler, options *agent.AgentOptions) error {
 	var err error
 
 	if len(options.Hostname) == 0 {
@@ -70,7 +70,7 @@ func ConfigDefault(taskManager scheduler.Scheduler, options *agent.AgentOptions)
 	return nil
 }
 
-func ConfigValidate(options agent.AgentOptions) error {
+func configValidate(options agent.AgentOptions) error {
 	var err error
 
 	if len(options.Hostname) > hostNameLen {

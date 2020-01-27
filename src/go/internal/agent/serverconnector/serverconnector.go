@@ -93,7 +93,7 @@ func ParseServerActive() ([]string, error) {
 		u := url.URL{Host: addresses[i]}
 		ip := net.ParseIP(addresses[i])
 		if nil == ip && 0 == len(strings.TrimSpace(u.Hostname())) {
-			return nil, fmt.Errorf("error parsing the \"ServerActive\" parameter: address \"%s\": empty value", addresses[i])
+			return nil, fmt.Errorf("address \"%s\": empty value", addresses[i])
 		}
 
 		if nil != ip {
@@ -105,14 +105,14 @@ func ParseServerActive() ([]string, error) {
 		}
 
 		if h, p, err := net.SplitHostPort(checkAddr); err != nil {
-			return nil, fmt.Errorf("error parsing the \"ServerActive\" parameter: address \"%s\": %s", addresses[i], err)
+			return nil, fmt.Errorf("address \"%s\": %s", addresses[i], err)
 		} else {
 			addresses[i] = net.JoinHostPort(strings.TrimSpace(h), strings.TrimSpace(p))
 		}
 
 		for j := 0; j < i; j++ {
 			if addresses[j] == addresses[i] {
-				return nil, fmt.Errorf("error parsing the \"ServerActive\" parameter: address \"%s\" specified more than once", addresses[i])
+				return nil, fmt.Errorf("address \"%s\" specified more than once", addresses[i])
 			}
 		}
 	}
