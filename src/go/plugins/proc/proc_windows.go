@@ -209,22 +209,22 @@ func (e *infoEnumerator) inspect(p *syscall.ProcessEntry32) {
 	var value float64
 	switch e.attr {
 	case attrVmsize:
-		var m win32.PROCESS_MEMORY_COUNTERS_EX
-		if err := win32.GetProcessMemoryInfo(h, &m, uint32(unsafe.Sizeof(m))); err != nil {
+		m, err := win32.GetProcessMemoryInfo(h)
+		if err != nil {
 			return
 		}
 		// convert to kilobytes
 		value = float64(m.PagefileUsage) / 1024
 	case attrWkset:
-		var m win32.PROCESS_MEMORY_COUNTERS_EX
-		if err := win32.GetProcessMemoryInfo(h, &m, uint32(unsafe.Sizeof(m))); err != nil {
+		m, err := win32.GetProcessMemoryInfo(h)
+		if err != nil {
 			return
 		}
 		// convert to kilobytes
 		value = float64(m.WorkingSetSize) / 1024
 	case attrPf:
-		var m win32.PROCESS_MEMORY_COUNTERS_EX
-		if err := win32.GetProcessMemoryInfo(h, &m, uint32(unsafe.Sizeof(m))); err != nil {
+		m, err := win32.GetProcessMemoryInfo(h)
+		if err != nil {
 			return
 		}
 		value = float64(m.PageFaultCount)

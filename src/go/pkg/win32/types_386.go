@@ -34,3 +34,20 @@ type PROCESS_MEMORY_COUNTERS_EX struct {
 	PeakPagefileUsage          uint32
 	PrivateUsage               uint32
 }
+
+type PERFORMANCE_INFORMATION struct {
+	Cb                uint32
+	CommitTotal       uint32
+	CommitLimit       uint32
+	CommitPeak        uint32
+	PhysicalTotal     uint32
+	PhysicalAvailable uint32
+	SystemCache       uint32
+	KernelTotal       uint32
+	KernelPaged       uint32
+	KernelNonpaged    uint32
+	PageSize          uint32
+	HandleCount       uint32
+	ProcessCount      uint32
+	ThreadCount       uint32
+}

@@ -52,7 +52,7 @@ func GlobalMemoryStatusEx() (m *MEMORYSTATUSEX, err error) {
 
 func GetProcessIoCounters(proc syscall.Handle) (ioc *IO_COUNTERS, err error) {
 	ioc = &IO_COUNTERS{}
-	ret, _, syserr := syscall.Syscall(globalMemoryStatusEx, 2, uintptr(proc), uintptr(unsafe.Pointer(ioc)), 0)
+	ret, _, syserr := syscall.Syscall(getProcessIoCounters, 2, uintptr(proc), uintptr(unsafe.Pointer(ioc)), 0)
 	if ret == 0 {
 		return nil, syserr
 	}

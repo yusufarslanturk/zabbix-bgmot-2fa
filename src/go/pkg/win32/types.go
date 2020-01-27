@@ -126,10 +126,10 @@ const (
 )
 
 type IO_COUNTERS struct {
-	ReadOperationCount uint64
+	ReadOperationCount  uint64
 	WriteOperationCount uint64
 	OtherOperationCount uint64
-	ReadTransferCount uint64
-	WriteTransferCount uint64
-	OtherTransferCount uint64
+	ReadTransferCount   uint64
+	WriteTransferCount  uint64
+	OtherTransferCount  uint64
 }

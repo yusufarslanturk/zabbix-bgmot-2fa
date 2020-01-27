@@ -17,19 +17,10 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package proc
+package memory
 
-import (
-	"fmt"
-	"testing"
-)
+import "zabbix.com/pkg/plugin"
 
-func TestProcNum(t *testing.T) {
-	var p Plugin
-
-	ret, err := p.exportProcNum([]string{"code.exe", "wiper"})
-
-	fmt.Println(ret, err)
-
-	t.Fail()
+func (p *Plugin) exportVmMemorySize(params []string) (result interface{}, err error) {
+	return nil, plugin.UnsupportedMetricError
 }

@@ -30,19 +30,32 @@ var (
 	hPsapi Hlib
 
 	getProcessMemoryInfo uintptr
+	getPerformanceInfo   uintptr
 )
 
 func init() {
 	hPsapi = mustLoadLibrary("psapi.dll")
 
 	getProcessMemoryInfo = hPsapi.mustGetProcAddress("GetProcessMemoryInfo")
+	getPerformanceInfo = hPsapi.mustGetProcAddress("GetPerformanceInfo")
 }
 
-func GetProcessMemoryInfo(proc syscall.Handle, mem *PROCESS_MEMORY_COUNTERS_EX, cb uint32) (err error) {
+func GetProcessMemoryInfo(proc syscall.Handle) (mem *PROCESS_MEMORY_COUNTERS_EX, err error) {
+	mem = &PROCESS_MEMORY_COUNTERS_EX{}
 	mem.Cb = uint32(unsafe.Sizeof(*mem))
-	ret, _, syserr := syscall.Syscall(getProcessMemoryInfo, 3, uintptr(proc), uintptr(unsafe.Pointer(mem)), uintptr(cb))
+	ret, _, syserr := syscall.Syscall(getProcessMemoryInfo, 3, uintptr(proc), uintptr(unsafe.Pointer(mem)), uintptr(mem.Cb))
 	if ret == 0 {
-		return syserr
+		return nil, syserr
+	}
+	return
+}
+
+func GetPerformanceInfo() (pinfo *PERFORMANCE_INFORMATION, err error) {
+	pinfo = &PERFORMANCE_INFORMATION{}
+	pinfo.Cb = uint32(unsafe.Sizeof(*pinfo))
+	ret, _, syserr := syscall.Syscall(getPerformanceInfo, 2, uintptr(unsafe.Pointer(pinfo)), uintptr(pinfo.Cb), 0)
+	if ret == 0 {
+		return nil, syserr
 	}
 	return
 }
