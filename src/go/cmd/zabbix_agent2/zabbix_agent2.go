@@ -357,26 +357,20 @@ func main() {
 
 	for i := 0; i < len(serverConnectors); i++ {
 		if serverConnectors[i], err = serverconnector.New(manager, addresses[i], &agent.Options); err != nil {
-			message := "cannot create server connector"
-			log.Critf("%s: %s", message, err)
-			fatalExit(message, err)
+			fatalExit("cannot create server connector", err)
 		}
 		serverConnectors[i].Start()
 	}
 
 	for _, listener := range listeners {
 		if err = listener.Start(); err != nil {
-			message := "cannot start server listener"
-			log.Critf("%s: %s", message, err)
-			fatalExit(message, err)
+			fatalExit("cannot start server listener", err)
 		}
 	}
 
 	if agent.Options.StatusPort != 0 {
 		if err = statuslistener.Start(manager, confFlag); err != nil {
-			message := "cannot start HTTP listener"
-			log.Critf("%s: %s", message, err)
-			fatalExit(message, err)
+			fatalExit("cannot start HTTP listener", err)
 		}
 	}
 
@@ -417,6 +411,7 @@ func fatalExit(message string, err error) {
 		var r = ([]rune)(message)
 
 		if unicode.IsLower(r[0]) && unicode.IsLetter(r[0]) {
+			log.Critf("%s: %s", message, err)
 			r[0] = unicode.ToUpper(r[0])
 			message = string(r)
 		}
