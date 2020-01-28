@@ -19,8 +19,6 @@
 
 package cpucollector
 
-import "runtime"
-
 const (
 	counterUnknown cpuCounter = iota - 1
 	counterUtil
@@ -71,7 +69,7 @@ func (c *cpuUnit) counterAverage(counter cpuCounter, period historyIndex) (value
 		if tail.load < head.load {
 			return
 		} else {
-			return (tail.load - head.load) / float64(runtime.NumCPU()) / float64(period)
+			return (tail.load - head.load) / float64(numCPU()) / float64(period)
 		}
 	}
 	return

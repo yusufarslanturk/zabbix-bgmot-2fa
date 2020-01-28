@@ -39,7 +39,7 @@ type sysCounter struct {
 const (
 	ObjectSystem = iota
 	ObjectProcessor
-	CounterProcessorInfo
+	ObjectProcessorInfo
 	CounterProcessorTime
 	CounterProcessorQueue
 	CounterSystemUptime

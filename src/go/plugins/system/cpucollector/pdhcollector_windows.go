@@ -21,6 +21,7 @@ package cpucollector
 
 import (
 	"fmt"
+	"unsafe"
 
 	"zabbix.com/pkg/pdh"
 	"zabbix.com/pkg/plugin"
@@ -32,6 +33,26 @@ type pdhCollector struct {
 	hQuery   win32.PDH_HQUERY
 	hCpuUtil []win32.PDH_HCOUNTER
 	hCpuLoad win32.PDH_HCOUNTER
+}
+
+func getNumaNodeCount() (count int) {
+	size, err := win32.GetLogicalProcessorInformationEx(win32.RelationNumaNode, nil)
+	if err != nil {
+		return 1
+	}
+
+	b := make([]byte, size)
+	size, err = win32.GetLogicalProcessorInformationEx(win32.RelationNumaNode, b)
+	if err != nil {
+		return 1
+	}
+
+	var sinfo *win32.SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX
+	for i := uint32(0); i < size; i += sinfo.Size {
+		sinfo = (*win32.SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)(unsafe.Pointer(&b[i]))
+		count++
+	}
+	return
 }
 
 // open function initializes PDH query/counters for cpu metric gathering
@@ -77,7 +98,28 @@ func (c *pdhCollector) open(numCpu int) {
 			}
 		}
 	} else {
-		// TODO: handle NUMA nodes
+		cpe.ObjectName = pdh.CounterName(pdh.ObjectProcessorInfo)
+		groups := getNumaNodeCount()
+		if groups == 1 {
+			groups = win32.GetActiveProcessorGroupCount()
+		}
+		cpuPerGroup := numCPU() / groups
+		index := 1
+		for g := 0; g < groups; g++ {
+			for i := 0; i < cpuPerGroup; i++ {
+				cpe.InstanceName = fmt.Sprintf("%d,%d", g, i)
+				path, err = pdh.MakePath(&cpe)
+				fmt.Println(path)
+				if err != nil {
+					c.log.Errf("cannot make counter path for CPU#%s utilization: %s", cpe.InstanceName, err)
+				}
+				c.hCpuUtil[index], err = win32.PdhAddCounter(c.hQuery, path, 0)
+				if err != nil {
+					c.log.Errf("cannot add performance counter for CPU#%s utilization: %s", cpe.InstanceName, err)
+				}
+				index++
+			}
+		}
 	}
 }
 

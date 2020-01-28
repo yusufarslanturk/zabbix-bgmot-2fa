@@ -107,12 +107,12 @@ func (p *Plugin) Collect() (err error) {
 	return nil
 }
 
-func (p *Plugin) numCPU() int {
+func numCPU() int {
 	return int(C.sysconf(C._SC_NPROCESSORS_CONF))
 }
 
 func (p *Plugin) Start() {
-	p.cpus = p.newCpus(p.numCPU() + 1)
+	p.cpus = p.newCpus(numCPU() + 1)
 }
 
 func (p *Plugin) Stop() {

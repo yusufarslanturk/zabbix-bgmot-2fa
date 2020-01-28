@@ -134,3 +134,21 @@ type PDH_FMT_COUNTERVALUE_LARGE struct {
 	_      uint32
 	Value  int64
 }
+
+type SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX struct {
+	Relationship uint32
+	Size         uint32
+	Data         [1]byte
+}
+
+type GROUP_AFFINITY struct {
+	Mask     uintptr
+	Group    uint16
+	Reserved [3]uint16
+}
+
+type NUMA_NODE_RELATIONSHIP struct {
+	NodeNumber uint32
+	Reserved   [20]uint8
+	GroupMask  GROUP_AFFINITY
+}

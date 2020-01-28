@@ -33,7 +33,7 @@ type Plugin struct {
 	collector *pdhCollector
 }
 
-func (p *Plugin) numCPU() int {
+func numCPU() int {
 	return runtime.NumCPU()
 }
 
@@ -83,8 +83,8 @@ func (p *Plugin) Collect() (err error) {
 }
 
 func (p *Plugin) Start() {
-	p.cpus = p.newCpus(p.numCPU())
-	p.collector.open(p.numCPU())
+	p.cpus = p.newCpus(numCPU())
+	p.collector.open(numCPU())
 }
 
 func (p *Plugin) Stop() {
