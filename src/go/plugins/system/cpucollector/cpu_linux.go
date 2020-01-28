@@ -33,11 +33,17 @@ import (
 	"strings"
 )
 
+// Plugin -
+type Plugin struct {
+	plugin.Base
+	cpus []*cpuUnit
+}
+
 const (
 	procStatLocation = "/proc/stat"
 )
 
-func (p *Plugin) collect() (err error) {
+func (p *Plugin) Collect() (err error) {
 	var file *os.File
 	if file, err = os.Open(procStatLocation); err != nil {
 		return err
@@ -105,30 +111,17 @@ func (p *Plugin) numCPU() int {
 	return int(C.sysconf(C._SC_NPROCESSORS_CONF))
 }
 
-func (p *Plugin) getStateIndex(state string) (index int, err error) {
-	switch state {
-	case "", "user":
-		index = stateUser
-	case "idle":
-		index = stateIdle
-	case "nice":
-		index = stateNice
-	case "system":
-		index = stateSystem
-	case "iowait":
-		index = stateIowait
-	case "interrupt":
-		index = stateIrq
-	case "softirq":
-		index = stateSoftirq
-	case "steal":
-		index = stateSteal
-	case "guest":
-		index = stateGcpu
-	case "guest_nice":
-		index = stateGnice
-	default:
-		err = errors.New("unsupported state")
-	}
-	return
+func (p *Plugin) Start() {
+	p.cpus = p.newCpus(p.numCPU() + 1)
+}
+
+func (p *Plugin) Stop() {
+	p.cpus = nil
+}
+
+func init() {
+	plugin.RegisterMetrics(&impl, "CpuCollector",
+		"system.cpu.discovery", "List of detected CPUs/CPU cores, used for low-level discovery.",
+		"system.cpu.num", "Number of CPUs.",
+		"system.cpu.util", "CPU utilisation percentage.")
 }

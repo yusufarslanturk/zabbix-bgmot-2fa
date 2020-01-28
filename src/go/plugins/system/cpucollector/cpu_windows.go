@@ -19,26 +19,84 @@
 
 package cpucollector
 
-
 import (
 	"errors"
+	"runtime"
+
+	"zabbix.com/pkg/plugin"
 )
 
-func (p *Plugin) collect() (err error) {
-	return errors.New("Not implemented")
+// Plugin -
+type Plugin struct {
+	plugin.Base
+	cpus      []*cpuUnit
+	collector *pdhCollector
 }
 
 func (p *Plugin) numCPU() int {
-	// TODO: implementation
-	return 0
+	return runtime.NumCPU()
 }
 
-func (p *Plugin) getStateIndex(state string) (index int, err error) {
-	switch state {
-	case "", "system":
-		index = stateSystem
+func (p *Plugin) getCpuLoad(params []string) (result interface{}, err error) {
+	period := historyIndex(60)
+	switch len(params) {
+	case 2: // mode parameter
+		if period = periodByMode(params[2]); period < 0 {
+			return nil, errors.New("Invalid third parameter.")
+		}
+		fallthrough
+	case 1: // cpu number or all
+		if params[0] != "" && params[0] != "all" {
+			return nil, errors.New("Invalid first parameter.")
+		}
+	case 0:
 	default:
-		err = errors.New("unsupported state")
+		return nil, errors.New("Too many parameters.")
 	}
-	return 0, errors.New("Not implemented")
+	return p.cpus[0].counterAverage(counterLoad, period), nil
+}
+
+func (p *Plugin) Collect() (err error) {
+	ok, err := p.collector.collect()
+	if err != nil || !ok {
+		return
+	}
+
+	for i, cpu := range p.cpus {
+		slot := &cpu.history[cpu.tail]
+		cpu.status = cpuStatusOnline
+		if i == 0 {
+			// gather cpu load into 'total' slot
+			slot.load += p.collector.cpuLoad()
+		}
+		slot.util += p.collector.cpuUtil(i)
+
+		if cpu.tail = cpu.tail.inc(); cpu.tail == cpu.head {
+			cpu.head = cpu.head.inc()
+		}
+		// write the current value into next slot so next time the new value
+		// can be added to it resulting in incrementing counter
+		nextSlot := &cpu.history[cpu.tail]
+		*nextSlot = *slot
+	}
+	return
+}
+
+func (p *Plugin) Start() {
+	p.cpus = p.newCpus(p.numCPU())
+	p.collector.open(p.numCPU())
+}
+
+func (p *Plugin) Stop() {
+	p.collector.close()
+	p.cpus = nil
+}
+
+func init() {
+	impl.collector = newPdhCollector(&impl)
+	plugin.RegisterMetrics(&impl, "CpuCollector",
+		"system.cpu.discovery", "List of detected CPUs/CPU cores, used for low-level discovery.",
+		"system.cpu.load", "CPU load.",
+		"system.cpu.num", "Number of CPUs.",
+		"system.cpu.util", "CPU utilisation percentage.")
 }
