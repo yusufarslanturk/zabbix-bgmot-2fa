@@ -27,10 +27,11 @@ import "C"
 import (
 	"bufio"
 	"bytes"
-	"errors"
 	"os"
 	"strconv"
 	"strings"
+
+	"zabbix.com/pkg/plugin"
 )
 
 // Plugin -
@@ -42,6 +43,10 @@ type Plugin struct {
 const (
 	procStatLocation = "/proc/stat"
 )
+
+func (p *Plugin) getCpuLoad(params []string) (result interface{}, err error) {
+	return nil, plugin.UnsupportedMetricError
+}
 
 func (p *Plugin) Collect() (err error) {
 	var file *os.File
@@ -97,8 +102,8 @@ func (p *Plugin) Collect() (err error) {
 			slot.counters[i] = 0
 		}
 		// Linux includes guest times in user and nice times
-		slot.counters[stateUser] -= slot.counters[stateGcpu]
-		slot.counters[stateNice] -= slot.counters[stateGnice]
+		slot.counters[counterUser] -= slot.counters[counterGcpu]
+		slot.counters[counterNice] -= slot.counters[counterGnice]
 
 		if cpu.tail = cpu.tail.inc(); cpu.tail == cpu.head {
 			cpu.head = cpu.head.inc()

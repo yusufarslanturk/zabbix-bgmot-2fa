@@ -20,7 +20,7 @@
 package cpucollector
 
 const (
-	counterUnknown cpuCounter = itoa-1
+	counterUnknown cpuCounter = iota - 1
 	counterUser
 	counterNice
 	counterSystem
@@ -63,10 +63,9 @@ func counterByType(name string) (counter cpuCounter) {
 	default:
 		return counterUnknown
 	}
-	return
 }
 
-func (c *cpuUnit) counterAverage(counter cpuCounter, period historyIndex) (value interface{}) {
+func (c *cpuUnit) counterAverage(counter cpuCounter, period historyIndex) (result interface{}) {
 	if c.head == c.tail {
 		return
 	}
@@ -83,13 +82,9 @@ func (c *cpuUnit) counterAverage(counter cpuCounter, period historyIndex) (value
 		period = totalnum
 	}
 	tail = &c.history[c.tail.dec()]
-	if totalnum > 1 {
-		head = &c.history[c.tail.sub(period)]
-	} else {
-		head = &cpuStats{}
-	}
+	head = &c.history[c.tail.sub(period)]
 
-	var counter, total uint64
+	var value, total uint64
 	for i := 0; i < len(tail.counters); i++ {
 		if tail.counters[i] > head.counters[i] {
 			total += tail.counters[i] - head.counters[i]
@@ -99,8 +94,8 @@ func (c *cpuUnit) counterAverage(counter cpuCounter, period historyIndex) (value
 		return
 	}
 
-	if tail.counters[stat] > head.counters[stat] {
-		counter = tail.counters[stat] - head.counters[stat]
+	if tail.counters[counter] > head.counters[counter] {
+		value = tail.counters[counter] - head.counters[counter]
 	}
-	return float64(counter) * 100 / float64(total), nil
+	return float64(value) * 100 / float64(total)
 }
