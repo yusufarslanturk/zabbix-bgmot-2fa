@@ -4808,7 +4808,6 @@ $form-icon-btn: (
 	overflow: hidden;
 	resize: none;
 	word-break: break-all;
-	white-space: normal;
 }
 
 // Map widget back to parent button.
@@ -7544,6 +7543,13 @@ table.preprocessing-test-results {
 
 		td {
 			height: 100%;
+		}
+	}
+
+	.overlay-dialogue-body {
+
+		textarea {
+			white-space: pre-wrap;
 		}
 	}
 }
