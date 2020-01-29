@@ -137,6 +137,7 @@ switch ($page['type']) {
 // construct menu
 $main_menu = [];
 $sub_menus = [];
+$page = (array) $page;
 
 $denied_page_requested = zbx_construct_menu($main_menu, $sub_menus, $page);
 
