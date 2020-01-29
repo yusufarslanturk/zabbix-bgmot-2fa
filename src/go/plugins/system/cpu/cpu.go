@@ -17,7 +17,7 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package cpucollector
+package cpu
 
 import (
 	"encoding/json"
@@ -26,6 +26,8 @@ import (
 
 	"zabbix.com/pkg/plugin"
 )
+
+const pluginName = "Cpu"
 
 var impl Plugin
 

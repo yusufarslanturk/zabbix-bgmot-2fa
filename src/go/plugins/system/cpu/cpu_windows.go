@@ -17,7 +17,7 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package cpucollector
+package cpu
 
 import (
 	"errors"
@@ -94,7 +94,7 @@ func (p *Plugin) Stop() {
 
 func init() {
 	impl.collector = newPdhCollector(&impl)
-	plugin.RegisterMetrics(&impl, "CpuCollector",
+	plugin.RegisterMetrics(&impl, pluginName,
 		"system.cpu.discovery", "List of detected CPUs/CPU cores, used for low-level discovery.",
 		"system.cpu.load", "CPU load.",
 		"system.cpu.num", "Number of CPUs.",

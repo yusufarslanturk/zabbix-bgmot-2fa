@@ -17,7 +17,7 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package cpucollector
+package cpu
 
 /*
 #include <unistd.h>
@@ -125,7 +125,7 @@ func (p *Plugin) Stop() {
 }
 
 func init() {
-	plugin.RegisterMetrics(&impl, "CpuCollector",
+	plugin.RegisterMetrics(&impl, pluginName,
 		"system.cpu.discovery", "List of detected CPUs/CPU cores, used for low-level discovery.",
 		"system.cpu.num", "Number of CPUs.",
 		"system.cpu.util", "CPU utilisation percentage.")
