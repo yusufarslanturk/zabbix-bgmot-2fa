@@ -51,7 +51,7 @@ func (p *Plugin) exportSystemTcpListen(params []string) (result interface{}, err
 // Export -
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
 	switch key {
-	case "system.tcp.listen":
+	case "net.tcp.listen":
 		return p.exportSystemTcpListen(params)
 	default:
 		return nil, plugin.UnsupportedMetricError
@@ -60,6 +60,6 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 func init() {
 	plugin.RegisterMetrics(&impl, "Tcp",
-		"ssytem.tcp.listen", "Checks if this TCP port is in LISTEN state.",
+		"net.tcp.listen", "Checks if this TCP port is in LISTEN state.",
 	)
 }

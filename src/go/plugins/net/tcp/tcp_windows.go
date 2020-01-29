@@ -45,7 +45,7 @@ func exportSystemTcpListen(port uint16) (result interface{}, err error) {
 	}
 
 	var nport uint16
-	binary.BigEndian.PutUint16((*[2]byte)(unsafe.Pointer(&nport))[:2], 0x03e8)
+	binary.BigEndian.PutUint16((*[2]byte)(unsafe.Pointer(&nport))[:2], port)
 	rows := (*[1 << 16]win32.MIB_TCPROW)(unsafe.Pointer(&tcpTable.Table[0]))[:tcpTable.NumEntries:tcpTable.NumEntries]
 	for _, row := range rows {
 		if row.State == win32.MIB_TCP_STATE_LISTEN && uint16(row.LocalPort) == nport {
