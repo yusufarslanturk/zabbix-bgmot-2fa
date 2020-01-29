@@ -33,6 +33,7 @@ type pdhCollector struct {
 	hQuery   win32.PDH_HQUERY
 	hCpuUtil []win32.PDH_HCOUNTER
 	hCpuLoad win32.PDH_HCOUNTER
+	iter     uint64
 }
 
 func getNumaNodeCount() (count int) {
@@ -85,40 +86,26 @@ func (c *pdhCollector) open(numCpu int) {
 		c.log.Errf("cannot add performance counter for total CPU utilization: %s", err)
 	}
 	// add per cpu utilization counters
-	if numCpu <= 64 {
-		for i := 1; i <= numCpu; i++ {
-			cpe.InstanceName = fmt.Sprintf("%d", i-1)
+
+	cpe.ObjectName = pdh.CounterName(pdh.ObjectProcessorInfo)
+	groups := getNumaNodeCount()
+	if groups == 1 {
+		groups = win32.GetActiveProcessorGroupCount()
+	}
+	cpuPerGroup := numCPU() / groups
+	index := 1
+	for g := 0; g < groups; g++ {
+		for i := 0; i < cpuPerGroup; i++ {
+			cpe.InstanceName = fmt.Sprintf("%d,%d", g, i)
 			path, err = pdh.MakePath(&cpe)
 			if err != nil {
 				c.log.Errf("cannot make counter path for CPU#%s utilization: %s", cpe.InstanceName, err)
 			}
-			c.hCpuUtil[i], err = win32.PdhAddCounter(c.hQuery, path, 0)
+			c.hCpuUtil[index], err = win32.PdhAddCounter(c.hQuery, path, 0)
 			if err != nil {
 				c.log.Errf("cannot add performance counter for CPU#%s utilization: %s", cpe.InstanceName, err)
 			}
-		}
-	} else {
-		cpe.ObjectName = pdh.CounterName(pdh.ObjectProcessorInfo)
-		groups := getNumaNodeCount()
-		if groups == 1 {
-			groups = win32.GetActiveProcessorGroupCount()
-		}
-		cpuPerGroup := numCPU() / groups
-		index := 1
-		for g := 0; g < groups; g++ {
-			for i := 0; i < cpuPerGroup; i++ {
-				cpe.InstanceName = fmt.Sprintf("%d,%d", g, i)
-				path, err = pdh.MakePath(&cpe)
-				fmt.Println(path)
-				if err != nil {
-					c.log.Errf("cannot make counter path for CPU#%s utilization: %s", cpe.InstanceName, err)
-				}
-				c.hCpuUtil[index], err = win32.PdhAddCounter(c.hQuery, path, 0)
-				if err != nil {
-					c.log.Errf("cannot add performance counter for CPU#%s utilization: %s", cpe.InstanceName, err)
-				}
-				index++
-			}
+			index++
 		}
 	}
 }
@@ -138,7 +125,9 @@ func (c *pdhCollector) collect() (ok bool, err error) {
 	if err = win32.PdhCollectQueryData(c.hQuery); err != nil {
 		return
 	}
-	return true, nil
+	// ignore first query result - no data will be gathered yet
+	c.iter++
+	return c.iter > 1, nil
 }
 
 // cpuLoad function returns collected CPU load counter- \Processor\Processor Queue Length
