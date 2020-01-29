@@ -418,5 +418,9 @@ function zbx_construct_menu(&$main_menu, &$sub_menus, array &$page, $action = nu
 		array_push($main_menu, $mmenu_entry);
 	}
 
+	if (!$page_exists) {
+		$denied_page_requested = true;
+	}
+
 	return $denied_page_requested;
 }
