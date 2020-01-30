@@ -41,7 +41,6 @@ import (
 )
 
 const HostMetadataLen = 255
-const HostInterfaceLen = 255
 const defaultAgentPort = 10050
 
 type Connector struct {
@@ -155,29 +154,7 @@ func (c *Connector) refreshActiveChecks() {
 	}
 
 	if len(c.options.HostInterface) > 0 {
-		if len(c.options.HostInterfaceItem) > 0 {
-			log.Warningf("both \"HostInterface\" and \"HostInterfaceItem\" configuration parameter defined, using \"HostInterface\"")
-		}
-
 		a.HostInterface = c.options.HostInterface
-	} else if len(c.options.HostInterfaceItem) > 0 {
-		a.HostInterface, err = c.taskManager.PerformTask(c.options.HostInterfaceItem, time.Duration(c.options.Timeout)*time.Second)
-		if err != nil {
-			log.Errf("cannot get host interface: %s", err)
-			return
-		}
-
-		if !utf8.ValidString(a.HostInterface) {
-			log.Errf("cannot get host interface: value is not an UTF-8 string")
-			return
-		}
-
-		var n int
-
-		if a.HostInterface, n = agent.CutAfterN(a.HostInterface, HostInterfaceLen); n != HostInterfaceLen {
-			log.Warningf("the returned value of \"%s\" item specified by \"HostInterfaceItem\" configuration parameter"+
-				" is too long, using first %d characters", c.options.HostInterfaceItem, n)
-		}
 	}
 
 	if len(c.options.ListenIP) > 0 {

@@ -28,6 +28,8 @@ import (
 	"strings"
 	"syscall"
 
+	_ "zabbix.com/plugins"
+
 	"zabbix.com/internal/agent"
 	"zabbix.com/internal/agent/remotecontrol"
 	"zabbix.com/internal/agent/scheduler"
@@ -232,11 +234,7 @@ func main() {
 		}
 	}
 
-	if err := configDefault(manager, &agent.Options); err != nil {
-		fatalExit("cannot process configuration", err)
-	}
-
-	if err := configValidate(agent.Options); err != nil {
+	if err := agent.ValidateOptions(agent.Options); err != nil {
 		fatalExit("cannot validate configuration", err)
 	}
 
@@ -351,6 +349,10 @@ func main() {
 	}
 
 	manager.Start()
+
+	if err = configUpdateItemParameters(manager, &agent.Options); err != nil {
+		fatalExit("cannot process configuration", err)
+	}
 
 	serverConnectors = make([]*serverconnector.Connector, len(addresses))
 
