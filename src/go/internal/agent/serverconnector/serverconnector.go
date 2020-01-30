@@ -40,7 +40,7 @@ import (
 	"zabbix.com/pkg/zbxcomms"
 )
 
-const HostMetadataLen = 255
+const hostMetadataLen = 255
 const defaultAgentPort = 10050
 
 type Connector struct {
@@ -147,7 +147,7 @@ func (c *Connector) refreshActiveChecks() {
 
 		var n int
 
-		if a.HostMetadata, n = agent.CutAfterN(a.HostMetadata, HostMetadataLen); n != HostMetadataLen {
+		if a.HostMetadata, n = agent.CutAfterN(a.HostMetadata, hostMetadataLen); n != hostMetadataLen {
 			log.Warningf("the returned value of \"%s\" item specified by \"HostMetadataItem\" configuration parameter"+
 				" is too long, using first %d characters", c.options.HostMetadataItem, n)
 		}
