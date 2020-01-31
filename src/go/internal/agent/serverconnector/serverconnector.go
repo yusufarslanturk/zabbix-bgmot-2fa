@@ -122,7 +122,12 @@ func ParseServerActive() ([]string, error) {
 func (c *Connector) refreshActiveChecks() {
 	var err error
 
-	a := activeChecksRequest{Request: "active checks", Host: c.options.Hostname, Version: version.Short()}
+	a := activeChecksRequest{
+		Request:       "active checks",
+		Host:          c.options.Hostname,
+		Version:       version.Short(),
+		HostInterface: c.options.HostInterface,
+	}
 
 	log.Debugf("[%d] In refreshActiveChecks() from [%s]", c.clientID, c.address)
 	defer log.Debugf("[%d] End of refreshActiveChecks() from [%s]", c.clientID, c.address)
@@ -151,10 +156,6 @@ func (c *Connector) refreshActiveChecks() {
 			log.Warningf("the returned value of \"%s\" item specified by \"HostMetadataItem\" configuration parameter"+
 				" is too long, using first %d characters", c.options.HostMetadataItem, n)
 		}
-	}
-
-	if len(c.options.HostInterface) > 0 {
-		a.HostInterface = c.options.HostInterface
 	}
 
 	if len(c.options.ListenIP) > 0 {
