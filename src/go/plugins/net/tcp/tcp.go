@@ -41,35 +41,31 @@ type Plugin struct {
 var impl Plugin
 
 func (p *Plugin) exportNetTcpPort(params []string) (result int, err error) {
-	var ipStr, portStr string
-
 	if len(params) > 2 {
 		err = errors.New(errorTooManyParams)
 		return
 	}
-	if len(params) < 1 || (len(params) == 1 && len(params[0]) == 0) {
+	if len(params) < 2 || len(params[1]) == 0 {
 		err = errors.New(errorInvalidSecondParam)
 		return
 	}
 
-	if len(params) == 1 {
-		portStr = params[0]
-	} else {
-		portStr = params[1]
-	}
+	port := params[1]
 
-	if _, err = strconv.ParseUint(portStr, 10, 16); err != nil {
+	if _, err = strconv.ParseUint(port, 10, 16); err != nil {
 		err = errors.New(errorInvalidSecondParam)
 		return
 	}
+
+	var address string
 
 	if params[0] == "" {
-		ipStr = net.JoinHostPort("127.0.0.1", portStr)
+		address = net.JoinHostPort("127.0.0.1", port)
 	} else {
-		ipStr = net.JoinHostPort(params[0], portStr)
+		address = net.JoinHostPort(params[0], port)
 	}
 
-	if _, err := net.Dial("tcp", ipStr); err != nil {
+	if _, err := net.Dial("tcp", address); err != nil {
 		return 0, nil
 	}
 	return 1, nil
