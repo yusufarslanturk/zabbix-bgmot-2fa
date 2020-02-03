@@ -21,7 +21,6 @@ package tcpudp
 
 import (
 	"errors"
-	"fmt"
 	"net"
 	"strconv"
 
@@ -43,7 +42,6 @@ var impl Plugin
 
 func (p *Plugin) exportNetTcpPort(params []string) (result int, err error) {
 	var ipStr, portStr string
-	var port uint64
 
 	if len(params) > 2 {
 		err = errors.New(errorTooManyParams)
@@ -60,15 +58,15 @@ func (p *Plugin) exportNetTcpPort(params []string) (result int, err error) {
 		portStr = params[1]
 	}
 
-	if port, err = strconv.ParseUint(portStr, 10, 16); err != nil {
+	if _, err = strconv.ParseUint(portStr, 10, 16); err != nil {
 		err = errors.New(errorInvalidSecondParam)
 		return
 	}
 
 	if params[0] == "" {
-		ipStr = fmt.Sprintf("127.0.0.1:%d", port)
+		ipStr = net.JoinHostPort("127.0.0.1", portStr)
 	} else {
-		ipStr = fmt.Sprintf("%s:%d", params[0], port)
+		ipStr = net.JoinHostPort(params[0], portStr)
 	}
 
 	if _, err := net.Dial("tcp", ipStr); err != nil {
