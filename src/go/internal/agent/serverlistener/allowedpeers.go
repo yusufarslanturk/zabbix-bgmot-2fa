@@ -42,20 +42,22 @@ func GetAllowedPeers(options *agent.AgentOptions) (allowedPeers *AllowedPeers, e
 		for _, o := range opts {
 			peer := strings.Trim(o, " \t")
 			if _, peerNet, err := net.ParseCIDR(peer); nil == err {
-				if !ap.isPresent(peerNet) {
-					ap.nets = append(ap.nets, peerNet)
-					maskLeadSize, maskTotalOnes := peerNet.Mask.Size()
-					if 0 == maskLeadSize && 128 == maskTotalOnes {
-						_, peerNet, _ = net.ParseCIDR("0.0.0.0/0")
-						if !ap.isPresent(peerNet) {
-							ap.nets = append(ap.nets, peerNet)
-						}
+				if ap.isPresent(peerNet) {
+					continue
+				}
+				ap.nets = append(ap.nets, peerNet)
+				maskLeadSize, maskTotalOnes := peerNet.Mask.Size()
+				if 0 == maskLeadSize && 128 == maskTotalOnes {
+					_, peerNet, _ = net.ParseCIDR("0.0.0.0/0")
+					if !ap.isPresent(peerNet) {
+						ap.nets = append(ap.nets, peerNet)
 					}
 				}
 			} else if peerip := net.ParseIP(peer); nil != peerip {
-				if !ap.isPresent(peerip) {
-					ap.ips = append(ap.ips, peerip)
+				if ap.isPresent(peerip) {
+					continue
 				}
+				ap.ips = append(ap.ips, peerip)
 			} else if !ap.isPresent(peer) {
 				ap.names = append(ap.names, peer)
 			}
