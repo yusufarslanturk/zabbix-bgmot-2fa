@@ -93,8 +93,26 @@ class CHtmlUrlValidator {
 		$url = parse_url($url);
 		$allowed_schemes = explode(',', strtolower(ZBX_URI_VALID_SCHEMES));
 
-		return ($url && ((array_key_exists('scheme', $url) && in_array(strtolower($url['scheme']), $allowed_schemes))
-			|| (array_key_exists('path', $url) && preg_match('/^[a-z_\.]+\.php/i', $url['path']) == 1)
-		));
+		// parse_url() may return boolean, but there must be at least some array keys.
+		if (!$url) {
+			return false;
+		}
+
+		// If scheme exists, check if it is allowed and has an IP or DNS.
+		if (array_key_exists('scheme', $url)) {
+			if (!array_key_exists('host', $url) && !array_key_exists('path', $url)) {
+				return false;
+			}
+
+			// Check against complete nonsense like "http:/".
+			if (!array_key_exists('host', $url) && array_key_exists('path', $url) && $url['path'] === '/') {
+				return false;
+			}
+
+			return in_array(strtolower($url['scheme']), $allowed_schemes);
+		}
+		else {
+			return (array_key_exists('path', $url) && $url['path'] !== '');
+		}
 	}
 }
