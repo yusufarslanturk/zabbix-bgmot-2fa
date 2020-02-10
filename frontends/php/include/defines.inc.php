@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -18,13 +18,13 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-define('ZABBIX_VERSION',		'4.4.5rc1');
-define('ZABBIX_API_VERSION',	'4.4.5');
+define('ZABBIX_VERSION',		'4.4.6rc1');
+define('ZABBIX_API_VERSION',	'4.4.6');
 define('ZABBIX_EXPORT_VERSION',	'4.4');
 define('ZABBIX_DB_VERSION',		4040000);
 
 define('ZABBIX_COPYRIGHT_FROM',	'2001');
-define('ZABBIX_COPYRIGHT_TO',	'2019');
+define('ZABBIX_COPYRIGHT_TO',	'2020');
 
 define('ZBX_LOGIN_ATTEMPTS',	5);
 define('ZBX_LOGIN_BLOCK',		30); // sec
@@ -130,6 +130,10 @@ define('ZBX_DB_MAX_ID', '9223372036854775807');
 
 // maximum number of records for create() or update() API calls
 define('ZBX_DB_MAX_INSERTS', 10000);
+
+// Default db and field character set
+define('ZBX_DB_DEFAULT_CHARSET', 'UTF8');
+define('ZBX_DB_MYSQL_DEFAULT_COLLATION', 'utf8_bin');
 
 define('ZBX_SHOW_TECHNICAL_ERRORS', false);
 
