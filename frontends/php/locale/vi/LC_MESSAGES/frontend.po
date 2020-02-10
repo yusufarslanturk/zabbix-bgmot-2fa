@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-02 01:44+0200\n"
-"PO-Revision-Date: 2019-12-09 09:47+0300\n"
+"POT-Creation-Date: 2020-02-10 10:16+0200\n"
+"PO-Revision-Date: 2020-02-10 08:07+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: vi\n"
@@ -13,7 +13,14 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1575877627.000000\n"
+"X-POOTLE-MTIME: 1581314879.000000\n"
+
+#: include/classes/db/MysqlDbBackend.php:67
+#: include/classes/db/OracleDbBackend.php:87
+#: include/classes/db/PostgresqlDbBackend.php:76
+#, c-format
+msgid "\"%1$s\" instead \"%2$s\""
+msgstr ""
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -347,7 +354,7 @@ msgid_plural "Account is blocked for %1$s seconds."
 msgstr[0] "Tài khoản bị khóa khoảng %1$s giây."
 
 #: app/views/monitoring.widget.problems.view.php:64
-#: include/actions.inc.php:157 include/blocks.inc.php:741
+#: include/actions.inc.php:157 include/blocks.inc.php:749
 #: include/classes/screens/CScreenHostTriggers.php:223
 #: include/classes/screens/CScreenProblem.php:910
 #: include/classes/screens/CScreenProblem.php:935
@@ -501,7 +508,7 @@ msgid "Action updated"
 msgstr "Hành động đã cập nhật"
 
 #: app/views/monitoring.dashboard.view.php:86
-#: app/views/monitoring.widget.problems.view.php:65 include/blocks.inc.php:742
+#: app/views/monitoring.widget.problems.view.php:65 include/blocks.inc.php:750
 #: include/classes/screens/CScreenHostTriggers.php:223
 #: include/classes/screens/CScreenProblem.php:911
 #: include/classes/screens/CScreenProblem.php:936
@@ -5355,7 +5362,7 @@ msgstr "Tạo bản sao id nhóm người dùng \"%1$s\" trong nhóm người d�
 msgid "Duplicate usrgrpid \"%1$s\" in user groups for screen \"%2$s\"."
 msgstr "Tạo bản sao id nhóm người \"%1$s\" dùng trong nhóm người dùng cho screen \"%2$s\"."
 
-#: app/views/monitoring.widget.problems.view.php:63 include/blocks.inc.php:740
+#: app/views/monitoring.widget.problems.view.php:63 include/blocks.inc.php:748
 #: include/classes/screens/CScreenProblem.php:909
 #: include/classes/screens/CScreenProblem.php:934
 #: include/classes/screens/CScreenProblem.php:1189 include/events.inc.php:258
@@ -7009,7 +7016,7 @@ msgstr "Sắp xếp theo chiều ngang"
 #: app/views/popup.generic.php:53 app/views/popup.generic.php:98
 #: app/views/popup.generic.php:137 app/views/search.php:26 httpconf.php:189
 #: httpconf.php:497 include/actions.inc.php:50 include/audit.inc.php:27
-#: include/blocks.inc.php:737 include/classes/screens/CScreenEvents.php:32
+#: include/blocks.inc.php:745 include/classes/screens/CScreenEvents.php:32
 #: include/classes/screens/CScreenHostgroupTriggers.php:135
 #: include/classes/screens/CScreenHostTriggers.php:67
 #: include/classes/screens/CScreenHostTriggers.php:135
@@ -8098,6 +8105,12 @@ msgstr "Biểu thức tự chọn \"%2$s\" không chính xác cho quy tắc khá
 msgid "Incorrect data."
 msgstr "Dữ liệu không chính xác."
 
+#: include/classes/db/MysqlDbBackend.php:66
+#: include/classes/db/PostgresqlDbBackend.php:75
+#, c-format
+msgid "Incorrect default charset for Zabbix database: %1$s."
+msgstr ""
+
 #: include/classes/api/services/CEvent.php:527
 #: include/classes/api/services/CProblem.php:394
 msgid "Incorrect evaltype value."
@@ -8331,6 +8344,11 @@ msgstr "Phương pháp \"%1$s.%2$s\" không chính xác."
 #: include/classes/api/services/CProblem.php:382
 msgid "Incorrect object value."
 msgstr "Giá trị đối tượng không chính xác."
+
+#: include/classes/db/OracleDbBackend.php:86
+#, c-format
+msgid "Incorrect parameter \"%1$s\" value: %2$s."
+msgstr ""
 
 #: include/classes/api/services/CAction.php:2824
 #, c-format
@@ -8850,7 +8868,7 @@ msgstr "Indonesian (id_ID)"
 #: app/views/monitoring.widget.actionlog.view.php:35
 #: app/views/monitoring.widget.problems.view.php:55
 #: include/actions.inc.php:1887 include/actions.inc.php:1971
-#: include/blocks.inc.php:736 include/classes/screens/CScreenActions.php:117
+#: include/blocks.inc.php:744 include/classes/screens/CScreenActions.php:117
 #: include/classes/screens/CScreenHostTriggers.php:223
 #: include/classes/screens/CScreenProblem.php:904
 #: include/classes/screens/CScreenProblem.php:928
@@ -11254,7 +11272,7 @@ msgstr "Bước tiếp theo"
 #: app/views/administration.user.list.php:115
 #: app/views/monitoring.widget.problems.view.php:261
 #: include/actions.inc.php:33 include/blocks.inc.php:622
-#: include/blocks.inc.php:847
+#: include/blocks.inc.php:855
 #: include/classes/screens/CScreenHostTriggers.php:273
 #: include/classes/screens/CScreenProblem.php:1134
 #: include/classes/screens/CScreenProblem.php:1270 include/events.inc.php:183
@@ -12397,7 +12415,7 @@ msgstr "Thao tác không có template để hoạt động."
 msgid "Operation type"
 msgstr "Kiểu thao tác"
 
-#: app/views/monitoring.widget.problems.view.php:62 include/blocks.inc.php:739
+#: app/views/monitoring.widget.problems.view.php:62 include/blocks.inc.php:747
 #: include/classes/screens/CScreenProblem.php:932
 #: include/classes/screens/CScreenProblem.php:1188 include/events.inc.php:170
 #: include/views/configuration.trigger.prototype.edit.php:68
@@ -13261,7 +13279,7 @@ msgid "Privilege level"
 msgstr "Cấp đặc quyền"
 
 #: app/views/monitoring.problem.view.php:163
-#: app/views/monitoring.widget.problems.view.php:58 include/blocks.inc.php:738
+#: app/views/monitoring.widget.problems.view.php:58 include/blocks.inc.php:746
 #: include/classes/screens/CScreenProblem.php:907
 #: include/classes/screens/CScreenProblem.php:930
 #: include/classes/screens/CScreenProblem.php:1101
@@ -15840,7 +15858,7 @@ msgid "Tag value"
 msgstr "Thẻ giá trị"
 
 #: app/views/monitoring.problem.view.php:283
-#: app/views/monitoring.widget.problems.view.php:66 include/blocks.inc.php:743
+#: app/views/monitoring.widget.problems.view.php:66 include/blocks.inc.php:751
 #: include/classes/screens/CScreenProblem.php:881
 #: include/classes/screens/CScreenProblem.php:937
 #: include/classes/screens/CScreenProblem.php:1192
@@ -16131,7 +16149,7 @@ msgstr "Ứng dụng không được khám phá nữa và sẽ bị xóa trong l
 msgid "The frontend does not match Zabbix database."
 msgstr "Giao diện không khớp với cơ sở dữ liệu Zabbix."
 
-#: include/classes/db/DbBackend.php:48
+#: include/classes/db/DbBackend.php:50
 #, c-format
 msgid "The frontend does not match Zabbix database. Current database version (mandatory/optional): %d/%d. Required mandatory version: %d. Contact your system administrator."
 msgstr "Giao diện không khớp với cơ sở dữ liệu Zabbix. Phiên bản cơ sở dữ liệu hiện tại (bắt buộc/tùy chọn): %d/%d. Phiên bản bắt buộc yêu cầu: %d. Liên hệ quản trị hệ thống của bạn."
@@ -16273,7 +16291,7 @@ msgstr "Cho tới"
 #: app/views/popup.triggerexpr.php:128 app/views/popup.triggerexpr.php:132
 #: include/actions.inc.php:1752 include/actions.inc.php:1806
 #: include/actions.inc.php:1887 include/actions.inc.php:1971
-#: include/actions.inc.php:2021 include/blocks.inc.php:718
+#: include/actions.inc.php:2021 include/blocks.inc.php:726
 #: include/classes/screens/CScreenActions.php:111
 #: include/classes/screens/CScreenEvents.php:32
 #: include/classes/screens/CScreenProblem.php:858
@@ -16938,7 +16956,7 @@ msgstr "Không thể tạo tập tin cấu hình."
 msgid "Unable to overwrite the existing configuration file."
 msgstr "Không thể ghi đè lên tệp cấu hình hiện có."
 
-#: include/classes/db/DbBackend.php:63
+#: include/classes/db/DbBackend.php:65
 msgid "Unable to select configuration."
 msgstr "Không thể lựa chọn cấu hình."
 
@@ -17109,6 +17127,13 @@ msgstr "Hủy liên kết: Web scenario \"%1$s\" trên \"%2$s\"."
 #: jsLoader.php:216
 msgid "Unmute"
 msgstr "Bật tiếng"
+
+#: include/classes/db/MysqlDbBackend.php:95
+#: include/classes/db/PostgresqlDbBackend.php:111
+#, c-format
+msgid "Unsupported charset or collation for table: %1$s."
+msgid_plural "Unsupported charset or collation for tables: %1$s."
+msgstr[0] ""
 
 #: include/classes/import/readers/CImportReaderFactory.php:65
 #, c-format
@@ -18405,7 +18430,7 @@ msgstr "Hàng năm"
 #: app/views/administration.user.list.php:109
 #: app/views/monitoring.widget.problems.view.php:261
 #: include/actions.inc.php:32 include/blocks.inc.php:622
-#: include/blocks.inc.php:847
+#: include/blocks.inc.php:855
 #: include/classes/screens/CScreenHostTriggers.php:273
 #: include/classes/screens/CScreenProblem.php:1134
 #: include/classes/screens/CScreenProblem.php:1270 include/events.inc.php:183
