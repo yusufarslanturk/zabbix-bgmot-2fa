@@ -113,7 +113,7 @@ function add_audit_ext($action, $resourcetype, $resourceid, $resourcename, $tabl
 	}
 
 	/*
-	 * CWebUser is not initianized in CUser->login() method.
+	 * CWebUser is not initialized in CUser->login() method.
 	 * $userid with value NULL throws DBEXECUTE_ERROR later, so no audit record will be created.
 	 */
 	$userid = ($action == AUDIT_ACTION_LOGIN)
