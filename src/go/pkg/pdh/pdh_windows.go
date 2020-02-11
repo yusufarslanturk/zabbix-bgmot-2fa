@@ -166,7 +166,7 @@ func ConvertPath(path string) (outPath string, err error) {
 	}
 
 	bufObject := (*[1 << 16]uint16)(unsafe.Pointer(elements.ObjectName))[:win32.PDH_MAX_COUNTER_NAME:win32.PDH_MAX_COUNTER_NAME]
-	bufCounter := (*[1 << 16]uint16)(unsafe.Pointer(elements.ObjectName))[:win32.PDH_MAX_COUNTER_NAME:win32.PDH_MAX_COUNTER_NAME]
+	bufCounter := (*[1 << 16]uint16)(unsafe.Pointer(elements.CounterName))[:win32.PDH_MAX_COUNTER_NAME:win32.PDH_MAX_COUNTER_NAME]
 	objectName := windows.UTF16ToString(bufObject)
 	counterName := windows.UTF16ToString(bufCounter)
 	objectIndex, objectErr := strconv.ParseInt(objectName, 10, 32)
