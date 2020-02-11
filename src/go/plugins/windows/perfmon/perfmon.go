@@ -262,6 +262,7 @@ func (p *Plugin) Start() {
 
 func (p *Plugin) Stop() {
 	_ = win32.PdhCloseQuery(p.query)
+	p.query = 0
 }
 
 func init() {
