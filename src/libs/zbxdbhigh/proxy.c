@@ -658,7 +658,6 @@ static int	get_proxyconfig_table_items_ext(zbx_uint64_t proxy_hostid, const zbx_
 	char		*sql = NULL;
 	size_t		sql_alloc = 4 * ZBX_KIBIBYTE, sql_offset = 0;
 	int		f, ret = SUCCEED, index = 1, itemid_index = 0;
-	zbx_uint64_t	itemid;
 	DB_RESULT	result;
 	DB_ROW		row;
 
@@ -709,6 +708,8 @@ static int	get_proxyconfig_table_items_ext(zbx_uint64_t proxy_hostid, const zbx_
 
 	while (NULL != (row = DBfetch(result)))
 	{
+		zbx_uint64_t	itemid;
+
 		ZBX_STR2UINT64(itemid, row[itemid_index]);
 		if (NULL != zbx_hashset_search((zbx_hashset_t *)itemids, &itemid))
 		{
@@ -974,7 +975,7 @@ int	get_proxyconfig_data(zbx_uint64_t proxy_hostid, struct zbx_json *j, char **e
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() proxy_hostid:" ZBX_FS_UI64, __func__, proxy_hostid);
 
-	zbx_hashset_create(&itemids, 1009, ZBX_DEFAULT_UINT64_HASH_FUNC, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
+	zbx_hashset_create(&itemids, 1000, ZBX_DEFAULT_UINT64_HASH_FUNC, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 	zbx_vector_uint64_create(&hosts);
 	zbx_vector_uint64_create(&httptests);
 
