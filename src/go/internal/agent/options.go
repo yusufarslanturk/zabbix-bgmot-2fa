@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -184,4 +184,26 @@ func GlobalOptions(all *AgentOptions) (options *plugin.GlobalOptions) {
 		SourceIP: Options.SourceIP,
 	}
 	return
+}
+
+func ValidateOptions(options AgentOptions) error {
+	const hostNameLen = 128
+	const hostMetadataLen = 255
+	const hostInterfaceLen = 255
+	var err error
+
+	if len(options.Hostname) > hostNameLen {
+		return fmt.Errorf("the value of \"Hostname\" configuration parameter cannot be longer than %d characters", hostNameLen)
+	}
+	if err = CheckHostname(options.Hostname); err != nil {
+		return fmt.Errorf("invalid \"Hostname\" configuration parameter: %s", err.Error())
+	}
+	if len(options.HostMetadata) > 0 && len(options.HostMetadata) > hostMetadataLen {
+		return fmt.Errorf("the value of \"HostMetadata\" configuration parameter cannot be longer than %d characters", hostMetadataLen)
+	}
+	if len(options.HostInterface) > hostInterfaceLen {
+		return fmt.Errorf("the value of \"HostInterface\" configuration parameter cannot be longer than %d characters", hostInterfaceLen)
+	}
+
+	return nil
 }

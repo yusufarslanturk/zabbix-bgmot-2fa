@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -18,13 +18,13 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-define('ZABBIX_VERSION',		'4.4.5rc1');
-define('ZABBIX_API_VERSION',	'4.4.5');
+define('ZABBIX_VERSION',		'4.4.6rc1');
+define('ZABBIX_API_VERSION',	'4.4.6');
 define('ZABBIX_EXPORT_VERSION',	'4.4');
 define('ZABBIX_DB_VERSION',		4040000);
 
 define('ZABBIX_COPYRIGHT_FROM',	'2001');
-define('ZABBIX_COPYRIGHT_TO',	'2019');
+define('ZABBIX_COPYRIGHT_TO',	'2020');
 
 define('ZBX_LOGIN_ATTEMPTS',	5);
 define('ZBX_LOGIN_BLOCK',		30); // sec
@@ -131,19 +131,20 @@ define('ZBX_DB_MAX_ID', '9223372036854775807');
 // maximum number of records for create() or update() API calls
 define('ZBX_DB_MAX_INSERTS', 10000);
 
+// Default db and field character set
+define('ZBX_DB_DEFAULT_CHARSET', 'UTF8');
+define('ZBX_DB_MYSQL_DEFAULT_COLLATION', 'utf8_bin');
+
 define('ZBX_SHOW_TECHNICAL_ERRORS', false);
 
 define('PAGE_TYPE_HTML',				0);
 define('PAGE_TYPE_IMAGE',				1);
-define('PAGE_TYPE_XML',					2);
 define('PAGE_TYPE_JS',					3); // javascript
 define('PAGE_TYPE_CSS',					4);
 define('PAGE_TYPE_HTML_BLOCK',			5); // simple block of html (as text)
 define('PAGE_TYPE_JSON',				6); // simple JSON
 define('PAGE_TYPE_JSON_RPC',			7); // api call
-define('PAGE_TYPE_TEXT_FILE',			8); // api call
 define('PAGE_TYPE_TEXT',				9); // simple text
-define('PAGE_TYPE_CSV',					10); // CSV format
 define('PAGE_TYPE_TEXT_RETURN_JSON',	11); // input plaintext output json
 
 define('ZBX_SESSION_ACTIVE',	0);

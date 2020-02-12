@@ -34,21 +34,3 @@ func TestConvertPath(t *testing.T) {
 		fmt.Printf("path: %s", path)
 	}
 }
-
-func TestMakePath(t *testing.T) {
-
-	cpe := CounterPathElements{
-		ObjectName:    CounterIndex(ObjectProcessor),
-		InstanceName:  "_Total",
-		InstanceIndex: -1,
-		CounterName:   "% Processor time",
-	}
-
-	path, err := MakePath(&cpe)
-	if err != nil {
-		fmt.Printf("error: %s\n", err)
-	} else {
-		fmt.Printf("path: %s\n", path)
-	}
-	t.Fail()
-}
