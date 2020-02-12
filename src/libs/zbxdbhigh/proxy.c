@@ -645,8 +645,6 @@ skip_data:
 	return ret;
 }
 
-#define ZBX_MAX_IDS_PER_SELECT 10000
-
 /******************************************************************************
  *                                                                            *
  * Function: get_proxyconfig_table_items                                      *
