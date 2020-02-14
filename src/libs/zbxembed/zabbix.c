@@ -24,6 +24,7 @@
 #include "embed.h"
 #include "duktape.h"
 #include "zabbix.h"
+#include "base64.h"
 
 /******************************************************************************
  *                                                                            *
@@ -70,8 +71,65 @@ static duk_ret_t	es_zabbix_log(duk_context *ctx)
 	return 0;
 }
 
+/******************************************************************************
+ *                                                                            *
+ * Function: es_zabbix_base64encode                                           *
+ *                                                                            *
+ * Purpose: encodes ECMAScript string to base64 string                       *
+ *                                                                            *
+ * Parameters: ctx - [IN] pointer to duk_context                              *
+ *                                                                            *
+ * Comments: Throws an error if the top value at ctx value stack is not       *
+ *           a string or if the value stack is empty                          *
+ *                                                                            *
+ ******************************************************************************/
+static duk_ret_t	es_zabbix_base64encode(duk_context *ctx)
+{
+	duk_size_t byte_len = 0;
+	const char *str = NULL;
+	char *b64str = NULL;
+
+	str = duk_require_lstring(ctx, 0, &byte_len);
+	str_base64_encode_dyn(str, &b64str, (int)byte_len);
+	duk_pop(ctx);
+	duk_push_string(ctx, b64str);
+	zbx_free(b64str);
+	return 1;
+}
+
+/******************************************************************************
+ *                                                                            *
+ * Function: es_zabbix_base64decode                                           *
+ *                                                                            *
+ * Purpose: decodes base64 string to ECMAScript string                        *
+ *                                                                            *
+ * Parameters: ctx - [IN] pointer to duk_context                              *
+ *                                                                            *
+ * Comments: Throws an error if the top value at ctx value stack is not       *
+ *           a string or if the value stack is empty                          *
+ *                                                                            *
+ ******************************************************************************/
+static duk_ret_t	es_zabbix_base64decode(duk_context *ctx)
+{
+	char *buffer = NULL;
+	const char *b64str;
+	int out_size, buffer_size;
+	duk_size_t b64_size;
+
+	b64str = duk_require_lstring(ctx, 0, &b64_size);
+	buffer_size = (int)b64_size * 3 / 4 + 1;
+	buffer = zbx_malloc(buffer, (size_t)buffer_size);
+	str_base64_decode(b64str, buffer, buffer_size, &out_size);
+	duk_pop(ctx);
+	duk_push_lstring(ctx, buffer, (duk_size_t)out_size);
+	zbx_free(buffer);
+	return 1;
+}
+
 static const duk_function_list_entry	zabbix_methods[] = {
-	{"Log", es_zabbix_log, 2},
+	{"Log",			es_zabbix_log,		2},
+	{"Base64encode",	es_zabbix_base64encode,	1},
+	{"Base64decode",	es_zabbix_base64decode,	1},
 	{NULL, NULL, 0}
 };
 
