@@ -23,6 +23,7 @@ package win32
 
 import (
 	"syscall"
+	"unsafe"
 )
 
 type Hlib syscall.Handle
@@ -101,6 +102,8 @@ type MIB_IF_ROW2 struct {
 	OutQLen                     uint64
 }
 
+type RGMIB_IF_ROW2 [ARRAY_MAX / unsafe.Sizeof(MIB_IF_ROW2{})]MIB_IF_ROW2
+
 type MIB_IF_TABLE2 struct {
 	NumEntries uint32
 	_          [4]byte
@@ -116,6 +119,9 @@ type MIB_IPADDRROW struct {
 	_         uint16
 	_         uint16
 }
+
+type RGMIB_IPADDRROW [ARRAY_MAX / unsafe.Sizeof(MIB_IPADDRROW{})]MIB_IPADDRROW
+
 type MIB_IPADDRTABLE struct {
 	NumEntries uint32
 	Table      [ANY_SIZE]MIB_IPADDRROW
@@ -128,6 +134,8 @@ type MIB_TCPROW struct {
 	RemoteAddr uint32
 	RemotePort uint32
 }
+
+type RGMIB_TCPROW [ARRAY_MAX / unsafe.Sizeof(MIB_TCPROW{})]MIB_TCPROW
 
 type MIB_TCPTABLE struct {
 	NumEntries uint32
