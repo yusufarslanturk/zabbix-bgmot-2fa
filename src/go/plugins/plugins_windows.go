@@ -1,4 +1,4 @@
-*
+/*
 ** Zabbix
 ** Copyright (C) 2001-2020 Zabbix SIA
 **
