@@ -1208,7 +1208,9 @@ define('IPMI_PRIVILEGE_OEM',		5);
 define('ZBX_HAVE_IPV6', true);
 define('ZBX_DISCOVERER_IPRANGE_LIMIT', 65536);
 
-define('ZBX_SOCKET_TIMEOUT',        3);                 // socket timeout limit
+define('ZBX_SOCKET_TIMEOUT',			3);		// Socket timeout limit.
+define('ZBX_CONNECT_TIMEOUT',			3);		// Zabbix server connect timeout limit.
+define('ZBX_MEDIA_TYPE_TEST_TIMEOUT',	65);	// Timeout limit set for media type test.
 define('ZBX_SOCKET_BYTES_LIMIT',    ZBX_MEBIBYTE * 16); // socket response size limit
 
 // value is also used in servercheck.js file
