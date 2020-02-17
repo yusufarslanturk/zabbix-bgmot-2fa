@@ -171,6 +171,7 @@ func (p *Plugin) getCpuUtil(params []string) (result interface{}, err error) {
 		if index = indexByCpu(params[0]); index < 0 || index >= len(p.cpus) {
 			return nil, errors.New("Invalid first parameter.")
 		}
+	case 0:
 	default:
 		return nil, errors.New("Too many parameters.")
 	}
