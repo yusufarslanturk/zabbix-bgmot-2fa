@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-10 10:16+0200\n"
+"POT-Creation-Date: 2020-02-17 12:03+0200\n"
 "PO-Revision-Date: 2020-02-10 08:08+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -217,7 +217,7 @@ msgctxt "screen reader"
 msgid "%1$s, selected"
 msgstr ""
 
-#: app/views/layout.htmlpage.php:106 include/page_header.php:284
+#: app/views/layout.htmlpage.php:107 include/page_header.php:264
 #, c-format
 msgid "%4$s failed login attempt logged. Last failed attempt was from %1$s on %2$s at %3$s."
 msgid_plural "%4$s failed login attempts logged. Last failed attempt was from %1$s on %2$s at %3$s."
@@ -3469,7 +3469,7 @@ msgstr "巨集的組態"
 msgid "Configuration of maintenance periods"
 msgstr ""
 
-#: app/controllers/CControllerMediatypeEdit.php:230
+#: app/controllers/CControllerMediatypeEdit.php:231
 #: app/controllers/CControllerMediatypeList.php:139
 msgid "Configuration of media types"
 msgstr "示警媒介類型的組態"
@@ -4319,7 +4319,7 @@ msgstr "硬體購買日期"
 msgid "Day"
 msgstr "日"
 
-#: include/func.inc.php:2664
+#: include/func.inc.php:2655
 msgid "Day before yesterday"
 msgstr ""
 
@@ -9892,37 +9892,37 @@ msgctxt "page navigation"
 msgid "Last"
 msgstr "末"
 
-#: include/func.inc.php:2717
+#: include/func.inc.php:2708
 #, c-format
 msgid "Last %1$d day"
 msgid_plural "Last %1$d days"
 msgstr[0] ""
 
-#: include/func.inc.php:2711
+#: include/func.inc.php:2702
 #, c-format
 msgid "Last %1$d hour"
 msgid_plural "Last %1$d hours"
 msgstr[0] ""
 
-#: include/func.inc.php:2704
+#: include/func.inc.php:2695
 #, c-format
 msgid "Last %1$d minute"
 msgid_plural "Last %1$d minutes"
 msgstr[0] ""
 
-#: include/func.inc.php:2720
+#: include/func.inc.php:2711
 #, c-format
 msgid "Last %1$d month"
 msgid_plural "Last %1$d months"
 msgstr[0] ""
 
-#: include/func.inc.php:2697
+#: include/func.inc.php:2688
 #, c-format
 msgid "Last %1$d second"
 msgid_plural "Last %1$d seconds"
 msgstr[0] ""
 
-#: include/func.inc.php:2723
+#: include/func.inc.php:2714
 #, c-format
 msgid "Last %1$d year"
 msgid_plural "Last %1$d years"
@@ -13191,7 +13191,7 @@ msgstr ""
 msgid "Preview"
 msgstr "預覽"
 
-#: include/func.inc.php:2667
+#: include/func.inc.php:2658
 msgid "Previous month"
 msgstr ""
 
@@ -13204,11 +13204,11 @@ msgstr ""
 msgid "Previous value"
 msgstr ""
 
-#: include/func.inc.php:2666
+#: include/func.inc.php:2657
 msgid "Previous week"
 msgstr ""
 
-#: include/func.inc.php:2668
+#: include/func.inc.php:2659
 msgid "Previous year"
 msgstr ""
 
@@ -16218,7 +16218,7 @@ msgstr ""
 msgid "Theme"
 msgstr "背景主題"
 
-#: include/func.inc.php:2665
+#: include/func.inc.php:2656
 msgid "This day last week"
 msgstr ""
 
@@ -16231,11 +16231,11 @@ msgstr "這欄位是由項目\"%s\"自動填入的."
 msgid "This is the test message from Zabbix"
 msgstr ""
 
-#: include/func.inc.php:2673 srv_status.php:41
+#: include/func.inc.php:2664 srv_status.php:41
 msgid "This month"
 msgstr "本月"
 
-#: include/func.inc.php:2674
+#: include/func.inc.php:2665
 msgid "This month so far"
 msgstr ""
 
@@ -16247,19 +16247,19 @@ msgstr "這篩選-列不是空白. 刪除它?"
 msgid "This screen row is not empty. Delete it?"
 msgstr "這篩選-行不是空白. 刪除它?"
 
-#: include/func.inc.php:2671 srv_status.php:40
+#: include/func.inc.php:2662 srv_status.php:40
 msgid "This week"
 msgstr "本周"
 
-#: include/func.inc.php:2672
+#: include/func.inc.php:2663
 msgid "This week so far"
 msgstr ""
 
-#: include/func.inc.php:2675 srv_status.php:42
+#: include/func.inc.php:2666 srv_status.php:42
 msgid "This year"
 msgstr "本年"
 
-#: include/func.inc.php:2676
+#: include/func.inc.php:2667
 msgid "This year so far"
 msgstr ""
 
@@ -16385,12 +16385,12 @@ msgstr "到"
 msgid "To set a host interface select a single item type for all items"
 msgstr "要設定一個主機介面, 選擇一個單一的項目類型給所有的項目"
 
-#: include/classes/screens/CScreenProblem.php:749 include/func.inc.php:2669
+#: include/classes/screens/CScreenProblem.php:749 include/func.inc.php:2660
 #: srv_status.php:39
 msgid "Today"
 msgstr "今天"
 
-#: include/func.inc.php:2670
+#: include/func.inc.php:2661
 msgid "Today so far"
 msgstr ""
 
@@ -18453,7 +18453,7 @@ msgstr "每年"
 msgid "Yes"
 msgstr "是"
 
-#: include/classes/screens/CScreenProblem.php:757 include/func.inc.php:2663
+#: include/classes/screens/CScreenProblem.php:757 include/func.inc.php:2654
 msgid "Yesterday"
 msgstr ""
 
@@ -18543,7 +18543,7 @@ msgstr ""
 msgid "ZABBIX"
 msgstr "Zabbix"
 
-#: include/page_header.php:156
+#: include/page_header.php:136
 msgid "Zabbix"
 msgstr "Zabbix"
 
@@ -18741,7 +18741,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: include/classes/validators/CApiInputValidator.php:1434
-#: include/validate.inc.php:227 include/validate.inc.php:590
+#: include/validate.inc.php:227 include/validate.inc.php:591
 msgid "a time unit is expected"
 msgstr ""
 
@@ -19634,7 +19634,7 @@ msgstr ""
 msgid "problem pattern"
 msgstr ""
 
-#: include/page_header.php:159 include/views/general.warning.php:21
+#: include/page_header.php:139 include/views/general.warning.php:21
 #, c-format
 msgid "refreshed every %1$s sec."
 msgstr "每 %1$s 秒更新"
@@ -20034,7 +20034,7 @@ msgstr ""
 #: include/classes/api/services/CMap.php:1146
 #: include/classes/validators/CApiInputValidator.php:356
 #: include/classes/validators/CApiInputValidator.php:664
-#: include/validate.inc.php:583
+#: include/validate.inc.php:584
 #, c-format
 msgid "value must be one of %1$s"
 msgstr ""
