@@ -1,4 +1,4 @@
-/*
+*
 ** Zabbix
 ** Copyright (C) 2001-2020 Zabbix SIA
 **
@@ -22,11 +22,8 @@ package plugins
 import (
 	_ "zabbix.com/plugins/log"
 	_ "zabbix.com/plugins/net/netif"
-<<<<<<< HEAD
-=======
 	_ "zabbix.com/plugins/system/uptime"
 	_ "zabbix.com/plugins/system/users"
->>>>>>> 9c454598582cbfbbdba087d563a0c70410bc5cc7
 	_ "zabbix.com/plugins/net/tcp"
 	_ "zabbix.com/plugins/systemrun"
 	_ "zabbix.com/plugins/vfs/file"
