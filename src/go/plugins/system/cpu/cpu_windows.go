@@ -41,7 +41,7 @@ func (p *Plugin) getCpuLoad(params []string) (result interface{}, err error) {
 	period := historyIndex(60)
 	switch len(params) {
 	case 2: // mode parameter
-		if period = periodByMode(params[2]); period < 0 {
+		if period = periodByMode(params[1]); period < 0 {
 			return nil, errors.New("Invalid third parameter.")
 		}
 		fallthrough
