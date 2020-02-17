@@ -27,7 +27,6 @@ import "C"
 import (
 	"bufio"
 	"bytes"
-	"errors"
 	"os"
 	"strconv"
 	"strings"
@@ -118,7 +117,7 @@ func numCPU() int {
 }
 
 func (p *Plugin) Start() {
-	p.cpus = p.newCpus(numCPU() + 1)
+	p.cpus = p.newCpus(numCPU())
 }
 
 func (p *Plugin) Stop() {
