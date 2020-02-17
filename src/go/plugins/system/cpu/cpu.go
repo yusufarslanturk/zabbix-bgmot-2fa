@@ -168,17 +168,13 @@ func (p *Plugin) getCpuUtil(params []string) (result interface{}, err error) {
 		}
 		fallthrough
 	case 1: // cpu number or all;
-		if index = indexByCpu(params[0]); index < 0 {
+		if index = indexByCpu(params[0]); index < 0 || index >= len(p.cpus) {
 			return nil, errors.New("Invalid first parameter.")
 		}
-	case 0:
 	default:
 		return nil, errors.New("Too many parameters.")
 	}
 
-	if index < 0 || index >= len(p.cpus) {
-		return nil, errors.New("Invalid first parameter.")
-	}
 	cpu := p.cpus[index]
 	if cpu.status == cpuStatusOffline {
 		return nil, errors.New("CPU is offline.")
