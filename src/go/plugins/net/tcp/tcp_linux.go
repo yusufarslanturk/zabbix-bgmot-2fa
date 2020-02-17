@@ -17,10 +17,19 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package tcp
+package tcpudp
 
-import "errors"
+import (
+	"errors"
+	"zabbix.com/pkg/plugin"
+)
 
 func exportSystemTcpListen(port uint16) (result interface{}, err error) {
 	return nil, errors.New("Not supported.")
+}
+
+func init() {
+	plugin.RegisterMetrics(&impl, "Tcp",
+		"net.tcp.port", "Checks if it is possible to make TCP connection to specified port.",
+	)
 }

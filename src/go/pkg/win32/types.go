@@ -24,6 +24,8 @@ package win32
 import (
 	"syscall"
 	"unsafe"
+
+	"golang.org/x/sys/windows"
 )
 
 type Hlib syscall.Handle
@@ -127,6 +129,7 @@ type MIB_IPADDRTABLE struct {
 	Table      [ANY_SIZE]MIB_IPADDRROW
 }
 
+<<<<<<< HEAD
 type MIB_TCPROW struct {
 	State      uint32
 	LocalAddr  uint32
@@ -140,4 +143,31 @@ type RGMIB_TCPROW [ARRAY_MAX / unsafe.Sizeof(MIB_TCPROW{})]MIB_TCPROW
 type MIB_TCPTABLE struct {
 	NumEntries uint32
 	Table      [ANY_SIZE]MIB_TCPROW
+=======
+type (
+	PDH_HQUERY   windows.Handle
+	PDH_HCOUNTER windows.Handle
+)
+
+type PDH_COUNTER_PATH_ELEMENTS struct {
+	MachineName    uintptr
+	ObjectName     uintptr
+	InstanceName   uintptr
+	ParentInstance uintptr
+	InstanceIndex  uint32
+	CounterName    uintptr
+}
+type LP_PDH_COUNTER_PATH_ELEMENTS *PDH_COUNTER_PATH_ELEMENTS
+
+type PDH_FMT_COUNTERVALUE_DOUBLE struct {
+	Status uint32
+	_      uint32
+	Value  float64
+}
+
+type PDH_FMT_COUNTERVALUE_LARGE struct {
+	Status uint32
+	_      uint32
+	Value  int64
+>>>>>>> 9c454598582cbfbbdba087d563a0c70410bc5cc7
 }
