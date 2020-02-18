@@ -5356,6 +5356,10 @@ table.preprocessing-test-results .rel-container {
   .host-avail-widget td {
     height: 100%; }
 
+  /**
+   * IE11 makes textarea elements inherit whatever white-space property is applied to the direct parent.
+   * https://stackoverflow.com/a/20327197
+   */
   .overlay-dialogue-body textarea {
     white-space: pre-wrap; } }
 .list-table thead th {

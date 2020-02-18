@@ -7548,6 +7548,10 @@ table.preprocessing-test-results {
 		}
 	}
 
+	/**
+	 * IE11 makes textarea elements inherit whatever white-space property is applied to the direct parent.
+	 * https://stackoverflow.com/a/20327197
+	 */
 	.overlay-dialogue-body {
 
 		textarea {
