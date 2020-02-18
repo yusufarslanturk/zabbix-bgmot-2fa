@@ -92,8 +92,11 @@ func (c *pdhCollector) open(numCpu int) {
 	if groups == 1 {
 		groups = win32.GetActiveProcessorGroupCount()
 	}
-	cpuPerGroup := numCPU() / groups
+	cpuPerGroup := numCpu / groups
 	index := 1
+
+	c.log.Debugf("cpu_groups = %d, cpus_per_group = %d, cpus = %d", groups, cpuPerGroup, numCpu)
+
 	for g := 0; g < groups; g++ {
 		for i := 0; i < cpuPerGroup; i++ {
 			cpe.InstanceName = fmt.Sprintf("%d,%d", g, i)
