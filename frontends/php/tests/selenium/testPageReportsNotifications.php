@@ -28,9 +28,9 @@ class testPageReportsNotifications extends CLegacyWebTest {
 		$this->zbxTestCheckHeader('Notifications');
 
 		// Check dropdown elements
-		$this->zbxTestDropdownHasOptions('media_type', ['all', 'Email', 'SMS']);
+		$this->zbxTestDropdownHasOptions('media_type', ['all', 'Discord', 'Email', 'SMS', 'Mattermost',  'Opsgenie', 'PagerDuty', 'Pushover', 'Slack', 'SMS', 'Test script']);
 		$this->zbxTestDropdownHasOptions('period', ['Daily', 'Weekly', 'Monthly', 'Yearly']);
-		$this->zbxTestDropdownHasOptions('year', ['2012', '2013', '2014', '2015', '2016', '2017']);
+		$this->zbxTestDropdownHasOptions('year', ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']);
 		// Check default selected dropdown values
 		$this->zbxTestDropdownAssertSelected('media_type', 'all');
 		$this->zbxTestDropdownAssertSelected('period', 'Weekly');
@@ -38,7 +38,7 @@ class testPageReportsNotifications extends CLegacyWebTest {
 		// Check media type links
 		$media_types = CDBHelper::getAll('SELECT mediatypeid,name FROM media_type');
 		foreach ($media_types as $media) {
-			$this->zbxTestAssertElementText("//a[contains(@href, 'mediatypeid=".$media['mediatypeid']."')]", $media['name']);
+			$this->zbxTestAssertElementText('//a[@href="zabbix.php?action=mediatype.edit&mediatypeid='.$media['mediatypeid'].'"]', $media['name']);
 		}
 
 		// Get users from DB
