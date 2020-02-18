@@ -32,7 +32,7 @@ const pluginName = "Cpu"
 var impl Plugin
 
 const (
-	maxHistory = 60*15 + 1
+	maxHistory = 60*15 + 2
 )
 
 const (
