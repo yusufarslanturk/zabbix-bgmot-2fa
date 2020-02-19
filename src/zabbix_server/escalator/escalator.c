@@ -1113,7 +1113,6 @@ static void	get_mediatype_params(const DB_EVENT *event, const DB_EVENT *r_event,
 	{
 		name = zbx_strdup(NULL, row[0]);
 		value = zbx_strdup(NULL, row[1]);
-
 		substitute_simple_macros(&actionid, event, r_event, &userid, NULL, NULL, NULL, &alert,
 				ack, &name, message_type, NULL, 0);
 		substitute_simple_macros(&actionid, event, r_event, &userid, NULL, NULL, NULL, &alert,
@@ -1704,7 +1703,7 @@ static void	escalation_execute_acknowledge_operations(const DB_EVENT *event, con
 	}
 	DBfree_result(result);
 
-	flush_user_msg(&user_msg, 1, event, NULL, action->actionid, ack);
+	flush_user_msg(&user_msg, 1, event, r_event, action->actionid, ack);
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
 }
@@ -2621,7 +2620,6 @@ static int	process_escalations(int now, int *nextcheck, unsigned int escalation_
 	zbx_vector_uint64_destroy(&eventids);
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
-
 	return ret; /* performance metric */
 }
 
