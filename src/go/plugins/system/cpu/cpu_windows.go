@@ -21,9 +21,10 @@ package cpu
 
 import (
 	"errors"
-	"runtime"
+	"unsafe"
 
 	"zabbix.com/pkg/plugin"
+	"zabbix.com/pkg/win32"
 )
 
 // Plugin -
@@ -33,8 +34,30 @@ type Plugin struct {
 	collector *pdhCollector
 }
 
-func numCPU() int {
-	return runtime.NumCPU()
+func numCPU() (numCpu int) {
+	size, err := win32.GetLogicalProcessorInformationEx(win32.RelationProcessorCore, nil)
+	if err != nil {
+		return
+	}
+
+	b := make([]byte, size)
+	size, err = win32.GetLogicalProcessorInformationEx(win32.RelationProcessorCore, b)
+	if err != nil {
+		return
+	}
+
+	var sinfo *win32.SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX
+	for i := uint32(0); i < size; i += sinfo.Size {
+		sinfo = (*win32.SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)(unsafe.Pointer(&b[i]))
+		pinfo := (*win32.PROCESSOR_RELATIONSHIP)(unsafe.Pointer(&sinfo.Data[0]))
+		groups := (*[1 << 16]win32.GROUP_AFFINITY)(unsafe.Pointer(&pinfo.GroupMask[0]))[:pinfo.GroupCount:pinfo.GroupCount]
+		for _, group := range groups {
+			for mask := group.Mask; mask != 0; mask >>= 1 {
+				numCpu += int(mask & 1)
+			}
+		}
+	}
+	return
 }
 
 func (p *Plugin) getCpuLoad(params []string) (result interface{}, err error) {
@@ -83,8 +106,12 @@ func (p *Plugin) Collect() (err error) {
 }
 
 func (p *Plugin) Start() {
-	p.cpus = p.newCpus(numCPU())
-	p.collector.open(numCPU())
+	numCpu := numCPU()
+	if numCpu == 0 {
+		p.Warningf("cannot obtain the total number of CPUs, only total values will be available")
+	}
+	p.cpus = p.newCpus(numCpu)
+	p.collector.open(numCpu)
 }
 
 func (p *Plugin) Stop() {

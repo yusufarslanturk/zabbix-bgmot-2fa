@@ -152,3 +152,11 @@ type NUMA_NODE_RELATIONSHIP struct {
 	Reserved   [20]uint8
 	GroupMask  GROUP_AFFINITY
 }
+
+type PROCESSOR_RELATIONSHIP struct {
+	Flags           uint8
+	EfficiencyClass uint8
+	Reserved        [20]uint8
+	GroupCount      uint16
+	GroupMask       [1]GROUP_AFFINITY
+}

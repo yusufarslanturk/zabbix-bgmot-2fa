@@ -115,10 +115,12 @@ func (c *pdhCollector) open(numCpu int) {
 
 // close function closes opened PDH query
 func (c *pdhCollector) close() {
-	_ = win32.PdhCloseQuery(c.hQuery)
-	c.hQuery = 0
-	c.hCpuLoad = 0
-	c.hCpuUtil = nil
+	if c.hQuery != 0 {
+		_ = win32.PdhCloseQuery(c.hQuery)
+		c.hQuery = 0
+		c.hCpuLoad = 0
+		c.hCpuUtil = nil
+	}
 }
 
 func (c *pdhCollector) collect() (ok bool, err error) {
