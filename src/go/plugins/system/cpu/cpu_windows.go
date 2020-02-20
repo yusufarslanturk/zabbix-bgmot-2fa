@@ -106,12 +106,13 @@ func (p *Plugin) Collect() (err error) {
 }
 
 func (p *Plugin) Start() {
-	numCpu := numCPU()
-	if numCpu == 0 {
-		p.Warningf("cannot obtain the total number of CPUs, only total values will be available")
+	numCpus := numCPU()
+	numGroups := getNumaNodeCount()
+	if numCpus == 0 || numGroups == 0 {
+		p.Warningf("cannot calculate the number of CPUs per group, only total values will be available")
 	}
-	p.cpus = p.newCpus(numCpu)
-	p.collector.open(numCpu)
+	p.cpus = p.newCpus(numCpus)
+	p.collector.open(numCpus, numGroups)
 }
 
 func (p *Plugin) Stop() {

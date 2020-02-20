@@ -57,7 +57,7 @@ func getNumaNodeCount() (count int) {
 }
 
 // open function initializes PDH query/counters for cpu metric gathering
-func (c *pdhCollector) open(numCpu int) {
+func (c *pdhCollector) open(numCpus int, numGroups int) {
 	var err error
 	if c.hQuery, err = win32.PdhOpenQuery(nil, 0); err != nil {
 		c.log.Errf("cannot open performance monitor query for CPU statistics: %s", err)
@@ -69,7 +69,7 @@ func (c *pdhCollector) open(numCpu int) {
 		c.log.Errf("cannot add performance counter for CPU load statistics: %s", err)
 	}
 
-	c.hCpuUtil = make([]win32.PDH_HCOUNTER, numCpu+1)
+	c.hCpuUtil = make([]win32.PDH_HCOUNTER, numCpus+1)
 	cpe := pdh.CounterPathElements{
 		ObjectName:    pdh.CounterName(pdh.ObjectProcessor),
 		InstanceName:  "_Total",
@@ -85,19 +85,19 @@ func (c *pdhCollector) open(numCpu int) {
 	if err != nil {
 		c.log.Errf("cannot add performance counter for total CPU utilization: %s", err)
 	}
+
+	if numCpus == 0 || numGroups == 0 {
+		return
+	}
+
 	// add per cpu utilization counters
 
 	cpe.ObjectName = pdh.CounterName(pdh.ObjectProcessorInfo)
-	groups := getNumaNodeCount()
-	if groups == 1 {
-		groups = win32.GetActiveProcessorGroupCount()
-	}
-	cpuPerGroup := numCpu / groups
+	cpuPerGroup := numCpus / numGroups
+	c.log.Debugf("cpu_groups = %d, cpus_per_group = %d, cpus = %d", numGroups, cpuPerGroup, numCpus)
 	index := 1
 
-	c.log.Debugf("cpu_groups = %d, cpus_per_group = %d, cpus = %d", groups, cpuPerGroup, numCpu)
-
-	for g := 0; g < groups; g++ {
+	for g := 0; g < numGroups; g++ {
 		for i := 0; i < cpuPerGroup; i++ {
 			cpe.InstanceName = fmt.Sprintf("%d,%d", g, i)
 			path, err = pdh.MakePath(&cpe)
