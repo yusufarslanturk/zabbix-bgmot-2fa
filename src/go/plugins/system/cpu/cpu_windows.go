@@ -120,6 +120,28 @@ func (p *Plugin) Stop() {
 	p.cpus = nil
 }
 
+func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
+	if p.cpus == nil || p.cpus[0].head == p.cpus[0].tail {
+		// no data gathered yet
+		return
+	}
+	switch key {
+	case "system.cpu.discovery":
+		return p.getCpuDiscovery(params)
+	case "system.cpu.load":
+		return p.getCpuLoad(params)
+	case "system.cpu.num":
+		if len(params) > 0 && params[0] == "max" {
+			return nil, errors.New("Invalid first parameter.")
+		}
+		return p.getCpuNum(params)
+	case "system.cpu.util":
+		return p.getCpuUtil(params)
+	default:
+		return nil, plugin.UnsupportedMetricError
+	}
+}
+
 func init() {
 	impl.collector = newPdhCollector(&impl)
 	plugin.RegisterMetrics(&impl, pluginName,

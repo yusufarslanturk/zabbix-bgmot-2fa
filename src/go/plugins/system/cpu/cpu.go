@@ -23,8 +23,6 @@ import (
 	"encoding/json"
 	"errors"
 	"strconv"
-
-	"zabbix.com/pkg/plugin"
 )
 
 const pluginName = "Cpu"
@@ -181,25 +179,6 @@ func (p *Plugin) getCpuUtil(params []string) (result interface{}, err error) {
 		return nil, errors.New("CPU is offline.")
 	}
 	return cpu.counterAverage(counter, period), nil
-}
-
-func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
-	if p.cpus == nil || p.cpus[0].head == p.cpus[0].tail {
-		// no data gathered yet
-		return
-	}
-	switch key {
-	case "system.cpu.discovery":
-		return p.getCpuDiscovery(params)
-	case "system.cpu.load":
-		return p.getCpuLoad(params)
-	case "system.cpu.num":
-		return p.getCpuNum(params)
-	case "system.cpu.util":
-		return p.getCpuUtil(params)
-	default:
-		return nil, plugin.UnsupportedMetricError
-	}
 }
 
 func (p *Plugin) newCpus(num int) (cpus []*cpuUnit) {

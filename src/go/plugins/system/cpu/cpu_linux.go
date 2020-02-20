@@ -124,6 +124,23 @@ func (p *Plugin) Stop() {
 	p.cpus = nil
 }
 
+func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
+	if p.cpus == nil || p.cpus[0].head == p.cpus[0].tail {
+		// no data gathered yet
+		return
+	}
+	switch key {
+	case "system.cpu.discovery":
+		return p.getCpuDiscovery(params)
+	case "system.cpu.num":
+		return p.getCpuNum(params)
+	case "system.cpu.util":
+		return p.getCpuUtil(params)
+	default:
+		return nil, plugin.UnsupportedMetricError
+	}
+}
+
 func init() {
 	plugin.RegisterMetrics(&impl, pluginName,
 		"system.cpu.discovery", "List of detected CPUs/CPU cores, used for low-level discovery.",
