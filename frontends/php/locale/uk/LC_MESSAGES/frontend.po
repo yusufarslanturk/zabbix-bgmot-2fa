@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-17 12:03+0200\n"
-"PO-Revision-Date: 2020-02-06 07:07+0300\n"
+"PO-Revision-Date: 2020-02-21 03:35+0300\n"
 "Last-Translator: Oleksii <oleksii.zagorskyi@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: uk\n"
@@ -13,14 +13,14 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1580965645.000000\n"
+"X-POOTLE-MTIME: 1582248950.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:67
 #: include/classes/db/OracleDbBackend.php:87
 #: include/classes/db/PostgresqlDbBackend.php:76
 #, c-format
 msgid "\"%1$s\" instead \"%2$s\""
-msgstr ""
+msgstr "\"%1$s\" замість \"%2$s\""
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -5329,7 +5329,7 @@ msgstr "Не зберігати історію"
 #: include/views/configuration.item.prototype.edit.php:680
 #: include/views/configuration.item.prototype.massupdate.php:422
 msgid "Do not keep trends"
-msgstr ""
+msgstr "Не зберігати тренди"
 
 #: jsLoader.php:146 jsLoader.php:269
 msgid "Do you wish to replace the conditional expression?"
@@ -5452,12 +5452,12 @@ msgstr "Дублікат назви важливості \"%s\"."
 #: include/classes/api/services/CTriggerGeneral.php:504
 #, c-format
 msgid "Duplicate trigger prototype with name \"%1$s\"."
-msgstr ""
+msgstr "Дублікат прототипа тригера з іменем \"%1$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:498
 #, c-format
 msgid "Duplicate trigger with name \"%1$s\"."
-msgstr ""
+msgstr "Дублікат тригера з іменем \"%1$s\"."
 
 #: include/classes/api/services/CMap.php:735
 #: include/classes/api/services/CMap.php:1199
@@ -5512,7 +5512,7 @@ msgstr "Кожнен URL-запит повинен мати унікальне �
 
 #: include/classes/widgets/CWidgetHelper.php:1111
 msgid "Each item"
-msgstr ""
+msgstr "Кожний елемент даних"
 
 #: app/views/administration.user.edit.php:272
 #: include/views/configuration.action.edit.php:506
@@ -5657,7 +5657,7 @@ msgstr "Пустий макрос умови фільтру для правил�
 #: include/classes/api/services/CAction.php:2756
 #, c-format
 msgid "Empty filter condition operator for action \"%1$s\"."
-msgstr ""
+msgstr "Пустий оператор умови фільтрації для дії \"%1$s\"."
 
 #: include/classes/api/services/CAction.php:2740
 #, c-format
@@ -5884,7 +5884,7 @@ msgstr "Шифрування"
 
 #: app/views/administration.autoreg.edit.php:50
 msgid "Encryption level"
-msgstr ""
+msgstr "Рівень шифрування"
 
 #: app/views/popup.preproctestedit.view.php:114
 msgid "End of line sequence"
