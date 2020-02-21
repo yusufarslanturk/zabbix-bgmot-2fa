@@ -343,6 +343,7 @@ func (t *starterTask) getWeight() int {
 	return t.plugin.capacity
 }
 
+// stopperTask invokes plugin Runner interface Stop method when plugin is being deactivated
 type stopperTask struct {
 	taskBase
 }

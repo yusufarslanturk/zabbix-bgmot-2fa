@@ -37,12 +37,23 @@ import (
 	"zabbix.com/pkg/plugin"
 )
 
+const (
+	// number of seconds to wait for plugins to finish during scheduler shutdown
+	shutdownTimeout = 5
+	// inactive shutdown value
+	shutdownInactive = -1
+)
+
 type Manager struct {
 	input       chan interface{}
 	plugins     map[string]*pluginAgent
 	pluginQueue pluginHeap
 	clients     map[uint64]*client
 	aliases     *alias.Manager
+	// number of active tasks (running in their own goroutines)
+	activeTasksNum int
+	// number of seconds left on shutdown timer
+	shutdownSeconds int
 }
 
 type updateRequest struct {
@@ -180,6 +191,7 @@ func (m *Manager) processQueue(now time.Time) {
 				continue
 			}
 
+			m.activeTasksNum++
 			p.reserveCapacity(p.popTask())
 			task.perform(m)
 
@@ -196,6 +208,7 @@ func (m *Manager) processQueue(now time.Time) {
 }
 
 func (m *Manager) processFinishRequest(task performer) {
+	m.activeTasksNum--
 	p := task.getPlugin()
 	p.releaseCapacity(task)
 	if p.active() && task.isActive() && task.isRecurring() {
@@ -228,6 +241,28 @@ func (m *Manager) rescheduleQueue(now time.Time) {
 	m.pluginQueue = queue
 }
 
+// deactivatePlugins removes all tasks and creates stopper tasks for active runner plugins
+func (m *Manager) deactivatePlugins() {
+	m.shutdownSeconds = shutdownTimeout
+
+	m.pluginQueue = make(pluginHeap, 0, len(m.pluginQueue))
+	for _, p := range m.plugins {
+		if p.refcount != 0 {
+			p.tasks = make(performerHeap, 0)
+			if _, ok := p.impl.(plugin.Runner); ok {
+				task := &stopperTask{
+					taskBase: taskBase{plugin: p, active: true},
+				}
+				p.enqueueTask(task)
+				heap.Push(&m.pluginQueue, p)
+				p.refcount = 0
+				log.Debugf("created final stopper task for plugin %s", p.name())
+			}
+			p.refcount = 0
+		}
+	}
+}
+
 func (m *Manager) run() {
 	defer log.PanicHook()
 	log.Debugf("starting manager")
@@ -252,22 +287,33 @@ run:
 			}
 			lastTick = now
 			m.processQueue(now)
-			// cleanup plugins used by passive checks
-			if now.Sub(cleaned) >= time.Hour {
-				if passive, ok := m.clients[0]; ok {
-					m.cleanupClient(passive, now)
+			if m.shutdownSeconds != shutdownInactive {
+				m.shutdownSeconds--
+				if m.shutdownSeconds == 0 {
+					break run
 				}
-				// remove inactive clients
-				for _, client := range m.clients {
-					if len(client.pluginsInfo) == 0 {
-						delete(m.clients, client.ID())
+			} else {
+				// cleanup plugins used by passive checks
+				if now.Sub(cleaned) >= time.Hour {
+					if passive, ok := m.clients[0]; ok {
+						m.cleanupClient(passive, now)
 					}
+					// remove inactive clients
+					for _, client := range m.clients {
+						if len(client.pluginsInfo) == 0 {
+							delete(m.clients, client.ID())
+						}
+					}
+					cleaned = now
 				}
-				cleaned = now
 			}
 		case u := <-m.input:
 			if u == nil {
-				break run
+				if m.activeTasksNum+len(m.pluginQueue) == 0 {
+					break run
+				}
+				m.deactivatePlugins()
+				m.processQueue(time.Now())
 			}
 			switch v := u.(type) {
 			case *updateRequest:
@@ -275,6 +321,9 @@ run:
 				m.processQueue(time.Now())
 			case performer:
 				m.processFinishRequest(v)
+				if m.shutdownSeconds != shutdownInactive && m.activeTasksNum+len(m.pluginQueue) == 0 {
+					break run
+				}
 				m.processQueue(time.Now())
 			case *queryRequest:
 				if response, err := m.processQuery(v); err != nil {
@@ -298,6 +347,7 @@ func (m *Manager) init() {
 	m.pluginQueue = make(pluginHeap, 0, len(plugin.Metrics))
 	m.clients = make(map[uint64]*client)
 	m.plugins = make(map[string]*pluginAgent)
+	m.shutdownSeconds = shutdownInactive
 
 	metrics := make([]*plugin.Metric, 0, len(plugin.Metrics))
 
