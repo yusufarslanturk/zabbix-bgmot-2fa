@@ -60,9 +60,9 @@ static duk_ret_t	es_zabbix_ctor(duk_context *ctx)
 
 /******************************************************************************
  *                                                                            *
- * Function: es_zabbix_status                                            *
+ * Function: es_zabbix_status                                                 *
  *                                                                            *
- * Purpose: Curlzabbix.Status method                                     *
+ * Purpose: Curlzabbix.Status method                                          *
  *                                                                            *
  ******************************************************************************/
 static duk_ret_t	es_zabbix_log(duk_context *ctx)
@@ -71,11 +71,12 @@ static duk_ret_t	es_zabbix_log(duk_context *ctx)
 	return 0;
 }
 
+
 /******************************************************************************
  *                                                                            *
  * Function: es_zabbix_base64encode                                           *
  *                                                                            *
- * Purpose: encodes ECMAScript string to base64 string                       *
+ * Purpose: converts cesu8 to utf8 and then encodes to base64 string          *
  *                                                                            *
  * Parameters: ctx - [IN] pointer to duk_context                              *
  *                                                                            *
@@ -88,9 +89,12 @@ static duk_ret_t	es_zabbix_base64encode(duk_context *ctx)
 	duk_size_t byte_len = 0;
 	const char *str = NULL;
 	char *b64str = NULL;
+	char *utf8 = NULL;
 
 	str = duk_require_lstring(ctx, 0, &byte_len);
-	str_base64_encode_dyn(str, &b64str, (int)byte_len);
+	zbx_cesu8_to_utf8(str, &utf8);
+	str_base64_encode_dyn(utf8, &b64str, (int)strlen(utf8));
+	zbx_free(utf8);
 	duk_pop(ctx);
 	duk_push_string(ctx, b64str);
 	zbx_free(b64str);
@@ -101,7 +105,7 @@ static duk_ret_t	es_zabbix_base64encode(duk_context *ctx)
  *                                                                            *
  * Function: es_zabbix_base64decode                                           *
  *                                                                            *
- * Purpose: decodes base64 string to ECMAScript string                        *
+ * Purpose: decodes base64 string                                             *
  *                                                                            *
  * Parameters: ctx - [IN] pointer to duk_context                              *
  *                                                                            *
