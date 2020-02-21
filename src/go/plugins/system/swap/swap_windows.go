@@ -88,6 +88,6 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 func init() {
 	plugin.RegisterMetrics(&impl, "Swap",
-		"system.swap.size", "Returns 	Swap space size in bytes or in percentage from total.",
+		"system.swap.size", "Returns Swap space size in bytes or in percentage from total.",
 	)
 }
