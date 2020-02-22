@@ -185,6 +185,14 @@ func main() {
 	flag.BoolVar(&printFlag, "print", printDefault, printDescription)
 	flag.BoolVar(&printFlag, "p", printDefault, printDescription+" (shorthand)")
 
+	var verboseFlag bool
+	const (
+		verboseDefault     = false
+		verboseDescription = "Enable verbose output for metric testing or printing"
+	)
+	flag.BoolVar(&verboseFlag, "verbose", verboseDefault, verboseDescription)
+	flag.BoolVar(&verboseFlag, "v", verboseDefault, verboseDescription+" (shorthand)")
+
 	var versionFlag bool
 	const (
 		versionDefault     = false
@@ -202,7 +210,7 @@ func main() {
 
 	flag.Parse()
 
-	var argConfig, argTest, argPrint, argVersion bool
+	var argConfig, argTest, argPrint, argVersion, argVerbose bool
 
 	// Need to manually check if the flag was specified, as default flag package
 	// does not offer automatic detection. Consider using third party package.
@@ -216,6 +224,8 @@ func main() {
 			argPrint = true
 		case "V", "version":
 			argVersion = true
+		case "v", "verbose":
+			argVerbose = true
 		}
 	})
 
@@ -239,19 +249,38 @@ func main() {
 	}
 
 	if argTest || argPrint {
-		if err := log.Open(log.Console, log.Warning, "", 0); err != nil {
+		var level int
+		if argVerbose {
+			level = log.Trace
+		} else {
+			level = log.Empty
+		}
+		if err := log.Open(log.Console, level, "", 0); err != nil {
 			fatalExit("cannot initialize logger", err)
 		}
 
+		var m *scheduler.Manager
+		var err error
+		if m, err = scheduler.NewManager(&agent.Options); err != nil {
+			fatalExit("cannot create scheduling manager", err)
+		}
+		m.Start()
+
 		if argTest {
-			if err := agent.CheckMetric(testFlag); err != nil {
+			if err := checkMetric(m, testFlag); err != nil {
 				fatalExit("cannot execute metric", err)
 			}
 		} else {
-			agent.CheckMetrics()
+			checkMetrics(m)
 		}
 
+		m.Stop()
+		monitor.Wait(monitor.Primary)
 		os.Exit(0)
+	}
+
+	if argVerbose {
+		fatalExit("", errors.New("verbose parameter can be specified only with test or print parameters"))
 	}
 
 	if remoteCommand != "" {
