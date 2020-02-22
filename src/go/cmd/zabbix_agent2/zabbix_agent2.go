@@ -385,16 +385,22 @@ func main() {
 	if agent.Options.StatusPort != 0 {
 		statuslistener.Stop()
 	}
-
 	for _, listener := range listeners {
 		listener.Stop()
 	}
 	for i := 0; i < len(serverConnectors); i++ {
-		serverConnectors[i].Stop()
+		serverConnectors[i].StopConnector()
 	}
 	manager.Stop()
+	monitor.Wait(monitor.Primary)
 
-	monitor.Wait()
+	// split shutdown in two steps to ensure that result cache is still running while manager is
+	// being stopped, because there might be pending exporters that could block if result cache
+	// is stoppped and its input channel is full.
+	for i := 0; i < len(serverConnectors); i++ {
+		serverConnectors[i].StopCache()
+	}
+	monitor.Wait(monitor.Secondary)
 
 	farewell := fmt.Sprintf("Zabbix Agent 2 stopped. (%s)", version.Long())
 	log.Infof(farewell)
@@ -406,7 +412,7 @@ func main() {
 
 func fatalExit(message string, err error) {
 	if len(message) == 0 {
-		message = fmt.Sprintf("%s", err.Error())
+		message = err.Error()
 	} else {
 		message = fmt.Sprintf("%s: %s", message, err.Error())
 	}
