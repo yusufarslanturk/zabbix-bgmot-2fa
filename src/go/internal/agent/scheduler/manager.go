@@ -385,7 +385,7 @@ func (m *Manager) init() {
 			pagent = &pluginAgent{
 				impl:         metric.Plugin,
 				tasks:        make(performerHeap, 0),
-				capacity:     capacity,
+				maxCapacity:  capacity,
 				usedCapacity: 0,
 				index:        -1,
 				refcount:     0,
