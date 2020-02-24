@@ -127,6 +127,23 @@ func (m *Manager) cleanupClient(c *client, now time.Time) {
 func (m *Manager) processUpdateRequest(update *updateRequest, now time.Time) {
 	log.Debugf("[%d] processing update request (%d requests)", update.clientID, len(update.requests))
 
+	// immediately fail direct checks and ignore bulk requests when shutting down
+	if m.shutdownSeconds != shutdownInactive {
+		if update.clientID == 0 {
+			if len(update.requests) == 1 {
+				update.sink.Write(&plugin.Result{
+					Itemid: update.requests[0].Itemid,
+					Error:  errors.New("Cannot obtain item value during shutdown process."),
+					Ts:     now,
+				})
+			} else {
+				log.Warningf("[%d] direct checks can contain only single request while received %d requests",
+					update.clientID, len(update.requests))
+			}
+		}
+		return
+	}
+
 	var c *client
 	var ok bool
 	if c, ok = m.clients[update.clientID]; !ok {
