@@ -67,7 +67,7 @@ func Start(taskManager scheduler.Scheduler, confFilePath string) (err error) {
 		log.Debugf("%s", err.Error())
 	}()
 
-	monitor.Register(monitor.Primary)
+	monitor.Register(monitor.Input)
 	return nil
 }
 
@@ -82,5 +82,5 @@ func Stop() {
 		log.Debugf("status listener has been stopped")
 	}
 
-	monitor.Unregister(monitor.Primary)
+	monitor.Unregister(monitor.Input)
 }

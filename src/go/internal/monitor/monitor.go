@@ -24,11 +24,12 @@ import (
 )
 
 const (
-	Primary = iota
-	Secondary
+	Input = iota
+	Scheduler
+	Output
 )
 
-var waitGroup [2]sync.WaitGroup
+var waitGroup [3]sync.WaitGroup
 
 // ServiceStarted must be called by internal services at start
 func Register(group int) {

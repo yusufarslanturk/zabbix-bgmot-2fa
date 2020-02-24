@@ -335,7 +335,7 @@ run:
 		}
 	}
 	log.Debugf("manager has been stopped")
-	monitor.Unregister(monitor.Primary)
+	monitor.Unregister(monitor.Scheduler)
 }
 
 type pluginCapacity struct {
@@ -414,7 +414,7 @@ func (m *Manager) init() {
 	}
 }
 func (m *Manager) Start() {
-	monitor.Register(monitor.Primary)
+	monitor.Register(monitor.Scheduler)
 	go m.run()
 }
 

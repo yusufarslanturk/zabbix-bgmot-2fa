@@ -273,7 +273,7 @@ func main() {
 		}
 
 		m.Stop()
-		monitor.Wait(monitor.Primary)
+		monitor.Wait(monitor.Scheduler)
 		os.Exit(0)
 	}
 
@@ -418,8 +418,10 @@ func main() {
 	for i := 0; i < len(serverConnectors); i++ {
 		serverConnectors[i].StopConnector()
 	}
+	monitor.Wait(monitor.Input)
+
 	manager.Stop()
-	monitor.Wait(monitor.Primary)
+	monitor.Wait(monitor.Scheduler)
 
 	// split shutdown in two steps to ensure that result cache is still running while manager is
 	// being stopped, because there might be pending exporters that could block if result cache
@@ -427,7 +429,7 @@ func main() {
 	for i := 0; i < len(serverConnectors); i++ {
 		serverConnectors[i].StopCache()
 	}
-	monitor.Wait(monitor.Secondary)
+	monitor.Wait(monitor.Output)
 
 	farewell := fmt.Sprintf("Zabbix Agent 2 stopped. (%s)", version.Long())
 	log.Infof(farewell)
