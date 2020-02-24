@@ -27,18 +27,11 @@ import (
 	"zabbix.com/internal/agent/scheduler"
 )
 
-func checkMetric(s scheduler.Scheduler, metric string) (err error) {
-	defer func() {
-		if err != nil {
-			fmt.Printf("%-46s[m|ZBX_NOTSUPPORTED] [%s]\n", metric, err.Error())
-		}
-	}()
-
+func checkMetric(s scheduler.Scheduler, metric string) {
 	value, err := s.PerformTask(metric, time.Duration(agent.Options.Timeout)*time.Second)
 	if err != nil {
-		return
+		fmt.Printf("%-46s[m|ZBX_NOTSUPPORTED] [%s]\n", metric, err.Error())
+	} else {
+		fmt.Printf("%-46s[s|%s]\n", metric, value)
 	}
-	fmt.Printf("%-46s[s|%s]\n", metric, value)
-
-	return nil
 }

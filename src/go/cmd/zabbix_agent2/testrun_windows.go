@@ -87,6 +87,6 @@ func checkMetrics() {
 	}
 
 	for _, metric := range metrics {
-		_ = checkMetric(metric)
+		checkMetric(metric)
 	}
 }

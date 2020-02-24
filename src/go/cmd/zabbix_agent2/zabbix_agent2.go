@@ -267,9 +267,7 @@ func main() {
 		m.Start()
 
 		if argTest {
-			if err := checkMetric(m, testFlag); err != nil {
-				fatalExit("cannot execute metric", err)
-			}
+			checkMetric(m, testFlag)
 		} else {
 			checkMetrics(m)
 		}
