@@ -39,7 +39,7 @@ func (p *Plugin) exportMd5sum(params []string) (result interface{}, err error) {
 
 	file, err := stdOs.Open(params[0])
 	if err != nil {
-		return nil, fmt.Errorf("Cannot open file %s", params[0])
+		return nil, fmt.Errorf("Cannot open file: %s", err)
 	}
 	defer file.Close()
 
