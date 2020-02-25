@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1991,15 +1991,6 @@ function show_messages($good = false, $okmsg = null, $errmsg = null) {
 						? ['R' => 255, 'G' => 55, 'B' => 55]
 						: ['R' => 155, 'G' => 155, 'B' => 55]
 				];
-			}
-			break;
-		case PAGE_TYPE_XML:
-			if ($title !== null) {
-				echo htmlspecialchars($title)."\n";
-			}
-
-			foreach ($messages as $message) {
-				echo '['.$message['type'].'] '.$message['message']."\n";
 			}
 			break;
 		case PAGE_TYPE_HTML:
