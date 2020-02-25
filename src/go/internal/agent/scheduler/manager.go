@@ -44,6 +44,7 @@ const (
 	shutdownInactive = -1
 )
 
+// Manager implements Scheduler interface and manages plugin interface usage.
 type Manager struct {
 	input       chan interface{}
 	plugins     map[string]*pluginAgent
@@ -56,6 +57,7 @@ type Manager struct {
 	shutdownSeconds int
 }
 
+// updateRequest contains list of metrics monitored by a client and additional client configuration data.
 type updateRequest struct {
 	clientID           uint64
 	sink               plugin.ResultWriter
@@ -64,6 +66,7 @@ type updateRequest struct {
 	expressions        []*glexpr.Expression
 }
 
+// queryRequest contains status/debug query request.
 type queryRequest struct {
 	command string
 	sink    chan string
@@ -77,9 +80,14 @@ type Scheduler interface {
 	Query(command string) (status string)
 }
 
+// cleanupClient performs deactivation of plugins the client is not using anymore.
+// It's called after client update and once per hour for the client associated to
+// single passive checks.
 func (m *Manager) cleanupClient(c *client, now time.Time) {
+	// get a list of plugins the client stopped using
 	released := c.cleanup(m.plugins, now)
 	for _, p := range released {
+		// check if the plugin is used by other clients
 		if p.refcount != 0 {
 			continue
 		}
@@ -124,6 +132,8 @@ func (m *Manager) cleanupClient(c *client, now time.Time) {
 	}
 }
 
+// processUpdateRequest processes client update request. It's being used for multiple requests
+// (active checks on a server) and also for direct requets (single passive and internal checks).
 func (m *Manager) processUpdateRequest(update *updateRequest, now time.Time) {
 	log.Debugf("[%d] processing update request (%d requests)", update.clientID, len(update.requests))
 
@@ -194,6 +204,7 @@ func (m *Manager) processUpdateRequest(update *updateRequest, now time.Time) {
 	m.cleanupClient(c, now)
 }
 
+// processQueue processes queued plugins/tasks
 func (m *Manager) processQueue(now time.Time) {
 	seconds := now.Unix()
 	for p := m.pluginQueue.Peek(); p != nil; p = m.pluginQueue.Peek() {
@@ -203,19 +214,21 @@ func (m *Manager) processQueue(now time.Time) {
 			}
 
 			heap.Pop(&m.pluginQueue)
-
 			if !p.hasCapacity() {
+				// plugin has no free capacity for the next task, keep the plugin out of queue
+				// until active tasks finishes and the required capacity is released
 				continue
 			}
 
+			// take the task out of plugin tasks queue and perform it
 			m.activeTasksNum++
 			p.reserveCapacity(p.popTask())
 			task.perform(m)
 
+			// if the plugin has capacity for the next task put it back into plugin queue
 			if !p.hasCapacity() {
 				continue
 			}
-
 			heap.Push(&m.pluginQueue, p)
 		} else {
 			// plugins with empty task queue should not be in Manager queue
@@ -224,6 +237,7 @@ func (m *Manager) processQueue(now time.Time) {
 	}
 }
 
+// processFinishRequest handles finished tasks
 func (m *Manager) processFinishRequest(task performer) {
 	m.activeTasksNum--
 	p := task.getPlugin()
@@ -280,6 +294,7 @@ func (m *Manager) deactivatePlugins() {
 	}
 }
 
+// run() is the main worker loop running in own goroutine until stopped
 func (m *Manager) run() {
 	defer log.PanicHook()
 	log.Debugf("starting manager")
@@ -326,10 +341,10 @@ run:
 			}
 		case u := <-m.input:
 			if u == nil {
+				m.deactivatePlugins()
 				if m.activeTasksNum+len(m.pluginQueue) == 0 {
 					break run
 				}
-				m.deactivatePlugins()
 				m.processQueue(time.Now())
 			}
 			switch v := u.(type) {
