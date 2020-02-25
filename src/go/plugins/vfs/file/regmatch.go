@@ -68,7 +68,7 @@ func (p *Plugin) exportRegmatch(params []string) (result interface{}, err error)
 	if startline > endline {
 		return nil, errors.New("Start line parameter must not exceed end line.")
 	}
-	
+
 	file, err := stdOs.Open(params[0])
 	if err != nil {
 		return nil, fmt.Errorf("Cannot open file %s: %s", params[0], err)
@@ -79,6 +79,11 @@ func (p *Plugin) exportRegmatch(params []string) (result interface{}, err error)
 	scanner := bufio.NewScanner(file)
 	curline = 0
 	ret := 0
+	r, err := regexp.Compile(params[1])
+	if err != nil {
+		return nil, fmt.Errorf("Cannot compile regular expression %s: %s", params[1], err)
+	}
+
 	for scanner.Scan() {
 		elapsed := time.Since(start)
 		if elapsed.Seconds() > float64(p.options.Timeout) {
@@ -87,7 +92,7 @@ func (p *Plugin) exportRegmatch(params []string) (result interface{}, err error)
 
 		curline++
 		if curline >= startline {
-			if match, _ :=regexp.Match(params[1],decode(encoder, scanner.Bytes())); match {
+			if match := r.Match(decode(encoder, scanner.Bytes())); match {
 				ret = 1
 			}
 		}
