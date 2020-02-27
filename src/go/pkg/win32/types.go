@@ -185,6 +185,8 @@ type GROUP_AFFINITY struct {
 	Reserved [3]uint16
 }
 
+type RGGROUP_AFFINITY [ARRAY_MAX / unsafe.Sizeof(GROUP_AFFINITY{})]GROUP_AFFINITY
+
 type NUMA_NODE_RELATIONSHIP struct {
 	NodeNumber uint32
 	Reserved   [20]uint8

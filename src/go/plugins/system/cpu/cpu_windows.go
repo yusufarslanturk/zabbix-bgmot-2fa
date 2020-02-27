@@ -50,7 +50,7 @@ func numCPU() (numCpu int) {
 	for i := uint32(0); i < size; i += sinfo.Size {
 		sinfo = (*win32.SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)(unsafe.Pointer(&b[i]))
 		pinfo := (*win32.PROCESSOR_RELATIONSHIP)(unsafe.Pointer(&sinfo.Data[0]))
-		groups := (*[1 << 16]win32.GROUP_AFFINITY)(unsafe.Pointer(&pinfo.GroupMask[0]))[:pinfo.GroupCount:pinfo.GroupCount]
+		groups := (*win32.RGGROUP_AFFINITY)(unsafe.Pointer(&pinfo.GroupMask[0]))[:pinfo.GroupCount:pinfo.GroupCount]
 		for _, group := range groups {
 			for mask := group.Mask; mask != 0; mask >>= 1 {
 				numCpu += int(mask & 1)
