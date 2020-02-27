@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-10 10:16+0200\n"
-"PO-Revision-Date: 2020-01-02 05:28+0300\n"
+"POT-Creation-Date: 2020-02-17 12:03+0200\n"
+"PO-Revision-Date: 2020-02-22 16:52+0300\n"
 "Last-Translator: Alexey <dotneft@gmail.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: ru\n"
@@ -13,14 +13,14 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1577935711.000000\n"
+"X-POOTLE-MTIME: 1582383122.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:67
 #: include/classes/db/OracleDbBackend.php:87
 #: include/classes/db/PostgresqlDbBackend.php:76
 #, c-format
 msgid "\"%1$s\" instead \"%2$s\""
-msgstr ""
+msgstr "\"%1$s\" вместо \"%2$s\""
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -240,7 +240,7 @@ msgctxt "screen reader"
 msgid "%1$s, selected"
 msgstr "%1$s, выбрано"
 
-#: app/views/layout.htmlpage.php:106 include/page_header.php:284
+#: app/views/layout.htmlpage.php:107 include/page_header.php:264
 #, c-format
 msgid "%4$s failed login attempt logged. Last failed attempt was from %1$s on %2$s at %3$s."
 msgid_plural "%4$s failed login attempts logged. Last failed attempt was from %1$s on %2$s at %3$s."
@@ -1525,7 +1525,7 @@ msgstr "Ширина рамки"
 
 #: app/controllers/CControllerUserUpdateGeneral.php:93
 msgid "Both passwords must be equal."
-msgstr "Пароли должны совпадать."
+msgstr "Оба пароля должны совпадать."
 
 #: include/views/js/monitoring.sysmaps.js.php:18
 #: include/views/js/monitoring.sysmaps.js.php:119
@@ -2691,7 +2691,7 @@ msgstr "Не удалось установить ID ресурса для эле
 
 #: jsLoader.php:215
 msgid "Cannot support notification audio for this device."
-msgstr ""
+msgstr "Поддержка аудио оповещений отсутствует для этого устройства."
 
 #: include/classes/api/services/CHostInterface.php:244
 msgid "Cannot switch host for interface."
@@ -3578,7 +3578,7 @@ msgstr "Настройка макросов"
 msgid "Configuration of maintenance periods"
 msgstr "Настройка периодов обслуживания"
 
-#: app/controllers/CControllerMediatypeEdit.php:230
+#: app/controllers/CControllerMediatypeEdit.php:231
 #: app/controllers/CControllerMediatypeList.php:139
 msgid "Configuration of media types"
 msgstr "Настройка способов оповещения"
@@ -4434,7 +4434,7 @@ msgstr "Дата покупки HW"
 msgid "Day"
 msgstr "День"
 
-#: include/func.inc.php:2664
+#: include/func.inc.php:2655
 msgid "Day before yesterday"
 msgstr "За день до вчера"
 
@@ -5329,7 +5329,7 @@ msgstr "Не хранить историю"
 #: include/views/configuration.item.prototype.edit.php:680
 #: include/views/configuration.item.prototype.massupdate.php:422
 msgid "Do not keep trends"
-msgstr "Не хранить динамику изменения"
+msgstr "Не хранить динамику изменений"
 
 #: jsLoader.php:146 jsLoader.php:269
 msgid "Do you wish to replace the conditional expression?"
@@ -6326,7 +6326,7 @@ msgstr "Размер файла (в байтах). Возвращает цело
 #: include/classes/items/CHelpItems.php:321
 #: include/classes/items/CHelpItems.php:635
 msgid "File systems and their spaces in bytes and percentage from total. Returns JSON"
-msgstr ""
+msgstr "Файловые системы и их размеры в байтах и в процентном отношении от общего размера. Возвращает JSON"
 
 #: include/classes/items/CHelpItems.php:309
 #: include/classes/items/CHelpItems.php:627
@@ -8244,7 +8244,7 @@ msgstr "Некорректные данные."
 #: include/classes/db/PostgresqlDbBackend.php:75
 #, c-format
 msgid "Incorrect default charset for Zabbix database: %1$s."
-msgstr ""
+msgstr "Некорректная кодовая страница по умолчанию для Zabbix базы данных: %1$s."
 
 #: include/classes/api/services/CEvent.php:527
 #: include/classes/api/services/CProblem.php:394
@@ -8483,7 +8483,7 @@ msgstr "Некорректное значение объекта."
 #: include/classes/db/OracleDbBackend.php:86
 #, c-format
 msgid "Incorrect parameter \"%1$s\" value: %2$s."
-msgstr ""
+msgstr "Некорректное значение \"%1$s\" параметра: %2$s."
 
 #: include/classes/api/services/CAction.php:2824
 #, c-format
@@ -9579,7 +9579,7 @@ msgstr "Элемент данных \"%1$s\" уже существует у \"%2
 #: include/items.inc.php:540
 #, c-format
 msgid "Item \"%1$s\" cannot be copied without its master item."
-msgstr "Нельзя скопировать элемент данных \"%1$s\" без его мастер элемента данных."
+msgstr "Нельзя скопировать элемент данных \"%1$s\" без своего мастер элемента данных."
 
 #: include/classes/api/services/CItem.php:943
 #, c-format
@@ -10033,7 +10033,7 @@ msgctxt "page navigation"
 msgid "Last"
 msgstr "Последняя"
 
-#: include/func.inc.php:2717
+#: include/func.inc.php:2708
 #, c-format
 msgid "Last %1$d day"
 msgid_plural "Last %1$d days"
@@ -10041,7 +10041,7 @@ msgstr[0] "Последний %1$d день"
 msgstr[1] "Последние %1$d дня"
 msgstr[2] "Последние %1$d дней"
 
-#: include/func.inc.php:2711
+#: include/func.inc.php:2702
 #, c-format
 msgid "Last %1$d hour"
 msgid_plural "Last %1$d hours"
@@ -10049,7 +10049,7 @@ msgstr[0] "Последний %1$d час"
 msgstr[1] "Последние %1$d часа"
 msgstr[2] "Последние %1$d часов"
 
-#: include/func.inc.php:2704
+#: include/func.inc.php:2695
 #, c-format
 msgid "Last %1$d minute"
 msgid_plural "Last %1$d minutes"
@@ -10057,7 +10057,7 @@ msgstr[0] "Последняя %1$d минута"
 msgstr[1] "Последние %1$d минуты"
 msgstr[2] "Последние %1$d минут"
 
-#: include/func.inc.php:2720
+#: include/func.inc.php:2711
 #, c-format
 msgid "Last %1$d month"
 msgid_plural "Last %1$d months"
@@ -10065,7 +10065,7 @@ msgstr[0] "Последний %1$d месяц"
 msgstr[1] "Последние %1$d месяца"
 msgstr[2] "Последние %1$d месяцев"
 
-#: include/func.inc.php:2697
+#: include/func.inc.php:2688
 #, c-format
 msgid "Last %1$d second"
 msgid_plural "Last %1$d seconds"
@@ -10073,7 +10073,7 @@ msgstr[0] "Последняя %1$d секунда"
 msgstr[1] "Последние %1$d секунды"
 msgstr[2] "Последние %1$d секунд"
 
-#: include/func.inc.php:2723
+#: include/func.inc.php:2714
 #, c-format
 msgid "Last %1$d year"
 msgid_plural "Last %1$d years"
@@ -10236,7 +10236,7 @@ msgstr "Индикаторы связи"
 #: include/views/configuration.host.prototype.edit.php:309
 #: include/views/configuration.template.edit.php:401
 msgid "Link new templates"
-msgstr ""
+msgstr "Присоединение новых шаблонов"
 
 #: include/classes/api/services/CMap.php:994
 #: include/classes/api/services/CMap.php:1458
@@ -10648,7 +10648,7 @@ msgstr "Тип подписи к элементам карты"
 
 #: sysmap.php:102
 msgid "Map is updated! Return to map list?"
-msgstr ""
+msgstr "Карта обновлена! Вернуться в список карт?"
 
 #: include/views/monitoring.sysmap.edit.php:176
 msgid "Map label type"
@@ -13354,7 +13354,7 @@ msgstr "Пред. время"
 msgid "Preview"
 msgstr "Предпросмотр"
 
-#: include/func.inc.php:2667
+#: include/func.inc.php:2658
 msgid "Previous month"
 msgstr "Предыдущий месяц"
 
@@ -13367,11 +13367,11 @@ msgstr "Предыдущая страница"
 msgid "Previous value"
 msgstr "Предыдущее значение"
 
-#: include/func.inc.php:2666
+#: include/func.inc.php:2657
 msgid "Previous week"
 msgstr "Предыдущая неделя"
 
-#: include/func.inc.php:2668
+#: include/func.inc.php:2659
 msgid "Previous year"
 msgstr "Предыдущий год"
 
@@ -14286,7 +14286,7 @@ msgstr "Возвращает JSON массив с LLD макросами, кот
 
 #: include/classes/items/CHelpItems.php:1095
 msgid "Return a JSON array with MBean objects or their attributes. Compared to jmx.discovery it does not define LLD macros. Can be used for LLD."
-msgstr "Возвращает JSON массив с MBean объектами и их атрибутами. В сравнении с jmx.discovery этот ключ не задает LLD макросы. Можно использовать для LLD."
+msgstr "Возвращает JSON массив с MBean объектами или их атрибутами. В сравнении с jmx.discovery этот ключ не задает LLD макросы. Можно использовать для LLD."
 
 #: include/classes/items/CHelpItems.php:1073
 msgid "Return first column of the first row of the SQL query result."
@@ -15301,7 +15301,7 @@ msgstr "Отображение заголовка"
 #: include/classes/widgets/forms/CWidgetFormHostAvail.php:62
 #: include/classes/widgets/forms/CWidgetFormWeb.php:58
 msgid "Show hosts in maintenance"
-msgstr "Показывать узлы сети в обслуживании"
+msgstr "Узлы сети в обслуживании"
 
 #: latest.php:373
 msgid "Show items without data"
@@ -15312,7 +15312,7 @@ msgstr "Показывать элементы данных без истории
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:279
 #: include/views/configuration.graph.edit.php:100
 msgid "Show legend"
-msgstr "Отображать легенду"
+msgstr "Легенда"
 
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:48
 #: include/classes/widgets/forms/CWidgetFormPlainText.php:55
@@ -15328,11 +15328,11 @@ msgstr "Количество строк"
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:113
 #: include/classes/widgets/forms/CWidgetFormProblems.php:158
 msgid "Show operational data"
-msgstr "Отображение оперативных данных"
+msgstr "Оперативные данные"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:312
 msgid "Show problems"
-msgstr "Отображать проблемы"
+msgstr "Проблемы"
 
 #: include/views/monitoring.history.php:152
 msgid "Show selected"
@@ -15349,7 +15349,7 @@ msgstr "Показать выбранное"
 #: include/views/monitoring.overview.items.php:101
 #: include/views/monitoring.sysmap.edit.php:223
 msgid "Show suppressed problems"
-msgstr "Отображение подавленных проблем"
+msgstr "Подавленные проблемы"
 
 #: app/views/monitoring.problem.view.php:284
 #: include/classes/widgets/forms/CWidgetFormProblems.php:116
@@ -15375,7 +15375,7 @@ msgstr "Отображать триггеры"
 #: include/classes/widgets/forms/CWidgetFormProblems.php:183
 #: include/views/common.filter.trigger.php:124
 msgid "Show unacknowledged only"
-msgstr "Отображать только неподтвержденные"
+msgstr "Только неподтвержденные"
 
 #: include/classes/widgets/forms/CWidgetFormNavTree.php:81
 msgid "Show unavailable maps"
@@ -16391,7 +16391,7 @@ msgstr "Группа элементов данных веб-сценария п�
 msgid "Theme"
 msgstr "Тема"
 
-#: include/func.inc.php:2665
+#: include/func.inc.php:2656
 msgid "This day last week"
 msgstr "Этот день прошлой недели"
 
@@ -16404,11 +16404,11 @@ msgstr "Это поле автоматически заполняется эле
 msgid "This is the test message from Zabbix"
 msgstr "Это тестовое сообщение от Zabbix"
 
-#: include/func.inc.php:2673 srv_status.php:41
+#: include/func.inc.php:2664 srv_status.php:41
 msgid "This month"
 msgstr "Этот месяц"
 
-#: include/func.inc.php:2674
+#: include/func.inc.php:2665
 msgid "This month so far"
 msgstr "В этом месяце"
 
@@ -16420,19 +16420,19 @@ msgstr "Колонка комплексного экрана не пустая. 
 msgid "This screen row is not empty. Delete it?"
 msgstr "Строка комплексного экрана не пустая. Удалить её?"
 
-#: include/func.inc.php:2671 srv_status.php:40
+#: include/func.inc.php:2662 srv_status.php:40
 msgid "This week"
 msgstr "Эта неделя"
 
-#: include/func.inc.php:2672
+#: include/func.inc.php:2663
 msgid "This week so far"
 msgstr "На этой неделе"
 
-#: include/func.inc.php:2675 srv_status.php:42
+#: include/func.inc.php:2666 srv_status.php:42
 msgid "This year"
 msgstr "Этот год"
 
-#: include/func.inc.php:2676
+#: include/func.inc.php:2667
 msgid "This year so far"
 msgstr "В этом году"
 
@@ -16558,12 +16558,12 @@ msgstr "К"
 msgid "To set a host interface select a single item type for all items"
 msgstr "Чтобы задать интерфейс узла сети выберите один тип элемента данных из всех элементов данных"
 
-#: include/classes/screens/CScreenProblem.php:749 include/func.inc.php:2669
+#: include/classes/screens/CScreenProblem.php:749 include/func.inc.php:2660
 #: srv_status.php:39
 msgid "Today"
 msgstr "Сегодня"
 
-#: include/func.inc.php:2670
+#: include/func.inc.php:2661
 msgid "Today so far"
 msgstr "Сегодня до сих пор"
 
@@ -17318,7 +17318,9 @@ msgstr "Включить звук"
 #, c-format
 msgid "Unsupported charset or collation for table: %1$s."
 msgid_plural "Unsupported charset or collation for tables: %1$s."
-msgstr[0] ""
+msgstr[0] "Неподдерживаемая кодовая страница или тип сравнения для таблицы: %1$s."
+msgstr[1] "Неподдерживаемая кодовая страница или тип сравнения для таблиц: %1$s."
+msgstr[2] "Неподдерживаемая кодовая страница или тип сравнения для таблиц: %1$s."
 
 #: include/classes/import/readers/CImportReaderFactory.php:65
 #, c-format
@@ -17843,7 +17845,7 @@ msgstr "Статистика записи в хранилище данных г�
 
 #: include/classes/items/CHelpItems.php:759
 msgid "VMware hypervisor datastores list, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr "Список гипервизоров хранилища VMware, <url> - URL службы VMware, <datastore> - имя хранилища"
+msgstr "Список хранилищ гипервизора VMware, <url> - URL службы VMware, <datastore> - имя хранилища"
 
 #: include/classes/items/CHelpItems.php:787
 msgid "VMware hypervisor model, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -18537,7 +18539,7 @@ msgstr "XML пустой"
 
 #: include/classes/api/services/CItemGeneral.php:2315
 msgid "XML is expected"
-msgstr "Ожидался XML"
+msgstr "Ожидается XML"
 
 #: include/forms.inc.php:1308 include/views/js/item.preprocessing.js.php:188
 msgid "XPath"
@@ -18647,7 +18649,7 @@ msgstr "Ежегодно"
 msgid "Yes"
 msgstr "Да"
 
-#: include/classes/screens/CScreenProblem.php:757 include/func.inc.php:2663
+#: include/classes/screens/CScreenProblem.php:757 include/func.inc.php:2654
 msgid "Yesterday"
 msgstr "Вчера"
 
@@ -18737,7 +18739,7 @@ msgstr "Ваша база данных работает некорректно. 
 msgid "ZABBIX"
 msgstr "ZABBIX"
 
-#: include/page_header.php:156
+#: include/page_header.php:136
 msgid "Zabbix"
 msgstr "Zabbix"
 
@@ -18935,7 +18937,7 @@ msgstr "ожидался период времени"
 
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: include/classes/validators/CApiInputValidator.php:1434
-#: include/validate.inc.php:227 include/validate.inc.php:590
+#: include/validate.inc.php:227 include/validate.inc.php:591
 msgid "a time unit is expected"
 msgstr "ожидается единица времени"
 
@@ -19828,7 +19830,7 @@ msgstr "prev() - Предыдущее значение"
 msgid "problem pattern"
 msgstr "шаблон проблем"
 
-#: include/page_header.php:159 include/views/general.warning.php:21
+#: include/page_header.php:139 include/views/general.warning.php:21
 #, c-format
 msgid "refreshed every %1$s sec."
 msgstr "обновление каждые %1$s сек."
@@ -20228,7 +20230,7 @@ msgstr "значение слишком длинное"
 #: include/classes/api/services/CMap.php:1146
 #: include/classes/validators/CApiInputValidator.php:356
 #: include/classes/validators/CApiInputValidator.php:664
-#: include/validate.inc.php:583
+#: include/validate.inc.php:584
 #, c-format
 msgid "value must be one of %1$s"
 msgstr "значение должно быть одно из %1$s"

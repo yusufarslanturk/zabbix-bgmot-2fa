@@ -31,6 +31,7 @@ var (
 
 	getLogicalProcessorInformationEx uintptr
 	getActiveProcessorGroupCount     uintptr
+	globalMemoryStatusEx             uintptr
 )
 
 const (
@@ -47,6 +48,7 @@ func init() {
 
 	getLogicalProcessorInformationEx = hKernel32.mustGetProcAddress("GetLogicalProcessorInformationEx")
 	getActiveProcessorGroupCount = hKernel32.mustGetProcAddress("GetActiveProcessorGroupCount")
+	globalMemoryStatusEx = hKernel32.mustGetProcAddress("GlobalMemoryStatusEx")
 }
 
 func GetLogicalProcessorInformationEx(relation int, info []byte) (size uint32, err error) {
@@ -68,4 +70,14 @@ func GetLogicalProcessorInformationEx(relation int, info []byte) (size uint32, e
 func GetActiveProcessorGroupCount() (count int) {
 	ret, _, _ := syscall.Syscall(getActiveProcessorGroupCount, 0, 0, 0, 0)
 	return int(ret)
+}
+
+func GlobalMemoryStatusEx() (m *MEMORYSTATUSEX, err error) {
+	m = &MEMORYSTATUSEX{}
+	m.Length = uint32(unsafe.Sizeof(*m))
+	ret, _, syserr := syscall.Syscall(globalMemoryStatusEx, 1, uintptr(unsafe.Pointer(m)), 0, 0)
+	if ret == 0 {
+		return nil, syserr
+	}
+	return
 }

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-10 10:16+0200\n"
-"PO-Revision-Date: 2020-02-10 08:00+0300\n"
+"POT-Creation-Date: 2020-02-17 12:03+0200\n"
+"PO-Revision-Date: 2020-02-12 07:23+0300\n"
 "Last-Translator: baardisk <baardisk@gmail.com>\n"
 "Language-Team: none\n"
 "Language: nb\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.3\n"
-"X-POOTLE-MTIME: 1581314425.000000\n"
+"X-POOTLE-MTIME: 1581484993.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:67
 #: include/classes/db/OracleDbBackend.php:87
 #: include/classes/db/PostgresqlDbBackend.php:76
-#, c-format
+#, fuzzy, c-format
 msgid "\"%1$s\" instead \"%2$s\""
-msgstr ""
+msgstr "\"%1$s\" i stedet for \"%2$s\""
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -85,7 +85,7 @@ msgstr[1] "%1$d dager"
 #, c-format
 msgctxt "screen reader"
 msgid "%1$d matches for %2$s found"
-msgstr ""
+msgstr "%1$d treff funnet for %2$s"
 
 #: app/controllers/CControllerWidgetProblemsView.php:56
 #: include/classes/screens/CScreenHostTriggers.php:204
@@ -104,8 +104,8 @@ msgstr "%1$s (år %2$s)"
 #, c-format
 msgid "%1$s Item"
 msgid_plural "%1$s Items"
-msgstr[0] "%1$s Artikkel"
-msgstr[1] "%1$s Artikler"
+msgstr[0] "%1$s Element"
+msgstr[1] "%1$s Elementer"
 
 #: include/classes/api/services/CItemGeneral.php:2321
 #: include/classes/import/readers/CXmlImportReader.php:46
@@ -118,8 +118,8 @@ msgstr "%1$s [Linje: %2$s | Kolonne: %3$s]"
 msgctxt "screen reader"
 msgid "%1$s action"
 msgid_plural "%1$s actions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s handling"
+msgstr[1] "%1$s handlinger"
 
 #: app/views/monitoring.acknowledge.edit.php:51
 #: app/views/monitoring.acknowledge.edit.php:56
@@ -134,16 +134,16 @@ msgstr[1] "%1$s hendelser"
 #, c-format
 msgid "%1$s item"
 msgid_plural "%1$s items"
-msgstr[0] "%1$s artikkel"
-msgstr[1] "%1$s artikler"
+msgstr[0] "%1$s element"
+msgstr[1] "%1$s elementer"
 
 #: include/actions.inc.php:1782
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s message"
 msgid_plural "%1$s messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s melding"
+msgstr[1] "%1$s meldinger"
 
 #: include/classes/widgets/CWidgetConfig.php:162
 #: include/classes/widgets/CWidgetConfig.php:163
@@ -160,28 +160,28 @@ msgstr[1] "%1$s minutter"
 #, c-format
 msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s av %2$s element er i en feilstatus"
+msgstr[1] "%1$s av %2$s elementer er i en feilstatus"
 
 #: jsLoader.php:256
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s preselected, use down,up arrow keys and enter to select"
-msgstr ""
+msgstr "%1$s forhåndsvalgt, bruk piltaster og enter for å velge"
 
 #: include/maps.inc.php:1109
 #, c-format
 msgid "%1$s problem"
 msgid_plural "%1$s problems"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s feil"
+msgstr[1] "%1$s feil"
 
 #: include/classes/helpers/CMapHelper.php:316
 #, c-format
 msgid "%1$s problem in total"
 msgid_plural "%1$s problems in total"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s feil totalt"
+msgstr[1] "%1$s feil totalt"
 
 #: app/views/monitoring.widget.actionlog.view.php:41
 #: include/actions.inc.php:2214 include/classes/screens/CScreenActions.php:129
@@ -205,34 +205,34 @@ msgstr[1] "%1$s sekunder"
 #: jsLoader.php:237
 #, c-format
 msgid "%1$s symbols remaining"
-msgstr ""
+msgstr "%1$s symboler gjenstår"
 
 #: app/views/monitoring.widget.problems.view.php:280
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s widget"
-msgstr ""
+msgstr "%1$s widget"
 
 #: app/views/monitoring.widget.problemhosts.view.php:98
 #: app/views/monitoring.widget.problems.view.php:194
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, Severity, %2$s"
-msgstr ""
+msgstr "%1$s, Alvorlighet, %2$s"
 
 #: jsLoader.php:250
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, read only"
-msgstr ""
+msgstr "%1$s, skrivebeskyttet"
 
 #: jsLoader.php:300
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, selected"
-msgstr ""
+msgstr "%1$s, valgt"
 
-#: app/views/layout.htmlpage.php:106 include/page_header.php:284
+#: app/views/layout.htmlpage.php:107 include/page_header.php:264
 #, c-format
 msgid "%4$s failed login attempt logged. Last failed attempt was from %1$s on %2$s at %3$s."
 msgid_plural "%4$s failed login attempts logged. Last failed attempt was from %1$s on %2$s at %3$s."
@@ -314,11 +314,11 @@ msgstr "500 siste verdier"
 #: app/views/popup.preproctestedit.view.js.php:34
 #: app/views/popup.preproctestedit.view.js.php:41
 msgid "<empty string>"
-msgstr ""
+msgstr "<tom streng>"
 
 #: include/forms.inc.php:1361 include/views/js/item.preprocessing.js.php:244
 msgid "<label name>"
-msgstr ""
+msgstr "<etikettnavn>"
 
 #: include/views/monitoring.sysmap.edit.php:116
 msgid "<manual>"
@@ -1187,11 +1187,11 @@ msgstr ""
 #: include/classes/api/services/CMaintenance.php:700
 #: include/views/configuration.maintenance.edit.php:233
 msgid "At least one host group or host must be selected."
-msgstr ""
+msgstr "Minst en vertsgruppe eller vert må velges."
 
 #: include/views/configuration.host.edit.php:195
 msgid "At least one interface must exist."
-msgstr ""
+msgstr "Det må være minst ett grensesnitt."
 
 #: include/classes/api/services/CMaintenance.php:367
 #: include/classes/api/services/CMaintenance.php:375
@@ -1206,7 +1206,7 @@ msgstr "Minst en av MySQL, PostgreSQL, Oracle eller IBM DB2 skal støttes."
 
 #: include/views/configuration.action.edit.php:1262
 msgid "At least one operation must exist."
-msgstr ""
+msgstr "Det må være minst én handling."
 
 #: include/views/configuration.action.edit.php:1266
 msgid "At least one operation or recovery operation must exist."
@@ -1854,7 +1854,7 @@ msgstr "Kan ikke klone vertsprototyper."
 #: include/classes/api/services/CDiscoveryRule.php:1813
 #: include/classes/api/services/CDiscoveryRule.php:1831
 msgid "Cannot clone item prototypes."
-msgstr "Kan ikke klone vare prototyper."
+msgstr "Kan ikke klone elementprototyper."
 
 #: include/classes/api/services/CDiscoveryRule.php:808
 msgid "Cannot clone trigger prototypes."
@@ -3524,7 +3524,7 @@ msgstr "Konfigurasjon av makroer"
 msgid "Configuration of maintenance periods"
 msgstr "Konfigurasjon av vedlikeholdsperioder"
 
-#: app/controllers/CControllerMediatypeEdit.php:230
+#: app/controllers/CControllerMediatypeEdit.php:231
 #: app/controllers/CControllerMediatypeList.php:139
 msgid "Configuration of media types"
 msgstr "Konfigurasjon av medietyper"
@@ -4377,7 +4377,7 @@ msgstr "Dato HW kjøpt"
 msgid "Day"
 msgstr "Dag"
 
-#: include/func.inc.php:2664
+#: include/func.inc.php:2655
 msgid "Day before yesterday"
 msgstr ""
 
@@ -5820,7 +5820,7 @@ msgstr "aktivert"
 #: include/views/configuration.host.massupdate.php:301
 #: include/views/configuration.host.prototype.edit.php:417
 msgid "Encryption"
-msgstr "kryptering"
+msgstr "Kryptering"
 
 #: app/views/administration.autoreg.edit.php:50
 msgid "Encryption level"
@@ -8333,7 +8333,7 @@ msgstr "Feil element for akseverdi."
 #: include/classes/api/services/CTriggerGeneral.php:1392
 #, c-format
 msgid "Incorrect item key \"%1$s\" provided for trigger expression on \"%2$s\"."
-msgstr "Feil varenøkkel \"%1$s\" gitt for utløserkonsept på \"%2$s\"."
+msgstr "Feil elementnøkkel \"%1$s\" gitt for utløseruttrykk på \"%2$s\"."
 
 #: include/classes/api/services/CScreenItem.php:693
 #, c-format
@@ -9497,7 +9497,7 @@ msgstr "Italiensk (it_IT)"
 #: include/views/monitoring.screen.constructor.edit.php:721 items.php:996
 #: items.php:1412
 msgid "Item"
-msgstr "artikkel"
+msgstr "Element"
 
 #: include/classes/api/services/CHostPrototype.php:994
 #: include/classes/api/services/CItem.php:51
@@ -9553,7 +9553,7 @@ msgstr[1] "Elementer kopiert"
 
 #: app/views/administration.proxy.list.php:70
 msgid "Item count"
-msgstr "Varenummer"
+msgstr "Antall elementer"
 
 #: items.php:539
 msgid "Item deleted"
@@ -9577,7 +9577,7 @@ msgstr "Element i \"ikke støttet\" tilstand"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:686
 msgid "Item not selected"
-msgstr "Varen er ikke valgt"
+msgstr "Element ikke valgt"
 
 #: include/classes/api/services/CItemGeneral.php:1281
 #, c-format
@@ -9646,7 +9646,7 @@ msgstr ""
 
 #: items.php:958
 msgid "Item updated"
-msgstr "Varen er oppdatert"
+msgstr "Elementet er oppdatert"
 
 #: include/classes/api/services/CItemGeneral.php:397
 msgid "Item uses host interface from non-parent host."
@@ -9728,7 +9728,7 @@ msgstr "Element med nøkkel \"%1$s\" eksisterer allerede på \"%2$s\"."
 #: include/views/conf.import.php:34 include/views/inventory.host.view.php:155
 #: include/views/inventory.host.view.php:174 items.php:1801 queue.php:109
 msgid "Items"
-msgstr "elementer"
+msgstr "Elementer"
 
 #: items.php:1435
 msgid "Items deleted"
@@ -9869,7 +9869,7 @@ msgstr ""
 #: include/views/configuration.item.prototype.list.php:53
 #: include/views/js/configuration.discovery.edit.js.php:78 items.php:49
 msgid "Key"
-msgstr "Tast"
+msgstr "Nøkkel"
 
 #: include/classes/api/services/CItemGeneral.php:449
 #, c-format
@@ -9964,42 +9964,42 @@ msgctxt "page navigation"
 msgid "Last"
 msgstr "Siste"
 
-#: include/func.inc.php:2717
+#: include/func.inc.php:2708
 #, c-format
 msgid "Last %1$d day"
 msgid_plural "Last %1$d days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: include/func.inc.php:2711
+#: include/func.inc.php:2702
 #, c-format
 msgid "Last %1$d hour"
 msgid_plural "Last %1$d hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: include/func.inc.php:2704
+#: include/func.inc.php:2695
 #, c-format
 msgid "Last %1$d minute"
 msgid_plural "Last %1$d minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: include/func.inc.php:2720
+#: include/func.inc.php:2711
 #, c-format
 msgid "Last %1$d month"
 msgid_plural "Last %1$d months"
 msgstr[0] ""
 msgstr[1] ""
 
-#: include/func.inc.php:2697
+#: include/func.inc.php:2688
 #, c-format
 msgid "Last %1$d second"
 msgid_plural "Last %1$d seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: include/func.inc.php:2723
+#: include/func.inc.php:2714
 #, c-format
 msgid "Last %1$d year"
 msgid_plural "Last %1$d years"
@@ -10417,7 +10417,7 @@ msgstr "Makro med hostmacroid \"%1$s\" eksisterer ikke."
 #: include/views/configuration.host.prototype.edit.php:343
 #: include/views/configuration.template.edit.php:421
 msgid "Macros"
-msgstr "makroer"
+msgstr "Makroer"
 
 #: adm.macros.php:101
 msgid "Macros updated"
@@ -11662,7 +11662,7 @@ msgstr "Ingen lagermodus spesifisert for handlingsoperasjon."
 #: include/classes/api/services/CScreenItem.php:511
 #: include/classes/api/services/CScreenItem.php:521
 msgid "No item ID provided for screen element."
-msgstr "Ingen artikkel ID angitt for skjermelement."
+msgstr "Ingen element-ID angitt for skjermelement."
 
 #: include/classes/api/services/CScreenItem.php:501
 msgid "No item prototype ID provided for screen element."
@@ -13247,7 +13247,7 @@ msgstr "Pre-installasjon sammendrag"
 #: include/views/configuration.item.prototype.edit.php:767
 #: include/views/configuration.item.prototype.massupdate.php:614
 msgid "Preprocessing"
-msgstr "forbehandling"
+msgstr "Forbehandling"
 
 #: app/views/popup.preproctestedit.view.php:129
 #: include/views/configuration.host.discovery.edit.php:787
@@ -13274,7 +13274,7 @@ msgstr ""
 msgid "Preview"
 msgstr "Forh"
 
-#: include/func.inc.php:2667
+#: include/func.inc.php:2658
 msgid "Previous month"
 msgstr ""
 
@@ -13287,11 +13287,11 @@ msgstr ""
 msgid "Previous value"
 msgstr ""
 
-#: include/func.inc.php:2666
+#: include/func.inc.php:2657
 msgid "Previous week"
 msgstr ""
 
-#: include/func.inc.php:2668
+#: include/func.inc.php:2659
 msgid "Previous year"
 msgstr ""
 
@@ -13496,7 +13496,7 @@ msgstr ""
 #: app/views/administration.proxy.edit.php:24
 #: app/views/administration.proxy.list.php:27 include/menu.inc.php:260
 msgid "Proxies"
-msgstr "fullmakter"
+msgstr "Proxy"
 
 #: app/views/administration.proxy.edit.php:83
 #: app/views/administration.proxy.edit.php:118 include/actions.inc.php:63
@@ -16133,7 +16133,7 @@ msgstr "Mal med det samme synlige navnet \"%s\" eksisterer allerede."
 #: include/views/configuration.template.massupdate.php:24
 #: include/views/conf.import.php:30
 msgid "Templates"
-msgstr "maler"
+msgstr "Maler"
 
 #: include/classes/api/services/CHostBase.php:238
 #, c-format
@@ -16306,7 +16306,7 @@ msgstr "Webscenario-applikasjonen tilhører en annen vert enn webscenarverten."
 msgid "Theme"
 msgstr "Tema"
 
-#: include/func.inc.php:2665
+#: include/func.inc.php:2656
 msgid "This day last week"
 msgstr ""
 
@@ -16319,11 +16319,11 @@ msgstr "Dette feltet er automatisk befolket av elementet \"%s\"."
 msgid "This is the test message from Zabbix"
 msgstr ""
 
-#: include/func.inc.php:2673 srv_status.php:41
+#: include/func.inc.php:2664 srv_status.php:41
 msgid "This month"
 msgstr "Denne måneden"
 
-#: include/func.inc.php:2674
+#: include/func.inc.php:2665
 msgid "This month so far"
 msgstr ""
 
@@ -16335,19 +16335,19 @@ msgstr "Denne skjermkolonnen er ikke tom. Slett det?"
 msgid "This screen row is not empty. Delete it?"
 msgstr "Denne skjermraden er ikke tom. Slett det?"
 
-#: include/func.inc.php:2671 srv_status.php:40
+#: include/func.inc.php:2662 srv_status.php:40
 msgid "This week"
 msgstr "Denne uken"
 
-#: include/func.inc.php:2672
+#: include/func.inc.php:2663
 msgid "This week so far"
 msgstr ""
 
-#: include/func.inc.php:2675 srv_status.php:42
+#: include/func.inc.php:2666 srv_status.php:42
 msgid "This year"
 msgstr "Dette året"
 
-#: include/func.inc.php:2676
+#: include/func.inc.php:2667
 msgid "This year so far"
 msgstr ""
 
@@ -16473,12 +16473,12 @@ msgstr "Til"
 msgid "To set a host interface select a single item type for all items"
 msgstr "For å angi et vertsgrensesnitt, velg en enkelt gjenstandstype for alle elementer"
 
-#: include/classes/screens/CScreenProblem.php:749 include/func.inc.php:2669
+#: include/classes/screens/CScreenProblem.php:749 include/func.inc.php:2660
 #: srv_status.php:39
 msgid "Today"
 msgstr "I dag"
 
-#: include/func.inc.php:2670
+#: include/func.inc.php:2661
 msgid "Today so far"
 msgstr ""
 
@@ -18552,7 +18552,7 @@ msgstr "Årlig"
 msgid "Yes"
 msgstr "Ja"
 
-#: include/classes/screens/CScreenProblem.php:757 include/func.inc.php:2663
+#: include/classes/screens/CScreenProblem.php:757 include/func.inc.php:2654
 msgid "Yesterday"
 msgstr "I går"
 
@@ -18642,7 +18642,7 @@ msgstr "Databasen fungerer ikke som den skal. Vennligst vent noen minutter og pr
 msgid "ZABBIX"
 msgstr "ZABBIX"
 
-#: include/page_header.php:156
+#: include/page_header.php:136
 msgid "Zabbix"
 msgstr "Zabbix"
 
@@ -18840,7 +18840,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: include/classes/validators/CApiInputValidator.php:1434
-#: include/validate.inc.php:227 include/validate.inc.php:590
+#: include/validate.inc.php:227 include/validate.inc.php:591
 msgid "a time unit is expected"
 msgstr "en tidsenhet er forventet"
 
@@ -19734,7 +19734,7 @@ msgstr ""
 msgid "problem pattern"
 msgstr ""
 
-#: include/page_header.php:159 include/views/general.warning.php:21
+#: include/page_header.php:139 include/views/general.warning.php:21
 #, c-format
 msgid "refreshed every %1$s sec."
 msgstr "oppdateres hver %1$s sek."
@@ -20134,7 +20134,7 @@ msgstr "verdien er for lang"
 #: include/classes/api/services/CMap.php:1146
 #: include/classes/validators/CApiInputValidator.php:356
 #: include/classes/validators/CApiInputValidator.php:664
-#: include/validate.inc.php:583
+#: include/validate.inc.php:584
 #, c-format
 msgid "value must be one of %1$s"
 msgstr "verdien må være en av %1$s"

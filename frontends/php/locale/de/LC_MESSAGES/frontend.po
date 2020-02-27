@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-10 10:16+0200\n"
-"PO-Revision-Date: 2020-02-10 07:58+0300\n"
-"Last-Translator: Yurii <jurijs.klopovskis@zabbix.com>\n"
+"POT-Creation-Date: 2020-02-17 12:03+0200\n"
+"PO-Revision-Date: 2020-02-22 16:36+0300\n"
+"Last-Translator: Joachim <joachim.schwender@web.de>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1581314335.000000\n"
+"X-POOTLE-MTIME: 1582382177.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:67
 #: include/classes/db/OracleDbBackend.php:87
@@ -227,7 +227,7 @@ msgctxt "screen reader"
 msgid "%1$s, selected"
 msgstr "%1$s, ausgewählt"
 
-#: app/views/layout.htmlpage.php:106 include/page_header.php:284
+#: app/views/layout.htmlpage.php:107 include/page_header.php:264
 #, c-format
 msgid "%4$s failed login attempt logged. Last failed attempt was from %1$s on %2$s at %3$s."
 msgid_plural "%4$s failed login attempts logged. Last failed attempt was from %1$s on %2$s at %3$s."
@@ -3524,7 +3524,7 @@ msgstr "Konfiguration der Makros"
 msgid "Configuration of maintenance periods"
 msgstr "Konfiguration von Wartungszeiträumen"
 
-#: app/controllers/CControllerMediatypeEdit.php:230
+#: app/controllers/CControllerMediatypeEdit.php:231
 #: app/controllers/CControllerMediatypeList.php:139
 msgid "Configuration of media types"
 msgstr "Konfiguration der Medientypen"
@@ -4381,7 +4381,7 @@ msgstr "HW-Anschaffungsdatum"
 msgid "Day"
 msgstr "Tag"
 
-#: include/func.inc.php:2664
+#: include/func.inc.php:2655
 msgid "Day before yesterday"
 msgstr "Vorgestern"
 
@@ -5087,7 +5087,7 @@ msgstr "Gefundenes Gerät"
 
 #: include/forms.inc.php:325
 msgid "Discovered items"
-msgstr ""
+msgstr "Gefundene Datenpunkte"
 
 # Gleichzeitig Menüeintrag für "network discovery" und "low level discovery" --> aargh
 #: app/views/search.php:38 app/views/search.php:78 app/views/search.php:79
@@ -7177,7 +7177,7 @@ msgstr "Hosts hinzugefügt"
 
 #: include/classes/widgets/CWidgetConfig.php:42
 msgid "Host availability"
-msgstr ""
+msgstr "Host Verfügbarkeit"
 
 #: include/classes/api/services/CHostInterface.php:819
 msgid "Host cannot have more than one default interface of the same type."
@@ -7343,7 +7343,7 @@ msgstr "Hostnetzwerke"
 
 #: include/audit.inc.php:28
 msgid "Host prototype"
-msgstr ""
+msgstr "Host Prototyp"
 
 #: include/classes/api/services/CHostPrototype.php:769
 #, c-format
@@ -7701,7 +7701,7 @@ msgstr "Fehler [%1$s] beim Laden des Bildes in [%2$s]."
 #: include/classes/helpers/CUploadFile.php:129
 #, c-format
 msgid "Image size must be less than %s."
-msgstr ""
+msgstr "Bildgröße muss kleiner als %s sein."
 
 #: adm.images.php:58
 msgid "Image updated"
@@ -8979,7 +8979,7 @@ msgstr "Information"
 #: include/classes/items/CHelpItems.php:165
 #: include/classes/items/CHelpItems.php:483
 msgid "Information about a service. Returns integer with param as state, startup; string - with param as displayname, path, user; text - with param as description; Specifically for state: 0 - running, 1 - paused, 2 - start pending, 3 - pause pending, 4 - continue pending, 5 - stop pending, 6 - stopped, 7 - unknown, 255 - no such service; Specifically for startup: 0 - automatic, 1 - automatic delayed, 2 - manual, 3 - disabled, 4 - unknown"
-msgstr ""
+msgstr "Information über einen Dienst. Gibt Integer mit Parametern wie Status, Start; Zeichenkette - mit Parameter als Azeigename, Pfad, Benutzer; text - mit Parameter als Beschreibung,; Spezifisch für Status: 0 - laufend, 1 - pausiert, 2 Start anstehend, 3 - Start pausiert, 4 - fortsetzen, 5 - anstehend anhalten, 6 - angehalten, 7 - unbekannt, 255 - kein solcher Dienst; Spezifisch für Start: 0 - automatisch, 1 - automatisch verzögert, 2 - manuell, 3 - gesperrt, 4 - unbekannt"
 
 #: include/views/configuration.triggers.list.php:137
 msgid "Inherited"
@@ -9000,7 +9000,7 @@ msgstr ""
 
 #: include/forms.inc.php:309 include/forms.inc.php:494
 msgid "Inherited items"
-msgstr ""
+msgstr "Geerbte Datenpunkte"
 
 #: app/views/popup.triggerexpr.php:180
 msgid "Insert"
@@ -9383,7 +9383,7 @@ msgstr "Ungültiger Antwort-Code \"%1$s\"."
 
 #: include/classes/validators/CFunctionValidator.php:312
 msgid "Invalid second parameter."
-msgstr ""
+msgstr "Ungültiger zweiter Parameter."
 
 #: include/classes/export/CConfigurationExportBuilder.php:76
 #: include/classes/export/CConfigurationExportBuilder.php:104
@@ -9460,7 +9460,7 @@ msgstr "Inventar"
 #: include/classes/api/services/CHost.php:1124
 #, c-format
 msgid "Inventory disabled for host \"%1$s\"."
-msgstr ""
+msgstr "Inventarisierung für Host \"%1$s\" gesperrt."
 
 #: include/views/administration.general.iconmap.edit.php:55
 msgid "Inventory field"
@@ -9656,7 +9656,7 @@ msgstr "Datenpunkt-Prototypen gelöscht"
 
 #: disc_prototypes.php:1189
 msgid "Item prototypes updated"
-msgstr ""
+msgstr "Datenpunkt Prototypen aktualisiert"
 
 #: items.php:958
 msgid "Item updated"
@@ -9791,12 +9791,12 @@ msgstr "JMX-Schnittstellen"
 #: include/views/configuration.item.prototype.edit.php:188
 #: include/views/configuration.item.prototype.massupdate.php:113
 msgid "JSON data"
-msgstr ""
+msgstr "JSON Daten"
 
 #: include/classes/api/services/CItemGeneral.php:2330
 #: include/classes/api/services/CItemGeneral.php:2359
 msgid "JSON is expected"
-msgstr ""
+msgstr "JSON erwartet"
 
 #: include/classes/validators/CNewValidator.php:101
 msgid "JSON string is expected"
@@ -9822,7 +9822,7 @@ msgstr "JSON-rpc-Version nicht angegeben."
 #: include/items.inc.php:1720
 #: include/views/configuration.host.discovery.edit.php:718
 msgid "JSONPath"
-msgstr ""
+msgstr "JSONPfad"
 
 #: include/func.inc.php:236
 msgid "Jan"
@@ -9937,16 +9937,16 @@ msgstr "LDAP Einstellungen"
 
 #: app/views/popup.preproctestedit.view.php:116
 msgid "LF"
-msgstr ""
+msgstr "LF"
 
 #: include/views/configuration.host.discovery.edit.php:718
 msgid "LLD macro"
-msgstr ""
+msgstr "LLD Makro"
 
 #: include/views/configuration.host.discovery.edit.php:776
 #: include/views/configuration.host.discovery.edit.php:791
 msgid "LLD macros"
-msgstr ""
+msgstr "LLD Makros"
 
 # Bei Auswahl dieses Punkts kann für jedes Kartenelement eine eigene Beschriftung festgelegt werden; Übersetzung wird gleichzeitig für Eingabetextfeld benutzt
 #: include/maps.inc.php:45 include/views/configuration.action.edit.php:51
@@ -9978,42 +9978,42 @@ msgctxt "page navigation"
 msgid "Last"
 msgstr "Letzte"
 
-#: include/func.inc.php:2717
+#: include/func.inc.php:2708
 #, c-format
 msgid "Last %1$d day"
 msgid_plural "Last %1$d days"
 msgstr[0] "Letzter %1$d Tag"
 msgstr[1] "Letzte %1$d Tage"
 
-#: include/func.inc.php:2711
+#: include/func.inc.php:2702
 #, c-format
 msgid "Last %1$d hour"
 msgid_plural "Last %1$d hours"
 msgstr[0] "Letzte %1$d Stunde"
 msgstr[1] "Letzte %1$d Stunden"
 
-#: include/func.inc.php:2704
+#: include/func.inc.php:2695
 #, c-format
 msgid "Last %1$d minute"
 msgid_plural "Last %1$d minutes"
 msgstr[0] "Letzte %1$d Minute"
 msgstr[1] "Letzte %1$d Minuten"
 
-#: include/func.inc.php:2720
+#: include/func.inc.php:2711
 #, c-format
 msgid "Last %1$d month"
 msgid_plural "Last %1$d months"
 msgstr[0] "Letzter %1$d Monat"
 msgstr[1] "Letzte %1$d Monate"
 
-#: include/func.inc.php:2697
+#: include/func.inc.php:2688
 #, c-format
 msgid "Last %1$d second"
 msgid_plural "Last %1$d seconds"
 msgstr[0] "Letzte %1$d Sekunde"
 msgstr[1] "Letzte %1$d Sekunden"
 
-#: include/func.inc.php:2723
+#: include/func.inc.php:2714
 #, c-format
 msgid "Last %1$d year"
 msgid_plural "Last %1$d years"
@@ -10098,7 +10098,7 @@ msgstr "Lettisch (lv_LV)"
 #: include/classes/widgets/forms/CWidgetFormHostAvail.php:48
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:95
 msgid "Layout"
-msgstr ""
+msgstr "Layout"
 
 #: include/classes/widgets/CWidgetHelper.php:732
 #: include/classes/widgets/CWidgetHelper.php:807
@@ -12131,7 +12131,7 @@ msgstr ""
 
 #: include/classes/items/CHelpItems.php:775
 msgid "Number of processor cores on VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr ""
+msgstr "Anzahl von Prozessorkernen auf VMware Hypervisor, <url> - VMware service URL, <uuid> - VMware Hypervisor Host"
 
 #: include/classes/items/CHelpItems.php:779
 msgid "Number of processor threads on VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -13295,26 +13295,26 @@ msgstr ""
 msgid "Preview"
 msgstr "Vorschau"
 
-#: include/func.inc.php:2667
+#: include/func.inc.php:2658
 msgid "Previous month"
-msgstr ""
+msgstr "Voriger Monat"
 
 #: jsLoader.php:129
 msgid "Previous page"
-msgstr ""
+msgstr "Vorangehende Seite"
 
 #: app/controllers/CControllerPopupPreprocTestSend.php:229
 #: app/views/popup.preproctestedit.view.php:102
 msgid "Previous value"
-msgstr ""
+msgstr "Vorangehender Wert"
 
-#: include/func.inc.php:2666
+#: include/func.inc.php:2657
 msgid "Previous week"
-msgstr ""
+msgstr "Vorige Woche"
 
-#: include/func.inc.php:2668
+#: include/func.inc.php:2659
 msgid "Previous year"
-msgstr ""
+msgstr "Voriges Jahr"
 
 #: include/hosts.inc.php:399
 msgid "Primary POC cell"
@@ -13477,7 +13477,7 @@ msgstr "Probleme"
 #: include/classes/screens/CScreenSystemStatus.php:54
 #: include/classes/widgets/CWidgetConfig.php:48 include/screens.inc.php:40
 msgid "Problems by severity"
-msgstr ""
+msgstr "Probleme nach Schweregrad"
 
 #: include/classes/items/CHelpItems.php:145
 #: include/classes/items/CHelpItems.php:463
@@ -14364,7 +14364,7 @@ msgstr "Befehle ausführen auf Hosts"
 #: include/classes/items/CHelpItems.php:221
 #: include/classes/items/CHelpItems.php:539
 msgid "Run specified command on the host. Returns text result of the command; 1 - with mode as nowait (regardless of command result)"
-msgstr ""
+msgstr "Führe angegebenen Befehl auf dem Host aus. Gibt Textausgabe des Befehls zurück: 1 - nicht wartend (egal was das Ergebnis ist)"
 
 #: include/locales.inc.php:79
 msgid "Russian (ru_RU)"
@@ -15174,7 +15174,7 @@ msgstr "Schweregrad (absteigend)"
 #: include/actions.inc.php:1836
 msgctxt "screen reader"
 msgid "Severity changed"
-msgstr ""
+msgstr "Schweregrad geändert"
 
 #: include/actions.inc.php:1806
 #: include/classes/screens/CScreenProblem.php:1249
@@ -15184,12 +15184,12 @@ msgstr ""
 #: include/actions.inc.php:1828
 msgctxt "screen reader"
 msgid "Severity decreased"
-msgstr ""
+msgstr "Schweregrad erniedrigt"
 
 #: include/actions.inc.php:1832
 msgctxt "screen reader"
 msgid "Severity increased"
-msgstr ""
+msgstr "Schweregrad erhöht"
 
 #: include/views/js/monitoring.sysmaps.js.php:297
 #: include/views/js/monitoring.sysmaps.js.php:446
@@ -16261,11 +16261,11 @@ msgstr ""
 #: include/html.inc.php:706
 #, c-format
 msgid "The application is not discovered anymore and will be deleted in %1$s (on %2$s at %3$s)."
-msgstr ""
+msgstr "Die Anwendung konnte nicht mehr entdeckt werden und wird in %1$s gelöscht (auf %2$s in %3$s)."
 
 #: include/html.inc.php:701
 msgid "The application is not discovered anymore and will be deleted the next time discovery rule is processed."
-msgstr ""
+msgstr "Die Anwendung konnte nicht mehr entdeckt werden und wird mit dem nächsten Suchlauf gelöscht."
 
 #: include/classes/db/Db2DbBackend.php:41
 #: include/classes/db/MysqlDbBackend.php:35
@@ -16282,20 +16282,20 @@ msgstr "Die Version der Oberfläche passt nicht zur Zabbix-Datenbank. Aktuelle D
 #: include/html.inc.php:652
 #, c-format
 msgid "The host group is not discovered anymore and will be deleted in %1$s (on %2$s at %3$s)."
-msgstr ""
+msgstr "Die Host Gruppe konnte nicht mehr entdeckt werden und wird in %1$s gelöscht (auf %2$s in %3$s)."
 
 #: include/html.inc.php:647
 msgid "The host group is not discovered anymore and will be deleted the next time discovery rule is processed."
-msgstr ""
+msgstr "Die Host Gruppe konnte nicht mehr entdeckt werden und wird mit dem nächsten Suchlauf gelöscht."
 
 #: include/html.inc.php:679
 #, c-format
 msgid "The host is not discovered anymore and will be deleted in %1$s (on %2$s at %3$s)."
-msgstr ""
+msgstr "Der Host konnte nicht mehr entdeckt werden und wird in %1$s gelöscht (auf %2$s in %3$s)."
 
 #: include/html.inc.php:674
 msgid "The host is not discovered anymore and will be deleted the next time discovery rule is processed."
-msgstr ""
+msgstr "Der Host konnte nicht mehr entdeckt werden und wird mit dem nächsten Suchlauf gelöscht."
 
 #: include/classes/api/services/CImage.php:394
 #, c-format
@@ -16341,7 +16341,7 @@ msgstr "Die Web-Szenario Anwendung, gehört zu einem anderen Host, als den Web-S
 msgid "Theme"
 msgstr "Thema"
 
-#: include/func.inc.php:2665
+#: include/func.inc.php:2656
 msgid "This day last week"
 msgstr "Tag vor einer Woche"
 
@@ -16354,13 +16354,13 @@ msgstr "Dieses Feld wird automatisch befüllt aus dem Datenpunkt \"%s\"."
 msgid "This is the test message from Zabbix"
 msgstr ""
 
-#: include/func.inc.php:2673 srv_status.php:41
+#: include/func.inc.php:2664 srv_status.php:41
 msgid "This month"
 msgstr "Diesen Monat"
 
-#: include/func.inc.php:2674
+#: include/func.inc.php:2665
 msgid "This month so far"
-msgstr ""
+msgstr "Dieser Monat bis jetzt"
 
 #: include/classes/screens/CScreenBuilder.php:607
 msgid "This screen column is not empty. Delete it?"
@@ -16370,21 +16370,21 @@ msgstr "Diese Tafelspalte ist nicht leer. Löschen?"
 msgid "This screen row is not empty. Delete it?"
 msgstr "Diese Tafelzeile ist nicht leer. Löschen?"
 
-#: include/func.inc.php:2671 srv_status.php:40
+#: include/func.inc.php:2662 srv_status.php:40
 msgid "This week"
 msgstr "Diese Woche"
 
-#: include/func.inc.php:2672
+#: include/func.inc.php:2663
 msgid "This week so far"
-msgstr ""
+msgstr "Diese woche bis jetzt"
 
-#: include/func.inc.php:2675 srv_status.php:42
+#: include/func.inc.php:2666 srv_status.php:42
 msgid "This year"
 msgstr "Dieses Jahr"
 
-#: include/func.inc.php:2676
+#: include/func.inc.php:2667
 msgid "This year so far"
-msgstr ""
+msgstr "Dieses Jahr bis jetzt"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:203
 msgid "Threshold"
@@ -16508,14 +16508,14 @@ msgstr "Bis"
 msgid "To set a host interface select a single item type for all items"
 msgstr "Zur Festlegung der Hostschnittstelle wählen Sie nur Datenpunkt eines Typs"
 
-#: include/classes/screens/CScreenProblem.php:749 include/func.inc.php:2669
+#: include/classes/screens/CScreenProblem.php:749 include/func.inc.php:2660
 #: srv_status.php:39
 msgid "Today"
 msgstr "Heute"
 
-#: include/func.inc.php:2670
+#: include/func.inc.php:2661
 msgid "Today so far"
-msgstr ""
+msgstr "Heute bis jetzt"
 
 #: include/classes/widgets/forms/CWidgetFormDataOver.php:60
 #: include/classes/widgets/forms/CWidgetFormPlainText.php:43
@@ -16827,7 +16827,7 @@ msgstr "Auslöser-Schwere"
 
 #: app/views/administration.user.edit.php:431 include/actions.inc.php:45
 msgid "Trigger severity"
-msgstr "Auslöserpriorität"
+msgstr "Auslöser Schweregrad"
 
 #: jsLoader.php:273
 msgid "Trigger status \"OK\""
@@ -18589,7 +18589,7 @@ msgstr "jährlich"
 msgid "Yes"
 msgstr "Ja"
 
-#: include/classes/screens/CScreenProblem.php:757 include/func.inc.php:2663
+#: include/classes/screens/CScreenProblem.php:757 include/func.inc.php:2654
 msgid "Yesterday"
 msgstr "Gestern"
 
@@ -18679,7 +18679,7 @@ msgstr "Ihre Datenbank funktioniert nicht richtig. Bitte warten Sie einige Minut
 msgid "ZABBIX"
 msgstr "ZABBIX"
 
-#: include/page_header.php:156
+#: include/page_header.php:136
 msgid "Zabbix"
 msgstr "Zabbix"
 
@@ -18877,7 +18877,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: include/classes/validators/CApiInputValidator.php:1434
-#: include/validate.inc.php:227 include/validate.inc.php:590
+#: include/validate.inc.php:227 include/validate.inc.php:591
 msgid "a time unit is expected"
 msgstr "Zeiteinheit erwartet"
 
@@ -19015,7 +19015,7 @@ msgstr "durchschn."
 
 #: app/controllers/CControllerPopupTriggerExpr.php:248
 msgid "avg() - Average value of a period T"
-msgstr ""
+msgstr "avg() - Durchschnittswert in einer Periode T"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:389
 msgid "band() - Bitwise AND of last (most recent) T value and mask"
@@ -19132,7 +19132,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:260
 msgid "change() - Difference between last and previous value"
-msgstr ""
+msgstr "change() - Differenz zwischen dem letzten und vorangehenden Wert"
 
 #: include/classes/parsers/CConditionFormula.php:219
 #, c-format
@@ -19250,30 +19250,30 @@ msgstr "Suchlauf"
 
 #: include/classes/api/services/CTask.php:166
 msgid "discovery rule is disabled"
-msgstr ""
+msgstr "Suchlauf ist gesperrt"
 
 #: include/actions.inc.php:27 include/correlation.inc.php:34
 msgid "does not contain"
-msgstr ""
+msgstr "enthält nicht"
 
 #: include/actions.inc.php:25 include/correlation.inc.php:32
 msgid "does not equal"
-msgstr ""
+msgstr "ist ungleich"
 
 #: include/actions.inc.php:35
 #: include/views/configuration.host.discovery.edit.php:658
 #: include/views/js/configuration.host.discovery.edit.js.php:27
 msgid "does not match"
-msgstr ""
+msgstr "passt nicht zu"
 
 #: include/actions.inc.php:24 include/correlation.inc.php:31
 #: include/views/inventory.host.list.php:54
 msgid "equals"
-msgstr ""
+msgstr "ist gleich"
 
 #: include/views/js/item.preprocessing.js.php:402
 msgid "error message"
-msgstr ""
+msgstr "Fehlermeldung"
 
 #: include/classes/api/services/CAction.php:1726
 msgid "esc_step_from and esc_step_to must be set together."
@@ -19285,7 +19285,7 @@ msgstr "Ausdruck ist leer"
 
 #: include/classes/helpers/CElasticsearchHelper.php:185
 msgid "failed to parse JSON"
-msgstr ""
+msgstr "Analyse von JSON gescheitert"
 
 #: include/forms.inc.php:2224 include/graphs.inc.php:104
 #: include/maintenances.inc.php:111
@@ -19344,13 +19344,13 @@ msgstr "Host-Gruppe"
 
 #: include/classes/api/services/CTask.php:184
 msgid "host is not monitored"
-msgstr ""
+msgstr "Host ist nicht überwacht"
 
 #: include/classes/widgets/CWidgetHelper.php:593
 #: include/classes/widgets/CWidgetHelper.php:950
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:344
 msgid "host pattern"
-msgstr ""
+msgstr "Host Muster"
 
 #: include/classes/api/services/CItemGeneral.php:1963
 msgid "hostid of dependent item and master item should match"
@@ -19421,11 +19421,11 @@ msgstr "Ungültige Speicherdauer für historische Daten"
 
 #: include/classes/validators/CApiInputValidator.php:1084
 msgid "invalid host group name"
-msgstr ""
+msgstr "ungültiger Hostgruppenname"
 
 #: include/classes/validators/CApiInputValidator.php:1128
 msgid "invalid host name"
-msgstr ""
+msgstr "ungültiger Hostname"
 
 #: include/classes/validators/CApiInputValidator.php:1387
 msgid "invalid regular expression"
@@ -19443,11 +19443,11 @@ msgstr ""
 
 #: include/actions.inc.php:29
 msgid "is greater than or equals"
-msgstr ""
+msgstr "ist größer als oder gleich"
 
 #: include/actions.inc.php:30
 msgid "is less than or equals"
-msgstr ""
+msgstr "ist kleiner als oder gleich"
 
 #: include/classes/validators/CApiInputValidator.php:1625
 msgid "is not enclosed in {} or is malformed"
@@ -19459,12 +19459,12 @@ msgstr "Datenpunkt"
 
 #: include/classes/api/services/CTask.php:151
 msgid "item is disabled"
-msgstr ""
+msgstr "Datenpunkt ist gesperrt"
 
 #: include/classes/widgets/CWidgetHelper.php:613
 #: include/classes/widgets/CWidgetHelper.php:967
 msgid "item pattern"
-msgstr ""
+msgstr "Datenpunktmuster"
 
 #: include/classes/parsers/CItemKey.php:120
 msgid "key is empty"
@@ -19583,7 +19583,7 @@ msgstr "min."
 
 #: app/controllers/CControllerPopupTriggerExpr.php:288
 msgid "min() - Minimum value for period T"
-msgstr ""
+msgstr "min() - Kleinster Wert der Periode T"
 
 #: include/classes/api/services/CHost.php:1695
 #: include/classes/validators/CApiInputValidator.php:942
@@ -19765,13 +19765,13 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:300
 msgid "prev() - Previous value"
-msgstr ""
+msgstr "prev() - vorangehender Wert"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:370
 msgid "problem pattern"
 msgstr ""
 
-#: include/page_header.php:159 include/views/general.warning.php:21
+#: include/page_header.php:139 include/views/general.warning.php:21
 #, c-format
 msgid "refreshed every %1$s sec."
 msgstr "aktualisiert alle %1$s sec."
@@ -20009,7 +20009,7 @@ msgstr "Hier klicken um zu suchen"
 
 #: include/classes/validators/CApiInputValidator.php:1662
 msgid "unacceptable URL"
-msgstr ""
+msgstr "unakzeptable URL"
 
 #: include/classes/import/validators/C44XmlValidator.php:2223
 #: include/classes/import/validators/CXmlValidatorGeneral.php:231
@@ -20127,7 +20127,7 @@ msgstr "Wert"
 #: include/classes/api/services/CDiscoveryRule.php:1359
 #, c-format
 msgid "value \"%1$s\" already exists"
-msgstr ""
+msgstr "Wert \"%1$s\" existiert bereits"
 
 #: include/classes/import/CConfigurationImport.php:845
 #: include/classes/import/CConfigurationImport.php:883
@@ -20171,7 +20171,7 @@ msgstr "Wert ist zu lang"
 #: include/classes/api/services/CMap.php:1146
 #: include/classes/validators/CApiInputValidator.php:356
 #: include/classes/validators/CApiInputValidator.php:664
-#: include/validate.inc.php:583
+#: include/validate.inc.php:584
 #, c-format
 msgid "value must be one of %1$s"
 msgstr "Wert muss einer von %1$s sein"
