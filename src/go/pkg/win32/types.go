@@ -52,6 +52,8 @@ const (
 	MIB_TCP_STATE_DELETE_TCB uint32 = 12
 )
 
+type RGWSTR [ARRAY_MAX / unsafe.Sizeof(uint16(0))]uint16
+
 type GUID struct {
 	Data1 uint32
 	Data2 uint16
