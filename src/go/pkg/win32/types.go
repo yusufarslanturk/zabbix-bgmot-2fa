@@ -23,6 +23,9 @@ package win32
 
 import (
 	"syscall"
+	"unsafe"
+
+	"golang.org/x/sys/windows"
 )
 
 type Hlib syscall.Handle
@@ -32,6 +35,21 @@ const (
 
 	IF_MAX_STRING_SIZE         = 256
 	IF_MAX_PHYS_ADDRESS_LENGTH = 32
+)
+
+const (
+	MIB_TCP_STATE_CLOSED     uint32 = 1
+	MIB_TCP_STATE_LISTEN     uint32 = 2
+	MIB_TCP_STATE_SYN_SENT   uint32 = 3
+	MIB_TCP_STATE_SYN_RCVD   uint32 = 4
+	MIB_TCP_STATE_ESTAB      uint32 = 5
+	MIB_TCP_STATE_FIN_WAIT1  uint32 = 6
+	MIB_TCP_STATE_FIN_WAIT2  uint32 = 7
+	MIB_TCP_STATE_CLOSE_WAIT uint32 = 8
+	MIB_TCP_STATE_CLOSING    uint32 = 9
+	MIB_TCP_STATE_LAST_ACK   uint32 = 10
+	MIB_TCP_STATE_TIME_WAIT  uint32 = 11
+	MIB_TCP_STATE_DELETE_TCB uint32 = 12
 )
 
 type GUID struct {
@@ -86,6 +104,8 @@ type MIB_IF_ROW2 struct {
 	OutQLen                     uint64
 }
 
+type RGMIB_IF_ROW2 [ARRAY_MAX / unsafe.Sizeof(MIB_IF_ROW2{})]MIB_IF_ROW2
+
 type MIB_IF_TABLE2 struct {
 	NumEntries uint32
 	_          [4]byte
@@ -101,9 +121,54 @@ type MIB_IPADDRROW struct {
 	_         uint16
 	_         uint16
 }
+
+type RGMIB_IPADDRROW [ARRAY_MAX / unsafe.Sizeof(MIB_IPADDRROW{})]MIB_IPADDRROW
+
 type MIB_IPADDRTABLE struct {
 	NumEntries uint32
 	Table      [ANY_SIZE]MIB_IPADDRROW
+}
+
+type MIB_TCPROW struct {
+	State      uint32
+	LocalAddr  uint32
+	LocalPort  uint32
+	RemoteAddr uint32
+	RemotePort uint32
+}
+
+type RGMIB_TCPROW [ARRAY_MAX / unsafe.Sizeof(MIB_TCPROW{})]MIB_TCPROW
+
+type MIB_TCPTABLE struct {
+	NumEntries uint32
+	Table      [ANY_SIZE]MIB_TCPROW
+}
+
+type (
+	PDH_HQUERY   windows.Handle
+	PDH_HCOUNTER windows.Handle
+)
+
+type PDH_COUNTER_PATH_ELEMENTS struct {
+	MachineName    uintptr
+	ObjectName     uintptr
+	InstanceName   uintptr
+	ParentInstance uintptr
+	InstanceIndex  uint32
+	CounterName    uintptr
+}
+type LP_PDH_COUNTER_PATH_ELEMENTS *PDH_COUNTER_PATH_ELEMENTS
+
+type PDH_FMT_COUNTERVALUE_DOUBLE struct {
+	Status uint32
+	_      uint32
+	Value  float64
+}
+
+type PDH_FMT_COUNTERVALUE_LARGE struct {
+	Status uint32
+	_      uint32
+	Value  int64
 }
 
 type MEMORYSTATUSEX struct {
