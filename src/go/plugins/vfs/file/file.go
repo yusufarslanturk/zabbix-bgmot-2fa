@@ -87,6 +87,6 @@ func init() {
 		"vfs.file.time", "Returns file time information.",
 		"vfs.file.size", "Returns file size.",
 		"vfs.file.regexp", "Find string in a file.",
-		"vfs.file.regmatch", "Find string in a file.")
+		"vfs.file.regmatch", "Find string in a file.",
 		"vfs.file.md5sum", "Returns MD5 checksum of file.")
 }
