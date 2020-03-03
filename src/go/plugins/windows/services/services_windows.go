@@ -401,7 +401,7 @@ func (p *Plugin) exportServices(params []string) (result interface{}, err error)
 				continue
 			}
 		}
-		p.Debugf(`openService`)
+
 		if typeFilter != nil || stateFilter != stateFlagAll {
 			service, err := openService(m, name)
 			if err != nil {
@@ -411,13 +411,11 @@ func (p *Plugin) exportServices(params []string) (result interface{}, err error)
 			defer service.Close()
 
 			if typeFilter != nil {
-				p.Debugf(` service.Config()`)
 				cfg, err := service.Config()
 				if err != nil {
 					p.Debugf(`cannot obtain service "%s" configuration: %s`, name, err)
 					continue
 				}
-				p.Debugf(` service.Config() end`)
 				if cfg.StartType != *typeFilter {
 					continue
 				}
