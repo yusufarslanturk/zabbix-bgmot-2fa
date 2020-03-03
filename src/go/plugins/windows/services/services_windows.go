@@ -464,7 +464,7 @@ func (p *Plugin) exportServices(params []string) (result interface{}, err error)
 	if len(services) == 0 {
 		return "0", nil
 	}
-	return strings.Join(services, "\r\n") + "\r\n", nil
+	return strings.Join(services, "\n") + "\n", nil
 }
 
 // Export -
