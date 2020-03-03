@@ -75,7 +75,7 @@ static int	DBpatch_4040001(void)
 	return SUCCEED;
 }
 
-static int	DBpatch_4000002(void)
+static int	DBpatch_4040002(void)
 {
 	if (0 == (program_type & ZBX_PROGRAM_TYPE_SERVER))
 		return SUCCEED;
