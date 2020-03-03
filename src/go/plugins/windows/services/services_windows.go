@@ -332,6 +332,73 @@ const (
 	stateFlagAll = stateFlagStarted | stateFlagStopped
 )
 
+func (p *Plugin) appendServiceName(m *mgr.Mgr, services *[]string, name string, excludeFilter map[string]bool, stateFilter int, typeFilter *uint32) {
+	if len(excludeFilter) != 0 {
+		if _, ok := excludeFilter[name]; ok {
+			return
+		}
+	}
+
+	if typeFilter != nil || stateFilter != stateFlagAll {
+		service, err := openService(m, name)
+		if err != nil {
+			p.Debugf(`cannot open service "%s": %s`, name, err)
+			return
+		}
+		defer service.Close()
+
+		if typeFilter != nil {
+			cfg, err := service.Config()
+			if err != nil {
+				p.Debugf(`cannot obtain service "%s" configuration: %s`, name, err)
+				return
+			}
+			if cfg.StartType != *typeFilter {
+				return
+			}
+		}
+		if stateFilter != stateFlagAll {
+			status, err := service.Query()
+			if err != nil {
+				p.Debugf(`cannot obtain service "%s" status: %s`, name, err)
+				return
+			}
+			switch status.State {
+			case svc.Running:
+				if stateFilter&stateFlagRunning == 0 {
+					return
+				}
+			case svc.Paused:
+				if stateFilter&stateFlagPaused == 0 {
+					return
+				}
+			case svc.StartPending:
+				if stateFilter&stateFlagStartPending == 0 {
+					return
+				}
+			case svc.PausePending:
+				if stateFilter&stateFlagPausePending == 0 {
+					return
+				}
+			case svc.ContinuePending:
+				if stateFilter&stateFlagContinuePending == 0 {
+					return
+				}
+			case svc.StopPending:
+				if stateFilter&stateFlagStopPending == 0 {
+					return
+				}
+			case svc.Stopped:
+				if stateFilter&stateFlagStopped == 0 {
+					return
+				}
+			}
+		}
+	}
+
+	*services = append(*services, name)
+}
+
 func (p *Plugin) exportServices(params []string) (result interface{}, err error) {
 	if len(params) > 3 {
 		return nil, errors.New("Too many parameters.")
@@ -396,69 +463,7 @@ func (p *Plugin) exportServices(params []string) (result interface{}, err error)
 
 	services := make([]string, 0)
 	for _, name := range names {
-		if len(excludeFilter) != 0 {
-			if _, ok := excludeFilter[name]; ok {
-				continue
-			}
-		}
-
-		if typeFilter != nil || stateFilter != stateFlagAll {
-			service, err := openService(m, name)
-			if err != nil {
-				p.Debugf(`cannot open service "%s": %s`, name, err)
-				continue
-			}
-			defer service.Close()
-
-			if typeFilter != nil {
-				cfg, err := service.Config()
-				if err != nil {
-					p.Debugf(`cannot obtain service "%s" configuration: %s`, name, err)
-					continue
-				}
-				if cfg.StartType != *typeFilter {
-					continue
-				}
-			}
-			if stateFilter != stateFlagAll {
-				status, err := service.Query()
-				if err != nil {
-					p.Debugf(`cannot obtain service "%s" status: %s`, name, err)
-					continue
-				}
-				switch status.State {
-				case svc.Running:
-					if stateFilter&stateFlagRunning == 0 {
-						continue
-					}
-				case svc.Paused:
-					if stateFilter&stateFlagPaused == 0 {
-						continue
-					}
-				case svc.StartPending:
-					if stateFilter&stateFlagStartPending == 0 {
-						continue
-					}
-				case svc.PausePending:
-					if stateFilter&stateFlagPausePending == 0 {
-						continue
-					}
-				case svc.ContinuePending:
-					if stateFilter&stateFlagContinuePending == 0 {
-						continue
-					}
-				case svc.StopPending:
-					if stateFilter&stateFlagStopPending == 0 {
-						continue
-					}
-				case svc.Stopped:
-					if stateFilter&stateFlagStopped == 0 {
-						continue
-					}
-				}
-			}
-		}
-		services = append(services, name)
+		p.appendServiceName(m, &services, name, excludeFilter, stateFilter, typeFilter)
 	}
 
 	if len(services) == 0 {
