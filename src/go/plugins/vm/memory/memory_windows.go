@@ -52,8 +52,8 @@ func (p *Plugin) exportVmMemorySize(params []string) (result interface{}, err er
 		return mem.TotalPhys - mem.AvailPhys, nil
 	case "pused":
 		return float64(mem.TotalPhys-mem.AvailPhys) / float64(mem.TotalPhys) * 100, nil
-	case "pavaialble":
-		return float64(mem.AvailPhys) / float64(mem.TotalPhys), nil
+	case "pavailable":
+		return float64(mem.AvailPhys) / float64(mem.TotalPhys) * 100, nil
 	default:
 		return nil, errors.New("Invalid first parameter.")
 	}
