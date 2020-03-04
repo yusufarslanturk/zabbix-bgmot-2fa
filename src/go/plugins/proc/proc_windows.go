@@ -86,14 +86,11 @@ func enumerateProcesses(name string, pv processEnumerator) (err error) {
 	}
 	defer syscall.CloseHandle(hs)
 
+	var procerr error
 	var pe syscall.ProcessEntry32
 	pe.Size = uint32(unsafe.Sizeof(pe))
-	if err = syscall.Process32First(hs, &pe); err != nil {
-		return
-	}
-
-	var procerr error
 	name = strings.ToUpper(name)
+
 	for procerr = syscall.Process32First(hs, &pe); procerr == nil; procerr = syscall.Process32Next(hs, &pe) {
 		if name == "" || name == strings.ToUpper(windows.UTF16ToString(pe.ExeFile[:])) {
 			pv.inspect(&pe)
