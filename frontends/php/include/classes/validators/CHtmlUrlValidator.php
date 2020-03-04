@@ -90,29 +90,25 @@ class CHtmlUrlValidator {
 			}
 		}
 
-		$url = parse_url($url);
-		$allowed_schemes = explode(',', strtolower(ZBX_URI_VALID_SCHEMES));
-
-		// parse_url() may return boolean, but there must be at least some array keys.
-		if (!$url) {
+		$url_parts = parse_url($url);
+		if (!$url_parts) {
 			return false;
 		}
 
-		// If scheme exists, check if it is allowed and has an IP or DNS.
-		if (array_key_exists('scheme', $url)) {
-			if (!array_key_exists('host', $url) && !array_key_exists('path', $url)) {
+		if (array_key_exists('scheme', $url_parts)) {
+			if (!in_array(strtolower($url_parts['scheme']), explode(',', strtolower(ZBX_URI_VALID_SCHEMES)))) {
 				return false;
 			}
 
-			// Check against complete nonsense like "http:/".
-			if (!array_key_exists('host', $url) && array_key_exists('path', $url) && $url['path'] === '/') {
-				return false;
+			if (array_key_exists('host', $url_parts)) {
+				return true;
 			}
-
-			return in_array(strtolower($url['scheme']), $allowed_schemes);
+			else {
+				return (array_key_exists('path', $url_parts) && $url_parts['path'] !== '/');
+			}
 		}
 		else {
-			return (array_key_exists('path', $url) && $url['path'] !== '');
+			return (array_key_exists('path', $url_parts) && $url_parts['path'] !== '');
 		}
 	}
 }
