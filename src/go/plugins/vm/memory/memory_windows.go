@@ -37,24 +37,24 @@ func (p *Plugin) exportVmMemorySize(params []string) (result interface{}, err er
 			return nil, err
 		}
 		return uint64(pinfo.SystemCache) * uint64(pinfo.PageSize), nil
-	} else {
-		mem, err := win32.GlobalMemoryStatusEx()
-		if err != nil {
-			return nil, err
-		}
-		switch mode {
-		case "", "total":
-			return mem.TotalPhys, nil
-		case "free", "available":
-			return mem.AvailPhys, nil
-		case "used":
-			return mem.TotalPhys - mem.AvailPhys, nil
-		case "pused":
-			return float64(mem.TotalPhys-mem.AvailPhys) / float64(mem.TotalPhys), nil
-		case "pavaialble":
-			return float64(mem.AvailPhys) / float64(mem.TotalPhys), nil
-		default:
-			return nil, errors.New("Invalid first parameter.")
-		}
+	}
+
+	mem, err := win32.GlobalMemoryStatusEx()
+	if err != nil {
+		return nil, err
+	}
+	switch mode {
+	case "", "total":
+		return mem.TotalPhys, nil
+	case "free", "available":
+		return mem.AvailPhys, nil
+	case "used":
+		return mem.TotalPhys - mem.AvailPhys, nil
+	case "pused":
+		return float64(mem.TotalPhys-mem.AvailPhys) / float64(mem.TotalPhys) * 100, nil
+	case "pavaialble":
+		return float64(mem.AvailPhys) / float64(mem.TotalPhys), nil
+	default:
+		return nil, errors.New("Invalid first parameter.")
 	}
 }
