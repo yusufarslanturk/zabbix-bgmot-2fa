@@ -2237,7 +2237,7 @@ void	zbx_replace_invalid_utf8(char *text)
  *               -1 on failure                                                *
  *                                                                            *
  ******************************************************************************/
-int zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
+int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
 {
 	const unsigned char *cc = (void *)cesu8;
 	char *cu;
