@@ -229,13 +229,13 @@ func (e *infoEnumerator) inspect(p *syscall.ProcessEntry32) {
 		if err = syscall.GetProcessTimes(h, &creationTime, &exitTime, &kernelTime, &userTime); err != nil {
 			return
 		}
-		value = float64(uint64(kernelTime.HighDateTime)<<32|uint64(kernelTime.LowDateTime)) / 1e4
+		value = float64((uint64(kernelTime.HighDateTime)<<32 | uint64(kernelTime.LowDateTime)) / 1e4)
 	case attrUtime:
 		var creationTime, exitTime, kernelTime, userTime syscall.Filetime
 		if err = syscall.GetProcessTimes(h, &creationTime, &exitTime, &kernelTime, &userTime); err != nil {
 			return
 		}
-		value = float64(uint64(userTime.HighDateTime)<<32|uint64(userTime.LowDateTime)) / 1e4
+		value = float64((uint64(userTime.HighDateTime)<<32 | uint64(userTime.LowDateTime)) / 1e4)
 	case attrGdiobj:
 		value = float64(win32.GetGuiResources(h, win32.GR_GDIOBJECTS))
 	case attrUserobj:
