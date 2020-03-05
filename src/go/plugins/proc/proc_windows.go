@@ -110,8 +110,7 @@ type numEnumerator struct {
 
 func (e *numEnumerator) inspect(p *syscall.ProcessEntry32) {
 	if e.user != "" {
-		procUser, err := getProcessUsername(p.ProcessID)
-		if err != nil || e.user != procUser {
+		if procUser, err := getProcessUsername(p.ProcessID); err != nil || e.user != strings.ToUpper(procUser) {
 			return
 		}
 	}
@@ -128,7 +127,7 @@ func (p *Plugin) exportProcNum(params []string) (result interface{}, err error) 
 	}
 	var e numEnumerator
 	if len(params) > 1 {
-		e.user = params[1]
+		e.user = strings.ToUpper(params[1])
 	}
 
 	if err = enumerateProcesses(name, &e); err != nil {
