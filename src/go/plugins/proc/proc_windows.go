@@ -279,9 +279,7 @@ func (e *infoEnumerator) inspect(p *syscall.ProcessEntry32) {
 	}
 
 	switch e.stat {
-	case statAvg:
-		e.value += value
-	case statSum:
+	case statAvg, statSum:
 		e.value += value
 	case statMin:
 		if e.num == 0 || value < e.value {
