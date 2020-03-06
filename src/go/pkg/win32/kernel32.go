@@ -29,8 +29,19 @@ import (
 var (
 	hKernel32 Hlib
 
-	globalMemoryStatusEx uintptr
-	getProcessIoCounters uintptr
+	globalMemoryStatusEx             uintptr
+	getProcessIoCounters             uintptr
+	getLogicalProcessorInformationEx uintptr
+	getActiveProcessorGroupCount     uintptr
+)
+
+const (
+	RelationProcessorCore = iota
+	RelationNumaNode
+	RelationCache
+	RelationProcessorPackage
+	RelationGroup
+	RelationAll = 0xfff
 )
 
 func init() {
@@ -38,6 +49,8 @@ func init() {
 
 	globalMemoryStatusEx = hKernel32.mustGetProcAddress("GlobalMemoryStatusEx")
 	getProcessIoCounters = hKernel32.mustGetProcAddress("GetProcessIoCounters")
+	getLogicalProcessorInformationEx = hKernel32.mustGetProcAddress("GetLogicalProcessorInformationEx")
+	getActiveProcessorGroupCount = hKernel32.mustGetProcAddress("GetActiveProcessorGroupCount")
 }
 
 func GlobalMemoryStatusEx() (m *MEMORYSTATUSEX, err error) {
@@ -57,4 +70,25 @@ func GetProcessIoCounters(proc syscall.Handle) (ioc *IO_COUNTERS, err error) {
 		return nil, syserr
 	}
 	return
+}
+
+func GetLogicalProcessorInformationEx(relation int, info []byte) (size uint32, err error) {
+	var buffer uintptr
+	if info != nil {
+		size = uint32(len(info))
+		buffer = uintptr(unsafe.Pointer(&info[0]))
+	}
+	ret, _, syserr := syscall.Syscall(getLogicalProcessorInformationEx, 3, uintptr(relation),
+		buffer, uintptr(unsafe.Pointer(&size)))
+	if ret == 0 {
+		if syscall.Errno(syserr) != syscall.ERROR_INSUFFICIENT_BUFFER {
+			return 0, syserr
+		}
+	}
+	return
+}
+
+func GetActiveProcessorGroupCount() (count int) {
+	ret, _, _ := syscall.Syscall(getActiveProcessorGroupCount, 0, 0, 0, 0)
+	return int(ret)
 }

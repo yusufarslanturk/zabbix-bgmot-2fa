@@ -21,6 +21,10 @@
 
 package win32
 
+const (
+	ARRAY_MAX = 1 << 31
+)
+
 type PROCESS_MEMORY_COUNTERS_EX struct {
 	Cb                         uint32
 	PageFaultCount             uint32
