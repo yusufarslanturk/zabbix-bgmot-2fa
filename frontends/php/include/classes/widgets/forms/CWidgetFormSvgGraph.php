@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -438,12 +438,12 @@ class CWidgetFormSvgGraph extends CWidgetForm {
 
 		if ($period < ZBX_MIN_PERIOD) {
 			$errors[] = _n('Minimum time period to display is %1$s minute.',
-				'Minimum time period to display is %1$s minutes.', (int) ZBX_MIN_PERIOD / SEC_PER_MIN
+				'Minimum time period to display is %1$s minutes.', (int) (ZBX_MIN_PERIOD / SEC_PER_MIN)
 			);
 		}
 		elseif ($period > ZBX_MAX_PERIOD) {
 			$errors[] = _n('Maximum time period to display is %1$s day.',
-				'Maximum time period to display is %1$s days.', (int) ZBX_MAX_PERIOD / SEC_PER_DAY
+				'Maximum time period to display is %1$s days.', (int) (ZBX_MAX_PERIOD / SEC_PER_DAY)
 			);
 		}
 

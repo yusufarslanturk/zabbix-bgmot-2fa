@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -378,7 +378,7 @@ static int	get_value(DC_ITEM *item, AGENT_RESULT *result, zbx_vector_ptr_t *add_
 			res = get_value_external(item, result);
 			break;
 		case ITEM_TYPE_SSH:
-#ifdef HAVE_SSH2
+#if defined(HAVE_SSH2) || defined(HAVE_SSH)
 			zbx_alarm_on(CONFIG_TIMEOUT);
 			res = get_value_ssh(item, result);
 			zbx_alarm_off();
@@ -890,12 +890,14 @@ ZBX_THREAD_ENTRY(poller_thread, args)
 
 	poller_type = *(unsigned char *)((zbx_thread_args_t *)args)->args;
 	process_type = ((zbx_thread_args_t *)args)->process_type;
-
 	server_num = ((zbx_thread_args_t *)args)->server_num;
 	process_num = ((zbx_thread_args_t *)args)->process_num;
 
 	zabbix_log(LOG_LEVEL_INFORMATION, "%s #%d started [%s #%d]", get_program_type_string(program_type),
 			server_num, get_process_type_string(process_type), process_num);
+
+	update_selfmon_counter(ZBX_PROCESS_STATE_BUSY);
+
 #ifdef HAVE_NETSNMP
 	if (ZBX_POLLER_TYPE_NORMAL == poller_type || ZBX_POLLER_TYPE_UNREACHABLE == poller_type)
 		zbx_init_snmp();

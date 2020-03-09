@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -942,10 +942,10 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 #else
 #	define ODBC_FEATURE_STATUS 	" NO"
 #endif
-#ifdef HAVE_SSH2
-#	define SSH2_FEATURE_STATUS 	"YES"
+#if defined(HAVE_SSH2) || defined(HAVE_SSH)
+#	define SSH_FEATURE_STATUS 	"YES"
 #else
-#	define SSH2_FEATURE_STATUS 	" NO"
+#	define SSH_FEATURE_STATUS 	" NO"
 #endif
 #ifdef HAVE_IPV6
 #	define IPV6_FEATURE_STATUS 	"YES"
@@ -968,7 +968,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 	zabbix_log(LOG_LEVEL_INFORMATION, "Web monitoring:        " LIBCURL_FEATURE_STATUS);
 	zabbix_log(LOG_LEVEL_INFORMATION, "VMware monitoring:     " VMWARE_FEATURE_STATUS);
 	zabbix_log(LOG_LEVEL_INFORMATION, "ODBC:                  " ODBC_FEATURE_STATUS);
-	zabbix_log(LOG_LEVEL_INFORMATION, "SSH2 support:          " SSH2_FEATURE_STATUS);
+	zabbix_log(LOG_LEVEL_INFORMATION, "SSH support:           " SSH_FEATURE_STATUS);
 	zabbix_log(LOG_LEVEL_INFORMATION, "IPv6 support:          " IPV6_FEATURE_STATUS);
 	zabbix_log(LOG_LEVEL_INFORMATION, "TLS support:           " TLS_FEATURE_STATUS);
 	zabbix_log(LOG_LEVEL_INFORMATION, "**************************");
@@ -1047,6 +1047,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 
 	if (SUCCEED != DBcheck_version())
 		exit(EXIT_FAILURE);
+	DBcheck_character_set();
 
 	threads_num = CONFIG_CONFSYNCER_FORKS + CONFIG_HEARTBEAT_FORKS + CONFIG_DATASENDER_FORKS
 			+ CONFIG_POLLER_FORKS + CONFIG_UNREACHABLE_POLLER_FORKS + CONFIG_TRAPPER_FORKS

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -617,7 +617,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=104');
 		$dashboard = CDashboardElement::find()->one()->edit();
 		$widget = $dashboard->getWidget($name);
-		$widget->delete();
+		$dashboard->deleteWidget($name);
 		$this->page->waitUntilReady();
 
 		$dashboard->save();

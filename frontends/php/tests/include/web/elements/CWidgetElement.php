@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -72,19 +72,8 @@ class CWidgetElement extends CElement {
 	 * @return CFormElement
 	 */
 	public function edit() {
-		$this->query('xpath:.//button[@class="btn-widget-edit"]')->one()->click();
+		$this->query('xpath:.//button[@class="btn-widget-edit"]')->one()->click(true);
 		return $this->query('xpath://div[@data-dialogueid="widgetConfg"]//form')->waitUntilVisible()->asForm()->one();
-	}
-
-	/**
-	 * Delete widget.
-	 *
-	 * @return $this
-	 */
-	public function delete() {
-		$this->query('xpath:.//button[@class="btn-widget-delete"]')->one()->click()->waitUntilNotVisible();
-
-		return $this;
 	}
 
 	/**
@@ -94,7 +83,8 @@ class CWidgetElement extends CElement {
 		$target = $this;
 
 		return function () use ($target) {
-			return ($target->query('xpath:.//div[@class="preloader-container"]')->one(false) === null);
+			return ($target->query('xpath:.//div[@class="preloader-container"]')->one(false)->isValid() === false);
 		};
 	}
 }
+

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -61,11 +61,11 @@ class CControllerProblemView extends CController {
 			'filter_show_latest_values' =>	'in 1',
 			'filter_tag_name_format' =>		'in '.PROBLEMS_TAG_NAME_FULL.','.PROBLEMS_TAG_NAME_SHORTENED.','.PROBLEMS_TAG_NAME_NONE,
 			'filter_tag_priority' =>		'string',
-			'from' =>						'range_time',
-			'to' =>							'range_time'
+			'filter_from' =>				'range_time',
+			'filter_to' =>					'range_time'
 		];
 
-		$ret = $this->validateInput($fields) && $this->validateTimeSelectorPeriod();
+		$ret = $this->validateInput($fields) && $this->validateTimeSelectorPeriod('filter_from', 'filter_to');
 
 		if ($ret && $this->hasInput('filter_inventory')) {
 			foreach ($this->getInput('filter_inventory') as $filter_inventory) {
@@ -335,8 +335,8 @@ class CControllerProblemView extends CController {
 			$timeselector_options = [
 				'profileIdx' => 'web.problem.filter',
 				'profileIdx2' => 0,
-				'from' => $this->hasInput('from') ? $this->getInput('from') : null,
-				'to' => $this->hasInput('to') ? $this->getInput('to') : null
+				'from' => $this->hasInput('filter_from') ? $this->getInput('filter_from') : null,
+				'to' => $this->hasInput('filter_to') ? $this->getInput('filter_to') : null
 			];
 			updateTimeSelectorPeriod($timeselector_options);
 

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -224,7 +224,7 @@ class CFilter extends CDiv {
 
 		return $this->addTab(
 			(new CLink($header, '#'.$anchor))->addClass(ZBX_STYLE_FILTER_TRIGGER),
-			(new CDiv($body))
+			(new CDiv($this->form->addItem($body)))
 				->addClass(ZBX_STYLE_FILTER_CONTAINER)
 				->setId($anchor)
 		);
@@ -304,6 +304,9 @@ class CFilter extends CDiv {
 					->addClass(ZBX_STYLE_TIME_SELECTION_CONTAINER)
 					->setId($anchor)
 			);
+			$this->form
+				->addItem(new CVar('filter_from', $from))
+				->addItem(new CVar('filter_to', $to));
 		}
 		else {
 			$this
@@ -320,7 +323,7 @@ class CFilter extends CDiv {
 	/**
 	 * Add tab.
 	 *
-	 * @param string|CTag $header    Tab header title string or CTag contaier.
+	 * @param string|CTag $header    Tab header title string or CTag container.
 	 * @param array       $body      Array of body elements.
 	 *
 	 * @return CFilter
@@ -381,9 +384,7 @@ class CFilter extends CDiv {
 			}
 		}
 
-		$this
-			->addStyle('display:none')
-			->form->addItem($this->tabs);
+		$this->addStyle('display:none');
 
 		if ($headers_cnt) {
 			$this
@@ -391,7 +392,7 @@ class CFilter extends CDiv {
 				->setAttribute('aria-label', _('Filter'));
 		}
 
-		$this->addItem($this->form);
+		$this->addItem($this->tabs);
 
 		return parent::toString($destroy).($headers_cnt ? get_js($this->getJS()) : '');
 	}

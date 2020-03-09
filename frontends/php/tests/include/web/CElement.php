@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -228,6 +228,15 @@ class CElement extends CBaseElement implements IWaitable {
 	}
 
 	/**
+	 * Take screenshot of the specific element.
+	 *
+	 * @return string
+	 */
+	public function takeScreenshot() {
+		return CElementQuery::getPage()->takeScreenshot($this);
+	}
+
+	/**
 	 * Get instance of specified element class from current element.
 	 *
 	 * @param string $class      class to be casted to
@@ -311,6 +320,39 @@ class CElement extends CBaseElement implements IWaitable {
 	 */
 	public function fill($text) {
 		return $this->overwrite($text);
+	}
+
+	/**
+	 * Remove element from the page.
+	 */
+	public function delete() {
+		CElementQuery::getDriver()->executeScript('arguments[0].remove();', [$this]);
+	}
+
+	/**
+	 * Get element rectangle.
+	 *
+	 * @return array
+	 */
+	public function getRect() {
+		$location = $this->getLocation();
+		$size = $this->getSize();
+
+		return [
+			'x' => $location->getX(),
+			'y' => $location->getY(),
+			'width' => $size->getWidth(),
+			'height' => $size->getHeight()
+		];
+	}
+
+	/**
+	 * Hover over an element.
+	 *
+	 * @return $this
+	 */
+	public function hover() {
+		return $this->fireEvent('mouseover');
 	}
 
 	/**
@@ -609,5 +651,16 @@ class CElement extends CBaseElement implements IWaitable {
 		}
 
 		return ($expected == $value);
+	}
+
+	/**
+	 * Remove focus from the element.
+	 *
+	 * @return $this
+	 */
+	public function removeFocus() {
+		CElementQuery::getDriver()->executeScript('arguments[0].blur();', [$this]);
+
+		return $this;
 	}
 }
