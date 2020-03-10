@@ -1484,6 +1484,7 @@ function getEventsActions(array $events, array $r_events = []) {
 	$userids = [];
 	$mediatypeids = [];
 	$actions = [];
+	$event_alert_state = [];
 
 	foreach ($events as $event) {
 		// Get alerts for event.
@@ -1504,24 +1505,64 @@ function getEventsActions(array $events, array $r_events = []) {
 		]);
 	}
 
-	$alerts = $alert_eventids
-		? API::Alert()->get([
-			'output' => ['alerttype', 'clock', 'error', 'eventid', 'mediatypeid', 'retries', 'status', 'userid'],
+	if ($alert_eventids) {
+		$event_alert_state = array_combine(array_keys($alert_eventids), array_fill(0, count($alert_eventids), [
+			'failed_ctn' => 0,
+			'in_progress_ctn' => 0,
+			'total_ctn' => 0,
+		]));
+
+		$alerts = API::Alert()->get([
+			'output' => [],
+			'groupCount' => true,
+			'countOutput' => true,
+			'filter' => ['status' => ALERT_STATUS_FAILED],
 			'eventids' => array_keys($alert_eventids)
-		])
-		: [];
+		]);
+
+		foreach ($alerts as $alert) {
+			$event_alert_state[$alert['eventid']]['failed_ctn'] = (int) $alert['rowscount'];
+		}
+
+		$alerts = API::Alert()->get([
+			'output' => [],
+			'groupCount' => true,
+			'countOutput' => true,
+			'filter' => ['status' => [ALERT_STATUS_NEW, ALERT_STATUS_NOT_SENT]],
+			'eventids' => array_keys($alert_eventids)
+		]);
+
+		foreach ($alerts as $alert) {
+			$event_alert_state[$alert['eventid']]['in_progress_ctn'] = (int) $alert['rowscount'];
+		}
+
+		$alerts = API::Alert()->get([
+			'output' => [],
+			'groupCount' => true,
+			'countOutput' => true,
+			'eventids' => array_keys($alert_eventids)
+		]);
+		foreach ($alerts as $alert) {
+			$event_alert_state[$alert['eventid']]['total_ctn'] = (int) $alert['rowscount'];
+		}
+	}
 
 	// Create array of actions for each event.
 	foreach ($events as $event) {
-		$event_actions = getSingleEventActions($event, $r_events, $alerts);
+		$event_actions = $event_alert_state[$event['eventid']];
+		if ($event['r_eventid']) {
+			$r_event_actions = $event_alert_state[$event['r_eventid']];
+			$event_actions['failed_ctn'] += $r_event_actions['failed_ctn'];
+			$event_actions['total_ctn'] += $r_event_actions['total_ctn'];
+			$event_actions['in_progress_ctn'] += $r_event_actions['in_progress_ctn'];
+		}
+
 		$actions[$event['eventid']] = [
-			'actions' => $event_actions['actions'],
-			'count' => $event_actions['count'],
-			'has_uncomplete_action' => $event_actions['has_uncomplete_action'],
-			'has_failed_action' => $event_actions['has_failed_action']
+			'actions' => [],
+			'count' => $event_actions['total_ctn'] + count($event['acknowledges']),
+			'has_uncomplete_action' => (bool) $event_actions['in_progress_ctn'],
+			'has_failed_action' => (bool) $event_actions['failed_ctn']
 		];
-		$mediatypeids += $event_actions['mediatypeids'];
-		$userids += $event_actions['userids'];
 	}
 
 	return [
@@ -1556,12 +1597,15 @@ function getEventDetailsActions(array $event) {
 		]);
 	}
 
+	$config = select_config();
+
 	// Get automatic actions (alerts).
 	$alerts = API::Alert()->get([
 		'output' => ['alerttype', 'clock', 'error', 'eventid', 'esc_step', 'mediatypeid', 'message', 'retries',
 			'sendto', 'status', 'subject', 'userid', 'p_eventid', 'acknowledgeid'
 		],
-		'eventids' => $alert_eventids
+		'eventids' => $alert_eventids,
+		'config' => $config['search_limit']
 	]);
 
 	$actions = getSingleEventActions($event, $r_events, $alerts);
