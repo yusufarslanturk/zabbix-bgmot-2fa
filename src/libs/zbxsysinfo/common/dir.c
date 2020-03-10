@@ -874,7 +874,7 @@ int	VFS_DIR_SIZE(AGENT_REQUEST *request, AGENT_RESULT *result)
  *                                                                            *
  *****************************************************************************/
 #if defined(_WINDOWS) || defined(__MINGW32__)
-static int	vfs_dir_count(const AGENT_REQUEST *request, AGENT_RESULT *result, HANDLE timeout_event)
+static int	vfs_dir_count(AGENT_REQUEST *request, AGENT_RESULT *result, HANDLE timeout_event)
 {
 	char			*dir = NULL;
 	int			types, max_depth, ret = SYSINFO_RET_FAIL;
