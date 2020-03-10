@@ -68,8 +68,6 @@ func resolveMetric(key string) (cfunc unsafe.Pointer) {
 		return unsafe.Pointer(C.NET_DNS_RECORD)
 	case "system.boottime":
 		return unsafe.Pointer(C.SYSTEM_BOOTTIME)
-	case "web.page.get":
-		return unsafe.Pointer(C.WEB_PAGE_GET)
 	case "web.page.perf":
 		return unsafe.Pointer(C.WEB_PAGE_PERF)
 	case "web.page.regexp":

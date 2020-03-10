@@ -83,8 +83,6 @@ func resolveMetric(key string) (cfunc unsafe.Pointer) {
 		cfunc = unsafe.Pointer(C.PROC_NUM)
 	case "system.boottime":
 		cfunc = unsafe.Pointer(C.SYSTEM_BOOTTIME)
-	case "web.page.get":
-		cfunc = unsafe.Pointer(C.WEB_PAGE_GET)
 	case "web.page.perf":
 		cfunc = unsafe.Pointer(C.WEB_PAGE_PERF)
 	case "web.page.regexp":
