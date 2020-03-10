@@ -1894,39 +1894,30 @@ function makeEventSeverityChangesIcon(array $data, array $users, array $config) 
 }
 
 /**
- * Create icon with hintbox for event actions.
+ * @param array  $actions                      Array with all actions sorted by clock.
+ * @param int    $actions[]['action_type']     Type of action table entry (ZBX_EVENT_HISTORY_*).
+ * @param string $actions[]['clock']           Time, when action was performed.
+ * @param string $actions[]['message']         Message sent by alert, or written by manual update, or remote command text.
+ * @param string $actions[]['action']          Flag with problem update operation performed (only for ZBX_EVENT_HISTORY_MANUAL_UPDATE).
+ * @param string $actions[]['alerttype']       Type of alert (only for ZBX_EVENT_HISTORY_ALERT).
+ * @param string $actions[]['mediatypeid']     Id for mediatype, where alert message was sent (only for ZBX_EVENT_HISTORY_ALERT).
+ * @param string $actions[]['error']           Error message in case of failed alert (only for ZBX_EVENT_HISTORY_ALERT).
+ * @param array  $users                        User name, surname and alias.
+ * @param array  $mediatypes                   Mediatypes with maxattempts value and description.
+ * @param string $mediatypes[]['description']  Mediatype description.
+ * @param array  $config                       Zabbix config.
  *
- * @param array  $data
- * @param array  $data['actions']                   Array with all actions sorted by clock.
- * @param int    $data['actions'][]['action_type']  Type of action table entry (ZBX_EVENT_HISTORY_*).
- * @param string $data['actions'][]['clock']        Time, when action was performed.
- * @param string $data['actions'][]['message']      Message sent by alert, or written by manual update, or remote command text.
- * @param string $data['actions'][]['action']       Flag with problem update operation performed (only for ZBX_EVENT_HISTORY_MANUAL_UPDATE).
- * @param string $data['actions'][]['alerttype']    Type of alert (only for ZBX_EVENT_HISTORY_ALERT).
- * @param string $data['actions'][]['mediatypeid']  Id for mediatype, where alert message was sent (only for ZBX_EVENT_HISTORY_ALERT).
- * @param string $data['actions'][]['error']        Error message in case of failed alert (only for ZBX_EVENT_HISTORY_ALERT).
- * @param int    $data['count']                     Number of actions.
- * @param bool   $data['has_uncomplete_action']     Does the event have at least one uncompleted alert action.
- * @param bool   $data['has_failed_action']         Does the event have at least one failed alert action.
- * @param array  $users                             User name, surname and alias.
- * @param array  $mediatypes                        Mediatypes with maxattempts value and description.
- * @param string $mediatypes[]['description']       Mediatype description.
- * @param array  $config                            Zabbix config.
- *
- * @return CSpan|null
+ * @return CTableInfo
  */
-function makeEventActionsIcon(array $data, array $users, array $mediatypes, array $config) {
-	// Number of meaningful actions.
-	$total = $data['count'];
-	// Number of all action entries.
-	$action_count = count($data['actions']);
+function makeEventActionsTable(array $actions, array $users, array $mediatypes, array $config): CTableInfo {
+	$action_count = count($actions);
 
 	$table = (new CTableInfo())->setHeader([
 		_('Time'), _('User/Recipient'), _('Action'), _('Message/Command'), _('Status'), _('Info')
 	]);
 
 	for ($i = 0; $i < $action_count && $i < ZBX_WIDGET_ROWS; $i++) {
-		$action = $data['actions'][$i];
+		$action = $actions[$i];
 
 		$message = '';
 		if ($action['action_type'] == ZBX_EVENT_HISTORY_MANUAL_UPDATE
@@ -1954,6 +1945,35 @@ function makeEventActionsIcon(array $data, array $users, array $mediatypes, arra
 		]);
 	}
 
+	return $table;
+}
+
+/**
+ * Create icon with hintbox for event actions.
+ *
+ * @param array  $data
+ * @param array  $data['actions']                   Array with all actions sorted by clock.
+ * @param int    $data['actions'][]['action_type']  Type of action table entry (ZBX_EVENT_HISTORY_*).
+ * @param string $data['actions'][]['clock']        Time, when action was performed.
+ * @param string $data['actions'][]['message']      Message sent by alert, or written by manual update, or remote command text.
+ * @param string $data['actions'][]['action']       Flag with problem update operation performed (only for ZBX_EVENT_HISTORY_MANUAL_UPDATE).
+ * @param string $data['actions'][]['alerttype']    Type of alert (only for ZBX_EVENT_HISTORY_ALERT).
+ * @param string $data['actions'][]['mediatypeid']  Id for mediatype, where alert message was sent (only for ZBX_EVENT_HISTORY_ALERT).
+ * @param string $data['actions'][]['error']        Error message in case of failed alert (only for ZBX_EVENT_HISTORY_ALERT).
+ * @param int    $data['count']                     Number of actions.
+ * @param bool   $data['has_uncomplete_action']     Does the event have at least one uncompleted alert action.
+ * @param bool   $data['has_failed_action']         Does the event have at least one failed alert action.
+ * @param array  $users                             User name, surname and alias.
+ * @param array  $mediatypes                        Mediatypes with maxattempts value and description.
+ * @param string $mediatypes[]['description']       Mediatype description.
+ * @param array  $config                            Zabbix config.
+ *
+ * @return CSpan|null
+ */
+function makeEventActionsIcon(array $data, array $users, array $mediatypes, array $config) {
+	// Number of meaningful actions.
+	$total = $data['count'];
+
 	// select icon
 	if ($data['has_failed_action']) {
 		$icon_style = ZBX_STYLE_ACTIONS_NUM_RED;
@@ -1969,7 +1989,7 @@ function makeEventActionsIcon(array $data, array $users, array $mediatypes, arra
 		? makeActionIcon([
 			'icon' => $icon_style,
 			'hint' => [
-				$table,
+				makeEventActionsTable($data['actions'], $users, $mediatypes, $config),
 				($total > ZBX_WIDGET_ROWS)
 					? (new CDiv(
 						(new CDiv(
