@@ -67,7 +67,18 @@ static duk_ret_t	es_zabbix_ctor(duk_context *ctx)
  ******************************************************************************/
 static duk_ret_t	es_zabbix_log(duk_context *ctx)
 {
-	zabbix_log(duk_to_int(ctx, 0), "%s", duk_to_string(ctx, 1));
+	char *utf8 = NULL;
+	int res;
+
+	res = zbx_cesu8_to_utf8(duk_to_string(ctx, 1), &utf8);
+
+	if (0 == res)
+		zabbix_log(duk_to_int(ctx, 0), "%s", utf8);
+	else if (-1 == res)
+		zabbix_log(LOG_LEVEL_WARNING, "could not convert from cesu8 to utf8");
+
+	zbx_free(utf8);
+
 	return 0;
 }
 
