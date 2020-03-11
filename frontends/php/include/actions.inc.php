@@ -1983,11 +1983,12 @@ function makeEventActionsIcon(array $data, $eventid) {
 	}
 
 	return $total
-		? (new CLink(makeActionIcon([
+		? makeActionIcon([
 			'icon' => $icon_style,
+			'button' => true,
 			'num' => $total,
 			'aria-label' => _xn('%1$s action', '%1$s actions', $total, 'screen reader', $total)
-		])))->setAttribute('data-actions-table-eventid', $eventid)
+		])->setAttribute('data-actions-table-eventid', $eventid)
 		: null;
 }
 

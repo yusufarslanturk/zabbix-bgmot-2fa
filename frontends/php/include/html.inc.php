@@ -847,14 +847,22 @@ function makeSuppressedProblemIcon(array $icon_data) {
  * Renders an action icon.
  *
  * @param array  $icon_data
- * @param string $icon_data[icon]  Icon style.
- * @param array  $icon_data[hint]  Hintbox content (optional).
- * @param int    $icon_data[num]   Number displayed over the icon (optional).
+ * @param string $icon_data[icon]    Icon style.
+ * @param array  $icon_data[hint]    Hintbox content (optional).
+ * @param bool   $icon_data[button]  Use button element (optional).
+ * @param int    $icon_data[num]     Number displayed over the icon (optional).
  *
- * @return CSpan
+ * @return CSpan|CButton
  */
 function makeActionIcon(array $icon_data) {
-	$icon = (new CSpan())->addClass($icon_data['icon']);
+
+	if (array_key_exists('button', $icon_data) && $icon_data['button']) {
+		$icon = (new CButton())->addClass($icon_data['icon']);
+	}
+	else {
+		$icon = (new CSpan())->addClass($icon_data['icon']);
+	}
+
 
 	if (array_key_exists('num', $icon_data)) {
 		if ($icon_data['num'] > 99) {
