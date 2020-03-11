@@ -1,6 +1,7 @@
 package web
 
 import (
+	"bytes"
 	"fmt"
 	"net"
 	"net/http"
@@ -80,12 +81,12 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	defer resp.Body.Close()
 
-	body, err := httputil.DumpResponse(resp, true)
+	b, err := httputil.DumpResponse(resp, true)
 	if err != nil {
 		return nil, fmt.Errorf("Cannot get content of web page: %s", err)
 	}
 
-	return string(body), nil
+	return string(bytes.TrimRight(b, "\r\n")), nil
 
 }
 
