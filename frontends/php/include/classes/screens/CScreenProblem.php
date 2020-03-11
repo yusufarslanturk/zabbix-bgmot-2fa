@@ -1099,9 +1099,7 @@ class CScreenProblem extends CScreenBase {
 						? zbx_date2age($problem['clock'], $problem['r_clock'])
 						: zbx_date2age($problem['clock']),
 					$problem_update_link,
-					makeEventActionsIcons($problem['eventid'], $data['actions'], $data['mediatypes'], $data['users'],
-						$this->config
-					),
+					makeEventActionsIcons($problem['eventid'], $data['actions'], $data['users'], $this->config),
 					$this->data['filter']['show_tags'] ? $tags[$problem['eventid']] : null
 				]), ($this->data['filter']['highlight_row'] && $value == TRIGGER_VALUE_TRUE)
 					? getSeverityFlhStyle($problem['severity'])

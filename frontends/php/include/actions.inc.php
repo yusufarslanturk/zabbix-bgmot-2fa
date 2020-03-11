@@ -1542,6 +1542,7 @@ function getEventsActions(array $events, array $r_events = []) {
 			'countOutput' => true,
 			'eventids' => array_keys($alert_eventids)
 		]);
+
 		foreach ($alerts as $alert) {
 			$event_alert_state[$alert['eventid']]['total_ctn'] = (int) $alert['rowscount'];
 		}
@@ -1748,16 +1749,15 @@ function getEventUpdates(array $event) {
  * @param array  $actions['messages']    Messages icon data.
  * @param array  $actions['severities']  Severity change icon data.
  * @param array  $actions['actions']     Actions icon data.
- * @param array  $mediatypes             Mediatypes with maxattempts value and description.
  * @param array  $users                  User name, surname and alias.
  * @param array  $config                 Zabbix config.
  *
  * @return CCol|string
  */
-function makeEventActionsIcons($eventid, $actions, $mediatypes, $users, $config) {
+function makeEventActionsIcons($eventid, $actions, $users, $config) {
 	$messages_icon = makeEventMessagesIcon($actions['messages'][$eventid], $users);
 	$severities_icon = makeEventSeverityChangesIcon($actions['severities'][$eventid], $users, $config);
-	$actions_icon = makeEventActionsIcon($actions['actions'][$eventid], $users, $mediatypes, $config);
+	$actions_icon = makeEventActionsIcon($actions['actions'][$eventid], $eventid);
 
 	$action_icons = [];
 	if ($messages_icon !== null) {
@@ -1909,7 +1909,7 @@ function makeEventSeverityChangesIcon(array $data, array $users, array $config) 
  *
  * @return CTableInfo
  */
-function makeEventActionsTable(array $actions, array $users, array $mediatypes, array $config): CTableInfo {
+function makeEventActionsTable(array $actions, array $users, array $mediatypes, array $config) {
 	$action_count = count($actions);
 
 	$table = (new CTableInfo())->setHeader([
@@ -1963,14 +1963,11 @@ function makeEventActionsTable(array $actions, array $users, array $mediatypes, 
  * @param int    $data['count']                     Number of actions.
  * @param bool   $data['has_uncomplete_action']     Does the event have at least one uncompleted alert action.
  * @param bool   $data['has_failed_action']         Does the event have at least one failed alert action.
- * @param array  $users                             User name, surname and alias.
- * @param array  $mediatypes                        Mediatypes with maxattempts value and description.
- * @param string $mediatypes[]['description']       Mediatype description.
- * @param array  $config                            Zabbix config.
+ * @param string $eventid
  *
  * @return CSpan|null
  */
-function makeEventActionsIcon(array $data, array $users, array $mediatypes, array $config) {
+function makeEventActionsIcon(array $data, $eventid) {
 	// Number of meaningful actions.
 	$total = $data['count'];
 
@@ -1986,22 +1983,11 @@ function makeEventActionsIcon(array $data, array $users, array $mediatypes, arra
 	}
 
 	return $total
-		? makeActionIcon([
+		? (new CLink(makeActionIcon([
 			'icon' => $icon_style,
-			'hint' => [
-				makeEventActionsTable($data['actions'], $users, $mediatypes, $config),
-				($total > ZBX_WIDGET_ROWS)
-					? (new CDiv(
-						(new CDiv(
-							(new CDiv(_s('Displaying %1$s of %2$s found', ZBX_WIDGET_ROWS, $total)))
-								->addClass(ZBX_STYLE_TABLE_STATS)
-						))->addClass(ZBX_STYLE_PAGING_BTN_CONTAINER)
-					))->addClass(ZBX_STYLE_TABLE_PAGING)
-					: null
-			],
 			'num' => $total,
 			'aria-label' => _xn('%1$s action', '%1$s actions', $total, 'screen reader', $total)
-		])
+		])))->setAttribute('data-event-actions-table', $eventid)
 		: null;
 }
 

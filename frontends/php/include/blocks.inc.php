@@ -641,9 +641,7 @@ function makeProblemsPopup(array $problems, array $triggers, $backurl, array $ac
 			$show_latest_values ? CScreenProblem::getLatestValues($trigger['items']) : null,
 			zbx_date2age($problem['clock']),
 			$ack,
-			makeEventActionsIcons($problem['eventid'], $actions['all_actions'], $actions['mediatypes'],
-				$actions['users'], $config
-			),
+			makeEventActionsIcons($problem['eventid'], $actions['all_actions'], $actions['users'], $config),
 			$tags[$problem['eventid']]
 		]));
 	}

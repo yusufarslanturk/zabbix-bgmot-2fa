@@ -239,7 +239,7 @@ abstract class CController {
 	/**
 	 * Get single input parameter.
 	 *
-	 * @return var
+	 * @return mixed
 	 */
 	public function getInput($var, $default = null) {
 		if ($default === null) {

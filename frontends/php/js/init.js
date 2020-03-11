@@ -267,6 +267,77 @@ jQuery(function($) {
 	});
 
 	/**
+	 * Build popup hintbox for event actions table.
+	 */
+	$(document).on('keydown click', '[data-event-actions-table]', function(event) {
+		var $obj = $(this),
+			position_target = event.target;
+
+		if (event.type === 'keydown' && event.which != 13) {
+			return;
+		}
+		else if (event.type === 'contextmenu' || (IE && $obj.closest('svg').length > 0)
+			|| event.originalEvent.detail !== 0) {
+			position_target = event;
+		}
+
+		// Manually trigger event for menuPopupPreloaderCloseHandler call for the previous preloader.
+		if ($('#menu-popup-preloader').length) {
+			$(document).trigger('click');
+		}
+
+		var	$preloader = createMenuPopupPreloader(),
+			url = new Curl('zabbix.php');
+
+		url.setArgument('action', 'event.actions.table');
+
+		var xhr = $.ajax({
+			url: url.getUrl(),
+			method: 'POST',
+			data: {
+				eventid: $obj.data('event-actions-table')
+			},
+			dataType: 'json',
+			beforeSend: function() {
+				$('.menu-popup-top').menuPopup('close');
+				setTimeout(function(){
+					$preloader
+						.fadeIn(200)
+						.position({
+							of: position_target,
+							my: 'left top',
+							at: 'left bottom'
+						});
+				}, 500);
+			},
+			success: function(resp) {
+				overlayPreloaderDestroy($preloader.prop('id'));
+				var hint = resp.body;
+
+				if (resp.messages) {
+					hint = resp.messages + hint;
+				}
+
+				if (resp.debug) {
+					hint = hint + resp.debug;
+				}
+
+				hintBox.showStaticHint(event, event.target, '', true, '', jQuery(hint));
+			},
+			error: function() {
+			}
+		});
+
+		addToOverlaysStack($preloader.prop('id'), event.target, 'preloader', xhr);
+
+		$(document)
+			.off('click', menuPopupPreloaderCloseHandler)
+			.on('click', {id: $preloader.prop('id')}, menuPopupPreloaderCloseHandler);
+
+		return false;
+	});
+
+	/**
 	 * add.popup event
 	 *
 	 * Call multiselect method 'addData' if parent was multiselect, execute addPopupValues function

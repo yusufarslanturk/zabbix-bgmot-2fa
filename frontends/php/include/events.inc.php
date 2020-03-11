@@ -376,7 +376,7 @@ function make_small_eventlist($startEvent, $backurl) {
 			(new CLink($event['acknowledged'] == EVENT_ACKNOWLEDGED ? _('Yes') : _('No'), $problem_update_url))
 				->addClass($event['acknowledged'] == EVENT_ACKNOWLEDGED ? ZBX_STYLE_GREEN : ZBX_STYLE_RED)
 				->addClass(ZBX_STYLE_LINK_ALT),
-			makeEventActionsIcons($event['eventid'], $actions['data'], $mediatypes, $users, $severity_config)
+			makeEventActionsIcons($event['eventid'], $actions['data'], $users, $severity_config)
 		]);
 	}
 
