@@ -21,15 +21,8 @@ package tcpudp
 
 import (
 	"errors"
-	"zabbix.com/pkg/plugin"
 )
 
 func exportSystemTcpListen(port uint16) (result interface{}, err error) {
 	return nil, errors.New("Not supported.")
-}
-
-func init() {
-	plugin.RegisterMetrics(&impl, "Tcp",
-		"net.tcp.port", "Checks if it is possible to make TCP connection to specified port.",
-	)
 }
