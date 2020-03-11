@@ -6,6 +6,7 @@ import (
 	"net"
 	"net/http"
 	"net/http/httputil"
+	"net/url"
 	"time"
 
 	"zabbix.com/internal/agent"
@@ -51,6 +52,15 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	if len(params) == 0 || params[0] == "" {
 		return nil, fmt.Errorf("Invalid first parameter.")
+	}
+
+	u, err := url.Parse(params[0])
+	if err != nil {
+		return nil, fmt.Errorf("Cannot parse url %s", err)
+	}
+
+	if u.Scheme == "" || u.Opaque != "" {
+		params[0] = "http://" + params[0]
 	}
 
 	req, err := http.NewRequest("GET", params[0], nil)
