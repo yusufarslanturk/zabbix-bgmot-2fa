@@ -269,7 +269,7 @@ jQuery(function($) {
 	/**
 	 * Build popup hintbox for event actions table.
 	 */
-	$(document).on('keydown click', '[data-event-actions-table]', function(event) {
+	$(document).on('keydown click', '[data-actions-table-eventid]', function(event) {
 		var $obj = $(this),
 			position_target = event.target;
 
@@ -295,7 +295,7 @@ jQuery(function($) {
 			url: url.getUrl(),
 			method: 'POST',
 			data: {
-				eventid: $obj.data('event-actions-table')
+				eventid: $obj.data('actions-table-eventid')
 			},
 			dataType: 'json',
 			beforeSend: function() {

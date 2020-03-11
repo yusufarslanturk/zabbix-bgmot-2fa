@@ -1987,7 +1987,7 @@ function makeEventActionsIcon(array $data, $eventid) {
 			'icon' => $icon_style,
 			'num' => $total,
 			'aria-label' => _xn('%1$s action', '%1$s actions', $total, 'screen reader', $total)
-		])))->setAttribute('data-event-actions-table', $eventid)
+		])))->setAttribute('data-actions-table-eventid', $eventid)
 		: null;
 }
 
