@@ -1,11 +1,10 @@
 package web
 
 import (
-	"errors"
 	"fmt"
-	"io/ioutil"
 	"net"
 	"net/http"
+	"net/http/httputil"
 	"time"
 
 	"zabbix.com/internal/agent"
@@ -40,7 +39,7 @@ func (p *Plugin) Validate(options interface{}) error {
 }
 
 func disableRedirect(req *http.Request, via []*http.Request) error {
-	return errors.New("redirects are disabled")
+	return http.ErrUseLastResponse
 }
 
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (interface{}, error) {
@@ -81,7 +80,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := httputil.DumpResponse(resp, true)
 	if err != nil {
 		return nil, fmt.Errorf("Cannot get content of web page: %s", err)
 	}
