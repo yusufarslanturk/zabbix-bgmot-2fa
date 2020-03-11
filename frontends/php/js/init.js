@@ -322,8 +322,8 @@ jQuery(function($) {
 					hint = hint + resp.debug;
 				}
 
-				hintBox.showStaticHint(event, event.target, '', true, '', jQuery(hint));
-			},
+				hintBox.showStaticHint(event, this, '', true, '', jQuery(hint));
+			}.bind(this),
 			error: function() {
 			}
 		});
