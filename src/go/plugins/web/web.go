@@ -63,6 +63,18 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		params[0] = "http://" + params[0]
 	}
 
+	if len(params) > 2 && params[2] != "" {
+		params[0] += ":" + params[2]
+	}
+
+	if len(params) > 1 && params[1] != "" {
+		if params[1][0] != '/' {
+			params[0] += "/"
+		}
+
+		params[0] += params[1]
+	}
+
 	req, err := http.NewRequest("GET", params[0], nil)
 	if err != nil {
 		return nil, fmt.Errorf("Cannot create new request: %s", err)
