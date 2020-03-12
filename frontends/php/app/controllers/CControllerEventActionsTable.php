@@ -69,7 +69,7 @@ class CControllerEventActionsTable extends CController {
 
 		$mediatypes = $mediatypeids
 			? API::MediaType()->get([
-				'output' => ['maxattempts', 'description'],
+				'output' => ['description'],
 				'mediatypeids' => $mediatypeids,
 				'preservekeys' => true
 			])

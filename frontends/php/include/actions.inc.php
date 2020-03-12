@@ -1946,14 +1946,6 @@ function makeEventActionsTable(array $actions, array $users, array $mediatypes, 
  * Create icon with hintbox for event actions.
  *
  * @param array  $data
- * @param array  $data['actions']                   Array with all actions sorted by clock.
- * @param int    $data['actions'][]['action_type']  Type of action table entry (ZBX_EVENT_HISTORY_*).
- * @param string $data['actions'][]['clock']        Time, when action was performed.
- * @param string $data['actions'][]['message']      Message sent by alert, or written by manual update, or remote command text.
- * @param string $data['actions'][]['action']       Flag with problem update operation performed (only for ZBX_EVENT_HISTORY_MANUAL_UPDATE).
- * @param string $data['actions'][]['alerttype']    Type of alert (only for ZBX_EVENT_HISTORY_ALERT).
- * @param string $data['actions'][]['mediatypeid']  Id for mediatype, where alert message was sent (only for ZBX_EVENT_HISTORY_ALERT).
- * @param string $data['actions'][]['error']        Error message in case of failed alert (only for ZBX_EVENT_HISTORY_ALERT).
  * @param int    $data['count']                     Number of actions.
  * @param bool   $data['has_uncomplete_action']     Does the event have at least one uncompleted alert action.
  * @param bool   $data['has_failed_action']         Does the event have at least one failed alert action.
