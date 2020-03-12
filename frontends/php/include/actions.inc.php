@@ -1805,6 +1805,7 @@ function makeEventMessagesIcon(array $data, array $users) {
 	return $total
 		? makeActionIcon([
 			'icon' => ZBX_STYLE_ACTION_ICON_MSGS,
+			'button' => true,
 			'hint' => [
 				$table,
 				($total > ZBX_WIDGET_ROWS)
@@ -1876,6 +1877,7 @@ function makeEventSeverityChangesIcon(array $data, array $users, array $config) 
 
 	return $total
 		? makeActionIcon([
+			'button' => true,
 			'icon' => $icon_style,
 			'hint' => [
 				$table,
@@ -2179,7 +2181,7 @@ function makeActionTableIcon(array $action, array $config) {
 				$new_severity_name = getSeverityName($action['new_severity'], $config);
 				$hint = $old_severity_name.'&nbsp;&rArr;&nbsp;'.$new_severity_name;
 
-				$action_icons[] = makeActionIcon(['icon' => $action_type, 'hint' => $hint]);
+				$action_icons[] = makeActionIcon(['button' => true, 'icon' => $action_type, 'hint' => $hint]);
 			}
 
 			return (new CCol($action_icons))->addClass(ZBX_STYLE_NOWRAP);
