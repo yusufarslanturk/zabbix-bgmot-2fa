@@ -322,7 +322,13 @@ jQuery(function($) {
 					hint = hint + resp.debug;
 				}
 
-				hintBox.showStaticHint(event, this, '', true, '', jQuery(hint));
+				if (event.type === 'keydown') {
+					var offset = $obj.offset(), w = jQuery(window);
+					event.clientX = offset.left - w.scrollLeft();
+					event.clientY = offset.top - w.scrollTop() + ($obj.height() / 2);
+				}
+
+				hintBox.showStaticHint(event, this, '', false, '', jQuery(hint));
 			}.bind(this),
 			error: function() {
 			}
