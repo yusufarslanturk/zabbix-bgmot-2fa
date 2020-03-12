@@ -44,37 +44,7 @@ func disableRedirect(req *http.Request, via []*http.Request) error {
 	return http.ErrUseLastResponse
 }
 
-func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (interface{}, error) {
-
-	if len(params) > 3 {
-		return nil, fmt.Errorf("Too many parameters.")
-	}
-
-	if len(params) == 0 || params[0] == "" {
-		return nil, fmt.Errorf("Invalid first parameter.")
-	}
-
-	u, err := url.Parse(params[0])
-	if err != nil {
-		return nil, fmt.Errorf("Cannot parse url %s", err)
-	}
-
-	if u.Scheme == "" || u.Opaque != "" {
-		params[0] = "http://" + params[0]
-	}
-
-	if len(params) > 2 && params[2] != "" {
-		params[0] += ":" + params[2]
-	}
-
-	if len(params) > 1 && params[1] != "" {
-		if params[1][0] != '/' {
-			params[0] += "/"
-		}
-
-		params[0] += params[1]
-	}
-
+func (p *Plugin) webPageGet(params []string) (interface{}, error) {
 	req, err := http.NewRequest("GET", params[0], nil)
 	if err != nil {
 		return nil, fmt.Errorf("Cannot create new request: %s", err)
@@ -109,10 +79,64 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	}
 
 	return string(bytes.TrimRight(b, "\r\n")), nil
+}
+
+func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (interface{}, error) {
+
+	if len(params) > 3 {
+		return nil, fmt.Errorf("Too many parameters.")
+	}
+
+	if len(params) == 0 || params[0] == "" {
+		return nil, fmt.Errorf("Invalid first parameter.")
+	}
+
+	u, err := url.Parse(params[0])
+	if err != nil {
+		return nil, fmt.Errorf("Cannot parse url %s", err)
+	}
+
+	if u.Scheme == "" || u.Opaque != "" {
+		params[0] = "http://" + params[0]
+	}
+
+	if len(params) > 2 && params[2] != "" {
+		params[0] += ":" + params[2]
+	}
+
+	if len(params) > 1 && params[1] != "" {
+		if params[1][0] != '/' {
+			params[0] += "/"
+		}
+
+		params[0] += params[1]
+	}
+
+	switch key {
+	case "web.page.regexp":
+		_, err := p.webPageGet(params)
+		if err != nil {
+			return nil, err
+		}
+		return nil, nil
+	case "web.page.perf":
+		start := time.Now()
+
+		_, err := p.webPageGet(params)
+		if err != nil {
+			return nil, err
+		}
+
+		return time.Since(start).Seconds(), nil
+	default:
+		return p.webPageGet(params)
+	}
 
 }
 
 func init() {
 	plugin.RegisterMetrics(&impl, "Web",
-		"web.page.get", "Get content of a web page.")
+		"web.page.get", "Get content of a web page.",
+		"web.page.perf", "Get content of a web page.",
+		"web.page.regexp", "Get content of a web page.")
 }
