@@ -281,6 +281,11 @@ jQuery(function($) {
 			position_target = event;
 		}
 
+		if (this.hintBoxItem) {
+			hintBox.hideHint(this, true);
+			return;
+		}
+
 		// Manually trigger event for menuPopupPreloaderCloseHandler call for the previous preloader.
 		if ($('#menu-popup-preloader').length) {
 			$(document).trigger('click');
