@@ -703,14 +703,6 @@ class CScreenProblem extends CScreenBase {
 			])
 			: [];
 
-		$data['mediatypes'] = $actions['mediatypeids']
-			? API::Mediatype()->get([
-				'output' => ['description', 'maxattempts'],
-				'mediatypeids' => array_keys($actions['mediatypeids']),
-				'preservekeys' => true
-			])
-			: [];
-
 		return $data;
 	}
 

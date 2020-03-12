@@ -1360,7 +1360,6 @@ function getEventsActionsIconsData(array $events, array $triggers, array $r_even
 			'severities' => $severities['data'],
 			'actions' => $actions
 		],
-		'mediatypeids' => [],
 		'userids' => $messages['userids'] + $severities['userids']
 	];
 }

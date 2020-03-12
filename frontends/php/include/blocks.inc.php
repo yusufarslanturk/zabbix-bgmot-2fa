@@ -259,11 +259,6 @@ function getSystemStatusData(array $filter) {
 				'output' => ['alias', 'name', 'surname'],
 				'userids' => array_keys($actions['userids']),
 				'preservekeys' => true
-			]),
-			'mediatypes' => API::MediaType()->get([
-				'output' => ['description', 'maxattempts'],
-				'mediatypeids' => array_keys($actions['mediatypeids']),
-				'preservekeys' => true
 			])
 		];
 

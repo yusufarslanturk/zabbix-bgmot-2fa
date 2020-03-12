@@ -315,11 +315,6 @@ function make_small_eventlist($startEvent, $backurl) {
 		'userids' => array_keys($actions['userids']),
 		'preservekeys' => true
 	]);
-	$mediatypes = API::Mediatype()->get([
-		'output' => ['description', 'maxattempts'],
-		'mediatypeids' => array_keys($actions['mediatypeids']),
-		'preservekeys' => true
-	]);
 
 	foreach ($events as $event) {
 		$duration = ($event['r_eventid'] != 0)
