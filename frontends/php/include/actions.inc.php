@@ -1352,16 +1352,16 @@ function eventType($type = null) {
 function getEventsActionsIconsData(array $events, array $triggers, array $r_events = []) {
 	$messages = getEventsMessages($events);
 	$severities = getEventsSeverityChanges($events, $triggers);
-	$actions = getEventsActions($events, $r_events);
+	$actions = getEventsAlertsOverview($events, $r_events);
 
 	return [
 		'data' => [
 			'messages' => $messages['data'],
 			'severities' => $severities['data'],
-			'actions' => $actions['data']
+			'actions' => $actions
 		],
-		'mediatypeids' => $actions['mediatypeids'],
-		'userids' => $messages['userids'] + $severities['userids'] + $actions['userids']
+		'mediatypeids' => [],
+		'userids' => $messages['userids'] + $severities['userids']
 	];
 }
 
@@ -1469,20 +1469,18 @@ function getEventsSeverityChanges(array $events, array $triggers) {
 }
 
 /**
- * Get data, required to create actions icon with popup with event actions.
+ * Get data, required to create actions icon.
  *
  * @param array  $events                 Array with event objects with acknowledges.
  * @param string $events[]['eventid']    Problem event ID.
  * @param string $events[]['r_eventid']  OK event ID.
  * @param array  $r_events               Array with related recovery event data (optional).
  *
- * @return array
+ * @return array  List indexed by eventid containing overview on event alerts.
  */
-function getEventsActions(array $events, array $r_events = []) {
+function getEventsAlertsOverview(array $events, array $r_events = []) {
 	$alert_eventids = [];
 	$r_eventids = [];
-	$userids = [];
-	$mediatypeids = [];
 	$actions = [];
 	$event_alert_state = [];
 
@@ -1559,18 +1557,13 @@ function getEventsActions(array $events, array $r_events = []) {
 		}
 
 		$actions[$event['eventid']] = [
-			'actions' => [],
 			'count' => $event_actions['total_ctn'] + count($event['acknowledges']),
 			'has_uncomplete_action' => (bool) $event_actions['in_progress_ctn'],
 			'has_failed_action' => (bool) $event_actions['failed_ctn']
 		];
 	}
 
-	return [
-		'data' => $actions,
-		'mediatypeids' => $mediatypeids,
-		'userids' => $userids
-	];
+	return $actions;
 }
 
 /**
