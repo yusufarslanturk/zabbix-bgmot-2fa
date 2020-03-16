@@ -67,7 +67,7 @@ func disableRedirect(req *http.Request, via []*http.Request) error {
 	return http.ErrUseLastResponse
 }
 
-func (p *Plugin) webPageGet(params []string) (string, error) {
+func (p *Plugin) webPageGet(params []string, dump bool) (string, error) {
 	req, err := http.NewRequest("GET", params[0], nil)
 	if err != nil {
 		return "", fmt.Errorf("Cannot create new request: %s", err)
@@ -95,6 +95,10 @@ func (p *Plugin) webPageGet(params []string) (string, error) {
 	}
 
 	defer resp.Body.Close()
+
+	if !dump {
+		return "", nil
+	}
 
 	b, err := httputil.DumpResponse(resp, true)
 	if err != nil {
@@ -162,7 +166,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 			output = "\\0"
 		}
 
-		s, err := p.webPageGet(params)
+		s, err := p.webPageGet(params, true)
 		if err != nil {
 			return nil, err
 		}
@@ -185,7 +189,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 		start := time.Now()
 
-		_, err := p.webPageGet(params)
+		_, err := p.webPageGet(params, false)
 		if err != nil {
 			return nil, err
 		}
@@ -196,7 +200,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 			return nil, fmt.Errorf("Too many parameters.")
 		}
 
-		return p.webPageGet(params)
+		return p.webPageGet(params, true)
 	}
 
 }
