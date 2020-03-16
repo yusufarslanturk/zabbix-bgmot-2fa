@@ -1,18 +1,23 @@
 package web
 
 import (
+	"bufio"
 	"bytes"
 	"fmt"
 	"net"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"regexp"
+	"strconv"
+	"strings"
 	"time"
 
 	"zabbix.com/internal/agent"
 	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/plugin"
 	"zabbix.com/pkg/version"
+	"zabbix.com/pkg/zbxregexp"
 )
 
 type Options struct {
@@ -44,10 +49,10 @@ func disableRedirect(req *http.Request, via []*http.Request) error {
 	return http.ErrUseLastResponse
 }
 
-func (p *Plugin) webPageGet(params []string) (interface{}, error) {
+func (p *Plugin) webPageGet(params []string) (string, error) {
 	req, err := http.NewRequest("GET", params[0], nil)
 	if err != nil {
-		return nil, fmt.Errorf("Cannot create new request: %s", err)
+		return "", fmt.Errorf("Cannot create new request: %s", err)
 	}
 
 	req.Header = map[string][]string{
@@ -68,25 +73,20 @@ func (p *Plugin) webPageGet(params []string) (interface{}, error) {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("Cannot get content of web page: %s", err)
+		return "", fmt.Errorf("Cannot get content of web page: %s", err)
 	}
 
 	defer resp.Body.Close()
 
 	b, err := httputil.DumpResponse(resp, true)
 	if err != nil {
-		return nil, fmt.Errorf("Cannot get content of web page: %s", err)
+		return "", fmt.Errorf("Cannot get content of web page: %s", err)
 	}
 
 	return string(bytes.TrimRight(b, "\r\n")), nil
 }
 
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (interface{}, error) {
-
-	if len(params) > 3 {
-		return nil, fmt.Errorf("Too many parameters.")
-	}
-
 	if len(params) == 0 || params[0] == "" {
 		return nil, fmt.Errorf("Invalid first parameter.")
 	}
@@ -114,12 +114,57 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	switch key {
 	case "web.page.regexp":
-		_, err := p.webPageGet(params)
+		var length *int
+		var output string
+
+		if len(params) > 6 {
+			return nil, fmt.Errorf("Too many parameters.")
+		}
+
+		if len(params) < 4 {
+			return nil, fmt.Errorf("Invalid number of parameters.")
+		}
+
+		rx, err := regexp.Compile(params[3])
+		if err != nil {
+			return nil, fmt.Errorf("Invalid forth parameter: %s", err)
+		}
+
+		if len(params) > 4 && params[4] != "" {
+			if n, err := strconv.Atoi(params[4]); err != nil {
+				return nil, fmt.Errorf("Invalid fifth parameter: %s", err)
+			} else {
+				length = &n
+			}
+		}
+
+		if len(params) > 5 && params[5] != "" {
+			output = params[5]
+		} else {
+			output = "\\0"
+		}
+
+		s, err := p.webPageGet(params)
 		if err != nil {
 			return nil, err
 		}
-		return nil, nil
+
+		scanner := bufio.NewScanner(strings.NewReader(s))
+		for scanner.Scan() {
+			if out, ok := zbxregexp.ExecuteRegex(scanner.Bytes(), rx, []byte(output)); ok {
+				if length != nil {
+					out, _ = agent.CutAfterN(out, *length)
+				}
+				return out, nil
+			}
+		}
+
+		return "", nil
 	case "web.page.perf":
+		if len(params) > 3 {
+			return nil, fmt.Errorf("Too many parameters.")
+		}
+
 		start := time.Now()
 
 		_, err := p.webPageGet(params)
@@ -129,6 +174,10 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 		return time.Since(start).Seconds(), nil
 	default:
+		if len(params) > 3 {
+			return nil, fmt.Errorf("Too many parameters.")
+		}
+
 		return p.webPageGet(params)
 	}
 
