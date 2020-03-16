@@ -186,6 +186,6 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 func init() {
 	plugin.RegisterMetrics(&impl, "Web",
 		"web.page.get", "Get content of a web page.",
-		"web.page.perf", "Get content of a web page.",
-		"web.page.regexp", "Get content of a web page.")
+		"web.page.perf", "Loading time of full web page (in seconds).",
+		"web.page.regexp", "Find string on a web page.")
 }
