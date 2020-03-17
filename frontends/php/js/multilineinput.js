@@ -225,10 +225,14 @@
 			else {
 				return this.each(function() {
 					var $this = $(this),
-						obj = $this.data('multilineInput');
+						obj = $this.data('multilineInput'),
+						value_lines = $.trim(value).split("\n");
 
 					obj.$hidden.val(value);
-					obj.$input.val($.trim(value).split("\n")[0]);
+					obj.$input.val(value_lines.length > 1
+						? value_lines[0] + String.fromCharCode(8230) // U+2026 Horizontal ellipsis character.
+						: value_lines[0]
+					);
 					$this.trigger('change');
 				});
 			}
