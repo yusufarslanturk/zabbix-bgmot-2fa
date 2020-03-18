@@ -1,10 +1,22 @@
 Changes for 4.4.7rc1
 
 New features:
-....I..... [ZBX-17173] improved windows agent build scripts (yurii)
+...G...PS. [ZBXNEXT-3604] added support of user configurable ciphers for communication between Zabbix components (Andris)
+.......PS. [ZBXNEXT-5649] added name referencing support ('~' suffix) to jsonpath (wiper)
 ...G...... [ZBXNEXT-5781] improved agent2 metric testing (-t) and printing (-p) by adding full plugin interface support and verbose testing option (wiper)
 
 Bug fixes:
+.........T [ZBX-17409] fixed item mysql.dbsize in Template DB MySQL (mchudinov)
+....I..... [ZBX-17173] improved windows agent build scripts (yurii)
+A......... [ZBX-17425] fixed template.massupdate API macros update (rlataria)
+..F....... [ZBX-17344] fixed PHP 7.4 errors in Latest data->History page for text and log items having an empty filter (Ivo)
+.......PS. [ZBX-17330] fixed error reading vmware events with keys over 2^31 (MVekslers)
+..F....... [ZBX-17288] fixed undefined indexes in Administration->Regular expressions->Test tab (averza, Ivo)
+...G...... [ZBX-17426] fixed agen2 build with go 1.14 (wiper)
+..FG...... [ZBX-16802] added mtime-reread/mtime-noreread options parameter to log* keys (atumilovics)
+..F....... [ZBX-17350] fixed displaying of multiple value types in Latest data->History page (Ivo)
+........S. [ZBX-17284] fixed macro {EVENT.VALUE} is not substituted properly in webhooks (akozlovs)
+..F....... [ZBX-17027] fixed broken layout on some pages with multiselect (rlataria)
 ..F....... [ZBX-17390] fixed validation of the maximum selected period (Sasha)
 ..F....... [ZBX-17205] fixed inability to add more than one space in auto-expandable fields like macros and tags (agriscenko)
 ..F....... [ZBX-17308] fixed unreachable code notice in a generic popup (averza)
@@ -1077,10 +1089,17 @@ A.F.I...S. [ZBXNEXT-4853,ZBXNEXT-517] added ability to send email messages in HT
 Changes for 4.0.19rc1
 
 New features:
-....I..... [ZBX-17173] improved windows agent build scripts (yurii)
+.......PS. [ZBXNEXT-5649] added name referencing support ('~' suffix) to jsonpath (wiper)
+...G...PS. [ZBXNEXT-3604] added support of user configurable ciphers for communication between Zabbix components (Andris)
 
 Bug fixes:
-..F....... [ZBX-17075] fixed "Problems" page validation to ignore invalid date format in filter (vasilijs)
+....I..... [ZBX-17173] improved windows agent build scripts (yurii)
+A......... [ZBX-17425] fixed template.massupdate API macros update (rlataria)
+..F....... [ZBX-17344] fixed PHP 7.4 errors in Latest data->History page for text and log items having an empty filter (Ivo)
+.......PS. [ZBX-17330] fixed error reading vmware events with keys over 2^31 (MVekslers)
+..F....... [ZBX-17288] fixed undefined indexes in Administration->Regular expressions->Test tab (averza, Ivo)
+..F....... [ZBX-17350] fixed displaying of multiple value types in Latest data->History page (Ivo)
+..FG...... [ZBX-16802] added mtime-reread/mtime-noreread options parameter to log* keys (atumilovics)
 ..F....... [ZBX-17390] fixed validation of the maximum selected period (Sasha)
 ..F....... [ZBX-17185] fixed non-disappearing messages of failed login attempts (Ivo)
 ........S. [ZBX-17322] fixed deadlock between server and frontend when updating multiple hosts (vso)

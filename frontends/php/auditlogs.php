@@ -52,11 +52,11 @@ $fields = [
 	'filter_rst' =>		[T_ZBX_STR,			O_OPT, P_SYS,	null,	null],
 	'filter_set' =>		[T_ZBX_STR,			O_OPT, P_SYS,	null,	null],
 	'alias' =>			[T_ZBX_STR,			O_OPT, P_SYS,	null,	null],
-	'filter_from' =>	[T_ZBX_RANGE_TIME,	O_OPT, P_SYS,	null,	null],
-	'filter_to' =>		[T_ZBX_RANGE_TIME,	O_OPT, P_SYS,	null,	null]
+	'from' =>			[T_ZBX_RANGE_TIME,	O_OPT, P_SYS,	null,	null],
+	'to' =>				[T_ZBX_RANGE_TIME,	O_OPT, P_SYS,	null,	null]
 ];
 check_fields($fields);
-validateTimeSelectorPeriod(getRequest('filter_from'), getRequest('filter_to'));
+validateTimeSelectorPeriod(getRequest('from'), getRequest('to'));
 
 /*
  * Ajax
@@ -88,8 +88,8 @@ elseif (hasRequest('filter_rst')) {
 $timeselector_options = [
 	'profileIdx' => 'web.auditlogs.filter',
 	'profileIdx2' => 0,
-	'from' => getRequest('filter_from'),
-	'to' => getRequest('filter_to')
+	'from' => getRequest('from'),
+	'to' => getRequest('to')
 ];
 updateTimeSelectorPeriod($timeselector_options);
 
