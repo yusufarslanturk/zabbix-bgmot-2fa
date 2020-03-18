@@ -115,7 +115,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	u, err := url.Parse(params[0])
 	if err != nil {
-		return nil, fmt.Errorf("Cannot parse url %s", err)
+		return nil, fmt.Errorf("Cannot parse url: %s", err)
 	}
 
 	if u.Scheme == "" || u.Opaque != "" {
