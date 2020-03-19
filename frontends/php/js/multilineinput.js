@@ -113,9 +113,7 @@
 				{
 					title: t('S_APPLY'),
 					action: function() {
-						var value = $textarea.val();
-						obj.$input.val($.trim(value).split("\n")[0]);
-						obj.$hidden.val(value);
+						obj.$node.multilineInput('value', $textarea.val());
 					},
 					enabled: !obj.options.readonly
 				},
@@ -164,6 +162,7 @@
 			return this.each(function() {
 				var $this = $(this),
 					obj = {
+						$node: $this,
 						options: $.extend({
 							title: '',
 							hint: t('S_CLICK_TO_VIEW_OR_EDIT'),
