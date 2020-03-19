@@ -87,9 +87,9 @@ func (p *Plugin) createRequest(req []byte) {
 	}
 }
 
-func (p *Plugin) validateResponse(rsp, req []byte) int {
-	if len(rsp) != ntpPacketSize {
-		log.Debugf("invalid response size: %d", len(rsp))
+func (p *Plugin) validateResponse(rsp []byte, ln int, req []byte) int {
+	if ln != ntpPacketSize {
+		log.Debugf("invalid response size: %d", ln)
 		return 0
 	}
 
@@ -145,7 +145,7 @@ func (p *Plugin) udpExpect(service string, address string) (result int) {
 		return
 	}
 
-	req := make([]byte, 48)
+	req := make([]byte, ntpPacketSize)
 	p.createRequest(req)
 
 	if _, err = conn.Write(req); err != nil {
@@ -153,13 +153,15 @@ func (p *Plugin) udpExpect(service string, address string) (result int) {
 		return
 	}
 
-	rsp := make([]byte, 48)
-	if _, err := conn.Read(rsp); err != nil {
+	var ln int
+	rsp := make([]byte, ntpPacketSize)
+
+	if ln, err = conn.Read(rsp); err != nil {
 		log.Debugf("UDP expect network error: cannot read from [%s]: %s", address, err.Error())
 		return
 	}
 
-	return p.validateResponse(rsp, req)
+	return p.validateResponse(rsp, ln, req)
 }
 
 func (p *Plugin) exportNetService(params []string) int {
