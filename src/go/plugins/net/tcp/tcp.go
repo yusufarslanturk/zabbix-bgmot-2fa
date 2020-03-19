@@ -180,7 +180,7 @@ func (p *Plugin) tcpExpect(service string, address string) (result int) {
 		return 1
 	}
 
-	if err = conn.SetReadDeadline(time.Now().Add(time.Second * p.options.Timeout)); nil != err {
+	if err = conn.SetReadDeadline(time.Now().Add(time.Second * p.options.Timeout)); err != nil {
 		return
 	}
 
