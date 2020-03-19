@@ -42,12 +42,12 @@ const (
 const (
 	ntpVersion          = 3
 	ntpModeServer       = 4
-	ntpPacketSize       = 48
-	ntpTransmitReqStart = 40
 	ntpTransmitRspStart = 24
 	ntpTransmitRspEnd   = 32
-	ntpScale            = 4294967296.0
+	ntpTransmitReqStart = 40
+	ntpPacketSize       = 48
 	ntpEpochOffset      = 2208988800.0
+	ntpScale            = 4294967296.0
 )
 
 type Options struct {
