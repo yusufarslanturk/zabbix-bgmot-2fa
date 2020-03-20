@@ -47,7 +47,6 @@ static duk_ret_t	es_btoa(duk_context *ctx)
 	zbx_cesu8_to_utf8(str, &utf8);
 	str_base64_encode_dyn(utf8, &b64str, (int)strlen(utf8));
 	zbx_free(utf8);
-	duk_pop(ctx);
 	duk_push_string(ctx, b64str);
 	zbx_free(b64str);
 	return 1;
@@ -80,7 +79,6 @@ static duk_ret_t	es_atob(duk_context *ctx)
 	buffer = zbx_malloc(buffer, (size_t)buffer_size);
 	str_base64_decode(utf8, buffer, buffer_size, &out_size);
 	zbx_free(utf8);
-	duk_pop(ctx);
 	duk_push_lstring(ctx, buffer, (duk_size_t)out_size);
 	zbx_free(buffer);
 	return 1;
