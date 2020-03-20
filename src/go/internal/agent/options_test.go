@@ -36,6 +36,7 @@ func TestCutAfterN(t *testing.T) {
 		{"+cutAfterZero", args{"foobar", 0}, ""},
 		{"-emptyString", args{"", 3}, ""},
 		{"-empty", args{"", 0}, ""},
+		{"+shorter by one byte", args{"foo", 2}, "fo"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
