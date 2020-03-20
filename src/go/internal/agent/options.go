@@ -35,11 +35,13 @@ import (
 var Options AgentOptions
 
 func CutAfterN(s string, n int) string {
-	for i := range s {
+	var i int
+	for pos := range s {
 		if i >= n {
-			s = s[:i]
+			s = s[:pos]
 			break
 		}
+		i++
 	}
 
 	return s

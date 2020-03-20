@@ -38,7 +38,8 @@ func TestCutAfterN(t *testing.T) {
 		{"-empty string", args{"", 3}, ""},
 		{"-empty", args{"", 0}, ""},
 		{"-one utf-8 character", args{"ыы", 1}, "ы"},
-		{"-two utf-8 characters", args{"ыы", 2}, "ыы"},
+		{"-two utf-8 characters", args{"ыыыы", 2}, "ыы"},
+		{"-japanese utf-8 characters", args{"日本語", 2}, "日本"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
