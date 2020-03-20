@@ -38,8 +38,7 @@ func CutAfterN(s string, n int) string {
 	var i int
 	for pos := range s {
 		if i >= n {
-			s = s[:pos]
-			break
+			return s[:pos]
 		}
 		i++
 	}
