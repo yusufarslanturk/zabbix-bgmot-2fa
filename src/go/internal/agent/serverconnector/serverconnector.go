@@ -154,7 +154,7 @@ func (c *Connector) refreshActiveChecks() {
 			log.Warningf("the returned value of \"%s\" item specified by \"HostMetadataItem\" configuration parameter"+
 				" is too long, using first %d characters", c.options.HostMetadataItem, hostMetadataLen)
 
-			a.HostMetadata, _ = agent.CutAfterN(a.HostMetadata, hostMetadataLen)
+			a.HostMetadata = agent.CutAfterN(a.HostMetadata, hostMetadataLen)
 		}
 	}
 

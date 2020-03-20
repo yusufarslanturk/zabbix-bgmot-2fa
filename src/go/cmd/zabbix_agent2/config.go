@@ -91,7 +91,7 @@ func updateHostInterface(taskManager scheduler.Scheduler, options *agent.AgentOp
 			log.Warningf("the returned value of \"%s\" item specified by \"HostInterfaceItem\" configuration parameter"+
 				" is too long, using first %d characters", options.HostInterfaceItem, hostInterfaceLen)
 
-			options.HostInterface, _ = agent.CutAfterN(options.HostInterface, hostInterfaceLen)
+			options.HostInterface = agent.CutAfterN(options.HostInterface, hostInterfaceLen)
 		}
 	}
 
