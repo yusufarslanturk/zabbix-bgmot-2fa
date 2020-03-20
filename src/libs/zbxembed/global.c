@@ -36,7 +36,7 @@
  *           a string or if the value stack is empty                          *
  *                                                                            *
  ******************************************************************************/
-static duk_ret_t	es_atob(duk_context *ctx)
+static duk_ret_t	es_btoa(duk_context *ctx)
 {
 	duk_size_t	byte_len = 0;
 	const char	*str = NULL;
@@ -65,7 +65,7 @@ static duk_ret_t	es_atob(duk_context *ctx)
  *           a string or if the value stack is empty                          *
  *                                                                            *
  ******************************************************************************/
-static duk_ret_t	es_btoa(duk_context *ctx)
+static duk_ret_t	es_atob(duk_context *ctx)
 {
 	char		*utf8 = NULL, *buffer = NULL;
 	const char	*str;
