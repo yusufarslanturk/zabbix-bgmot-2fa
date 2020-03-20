@@ -71,7 +71,6 @@ static duk_ret_t	es_atob(duk_context *ctx)
 	int		out_size, buffer_size;
 	duk_size_t	byte_len;
 
-
 	str = duk_require_lstring(ctx, 0, &byte_len);
 	zbx_cesu8_to_utf8(str, &utf8);
 

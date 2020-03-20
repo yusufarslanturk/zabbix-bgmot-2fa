@@ -2233,40 +2233,44 @@ void	zbx_replace_invalid_utf8(char *text)
  *             utf8  - [OUT] on success, pointer to pointer to the first char *
  *                     of allocated NULL terminated UTF8 string               *
  *                                                                            *
- * Return value:  0 on success                                                *
- *               -1 on failure                                                *
+ * Return value: SUCCEED on success                                                *
+ *               FAIL on failure                                                *
  *                                                                            *
  ******************************************************************************/
 int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
 {
-	const unsigned char *cc = (void *)cesu8;
-	char *cu;
-	uint32_t hs = 0;
+	const unsigned char	*cc = (void *)cesu8;
+	char			*cu;
+	uint32_t		hs = 0;
+	int			ret = SUCCEED;
 
 	*utf8 = zbx_malloc(*utf8, strlen(cesu8) + 1);
 
 	if (NULL == *utf8)
-		return -1;
+	{
+		ret = FAIL;
+		goto out;
+	}
 
 	cu = *utf8;
 
-	while (*cc != '\0')
+	while ('\0' != *cc)
 	{
-		uint32_t c = 0;
-		uint32_t u;
+		uint32_t	c = 0;
+		uint32_t	u;
 
-		if (cc[0] <= 0x7F)
+		if (0x7F >= cc[0])
 		{
 			*cu++ = *cc++;
 			continue;
 		}
-		else if (cc[0] <= 0xDF)
+		else if (cc[0] <= 0xDF && cc[1] != '\0')
 		{
 			*cu++ = *cc++;
 			*cu++ = *cc++;
 			continue;
 		}
-		else if (cc[0] <= 0xEF)
+		else if (0xEF >= cc[0] && '\0' != cc[1] && '\0' != cc[2])
 		{
 			/* Surrogates are encoded in 3 chars so convert
 			 * back to a single UTF-16 value
@@ -2275,7 +2279,7 @@ int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
 					((uint32_t)cc[1] & 0x3F) << 6 |
 					((uint32_t)cc[2] & 0x3F);
 		}
-		else
+		else if ('\0' != cc[1] && '\0' != cc[2] && '\0' != cc[3])
 		{
 			*cu++ = *cc++;
 			*cu++ = *cc++;
@@ -2283,12 +2287,17 @@ int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
 			*cu++ = *cc++;
 			continue;
 		}
+		else
+		{
+			ret = FAIL;
+			goto out;
+		}
 
-		if (hs == 0 && c >= 0xD800 && c <= 0xDBFF)
+		if (0 == hs && 0xD800 <= c && 0xDBFF >= c)
 		{
 			hs = c;
 		}
-		else if (hs != 0 && c >= 0xDC00 && c <= 0xDFFF)
+		else if (0 != hs && 0xDC00 <= c && 0xDFFF >= c)
 		{
 			/* Have high and low surrogates - convert to code point then
 			 * back to UTF-8
@@ -2300,19 +2309,28 @@ int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
 			*cu++ = 0x80 | (u & 0x3F);
 			hs = 0;
 		}
-		else
+		else if ('\0' != cc[1] && '\0' != cc[2])
 		{
 			*cu++ = cc[0];
 			*cu++ = cc[1];
 			*cu++ = cc[2];
 			hs = 0;
 		}
+		else
+		{
+			ret = FAIL;
+			goto out;
+		}
 
 		cc += 3;
 	}
 
 	*cu = '\0';
-	return 0;
+out:
+	if (FAIL == ret)
+		zbx_free(*utf8);
+
+	return ret;
 }
 
 void	dos2unix(char *str)
