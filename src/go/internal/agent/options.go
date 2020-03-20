@@ -36,8 +36,8 @@ var Options AgentOptions
 
 func CutAfterN(s string, n int) string {
 	for i := range s {
-		if i > n {
-			s = s[:i-1]
+		if i >= n {
+			s = s[:i]
 			break
 		}
 	}
