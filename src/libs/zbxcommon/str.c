@@ -2264,7 +2264,7 @@ int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
 			*cu++ = *cc++;
 			continue;
 		}
-		else if (cc[0] <= 0xDF && cc[1] != '\0')
+		else if (0xDF >= cc[0] && '\0' != cc[1])
 		{
 			*cu++ = *cc++;
 			*cu++ = *cc++;
@@ -2286,11 +2286,6 @@ int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
 			*cu++ = *cc++;
 			*cu++ = *cc++;
 			continue;
-		}
-		else
-		{
-			ret = FAIL;
-			goto out;
 		}
 
 		if (0 == hs && 0xD800 <= c && 0xDBFF >= c)
@@ -2316,13 +2311,16 @@ int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
 			*cu++ = cc[2];
 			hs = 0;
 		}
+
+		if ('\0' != cc[1] && '\0' != cc[2])
+		{
+			cc += 3;
+		}
 		else
 		{
 			ret = FAIL;
 			goto out;
 		}
-
-		cc += 3;
 	}
 
 	*cu = '\0';
