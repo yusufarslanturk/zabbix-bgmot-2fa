@@ -32,8 +32,10 @@
  *                                                                            *
  * Parameters: ctx - [IN] pointer to duk_context                              *
  *                                                                            *
- * Comments: Throws an error if the top value at ctx value stack is not       *
- *           a string or if the value stack is empty                          *
+ * Comments: Throws an error:                                                 *
+ *               - if the top value at ctx value stack is not a string        *
+ *               - if the value stack is empty                                *
+ *               - if string could not converted from cesu8 to utf8           *
  *                                                                            *
  ******************************************************************************/
 static duk_ret_t	es_btoa(duk_context *ctx)
@@ -44,7 +46,10 @@ static duk_ret_t	es_btoa(duk_context *ctx)
 	char		*utf8 = NULL;
 
 	str = duk_require_lstring(ctx, 0, &byte_len);
-	zbx_cesu8_to_utf8(str, &utf8);
+
+	if (SUCCEED  != zbx_cesu8_to_utf8(str, &utf8))
+		duk_error(ctx, DUK_ERR_TYPE_ERROR, "error while converting string from cesu8 to utf8");
+
 	str_base64_encode_dyn(utf8, &b64str, (int)strlen(utf8));
 	zbx_free(utf8);
 	duk_push_string(ctx, b64str);
@@ -60,8 +65,10 @@ static duk_ret_t	es_btoa(duk_context *ctx)
  *                                                                            *
  * Parameters: ctx - [IN] pointer to duk_context                              *
  *                                                                            *
- * Comments: Throws an error if the top value at ctx value stack is not       *
- *           a string or if the value stack is empty                          *
+ * Comments: Throws an error:                                                 *
+ *               - if the top value at ctx value stack is not a string        *
+ *               - if the value stack is empty                                *
+ *               - if string could not converted from cesu8 to utf8           *
  *                                                                            *
  ******************************************************************************/
 static duk_ret_t	es_atob(duk_context *ctx)
@@ -72,7 +79,9 @@ static duk_ret_t	es_atob(duk_context *ctx)
 	duk_size_t	byte_len;
 
 	str = duk_require_lstring(ctx, 0, &byte_len);
-	zbx_cesu8_to_utf8(str, &utf8);
+
+	if (SUCCEED  != zbx_cesu8_to_utf8(str, &utf8))
+		duk_error(ctx, DUK_ERR_TYPE_ERROR, "error while converting string from cesu8 to utf8");
 
 	buffer_size = (int)strlen(utf8) * 3 / 4 + 1;
 	buffer = zbx_malloc(buffer, (size_t)buffer_size);
