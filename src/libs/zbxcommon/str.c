@@ -2233,8 +2233,8 @@ void	zbx_replace_invalid_utf8(char *text)
  *             utf8  - [OUT] on success, pointer to pointer to the first char *
  *                     of allocated NULL terminated UTF8 string               *
  *                                                                            *
- * Return value: SUCCEED on success                                                *
- *               FAIL on failure                                                *
+ * Return value: SUCCEED on success                                           *
+ *               FAIL on failure                                              *
  *                                                                            *
  ******************************************************************************/
 int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
