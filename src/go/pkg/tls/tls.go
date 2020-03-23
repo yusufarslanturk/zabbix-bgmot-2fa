@@ -651,12 +651,12 @@ static void tls_describe_ciphersuites(SSL_CTX_LP ctx, char **desc)
 #undef TLS_CIPHERS_BUF_LEN
 }
 
-static const char	*tls_version()
+static const char	*tls_version(void)
 {
 	return OpenSSL_version(OPENSSL_VERSION);
 }
 
-static const char	*tls_version_static()
+static const char	*tls_version_static(void)
 {
 	return OPENSSL_VERSION_TEXT;
 }
@@ -800,12 +800,12 @@ static void tls_describe_ciphersuites(SSL_CTX_LP ciphers, char **desc)
 	TLS_UNUSED(desc);
 }
 
-static const char	*tls_version()
+static const char	*tls_version(void)
 {
 	return NULL;
 }
 
-static const char	*tls_version_static()
+static const char	*tls_version_static(void)
 {
 	return NULL;
 }
