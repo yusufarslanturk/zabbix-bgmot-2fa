@@ -254,13 +254,9 @@ func (p *Plugin) exportNetService(params []string) int {
 	return p.tcpExpect(service, net.JoinHostPort(ip, port))
 }
 
-func round(num float64) int {
-	return int(num + math.Copysign(0.5, num))
-}
-
 func toFixed(num float64, precision int) float64 {
 	output := math.Pow(10, float64(precision))
-	return float64(round(num*output)) / output
+	return math.Round(num*output) / output
 }
 
 func (p *Plugin) exportNetServicePerf(params []string) float64 {
