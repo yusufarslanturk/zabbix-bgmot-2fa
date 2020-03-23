@@ -228,7 +228,7 @@ class CLdap {
 		else {
 			$filter = '(ObjectClass=*)';
 		}
-		$sr = @ldap_search($this->ds, $base, $filter);
+		$sr = @ldap_search($this->ds, $base, $filter, ['cn','memberof', 'mail']);
 		$result = is_resource($sr) ? @ldap_get_entries($this->ds, $sr) : [];
 
 		// don't accept more or less than one response
