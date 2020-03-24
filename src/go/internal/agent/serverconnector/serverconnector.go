@@ -41,6 +41,7 @@ import (
 )
 
 const hostMetadataLen = 255
+const hostInterfaceLen = 255
 const defaultAgentPort = 10050
 
 type Connector struct {
@@ -132,30 +133,26 @@ func (c *Connector) refreshActiveChecks() {
 	log.Debugf("[%d] In refreshActiveChecks() from [%s]", c.clientID, c.address)
 	defer log.Debugf("[%d] End of refreshActiveChecks() from [%s]", c.clientID, c.address)
 
-	if len(c.options.HostMetadata) > 0 {
-		if len(c.options.HostMetadataItem) > 0 {
-			log.Warningf("both \"HostMetadata\" and \"HostMetadataItem\" configuration parameter defined, using \"HostMetadata\"")
-		}
+	if a.HostInterface, err = update(
+		c.taskManager,
+		time.Duration(c.options.Timeout)*time.Second,
+		"HostInterface",
+		c.options.HostInterface,
+		c.options.HostInterfaceItem,
+		hostInterfaceLen,
+	); err != nil {
+		log.Errf("cannot get host interface: %s", err)
+	}
 
-		a.HostMetadata = c.options.HostMetadata
-	} else if len(c.options.HostMetadataItem) > 0 {
-		a.HostMetadata, err = c.taskManager.PerformTask(c.options.HostMetadataItem, time.Duration(c.options.Timeout)*time.Second)
-		if err != nil {
-			log.Errf("cannot get host metadata: %s", err)
-			return
-		}
-
-		if !utf8.ValidString(a.HostMetadata) {
-			log.Errf("cannot get host metadata: value is not an UTF-8 string")
-			return
-		}
-
-		var n int
-
-		if a.HostMetadata, n = agent.CutAfterN(a.HostMetadata, hostMetadataLen); n != hostMetadataLen {
-			log.Warningf("the returned value of \"%s\" item specified by \"HostMetadataItem\" configuration parameter"+
-				" is too long, using first %d characters", c.options.HostMetadataItem, n)
-		}
+	if a.HostMetadata, err = update(
+		c.taskManager,
+		time.Duration(c.options.Timeout)*time.Second,
+		"HostMetadata",
+		c.options.HostMetadata,
+		c.options.HostMetadataItem,
+		hostMetadataLen,
+	); err != nil {
+		log.Errf("cannot get host metadata: %s", err)
 	}
 
 	if len(c.options.ListenIP) > 0 {
@@ -382,4 +379,32 @@ func (c *Connector) StopCache() {
 
 func (c *Connector) UpdateOptions() {
 	c.input <- &agent.Options
+}
+
+func update(taskManager scheduler.Scheduler, timeout time.Duration, name, value, item string, length int) (string, error) {
+	var err error
+
+	if len(value) > 0 {
+		if len(item) > 0 {
+			log.Warningf("both \"%s\" and \"%sItem\" configuration parameter defined, using \"%s\"", name, name, name)
+		}
+	} else if len(item) > 0 {
+		value, err = taskManager.PerformTask(item, timeout)
+		if err != nil {
+			return value, err
+		}
+
+		if !utf8.ValidString(value) {
+			return value, fmt.Errorf("value is not an UTF-8 string")
+		}
+
+		var n int
+
+		if value, n = agent.CutAfterN(value, length); n > length {
+			log.Warningf("the returned value of \"%s\" item specified by \"%sItem\" configuration parameter"+
+				" is too long, using first %d characters", item, name, n)
+		}
+	}
+
+	return value, nil
 }
