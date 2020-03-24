@@ -1243,6 +1243,7 @@ class CUser extends CApiService {
 				$this->updateUsersGroups([$new_user], __FUNCTION__);
 				$this->updateMedias([$new_user], __FUNCTION__);
 
+		                self::$userData = $new_user;
 				$this->addAuditBulk(AUDIT_ACTION_ADD, AUDIT_RESOURCE_USER, [$new_user]);
 			}
 			else {
