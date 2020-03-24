@@ -26,7 +26,7 @@
 
 /******************************************************************************
  *                                                                            *
- * Function: es_atob                                                          *
+ * Function: es_btoa                                                          *
  *                                                                            *
  * Purpose: encodes parameter to base64 string                                *
  *                                                                            *
@@ -52,7 +52,7 @@ static duk_ret_t	es_btoa(duk_context *ctx)
 
 /******************************************************************************
  *                                                                            *
- * Function: es_btoa                                                          *
+ * Function: es_atob                                                          *
  *                                                                            *
  * Purpose: decodes base64 string                                             *
  *                                                                            *
