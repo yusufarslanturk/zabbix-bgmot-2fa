@@ -1478,7 +1478,7 @@ class CUser extends CApiService {
                 // We use only CN field to map groups
 		$adgrps = array();
 		foreach ($adgroups as $adgroup) {
-			if (preg_match('/CN=(.+?),OU=/', $adgroup, $matches)) {
+			if (preg_match('/CN=(.+?),OU=/i', $adgroup, $matches)) {
 				$adgrps[] = $matches[1];
 			}
 		}
