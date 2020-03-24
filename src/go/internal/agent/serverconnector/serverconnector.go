@@ -382,13 +382,12 @@ func (c *Connector) UpdateOptions() {
 }
 
 func update(taskManager scheduler.Scheduler, timeout time.Duration, name, value, item string, length int) (string, error) {
-	var err error
-
 	if len(value) > 0 {
 		if len(item) > 0 {
 			log.Warningf("both \"%s\" and \"%sItem\" configuration parameter defined, using \"%s\"", name, name, name)
 		}
 	} else if len(item) > 0 {
+		var err error
 		value, err = taskManager.PerformTask(item, timeout)
 		if err != nil {
 			return value, err
