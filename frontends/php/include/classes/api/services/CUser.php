@@ -1216,9 +1216,18 @@ class CUser extends CApiService {
 				else {
 					$medias = [];
 				}
+				if (array_key_exists('name', $user_info)) {
+					if (is_array($user_info['name'])) {
+						$user_name = $user_info['name'][0];
+					} else {
+						$user_name = $user_info['name'];
+					}
+				} else {
+					$user_name = '';
+				}
 				$new_user = [
 					'alias' => $user['user'],
-					'name' => array_key_exists('name', $user_info) ?  $user_info['name'][0] : '',
+					'name' => $user_name,
 					'surname' => '',
 					'url' => '',
 					'passwd' => md5($user['password']),
