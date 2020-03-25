@@ -45,9 +45,21 @@ const char	*tls_crypto_init_msg;
 #	error package zabbix.com/pkg/tls cannot be compiled with LibreSSL. Encryption is supported with OpenSSL.
 #elif !defined(HAVE_OPENSSL_WITH_PSK)
 #	error package zabbix.com/pkg/tls cannot be compiled with OpenSSL which has excluded PSK support.
-#elif OPENSSL_VERSION_NUMBER < 0x1010000fL
-	// OpenSSL before 1.1.0
-#	error package zabbix.com/pkg/tls cannot be compiled with this OpenSSL version. Supported versions are 1.1.0 and newer.
+#elif OPENSSL_VERSION_NUMBER < 0x1000100fL
+	// OpenSSL before 1.0.1
+#	error package zabbix.com/pkg/tls cannot be compiled with this OpenSSL version.\
+		Supported versions are 1.0.1 and newer.
+#endif
+
+#if (OPENSSL_VERSION_NUMBER >= 0x1000100fL && OPENSSL_VERSION_NUMBER < 0x1010000fL)
+	// OpenSSL 1.0.1/1.0.2 (before 1.1.0)
+#include <openssl/x509v3.h>	// string_to_hex()
+#	define OPENSSL_hexstr2buf			string_to_hex
+#	define TLS_method				TLSv1_2_method
+#	define SSL_CTX_get_ciphers(ciphers)		((ciphers)->cipher_list)
+#	define OPENSSL_VERSION				SSLEAY_VERSION
+#	define OpenSSL_version				SSLeay_version
+#	define SSL_CTX_set_min_proto_version(ctx, TLSv)	1
 #endif
 
 #define TLS_EX_DATA_ERRBIO	0
@@ -75,7 +87,12 @@ static int tls_init(void)
 		tls_crypto_init_msg = "cannot initialize OpenSSL library";
 		return -1;
 	}
-
+#elif (OPENSSL_VERSION_NUMBER >= 0x1000100fL && OPENSSL_VERSION_NUMBER < 0x1010000fL)
+	// OpenSSL 1.0.1/1.0.2 (before 1.1.0)
+	SSL_load_error_strings();
+	ERR_load_BIO_strings();
+	SSL_library_init();
+#endif
 	if (1 != RAND_status())		// protect against not properly seeded PRNG
 	{
 		tls_crypto_init_msg = "cannot initialize PRNG";
@@ -84,7 +101,6 @@ static int tls_init(void)
 
 	tls_crypto_init_msg = "OpenSSL library successfully initialized";
 	return 0;
-#endif
 }
 
 static unsigned int tls_psk_client_cb(SSL *ssl, const char *hint, char *identity,
