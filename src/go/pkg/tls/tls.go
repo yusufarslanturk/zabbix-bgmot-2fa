@@ -41,6 +41,15 @@ const char	*tls_crypto_init_msg;
 #include <openssl/bio.h>
 #include <openssl/rand.h>
 
+#if defined(LIBRESSL_VERSION_NUMBER)
+#	error package zabbix.com/pkg/tls cannot be compiled with LibreSSL. Encryption is supported with OpenSSL.
+#elif !defined(HAVE_OPENSSL_WITH_PSK)
+#	error package zabbix.com/pkg/tls cannot be compiled with OpenSSL which has excluded PSK support.
+#elif OPENSSL_VERSION_NUMBER < 0x1010000fL
+	// OpenSSL before 1.1.0
+#	error package zabbix.com/pkg/tls cannot be compiled with this OpenSSL version. Supported versions are 1.1.0 and newer.
+#endif
+
 #define TLS_EX_DATA_ERRBIO	0
 #define TLS_EX_DATA_IDENTITY	1
 #define TLS_EX_DATA_KEY		2
@@ -59,8 +68,8 @@ typedef struct {
 
 static int tls_init(void)
 {
-#if OPENSSL_VERSION_NUMBER >= 0x1010000fL && !defined(LIBRESSL_VERSION_NUMBER)
-// OpenSSL 1.1.0 or newer, not LibreSSL
+#if OPENSSL_VERSION_NUMBER >= 0x1010000fL
+	// OpenSSL 1.1.0 or newer
 	if (1 != OPENSSL_init_ssl(OPENSSL_INIT_LOAD_SSL_STRINGS | OPENSSL_INIT_LOAD_CRYPTO_STRINGS, NULL))
 	{
 		tls_crypto_init_msg = "cannot initialize OpenSSL library";
@@ -75,9 +84,6 @@ static int tls_init(void)
 
 	tls_crypto_init_msg = "OpenSSL library successfully initialized";
 	return 0;
-#elif	// OpenSSL 1.0.1/1.0.2 (before 1.1.0) or LibreSSL - currently not supported
-	zbx_crypto_lib_init_msg = "OpenSSL older than 1.1.0 and LibreSSL currently are not supported";
-	return -1;
 #endif
 }
 
@@ -662,10 +668,10 @@ static const char	*tls_version_static(void)
 }
 
 #elif defined(HAVE_GNUTLS)
-#error zabbix_agent2 does not support GnuTLS library. Compile with OpenSSL\
+#	error zabbix_agent2 does not support GnuTLS library. Compile with OpenSSL\
 		(configure parameter --with-openssl) or without encryption support.
 #elif defined(HAVE_POLARSSL)
-#error zabbix_agent2 does not support mbedTLS (PolarSSL) library. Compile with OpenSSL\
+#	error zabbix_agent2 does not support mbedTLS (PolarSSL) library. Compile with OpenSSL\
 		(configure parameter --with-openssl) or without encryption support.
 #else // no crypto library requested, compile without encryption support
 
