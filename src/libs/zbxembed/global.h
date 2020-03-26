@@ -1,4 +1,3 @@
-<?php
 /*
 ** Zabbix
 ** Copyright (C) 2001-2020 Zabbix SIA
@@ -9,7 +8,7 @@
 ** (at your option) any later version.
 **
 ** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
+** but WITHOUT ANY WARRANTY; without even the envied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 ** GNU General Public License for more details.
 **
@@ -18,24 +17,9 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
+#ifndef ZABBIX_GLOBAL_H
+#define ZABBIX_GLOABL_H
 
-require_once dirname(__FILE__).'/../include/CAPITest.php';
+void	es_init_global_functions(zbx_es_t *es);
 
-class testAPIInfo extends CAPITest {
-	public function testAPIInfo_VersionWithAuth() {
-		$error = [
-			'code' => -32602,
-			'message' => 'Invalid params.',
-			'data' => 'The "apiinfo.version" method must be called without the "auth" parameter.'
-		];
-
-		$this->call('apiinfo.version', [], $error);
-	}
-
-	public function testAPIInfo_VersionWithoutAuth() {
-		$this->disableAuthorization();
-		$result = $this->call('apiinfo.version', []);
-
-		$this->assertSame('4.4.8', $result['result']);
-	}
-}
+#endif
