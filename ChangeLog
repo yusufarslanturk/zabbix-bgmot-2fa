@@ -1,3 +1,15 @@
+Changes for 4.4.8rc1
+
+New features:
+
+Bug fixes:
+
+--------------------------------------------------------------------------------
+Changes for 4.4.7
+
+4.4.7rc1 was released as 4.4.7 without any changes
+
+--------------------------------------------------------------------------------
 Changes for 4.4.7rc1
 
 New features:
@@ -226,7 +238,7 @@ A......... [ZBX-16679] fixed username and password fields resetting and saving f
 ...G...... [ZBX-16769] fixed Zabbix agent 2 compilation on i386, arm, ppc64le and s390x architectures (viktors)
 ........S. [ZBX-16843] fixed {TRIGGER.ID} to be supported on trigger level in addition to host level and template level tags (vso)
 ..F....... [ZBX-16812] fixed problems by severity widget problem duplication (talbergs)
-..F....... [ZBX-16815] fixed widget form positioing when changing widget type from Graph to any other type (averza)
+..F....... [ZBX-16815] fixed widget form positioning when changing widget type from Graph to any other type (averza)
 ..F....... [ZBX-16706] fixed unneeded padding for dashboard URL widget (averza)
 ..F....... [ZBX-16784] fixed Oracle performance by using "between" operator in SQL queries (averza)
 ..F....... [ZBX-16579] fixed long text wrapping in the latest data history (averza)
@@ -1086,6 +1098,18 @@ A.F.I...S. [ZBXNEXT-4853,ZBXNEXT-517] added ability to send email messages in HT
 ..F.....S. [ZBXNEXT-1282,ZBXNEXT-4730] added changes to introduce regex based matching for auto-registration (vasilijs, viktors)
 
 --------------------------------------------------------------------------------
+Changes for 4.0.20rc1
+
+New features:
+
+Bug fixes:
+
+--------------------------------------------------------------------------------
+Changes for 4.0.19
+
+4.0.19rc1 was released as 4.0.19 without any changes
+
+--------------------------------------------------------------------------------
 Changes for 4.0.19rc1
 
 New features:
@@ -1239,7 +1263,7 @@ A......... [ZBX-16679] fixed username and password fields resetting and saving f
 ..F....... [ZBX-16809] fixed undefined offset error in action operation condition form (miks)
 ...G...... [ZBX-16595] optimized active logs checks monitoring when buffer flushing fails (arimdjonoks)
 ..F....... [ZBX-16682] fixed wrong element label update in map constructor (rlataria)
-..F....... [ZBX-16815] fixed widget form positioing when changing widget type from Graph to any other type (averza)
+..F....... [ZBX-16815] fixed widget form positioning when changing widget type from Graph to any other type (averza)
 ..F....... [ZBX-16706] fixed unneeded padding for dashboard URL widget (averza)
 ..F....... [ZBX-16784] fixed Oracle performance by using "between" operator in SQL queries (averza)
 ..F....... [ZBX-16579] fixed long text wrapping in the latest data history (averza)
