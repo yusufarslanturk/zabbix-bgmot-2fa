@@ -236,9 +236,13 @@ static void *tls_new_context(const char *ca_file, const char *crl_file, const ch
 	// By default, in TLS 1.3 only *-SHA256 ciphersuites work with PSK.
 #	define TLS_1_3_CIPHERSUITES	"TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256"
 #endif
-// OpenSSL 1.1.0 or newer
-#define TLS_CIPHER_PSK_ECDHE		"kECDHEPSK+AES128:"
-#define TLS_CIPHER_PSK			"kPSK+AES128"
+#if OPENSSL_VERSION_NUMBER >= 0x1010000fL	// OpenSSL 1.1.0 or newer
+#	define TLS_CIPHER_PSK_ECDHE	"kECDHEPSK+AES128:"
+#	define TLS_CIPHER_PSK		"kPSK+AES128"
+#else						// OpenSSL 1.0.1/1.0.2 (before 1.1.0)
+#	define TLS_CIPHER_PSK_ECDHE	""
+#	define TLS_CIPHER_PSK		"PSK-AES128-CBC-SHA"
+#endif
 #endif
 	SSL_CTX		*ctx;
 	int		ret = -1;
@@ -386,7 +390,7 @@ static int tls_new(SSL_CTX_LP ctx, const char *psk_identity, const char *psk_key
 static tls_t *tls_new_client(SSL_CTX_LP ctx, const char *psk_identity, const char *psk_key)
 {
 	tls_t	*tls;
-	int		ret;
+	int	ret;
 
 	if (0 == tls_new(ctx, psk_identity, psk_key, &tls))
 	{
@@ -403,7 +407,7 @@ static tls_t *tls_new_client(SSL_CTX_LP ctx, const char *psk_identity, const cha
 static tls_t *tls_new_server(SSL_CTX_LP ctx, const char *psk_identity, const char *psk_key)
 {
 	tls_t	*tls;
-	int		ret;
+	int	ret;
 
 	if (0 == tls_new(ctx, psk_identity, psk_key, &tls))
 	{
