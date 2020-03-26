@@ -60,11 +60,6 @@ int	VFS_FS_SIZE(AGENT_REQUEST *request, AGENT_RESULT *result);
 int	VFS_FS_GET(AGENT_REQUEST *request, AGENT_RESULT *result);
 int	VM_MEMORY_SIZE(AGENT_REQUEST *request, AGENT_RESULT *result);
 
-int	zbx_execute_threaded_metric(zbx_metric_func_t metric_func, AGENT_REQUEST *request, AGENT_RESULT *result)
-{
-	return metric_func(request, result);	// calling fork() in a multithreaded program may result in deadlock on mutex
-}
-
 */
 import "C"
 
