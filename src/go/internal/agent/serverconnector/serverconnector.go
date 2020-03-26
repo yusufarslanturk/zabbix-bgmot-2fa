@@ -133,25 +133,13 @@ func (c *Connector) refreshActiveChecks() {
 	log.Debugf("[%d] In refreshActiveChecks() from [%s]", c.clientID, c.address)
 	defer log.Debugf("[%d] End of refreshActiveChecks() from [%s]", c.clientID, c.address)
 
-	if a.HostInterface, err = update(
-		c.taskManager,
-		time.Duration(c.options.Timeout)*time.Second,
-		"HostInterface",
-		c.options.HostInterface,
-		c.options.HostInterfaceItem,
-		hostInterfaceLen,
-	); err != nil {
+	if a.HostInterface, err = update(c.taskManager, time.Duration(c.options.Timeout)*time.Second, "HostInterface",
+		c.options.HostInterface, c.options.HostInterfaceItem, hostInterfaceLen); err != nil {
 		log.Errf("cannot get host interface: %s", err)
 	}
 
-	if a.HostMetadata, err = update(
-		c.taskManager,
-		time.Duration(c.options.Timeout)*time.Second,
-		"HostMetadata",
-		c.options.HostMetadata,
-		c.options.HostMetadataItem,
-		hostMetadataLen,
-	); err != nil {
+	if a.HostMetadata, err = update(c.taskManager, time.Duration(c.options.Timeout)*time.Second, "HostMetadata",
+		c.options.HostMetadata, c.options.HostMetadataItem, hostMetadataLen); err != nil {
 		log.Errf("cannot get host metadata: %s", err)
 	}
 
