@@ -224,7 +224,10 @@ static duk_ret_t	es_httprequest_query(duk_context *ctx, const char *http_request
 		struct zbx_json_parse	jp;
 
 		if (NULL != request->headers)
+		{
 			curl_slist_free_all(request->headers);
+			request->headers = NULL;
+		}
 
 		if (NULL != contents)
 		{
