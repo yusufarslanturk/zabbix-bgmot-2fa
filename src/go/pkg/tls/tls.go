@@ -45,13 +45,15 @@ const char	*tls_crypto_init_msg;
 #	error package zabbix.com/pkg/tls cannot be compiled with LibreSSL. Encryption is supported with OpenSSL.
 #elif !defined(HAVE_OPENSSL_WITH_PSK)
 #	error package zabbix.com/pkg/tls cannot be compiled with OpenSSL which has excluded PSK support.
+#elif defined(_WINDOWS) && OPENSSL_VERSION_NUMBER < 0x1010100fL	// On MS Windows OpenSSL 1.1.1 is required
+#	error on Microsoft Windows the package zabbix.com/pkg/tls requires OpenSSL 1.1.1 or newer.
 #elif OPENSSL_VERSION_NUMBER < 0x1000100fL
 	// OpenSSL before 1.0.1
 #	error package zabbix.com/pkg/tls cannot be compiled with this OpenSSL version.\
 		Supported versions are 1.0.1 and newer.
 #endif
 
-#if (OPENSSL_VERSION_NUMBER >= 0x1000100fL && OPENSSL_VERSION_NUMBER < 0x1010000fL)
+#if (OPENSSL_VERSION_NUMBER < 0x1010000fL)
 	// OpenSSL 1.0.1/1.0.2 (before 1.1.0)
 #include <openssl/x509v3.h>	// string_to_hex()
 #	define OPENSSL_hexstr2buf			string_to_hex
@@ -78,6 +80,59 @@ typedef struct {
 	char *psk_key;
 } tls_t;
 
+#if (OPENSSL_VERSION_NUMBER < 0x1010000fL)
+        // OpenSSL 1.0.1/1.0.2 (before 1.1.0)
+#include <pthread.h>
+
+// exit codes
+#define ZBX_EXIT_LOCK_FAILED	2
+#define ZBX_EXIT_UNLOCK_FAILED	3
+
+static pthread_mutex_t	*mutexes = NULL;	// Mutexes for multi-threaded OpenSSL (see "man 3ssl threads"
+						// and example in crypto/threads/mttest.c).
+
+static void	zbx_mutex_lock(const char *filename, int line, int idx)
+{
+	if (0 != pthread_mutex_lock(mutexes + idx))
+	{
+		fprintf(stderr, "[file:'%s',line:%d] lock failed: [%d] %s\n", filename, line, errno, strerror(errno));
+		exit(ZBX_EXIT_LOCK_FAILED);
+	}
+}
+
+static void	zbx_mutex_unlock(const char *filename, int line, int idx)
+{
+	if (0 != pthread_mutex_unlock(mutexes + idx))
+	{
+		fprintf(stderr, "[file:'%s',line:%d] unlock failed: [%d] %s\n", filename, line, errno, strerror(errno));
+		exit(ZBX_EXIT_UNLOCK_FAILED);
+	}
+}
+
+static void	zbx_openssl_locking_cb(int mode, int n, const char *file, int line)
+{
+	if (0 != (mode & CRYPTO_LOCK))
+		zbx_mutex_lock(file, line, n);
+	else
+		zbx_mutex_unlock(file, line, n);
+}
+
+static int	zbx_allocate_mutexes(const char **error_msg)
+{
+	int	num_locks;
+
+	num_locks = CRYPTO_num_locks();
+
+	if (NULL == (mutexes = malloc((size_t)num_locks * sizeof(pthread_mutex_t))))
+	{
+		*error_msg = strdup("cannot allocate mutexes for OpenSSL library: out of memory");
+		return -1;
+	}
+
+	return 0;
+}
+#endif
+
 static int tls_init(void)
 {
 #if OPENSSL_VERSION_NUMBER >= 0x1010000fL
@@ -87,11 +142,17 @@ static int tls_init(void)
 		tls_crypto_init_msg = "cannot initialize OpenSSL library";
 		return -1;
 	}
-#elif (OPENSSL_VERSION_NUMBER >= 0x1000100fL && OPENSSL_VERSION_NUMBER < 0x1010000fL)
-	// OpenSSL 1.0.1/1.0.2 (before 1.1.0)
+#else	// OpenSSL 1.0.1/1.0.2 (before 1.1.0)
 	SSL_load_error_strings();
 	ERR_load_BIO_strings();
 	SSL_library_init();
+
+	if (0 != zbx_allocate_mutexes(&tls_crypto_init_msg))
+		return -1;
+
+	CRYPTO_set_locking_callback((void (*)(int, int, const char *, int))zbx_openssl_locking_cb);
+
+	// do not register our own threadid_func() callback, use OpenSSL default one
 #endif
 	if (1 != RAND_status())		// protect against not properly seeded PRNG
 	{
