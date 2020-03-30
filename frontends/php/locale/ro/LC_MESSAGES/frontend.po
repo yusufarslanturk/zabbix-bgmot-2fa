@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-16 17:14+0200\n"
+"POT-Creation-Date: 2020-03-29 01:44+0200\n"
 "PO-Revision-Date: 2020-02-10 08:06+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -1312,7 +1312,7 @@ msgstr ""
 msgid "Authentication method"
 msgstr "Metodă de autentificare"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:240
+#: app/controllers/CControllerAuthenticationUpdate.php:243
 msgid "Authentication method changed"
 msgstr ""
 
@@ -1334,7 +1334,7 @@ msgstr "Frază de acces pentru autentificare"
 msgid "Authentication protocol"
 msgstr "Protocol de autentificare"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:239
+#: app/controllers/CControllerAuthenticationUpdate.php:242
 msgid "Authentication settings updated"
 msgstr ""
 
@@ -2531,7 +2531,7 @@ msgstr ""
 msgid "Cannot include view file \"%s\"."
 msgstr "Nu se poate include vezi fișier \"%s\"."
 
-#: app/controllers/CControllerPopupTriggerExpr.php:691
+#: app/controllers/CControllerPopupTriggerExpr.php:698
 msgid "Cannot insert trigger expression"
 msgstr "Nu se poate introduce expresia trigger"
 
@@ -2833,7 +2833,7 @@ msgstr "Nu se poate actualiza acțiunea"
 msgid "Cannot update application"
 msgstr "Nu se poate actualiza aplicația"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:244
+#: app/controllers/CControllerAuthenticationUpdate.php:247
 msgid "Cannot update authentication"
 msgstr ""
 
@@ -3448,7 +3448,7 @@ msgstr ""
 msgid "Concurrent sessions"
 msgstr ""
 
-#: app/controllers/CControllerPopupTriggerExpr.php:714
+#: app/controllers/CControllerPopupTriggerExpr.php:721
 msgid "Condition"
 msgstr "Condiție"
 
@@ -8728,7 +8728,7 @@ msgstr "Grup utilizator incorect."
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
 msgstr "Valoare incorectă \"%1$s\" pentru câmpul \"%2$s\"."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:136
+#: app/controllers/CControllerAuthenticationUpdate.php:129
 #: include/classes/api/services/CAction.php:1786
 #: include/classes/api/services/CScreenItem.php:567
 #: include/validate.inc.php:351
@@ -8796,8 +8796,8 @@ msgstr ""
 msgid "Incorrect value for \"%1$s\" field."
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:95
-#: app/controllers/CControllerAuthenticationUpdate.php:127
+#: app/controllers/CControllerAuthenticationUpdate.php:88
+#: app/controllers/CControllerAuthenticationUpdate.php:120
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: app/controllers/CControllerPopupMedia.php:99
 #: app/controllers/CControllerPopupMedia.php:110
@@ -9655,7 +9655,7 @@ msgstr[2] "Itemi activați"
 msgid "Item in \"not supported\" state"
 msgstr "Item în stare \"nesuportată\""
 
-#: app/controllers/CControllerPopupTriggerExpr.php:686
+#: app/controllers/CControllerPopupTriggerExpr.php:693
 msgid "Item not selected"
 msgstr "Item neselectat"
 
@@ -9991,11 +9991,11 @@ msgstr "Autentificare LDAP"
 msgid "LDAP host"
 msgstr "Server LDAP"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:96
+#: app/controllers/CControllerAuthenticationUpdate.php:89
 msgid "LDAP is not configured"
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:184
+#: app/controllers/CControllerAuthenticationUpdate.php:187
 msgid "LDAP login successful"
 msgstr "Autentificare LDAP reusită "
 
@@ -17244,7 +17244,7 @@ msgid "Unknown function."
 msgstr "Funcție necunoscută."
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:48
-#: app/controllers/CControllerPopupTriggerExpr.php:535
+#: app/controllers/CControllerPopupTriggerExpr.php:542
 #: include/triggers.inc.php:1437
 msgid "Unknown host item, no such item in selected host"
 msgstr "Item server necunoscut, nu există asemenea item în serverul selectat"
@@ -19119,7 +19119,7 @@ msgstr ""
 msgid "cannot be changed"
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:127
+#: app/controllers/CControllerAuthenticationUpdate.php:120
 #: app/controllers/CControllerPopupMedia.php:99
 #: app/controllers/CControllerPopupMedia.php:110
 #: app/controllers/CControllerPopupTriggerWizard.php:134

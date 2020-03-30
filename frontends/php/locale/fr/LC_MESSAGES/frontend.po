@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-16 17:14+0200\n"
+"POT-Creation-Date: 2020-03-29 01:44+0200\n"
 "PO-Revision-Date: 2020-02-10 08:04+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -1294,7 +1294,7 @@ msgstr "L'authentification a échoué: %1$s."
 msgid "Authentication method"
 msgstr "Méthode d'authentification"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:240
+#: app/controllers/CControllerAuthenticationUpdate.php:243
 msgid "Authentication method changed"
 msgstr "Méthode d'authentification modifiée"
 
@@ -1316,7 +1316,7 @@ msgstr "Phrase d'authentification"
 msgid "Authentication protocol"
 msgstr "Protocole d'authentification"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:239
+#: app/controllers/CControllerAuthenticationUpdate.php:242
 msgid "Authentication settings updated"
 msgstr "Paramètres d'authentification mis à jour"
 
@@ -2474,7 +2474,7 @@ msgstr "Impossible d'inclure le fichier JS \"%s\"."
 msgid "Cannot include view file \"%s\"."
 msgstr "Impossible d'inclure le fichier de vue \"%s\"."
 
-#: app/controllers/CControllerPopupTriggerExpr.php:691
+#: app/controllers/CControllerPopupTriggerExpr.php:698
 msgid "Cannot insert trigger expression"
 msgstr "Impossible d'insérer l'expression de déclencheur"
 
@@ -2775,7 +2775,7 @@ msgstr "Impossible de mettre à jour l'action"
 msgid "Cannot update application"
 msgstr "Impossible de mettre à jour l'application"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:244
+#: app/controllers/CControllerAuthenticationUpdate.php:247
 msgid "Cannot update authentication"
 msgstr "Impossible de mettre à jour l'authentification"
 
@@ -3384,7 +3384,7 @@ msgstr "Compression"
 msgid "Concurrent sessions"
 msgstr "Sessions concurrentes"
 
-#: app/controllers/CControllerPopupTriggerExpr.php:714
+#: app/controllers/CControllerPopupTriggerExpr.php:721
 msgid "Condition"
 msgstr "Condition"
 
@@ -8647,7 +8647,7 @@ msgstr "Groupe d'utilisateurs incorrect."
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
 msgstr "Valeur \"%1$s\" incorrecte pour le champ \"%2$s\"."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:136
+#: app/controllers/CControllerAuthenticationUpdate.php:129
 #: include/classes/api/services/CAction.php:1786
 #: include/classes/api/services/CScreenItem.php:567
 #: include/validate.inc.php:351
@@ -8715,8 +8715,8 @@ msgstr "Valeur \"%1$s\" incorrecte dans le champ \"%2$s\" pour le type de média
 msgid "Incorrect value for \"%1$s\" field."
 msgstr "Valeur incorrecte pour le champ \"%1$s\"."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:95
-#: app/controllers/CControllerAuthenticationUpdate.php:127
+#: app/controllers/CControllerAuthenticationUpdate.php:88
+#: app/controllers/CControllerAuthenticationUpdate.php:120
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: app/controllers/CControllerPopupMedia.php:99
 #: app/controllers/CControllerPopupMedia.php:110
@@ -9572,7 +9572,7 @@ msgstr[1] "Éléments activés"
 msgid "Item in \"not supported\" state"
 msgstr "Élément dans l'état \"non supporté\""
 
-#: app/controllers/CControllerPopupTriggerExpr.php:686
+#: app/controllers/CControllerPopupTriggerExpr.php:693
 msgid "Item not selected"
 msgstr "Élément non sélectionné"
 
@@ -9906,11 +9906,11 @@ msgstr "Authentification LDAP"
 msgid "LDAP host"
 msgstr "Hôte LDAP"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:96
+#: app/controllers/CControllerAuthenticationUpdate.php:89
 msgid "LDAP is not configured"
 msgstr "LDAP n'est pas configuré"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:184
+#: app/controllers/CControllerAuthenticationUpdate.php:187
 msgid "LDAP login successful"
 msgstr "Connexion LDAP réussie"
 
@@ -17134,7 +17134,7 @@ msgid "Unknown function."
 msgstr "Fonction inconnue."
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:48
-#: app/controllers/CControllerPopupTriggerExpr.php:535
+#: app/controllers/CControllerPopupTriggerExpr.php:542
 #: include/triggers.inc.php:1437
 msgid "Unknown host item, no such item in selected host"
 msgstr "Élément inconnu, cet élément n'existe pas dans l'hôte sélectionné"
@@ -19001,7 +19001,7 @@ msgstr "calculé"
 msgid "cannot be changed"
 msgstr "ne peut pas être changé"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:127
+#: app/controllers/CControllerAuthenticationUpdate.php:120
 #: app/controllers/CControllerPopupMedia.php:99
 #: app/controllers/CControllerPopupMedia.php:110
 #: app/controllers/CControllerPopupTriggerWizard.php:134

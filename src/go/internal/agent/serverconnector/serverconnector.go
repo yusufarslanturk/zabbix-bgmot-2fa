@@ -387,7 +387,7 @@ func processConfigItem(taskManager scheduler.Scheduler, timeout time.Duration, n
 
 		var n int
 
-		if value, n = agent.CutAfterN(value, length); n > length {
+		if value = agent.CutAfterN(value, length); n > length {
 			log.Warningf("the returned value of \"%s\" item specified by \"%sItem\" configuration parameter"+
 				" is too long, using first %d characters", item, name, n)
 		}
