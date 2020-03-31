@@ -481,8 +481,7 @@ int	WEB_PAGE_PERF(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
-	char		*hostname, *path_str, *port_str, *buffer = NULL, *error = NULL,
-			*ptr = NULL, *str, *newline, *regexp, *length_str;
+	char		*hostname, *path_str, *port_str, *buffer = NULL, *error = NULL, *regexp, *length_str;
 	const char	*output;
 	int		length, ret;
 
@@ -519,8 +518,12 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	if (SYSINFO_RET_OK == (ret = get_http_page(hostname, path_str, port_str, &buffer, &error)))
 	{
+		char	*ptr = NULL, *str;
+
 		for (str = buffer; ;)
 		{
+			char	*newline;
+
 			if (NULL != (newline = strchr(str, '\n')))
 			{
 				if (str != newline && '\r' == newline[-1])
@@ -540,11 +543,7 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 		if (NULL != ptr)
 		{
-			int len;
-
-			len = MIN(length, strlen(ptr));
-			ptr[len] = '\0';
-
+			ptr[MIN(length, strlen(ptr))] = '\0';
 			SET_STR_RESULT(result, ptr);
 		}
 		else
