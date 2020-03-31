@@ -539,7 +539,10 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 		}
 
 		if (NULL != ptr)
+		{
+			ptr[length] = '\0';
 			SET_STR_RESULT(result, ptr);
+		}
 		else
 			SET_STR_RESULT(result, zbx_strdup(NULL, ""));
 
