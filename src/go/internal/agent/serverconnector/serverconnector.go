@@ -136,11 +136,13 @@ func (c *Connector) refreshActiveChecks() {
 	if a.HostInterface, err = processConfigItem(c.taskManager, time.Duration(c.options.Timeout)*time.Second, "HostInterface",
 		c.options.HostInterface, c.options.HostInterfaceItem, hostInterfaceLen); err != nil {
 		log.Errf("cannot get host interface: %s", err)
+		return
 	}
 
 	if a.HostMetadata, err = processConfigItem(c.taskManager, time.Duration(c.options.Timeout)*time.Second, "HostMetadata",
 		c.options.HostMetadata, c.options.HostMetadataItem, hostMetadataLen); err != nil {
 		log.Errf("cannot get host metadata: %s", err)
+		return
 	}
 
 	if len(c.options.ListenIP) > 0 {
