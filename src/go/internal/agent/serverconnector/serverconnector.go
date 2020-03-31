@@ -124,10 +124,9 @@ func (c *Connector) refreshActiveChecks() {
 	var err error
 
 	a := activeChecksRequest{
-		Request:       "active checks",
-		Host:          c.options.Hostname,
-		Version:       version.Short(),
-		HostInterface: c.options.HostInterface,
+		Request: "active checks",
+		Host:    c.options.Hostname,
+		Version: version.Short(),
 	}
 
 	log.Debugf("[%d] In refreshActiveChecks() from [%s]", c.clientID, c.address)
