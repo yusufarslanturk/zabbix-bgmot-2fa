@@ -543,7 +543,9 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 		if (NULL != ptr)
 		{
-			ptr[MIN(length, strlen(ptr))] = '\0';
+			if (length < strlen(ptr))
+				ptr[length] = '\0';
+
 			SET_STR_RESULT(result, ptr);
 		}
 		else
