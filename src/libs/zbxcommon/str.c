@@ -2224,6 +2224,33 @@ void	zbx_replace_invalid_utf8(char *text)
 
 /******************************************************************************
  *                                                                            *
+ * Function: cesu8_decode_surrogate                                           *
+ *                                                                            *
+ * Purpose: decodes one part of cesu8 utf16 surrogate pair                    *
+ *                                                                            *
+ * Parameters: ptr - [IN] pointer of the 3 byte sequence                      *
+ *             out - [OUT] the surrogate value                                *
+ *                                                                            *
+ * Return value: SUCCEED on success                                           *
+ *               FAIL on failure                                              *
+ *                                                                            *
+ ******************************************************************************/
+static int	cesu8_decode_surrogate(const char *ptr, zbx_uint32_t *out)
+{
+	*out = ((unsigned char)*ptr++ & 0xF) << 12;
+	if (0x80 != (*ptr & 0xC0))
+		return FAIL;
+
+	*out |= ((unsigned char)*ptr++ & 0x3F) << 6;
+	if (0x80 != (*ptr & 0xC0))
+		return FAIL;
+
+	*out |= ((unsigned char)*ptr & 0x3F);
+	return SUCCEED;
+}
+
+/******************************************************************************
+ *                                                                            *
  * Function: zbx_cesu8_to_utf8                                                *
  *                                                                            *
  * Purpose: convert character encoding from cesu8 to utf8                     *
@@ -2233,86 +2260,80 @@ void	zbx_replace_invalid_utf8(char *text)
  *             utf8  - [OUT] on success, pointer to pointer to the first char *
  *                     of allocated NULL terminated UTF8 string               *
  *                                                                            *
- * Return value:  0 on success                                                *
- *               -1 on failure                                                *
+ * Return value: SUCCEED on success                                           *
+ *               FAIL on failure                                              *
  *                                                                            *
  ******************************************************************************/
 int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8)
 {
-	const unsigned char *cc = (void *)cesu8;
-	char *cu;
-	uint32_t hs = 0;
+	const char	*in, *end;
+	char		*out;
+	size_t		len;
 
-	*utf8 = zbx_malloc(*utf8, strlen(cesu8) + 1);
+	len = strlen(cesu8);
+	out = *utf8 = zbx_malloc(*utf8, len + 1);
+	end = cesu8 + len;
 
-	if (NULL == *utf8)
-		return -1;
-
-	cu = *utf8;
-
-	while (*cc != '\0')
+	for (in = cesu8; in < end; )
 	{
-		uint32_t c = 0;
-		uint32_t u;
-
-		if (cc[0] <= 0x7F)
+		if (0x7F >= (unsigned char)*in)
 		{
-			*cu++ = *cc++;
+			*out++ = *in++;
 			continue;
 		}
-		else if (cc[0] <= 0xDF)
+		if (0xDF >= (unsigned char)*in)
 		{
-			*cu++ = *cc++;
-			*cu++ = *cc++;
+			if (2 > end - in)
+				goto fail;
+
+			*out++ = *in++;
+			*out++ = *in++;
 			continue;
 		}
-		else if (cc[0] <= 0xEF)
+		if (0xEF >= (unsigned char)*in)
 		{
-			/* Surrogates are encoded in 3 chars so convert
-			 * back to a single UTF-16 value
-			 */
-			c = ((uint32_t)cc[0] & 0xF) << 12 |
-					((uint32_t)cc[1] & 0x3F) << 6 |
-					((uint32_t)cc[2] & 0x3F);
-		}
-		else
-		{
-			*cu++ = *cc++;
-			*cu++ = *cc++;
-			*cu++ = *cc++;
-			*cu++ = *cc++;
+			zbx_uint32_t	c1, c2, u;
+
+			if (3 > end - in || FAIL == cesu8_decode_surrogate(in, &c1))
+				goto fail;
+
+			if (0xD800 > c1 || 0xDBFF < c1)
+			{
+				/* normal 3-byte sequence */
+				*out++ = *in++;
+				*out++ = *in++;
+				*out++ = *in++;
+				continue;
+			}
+
+			/* decode unicode supplementary character represented as surrogate pair */
+			in += 3;
+			if (3 > end - in || FAIL == cesu8_decode_surrogate(in, &c2) || 0xDC00 > c2 || 0xDFFF < c2)
+				goto fail;
+
+			u = 0x10000 + ((((uint32_t)c1 & 0x3FF) << 10) | (c2 & 0x3FF));
+			*out++ = 0xF0 |  u >> 18;
+			*out++ = 0x80 | (u >> 12 & 0x3F);
+			*out++ = 0x80 | (u >> 6 & 0x3F);
+			*out++ = 0x80 | (u & 0x3F);
+			in += 3;
 			continue;
+
 		}
 
-		if (hs == 0 && c >= 0xD800 && c <= 0xDBFF)
-		{
-			hs = c;
-		}
-		else if (hs != 0 && c >= 0xDC00 && c <= 0xDFFF)
-		{
-			/* Have high and low surrogates - convert to code point then
-			 * back to UTF-8
-			 */
-			u = 0x10000 + ((((uint32_t)hs & 0x3FF) << 10) | (c & 0x3FF));
-			*cu++ = 0xF0 |  u >> 18;
-			*cu++ = 0x80 | (u >> 12 & 0x3F);
-			*cu++ = 0x80 | (u >> 6 & 0x3F);
-			*cu++ = 0x80 | (u & 0x3F);
-			hs = 0;
-		}
-		else
-		{
-			*cu++ = cc[0];
-			*cu++ = cc[1];
-			*cu++ = cc[2];
-			hs = 0;
-		}
+		if (4 > end - in)
+			goto fail;
 
-		cc += 3;
+		*out++ = *in++;
+		*out++ = *in++;
+		*out++ = *in++;
+		*out++ = *in++;
 	}
-
-	*cu = '\0';
-	return 0;
+	*out = '\0';
+	return SUCCEED;
+fail:
+	zbx_free(*utf8);
+	return FAIL;
 }
 
 void	dos2unix(char *str)

@@ -482,26 +482,17 @@ int	zbx_es_execute(zbx_es_t *es, const char *script, const char *code, int size,
 	if (0 == duk_check_type(es->env->ctx, -1, DUK_TYPE_UNDEFINED))
 	{
 		if (0 != duk_check_type(es->env->ctx, -1, DUK_TYPE_NULL))
+		{
 			*output = NULL;
+			zabbix_log(LOG_LEVEL_DEBUG, "%s() output: null", __func__);
+		}
 		else
 		{
-			char *utf8 = NULL;
-			int res;
-
-			*output = NULL;
-
-			res = zbx_cesu8_to_utf8(duk_safe_to_string(es->env->ctx, -1), &utf8);
-
-			if (0 == res)
-				*output = zbx_strdup(NULL, utf8);
-			else if (-1 == res)
-				*error = zbx_strdup(*error, "could not convert from cesu8 to utf8");
-
-			zbx_free(utf8);
+			if (SUCCEED != (ret = zbx_cesu8_to_utf8(duk_safe_to_string(es->env->ctx, -1), output)))
+				*error = zbx_strdup(*error, "could not convert return value to utf8");
+			else
+				zabbix_log(LOG_LEVEL_DEBUG, "%s() output:'%s'", __func__, *output);
 		}
-
-		zabbix_log(LOG_LEVEL_DEBUG, "%s() output:'%s'", __func__, ZBX_NULL2EMPTY_STR(*output));
-		ret = SUCCEED;
 	}
 	else
 		*error = zbx_strdup(*error, "undefined return value");
