@@ -1072,6 +1072,7 @@ double	zbx_time(void);
 void	zbx_timespec(zbx_timespec_t *ts);
 double	zbx_current_time(void);
 void	zbx_get_time(struct tm *tm, long *milliseconds, zbx_timezone_t *tz);
+long	zbx_get_timezone_offset(time_t t, struct tm *tm);
 int	zbx_utc_time(int year, int mon, int mday, int hour, int min, int sec, int *t);
 int	zbx_day_in_month(int year, int mon);
 
@@ -1207,7 +1208,6 @@ size_t	zbx_strlen_utf8_nbytes(const char *text, size_t maxlen);
 int	zbx_is_utf8(const char *text);
 #define ZBX_UTF8_REPLACE_CHAR	'?'
 void	zbx_replace_invalid_utf8(char *text);
-int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8);
 
 void	dos2unix(char *str);
 int	str2uint64(const char *str, const char *suffixes, zbx_uint64_t *value);

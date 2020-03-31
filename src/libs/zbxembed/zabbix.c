@@ -24,7 +24,6 @@
 #include "embed.h"
 #include "duktape.h"
 #include "zabbix.h"
-#include "base64.h"
 
 /******************************************************************************
  *                                                                            *

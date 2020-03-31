@@ -28,6 +28,7 @@ import (
 	"time"
 
 	"zabbix.com/internal/agent"
+	"zabbix.com/internal/agent/alias"
 	"zabbix.com/pkg/conf"
 	"zabbix.com/pkg/itemutil"
 	"zabbix.com/pkg/log"
@@ -227,6 +228,7 @@ func (m *mockManager) iterate(t *testing.T, iters int) {
 
 func (m *mockManager) mockInit(t *testing.T) {
 	m.init()
+	m.aliases, _ = alias.NewManager(nil)
 	clock := time.Now().Unix()
 	m.startTime = time.Unix(clock-clock%10, 100)
 	t.Logf("starting time %s", m.startTime.Format(time.Stamp))
@@ -456,7 +458,7 @@ func (t *mockCollectorTask) reschedule(now time.Time) (err error) {
 }
 
 func (t *mockCollectorTask) getWeight() int {
-	return t.plugin.capacity
+	return t.plugin.maxCapacity
 }
 
 type mockStarterTask struct {
@@ -474,7 +476,7 @@ func (t *mockStarterTask) reschedule(now time.Time) (err error) {
 }
 
 func (t *mockStarterTask) getWeight() int {
-	return t.plugin.capacity
+	return t.plugin.maxCapacity
 }
 
 type mockStopperTask struct {
@@ -492,7 +494,7 @@ func (t *mockStopperTask) reschedule(now time.Time) (err error) {
 }
 
 func (t *mockStopperTask) getWeight() int {
-	return t.plugin.capacity
+	return t.plugin.maxCapacity
 }
 
 type mockWatcherTask struct {
@@ -514,7 +516,7 @@ func (t *mockWatcherTask) reschedule(now time.Time) (err error) {
 }
 
 func (t *mockWatcherTask) getWeight() int {
-	return t.plugin.capacity
+	return t.plugin.maxCapacity
 }
 
 // plugin.ContextProvider interface
@@ -555,7 +557,7 @@ func (t *mockConfigerTask) reschedule(now time.Time) (err error) {
 }
 
 func (t *mockConfigerTask) getWeight() int {
-	return t.plugin.capacity
+	return t.plugin.maxCapacity
 }
 
 func checkExporterTasks(t *testing.T, m *Manager, clientID uint64, items []*clientItem) {
@@ -913,7 +915,7 @@ func TestScheduleCapacity(t *testing.T) {
 	manager.mockInit(t)
 
 	p := manager.plugins["debug2"]
-	p.capacity = 2
+	p.maxCapacity = 2
 
 	items := []*clientItem{
 		&clientItem{itemid: 1, delay: "1", key: "debug1"},

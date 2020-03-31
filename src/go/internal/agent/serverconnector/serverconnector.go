@@ -150,11 +150,11 @@ func (c *Connector) refreshActiveChecks() {
 			return
 		}
 
-		var n int
-
-		if a.HostMetadata, n = agent.CutAfterN(a.HostMetadata, hostMetadataLen); n != hostMetadataLen {
+		if len(a.HostMetadata) > hostMetadataLen {
 			log.Warningf("the returned value of \"%s\" item specified by \"HostMetadataItem\" configuration parameter"+
-				" is too long, using first %d characters", c.options.HostMetadataItem, n)
+				" is too long, using first %d characters", c.options.HostMetadataItem, hostMetadataLen)
+
+			a.HostMetadata = agent.CutAfterN(a.HostMetadata, hostMetadataLen)
 		}
 	}
 
@@ -335,7 +335,7 @@ run:
 		}
 	}
 	log.Debugf("[%d] server connector has been stopped", c.clientID)
-	monitor.Unregister()
+	monitor.Unregister(monitor.Input)
 }
 
 func (c *Connector) updateOptions(options *agent.AgentOptions) {
@@ -368,12 +368,15 @@ func New(taskManager scheduler.Scheduler, address string, options *agent.AgentOp
 
 func (c *Connector) Start() {
 	c.resultCache.Start()
-	monitor.Register()
+	monitor.Register(monitor.Input)
 	go c.run()
 }
 
-func (c *Connector) Stop() {
+func (c *Connector) StopConnector() {
 	c.input <- nil
+}
+
+func (c *Connector) StopCache() {
 	c.resultCache.Stop()
 }
 
