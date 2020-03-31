@@ -2,10 +2,10 @@ Changes for 4.4.8rc1
 
 New features:
 ..F....... [ZBXNEXT-4829] changed web setup wizard to not create and drop tables for DB connectivity test purposes (Ivo)
-.........T [ZBX-17457] fixed description in Template DB MySQL by Zabbix agent (mchudinov)
 .......PS. [ZBXNEXT-5734] added base64 encode, decode functions to webhook (mabele)
 
 Bug fixes:
+.........T [ZBX-17457] fixed description in Template DB MySQL by Zabbix agent (mchudinov)
 ..F....... [ZBX-17508] fixed error in oracle database encoding check (gcalenko)
 ...G...... [ZBX-17442] fixed web.page.get to time out when there is no response (vso)
 ..F....... [ZBX-17429] fixed trigger expression condition popup to display negative numbers upon opening existing expression (Ivo)
