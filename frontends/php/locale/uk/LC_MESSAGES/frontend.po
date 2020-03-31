@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-29 01:44+0200\n"
+"POT-Creation-Date: 2020-03-31 10:12+0300\n"
 "PO-Revision-Date: 2020-02-21 19:34+0300\n"
 "Last-Translator: Oleksii <oleksii.zagorskyi@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-POOTLE-MTIME: 1582306455.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:67
-#: include/classes/db/OracleDbBackend.php:87
+#: include/classes/db/OracleDbBackend.php:86
 #: include/classes/db/PostgresqlDbBackend.php:76
 #, c-format
 msgid "\"%1$s\" instead \"%2$s\""
@@ -8480,7 +8480,7 @@ msgstr "Некоректний метод \"%1$s.%2$s\"."
 msgid "Incorrect object value."
 msgstr "Некоректне значення об'єкта."
 
-#: include/classes/db/OracleDbBackend.php:86
+#: include/classes/db/OracleDbBackend.php:85
 #, c-format
 msgid "Incorrect parameter \"%1$s\" value: %2$s."
 msgstr ""
