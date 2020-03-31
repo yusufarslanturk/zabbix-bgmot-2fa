@@ -53,7 +53,7 @@ const char	*tls_crypto_init_msg;
 		Supported versions are 1.0.1 and newer.
 #endif
 
-#if (OPENSSL_VERSION_NUMBER < 0x1010000fL)
+#if OPENSSL_VERSION_NUMBER < 0x1010000fL
 	// OpenSSL 1.0.1/1.0.2 (before 1.1.0)
 #include <openssl/x509v3.h>	// string_to_hex()
 #	define OPENSSL_hexstr2buf			string_to_hex
@@ -80,7 +80,7 @@ typedef struct {
 	char *psk_key;
 } tls_t;
 
-#if (OPENSSL_VERSION_NUMBER < 0x1010000fL)
+#if OPENSSL_VERSION_NUMBER < 0x1010000fL
         // OpenSSL 1.0.1/1.0.2 (before 1.1.0)
 #include <pthread.h>
 
