@@ -544,16 +544,7 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 		if (NULL != ptr)
 		{
 			if ((size_t)length < zbx_strlen_utf8(ptr))
-			{
-				char	*value_tmp;
-				size_t	len;
-
-				value_tmp = zbx_dsprintf(NULL, "%s", ptr);
-				len = zbx_strlen_utf8_nchars(value_tmp, (size_t)(length + 1));
-
-				zbx_strlcpy_utf8(ptr, value_tmp, len);
-				zbx_free(value_tmp);
-			}
+				ptr[zbx_strlen_utf8_nchars(ptr, length)] = '\0';
 
 			SET_STR_RESULT(result, ptr);
 		}
