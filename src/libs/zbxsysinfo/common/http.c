@@ -505,7 +505,7 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 	output = get_rparam(request, 5);
 
 	if (NULL == length_str || '\0' == *length_str)
-		length = 0x7FFFFFFE;
+		length = ZBX_MAX_UINT31_1;
 	else if (FAIL == is_uint31_1(length_str, &length))
 	{
 		SET_MSG_RESULT(result, zbx_strdup(NULL, "Invalid fifth parameter."));
