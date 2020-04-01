@@ -119,7 +119,7 @@ static void	zbx_openssl_locking_cb(int mode, int n, const char *file, int line)
 
 static int	zbx_allocate_mutexes(const char **error_msg)
 {
-	int	num_locks;
+	int	num_locks, i;
 
 	num_locks = CRYPTO_num_locks();
 
@@ -127,6 +127,22 @@ static int	zbx_allocate_mutexes(const char **error_msg)
 	{
 		*error_msg = strdup("cannot allocate mutexes for OpenSSL library: out of memory");
 		return -1;
+	}
+
+	for (i = 0; i < num_locks; i++)
+	{
+		int	res;
+
+		if (0 != (res = pthread_mutex_init(mutexes + i, NULL)))
+		{
+			char	buf[128];
+
+			snprintf(buf, sizeof(buf), "cannot initialize mutex %d (out of %d) for OpenSSL library:"
+					" pthread_mutex_init() returned %d", i, num_locks, res);
+
+			*error_msg = strdup(buf);
+			return -1;
+		}
 	}
 
 	return 0;
