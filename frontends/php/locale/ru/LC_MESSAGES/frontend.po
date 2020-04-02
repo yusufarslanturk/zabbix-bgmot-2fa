@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-16 17:14+0200\n"
+"POT-Creation-Date: 2020-03-31 10:12+0300\n"
 "PO-Revision-Date: 2020-02-22 16:52+0300\n"
 "Last-Translator: Alexey <dotneft@gmail.com>\n"
 "Language-Team: Zabbix translation team\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-POOTLE-MTIME: 1582383122.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:67
-#: include/classes/db/OracleDbBackend.php:87
+#: include/classes/db/OracleDbBackend.php:86
 #: include/classes/db/PostgresqlDbBackend.php:76
 #, c-format
 msgid "\"%1$s\" instead \"%2$s\""
@@ -1315,7 +1315,7 @@ msgstr "Ошибка при аутентификации: %1$s."
 msgid "Authentication method"
 msgstr "Метод аутентификации"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:240
+#: app/controllers/CControllerAuthenticationUpdate.php:243
 msgid "Authentication method changed"
 msgstr "Метод аутентификации изменён"
 
@@ -1337,7 +1337,7 @@ msgstr "Пароль аутентификации"
 msgid "Authentication protocol"
 msgstr "Протокол аутентификации"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:239
+#: app/controllers/CControllerAuthenticationUpdate.php:242
 msgid "Authentication settings updated"
 msgstr "Настройки аутентификации обновлены"
 
@@ -2527,7 +2527,7 @@ msgstr "Не удалось подключить JS файл \"%s\"."
 msgid "Cannot include view file \"%s\"."
 msgstr "Не удалось включить файл представления \"%s\"."
 
-#: app/controllers/CControllerPopupTriggerExpr.php:691
+#: app/controllers/CControllerPopupTriggerExpr.php:698
 msgid "Cannot insert trigger expression"
 msgstr "Не удалось вставить выражение триггера"
 
@@ -2829,7 +2829,7 @@ msgstr "Не удалось обновить действие"
 msgid "Cannot update application"
 msgstr "Не удалось обновить группу элементов данных"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:244
+#: app/controllers/CControllerAuthenticationUpdate.php:247
 msgid "Cannot update authentication"
 msgstr "Не удалось обновить аутентификацию"
 
@@ -3441,7 +3441,7 @@ msgstr "Сжатие"
 msgid "Concurrent sessions"
 msgstr "Одновременные сессии"
 
-#: app/controllers/CControllerPopupTriggerExpr.php:714
+#: app/controllers/CControllerPopupTriggerExpr.php:721
 msgid "Condition"
 msgstr "Условие"
 
@@ -8480,7 +8480,7 @@ msgstr "Некорректный метод \"%1$s.%2$s\"."
 msgid "Incorrect object value."
 msgstr "Некорректное значение объекта."
 
-#: include/classes/db/OracleDbBackend.php:86
+#: include/classes/db/OracleDbBackend.php:85
 #, c-format
 msgid "Incorrect parameter \"%1$s\" value: %2$s."
 msgstr "Некорректное значение \"%1$s\" параметра: %2$s."
@@ -8717,7 +8717,7 @@ msgstr "Некорректная группа пользователей."
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
 msgstr "Некорректное значение \"%1$s\" для \"%2$s\" поля."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:136
+#: app/controllers/CControllerAuthenticationUpdate.php:129
 #: include/classes/api/services/CAction.php:1786
 #: include/classes/api/services/CScreenItem.php:567
 #: include/validate.inc.php:351
@@ -8785,8 +8785,8 @@ msgstr "Некорректное значение \"%1$s\" в поле \"%2$s\" 
 msgid "Incorrect value for \"%1$s\" field."
 msgstr "Некорректное значение для \"%1$s\" поля."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:95
-#: app/controllers/CControllerAuthenticationUpdate.php:127
+#: app/controllers/CControllerAuthenticationUpdate.php:88
+#: app/controllers/CControllerAuthenticationUpdate.php:120
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: app/controllers/CControllerPopupMedia.php:99
 #: app/controllers/CControllerPopupMedia.php:110
@@ -9644,7 +9644,7 @@ msgstr[2] "Элементы данных активированы"
 msgid "Item in \"not supported\" state"
 msgstr "Элемент данных в \"неподдерживаемом\" состоянии"
 
-#: app/controllers/CControllerPopupTriggerExpr.php:686
+#: app/controllers/CControllerPopupTriggerExpr.php:693
 msgid "Item not selected"
 msgstr "Элемент данных не выбран"
 
@@ -9979,11 +9979,11 @@ msgstr "LDAP аутентификация"
 msgid "LDAP host"
 msgstr "Хост LDAP"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:96
+#: app/controllers/CControllerAuthenticationUpdate.php:89
 msgid "LDAP is not configured"
 msgstr "LDAP не настроен"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:184
+#: app/controllers/CControllerAuthenticationUpdate.php:187
 msgid "LDAP login successful"
 msgstr "Успешный вход через LDAP"
 
@@ -17228,7 +17228,7 @@ msgid "Unknown function."
 msgstr "Неизвестная функция."
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:48
-#: app/controllers/CControllerPopupTriggerExpr.php:535
+#: app/controllers/CControllerPopupTriggerExpr.php:542
 #: include/triggers.inc.php:1437
 msgid "Unknown host item, no such item in selected host"
 msgstr "Неизвестный элемент данных узла сети, такого элемента данных нет у выбранного узла сети"
@@ -19103,7 +19103,7 @@ msgstr "вычисляемое"
 msgid "cannot be changed"
 msgstr "нельзя изменить"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:127
+#: app/controllers/CControllerAuthenticationUpdate.php:120
 #: app/controllers/CControllerPopupMedia.php:99
 #: app/controllers/CControllerPopupMedia.php:110
 #: app/controllers/CControllerPopupTriggerWizard.php:134

@@ -775,7 +775,7 @@ static const char	*tls_version_static(void)
 typedef void * SSL_CTX_LP;
 
 typedef struct {
-} tls_t, *tls_lp_t;
+} tls_t;
 
 static int tls_init(void)
 {
