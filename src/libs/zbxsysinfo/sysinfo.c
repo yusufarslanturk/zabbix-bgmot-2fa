@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1044,6 +1044,13 @@ zbx_uint64_t	get_kstat_numeric_value(const kstat_named_t *kn)
 #endif
 
 #if !defined(_WINDOWS) && !defined(__MINGW32__)
+#if defined(WITH_AGENT2_METRICS)
+int	zbx_execute_threaded_metric(zbx_metric_func_t metric_func, AGENT_REQUEST *request, AGENT_RESULT *result)
+{
+	/* calling fork() in a multithreaded program may result in deadlock on mutex */
+	return metric_func(request, result);
+}
+#else
 /******************************************************************************
  *                                                                            *
  * Function: serialize_agent_result                                           *
@@ -1351,6 +1358,7 @@ out:
 			ISSET_MSG(result) ? result->msg : "");
 	return ret;
 }
+#endif
 #else
 
 static ZBX_THREAD_LOCAL zbx_uint32_t	mutex_flag = ZBX_MUTEX_ALL_ALLOW;
@@ -1497,3 +1505,19 @@ int	zbx_execute_threaded_metric(zbx_metric_func_t metric_func, AGENT_REQUEST *re
 	return WAIT_OBJECT_0 == rc ? metric_args.agent_ret : SYSINFO_RET_FAIL;
 }
 #endif
+
+/******************************************************************************
+ *                                                                            *
+ * Function: zbx_mpoints_free                                                 *
+ *                                                                            *
+ * Purpose: frees previously allocated mount-point structure                  *
+ *                                                                            *
+ * Parameters: mpoint - [IN] pointer to structure from vector                 *
+ *                                                                            *
+ * Return value:                                                              *
+ *                                                                            *
+ ******************************************************************************/
+void	zbx_mpoints_free(zbx_mpoint_t *mpoint)
+{
+	zbx_free(mpoint);
+}

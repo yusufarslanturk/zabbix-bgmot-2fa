@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -375,6 +375,7 @@ if (!$readonly) {
 	$master_item[] = (new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN);
 	$master_item[] = (new CButton('button', _('Select')))
 		->addClass(ZBX_STYLE_BTN_GREY)
+		->removeId()
 		->onClick('return PopUp("popup.generic",'.
 			CJs::encodeJson([
 				'srctbl' => 'items',
@@ -392,6 +393,7 @@ if (!$readonly) {
 	$master_item[] = (new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN);
 	$master_item[] = (new CButton('button', _('Select prototype')))
 		->addClass(ZBX_STYLE_BTN_GREY)
+		->removeId()
 		->onClick('return PopUp("popup.generic",'.
 			CJs::encodeJson([
 				'srctbl' => 'item_prototypes',

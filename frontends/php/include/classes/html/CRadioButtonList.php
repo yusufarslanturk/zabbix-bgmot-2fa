@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -116,7 +116,9 @@ class CRadioButtonList extends CList {
 
 		if ($this->readonly) {
 			$this->addItem(
-				(new CVar($this->name, $this->value, zbx_formatDomId($this->name)))->setEnabled($this->enabled)
+				(new CVar($this->name, $this->value))
+					->setEnabled($this->enabled)
+					->removeId()
 			);
 		}
 

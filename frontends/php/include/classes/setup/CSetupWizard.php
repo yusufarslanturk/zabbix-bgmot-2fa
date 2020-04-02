@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -413,31 +413,42 @@ class CSetupWizard extends CForm {
 
 		$error = '';
 
-		// during setup set debug to false to avoid displaying unwanted PHP errors in messages
+		// During setup set debug to false to avoid displaying unwanted PHP errors in messages.
 		if (!$result = DBconnect($error)) {
 			error($error);
 		}
 		else {
 			$result = true;
+
 			if (!zbx_empty($DB['SCHEMA']) && $DB['TYPE'] == ZBX_DB_DB2) {
-				$db_schema = DBselect('SELECT schemaname FROM syscat.schemata WHERE schemaname=\''.db2_escape_string($DB['SCHEMA']).'\'');
+				$db_schema = DBselect(
+					"SELECT schemaname FROM syscat.schemata WHERE schemaname='".db2_escape_string($DB['SCHEMA'])."'"
+				);
 				$result = DBfetch($db_schema);
 			}
 
 			if (!zbx_empty($DB['SCHEMA']) && $DB['TYPE'] == ZBX_DB_POSTGRESQL) {
-				$db_schema = DBselect('SELECT schema_name FROM information_schema.schemata WHERE schema_name = \''.pg_escape_string($DB['SCHEMA']).'\';');
+				$db_schema = DBselect(
+					"SELECT schema_name".
+					" FROM information_schema.schemata".
+					" WHERE schema_name='".pg_escape_string($DB['SCHEMA'])."'"
+				);
 				$result = DBfetch($db_schema);
 			}
 
-			if ($result) {
-				$result = DBexecute('CREATE TABLE zabbix_installation_test (test_row INTEGER)');
-				$result &= DBexecute('DROP TABLE zabbix_installation_test');
+			$db = DB::getDbBackend();
+
+			if (!$db->checkEncoding()) {
+				error($db->getWarning());
+
+				return false;
 			}
 		}
 
 		DBclose();
 
 		$DB = null;
+
 		return $result;
 	}
 

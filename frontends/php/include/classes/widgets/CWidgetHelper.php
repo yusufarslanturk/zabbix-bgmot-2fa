@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -638,6 +638,7 @@ class CWidgetHelper {
 					(new CButton())
 						->setAttribute('title', _('Delete'))
 						->addClass(ZBX_STYLE_REMOVE_BTN)
+						->removeId()
 				))
 					->addClass(ZBX_STYLE_COLUMN_5)
 			]))
@@ -677,9 +678,7 @@ class CWidgetHelper {
 	 * @return CList
 	 */
 	public static function getGraphOverride($field, $form_name) {
-		$list = (new CList())
-			->addClass(ZBX_STYLE_OVERRIDES_LIST)
-			->setId('overrides');
+		$list = (new CList())->addClass(ZBX_STYLE_OVERRIDES_LIST);
 
 		$values = $field->getValue();
 
@@ -818,11 +817,10 @@ class CWidgetHelper {
 	 * Return javascript necessary to initialize CWidgetFieldGraphOverride field.
 	 *
 	 * @param CWidgetFieldGraphOverride $field
-	 * @param string                    $form_name  Form name in which override field is located.
 	 *
 	 * @return string
 	 */
-	public static function getGraphOverrideJavascript($field, $form_name) {
+	public static function getGraphOverrideJavascript($field) {
 		$scripts = [
 			// Define it as function to avoid redundancy.
 			'function initializeOverrides() {'.
@@ -943,7 +941,8 @@ class CWidgetHelper {
 						(new CButton())
 							->addClass(ZBX_STYLE_COLOR_PREVIEW_BOX)
 							->addStyle('background-color: #'.$value['color'].';')
-							->setAttribute('title', $is_opened ? _('Collapse') : _('Expand')),
+							->setAttribute('title', $is_opened ? _('Collapse') : _('Expand'))
+							->removeId(),
 						(new CPatternSelect([
 							'name' => $field_name.'['.$row_num.'][hosts][]',
 							'object_name' => 'hosts',
@@ -988,6 +987,7 @@ class CWidgetHelper {
 					(new CButton())
 						->setAttribute('title', _('Delete'))
 						->addClass(ZBX_STYLE_REMOVE_BTN)
+						->removeId()
 				]))->addClass(ZBX_STYLE_COLUMN_5)
 			]))
 				->addClass(ZBX_STYLE_LIST_ACCORDION_ITEM_HEAD)
@@ -1232,8 +1232,8 @@ class CWidgetHelper {
 					'row: ".'.ZBX_STYLE_LIST_ACCORDION_ITEM.'",'.
 					'dataCallback: function(data) {'.
 						'data.color = function(num) {'.
-							'var palete = '.CWidgetFieldGraphDataSet::DEFAULT_COLOR_PALETE.';'.
-							'return palete[num % palete.length];'.
+							'var palette = '.CWidgetFieldGraphDataSet::DEFAULT_COLOR_PALETTE.';'.
+							'return palette[num % palette.length];'.
 						'} (data.rowNum);'.
 						'return data;'.
 					'}'.
@@ -1273,7 +1273,7 @@ class CWidgetHelper {
 					'}'.
 				'});',
 
-			// Intialize vertical accordion.
+			// Initialize vertical accordion.
 			'jQuery("#data_sets")'.
 				'.on("focus", ".'.CMultiSelect::ZBX_STYLE_CLASS.' input.input", function() {'.
 					'jQuery("#data_sets").zbx_vertical_accordion("expandNth",'.

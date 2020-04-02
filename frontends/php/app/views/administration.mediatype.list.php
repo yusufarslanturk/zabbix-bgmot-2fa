@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -126,6 +126,7 @@ foreach ($data['mediatypes'] as $mediaType) {
 
 	$test_link = (new CButton('mediatypetest_edit', _('Test')))
 		->addClass(ZBX_STYLE_BTN_LINK)
+		->removeId()
 		->setEnabled(MEDIA_TYPE_STATUS_ACTIVE == $mediaType['status'])
 		->onClick('return PopUp("popup.mediatypetest.edit",'.CJs::encodeJson([
 			'mediatypeid' => $mediaType['mediatypeid']

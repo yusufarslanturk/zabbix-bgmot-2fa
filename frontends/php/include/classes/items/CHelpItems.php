@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -317,6 +317,10 @@ class CHelpItems {
 					'description' => _('Disk space in bytes or in percentage from total. Returns integer for bytes; float for percentage')
 				],
 				[
+					'key' => 'vfs.fs.get',
+					'description' => _('File systems and their spaces in bytes and percentage from total. Returns JSON')
+				],
+				[
 					'key' => 'vm.memory.size[<mode>]',
 					'description' => _('Memory size in bytes or in percentage from total. Returns integer for bytes; float for percentage')
 				],
@@ -379,11 +383,11 @@ class CHelpItems {
 					'description' => _('Maximum number of processes supported by OS. Returns integer')
 				],
 				[
-					'key' => 'log[file,<regexp>,<encoding>,<maxlines>,<mode>,<output>,<maxdelay>]',
+					'key' => 'log[file,<regexp>,<encoding>,<maxlines>,<mode>,<output>,<maxdelay>,<options>]',
 					'description' => _('Log file monitoring. Returns log')
 				],
 				[
-					'key' => 'log.count[file,<regexp>,<encoding>,<maxproclines>,<mode>,<maxdelay>]',
+					'key' => 'log.count[file,<regexp>,<encoding>,<maxproclines>,<mode>,<maxdelay>,<options>]',
 					'description' => _('Count of matched lines in log file monitoring. Returns integer')
 				],
 				[
@@ -625,6 +629,10 @@ class CHelpItems {
 				[
 					'key' => 'vfs.fs.inode[fs,<mode>]',
 					'description' => _('Number or percentage of inodes. Returns integer for number; float for percentage')
+				],
+				[
+					'key' => 'vfs.fs.get',
+					'description' => _('File systems and their spaces in bytes and percentage from total. Returns JSON')
 				],
 				[
 					'key' => 'vfs.fs.size[fs,<mode>]',

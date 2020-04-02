@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -248,7 +248,7 @@ class testFormTrigger extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//textarea[@id='expr_temp']", 'rows', 7);
 			$this->zbxTestAssertAttribute("//textarea[@id='expr_temp']", 'readonly');
 			$this->zbxTestTextPresent('Close expression constructor');
-			$this->zbxTestAssertNotVisibleId('expression');
+			$this->zbxTestAssertNotVisibleXpath('//input[@name="expression"]');
 
 			if (!isset($data['form'])) {
 				$this->zbxTestAssertVisibleXpath("//li[@id='expression_row']//button[contains(@onclick, 'add_expression') and text()='Add']");
@@ -596,19 +596,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'expected' => TEST_BAD,
 					'description' => 'MyTrigger_CheckUrl',
 					'expression' => '{Simple form test host:test-item-reuse.last(0)}<5',
-					'url' => 'www.zabbix.com',
-					'error_msg' => 'Cannot add trigger',
-					'errors' => [
-						'Wrong value for url field.'
-					]
-				]
-			],
-			[
-				[
-					'expected' => TEST_BAD,
-					'description' => 'MyTrigger_CheckUrl',
-					'expression' => '{Simple form test host:test-item-reuse.last(0)}<5',
-					'url' => 'zabbix.com',
+					'url' => 'javascript:alert(123);',
 					'error_msg' => 'Cannot add trigger',
 					'errors' => [
 						'Wrong value for url field.'

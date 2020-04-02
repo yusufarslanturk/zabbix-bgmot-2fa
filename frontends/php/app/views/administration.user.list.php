@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ $widget = (new CWidget())
 		(new CForm('get'))
 			->cleanItems()
 			->setAttribute('aria-label', _('Main filter'))
-			->addVar('action', 'user.list')
+			->addItem((new CVar('action', 'user.list'))->removeId())
 			->addItem((new CList())
 				->addItem([
 					new CLabel(_('User group'), 'filter_usrgrpid'),

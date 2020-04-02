@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -59,9 +59,9 @@ static duk_ret_t	es_zabbix_ctor(duk_context *ctx)
 
 /******************************************************************************
  *                                                                            *
- * Function: es_zabbix_status                                            *
+ * Function: es_zabbix_status                                                 *
  *                                                                            *
- * Purpose: Curlzabbix.Status method                                     *
+ * Purpose: Curlzabbix.Status method                                          *
  *                                                                            *
  ******************************************************************************/
 static duk_ret_t	es_zabbix_log(duk_context *ctx)
@@ -71,7 +71,7 @@ static duk_ret_t	es_zabbix_log(duk_context *ctx)
 }
 
 static const duk_function_list_entry	zabbix_methods[] = {
-	{"Log", es_zabbix_log, 2},
+	{"Log",			es_zabbix_log,		2},
 	{NULL, NULL, 0}
 };
 

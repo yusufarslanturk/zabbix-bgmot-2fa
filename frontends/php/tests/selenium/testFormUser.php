@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -375,7 +375,7 @@ class testFormUser extends CWebTest {
 					'error_details' => 'Incorrect value for field "autologout": cannot be empty.'
 				]
 			],
-			// URL with a space in the middle.
+			// URL unacceptable.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -384,37 +384,7 @@ class testFormUser extends CWebTest {
 						'Groups' => 'Zabbix administrators',
 						'Password' => 'zabbix',
 						'Password (once again)' => 'zabbix',
-						'URL (after login)' => 'www.zab bix.com'
-					],
-					'error_title' => 'Cannot add user',
-					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
-				]
-			],
-			// External URL without protocol.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Alias' => 'Negative_Test17',
-						'Groups' => 'Zabbix administrators',
-						'Password' => 'zabbix',
-						'Password (once again)' => 'zabbix',
-						'URL (after login)' => 'zabbix.com'
-					],
-					'error_title' => 'Cannot add user',
-					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
-				]
-			],
-			// Internal URL without extention.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Alias' => 'Negative_Test18',
-						'Groups' => 'Zabbix administrators',
-						'Password' => 'zabbix',
-						'Password (once again)' => 'zabbix',
-						'URL (after login)' => 'sysmaps'
+						'URL (after login)' => 'javascript:alert(123);'
 					],
 					'error_title' => 'Cannot add user',
 					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
@@ -496,7 +466,7 @@ class testFormUser extends CWebTest {
 					'check_user' => true
 				]
 			],
-			// Verification that field password is not mandatory for users with LDAP authentification.
+			// Verification that field password is not mandatory for users with LDAP authentication.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -844,34 +814,12 @@ class testFormUser extends CWebTest {
 					'error_details' => 'Incorrect value for field "autologout": cannot be empty.'
 				]
 			],
-			// URL with a space in the middle.
+			// URL unacceptable.
 			[
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'URL (after login)' => 'www.zab bix.com'
-					],
-					'error_title' => 'Cannot update user',
-					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
-				]
-			],
-			// External URL without protocol.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'URL (after login)' => 'zabbix.com'
-					],
-					'error_title' => 'Cannot update user',
-					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
-				]
-			],
-			// Internal URL without extention.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'URL (after login)' => 'sysmaps'
+						'URL (after login)' => 'javascript:alert(123);'
 					],
 					'error_title' => 'Cannot update user',
 					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
