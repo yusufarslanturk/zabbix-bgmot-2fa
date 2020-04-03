@@ -72,6 +72,10 @@ func getValue(u interface{}, def string) string {
 }
 
 func getUname(params []string) (hostname string, err error) {
+	if len(params) > 0 {
+		return "", errors.New("Too many parameters.")
+	}
+
 	opsys, err := wmi.QueryTable(`root\cimv2`, `select CSName,Version,Caption,CSDVersion from Win32_OperatingSystem`)
 	if err != nil {
 		return "", err
