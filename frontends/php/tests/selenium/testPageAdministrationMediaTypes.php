@@ -72,8 +72,8 @@ class testPageAdministrationMediaTypes extends CWebTest {
 					'filter' => [
 						'Status' => 'Enabled'
 					],
-					'result' => ['Email', 'Mattermost', 'Opsgenie', 'Pushover', 'Reference webhook', 'SMS',
-							'URL test webhook', 'Webhook to delete']
+					'result' => ['Discord', 'Email', 'Mattermost', 'Opsgenie', 'PagerDuty', 'Pushover', 'Reference webhook',
+						'Slack', 'SMS', 'URL test webhook', 'Webhook to delete']
 				]
 			],
 			[

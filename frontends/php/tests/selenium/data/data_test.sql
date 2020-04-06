@@ -2316,15 +2316,15 @@ INSERT INTO widget_field (widgetid, widget_fieldid, type, name, value_int) VALUE
 
 -- testFormAdministrationMediaTypeWebhook
 INSERT INTO media_type (mediatypeid, type, name, status, script, description) VALUES (101, 4, 'Reference webhook', 0, 'return 0;', 'Reference webhook media type');
-INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (48, 101, 'URL', '');
-INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (49, 101, 'To', '{ALERT.SENDTO}');
-INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (50, 101, 'Subject', '{ALERT.SUBJECT}');
-INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (51, 101, 'Message', '{ALERT.MESSAGE}');
+INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (1000, 101, 'URL', '');
+INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (1001, 101, 'To', '{ALERT.SENDTO}');
+INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (1002, 101, 'Subject', '{ALERT.SUBJECT}');
+INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (1003, 101, 'Message', '{ALERT.MESSAGE}');
 INSERT INTO media_type (mediatypeid, type, name, status, script, show_event_menu, event_menu_name, event_menu_url, description) VALUES (102, 4, 'Webhook to delete', 0, 'return 0;', 1, 'Unique webhook tag', 'zabbix.php?action=mediatype.list&ddreset={EVENT.TAGS.webhook}', 'Webhook media type to be deleted');
-INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (52, 102, 'Parameter name to be deleted', 'Parameter value to be deleted');
-INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (53, 102, '2nd parameter name to be deleted', '2nd parameter value to be deleted');
+INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (1004, 102, 'Parameter name to be deleted', 'Parameter value to be deleted');
+INSERT INTO media_type_param (mediatype_paramid, mediatypeid, name, value) VALUES (1005, 102, '2nd parameter name to be deleted', '2nd parameter value to be deleted');
 
---testPageProblems_ProblemLinks
+-- testPageProblems_ProblemLinks
 INSERT INTO media_type (mediatypeid, type, name, status, script, show_event_menu, event_menu_name, event_menu_url, description) VALUES (103, 4, 'URL test webhook', 0, 'return 0;', 1, 'Webhook url for all', 'zabbix.php?action=mediatype.edit&mediatypeid=101', 'Webhook media type for URL test');
 INSERT INTO event_tag (eventtagid, eventid, tag, value) VALUES (201, 9003, 'webhook', '1');
 INSERT INTO problem_tag (problemtagid, eventid, tag, value) VALUES (201, 9003, 'webhook', '1');

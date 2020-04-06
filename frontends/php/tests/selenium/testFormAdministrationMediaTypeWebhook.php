@@ -30,17 +30,6 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 
 	public function createUpdateWebhookData() {
 		return [
-			// Add webhook media type with default values and only space in script field.
-			[
-				[
-					'expected' => TEST_GOOD,
-					'fields' => [
-						'Name' => 'Webhook with default fields',
-						'Type' => 'Webhook',
-						'Script' => ' '
-					]
-				]
-			],
 			// Add webhook media type without parameters.
 			[
 				[
@@ -104,6 +93,18 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 						['Name' => '1st new parameter', 'Value' => '1st new parameter value'],
 						['Name' => '2nd parameter', 'Value' => '{2ND.PARAMETER}']
 					]
+				]
+			],
+			// Attempt to add a webhook media type with default values and only space in script field.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Name' => 'Webhook with default fields',
+						'Type' => 'Webhook',
+						'Script' => ' '
+					],
+					'error_message' => 'Invalid parameter "/2/script": cannot be empty.'
 				]
 			],
 			// Attempt to add a webhook media type with a blank name.
@@ -221,36 +222,6 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 						'Menu entry name' => '{EVENT.TAGS."Returned tag"}'
 					],
 					'error_message' => 'Incorrect value for field "event_menu_url": cannot be empty.'
-				]
-			],
-			// Attempt to add a webhook with incorrect menu entry URL format.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with incorrect menu entry URL',
-						'Type' => 'Webhook',
-						'Script' => 'Incorrect menu entry URL',
-						'Include event menu entry' => true,
-						'Menu entry name' => '{EVENT.TAGS."Returned tag"}',
-						'Menu entry URL' => 'zabbix.com'
-					],
-					'error_message' => 'Invalid parameter "/2/event_menu_url": unacceptable URL.'
-				]
-			],
-			// Attempt to add a webhook with an invalid macro in menu entry URL field.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with invalid macro in menu entry URL',
-						'Type' => 'Webhook',
-						'Script' => 'Invalid macro in menu entry URL',
-						'Include event menu entry' => true,
-						'Menu entry name' => '{EVENT.TAGS."Returned tag"}',
-						'Menu entry URL' => '{INVALID.MACRO}'
-					],
-					'error_message' => 'Invalid parameter "/2/event_menu_url": unacceptable URL.'
 				]
 			],
 			// Attempt to add a webhook with empty Attempts field.
@@ -554,22 +525,6 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 					'error_message' => 'Incorrect value for field "event_menu_url": cannot be empty.'
 				]
 			],
-			// Add a menu entry URL with an incorrect macro.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Incorrect menu entry URL',
-						'Type' => 'Webhook',
-						'Script' => 'Incorrect menu entry URL',
-						'Include event menu entry' => true,
-						'Menu entry name' => '{EVENT.TAGS."Returned tag"}',
-						'Menu entry URL' => '{URL}'
-					],
-					'error_message' => 'Invalid parameter "/1/event_menu_url": unacceptable URL.'
-				]
-			],
 			// Remove the value of the attempts field.
 			[
 				[
@@ -766,7 +721,7 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		$mediatype_sql = 'SELECT type, status, maxsessions, maxattempts, attempt_interval, content_type, script, '.
 			'timeout, process_tags, show_event_menu, event_menu_name, event_menu_url, description, mtp.name, mtp.value '.
 			'FROM media_type mt INNER JOIN media_type_param mtp ON mt.mediatypeid=mtp.mediatypeid WHERE mt.name=';
-		$old_hash = CDBHelper::getHash($mediatype_sql.'\'Reference webhook\'');
+		$old_hash = CDBHelper::getHash($mediatype_sql.'\'Reference webhook\' ORDER BY mtp.name');
 
 		// Clone the reference media type.
 		$this->page->login()->open('zabbix.php?action=mediatype.list');
@@ -781,7 +736,7 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		$this->assertTrue($message->isGood());
 		$this->assertEquals('Media type added', $message->getTitle());
 		// Check that the parameters of the clone and of the cloned media types are equal.
-		$this->assertEquals($old_hash, CDBHelper::getHash($mediatype_sql.'\'Webhook clone\''));
+		$this->assertEquals($old_hash, CDBHelper::getHash($mediatype_sql.'\'Webhook clone\' ORDER BY mtp.name'));
 	}
 
 	public function testFormAdministrationMediaTypeWebhook_Cancel() {
@@ -821,7 +776,7 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		$this->assertEquals(0, CDBHelper::getCount('SELECT mediatypeid FROM media_type WHERE name=\'Webhook to delete\''));
 	}
 
-	// Finction that removes existing webhook parameters or adds new ones based on the Action field in data provider.
+	// Function that removes existing webhook parameters or adds new ones based on the Action field in data provider.
 	private function fillParametersField($data) {
 		$parameters_table = $this->query('id:parameters_table')->asTable()->one();
 		foreach ($data['parameters'] as $parameter) {
