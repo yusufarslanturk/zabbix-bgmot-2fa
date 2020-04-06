@@ -414,7 +414,6 @@ class testPageProblems extends CLegacyWebTest {
 			[
 				[
 					'problem' => '1_trigger_High',
-					'tags' => 'webhook: 1',
 					'links' => [
 						'Problems' => 'zabbix.php?action=problem.view&filter_triggerids%5B%5D=100035&filter_set=1',
 						'Configuration' => 'triggers.php?form=update&triggerid=100035',
@@ -422,18 +421,6 @@ class testPageProblems extends CLegacyWebTest {
 						'Webhook url for all' => 'zabbix.php?action=mediatype.edit&mediatypeid=101',
 						'Unique webhook tag' => 'zabbix.php?action=mediatype.list&ddreset=1',
 						'1_item' => 'history.php?action=showgraph&itemids%5B%5D=99086'
-					]
-				]
-			],
-			[
-				[
-					'problem' => 'Test trigger with tag',
-					'tag' => 'Service: abc',
-					'links' => [
-						'Problems' => 'zabbix.php?action=problem.view&filter_triggerids%5B%5D=99251&filter_set=1',
-						'Configuration' => 'triggers.php?form=update&triggerid=99251',
-						'Webhook url for all' => 'zabbix.php?action=mediatype.edit&mediatypeid=101',
-						'Number of processes' => 'history.php?action=showgraph&itemids%5B%5D=29192'
 					]
 				]
 			]
@@ -448,7 +435,7 @@ class testPageProblems extends CLegacyWebTest {
 		$this->page->login()->open('zabbix.php?action=problem.view&ddreset=1');
 		$this->query('button:Reset')->one()->click();
 		$this->page->waitUntilReady();
-		$this->query('xpath:.//a[text()="'.$data['problem'].'"]')->one()->waitUntilClickable()->click();
+		$this->query('link', $data['problem'])->one()->waitUntilClickable()->click();
 		$popup = CPopupMenuElement::find()->waitUntilVisible()->one();
 
 		foreach($data['links'] as $label => $url) {

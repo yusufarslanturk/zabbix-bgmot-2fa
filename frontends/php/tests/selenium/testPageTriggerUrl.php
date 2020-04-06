@@ -30,6 +30,9 @@ class testPageTriggerUrl extends CWebTest {
 
 	public $trigger = '1_trigger_Not_classified';
 	public $url = 'tr_events.php?triggerid=100032&eventid=9000';
+	public $webhook = 'Webhook url for all';
+	public $webhook_url = 'zabbix.php?action=mediatype.edit&mediatypeid=101';
+	public $unique_webhook = 'Unique webhook tag';
 
 	/**
 	 * Check trigger url in Problems widget.
@@ -222,6 +225,12 @@ class testPageTriggerUrl extends CWebTest {
 			// Check trigger popup menu.
 			$popup = CPopupMenuElement::find()->waitUntilVisible()->one();
 			$this->assertTrue($popup->hasTitles(['TRIGGER', 'LINKS', 'HISTORY']));
+			// Check webhook url.
+			$this->assertFalse($popup->hasItems($this->unique_webhook));
+			$this->assertTrue($popup->hasItems($this->webhook));
+			$this->assertContains($this->webhook_url, $popup->query('xpath:.//li/a[text()="'.$this->webhook.'"]')
+					->one()->getAttribute('href'));
+			// Open trigger link.
 			$popup->fill('Trigger URL');
 		}
 		else {
