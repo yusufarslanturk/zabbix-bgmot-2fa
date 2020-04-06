@@ -380,18 +380,18 @@ func processConfigItem(taskManager scheduler.Scheduler, timeout time.Duration, n
 		var err error
 		value, err = taskManager.PerformTask(item, timeout)
 		if err != nil {
-			return value, err
+			return "", err
 		}
 
 		if !utf8.ValidString(value) {
-			return value, fmt.Errorf("value is not an UTF-8 string")
+			return "", fmt.Errorf("value is not an UTF-8 string")
 		}
 
 		if len(value) > length {
 			log.Warningf("the returned value of \"%s\" item specified by \"%sItem\" configuration parameter"+
 				" is too long, using first %d characters", item, name, length)
 
-			value = agent.CutAfterN(value, length)
+			return agent.CutAfterN(value, length), nil
 		}
 	}
 
