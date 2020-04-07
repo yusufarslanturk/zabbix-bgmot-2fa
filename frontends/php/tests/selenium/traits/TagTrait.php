@@ -46,12 +46,10 @@ trait TagTrait {
 			'mapping' => [
 				'Name' => [
 					'name' => 'name',
-					'selector' => 'xpath:./textarea',
 					'class' => 'CElement'
 				],
 				'Value' => [
 					'name' => 'value',
-					'selector' => 'xpath:./textarea',
 					'class' => 'CElement'
 				]
 			]
@@ -81,6 +79,15 @@ trait TagTrait {
 	 */
 	public function getTags() {
 		return $this->getTagTable()->getValue();
+	}
+
+	/**
+	 * Remove tag rows.
+	 *
+	 * @return $this
+	 */
+	public function removeTags() {
+		return $this->getTagTable()->clear();
 	}
 
 	/**
