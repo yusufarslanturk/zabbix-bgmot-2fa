@@ -18,8 +18,8 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-define('ZABBIX_VERSION',		'4.4.6rc1');
-define('ZABBIX_API_VERSION',	'4.4.6');
+define('ZABBIX_VERSION',		'4.4.8rc1');
+define('ZABBIX_API_VERSION',	'4.4.8');
 define('ZABBIX_EXPORT_VERSION',	'4.4');
 define('ZABBIX_DB_VERSION',		4040000);
 
@@ -36,7 +36,8 @@ define('ZBX_MEBIBYTE',	'1048576');
 define('ZBX_GIBIBYTE',	'1073741824');
 
 define('ZBX_MIN_PERIOD',		60); // 1 minute
-define('ZBX_MAX_PERIOD',		63158400); // the maximum period for the time bar control, ~2 years (2 * 365 * 86400) + 86400
+// the maximum period for the time bar control, ~2 years (2 * 365 * 86400) + 86400 + 3600 + 1
+define('ZBX_MAX_PERIOD',		63162001);
 define('ZBX_MIN_INT32',			-2147483648);
 define('ZBX_MAX_INT32',			2147483647);
 define('ZBX_MIN_INT64',			'-9223372036854775808');
@@ -1279,6 +1280,7 @@ define('API_COLOR',				27);
 define('API_NUMERIC',			28);
 define('API_LLD_MACRO',			29);
 define('API_PSK',				30);
+define('API_SORTORDER',			31);
 
 // flags
 define('API_REQUIRED',					0x0001);
