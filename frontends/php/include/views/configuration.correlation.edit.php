@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -179,20 +179,16 @@ $correlation_tab
 	->addRow(_('New condition'),
 		(new CDiv(
 			(new CTable())
-				->setAttribute('style', 'width: 100%;')
-				->addRow(
-					new CCol([
+				->addRow([
+					new CCol(
 						new CComboBox('new_condition[type]', $data['new_condition']['type'], 'submit()',
 							$data['allowedConditions']
-						),
-						(new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
-						$condition2,
-						($condition2 === null) ? null : (new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
-						$condition_operator,
-						(new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
-						$condition
-					])
-				)
+						)
+					),
+					$condition2 ? new CCol($condition2) : null,
+					new CCol($condition_operator),
+					(new CCol($condition))->addStyle('vertical-align: top;')
+				])
 				->addRow(
 					(new CSimpleButton(_('Add')))
 						->onClick('javascript: submitFormWithParam("'.$form->getName().'", "add_condition", "1");')

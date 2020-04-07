@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -22,10 +22,10 @@
 $form = (new CForm())
 	->cleanItems()
 	->addVar('action', 'popup.preproctest.send')
-	->addVar('hostid', $data['hostid'])
-	->addVar('value_type', $data['value_type'])
 	->addVar('test_type', $data['test_type'])
 	->addVar('show_final_result', $data['show_final_result'])
+	->addItem((new CVar('hostid', $data['hostid']))->removeId())
+	->addItem((new CVar('value_type', $data['value_type']))->removeId())
 	->setId('preprocessing-test-form');
 
 // Create macros table.

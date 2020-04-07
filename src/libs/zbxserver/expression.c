@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -3245,10 +3245,6 @@ int	substitute_simple_macros(zbx_uint64_t *actionid, const DB_EVENT *event, cons
 				{
 					replace_to = zbx_strdup(replace_to, event->name);
 				}
-				else if (0 == strcmp(m, MVAR_EVENT_OPDATA))
-				{
-					resolve_opdata(c_event, &replace_to, error, maxerrlen);
-				}
 				else if (0 == strncmp(m, MVAR_EVENT, ZBX_CONST_STRLEN(MVAR_EVENT)))
 				{
 					get_event_value(m, event, &replace_to, userid);
@@ -3681,10 +3677,6 @@ int	substitute_simple_macros(zbx_uint64_t *actionid, const DB_EVENT *event, cons
 				else if (0 == strcmp(m, MVAR_EVENT_NAME))
 				{
 					replace_to = zbx_strdup(replace_to, event->name);
-				}
-				else if (0 == strcmp(m, MVAR_EVENT_OPDATA))
-				{
-					resolve_opdata(c_event, &replace_to, error, maxerrlen);
 				}
 				else if (0 == strncmp(m, MVAR_EVENT, ZBX_CONST_STRLEN(MVAR_EVENT)))
 				{

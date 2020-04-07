@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -30,11 +30,11 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 		$this->zbxTestTextPresent('Host groups', 'Hosts', 'Severity', 'Filter', 'From', 'Till');
 		$this->zbxTestClickXpathWait('//button[text()="Reset"]');
 
-		// Check selected severities
+		// Check unselected severities
 		$severities = ['Not classified', 'Warning', 'High', 'Information', 'Average', 'Disaster'];
 		foreach ($severities as $severity) {
 			$severity_id = $this->zbxTestGetAttributeValue('//label[text()=\''.$severity.'\']', 'for');
-			$this->assertTrue($this->zbxTestCheckboxSelected($severity_id));
+			$this->assertTrue($this->query('id', $severity_id)->waitUntilPresent()->one()->isSelected(false));
 		}
 
 		// Check closed filter
@@ -143,9 +143,9 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 				[
 					'filter' => [
 						'severities' => [
-							'Not classified',
-							'Information',
-							'Warning'
+							'Average',
+							'High',
+							'Disaster'
 						]
 					],
 					'date' => [
@@ -160,10 +160,8 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 				[
 					'filter' => [
 						'severities' => [
-							'Not classified',
-							'Warning',
-							'Information',
-							'Average'
+							'High',
+							'Disaster'
 						]
 					],
 					'date' => [

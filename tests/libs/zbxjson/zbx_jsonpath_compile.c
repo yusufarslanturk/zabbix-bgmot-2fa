@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -115,7 +115,8 @@ static void	jsonpath_token_print(char **data, size_t *data_alloc, size_t *data_o
 
 static char	*segment_data_to_str(const zbx_jsonpath_segment_t *segment)
 {
-	const char			*functions[] = {"unknown", "min()", "max()", "avg()", "length()", "first()"};
+	const char			*functions[] = {"unknown", "min()", "max()", "avg()", "length()", "first()",
+							"sum()", "~"};
 	char				*data = NULL;
 	size_t				data_alloc = 0, data_offset = 0;
 	int				i;
