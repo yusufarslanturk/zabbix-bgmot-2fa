@@ -104,12 +104,14 @@ if ($data['change_password']) {
 		$password1->setAttribute('autofocus', 'autofocus');
 	}
 
-	// Hidden dummy login field for protection against chrome error when password autocomplete.
-	$autocomplete_name = (new CDiv([(new CTextBox(null, null))->setAttribute('tabindex', '-1')->removeId()]))
-		->addStyle('position: absolute; left: -100vw;');
-
 	$user_form_list
-		->addRow((new CLabel(_('Password'), 'password1'))->setAsteriskMark(), [$autocomplete_name, $password1])
+		->addRow((new CLabel(_('Password'), 'password1'))->setAsteriskMark(), [
+			// Hidden dummy login field for protection against chrome error when password autocomplete.
+			(new CInput('text', null, null))
+				->setAttribute('tabindex', '-1')
+				->addStyle('position: absolute; left: -100vw;'),
+			$password1
+		])
 		->addRow((new CLabel(_('Password (once again)'), 'password2'))->setAsteriskMark(),
 			(new CPassBox('password2', $data['password2']))
 				->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
