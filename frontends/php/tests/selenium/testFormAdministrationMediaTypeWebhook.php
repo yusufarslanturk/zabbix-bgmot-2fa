@@ -807,12 +807,12 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		}
 		if (CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
 			$container = $form->getFieldContainer('Concurrent sessions');
+			$concurrent_session = is_array($data['concurrent_sessions'])
+					? array_key_first($data['concurrent_sessions'])
+					: $data['concurrent_sessions'];
+			$container->query('id:maxsessions_type')->asSegmentedRadio()->one()->select($concurrent_session);
 			if (is_array($data['concurrent_sessions'])) {
-				$container->query('id:maxsessions_type')->asSegmentedRadio()->one()->select(array_key_first($data['concurrent_sessions']));
 				$container->query('id:maxsessions')->one()->fill(array_values($data['concurrent_sessions']));
-			}
-			else {
-				$container->query('id:maxsessions_type')->asSegmentedRadio()->one()->select($data['concurrent_sessions']);
 			}
 		}
 	}
@@ -848,13 +848,8 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		$form = $this->query('id:media_type_form')->asForm()->waitUntilVisible()->one();
 
 		// Check that fields in Media type tab are updated.
-		$check_media_fields = ['Name', 'Type', 'Script', 'Timeout', 'Process tags', 'Include event menu entry',
-				'Menu entry name', 'Menu entry URL', 'Description', 'Enabled'];
-		foreach ($check_media_fields as $field_name) {
-			if (array_key_exists($field_name, $data['fields'])) {
-				$this->assertEquals($data['fields'][$field_name], $form->getField($field_name)->getValue());
-			}
-		}
+		$form->checkValue($data['fields']);
+
 		// Check that webhook parameters are added / removed, or check that all 4 default prameters are present.
 		$params_table = $form->getField('Parameters')->asTable();
 		if (CTestArrayHelper::get($data, 'parameters', false)) {
@@ -888,38 +883,28 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		}
 		// Check that fields in Options tab are updated.
 		if (CTestArrayHelper::get($data, 'options', false) || CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
-			$check_options_fields = ['Concurrent sessions', 'Attempts', 'Attempt interval'];
 			$form->selectTab('Options');
-			foreach ($check_options_fields as $field_name) {
-				// Field Concurrent sessions is checked separately as it may have 2 parameters to check (type and value).
-				if ($field_name === 'Concurrent sessions' && CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
-					$container = $form->getFieldContainer('Concurrent sessions');
-					// If concurrent sessions type is Custom then both type and value should be checked for this field.
-					if (is_array($data['concurrent_sessions'])) {
-						$this->assertEquals(array_key_first($data['concurrent_sessions']),
-								$container->query('id:maxsessions_type')->asSegmentedRadio()->one()->getValue());
-						$this->assertEquals($data['concurrent_sessions']['Custom'],
-								$container->query('id:maxsessions')->one()->getValue());
-					}
-					else {
-						// Only type needs to be checked if Concurrent sessions is set to One or Unlimited.
-						$this->assertEquals($data['concurrent_sessions'],
-								$container->query('id:maxsessions_type')->asSegmentedRadio()->one()->getValue());
-					}
-				}
-				elseif (array_key_exists($field_name, $data['options'])) {
-					$this->assertEquals($data['options'][$field_name], $form->getField($field_name)->getValue());
+			if (CTestArrayHelper::get($data, 'options', false)) {
+				$form->checkValue($data['options']);
+			}
+			if (CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
+				$container = $form->getFieldContainer('Concurrent sessions');
+				$concurrent_session = is_array($data['concurrent_sessions'])
+						? array_key_first($data['concurrent_sessions'])
+						: $data['concurrent_sessions'];
+				$this->assertEquals($concurrent_session,
+						$container->query('id:maxsessions_type')->asSegmentedRadio()->one()->getValue());
+				// If concurrent sessions type is Custom then value should be checked for this field.
+				if (is_array($data['concurrent_sessions'])) {
+					$this->assertEquals($data['concurrent_sessions']['Custom'],
+							$container->query('id:maxsessions')->one()->getValue());
 				}
 			}
 		}
+
 		// Check that "Menu entry name" and "Menu entry URL" fields are enabled only if "Include event menu entry" is set.
-		if (CTestArrayHelper::get($data, 'fields.Include event menu entry', false)) {
-			$this->assertTrue($form->getField('Menu entry name')->isEnabled());
-			$this->assertTrue($form->getField('Menu entry URL')->isEnabled());
-		}
-		else {
-			$this->assertFalse($form->getField('Menu entry name')->isEnabled());
-			$this->assertFalse($form->getField('Menu entry URL')->isEnabled());
-		}
+		$menu_enabled = CTestArrayHelper::get($data, 'fields.Include event menu entry', false);
+		$this->assertTrue($form->getField('Menu entry name')->isEnabled($menu_enabled));
+		$this->assertTrue($form->getField('Menu entry URL')->isEnabled($menu_enabled));
 	}
 }
