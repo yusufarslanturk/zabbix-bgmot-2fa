@@ -343,7 +343,7 @@ static wchar_t	*get_all_counter_eng_names(wchar_t *reg_value_name)
 	DWORD		buffer_size = 0;
 	LSTATUS		status = ERROR_SUCCESS;
 	/* this registry key guaranteed to hold english counter texts even in localized Win versions */
-	static HKEY reg_key = HKEY_PERFORMANCE_TEXT;
+	static HKEY	reg_key = HKEY_PERFORMANCE_TEXT;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
 
@@ -424,14 +424,15 @@ static int	validate_counter_path(PDH_COUNTER_PATH_ELEMENTS	*cpe)
 
 		if (ERROR_SUCCESS != (pdh_status = PdhMakeCounterPath(cpe, path, &s, 0)))
 		{
-			zabbix_log(LOG_LEVEL_ERR, "PdhMakeCounterPath() failed: %s",
+			zabbix_log(LOG_LEVEL_WARNING, "PdhMakeCounterPath() failed: %s",
 					strerror_from_module(pdh_status, L"PDH.DLL"));
 		}
 		else if (ERROR_SUCCESS != (pdh_status = PdhValidatePath(path)))
 		{
 			if (PDH_CSTATUS_NO_COUNTER != pdh_status && PDH_CSTATUS_NO_INSTANCE != pdh_status)
 			{
-				zabbix_log(LOG_LEVEL_ERR, "PdhValidatePath() failed: %s",
+				zabbix_log(LOG_LEVEL_DEBUG, "PdhValidatePath() szObjectName:%s szCounterName:%s"
+						" failed: %s", cpe->szObjectName, cpe->szCounterName,
 						strerror_from_module(pdh_status, L"PDH.DLL"));
 			}
 		}
@@ -444,7 +445,7 @@ static int	validate_counter_path(PDH_COUNTER_PATH_ELEMENTS	*cpe)
 	}
 	else
 	{
-		zabbix_log(LOG_LEVEL_ERR, "PdhMakeCounterPath() failed: %s",
+		zabbix_log(LOG_LEVEL_DEBUG, "PdhMakeCounterPath() failed: %s",
 				strerror_from_module(pdh_status, L"PDH.DLL"));
 	}
 
