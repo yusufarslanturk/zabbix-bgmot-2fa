@@ -58,4 +58,46 @@ class CTestArrayHelper {
 	public static function isAssociative($array) {
 		return $array && array_keys($array) !== range(0, count($array) - 1);
 	}
+
+	/**
+	 * Sort array by multiple fields.
+	 *
+	 * @static
+	 *
+	 * @param array $array  array to sort passed by reference
+	 * @param array $fields fields to sort, can be either string with field name or array with 'field' and 'order' keys
+	 */
+	public static function sort(array &$array, array $fields) {
+		foreach ($fields as $fid => $field) {
+			if (!is_array($field)) {
+				$fields[$fid] = ['field' => $field, 'order' => ZBX_SORT_UP];
+			}
+		}
+
+		self::$fields = $fields;
+
+		uasort($array, ['self', 'compare']);
+	}
+
+	/**
+	 * Method to be used as callback for uasort function in sort method.
+	 *
+	 * @static
+	 *
+	 * @param $a
+	 * @param $b
+	 *
+	 * @return int
+	 */
+	protected static function compare($a, $b) {
+		foreach (self::$fields as $field) {
+			$cmp = strnatcasecmp($a[$field['field']], $b[$field['field']]);
+
+			if ($cmp != 0) {
+				return $cmp * ($field['order'] == ZBX_SORT_UP ? 1 : -1);
+			}
+		}
+
+		return 0;
+	}
 }

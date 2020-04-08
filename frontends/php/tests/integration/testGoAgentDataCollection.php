@@ -480,7 +480,7 @@ class testGoAgentDataCollection extends CIntegrationTest {
 					'itemids' => $ids,
 					'history' => $type
 				]);
-				CArrayHelper::sort($result, ['itemid', 'clock', 'ns']);
+				CTestArrayHelper::sort($result, ['itemid', 'clock', 'ns']);
 
 				foreach ($result['result'] as $item) {
 					$values[$item['itemid']][] = $item['value'];
