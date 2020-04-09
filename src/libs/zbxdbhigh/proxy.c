@@ -4304,7 +4304,7 @@ static int	process_auto_registration_contents(struct zbx_json_parse *jp_data, zb
 			connection_type = ZBX_TCP_SEC_UNENCRYPTED;
 		}
 		else if (FAIL == is_uint32(tmp, &connection_type) || (ZBX_TCP_SEC_UNENCRYPTED != connection_type &&
-				ZBX_TCP_SEC_TLS_PSK != connection_type))
+				ZBX_TCP_SEC_TLS_PSK != connection_type && ZBX_TCP_SEC_TLS_CERT != connection_type))
 		{
 			zabbix_log(LOG_LEVEL_WARNING, "%s(): \"%s\" is not a valid value for \""
 					ZBX_PROTO_TAG_TLS_ACCEPTED "\"", __func__, tmp);
