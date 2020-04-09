@@ -74,30 +74,16 @@ class CTestArrayHelper {
 			}
 		}
 
-		self::$fields = $fields;
+		uasort($array, function($a, $b) use ($fields) {
+			foreach ($fields as $field) {
+				$cmp = strnatcasecmp($a[$field['field']], $b[$field['field']]);
 
-		uasort($array, ['self', 'compare']);
-	}
-
-	/**
-	 * Method to be used as callback for uasort function in sort method.
-	 *
-	 * @static
-	 *
-	 * @param $a
-	 * @param $b
-	 *
-	 * @return int
-	 */
-	protected static function compare($a, $b) {
-		foreach (self::$fields as $field) {
-			$cmp = strnatcasecmp($a[$field['field']], $b[$field['field']]);
-
-			if ($cmp != 0) {
-				return $cmp * ($field['order'] == ZBX_SORT_UP ? 1 : -1);
+				if ($cmp != 0) {
+					return $cmp * ($field['order'] == ZBX_SORT_UP ? 1 : -1);
+				}
 			}
-		}
 
-		return 0;
+			return 0;
+		});
 	}
 }
