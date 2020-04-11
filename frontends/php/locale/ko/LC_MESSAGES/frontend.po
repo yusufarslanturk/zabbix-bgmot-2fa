@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-06 22:11+0300\n"
+"POT-Creation-Date: 2020-04-12 01:44+0300\n"
 "PO-Revision-Date: 2020-02-10 08:05+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -383,7 +383,7 @@ msgid "Acknowledged RESOLVED events"
 msgstr "대응 완료된 해결 이벤트"
 
 #: app/views/administration.mediatype.edit.php:93
-#: app/views/administration.mediatype.edit.php:147
+#: app/views/administration.mediatype.edit.php:145
 #: app/views/administration.mediatype.list.php:70
 #: app/views/administration.user.edit.php:214
 #: app/views/dashboard.sharing.edit.php:24
@@ -553,7 +553,7 @@ msgid "Active till"
 msgstr "종료시간"
 
 #: app/views/administration.mediatype.edit.js.php:60
-#: app/views/administration.mediatype.edit.php:108
+#: app/views/administration.mediatype.edit.php:106
 #: app/views/administration.mediatype.edit.php:188
 #: app/views/administration.mediatype.edit.php:312
 #: app/views/administration.proxy.edit.php:126
@@ -2998,7 +2998,7 @@ msgid "Change PSK"
 msgstr ""
 
 #: app/views/administration.authentication.edit.php:72
-#: app/views/administration.mediatype.edit.php:129
+#: app/views/administration.mediatype.edit.php:127
 #: app/views/administration.user.edit.php:117
 msgid "Change password"
 msgstr "암호 변경"
@@ -3713,7 +3713,7 @@ msgstr "포함"
 #: include/views/configuration.trigger.prototype.list.php:31
 #: include/views/configuration.triggers.list.php:174
 #: include/views/monitoring.charts.php:58
-#: include/views/monitoring.history.php:218
+#: include/views/monitoring.history.php:216
 #: include/views/monitoring.hostscreen.php:63
 #: include/views/monitoring.overview.items.php:73
 #: include/views/monitoring.overview.triggers.php:110
@@ -6246,7 +6246,7 @@ msgstr "면"
 #: include/views/configuration.template.list.php:73
 #: include/views/configuration.triggers.list.php:162
 #: include/views/inventory.host.list.php:48
-#: include/views/monitoring.history.php:246
+#: include/views/monitoring.history.php:244
 #: include/views/monitoring.overview.items.php:81
 #: include/views/monitoring.screen.list.php:58
 #: include/views/monitoring.slideconf.list.php:45
@@ -6409,7 +6409,7 @@ msgstr "기능"
 msgid "GMT%1$s"
 msgstr "GMT%1$s"
 
-#: app/views/administration.mediatype.edit.php:119
+#: app/views/administration.mediatype.edit.php:117
 #: app/views/administration.mediatype.list.php:87
 msgid "GSM modem"
 msgstr "GSM 모뎀"
@@ -6640,7 +6640,7 @@ msgstr "그래프 합계치"
 #: app/controllers/CControllerPopupGeneric.php:260
 #: include/views/configuration.graph.edit.php:97
 #: include/views/configuration.graph.list.php:90
-#: include/views/monitoring.history.php:231
+#: include/views/monitoring.history.php:229
 msgid "Graph type"
 msgstr "그래프 종류"
 
@@ -6915,7 +6915,7 @@ msgstr "디버그를 감추기"
 msgid "Hide groups without problems"
 msgstr "장애가 없는 그룹을 감추기"
 
-#: include/views/monitoring.history.php:162
+#: include/views/monitoring.history.php:160
 msgid "Hide selected"
 msgstr "선택 항목 감추기"
 
@@ -10181,7 +10181,7 @@ msgstr "로컬"
 
 #: include/classes/screens/CScreenHistory.php:270
 #: include/classes/widgets/forms/CWidgetFormClock.php:32
-#: include/views/monitoring.history.php:270
+#: include/views/monitoring.history.php:268
 #: include/views/monitoring.screen.constructor.edit.php:700
 msgid "Local time"
 msgstr "로컬 시간"
@@ -10549,11 +10549,11 @@ msgstr "3월"
 msgid "Mark elements on trigger status change"
 msgstr "트리거의 상태가 바뀐 요소를 색 지정"
 
-#: include/views/monitoring.history.php:164
+#: include/views/monitoring.history.php:162
 msgid "Mark others"
 msgstr "선택 이외 항목 색 지정"
 
-#: include/views/monitoring.history.php:163
+#: include/views/monitoring.history.php:161
 msgid "Mark selected"
 msgstr "선택 항목 색 지정"
 
@@ -11021,7 +11021,7 @@ msgstr "NTLM"
 #: app/controllers/CControllerPopupTriggerWizard.php:134
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:64 applications.php:37
 #: app/views/administration.mediatype.edit.php:44
-#: app/views/administration.mediatype.edit.php:145
+#: app/views/administration.mediatype.edit.php:143
 #: app/views/administration.mediatype.list.php:39
 #: app/views/administration.mediatype.list.php:65
 #: app/views/administration.proxy.list.php:38
@@ -11875,7 +11875,7 @@ msgstr "없음"
 #: app/views/popup.generic.php:512 include/graphs.inc.php:24
 #: include/items.inc.php:158 include/triggers.inc.php:1282
 #: include/views/configuration.triggers.list.php:71
-#: include/views/monitoring.history.php:233
+#: include/views/monitoring.history.php:231
 msgid "Normal"
 msgstr "일반"
 
@@ -13728,8 +13728,8 @@ msgstr "원격 명령"
 
 #: app/views/administration.mediatype.edit.js.php:7
 #: app/views/administration.mediatype.edit.php:100
-#: app/views/administration.mediatype.edit.php:161
-#: app/views/administration.mediatype.edit.php:179
+#: app/views/administration.mediatype.edit.php:159
+#: app/views/administration.mediatype.edit.php:178
 #: app/views/administration.user.edit.php:275
 #: app/views/hostmacros.list.html.php:114
 #: app/views/hostmacros.list.html.php:128
@@ -14621,7 +14621,7 @@ msgstr "스크립트 이름"
 msgid "Script name \"%1$s\" already used in menu path for script \"%2$s\"."
 msgstr "스크립트 이름 \"%1$s\"은 스크립트\"%2$s\"의 메뉴 경로에 이미 이용되고 있습니다."
 
-#: app/views/administration.mediatype.edit.php:112
+#: app/views/administration.mediatype.edit.php:110
 msgid "Script parameters"
 msgstr "스크립트 파라미터"
 
@@ -14750,7 +14750,7 @@ msgid "Select widget"
 msgstr "위젯의 선택"
 
 #: app/views/administration.script.edit.php:82
-#: include/views/monitoring.history.php:176
+#: include/views/monitoring.history.php:174
 msgid "Selected"
 msgstr "선택"
 
@@ -15155,7 +15155,7 @@ msgstr ""
 msgid "Show problems"
 msgstr "장애의 표시"
 
-#: include/views/monitoring.history.php:161
+#: include/views/monitoring.history.php:159
 msgid "Show selected"
 msgstr "선택 항목 보이기"
 
@@ -15450,7 +15450,7 @@ msgstr "스페인어 (es_ES)"
 msgid "Specified script does not exist or you do not have rights on it for action operation command."
 msgstr "실행하는 액션 커맨드에서 지정된 스크립트가 존재하지 않거나, 권한이 없습니다."
 
-#: include/views/monitoring.history.php:273 latest.php:387
+#: include/views/monitoring.history.php:271 latest.php:387
 msgid "Specify some filter condition to see the values."
 msgstr "값을 표시하기 위해 몇가지 필터조건을 지정해 주십시오."
 
@@ -15459,7 +15459,7 @@ msgid "Speed"
 msgstr "속도"
 
 #: app/views/popup.generic.php:503 include/graphs.inc.php:25
-#: include/views/monitoring.history.php:234
+#: include/views/monitoring.history.php:232
 msgid "Stacked"
 msgstr "누적 그래프"
 
@@ -16361,7 +16361,7 @@ msgstr "타임아웃"
 #: include/classes/screens/CScreenHistory.php:448
 #: include/classes/screens/CScreenPlainText.php:42
 #: include/classes/screens/CScreenPlainText.php:53
-#: include/views/monitoring.history.php:269
+#: include/views/monitoring.history.php:267
 msgid "Timestamp"
 msgstr "타임 스탬프"
 
@@ -17809,7 +17809,7 @@ msgstr "VMware가상머신 가동시간, <url> - VMware서비스 URL, <uuid> - V
 msgid "Validation"
 msgstr ""
 
-#: app/views/administration.mediatype.edit.php:146
+#: app/views/administration.mediatype.edit.php:144
 #: app/views/hostmacros.list.html.php:46
 #: app/views/monitoring.widget.plaintext.view.php:46
 #: app/views/popup.httpstep.php:66 app/views/popup.httpstep.php:92
@@ -17841,7 +17841,7 @@ msgstr ""
 #: include/views/configuration.triggers.list.php:197
 #: include/views/configuration.triggers.massupdate.php:86
 #: include/views/monitoring.history.php:152
-#: include/views/monitoring.history.php:271
+#: include/views/monitoring.history.php:269
 #, c-format
 msgid "Value"
 msgstr "값"
@@ -18824,15 +18824,15 @@ msgstr ""
 msgid "an unsigned integer is expected"
 msgstr ""
 
-#: include/views/monitoring.history.php:172
+#: include/views/monitoring.history.php:170
 msgid "as Blue"
 msgstr "파랑"
 
-#: include/views/monitoring.history.php:171
+#: include/views/monitoring.history.php:169
 msgid "as Green"
 msgstr "녹색"
 
-#: include/views/monitoring.history.php:170
+#: include/views/monitoring.history.php:168
 msgid "as Red"
 msgstr "빨강"
 

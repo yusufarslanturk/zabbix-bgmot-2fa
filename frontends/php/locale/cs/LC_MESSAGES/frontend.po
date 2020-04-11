@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-06 22:11+0300\n"
+"POT-Creation-Date: 2020-04-12 01:44+0300\n"
 "PO-Revision-Date: 2020-02-10 08:03+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -415,7 +415,7 @@ msgid "Acknowledged RESOLVED events"
 msgstr "Potvrzené VYŘEŠENÉ události"
 
 #: app/views/administration.mediatype.edit.php:93
-#: app/views/administration.mediatype.edit.php:147
+#: app/views/administration.mediatype.edit.php:145
 #: app/views/administration.mediatype.list.php:70
 #: app/views/administration.user.edit.php:214
 #: app/views/dashboard.sharing.edit.php:24
@@ -589,7 +589,7 @@ msgid "Active till"
 msgstr "Aktivní do"
 
 #: app/views/administration.mediatype.edit.js.php:60
-#: app/views/administration.mediatype.edit.php:108
+#: app/views/administration.mediatype.edit.php:106
 #: app/views/administration.mediatype.edit.php:188
 #: app/views/administration.mediatype.edit.php:312
 #: app/views/administration.proxy.edit.php:126
@@ -3116,7 +3116,7 @@ msgid "Change PSK"
 msgstr ""
 
 #: app/views/administration.authentication.edit.php:72
-#: app/views/administration.mediatype.edit.php:129
+#: app/views/administration.mediatype.edit.php:127
 #: app/views/administration.user.edit.php:117
 msgid "Change password"
 msgstr "Změnit heslo"
@@ -3831,7 +3831,7 @@ msgstr "Obsahuje"
 #: include/views/configuration.trigger.prototype.list.php:31
 #: include/views/configuration.triggers.list.php:174
 #: include/views/monitoring.charts.php:58
-#: include/views/monitoring.history.php:218
+#: include/views/monitoring.history.php:216
 #: include/views/monitoring.hostscreen.php:63
 #: include/views/monitoring.overview.items.php:73
 #: include/views/monitoring.overview.triggers.php:110
@@ -6377,7 +6377,7 @@ msgstr "Oblast"
 #: include/views/configuration.template.list.php:73
 #: include/views/configuration.triggers.list.php:162
 #: include/views/inventory.host.list.php:48
-#: include/views/monitoring.history.php:246
+#: include/views/monitoring.history.php:244
 #: include/views/monitoring.overview.items.php:81
 #: include/views/monitoring.screen.list.php:58
 #: include/views/monitoring.slideconf.list.php:45
@@ -6540,7 +6540,7 @@ msgstr "Funkce"
 msgid "GMT%1$s"
 msgstr "GMT%1$s"
 
-#: app/views/administration.mediatype.edit.php:119
+#: app/views/administration.mediatype.edit.php:117
 #: app/views/administration.mediatype.list.php:87
 msgid "GSM modem"
 msgstr "GSM modem"
@@ -6773,7 +6773,7 @@ msgstr "Souhrn grafu"
 #: app/controllers/CControllerPopupGeneric.php:260
 #: include/views/configuration.graph.edit.php:97
 #: include/views/configuration.graph.list.php:90
-#: include/views/monitoring.history.php:231
+#: include/views/monitoring.history.php:229
 msgid "Graph type"
 msgstr "Typ grafu"
 
@@ -7050,7 +7050,7 @@ msgstr "Skrýt debug"
 msgid "Hide groups without problems"
 msgstr "Skrýt skupiny bez problémů"
 
-#: include/views/monitoring.history.php:162
+#: include/views/monitoring.history.php:160
 msgid "Hide selected"
 msgstr "Skrýt vybrané"
 
@@ -10344,7 +10344,7 @@ msgstr "Lokální"
 
 #: include/classes/screens/CScreenHistory.php:270
 #: include/classes/widgets/forms/CWidgetFormClock.php:32
-#: include/views/monitoring.history.php:270
+#: include/views/monitoring.history.php:268
 #: include/views/monitoring.screen.constructor.edit.php:700
 msgid "Local time"
 msgstr "Místní čas"
@@ -10712,11 +10712,11 @@ msgstr "Březen"
 msgid "Mark elements on trigger status change"
 msgstr "Označ elementy při změně stavu spouštěče"
 
-#: include/views/monitoring.history.php:164
+#: include/views/monitoring.history.php:162
 msgid "Mark others"
 msgstr "Označit ostatní"
 
-#: include/views/monitoring.history.php:163
+#: include/views/monitoring.history.php:161
 msgid "Mark selected"
 msgstr "Označit vybrané"
 
@@ -11194,7 +11194,7 @@ msgstr "NTLM"
 #: app/controllers/CControllerPopupTriggerWizard.php:134
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:64 applications.php:37
 #: app/views/administration.mediatype.edit.php:44
-#: app/views/administration.mediatype.edit.php:145
+#: app/views/administration.mediatype.edit.php:143
 #: app/views/administration.mediatype.list.php:39
 #: app/views/administration.mediatype.list.php:65
 #: app/views/administration.proxy.list.php:38
@@ -12048,7 +12048,7 @@ msgstr "Žádná"
 #: app/views/popup.generic.php:512 include/graphs.inc.php:24
 #: include/items.inc.php:158 include/triggers.inc.php:1282
 #: include/views/configuration.triggers.list.php:71
-#: include/views/monitoring.history.php:233
+#: include/views/monitoring.history.php:231
 msgid "Normal"
 msgstr "Normální"
 
@@ -13907,8 +13907,8 @@ msgstr "Vzdálený příkaz"
 
 #: app/views/administration.mediatype.edit.js.php:7
 #: app/views/administration.mediatype.edit.php:100
-#: app/views/administration.mediatype.edit.php:161
-#: app/views/administration.mediatype.edit.php:179
+#: app/views/administration.mediatype.edit.php:159
+#: app/views/administration.mediatype.edit.php:178
 #: app/views/administration.user.edit.php:275
 #: app/views/hostmacros.list.html.php:114
 #: app/views/hostmacros.list.html.php:128
@@ -14802,7 +14802,7 @@ msgstr "Název skriptu"
 msgid "Script name \"%1$s\" already used in menu path for script \"%2$s\"."
 msgstr "Skript se jménem \"%1$s\" již existuje v menu cestě pro skript \"%2$s\"."
 
-#: app/views/administration.mediatype.edit.php:112
+#: app/views/administration.mediatype.edit.php:110
 msgid "Script parameters"
 msgstr "Script parametry"
 
@@ -14931,7 +14931,7 @@ msgid "Select widget"
 msgstr "Vyber prvek"
 
 #: app/views/administration.script.edit.php:82
-#: include/views/monitoring.history.php:176
+#: include/views/monitoring.history.php:174
 msgid "Selected"
 msgstr "Vybrané"
 
@@ -15336,7 +15336,7 @@ msgstr ""
 msgid "Show problems"
 msgstr "Ukaž problémy"
 
-#: include/views/monitoring.history.php:161
+#: include/views/monitoring.history.php:159
 msgid "Show selected"
 msgstr "Zobrazit vybrané"
 
@@ -15631,7 +15631,7 @@ msgstr "Španělsky (es_ES)"
 msgid "Specified script does not exist or you do not have rights on it for action operation command."
 msgstr "Specifikovaný skript neexistuje nebo nemáte práva na jeho vykonání."
 
-#: include/views/monitoring.history.php:273 latest.php:387
+#: include/views/monitoring.history.php:271 latest.php:387
 msgid "Specify some filter condition to see the values."
 msgstr "Nenalezené žádné hodnoty."
 
@@ -15640,7 +15640,7 @@ msgid "Speed"
 msgstr "Rychlost"
 
 #: app/views/popup.generic.php:503 include/graphs.inc.php:25
-#: include/views/monitoring.history.php:234
+#: include/views/monitoring.history.php:232
 msgid "Stacked"
 msgstr "Skládaný"
 
@@ -16546,7 +16546,7 @@ msgstr "Časový limit"
 #: include/classes/screens/CScreenHistory.php:448
 #: include/classes/screens/CScreenPlainText.php:42
 #: include/classes/screens/CScreenPlainText.php:53
-#: include/views/monitoring.history.php:269
+#: include/views/monitoring.history.php:267
 msgid "Timestamp"
 msgstr "Časové razítko"
 
@@ -18010,7 +18010,7 @@ msgstr "VMware čas provozu virtuálního stroje, <url> - URL VMware služby, <u
 msgid "Validation"
 msgstr "Validace"
 
-#: app/views/administration.mediatype.edit.php:146
+#: app/views/administration.mediatype.edit.php:144
 #: app/views/hostmacros.list.html.php:46
 #: app/views/monitoring.widget.plaintext.view.php:46
 #: app/views/popup.httpstep.php:66 app/views/popup.httpstep.php:92
@@ -18042,7 +18042,7 @@ msgstr "Validace"
 #: include/views/configuration.triggers.list.php:197
 #: include/views/configuration.triggers.massupdate.php:86
 #: include/views/monitoring.history.php:152
-#: include/views/monitoring.history.php:271
+#: include/views/monitoring.history.php:269
 #, c-format
 msgid "Value"
 msgstr "Hodnota"
@@ -19031,15 +19031,15 @@ msgstr ""
 msgid "an unsigned integer is expected"
 msgstr ""
 
-#: include/views/monitoring.history.php:172
+#: include/views/monitoring.history.php:170
 msgid "as Blue"
 msgstr "jako Modrá"
 
-#: include/views/monitoring.history.php:171
+#: include/views/monitoring.history.php:169
 msgid "as Green"
 msgstr "jako Zelená"
 
-#: include/views/monitoring.history.php:170
+#: include/views/monitoring.history.php:168
 msgid "as Red"
 msgstr "jako Červená"
 
