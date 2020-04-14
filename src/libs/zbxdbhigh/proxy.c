@@ -4336,46 +4336,6 @@ static int	process_auto_registration_contents(struct zbx_json_parse *jp_data, zb
 
 /******************************************************************************
  *                                                                            *
- * Function: process_auto_registration                                        *
- *                                                                            *
- * Purpose: update auto registration data, received from proxy                *
- *                                                                            *
- * Parameters: jp           - [IN] JSON with historical data                  *
- *             proxy_hostid - [IN] proxy identifier from database             *
- *             ts           - [IN] timestamp when the proxy connection was    *
- *                                 established                                *
- *             error        - [OUT] address of a pointer to the info string   *
- *                                  (should be freed by the caller)           *
- *                                                                            *
- * Return value:  SUCCEED - processed successfully                            *
- *                FAIL - an error occurred                                    *
- *                                                                            *
- ******************************************************************************/
-int	process_auto_registration(struct zbx_json_parse *jp, zbx_uint64_t proxy_hostid, zbx_timespec_t *ts,
-		char **error)
-{
-	struct zbx_json_parse	jp_data;
-	int			ret;
-
-	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
-
-	log_client_timediff(LOG_LEVEL_DEBUG, jp, ts);
-
-	if (SUCCEED != (ret = zbx_json_brackets_by_name(jp, ZBX_PROTO_TAG_DATA, &jp_data)))
-	{
-		*error = zbx_strdup(*error, zbx_json_strerror());
-		goto out;
-	}
-
-	ret = process_auto_registration_contents(&jp_data, proxy_hostid, error);
-out:
-	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_result_string(ret));
-
-	return ret;
-}
-
-/******************************************************************************
- *                                                                            *
  * Function: proxy_get_history_count                                          *
  *                                                                            *
  * Purpose: get the number of values waiting to be sent to the sever          *
