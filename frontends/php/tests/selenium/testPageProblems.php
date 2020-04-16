@@ -419,8 +419,19 @@ class testPageProblems extends CLegacyWebTest {
 						'Configuration' => 'triggers.php?form=update&triggerid=100035',
 						'Trigger URL' => 'triggers.php?form=update&triggerid=100035',
 						'Webhook url for all' => 'zabbix.php?action=mediatype.edit&mediatypeid=101',
-						'Unique webhook tag' => 'zabbix.php?action=mediatype.list&ddreset=1',
+						'Unique webhook url' => 'zabbix.php?action=mediatype.list&ddreset=1',
 						'1_item' => 'history.php?action=showgraph&itemids%5B%5D=99086'
+					]
+				]
+			],
+			[
+				[
+					'problem' => 'Test trigger with tag',
+					'links' => [
+						'Problems' => 'zabbix.php?action=problem.view&filter_triggerids%5B%5D=99251&filter_set=1',
+						'Configuration' => 'triggers.php?form=update&triggerid=99251',
+						'Webhook url for all' => 'zabbix.php?action=mediatype.edit&mediatypeid=101',
+						'Number of processes' => 'history.php?action=showgraph&itemids%5B%5D=29192'
 					]
 				]
 			]
@@ -441,5 +452,6 @@ class testPageProblems extends CLegacyWebTest {
 		foreach($data['links'] as $label => $url) {
 			$this->assertContains($url, $popup->query('xpath:.//li/a[text()="'.$label.'"]')->one()->getAttribute('href'));
 		}
+		$this->assertEquals(count($data['links']), $this->query('xpath://a[@role="menuitem"]')->all()->count());
 	}
 }
