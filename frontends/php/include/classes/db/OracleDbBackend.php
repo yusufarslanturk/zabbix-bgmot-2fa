@@ -60,4 +60,33 @@ class OracleDbBackend extends DbBackend {
 
 		return $sql;
 	}
+
+	/**
+	 * Check database and table fields encoding.
+	 *
+	 * @return bool
+	 */
+	public function checkEncoding() {
+		return $this->checkDatabaseEncoding();
+	}
+
+	/**
+	 * Check database schema encoding. On error will set warning message.
+	 *
+	 * @return bool
+	 */
+	protected function checkDatabaseEncoding() {
+		$row = DBfetch(DBselect('SELECT value, parameter FROM NLS_DATABASE_PARAMETERS'.
+			' WHERE '.dbConditionString('parameter', ['NLS_CHARACTERSET', 'NLS_NCHAR_CHARACTERSET']).
+				' AND value!='.zbx_dbstr(ZBX_DB_DEFAULT_CHARSET)
+		));
+
+		if ($row) {
+			$this->setWarning((_s('Incorrect parameter "%1$s" value: %2$s.',
+				$row['parameter'], _s('"%1$s" instead "%2$s"', $row['value'], ZBX_DB_DEFAULT_CHARSET)
+			)));
+		}
+
+		return !$row;
+	}
 }

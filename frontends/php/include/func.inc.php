@@ -1429,12 +1429,7 @@ function zbx_toCSV($values) {
 			$row = [$row];
 		}
 		foreach ($row as $num => $value) {
-			if (is_null($value)) {
-				unset($row[$num]);
-			}
-			else {
-				$row[$num] = str_replace('"', '""', $value);
-			}
+			$row[$num] = str_replace('"', '""', $value);
 		}
 		$csv .= '"'.implode($glue, $row).'"'."\n";
 	}
@@ -1991,15 +1986,6 @@ function show_messages($good = false, $okmsg = null, $errmsg = null) {
 						? ['R' => 255, 'G' => 55, 'B' => 55]
 						: ['R' => 155, 'G' => 155, 'B' => 55]
 				];
-			}
-			break;
-		case PAGE_TYPE_XML:
-			if ($title !== null) {
-				echo htmlspecialchars($title)."\n";
-			}
-
-			foreach ($messages as $message) {
-				echo '['.$message['type'].'] '.$message['message']."\n";
 			}
 			break;
 		case PAGE_TYPE_HTML:

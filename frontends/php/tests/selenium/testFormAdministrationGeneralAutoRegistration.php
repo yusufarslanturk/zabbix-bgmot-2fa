@@ -88,7 +88,11 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 						'Resource' => 'Auto registration',
 						'Action' => 'Updated',
 						'ID' => 1,
-						'Details' => "config.tls_accept: 1 => 2\nconfig.tls_psk_identity: ******** => ********\nconfig.tls_psk: ******** => ********"
+						'Details' => [
+							'config.tls_accept: 1 => 2',
+							'config.tls_psk_identity: ******** => ********',
+							'config.tls_psk: ******** => ********'
+						]
 					]
 				]
 			],
@@ -103,7 +107,7 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 						'Resource' => 'Auto registration',
 						'Action' => 'Updated',
 						'ID' => 1,
-						'Details' => 'config.tls_accept: 2 => 3'
+						'Details' => ['config.tls_accept: 2 => 3']
 					]
 				]
 			],
@@ -118,7 +122,11 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 						'Resource' => 'Auto registration',
 						'Action' => 'Updated',
 						'ID' => 1,
-						'Details' => "config.tls_accept: 3 => 1\nconfig.tls_psk_identity: ******** => ********\nconfig.tls_psk: ******** => ********"
+						'Details' => [
+							'config.tls_accept: 3 => 1',
+							'config.tls_psk_identity: ******** => ********',
+							'config.tls_psk: ******** => ********'
+						]
 					]
 				]
 			]
@@ -134,6 +142,9 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 	public function testFormAdministrationGeneralAutoRegistration_Audit($data) {
 		// Add encryption.
 		$this->page->login()->open('zabbix.php?action=autoreg.edit');
+		// Added sleep, because sorting on Audit page is by time,
+		// but sometimes there is no time difference between test cases and they are sorted unpredictably
+		sleep(1);
 		$form = $this->query('id:autoreg-form')->asForm()->one();
 		$form->fill($data['fields']);
 		$form->submit();
@@ -147,7 +158,12 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 		// Get first row data.
 		$row = $rows->get(0);
 		foreach ($data['audit'] as $column => $value) {
-			$text = $row->getColumnData($column, $value);
+			$text = $row->getColumn($column)->getText();
+			if (is_array($value)) {
+				$text = explode("\n", $text);
+				sort($text);
+				sort($value);
+			}
 			$this->assertEquals($value, $text);
 		}
 	}

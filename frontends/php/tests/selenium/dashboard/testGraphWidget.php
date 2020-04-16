@@ -93,12 +93,14 @@ class testGraphWidget extends CWebTest {
 
 	/*
 	 * Check screenshots of graph widget form.
+	 * @browsers chrome
 	 */
 	public function testGraphWidget_FormLayout() {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
 		$dashboard = CDashboardElement::find()->one()->edit();
 		$overlay = $dashboard->addWidget();
 		$form = $overlay->asForm();
+		$this->page->removeFocus();
 		$element = $overlay->query('id:svg-graph-preview')->one();
 
 		$errors = [];
