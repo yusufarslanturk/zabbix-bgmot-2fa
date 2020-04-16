@@ -19,38 +19,532 @@
 **/
 
 require_once dirname(__FILE__).'/../include/CWebTest.php';
+require_once dirname(__FILE__).'/traits/TagTrait.php';
 
 /**
  * @backup media_type
  */
 class testFormAdministrationMediaTypeWebhook extends CWebTest {
 
+	use TagTrait;
+
 	// SQL query to get media_type and media_type_param tables to compare hash values.
 	private $sql = 'SELECT * FROM media_type mt INNER JOIN media_type_param mtp ON mt.mediatypeid=mtp.mediatypeid';
+
+	public function validateWebhookData() {
+		return [
+			// Attempt to add a webhook media type with default values and only space in script field.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with default fields',
+						'Type' => 'Webhook',
+						'Script' => ' '
+					],
+					'error_message' => 'Invalid parameter "/2/script": cannot be empty.'
+				]
+			],
+			// Attepmt to add a webhook media type with a name that is already taken.
+			[
+				[
+					'fields' => [
+						'Name' => 'Email',
+						'Type' => 'Webhook',
+						'Script' => 'occupied name webhook'
+					],
+					'error_message' => 'Media type "Email" already exists.'
+				]
+			],
+			// Attempt to add a webhook media type with a blank name.
+			[
+				[
+					'fields' => [
+						'Name' => '',
+						'Type' => 'Webhook',
+						'Script' => 'blank name webhook'
+					],
+					'error_message' => 'Incorrect value for field "name": cannot be empty.'
+				]
+			],
+			// Attempt to add a webhook with a blank parameter name.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with blank parameter name',
+						'Type' => 'Webhook',
+						'Script' => 'blank parameter name webhook'
+					],
+					'parameters' => [
+						[
+							'name' => '',
+							'value' => '{BLANK.NAME}'
+						]
+					],
+					'error_message' => 'Invalid parameter "/2/parameters/5/name": cannot be empty.'
+				]
+			],
+			// Attempt to add a webhook without specifying the script field.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with empty script field',
+						'Type' => 'Webhook'
+					],
+					'error_message' => 'Invalid parameter "/2/script": cannot be empty.'
+				]
+			],
+			// Attempt to add a webhook with timeout equal to zero.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with zero timeout',
+						'Type' => 'Webhook',
+						'Script' => 'Zero timeout',
+						'Timeout' => '0'
+					],
+					'error_message' => 'Invalid parameter "/2/timeout": value must be one of 1-60.'
+				]
+			],
+			// Attempt to add a webhook with too large timeout.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with too large timeout',
+						'Type' => 'Webhook',
+						'Script' => 'Large timeout',
+						'Timeout' => '61s'
+					],
+					'error_message' => 'Invalid parameter "/2/timeout": value must be one of 1-60.'
+				]
+			],
+			// Attempt to add a webhook with too large timeout #2.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with too large timeout',
+						'Type' => 'Webhook',
+						'Script' => 'Large timeout',
+						'Timeout' => '2m'
+					],
+					'error_message' => 'Invalid parameter "/2/timeout": value must be one of 1-60.'
+				]
+			],
+			// Attempt to add a webhook with a string in the timeout field.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with too large timeout',
+						'Type' => 'Webhook',
+						'Script' => 'String in timeout',
+						'Timeout' => '30seconds'
+					],
+					'error_message' => 'Invalid parameter "/2/timeout": a time unit is expected.'
+				]
+			],
+			// Attempt to add a webhook with empty menu entry name.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with empty menu entry name',
+						'Type' => 'Webhook',
+						'Script' => 'Empty menu entry name',
+						'Include event menu entry' => true,
+						'Menu entry URL' => 'https://zabbix.com/{EVENT.TAGS."Returned value"}'
+					],
+					'error_message' => 'Incorrect value for field "event_menu_name": cannot be empty.'
+				]
+			],
+			// Attempt to add a webhook with empty menu entry URL.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with empty menu entry URL',
+						'Type' => 'Webhook',
+						'Script' => 'Empty menu entry URL',
+						'Include event menu entry' => true,
+						'Menu entry name' => '{EVENT.TAGS."Returned tag"}'
+					],
+					'error_message' => 'Incorrect value for field "event_menu_url": cannot be empty.'
+				]
+			],
+			// Attempt to add a webhook with empty Attempts field.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with empty attempts field',
+						'Type' => 'Webhook',
+						'Script' => 'Empty attempts field'
+					],
+					'options' => [
+						'Attempts' => ''
+					],
+					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
+				]
+			],
+			// Attempt to add a webhook with 0 in Attempts field.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with 0 in attempts field',
+						'Type' => 'Webhook',
+						'Script' => 'Zero Attempts'
+					],
+					'options' => [
+						'Attempts' => '0'
+					],
+					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
+				]
+			],
+			// Attempt to add a webhook with too much Attempts.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with too much attempts',
+						'Type' => 'Webhook',
+						'Script' => 'Too much Attempts'
+					],
+					'options' => [
+						'Attempts' => '11'
+					],
+					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
+				]
+			],
+			// Attempt to add a webhook with empty Attempt interval field.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with an empty Attempt interval',
+						'Type' => 'Webhook',
+						'Script' => 'Empty attempt interval'
+					],
+					'options' => [
+						'Attempts' => '5',
+						'Attempt interval' => ''
+					],
+					'error_message' => 'Incorrect value for field "attempt_interval": cannot be empty.'
+				]
+			],
+			// Attempt to add a webhook with Attempt interval out of range.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with Attempt interval out of range',
+						'Type' => 'Webhook',
+						'Script' => 'Out of range attempt interval'
+					],
+					'options' => [
+						'Attempts' => '5',
+						'Attempt interval' => '61'
+					],
+					'error_message' => 'Incorrect value for field "attempt_interval": must be between "0" and "60".'
+				]
+			],
+			// Attempt to add a webhook with custom concurrent sessions number out of range.
+			[
+				[
+					'fields' => [
+						'Name' => 'Webhook with Attempt interval out of range',
+						'Type' => 'Webhook',
+						'Script' => 'Out of range attempt interval'
+					],
+					'options' => [
+						'Attempts' => '5',
+						'Attempt interval' => '5'
+					],
+					'concurrent_sessions' => [
+						'Custom' => '101'
+					],
+					'error_message' => 'Incorrect value for field "maxsessions": must be between "0" and "100".'
+				]
+			],
+			// Attempt to set concurrent sessions field to custom and set the value out of range.
+			[
+				[
+					'fields' => [
+						'Name' => 'Custom concurrent sessions out of range',
+						'Type' => 'Webhook',
+						'Script' => 'Custom concurrent sessions out of range'
+					],
+					'options' => [
+						'Attempts' => '5'
+					],
+					'concurrent_sessions' => [
+						'Custom' => '101'
+					],
+					'error_message' => 'Incorrect value for field "maxsessions": must be between "0" and "100".'
+				]
+			],
+			// Adding a parameter with a blank name to the media type.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'blank parameter name webhook'
+					],
+					'parameters' => [
+						[
+							'action' => USER_ACTION_UPDATE,
+							'index' => 1,
+							'name' => '',
+							'value' => '{BLANK.NAME}'
+						]
+					],
+					'error_message' => 'Invalid parameter "/1/parameters/2/name": cannot be empty.'
+				]
+			],
+			// Removing the value of field script.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => ''
+					],
+					'error_message' => 'Invalid parameter "/1/script": cannot be empty.'
+				]
+			],
+			// Changing the value of timeout field to zero.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'Zero timeout',
+						'Timeout' => '0'
+					],
+					'error_message' => 'Invalid parameter "/1/timeout": value must be one of 1-60.'
+				]
+			],
+			// Increasing timeout too high.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'Large timeout',
+						'Timeout' => '3d'
+					],
+					'error_message' => 'Invalid parameter "/1/timeout": value must be one of 1-60.'
+				]
+			],
+			// Changing value of field timeout to a string
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'String in timeout',
+						'Timeout' => '1minute'
+					],
+					'error_message' => 'Invalid parameter "/1/timeout": a time unit is expected.'
+				]
+			],
+			// Add a menu entry URL without a menu entry name.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'Empty menu entry name',
+						'Include event menu entry' => true,
+						'Menu entry URL' => '{EVENT.TAGS.Address}'
+					],
+					'error_message' => 'Incorrect value for field "event_menu_name": cannot be empty.'
+				]
+			],
+			// Add a menu entry name without a menu entry URL.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'Empty menu entry URL',
+						'Include event menu entry' => true,
+						'Menu entry name' => '{EVENT.TAGS."Returned tag"}'
+					],
+					'error_message' => 'Incorrect value for field "event_menu_url": cannot be empty.'
+				]
+			],
+			// Remove the value of the attempts field.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'Empty attempts field'
+					],
+					'options' => [
+						'Attempts' => ''
+					],
+					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
+				]
+			],
+			// Set the value of Attempts field to 0.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'Zero Attempts'
+					],
+					'options' => [
+						'Attempts' => '0'
+					],
+					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
+				]
+			],
+			// Set the value of Attempts field too high.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'Too much Attempts'
+					],
+					'options' => [
+						'Attempts' => '100'
+					],
+					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
+				]
+			],
+			// Set the value of Attempts field to some string.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'attempts in string format'
+					],
+					'options' => [
+						'Attempts' => 'five'
+					],
+					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
+				]
+			],
+			// Remove the value of the attempt interval field.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'Empty attempt interval'
+					],
+					'options' => [
+						'Attempts' => '1',
+						'Attempt interval' => ''
+					],
+					'error_message' => 'Incorrect value for field "attempt_interval": cannot be empty.'
+				]
+			],
+			// Set a value of the attempt interval that is out of range.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'Out of range attempt interval'
+					],
+					'options' => [
+						'Attempts' => '5',
+						'Attempt interval' => '61'
+					],
+					'error_message' => 'Incorrect value for field "attempt_interval": must be between "0" and "60".'
+				]
+			],
+			// Set a string value in the attempt interval field.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Type' => 'Webhook',
+						'Script' => 'String in attempt interval'
+					],
+					'options' => [
+						'Attempts' => '5',
+						'Attempt interval' => '10seconds'
+					],
+					'error_message' => 'Incorrect value for field "attempt_interval": must be between "0" and "60".'
+				]
+			],
+			// Removing the name of a webhook media type.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Name' => '',
+						'Type' => 'Webhook',
+						'Script' => 'blank name webhook'
+					],
+					'error_message' => 'Incorrect value for field "name": cannot be empty.'
+				]
+			],
+			// Changing the name of a webhook media type to a name that is already taken.
+			[
+				[
+					'update' => true,
+					'fields' => [
+						'Name' => 'Email',
+						'Type' => 'Webhook',
+						'Script' => 'blank name webhook'
+					],
+					'error_message' => 'Media type "Email" already exists.'
+				]
+			]
+		];
+	}
+
+	/**
+	* @dataProvider validateWebhookData
+	*/
+	public function testFormAdministrationMediaTypeWebhook_Validate($data) {
+		$old_hash = CDBHelper::getHash($this->sql);
+
+		$this->page->login()->open('zabbix.php?action=mediatype.list');
+		$button = CTestArrayHelper::get($data, 'update', false) ? 'link:Validation webhook' : 'button:Create media type';
+		$this->query($button)->one()->WaitUntilClickable()->click();
+		$form = $this->query('id:media_type_form')->asForm()->waitUntilVisible()->one();
+		$form->fill($data['fields']);
+		// Fill webhook parameters if needed.
+		$this->setTableSelector('id:parameters_table');
+		if (array_key_exists('parameters', $data)) {
+			$this->fillTags($data['parameters']);
+		}
+		// Fill fields in Operations tab if needed.
+		if (CTestArrayHelper::get($data, 'options', false) || CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
+			$form->selectTab('Options');
+			$this->fillOperationsTab($data, $form);
+		}
+
+		$form->submit();
+		$this->page->waitUntilReady();
+
+		// Check media type creation or update message.
+		$message_title = CTestArrayHelper::get($data, 'update', false) ? 'Cannot update media type' : 'Cannot add media type';
+		$message = CMessageElement::find()->one();
+		$this->assertEquals($message_title, $message->getTitle());
+		$this->assertTrue($message->hasLine($data['error_message']));
+
+		// Check that no DB changes took place.
+		$this->assertEquals($old_hash, CDBHelper::getHash($this->sql));
+	}
 
 	public function createUpdateWebhookData() {
 		return [
 			// Add webhook media type without parameters.
 			[
 				[
-					'expected' => TEST_GOOD,
 					'fields' => [
 						'Name' => 'Webhook without parameters',
 						'Type' => 'Webhook',
 						'Script' => 'all parameters should be removed'
 					],
-					'parameters' => [
-						['Name' => 'URL', 'Action' => 'Remove'],
-						['Name' => 'To', 'Action' => 'Remove'],
-						['Name' => 'Subject', 'Action' => 'Remove'],
-						['Name' => 'Message', 'Action' => 'Remove']
-					]
+					'remove_parameters' => true
 				]
 			],
 			// Add webhook media type with enabled menu entry fields and changed options tab fields.
 			[
 				[
-					'expected' => TEST_GOOD,
 					'fields' => [
 						'Name' => 'Webhook with enabled menu entry fields',
 						'Type' => 'Webhook',
@@ -71,7 +565,6 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 			// Add webhook media type with all possible parameters defined.
 			[
 				[
-					'expected' => TEST_GOOD,
 					'fields' => [
 						'Name' => 'All fields specified',
 						'Type' => 'Webhook',
@@ -90,272 +583,50 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 					],
 					'concurrent_sessions' => 'Unlimited',
 					'parameters' => [
-						['Name' => '1st new parameter', 'Value' => '1st new parameter value'],
-						['Name' => '2nd parameter', 'Value' => '{2ND.PARAMETER}']
+						[
+							'name' => '1st new parameter',
+							'value' => '1st new parameter value'
+						],
+						[
+							'name' => '2nd parameter',
+							'value' => '{2ND.PARAMETER}'
+						],
+						[
+							'action' => USER_ACTION_REMOVE,
+							'name' => 'URL'
+						]
 					]
-				]
-			],
-			// Attempt to add a webhook media type with default values and only space in script field.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with default fields',
-						'Type' => 'Webhook',
-						'Script' => ' '
-					],
-					'error_message' => 'Invalid parameter "/2/script": cannot be empty.'
-				]
-			],
-			// Attempt to add a webhook media type with a blank name.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Type' => 'Webhook',
-						'Script' => 'blank name webhook'
-					],
-					'error_message' => 'Incorrect value for field "name": cannot be empty.'
-				]
-			],
-			// Attempt to add a webhook with a blank parameter name.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with blank parameter name',
-						'Type' => 'Webhook',
-						'Script' => 'blank parameter name webhook'
-					],
-					'parameters' => [
-						['Name' => '', 'Value' => '{BLANK.NAME}']
-					],
-					'error_message' => 'Invalid parameter "/2/parameters/5/name": cannot be empty.'
-				]
-			],
-			// Attempt to add a webhook without specifying the script field.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with empty script field',
-						'Type' => 'Webhook'
-					],
-					'error_message' => 'Invalid parameter "/2/script": cannot be empty.'
-				]
-			],
-			// Attempt to add a webhook with timeout equal to zero.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with zero timeout',
-						'Type' => 'Webhook',
-						'Script' => 'Zero timeout',
-						'Timeout' => '0'
-					],
-					'error_message' => 'Invalid parameter "/2/timeout": value must be one of 1-60.'
-				]
-			],
-			// Attempt to add a webhook with too large timeout.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with too large timeout',
-						'Type' => 'Webhook',
-						'Script' => 'Large timeout',
-						'Timeout' => '61s'
-					],
-					'error_message' => 'Invalid parameter "/2/timeout": value must be one of 1-60.'
-				]
-			],
-			// Attempt to add a webhook with too large timeout #2.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with too large timeout',
-						'Type' => 'Webhook',
-						'Script' => 'Large timeout',
-						'Timeout' => '2m'
-					],
-					'error_message' => 'Invalid parameter "/2/timeout": value must be one of 1-60.'
-				]
-			],
-			// Attempt to add a webhook with a string in the timeout field.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with too large timeout',
-						'Type' => 'Webhook',
-						'Script' => 'String in timeout',
-						'Timeout' => '30seconds'
-					],
-					'error_message' => 'Invalid parameter "/2/timeout": a time unit is expected.'
-				]
-			],
-			// Attempt to add a webhook with empty menu entry name.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with empty menu entry name',
-						'Type' => 'Webhook',
-						'Script' => 'Empty menu entry name',
-						'Include event menu entry' => true,
-						'Menu entry URL' => 'https://zabbix.com/{EVENT.TAGS."Returned value"}'
-					],
-					'error_message' => 'Incorrect value for field "event_menu_name": cannot be empty.'
-				]
-			],
-			// Attempt to add a webhook with empty menu entry URL.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with empty menu entry URL',
-						'Type' => 'Webhook',
-						'Script' => 'Empty menu entry URL',
-						'Include event menu entry' => true,
-						'Menu entry name' => '{EVENT.TAGS."Returned tag"}'
-					],
-					'error_message' => 'Incorrect value for field "event_menu_url": cannot be empty.'
-				]
-			],
-			// Attempt to add a webhook with empty Attempts field.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with empty attempts field',
-						'Type' => 'Webhook',
-						'Script' => 'Empty attempts field'
-					],
-					'options' => [
-						'Attempts' => ''
-					],
-					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
-				]
-			],
-			// Attempt to add a webhook with 0 in Attempts field.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with 0 in attempts field',
-						'Type' => 'Webhook',
-						'Script' => 'Zero Attempts'
-					],
-					'options' => [
-						'Attempts' => '0'
-					],
-					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
-				]
-			],
-			// Attempt to add a webhook with too much Attempts.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with too much attempts',
-						'Type' => 'Webhook',
-						'Script' => 'Too much Attempts'
-					],
-					'options' => [
-						'Attempts' => '11'
-					],
-					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
-				]
-			],
-			// Attempt to add a webhook with empty Attempt interval field.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with an empty Attempt interval',
-						'Type' => 'Webhook',
-						'Script' => 'Empty attempt interval'
-					],
-					'options' => [
-						'Attempts' => '5',
-						'Attempt interval' => ''
-					],
-					'error_message' => 'Incorrect value for field "attempt_interval": cannot be empty.'
-				]
-			],
-			// Attempt to add a webhook with Attempt interval out of range.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with Attempt interval out of range',
-						'Type' => 'Webhook',
-						'Script' => 'Out of range attempt interval'
-					],
-					'options' => [
-						'Attempts' => '5',
-						'Attempt interval' => '61'
-					],
-					'error_message' => 'Incorrect value for field "attempt_interval": must be between "0" and "60".'
-				]
-			],
-			// Attempt to add a webhook with custom concurrent sessions number out of range.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Webhook with Attempt interval out of range',
-						'Type' => 'Webhook',
-						'Script' => 'Out of range attempt interval'
-					],
-					'options' => [
-						'Attempts' => '5',
-						'Attempt interval' => '5'
-					],
-					'concurrent_sessions' => [
-						'Custom' => '101'
-					],
-					'error_message' => 'Incorrect value for field "maxsessions": must be between "0" and "100".'
 				]
 			],
 			// Change the type of media type.
 			[
 				[
 					'update' => true,
-					'expected' => TEST_GOOD,
 					'fields' => [
 						'Name' => 'Webhook changed to SMS',
 						'Type' => 'SMS',
 						'GSM modem' => '/dev/ttyS0'
-					]
+					],
+					'check_parameters' => false
 				]
 			],
 			// Remove all webhook parameters and change timeout.
 			[
 				[
 					'update' => true,
-					'expected' => TEST_GOOD,
 					'fields' => [
 						'Name' => 'Remove webhook parameters',
 						'Type' => 'Webhook',
 						'Timeout' => '10',
 						'Script' => 'all parameters should be removed'
 					],
-					'parameters' => [
-						['Name' => 'URL', 'Action' => 'Remove'],
-						['Name' => 'To', 'Action' => 'Remove'],
-						['Name' => 'Subject', 'Action' => 'Remove'],
-						['Name' => 'Message', 'Action' => 'Remove']
-					]
+					'remove_parameters' => true
 				]
 			],
 			// Update webhook script and add Menu entry parameters.
 			[
 				[
 					'update' => true,
-					'expected' => TEST_GOOD,
 					'fields' => [
 						'Name' => 'Add menu entry fields',
 						'Type' => 'Webhook',
@@ -370,7 +641,6 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 			[
 				[
 					'update' => true,
-					'expected' => TEST_GOOD,
 					'fields' => [
 						'Name' => 'All fields updated',
 						'Type' => 'Webhook',
@@ -391,279 +661,34 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 						'Custom' => '2'
 					],
 					'parameters' => [
-						['Name' => 'URL', 'Action' => 'Remove'],
-						['Name' => 'To', 'Action' => 'Remove'],
-						['Name' => '1st new parameter', 'Value' => '1st new parameter value'],
-						['Name' => '2nd parameter', 'Value' => '{2ND.PARAMETER}']
+						[
+							'name' => '1st new parameter',
+							'value' => '{1ST.PARAMETER}'
+						],
+						[
+							'action' => USER_ACTION_UPDATE,
+							'index' => 1,
+							'name' => '1st updated parameter',
+							'value' => '1st updated parameter value'
+						],
+						[
+							'action' => USER_ACTION_UPDATE,
+							'index' => 2,
+							'name' => '2nd updated parameter',
+							'value' => '{2ND.PARAMETER}'
+						],
+						[
+							'action' => USER_ACTION_REMOVE,
+							'name' => 'URL'
+						]
 					]
 				]
-			],
-			// Removing the name of a webhook media type.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => '',
-						'Type' => 'Webhook',
-						'Script' => 'blank name webhook'
-					],
-					'error_message' => 'Incorrect value for field "name": cannot be empty.'
-				]
-			],
-			// Changing the name of a webhook media type to a name that is already taken.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Email',
-						'Type' => 'Webhook',
-						'Script' => 'blank name webhook'
-					],
-					'error_message' => 'Media type "Email" already exists.'
-				]
-			],
-			// Adding a parameter with a blank name to the media type.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Blank parameter name',
-						'Type' => 'Webhook',
-						'Script' => 'blank parameter name webhook'
-					],
-					'parameters' => [
-						['Name' => '', 'Value' => '{BLANK.NAME}']
-					],
-					'error_message' => 'Invalid parameter "/1/parameters/5/name": cannot be empty.'
-				]
-			],
-			// Removing the value of field script.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Empty script field',
-						'Type' => 'Webhook',
-						'Script' => ''
-					],
-					'error_message' => 'Invalid parameter "/1/script": cannot be empty.'
-				]
-			],
-			// Changing the value of timeout field to zero.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Zero timeout',
-						'Type' => 'Webhook',
-						'Script' => 'Zero timeout',
-						'Timeout' => '0'
-					],
-					'error_message' => 'Invalid parameter "/1/timeout": value must be one of 1-60.'
-				]
-			],
-			// Increasing timeout too high.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Too large timeout',
-						'Type' => 'Webhook',
-						'Script' => 'Large timeout',
-						'Timeout' => '3d'
-					],
-					'error_message' => 'Invalid parameter "/1/timeout": value must be one of 1-60.'
-				]
-			],
-			// Changing value of field timeout to a string
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'String in timeout field',
-						'Type' => 'Webhook',
-						'Script' => 'String in timeout',
-						'Timeout' => '1minute'
-					],
-					'error_message' => 'Invalid parameter "/1/timeout": a time unit is expected.'
-				]
-			],
-			// Add a menu entry URL without a menu entry name.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Empty menu entry name',
-						'Type' => 'Webhook',
-						'Script' => 'Empty menu entry name',
-						'Include event menu entry' => true,
-						'Menu entry URL' => '{EVENT.TAGS.Address}'
-					],
-					'error_message' => 'Incorrect value for field "event_menu_name": cannot be empty.'
-				]
-			],
-			// Add a menu entry name without a menu entry URL.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Empty menu entry URL',
-						'Type' => 'Webhook',
-						'Script' => 'Empty menu entry URL',
-						'Include event menu entry' => true,
-						'Menu entry name' => '{EVENT.TAGS."Returned tag"}'
-					],
-					'error_message' => 'Incorrect value for field "event_menu_url": cannot be empty.'
-				]
-			],
-			// Remove the value of the attempts field.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Empty attempts field',
-						'Type' => 'Webhook',
-						'Script' => 'Empty attempts field'
-					],
-					'options' => [
-						'Attempts' => ''
-					],
-					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
-				]
-			],
-			// Set the value of Attempts field to 0.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => '0 in attempts field',
-						'Type' => 'Webhook',
-						'Script' => 'Zero Attempts'
-					],
-					'options' => [
-						'Attempts' => '0'
-					],
-					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
-				]
-			],
-			// Set the value of Attempts field too high.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Too much attempts',
-						'Type' => 'Webhook',
-						'Script' => 'Too much Attempts'
-					],
-					'options' => [
-						'Attempts' => '100'
-					],
-					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
-				]
-			],
-			// Set the value of Attempts field to some string.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'String in attempts',
-						'Type' => 'Webhook',
-						'Script' => 'attempts in string format'
-					],
-					'options' => [
-						'Attempts' => 'five'
-					],
-					'error_message' => 'Incorrect value for field "maxattempts": must be between "1" and "10".'
-				]
-			],
-			// Remove the value of the attempt interval field.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Empty Attempt interval',
-						'Type' => 'Webhook',
-						'Script' => 'Empty attempt interval'
-					],
-					'options' => [
-						'Attempts' => '1',
-						'Attempt interval' => ''
-					],
-					'error_message' => 'Incorrect value for field "attempt_interval": cannot be empty.'
-				]
-			],
-			// Set a value of the attempt interval that is out of range.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Attempt interval out of range',
-						'Type' => 'Webhook',
-						'Script' => 'Out of range attempt interval'
-					],
-					'options' => [
-						'Attempts' => '5',
-						'Attempt interval' => '61'
-					],
-					'error_message' => 'Incorrect value for field "attempt_interval": must be between "0" and "60".'
-				]
-			],
-			// Set a string value in the attempt interval field.
-			[
-				[
-					'update' => true,
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Attempt interval out of range',
-						'Type' => 'Webhook',
-						'Script' => 'String in attempt interval'
-					],
-					'options' => [
-						'Attempts' => '5',
-						'Attempt interval' => '10seconds'
-					],
-					'error_message' => 'Incorrect value for field "attempt_interval": must be between "0" and "60".'
-				]
-			],
-			// Attempt to set concurrent sessions field to custom and set the value out of range.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Name' => 'Custom concurrent sessions out of range',
-						'Type' => 'Webhook',
-						'Script' => 'Custom concurrent sessions out of range'
-					],
-					'options' => [
-						'Attempts' => '5'
-					],
-					'concurrent_sessions' => [
-						'Custom' => '101'
-					],
-					'error_message' => 'Incorrect value for field "maxsessions": must be between "0" and "100".'
-				]
-			],
+			]
 		];
 	}
 
 	/**
 	* @backup media_type
-	* @backup media_type_param
 	* @dataProvider createUpdateWebhookData
 	*/
 	public function testFormAdministrationMediaTypeWebhook_CreateUpdate($data) {
@@ -674,30 +699,35 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		$this->query($button)->one()->WaitUntilClickable()->click();
 		$form = $this->query('id:media_type_form')->asForm()->waitUntilVisible()->one();
 		$form->fill($data['fields']);
+		// Fill webhook parameters if needed.
+		$this->setTableSelector('id:parameters_table');
 		if (array_key_exists('parameters', $data)) {
-			$this->fillParametersField($data);
+			$this->fillTags($data['parameters']);
+		}
+		// Remove all parameters if corresponding flag exists.
+		if (array_key_exists('remove_parameters', $data)) {
+			$this->removeTags();
 		}
 		// Fill fields in Operations tab if needed.
 		if (CTestArrayHelper::get($data, 'options', false) || CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
 			$form->selectTab('Options');
 			$this->fillOperationsTab($data, $form);
 		}
-
 		$form->submit();
 		$this->page->waitUntilReady();
 
 		// Check media type creation or update message.
-		$good_title = CTestArrayHelper::get($data, 'update', false) ? 'Media type updated' : 'Media type added';
-		$bad_title = CTestArrayHelper::get($data, 'update', false) ? 'Cannot update media type' : 'Cannot add media type';
-		$this->assertMediaTypeMessage($data, $good_title, $bad_title);
+		$message_title = CTestArrayHelper::get($data, 'update', false) ? 'Media type updated' : 'Media type added';
+		$message = CMessageElement::find()->one();
+		$this->assertTrue($message->isGood());
+		$this->assertEquals($message_title, $message->getTitle());
+		// Check that the media type was actually created or updated.
+		$mediatype_count = CDBHelper::getCount('SELECT mediatypeid FROM media_type WHERE name ='.
+				CDBHelper::escape($data['fields']['Name']));
+		$this->assertEquals(1, $mediatype_count);
 
-		// Check that no DB changes took place in case of negative test.
-		if ($data['expected'] === TEST_BAD) {
-			$this->assertEquals($old_hash, CDBHelper::getHash($this->sql));
-		}
-		else {
-			$this->checkMediaTypeFields($data);
-		}
+		// Check the values of created or updated media type fields.
+		$this->checkMediaTypeFields($data);
 	}
 
 	public function testFormAdministrationMediaTypeWebhook_SimpleUpdate() {
@@ -718,9 +748,9 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 
 	public function testFormAdministrationMediaTypeWebhook_Clone() {
 		// SQL for collecting all webhook mediatype parameter values, both from media_type and media_type_param tables.
-		$mediatype_sql = 'SELECT type, status, maxsessions, maxattempts, attempt_interval, content_type, script, '.
-			'timeout, process_tags, show_event_menu, event_menu_name, event_menu_url, description, mtp.name, mtp.value '.
-			'FROM media_type mt INNER JOIN media_type_param mtp ON mt.mediatypeid=mtp.mediatypeid WHERE mt.name=';
+		$mediatype_sql = 'SELECT type, status, maxsessions, maxattempts, attempt_interval, content_type, script, timeout, '.
+				'process_tags, show_event_menu, event_menu_name, event_menu_url, description, mtp.name, mtp.value '.
+				'FROM media_type mt INNER JOIN media_type_param mtp ON mt.mediatypeid=mtp.mediatypeid WHERE mt.name=';
 		$old_hash = CDBHelper::getHash($mediatype_sql.'\'Reference webhook\' ORDER BY mtp.name');
 
 		// Clone the reference media type.
@@ -776,26 +806,6 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		$this->assertEquals(0, CDBHelper::getCount('SELECT mediatypeid FROM media_type WHERE name=\'Webhook to delete\''));
 	}
 
-	// Function that removes existing webhook parameters or adds new ones based on the Action field in data provider.
-	private function fillParametersField($data) {
-		$parameters_table = $this->query('id:parameters_table')->asTable()->one();
-		foreach ($data['parameters'] as $parameter) {
-			if (CTestArrayHelper::get($parameter, 'Action', 'Add') === 'Remove') {
-				$delete_row = $parameters_table->getRow($parameter['Name']);
-				$delete_row->query('button:Remove')->one()->waitUntilClickable()->click();
-			}
-			else {
-				$rows_count = $parameters_table->getRows()->count();
-				$parameters_table->query('button:Add')->one()->click();
-				// Name is placed in the 1st td element of each row, and value - in the 2nd td element.
-				$new_name = $parameters_table->query('xpath://tbody/tr['.$rows_count.']/td[1]/input')->one();
-				$new_value = $parameters_table->query('xpath://tbody/tr['.$rows_count.']/td[2]/input')->one();
-				$new_name->fill($parameter['Name']);
-				$new_value->fill($parameter['Value']);
-			}
-		}
-	}
-
 	/*
 	 * Function used to popullate fields located in the Operations tab.
 	 * Field concurrent sessions has two input elelents - one of them is displayed only if concurrent sessions = Custom.
@@ -807,35 +817,12 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		}
 		if (CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
 			$container = $form->getFieldContainer('Concurrent sessions');
-			$concurrent_session = is_array($data['concurrent_sessions'])
-					? array_key_first($data['concurrent_sessions'])
-					: $data['concurrent_sessions'];
-			$container->query('id:maxsessions_type')->asSegmentedRadio()->one()->select($concurrent_session);
+			$concurrent_sessions = is_array($data['concurrent_sessions'])
+					? array_key_first($data['concurrent_sessions']) : $data['concurrent_sessions'];
+			$container->query('id:maxsessions_type')->asSegmentedRadio()->one()->select($concurrent_sessions);
 			if (is_array($data['concurrent_sessions'])) {
 				$container->query('id:maxsessions')->one()->fill(array_values($data['concurrent_sessions']));
 			}
-		}
-	}
-
-	/*
-	 * Function that checks the displayed message and checks created/updated media type in dB,
-	 * or, in case of a negative scenario, checks error message title and details.
-	 */
-	private function assertMediaTypeMessage($data, $good_title, $bad_title) {
-		$message = CMessageElement::find()->one();
-		switch ($data['expected']) {
-			case TEST_GOOD:
-				$this->assertTrue($message->isGood());
-				$this->assertEquals($good_title, $message->getTitle());
-				$mediatype_count = CDBHelper::getCount('SELECT mediatypeid FROM media_type WHERE name ='.zbx_dbstr($data['fields']['Name']));
-				$count = ($good_title === 'Media type deleted') ? 0 : 1;
-				$this->assertEquals($count, $mediatype_count);
-				break;
-
-			case TEST_BAD:
-				$this->assertEquals($bad_title, $message->getTitle());
-				$this->assertTrue($message->hasLine($data['error_message']));
-				break;
 		}
 	}
 
@@ -849,62 +836,78 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 
 		// Check that fields in Media type tab are updated.
 		$form->checkValue($data['fields']);
-
-		// Check that webhook parameters are added / removed, or check that all 4 default prameters are present.
-		$params_table = $form->getField('Parameters')->asTable();
-		if (CTestArrayHelper::get($data, 'parameters', false)) {
-			foreach ($data['parameters'] as $parameter) {
-				if (CTestArrayHelper::get($parameter, 'Action', 'Add') === 'Remove') {
-					$this->assertEquals($params_table->query('xpath://input[@value="'.$parameter['Name'].'"]')->count(), 0);
-				}
-				else {
-					// Name is placed in the 1st td element of each row, and value - in the 2nd td element.
-					$this->assertEquals($params_table->query('xpath://td[1]/input[@value="'.$parameter['Name'].'"]')->count(), 1);
-					$this->assertEquals($params_table->query('xpath://td[2]/input[@value="'.$parameter['Value'].'"]')->count(), 1);
-				}
-			}
+		// Check webhook parameters
+		if (CTestArrayHelper::get($data, 'check_parameters', true)) {
+			$this->checkParameters($data);
 		}
-		else {
-			$default_params = [
-				['Name' => 'URL', 'Value' => ''],
-				['Name' => 'To', 'Value' => '{ALERT.SENDTO}'],
-				['Name' => 'Subject', 'Value' => '{ALERT.SUBJECT}'],
-				['Name' => 'Message', 'Value' => '{ALERT.MESSAGE}']
-			];
-			// Parameters table last row is occupied by the Add button, and should be deducted from the total row count.
-			$this->assertEquals(count($default_params), $params_table->getRows()->count()-1);
-			foreach($default_params as $parameter) {
-				// Parameter name is placed in the 1st td element of each row, and parameter value - in the 2nd td element.
-				$this->assertEquals($parameter['Name'], $params_table->query('xpath://td[1]/input[@value="'.
-						$parameter['Name'].'"]')->one()->getValue());
-				$this->assertEquals($parameter['Value'], $params_table->query('xpath://td[2]/input[@value="'.
-						$parameter['Value'].'"]')->one()->getValue());
-			}
-		}
-		// Check that fields in Options tab are updated.
-		if (CTestArrayHelper::get($data, 'options', false) || CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
-			$form->selectTab('Options');
-			if (CTestArrayHelper::get($data, 'options', false)) {
-				$form->checkValue($data['options']);
-			}
-			if (CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
-				$container = $form->getFieldContainer('Concurrent sessions');
-				$concurrent_session = is_array($data['concurrent_sessions'])
-						? array_key_first($data['concurrent_sessions'])
-						: $data['concurrent_sessions'];
-				$this->assertEquals($concurrent_session,
-						$container->query('id:maxsessions_type')->asSegmentedRadio()->one()->getValue());
-				// If concurrent sessions type is Custom then value should be checked for this field.
-				if (is_array($data['concurrent_sessions'])) {
-					$this->assertEquals($data['concurrent_sessions']['Custom'],
-							$container->query('id:maxsessions')->one()->getValue());
-				}
-			}
-		}
-
 		// Check that "Menu entry name" and "Menu entry URL" fields are enabled only if "Include event menu entry" is set.
 		$menu_enabled = CTestArrayHelper::get($data, 'fields.Include event menu entry', false);
 		$this->assertTrue($form->getField('Menu entry name')->isEnabled($menu_enabled));
 		$this->assertTrue($form->getField('Menu entry URL')->isEnabled($menu_enabled));
+		// Check that fields in Options tab are updated.
+		if (CTestArrayHelper::get($data, 'options', false) || CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
+			$this->checkmediaTypeOptions($data, $form);
+		}
+	}
+
+	/*
+	 * Function prepares a reference parameters array based on parameter actions in data provider and compares it with
+	 * the values obtained from the media type configuration form.
+	 */
+	private function checkParameters($data) {
+		// Check creation, update and deletion of webhook parameters, or check that all 4 default prameters are present.
+		$expected_params = [
+			['name' => 'Message', 'value' => '{ALERT.MESSAGE}'],
+			['name' => 'Subject', 'value' => '{ALERT.SUBJECT}'],
+			['name' => 'To', 'value' => '{ALERT.SENDTO}'],
+			['name' => 'URL', 'value' => '']
+		];
+		// Add, substitute or remove parameters from the reference array based on parameter actions in data provider.
+		if (CTestArrayHelper::get($data, 'parameters', false)) {
+			foreach ($data['parameters'] as $parameter) {
+				$action = CTestArrayHelper::get($parameter, 'action', USER_ACTION_ADD);
+				switch ($action) {
+					case USER_ACTION_ADD :
+						array_push($expected_params, $parameter);
+						break;
+					case USER_ACTION_UPDATE :
+						$remplacement = [$parameter['index'] => ['name' => $parameter['name'], 'value' => $parameter['value']]];
+						$expected_params = array_replace($expected_params, $remplacement);
+						break;
+					case USER_ACTION_REMOVE :
+						$expected_params = array_filter($expected_params, function($p) use ($parameter){
+							return $p['name'] != $parameter['name'];
+						});
+						break;
+				}
+			}
+		}
+		// Sort the parameters in reference array alphabetically.
+		usort($expected_params, function ($a, $b) {
+			return strcmp($a['name'], $b['name']);
+		});
+		// If parameters were not deleted from the media type, compare them with the reference array.
+		$this->assertTags((CTestArrayHelper::get($data, 'remove_parameters', false)) ? [] : $expected_params);
+	}
+
+	/*
+	 * Check the values of fields located in the Operations tab.
+	 */
+	private function checkMediaTypeOptions($data, $form) {
+		$form->selectTab('Options');
+		if (CTestArrayHelper::get($data, 'options', false)) {
+			$form->checkValue($data['options']);
+		}
+		if (CTestArrayHelper::get($data, 'concurrent_sessions', false)) {
+			$container = $form->getFieldContainer('Concurrent sessions');
+			$concurrent_sessions = is_array($data['concurrent_sessions'])
+					? array_key_first($data['concurrent_sessions']) : $data['concurrent_sessions'];
+			$this->assertEquals($concurrent_sessions,
+					$container->query('id:maxsessions_type')->asSegmentedRadio()->one()->getValue());
+			// If concurrent sessions type is Custom then value should be checked for this field.
+			if (is_array($data['concurrent_sessions'])) {
+				$this->assertEquals($data['concurrent_sessions']['Custom'], $container->query('id:maxsessions')->one()->getValue());
+			}
+		}
 	}
 }
