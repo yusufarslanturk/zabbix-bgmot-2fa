@@ -82,7 +82,7 @@ There are no template links in this template.
 
 |Group|Name|Description|Type|Key and additional info|
 |-----|----|-----------|----|---------------------|
-|HAProxy |HAProxy: Version |<p>-</p> |DEPENDENT |haproxy.version<p>**Preprocessing**:</p><p>- REGEX: `HAProxy version (\d+\.\d+\.\d+.*), \1`</p><p>⛔️ON_FAIL: `CUSTOM_ERROR -> HAProxy version is not found`</p><p>- DISCARD_UNCHANGED_HEARTBEAT: `1d`</p> |
+|HAProxy |HAProxy: Version |<p>-</p> |DEPENDENT |haproxy.version<p>**Preprocessing**:</p><p>- REGEX: `HAProxy version ([^,]*), \1`</p><p>⛔️ON_FAIL: `CUSTOM_ERROR -> HAProxy version is not found`</p><p>- DISCARD_UNCHANGED_HEARTBEAT: `1d`</p> |
 |HAProxy |HAProxy: Uptime |<p>-</p> |DEPENDENT |haproxy.uptime<p>**Preprocessing**:</p><p>- JAVASCRIPT: `try {     var t = value.match(/(\d+)d (\d+)h(\d+)m(\d+)s/);     return t[1] * 86400 + t[2] * 3600 + t[3] * 60 + t[4] * 1; } catch (error) {     throw "HAProxy uptime is not found : " + error; }`</p> |
 |HAProxy |HAProxy: Service status |<p>-</p> |SIMPLE |net.tcp.service["{$HAPROXY.STATS.SCHEME}","{HOST.CONN}","{$HAPROXY.STATS.PORT}"]<p>**Preprocessing**:</p><p>- DISCARD_UNCHANGED_HEARTBEAT: `10m`</p> |
 |HAProxy |HAProxy: Service response time |<p>-</p> |SIMPLE |net.tcp.service.perf["{$HAPROXY.STATS.SCHEME}","{HOST.CONN}","{$HAPROXY.STATS.PORT}"] |
