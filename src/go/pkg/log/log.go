@@ -61,7 +61,7 @@ var logStat LogStat
 var logAccess sync.Mutex
 
 func CheckLogLevel(level int) bool {
-	if level != Info && level > logLevel || Empty == logLevel {
+	if level != Info && (level > logLevel || Empty == level) {
 		return false
 	}
 	return true
