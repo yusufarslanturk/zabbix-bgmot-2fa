@@ -972,7 +972,7 @@ class testUsers extends CAPITest {
 					],
 					'user_medias' => [
 						[
-							'mediatypeid' => '10',
+							'mediatypeid' => '125',
 							'sendto' => 'api@zabbix.com'
 						]
 					],
