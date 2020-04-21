@@ -19,13 +19,16 @@
 **/
 
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
+require_once dirname(__FILE__).'/FormParametersTrait.php';
 
 /**
  * Trait for tags in form related tests.
  */
 trait TagTrait {
 
-	protected $table_selector = 'id:tags-table';
+	use FormParametersTrait;
+
+	protected $tag_table_selector = 'id:tags-table';
 
 	/**
 	 * Set custom selector for tag table.
@@ -42,18 +45,8 @@ trait TagTrait {
 	 * @return CMultifieldTable
 	 */
 	protected function getTagTable() {
-		return $this->query($this->table_selector)->asMultifieldTable([
-			'mapping' => [
-				'Name' => [
-					'name' => 'name',
-					'class' => 'CElement'
-				],
-				'Value' => [
-					'name' => 'value',
-					'class' => 'CElement'
-				]
-			]
-		])->one();
+		$this->setTableSelector($this->tag_table_selector);
+		return $this->getTable();
 	}
 
 	/**
@@ -64,12 +57,8 @@ trait TagTrait {
 	 * @throws Exception
 	 */
 	public function fillTags($tags, $defaultAction = USER_ACTION_ADD) {
-		foreach ($tags as &$tag) {
-			$tag['action'] = CTestArrayHelper::get($tag, 'action', $defaultAction);
-		}
-		unset($tag);
-
-		$this->getTagTable()->fill($tags);
+		$this->setTableSelector($this->tag_table_selector);
+		$this->fillParameters($tags, $defaultAction);
 	}
 
 	/**
@@ -82,11 +71,11 @@ trait TagTrait {
 	}
 
 	/**
-	 * Remove tag rows.
+	 * Remove parameters rows.
 	 *
 	 * @return $this
 	 */
-	public function removeTags() {
+	public function removeParameters() {
 		return $this->getTagTable()->clear();
 	}
 
@@ -96,14 +85,7 @@ trait TagTrait {
 	 * @param array $data    tag element values
 	 */
 	public function assertTags($data) {
-		$rows = [];
-		foreach ($data as $values) {
-			$rows[] = [
-				'name' => CTestArrayHelper::get($values, 'name', ''),
-				'value' => CTestArrayHelper::get($values, 'value', ''),
-			];
-		}
-
-		$this->assertEquals($rows, $this->getTags(), 'Tags on a page does not match tags in data provider.');
+		$this->setTableSelector($this->tag_table_selector);
+		$this->assertValues($data);
 	}
 }
