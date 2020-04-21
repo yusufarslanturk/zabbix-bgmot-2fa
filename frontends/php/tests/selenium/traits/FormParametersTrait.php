@@ -20,42 +20,10 @@
 
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
 
-
 /**
  * Trait for name-value parameters in form related tests.
  */
 trait FormParametersTrait {
-
-	protected $table_selector = 'id:parameters_table';
-
-	/**
-	 * Set custom selector for table.
-	 *
-	 * @param string $selector    table selector
-	 */
-	public function setTableSelector($selector) {
-		$this->table_selector = $selector;
-	}
-
-	/**
-	 * Get table element with mapping set.
-	 *
-	 * @return CMultifieldTable
-	 */
-	protected function getTable() {
-		return $this->query($this->table_selector)->asMultifieldTable([
-			'mapping' => [
-				'Name' => [
-					'name' => 'name',
-					'class' => 'CElement'
-				],
-				'Value' => [
-					'name' => 'value',
-					'class' => 'CElement'
-				]
-			]
-		])->one();
-	}
 
 	/**
 	 * Fill parameters table with specified data.
@@ -96,15 +64,15 @@ trait FormParametersTrait {
 			];
 		}
 
-		$this->assertEquals($rows, $this->getFormParameters(), 'Tags on a page does not match tags in data provider.');
+		$this->assertEquals($rows, $this->getValues(), 'Tags on a page does not match tags in data provider.');
 	}
 
 	/**
-	 * Get input fields of parameters.
+	 * Get values from input fields of parameters.
 	 *
 	 * @return array
 	 */
-	public function getFormParameters() {
+	public function getValues() {
 		return $this->getTable()->getValue();
 	}
 }

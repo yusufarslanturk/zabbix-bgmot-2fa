@@ -506,7 +506,6 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		$form = $this->query('id:media_type_form')->asForm()->waitUntilVisible()->one();
 		$form->fill($data['fields']);
 		// Fill webhook parameters if needed.
-		$this->setTableSelector('id:parameters_table');
 		if (array_key_exists('parameters', $data)) {
 			$this->fillParameters($data['parameters']);
 		}
@@ -700,7 +699,6 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		$form = $this->query('id:media_type_form')->asForm()->waitUntilVisible()->one();
 		$form->fill($data['fields']);
 		// Fill webhook parameters if needed.
-		$this->setTableSelector('id:parameters_table');
 		if (array_key_exists('parameters', $data)) {
 			$this->fillParameters($data['parameters']);
 		}
@@ -772,17 +770,17 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		return [
 			[
 				[
-					'action' => 'creation'
+					'create'
 				]
 			],
 			[
 				[
-					'action' => 'update'
+					'update'
 				]
 			],
 			[
 				[
-					'action' => 'creation'
+					'clone'
 				]
 			]
 		];
@@ -800,9 +798,9 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		$old_hash = CDBHelper::getHash($this->sql);
 
 		$this->page->login()->open('zabbix.php?action=mediatype.list');
-		$button = ($data['action'] === 'creation') ? 'button:Create media type' : 'link:Reference webhook';
+		$button = ($data === 'create') ? 'button:Create media type' : 'link:Reference webhook';
 		$this->query($button)->one()->WaitUntilClickable()->click();
-		if ($data['action'] === 'clone') {
+		if ($data === 'clone') {
 			$this->query('button:Clone')->one()->click();
 		}
 		$form = $this->query('id:media_type_form')->asForm()->waitUntilVisible()->one();
@@ -824,6 +822,24 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 		$this->assertTrue($message->isGood());
 		$this->assertEquals('Media type deleted', $message->getTitle());
 		$this->assertEquals(0, CDBHelper::getCount('SELECT mediatypeid FROM media_type WHERE name=\'Webhook to delete\''));
+	}
+
+	/**
+	 * Get table element with mapping set.
+	 */
+	protected function getTable() {
+		return $this->query('id:parameters_table')->asMultifieldTable([
+			'mapping' => [
+				'Name' => [
+					'name' => 'name',
+					'class' => 'CElement'
+				],
+				'Value' => [
+					'name' => 'value',
+					'class' => 'CElement'
+				]
+			]
+		])->one();
 	}
 
 	/**

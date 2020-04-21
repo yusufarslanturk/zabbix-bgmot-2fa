@@ -28,64 +28,34 @@ trait TagTrait {
 
 	use FormParametersTrait;
 
-	protected $tag_table_selector = 'id:tags-table';
+	protected $table_selector = 'id:tags-table';
 
 	/**
-	 * Set custom selector for tag table.
+	 * Set custom selector for table.
 	 *
-	 * @param string $selector    tag table selector
+	 * @param string $selector    table selector
 	 */
 	public function setTableSelector($selector) {
 		$this->table_selector = $selector;
 	}
 
 	/**
-	 * Get tag table element with mapping set.
+	 * Get table element with mapping set.
 	 *
 	 * @return CMultifieldTable
 	 */
-	protected function getTagTable() {
-		$this->setTableSelector($this->tag_table_selector);
-		return $this->getTable();
-	}
-
-	/**
-	 * Fill tag with specified data.
-	 *
-	 * @param array $tags    data array where keys are fields label text and values are values to be put in fields
-	 *
-	 * @throws Exception
-	 */
-	public function fillTags($tags, $defaultAction = USER_ACTION_ADD) {
-		$this->setTableSelector($this->tag_table_selector);
-		$this->fillParameters($tags, $defaultAction);
-	}
-
-	/**
-	 * Get input fields of tags.
-	 *
-	 * @return array
-	 */
-	public function getTags() {
-		return $this->getTagTable()->getValue();
-	}
-
-	/**
-	 * Remove parameters rows.
-	 *
-	 * @return $this
-	 */
-	public function removeParameters() {
-		return $this->getTagTable()->clear();
-	}
-
-	/**
-	 * Check if values of tags inputs match data from data provider.
-	 *
-	 * @param array $data    tag element values
-	 */
-	public function assertTags($data) {
-		$this->setTableSelector($this->tag_table_selector);
-		$this->assertValues($data);
+	protected function getTable() {
+		return $this->query($this->table_selector)->asMultifieldTable([
+			'mapping' => [
+				'Name' => [
+					'name' => 'name',
+					'class' => 'CElement'
+				],
+				'Value' => [
+					'name' => 'value',
+					'class' => 'CElement'
+				]
+			]
+		])->one();
 	}
 }
