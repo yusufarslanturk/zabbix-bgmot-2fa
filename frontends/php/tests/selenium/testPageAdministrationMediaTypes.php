@@ -482,7 +482,7 @@ class testPageAdministrationMediaTypes extends CWebTest {
 		$fields = CTestArrayHelper::get($data, 'parameters', ['Send to', 'Subject', 'Message']);
 		$this->assertEquals($fields, $form->getLabels()->asText());
 		if (CTestArrayHelper::get($data, 'webhook', false)) {
-				$this->assertTrue($form->getField('Response')->isEnabled(false));
+			$this->assertTrue($form->getField('Response')->isEnabled(false));
 		}
 
 		// Fill and submit testing form.
@@ -501,8 +501,9 @@ class testPageAdministrationMediaTypes extends CWebTest {
 		else {
 			$this->assertTrue($message->hasLine($data['error']));
 		}
+
 		if (CTestArrayHelper::get($data, 'webhook', false)) {
-		$form->checkValue(['Response' => 'false']);
+			$form->checkValue(['Response' => 'false']);
 			$this->assertEquals($form->query('id:webhook_response_type')->one()->getText(), 'Response type: String');
 		}
 	}
