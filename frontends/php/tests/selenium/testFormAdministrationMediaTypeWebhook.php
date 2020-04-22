@@ -832,10 +832,12 @@ class testFormAdministrationMediaTypeWebhook extends CWebTest {
 			'mapping' => [
 				'Name' => [
 					'name' => 'name',
+					'selector' => 'xpath:./input',
 					'class' => 'CElement'
 				],
 				'Value' => [
 					'name' => 'value',
+					'selector' => 'xpath:./input',
 					'class' => 'CElement'
 				]
 			]

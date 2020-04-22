@@ -49,10 +49,12 @@ trait TagTrait {
 			'mapping' => [
 				'Name' => [
 					'name' => 'name',
+					'selector' => 'xpath:./textarea',
 					'class' => 'CElement'
 				],
 				'Value' => [
 					'name' => 'value',
+					'selector' => 'xpath:./textarea',
 					'class' => 'CElement'
 				]
 			]
