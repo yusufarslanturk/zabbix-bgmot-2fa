@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-06 22:11+0300\n"
+"POT-Creation-Date: 2020-04-19 14:13+0300\n"
 "PO-Revision-Date: 2020-02-10 08:07+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -175,7 +175,7 @@ msgid "%1$s retry left"
 msgid_plural "%1$s retries left"
 msgstr[0] "%1$s thử lại "
 
-#: app/views/administration.user.edit.php:365
+#: app/views/administration.user.edit.php:373
 #: include/classes/widgets/CWidgetConfig.php:160
 #: include/classes/widgets/CWidgetConfig.php:161 jsLoader.php:294
 #: jsLoader.php:295
@@ -383,9 +383,9 @@ msgid "Acknowledged RESOLVED events"
 msgstr " Sự kiện được ghi nhận giải quyết"
 
 #: app/views/administration.mediatype.edit.php:93
-#: app/views/administration.mediatype.edit.php:147
+#: app/views/administration.mediatype.edit.php:145
 #: app/views/administration.mediatype.list.php:70
-#: app/views/administration.user.edit.php:214
+#: app/views/administration.user.edit.php:222
 #: app/views/dashboard.sharing.edit.php:24
 #: app/views/dashboard.sharing.edit.php:45
 #: app/views/monitoring.widget.actionlog.view.php:30
@@ -553,14 +553,14 @@ msgid "Active till"
 msgstr "Kích hoạt"
 
 #: app/views/administration.mediatype.edit.js.php:60
-#: app/views/administration.mediatype.edit.php:108
+#: app/views/administration.mediatype.edit.php:106
 #: app/views/administration.mediatype.edit.php:188
 #: app/views/administration.mediatype.edit.php:312
 #: app/views/administration.proxy.edit.php:126
 #: app/views/administration.script.edit.js.php:34
 #: app/views/administration.script.edit.php:121
-#: app/views/administration.user.edit.php:287
-#: app/views/administration.user.edit.php:459
+#: app/views/administration.user.edit.php:295
+#: app/views/administration.user.edit.php:467
 #: app/views/dashboard.sharing.edit.php:28
 #: app/views/dashboard.sharing.edit.php:49
 #: app/views/hostmacros.list.html.php:204
@@ -877,8 +877,8 @@ msgstr "Tất cả"
 msgid "All dashboards"
 msgstr "Tất cả bảng điều khiển"
 
-#: app/views/administration.user.edit.php:323
-#: app/views/administration.user.edit.php:329
+#: app/views/administration.user.edit.php:331
+#: app/views/administration.user.edit.php:337
 #: include/views/administration.usergroups.edit.php:109
 msgid "All groups"
 msgstr "Tất cả nhóm"
@@ -1317,7 +1317,7 @@ msgstr "Tự động"
 msgid "Auto registration"
 msgstr "Đăng ký tự động"
 
-#: app/views/administration.user.edit.php:176
+#: app/views/administration.user.edit.php:184
 msgid "Auto-login"
 msgstr "Tự động đăng nhập"
 
@@ -1325,7 +1325,7 @@ msgstr "Tự động đăng nhập"
 msgid "Auto-login and auto-logout options cannot be enabled together."
 msgstr "Tùy chọn đăng nhập tự động hoặc đăng xuất tự động không thể bật cùng một lúc."
 
-#: app/views/administration.user.edit.php:181
+#: app/views/administration.user.edit.php:189
 msgid "Auto-logout"
 msgstr "Tự động đăng xuất"
 
@@ -1582,9 +1582,9 @@ msgstr "Không thể xóa"
 #: app/views/administration.mediatype.edit.php:309
 #: app/views/administration.proxy.edit.php:122
 #: app/views/administration.script.edit.php:118
-#: app/views/administration.user.edit.php:453
-#: app/views/administration.user.edit.php:460
-#: app/views/administration.user.edit.php:467
+#: app/views/administration.user.edit.php:461
+#: app/views/administration.user.edit.php:468
+#: app/views/administration.user.edit.php:475
 #: app/views/monitoring.acknowledge.edit.php:88
 #: app/views/monitoring.dashboard.view.php:100
 #: include/classes/html/CButtonCancel.php:25
@@ -3006,8 +3006,8 @@ msgid "Change PSK"
 msgstr ""
 
 #: app/views/administration.authentication.edit.php:72
-#: app/views/administration.mediatype.edit.php:129
-#: app/views/administration.user.edit.php:117
+#: app/views/administration.mediatype.edit.php:127
+#: app/views/administration.user.edit.php:125
 msgid "Change password"
 msgstr "Thay đổi mật khẩu"
 
@@ -3721,7 +3721,7 @@ msgstr "Chứa"
 #: include/views/configuration.trigger.prototype.list.php:31
 #: include/views/configuration.triggers.list.php:174
 #: include/views/monitoring.charts.php:58
-#: include/views/monitoring.history.php:218
+#: include/views/monitoring.history.php:216
 #: include/views/monitoring.hostscreen.php:63
 #: include/views/monitoring.overview.items.php:73
 #: include/views/monitoring.overview.triggers.php:110
@@ -4438,7 +4438,7 @@ msgstr "Trễ bởi"
 #: app/views/administration.proxy.list.php:167
 #: app/views/administration.script.edit.php:131
 #: app/views/administration.script.list.php:113
-#: app/views/administration.user.edit.php:447
+#: app/views/administration.user.edit.php:455
 #: app/views/administration.user.list.php:202
 #: app/views/monitoring.dashboard.list.php:76
 #: include/classes/html/CButtonDelete.php:25
@@ -4702,7 +4702,7 @@ msgstr "Xóa các kiểu trigger được chọn?"
 msgid "Delete selected triggers?"
 msgstr "Xóa các trigger được chọn?"
 
-#: app/views/administration.user.edit.php:449
+#: app/views/administration.user.edit.php:457
 msgid "Delete selected user?"
 msgstr "Xóa người dùng được chọn?"
 
@@ -4961,7 +4961,7 @@ msgstr "Vô hiệu hóa web scenario đã chọn?"
 
 #: app/views/administration.mediatype.list.php:48
 #: app/views/administration.mediatype.list.php:122
-#: app/views/administration.user.edit.php:224
+#: app/views/administration.user.edit.php:232
 #: app/views/administration.user.list.php:189
 #: app/views/administration.user.list.php:191 auditlogs.php:147
 #: include/discovery.inc.php:108 include/hosts.inc.php:1321
@@ -5393,7 +5393,7 @@ msgstr "Mỗi URL cần có một tên duy nhất. Xin chắc chắn chi�
 msgid "Each item"
 msgstr ""
 
-#: app/views/administration.user.edit.php:272
+#: app/views/administration.user.edit.php:280
 #: include/views/configuration.action.edit.php:500
 #: include/views/configuration.action.edit.php:521
 #: include/views/configuration.action.edit.php:1304
@@ -5720,7 +5720,7 @@ msgstr "Kích hoạt trap"
 #: app/views/administration.mediatype.edit.php:257
 #: app/views/administration.mediatype.list.php:47
 #: app/views/administration.mediatype.list.php:118
-#: app/views/administration.user.edit.php:218
+#: app/views/administration.user.edit.php:226
 #: app/views/administration.user.list.php:188
 #: app/views/administration.user.list.php:192 app/views/popup.media.php:74
 #: app/views/popup.triggerwizard.php:128 auditlogs.php:144
@@ -6253,7 +6253,7 @@ msgstr "Khu vực được tô kín"
 #: include/views/configuration.template.list.php:73
 #: include/views/configuration.triggers.list.php:162
 #: include/views/inventory.host.list.php:48
-#: include/views/monitoring.history.php:246
+#: include/views/monitoring.history.php:244
 #: include/views/monitoring.overview.items.php:81
 #: include/views/monitoring.screen.list.php:58
 #: include/views/monitoring.slideconf.list.php:45
@@ -6383,7 +6383,7 @@ msgstr "Truy cập Frontend"
 msgid "Frontend access updated"
 msgstr "Truy cập frontend đã được cập nhật"
 
-#: app/views/administration.user.edit.php:353
+#: app/views/administration.user.edit.php:361
 msgid "Frontend messaging"
 msgstr "Thông điệp frontend"
 
@@ -6416,7 +6416,7 @@ msgstr "Hàm"
 msgid "GMT%1$s"
 msgstr "GMT%1$s"
 
-#: app/views/administration.mediatype.edit.php:119
+#: app/views/administration.mediatype.edit.php:117
 #: app/views/administration.mediatype.list.php:87
 msgid "GSM modem"
 msgstr "Bộ điều giải GSM"
@@ -6647,7 +6647,7 @@ msgstr "Tính tổng đồ thị"
 #: app/controllers/CControllerPopupGeneric.php:260
 #: include/views/configuration.graph.edit.php:97
 #: include/views/configuration.graph.list.php:90
-#: include/views/monitoring.history.php:231
+#: include/views/monitoring.history.php:229
 msgid "Graph type"
 msgstr "Kiểu đồ thị"
 
@@ -6922,7 +6922,7 @@ msgstr "Ẩn gỡ lỗi"
 msgid "Hide groups without problems"
 msgstr "Ẩn nhóm không có vấn đề"
 
-#: include/views/monitoring.history.php:162
+#: include/views/monitoring.history.php:160
 msgid "Hide selected"
 msgstr "Ẩn lựa chọn"
 
@@ -7125,7 +7125,7 @@ msgstr[0] "Host được kích hoạtCác host được kích hoạt"
 
 #: app/views/administration.script.edit.php:79
 #: app/views/administration.script.list.php:61
-#: app/views/administration.user.edit.php:320
+#: app/views/administration.user.edit.php:328
 #: app/views/monitoring.widget.problemhosts.view.php:27
 #: app/views/monitoring.widget.problemsbysv.view.php:40
 #: app/views/monitoring.widget.web.view.php:26 app/views/search.php:129
@@ -9877,7 +9877,7 @@ msgstr "Nhãn"
 msgid "Label location"
 msgstr "Vị trí nhãn"
 
-#: app/views/administration.user.edit.php:159
+#: app/views/administration.user.edit.php:167
 msgid "Language"
 msgstr "Ngôn ngữ"
 
@@ -10188,7 +10188,7 @@ msgstr "Cục bộ"
 
 #: include/classes/screens/CScreenHistory.php:270
 #: include/classes/widgets/forms/CWidgetFormClock.php:32
-#: include/views/monitoring.history.php:270
+#: include/views/monitoring.history.php:268
 #: include/views/monitoring.screen.constructor.edit.php:700
 msgid "Local time"
 msgstr "Giờ địa phương"
@@ -10310,7 +10310,7 @@ msgstr "Tổng kiểm tra MD5 của tập tin. Trả về chuỗi ký tự (MD5 
 msgid "Macro"
 msgstr "Macro"
 
-#: include/classes/api/services/CUserMacro.php:888
+#: include/classes/api/services/CUserMacro.php:894
 #, c-format
 msgid "Macro \"%1$s\" already exists on \"%2$s\"."
 msgstr "Macro \"%1$s\" đã tồn tại trên \"%2$s\"."
@@ -10320,12 +10320,12 @@ msgstr "Macro \"%1$s\" đã tồn tại trên \"%2$s\"."
 msgid "Macro \"%1$s\" already exists."
 msgstr "Macro \"%1$s\" đã tồn tại."
 
-#: include/classes/api/services/CUserMacro.php:804
+#: include/classes/api/services/CUserMacro.php:810
 #, c-format
 msgid "Macro \"%1$s\" is not unique."
 msgstr "Macro \"%1$s\" không phải là duy nhất."
 
-#: include/classes/api/services/CUserMacro.php:911
+#: include/classes/api/services/CUserMacro.php:917
 #, c-format
 msgid "Macro with hostmacroid \"%1$s\" does not exist."
 msgstr "Macro với hostmacroid \"%1$s\" không tồn tại."
@@ -10556,11 +10556,11 @@ msgstr "Tháng 3"
 msgid "Mark elements on trigger status change"
 msgstr "Các phần tử đánh đấu trên trạng thái trigger thay đổi"
 
-#: include/views/monitoring.history.php:164
+#: include/views/monitoring.history.php:162
 msgid "Mark others"
 msgstr "Đánh dấu khác"
 
-#: include/views/monitoring.history.php:163
+#: include/views/monitoring.history.php:161
 msgid "Mark selected"
 msgstr "Đánh dấu được lựa chọn"
 
@@ -10659,8 +10659,8 @@ msgid "May"
 msgstr "Tháng 5"
 
 #: app/controllers/CControllerPopupMedia.php:175
-#: app/views/administration.user.edit.php:284
-#: app/views/administration.user.edit.php:299 app/views/popup.media.php:54
+#: app/views/administration.user.edit.php:292
+#: app/views/administration.user.edit.php:307 app/views/popup.media.php:54
 msgid "Media"
 msgstr "Media"
 
@@ -10776,8 +10776,8 @@ msgstr "Tin nhắn"
 msgid "Message format"
 msgstr ""
 
-#: app/views/administration.user.edit.php:358
 #: app/views/administration.user.edit.php:366
+#: app/views/administration.user.edit.php:374
 msgid "Message timeout"
 msgstr "Thời hạn tin nhắn"
 
@@ -10789,7 +10789,7 @@ msgstr "Tin nhắn/Lệnh"
 msgid "Messages"
 msgstr "Các tin nhắn"
 
-#: app/views/administration.user.edit.php:438
+#: app/views/administration.user.edit.php:446
 msgid "Messaging"
 msgstr "Viết tin nhắn"
 
@@ -11028,7 +11028,7 @@ msgstr "NTLM"
 #: app/controllers/CControllerPopupTriggerWizard.php:134
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:64 applications.php:37
 #: app/views/administration.mediatype.edit.php:44
-#: app/views/administration.mediatype.edit.php:145
+#: app/views/administration.mediatype.edit.php:143
 #: app/views/administration.mediatype.list.php:39
 #: app/views/administration.mediatype.list.php:65
 #: app/views/administration.proxy.list.php:38
@@ -11767,7 +11767,7 @@ msgstr "Không có quyền truy cập hệ thống."
 #: include/classes/api/services/CUserGroup.php:876
 #: include/classes/api/services/CUserMacro.php:375
 #: include/classes/api/services/CUserMacro.php:462
-#: include/classes/api/services/CUserMacro.php:768
+#: include/classes/api/services/CUserMacro.php:774
 #: include/classes/api/services/CUser.php:422
 #: include/classes/api/services/CUser.php:979
 #: include/classes/api/services/CValueMap.php:240
@@ -11882,7 +11882,7 @@ msgstr "Không có"
 #: app/views/popup.generic.php:512 include/graphs.inc.php:24
 #: include/items.inc.php:158 include/triggers.inc.php:1282
 #: include/views/configuration.triggers.list.php:71
-#: include/views/monitoring.history.php:233
+#: include/views/monitoring.history.php:231
 msgid "Normal"
 msgstr "bình thường"
 
@@ -12246,7 +12246,7 @@ msgstr "On"
 msgid "On status change triggers blink for"
 msgstr "Thay đổi trạng thái trigger trong nháy mắt"
 
-#: app/views/administration.user.edit.php:364
+#: app/views/administration.user.edit.php:372
 msgid "Once"
 msgstr "Một lần"
 
@@ -12914,8 +12914,8 @@ msgstr "Thụ động"
 
 #: app/controllers/CControllerUserUpdateGeneral.php:98
 #: app/views/administration.mediatype.edit.php:194
-#: app/views/administration.user.edit.php:107
-#: app/views/administration.user.edit.php:116 disc_prototypes.php:278
+#: app/views/administration.user.edit.php:108
+#: app/views/administration.user.edit.php:124 disc_prototypes.php:278
 #: host_discovery.php:218 httpconf.php:65
 #: include/classes/setup/CSetupWizard.php:248
 #: include/views/configuration.action.edit.php:944
@@ -12946,11 +12946,11 @@ msgstr "Thụ động"
 msgid "Password"
 msgstr "mật khẩu"
 
-#: app/views/administration.user.edit.php:108
+#: app/views/administration.user.edit.php:115
 msgid "Password (once again)"
 msgstr "Mật khẩu (nhập lại một lần nữa)"
 
-#: app/views/administration.user.edit.php:113
+#: app/views/administration.user.edit.php:121
 msgid "Password is not mandatory for non internal authentication type."
 msgstr "Mật khẩu không bắt buộc đối với loại xác thực không nội bộ."
 
@@ -13010,9 +13010,9 @@ msgstr "Loại chu kỳ"
 msgid "Periods"
 msgstr "Các chu kỳ"
 
-#: app/views/administration.user.edit.php:320
-#: app/views/administration.user.edit.php:340
-#: app/views/administration.user.edit.php:347
+#: app/views/administration.user.edit.php:328
+#: app/views/administration.user.edit.php:348
+#: app/views/administration.user.edit.php:355
 #: app/views/dashboard.sharing.edit.php:24
 #: app/views/dashboard.sharing.edit.php:45
 #: include/views/administration.usergroups.edit.php:103
@@ -13028,7 +13028,7 @@ msgstr "Các chu kỳ"
 msgid "Permissions"
 msgstr "Quyền truy cập"
 
-#: app/views/administration.user.edit.php:345
+#: app/views/administration.user.edit.php:353
 msgid "Permissions can be assigned for user groups only."
 msgstr "Quyền truy cập có thể chỉ được gán cho nhóm người dùng."
 
@@ -13049,12 +13049,12 @@ msgstr "Đặt thuật toán"
 msgid "Plain text"
 msgstr "Văn bản gốc"
 
-#: app/views/administration.user.edit.php:382
-#: app/views/administration.user.edit.php:414
+#: app/views/administration.user.edit.php:390
+#: app/views/administration.user.edit.php:422
 msgid "Play"
 msgstr "Phát"
 
-#: app/views/administration.user.edit.php:362
+#: app/views/administration.user.edit.php:370
 msgid "Play sound"
 msgstr "Phát âm thanh"
 
@@ -13613,7 +13613,7 @@ msgstr "Người nhận (tăng dần)"
 msgid "Recipient (descending)"
 msgstr "Người nhận (giảm dần)"
 
-#: app/views/administration.user.edit.php:376
+#: app/views/administration.user.edit.php:384
 #: include/classes/screens/CScreenProblem.php:1102
 #: include/views/configuration.item.list.php:169
 #: include/views/configuration.trigger.prototype.list.php:131
@@ -13653,7 +13653,7 @@ msgstr "Thời gian phục hồi"
 msgid "Rectangle"
 msgstr "Hình chữ nhật"
 
-#: app/views/administration.user.edit.php:191
+#: app/views/administration.user.edit.php:199
 msgid "Refresh"
 msgstr "làm mới"
 
@@ -13735,9 +13735,9 @@ msgstr "Lệnh từ xa"
 
 #: app/views/administration.mediatype.edit.js.php:7
 #: app/views/administration.mediatype.edit.php:100
-#: app/views/administration.mediatype.edit.php:161
-#: app/views/administration.mediatype.edit.php:179
-#: app/views/administration.user.edit.php:275
+#: app/views/administration.mediatype.edit.php:159
+#: app/views/administration.mediatype.edit.php:178
+#: app/views/administration.user.edit.php:283
 #: app/views/hostmacros.list.html.php:114
 #: app/views/hostmacros.list.html.php:128
 #: app/views/hostmacros.list.html.php:136
@@ -14202,7 +14202,7 @@ msgstr "Chiếm giữ trong hàng"
 msgid "Rows"
 msgstr "Số hàng"
 
-#: app/views/administration.user.edit.php:196
+#: app/views/administration.user.edit.php:204
 msgid "Rows per page"
 msgstr "Số hàng trên mỗi trang"
 
@@ -14628,7 +14628,7 @@ msgstr "Tên script"
 msgid "Script name \"%1$s\" already used in menu path for script \"%2$s\"."
 msgstr "Tên script \"%1$s\" đã được sử dụng trong danh sách đường dẫn cho script \"%2$s\"."
 
-#: app/views/administration.mediatype.edit.php:112
+#: app/views/administration.mediatype.edit.php:110
 msgid "Script parameters"
 msgstr "Tiến trình tham số "
 
@@ -14757,7 +14757,7 @@ msgid "Select widget"
 msgstr "Chọn ô điều khiển"
 
 #: app/views/administration.script.edit.php:82
-#: include/views/monitoring.history.php:176
+#: include/views/monitoring.history.php:174
 msgid "Selected"
 msgstr "Đã chọn"
 
@@ -14815,7 +14815,7 @@ msgstr "Gửi tin nhắn đến các người dùng"
 msgid "Send only to"
 msgstr "Chỉ gửi đến"
 
-#: app/views/administration.user.edit.php:214 app/views/popup.media.php:57
+#: app/views/administration.user.edit.php:222 app/views/popup.media.php:57
 #: app/views/popup.media.php:64 app/views/popup.mediatypetest.edit.php:53
 msgid "Send to"
 msgstr "Gửi tới"
@@ -15162,11 +15162,11 @@ msgstr ""
 msgid "Show problems"
 msgstr "Hiển thị vấn đề"
 
-#: include/views/monitoring.history.php:161
+#: include/views/monitoring.history.php:159
 msgid "Show selected"
 msgstr "Hiển thị lựa chọn"
 
-#: app/views/administration.user.edit.php:432
+#: app/views/administration.user.edit.php:440
 #: app/views/monitoring.problem.view.php:299
 #: include/classes/widgets/forms/CWidgetFormDataOver.php:48
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:76
@@ -15457,7 +15457,7 @@ msgstr "Spanish (es_ES)"
 msgid "Specified script does not exist or you do not have rights on it for action operation command."
 msgstr "Tập lệnh được chỉ định không tồn tại hoặc bạn không có quyền truy cập vào nó cho thao tác lệnh hoạt động."
 
-#: include/views/monitoring.history.php:273 latest.php:387
+#: include/views/monitoring.history.php:271 latest.php:387
 msgid "Specify some filter condition to see the values."
 msgstr "Chỉ định một số điều kiện lọc để xem các giá trị."
 
@@ -15466,7 +15466,7 @@ msgid "Speed"
 msgstr "Tốc độ"
 
 #: app/views/popup.generic.php:503 include/graphs.inc.php:25
-#: include/views/monitoring.history.php:234
+#: include/views/monitoring.history.php:232
 msgid "Stacked"
 msgstr "Xếp chồng"
 
@@ -15623,8 +15623,8 @@ msgstr "Bước có tên \"%1$s\" đã tồn tại."
 msgid "Steps"
 msgstr "Các bước"
 
-#: app/views/administration.user.edit.php:387
-#: app/views/administration.user.edit.php:419
+#: app/views/administration.user.edit.php:395
+#: app/views/administration.user.edit.php:427
 msgid "Stop"
 msgstr "Dừng lại"
 
@@ -15747,7 +15747,7 @@ msgstr "Chuyển đổi phương pháp xác nhận sẽ thiết laoapj la�
 msgid "System boot time. Returns integer (Unix timestamp)"
 msgstr "Thời gian khởi động hệ thống. Trả về kiểu integer (đơn vị dấu thời gian)"
 
-#: app/views/administration.user.edit.php:169 include/users.inc.php:83
+#: app/views/administration.user.edit.php:177 include/users.inc.php:83
 msgid "System default"
 msgstr "Mặc định hệ thống"
 
@@ -16211,7 +16211,7 @@ msgstr "Các yêu cầu thủ tục từ xa không tồn tại / không să�
 msgid "The web scenario application belongs to a different host than the web scenario host."
 msgstr "Ứng dụng web scenario thuộc về một host khác hơn so với host web scenario."
 
-#: app/views/administration.user.edit.php:168
+#: app/views/administration.user.edit.php:176
 msgid "Theme"
 msgstr "Giao diện"
 
@@ -16368,7 +16368,7 @@ msgstr "Hết giờ"
 #: include/classes/screens/CScreenHistory.php:448
 #: include/classes/screens/CScreenPlainText.php:42
 #: include/classes/screens/CScreenPlainText.php:53
-#: include/views/monitoring.history.php:269
+#: include/views/monitoring.history.php:267
 msgid "Timestamp"
 msgstr "Nhãn thời gian"
 
@@ -16695,7 +16695,7 @@ msgstr "Biểu thức khôi phục trigger phải chứa ít nhất một máy c
 msgid "Trigger severities"
 msgstr "Mức độ quan trọng của trigger"
 
-#: app/views/administration.user.edit.php:431 include/actions.inc.php:45
+#: app/views/administration.user.edit.php:439 include/actions.inc.php:45
 msgid "Trigger severity"
 msgstr "Mức độ quan trọng của trigger"
 
@@ -16786,7 +16786,7 @@ msgstr "Hai phần tử sơ đồ nên được chọn"
 #: app/views/administration.mediatype.list.php:66
 #: app/views/administration.script.edit.php:42
 #: app/views/administration.script.list.php:57
-#: app/views/administration.user.edit.php:214
+#: app/views/administration.user.edit.php:222
 #: app/views/dashboard.sharing.edit.php:73
 #: app/views/monitoring.widget.actionlog.view.php:31
 #: app/views/popup.generic.php:87 app/views/popup.media.php:55
@@ -16899,7 +16899,7 @@ msgstr "UNKNOWN"
 msgid "URL"
 msgstr "URL"
 
-#: app/views/administration.user.edit.php:201
+#: app/views/administration.user.edit.php:209
 msgid "URL (after login)"
 msgstr "URL (sau khi đăng nhập)"
 
@@ -17181,8 +17181,8 @@ msgstr "Up"
 #: app/views/administration.mediatype.edit.php:320
 #: app/views/administration.proxy.edit.php:132
 #: app/views/administration.script.edit.php:129
-#: app/views/administration.user.edit.php:445
-#: app/views/administration.user.edit.php:466
+#: app/views/administration.user.edit.php:453
+#: app/views/administration.user.edit.php:474
 #: app/views/dashboard.sharing.edit.php:100
 #: app/views/monitoring.acknowledge.edit.php:87
 #: app/views/popup.httpstep.php:177 app/views/popup.media.php:111
@@ -17317,7 +17317,7 @@ msgstr "Sử dụng yêu cầu số lượng lớn"
 msgid "Use custom event status colours"
 msgstr "Sử dụng màu trạng thái sự kiện tùy chỉnh"
 
-#: app/views/administration.user.edit.php:214 app/views/popup.media.php:73
+#: app/views/administration.user.edit.php:222 app/views/popup.media.php:73
 msgid "Use if severity"
 msgstr "Sử dụng nếu mức độ quan trọng"
 
@@ -17329,7 +17329,7 @@ msgstr "Sử dùng trong các action"
 msgid "Used in items"
 msgstr "item đã được sử dụng"
 
-#: app/views/administration.user.edit.php:205 httpconf.php:59
+#: app/views/administration.user.edit.php:213 httpconf.php:59
 #: include/actions.inc.php:1752 include/actions.inc.php:1806
 #: include/actions.inc.php:2021 include/audit.inc.php:24
 #: include/classes/setup/CSetupWizard.php:245 include/hosts.inc.php:61
@@ -17384,7 +17384,7 @@ msgstr "Người dùng được thêm vào"
 msgid "User agent string"
 msgstr "Chuỗi người dùng agent"
 
-#: app/views/administration.user.edit.php:311
+#: app/views/administration.user.edit.php:319
 msgid "User can't change type for himself"
 msgstr "Người dùng không thể thay đổi kiểu cho chính mình"
 
@@ -17544,8 +17544,8 @@ msgstr "Chia sẻ của người dùng bị thiếu tham số: %1$s cho sơ đ�
 msgid "User sharing is missing parameters: %1$s for screen \"%2$s\"."
 msgstr "Chia sẻ của người dùng bị thiếu tham số: %1$s cho screen \"%2$s\"."
 
-#: app/views/administration.user.edit.php:310
-#: app/views/administration.user.edit.php:315
+#: app/views/administration.user.edit.php:318
+#: app/views/administration.user.edit.php:323
 #: app/views/administration.user.list.php:61
 #: app/views/administration.user.list.php:86
 msgid "User type"
@@ -17816,7 +17816,7 @@ msgstr "Thời gian hoạt động của máy ảo VMware, <url> - dịch vu�
 msgid "Validation"
 msgstr ""
 
-#: app/views/administration.mediatype.edit.php:146
+#: app/views/administration.mediatype.edit.php:144
 #: app/views/hostmacros.list.html.php:46
 #: app/views/monitoring.widget.plaintext.view.php:46
 #: app/views/popup.httpstep.php:66 app/views/popup.httpstep.php:92
@@ -17848,7 +17848,7 @@ msgstr ""
 #: include/views/configuration.triggers.list.php:197
 #: include/views/configuration.triggers.massupdate.php:86
 #: include/views/monitoring.history.php:152
-#: include/views/monitoring.history.php:271
+#: include/views/monitoring.history.php:269
 #, c-format
 msgid "Value"
 msgstr "Giá trị"
@@ -18163,7 +18163,7 @@ msgid "Welcome to"
 msgstr "Chào mừng đến với"
 
 #: app/controllers/CControllerPopupMedia.php:115
-#: app/views/administration.user.edit.php:214 app/views/popup.media.php:68
+#: app/views/administration.user.edit.php:222 app/views/popup.media.php:68
 msgid "When active"
 msgstr "Khi hoạt động"
 
@@ -18459,7 +18459,7 @@ msgstr "hôm qua"
 msgid "You are logged in as \"%1$s\"."
 msgstr "Bạn vừa đăng nhập vào \"%1$s\"."
 
-#: app/views/administration.user.edit.php:155
+#: app/views/administration.user.edit.php:163
 msgid "You are not able to choose some of the languages, because locales for them are not installed on the web server."
 msgstr "Bạn không thể chọn một số trong các ngôn ngữ, bởi vì địa chỉ của chúng không được cài đặt trên web máy chủ."
 
@@ -18831,15 +18831,15 @@ msgstr ""
 msgid "an unsigned integer is expected"
 msgstr ""
 
-#: include/views/monitoring.history.php:172
+#: include/views/monitoring.history.php:170
 msgid "as Blue"
 msgstr "as Blue"
 
-#: include/views/monitoring.history.php:171
+#: include/views/monitoring.history.php:169
 msgid "as Green"
 msgstr "as Green"
 
-#: include/views/monitoring.history.php:170
+#: include/views/monitoring.history.php:168
 msgid "as Red"
 msgstr "as Red"
 
@@ -19232,7 +19232,7 @@ msgstr "Hình ảnh"
 msgid "in"
 msgstr "in"
 
-#: app/views/administration.user.edit.php:330
+#: app/views/administration.user.edit.php:338
 #: include/views/administration.usergroups.edit.php:116
 msgid "including subgroups"
 msgstr "bao gồm các nhóm nhỏ"
@@ -19553,7 +19553,7 @@ msgstr "số"
 msgid "of"
 msgstr "of"
 
-#: app/views/administration.user.edit.php:249
+#: app/views/administration.user.edit.php:257
 #: include/classes/setup/CFrontendSetup.php:253
 #: include/classes/setup/CFrontendSetup.php:312
 #: include/classes/setup/CFrontendSetup.php:329
@@ -19581,7 +19581,7 @@ msgstr "off"
 msgid "old event tag name"
 msgstr ""
 
-#: app/views/administration.user.edit.php:249
+#: app/views/administration.user.edit.php:257
 #: include/classes/setup/CFrontendSetup.php:312
 #: include/classes/setup/CFrontendSetup.php:329
 #: include/classes/setup/CFrontendSetup.php:350
