@@ -2217,8 +2217,10 @@ static void	lld_item_update(const zbx_lld_item_prototype_t *item_prototype, cons
 
 	buffer = zbx_strdup(buffer, item_prototype->snmp_oid);
 
-	if (ITEM_TYPE_SNMP == item_prototype->type && FAIL == substitute_key_macros(&buffer, NULL, NULL, jp_row,
-			lld_macro_paths, MACRO_TYPE_SNMP_OID, err, sizeof(err)))
+	if ((ITEM_TYPE_SNMPv1 == item_prototype->type || ITEM_TYPE_SNMPv2c == item_prototype->type ||
+			ITEM_TYPE_SNMPv3 == item_prototype->type) &&
+			FAIL == substitute_key_macros(&buffer, NULL, NULL, jp_row, lld_macro_paths, MACRO_TYPE_SNMP_OID,
+			err, sizeof(err)))
 	{
 		*error = zbx_strdcatf(*error, "Cannot update item, error in SNMP OID key parameters: %s.\n", err);
 	}
