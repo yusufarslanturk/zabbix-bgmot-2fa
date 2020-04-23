@@ -449,7 +449,7 @@ class testPageAdministrationMediaTypes extends CWebTest {
 				[
 					'name' => 'Reference webhook',
 					'webhook' => true,
-					'parameters' => ['URL', 'To', 'Subject', 'Message', 'Response'],
+					'parameters' => ['Message', 'Response', 'Subject', 'To', 'URL'],
 					'error' => [
 						'Connection to Zabbix server "localhost" refused. Possible reasons:',
 						'1. Incorrect server IP/DNS in the "zabbix.conf.php";',
@@ -479,8 +479,9 @@ class testPageAdministrationMediaTypes extends CWebTest {
 		$dialog = $this->query('id:overlay_dialogue')->asOverlayDialog()->one()->waitUntilReady();
 		$this->assertEquals('Test media type', $dialog->getTitle());
 		$form = $dialog->asForm();
-		$fields = CTestArrayHelper::get($data, 'parameters', ['Send to', 'Subject', 'Message']);
-		$this->assertEquals($fields, $form->getLabels()->asText());
+		$labels = $form->getLabels()->asText();
+		sort($labels);
+		$this->assertEquals(CTestArrayHelper::get($data, 'parameters', ['Message', 'Send to', 'Subject']), $labels);
 		if (CTestArrayHelper::get($data, 'webhook', false)) {
 			$this->assertTrue($form->getField('Response')->isEnabled(false));
 		}
