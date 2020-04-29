@@ -485,7 +485,7 @@ A.F....... [ZBXNEXT-5344] extended LLD preprocessing to support XML related prep
 ..F....... [ZBX-11280] implemented auto-resizing of macro and tag fields on user input (agriscenko)
 ..F....... [ZBXNEXT-5251] extended widget "Problems by severity" with aggregated view (ashubin, vasilijs)
 ..F....... [ZBX-11299] changed font for fields of trigger expressions and scripts to monospaced (agriscenko)
-..F....... [ZBX-16157] moved Adminitration->Users pages to MVC framework (Ivo, Sasha)
+..F....... [ZBX-16157] moved Administration->Users pages to MVC framework (Ivo, Sasha)
 
 Bug fixes:
 ..F....... [ZBX-16501] fixed log out form being resubmitted when user is already logged back in another tab (Ivo)
