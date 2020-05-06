@@ -304,7 +304,7 @@ func main() {
 	}
 	switch agent.Options.DebugLevel {
 	case 0:
-		logLevel = log.Empty
+		logLevel = log.Info
 	case 1:
 		logLevel = log.Crit
 	case 2:
