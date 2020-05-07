@@ -38,7 +38,7 @@ const Warning = 3
 const Debug = 4
 const Trace = 5
 
-const Empty = 127
+const None = -1
 
 const Undefined = 0
 const System = 1
@@ -61,7 +61,7 @@ var logStat LogStat
 var logAccess sync.Mutex
 
 func CheckLogLevel(level int) bool {
-	if level > logLevel || Empty == logLevel {
+	if level > logLevel {
 		return false
 	}
 	return true
@@ -69,8 +69,8 @@ func CheckLogLevel(level int) bool {
 
 func Level() string {
 	switch logLevel {
-	case Empty:
-		return "empty"
+	case None:
+		return "none"
 	case Info:
 		return "info"
 	case Crit:

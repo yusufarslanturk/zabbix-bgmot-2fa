@@ -24,22 +24,31 @@ import (
 )
 import "zabbix.com/pkg/log"
 
+const Empty = 0
+const Crit = 1
+const Err = 2
+const Warning = 3
+const Debug = 4
+const Trace = 5
+
+const Info = 127
+
 //export handleZabbixLog
 func handleZabbixLog(clevel C.int, cmessage *C.char) {
 	message := C.GoString(cmessage)
 	switch int(clevel) {
-	case log.Empty:
-	case log.Info:
+	case Empty:
+	case Info:
 		log.Infof(message)
-	case log.Crit:
+	case Crit:
 		log.Critf(message)
-	case log.Err:
+	case Err:
 		log.Errf(message)
-	case log.Warning:
+	case Warning:
 		log.Warningf(message)
-	case log.Debug:
+	case Debug:
 		log.Debugf(message)
-	case log.Trace:
+	case Trace:
 		log.Tracef(message)
 	}
 }
