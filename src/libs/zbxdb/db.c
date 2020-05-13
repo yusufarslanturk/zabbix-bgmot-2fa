@@ -506,7 +506,8 @@ int	zbx_db_connect(char *host, char *user, char *password, char *dbname, char *d
 		ret = ZBX_DB_FAIL;
 	}
 
-	if (NULL == mysql_real_connect(conn, host, user, password, dbname, port, dbsocket, CLIENT_MULTI_STATEMENTS))
+	if (ZBX_DB_OK == ret && NULL == mysql_real_connect(conn, host, user, password, dbname, port, dbsocket,
+			CLIENT_MULTI_STATEMENTS))
 	{
 		zbx_db_errlog(ERR_Z3001, mysql_errno(conn), mysql_error(conn), dbname);
 		ret = ZBX_DB_FAIL;
