@@ -181,6 +181,7 @@ AC_DEFUN([AX_LIB_MYSQL],
 
             unset _save_mysql_ldflags
             unset _save_mysql_cflags
+            unset _save_mysql_libs
 
             MYSQL_VERSION=`$MYSQL_CONFIG --version`
 
