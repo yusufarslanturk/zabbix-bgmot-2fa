@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-18 12:32+0300\n"
-"PO-Revision-Date: 2020-05-18 09:20+0300\n"
+"PO-Revision-Date: 2020-05-25 07:57+0300\n"
 "Last-Translator: Yurii <jurijs.klopovskis@zabbix.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: vi\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1589786404.000000\n"
+"X-POOTLE-MTIME: 1590386223.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:67
 #: include/classes/db/OracleDbBackend.php:86
@@ -87,7 +87,7 @@ msgstr "%1$d khớp với %2$s được tìm thấy"
 #, c-format
 msgid "%1$d of %3$d%2$s problem is shown"
 msgid_plural "%1$d of %3$d%2$s problems are shown"
-msgstr[0] ""
+msgstr[0] "%1$d của %3$d%2$s vấn đề được hiển thị%1$d của %3$d%2$s vấn đề được hiển thị"
 
 #: chart4.php:94 chart5.php:89
 #, c-format
@@ -98,7 +98,7 @@ msgstr "%1$s (năm %2$s)"
 #, c-format
 msgid "%1$s Item"
 msgid_plural "%1$s Items"
-msgstr[0] ""
+msgstr[0] "%1$s Mục%1$s Các mục"
 
 #: include/classes/api/services/CItemGeneral.php:2321
 #: include/classes/import/readers/CXmlImportReader.php:46
@@ -221,6 +221,7 @@ msgid "%4$s failed login attempt logged. Last failed attempt was from %1$s on %2
 msgid_plural "%4$s failed login attempts logged. Last failed attempt was from %1$s on %2$s at %3$s."
 msgstr[0] "%4$s lần đăng nhập thất bại được ghi nhận. Đăng nhập thất bại cuối từ %1$s trên %2$s lúc %3$s.%4$s lần đăng nhập thất bại được ghi nhận. Đăng nhập thất bại cuối từ %1$s trên %2$s lúc %3$s."
 
+# Deleting for now because this string breaks Zabbix release procedure.
 #: include/classes/screens/CScreenDiscovery.php:213
 #, c-format
 msgid "%d device"
