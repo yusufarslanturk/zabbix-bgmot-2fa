@@ -23,6 +23,13 @@ require_once 'vendor/autoload.php';
 require_once dirname(__FILE__).'/CElementQuery.php';
 require_once dirname(__FILE__).'/CommandExecutor.php';
 
+use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\Chrome\ChromeOptions;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Facebook\WebDriver\WebDriverDimension;
+use Facebook\WebDriver\Exception\NoSuchAlertException;
+use Facebook\WebDriver\WebDriverExpectedCondition;
+
 /**
  * Web page implementation.
  */
@@ -82,10 +89,7 @@ class CPage {
 			$capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
 		}
 
-		$this->driver = RemoteWebDriver::create('http://'.
-				(defined('PHPUNIT_DRIVER_ADDRESS') ? PHPUNIT_DRIVER_ADDRESS : 'localhost').
-				':4444/wd/hub', $capabilities
-		);
+		$this->driver = RemoteWebDriver::create('http://'.PHPUNIT_DRIVER_ADDRESS.':4444/wd/hub', $capabilities);
 
 		$this->driver->manage()->window()->setSize(
 				new WebDriverDimension(self::DEFAULT_PAGE_WIDTH, self::DEFAULT_PAGE_HEIGHT)
@@ -386,7 +390,7 @@ class CPage {
 		try {
 			return $this->driver->switchTo()->alert()->getText();
 		}
-		catch (NoAlertOpenException $exception) {
+		catch (NoSuchAlertException $exception) {
 			return null;
 		}
 	}

@@ -59,19 +59,29 @@ static duk_ret_t	es_zabbix_ctor(duk_context *ctx)
 
 /******************************************************************************
  *                                                                            *
- * Function: es_zabbix_status                                            *
+ * Function: es_zabbix_status                                                 *
  *                                                                            *
- * Purpose: Curlzabbix.Status method                                     *
+ * Purpose: Curlzabbix.Status method                                          *
  *                                                                            *
  ******************************************************************************/
 static duk_ret_t	es_zabbix_log(duk_context *ctx)
 {
-	zabbix_log(duk_to_int(ctx, 0), "%s", duk_to_string(ctx, 1));
+	char	*utf8 = NULL;
+
+	if (SUCCEED != zbx_cesu8_to_utf8(duk_to_string(ctx, 1), &utf8))
+	{
+		utf8 = zbx_strdup(utf8, duk_to_string(ctx, 1));
+		zbx_replace_invalid_utf8(utf8);
+	}
+
+	zabbix_log(duk_to_int(ctx, 0), "%s", utf8);
+	zbx_free(utf8);
+
 	return 0;
 }
 
 static const duk_function_list_entry	zabbix_methods[] = {
-	{"Log", es_zabbix_log, 2},
+	{"Log",			es_zabbix_log,		2},
 	{NULL, NULL, 0}
 };
 

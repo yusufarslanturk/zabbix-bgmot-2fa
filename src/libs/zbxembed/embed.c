@@ -24,6 +24,7 @@
 #include "embed.h"
 #include "httprequest.h"
 #include "zabbix.h"
+#include "global.h"
 
 #include "duktape.h"
 
@@ -208,6 +209,8 @@ int	zbx_es_init_env(zbx_es_t *es, char **error)
 	duk_push_global_object(es->env->ctx);
 	duk_del_prop_string(es->env->ctx, -1, "Duktape");
 	duk_pop(es->env->ctx);
+
+	es_init_global_functions(es);
 
 	/* put environment object to be accessible from duktape C calls */
 	duk_push_global_stash(es->env->ctx);
@@ -431,7 +434,7 @@ int	zbx_es_execute(zbx_es_t *es, const char *script, const char *code, int size,
 	void		*buffer;
 	volatile int	ret = FAIL;
 
-	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
+	zabbix_log(LOG_LEVEL_DEBUG, "In %s() param:%s", __func__, param);
 
 	if (SUCCEED == zbx_es_fatal_error(es))
 	{
@@ -482,12 +485,18 @@ int	zbx_es_execute(zbx_es_t *es, const char *script, const char *code, int size,
 	if (0 == duk_check_type(es->env->ctx, -1, DUK_TYPE_UNDEFINED))
 	{
 		if (0 != duk_check_type(es->env->ctx, -1, DUK_TYPE_NULL))
+		{
+			ret = SUCCEED;
 			*output = NULL;
+			zabbix_log(LOG_LEVEL_DEBUG, "%s() output: null", __func__);
+		}
 		else
-			*output = zbx_strdup(NULL, duk_safe_to_string(es->env->ctx, -1));
-
-		zabbix_log(LOG_LEVEL_DEBUG, "%s() output:'%s'", __func__, ZBX_NULL2EMPTY_STR(*output));
-		ret = SUCCEED;
+		{
+			if (SUCCEED != (ret = zbx_cesu8_to_utf8(duk_safe_to_string(es->env->ctx, -1), output)))
+				*error = zbx_strdup(*error, "could not convert return value to utf8");
+			else
+				zabbix_log(LOG_LEVEL_DEBUG, "%s() output:'%s'", __func__, *output);
+		}
 	}
 	else
 		*error = zbx_strdup(*error, "undefined return value");
@@ -503,7 +512,7 @@ out:
 /******************************************************************************
  *                                                                            *
  * Function: zbx_es_set_timeout                                               *
- *                                                                            *
+ *                                              es_init_global_functions                              *
  * Purpose: sets script execution timeout                                     *
  *                                                                            *
  * Parameters: es      - [IN] the embedded scripting engine                   *

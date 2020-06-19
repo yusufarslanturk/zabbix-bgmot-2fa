@@ -22,6 +22,7 @@
 
 #include "sysinc.h"
 #include "zbxtypes.h"
+#include "module.h"
 #include "version.h"
 #include "md5.h"
 
@@ -963,8 +964,9 @@ int	is_hex_n_range(const char *str, size_t n, void *value, size_t size, zbx_uint
 #define is_uint31(str, value) \
 	is_uint_n_range(str, ZBX_SIZE_T_MAX, value, 4, 0x0, 0x7FFFFFFF)
 
+#define ZBX_MAX_UINT31_1	0x7FFFFFFE
 #define is_uint31_1(str, value) \
-	is_uint_n_range(str, ZBX_SIZE_T_MAX, value, 4, 0x0, 0x7FFFFFFE)
+	is_uint_n_range(str, ZBX_SIZE_T_MAX, value, 4, 0x0, ZBX_MAX_UINT31_1)
 
 #define is_uint_range(str, value, min, max) \
 	is_uint_n_range(str, ZBX_SIZE_T_MAX, value, sizeof(unsigned int), min, max)
@@ -983,9 +985,9 @@ void	zbx_remove_chars(char *str, const char *charlist);
 #define ZBX_WHITESPACE			" \t\r\n"
 #define zbx_remove_whitespace(str)	zbx_remove_chars(str, ZBX_WHITESPACE)
 void	del_zeros(char *s);
-int	get_param(const char *param, int num, char *buf, size_t max_len);
+int	get_param(const char *param, int num, char *buf, size_t max_len, zbx_request_parameter_type_t *type);
 int	num_param(const char *param);
-char	*get_param_dyn(const char *param, int num);
+char	*get_param_dyn(const char *param, int num, zbx_request_parameter_type_t *type);
 
 /******************************************************************************
  *                                                                            *
@@ -1072,6 +1074,7 @@ double	zbx_time(void);
 void	zbx_timespec(zbx_timespec_t *ts);
 double	zbx_current_time(void);
 void	zbx_get_time(struct tm *tm, long *milliseconds, zbx_timezone_t *tz);
+long	zbx_get_timezone_offset(time_t t, struct tm *tm);
 int	zbx_utc_time(int year, int mon, int mday, int hour, int min, int sec, int *t);
 int	zbx_day_in_month(int year, int mon);
 
@@ -1207,6 +1210,8 @@ size_t	zbx_strlen_utf8_nbytes(const char *text, size_t maxlen);
 int	zbx_is_utf8(const char *text);
 #define ZBX_UTF8_REPLACE_CHAR	'?'
 void	zbx_replace_invalid_utf8(char *text);
+
+int	zbx_cesu8_to_utf8(const char *cesu8, char **utf8);
 
 void	dos2unix(char *str);
 int	str2uint64(const char *str, const char *suffixes, zbx_uint64_t *value);

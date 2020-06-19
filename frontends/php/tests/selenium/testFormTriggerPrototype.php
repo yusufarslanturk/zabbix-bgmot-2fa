@@ -21,6 +21,8 @@
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
 require_once dirname(__FILE__).'/../../include/items.inc.php';
 
+use Facebook\WebDriver\WebDriverBy;
+
 /**
  * Test the creation of inheritance of new objects on a previously linked template.
  *
@@ -297,7 +299,7 @@ class testFormTriggerPrototype extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//textarea[@id='expr_temp']", 'rows', 7);
 			$this->zbxTestAssertAttribute("//textarea[@id='expr_temp']", 'readonly');
 			$this->zbxTestTextPresent('Close expression constructor');
-			$this->zbxTestAssertNotVisibleId('expression');
+			$this->zbxTestAssertNotVisibleXpath('//input[@name="expression"]');
 
 			if (!isset($data['form'])) {
 				$this->zbxTestAssertVisibleXpath("//li[@id='expression_row']//button[contains(@onclick, 'add_expression') and text()='Add']");
@@ -584,7 +586,7 @@ class testFormTriggerPrototype extends CLegacyWebTest {
 					'expected' => TEST_BAD,
 					'description' => 'MyTrigger_CheckWrongUrl',
 					'expression' => '{Simple form test host:someItem.uptime.last(0)}<0',
-					'url' => 'www.zabbix.com',
+					'url' => 'javascript:alert(123);',
 					'error_msg' => 'Cannot add trigger prototype',
 					'errors' => [
 						'Wrong value for url field.'

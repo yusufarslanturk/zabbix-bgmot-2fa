@@ -22,6 +22,8 @@ require_once 'vendor/autoload.php';
 
 require_once dirname(__FILE__).'/../CElement.php';
 
+use Facebook\WebDriver\Remote\RemoteWebElement;
+
 /**
  * Multiselect element.
  */
@@ -40,12 +42,14 @@ class CMultiselectElement extends CElement {
 	/**
 	 * @inheritdoc
 	 */
-	public function __construct(RemoteWebElement $element, $options = []) {
-		parent::__construct($element, $options);
+	public static function createInstance(RemoteWebElement $element, $options = []) {
+		$instance = parent::createInstance($element, $options);
 
-		if ($this->mode === null) {
-			$this->mode = self::$default_mode;
+		if ($instance->mode === null) {
+			$instance->mode = self::$default_mode;
 		}
+
+		return $instance;
 	}
 
 	/**
@@ -186,7 +190,7 @@ class CMultiselectElement extends CElement {
 		$buttons = [];
 		$xpath = 'xpath:.//button';
 
-		foreach ($this->query($xpath)->all() as $button) {
+		foreach ($this->query($xpath)->waitUntilVisible()->all() as $button) {
 			$buttons[$button->getText()] = $button;
 		}
 

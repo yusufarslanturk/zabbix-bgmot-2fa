@@ -2450,7 +2450,10 @@ cancel_warning:
 
 	/* 3. Delete cancelled, completed escalations. */
 	if (0 != escalationids.values_num)
+	{
+		zbx_vector_uint64_sort(&escalationids, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 		DBexecute_multiple_query("delete from escalations where", "escalationid", &escalationids);
+	}
 
 	DBcommit();
 out:

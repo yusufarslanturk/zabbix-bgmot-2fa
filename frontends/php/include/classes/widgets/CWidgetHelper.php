@@ -46,15 +46,17 @@ class CWidgetHelper {
 	 */
 	public static function createFormList($dialogue_name, $type, $view_mode, $known_widget_types, $field_rf_rate) {
 		return (new CFormList())
-			->addRow((new CLabel(_('Type'), 'type')), [
-					(new CComboBox('type', $type, 'updateWidgetConfigDialogue()', $known_widget_types)),
+			->addItem((new CListItem([
+					(new CDiv(new CLabel(_('Type'), 'type')))->addClass(ZBX_STYLE_TABLE_FORMS_TD_LEFT),
+					(new CDiv(new CComboBox('type', $type, 'updateWidgetConfigDialogue()', $known_widget_types)))
+						->addClass(ZBX_STYLE_TABLE_FORMS_TD_RIGHT),
 					(new CDiv((new CCheckBox('show_header'))
-						->setLabel(_('Show header'))
-						->setLabelPosition(CCheckBox::LABEL_POSITION_LEFT)
-						->setId('show_header')
-						->setChecked($view_mode == ZBX_WIDGET_VIEW_MODE_NORMAL)
-					))->addClass(ZBX_STYLE_TABLE_FORMS_SECOND_COLUMN)
-				]
+							->setLabel(_('Show header'))
+							->setLabelPosition(CCheckBox::LABEL_POSITION_LEFT)
+							->setId('show_header')
+							->setChecked($view_mode == ZBX_WIDGET_VIEW_MODE_NORMAL)))
+						->addClass(ZBX_STYLE_TABLE_FORMS_SECOND_COLUMN)
+				]))->addClass('table-forms-row-with-second-field')
 			)
 			->addRow(_('Name'),
 				(new CTextBox('name', $dialogue_name))
@@ -638,6 +640,7 @@ class CWidgetHelper {
 					(new CButton())
 						->setAttribute('title', _('Delete'))
 						->addClass(ZBX_STYLE_REMOVE_BTN)
+						->removeId()
 				))
 					->addClass(ZBX_STYLE_COLUMN_5)
 			]))
@@ -677,9 +680,7 @@ class CWidgetHelper {
 	 * @return CList
 	 */
 	public static function getGraphOverride($field, $form_name) {
-		$list = (new CList())
-			->addClass(ZBX_STYLE_OVERRIDES_LIST)
-			->setId('overrides');
+		$list = (new CList())->addClass(ZBX_STYLE_OVERRIDES_LIST);
 
 		$values = $field->getValue();
 
@@ -942,7 +943,8 @@ class CWidgetHelper {
 						(new CButton())
 							->addClass(ZBX_STYLE_COLOR_PREVIEW_BOX)
 							->addStyle('background-color: #'.$value['color'].';')
-							->setAttribute('title', $is_opened ? _('Collapse') : _('Expand')),
+							->setAttribute('title', $is_opened ? _('Collapse') : _('Expand'))
+							->removeId(),
 						(new CPatternSelect([
 							'name' => $field_name.'['.$row_num.'][hosts][]',
 							'object_name' => 'hosts',
@@ -987,6 +989,7 @@ class CWidgetHelper {
 					(new CButton())
 						->setAttribute('title', _('Delete'))
 						->addClass(ZBX_STYLE_REMOVE_BTN)
+						->removeId()
 				]))->addClass(ZBX_STYLE_COLUMN_5)
 			]))
 				->addClass(ZBX_STYLE_LIST_ACCORDION_ITEM_HEAD)
