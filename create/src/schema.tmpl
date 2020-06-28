@@ -424,12 +424,25 @@ FIELD		|users_status	|t_integer	|'0'	|NOT NULL	|0
 FIELD		|debug_mode	|t_integer	|'0'	|NOT NULL	|0
 UNIQUE		|1		|name
 
+TABLE|adusrgrp|adusrgrpid|ZBX_DATA
+FIELD		|adusrgrpid	|t_id		|	|NOT NULL	|0
+FIELD		|name		|t_varchar(64)	|''	|NOT NULL	|0
+FIELD		|user_type	|t_integer	|'1'	|NOT NULL	|0
+UNIQUE		|1		|name
+
 TABLE|users_groups|id|ZBX_DATA
 FIELD		|id		|t_id		|	|NOT NULL	|0
 FIELD		|usrgrpid	|t_id		|	|NOT NULL	|0			|1|usrgrp
 FIELD		|userid		|t_id		|	|NOT NULL	|0			|2|users
 UNIQUE		|1		|usrgrpid,userid
 INDEX		|2		|userid
+
+TABLE|adgroups_groups|id|ZBX_DATA
+FIELD		|id		|t_id		|	|NOT NULL	|0
+FIELD		|usrgrpid	|t_id		|	|NOT NULL	|0			|1|usrgrp
+FIELD		|adusrgrpid	|t_id		|	|NOT NULL	|0			|2|adusrgrp
+UNIQUE		|1		|usrgrpid,adusrgrpid
+INDEX		|2		|adusrgrpid
 
 TABLE|scripts|scriptid|ZBX_DATA
 FIELD		|scriptid	|t_id		|	|NOT NULL	|0
@@ -636,6 +649,11 @@ FIELD		|saml_sign_logout_responses	|t_integer	|'0'	|NOT NULL	|ZBX_NODATA
 FIELD		|saml_encrypt_nameid	|t_integer	|'0'	|NOT NULL	|ZBX_NODATA
 FIELD		|saml_encrypt_assertions|t_integer	|'0'	|NOT NULL	|ZBX_NODATA
 FIELD		|saml_case_sensitive	|t_integer	|'0'	|NOT NULL	|ZBX_NODATA
+FIELD		|2fa_type	|t_integer	|'0'	|NOT NULL	|ZBX_NODATA
+FIELD		|2fa_duo_api_hostname|t_varchar(255)	|''	|NOT NULL	|ZBX_NODATA
+FIELD		|2fa_duo_integration_key|t_varchar(255)	|''	|NOT NULL	|ZBX_NODATA
+FIELD		|2fa_duo_secret_key|t_varchar(255)	|''	|NOT NULL	|ZBX_NODATA
+FIELD		|2fa_duo_a_key|t_varchar(40)	|''	|NOT NULL	|ZBX_NODATA
 INDEX		|1		|alert_usrgrpid
 INDEX		|2		|discovery_groupid
 
