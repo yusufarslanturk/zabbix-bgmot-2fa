@@ -166,8 +166,8 @@ function getMainMenu(): CMenu {
 						->setAction('authentication.edit')
 						->setAliases(['authentication.update']),
 					(new CMenuItem(_('2FA')))
-						->setAction('2fa.edit')
-						->setAliases(['2fa.update']),
+						->setAction('twofa.edit')
+						->setAliases(['twofa.update']),
 					(new CMenuItem(_('User groups')))
 						->setAction('usergroup.list')
 						->setAliases(['usergroup.edit']),
