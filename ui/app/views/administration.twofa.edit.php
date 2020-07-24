@@ -18,6 +18,7 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
+$this->includeJsFile('administration.twofa.edit.js.php');
 
 $widget = (new CWidget())->setTitle(_('Two factor authentication'));
 
@@ -27,49 +28,54 @@ $twofaForm = (new CForm())->setName('twofaForm');
 // create form list
 $twofaFormList = new CFormList('twofaList');
 
-// append config radio buttons to form list
+// append 2fa_type radio buttons to form list
 $twofaFormList->addRow(_('Two factor authentication'),
-	(new CRadioButtonList('config', (int) $this->data['config']['2fa_type']))
+	(new CRadioButtonList('2fa_type', (int) $data['2fa_type']))
 		->addValue(_('None'), ZBX_AUTH_2FA_NONE, null, 'submit()')
 		->addValue(_('DUO'), ZBX_AUTH_2FA_DUO, null, 'submit()')
 		->setModern(true)
 );
 
+// Add current value of 2fa_type
+//+++$twofaForm->addVar('db_2fa_type', $data['2fa_type']);
+$twofaForm->addVar('action', $data['action_submit']);
+
 // append DUO fields to form list
-if ($this->data['config']['2fa_type'] == ZBX_AUTH_2FA_DUO) {
+if ($data['2fa_type'] == ZBX_AUTH_2FA_DUO) {
 	$twofaFormList->addRow(
 		_('API hostname'),
-		(new CTextBox('2fa_duo_api_hostname', $this->data['config']['2fa_duo_api_hostname']))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		(new CTextBox('2fa_duo_api_hostname', $data['2fa_duo_api_hostname']))
+			->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 	);
 	$twofaFormList->addRow(
 		_('Integration key'),
-		(new CTextBox('2fa_duo_integration_key', $this->data['config']['2fa_duo_integration_key']))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		(new CTextBox('2fa_duo_integration_key', $data['2fa_duo_integration_key']))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 	);
 	$twofaFormList->addRow(
 		_('Secret key'),
-		(new CPassBox('2fa_duo_secret_key', $this->data['config']['2fa_duo_secret_key']))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		(new CPassBox('2fa_duo_secret_key', $data['2fa_duo_secret_key']))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 	);
 	$twofaFormList->addRow(
 		_('40 characters long custom key'),
-		(new CPassBox('2fa_duo_a_key', $this->data['config']['2fa_duo_a_key'], 40))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		(new CPassBox('2fa_duo_a_key', $data['2fa_duo_a_key'], 40))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 	);
 }
 
 // append form list to tab
 $twofaTab = new CTabView();
-$twofaTab->addTab('twofaTab', $this->data['title'], $twofaFormList);
+$twofaTab->addTab('twofaTab', /*+++$data['title']*/ '2FA', $twofaFormList);
 
 // create save button
 $saveButton = new CSubmit('update', _('Update'));
-if ($this->data['is_2fa_type_changed']) {
+/*+++if ($data['is_2fa_type_changed']) {
 	$saveButton->onClick('javascript: if (confirm('.
 		CJs::encodeJson(_('Switching two factor authentication method will reset all except this session! Continue?')).')) {'.
 		'jQuery("#twofaForm").submit(); return true; } else { return false; }'
 	);
 }
-elseif ($this->data['config']['2fa_type'] != ZBX_AUTH_2FA_DUO) {
+elseif ($data['2fa_type'] != ZBX_AUTH_2FA_DUO) {
 	$saveButton->setAttribute('disabled', 'true');
-}
+}*/
 
 $twofaTab->setFooter(makeFormFooter($saveButton));
 
@@ -79,4 +85,4 @@ $twofaForm->addItem($twofaTab);
 // append form to widget
 $widget->addItem($twofaForm);
 
-return $widget;
+$widget->show();

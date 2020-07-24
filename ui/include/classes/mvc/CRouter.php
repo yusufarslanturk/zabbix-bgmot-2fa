@@ -58,6 +58,8 @@ class CRouter {
 		'auditlog.list'					=> ['CControllerAuditLogList',						'layout.htmlpage',		'reports.auditlog.list'],
 		'authentication.edit'			=> ['CControllerAuthenticationEdit',				'layout.htmlpage',		'administration.authentication.edit'],
 		'authentication.update'			=> ['CControllerAuthenticationUpdate',				null,					null],
+		'twofa.edit'		=> ['CControllerTwofaEdit',				'layout.htmlpage',		'administration.twofa.edit'],
+		'twofa.update'		=> ['CControllerTwofaUpdate',				null,				null],
 		'autoreg.edit'					=> ['CControllerAutoregEdit',						'layout.htmlpage',		'administration.autoreg.edit'],
 		'autoreg.update'				=> ['CControllerAutoregUpdate',						null,					null],
 		'charts.view'					=> ['CControllerChartsView',						'layout.htmlpage',		'monitoring.charts.view'],
