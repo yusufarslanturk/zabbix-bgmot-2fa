@@ -37,7 +37,6 @@ $twofaFormList->addRow(_('Two factor authentication'),
 );
 
 // Add current value of 2fa_type
-//+++$twofaForm->addVar('db_2fa_type', $data['2fa_type']);
 $twofaForm->addVar('action', $data['action_submit']);
 
 // append DUO fields to form list
@@ -63,19 +62,10 @@ if ($data['2fa_type'] == ZBX_AUTH_2FA_DUO) {
 
 // append form list to tab
 $twofaTab = new CTabView();
-$twofaTab->addTab('twofaTab', /*+++$data['title']*/ '2FA', $twofaFormList);
+$twofaTab->addTab('twofaTab', '2FA', $twofaFormList);
 
 // create save button
 $saveButton = new CSubmit('update', _('Update'));
-/*+++if ($data['is_2fa_type_changed']) {
-	$saveButton->onClick('javascript: if (confirm('.
-		CJs::encodeJson(_('Switching two factor authentication method will reset all except this session! Continue?')).')) {'.
-		'jQuery("#twofaForm").submit(); return true; } else { return false; }'
-	);
-}
-elseif ($data['2fa_type'] != ZBX_AUTH_2FA_DUO) {
-	$saveButton->setAttribute('disabled', 'true');
-}*/
 
 $twofaTab->setFooter(makeFormFooter($saveButton));
 

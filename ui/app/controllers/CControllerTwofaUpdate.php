@@ -77,10 +77,7 @@ class CControllerTwofaUpdate extends CController {
 
 		$settings_changed = array_diff_assoc($config, select_config());
 
-		sdff("+++ settings_changed=");
-		sdff($settings_changed);
 		if (!$settings_changed) {
-			sdff("+++ settings did not change");
 			return $is_valid;
 		}
 
@@ -94,8 +91,6 @@ class CControllerTwofaUpdate extends CController {
 			}
 		}
 
-		sdff("+++ CControllerTwofaUpdate.php is_valid=");
-		sdff($is_valid);
 		return $is_valid;
 	}
 	/**
@@ -132,17 +127,9 @@ class CControllerTwofaUpdate extends CController {
 		}
 
 		$data = array_merge($config, $fields);
-		//sdff("+++ data before Inputs");
-		//sdff($data);
 		$this->getInputs($data, array_keys($fields));
-		sdff("+++ data Inputs");
-		sdff($data);
 		$data = array_diff_assoc($data, $config);
 
-		sdff("+++ data['2fa_type']=");
-		sdff($data['2fa_type']);
-		sdff("+++ getInput('2fa_duo_api_hostname'=");
-		sdff($this->getInput('2fa_duo_api_hostname', 'no'));
 		if ($data &&
 		    (!array_key_exists('2fa_type', $data) || // something other than 2fa_type changed
 		    ($data['2fa_type'] == ZBX_AUTH_2FA_DUO &&
@@ -150,8 +137,6 @@ class CControllerTwofaUpdate extends CController {
 		    ($data['2fa_type'] == ZBX_AUTH_2FA_NONE &&
 		     $this->getInput('2fa_duo_api_hostname', 'no') == 'no')) // User did not just switched to None
 		   ) {
-			sdff("+++ data is not empty");
-			sdff($data);
 			$result = update_config($data);
 			if ($result) {
 				if (array_key_exists('2fa_type', $data)) {

@@ -18,15 +18,12 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-
 require_once dirname(__FILE__).'/include/classes/duo/CDuoWeb.php';
-
 require_once dirname(__FILE__).'/include/config.inc.php';
 require_once dirname(__FILE__).'/include/forms.inc.php';
 
 $page['title'] = _('ZABBIX');
 $page['file'] = 'duo.php';
-
 
 if (isset($_POST['sig_response'])) {
 	/*
@@ -65,14 +62,13 @@ if (!$name || $name == ZBX_GUEST_USER) {
 }
 // Authentication is not complete yet so reset cookie
 // to make it impossible to visit other pages until 2FA complete
-$_REQUEST['sessionid'] = CWebUser::getSessionCookie();
+$data = [
+	'sessionid' => CWebUser::getSessionCookie(),
+	'sig_request' => CDuoWeb::signRequest($name),
+	'name' => $name
+];
 zbx_unsetcookie('zbx_sessionid');
 
-// Perform 2FA via DUO
-$sig_request = CDuoWeb::signRequest($name);
-$_REQUEST['sig_request'] = $sig_request;
-$_REQUEST['name'] = $name;
-
-$enrollView = new CView('general.duo');
-$enrollView->render();
+echo (new CView('general.duo', $data))
+	->getOutput();
 ?>

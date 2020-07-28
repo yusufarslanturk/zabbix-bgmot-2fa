@@ -65,11 +65,6 @@ class CControllerTwofaEdit extends CController {
 		$data = [
 			'action_submit' => 'twofa.update',
 			'form_refresh' => 0
-			//'config' => $config,
-			// 'is_2fa_type_changed' => $is2faTypeChanged,
-			//'user' => getRequest('user', CWebUser::$data['alias']),
-			//'user_password' => getRequest('user_password', ''),
-			//'user_list' => null
 		];
 
 		if ($this->hasInput('form_refresh')) {
@@ -87,17 +82,6 @@ class CControllerTwofaEdit extends CController {
 		else {
 			$data += select_config();
 		}
-
-		/*+++if (hasRequest('config')) {
-			$is2faTypeChanged = ($data['2fa_type'] != getRequest('config'));
-			$data['2fa_type'] = getRequest('config');
-		}
-		else {
-			$is2faTypeChanged = false;
-		}*/
-		//+++$data['is_2fa_type_changed'] = $is2faTypeChanged;
-		sdff('+++CControllerTwofaEdit $data');
-		sdff($data);
 
 		$response = new CControllerResponseData($data);
 		$response->setTitle(twofa2str($data['2fa_type']));
