@@ -55,6 +55,11 @@ class CRouter {
 	 */
 	private $routes = [
 		// action						controller											layout					view
+		'adusergrps.create'				=> ['CControllerAdUsergroupCreate',					null,					null],
+		'adusergrps.delete'				=> ['CControllerAdUsergroupDelete',					null,					null],
+		'adusergrps.list'				=> ['CControllerAdUsergroupList',					'layout.htmlpage',		'administration.adusergroups.list'],
+		'adusergrps.edit'				=> ['CControllerAdUsergroupEdit',					'layout.htmlpage',		'administration.adusergroups.edit'],
+		'adusergrps.update'				=> ['CControllerAdUsergroupUpdate',					null,					null],
 		'auditlog.list'					=> ['CControllerAuditLogList',						'layout.htmlpage',		'reports.auditlog.list'],
 		'authentication.edit'			=> ['CControllerAuthenticationEdit',				'layout.htmlpage',		'administration.authentication.edit'],
 		'authentication.update'			=> ['CControllerAuthenticationUpdate',				null,					null],

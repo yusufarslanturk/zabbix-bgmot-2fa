@@ -1,31 +1,13 @@
 <?php
-/*
-** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
-**
-** This program is free software; you can redistribute it and/or modify
-** it under the terms of the GNU General Public License as published by
-** the Free Software Foundation; either version 2 of the License, or
-** (at your option) any later version.
-**
-** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-** GNU General Public License for more details.
-**
-** You should have received a copy of the GNU General Public License
-** along with this program; if not, write to the Free Software
-** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-**/
 
+$this->addJsFile('multiselect.js');
 
 $widget = (new CWidget())->setTitle(_('AD groups'));
 
 // create form
 $adGroupForm = (new CForm())
-	->setName('adGroupsForm')
-	->setAttribute('aria-labeledby', ZBX_STYLE_PAGE_TITLE)
-	->addVar('form', $data['form']);
+	->setName('ad_group_form')
+	->setAttribute('aria-labeledby', ZBX_STYLE_PAGE_TITLE);
 
 if ($data['adusrgrpid'] != 0) {
 	$adGroupForm->addVar('adusrgrpid', $data['adusrgrpid']);
@@ -60,7 +42,7 @@ $adGroupFormList->addRow(
 				]
 			]
 		]))
-			->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			->setAriaRequired()
 	);
 
@@ -78,20 +60,31 @@ if (!$data['form_refresh']) {
 	$adGroupTab->setSelected(0);
 }
 
+$cancel_button = (new CRedirectButton(_('Cancel'), (new CUrl('zabbix.php'))
+	->setArgument('action', 'adusergrps.list')
+	->setArgument('page', CPagerHelper::loadPage('adusergrps.list', null))
+))->setId('cancel');
+
 // append buttons to form
 if ($data['adusrgrpid'] != 0) {
 	$adGroupTab->setFooter(makeFormFooter(
-		new CSubmit('update', _('Update')),
+		(new CSubmitButton(_('Update'), 'action', 'adusergrps.update' ))->setId('update'),
 		[
-			new CButtonDelete(_('Delete selected AD group?'), url_param('form').url_param('adusrgrpid')),
-			new CButtonCancel()
+			(new CRedirectButton(_('Delete'),
+				(new CUrl('zabbix.php'))->setArgument('action', 'adusergrps.delete')
+					->setArgument('adusrgrpid', [$data['adusrgrpid']])->setArgumentSID(),
+				_('Delete selected AD group?')
+			))->setId('delete'),
+			$cancel_button
 		]
 	));
 }
 else {
 	$adGroupTab->setFooter(makeFormFooter(
-		new CSubmit('add', _('Add')),
-		[new CButtonCancel()]
+		(new CSubmitButton(_('Add'), 'action', 'adusergrps.create'))->setId('add'),
+		[
+			$cancel_button
+		]
 	));
 }
 
@@ -100,4 +93,4 @@ $adGroupForm->addItem($adGroupTab);
 
 $widget->addItem($adGroupForm);
 
-return $widget;
+$widget->show();
