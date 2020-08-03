@@ -5,8 +5,8 @@ class CControllerAdUsergroupUpdate extends CController {
 	protected function checkInput() {
 		$fields = [
 			'adusrgrpid'	=> 'required|db adusrgrp.adusrgrpid',
-			'adgname'	=> 'not_empty|db adusrgrp.name',
-			'user_groups'	=> 'array_db usrgrp.usrgrpid',
+			'adgname'	=> 'required|not_empty|db adusrgrp.name',
+			'user_groups'	=> 'required|array_db usrgrp.usrgrpid',
 			'user_type'	=> 'db adusrgrp.user_type',
 			'form_refresh'	=> 'int32'
 		];

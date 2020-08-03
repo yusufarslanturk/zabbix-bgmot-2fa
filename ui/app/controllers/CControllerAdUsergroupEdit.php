@@ -16,7 +16,7 @@ class CControllerAdUsergroupEdit extends CController {
 			'adusrgrpid'      => 'db adusrgrp.adusrgrpid',
 			'adgname'         => 'db adusrgrp.name',
 			'adgroup_groupid' => 'db adgroups_groups.id',
-			'user_groups'     => 'array_db usrgrp.name',
+			'user_groups'     => 'not_empty|array_db usrgrp.name',
 			'user_type'      => 'db adusrgrp.user_type',
 
 			'form_refresh'    => 'int32'
