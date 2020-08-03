@@ -7,8 +7,8 @@ DB_PASSWORD=zabbix
 ZABBIX_INSTALL_PATH=/usr/share/zabbix
 
 TMPDIR=/tmp/`date +%s`
-VERSION=5.0.1
-BGVERSION=5.0.1-bg
+VERSION=5.0.2
+BGVERSION=5.0.2-bg
 ZABBIX_INSTALLED_VERSION=`grep ZABBIX_VERSION ${ZABBIX_INSTALL_PATH}/include/defines.inc.php | cut -d\' -f 4`
 
 if [ "$VERSION" != "$ZABBIX_INSTALLED_VERSION" ]
@@ -41,17 +41,13 @@ fi
 
 # Copy new files
 echo 'Patching WebUI files...'
-cd frontends/php
-cp 2fa.php ${ZABBIX_INSTALL_PATH}/
+cd ui
+cp index.php ${ZABBIX_INSTALL_PATH}/
 cp duo.php ${ZABBIX_INSTALL_PATH}/
-cp adusergrps.php ${ZABBIX_INSTALL_PATH}/
 cp assets/styles/Duo-Frame.css ${ZABBIX_INSTALL_PATH}/assets/styles/
 cp js/Duo-Web-v2.js ${ZABBIX_INSTALL_PATH}/js
 cp ${ZABBIX_INSTALL_PATH}/index.php  ${ZABBIX_INSTALL_PATH}/index.php-`date +%s`.bak
-cp index.php ${ZABBIX_INSTALL_PATH}/
 cd include
-cp ${ZABBIX_INSTALL_PATH}/include/audit.inc.php  ${ZABBIX_INSTALL_PATH}/include/audit.inc.php-`date +%s`.bak
-cp audit.inc.php ${ZABBIX_INSTALL_PATH}/include/
 cp ${ZABBIX_INSTALL_PATH}/include/defines.inc.php ${ZABBIX_INSTALL_PATH}/include/defines.inc.php-`date +%s`.bak
 cp defines.inc.php ${ZABBIX_INSTALL_PATH}/include/
 cp ${ZABBIX_INSTALL_PATH}/include/menu.inc.php ${ZABBIX_INSTALL_PATH}/include/menu.inc.php-`date +%s`.bak
@@ -78,10 +74,18 @@ mkdir ${ZABBIX_INSTALL_PATH}/include/classes/duo/ && chmod a+rx ${ZABBIX_INSTALL
 cp duo/CDuoWeb.php ${ZABBIX_INSTALL_PATH}/include/classes/duo/
 cp ${ZABBIX_INSTALL_PATH}/include/classes/ldap/CLdap.php ${ZABBIX_INSTALL_PATH}/include/classes/ldap/CLdap.php-`date +%s`.bak
 cp ldap/CLdap.php ${ZABBIX_INSTALL_PATH}/include/classes/ldap/
+cp ${ZABBIX_INSTALL_PATH}/include/classes/mvc/CRouter.php ${ZABBIX_INSTALL_PATH}/include/classes/mvc/CRouter.php-`date +%s`.bak
+cp mvc/CRouter.php ${ZABBIX_INSTALL_PATH}/include/classes/mvc/CRouter.php
 cp ${ZABBIX_INSTALL_PATH}/include/classes/validators/CLdapAuthValidator.php ${ZABBIX_INSTALL_PATH}/include/classes/validators/CLdapAuthValidator.php-`date +%s`.bak
 cp validators/CLdapAuthValidator.php ${ZABBIX_INSTALL_PATH}/include/classes/validators/
-cd ../views/
-cp -r administration.adusergroups.*  ${ZABBIX_INSTALL_PATH}/include/views/
-cp administration.twofa.edit.php ${ZABBIX_INSTALL_PATH}/include/views/
-cp general.duo.php ${ZABBIX_INSTALL_PATH}/include/views/
+cd ../../app/views/
+cp -r administration.adusergroups.*  ${ZABBIX_INSTALL_PATH}/app/views/
+cp administration.twofa.edit.php ${ZABBIX_INSTALL_PATH}/app/views/
+cp js/administration.twofa.edit.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/
+cd ../controllers/
+cp -r CControllerAdUsergroup* ${ZABBIX_INSTALL_PATH}/app/controllers/
+cp ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerAuditLogList.php ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerAuditLogList.php-`date +%s`.bak
+cp CControllerAuditLogList.php ${ZABBIX_INSTALL_PATH}/app/controllers/
+cp -r CControllerTwofa* ${ZABBIX_INSTALL_PATH}/app/controllers/
+
 echo 'Done! Reload your browser to see changes.'
