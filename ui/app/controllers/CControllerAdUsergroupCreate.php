@@ -20,7 +20,7 @@ class CControllerAdUsergroupCreate extends CController {
 						->getUrl()
 					);
 					$response->setFormData($this->getInputAll());
-					$response->setMessageError(_('Cannot add AD group'));
+					$response->setMessageError(_('Cannot add LDAP group'));
 					$this->setResponse($response);
 					break;
 
@@ -53,13 +53,13 @@ class CControllerAdUsergroupCreate extends CController {
 				->setArgument('page', CPagerHelper::loadPage('adusergrps.list', null))
 			);
 			$response->setFormData(['uncheck' => '1']);
-			$response->setMessageOk(_('AD group added'));
+			$response->setMessageOk(_('LDAP group added'));
 		}
 		else {
 			$response = new CControllerResponseRedirect((new CUrl('zabbix.php'))
 				->setArgument('action', 'adusergrps.edit')
 			);
-			$response->setMessageError(_('Cannot add AD group'));
+			$response->setMessageError(_('Cannot add LDAP group'));
 			$response->setFormData($this->getInputAll());
 		}
 

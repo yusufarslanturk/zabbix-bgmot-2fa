@@ -2,7 +2,7 @@
 
 $this->addJsFile('multiselect.js');
 
-$widget = (new CWidget())->setTitle(_('AD groups'));
+$widget = (new CWidget())->setTitle(_('LDAP groups'));
 
 // create form
 $adGroupForm = (new CForm())
@@ -15,7 +15,7 @@ if ($data['adusrgrpid'] != 0) {
 
 $adGroupFormList = (new CFormList())
 	->addRow(
-		(new CLabel(_('AD group name'), 'adgname'))->setAsteriskMark(),
+		(new CLabel(_('LDAP group name'), 'adgname'))->setAsteriskMark(),
 		(new CTextBox('adgname', $data['name']))
 			->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			->setAriaRequired()
@@ -51,11 +51,11 @@ $userTypeComboBox = new CComboBox('user_type', $data['user_type'], null, [
 	USER_TYPE_ZABBIX_ADMIN => user_type2str(USER_TYPE_ZABBIX_ADMIN),
 	USER_TYPE_SUPER_ADMIN => user_type2str(USER_TYPE_SUPER_ADMIN)
 ]);
-$adGroupFormList->addRow(_('User type for users in this AD group'), $userTypeComboBox);
+$adGroupFormList->addRow(_('User type for users in this LDAP group'), $userTypeComboBox);
 
 // append form lists to tab
 $adGroupTab = (new CTabView())
-	->addTab('adGroupTab', _('AD group'), $adGroupFormList);
+	->addTab('adGroupTab', _('LDAP group'), $adGroupFormList);
 if (!$data['form_refresh']) {
 	$adGroupTab->setSelected(0);
 }
@@ -73,7 +73,7 @@ if ($data['adusrgrpid'] != 0) {
 			(new CRedirectButton(_('Delete'),
 				(new CUrl('zabbix.php'))->setArgument('action', 'adusergrps.delete')
 					->setArgument('adusrgrpid', [$data['adusrgrpid']])->setArgumentSID(),
-				_('Delete selected AD group?')
+				_('Delete selected LDAP group?')
 			))->setId('delete'),
 			$cancel_button
 		]

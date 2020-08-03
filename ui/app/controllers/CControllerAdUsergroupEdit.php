@@ -3,7 +3,7 @@
 class CControllerAdUsergroupEdit extends CController {
 
 	/**
-	 * @var array  AD group data from database.
+	 * @var array AD group data from database.
 	 */
 	private $db_aduser_group = [];
 
@@ -79,7 +79,7 @@ class CControllerAdUsergroupEdit extends CController {
 		order_result($data['groups'], 'name');
 
 		$response = new CControllerResponseData($data);
-		$response->setTitle(_('Configuration of AD groups'));
+		$response->setTitle(_('Configuration of LDAP groups'));
 		$this->setResponse($response);
 	}
 }

@@ -22,7 +22,7 @@ class CControllerAdUsergroupUpdate extends CController {
 						->getUrl()
 					);
 					$response->setFormData($this->getInputAll());
-					$response->setMessageError(_('Cannot update AD group'));
+					$response->setMessageError(_('Cannot update LDAP group'));
 					$this->setResponse($response);
 					break;
 
@@ -56,13 +56,13 @@ class CControllerAdUsergroupUpdate extends CController {
 				->setArgument('page', CPagerHelper::loadPage('adusergrps.list', null))
 			);
 			$response->setFormData(['uncheck' => '1']);
-			$response->setMessageOk(_('AD group updated'));
+			$response->setMessageOk(_('LDAP group updated'));
 		}
 		else {
 			$response = new CControllerResponseRedirect((new CUrl('zabbix.php'))
 				->setArgument('action', 'adusergrps.edit')
 			);
-			$response->setMessageError(_('Cannot update AD group'));
+			$response->setMessageError(_('Cannot update LDAP group'));
 			$response->setFormData($this->getInputAll());
 		}
 

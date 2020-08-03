@@ -43,10 +43,10 @@ class CControllerAdUsergroupDelete extends CController {
 
 		if ($result) {
 			$response->setFormData(['uncheck' => '1']);
-			$response->setMessageOk(_n('AD group deleted', 'AD groups deleted', $deleted));
+			$response->setMessageOk(_n('LDAP group deleted', 'LDAP groups deleted', $deleted));
 		}
 		else {
-			$response->setMessageError(_n('Cannot delete AD group', 'Cannot delete AD groups', $deleted));
+			$response->setMessageError(_n('Cannot delete LDAP group', 'Cannot delete LDAP groups', $deleted));
 		}
 
 		$this->setResponse($response);

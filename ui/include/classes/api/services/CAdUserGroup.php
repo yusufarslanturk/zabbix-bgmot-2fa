@@ -173,7 +173,7 @@ class CAdUserGroup extends CApiService {
 	 */
 	private function validateCreate(array &$adusrgrps) {
 		if (self::$userData['type'] != USER_TYPE_SUPER_ADMIN) {
-			self::exception(ZBX_API_ERROR_PERMISSIONS, _('Only Super Admins can create AD groups.'));
+			self::exception(ZBX_API_ERROR_PERMISSIONS, _('Only Super Admins can create LDAP groups.'));
 		}
 
 		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['name']], 'fields' => [
@@ -300,7 +300,7 @@ class CAdUserGroup extends CApiService {
 		]);
 
 		if ($db_adusrgrps) {
-			self::exception(ZBX_API_ERROR_PARAMETERS, _s('AD group "%1$s" already exists.', $db_adusrgrps[0]['name']));
+			self::exception(ZBX_API_ERROR_PARAMETERS, _s('LDAP group "%1$s" already exists.', $db_adusrgrps[0]['name']));
 		}
 	}
 
@@ -411,7 +411,7 @@ class CAdUserGroup extends CApiService {
 		while ($db_usrgrp = DBfetch($db_usrgrps)) {
 			if ($db_usrgrp['usrgrp_num'] == $del_usrgrpids[$db_usrgrp['usrgrpid']]) {
 				self::exception(ZBX_API_ERROR_PARAMETERS,
-					_s('AD group "%1$s" cannot be without user group.', $db_usrgrp['name'])
+					_s('LDAP group "%1$s" cannot be without user group.', $db_usrgrp['name'])
 				);
 			}
 		}
@@ -501,7 +501,7 @@ class CAdUserGroup extends CApiService {
 	 */
 	protected function validateDelete(array &$adusrgrpids, array &$db_adusrgrps = null) {
 		if (self::$userData['type'] != USER_TYPE_SUPER_ADMIN) {
-			self::exception(ZBX_API_ERROR_PERMISSIONS, _('Only Super Admins can delete AD groups.'));
+			self::exception(ZBX_API_ERROR_PERMISSIONS, _('Only Super Admins can delete LDAP groups.'));
 		}
 
 		$api_input_rules = ['type' => API_IDS, 'flags' => API_NOT_EMPTY, 'uniq' => true];

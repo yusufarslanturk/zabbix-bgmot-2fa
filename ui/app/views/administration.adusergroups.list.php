@@ -1,10 +1,10 @@
 <?php
 
 $widget = (new CWidget())
-	->setTitle(_('AD groups'))
+	->setTitle(_('LDAP groups'))
 	->setControls((new CTag('nav', true,
 		(new CList())
-			->addItem(new CRedirectButton(_('Create AD group'),
+			->addItem(new CRedirectButton(_('Create LDAP group'),
 				(new CUrl('zabbix.php'))->setArgument('action', 'adusergrps.edit'))
 			)
 		))->setAttribute('aria-label', _('Content controls'))
@@ -87,7 +87,7 @@ $adGroupsForm->addItem([
 	$adGroupTable,
 	$this->data['paging'],
 	new CActionButtonList('action', 'adusrgrpid', [
-		'adusergrps.delete' => ['name' => _('Delete'), 'confirm' => _('Delete selected AD groups?')]
+		'adusergrps.delete' => ['name' => _('Delete'), 'confirm' => _('Delete selected LDAP groups?')]
 	], 'adusergroup')
 ]);
 
