@@ -36,7 +36,7 @@ In my case I see membership information as an array of records with format 'CN=<
 3.5) A user is created belonging to Zabbix User Groups found in 3.3) with 'User type' defined for matched 'LDAP group'. If multiple LDAP Groups found then the highest level of 'User type' applied.
 
 ### Installation
-Very quick way to see this code in action is to deploy a Docker container using one of these images:
+Very quick way to see this code in action is to deploy a Docker containers:
 - [zabbix-appliance-ubuntu](https://hub.docker.com/repository/docker/bgmot42/zabbix-appliance-ubuntu)
 
 There are two ways to install this code:
