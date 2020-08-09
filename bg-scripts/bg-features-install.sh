@@ -2,6 +2,7 @@
 
 set -x
 
+DB_HOST=localhost
 DB_USERNAME=zabbix
 DB_PASSWORD=zabbix
 ZABBIX_INSTALL_PATH=/usr/share/zabbix
@@ -23,13 +24,13 @@ unzip zabbix-${BGVERSION}.zip
 cd zabbix-${BGVERSION}
 
 # Check if DB is already patched
-echo 'show tables' | mysql -u $DB_USERNAME -p${DB_PASSWORD} zabbix | grep adusrgrp
+echo 'show tables' | mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} zabbix | grep adusrgrp
 if [ "$?" -eq "0" ]
 then
   echo 'Database already patched. No changes to DB will be made'
 else
   echo 'Patching DB...'
-  mysql -u $DB_USERNAME -p${DB_PASSWORD} zabbix < bg-scripts/db-update.sql
+  mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} zabbix < bg-scripts/db-update.sql
   if [ "$?" -eq "0" ]
   then
     echo 'Database was successfully patched.'
