@@ -47,5 +47,5 @@ curl -L -o bg-features-install.sh https://github.com/BGmot/zabbix/raw/5.0.3-bg/b
 ```
 Modify the script to provide proper values for DB_HOST, DB_USERNAME, DB_PASSWORD and ZABBIX_INSTALL_PATH (where all your php files located) and run the script:
 ```
-bash bg-features-install.sh
+sudo bash bg-features-install.sh
 ```
