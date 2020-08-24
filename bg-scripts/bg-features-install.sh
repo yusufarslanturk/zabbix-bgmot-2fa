@@ -1,6 +1,9 @@
 #!/bin/bash
 
 set -x
+set -e
+set -u
+set -o
 
 DB_HOST=localhost
 DB_USERNAME=zabbix
