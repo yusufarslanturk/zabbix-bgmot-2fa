@@ -8,8 +8,8 @@ DB_PASSWORD=zabbix
 ZABBIX_INSTALL_PATH=/usr/share/zabbix
 
 TMPDIR=/tmp/`date +%s`
-VERSION=5.0.2
-BGVERSION=5.0.2-bg
+VERSION=5.0.3
+BGVERSION=5.0.3-bg
 ZABBIX_INSTALLED_VERSION=`grep ZABBIX_VERSION ${ZABBIX_INSTALL_PATH}/include/defines.inc.php | cut -d\' -f 4`
 
 if [ "$VERSION" != "$ZABBIX_INSTALLED_VERSION" ]
