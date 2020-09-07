@@ -317,7 +317,7 @@ class testFormUserMedia extends CWebTest {
 		$user_form = $this->query('name:userForm')->asForm()->waitUntilPresent()->one();
 		$user_form->selectTab('Media');
 		// Check that no medias are configured.
-		$this->assertTrue($user_form->getField('Media')->getRows()->count() === 0);
+		$this->assertTrue($user_form->getField('Media')->asTable()->getRows()->count() === 0);
 		// Add media.
 		$this->query('button', 'Add')->one()->click();
 		$this->setMediaValues($data);
@@ -333,7 +333,7 @@ class testFormUserMedia extends CWebTest {
 				$media_form->submit();
 				$this->page->waitUntilReady();
 				$user_form->invalidate();
-				$this->assertEquals($user_form->getField('Media')->getRows()->count(), $i + 2);
+				$this->assertEquals($user_form->getField('Media')->asTable()->getRows()->count(), $i + 2);
 			}
 		}
 		else {
@@ -424,7 +424,7 @@ class testFormUserMedia extends CWebTest {
 		$this->removeEmailFromList('3@zabbix.com');
 		$this->checkEmailNotPresent('3@zabbix.com');
 		// Edit the media - remove email 2@zabbix.com and check that it's removed.
-		$media_list = $user_form->getField('Media')->waitUntilVisible();
+		$media_list = $user_form->getField('Media')->asTable()->waitUntilVisible();
 		$row = $media_list->getRow(0);
 		$row->query('button:Edit')->one()->click();
 		$this->removeEmailFromList('2@zabbix.com');
@@ -522,7 +522,7 @@ class testFormUserMedia extends CWebTest {
 			$user = CTestArrayHelper::get($data, 'user_fields.Alias', false) ? $data['user_fields']['Alias'] : $data['username'];
 			$this->query('link', $user)->waitUntilVisible()->one()->click();
 			$user_form = $this->query('name:userForm')->asForm()->waitUntilVisible()->one();
-			$media_field = $user_form->getField('Media');
+			$media_field = $user_form->getField('Media')->asTable();
 			$this->assertTrue($media_field->getRows()->count() === 1);
 			$row = $media_field->getRow(0);
 			// Verify the values of "Type" and "Send to" for the created and updated media.
@@ -543,7 +543,7 @@ class testFormUserMedia extends CWebTest {
 	private function checkEmailNotPresent($email) {
 		// Check that the removed email is not present in 'Send to' field.
 		$user_form = $this->query('name:userForm')->asForm()->waitUntilVisible()->one();
-		$row = $user_form->getField('Media')->getRow(0);
+		$row = $user_form->getField('Media')->asTable()->getRow(0);
 		$this->assertNotContains($email, $row->getColumn('Send to')->getText());
 	}
 
@@ -567,7 +567,7 @@ class testFormUserMedia extends CWebTest {
 	private function checkMediaConfiguration($data, $original_period = '1-7,00:00-24:00', $edit_send_to = true) {
 		// Check media type.
 		$user_form = $this->query('name:userForm')->asForm()->waitUntilVisible()->one();
-		$media_field = $user_form->getField('Media');
+		$media_field = $user_form->getField('Media')->asTable();
 		if (!$edit_send_to) {
 			$this->assertTrue($media_field->getRows()->count() === 1);
 			$row = $media_field->getRow(0);

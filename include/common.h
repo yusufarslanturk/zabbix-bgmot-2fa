@@ -1179,7 +1179,7 @@ const char	*zbx_event_value_string(unsigned char source, unsigned char object, u
 
 #ifdef _WINDOWS
 const OSVERSIONINFOEX	*zbx_win_getversion(void);
-void	zbx_wmi_get(const char *wmi_namespace, const char *wmi_query, char **utf8_value);
+void	zbx_wmi_get(const char *wmi_namespace, const char *wmi_query, double timeout, char **utf8_value);
 wchar_t	*zbx_acp_to_unicode(const char *acp_string);
 wchar_t	*zbx_oemcp_to_unicode(const char *oemcp_string);
 int	zbx_acp_to_unicode_static(const char *acp_string, wchar_t *wide_string, int wide_size);
@@ -1314,9 +1314,6 @@ void	zbx_alarm_flag_clear(void);
 #ifndef _WINDOWS
 unsigned int	zbx_alarm_on(unsigned int seconds);
 unsigned int	zbx_alarm_off(void);
-#if defined(HAVE_RESOLV_H)
-void	zbx_update_resolver_conf(void);		/* handle /etc/resolv.conf update */
-#endif
 #endif
 
 int	zbx_alarm_timed_out(void);

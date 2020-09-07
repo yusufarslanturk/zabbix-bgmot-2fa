@@ -1118,6 +1118,7 @@ static void	add_message_alert(const DB_EVENT *event, const DB_EVENT *r_event, zb
 	DB_ROW		row;
 	int		now, priority, have_alerts = 0, res;
 	zbx_db_insert_t	db_insert;
+	char		*period = NULL;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __function_name);
 
@@ -1150,7 +1151,6 @@ static void	add_message_alert(const DB_EVENT *event, const DB_EVENT *r_event, zb
 	{
 		int		severity, status;
 		const char	*perror;
-		char		*period = NULL;
 
 		ZBX_STR2UINT64(mediatypeid, row[0]);
 		severity = atoi(row[2]);
@@ -1215,9 +1215,9 @@ static void	add_message_alert(const DB_EVENT *event, const DB_EVENT *r_event, zb
 					now, mediatypeid, row[1], subject, message, status, perror, esc_step,
 					(int)ALERT_TYPE_MESSAGE, ackid);
 		}
-
-		zbx_free(period);
 	}
+
+	zbx_free(period);
 
 	DBfree_result(result);
 

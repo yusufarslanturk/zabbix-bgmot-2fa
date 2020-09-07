@@ -1,9 +1,89 @@
+Changes for 4.0.25rc1
+
+New features:
+
+Bug fixes:
+..F....... [ZBX-18326] fixed unsupported code for internet explorer (rlataria)
+.......PS. [ZBX-15904] added check of required cache size for vmware event messages (asestakovs)
+.......PS. [ZBX-18121] fixed SSH monitoring when compiled with libssh; thanks to MATSUDA Daiki for the patch (Andris, viktors)
+.........T [ZBX-14503] updated JMX template to follow guidelines (tuskov)
+........S. [ZBX-18189] fixed crash when performing housekeeping with disabled value cache (viktors)
+A......... [ZBX-18181] fixed undefined index when importing host with non-existing interface (Ivo)
+..F....... [ZBX-18050] removed proxy name from host breadcrumbs (rlataria)
+..F....... [ZBX-18202] added new default item keys for item type "Zabbix aggregate" (agriscenko)
+..F....... [ZBX-18124] fixed discovered host group prototype saving during import (miks)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.24
+
+4.0.24rc2 was released as 4.0.24 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 4.0.24rc2
+
+Bug fixes:
+A......... [ZBX-13789] fixed SQL errors with Oracle backend due to incorrect use of the USING statement (Sasha)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.24rc1
+
+Bug fixes:
+A......... [ZBX-18046] improved error message generation performance of user macro and item key parser (vmurzins)
+........S. [ZBX-18105] fixed use on uninitialised variable (viktors)
+........S. [ZBX-18014] added ODBC empty query check (viktors)
+..F....... [ZBX-18160] fixed fatal error in items.php and host_discovery.php (rlataria)
+A......... [ZBX-13383] improved performance of the trigger and trigger prototype inheritance (Sasha)
+...G...... [ZBX-17974] implement timeouts for WMI queries (arimdjonoks)
+A......... [ZBX-13789] improved performance of "Problems" widget with MySQL backend by removing DISTINCT modifier from SQL statements with tables joined by primary keys (Sasha)
+A.F....... [ZBX-17468] fixed excess audit log record being added on host status update (talbergs)
+A......... [ZBX-18076] fixed PHP notice and multiple undefined index errors in hostinterface API (miks)
+..F....... [ZBX-18000] added red label for disabled media types in user profile (rlataria)
+A......... [ZBX-18075] fixed runtime error when creating a host via API (agriscenko)
+..F....... [ZBX-15927] removed problem calculation for dependent triggers when master trigger is in problem state (kustalovs)
+..F....... [ZBX-18063] fixed usage of unsupported parameter in API call (miks)
+..F....... [ZBX-18060] fixed inaccessible user be displayed as accessible in slide show properties screen (miks)
+.......PS. [ZBX-17252] fixed building of Zabbix daemons with link time optimization (vso)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.23
+
+4.0.23rc1 was released as 4.0.23 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 4.0.23rc1
+
+New features:
+.......PS. [ZBXNEXT-6004] added host info to vmware event message log (asestakovs)
+.......PS. [ZBXNEXT-5903] added vmware datacenters discovery (asestakovs)
+
+Bug fixes:
+...G...... [ZBX-8081] fixed 'cmdline' parameter truncation on Solaris 11.3 and later (viktors, wiper)
+........S. [ZBX-18014] fixed memory leak when action message does not have to be sent (viktors)
+..F....... [ZBX-15117] fixed graph configuration with large amount of items (talbergs)
+........S. [ZBX-18069] fixed server exit when trying to execute IPMI script without IPMI pollers (wiper)
+A......... [ZBX-17960] fixed undefined index in trends API (talbergs)
+..F....... [ZBX-17682] fixed button disable state in template item list and discovery list (rlataria)
+..F....... [ZBX-17820] fixed classic graph widget default header (talbergs)
+..F....... [ZBX-17924] fixed php errors in "System information" window for MySQL (talbergs)
+...G...... [ZBX-17917] changed vm.memory.size keys on Solaris to get memory usage statistics from kstat (wiper)
+...G...... [ZBX-18029] fixed cpu counter wraparound handling on Solaris (wiper)
+.......PS. [ZBX-17624] fixed misleading error message in case of not available datastorage for vmware.hv.datastore.read and vmware.hv.datastore.write metrics (MVekslers)
+A.F....... [ZBX-17860] fixed host prototype import (rlataria)
+...G...... [ZBX-17922] removed mtime check when matching files on disk with the cached list, this should reduce chances of log files being scanned again after system time changes (wiper)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.22
+
+4.0.22rc1 was released as 4.0.22 without any changes
+
+--------------------------------------------------------------------------------
 Changes for 4.0.22rc1
 
 New features:
 ........S. [ZBXNEXT-3588] improved Zabbix server performance when evaluating trigger, discovery, autoregistration and internal actions (vso)
 
 Bug fixes:
+..F....... [ZBX-18057] fixed security vulnerability CVE-2020-15803 (Stored XSS attack on URL widget) (Ivo, talbergs)
 .......PS. [ZBX-17720] exclude disabled items from preprocessing configuration sync (wiper)
 ........S. [ZBX-17851] fixed possible deadlocks when deleting escalations (wiper)
 .....J.... [ZBX-17406] fixed null value for a field of CompositeData in JMX discovery (arimdjonoks)
@@ -2895,6 +2975,7 @@ Changes for 3.0.32rc1
 New features:
 
 Bug fixes:
+..F....... [ZBX-18057] fixed security vulnerability CVE-2020-15803 (Stored XSS attack on URL widget) (Ivo, talbergs)
 
 --------------------------------------------------------------------------------
 Changes for 3.0.31

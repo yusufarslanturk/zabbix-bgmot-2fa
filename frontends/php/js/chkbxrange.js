@@ -260,7 +260,13 @@ var chkbxRange = {
 		var selectedCountSpan = jQuery('#selected_count');
 		selectedCountSpan.text(count + ' ' + selectedCountSpan.text().split(' ')[1]);
 
-		jQuery('#action_buttons button').prop('disabled', count == 0);
+		jQuery('#action_buttons button').each(function() {
+			var $elem = jQuery(this);
+
+			if (!$elem.data('disabled')) {
+				$elem.prop('disabled', count == 0);
+			}
+		});
 	},
 
 	// check if all checkboxes are selected and select main checkbox, else disable checkbox, select options and button

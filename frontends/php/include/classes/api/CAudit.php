@@ -168,6 +168,12 @@ class CAudit {
 				$table_name = 'valuemaps';
 				break;
 
+			case AUDIT_RESOURCE_HOST:
+				$field_name_resourceid = 'hostid';
+				$field_name_resourcename = 'host';
+				$table_name = 'hosts';
+				break;
+
 			default:
 				return;
 		}

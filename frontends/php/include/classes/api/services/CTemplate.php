@@ -253,7 +253,7 @@ class CTemplate extends CHostGeneral {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$res = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$res = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($template = DBfetch($res)) {
 			if ($options['countOutput']) {
 				if ($options['groupCount']) {
@@ -361,7 +361,7 @@ class CTemplate extends CHostGeneral {
 	protected function validateCreate(array $templates) {
 		$groupIds = [];
 
-		foreach ($templates as $template) {
+		foreach ($templates as &$template) {
 			// check if hosts have at least 1 group
 			if (!isset($template['groups']) || !$template['groups']) {
 				self::exception(ZBX_API_ERROR_PARAMETERS,
@@ -372,9 +372,18 @@ class CTemplate extends CHostGeneral {
 			$template['groups'] = zbx_toArray($template['groups']);
 
 			foreach ($template['groups'] as $group) {
+				if (!is_array($group) || (is_array($group) && !array_key_exists('groupid', $group))) {
+					self::exception(ZBX_API_ERROR_PARAMETERS,
+						_s('Incorrect value for field "%1$s": %2$s.', 'groups',
+							_s('the parameter "%1$s" is missing', 'groupid')
+						)
+					);
+				}
+
 				$groupIds[$group['groupid']] = $group['groupid'];
 			}
 		}
+		unset($template);
 
 		$dbHostGroups = API::HostGroup()->get([
 			'output' => ['groupid'],
@@ -481,7 +490,7 @@ class CTemplate extends CHostGeneral {
 		$macros = [];
 		foreach ($templates as &$template) {
 			if (isset($template['macros'])) {
-				$macros[$template['templateid']] = $template['macros'];
+				$macros[$template['templateid']] = zbx_toArray($template['macros']);
 
 				unset($template['macros']);
 			}

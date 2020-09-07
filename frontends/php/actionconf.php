@@ -750,7 +750,7 @@ if (hasRequest('form')) {
 		$data['new_recovery_operation'] = ['operationtype' => OPERATION_TYPE_MESSAGE];
 	}
 
-	$data['available_mediatypes'] = API::MediaType()->get(['output' => ['mediatypeid', 'description']]);
+	$data['available_mediatypes'] = API::MediaType()->get(['output' => ['mediatypeid', 'description', 'status']]);
 	order_result($data['available_mediatypes'], 'description');
 
 	if ($data['new_ack_operation'] && !is_array($data['new_ack_operation'])) {

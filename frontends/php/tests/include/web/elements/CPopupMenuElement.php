@@ -108,7 +108,6 @@ class CPopupMenuElement extends CElement {
 		if (!is_array($items)) {
 			$items = [$items];
 		}
-
 		// Get item by name.
 		$element = $this->getItem(array_shift($items));
 

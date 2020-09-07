@@ -23,7 +23,7 @@ require_once dirname(__FILE__) . '/../../include/CWebTest.php';
 /**
  * @backup profiles
  */
-class testDynamicItemWidgets extends CWebTest {
+class testDashboardDynamicItemWidgets extends CWebTest {
 
 	public static function getWidgetsData() {
 		return [
@@ -130,10 +130,10 @@ class testDynamicItemWidgets extends CWebTest {
 					'widgets' => [
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1I2'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H2: Dynamic widgets H2I1'],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1 G2 (I2)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H2: Dynamic widgets H1 G1 (I1)'],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H2: Dynamic widgets H1 G3 (I1 and I2)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H2: Dynamic widgets H1 G4 (H1I1 and H3I1)'],
 						[
@@ -172,10 +172,10 @@ class testDynamicItemWidgets extends CWebTest {
 					'widgets' => [
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1I2'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H3: Dynamic widgets H3I1'],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1 G2 (I2)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H3: Dynamic widgets H1 G1 (I1)'],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H3: Dynamic widgets H1 G3 (I1 and I2)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H3: Dynamic widgets H1 G4 (H1I1 and H3I1)'],
 						[
@@ -213,13 +213,13 @@ class testDynamicItemWidgets extends CWebTest {
 					],
 					'widgets' => [
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1I2'],
-						['type' => 'Graph (classic)', 'header' => ''],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1 G2 (I2)'],
-						['type' => 'Graph (classic)', 'header' => ''],
-						['type' => 'Graph (classic)', 'header' => ''],
-						['type' => 'Graph (classic)', 'header' => ''],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						[
 							'type' => 'Plain text',
 							'header' => 'Dynamic widgets H1: Dynamic widgets H1I2',
@@ -440,10 +440,10 @@ class testDynamicItemWidgets extends CWebTest {
 					'widgets' => [
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1I2'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H2: Dynamic widgets H2I1'],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1 G2 (I2)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H2: Dynamic widgets H1 G1 (I1)'],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H2: Dynamic widgets H1 G3 (I1 and I2)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H2: Dynamic widgets H1 G4 (H1I1 and H3I1)'],
 						[
@@ -482,10 +482,10 @@ class testDynamicItemWidgets extends CWebTest {
 					'widgets' => [
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1I2'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H3: Dynamic widgets H3I1'],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1 G2 (I2)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H3: Dynamic widgets H1 G1 (I1)'],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H3: Dynamic widgets H1 G3 (I1 and I2)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H3: Dynamic widgets H1 G4 (H1I1 and H3I1)'],
 						[
@@ -523,13 +523,13 @@ class testDynamicItemWidgets extends CWebTest {
 					],
 					'widgets' => [
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1I2'],
-						['type' => 'Graph (classic)', 'header' => ''],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						['type' => 'Graph (classic)', 'header' => 'Dynamic widgets H1: Dynamic widgets H1 G2 (I2)'],
-						['type' => 'Graph (classic)', 'header' => ''],
-						['type' => 'Graph (classic)', 'header' => ''],
-						['type' => 'Graph (classic)', 'header' => ''],
-						['type' => 'Graph (classic)', 'header' => ''],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
+						['type' => 'Graph (classic)', 'header' => 'Graph (classic)'],
 						[
 							'type' => 'Plain text',
 							'header' => 'Dynamic widgets H1: Dynamic widgets H1I2',
@@ -559,9 +559,12 @@ class testDynamicItemWidgets extends CWebTest {
 	}
 
 	/**
+	 * @on-before createTestFile
+	 * @on-after removeTestFile
+	 *
 	 * @dataProvider getWidgetsData
 	 */
-	public function testDynamicItemWidgets_Layout($data) {
+	public function testDashboardDynamicItemWidgets_Layout($data) {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=105');
 		$dashboard = CDashboardElement::find()->one();
 		$filter = $dashboard->getControls()->waitUntilVisible();
@@ -577,7 +580,7 @@ class testDynamicItemWidgets extends CWebTest {
 			$this->assertEquals($expected['header'], $widget->getHeaderText());
 
 			// Check widget empty content, because the host group or/and host doesn't match dynamic option criteria.
-			if ($expected['header'] === '' || $expected['header'] === 'Plain text'
+			if ($expected['header'] === 'Graph (classic)' || $expected['header'] === 'Plain text'
 					|| CTestArrayHelper::get($expected, 'empty', false)) {
 				$content = $widget_content->query('class:nothing-to-show')->one()->getText();
 				$message = ($expected['type'] === 'URL')
@@ -600,11 +603,21 @@ class testDynamicItemWidgets extends CWebTest {
 
 				case 'URL':
 					$this->page->switchTo($widget_content->query('id:iframe')->one());
-					$form = $this->query('xpath://form[@action="hostinventories.php"]')->asForm()->one();
-					$this->assertEquals($expected['host'], $form->getFieldContainer('Host name')->getText());
+					$params = json_decode($this->query('xpath://body')->one()->getText(), true);
+					$this->assertEquals($expected['host'], $params['name']);
 					$this->page->switchTo();
 					break;
 			}
 		}
+	}
+
+	public function createTestFile() {
+		if (file_put_contents(PHPUNIT_BASEDIR.'/frontends/php/iframe.php', '<?php echo json_encode($_GET);') === false) {
+			throw new Exception('Failed to create iframe test file.');
+		}
+	}
+
+	public function removeTestFile() {
+		@unlink(PHPUNIT_BASEDIR.'/frontends/php/iframe.php');
 	}
 }

@@ -203,7 +203,7 @@ class CPage {
 			self::$cookie = null;
 		}
 		catch (\Exception $e) {
-			// Code is not missing here.
+			throw new \Exception('Cannot logout user: '.$e->getTraceAsString());
 		}
 	}
 
@@ -501,5 +501,20 @@ class CPage {
 		}
 
 		return $this;
+	}
+
+	/**
+	 * Allows to login with user credentials.
+	 *
+	 * @param string $alias     Username on login screen
+	 * @param string $password  Password on login screen
+	 */
+	public function userLogin($alias, $password) {
+		$this->logout();
+		$this->open('index.php');
+		$this->query('id:name')->waitUntilVisible()->one()->fill($alias);
+		$this->query('id:password')->one()->fill($password);
+		$this->query('id:enter')->one()->click();
+		$this->waitUntilReady();
 	}
 }

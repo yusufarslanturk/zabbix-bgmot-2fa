@@ -791,14 +791,14 @@ INSERT INTO graphs (graphid, name, templateid) VALUES (15004, 'testInheritanceGr
 INSERT INTO graphs (graphid, name, templateid) VALUES (15005, 'testInheritanceGraph2', 15001);
 INSERT INTO graphs (graphid, name, templateid) VALUES (15006, 'testInheritanceGraph3', 15002);
 INSERT INTO graphs (graphid, name, templateid) VALUES (15007, 'testInheritanceGraph4', 15003);
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15000, 15000, 15001, 1, 1, 'FF5555');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15001, 15001, 15002, 1, 1, 'FF5555');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15002, 15002, 15003, 1, 1, 'FF5555');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15003, 15003, 15004, 1, 1, 'FF5555');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15004, 15004, 15006, 1, 1, 'FF5555');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15005, 15005, 15007, 1, 1, 'FF5555');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15006, 15006, 15008, 1, 1, 'FF5555');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15007, 15007, 15009, 1, 1, 'FF5555');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150000, 15000, 15001, 1, 1, 'FF5555');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150001, 15001, 15002, 1, 1, 'FF5555');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150002, 15002, 15003, 1, 1, 'FF5555');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150003, 15003, 15004, 1, 1, 'FF5555');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150004, 15004, 15006, 1, 1, 'FF5555');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150005, 15005, 15007, 1, 1, 'FF5555');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150006, 15006, 15008, 1, 1, 'FF5555');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150007, 15007, 15009, 1, 1, 'FF5555');
 
 -- testInheritanceDiscoveryRule.LayoutCheck and testInheritanceDiscoveryRule.SimpleUpdate
 -- testFormItemPrototype, testInheritanceItemPrototype etc. for all prototype testing
@@ -884,22 +884,22 @@ INSERT INTO graphs (graphid, name, flags, templateid) VALUES (15014, 'testInheri
 INSERT INTO graphs (graphid, name, flags, templateid) VALUES (15015, 'testInheritanceGraphPrototype4', 2, 15011);
 
 -- testFormGraphPrototype.LayoutCheck and testInheritanceGraphPrototype.SimpleUpdate
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15008, 15008, 15000, 1, 0, '9999FF');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15009, 15008, 15021, 1, 1, 'FF9999');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15010, 15009, 15000, 1, 0, '9999FF');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15011, 15009, 15021, 1, 1, 'FF9999');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15012, 15010, 15000, 1, 0, '9999FF');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15013, 15010, 15021, 1, 1, 'FF9999');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15014, 15011, 15000, 1, 0, '9999FF');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15015, 15011, 15021, 1, 1, 'FF9999');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15016, 15012, 15005, 1, 0, '9999FF');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15017, 15012, 15026, 1, 1, 'FF9999');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15018, 15013, 15005, 1, 0, '9999FF');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15019, 15013, 15026, 1, 1, 'FF9999');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15020, 15014, 15005, 1, 0, '9999FF');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15021, 15014, 15026, 1, 1, 'FF9999');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15022, 15015, 15005, 1, 0, '9999FF');
-INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (15023, 15015, 15026, 1, 1, 'FF9999');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150008, 15008, 15000, 1, 0, '9999FF');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150009, 15008, 15021, 1, 1, 'FF9999');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150010, 15009, 15000, 1, 0, '9999FF');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150011, 15009, 15021, 1, 1, 'FF9999');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150012, 15010, 15000, 1, 0, '9999FF');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150013, 15010, 15021, 1, 1, 'FF9999');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150014, 15011, 15000, 1, 0, '9999FF');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150015, 15011, 15021, 1, 1, 'FF9999');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150016, 15012, 15005, 1, 0, '9999FF');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150017, 15012, 15026, 1, 1, 'FF9999');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150018, 15013, 15005, 1, 0, '9999FF');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150019, 15013, 15026, 1, 1, 'FF9999');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150020, 15014, 15005, 1, 0, '9999FF');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150021, 15014, 15026, 1, 1, 'FF9999');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150022, 15015, 15005, 1, 0, '9999FF');
+INSERT INTO graphs_items (gitemid, graphid, itemid, drawtype, sortorder, color) VALUES (150023, 15015, 15026, 1, 1, 'FF9999');
 
 -- testFormTriggerPrototype.LayoutCheck, testInheritanceTriggerPrototype.SimpleUpdate
 INSERT INTO triggers (triggerid, expression, description, comments, flags)             VALUES (99008, '{99737}=0', 'testInheritanceTriggerPrototype1', '', 2);
@@ -1537,7 +1537,7 @@ INSERT INTO corr_operation (corr_operationid, correlationid, type) VALUES (99003
 INSERT INTO hosts (hostid, host, name, status, description, flags) VALUES (90001, 'Host for host prototype tests', 'Host for host prototype tests', 0, '', 0);
 INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (99000, 90001, 4);
 INSERT INTO interface (interfaceid, hostid, main, type, useip, ip, dns, port) values (50024,90001,1,1,1,'127.0.0.1','','10050');
-INSERT INTO items (name, key_, hostid, value_type, itemid, interfaceid, flags, delay, params, description, posts, headers) VALUES ('Discovery rule 1', 'key1', 90001, 4, 90001, 50024, 1, '30s', '', '', '', '');
+INSERT INTO items (name, key_, hostid, value_type, itemid, interfaceid, flags, delay, params, description, posts, headers, type) VALUES ('Discovery rule 1', 'key1', 90001, 4, 90001, 50024, 1, '30s', '', '', '', '', 2);
 INSERT INTO items (name, key_, hostid, value_type, itemid, interfaceid, flags, delay, params, description, posts, headers) VALUES ('Discovery rule 2', 'key2', 90001, 4, 90002, 50024, 1, '30s', '', '', '', '');
 INSERT INTO items (name, key_, hostid, value_type, itemid, interfaceid, flags, delay, params, description, posts, headers) VALUES ('Discovery rule 3', 'key3', 90001, 4, 90003, 50024, 1, '30s', '', '', '', '');
 INSERT INTO hosts (hostid, host, name, status, description, flags) VALUES (90002, 'Host prototype {#1}', 'Host prototype {#1}', 0, '', 2);
@@ -2075,12 +2075,12 @@ INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50013, 50014, 4)
 INSERT INTO items (itemid, type, hostid, name, key_, params, description, posts, headers) VALUES (40067, 2, 50014, 'Item A', 'A', '', '', '', '');
 INSERT INTO items (itemid, type, hostid, name, key_, params, description, posts, headers) VALUES (40068, 2, 50014, 'Item B', 'B', '', '', '', '');
 INSERT INTO items (itemid, type, hostid, name, key_, params, description, posts, headers) VALUES (40069, 2, 50014, 'Item C', 'C', '', '', '', '');
-INSERT INTO triggers (triggerid, expression, description, comments) VALUES (16027, '{16027}=0', 'A trigger', '');
-INSERT INTO triggers (triggerid, expression, description, comments) VALUES (16028, '{16028}=0', 'B trigger', '');
-INSERT INTO triggers (triggerid, expression, description, comments) VALUES (16029, '{16029}=0', 'C trigger', '');
-INSERT INTO functions (functionid, itemid, triggerid, name, parameter) VALUES (16028, 40067, 16027,'last','0');
-INSERT INTO functions (functionid, itemid, triggerid, name, parameter) VALUES (16029, 40068, 16028,'last','0');
-INSERT INTO functions (functionid, itemid, triggerid, name, parameter) VALUES (16030, 40069, 16029,'last','0');
+INSERT INTO triggers (triggerid, expression, description, comments) VALUES (100041, '{16028}=0', 'A trigger', '');
+INSERT INTO triggers (triggerid, expression, description, comments) VALUES (100042, '{16029}=0', 'B trigger', '');
+INSERT INTO triggers (triggerid, expression, description, comments) VALUES (100043, '{16030}=0', 'C trigger', '');
+INSERT INTO functions (functionid, itemid, triggerid, name, parameter) VALUES (16028, 40067, 100041,'last','0');
+INSERT INTO functions (functionid, itemid, triggerid, name, parameter) VALUES (16029, 40068, 100042,'last','0');
+INSERT INTO functions (functionid, itemid, triggerid, name, parameter) VALUES (16030, 40069, 100043,'last','0');
 
 -- testFormAdministrationMediaTypes
 INSERT INTO media_type (mediatypeid, type, description, exec_path, status) VALUES (100, 1, 'Test script', 'Selenium test script', 1);
@@ -2243,4 +2243,4 @@ INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value
 INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int) VALUES (90059, 119, 0, 'dynamic', 1);
 INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (120, 105, 'url', 'Dynamic URL', 0, 13, 6, 4);
 INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int) VALUES (90060, 120, 0, 'dynamic', 1);
-INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_str) VALUES (90061, 120, 1, 'url', 'hostinventories.php?hostid={HOST.ID}');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_str) VALUES (90061, 120, 1, 'url', 'iframe.php?name={HOST.NAME}');

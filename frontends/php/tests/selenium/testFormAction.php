@@ -513,7 +513,7 @@ class testFormAction extends CLegacyWebTest {
 			}
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Type of calculation');
+			$this->zbxTestTextNotVisible('Type of calculation');
 			$this->zbxTestAssertNotVisibleId('evaltype');
 		}
 
