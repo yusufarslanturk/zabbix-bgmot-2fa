@@ -8,6 +8,10 @@ The code in this repository is always based on official code from Zabbix with tw
 - two factor authentication (2FA) using DUO provider
 - LDAP authentication with AD groups - an attempt to address [ZBXNEXT-276](https://support.zabbix.com/browse/ZBXNEXT-276)
 
+Detailed HowTos:
+- https://bgmot.com/zabbix_twofa_duo
+- https://bgmot.com/zabbix_ldap_groups
+
 ### 2FA
 With 2FA enabled when you login into WebUI after 'in-stock' authentication (internal, LDAP or whatever is configured in your case) is successfully done the user is presented with DUO's interface to perform authentication via an SMS, DUO app push, or a phone call. For details please go to [DUO website](https://duo.com), you may also want to read about [details of implementation](https://duo.com/docs/duoweb).
 To enable 2FA go to Administration -> Authentication -> Two factor authentication, toggle DUO and fill in all the fields with data you get from DUO when you register an account. To fill in '40 characters long custom key' field you need to generate this custiom key, in python use following code:
