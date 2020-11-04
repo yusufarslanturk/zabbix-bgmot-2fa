@@ -500,27 +500,27 @@ class CTrigger extends CTriggerGeneral {
 	 * @return array
 	 */
 	public function create(array $triggers) {
-		$triggers = zbx_toArray($triggers);
-
 		$this->validateCreate($triggers);
 		$this->createReal($triggers);
 		$this->inherit($triggers);
 
-		// clear all dependencies on inherited triggers
+		// Clear all dependencies on inherited triggers.
 		$this->deleteDependencies($triggers);
 
-		// add new dependencies
+		// Add new dependencies.
 		foreach ($triggers as $trigger) {
-			if (!empty($trigger['dependencies'])) {
-				$newDeps = [];
-				foreach ($trigger['dependencies'] as $depTrigger) {
-					$newDeps[] = [
-						'triggerid' => $trigger['triggerid'],
-						'dependsOnTriggerid' => $depTrigger['triggerid']
-					];
-				}
-				$this->addDependencies($newDeps);
+			if (!array_key_exists('dependencies', $trigger) || !$trigger['dependencies']) {
+				continue;
 			}
+
+			$new_dependencies = [];
+			foreach ($trigger['dependencies'] as $dependency) {
+				$new_dependencies[] = [
+					'triggerid' => $trigger['triggerid'],
+					'dependsOnTriggerid' => $dependency['triggerid']
+				];
+			}
+			$this->addDependencies($new_dependencies);
 		}
 
 		return ['triggerids' => zbx_objectValues($triggers, 'triggerid')];
@@ -536,47 +536,24 @@ class CTrigger extends CTriggerGeneral {
 	 * @return array
 	 */
 	public function update(array $triggers) {
-		$triggers = zbx_toArray($triggers);
-
 		$this->validateUpdate($triggers, $db_triggers);
-
-		$validate_dependencies = [];
-		foreach ($triggers as $tnum => $trigger) {
-			$db_trigger = $db_triggers[$tnum];
-
-			$expressions_changed = ($trigger['expression'] !== $db_trigger['expression']
-				|| $trigger['recovery_expression'] !== $db_trigger['recovery_expression']);
-
-			if ($expressions_changed && $db_trigger['dependencies'] && !array_key_exists('dependencies', $trigger)) {
-				$validate_dependencies[] = [
-					'triggerid' => $trigger['triggerid'],
-					'dependencies' => zbx_objectValues($db_trigger['dependencies'], 'triggerid')
-				];
-			}
-		}
-
-		if ($validate_dependencies) {
-			$this->checkDependencies($validate_dependencies);
-			$this->checkDependencyParents($validate_dependencies);
-		}
-
 		$this->updateReal($triggers, $db_triggers);
 		$this->inherit($triggers);
 
 		foreach ($triggers as $trigger) {
-			// replace dependencies
-			if (isset($trigger['dependencies'])) {
+			// Replace dependencies.
+			if (array_key_exists('dependencies', $trigger)) {
 				$this->deleteDependencies($trigger);
 
 				if ($trigger['dependencies']) {
-					$newDeps = [];
-					foreach ($trigger['dependencies'] as $depTrigger) {
-						$newDeps[] = [
+					$new_dependencies = [];
+					foreach ($trigger['dependencies'] as $dependency) {
+						$new_dependencies[] = [
 							'triggerid' => $trigger['triggerid'],
-							'dependsOnTriggerid' => $depTrigger['triggerid']
+							'dependsOnTriggerid' => $dependency['triggerid']
 						];
 					}
-					$this->addDependencies($newDeps);
+					$this->addDependencies($new_dependencies);
 				}
 			}
 		}
@@ -644,17 +621,23 @@ class CTrigger extends CTriggerGeneral {
 	/**
 	 * Validates the input for the addDependencies() method.
 	 *
-	 * @throws APIException if the given dependencies are invalid
-	 *
-	 * @param array $triggersData
+	 * @param array $triggers_data
 	 * @param bool  $inherited
+	 *
+	 * @throws APIException if the given dependencies are invalid.
 	 */
-	protected function validateAddDependencies(array $triggersData, $inherited = false) {
-		if (!$triggersData) {
-			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+	protected function validateAddDependencies(array &$triggers_data, bool $inherited = false) {
+		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['triggerid', 'dependsOnTriggerid']], 'fields' => [
+			'triggerid' =>			['type' => API_ID, 'flags' => API_REQUIRED],
+			'dependsOnTriggerid' =>	['type' => API_ID, 'flags' => API_REQUIRED]
+		]];
+
+		if (!CApiInputValidator::validate($api_input_rules, $triggers_data, '/', $error)) {
+			self::exception(ZBX_API_ERROR_PARAMETERS, $error);
 		}
 
-		$triggerids = array_unique(zbx_objectValues($triggersData, 'triggerid'));
+		$triggerids = zbx_objectValues($triggers_data, 'triggerid');
+		$triggerids = array_keys(array_flip($triggerids));
 
 		$permission_check = $inherited
 			? ['nopermissions' => true]
@@ -666,12 +649,8 @@ class CTrigger extends CTriggerGeneral {
 			'preservekeys' => true
 		] + $permission_check);
 
-		foreach ($triggerids as $triggerid) {
-			if (!array_key_exists($triggerid, $triggers)) {
-				self::exception(ZBX_API_ERROR_PERMISSIONS,
-					_('No permissions to referred object or it does not exist!')
-				);
-			}
+		if (count($triggerids) != count($triggers)) {
+			self::exception(ZBX_API_ERROR_PERMISSIONS, _('No permissions to referred object or it does not exist!'));
 		}
 
 		foreach ($triggers as $trigger) {
@@ -682,28 +661,28 @@ class CTrigger extends CTriggerGeneral {
 			}
 		}
 
-		$depTtriggerIds = [];
+		$dep_triggerids = [];
 		$triggers = [];
-		foreach ($triggersData as $dep) {
-			$triggerId = $dep['triggerid'];
+		foreach ($triggers_data as $dep) {
+			$triggerid = $dep['triggerid'];
 
-			if (!isset($triggers[$dep['triggerid']])) {
-				$triggers[$triggerId] = [
-					'triggerid' => $triggerId,
-					'dependencies' => [],
+			if (!array_key_exists($dep['triggerid'], $triggers)) {
+				$triggers[$triggerid] = [
+					'triggerid' => $triggerid,
+					'dependencies' => []
 				];
 			}
-			$triggers[$triggerId]['dependencies'][] = $dep['dependsOnTriggerid'];
-			$depTtriggerIds[$dep['dependsOnTriggerid']] = $dep['dependsOnTriggerid'];
+			$triggers[$triggerid]['dependencies'][] = $dep['dependsOnTriggerid'];
+			$dep_triggerids[$dep['dependsOnTriggerid']] = $dep['dependsOnTriggerid'];
 		}
 
-		if (!$inherited && $depTtriggerIds) {
+		if (!$inherited) {
 			$count = $this->get([
 				'countOutput' => true,
-				'triggerids' => $depTtriggerIds
+				'triggerids' => $dep_triggerids
 			]);
 
-			if ($count != count($depTtriggerIds)) {
+			if ($count != count($dep_triggerids)) {
 				self::exception(ZBX_API_ERROR_PERMISSIONS,
 					_('No permissions to referred object or it does not exist!')
 				);
@@ -718,19 +697,17 @@ class CTrigger extends CTriggerGeneral {
 	/**
 	 * Add the given dependencies and inherit them on all child triggers.
 	 *
-	 * @param array $triggersData   an array of trigger dependency pairs, each pair in the form of
+	 * @param array $triggers_data   an array of trigger dependency pairs, each pair in the form of
 	 *                              array('triggerid' => 1, 'dependsOnTriggerid' => 2)
 	 * @param bool  $inherited      Determines either to check permissions for added dependencies. Permissions are not
 	 *                              validated for inherited triggers.
 	 *
 	 * @return array
 	 */
-	public function addDependencies(array $triggersData, $inherited = false) {
-		$triggersData = zbx_toArray($triggersData);
+	public function addDependencies(array $triggers_data, $inherited = false): array {
+		$this->validateAddDependencies($triggers_data, $inherited);
 
-		$this->validateAddDependencies($triggersData, $inherited);
-
-		foreach ($triggersData as $dep) {
+		foreach ($triggers_data as $dep) {
 			$triggerId = $dep['triggerid'];
 			$depTriggerId = $dep['dependsOnTriggerid'];
 
@@ -762,23 +739,24 @@ class CTrigger extends CTriggerGeneral {
 			}
 		}
 
-		return ['triggerids' => array_unique(zbx_objectValues($triggersData, 'triggerid'))];
+		return ['triggerids' => array_unique(zbx_objectValues($triggers_data, 'triggerid'))];
 	}
 
 	/**
 	 * Validates the input for the deleteDependencies() method.
 	 *
-	 * @throws APIException if the given input is invalid
-	 *
 	 * @param array $triggers
 	 * @param bool  $inherited
+	 *
+	 * @throws APIException if the given input is invalid
 	 */
-	protected function validateDeleteDependencies(array $triggers, $inherited) {
+	protected function validateDeleteDependencies(array $triggers, bool $inherited) {
 		if (!$triggers) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
 		}
 
-		$triggerids = array_unique(zbx_objectValues($triggers, 'triggerid'));
+		$triggerids = zbx_objectValues($triggers, 'triggerid');
+		$triggerids = array_keys(array_flip($triggerids));
 
 		$permission_check = $inherited
 			? ['nopermissions' => true]
@@ -1015,7 +993,7 @@ class CTrigger extends CTriggerGeneral {
 							foreach ($depTemplateIds as $depTemplateId) {
 								if (!isset($templates[$depTemplateId])) {
 									self::exception(ZBX_API_ERROR_PARAMETERS,
-										_s('Not all templates are linked to "%s".', reset($templates))
+										_s('Not all templates are linked to "%1$s".', reset($templates))
 									);
 								}
 							}

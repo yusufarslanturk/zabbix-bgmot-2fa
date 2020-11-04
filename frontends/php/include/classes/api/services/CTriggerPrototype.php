@@ -427,8 +427,6 @@ class CTriggerPrototype extends CTriggerGeneral {
 	 * @return array
 	 */
 	public function create(array $trigger_prototypes) {
-		$trigger_prototypes = zbx_toArray($trigger_prototypes);
-
 		$this->validateCreate($trigger_prototypes);
 		$this->createReal($trigger_prototypes);
 		$this->inherit($trigger_prototypes);
@@ -458,8 +456,6 @@ class CTriggerPrototype extends CTriggerGeneral {
 	 * @return array
 	 */
 	public function update(array $trigger_prototypes) {
-		$trigger_prototypes = zbx_toArray($trigger_prototypes);
-
 		$this->validateUpdate($trigger_prototypes, $db_triggers);
 		$this->updateReal($trigger_prototypes, $db_triggers);
 		$this->inherit($trigger_prototypes);
@@ -646,10 +642,10 @@ class CTriggerPrototype extends CTriggerGeneral {
 	/**
 	 * Validates the input for the addDependencies() method.
 	 *
-	 * @param array  $triggerPrototypes
-	 * @param string $triggerPrototypes[]['triggerid']
-	 * @param array  $triggerPrototypes[]['dependencies']
-	 * @param string $triggerPrototypes[]['dependencies'][]['triggerid']
+	 * @param array  $trigger_prototypes
+	 * @param string $trigger_prototypes[]['triggerid']
+	 * @param array  $trigger_prototypes[]['dependencies']
+	 * @param string $trigger_prototypes[]['dependencies'][]['triggerid']
 	 *
 	 * @throws APIException if the given dependencies are invalid.
 	 */
