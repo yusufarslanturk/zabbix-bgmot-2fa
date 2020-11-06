@@ -1120,7 +1120,7 @@ class testFormUser extends CWebTest {
 
 	private function setAutoLogout($data) {
 		$form = $this->query('name:userForm')->asForm()->one();
-		$auto_logout = $form->getFieldElements('Auto-logout');
+		$auto_logout = $form->getFieldContainer('Auto-logout')->children()->all();
 		/*
 		 * Auto-logout fields consists of multiple elements, the following of which will be used:
 		 *		0 - Checkbox element

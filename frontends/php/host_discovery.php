@@ -145,7 +145,11 @@ $fields = [
 	'jmx_endpoint' =>			[T_ZBX_STR, O_OPT, null,	NOT_EMPTY,
 		'(isset({add}) || isset({update})) && isset({type}) && {type} == '.ITEM_TYPE_JMX
 	],
-	'timeout' =>				[T_ZBX_STR, O_OPT, null,	null,		null],
+	'timeout' => 				[T_ZBX_TU, O_OPT, P_ALLOW_USER_MACRO,	null,
+									'(isset({add}) || isset({update})) && isset({type})'.
+										' && {type} == '.ITEM_TYPE_HTTPAGENT,
+									_('Timeout')
+								],
 	'url' =>					[T_ZBX_STR, O_OPT, null,	NOT_EMPTY,
 									'(isset({add}) || isset({update})) && isset({type})'.
 										' && {type} == '.ITEM_TYPE_HTTPAGENT,
@@ -631,12 +635,11 @@ else {
 	// Set is_template false, when one of hosts is not template.
 	if ($data['discoveries']) {
 		$hosts_status = [];
-		foreach (zbx_objectValues($data['discoveries'], 'hosts') as $value) {
-			// Discovery can contain only one host.
-			$hosts_status[] = $value[0]['status'];
+		foreach ($data['discoveries'] as $discovery) {
+			$hosts_status[$discovery['hosts'][0]['status']] = true;
 		}
-		foreach (array_unique($hosts_status) as $value) {
-			if ($value != HOST_STATUS_TEMPLATE) {
+		foreach ($hosts_status as $key => $value) {
+			if ($key != HOST_STATUS_TEMPLATE) {
 				$data['is_template'] = false;
 				break;
 			}

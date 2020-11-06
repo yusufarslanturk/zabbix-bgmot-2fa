@@ -1,8 +1,46 @@
-Changes for 4.0.25rc1
+Changes for 4.0.27rc1
 
 New features:
 
 Bug fixes:
+...G...... [ZBX-18185] fixed compilation error on Solaris 10 (akozlovs)
+A......... [ZBX-18317] fixed fatal error when updating only discovered triggers and their properties (Ivo)
+A......... [ZBX-18163] fixed deletion of one last remaining main host interface to show error instead of silently deleting the interface (Ivo)
+..F....... [ZBX-18058] updated the list of item keys and their descriptions (agriscenko)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.26
+
+4.0.26rc1 was released as 4.0.26 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 4.0.26rc1
+
+Bug fixes:
+..F....... [ZBX-18464] fixed javascript Uncaught TypeError when clicking on disabled multiselect item (miks)
+........S. [ZBX-18411] set maxQueryMetrics default values for vcenter depending on its version (arimdjonoks)
+..F....... [ZBX-18438] fixed missing asterisk mark for "timeout" field in item, item prototype and LLD rule edit forms (Ivo)
+..F....... [ZBX-18327] fixed undefined index when invalid URL is given (Ivo)
+.......PS. [ZBX-17178] fixed multi-line value truncation in snmp lld (asestakovs)
+.......PS. [ZBX-18462] fixed inconsistent auto-registration behaviour for hosts without metadata on Oracle DB compared to other databases when using Zabbix proxy (viktors)
+.......PS. [ZBX-18364] fixed inconsistency with autoregistration behaviour for hosts without metadata on Oracle compared to other databases (viktors)
+.......PS. [ZBX-18365] added Fping 5.0 support to Zabbix (dimir)
+........S. [ZBX-17493] added discarding of incoming values outside history/trends storage periods on server (wiper)
+..F....... [ZBX-18343] fixed in screen "host issue" problem stay even after problem resolved (rlataria)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.25
+
+4.0.25rc1 was released as 4.0.25 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 4.0.25rc1
+
+Bug fixes:
+.........T [ZBX-17842] updated VMware template to follow guidelines (tuskov)
+.......PS. [ZBX-17848] fixed fping interval detection, added log prints of detected options in debug mode, re-detect options every hour (dimir)
+........S. [ZBX-18188] increased age and duration related macro resolution to seconds (viktors)
+........S. [ZBX-15651] fixed handling of overlapping IP addresses in network discovery received from single Zabbix proxy (vso)
 ..F....... [ZBX-18326] fixed unsupported code for internet explorer (rlataria)
 .......PS. [ZBX-15904] added check of required cache size for vmware event messages (asestakovs)
 .......PS. [ZBX-18121] fixed SSH monitoring when compiled with libssh; thanks to MATSUDA Daiki for the patch (Andris, viktors)

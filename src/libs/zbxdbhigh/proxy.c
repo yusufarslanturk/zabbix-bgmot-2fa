@@ -3389,6 +3389,7 @@ static int	process_discovery_data_contents(struct zbx_json_parse *jp_data, char 
 			DBfree_result(result);
 
 			last_druleid = drule.druleid;
+			*last_ip = '\0';
 		}
 
 		if ('\0' == *last_ip || 0 != strcmp(ip, last_ip))

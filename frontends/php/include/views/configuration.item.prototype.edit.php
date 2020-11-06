@@ -179,8 +179,10 @@ $itemFormList->addRow(
 
 // ITEM_TYPE_HTTPAGENT Timeout field.
 $itemFormList->addRow(
-	new CLabel(_('Timeout'), 'timeout'),
-	(new CTextBox('timeout', $data['timeout'], $readonly))->setWidth(ZBX_TEXTAREA_SMALL_WIDTH),
+	(new CLabel(_('Timeout'), 'timeout'))->setAsteriskMark(),
+	(new CTextBox('timeout', $data['timeout'], $readonly))
+		->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+		->setAriaRequired(),
 	'timeout_row'
 );
 
