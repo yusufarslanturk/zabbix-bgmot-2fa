@@ -161,7 +161,7 @@ function make_event_details($event, $backurl) {
 	$table = (new CTableInfo())
 		->addRow([
 			_('Event'),
-			$event['name']
+			(new CDiv($event['name']))->addClass(ZBX_STYLE_WORDWRAP)
 		])
 		->addRow([
 			_('Severity'),

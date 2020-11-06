@@ -1249,6 +1249,7 @@ function make_trigger_details($trigger) {
 		->addRow([
 			new CCol(_('Trigger')),
 			new CCol((new CLinkAction(CMacrosResolverHelper::resolveTriggerName($trigger)))
+				->addClass(ZBX_STYLE_WORDWRAP)
 				->setMenuPopup(CMenuPopupHelper::getTrigger($trigger['triggerid']))
 			)
 		])
