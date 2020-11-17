@@ -115,7 +115,7 @@ class testFormSetup extends CWebTest {
 			if ($db_type === 'PostgreSQL') {
 					$schema_field = $form->getField('Database schema');
 					$this->assertTrue($schema_field->isValid());
-					$this->assertEquals($maxlength, $schema_field->getAttribute('maxlength'));
+					$this->assertEquals(255, $schema_field->getAttribute('maxlength'));
 			}
 
 			foreach ($fields as $field_name) {
@@ -162,7 +162,7 @@ class testFormSetup extends CWebTest {
 			'Database server' => $db_parameters['Database host'],
 			'Database name' => $db_parameters['Database name'],
 			'Database user' => $db_parameters['User'],
-			'Database password' => '********',
+			'Database password' => '******',
 			'Zabbix server' => 'localhost',
 			'Zabbix server port' => '10051',
 			'Zabbix server name' => ''
@@ -179,7 +179,13 @@ class testFormSetup extends CWebTest {
 		$summary_fields['Database port'] = ($db_parameters['Database port'] === '0') ? 'default' : $db_parameters['Database port'];
 		foreach ($summary_fields as $field_name => $value) {
 			$xpath = 'xpath://span[text()="'.$field_name.'"]/../../div[@class="table-forms-td-right"]';
-			$this->assertEquals($value, $this->query($xpath)->one()->getText());
+			// Assert contains is used as Password length can differ
+			if ($field_name === 'Database password') {
+				$this->assertContains($value, $this->query($xpath)->one()->getText());
+			}
+			else {
+				$this->assertEquals($value, $this->query($xpath)->one()->getText());
+			}
 		}
 		$this->checkButtons();
 	}
@@ -309,7 +315,7 @@ class testFormSetup extends CWebTest {
 		}
 
 		// Skip the case with invalid DB schema if DB type is not PostgreSQL
-		if (array_key_exists('Database schema', $data['field']) && $db_parameters['Database type'] !== 'PostgreSQL') {
+		if (array_key_exists('Database schema', $data['field']) && $db_parameters['Database type'] === 'MySQL') {
 
 			return;
 		}
