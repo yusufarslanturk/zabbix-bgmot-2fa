@@ -314,8 +314,8 @@ class testFormSetup extends CWebTest {
 			$db_parameters['Database port'] = ($db_parameters['Database type'] === 'PostgreSQL') ? 5432 : 3306;
 		}
 
-		// Skip the case with invalid DB schema if DB type is not PostgreSQL
-		if (array_key_exists('Database schema', $data['field']) && $db_parameters['Database type'] === 'MySQL') {
+		// Skip the case with invalid DB schema if DB type is MySQL
+		if (array_key_exists('Database schema', $data['field']['name']) && $db_parameters['Database type'] === 'MySQL') {
 
 			return;
 		}
@@ -338,7 +338,9 @@ class testFormSetup extends CWebTest {
 		// Check the outcome for the specified database configuration
 		$this->clickSectionButton('Next step');
 		if (CTestArrayHelper::get($data, 'expected', TEST_GOOD) === TEST_BAD) {
-			$error_details = CTestArrayHelper::get($data, 'error_details', 'Error connecting to database.');
+			$default_details = ($db_parameters['Database type'] === 'PostgreSQL') ? 'Error connecting to database.' :
+					'Error connecting to database: Connection refused';
+			$error_details = CTestArrayHelper::get($data, 'error_details', $default_details);
 			$this->assertMessage(TEST_BAD, 'Cannot connect to the database.', $error_details);
 		}
 		else {
