@@ -40,14 +40,17 @@ class testFormSetup extends CWebTest {
 		];
 	}
 
-	public function testFormSetup_checkLayout() {
+	public function testFormSetup_checkWelcomeSectionLayout() {
 		$this->page->login()->open('setup.php')->waitUntilReady();
 
 		// Check Welcome section
 		$this->assertEquals("Welcome to\nZabbix 4.0", $this->query('xpath://div[@class="setup-title"]')->one()->getText());
 		$this->checkSections('Welcome');
-
 		$this->checkButtons('first section');
+	}
+
+	public function testFormSetup_checkPrerequisitesSectionLayout() {
+		$this->page->login()->open('setup.php')->waitUntilReady();
 		$this->clickSectionButton('Next step');
 
 		// Check Pre-requisites section
@@ -85,7 +88,10 @@ class testFormSetup extends CWebTest {
 		$this->assertTableDataColumn($prerequisites, '');
 		$this->checkSections('Check of pre-requesties');
 		$this->checkButtons();
-		$this->clickSectionButton('Next step');
+	}
+
+	public function testFormSetup_checkDbConnectionSectionLayout() {
+		$this->openSpecifiedSection('Configure DB connection');
 
 		// Check Configure DB connection section
 		$fields = [
@@ -101,42 +107,30 @@ class testFormSetup extends CWebTest {
 		$form = $this->query('xpath://form')->asForm()->one();
 
 		// Check input fieldsin Configure DB connection section for each DB type
+		$db_parameters = $this->getDbParameters();
 		$db_types = $form->getField('Database type')->getOptions()->asText();
 		foreach ($db_types as $db_type) {
 			$form->getField('Database type')->select($db_type);
 			$form->invalidate();
 			if ($db_type === 'PostgreSQL') {
-				$schema_field = $form->getField('Database schema');
-				$this->assertTrue($schema_field->isValid());
-				$this->assertEquals($maxlength, $schema_field->getAttribute('maxlength'));
+					$schema_field = $form->getField('Database schema');
+					$this->assertTrue($schema_field->isValid());
+					$this->assertEquals($maxlength, $schema_field->getAttribute('maxlength'));
 			}
-			else {
-				$this->assertFalse($form->query('xpath://label[text()="Database schema"]')->one(false)->isValid());
-			}
+
 			foreach ($fields as $field_name) {
 				$maxlength = ($field_name === 'Database port') ? 5 : 255;
 				$field = $form->getField($field_name);
 				$this->assertTrue($field->isValid());
 				$this->assertEquals($maxlength, $field->getAttribute('maxlength'));
-
 			}
 		}
+	}
 
-		// Fill Configure DB connection section depending on DB type
-		global $DB;
-		$db_parameters = [
-			'Database host' => $DB['SERVER'],
-			'Database name' => $DB['DATABASE'],
-			'User' => $DB['USER'],
-			'Password' => $DB['PASSWORD']
-		];
-		$db_parameters['Database type'] = ($DB['TYPE'] === 'POSTGRESQL') ? 'PostgreSQL' : 'MySQL';
-		$form->fill($db_parameters);
+	public function testFormSetup_checkZabbixServerSectionLayout() {
+		$this->openSpecifiedSection('Zabbix server details');
 
-		$this->checkButtons();
-		$this->clickSectionButton('Next step');
-
-		// Check Zabbix server details
+		// Check Zabbix server details section
 		$server_params = [
 			'Host' => 'localhost',
 			'Port' => '10051',
@@ -155,23 +149,26 @@ class testFormSetup extends CWebTest {
 		}
 
 		$this->checkButtons();
-		$this->clickSectionButton('Next step');
+	}
 
-		// Check Pre-installaion summary
+	public function testFormSetup_checkSummarySection() {
+		$this->openSpecifiedSection('Pre-installation summary');
+		$db_parameters = $this->getDbParameters();
 		$text = 'Please check configuration parameters. If all is correct, press "Next step" button, or "Back" button '.
 				'to change configuration parameters.';
 		$this->checkPageTextElements('Pre-installation summary', $text);
 
 		$summary_fields = [
-			'Database server' => $DB['SERVER'],
-			'Database name' => $DB['DATABASE'],
-			'Database user' => $DB['USER'],
+			'Database server' => $db_parameters['Database host'],
+			'Database name' => $db_parameters['Database name'],
+			'Database user' => $db_parameters['User'],
 			'Database password' => '********',
 			'Zabbix server' => 'localhost',
 			'Zabbix server port' => '10051',
 			'Zabbix server name' => ''
 		];
-		if ($DB['TYPE'] === 'POSTGRESQL') {
+
+		if ($db_parameters['Database type'] === 'PostgreSQL') {
 			$summary_fields['Database type'] = 'PostgreSQL';
 			$summary_fields['Database schema'] = '';
 		}
@@ -179,21 +176,22 @@ class testFormSetup extends CWebTest {
 			$summary_fields['Database type'] = 'MySQL';
 			$this->assertFalse($this->query('xpath://span[text()="Database schema"]')->one(false)->isValid());
 		}
-		$summary_fields['Database port'] = ($DB['PORT'] === '0') ? 'default' : $DB['PORT'];
+		$summary_fields['Database port'] = ($db_parameters['Database port'] === '0') ? 'default' : $db_parameters['Database port'];
 		foreach ($summary_fields as $field_name => $value) {
 			$xpath = 'xpath://span[text()="'.$field_name.'"]/../../div[@class="table-forms-td-right"]';
 			$this->assertEquals($value, $this->query($xpath)->one()->getText());
 		}
 		$this->checkButtons();
-		$this->clickSectionButton('Next step');
+	}
 
-		// Check Install section
+	public function testFormSetup_checkInstallSection() {
+		$this->openSpecifiedSection('Install');
 		$this->checkPageTextElements('Install', '/conf/zabbix.conf.php" created.');
 		$this->assertEquals('Congratulations! You have successfully installed Zabbix frontend.',
 				$this->query('class:green')->one()->getText());
 		$this->checkButtons('last section');
 
-		// Chek that Dashboard view is opened after completing the form
+		// Check that Dashboard view is opened after completing the form
 		$this->query('button:Finish')->one()->click();
 		$this->page->waitUntilReady();
 		$this->assertContains('zabbix.php?action=dashboard.view', $this->page->getCurrentURL());
@@ -264,7 +262,7 @@ class testFormSetup extends CWebTest {
 					]
 				]
 			],
-			// Incorrect password.
+			// Set incorrect password.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -300,43 +298,38 @@ class testFormSetup extends CWebTest {
 	/**
 	 * @dataProvider getDbConnectionDetails
 	 */
-	public function testFormSetup_checkDbSection($data) {
+	public function testFormSetup_checkDbConfigSectionParameters($data) {
 		// Prepare array with DB parameter values
-		global $DB;
-		$db_parameters = [
-			'Database host' => $DB['SERVER'],
-			'Database name' => $DB['DATABASE'],
-			'User' => $DB['USER'],
-			'Password' => $DB['PASSWORD']
-		];
-		$db_parameters['Database type'] = ($DB['TYPE'] === 'POSTGRESQL') ? 'PostgreSQL' : 'MySQL';
+		$db_parameters = $this->getDbParameters();
 		$db_parameters[$data['field']['name']] = $data['field']['value'];
 
 		// Use default database port if specified in data provider
 		if (array_key_exists('change_port', $data)) {
-			$db_parameters['Database port'] = ($DB['TYPE'] === 'POSTGRESQL') ? 5432 : 3306;
+			$db_parameters['Database port'] = ($db_parameters['Database type'] === 'PostgreSQL') ? 5432 : 3306;
 		}
 
 		// Skip the case with invalid DB schema if DB type is not PostgreSQL
-		if (array_key_exists('Database schema', $data['field']) && $DB['TYPE'] !== 'POSTGRESQL') {
+		if (array_key_exists('Database schema', $data['field']) && $db_parameters['Database type'] !== 'PostgreSQL') {
 
 			return;
 		}
 		// Open "Configure DB connection" section
-		$this->page->login()->open('setup.php')->waitUntilReady();
-		$this->clickSectionButton('Next step', 2);
-		$this->assertEquals('Configure DB connection', $this->query('xpath://h1')->one()->getText());
+		$this->openSpecifiedSection('Configure DB connection');
 
+		// Fill Database connection parameters
 		$form = $this->query('xpath://form')->asForm()->one();
 		$form->fill($db_parameters);
+
 		// Check that port number was trimmed after removing focus, starting with 1st non-numeric symbol.
 		if ($data['field']['name'] === 'Database port') {
 			$this->page->removeFocus();
 		}
+		$form->invalidate();
 		if (array_key_exists('check_port', $data)) {
 			$this->assertEquals($data['check_port'], $form->getField('Database port')->getValue());
 		}
 
+		// Check the outcome for the specified database configuration
 		$this->clickSectionButton('Next step');
 		if (CTestArrayHelper::get($data, 'expected', TEST_GOOD) === TEST_BAD) {
 			$error_details = CTestArrayHelper::get($data, 'error_details', 'Error connecting to database.');
@@ -347,11 +340,10 @@ class testFormSetup extends CWebTest {
 		}
 	}
 
-	public function testFormSetup_checkZabbixServerSection() {
+	public function testFormSetup_checkZabbixServerSectionParameters() {
 		// Open Zabbix server configuration section.
-		$this->openZabbixServerDetailsSection();
+		$this->openSpecifiedSection('Zabbix server details');
 
-		$this->assertEquals('Zabbix server details', $this->query('xpath://h1')->one()->getText());
 		$server_parameters = [
 			'Host' => 'Zabbix_server_imaginary_host',
 			'Port' => '65535',
@@ -374,7 +366,7 @@ class testFormSetup extends CWebTest {
 		$form->fill($server_parameters);
 		$this->clickSectionButton('Next step');
 
-		// Check that the vields are filled correctly in the Pre-installation summary section
+		// Check that the fields are filled correctly in the Pre-installation summary section
 		$summary_fields = [
 			'Zabbix server' => $server_parameters['Host'],
 			'Zabbix server port' => $server_parameters['Port'],
@@ -399,9 +391,7 @@ class testFormSetup extends CWebTest {
 
 	public function testFormSetup_checkBackButtons() {
 		// Open the Pre-installation summary section
-		$this->openZabbixServerDetailsSection();
-		$this->clickSectionButton('Next step');
-		$this->assertEquals('Pre-installation summary', $this->query('xpath://h1')->one()->getText());
+		$this->openSpecifiedSection('Pre-installation summary');
 
 		// Proceed back to the 1st section of the setup form
 		$this->clickSectionButton('Back');
@@ -422,9 +412,7 @@ class testFormSetup extends CWebTest {
 
 	public function testFormSetup_restoreServerConfig() {
 		// Open the last section of the setup form
-		$this->openZabbixServerDetailsSection();
-		$this->clickSectionButton('Next step', 2);
-
+		$this->openSpecifiedSection('Install');
 		// Need to wait for 3s for php cache to reload and for zabbix server parameter the changes to take place
 		sleep(3);
 		$this->clickSectionButton('Finish');
@@ -519,23 +507,46 @@ class testFormSetup extends CWebTest {
 	}
 
 	/**
-	 * Function opens the setup form and navigates to the "Zabbix server details" section.
+	 * Function opens the setup form and navigates to the specified section.
+	 *
+	 * @param	string	$section	the name of the section to be opened
 	 */
-	private function openZabbixServerDetailsSection() {
+	private function openSpecifiedSection($section) {
+		$this->page->login()->open('setup.php')->waitUntilReady();
+		$this->clickSectionButton('Next step', 2);
+		// No actions required in case of Configure DB connection section
+		if ($section === 'Configure DB connection') {
+			return;
+		}
+		// Define the number of clicks on the Next step button depending on the name of the desired section
+		$skip_sections = [
+			'Zabbix server details' => 1,
+			'Pre-installation summary' => 2,
+			'Install' => 3
+		];
+		// Fill in DB parameters and navigate to the desired section
+		$db_parameters = $this->getDbParameters();
+		$form = $this->query('xpath://form')->asForm()->one();
+		$form->fill($db_parameters);
+		$this->clickSectionButton('Next step', $skip_sections[$section]);
+	}
+
+	/**
+	 * Function retrieves the values to be filled in the Configure DB connection section.
+	 *
+	 * @return	array
+	 */
+	private function getDbParameters() {
 		global $DB;
 		$db_parameters = [
 			'Database host' => $DB['SERVER'],
 			'Database name' => $DB['DATABASE'],
+			'Database port' => $DB['PORT'],
 			'User' => $DB['USER'],
 			'Password' => $DB['PASSWORD']
 		];
 		$db_parameters['Database type'] = ($DB['TYPE'] === 'POSTGRESQL') ? 'PostgreSQL' : 'MySQL';
 
-		// Open "Configure DB connection" section
-		$this->page->login()->open('setup.php')->waitUntilReady();
-		$this->clickSectionButton('Next step', 2);
-		$form = $this->query('xpath://form')->asForm()->one();
-		$form->fill($db_parameters);
-		$this->clickSectionButton('Next step');
+		return $db_parameters;
 	}
 }
