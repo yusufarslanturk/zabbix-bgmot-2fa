@@ -315,7 +315,7 @@ class testFormSetup extends CWebTest {
 		}
 
 		// Skip the case with invalid DB schema if DB type is MySQL
-		if (array_key_exists('Database schema', $data['field']['name']) && $db_parameters['Database type'] === 'MySQL') {
+		if ($data['field']['name'] === 'Database schema' && $db_parameters['Database type'] === 'MySQL') {
 
 			return;
 		}
