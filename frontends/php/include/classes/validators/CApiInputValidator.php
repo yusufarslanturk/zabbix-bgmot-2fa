@@ -165,7 +165,7 @@ class CApiInputValidator {
 		}
 
 		// This message can be untranslated because warn about incorrect validation rules at a development stage.
-		$error = 'Incorrect validation rules.1';
+		$error = 'Incorrect validation rules.';
 
 		return false;
 	}
@@ -230,7 +230,7 @@ class CApiInputValidator {
 		}
 
 		// This message can be untranslated because warn about incorrect validation rules at a development stage.
-		$error = 'Incorrect validation rules.2';
+		$error = 'Incorrect validation rules.';
 
 		return false;
 	}
@@ -318,7 +318,7 @@ class CApiInputValidator {
 		}
 
 		// This message can be untranslated because warn about incorrect validation rules at a development stage.
-		$error = 'Incorrect validation rules.3';
+		$error = 'Incorrect validation rules.';
 
 		return false;
 	}
