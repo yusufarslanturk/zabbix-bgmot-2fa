@@ -649,10 +649,10 @@ class CTriggerPrototype extends CTriggerGeneral {
 	 *
 	 * @throws APIException if the given dependencies are invalid.
 	 */
-	protected function validateAddDependencies(array $triggerPrototypes) {
+	protected function validateAddDependencies(array $trigger_prototypes) {
 		$depTriggerIds = [];
 
-		foreach ($triggerPrototypes as $triggerPrototype) {
+		foreach ($trigger_prototypes as $triggerPrototype) {
 			if (!array_key_exists('dependencies', $triggerPrototype)) {
 				continue;
 			}
@@ -679,19 +679,19 @@ class CTriggerPrototype extends CTriggerGeneral {
 			$dRules = $this->get([
 				'output' => ['triggerid'],
 				'selectDiscoveryRule' => ['itemid'],
-				'triggerids' => zbx_objectValues($triggerPrototypes, 'triggerid'),
+				'triggerids' => zbx_objectValues($trigger_prototypes, 'triggerid'),
 				'preservekeys' => true
 			]);
 
-			foreach ($triggerPrototypes as $triggerPrototype) {
-				if (!array_key_exists('dependencies', $triggerPrototype)) {
+			foreach ($trigger_prototypes as $trigger_prototype) {
+				if (!array_key_exists('dependencies', $trigger_prototype)) {
 					continue;
 				}
 
-				$dRuleId = $dRules[$triggerPrototype['triggerid']]['discoveryRule']['itemid'];
+				$dRuleId = $dRules[$trigger_prototype['triggerid']]['discoveryRule']['itemid'];
 
 				// Check if current trigger prototype rules match dependent trigger prototype rules.
-				foreach ($triggerPrototype['dependencies'] as $dependency) {
+				foreach ($trigger_prototype['dependencies'] as $dependency) {
 					if (isset($depTriggerPrototypes[$dependency['triggerid']])) {
 						$depTriggerDRuleId = $depTriggerPrototypes[$dependency['triggerid']]['discoveryRule']['itemid'];
 
@@ -718,9 +718,9 @@ class CTriggerPrototype extends CTriggerGeneral {
 			self::exception(ZBX_API_ERROR_PERMISSIONS, _('No permissions to referred object or it does not exist!'));
 		}
 
-		$this->checkDependencies($triggerPrototypes);
-		$this->checkDependencyParents($triggerPrototypes);
-		$this->checkDependencyDuplicates($triggerPrototypes);
+		$this->checkDependencies($trigger_prototypes);
+		$this->checkDependencyParents($trigger_prototypes);
+		$this->checkDependencyDuplicates($trigger_prototypes);
 	}
 
 	/**
