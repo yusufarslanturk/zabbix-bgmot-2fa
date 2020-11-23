@@ -113,9 +113,12 @@ class testFormSetup extends CWebTest {
 			$form->getField('Database type')->select($db_type);
 			$form->invalidate();
 			if ($db_type === 'PostgreSQL') {
+				// Workaroung implemented due to ZBX-18688 - Remove the below condition when issue is fixed
+				if (count($db_types) > 1) {
 					$schema_field = $form->getField('Database schema');
 					$this->assertTrue($schema_field->isValid());
 					$this->assertEquals(255, $schema_field->getAttribute('maxlength'));
+				}
 			}
 
 			foreach ($fields as $field_name) {
