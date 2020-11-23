@@ -225,9 +225,9 @@ int	zbx_regexp_compile(const char *pattern, zbx_regexp_t **regexp, const char **
  * Purpose: public wrapper for regexp_compile          *
  *                                                     *
  *******************************************************/
-int	zbx_regexp_compile_ext(const char *pattern, zbx_regexp_t **regexp, int flags, const char **err_msg_static)
+int	zbx_regexp_compile_ext(const char *pattern, zbx_regexp_t **regexp, int flags, char **err_msg)
 {
-	return regexp_compile(pattern, flags, regexp, err_msg_static);
+	return regexp_compile2(pattern, flags, regexp, err_msg);
 }
 
 /****************************************************************************************************
@@ -789,32 +789,37 @@ static int	regexp_sub(const char *string, const char *pattern, const char *outpu
  *             out             - [OUT] the output value if the input string      *
  *                                     matches the specified regular expression  *
  *                                     or NULL otherwise                         *
+ *             err_msg         - [OUT] error message. Deallocate in caller.      *
  *                                                                               *
- * Return value: SUCCEED - the regular expression match was done                 *
- *               FAIL    - failed to match                                       *
+ * Return value: ZBX_REGEXP_MATCH        - successful match                      *
+ *               ZBX_REGEXP_NO_MATCH     - no match                              *
+ *               ZBX_REGEXP_RUNTIME_FAIL - error occurred                        *
  *                                                                               *
  * Comments: Multiline match is performed                                        *
  *                                                                               *
  *********************************************************************************/
 int	zbx_mregexp_sub_precompiled(const char *string, const zbx_regexp_t *regexp, const char *output_template,
-		size_t limit, char **out)
+		size_t limit, char **out, char **err_msg)
 {
 	zbx_regmatch_t	match[ZBX_REGEXP_GROUPS_MAX];
 	unsigned int	i;
+	int		res;
+
 	zbx_free(*out);
 
 	/* -1 is special pcre value for unused patterns */
 	for (i = 0; i < ARRSIZE(match); i++)
 		match[i].rm_so = match[i].rm_eo = -1;
 
-	if (ZBX_REGEXP_MATCH == regexp_exec(string, regexp, ZBX_REGEXP_GROUPS_MAX, match) &&
-			NULL != (*out = regexp_sub_replace(string, output_template, match, ZBX_REGEXP_GROUPS_MAX,
-			limit)))
+	if (ZBX_REGEXP_MATCH == (res = regexp_exec2(string, regexp, ZBX_REGEXP_GROUPS_MAX, match, err_msg)))
 	{
-		return SUCCEED;
+		if (NULL != (*out = regexp_sub_replace(string, output_template, match, ZBX_REGEXP_GROUPS_MAX, limit)))
+			return ZBX_REGEXP_MATCH;
+		else
+			return ZBX_REGEXP_NO_MATCH;	/*  no match: the regexp matched but the substitution failed */
 	}
 
-	return FAIL;
+	return res;	/* ZBX_REGEXP_NO_MATCH or ZBX_REGEXP_RUNTIME_FAIL */
 }
 
 /*********************************************************************************

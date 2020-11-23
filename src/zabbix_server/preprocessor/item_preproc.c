@@ -737,8 +737,9 @@ static int	item_preproc_regsub_op(zbx_variant_t *value, const char *params, char
 {
 	char		pattern[ITEM_PREPROC_PARAMS_LEN * ZBX_MAX_BYTES_IN_UTF8_CHAR + 1];
 	char		*output, *new_value = NULL;
-	const char	*regex_error;
+	char		*regex_error = NULL;
 	zbx_regexp_t	*regex = NULL;
+	int		res;
 
 	if (FAIL == item_preproc_convert_value(value, ZBX_VARIANT_STR, errmsg))
 		return FAIL;
@@ -756,12 +757,22 @@ static int	item_preproc_regsub_op(zbx_variant_t *value, const char *params, char
 	if (FAIL == zbx_regexp_compile_ext(pattern, &regex, 0, &regex_error))	/* PCRE_MULTILINE is not used here */
 	{
 		*errmsg = zbx_dsprintf(*errmsg, "invalid regular expression: %s", regex_error);
+		zbx_free(regex_error);
 		return FAIL;
 	}
 
-	if (FAIL == zbx_mregexp_sub_precompiled(value->data.str, regex, output, ZBX_MAX_RECV_DATA_SIZE, &new_value))
+	if (ZBX_REGEXP_NO_MATCH == (res = zbx_mregexp_sub_precompiled(value->data.str, regex, output,
+			ZBX_MAX_RECV_DATA_SIZE, &new_value, &regex_error)))
 	{
-		*errmsg = zbx_strdup(*errmsg, "pattern does not match");
+		*errmsg = zbx_strdup(*errmsg, "pattern does not match or substitution failed");
+		zbx_regexp_free(regex);
+		return FAIL;
+	}
+
+	if (ZBX_REGEXP_RUNTIME_FAIL == res)
+	{
+		*errmsg = zbx_dsprintf(*errmsg, "error occurred while matching regular expression: %s", regex_error);
+		zbx_free(regex_error);
 		zbx_regexp_free(regex);
 		return FAIL;
 	}
