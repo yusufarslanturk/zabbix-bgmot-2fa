@@ -366,9 +366,7 @@ class testFormSetup extends CWebTest {
 		// Check the outcome for the specified database configuration
 		$this->clickSectionButton('Next step');
 		if (CTestArrayHelper::get($data, 'expected', TEST_GOOD) === TEST_BAD) {
-			$default_details = ($db_parameters['Database type'] === 'PostgreSQL') ? 'Error connecting to database.' :
-					'Error connecting to database: Connection refused';
-			$error_details = CTestArrayHelper::get($data, 'error_details', $default_details);
+			$error_details = CTestArrayHelper::get($data, 'error_details', 'Error connecting to database');
 			$this->assertMessage(TEST_BAD, 'Cannot connect to the database.', $error_details);
 		}
 		else {
