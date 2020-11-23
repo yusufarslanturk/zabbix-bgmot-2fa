@@ -207,7 +207,7 @@ class testFormSetup extends CWebTest {
 			foreach ($text_elements as $element => $text) {
 				$this->assertEquals($text, $this->query('xpath', $element)->one()->getText());
 			}
-			$this->checkButtons('last section');
+			$this->checkButtons('Install section');
 		}
 		else {
 			$this->checkPageTextElements('Install', '/conf/zabbix.conf.php" created.');
@@ -496,6 +496,14 @@ class testFormSetup extends CWebTest {
 					'Cancel' => true,
 					'Back' => true,
 					'Next step' => true
+				];
+				break;
+
+			case 'Install section':
+				$buttons = [
+					'Cancel' => true,
+					'Back' => true,
+					'Finish' => true
 				];
 				break;
 		}
