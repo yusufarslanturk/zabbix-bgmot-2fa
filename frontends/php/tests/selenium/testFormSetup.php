@@ -322,11 +322,20 @@ class testFormSetup extends CWebTest {
 
 			return;
 		}
+
 		// Open "Configure DB connection" section
 		$this->openSpecifiedSection('Configure DB connection');
 
 		// Fill Database connection parameters
 		$form = $this->query('xpath://form')->asForm()->one();
+
+		// Workaroung implemented due to ZBX-18688 - Remove the below condition when issue is fixed
+		$db_types = $form->getField('Database type')->getOptions()->asText();
+		if ($data['field']['name'] === 'Database schema' && count($db_types) === 1) {
+
+			return;
+		}
+
 		$form->fill($db_parameters);
 
 		// Check that port number was trimmed after removing focus, starting with 1st non-numeric symbol.
