@@ -119,6 +119,89 @@ out:
 	return ret;
 }
 
+/******************************************************************************
+ *                                                                            *
+ * Function: regexp_compile2                                                  *
+ *                                                                            *
+ * Purpose: compiles a regular expression                                     *
+ *                                                                            *
+ * Parameters:                                                                *
+ *     pattern   - [IN] regular expression as a text string. Empty            *
+ *                      string ("") is allowed, it will match everything.     *
+ *                      NULL is not allowed.                                  *
+ *     flags     - [IN] regexp compilation parameters passed to pcre_compile. *
+ *                      PCRE_CASELESS, PCRE_NO_AUTO_CAPTURE, PCRE_MULTILINE.  *
+ *     regexp    - [OUT] compiled regexp. Can be NULL if only regular         *
+ *                       expression compilation is checked. Cleanup in caller.*
+ *     err_msg   - [OUT] error message. Deallocate in caller.                 *
+ *                                                                            *
+ * Return value: SUCCEED or FAIL                                              *
+ *                                                                            *
+ ******************************************************************************/
+static int	regexp_compile2(const char *pattern, int flags, zbx_regexp_t **regexp, char **err_msg)
+{
+	const char		*__function_name = "regexp_compile";
+	const char		*err_msg_static = NULL;
+	int			error_offset = -1, ret = SUCCEED;
+	pcre			*pcre_regexp;
+	struct pcre_extra	*extra;
+
+	zabbix_log(LOG_LEVEL_DEBUG, "In %s() pattern:'%s' flags:%d", __function_name, pattern, flags);
+
+#ifdef PCRE_NO_AUTO_CAPTURE
+	/* If PCRE_NO_AUTO_CAPTURE bit is set in 'flags' but regular expression contains references to numbered */
+	/* capturing groups then reset PCRE_NO_AUTO_CAPTURE bit. Otherwise the regular expression might not compile. */
+
+	if (0 != (flags & PCRE_NO_AUTO_CAPTURE))
+	{
+		const char	*pstart = pattern, *offset;
+
+		while (NULL != (offset = strchr(pstart, '\\')))
+		{
+			offset++;
+
+			if (('1' <= *offset && *offset <= '9') || 'g' == *offset)
+			{
+				flags ^= PCRE_NO_AUTO_CAPTURE;
+				break;
+			}
+
+			if (*offset == '\\')
+				offset++;
+
+			pstart = offset;
+		}
+	}
+#endif
+
+	if (NULL == (pcre_regexp = pcre_compile(pattern, flags, &err_msg_static, &error_offset, NULL)))
+	{
+		*err_msg = zbx_dsprintf(*err_msg, "%s, position %d, flags:%d", err_msg_static, error_offset, flags);
+		ret = FAIL;
+		goto out;
+	}
+
+	if (NULL != regexp)
+	{
+		if (NULL == (extra = pcre_study(pcre_regexp, 0, &err_msg_static)) && NULL != err_msg_static)
+		{
+			*err_msg = zbx_dsprintf(*err_msg, "pcre_study() error: %s, flags:%d", err_msg_static, flags);
+			pcre_free(pcre_regexp);
+			return FAIL;
+		}
+
+		*regexp = (zbx_regexp_t *)zbx_malloc(NULL, sizeof(zbx_regexp_t));
+		(*regexp)->pcre_regexp = pcre_regexp;
+		(*regexp)->extra = extra;
+	}
+	else
+		pcre_free(pcre_regexp);
+out:
+	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __function_name, zbx_result_string(ret));
+
+	return ret;
+}
+
 /*******************************************************
  *                                                     *
  * Function: zbx_regexp_compile                        *
