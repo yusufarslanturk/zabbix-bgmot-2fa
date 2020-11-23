@@ -220,6 +220,22 @@ int	zbx_regexp_compile(const char *pattern, zbx_regexp_t **regexp, const char **
 
 /*******************************************************
  *                                                     *
+ * Function: zbx_regexp_compile2                       *
+ *                                                     *
+ * Purpose: public wrapper for regexp_compile          *
+ *                                                     *
+ *******************************************************/
+int	zbx_regexp_compile2(const char *pattern, zbx_regexp_t **regexp, char **err_msg)
+{
+#ifdef PCRE_NO_AUTO_CAPTURE
+	return regexp_compile2(pattern, PCRE_MULTILINE | PCRE_NO_AUTO_CAPTURE, regexp, err_msg);
+#else
+	return regexp_compile2(pattern, PCRE_MULTILINE, regexp, err_msg);
+#endif
+}
+
+/*******************************************************
+ *                                                     *
  * Function: zbx_regexp_compile_ext                    *
  *                                                     *
  * Purpose: public wrapper for regexp_compile          *
@@ -508,6 +524,30 @@ void	zbx_regexp_free(zbx_regexp_t *regexp)
 int     zbx_regexp_match_precompiled(const char *string, const zbx_regexp_t *regexp)
 {
 	return (ZBX_REGEXP_MATCH == regexp_exec(string, regexp, 0, NULL)) ? 0 : -1;
+}
+
+/******************************************************************************
+ *                                                                            *
+ * Function: zbx_regexp_match_precompiled2                                    *
+ *                                                                            *
+ * Purpose: checks if string matches a precompiled regular expression without *
+ *          returning matching groups                                         *
+ *                                                                            *
+ * Parameters: string - [IN] string to be matched                             *
+ *             regexp - [IN] precompiled regular expression                   *
+ *            err_msg - [OUT] error message. Deallocate in caller.            *
+ *                                                                            *
+ * Return value: ZBX_REGEXP_MATCH        - successful match                   *
+ *               ZBX_REGEXP_NO_MATCH     - no match                           *
+ *               ZBX_REGEXP_RUNTIME_FAIL - error occurred                     *
+ *                                                                            *
+ * Comments: use this function for better performance if many strings need to *
+ *           be matched against the same regular expression                   *
+ *                                                                            *
+ ******************************************************************************/
+int     zbx_regexp_match_precompiled2(const char *string, const zbx_regexp_t *regexp, char **err_msg)
+{
+	return regexp_exec2(string, regexp, 0, NULL, err_msg);
 }
 
 /****************************************************************************************************
