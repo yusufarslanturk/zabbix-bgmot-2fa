@@ -490,28 +490,6 @@ void	zbx_regexp_free(zbx_regexp_t *regexp)
 
 /******************************************************************************
  *                                                                            *
- * Function: zbx_regexp_match_precompiled                                     *
- *                                                                            *
- * Purpose: checks if string matches a precompiled regular expression without *
- *          returning matching groups                                         *
- *                                                                            *
- * Parameters: string - [IN] string to be matched                             *
- *             regex  - [IN] precompiled regular expression                   *
- *                                                                            *
- * Return value: 0 - successful match                                         *
- *               nonzero - no match                                           *
- *                                                                            *
- * Comments: use this function for better performance if many strings need to *
- *           be matched against the same regular expression                   *
- *                                                                            *
- ******************************************************************************/
-int     zbx_regexp_match_precompiled(const char *string, const zbx_regexp_t *regexp)
-{
-	return (ZBX_REGEXP_MATCH == regexp_exec(string, regexp, 0, NULL)) ? 0 : -1;
-}
-
-/******************************************************************************
- *                                                                            *
  * Function: zbx_regexp_match_precompiled2                                    *
  *                                                                            *
  * Purpose: checks if string matches a precompiled regular expression without *
