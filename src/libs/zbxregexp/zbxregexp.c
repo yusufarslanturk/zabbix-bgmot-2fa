@@ -1080,10 +1080,18 @@ int	zbx_regexp_sub2(const char *string, const char *pattern, const char *output_
  * Purpose: This function is similar to zbx_regexp_sub() with exception that     *
  *          multiline matches are accepted.                                      *
  *                                                                               *
+ * Return value: if success:                                                     *
+ *                   ZBX_REGEXP_MATCH or                                         *
+ *                   ZBX_REGEXP_NO_MATCH                                         *
+ *               if errors:                                                      *
+ *                   ZBX_REGEXP_COMPILE_FAIL or                                  *
+ *                   ZBX_REGEXP_RUNTIME_FAIL with error message in' err_msg'     *
+ *                                                                               *
  *********************************************************************************/
-int	zbx_mregexp_sub(const char *string, const char *pattern, const char *output_template, char **out)
+int	zbx_mregexp_sub(const char *string, const char *pattern, const char *output_template, char **out,
+		char **err_msg)
 {
-	return regexp_sub(string, pattern, output_template, 0, out);
+	return regexp_sub2(string, pattern, output_template, 0, out, err_msg);
 }
 
 /*********************************************************************************
