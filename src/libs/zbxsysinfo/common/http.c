@@ -21,6 +21,7 @@
 #include "sysinfo.h"
 #include "zbxregexp.h"
 #include "zbxhttp.h"
+#include "log.h"
 
 #include "comms.h"
 #include "cfg.h"
@@ -519,8 +520,12 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	if (SYSINFO_RET_OK == (ret = get_http_page(hostname, path_str, port_str, &buffer, &error)))
 	{
+		char	*err_msg = NULL, *runtime_err_msg = NULL;
+
 		for (str = buffer; ;)
 		{
+			int	res;
+
 			if (NULL != (newline = strchr(str, '\n')))
 			{
 				if (str != newline && '\r' == newline[-1])
@@ -529,8 +534,28 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 					*newline = '\0';
 			}
 
-			if (SUCCEED == zbx_regexp_sub(str, regexp, output, &ptr) && NULL != ptr)
+			res = zbx_regexp_sub2(str, regexp, output, &ptr, &err_msg);
+
+			if (ZBX_REGEXP_MATCH == res && NULL != ptr)
 				break;
+
+			if (ZBX_REGEXP_COMPILE_FAIL == res)
+			{
+				SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Invalid fourth parameter: %s", err_msg));
+				zbx_free(err_msg);
+				zbx_free(buffer);
+				return SYSINFO_RET_FAIL;
+			}
+
+			if (ZBX_REGEXP_RUNTIME_FAIL == res)
+			{
+				/* Do not make the item NOTSUPPORTED in case of regexp runtime error. */
+				/* Handle it as a transient error, log only the first occurrence. */
+				if (NULL == runtime_err_msg)
+					runtime_err_msg = err_msg;
+				else
+					zbx_free(err_msg);
+			}
 
 			if (NULL != newline)
 				str = newline + 1;
@@ -544,6 +569,13 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 			SET_STR_RESULT(result, zbx_strdup(NULL, ""));
 
 		zbx_free(buffer);
+
+		if (NULL != runtime_err_msg)
+		{
+			zabbix_log(LOG_LEVEL_WARNING, "error occurred while matching regular expression \"%s\": %s",
+					regexp, runtime_err_msg);
+			zbx_free(runtime_err_msg);
+		}
 	}
 	else
 		SET_MSG_RESULT(result, error);
