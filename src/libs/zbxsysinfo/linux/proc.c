@@ -1458,6 +1458,8 @@ int	PROC_CPU_UTIL(AGENT_REQUEST *request, AGENT_RESULT *result)
 	if (NULL != (username = get_rparam(request, 1)) && '\0' == *username)
 		username = NULL;
 
+	/* if the number of 'cmdline' parameter is changed from 3 to other value */
+	/* adjust error message in zbx_procstat_get_util() */
 	if (NULL != (cmdline = get_rparam(request, 3)) && '\0' == *cmdline)
 		cmdline = NULL;
 

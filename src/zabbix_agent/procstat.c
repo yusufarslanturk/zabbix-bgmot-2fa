@@ -23,6 +23,7 @@
 #include "stats.h"
 #include "ipc.h"
 #include "procstat.h"
+#include "zbxregexp.h"
 
 #ifdef ZBX_PROCSTAT_COLLECTOR
 
@@ -1053,9 +1054,23 @@ int	zbx_procstat_get_util(const char *procname, const char *username, const char
 	if (NULL == (query = procstat_get_query(procstat_ref.addr, procname, username, cmdline, flags)))
 	{
 		if (procstat_queries_num(procstat_ref.addr) == PROCSTAT_MAX_QUERIES)
+		{
 			*errmsg = zbx_strdup(*errmsg, "Maximum number of queries reached.");
+		}
 		else
+		{
+			char	*errmsg_local = NULL;
+
+			if (FAIL == (ret = zbx_regexp_compile2(cmdline, NULL, &errmsg_local)))
+			{
+				*errmsg = zbx_dsprintf(*errmsg, "Invalid regular expression in the fourth parameter:"
+						" %s", errmsg_local);
+				zbx_free(errmsg_local);
+				goto out;
+			}
+
 			procstat_add(procname, username, cmdline, flags);
+		}
 
 		goto out;
 	}
