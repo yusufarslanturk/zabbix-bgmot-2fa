@@ -1939,9 +1939,9 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 
 					if (0 == (ZBX_METRIC_FLAG_LOG_COUNT & flags))	/* log[] or logrt[] */
 					{
-						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex(regexps, value,
+						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex2(regexps, value,
 								pattern, ZBX_CASE_SENSITIVE, output_template,
-								&item_value)))
+								&item_value, err_msg)))
 						{
 							if (SUCCEED == (send_err = process_value(server, port,
 									hostname, key, item_value, ITEM_STATE_NORMAL,
@@ -1968,8 +1968,8 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 					}
 					else	/* log.count[] or logrt.count[] */
 					{
-						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex(regexps, value,
-								pattern, ZBX_CASE_SENSITIVE, NULL, NULL)))
+						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex2(regexps, value,
+								pattern, ZBX_CASE_SENSITIVE, NULL, NULL, err_msg)))
 						{
 							(*s_count)--;
 						}
@@ -1978,9 +1978,9 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 					if ('\0' != *encoding)
 						zbx_free(value);
 
-					if (FAIL == regexp_ret)
+					if (ZBX_REGEXP_COMPILE_FAIL == regexp_ret ||
+							ZBX_REGEXP_RUNTIME_FAIL == regexp_ret)
 					{
-						*err_msg = zbx_dsprintf(*err_msg, "cannot compile regular expression");
 						ret = FAIL;
 						goto out;
 					}
@@ -2033,9 +2033,9 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 
 					if (0 == (ZBX_METRIC_FLAG_LOG_COUNT & flags))   /* log[] or logrt[] */
 					{
-						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex(regexps, value,
+						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex2(regexps, value,
 								pattern, ZBX_CASE_SENSITIVE, output_template,
-								&item_value)))
+								&item_value, err_msg)))
 						{
 							if (SUCCEED == (send_err = process_value(server, port,
 									hostname, key, item_value, ITEM_STATE_NORMAL,
@@ -2062,8 +2062,8 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 					}
 					else	/* log.count[] or logrt.count[] */
 					{
-						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex(regexps, value,
-								pattern, ZBX_CASE_SENSITIVE, NULL, NULL)))
+						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex2(regexps, value,
+								pattern, ZBX_CASE_SENSITIVE, NULL, NULL, err_msg)))
 						{
 							(*s_count)--;
 						}
@@ -2072,9 +2072,9 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 					if ('\0' != *encoding)
 						zbx_free(value);
 
-					if (FAIL == regexp_ret)
+					if (ZBX_REGEXP_COMPILE_FAIL == regexp_ret ||
+							ZBX_REGEXP_RUNTIME_FAIL == regexp_ret)
 					{
-						*err_msg = zbx_dsprintf(*err_msg, "cannot compile regular expression");
 						ret = FAIL;
 						goto out;
 					}
