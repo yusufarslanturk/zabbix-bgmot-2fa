@@ -811,7 +811,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 * @param int    $triggers[]['manual_close']                 [IN] (optional)
 	 * @param array  $triggers[]['tags']                         [IN] (optional)
 	 * @param string $triggers[]['tags'][]['tag']                [IN]
-	 * @param string $triggers[]['tags'][]['value']              [IN] (optional)
+	 * @param string $triggers[]['tags'][]['value']              [IN/OUT] (optional)
 	 * @param array  $triggers[]['dependencies']                 [IN] (optional)
 	 * @param string $triggers[]['dependencies'][]['triggerid']  [IN]
 	 *
@@ -839,7 +839,6 @@ abstract class CTriggerGeneral extends CApiService {
 				'triggerid' =>				['type' => API_ID, 'flags' => API_REQUIRED]
 			]]
 		]];
-
 		if (!CApiInputValidator::validate($api_input_rules, $triggers, '/', $error)) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, $error);
 		}
@@ -864,14 +863,14 @@ abstract class CTriggerGeneral extends CApiService {
 	 * @param int    $triggers[]['status']                       [IN] (optional)
 	 * @param int    $triggers[]['type']                         [IN] (optional)
 	 * @param string $triggers[]['url']                          [IN] (optional)
-	 * @param int    $triggers[]['recovery_mode']                [IN] (optional)
-	 * @param string $triggers[]['recovery_expression']          [IN] (optional)
-	 * @param int    $triggers[]['correlation_mode']             [IN] (optional)
-	 * @param string $triggers[]['correlation_tag']              [IN] (optional)
+	 * @param int    $triggers[]['recovery_mode']                [IN/OUT] (optional)
+	 * @param string $triggers[]['recovery_expression']          [IN/OUT] (optional)
+	 * @param int    $triggers[]['correlation_mode']             [IN/OUT] (optional)
+	 * @param string $triggers[]['correlation_tag']              [IN/OUT] (optional)
 	 * @param int    $triggers[]['manual_close']                 [IN] (optional)
 	 * @param array  $triggers[]['tags']                         [IN] (optional)
 	 * @param string $triggers[]['tags'][]['tag']                [IN]
-	 * @param string $triggers[]['tags'][]['value']              [IN] (optional)
+	 * @param string $triggers[]['tags'][]['value']              [IN/OUT] (optional)
 	 * @param array  $triggers[]['dependencies']                 [IN] (optional)
 	 * @param string $triggers[]['dependencies'][]['triggerid']  [IN]
 	 * @param array  $db_triggers                                [OUT]
@@ -916,7 +915,6 @@ abstract class CTriggerGeneral extends CApiService {
 				'triggerid' =>				['type' => API_ID, 'flags' => API_REQUIRED]
 			]]
 		]];
-
 		if (!CApiInputValidator::validate($api_input_rules, $triggers, '/', $error)) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, $error);
 		}
@@ -933,6 +931,7 @@ abstract class CTriggerGeneral extends CApiService {
 		];
 
 		$class = get_class($this);
+
 		switch ($class) {
 			case 'CTrigger':
 				$error_cannot_update = _('Cannot update "%1$s" for templated trigger "%2$s".');
@@ -966,8 +965,8 @@ abstract class CTriggerGeneral extends CApiService {
 		$_db_triggers = $this->createRelationMap($db_trigger_tags, 'triggerid', 'triggertagid')
 			->mapMany($_db_triggers, $db_trigger_tags, 'tags');
 
-		$read_only_fields = ['description', 'expression', 'recovery_mode', 'recovery_expression',
-			'correlation_mode', 'correlation_tag', 'manual_close'
+		$read_only_fields = ['description', 'expression', 'recovery_mode', 'recovery_expression', 'correlation_mode',
+			'correlation_tag', 'manual_close'
 		];
 
 		foreach ($triggers as $key => &$trigger) {
