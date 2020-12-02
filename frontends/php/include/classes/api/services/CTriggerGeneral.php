@@ -1043,6 +1043,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 */
 	protected function createReal(array &$triggers, $inherited = false) {
 		$class = get_class($this);
+
 		switch ($class) {
 			case 'CTrigger':
 				$resource = AUDIT_RESOURCE_TRIGGER;
@@ -1147,6 +1148,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 */
 	protected function updateReal(array $triggers, array $db_triggers, $inherited = false) {
 		$class = get_class($this);
+
 		switch ($class) {
 			case 'CTrigger':
 				$resource = AUDIT_RESOURCE_TRIGGER;
