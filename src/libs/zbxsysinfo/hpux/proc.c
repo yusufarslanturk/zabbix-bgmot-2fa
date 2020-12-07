@@ -144,7 +144,7 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 				if (-1 == pstat(PSTAT_GETCOMMANDLINE, un, sizeof(cmdline), 1, pst[i].pst_pid))
 					continue;
 
-				if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match_precompiled2(cmdline, regx,
+				if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match_precompiled(cmdline, regx,
 						&err_msg)))
 				{
 					continue;

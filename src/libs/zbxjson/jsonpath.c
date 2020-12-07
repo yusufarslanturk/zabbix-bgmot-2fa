@@ -1677,7 +1677,7 @@ static int	jsonpath_regexp_match(const char *text, const char *pattern, double *
 		return FAIL;
 	}
 
-	if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled2(text, rxp, &error)))
+	if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled(text, rxp, &error)))
 	{
 		*result = 1.0;
 	}

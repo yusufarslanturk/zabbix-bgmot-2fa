@@ -61,7 +61,7 @@ static int	filename_matches(const char *fname, const zbx_regexp_t *regex_incl, c
 
 	if (NULL != regex_incl)
 	{
-		if (ZBX_REGEXP_MATCH != (res = zbx_regexp_match_precompiled2(fname, regex_incl, err_msg)))
+		if (ZBX_REGEXP_MATCH != (res = zbx_regexp_match_precompiled(fname, regex_incl, err_msg)))
 		{
 			if (ZBX_REGEXP_NO_MATCH == res)
 				return ZBX_FILENAME_NO_MATCH;
@@ -73,7 +73,7 @@ static int	filename_matches(const char *fname, const zbx_regexp_t *regex_incl, c
 
 	if (NULL != regex_excl)
 	{
-		if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled2(fname, regex_excl, err_msg)))
+		if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled(fname, regex_excl, err_msg)))
 			return ZBX_FILENAME_NO_MATCH;
 
 		if (ZBX_REGEXP_RUNTIME_FAIL == res)
@@ -676,7 +676,7 @@ static int	vfs_dir_size(AGENT_REQUEST *request, AGENT_RESULT *result, HANDLE tim
 			if (NULL != regex_excl_dir && 0 != (data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
 			{
 				/* consider only path relative to path given in first parameter */
-				if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled2(path + dir_len + 1,
+				if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled(path + dir_len + 1,
 								regex_excl_dir, &error)))
 				{
 					zbx_free(wpath);
@@ -887,7 +887,7 @@ static int	vfs_dir_size(AGENT_REQUEST *request, AGENT_RESULT *result)
 				if (NULL != regex_excl_dir && 0 != S_ISDIR(status.st_mode))
 				{
 					/* consider only path relative to path given in first parameter */
-					if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled2(path + dir_len + 1,
+					if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled(path + dir_len + 1,
 							regex_excl_dir, &error)))
 					{
 						zbx_free(path);
@@ -1102,7 +1102,7 @@ static int	vfs_dir_count(const AGENT_REQUEST *request, AGENT_RESULT *result, HAN
 			if (NULL != regex_excl_dir && 0 != (data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
 			{
 				/* consider only path relative to path given in first parameter */
-				if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled2(path + dir_len + 1,
+				if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled(path + dir_len + 1,
 						regex_excl_dir, &error)))
 				{
 					zbx_free(path);
@@ -1302,7 +1302,7 @@ static int	vfs_dir_count(AGENT_REQUEST *request, AGENT_RESULT *result)
 				if (NULL != regex_excl_dir && 0 != S_ISDIR(status.st_mode))
 				{
 					/* consider only path relative to path given in first parameter */
-					if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled2(path + dir_len + 1,
+					if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled(path + dir_len + 1,
 							regex_excl_dir, &error)))
 					{
 						zbx_free(path);

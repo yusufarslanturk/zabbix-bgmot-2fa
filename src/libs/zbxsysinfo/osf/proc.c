@@ -122,7 +122,7 @@ int	PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 			{
 				int	rc;
 
-				if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match_precompiled2(psinfo.pr_psargs, regx,
+				if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match_precompiled(psinfo.pr_psargs, regx,
 						&err_msg)))
 				{
 					goto skip_process;
@@ -281,7 +281,7 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 			{
 				int	rc;
 
-				if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match_precompiled2(psinfo.pr_psargs, regx,
+				if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match_precompiled(psinfo.pr_psargs, regx,
 						&err_msg)))
 				{
 					goto skip_process;

@@ -505,7 +505,7 @@ int	VFS_FILE_REGMATCH(AGENT_REQUEST *request, AGENT_RESULT *result)
 			goto err;
 		}
 
-		if (ZBX_REGEXP_RUNTIME_FAIL == (rc = zbx_regexp_match_precompiled2(utf8, regx, &err_msg)))
+		if (ZBX_REGEXP_RUNTIME_FAIL == (rc = zbx_regexp_match_precompiled(utf8, regx, &err_msg)))
 		{
 			SET_MSG_RESULT(result, zbx_dsprintf(NULL, "error occurred while matching regular expression:"
 						" %s", err_msg));

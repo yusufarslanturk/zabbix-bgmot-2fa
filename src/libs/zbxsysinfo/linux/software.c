@@ -255,7 +255,7 @@ int	SYSTEM_SW_PACKAGES(AGENT_REQUEST *request, AGENT_RESULT *result)
 				{
 					int	res;
 
-					if (ZBX_REGEXP_NO_MATCH == (res = zbx_regexp_match_precompiled2(package, regx,
+					if (ZBX_REGEXP_NO_MATCH == (res = zbx_regexp_match_precompiled(package, regx,
 							&err_msg)))
 					{
 						goto next;

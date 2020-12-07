@@ -167,7 +167,7 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 			{
 				int	rc;
 
-				if (ZBX_REGEXP_MATCH == (rc = zbx_regexp_match_precompiled2(args, regx, &err_msg)))
+				if (ZBX_REGEXP_MATCH == (rc = zbx_regexp_match_precompiled(args, regx, &err_msg)))
 				{
 					comm_ok = 1;
 				}
@@ -351,7 +351,7 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 			{
 				int	rc;
 
-				if (ZBX_REGEXP_MATCH == (rc = zbx_regexp_match_precompiled2(args, regx, &err_msg)))
+				if (ZBX_REGEXP_MATCH == (rc = zbx_regexp_match_precompiled(args, regx, &err_msg)))
 				{
 					comm_ok = 1;
 				}

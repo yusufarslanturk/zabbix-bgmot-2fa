@@ -1422,7 +1422,7 @@ static int	pick_logfile(const char *directory, const char *filename, int mtime, 
 			char	*error = NULL;
 			int	res;
 
-			if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled2(filename, re, &error)))
+			if (ZBX_REGEXP_MATCH == (res = zbx_regexp_match_precompiled(filename, re, &error)))
 			{
 				add_logfile(logfiles, logfiles_alloc, logfiles_num, logfile_candidate, &file_buf);
 			}

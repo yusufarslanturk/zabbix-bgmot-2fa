@@ -422,7 +422,7 @@ void	zbx_regexp_free(zbx_regexp_t *regexp)
 
 /******************************************************************************
  *                                                                            *
- * Function: zbx_regexp_match_precompiled2                                    *
+ * Function: zbx_regexp_match_precompiled                                     *
  *                                                                            *
  * Purpose: checks if string matches a precompiled regular expression without *
  *          returning matching groups                                         *
@@ -439,7 +439,7 @@ void	zbx_regexp_free(zbx_regexp_t *regexp)
  *           be matched against the same regular expression                   *
  *                                                                            *
  ******************************************************************************/
-int     zbx_regexp_match_precompiled2(const char *string, const zbx_regexp_t *regexp, char **err_msg)
+int     zbx_regexp_match_precompiled(const char *string, const zbx_regexp_t *regexp, char **err_msg)
 {
 	return regexp_exec2(string, regexp, 0, NULL, err_msg);
 }

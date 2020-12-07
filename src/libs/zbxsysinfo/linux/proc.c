@@ -205,7 +205,7 @@ static int	check_proccomm(FILE *f_cmd, const zbx_regexp_t *regexp, char **err_ms
 			if ('\0' == tmp[i])
 				tmp[i] = ' ';
 
-		res = zbx_regexp_match_precompiled2(tmp, regexp, err_msg);
+		res = zbx_regexp_match_precompiled(tmp, regexp, err_msg);
 		zbx_free(tmp);
 
 		return res;

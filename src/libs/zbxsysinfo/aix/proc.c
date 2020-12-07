@@ -79,7 +79,7 @@ static int	check_procargs(struct procentry64 *procentry, const zbx_regexp_t *reg
 	if (i == sizeof(procargs) - 1)
 		procargs[i] = '\0';
 
-	return zbx_regexp_match_precompiled2(procargs, regexp, err_msg);
+	return zbx_regexp_match_precompiled(procargs, regexp, err_msg);
 }
 
 int	PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
