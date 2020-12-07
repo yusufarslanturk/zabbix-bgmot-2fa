@@ -1368,7 +1368,7 @@ static int	lld_items_preproc_step_validate(const zbx_lld_item_preproc_t * pp, zb
 
 			*output++ = '\0';
 
-			if (FAIL == (ret = zbx_regexp_compile2(pattern, NULL, &regexp_err)))
+			if (FAIL == (ret = zbx_regexp_compile(pattern, NULL, &regexp_err)))
 			{
 				zbx_snprintf(err, sizeof(err), "invalid regular expression: %s", regexp_err);
 				zbx_free(regexp_err);

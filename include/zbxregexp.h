@@ -39,7 +39,7 @@ typedef struct
 zbx_expression_t;
 
 /* regular expressions */
-int	zbx_regexp_compile2(const char *pattern, zbx_regexp_t **regexp, char **err_msg);
+int	zbx_regexp_compile(const char *pattern, zbx_regexp_t **regexp, char **err_msg);
 int	zbx_regexp_compile_ext(const char *pattern, zbx_regexp_t **regexp, int flags, char **err_msg);
 void	zbx_regexp_free(zbx_regexp_t *regexp);
 int	zbx_regexp_match_precompiled2(const char *string, const zbx_regexp_t *regexp, char **err_msg);

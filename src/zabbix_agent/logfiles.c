@@ -1587,7 +1587,7 @@ static int	compile_filename_regexp(const char *filename_regexp, zbx_regexp_t **r
 {
 	char	*regexp_err = NULL;
 
-	if (SUCCEED != zbx_regexp_compile2(filename_regexp, re, &regexp_err))
+	if (SUCCEED != zbx_regexp_compile(filename_regexp, re, &regexp_err))
 	{
 		*err_msg = zbx_dsprintf(*err_msg, "Cannot compile a regular expression describing filename pattern: %s",
 				regexp_err);

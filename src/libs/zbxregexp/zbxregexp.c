@@ -136,12 +136,12 @@ out:
 
 /*******************************************************
  *                                                     *
- * Function: zbx_regexp_compile2                       *
+ * Function: zbx_regexp_compile                        *
  *                                                     *
  * Purpose: public wrapper for regexp_compile          *
  *                                                     *
  *******************************************************/
-int	zbx_regexp_compile2(const char *pattern, zbx_regexp_t **regexp, char **err_msg)
+int	zbx_regexp_compile(const char *pattern, zbx_regexp_t **regexp, char **err_msg)
 {
 #ifdef PCRE_NO_AUTO_CAPTURE
 	return regexp_compile(pattern, PCRE_MULTILINE | PCRE_NO_AUTO_CAPTURE, regexp, err_msg);
@@ -166,7 +166,7 @@ int	zbx_regexp_compile_ext(const char *pattern, zbx_regexp_t **regexp, int flags
  *                                                                                                  *
  * Function: regexp_prepare                                                                         *
  *                                                                                                  *
- * Purpose: wrapper for zbx_regexp_compile2. Caches and reuses the last used regexp.                *
+ * Purpose: wrapper for zbx_regexp_compile. Caches and reuses the last used regexp.                 *
  *                                                                                                  *
  ****************************************************************************************************/
 static int	regexp_prepare(const char *pattern, int flags, zbx_regexp_t **regexp, char **err_msg)

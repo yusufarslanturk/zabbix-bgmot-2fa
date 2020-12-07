@@ -83,7 +83,7 @@ int	PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		return SYSINFO_RET_FAIL;
 	}
 
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile2(proccomm, &regx, &err_msg))
+	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
 	{
 		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
 				err_msg));
@@ -238,7 +238,7 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		return SYSINFO_RET_FAIL;
 	}
 
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile2(proccomm, &regx, &err_msg))
+	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
 	{
 		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
 				err_msg));

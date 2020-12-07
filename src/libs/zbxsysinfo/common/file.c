@@ -496,7 +496,7 @@ int	VFS_FILE_REGMATCH(AGENT_REQUEST *request, AGENT_RESULT *result)
 		utf8 = convert_to_utf8(buf, (size_t)nbytes, encoding);
 		zbx_rtrim(utf8, "\r\n");
 
-		if (NULL == regx && SUCCEED != zbx_regexp_compile2(regexp, &regx, &err_msg))
+		if (NULL == regx && SUCCEED != zbx_regexp_compile(regexp, &regx, &err_msg))
 		{
 			SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the second"
 						" parameter: %s", err_msg));

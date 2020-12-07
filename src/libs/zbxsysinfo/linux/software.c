@@ -209,7 +209,7 @@ int	SYSTEM_SW_PACKAGES(AGENT_REQUEST *request, AGENT_RESULT *result)
 		return ret;
 	}
 
-	if (1 == check_regex && SUCCEED != zbx_regexp_compile2(regex, &regx, &err_msg))
+	if (1 == check_regex && SUCCEED != zbx_regexp_compile(regex, &regx, &err_msg))
 	{
 		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Invalid regular expression in the first parameter: %s",
 				err_msg));

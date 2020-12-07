@@ -238,7 +238,7 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	count = sz / sizeof(struct kinfo_proc);
 #endif
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile2(proccomm, &regx, &err_msg))
+	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
 	{
 		zbx_free(proc);
 		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
@@ -445,7 +445,7 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	count = sz / sizeof(struct kinfo_proc);
 #endif
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile2(proccomm, &regx, &err_msg))
+	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
 	{
 		zbx_free(proc);
 		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
