@@ -133,7 +133,8 @@ out:
  *                      PCRE_CASELESS, PCRE_NO_AUTO_CAPTURE, PCRE_MULTILINE.  *
  *     regexp    - [OUT] compiled regexp. Can be NULL if only regular         *
  *                       expression compilation is checked. Cleanup in caller.*
- *     err_msg   - [OUT] error message. Deallocate in caller.                 *
+ *     err_msg   - [OUT] error message. Deallocate in caller. Can be NULL to  *
+ *                       discard the error message.                           *
  *                                                                            *
  * Return value: SUCCEED or FAIL                                              *
  *                                                                            *
@@ -176,7 +177,12 @@ static int	regexp_compile2(const char *pattern, int flags, zbx_regexp_t **regexp
 
 	if (NULL == (pcre_regexp = pcre_compile(pattern, flags, &err_msg_static, &error_offset, NULL)))
 	{
-		*err_msg = zbx_dsprintf(*err_msg, "%s, position %d, flags:%d", err_msg_static, error_offset, flags);
+		if (NULL != err_msg)
+		{
+			*err_msg = zbx_dsprintf(*err_msg, "%s, position %d, flags:%d", err_msg_static, error_offset,
+					flags);
+		}
+
 		ret = FAIL;
 		goto out;
 	}
@@ -185,9 +191,15 @@ static int	regexp_compile2(const char *pattern, int flags, zbx_regexp_t **regexp
 	{
 		if (NULL == (extra = pcre_study(pcre_regexp, 0, &err_msg_static)) && NULL != err_msg_static)
 		{
-			*err_msg = zbx_dsprintf(*err_msg, "pcre_study() error: %s, flags:%d", err_msg_static, flags);
+			if (NULL != err_msg)
+			{
+				*err_msg = zbx_dsprintf(*err_msg, "pcre_study() error: %s, flags:%d", err_msg_static,
+						flags);
+			}
+
 			pcre_free(pcre_regexp);
-			return FAIL;
+			ret = FAIL;
+			goto out;
 		}
 
 		*regexp = (zbx_regexp_t *)zbx_malloc(NULL, sizeof(zbx_regexp_t));
