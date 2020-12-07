@@ -41,7 +41,7 @@ zbx_regmatch_t;
 
 /******************************************************************************
  *                                                                            *
- * Function: regexp_compile2                                                  *
+ * Function: regexp_compile                                                   *
  *                                                                            *
  * Purpose: compiles a regular expression                                     *
  *                                                                            *
@@ -59,7 +59,7 @@ zbx_regmatch_t;
  * Return value: SUCCEED or FAIL                                              *
  *                                                                            *
  ******************************************************************************/
-static int	regexp_compile2(const char *pattern, int flags, zbx_regexp_t **regexp, char **err_msg)
+static int	regexp_compile(const char *pattern, int flags, zbx_regexp_t **regexp, char **err_msg)
 {
 	const char		*__function_name = "regexp_compile";
 	const char		*err_msg_static = NULL;
@@ -144,9 +144,9 @@ out:
 int	zbx_regexp_compile2(const char *pattern, zbx_regexp_t **regexp, char **err_msg)
 {
 #ifdef PCRE_NO_AUTO_CAPTURE
-	return regexp_compile2(pattern, PCRE_MULTILINE | PCRE_NO_AUTO_CAPTURE, regexp, err_msg);
+	return regexp_compile(pattern, PCRE_MULTILINE | PCRE_NO_AUTO_CAPTURE, regexp, err_msg);
 #else
-	return regexp_compile2(pattern, PCRE_MULTILINE, regexp, err_msg);
+	return regexp_compile(pattern, PCRE_MULTILINE, regexp, err_msg);
 #endif
 }
 
@@ -159,7 +159,7 @@ int	zbx_regexp_compile2(const char *pattern, zbx_regexp_t **regexp, char **err_m
  *******************************************************/
 int	zbx_regexp_compile_ext(const char *pattern, zbx_regexp_t **regexp, int flags, char **err_msg)
 {
-	return regexp_compile2(pattern, flags, regexp, err_msg);
+	return regexp_compile(pattern, flags, regexp, err_msg);
 }
 
 /****************************************************************************************************
@@ -188,7 +188,7 @@ static int	regexp_prepare(const char *pattern, int flags, zbx_regexp_t **regexp,
 		curr_pattern = NULL;
 		curr_flags = 0;
 
-		if (SUCCEED == regexp_compile2(pattern, flags, &curr_regexp, err_msg))
+		if (SUCCEED == regexp_compile(pattern, flags, &curr_regexp, err_msg))
 		{
 			curr_pattern = zbx_strdup(curr_pattern, pattern);
 			curr_flags = flags;
