@@ -520,7 +520,7 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	if (SYSINFO_RET_OK == (ret = get_http_page(hostname, path_str, port_str, &buffer, &error)))
 	{
-		char	*err_msg = NULL, *runtime_err_msg = NULL;
+		char	*err_msg = NULL;
 
 		for (str = buffer; ;)
 		{
@@ -539,22 +539,14 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 			if (ZBX_REGEXP_MATCH == res && NULL != ptr)
 				break;
 
-			if (ZBX_REGEXP_COMPILE_FAIL == res)
+			if (ZBX_REGEXP_COMPILE_FAIL == res || ZBX_REGEXP_RUNTIME_FAIL == res)
 			{
-				SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Invalid fourth parameter: %s", err_msg));
+				SET_MSG_RESULT(result, zbx_dsprintf(NULL, "%s regular expression in the fourth"
+						" parameter: %s", (ZBX_REGEXP_COMPILE_FAIL == res) ?
+						"Invalid" : "Error occurred while matching", err_msg));
 				zbx_free(err_msg);
 				zbx_free(buffer);
 				return SYSINFO_RET_FAIL;
-			}
-
-			if (ZBX_REGEXP_RUNTIME_FAIL == res)
-			{
-				/* Do not make the item NOTSUPPORTED in case of regexp runtime error. */
-				/* Handle it as a transient error, log only the first occurrence. */
-				if (NULL == runtime_err_msg)
-					runtime_err_msg = err_msg;
-				else
-					zbx_free(err_msg);
 			}
 
 			if (NULL != newline)
@@ -569,13 +561,6 @@ int	WEB_PAGE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 			SET_STR_RESULT(result, zbx_strdup(NULL, ""));
 
 		zbx_free(buffer);
-
-		if (NULL != runtime_err_msg)
-		{
-			zabbix_log(LOG_LEVEL_WARNING, "error occurred while matching regular expression \"%s\": %s",
-					regexp, runtime_err_msg);
-			zbx_free(runtime_err_msg);
-		}
 	}
 	else
 		SET_MSG_RESULT(result, error);

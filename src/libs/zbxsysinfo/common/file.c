@@ -258,7 +258,7 @@ err:
 int	VFS_FILE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
 	char		*filename, *regexp, encoding[32], *output, *start_line_str, *end_line_str;
-	char		*utf8, *tmp, *ptr = NULL, *err_msg = NULL, *runtime_err_msg = NULL;
+	char		*utf8, *tmp, *ptr = NULL, *err_msg = NULL;
 	int		nbytes, f = -1, ret = SYSINFO_RET_FAIL;
 	zbx_uint32_t	start_line, end_line, current_line = 0;
 	double		ts;
@@ -354,22 +354,13 @@ int	VFS_FILE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 			break;
 		}
 
-		if (ZBX_REGEXP_COMPILE_FAIL == res)
+		if (ZBX_REGEXP_COMPILE_FAIL == res || ZBX_REGEXP_RUNTIME_FAIL == res)
 		{
-			SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Invalid regular expression in the second"
-					" parameter: %s", err_msg));
+			SET_MSG_RESULT(result, zbx_dsprintf(NULL, "%s regular expression in the second parameter: %s",
+					(ZBX_REGEXP_COMPILE_FAIL == res) ? "Invalid" : "Error occurred while matching",
+					err_msg));
 			zbx_free(err_msg);
 			goto err;
-		}
-
-		if (ZBX_REGEXP_RUNTIME_FAIL == res)
-		{
-			/* Do not make the item NOTSUPPORTED in case of regexp runtime error. */
-			/* Handle it as a transient error, log only the first occurrence. */
-			if (NULL == runtime_err_msg)
-				runtime_err_msg = err_msg;
-			else
-				zbx_free(err_msg);
 		}
 
 		if (current_line >= end_line)
@@ -393,13 +384,6 @@ int	VFS_FILE_REGEXP(AGENT_REQUEST *request, AGENT_RESULT *result)
 err:
 	if (-1 != f)
 		close(f);
-
-	if (NULL != runtime_err_msg)
-	{
-		zabbix_log(LOG_LEVEL_WARNING, "error occurred while matching regular expression \"%s\": %s",
-				regexp, runtime_err_msg);
-		zbx_free(runtime_err_msg);
-	}
 
 	return ret;
 }
