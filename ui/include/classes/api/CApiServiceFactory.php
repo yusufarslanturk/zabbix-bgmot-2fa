@@ -75,6 +75,7 @@ class CApiServiceFactory extends CRegistryFactory {
 		'triggerprototype' => CTriggerPrototype::class,
 		'user' => CUser::class,
 		'usergroup' => CUserGroup::class,
+		'adusergroup' => CAdUserGroup::class,
 		'usermacro' => CUserMacro::class,
 		'valuemap' => CValueMap::class
 	];
