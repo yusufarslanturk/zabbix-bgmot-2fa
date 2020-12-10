@@ -119,6 +119,15 @@ class CUserGroup extends CApiService {
 			$sqlParts['where']['gug'] = 'g.usrgrpid=ug.usrgrpid';
 		}
 
+		// adusrgrpids
+		if (!is_null($options['adusrgrpids'])) {
+			zbx_value2array($options['adusrgrpids']);
+
+			$sqlParts['from']['adgroups_groups'] = 'adgroups_groups agug';
+			$sqlParts['where'][] = dbConditionInt('agug.adusrgrpid', $options['adusrgrpids']);
+			$sqlParts['where']['adgug'] = 'g.usrgrpid=agug.usrgrpid';
+		}
+
 		// status
 		if (!is_null($options['status'])) {
 			$sqlParts['where'][] = 'g.users_status='.zbx_dbstr($options['status']);
