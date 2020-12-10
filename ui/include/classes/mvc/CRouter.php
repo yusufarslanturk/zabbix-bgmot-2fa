@@ -55,6 +55,11 @@ class CRouter {
 	 */
 	private $routes = [
 		// action						controller											layout					view
+		'adusergrps.create'				=> ['CControllerAdUsergroupCreate',					null,					null],
+		'adusergrps.delete'				=> ['CControllerAdUsergroupDelete',					null,					null],
+		'adusergrps.list'				=> ['CControllerAdUsergroupList',					'layout.htmlpage',		'administration.adusergroups.list'],
+		'adusergrps.edit'				=> ['CControllerAdUsergroupEdit',					'layout.htmlpage',		'administration.adusergroups.edit'],
+		'adusergrps.update'				=> ['CControllerAdUsergroupUpdate',					null,					null],
 		'action.operation.get'			=> ['CControllerActionOperationGet',				'layout.json',			null],
 		'action.operation.validate'		=> ['CControllerActionOperationValidate',			'layout.json',			null],
 		'application.create'			=> ['CControllerApplicationCreate',					null,					null],
@@ -196,6 +201,8 @@ class CRouter {
 		'timeselector.update'			=> ['CControllerTimeSelectorUpdate',				'layout.json',			null],
 		'trigdisplay.edit'				=> ['CControllerTrigDisplayEdit',					'layout.htmlpage',		'administration.trigdisplay.edit'],
 		'trigdisplay.update'			=> ['CControllerTrigDisplayUpdate',					null,					null],
+		'twofa.edit'		=> ['CControllerTwofaEdit',				'layout.htmlpage',		'administration.twofa.edit'],
+		'twofa.update'		=> ['CControllerTwofaUpdate',				null,				null],
 		'user.create'					=> ['CControllerUserCreate',						null,					null],
 		'user.delete'					=> ['CControllerUserDelete',						null,					null],
 		'user.edit'						=> ['CControllerUserEdit',							'layout.htmlpage',		'administration.user.edit'],
@@ -272,6 +279,7 @@ class CRouter {
 		'correlation.php'				=> ['CLegacyAction', null, null],
 		'disc_prototypes.php'			=> ['CLegacyAction', null, null],
 		'discoveryconf.php'				=> ['CLegacyAction', null, null],
+		'duo.php'					=> ['CLegacyAction', null, null],
 		'graphs.php'					=> ['CLegacyAction', null, null],
 		'history.php'					=> ['CLegacyAction', null, null],
 		'host_discovery.php'			=> ['CLegacyAction', null, null],
