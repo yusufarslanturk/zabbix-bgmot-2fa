@@ -46,16 +46,14 @@ fi
 # Copy new files
 echo 'Patching WebUI files...'
 cd ui
+cp ${ZABBIX_INSTALL_PATH}/index.php  ${ZABBIX_INSTALL_PATH}/index.php-`date +%s`.bak
 cp index.php ${ZABBIX_INSTALL_PATH}/
 cp duo.php ${ZABBIX_INSTALL_PATH}/
 cp assets/styles/Duo-Frame.css ${ZABBIX_INSTALL_PATH}/assets/styles/
 cp js/Duo-Web-v2.js ${ZABBIX_INSTALL_PATH}/js
-cp ${ZABBIX_INSTALL_PATH}/index.php  ${ZABBIX_INSTALL_PATH}/index.php-`date +%s`.bak
 cd include
 cp ${ZABBIX_INSTALL_PATH}/include/defines.inc.php ${ZABBIX_INSTALL_PATH}/include/defines.inc.php-`date +%s`.bak
 cp defines.inc.php ${ZABBIX_INSTALL_PATH}/include/
-cp ${ZABBIX_INSTALL_PATH}/include/menu.inc.php ${ZABBIX_INSTALL_PATH}/include/menu.inc.php-`date +%s`.bak
-cp menu.inc.php ${ZABBIX_INSTALL_PATH}/include
 cp ${ZABBIX_INSTALL_PATH}/include/perm.inc.php ${ZABBIX_INSTALL_PATH}/include/perm.inc.php-`date +%s`.bak
 cp perm.inc.php ${ZABBIX_INSTALL_PATH}/include
 cp ${ZABBIX_INSTALL_PATH}/include/schema.inc.php ${ZABBIX_INSTALL_PATH}/include/schema.inc.php-`date +%s`.bak
@@ -76,6 +74,10 @@ cp CUserGroup.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/
 cd ../../
 mkdir ${ZABBIX_INSTALL_PATH}/include/classes/duo/ && chmod a+rx ${ZABBIX_INSTALL_PATH}/include/classes/duo/
 cp duo/CDuoWeb.php ${ZABBIX_INSTALL_PATH}/include/classes/duo/
+cp ${ZABBIX_INSTALL_PATH}/include/classes/helpers/CMenuHelper.php ${ZABBIX_INSTALL_PATH}/include/classes/helpers/CMenuHelper.php-`date +%s`.bak
+cp helpers/CMenuHelper.php ${ZABBIX_INSTALL_PATH}/include/classes/helpers/
+cp ${ZABBIX_INSTALL_PATH}/include/classes/helpers/CRoleHelper.php ${ZABBIX_INSTALL_PATH}/include/classes/helpers/CRoleHelper.php-`date +%s`.bak
+cp helpers/CRoleHelper.php ${ZABBIX_INSTALL_PATH}/include/classes/helpers/
 cp ${ZABBIX_INSTALL_PATH}/include/classes/ldap/CLdap.php ${ZABBIX_INSTALL_PATH}/include/classes/ldap/CLdap.php-`date +%s`.bak
 cp ldap/CLdap.php ${ZABBIX_INSTALL_PATH}/include/classes/ldap/
 cp ${ZABBIX_INSTALL_PATH}/include/classes/mvc/CRouter.php ${ZABBIX_INSTALL_PATH}/include/classes/mvc/CRouter.php-`date +%s`.bak
