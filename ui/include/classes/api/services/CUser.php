@@ -1348,7 +1348,6 @@ class CUser extends CApiService {
 			GROUP_GUI_ACCESS_DISABLED => CAuthenticationHelper::get(CAuthenticationHelper::AUTHENTICATION_TYPE)
 		];
 
-//+++
 		// Find out whether the user exists in internal DB
 		$user_found_in_db = false;
 		if (CAuthenticationHelper::get(CAuthenticationHelper::LDAP_CASE_SENSITIVE) == ZBX_AUTH_CASE_SENSITIVE) {
@@ -1380,7 +1379,7 @@ class CUser extends CApiService {
 				$user_info = $this->ldapLogin($user);
 				$adgroups = $user_info['memberof']; // Array of all AD groups the user is member of
 				// Get User Groups associated with at least one of AD group from all AD Groups the user is member of
-				$usrgrps_and_type = $this->getAdUserGroupsData($adgroups); //+++
+				$usrgrps_and_type = $this->getAdUserGroupsData($adgroups);
 				// Create User in local DB
 				if (array_key_exists('mail', $user_info)) {
 					$medias = [
@@ -1693,7 +1692,6 @@ class CUser extends CApiService {
 		return $usrgrps;
 	}
 
- 
 	private function getAdUserGroupsData($adgroups) {
 		// $adgroups is an array of records like this
 		// 'CN=<cn_name>,OU=<ouX>,OU=<ouY>...etc'
@@ -1747,9 +1745,9 @@ class CUser extends CApiService {
 			'groups' => $user_groups,
 			'user_type' => $adgrp_user_type
 		];
+		return $ret;
 	}
 
-		return $ret;
 	/**
 	 * Returns user type.
 	 *
