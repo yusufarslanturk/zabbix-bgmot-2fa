@@ -7,7 +7,7 @@ ALTER TABLE config ADD COLUMN 2fa_duo_a_key CHAR(40) DEFAULT '';
 CREATE TABLE `adusrgrp` (
         `adusrgrpid`             bigint unsigned                           NOT NULL,
         `name`                   varchar(64)     DEFAULT ''                NOT NULL,
-        `roleid`                 igint unsigned                            NOT NULL,
+        `roleid`                 bigint unsigned                            NOT NULL,
         PRIMARY KEY (adusrgrpid)
 ) ENGINE=InnoDB;
 CREATE UNIQUE INDEX `adusrgrp_1` ON `adusrgrp` (`name`);
