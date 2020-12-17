@@ -50,6 +50,15 @@ class CInput extends CTag {
 	}
 
 	/**
+	 * Prevent browser to autocomplete input element.
+	 */
+	public function disableAutocomplete() {
+		$this->setAttribute('autocomplete', 'off');
+
+		return $this;
+	}
+
+	/**
 	 * Enable or disable the element.
 	 *
 	 * @param bool $value

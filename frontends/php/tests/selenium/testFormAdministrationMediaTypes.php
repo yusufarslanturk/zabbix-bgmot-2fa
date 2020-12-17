@@ -63,27 +63,27 @@ class testFormAdministrationMediaTypes extends CLegacyWebTest {
 			],
 			[
 				[
-					'type' => 'Script',
+					'type' => 'Script'
 				]
 			],
 			[
 				[
 					'type' => 'SMS',
-					'gsm_modem' => '/dev/ttyS0',
+					'gsm_modem' => '/dev/ttyS0'
 				]
 			],
 			[
 				[
 					'type' => 'Jabber',
-					'jabber_username' => 'user@server',
+					'jabber_username' => 'user@server'
 				]
 			],
 			[
 				[
 					'type' => 'Ez Texting',
-					'eztext_limit' => 'USA (160 characters)',
+					'eztext_limit' => 'USA (160 characters)'
 				]
-			],
+			]
 		];
 	}
 

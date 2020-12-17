@@ -58,7 +58,7 @@ class API_JSON_Host extends CAPITest {
 						['templateid' => 10103]	/* Template App Telnet Service */
 					]
 				]
-			],
+			]
 		];
 	}
 

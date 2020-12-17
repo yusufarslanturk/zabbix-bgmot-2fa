@@ -83,7 +83,7 @@ class testFormUserProfile extends CLegacyWebTest {
 				'expected' => TEST_GOOD,
 				'password1' => PHPUNIT_LOGIN_PWD,
 				'password2' => PHPUNIT_LOGIN_PWD
-			]],
+			]]
 		];
 	}
 
@@ -527,13 +527,13 @@ class testFormUserProfile extends CLegacyWebTest {
 				'expected' => TEST_GOOD,
 				'type' => 'Jabber',
 				'send_to' => 'testmacro@zabbix.com',
-				'period' => '{$WORKING_HOURS}',
+				'period' => '{$WORKING_HOURS}'
 			]],
 			[[
 				'expected' => TEST_GOOD,
 				'type' => 'SMS via IP',
 				'send_to' => 'testperiod@zabbix.com',
-				'period' => '1-7,00:00-24:00',
+				'period' => '1-7,00:00-24:00'
 			]]
 		];
 	}

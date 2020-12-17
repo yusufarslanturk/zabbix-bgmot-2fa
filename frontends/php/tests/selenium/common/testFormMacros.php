@@ -80,7 +80,7 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'macro' => '{MACRO}',
+							'macro' => '{MACRO}'
 						]
 					],
 					'error_details' => 'Invalid macro "{MACRO}": incorrect syntax near "MACRO}".'
@@ -215,7 +215,7 @@ abstract class testFormMacros extends CWebTest {
 						[
 							'action' => USER_ACTION_UPDATE,
 							'index' => 0,
-							'macro' => '{MACRO}',
+							'macro' => '{MACRO}'
 						]
 					],
 					'error_details' => 'Invalid macro "{MACRO}": incorrect syntax near "MACRO}".'

@@ -936,7 +936,7 @@ class CWidgetHelper {
 							)
 					]))
 						->addClass(CMultiSelect::ZBX_STYLE_CLASS)
-						->addClass(ZBX_STYLE_COLUMN_50),
+						->addClass(ZBX_STYLE_COLUMN_50)
 				]))
 					->addClass(ZBX_STYLE_COLUMN_95)
 					->addClass(ZBX_STYLE_COLUMNS),
@@ -1034,7 +1034,7 @@ class CWidgetHelper {
 									->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 							)
 					))
-						->addClass(ZBX_STYLE_COLUMN_50),
+						->addClass(ZBX_STYLE_COLUMN_50)
 				]))
 					->addClass(ZBX_STYLE_COLUMNS)
 					->addClass(ZBX_STYLE_COLUMN_95)

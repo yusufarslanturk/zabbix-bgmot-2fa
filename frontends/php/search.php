@@ -411,7 +411,7 @@ if ($admin) {
 			_('Graphs'),
 			_('Screens'),
 			_('Discovery'),
-			_('Web'),
+			_('Web')
 		]);
 
 	foreach ($templates as $tnum => $template) {

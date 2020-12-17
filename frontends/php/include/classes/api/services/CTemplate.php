@@ -648,7 +648,7 @@ class CTemplate extends CHostGeneral {
 		}
 
 		DB::delete('optemplate', [
-			'templateid'=>$templateids,
+			'templateid'=>$templateids
 		]);
 
 		// delete empty operations
@@ -663,7 +663,7 @@ class CTemplate extends CHostGeneral {
 		}
 
 		DB::delete('operations', [
-			'operationid'=>$delOperationids,
+			'operationid'=>$delOperationids
 		]);
 
 		// http tests

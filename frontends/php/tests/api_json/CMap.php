@@ -43,8 +43,8 @@ class API_JSON_Map extends CAPITest {
 					'severity_min' => 0,
 					'show_suppressed' => 0,
 					'selements' => []
-				]],
-			],
+				]]
+			]
 		];
 	}
 

@@ -29,6 +29,7 @@ jQuery(function($) {
 	var ServerChecker = {
 		$elem: null,
 		elem_offset_top: 0,
+		elm_margins: 0,
 		delay: 10000, // 10 seconds
 		warning: false,
 
@@ -46,7 +47,10 @@ jQuery(function($) {
 			this.prepareNext(timeout);
 
 			this.$elem = $elem;
+			this.elm_margins = $elem.outerWidth(true) - $elem.width();
+			this.updateWidth();
 			this.$elem.on('mouseenter', this.hideMessage.bind(this));
+			$(window).on('resize', this.updateWidth.bind(this));
 		},
 
 		prepareNext: function(delay) {
@@ -101,6 +105,12 @@ jQuery(function($) {
 
 				this.$elem.fadeOut(200);
 			}
+		},
+
+		updateWidth: function() {
+			this.$elem.css({
+				width: window.innerWidth - (window.innerWidth - document.documentElement.clientWidth) - this.elm_margins
+			});
 		}
 	};
 

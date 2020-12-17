@@ -19,7 +19,7 @@ dnl
 
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([Zabbix],[4.0.27rc1])
+AC_INIT([Zabbix],[4.0.28rc1])
 AC_CONFIG_SRCDIR(src/zabbix_server/server.c)
 AM_INIT_AUTOMAKE([subdir-objects  filename-length-max=99])
 
@@ -99,8 +99,20 @@ AC_CHECK_HEADERS(net/if.h net/if_mib.h, [], [], [
 #endif
 ])
 
+AC_MSG_CHECKING(whether compiler supports -Werror=cpp)
+checked_werror_cpp_CFLAGS=""
 saved_CFLAGS="$CFLAGS"
-CFLAGS="-Werror $CFLAGS"
+CFLAGS="$CFLAGS -Werror=cpp"
+AC_TRY_COMPILE(,[
+  void f() {};
+],checked_werror_cpp_CFLAGS="-Werror=cpp"
+  AC_MSG_RESULT(yes),
+  AC_MSG_RESULT(no)
+)
+CFLAGS="$saved_CFLAGS"
+
+saved_CFLAGS="$CFLAGS"
+CFLAGS="$checked_werror_cpp_CFLAGS $CFLAGS"
 AC_CHECK_HEADERS(sys/mount.h sys/proc.h sys/sysctl.h sys/user.h, [], [], [
 #ifdef HAVE_SYS_TYPES_H
 #  include <sys/types.h>
@@ -678,6 +690,18 @@ AC_TRY_COMPILE([
 	tm.tm_gmtoff;
 ],
 AC_DEFINE(HAVE_TM_TM_GMTOFF,1,[Define to 1 if 'tm.tm_gmtoff' exists.])
+AC_MSG_RESULT(yes),
+AC_MSG_RESULT(no))
+
+AC_MSG_CHECKING(for field updates in struct vminfo_t)
+AC_TRY_COMPILE([
+#include <sys/sysinfo.h>
+],
+[
+	vminfo_t vminfo;
+	vminfo.updates;
+],
+AC_DEFINE(HAVE_VMINFO_T_UPDATES,1,[Define to 1 if 'vminfo.updates' exists.])
 AC_MSG_RESULT(yes),
 AC_MSG_RESULT(no))
 

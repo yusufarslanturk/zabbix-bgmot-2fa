@@ -1293,11 +1293,17 @@ abstract class CItemGeneral extends CApiService {
 							);
 						}
 
-						if (!is_numeric($params)
-								&& (new CUserMacroParser())->parse($params) != CParser::PARSE_SUCCESS
-								&& (!($this instanceof CItemPrototype)
-									|| ((new CLLDMacroFunctionParser())->parse($params) != CParser::PARSE_SUCCESS
-										&& (new CLLDMacroParser())->parse($params) != CParser::PARSE_SUCCESS))) {
+						if (is_numeric($params)) {
+							break;
+						}
+
+						$types = ['usermacros' => true];
+
+						if ($this instanceof CItemPrototype) {
+							$types['lldmacros'] = true;
+						}
+
+						if (!(new CMacrosResolverGeneral)->getMacroPositions($params, $types)) {
 							self::exception(ZBX_API_ERROR_PARAMETERS, _s('Incorrect value for field "%1$s": %2$s.',
 								'params', _('a numeric value is expected')
 							));
@@ -1804,14 +1810,14 @@ abstract class CItemGeneral extends CApiService {
 			],
 			'url' => [
 				'type' => API_STRING_UTF8, 'flags' => API_REQUIRED | API_NOT_EMPTY,
-				'length' => DB::getFieldLength('items', 'url'),
+				'length' => DB::getFieldLength('items', 'url')
 			],
 			'status_codes' => [
 				'type' => API_STRING_UTF8, 'length' => DB::getFieldLength('items', 'status_codes')
 			],
 			'follow_redirects' => [
 				'type' => API_INT32,
-				'in' => implode(',', [HTTPTEST_STEP_FOLLOW_REDIRECTS_OFF, HTTPTEST_STEP_FOLLOW_REDIRECTS_ON]),
+				'in' => implode(',', [HTTPTEST_STEP_FOLLOW_REDIRECTS_OFF, HTTPTEST_STEP_FOLLOW_REDIRECTS_ON])
 			],
 			'post_type' => [
 				'type' => API_INT32,
@@ -1845,13 +1851,13 @@ abstract class CItemGeneral extends CApiService {
 				'in' => implode(',', [HTTPCHECK_ALLOW_TRAPS_OFF, HTTPCHECK_ALLOW_TRAPS_ON])
 			],
 			'ssl_cert_file' => [
-				'type' => API_STRING_UTF8, 'length' => DB::getFieldLength('items', 'ssl_cert_file'),
+				'type' => API_STRING_UTF8, 'length' => DB::getFieldLength('items', 'ssl_cert_file')
 			],
 			'ssl_key_file' => [
-				'type' => API_STRING_UTF8, 'length' => DB::getFieldLength('items', 'ssl_key_file'),
+				'type' => API_STRING_UTF8, 'length' => DB::getFieldLength('items', 'ssl_key_file')
 			],
 			'ssl_key_password' => [
-				'type' => API_STRING_UTF8, 'length' => DB::getFieldLength('items', 'ssl_key_password'),
+				'type' => API_STRING_UTF8, 'length' => DB::getFieldLength('items', 'ssl_key_password')
 			],
 			'verify_peer' => [
 				'type' => API_INT32,

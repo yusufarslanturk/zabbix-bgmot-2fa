@@ -311,10 +311,10 @@ elseif (hasRequest('add') || hasRequest('update')) {
 
 			// copy template screens
 			$dbTemplateScreens = API::TemplateScreen()->get([
+				'noInheritance' => true,
 				'output' => ['screenid'],
 				'templateids' => $cloneTemplateId,
-				'preservekeys' => true,
-				'inherited' => false
+				'preservekeys' => true
 			]);
 
 			if ($dbTemplateScreens) {

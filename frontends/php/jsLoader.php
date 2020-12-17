@@ -101,7 +101,7 @@ $availableJScripts = [
 	// templates
 	'sysmap.tpl.js' => 'templates/',
 	// page-specific scripts
-	'items.js' => 'pages/',
+	'items.js' => 'pages/'
 ];
 
 $tranStrings = [

@@ -114,7 +114,7 @@ class C20ImportConverterTest extends CImportConverterTest {
 									'item_prototypes' => [],
 									'graph_prototypes' => [],
 									'trigger_prototypes' => []
-								],
+								]
 							]
 						]
 					]
@@ -219,7 +219,7 @@ class C20ImportConverterTest extends CImportConverterTest {
 											[
 												'macro' => '{#MACRO}',
 												'value' => 'regex',
-												'operator' => CONDITION_OPERATOR_REGEXP,
+												'operator' => CONDITION_OPERATOR_REGEXP
 											]
 										]
 									],
@@ -415,7 +415,7 @@ class C20ImportConverterTest extends CImportConverterTest {
 									'item_prototypes' => [],
 									'graph_prototypes' => [],
 									'trigger_prototypes' => []
-								],
+								]
 							]
 						]
 					]
@@ -545,7 +545,7 @@ class C20ImportConverterTest extends CImportConverterTest {
 											[
 												'macro' => '{#MACRO}',
 												'value' => 'regex',
-												'operator' => CONDITION_OPERATOR_REGEXP,
+												'operator' => CONDITION_OPERATOR_REGEXP
 											]
 										]
 									],

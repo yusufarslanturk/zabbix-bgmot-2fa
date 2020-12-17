@@ -51,7 +51,7 @@ class testPageLowLevelDiscovery extends CWebTest {
 		$this->assertSame($headers, $table->getHeadersText());
 
 		// Check that 3 rows displayed
-		$this->assertRowCount(3);
+		$this->assertTableStats(3);
 
 		// Check buttons.
 		$buttons_name = ['Disable', 'Enable', 'Check now', 'Delete'];

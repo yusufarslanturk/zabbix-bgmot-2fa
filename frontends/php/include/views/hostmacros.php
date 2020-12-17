@@ -82,6 +82,7 @@ else {
 			->setReadOnly(
 				$data['readonly'] || ($data['show_inherited_macros'] && !($macro['type'] & MACRO_TYPE_HOSTMACRO))
 			)
+			->disableAutocomplete()
 			->setAttribute('placeholder', _('value'));
 
 		$row = [$macro_cell, '&rArr;', $value_input];

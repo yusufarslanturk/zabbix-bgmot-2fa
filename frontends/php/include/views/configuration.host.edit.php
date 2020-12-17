@@ -666,10 +666,12 @@ $divTabs->addTab('ipmiTab', _('IPMI'),
 		->addRow(_('Username'),
 			(new CTextBox('ipmi_username', $data['ipmi_username'], ($data['flags'] == ZBX_FLAG_DISCOVERY_CREATED)))
 				->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+				->disableAutocomplete()
 		)
 		->addRow(_('Password'),
 			(new CTextBox('ipmi_password', $data['ipmi_password'], ($data['flags'] == ZBX_FLAG_DISCOVERY_CREATED)))
 				->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+				->disableAutocomplete()
 		)
 );
 
@@ -789,6 +791,7 @@ $encryption_form_list = (new CFormList('encryption'))
 		(new CTextBox('tls_psk', $data['tls_psk'], $data['flags'] == ZBX_FLAG_DISCOVERY_CREATED, 512))
 			->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			->setAriaRequired()
+			->disableAutocomplete()
 	)
 	->addRow(_('Issuer'),
 		(new CTextBox('tls_issuer', $data['tls_issuer'], $data['flags'] == ZBX_FLAG_DISCOVERY_CREATED, 1024))
