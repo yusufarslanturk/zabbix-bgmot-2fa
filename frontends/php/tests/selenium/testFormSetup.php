@@ -91,7 +91,8 @@ class testFormSetup extends CWebTest {
 		$this->checkSections('Check of pre-requesties');
 		$this->checkButtons();
 
-		$this->assertScreenshot($this->query('xpath://form')->one(), 'Prerequisites');
+		$skip_element = $this->query('xpath://td[text()="PHP databases support"]/..//span')->one();
+		$this->assertScreenshotExcept($this->query('xpath://form')->one(), [$skip_element], 'Prerequisites');
 	}
 
 	public function testFormSetup_dbConnectionSectionLayout() {
