@@ -47,6 +47,8 @@ class testFormSetup extends CWebTest {
 		$this->assertEquals("Welcome to\nZabbix 4.0", $this->query('xpath://div[@class="setup-title"]')->one()->getText());
 		$this->checkSections('Welcome');
 		$this->checkButtons('first section');
+
+		$this->assertScreenshot($this->query('xpath://form')->one(), 'Welcome');
 	}
 
 	public function testFormSetup_prerequisitesSectionLayout() {
@@ -88,6 +90,8 @@ class testFormSetup extends CWebTest {
 		$this->assertTableDataColumn($prerequisites, '');
 		$this->checkSections('Check of pre-requesties');
 		$this->checkButtons();
+
+		$this->assertScreenshot($this->query('xpath://form')->one(), 'Prerequisites');
 	}
 
 	public function testFormSetup_dbConnectionSectionLayout() {
@@ -122,6 +126,14 @@ class testFormSetup extends CWebTest {
 				$this->assertEquals($field_value, $field->getValue());
 				$this->assertEquals($maxlength, $field->getAttribute('maxlength'));
 			}
+
+			// Array of fields to be skippen by the screenshot check.
+			$skip_db_fields = [];
+			foreach(['Database type', 'Database host', 'Database name'] as $skip_field) {
+				array_push($skip_db_fields, $form->getField($skip_field));
+			}
+			$screenshot = ($db_type === 'PostgreSQL') ? 'ConfigureDB_Postgres' : 'ConfigureDB_MySQL';
+			$this->assertScreenshotExcept($form, $skip_db_fields, $screenshot);
 		}
 	}
 
@@ -147,6 +159,7 @@ class testFormSetup extends CWebTest {
 		}
 
 		$this->checkButtons();
+		$this->assertScreenshot($form, 'ZabbixServerDetails');
 	}
 
 	public function testFormSetup_summarySection() {
@@ -186,6 +199,14 @@ class testFormSetup extends CWebTest {
 			}
 		}
 		$this->checkButtons();
+
+		$skip_fields = [];
+		foreach(['Database server', 'Database name'] as $skip_field) {
+			$xpath = 'xpath://span[text()='.CXPathHelper::escapeQuotes($skip_field).']/../../div[@class="table-forms-td-right"]';
+			array_push($skip_fields, $this->query($xpath)->one());
+		}
+		$screenshot = ($db_parameters['Database type'] === 'PostgreSQL') ? 'PreInstall_Postgres' : 'PreInstall_MySQL';
+		$this->assertScreenshotExcept($this->query('xpath://form')->one(), $skip_fields, $screenshot);
 	}
 
 	public function testFormSetup_installSection() {
@@ -194,55 +215,12 @@ class testFormSetup extends CWebTest {
 		$this->assertEquals('Congratulations! You have successfully installed Zabbix frontend.',
 				$this->query('class:green')->one()->getText());
 		$this->checkButtons('last section');
+		$this->assertScreenshot($this->query('xpath://form')->one(), 'Install');
 
 		// Check that Dashboard view is opened after completing the form.
 		$this->query('button:Finish')->one()->click();
 		$this->page->waitUntilReady();
 		$this->assertContains('zabbix.php?action=dashboard.view', $this->page->getCurrentURL());
-	}
-
-	public function testFormSetup_sectionScreenshots() {
-		$this->page->login()->open('setup.php')->waitUntilReady();
-		$form = $this->query('xpath://form')->asForm()->one();
-
-		// Check Welcome section layout.
-		$this->assertScreenshot($form, 'Welcome');
-		$this->query('button:Next step')->one()->click();
-
-		// Check Prerequisites section layout.
-		$this->assertScreenshot($form, 'Prerequisites');
-		$this->query('button:Next step')->one()->click();
-
-		// Check Configure DB section layout.
-		$db_parameters = $this->getDbParameters();
-		$db_screenshot = ($db_parameters['Database type'] === 'PostgreSQL') ? 'ConfigureDB_Postgres' : 'ConfigureDB_MySQL';
-
-		$skip_db_fields = [];
-		foreach(['Database host', 'Database name'] as $skip_field) {
-			array_push($skip_db_fields, $form->getField($skip_field));
-		}
-		$this->assertScreenshotExcept($form, $skip_db_fields, $db_screenshot);
-
-		$form->fill($db_parameters);
-		$this->query('button:Next step')->one()->click();
-
-		// Check Zabbix server details section layout.
-		$this->assertScreenshot($form, 'ZabbixServerDetails');
-		$this->query('button:Next step')->one()->click();
-
-		// Check Pre-installation summary section layout.
-		$skip_preinstall_fields = [];
-		foreach(['Database server', 'Database name'] as $skip_field) {
-			$xpath = 'xpath://span[text()='.CXPathHelper::escapeQuotes($skip_field).']/../../div[@class="table-forms-td-right"]';
-			array_push($skip_preinstall_fields, $this->query($xpath)->one());
-		}
-		$preinstall_screenshot = ($db_parameters['Database type'] === 'PostgreSQL') ? 'PreInstall_Postgres' : 'PreInstall_MySQL';
-
-		$this->assertScreenshotExcept($form, $skip_preinstall_fields, $preinstall_screenshot);
-		$this->query('button:Next step')->one()->click();
-
-		// Check Install section layout.
-		$this->assertScreenshot($form, 'Install');
 	}
 
 	public function getDbConnectionDetails() {
