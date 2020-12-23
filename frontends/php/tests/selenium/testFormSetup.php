@@ -91,8 +91,9 @@ class testFormSetup extends CWebTest {
 		$this->checkSections('Check of pre-requesties');
 		$this->checkButtons();
 
-		$skip_element = $this->query('xpath://td[text()="PHP databases support"]/..//span')->one();
-		$this->assertScreenshotExcept($this->query('xpath://form')->one(), [$skip_element], 'Prerequisites');
+		global $DB;
+		$screenshot = ($DB['TYPE'] === ZBX_DB_POSTGRESQL) ? 'Prerequisites_PostgreSQL' : 'Prerequisites_MySQL';
+		$this->assertScreenshot($this->query('xpath://form')->one(), $screenshot);
 	}
 
 	public function testFormSetup_dbConnectionSectionLayout() {
