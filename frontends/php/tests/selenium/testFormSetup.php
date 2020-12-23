@@ -129,9 +129,9 @@ class testFormSetup extends CWebTest {
 				$this->assertEquals($maxlength, $field->getAttribute('maxlength'));
 			}
 
-			// Array of fields to be skippen by the screenshot check.
+			// Array of fields to be skipped by the screenshot check.
 			$skip_db_fields = [];
-			foreach(['Database type', 'Database host', 'Database name'] as $skip_field) {
+			foreach(['Database host', 'Database name'] as $skip_field) {
 				array_push($skip_db_fields, $form->getField($skip_field));
 			}
 			$screenshot = ($db_type === 'PostgreSQL') ? 'ConfigureDB_Postgres' : 'ConfigureDB_MySQL';
@@ -202,6 +202,7 @@ class testFormSetup extends CWebTest {
 		}
 		$this->checkButtons();
 
+		// Check screenshot of the Pre-installation summary section.
 		$skip_fields = [];
 		foreach(['Database server', 'Database name'] as $skip_field) {
 			$xpath = 'xpath://span[text()='.CXPathHelper::escapeQuotes($skip_field).']/../../div[@class="table-forms-td-right"]';
