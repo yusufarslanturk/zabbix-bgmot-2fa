@@ -201,6 +201,50 @@ class testFormSetup extends CWebTest {
 		$this->assertContains('zabbix.php?action=dashboard.view', $this->page->getCurrentURL());
 	}
 
+	public function testFormSetup_sectionScreenshots() {
+		$this->page->login()->open('setup.php')->waitUntilReady();
+		$form = $this->query('xpath://form')->asForm()->one();
+
+		// Check Welcome section layout.
+		$this->assertScreenshot($form, 'Welcome');
+		$this->query('button:Next step')->one()->click();
+
+		// Check Prerequisites section layout.
+		$this->assertScreenshot($form, 'Prerequisites');
+		$this->query('button:Next step')->one()->click();
+
+		// Check Configure DB section layout.
+		$db_parameters = $this->getDbParameters();
+		$db_screenshot = ($db_parameters['Database type'] === 'PostgreSQL') ? 'ConfigureDB_Postgres' : 'ConfigureDB_MySQL';
+
+		$skip_db_fields = [];
+		foreach(['Database host', 'Database name'] as $skip_field) {
+			array_push($skip_db_fields, $form->getField($skip_field));
+		}
+		$this->assertScreenshotExcept($form, $skip_db_fields, $db_screenshot);
+
+		$form->fill($db_parameters);
+		$this->query('button:Next step')->one()->click();
+
+		// Check Zabbix server details section layout.
+		$this->assertScreenshot($form, 'ZabbixServerDetails');
+		$this->query('button:Next step')->one()->click();
+
+		// Check Pre-installation summary section layout.
+		$skip_preinstall_fields = [];
+		foreach(['Database server', 'Database name'] as $skip_field) {
+			$xpath = 'xpath://span[text()='.CXPathHelper::escapeQuotes($skip_field).']/../../div[@class="table-forms-td-right"]';
+			array_push($skip_preinstall_fields, $this->query($xpath)->one());
+		}
+		$preinstall_screenshot = ($db_parameters['Database type'] === 'PostgreSQL') ? 'PreInstall_Postgres' : 'PreInstall_MySQL';
+
+		$this->assertScreenshotExcept($form, $skip_preinstall_fields, $preinstall_screenshot);
+		$this->query('button:Next step')->one()->click();
+
+		// Check Install section layout.
+		$this->assertScreenshot($form, 'Install');
+	}
+
 	public function getDbConnectionDetails() {
 		return [
 			// Incorrect DB host.
