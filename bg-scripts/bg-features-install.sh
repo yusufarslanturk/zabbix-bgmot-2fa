@@ -70,6 +70,7 @@ cp ${ZABBIX_INSTALL_PATH}/include/classes/api/services/CUser.php ${ZABBIX_INSTAL
 cp CUser.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/
 cp ${ZABBIX_INSTALL_PATH}/include/classes/api/services/CUserGroup.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/CUserGroup.php-`date +%s`.bak
 cp CUserGroup.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/
+cp CTwofa.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/
 cd ../../
 mkdir ${ZABBIX_INSTALL_PATH}/include/classes/duo/ && chmod a+rx ${ZABBIX_INSTALL_PATH}/include/classes/duo/
 cp duo/CDuoWeb.php ${ZABBIX_INSTALL_PATH}/include/classes/duo/
@@ -77,6 +78,7 @@ cp ${ZABBIX_INSTALL_PATH}/include/classes/helpers/CMenuHelper.php ${ZABBIX_INSTA
 cp helpers/CMenuHelper.php ${ZABBIX_INSTALL_PATH}/include/classes/helpers/
 cp ${ZABBIX_INSTALL_PATH}/include/classes/helpers/CRoleHelper.php ${ZABBIX_INSTALL_PATH}/include/classes/helpers/CRoleHelper.php-`date +%s`.bak
 cp helpers/CRoleHelper.php ${ZABBIX_INSTALL_PATH}/include/classes/helpers/
+cp helpers/CTwofaHelper.php ${ZABBIX_INSTALL_PATH}/include/classes/helpers/
 cp ${ZABBIX_INSTALL_PATH}/include/classes/ldap/CLdap.php ${ZABBIX_INSTALL_PATH}/include/classes/ldap/CLdap.php-`date +%s`.bak
 cp ldap/CLdap.php ${ZABBIX_INSTALL_PATH}/include/classes/ldap/
 cp ${ZABBIX_INSTALL_PATH}/include/classes/mvc/CRouter.php ${ZABBIX_INSTALL_PATH}/include/classes/mvc/CRouter.php-`date +%s`.bak
@@ -89,10 +91,13 @@ cp administration.twofa.edit.php ${ZABBIX_INSTALL_PATH}/app/views/
 cp js/administration.twofa.edit.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/
 cp ${ZABBIX_INSTALL_PATH}/app/views/js/administration.userrole.edit.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/administration.userrole.edit.js.php-`date +%s`.bak
 cp js/administration.userrole.edit.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/
+cp ${ZABBIX_INSTALL_PATH}/app/views/js/reports.auditlog.list.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/reports.auditlog.list.js.php-`date +%s`.bak
+cp js/reports.auditlog.list.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/
 cd ../controllers/
 cp -r CControllerAdUsergroup* ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerAuditLogList.php ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerAuditLogList.php-`date +%s`.bak
 cp CControllerAuditLogList.php ${ZABBIX_INSTALL_PATH}/app/controllers/
+cp CControllerTwofaEdit.php ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp -r CControllerTwofa* ${ZABBIX_INSTALL_PATH}/app/controllers/
 
 echo 'Done! Reload your browser to see changes.'
