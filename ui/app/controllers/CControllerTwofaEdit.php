@@ -39,7 +39,7 @@ class CControllerTwofaEdit extends CController {
 	 * @return bool
 	 */
 	protected function checkPermissions() {
-		return $this->getUserType() == USER_TYPE_SUPER_ADMIN;
+		return $this->checkAccess(CRoleHelper::UI_ADMINISTRATION_AUTHENTICATION);
 	}
 
 	protected function doAction() {
@@ -47,6 +47,19 @@ class CControllerTwofaEdit extends CController {
 			'action_submit' => 'twofa.update',
 			'form_refresh' => 0
 		];
+
+		$twofa_params = [
+			CTwofaHelper::TWOFA_TYPE,
+			CTwofaHelper::TWOFA_DUO_API_HOSTNAME,
+			CTwofaHelper::TWOFA_DUO_INTEGRATION_KEY,
+			CTwofaHelper::TWOFA_DUO_SECRET_KEY,
+			CTwofaHelper::TWOFA_DUO_A_KEY
+		];
+
+		$twofa = [];
+		foreach ($twofa_params as $param) {
+			$twofa[$param] = CTwofaHelper::get($param);
+		}
 
 		if ($this->hasInput('form_refresh')) {
 			$this->getInputs($data, [
@@ -58,10 +71,10 @@ class CControllerTwofaEdit extends CController {
 				'2fa_duo_a_key',
 			]);
 
-			$data += select_config();
+			$data += $twofa;
 		}
 		else {
-			$data += select_config();
+			$data += $twofa;
 		}
 
 		$response = new CControllerResponseData($data);
