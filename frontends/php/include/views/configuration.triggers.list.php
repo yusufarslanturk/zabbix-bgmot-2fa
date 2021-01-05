@@ -198,10 +198,10 @@ foreach ($data['triggers'] as $tnum => $trigger) {
 		$description[] = NAME_DELIMITER;
 	}
 
-	$description[] = new CLink(
+	$description[] = (new CLink(
 		CHtml::encode($trigger['description']),
 		'triggers.php?form=update&hostid='.$data['hostid'].'&triggerid='.$triggerid
-	);
+	))->addClass(ZBX_STYLE_WORDWRAP);
 
 	if ($trigger['dependencies']) {
 		$description[] = [BR(), bold(_('Depends on').':')];
