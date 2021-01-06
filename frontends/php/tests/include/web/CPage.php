@@ -74,6 +74,14 @@ class CPage {
 	 * Web driver and CElementQuery initialization.
 	 */
 	public function __construct() {
+		$this->connect();
+		CElementQuery::setPage($this);
+	}
+
+	/**
+	 * Web driver initialization.
+	 */
+	public function connect() {
 		$capabilities = DesiredCapabilities::chrome();
 		if (defined('PHPUNIT_BROWSER_NAME')) {
 			$capabilities->setBrowserName(PHPUNIT_BROWSER_NAME);
@@ -95,8 +103,6 @@ class CPage {
 		$this->driver->manage()->window()->setSize(
 				new WebDriverDimension(self::DEFAULT_PAGE_WIDTH, self::DEFAULT_PAGE_HEIGHT)
 		);
-
-		CElementQuery::setPage($this);
 	}
 
 	/**
@@ -155,6 +161,14 @@ class CPage {
 	public function destroy() {
 		$this->driver->quit();
 		self::$cookie = null;
+	}
+
+	/**
+	 * Reconnect web driver.
+	 */
+	public function reset() {
+		$this->destroy();
+		$this->connect();
 	}
 
 	/**
