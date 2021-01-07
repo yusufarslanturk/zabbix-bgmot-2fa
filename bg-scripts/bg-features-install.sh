@@ -98,6 +98,8 @@ cd ../controllers/
 cp -r CControllerAdUsergroup* ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerAuditLogList.php ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerAuditLogList.php-`date +%s`.bak
 cp CControllerAuditLogList.php ${ZABBIX_INSTALL_PATH}/app/controllers/
+cp ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerUserroleUpdate.php ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerUserroleUpdate.php-`date +%s`.bak
+cp CControllerUserroleUpdate.php ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp CControllerTwofaEdit.php ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp -r CControllerTwofa* ${ZABBIX_INSTALL_PATH}/app/controllers/
 
