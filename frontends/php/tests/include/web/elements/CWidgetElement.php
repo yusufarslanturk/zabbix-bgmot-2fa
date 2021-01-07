@@ -60,12 +60,12 @@ class CWidgetElement extends CElement {
 	}
 
 	/**
-	 * Check if widget is editable (dashboard is set to edit mode).
+	 * Check if widget is editable (widget edit button is present).
 	 *
 	 * @return boolean
 	 */
 	public function isEditable() {
-		return $this->query('xpath:.//button[@class="btn-widget-edit"]')->one()->isDisplayed();
+		return $this->query('xpath:.//button[@class="btn-widget-edit"]')->one()->isPresent();
 	}
 
 	/**

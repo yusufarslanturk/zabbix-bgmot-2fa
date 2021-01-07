@@ -175,7 +175,6 @@ class CDashboardElement extends CElement {
 		$this->query('xpath:.//div[contains(@class, "dashbrd-grid-widget-head")]/h4[text()="'.$name.
 				'"]/../../..//button[@title="Delete"]')->one()->click()->waitUntilNotVisible();
 
-
 		return $this;
 	}
 
