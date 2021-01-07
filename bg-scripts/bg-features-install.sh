@@ -57,6 +57,7 @@ cp ${ZABBIX_INSTALL_PATH}/include/perm.inc.php ${ZABBIX_INSTALL_PATH}/include/pe
 cp perm.inc.php ${ZABBIX_INSTALL_PATH}/include
 cp ${ZABBIX_INSTALL_PATH}/include/schema.inc.php ${ZABBIX_INSTALL_PATH}/include/schema.inc.php-`date +%s`.bak
 cp schema.inc.php ${ZABBIX_INSTALL_PATH}/include
+cp views/general.duo.php ${ZABBIX_INSTALL_PATH}/include/views/
 cd classes/api
 cp ${ZABBIX_INSTALL_PATH}/include/classes/api/API.php ${ZABBIX_INSTALL_PATH}/include/classes/api/API.php-`date +%s`.bak
 cp API.php ${ZABBIX_INSTALL_PATH}/include/classes/api/
