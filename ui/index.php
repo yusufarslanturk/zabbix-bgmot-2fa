@@ -80,7 +80,7 @@ if (hasRequest('enter') && CWebUser::login(getRequest('name', ZBX_GUEST_USER), g
 		]);
 	}
 
-	$twofa_type = $config['2fa_type'];
+	$twofa_type = CTwofaHelper::get(CTwofaHelper::TWOFA_TYPE);
 	if ($twofa_type == ZBX_AUTH_2FA_NONE || CWebUser::isGuest()) {
 		$redirect = array_filter([CWebUser::isGuest() ? '' : $request, CWebUser::$data['url'], CMenuHelper::getFirstUrl()]);
 		redirect(reset($redirect));

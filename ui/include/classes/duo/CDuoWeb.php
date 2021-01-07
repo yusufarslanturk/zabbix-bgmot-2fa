@@ -99,10 +99,9 @@ class CDuoWeb
 
     public static function signRequest($username, $time = null)
     {
-        $config = select_config();
-        $ikey = $config['2fa_duo_integration_key'];
-        $skey = $config['2fa_duo_secret_key'];
-        $akey = $config['2fa_duo_a_key'];
+        $ikey = CTwofaHelper::get(CTwofaHelper::TWOFA_DUO_INTEGRATION_KEY);
+        $skey = CTwofaHelper::get(CTwofaHelper::TWOFA_DUO_SECRET_KEY);
+        $akey = CTwofaHelper::get(CTwofaHelper::TWOFA_DUO_A_KEY);
 
         if (!isset($username) || strlen($username) === 0) {
             return self::ERR_USER;
@@ -130,10 +129,16 @@ class CDuoWeb
 
     public static function verifyResponse($sig_response, $username, $time = null)
     {
-        $config = select_config();
-        $ikey = $config['2fa_duo_integration_key'];
-        $skey = $config['2fa_duo_secret_key'];
-        $akey = $config['2fa_duo_a_key'];
+	// Session was reset sow we can't use CTwofaHelper (API calls)
+	// get parameters directly from DB
+	$result = DBselect('SELECT 2fa_duo_integration_key, 2fa_duo_secret_key, 2fa_duo_a_key FROM config');
+	$db_twofa =[];
+	while ($row = DBfetch($result)) {
+		$db_twofa[] = $row;
+	}
+	$ikey = $db_twofa[0]['2fa_duo_integration_key'];
+	$skey = $db_twofa[0]['2fa_duo_secret_key'];
+	$akey = $db_twofa[0]['2fa_duo_a_key'];
 
         list($auth_sig, $app_sig) = explode(':', $sig_response);
 

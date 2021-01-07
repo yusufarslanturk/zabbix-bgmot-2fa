@@ -25,9 +25,7 @@ class CTwofaHelper extends CConfigGeneralHelper {
 	 */
 	protected static function loadParams(?string $param = null, bool $is_global = false): void {
 		if (!self::$params) {
-			self::$params = API::twofa()->get(['output' => 'extend']);
-			sdff("+++include/classes/helpers/CTwofaHelper:params=");
-			sdff(self::$params);
+			self::$params = API::Twofa()->get(['output' => 'extend']);
 
 			if (self::$params === false) {
 				throw new Exception(_('Unable to load 2FA API parameters.'));

@@ -53,14 +53,10 @@ class CTwofa extends CApiService {
 		$db_twofa = [];
 
 		$result = DBselect($this->createSelectQuery($this->tableName(), $options));
-		sdff("+++include/classes/api/services/CTwofa:SQL query=");
-		sdff($this->createSelectQuery($this->tableName(), $options));
 
 		while ($row = DBfetch($result)) {
 			$db_twofa[] = $row;
 		}
-		sdff("+++include/classes/api/services/CTwofa:db_twofa=");
-		sdff($db_twofa);
 		$db_twofa = $this->unsetExtraFields($db_twofa, ['configid'], []);
 
 		return $db_twofa[0];

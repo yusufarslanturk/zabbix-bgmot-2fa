@@ -13,6 +13,7 @@ $twofaFormList = new CFormList('twofaList');
 // append 2fa_type radio buttons to form list
 $twofaFormList->addRow(_('Two factor authentication'),
 	(new CRadioButtonList('2fa_type', (int) $data['2fa_type']))
+		->setAttribute('autofocus', 'autofocus')
 		->addValue(_('None'), ZBX_AUTH_2FA_NONE, null, 'submit()')
 		->addValue(_('DUO'), ZBX_AUTH_2FA_DUO, null, 'submit()')
 		->setModern(true)

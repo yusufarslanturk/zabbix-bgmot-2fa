@@ -12,8 +12,7 @@ $sessionid = $data['sessionid'];
 $sig_request = $data['sig_request'];
 $name = $data['name'];
 
-$config = select_config();
-$server = $config['2fa_duo_api_hostname'];
+$server = CTwofaHelper::get(CTwofaHelper::TWOFA_DUO_API_HOSTNAME);
 
 (new CDiv([
 	(new CTag('main', true, [

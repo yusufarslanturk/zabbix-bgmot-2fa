@@ -1,24 +1,4 @@
 <?php
-/*
-** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
-**
-** This program is free software; you can redistribute it and/or modify
-** it under the terms of the GNU General Public License as published by
-** the Free Software Foundation; either version 2 of the License, or
-** (at your option) any later version.
-**
-** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-** GNU General Public License for more details.
-**
-** You should have received a copy of the GNU General Public License
-** along with this program; if not, write to the Free Software
-** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-**/
-
-
 class CControllerTwofaUpdate extends CController {
 
 	/**
@@ -37,11 +17,9 @@ class CControllerTwofaUpdate extends CController {
 
 	protected function checkInput() {
 		$fields = [
-			'2fa_type' =>			'db config.2fa_type',
 			'form_refresh' =>		'string',
-			// actions
 			'update' =>			'string',
-			// DUO 2FA
+			'2fa_type' =>			'in '.ZBX_AUTH_2FA_NONE.','.ZBX_AUTH_2FA_DUO,
 			'2fa_duo_api_hostname' =>	'db config.2fa_duo_api_hostname',
 			'2fa_duo_integration_key' => 	'db config.2fa_duo_integration_key',
 			'2fa_duo_secret_key' =>		'db config.2fa_duo_secret_key',
@@ -59,50 +37,71 @@ class CControllerTwofaUpdate extends CController {
 	}
 
 	/**
-	 * Validate DUO 2FA settings.
-	 *
-	 * @return bool
-	 */
-	private function validateDuoTwofa() {
-		$is_valid = true;
-		$config = select_config();
-		$req = [];
-		$this->getInputs($req, ['2fa_type']);
-		$fields = ['2fa_duo_api_hostname', '2fa_duo_integration_key', '2fa_duo_secret_key', '2fa_duo_a_key'];
-		$this->getInputs($config, $fields);
-
-		if ($req['2fa_type'] == ZBX_AUTH_2FA_NONE) {
-			return $is_valid;
-		}
-
-		$settings_changed = array_diff_assoc($config, select_config());
-
-		if (!$settings_changed) {
-			return $is_valid;
-		}
-
-		foreach ($fields as $field) {
-			if (trim($config[$field]) === '') {
-				$this->response->setMessageError(
-					_s('Incorrect value for field "%1$s": %2$s.', $field, _('cannot be empty'))
-				);
-				$is_valid = false;
-				break;
-			}
-		}
-
-		return $is_valid;
-	}
-	/**
 	 * Validate is user allowed to change configuration.
 	 *
 	 * @return bool
 	 */
 	protected function checkPermissions() {
-		return $this->getUserType() == USER_TYPE_SUPER_ADMIN;
+		return $this->checkAccess(CRoleHelper::UI_ADMINISTRATION_AUTHENTICATION);
 	}
 
+ 	/**
+	 * Validate DUO 2FA settings.
+ 	 *
+ 	 * @return bool
+ 	 */
+	private function validateDuoTwofa() {
+		$twofa_fields = [
+			'2fa_type', '2fa_duo_api_hostname', '2fa_duo_integration_key',
+			'2fa_duo_secret_key', '2fa_duo_a_key'
+		];
+		$twofa_auth = [
+			'2fa_type' => CTwofaHelper::get(CTwofaHelper::TWOFA_TYPE),
+			'2fa_duo_api_hostname' => CTwofaHelper::get(CTwofaHelper::TWOFA_DUO_API_HOSTNAME),
+			'2fa_duo_integration_key' => CTwofaHelper::get(CTwofaHelper::TWOFA_DUO_INTEGRATION_KEY),
+			'2fa_duo_secret_key' => CTwofaHelper::get(CTwofaHelper::TWOFA_DUO_SECRET_KEY),
+			'2fa_duo_a_key' => CTwofaHelper::get(CTwofaHelper::TWOFA_DUO_A_KEY)
+		];
+		$this->getInputs($twofa_auth, $twofa_fields);
+
+		if ($twofa_auth['2fa_type'] == ZBX_AUTH_2FA_NONE) {
+			return true;
+		}
+		foreach ($twofa_fields as $field) {
+			if (trim($twofa_auth[$field]) === '') {
+				CMessageHelper::setErrorTitle(_s('Incorrect value for field "%1$s": %2$s.', $field, _('cannot be empty')));
+
+				return false;
+			}
+		}
+
+		return true;
+ 	}
+
 	protected function doAction() {
+		$twofa_params = [
+			CTwofaHelper::TWOFA_TYPE,
+			CTwofaHelper::TWOFA_DUO_API_HOSTNAME,
+			CTwofaHelper::TWOFA_DUO_INTEGRATION_KEY,
+			CTwofaHelper::TWOFA_DUO_SECRET_KEY,
+			CTwofaHelper::TWOFA_DUO_A_KEY
+		];
+
+		$twofa = [];
+		foreach ($twofa_params as $param) {
+			$twofa[$param] = CTwofaHelper::get($param);
+		}
+
+		if ( ($this->getInput('2fa_type') == ZBX_AUTH_2FA_DUO &&
+		      $this->getInput('2fa_duo_api_hostname', 'no') == 'no') ||
+		     ($this->getInput('2fa_type') == ZBX_AUTH_2FA_NONE &&
+		      $this->getInput('2fa_duo_api_hostname', 'no') != 'no') ) {
+			// Just switching Tabs
+			$this->response->setFormData($this->getInputAll());
+			$this->setResponse($this->response);
+			return;
+		}
+		// User clicked 'Update'
 		$duo_twofa_valid = $this->validateDuoTwofa();
 
 		if (!$duo_twofa_valid) {
@@ -111,11 +110,7 @@ class CControllerTwofaUpdate extends CController {
 			return;
 		}
 
-		$config = select_config();
-
-		$fields = [
-			'2fa_type' => ZBX_AUTH_2FA_NONE
-		];
+		$fields = ['2fa_type' => ZBX_AUTH_2FA_NONE];
 
 		if ($this->getInput('2fa_type', ZBX_AUTH_2FA_NONE) == ZBX_AUTH_2FA_DUO) {
 			$fields += [
@@ -126,33 +121,25 @@ class CControllerTwofaUpdate extends CController {
 			];
 		}
 
-		$data = array_merge($config, $fields);
+		$data = $fields + $twofa;
 		$this->getInputs($data, array_keys($fields));
-		$data = array_diff_assoc($data, $config);
+		$data = array_diff_assoc($data, $twofa);
 
-		if ($data &&
-		    (!array_key_exists('2fa_type', $data) || // something other than 2fa_type changed
-		    ($data['2fa_type'] == ZBX_AUTH_2FA_DUO &&
-		     $this->getInput('2fa_duo_api_hostname', 'no') != 'no') || // User did not just switched to from None
-		    ($data['2fa_type'] == ZBX_AUTH_2FA_NONE &&
-		     $this->getInput('2fa_duo_api_hostname', 'no') == 'no')) // User did not just switched to None
-		   ) {
-			$result = update_config($data);
+		if ($data) {
+			$result = API::Twofa()->update($data);
+
 			if ($result) {
 				if (array_key_exists('2fa_type', $data)) {
 					$this->invalidateSessions();
 				}
 
-				$this->response->setMessageOk(_('2FA settings updated'));
 				add_audit(AUDIT_ACTION_UPDATE, AUDIT_RESOURCE_ZABBIX_CONFIG, _('2FA settings changed'));
+				CMessageHelper::setSuccessTitle(_('2FA settings updated'));
 			}
 			else {
 				$this->response->setFormData($this->getInputAll());
-				$this->response->setMessageError(_('Cannot update 2FA settings'));
+				CMessageHelper::setErrorTitle(_('Cannot update 2FA'));
 			}
-		}
-		else {
-			$this->response->setFormData($this->getInputAll());
 		}
 
 		$this->setResponse($this->response);
