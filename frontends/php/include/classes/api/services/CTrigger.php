@@ -631,7 +631,6 @@ class CTrigger extends CTriggerGeneral {
 			'triggerid' =>			['type' => API_ID, 'flags' => API_REQUIRED],
 			'dependsOnTriggerid' =>	['type' => API_ID, 'flags' => API_REQUIRED]
 		]];
-
 		if (!CApiInputValidator::validate($api_input_rules, $triggers_data, '/', $error)) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, $error);
 		}
@@ -697,8 +696,8 @@ class CTrigger extends CTriggerGeneral {
 	/**
 	 * Add the given dependencies and inherit them on all child triggers.
 	 *
-	 * @param array $triggers_data   an array of trigger dependency pairs, each pair in the form of
-	 *                              array('triggerid' => 1, 'dependsOnTriggerid' => 2)
+	 * @param array $triggers_data  An array of trigger dependency pairs, each pair in the form of
+	 *                              ['triggerid' => 1, 'dependsOnTriggerid' => 2].
 	 * @param bool  $inherited      Determines either to check permissions for added dependencies. Permissions are not
 	 *                              validated for inherited triggers.
 	 *

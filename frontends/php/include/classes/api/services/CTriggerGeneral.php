@@ -477,13 +477,62 @@ abstract class CTriggerGeneral extends CApiService {
 	}
 
 	/**
+	 * Populate an array by "hostid" keys.
+	 *
+	 * @param array  $descriptions
+	 * @param string $descriptions[<description>][]['expression']
+	 *
+	 * @throws APIException  If host or template does not exists.
+	 *
+	 * @return array
+	 */
+	protected function populateHostIds($descriptions) {
+		$expression_data = new CTriggerExpression(['lldmacros' => $this instanceof CTriggerPrototype]);
+
+		$hosts = [];
+
+		foreach ($descriptions as $description => $triggers) {
+			foreach ($triggers as $index => $trigger) {
+				$expression_data->parse($trigger['expression']);
+				$hosts[$expression_data->getHosts()[0]][$description][] = $index;
+			}
+		}
+
+		$db_hosts = DBselect(
+			'SELECT h.hostid,h.host'.
+			' FROM hosts h'.
+			' WHERE '.dbConditionInt('h.host', array_keys($hosts)).
+				' AND '.dbConditionInt('h.status',
+					[HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED, HOST_STATUS_TEMPLATE]
+				)
+		);
+
+		while ($db_host = DBfetch($db_hosts)) {
+			foreach ($hosts[$db_host['host']] as $description => $indexes) {
+				foreach ($indexes as $index) {
+					$descriptions[$description][$index]['hostid'] = $db_host['hostid'];
+				}
+			}
+			unset($hosts[$db_host['host']]);
+		}
+
+		if ($hosts) {
+			$error_wrong_host = ($this instanceof CTrigger)
+				? _('Incorrect trigger expression. Host "%1$s" does not exist or you have no access to this host.')
+				: _('Incorrect trigger prototype expression. Host "%1$s" does not exist or you have no access to this host.');
+			self::exception(ZBX_API_ERROR_PARAMETERS, _params($error_wrong_host, [key($hosts)]));
+		}
+
+		return $descriptions;
+	}
+
+	/**
 	 * Checks triggers for duplicates.
 	 *
 	 * @param array  $descriptions
-	 * @param string $descriptions[<description>]['expression']
-	 * @param int    $descriptions[<description>]['recovery_mode']
-	 * @param string $descriptions[<description>]['recovery_expression']
-	 * @param string $descriptions[<description>]['hostid']
+	 * @param string $descriptions[<description>][]['expression']
+	 * @param string $descriptions[<description>][]['recovery_expression']
+	 * @param string $descriptions[<description>][]['hostid']
 	 *
 	 * @throws APIException if at least one trigger exists
 	 */
@@ -498,7 +547,7 @@ abstract class CTriggerGeneral extends CApiService {
 			}
 
 			$db_triggers = DBfetchArray(DBselect(
-				'SELECT DISTINCT t.expression,t.recovery_mode,t.recovery_expression'.
+				'SELECT DISTINCT t.expression,t.recovery_expression'.
 				' FROM triggers t,functions f,items i,hosts h'.
 				' WHERE t.triggerid=f.triggerid'.
 					' AND f.itemid=i.itemid'.
@@ -530,66 +579,6 @@ abstract class CTriggerGeneral extends CApiService {
 						_params($error_already_exists, [$description, $db_hosts[0]['name']])
 					);
 				}
-			}
-		}
-	}
-
-	/**
-	 * Checks that no trigger with the same description and expression as $trigger exist on the given host.
-	 * Assumes the given trigger is valid.
-	 *
-	 * @param array  $trigger
-	 * @param string $trigger['triggerid']           (optional)
-	 * @param string $trigger['description']
-	 * @param string $trigger['expression']
-	 * @param string $trigger['recovery_expression']
-	 *
-	 * @throws APIException if at least one trigger exists
-	 */
-	protected function checkIfExistsOnHost($trigger) {
-		switch (get_class($this)) {
-			case 'CTrigger':
-				$expressionData = new CTriggerExpression(['lldmacros' => false]);
-				$error_already_exists = _('Trigger "%1$s" already exists on "%2$s".');
-				break;
-
-			case 'CTriggerPrototype':
-				$expressionData = new CTriggerExpression();
-				$error_already_exists = _('Trigger prototype "%1$s" already exists on "%2$s".');
-				break;
-
-			default:
-				self::exception(ZBX_API_ERROR_INTERNAL, _('Internal error.'));
-		}
-
-		$expressionData->parse($trigger['expression']);
-
-		$_db_triggers = $this->get([
-			'output' => ['expression', 'recovery_expression'],
-			'filter' => [
-				'host' => $expressionData->getHosts()[0],
-				'description' => $trigger['description'],
-				'flags' => null
-			],
-			'preservekeys' => true,
-			'nopermissions' => true
-		]);
-
-		$_db_triggers = CMacrosResolverHelper::resolveTriggerExpressions($_db_triggers,
-			['sources' => ['expression', 'recovery_expression']]
-		);
-
-		if (array_key_exists('triggerid', $trigger)) {
-			unset($_db_triggers[$trigger['triggerid']]);
-		}
-
-		foreach ($_db_triggers as $_db_trigger) {
-			if ($_db_trigger['expression'] === $trigger['expression']
-					&& $_db_trigger['recovery_expression'] === $trigger['recovery_expression']) {
-
-				self::exception(ZBX_API_ERROR_PARAMETERS,
-					_params($error_already_exists, [$trigger['description'], $expressionData->getHosts()[0]])
-				);
 			}
 		}
 	}
@@ -694,18 +683,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 * @throws APIException if validation failed.
 	 */
 	protected function checkTriggerExpressions(array $trigger): void {
-		switch (get_class($this)) {
-			case 'CTrigger':
-				$expression_data = new CTriggerExpression(['lldmacros' => false]);
-				break;
-
-			case 'CTriggerPrototype':
-				$expression_data = new CTriggerExpression();
-				break;
-
-			default:
-				self::exception(ZBX_API_ERROR_INTERNAL, _('Internal error.'));
-		}
+		$expression_data = new CTriggerExpression(['lldmacros' => $this instanceof CTriggerPrototype]);
 
 		// Check trigger expression.
 		if (!$expression_data->parse($trigger['expression'])) {
@@ -811,7 +789,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 * @param int    $triggers[]['manual_close']                 [IN] (optional)
 	 * @param array  $triggers[]['tags']                         [IN] (optional)
 	 * @param string $triggers[]['tags'][]['tag']                [IN]
-	 * @param string $triggers[]['tags'][]['value']              [IN] (optional)
+	 * @param string $triggers[]['tags'][]['value']              [IN/OUT] (optional)
 	 * @param array  $triggers[]['dependencies']                 [IN] (optional)
 	 * @param string $triggers[]['dependencies'][]['triggerid']  [IN]
 	 *
@@ -839,17 +817,24 @@ abstract class CTriggerGeneral extends CApiService {
 				'triggerid' =>				['type' => API_ID, 'flags' => API_REQUIRED]
 			]]
 		]];
-
 		if (!CApiInputValidator::validate($api_input_rules, $triggers, '/', $error)) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, $error);
 		}
+
+		$descriptions = [];
 
 		foreach ($triggers as $trigger) {
 			$this->checkTriggerUrl($trigger);
 			$this->checkTriggerCorrelationMode($trigger);
 			$this->checkTriggerExpressions($trigger);
-			$this->checkIfExistsOnHost($trigger);
+
+			$descriptions[$trigger['description']][] = [
+				'expression' => $trigger['expression'],
+				'recovery_expression' => $trigger['recovery_expression']
+			];
 		}
+		$descriptions = $this->populateHostIds($descriptions);
+		$this->checkDuplicates($descriptions);
 	}
 
 	/**
@@ -864,14 +849,14 @@ abstract class CTriggerGeneral extends CApiService {
 	 * @param int    $triggers[]['status']                       [IN] (optional)
 	 * @param int    $triggers[]['type']                         [IN] (optional)
 	 * @param string $triggers[]['url']                          [IN] (optional)
-	 * @param int    $triggers[]['recovery_mode']                [IN] (optional)
-	 * @param string $triggers[]['recovery_expression']          [IN] (optional)
-	 * @param int    $triggers[]['correlation_mode']             [IN] (optional)
-	 * @param string $triggers[]['correlation_tag']              [IN] (optional)
+	 * @param int    $triggers[]['recovery_mode']                [IN/OUT] (optional)
+	 * @param string $triggers[]['recovery_expression']          [IN/OUT] (optional)
+	 * @param int    $triggers[]['correlation_mode']             [IN/OUT] (optional)
+	 * @param string $triggers[]['correlation_tag']              [IN/OUT] (optional)
 	 * @param int    $triggers[]['manual_close']                 [IN] (optional)
 	 * @param array  $triggers[]['tags']                         [IN] (optional)
 	 * @param string $triggers[]['tags'][]['tag']                [IN]
-	 * @param string $triggers[]['tags'][]['value']              [IN] (optional)
+	 * @param string $triggers[]['tags'][]['value']              [IN/OUT] (optional)
 	 * @param array  $triggers[]['dependencies']                 [IN] (optional)
 	 * @param string $triggers[]['dependencies'][]['triggerid']  [IN]
 	 * @param array  $db_triggers                                [OUT]
@@ -916,7 +901,6 @@ abstract class CTriggerGeneral extends CApiService {
 				'triggerid' =>				['type' => API_ID, 'flags' => API_REQUIRED]
 			]]
 		]];
-
 		if (!CApiInputValidator::validate($api_input_rules, $triggers, '/', $error)) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, $error);
 		}
@@ -933,6 +917,7 @@ abstract class CTriggerGeneral extends CApiService {
 		];
 
 		$class = get_class($this);
+
 		switch ($class) {
 			case 'CTrigger':
 				$error_cannot_update = _('Cannot update "%1$s" for templated trigger "%2$s".');
@@ -966,9 +951,11 @@ abstract class CTriggerGeneral extends CApiService {
 		$_db_triggers = $this->createRelationMap($db_trigger_tags, 'triggerid', 'triggertagid')
 			->mapMany($_db_triggers, $db_trigger_tags, 'tags');
 
-		$read_only_fields = ['description', 'expression', 'recovery_mode', 'recovery_expression',
-			'correlation_mode', 'correlation_tag', 'manual_close'
+		$read_only_fields = ['description', 'expression', 'recovery_mode', 'recovery_expression', 'correlation_mode',
+			'correlation_tag', 'manual_close'
 		];
+
+		$descriptions = [];
 
 		foreach ($triggers as $key => &$trigger) {
 			if (!array_key_exists($trigger['triggerid'], $_db_triggers)) {
@@ -1009,12 +996,20 @@ abstract class CTriggerGeneral extends CApiService {
 			}
 
 			if ($expressions_changed || $trigger['description'] !== $db_trigger['description']) {
-				$this->checkIfExistsOnHost($trigger);
+				$descriptions[$trigger['description']][] = [
+					'expression' => $trigger['expression'],
+					'recovery_expression' => $trigger['recovery_expression']
+				];
 			}
 
 			$db_triggers[$key] = $db_trigger;
 		}
 		unset($trigger);
+
+		if ($descriptions) {
+			$descriptions = $this->populateHostIds($descriptions);
+			$this->checkDuplicates($descriptions);
+		}
 	}
 
 	/**
@@ -1044,6 +1039,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 */
 	protected function createReal(array &$triggers, $inherited = false) {
 		$class = get_class($this);
+
 		switch ($class) {
 			case 'CTrigger':
 				$resource = AUDIT_RESOURCE_TRIGGER;
@@ -1148,6 +1144,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 */
 	protected function updateReal(array $triggers, array $db_triggers, $inherited = false) {
 		$class = get_class($this);
+
 		switch ($class) {
 			case 'CTrigger':
 				$resource = AUDIT_RESOURCE_TRIGGER;

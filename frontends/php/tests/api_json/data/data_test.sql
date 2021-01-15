@@ -1164,10 +1164,10 @@ INSERT INTO interface_discovery (interfaceid, parent_interfaceid) VALUES (50027,
 
 -- test trigger validation
 INSERT INTO hosts (hostid, host, name, status, description) VALUES (99013, 'Trigger validation test host', 'Trigger validation test host', 0, '');
-INSERT INTO interface (interfaceid,hostid,main,type,useip,ip,dns,port) values (50028,99013,1,1,1,'127.0.0.1','','10050');
-INSERT INTO hstgrp (groupid,name,internal) VALUES (50027,'Trigger validation test host group',0);
+INSERT INTO interface (interfaceid,hostid,main,type,useip,ip,dns,port) values (50028, 99013, 1, 1, 1, '127.0.0.1', '', '10050');
+INSERT INTO hstgrp (groupid, name, internal) VALUES (50027, 'Trigger validation test host group', 0);
 INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50023, 99013, 50027);
-INSERT INTO items (itemid,hostid,interfaceid,type,value_type,name,key_,delay,history,status,params,description,flags,posts,headers) VALUES (58736, 99013, NULL, 2, 3,'item','item','1d','90d',0,'','',1,'','');
+INSERT INTO items (itemid, hostid, interfaceid, type, value_type, name, key_,delay, history, status, params, description, posts, headers) VALUES (58736, 99013, NULL, 2, 3, 'item', 'item', '1d', '90d', 0, '', '', '', '');
 INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50172, 'test-trigger-1', '{50232}=0', '');
 INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50232, 50172, 58736, 'last', '');
 INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50173, 'test-trigger-2', '{50233}=0', '');

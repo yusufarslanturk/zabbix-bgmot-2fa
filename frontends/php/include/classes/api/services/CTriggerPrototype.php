@@ -652,12 +652,12 @@ class CTriggerPrototype extends CTriggerGeneral {
 	protected function validateAddDependencies(array $trigger_prototypes) {
 		$depTriggerIds = [];
 
-		foreach ($trigger_prototypes as $triggerPrototype) {
-			if (!array_key_exists('dependencies', $triggerPrototype)) {
+		foreach ($trigger_prototypes as $trigger_prototype) {
+			if (!array_key_exists('dependencies', $trigger_prototype)) {
 				continue;
 			}
 
-			foreach ($triggerPrototype['dependencies'] as $dependency) {
+			foreach ($trigger_prototype['dependencies'] as $dependency) {
 				$depTriggerIds[$dependency['triggerid']] = $dependency['triggerid'];
 			}
 		}
