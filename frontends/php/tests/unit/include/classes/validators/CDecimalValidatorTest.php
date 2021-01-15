@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ class CDecimalValidatorTest extends CValidatorTest {
 			[['maxPrecision' => 5, 'maxScale' => 3], '99.999'],
 			[['maxPrecision' => 5, 'maxScale' => 3], -99.999],
 			[['maxPrecision' => 5, 'maxScale' => 3], '-99.999'],
-			[['maxScale' => 3], '1.001'],
+			[['maxScale' => 3], '1.001']
 		];
 	}
 
@@ -153,7 +153,7 @@ class CDecimalValidatorTest extends CValidatorTest {
 				],
 				-9.9999,
 				'Value -9.9999 has to many digits after the decimal point, it cannot have more than 3 digits'
-			],
+			]
 		];
 	}
 
@@ -173,7 +173,7 @@ class CDecimalValidatorTest extends CValidatorTest {
 				['messageInvalid' => 'Invalid decimal value "%2$s" for "%1$s"'],
 				'A',
 				'Invalid decimal value "A" for "object"'
-			],
+			]
 		];
 	}
 

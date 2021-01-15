@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -210,7 +210,7 @@ class CSetupWizard extends CForm {
 	}
 
 	function stage2() {
-		$DB['TYPE'] = $this->getConfig('DB_TYPE');
+		$DB['TYPE'] = $this->getConfig('DB_TYPE', key(CFrontendSetup::getSupportedDatabases()));
 
 		$table = new CFormList();
 
@@ -371,7 +371,7 @@ class CSetupWizard extends CForm {
 				new CTag('ol', true, [
 					new CTag('li', true, new CLink(_('Download the configuration file'), 'setup.php?save_config=1')),
 					new CTag('li', true, _s('Save it as "%1$s"', $config_file_name))
-				]),
+				])
 			];
 		}
 		else {

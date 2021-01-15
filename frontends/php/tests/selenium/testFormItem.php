@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -2403,7 +2403,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item empty multiplier',
 					'key' => 'item-empty-multiplier',
 					'preprocessing' => [
-						['type' => 'Custom multiplier', 'params' => ''],
+						['type' => 'Custom multiplier', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2414,7 +2414,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item string multiplier',
 					'key' => 'item-string-multiplier',
 					'preprocessing' => [
-						['type' => 'Custom multiplier', 'params' => 'abc'],
+						['type' => 'Custom multiplier', 'params' => 'abc']
 					],
 					'error' => 'Incorrect value for field "params": a numeric value is expected.'
 				]
@@ -2425,7 +2425,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item multiplier symbol',
 					'key' => 'item-symbol-multiplier',
 					'preprocessing' => [
-						['type' => 'Custom multiplier', 'params' => '0,0'],
+						['type' => 'Custom multiplier', 'params' => '0,0']
 					],
 					'error' => 'Incorrect value for field "params": a numeric value is expected.'
 				]
@@ -2436,7 +2436,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item multiplier symbol',
 					'key' => 'item-symbol-multiplier',
 					'preprocessing' => [
-						['type' => 'Custom multiplier', 'params' => '1a!@#$%^&*()-='],
+						['type' => 'Custom multiplier', 'params' => '1a!@#$%^&*()-=']
 					],
 					'error' => 'Incorrect value for field "params": a numeric value is expected.'
 				]
@@ -2448,7 +2448,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item right trim',
 					'key' => 'item-empty-right-trim',
 					'preprocessing' => [
-						['type' => 'Right trim', 'params' => ''],
+						['type' => 'Right trim', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2459,7 +2459,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item left trim',
 					'key' => 'item-empty-left-trim',
 					'preprocessing' => [
-						['type' => 'Left trim', 'params' => ''],
+						['type' => 'Left trim', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2470,7 +2470,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item trim',
 					'key' => 'item-empty-trim',
 					'preprocessing' => [
-						['type' => 'Trim', 'params' => ''],
+						['type' => 'Trim', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2482,7 +2482,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item XML XPath',
 					'key' => 'item-empty-xpath',
 					'preprocessing' => [
-						['type' => 'XML XPath', 'params' => ''],
+						['type' => 'XML XPath', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2493,7 +2493,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item JSON Path',
 					'key' => 'item-empty-jsonpath',
 					'preprocessing' => [
-						['type' => 'JSON Path', 'params' => ''],
+						['type' => 'JSON Path', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2505,7 +2505,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item empty regular expression',
 					'key' => 'item-empty-first-parameter',
 					'preprocessing' => [
-						['type' => 'Regular expression', 'params' => '', 'output' => ''],
+						['type' => 'Regular expression', 'params' => '', 'output' => '']
 					],
 					'error' => 'Incorrect value for field "params": first parameter is expected.'
 				]
@@ -2516,7 +2516,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item empty regular expression',
 					'key' => 'item-empty-first-parameter',
 					'preprocessing' => [
-						['type' => 'Regular expression', 'params' => '', 'output' => 'test output'],
+						['type' => 'Regular expression', 'params' => '', 'output' => 'test output']
 					],
 					'error' => 'Incorrect value for field "params": first parameter is expected.'
 				]
@@ -2527,7 +2527,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item empty regular expression',
 					'key' => 'item-empty-second-parameter',
 					'preprocessing' => [
-						['type' => 'Regular expression', 'params' => 'expression', 'output' => ''],
+						['type' => 'Regular expression', 'params' => 'expression', 'output' => '']
 					],
 					'error' => 'Incorrect value for field "params": second parameter is expected.'
 				]

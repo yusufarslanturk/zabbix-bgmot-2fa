@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -215,7 +215,7 @@ class testTagBasedPermissions extends CLegacyWebTest {
 						'Selenium user group for tag permissions AAA' => [
 						]
 					],
-					'trigger_names' => ['Trigger for tag permissions MySQL', 'Trigger for tag permissions Oracle'],
+					'trigger_names' => ['Trigger for tag permissions MySQL', 'Trigger for tag permissions Oracle']
 				]
 			],
 			[
@@ -250,7 +250,7 @@ class testTagBasedPermissions extends CLegacyWebTest {
 							]
 						]
 					],
-					'trigger_names' => ['Trigger for tag permissions MySQL'],
+					'trigger_names' => ['Trigger for tag permissions MySQL']
 				]
 			],
 			[
@@ -262,7 +262,7 @@ class testTagBasedPermissions extends CLegacyWebTest {
 							]
 						]
 					],
-					'trigger_names' => ['Trigger for tag permissions MySQL', 'Trigger for tag permissions Oracle'],
+					'trigger_names' => ['Trigger for tag permissions MySQL', 'Trigger for tag permissions Oracle']
 				]
 			]
 		];
@@ -330,7 +330,7 @@ class testTagBasedPermissions extends CLegacyWebTest {
 							]
 						]
 					],
-					'trigger_names' => ['Trigger for tag permissions Oracle'],
+					'trigger_names' => ['Trigger for tag permissions Oracle']
 				]
 			],
 			[
@@ -345,7 +345,7 @@ class testTagBasedPermissions extends CLegacyWebTest {
 							]
 						]
 					],
-					'trigger_names' => ['Trigger for tag permissions MySQL', 'Trigger for tag permissions Oracle'],
+					'trigger_names' => ['Trigger for tag permissions MySQL', 'Trigger for tag permissions Oracle']
 				]
 			],
 			[

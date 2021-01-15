@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -403,7 +403,7 @@ class testFormItemHttpAgent extends CLegacyWebTest {
 						'Incorrect value for field "URL": cannot be empty.'
 					],
 					'check_db' => false,
-					'error' => 'Page received incorrect data',
+					'error' => 'Page received incorrect data'
 				]
 			],
 			[
@@ -766,7 +766,7 @@ class testFormItemHttpAgent extends CLegacyWebTest {
 			[
 				[
 					'fields' => [
-						'Request body' => 'test',
+						'Request body' => 'test'
 					],
 					'request_type' => 'XML data',
 					'error_details' => [
@@ -915,7 +915,7 @@ class testFormItemHttpAgent extends CLegacyWebTest {
 						'Enable trapping' => true,
 						'SSL verify peer' => true,
 						'SSL verify host' => true,
-						'Enabled' => false,
+						'Enabled' => false
 					],
 					'query' => [
 						['name' => 'login', 'value' => 'admin'],
@@ -936,7 +936,7 @@ class testFormItemHttpAgent extends CLegacyWebTest {
 						'Name' => 'Empty Basic User/Password',
 						'Key' => 'basic.empty.user.pass',
 						'URL' => 'zabbix.com',
-						'HTTP authentication' => 'Basic',
+						'HTTP authentication' => 'Basic'
 					],
 					'check_form' => true
 				]
@@ -948,7 +948,7 @@ class testFormItemHttpAgent extends CLegacyWebTest {
 						'Name' => 'Empty NTLM User/Password',
 						'Key' => 'ntlm.empty.user.pass',
 						'URL' => 'zabbix.com',
-						'HTTP authentication' => 'NTLM',
+						'HTTP authentication' => 'NTLM'
 					],
 					'check_form' => true
 				]
@@ -1084,7 +1084,7 @@ class testFormItemHttpAgent extends CLegacyWebTest {
 			[
 				[
 					'fields' => [
-						'HTTP authentication' => 'Basic',
+						'HTTP authentication' => 'Basic'
 					],
 					'check_form' => true
 				]
@@ -1093,7 +1093,7 @@ class testFormItemHttpAgent extends CLegacyWebTest {
 			[
 				[
 					'fields' => [
-						'HTTP authentication' => 'NTLM',
+						'HTTP authentication' => 'NTLM'
 					],
 					'check_form' => true
 				]

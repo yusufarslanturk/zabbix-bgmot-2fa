@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -194,7 +194,7 @@ class CControllerNotificationsGet extends CController {
 							'[url='.$url_events.']'.CHtml::encode($notification['name']).'[/url]',
 							'[url='.$url_trigger_events.']'.
 								zbx_date2str(DATE_TIME_FORMAT_SECONDS, $notification['clock']).
-							'[/url]',
+							'[/url]'
 						]
 					];
 				}

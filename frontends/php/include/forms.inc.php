@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -461,7 +461,7 @@ function getItemFilterForm(&$items) {
 		new CComboBox('filter_templated_items', $filter_templated_items, null, [
 			-1 => _('all'),
 			1 => _('Templated items'),
-			0 => _('Not Templated items'),
+			0 => _('Not Templated items')
 		])
 	);
 

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -757,7 +757,7 @@ if (hasRequest('form')) {
 		$data['new_ack_operation'] = [
 			'operationtype' => OPERATION_TYPE_MESSAGE,
 			'ack_short' => ACTION_DEFAULT_SUBJ_ACKNOWLEDGE,
-			'ack_long' => ACTION_DEFAULT_MSG_ACKNOWLEDGE,
+			'ack_long' => ACTION_DEFAULT_MSG_ACKNOWLEDGE
 		];
 	}
 	if ($data['new_ack_operation'] && !array_key_exists('opmessage', $data['new_ack_operation'])
@@ -810,7 +810,7 @@ else {
 	$data['actions'] = API::Action()->get([
 		'output' => API_OUTPUT_EXTEND,
 		'search' => [
-			'name' => ($filter['name'] === '') ? null : $filter['name'],
+			'name' => ($filter['name'] === '') ? null : $filter['name']
 		],
 		'filter' => [
 			'eventsource' => $data['eventsource'],

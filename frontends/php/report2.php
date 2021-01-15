@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ $fields = [
 	'filter_rst'=>		[T_ZBX_STR,			O_OPT,	P_SYS,			null,		null],
 	'filter_set' =>		[T_ZBX_STR,			O_OPT,	P_SYS,			null,		null],
 	'from' =>			[T_ZBX_RANGE_TIME,	O_OPT,	P_SYS,			null,		null],
-	'to' =>				[T_ZBX_RANGE_TIME,	O_OPT,	P_SYS,			null,		null],
+	'to' =>				[T_ZBX_RANGE_TIME,	O_OPT,	P_SYS,			null,		null]
 ];
 check_fields($fields);
 validateTimeSelectorPeriod(getRequest('from'), getRequest('to'));

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -273,7 +273,8 @@ $itemFormList->addRow(
 	new CLabel(_('HTTP proxy'), 'http_proxy'),
 	(new CTextBox('http_proxy', $data['http_proxy'], $data['limited'], DB::getFieldLength('items', 'http_proxy')))
 		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
-		->setAttribute('placeholder', '[protocol://][user[:password]@]proxy.example.com[:port]'),
+		->setAttribute('placeholder', '[protocol://][user[:password]@]proxy.example.com[:port]')
+		->disableAutocomplete(),
 	'http_proxy_row'
 );
 
@@ -295,7 +296,8 @@ $itemFormList->addRow(
 $itemFormList->addRow(
 	new CLabel(_('User name'), 'http_username'),
 	(new CTextBox('http_username', $data['http_username'], $data['limited'], DB::getFieldLength('items', 'username')))
-		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH),
+		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		->disableAutocomplete(),
 	'http_username_row'
 );
 
@@ -303,7 +305,8 @@ $itemFormList->addRow(
 $itemFormList->addRow(
 	new CLabel(_('Password'), 'http_password'),
 	(new CTextBox('http_password', $data['http_password'], $data['limited'], DB::getFieldLength('items', 'password')))
-		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH),
+		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		->disableAutocomplete(),
 	'http_password_row'
 );
 
@@ -347,7 +350,9 @@ $itemFormList->addRow(
 	new CLabel(_('SSL key password'), 'ssl_key_password'),
 	(new CTextBox('ssl_key_password', $data['ssl_key_password'], $data['limited'],
 		DB::getFieldLength('items', 'ssl_key_password')
-	))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH),
+	))
+		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		->disableAutocomplete(),
 	'ssl_key_password_row'
 );
 
@@ -430,7 +435,8 @@ $itemFormList->addRow((new CLabel(_('Authentication protocol'), 'snmpv3_authprot
 );
 $itemFormList->addRow(_('Authentication passphrase'),
 	(new CTextBox('snmpv3_authpassphrase', $this->data['snmpv3_authpassphrase'], false, 64))
-		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH),
+		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		->disableAutocomplete(),
 	'row_snmpv3_authpassphrase'
 );
 $itemFormList->addRow((new CLabel(_('Privacy protocol'), 'snmpv3_privprotocol')),
@@ -442,7 +448,8 @@ $itemFormList->addRow((new CLabel(_('Privacy protocol'), 'snmpv3_privprotocol'))
 );
 $itemFormList->addRow(_('Privacy passphrase'),
 	(new CTextBox('snmpv3_privpassphrase', $this->data['snmpv3_privpassphrase'], false, 64))
-		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH),
+		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		->disableAutocomplete(),
 	'row_snmpv3_privpassphrase'
 );
 $itemFormList->addRow(_('Port'),
@@ -469,7 +476,9 @@ $itemFormList->addRow((new CLabel(_('JMX endpoint'), 'jmx_endpoint'))->setAsteri
 	'row_jmx_endpoint'
 );
 $itemFormList->addRow(_('User name'),
-	(new CTextBox('username', $this->data['username'], false, 64))->setWidth(ZBX_TEXTAREA_SMALL_WIDTH),
+	(new CTextBox('username', $this->data['username'], false, 64))
+		->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+		->disableAutocomplete(),
 	'row_username'
 );
 $itemFormList->addRow(
@@ -487,7 +496,9 @@ $itemFormList->addRow(
 	'row_privatekey'
 );
 $itemFormList->addRow(_('Password'),
-	(new CTextBox('password', $this->data['password'], false, 64))->setWidth(ZBX_TEXTAREA_SMALL_WIDTH),
+	(new CTextBox('password', $this->data['password'], false, 64))
+		->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+		->disableAutocomplete(),
 	'row_password'
 );
 $itemFormList->addRow(

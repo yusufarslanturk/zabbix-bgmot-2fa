@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1002,7 +1002,7 @@ class testFormWeb extends CLegacyWebTest {
 					'expected' => TEST_BAD,
 					'name' => 'Headers -empty value',
 					'headers' => [
-						['name' => 'test'],
+						['name' => 'test']
 					],
 					'add_step' => [
 						['step' => 'Headers -empty value']
@@ -1019,7 +1019,7 @@ class testFormWeb extends CLegacyWebTest {
 					'expected' => TEST_BAD,
 					'name' => 'Headers -empty name',
 					'headers' => [
-						['value' => 'test'],
+						['value' => 'test']
 					],
 					'add_step' => [
 						['step' => 'Headers -empty name']

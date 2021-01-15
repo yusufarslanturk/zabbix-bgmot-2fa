@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -50,7 +50,8 @@ foreach ($data['macros'] as $i => $macro) {
 
 	$value_input = (new CTextBox('macros['.$i.'][value]', $macro['value'], false, 255))
 		->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH)
-		->setAttribute('placeholder', _('value'));
+		->setAttribute('placeholder', _('value'))
+		->disableAutocomplete();
 
 	$button_cell = [
 		(new CButton('macros['.$i.'][remove]', _('Remove')))

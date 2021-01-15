@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -63,27 +63,27 @@ class testFormAdministrationMediaTypes extends CLegacyWebTest {
 			],
 			[
 				[
-					'type' => 'Script',
+					'type' => 'Script'
 				]
 			],
 			[
 				[
 					'type' => 'SMS',
-					'gsm_modem' => '/dev/ttyS0',
+					'gsm_modem' => '/dev/ttyS0'
 				]
 			],
 			[
 				[
 					'type' => 'Jabber',
-					'jabber_username' => 'user@server',
+					'jabber_username' => 'user@server'
 				]
 			],
 			[
 				[
 					'type' => 'Ez Texting',
-					'eztext_limit' => 'USA (160 characters)',
+					'eztext_limit' => 'USA (160 characters)'
 				]
-			],
+			]
 		];
 	}
 

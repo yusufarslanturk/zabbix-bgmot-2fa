@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -58,9 +58,9 @@ if ((PAGE_TYPE_JS == $page['type']) || (PAGE_TYPE_HTML_BLOCK == $page['type'])) 
 
 $options = [
 	'groups' => [
-		'real_hosts' => 1,
+		'real_hosts' => 1
 	],
-	'groupid' => getRequest('groupid'),
+	'groupid' => getRequest('groupid')
 ];
 $pageFilter = new CPageFilter($options);
 $_REQUEST['groupid'] = $pageFilter->groupid;
@@ -107,7 +107,7 @@ $table = (new CTableInfo())
 			make_sorting_header($groupFieldTitle === '' ? _('Field') : $groupFieldTitle, 'inventory_field',
 				$sortField, $sortOrder
 			),
-			make_sorting_header(_('Host count'), 'host_count', $sortField, $sortOrder),
+			make_sorting_header(_('Host count'), 'host_count', $sortField, $sortOrder)
 		]
 	);
 

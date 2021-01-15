@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -82,7 +82,7 @@ class testPageHostGraph extends CLegacyWebTest {
 			'triggers.php?hostid='.$hostid => 'Triggers',
 			'graphs.php?hostid='.$hostid => 'Graphs',
 			'host_discovery.php?hostid='.$hostid => 'Discovery rules',
-			'httpconf.php?hostid='.$hostid => 'Web scenarios',
+			'httpconf.php?hostid='.$hostid => 'Web scenarios'
 		];
 		$count_items = CDBHelper::getCount('SELECT NULL FROM items WHERE hostid='.$hostid);
 		$count_graphs = CDBHelper::getCount($sql);
@@ -598,7 +598,7 @@ class testPageHostGraph extends CLegacyWebTest {
 					'host' => 'Host to delete graphs',
 					'graph' => 'all'
 				]
-			],
+			]
 		];
 	}
 

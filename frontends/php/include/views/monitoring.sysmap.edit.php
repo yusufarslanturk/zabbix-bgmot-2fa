@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -212,7 +212,7 @@ $map_tab->addRow(_('Problem display'),
 	new CComboBox('show_unack', $data['sysmap']['show_unack'], null, [
 		EXTACK_OPTION_ALL => _('All'),
 		EXTACK_OPTION_BOTH => _('Separated'),
-		EXTACK_OPTION_UNACK => _('Unacknowledged only'),
+		EXTACK_OPTION_UNACK => _('Unacknowledged only')
 	])
 );
 

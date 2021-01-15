@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ class CControllerMenuPopup extends CController {
 	private static function getMenuDataDashboard(array $data) {
 		$db_dashboards = API::Dashboard()->get([
 			'output' => [],
-			'dashboardids' => $data['dashboardid'],
+			'dashboardids' => $data['dashboardid']
 		]);
 
 		if ($db_dashboards) {
@@ -408,7 +408,7 @@ class CControllerMenuPopup extends CController {
 
 					case SYSMAP_ELEMENT_TYPE_IMAGE:
 						$menu_data = [
-							'type' => 'map_element_image',
+							'type' => 'map_element_image'
 						];
 						if ($selement['urls']) {
 							$menu_data['urls'] = $selement['urls'];

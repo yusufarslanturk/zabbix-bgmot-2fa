@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1141,7 +1141,7 @@ class testDashboardGraphWidget extends CWebTest {
 						'item' => 'Agent ping'
 					],
 					'Overrides' => [
-						'item' => '*',
+						'item' => '*'
 					],
 					'error' => 'Invalid parameter "Overrides/1/hosts": cannot be empty.'
 				]
@@ -1232,7 +1232,7 @@ class testDashboardGraphWidget extends CWebTest {
 				[
 					'Widget name' => 'Test cases for update',
 					'Overrides' => [
-						'item' => '',
+						'item' => ''
 					],
 					'error' => 'Invalid parameter "Overrides/1/items": cannot be empty.'
 				]
@@ -1900,7 +1900,7 @@ class testDashboardGraphWidget extends CWebTest {
 					'host' => 'id:or_'.$i.'_hosts',
 					'item' => 'id:or_'.$i.'_items',
 					'color' => 'id:or_'.$i.'__color_',
-					'time_shift' => 'name:or['.$i.'][timeshift]',
+					'time_shift' => 'name:or['.$i.'][timeshift]'
 				];
 
 				$this->fillMappedFields($override, $mapping);
@@ -1983,7 +1983,7 @@ class testDashboardGraphWidget extends CWebTest {
 					'host' => 'id:or_'.$i.'_hosts',
 					'item' => 'id:or_'.$i.'_items',
 					'color' => 'id:or_'.$i.'__color_',
-					'time_shift' => 'name:or['.$i.'][timeshift]',
+					'time_shift' => 'name:or['.$i.'][timeshift]'
 				];
 				foreach ($mapping as $field => $selector) {
 					if (!array_key_exists($field, $override)) {
@@ -2080,7 +2080,7 @@ class testDashboardGraphWidget extends CWebTest {
 					],
 					'Data set' => [
 						'host' => 'Cancel create',
-						'item' => 'Cancel create',
+						'item' => 'Cancel create'
 					]
 				]
 			],
@@ -2093,7 +2093,7 @@ class testDashboardGraphWidget extends CWebTest {
 					],
 					'Data set' => [
 						'host' => 'Cancel update',
-						'item' => 'Cancel update',
+						'item' => 'Cancel update'
 					]
 				]
 			]
