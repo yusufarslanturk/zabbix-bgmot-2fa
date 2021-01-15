@@ -589,7 +589,7 @@ class testFormTriggerPrototype extends CLegacyWebTest {
 					'url' => 'javascript:alert(123);',
 					'error_msg' => 'Cannot add trigger prototype',
 					'errors' => [
-						'Wrong value for url field.'
+						'Invalid parameter "/1/url": unacceptable URL.'
 					]
 				]
 			],

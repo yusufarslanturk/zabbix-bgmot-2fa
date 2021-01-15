@@ -754,24 +754,6 @@ abstract class CTriggerGeneral extends CApiService {
 	}
 
 	/**
-	 * Check if given trigger URL is valid.
-	 *
-	 * @param array  $trigger
-	 * @param string $trigger['url']  URL to validate.
-	 *
-	 * @throws APIException if validation failed.
-	 */
-	protected function checkTriggerUrl(array $trigger): void {
-		if (!array_key_exists('url', $trigger) || $trigger['url'] === '') {
-			return;
-		}
-
-		if (!CHtmlUrlValidator::validate($trigger['url'])) {
-			self::exception(ZBX_API_ERROR_PARAMETERS, _('Wrong value for url field.'));
-		}
-	}
-
-	/**
 	 * Validate trigger to be created.
 	 *
 	 * @param array  $triggers                                   [IN/OUT]
@@ -803,7 +785,7 @@ abstract class CTriggerGeneral extends CApiService {
 			'priority' =>				['type' => API_INT32, 'in' => implode(',', range(TRIGGER_SEVERITY_NOT_CLASSIFIED, TRIGGER_SEVERITY_COUNT - 1))],
 			'status' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_STATUS_ENABLED, TRIGGER_STATUS_DISABLED])],
 			'type' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_MULT_EVENT_DISABLED, TRIGGER_MULT_EVENT_ENABLED])],
-			'url' =>					['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'url')],
+			'url' =>					['type' => API_URL, 'flags' => API_ALLOW_USER_MACRO, 'length' => DB::getFieldLength('triggers', 'url')],
 			'recovery_mode' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_RECOVERY_MODE_EXPRESSION, ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION, ZBX_RECOVERY_MODE_NONE]), 'default' => DB::getDefault('triggers', 'recovery_mode')],
 			'recovery_expression' =>	['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'recovery_expression'), 'default' => DB::getDefault('triggers', 'recovery_expression')],
 			'correlation_mode' =>		['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_CORRELATION_NONE, ZBX_TRIGGER_CORRELATION_TAG]), 'default' => DB::getDefault('triggers', 'correlation_mode')],
@@ -824,7 +806,6 @@ abstract class CTriggerGeneral extends CApiService {
 		$descriptions = [];
 
 		foreach ($triggers as $trigger) {
-			$this->checkTriggerUrl($trigger);
 			$this->checkTriggerCorrelationMode($trigger);
 			$this->checkTriggerExpressions($trigger);
 
@@ -887,7 +868,7 @@ abstract class CTriggerGeneral extends CApiService {
 			'priority' =>				['type' => API_INT32, 'in' => implode(',', range(TRIGGER_SEVERITY_NOT_CLASSIFIED, TRIGGER_SEVERITY_COUNT - 1))],
 			'status' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_STATUS_ENABLED, TRIGGER_STATUS_DISABLED])],
 			'type' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_MULT_EVENT_DISABLED, TRIGGER_MULT_EVENT_ENABLED])],
-			'url' =>					['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'url')],
+			'url' =>					['type' => API_URL, 'flags' => API_ALLOW_USER_MACRO, 'length' => DB::getFieldLength('triggers', 'url')],
 			'recovery_mode' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_RECOVERY_MODE_EXPRESSION, ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION, ZBX_RECOVERY_MODE_NONE])],
 			'recovery_expression' =>	['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'recovery_expression')],
 			'correlation_mode' =>		['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_CORRELATION_NONE, ZBX_TRIGGER_CORRELATION_TAG])],
@@ -985,7 +966,6 @@ abstract class CTriggerGeneral extends CApiService {
 				}
 			}
 
-			$this->checkTriggerUrl($trigger);
 			$this->checkTriggerCorrelationMode($trigger);
 
 			$expressions_changed = ($trigger['expression'] !== $db_trigger['expression']
