@@ -673,43 +673,19 @@ abstract class CTriggerGeneral extends CApiService {
 	}
 
 	/**
-	 * Validate trigger expressions.
+	 * Validate integrity of trigger recovery properties.
 	 *
 	 * @param array  $trigger
-	 * @param string $trigger['expression']
 	 * @param int    $trigger['recovery_mode']
 	 * @param string $trigger['recovery_expression']
 	 *
 	 * @throws APIException if validation failed.
 	 */
-	protected function checkTriggerExpressions(array $trigger): void {
-		$expression_data = new CTriggerExpression(['lldmacros' => $this instanceof CTriggerPrototype]);
-
-		// Check trigger expression.
-		if (!$expression_data->parse($trigger['expression'])) {
-			self::exception(ZBX_API_ERROR_PARAMETERS, $expression_data->error);
-		}
-
-		if (!$expression_data->expressions) {
-			self::exception(ZBX_API_ERROR_PARAMETERS,
-				_('Trigger expression must contain at least one host:key reference.')
-			);
-		}
-
-		// Check trigger recovery expression.
+	protected function checkTriggerRecoveryMode(array $trigger): void {
 		if ($trigger['recovery_mode'] == ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION) {
 			if ($trigger['recovery_expression'] === '') {
 				self::exception(ZBX_API_ERROR_PARAMETERS,
 					_s('Incorrect value for field "%1$s": %2$s.', 'recovery_expression', _('cannot be empty'))
-				);
-			}
-			elseif (!$expression_data->parse($trigger['recovery_expression'])) {
-				self::exception(ZBX_API_ERROR_PARAMETERS, $expression_data->error);
-			}
-
-			if (!$expression_data->expressions) {
-				self::exception(ZBX_API_ERROR_PARAMETERS,
-					_('Trigger recovery expression must contain at least one host:key reference.')
 				);
 			}
 		}
@@ -780,14 +756,14 @@ abstract class CTriggerGeneral extends CApiService {
 	protected function validateCreate(array &$triggers): void {
 		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['description', 'expression']], 'fields' => [
 			'description' =>			['type' => API_STRING_UTF8, 'flags' => API_REQUIRED | API_NOT_EMPTY, 'length' => DB::getFieldLength('triggers', 'description')],
-			'expression' =>				['type' => API_STRING_UTF8, 'flags' => API_REQUIRED | API_NOT_EMPTY, 'length' => DB::getFieldLength('triggers', 'expression')],
+			'expression' =>				['type' => API_TRIGGER_EXPRESSION, 'flags' => API_REQUIRED | API_NOT_EMPTY | API_ALLOW_LLD_MACRO, 'length' => DB::getFieldLength('triggers', 'expression')],
 			'comments' =>				['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'comments')],
 			'priority' =>				['type' => API_INT32, 'in' => implode(',', range(TRIGGER_SEVERITY_NOT_CLASSIFIED, TRIGGER_SEVERITY_COUNT - 1))],
 			'status' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_STATUS_ENABLED, TRIGGER_STATUS_DISABLED])],
 			'type' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_MULT_EVENT_DISABLED, TRIGGER_MULT_EVENT_ENABLED])],
 			'url' =>					['type' => API_URL, 'flags' => API_ALLOW_USER_MACRO, 'length' => DB::getFieldLength('triggers', 'url')],
 			'recovery_mode' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_RECOVERY_MODE_EXPRESSION, ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION, ZBX_RECOVERY_MODE_NONE]), 'default' => DB::getDefault('triggers', 'recovery_mode')],
-			'recovery_expression' =>	['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'recovery_expression'), 'default' => DB::getDefault('triggers', 'recovery_expression')],
+			'recovery_expression' =>	['type' => API_TRIGGER_EXPRESSION, 'flags' => API_ALLOW_LLD_MACRO, 'length' => DB::getFieldLength('triggers', 'recovery_expression'), 'default' => DB::getDefault('triggers', 'recovery_expression')],
 			'correlation_mode' =>		['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_CORRELATION_NONE, ZBX_TRIGGER_CORRELATION_TAG]), 'default' => DB::getDefault('triggers', 'correlation_mode')],
 			'correlation_tag' =>		['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'correlation_tag'), 'default' => DB::getDefault('triggers', 'correlation_tag')],
 			'manual_close' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_MANUAL_CLOSE_NOT_ALLOWED, ZBX_TRIGGER_MANUAL_CLOSE_ALLOWED])],
@@ -799,15 +775,18 @@ abstract class CTriggerGeneral extends CApiService {
 				'triggerid' =>				['type' => API_ID, 'flags' => API_REQUIRED]
 			]]
 		]];
+		if (!$this instanceof CTriggerPrototype) {
+			$api_input_rules['fields']['expression']['flags'] &= ~API_ALLOW_LLD_MACRO;
+			$api_input_rules['fields']['recovery_expression']['flags'] &= ~API_ALLOW_LLD_MACRO;
+		}
 		if (!CApiInputValidator::validate($api_input_rules, $triggers, '/', $error)) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, $error);
 		}
 
 		$descriptions = [];
-
 		foreach ($triggers as $trigger) {
 			$this->checkTriggerCorrelationMode($trigger);
-			$this->checkTriggerExpressions($trigger);
+			$this->checkTriggerRecoveryMode($trigger);
 
 			$descriptions[$trigger['description']][] = [
 				'expression' => $trigger['expression'],
@@ -863,14 +842,14 @@ abstract class CTriggerGeneral extends CApiService {
 		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['description', 'expression']], 'fields' => [
 			'triggerid' =>				['type' => API_ID, 'flags' => API_REQUIRED],
 			'description' =>			['type' => API_STRING_UTF8, 'flags' => API_NOT_EMPTY, 'length' => DB::getFieldLength('triggers', 'description')],
-			'expression' =>				['type' => API_STRING_UTF8, 'flags' => API_NOT_EMPTY, 'length' => DB::getFieldLength('triggers', 'expression')],
+			'expression' =>				['type' => API_TRIGGER_EXPRESSION, 'flags' => API_NOT_EMPTY | API_ALLOW_LLD_MACRO, 'length' => DB::getFieldLength('triggers', 'expression')],
 			'comments' =>				['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'comments')],
 			'priority' =>				['type' => API_INT32, 'in' => implode(',', range(TRIGGER_SEVERITY_NOT_CLASSIFIED, TRIGGER_SEVERITY_COUNT - 1))],
 			'status' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_STATUS_ENABLED, TRIGGER_STATUS_DISABLED])],
 			'type' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_MULT_EVENT_DISABLED, TRIGGER_MULT_EVENT_ENABLED])],
 			'url' =>					['type' => API_URL, 'flags' => API_ALLOW_USER_MACRO, 'length' => DB::getFieldLength('triggers', 'url')],
 			'recovery_mode' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_RECOVERY_MODE_EXPRESSION, ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION, ZBX_RECOVERY_MODE_NONE])],
-			'recovery_expression' =>	['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'recovery_expression')],
+			'recovery_expression' =>	['type' => API_TRIGGER_EXPRESSION, 'flags' => API_ALLOW_LLD_MACRO, 'length' => DB::getFieldLength('triggers', 'recovery_expression')],
 			'correlation_mode' =>		['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_CORRELATION_NONE, ZBX_TRIGGER_CORRELATION_TAG])],
 			'correlation_tag' =>		['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'correlation_tag')],
 			'manual_close' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_MANUAL_CLOSE_NOT_ALLOWED, ZBX_TRIGGER_MANUAL_CLOSE_ALLOWED])],
@@ -882,6 +861,10 @@ abstract class CTriggerGeneral extends CApiService {
 				'triggerid' =>				['type' => API_ID, 'flags' => API_REQUIRED]
 			]]
 		]];
+		if (!$this instanceof CTriggerPrototype) {
+			$api_input_rules['fields']['expression']['flags'] &= ~API_ALLOW_LLD_MACRO;
+			$api_input_rules['fields']['recovery_expression']['flags'] &= ~API_ALLOW_LLD_MACRO;
+		}
 		if (!CApiInputValidator::validate($api_input_rules, $triggers, '/', $error)) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, $error);
 		}
@@ -967,15 +950,11 @@ abstract class CTriggerGeneral extends CApiService {
 			}
 
 			$this->checkTriggerCorrelationMode($trigger);
+			$this->checkTriggerRecoveryMode($trigger);
 
-			$expressions_changed = ($trigger['expression'] !== $db_trigger['expression']
-				|| $trigger['recovery_expression'] !== $db_trigger['recovery_expression']);
-
-			if ($expressions_changed) {
-				$this->checkTriggerExpressions($trigger);
-			}
-
-			if ($expressions_changed || $trigger['description'] !== $db_trigger['description']) {
+			if ($trigger['expression'] !== $db_trigger['expression']
+					|| $trigger['recovery_expression'] !== $db_trigger['recovery_expression']
+					|| $trigger['description'] !== $db_trigger['description']) {
 				$descriptions[$trigger['description']][] = [
 					'expression' => $trigger['expression'],
 					'recovery_expression' => $trigger['recovery_expression']

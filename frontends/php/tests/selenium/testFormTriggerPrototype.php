@@ -487,7 +487,7 @@ class testFormTriggerPrototype extends CLegacyWebTest {
 					'expression' => '{Simple form test host}',
 					'error_msg' => 'Cannot add trigger prototype',
 					'errors' => [
-						'Incorrect trigger expression. Check expression part starting from "{Simple form test host}".'
+						'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{Simple form test host}"..'
 					]
 				]
 			],
@@ -674,7 +674,7 @@ class testFormTriggerPrototype extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host@:item-prototype-reuse.last(0)}".']
+							'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{Simple form test host@:item-prototype-reuse.last(0)}"..']
 						]
 					]
 				]
@@ -687,7 +687,7 @@ class testFormTriggerPrototype extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}".']
+							'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}"..']
 						]
 					]
 				]
@@ -700,7 +700,7 @@ class testFormTriggerPrototype extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}".']
+							'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}"..']
 						]
 					]
 				]
@@ -713,7 +713,7 @@ class testFormTriggerPrototype extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:item-prototype-reuse.lastA(0)}".']
+							'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{Simple form test host:item-prototype-reuse.lastA(0)}"..']
 						]
 					]
 				]

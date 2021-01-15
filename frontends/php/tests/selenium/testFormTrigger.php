@@ -441,7 +441,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'expression' => '6 and 0 or 0',
 					'error_msg' => 'Cannot add trigger',
 					'errors' => [
-						'Trigger expression must contain at least one host:key reference.'
+						'Invalid parameter "/1/expression": trigger expression must contain at least one host:key reference.'
 					]
 				]
 			],
@@ -452,7 +452,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'expression' => '{Simple form test host}',
 					'error_msg' => 'Cannot add trigger',
 					'errors' => [
-						'Incorrect trigger expression. Check expression part starting from "{Simple form test host}".'
+						'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{Simple form test host}"..'
 					]
 				]
 			],
@@ -645,7 +645,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'expression' => '{Simple form test host:test-item-reuse.last(0)} or {#MACRO}',
 					'error_msg' => 'Cannot add trigger',
 					'errors' => [
-						'Incorrect trigger expression. Check expression part starting from " {#MACRO}".'
+						'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from " {#MACRO}"..'
 					]
 				]
 			],
@@ -708,7 +708,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host@:test-item-reuse.last(0)}".']
+							'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{Simple form test host@:test-item-reuse.last(0)}"..']
 						]
 					]
 				]
@@ -721,7 +721,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}".']
+							'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}"..']
 						]
 					]
 				]
@@ -734,7 +734,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}".']
+							'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}"..']
 						]
 					]
 				]
@@ -747,7 +747,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:test-item-reuse.lastA(0)}".']
+							'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{Simple form test host:test-item-reuse.lastA(0)}"..']
 						]
 					]
 				]
