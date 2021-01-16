@@ -707,14 +707,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 * @throws APIException if validation failed.
 	 */
 	protected function checkTriggerCorrelationMode(array $trigger): void {
-		if ($trigger['correlation_mode'] == ZBX_TRIGGER_CORRELATION_NONE) {
-			if ($trigger['correlation_tag'] !== '') {
-				self::exception(ZBX_API_ERROR_PARAMETERS,
-					_s('Incorrect value for field "%1$s": %2$s.', 'correlation_tag', _('should be empty'))
-				);
-			}
-		}
-		elseif ($trigger['correlation_mode'] == ZBX_TRIGGER_CORRELATION_TAG) {
+		if ($trigger['correlation_mode'] == ZBX_TRIGGER_CORRELATION_TAG) {
 			if ($trigger['recovery_mode'] == ZBX_RECOVERY_MODE_NONE) {
 				self::exception(ZBX_API_ERROR_PARAMETERS, _s('Incorrect value for field "%1$s": %2$s.',
 					'correlation_mode', _s('unexpected value "%1$s"', $trigger['correlation_mode'])
@@ -726,6 +719,11 @@ abstract class CTriggerGeneral extends CApiService {
 					_s('Incorrect value for field "%1$s": %2$s.', 'correlation_tag', _('cannot be empty'))
 				);
 			}
+		}
+		elseif ($trigger['correlation_tag'] !== '') {
+			self::exception(ZBX_API_ERROR_PARAMETERS,
+				_s('Incorrect value for field "%1$s": %2$s.', 'correlation_tag', _('should be empty'))
+			);
 		}
 	}
 
