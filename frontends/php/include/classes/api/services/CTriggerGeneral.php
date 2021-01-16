@@ -683,7 +683,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 *
 	 * @throws APIException if validation failed.
 	 */
-	private static function checkTriggerRecoveryMode(array $trigger): void {
+	private static function checkTriggerRecoveryMode(array $trigger) {
 		if ($trigger['recovery_mode'] == ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION) {
 			if ($trigger['recovery_expression'] === '') {
 				self::exception(ZBX_API_ERROR_PARAMETERS,
@@ -710,7 +710,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 *
 	 * @throws APIException if validation failed.
 	 */
-	private static function checkTriggerCorrelationMode(array $trigger): void {
+	private static function checkTriggerCorrelationMode(array $trigger) {
 		if ($trigger['correlation_mode'] == ZBX_TRIGGER_CORRELATION_TAG) {
 			if ($trigger['recovery_mode'] == ZBX_RECOVERY_MODE_NONE) {
 				self::exception(ZBX_API_ERROR_PARAMETERS, _s('Incorrect value for field "%1$s": %2$s.',
@@ -755,7 +755,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 *
 	 * @throws APIException if validation failed.
 	 */
-	protected function validateCreate(array &$triggers): void {
+	protected function validateCreate(array &$triggers) {
 		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['description', 'expression']], 'fields' => [
 			'description' =>			['type' => API_STRING_UTF8, 'flags' => API_REQUIRED | API_NOT_EMPTY, 'length' => DB::getFieldLength('triggers', 'description')],
 			'expression' =>				['type' => API_TRIGGER_EXPRESSION, 'flags' => API_REQUIRED | API_NOT_EMPTY | API_ALLOW_LLD_MACRO, 'length' => DB::getFieldLength('triggers', 'expression')],

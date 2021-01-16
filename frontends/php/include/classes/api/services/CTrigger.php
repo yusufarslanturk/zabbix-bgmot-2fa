@@ -626,7 +626,7 @@ class CTrigger extends CTriggerGeneral {
 	 *
 	 * @throws APIException if the given dependencies are invalid.
 	 */
-	protected function validateAddDependencies(array &$triggers_data, bool $inherited = false) {
+	protected function validateAddDependencies(array &$triggers_data, $inherited = false) {
 		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['triggerid', 'dependsOnTriggerid']], 'fields' => [
 			'triggerid' =>			['type' => API_ID, 'flags' => API_REQUIRED],
 			'dependsOnTriggerid' =>	['type' => API_ID, 'flags' => API_REQUIRED]
@@ -703,7 +703,7 @@ class CTrigger extends CTriggerGeneral {
 	 *
 	 * @return array
 	 */
-	public function addDependencies(array $triggers_data, $inherited = false): array {
+	public function addDependencies(array $triggers_data, $inherited = false) {
 		$this->validateAddDependencies($triggers_data, $inherited);
 
 		foreach ($triggers_data as $dep) {
@@ -749,7 +749,7 @@ class CTrigger extends CTriggerGeneral {
 	 *
 	 * @throws APIException if the given input is invalid
 	 */
-	protected function validateDeleteDependencies(array $triggers, bool $inherited) {
+	protected function validateDeleteDependencies(array $triggers, $inherited) {
 		if (!$triggers) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
 		}
