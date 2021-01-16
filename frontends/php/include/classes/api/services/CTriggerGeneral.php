@@ -675,13 +675,15 @@ abstract class CTriggerGeneral extends CApiService {
 	/**
 	 * Validate integrity of trigger recovery properties.
 	 *
+	 * @static
+	 *
 	 * @param array  $trigger
 	 * @param int    $trigger['recovery_mode']
 	 * @param string $trigger['recovery_expression']
 	 *
 	 * @throws APIException if validation failed.
 	 */
-	protected function checkTriggerRecoveryMode(array $trigger): void {
+	private static function checkTriggerRecoveryMode(array $trigger): void {
 		if ($trigger['recovery_mode'] == ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION) {
 			if ($trigger['recovery_expression'] === '') {
 				self::exception(ZBX_API_ERROR_PARAMETERS,
@@ -699,6 +701,8 @@ abstract class CTriggerGeneral extends CApiService {
 	/**
 	 * Validate trigger correlation mode and related properties.
 	 *
+	 * @static
+	 *
 	 * @param array  $trigger
 	 * @param int    $trigger['correlation_mode']
 	 * @param string $trigger['correlation_tag']
@@ -706,7 +710,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 *
 	 * @throws APIException if validation failed.
 	 */
-	protected function checkTriggerCorrelationMode(array $trigger): void {
+	private static function checkTriggerCorrelationMode(array $trigger): void {
 		if ($trigger['correlation_mode'] == ZBX_TRIGGER_CORRELATION_TAG) {
 			if ($trigger['recovery_mode'] == ZBX_RECOVERY_MODE_NONE) {
 				self::exception(ZBX_API_ERROR_PARAMETERS, _s('Incorrect value for field "%1$s": %2$s.',
@@ -783,8 +787,8 @@ abstract class CTriggerGeneral extends CApiService {
 
 		$descriptions = [];
 		foreach ($triggers as $trigger) {
-			$this->checkTriggerCorrelationMode($trigger);
-			$this->checkTriggerRecoveryMode($trigger);
+			self::checkTriggerCorrelationMode($trigger);
+			self::checkTriggerRecoveryMode($trigger);
 
 			$descriptions[$trigger['description']][] = [
 				'expression' => $trigger['expression'],
@@ -947,8 +951,8 @@ abstract class CTriggerGeneral extends CApiService {
 				}
 			}
 
-			$this->checkTriggerCorrelationMode($trigger);
-			$this->checkTriggerRecoveryMode($trigger);
+			self::checkTriggerCorrelationMode($trigger);
+			self::checkTriggerRecoveryMode($trigger);
 
 			if ($trigger['expression'] !== $db_trigger['expression']
 					|| $trigger['recovery_expression'] !== $db_trigger['recovery_expression']
@@ -1273,7 +1277,7 @@ abstract class CTriggerGeneral extends CApiService {
 	 *
 	 * @throws APIException if error occurred
 	 */
-	protected function implode_expressions(array &$triggers, array $db_triggers = null, array &$triggers_functions,
+	private function implode_expressions(array &$triggers, array $db_triggers = null, array &$triggers_functions,
 			$inherited = false) {
 		$class = get_class($this);
 
