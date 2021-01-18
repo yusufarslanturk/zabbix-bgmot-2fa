@@ -72,6 +72,7 @@ class ApiJsonTests {
 		$suite->addTestSuite('testTaskCreate');
 		$suite->addTestSuite('testTemplateImport');
 		$suite->addTestSuite('testTriggerPermissions');
+		$suite->addTestSuite('testTriggerValidation');
 		$suite->addTestSuite('testUserGroup');
 		$suite->addTestSuite('testUserMacro');
 		$suite->addTestSuite('testUsers');

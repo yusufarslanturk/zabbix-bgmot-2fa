@@ -24,7 +24,7 @@ require_once dirname(__FILE__).'/../include/CAPITest.php';
 /**
  * @backup items
  */
-class testTriggerValidation {//extends CAPITest {
+class testTriggerValidation extends CAPITest {
 
 	const TEMPLATE_TRIGGERID = 13015;
 	const UPDATE_TRIGGER_1 = 50202;
