@@ -769,11 +769,11 @@ abstract class CTriggerGeneral extends CApiService {
 			'correlation_mode' =>		['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_CORRELATION_NONE, ZBX_TRIGGER_CORRELATION_TAG]), 'default' => DB::getDefault('triggers', 'correlation_mode')],
 			'correlation_tag' =>		['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'correlation_tag'), 'default' => DB::getDefault('triggers', 'correlation_tag')],
 			'manual_close' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_MANUAL_CLOSE_NOT_ALLOWED, ZBX_TRIGGER_MANUAL_CLOSE_ALLOWED])],
-			'tags' =>					['type' => API_OBJECTS, 'flags' => API_NORMALIZE, 'uniq' => [['tag', 'value']], 'fields' => [
+			'tags' =>					['type' => API_OBJECTS, 'uniq' => [['tag', 'value']], 'fields' => [
 				'tag' =>					['type' => API_STRING_UTF8, 'flags' => API_REQUIRED | API_NOT_EMPTY, 'length' => DB::getFieldLength('trigger_tag', 'tag')],
 				'value' =>					['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('trigger_tag', 'value'), 'default' => DB::getDefault('trigger_tag', 'value')]
 			]],
-			'dependencies' =>			['type' => API_OBJECTS, 'flags' => API_NORMALIZE, 'uniq' => [['triggerid']], 'fields'=> [
+			'dependencies' =>			['type' => API_OBJECTS, 'uniq' => [['triggerid']], 'fields'=> [
 				'triggerid' =>				['type' => API_ID, 'flags' => API_REQUIRED]
 			]]
 		]];
@@ -855,11 +855,11 @@ abstract class CTriggerGeneral extends CApiService {
 			'correlation_mode' =>		['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_CORRELATION_NONE, ZBX_TRIGGER_CORRELATION_TAG])],
 			'correlation_tag' =>		['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'correlation_tag')],
 			'manual_close' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_MANUAL_CLOSE_NOT_ALLOWED, ZBX_TRIGGER_MANUAL_CLOSE_ALLOWED])],
-			'tags' =>					['type' => API_OBJECTS, 'flags' => API_NORMALIZE, 'uniq' => [['tag', 'value']], 'fields' => [
+			'tags' =>					['type' => API_OBJECTS, 'uniq' => [['tag', 'value']], 'fields' => [
 				'tag' =>					['type' => API_STRING_UTF8, 'flags' => API_REQUIRED | API_NOT_EMPTY, 'length' => DB::getFieldLength('trigger_tag', 'tag')],
 				'value' =>					['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('trigger_tag', 'value'), 'default' => DB::getDefault('trigger_tag', 'value')]
 			]],
-			'dependencies' =>			['type' => API_OBJECTS, 'flags' => API_NORMALIZE, 'uniq' => [['triggerid']], 'fields'=> [
+			'dependencies' =>			['type' => API_OBJECTS, 'uniq' => [['triggerid']], 'fields'=> [
 				'triggerid' =>				['type' => API_ID, 'flags' => API_REQUIRED]
 			]]
 		]];

@@ -47,7 +47,9 @@ class testTriggerValidation extends CAPITest {
 					[
 						'triggerid' => self::UPDATE_TRIGGER_1,
 						'dependencies' => [
-							'triggerid' => self::UPDATE_TRIGGER_2
+							[
+								'triggerid' => self::UPDATE_TRIGGER_2
+							]
 						]
 					]
 				],
@@ -86,18 +88,22 @@ class testTriggerValidation extends CAPITest {
 				],
 				'expected_error' => 'Trigger "test-trigger-2" already exists on "Trigger validation test host".'
 			],
-			'try circular dependencies' => [
+			'check circular dependencies' => [
 				'triggers' => [
 					[
 						'triggerid' => self::UPDATE_TRIGGER_1,
 						'dependencies' => [
-							'triggerid' => self::UPDATE_TRIGGER_2
+							[
+								'triggerid' => self::UPDATE_TRIGGER_2
+							]
 						]
 					],
 					[
 						'triggerid' => self::UPDATE_TRIGGER_2,
 						'dependencies' => [
-							'triggerid' => self::UPDATE_TRIGGER_1
+							[
+								'triggerid' => self::UPDATE_TRIGGER_1
+							]
 						]
 					]
 				],
@@ -117,7 +123,9 @@ class testTriggerValidation extends CAPITest {
 					[
 						'triggerid' => self::UPDATE_TRIGGER_1,
 						'dependencies' => [
-							'triggerid' => self::UPDATE_TRIGGER_1
+							[
+								'triggerid' => self::UPDATE_TRIGGER_1
+							]
 						]
 					]
 				],
@@ -137,7 +145,9 @@ class testTriggerValidation extends CAPITest {
 					[
 						'triggerid' => self::UPDATE_TRIGGER_1,
 						'dependencies' => [
-							'triggerid' => 0
+							[
+								'triggerid' => 0
+							]
 						]
 					]
 				],
@@ -451,6 +461,31 @@ class testTriggerValidation extends CAPITest {
 					]
 				],
 				'expected_error' => 'Invalid parameter "/1/dependencies": an array is expected.'
+			],
+			'trigger with incorrectly formatted tags' => [
+				'triggers' => [
+					[
+						'description' => 'Trigger with tags',
+						'expression' => '{Trigger validation test host:item.last()}=0',
+						'tags' => [
+							'tag' => 'tag1',
+							'tag' => 'tag2'
+						]
+					]
+				],
+				'expected_error' => 'Invalid parameter "/1/tags/1": an array is expected.'
+			],
+			'trigger with incorrectly formatted dependencies' => [
+				'triggers' => [
+					[
+						'description' => 'Trigger with dependencies',
+						'expression' => '{Trigger validation test host:item.last()}=0',
+						'dependencies' => [
+							'triggerid' => self::UPDATE_TRIGGER_1
+						]
+					]
+				],
+				'expected_error' => 'Invalid parameter "/1/dependencies/1": an array is expected.'
 			],
 		];
 	}
