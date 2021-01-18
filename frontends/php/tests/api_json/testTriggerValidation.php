@@ -26,11 +26,11 @@ require_once dirname(__FILE__).'/../include/CAPITest.php';
  */
 class testTriggerValidation extends CAPITest {
 
-	const TEMPLATE_TRIGGERID = 13015;
-	const UPDATE_TRIGGER_1 = 50202;
-	const UPDATE_TRIGGER_2 = 50203;
+	const TEMPLATE_TRIGGERID = 50174;
+	const UPDATE_TRIGGER_1 = 50172;
+	const UPDATE_TRIGGER_2 = 50173;
 
-	public static function triggersToUpdate() {
+	public static function triggers_to_update_data() {
 		return [
 			// Successful cases.
 			'disable trigger' => [
@@ -62,6 +62,15 @@ class testTriggerValidation extends CAPITest {
 				],
 				'expected_error' => null
 			],
+			'change recovery mode to "none"' => [
+				'triggers' => [
+					[
+						'triggerid' => self::UPDATE_TRIGGER_1,
+						'recovery_mode' => 2
+					]
+				],
+				'expected_error' => null
+			],
 
 			// Failed cases.
 			'swap names between 2 triggers' => [
@@ -76,23 +85,6 @@ class testTriggerValidation extends CAPITest {
 					]
 				],
 				'expected_error' => 'Trigger "test-trigger-2" already exists on "Trigger validation test host".'
-			],
-			'try circular dependencies' => [
-				'triggers' => [
-					[
-						'triggerid' => self::UPDATE_TRIGGER_1,
-						'dependencies' => [
-							'triggerid' => self::UPDATE_TRIGGER_2
-						]
-					],
-					[
-						'triggerid' => self::UPDATE_TRIGGER_2,
-						'dependencies' => [
-							'triggerid' => self::UPDATE_TRIGGER_1
-						]
-					]
-				],
-				'expected_error' => 'Cannot create circular dependencies.'
 			],
 			'try circular dependencies' => [
 				'triggers' => [
@@ -140,16 +132,6 @@ class testTriggerValidation extends CAPITest {
 				],
 				'expected_error' => 'Invalid parameter "/1": unexpected parameter "flags".'
 			],
-			'incorrect recovery settings' => [
-				'triggers' => [
-					[
-						'triggerid' => self::UPDATE_TRIGGER_1,
-						'recovery_mode' => 2,
-						'recovery_expression' => '{Trigger validation test host:item.last()}=0'
-					]
-				],
-				'expected_error' => 'Incorrect value for field "recovery_expression": should be empty.'
-			],
 			'add unexisting dependent trigger' => [
 				'triggers' => [
 					[
@@ -164,7 +146,7 @@ class testTriggerValidation extends CAPITest {
 		];
 	}
 
-	public static function triggersToCreate() {
+	public static function triggers_to_create_data() {
 		return [
 			// Successful cases.
 			'2 triggers with different names' => [
@@ -180,13 +162,13 @@ class testTriggerValidation extends CAPITest {
 				],
 				'expected_error' => null
 			],
-			'trigger with null values for array properties' => [
+			'trigger with empty array values for tags and dependencies' => [
 				'triggers' => [
 					[
 						'description' => 'Trigger with null values for array properties',
 						'expression' => '{Trigger validation test host:item.last()}=0',
-						'tags' => null,
-						'dependencies' => null
+						'tags' => [],
+						'dependencies' => []
 					]
 				],
 				'expected_error' => null
@@ -260,7 +242,7 @@ class testTriggerValidation extends CAPITest {
 				],
 				'expected_error' => 'Invalid parameter "/2": value (description, expression)=(Duplicate trigger name, {Trigger validation test host:item.last()}=0) already exists.'
 			],
-			'Trigger with invalid seveiry #1' => [
+			'Trigger with invalid severity #1' => [
 				'triggers' => [
 					[
 						'description' => 'Trigger with invalid severity',
@@ -270,7 +252,7 @@ class testTriggerValidation extends CAPITest {
 				],
 				'expected_error' => 'Invalid parameter "/1/priority": an integer is expected.'
 			],
-			'Trigger with invalid seveiry #2' => [
+			'Trigger with invalid severity #2' => [
 				'triggers' => [
 					[
 						'description' => 'Trigger with invalid severity',
@@ -449,14 +431,34 @@ class testTriggerValidation extends CAPITest {
 					]
 				],
 				'expected_error' => 'Invalid parameter "/1/tags/2": value (tag, value)=(tag, value) already exists.'
-			]
+			],
+			'trigger with null in tags property' => [
+				'triggers' => [
+					[
+						'description' => 'Trigger with null values for array properties',
+						'expression' => '{Trigger validation test host:item.last()}=0',
+						'tags' => null
+					]
+				],
+				'expected_error' => 'Invalid parameter "/1/tags": an array is expected.'
+			],
+			'trigger with null in dependencies property' => [
+				'triggers' => [
+					[
+						'description' => 'Trigger with null values for array properties',
+						'expression' => '{Trigger validation test host:item.last()}=0',
+						'dependencies' => null
+					]
+				],
+				'expected_error' => 'Invalid parameter "/1/dependencies": an array is expected.'
+			],
 		];
 	}
 
 	/**
 	 * Test trigger.create API.
 	 *
-	 * @dataProvider triggersToCreate
+	 * @dataProvider triggers_to_create_data
 	 */
 	public function testTriggerCreate($triggers, $expected_error) {
 		$this->call('trigger.create', $triggers, $expected_error);
@@ -465,7 +467,7 @@ class testTriggerValidation extends CAPITest {
 	/**
 	 * Test trigger.update API.
 	 *
-	 * @dataProvider triggersToUpdate
+	 * @dataProvider triggers_to_update_data
 	 */
 	public function testTriggerUpdate($triggers, $expected_error) {
 		$this->call('trigger.update', $triggers, $expected_error);
