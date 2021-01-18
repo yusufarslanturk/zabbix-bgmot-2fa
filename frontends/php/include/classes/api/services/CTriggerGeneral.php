@@ -951,6 +951,22 @@ abstract class CTriggerGeneral extends CApiService {
 				}
 			}
 
+			if ($db_trigger['recovery_mode'] != $trigger['recovery_mode']) {
+				if ($trigger['recovery_mode'] == ZBX_RECOVERY_MODE_NONE) {
+					$trigger['correlation_mode'] = ZBX_TRIGGER_CORRELATION_NONE;
+					$trigger['correlation_tag'] = '';
+					$trigger['recovery_expression'] = '';
+				}
+				elseif ($trigger['recovery_mode'] != ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION) {
+					$trigger['recovery_expression'] = '';
+				}
+			}
+
+			if ($db_trigger['correlation_mode'] == ZBX_TRIGGER_CORRELATION_TAG
+					&& $trigger['correlation_mode'] == ZBX_TRIGGER_CORRELATION_NONE) {
+				$trigger['correlation_tag'] = '';
+			}
+
 			self::checkTriggerCorrelationMode($trigger);
 			self::checkTriggerRecoveryMode($trigger);
 
