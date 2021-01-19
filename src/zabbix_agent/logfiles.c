@@ -1736,6 +1736,12 @@ static char	*buf_find_newline(char *p, char **p_next, const char *p_end, const c
 	{
 		for (; p < p_end; p++)
 		{
+			if (0x0 == *p)
+			{
+				*p = 0x3f;
+				continue;
+			}
+
 			if (0xd < *p || 0xa > *p)
 				continue;
 
