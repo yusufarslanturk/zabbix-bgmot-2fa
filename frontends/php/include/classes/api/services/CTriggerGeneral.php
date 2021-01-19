@@ -758,14 +758,14 @@ abstract class CTriggerGeneral extends CApiService {
 	protected function validateCreate(array &$triggers) {
 		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['description', 'expression']], 'fields' => [
 			'description' =>			['type' => API_STRING_UTF8, 'flags' => API_REQUIRED | API_NOT_EMPTY, 'length' => DB::getFieldLength('triggers', 'description')],
-			'expression' =>				['type' => API_TRIGGER_EXPRESSION, 'flags' => API_REQUIRED | API_NOT_EMPTY | API_ALLOW_LLD_MACRO, 'length' => DB::getFieldLength('triggers', 'expression')],
+			'expression' =>				['type' => API_TRIGGER_EXPRESSION, 'flags' => API_REQUIRED | API_NOT_EMPTY | API_ALLOW_LLD_MACRO],
 			'comments' =>				['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'comments')],
 			'priority' =>				['type' => API_INT32, 'in' => implode(',', range(TRIGGER_SEVERITY_NOT_CLASSIFIED, TRIGGER_SEVERITY_COUNT - 1))],
 			'status' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_STATUS_ENABLED, TRIGGER_STATUS_DISABLED])],
 			'type' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_MULT_EVENT_DISABLED, TRIGGER_MULT_EVENT_ENABLED])],
 			'url' =>					['type' => API_URL, 'flags' => API_ALLOW_USER_MACRO, 'length' => DB::getFieldLength('triggers', 'url')],
 			'recovery_mode' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_RECOVERY_MODE_EXPRESSION, ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION, ZBX_RECOVERY_MODE_NONE]), 'default' => DB::getDefault('triggers', 'recovery_mode')],
-			'recovery_expression' =>	['type' => API_TRIGGER_EXPRESSION, 'flags' => API_ALLOW_LLD_MACRO, 'length' => DB::getFieldLength('triggers', 'recovery_expression'), 'default' => DB::getDefault('triggers', 'recovery_expression')],
+			'recovery_expression' =>	['type' => API_TRIGGER_EXPRESSION, 'flags' => API_ALLOW_LLD_MACRO, 'default' => DB::getDefault('triggers', 'recovery_expression')],
 			'correlation_mode' =>		['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_CORRELATION_NONE, ZBX_TRIGGER_CORRELATION_TAG]), 'default' => DB::getDefault('triggers', 'correlation_mode')],
 			'correlation_tag' =>		['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'correlation_tag'), 'default' => DB::getDefault('triggers', 'correlation_tag')],
 			'manual_close' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_MANUAL_CLOSE_NOT_ALLOWED, ZBX_TRIGGER_MANUAL_CLOSE_ALLOWED])],
@@ -844,14 +844,14 @@ abstract class CTriggerGeneral extends CApiService {
 		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['description', 'expression']], 'fields' => [
 			'triggerid' =>				['type' => API_ID, 'flags' => API_REQUIRED],
 			'description' =>			['type' => API_STRING_UTF8, 'flags' => API_NOT_EMPTY, 'length' => DB::getFieldLength('triggers', 'description')],
-			'expression' =>				['type' => API_TRIGGER_EXPRESSION, 'flags' => API_NOT_EMPTY | API_ALLOW_LLD_MACRO, 'length' => DB::getFieldLength('triggers', 'expression')],
+			'expression' =>				['type' => API_TRIGGER_EXPRESSION, 'flags' => API_NOT_EMPTY | API_ALLOW_LLD_MACRO],
 			'comments' =>				['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'comments')],
 			'priority' =>				['type' => API_INT32, 'in' => implode(',', range(TRIGGER_SEVERITY_NOT_CLASSIFIED, TRIGGER_SEVERITY_COUNT - 1))],
 			'status' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_STATUS_ENABLED, TRIGGER_STATUS_DISABLED])],
 			'type' =>					['type' => API_INT32, 'in' => implode(',', [TRIGGER_MULT_EVENT_DISABLED, TRIGGER_MULT_EVENT_ENABLED])],
 			'url' =>					['type' => API_URL, 'flags' => API_ALLOW_USER_MACRO, 'length' => DB::getFieldLength('triggers', 'url')],
 			'recovery_mode' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_RECOVERY_MODE_EXPRESSION, ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION, ZBX_RECOVERY_MODE_NONE])],
-			'recovery_expression' =>	['type' => API_TRIGGER_EXPRESSION, 'flags' => API_ALLOW_LLD_MACRO, 'length' => DB::getFieldLength('triggers', 'recovery_expression')],
+			'recovery_expression' =>	['type' => API_TRIGGER_EXPRESSION, 'flags' => API_ALLOW_LLD_MACRO],
 			'correlation_mode' =>		['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_CORRELATION_NONE, ZBX_TRIGGER_CORRELATION_TAG])],
 			'correlation_tag' =>		['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('triggers', 'correlation_tag')],
 			'manual_close' =>			['type' => API_INT32, 'in' => implode(',', [ZBX_TRIGGER_MANUAL_CLOSE_NOT_ALLOWED, ZBX_TRIGGER_MANUAL_CLOSE_ALLOWED])],
@@ -1614,6 +1614,9 @@ abstract class CTriggerGeneral extends CApiService {
 
 		$functionid = DB::reserveIds('functions', $functions_num);
 
+		$expression_max_length = DB::getFieldLength('triggers', 'expression');
+		$recovery_expression_max_length = DB::getFieldLength('triggers', 'recovery_expression');
+
 		// Replace {host:item.func()} macros with {<functionid>}.
 		foreach ($triggers as $tnum => &$trigger) {
 			$expressions_changed = $db_triggers === null
@@ -1640,6 +1643,12 @@ abstract class CTriggerGeneral extends CApiService {
 			}
 			while ($exprPart = prev($expressionData->expressions));
 
+			if (mb_strlen($trigger['expression']) > $expression_max_length) {
+				self::exception(ZBX_API_ERROR_PARAMETERS, _s(
+					'Invalid parameter "%1$s": %2$s.', '/'.($tnum + 1).'/expression', _('value is too long')
+				));
+			}
+
 			if ($trigger['recovery_mode'] == ZBX_RECOVERY_MODE_RECOVERY_EXPRESSION) {
 				$expressionData->parse($trigger['recovery_expression']);
 				$exprPart = end($expressionData->expressions);
@@ -1650,6 +1659,12 @@ abstract class CTriggerGeneral extends CApiService {
 					);
 				}
 				while ($exprPart = prev($expressionData->expressions));
+
+				if (mb_strlen($trigger['recovery_expression']) > $recovery_expression_max_length) {
+					self::exception(ZBX_API_ERROR_PARAMETERS, _s('Invalid parameter "%1$s": %2$s.',
+						'/'.($tnum + 1).'/recovery_expression', _('value is too long')
+					));
+				}
 			}
 		}
 		unset($trigger);
