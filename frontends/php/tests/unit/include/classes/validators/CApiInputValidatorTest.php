@@ -2959,15 +2959,9 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 			],
 			[
 				['type' => API_TRIGGER_EXPRESSION],
-				[],
-				'/1/expression',
-				'Invalid parameter "/1/expression": a character string is expected.'
-			],
-			[
-				['type' => API_TRIGGER_EXPRESSION],
 				'{host:item.last() = 0',
 				'/1/expression',
-				'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from "{host:item.last() = 0"..'
+				'Invalid parameter "/1/expression": incorrect trigger expression starting from "{host:item.last() = 0".'
 			],
 			[
 				['type' => API_TRIGGER_EXPRESSION],
@@ -2979,7 +2973,7 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 				['type' => API_TRIGGER_EXPRESSION],
 				'{host:item.last()} = {#LLD_MACRO}',
 				'/1/expression',
-				'Invalid parameter "/1/expression": Incorrect trigger expression. Check expression part starting from " {#LLD_MACRO}"..'
+				'Invalid parameter "/1/expression": incorrect trigger expression starting from " {#LLD_MACRO}".'
 			],
 			[
 				['type' => API_TRIGGER_EXPRESSION, 'flags' => API_ALLOW_LLD_MACRO],

@@ -1649,7 +1649,7 @@ class CApiInputValidator {
 	private static function validateTriggerExpression($rule, &$data, $path, &$error) {
 		$flags = array_key_exists('flags', $rule) ? $rule['flags'] : 0x00;
 
-		if (self::checkStringUtf8($flags, $data, $path, $error) === false) {
+		if (self::checkStringUtf8($flags & API_NOT_EMPTY, $data, $path, $error) === false) {
 			return false;
 		}
 
@@ -1662,7 +1662,10 @@ class CApiInputValidator {
 			return false;
 		}
 
-		$expression_data = new CTriggerExpression(['lldmacros' => ($flags & API_ALLOW_LLD_MACRO)]);
+		$expression_data = new CTriggerExpression([
+			'lldmacros' => ($flags & API_ALLOW_LLD_MACRO),
+			'lowercase_errors' => true
+		]);
 
 		if (!$expression_data->parse($data)) {
 			$error = _s('Invalid parameter "%1$s": %2$s.', $path, $expression_data->error);
