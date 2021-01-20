@@ -1738,7 +1738,7 @@ static char	*buf_find_newline(char *p, char **p_next, const char *p_end, const c
 		{
 			if (0x0 == *p)
 			{
-				*p = 0x3f;
+				*p = '?';
 				continue;
 			}
 
