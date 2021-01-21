@@ -22,7 +22,7 @@
 require_once dirname(__FILE__).'/../include/CAPITest.php';
 
 /**
- * @backup items
+ * @backup triggers
  */
 class testTriggerValidation extends CAPITest {
 
