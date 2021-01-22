@@ -696,7 +696,7 @@ class CTrigger extends CTriggerGeneral {
 			$dep_triggerids[$dep['dependsOnTriggerid']] = $dep['dependsOnTriggerid'];
 		}
 
-		if (!$inherited && $dep_triggerids) {
+		if (!$inherited) {
 			$count = $this->get([
 				'countOutput' => true,
 				'triggerids' => $dep_triggerids
