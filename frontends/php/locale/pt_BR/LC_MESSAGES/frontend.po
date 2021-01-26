@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-08 19:52+0200\n"
-"PO-Revision-Date: 2019-06-19 12:51+0300\n"
-"Last-Translator: Adail <the.spaww@gmail.com>\n"
+"POT-Creation-Date: 2021-01-15 19:51+0200\n"
+"PO-Revision-Date: 2021-01-22 17:21+0300\n"
+"Last-Translator: Marlon <Marlon@outlook.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1560941497.000000\n"
+"X-POOTLE-MTIME: 1611328870.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:70
 #: include/classes/db/OracleDbBackend.php:89
@@ -193,7 +193,7 @@ msgstr "%1$s widget"
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, Severity, %2$s"
-msgstr "%1$s, Severidade, %2$s"
+msgstr "%1$s, Gravidade, %2$s"
 
 #: jsLoader.php:238
 #, c-format
@@ -1218,7 +1218,7 @@ msgstr "Falha de autenticação: %1$s."
 msgid "Authentication method"
 msgstr "Método de autenticação"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:242
+#: app/controllers/CControllerAuthenticationUpdate.php:240
 msgid "Authentication method changed"
 msgstr "Método de autenticação modificado"
 
@@ -1238,7 +1238,7 @@ msgstr "Senha de autenticação"
 msgid "Authentication protocol"
 msgstr "Protocolo de autenticação"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:241
+#: app/controllers/CControllerAuthenticationUpdate.php:239
 msgid "Authentication settings updated"
 msgstr "Configurações de autenticação atualizadas"
 
@@ -2717,7 +2717,7 @@ msgstr "Ação não foi atualizada"
 msgid "Cannot update application"
 msgstr "Aplicação não foi atualizada"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:246
+#: app/controllers/CControllerAuthenticationUpdate.php:244
 msgid "Cannot update authentication"
 msgstr "Não foi possível atualizar a autenticação"
 
@@ -3000,7 +3000,7 @@ msgstr "Modificações por segundo"
 
 #: app/views/monitoring.acknowledge.edit.php:62
 msgid "Change severity"
-msgstr "Mudar severidade"
+msgstr "Mudar gravidade"
 
 #: include/forms.inc.php:353 include/items.inc.php:131
 #: include/views/configuration.item.edit.php:690
@@ -3491,7 +3491,7 @@ msgstr "Configuração de protótipos de trigger"
 
 #: adm.triggerseverities.php:24
 msgid "Configuration of trigger severities"
-msgstr "Configuração de severidades de trigger"
+msgstr "Configuração de gravidades de trigger"
 
 #: triggers.php:27
 msgid "Configuration of triggers"
@@ -4063,7 +4063,7 @@ msgstr "Script personalizado"
 
 #: include/views/administration.general.trigseverity.edit.php:87
 msgid "Custom severity names affect all locales and require manual translation!"
-msgstr "Nomes customizados de severidade afetam todas as traduções e requerem tradução manual!"
+msgstr "Nomes customizados de gravidade afetam todas as traduções e requerem tradução manual!"
 
 #: include/views/js/monitoring.sysmaps.js.php:87
 msgid "Custom size"
@@ -5285,7 +5285,7 @@ msgstr "Host duplicado. Já existe outro com o mesmo nome visível: \"%s\"."
 #: include/profiles.inc.php:176
 #, c-format
 msgid "Duplicate severity name \"%s\"."
-msgstr "Nome duplicado para a severidade: \"%s\"."
+msgstr "Nome duplicado para a gravidade: \"%s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:820
 #, c-format
@@ -6745,8 +6745,7 @@ msgstr "Grupos"
 msgid "H:i"
 msgstr "H:i"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1416
-#: include/classes/graphdraw/CLineGraphDraw.php:1423
+#: include/classes/graphdraw/CLineGraphDraw.php:1330
 #: include/translateDefines.inc.php:34
 msgid "H:i:s"
 msgstr "H:i:s"
@@ -6851,7 +6850,7 @@ msgstr "Ocultar depuração"
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:86
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:86
 msgid "Hide groups without problems"
-msgstr "Ocultar grupos sem problemas"
+msgstr "Ocultar grupos sem incidentes"
 
 #: include/views/monitoring.history.php:158
 msgid "Hide selected"
@@ -8491,7 +8490,7 @@ msgstr ""
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
 msgstr "O valor \"%1$s\" não é válido para o campo \"%2$s\"."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:127
+#: app/controllers/CControllerAuthenticationUpdate.php:125
 #: include/classes/api/services/CAction.php:1782
 #: include/classes/api/services/CScreenItem.php:576
 #: include/validate.inc.php:351
@@ -8558,7 +8557,7 @@ msgstr "Foi informado um valor inválido (%1$s) no campo \"%2$s\" do tipo de mí
 msgid "Incorrect value for \"%1$s\" field."
 msgstr "Valor incorreto para o campo \"%1$s\"."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:88
+#: app/controllers/CControllerAuthenticationUpdate.php:86
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: app/controllers/CControllerPopupMedia.php:94
 #: app/controllers/CControllerPopupMedia.php:105 correlation.php:227
@@ -8699,9 +8698,9 @@ msgstr "Valor incorreto para o campo \"%1$s\"."
 #: include/classes/api/services/CTriggerGeneral.php:1150
 #: include/classes/api/services/CUserGroup.php:463
 #: include/classes/api/services/CUser.php:536
-#: include/classes/graphdraw/CLineGraphDraw.php:113
-#: include/classes/graphdraw/CLineGraphDraw.php:241
-#: include/classes/graphdraw/CLineGraphDraw.php:251
+#: include/classes/graphdraw/CLineGraphDraw.php:112
+#: include/classes/graphdraw/CLineGraphDraw.php:240
+#: include/classes/graphdraw/CLineGraphDraw.php:250
 #: include/classes/graphdraw/CPieGraphDraw.php:203
 #: include/classes/graphdraw/CPieGraphDraw.php:213
 #: include/classes/helpers/CSvgGraphHelper.php:235
@@ -8726,7 +8725,7 @@ msgstr "Valor incorreto para o campo \"%1$s\"."
 msgid "Incorrect value for field \"%1$s\": %2$s."
 msgstr "Valor inválido para o campo \"%1$s\": %2$s."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:119
+#: app/controllers/CControllerAuthenticationUpdate.php:117
 #: app/controllers/CControllerPopupTriggerWizard.php:133
 #: include/validate.inc.php:346
 #, c-format
@@ -9664,11 +9663,11 @@ msgstr "Autenticação LDAP"
 msgid "LDAP host"
 msgstr "Servidor LDAP"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:89
+#: app/controllers/CControllerAuthenticationUpdate.php:87
 msgid "LDAP is not configured"
 msgstr "O LDAP não está configurado"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:186
+#: app/controllers/CControllerAuthenticationUpdate.php:184
 msgid "LDAP login successful"
 msgstr "A sessão foi iniciada com o servidor LDAP"
 
@@ -10086,7 +10085,7 @@ msgstr "Perdido"
 msgid "Low-level discovery rule in \"not supported\" state"
 msgstr "A regra de autobusca (LLD) está em estado \"não suportado\""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1384
+#: include/classes/graphdraw/CLineGraphDraw.php:1335
 msgid "M"
 msgstr "M"
 
@@ -11801,11 +11800,11 @@ msgstr "Número de colisões fora da janela. Retorna: número inteiro"
 
 #: include/views/monitoring.sysmap.edit.php:135
 msgid "Number of problems"
-msgstr "Quantidade de problemas"
+msgstr "Quantidade de incidentes"
 
 #: include/views/monitoring.sysmap.edit.php:136
 msgid "Number of problems and expand most critical one"
-msgstr "Quantidade de problemas e expansão do mais crítico"
+msgstr "Quantidade de incidentes e expansão do mais crítico"
 
 #: include/classes/items/CHelpItems.php:839
 msgid "Number of processor cores on VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -13041,7 +13040,7 @@ msgstr "Incidentes"
 #: include/classes/screens/CScreenSystemStatus.php:54
 #: include/classes/widgets/CWidgetConfig.php:45 include/screens.inc.php:41
 msgid "Problems by severity"
-msgstr "Problemas por severidade"
+msgstr "Incidentes por gravidade"
 
 #: include/classes/items/CHelpItems.php:153
 #: include/classes/items/CHelpItems.php:483
@@ -14392,7 +14391,7 @@ msgstr "A ação selecionada foi excluída"
 
 #: app/views/monitoring.acknowledge.edit.php:54
 msgid "Selected and all other problems of related triggers"
-msgstr "Selecionado e todos os outros problemas de triggers relacionadas"
+msgstr "Selecionado e todos os outros incidentes de triggers relacionadas"
 
 #: correlation.php:374
 msgid "Selected correlations deleted"
@@ -16038,7 +16037,7 @@ msgstr "Estatísticas"
 #: app/controllers/CControllerPopupTriggerWizard.php:216
 #: app/controllers/CControllerPopupTriggerWizard.php:287
 #: app/views/popup.services.php:44 include/actions.inc.php:44
-#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:483
+#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:482
 #: include/events.inc.php:229 include/maps.inc.php:26
 #: include/triggers.inc.php:1250
 #: include/views/configuration.services.edit.php:87
@@ -16484,7 +16483,11 @@ msgstr "EUA (160 caracteres)"
 msgid "Ukrainian (uk_UA)"
 msgstr "Ucraniano (uk_UA)"
 
-#: include/classes/core/CConfigFile.php:155
+#: include/classes/core/CConfigFile.php:150
+msgid "Unable to change configuration file permissions to 0600."
+msgstr ""
+
+#: include/classes/core/CConfigFile.php:160
 msgid "Unable to create the configuration file."
 msgstr "Não foi possível criar o arquivo de configuração."
 
@@ -16496,7 +16499,7 @@ msgstr "Não foi possível criar o arquivo de configuração."
 msgid "Unable to determine current Zabbix database version: %1$s."
 msgstr ""
 
-#: include/classes/core/CConfigFile.php:151
+#: include/classes/core/CConfigFile.php:156
 msgid "Unable to overwrite the existing configuration file."
 msgstr "Não foi possível sobrescrever o arquivo de configuração existente."
 
@@ -16854,7 +16857,7 @@ msgstr "Utilizar cor customizada de evento"
 #: app/views/popup.media.php:80
 #: include/views/administration.users.edit.php:247
 msgid "Use if severity"
-msgstr "Usar se severidade"
+msgstr "Usar se gravidade"
 
 #: app/views/administration.mediatype.list.php:67
 msgid "Used in actions"
@@ -17869,7 +17872,7 @@ msgid "Y axis MAX value must be greater than Y axis MIN value"
 msgstr "O valor MÁXIMO do eixo Y deve ser maior que o MÍNIMO"
 
 #: include/classes/api/services/CGraphGeneral.php:314
-#: include/classes/graphdraw/CLineGraphDraw.php:711
+#: include/classes/graphdraw/CLineGraphDraw.php:710
 msgid "Y axis MAX value must be greater than Y axis MIN value."
 msgstr "O valor MÁXIMO do eixo Y deve ser superior ao valor configurado para o MÍNIMO."
 
@@ -18706,11 +18709,11 @@ msgid "invalid byte sequence in UTF-8"
 msgstr "sequência de bytes inválida no UTF-8"
 
 #: include/classes/api/services/CItemGeneral.php:336
-#: include/classes/graphdraw/CLineGraphDraw.php:113
+#: include/classes/graphdraw/CLineGraphDraw.php:112
 msgid "invalid delay"
 msgstr "atraso inválido"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:242
+#: include/classes/graphdraw/CLineGraphDraw.php:241
 #: include/classes/graphdraw/CPieGraphDraw.php:204
 #: include/classes/helpers/CSvgGraphHelper.php:236
 msgid "invalid history storage period"
@@ -18728,7 +18731,7 @@ msgstr "nome inválido de host"
 msgid "invalid regular expression"
 msgstr "expressão regular inválida"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:252
+#: include/classes/graphdraw/CLineGraphDraw.php:251
 #: include/classes/graphdraw/CPieGraphDraw.php:214
 #: include/classes/helpers/CSvgGraphHelper.php:248
 msgid "invalid trend storage period"
@@ -18817,9 +18820,9 @@ msgctxt "month short"
 msgid "m"
 msgstr "m"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1384
-#: include/classes/graphdraw/CLineGraphDraw.php:1392
-#: include/classes/graphdraw/CLineGraphDraw.php:1399
+#: include/classes/graphdraw/CLineGraphDraw.php:1332
+#: include/classes/graphdraw/CLineGraphDraw.php:1333
+#: include/classes/graphdraw/CLineGraphDraw.php:1334
 msgid "m-d"
 msgstr "d-m"
 

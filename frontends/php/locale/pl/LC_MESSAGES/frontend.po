@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-08 19:52+0200\n"
+"POT-Creation-Date: 2021-01-15 19:51+0200\n"
 "PO-Revision-Date: 2020-02-17 09:52+0300\n"
 "Last-Translator: Yurii <jurijs.klopovskis@zabbix.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -1233,7 +1233,7 @@ msgstr ""
 msgid "Authentication method"
 msgstr "Metoda uwierzytelniania"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:242
+#: app/controllers/CControllerAuthenticationUpdate.php:240
 msgid "Authentication method changed"
 msgstr ""
 
@@ -1253,7 +1253,7 @@ msgstr "Hasło uwierzytelniania"
 msgid "Authentication protocol"
 msgstr "Protokół uwierzytelniania"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:241
+#: app/controllers/CControllerAuthenticationUpdate.php:239
 msgid "Authentication settings updated"
 msgstr ""
 
@@ -2765,7 +2765,7 @@ msgstr "Nie można zaktualizować akcji"
 msgid "Cannot update application"
 msgstr "Nie można zaktualizować aplikacji"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:246
+#: app/controllers/CControllerAuthenticationUpdate.php:244
 msgid "Cannot update authentication"
 msgstr ""
 
@@ -6803,8 +6803,7 @@ msgstr "Grupy"
 msgid "H:i"
 msgstr "H:i"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1416
-#: include/classes/graphdraw/CLineGraphDraw.php:1423
+#: include/classes/graphdraw/CLineGraphDraw.php:1330
 #: include/translateDefines.inc.php:34
 msgid "H:i:s"
 msgstr "H:i:s"
@@ -8553,7 +8552,7 @@ msgstr ""
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
 msgstr "Błędna wartość \"%1$s\" dla pola \"%2$s\"."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:127
+#: app/controllers/CControllerAuthenticationUpdate.php:125
 #: include/classes/api/services/CAction.php:1782
 #: include/classes/api/services/CScreenItem.php:576
 #: include/validate.inc.php:351
@@ -8620,7 +8619,7 @@ msgstr "Błędna wartość \"%1$s\" w polu \"%2$s\" dla typu mediów \"%3$s\"."
 msgid "Incorrect value for \"%1$s\" field."
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:88
+#: app/controllers/CControllerAuthenticationUpdate.php:86
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: app/controllers/CControllerPopupMedia.php:94
 #: app/controllers/CControllerPopupMedia.php:105 correlation.php:227
@@ -8761,9 +8760,9 @@ msgstr ""
 #: include/classes/api/services/CTriggerGeneral.php:1150
 #: include/classes/api/services/CUserGroup.php:463
 #: include/classes/api/services/CUser.php:536
-#: include/classes/graphdraw/CLineGraphDraw.php:113
-#: include/classes/graphdraw/CLineGraphDraw.php:241
-#: include/classes/graphdraw/CLineGraphDraw.php:251
+#: include/classes/graphdraw/CLineGraphDraw.php:112
+#: include/classes/graphdraw/CLineGraphDraw.php:240
+#: include/classes/graphdraw/CLineGraphDraw.php:250
 #: include/classes/graphdraw/CPieGraphDraw.php:203
 #: include/classes/graphdraw/CPieGraphDraw.php:213
 #: include/classes/helpers/CSvgGraphHelper.php:235
@@ -8788,7 +8787,7 @@ msgstr ""
 msgid "Incorrect value for field \"%1$s\": %2$s."
 msgstr "Błędna wartość dla pola \"%1$s\": %2$s."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:119
+#: app/controllers/CControllerAuthenticationUpdate.php:117
 #: app/controllers/CControllerPopupTriggerWizard.php:133
 #: include/validate.inc.php:346
 #, c-format
@@ -9726,11 +9725,11 @@ msgstr "Uwierzytelnianie LDAP"
 msgid "LDAP host"
 msgstr "Host LDAP"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:89
+#: app/controllers/CControllerAuthenticationUpdate.php:87
 msgid "LDAP is not configured"
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:186
+#: app/controllers/CControllerAuthenticationUpdate.php:184
 msgid "LDAP login successful"
 msgstr "Pomyślnie zalogowano z LDAP"
 
@@ -10154,7 +10153,7 @@ msgstr "Stracone"
 msgid "Low-level discovery rule in \"not supported\" state"
 msgstr "Niskopoziomowa reguła wykrywania w stanie \"niewspierany\""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1384
+#: include/classes/graphdraw/CLineGraphDraw.php:1335
 msgid "M"
 msgstr "M"
 
@@ -16113,7 +16112,7 @@ msgstr "Trendy"
 #: app/controllers/CControllerPopupTriggerWizard.php:216
 #: app/controllers/CControllerPopupTriggerWizard.php:287
 #: app/views/popup.services.php:44 include/actions.inc.php:44
-#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:483
+#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:482
 #: include/events.inc.php:229 include/maps.inc.php:26
 #: include/triggers.inc.php:1250
 #: include/views/configuration.services.edit.php:87
@@ -16563,7 +16562,11 @@ msgstr "USA (160 znaków)"
 msgid "Ukrainian (uk_UA)"
 msgstr "Ukraiński (uk_UA)"
 
-#: include/classes/core/CConfigFile.php:155
+#: include/classes/core/CConfigFile.php:150
+msgid "Unable to change configuration file permissions to 0600."
+msgstr ""
+
+#: include/classes/core/CConfigFile.php:160
 msgid "Unable to create the configuration file."
 msgstr "Nie można utworzyć pliku konfiguracji."
 
@@ -16575,7 +16578,7 @@ msgstr "Nie można utworzyć pliku konfiguracji."
 msgid "Unable to determine current Zabbix database version: %1$s."
 msgstr ""
 
-#: include/classes/core/CConfigFile.php:151
+#: include/classes/core/CConfigFile.php:156
 msgid "Unable to overwrite the existing configuration file."
 msgstr "Nie można nadpisać istniejącego pliku konfiguracji."
 
@@ -17949,7 +17952,7 @@ msgid "Y axis MAX value must be greater than Y axis MIN value"
 msgstr ""
 
 #: include/classes/api/services/CGraphGeneral.php:314
-#: include/classes/graphdraw/CLineGraphDraw.php:711
+#: include/classes/graphdraw/CLineGraphDraw.php:710
 msgid "Y axis MAX value must be greater than Y axis MIN value."
 msgstr "Wartość MAX osi Y musi być większa od wartości MIN osi Y."
 
@@ -18785,11 +18788,11 @@ msgid "invalid byte sequence in UTF-8"
 msgstr ""
 
 #: include/classes/api/services/CItemGeneral.php:336
-#: include/classes/graphdraw/CLineGraphDraw.php:113
+#: include/classes/graphdraw/CLineGraphDraw.php:112
 msgid "invalid delay"
 msgstr ""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:242
+#: include/classes/graphdraw/CLineGraphDraw.php:241
 #: include/classes/graphdraw/CPieGraphDraw.php:204
 #: include/classes/helpers/CSvgGraphHelper.php:236
 msgid "invalid history storage period"
@@ -18807,7 +18810,7 @@ msgstr ""
 msgid "invalid regular expression"
 msgstr ""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:252
+#: include/classes/graphdraw/CLineGraphDraw.php:251
 #: include/classes/graphdraw/CPieGraphDraw.php:214
 #: include/classes/helpers/CSvgGraphHelper.php:248
 msgid "invalid trend storage period"
@@ -18896,9 +18899,9 @@ msgctxt "month short"
 msgid "m"
 msgstr "m"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1384
-#: include/classes/graphdraw/CLineGraphDraw.php:1392
-#: include/classes/graphdraw/CLineGraphDraw.php:1399
+#: include/classes/graphdraw/CLineGraphDraw.php:1332
+#: include/classes/graphdraw/CLineGraphDraw.php:1333
+#: include/classes/graphdraw/CLineGraphDraw.php:1334
 msgid "m-d"
 msgstr "m-d"
 
