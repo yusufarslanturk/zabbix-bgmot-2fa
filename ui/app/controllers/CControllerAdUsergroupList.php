@@ -27,7 +27,7 @@ class CControllerAdUsergroupList extends CController {
 	}
 
 	protected function checkPermissions() {
-		return ($this->getUserType() == USER_TYPE_SUPER_ADMIN);
+		return $this->checkAccess(CRoleHelper::UI_ADMINISTRATION_USER_GROUPS);
 	}
 
 	protected function doAction() {
@@ -50,8 +50,7 @@ class CControllerAdUsergroupList extends CController {
 			'name' => CProfile::get('web.adusergroup.filter_name', '')
 		];
 
-		$config = select_config();
-
+		$limit = CSettingsHelper::get(CSettingsHelper::SEARCH_LIMIT) + 1;
 		$data = [
 			'uncheck' => $this->hasInput('uncheck'),
 			'sort' => $sort_field,
@@ -60,13 +59,21 @@ class CControllerAdUsergroupList extends CController {
 			'profileIdx' => 'web.adusergroup.filter',
 			'active_tab' => CProfile::get('web.adusergroup.filter.active', 1),
 			'adusergroups' => API::AdUserGroup()->get([
-				'output' => ['adusrgrpid', 'name', 'user_type'],
+				'output' => ['adusrgrpid', 'name', 'roleid'],
+				'selectRole' => ['name'],
 				'search' => ['name' => ($filter['name'] !== '') ? $filter['name'] : null],
 				'adusrgrpids' => getRequest('adusrgrpid'),
 				'sortfield' => $sort_field,
-				'limit' => $config['search_limit'] + 1
-			])
+				//'limit' => $config['search_limit'] + 1
+				'limit' => $limit
+			]),
+			'allowed_ui_users' => $this->checkAccess(CRoleHelper::UI_ADMINISTRATION_USERS)
 		];
+
+		foreach ($data['adusergroups'] as &$adusergroup) {
+			$adusergroup['role_name'] = $adusergroup['role']['name'];
+		}
+		unset($user);
 
 		// data sort and pager
 		CArrayHelper::sort($data['adusergroups'], [['field' => $sort_field, 'order' => $sort_order]]);
@@ -85,8 +92,9 @@ class CControllerAdUsergroupList extends CController {
 			CArrayHelper::sort($adusergroup['groups'], ['name']);
 
 			$usergroup['group_cnt'] = count($adusergroup['groups']);
-			if ($usergroup['group_cnt'] > $config['max_in_table']) {
-				$usergroup['groups'] = array_slice($usergroup['groups'], 0, $config['max_in_table']);
+			$max_in_table = CSettingsHelper::get(CSettingsHelper::MAX_IN_TABLE);
+			if ($usergroup['group_cnt'] > $max_in_table) {
+				$usergroup['groups'] = array_slice($usergroup['groups'], 0, $max_in_table);
 			}
 		}
 		unset($adusergroup);

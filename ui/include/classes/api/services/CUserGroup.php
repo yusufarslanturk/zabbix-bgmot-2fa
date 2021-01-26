@@ -65,6 +65,7 @@ class CUserGroup extends CApiService {
 		$defOptions = [
 			'usrgrpids'					=> null,
 			'userids'					=> null,
+			'adusrgrpids'					=> null,
 			'status'					=> null,
 			'with_gui_access'			=> null,
 			// filter

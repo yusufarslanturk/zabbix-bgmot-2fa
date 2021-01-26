@@ -6,21 +6,19 @@ class CControllerAdUsergroupCreate extends CController {
 		$fields = [
 			'adgname'	=> 'required|not_empty|db adusrgrp.name',
 			'user_groups'	=> 'required|array_db usrgrp.usrgrpid',
-			'user_type'	=> 'db adusrgrp.user_type',
+			'roleid'        => 'required|db adusrgrp.roleid',
 			'form_refresh'	=> 'int32'
 		];
 
 		$ret = $this->validateInput($fields);
+		$error = $this->GetValidationError();
 
 		if (!$ret) {
-			switch ($this->getValidationError()) {
+			switch ($error) {
 				case self::VALIDATION_ERROR:
-					$response = new CControllerResponseRedirect((new CUrl('zabbix.php'))
-						->setArgument('action', 'adusergrps.edit')
-						->getUrl()
-					);
+					$response = new CControllerResponseRedirect('zabbix.php?action=adusergrps.edit');
 					$response->setFormData($this->getInputAll());
-					$response->setMessageError(_('Cannot add LDAP group'));
+					CMessageHelper::setErrorTitle(_('Cannot add LDAP group'));
 					$this->setResponse($response);
 					break;
 
@@ -34,15 +32,14 @@ class CControllerAdUsergroupCreate extends CController {
 	}
 
 	protected function checkPermissions() {
-		return ($this->getUserType() == USER_TYPE_SUPER_ADMIN);
+		return $this->checkAccess(CRoleHelper::UI_ADMINISTRATION_USERS);
 	}
 
 	protected function doAction() {
-		$usrgrps = $this->getInput('user_groups');
 		$aduser_group = [
 			'name' => $this->getInput('adgname'),
-			'usrgrps' => zbx_toObject($usrgrps, 'usrgrpid'),
-			'user_type' => $this->getInput('user_type')
+			'usrgrps' => zbx_toObject($this->getInput('user_groups'), 'usrgrpid'),
+			'roleid' => $this->getInput('roleid')
 		];
 
 		$result = (bool) API::AdUserGroup()->create($aduser_group);
@@ -53,14 +50,14 @@ class CControllerAdUsergroupCreate extends CController {
 				->setArgument('page', CPagerHelper::loadPage('adusergrps.list', null))
 			);
 			$response->setFormData(['uncheck' => '1']);
-			$response->setMessageOk(_('LDAP group added'));
+			CMessageHelper::setSuccessTitle(_('LDAP group added'));
 		}
 		else {
 			$response = new CControllerResponseRedirect((new CUrl('zabbix.php'))
 				->setArgument('action', 'adusergrps.edit')
 			);
-			$response->setMessageError(_('Cannot add LDAP group'));
 			$response->setFormData($this->getInputAll());
+			CMessageHelper::setErrorTitle(_('Cannot add LDAP group'));
 		}
 
 		$this->setResponse($response);

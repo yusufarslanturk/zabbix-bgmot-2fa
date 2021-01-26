@@ -39,7 +39,7 @@ $adGroupTable = (new CTableInfo())
 				->getUrl()
 		),
 		_('User groups'),
-		_('User type')
++		_('User role')
 	]);
 
 foreach ($this->data['adusergroups'] as $adusrgrp) {
@@ -74,11 +74,12 @@ foreach ($this->data['adusergroups'] as $adusrgrp) {
 		->getUrl()
 	);
 
+	// Append LDAP group to table
 	$adGroupTable->addRow([
 		new CCheckBox('adusrgrpid['.$adGroupId.']', $adGroupId),
 		(new CCol($name))->addClass(ZBX_STYLE_NOWRAP),
 		$userGroups,
-		user_type2str($adusrgrp['user_type']),
+		$adusrgrp['role']
 	]);
 }
 

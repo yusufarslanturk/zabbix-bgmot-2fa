@@ -5,6 +5,12 @@
  */
 class CAdUserGroup extends CApiService {
 
+	public const ACCESS_RULES = [
+		'get' => ['min_user_type' => USER_TYPE_ZABBIX_USER],
+		'create' => ['min_user_type' => USER_TYPE_SUPER_ADMIN],
+		'update' => ['min_user_type' => USER_TYPE_SUPER_ADMIN],
+		'delete' => ['min_user_type' => USER_TYPE_SUPER_ADMIN]
+	];
 	protected $tableName = 'adusrgrp';
 	protected $tableAlias = 'ag';
 	protected $sortColumns = ['adusrgrpid', 'name'];
@@ -46,7 +52,8 @@ class CAdUserGroup extends CApiService {
 			// output
 			'editable'				=> false,
 			'output'				=> API_OUTPUT_EXTEND,
-			'selectGroups'				=> null,
+			'selectUsrgrps'				=> null,
+			'selectRole'				=> null,
 			'countOutput'				=> false,
 			'preservekeys'				=> false,
 			'sortfield'				=> '',
@@ -71,14 +78,14 @@ class CAdUserGroup extends CApiService {
 		}
 
 		// adusrgrpids
-		if (!is_null($options['adusrgrpids'])) {
+		if ($options['adusrgrpids'] !== null) {
 			zbx_value2array($options['adusrgrpids']);
 
 			$sqlParts['where'][] = dbConditionInt('ag.adusrgrpid', $options['adusrgrpids']);
 		}
 
 		// usrgrpids
-		if (!is_null($options['usrgrpids'])) {
+		if ($options['usrgrpids'] !== null) {
 			zbx_value2array($options['usrgrpids']);
 
 			$sqlParts['from']['adgroups_groups'] = 'adgroups_groups agg';
@@ -118,16 +125,42 @@ class CAdUserGroup extends CApiService {
 		}
 
 		// adding user groups
-		if ($options['selectGroups'] !== null && $options['selectGroups'] != API_OUTPUT_COUNT) {
+		if ($options['selectUsrgrps'] !== null && $options['selectUsrgrps'] != API_OUTPUT_COUNT) {
 			$relationMap = $this->createRelationMap($result, 'adusrgrpid', 'usrgrpid', 'adgroups_groups');
 
 			$dbUserGroups = API::UserGroup()->get([
-				'output' => $options['selectGroups'],
+				'output' => $options['selectUsrgrps'],
 				'usrgrpids' => $relationMap->getRelatedIds(),
 				'preservekeys' => true
 			]);
 
 			$result = $relationMap->mapMany($result, $dbUserGroups, 'usrgrps');
+		}
+
+		$adusrgrpIds = zbx_objectValues($result, 'adusrgrpid');
+		// adding user role
+		if ($options['selectRole'] !== null && $options['selectRole'] !== API_OUTPUT_COUNT) {
+			if ($options['selectRole'] === API_OUTPUT_EXTEND) {
+				$options['selectRole'] = ['roleid', 'name', 'type', 'readonly'];
+			}
+
+			$db_roles = DBselect(
+				'SELECT adg.adusrgrpid'.($options['selectRole'] ? ',r.'.implode(',r.', $options['selectRole']) : '').
+				' FROM adusrgrp adg,role r'.
+				' WHERE adg.roleid=r.roleid'.
+				' AND '.dbConditionInt('adg.adusrgrpid', $adusrgrpIds)
+			);
+
+			foreach ($result as $adusrgrpid => $adusrgrp) {
+				$result[$adusrgrpid]['role'] = [];
+			}
+
+			while ($db_role = DBfetch($db_roles)) {
+				$adusrgrpid = $db_role['adusrgrpid'];
+				unset($db_role['adusrgrpid']);
+
+				$result[$adusrgrpid]['role'] = $db_role;
+			}
 		}
 
 		// removing keys (hash -> array)
@@ -173,12 +206,12 @@ class CAdUserGroup extends CApiService {
 	 */
 	private function validateCreate(array &$adusrgrps) {
 		if (self::$userData['type'] != USER_TYPE_SUPER_ADMIN) {
-			self::exception(ZBX_API_ERROR_PERMISSIONS, _('Only Super Admins can create LDAP groups.'));
+			self::exception(ZBX_API_ERROR_PERMISSIONS, _('You do not have permissions to create LDAP groups.'));
 		}
 
 		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['name']], 'fields' => [
 			'name' =>		['type' => API_STRING_UTF8, 'flags' => API_REQUIRED | API_NOT_EMPTY, 'length' => DB::getFieldLength('adusrgrp', 'name')],
-			'user_type' =>		['type' => API_INT32, 'in' => implode(',', [USER_TYPE_ZABBIX_USER, USER_TYPE_ZABBIX_ADMIN, USER_TYPE_SUPER_ADMIN])],
+			'roleid' =>		['type' => API_ID, 'flags' => API_REQUIRED],
 			'usrgrps' =>		['type' => API_OBJECTS, 'flags' => API_REQUIRED | API_NOT_EMPTY, 'uniq' => [['usrgrpid']], 'fields' => [
 			'usrgrpid' =>		['type' => API_ID, 'flags' => API_REQUIRED]
 			]]
@@ -210,8 +243,8 @@ class CAdUserGroup extends CApiService {
 				$upd_adusrgrp['name'] = $adusrgrp['name'];
 			}
 
-			if (array_key_exists('user_type', $adusrgrp) && $adusrgrp['user_type'] !== $db_adusrgrp['user_type']) {
-				$upd_adusrgrp['user_type'] = $adusrgrp['user_type'];
+			if (array_key_exists('roleid', $adusrgrp) && $adusrgrp['roleid'] != $db_adusrgrp['roleid']) {
+				$upd_adusrgrp['roleid'] = $adusrgrp['roleid'];
 			}
 
 			if ($upd_adusrgrp) {
@@ -246,7 +279,7 @@ class CAdUserGroup extends CApiService {
 		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['adusrgrpid'], ['name']], 'fields' => [
 			'adusrgrpid' =>		['type' => API_ID, 'flags' => API_REQUIRED],
 			'name' =>		['type' => API_STRING_UTF8, 'flags' => API_NOT_EMPTY, 'length' => DB::getFieldLength('adusrgrp', 'name')],
-			'user_type' =>		['type' => API_INT32, 'in' => implode(',', [USER_TYPE_ZABBIX_USER, USER_TYPE_ZABBIX_ADMIN, USER_TYPE_SUPER_ADMIN])],
+			'roleid' =>		['type' => API_ID],
 			'usrgrps' =>		['type' => API_OBJECTS, 'flags' => API_REQUIRED | API_NOT_EMPTY, 'uniq' => [['usrgrpid']], 'fields' => [
 			'usrgrpid' =>		['type' => API_ID, 'flags' => API_REQUIRED]
 			]]
@@ -257,12 +290,23 @@ class CAdUserGroup extends CApiService {
 
 		// Check AD group names.
 		$db_adusrgrps = DB::select('adusrgrp', [
-			'output' => ['adusrgrpid', 'name', 'user_type'],
+			'output' => ['adusrgrpid', 'name', 'roleid'],
 			'adusrgrpids' => zbx_objectValues($adusrgrps, 'adusrgrpid'),
 			'preservekeys' => true
 		]);
 
+		// Get readonly super admin role ID and name.
+		$db_roles = DBfetchArray(DBselect(
+			'SELECT roleid,name'.
+			' FROM role'.
+			' WHERE type='.USER_TYPE_SUPER_ADMIN.
+				' AND readonly=1'
+		));
+		$readonly_superadmin_role = $db_roles[0];
+
+		$superadminids_to_update = [];
 		$names = [];
+		$check_roleids = [];
 
 		foreach ($adusrgrps as $adusrgrp) {
 			// Check if this AD group exists.
@@ -277,11 +321,24 @@ class CAdUserGroup extends CApiService {
 			if (array_key_exists('name', $adusrgrp) && $adusrgrp['name'] !== $db_adusrgrp['name']) {
 				$names[] = $adusrgrp['name'];
 			}
+
+			if (array_key_exists('roleid', $adusrgrp) && $adusrgrp['roleid'] != $adusrgrp['roleid']) {
+				if ($db_adusrgrp['roleid'] == $readonly_superadmin_role['roleid']) {
+					$superadminids_to_update[] = $adusrgrp['userid'];
+				}
+
+				$check_roleids[] = $user['roleid'];
+			}
 		}
 
 		if ($names) {
 			$this->checkDuplicates($names);
 		}
+
+		if ($check_roleids) {
+			$this->checkRoles($check_roleids);
+		}
+
 		$this->checkUserGroups($adusrgrps);
 	}
 
@@ -413,6 +470,27 @@ class CAdUserGroup extends CApiService {
 				self::exception(ZBX_API_ERROR_PARAMETERS,
 					_s('LDAP group "%1$s" cannot be without user group.', $db_usrgrp['name'])
 				);
+			}
+		}
+	}
+
+	/**
+	 * Check for valid user roles.
+	 *
+	 * @param array $roleids
+	 *
+	 * @throws APIException
+	 */
+	private function checkRoles(array $roleids): void {
+		$db_roles = DB::select('role', [
+			'output' => ['roleid'],
+			'roleids' => $roleids,
+			'preservekeys' => true
+		]);
+
+		foreach ($roleids as $roleid) {
+			if (!array_key_exists($roleid, $db_roles)) {
+				self::exception(ZBX_API_ERROR_PARAMETERS, _s('User role with ID "%1$s" is not available.', $roleid));
 			}
 		}
 	}
