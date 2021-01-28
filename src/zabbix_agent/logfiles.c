@@ -1736,6 +1736,7 @@ static char	*buf_find_newline(char *p, char **p_next, const char *p_end, const c
 	{
 		for (; p < p_end; p++)
 		{
+			/* detect NULL byte and replace it with '?' character */
 			if (0x0 == *p)
 			{
 				*p = '?';
@@ -1769,6 +1770,7 @@ static char	*buf_find_newline(char *p, char **p_next, const char *p_end, const c
 	{
 		while (p <= p_end - szbyte)
 		{
+			/* detect NULL byte in UTF-16 encoding and replace it with '?' character */
 			if (2 == szbyte && 0x0 == p[0] && 0x0 == p[1])
 				*p = '?';
 
