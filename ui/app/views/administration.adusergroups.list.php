@@ -39,7 +39,7 @@ $adGroupTable = (new CTableInfo())
 				->getUrl()
 		),
 		_('User groups'),
-+		_('User role')
+		_('User role')
 	]);
 
 foreach ($this->data['adusergroups'] as $adusrgrp) {
