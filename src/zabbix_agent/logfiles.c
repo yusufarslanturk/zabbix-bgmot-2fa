@@ -1769,6 +1769,9 @@ static char	*buf_find_newline(char *p, char **p_next, const char *p_end, const c
 	{
 		while (p <= p_end - szbyte)
 		{
+			if (2 == szbyte && 0x0 == p[0] && 0x0 == p[1])
+				*p = '?';
+
 			if (0 == memcmp(p, lf, szbyte))		/* LF (Unix) */
 			{
 				*p_next = p + szbyte;
