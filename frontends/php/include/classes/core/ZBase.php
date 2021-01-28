@@ -124,7 +124,7 @@ class ZBase {
 
 		switch ($mode) {
 			case self::EXEC_MODE_DEFAULT:
-				if (getRequest('action') === 'notifications.get') {
+				if (getRequest('action', '') === 'notifications.get') {
 					CWebUser::disableSessionExtension();
 				}
 
