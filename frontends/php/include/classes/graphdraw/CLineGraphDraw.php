@@ -1302,7 +1302,7 @@ class CLineGraphDraw extends CGraphDraw {
 	 *
 	 * @return array
 	 */
-	private function getOptimalDateTimeIntervalSpec(int $pref_sub_interval, float $min_sub_interval): array {
+	private function getOptimalDateTimeIntervalSpec($pref_sub_interval, $min_sub_interval) {
 		// Possible X-axis main and sub-intervals.
 		$intervals = [
 			'PT1M' => ['PT1S', 'PT5S', 'PT10S', 'PT30S'],
@@ -1382,7 +1382,7 @@ class CLineGraphDraw extends CGraphDraw {
 	 *
 	 * @return array
 	 */
-	private function getDateTimeIntervals(int $start, int $end, DateInterval $interval): array {
+	private function getDateTimeIntervals($start, $end, $interval) {
 		$intervals = [];
 
 		$interval_ts = (new DateTime('@0'))
