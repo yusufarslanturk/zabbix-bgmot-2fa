@@ -22,11 +22,7 @@ class CControllerAdUsergroupDelete extends CController {
 	}
 
 	protected function checkPermissions() {
-		if ($this->getUserType() != USER_TYPE_SUPER_ADMIN) {
-			return false;
-		}
-
-		return true;
+		return $this->checkAccess(CRoleHelper::UI_ADMINISTRATION_USERS);
 	}
 
 	protected function doAction() {
@@ -43,10 +39,10 @@ class CControllerAdUsergroupDelete extends CController {
 
 		if ($result) {
 			$response->setFormData(['uncheck' => '1']);
-			$response->setMessageOk(_n('LDAP group deleted', 'LDAP groups deleted', $deleted));
+			CMessageHelper::setSuccessTitle(_n('LDAP group deleted', 'LDAP groups deleted', $deleted));
 		}
 		else {
-			$response->setMessageError(_n('Cannot delete LDAP group', 'Cannot delete LDAP groups', $deleted));
+			CMessageHelper::setErrorTitle(_n('Cannot delete LDAP group', 'Cannot delete LDAP groups', $deleted));
 		}
 
 		$this->setResponse($response);

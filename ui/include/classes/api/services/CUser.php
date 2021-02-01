@@ -1333,7 +1333,7 @@ class CUser extends CApiService {
 	 */
 	public function login(array $user) {
 		$api_input_rules = ['type' => API_OBJECT, 'fields' => [
-			'user' =>		['type' => API_STRING_UTF8, 'flags' => API_REQUIRED, 'length' => 255],
+			'user' =>	['type' => API_STRING_UTF8, 'flags' => API_REQUIRED, 'length' => 255],
 			'password' =>	['type' => API_STRING_UTF8, 'flags' => API_REQUIRED, 'length' => 255],
 			'userData' =>	['type' => API_FLAG]
 		]];
@@ -1379,7 +1379,7 @@ class CUser extends CApiService {
 				$user_info = $this->ldapLogin($user);
 				$adgroups = $user_info['memberof']; // Array of all AD groups the user is member of
 				// Get User Groups associated with at least one of AD group from all AD Groups the user is member of
-				$usrgrps_and_type = $this->getAdUserGroupsData($adgroups);
+				$usrgrps_and_role = $this->getAdUserGroupsData($adgroups);
 				// Create User in local DB
 				if (array_key_exists('mail', $user_info)) {
 					$medias = [
@@ -1410,14 +1410,14 @@ class CUser extends CApiService {
 					'surname' => '',
 					'url' => '',
 					'passwd' => md5($user['password']),
-					'type' => $usrgrps_and_type['user_type']
+					'roleid' => $usrgrps_and_role['roleid']
 				];
 				// This will not work here as we are not Admin at this point
 				// $result = (bool) API::User()->create($user);
 				$userid = DB::insert('users', [$new_user]);
 				$new_user['userid'] = $userid[0];
 				$new_user['user_medias'] = $medias;
-				$new_user['usrgrps'] = $usrgrps_and_type['groups'];
+				$new_user['usrgrps'] = $usrgrps_and_role['groups'];
 
 				$this->updateUsersGroups([$new_user], __FUNCTION__);
 				$this->updateMedias([$new_user], __FUNCTION__);
@@ -1705,21 +1705,27 @@ class CUser extends CApiService {
 
 		$adgrp_id = -1;
 		$adgrp_name = '';
-		$adgrp_user_type = -1;
+		$user_type = -1;
+		$roleid = -1;
 		$user_groups = [];
 		foreach ($adgrps as $adgrp) {
 			$db_adgrp =  DB::select('adusrgrp', [
-				'output' => ['adusrgrpid', 'name', 'user_type'],
+				'output' => ['adusrgrpid', 'name', 'roleid'],
 				'filter' => ['name' => $adgrp]
 			]);
 
 			if (!empty($db_adgrp)) {
 				// AD group found in internal DB
+				$role =  DB::select('role', [
+					'output' => ['roleid', 'type'],
+					'filter' => ['roleid' => $db_adgrp[0]['roleid']]
+				]);
 				$adgrp_id = $db_adgrp[0]['adusrgrpid'];
 				$adgrp_name = $db_adgrp[0]['name'];
-				if ($db_adgrp[0]['user_type'] > $adgrp_user_type) {
+				if ($role[0]['type'] > $user_type) {
 					// The highest privilege wins
-					$adgrp_user_type = $db_adgrp[0]['user_type'];
+					$user_type = $role[0]['type'];
+					$roleid = $role[0]['roleid'];
 				}
 				$db_usrgrps =  DB::select('adgroups_groups', [
 					'output' => ['usrgrpid'],
@@ -1743,7 +1749,7 @@ class CUser extends CApiService {
 		// - UserType associated with this AD group
 		$ret = [
 			'groups' => $user_groups,
-			'user_type' => $adgrp_user_type
+			'roleid' => $roleid
 		];
 		return $ret;
 	}

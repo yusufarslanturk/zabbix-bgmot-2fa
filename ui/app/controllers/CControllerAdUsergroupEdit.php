@@ -88,6 +88,7 @@ class CControllerAdUsergroupEdit extends CController {
 
 		if ($data['form_refresh'] != 0) {
 			$user_groups = $this->getInput('user_groups', []);
+			$data['name'] = $this->getInput('adgname', '');
 		}
 
 		$data['groups'] = $user_groups
