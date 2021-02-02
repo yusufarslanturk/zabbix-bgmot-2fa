@@ -46,12 +46,11 @@ $adGroupFormList->addRow(
 			->setAriaRequired()
 	);
 
-$userTypeComboBox = new CComboBox('user_type', $data['user_type'], null, [
-	USER_TYPE_ZABBIX_USER => user_type2str(USER_TYPE_ZABBIX_USER),
-	USER_TYPE_ZABBIX_ADMIN => user_type2str(USER_TYPE_ZABBIX_ADMIN),
-	USER_TYPE_SUPER_ADMIN => user_type2str(USER_TYPE_SUPER_ADMIN)
-]);
-$adGroupFormList->addRow(_('User type for users in this LDAP group'), $userTypeComboBox);
+$type_select = (new CSelect('user_type'))
+	->setFocusableElementId('label-type')
+	->setValue($data['user_type'])
+	->addOptions(CSelect::createOptionsFromArray(user_type2str()));
+$adGroupFormList->addRow(new CLabel(_('User type for users in this LDAP group'), $type_select->getFocusableElementId()), $type_select);
 
 // append form lists to tab
 $adGroupTab = (new CTabView())
