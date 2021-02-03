@@ -787,8 +787,8 @@ abstract class CTriggerGeneral extends CApiService {
 
 		$descriptions = [];
 		foreach ($triggers as $trigger) {
-			self::checkTriggerCorrelationMode($trigger);
 			self::checkTriggerRecoveryMode($trigger);
+			self::checkTriggerCorrelationMode($trigger);
 
 			$descriptions[$trigger['description']][] = [
 				'expression' => $trigger['expression'],
@@ -965,8 +965,8 @@ abstract class CTriggerGeneral extends CApiService {
 					: '';
 			}
 
-			self::checkTriggerCorrelationMode($trigger);
 			self::checkTriggerRecoveryMode($trigger);
+			self::checkTriggerCorrelationMode($trigger);
 
 			if ($trigger['expression'] !== $db_trigger['expression']
 					|| $trigger['recovery_expression'] !== $db_trigger['recovery_expression']
