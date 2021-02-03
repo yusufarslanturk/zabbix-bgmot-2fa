@@ -1772,7 +1772,12 @@ static char	*buf_find_newline(char *p, char **p_next, const char *p_end, const c
 		{
 			/* detect NULL byte in UTF-16 encoding and replace it with '?' character */
 			if (2 == szbyte && 0x0 == *p && 0x0 == *(p + 1))
-				*p = '?';
+			{
+				if (0x0 == *cr)			/* Big-endian */
+					p[1] = '?';
+				else				/* Little-endian */
+					*p = '?';
+			}
 
 			if (0 == memcmp(p, lf, szbyte))		/* LF (Unix) */
 			{
