@@ -345,6 +345,8 @@ static void	send_signal_handler(int sig)
 	}
 #undef CASE_LOG_WARNING
 
+	cleanup();
+
 	/* Calling _exit() to terminate the process immediately is important. See ZBX-5732 for details. */
 	/* Return FAIL instead of EXIT_FAILURE to keep return signals consistent for send_value() */
 	_exit(FAIL);
@@ -1130,6 +1132,24 @@ static char	*zbx_fgets_alloc(char **buffer, size_t *buffer_alloc, FILE *fp)
 	return *buffer;
 }
 
+static void	cleanup()
+{
+#if defined(HAVE_POLARSSL) || defined(HAVE_GNUTLS) || defined(HAVE_OPENSSL)
+	if (ZBX_TCP_SEC_UNENCRYPTED != configured_tls_connect_mode)
+	{
+		zbx_tls_free();
+#if defined(_WINDOWS)
+		zbx_tls_library_deinit();
+#endif
+	}
+#endif
+	zabbix_close_log();
+#if defined(_WINDOWS)
+	while (0 == WSACleanup())
+		;
+#endif
+}
+
 /* sending a huge amount of values in a single connection is likely to */
 /* take long and hit timeout, so we limit values to 250 per connection */
 #define VALUES_MAX	250
@@ -1451,20 +1471,8 @@ exit:
 				" Use option -vv for more detailed output." : "");
 	}
 
-#if defined(HAVE_POLARSSL) || defined(HAVE_GNUTLS) || defined(HAVE_OPENSSL)
-	if (ZBX_TCP_SEC_UNENCRYPTED != configured_tls_connect_mode)
-	{
-		zbx_tls_free();
-#if defined(_WINDOWS)
-		zbx_tls_library_deinit();
-#endif
-	}
-#endif
-	zabbix_close_log();
-#if defined(_WINDOWS)
-	while (0 == WSACleanup())
-		;
-#endif
+	cleanup();
+
 	if (FAIL == ret)
 		ret = EXIT_FAILURE;
 
