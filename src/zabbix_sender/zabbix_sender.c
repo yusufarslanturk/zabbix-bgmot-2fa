@@ -1473,8 +1473,20 @@ exit:
 				" Use option -vv for more detailed output." : "");
 	}
 
-	cleanup();
-
+#if defined(HAVE_POLARSSL) || defined(HAVE_GNUTLS) || defined(HAVE_OPENSSL)
+	if (ZBX_TCP_SEC_UNENCRYPTED != configured_tls_connect_mode)
+	{
+		zbx_tls_free();
+#if defined(_WINDOWS)
+		zbx_tls_library_deinit();
+#endif
+	}
+#endif
+	zabbix_close_log();
+#if defined(_WINDOWS)
+	while (0 == WSACleanup())
+		;
+#endif
 	if (FAIL == ret)
 		ret = EXIT_FAILURE;
 
