@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 19:52+0200\n"
+"POT-Creation-Date: 2021-02-12 19:52+0200\n"
 "PO-Revision-Date: 2019-01-29 07:38+0300\n"
 "Last-Translator: YunXi <tech@gootoo.top>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -6929,7 +6929,7 @@ msgstr "主机存取"
 msgid "Host added"
 msgstr "已添加主机"
 
-#: include/classes/api/services/CHostInterface.php:902
+#: include/classes/api/services/CHostInterface.php:908
 msgid "Host cannot have more than one default interface of the same type."
 msgstr "主机不能有超过一个同类型的默认接口."
 
@@ -8708,7 +8708,7 @@ msgstr "安装名称"
 msgid "Interface"
 msgstr "接口"
 
-#: include/classes/api/services/CHostInterface.php:923
+#: include/classes/api/services/CHostInterface.php:929
 #, c-format
 msgid "Interface is linked to item \"%1$s\" on \"%2$s\"."
 msgstr "接口是链接到\"%2$s\"上的监控项\"%1$s\"."
@@ -11121,8 +11121,8 @@ msgstr "未发现数据"
 msgid "No data."
 msgstr "没有数据。"
 
-#: include/classes/api/services/CHostInterface.php:823
-#: include/classes/api/services/CHostInterface.php:895
+#: include/classes/api/services/CHostInterface.php:824
+#: include/classes/api/services/CHostInterface.php:899
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "在\"%2$s\"上的\"%1$s\"类型无默认接口."

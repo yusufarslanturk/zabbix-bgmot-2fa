@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 19:52+0200\n"
+"POT-Creation-Date: 2021-02-12 19:52+0200\n"
 "PO-Revision-Date: 2019-03-19 11:55+0300\n"
 "Last-Translator: Oleksii <oleksii.zagorskyi@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
@@ -7054,7 +7054,7 @@ msgstr "Доступ до вузла мережі"
 msgid "Host added"
 msgstr "Вузел мережі додано"
 
-#: include/classes/api/services/CHostInterface.php:902
+#: include/classes/api/services/CHostInterface.php:908
 msgid "Host cannot have more than one default interface of the same type."
 msgstr "У вузла мережі не може бути більше одного інтерфейсу по замовчуванню однакового типу."
 
@@ -8839,7 +8839,7 @@ msgstr "Ім'я інсталятора"
 msgid "Interface"
 msgstr "Інтерфейс"
 
-#: include/classes/api/services/CHostInterface.php:923
+#: include/classes/api/services/CHostInterface.php:929
 #, c-format
 msgid "Interface is linked to item \"%1$s\" on \"%2$s\"."
 msgstr "Інтерфейс зв'язаний з елементом даних \"%1$s\" у \"%2$s\"."
@@ -11281,8 +11281,8 @@ msgstr "Дані не знайдено."
 msgid "No data."
 msgstr "Данні відсутні."
 
-#: include/classes/api/services/CHostInterface.php:823
-#: include/classes/api/services/CHostInterface.php:895
+#: include/classes/api/services/CHostInterface.php:824
+#: include/classes/api/services/CHostInterface.php:899
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "Відсутній інтерфейс по замовчуванню \"%1$s\" типу у вузла мережі \"%2$s\"."

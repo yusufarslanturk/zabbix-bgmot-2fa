@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 19:52+0200\n"
+"POT-Creation-Date: 2021-02-12 19:52+0200\n"
 "PO-Revision-Date: 2018-11-30 14:01+0300\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: none\n"
@@ -6986,7 +6986,7 @@ msgstr "גישה למארח"
 msgid "Host added"
 msgstr "נוסף מארח"
 
-#: include/classes/api/services/CHostInterface.php:902
+#: include/classes/api/services/CHostInterface.php:908
 msgid "Host cannot have more than one default interface of the same type."
 msgstr "למארח לא יכול להיות יותר ממנשק בררת מחדל יחיד מאותו הסוג."
 
@@ -8768,7 +8768,7 @@ msgstr "שם המתקין"
 msgid "Interface"
 msgstr "מנשק"
 
-#: include/classes/api/services/CHostInterface.php:923
+#: include/classes/api/services/CHostInterface.php:929
 #, c-format
 msgid "Interface is linked to item \"%1$s\" on \"%2$s\"."
 msgstr "המנשק מקושר לפריט „%1$s” תחת „%2$s”."
@@ -11195,8 +11195,8 @@ msgstr "לא נמצאו נתונים."
 msgid "No data."
 msgstr "אין נתונים."
 
-#: include/classes/api/services/CHostInterface.php:823
-#: include/classes/api/services/CHostInterface.php:895
+#: include/classes/api/services/CHostInterface.php:824
+#: include/classes/api/services/CHostInterface.php:899
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "אין מנשק בררת מחדל עבור הסוג „%1$s” תחת „%2$s”."

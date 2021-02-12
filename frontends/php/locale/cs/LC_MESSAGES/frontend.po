@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 19:52+0200\n"
+"POT-Creation-Date: 2021-02-12 19:52+0200\n"
 "PO-Revision-Date: 2019-05-06 14:15+0300\n"
 "Last-Translator: martinds <kotyk@datasys.cz>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -7054,7 +7054,7 @@ msgstr "Přístup hostitele"
 msgid "Host added"
 msgstr "Host byl přidán"
 
-#: include/classes/api/services/CHostInterface.php:902
+#: include/classes/api/services/CHostInterface.php:908
 msgid "Host cannot have more than one default interface of the same type."
 msgstr "Host nemůže mít více než jedno předvolené rozhraní daného typu."
 
@@ -8839,7 +8839,7 @@ msgstr "Jméno technika"
 msgid "Interface"
 msgstr "Rozhraní"
 
-#: include/classes/api/services/CHostInterface.php:923
+#: include/classes/api/services/CHostInterface.php:929
 #, c-format
 msgid "Interface is linked to item \"%1$s\" on \"%2$s\"."
 msgstr "Rozhraní je připojené na položku \"%1$s\" na \"%2$s\"."
@@ -11281,8 +11281,8 @@ msgstr "Nebyla nalezena žádná data."
 msgid "No data."
 msgstr "Žádná data."
 
-#: include/classes/api/services/CHostInterface.php:823
-#: include/classes/api/services/CHostInterface.php:895
+#: include/classes/api/services/CHostInterface.php:824
+#: include/classes/api/services/CHostInterface.php:899
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "Žádné standardní rozhraní pro \"%1$s\" typu na \"%2$s\"."

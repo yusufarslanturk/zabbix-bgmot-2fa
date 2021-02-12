@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 19:52+0200\n"
+"POT-Creation-Date: 2021-02-12 19:52+0200\n"
 "PO-Revision-Date: 2020-02-08 23:45+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: none\n"
@@ -6925,7 +6925,7 @@ msgstr "Akses host"
 msgid "Host added"
 msgstr "Host ditambah"
 
-#: include/classes/api/services/CHostInterface.php:902
+#: include/classes/api/services/CHostInterface.php:908
 msgid "Host cannot have more than one default interface of the same type."
 msgstr "Host tidak boleh memiliki lebih dari satu default interface pada tipe yang sama."
 
@@ -8704,7 +8704,7 @@ msgstr "Nama installer"
 msgid "Interface"
 msgstr "Interface"
 
-#: include/classes/api/services/CHostInterface.php:923
+#: include/classes/api/services/CHostInterface.php:929
 #, c-format
 msgid "Interface is linked to item \"%1$s\" on \"%2$s\"."
 msgstr "Interface terhubung ke item \"%1$s\" pada \"%2$s\"."
@@ -11118,8 +11118,8 @@ msgstr ""
 msgid "No data."
 msgstr ""
 
-#: include/classes/api/services/CHostInterface.php:823
-#: include/classes/api/services/CHostInterface.php:895
+#: include/classes/api/services/CHostInterface.php:824
+#: include/classes/api/services/CHostInterface.php:899
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "Tidak ada interface standar untuk \"%1$s\" ketik di \"%2$s\"."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 19:52+0200\n"
+"POT-Creation-Date: 2021-02-12 19:52+0200\n"
 "PO-Revision-Date: 2020-02-08 23:48+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix translation team\n"
@@ -6988,7 +6988,7 @@ msgstr "Ana makine erişimi"
 msgid "Host added"
 msgstr "Ana makine eklendi"
 
-#: include/classes/api/services/CHostInterface.php:902
+#: include/classes/api/services/CHostInterface.php:908
 msgid "Host cannot have more than one default interface of the same type."
 msgstr "Ana makine, aynı türde birden çok öntanımlı arayüze sahip olamaz."
 
@@ -8770,7 +8770,7 @@ msgstr "Yükleyici adı"
 msgid "Interface"
 msgstr "Arayüz"
 
-#: include/classes/api/services/CHostInterface.php:923
+#: include/classes/api/services/CHostInterface.php:929
 #, c-format
 msgid "Interface is linked to item \"%1$s\" on \"%2$s\"."
 msgstr "Arayüz, \"%2$s\" üzerindeki \"%1$s\" öğesiyle bağlantılı."
@@ -11197,8 +11197,8 @@ msgstr "Veri bulunamadı."
 msgid "No data."
 msgstr "Veri yok."
 
-#: include/classes/api/services/CHostInterface.php:823
-#: include/classes/api/services/CHostInterface.php:895
+#: include/classes/api/services/CHostInterface.php:824
+#: include/classes/api/services/CHostInterface.php:899
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "\"%2$s\" üzerinde \"%1$s\" türü için hiçbir öntanımlı arayüz yok."

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 19:52+0200\n"
+"POT-Creation-Date: 2021-02-12 19:52+0200\n"
 "PO-Revision-Date: 2020-02-08 23:46+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: NL\n"
@@ -6990,7 +6990,7 @@ msgstr "Host toegang"
 msgid "Host added"
 msgstr "Host toegevoegd"
 
-#: include/classes/api/services/CHostInterface.php:902
+#: include/classes/api/services/CHostInterface.php:908
 msgid "Host cannot have more than one default interface of the same type."
 msgstr "Host kan niet meer dan een standaard interface van hetzelfde type bevatten.Host kan niet meer dan een standaard interface van hetzelfde type bevatten.Host kan niet meer dan een standaard interface van hetzelfde type bevatten.Host kan niet meer dan een standaard interface van hetzelfde type bevatten."
 
@@ -8774,7 +8774,7 @@ msgstr "Naam installateur"
 msgid "Interface"
 msgstr "Interface"
 
-#: include/classes/api/services/CHostInterface.php:923
+#: include/classes/api/services/CHostInterface.php:929
 #, c-format
 msgid "Interface is linked to item \"%1$s\" on \"%2$s\"."
 msgstr "Interface is gekoppeld aan item \"%1$s\" op \"%2$s\"."
@@ -11202,8 +11202,8 @@ msgstr ""
 msgid "No data."
 msgstr ""
 
-#: include/classes/api/services/CHostInterface.php:823
-#: include/classes/api/services/CHostInterface.php:895
+#: include/classes/api/services/CHostInterface.php:824
+#: include/classes/api/services/CHostInterface.php:899
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr ""

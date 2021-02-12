@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 19:52+0200\n"
+"POT-Creation-Date: 2021-02-12 19:52+0200\n"
 "PO-Revision-Date: 2020-05-01 15:52+0300\n"
 "Last-Translator: Quang <quangnh@tnmt.vn>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -6928,7 +6928,7 @@ msgstr "Kết nối host"
 msgid "Host added"
 msgstr "Host được thêm vào"
 
-#: include/classes/api/services/CHostInterface.php:902
+#: include/classes/api/services/CHostInterface.php:908
 msgid "Host cannot have more than one default interface of the same type."
 msgstr "Host không thể có nhiều hơn một interface mặc định của kiểu tương tự."
 
@@ -8707,7 +8707,7 @@ msgstr "Tên người cài đặt"
 msgid "Interface"
 msgstr "Interface"
 
-#: include/classes/api/services/CHostInterface.php:923
+#: include/classes/api/services/CHostInterface.php:929
 #, c-format
 msgid "Interface is linked to item \"%1$s\" on \"%2$s\"."
 msgstr "Interface được liên kết đến item \"%1$s\" trên \"%2$s\". "
@@ -11119,8 +11119,8 @@ msgstr "Không tìm thấy dữ liệu."
 msgid "No data."
 msgstr "Không có dữ liệu."
 
-#: include/classes/api/services/CHostInterface.php:823
-#: include/classes/api/services/CHostInterface.php:895
+#: include/classes/api/services/CHostInterface.php:824
+#: include/classes/api/services/CHostInterface.php:899
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "Không có interface mặc định cho kiểu \"%1$s\" trên \"%2$s\". "
