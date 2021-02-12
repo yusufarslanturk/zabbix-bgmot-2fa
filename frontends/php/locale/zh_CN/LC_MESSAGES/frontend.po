@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-15 19:51+0200\n"
+"POT-Creation-Date: 2021-02-05 19:52+0200\n"
 "PO-Revision-Date: 2019-01-29 07:38+0300\n"
 "Last-Translator: YunXi <tech@gootoo.top>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -1354,7 +1354,7 @@ msgstr "闪烁中"
 msgid "Blocked"
 msgstr "锁定的"
 
-#: include/classes/core/ZBase.php:265
+#: include/classes/core/ZBase.php:269
 msgid "Blue"
 msgstr "蓝"
 
@@ -1564,12 +1564,12 @@ msgstr "无法添加关联"
 msgid "Cannot add correlation condition"
 msgstr "无法添加关联条件"
 
-#: include/classes/api/services/CTrigger.php:939
-#: include/classes/api/services/CTriggerPrototype.php:784
+#: include/classes/api/services/CTrigger.php:937
+#: include/classes/api/services/CTriggerPrototype.php:780
 msgid "Cannot add dependency from a host to a template."
 msgstr "无法添加自主机到模板的依赖"
 
-#: include/classes/api/services/CDiscoveryRule.php:845
+#: include/classes/api/services/CDiscoveryRule.php:847
 #: include/triggers.inc.php:527
 #, c-format
 msgid "Cannot add dependency from trigger \"%1$s:%2$s\" to non existing trigger \"%3$s:%4$s\"."
@@ -1744,21 +1744,21 @@ msgstr "无法清除历史"
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
 msgstr ""
 
-#: include/classes/api/services/CDiscoveryRule.php:1535
+#: include/classes/api/services/CDiscoveryRule.php:1537
 msgid "Cannot clone graph prototypes."
 msgstr "无法克隆图形原型"
 
-#: include/classes/api/services/CDiscoveryRule.php:1583
+#: include/classes/api/services/CDiscoveryRule.php:1585
 msgid "Cannot clone host prototypes."
 msgstr "无法克隆主机原型。"
 
-#: include/classes/api/services/CDiscoveryRule.php:1340
-#: include/classes/api/services/CDiscoveryRule.php:1396
-#: include/classes/api/services/CDiscoveryRule.php:1414
+#: include/classes/api/services/CDiscoveryRule.php:1342
+#: include/classes/api/services/CDiscoveryRule.php:1398
+#: include/classes/api/services/CDiscoveryRule.php:1416
 msgid "Cannot clone item prototypes."
 msgstr "无法克隆监控项原型"
 
-#: include/classes/api/services/CDiscoveryRule.php:758
+#: include/classes/api/services/CDiscoveryRule.php:760
 msgid "Cannot clone trigger prototypes."
 msgstr "无法克隆触发器原型"
 
@@ -1808,16 +1808,16 @@ msgstr "在自动发现的主机\"%1$s\"上不能创建主机模板"
 msgid "Cannot create another database connection."
 msgstr "无法创建其他的数据库连接."
 
-#: include/classes/api/services/CTrigger.php:973
-#: include/classes/api/services/CTriggerPrototype.php:815
+#: include/classes/api/services/CTrigger.php:971
+#: include/classes/api/services/CTriggerPrototype.php:811
 msgid "Cannot create circular dependencies."
 msgstr "不能创建环形的依赖关系。"
 
-#: include/classes/api/services/CTrigger.php:945
+#: include/classes/api/services/CTrigger.php:943
 msgid "Cannot create dependency on trigger itself."
 msgstr "不能创建触发器本身的依赖."
 
-#: include/classes/api/services/CTriggerPrototype.php:754
+#: include/classes/api/services/CTriggerPrototype.php:750
 msgid "Cannot create dependency on trigger prototype itself."
 msgstr "无法创建触发器原形的依赖。"
 
@@ -1869,8 +1869,8 @@ msgid "Cannot delete dashboard"
 msgid_plural "Cannot delete dashboards"
 msgstr[0] "无法删除仪表盘"
 
-#: include/classes/api/services/CTrigger.php:843
-#: include/classes/api/services/CTriggerPrototype.php:581
+#: include/classes/api/services/CTrigger.php:841
+#: include/classes/api/services/CTriggerPrototype.php:577
 msgid "Cannot delete dependency"
 msgstr "无法删除依赖关系"
 
@@ -2050,12 +2050,12 @@ msgstr "无法删除模板的监控项."
 msgid "Cannot delete templated items."
 msgstr "无法删除模板监控项."
 
-#: include/classes/api/services/CTrigger.php:636
+#: include/classes/api/services/CTrigger.php:634
 #, c-format
 msgid "Cannot delete templated trigger \"%1$s:%2$s\"."
 msgstr "无法删除模板的触发器 \"%1$s:%2$s\"."
 
-#: include/classes/api/services/CTriggerPrototype.php:534
+#: include/classes/api/services/CTriggerPrototype.php:530
 #, c-format
 msgid "Cannot delete templated trigger prototype \"%1$s:%2$s\"."
 msgstr "无法删除模板的触发器原型 \"%1$s:%2$s\"。"
@@ -2237,8 +2237,8 @@ msgstr "无法找到主机 \"%1$s\" 用于聚合图形 \"%2$s\"."
 msgid "Cannot find host group \"%1$s\" for host prototype \"%2$s\" of discovery rule \"%3$s\" on \"%4$s\"."
 msgstr "在 \"%4$s\"上无法针对自动发现规则 \"%3$s\"上的\"%2$s\"主机模板找到主机组 \"%1$s\""
 
-#: include/classes/api/services/CDiscoveryRule.php:1203
-#: include/classes/api/services/CDiscoveryRule.php:1367
+#: include/classes/api/services/CDiscoveryRule.php:1205
+#: include/classes/api/services/CDiscoveryRule.php:1369
 #: include/classes/api/services/CItemGeneral.php:115 include/items.inc.php:506
 #: include/items.inc.php:653
 #, c-format
@@ -2506,16 +2506,6 @@ msgstr "无法设置 \"%1$s\" 为监控项 \"%2$s\"."
 msgid "Cannot set \"%1$s\" for template screen \"%2$s\"."
 msgstr "不能设置\"%1$s\"在模板聚合图形\"%2$s\"中。"
 
-#: include/classes/api/services/CTriggerGeneral.php:816
-#, c-format
-msgid "Cannot set \"%1$s\" for trigger \"%2$s\"."
-msgstr "无法设置 \"%1$s\" 为触发器 \"%2$s\"."
-
-#: include/classes/api/services/CTriggerGeneral.php:822
-#, c-format
-msgid "Cannot set \"%1$s\" for trigger prototype \"%2$s\"."
-msgstr "在触发器模板 \"%2$s\" 中 无法设置 \"%1$s\" "
-
 #: include/classes/api/services/CItemPrototype.php:325
 #, c-format
 msgid "Cannot set \"templateid\" field for application prototype in item prototype \"%1$s\"."
@@ -2596,25 +2586,15 @@ msgstr "图形模板 \"%2$s\" 无法更新 \"%1$s\" "
 msgid "Cannot update \"%1$s\" for item \"%2$s\"."
 msgstr "无法更新 \"%1$s\" 为监控项 \"%2$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:975
+#: include/classes/api/services/CTriggerGeneral.php:889
 #, c-format
 msgid "Cannot update \"%1$s\" for templated trigger \"%2$s\"."
 msgstr "触发器模板 \"%2$s\" 无法更新 \"%1$s\""
 
-#: include/classes/api/services/CTriggerGeneral.php:981
+#: include/classes/api/services/CTriggerGeneral.php:900
 #, c-format
 msgid "Cannot update \"%1$s\" for templated trigger prototype \"%2$s\"."
 msgstr "触发器原型 \"%2$s\" 无法更新到模板 \"%1$s\"。"
-
-#: include/classes/api/services/CTriggerGeneral.php:974
-#, c-format
-msgid "Cannot update \"%1$s\" for trigger \"%2$s\"."
-msgstr "无法更新 \"%1$s\" 为触发器 \"%2$s\"."
-
-#: include/classes/api/services/CTriggerGeneral.php:980
-#, c-format
-msgid "Cannot update \"%1$s\" for trigger prototype \"%2$s\"."
-msgstr "无法更新触发器模板\"%2$s\"的\"%1$s\""
 
 #: include/classes/api/services/CHost.php:1918
 #, c-format
@@ -2626,9 +2606,9 @@ msgstr "无法更新 \"%2$s\"在发现的主机\"%1$s\"。"
 msgid "Cannot update \"%2$s\" for a discovered item \"%1$s\"."
 msgstr "无法更新 \"%2$s\"在发现的监控项 \"%1$s\"。"
 
-#: include/classes/api/services/CTriggerGeneral.php:1031
-#: include/classes/api/services/CTrigger.php:679
-#: include/classes/api/services/CTrigger.php:803
+#: include/classes/api/services/CTriggerGeneral.php:895
+#: include/classes/api/services/CTrigger.php:678
+#: include/classes/api/services/CTrigger.php:801
 #, c-format
 msgid "Cannot update \"%2$s\" for a discovered trigger \"%1$s\"."
 msgstr "无法更新 \"%2$s\" 在发现的触发器\"%1$s\"。"
@@ -2846,7 +2826,7 @@ msgstr "对于被自动发现的主机 \"%1$s\"无法更新其模板"
 msgid "Cannot update trigger"
 msgstr "无法更新触发器"
 
-#: include/classes/api/services/CTriggerGeneral.php:1932
+#: include/classes/api/services/CTriggerGeneral.php:1756
 #, c-format
 msgid "Cannot update trigger \"%1$s\": %2$s."
 msgstr "无法更新触发器 \"%1$s\": %2$s "
@@ -2856,7 +2836,7 @@ msgid "Cannot update trigger prototype"
 msgid_plural "Cannot update trigger prototypes"
 msgstr[0] "无法更新触发器模板"
 
-#: include/classes/api/services/CTriggerGeneral.php:1788
+#: include/classes/api/services/CTriggerGeneral.php:1597
 #, c-format
 msgid "Cannot update trigger prototype \"%1$s\": %2$s."
 msgstr "无法更新触发器模板 \"%1$s\": %2$s。"
@@ -2978,7 +2958,7 @@ msgstr "机架信息。返回字符串"
 msgid "Check already exists."
 msgstr "检查已存在."
 
-#: include/classes/parsers/CTriggerExpression.php:460
+#: include/classes/parsers/CTriggerExpression.php:472
 #, c-format
 msgid "Check expression part starting from \"%1$s\"."
 msgstr "检查开始于\"%1$s\"的表达式部份."
@@ -3267,7 +3247,7 @@ msgstr "对于动作\"%1$s\"条件\"%2$s\"不可以应用于计算式\"%3$s\"中
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for correlation \"%1$s\"."
 msgstr "在关联\"%1$s\"中，条件\"%2$s\"无法使用公式 \"%3$s\" "
 
-#: include/classes/api/services/CDiscoveryRule.php:1079
+#: include/classes/api/services/CDiscoveryRule.php:1081
 #, c-format
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for discovery rule \"%1$s\"."
 msgstr "对于自动发现规则\"%1$s\"条件\"%2$s\"不可以应用于计算式\"%3$s\"中"
@@ -3282,7 +3262,7 @@ msgstr "对于动作\"%1$s\"应用于计算式 \"%3$s\"中的\"%2$s\"条件未�
 msgid "Condition \"%2$s\" used in formula \"%3$s\" for correlation \"%1$s\" is not defined."
 msgstr "在关联项 \"%1$s\" 中 条件 \"%2$s\" 在表达式 \"%3$s\"没有被使用"
 
-#: include/classes/api/services/CDiscoveryRule.php:1078
+#: include/classes/api/services/CDiscoveryRule.php:1080
 #, c-format
 msgid "Condition \"%2$s\" used in formula \"%3$s\" for discovery rule \"%1$s\" is not defined."
 msgstr "对于自动发现规则\"%1$s\"应用于计算表达式 \"%3$s\"中的条件 \"%2$s\"未被定义"
@@ -4061,7 +4041,7 @@ msgstr "DNS名称"
 msgid "Daily"
 msgstr "每日"
 
-#: include/classes/core/ZBase.php:266
+#: include/classes/core/ZBase.php:270
 msgid "Dark"
 msgstr "暗色"
 
@@ -5199,12 +5179,12 @@ msgstr "拓扑图 %1$s 名字重复。"
 msgid "Duplicate \"name\" value \"%1$s\" for screen."
 msgstr "复制聚合图形的\"name\"值\"%1$s\""
 
-#: include/classes/api/services/CTrigger.php:1115
+#: include/classes/api/services/CTrigger.php:1113
 #, c-format
 msgid "Duplicate dependencies in trigger \"%1$s\"."
 msgstr "重复依赖关系在触发器 \"%1$s\" 中."
 
-#: include/classes/api/services/CTriggerPrototype.php:985
+#: include/classes/api/services/CTriggerPrototype.php:981
 #, c-format
 msgid "Duplicate dependencies in trigger prototype \"%1$s\"."
 msgstr "触发器的原形依赖复制\"%1$s\"。"
@@ -5225,16 +5205,6 @@ msgstr "重复的主机. 有相同主机可视名称\"%s\"的主机已存于数�
 #, c-format
 msgid "Duplicate severity name \"%s\"."
 msgstr "重复的严重性名称\"%s\"."
-
-#: include/classes/api/services/CTriggerGeneral.php:820
-#, c-format
-msgid "Duplicate trigger prototype with name \"%1$s\"."
-msgstr ""
-
-#: include/classes/api/services/CTriggerGeneral.php:814
-#, c-format
-msgid "Duplicate trigger with name \"%1$s\"."
-msgstr ""
 
 #: include/classes/api/services/CMap.php:735
 #: include/classes/api/services/CMap.php:1188
@@ -5417,12 +5387,12 @@ msgstr "空的关联ID。"
 msgid "Empty filter condition formula ID for action \"%1$s\"."
 msgstr "针对动作\"%1$s\"的过滤器条件表达式ID为空"
 
-#: include/classes/api/services/CDiscoveryRule.php:1106
+#: include/classes/api/services/CDiscoveryRule.php:1108
 #, c-format
 msgid "Empty filter condition formula ID for discovery rule \"%1$s\"."
 msgstr "针对自动发现规则 \"%1$s\"的过滤器条件表达式ID为空"
 
-#: include/classes/api/services/CDiscoveryRule.php:1098
+#: include/classes/api/services/CDiscoveryRule.php:1100
 #, c-format
 msgid "Empty filter condition macro for discovery rule \"%1$s\"."
 msgstr "针对自动发现规则 \"%1$s\"的过滤器条件宏变量为空"
@@ -5460,8 +5430,7 @@ msgstr ""
 #: include/classes/api/services/CService.php:430
 #: include/classes/api/services/CService.php:498
 #: include/classes/api/services/CTemplate.php:560
-#: include/classes/api/services/CTrigger.php:654
-#: include/classes/api/services/CTrigger.php:778
+#: include/classes/api/services/CTrigger.php:775
 #: include/classes/api/services/CUserMacro.php:600
 msgid "Empty input parameter."
 msgstr "空的输入参数."
@@ -6001,7 +5970,6 @@ msgstr "字段 \"%1$s\"不能被设置为空"
 #: include/classes/api/services/CHostGroup.php:906
 #: include/classes/api/services/CHost.php:747
 #: include/classes/api/services/CTemplate.php:793
-#: include/classes/api/services/CTriggerGeneral.php:495
 #: include/classes/validators/CNewValidator.php:256
 #: include/validate.inc.php:300
 #, c-format
@@ -6807,11 +6775,11 @@ msgstr "阶"
 msgid "High"
 msgstr "严重"
 
-#: include/classes/core/ZBase.php:268
+#: include/classes/core/ZBase.php:272
 msgid "High-contrast dark"
 msgstr "高对比度暗色"
 
-#: include/classes/core/ZBase.php:267
+#: include/classes/core/ZBase.php:271
 msgid "High-contrast light"
 msgstr "高对比度亮色"
 
@@ -7911,7 +7879,7 @@ msgstr "模板名称\"%1$s\"使用了不正确的名称."
 msgid "Incorrect conditions for action \"%1$s\"."
 msgstr "动作\"%1$s\"的条件不正确"
 
-#: include/classes/api/services/CDiscoveryRule.php:1072
+#: include/classes/api/services/CDiscoveryRule.php:1074
 #, c-format
 msgid "Incorrect conditions for discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的条件不正确."
@@ -7930,7 +7898,7 @@ msgstr "动作\"%1$s\": %3$s自定义的表达式\"%2$s\" 不正确."
 msgid "Incorrect custom expression \"%2$s\" for correlation \"%1$s\": %3$s."
 msgstr "在关联项\"%1$s\": %3$s中使用了错误的表达式\"%2$s\"。"
 
-#: include/classes/api/services/CDiscoveryRule.php:1077
+#: include/classes/api/services/CDiscoveryRule.php:1079
 #, c-format
 msgid "Incorrect custom expression \"%2$s\" for discovery rule \"%1$s\": %3$s."
 msgstr "自动发现规则\"%1$s\": %3$s自定义的表达式 \"%2$s\"不正确."
@@ -7981,7 +7949,7 @@ msgstr "错误的文件上传."
 msgid "Incorrect filter condition formula ID for action \"%1$s\"."
 msgstr "动作\"%1$s\"的过滤器条件计算式ID不正确."
 
-#: include/classes/api/services/CDiscoveryRule.php:1107
+#: include/classes/api/services/CDiscoveryRule.php:1109
 #, c-format
 msgid "Incorrect filter condition formula ID for discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的条件计算式ID不正确."
@@ -7991,7 +7959,7 @@ msgstr "自动发现规则\"%1$s\"的条件计算式ID不正确."
 msgid "Incorrect filter condition formula ID given for correlation \"%1$s\"."
 msgstr "错误的过滤条件公式给出相关ID \"%1$s\" 。"
 
-#: include/classes/api/services/CDiscoveryRule.php:1099
+#: include/classes/api/services/CDiscoveryRule.php:1101
 #, c-format
 msgid "Incorrect filter condition macro for discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的过滤器条件宏变量不正确"
@@ -8002,7 +7970,7 @@ msgstr "自动发现规则\"%1$s\"的过滤器条件宏变量不正确"
 msgid "Incorrect filter condition operator for action \"%1$s\"."
 msgstr "动作\"%1$s\"过滤器条件行为不正确."
 
-#: include/classes/api/services/CDiscoveryRule.php:1111
+#: include/classes/api/services/CDiscoveryRule.php:1113
 #, c-format
 msgid "Incorrect filter condition operator for discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的过滤器条件行为不正确"
@@ -8095,7 +8063,7 @@ msgstr "聚合图形元素应用了不正确的监控项目ID \"%1$s\" 。"
 msgid "Incorrect item for axis value."
 msgstr "错误的项目轴线值."
 
-#: include/classes/api/services/CTriggerGeneral.php:1702
+#: include/classes/api/services/CTriggerGeneral.php:1511
 #, c-format
 msgid "Incorrect item key \"%1$s\" provided for trigger expression on \"%2$s\"."
 msgstr "提供错误的项目键值\"%1$s\"给\"%2$s\"上的触发器表达式."
@@ -8309,18 +8277,19 @@ msgstr "服务\"%1$s\"存在错误的触发器 ID."
 msgid "Incorrect trigger expression"
 msgstr "错误的触发器表达式"
 
-#: include/classes/parsers/CTriggerExpression.php:453
-#: include/classes/parsers/CTriggerExpression.php:460
+#: include/classes/parsers/CTriggerExpression.php:463
+#: include/classes/parsers/CTriggerExpression.php:472
 msgid "Incorrect trigger expression."
 msgstr "错误的触发器表达式."
 
-#: include/classes/api/services/CTriggerGeneral.php:1492
+#: include/classes/api/services/CTriggerGeneral.php:521
+#: include/classes/api/services/CTriggerGeneral.php:1301
 #: include/triggers.inc.php:633
 #, c-format
 msgid "Incorrect trigger expression. Host \"%1$s\" does not exist or you have no access to this host."
 msgstr "错误的触发器表达式. 主机 \"%1$s\"不存在或您不能存取此主机."
 
-#: include/classes/api/services/CTriggerGeneral.php:1493
+#: include/classes/api/services/CTriggerGeneral.php:1302
 msgid "Incorrect trigger expression. Trigger expression elements should not belong to a template and a host simultaneously."
 msgstr "错误的触发器表达式. 触发器表达式组件不该同时属于一个模板和一个主机."
 
@@ -8332,12 +8301,13 @@ msgstr "错误的触发器表达式. 触发器表达式组件不该同时属于�
 msgid "Incorrect trigger function \"%1$s\" provided in expression."
 msgstr "用了错误的触发器方程序\"%1$s\"于表达式中."
 
-#: include/classes/api/services/CTriggerGeneral.php:1499
+#: include/classes/api/services/CTriggerGeneral.php:522
+#: include/classes/api/services/CTriggerGeneral.php:1308
 #, c-format
 msgid "Incorrect trigger prototype expression. Host \"%1$s\" does not exist or you have no access to this host."
 msgstr "触发器的模板表达式错误。主机\"%1$s\"不存在或您没有权限访问它."
 
-#: include/classes/api/services/CTriggerGeneral.php:1500
+#: include/classes/api/services/CTriggerGeneral.php:1309
 msgid "Incorrect trigger prototype expression. Trigger prototype expression elements should not belong to a template and a host simultaneously."
 msgstr "触发器模板表达式错误。触发器表达式元素不应该同时属于一个模板和一个主机."
 
@@ -8351,7 +8321,7 @@ msgstr "动作\"%1$s\"的计算类型不正确."
 msgid "Incorrect type of calculation for correlation \"%1$s\"."
 msgstr "\"%1$s\"的关联项计算类型错误。"
 
-#: include/classes/api/services/CDiscoveryRule.php:1065
+#: include/classes/api/services/CDiscoveryRule.php:1067
 #, c-format
 msgid "Incorrect type of calculation for discovery rule \"%1$s\"."
 msgstr "自动发现规则 \"%1$s\"的计算类型不正确."
@@ -8399,7 +8369,7 @@ msgstr ""
 #: include/classes/api/services/CAction.php:1849
 #: include/classes/api/services/CAction.php:2866
 #: include/classes/api/services/CAction.php:3011
-#: include/classes/api/services/CDiscoveryRule.php:1013
+#: include/classes/api/services/CDiscoveryRule.php:1015
 #: include/classes/api/services/CDRule.php:237
 #: include/classes/api/services/CDRule.php:244
 #: include/classes/api/services/CDRule.php:292
@@ -8507,8 +8477,8 @@ msgstr "\"%1$s\" 字段的值不正确。"
 #: include/classes/api/services/CCorrelation.php:1101
 #: include/classes/api/services/CCorrelation.php:1118
 #: include/classes/api/services/CCorrelation.php:1137
-#: include/classes/api/services/CDiscoveryRule.php:1133
-#: include/classes/api/services/CDiscoveryRule.php:1306
+#: include/classes/api/services/CDiscoveryRule.php:1135
+#: include/classes/api/services/CDiscoveryRule.php:1308
 #: include/classes/api/services/CDRule.php:203
 #: include/classes/api/services/CDRule.php:209
 #: include/classes/api/services/CDRule.php:214
@@ -8614,23 +8584,11 @@ msgstr "\"%1$s\" 字段的值不正确。"
 #: include/classes/api/services/CScreen.php:423
 #: include/classes/api/services/CScreen.php:429
 #: include/classes/api/services/CTemplate.php:377
-#: include/classes/api/services/CTriggerGeneral.php:500
-#: include/classes/api/services/CTriggerGeneral.php:506
-#: include/classes/api/services/CTriggerGeneral.php:516
-#: include/classes/api/services/CTriggerGeneral.php:864
-#: include/classes/api/services/CTriggerGeneral.php:872
-#: include/classes/api/services/CTriggerGeneral.php:890
-#: include/classes/api/services/CTriggerGeneral.php:897
-#: include/classes/api/services/CTriggerGeneral.php:904
-#: include/classes/api/services/CTriggerGeneral.php:910
-#: include/classes/api/services/CTriggerGeneral.php:918
-#: include/classes/api/services/CTriggerGeneral.php:1101
-#: include/classes/api/services/CTriggerGeneral.php:1110
-#: include/classes/api/services/CTriggerGeneral.php:1118
-#: include/classes/api/services/CTriggerGeneral.php:1128
-#: include/classes/api/services/CTriggerGeneral.php:1136
-#: include/classes/api/services/CTriggerGeneral.php:1142
-#: include/classes/api/services/CTriggerGeneral.php:1150
+#: include/classes/api/services/CTriggerGeneral.php:690
+#: include/classes/api/services/CTriggerGeneral.php:696
+#: include/classes/api/services/CTriggerGeneral.php:716
+#: include/classes/api/services/CTriggerGeneral.php:723
+#: include/classes/api/services/CTriggerGeneral.php:729
 #: include/classes/api/services/CUserGroup.php:463
 #: include/classes/api/services/CUser.php:536
 #: include/classes/graphdraw/CLineGraphDraw.php:112
@@ -8800,14 +8758,11 @@ msgstr "内部数据存储期"
 
 #: include/classes/api/services/CGraphGeneral.php:494
 #: include/classes/api/services/CGraphGeneral.php:625
-#: include/classes/api/services/CTriggerGeneral.php:616
-#: include/classes/api/services/CTriggerGeneral.php:761
-#: include/classes/api/services/CTriggerGeneral.php:826
-#: include/classes/api/services/CTriggerGeneral.php:985
-#: include/classes/api/services/CTriggerGeneral.php:1215
-#: include/classes/api/services/CTriggerGeneral.php:1324
-#: include/classes/api/services/CTriggerGeneral.php:1505
-#: include/classes/api/services/CTriggerGeneral.php:1867
+#: include/classes/api/services/CTriggerGeneral.php:905
+#: include/classes/api/services/CTriggerGeneral.php:1028
+#: include/classes/api/services/CTriggerGeneral.php:1133
+#: include/classes/api/services/CTriggerGeneral.php:1314
+#: include/classes/api/services/CTriggerGeneral.php:1691
 #: include/classes/core/CJsonRpc.php:205
 #: include/classes/import/validators/CXmlValidatorGeneral.php:147
 #: include/classes/widgets/fields/CWidgetField.php:100
@@ -8995,68 +8950,73 @@ msgstr "无效的参数个数."
 #: include/classes/api/services/CItemGeneral.php:2044
 #: include/classes/api/services/CItemGeneral.php:2054
 #: include/classes/api/services/CItemGeneral.php:2083
+#: include/classes/api/services/CTriggerGeneral.php:1646
+#: include/classes/api/services/CTriggerGeneral.php:1662
 #: include/classes/api/services/CUser.php:668
 #: include/classes/api/services/CUser.php:679
-#: include/classes/validators/CApiInputValidator.php:250
-#: include/classes/validators/CApiInputValidator.php:255
-#: include/classes/validators/CApiInputValidator.php:260
-#: include/classes/validators/CApiInputValidator.php:290
-#: include/classes/validators/CApiInputValidator.php:351
-#: include/classes/validators/CApiInputValidator.php:358
-#: include/classes/validators/CApiInputValidator.php:390
-#: include/classes/validators/CApiInputValidator.php:395
-#: include/classes/validators/CApiInputValidator.php:437
-#: include/classes/validators/CApiInputValidator.php:442
-#: include/classes/validators/CApiInputValidator.php:476
-#: include/classes/validators/CApiInputValidator.php:481
-#: include/classes/validators/CApiInputValidator.php:522
-#: include/classes/validators/CApiInputValidator.php:527
-#: include/classes/validators/CApiInputValidator.php:567
-#: include/classes/validators/CApiInputValidator.php:598
-#: include/classes/validators/CApiInputValidator.php:603
-#: include/classes/validators/CApiInputValidator.php:659
-#: include/classes/validators/CApiInputValidator.php:692
-#: include/classes/validators/CApiInputValidator.php:697
-#: include/classes/validators/CApiInputValidator.php:738
-#: include/classes/validators/CApiInputValidator.php:743
-#: include/classes/validators/CApiInputValidator.php:748
-#: include/classes/validators/CApiInputValidator.php:777
-#: include/classes/validators/CApiInputValidator.php:832
-#: include/classes/validators/CApiInputValidator.php:839
-#: include/classes/validators/CApiInputValidator.php:866
-#: include/classes/validators/CApiInputValidator.php:911
-#: include/classes/validators/CApiInputValidator.php:940
-#: include/classes/validators/CApiInputValidator.php:985
-#: include/classes/validators/CApiInputValidator.php:990
-#: include/classes/validators/CApiInputValidator.php:1027
-#: include/classes/validators/CApiInputValidator.php:1032
-#: include/classes/validators/CApiInputValidator.php:1075
-#: include/classes/validators/CApiInputValidator.php:1084
-#: include/classes/validators/CApiInputValidator.php:1090
-#: include/classes/validators/CApiInputValidator.php:1118
-#: include/classes/validators/CApiInputValidator.php:1128
-#: include/classes/validators/CApiInputValidator.php:1134
-#: include/classes/validators/CApiInputValidator.php:1170
-#: include/classes/validators/CApiInputValidator.php:1181
-#: include/classes/validators/CApiInputValidator.php:1188
-#: include/classes/validators/CApiInputValidator.php:1215
-#: include/classes/validators/CApiInputValidator.php:1225
-#: include/classes/validators/CApiInputValidator.php:1250
-#: include/classes/validators/CApiInputValidator.php:1255
-#: include/classes/validators/CApiInputValidator.php:1281
-#: include/classes/validators/CApiInputValidator.php:1288
-#: include/classes/validators/CApiInputValidator.php:1315
-#: include/classes/validators/CApiInputValidator.php:1322
-#: include/classes/validators/CApiInputValidator.php:1349
-#: include/classes/validators/CApiInputValidator.php:1358
-#: include/classes/validators/CApiInputValidator.php:1403
-#: include/classes/validators/CApiInputValidator.php:1414
-#: include/classes/validators/CApiInputValidator.php:1447
-#: include/classes/validators/CApiInputValidator.php:1502
-#: include/classes/validators/CApiInputValidator.php:1589
-#: include/classes/validators/CApiInputValidator.php:1594
-#: include/classes/validators/CApiInputValidator.php:1621
-#: include/classes/validators/CApiInputValidator.php:1626
+#: include/classes/validators/CApiInputValidator.php:254
+#: include/classes/validators/CApiInputValidator.php:259
+#: include/classes/validators/CApiInputValidator.php:264
+#: include/classes/validators/CApiInputValidator.php:294
+#: include/classes/validators/CApiInputValidator.php:355
+#: include/classes/validators/CApiInputValidator.php:362
+#: include/classes/validators/CApiInputValidator.php:394
+#: include/classes/validators/CApiInputValidator.php:399
+#: include/classes/validators/CApiInputValidator.php:441
+#: include/classes/validators/CApiInputValidator.php:446
+#: include/classes/validators/CApiInputValidator.php:480
+#: include/classes/validators/CApiInputValidator.php:485
+#: include/classes/validators/CApiInputValidator.php:526
+#: include/classes/validators/CApiInputValidator.php:531
+#: include/classes/validators/CApiInputValidator.php:571
+#: include/classes/validators/CApiInputValidator.php:602
+#: include/classes/validators/CApiInputValidator.php:607
+#: include/classes/validators/CApiInputValidator.php:663
+#: include/classes/validators/CApiInputValidator.php:696
+#: include/classes/validators/CApiInputValidator.php:701
+#: include/classes/validators/CApiInputValidator.php:742
+#: include/classes/validators/CApiInputValidator.php:747
+#: include/classes/validators/CApiInputValidator.php:752
+#: include/classes/validators/CApiInputValidator.php:781
+#: include/classes/validators/CApiInputValidator.php:836
+#: include/classes/validators/CApiInputValidator.php:843
+#: include/classes/validators/CApiInputValidator.php:870
+#: include/classes/validators/CApiInputValidator.php:915
+#: include/classes/validators/CApiInputValidator.php:944
+#: include/classes/validators/CApiInputValidator.php:989
+#: include/classes/validators/CApiInputValidator.php:994
+#: include/classes/validators/CApiInputValidator.php:1031
+#: include/classes/validators/CApiInputValidator.php:1036
+#: include/classes/validators/CApiInputValidator.php:1079
+#: include/classes/validators/CApiInputValidator.php:1088
+#: include/classes/validators/CApiInputValidator.php:1094
+#: include/classes/validators/CApiInputValidator.php:1122
+#: include/classes/validators/CApiInputValidator.php:1132
+#: include/classes/validators/CApiInputValidator.php:1138
+#: include/classes/validators/CApiInputValidator.php:1174
+#: include/classes/validators/CApiInputValidator.php:1185
+#: include/classes/validators/CApiInputValidator.php:1192
+#: include/classes/validators/CApiInputValidator.php:1219
+#: include/classes/validators/CApiInputValidator.php:1229
+#: include/classes/validators/CApiInputValidator.php:1254
+#: include/classes/validators/CApiInputValidator.php:1259
+#: include/classes/validators/CApiInputValidator.php:1285
+#: include/classes/validators/CApiInputValidator.php:1292
+#: include/classes/validators/CApiInputValidator.php:1319
+#: include/classes/validators/CApiInputValidator.php:1326
+#: include/classes/validators/CApiInputValidator.php:1353
+#: include/classes/validators/CApiInputValidator.php:1362
+#: include/classes/validators/CApiInputValidator.php:1407
+#: include/classes/validators/CApiInputValidator.php:1418
+#: include/classes/validators/CApiInputValidator.php:1451
+#: include/classes/validators/CApiInputValidator.php:1506
+#: include/classes/validators/CApiInputValidator.php:1593
+#: include/classes/validators/CApiInputValidator.php:1598
+#: include/classes/validators/CApiInputValidator.php:1625
+#: include/classes/validators/CApiInputValidator.php:1630
+#: include/classes/validators/CApiInputValidator.php:1661
+#: include/classes/validators/CApiInputValidator.php:1671
+#: include/classes/validators/CApiInputValidator.php:1676
 #: include/classes/widgets/fields/CWidgetFieldGraphOverride.php:133
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:480
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:484
@@ -9221,7 +9181,7 @@ msgstr "监控项\"%1$s\"不能填入一个不存在的主机资产纪录栏位�
 msgid "Item \"%1$s\" does not exist on template \"%2$s\"."
 msgstr "监控项\"%1$s\"不存在于模板\"%2$s\"中."
 
-#: include/classes/api/services/CDiscoveryRule.php:1307
+#: include/classes/api/services/CDiscoveryRule.php:1309
 #: include/classes/api/services/CItemGeneral.php:1670
 #, c-format
 msgid "Item \"%1$s\" does not exist or you have no access to this item"
@@ -9282,7 +9242,7 @@ msgstr "项目未被选择"
 msgid "Item pre-processing is missing parameters: %1$s"
 msgstr "项目预处理缺少参数：%1$s"
 
-#: include/classes/api/services/CDiscoveryRule.php:1138
+#: include/classes/api/services/CDiscoveryRule.php:1140
 msgid "Item pre-processing is not allowed for discovery rules."
 msgstr "发现规则不允许进行项目预处理。"
 
@@ -11058,7 +11018,7 @@ msgstr "聚合图形的 \"%1$s\"未配置"
 msgid "No \"%2$s\" given for a filter condition of action \"%1$s\"."
 msgstr "动作\"%1$s\"的过滤器条件未配置 \"%2$s\" "
 
-#: include/classes/api/services/CDiscoveryRule.php:1115
+#: include/classes/api/services/CDiscoveryRule.php:1117
 #, c-format
 msgid "No \"%2$s\" given for a filter condition of discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的过滤器条件的\"%2$s\"未配置"
@@ -11068,7 +11028,7 @@ msgstr "自动发现规则\"%1$s\"的过滤器条件的\"%2$s\"未配置"
 msgid "No \"%2$s\" given for the filter of action \"%1$s\"."
 msgstr "动作 \"%1$s\"的过滤器未配置\"%2$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1083
+#: include/classes/api/services/CDiscoveryRule.php:1085
 #, c-format
 msgid "No \"%2$s\" given for the filter of discovery rule \"%1$s\"."
 msgstr "自动发现规则 \"%1$s\"的过滤器未配置\"%2$s\"."
@@ -11453,14 +11413,14 @@ msgstr "没有系统访问权限。"
 #: include/classes/api/services/CTemplateScreen.php:682
 #: include/classes/api/services/CTemplateScreen.php:745
 #: include/classes/api/services/CTemplateScreen.php:756
-#: include/classes/api/services/CTriggerGeneral.php:1047
-#: include/classes/api/services/CTrigger.php:628
-#: include/classes/api/services/CTrigger.php:672
-#: include/classes/api/services/CTrigger.php:708
-#: include/classes/api/services/CTrigger.php:796
-#: include/classes/api/services/CTriggerPrototype.php:526
-#: include/classes/api/services/CTriggerPrototype.php:704
-#: include/classes/api/services/CTriggerPrototype.php:722
+#: include/classes/api/services/CTriggerGeneral.php:928
+#: include/classes/api/services/CTrigger.php:626
+#: include/classes/api/services/CTrigger.php:673
+#: include/classes/api/services/CTrigger.php:707
+#: include/classes/api/services/CTrigger.php:794
+#: include/classes/api/services/CTriggerPrototype.php:522
+#: include/classes/api/services/CTriggerPrototype.php:700
+#: include/classes/api/services/CTriggerPrototype.php:718
 #: include/classes/api/services/CUserGroup.php:329
 #: include/classes/api/services/CUserGroup.php:876
 #: include/classes/api/services/CUserMacro.php:373
@@ -11536,7 +11496,7 @@ msgstr "没有含触发器ID\"%1$s\"的触发器."
 msgid "No triggers defined."
 msgstr "没有已定义的触发器."
 
-#: include/classes/validators/CApiInputValidator.php:802
+#: include/classes/validators/CApiInputValidator.php:806
 msgid "Non-boolean flags are deprecated."
 msgstr "不推荐使用非布尔标志。"
 
@@ -11599,8 +11559,8 @@ msgstr "非确认"
 msgid "Not Templated items"
 msgstr "非模板监控项"
 
-#: include/classes/api/services/CTrigger.php:1018
-#: include/classes/api/services/CTriggerPrototype.php:863
+#: include/classes/api/services/CTrigger.php:1016
+#: include/classes/api/services/CTriggerPrototype.php:859
 #, c-format
 msgid "Not all templates are linked to \"%s\"."
 msgstr "并非所有的模板都连接到\"%s\"."
@@ -12466,7 +12426,7 @@ msgstr "页面接收到错误的数据"
 msgid "Parameter"
 msgstr "参数"
 
-#: include/classes/validators/CApiInputValidator.php:862
+#: include/classes/validators/CApiInputValidator.php:866
 #, c-format
 msgid "Parameter \"%1$s\" is deprecated."
 msgstr "参数 \"%1$s\" 已被弃用。"
@@ -15346,11 +15306,6 @@ msgstr "表\"%1$s\"不能有栏位名为\"%2$s\"."
 msgid "Tag"
 msgstr "标签"
 
-#: include/classes/api/services/CTriggerGeneral.php:526
-#, c-format
-msgid "Tag \"%1$s\" with value \"%2$s\" already exists."
-msgstr "标签 \"%1$s\"与值 \"%2$s\" 重复存在。"
-
 #: app/views/monitoring.problem.view.php:285
 #: include/classes/widgets/forms/CWidgetFormProblems.php:150
 msgid "Tag display priority"
@@ -15963,13 +15918,12 @@ msgstr "趋势"
 msgid "Trigger"
 msgstr "触发器"
 
-#: include/classes/api/services/CTriggerGeneral.php:575
-#: include/classes/api/services/CTriggerGeneral.php:607
+#: include/classes/api/services/CTriggerGeneral.php:570
 #, c-format
 msgid "Trigger \"%1$s\" already exists on \"%2$s\"."
 msgstr "触发器\"%1$s\"已存在于\"%2$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:1859
+#: include/classes/api/services/CTriggerGeneral.php:1683
 #, c-format
 msgid "Trigger \"%1$s\" belongs to templates with different linkages."
 msgstr "触发器\"%1$s\"属于不同的联系，以模板。"
@@ -15983,7 +15937,7 @@ msgstr "触发器\"%1$s\"相依于一个不存在的触发器\"%2$s\"."
 msgid "Trigger added"
 msgstr "触发器已添加"
 
-#: include/classes/api/services/CTrigger.php:1061
+#: include/classes/api/services/CTrigger.php:1059
 msgid "Trigger cannot be dependent on a trigger that is inherited from it."
 msgstr "触发器不能依赖从它继承的一个触发器."
 
@@ -16033,10 +15987,6 @@ msgstr "触发器事件和报警数据存储周期"
 msgid "Trigger event and alert data storage period \"%1$s\"."
 msgstr "触发事件和警报数据存储期限 \"%1$s\" 。"
 
-#: include/classes/api/services/CTriggerGeneral.php:771
-msgid "Trigger expression must contain at least one host:key reference."
-msgstr "触发器表达式必需包含至少一个 主机:键值 ."
-
 #: include/classes/api/services/CHostBase.php:153
 #, c-format
 msgid "Trigger has items from template \"%1$s\" that is not linked to host."
@@ -16074,18 +16024,17 @@ msgstr "触发器概览"
 msgid "Trigger prototype"
 msgstr "触发器类型"
 
-#: include/classes/api/services/CTriggerGeneral.php:576
-#: include/classes/api/services/CTriggerGeneral.php:612
+#: include/classes/api/services/CTriggerGeneral.php:571
 #, c-format
 msgid "Trigger prototype \"%1$s\" already exists on \"%2$s\"."
 msgstr "在\"%2$s\"中触发器原型模板\"%1$s\"重复。"
 
-#: include/classes/api/services/CTriggerGeneral.php:1863
+#: include/classes/api/services/CTriggerGeneral.php:1687
 #, c-format
 msgid "Trigger prototype \"%1$s\" belongs to templates with different linkages."
 msgstr "触发器原型模板\"%1$s\"属于不同的联系，以模板。"
 
-#: include/classes/api/services/CTriggerGeneral.php:1782
+#: include/classes/api/services/CTriggerGeneral.php:1591
 #, c-format
 msgid "Trigger prototype \"%1$s\" contains item prototypes from multiple discovery rules."
 msgstr "触发器模板\"%1$s\"中包含了来自多个自动发现规则的项目模板."
@@ -16095,7 +16044,7 @@ msgstr "触发器模板\"%1$s\"中包含了来自多个自动发现规则的项�
 msgid "Trigger prototype \"%1$s\" depends on trigger \"%2$s\", which does not exist."
 msgstr "触发器模板 \"%1$s\" 依赖于触发器 \"%2$s\" ,但它不存在。"
 
-#: include/classes/api/services/CTriggerGeneral.php:1777
+#: include/classes/api/services/CTriggerGeneral.php:1586
 #, c-format
 msgid "Trigger prototype \"%1$s\" must contain at least one item prototype."
 msgstr "触发器模板 \"%1$s\"必须至少包含一个项目模板."
@@ -16104,7 +16053,7 @@ msgstr "触发器模板 \"%1$s\"必须至少包含一个项目模板."
 msgid "Trigger prototype added"
 msgstr "触发器模板已添加"
 
-#: include/classes/api/services/CTriggerPrototype.php:920
+#: include/classes/api/services/CTriggerPrototype.php:916
 msgid "Trigger prototype cannot be dependent on a trigger that is inherited from it."
 msgstr "原型的触发将不能够依靠从自己继承了触发。"
 
@@ -16132,10 +16081,6 @@ msgstr "触发器模板已删除"
 #: trigger_prototypes.php:406
 msgid "Trigger prototypes updated"
 msgstr "触发器模板已更新"
-
-#: include/classes/api/services/CTriggerGeneral.php:783
-msgid "Trigger recovery expression must contain at least one host:key reference."
-msgstr "必须包含至少一个触发恢复表达式，例子 host:key 。"
 
 #: include/html.inc.php:752
 #: include/views/administration.general.trigseverity.edit.php:25
@@ -16601,7 +16546,7 @@ msgstr "未支持的导入格式\"%1$s\"."
 msgid "Unsupported parameter \"%2$s\" for a filter condition of action \"%1$s\"."
 msgstr "动作\"%1$s\"的过滤器条件不支持参数\"%2$s\""
 
-#: include/classes/api/services/CDiscoveryRule.php:1116
+#: include/classes/api/services/CDiscoveryRule.php:1118
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for a filter condition of discovery rule \"%1$s\"."
 msgstr "自动发现规则 \"%1$s\"的过滤器条件不支持参数\"%2$s\""
@@ -16611,7 +16556,7 @@ msgstr "自动发现规则 \"%1$s\"的过滤器条件不支持参数\"%2$s\""
 msgid "Unsupported parameter \"%2$s\" for the filter of action \"%1$s\"."
 msgstr "动作\"%1$s\"的过滤器不支持参数\"%2$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1084
+#: include/classes/api/services/CDiscoveryRule.php:1086
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for the filter of discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的过滤器不支持参数\"%2$s\"."
@@ -17701,22 +17646,10 @@ msgstr "错误的服务栏位\"%1$s\"."
 msgid "Wrong fields for time for service \"%1$s\"."
 msgstr "错误的服务\"%1$s\"其时间栏位."
 
-#: include/classes/api/services/CTriggerGeneral.php:821
-#: include/classes/api/services/CTriggerGeneral.php:979
-msgid "Wrong fields for trigger prototype."
-msgstr "错误的触发的原型字段。"
-
-#: include/classes/api/services/CTriggerGeneral.php:815
-#: include/classes/api/services/CTriggerGeneral.php:973
-msgid "Wrong fields for trigger."
-msgstr "错误的触发器栏位."
-
 #: include/classes/api/services/CMapElement.php:63
 #: include/classes/api/services/CMap.php:958
 #: include/classes/api/services/CMap.php:1418
 #: include/classes/api/services/CScreenItem.php:967
-#: include/classes/api/services/CTriggerGeneral.php:846
-#: include/classes/api/services/CTriggerGeneral.php:1000
 msgid "Wrong value for url field."
 msgstr "url 栏值错误。"
 
@@ -18033,7 +17966,7 @@ msgstr "Zabbix server (代理)"
 msgid "Zabbix server details"
 msgstr "zabbix 服务器 详细信息"
 
-#: jsrpc.php:81
+#: jsrpc.php:80
 msgid "Zabbix server is not running: the information displayed may not be current."
 msgstr "Zabbix server is not running: the information displayed may not be current."
 
@@ -18072,37 +18005,35 @@ msgstr "[错误的日计数: \"%s\" ]"
 msgid "[Wrong value for month: \"%s\" ]"
 msgstr "[错误的月计数: \"%s\" ]"
 
-#: include/classes/validators/CApiInputValidator.php:777
+#: include/classes/validators/CApiInputValidator.php:781
 msgid "a boolean is expected"
 msgstr "预先设定的布尔值"
 
-#: include/classes/api/services/CTriggerGeneral.php:500
-#: include/classes/api/services/CTriggerGeneral.php:516
 #: include/classes/api/services/CUser.php:668
 #: include/classes/import/validators/CXmlValidatorGeneral.php:193
-#: include/classes/validators/CApiInputValidator.php:250
+#: include/classes/validators/CApiInputValidator.php:254
 #: include/classes/validators/CNewValidator.php:279
 msgid "a character string is expected"
 msgstr "请在字符串中指定"
 
-#: include/classes/validators/CApiInputValidator.php:567
+#: include/classes/validators/CApiInputValidator.php:571
 msgid "a floating point value is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:291
+#: include/classes/validators/CApiInputValidator.php:295
 msgid "a hexadecimal colour code (6 symbols) is expected"
 msgstr "期望十六进制颜色代码（6个符号）"
 
-#: include/classes/validators/CApiInputValidator.php:738
-#: include/classes/validators/CApiInputValidator.php:1181
+#: include/classes/validators/CApiInputValidator.php:742
+#: include/classes/validators/CApiInputValidator.php:1185
 msgid "a number is expected"
 msgstr "预先设定的数字"
 
-#: include/classes/validators/CApiInputValidator.php:442
-#: include/classes/validators/CApiInputValidator.php:481
-#: include/classes/validators/CApiInputValidator.php:748
-#: include/classes/validators/CApiInputValidator.php:1188
-#: include/classes/validators/CApiInputValidator.php:1414
+#: include/classes/validators/CApiInputValidator.php:446
+#: include/classes/validators/CApiInputValidator.php:485
+#: include/classes/validators/CApiInputValidator.php:752
+#: include/classes/validators/CApiInputValidator.php:1192
+#: include/classes/validators/CApiInputValidator.php:1418
 msgid "a number is too large"
 msgstr "数字过大"
 
@@ -18117,23 +18048,23 @@ msgid "a time is expected"
 msgstr "a 预计时间"
 
 #: app/controllers/CControllerPopupMedia.php:110
-#: include/classes/validators/CApiInputValidator.php:1322
+#: include/classes/validators/CApiInputValidator.php:1326
 #: include/validate.inc.php:216
 msgid "a time period is expected"
 msgstr "预设时间段"
 
-#: include/classes/validators/CApiInputValidator.php:1288
+#: include/classes/validators/CApiInputValidator.php:1292
 #: include/validate.inc.php:235
 msgid "a time range is expected"
 msgstr "预计时间范围"
 
 #: app/controllers/CControllerPopupHttpStep.php:94
-#: include/classes/validators/CApiInputValidator.php:1403
+#: include/classes/validators/CApiInputValidator.php:1407
 #: include/validate.inc.php:227 include/validate.inc.php:591
 msgid "a time unit is expected"
 msgstr "预设时间单位"
 
-#: include/classes/validators/CApiInputValidator.php:1255
+#: include/classes/validators/CApiInputValidator.php:1259
 msgid "a user macro is expected"
 msgstr "预设用户宏"
 
@@ -18179,18 +18110,18 @@ msgstr "所有介质"
 #: include/classes/api/services/CItemGeneral.php:1977
 #: include/classes/api/services/CItemGeneral.php:2001
 #: include/classes/import/validators/CXmlValidatorGeneral.php:207
-#: include/classes/validators/CApiInputValidator.php:390
-#: include/classes/validators/CApiInputValidator.php:522
-#: include/classes/validators/CApiInputValidator.php:598
-#: include/classes/validators/CApiInputValidator.php:692
-#: include/classes/validators/CApiInputValidator.php:832
-#: include/classes/validators/CApiInputValidator.php:985
-#: include/classes/validators/CApiInputValidator.php:1027
+#: include/classes/validators/CApiInputValidator.php:394
+#: include/classes/validators/CApiInputValidator.php:526
+#: include/classes/validators/CApiInputValidator.php:602
+#: include/classes/validators/CApiInputValidator.php:696
+#: include/classes/validators/CApiInputValidator.php:836
+#: include/classes/validators/CApiInputValidator.php:989
+#: include/classes/validators/CApiInputValidator.php:1031
 msgid "an array is expected"
 msgstr "请在阵列中指定"
 
-#: include/classes/validators/CApiInputValidator.php:911
-#: include/classes/validators/CApiInputValidator.php:940
+#: include/classes/validators/CApiInputValidator.php:915
+#: include/classes/validators/CApiInputValidator.php:944
 msgid "an array or a character string is expected"
 msgstr "预设一个数组或一个字符串"
 
@@ -18207,11 +18138,11 @@ msgstr "预设会出现偶数个十六进制字符"
 msgid "an explicit time is expected"
 msgstr "需要一个明确的时间"
 
-#: include/classes/validators/CApiInputValidator.php:437
+#: include/classes/validators/CApiInputValidator.php:441
 msgid "an integer is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:476
+#: include/classes/validators/CApiInputValidator.php:480
 msgid "an unsigned integer is expected"
 msgstr ""
 
@@ -18329,22 +18260,19 @@ msgstr "不能变更"
 #: include/classes/api/services/CMediatype.php:721
 #: include/classes/api/services/CProxy.php:578
 #: include/classes/api/services/CProxy.php:584
-#: include/classes/api/services/CTriggerGeneral.php:506
-#: include/classes/api/services/CTriggerGeneral.php:872
-#: include/classes/api/services/CTriggerGeneral.php:904
-#: include/classes/api/services/CTriggerGeneral.php:1118
-#: include/classes/api/services/CTriggerGeneral.php:1136
+#: include/classes/api/services/CTriggerGeneral.php:690
+#: include/classes/api/services/CTriggerGeneral.php:723
 #: include/classes/api/services/CUserGroup.php:463
 #: include/classes/api/services/CUser.php:536
 #: include/classes/api/services/CUser.php:679
-#: include/classes/validators/CApiInputValidator.php:260
-#: include/classes/validators/CApiInputValidator.php:395
-#: include/classes/validators/CApiInputValidator.php:527
-#: include/classes/validators/CApiInputValidator.php:603
-#: include/classes/validators/CApiInputValidator.php:697
-#: include/classes/validators/CApiInputValidator.php:743
-#: include/classes/validators/CApiInputValidator.php:990
-#: include/classes/validators/CApiInputValidator.php:1032
+#: include/classes/validators/CApiInputValidator.php:264
+#: include/classes/validators/CApiInputValidator.php:399
+#: include/classes/validators/CApiInputValidator.php:531
+#: include/classes/validators/CApiInputValidator.php:607
+#: include/classes/validators/CApiInputValidator.php:701
+#: include/classes/validators/CApiInputValidator.php:747
+#: include/classes/validators/CApiInputValidator.php:994
+#: include/classes/validators/CApiInputValidator.php:1036
 #: include/classes/validators/CNewValidator.php:91 usergrps.php:318
 #: usergrps.php:358 usergrps.php:361
 msgid "cannot be empty"
@@ -18447,7 +18375,7 @@ msgstr "降"
 msgid "diff() - Difference between last and preceding values (1 - true, 0 - false)"
 msgstr "diff() - 最后一个值和前一个值之间的差异（1 - true，0 - false）"
 
-#: include/classes/validators/CApiInputValidator.php:1225
+#: include/classes/validators/CApiInputValidator.php:1229
 msgid "directory or script name cannot be empty"
 msgstr "目录或脚本名称不能为空"
 
@@ -18592,6 +18520,15 @@ msgstr "错误的元素"
 msgid "incorrect syntax near \"%1$s\""
 msgstr "\"%1$s\"附近语法错误"
 
+#: include/classes/parsers/CTriggerExpression.php:462
+msgid "incorrect trigger expression"
+msgstr ""
+
+#: include/classes/parsers/CTriggerExpression.php:471
+#, c-format
+msgid "incorrect trigger expression starting from \"%1$s\""
+msgstr ""
+
 #: include/events.inc.php:37
 msgctxt "event source"
 msgid "internal"
@@ -18602,7 +18539,7 @@ msgstr "事件源"
 msgid "invalid address range \"%1$s\""
 msgstr "无效地址范围 \"%1$s\""
 
-#: include/classes/validators/CApiInputValidator.php:255
+#: include/classes/validators/CApiInputValidator.php:259
 msgid "invalid byte sequence in UTF-8"
 msgstr "UTF-8中无效的字节排序"
 
@@ -18617,15 +18554,15 @@ msgstr "无效延迟"
 msgid "invalid history storage period"
 msgstr "无效的历史数据期间"
 
-#: include/classes/validators/CApiInputValidator.php:1084
+#: include/classes/validators/CApiInputValidator.php:1088
 msgid "invalid host group name"
 msgstr "无效的主机群组名称"
 
-#: include/classes/validators/CApiInputValidator.php:1128
+#: include/classes/validators/CApiInputValidator.php:1132
 msgid "invalid host name"
 msgstr "无效的主机名称"
 
-#: include/classes/validators/CApiInputValidator.php:1358
+#: include/classes/validators/CApiInputValidator.php:1362
 msgid "invalid regular expression"
 msgstr "无效的正则表达式"
 
@@ -18647,7 +18584,7 @@ msgstr "大于等于"
 msgid "is less than or equals"
 msgstr "小于等于"
 
-#: include/classes/validators/CApiInputValidator.php:1594
+#: include/classes/validators/CApiInputValidator.php:1598
 msgid "is not enclosed in {} or is malformed"
 msgstr "不包含在{}或格式错误"
 
@@ -18817,8 +18754,8 @@ msgstr "必需为一个正确的LDAP用户"
 msgid "must be between \"%1$s\" and \"%2$s\""
 msgstr "必须在 \"%1$s\" 和 \"%2$s\" 之间"
 
-#: include/classes/validators/CApiInputValidator.php:1091
-#: include/classes/validators/CApiInputValidator.php:1135
+#: include/classes/validators/CApiInputValidator.php:1095
+#: include/classes/validators/CApiInputValidator.php:1139
 msgid "must contain at least one low-level discovery macro"
 msgstr "必须包含至少一个底层发现宏"
 
@@ -19056,10 +18993,8 @@ msgstr "简要描述"
 #: include/classes/api/services/CMaintenance.php:711
 #: include/classes/api/services/CProxy.php:662
 #: include/classes/api/services/CProxy.php:786
-#: include/classes/api/services/CTriggerGeneral.php:864
-#: include/classes/api/services/CTriggerGeneral.php:890
-#: include/classes/api/services/CTriggerGeneral.php:1110
-#: include/classes/api/services/CTriggerGeneral.php:1128
+#: include/classes/api/services/CTriggerGeneral.php:696
+#: include/classes/api/services/CTriggerGeneral.php:729
 msgid "should be empty"
 msgstr "可能是空的"
 
@@ -19131,7 +19066,7 @@ msgstr "模板ID\"%1$s\"已传送%2$s次"
 #: include/classes/api/services/CHost.php:1891
 #: include/classes/api/services/CHttpTest.php:744
 #: include/classes/api/services/CTemplate.php:378
-#: include/classes/validators/CApiInputValidator.php:867
+#: include/classes/validators/CApiInputValidator.php:871
 #, c-format
 msgid "the parameter \"%1$s\" is missing"
 msgstr "找不到参数 \"%1$s\""
@@ -19183,11 +19118,15 @@ msgstr "触发器"
 msgid "trigger does not allow manual closing"
 msgstr "触发器不允许手动关闭"
 
-#: include/classes/api/services/CTriggerGeneral.php:1789
+#: include/classes/validators/CApiInputValidator.php:1677
+msgid "trigger expression must contain at least one host:key reference"
+msgstr ""
+
+#: include/classes/api/services/CTriggerGeneral.php:1598
 msgid "trigger prototype cannot be moved to another template or host"
 msgstr "触发器原型无法移动到另外一个模板或者主机"
 
-#: include/classes/api/services/CTriggerGeneral.php:1934
+#: include/classes/api/services/CTriggerGeneral.php:1758
 msgid "trigger with linkages cannot be moved to another template or host"
 msgstr "触发器原型以及关联项无法移动到另外一个模板或者主机"
 
@@ -19196,7 +19135,7 @@ msgstr "触发器原型以及关联项无法移动到另外一个模板或者主
 msgid "type here to search"
 msgstr "在此输入搜索"
 
-#: include/classes/validators/CApiInputValidator.php:1626
+#: include/classes/validators/CApiInputValidator.php:1630
 msgid "unacceptable URL"
 msgstr ""
 
@@ -19210,7 +19149,7 @@ msgstr "宏的结束是不正确"
 
 #: include/classes/api/services/CHttpTest.php:458
 #: include/classes/api/services/CHttpTest.php:482
-#: include/classes/validators/CApiInputValidator.php:839
+#: include/classes/validators/CApiInputValidator.php:843
 #, c-format
 msgid "unexpected parameter \"%1$s\""
 msgstr "\"%1$s\" 参数异常"
@@ -19235,12 +19174,7 @@ msgstr "异常的文本 \"%1$s\""
 #: include/classes/api/services/CItemGeneral.php:1278
 #: include/classes/api/services/CProxy.php:559
 #: include/classes/api/services/CProxy.php:566
-#: include/classes/api/services/CTriggerGeneral.php:898
-#: include/classes/api/services/CTriggerGeneral.php:911
-#: include/classes/api/services/CTriggerGeneral.php:919
-#: include/classes/api/services/CTriggerGeneral.php:1102
-#: include/classes/api/services/CTriggerGeneral.php:1143
-#: include/classes/api/services/CTriggerGeneral.php:1151
+#: include/classes/api/services/CTriggerGeneral.php:717
 #, c-format
 msgid "unexpected value \"%1$s\""
 msgstr "\"%1$s\" 值异常"
@@ -19297,23 +19231,26 @@ msgstr "值"
 msgid "value \"%1$s\" not found"
 msgstr "值 \"%1$s\" 未找到"
 
-#: include/classes/validators/CApiInputValidator.php:1448
-#: include/classes/validators/CApiInputValidator.php:1502
+#: include/classes/validators/CApiInputValidator.php:1452
+#: include/classes/validators/CApiInputValidator.php:1506
 #, c-format
 msgid "value %1$s already exists"
 msgstr "值 %1$s 已存在"
 
-#: include/classes/validators/CApiInputValidator.php:358
-#: include/classes/validators/CApiInputValidator.php:1075
-#: include/classes/validators/CApiInputValidator.php:1118
-#: include/classes/validators/CApiInputValidator.php:1170
-#: include/classes/validators/CApiInputValidator.php:1215
-#: include/classes/validators/CApiInputValidator.php:1250
-#: include/classes/validators/CApiInputValidator.php:1281
-#: include/classes/validators/CApiInputValidator.php:1315
-#: include/classes/validators/CApiInputValidator.php:1349
-#: include/classes/validators/CApiInputValidator.php:1589
-#: include/classes/validators/CApiInputValidator.php:1621
+#: include/classes/api/services/CTriggerGeneral.php:1646
+#: include/classes/api/services/CTriggerGeneral.php:1663
+#: include/classes/validators/CApiInputValidator.php:362
+#: include/classes/validators/CApiInputValidator.php:1079
+#: include/classes/validators/CApiInputValidator.php:1122
+#: include/classes/validators/CApiInputValidator.php:1174
+#: include/classes/validators/CApiInputValidator.php:1219
+#: include/classes/validators/CApiInputValidator.php:1254
+#: include/classes/validators/CApiInputValidator.php:1285
+#: include/classes/validators/CApiInputValidator.php:1319
+#: include/classes/validators/CApiInputValidator.php:1353
+#: include/classes/validators/CApiInputValidator.php:1593
+#: include/classes/validators/CApiInputValidator.php:1625
+#: include/classes/validators/CApiInputValidator.php:1661
 msgid "value is too long"
 msgstr "值过长"
 
@@ -19326,8 +19263,8 @@ msgstr "值过长"
 #: include/classes/api/services/CMap.php:681
 #: include/classes/api/services/CMap.php:1129
 #: include/classes/api/services/CMap.php:1135
-#: include/classes/validators/CApiInputValidator.php:352
-#: include/classes/validators/CApiInputValidator.php:660
+#: include/classes/validators/CApiInputValidator.php:356
+#: include/classes/validators/CApiInputValidator.php:664
 #: include/validate.inc.php:584
 #, c-format
 msgid "value must be one of %1$s"
