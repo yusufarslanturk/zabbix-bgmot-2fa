@@ -2161,8 +2161,8 @@ static int	process_log(unsigned char flags, const char *filename, zbx_uint64_t *
 	const char	*__function_name = "process_log";
 	int		f, ret = FAIL;
 
-	zabbix_log(LOG_LEVEL_DEBUG, "In %s() filename:'%s' lastlogsize:" ZBX_FS_UI64 " mtime:%d",
-			__function_name, filename, *lastlogsize, NULL != mtime ? *mtime : 0);
+	zabbix_log(LOG_LEVEL_DEBUG, "In %s() filename:'%s' lastlogsize:" ZBX_FS_UI64 " mtime:%d seek_offset:"
+			ZBX_FS_UI64, __function_name, filename, *lastlogsize, NULL != mtime ? *mtime : 0, seek_offset);
 
 	if (-1 == (f = open_file_helper(filename, err_msg)))
 		goto out;
