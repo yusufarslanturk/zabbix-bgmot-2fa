@@ -3120,7 +3120,36 @@ int	process_logrt(unsigned char flags, const char *filename, zbx_uint64_t *lastl
 			*mtime = logfiles[i].mtime;
 
 			if (start_idx != i)
+			{
 				*lastlogsize = logfiles[i].processed_size;
+			}
+			else
+			{
+				/* When agent starts it can receive from server an out-of-date lastlogsize value, */
+				/* larger than current log file size. */
+
+				if (*lastlogsize > logfiles[i].size)
+				{
+					int	j, found = 0;
+
+					/* check if there are other log files with the same mtime and size */
+					/* greater or equal to lastlogsize */
+					for (j = 0; j < logfiles_num; j++)
+					{
+						if (i == j || logfiles[i].mtime != logfiles[j].mtime)
+							continue;
+
+						if (*lastlogsize <= logfiles[j].size)
+						{
+							found = 1;
+							break;
+						}
+					}
+
+					if (0 == found)
+						*lastlogsize = logfiles[i].processed_size;
+				}
+			}
 
 			if (0 == *skip_old_data)
 			{
