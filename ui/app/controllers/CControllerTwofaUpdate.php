@@ -45,11 +45,11 @@ class CControllerTwofaUpdate extends CController {
 		return $this->checkAccess(CRoleHelper::UI_ADMINISTRATION_AUTHENTICATION);
 	}
 
- 	/**
+	/**
 	 * Validate DUO 2FA settings.
- 	 *
- 	 * @return bool
- 	 */
+	 *
+	 * @return bool
+	 */
 	private function validateDuoTwofa() {
 		$twofa_fields = [
 			'2fa_type', '2fa_duo_api_hostname', '2fa_duo_integration_key',
@@ -76,7 +76,7 @@ class CControllerTwofaUpdate extends CController {
 		}
 
 		return true;
- 	}
+	}
 
 	protected function doAction() {
 		$twofa_params = [
