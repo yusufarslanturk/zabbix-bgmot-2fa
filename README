@@ -45,9 +45,9 @@ Very quick way to see this code in action is to deploy a Docker container using 
 
 There are two ways to install this code:
 1. fresh install from sources using this repository, follow [this guide](https://www.zabbix.com/documentation/current/manual/installation/install)
-2. if you already have Zabbix server installed (WebUI and MySQL DB on the same host) then login into the Zabbix server as `root`, download this script (pay attention that version of your Zabbix Server - 5.2.4 in this example - matches this repository version/tag - 5.2.4-bg):
+2. if you already have Zabbix server installed (WebUI and MySQL DB on the same host) then login into the Zabbix server as `root`, download this script (pay attention that version of your Zabbix Server - 5.2.5 in this example - matches this repository version/tag - 5.2.5-bg):
 ```
-curl -L -o bg-features-install.sh https://github.com/BGmot/zabbix/raw/5.2.4-bg/bg-scripts/bg-features-install.sh
+curl -L -o bg-features-install.sh https://github.com/BGmot/zabbix/raw/5.2.5-bg/bg-scripts/bg-features-install.sh
 ```
 Modify the script to provide proper values for DB_HOST, DB_USERNAME, DB_PASSWORD and ZABBIX_INSTALL_PATH (where all your php files located) and run the script:
 ```
