@@ -1061,7 +1061,7 @@ int	zbx_procstat_get_util(const char *procname, const char *username, const char
 		{
 			char	*errmsg_local = NULL;
 
-			if (FAIL == (ret = zbx_regexp_compile(cmdline, NULL, &errmsg_local)))
+			if (NULL != cmdline && FAIL == (ret = zbx_regexp_compile(cmdline, NULL, &errmsg_local)))
 			{
 				*errmsg = zbx_dsprintf(*errmsg, "Invalid regular expression in the fourth parameter:"
 						" %s", errmsg_local);
