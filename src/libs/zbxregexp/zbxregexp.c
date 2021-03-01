@@ -451,53 +451,6 @@ int     zbx_regexp_match_precompiled(const char *string, const zbx_regexp_t *reg
  * Purpose: compiles and executes a regexp                                                          *
  *                                                                                                  *
  * Parameters:                                                                                      *
- *     string     - [IN] string to be matched against 'regexp'                                      *
- *     pattern    - [IN] regular expression pattern                                                 *
- *     flags      - [IN] execution flags for matching                                               *
- *     len        - [OUT] length of matched string,                                                 *
- *                      0 in case of no match or                                                    *
- *                      FAIL if an error occurred.                                                  *
- *                                                                                                  *
- * Return value: pointer to the matched substring or null                                           *
- *                                                                                                  *
- ****************************************************************************************************/
-static char	*zbx_regexp(const char *string, const char *pattern, int flags, int *len)
-{
-	char		*c = NULL;
-	zbx_regmatch_t	match;
-	zbx_regexp_t	*regexp = NULL;
-
-	if (NULL != len)
-		*len = FAIL;
-
-	if (SUCCEED != regexp_prepare(pattern, flags, &regexp, NULL))
-		return NULL;
-
-	if (NULL != string)
-	{
-		int	r;
-
-		if (ZBX_REGEXP_MATCH == (r = regexp_exec(string, regexp, 1, &match)))
-		{
-			c = (char *)string + match.rm_so;
-
-			if (NULL != len)
-				*len = match.rm_eo - match.rm_so;
-		}
-		else if (ZBX_REGEXP_NO_MATCH == r && NULL != len)
-			*len = 0;
-	}
-
-	return c;
-}
-
-/****************************************************************************************************
- *                                                                                                  *
- * Function: zbx_regexp2                                                                            *
- *                                                                                                  *
- * Purpose: compiles and executes a regexp                                                          *
- *                                                                                                  *
- * Parameters:                                                                                      *
  *     string      - [IN] string to be matched against 'regexp'                                     *
  *     pattern     - [IN] regular expression pattern                                                *
  *     flags       - [IN] execution flags for matching                                              *
@@ -513,7 +466,7 @@ static char	*zbx_regexp(const char *string, const char *pattern, int flags, int 
  *                   ZBX_REGEXP_RUNTIME_FAIL with error message in 'err_msg'                        *
  *                                                                                                  *
  ****************************************************************************************************/
-static int	zbx_regexp2(const char *string, const char *pattern, int flags, char **matched_pos, int *len,
+static int	zbx_regexp(const char *string, const char *pattern, int flags, char **matched_pos, int *len,
 		char **err_msg)
 {
 	zbx_regmatch_t	match;
@@ -549,7 +502,12 @@ static int	zbx_regexp2(const char *string, const char *pattern, int flags, char 
 
 char	*zbx_regexp_match(const char *string, const char *pattern, int *len)
 {
-	return zbx_regexp(string, pattern, PCRE_MULTILINE, len);
+	char	*matched_pos;
+
+	if (ZBX_REGEXP_MATCH == zbx_regexp(string, pattern, PCRE_MULTILINE, &matched_pos, len, NULL))
+		return matched_pos;
+
+	return NULL;
 }
 
 /******************************************************************************
@@ -575,7 +533,7 @@ char	*zbx_regexp_match(const char *string, const char *pattern, int *len)
  *****************************************************************************/
 int	zbx_regexp_match2(const char *string, const char *pattern, char **matched_pos, int *len, char **err_msg)
 {
-	return zbx_regexp2(string, pattern, PCRE_MULTILINE, matched_pos, len, err_msg);
+	return zbx_regexp(string, pattern, PCRE_MULTILINE, matched_pos, len, err_msg);
 }
 
 /******************************************************************************
@@ -1086,7 +1044,7 @@ static int	regexp_match_ex_regsub(const char *string, const char *pattern, int c
 		regexp_flags |= PCRE_CASELESS;
 
 	if (NULL == output)
-		rc = zbx_regexp2(string, pattern, regexp_flags, NULL, NULL, &err_msg_local);
+		rc = zbx_regexp(string, pattern, regexp_flags, NULL, NULL, &err_msg_local);
 	else
 		rc = regexp_sub2(string, pattern, output_template, regexp_flags, output, &err_msg_local);
 
