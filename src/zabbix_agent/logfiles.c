@@ -1939,7 +1939,7 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 
 					if (0 == (ZBX_METRIC_FLAG_LOG_COUNT & flags))	/* log[] or logrt[] */
 					{
-						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex2(regexps, value,
+						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex(regexps, value,
 								pattern, ZBX_CASE_SENSITIVE, output_template,
 								&item_value, err_msg)))
 						{
@@ -1968,7 +1968,7 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 					}
 					else	/* log.count[] or logrt.count[] */
 					{
-						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex2(regexps, value,
+						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex(regexps, value,
 								pattern, ZBX_CASE_SENSITIVE, NULL, NULL, err_msg)))
 						{
 							(*s_count)--;
@@ -2033,7 +2033,7 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 
 					if (0 == (ZBX_METRIC_FLAG_LOG_COUNT & flags))   /* log[] or logrt[] */
 					{
-						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex2(regexps, value,
+						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex(regexps, value,
 								pattern, ZBX_CASE_SENSITIVE, output_template,
 								&item_value, err_msg)))
 						{
@@ -2062,7 +2062,7 @@ static int	zbx_read2(int fd, unsigned char flags, zbx_uint64_t *lastlogsize, int
 					}
 					else	/* log.count[] or logrt.count[] */
 					{
-						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex2(regexps, value,
+						if (ZBX_REGEXP_MATCH == (regexp_ret = regexp_sub_ex(regexps, value,
 								pattern, ZBX_CASE_SENSITIVE, NULL, NULL, err_msg)))
 						{
 							(*s_count)--;
