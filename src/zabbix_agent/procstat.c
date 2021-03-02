@@ -1035,7 +1035,8 @@ void	zbx_procstat_destroy(void)
  *     SUCCEED - the utime value was retrieved successfully                   *
  *     FAIL    - either collector does not have at least two data samples     *
  *               required to calculate the statistics, or an error occurred   *
- *               during the collection process. In the second case the errmsg *
+ *               during the collection process (e.g. invalid regular          *
+ *               expresion was specified). In the second case the errmsg      *
  *               will contain an error message.                               *
  *     This function calls exit() on shared memory errors.                    *
  *                                                                            *
@@ -1061,7 +1062,7 @@ int	zbx_procstat_get_util(const char *procname, const char *username, const char
 		{
 			char	*errmsg_local = NULL;
 
-			if (NULL != cmdline && FAIL == (ret = zbx_regexp_compile(cmdline, NULL, &errmsg_local)))
+			if (NULL != cmdline && FAIL == zbx_regexp_compile(cmdline, NULL, &errmsg_local))
 			{
 				*errmsg = zbx_dsprintf(*errmsg, "Invalid regular expression in the fourth parameter:"
 						" %s", errmsg_local);
