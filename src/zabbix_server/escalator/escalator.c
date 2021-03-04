@@ -676,7 +676,8 @@ static void	add_sentusers_msg_esc_cancel(ZBX_USER_MSG **user_msg, zbx_uint64_t a
 		}
 
 		subject_dyn = zbx_strdup(NULL, row[2]);
-		message_dyn = zbx_dsprintf(NULL, "NOTE: Escalation cancelled: %s\n%s", error, row[3]);
+		message_dyn = zbx_dsprintf(NULL, "NOTE: Escalation cancelled: %s\nLast message sent:\n%s", error,
+				row[3]);
 
 		substitute_simple_macros(&actionid, event, NULL, &userid, NULL, NULL, NULL, NULL,
 				NULL, &subject_dyn, MACRO_TYPE_MESSAGE_NORMAL, NULL, 0);
