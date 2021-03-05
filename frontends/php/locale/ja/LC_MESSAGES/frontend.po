@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 19:52+0200\n"
+"POT-Creation-Date: 2021-03-05 19:51+0200\n"
 "PO-Revision-Date: 2021-02-08 03:32+0300\n"
 "Last-Translator: Atsushi <a.tanaka77@gmail.com>\n"
 "Language-Team: Zabbix\n"
@@ -1912,7 +1912,7 @@ msgid "Cannot delete host because maintenance \"%1$s\" must contain at least one
 msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must contain at least one host or host group."
 msgstr[0] "メンテナンス\"%1$s\"は少なくとも1つのホストかホストグループが必要なのでホストを削除できません。"
 
-#: include/classes/api/services/CHostGroup.php:1489
+#: include/classes/api/services/CHostGroup.php:1490
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
@@ -2626,7 +2626,7 @@ msgstr "テンプレートスクリーン\"%1$s\"の\"templateid\"を更新で�
 msgid "Cannot update a discovered graph."
 msgstr "ディスカバリされたグラフを更新できません。"
 
-#: include/classes/api/services/CHostGroup.php:789
+#: include/classes/api/services/CHostGroup.php:790
 msgid "Cannot update a discovered host group."
 msgstr "ディスカバリされたホストグループを更新できません。"
 
@@ -2696,9 +2696,9 @@ msgstr "グラフのプロトタイプを更新できません"
 msgid "Cannot update group"
 msgstr "グループを更新できません"
 
-#: include/classes/api/services/CHostGroup.php:995
-#: include/classes/api/services/CHostGroup.php:1099
-#: include/classes/api/services/CHostGroup.php:1235
+#: include/classes/api/services/CHostGroup.php:996
+#: include/classes/api/services/CHostGroup.php:1100
+#: include/classes/api/services/CHostGroup.php:1236
 #, c-format
 msgid "Cannot update groups for discovered host \"%1$s\"."
 msgstr "ディスカバリされたホスト\"%1$s\"のグループを更新できません。"
@@ -5961,7 +5961,7 @@ msgstr "フィールド\"%1$s\"はNULLに設定できません。"
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:493
 #: include/classes/api/services/CDRule.php:503
-#: include/classes/api/services/CHostGroup.php:906
+#: include/classes/api/services/CHostGroup.php:907
 #: include/classes/api/services/CHost.php:747
 #: include/classes/api/services/CTemplate.php:793
 #: include/classes/validators/CNewValidator.php:256
@@ -6569,12 +6569,12 @@ msgstr "グリッド"
 msgid "Group"
 msgstr "グループ"
 
-#: include/classes/api/services/CHostGroup.php:712
+#: include/classes/api/services/CHostGroup.php:713
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used by a host prototype."
 msgstr "ホストのプロトタイプで使用されているためグループ\"%1$s\"は削除できません。"
 
-#: include/classes/api/services/CHostGroup.php:756
+#: include/classes/api/services/CHostGroup.php:757
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used in a correlation condition."
 msgstr "相関関係の条件で使用されているためグループ\"%1$s\"は削除できません。"
@@ -6891,7 +6891,7 @@ msgstr[0] "ホスト"
 msgid "Host \"%1$s\" already exists."
 msgstr "ホスト\"%1$s\"はすでに存在しています。"
 
-#: include/classes/api/services/CHostGroup.php:1452
+#: include/classes/api/services/CHostGroup.php:1453
 #: include/classes/api/services/CHost.php:813
 #: include/classes/api/services/CHost.php:1692
 #: include/classes/api/services/CHost.php:1881
@@ -6963,17 +6963,17 @@ msgstr[0] "ホストを有効にしました"
 msgid "Host group"
 msgstr "ホストグループ"
 
-#: include/classes/api/services/CHostGroup.php:640
+#: include/classes/api/services/CHostGroup.php:641
 #, c-format
 msgid "Host group \"%1$s\" already exists."
 msgstr "ホストグループ\"%1$s\"はすでに存在しています。"
 
-#: include/classes/api/services/CHostGroup.php:741
+#: include/classes/api/services/CHostGroup.php:742
 #, c-format
 msgid "Host group \"%1$s\" cannot be deleted, because it is used in a global script."
 msgstr "グローバルスクリプトに使用されているためホストグループ\"%1$s\"を削除できません。"
 
-#: include/classes/api/services/CHostGroup.php:698
+#: include/classes/api/services/CHostGroup.php:699
 #, c-format
 msgid "Host group \"%1$s\" is internal and can not be deleted."
 msgstr "ホストグループ\"%1$s\"は内部的に使用されているため削除できません。"
@@ -11327,13 +11327,13 @@ msgstr "システムへのアクセス権がありません。"
 #: include/classes/api/services/CGraphPrototype.php:717
 #: include/classes/api/services/CHostBase.php:49
 #: include/classes/api/services/CHostGeneral.php:56
-#: include/classes/api/services/CHostGroup.php:693
-#: include/classes/api/services/CHostGroup.php:797
-#: include/classes/api/services/CHostGroup.php:1036
-#: include/classes/api/services/CHostGroup.php:1067
-#: include/classes/api/services/CHostGroup.php:1168
-#: include/classes/api/services/CHostGroup.php:1290
-#: include/classes/api/services/CHostGroup.php:1310
+#: include/classes/api/services/CHostGroup.php:694
+#: include/classes/api/services/CHostGroup.php:798
+#: include/classes/api/services/CHostGroup.php:1037
+#: include/classes/api/services/CHostGroup.php:1068
+#: include/classes/api/services/CHostGroup.php:1169
+#: include/classes/api/services/CHostGroup.php:1291
+#: include/classes/api/services/CHostGroup.php:1311
 #: include/classes/api/services/CHostInterface.php:239
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
@@ -11893,7 +11893,7 @@ msgstr "一度だけ"
 msgid "One"
 msgstr "1つ"
 
-#: include/classes/api/services/CHostGroup.php:1178
+#: include/classes/api/services/CHostGroup.php:1179
 msgid "One of the objects is left without a host group."
 msgstr "ホストグループが設定されていないオブジェクトが残っています"
 
@@ -11906,7 +11906,7 @@ msgstr "一度限り"
 msgid "One-time downtime"
 msgstr "一時的なダウンタイム"
 
-#: include/classes/api/services/CHostGroup.php:652
+#: include/classes/api/services/CHostGroup.php:653
 msgid "Only Super Admins can create host groups."
 msgstr "特権管理者のみがホストグループを作成できます。"
 
@@ -15380,7 +15380,7 @@ msgstr "テンプレート"
 msgid "Template \"%1$s\" already exists."
 msgstr "テンプレート\"%1$s\"はすでに存在します。"
 
-#: include/classes/api/services/CHostGroup.php:1457
+#: include/classes/api/services/CHostGroup.php:1458
 #: include/classes/api/services/CTemplate.php:368
 #: include/classes/api/services/CTemplate.php:997
 #, c-format

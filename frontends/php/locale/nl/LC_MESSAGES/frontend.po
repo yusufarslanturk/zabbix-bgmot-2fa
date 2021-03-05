@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 19:52+0200\n"
+"POT-Creation-Date: 2021-03-05 19:51+0200\n"
 "PO-Revision-Date: 2020-02-08 23:46+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: NL\n"
@@ -1939,7 +1939,7 @@ msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must con
 msgstr[0] ""
 msgstr[1] ""
 
-#: include/classes/api/services/CHostGroup.php:1489
+#: include/classes/api/services/CHostGroup.php:1490
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
@@ -2679,7 +2679,7 @@ msgstr ""
 msgid "Cannot update a discovered graph."
 msgstr "Kan een ontdekte grafiek niet bijwerken."
 
-#: include/classes/api/services/CHostGroup.php:789
+#: include/classes/api/services/CHostGroup.php:790
 msgid "Cannot update a discovered host group."
 msgstr "Kan een ontdekte hostgroep niet bijwerken."
 
@@ -2750,9 +2750,9 @@ msgstr "Kan grafiek-prototype niet bijwerken"
 msgid "Cannot update group"
 msgstr "Kan groep niet bijwerken"
 
-#: include/classes/api/services/CHostGroup.php:995
-#: include/classes/api/services/CHostGroup.php:1099
-#: include/classes/api/services/CHostGroup.php:1235
+#: include/classes/api/services/CHostGroup.php:996
+#: include/classes/api/services/CHostGroup.php:1100
+#: include/classes/api/services/CHostGroup.php:1236
 #, c-format
 msgid "Cannot update groups for discovered host \"%1$s\"."
 msgstr "Kan geen groepen updaten voor ontdekte host \"%1$s\"."
@@ -6028,7 +6028,7 @@ msgstr "Veld \"%1$s\" kan niet worden ingesteld op NULL."
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:493
 #: include/classes/api/services/CDRule.php:503
-#: include/classes/api/services/CHostGroup.php:906
+#: include/classes/api/services/CHostGroup.php:907
 #: include/classes/api/services/CHost.php:747
 #: include/classes/api/services/CTemplate.php:793
 #: include/classes/validators/CNewValidator.php:256
@@ -6637,12 +6637,12 @@ msgstr "Raster"
 msgid "Group"
 msgstr "Groep"
 
-#: include/classes/api/services/CHostGroup.php:712
+#: include/classes/api/services/CHostGroup.php:713
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used by a host prototype."
 msgstr "Groep \"%1$s\" kan niet worden verwijderd omdat het wordt gebruikt door een host-prototype."
 
-#: include/classes/api/services/CHostGroup.php:756
+#: include/classes/api/services/CHostGroup.php:757
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used in a correlation condition."
 msgstr ""
@@ -6961,7 +6961,7 @@ msgstr[1] "Hosts"
 msgid "Host \"%1$s\" already exists."
 msgstr "Host \"%1$s\" bestaat reeds."
 
-#: include/classes/api/services/CHostGroup.php:1452
+#: include/classes/api/services/CHostGroup.php:1453
 #: include/classes/api/services/CHost.php:813
 #: include/classes/api/services/CHost.php:1692
 #: include/classes/api/services/CHost.php:1881
@@ -7035,17 +7035,17 @@ msgstr[1] "Hosts ingeschakeld"
 msgid "Host group"
 msgstr "Hostgroep"
 
-#: include/classes/api/services/CHostGroup.php:640
+#: include/classes/api/services/CHostGroup.php:641
 #, c-format
 msgid "Host group \"%1$s\" already exists."
 msgstr "Host groep \"%1$s\" bestaat al."
 
-#: include/classes/api/services/CHostGroup.php:741
+#: include/classes/api/services/CHostGroup.php:742
 #, c-format
 msgid "Host group \"%1$s\" cannot be deleted, because it is used in a global script."
 msgstr "Host groep \"%1$s\" kan niet worden verwijderd, omdat het wordt gebruikt in een globaal script.Host groep \"%1$s\" kan niet worden verwijderd, omdat het wordt gebruikt in een globaal script.Host groep \"%1$s\" kan niet worden verwijderd, omdat het wordt gebruikt in een globaal script.Host groep \"%1$s\" kan niet worden verwijderd, omdat het wordt gebruikt in een globaal script."
 
-#: include/classes/api/services/CHostGroup.php:698
+#: include/classes/api/services/CHostGroup.php:699
 #, c-format
 msgid "Host group \"%1$s\" is internal and can not be deleted."
 msgstr "Host groep \"%1$s\" is intern en kan niet verwijderd worden."
@@ -11418,13 +11418,13 @@ msgstr ""
 #: include/classes/api/services/CGraphPrototype.php:717
 #: include/classes/api/services/CHostBase.php:49
 #: include/classes/api/services/CHostGeneral.php:56
-#: include/classes/api/services/CHostGroup.php:693
-#: include/classes/api/services/CHostGroup.php:797
-#: include/classes/api/services/CHostGroup.php:1036
-#: include/classes/api/services/CHostGroup.php:1067
-#: include/classes/api/services/CHostGroup.php:1168
-#: include/classes/api/services/CHostGroup.php:1290
-#: include/classes/api/services/CHostGroup.php:1310
+#: include/classes/api/services/CHostGroup.php:694
+#: include/classes/api/services/CHostGroup.php:798
+#: include/classes/api/services/CHostGroup.php:1037
+#: include/classes/api/services/CHostGroup.php:1068
+#: include/classes/api/services/CHostGroup.php:1169
+#: include/classes/api/services/CHostGroup.php:1291
+#: include/classes/api/services/CHostGroup.php:1311
 #: include/classes/api/services/CHostInterface.php:239
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
@@ -11984,7 +11984,7 @@ msgstr ""
 msgid "One"
 msgstr ""
 
-#: include/classes/api/services/CHostGroup.php:1178
+#: include/classes/api/services/CHostGroup.php:1179
 msgid "One of the objects is left without a host group."
 msgstr ""
 
@@ -11997,7 +11997,7 @@ msgstr ""
 msgid "One-time downtime"
 msgstr "Eenmalige onderbreking"
 
-#: include/classes/api/services/CHostGroup.php:652
+#: include/classes/api/services/CHostGroup.php:653
 msgid "Only Super Admins can create host groups."
 msgstr "Alleen hoofdbeheerders kunnen hostgroepen aanmaken."
 
@@ -15475,7 +15475,7 @@ msgstr "Template"
 msgid "Template \"%1$s\" already exists."
 msgstr ""
 
-#: include/classes/api/services/CHostGroup.php:1457
+#: include/classes/api/services/CHostGroup.php:1458
 #: include/classes/api/services/CTemplate.php:368
 #: include/classes/api/services/CTemplate.php:997
 #, c-format

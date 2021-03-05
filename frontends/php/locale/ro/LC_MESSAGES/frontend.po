@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 19:52+0200\n"
+"POT-Creation-Date: 2021-03-05 19:51+0200\n"
 "PO-Revision-Date: 2020-02-08 23:47+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -1965,7 +1965,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: include/classes/api/services/CHostGroup.php:1489
+#: include/classes/api/services/CHostGroup.php:1490
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
@@ -2735,7 +2735,7 @@ msgstr "Nu se poate actualiza \"templateid\" pentru ecranul șablon \"%1$s\"."
 msgid "Cannot update a discovered graph."
 msgstr "Nu se poate actualiza un grafic bazat pe detecție."
 
-#: include/classes/api/services/CHostGroup.php:789
+#: include/classes/api/services/CHostGroup.php:790
 msgid "Cannot update a discovered host group."
 msgstr "Nu se poate actualiza un grup de servere bazat pe detecție."
 
@@ -2807,9 +2807,9 @@ msgstr "Nu se poate actualiza prototipul grafic"
 msgid "Cannot update group"
 msgstr "Nu se poate actualiza grupul"
 
-#: include/classes/api/services/CHostGroup.php:995
-#: include/classes/api/services/CHostGroup.php:1099
-#: include/classes/api/services/CHostGroup.php:1235
+#: include/classes/api/services/CHostGroup.php:996
+#: include/classes/api/services/CHostGroup.php:1100
+#: include/classes/api/services/CHostGroup.php:1236
 #, c-format
 msgid "Cannot update groups for discovered host \"%1$s\"."
 msgstr "Nu se pot actualiza grupurile pentru serverul detectat \"%1$s\"."
@@ -6096,7 +6096,7 @@ msgstr "Câmpul \"%1$s\" nu poate fi pus NULL."
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:493
 #: include/classes/api/services/CDRule.php:503
-#: include/classes/api/services/CHostGroup.php:906
+#: include/classes/api/services/CHostGroup.php:907
 #: include/classes/api/services/CHost.php:747
 #: include/classes/api/services/CTemplate.php:793
 #: include/classes/validators/CNewValidator.php:256
@@ -6706,12 +6706,12 @@ msgstr "Grilă"
 msgid "Group"
 msgstr "Grup"
 
-#: include/classes/api/services/CHostGroup.php:712
+#: include/classes/api/services/CHostGroup.php:713
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used by a host prototype."
 msgstr "Grupul \"%1$s\" nu poate fi șters, pentru că este utilizat de un server prototip "
 
-#: include/classes/api/services/CHostGroup.php:756
+#: include/classes/api/services/CHostGroup.php:757
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used in a correlation condition."
 msgstr ""
@@ -7034,7 +7034,7 @@ msgstr[2] "Server"
 msgid "Host \"%1$s\" already exists."
 msgstr "Serverul \"%1$s\" există deja."
 
-#: include/classes/api/services/CHostGroup.php:1452
+#: include/classes/api/services/CHostGroup.php:1453
 #: include/classes/api/services/CHost.php:813
 #: include/classes/api/services/CHost.php:1692
 #: include/classes/api/services/CHost.php:1881
@@ -7110,17 +7110,17 @@ msgstr[2] "Servere activate"
 msgid "Host group"
 msgstr "Grup server"
 
-#: include/classes/api/services/CHostGroup.php:640
+#: include/classes/api/services/CHostGroup.php:641
 #, c-format
 msgid "Host group \"%1$s\" already exists."
 msgstr "Grupul server \"%1$s\" există deja."
 
-#: include/classes/api/services/CHostGroup.php:741
+#: include/classes/api/services/CHostGroup.php:742
 #, c-format
 msgid "Host group \"%1$s\" cannot be deleted, because it is used in a global script."
 msgstr "Grupul server \"%1$s\" nu poate fi șters, pentru că este utilizat într-un script global."
 
-#: include/classes/api/services/CHostGroup.php:698
+#: include/classes/api/services/CHostGroup.php:699
 #, c-format
 msgid "Host group \"%1$s\" is internal and can not be deleted."
 msgstr "Grupul server \"%1$s\" este intern și nu poate fi șters."
@@ -11509,13 +11509,13 @@ msgstr "Nicio permisiune de acces la sistem."
 #: include/classes/api/services/CGraphPrototype.php:717
 #: include/classes/api/services/CHostBase.php:49
 #: include/classes/api/services/CHostGeneral.php:56
-#: include/classes/api/services/CHostGroup.php:693
-#: include/classes/api/services/CHostGroup.php:797
-#: include/classes/api/services/CHostGroup.php:1036
-#: include/classes/api/services/CHostGroup.php:1067
-#: include/classes/api/services/CHostGroup.php:1168
-#: include/classes/api/services/CHostGroup.php:1290
-#: include/classes/api/services/CHostGroup.php:1310
+#: include/classes/api/services/CHostGroup.php:694
+#: include/classes/api/services/CHostGroup.php:798
+#: include/classes/api/services/CHostGroup.php:1037
+#: include/classes/api/services/CHostGroup.php:1068
+#: include/classes/api/services/CHostGroup.php:1169
+#: include/classes/api/services/CHostGroup.php:1291
+#: include/classes/api/services/CHostGroup.php:1311
 #: include/classes/api/services/CHostInterface.php:239
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
@@ -12075,7 +12075,7 @@ msgstr "Odată"
 msgid "One"
 msgstr ""
 
-#: include/classes/api/services/CHostGroup.php:1178
+#: include/classes/api/services/CHostGroup.php:1179
 msgid "One of the objects is left without a host group."
 msgstr "Unul dintre obiecte este lăsat fără grup servere."
 
@@ -12088,7 +12088,7 @@ msgstr "O singură dată"
 msgid "One-time downtime"
 msgstr "Întrerupere unică"
 
-#: include/classes/api/services/CHostGroup.php:652
+#: include/classes/api/services/CHostGroup.php:653
 msgid "Only Super Admins can create host groups."
 msgstr "Numai super administratorii pot crea grupuri de servere."
 
@@ -15572,7 +15572,7 @@ msgstr "Șablon"
 msgid "Template \"%1$s\" already exists."
 msgstr "Șablonul \"%1$s\" există deja."
 
-#: include/classes/api/services/CHostGroup.php:1457
+#: include/classes/api/services/CHostGroup.php:1458
 #: include/classes/api/services/CTemplate.php:368
 #: include/classes/api/services/CTemplate.php:997
 #, c-format

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 19:52+0200\n"
+"POT-Creation-Date: 2021-03-05 19:51+0200\n"
 "PO-Revision-Date: 2019-03-19 11:57+0300\n"
 "Last-Translator: Oleksii <oleksii.zagorskyi@zabbix.com>\n"
 "Language-Team: \n"
@@ -1938,7 +1938,7 @@ msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must con
 msgstr[0] "Cannot delete host because maintenance \"%1$s\" must contain at least one host or host group."
 msgstr[1] "Cannot delete selected hosts because maintenance \"%1$s\" must contain at least one host or host group."
 
-#: include/classes/api/services/CHostGroup.php:1489
+#: include/classes/api/services/CHostGroup.php:1490
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
@@ -2678,7 +2678,7 @@ msgstr "Cannot update \"templateid\" for template screen \"%1$s\"."
 msgid "Cannot update a discovered graph."
 msgstr "Cannot update a discovered graph."
 
-#: include/classes/api/services/CHostGroup.php:789
+#: include/classes/api/services/CHostGroup.php:790
 msgid "Cannot update a discovered host group."
 msgstr "Cannot update a discovered host group."
 
@@ -2749,9 +2749,9 @@ msgstr "Cannot update graph prototype"
 msgid "Cannot update group"
 msgstr "Cannot update group"
 
-#: include/classes/api/services/CHostGroup.php:995
-#: include/classes/api/services/CHostGroup.php:1099
-#: include/classes/api/services/CHostGroup.php:1235
+#: include/classes/api/services/CHostGroup.php:996
+#: include/classes/api/services/CHostGroup.php:1100
+#: include/classes/api/services/CHostGroup.php:1236
 #, c-format
 msgid "Cannot update groups for discovered host \"%1$s\"."
 msgstr "Cannot update groups for discovered host \"%1$s\"."
@@ -6024,7 +6024,7 @@ msgstr "Field \"%1$s\" cannot be set to NULL."
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:493
 #: include/classes/api/services/CDRule.php:503
-#: include/classes/api/services/CHostGroup.php:906
+#: include/classes/api/services/CHostGroup.php:907
 #: include/classes/api/services/CHost.php:747
 #: include/classes/api/services/CTemplate.php:793
 #: include/classes/validators/CNewValidator.php:256
@@ -6633,12 +6633,12 @@ msgstr "Grid"
 msgid "Group"
 msgstr "Group"
 
-#: include/classes/api/services/CHostGroup.php:712
+#: include/classes/api/services/CHostGroup.php:713
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used by a host prototype."
 msgstr "Group \"%1$s\" cannot be deleted, because it is used by a host prototype."
 
-#: include/classes/api/services/CHostGroup.php:756
+#: include/classes/api/services/CHostGroup.php:757
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used in a correlation condition."
 msgstr "Group \"%1$s\" cannot be deleted, because it is used in a correlation condition."
@@ -6957,7 +6957,7 @@ msgstr[1] "Hosts"
 msgid "Host \"%1$s\" already exists."
 msgstr "Host \"%1$s\" already exists."
 
-#: include/classes/api/services/CHostGroup.php:1452
+#: include/classes/api/services/CHostGroup.php:1453
 #: include/classes/api/services/CHost.php:813
 #: include/classes/api/services/CHost.php:1692
 #: include/classes/api/services/CHost.php:1881
@@ -7031,17 +7031,17 @@ msgstr[1] "Hosts enabled"
 msgid "Host group"
 msgstr "Host group"
 
-#: include/classes/api/services/CHostGroup.php:640
+#: include/classes/api/services/CHostGroup.php:641
 #, c-format
 msgid "Host group \"%1$s\" already exists."
 msgstr "Host group \"%1$s\" already exists."
 
-#: include/classes/api/services/CHostGroup.php:741
+#: include/classes/api/services/CHostGroup.php:742
 #, c-format
 msgid "Host group \"%1$s\" cannot be deleted, because it is used in a global script."
 msgstr "Host group \"%1$s\" cannot be deleted, because it is used in a global script."
 
-#: include/classes/api/services/CHostGroup.php:698
+#: include/classes/api/services/CHostGroup.php:699
 #, c-format
 msgid "Host group \"%1$s\" is internal and can not be deleted."
 msgstr "Host group \"%1$s\" is internal and can not be deleted."
@@ -11411,13 +11411,13 @@ msgstr "No permissions for system access."
 #: include/classes/api/services/CGraphPrototype.php:717
 #: include/classes/api/services/CHostBase.php:49
 #: include/classes/api/services/CHostGeneral.php:56
-#: include/classes/api/services/CHostGroup.php:693
-#: include/classes/api/services/CHostGroup.php:797
-#: include/classes/api/services/CHostGroup.php:1036
-#: include/classes/api/services/CHostGroup.php:1067
-#: include/classes/api/services/CHostGroup.php:1168
-#: include/classes/api/services/CHostGroup.php:1290
-#: include/classes/api/services/CHostGroup.php:1310
+#: include/classes/api/services/CHostGroup.php:694
+#: include/classes/api/services/CHostGroup.php:798
+#: include/classes/api/services/CHostGroup.php:1037
+#: include/classes/api/services/CHostGroup.php:1068
+#: include/classes/api/services/CHostGroup.php:1169
+#: include/classes/api/services/CHostGroup.php:1291
+#: include/classes/api/services/CHostGroup.php:1311
 #: include/classes/api/services/CHostInterface.php:239
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
@@ -11977,7 +11977,7 @@ msgstr "Once"
 msgid "One"
 msgstr "One"
 
-#: include/classes/api/services/CHostGroup.php:1178
+#: include/classes/api/services/CHostGroup.php:1179
 msgid "One of the objects is left without a host group."
 msgstr "One of the objects is left without a host group."
 
@@ -11990,7 +11990,7 @@ msgstr "One time only"
 msgid "One-time downtime"
 msgstr "One-time downtime"
 
-#: include/classes/api/services/CHostGroup.php:652
+#: include/classes/api/services/CHostGroup.php:653
 msgid "Only Super Admins can create host groups."
 msgstr "Only Super Admins can create host groups."
 
@@ -15468,7 +15468,7 @@ msgstr "Template"
 msgid "Template \"%1$s\" already exists."
 msgstr "Template \"%1$s\" already exists."
 
-#: include/classes/api/services/CHostGroup.php:1457
+#: include/classes/api/services/CHostGroup.php:1458
 #: include/classes/api/services/CTemplate.php:368
 #: include/classes/api/services/CTemplate.php:997
 #, c-format

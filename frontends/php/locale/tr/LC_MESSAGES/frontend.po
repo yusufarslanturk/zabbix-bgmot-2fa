@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 19:52+0200\n"
+"POT-Creation-Date: 2021-03-05 19:51+0200\n"
 "PO-Revision-Date: 2020-02-08 23:48+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix translation team\n"
@@ -1940,7 +1940,7 @@ msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must con
 msgstr[0] ""
 msgstr[1] ""
 
-#: include/classes/api/services/CHostGroup.php:1489
+#: include/classes/api/services/CHostGroup.php:1490
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
@@ -2680,7 +2680,7 @@ msgstr "Şablon ekranı \"%1$s\" için \"templateid\" güncellenemiyor."
 msgid "Cannot update a discovered graph."
 msgstr "Keşfedilmiş bir grafik güncellenemiyor."
 
-#: include/classes/api/services/CHostGroup.php:789
+#: include/classes/api/services/CHostGroup.php:790
 msgid "Cannot update a discovered host group."
 msgstr "Keşfedilmiş bir ana makine grubu güncellenemiyor."
 
@@ -2751,9 +2751,9 @@ msgstr "Grafik prototipi güncellenemiyor"
 msgid "Cannot update group"
 msgstr "Grup güncellenemiyor"
 
-#: include/classes/api/services/CHostGroup.php:995
-#: include/classes/api/services/CHostGroup.php:1099
-#: include/classes/api/services/CHostGroup.php:1235
+#: include/classes/api/services/CHostGroup.php:996
+#: include/classes/api/services/CHostGroup.php:1100
+#: include/classes/api/services/CHostGroup.php:1236
 #, c-format
 msgid "Cannot update groups for discovered host \"%1$s\"."
 msgstr "Keşfedilen ana makine \"%1$s\" için gruplar güncellenemiyor."
@@ -6026,7 +6026,7 @@ msgstr "\"%1$s\" alanı NULL olarak ayarlanamıyor."
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:493
 #: include/classes/api/services/CDRule.php:503
-#: include/classes/api/services/CHostGroup.php:906
+#: include/classes/api/services/CHostGroup.php:907
 #: include/classes/api/services/CHost.php:747
 #: include/classes/api/services/CTemplate.php:793
 #: include/classes/validators/CNewValidator.php:256
@@ -6635,12 +6635,12 @@ msgstr "Izgara"
 msgid "Group"
 msgstr "Grup"
 
-#: include/classes/api/services/CHostGroup.php:712
+#: include/classes/api/services/CHostGroup.php:713
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used by a host prototype."
 msgstr "\"%1$s\" grubu, bir ana makine prototipi tarafından kullanıldığı için silinemez."
 
-#: include/classes/api/services/CHostGroup.php:756
+#: include/classes/api/services/CHostGroup.php:757
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used in a correlation condition."
 msgstr "\"%1$s\" grubu, bir korelasyon koşulunda kullanıldığından silinemiyor."
@@ -6959,7 +6959,7 @@ msgstr[1] "Ana makineler"
 msgid "Host \"%1$s\" already exists."
 msgstr "\"%1$s\" ana makinesi zaten var."
 
-#: include/classes/api/services/CHostGroup.php:1452
+#: include/classes/api/services/CHostGroup.php:1453
 #: include/classes/api/services/CHost.php:813
 #: include/classes/api/services/CHost.php:1692
 #: include/classes/api/services/CHost.php:1881
@@ -7033,17 +7033,17 @@ msgstr[1] "Ana makineler etkin"
 msgid "Host group"
 msgstr "Ana makine grubu"
 
-#: include/classes/api/services/CHostGroup.php:640
+#: include/classes/api/services/CHostGroup.php:641
 #, c-format
 msgid "Host group \"%1$s\" already exists."
 msgstr "\"%1$s\" ana makine grubu zaten var."
 
-#: include/classes/api/services/CHostGroup.php:741
+#: include/classes/api/services/CHostGroup.php:742
 #, c-format
 msgid "Host group \"%1$s\" cannot be deleted, because it is used in a global script."
 msgstr "\"%1$s\" adlı ana makine grubu, genel bir komut dizisinde kullanıldığından silinemiyor."
 
-#: include/classes/api/services/CHostGroup.php:698
+#: include/classes/api/services/CHostGroup.php:699
 #, c-format
 msgid "Host group \"%1$s\" is internal and can not be deleted."
 msgstr "\"%1$s\" ana makine grubu dahilidir ve silinemez."
@@ -11413,13 +11413,13 @@ msgstr "Sistem erişimi için izin yok."
 #: include/classes/api/services/CGraphPrototype.php:717
 #: include/classes/api/services/CHostBase.php:49
 #: include/classes/api/services/CHostGeneral.php:56
-#: include/classes/api/services/CHostGroup.php:693
-#: include/classes/api/services/CHostGroup.php:797
-#: include/classes/api/services/CHostGroup.php:1036
-#: include/classes/api/services/CHostGroup.php:1067
-#: include/classes/api/services/CHostGroup.php:1168
-#: include/classes/api/services/CHostGroup.php:1290
-#: include/classes/api/services/CHostGroup.php:1310
+#: include/classes/api/services/CHostGroup.php:694
+#: include/classes/api/services/CHostGroup.php:798
+#: include/classes/api/services/CHostGroup.php:1037
+#: include/classes/api/services/CHostGroup.php:1068
+#: include/classes/api/services/CHostGroup.php:1169
+#: include/classes/api/services/CHostGroup.php:1291
+#: include/classes/api/services/CHostGroup.php:1311
 #: include/classes/api/services/CHostInterface.php:239
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
@@ -11979,7 +11979,7 @@ msgstr "Bir kere"
 msgid "One"
 msgstr "Bir"
 
-#: include/classes/api/services/CHostGroup.php:1178
+#: include/classes/api/services/CHostGroup.php:1179
 msgid "One of the objects is left without a host group."
 msgstr "Nesnelerden biri, ana makine grubu olmadan bırakıldı."
 
@@ -11992,7 +11992,7 @@ msgstr "Yalnızca bir kere"
 msgid "One-time downtime"
 msgstr "Bir kerelik aksama süresi"
 
-#: include/classes/api/services/CHostGroup.php:652
+#: include/classes/api/services/CHostGroup.php:653
 msgid "Only Super Admins can create host groups."
 msgstr "Yalnızca Süper Yöneticiler ana makine grupları oluşturabilir."
 
@@ -15471,7 +15471,7 @@ msgstr "Şablon"
 msgid "Template \"%1$s\" already exists."
 msgstr "\"%1$s\" şablonu zaten var."
 
-#: include/classes/api/services/CHostGroup.php:1457
+#: include/classes/api/services/CHostGroup.php:1458
 #: include/classes/api/services/CTemplate.php:368
 #: include/classes/api/services/CTemplate.php:997
 #, c-format

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 19:52+0200\n"
+"POT-Creation-Date: 2021-03-05 19:51+0200\n"
 "PO-Revision-Date: 2021-01-25 11:37+0300\n"
 "Last-Translator: Marlon <Marlon@outlook.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -1940,7 +1940,7 @@ msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must con
 msgstr[0] "Não foi possível excluir o host porque a manutenção \"%1$s\" deve conter pelo menos um host ou grupo de hosts."
 msgstr[1] "Não foi possível os hosts selecionados porque a manutenção \"%1$s\" deve conter pelo menos um host ou grupo de hosts."
 
-#: include/classes/api/services/CHostGroup.php:1489
+#: include/classes/api/services/CHostGroup.php:1490
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
@@ -2680,7 +2680,7 @@ msgstr "Não foi possível atualizar o \"templateid\" para o template de tela \"
 msgid "Cannot update a discovered graph."
 msgstr "Não é possível atualizar um gráfico descoberto."
 
-#: include/classes/api/services/CHostGroup.php:789
+#: include/classes/api/services/CHostGroup.php:790
 msgid "Cannot update a discovered host group."
 msgstr "Não é possível atualizar um grupo de hosts descoberto."
 
@@ -2751,9 +2751,9 @@ msgstr "Não foi possível atualizar o protótipo de gráfico"
 msgid "Cannot update group"
 msgstr "Grupo não foi atualizado"
 
-#: include/classes/api/services/CHostGroup.php:995
-#: include/classes/api/services/CHostGroup.php:1099
-#: include/classes/api/services/CHostGroup.php:1235
+#: include/classes/api/services/CHostGroup.php:996
+#: include/classes/api/services/CHostGroup.php:1100
+#: include/classes/api/services/CHostGroup.php:1236
 #, c-format
 msgid "Cannot update groups for discovered host \"%1$s\"."
 msgstr "Não é possível atualizar os grupos para o host descoberto \"%1$s\"."
@@ -6029,7 +6029,7 @@ msgstr "O campo \"%1$s\" não pode ser definido como NULO."
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:493
 #: include/classes/api/services/CDRule.php:503
-#: include/classes/api/services/CHostGroup.php:906
+#: include/classes/api/services/CHostGroup.php:907
 #: include/classes/api/services/CHost.php:747
 #: include/classes/api/services/CTemplate.php:793
 #: include/classes/validators/CNewValidator.php:256
@@ -6638,12 +6638,12 @@ msgstr "Grade"
 msgid "Group"
 msgstr "Grupo"
 
-#: include/classes/api/services/CHostGroup.php:712
+#: include/classes/api/services/CHostGroup.php:713
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used by a host prototype."
 msgstr "O grupo \"%1$s\" não pode ser excluído por ser utilizado em um protótipo de host."
 
-#: include/classes/api/services/CHostGroup.php:756
+#: include/classes/api/services/CHostGroup.php:757
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used in a correlation condition."
 msgstr "O grupo \"%1$s\" não pode ser excluído, pois é utilizado em condição de correlacionamento."
@@ -6962,7 +6962,7 @@ msgstr[1] "Hosts"
 msgid "Host \"%1$s\" already exists."
 msgstr "O host \"%1$s\" já existe."
 
-#: include/classes/api/services/CHostGroup.php:1452
+#: include/classes/api/services/CHostGroup.php:1453
 #: include/classes/api/services/CHost.php:813
 #: include/classes/api/services/CHost.php:1692
 #: include/classes/api/services/CHost.php:1881
@@ -7036,17 +7036,17 @@ msgstr[1] "Hosts ativados"
 msgid "Host group"
 msgstr "Grupo de hosts"
 
-#: include/classes/api/services/CHostGroup.php:640
+#: include/classes/api/services/CHostGroup.php:641
 #, c-format
 msgid "Host group \"%1$s\" already exists."
 msgstr "O grupo de hosts \"%1$s\" já existe."
 
-#: include/classes/api/services/CHostGroup.php:741
+#: include/classes/api/services/CHostGroup.php:742
 #, c-format
 msgid "Host group \"%1$s\" cannot be deleted, because it is used in a global script."
 msgstr "O grupo de hosts \"%1$s\" não pode ser excluído pois é utilizado por um script global."
 
-#: include/classes/api/services/CHostGroup.php:698
+#: include/classes/api/services/CHostGroup.php:699
 #, c-format
 msgid "Host group \"%1$s\" is internal and can not be deleted."
 msgstr "O grupo de hosts \"%1$s\" é interno e não pode ser excluído."
@@ -11424,13 +11424,13 @@ msgstr "Sem permissão de acesso ao sistema."
 #: include/classes/api/services/CGraphPrototype.php:717
 #: include/classes/api/services/CHostBase.php:49
 #: include/classes/api/services/CHostGeneral.php:56
-#: include/classes/api/services/CHostGroup.php:693
-#: include/classes/api/services/CHostGroup.php:797
-#: include/classes/api/services/CHostGroup.php:1036
-#: include/classes/api/services/CHostGroup.php:1067
-#: include/classes/api/services/CHostGroup.php:1168
-#: include/classes/api/services/CHostGroup.php:1290
-#: include/classes/api/services/CHostGroup.php:1310
+#: include/classes/api/services/CHostGroup.php:694
+#: include/classes/api/services/CHostGroup.php:798
+#: include/classes/api/services/CHostGroup.php:1037
+#: include/classes/api/services/CHostGroup.php:1068
+#: include/classes/api/services/CHostGroup.php:1169
+#: include/classes/api/services/CHostGroup.php:1291
+#: include/classes/api/services/CHostGroup.php:1311
 #: include/classes/api/services/CHostInterface.php:239
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
@@ -11990,7 +11990,7 @@ msgstr "Uma vez"
 msgid "One"
 msgstr "Um"
 
-#: include/classes/api/services/CHostGroup.php:1178
+#: include/classes/api/services/CHostGroup.php:1179
 msgid "One of the objects is left without a host group."
 msgstr "Um dos objetos está sem um grupo de hosts."
 
@@ -12003,7 +12003,7 @@ msgstr "Apenas uma vez"
 msgid "One-time downtime"
 msgstr "Downtime único"
 
-#: include/classes/api/services/CHostGroup.php:652
+#: include/classes/api/services/CHostGroup.php:653
 msgid "Only Super Admins can create host groups."
 msgstr "Apenas os super administradores podem criar grupos de hosts."
 
@@ -15481,7 +15481,7 @@ msgstr "Template"
 msgid "Template \"%1$s\" already exists."
 msgstr "O template \"%1$s\" já existe."
 
-#: include/classes/api/services/CHostGroup.php:1457
+#: include/classes/api/services/CHostGroup.php:1458
 #: include/classes/api/services/CTemplate.php:368
 #: include/classes/api/services/CTemplate.php:997
 #, c-format
