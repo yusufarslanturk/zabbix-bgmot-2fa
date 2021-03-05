@@ -624,7 +624,7 @@ static void	add_sentusers_msg_esc_cancel(ZBX_USER_MSG **user_msg, zbx_uint64_t a
 		const char *error)
 {
 	const char	*__function_name = "add_sentusers_msg_esc_cancel";
-	char		*subject_dyn, *message_dyn, *sql = NULL;
+	char		*message_dyn, *sql = NULL;
 	DB_RESULT	result;
 	DB_ROW		row;
 	zbx_uint64_t	userid, mediatypeid, userid_prev = 0, mediatypeid_prev = 0;
@@ -675,18 +675,11 @@ static void	add_sentusers_msg_esc_cancel(ZBX_USER_MSG **user_msg, zbx_uint64_t a
 				break;
 		}
 
-		subject_dyn = zbx_strdup(NULL, row[2]);
 		message_dyn = zbx_dsprintf(NULL, "NOTE: Escalation cancelled: %s\nLast message sent:\n%s", error,
 				row[3]);
 
-		substitute_simple_macros(&actionid, event, NULL, &userid, NULL, NULL, NULL, NULL,
-				NULL, &subject_dyn, MACRO_TYPE_MESSAGE_NORMAL, NULL, 0);
-		substitute_simple_macros(&actionid, event, NULL, &userid, NULL, NULL, NULL, NULL,
-				NULL, &message_dyn, MACRO_TYPE_MESSAGE_NORMAL, NULL, 0);
+		add_user_msg(userid, mediatypeid, user_msg, row[2], message_dyn, 0);
 
-		add_user_msg(userid, mediatypeid, user_msg, subject_dyn, message_dyn, 0);
-
-		zbx_free(subject_dyn);
 		zbx_free(message_dyn);
 	}
 	DBfree_result(result);
