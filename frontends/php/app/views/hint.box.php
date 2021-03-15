@@ -30,25 +30,25 @@ function makeEventList(array $data) {
 	// Show trigger description and URL.
 	$div = new CDiv();
 
-	if ($data['trigger_comments'] !== '') {
+	if ($data['trigger']['comments'] !== '') {
 		$div->addItem(
 			(new CDiv())
-				->addItem(zbx_str2links($data['trigger_comments']))
+				->addItem(zbx_str2links($data['trigger']['comments']))
 				->addClass(ZBX_STYLE_OVERLAY_DESCR)
 				->addStyle('max-width: 500px')
 		);
 	}
 
-	if ($data['trigger_url'] !== '') {
-		$trigger_url = CHtmlUrlValidator::validate($data['trigger_url'], false)
-			? $data['trigger_url']
+	if ($data['trigger']['url'] !== '') {
+		$trigger_url = CHtmlUrlValidator::validate($data['trigger']['url'], false)
+			? $data['trigger']['url']
 			: 'javascript: alert(\''._s('Provided URL "%1$s" is invalid.',
-					zbx_jsvalue($data['trigger_url'], false, false)).
+					zbx_jsvalue($data['trigger']['url'], false, false)).
 				'\');';
 
 		$div->addItem(
 			(new CDiv())
-				->addItem(new CLink(CHtml::encode($data['trigger_url']), $trigger_url))
+				->addItem(new CLink(CHtml::encode($data['trigger']['url']), $trigger_url))
 				->addClass(ZBX_STYLE_OVERLAY_DESCR_URL)
 				->addStyle('max-width: 500px')
 		);

@@ -68,6 +68,21 @@ class CControllerHintBox extends CController {
 	 * @return array|null
 	 */
 	private static function getHintDataEventList(array $data) {
+		$triggers = API::Trigger()->get([
+			'output' => ['triggerid', 'expression', 'comments', 'url'],
+			'triggerids' => $data['triggerid'],
+			'preservekeys' => true
+		]);
+
+		if (!$triggers) {
+			error(_('No permissions to referred object or it does not exist!'));
+
+			return null;
+		}
+
+		$triggers = CMacrosResolverHelper::resolveTriggerUrls($triggers);
+		$trigger = reset($triggers);
+
 		$options = [
 			'output' => ['eventid', 'r_eventid', 'clock', 'ns', 'objectid', 'acknowledged'],
 			'select_acknowledges' => ['action'],
@@ -86,12 +101,6 @@ class CControllerHintBox extends CController {
 		}
 
 		$problems = API::Event()->get($options);
-
-		if (!$problems) {
-			error(_('No permissions to referred object or it does not exist!'));
-
-			return null;
-		}
 
 		CArrayHelper::sort($problems, [
 			['field' => 'clock', 'order' => ZBX_SORT_DOWN],
@@ -126,11 +135,22 @@ class CControllerHintBox extends CController {
 				$problem['correlationid'] = 0;
 				$problem['userid'] = 0;
 			}
+
+			if (bccomp($problem['eventid'], $data['eventid_till']) == 0) {
+				$trigger['comments'] = CMacrosResolverHelper::resolveTriggerDescription($trigger + [
+					'clock' => $problem['clock'],
+					'ns' => $problem['ns']
+				], ['events' => true]);
+			}
 		}
 		unset($problem);
 
-		$data['problems'] = $problems;
-
-		return $data;
+		return [
+			'trigger' => [
+				'comments' => $trigger['comments'],
+				'url' => $trigger['url']
+			],
+			'problems' => $problems
+		] + $data;
 	}
 }

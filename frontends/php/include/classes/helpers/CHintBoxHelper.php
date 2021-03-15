@@ -24,10 +24,7 @@ class CHintBoxHelper {
 	/**
 	 * Prepare data for a hint with trigger events and, if defined, trigger description and a clickable URL.
 	 *
-	 * @param array  $trigger                    An array of trigger data.
-	 * @param string $trigger['triggerid']       Trigger ID to select events.
-	 * @param string $trigger['comments']        Trigger description.
-	 * @param string $trigger['url']             Trigger URL.
+	 * @param string $triggerid                  Trigger ID to select events.
 	 * @param string $eventid_till
 	 * @param string $backurl                    URL used by acknowledgment page.
 	 * @param bool   $show_timeline              (optional) Show time line flag.
@@ -48,15 +45,13 @@ class CHintBoxHelper {
 	 *
 	 * @return array
 	 */
-	public static function getEventList(array $trigger, $eventid_till, $backurl, $show_timeline = true,
+	public static function getEventList($triggerid, $eventid_till, $backurl, $show_timeline = true,
 			$show_tags = PROBLEMS_SHOW_TAGS_3, array $filter_tags = [], $tag_name_format = PROBLEMS_TAG_NAME_FULL,
 			$tag_priority = '') {
 		$data = [
 			'type' => 'eventlist',
 			'data' => [
-				'triggerid' => $trigger['triggerid'],
-				'trigger_comments' => $trigger['comments'],
-				'trigger_url' => $trigger['url'],
+				'triggerid' => $triggerid,
 				'eventid_till' => $eventid_till,
 				'backurl' => $backurl,
 				'show_timeline' => (int) $show_timeline,
