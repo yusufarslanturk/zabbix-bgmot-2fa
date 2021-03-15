@@ -82,7 +82,7 @@ function makeEventList(array $data) {
 	$last_clock = 0;
 
 	if ($data['problems'] && $data['show_tags'] != PROBLEMS_SHOW_TAGS_NONE) {
-		$tags = makeTags($data['problems'], true, 'eventid', (bool) $data['show_tags'],
+		$tags = makeTags($data['problems'], true, 'eventid', $data['show_tags'],
 			array_key_exists('filter_tags', $data) ? $data['filter_tags'] : [], $data['tag_name_format'],
 			$data['tag_priority']
 		);
