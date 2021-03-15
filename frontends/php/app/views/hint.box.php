@@ -57,7 +57,7 @@ function makeEventList(array $data) {
 	// sort field indicator
 	$sort_div = (new CSpan())->addClass(ZBX_STYLE_ARROW_DOWN);
 
-	if ((bool) $data['show_timeline']) {
+	if ($data['show_timeline']) {
 		$header = [
 			(new CColHeader([_('Time'), $sort_div]))->addClass(ZBX_STYLE_RIGHT),
 			(new CColHeader())->addClass(ZBX_STYLE_TIMELINE_TH),
@@ -82,9 +82,8 @@ function makeEventList(array $data) {
 	$last_clock = 0;
 
 	if ($data['problems'] && $data['show_tags'] != PROBLEMS_SHOW_TAGS_NONE) {
-		$tags = makeTags($data['problems'], true, 'eventid', $data['show_tags'],
-			array_key_exists('filter_tags', $data) ? $data['filter_tags'] : [], $data['tag_name_format'],
-			$data['tag_priority']
+		$tags = makeTags($data['problems'], true, 'eventid', $data['show_tags'], $data['filter_tags'],
+			$data['tag_name_format'], $data['tag_priority']
 		);
 	}
 
@@ -136,7 +135,7 @@ function makeEventList(array $data) {
 		// Add colors and blinking to span depending on configuration and trigger parameters.
 		addTriggerValueStyle($cell_status, $value, $value_clock, $problem['acknowledged'] == EVENT_ACKNOWLEDGED);
 
-		if ((bool) $data['show_timeline']) {
+		if ($data['show_timeline']) {
 			if ($last_clock != 0) {
 				CScreenProblem::addTimelineBreakpoint($table, $last_clock, $problem['clock'], ZBX_SORT_DOWN);
 			}

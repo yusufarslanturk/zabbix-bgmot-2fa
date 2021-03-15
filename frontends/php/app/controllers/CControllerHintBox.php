@@ -63,7 +63,22 @@ class CControllerHintBox extends CController {
 	 * @param array  $data
 	 * @param string $data['triggerid']
 	 * @param string $data['eventid_till']
-	 * @param string $data['show_tags']
+	 * @param string $data['backurl']                    URL used by acknowledgment page.
+	 * @param int    $data['show_timeline']              Show time line flag.
+	 * @param int    $data['show_tags']                  Show tags flag. Possible values:
+	 *                                                     - PROBLEMS_SHOW_TAGS_NONE;
+	 *                                                     - PROBLEMS_SHOW_TAGS_1;
+	 *                                                     - PROBLEMS_SHOW_TAGS_2;
+	 *                                                     - PROBLEMS_SHOW_TAGS_3 (default).
+	 * @param array  $data['filter_tags']                (optional) An array of tag filtering data.
+	 * @param string $data['filter_tags'][]['tag']       Tag name.
+	 * @param int    $data['filter_tags'][]['operator']  Tag operator.
+	 * @param string $data['filter_tags'][]['value']     Tag value.
+	 * @param int    $data['tag_name_format']            Tag name format. Possible values:
+	 *                                                     - PROBLEMS_TAG_NAME_FULL (default);
+	 *                                                     - PROBLEMS_TAG_NAME_SHORTENED;
+	 *                                                     - PROBLEMS_TAG_NAME_NONE.
+	 * @param string $data['tag_priority']               A list of comma-separated tag names.
 	 *
 	 * @return array|null
 	 */
@@ -147,7 +162,13 @@ class CControllerHintBox extends CController {
 
 		return [
 			'trigger' => array_intersect_key($trigger, array_flip(['triggerid', 'comments', 'url'])),
-			'problems' => $problems
-		] + $data;
+			'problems' => $problems,
+			'backurl' => $data['backurl'],
+			'show_timeline' => (bool) $data['show_timeline'],
+			'show_tags' => $data['show_tags'],
+			'filter_tags' => array_key_exists('filter_tags', $data) ? $data['filter_tags'] : [],
+			'tag_name_format' => $data['tag_name_format'],
+			'tag_priority' => $data['tag_priority']
+		];
 	}
 }
