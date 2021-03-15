@@ -90,7 +90,7 @@ function makeEventList(array $data) {
 		}
 
 		$url_details = (new CUrl('tr_events.php'))
-			->setArgument('triggerid', '')
+			->setArgument('triggerid', $data['trigger']['triggerid'])
 			->setArgument('eventid', '');
 
 		foreach ($data['problems'] as $problem) {
@@ -114,9 +114,7 @@ function makeEventList(array $data) {
 				$value_clock = $in_closing ? time() : $problem['clock'];
 			}
 
-			$url_details
-				->setArgument('triggerid', $problem['objectid'])
-				->setArgument('eventid', $problem['eventid']);
+			$url_details->setArgument('eventid', $problem['eventid']);
 
 			$cell_clock = ($problem['clock'] >= $today)
 				? zbx_date2str(TIME_FORMAT_SECONDS, $problem['clock'])

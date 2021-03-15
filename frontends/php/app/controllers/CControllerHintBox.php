@@ -84,7 +84,7 @@ class CControllerHintBox extends CController {
 		$trigger = reset($triggers);
 
 		$options = [
-			'output' => ['eventid', 'r_eventid', 'clock', 'ns', 'objectid', 'acknowledged'],
+			'output' => ['eventid', 'r_eventid', 'clock', 'ns', 'acknowledged'],
 			'select_acknowledges' => ['action'],
 			'source' => EVENT_SOURCE_TRIGGERS,
 			'object' => EVENT_OBJECT_TRIGGER,
@@ -146,10 +146,7 @@ class CControllerHintBox extends CController {
 		unset($problem);
 
 		return [
-			'trigger' => [
-				'comments' => $trigger['comments'],
-				'url' => $trigger['url']
-			],
+			'trigger' => array_intersect_key($trigger, array_flip(['triggerid', 'comments', 'url'])),
 			'problems' => $problems
 		] + $data;
 	}
