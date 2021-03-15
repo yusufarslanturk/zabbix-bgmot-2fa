@@ -78,112 +78,110 @@ function makeEventList(array $data) {
 			($data['show_tags'] != PROBLEMS_SHOW_TAGS_NONE) ? _('Tags') : null
 		]));
 
-	if ($data['eventid_till'] != 0) {
-		$today = strtotime('today');
-		$last_clock = 0;
+	$today = strtotime('today');
+	$last_clock = 0;
 
-		if ($data['problems'] && $data['show_tags'] != PROBLEMS_SHOW_TAGS_NONE) {
-			$tags = makeTags($data['problems'], true, 'eventid', (bool) $data['show_tags'],
-				array_key_exists('filter_tags', $data) ? $data['filter_tags'] : [], $data['tag_name_format'],
-				$data['tag_priority']
-			);
+	if ($data['problems'] && $data['show_tags'] != PROBLEMS_SHOW_TAGS_NONE) {
+		$tags = makeTags($data['problems'], true, 'eventid', (bool) $data['show_tags'],
+			array_key_exists('filter_tags', $data) ? $data['filter_tags'] : [], $data['tag_name_format'],
+			$data['tag_priority']
+		);
+	}
+
+	$url_details = (new CUrl('tr_events.php'))
+		->setArgument('triggerid', $data['trigger']['triggerid'])
+		->setArgument('eventid', '');
+
+	foreach ($data['problems'] as $problem) {
+		if ($problem['r_eventid'] != 0) {
+			$value = TRIGGER_VALUE_FALSE;
+			$value_str = _('RESOLVED');
+			$value_clock = $problem['r_clock'];
+		}
+		else {
+			$in_closing = false;
+
+			foreach ($problem['acknowledges'] as $acknowledge) {
+				if (($acknowledge['action'] & ZBX_PROBLEM_UPDATE_CLOSE) == ZBX_PROBLEM_UPDATE_CLOSE) {
+					$in_closing = true;
+					break;
+				}
+			}
+
+			$value = $in_closing ? TRIGGER_VALUE_FALSE : TRIGGER_VALUE_TRUE;
+			$value_str = $in_closing ? _('CLOSING') : _('PROBLEM');
+			$value_clock = $in_closing ? time() : $problem['clock'];
 		}
 
-		$url_details = (new CUrl('tr_events.php'))
-			->setArgument('triggerid', $data['trigger']['triggerid'])
-			->setArgument('eventid', '');
+		$url_details->setArgument('eventid', $problem['eventid']);
 
-		foreach ($data['problems'] as $problem) {
-			if ($problem['r_eventid'] != 0) {
-				$value = TRIGGER_VALUE_FALSE;
-				$value_str = _('RESOLVED');
-				$value_clock = $problem['r_clock'];
+		$cell_clock = ($problem['clock'] >= $today)
+			? zbx_date2str(TIME_FORMAT_SECONDS, $problem['clock'])
+			: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['clock']);
+		$cell_clock = new CCol(new CLink($cell_clock, $url_details));
+		if ($problem['r_eventid'] != 0) {
+			$cell_r_clock = ($problem['r_clock'] >= $today)
+				? zbx_date2str(TIME_FORMAT_SECONDS, $problem['r_clock'])
+				: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['r_clock']);
+			$cell_r_clock = (new CCol(new CLink($cell_r_clock, $url_details)))
+				->addClass(ZBX_STYLE_NOWRAP)
+				->addClass(ZBX_STYLE_RIGHT);
+		}
+		else {
+			$cell_r_clock = '';
+		}
+
+		$cell_status = new CSpan($value_str);
+
+		// Add colors and blinking to span depending on configuration and trigger parameters.
+		addTriggerValueStyle($cell_status, $value, $value_clock, $problem['acknowledged'] == EVENT_ACKNOWLEDGED);
+
+		if ((bool) $data['show_timeline']) {
+			if ($last_clock != 0) {
+				CScreenProblem::addTimelineBreakpoint($table, $last_clock, $problem['clock'], ZBX_SORT_DOWN);
 			}
-			else {
-				$in_closing = false;
+			$last_clock = $problem['clock'];
 
-				foreach ($problem['acknowledges'] as $acknowledge) {
-					if (($acknowledge['action'] & ZBX_PROBLEM_UPDATE_CLOSE) == ZBX_PROBLEM_UPDATE_CLOSE) {
-						$in_closing = true;
-						break;
-					}
-				}
-
-				$value = $in_closing ? TRIGGER_VALUE_FALSE : TRIGGER_VALUE_TRUE;
-				$value_str = $in_closing ? _('CLOSING') : _('PROBLEM');
-				$value_clock = $in_closing ? time() : $problem['clock'];
-			}
-
-			$url_details->setArgument('eventid', $problem['eventid']);
-
-			$cell_clock = ($problem['clock'] >= $today)
-				? zbx_date2str(TIME_FORMAT_SECONDS, $problem['clock'])
-				: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['clock']);
-			$cell_clock = new CCol(new CLink($cell_clock, $url_details));
-			if ($problem['r_eventid'] != 0) {
-				$cell_r_clock = ($problem['r_clock'] >= $today)
-					? zbx_date2str(TIME_FORMAT_SECONDS, $problem['r_clock'])
-					: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['r_clock']);
-				$cell_r_clock = (new CCol(new CLink($cell_r_clock, $url_details)))
+			$row = [
+				$cell_clock->addClass(ZBX_STYLE_TIMELINE_DATE),
+				(new CCol())
+					->addClass(ZBX_STYLE_TIMELINE_AXIS)
+					->addClass(ZBX_STYLE_TIMELINE_DOT),
+				(new CCol())->addClass(ZBX_STYLE_TIMELINE_TD)
+			];
+		}
+		else {
+			$row = [
+				$cell_clock
 					->addClass(ZBX_STYLE_NOWRAP)
-					->addClass(ZBX_STYLE_RIGHT);
-			}
-			else {
-				$cell_r_clock = '';
-			}
-
-			$cell_status = new CSpan($value_str);
-
-			// Add colors and blinking to span depending on configuration and trigger parameters.
-			addTriggerValueStyle($cell_status, $value, $value_clock, $problem['acknowledged'] == EVENT_ACKNOWLEDGED);
-
-			if ((bool) $data['show_timeline']) {
-				if ($last_clock != 0) {
-					CScreenProblem::addTimelineBreakpoint($table, $last_clock, $problem['clock'], ZBX_SORT_DOWN);
-				}
-				$last_clock = $problem['clock'];
-
-				$row = [
-					$cell_clock->addClass(ZBX_STYLE_TIMELINE_DATE),
-					(new CCol())
-						->addClass(ZBX_STYLE_TIMELINE_AXIS)
-						->addClass(ZBX_STYLE_TIMELINE_DOT),
-					(new CCol())->addClass(ZBX_STYLE_TIMELINE_TD)
-				];
-			}
-			else {
-				$row = [
-					$cell_clock
-						->addClass(ZBX_STYLE_NOWRAP)
-						->addClass(ZBX_STYLE_RIGHT)
-				];
-			}
-
-			// Create acknowledge link.
-			$problem_update_url = (new CUrl('zabbix.php'))
-				->setArgument('action', 'acknowledge.edit')
-				->setArgument('eventids', [$problem['eventid']])
-				->setArgument('backurl', $data['backurl'])
-				->getUrl();
-
-			$acknowledged = ($problem['acknowledged'] == EVENT_ACKNOWLEDGED);
-			$problem_update_link = (new CLink($acknowledged ? _('Yes') : _('No'), $problem_update_url))
-				->addClass($acknowledged ? ZBX_STYLE_GREEN : ZBX_STYLE_RED)
-				->addClass(ZBX_STYLE_LINK_ALT);
-
-			$table->addRow(array_merge($row, [
-				$cell_r_clock,
-				$cell_status,
-				(new CCol(
-					($problem['r_eventid'] != 0)
-						? zbx_date2age($problem['clock'], $problem['r_clock'])
-						: zbx_date2age($problem['clock'])
-				))
-					->addClass(ZBX_STYLE_NOWRAP),
-				$problem_update_link,
-				($data['show_tags'] != PROBLEMS_SHOW_TAGS_NONE) ? $tags[$problem['eventid']] : null
-			]));
+					->addClass(ZBX_STYLE_RIGHT)
+			];
 		}
+
+		// Create acknowledge link.
+		$problem_update_url = (new CUrl('zabbix.php'))
+			->setArgument('action', 'acknowledge.edit')
+			->setArgument('eventids', [$problem['eventid']])
+			->setArgument('backurl', $data['backurl'])
+			->getUrl();
+
+		$acknowledged = ($problem['acknowledged'] == EVENT_ACKNOWLEDGED);
+		$problem_update_link = (new CLink($acknowledged ? _('Yes') : _('No'), $problem_update_url))
+			->addClass($acknowledged ? ZBX_STYLE_GREEN : ZBX_STYLE_RED)
+			->addClass(ZBX_STYLE_LINK_ALT);
+
+		$table->addRow(array_merge($row, [
+			$cell_r_clock,
+			$cell_status,
+			(new CCol(
+				($problem['r_eventid'] != 0)
+					? zbx_date2age($problem['clock'], $problem['r_clock'])
+					: zbx_date2age($problem['clock'])
+			))
+				->addClass(ZBX_STYLE_NOWRAP),
+			$problem_update_link,
+			($data['show_tags'] != PROBLEMS_SHOW_TAGS_NONE) ? $tags[$problem['eventid']] : null
+		]));
 	}
 
 	$div->addItem($table);
