@@ -21,6 +21,10 @@
 
 class CControllerHintBox extends CController {
 
+	protected function init() {
+		$this->disableSIDvalidation();
+	}
+
 	protected function checkInput() {
 		$fields = [
 			'type' => 'required|in eventlist',
