@@ -28,7 +28,7 @@ class CControllerHintBox extends CController {
 	protected function checkInput() {
 		$fields = [
 			'type' => 'required|in eventlist',
-			'data' => 'array'
+			'data' => 'required|array'
 		];
 
 		$ret = $this->validateInput($fields);
@@ -45,17 +45,12 @@ class CControllerHintBox extends CController {
 	}
 
 	protected function doAction() {
-		$data = $this->hasInput('data') ? $this->getInput('data') : [];
-
-		$hint_data = null;
-		if ($this->getInput('type') === 'eventlist') {
-			$hint_data = self::getHintDataEventList($data);
-		}
-
 		$output = [];
 
-		if ($hint_data !== null) {
-			$output['data'] = $hint_data;
+		switch ($this->getInput('type')) {
+			case 'eventlist':
+				$output['data'] = self::getHintDataEventList($this->getInput('data'));
+				break;
 		}
 
 		$this->setResponse(new CControllerResponseData($output));
