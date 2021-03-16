@@ -31,7 +31,7 @@ class CControllerHintBox extends CController {
 			'data' => 'required|array'
 		];
 
-		$ret = $this->validateInput($fields);
+		$ret = $this->validateInput($fields) && $this->validateInputData();
 
 		if (!$ret) {
 			$this->setResponse(new CControllerResponseData([]));
@@ -40,17 +40,80 @@ class CControllerHintBox extends CController {
 		return $ret;
 	}
 
+	private function validateInputData() {
+		$data = $this->getInput('data');
+
+		switch ($this->getInput('type')) {
+			case 'eventlist':
+				$fields = [
+					'triggerid' => 'required|db triggers.triggerid',
+					'eventid_till' => 'required|db events.eventid',
+					'backurl' => 'required|string',
+					'show_timeline' => 'required|in 0,1',
+					'show_tags' => 'required|in '.implode(',', [PROBLEMS_SHOW_TAGS_NONE, PROBLEMS_SHOW_TAGS_1, PROBLEMS_SHOW_TAGS_2, PROBLEMS_SHOW_TAGS_3]),
+					'filter_tags' => 'array',
+					'tag_name_format' => 'required|in '.implode(',', [PROBLEMS_TAG_NAME_FULL, PROBLEMS_TAG_NAME_SHORTENED, PROBLEMS_TAG_NAME_NONE]),
+					'tag_priority' => 'required|string'
+				];
+				break;
+		}
+
+		$validator = new CNewValidator($data, $fields);
+		array_map('error', $validator->getAllErrors());
+
+		$ret = !$validator->isError() && !$validator->isErrorFatal();
+
+		if ($ret) {
+			switch ($this->getInput('type')) {
+				case 'eventlist':
+					$ret = $this->validateInputFilterTags();
+					break;
+			}
+		}
+
+		return $ret;
+	}
+
+	private function validateInputFilterTags() {
+		$data = $this->getInput('data');
+		$filter_tags = array_key_exists('filter_tags', $data) ? $data['filter_tags'] : [];
+
+		foreach ($filter_tags as $filter_tag) {
+			$fields = [
+				'tag' => 'required|string',
+				'operator' => 'required|in '.implode(',', [TAG_OPERATOR_EQUAL, TAG_OPERATOR_LIKE]),
+				'value' => 'required|string'
+			];
+
+			$validator = new CNewValidator($filter_tag, $fields);
+			array_map('error', $validator->getAllErrors());
+
+			if ($validator->isError() || $validator->isErrorFatal()) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	protected function checkPermissions() {
 		return true;
 	}
 
 	protected function doAction() {
-		$output = [];
-
 		switch ($this->getInput('type')) {
 			case 'eventlist':
-				$output['data'] = self::getHintDataEventList($this->getInput('data'));
+				$hint_data = self::getHintDataEventList($this->getInput('data'));
 				break;
+
+			default:
+				$hint_data = null;
+		}
+
+		$output = [];
+
+		if ($hint_data !== null) {
+			$output['data'] = $hint_data;
 		}
 
 		$this->setResponse(new CControllerResponseData($output));
