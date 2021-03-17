@@ -589,7 +589,7 @@ class CHost extends CHostGeneral {
 
 		$this->addAuditBulk(AUDIT_ACTION_ADD, AUDIT_RESOURCE_HOST, $hosts);
 
-		return ['hostids' => array_column($hosts, 'hostid')];
+		return ['hostids' => zbx_objectValues($hosts, 'hostid')];
 	}
 
 	/**

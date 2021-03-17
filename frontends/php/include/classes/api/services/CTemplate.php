@@ -379,7 +379,7 @@ class CTemplate extends CHostGeneral {
 
 		$this->addAuditBulk(AUDIT_ACTION_ADD, AUDIT_RESOURCE_TEMPLATE, $templates);
 
-		return ['templateids' => array_column($templates, 'hostid')];
+		return ['templateids' => zbx_objectValues($templates, 'hostid')];
 	}
 
 	/**
