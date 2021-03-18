@@ -21,6 +21,7 @@
 
 require_once dirname(__FILE__).'/CHost.php';
 require_once dirname(__FILE__).'/CItem.php';
+require_once dirname(__FILE__).'/testJSONRPC.php';
 require_once dirname(__FILE__).'/testAPIInfo.php';
 require_once dirname(__FILE__).'/testAction.php';
 require_once dirname(__FILE__).'/testApplication.php';
@@ -54,6 +55,7 @@ class ApiJsonTests {
 
 //		$suite->addTestSuite('API_JSON_Host');
 //		$suite->addTestSuite('API_JSON_Item');
+		$suite->addTestSuite('testJSONRPC');
 		$suite->addTestSuite('testAPIInfo');
 		$suite->addTestSuite('testAction');
 		$suite->addTestSuite('testApplication');
