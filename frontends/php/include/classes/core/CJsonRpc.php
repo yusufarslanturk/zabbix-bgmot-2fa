@@ -49,7 +49,6 @@ class CJsonRpc {
 		$this->json = new CJson();
 		$this->initErrors();
 
-		$this->_error = false;
 		$this->_response = [];
 		$this->_jsonDecoded = $this->json->decode($data, true);
 	}
