@@ -1223,6 +1223,8 @@ define('API_COLOR',					27);
 define('API_NUMERIC',				28);
 define('API_SORTORDER',				29);
 define('API_TRIGGER_EXPRESSION',	30);
+define('API_JSONRPC_PARAMS',		31);
+define('API_JSONRPC_ID',			32);
 
 // flags
 define('API_REQUIRED',				0x0001);
