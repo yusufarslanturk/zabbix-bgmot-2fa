@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-05 19:51+0200\n"
+"POT-Creation-Date: 2021-03-19 19:51+0200\n"
 "PO-Revision-Date: 2019-05-06 14:15+0300\n"
 "Last-Translator: martinds <kotyk@datasys.cz>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -985,7 +985,7 @@ msgstr[0] "Aplikace byla smazána"
 msgstr[1] "Aplikace byla smazána"
 msgstr[2] "Aplikace byla smazána"
 
-#: include/classes/core/CJsonRpc.php:210
+#: include/classes/core/CJsonRpc.php:203
 msgid "Application error."
 msgstr "Chyba aplikace."
 
@@ -1625,10 +1625,6 @@ msgstr "Není možné přidat prototyp grafu"
 msgid "Cannot add group"
 msgstr "Nelze přidat skupinu"
 
-#: include/classes/api/services/CTemplate.php:335
-msgid "Cannot add group."
-msgstr "Není možné přidat skupinu."
-
 #: hosts.php:521
 msgid "Cannot add host"
 msgstr "Nelze přidat hosta"
@@ -1765,11 +1761,6 @@ msgstr "Není možný se anonymní bind na LDAP server."
 msgid "Cannot bind to LDAP server."
 msgstr "Není možný bind na LDAP server."
 
-#: include/classes/api/clients/CLocalApiClient.php:87
-#, c-format
-msgid "Cannot call method \"%1$s.%2$s\" without parameters."
-msgstr "Není možné vyvolat metodu \"%1$s.%2$s\" bez parametrů."
-
 #: httpconf.php:196 httpconf.php:512 items.php:928
 msgid "Cannot clear history"
 msgstr "Nelze smazat historii"
@@ -1873,10 +1864,6 @@ msgstr "Nelze vytvořit mapu ikon"
 msgid "Cannot create new application, web scenario is already assigned to application."
 msgstr "Nelze vytvořit novou aplikaci, webový scénář je již k aplikaci přiřazen."
 
-#: include/classes/api/services/CTemplate.php:349
-msgid "Cannot create template."
-msgstr "Není možné vytvořit šablonu."
-
 #: include/classes/setup/CSetupWizard.php:368
 msgid "Cannot create the configuration file."
 msgstr "Není možné vytvořit konfigurační soubor."
@@ -1958,7 +1945,7 @@ msgstr[2] "Nelze smazat skupinu"
 msgid "Cannot delete host"
 msgstr "Nelze smazat hostitele"
 
-#: include/classes/api/services/CHost.php:1210
+#: include/classes/api/services/CHost.php:1234
 #, c-format
 msgid "Cannot delete host because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must contain at least one host or host group."
@@ -1966,7 +1953,7 @@ msgstr[0] "Není možné smazat hosta, protože údržba \"%1$s\" musí obsahova
 msgstr[1] "Není možné smazat vybrané hosty, protože údržba \"%1$s\" musí obsahovat minimálně jednoho hosta či skupinu hostů."
 msgstr[2] "Není možné smazat vybrané hosty, protože údržba \"%1$s\" musí obsahovat minimálně jednoho hosta či skupinu hostů."
 
-#: include/classes/api/services/CHostGroup.php:1490
+#: include/classes/api/services/CHostGroup.php:1523
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
@@ -1995,7 +1982,7 @@ msgstr "Nelze smazat obrázek"
 msgid "Cannot delete interface for discovered host \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CHost.php:997
+#: include/classes/api/services/CHost.php:1021
 msgid "Cannot delete inventory."
 msgstr "Není možné smazat inventář."
 
@@ -2076,7 +2063,7 @@ msgstr "Nelze smazat službu"
 msgid "Cannot delete slide show"
 msgstr "Není možné smazat prezentaci"
 
-#: templates.php:367 templates.php:381 templates.php:414
+#: templates.php:364 templates.php:378 templates.php:411
 msgid "Cannot delete template"
 msgstr "Nelze smazat šablonu"
 
@@ -2445,7 +2432,7 @@ msgstr "Nelze formátovat strom. Zkontrolujte logickou struktůru v odkazech slu
 msgid "Cannot format tree."
 msgstr "Nelze formátovat strom."
 
-#: include/classes/api/services/CTemplate.php:814
+#: include/classes/api/services/CTemplate.php:806
 msgid "Cannot have empty visible template name."
 msgstr "Není možné mít prázdné zobrazované jméno šablony."
 
@@ -2479,12 +2466,12 @@ msgstr "Není možné vložit view soubor \"%s\"."
 msgid "Cannot insert trigger expression"
 msgstr "Není možné vložit výraz spouštěče"
 
-#: include/classes/api/services/CHost.php:975
+#: include/classes/api/services/CHost.php:999
 msgid "Cannot link template"
 msgstr "Není možné nalinkovat šablonu"
 
-#: include/classes/api/services/CTemplate.php:901
-#: include/classes/api/services/CTemplate.php:915
+#: include/classes/api/services/CTemplate.php:893
+#: include/classes/api/services/CTemplate.php:907
 msgid "Cannot link template."
 msgstr "Není možné nalinkovat šablonu."
 
@@ -2492,19 +2479,19 @@ msgstr "Není možné nalinkovat šablonu."
 msgid "Cannot logout."
 msgstr "Odhlášení není možné."
 
-#: include/classes/api/services/CHost.php:841
+#: include/classes/api/services/CHost.php:865
 msgid "Cannot mass update host name."
 msgstr "Není možné hromadně aktualizovat jméno hosta."
 
-#: include/classes/api/services/CTemplate.php:1039
+#: include/classes/api/services/CTemplate.php:1031
 msgid "Cannot mass update template name."
 msgstr "Není možné hromadně aktualizovat jméno šablony."
 
-#: include/classes/api/services/CHost.php:827
+#: include/classes/api/services/CHost.php:851
 msgid "Cannot mass update visible host name."
 msgstr "Není možné hromadně aktualizovat zobrazované jméno hosta."
 
-#: include/classes/api/services/CTemplate.php:1004
+#: include/classes/api/services/CTemplate.php:996
 msgid "Cannot mass update visible template name."
 msgstr "Není možné hromadně aktualizovat zobrazované jméno šablony."
 
@@ -2513,17 +2500,17 @@ msgstr "Není možné hromadně aktualizovat zobrazované jméno šablony."
 msgid "Cannot pass duplicate template IDs for the linkage: %s."
 msgstr "Není možné vykonat vícenásobné linkovaní šablon s ID: %s."
 
-#: include/classes/db/DB.php:830
+#: include/classes/db/DB.php:832
 #, c-format
 msgid "Cannot perform delete statement on table \"%1$s\" without where condition."
 msgstr "Nelze vykonat příkaz vymazat na tabulce \"%1$s\" bez podmínky kde."
 
-#: include/classes/db/DB.php:543
+#: include/classes/db/DB.php:545
 #, c-format
 msgid "Cannot perform update statement on table \"%1$s\" without values."
 msgstr "Nelze vykonat příkaz aktualizace na tabulce \"%1$s\" bez hodnot."
 
-#: include/classes/db/DB.php:556
+#: include/classes/db/DB.php:558
 #, c-format
 msgid "Cannot perform update statement on table \"%1$s\" without where condition."
 msgstr "Není možné vykonat update příkaz nad tabulkou \"%1$s\" bez podmínky where."
@@ -2616,9 +2603,9 @@ msgstr "Není možné nastavit \"templateid\" pro prototyp aplikace v prototypu 
 msgid "Cannot set \"templateid\" for screen \"%1$s\"."
 msgstr "Nelze nastavit \"templateid\" pro obrazovku \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:892
-#: include/classes/api/services/CHost.php:1780
-#: include/classes/api/services/CHost.php:1941
+#: include/classes/api/services/CHost.php:916
+#: include/classes/api/services/CHost.php:1804
+#: include/classes/api/services/CHost.php:1965
 msgid "Cannot set inventory fields for disabled inventory."
 msgstr "Nelze nastavit inventární pole pro zakázaný inventář."
 
@@ -2639,28 +2626,28 @@ msgstr "Nelze přepnout host pro interface."
 msgid "Cannot unblock users"
 msgstr "Nelze odblokovat uživatele"
 
-#: include/classes/api/services/CHostGeneral.php:555
+#: include/classes/api/services/CHostGeneral.php:544
 msgid "Cannot unlink and clear Web scenarios."
 msgstr "Není možné zrušit a smazat web scénář."
 
-#: include/classes/api/services/CHostGeneral.php:616
+#: include/classes/api/services/CHostGeneral.php:605
 msgid "Cannot unlink and clear applications."
 msgstr "Není možné zrušit připojení a smazat aplikace."
 
-#: include/classes/api/services/CHostGeneral.php:427
+#: include/classes/api/services/CHostGeneral.php:416
 msgid "Cannot unlink and clear discovery rules"
 msgstr "Není možné zrušit propojení a smazat objevovací pravidla"
 
-#: include/classes/api/services/CHost.php:950
+#: include/classes/api/services/CHost.php:974
 msgid "Cannot unlink template"
 msgstr "Nelze odpojit šablonu"
 
-#: include/classes/api/services/CTemplate.php:866
-#: include/classes/api/services/CTemplate.php:889
+#: include/classes/api/services/CTemplate.php:858
+#: include/classes/api/services/CTemplate.php:881
 msgid "Cannot unlink template."
 msgstr "Není možné zrušit linkování šablony."
 
-#: include/classes/api/services/CHostGeneral.php:269
+#: include/classes/api/services/CHostGeneral.php:258
 #, c-format
 msgid "Cannot unlink trigger \"%s\", it has items from template that is left linked to host."
 msgstr "Není možné zrušit propojení spouštěče \"%s\", protože obsahuje položky ze šablony, která je propojená s hostem."
@@ -2696,7 +2683,7 @@ msgstr "Nelze aktualizovat \"%1$s\" pro šablonu spouštěče \"%2$s\"."
 msgid "Cannot update \"%1$s\" for templated trigger prototype \"%2$s\"."
 msgstr "Nelze aktualizovat \"%1$s\" pro prototyp šablony spouštěče \"%2$s\"."
 
-#: include/classes/api/services/CHost.php:1918
+#: include/classes/api/services/CHost.php:1942
 #, c-format
 msgid "Cannot update \"%2$s\" for a discovered host \"%1$s\"."
 msgstr "Není možné aktualizovat \"%2$s\" pro objeveného hosta \"%1$s\"."
@@ -2732,7 +2719,7 @@ msgstr "Není možné aktualizovat \"templateid\" pro šablonu obrazovky \"%1$s\
 msgid "Cannot update a discovered graph."
 msgstr "Není možné aktualizovat objevený graf."
 
-#: include/classes/api/services/CHostGroup.php:790
+#: include/classes/api/services/CHostGroup.php:823
 msgid "Cannot update a discovered host group."
 msgstr "Není možné aktualizovat objevenou skupinu hostů."
 
@@ -2804,9 +2791,9 @@ msgstr "Není možné aktualizovat prototyp grafu"
 msgid "Cannot update group"
 msgstr "Nelze upravit skupinu"
 
-#: include/classes/api/services/CHostGroup.php:996
-#: include/classes/api/services/CHostGroup.php:1100
-#: include/classes/api/services/CHostGroup.php:1236
+#: include/classes/api/services/CHostGroup.php:1029
+#: include/classes/api/services/CHostGroup.php:1133
+#: include/classes/api/services/CHostGroup.php:1269
 #, c-format
 msgid "Cannot update groups for discovered host \"%1$s\"."
 msgstr "Není možné aktualizovat skupiny pro objeveného hosta \"%1$s\"."
@@ -2815,7 +2802,7 @@ msgstr "Není možné aktualizovat skupiny pro objeveného hosta \"%1$s\"."
 msgid "Cannot update host"
 msgstr "Nelze upravit hostitele"
 
-#: include/classes/api/services/CHost.php:789
+#: include/classes/api/services/CHost.php:813
 msgid "Cannot update host encryption settings. Connection settings for both directions should be specified."
 msgstr "Nelze aktualizovat nastavení šifrování hostitele. Měly by být upřesněny nastavení připojení pro oba směry."
 
@@ -2913,7 +2900,7 @@ msgstr "Není možné aktualizovat prezentaci"
 msgid "Cannot update step for a templated web scenario \"%1$s\": %2$s."
 msgstr "Nelze aktualizovat krok šablony webového scénáře \"%1$s\": %2$s."
 
-#: templates.php:182
+#: templates.php:181
 msgid "Cannot update template"
 msgstr "Nelze upravit šablonu"
 
@@ -2921,8 +2908,8 @@ msgstr "Nelze upravit šablonu"
 msgid "Cannot update templated applications."
 msgstr "Není možné aktualizovat aplikace patřící šabloně."
 
-#: include/classes/api/services/CTemplate.php:765
-#: include/classes/api/services/CTemplate.php:1100
+#: include/classes/api/services/CTemplate.php:757
+#: include/classes/api/services/CTemplate.php:1092
 #, c-format
 msgid "Cannot update templates on discovered host \"%1$s\"."
 msgstr "Není možné aktualizovat šablony pro objeveného hosta \"%1$s\"."
@@ -3173,8 +3160,7 @@ msgstr "Kruhový odkaz v obrazovkách: %1$s."
 msgid "Circular reference in templates: %1$s."
 msgstr "Kruhový odkaz v šablonách: %1$s."
 
-#: include/classes/api/services/CHostBase.php:200
-#: include/classes/api/services/CHostBase.php:257
+#: include/classes/api/services/CHostBase.php:213
 msgid "Circular template linkage is not allowed."
 msgstr "Kruhové odkazování šablon není povolené."
 
@@ -4748,7 +4734,7 @@ msgstr "Smazat web scénář?"
 msgid "Deleted"
 msgstr "Smazán"
 
-#: include/classes/api/services/CHost.php:1362
+#: include/classes/api/services/CHost.php:1386
 #, c-format
 msgid "Deleted: Host \"%1$s\"."
 msgstr "Smazané: Host \"%1$s\"."
@@ -4758,7 +4744,7 @@ msgstr "Smazané: Host \"%1$s\"."
 msgid "Deleted: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr "Smazané: Prototyp hosta \"%1$s\" na \"%2$s\"."
 
-#: include/classes/api/services/CTemplate.php:695
+#: include/classes/api/services/CTemplate.php:724
 #, c-format
 msgid "Deleted: Template \"%1$s\"."
 msgstr "Smazané: Šablona \"%1$s\"."
@@ -5309,14 +5295,14 @@ msgstr "Kopírovat závislosti ve spouštěči \"%1$s\"."
 msgid "Duplicate dependencies in trigger prototype \"%1$s\"."
 msgstr "Duplicita závislosti v prototypu spouštěče \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:1716
-#: include/classes/api/services/CHost.php:1971
+#: include/classes/api/services/CHost.php:1740
+#: include/classes/api/services/CHost.php:1995
 #, c-format
 msgid "Duplicate host. Host with the same host name \"%s\" already exists in data."
 msgstr "Kopírování hosta. Host se stejným jménem \"%s\" již existuje."
 
-#: include/classes/api/services/CHost.php:1723
-#: include/classes/api/services/CHost.php:1991
+#: include/classes/api/services/CHost.php:1747
+#: include/classes/api/services/CHost.php:2015
 #, c-format
 msgid "Duplicate host. Host with the same visible name \"%s\" already exists in data."
 msgstr "Kopírování hosta. Host se stejným zobrazovaným jménem \"%s\" již existuje v datech."
@@ -5533,7 +5519,7 @@ msgstr "Prázdná filtrovací podmínka operátora pro typ akce \"%1$s\". "
 #: include/classes/api/services/CDRule.php:187
 #: include/classes/api/services/CDRule.php:313
 #: include/classes/api/services/CHostInterface.php:383
-#: include/classes/api/services/CHost.php:1138
+#: include/classes/api/services/CHost.php:1162
 #: include/classes/api/services/CHostPrototype.php:875
 #: include/classes/api/services/CImage.php:437
 #: include/classes/api/services/CMaintenance.php:528
@@ -5549,7 +5535,7 @@ msgstr "Prázdná filtrovací podmínka operátora pro typ akce \"%1$s\". "
 #: include/classes/api/services/CService.php:366
 #: include/classes/api/services/CService.php:430
 #: include/classes/api/services/CService.php:498
-#: include/classes/api/services/CTemplate.php:560
+#: include/classes/api/services/CTemplate.php:589
 #: include/classes/api/services/CTrigger.php:775
 #: include/classes/api/services/CUserMacro.php:600
 msgid "Empty input parameter."
@@ -5915,11 +5901,6 @@ msgstr "Rozbalte makra"
 msgid "Expand single problem"
 msgstr "Rozvést jeden problém"
 
-#: include/classes/core/CJsonRpc.php:110
-#, c-format
-msgid "Expecting JSON-rpc version 2.0, \"%s\" is given."
-msgstr "Byla očekávána JSON-rpc verze 2.0, ale \"%s\" je použita."
-
 #: include/views/configuration.maintenance.list.php:55
 #: include/views/configuration.maintenance.list.php:83
 msgctxt "maintenance status"
@@ -6041,7 +6022,7 @@ msgstr "Adresa URL nebyla úspěšně analyzována."
 msgid "Failed to update dashboard"
 msgstr "Nepodařilo se aktualizovat dashboard"
 
-#: include/classes/api/services/CTemplate.php:518
+#: include/classes/api/services/CTemplate.php:547
 msgid "Failed to update template."
 msgstr "Nepodařilo se aktualizovat šablony."
 
@@ -6078,7 +6059,7 @@ msgstr "Únor"
 msgid "Field"
 msgstr "Pole"
 
-#: include/classes/db/DB.php:349
+#: include/classes/db/DB.php:329
 #, c-format
 msgid "Field \"%1$s\" cannot be set to NULL."
 msgstr "Pole \"%1$s\" nemůže být nastavené na NULL."
@@ -6089,9 +6070,9 @@ msgstr "Pole \"%1$s\" nemůže být nastavené na NULL."
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:493
 #: include/classes/api/services/CDRule.php:503
-#: include/classes/api/services/CHostGroup.php:907
-#: include/classes/api/services/CHost.php:747
-#: include/classes/api/services/CTemplate.php:793
+#: include/classes/api/services/CHostGroup.php:940
+#: include/classes/api/services/CHost.php:771
+#: include/classes/api/services/CTemplate.php:785
 #: include/classes/validators/CNewValidator.php:256
 #: include/validate.inc.php:300
 #, c-format
@@ -6142,7 +6123,7 @@ msgstr "Položka \"%1$s\" je nutné pro typ médií \"%2$s\"."
 msgid "Field \"%1$s\" must be missing."
 msgstr "Pole \"%1$s\" musí chybět."
 
-#: include/classes/api/services/CTemplate.php:412
+#: include/classes/api/services/CTemplate.php:441
 msgid "Field \"host\" is mandatory."
 msgstr "Pole \"host\" je vyžadované."
 
@@ -6699,12 +6680,12 @@ msgstr "Mřížka"
 msgid "Group"
 msgstr "Skupina"
 
-#: include/classes/api/services/CHostGroup.php:713
+#: include/classes/api/services/CHostGroup.php:746
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used by a host prototype."
 msgstr "Skupina \"%1$s\" nemůže být smazána, protože je používána prototypem hosta."
 
-#: include/classes/api/services/CHostGroup.php:757
+#: include/classes/api/services/CHostGroup.php:790
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used in a correlation condition."
 msgstr "Skupina \"%1$s\" nemůže být odstraněna, protože je použita v korelační podmínce."
@@ -7018,17 +6999,17 @@ msgstr[0] "Hostitel"
 msgstr[1] "Hostitelé"
 msgstr[2] "Hostitelé"
 
-#: include/classes/api/services/CHost.php:854
-#: include/classes/api/services/CTemplate.php:444
+#: include/classes/api/services/CHost.php:878
+#: include/classes/api/services/CTemplate.php:473
 #: include/classes/import/importers/CHostImporter.php:67
 #, c-format
 msgid "Host \"%1$s\" already exists."
 msgstr "Host \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHostGroup.php:1453
-#: include/classes/api/services/CHost.php:813
-#: include/classes/api/services/CHost.php:1692
-#: include/classes/api/services/CHost.php:1881
+#: include/classes/api/services/CHostGroup.php:1486
+#: include/classes/api/services/CHost.php:837
+#: include/classes/api/services/CHost.php:1716
+#: include/classes/api/services/CHost.php:1905
 #, c-format
 msgid "Host \"%1$s\" cannot be without host group."
 msgstr "Host \"%1$s\" nemůže být bez hostitelské skupiny."
@@ -7101,17 +7082,17 @@ msgstr[2] "Hosty povoleny"
 msgid "Host group"
 msgstr "Skupina hostitele"
 
-#: include/classes/api/services/CHostGroup.php:641
+#: include/classes/api/services/CHostGroup.php:674
 #, c-format
 msgid "Host group \"%1$s\" already exists."
 msgstr "Skupina hostů \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHostGroup.php:742
+#: include/classes/api/services/CHostGroup.php:775
 #, c-format
 msgid "Host group \"%1$s\" cannot be deleted, because it is used in a global script."
 msgstr "Skupinu hostů \"%1$s\" není možné smazat, je použitá v globálním skriptu."
 
-#: include/classes/api/services/CHostGroup.php:699
+#: include/classes/api/services/CHostGroup.php:732
 #, c-format
 msgid "Host group \"%1$s\" is internal and can not be deleted."
 msgstr "Skupina hostů \"%1$s\" je interní a nemůže byt smazána."
@@ -7276,7 +7257,7 @@ msgstr "Maska podsítě hosta"
 msgid "Host time"
 msgstr "Čas hosta"
 
-#: include/classes/api/services/CHost.php:678
+#: include/classes/api/services/CHost.php:702
 msgid "Host update failed."
 msgstr "Aktualizace hosta selhala."
 
@@ -7289,25 +7270,25 @@ msgstr "Host byl aktualizován"
 msgid "Host with ID \"%1$s\" is not available."
 msgstr "Host s ID \"%1$s\" není dostupný."
 
-#: include/classes/api/services/CTemplate.php:1065
+#: include/classes/api/services/CTemplate.php:1057
 #, c-format
 msgid "Host with the same name \"%1$s\" already exists."
 msgstr "Host se stejným jménem \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHost.php:1811
-#: include/classes/api/services/CHost.php:2047
+#: include/classes/api/services/CHost.php:1835
+#: include/classes/api/services/CHost.php:2071
 #, c-format
 msgid "Host with the same name \"%s\" already exists."
 msgstr "Host s stejným jménem \"%s\" již existuje."
 
-#: include/classes/api/services/CTemplate.php:470
-#: include/classes/api/services/CTemplate.php:1030
+#: include/classes/api/services/CTemplate.php:499
+#: include/classes/api/services/CTemplate.php:1022
 #, c-format
 msgid "Host with the same visible name \"%1$s\" already exists."
 msgstr "Host se stejným viditelným jménem \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHost.php:1817
-#: include/classes/api/services/CHost.php:2054
+#: include/classes/api/services/CHost.php:1841
+#: include/classes/api/services/CHost.php:2078
 #, c-format
 msgid "Host with the same visible name \"%s\" already exists."
 msgstr "Host se stejným viditelným jménem \"%s\" již existuje."
@@ -7931,7 +7912,7 @@ msgstr "Funkci byly předány neplatné argumenty"
 #: include/classes/api/services/CHostInterface.php:234
 #: include/classes/api/services/CHostInterface.php:435
 #: include/classes/api/services/CHostInterface.php:696
-#: include/classes/api/services/CHost.php:1174
+#: include/classes/api/services/CHost.php:1198
 #: include/classes/api/services/CHostPrototype.php:392
 #: include/classes/api/services/CHostPrototype.php:413
 #: include/classes/api/services/CItemGeneral.php:257
@@ -7986,9 +7967,9 @@ msgstr "Neplatná hromadná hodnota pro rozhraní."
 msgid "Incorrect calculate SLA value for service \"%1$s\"."
 msgstr "Nesprávně vypočítaná hodnota SLA pro službu \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:836
-#: include/classes/api/services/CHost.php:1680
-#: include/classes/api/services/CHost.php:1965
+#: include/classes/api/services/CHost.php:860
+#: include/classes/api/services/CHost.php:1704
+#: include/classes/api/services/CHost.php:1989
 #, c-format
 msgid "Incorrect characters used for host name \"%s\"."
 msgstr "Nesprávné znaky použité pro jméno hosta \"%s\"."
@@ -7999,8 +7980,8 @@ msgstr "Nesprávné znaky použité pro jméno hosta \"%s\"."
 msgid "Incorrect characters used for proxy name \"%1$s\"."
 msgstr "Nesprávné znaky použité pro jméno proxy \"%1$s\"."
 
-#: include/classes/api/services/CTemplate.php:422
-#: include/classes/api/services/CTemplate.php:1075
+#: include/classes/api/services/CTemplate.php:451
+#: include/classes/api/services/CTemplate.php:1067
 #, c-format
 msgid "Incorrect characters used for template name \"%1$s\"."
 msgstr "Nesprávné znaky použité pro jméno šablony \"%1$s\"."
@@ -8062,7 +8043,7 @@ msgstr "Neplatná hodnota objektu události."
 msgid "Incorrect eventsource value."
 msgstr "Neplatná hodnota zdroje události."
 
-#: include/classes/db/DB.php:563 include/classes/db/DB.php:837
+#: include/classes/db/DB.php:565 include/classes/db/DB.php:839
 #, c-format
 msgid "Incorrect field \"%1$s\" name or value in where statement for table \"%2$s\"."
 msgstr "Neplatné jméno pole \"%1$s\" nebo hodnota údaje pro tabulku \"%2$s\"."
@@ -8149,9 +8130,9 @@ msgstr "Neplatný obrázkový index."
 #: include/classes/api/services/CAction.php:2902
 #: include/classes/api/services/CAction.php:2914
 #: include/classes/api/services/CAction.php:2926
-#: include/classes/api/services/CHost.php:819
-#: include/classes/api/services/CHost.php:1674
-#: include/classes/api/services/CHost.php:1867
+#: include/classes/api/services/CHost.php:843
+#: include/classes/api/services/CHost.php:1698
+#: include/classes/api/services/CHost.php:1891
 #: include/classes/api/services/CImage.php:449
 #: include/classes/api/services/CImage.php:490
 #: include/classes/api/services/CProxy.php:619
@@ -8159,8 +8140,8 @@ msgstr "Neplatný obrázkový index."
 #: include/classes/api/services/CProxy.php:727
 #: include/classes/api/services/CProxy.php:749
 #: include/classes/api/services/CScreen.php:455
-#: include/classes/api/services/CTemplate.php:417
-#: include/classes/api/services/CTemplate.php:545
+#: include/classes/api/services/CTemplate.php:446
+#: include/classes/api/services/CTemplate.php:574
 #: include/classes/api/services/CTemplateScreen.php:596
 msgid "Incorrect input parameters."
 msgstr "Nesprávné vstupní parametry."
@@ -8175,8 +8156,8 @@ msgstr "Neplatný parametr DNS pro rozhraní \"%s\"."
 msgid "Incorrect interface port \"%s\" provided."
 msgstr "Poskytnuto neplatné rozhraní pro port \"%s\"."
 
-#: include/classes/api/services/CHost.php:1786
-#: include/classes/api/services/CHost.php:1947
+#: include/classes/api/services/CHost.php:1810
+#: include/classes/api/services/CHost.php:1971
 #, c-format
 msgid "Incorrect inventory field \"%s\"."
 msgstr "Neplatné pole inventáře \"%s\"."
@@ -8376,8 +8357,8 @@ msgstr "Neplatné pořadí řazení pro službu \"%1$s\"."
 msgid "Incorrect source value."
 msgstr "Neplatná hodnota zdroje."
 
-#: include/classes/api/services/CHost.php:1758
-#: include/classes/api/services/CHost.php:1913
+#: include/classes/api/services/CHost.php:1782
+#: include/classes/api/services/CHost.php:1937
 #, c-format
 msgid "Incorrect status for host \"%1$s\"."
 msgstr "Neplatný stav pro hosta \"%1$s\"."
@@ -8534,19 +8515,19 @@ msgstr "Neplatná hodnota \"%1$s\" pro pole \"%2$s\"."
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field: must be between %3$s and %4$s."
 msgstr "Neplatná hodnota \"%1$s\" pro \"%2$s\" pole: musí byt mezi %3$s a %4$s."
 
-#: include/classes/db/DB.php:379
+#: include/classes/db/DB.php:359
 #, c-format
 msgid "Incorrect value \"%1$s\" for float field \"%2$s\"."
 msgstr "Neplatná hodnota \"%1$s\" pro float field \"%2$s\"."
 
-#: include/classes/db/DB.php:373
+#: include/classes/db/DB.php:353
 #, c-format
 msgid "Incorrect value \"%1$s\" for int field \"%2$s\"."
 msgstr "Neplatná hodnota \"%1$s\" pro integer field \"%2$s\"."
 
 #: include/classes/api/services/CMaintenance.php:387
 #: include/classes/api/services/CMaintenance.php:654
-#: include/classes/db/DB.php:367
+#: include/classes/db/DB.php:347
 #, c-format
 msgid "Incorrect value \"%1$s\" for unsigned int field \"%2$s\"."
 msgstr "Neplatná hodnota \"%1$s\" pro unsigned integer field \"%2$s\"."
@@ -8629,21 +8610,21 @@ msgstr "Neplatná hodnota pro pole \"%1$s\"."
 #: include/classes/api/services/CEvent.php:804
 #: include/classes/api/services/CEvent.php:847
 #: include/classes/api/services/CEvent.php:904
-#: include/classes/api/services/CHost.php:777
-#: include/classes/api/services/CHost.php:1576
-#: include/classes/api/services/CHost.php:1582
-#: include/classes/api/services/CHost.php:1597
-#: include/classes/api/services/CHost.php:1603
-#: include/classes/api/services/CHost.php:1608
-#: include/classes/api/services/CHost.php:1614
-#: include/classes/api/services/CHost.php:1622
-#: include/classes/api/services/CHost.php:1628
-#: include/classes/api/services/CHost.php:1637
-#: include/classes/api/services/CHost.php:1643
-#: include/classes/api/services/CHost.php:1701
-#: include/classes/api/services/CHost.php:1752
-#: include/classes/api/services/CHost.php:1890
-#: include/classes/api/services/CHost.php:1907
+#: include/classes/api/services/CHost.php:801
+#: include/classes/api/services/CHost.php:1600
+#: include/classes/api/services/CHost.php:1606
+#: include/classes/api/services/CHost.php:1621
+#: include/classes/api/services/CHost.php:1627
+#: include/classes/api/services/CHost.php:1632
+#: include/classes/api/services/CHost.php:1638
+#: include/classes/api/services/CHost.php:1646
+#: include/classes/api/services/CHost.php:1652
+#: include/classes/api/services/CHost.php:1661
+#: include/classes/api/services/CHost.php:1667
+#: include/classes/api/services/CHost.php:1725
+#: include/classes/api/services/CHost.php:1776
+#: include/classes/api/services/CHost.php:1914
+#: include/classes/api/services/CHost.php:1931
 #: include/classes/api/services/CHttpTest.php:959
 #: include/classes/api/services/CHttpTest.php:1057
 #: include/classes/api/services/CItemGeneral.php:216
@@ -8714,7 +8695,7 @@ msgstr "Neplatná hodnota pro pole \"%1$s\"."
 #: include/classes/api/services/CProxy.php:793
 #: include/classes/api/services/CScreen.php:423
 #: include/classes/api/services/CScreen.php:429
-#: include/classes/api/services/CTemplate.php:377
+#: include/classes/api/services/CTemplate.php:406
 #: include/classes/api/services/CTriggerGeneral.php:690
 #: include/classes/api/services/CTriggerGeneral.php:696
 #: include/classes/api/services/CTriggerGeneral.php:716
@@ -8879,7 +8860,7 @@ msgctxt "user type"
 msgid "Internal"
 msgstr "Interní"
 
-#: include/classes/core/CJsonRpc.php:206
+#: include/classes/core/CJsonRpc.php:199
 msgid "Internal JSON-RPC error."
 msgstr "Interní JSON-RPC chyba."
 
@@ -8894,7 +8875,7 @@ msgstr "Perioda ukládání interních dat"
 #: include/classes/api/services/CTriggerGeneral.php:1133
 #: include/classes/api/services/CTriggerGeneral.php:1314
 #: include/classes/api/services/CTriggerGeneral.php:1691
-#: include/classes/core/CJsonRpc.php:205
+#: include/classes/core/CJsonRpc.php:198
 #: include/classes/import/validators/CXmlValidatorGeneral.php:147
 #: include/classes/widgets/fields/CWidgetField.php:100
 msgid "Internal error."
@@ -8931,11 +8912,11 @@ msgstr "Interval"
 msgid "Invalid IP address \"%1$s\"."
 msgstr "Neplatná IP adresa \"%1$s\"."
 
-#: include/classes/core/CJsonRpc.php:186
+#: include/classes/core/CJsonRpc.php:179
 msgid "Invalid JSON. An error occurred on the server while parsing the JSON text."
 msgstr "Neplatný JSON. Chyba se vyskytla na serveru během zpracování JSON textu."
 
-#: include/classes/core/CJsonRpc.php:190
+#: include/classes/core/CJsonRpc.php:183
 msgid "Invalid Request."
 msgstr "Neplatný požadavek."
 
@@ -9049,7 +9030,7 @@ msgstr "Neplatné makro \"%1$s\": %2$s."
 #: include/classes/api/services/CService.php:200
 #: include/classes/api/services/CService.php:371
 #: include/classes/api/services/CService.php:1202
-#: include/classes/core/CJsonRpc.php:201
+#: include/classes/core/CJsonRpc.php:194
 msgid "Invalid method parameters."
 msgstr "Neplatné parametry metody."
 
@@ -9085,69 +9066,71 @@ msgstr "Neplatný počet parametrů."
 #: include/classes/api/services/CTriggerGeneral.php:1662
 #: include/classes/api/services/CUser.php:668
 #: include/classes/api/services/CUser.php:679
-#: include/classes/validators/CApiInputValidator.php:254
-#: include/classes/validators/CApiInputValidator.php:259
-#: include/classes/validators/CApiInputValidator.php:264
-#: include/classes/validators/CApiInputValidator.php:294
-#: include/classes/validators/CApiInputValidator.php:355
-#: include/classes/validators/CApiInputValidator.php:362
-#: include/classes/validators/CApiInputValidator.php:394
-#: include/classes/validators/CApiInputValidator.php:399
-#: include/classes/validators/CApiInputValidator.php:441
-#: include/classes/validators/CApiInputValidator.php:446
-#: include/classes/validators/CApiInputValidator.php:480
-#: include/classes/validators/CApiInputValidator.php:485
-#: include/classes/validators/CApiInputValidator.php:526
-#: include/classes/validators/CApiInputValidator.php:531
-#: include/classes/validators/CApiInputValidator.php:571
-#: include/classes/validators/CApiInputValidator.php:602
-#: include/classes/validators/CApiInputValidator.php:607
-#: include/classes/validators/CApiInputValidator.php:663
-#: include/classes/validators/CApiInputValidator.php:696
-#: include/classes/validators/CApiInputValidator.php:701
-#: include/classes/validators/CApiInputValidator.php:742
-#: include/classes/validators/CApiInputValidator.php:747
-#: include/classes/validators/CApiInputValidator.php:752
-#: include/classes/validators/CApiInputValidator.php:781
-#: include/classes/validators/CApiInputValidator.php:836
-#: include/classes/validators/CApiInputValidator.php:843
-#: include/classes/validators/CApiInputValidator.php:870
-#: include/classes/validators/CApiInputValidator.php:915
-#: include/classes/validators/CApiInputValidator.php:944
-#: include/classes/validators/CApiInputValidator.php:989
-#: include/classes/validators/CApiInputValidator.php:994
-#: include/classes/validators/CApiInputValidator.php:1031
-#: include/classes/validators/CApiInputValidator.php:1036
-#: include/classes/validators/CApiInputValidator.php:1079
-#: include/classes/validators/CApiInputValidator.php:1088
-#: include/classes/validators/CApiInputValidator.php:1094
-#: include/classes/validators/CApiInputValidator.php:1122
-#: include/classes/validators/CApiInputValidator.php:1132
-#: include/classes/validators/CApiInputValidator.php:1138
-#: include/classes/validators/CApiInputValidator.php:1174
-#: include/classes/validators/CApiInputValidator.php:1185
-#: include/classes/validators/CApiInputValidator.php:1192
-#: include/classes/validators/CApiInputValidator.php:1219
-#: include/classes/validators/CApiInputValidator.php:1229
-#: include/classes/validators/CApiInputValidator.php:1254
-#: include/classes/validators/CApiInputValidator.php:1259
-#: include/classes/validators/CApiInputValidator.php:1285
-#: include/classes/validators/CApiInputValidator.php:1292
-#: include/classes/validators/CApiInputValidator.php:1319
-#: include/classes/validators/CApiInputValidator.php:1326
-#: include/classes/validators/CApiInputValidator.php:1353
-#: include/classes/validators/CApiInputValidator.php:1362
-#: include/classes/validators/CApiInputValidator.php:1407
-#: include/classes/validators/CApiInputValidator.php:1418
-#: include/classes/validators/CApiInputValidator.php:1451
-#: include/classes/validators/CApiInputValidator.php:1506
-#: include/classes/validators/CApiInputValidator.php:1593
-#: include/classes/validators/CApiInputValidator.php:1598
-#: include/classes/validators/CApiInputValidator.php:1625
-#: include/classes/validators/CApiInputValidator.php:1630
-#: include/classes/validators/CApiInputValidator.php:1661
-#: include/classes/validators/CApiInputValidator.php:1671
-#: include/classes/validators/CApiInputValidator.php:1676
+#: include/classes/validators/CApiInputValidator.php:262
+#: include/classes/validators/CApiInputValidator.php:267
+#: include/classes/validators/CApiInputValidator.php:272
+#: include/classes/validators/CApiInputValidator.php:302
+#: include/classes/validators/CApiInputValidator.php:363
+#: include/classes/validators/CApiInputValidator.php:370
+#: include/classes/validators/CApiInputValidator.php:402
+#: include/classes/validators/CApiInputValidator.php:407
+#: include/classes/validators/CApiInputValidator.php:449
+#: include/classes/validators/CApiInputValidator.php:454
+#: include/classes/validators/CApiInputValidator.php:488
+#: include/classes/validators/CApiInputValidator.php:493
+#: include/classes/validators/CApiInputValidator.php:534
+#: include/classes/validators/CApiInputValidator.php:539
+#: include/classes/validators/CApiInputValidator.php:579
+#: include/classes/validators/CApiInputValidator.php:610
+#: include/classes/validators/CApiInputValidator.php:615
+#: include/classes/validators/CApiInputValidator.php:671
+#: include/classes/validators/CApiInputValidator.php:704
+#: include/classes/validators/CApiInputValidator.php:709
+#: include/classes/validators/CApiInputValidator.php:750
+#: include/classes/validators/CApiInputValidator.php:755
+#: include/classes/validators/CApiInputValidator.php:760
+#: include/classes/validators/CApiInputValidator.php:789
+#: include/classes/validators/CApiInputValidator.php:844
+#: include/classes/validators/CApiInputValidator.php:851
+#: include/classes/validators/CApiInputValidator.php:878
+#: include/classes/validators/CApiInputValidator.php:923
+#: include/classes/validators/CApiInputValidator.php:952
+#: include/classes/validators/CApiInputValidator.php:997
+#: include/classes/validators/CApiInputValidator.php:1002
+#: include/classes/validators/CApiInputValidator.php:1039
+#: include/classes/validators/CApiInputValidator.php:1044
+#: include/classes/validators/CApiInputValidator.php:1087
+#: include/classes/validators/CApiInputValidator.php:1096
+#: include/classes/validators/CApiInputValidator.php:1102
+#: include/classes/validators/CApiInputValidator.php:1130
+#: include/classes/validators/CApiInputValidator.php:1140
+#: include/classes/validators/CApiInputValidator.php:1146
+#: include/classes/validators/CApiInputValidator.php:1182
+#: include/classes/validators/CApiInputValidator.php:1193
+#: include/classes/validators/CApiInputValidator.php:1200
+#: include/classes/validators/CApiInputValidator.php:1227
+#: include/classes/validators/CApiInputValidator.php:1237
+#: include/classes/validators/CApiInputValidator.php:1262
+#: include/classes/validators/CApiInputValidator.php:1267
+#: include/classes/validators/CApiInputValidator.php:1293
+#: include/classes/validators/CApiInputValidator.php:1300
+#: include/classes/validators/CApiInputValidator.php:1327
+#: include/classes/validators/CApiInputValidator.php:1334
+#: include/classes/validators/CApiInputValidator.php:1361
+#: include/classes/validators/CApiInputValidator.php:1370
+#: include/classes/validators/CApiInputValidator.php:1415
+#: include/classes/validators/CApiInputValidator.php:1426
+#: include/classes/validators/CApiInputValidator.php:1459
+#: include/classes/validators/CApiInputValidator.php:1514
+#: include/classes/validators/CApiInputValidator.php:1601
+#: include/classes/validators/CApiInputValidator.php:1606
+#: include/classes/validators/CApiInputValidator.php:1633
+#: include/classes/validators/CApiInputValidator.php:1638
+#: include/classes/validators/CApiInputValidator.php:1669
+#: include/classes/validators/CApiInputValidator.php:1679
+#: include/classes/validators/CApiInputValidator.php:1684
+#: include/classes/validators/CApiInputValidator.php:1708
+#: include/classes/validators/CApiInputValidator.php:1728
 #: include/classes/widgets/fields/CWidgetFieldGraphOverride.php:133
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:480
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:484
@@ -9159,7 +9142,7 @@ msgstr "Neplatný počet parametrů."
 msgid "Invalid parameter \"%1$s\": %2$s."
 msgstr "Neplatný parametr \"%1$s\": %2$s."
 
-#: include/classes/core/CJsonRpc.php:200
+#: include/classes/core/CJsonRpc.php:193
 msgid "Invalid params."
 msgstr "Neplatný parametr."
 
@@ -9236,7 +9219,7 @@ msgstr "Neplatné view jméno pro \"%s\". Povolené znaky: \"a-z\" a \".\"."
 msgid "Inventory"
 msgstr "Inventář"
 
-#: include/classes/api/services/CHost.php:1016
+#: include/classes/api/services/CHost.php:1040
 #, c-format
 msgid "Inventory disabled for host \"%1$s\"."
 msgstr "Inventář vypnutý pro hosta \"%1$s\"."
@@ -9576,22 +9559,10 @@ msgstr ""
 msgid "JSON string is expected"
 msgstr "JSON řetězec je očekáván"
 
-#: include/classes/core/CJsonRpc.php:158
+#: include/classes/core/CJsonRpc.php:153
 #, c-format
-msgid "JSON-rpc error generation failed. No such error \"%s\"."
-msgstr "Generovaní chyby JSON-rpc selhalo. Žádná chyba \"%s\"."
-
-#: include/classes/core/CJsonRpc.php:115
-msgid "JSON-rpc method is not defined."
-msgstr "Metoda JSON-rpc není definována."
-
-#: include/classes/core/CJsonRpc.php:120
-msgid "JSON-rpc params is not an Array."
-msgstr "JSON-rpc parametry nejsou Array."
-
-#: include/classes/core/CJsonRpc.php:105
-msgid "JSON-rpc version is not specified."
-msgstr "JSON-rpc verze není specifikována."
+msgid "JSON-RPC error generation failed. No such error \"%1$s\"."
+msgstr ""
 
 #: app/views/administration.mediatype.edit.php:54 include/media.inc.php:27
 msgid "Jabber"
@@ -10627,7 +10598,7 @@ msgstr "Zprávy"
 msgid "Messaging"
 msgstr "Zprávy"
 
-#: include/classes/core/CJsonRpc.php:195
+#: include/classes/core/CJsonRpc.php:188
 msgid "Method not found."
 msgstr "Metoda nenalezena."
 
@@ -11287,8 +11258,8 @@ msgstr "Žádná data."
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "Žádné standardní rozhraní pro \"%1$s\" typu na \"%2$s\"."
 
-#: include/classes/core/CJsonRpc.php:211 include/classes/core/CJsonRpc.php:216
-#: include/classes/core/CJsonRpc.php:221
+#: include/classes/core/CJsonRpc.php:204 include/classes/core/CJsonRpc.php:209
+#: include/classes/core/CJsonRpc.php:214
 msgid "No details"
 msgstr "Bez podrobností"
 
@@ -11387,8 +11358,8 @@ msgstr "Nenalezené žádné rozhraní."
 msgid "No interface provided for proxy \"%s\"."
 msgstr "Žádné neposkytnuté rozhraní pro proxy \"%s\"."
 
-#: include/classes/api/services/CHost.php:1765
-#: include/classes/api/services/CHost.php:1958
+#: include/classes/api/services/CHost.php:1789
+#: include/classes/api/services/CHost.php:1982
 #, c-format
 msgid "No interfaces for host \"%s\"."
 msgstr "Žádné rozhraní pro host \"%s\"."
@@ -11497,22 +11468,22 @@ msgstr "Žádné oprávnění pro přístup do systému."
 #: include/classes/api/services/CGraphPrototype.php:717
 #: include/classes/api/services/CHostBase.php:49
 #: include/classes/api/services/CHostGeneral.php:56
-#: include/classes/api/services/CHostGroup.php:694
-#: include/classes/api/services/CHostGroup.php:798
-#: include/classes/api/services/CHostGroup.php:1037
-#: include/classes/api/services/CHostGroup.php:1068
-#: include/classes/api/services/CHostGroup.php:1169
-#: include/classes/api/services/CHostGroup.php:1291
-#: include/classes/api/services/CHostGroup.php:1311
+#: include/classes/api/services/CHostGroup.php:727
+#: include/classes/api/services/CHostGroup.php:831
+#: include/classes/api/services/CHostGroup.php:1070
+#: include/classes/api/services/CHostGroup.php:1101
+#: include/classes/api/services/CHostGroup.php:1202
+#: include/classes/api/services/CHostGroup.php:1324
+#: include/classes/api/services/CHostGroup.php:1344
 #: include/classes/api/services/CHostInterface.php:239
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
 #: include/classes/api/services/CHostInterface.php:661
 #: include/classes/api/services/CHostInterface.php:709
-#: include/classes/api/services/CHost.php:1143
-#: include/classes/api/services/CHost.php:1178
-#: include/classes/api/services/CHost.php:1741
-#: include/classes/api/services/CHost.php:1873
+#: include/classes/api/services/CHost.php:1167
+#: include/classes/api/services/CHost.php:1202
+#: include/classes/api/services/CHost.php:1765
+#: include/classes/api/services/CHost.php:1897
 #: include/classes/api/services/CHostPrototype.php:353
 #: include/classes/api/services/CHostPrototype.php:399
 #: include/classes/api/services/CHostPrototype.php:420
@@ -11567,8 +11538,7 @@ msgstr "Žádné oprávnění pro přístup do systému."
 #: include/classes/api/services/CService.php:988
 #: include/classes/api/services/CService.php:1012
 #: include/classes/api/services/CTask.php:136
-#: include/classes/api/services/CTemplate.php:733
-#: include/classes/api/services/CTemplate.php:755
+#: include/classes/api/services/CTemplate.php:747
 #: include/classes/api/services/CTemplateScreen.php:631
 #: include/classes/api/services/CTemplateScreen.php:682
 #: include/classes/api/services/CTemplateScreen.php:745
@@ -11656,7 +11626,7 @@ msgstr "Žádný spouštěč s triggerid \"%1$s\"."
 msgid "No triggers defined."
 msgstr "Žádné definované spouštěče."
 
-#: include/classes/validators/CApiInputValidator.php:806
+#: include/classes/validators/CApiInputValidator.php:814
 msgid "Non-boolean flags are deprecated."
 msgstr "Non-boolean flags jsou zastaralé."
 
@@ -11729,7 +11699,7 @@ msgstr "Né všechny šablony jsou připojené k \"%s\"."
 msgid "Not allowed to set password for user \"guest\"."
 msgstr "Není povolené nastavení hesla pro uživatele \"guest\"."
 
-#: include/classes/api/clients/CLocalApiClient.php:166
+#: include/classes/api/clients/CLocalApiClient.php:156
 msgid "Not authorised."
 msgstr "Neautorizovaný."
 
@@ -12063,7 +12033,7 @@ msgstr "Jednou"
 msgid "One"
 msgstr "Jedna"
 
-#: include/classes/api/services/CHostGroup.php:1179
+#: include/classes/api/services/CHostGroup.php:1212
 msgid "One of the objects is left without a host group."
 msgstr "Jeden z objektů je bez skupiny hostů."
 
@@ -12076,7 +12046,7 @@ msgstr "Pouze jednou"
 msgid "One-time downtime"
 msgstr "Jednorázový downtime"
 
-#: include/classes/api/services/CHostGroup.php:653
+#: include/classes/api/services/CHostGroup.php:686
 msgid "Only Super Admins can create host groups."
 msgstr "Jen super administrátoři mohou vytvořit skupiny."
 
@@ -12588,7 +12558,7 @@ msgstr "Stránka přijala nesprávné údaje"
 msgid "Parameter"
 msgstr "Parametr"
 
-#: include/classes/validators/CApiInputValidator.php:866
+#: include/classes/validators/CApiInputValidator.php:874
 #, c-format
 msgid "Parameter \"%1$s\" is deprecated."
 msgstr "Parametr \"%1$s\" je zastaralý."
@@ -12639,7 +12609,7 @@ msgstr "Analyzovat"
 msgid "Parse SQL error [%1$s] in [%2$s]."
 msgstr "Parsovací SQL chyba [%1$s] v [%2$s]."
 
-#: include/classes/core/CJsonRpc.php:185
+#: include/classes/core/CJsonRpc.php:178
 msgid "Parse error"
 msgstr "Parsovací chyba"
 
@@ -14027,13 +13997,12 @@ msgstr "SQL počet: %1$s (selecty: %2$s | vykonání: %3$s)"
 msgid "SQL query"
 msgstr "SQL dotaz"
 
-#: include/classes/db/DB.php:847
+#: include/classes/db/DB.php:849
 #, c-format
 msgid "SQL statement execution has failed \"%1$s\""
 msgstr "Vykonání SQL dotazu selhalo \"%1$s\""
 
-#: include/classes/db/DB.php:468 include/classes/db/DB.php:515
-#: include/classes/db/DB.php:574
+#: include/classes/db/DB.php:517 include/classes/db/DB.php:576
 #, c-format
 msgid "SQL statement execution has failed \"%1$s\"."
 msgstr "Vykonání SQL dotazu selhalo \"%1$s\"."
@@ -15395,7 +15364,7 @@ msgstr "Výchozí nastavení"
 msgid "System error occurred. Please contact Zabbix administrator."
 msgstr "Nastala chyba systému. Kontaktujte prosím administrátora Zabbixu."
 
-#: include/classes/core/CJsonRpc.php:215
+#: include/classes/core/CJsonRpc.php:208
 msgid "System error."
 msgstr "Sytémová chyba."
 
@@ -15460,7 +15429,7 @@ msgstr "PRAVDA"
 msgid "Table \"%1$s\" does not exist."
 msgstr "Tabulka \"%1$s\" neexistuje."
 
-#: include/classes/db/DB.php:416
+#: include/classes/db/DB.php:396
 #, c-format
 msgid "Table \"%1$s\" doesn't have a field named \"%2$s\"."
 msgstr "Tabulka \"%1$s\" neobsahuje pole se jménem \"%2$s\"."
@@ -15551,16 +15520,16 @@ msgstr "Telnet"
 msgid "Template"
 msgstr "Šablona"
 
-#: include/classes/api/services/CHost.php:865
-#: include/classes/api/services/CTemplate.php:434
+#: include/classes/api/services/CHost.php:889
+#: include/classes/api/services/CTemplate.php:463
 #: include/classes/import/importers/CTemplateImporter.php:78
 #, c-format
 msgid "Template \"%1$s\" already exists."
 msgstr "Šablona \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHostGroup.php:1458
-#: include/classes/api/services/CTemplate.php:368
-#: include/classes/api/services/CTemplate.php:997
+#: include/classes/api/services/CHostGroup.php:1491
+#: include/classes/api/services/CTemplate.php:397
+#: include/classes/api/services/CTemplate.php:989
 #, c-format
 msgid "Template \"%1$s\" cannot be without host group."
 msgstr "Template \"%1$s\" nemůže být bez hostitelské skupiny."
@@ -15578,11 +15547,11 @@ msgstr "Šablona přidána"
 msgid "Template and host properties that are inherited through template linkage will be unlinked and cleared."
 msgstr ""
 
-#: include/classes/api/services/CHostBase.php:260
+#: include/classes/api/services/CHostBase.php:285
 msgid "Template cannot be linked to another template more than once even through other templates."
 msgstr "Šablona nemůže být připojená k jiné šabloně víc jak jednou, včetně propojení přes jiné šablony."
 
-#: templates.php:367 templates.php:381 templates.php:414
+#: templates.php:364 templates.php:378 templates.php:411
 msgid "Template deleted"
 msgstr "Šablona byla smazána"
 
@@ -15616,7 +15585,7 @@ msgstr "Šablona obrazovek"
 msgid "Template trigger"
 msgstr "Šablona spouštěče"
 
-#: templates.php:181
+#: templates.php:180
 msgid "Template updated"
 msgstr "Šablona byla aktualizována"
 
@@ -15624,25 +15593,25 @@ msgstr "Šablona byla aktualizována"
 msgid "Template value"
 msgstr "Šablona hodnota"
 
-#: include/classes/api/services/CTemplate.php:1052
+#: include/classes/api/services/CTemplate.php:1044
 #, c-format
 msgid "Template with the same name \"%1$s\" already exists."
 msgstr "Šablona se stejným jménem \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHost.php:1832
-#: include/classes/api/services/CHost.php:2072
+#: include/classes/api/services/CHost.php:1856
+#: include/classes/api/services/CHost.php:2096
 #, c-format
 msgid "Template with the same name \"%s\" already exists."
 msgstr "Šablona se stejným jménem \"%s\" již existuje."
 
-#: include/classes/api/services/CTemplate.php:457
-#: include/classes/api/services/CTemplate.php:1017
+#: include/classes/api/services/CTemplate.php:486
+#: include/classes/api/services/CTemplate.php:1009
 #, c-format
 msgid "Template with the same visible name \"%1$s\" already exists."
 msgstr "Šablona se stejným viditelným jménem \"%1$s\" již existuje."
 
-#: include/classes/api/services/CHost.php:1838
-#: include/classes/api/services/CHost.php:2080
+#: include/classes/api/services/CHost.php:1862
+#: include/classes/api/services/CHost.php:2104
 #, c-format
 msgid "Template with the same visible name \"%s\" already exists."
 msgstr "Šablona se stejným zobrazovaným jménem \"%s\" již existuje."
@@ -15669,7 +15638,7 @@ msgstr "Položky ze šablony"
 msgid "Templates"
 msgstr "Šablony"
 
-#: include/classes/api/services/CHostBase.php:238
+#: include/classes/api/services/CHostBase.php:198
 #, c-format
 msgid "Templates \"%1$s\" unlinked from hosts \"%2$s\"."
 msgstr "Šablony \"%1$s\" odpojené od hostů \"%2$s\"."
@@ -15715,7 +15684,7 @@ msgstr "Testovací řetězec"
 msgid "Text"
 msgstr "Text"
 
-#: include/classes/api/clients/CLocalApiClient.php:99
+#: include/classes/api/clients/CLocalApiClient.php:89
 #, c-format
 msgid "The \"%1$s.%2$s\" method must be called without the \"auth\" parameter."
 msgstr "\"%1$s.%2$s\" metoda musí být nazvána bez \"auth\" parametru."
@@ -15792,11 +15761,11 @@ msgstr "Položka již není objevovaná a bude smazána při dalším objevován
 msgid "The number of processes. Returns integer"
 msgstr "Počet procesů. Vráti celé číslo"
 
-#: include/classes/core/CJsonRpc.php:191
+#: include/classes/core/CJsonRpc.php:184
 msgid "The received JSON is not a valid JSON-RPC Request."
 msgstr "Přijatý JSON není platný JSON-RPC požadavek."
 
-#: include/classes/core/CJsonRpc.php:196
+#: include/classes/core/CJsonRpc.php:189
 msgid "The requested remote-procedure does not exist / is not available"
 msgstr "Požadovaná vzdálená procedura neexistuje / není dostupná"
 
@@ -16033,7 +16002,7 @@ msgstr "Změň výstup SQL dotazu na JSON objekt pro nízko úrovňové objevov�
 msgid "Transparency"
 msgstr "Transparentnost"
 
-#: include/classes/core/CJsonRpc.php:220
+#: include/classes/core/CJsonRpc.php:213
 msgid "Transport error."
 msgstr "Přenosová chyba."
 
@@ -16160,7 +16129,7 @@ msgstr "Perioda uložení údajů událostí a poplachů spouštěče"
 msgid "Trigger event and alert data storage period \"%1$s\"."
 msgstr "Perioda ukládání dat událostí a výstrah \"%1$s\"."
 
-#: include/classes/api/services/CHostBase.php:153
+#: include/classes/api/services/CHostBase.php:159
 #, c-format
 msgid "Trigger has items from template \"%1$s\" that is not linked to host."
 msgstr "Spouštěč má položky ze šablony \"%1$s\" která není připojená k hostu."
@@ -16665,32 +16634,32 @@ msgstr "Odpojit od šablony"
 msgid "Unlink from templates"
 msgstr "Odpojit od šablon"
 
-#: include/classes/api/services/CHostGeneral.php:622
+#: include/classes/api/services/CHostGeneral.php:611
 #, c-format
 msgid "Unlinked: Application \"%1$s\" on \"%2$s\"."
 msgstr "Odpojené: Aplikáce \"%1$s\" na \"%2$s\"."
 
-#: include/classes/api/services/CHostGeneral.php:436
+#: include/classes/api/services/CHostGeneral.php:425
 #, c-format
 msgid "Unlinked: Discovery rule \"%1$s\" on \"%2$s\"."
 msgstr "Odpojené: Objevovací pravidlo \"%1$s\" na \"%2$s\"."
 
-#: include/classes/api/services/CHostGeneral.php:526
+#: include/classes/api/services/CHostGeneral.php:515
 #, c-format
 msgid "Unlinked: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr "Odpojené: Prototyp hosta \"%1$s\" na \"%2$s\"."
 
-#: include/classes/api/services/CHostGeneral.php:452
+#: include/classes/api/services/CHostGeneral.php:441
 #, c-format
 msgid "Unlinked: Item \"%1$s\" on \"%2$s\"."
 msgstr "Odpojené: Položka \"%1$s\" na \"%2$s\"."
 
-#: include/classes/api/services/CHostGeneral.php:471
+#: include/classes/api/services/CHostGeneral.php:460
 #, c-format
 msgid "Unlinked: Item prototype \"%1$s\" on \"%2$s\"."
 msgstr "Odpojené: Prototyp položky \"%1$s\" na \"%2$s\"."
 
-#: include/classes/api/services/CHostGeneral.php:564
+#: include/classes/api/services/CHostGeneral.php:553
 #, c-format
 msgid "Unlinked: Web scenario \"%1$s\" on \"%2$s\"."
 msgstr "Odpojené: Web scénář \"%1$s\" na \"%2$s\"."
@@ -16830,7 +16799,7 @@ msgstr "Problém aktualizace"
 msgid "Updated"
 msgstr "Aktualizováno"
 
-#: include/classes/api/services/CHost.php:1111
+#: include/classes/api/services/CHost.php:1135
 #, c-format
 msgid "Updated status of host \"%1$s\"."
 msgstr "Aktualizovaný stav hostitele \"%1$s\"."
@@ -17438,7 +17407,7 @@ msgstr "Hodnota \"%1$s\" je neplatná pro parametr \"grid_show\". Možnosti: \"%
 msgid "Value \"%1$s\" is invalid for parameter \"grid_show\". Choices are: \"%2$s\"."
 msgstr "Hodnota \"%1$s\" je neplatná pro parametr \"grid_show\". Možnosti: \"%2$s\"."
 
-#: include/classes/db/DB.php:359 include/classes/db/DB.php:388
+#: include/classes/db/DB.php:339 include/classes/db/DB.php:368
 #, c-format
 msgid "Value \"%1$s\" is too long for field \"%2$s\" - %3$d characters. Allowed length is %4$d characters."
 msgstr "Hodnota \"%1$s\" je příliš dlouhá pro pole \"%2$s\" - %3$d znaků. Povolená délka je do %4$d znaků."
@@ -17604,7 +17573,7 @@ msgstr "Virtuální velikost prostoru v bytech nebo v procentech z celkového po
 msgid "Visible name"
 msgstr "Zobrazované jméno"
 
-#: include/classes/api/services/CHost.php:1983
+#: include/classes/api/services/CHost.php:2007
 msgid "Visible name cannot be empty if host name is missing."
 msgstr "Zobrazované jméno nemůže být prázdné když jméno hostu chybí."
 
@@ -17804,8 +17773,8 @@ msgstr "Zápis"
 msgid "Wrong fields for dependency for service \"%1$s\"."
 msgstr "Nesprávné pole pro závislost na službě \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:1668
-#: include/classes/api/services/CHost.php:1861
+#: include/classes/api/services/CHost.php:1692
+#: include/classes/api/services/CHost.php:1885
 #, c-format
 msgid "Wrong fields for host \"%1$s\"."
 msgstr "Nesprávné pole pro hosta \"%1$s\"."
@@ -18013,8 +17982,8 @@ msgid "You did not specify targets for action operation global script \"%s\"."
 msgstr "Nespecifikovali jste cíle pro akci globálního skriptu \"%s\"."
 
 #: include/classes/api/services/CCorrelation.php:474
-#: include/classes/api/services/CHost.php:703
-#: include/classes/api/services/CHost.php:768
+#: include/classes/api/services/CHost.php:727
+#: include/classes/api/services/CHost.php:792
 #: include/classes/api/services/CIconMap.php:178
 #: include/classes/api/services/CIconMap.php:249
 #: include/classes/api/services/CMaintenance.php:521
@@ -18024,11 +17993,11 @@ msgstr "Nespecifikovali jste cíle pro akci globálního skriptu \"%s\"."
 #: include/classes/api/services/CScript.php:318
 #: include/classes/api/services/CScript.php:560
 #: include/classes/api/services/CTask.php:104
-#: include/classes/api/services/CTemplate.php:397
-#: include/classes/api/services/CTemplate.php:540
-#: include/classes/api/services/CTemplate.php:572
-#: include/classes/api/services/CTemplate.php:989
-#: include/classes/api/services/CTemplate.php:1095
+#: include/classes/api/services/CTemplate.php:426
+#: include/classes/api/services/CTemplate.php:569
+#: include/classes/api/services/CTemplate.php:601
+#: include/classes/api/services/CTemplate.php:981
+#: include/classes/api/services/CTemplate.php:1087
 #: include/classes/api/services/CUserMacro.php:266
 #: include/classes/api/services/CUserMacro.php:350
 #: include/classes/api/services/CUserMacro.php:443
@@ -18190,35 +18159,35 @@ msgstr "[Nesprávná hodnota pro den: \"%s\" ]"
 msgid "[Wrong value for month: \"%s\" ]"
 msgstr "[Nesprávná hodnota pro měsíc: \"%s\" ]"
 
-#: include/classes/validators/CApiInputValidator.php:781
+#: include/classes/validators/CApiInputValidator.php:789
 msgid "a boolean is expected"
 msgstr "boolean je očekávám"
 
 #: include/classes/api/services/CUser.php:668
 #: include/classes/import/validators/CXmlValidatorGeneral.php:193
-#: include/classes/validators/CApiInputValidator.php:254
+#: include/classes/validators/CApiInputValidator.php:262
 #: include/classes/validators/CNewValidator.php:279
 msgid "a character string is expected"
 msgstr "řetězec znaků se očekává"
 
-#: include/classes/validators/CApiInputValidator.php:571
+#: include/classes/validators/CApiInputValidator.php:579
 msgid "a floating point value is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:295
+#: include/classes/validators/CApiInputValidator.php:303
 msgid "a hexadecimal colour code (6 symbols) is expected"
 msgstr "hexadecimální barevný kód (6 symbolů) je očekáván"
 
-#: include/classes/validators/CApiInputValidator.php:742
-#: include/classes/validators/CApiInputValidator.php:1185
+#: include/classes/validators/CApiInputValidator.php:750
+#: include/classes/validators/CApiInputValidator.php:1193
 msgid "a number is expected"
 msgstr "číslo je očekáváno"
 
-#: include/classes/validators/CApiInputValidator.php:446
-#: include/classes/validators/CApiInputValidator.php:485
-#: include/classes/validators/CApiInputValidator.php:752
-#: include/classes/validators/CApiInputValidator.php:1192
-#: include/classes/validators/CApiInputValidator.php:1418
+#: include/classes/validators/CApiInputValidator.php:454
+#: include/classes/validators/CApiInputValidator.php:493
+#: include/classes/validators/CApiInputValidator.php:760
+#: include/classes/validators/CApiInputValidator.php:1200
+#: include/classes/validators/CApiInputValidator.php:1426
 msgid "a number is too large"
 msgstr "číslo je moc veliké"
 
@@ -18228,28 +18197,32 @@ msgstr "číslo je moc veliké"
 msgid "a numeric value is expected"
 msgstr "očekává se číselná hodnota"
 
+#: include/classes/validators/CApiInputValidator.php:1728
+msgid "a string, number or null value is expected"
+msgstr ""
+
 #: include/classes/validators/CNewValidator.php:267
 msgid "a time is expected"
 msgstr "očekáváný čas"
 
 #: app/controllers/CControllerPopupMedia.php:110
-#: include/classes/validators/CApiInputValidator.php:1326
+#: include/classes/validators/CApiInputValidator.php:1334
 #: include/validate.inc.php:216
 msgid "a time period is expected"
 msgstr "je očekávána perioda času"
 
-#: include/classes/validators/CApiInputValidator.php:1292
+#: include/classes/validators/CApiInputValidator.php:1300
 #: include/validate.inc.php:235
 msgid "a time range is expected"
 msgstr "očekává se časový rozsah"
 
 #: app/controllers/CControllerPopupHttpStep.php:94
-#: include/classes/validators/CApiInputValidator.php:1407
+#: include/classes/validators/CApiInputValidator.php:1415
 #: include/validate.inc.php:227 include/validate.inc.php:591
 msgid "a time unit is expected"
 msgstr "je očekávána časová jednotka"
 
-#: include/classes/validators/CApiInputValidator.php:1259
+#: include/classes/validators/CApiInputValidator.php:1267
 msgid "a user macro is expected"
 msgstr "je očekáváno uživatelské macro"
 
@@ -18295,27 +18268,31 @@ msgstr "všechny média"
 #: include/classes/api/services/CItemGeneral.php:1977
 #: include/classes/api/services/CItemGeneral.php:2001
 #: include/classes/import/validators/CXmlValidatorGeneral.php:207
-#: include/classes/validators/CApiInputValidator.php:394
-#: include/classes/validators/CApiInputValidator.php:526
-#: include/classes/validators/CApiInputValidator.php:602
-#: include/classes/validators/CApiInputValidator.php:696
-#: include/classes/validators/CApiInputValidator.php:836
-#: include/classes/validators/CApiInputValidator.php:989
-#: include/classes/validators/CApiInputValidator.php:1031
+#: include/classes/validators/CApiInputValidator.php:402
+#: include/classes/validators/CApiInputValidator.php:534
+#: include/classes/validators/CApiInputValidator.php:610
+#: include/classes/validators/CApiInputValidator.php:704
+#: include/classes/validators/CApiInputValidator.php:844
+#: include/classes/validators/CApiInputValidator.php:997
+#: include/classes/validators/CApiInputValidator.php:1039
 msgid "an array is expected"
 msgstr "očekává se pole"
 
-#: include/classes/validators/CApiInputValidator.php:915
-#: include/classes/validators/CApiInputValidator.php:944
+#: include/classes/validators/CApiInputValidator.php:923
+#: include/classes/validators/CApiInputValidator.php:952
 msgid "an array or a character string is expected"
 msgstr "řada či znakový řetězec je očekáván"
+
+#: include/classes/validators/CApiInputValidator.php:1708
+msgid "an array or object is expected"
+msgstr ""
 
 #: include/classes/import/validators/C10XmlValidator.php:397
 #: include/classes/import/validators/C10XmlValidator.php:419
 msgid "an empty string is expected"
 msgstr "prázdný řetězec je očekávan"
 
-#: include/classes/api/services/CHost.php:1609
+#: include/classes/api/services/CHost.php:1633
 msgid "an even number of hexadecimal characters is expected"
 msgstr "je očekáván sudý počet hexadecimálních znaků"
 
@@ -18323,11 +18300,11 @@ msgstr "je očekáván sudý počet hexadecimálních znaků"
 msgid "an explicit time is expected"
 msgstr "přesný čas je očekáván"
 
-#: include/classes/validators/CApiInputValidator.php:441
+#: include/classes/validators/CApiInputValidator.php:449
 msgid "an integer is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:480
+#: include/classes/validators/CApiInputValidator.php:488
 msgid "an unsigned integer is expected"
 msgstr ""
 
@@ -18423,8 +18400,8 @@ msgstr "nemůže být změněno"
 #: include/classes/api/services/CDRule.php:357
 #: include/classes/api/services/CDRule.php:512
 #: include/classes/api/services/CEvent.php:847
-#: include/classes/api/services/CHost.php:1597
-#: include/classes/api/services/CHost.php:1603
+#: include/classes/api/services/CHost.php:1621
+#: include/classes/api/services/CHost.php:1627
 #: include/classes/api/services/CItemGeneral.php:484
 #: include/classes/api/services/CItemGeneral.php:511
 #: include/classes/api/services/CItemGeneral.php:517
@@ -18450,14 +18427,14 @@ msgstr "nemůže být změněno"
 #: include/classes/api/services/CUserGroup.php:463
 #: include/classes/api/services/CUser.php:536
 #: include/classes/api/services/CUser.php:679
-#: include/classes/validators/CApiInputValidator.php:264
-#: include/classes/validators/CApiInputValidator.php:399
-#: include/classes/validators/CApiInputValidator.php:531
-#: include/classes/validators/CApiInputValidator.php:607
-#: include/classes/validators/CApiInputValidator.php:701
-#: include/classes/validators/CApiInputValidator.php:747
-#: include/classes/validators/CApiInputValidator.php:994
-#: include/classes/validators/CApiInputValidator.php:1036
+#: include/classes/validators/CApiInputValidator.php:272
+#: include/classes/validators/CApiInputValidator.php:407
+#: include/classes/validators/CApiInputValidator.php:539
+#: include/classes/validators/CApiInputValidator.php:615
+#: include/classes/validators/CApiInputValidator.php:709
+#: include/classes/validators/CApiInputValidator.php:755
+#: include/classes/validators/CApiInputValidator.php:1002
+#: include/classes/validators/CApiInputValidator.php:1044
 #: include/classes/validators/CNewValidator.php:91 usergrps.php:318
 #: usergrps.php:358 usergrps.php:361
 msgid "cannot be empty"
@@ -18560,7 +18537,7 @@ msgstr "klesající"
 msgid "diff() - Difference between last and preceding values (1 - true, 0 - false)"
 msgstr "diff() - Rozdíl mezi poslední a předchozími hodnotami (1 - pravá, 0 - falešná)"
 
-#: include/classes/validators/CApiInputValidator.php:1229
+#: include/classes/validators/CApiInputValidator.php:1237
 msgid "directory or script name cannot be empty"
 msgstr "adresář nebo název skriptu nemůže být prázdný"
 
@@ -18724,7 +18701,7 @@ msgstr "interní"
 msgid "invalid address range \"%1$s\""
 msgstr "neplatný rozsah adresy \"%1$s\""
 
-#: include/classes/validators/CApiInputValidator.php:259
+#: include/classes/validators/CApiInputValidator.php:267
 msgid "invalid byte sequence in UTF-8"
 msgstr "neplatná bytová sekvence v UTF-8"
 
@@ -18739,15 +18716,15 @@ msgstr "neplatné zdržení"
 msgid "invalid history storage period"
 msgstr "neplatná perioda historie ukládání"
 
-#: include/classes/validators/CApiInputValidator.php:1088
+#: include/classes/validators/CApiInputValidator.php:1096
 msgid "invalid host group name"
 msgstr "neplatný název skupiny"
 
-#: include/classes/validators/CApiInputValidator.php:1132
+#: include/classes/validators/CApiInputValidator.php:1140
 msgid "invalid host name"
 msgstr "neplatné jméno hosta"
 
-#: include/classes/validators/CApiInputValidator.php:1362
+#: include/classes/validators/CApiInputValidator.php:1370
 msgid "invalid regular expression"
 msgstr "neplatný regulérní výraz"
 
@@ -18769,7 +18746,7 @@ msgstr "je větší než nebo se rovná"
 msgid "is less than or equals"
 msgstr "je menší než nebo se rovná"
 
-#: include/classes/validators/CApiInputValidator.php:1598
+#: include/classes/validators/CApiInputValidator.php:1606
 msgid "is not enclosed in {} or is malformed"
 msgstr "není to uzavřeno v {} nebo je to poškozeno"
 
@@ -18906,7 +18883,7 @@ msgstr "min"
 msgid "min() - Minimum value for period T"
 msgstr "min() - Minimální hodnota pro periodu T"
 
-#: include/classes/api/services/CHost.php:1615
+#: include/classes/api/services/CHost.php:1639
 #, c-format
 msgid "minimum length is %1$s characters"
 msgstr "minimální délka je %1$s znaků"
@@ -18939,8 +18916,8 @@ msgstr "musí být platný uživatel LDAP"
 msgid "must be between \"%1$s\" and \"%2$s\""
 msgstr "musí být mezi \"%1$s\" a \"%2$s\""
 
-#: include/classes/validators/CApiInputValidator.php:1095
-#: include/classes/validators/CApiInputValidator.php:1139
+#: include/classes/validators/CApiInputValidator.php:1103
+#: include/classes/validators/CApiInputValidator.php:1147
 msgid "must contain at least one low-level discovery macro"
 msgstr "musí obsahovat minimálně jedno základní vyhledávací makro"
 
@@ -18959,7 +18936,7 @@ msgid "new"
 msgstr "nový"
 
 #: hosts.php:1145 include/views/configuration.host.massupdate.php:83
-#: include/views/configuration.item.massupdate.php:652 templates.php:531
+#: include/views/configuration.item.massupdate.php:652 templates.php:528
 msgctxt "new element in multiselect"
 msgid "new"
 msgstr "nový"
@@ -19163,10 +19140,10 @@ msgstr "vybrané"
 msgid "short description"
 msgstr "krátký popis"
 
-#: include/classes/api/services/CHost.php:1622
-#: include/classes/api/services/CHost.php:1628
-#: include/classes/api/services/CHost.php:1637
-#: include/classes/api/services/CHost.php:1643
+#: include/classes/api/services/CHost.php:1646
+#: include/classes/api/services/CHost.php:1652
+#: include/classes/api/services/CHost.php:1661
+#: include/classes/api/services/CHost.php:1667
 #: include/classes/api/services/CHttpTest.php:959
 #: include/classes/api/services/CHttpTest.php:1057
 #: include/classes/api/services/CItemGeneral.php:498
@@ -19247,11 +19224,11 @@ msgstr "šablona ID \"%1$s\" je použitá %2$s krát"
 #: app/controllers/CControllerDashboardUpdate.php:135
 #: app/controllers/CControllerDashboardUpdate.php:143
 #: include/classes/api/services/CDashboard.php:385
-#: include/classes/api/services/CHost.php:1702
-#: include/classes/api/services/CHost.php:1891
+#: include/classes/api/services/CHost.php:1726
+#: include/classes/api/services/CHost.php:1915
 #: include/classes/api/services/CHttpTest.php:744
-#: include/classes/api/services/CTemplate.php:378
-#: include/classes/validators/CApiInputValidator.php:871
+#: include/classes/api/services/CTemplate.php:407
+#: include/classes/validators/CApiInputValidator.php:879
 #, c-format
 msgid "the parameter \"%1$s\" is missing"
 msgstr "parametr \"%1$s\" chybí"
@@ -19303,7 +19280,7 @@ msgstr "spouštěč"
 msgid "trigger does not allow manual closing"
 msgstr "spouštěč neumožňuje manuální zavírání"
 
-#: include/classes/validators/CApiInputValidator.php:1677
+#: include/classes/validators/CApiInputValidator.php:1685
 msgid "trigger expression must contain at least one host:key reference"
 msgstr ""
 
@@ -19320,7 +19297,7 @@ msgstr "spouštěc s vazbami nelze přesunout do jiné šablony nebo hosta"
 msgid "type here to search"
 msgstr "pište zde pro vyhledávání"
 
-#: include/classes/validators/CApiInputValidator.php:1630
+#: include/classes/validators/CApiInputValidator.php:1638
 msgid "unacceptable URL"
 msgstr ""
 
@@ -19334,7 +19311,7 @@ msgstr "neočekávaný konec makra"
 
 #: include/classes/api/services/CHttpTest.php:458
 #: include/classes/api/services/CHttpTest.php:482
-#: include/classes/validators/CApiInputValidator.php:843
+#: include/classes/validators/CApiInputValidator.php:851
 #, c-format
 msgid "unexpected parameter \"%1$s\""
 msgstr "neočekávaný parametr \"%1$s\""
@@ -19354,8 +19331,8 @@ msgstr "neočekávaný text \"%1$s\""
 
 #: include/classes/api/services/CEvent.php:805
 #: include/classes/api/services/CEvent.php:905
-#: include/classes/api/services/CHost.php:1577
-#: include/classes/api/services/CHost.php:1583
+#: include/classes/api/services/CHost.php:1601
+#: include/classes/api/services/CHost.php:1607
 #: include/classes/api/services/CItemGeneral.php:1278
 #: include/classes/api/services/CProxy.php:559
 #: include/classes/api/services/CProxy.php:566
@@ -19416,40 +19393,40 @@ msgstr "hodnota"
 msgid "value \"%1$s\" not found"
 msgstr "hodnota \"%1$s\" nebyla nalezena"
 
-#: include/classes/validators/CApiInputValidator.php:1452
-#: include/classes/validators/CApiInputValidator.php:1506
+#: include/classes/validators/CApiInputValidator.php:1460
+#: include/classes/validators/CApiInputValidator.php:1514
 #, c-format
 msgid "value %1$s already exists"
 msgstr "hodnota %1$s již existuje"
 
 #: include/classes/api/services/CTriggerGeneral.php:1646
 #: include/classes/api/services/CTriggerGeneral.php:1663
-#: include/classes/validators/CApiInputValidator.php:362
-#: include/classes/validators/CApiInputValidator.php:1079
-#: include/classes/validators/CApiInputValidator.php:1122
-#: include/classes/validators/CApiInputValidator.php:1174
-#: include/classes/validators/CApiInputValidator.php:1219
-#: include/classes/validators/CApiInputValidator.php:1254
-#: include/classes/validators/CApiInputValidator.php:1285
-#: include/classes/validators/CApiInputValidator.php:1319
-#: include/classes/validators/CApiInputValidator.php:1353
-#: include/classes/validators/CApiInputValidator.php:1593
-#: include/classes/validators/CApiInputValidator.php:1625
-#: include/classes/validators/CApiInputValidator.php:1661
+#: include/classes/validators/CApiInputValidator.php:370
+#: include/classes/validators/CApiInputValidator.php:1087
+#: include/classes/validators/CApiInputValidator.php:1130
+#: include/classes/validators/CApiInputValidator.php:1182
+#: include/classes/validators/CApiInputValidator.php:1227
+#: include/classes/validators/CApiInputValidator.php:1262
+#: include/classes/validators/CApiInputValidator.php:1293
+#: include/classes/validators/CApiInputValidator.php:1327
+#: include/classes/validators/CApiInputValidator.php:1361
+#: include/classes/validators/CApiInputValidator.php:1601
+#: include/classes/validators/CApiInputValidator.php:1633
+#: include/classes/validators/CApiInputValidator.php:1669
 msgid "value is too long"
 msgstr "hodnota je příliš dlouhá"
 
 #: app/controllers/CControllerPopupHttpStep.php:101
-#: include/classes/api/services/CHost.php:778
-#: include/classes/api/services/CHost.php:1753
-#: include/classes/api/services/CHost.php:1908
+#: include/classes/api/services/CHost.php:802
+#: include/classes/api/services/CHost.php:1777
+#: include/classes/api/services/CHost.php:1932
 #: include/classes/api/services/CMapElement.php:102
 #: include/classes/api/services/CMap.php:675
 #: include/classes/api/services/CMap.php:681
 #: include/classes/api/services/CMap.php:1129
 #: include/classes/api/services/CMap.php:1135
-#: include/classes/validators/CApiInputValidator.php:356
-#: include/classes/validators/CApiInputValidator.php:664
+#: include/classes/validators/CApiInputValidator.php:364
+#: include/classes/validators/CApiInputValidator.php:672
 #: include/validate.inc.php:584
 #, c-format
 msgid "value must be one of %1$s"
