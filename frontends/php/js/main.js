@@ -417,6 +417,12 @@ var hintBox = {
 
 				// Manually trigger preloaderCloseHandler for the previous preloader.
 				if (jQuery('#hintbox-preloader').length) {
+
+					// Prevent loading restart on repetitive click and keydown events.
+					if (e.type === 'click' || e.type === 'keydown') {
+						return false;
+					}
+
 					jQuery(document).trigger('click');
 				}
 
@@ -499,7 +505,7 @@ var hintBox = {
 
 		var $preloader = hintBox.createPreloader();
 
-		setTimeout(function() {
+		var preloader_timer = setTimeout(function() {
 			$preloader.fadeIn(200);
 			hintBox.positionElement(e, $target[0], $preloader);
 		}, 500);
@@ -507,6 +513,7 @@ var hintBox = {
 		addToOverlaysStack($preloader.prop('id'), $target[0], 'preloader', xhr);
 
 		xhr.done(function(resp) {
+			clearTimeout(preloader_timer);
 			overlayPreloaderDestroy($preloader.prop('id'));
 
 			var $hint_box = $target.next('.hint-box').empty();
