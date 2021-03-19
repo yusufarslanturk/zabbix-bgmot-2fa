@@ -1340,7 +1340,7 @@ class CHost extends CHostGeneral {
 		]);
 
 		$db_hosts = API::Host()->get([
-			'output' => ['hostid', 'name'],
+			'output' => ['hostid', 'host', 'name'],
 			'hostids' => $hostIds,
 			'nopermissions' => true
 		]);
