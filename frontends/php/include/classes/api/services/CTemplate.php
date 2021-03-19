@@ -561,7 +561,7 @@ class CTemplate extends CHostGeneral {
 		}
 
 		$db_templates = $this->get([
-			'output' => ['templateid', 'name'],
+			'output' => ['templateid', 'host', 'name'],
 			'templateids' => $templateids,
 			'editable' => true,
 			'preservekeys' => true
