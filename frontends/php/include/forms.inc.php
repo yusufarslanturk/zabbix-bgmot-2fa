@@ -2011,7 +2011,7 @@ function getTimeperiodForm(array $data) {
 								2 => _x('second', 'adjective'),
 								3 => _('third'),
 								4 => _('fourth'),
-								5 => _('last')
+								5 => _x('last', 'week of month')
 							])))
 						)
 						->addRow(
