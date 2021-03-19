@@ -174,6 +174,12 @@ class CAudit {
 				$table_name = 'hosts';
 				break;
 
+			case AUDIT_RESOURCE_TEMPLATE:
+				$field_name_resourceid = 'hostid';
+				$field_name_resourcename = 'host';
+				$table_name = 'hosts';
+				break;
+
 			default:
 				return;
 		}
