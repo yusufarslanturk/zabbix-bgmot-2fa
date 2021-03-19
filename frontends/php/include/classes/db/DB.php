@@ -458,7 +458,7 @@ class DB {
 	 *
 	 * @return array
 	 */
-	private static function getMandatoryFields(array $table_schema): array {
+	private static function getMandatoryFields(array $table_schema) {
 		global $DB;
 
 		$mandatory_fields = [];
