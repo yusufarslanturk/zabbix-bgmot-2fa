@@ -78,6 +78,7 @@ class CRouter {
 		'export.templates.xml'			=> ['CControllerExportXml',					'layout.xml',			null],
 		'favourite.create'				=> ['CControllerFavouriteCreate',			'layout.javascript',	null],
 		'favourite.delete'				=> ['CControllerFavouriteDelete',			'layout.javascript',	null],
+		'hint.box'						=> ['CControllerHintBox',					'layout.json',			'hint.box'],
 		'map.view'						=> ['CControllerMapView',					'layout.htmlpage',		'monitoring.map.view'],
 		'mediatype.create'				=> ['CControllerMediatypeCreate',			null,					null],
 		'mediatype.delete'				=> ['CControllerMediatypeDelete',			null,					null],
