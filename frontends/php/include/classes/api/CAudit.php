@@ -125,6 +125,12 @@ class CAudit {
 				$table_name = 'globalmacro';
 				break;
 
+			case AUDIT_RESOURCE_MAINTENANCE:
+				$field_name_resourceid = 'maintenanceid';
+				$field_name_resourcename = 'name';
+				$table_name = 'maintenances';
+				break;
+
 			case AUDIT_RESOURCE_PROXY:
 				$field_name_resourceid = 'proxyid';
 				$field_name_resourcename = 'host';
@@ -175,7 +181,7 @@ class CAudit {
 				break;
 
 			case AUDIT_RESOURCE_TEMPLATE:
-				$field_name_resourceid = 'hostid';
+				$field_name_resourceid = 'templateid';
 				$field_name_resourcename = 'host';
 				$table_name = 'hosts';
 				break;
