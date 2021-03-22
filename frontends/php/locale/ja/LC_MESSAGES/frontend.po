@@ -18601,7 +18601,7 @@ msgstr "最新値"
 #: include/forms.inc.php:2014 include/maintenances.inc.php:115
 msgctxt "week of month"
 msgid "last"
-msgstr "最後"
+msgstr "最終"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:276
 msgid "last() - Last (most recent) T value"
