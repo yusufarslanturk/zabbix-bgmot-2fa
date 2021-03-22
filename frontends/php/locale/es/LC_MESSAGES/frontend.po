@@ -18674,10 +18674,15 @@ msgid "key is empty"
 msgstr ""
 
 #: include/classes/graphdraw/CLineGraphDraw.php:1853
-#: include/classes/graphdraw/CPieGraphDraw.php:333 include/forms.inc.php:2014
-#: include/graphs.inc.php:82 include/maintenances.inc.php:115
+#: include/classes/graphdraw/CPieGraphDraw.php:333
+#: include/graphs.inc.php:82
 #: include/views/js/configuration.graph.edit.js.php:182
 #: include/views/js/configuration.graph.edit.js.php:245
+msgid "last"
+msgstr "último"
+
+#: include/forms.inc.php:2014 include/maintenances.inc.php:115
+msgctxt "week of month"
 msgid "last"
 msgstr "último"
 
