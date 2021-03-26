@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-22 11:44+0200\n"
-"PO-Revision-Date: 2021-02-08 03:32+0300\n"
+"PO-Revision-Date: 2021-03-23 11:18+0300\n"
 "Last-Translator: Atsushi <a.tanaka77@gmail.com>\n"
 "Language-Team: Zabbix\n"
 "Language: ja\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.5.1.3\n"
 "X-Poedit-Basepath: ../../\n"
-"X-POOTLE-MTIME: 1612747937.000000\n"
+"X-POOTLE-MTIME: 1616491125.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:70
 #: include/classes/db/OracleDbBackend.php:89
@@ -9413,7 +9413,7 @@ msgstr "JSON文字列で指定してください"
 #: include/classes/core/CJsonRpc.php:153
 #, c-format
 msgid "JSON-RPC error generation failed. No such error \"%1$s\"."
-msgstr ""
+msgstr "JSON-RPCエラーの生成に失敗しました。\"%1$s\"というようなエラーはありません。"
 
 #: app/views/administration.mediatype.edit.php:54 include/media.inc.php:27
 msgid "Jabber"
@@ -17999,7 +17999,7 @@ msgstr "数値で指定してください"
 
 #: include/classes/validators/CApiInputValidator.php:1728
 msgid "a string, number or null value is expected"
-msgstr ""
+msgstr "文字列か数字か空文字列で指定してください"
 
 #: include/classes/validators/CNewValidator.php:267
 msgid "a time is expected"
@@ -18085,7 +18085,7 @@ msgstr "配列か文字列で指定してください"
 
 #: include/classes/validators/CApiInputValidator.php:1708
 msgid "an array or object is expected"
-msgstr ""
+msgstr "配列かオブジェクトで指定してください"
 
 #: include/classes/import/validators/C10XmlValidator.php:397
 #: include/classes/import/validators/C10XmlValidator.php:419
