@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
 ** Copyright (C) 2001-2021 Zabbix SIA
@@ -19,9 +19,11 @@
 **/
 
 
-class CMacroParserTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
 
-	public function testProvider() {
+class CMacroParserTest extends TestCase {
+
+	public function dataProvider() {
 		return [
 			[[], '{HOST.HOST}', 0, [
 				'rc' => CParser::PARSE_SUCCESS,
@@ -112,7 +114,7 @@ class CMacroParserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testProvider
+	 * @dataProvider dataProvider
 	 *
 	 * @param string $source
 	 * @param int    $pos
