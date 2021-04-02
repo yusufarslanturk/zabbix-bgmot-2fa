@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-22 11:44+0200\n"
+"POT-Creation-Date: 2021-04-02 19:50+0300\n"
 "PO-Revision-Date: 2021-03-19 17:56+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -1445,7 +1445,7 @@ msgid "CERT"
 msgstr ""
 
 #: app/views/hint.box.php:111 app/views/monitoring.widget.problems.view.php:93
-#: include/classes/graph/CSvgGraph.php:977
+#: include/classes/graph/CSvgGraph.php:980
 #: include/classes/screens/CScreenEvents.php:116
 #: include/classes/screens/CScreenProblem.php:953
 #: include/classes/screens/CScreenProblem.php:1119 include/events.inc.php:340
@@ -12408,7 +12408,7 @@ msgid "POP"
 msgstr ""
 
 #: app/views/hint.box.php:111 app/views/monitoring.widget.problems.view.php:93
-#: chart5.php:199 include/classes/graph/CSvgGraph.php:972
+#: chart5.php:199 include/classes/graph/CSvgGraph.php:975
 #: include/classes/screens/CScreenEvents.php:116
 #: include/classes/screens/CScreenProblem.php:953
 #: include/classes/screens/CScreenProblem.php:1119 include/events.inc.php:340
@@ -13081,7 +13081,7 @@ msgid "Queue of items to be updated"
 msgstr ""
 
 #: app/views/hint.box.php:97 app/views/monitoring.widget.problems.view.php:79
-#: include/classes/graph/CSvgGraph.php:968
+#: include/classes/graph/CSvgGraph.php:971
 #: include/classes/screens/CScreenEvents.php:121
 #: include/classes/screens/CScreenProblem.php:939
 #: include/classes/screens/CScreenProblem.php:1107 include/events.inc.php:345
