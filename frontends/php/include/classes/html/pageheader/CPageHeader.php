@@ -142,12 +142,13 @@ class CPageHeader {
 		<meta name="msapplication-config" content="none"/>
 
 HTML;
+		$themes_path = array_map(function($theme) {
+			return 'assets/styles/'.$theme.'.css';
+		}, array_keys(Z::getThemes()));
 
 		foreach ($this->cssFiles as $path) {
 			// Add query string only to theme css files.
-			if (in_array($path, ['assets/styles/blue-theme.css', 'assets/styles/dark-theme.css',
-						'assets/styles/hc-light.css', 'assets/styles/hc-dark.css'
-					])) {
+			if (in_array($path, $themes_path)) {
 				$path .= '?'.(int) filemtime($path);
 			}
 
