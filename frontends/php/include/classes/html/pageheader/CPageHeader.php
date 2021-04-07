@@ -164,6 +164,10 @@ HTML;
 		}
 
 		foreach ($this->jsFiles as $path) {
+			if (parse_url($path, PHP_URL_QUERY) === null) {
+				$path .= '?'.(int) filemtime($path);
+			}
+
 			echo '<script src="'.htmlspecialchars($path).'"></script>'."\n";
 		}
 
