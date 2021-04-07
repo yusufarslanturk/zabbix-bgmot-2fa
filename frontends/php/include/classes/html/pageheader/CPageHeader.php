@@ -142,17 +142,13 @@ class CPageHeader {
 		<meta name="msapplication-config" content="none"/>
 
 HTML;
-		$themes_path = array_map(function($theme) {
-			return 'assets/styles/'.$theme.'.css';
-		}, array_keys(Z::getThemes()));
 
 		foreach ($this->cssFiles as $path) {
-			// Add query string only to theme css files.
-			if (in_array($path, $themes_path)) {
+			if (parse_url($path, PHP_URL_QUERY) === null) {
 				$path .= '?'.(int) filemtime($path);
 			}
 
-			echo '<link rel="stylesheet" type="text/css" href="'.$path.'" />'."\n";
+			echo '<link rel="stylesheet" type="text/css" href="'.htmlspecialchars($path).'" />'."\n";
 		}
 
 		if ($this->styles) {
@@ -168,7 +164,7 @@ HTML;
 		}
 
 		foreach ($this->jsFiles as $path) {
-			echo '<script src="'.$path.'"></script>'."\n";
+			echo '<script src="'.htmlspecialchars($path).'"></script>'."\n";
 		}
 
 		if ($this->js) {
