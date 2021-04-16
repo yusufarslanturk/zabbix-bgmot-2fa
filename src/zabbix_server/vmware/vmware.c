@@ -3696,7 +3696,7 @@ static int	vmware_service_destroy_event_session(CURL *easyhandle, const char *ev
 		ZBX_POST_VSPHERE_FOOTER
 
 	int	ret = FAIL;
-	char	tmp[MAX_STRING_LEN], *event_session_esc, *soap_err = NULL;
+	char	tmp[MAX_STRING_LEN], *event_session_esc;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
 
@@ -3706,12 +3706,8 @@ static int	vmware_service_destroy_event_session(CURL *easyhandle, const char *ev
 
 	zbx_free(event_session_esc);
 
-	if (SUCCEED != zbx_soap_post(__func__, easyhandle, tmp, NULL, &soap_err))
-	{
-		*error = zbx_strdcatf(*error, "%s%s", NULL != *error ? "; " : "", soap_err);
-		zbx_free(soap_err);
+	if (SUCCEED != zbx_soap_post(__func__, easyhandle, tmp, NULL, error))
 		goto out;
-	}
 
 	ret = SUCCEED;
 out:
