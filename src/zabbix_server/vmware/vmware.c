@@ -631,6 +631,7 @@ static int	zbx_soap_post(const char *fn_parent, CURL *easyhandle, const char *re
 	xmlDoc		*doc;
 	ZBX_HTTPPAGE	*resp;
 	int		ret = SUCCEED;
+	char		*val = NULL;
 
 	if (SUCCEED != zbx_http_post(easyhandle, request, &resp, error))
 		return FAIL;
@@ -638,9 +639,14 @@ static int	zbx_soap_post(const char *fn_parent, CURL *easyhandle, const char *re
 	if (NULL != fn_parent)
 		zabbix_log(LOG_LEVEL_TRACE, "%s() SOAP response: %s", fn_parent, resp->data);
 
-	if (SUCCEED != zbx_xml_try_read_value(resp->data, resp->offset, ZBX_XPATH_FAULTSTRING(), &doc, error, error)
-			|| NULL != *error)
+	if (SUCCEED != zbx_xml_try_read_value(resp->data, resp->offset, ZBX_XPATH_FAULTSTRING(), &doc, &val, error))
 	{
+		ret = FAIL;
+	}
+	else if (NULL != val)
+	{
+		*error = zbx_strdup(*error, val);
+		zbx_free(val);
 		ret = FAIL;
 	}
 
