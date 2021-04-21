@@ -645,8 +645,8 @@ static int	zbx_soap_post(const char *fn_parent, CURL *easyhandle, const char *re
 	}
 	else if (NULL != val)
 	{
-		*error = zbx_strdup(*error, val);
-		zbx_free(val);
+		zbx_free(*error);
+		*error = val;
 		ret = FAIL;
 	}
 
