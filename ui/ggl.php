@@ -9,7 +9,6 @@ include_once dirname(__FILE__).'/gglauth/GoogleQrUrl.php';
 $page['title'] = _('ZABBIX');
 $page['file'] = 'ggl.php';
 
-//CSessionHelper::clear();
 if (isset($_POST['code'])) {
 	// Verify entered code and log in user.
 	// Find current user's secret
@@ -30,21 +29,23 @@ if (isset($_POST['code'])) {
 	if ($g->checkCode($secret, $_POST['code'])) {
 		// Verification successful
 		// Update database if this is the very fist 2FA authentication
-		API::getWrapper()->auth = $_POST['sessionid'];
-		CSessionHelper::set('sessionid', $_POST['sessionid']);
+		CWebUser::setSessionCookie($_POST['sessionid']);
+		if (!zbx_empty(CWebUser::$data['url'])) {
+			$url = CWebUser::$data['url'];
+		}
+		else {
+			$url = ZBX_DEFAULT_URL;
+		}
 		if ($db_users[0]['ggl_enrolled'] == 0) {
 			unset($db_users[0]['ggl_secret']);
 			$db_users[0]['ggl_enrolled'] = 1;
 			API::User()->update($db_users);
 		}
-		redirect('index.php');
+		redirect($url);
 		exit;
 	}
 	else {
-		// Verification failed, fall back to a guest account
-		//CWebUser::logout();
-		//redirect('index.php');
-		//#exit;
+		// Verification failed
 		$data = [
 			'sessionid' => $_POST['sessionid'],
 			'name' => $_POST['name'],
@@ -63,7 +64,7 @@ if (!$name || $name == ZBX_GUEST_USER) {
 
 // Authentication is not complete yet so reset cookie
 // to make it impossible to visit other pages until 2FA complete
-CSessionHelper::clear();
+zbx_unsetcookie('zbx_sessionid');
 
 // Find out whether the user is already enrolled in Google Authenticator
 $db_users = DB::select('users', [
