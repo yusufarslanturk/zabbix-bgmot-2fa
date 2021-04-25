@@ -113,7 +113,7 @@ class CControllerTwofaUpdate extends CController {
 		$data = array_diff_assoc($data, $config);
 
 		if ($data &&
-		    $this->getInput('update', 'no') == 'update' ) {
+		    $this->getInput('update', 'no') == 'Update' ) {
 			// User clicked 'Update'
 			$result = update_config($data);
 			if ($result) {
