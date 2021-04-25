@@ -93,6 +93,7 @@ cd ../../app/views/
 cp -r administration.adusergroups.*  ${ZABBIX_INSTALL_PATH}/app/views/
 cp administration.twofa.edit.php ${ZABBIX_INSTALL_PATH}/app/views/
 cp js/administration.twofa.edit.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/
+cp js/administration.adusergroups.edit.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/
 cp ${ZABBIX_INSTALL_PATH}/app/views/js/administration.userrole.edit.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/administration.userrole.edit.js.php-`date +%s`.bak
 cp js/administration.userrole.edit.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/
 cp ${ZABBIX_INSTALL_PATH}/app/views/js/reports.auditlog.list.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/reports.auditlog.list.js.php-`date +%s`.bak
