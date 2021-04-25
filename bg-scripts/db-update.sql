@@ -4,6 +4,9 @@ ALTER TABLE config ADD COLUMN 2fa_duo_integration_key VARCHAR(255) DEFAULT '';
 ALTER TABLE config ADD COLUMN 2fa_duo_secret_key VARCHAR(255) DEFAULT '';
 ALTER TABLE config ADD COLUMN 2fa_duo_a_key CHAR(40) DEFAULT '';
 
+ALTER TABLE users ADD COLUMN ggl_secret VARCHAR(100) DEFAULT '' NOT NULL;
+ALTER TABLE users ADD COLUMN ggl_enrolled INT DEFAULT 0 NOT NULL;
+
 CREATE TABLE `adusrgrp` (
         `adusrgrpid`             bigint unsigned                           NOT NULL,
         `name`                   varchar(64)     DEFAULT ''                NOT NULL,
