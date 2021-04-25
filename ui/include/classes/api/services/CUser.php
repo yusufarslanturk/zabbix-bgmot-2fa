@@ -359,7 +359,7 @@ class CUser extends CApiService {
 
 			// strings
 			$field_names = ['alias', 'name', 'surname', 'autologout', 'passwd', 'refresh', 'url', 'lang', 'theme',
-				'timezone'
+				'timezone', 'ggl_secret'
 			];
 			foreach ($field_names as $field_name) {
 				if (array_key_exists($field_name, $user) && $user[$field_name] !== $db_user[$field_name]) {
@@ -368,7 +368,7 @@ class CUser extends CApiService {
 			}
 
 			// integers
-			foreach (['autologin', 'rows_per_page', 'roleid'] as $field_name) {
+			foreach (['autologin', 'rows_per_page', 'roleid', 'ggl_enrolled'] as $field_name) {
 				if (array_key_exists($field_name, $user) && $user[$field_name] != $db_user[$field_name]) {
 					$upd_user[$field_name] = $user[$field_name];
 				}
@@ -436,7 +436,9 @@ class CUser extends CApiService {
 				'active' =>			['type' => API_INT32, 'in' => implode(',', [MEDIA_STATUS_ACTIVE, MEDIA_STATUS_DISABLED])],
 				'severity' =>		['type' => API_INT32, 'in' => '0:63'],
 				'period' =>			['type' => API_TIME_PERIOD, 'flags' => API_ALLOW_USER_MACRO, 'length' => DB::getFieldLength('media', 'period')]
-			]]
+			]],
+			'ggl_secret' =>				['type' => API_STRING_UTF8, 'flags' => API_NOT_EMPTY, 'length' => 255],
+			'ggl_enrolled' =>			['type' => API_ID]
 		]];
 		if (!CApiInputValidator::validate($api_input_rules, $users, '/', $error)) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, $error);

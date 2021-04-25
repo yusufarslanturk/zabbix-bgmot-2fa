@@ -130,6 +130,18 @@ return [
 				'length' => 20,
 				'ref_table' => 'role',
 				'ref_field' => 'roleid'
+			],
+			'ggl_secret' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_CHAR,
+				'length' => 100,
+				'default' => ''
+			],
+			'ggl_enrolled' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_INT,
+				'length' => 10,
+				'default' => '0'
 			]
 		]
 	],

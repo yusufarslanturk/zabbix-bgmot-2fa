@@ -90,6 +90,9 @@ if (hasRequest('enter') && CWebUser::login(getRequest('name', ZBX_GUEST_USER), g
 			case ZBX_AUTH_2FA_DUO:
 				$redirect = 'duo.php';
 				break;
+			case ZBX_AUTH_2FA_GGL:
+				$redirect = 'ggl.php';
+				break;
 			default:
 				$redirect = array_filter([CWebUser::isGuest() ? '' : $request, CWebUser::$data['url'], CMenuHelper::getFirstUrl()]);
 		}

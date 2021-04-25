@@ -16,6 +16,7 @@ $twofaFormList->addRow(_('Two factor authentication'),
 		->setAttribute('autofocus', 'autofocus')
 		->addValue(_('None'), ZBX_AUTH_2FA_NONE, null, 'submit()')
 		->addValue(_('DUO'), ZBX_AUTH_2FA_DUO, null, 'submit()')
+		->addValue(_('Google Authenticator'), ZBX_AUTH_2FA_GGL, null, 'submit()')
 		->setModern(true)
 );
 
@@ -40,6 +41,10 @@ if ($data['2fa_type'] == ZBX_AUTH_2FA_DUO) {
 	$twofaFormList->addRow(
 		_('40 characters long custom key'),
 		(new CPassBox('2fa_duo_a_key', $data['2fa_duo_a_key'], 40))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+	);
+} else if ($data['2fa_type'] == ZBX_AUTH_2FA_GGL) {
+        $twofaFormList->addRow(
+		_('All users will be required to use Google Authenticator application on their devices')
 	);
 }
 

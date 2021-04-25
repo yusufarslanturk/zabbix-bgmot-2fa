@@ -118,7 +118,7 @@ class CTwofa extends CApiService {
 	 */
 	protected function validateUpdate(array $twofa): array {
 		$api_input_rules = ['type' => API_OBJECT, 'flags' => API_NOT_EMPTY, 'fields' => [
-			'2fa_type' =>				['type' => API_INT32, 'in' => ZBX_AUTH_2FA_NONE.','.ZBX_AUTH_2FA_DUO],
+			'2fa_type' =>				['type' => API_INT32, 'in' => ZBX_AUTH_2FA_NONE.','.ZBX_AUTH_2FA_DUO.','.ZBX_AUTH_2FA_GGL],
 			'2fa_duo_api_hostname' =>		['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('config', '2fa_duo_api_hostname')],
 			'2fa_duo_integration_key' =>		['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('config', '2fa_duo_integration_key')],
 			'2fa_duo_secret_key' =>			['type' => API_STRING_UTF8, 'length' => DB::getFieldLength('config', '2fa_duo_secret_key')],

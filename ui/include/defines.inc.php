@@ -125,6 +125,7 @@ define('ZBX_AUTH_CASE_INSENSITIVE',	0);
 define('ZBX_AUTH_CASE_SENSITIVE',	1);
 define('ZBX_AUTH_2FA_NONE',	0);
 define('ZBX_AUTH_2FA_DUO',	1);
+define('ZBX_AUTH_2FA_GGL',	2);
 
 define('ZBX_DB_MYSQL',		'MYSQL');
 define('ZBX_DB_ORACLE',		'ORACLE');

@@ -19,7 +19,7 @@ class CControllerTwofaUpdate extends CController {
 		$fields = [
 			'form_refresh' =>		'string',
 			'update' =>			'string',
-			'2fa_type' =>			'in '.ZBX_AUTH_2FA_NONE.','.ZBX_AUTH_2FA_DUO,
+			'2fa_type' =>			'in '.ZBX_AUTH_2FA_NONE.','.ZBX_AUTH_2FA_DUO.','.ZBX_AUTH_2FA_GGL,
 			'2fa_duo_api_hostname' =>	'db config.2fa_duo_api_hostname',
 			'2fa_duo_integration_key' => 	'db config.2fa_duo_integration_key',
 			'2fa_duo_secret_key' =>		'db config.2fa_duo_secret_key',
@@ -94,7 +94,7 @@ class CControllerTwofaUpdate extends CController {
 
 		if ( ($this->getInput('2fa_type') == ZBX_AUTH_2FA_DUO &&
 		      $this->getInput('2fa_duo_api_hostname', 'no') == 'no') ||
-		     ($this->getInput('2fa_type') == ZBX_AUTH_2FA_NONE &&
+		     ($this->getInput('2fa_type') != ZBX_AUTH_2FA_DUO &&
 		      $this->getInput('2fa_duo_api_hostname', 'no') != 'no') ) {
 			// Just switching Tabs
 			$this->response->setFormData($this->getInputAll());
