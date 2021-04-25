@@ -64,7 +64,8 @@ class CControllerTwofaUpdate extends CController {
 		];
 		$this->getInputs($twofa_auth, $twofa_fields);
 
-		if ($twofa_auth['2fa_type'] == ZBX_AUTH_2FA_NONE) {
+		if ($twofa_auth['2fa_type'] == ZBX_AUTH_2FA_NONE ||
+		    $twofa_auth['2fa_type'] == ZBX_AUTH_2FA_GGL) {
 			return true;
 		}
 		foreach ($twofa_fields as $field) {
@@ -92,10 +93,7 @@ class CControllerTwofaUpdate extends CController {
 			$twofa[$param] = CTwofaHelper::get($param);
 		}
 
-		if ( ($this->getInput('2fa_type') == ZBX_AUTH_2FA_DUO &&
-		      $this->getInput('2fa_duo_api_hostname', 'no') == 'no') ||
-		     ($this->getInput('2fa_type') != ZBX_AUTH_2FA_DUO &&
-		      $this->getInput('2fa_duo_api_hostname', 'no') != 'no') ) {
+		if ($this->getInput('update', 'no') == 'no' ) {
 			// Just switching Tabs
 			$this->response->setFormData($this->getInputAll());
 			$this->setResponse($this->response);
