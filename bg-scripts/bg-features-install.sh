@@ -45,6 +45,8 @@ fi
 # Copy new files
 echo 'Patching WebUI files...'
 cd ui
+cp -r gglauth ${ZABBIX_INSTALL_PATH}/
+cp ggl.php ${ZABBIX_INSTALL_PATH}/
 cp ${ZABBIX_INSTALL_PATH}/index.php  ${ZABBIX_INSTALL_PATH}/index.php-`date +%s`.bak
 cp index.php ${ZABBIX_INSTALL_PATH}/
 cp duo.php ${ZABBIX_INSTALL_PATH}/
@@ -58,6 +60,7 @@ cp perm.inc.php ${ZABBIX_INSTALL_PATH}/include
 cp ${ZABBIX_INSTALL_PATH}/include/schema.inc.php ${ZABBIX_INSTALL_PATH}/include/schema.inc.php-`date +%s`.bak
 cp schema.inc.php ${ZABBIX_INSTALL_PATH}/include
 cp views/general.duo.php ${ZABBIX_INSTALL_PATH}/include/views/
+cp views/general.ggl.php ${ZABBIX_INSTALL_PATH}/include/views/
 cd classes/api
 cp ${ZABBIX_INSTALL_PATH}/include/classes/api/API.php ${ZABBIX_INSTALL_PATH}/include/classes/api/API.php-`date +%s`.bak
 cp API.php ${ZABBIX_INSTALL_PATH}/include/classes/api/
@@ -101,6 +104,7 @@ cp CControllerAuditLogList.php ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerUserroleUpdate.php ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerUserroleUpdate.php-`date +%s`.bak
 cp CControllerUserroleUpdate.php ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp CControllerTwofaEdit.php ${ZABBIX_INSTALL_PATH}/app/controllers/
+cp CControllerTwofaUpdate.php ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp -r CControllerTwofa* ${ZABBIX_INSTALL_PATH}/app/controllers/
 
 echo 'Done! Reload your browser to see changes.'
