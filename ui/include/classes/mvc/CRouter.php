@@ -266,6 +266,7 @@ class CRouter {
 		'disc_prototypes.php'			=> ['CLegacyAction', null, null],
 		'discoveryconf.php'				=> ['CLegacyAction', null, null],
 		'duo.php'					=> ['CLegacyAction', null, null],
+		'ggl.php'					=> ['CLegacyAction', null, null],
 		'graphs.php'					=> ['CLegacyAction', null, null],
 		'history.php'					=> ['CLegacyAction', null, null],
 		'host_discovery.php'			=> ['CLegacyAction', null, null],

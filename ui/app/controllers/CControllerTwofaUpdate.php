@@ -1,23 +1,4 @@
 <?php
-/*
-** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
-**
-** This program is free software; you can redistribute it and/or modify
-** it under the terms of the GNU General Public License as published by
-** the Free Software Foundation; either version 2 of the License, or
-** (at your option) any later version.
-**
-** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-** GNU General Public License for more details.
-**
-** You should have received a copy of the GNU General Public License
-** along with this program; if not, write to the Free Software
-** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-**/
-
 
 class CControllerTwofaUpdate extends CController {
 
@@ -71,7 +52,8 @@ class CControllerTwofaUpdate extends CController {
 		$fields = ['2fa_duo_api_hostname', '2fa_duo_integration_key', '2fa_duo_secret_key', '2fa_duo_a_key'];
 		$this->getInputs($config, $fields);
 
-		if ($req['2fa_type'] == ZBX_AUTH_2FA_NONE) {
+		if ($twofa_auth['2fa_type'] == ZBX_AUTH_2FA_NONE ||
+		    $twofa_auth['2fa_type'] == ZBX_AUTH_2FA_GGL) {
 			return $is_valid;
 		}
 
@@ -131,12 +113,8 @@ class CControllerTwofaUpdate extends CController {
 		$data = array_diff_assoc($data, $config);
 
 		if ($data &&
-		    (!array_key_exists('2fa_type', $data) || // something other than 2fa_type changed
-		    ($data['2fa_type'] == ZBX_AUTH_2FA_DUO &&
-		     $this->getInput('2fa_duo_api_hostname', 'no') != 'no') || // User did not just switched to from None
-		    ($data['2fa_type'] == ZBX_AUTH_2FA_NONE &&
-		     $this->getInput('2fa_duo_api_hostname', 'no') == 'no')) // User did not just switched to None
-		   ) {
+		    $this->getInput('update', 'no') == 'update' ) {
+			// User clicked 'Update'
 			$result = update_config($data);
 			if ($result) {
 				if (array_key_exists('2fa_type', $data)) {
@@ -152,6 +130,7 @@ class CControllerTwofaUpdate extends CController {
 			}
 		}
 		else {
+			// User is jus switching tabs
 			$this->response->setFormData($this->getInputAll());
 		}
 

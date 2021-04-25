@@ -1,22 +1,4 @@
 <?php
-/*
-** Zabbix
-** Copyright (C) 2001-2017 Zabbix SIA
-**
-** This program is free software; you can redistribute it and/or modify
-** it under the terms of the GNU General Public License as published by
-** the Free Software Foundation; either version 2 of the License, or
-** (at your option) any later version.
-**
-** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-** GNU General Public License for more details.
-**
-** You should have received a copy of the GNU General Public License
-** along with this program; if not, write to the Free Software
-** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-**/
 
 $this->includeJsFile('administration.twofa.edit.js.php');
 
@@ -33,6 +15,7 @@ $twofaFormList->addRow(_('Two factor authentication'),
 	(new CRadioButtonList('2fa_type', (int) $data['2fa_type']))
 		->addValue(_('None'), ZBX_AUTH_2FA_NONE, null, 'submit()')
 		->addValue(_('DUO'), ZBX_AUTH_2FA_DUO, null, 'submit()')
+		->addValue(_('Google Authenticator'), ZBX_AUTH_2FA_GGL, null, 'submit()')
 		->setModern(true)
 );
 
@@ -57,6 +40,10 @@ if ($data['2fa_type'] == ZBX_AUTH_2FA_DUO) {
 	$twofaFormList->addRow(
 		_('40 characters long custom key'),
 		(new CPassBox('2fa_duo_a_key', $data['2fa_duo_a_key'], 40))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+	);
+} else if ($data['2fa_type'] == ZBX_AUTH_2FA_GGL) {
+        $twofaFormList->addRow(
+		_('All users will be required to use Google Authenticator application on their devices')
 	);
 }
 

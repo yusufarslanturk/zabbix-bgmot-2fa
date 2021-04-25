@@ -46,6 +46,8 @@ fi
 # Copy new files
 echo 'Patching WebUI files...'
 cd ui
+cp -r gglauth ${ZABBIX_INSTALL_PATH}/
+cp ggl.php ${ZABBIX_INSTALL_PATH}/
 cp index.php ${ZABBIX_INSTALL_PATH}/
 cp duo.php ${ZABBIX_INSTALL_PATH}/
 cp assets/styles/Duo-Frame.css ${ZABBIX_INSTALL_PATH}/assets/styles/
@@ -60,6 +62,8 @@ cp ${ZABBIX_INSTALL_PATH}/include/perm.inc.php ${ZABBIX_INSTALL_PATH}/include/pe
 cp perm.inc.php ${ZABBIX_INSTALL_PATH}/include
 cp ${ZABBIX_INSTALL_PATH}/include/schema.inc.php ${ZABBIX_INSTALL_PATH}/include/schema.inc.php-`date +%s`.bak
 cp schema.inc.php ${ZABBIX_INSTALL_PATH}/include
+cp views/general.duo.php ${ZABBIX_INSTALL_PATH}/include/views/
+cp views/general.ggl.php ${ZABBIX_INSTALL_PATH}/include/views/
 cd classes/api
 cp ${ZABBIX_INSTALL_PATH}/include/classes/api/API.php ${ZABBIX_INSTALL_PATH}/include/classes/api/API.php-`date +%s`.bak
 cp API.php ${ZABBIX_INSTALL_PATH}/include/classes/api/
@@ -86,6 +90,7 @@ cd ../../app/views/
 cp -r administration.adusergroups.*  ${ZABBIX_INSTALL_PATH}/app/views/
 cp administration.twofa.edit.php ${ZABBIX_INSTALL_PATH}/app/views/
 cp js/administration.twofa.edit.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/
+cp js/administration.adusergroups.edit.js.php ${ZABBIX_INSTALL_PATH}/app/views/js/
 cd ../controllers/
 cp -r CControllerAdUsergroup* ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerAuditLogList.php ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerAuditLogList.php-`date +%s`.bak
