@@ -397,7 +397,6 @@ class CUser extends CApiService {
 			]],
 			'ggl_secret' =>				['type' => API_STRING_UTF8, 'flags' => API_NOT_EMPTY, 'length' => 100],
 			'ggl_enrolled' =>			['type' => API_ID]
-			]]
 		]];
 		if (!CApiInputValidator::validate($api_input_rules, $users, '/', $error)) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, $error);
