@@ -658,6 +658,13 @@ static int	vfs_dir_size(AGENT_REQUEST *request, AGENT_RESULT *result, HANDLE tim
 		{
 			SET_MSG_RESULT(result, error);
 			list.values_num++;
+
+			if (0 == FindClose(handle))
+			{
+				zabbix_log(LOG_LEVEL_DEBUG, "%s() cannot close directory listing '%s': %s",
+						__function_name, item->path, zbx_strerror(errno));
+			}
+
 			goto err2;
 		}
 
