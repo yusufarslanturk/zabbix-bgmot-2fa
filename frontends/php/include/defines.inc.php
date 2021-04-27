@@ -19,8 +19,8 @@
 **/
 
 
-define('ZABBIX_VERSION',		'4.0.30rc1');
-define('ZABBIX_API_VERSION',	'4.0.30');
+define('ZABBIX_VERSION',		'4.0.31rc1');
+define('ZABBIX_API_VERSION',	'4.0.31');
 define('ZABBIX_EXPORT_VERSION',	'4.0');
 define('ZABBIX_DB_VERSION',		4000000);
 
@@ -1223,6 +1223,8 @@ define('API_COLOR',					27);
 define('API_NUMERIC',				28);
 define('API_SORTORDER',				29);
 define('API_TRIGGER_EXPRESSION',	30);
+define('API_JSONRPC_PARAMS',		31);
+define('API_JSONRPC_ID',			32);
 
 // flags
 define('API_REQUIRED',				0x0001);

@@ -202,7 +202,7 @@ class testPageTriggerUrl extends CWebTest {
 		}
 		else {
 			// Follow trigger link in overlay dialogue.
-			$hintbox = $this->query('xpath://div[@class="overlay-dialogue"]')->one();
+			$hintbox = $this->query('xpath://div[@class="overlay-dialogue"]')->waitUntilVisible()->one();
 			$hintbox->query('link', $this->url)->one()->click();
 		}
 
