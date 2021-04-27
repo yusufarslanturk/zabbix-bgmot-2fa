@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -169,14 +169,12 @@ class CScreenProblem extends CScreenBase {
 	 * @param int    $filter['show_latest_values']    (optional)
 	 * @param array  $config
 	 * @param int    $config['search_limit']
-	 * @param bool   $resolve_comments
-	 * @param bool   $resolve_urls
 	 *
 	 * @static
 	 *
 	 * @return array
 	 */
-	public static function getData(array $filter, array $config, $resolve_comments = false, $resolve_urls = false) {
+	public static function getData(array $filter, array $config) {
 		$filter_groupids = array_key_exists('groupids', $filter) && $filter['groupids'] ? $filter['groupids'] : null;
 		$filter_hostids = array_key_exists('hostids', $filter) && $filter['hostids'] ? $filter['hostids'] : null;
 		$filter_applicationids = null;
@@ -344,20 +342,10 @@ class CScreenProblem extends CScreenBase {
 							['itemid', 'hostid', 'name', 'key_', 'value_type', 'units', 'valuemapid'];
 					}
 
-					if ($resolve_comments || $resolve_urls || $show_latest_values || $details) {
-						$options['output'][] = 'expression';
-					}
-
 					if ($show_latest_values || $details) {
-						$options['output'] = array_merge($options['output'], ['recovery_mode', 'recovery_expression']);
-					}
-
-					if ($resolve_comments) {
-						$options['output'][] = 'comments';
-					}
-
-					if ($resolve_urls) {
-						$options['output'][] = 'url';
+						$options['output'] = array_merge($options['output'],
+							['expression', 'recovery_mode', 'recovery_expression']
+						);
 					}
 
 					$data['triggers'] += API::Trigger()->get($options);
@@ -570,14 +558,12 @@ class CScreenProblem extends CScreenBase {
 	 * @param int   $filter['details']
 	 * @param int   $filter['show']
 	 * @param int   $filter['show_latest_values']
-	 * @param bool  $resolve_comments
-	 * @param bool  $resolve_urls
 	 *
 	 * @static
 	 *
 	 * @return array
 	 */
-	public static function makeData(array $data, array $filter, $resolve_comments = false, $resolve_urls = false) {
+	public static function makeData(array $data, array $filter) {
 		// unset unused triggers
 		$triggerids = [];
 
@@ -619,32 +605,6 @@ class CScreenProblem extends CScreenBase {
 				}
 				unset($trigger);
 			}
-		}
-
-		if ($resolve_comments) {
-			foreach ($data['problems'] as &$problem) {
-				$trigger = $data['triggers'][$problem['objectid']];
-				$problem['comments'] = CMacrosResolverHelper::resolveTriggerDescription(
-					[
-						'triggerid' => $problem['objectid'],
-						'expression' => $trigger['expression'],
-						'comments' => $trigger['comments'],
-						'clock' => $problem['clock'],
-						'ns' => $problem['ns']
-					],
-					['events' => true]
-				);
-			}
-			unset($problem);
-
-			foreach ($data['triggers'] as &$trigger) {
-				unset($trigger['comments']);
-			}
-			unset($trigger);
-		}
-
-		if ($resolve_urls) {
-			$data['triggers'] = CMacrosResolverHelper::resolveTriggerUrls($data['triggers']);
 		}
 
 		// get additional data
@@ -1040,6 +1000,7 @@ class CScreenProblem extends CScreenBase {
 					? makeTriggerDependencies($dependencies[$trigger['triggerid']])
 					: [];
 				$description[] = (new CLinkAction($problem['name']))
+					->addClass(ZBX_STYLE_WORDWRAP)
 					->setMenuPopup(CMenuPopupHelper::getTrigger($trigger['triggerid'], $problem['eventid']));
 
 				if ($this->data['filter']['details'] == 1) {

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -440,26 +440,29 @@ class CSvgGraph extends CSvg {
 	public function draw() {
 		$this->applyMissingDataFunc();
 		$this->calculateDimensions();
-		$this->calculatePaths();
 
-		$this->drawGrid();
+		if ($this->canvas_width > 0 && $this->canvas_height > 0) {
+			$this->calculatePaths();
 
-		if ($this->left_y_show) {
-			$this->drawCanvasLeftYAxis();
+			$this->drawGrid();
+
+			if ($this->left_y_show) {
+				$this->drawCanvasLeftYAxis();
+			}
+			if ($this->right_y_show) {
+				$this->drawCanvasRightYAxis();
+			}
+			if ($this->x_show) {
+				$this->drawCanvasXAxis();
+			}
+
+			$this->drawMetricsLine();
+			$this->drawMetricsPoint();
+
+			$this->drawProblems();
+
+			$this->addClipArea();
 		}
-		if ($this->right_y_show) {
-			$this->drawCanvasRightYAxis();
-		}
-		if ($this->x_show) {
-			$this->drawCanvasXAxis();
-		}
-
-		$this->drawMetricsLine();
-		$this->drawMetricsPoint();
-
-		$this->drawProblems();
-
-		$this->addClipArea();
 
 		return $this;
 	}

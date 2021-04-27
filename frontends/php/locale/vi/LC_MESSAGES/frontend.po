@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-20 19:52+0200\n"
+"POT-Creation-Date: 2021-04-02 19:50+0300\n"
 "PO-Revision-Date: 2020-05-01 15:52+0300\n"
 "Last-Translator: Quang <quangnh@tnmt.vn>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -36,9 +36,9 @@ msgstr "\"%1$s\" được dự đoán trước"
 #: include/classes/api/services/CMaintenance.php:351
 #: include/classes/api/services/CMaintenance.php:356
 #: include/classes/api/services/CMaintenance.php:396
-#: include/classes/api/services/CMaintenance.php:585
-#: include/classes/api/services/CMaintenance.php:601
-#: include/classes/api/services/CMaintenance.php:671 maintenance.php:139
+#: include/classes/api/services/CMaintenance.php:587
+#: include/classes/api/services/CMaintenance.php:603
+#: include/classes/api/services/CMaintenance.php:673 maintenance.php:139
 #: maintenance.php:145 services.php:182 services.php:191
 #, c-format
 msgid "\"%s\" must be between 1970.01.01 and 2038.01.18."
@@ -85,7 +85,7 @@ msgid "%1$s Item"
 msgid_plural "%1$s Items"
 msgstr[0] "%1$s mục"
 
-#: include/classes/api/services/CItemGeneral.php:1987
+#: include/classes/api/services/CItemGeneral.php:2045
 #: include/classes/import/readers/CXmlImportReader.php:46
 #, c-format
 msgid "%1$s [Line: %2$s | Column: %3$s]"
@@ -169,14 +169,14 @@ msgid "%1$s second"
 msgid_plural "%1$s seconds"
 msgstr[0] "%1$s giây"
 
-#: app/views/monitoring.widget.problems.view.php:240
+#: app/views/monitoring.widget.problems.view.php:238
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s widget"
 msgstr "%1$s ô điều khiển"
 
 #: app/views/monitoring.widget.problemhosts.view.php:98
-#: app/views/monitoring.widget.problems.view.php:160
+#: app/views/monitoring.widget.problems.view.php:158
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, Severity, %2$s"
@@ -235,7 +235,7 @@ msgstr "(không proxy)"
 msgid "0 - use default port"
 msgstr "0 - Cổng sử dụng mặc định"
 
-#: include/triggers.inc.php:1888
+#: include/triggers.inc.php:1889
 msgid "0 or 1"
 msgstr "0 hoặc 1"
 
@@ -310,13 +310,13 @@ msgstr "Truy cập bị từ chối"
 msgid "Access denied!"
 msgstr "Truy cập bị từ chối!"
 
-#: app/views/monitoring.widget.problems.view.php:62
+#: app/views/hint.box.php:77 app/views/monitoring.widget.problems.view.php:62
 #: include/actions.inc.php:155 include/blocks.inc.php:559
 #: include/classes/screens/CScreenHostTriggers.php:218
-#: include/classes/screens/CScreenProblem.php:895
-#: include/classes/screens/CScreenProblem.php:918
-#: include/classes/screens/CScreenProblem.php:1135 include/events.inc.php:250
-#: include/events.inc.php:462 include/views/configuration.action.edit.php:1117
+#: include/classes/screens/CScreenProblem.php:855
+#: include/classes/screens/CScreenProblem.php:878
+#: include/classes/screens/CScreenProblem.php:1096 include/events.inc.php:250
+#: include/views/configuration.action.edit.php:1117
 #: include/views/configuration.action.edit.php:1210
 msgid "Ack"
 msgstr "Ghi nhận"
@@ -375,7 +375,7 @@ msgstr " Sự kiện được ghi nhận giải quyết"
 #: include/views/configuration.graph.edit.php:350
 #: include/views/configuration.host.discovery.edit.php:529
 #: include/views/configuration.host.discovery.edit.php:628
-#: include/views/configuration.host.edit.php:546
+#: include/views/configuration.host.edit.php:295
 #: include/views/configuration.host.prototype.edit.php:256
 #: include/views/configuration.httpconf.edit.php:209
 #: include/views/configuration.item.edit.php:712
@@ -387,7 +387,7 @@ msgstr " Sự kiện được ghi nhận giải quyết"
 #: include/views/configuration.maintenance.edit.php:77
 #: include/views/configuration.services.edit.php:117
 #: include/views/configuration.services.edit.php:170
-#: include/views/configuration.template.edit.php:346
+#: include/views/configuration.template.edit.php:126
 #: include/views/configuration.trigger.prototype.edit.php:174
 #: include/views/configuration.trigger.prototype.edit.php:368
 #: include/views/configuration.trigger.prototype.edit.php:554
@@ -462,10 +462,10 @@ msgstr "Hành động đã cập nhật"
 #: app/views/monitoring.dashboard.view.php:86
 #: app/views/monitoring.widget.problems.view.php:63 include/blocks.inc.php:560
 #: include/classes/screens/CScreenHostTriggers.php:218
-#: include/classes/screens/CScreenProblem.php:896
-#: include/classes/screens/CScreenProblem.php:919
-#: include/classes/screens/CScreenProblem.php:1136
-#: include/classes/screens/CScreenProblem.php:1176 include/events.inc.php:251
+#: include/classes/screens/CScreenProblem.php:856
+#: include/classes/screens/CScreenProblem.php:879
+#: include/classes/screens/CScreenProblem.php:1097
+#: include/classes/screens/CScreenProblem.php:1137 include/events.inc.php:251
 #: include/menu.inc.php:215 include/views/configuration.action.edit.php:24
 #: include/views/configuration.action.list.php:23
 #: include/views/monitoring.screen.list.php:81
@@ -488,7 +488,7 @@ msgid "Active"
 msgstr "Kích hoạt"
 
 #: include/classes/api/services/CMaintenance.php:351
-#: include/classes/api/services/CMaintenance.php:585
+#: include/classes/api/services/CMaintenance.php:587
 #: include/views/configuration.maintenance.edit.php:54
 #: include/views/configuration.maintenance.list.php:72 maintenance.php:45
 #: maintenance.php:139
@@ -496,7 +496,7 @@ msgid "Active since"
 msgstr "Kích hoạt từ"
 
 #: include/classes/api/services/CMaintenance.php:356
-#: include/classes/api/services/CMaintenance.php:601
+#: include/classes/api/services/CMaintenance.php:603
 #: include/views/configuration.maintenance.edit.php:60
 #: include/views/configuration.maintenance.list.php:73 maintenance.php:48
 #: maintenance.php:145
@@ -561,8 +561,8 @@ msgstr "Kích hoạt"
 #: include/views/configuration.host.edit.php:132
 #: include/views/configuration.host.edit.php:148
 #: include/views/configuration.host.edit.php:164
-#: include/views/configuration.host.edit.php:608
-#: include/views/configuration.host.edit.php:824
+#: include/views/configuration.host.edit.php:357
+#: include/views/configuration.host.edit.php:573
 #: include/views/configuration.hostgroups.edit.php:51
 #: include/views/configuration.host.prototype.edit.php:210
 #: include/views/configuration.host.prototype.edit.php:309
@@ -590,8 +590,8 @@ msgstr "Kích hoạt"
 #: include/views/configuration.services.edit.php:155
 #: include/views/configuration.services.edit.php:324
 #: include/views/configuration.services.edit.php:361
-#: include/views/configuration.template.edit.php:408
-#: include/views/configuration.template.edit.php:460
+#: include/views/configuration.template.edit.php:188
+#: include/views/configuration.template.edit.php:240
 #: include/views/configuration.trigger.prototype.edit.php:87
 #: include/views/configuration.trigger.prototype.edit.php:123
 #: include/views/configuration.trigger.prototype.edit.php:280
@@ -857,7 +857,7 @@ msgstr "Tất cả thẻ"
 msgid "All templates"
 msgstr "Tất cả mẫu"
 
-#: include/triggers.inc.php:1283
+#: include/triggers.inc.php:1284
 #: include/views/configuration.trigger.prototype.edit.php:520
 #: include/views/configuration.trigger.prototype.massupdate.php:173
 #: include/views/configuration.triggers.edit.php:554
@@ -876,7 +876,7 @@ msgstr "Những host được phép"
 msgid "Alternatively, you can install it manually:"
 msgstr "Xen kẽ, bạn có thể cài đặt chúng bằng tay:"
 
-#: include/triggers.inc.php:1351
+#: include/triggers.inc.php:1352
 #: include/views/configuration.action.edit.php:112
 #: include/views/configuration.action.edit.php:1143
 #: include/views/configuration.correlation.edit.php:94
@@ -949,7 +949,7 @@ msgid "Application deleted"
 msgid_plural "Applications deleted"
 msgstr[0] "Ứng dụng đã bị xóa"
 
-#: include/classes/core/CJsonRpc.php:210
+#: include/classes/core/CJsonRpc.php:203
 msgid "Application error."
 msgstr "Lỗi ứng dụng."
 
@@ -975,19 +975,17 @@ msgstr "Ứng dụng với id \"%1$s\" không tồn tại."
 #: include/html.inc.php:357
 #: include/views/configuration.application.edit.php:23
 #: include/views/configuration.application.list.php:23
-#: include/views/configuration.host.edit.php:304
 #: include/views/configuration.host.list.php:129
 #: include/views/configuration.host.list.php:333
 #: include/views/configuration.item.edit.php:915
 #: include/views/configuration.item.list.php:70
 #: include/views/configuration.item.prototype.edit.php:760
 #: include/views/configuration.item.prototype.list.php:58
-#: include/views/configuration.template.edit.php:130
 #: include/views/configuration.template.list.php:86
 #: include/views/configuration.template.list.php:184
 #: include/views/conf.import.php:33 include/views/inventory.host.view.php:158
-#: search.php:133 search.php:160 search.php:189 search.php:408 search.php:433
-#: search.php:465
+#: search.php:133 search.php:160 search.php:188 search.php:390 search.php:415
+#: search.php:447
 msgid "Applications"
 msgstr "Ứng dụng"
 
@@ -1092,7 +1090,7 @@ msgid "At (hour:minute)"
 msgstr "Tại (giờ: phút)"
 
 #: include/classes/api/services/CMaintenance.php:279
-#: include/classes/api/services/CMaintenance.php:700
+#: include/classes/api/services/CMaintenance.php:702
 #: include/views/configuration.maintenance.edit.php:233
 msgid "At least one host group or host must be selected."
 msgstr "Ít nhất một nhóm máy chủ hoặc máy chủ phải đượ chọn."
@@ -1103,8 +1101,8 @@ msgstr "Ít nhất 1 interface phải tồn tại."
 
 #: include/classes/api/services/CMaintenance.php:367
 #: include/classes/api/services/CMaintenance.php:375
-#: include/classes/api/services/CMaintenance.php:621
-#: include/classes/api/services/CMaintenance.php:629
+#: include/classes/api/services/CMaintenance.php:623
+#: include/classes/api/services/CMaintenance.php:631
 msgid "At least one maintenance period must be created."
 msgstr "Ít nhất một chu kỳ bảo trì phải được thiết lập."
 
@@ -1183,7 +1181,7 @@ msgstr "Tháng 8"
 msgid "Authentication"
 msgstr "Xác thực"
 
-#: include/views/configuration.host.edit.php:664
+#: include/views/configuration.host.edit.php:413
 #: include/views/configuration.host.prototype.edit.php:328
 msgid "Authentication algorithm"
 msgstr "Thuật toán xác thực"
@@ -1203,7 +1201,7 @@ msgstr "Xác thực lỗi: %1$s."
 msgid "Authentication method"
 msgstr "Phương thức xác thực"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:242
+#: app/controllers/CControllerAuthenticationUpdate.php:240
 msgid "Authentication method changed"
 msgstr "Phương phác xác thực chuyển đổi"
 
@@ -1223,7 +1221,7 @@ msgstr "Mật mã xác thực"
 msgid "Authentication protocol"
 msgstr "Giao thức xác thực"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:241
+#: app/controllers/CControllerAuthenticationUpdate.php:239
 msgid "Authentication settings updated"
 msgstr "Cài đặt xác thưc đã được cập nhật"
 
@@ -1266,7 +1264,7 @@ msgstr "Sự  kiện đăng kí tự động hoặc cảnh báo chu kì lưu tr�
 #: include/hosts.inc.php:1274
 #: include/views/administration.general.other.edit.php:59
 #: include/views/configuration.action.edit.php:1078
-#: include/views/configuration.host.edit.php:695
+#: include/views/configuration.host.edit.php:444
 #: include/views/configuration.host.massupdate.php:279
 #: include/views/configuration.host.prototype.edit.php:368
 msgid "Automatic"
@@ -1354,7 +1352,7 @@ msgstr "Chớp nháy"
 msgid "Blocked"
 msgstr "Bị khóa"
 
-#: include/classes/core/ZBase.php:265
+#: include/classes/core/ZBase.php:269
 msgid "Blue"
 msgstr "Xanh da trời"
 
@@ -1431,12 +1429,11 @@ msgstr "By trigger template"
 msgid "CERT"
 msgstr "CERT"
 
-#: app/views/monitoring.widget.problems.view.php:93
-#: include/classes/graph/CSvgGraph.php:977
+#: app/views/hint.box.php:111 app/views/monitoring.widget.problems.view.php:93
+#: include/classes/graph/CSvgGraph.php:980
 #: include/classes/screens/CScreenEvents.php:116
-#: include/classes/screens/CScreenProblem.php:993
-#: include/classes/screens/CScreenProblem.php:1158 include/events.inc.php:340
-#: include/events.inc.php:542
+#: include/classes/screens/CScreenProblem.php:953
+#: include/classes/screens/CScreenProblem.php:1119 include/events.inc.php:340
 msgid "CLOSING"
 msgstr "ĐÓNG"
 
@@ -1564,12 +1561,12 @@ msgstr "Không thể thêm liên kết"
 msgid "Cannot add correlation condition"
 msgstr "Không thể thêm điều kiện liên kết"
 
-#: include/classes/api/services/CTrigger.php:939
-#: include/classes/api/services/CTriggerPrototype.php:784
+#: include/classes/api/services/CTrigger.php:937
+#: include/classes/api/services/CTriggerPrototype.php:780
 msgid "Cannot add dependency from a host to a template."
 msgstr "Không thể thêm quan hệ phụ thuộc từ host đến template"
 
-#: include/classes/api/services/CDiscoveryRule.php:845
+#: include/classes/api/services/CDiscoveryRule.php:847
 #: include/triggers.inc.php:527
 #, c-format
 msgid "Cannot add dependency from trigger \"%1$s:%2$s\" to non existing trigger \"%3$s:%4$s\"."
@@ -1590,10 +1587,6 @@ msgstr "Không thể thêm kiểu biểu đồ"
 #: hostgroups.php:113 usergrps.php:143
 msgid "Cannot add group"
 msgstr "Không thể thêm nhóm"
-
-#: include/classes/api/services/CTemplate.php:335
-msgid "Cannot add group."
-msgstr "Không thể thêm nhóm."
 
 #: hosts.php:521
 msgid "Cannot add host"
@@ -1731,11 +1724,6 @@ msgstr "Không thể liên kết ẩn danh với máy chủ LDAP."
 msgid "Cannot bind to LDAP server."
 msgstr "Không thể liên kết với máy chủ LDAP."
 
-#: include/classes/api/clients/CLocalApiClient.php:87
-#, c-format
-msgid "Cannot call method \"%1$s.%2$s\" without parameters."
-msgstr "Không thể gọi phương pháp \"%1$s.%2$s\"  ngoài tham số."
-
 #: httpconf.php:196 httpconf.php:512 items.php:928
 msgid "Cannot clear history"
 msgstr "Không thể xóa lịch sử"
@@ -1744,21 +1732,21 @@ msgstr "Không thể xóa lịch sử"
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
 msgstr ""
 
-#: include/classes/api/services/CDiscoveryRule.php:1535
+#: include/classes/api/services/CDiscoveryRule.php:1537
 msgid "Cannot clone graph prototypes."
 msgstr "Không thể sao chép kiểu đồ thị."
 
-#: include/classes/api/services/CDiscoveryRule.php:1583
+#: include/classes/api/services/CDiscoveryRule.php:1585
 msgid "Cannot clone host prototypes."
 msgstr "Không thể sao chép kiểu host."
 
-#: include/classes/api/services/CDiscoveryRule.php:1340
-#: include/classes/api/services/CDiscoveryRule.php:1396
-#: include/classes/api/services/CDiscoveryRule.php:1414
+#: include/classes/api/services/CDiscoveryRule.php:1342
+#: include/classes/api/services/CDiscoveryRule.php:1398
+#: include/classes/api/services/CDiscoveryRule.php:1416
 msgid "Cannot clone item prototypes."
 msgstr "Không thể sao chép kiểu item."
 
-#: include/classes/api/services/CDiscoveryRule.php:758
+#: include/classes/api/services/CDiscoveryRule.php:760
 msgid "Cannot clone trigger prototypes."
 msgstr "Không thể sao chép kiểu trigger."
 
@@ -1808,16 +1796,16 @@ msgstr "Không thể tạo một kiểu host trên một discovered host \"%
 msgid "Cannot create another database connection."
 msgstr "Không thể tạo sự kết nối cơ sở dữ liệu khác."
 
-#: include/classes/api/services/CTrigger.php:973
-#: include/classes/api/services/CTriggerPrototype.php:815
+#: include/classes/api/services/CTrigger.php:971
+#: include/classes/api/services/CTriggerPrototype.php:811
 msgid "Cannot create circular dependencies."
 msgstr "Không thể tạo quan hệ phụ thuộc vòng tròn."
 
-#: include/classes/api/services/CTrigger.php:945
+#: include/classes/api/services/CTrigger.php:943
 msgid "Cannot create dependency on trigger itself."
 msgstr "Không thể tạo quan hệ phụ thuộc trên bản thân trigger."
 
-#: include/classes/api/services/CTriggerPrototype.php:754
+#: include/classes/api/services/CTriggerPrototype.php:750
 msgid "Cannot create dependency on trigger prototype itself."
 msgstr "Không thể tạo quan hệ phụ thuộc trên một trigger"
 
@@ -1832,10 +1820,6 @@ msgstr "Không thể tạo biểu tượng sơ đồ."
 #: httpconf.php:214
 msgid "Cannot create new application, web scenario is already assigned to application."
 msgstr "Không thể tạo ứng dụng mới, web scenario được sẵn sàng gán cho ứng dụng."
-
-#: include/classes/api/services/CTemplate.php:349
-msgid "Cannot create template."
-msgstr "Không thể tạo mẫu."
 
 #: include/classes/setup/CSetupWizard.php:368
 msgid "Cannot create the configuration file."
@@ -1869,8 +1853,8 @@ msgid "Cannot delete dashboard"
 msgid_plural "Cannot delete dashboards"
 msgstr[0] "Không thể xóa bảng điểu khiển"
 
-#: include/classes/api/services/CTrigger.php:843
-#: include/classes/api/services/CTriggerPrototype.php:581
+#: include/classes/api/services/CTrigger.php:841
+#: include/classes/api/services/CTriggerPrototype.php:577
 msgid "Cannot delete dependency"
 msgstr "Không thể xóa quan hệ phụ thuộc"
 
@@ -1912,7 +1896,7 @@ msgstr[0] "Không thể xóa nhóm"
 msgid "Cannot delete host"
 msgstr "Không thể xóa host"
 
-#: include/classes/api/services/CHost.php:1210
+#: include/classes/api/services/CHost.php:1234
 #, c-format
 msgid "Cannot delete host because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must contain at least one host or host group."
@@ -1920,7 +1904,7 @@ msgstr[0] ""
 "Không thể xóa máy chủ bởi vì bảo trì \"%1$s\" phải chứa ít nhất một máy chủ hoặc nhóm máy chủ. \n"
 "Không thể xóa máy chủ đã chọn bởi vì bảo trì \"%1$s\" phải chứa ít nhất một máy chủ hoặc một nhóm máy chủ."
 
-#: include/classes/api/services/CHostGroup.php:1489
+#: include/classes/api/services/CHostGroup.php:1523
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
@@ -1949,7 +1933,7 @@ msgstr "Không thể xóa hình ảnh"
 msgid "Cannot delete interface for discovered host \"%1$s\"."
 msgstr ""
 
-#: include/classes/api/services/CHost.php:997
+#: include/classes/api/services/CHost.php:1021
 msgid "Cannot delete inventory."
 msgstr "Không thể xóa danh sách lưu trữ."
 
@@ -2022,7 +2006,7 @@ msgstr "Không thể xóa dịch vụ"
 msgid "Cannot delete slide show"
 msgstr "Không thể xóa slide show"
 
-#: templates.php:367 templates.php:381 templates.php:414
+#: templates.php:364 templates.php:378 templates.php:411
 msgid "Cannot delete template"
 msgstr "Không thể xóa template"
 
@@ -2054,12 +2038,12 @@ msgstr "Không thể  xóa item mẫu."
 msgid "Cannot delete templated items."
 msgstr "Không thể xóa các item mẫu."
 
-#: include/classes/api/services/CTrigger.php:636
+#: include/classes/api/services/CTrigger.php:634
 #, c-format
 msgid "Cannot delete templated trigger \"%1$s:%2$s\"."
 msgstr "Không thể xóa trigger mẫu \"%1$s:%2$s\"."
 
-#: include/classes/api/services/CTriggerPrototype.php:534
+#: include/classes/api/services/CTriggerPrototype.php:530
 #, c-format
 msgid "Cannot delete templated trigger prototype \"%1$s:%2$s\"."
 msgstr "Không thể xóa kiểu giao thức trigger mẫu \"%1$s:%2$s\"."
@@ -2241,8 +2225,8 @@ msgstr "Không thể tìm thấy host \"%1$s\" được sử dụng trong m
 msgid "Cannot find host group \"%1$s\" for host prototype \"%2$s\" of discovery rule \"%3$s\" on \"%4$s\"."
 msgstr "Không thể tìm thấy nhóm host \"%1$s\" cho kiểu host \"%2$s\" của quy tắc phát hiện \"%3$s\" trên \"%4$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1203
-#: include/classes/api/services/CDiscoveryRule.php:1367
+#: include/classes/api/services/CDiscoveryRule.php:1205
+#: include/classes/api/services/CDiscoveryRule.php:1369
 #: include/classes/api/services/CItemGeneral.php:115 include/items.inc.php:506
 #: include/items.inc.php:653
 #, c-format
@@ -2353,7 +2337,7 @@ msgstr "Không thể tìm thấy dạng thức cây. Kiểm tra cấu tru�
 msgid "Cannot format tree."
 msgstr "Không thể tìm thấy dạng thức cây."
 
-#: include/classes/api/services/CTemplate.php:814
+#: include/classes/api/services/CTemplate.php:805
 msgid "Cannot have empty visible template name."
 msgstr "Không thể để trống tên mẫu."
 
@@ -2383,12 +2367,12 @@ msgstr "Không thể xem gộp tập tin \"%s\"."
 msgid "Cannot insert trigger expression"
 msgstr "Không thể chèn biểu thức trigger"
 
-#: include/classes/api/services/CHost.php:975
+#: include/classes/api/services/CHost.php:999
 msgid "Cannot link template"
 msgstr "Không thể liên kết template"
 
-#: include/classes/api/services/CTemplate.php:901
-#: include/classes/api/services/CTemplate.php:915
+#: include/classes/api/services/CTemplate.php:892
+#: include/classes/api/services/CTemplate.php:906
 msgid "Cannot link template."
 msgstr "Không thể kết nối mẫu"
 
@@ -2396,19 +2380,19 @@ msgstr "Không thể kết nối mẫu"
 msgid "Cannot logout."
 msgstr "Không thể đăng xuất."
 
-#: include/classes/api/services/CHost.php:841
+#: include/classes/api/services/CHost.php:865
 msgid "Cannot mass update host name."
 msgstr "Không thể cập nhật cùng một lúc tên host."
 
-#: include/classes/api/services/CTemplate.php:1039
+#: include/classes/api/services/CTemplate.php:1030
 msgid "Cannot mass update template name."
 msgstr "Không thể cập nhật hàng loạt tên mẫu."
 
-#: include/classes/api/services/CHost.php:827
+#: include/classes/api/services/CHost.php:851
 msgid "Cannot mass update visible host name."
 msgstr "Không thể cập nhật cùng một lúc visible host name."
 
-#: include/classes/api/services/CTemplate.php:1004
+#: include/classes/api/services/CTemplate.php:995
 msgid "Cannot mass update visible template name."
 msgstr "Không thể cập nhật hàng loạt tên mẫu có thể nhìn thấy."
 
@@ -2417,17 +2401,17 @@ msgstr "Không thể cập nhật hàng loạt tên mẫu có thể nhìn thấy
 msgid "Cannot pass duplicate template IDs for the linkage: %s."
 msgstr "Không thể tạo cùng một mật khẩu template IDs cho liên kết: %s. "
 
-#: include/classes/db/DB.php:830
+#: include/classes/db/DB.php:832
 #, c-format
 msgid "Cannot perform delete statement on table \"%1$s\" without where condition."
 msgstr "Không thể xóa trạng thái trong bảng \"%1$s\" với điều kiện tại đó."
 
-#: include/classes/db/DB.php:543
+#: include/classes/db/DB.php:545
 #, c-format
 msgid "Cannot perform update statement on table \"%1$s\" without values."
 msgstr "Không thể cập nhật trạng thái trong bảng \"%1$s\" với nhiều giá trị."
 
-#: include/classes/db/DB.php:556
+#: include/classes/db/DB.php:558
 #, c-format
 msgid "Cannot perform update statement on table \"%1$s\" without where condition."
 msgstr "Không thể cập nhật trạng thái trong bảng \"%1$s\" với điều kiện tại đó."
@@ -2510,16 +2494,6 @@ msgstr "Không thể đặt lại \"%1$s\" cho item \"%2$s\"."
 msgid "Cannot set \"%1$s\" for template screen \"%2$s\"."
 msgstr "Không thể đặt \"%1$s\" cho screen mẫu \"%2$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:816
-#, c-format
-msgid "Cannot set \"%1$s\" for trigger \"%2$s\"."
-msgstr "Không thể đặt lại \"%1$s\" cho trigger \"%2$s\"."
-
-#: include/classes/api/services/CTriggerGeneral.php:822
-#, c-format
-msgid "Cannot set \"%1$s\" for trigger prototype \"%2$s\"."
-msgstr "Không thể đặt \"%1$s\". cho kiểu trigger \"%2$s\"."
-
 #: include/classes/api/services/CItemPrototype.php:325
 #, c-format
 msgid "Cannot set \"templateid\" field for application prototype in item prototype \"%1$s\"."
@@ -2530,9 +2504,9 @@ msgstr "Không thể đặt trường \"templateid\" cho kiểu ứng dụng tro
 msgid "Cannot set \"templateid\" for screen \"%1$s\"."
 msgstr "Không thể đặt lại \"templateid\" cho screen \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:892
-#: include/classes/api/services/CHost.php:1780
-#: include/classes/api/services/CHost.php:1941
+#: include/classes/api/services/CHost.php:916
+#: include/classes/api/services/CHost.php:1802
+#: include/classes/api/services/CHost.php:1963
 msgid "Cannot set inventory fields for disabled inventory."
 msgstr "Không thể đặt lại các trường inventory khi vô hiệu hóa inventory."
 
@@ -2553,28 +2527,28 @@ msgstr "Không thể chuyển đổi host cho interface."
 msgid "Cannot unblock users"
 msgstr "Không thể không ngăn chặn các người dùng"
 
-#: include/classes/api/services/CHostGeneral.php:555
+#: include/classes/api/services/CHostGeneral.php:544
 msgid "Cannot unlink and clear Web scenarios."
 msgstr "Không thể ngắt kết nối hoặc xóa các web scenario."
 
-#: include/classes/api/services/CHostGeneral.php:616
+#: include/classes/api/services/CHostGeneral.php:605
 msgid "Cannot unlink and clear applications."
 msgstr "Không thể ngắt kết nối hoặc xóa các ứng dụng."
 
-#: include/classes/api/services/CHostGeneral.php:427
+#: include/classes/api/services/CHostGeneral.php:416
 msgid "Cannot unlink and clear discovery rules"
 msgstr "Không thể ngắt kết nối hoặc xóa các quy tắc phát hiện"
 
-#: include/classes/api/services/CHost.php:950
+#: include/classes/api/services/CHost.php:974
 msgid "Cannot unlink template"
 msgstr "Không thể ngắt kết nối tempate"
 
-#: include/classes/api/services/CTemplate.php:866
-#: include/classes/api/services/CTemplate.php:889
+#: include/classes/api/services/CTemplate.php:857
+#: include/classes/api/services/CTemplate.php:880
 msgid "Cannot unlink template."
 msgstr "Không thể kết nối đến mẫu."
 
-#: include/classes/api/services/CHostGeneral.php:269
+#: include/classes/api/services/CHostGeneral.php:258
 #, c-format
 msgid "Cannot unlink trigger \"%s\", it has items from template that is left linked to host."
 msgstr "Không thể ngắt kết nối trigger \"%s\", nó có các item từ template đó là liên kết đến host."
@@ -2600,27 +2574,17 @@ msgstr "Không thể cập nhật \"%1$s\" cho kiểu đồ thị \"%2$s\"."
 msgid "Cannot update \"%1$s\" for item \"%2$s\"."
 msgstr "Không thể cập nhật \"%1$s\" cho item \"%2$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:975
+#: include/classes/api/services/CTriggerGeneral.php:889
 #, c-format
 msgid "Cannot update \"%1$s\" for templated trigger \"%2$s\"."
 msgstr "Không thể cập nhật \"%1$s\" cho trigger mẫu \"%2$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:981
+#: include/classes/api/services/CTriggerGeneral.php:900
 #, c-format
 msgid "Cannot update \"%1$s\" for templated trigger prototype \"%2$s\"."
 msgstr "Không thể cập nhật \"%1$s\" cho kiểu trigger mẫu \"%2$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:974
-#, c-format
-msgid "Cannot update \"%1$s\" for trigger \"%2$s\"."
-msgstr "Không thể cập nhật \"%1$s\" cho trigger \"%2$s\"."
-
-#: include/classes/api/services/CTriggerGeneral.php:980
-#, c-format
-msgid "Cannot update \"%1$s\" for trigger prototype \"%2$s\"."
-msgstr "Không thể cập nhật \"%1$s\" cho kiểu trigger \"%2$s\"."
-
-#: include/classes/api/services/CHost.php:1918
+#: include/classes/api/services/CHost.php:1940
 #, c-format
 msgid "Cannot update \"%2$s\" for a discovered host \"%1$s\"."
 msgstr "Không thể cập nhật \"%2$s\" cho máy chủ khám phá \"%1$s\"."
@@ -2630,9 +2594,9 @@ msgstr "Không thể cập nhật \"%2$s\" cho máy chủ khám phá \"%1$s\"."
 msgid "Cannot update \"%2$s\" for a discovered item \"%1$s\"."
 msgstr "Không thể cập nhật \"%2$s\" cho item được khám phá \"%1$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:1031
-#: include/classes/api/services/CTrigger.php:679
-#: include/classes/api/services/CTrigger.php:803
+#: include/classes/api/services/CTriggerGeneral.php:895
+#: include/classes/api/services/CTrigger.php:678
+#: include/classes/api/services/CTrigger.php:801
 #, c-format
 msgid "Cannot update \"%2$s\" for a discovered trigger \"%1$s\"."
 msgstr "Không thể cập nhật \"%2$s\" cho một trigger khám phá \"%1$s\"."
@@ -2656,7 +2620,7 @@ msgstr "Không thể cập nhật \"templateid\" cho template screen \"%1$s\"
 msgid "Cannot update a discovered graph."
 msgstr "Không thể cập nhật một biểu đồ được phát hiện."
 
-#: include/classes/api/services/CHostGroup.php:789
+#: include/classes/api/services/CHostGroup.php:823
 msgid "Cannot update a discovered host group."
 msgstr "Không thể cập nhật một nhóm host được phát hiện."
 
@@ -2673,7 +2637,7 @@ msgstr "Không thể cập nhật hành động"
 msgid "Cannot update application"
 msgstr "Không thể cập nhật ứng dụng"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:246
+#: app/controllers/CControllerAuthenticationUpdate.php:244
 msgid "Cannot update authentication"
 msgstr "Không thể cập nhật xác thực"
 
@@ -2726,9 +2690,9 @@ msgstr "Không thể cập nhật kiểu đồ thị"
 msgid "Cannot update group"
 msgstr "Không thể cập nhật nhóm"
 
-#: include/classes/api/services/CHostGroup.php:995
-#: include/classes/api/services/CHostGroup.php:1099
-#: include/classes/api/services/CHostGroup.php:1235
+#: include/classes/api/services/CHostGroup.php:1029
+#: include/classes/api/services/CHostGroup.php:1133
+#: include/classes/api/services/CHostGroup.php:1269
 #, c-format
 msgid "Cannot update groups for discovered host \"%1$s\"."
 msgstr "Không thể cập nhật các nhóm cho host được phát hiện \"%1$s\"."
@@ -2737,7 +2701,7 @@ msgstr "Không thể cập nhật các nhóm cho host được phát hiê
 msgid "Cannot update host"
 msgstr "Không thể cập nhật host"
 
-#: include/classes/api/services/CHost.php:789
+#: include/classes/api/services/CHost.php:813
 msgid "Cannot update host encryption settings. Connection settings for both directions should be specified."
 msgstr "Không thể cập nhật cài đặt mật mã máy chủ. Cài đặt kết nối cho cả hướng được chỉ rõ."
 
@@ -2831,7 +2795,7 @@ msgstr "Không thể cập nhật slide show"
 msgid "Cannot update step for a templated web scenario \"%1$s\": %2$s."
 msgstr "Không thể cập nhật bước cho một mẫu web scenario \"%1$s\": %2$s."
 
-#: templates.php:182
+#: templates.php:181
 msgid "Cannot update template"
 msgstr "Không thể cập nhật template"
 
@@ -2839,8 +2803,8 @@ msgstr "Không thể cập nhật template"
 msgid "Cannot update templated applications."
 msgstr "Không thể cập nhật các template ứng dụng."
 
-#: include/classes/api/services/CTemplate.php:765
-#: include/classes/api/services/CTemplate.php:1100
+#: include/classes/api/services/CTemplate.php:756
+#: include/classes/api/services/CTemplate.php:1091
 #, c-format
 msgid "Cannot update templates on discovered host \"%1$s\"."
 msgstr "Không thể cập nhật các template trên host được phát hiện \"%1$s\"."
@@ -2850,7 +2814,7 @@ msgstr "Không thể cập nhật các template trên host được phát 
 msgid "Cannot update trigger"
 msgstr "Không thể cập nhật trigger"
 
-#: include/classes/api/services/CTriggerGeneral.php:1932
+#: include/classes/api/services/CTriggerGeneral.php:1756
 #, c-format
 msgid "Cannot update trigger \"%1$s\": %2$s."
 msgstr "Không thể cập nhật trigger \"%1$s\": %2$s."
@@ -2860,7 +2824,7 @@ msgid "Cannot update trigger prototype"
 msgid_plural "Cannot update trigger prototypes"
 msgstr[0] "Không thể cập nhật kiểu trigger"
 
-#: include/classes/api/services/CTriggerGeneral.php:1788
+#: include/classes/api/services/CTriggerGeneral.php:1597
 #, c-format
 msgid "Cannot update trigger prototype \"%1$s\": %2$s."
 msgstr "Không thể cập nhật kiểu trigger \"%1$s\": %2$s."
@@ -2917,8 +2881,8 @@ msgstr "Trung tâm"
 
 #: app/views/administration.proxy.edit.php:91
 #: app/views/administration.proxy.edit.php:99
-#: include/views/configuration.host.edit.php:763
-#: include/views/configuration.host.edit.php:779
+#: include/views/configuration.host.edit.php:512
+#: include/views/configuration.host.edit.php:528
 #: include/views/configuration.host.massupdate.php:328
 #: include/views/configuration.host.massupdate.php:336
 #: include/views/configuration.host.prototype.edit.php:381
@@ -2982,7 +2946,7 @@ msgstr "Thông tin Chassis. Trả về kiểu string"
 msgid "Check already exists."
 msgstr "Kiểm tra đã tồn tại."
 
-#: include/classes/parsers/CTriggerExpression.php:460
+#: include/classes/parsers/CTriggerExpression.php:472
 #, c-format
 msgid "Check expression part starting from \"%1$s\"."
 msgstr "Thành phần biểu thức kiểm tra bắt đầu từ \"%1$s\"."
@@ -3089,8 +3053,7 @@ msgstr "Thông tin tham khảo cho screen: %1$s."
 msgid "Circular reference in templates: %1$s."
 msgstr "Thông tư tham khảo cho các template: %1$s."
 
-#: include/classes/api/services/CHostBase.php:200
-#: include/classes/api/services/CHostBase.php:257
+#: include/classes/api/services/CHostBase.php:213
 msgid "Circular template linkage is not allowed."
 msgstr "Liên kết thông tư template không được cho phép."
 
@@ -3132,14 +3095,14 @@ msgstr "Đồng hồ"
 #: include/views/configuration.discovery.edit.php:110
 #: include/views/configuration.graph.edit.php:473
 #: include/views/configuration.host.discovery.edit.php:706
-#: include/views/configuration.host.edit.php:815
+#: include/views/configuration.host.edit.php:564
 #: include/views/configuration.hostgroups.edit.php:58
 #: include/views/configuration.host.prototype.edit.php:437
 #: include/views/configuration.httpconf.edit.php:244
 #: include/views/configuration.item.edit.php:1089
 #: include/views/configuration.item.prototype.edit.php:920
 #: include/views/configuration.maintenance.edit.php:287
-#: include/views/configuration.template.edit.php:445
+#: include/views/configuration.template.edit.php:225
 #: include/views/configuration.trigger.prototype.edit.php:636
 #: include/views/configuration.triggers.edit.php:644
 #: include/views/monitoring.screen.edit.php:222
@@ -3271,7 +3234,7 @@ msgstr "Điều kiện \"%2$s\" không được sử dụng trong công thức \
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for correlation \"%1$s\"."
 msgstr "Điều kiện \"%2$s\" không được sử dụng trong công thức \"%3$s\" cho liên kết \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1079
+#: include/classes/api/services/CDiscoveryRule.php:1081
 #, c-format
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for discovery rule \"%1$s\"."
 msgstr "Điều kiện \"%2$s\" không được sử dụng trong công thức \"%3$s\" cho quy tắc khám phá \"%1$s\"."
@@ -3286,7 +3249,7 @@ msgstr "Điều kiện \"%2$s\" được sử dụng trong công thức \"%3$s\"
 msgid "Condition \"%2$s\" used in formula \"%3$s\" for correlation \"%1$s\" is not defined."
 msgstr "Điều kiện \"%2$s\" được sử dụng trong công thức \"%3$s\" cho liên kết \"%1$s\" không xác định."
 
-#: include/classes/api/services/CDiscoveryRule.php:1078
+#: include/classes/api/services/CDiscoveryRule.php:1080
 #, c-format
 msgid "Condition \"%2$s\" used in formula \"%3$s\" for discovery rule \"%1$s\" is not defined."
 msgstr "Điều kiện \"%2$s\" được sử dụng trong công thức \"%3$s\" cho quy tắc khám phá \"%1$s\" không được xác định."
@@ -3554,7 +3517,7 @@ msgstr ""
 msgid "Connections"
 msgstr "Kết nối"
 
-#: include/views/configuration.host.edit.php:767
+#: include/views/configuration.host.edit.php:516
 #: include/views/configuration.host.massupdate.php:331
 #: include/views/configuration.host.prototype.edit.php:385
 msgid "Connections from host"
@@ -3564,7 +3527,7 @@ msgstr "Kết nối từ máy chủ"
 msgid "Connections from proxy"
 msgstr "Kết nối từ proxy"
 
-#: include/views/configuration.host.edit.php:759
+#: include/views/configuration.host.edit.php:508
 #: include/views/configuration.host.massupdate.php:324
 #: include/views/configuration.host.prototype.edit.php:377
 msgid "Connections to host"
@@ -4065,7 +4028,7 @@ msgstr "TÊN DNS"
 msgid "Daily"
 msgstr "Hàng ngày"
 
-#: include/classes/core/ZBase.php:266
+#: include/classes/core/ZBase.php:270
 msgid "Dark"
 msgstr "Tối"
 
@@ -4195,7 +4158,7 @@ msgid "Database user"
 msgstr "Người dùng cơ sở dữ liệu"
 
 #: include/classes/api/services/CMaintenance.php:397
-#: include/classes/api/services/CMaintenance.php:671
+#: include/classes/api/services/CMaintenance.php:673
 #: include/forms.inc.php:1996 include/forms.inc.php:2081 maintenance.php:50
 msgid "Date"
 msgstr "Ngày"
@@ -4374,7 +4337,7 @@ msgstr "Xóa"
 msgid "Delete all elements that are not present in the XML file?"
 msgstr "Xóa tất cả các phần tử không có trong tệp XML?"
 
-#: include/views/configuration.template.edit.php:450
+#: include/views/configuration.template.edit.php:230
 #: include/views/configuration.template.list.php:231
 msgid "Delete and clear"
 msgstr "Xóa và xóa sạch"
@@ -4383,7 +4346,7 @@ msgstr "Xóa và xóa sạch"
 msgid "Delete and clear selected templates? (Warning: all linked hosts will be cleared!)"
 msgstr "Xóa và xóa hoàn toàn các template được chọn hay không? (Cảnh báo: tất cả các liên kết đến host sẽ bị xóa bỏ hoàn toàn!)"
 
-#: include/views/configuration.template.edit.php:451
+#: include/views/configuration.template.edit.php:231
 msgid "Delete and clear template? (Warning: all linked hosts will be cleared!)"
 msgstr "Xóa và xóa bỏ hoàn toàn template hay không? (Cảnh báo: tất cả các liên kết đến các host sẽ bị xóa bỏ hoàn toàn!)"
 
@@ -4529,7 +4492,7 @@ msgstr "Xóa kiểu host được chọn?"
 msgid "Delete selected host prototypes?"
 msgstr "Xóa các kiểu host được chọn?"
 
-#: include/views/configuration.host.edit.php:817
+#: include/views/configuration.host.edit.php:566
 msgid "Delete selected host?"
 msgstr "Xóa host được chọn?"
 
@@ -4636,7 +4599,7 @@ msgstr "Xóa dịch vụ \"%1$s\"?"
 msgid "Delete slide show?"
 msgstr "Xóa slide show?"
 
-#: include/views/configuration.template.edit.php:447
+#: include/views/configuration.template.edit.php:227
 msgid "Delete template?"
 msgstr "Xóa template?"
 
@@ -4656,7 +4619,7 @@ msgstr "Xóa web scanario?"
 msgid "Deleted"
 msgstr "Đã xóa"
 
-#: include/classes/api/services/CHost.php:1362
+#: include/classes/api/services/CHost.php:1383
 #, c-format
 msgid "Deleted: Host \"%1$s\"."
 msgstr "Đã xóa: Host \"%1$s\"."
@@ -4666,7 +4629,7 @@ msgstr "Đã xóa: Host \"%1$s\"."
 msgid "Deleted: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr "Đã xóa: Kiểu host \"%1$s\" trên \"%2$s\"."
 
-#: include/classes/api/services/CTemplate.php:695
+#: include/classes/api/services/CTemplate.php:722
 #, c-format
 msgid "Deleted: Template \"%1$s\"."
 msgstr "Đã xóa: Template \"%1$s\"."
@@ -4689,7 +4652,7 @@ msgstr "Từ chối"
 msgid "Dependencies"
 msgstr "Quan hệ phụ thuộc"
 
-#: include/triggers.inc.php:2737
+#: include/triggers.inc.php:2738
 msgid "Dependent"
 msgstr "Phụ thuộc"
 
@@ -4697,7 +4660,7 @@ msgstr "Phụ thuộc"
 msgid "Dependent item"
 msgstr "Item phụ thuộc"
 
-#: app/views/popup.generic.php:293 include/triggers.inc.php:2737
+#: app/views/popup.generic.php:293 include/triggers.inc.php:2738
 #: include/views/configuration.services.edit.php:152
 #: include/views/configuration.trigger.prototype.list.php:81
 #: include/views/configuration.triggers.list.php:207
@@ -4862,7 +4825,7 @@ msgstr "Vô hiệu hóa web scenario đã chọn?"
 #: include/discovery.inc.php:108 include/hosts.inc.php:1272
 #: include/html.inc.php:318 include/httptest.inc.php:46
 #: include/items.inc.php:142 include/items.inc.php:145
-#: include/items.inc.php:189 include/triggers.inc.php:2216
+#: include/items.inc.php:189 include/triggers.inc.php:2217
 #: include/users.inc.php:86
 #: include/views/administration.general.other.edit.php:57
 #: include/views/administration.usergroups.list.php:44
@@ -4877,7 +4840,7 @@ msgstr "Vô hiệu hóa web scenario đã chọn?"
 #: include/views/configuration.correlation.list.php:46
 #: include/views/configuration.correlation.list.php:96
 #: include/views/configuration.discovery.list.php:45
-#: include/views/configuration.host.edit.php:693
+#: include/views/configuration.host.edit.php:442
 #: include/views/configuration.host.list.php:200
 #: include/views/configuration.host.massupdate.php:186
 #: include/views/configuration.host.massupdate.php:277
@@ -4918,7 +4881,7 @@ msgstr "Item được khám phá"
 #: include/views/configuration.template.list.php:204
 #: include/views/inventory.host.view.php:164
 #: include/views/inventory.host.view.php:175 search.php:137 search.php:176
-#: search.php:205 search.php:413 search.php:453 search.php:470
+#: search.php:192 search.php:395 search.php:435 search.php:452
 msgid "Discovery"
 msgstr "Khám phá"
 
@@ -5035,8 +4998,6 @@ msgstr "Quy tắc phát hiện đã cập nhật"
 #: include/views/configuration.discovery.list.php:22
 #: include/views/configuration.host.discovery.edit.php:23
 #: include/views/configuration.host.discovery.list.php:23
-#: include/views/configuration.host.edit.php:413
-#: include/views/configuration.template.edit.php:220
 #: include/views/conf.import.php:35
 msgid "Discovery rules"
 msgstr "Các quy tắc phát hiện"
@@ -5083,7 +5044,7 @@ msgstr "Hiển thị sơ đồ xếp chồng"
 
 #: include/actions.inc.php:1769 include/actions.inc.php:1841
 #: include/actions.inc.php:1932 include/func.inc.php:1703 jsLoader.php:309
-#: queue.php:298 search.php:256 search.php:356 search.php:498
+#: queue.php:298 search.php:238 search.php:338 search.php:480
 #, c-format
 msgid "Displaying %1$s of %2$s found"
 msgstr "Hiển thị %1$s của %2$s đã tìm được"
@@ -5205,24 +5166,24 @@ msgstr "Tạo bản sao \"tên\" giá trị \"%1$s\" cho sơ đồ."
 msgid "Duplicate \"name\" value \"%1$s\" for screen."
 msgstr "Tạo bản sao \"tên\" giá trị \"%1$s\" cho screen."
 
-#: include/classes/api/services/CTrigger.php:1115
+#: include/classes/api/services/CTrigger.php:1113
 #, c-format
 msgid "Duplicate dependencies in trigger \"%1$s\"."
 msgstr "Bản sao quan hệ phụ thuộc trong trigger \"%1$s\"."
 
-#: include/classes/api/services/CTriggerPrototype.php:985
+#: include/classes/api/services/CTriggerPrototype.php:981
 #, c-format
 msgid "Duplicate dependencies in trigger prototype \"%1$s\"."
 msgstr "Tạo bản sao quan hệ phụ thuộc trong kiểu trigger \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:1716
-#: include/classes/api/services/CHost.php:1971
+#: include/classes/api/services/CHost.php:1738
+#: include/classes/api/services/CHost.php:1993
 #, c-format
 msgid "Duplicate host. Host with the same host name \"%s\" already exists in data."
 msgstr "Bản sao host. Host với tên host cùng là \"%s\" đã tồn tại trong dữ liệu."
 
-#: include/classes/api/services/CHost.php:1723
-#: include/classes/api/services/CHost.php:1991
+#: include/classes/api/services/CHost.php:1745
+#: include/classes/api/services/CHost.php:2013
 #, c-format
 msgid "Duplicate host. Host with the same visible name \"%s\" already exists in data."
 msgstr "Bản sao host. Host với tên hiển thị cùng là \"%s\" đã tồn tại trong dữ liệu."
@@ -5231,16 +5192,6 @@ msgstr "Bản sao host. Host với tên hiển thị cùng là \"%s\" đã 
 #, c-format
 msgid "Duplicate severity name \"%s\"."
 msgstr "Tạo bản sao mức độ quan trọng của tên \"%s\"."
-
-#: include/classes/api/services/CTriggerGeneral.php:820
-#, c-format
-msgid "Duplicate trigger prototype with name \"%1$s\"."
-msgstr "Trùng trigger prototype có tên \"%1$s\"."
-
-#: include/classes/api/services/CTriggerGeneral.php:814
-#, c-format
-msgid "Duplicate trigger with name \"%1$s\"."
-msgstr "Trùng tên trigger \"%1$s\"."
 
 #: include/classes/api/services/CMap.php:735
 #: include/classes/api/services/CMap.php:1188
@@ -5266,11 +5217,11 @@ msgstr "Tạo bản sao id nhóm người dùng \"%1$s\" trong nhóm người d�
 msgid "Duplicate usrgrpid \"%1$s\" in user groups for screen \"%2$s\"."
 msgstr "Tạo bản sao id nhóm người \"%1$s\" dùng trong nhóm người dùng cho screen \"%2$s\"."
 
-#: app/views/monitoring.widget.problems.view.php:61 include/blocks.inc.php:558
-#: include/classes/screens/CScreenProblem.php:894
-#: include/classes/screens/CScreenProblem.php:917
-#: include/classes/screens/CScreenProblem.php:1134 include/events.inc.php:249
-#: include/events.inc.php:461 include/views/configuration.action.edit.php:435
+#: app/views/hint.box.php:76 app/views/monitoring.widget.problems.view.php:61
+#: include/blocks.inc.php:558 include/classes/screens/CScreenProblem.php:854
+#: include/classes/screens/CScreenProblem.php:877
+#: include/classes/screens/CScreenProblem.php:1095 include/events.inc.php:249
+#: include/views/configuration.action.edit.php:435
 msgid "Duration"
 msgstr "Khoảng thời gian"
 
@@ -5423,12 +5374,12 @@ msgstr "ID liên kết trống."
 msgid "Empty filter condition formula ID for action \"%1$s\"."
 msgstr "ID công thức điều kiện lọc trống cho hoạt động \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1106
+#: include/classes/api/services/CDiscoveryRule.php:1108
 #, c-format
 msgid "Empty filter condition formula ID for discovery rule \"%1$s\"."
 msgstr "ID công thức điều kiện lọc trống cho quy tắc khám phá \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1098
+#: include/classes/api/services/CDiscoveryRule.php:1100
 #, c-format
 msgid "Empty filter condition macro for discovery rule \"%1$s\"."
 msgstr "Macro điều kiện lọc trống cho quy tắc khám phá \"%1$s\"."
@@ -5449,10 +5400,10 @@ msgstr "Điều kiện lọc rỗng cho hành động \"%1$s\"."
 #: include/classes/api/services/CDRule.php:187
 #: include/classes/api/services/CDRule.php:313
 #: include/classes/api/services/CHostInterface.php:383
-#: include/classes/api/services/CHost.php:1138
+#: include/classes/api/services/CHost.php:1162
 #: include/classes/api/services/CHostPrototype.php:875
 #: include/classes/api/services/CImage.php:437
-#: include/classes/api/services/CMaintenance.php:528
+#: include/classes/api/services/CMaintenance.php:530
 #: include/classes/api/services/CMap.php:555
 #: include/classes/api/services/CMap.php:581
 #: include/classes/api/services/CMap.php:1011
@@ -5465,9 +5416,8 @@ msgstr "Điều kiện lọc rỗng cho hành động \"%1$s\"."
 #: include/classes/api/services/CService.php:366
 #: include/classes/api/services/CService.php:430
 #: include/classes/api/services/CService.php:498
-#: include/classes/api/services/CTemplate.php:560
-#: include/classes/api/services/CTrigger.php:654
-#: include/classes/api/services/CTrigger.php:778
+#: include/classes/api/services/CTemplate.php:589
+#: include/classes/api/services/CTrigger.php:775
 #: include/classes/api/services/CUserMacro.php:600
 msgid "Empty input parameter."
 msgstr "Không có tham số đầu vào."
@@ -5623,7 +5573,7 @@ msgstr "Kích hoạt trap"
 #: auditlogs.php:144 include/discovery.inc.php:107 include/html.inc.php:314
 #: include/httptest.inc.php:45 include/items.inc.php:142
 #: include/items.inc.php:145 include/items.inc.php:186
-#: include/triggers.inc.php:1288 include/triggers.inc.php:2213
+#: include/triggers.inc.php:1289 include/triggers.inc.php:2214
 #: include/views/administration.usergroups.edit.php:73
 #: include/views/administration.usergroups.edit.php:88
 #: include/views/administration.usergroups.edit.php:89
@@ -5654,7 +5604,7 @@ msgstr "Đã kích hoạt"
 
 #: app/views/administration.proxy.edit.php:120
 #: app/views/administration.proxy.list.php:66
-#: include/views/configuration.host.edit.php:805
+#: include/views/configuration.host.edit.php:554
 #: include/views/configuration.host.massupdate.php:373
 #: include/views/configuration.host.prototype.edit.php:422
 msgid "Encryption"
@@ -5725,7 +5675,7 @@ msgstr "Quy tắc liên kết sự kiện"
 msgid "Event details"
 msgstr "Chi tiết sự kiện"
 
-#: include/triggers.inc.php:1278
+#: include/triggers.inc.php:1279
 msgid "Event generation"
 msgstr "Tạo ra sự kiện"
 
@@ -5829,11 +5779,6 @@ msgstr "Mở rộng macros"
 #: include/views/monitoring.sysmap.edit.php:134
 msgid "Expand single problem"
 msgstr "Mở rộng vấn đề duy nhất"
-
-#: include/classes/core/CJsonRpc.php:110
-#, c-format
-msgid "Expecting JSON-rpc version 2.0, \"%s\" is given."
-msgstr "Mong muốn JSON-rpc phiên bản 2.0, \"%s\" được đưa ra."
 
 #: include/views/configuration.maintenance.list.php:55
 #: include/views/configuration.maintenance.list.php:83
@@ -5956,7 +5901,7 @@ msgstr "Không thể phân tích cú pháp URL."
 msgid "Failed to update dashboard"
 msgstr "Không thể cập nhật bảng điều khiển"
 
-#: include/classes/api/services/CTemplate.php:518
+#: include/classes/api/services/CTemplate.php:547
 msgid "Failed to update template."
 msgstr "Không thể cập nhật mẫu."
 
@@ -5993,7 +5938,7 @@ msgstr "Tháng 2"
 msgid "Field"
 msgstr "Trường"
 
-#: include/classes/db/DB.php:349
+#: include/classes/db/DB.php:329
 #, c-format
 msgid "Field \"%1$s\" cannot be set to NULL."
 msgstr "Trường \"%1$s\" không thể bị thiết lập là NULL."
@@ -6004,10 +5949,9 @@ msgstr "Trường \"%1$s\" không thể bị thiết lập là NULL."
 #: include/classes/api/services/CDRule.php:318
 #: include/classes/api/services/CDRule.php:493
 #: include/classes/api/services/CDRule.php:503
-#: include/classes/api/services/CHostGroup.php:906
-#: include/classes/api/services/CHost.php:747
-#: include/classes/api/services/CTemplate.php:793
-#: include/classes/api/services/CTriggerGeneral.php:495
+#: include/classes/api/services/CHostGroup.php:940
+#: include/classes/api/services/CHost.php:771
+#: include/classes/api/services/CTemplate.php:784
 #: include/classes/validators/CNewValidator.php:256
 #: include/validate.inc.php:300
 #, c-format
@@ -6058,7 +6002,7 @@ msgstr "Trường \"%1$s\" được chuẩn bị cho loại phương tiện \"%2
 msgid "Field \"%1$s\" must be missing."
 msgstr "Trường \"%1$s\" phải bị lỗi."
 
-#: include/classes/api/services/CTemplate.php:412
+#: include/classes/api/services/CTemplate.php:441
 msgid "Field \"host\" is mandatory."
 msgstr "Trường \"máy chủ\" là bắt buộc."
 
@@ -6276,8 +6220,8 @@ msgstr "Thông điệp frontend"
 msgid "Full"
 msgstr "Full"
 
-#: include/views/configuration.host.edit.php:816
-#: include/views/configuration.template.edit.php:446
+#: include/views/configuration.host.edit.php:565
+#: include/views/configuration.template.edit.php:226
 #: include/views/monitoring.screen.edit.php:223
 #: include/views/monitoring.sysmap.edit.php:390
 msgid "Full clone"
@@ -6338,7 +6282,7 @@ msgid "Get content of web page. Returns web page source as text"
 msgstr "Nội dung của trang web. Trả về nguồn trang web dưới dạng văn bản"
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:49
-#: include/triggers.inc.php:1434
+#: include/triggers.inc.php:1435
 msgid "Given expression is not a macro"
 msgstr "Biểu thức đã cho không phải là một macro"
 
@@ -6383,7 +6327,7 @@ msgid "Gradient line"
 msgstr "Đường độ dốc"
 
 #: charts.php:99 include/audit.inc.php:30
-#: include/classes/screens/CScreenProblem.php:1237
+#: include/classes/screens/CScreenProblem.php:1198
 #: include/classes/widgets/CWidgetConfig.php:46
 #: include/classes/widgets/forms/CWidgetFormGraph.php:32
 #: include/classes/widgets/forms/CWidgetFormGraph.php:62
@@ -6511,8 +6455,6 @@ msgstr "Kiều đồ thị với ID \"%1$s\" không sẵn sàng."
 #: include/views/configuration.graph.edit.php:31
 #: include/views/configuration.graph.list.php:24
 #: include/views/configuration.host.discovery.list.php:129
-#: include/views/configuration.host.edit.php:489
-#: include/views/configuration.template.edit.php:285
 msgid "Graph prototypes"
 msgstr "Các kiểu đồ thị"
 
@@ -6559,18 +6501,16 @@ msgstr "Đồ thị với tên giống nhau nhưng kiểu khác nhau tồn
 #: include/views/configuration.graph.edit.php:26
 #: include/views/configuration.graph.list.php:39
 #: include/views/configuration.host.discovery.list.php:54
-#: include/views/configuration.host.edit.php:387
 #: include/views/configuration.host.list.php:132
 #: include/views/configuration.host.list.php:345
-#: include/views/configuration.template.edit.php:196
 #: include/views/configuration.template.list.php:89
 #: include/views/configuration.template.list.php:196
 #: include/views/conf.import.php:37 include/views/inventory.host.view.php:148
 #: include/views/inventory.host.view.php:163
 #: include/views/inventory.host.view.php:174
 #: include/views/monitoring.charts.php:63 jsLoader.php:264 search.php:130
-#: search.php:136 search.php:172 search.php:201 search.php:239 search.php:291
-#: search.php:345 search.php:411 search.php:445 search.php:468
+#: search.php:136 search.php:172 search.php:191 search.php:221 search.php:273
+#: search.php:327 search.php:393 search.php:427 search.php:450
 msgid "Graphs"
 msgstr "Đồ thị"
 
@@ -6617,12 +6557,12 @@ msgstr "Grid"
 msgid "Group"
 msgstr "Nhóm"
 
-#: include/classes/api/services/CHostGroup.php:712
+#: include/classes/api/services/CHostGroup.php:746
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used by a host prototype."
 msgstr "Nhóm \"%1$s\" không thể bị xóa, bởi vì nó được sử dụng bởi các kiểu host."
 
-#: include/classes/api/services/CHostGroup.php:756
+#: include/classes/api/services/CHostGroup.php:790
 #, c-format
 msgid "Group \"%1$s\" cannot be deleted, because it is used in a correlation condition."
 msgstr "Nhóm \"%1$s\" không thể xóa, bởi vì nó được sử dụng trong một điều kiện tương quan."
@@ -6691,8 +6631,7 @@ msgstr "Các nhóm"
 msgid "H:i"
 msgstr "H:i"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1416
-#: include/classes/graphdraw/CLineGraphDraw.php:1423
+#: include/classes/graphdraw/CLineGraphDraw.php:1330
 #: include/translateDefines.inc.php:34
 msgid "H:i:s"
 msgstr "H:i:s"
@@ -6815,11 +6754,11 @@ msgstr "Thứ bậc"
 msgid "High"
 msgstr "Cao"
 
-#: include/classes/core/ZBase.php:268
+#: include/classes/core/ZBase.php:272
 msgid "High-contrast dark"
 msgstr "Độ tương phản tối"
 
-#: include/classes/core/ZBase.php:267
+#: include/classes/core/ZBase.php:271
 msgid "High-contrast light"
 msgstr "Độ tương phản sáng"
 
@@ -6829,7 +6768,7 @@ msgstr "Làm nổi bật toàn bộ hàng"
 
 #: app/views/monitoring.acknowledge.edit.php:34
 #: app/views/monitoring.problem.view.php:93 history.php:27
-#: include/classes/screens/CScreenProblem.php:1242
+#: include/classes/screens/CScreenProblem.php:1203
 #: include/classes/widgets/forms/CWidgetFormProblems.php:36
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:56
 #: include/forms.inc.php:438 include/forms.inc.php:872
@@ -6895,9 +6834,9 @@ msgstr "Sắp xếp theo chiều ngang"
 #: include/classes/screens/CScreenHostTriggers.php:135
 #: include/classes/screens/CScreenHostTriggers.php:180
 #: include/classes/screens/CScreenHttpTest.php:115
-#: include/classes/screens/CScreenProblem.php:890
-#: include/classes/screens/CScreenProblem.php:914
-#: include/classes/screens/CScreenProblem.php:1132
+#: include/classes/screens/CScreenProblem.php:850
+#: include/classes/screens/CScreenProblem.php:874
+#: include/classes/screens/CScreenProblem.php:1093
 #: include/classes/screens/CScreenTriggersInfo.php:40
 #: include/classes/setup/CSetupWizard.php:274
 #: include/classes/widgets/forms/CWidgetFormProblems.php:200
@@ -6907,7 +6846,7 @@ msgstr "Sắp xếp theo chiều ngang"
 #: include/views/configuration.application.list.php:35
 #: include/views/configuration.application.list.php:62
 #: include/views/configuration.graph.list.php:51
-#: include/views/configuration.host.edit.php:535
+#: include/views/configuration.host.edit.php:284
 #: include/views/configuration.host.massupdate.php:365
 #: include/views/configuration.host.prototype.edit.php:169
 #: include/views/configuration.httpconf.list.php:49
@@ -6933,17 +6872,17 @@ msgid "Host"
 msgid_plural "Hosts"
 msgstr[0] "Host"
 
-#: include/classes/api/services/CHost.php:854
-#: include/classes/api/services/CTemplate.php:444
+#: include/classes/api/services/CHost.php:878
+#: include/classes/api/services/CTemplate.php:473
 #: include/classes/import/importers/CHostImporter.php:67
 #, c-format
 msgid "Host \"%1$s\" already exists."
 msgstr "Host \"%1$s\" đã tồn tại."
 
-#: include/classes/api/services/CHostGroup.php:1452
-#: include/classes/api/services/CHost.php:813
-#: include/classes/api/services/CHost.php:1692
-#: include/classes/api/services/CHost.php:1881
+#: include/classes/api/services/CHostGroup.php:1486
+#: include/classes/api/services/CHost.php:837
+#: include/classes/api/services/CHost.php:1714
+#: include/classes/api/services/CHost.php:1903
 #, c-format
 msgid "Host \"%1$s\" cannot be without host group."
 msgstr "Máy chủ \"%1$s\" không thể không có nhóm máy chủ."
@@ -6969,7 +6908,7 @@ msgstr "Kết nối host"
 msgid "Host added"
 msgstr "Host được thêm vào"
 
-#: include/classes/api/services/CHostInterface.php:902
+#: include/classes/api/services/CHostInterface.php:908
 msgid "Host cannot have more than one default interface of the same type."
 msgstr "Host không thể có nhiều hơn một interface mặc định của kiểu tương tự."
 
@@ -7008,21 +6947,21 @@ msgstr[0] "Host được kích hoạtCác host được kích hoạt"
 #: include/views/js/monitoring.sysmaps.js.php:71
 #: include/views/js/monitoring.sysmaps.js.php:77
 #: include/views/js/monitoring.sysmaps.js.php:125 jsLoader.php:182
-#: report2.php:393 report2.php:431 search.php:288
+#: report2.php:393 report2.php:431 search.php:270
 msgid "Host group"
 msgstr "Nhóm host"
 
-#: include/classes/api/services/CHostGroup.php:640
+#: include/classes/api/services/CHostGroup.php:674
 #, c-format
 msgid "Host group \"%1$s\" already exists."
 msgstr "Nhóm host \"%1$s\" đã tồn tại."
 
-#: include/classes/api/services/CHostGroup.php:741
+#: include/classes/api/services/CHostGroup.php:775
 #, c-format
 msgid "Host group \"%1$s\" cannot be deleted, because it is used in a global script."
 msgstr "`Nhóm host \"%1$s\" không thể bị xóa, bởi bị nó được sử dụng trong một tập lệnh toàn cục."
 
-#: include/classes/api/services/CHostGroup.php:698
+#: include/classes/api/services/CHostGroup.php:732
 #, c-format
 msgid "Host group \"%1$s\" is internal and can not be deleted."
 msgstr "Nhóm host \"%1$s\" là nội bộ và không thể bị xóa."
@@ -7061,7 +7000,7 @@ msgstr "Nhóm máy chủ với ID \"%1$s\" không sẵn sàng."
 #: include/views/configuration.hostgroups.edit.php:22
 #: include/views/configuration.hostgroups.list.php:23
 #: include/views/configuration.maintenance.edit.php:235
-#: include/views/reports.toptriggers.php:34 latest.php:322 search.php:355
+#: include/views/reports.toptriggers.php:34 latest.php:322 search.php:337
 #: usergrps.php:318 usergrps.php:358
 msgid "Host groups"
 msgstr "Các nhóm host"
@@ -7080,7 +7019,7 @@ msgstr "Giao diện host"
 
 #: app/views/monitoring.problem.view.php:282 hostinventories.php:26
 #: include/views/common.filter.trigger.php:123
-#: include/views/configuration.host.edit.php:755
+#: include/views/configuration.host.edit.php:504
 #: include/views/configuration.host.prototype.edit.php:373
 #: include/views/inventory.host.list.php:23
 #: include/views/inventory.host.view.php:221 jsLoader.php:266
@@ -7159,7 +7098,6 @@ msgstr "Kiểu host với tên hiển thị \"%1$s\" đã tồn tại trong
 
 #: include/html.inc.php:482
 #: include/views/configuration.host.discovery.list.php:97
-#: include/views/configuration.host.edit.php:509
 #: include/views/configuration.host.prototype.edit.php:30
 #: include/views/configuration.host.prototype.list.php:23
 msgid "Host prototypes"
@@ -7186,7 +7124,7 @@ msgstr "Host subnet mask"
 msgid "Host time"
 msgstr "Thời gian của host"
 
-#: include/classes/api/services/CHost.php:678
+#: include/classes/api/services/CHost.php:702
 msgid "Host update failed."
 msgstr "Host cập nhật thất bại."
 
@@ -7199,25 +7137,25 @@ msgstr "Host đã cập nhật"
 msgid "Host with ID \"%1$s\" is not available."
 msgstr "Máy chủ với ID \"%1$s\" không sẵn sàng."
 
-#: include/classes/api/services/CTemplate.php:1065
+#: include/classes/api/services/CTemplate.php:1056
 #, c-format
 msgid "Host with the same name \"%1$s\" already exists."
 msgstr "Host với cùng một tên \"%1$s\" đã tồn tại."
 
-#: include/classes/api/services/CHost.php:1811
-#: include/classes/api/services/CHost.php:2047
+#: include/classes/api/services/CHost.php:1833
+#: include/classes/api/services/CHost.php:2069
 #, c-format
 msgid "Host with the same name \"%s\" already exists."
 msgstr "Host với cùng một tên \"%s\" đã tồn tại."
 
-#: include/classes/api/services/CTemplate.php:470
-#: include/classes/api/services/CTemplate.php:1030
+#: include/classes/api/services/CTemplate.php:499
+#: include/classes/api/services/CTemplate.php:1021
 #, c-format
 msgid "Host with the same visible name \"%1$s\" already exists."
 msgstr "Host với cùng một tên hiển thị \"%1$s\" đã tồn tại."
 
-#: include/classes/api/services/CHost.php:1817
-#: include/classes/api/services/CHost.php:2054
+#: include/classes/api/services/CHost.php:1839
+#: include/classes/api/services/CHost.php:2076
 #, c-format
 msgid "Host with the same visible name \"%s\" already exists."
 msgstr "Host với cùng một tên hiển thị \"%s\" đã tồn tại."
@@ -7243,8 +7181,8 @@ msgstr "Host với cùng một tên hiển thị \"%s\" đã tồn tại."
 #: include/views/configuration.host.massupdate.php:24
 #: include/views/configuration.maintenance.edit.php:251
 #: include/views/conf.import.php:29 include/views/reports.toptriggers.php:51
-#: latest.php:339 search.php:255 search.php:293 search.php:310 search.php:315
-#: search.php:331
+#: latest.php:339 search.php:237 search.php:275 search.php:292 search.php:297
+#: search.php:313
 msgid "Hosts"
 msgstr "Các host"
 
@@ -7329,7 +7267,7 @@ msgstr "Dải IP \"%1$s\" vượt quá giới hạn địa chỉ \"%2$s\""
 #: include/items.inc.php:352 include/views/configuration.action.edit.php:919
 #: include/views/configuration.action.edit.php:1675
 #: include/views/configuration.action.edit.php:2154
-#: include/views/configuration.host.edit.php:662
+#: include/views/configuration.host.edit.php:411
 #: include/views/configuration.host.massupdate.php:367
 #: include/views/configuration.host.prototype.edit.php:343
 msgid "IPMI"
@@ -7562,8 +7500,8 @@ msgstr "Máy chủ không thể tiếp cận"
 msgid "Inaccessible item"
 msgstr "Item không thể tiếp cận"
 
-#: include/classes/screens/CScreenProblem.php:414
-#: include/hostgroups.inc.php:291 include/triggers.inc.php:2368
+#: include/classes/screens/CScreenProblem.php:402
+#: include/hostgroups.inc.php:291 include/triggers.inc.php:2369
 #: include/views/configuration.host.list.php:190
 #: include/views/inventory.host.view.php:36
 msgid "Inaccessible maintenance"
@@ -7576,11 +7514,11 @@ msgstr "Sơ đồ không thể tiếp cận"
 
 #: include/graphs.inc.php:271 include/hosts.inc.php:631
 #: include/hosts.inc.php:800 include/httptest.inc.php:209
-#: include/items.inc.php:898 include/triggers.inc.php:2507
+#: include/items.inc.php:898 include/triggers.inc.php:2508
 msgid "Inaccessible template"
 msgstr "Mẫu không thể tiếp cận"
 
-#: include/triggers.inc.php:2707 include/triggers.inc.php:2715
+#: include/triggers.inc.php:2708 include/triggers.inc.php:2716
 msgid "Inaccessible trigger"
 msgstr "Trigger không thể tiếp cận"
 
@@ -7841,17 +7779,17 @@ msgstr "Đối số không chính xác được thông qua hàm."
 #: include/classes/api/services/CHostInterface.php:234
 #: include/classes/api/services/CHostInterface.php:435
 #: include/classes/api/services/CHostInterface.php:696
-#: include/classes/api/services/CHost.php:1174
+#: include/classes/api/services/CHost.php:1198
 #: include/classes/api/services/CHostPrototype.php:392
 #: include/classes/api/services/CHostPrototype.php:413
 #: include/classes/api/services/CItemGeneral.php:257
 #: include/classes/api/services/CItemGeneral.php:1248
 #: include/classes/api/services/CItemGeneral.php:1266
 #: include/classes/api/services/CItemGeneral.php:1288
-#: include/classes/api/services/CItemGeneral.php:1314
-#: include/classes/api/services/CItemGeneral.php:1327
-#: include/classes/api/services/CItemGeneral.php:1356
-#: include/classes/api/services/CItemGeneral.php:1370
+#: include/classes/api/services/CItemGeneral.php:1320
+#: include/classes/api/services/CItemGeneral.php:1333
+#: include/classes/api/services/CItemGeneral.php:1362
+#: include/classes/api/services/CItemGeneral.php:1376
 #: include/classes/api/services/CMapElement.php:46
 #: include/classes/api/services/CMapElement.php:117
 #: include/classes/api/services/CMapElement.php:129
@@ -7896,9 +7834,9 @@ msgstr "Giá trị số lượng lớn không chính xác cho interface."
 msgid "Incorrect calculate SLA value for service \"%1$s\"."
 msgstr "Tính toán giá trị SLA cho dịch vụ \"%1$s\" không chính xác."
 
-#: include/classes/api/services/CHost.php:836
-#: include/classes/api/services/CHost.php:1680
-#: include/classes/api/services/CHost.php:1965
+#: include/classes/api/services/CHost.php:860
+#: include/classes/api/services/CHost.php:1702
+#: include/classes/api/services/CHost.php:1987
 #, c-format
 msgid "Incorrect characters used for host name \"%s\"."
 msgstr "Các ký tự được sử dụng cho tên host \"%s\" không chính xác."
@@ -7909,8 +7847,8 @@ msgstr "Các ký tự được sử dụng cho tên host \"%s\" không chi�
 msgid "Incorrect characters used for proxy name \"%1$s\"."
 msgstr "Các ký tự được sử dụng cho tên proxy \"%1$s\" không chính xác."
 
-#: include/classes/api/services/CTemplate.php:422
-#: include/classes/api/services/CTemplate.php:1075
+#: include/classes/api/services/CTemplate.php:451
+#: include/classes/api/services/CTemplate.php:1066
 #, c-format
 msgid "Incorrect characters used for template name \"%1$s\"."
 msgstr "Các ký tự được sử dụng cho tên template \"%1$s\" không chính xác."
@@ -7920,7 +7858,7 @@ msgstr "Các ký tự được sử dụng cho tên template \"%1$s\" khôn
 msgid "Incorrect conditions for action \"%1$s\"."
 msgstr "Điều kiện không chính xác cho hoạt động \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1072
+#: include/classes/api/services/CDiscoveryRule.php:1074
 #, c-format
 msgid "Incorrect conditions for discovery rule \"%1$s\"."
 msgstr "Điều kiện không chính xác cho quy tắc khám phá \"%1$s\"."
@@ -7939,7 +7877,7 @@ msgstr "Biểu thức tự chọn \"%2$s\" không chính xác cho hoạt động
 msgid "Incorrect custom expression \"%2$s\" for correlation \"%1$s\": %3$s."
 msgstr "Biểu thức tự chọn \"%2$s\" không chính xác cho liên kết \"%1$s\": %3$s."
 
-#: include/classes/api/services/CDiscoveryRule.php:1077
+#: include/classes/api/services/CDiscoveryRule.php:1079
 #, c-format
 msgid "Incorrect custom expression \"%2$s\" for discovery rule \"%1$s\": %3$s."
 msgstr "Biểu thức tự chọn \"%2$s\" không chính xác cho quy tắc khám phá \"%1$s\": %3$s."
@@ -7972,7 +7910,7 @@ msgstr "Giá trị đối tượng sự kiện không chính xác."
 msgid "Incorrect eventsource value."
 msgstr "Giá trị nguồn sự kiện không chính xác."
 
-#: include/classes/db/DB.php:563 include/classes/db/DB.php:837
+#: include/classes/db/DB.php:565 include/classes/db/DB.php:839
 #, c-format
 msgid "Incorrect field \"%1$s\" name or value in where statement for table \"%2$s\"."
 msgstr "Trường có tên \"%1$s\" không chính xác hoặc giá trị ở nơi báo cáo đối với bảng \"%2$s\"."
@@ -7990,7 +7928,7 @@ msgstr "Tải lên tập tin không chính xác."
 msgid "Incorrect filter condition formula ID for action \"%1$s\"."
 msgstr "ID công thức điều kiện bộ lọc không chính xác cho hoạt động \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1107
+#: include/classes/api/services/CDiscoveryRule.php:1109
 #, c-format
 msgid "Incorrect filter condition formula ID for discovery rule \"%1$s\"."
 msgstr "ID công thức điều kiện bộ lọc không chính xác cho quy tắc khám phá \"%1$s\"."
@@ -8000,7 +7938,7 @@ msgstr "ID công thức điều kiện bộ lọc không chính xác cho quy t�
 msgid "Incorrect filter condition formula ID given for correlation \"%1$s\"."
 msgstr "ID công thức điều kiện bộ lọc không chính xác cho liên kết \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1099
+#: include/classes/api/services/CDiscoveryRule.php:1101
 #, c-format
 msgid "Incorrect filter condition macro for discovery rule \"%1$s\"."
 msgstr "Điều kiện lọc macro không chính xác cho quy tắc khám phá \"%1$s\"."
@@ -8011,7 +7949,7 @@ msgstr "Điều kiện lọc macro không chính xác cho quy tắc khám phá \
 msgid "Incorrect filter condition operator for action \"%1$s\"."
 msgstr "Thao tác điều kiện lọc không chính xác cho hoạt động \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1111
+#: include/classes/api/services/CDiscoveryRule.php:1113
 #, c-format
 msgid "Incorrect filter condition operator for discovery rule \"%1$s\"."
 msgstr "Thao tác điều kiện lọc không chính xác cho quy tắc khám phá \"%1$s\"."
@@ -8024,7 +7962,7 @@ msgstr "Kiểu điều kiện lọc không chính xác cho hoạt động \"%1$s
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:50
 #: include/classes/triggers/CTextTriggerConstructor.php:113
-#: include/triggers.inc.php:1435
+#: include/triggers.inc.php:1436
 msgid "Incorrect function is used"
 msgstr "Hàm được sử dụng không chính xác."
 
@@ -8059,9 +7997,9 @@ msgstr "Chỉ số hình ảnh không chính xác."
 #: include/classes/api/services/CAction.php:2902
 #: include/classes/api/services/CAction.php:2914
 #: include/classes/api/services/CAction.php:2926
-#: include/classes/api/services/CHost.php:819
-#: include/classes/api/services/CHost.php:1674
-#: include/classes/api/services/CHost.php:1867
+#: include/classes/api/services/CHost.php:843
+#: include/classes/api/services/CHost.php:1696
+#: include/classes/api/services/CHost.php:1889
 #: include/classes/api/services/CImage.php:449
 #: include/classes/api/services/CImage.php:490
 #: include/classes/api/services/CProxy.php:619
@@ -8069,8 +8007,8 @@ msgstr "Chỉ số hình ảnh không chính xác."
 #: include/classes/api/services/CProxy.php:727
 #: include/classes/api/services/CProxy.php:749
 #: include/classes/api/services/CScreen.php:455
-#: include/classes/api/services/CTemplate.php:417
-#: include/classes/api/services/CTemplate.php:545
+#: include/classes/api/services/CTemplate.php:446
+#: include/classes/api/services/CTemplate.php:574
 #: include/classes/api/services/CTemplateScreen.php:596
 msgid "Incorrect input parameters."
 msgstr "Các tham số đầu vào không chính xác."
@@ -8085,8 +8023,8 @@ msgstr "Tham số DNS interface \"%s\" được cung cấp không chính xa�
 msgid "Incorrect interface port \"%s\" provided."
 msgstr "Cổng interface \"%s\" được cung cấp không chính xác."
 
-#: include/classes/api/services/CHost.php:1786
-#: include/classes/api/services/CHost.php:1947
+#: include/classes/api/services/CHost.php:1808
+#: include/classes/api/services/CHost.php:1969
 #, c-format
 msgid "Incorrect inventory field \"%s\"."
 msgstr "Trường lưu trữ \"%s\" không chính xác."
@@ -8104,7 +8042,7 @@ msgstr "ID item \"%1$s\" được cung cấp không chính xác đối vơ�
 msgid "Incorrect item for axis value."
 msgstr "Item không chính xác đối với trục giá trị."
 
-#: include/classes/api/services/CTriggerGeneral.php:1702
+#: include/classes/api/services/CTriggerGeneral.php:1511
 #, c-format
 msgid "Incorrect item key \"%1$s\" provided for trigger expression on \"%2$s\"."
 msgstr "Key item \"%1$s\" không chính xác được cung cấp cho biểu thức trigger trên \"%2$s\"."
@@ -8115,7 +8053,7 @@ msgid "Incorrect item prototype ID \"%1$s\" provided for screen element."
 msgstr "ID kiểu item \"%1$s\" không chính xác được cung cấp cho phần tử screen."
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:51
-#: include/triggers.inc.php:1436
+#: include/triggers.inc.php:1437
 msgid "Incorrect item value type"
 msgstr "Kiểu giá trị item không chính xác"
 
@@ -8212,7 +8150,7 @@ msgid "Incorrect parameters for condition."
 msgstr "Các tham số cho điều kiện không chính xác."
 
 #: include/classes/api/services/CMaintenance.php:325
-#: include/classes/api/services/CMaintenance.php:538
+#: include/classes/api/services/CMaintenance.php:540
 msgid "Incorrect parameters for maintenance."
 msgstr "Các tham số cho bảo trì không chính xác."
 
@@ -8286,8 +8224,8 @@ msgstr "Thứ tự sắp xếp không chính xác cho dịch vụ \"%1$s\"."
 msgid "Incorrect source value."
 msgstr "Giá trị nguồn không chính xác."
 
-#: include/classes/api/services/CHost.php:1758
-#: include/classes/api/services/CHost.php:1913
+#: include/classes/api/services/CHost.php:1780
+#: include/classes/api/services/CHost.php:1935
 #, c-format
 msgid "Incorrect status for host \"%1$s\"."
 msgstr "Trạng thái máy chủ không chính xác \"%1$s\"."
@@ -8318,18 +8256,19 @@ msgstr "Trigger ID cho dịch vụ \"%1$s\" không chính xác."
 msgid "Incorrect trigger expression"
 msgstr "Biểu thức trigger không chính xác"
 
-#: include/classes/parsers/CTriggerExpression.php:453
-#: include/classes/parsers/CTriggerExpression.php:460
+#: include/classes/parsers/CTriggerExpression.php:463
+#: include/classes/parsers/CTriggerExpression.php:472
 msgid "Incorrect trigger expression."
 msgstr "Biểu thức trigger không chính xác."
 
-#: include/classes/api/services/CTriggerGeneral.php:1492
+#: include/classes/api/services/CTriggerGeneral.php:521
+#: include/classes/api/services/CTriggerGeneral.php:1301
 #: include/triggers.inc.php:633
 #, c-format
 msgid "Incorrect trigger expression. Host \"%1$s\" does not exist or you have no access to this host."
 msgstr "Biểu thức trigger không chính xác. Host \"%1$s\" không tồn tại hoặc bạn không có quyền truy cập vào host này."
 
-#: include/classes/api/services/CTriggerGeneral.php:1493
+#: include/classes/api/services/CTriggerGeneral.php:1302
 msgid "Incorrect trigger expression. Trigger expression elements should not belong to a template and a host simultaneously."
 msgstr "Biểu thức trigger không chính xác. Các phần tử biểu thức trigger không phải thuộc về một template và một host cùng một lúc."
 
@@ -8341,12 +8280,13 @@ msgstr "Biểu thức trigger không chính xác. Các phần tử biể
 msgid "Incorrect trigger function \"%1$s\" provided in expression."
 msgstr "Hàm trigger \"%1$s\" không chính xác được cung cấp trong biểu thức."
 
-#: include/classes/api/services/CTriggerGeneral.php:1499
+#: include/classes/api/services/CTriggerGeneral.php:522
+#: include/classes/api/services/CTriggerGeneral.php:1308
 #, c-format
 msgid "Incorrect trigger prototype expression. Host \"%1$s\" does not exist or you have no access to this host."
 msgstr "Biểu thức trigger không chính xác. Máy chủ \"%1$s\" không tồn tại hoặc bạn không có quyền truy cập vào máy chủ này."
 
-#: include/classes/api/services/CTriggerGeneral.php:1500
+#: include/classes/api/services/CTriggerGeneral.php:1309
 msgid "Incorrect trigger prototype expression. Trigger prototype expression elements should not belong to a template and a host simultaneously."
 msgstr "Biểu thức trigger không chính xác. Các thành phần biểu thức trigger không nên đồng thời thuộc về một mẫu và máy chủ lưu trữ."
 
@@ -8360,7 +8300,7 @@ msgstr "Loại tính toán không chính xác cho hoạt động \"%1$s\"."
 msgid "Incorrect type of calculation for correlation \"%1$s\"."
 msgstr "Loại tính toán không chính xác cho liên kết\"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1065
+#: include/classes/api/services/CDiscoveryRule.php:1067
 #, c-format
 msgid "Incorrect type of calculation for discovery rule \"%1$s\"."
 msgstr "Loại tính toán không chính xác cho quy tắc khám phá \"%1$s\"."
@@ -8408,7 +8348,7 @@ msgstr ""
 #: include/classes/api/services/CAction.php:1849
 #: include/classes/api/services/CAction.php:2866
 #: include/classes/api/services/CAction.php:3011
-#: include/classes/api/services/CDiscoveryRule.php:1013
+#: include/classes/api/services/CDiscoveryRule.php:1015
 #: include/classes/api/services/CDRule.php:237
 #: include/classes/api/services/CDRule.php:244
 #: include/classes/api/services/CDRule.php:292
@@ -8419,7 +8359,7 @@ msgstr ""
 #: include/classes/api/services/CDRule.php:558
 #: include/classes/api/services/CDRule.php:571
 #: include/classes/api/services/CItemGeneral.php:528
-#: include/classes/api/services/CItemGeneral.php:1964
+#: include/classes/api/services/CItemGeneral.php:2022
 #: include/classes/validators/CNewValidator.php:116
 #: include/classes/validators/CNewValidator.php:129
 #: include/classes/validators/CNewValidator.php:142
@@ -8434,7 +8374,7 @@ msgstr ""
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
 msgstr "Giá trị \"%1$s\" không chính xác đối với trường \"%2$s\"."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:127
+#: app/controllers/CControllerAuthenticationUpdate.php:125
 #: include/classes/api/services/CAction.php:1782
 #: include/classes/api/services/CScreenItem.php:576
 #: include/validate.inc.php:351
@@ -8442,19 +8382,19 @@ msgstr "Giá trị \"%1$s\" không chính xác đối với trường \"%2
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field: must be between %3$s and %4$s."
 msgstr "Giá trị \"%1$s\" không chính xác đối với trường \"%2$s\": phải nằm giữa \"%3$s\" và \"%4$s\". "
 
-#: include/classes/db/DB.php:379
+#: include/classes/db/DB.php:359
 #, c-format
 msgid "Incorrect value \"%1$s\" for float field \"%2$s\"."
 msgstr "Giá trị \"%1$s\" không chính xác đối với trường float \"%2$s\"."
 
-#: include/classes/db/DB.php:373
+#: include/classes/db/DB.php:353
 #, c-format
 msgid "Incorrect value \"%1$s\" for int field \"%2$s\"."
 msgstr "Giá trị \"%1$s\" không chính xác đối với trường int \"%2$s\"."
 
 #: include/classes/api/services/CMaintenance.php:387
-#: include/classes/api/services/CMaintenance.php:654
-#: include/classes/db/DB.php:367
+#: include/classes/api/services/CMaintenance.php:656
+#: include/classes/db/DB.php:347
 #, c-format
 msgid "Incorrect value \"%1$s\" for unsigned int field \"%2$s\"."
 msgstr "Giá trị \"%1$s\" không chính xác đối với trường unsigned int \"%2$s\". "
@@ -8501,7 +8441,7 @@ msgstr "Giá trị \"%1$s\" không chính xác trong trường \"%2$s\" cho lo�
 msgid "Incorrect value for \"%1$s\" field."
 msgstr "Giá trị không chính xác cho trường \"%1$s\"."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:88
+#: app/controllers/CControllerAuthenticationUpdate.php:86
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: app/controllers/CControllerPopupMedia.php:94
 #: app/controllers/CControllerPopupMedia.php:105 correlation.php:227
@@ -8516,8 +8456,8 @@ msgstr "Giá trị không chính xác cho trường \"%1$s\"."
 #: include/classes/api/services/CCorrelation.php:1101
 #: include/classes/api/services/CCorrelation.php:1118
 #: include/classes/api/services/CCorrelation.php:1137
-#: include/classes/api/services/CDiscoveryRule.php:1133
-#: include/classes/api/services/CDiscoveryRule.php:1306
+#: include/classes/api/services/CDiscoveryRule.php:1135
+#: include/classes/api/services/CDiscoveryRule.php:1308
 #: include/classes/api/services/CDRule.php:203
 #: include/classes/api/services/CDRule.php:209
 #: include/classes/api/services/CDRule.php:214
@@ -8537,21 +8477,21 @@ msgstr "Giá trị không chính xác cho trường \"%1$s\"."
 #: include/classes/api/services/CEvent.php:804
 #: include/classes/api/services/CEvent.php:847
 #: include/classes/api/services/CEvent.php:904
-#: include/classes/api/services/CHost.php:777
-#: include/classes/api/services/CHost.php:1576
-#: include/classes/api/services/CHost.php:1582
-#: include/classes/api/services/CHost.php:1597
-#: include/classes/api/services/CHost.php:1603
-#: include/classes/api/services/CHost.php:1608
-#: include/classes/api/services/CHost.php:1614
-#: include/classes/api/services/CHost.php:1622
-#: include/classes/api/services/CHost.php:1628
-#: include/classes/api/services/CHost.php:1637
-#: include/classes/api/services/CHost.php:1643
-#: include/classes/api/services/CHost.php:1701
-#: include/classes/api/services/CHost.php:1752
-#: include/classes/api/services/CHost.php:1890
-#: include/classes/api/services/CHost.php:1907
+#: include/classes/api/services/CHost.php:801
+#: include/classes/api/services/CHost.php:1598
+#: include/classes/api/services/CHost.php:1604
+#: include/classes/api/services/CHost.php:1619
+#: include/classes/api/services/CHost.php:1625
+#: include/classes/api/services/CHost.php:1630
+#: include/classes/api/services/CHost.php:1636
+#: include/classes/api/services/CHost.php:1644
+#: include/classes/api/services/CHost.php:1650
+#: include/classes/api/services/CHost.php:1659
+#: include/classes/api/services/CHost.php:1665
+#: include/classes/api/services/CHost.php:1723
+#: include/classes/api/services/CHost.php:1774
+#: include/classes/api/services/CHost.php:1912
+#: include/classes/api/services/CHost.php:1929
 #: include/classes/api/services/CHttpTest.php:959
 #: include/classes/api/services/CHttpTest.php:1057
 #: include/classes/api/services/CItemGeneral.php:216
@@ -8567,26 +8507,26 @@ msgstr "Giá trị không chính xác cho trường \"%1$s\"."
 #: include/classes/api/services/CItemGeneral.php:1271
 #: include/classes/api/services/CItemGeneral.php:1277
 #: include/classes/api/services/CItemGeneral.php:1292
-#: include/classes/api/services/CItemGeneral.php:1301
-#: include/classes/api/services/CItemGeneral.php:1319
-#: include/classes/api/services/CItemGeneral.php:1332
-#: include/classes/api/services/CItemGeneral.php:1339
+#: include/classes/api/services/CItemGeneral.php:1307
+#: include/classes/api/services/CItemGeneral.php:1325
+#: include/classes/api/services/CItemGeneral.php:1338
 #: include/classes/api/services/CItemGeneral.php:1345
-#: include/classes/api/services/CItemGeneral.php:1361
-#: include/classes/api/services/CItemGeneral.php:1375
-#: include/classes/api/services/CItemGeneral.php:1611
-#: include/classes/api/services/CItemGeneral.php:1631
-#: include/classes/api/services/CItemGeneral.php:1638
-#: include/classes/api/services/CItemGeneral.php:1648
-#: include/classes/api/services/CItemGeneral.php:1728
-#: include/classes/api/services/CItemGeneral.php:1742
-#: include/classes/api/services/CItemGeneral.php:1903
+#: include/classes/api/services/CItemGeneral.php:1351
+#: include/classes/api/services/CItemGeneral.php:1367
+#: include/classes/api/services/CItemGeneral.php:1381
+#: include/classes/api/services/CItemGeneral.php:1669
+#: include/classes/api/services/CItemGeneral.php:1689
+#: include/classes/api/services/CItemGeneral.php:1696
+#: include/classes/api/services/CItemGeneral.php:1706
+#: include/classes/api/services/CItemGeneral.php:1786
+#: include/classes/api/services/CItemGeneral.php:1800
+#: include/classes/api/services/CItemGeneral.php:1961
 #: include/classes/api/services/CItem.php:771
 #: include/classes/api/services/CItem.php:779
 #: include/classes/api/services/CItemPrototype.php:942
 #: include/classes/api/services/CItemPrototype.php:950
-#: include/classes/api/services/CMaintenance.php:488
-#: include/classes/api/services/CMaintenance.php:711
+#: include/classes/api/services/CMaintenance.php:490
+#: include/classes/api/services/CMaintenance.php:713
 #: include/classes/api/services/CMapElement.php:101
 #: include/classes/api/services/CMapElement.php:122
 #: include/classes/api/services/CMapElement.php:147
@@ -8622,29 +8562,17 @@ msgstr "Giá trị không chính xác cho trường \"%1$s\"."
 #: include/classes/api/services/CProxy.php:793
 #: include/classes/api/services/CScreen.php:423
 #: include/classes/api/services/CScreen.php:429
-#: include/classes/api/services/CTemplate.php:377
-#: include/classes/api/services/CTriggerGeneral.php:500
-#: include/classes/api/services/CTriggerGeneral.php:506
-#: include/classes/api/services/CTriggerGeneral.php:516
-#: include/classes/api/services/CTriggerGeneral.php:864
-#: include/classes/api/services/CTriggerGeneral.php:872
-#: include/classes/api/services/CTriggerGeneral.php:890
-#: include/classes/api/services/CTriggerGeneral.php:897
-#: include/classes/api/services/CTriggerGeneral.php:904
-#: include/classes/api/services/CTriggerGeneral.php:910
-#: include/classes/api/services/CTriggerGeneral.php:918
-#: include/classes/api/services/CTriggerGeneral.php:1101
-#: include/classes/api/services/CTriggerGeneral.php:1110
-#: include/classes/api/services/CTriggerGeneral.php:1118
-#: include/classes/api/services/CTriggerGeneral.php:1128
-#: include/classes/api/services/CTriggerGeneral.php:1136
-#: include/classes/api/services/CTriggerGeneral.php:1142
-#: include/classes/api/services/CTriggerGeneral.php:1150
+#: include/classes/api/services/CTemplate.php:406
+#: include/classes/api/services/CTriggerGeneral.php:690
+#: include/classes/api/services/CTriggerGeneral.php:696
+#: include/classes/api/services/CTriggerGeneral.php:716
+#: include/classes/api/services/CTriggerGeneral.php:723
+#: include/classes/api/services/CTriggerGeneral.php:729
 #: include/classes/api/services/CUserGroup.php:463
 #: include/classes/api/services/CUser.php:536
-#: include/classes/graphdraw/CLineGraphDraw.php:113
-#: include/classes/graphdraw/CLineGraphDraw.php:241
-#: include/classes/graphdraw/CLineGraphDraw.php:251
+#: include/classes/graphdraw/CLineGraphDraw.php:112
+#: include/classes/graphdraw/CLineGraphDraw.php:240
+#: include/classes/graphdraw/CLineGraphDraw.php:250
 #: include/classes/graphdraw/CPieGraphDraw.php:203
 #: include/classes/graphdraw/CPieGraphDraw.php:213
 #: include/classes/helpers/CSvgGraphHelper.php:235
@@ -8669,7 +8597,7 @@ msgstr "Giá trị không chính xác cho trường \"%1$s\"."
 msgid "Incorrect value for field \"%1$s\": %2$s."
 msgstr "Giá trị không chính xác cho trường \"%1$s\": %2$s."
 
-#: app/controllers/CControllerAuthenticationUpdate.php:119
+#: app/controllers/CControllerAuthenticationUpdate.php:117
 #: app/controllers/CControllerPopupTriggerWizard.php:133
 #: include/validate.inc.php:346
 #, c-format
@@ -8695,8 +8623,8 @@ msgstr "Indonesian (id_ID)"
 #: include/actions.inc.php:1881 include/actions.inc.php:1965
 #: include/blocks.inc.php:554 include/classes/screens/CScreenActions.php:117
 #: include/classes/screens/CScreenHostTriggers.php:218
-#: include/classes/screens/CScreenProblem.php:889
-#: include/classes/screens/CScreenProblem.php:913
+#: include/classes/screens/CScreenProblem.php:849
+#: include/classes/screens/CScreenProblem.php:873
 #: include/views/administration.auditacts.list.php:62
 #: include/views/configuration.application.list.php:65
 #: include/views/configuration.host.discovery.list.php:60
@@ -8759,7 +8687,7 @@ msgstr "Tên người cài đặt"
 msgid "Interface"
 msgstr "Interface"
 
-#: include/classes/api/services/CHostInterface.php:923
+#: include/classes/api/services/CHostInterface.php:929
 #, c-format
 msgid "Interface is linked to item \"%1$s\" on \"%2$s\"."
 msgstr "Interface được liên kết đến item \"%1$s\" trên \"%2$s\". "
@@ -8799,7 +8727,7 @@ msgctxt "user type"
 msgid "Internal"
 msgstr "Nội bộ"
 
-#: include/classes/core/CJsonRpc.php:206
+#: include/classes/core/CJsonRpc.php:199
 msgid "Internal JSON-RPC error."
 msgstr "Lỗi nội bộ JSON-RPC."
 
@@ -8809,15 +8737,12 @@ msgstr "Chu kì lưu trữ dữ liệu nội bộ"
 
 #: include/classes/api/services/CGraphGeneral.php:494
 #: include/classes/api/services/CGraphGeneral.php:625
-#: include/classes/api/services/CTriggerGeneral.php:616
-#: include/classes/api/services/CTriggerGeneral.php:761
-#: include/classes/api/services/CTriggerGeneral.php:826
-#: include/classes/api/services/CTriggerGeneral.php:985
-#: include/classes/api/services/CTriggerGeneral.php:1215
-#: include/classes/api/services/CTriggerGeneral.php:1324
-#: include/classes/api/services/CTriggerGeneral.php:1505
-#: include/classes/api/services/CTriggerGeneral.php:1867
-#: include/classes/core/CJsonRpc.php:205
+#: include/classes/api/services/CTriggerGeneral.php:905
+#: include/classes/api/services/CTriggerGeneral.php:1028
+#: include/classes/api/services/CTriggerGeneral.php:1133
+#: include/classes/api/services/CTriggerGeneral.php:1314
+#: include/classes/api/services/CTriggerGeneral.php:1691
+#: include/classes/core/CJsonRpc.php:198
 #: include/classes/import/validators/CXmlValidatorGeneral.php:147
 #: include/classes/widgets/fields/CWidgetField.php:100
 msgid "Internal error."
@@ -8854,11 +8779,11 @@ msgstr "Khoảng thời gian"
 msgid "Invalid IP address \"%1$s\"."
 msgstr "Địa chỉ IP \"%1$s\" không hợp lệ."
 
-#: include/classes/core/CJsonRpc.php:186
+#: include/classes/core/CJsonRpc.php:179
 msgid "Invalid JSON. An error occurred on the server while parsing the JSON text."
 msgstr "JSON không hợp lệ. Một lỗi xảy ra trên máy chủ trong khi phân tích văn bản JSON."
 
-#: include/classes/core/CJsonRpc.php:190
+#: include/classes/core/CJsonRpc.php:183
 msgid "Invalid Request."
 msgstr "Yêu cầu không hợp lệ."
 
@@ -8972,7 +8897,7 @@ msgstr "Macro \"%1$s\" không hợp lệ: %2$s."
 #: include/classes/api/services/CService.php:200
 #: include/classes/api/services/CService.php:371
 #: include/classes/api/services/CService.php:1202
-#: include/classes/core/CJsonRpc.php:201
+#: include/classes/core/CJsonRpc.php:194
 msgid "Invalid method parameters."
 msgstr "Phương pháp tham số không hợp lệ."
 
@@ -8995,77 +8920,84 @@ msgstr "Số đối số không hợp lệ của các tham số."
 #: app/controllers/CControllerDashboardUpdate.php:134
 #: app/controllers/CControllerDashboardUpdate.php:142
 #: app/controllers/CControllerPopupHttpStep.php:100
-#: include/classes/api/services/CItemGeneral.php:1919
-#: include/classes/api/services/CItemGeneral.php:1926
-#: include/classes/api/services/CItemGeneral.php:1934
-#: include/classes/api/services/CItemGeneral.php:1943
-#: include/classes/api/services/CItemGeneral.php:1950
-#: include/classes/api/services/CItemGeneral.php:1981
-#: include/classes/api/services/CItemGeneral.php:1986
-#: include/classes/api/services/CItemGeneral.php:1996
-#: include/classes/api/services/CItemGeneral.php:2025
+#: include/classes/api/services/CItemGeneral.php:1977
+#: include/classes/api/services/CItemGeneral.php:1984
+#: include/classes/api/services/CItemGeneral.php:1992
+#: include/classes/api/services/CItemGeneral.php:2001
+#: include/classes/api/services/CItemGeneral.php:2008
+#: include/classes/api/services/CItemGeneral.php:2039
+#: include/classes/api/services/CItemGeneral.php:2044
+#: include/classes/api/services/CItemGeneral.php:2054
+#: include/classes/api/services/CItemGeneral.php:2083
+#: include/classes/api/services/CTriggerGeneral.php:1646
+#: include/classes/api/services/CTriggerGeneral.php:1662
 #: include/classes/api/services/CUser.php:668
 #: include/classes/api/services/CUser.php:679
-#: include/classes/validators/CApiInputValidator.php:250
-#: include/classes/validators/CApiInputValidator.php:255
-#: include/classes/validators/CApiInputValidator.php:260
-#: include/classes/validators/CApiInputValidator.php:290
-#: include/classes/validators/CApiInputValidator.php:351
-#: include/classes/validators/CApiInputValidator.php:358
-#: include/classes/validators/CApiInputValidator.php:390
-#: include/classes/validators/CApiInputValidator.php:395
-#: include/classes/validators/CApiInputValidator.php:437
-#: include/classes/validators/CApiInputValidator.php:442
-#: include/classes/validators/CApiInputValidator.php:476
-#: include/classes/validators/CApiInputValidator.php:481
-#: include/classes/validators/CApiInputValidator.php:522
-#: include/classes/validators/CApiInputValidator.php:527
-#: include/classes/validators/CApiInputValidator.php:567
-#: include/classes/validators/CApiInputValidator.php:598
-#: include/classes/validators/CApiInputValidator.php:603
-#: include/classes/validators/CApiInputValidator.php:659
-#: include/classes/validators/CApiInputValidator.php:692
-#: include/classes/validators/CApiInputValidator.php:697
-#: include/classes/validators/CApiInputValidator.php:738
-#: include/classes/validators/CApiInputValidator.php:743
-#: include/classes/validators/CApiInputValidator.php:748
-#: include/classes/validators/CApiInputValidator.php:777
-#: include/classes/validators/CApiInputValidator.php:832
-#: include/classes/validators/CApiInputValidator.php:839
-#: include/classes/validators/CApiInputValidator.php:866
-#: include/classes/validators/CApiInputValidator.php:911
-#: include/classes/validators/CApiInputValidator.php:940
-#: include/classes/validators/CApiInputValidator.php:985
-#: include/classes/validators/CApiInputValidator.php:990
-#: include/classes/validators/CApiInputValidator.php:1027
-#: include/classes/validators/CApiInputValidator.php:1032
-#: include/classes/validators/CApiInputValidator.php:1075
-#: include/classes/validators/CApiInputValidator.php:1084
-#: include/classes/validators/CApiInputValidator.php:1090
-#: include/classes/validators/CApiInputValidator.php:1118
-#: include/classes/validators/CApiInputValidator.php:1128
-#: include/classes/validators/CApiInputValidator.php:1134
-#: include/classes/validators/CApiInputValidator.php:1170
-#: include/classes/validators/CApiInputValidator.php:1181
-#: include/classes/validators/CApiInputValidator.php:1188
-#: include/classes/validators/CApiInputValidator.php:1215
-#: include/classes/validators/CApiInputValidator.php:1225
-#: include/classes/validators/CApiInputValidator.php:1250
-#: include/classes/validators/CApiInputValidator.php:1255
-#: include/classes/validators/CApiInputValidator.php:1281
-#: include/classes/validators/CApiInputValidator.php:1288
-#: include/classes/validators/CApiInputValidator.php:1315
-#: include/classes/validators/CApiInputValidator.php:1322
-#: include/classes/validators/CApiInputValidator.php:1349
-#: include/classes/validators/CApiInputValidator.php:1358
-#: include/classes/validators/CApiInputValidator.php:1403
-#: include/classes/validators/CApiInputValidator.php:1414
-#: include/classes/validators/CApiInputValidator.php:1447
-#: include/classes/validators/CApiInputValidator.php:1502
-#: include/classes/validators/CApiInputValidator.php:1589
-#: include/classes/validators/CApiInputValidator.php:1594
-#: include/classes/validators/CApiInputValidator.php:1621
-#: include/classes/validators/CApiInputValidator.php:1626
+#: include/classes/validators/CApiInputValidator.php:262
+#: include/classes/validators/CApiInputValidator.php:267
+#: include/classes/validators/CApiInputValidator.php:272
+#: include/classes/validators/CApiInputValidator.php:302
+#: include/classes/validators/CApiInputValidator.php:363
+#: include/classes/validators/CApiInputValidator.php:370
+#: include/classes/validators/CApiInputValidator.php:402
+#: include/classes/validators/CApiInputValidator.php:407
+#: include/classes/validators/CApiInputValidator.php:449
+#: include/classes/validators/CApiInputValidator.php:454
+#: include/classes/validators/CApiInputValidator.php:488
+#: include/classes/validators/CApiInputValidator.php:493
+#: include/classes/validators/CApiInputValidator.php:534
+#: include/classes/validators/CApiInputValidator.php:539
+#: include/classes/validators/CApiInputValidator.php:579
+#: include/classes/validators/CApiInputValidator.php:610
+#: include/classes/validators/CApiInputValidator.php:615
+#: include/classes/validators/CApiInputValidator.php:671
+#: include/classes/validators/CApiInputValidator.php:704
+#: include/classes/validators/CApiInputValidator.php:709
+#: include/classes/validators/CApiInputValidator.php:750
+#: include/classes/validators/CApiInputValidator.php:755
+#: include/classes/validators/CApiInputValidator.php:760
+#: include/classes/validators/CApiInputValidator.php:789
+#: include/classes/validators/CApiInputValidator.php:844
+#: include/classes/validators/CApiInputValidator.php:851
+#: include/classes/validators/CApiInputValidator.php:878
+#: include/classes/validators/CApiInputValidator.php:923
+#: include/classes/validators/CApiInputValidator.php:952
+#: include/classes/validators/CApiInputValidator.php:997
+#: include/classes/validators/CApiInputValidator.php:1002
+#: include/classes/validators/CApiInputValidator.php:1039
+#: include/classes/validators/CApiInputValidator.php:1044
+#: include/classes/validators/CApiInputValidator.php:1087
+#: include/classes/validators/CApiInputValidator.php:1096
+#: include/classes/validators/CApiInputValidator.php:1102
+#: include/classes/validators/CApiInputValidator.php:1130
+#: include/classes/validators/CApiInputValidator.php:1140
+#: include/classes/validators/CApiInputValidator.php:1146
+#: include/classes/validators/CApiInputValidator.php:1182
+#: include/classes/validators/CApiInputValidator.php:1193
+#: include/classes/validators/CApiInputValidator.php:1200
+#: include/classes/validators/CApiInputValidator.php:1227
+#: include/classes/validators/CApiInputValidator.php:1237
+#: include/classes/validators/CApiInputValidator.php:1262
+#: include/classes/validators/CApiInputValidator.php:1267
+#: include/classes/validators/CApiInputValidator.php:1293
+#: include/classes/validators/CApiInputValidator.php:1300
+#: include/classes/validators/CApiInputValidator.php:1327
+#: include/classes/validators/CApiInputValidator.php:1334
+#: include/classes/validators/CApiInputValidator.php:1361
+#: include/classes/validators/CApiInputValidator.php:1370
+#: include/classes/validators/CApiInputValidator.php:1415
+#: include/classes/validators/CApiInputValidator.php:1426
+#: include/classes/validators/CApiInputValidator.php:1459
+#: include/classes/validators/CApiInputValidator.php:1514
+#: include/classes/validators/CApiInputValidator.php:1601
+#: include/classes/validators/CApiInputValidator.php:1606
+#: include/classes/validators/CApiInputValidator.php:1633
+#: include/classes/validators/CApiInputValidator.php:1638
+#: include/classes/validators/CApiInputValidator.php:1669
+#: include/classes/validators/CApiInputValidator.php:1679
+#: include/classes/validators/CApiInputValidator.php:1684
+#: include/classes/validators/CApiInputValidator.php:1708
+#: include/classes/validators/CApiInputValidator.php:1728
 #: include/classes/widgets/fields/CWidgetFieldGraphOverride.php:133
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:480
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:484
@@ -9077,7 +9009,7 @@ msgstr "Số đối số không hợp lệ của các tham số."
 msgid "Invalid parameter \"%1$s\": %2$s."
 msgstr "Tham số \"%1$s\" không hợp lệ: %2$s."
 
-#: include/classes/core/CJsonRpc.php:200
+#: include/classes/core/CJsonRpc.php:193
 msgid "Invalid params."
 msgstr "Tham số không hợp lệ."
 
@@ -9154,7 +9086,7 @@ msgstr "Tên để xem không hợp lệ cho \"%s\". Cho phép các ký t�
 msgid "Inventory"
 msgstr "Kiểm kê"
 
-#: include/classes/api/services/CHost.php:1016
+#: include/classes/api/services/CHost.php:1040
 #, c-format
 msgid "Inventory disabled for host \"%1$s\"."
 msgstr "Kiểm kê bị vô hiệu hóa cho host \"%1$s\"."
@@ -9177,7 +9109,7 @@ msgid "Issue"
 msgstr "Issue"
 
 #: app/views/administration.proxy.edit.php:112
-#: include/views/configuration.host.edit.php:796
+#: include/views/configuration.host.edit.php:545
 #: include/views/configuration.host.massupdate.php:346
 #: include/views/configuration.host.prototype.edit.php:411
 msgid "Issuer"
@@ -9230,8 +9162,8 @@ msgstr "Item \"%1$s\" không thể gắn vào một quá trình kiểm k�
 msgid "Item \"%1$s\" does not exist on template \"%2$s\"."
 msgstr "Item \"%1$s\" không tồn tại trên template \"%2$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1307
-#: include/classes/api/services/CItemGeneral.php:1612
+#: include/classes/api/services/CDiscoveryRule.php:1309
+#: include/classes/api/services/CItemGeneral.php:1670
 #, c-format
 msgid "Item \"%1$s\" does not exist or you have no access to this item"
 msgstr "Item \"%1$s\" không tồn tại hoặc bạn không có quyền truy cập vào item này"
@@ -9291,7 +9223,7 @@ msgstr "Item không được lựa chọn"
 msgid "Item pre-processing is missing parameters: %1$s"
 msgstr "Item chuẩn bị xử lí bị thiếu tham số: %1$s"
 
-#: include/classes/api/services/CDiscoveryRule.php:1138
+#: include/classes/api/services/CDiscoveryRule.php:1140
 msgid "Item pre-processing is not allowed for discovery rules."
 msgstr "Item chuẩn bị xử lý không được phép cho các quy tắc khám phá."
 
@@ -9335,10 +9267,8 @@ msgstr "Kiểu item với ID \"%1$s\" không sẵn sàng."
 
 #: app/controllers/CControllerPopupGeneric.php:252 include/html.inc.php:449
 #: include/views/configuration.host.discovery.list.php:115
-#: include/views/configuration.host.edit.php:436
 #: include/views/configuration.item.prototype.edit.php:22
 #: include/views/configuration.item.prototype.list.php:23
-#: include/views/configuration.template.edit.php:243
 msgid "Item prototypes"
 msgstr "Các kiểu item"
 
@@ -9404,7 +9334,7 @@ msgstr "Item với key \"%1$s\" đã tồn tại trên \"%2$s\" như là mô
 msgid "Item with key \"%1$s\" already exists on \"%2$s\" as unknown item element."
 msgstr "Item với key \"%1$s\" đã tồn tại trên \"%2$s\" như là phần tử item chưa biết"
 
-#: include/classes/api/services/CItemGeneral.php:1495
+#: include/classes/api/services/CItemGeneral.php:1553
 #, c-format
 msgid "Item with key \"%1$s\" already exists on \"%2$s\"."
 msgstr "Item với key \"%1$s\" đã tồn tại trên \"%2$s\"."
@@ -9416,19 +9346,17 @@ msgstr "Item với key \"%1$s\" đã tồn tại trên \"%2$s\"."
 #: include/views/configuration.application.list.php:108
 #: include/views/configuration.graph.edit.php:434
 #: include/views/configuration.host.discovery.list.php:52
-#: include/views/configuration.host.edit.php:327
 #: include/views/configuration.host.list.php:130
 #: include/views/configuration.host.list.php:337
 #: include/views/configuration.item.edit.php:22
 #: include/views/configuration.item.list.php:25
 #: include/views/configuration.item.massupdate.php:22
-#: include/views/configuration.template.edit.php:154
 #: include/views/configuration.template.list.php:87
 #: include/views/configuration.template.list.php:188
 #: include/views/conf.import.php:34 include/views/inventory.host.view.php:161
 #: include/views/inventory.host.view.php:172 items.php:1681 queue.php:109
-#: search.php:134 search.php:164 search.php:193 search.php:409 search.php:437
-#: search.php:466
+#: search.php:134 search.php:164 search.php:189 search.php:391 search.php:419
+#: search.php:448
 msgid "Items"
 msgstr "Các item"
 
@@ -9481,8 +9409,8 @@ msgstr "JSON Path"
 msgid "JSON data"
 msgstr "JSON data"
 
-#: include/classes/api/services/CItemGeneral.php:1996
-#: include/classes/api/services/CItemGeneral.php:2025
+#: include/classes/api/services/CItemGeneral.php:2054
+#: include/classes/api/services/CItemGeneral.php:2083
 msgid "JSON is expected"
 msgstr "Yêu cầu JSON"
 
@@ -9490,22 +9418,10 @@ msgstr "Yêu cầu JSON"
 msgid "JSON string is expected"
 msgstr "Chuỗi JSON là được kì vọng"
 
-#: include/classes/core/CJsonRpc.php:158
+#: include/classes/core/CJsonRpc.php:153
 #, c-format
-msgid "JSON-rpc error generation failed. No such error \"%s\"."
-msgstr "Sự tạo ra lỗi JSON-rpc đã thất bại. Không có lỗi như vậy \"%s\"."
-
-#: include/classes/core/CJsonRpc.php:115
-msgid "JSON-rpc method is not defined."
-msgstr "Phương pháp JSON-rpc không được xác định."
-
-#: include/classes/core/CJsonRpc.php:120
-msgid "JSON-rpc params is not an Array."
-msgstr "Các tham số JSON-rpc không phải là mảng."
-
-#: include/classes/core/CJsonRpc.php:105
-msgid "JSON-rpc version is not specified."
-msgstr "Các phiên bản JSON-rpc không được ghi rõ."
+msgid "JSON-RPC error generation failed. No such error \"%1$s\"."
+msgstr ""
 
 #: app/views/administration.mediatype.edit.php:54 include/media.inc.php:27
 msgid "Jabber"
@@ -9603,11 +9519,11 @@ msgstr "Xác thực LDAP"
 msgid "LDAP host"
 msgstr "LDAP host"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:89
+#: app/controllers/CControllerAuthenticationUpdate.php:87
 msgid "LDAP is not configured"
 msgstr "LDAP không được cấu hình"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:186
+#: app/controllers/CControllerAuthenticationUpdate.php:184
 msgid "LDAP login successful"
 msgstr "Đăng nhập LDAP thành công"
 
@@ -9741,13 +9657,13 @@ msgid "Last week graph"
 msgstr "Đồ thị tuần cuối cùng"
 
 #: include/menu.inc.php:68 include/views/inventory.host.view.php:134
-#: jsLoader.php:268 latest.php:26 latest.php:306 search.php:128 search.php:232
-#: search.php:289 search.php:338
+#: jsLoader.php:268 latest.php:26 latest.php:306 search.php:128 search.php:214
+#: search.php:271 search.php:320
 msgid "Latest data"
 msgstr "Dữ liệu gần đây nhất"
 
 #: app/views/monitoring.widget.problems.view.php:60 include/blocks.inc.php:557
-#: include/classes/screens/CScreenProblem.php:916 jsLoader.php:269
+#: include/classes/screens/CScreenProblem.php:876 jsLoader.php:269
 msgid "Latest values"
 msgstr "Các giá trị gần đây nhất"
 
@@ -9822,9 +9738,9 @@ msgstr "Liên kết"
 msgid "Link indicators"
 msgstr "Chỉ số liên kết"
 
-#: include/views/configuration.host.edit.php:613
+#: include/views/configuration.host.edit.php:362
 #: include/views/configuration.host.prototype.edit.php:314
-#: include/views/configuration.template.edit.php:413
+#: include/views/configuration.template.edit.php:193
 msgid "Link new templates"
 msgstr "Liên kết các template mới"
 
@@ -9856,12 +9772,12 @@ msgstr "Liên kết đến các template"
 msgid "Linked map"
 msgstr "Sơ đồ được kết nối"
 
-#: include/views/configuration.host.edit.php:583
-#: include/views/configuration.host.edit.php:633
+#: include/views/configuration.host.edit.php:332
+#: include/views/configuration.host.edit.php:382
 #: include/views/configuration.host.prototype.edit.php:245
 #: include/views/configuration.host.prototype.edit.php:284
-#: include/views/configuration.template.edit.php:382
-#: include/views/configuration.template.edit.php:419
+#: include/views/configuration.template.edit.php:162
+#: include/views/configuration.template.edit.php:199
 #: include/views/configuration.template.list.php:32
 #: include/views/configuration.template.list.php:93
 msgid "Linked templates"
@@ -10019,7 +9935,7 @@ msgstr "Đánh mất"
 msgid "Low-level discovery rule in \"not supported\" state"
 msgstr "Quy tắc phát hiện mức độ thấp ở trạng thái \"không được hỗ trợ\""
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1384
+#: include/classes/graphdraw/CLineGraphDraw.php:1335
 msgid "M"
 msgstr "M"
 
@@ -10089,9 +10005,9 @@ msgstr "Macro với hostmacroid \"%1$s\" không tồn tại."
 #: include/html.inc.php:749
 #: include/views/administration.general.macros.edit.php:25
 #: include/views/administration.general.macros.edit.php:81
-#: include/views/configuration.host.edit.php:687
+#: include/views/configuration.host.edit.php:436
 #: include/views/configuration.host.prototype.edit.php:360
-#: include/views/configuration.template.edit.php:437
+#: include/views/configuration.template.edit.php:217
 msgid "Macros"
 msgstr "Macros"
 
@@ -10134,14 +10050,14 @@ msgstr "Bảo trì"
 
 #: include/classes/api/services/CMaintenance.php:331
 #: include/classes/api/services/CMaintenance.php:345
-#: include/classes/api/services/CMaintenance.php:572
-#: include/classes/api/services/CMaintenance.php:729
+#: include/classes/api/services/CMaintenance.php:574
+#: include/classes/api/services/CMaintenance.php:731
 #, c-format
 msgid "Maintenance \"%1$s\" already exists."
 msgstr "Bảo trì \"%1$s\" đã tồn tại."
 
 #: include/classes/api/services/CMaintenance.php:361
-#: include/classes/api/services/CMaintenance.php:614
+#: include/classes/api/services/CMaintenance.php:616
 msgid "Maintenance \"Active since\" value cannot be bigger than \"Active till\"."
 msgstr "Giá trị bảo trì \"Active since\" không thể được lớn hơn so với \"Active till\"."
 
@@ -10194,7 +10110,7 @@ msgstr "Tham số bắt buộc bị lỗi."
 #: include/hosts.inc.php:1273
 #: include/views/administration.general.other.edit.php:58
 #: include/views/configuration.action.edit.php:1077
-#: include/views/configuration.host.edit.php:694
+#: include/views/configuration.host.edit.php:443
 #: include/views/configuration.host.massupdate.php:278
 #: include/views/configuration.host.prototype.edit.php:367
 msgid "Manual"
@@ -10325,7 +10241,7 @@ msgstr "Đánh dấu được lựa chọn"
 msgid "Mask"
 msgstr "Mặt nạ"
 
-#: include/classes/screens/CScreenProblem.php:1113
+#: include/classes/screens/CScreenProblem.php:1074
 #: include/views/configuration.host.list.php:381
 #: include/views/configuration.item.list.php:255
 #: include/views/configuration.item.massupdate.php:745
@@ -10513,7 +10429,7 @@ msgstr "Thời hạn tin nhắn"
 msgid "Message/Command"
 msgstr "Tin nhắn/Lệnh"
 
-#: include/classes/screens/CScreenProblem.php:1169
+#: include/classes/screens/CScreenProblem.php:1130
 msgid "Messages"
 msgstr "Các tin nhắn"
 
@@ -10521,7 +10437,7 @@ msgstr "Các tin nhắn"
 msgid "Messaging"
 msgstr "Viết tin nhắn"
 
-#: include/classes/core/CJsonRpc.php:195
+#: include/classes/core/CJsonRpc.php:188
 msgid "Method not found."
 msgstr "Không tìm thấy giải pháp"
 
@@ -10710,7 +10626,7 @@ msgstr "Mozilla Firefox"
 msgid "Multiple"
 msgstr "Nhiều"
 
-#: include/triggers.inc.php:1279
+#: include/triggers.inc.php:1280
 msgid "Multiple PROBLEM events"
 msgstr "Nhiều sự kiện có vấn đề"
 
@@ -10803,8 +10719,8 @@ msgstr "NTLM"
 #: include/views/configuration.host.discovery.edit.php:110
 #: include/views/configuration.host.discovery.edit.php:207
 #: include/views/configuration.host.discovery.list.php:51
-#: include/views/configuration.host.edit.php:546
-#: include/views/configuration.host.edit.php:623
+#: include/views/configuration.host.edit.php:295
+#: include/views/configuration.host.edit.php:372
 #: include/views/configuration.hostgroups.list.php:39
 #: include/views/configuration.hostgroups.list.php:57
 #: include/views/configuration.host.list.php:59
@@ -10834,7 +10750,7 @@ msgstr "NTLM"
 #: include/views/configuration.maintenance.list.php:45
 #: include/views/configuration.maintenance.list.php:70
 #: include/views/configuration.services.edit.php:43
-#: include/views/configuration.template.edit.php:346
+#: include/views/configuration.template.edit.php:126
 #: include/views/configuration.template.list.php:26
 #: include/views/configuration.template.list.php:85
 #: include/views/configuration.trigger.prototype.edit.php:59
@@ -10989,14 +10905,15 @@ msgstr "Trigger mới"
 msgid "Next step"
 msgstr "Bước tiếp theo"
 
-#: app/views/monitoring.widget.problems.view.php:221
+#: app/views/hint.box.php:168
+#: app/views/monitoring.widget.problems.view.php:219
 #: include/actions.inc.php:33 include/blocks.inc.php:434
 #: include/blocks.inc.php:633
 #: include/classes/screens/CScreenHostTriggers.php:268
-#: include/classes/screens/CScreenProblem.php:1082
-#: include/classes/screens/CScreenProblem.php:1191 include/events.inc.php:176
-#: include/events.inc.php:376 include/events.inc.php:601
-#: include/triggers.inc.php:1285 include/triggers.inc.php:1290
+#: include/classes/screens/CScreenProblem.php:1043
+#: include/classes/screens/CScreenProblem.php:1152 include/events.inc.php:176
+#: include/events.inc.php:376 include/triggers.inc.php:1286
+#: include/triggers.inc.php:1291
 #: include/views/administration.users.list.php:111
 #: include/views/administration.users.list.php:115
 #: include/views/configuration.host.prototype.list.php:126
@@ -11070,7 +10987,7 @@ msgstr "\"%1$s\" không được đưa ra cho template screen."
 msgid "No \"%2$s\" given for a filter condition of action \"%1$s\"."
 msgstr "Không có \"%2$s\" cho điều kiện lọc hoạt động \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1115
+#: include/classes/api/services/CDiscoveryRule.php:1117
 #, c-format
 msgid "No \"%2$s\" given for a filter condition of discovery rule \"%1$s\"."
 msgstr "Không có \"%2$s\" cho điều kiện lọc quy tắc khám phá \"%1$s\"."
@@ -11080,7 +10997,7 @@ msgstr "Không có \"%2$s\" cho điều kiện lọc quy tắc khám phá \"%1$s
 msgid "No \"%2$s\" given for the filter of action \"%1$s\"."
 msgstr "Không có \"%2$s\" cho lọc hoạt động \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1083
+#: include/classes/api/services/CDiscoveryRule.php:1085
 #, c-format
 msgid "No \"%2$s\" given for the filter of discovery rule \"%1$s\"."
 msgstr "Không có \"%2$s\" cho bộ lọc quy tắc khám phá \"%1$s\"."
@@ -11173,14 +11090,14 @@ msgstr "Không tìm thấy dữ liệu."
 msgid "No data."
 msgstr "Không có dữ liệu."
 
-#: include/classes/api/services/CHostInterface.php:823
-#: include/classes/api/services/CHostInterface.php:895
+#: include/classes/api/services/CHostInterface.php:824
+#: include/classes/api/services/CHostInterface.php:899
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "Không có interface mặc định cho kiểu \"%1$s\" trên \"%2$s\". "
 
-#: include/classes/core/CJsonRpc.php:211 include/classes/core/CJsonRpc.php:216
-#: include/classes/core/CJsonRpc.php:221
+#: include/classes/core/CJsonRpc.php:204 include/classes/core/CJsonRpc.php:209
+#: include/classes/core/CJsonRpc.php:214
 msgid "No details"
 msgstr "Không có thông tin chi tiết"
 
@@ -11190,8 +11107,8 @@ msgstr "Không có quy tắc phát hiện các ID cho."
 
 #: app/views/administration.proxy.edit.php:89
 #: app/views/administration.proxy.edit.php:97
-#: include/views/configuration.host.edit.php:761
-#: include/views/configuration.host.edit.php:771
+#: include/views/configuration.host.edit.php:510
+#: include/views/configuration.host.edit.php:520
 #: include/views/configuration.host.massupdate.php:326
 #: include/views/configuration.host.massupdate.php:334
 #: include/views/configuration.host.prototype.edit.php:379
@@ -11279,8 +11196,8 @@ msgstr "Không tìm thấy interface."
 msgid "No interface provided for proxy \"%s\"."
 msgstr "Interface không được cung cấp cho proxy \"%s\"."
 
-#: include/classes/api/services/CHost.php:1765
-#: include/classes/api/services/CHost.php:1958
+#: include/classes/api/services/CHost.php:1787
+#: include/classes/api/services/CHost.php:1980
 #, c-format
 msgid "No interfaces for host \"%s\"."
 msgstr "Không có interface nào cho host \"%s\"."
@@ -11341,6 +11258,7 @@ msgstr "Không có quyền truy cập hệ thống."
 #: app/controllers/CControllerDashboardView.php:195
 #: app/controllers/CControllerDashboardView.php:231
 #: app/controllers/CControllerExportXml.php:103
+#: app/controllers/CControllerHintBox.php:155
 #: app/controllers/CControllerMenuPopup.php:76
 #: app/controllers/CControllerMenuPopup.php:106
 #: app/controllers/CControllerMenuPopup.php:190
@@ -11389,22 +11307,22 @@ msgstr "Không có quyền truy cập hệ thống."
 #: include/classes/api/services/CGraphPrototype.php:717
 #: include/classes/api/services/CHostBase.php:49
 #: include/classes/api/services/CHostGeneral.php:56
-#: include/classes/api/services/CHostGroup.php:693
-#: include/classes/api/services/CHostGroup.php:797
-#: include/classes/api/services/CHostGroup.php:1036
-#: include/classes/api/services/CHostGroup.php:1067
-#: include/classes/api/services/CHostGroup.php:1168
-#: include/classes/api/services/CHostGroup.php:1290
-#: include/classes/api/services/CHostGroup.php:1310
+#: include/classes/api/services/CHostGroup.php:727
+#: include/classes/api/services/CHostGroup.php:831
+#: include/classes/api/services/CHostGroup.php:1070
+#: include/classes/api/services/CHostGroup.php:1101
+#: include/classes/api/services/CHostGroup.php:1202
+#: include/classes/api/services/CHostGroup.php:1324
+#: include/classes/api/services/CHostGroup.php:1344
 #: include/classes/api/services/CHostInterface.php:239
 #: include/classes/api/services/CHostInterface.php:259
 #: include/classes/api/services/CHostInterface.php:394
 #: include/classes/api/services/CHostInterface.php:661
 #: include/classes/api/services/CHostInterface.php:709
-#: include/classes/api/services/CHost.php:1143
-#: include/classes/api/services/CHost.php:1178
-#: include/classes/api/services/CHost.php:1741
-#: include/classes/api/services/CHost.php:1873
+#: include/classes/api/services/CHost.php:1167
+#: include/classes/api/services/CHost.php:1202
+#: include/classes/api/services/CHost.php:1763
+#: include/classes/api/services/CHost.php:1895
 #: include/classes/api/services/CHostPrototype.php:353
 #: include/classes/api/services/CHostPrototype.php:399
 #: include/classes/api/services/CHostPrototype.php:420
@@ -11429,10 +11347,10 @@ msgstr "Không có quyền truy cập hệ thống."
 #: include/classes/api/services/CMaintenance.php:263
 #: include/classes/api/services/CMaintenance.php:292
 #: include/classes/api/services/CMaintenance.php:305
-#: include/classes/api/services/CMaintenance.php:561
-#: include/classes/api/services/CMaintenance.php:643
-#: include/classes/api/services/CMaintenance.php:746
-#: include/classes/api/services/CMaintenance.php:764
+#: include/classes/api/services/CMaintenance.php:563
+#: include/classes/api/services/CMaintenance.php:645
+#: include/classes/api/services/CMaintenance.php:748
+#: include/classes/api/services/CMaintenance.php:766
 #: include/classes/api/services/CMapElement.php:212
 #: include/classes/api/services/CMapElement.php:343
 #: include/classes/api/services/CMap.php:567
@@ -11459,20 +11377,19 @@ msgstr "Không có quyền truy cập hệ thống."
 #: include/classes/api/services/CService.php:988
 #: include/classes/api/services/CService.php:1012
 #: include/classes/api/services/CTask.php:136
-#: include/classes/api/services/CTemplate.php:733
-#: include/classes/api/services/CTemplate.php:755
+#: include/classes/api/services/CTemplate.php:746
 #: include/classes/api/services/CTemplateScreen.php:631
 #: include/classes/api/services/CTemplateScreen.php:682
 #: include/classes/api/services/CTemplateScreen.php:745
 #: include/classes/api/services/CTemplateScreen.php:756
-#: include/classes/api/services/CTriggerGeneral.php:1047
-#: include/classes/api/services/CTrigger.php:628
-#: include/classes/api/services/CTrigger.php:672
-#: include/classes/api/services/CTrigger.php:708
-#: include/classes/api/services/CTrigger.php:796
-#: include/classes/api/services/CTriggerPrototype.php:526
-#: include/classes/api/services/CTriggerPrototype.php:704
-#: include/classes/api/services/CTriggerPrototype.php:722
+#: include/classes/api/services/CTriggerGeneral.php:928
+#: include/classes/api/services/CTrigger.php:626
+#: include/classes/api/services/CTrigger.php:673
+#: include/classes/api/services/CTrigger.php:707
+#: include/classes/api/services/CTrigger.php:794
+#: include/classes/api/services/CTriggerPrototype.php:522
+#: include/classes/api/services/CTriggerPrototype.php:700
+#: include/classes/api/services/CTriggerPrototype.php:718
 #: include/classes/api/services/CUserGroup.php:329
 #: include/classes/api/services/CUserGroup.php:876
 #: include/classes/api/services/CUserMacro.php:373
@@ -11548,7 +11465,7 @@ msgstr "Không có trigger với triggerid \"%1$s\"."
 msgid "No triggers defined."
 msgstr "Không xác định được trigger nào."
 
-#: include/classes/validators/CApiInputValidator.php:802
+#: include/classes/validators/CApiInputValidator.php:814
 msgid "Non-boolean flags are deprecated."
 msgstr "Không có cờ boolean bị phản đối."
 
@@ -11587,7 +11504,7 @@ msgid "None"
 msgstr "Không có"
 
 #: app/views/popup.generic.php:538 include/graphs.inc.php:24
-#: include/items.inc.php:160 include/triggers.inc.php:1278
+#: include/items.inc.php:160 include/triggers.inc.php:1279
 #: include/views/configuration.triggers.list.php:42
 #: include/views/monitoring.history.php:229
 msgid "Normal"
@@ -11611,8 +11528,8 @@ msgstr "Không báo nhận"
 msgid "Not Templated items"
 msgstr "Không có Templated items"
 
-#: include/classes/api/services/CTrigger.php:1018
-#: include/classes/api/services/CTriggerPrototype.php:863
+#: include/classes/api/services/CTrigger.php:1016
+#: include/classes/api/services/CTriggerPrototype.php:859
 #, c-format
 msgid "Not all templates are linked to \"%s\"."
 msgstr "Không phải tất cả template đều được kết nối đến \"%s\"."
@@ -11621,7 +11538,7 @@ msgstr "Không phải tất cả template đều được kết nối đê�
 msgid "Not allowed to set password for user \"guest\"."
 msgstr "Không được phép đặt lại mật khẩu cho người dùng \"guest\"."
 
-#: include/classes/api/clients/CLocalApiClient.php:166
+#: include/classes/api/clients/CLocalApiClient.php:156
 msgid "Not authorised."
 msgstr "Không có tác giả."
 
@@ -11827,13 +11744,13 @@ msgid "Numeral systems"
 msgstr "Hệ thống số"
 
 #: include/forms.inc.php:352 include/items.inc.php:129
-#: include/triggers.inc.php:1886 include/views/configuration.item.edit.php:689
+#: include/triggers.inc.php:1887 include/views/configuration.item.edit.php:689
 #: include/views/configuration.item.massupdate.php:280
 #: include/views/configuration.item.prototype.edit.php:619
 msgid "Numeric (float)"
 msgstr "Số (float)"
 
-#: include/triggers.inc.php:1887
+#: include/triggers.inc.php:1888
 msgid "Numeric (integer)"
 msgstr "Số lượng (integer)"
 
@@ -11955,7 +11872,7 @@ msgstr "Một lần"
 msgid "One"
 msgstr "Một"
 
-#: include/classes/api/services/CHostGroup.php:1178
+#: include/classes/api/services/CHostGroup.php:1212
 msgid "One of the objects is left without a host group."
 msgstr "Một trong các đối tượng rời khỏi một nhóm host."
 
@@ -11968,7 +11885,7 @@ msgstr "Một lần duy nhất"
 msgid "One-time downtime"
 msgstr "Một lần downtime"
 
-#: include/classes/api/services/CHostGroup.php:652
+#: include/classes/api/services/CHostGroup.php:686
 msgid "Only Super Admins can create host groups."
 msgstr "Chỉ các Super Admin mới có thể tạo các nhóm host."
 
@@ -12018,7 +11935,7 @@ msgstr "Chỉ quản trị viên mới có thể đặt chủ sở hữu slide s
 msgid "Only items assigned to enabled hosts are counted"
 msgstr "Chỉ các item được gán đến host đã kích hoạt mới được tính"
 
-#: include/classes/api/services/CItemGeneral.php:1381
+#: include/classes/api/services/CItemGeneral.php:1387
 msgid "Only one change step is allowed."
 msgstr "Chỉ một bước thay đổi được cho phép."
 
@@ -12131,7 +12048,7 @@ msgstr "Tùy chọn"
 #: app/views/monitoring.problem.view.php:228
 #: include/classes/widgets/forms/CWidgetFormProblems.php:95
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:379
-#: include/triggers.inc.php:1351
+#: include/triggers.inc.php:1352
 #: include/views/configuration.action.edit.php:113
 #: include/views/configuration.action.edit.php:1144
 #: include/views/configuration.correlation.edit.php:95
@@ -12421,14 +12338,14 @@ msgstr "Phần mở rộng PHP xmlwriter lỗi."
 msgid "POP"
 msgstr "POP"
 
-#: app/views/monitoring.widget.problems.view.php:93 chart5.php:199
-#: include/classes/graph/CSvgGraph.php:972
+#: app/views/hint.box.php:111 app/views/monitoring.widget.problems.view.php:93
+#: chart5.php:199 include/classes/graph/CSvgGraph.php:975
 #: include/classes/screens/CScreenEvents.php:116
-#: include/classes/screens/CScreenProblem.php:993
-#: include/classes/screens/CScreenProblem.php:1158 include/events.inc.php:340
-#: include/events.inc.php:542 include/maps.inc.php:291
-#: include/maps.inc.php:375 include/maps.inc.php:468 include/maps.inc.php:556
-#: include/triggers.inc.php:232 include/views/monitoring.overview.items.php:32
+#: include/classes/screens/CScreenProblem.php:953
+#: include/classes/screens/CScreenProblem.php:1119 include/events.inc.php:340
+#: include/maps.inc.php:291 include/maps.inc.php:375 include/maps.inc.php:468
+#: include/maps.inc.php:556 include/triggers.inc.php:232
+#: include/views/monitoring.overview.items.php:32
 #: include/views/monitoring.overview.triggers.php:41
 msgid "PROBLEM"
 msgstr "PROBLEM"
@@ -12443,9 +12360,9 @@ msgstr "Chế độ tạo sự kiện PROBLEM"
 #: app/views/administration.proxy.edit.php:106
 #: app/views/administration.proxy.list.php:116
 #: app/views/administration.proxy.list.php:129
-#: include/views/configuration.host.edit.php:762
-#: include/views/configuration.host.edit.php:775
-#: include/views/configuration.host.edit.php:790
+#: include/views/configuration.host.edit.php:511
+#: include/views/configuration.host.edit.php:524
+#: include/views/configuration.host.edit.php:539
 #: include/views/configuration.host.list.php:297
 #: include/views/configuration.host.list.php:313
 #: include/views/configuration.host.list.php:316
@@ -12459,7 +12376,7 @@ msgid "PSK"
 msgstr "PSK"
 
 #: app/views/administration.proxy.edit.php:101
-#: include/views/configuration.host.edit.php:784
+#: include/views/configuration.host.edit.php:533
 #: include/views/configuration.host.massupdate.php:338
 #: include/views/configuration.host.prototype.edit.php:401
 msgid "PSK identity"
@@ -12478,7 +12395,7 @@ msgstr "Trang nhận được dữ liệu không chính xác"
 msgid "Parameter"
 msgstr "Tham số"
 
-#: include/classes/validators/CApiInputValidator.php:862
+#: include/classes/validators/CApiInputValidator.php:874
 #, c-format
 msgid "Parameter \"%1$s\" is deprecated."
 msgstr "Tham số \"%1$s\" được yêu cầu."
@@ -12529,7 +12446,7 @@ msgstr "Phân tích"
 msgid "Parse SQL error [%1$s] in [%2$s]."
 msgstr "Lỗi Parse SQL [%1$s] trong [%2$s]."
 
-#: include/classes/core/CJsonRpc.php:185
+#: include/classes/core/CJsonRpc.php:178
 msgid "Parse error"
 msgstr "Lỗi phân tách"
 
@@ -12553,7 +12470,7 @@ msgstr "Thụ động"
 #: include/views/configuration.host.discovery.edit.php:306
 #: include/views/configuration.host.discovery.edit.php:468
 #: include/views/configuration.host.discovery.edit.php:498
-#: include/views/configuration.host.edit.php:671
+#: include/views/configuration.host.edit.php:420
 #: include/views/configuration.host.prototype.edit.php:339
 #: include/views/configuration.httpconf.edit.php:170
 #: include/views/configuration.item.edit.php:347
@@ -12870,17 +12787,17 @@ msgstr "Riêng"
 msgid "Private key file"
 msgstr "Key file riêng"
 
-#: include/views/configuration.host.edit.php:665
+#: include/views/configuration.host.edit.php:414
 #: include/views/configuration.host.prototype.edit.php:332
 msgid "Privilege level"
 msgstr "Cấp đặc quyền"
 
 #: app/views/monitoring.problem.view.php:163
 #: app/views/monitoring.widget.problems.view.php:56 include/blocks.inc.php:556
-#: include/classes/screens/CScreenProblem.php:892
-#: include/classes/screens/CScreenProblem.php:915
-#: include/classes/screens/CScreenProblem.php:1049
-#: include/classes/screens/CScreenProblem.php:1133
+#: include/classes/screens/CScreenProblem.php:852
+#: include/classes/screens/CScreenProblem.php:875
+#: include/classes/screens/CScreenProblem.php:1010
+#: include/classes/screens/CScreenProblem.php:1094
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:58
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:58
 #: include/classes/widgets/forms/CWidgetFormProblems.php:75
@@ -12905,7 +12822,7 @@ msgstr "Vấn đề được tạo"
 msgid "Problem display"
 msgstr "Hiển thị vấn đề"
 
-#: include/triggers.inc.php:1271
+#: include/triggers.inc.php:1272
 #: include/views/js/configuration.triggers.edit.js.php:39
 msgid "Problem expression"
 msgstr "Biểu thức vấn đề"
@@ -12957,7 +12874,7 @@ msgstr "Vấn đề, nếu ít nhất một phần tử con có vấn 
 #: include/maps.inc.php:559 include/maps.inc.php:571 include/menu.inc.php:52
 #: include/views/common.filter.trigger.php:42
 #: include/views/inventory.host.view.php:142 jsLoader.php:273 report2.php:455
-#: search.php:129 search.php:233 search.php:290 search.php:339
+#: search.php:129 search.php:215 search.php:272 search.php:321
 msgid "Problems"
 msgstr "Các vấn đề"
 
@@ -12978,8 +12895,8 @@ msgid "Properties"
 msgstr "Thuộc tính"
 
 #: app/controllers/CControllerMenuPopup.php:562
-#: app/controllers/CControllerWidgetUrlView.php:56
-#: include/classes/screens/CScreenUrl.php:70 include/events.inc.php:431
+#: app/controllers/CControllerWidgetUrlView.php:56 app/views/hint.box.php:45
+#: include/classes/screens/CScreenUrl.php:70
 #, c-format
 msgid "Provided URL \"%1$s\" is invalid."
 msgstr "URL \"%1$s\" được cung cấp không hợp lệ"
@@ -13093,12 +13010,11 @@ msgstr "Hàng đợi"
 msgid "Queue of items to be updated"
 msgstr "Hàng đợi item được cập nhật"
 
-#: app/views/monitoring.widget.problems.view.php:79
-#: include/classes/graph/CSvgGraph.php:968
+#: app/views/hint.box.php:97 app/views/monitoring.widget.problems.view.php:79
+#: include/classes/graph/CSvgGraph.php:971
 #: include/classes/screens/CScreenEvents.php:121
-#: include/classes/screens/CScreenProblem.php:979
-#: include/classes/screens/CScreenProblem.php:1146 include/events.inc.php:345
-#: include/events.inc.php:528
+#: include/classes/screens/CScreenProblem.php:939
+#: include/classes/screens/CScreenProblem.php:1107 include/events.inc.php:345
 msgid "RESOLVED"
 msgstr "GIẢI QUYẾT"
 
@@ -13186,7 +13102,7 @@ msgstr "Người nhận (tăng dần)"
 msgid "Recipient (descending)"
 msgstr "Người nhận (giảm dần)"
 
-#: include/classes/screens/CScreenProblem.php:1050
+#: include/classes/screens/CScreenProblem.php:1011
 #: include/views/administration.users.edit.php:380
 #: include/views/configuration.item.list.php:174
 #: include/views/configuration.trigger.prototype.list.php:130
@@ -13194,7 +13110,7 @@ msgstr "Người nhận (giảm dần)"
 msgid "Recovery"
 msgstr "Sự phục hồi"
 
-#: include/triggers.inc.php:1275
+#: include/triggers.inc.php:1276
 #: include/views/configuration.trigger.prototype.edit.php:273
 #: include/views/configuration.trigger.prototype.edit.php:355
 #: include/views/configuration.triggers.edit.php:297
@@ -13212,12 +13128,11 @@ msgstr "Phục hồi lỗi cú pháp biểu thức."
 msgid "Recovery operations"
 msgstr "Phục hồi hoạt động"
 
-#: app/views/monitoring.widget.problems.view.php:51
+#: app/views/hint.box.php:74 app/views/monitoring.widget.problems.view.php:51
 #: include/classes/screens/CScreenEvents.php:32
-#: include/classes/screens/CScreenProblem.php:887
-#: include/classes/screens/CScreenProblem.php:910
-#: include/classes/screens/CScreenProblem.php:1130 include/events.inc.php:246
-#: include/events.inc.php:459
+#: include/classes/screens/CScreenProblem.php:847
+#: include/classes/screens/CScreenProblem.php:870
+#: include/classes/screens/CScreenProblem.php:1091 include/events.inc.php:246
 msgid "Recovery time"
 msgstr "Thời gian phục hồi"
 
@@ -13582,26 +13497,26 @@ msgstr "Giải quyết bởi"
 
 #: app/views/monitoring.widget.problems.view.php:133
 #: include/classes/screens/CScreenHostTriggers.php:234
-#: include/classes/screens/CScreenProblem.php:1010
+#: include/classes/screens/CScreenProblem.php:970
 #, c-format
 msgid "Resolved by correlation rule \"%1$s\"."
 msgstr "Giải quyết bởi quy tắc liên kết \"%1$s\"."
 
 #: app/views/monitoring.widget.problems.view.php:136
 #: include/classes/screens/CScreenHostTriggers.php:237
-#: include/classes/screens/CScreenProblem.php:1013
+#: include/classes/screens/CScreenProblem.php:973
 msgid "Resolved by correlation rule."
 msgstr "Giải quyết bởi quy tắc liên kết."
 
 #: app/views/monitoring.widget.problems.view.php:143
 #: include/classes/screens/CScreenHostTriggers.php:244
-#: include/classes/screens/CScreenProblem.php:1020
+#: include/classes/screens/CScreenProblem.php:980
 msgid "Resolved by inaccessible user."
 msgstr "Đã xử lý bởi inaccessible user."
 
 #: app/views/monitoring.widget.problems.view.php:142
 #: include/classes/screens/CScreenHostTriggers.php:243
-#: include/classes/screens/CScreenProblem.php:1019
+#: include/classes/screens/CScreenProblem.php:979
 #, c-format
 msgid "Resolved by user \"%1$s\"."
 msgstr "Giải quyết bởi người dùng \"%1$s\"."
@@ -13913,13 +13828,12 @@ msgstr "Đếm SQL: %1$s (chọn: %2$s | thực thi: %3$s)"
 msgid "SQL query"
 msgstr "Truy vấn SQL"
 
-#: include/classes/db/DB.php:847
+#: include/classes/db/DB.php:849
 #, c-format
 msgid "SQL statement execution has failed \"%1$s\""
 msgstr "Thực hiện câu lệnh SQL đã thất bại \"%1$s\""
 
-#: include/classes/db/DB.php:468 include/classes/db/DB.php:515
-#: include/classes/db/DB.php:574
+#: include/classes/db/DB.php:517 include/classes/db/DB.php:576
 #, c-format
 msgid "SQL statement execution has failed \"%1$s\"."
 msgstr "Thực hiện câu lệnh SQL đã thất bại \"%1$s\"."
@@ -14108,8 +14022,7 @@ msgstr "Screen đã được cập nhật"
 
 #: app/controllers/CControllerPopupGeneric.php:214
 #: app/controllers/CControllerPopupGeneric.php:280 include/html.inc.php:398
-#: include/menu.inc.php:78 include/views/configuration.template.edit.php:306
-#: include/views/configuration.template.list.php:90
+#: include/menu.inc.php:78 include/views/configuration.template.list.php:90
 #: include/views/configuration.template.list.php:200
 #: include/views/conf.import.php:39 include/views/inventory.host.view.php:149
 #: include/views/monitoring.hostscreen.php:28
@@ -14120,8 +14033,8 @@ msgstr "Screen đã được cập nhật"
 #: include/views/monitoring.screen.php:28
 #: include/views/monitoring.screen.php:49
 #: include/views/monitoring.slideconf.list.php:30
-#: include/views/monitoring.slides.php:51 search.php:131 search.php:240
-#: search.php:412 search.php:449 search.php:469
+#: include/views/monitoring.slides.php:51 search.php:131 search.php:222
+#: search.php:394 search.php:431 search.php:451
 msgid "Screens"
 msgstr "Screens"
 
@@ -14190,7 +14103,7 @@ msgstr "Script đã được cập nhật"
 msgid "Scripts"
 msgstr "Các Script"
 
-#: app/views/layout.htmlpage.menu.php:34 search.php:26 search.php:502
+#: app/views/layout.htmlpage.menu.php:34 search.php:26 search.php:484
 msgid "Search"
 msgstr "Tìm kiếm"
 
@@ -14557,16 +14470,16 @@ msgstr "Cài đặt LDAP tham chiếu đến \"Off\" thất bại."
 #: app/views/popup.triggerwizard.php:83
 #: include/classes/screens/CScreenEvents.php:33
 #: include/classes/screens/CScreenHistory.php:275
-#: include/classes/screens/CScreenProblem.php:884
-#: include/classes/screens/CScreenProblem.php:906
-#: include/classes/screens/CScreenProblem.php:1128
+#: include/classes/screens/CScreenProblem.php:844
+#: include/classes/screens/CScreenProblem.php:866
+#: include/classes/screens/CScreenProblem.php:1089
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:67
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:67
 #: include/classes/widgets/forms/CWidgetFormProblems.php:84
 #: include/classes/widgets/forms/CWidgetFormProblems.php:196
 #: include/classes/widgets/forms/CWidgetFormProblems.php:197
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:351
-#: include/events.inc.php:167 include/triggers.inc.php:1256
+#: include/events.inc.php:167 include/triggers.inc.php:1257
 #: include/views/configuration.item.list.php:145
 #: include/views/configuration.trigger.prototype.edit.php:65
 #: include/views/configuration.trigger.prototype.list.php:50
@@ -14590,7 +14503,7 @@ msgid "Severity changed"
 msgstr "Mức độ nghiêm trọng đã thay đổi"
 
 #: include/actions.inc.php:1800
-#: include/classes/screens/CScreenProblem.php:1172
+#: include/classes/screens/CScreenProblem.php:1133
 msgid "Severity changes"
 msgstr "Mức độ nghiêm trọng thay đổi"
 
@@ -15038,20 +14951,20 @@ msgstr ""
 #: app/controllers/CControllerPopupGeneric.php:201
 #: app/controllers/CControllerPopupGeneric.php:264
 #: app/views/administration.mediatype.list.php:43
-#: app/views/administration.mediatype.list.php:66
+#: app/views/administration.mediatype.list.php:66 app/views/hint.box.php:75
 #: app/views/monitoring.widget.actionlog.view.php:34
 #: app/views/monitoring.widget.problems.view.php:52
 #: include/actions.inc.php:1881 include/actions.inc.php:1965
 #: include/classes/screens/CScreenActions.php:116
 #: include/classes/screens/CScreenHttpTestDetails.php:86
 #: include/classes/screens/CScreenHttpTest.php:119
-#: include/classes/screens/CScreenProblem.php:888
-#: include/classes/screens/CScreenProblem.php:912
-#: include/classes/screens/CScreenProblem.php:1131
+#: include/classes/screens/CScreenProblem.php:848
+#: include/classes/screens/CScreenProblem.php:872
+#: include/classes/screens/CScreenProblem.php:1092
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:35
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:36
-#: include/events.inc.php:247 include/events.inc.php:460
-#: include/forms.inc.php:398 include/forms.inc.php:847
+#: include/events.inc.php:247 include/forms.inc.php:398
+#: include/forms.inc.php:847
 #: include/views/administration.auditacts.list.php:61
 #: include/views/administration.usergroups.list.php:40
 #: include/views/administration.usergroups.list.php:64
@@ -15195,7 +15108,7 @@ msgid "Subject"
 msgstr "Đối tượng"
 
 #: app/views/administration.proxy.edit.php:115
-#: include/views/configuration.host.edit.php:800
+#: include/views/configuration.host.edit.php:549
 #: include/views/configuration.host.massupdate.php:349
 #: include/views/configuration.host.prototype.edit.php:416
 msgctxt "encryption certificate"
@@ -15280,7 +15193,7 @@ msgstr "Mặc định hệ thống"
 msgid "System error occurred. Please contact Zabbix administrator."
 msgstr "Xảy ra lỗi hệ thống. Vui lòng liên hệ với quản trị viên Zabbix."
 
-#: include/classes/core/CJsonRpc.php:215
+#: include/classes/core/CJsonRpc.php:208
 msgid "System error."
 msgstr "Lỗi hệ thống."
 
@@ -15345,7 +15258,7 @@ msgstr "TRUE"
 msgid "Table \"%1$s\" does not exist."
 msgstr "Bảng \"%1$s\" không tồn tại."
 
-#: include/classes/db/DB.php:416
+#: include/classes/db/DB.php:396
 #, c-format
 msgid "Table \"%1$s\" doesn't have a field named \"%2$s\"."
 msgstr "Bảng \"%1$s\" Không có trường đươc đặt tên \"%2$s\"."
@@ -15354,11 +15267,6 @@ msgstr "Bảng \"%1$s\" Không có trường đươc đặt tên \"%2$s\"."
 #: usergrps.php:361
 msgid "Tag"
 msgstr "Tag"
-
-#: include/classes/api/services/CTriggerGeneral.php:526
-#, c-format
-msgid "Tag \"%1$s\" with value \"%2$s\" already exists."
-msgstr "Thẻ \"%1$s\" với giá trị \"%2$s\" đã tồn tại."
 
 #: app/views/monitoring.problem.view.php:285
 #: include/classes/widgets/forms/CWidgetFormProblems.php:150
@@ -15383,14 +15291,14 @@ msgstr "Thẻ tên"
 msgid "Tag value"
 msgstr "Thẻ giá trị"
 
-#: app/views/monitoring.problem.view.php:283
+#: app/views/hint.box.php:78 app/views/monitoring.problem.view.php:283
 #: app/views/monitoring.widget.problems.view.php:64 include/blocks.inc.php:561
-#: include/classes/screens/CScreenProblem.php:866
-#: include/classes/screens/CScreenProblem.php:920
-#: include/classes/screens/CScreenProblem.php:1137
+#: include/classes/screens/CScreenProblem.php:826
+#: include/classes/screens/CScreenProblem.php:880
+#: include/classes/screens/CScreenProblem.php:1098
 #: include/classes/widgets/forms/CWidgetFormProblems.php:93
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:377
-#: include/events.inc.php:235 include/events.inc.php:463
+#: include/events.inc.php:235
 #: include/views/administration.usergroups.edit.php:184
 #: include/views/configuration.maintenance.edit.php:267
 #: include/views/configuration.trigger.prototype.edit.php:514
@@ -15436,21 +15344,21 @@ msgstr "Telnet"
 #: include/actions.inc.php:47 include/audit.inc.php:53
 #: include/forms.inc.php:460 include/forms.inc.php:857
 #: include/views/configuration.template.edit.php:40
-#: include/views/configuration.template.edit.php:334 report2.php:391
-#: search.php:407
+#: include/views/configuration.template.edit.php:114 report2.php:391
+#: search.php:389
 msgid "Template"
 msgstr "Template"
 
-#: include/classes/api/services/CHost.php:865
-#: include/classes/api/services/CTemplate.php:434
+#: include/classes/api/services/CHost.php:889
+#: include/classes/api/services/CTemplate.php:463
 #: include/classes/import/importers/CTemplateImporter.php:78
 #, c-format
 msgid "Template \"%1$s\" already exists."
 msgstr "template \"%1$s\" đã tồn tại."
 
-#: include/classes/api/services/CHostGroup.php:1457
-#: include/classes/api/services/CTemplate.php:368
-#: include/classes/api/services/CTemplate.php:997
+#: include/classes/api/services/CHostGroup.php:1491
+#: include/classes/api/services/CTemplate.php:397
+#: include/classes/api/services/CTemplate.php:988
 #, c-format
 msgid "Template \"%1$s\" cannot be without host group."
 msgstr "Mẫu \"%1$s\" không thể nằm ngoài nhóm máy chủ."
@@ -15468,11 +15376,11 @@ msgstr "Template đã được thêm vào"
 msgid "Template and host properties that are inherited through template linkage will be unlinked and cleared."
 msgstr "Thuộc tính của mẫu và thiết bị được kế thừa qua liên kết mẫu sẽ bị hủy liên kết và xóa."
 
-#: include/classes/api/services/CHostBase.php:260
+#: include/classes/api/services/CHostBase.php:285
 msgid "Template cannot be linked to another template more than once even through other templates."
 msgstr "Template không thể liên kết được đến template khác nhiều hơn một lần thậm chí thông qua các template khác."
 
-#: templates.php:367 templates.php:381 templates.php:414
+#: templates.php:364 templates.php:378 templates.php:411
 msgid "Template deleted"
 msgstr "Template đã bị xóa"
 
@@ -15506,7 +15414,7 @@ msgstr "Template screens"
 msgid "Template trigger"
 msgstr "Template trigger"
 
-#: templates.php:181
+#: templates.php:180
 msgid "Template updated"
 msgstr "Template đã được cập nhật"
 
@@ -15514,25 +15422,25 @@ msgstr "Template đã được cập nhật"
 msgid "Template value"
 msgstr "Giá trị mẫu"
 
-#: include/classes/api/services/CTemplate.php:1052
+#: include/classes/api/services/CTemplate.php:1043
 #, c-format
 msgid "Template with the same name \"%1$s\" already exists."
 msgstr "Template với cùng một tên \"%1$s\" đã tồn tại."
 
-#: include/classes/api/services/CHost.php:1832
-#: include/classes/api/services/CHost.php:2072
+#: include/classes/api/services/CHost.php:1854
+#: include/classes/api/services/CHost.php:2094
 #, c-format
 msgid "Template with the same name \"%s\" already exists."
 msgstr "Template với cùng một tên \"%s\" đã tồn tại."
 
-#: include/classes/api/services/CTemplate.php:457
-#: include/classes/api/services/CTemplate.php:1017
+#: include/classes/api/services/CTemplate.php:486
+#: include/classes/api/services/CTemplate.php:1008
 #, c-format
 msgid "Template with the same visible name \"%1$s\" already exists."
 msgstr "Template với cùng tên hiển thị \"%1$s\" đã tồn tại. "
 
-#: include/classes/api/services/CHost.php:1838
-#: include/classes/api/services/CHost.php:2080
+#: include/classes/api/services/CHost.php:1860
+#: include/classes/api/services/CHost.php:2102
 #, c-format
 msgid "Template with the same visible name \"%s\" already exists."
 msgstr "Template với cùng một tên hiển thị \"%s\" đã tồn tại."
@@ -15544,7 +15452,7 @@ msgstr "Templated items"
 #: app/controllers/CControllerPopupGeneric.php:75 include/menu.inc.php:188
 #: include/views/configuration.action.edit.php:1050
 #: include/views/configuration.copy.elements.php:59
-#: include/views/configuration.host.edit.php:640
+#: include/views/configuration.host.edit.php:389
 #: include/views/configuration.hostgroups.list.php:59
 #: include/views/configuration.hostgroups.list.php:139
 #: include/views/configuration.host.list.php:65
@@ -15554,12 +15462,12 @@ msgstr "Templated items"
 #: include/views/configuration.host.prototype.list.php:54
 #: include/views/configuration.template.edit.php:22
 #: include/views/configuration.template.list.php:51
-#: include/views/conf.import.php:30 search.php:294 search.php:320
-#: search.php:325 search.php:332 search.php:497
+#: include/views/conf.import.php:30 search.php:276 search.php:302
+#: search.php:307 search.php:314 search.php:479
 msgid "Templates"
 msgstr "Templates"
 
-#: include/classes/api/services/CHostBase.php:238
+#: include/classes/api/services/CHostBase.php:198
 #, c-format
 msgid "Templates \"%1$s\" unlinked from hosts \"%2$s\"."
 msgstr "Template \"%1$s\" không liên kết từ các host \"%2$s\"."
@@ -15605,7 +15513,7 @@ msgstr "Kiểm tra chuỗi"
 msgid "Text"
 msgstr "Văn bản"
 
-#: include/classes/api/clients/CLocalApiClient.php:99
+#: include/classes/api/clients/CLocalApiClient.php:89
 #, c-format
 msgid "The \"%1$s.%2$s\" method must be called without the \"auth\" parameter."
 msgstr "Phương thức \"%1$s.%2$s\" phải được gọi ngoại trừ tham số \"auth\"."
@@ -15678,11 +15586,11 @@ msgstr "Item này không được khám phá nữa và sẽ bị xóa trong lầ
 msgid "The number of processes. Returns integer"
 msgstr "Số lượng các tiến trình. Trả về kiểu integer"
 
-#: include/classes/core/CJsonRpc.php:191
+#: include/classes/core/CJsonRpc.php:184
 msgid "The received JSON is not a valid JSON-RPC Request."
 msgstr "JSON đã nhận không phải là một yêu cầu JSON-RPC hợp lệ."
 
-#: include/classes/core/CJsonRpc.php:196
+#: include/classes/core/CJsonRpc.php:189
 msgid "The requested remote-procedure does not exist / is not available"
 msgstr "Các yêu cầu thủ tục từ xa không tồn tại / không sẵn sàng"
 
@@ -15698,7 +15606,7 @@ msgstr "Giao diện"
 msgid "This day last week"
 msgstr "Ngày cuối tuần"
 
-#: include/views/configuration.host.edit.php:734
+#: include/views/configuration.host.edit.php:483
 #, c-format
 msgid "This field is automatically populated by item \"%s\"."
 msgstr "Trường này được tự động gắn vào bởi item \"%s\"."
@@ -15757,6 +15665,7 @@ msgstr "Cho tới"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:45
 #: app/controllers/CControllerPopupTriggerExpr.php:174
+#: app/views/hint.box.php:62 app/views/hint.box.php:68
 #: app/views/monitoring.widget.actionlog.view.php:29
 #: app/views/monitoring.widget.problems.view.php:36
 #: app/views/popup.triggerexpr.php:131 app/views/popup.triggerexpr.php:135
@@ -15765,14 +15674,13 @@ msgstr "Cho tới"
 #: include/actions.inc.php:2015 include/blocks.inc.php:536
 #: include/classes/screens/CScreenActions.php:111
 #: include/classes/screens/CScreenEvents.php:32
-#: include/classes/screens/CScreenProblem.php:843
-#: include/classes/screens/CScreenProblem.php:1129
+#: include/classes/screens/CScreenProblem.php:803
+#: include/classes/screens/CScreenProblem.php:1090
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:32
 #: include/classes/widgets/forms/CWidgetFormProblems.php:194
 #: include/classes/widgets/forms/CWidgetFormProblems.php:195
 #: include/events.inc.php:171 include/events.inc.php:245
-#: include/events.inc.php:447 include/events.inc.php:453
 #: include/views/administration.auditacts.list.php:56
 #: include/views/administration.auditlogs.list.php:70
 #: include/views/configuration.services.edit.php:295
@@ -15852,7 +15760,7 @@ msgstr "To"
 msgid "To set a host interface select a single item type for all items"
 msgstr "Để thiết lập một host interface chọn một kiểu item duy nhất cho tất cả các item"
 
-#: include/classes/screens/CScreenProblem.php:739 include/func.inc.php:2695
+#: include/classes/screens/CScreenProblem.php:699 include/func.inc.php:2695
 #: srv_status.php:39
 msgid "Today"
 msgstr "Hôm nay"
@@ -15919,7 +15827,7 @@ msgstr "Chuyển đổi kết quả truy vấn SQL thành một đối tượng 
 msgid "Transparency"
 msgstr "Công khai"
 
-#: include/classes/core/CJsonRpc.php:220
+#: include/classes/core/CJsonRpc.php:213
 msgid "Transport error."
 msgstr "Lỗi đường truyền."
 
@@ -15957,7 +15865,7 @@ msgstr "Các khuynh hướng "
 #: app/controllers/CControllerPopupTriggerWizard.php:216
 #: app/controllers/CControllerPopupTriggerWizard.php:287
 #: app/views/popup.services.php:44 include/actions.inc.php:44
-#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:483
+#: include/audit.inc.php:35 include/classes/graphdraw/CLineGraphDraw.php:482
 #: include/events.inc.php:229 include/maps.inc.php:26
 #: include/triggers.inc.php:1250
 #: include/views/configuration.services.edit.php:87
@@ -15971,13 +15879,12 @@ msgstr "Các khuynh hướng "
 msgid "Trigger"
 msgstr "Trigger"
 
-#: include/classes/api/services/CTriggerGeneral.php:575
-#: include/classes/api/services/CTriggerGeneral.php:607
+#: include/classes/api/services/CTriggerGeneral.php:570
 #, c-format
 msgid "Trigger \"%1$s\" already exists on \"%2$s\"."
 msgstr "Trigger \"%1$s\" đã tồn tại trên \"%2$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:1859
+#: include/classes/api/services/CTriggerGeneral.php:1683
 #, c-format
 msgid "Trigger \"%1$s\" belongs to templates with different linkages."
 msgstr "Trigger \"%1$s\" thuộc về các mẫu có các liên kết khác nhau."
@@ -15991,7 +15898,7 @@ msgstr "Trigger \"%1$s\" phụ thuộc vào \"%2$s\", mà không tồn tại
 msgid "Trigger added"
 msgstr "Trigger được thêm vào"
 
-#: include/classes/api/services/CTrigger.php:1061
+#: include/classes/api/services/CTrigger.php:1059
 msgid "Trigger cannot be dependent on a trigger that is inherited from it."
 msgstr "Trigger không thể phụ thuộc vào một trigger mà được kế thừa từ nó."
 
@@ -16041,11 +15948,7 @@ msgstr "Sự kiện trigger và thông báo chu kỳ lưu trữ dữ liê�
 msgid "Trigger event and alert data storage period \"%1$s\"."
 msgstr "Sự kiện trigger và thời gian lưu trữ dữ liệu cảnh báo \"%1$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:771
-msgid "Trigger expression must contain at least one host:key reference."
-msgstr "Biểu thức trigger phải chứa ít nhất một host: key reference."
-
-#: include/classes/api/services/CHostBase.php:153
+#: include/classes/api/services/CHostBase.php:159
 #, c-format
 msgid "Trigger has items from template \"%1$s\" that is not linked to host."
 msgstr "Trigger có các item từ template \"%1$s\" đó không phải là liên kết đến host."
@@ -16082,18 +15985,17 @@ msgstr "Tổng quan các trigger"
 msgid "Trigger prototype"
 msgstr "Kiểu trigger"
 
-#: include/classes/api/services/CTriggerGeneral.php:576
-#: include/classes/api/services/CTriggerGeneral.php:612
+#: include/classes/api/services/CTriggerGeneral.php:571
 #, c-format
 msgid "Trigger prototype \"%1$s\" already exists on \"%2$s\"."
 msgstr "Trigger \"%1$s\" đã tồn tại trên \"%2$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:1863
+#: include/classes/api/services/CTriggerGeneral.php:1687
 #, c-format
 msgid "Trigger prototype \"%1$s\" belongs to templates with different linkages."
 msgstr "Trigger \"%1$s\" thuộc về các mẫu có các liên kết khác nhau."
 
-#: include/classes/api/services/CTriggerGeneral.php:1782
+#: include/classes/api/services/CTriggerGeneral.php:1591
 #, c-format
 msgid "Trigger prototype \"%1$s\" contains item prototypes from multiple discovery rules."
 msgstr "Kiểu trigger \"%1$s\" chứa các kiểu item từ nhiều quy tắc phát hiện."
@@ -16103,7 +16005,7 @@ msgstr "Kiểu trigger \"%1$s\" chứa các kiểu item từ nhiều quy t
 msgid "Trigger prototype \"%1$s\" depends on trigger \"%2$s\", which does not exist."
 msgstr "Kiểu trigger \"%1$s\" phụ thuộc vào trigger \"%2$s\", không tồn tại."
 
-#: include/classes/api/services/CTriggerGeneral.php:1777
+#: include/classes/api/services/CTriggerGeneral.php:1586
 #, c-format
 msgid "Trigger prototype \"%1$s\" must contain at least one item prototype."
 msgstr "Kiểu trigger \"%1$s\" phải chứa ít nhất một kiểu item."
@@ -16112,7 +16014,7 @@ msgstr "Kiểu trigger \"%1$s\" phải chứa ít nhất một kiểu item
 msgid "Trigger prototype added"
 msgstr "Kiểu trigger đã được thêm vào"
 
-#: include/classes/api/services/CTriggerPrototype.php:920
+#: include/classes/api/services/CTriggerPrototype.php:916
 msgid "Trigger prototype cannot be dependent on a trigger that is inherited from it."
 msgstr "Kiểu trigger không thể phụ thuộc vào một trigger được kế thừa từ nó."
 
@@ -16127,8 +16029,6 @@ msgstr[0] "Kiểu trigger được cập nhật"
 
 #: app/controllers/CControllerPopupGeneric.php:149 include/html.inc.php:459
 #: include/views/configuration.host.discovery.list.php:122
-#: include/views/configuration.host.edit.php:464
-#: include/views/configuration.template.edit.php:264
 #: include/views/configuration.trigger.prototype.edit.php:25
 #: include/views/configuration.trigger.prototype.list.php:23
 #: include/views/configuration.trigger.prototype.massupdate.php:24
@@ -16142,10 +16042,6 @@ msgstr "Các kiểu trigger đã bị xóa"
 #: trigger_prototypes.php:406
 msgid "Trigger prototypes updated"
 msgstr "Các kiểu trigger đã được cập nhật"
-
-#: include/classes/api/services/CTriggerGeneral.php:783
-msgid "Trigger recovery expression must contain at least one host:key reference."
-msgstr "Biểu thức khôi phục trigger phải chứa ít nhất một máy chủ: tham chiếu khóa."
 
 #: include/html.inc.php:752
 #: include/views/administration.general.trigseverity.edit.php:25
@@ -16174,12 +16070,10 @@ msgstr "Trigger được cập nhật"
 #: include/html.inc.php:377 include/triggers.inc.php:921
 #: include/views/configuration.action.list.php:32
 #: include/views/configuration.host.discovery.list.php:53
-#: include/views/configuration.host.edit.php:355
 #: include/views/configuration.host.list.php:131
 #: include/views/configuration.host.list.php:341
 #: include/views/configuration.item.list.php:64
 #: include/views/configuration.item.list.php:192
-#: include/views/configuration.template.edit.php:175
 #: include/views/configuration.template.list.php:88
 #: include/views/configuration.template.list.php:192
 #: include/views/configuration.triggers.edit.php:24
@@ -16190,7 +16084,7 @@ msgstr "Trigger được cập nhật"
 #: include/views/js/monitoring.sysmaps.js.php:143
 #: include/views/monitoring.overview.items.php:56
 #: include/views/monitoring.overview.triggers.php:93 search.php:135
-#: search.php:168 search.php:197 search.php:410 search.php:441 search.php:467
+#: search.php:168 search.php:190 search.php:392 search.php:423 search.php:449
 #: triggers.php:605
 msgid "Triggers"
 msgstr "Các trigger"
@@ -16403,7 +16297,11 @@ msgstr "USA (160 ký tự)"
 msgid "Ukrainian (uk_UA)"
 msgstr "Ukrainian (uk_UA)"
 
-#: include/classes/core/CConfigFile.php:155
+#: include/classes/core/CConfigFile.php:150
+msgid "Unable to change configuration file permissions to 0600."
+msgstr ""
+
+#: include/classes/core/CConfigFile.php:160
 msgid "Unable to create the configuration file."
 msgstr "Không thể tạo tập tin cấu hình."
 
@@ -16415,7 +16313,7 @@ msgstr "Không thể tạo tập tin cấu hình."
 msgid "Unable to determine current Zabbix database version: %1$s."
 msgstr ""
 
-#: include/classes/core/CConfigFile.php:151
+#: include/classes/core/CConfigFile.php:156
 msgid "Unable to overwrite the existing configuration file."
 msgstr "Không thể ghi đè lên tệp cấu hình hiện có."
 
@@ -16477,7 +16375,7 @@ msgstr "Đơn vị"
 #: include/items.inc.php:171 include/maintenances.inc.php:39
 #: include/maps.inc.php:39 include/regexp.inc.php:236
 #: include/screens.inc.php:57 include/triggers.inc.php:120
-#: include/triggers.inc.php:242 include/triggers.inc.php:2213
+#: include/triggers.inc.php:242 include/triggers.inc.php:2214
 #: include/users.inc.php:66 include/users.inc.php:89
 #: include/views/configuration.action.edit.php:493
 #: include/views/configuration.triggers.list.php:43
@@ -16503,12 +16401,12 @@ msgstr "Hàm không rõ"
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:48
 #: app/controllers/CControllerPopupTriggerExpr.php:542
-#: include/triggers.inc.php:1433
+#: include/triggers.inc.php:1434
 msgid "Unknown host item, no such item in selected host"
 msgstr "Host item không rõ, không có item trong host được lựa chọn"
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:47
-#: include/triggers.inc.php:1432
+#: include/triggers.inc.php:1433
 msgid "Unknown host, no such host present in system"
 msgstr "Host không rõ, không có như vậy trong hệ thống"
 
@@ -16534,14 +16432,14 @@ msgstr "Kiểu giá trị không rõ"
 msgid "Unlimited"
 msgstr "Không giới hạn"
 
-#: include/views/configuration.host.edit.php:564
+#: include/views/configuration.host.edit.php:313
 #: include/views/configuration.host.prototype.edit.php:273
-#: include/views/configuration.template.edit.php:363
+#: include/views/configuration.template.edit.php:143
 msgid "Unlink"
 msgstr "Hủy liên kết"
 
-#: include/views/configuration.host.edit.php:570
-#: include/views/configuration.template.edit.php:369
+#: include/views/configuration.host.edit.php:319
+#: include/views/configuration.template.edit.php:149
 msgid "Unlink and clear"
 msgstr "Hủy liên kết và xóa"
 
@@ -16553,32 +16451,32 @@ msgstr "Hủy liên kết từ template"
 msgid "Unlink from templates"
 msgstr "Hủy liên kết từ các template"
 
-#: include/classes/api/services/CHostGeneral.php:622
+#: include/classes/api/services/CHostGeneral.php:611
 #, c-format
 msgid "Unlinked: Application \"%1$s\" on \"%2$s\"."
 msgstr "Hủy liên kết: Ứng dụng \"%1$s\" trên \"%2$s\"."
 
-#: include/classes/api/services/CHostGeneral.php:436
+#: include/classes/api/services/CHostGeneral.php:425
 #, c-format
 msgid "Unlinked: Discovery rule \"%1$s\" on \"%2$s\"."
 msgstr "Hủy liên kết: Quy tắc phát hiện \"%1$s\" trên \"%2$s\"."
 
-#: include/classes/api/services/CHostGeneral.php:526
+#: include/classes/api/services/CHostGeneral.php:515
 #, c-format
 msgid "Unlinked: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr "Hủy liên kết: Kiểu host \"%1$s\" trên \"%2$s\"."
 
-#: include/classes/api/services/CHostGeneral.php:452
+#: include/classes/api/services/CHostGeneral.php:441
 #, c-format
 msgid "Unlinked: Item \"%1$s\" on \"%2$s\"."
 msgstr "Hủy liên kết: Item \"%1$s\" trên \"%2$s\"."
 
-#: include/classes/api/services/CHostGeneral.php:471
+#: include/classes/api/services/CHostGeneral.php:460
 #, c-format
 msgid "Unlinked: Item prototype \"%1$s\" on \"%2$s\"."
 msgstr "Hủy liên kết: Kiểu item \"%1$s\" trên \"%2$s\"."
 
-#: include/classes/api/services/CHostGeneral.php:564
+#: include/classes/api/services/CHostGeneral.php:553
 #, c-format
 msgid "Unlinked: Web scenario \"%1$s\" on \"%2$s\"."
 msgstr "Hủy liên kết: Web scenario \"%1$s\" trên \"%2$s\"."
@@ -16609,7 +16507,7 @@ msgstr "Không hỗ trợ import có dạng thức \"%1$s\"."
 msgid "Unsupported parameter \"%2$s\" for a filter condition of action \"%1$s\"."
 msgstr "Không hỗ trợ tham số \"%2$s\" cho một điều kiện lọc cho hoạt động \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1116
+#: include/classes/api/services/CDiscoveryRule.php:1118
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for a filter condition of discovery rule \"%1$s\"."
 msgstr "Tham số không được hỗ trợ \"%2$s\" cho điều kiện lọc của quy tắc khám phá \"%1$s\"."
@@ -16619,7 +16517,7 @@ msgstr "Tham số không được hỗ trợ \"%2$s\" cho điều kiện lọc c
 msgid "Unsupported parameter \"%2$s\" for the filter of action \"%1$s\"."
 msgstr "Tham số không được hỗ trợ \"%2$s\" cho bộ lọc hoạt động \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1084
+#: include/classes/api/services/CDiscoveryRule.php:1086
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for the filter of discovery rule \"%1$s\"."
 msgstr "Tham số không được hỗ trợ \"%2$s\" cho bộ lọc quy tắc khám phá \"%1$s\"."
@@ -16665,7 +16563,7 @@ msgstr "Up"
 #: include/views/configuration.discovery.edit.php:108
 #: include/views/configuration.graph.edit.php:457
 #: include/views/configuration.host.discovery.edit.php:720
-#: include/views/configuration.host.edit.php:813
+#: include/views/configuration.host.edit.php:562
 #: include/views/configuration.hostgroups.edit.php:57
 #: include/views/configuration.host.massupdate.php:377
 #: include/views/configuration.host.prototype.edit.php:435
@@ -16676,7 +16574,7 @@ msgstr "Up"
 #: include/views/configuration.maintenance.edit.php:134
 #: include/views/configuration.maintenance.edit.php:285
 #: include/views/configuration.services.edit.php:355
-#: include/views/configuration.template.edit.php:443
+#: include/views/configuration.template.edit.php:223
 #: include/views/configuration.trigger.prototype.edit.php:635
 #: include/views/configuration.trigger.prototype.massupdate.php:188
 #: include/views/configuration.triggers.edit.php:643
@@ -16718,7 +16616,7 @@ msgstr "Cập nhật vấn đề"
 msgid "Updated"
 msgstr "Đã cập nhật"
 
-#: include/classes/api/services/CHost.php:1111
+#: include/classes/api/services/CHost.php:1135
 #, c-format
 msgid "Updated status of host \"%1$s\"."
 msgstr "Cập nhật trạng thái của máy chủ \"%1$s\"."
@@ -17025,7 +16923,7 @@ msgstr "Người dùng/Người nhận"
 #: app/views/administration.mediatype.edit.php:94
 #: app/views/administration.mediatype.edit.php:158
 #: app/views/administration.mediatype.list.php:93 disc_prototypes.php:225
-#: host_discovery.php:205 include/views/configuration.host.edit.php:666
+#: host_discovery.php:205 include/views/configuration.host.edit.php:415
 #: include/views/configuration.host.prototype.edit.php:336
 #: include/views/general.login.php:60 index.php:33 items.php:192
 msgid "Username"
@@ -17322,7 +17220,7 @@ msgstr "Giá trị \"%1$s\" là không hợp lệ đối với tham số 
 msgid "Value \"%1$s\" is invalid for parameter \"grid_show\". Choices are: \"%2$s\"."
 msgstr "Giá trị \"%1$s\" là không hợp lệ đối với tham số \"grid-align\". Các lựa chọn là: \"%2$s\"."
 
-#: include/classes/db/DB.php:359 include/classes/db/DB.php:388
+#: include/classes/db/DB.php:339 include/classes/db/DB.php:368
 #, c-format
 msgid "Value \"%1$s\" is too long for field \"%2$s\" - %3$d characters. Allowed length is %4$d characters."
 msgstr "Giá trị \"%1$s\" là quá dài đối với trường \"%2$s\" - %3$d ký tự. Chiều dài cho phép là %4$d ký tự."
@@ -17486,7 +17384,7 @@ msgstr "Kích thước không gian ảo tính bằng byte hoặc theo tỷ lệ 
 msgid "Visible name"
 msgstr "Tên hiển thị"
 
-#: include/classes/api/services/CHost.php:1983
+#: include/classes/api/services/CHost.php:2005
 msgid "Visible name cannot be empty if host name is missing."
 msgstr "Tên hiển thị không thể bị trống nếu tên host bị lỗi."
 
@@ -17522,8 +17420,8 @@ msgstr "Chúng tôi xin lỗi, số lượng tối đa có thể của ca
 #: include/views/inventory.host.view.php:131
 #: include/views/inventory.host.view.php:167
 #: include/views/inventory.host.view.php:176 search.php:132 search.php:138
-#: search.php:180 search.php:209 search.php:241 search.php:292 search.php:346
-#: search.php:414 search.php:457 search.php:471
+#: search.php:180 search.php:193 search.php:223 search.php:274 search.php:328
+#: search.php:396 search.php:439 search.php:453
 msgid "Web"
 msgstr "Web"
 
@@ -17577,9 +17475,7 @@ msgstr[0] "Web scenario đã được kích hoạtCác web scenario đã đ
 msgid "Web scenario updated"
 msgstr "Web scenario đã cập nhật"
 
-#: include/html.inc.php:419 include/views/configuration.host.edit.php:531
-#: include/views/configuration.template.edit.php:328
-#: include/views/conf.import.php:38
+#: include/html.inc.php:419 include/views/conf.import.php:38
 msgid "Web scenarios"
 msgstr "Web scenarios"
 
@@ -17684,8 +17580,8 @@ msgstr "Ghi"
 msgid "Wrong fields for dependency for service \"%1$s\"."
 msgstr "Những trường không đúng đối với quan hệ phụ thuộc cho dịch vụ \"%1$s\"."
 
-#: include/classes/api/services/CHost.php:1668
-#: include/classes/api/services/CHost.php:1861
+#: include/classes/api/services/CHost.php:1690
+#: include/classes/api/services/CHost.php:1883
 #, c-format
 msgid "Wrong fields for host \"%1$s\"."
 msgstr "Các trường sai cho máy chủ \"%1$s\"."
@@ -17711,22 +17607,10 @@ msgstr "Những trường không đúng đối với dịch vụ \"%1$s\"."
 msgid "Wrong fields for time for service \"%1$s\"."
 msgstr "Những trường không đúng đối với thời gian của dịch vụ \"%1$s\"."
 
-#: include/classes/api/services/CTriggerGeneral.php:821
-#: include/classes/api/services/CTriggerGeneral.php:979
-msgid "Wrong fields for trigger prototype."
-msgstr "Các trường sai cho kiểu trigger."
-
-#: include/classes/api/services/CTriggerGeneral.php:815
-#: include/classes/api/services/CTriggerGeneral.php:973
-msgid "Wrong fields for trigger."
-msgstr "Những trường không đúng đối với trigger."
-
 #: include/classes/api/services/CMapElement.php:63
 #: include/classes/api/services/CMap.php:958
 #: include/classes/api/services/CMap.php:1418
 #: include/classes/api/services/CScreenItem.php:967
-#: include/classes/api/services/CTriggerGeneral.php:846
-#: include/classes/api/services/CTriggerGeneral.php:1000
 msgid "Wrong value for url field."
 msgstr "Giá trị sai cho trường url."
 
@@ -17762,7 +17646,7 @@ msgstr "Dữ liệu XML"
 msgid "XML is empty"
 msgstr "XML trống"
 
-#: include/classes/api/services/CItemGeneral.php:1981
+#: include/classes/api/services/CItemGeneral.php:2039
 msgid "XML is expected"
 msgstr "Yêu cầu XML"
 
@@ -17781,7 +17665,7 @@ msgid "Y axis MAX value must be greater than Y axis MIN value"
 msgstr "Giá trị lớn nhất của trục Y phải lớn hơn giá trị nhỏ nhất."
 
 #: include/classes/api/services/CGraphGeneral.php:314
-#: include/classes/graphdraw/CLineGraphDraw.php:711
+#: include/classes/graphdraw/CLineGraphDraw.php:710
 msgid "Y axis MAX value must be greater than Y axis MIN value."
 msgstr "Giá trị cực đại của trục Y phải lớn hơn giá trị cực tiểu trục Y."
 
@@ -17846,14 +17730,15 @@ msgstr "Năm"
 msgid "Yearly"
 msgstr "Hàng năm"
 
-#: app/views/monitoring.widget.problems.view.php:221
+#: app/views/hint.box.php:168
+#: app/views/monitoring.widget.problems.view.php:219
 #: include/actions.inc.php:32 include/blocks.inc.php:434
 #: include/blocks.inc.php:633
 #: include/classes/screens/CScreenHostTriggers.php:268
-#: include/classes/screens/CScreenProblem.php:1082
-#: include/classes/screens/CScreenProblem.php:1191 include/events.inc.php:176
-#: include/events.inc.php:376 include/events.inc.php:601
-#: include/triggers.inc.php:1284 include/triggers.inc.php:1289
+#: include/classes/screens/CScreenProblem.php:1043
+#: include/classes/screens/CScreenProblem.php:1152 include/events.inc.php:176
+#: include/events.inc.php:376 include/triggers.inc.php:1285
+#: include/triggers.inc.php:1290
 #: include/views/administration.general.valuemapping.list.php:65
 #: include/views/administration.users.list.php:109
 #: include/views/configuration.host.prototype.list.php:126
@@ -17865,7 +17750,7 @@ msgstr "Hàng năm"
 msgid "Yes"
 msgstr "Yes"
 
-#: include/classes/screens/CScreenProblem.php:747 include/func.inc.php:2689
+#: include/classes/screens/CScreenProblem.php:707 include/func.inc.php:2689
 msgid "Yesterday"
 msgstr "hôm qua"
 
@@ -17905,22 +17790,22 @@ msgid "You did not specify targets for action operation global script \"%s\"."
 msgstr "Bạn không ghi rõ mục tiêu cho thao tác tập lệnh action \"%s\"."
 
 #: include/classes/api/services/CCorrelation.php:474
-#: include/classes/api/services/CHost.php:703
-#: include/classes/api/services/CHost.php:768
+#: include/classes/api/services/CHost.php:727
+#: include/classes/api/services/CHost.php:792
 #: include/classes/api/services/CIconMap.php:178
 #: include/classes/api/services/CIconMap.php:249
-#: include/classes/api/services/CMaintenance.php:521
-#: include/classes/api/services/CMaintenance.php:953
-#: include/classes/api/services/CMaintenance.php:965
+#: include/classes/api/services/CMaintenance.php:523
+#: include/classes/api/services/CMaintenance.php:945
+#: include/classes/api/services/CMaintenance.php:956
 #: include/classes/api/services/CScript.php:241
 #: include/classes/api/services/CScript.php:318
 #: include/classes/api/services/CScript.php:560
 #: include/classes/api/services/CTask.php:104
-#: include/classes/api/services/CTemplate.php:397
-#: include/classes/api/services/CTemplate.php:540
-#: include/classes/api/services/CTemplate.php:572
-#: include/classes/api/services/CTemplate.php:989
-#: include/classes/api/services/CTemplate.php:1095
+#: include/classes/api/services/CTemplate.php:426
+#: include/classes/api/services/CTemplate.php:569
+#: include/classes/api/services/CTemplate.php:600
+#: include/classes/api/services/CTemplate.php:980
+#: include/classes/api/services/CTemplate.php:1086
 #: include/classes/api/services/CUserMacro.php:266
 #: include/classes/api/services/CUserMacro.php:350
 #: include/classes/api/services/CUserMacro.php:443
@@ -18043,7 +17928,7 @@ msgstr "Máy chủ zabbix (proxy)"
 msgid "Zabbix server details"
 msgstr "Chi tiết máy chủ zabbix"
 
-#: jsrpc.php:81
+#: jsrpc.php:80
 msgid "Zabbix server is not running: the information displayed may not be current."
 msgstr "Máy chủ Zabbix đang không hoạt động: Thông tin được hiển thị có thể không tồn tại."
 
@@ -18082,68 +17967,70 @@ msgstr "[Giá trị sai trong ngày: \"%s\"]"
 msgid "[Wrong value for month: \"%s\" ]"
 msgstr "[Giá trị sai trong tháng: \"%s\"]"
 
-#: include/classes/validators/CApiInputValidator.php:777
+#: include/classes/validators/CApiInputValidator.php:789
 msgid "a boolean is expected"
 msgstr "Một boolean được mong đợi "
 
-#: include/classes/api/services/CTriggerGeneral.php:500
-#: include/classes/api/services/CTriggerGeneral.php:516
 #: include/classes/api/services/CUser.php:668
 #: include/classes/import/validators/CXmlValidatorGeneral.php:193
-#: include/classes/validators/CApiInputValidator.php:250
+#: include/classes/validators/CApiInputValidator.php:262
 #: include/classes/validators/CNewValidator.php:279
 msgid "a character string is expected"
 msgstr "Chuỗi kí tự được mong đợi "
 
-#: include/classes/validators/CApiInputValidator.php:567
+#: include/classes/validators/CApiInputValidator.php:579
 msgid "a floating point value is expected"
 msgstr "Yêu cầu số thực"
 
-#: include/classes/validators/CApiInputValidator.php:291
+#: include/classes/validators/CApiInputValidator.php:303
 msgid "a hexadecimal colour code (6 symbols) is expected"
 msgstr "một mã màu thập lục phân (6 ký hiệu) được mong đợi"
 
-#: include/classes/validators/CApiInputValidator.php:738
-#: include/classes/validators/CApiInputValidator.php:1181
+#: include/classes/validators/CApiInputValidator.php:750
+#: include/classes/validators/CApiInputValidator.php:1193
 msgid "a number is expected"
 msgstr "một số được kì vọng"
 
-#: include/classes/validators/CApiInputValidator.php:442
-#: include/classes/validators/CApiInputValidator.php:481
-#: include/classes/validators/CApiInputValidator.php:748
-#: include/classes/validators/CApiInputValidator.php:1188
-#: include/classes/validators/CApiInputValidator.php:1414
+#: include/classes/validators/CApiInputValidator.php:454
+#: include/classes/validators/CApiInputValidator.php:493
+#: include/classes/validators/CApiInputValidator.php:760
+#: include/classes/validators/CApiInputValidator.php:1200
+#: include/classes/validators/CApiInputValidator.php:1426
 msgid "a number is too large"
 msgstr "một số là quá lớn"
 
 #: include/classes/api/services/CDRule.php:320
-#: include/classes/api/services/CItemGeneral.php:1302
+#: include/classes/api/services/CItemGeneral.php:1308
 #: include/classes/api/services/CScreen.php:423
 msgid "a numeric value is expected"
 msgstr "một giá trị số được mong đợi"
+
+#: include/classes/validators/CApiInputValidator.php:1728
+msgid "a string, number or null value is expected"
+msgstr ""
 
 #: include/classes/validators/CNewValidator.php:267
 msgid "a time is expected"
 msgstr "một thời gian được kì vọng"
 
 #: app/controllers/CControllerPopupMedia.php:110
-#: include/classes/validators/CApiInputValidator.php:1322
+#: include/classes/validators/CApiInputValidator.php:1334
 #: include/validate.inc.php:216
 msgid "a time period is expected"
 msgstr "một khoảng thời gian được dự kiến"
 
-#: include/classes/validators/CApiInputValidator.php:1288
+#: include/classes/validators/CApiInputValidator.php:1300
 #: include/validate.inc.php:235
 msgid "a time range is expected"
 msgstr "một khoảng thời gian dự kiến"
 
 #: app/controllers/CControllerPopupHttpStep.php:94
-#: include/classes/validators/CApiInputValidator.php:1403
+#: include/classes/validators/CApiInputValidator.php:1415
 #: include/validate.inc.php:227 include/validate.inc.php:591
 msgid "a time unit is expected"
 msgstr "một đơn vị thời gian dự kiến"
 
-#: include/classes/validators/CApiInputValidator.php:1255
+#: include/classes/validators/CApiInputValidator.php:1267
 msgid "a user macro is expected"
 msgstr "một macro người dùng được kì vọng"
 
@@ -18186,30 +18073,34 @@ msgstr "Tất cả media"
 
 #: include/classes/api/services/CDRule.php:463
 #: include/classes/api/services/CDRule.php:470
-#: include/classes/api/services/CItemGeneral.php:1919
-#: include/classes/api/services/CItemGeneral.php:1943
+#: include/classes/api/services/CItemGeneral.php:1977
+#: include/classes/api/services/CItemGeneral.php:2001
 #: include/classes/import/validators/CXmlValidatorGeneral.php:207
-#: include/classes/validators/CApiInputValidator.php:390
-#: include/classes/validators/CApiInputValidator.php:522
-#: include/classes/validators/CApiInputValidator.php:598
-#: include/classes/validators/CApiInputValidator.php:692
-#: include/classes/validators/CApiInputValidator.php:832
-#: include/classes/validators/CApiInputValidator.php:985
-#: include/classes/validators/CApiInputValidator.php:1027
+#: include/classes/validators/CApiInputValidator.php:402
+#: include/classes/validators/CApiInputValidator.php:534
+#: include/classes/validators/CApiInputValidator.php:610
+#: include/classes/validators/CApiInputValidator.php:704
+#: include/classes/validators/CApiInputValidator.php:844
+#: include/classes/validators/CApiInputValidator.php:997
+#: include/classes/validators/CApiInputValidator.php:1039
 msgid "an array is expected"
 msgstr "một mảng được mong đợi"
 
-#: include/classes/validators/CApiInputValidator.php:911
-#: include/classes/validators/CApiInputValidator.php:940
+#: include/classes/validators/CApiInputValidator.php:923
+#: include/classes/validators/CApiInputValidator.php:952
 msgid "an array or a character string is expected"
 msgstr "một mảng hoặc một chuỗi ký tự được mong đợi"
+
+#: include/classes/validators/CApiInputValidator.php:1708
+msgid "an array or object is expected"
+msgstr ""
 
 #: include/classes/import/validators/C10XmlValidator.php:397
 #: include/classes/import/validators/C10XmlValidator.php:419
 msgid "an empty string is expected"
 msgstr "một chuỗi trống dự kiến"
 
-#: include/classes/api/services/CHost.php:1609
+#: include/classes/api/services/CHost.php:1631
 msgid "an even number of hexadecimal characters is expected"
 msgstr "một số lượng chẵn các ký tự thập lục phân được mong đợi"
 
@@ -18217,11 +18108,11 @@ msgstr "một số lượng chẵn các ký tự thập lục phân được mon
 msgid "an explicit time is expected"
 msgstr "một thời gian rõ ràng được dự kiến"
 
-#: include/classes/validators/CApiInputValidator.php:437
+#: include/classes/validators/CApiInputValidator.php:449
 msgid "an integer is expected"
 msgstr "yêu cầu một số nguyên"
 
-#: include/classes/validators/CApiInputValidator.php:476
+#: include/classes/validators/CApiInputValidator.php:488
 msgid "an unsigned integer is expected"
 msgstr "Yêu cầu số nguyên dương"
 
@@ -18317,16 +18208,16 @@ msgstr "Không thể thay đổi"
 #: include/classes/api/services/CDRule.php:357
 #: include/classes/api/services/CDRule.php:512
 #: include/classes/api/services/CEvent.php:847
-#: include/classes/api/services/CHost.php:1597
-#: include/classes/api/services/CHost.php:1603
+#: include/classes/api/services/CHost.php:1619
+#: include/classes/api/services/CHost.php:1625
 #: include/classes/api/services/CItemGeneral.php:484
 #: include/classes/api/services/CItemGeneral.php:511
 #: include/classes/api/services/CItemGeneral.php:517
 #: include/classes/api/services/CItemGeneral.php:523
 #: include/classes/api/services/CItemGeneral.php:1271
 #: include/classes/api/services/CItemGeneral.php:1292
-#: include/classes/api/services/CItemGeneral.php:1319
-#: include/classes/api/services/CItemGeneral.php:1332
+#: include/classes/api/services/CItemGeneral.php:1325
+#: include/classes/api/services/CItemGeneral.php:1338
 #: include/classes/api/services/CMapElement.php:122
 #: include/classes/api/services/CMapElement.php:147
 #: include/classes/api/services/CMapElement.php:185
@@ -18339,28 +18230,25 @@ msgstr "Không thể thay đổi"
 #: include/classes/api/services/CMediatype.php:721
 #: include/classes/api/services/CProxy.php:578
 #: include/classes/api/services/CProxy.php:584
-#: include/classes/api/services/CTriggerGeneral.php:506
-#: include/classes/api/services/CTriggerGeneral.php:872
-#: include/classes/api/services/CTriggerGeneral.php:904
-#: include/classes/api/services/CTriggerGeneral.php:1118
-#: include/classes/api/services/CTriggerGeneral.php:1136
+#: include/classes/api/services/CTriggerGeneral.php:690
+#: include/classes/api/services/CTriggerGeneral.php:723
 #: include/classes/api/services/CUserGroup.php:463
 #: include/classes/api/services/CUser.php:536
 #: include/classes/api/services/CUser.php:679
-#: include/classes/validators/CApiInputValidator.php:260
-#: include/classes/validators/CApiInputValidator.php:395
-#: include/classes/validators/CApiInputValidator.php:527
-#: include/classes/validators/CApiInputValidator.php:603
-#: include/classes/validators/CApiInputValidator.php:697
-#: include/classes/validators/CApiInputValidator.php:743
-#: include/classes/validators/CApiInputValidator.php:990
-#: include/classes/validators/CApiInputValidator.php:1032
+#: include/classes/validators/CApiInputValidator.php:272
+#: include/classes/validators/CApiInputValidator.php:407
+#: include/classes/validators/CApiInputValidator.php:539
+#: include/classes/validators/CApiInputValidator.php:615
+#: include/classes/validators/CApiInputValidator.php:709
+#: include/classes/validators/CApiInputValidator.php:755
+#: include/classes/validators/CApiInputValidator.php:1002
+#: include/classes/validators/CApiInputValidator.php:1044
 #: include/classes/validators/CNewValidator.php:91 usergrps.php:318
 #: usergrps.php:358 usergrps.php:361
 msgid "cannot be empty"
 msgstr "Không thể để trống"
 
-#: include/classes/api/services/CItemGeneral.php:1935
+#: include/classes/api/services/CItemGeneral.php:1993
 msgid "cannot convert to JSON, result value too long"
 msgstr "không thể chuyển đổi sang JSON, giá trị kết quả quá dài"
 
@@ -18377,7 +18265,7 @@ msgstr "thay đổi() - Sự khác biệt giữa giá trị cuối cùng và gi�
 msgid "check expression starting from \"%1$s\""
 msgstr "kiểm tra biểu thức bắt đầu từ \"%1$s\""
 
-#: include/classes/api/services/CItemGeneral.php:1649
+#: include/classes/api/services/CItemGeneral.php:1707
 #: include/classes/import/CConfigurationImport.php:2715
 msgid "circular item dependency is not allowed"
 msgstr "phụ thuộc item không được phép"
@@ -18457,7 +18345,7 @@ msgstr "giảm dần"
 msgid "diff() - Difference between last and preceding values (1 - true, 0 - false)"
 msgstr "diff() - Sự khác biệt giữa các giá trị cuối cùng và trước (1 - true, 0 - false)"
 
-#: include/classes/validators/CApiInputValidator.php:1225
+#: include/classes/validators/CApiInputValidator.php:1237
 msgid "directory or script name cannot be empty"
 msgstr "tên thư mục hoặc tập lệnh không được để trống"
 
@@ -18511,7 +18399,7 @@ msgstr "thất bại trong việc phân tích JSON"
 msgid "first"
 msgstr "đầu tiên"
 
-#: include/classes/api/services/CItemGeneral.php:1340
+#: include/classes/api/services/CItemGeneral.php:1346
 msgid "first parameter is expected"
 msgstr "tham số đầu tiên được mong đợi"
 
@@ -18570,7 +18458,7 @@ msgstr "Máy chủ không được theo dõi"
 msgid "host pattern"
 msgstr "Mẫu máy chủ"
 
-#: include/classes/api/services/CItemGeneral.php:1632
+#: include/classes/api/services/CItemGeneral.php:1690
 msgid "hostid of dependent item and master item should match"
 msgstr "id máy chủ của item phụ thuộc và item chủ phải phù hợp"
 
@@ -18602,6 +18490,15 @@ msgstr "số phần tử không chính xác"
 msgid "incorrect syntax near \"%1$s\""
 msgstr "Cú pháp không chính xác khoảng \"%1$s\""
 
+#: include/classes/parsers/CTriggerExpression.php:462
+msgid "incorrect trigger expression"
+msgstr ""
+
+#: include/classes/parsers/CTriggerExpression.php:471
+#, c-format
+msgid "incorrect trigger expression starting from \"%1$s\""
+msgstr ""
+
 #: include/events.inc.php:37
 msgctxt "event source"
 msgid "internal"
@@ -18612,34 +18509,34 @@ msgstr "internal"
 msgid "invalid address range \"%1$s\""
 msgstr "phạm vi địa chỉ không hợp lệ \"%1$s\""
 
-#: include/classes/validators/CApiInputValidator.php:255
+#: include/classes/validators/CApiInputValidator.php:267
 msgid "invalid byte sequence in UTF-8"
 msgstr "chuỗi byte không hợp lệ trong UTF-8"
 
 #: include/classes/api/services/CItemGeneral.php:336
-#: include/classes/graphdraw/CLineGraphDraw.php:113
+#: include/classes/graphdraw/CLineGraphDraw.php:112
 msgid "invalid delay"
 msgstr "Thời gian trễ không hợp lệ"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:242
+#: include/classes/graphdraw/CLineGraphDraw.php:241
 #: include/classes/graphdraw/CPieGraphDraw.php:204
 #: include/classes/helpers/CSvgGraphHelper.php:236
 msgid "invalid history storage period"
 msgstr "thời gian lưu trữ lịch sử không hợp lệ"
 
-#: include/classes/validators/CApiInputValidator.php:1084
+#: include/classes/validators/CApiInputValidator.php:1096
 msgid "invalid host group name"
 msgstr "tên máy chủ không hợp lệ"
 
-#: include/classes/validators/CApiInputValidator.php:1128
+#: include/classes/validators/CApiInputValidator.php:1140
 msgid "invalid host name"
 msgstr "Tên máy chủ không hợp lệ"
 
-#: include/classes/validators/CApiInputValidator.php:1358
+#: include/classes/validators/CApiInputValidator.php:1370
 msgid "invalid regular expression"
 msgstr "Biểu thức chính quy không hợp lệ"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:252
+#: include/classes/graphdraw/CLineGraphDraw.php:251
 #: include/classes/graphdraw/CPieGraphDraw.php:214
 #: include/classes/helpers/CSvgGraphHelper.php:248
 msgid "invalid trend storage period"
@@ -18657,7 +18554,7 @@ msgstr "lớn hơn hoặc bằng"
 msgid "is less than or equals"
 msgstr "nhỏ hơn hoặc bằng"
 
-#: include/classes/validators/CApiInputValidator.php:1594
+#: include/classes/validators/CApiInputValidator.php:1606
 msgid "is not enclosed in {} or is malformed"
 msgstr "không được đính kèm trong {} hoặc không đúng định dạng"
 
@@ -18679,10 +18576,14 @@ msgid "key is empty"
 msgstr "Không có key"
 
 #: include/classes/graphdraw/CLineGraphDraw.php:1853
-#: include/classes/graphdraw/CPieGraphDraw.php:333 include/forms.inc.php:2014
-#: include/graphs.inc.php:82 include/maintenances.inc.php:115
+#: include/classes/graphdraw/CPieGraphDraw.php:333 include/graphs.inc.php:82
 #: include/views/js/configuration.graph.edit.js.php:182
 #: include/views/js/configuration.graph.edit.js.php:245
+msgid "last"
+msgstr "Cuối cùng"
+
+#: include/forms.inc.php:2014 include/maintenances.inc.php:115
+msgctxt "week of month"
 msgid "last"
 msgstr "Cuối cùng"
 
@@ -18728,9 +18629,9 @@ msgctxt "month short"
 msgid "m"
 msgstr "m"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:1384
-#: include/classes/graphdraw/CLineGraphDraw.php:1392
-#: include/classes/graphdraw/CLineGraphDraw.php:1399
+#: include/classes/graphdraw/CLineGraphDraw.php:1332
+#: include/classes/graphdraw/CLineGraphDraw.php:1333
+#: include/classes/graphdraw/CLineGraphDraw.php:1334
 msgid "m-d"
 msgstr "m-d"
 
@@ -18770,11 +18671,11 @@ msgstr "max"
 msgid "max() - Maximum value for period T"
 msgstr "max() - Giá trị tối đa cho giai đoạn T"
 
-#: include/classes/api/services/CItemGeneral.php:1743
+#: include/classes/api/services/CItemGeneral.php:1801
 msgid "maximum dependent items count reached"
 msgstr "số lượng phụ thuộc tối đa đạt đến"
 
-#: include/classes/api/services/CItemGeneral.php:1729
+#: include/classes/api/services/CItemGeneral.php:1787
 #: include/classes/import/CConfigurationImport.php:2669
 #: include/classes/import/CConfigurationImport.php:2730
 msgid "maximum number of dependency levels reached"
@@ -18794,7 +18695,7 @@ msgstr "min"
 msgid "min() - Minimum value for period T"
 msgstr "min () - Giá trị tối thiểu cho giai đoạn T"
 
-#: include/classes/api/services/CHost.php:1615
+#: include/classes/api/services/CHost.php:1637
 #, c-format
 msgid "minimum length is %1$s characters"
 msgstr "độ dài tối thiểu là ký tự %1$s"
@@ -18827,8 +18728,8 @@ msgstr "Phải có một người dùng LDAP hợp lệ"
 msgid "must be between \"%1$s\" and \"%2$s\""
 msgstr "Phải nằm trong khoảng \"%1$s\" và \"%2$s\""
 
-#: include/classes/validators/CApiInputValidator.php:1091
-#: include/classes/validators/CApiInputValidator.php:1135
+#: include/classes/validators/CApiInputValidator.php:1103
+#: include/classes/validators/CApiInputValidator.php:1147
 msgid "must contain at least one low-level discovery macro"
 msgstr "phải chứa ít nhất một macro khám phá cấp thấp"
 
@@ -18847,7 +18748,7 @@ msgid "new"
 msgstr "new"
 
 #: hosts.php:1145 include/views/configuration.host.massupdate.php:83
-#: include/views/configuration.item.massupdate.php:652 templates.php:531
+#: include/views/configuration.item.massupdate.php:652 templates.php:528
 msgctxt "new element in multiselect"
 msgid "new"
 msgstr "new"
@@ -18869,8 +18770,8 @@ msgstr "nodata() - Không có dữ liệu nhận được trong khoảng thời 
 msgid "none"
 msgstr "Không có "
 
-#: include/classes/api/services/CItemGeneral.php:1926
-#: include/classes/api/services/CItemGeneral.php:1950
+#: include/classes/api/services/CItemGeneral.php:1984
+#: include/classes/api/services/CItemGeneral.php:2008
 msgid "nonempty key and value pair expected"
 msgstr "cặp khóa và giá trị dự kiến không được để trống"
 
@@ -19025,7 +18926,7 @@ msgstr "Bên phải "
 msgid "root"
 msgstr "root"
 
-#: include/classes/api/services/CItemGeneral.php:1639
+#: include/classes/api/services/CItemGeneral.php:1697
 msgid "ruleid of dependent item and master item should match"
 msgstr "quy tắc của item phụ thuộc và item chủ phải phù hợp"
 
@@ -19039,7 +18940,7 @@ msgctxt "adjective"
 msgid "second"
 msgstr "giây"
 
-#: include/classes/api/services/CItemGeneral.php:1346
+#: include/classes/api/services/CItemGeneral.php:1352
 msgid "second parameter is expected"
 msgstr "tham số thứ hai được kì vọng"
 
@@ -19051,25 +18952,23 @@ msgstr "Chọn"
 msgid "short description"
 msgstr "Mô tả ngắn"
 
-#: include/classes/api/services/CHost.php:1622
-#: include/classes/api/services/CHost.php:1628
-#: include/classes/api/services/CHost.php:1637
-#: include/classes/api/services/CHost.php:1643
+#: include/classes/api/services/CHost.php:1644
+#: include/classes/api/services/CHost.php:1650
+#: include/classes/api/services/CHost.php:1659
+#: include/classes/api/services/CHost.php:1665
 #: include/classes/api/services/CHttpTest.php:959
 #: include/classes/api/services/CHttpTest.php:1057
 #: include/classes/api/services/CItemGeneral.php:498
 #: include/classes/api/services/CItemGeneral.php:536
-#: include/classes/api/services/CItemGeneral.php:1361
-#: include/classes/api/services/CItemGeneral.php:1375
-#: include/classes/api/services/CItemGeneral.php:1903
-#: include/classes/api/services/CMaintenance.php:488
-#: include/classes/api/services/CMaintenance.php:711
+#: include/classes/api/services/CItemGeneral.php:1367
+#: include/classes/api/services/CItemGeneral.php:1381
+#: include/classes/api/services/CItemGeneral.php:1961
+#: include/classes/api/services/CMaintenance.php:490
+#: include/classes/api/services/CMaintenance.php:713
 #: include/classes/api/services/CProxy.php:662
 #: include/classes/api/services/CProxy.php:786
-#: include/classes/api/services/CTriggerGeneral.php:864
-#: include/classes/api/services/CTriggerGeneral.php:890
-#: include/classes/api/services/CTriggerGeneral.php:1110
-#: include/classes/api/services/CTriggerGeneral.php:1128
+#: include/classes/api/services/CTriggerGeneral.php:696
+#: include/classes/api/services/CTriggerGeneral.php:729
 msgid "should be empty"
 msgstr "trống"
 
@@ -19137,11 +19036,11 @@ msgstr "ID template \"%1$s\" được thông qua %2$s lần"
 #: app/controllers/CControllerDashboardUpdate.php:135
 #: app/controllers/CControllerDashboardUpdate.php:143
 #: include/classes/api/services/CDashboard.php:385
-#: include/classes/api/services/CHost.php:1702
-#: include/classes/api/services/CHost.php:1891
+#: include/classes/api/services/CHost.php:1724
+#: include/classes/api/services/CHost.php:1913
 #: include/classes/api/services/CHttpTest.php:744
-#: include/classes/api/services/CTemplate.php:378
-#: include/classes/validators/CApiInputValidator.php:867
+#: include/classes/api/services/CTemplate.php:407
+#: include/classes/validators/CApiInputValidator.php:879
 #, c-format
 msgid "the parameter \"%1$s\" is missing"
 msgstr "Tham số \"%1$s\" bị thiếu"
@@ -19193,11 +19092,15 @@ msgstr "trigger"
 msgid "trigger does not allow manual closing"
 msgstr "Trigger không cho phép đóng thủ công"
 
-#: include/classes/api/services/CTriggerGeneral.php:1789
+#: include/classes/validators/CApiInputValidator.php:1685
+msgid "trigger expression must contain at least one host:key reference"
+msgstr ""
+
+#: include/classes/api/services/CTriggerGeneral.php:1598
 msgid "trigger prototype cannot be moved to another template or host"
 msgstr "mẫu trigger không thể được chuyển sang mẫu hoặc máy chủ khác"
 
-#: include/classes/api/services/CTriggerGeneral.php:1934
+#: include/classes/api/services/CTriggerGeneral.php:1758
 msgid "trigger with linkages cannot be moved to another template or host"
 msgstr "trigger với các liên kết không thể được chuyển đến một mẫu hoặc máy chủ khác"
 
@@ -19206,7 +19109,7 @@ msgstr "trigger với các liên kết không thể được chuyển đến m�
 msgid "type here to search"
 msgstr "Kiểu cần tìm kiếm"
 
-#: include/classes/validators/CApiInputValidator.php:1626
+#: include/classes/validators/CApiInputValidator.php:1638
 msgid "unacceptable URL"
 msgstr "URL không được chấp nhận"
 
@@ -19220,7 +19123,7 @@ msgstr "kết thúc bất ngờ của macro"
 
 #: include/classes/api/services/CHttpTest.php:458
 #: include/classes/api/services/CHttpTest.php:482
-#: include/classes/validators/CApiInputValidator.php:839
+#: include/classes/validators/CApiInputValidator.php:851
 #, c-format
 msgid "unexpected parameter \"%1$s\""
 msgstr "tham số bất ngờ \"%1$s\""
@@ -19240,17 +19143,12 @@ msgstr "Văn bản bất ngờ \"%1$s\""
 
 #: include/classes/api/services/CEvent.php:805
 #: include/classes/api/services/CEvent.php:905
-#: include/classes/api/services/CHost.php:1577
-#: include/classes/api/services/CHost.php:1583
+#: include/classes/api/services/CHost.php:1599
+#: include/classes/api/services/CHost.php:1605
 #: include/classes/api/services/CItemGeneral.php:1278
 #: include/classes/api/services/CProxy.php:559
 #: include/classes/api/services/CProxy.php:566
-#: include/classes/api/services/CTriggerGeneral.php:898
-#: include/classes/api/services/CTriggerGeneral.php:911
-#: include/classes/api/services/CTriggerGeneral.php:919
-#: include/classes/api/services/CTriggerGeneral.php:1102
-#: include/classes/api/services/CTriggerGeneral.php:1143
-#: include/classes/api/services/CTriggerGeneral.php:1151
+#: include/classes/api/services/CTriggerGeneral.php:717
 #, c-format
 msgid "unexpected value \"%1$s\""
 msgstr "Giá trị bất ngờ \"%1$s\""
@@ -19307,37 +19205,40 @@ msgstr "Giá trị"
 msgid "value \"%1$s\" not found"
 msgstr "Giá trị \"%1$s\" không được tìm thấy"
 
-#: include/classes/validators/CApiInputValidator.php:1448
-#: include/classes/validators/CApiInputValidator.php:1502
+#: include/classes/validators/CApiInputValidator.php:1460
+#: include/classes/validators/CApiInputValidator.php:1514
 #, c-format
 msgid "value %1$s already exists"
 msgstr "Giá trị \"%1$s\" đã tồn tại"
 
-#: include/classes/validators/CApiInputValidator.php:358
-#: include/classes/validators/CApiInputValidator.php:1075
-#: include/classes/validators/CApiInputValidator.php:1118
-#: include/classes/validators/CApiInputValidator.php:1170
-#: include/classes/validators/CApiInputValidator.php:1215
-#: include/classes/validators/CApiInputValidator.php:1250
-#: include/classes/validators/CApiInputValidator.php:1281
-#: include/classes/validators/CApiInputValidator.php:1315
-#: include/classes/validators/CApiInputValidator.php:1349
-#: include/classes/validators/CApiInputValidator.php:1589
-#: include/classes/validators/CApiInputValidator.php:1621
+#: include/classes/api/services/CTriggerGeneral.php:1646
+#: include/classes/api/services/CTriggerGeneral.php:1663
+#: include/classes/validators/CApiInputValidator.php:370
+#: include/classes/validators/CApiInputValidator.php:1087
+#: include/classes/validators/CApiInputValidator.php:1130
+#: include/classes/validators/CApiInputValidator.php:1182
+#: include/classes/validators/CApiInputValidator.php:1227
+#: include/classes/validators/CApiInputValidator.php:1262
+#: include/classes/validators/CApiInputValidator.php:1293
+#: include/classes/validators/CApiInputValidator.php:1327
+#: include/classes/validators/CApiInputValidator.php:1361
+#: include/classes/validators/CApiInputValidator.php:1601
+#: include/classes/validators/CApiInputValidator.php:1633
+#: include/classes/validators/CApiInputValidator.php:1669
 msgid "value is too long"
 msgstr "Giá trị quá dài"
 
 #: app/controllers/CControllerPopupHttpStep.php:101
-#: include/classes/api/services/CHost.php:778
-#: include/classes/api/services/CHost.php:1753
-#: include/classes/api/services/CHost.php:1908
+#: include/classes/api/services/CHost.php:802
+#: include/classes/api/services/CHost.php:1775
+#: include/classes/api/services/CHost.php:1930
 #: include/classes/api/services/CMapElement.php:102
 #: include/classes/api/services/CMap.php:675
 #: include/classes/api/services/CMap.php:681
 #: include/classes/api/services/CMap.php:1129
 #: include/classes/api/services/CMap.php:1135
-#: include/classes/validators/CApiInputValidator.php:352
-#: include/classes/validators/CApiInputValidator.php:660
+#: include/classes/validators/CApiInputValidator.php:364
+#: include/classes/validators/CApiInputValidator.php:672
 #: include/validate.inc.php:584
 #, c-format
 msgid "value must be one of %1$s"

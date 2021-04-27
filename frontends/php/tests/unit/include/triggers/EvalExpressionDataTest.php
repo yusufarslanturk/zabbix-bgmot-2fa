@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,9 +19,11 @@
 **/
 
 
-class EvalExpressionDataTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
 
-	public function testValidProvider() {
+class EvalExpressionDataTest extends TestCase {
+
+	public function dataProviderValid() {
 		return [
 			[
 				'{host:item.last()} = 0',
@@ -113,7 +115,7 @@ class EvalExpressionDataTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testValidProvider
+	 * @dataProvider dataProviderValid
 	 *
 	 * @param $expression
 	 * @param array $replacements
@@ -124,7 +126,7 @@ class EvalExpressionDataTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame(true, $result);
 	}
 
-	public function testInvalidProvider() {
+	public function dataProviderInvalid() {
 		return [
 			[
 				'{host:item.last()} = 0',
@@ -229,7 +231,7 @@ class EvalExpressionDataTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testInvalidProvider
+	 * @dataProvider dataProviderInvalid
 	 *
 	 * @param $expression
 	 * @param array $replacements

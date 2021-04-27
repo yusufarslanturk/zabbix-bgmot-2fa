@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -125,6 +125,12 @@ class CAudit {
 				$table_name = 'globalmacro';
 				break;
 
+			case AUDIT_RESOURCE_MAINTENANCE:
+				$field_name_resourceid = 'maintenanceid';
+				$field_name_resourcename = 'name';
+				$table_name = 'maintenances';
+				break;
+
 			case AUDIT_RESOURCE_PROXY:
 				$field_name_resourceid = 'proxyid';
 				$field_name_resourcename = 'host';
@@ -170,6 +176,12 @@ class CAudit {
 
 			case AUDIT_RESOURCE_HOST:
 				$field_name_resourceid = 'hostid';
+				$field_name_resourcename = 'host';
+				$table_name = 'hosts';
+				break;
+
+			case AUDIT_RESOURCE_TEMPLATE:
+				$field_name_resourceid = 'templateid';
 				$field_name_resourcename = 'host';
 				$table_name = 'hosts';
 				break;

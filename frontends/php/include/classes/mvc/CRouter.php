@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -78,6 +78,7 @@ class CRouter {
 		'export.templates.xml'			=> ['CControllerExportXml',					'layout.xml',			null],
 		'favourite.create'				=> ['CControllerFavouriteCreate',			'layout.javascript',	null],
 		'favourite.delete'				=> ['CControllerFavouriteDelete',			'layout.javascript',	null],
+		'hint.box'						=> ['CControllerHintBox',					'layout.json',			'hint.box'],
 		'map.view'						=> ['CControllerMapView',					'layout.htmlpage',		'monitoring.map.view'],
 		'mediatype.create'				=> ['CControllerMediatypeCreate',			null,					null],
 		'mediatype.delete'				=> ['CControllerMediatypeDelete',			null,					null],

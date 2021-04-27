@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -144,14 +144,11 @@ class CPageHeader {
 HTML;
 
 		foreach ($this->cssFiles as $path) {
-			// Add query string only to theme css files.
-			if (in_array($path, ['assets/styles/blue-theme.css', 'assets/styles/dark-theme.css',
-						'assets/styles/hc-light.css', 'assets/styles/hc-dark.css'
-					])) {
+			if (parse_url($path, PHP_URL_QUERY) === null) {
 				$path .= '?'.(int) filemtime($path);
 			}
 
-			echo '<link rel="stylesheet" type="text/css" href="'.$path.'" />'."\n";
+			echo '<link rel="stylesheet" type="text/css" href="'.htmlspecialchars($path).'" />'."\n";
 		}
 
 		if ($this->styles) {
@@ -167,7 +164,11 @@ HTML;
 		}
 
 		foreach ($this->jsFiles as $path) {
-			echo '<script src="'.$path.'"></script>'."\n";
+			if (parse_url($path, PHP_URL_QUERY) === null) {
+				$path .= '?'.(int) filemtime($path);
+			}
+
+			echo '<script src="'.htmlspecialchars($path).'"></script>'."\n";
 		}
 
 		if ($this->js) {

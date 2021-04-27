@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -18,9 +18,11 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
+use PHPUnit\Framework\TestCase;
+
 class CDecimalStringValidatorTest extends CValidatorTest {
 
-	public function validValuesProvider() {
+	public function dataProviderValidValues() {
 		return [
 			[[], 0],
 			[[], '0'],
@@ -54,7 +56,7 @@ class CDecimalStringValidatorTest extends CValidatorTest {
 		];
 	}
 
-	public function validParamProvider() {
+	public function dataProviderValidParam() {
 		return [
 			[
 				['messageInvalid' => 'Invalid decimal string']
@@ -62,7 +64,7 @@ class CDecimalStringValidatorTest extends CValidatorTest {
 		];
 	}
 
-	public function invalidValuesProvider() {
+	public function dataProviderInvalidValues() {
 		return [
 			[
 				['messageInvalid' => 'Invalid decimal "%1$s"'],
@@ -112,7 +114,7 @@ class CDecimalStringValidatorTest extends CValidatorTest {
 		];
 	}
 
-	public function invalidValuesWithObjectsProvider() {
+	public function dataProviderInvalidValuesWithObjects() {
 		return [
 			[
 				['messageInvalid' => 'Invalid decimal value "%2$s" for "%1$s"'],

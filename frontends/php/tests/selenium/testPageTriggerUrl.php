@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -202,7 +202,7 @@ class testPageTriggerUrl extends CWebTest {
 		}
 		else {
 			// Follow trigger link in overlay dialogue.
-			$hintbox = $this->query('xpath://div[@class="overlay-dialogue"]')->one();
+			$hintbox = $this->query('xpath://div[@class="overlay-dialogue"]')->waitUntilVisible()->one();
 			$hintbox->query('link', $this->url)->one()->click();
 		}
 
