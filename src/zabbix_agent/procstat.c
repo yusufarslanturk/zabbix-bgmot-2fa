@@ -1036,7 +1036,7 @@ void	zbx_procstat_destroy(void)
  *     FAIL    - either collector does not have at least two data samples     *
  *               required to calculate the statistics, or an error occurred   *
  *               during the collection process (e.g. invalid regular          *
- *               expresion was specified). In the second case the errmsg      *
+ *               expression was specified). In the second case the errmsg     *
  *               will contain an error message.                               *
  *     This function calls exit() on shared memory errors.                    *
  *                                                                            *

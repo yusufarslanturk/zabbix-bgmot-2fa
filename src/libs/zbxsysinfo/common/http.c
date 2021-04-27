@@ -21,7 +21,6 @@
 #include "sysinfo.h"
 #include "zbxregexp.h"
 #include "zbxhttp.h"
-#include "log.h"
 
 #include "comms.h"
 #include "cfg.h"
