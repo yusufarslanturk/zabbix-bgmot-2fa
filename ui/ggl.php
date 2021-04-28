@@ -30,7 +30,8 @@ if (isset($_POST['code'])) {
 		// Verification successful
 		// Update database if this is the very fist 2FA authentication
 		CWebUser::setSessionCookie($_POST['sessionid']);
-		if (!zbx_empty(CWebUser::$data['url'])) {
+		if (CWebUser::$data['url'] &&
+		    !zbx_empty(CWebUser::$data['url'])) {
 			$url = CWebUser::$data['url'];
 		}
 		else {
@@ -39,7 +40,12 @@ if (isset($_POST['code'])) {
 		if ($db_users[0]['ggl_enrolled'] == 0) {
 			unset($db_users[0]['ggl_secret']);
 			$db_users[0]['ggl_enrolled'] = 1;
-			API::User()->update($db_users);
+			$upd_user = $db_users[0];
+			$upd_users[] = [
+				'values' => $upd_user,
+				'where' => ['userid' => $upd_user['userid']]
+			];
+			DB::update('users', $upd_users);
 		}
 		redirect($url);
 		exit;
@@ -98,7 +104,6 @@ $data = [
 	'qr_url' => $qr_url,
 	'error' => $error
 ];
-//CSessionHelper::clear();
 
 echo (new CView('general.ggl', $data))
 	->getOutput();
