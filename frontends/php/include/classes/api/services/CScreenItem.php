@@ -137,6 +137,10 @@ class CScreenItem extends CApiService {
 	 * @param array $screenItems
 	 */
 	protected function validateCreate(array $screenItems) {
+		if (!$screenItems) {
+			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+		}
+
 		$screenItemDBfields = [
 			'screenid' => null,
 			'resourcetype' => null
@@ -183,7 +187,11 @@ class CScreenItem extends CApiService {
 			}
 		}
 
-		$dbScreenItems = API::getApiService()->select($this->tableName(), [
+		if (!$dbScreens) {
+			self::exception(ZBX_API_ERROR_PERMISSIONS, _('No permissions to referred object or it does not exist!'));
+		}
+
+		$dbScreenItems = DB::select($this->tableName(), [
 			'output' => ['screenitemid', 'screenid', 'x', 'y', 'rowspan', 'colspan'],
 			'filter' => ['screenid' => array_keys($dbScreens)],
 			'preservekeys' => true
@@ -262,6 +270,10 @@ class CScreenItem extends CApiService {
 	 * @param array $screenItems
 	 */
 	protected function validateUpdate(array $screenItems) {
+		if (!$screenItems) {
+			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+		}
+
 		$screenItemDBfields = [
 			'screenitemid' => null
 		];
@@ -295,7 +307,11 @@ class CScreenItem extends CApiService {
 			$dbScreens = zbx_array_merge($dbScreens, $dbTemplateScreens);
 		}
 
-		$dbScreenItems = API::getApiService()->select($this->tableName(), [
+		if (!$dbScreens) {
+			self::exception(ZBX_API_ERROR_PERMISSIONS, _('No permissions to referred object or it does not exist!'));
+		}
+
+		$dbScreenItems = DB::select($this->tableName(), [
 			'output' => ['screenitemid', 'screenid', 'x', 'y', 'rowspan', 'colspan', 'resourcetype', 'resourceid',
 				'style'
 			],
