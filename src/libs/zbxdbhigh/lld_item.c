@@ -1343,7 +1343,7 @@ static int	lld_items_preproc_step_validate(const zbx_lld_item_preproc_t * pp, zb
 	zbx_token_t	token;
 	char		err[MAX_STRING_LEN];
 	char		pattern[ITEM_PREPROC_PARAMS_LEN * ZBX_MAX_BYTES_IN_UTF8_CHAR + 1], *output;
-	const char*	regexp_err = NULL;
+	char		*regexp_err = NULL;
 	zbx_jsonpath_t	jsonpath;
 
 	*err = '\0';
@@ -1370,7 +1370,8 @@ static int	lld_items_preproc_step_validate(const zbx_lld_item_preproc_t * pp, zb
 
 			if (FAIL == (ret = zbx_regexp_compile(pattern, NULL, &regexp_err)))
 			{
-				zbx_strlcpy(err, regexp_err, sizeof(err));
+				zbx_snprintf(err, sizeof(err), "invalid regular expression: %s", regexp_err);
+				zbx_free(regexp_err);
 			}
 			break;
 		case ZBX_PREPROC_JSONPATH:
