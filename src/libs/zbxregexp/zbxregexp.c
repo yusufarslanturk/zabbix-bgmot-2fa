@@ -908,6 +908,12 @@ int	regexp_sub_ex(const zbx_vector_ptr_t *regexps, const char *string, const cha
 		goto out;
 	}
 
+	if (NULL == string || '\0' == *string)
+	{
+		ret = ZBX_REGEXP_NO_MATCH;
+		goto out;
+	}
+
 	if ('@' != *pattern)				/* not a global regexp */
 	{
 		ret = regexp_match_ex_regsub(string, pattern, case_sensitive, output_template, output);
