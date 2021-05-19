@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
    <version>5.0</version>
-   <date>2021-03-17T12:47:57Z</date>
+   <date>2021-04-14T16:30:11Z</date>
    <groups>
       <group>
          <name>Templates/Power</name>
@@ -9,9 +9,9 @@
    </groups>
    <templates>
       <template>
-         <template>Template Power APC UPS SNMP</template>
-         <name>Template Power APC UPS SNMP</name>
-         <description>Template Power APC UPS&#13;
+         <template>Template Power APC Smart-UPS SRT 8000 SNMP</template>
+         <name>Template Power APC Smart-UPS SRT 8000 SNMP</name>
+         <description>Template Power APC Smart-UPS SRT 8000&#13;
 &#13;
 MIBs used:&#13;
 PowerNet-MIB&#13;
@@ -37,9 +37,10 @@ Template tooling version used: 0.38</description>
             <item>
                <name>Battery capacity</name>
                <type>SNMP_AGENT</type>
-               <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.2.1.0</snmp_oid>
-               <key>battery.capacity[upsAdvBatteryCapacity]</key>
+               <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.3.1.0</snmp_oid>
+               <key>battery.capacity[upsHighPrecBatteryCapacity]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <value_type>FLOAT</value_type>
                <units>%</units>
                <description>MIB: PowerNet-MIB&#13;
@@ -47,29 +48,43 @@ The remaining battery capacity expressed as&#13;
  percentage of full capacity.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
+                  <step>
+                     <type>MULTIPLIER</type>
+                     <params>0.1</params>
+                  </step>
                   <step>
                      <type>DISCARD_UNCHANGED_HEARTBEAT</type>
                      <params>6h</params>
                   </step>
                </preprocessing>
+               <triggers>
+                  <trigger>
+                     <expression>{last()} &lt; {$BATTERY.CAPACITY.MIN.WARN}</expression>
+                     <name>Battery has low capacity (below {$BATTERY.CAPACITY.MIN.WARN}%)</name>
+                     <opdata>Current capacity: {ITEM.LASTVALUE1}</opdata>
+                     <priority>HIGH</priority>
+                  </trigger>
+               </triggers>
             </item>
             <item>
                <name>External battery packs count</name>
                <type>SNMP_AGENT</type>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.2.5.0</snmp_oid>
                <key>battery.external_packs_count[upsAdvBatteryNumOfBattPacks]</key>
+               <delay>1h</delay>
                <history>7d</history>
+               <status>ENABLED</status>
                <description>MIB: PowerNet-MIB&#13;
 The number of external battery packs connected to the UPS. If&#13;
  the UPS does not use smart cells then the agent reports&#13;
  ERROR_NO_SUCH_NAME.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
@@ -84,8 +99,10 @@ The number of external battery packs connected to the UPS. If&#13;
                <type>SNMP_AGENT</type>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.1.3.0</snmp_oid>
                <key>battery.last_replace_date[upsBasicBatteryLastReplaceDate]</key>
+               <delay>1h</delay>
                <history>7d</history>
                <trends>0</trends>
+               <status>ENABLED</status>
                <value_type>CHAR</value_type>
                <description>MIB: PowerNet-MIB&#13;
 The date when the UPS system's batteries were last replaced&#13;
@@ -95,7 +112,7 @@ The date when the UPS system's batteries were last replaced&#13;
  For Symmetra PX 250/500 this OID is read-only and is configurable in the local display only.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
@@ -111,11 +128,12 @@ The date when the UPS system's batteries were last replaced&#13;
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.2.4.0</snmp_oid>
                <key>battery.replace_indicator[upsAdvBatteryReplaceIndicator]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <description>MIB: PowerNet-MIB&#13;
 Indicates whether the UPS batteries need replacement.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <valuemap>
@@ -142,6 +160,7 @@ Indicates whether the UPS batteries need replacement.</description>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.2.3.0</snmp_oid>
                <key>battery.runtime_remaining[upsAdvBatteryRunTimeRemaining]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <value_type>FLOAT</value_type>
                <units>s</units>
                <description>MIB: PowerNet-MIB&#13;
@@ -149,7 +168,7 @@ The UPS battery run time remaining before battery&#13;
  exhaustion.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
@@ -169,6 +188,7 @@ The UPS battery run time remaining before battery&#13;
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.1.1.0</snmp_oid>
                <key>battery.status[upsBasicBatteryStatus]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <description>MIB: PowerNet-MIB&#13;
 The status of the UPS batteries. A batteryLow(3) value&#13;
  indicates the UPS will be unable to sustain the current&#13;
@@ -179,7 +199,7 @@ The status of the UPS batteries. A batteryLow(3) value&#13;
  installed has an internal error condition.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <valuemap>
@@ -212,6 +232,7 @@ The status of the UPS batteries. A batteryLow(3) value&#13;
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.3.2.0</snmp_oid>
                <key>battery.temperature[upsHighPrecBatteryTemperature]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <value_type>FLOAT</value_type>
                <units>℃</units>
                <description>MIB: PowerNet-MIB&#13;
@@ -219,7 +240,7 @@ The current internal UPS temperature in Celsius.&#13;
  Temperatures below zero read as 0.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
@@ -247,13 +268,14 @@ The current internal UPS temperature in Celsius.&#13;
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.3.4.0</snmp_oid>
                <key>battery.voltage[upsHighPrecBatteryActualVoltage]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <value_type>FLOAT</value_type>
                <units>V</units>
                <description>MIB: PowerNet-MIB&#13;
 The actual battery bus voltage in Volts.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
@@ -268,91 +290,12 @@ The actual battery bus voltage in Volts.</description>
                </preprocessing>
             </item>
             <item>
-               <name>ICMP ping</name>
-               <type>SIMPLE</type>
-               <key>icmpping</key>
-               <history>1w</history>
-               <applications>
-                  <application>
-                     <name>Status</name>
-                  </application>
-               </applications>
-               <valuemap>
-                  <name>Service state</name>
-               </valuemap>
-               <triggers>
-                  <trigger>
-                     <expression>{max(#3)}=0</expression>
-                     <name>Unavailable by ICMP ping</name>
-                     <priority>HIGH</priority>
-                     <description>Last three attempts returned timeout.  Please check device connectivity.</description>
-                  </trigger>
-               </triggers>
-            </item>
-            <item>
-               <name>ICMP loss</name>
-               <type>SIMPLE</type>
-               <key>icmppingloss</key>
-               <history>1w</history>
-               <value_type>FLOAT</value_type>
-               <units>%</units>
-               <applications>
-                  <application>
-                     <name>Status</name>
-                  </application>
-               </applications>
-               <triggers>
-                  <trigger>
-                     <expression>{min(5m)}&gt;{$ICMP.LOSS.WARN} and {min(5m)}&lt;100</expression>
-                     <name>High ICMP ping loss</name>
-                     <opdata>Loss: {ITEM.LASTVALUE1}</opdata>
-                     <priority>WARNING</priority>
-                     <dependencies>
-                        <dependency>
-                           <name>Unavailable by ICMP ping</name>
-                           <expression>{Template Power APC UPS SNMP:icmpping.max(#3)}=0</expression>
-                        </dependency>
-                     </dependencies>
-                  </trigger>
-               </triggers>
-            </item>
-            <item>
-               <name>ICMP response time</name>
-               <type>SIMPLE</type>
-               <key>icmppingsec</key>
-               <history>1w</history>
-               <value_type>FLOAT</value_type>
-               <units>s</units>
-               <applications>
-                  <application>
-                     <name>Status</name>
-                  </application>
-               </applications>
-               <triggers>
-                  <trigger>
-                     <expression>{avg(5m)}&gt;{$ICMP.RESPONSE_TIME.WARN}</expression>
-                     <name>High ICMP ping response time</name>
-                     <opdata>Value: {ITEM.LASTVALUE1}</opdata>
-                     <priority>WARNING</priority>
-                     <dependencies>
-                        <dependency>
-                           <name>High ICMP ping loss</name>
-                           <expression>{Template Power APC UPS SNMP:icmppingloss.min(5m)}&gt;{$ICMP.LOSS.WARN} and {Template Power APC UPS SNMP:icmppingloss.min(5m)}&lt;100</expression>
-                        </dependency>
-                        <dependency>
-                           <name>Unavailable by ICMP ping</name>
-                           <expression>{Template Power APC UPS SNMP:icmpping.max(#3)}=0</expression>
-                        </dependency>
-                     </dependencies>
-                  </trigger>
-               </triggers>
-            </item>
-            <item>
                <name>Input fail cause</name>
                <type>SNMP_AGENT</type>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.3.2.5.0</snmp_oid>
                <key>input.fail[upsAdvInputLineFailCause]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <description>MIB: PowerNet-MIB&#13;
 The reason for the occurrence of the last transfer to UPS&#13;
 battery power.  The variable is set to:&#13;
@@ -380,7 +323,7 @@ a rate of change of input voltage greater than ten volts per cycle.&#13;
 the line voltage.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <valuemap>
@@ -399,13 +342,14 @@ the line voltage.</description>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.3.3.4.0</snmp_oid>
                <key>input.frequency[upsHighPrecInputFrequency]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <value_type>FLOAT</value_type>
                <units>Hz</units>
                <description>MIB: PowerNet-MIB&#13;
 The current input frequency to the UPS system in Hz.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
@@ -433,13 +377,14 @@ The current input frequency to the UPS system in Hz.</description>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.3.3.1.0</snmp_oid>
                <key>input.voltage[upsHighPrecInputLineVoltage]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <value_type>FLOAT</value_type>
                <units>V</units>
                <description>MIB: PowerNet-MIB&#13;
 The current utility line voltage in VAC.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
@@ -467,13 +412,14 @@ The current utility line voltage in VAC.</description>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.4.3.4.0</snmp_oid>
                <key>output.current[upsHighPrecOutputCurrent]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <value_type>FLOAT</value_type>
                <units>A</units>
                <description>MIB: PowerNet-MIB&#13;
 The current in amperes drawn by the load on the UPS.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
@@ -493,6 +439,7 @@ The current in amperes drawn by the load on the UPS.</description>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.4.3.3.0</snmp_oid>
                <key>output.load[upsHighPrecOutputLoad]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <value_type>FLOAT</value_type>
                <units>%</units>
                <description>MIB: PowerNet-MIB&#13;
@@ -500,7 +447,7 @@ The current UPS load expressed as percentage&#13;
 of rated capacity.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
@@ -529,6 +476,7 @@ of rated capacity.</description>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.4.1.1.0</snmp_oid>
                <key>output.status[upsBasicOutputStatus]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <description>MIB: PowerNet-MIB&#13;
 The current state of the UPS. If the UPS is unable to&#13;
  determine the state of the UPS this variable is set&#13;
@@ -539,11 +487,11 @@ During self-test most UPSes report onBattery(3) but&#13;
  to the upsBasicStateOutputState OID.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <valuemap>
-                  <name>PowerNet-MIB::upsBasicBatteryStatus</name>
+                  <name>PowerNet-MIB::upsBasicOutputStatus</name>
                </valuemap>
                <preprocessing>
                   <step>
@@ -615,13 +563,14 @@ During self-test most UPSes report onBattery(3) but&#13;
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.4.3.1.0</snmp_oid>
                <key>output.voltage[upsHighPrecOutputVoltage]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <value_type>FLOAT</value_type>
                <units>V</units>
                <description>MIB: PowerNet-MIB&#13;
 The output voltage of the UPS system in VAC.</description>
                <applications>
                   <application>
-                     <name>General</name>
+                     <name>Status</name>
                   </application>
                </applications>
                <preprocessing>
@@ -641,6 +590,7 @@ The output voltage of the UPS system in VAC.</description>
                <key>snmptrap.fallback</key>
                <history>2w</history>
                <trends>0</trends>
+               <status>ENABLED</status>
                <value_type>LOG</value_type>
                <description>Item is used to collect all SNMP traps unmatched by other snmptrap items</description>
                <applications>
@@ -658,6 +608,7 @@ The output voltage of the UPS system in VAC.</description>
                <delay>1h</delay>
                <history>2w</history>
                <trends>0</trends>
+               <status>ENABLED</status>
                <value_type>CHAR</value_type>
                <description>MIB: SNMPv2-MIB&#13;
 The textual identification of the contact person for this managed&#13;
@@ -684,6 +635,7 @@ information is known, the value is the zero-length string.</description>
                <delay>1h</delay>
                <history>2w</history>
                <trends>0</trends>
+               <status>ENABLED</status>
                <value_type>CHAR</value_type>
                <description>MIB: SNMPv2-MIB&#13;
 A textual description of the entity. This value should&#13;
@@ -709,6 +661,7 @@ networking software.</description>
                <delay>15m</delay>
                <history>2w</history>
                <trends>0</trends>
+               <status>ENABLED</status>
                <value_type>CHAR</value_type>
                <description>MIB: SNMPv2-MIB&#13;
 The physical location of this node (e.g., `telephone closet,&#13;
@@ -722,7 +675,7 @@ The physical location of this node (e.g., `telephone closet,&#13;
                <preprocessing>
                   <step>
                      <type>DISCARD_UNCHANGED_HEARTBEAT</type>
-                     <params>1h</params>
+                     <params>6h</params>
                   </step>
                </preprocessing>
             </item>
@@ -731,8 +684,10 @@ The physical location of this node (e.g., `telephone closet,&#13;
                <type>SNMP_AGENT</type>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.1.1.1.0</snmp_oid>
                <key>system.model[upsBasicIdentModel]</key>
+               <delay>15m</delay>
                <history>7d</history>
                <trends>0</trends>
+               <status>ENABLED</status>
                <value_type>CHAR</value_type>
                <description>MIB: PowerNet-MIB&#13;
 The UPS model name (e.g. 'APC Smart-UPS 600').</description>
@@ -752,10 +707,11 @@ The UPS model name (e.g. 'APC Smart-UPS 600').</description>
                <name>System name</name>
                <type>SNMP_AGENT</type>
                <snmp_oid>1.3.6.1.2.1.1.5.0</snmp_oid>
-               <key>system.name</key>
+               <key>system.name[sysName.0]</key>
                <delay>15m</delay>
                <history>2w</history>
                <trends>0</trends>
+               <status>ENABLED</status>
                <value_type>CHAR</value_type>
                <description>MIB: SNMPv2-MIB&#13;
 An administratively-assigned name for this managed node.By&#13;
@@ -770,7 +726,7 @@ the value is the zero-length string.</description>
                <preprocessing>
                   <step>
                      <type>DISCARD_UNCHANGED_HEARTBEAT</type>
-                     <params>1h</params>
+                     <params>6h</params>
                   </step>
                </preprocessing>
                <triggers>
@@ -791,6 +747,7 @@ the value is the zero-length string.</description>
                <delay>15m</delay>
                <history>2w</history>
                <trends>0</trends>
+               <status>ENABLED</status>
                <value_type>CHAR</value_type>
                <description>MIB: SNMPv2-MIB&#13;
 The vendor's authoritative identification of the network management&#13;
@@ -807,7 +764,7 @@ to its `Fred Router'.</description>
                <preprocessing>
                   <step>
                      <type>DISCARD_UNCHANGED_HEARTBEAT</type>
-                     <params>1h</params>
+                     <params>6h</params>
                   </step>
                </preprocessing>
             </item>
@@ -816,8 +773,10 @@ to its `Fred Router'.</description>
                <type>SNMP_AGENT</type>
                <snmp_oid>1.3.6.1.4.1.318.1.1.1.1.2.3.0</snmp_oid>
                <key>system.sn[upsAdvIdentSerialNumber]</key>
+               <delay>15m</delay>
                <history>7d</history>
                <trends>0</trends>
+               <status>ENABLED</status>
                <value_type>CHAR</value_type>
                <description>MIB: PowerNet-MIB&#13;
 An 8-character string identifying the serial number of&#13;
@@ -844,6 +803,7 @@ An 8-character string identifying the serial number of&#13;
                <delay>30s</delay>
                <history>2w</history>
                <trends>0d</trends>
+               <status>ENABLED</status>
                <units>uptime</units>
                <description>MIB: SNMPv2-MIB&#13;
 The time (in hundredths of a second) since the network management&#13;
@@ -869,7 +829,7 @@ portion of the system was last re-initialized.</description>
                      <dependencies>
                         <dependency>
                            <name>No SNMP data collection</name>
-                           <expression>{Template Power APC UPS SNMP:zabbix[host,snmp,available].max({$SNMP.TIMEOUT})}=0</expression>
+                           <expression>{Template Power APC Smart-UPS SRT 8000 SNMP:zabbix[host,snmp,available].max({$SNMP.TIMEOUT})}=0</expression>
                         </dependency>
                      </dependencies>
                   </trigger>
@@ -880,6 +840,7 @@ portion of the system was last re-initialized.</description>
                <type>INTERNAL</type>
                <key>zabbix[host,snmp,available]</key>
                <history>7d</history>
+               <status>ENABLED</status>
                <applications>
                   <application>
                      <name>Status</name>
@@ -888,6 +849,12 @@ portion of the system was last re-initialized.</description>
                <valuemap>
                   <name>zabbix.host.available</name>
                </valuemap>
+               <preprocessing>
+                  <step>
+                     <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                     <params>6h</params>
+                  </step>
+               </preprocessing>
                <triggers>
                   <trigger>
                      <expression>{max({$SNMP.TIMEOUT})}=0</expression>
@@ -895,12 +862,6 @@ portion of the system was last re-initialized.</description>
                      <opdata>Current state: {ITEM.LASTVALUE1}</opdata>
                      <priority>WARNING</priority>
                      <description>SNMP is not available for polling. Please check device connectivity and SNMP settings.</description>
-                     <dependencies>
-                        <dependency>
-                           <name>Unavailable by ICMP ping</name>
-                           <expression>{Template Power APC UPS SNMP:icmpping.max(#3)}=0</expression>
-                        </dependency>
-                     </dependencies>
                   </trigger>
                </triggers>
             </item>
@@ -919,14 +880,16 @@ portion of the system was last re-initialized.</description>
                      <type>SNMP_AGENT</type>
                      <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.2.6.0</snmp_oid>
                      <key>battery.external_packs_bad[upsAdvBatteryNumOfBadBattPacks.{#SNMPINDEX}]</key>
+                     <delay>15m</delay>
                      <history>7d</history>
+                     <status>ENABLED</status>
                      <description>MIB: PowerNet-MIB&#13;
 The number of external battery packs connected to the UPS that&#13;
 are defective. If the UPS does not use smart cells then the&#13;
 agent reports ERROR_NO_SUCH_NAME.</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -962,14 +925,16 @@ agent reports ERROR_NO_SUCH_NAME.</description>
                      <type>SNMP_AGENT</type>
                      <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.3.10.2.1.8.{#SNMPINDEX}</snmp_oid>
                      <key>battery.estimated_replace_date[upsHighPrecBatteryPackCartridgeReplaceDate.{#BATTERY_PACK}.{#CARTRIDGE_INDEX}]</key>
+                     <delay>1h</delay>
                      <history>7d</history>
                      <trends>0</trends>
+                     <status>ENABLED</status>
                      <value_type>CHAR</value_type>
                      <description>MIB: PowerNet-MIB&#13;
 The battery cartridge estimated battery replace date.</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -986,6 +951,7 @@ The battery cartridge estimated battery replace date.</description>
                      <key>battery.pack.cartridge_health[upsHighPrecBatteryPackCartridgeHealth.{#BATTERY_PACK}.{#CARTRIDGE_INDEX}]</key>
                      <history>7d</history>
                      <trends>0</trends>
+                     <status>ENABLED</status>
                      <value_type>CHAR</value_type>
                      <description>MIB: PowerNet-MIB&#13;
 The battery cartridge health.&#13;
@@ -998,7 +964,7 @@ The battery cartridge health.&#13;
   bit 6 Battery measured lifetime near end acknowledged, order replacement cartridge</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -1031,6 +997,7 @@ The battery cartridge health.&#13;
                      <key>battery.pack.status[upsHighPrecBatteryPackCartridgeStatus.{#BATTERY_PACK}.{#CARTRIDGE_INDEX}]</key>
                      <history>7d</history>
                      <trends>0</trends>
+                     <status>ENABLED</status>
                      <value_type>CHAR</value_type>
                      <description>MIB: PowerNet-MIB&#13;
 The battery cartridge status.&#13;
@@ -1048,7 +1015,7 @@ bit 10 DisconnectedFrame&#13;
 bit 11 FirmwareMismatch</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -1059,7 +1026,7 @@ bit 11 FirmwareMismatch</description>
                      </preprocessing>
                      <trigger_prototypes>
                         <trigger_prototype>
-                           <expression>{regexp("^(0{16})$")}=1</expression>
+                           <expression>{regexp("^(0{16})$")}=0</expression>
                            <name>{#BATTERY_PACK}.{#CARTRIDGE_INDEX}: Battery status is not okay</name>
                            <opdata>Current bit set: {ITEM.LASTVALUE1}</opdata>
                            <priority>WARNING</priority>
@@ -1085,13 +1052,14 @@ bit 11 FirmwareMismatch</description>
                      <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.3.10.2.1.5.{#SNMPINDEX}</snmp_oid>
                      <key>battery.temperature[upsHighPrecBatteryPackTemperature.{#BATTERY_PACK}.{#CARTRIDGE_INDEX}]</key>
                      <history>7d</history>
+                     <status>ENABLED</status>
                      <value_type>FLOAT</value_type>
                      <units>℃</units>
                      <description>MIB: PowerNet-MIB&#13;
 The battery pack temperature in Celsius.</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -1118,8 +1086,10 @@ The battery pack temperature in Celsius.</description>
                      <type>SNMP_AGENT</type>
                      <snmp_oid>1.3.6.1.4.1.318.1.1.1.2.3.10.2.1.4.{#SNMPINDEX}</snmp_oid>
                      <key>system.sn[upsHighPrecBatteryPackSerialNumber.{#BATTERY_PACK}.{#CARTRIDGE_INDEX}]</key>
+                     <delay>15m</delay>
                      <history>7d</history>
                      <trends>0</trends>
+                     <status>ENABLED</status>
                      <value_type>CHAR</value_type>
                      <description>MIB: PowerNet-MIB&#13;
 The battery pack serial number.</description>
@@ -1152,6 +1122,7 @@ The battery pack serial number.</description>
                      <snmp_oid>1.3.6.1.4.1.318.1.1.25.1.2.1.7.1.1</snmp_oid>
                      <key>external.sensor.humidity[uioSensorStatusHumidity.1.{#SNMPINDEX}]</key>
                      <history>7d</history>
+                     <status>ENABLED</status>
                      <value_type>FLOAT</value_type>
                      <units>%</units>
                      <description>MIB: PowerNet-MIB&#13;
@@ -1160,7 +1131,7 @@ The sensor's current humidity reading - a relative humidity&#13;
  sensor that doesn't read humidity or lost communications.</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -1176,6 +1147,7 @@ The sensor's current humidity reading - a relative humidity&#13;
                      <snmp_oid>1.3.6.1.4.1.318.1.1.25.1.2.1.9.1.1</snmp_oid>
                      <key>external.sensor.status[uioSensorStatusAlarmStatus.1.{#SNMPINDEX}]</key>
                      <history>7d</history>
+                     <status>ENABLED</status>
                      <description>MIB: PowerNet-MIB&#13;
 The alarm status of the sensor. Possible values:&#13;
 uioNormal                 (1),&#13;
@@ -1184,7 +1156,7 @@ uioCritical               (3),&#13;
 sensorStatusNotApplicable (4)</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <valuemap>
@@ -1223,6 +1195,7 @@ sensorStatusNotApplicable (4)</description>
                      <snmp_oid>1.3.6.1.4.1.318.1.1.25.1.2.1.6.1.1</snmp_oid>
                      <key>external.sensor.temperature[uioSensorStatusTemperatureDegC.1.{#SNMPINDEX}]</key>
                      <history>7d</history>
+                     <status>ENABLED</status>
                      <value_type>FLOAT</value_type>
                      <units>℃</units>
                      <description>MIB: PowerNet-MIB&#13;
@@ -1230,7 +1203,7 @@ The sensor's current temperature reading in Celsius.&#13;
  -1 indicates an invalid reading due to lost communications.</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -1282,6 +1255,7 @@ The sensor's current temperature reading in Celsius.&#13;
                      <snmp_oid>1.3.6.1.4.1.318.1.1.25.1.2.2.7.1.1</snmp_oid>
                      <key>external.sensor.humidity[uioSensorStatusHumidity.2.{#SNMPINDEX}]</key>
                      <history>7d</history>
+                     <status>ENABLED</status>
                      <value_type>FLOAT</value_type>
                      <units>%</units>
                      <description>MIB: PowerNet-MIB&#13;
@@ -1290,7 +1264,7 @@ The sensor's current humidity reading - a relative humidity&#13;
  sensor that doesn't read humidity or lost communications.</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -1306,6 +1280,7 @@ The sensor's current humidity reading - a relative humidity&#13;
                      <snmp_oid>1.3.6.1.4.1.318.1.1.25.1.2.2.9.1.1</snmp_oid>
                      <key>external.sensor.status[uioSensorStatusAlarmStatus.2.{#SNMPINDEX}]</key>
                      <history>7d</history>
+                     <status>ENABLED</status>
                      <description>MIB: PowerNet-MIB&#13;
 The alarm status of the sensor. Possible values:&#13;
 uioNormal                 (1),&#13;
@@ -1314,7 +1289,7 @@ uioCritical               (3),&#13;
 sensorStatusNotApplicable (4)</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <valuemap>
@@ -1353,6 +1328,7 @@ sensorStatusNotApplicable (4)</description>
                      <snmp_oid>1.3.6.1.4.1.318.1.1.25.1.2.2.6.1.1</snmp_oid>
                      <key>external.sensor.temperature[uioSensorStatusTemperatureDegC.2.{#SNMPINDEX}]</key>
                      <history>7d</history>
+                     <status>ENABLED</status>
                      <value_type>FLOAT</value_type>
                      <units>℃</units>
                      <description>MIB: PowerNet-MIB&#13;
@@ -1360,7 +1336,7 @@ The sensor's current temperature reading in Celsius.&#13;
  -1 indicates an invalid reading due to lost communications.</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -1412,6 +1388,7 @@ The sensor's current temperature reading in Celsius.&#13;
                      <snmp_oid>1.3.6.1.4.1.318.1.1.1.9.2.3.1.6.1.1.{#PHASEINDEX}</snmp_oid>
                      <key>phase.input.current[upsPhaseInputCurrent.1.1.{#PHASEINDEX}]</key>
                      <history>7d</history>
+                     <status>ENABLED</status>
                      <value_type>FLOAT</value_type>
                      <units>A</units>
                      <description>MIB: PowerNet-MIB&#13;
@@ -1419,7 +1396,7 @@ The input current in 0.1 amperes, or -0.1 if it's&#13;
  unsupported by this UPS.</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -1439,6 +1416,7 @@ The input current in 0.1 amperes, or -0.1 if it's&#13;
                      <snmp_oid>1.3.6.1.4.1.318.1.1.1.9.2.3.1.3.1.1.{#PHASEINDEX}</snmp_oid>
                      <key>phase.input.voltage[upsPhaseInputVoltage.1.1.{#PHASEINDEX}]</key>
                      <history>7d</history>
+                     <status>ENABLED</status>
                      <value_type>FLOAT</value_type>
                      <units>V</units>
                      <description>MIB: PowerNet-MIB&#13;
@@ -1446,7 +1424,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
  by this UPS.</description>
                      <applications>
                         <application>
-                           <name>General</name>
+                           <name>Status</name>
                         </application>
                      </applications>
                      <preprocessing>
@@ -1467,20 +1445,114 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                </item_prototypes>
                <host_prototypes/>
             </discovery_rule>
+            <discovery_rule>
+               <name>Output phases discovery</name>
+               <type>SNMP_AGENT</type>
+               <snmp_oid>discovery[{#PHASEINDEX},1.3.6.1.4.1.318.1.1.1.9.3.3.1.2.1.1]</snmp_oid>
+               <key>output.phases.discovery</key>
+               <delay>1h</delay>
+               <description>The output phase identifier. OID upsPhaseOutputPhaseIndex.1.1</description>
+               <item_prototypes>
+                  <item_prototype>
+                     <name>{#PHASEINDEX}: Phase output current</name>
+                     <type>SNMP_AGENT</type>
+                     <snmp_oid>1.3.6.1.4.1.318.1.1.1.9.3.3.1.4.1.1.{#PHASEINDEX}</snmp_oid>
+                     <key>phase.output.current[upsPhaseOutputCurrent.1.1.{#PHASEINDEX}]</key>
+                     <history>7d</history>
+                     <status>ENABLED</status>
+                     <value_type>FLOAT</value_type>
+                     <units>A</units>
+                     <description>MIB: PowerNet-MIB&#13;
+The output current in 0.1 amperes drawn&#13;
+ by the load on the UPS, or -1 if it's unsupported&#13;
+ by this UPS.</description>
+                     <applications>
+                        <application>
+                           <name>Status</name>
+                        </application>
+                     </applications>
+                     <preprocessing>
+                        <step>
+                           <type>MULTIPLIER</type>
+                           <params>0.1</params>
+                        </step>
+                        <step>
+                           <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                           <params>6h</params>
+                        </step>
+                     </preprocessing>
+                  </item_prototype>
+                  <item_prototype>
+                     <name>{#PHASEINDEX}: Phase output load, %</name>
+                     <type>SNMP_AGENT</type>
+                     <snmp_oid>1.3.6.1.4.1.318.1.1.1.9.3.3.1.10.1.1.{#PHASEINDEX}</snmp_oid>
+                     <key>phase.output.load.percent[upsPhaseOutputPercentLoad.1.1.{#PHASEINDEX}]</key>
+                     <history>7d</history>
+                     <status>ENABLED</status>
+                     <value_type>FLOAT</value_type>
+                     <units>%</units>
+                     <description>MIB: PowerNet-MIB&#13;
+The percentage of the UPS load capacity in VA at&#13;
+ redundancy @ (n + x) presently being used on this&#13;
+ output phase, or -1 if it's unsupported by this UPS.</description>
+                     <applications>
+                        <application>
+                           <name>Status</name>
+                        </application>
+                     </applications>
+                     <preprocessing>
+                        <step>
+                           <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                           <params>6h</params>
+                        </step>
+                     </preprocessing>
+                  </item_prototype>
+                  <item_prototype>
+                     <name>{#PHASEINDEX}: Phase output voltage</name>
+                     <type>SNMP_AGENT</type>
+                     <snmp_oid>1.3.6.1.4.1.318.1.1.1.9.3.3.1.3.1.1.{#PHASEINDEX}</snmp_oid>
+                     <key>phase.output.voltage[upsPhaseOutputVoltage.1.1.{#PHASEINDEX}]</key>
+                     <history>7d</history>
+                     <status>ENABLED</status>
+                     <value_type>FLOAT</value_type>
+                     <units>V</units>
+                     <description>MIB: PowerNet-MIB&#13;
+The output voltage in VAC, or -1 if it's unsupported&#13;
+ by this UPS.</description>
+                     <applications>
+                        <application>
+                           <name>Status</name>
+                        </application>
+                     </applications>
+                     <preprocessing>
+                        <step>
+                           <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                           <params>6h</params>
+                        </step>
+                     </preprocessing>
+                     <trigger_prototypes>
+                        <trigger_prototype>
+                           <expression>{min({$TIME.PERIOD})} &gt; {$UPS.INPUT_VOLT.MAX.WARN} or {max({$TIME.PERIOD})} &lt; {$UPS.INPUT_VOLT.MIN.WARN}</expression>
+                           <name>{#PHASEINDEX}: Unacceptable phase {#PHASEINDEX} output voltage (out of range {$UPS.INPUT_VOLT.MIN.WARN}-{$UPS.INPUT_VOLT.MAX.WARN}V for {$TIME.PERIOD})</name>
+                           <opdata>Current phase {#PHASEINDEX} voltage: {ITEM.LASTVALUE1}</opdata>
+                           <priority>HIGH</priority>
+                        </trigger_prototype>
+                     </trigger_prototypes>
+                  </item_prototype>
+               </item_prototypes>
+               <host_prototypes/>
+            </discovery_rule>
          </discovery_rules>
          <macros>
+            <macro>
+               <macro>{$BATTERY.CAPACITY.MIN.WARN}</macro>
+               <value>50</value>
+               <description>Minimum battery capacity percentage for trigger expression.</description>
+            </macro>
             <macro>
                <macro>{$BATTERY.TEMP.MAX.WARN}</macro>
                <value>55</value>
                <description>Maximum battery temperature for trigger expression.</description>
-            </macro>
-            <macro>
-               <macro>{$ICMP.LOSS.WARN}</macro>
-               <value>20</value>
-            </macro>
-            <macro>
-               <macro>{$ICMP.RESPONSE_TIME.WARN}</macro>
-               <value>0.15</value>
             </macro>
             <macro>
                <macro>{$SNMP.TIMEOUT}</macro>
@@ -1529,7 +1601,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                      <style>0</style>
                      <resource>
                         <key>system.uptime[sysUpTime.0]</key>
-                        <host>Template Power APC UPS SNMP</host>
+                        <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                      </resource>
                      <width>500</width>
                      <height>100</height>
@@ -1551,7 +1623,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                      <style>0</style>
                      <resource>
                         <key>input.fail[upsAdvInputLineFailCause]</key>
-                        <host>Template Power APC UPS SNMP</host>
+                        <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                      </resource>
                      <width>500</width>
                      <height>100</height>
@@ -1573,7 +1645,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                      <style>0</style>
                      <resource>
                         <key>output.status[upsBasicOutputStatus]</key>
-                        <host>Template Power APC UPS SNMP</host>
+                        <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                      </resource>
                      <width>500</width>
                      <height>100</height>
@@ -1595,7 +1667,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                      <style>0</style>
                      <resource>
                         <key>battery.status[upsBasicBatteryStatus]</key>
-                        <host>Template Power APC UPS SNMP</host>
+                        <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                      </resource>
                      <width>500</width>
                      <height>100</height>
@@ -1617,7 +1689,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                      <style>0</style>
                      <resource>
                         <key>battery.runtime_remaining[upsAdvBatteryRunTimeRemaining]</key>
-                        <host>Template Power APC UPS SNMP</host>
+                        <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                      </resource>
                      <width>500</width>
                      <height>100</height>
@@ -1639,7 +1711,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                      <style>0</style>
                      <resource>
                         <key>battery.last_replace_date[upsBasicBatteryLastReplaceDate]</key>
-                        <host>Template Power APC UPS SNMP</host>
+                        <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                      </resource>
                      <width>500</width>
                      <height>100</height>
@@ -1661,7 +1733,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                      <style>0</style>
                      <resource>
                         <name>Capacity of the UPS batteries</name>
-                        <host>Template Power APC UPS SNMP</host>
+                        <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                      </resource>
                      <width>300</width>
                      <height>300</height>
@@ -1683,7 +1755,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                      <style>0</style>
                      <resource>
                         <name>Voltage</name>
-                        <host>Template Power APC UPS SNMP</host>
+                        <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                      </resource>
                      <width>400</width>
                      <height>100</height>
@@ -1705,7 +1777,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                      <style>0</style>
                      <resource>
                         <name>Output</name>
-                        <host>Template Power APC UPS SNMP</host>
+                        <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                      </resource>
                      <width>400</width>
                      <height>100</height>
@@ -1735,8 +1807,8 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
             <graph_item>
                <color>1A7C11</color>
                <item>
-                  <host>Template Power APC UPS SNMP</host>
-                  <key>battery.capacity[upsAdvBatteryCapacity]</key>
+                  <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
+                  <key>battery.capacity[upsHighPrecBatteryCapacity]</key>
                </item>
             </graph_item>
          </graph_items>
@@ -1747,7 +1819,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
             <graph_item>
                <color>1A7C11</color>
                <item>
-                  <host>Template Power APC UPS SNMP</host>
+                  <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                   <key>output.current[upsHighPrecOutputCurrent]</key>
                </item>
             </graph_item>
@@ -1755,7 +1827,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                <sortorder>1</sortorder>
                <color>2774A4</color>
                <item>
-                  <host>Template Power APC UPS SNMP</host>
+                  <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                   <key>output.load[upsHighPrecOutputLoad]</key>
                </item>
             </graph_item>
@@ -1767,7 +1839,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
             <graph_item>
                <color>1A7C11</color>
                <item>
-                  <host>Template Power APC UPS SNMP</host>
+                  <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                   <key>input.voltage[upsHighPrecInputLineVoltage]</key>
                </item>
             </graph_item>
@@ -1775,7 +1847,7 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
                <sortorder>1</sortorder>
                <color>2774A4</color>
                <item>
-                  <host>Template Power APC UPS SNMP</host>
+                  <host>Template Power APC Smart-UPS SRT 8000 SNMP</host>
                   <key>output.voltage[upsHighPrecOutputVoltage]</key>
                </item>
             </graph_item>
@@ -2006,19 +2078,6 @@ The input voltage in VAC, or -1 if it's unsupported&#13;
             <mapping>
                <value>2</value>
                <newvalue>unknown</newvalue>
-            </mapping>
-         </mappings>
-      </value_map>
-      <value_map>
-         <name>Service state</name>
-         <mappings>
-            <mapping>
-               <value>0</value>
-               <newvalue>Down</newvalue>
-            </mapping>
-            <mapping>
-               <value>1</value>
-               <newvalue>Up</newvalue>
             </mapping>
          </mappings>
       </value_map>
