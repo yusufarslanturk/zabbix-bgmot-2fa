@@ -82,9 +82,9 @@ svg a {
 	}
 }
 
-image,
 svg {
-	&:focus {
+	&:focus,
+	*:focus {
 		outline: none;
 	}
 }

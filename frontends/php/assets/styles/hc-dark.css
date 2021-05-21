@@ -84,8 +84,8 @@ svg a {
     fill: #f8f8f8;
     text-decoration: underline; }
 
-image:focus,
-svg:focus {
+svg:focus,
+svg *:focus {
   outline: none; }
 
 .link-action {

@@ -79,8 +79,8 @@ svg a {
     fill: #4796c4;
     text-decoration: underline; }
 
-image:focus,
-svg:focus {
+svg:focus,
+svg *:focus {
   outline: none; }
 
 .link-action {
