@@ -591,7 +591,7 @@ static void	dc_trends_fetch_and_update(ZBX_DC_TREND *trends, int trends_num, zbx
 
 	DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, "itemid", itemids, itemids_num);
 
-	result = DBselect("%s order by itemid", sql);
+	result = DBselect("%s order by itemid,clock", sql);
 
 	sql_offset = 0;
 	DBbegin_multiple_update(&sql, &sql_alloc, &sql_offset);
@@ -912,11 +912,7 @@ static int	zbx_trend_compare(const void *d1, const void *d2)
 	const ZBX_DC_TREND	*p1 = (const ZBX_DC_TREND *)d1;
 	const ZBX_DC_TREND	*p2 = (const ZBX_DC_TREND *)d2;
 
-	if (p1->itemid < p2->itemid)
-		return -1;
-
-	if (p1->itemid > p2->itemid)
-		return +1;
+	ZBX_RETURN_IF_NOT_EQUAL(p1->itemid, p2->itemid);
 
 	return (p1->clock > p2->clock) - (p2->clock > p1->clock);
 }
