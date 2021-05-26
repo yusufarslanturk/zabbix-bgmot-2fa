@@ -32,12 +32,11 @@ int	PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 	struct passwd	*usrinfo;
 	struct prpsinfo	psinfo;
 	char		filename[MAX_STRING_LEN];
-	char		*procname, *proccomm, *param, *err_msg = NULL;
+	char		*procname, *proccomm, *param;
 	double		memsize = -1;
 	int		pgsize = getpagesize();
 	int		proccount = 0, invalid_user = 0, do_task;
 	pid_t		curr_pid = getpid();
-	zbx_regexp_t	*regx = NULL;
 
 	if (4 < request->nparam)
 	{
@@ -83,15 +82,6 @@ int	PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		return SYSINFO_RET_FAIL;
 	}
 
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
-	{
-		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
-				err_msg));
-		zbx_free(err_msg);
-		closedir(dir);
-		return SYSINFO_RET_FAIL;
-	}
-
 	while (NULL != (entries = readdir(dir)))
 	{
 		strscpy(filename, "/proc/");
@@ -101,44 +91,26 @@ int	PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		{
 			proc = open(filename, O_RDONLY);
 			if (-1 == proc)
-				goto skip_process;
+				goto lbl_skip_procces;
 
 			if (-1 == ioctl(proc, PIOCPSINFO, &psinfo))
-				goto skip_process;
+				goto lbl_skip_procces;
 
 			/* Self process information. It leads to incorrect results for proc.mem[zabbix_agentd]. */
 			if (psinfo.pr_pid == curr_pid)
-				goto skip_process;
+				goto lbl_skip_procces;
 
 			if (NULL != procname && '\0' != *procname)
 				if (0 == strcmp(procname, psinfo.pr_fname))
-					goto skip_process;
+					goto lbl_skip_procces;
 
 			if (NULL != usrinfo)
 				if (usrinfo->pw_uid != psinfo.pr_uid)
-					goto skip_process;
+					goto lbl_skip_procces;
 
-			if (NULL != regx)
-			{
-				int	rc;
-
-				if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match_precompiled(psinfo.pr_psargs, regx,
-						&err_msg)))
-				{
-					goto skip_process;
-				}
-
-				if (ZBX_REGEXP_RUNTIME_FAIL == rc)
-				{
-					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "error occurred while matching"
-							" regular expression in the fourth parameter: %s", err_msg));
-					zbx_free(err_msg);
-					close(proc);
-					zbx_regexp_free(regx);
-					closedir(dir);
-					return SYSINFO_RET_FAIL;
-				}
-			}
+			if (NULL != proccomm && '\0' != *proccomm)
+				if (NULL == zbx_regexp_match(psinfo.pr_psargs, proccomm, NULL))
+					goto lbl_skip_procces;
 
 			proccount++;
 
@@ -155,14 +127,11 @@ int	PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 				else	/* SUM */
 					memsize += (double)(psinfo.pr_rssize * pgsize);
 			}
-skip_process:
+lbl_skip_procces:
 			if (-1 != proc)
 				close(proc);
 		}
 	}
-
-	if (NULL != regx)
-		zbx_regexp_free(regx);
 
 	closedir(dir);
 
@@ -189,10 +158,9 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 	struct passwd	*usrinfo;
 	struct prpsinfo	psinfo;
 	char		filename[MAX_STRING_LEN];
-	char		*procname, *proccomm, *param, *err_msg = NULL;
+	char		*procname, *proccomm, *param;
 	int		proccount = 0, invalid_user = 0, zbx_proc_stat;
 	pid_t		curr_pid = getpid();
-	zbx_regexp_t	*regx = NULL;
 
 	if (4 < request->nparam)
 	{
@@ -238,15 +206,6 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		return SYSINFO_RET_FAIL;
 	}
 
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
-	{
-		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
-				err_msg));
-		zbx_free(err_msg);
-		closedir(dir);
-		return SYSINFO_RET_FAIL;
-	}
-
 	while (NULL != (entries = readdir(dir)))
 	{
 		strscpy(filename, "/proc/");
@@ -256,58 +215,37 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		{
 			proc = open(filename, O_RDONLY);
 			if (-1 == proc)
-				goto skip_process;
+				goto lbl_skip_procces;
 
 			if (-1 == ioctl(proc, PIOCPSINFO, &psinfo))
-				goto skip_process;
+				goto lbl_skip_procces;
 
 			/* Self process information. It leads to incorrect results for proc.num[zabbix_agentd]. */
 			if (psinfo.pr_pid == curr_pid)
-				goto skip_process;
+				goto lbl_skip_procces;
 
 			if (NULL != procname && '\0' != *procname)
 				if (0 != strcmp(procname, psinfo.pr_fname))
-					goto skip_process;
+					goto lbl_skip_procces;
 
 			if (NULL != usrinfo)
 				if (usrinfo->pw_uid != psinfo.pr_uid)
-					goto skip_process;
+					goto lbl_skip_procces;
 
 			if (-1 != zbx_proc_stat)
 				if (psinfo.pr_sname != zbx_proc_stat)
-					goto skip_process;
+					goto lbl_skip_procces;
 
-			if (NULL != regx)
-			{
-				int	rc;
-
-				if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match_precompiled(psinfo.pr_psargs, regx,
-						&err_msg)))
-				{
-					goto skip_process;
-				}
-
-				if (ZBX_REGEXP_RUNTIME_FAIL == rc)
-				{
-					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "error occurred while matching"
-							" regular expression in the fourth parameter: %s", err_msg));
-					zbx_free(err_msg);
-					close(proc);
-					zbx_regexp_free(regx);
-					closedir(dir);
-					return SYSINFO_RET_FAIL;
-				}
-			}
+			if (NULL != proccomm && '\0' != *proccomm)
+				if (NULL == zbx_regexp_match(psinfo.pr_psargs, proccomm, NULL))
+					goto lbl_skip_procces;
 
 			proccount++;
-skip_process:
+lbl_skip_procces:
 			if (-1 != proc)
 				close(proc);
 		}
 	}
-
-	if (NULL != regx)
-		zbx_regexp_free(regx);
 
 	closedir(dir);
 out:

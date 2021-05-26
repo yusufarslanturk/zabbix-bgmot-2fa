@@ -270,8 +270,7 @@ out:
 }
 #endif
 
-static int	get_device_sensors(int do_task, const char *device, const char *name, double *aggr, int *cnt,
-		char **err_msg)
+static void	get_device_sensors(int do_task, const char *device, const char *name, double *aggr, int *cnt)
 {
 	char	sensorname[MAX_STRING_LEN];
 
@@ -285,36 +284,18 @@ static int	get_device_sensors(int do_task, const char *device, const char *name,
 	{
 		DIR		*devicedir = NULL, *sensordir = NULL;
 		struct dirent	*deviceent, *sensorent;
-		char		*err_msg_local = NULL;
 		char		devicename[MAX_STRING_LEN];
 
 		if (NULL == (devicedir = opendir(DEVICE_DIR)))
-		{
-			*err_msg = zbx_dsprintf(*err_msg, "Cannot open directory \"%s\"", DEVICE_DIR);
-			return FAIL;
-		}
+			return;
 
 		while (NULL != (deviceent = readdir(devicedir)))
 		{
-			int	rc;
-
 			if (0 == strcmp(deviceent->d_name, ".") || 0 == strcmp(deviceent->d_name, ".."))
 				continue;
 
-			if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match2(deviceent->d_name, device, NULL, NULL,
-					&err_msg_local)))
-			{
+			if (NULL == zbx_regexp_match(deviceent->d_name, device, NULL))
 				continue;
-			}
-			else if (ZBX_REGEXP_COMPILE_FAIL == rc || ZBX_REGEXP_RUNTIME_FAIL == rc)
-			{
-				*err_msg = zbx_dsprintf(*err_msg, "%s regular expression \"%s\": %s",
-						(ZBX_REGEXP_COMPILE_FAIL == rc) ?
-						"Invalid" : "Error occurred while matching", device, err_msg_local);
-				zbx_free(err_msg_local);
-				closedir(devicedir);
-				return FAIL;
-			}
 
 			zbx_snprintf(devicename, sizeof(devicename), "%s/%s", DEVICE_DIR, deviceent->d_name);
 
@@ -326,21 +307,8 @@ static int	get_device_sensors(int do_task, const char *device, const char *name,
 				if (0 == strcmp(sensorent->d_name, ".") || 0 == strcmp(sensorent->d_name, ".."))
 					continue;
 
-				if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match2(sensorent->d_name, name, NULL, NULL,
-						&err_msg_local)))
-				{
+				if (NULL == zbx_regexp_match(sensorent->d_name, name, NULL))
 					continue;
-				}
-				else if (ZBX_REGEXP_COMPILE_FAIL == rc || ZBX_REGEXP_RUNTIME_FAIL == rc)
-				{
-					*err_msg = zbx_dsprintf(*err_msg, "%s regular expression \"%s\": %s",
-							(ZBX_REGEXP_COMPILE_FAIL == rc) ? "Invalid" :
-							"Error occurred while matching", name, err_msg_local);
-					zbx_free(err_msg_local);
-					closedir(sensordir);
-					closedir(devicedir);
-					return FAIL;
-				}
 
 				zbx_snprintf(sensorname, sizeof(sensorname), "%s/%s", devicename, sensorent->d_name);
 				count_sensor(do_task, sensorname, aggr, cnt);
@@ -349,8 +317,6 @@ static int	get_device_sensors(int do_task, const char *device, const char *name,
 		}
 		closedir(devicedir);
 	}
-
-	return SUCCEED;
 #else
 	DIR		*sensordir = NULL, *devicedir = NULL;
 	struct dirent	*sensorent, *deviceent;
@@ -362,10 +328,7 @@ static int	get_device_sensors(int do_task, const char *device, const char *name,
 	zbx_snprintf(hwmon_dir, sizeof(hwmon_dir), "%s", DEVICE_DIR);
 
 	if (NULL == (devicedir = opendir(hwmon_dir)))
-	{
-		*err_msg = zbx_dsprintf(*err_msg, "Cannot open directory \"%s\"", hwmon_dir);
-		return FAIL;
-	}
+		return;
 
 	while (NULL != (deviceent = readdir(devicedir)))
 	{
@@ -409,43 +372,19 @@ static int	get_device_sensors(int do_task, const char *device, const char *name,
 			}
 			else
 			{
-				char	*err_msg_local = NULL;
-
 				zbx_snprintf(regex, sizeof(regex), "%s[0-9]*_input", name);
 
 				if (NULL == (sensordir = opendir(devicepath)))
-				{
-					*err_msg = zbx_dsprintf(*err_msg, "Cannot open directory \"%s\"", devicepath);
-					closedir(devicedir);
-					return FAIL;
-				}
+					goto out;
 
 				while (NULL != (sensorent = readdir(sensordir)))
 				{
-					int	rc;
-
 					if (0 == strcmp(sensorent->d_name, ".") ||
 							0 == strcmp(sensorent->d_name, ".."))
-					{
 						continue;
-					}
 
-					if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match2(sensorent->d_name, regex,
-							NULL, NULL, &err_msg_local)))
-					{
-							continue;
-					}
-					else if (ZBX_REGEXP_COMPILE_FAIL == rc || ZBX_REGEXP_RUNTIME_FAIL == rc)
-					{
-						*err_msg = zbx_dsprintf(*err_msg, "%s regular expression \"%s\": %s",
-								(ZBX_REGEXP_COMPILE_FAIL == rc) ?
-								"Invalid" : "Error occurred while matching",
-								regex, err_msg_local);
-						zbx_free(err_msg_local);
-						closedir(sensordir);
-						closedir(devicedir);
-						return FAIL;
-					}
+					if (NULL == zbx_regexp_match(sensorent->d_name, regex, NULL))
+						continue;
 
 					zbx_snprintf(sensorname, sizeof(sensorname), "%s/%s", devicepath,
 							sensorent->d_name);
@@ -455,15 +394,14 @@ static int	get_device_sensors(int do_task, const char *device, const char *name,
 			}
 		}
 	}
-
+out:
 	closedir(devicedir);
-	return SUCCEED;
 #endif
 }
 
 int	GET_SENSOR(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
-	char	*device, *name, *function, *err_msg = NULL;
+	char	*device, *name, *function;
 	int	do_task, cnt = 0;
 	double	aggr = 0;
 
@@ -512,11 +450,7 @@ int	GET_SENSOR(AGENT_REQUEST *request, AGENT_RESULT *result)
 		return SYSINFO_RET_FAIL;
 	}
 
-	if (SUCCEED != get_device_sensors(do_task, device, name, &aggr, &cnt, &err_msg))
-	{
-		SET_MSG_RESULT(result, err_msg);
-		return SYSINFO_RET_FAIL;
-	}
+	get_device_sensors(do_task, device, name, &aggr, &cnt);
 
 	if (0 == cnt)
 	{

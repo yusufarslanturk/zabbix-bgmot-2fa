@@ -52,10 +52,9 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
 #define ZBX_BURST	((size_t)10)
 
-	char			*procname, *proccomm, *param, *err_msg = NULL;
+	char			*procname, *proccomm, *param;
 	struct passwd		*usrinfo;
 	int			proccount = 0, invalid_user = 0, zbx_proc_stat, count, idx = 0;
-	zbx_regexp_t		*regx = NULL;
 	struct pst_status	pst[ZBX_BURST];
 
 	if (4 < request->nparam)
@@ -112,14 +111,6 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	memset(pst, 0, sizeof(pst));
 
-	if (NULL != proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
-	{
-		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
-				err_msg));
-		zbx_free(err_msg);
-		return SYSINFO_RET_FAIL;
-	}
-
 	while (0 < (count = pstat_getproc(pst, sizeof(*pst), ZBX_BURST, idx)))
 	{
 		int	i;
@@ -132,9 +123,8 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 			if (NULL != usrinfo && usrinfo->pw_uid != pst[i].pst_uid)
 				continue;
 
-			if (NULL != regx)
+			if (NULL != proccomm)
 			{
-				int		rc;
 				union pstun	un;
 				char		cmdline[1024];	/* up to 1020 characters from HP-UX */
 
@@ -144,20 +134,8 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 				if (-1 == pstat(PSTAT_GETCOMMANDLINE, un, sizeof(cmdline), 1, pst[i].pst_pid))
 					continue;
 
-				if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match_precompiled(cmdline, regx,
-						&err_msg)))
-				{
+				if (NULL == zbx_regexp_match(cmdline, proccomm, NULL))
 					continue;
-				}
-
-				if (ZBX_REGEXP_RUNTIME_FAIL == rc)
-				{
-					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "error occurred while matching"
-							" regular expression in the fourth parameter: %s", err_msg));
-					zbx_free(err_msg);
-					zbx_regexp_free(regx);
-					return SYSINFO_RET_FAIL;
-				}
 			}
 
 			if (FAIL == check_procstate(pst[i], zbx_proc_stat))
@@ -169,9 +147,6 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		idx = pst[count - 1].pst_idx + 1;
 		memset(pst, 0, sizeof(pst));
 	}
-
-	if (NULL != regx)
-		zbx_regexp_free(regx);
 
 	if (-1 == count)
 	{

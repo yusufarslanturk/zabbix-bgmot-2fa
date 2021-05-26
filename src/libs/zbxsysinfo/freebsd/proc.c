@@ -103,7 +103,7 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 #define ZBX_DSIZE	6
 #define ZBX_SSIZE	7
 
-	char		*procname, *proccomm, *param, *args, *mem_type = NULL, *err_msg = NULL;
+	char		*procname, *proccomm, *param, *args, *mem_type = NULL;
 	int		do_task, pagesize, count, i, proccount = 0, invalid_user = 0, mem_type_code, mib[4];
 	unsigned int	mibs;
 	zbx_uint64_t	mem_size = 0, byte_value = 0;
@@ -117,7 +117,6 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	struct kinfo_proc	*proc = NULL;
 	struct passwd		*usrinfo;
-	zbx_regexp_t		*regx = NULL;
 
 	if (5 < request->nparam)
 	{
@@ -253,15 +252,6 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		return SYSINFO_RET_FAIL;
 	}
 
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
-	{
-		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
-				err_msg));
-		zbx_free(err_msg);
-		zbx_free(proc);
-		return SYSINFO_RET_FAIL;
-	}
-
 	count = sz / sizeof(struct kinfo_proc);
 
 	for (i = 0; i < count; i++)
@@ -269,25 +259,13 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		if (NULL != procname && '\0' != *procname && 0 != strcmp(procname, proc[i].ZBX_PROC_COMM))
 			continue;
 
-		if (NULL != regx)
+		if (NULL != proccomm && '\0' != *proccomm)
 		{
-			int	rc;
-
 			if (NULL == (args = get_commandline(&proc[i])))
 				continue;
 
-			if (ZBX_REGEXP_NO_MATCH == (rc = zbx_regexp_match_precompiled(args, regx, &err_msg)))
+			if (NULL == zbx_regexp_match(args, proccomm, NULL))
 				continue;
-
-			if (ZBX_REGEXP_RUNTIME_FAIL == rc)
-			{
-				SET_MSG_RESULT(result, zbx_dsprintf(NULL, "error occurred while matching regular"
-						" expression in the fourth parameter: %s", err_msg));
-				zbx_free(err_msg);
-				zbx_regexp_free(regx);
-				zbx_free(proc);
-				return SYSINFO_RET_FAIL;
-			}
 		}
 
 		switch (mem_type_code)
@@ -353,9 +331,6 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		}
 	}
 
-	if (NULL != regx)
-		zbx_regexp_free(regx);
-
 	zbx_free(proc);
 out:
 	if (ZBX_PMEM != mem_type_code)
@@ -386,13 +361,12 @@ out:
 
 int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
-	char			*procname, *proccomm, *param, *args, *err_msg = NULL;
+	char			*procname, *proccomm, *param, *args;
 	int			proccount = 0, invalid_user = 0, zbx_proc_stat;
 	int			count, i, proc_ok, stat_ok, comm_ok, mib[4], mibs;
 	size_t			sz;
 	struct kinfo_proc	*proc = NULL;
 	struct passwd		*usrinfo;
-	zbx_regexp_t		*regx = NULL;
 
 	if (4 < request->nparam)
 	{
@@ -485,15 +459,6 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	count = sz / sizeof(struct kinfo_proc);
 
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
-	{
-		zbx_free(proc);
-		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
-				err_msg));
-		zbx_free(err_msg);
-		return SYSINFO_RET_FAIL;
-	}
-
 	for (i = 0; i < count; i++)
 	{
 		proc_ok = 0;
@@ -531,26 +496,11 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		else
 			stat_ok = 1;
 
-		if (NULL != regx)
+		if (NULL != proccomm && '\0' != *proccomm)
 		{
 			if (NULL != (args = get_commandline(&proc[i])))
-			{
-				int	rc;
-
-				if (ZBX_REGEXP_MATCH == (rc = zbx_regexp_match_precompiled(args, regx, &err_msg)))
-				{
+				if (NULL != zbx_regexp_match(args, proccomm, NULL))
 					comm_ok = 1;
-				}
-				else if (ZBX_REGEXP_RUNTIME_FAIL == rc)
-				{
-					zbx_free(proc);
-					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "error occurred while matching"
-							" regular expression in the fourth parameter: %s", err_msg));
-					zbx_free(err_msg);
-					zbx_regexp_free(regx);
-					return SYSINFO_RET_FAIL;
-				}
-			}
 		}
 		else
 			comm_ok = 1;
@@ -558,10 +508,6 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		if (proc_ok && stat_ok && comm_ok)
 			proccount++;
 	}
-
-	if (NULL != regx)
-		zbx_regexp_free(regx);
-
 	zbx_free(proc);
 out:
 	SET_UI64_RESULT(result, proccount);
