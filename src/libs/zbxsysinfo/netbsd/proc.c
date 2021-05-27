@@ -29,8 +29,8 @@ static kvm_t	*kd = NULL;
 static char	*proc_argv(pid_t pid)
 {
 	size_t		sz = 0;
-	int		mib[4];
-	int		i;
+	int		mib[4], ret;
+	int		i, len;
 	static char	*argv = NULL;
 	static size_t	argv_alloc = 0;
 
@@ -64,12 +64,12 @@ static char	*proc_argv(pid_t pid)
 
 int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
-	char			*procname, *proccomm, *param, *args, *err_msg = NULL;
+	char			*procname, *proccomm, *param, *args;
 	int			do_task, pagesize, count, i, proccount = 0, invalid_user = 0, proc_ok, comm_ok, op, arg;
 	double			value = 0.0, memsize = 0;
+	size_t			sz;
 	struct kinfo_proc2	*proc, *pproc;
 	struct passwd		*usrinfo;
-	zbx_regexp_t		*regx = NULL;
 
 	if (4 < request->nparam)
 	{
@@ -145,14 +145,6 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		return SYSINFO_RET_FAIL;
 	}
 
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
-	{
-		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
-				err_msg));
-		zbx_free(err_msg);
-		return SYSINFO_RET_FAIL;
-	}
-
 	for (pproc = proc, i = 0; i < count; pproc++, i++)
 	{
 		proc_ok = 0;
@@ -161,24 +153,12 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		if (NULL == procname || '\0' == *procname || 0 == strcmp(procname, pproc->p_comm))
 			proc_ok = 1;
 
-		if (NULL != regx)
+		if (NULL != proccomm && '\0' != *proccomm)
 		{
 			if (NULL != (args = proc_argv(pproc->p_pid)))
 			{
-				int	rc;
-
-				if (ZBX_REGEXP_MATCH == (rc = zbx_regexp_match_precompiled(args, regx, &err_msg)))
-				{
+				if (NULL != zbx_regexp_match(args, proccomm, NULL))
 					comm_ok = 1;
-				}
-				else if (ZBX_REGEXP_RUNTIME_FAIL == rc)
-				{
-					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "error occurred while matching"
-							" regular expression in the fourth parameter: %s", err_msg));
-					zbx_free(err_msg);
-					zbx_regexp_free(regx);
-					return SYSINFO_RET_FAIL;
-				}
 			}
 		}
 		else
@@ -202,9 +182,6 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 			}
 		}
 	}
-
-	if (NULL != regx)
-		zbx_regexp_free(regx);
 out:
 	if (ZBX_DO_AVG == do_task)
 		SET_DBL_RESULT(result, 0 == proccount ? 0 : memsize / proccount);
@@ -216,12 +193,12 @@ out:
 
 int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
-	char			*procname, *proccomm, *param, *args, *err_msg = NULL;
+	char			*procname, *proccomm, *param, *args;
 	int			proccount = 0, invalid_user = 0, zbx_proc_stat;
 	int			count, i, proc_ok, stat_ok, comm_ok, op, arg;
+	size_t			sz;
 	struct kinfo_proc2	*proc, *pproc;
 	struct passwd		*usrinfo;
-	zbx_regexp_t		*regx = NULL;
 
 	if (4 < request->nparam)
 	{
@@ -299,14 +276,6 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		return SYSINFO_RET_FAIL;
 	}
 
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
-	{
-		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
-				err_msg));
-		zbx_free(err_msg);
-		return SYSINFO_RET_FAIL;
-	}
-
 	for (pproc = proc, i = 0; i < count; pproc++, i++)
 	{
 		proc_ok = 0;
@@ -345,24 +314,12 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		else
 			stat_ok = 1;
 
-		if (NULL != regx)
+		if (NULL != proccomm && '\0' != *proccomm)
 		{
 			if (NULL != (args = proc_argv(pproc->p_pid)))
 			{
-				int	rc;
-
-				if (ZBX_REGEXP_MATCH == (rc = zbx_regexp_match_precompiled(args, regx, &err_msg)))
-				{
+				if (NULL != zbx_regexp_match(args, proccomm, NULL))
 					comm_ok = 1;
-				}
-				else if (ZBX_REGEXP_RUNTIME_FAIL == rc)
-				{
-					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "error occurred while matching"
-							" regular expression in the fourth parameter: %s", err_msg));
-					zbx_free(err_msg);
-					zbx_regexp_free(regx);
-					return SYSINFO_RET_FAIL;
-				}
 			}
 		}
 		else
@@ -371,9 +328,6 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		if (proc_ok && stat_ok && comm_ok)
 			proccount++;
 	}
-
-	if (NULL != regx)
-		zbx_regexp_free(regx);
 out:
 	SET_UI64_RESULT(result, proccount);
 

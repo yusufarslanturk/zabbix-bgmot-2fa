@@ -112,7 +112,7 @@ static void	collect_args(char **argv, int argc, char **args, size_t *args_alloc)
 
 int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
-	char			*procname, *proccomm, *param, *err_msg = NULL;
+	char			*procname, *proccomm, *param;
 	int			do_task, pagesize, count, i, proccount = 0, invalid_user = 0, proc_ok, comm_ok;
 	double			value = 0.0, memsize = 0;
 	size_t			sz;
@@ -127,7 +127,6 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 	char			**argv = NULL, *args = NULL;
 	size_t			argv_alloc = 0, args_alloc = 0;
 	int			argc;
-	zbx_regexp_t		*regx = NULL;
 
 	if (4 < request->nparam)
 	{
@@ -238,15 +237,6 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	count = sz / sizeof(struct kinfo_proc);
 #endif
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
-	{
-		zbx_free(proc);
-		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
-				err_msg));
-		zbx_free(err_msg);
-		return SYSINFO_RET_FAIL;
-	}
-
 	for (i = 0; i < count; i++)
 	{
 		proc_ok = 0;
@@ -255,29 +245,13 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		if (NULL == procname || '\0' == *procname || 0 == strcmp(procname, proc[i].ZBX_P_COMM))
 			proc_ok = 1;
 
-		if (NULL != regx)
+		if (NULL != proccomm && '\0' != *proccomm)
 		{
 			if (SUCCEED == proc_argv(proc[i].ZBX_P_PID, &argv, &argv_alloc, &argc))
 			{
-				int	rc;
-
 				collect_args(argv, argc, &args, &args_alloc);
-
-				if (ZBX_REGEXP_MATCH == (rc = zbx_regexp_match_precompiled(args, regx, &err_msg)))
-				{
+				if (NULL != zbx_regexp_match(args, proccomm, NULL))
 					comm_ok = 1;
-				}
-				else if (ZBX_REGEXP_RUNTIME_FAIL == rc)
-				{
-					zbx_free(proc);
-					zbx_free(argv);
-					zbx_free(args);
-					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "error occurred while matching"
-							" regular expression in the fourth parameter: %s", err_msg));
-					zbx_free(err_msg);
-					zbx_regexp_free(regx);
-					return SYSINFO_RET_FAIL;
-				}
 			}
 		}
 		else
@@ -304,9 +278,6 @@ int     PROC_MEM(AGENT_REQUEST *request, AGENT_RESULT *result)
 	zbx_free(proc);
 	zbx_free(argv);
 	zbx_free(args);
-
-	if (NULL != regx)
-		zbx_regexp_free(regx);
 out:
 	if (ZBX_DO_AVG == do_task)
 		SET_DBL_RESULT(result, 0 == proccount ? 0 : memsize / proccount);
@@ -318,7 +289,7 @@ out:
 
 int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
-	char			*procname, *proccomm, *param, *err_msg = NULL;
+	char			*procname, *proccomm, *param;
 	int			proccount = 0, invalid_user = 0, zbx_proc_stat, count, i, proc_ok, stat_ok, comm_ok;
 	size_t			sz;
 	struct passwd		*usrinfo;
@@ -332,7 +303,6 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 	char			**argv = NULL, *args = NULL;
 	size_t			argv_alloc = 0, args_alloc = 0;
 	int			argc;
-	zbx_regexp_t		*regx = NULL;
 
 	if (4 < request->nparam)
 	{
@@ -445,14 +415,6 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	count = sz / sizeof(struct kinfo_proc);
 #endif
-	if (NULL != proccomm && '\0' != *proccomm && SUCCEED != zbx_regexp_compile(proccomm, &regx, &err_msg))
-	{
-		zbx_free(proc);
-		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "invalid regular expression in the fourth parameter: %s",
-				err_msg));
-		zbx_free(err_msg);
-		return SYSINFO_RET_FAIL;
-	}
 
 	for (i = 0; i < count; i++)
 	{
@@ -492,29 +454,13 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 		else
 			stat_ok = 1;
 
-		if (NULL != regx)
+		if (NULL != proccomm && '\0' != *proccomm)
 		{
 			if (SUCCEED == proc_argv(proc[i].ZBX_P_PID, &argv, &argv_alloc, &argc))
 			{
-				int	rc;
-
 				collect_args(argv, argc, &args, &args_alloc);
-
-				if (ZBX_REGEXP_MATCH == (rc = zbx_regexp_match_precompiled(args, regx, &err_msg)))
-				{
+				if (NULL != zbx_regexp_match(args, proccomm, NULL))
 					comm_ok = 1;
-				}
-				else if (ZBX_REGEXP_RUNTIME_FAIL == rc)
-				{
-					zbx_free(proc);
-					zbx_free(argv);
-					zbx_free(args);
-					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "error occurred while matching"
-							" regular expression in the fourth parameter: %s", err_msg));
-					zbx_free(err_msg);
-					zbx_regexp_free(regx);
-					return SYSINFO_RET_FAIL;
-				}
 			}
 		}
 		else
@@ -526,9 +472,6 @@ int	PROC_NUM(AGENT_REQUEST *request, AGENT_RESULT *result)
 	zbx_free(proc);
 	zbx_free(argv);
 	zbx_free(args);
-
-	if (NULL != regx)
-		zbx_regexp_free(regx);
 out:
 	SET_UI64_RESULT(result, proccount);
 
