@@ -913,8 +913,9 @@ static int	zbx_trend_compare(const void *d1, const void *d2)
 	const ZBX_DC_TREND	*p2 = (const ZBX_DC_TREND *)d2;
 
 	ZBX_RETURN_IF_NOT_EQUAL(p1->itemid, p2->itemid);
+	ZBX_RETURN_IF_NOT_EQUAL(p1->clock, p2->clock);
 
-	return (p1->clock > p2->clock) - (p2->clock > p1->clock);
+	return 0;
 }
 
 /******************************************************************************
