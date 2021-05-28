@@ -4578,13 +4578,38 @@ static int	vmware_service_initialize(zbx_vmware_service_t *service, CURL *easyha
 
 	zbx_vector_ptr_create(&counters);
 
-	if (SUCCEED != vmware_service_get_perf_counters(service, easyhandle, &counters, error))
-		goto out;
-
 	if (SUCCEED != vmware_service_get_contents(easyhandle, &version, &fullname, error))
 		goto out;
 
+	if (NULL != service->version && 0 == strcmp(service->version, version))
+	{
+		ret = SUCCEED;
+		goto out;
+	}
+
+	if (SUCCEED != vmware_service_get_perf_counters(service, easyhandle, &counters, error))
+		goto out;
+
 	zbx_vmware_lock();
+
+	if (NULL != service->version)
+		vmware_shared_strfree(service->version);
+
+	if (NULL != service->fullname)
+		vmware_shared_strfree(service->fullname);
+
+	if (0 != service->counters.num_data)
+	{
+		zbx_hashset_iter_t	iter;
+		zbx_vmware_counter_t	*counter;
+
+		zbx_hashset_iter_reset(&service->counters, &iter);
+
+		while (NULL != (counter = (zbx_vmware_counter_t *)zbx_hashset_iter_next(&iter)))
+			vmware_counter_shared_clean(counter);
+
+		zbx_hashset_clear(&service->counters);
+	}
 
 	service->fullname = vmware_shared_strdup(fullname);
 	vmware_counters_shared_copy(&service->counters, &counters);
@@ -4801,7 +4826,8 @@ static void	vmware_service_update(zbx_vmware_service_t *service)
 	if (SUCCEED != vmware_service_authenticate(service, easyhandle, &page, &data->error))
 		goto clean;
 
-	if (0 != (service->state & ZBX_VMWARE_STATE_NEW) &&
+	if ((0 != (service->state & ZBX_VMWARE_STATE_NEW) ||
+			ZBX_VMWARE_SERVICE_TTL < (time(NULL) - service->lastcheck)) &&
 			SUCCEED != vmware_service_initialize(service, easyhandle, &data->error))
 	{
 		goto clean;
