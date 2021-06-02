@@ -591,7 +591,7 @@ static void	dc_trends_fetch_and_update(ZBX_DC_TREND *trends, int trends_num, zbx
 
 	DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, "itemid", itemids, itemids_num);
 
-	result = DBselect("%s", sql);
+	result = DBselect("%s order by itemid", sql);
 
 	sql_offset = 0;
 	DBbegin_multiple_update(&sql, &sql_alloc, &sql_offset);
