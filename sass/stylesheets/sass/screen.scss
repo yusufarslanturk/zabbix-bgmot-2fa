@@ -82,6 +82,13 @@ svg a {
 	}
 }
 
+svg {
+	&:focus,
+	*:focus {
+		outline: none;
+	}
+}
+
 .link-action {
 	border-bottom: 1px dotted;
 	cursor: pointer;

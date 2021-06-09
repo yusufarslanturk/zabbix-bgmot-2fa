@@ -474,7 +474,7 @@ elseif (hasRequest('action') && getRequest('action') == 'host.massupdate' && has
 		}
 		unset($host);
 
-		$result = (bool) API::Host()->update($hosts);
+		$result = $hosts ? (bool) API::Host()->update($hosts) : true;
 
 		if ($result === false) {
 			throw new Exception();

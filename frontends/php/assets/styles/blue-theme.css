@@ -79,6 +79,10 @@ svg a {
     fill: #0275b8;
     text-decoration: underline; }
 
+svg:focus,
+svg *:focus {
+  outline: none; }
+
 .link-action {
   border-bottom: 1px dotted;
   cursor: pointer;
