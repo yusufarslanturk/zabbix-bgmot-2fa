@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-28 19:50+0300\n"
+"POT-Creation-Date: 2021-06-11 19:50+0300\n"
 "PO-Revision-Date: 2019-01-29 07:38+0300\n"
 "Last-Translator: YunXi <tech@gootoo.top>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -89,7 +89,7 @@ msgid "%1$s Item"
 msgid_plural "%1$s Items"
 msgstr[0] "%1$s 监控项"
 
-#: include/classes/api/services/CItemGeneral.php:2045
+#: include/classes/api/services/CItemGeneral.php:2059
 #: include/classes/import/readers/CXmlImportReader.php:46
 #, c-format
 msgid "%1$s [Line: %2$s | Column: %3$s]"
@@ -967,7 +967,7 @@ msgstr "应用集原型"
 msgid "Application updated"
 msgstr "应用集已更新"
 
-#: include/classes/api/services/CItemGeneral.php:619
+#: include/classes/api/services/CItemGeneral.php:633
 #, c-format
 msgid "Application with ID \"%1$s\" is not available on \"%2$s\"."
 msgstr "ID为 \"%1$s\"的应用集不在 \"%2$s\" 之中."
@@ -1529,15 +1529,15 @@ msgstr "取消"
 msgid "Cannot add a discovered application \"%1$s\" to a web scenario."
 msgstr "不能添加一个已发现的应用集 \"%1$s\" 到 web 场景。"
 
-#: include/classes/api/services/CGraph.php:702
-#: include/classes/api/services/CGraph.php:716
-#: include/classes/api/services/CGraph.php:730
+#: include/classes/api/services/CGraph.php:703
+#: include/classes/api/services/CGraph.php:717
+#: include/classes/api/services/CGraph.php:731
 #, c-format
 msgid "Cannot add a non-numeric item \"%1$s\" to graph \"%2$s\"."
 msgstr "不能添加一个非数字监控项 \"%1$s\" 到图表 \"%2$s\"."
 
-#: include/classes/api/services/CGraphPrototype.php:669
-#: include/classes/api/services/CGraphPrototype.php:733
+#: include/classes/api/services/CGraphPrototype.php:670
+#: include/classes/api/services/CGraphPrototype.php:734
 #, c-format
 msgid "Cannot add a non-numeric item \"%1$s\" to graph prototype \"%2$s\"."
 msgstr "不可以添加一个非数值型的监控项目 \"%1$s\"到数据图模板\"%2$s\"."
@@ -1568,7 +1568,7 @@ msgstr "无法添加关联条件"
 msgid "Cannot add dependency from a host to a template."
 msgstr "无法添加自主机到模板的依赖"
 
-#: include/classes/api/services/CDiscoveryRule.php:847
+#: include/classes/api/services/CDiscoveryRule.php:857
 #: include/triggers.inc.php:527
 #, c-format
 msgid "Cannot add dependency from trigger \"%1$s:%2$s\" to non existing trigger \"%3$s:%4$s\"."
@@ -1734,21 +1734,21 @@ msgstr "无法清除历史"
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
 msgstr ""
 
-#: include/classes/api/services/CDiscoveryRule.php:1537
+#: include/classes/api/services/CDiscoveryRule.php:1547
 msgid "Cannot clone graph prototypes."
 msgstr "无法克隆图形原型"
 
-#: include/classes/api/services/CDiscoveryRule.php:1585
+#: include/classes/api/services/CDiscoveryRule.php:1595
 msgid "Cannot clone host prototypes."
 msgstr "无法克隆主机原型。"
 
-#: include/classes/api/services/CDiscoveryRule.php:1342
-#: include/classes/api/services/CDiscoveryRule.php:1398
-#: include/classes/api/services/CDiscoveryRule.php:1416
+#: include/classes/api/services/CDiscoveryRule.php:1352
+#: include/classes/api/services/CDiscoveryRule.php:1408
+#: include/classes/api/services/CDiscoveryRule.php:1426
 msgid "Cannot clone item prototypes."
 msgstr "无法克隆监控项原型"
 
-#: include/classes/api/services/CDiscoveryRule.php:760
+#: include/classes/api/services/CDiscoveryRule.php:770
 msgid "Cannot clone trigger prototypes."
 msgstr "无法克隆触发器原型"
 
@@ -1910,7 +1910,7 @@ msgid "Cannot delete host group because maintenance \"%1$s\" must contain at lea
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
 msgstr[0] "无法删除主机群组因为维护 \"%1$s\" 必须包含至少一个主机或一个主机群组。无法删除所选主机群组因为维护 \"%1$s\" 必须包含至少一个主机或一个主机群组。"
 
-#: include/classes/api/services/CDiscoveryRule.php:531
+#: include/classes/api/services/CDiscoveryRule.php:541
 msgid "Cannot delete host prototype."
 msgstr "无法删除主机原型。"
 
@@ -2012,11 +2012,11 @@ msgstr "无法删除模板"
 msgid "Cannot delete templated application."
 msgstr "无法删除模板的应用集."
 
-#: include/classes/api/services/CGraphPrototype.php:575
+#: include/classes/api/services/CGraphPrototype.php:576
 msgid "Cannot delete templated graph prototype."
 msgstr "无法删除模板的图表原型。"
 
-#: include/classes/api/services/CGraph.php:559
+#: include/classes/api/services/CGraph.php:560
 msgid "Cannot delete templated graph."
 msgstr "无法删除模板的图表。"
 
@@ -2024,15 +2024,15 @@ msgstr "无法删除模板的图表。"
 msgid "Cannot delete templated host prototype."
 msgstr "无法删除模板的主机原型。"
 
-#: include/classes/api/services/CItemPrototype.php:874
+#: include/classes/api/services/CItemPrototype.php:885
 msgid "Cannot delete templated item prototype."
 msgstr "无法删除模板的监控项原型。"
 
-#: include/classes/api/services/CItem.php:703
+#: include/classes/api/services/CItem.php:714
 msgid "Cannot delete templated item."
 msgstr "无法删除模板的监控项."
 
-#: include/classes/api/services/CDiscoveryRule.php:482
+#: include/classes/api/services/CDiscoveryRule.php:492
 msgid "Cannot delete templated items."
 msgstr "无法删除模板监控项."
 
@@ -2223,8 +2223,8 @@ msgstr "无法找到主机 \"%1$s\" 用于聚合图形 \"%2$s\"."
 msgid "Cannot find host group \"%1$s\" for host prototype \"%2$s\" of discovery rule \"%3$s\" on \"%4$s\"."
 msgstr "在 \"%4$s\"上无法针对自动发现规则 \"%3$s\"上的\"%2$s\"主机模板找到主机组 \"%1$s\""
 
-#: include/classes/api/services/CDiscoveryRule.php:1205
-#: include/classes/api/services/CDiscoveryRule.php:1369
+#: include/classes/api/services/CDiscoveryRule.php:1215
+#: include/classes/api/services/CDiscoveryRule.php:1379
 #: include/classes/api/services/CItemGeneral.php:115 include/items.inc.php:506
 #: include/items.inc.php:653
 #, c-format
@@ -2481,7 +2481,7 @@ msgstr "在图形 \"%2$s\" 中无法设置 \"%1$s\""
 msgid "Cannot set \"%1$s\" for graph prototype \"%2$s\"."
 msgstr "在模板 \"%2$s\" 中无法设置 \"%1$s\""
 
-#: include/classes/api/services/CItemGeneral.php:318
+#: include/classes/api/services/CItemGeneral.php:332
 #, c-format
 msgid "Cannot set \"%1$s\" for item \"%2$s\"."
 msgstr "无法设置 \"%1$s\" 为监控项 \"%2$s\"."
@@ -2492,7 +2492,7 @@ msgstr "无法设置 \"%1$s\" 为监控项 \"%2$s\"."
 msgid "Cannot set \"%1$s\" for template screen \"%2$s\"."
 msgstr "不能设置\"%1$s\"在模板聚合图形\"%2$s\"中。"
 
-#: include/classes/api/services/CItemPrototype.php:325
+#: include/classes/api/services/CItemPrototype.php:336
 #, c-format
 msgid "Cannot set \"templateid\" field for application prototype in item prototype \"%1$s\"."
 msgstr "不能设置 \"templateid\" 设置到项目原形 \"%1$s\" 。"
@@ -2567,7 +2567,7 @@ msgstr "图形 \"%2$s\" 无法更新 \"%1$s\""
 msgid "Cannot update \"%1$s\" for graph prototype \"%2$s\"."
 msgstr "图形模板 \"%2$s\" 无法更新 \"%1$s\" "
 
-#: include/classes/api/services/CItemGeneral.php:272
+#: include/classes/api/services/CItemGeneral.php:286
 #, c-format
 msgid "Cannot update \"%1$s\" for item \"%2$s\"."
 msgstr "无法更新 \"%1$s\" 为监控项 \"%2$s\"."
@@ -2587,7 +2587,7 @@ msgstr "触发器原型 \"%2$s\" 无法更新到模板 \"%1$s\"。"
 msgid "Cannot update \"%2$s\" for a discovered host \"%1$s\"."
 msgstr "无法更新 \"%2$s\"在发现的主机\"%1$s\"。"
 
-#: include/classes/api/services/CItemGeneral.php:202
+#: include/classes/api/services/CItemGeneral.php:216
 #, c-format
 msgid "Cannot update \"%2$s\" for a discovered item \"%1$s\"."
 msgstr "无法更新 \"%2$s\"在发现的监控项 \"%1$s\"。"
@@ -2961,9 +2961,9 @@ msgstr "现在检查"
 msgid "Check of pre-requisites"
 msgstr "必要条件检测"
 
-#: include/classes/api/services/CItemGeneral.php:422
-#: include/classes/api/services/CItemGeneral.php:429
 #: include/classes/api/services/CItemGeneral.php:436
+#: include/classes/api/services/CItemGeneral.php:443
+#: include/classes/api/services/CItemGeneral.php:450
 msgid "Check the key, please. Default example was passed."
 msgstr "请检查键值。使用了默认的示例。"
 
@@ -3232,7 +3232,7 @@ msgstr "对于动作\"%1$s\"条件\"%2$s\"不可以应用于计算式\"%3$s\"中
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for correlation \"%1$s\"."
 msgstr "在关联\"%1$s\"中，条件\"%2$s\"无法使用公式 \"%3$s\" "
 
-#: include/classes/api/services/CDiscoveryRule.php:1081
+#: include/classes/api/services/CDiscoveryRule.php:1091
 #, c-format
 msgid "Condition \"%2$s\" is not used in formula \"%3$s\" for discovery rule \"%1$s\"."
 msgstr "对于自动发现规则\"%1$s\"条件\"%2$s\"不可以应用于计算式\"%3$s\"中"
@@ -3247,7 +3247,7 @@ msgstr "对于动作\"%1$s\"应用于计算式 \"%3$s\"中的\"%2$s\"条件未�
 msgid "Condition \"%2$s\" used in formula \"%3$s\" for correlation \"%1$s\" is not defined."
 msgstr "在关联项 \"%1$s\" 中 条件 \"%2$s\" 在表达式 \"%3$s\"没有被使用"
 
-#: include/classes/api/services/CDiscoveryRule.php:1080
+#: include/classes/api/services/CDiscoveryRule.php:1090
 #, c-format
 msgid "Condition \"%2$s\" used in formula \"%3$s\" for discovery rule \"%1$s\" is not defined."
 msgstr "对于自动发现规则\"%1$s\"应用于计算表达式 \"%3$s\"中的条件 \"%2$s\"未被定义"
@@ -4945,12 +4945,12 @@ msgstr ""
 msgid "Discovery rule"
 msgstr "自动发现规则"
 
-#: include/classes/api/services/CDiscoveryRule.php:35
+#: include/classes/api/services/CDiscoveryRule.php:45
 #, c-format
 msgid "Discovery rule \"%1$s\" already exists on \"%2$s\", inherited from another template."
 msgstr "自动发现规则 \"%1$s\" 已存在于 \"%2$s\", 继承自其它的模板."
 
-#: include/classes/api/services/CDiscoveryRule.php:36
+#: include/classes/api/services/CDiscoveryRule.php:46
 #, c-format
 msgid "Discovery rule \"%1$s\" already exists on \"%2$s\"."
 msgstr "发现规则\"%1$s\"已存在于 \"%2$s\"."
@@ -5147,7 +5147,7 @@ msgstr "在关联项中复制\"%1$s\"的值 \"%2$s\""
 msgid "Duplicate \"description\" value \"%1$s\" for media type."
 msgstr "%1$s 媒体类型说明值重复。"
 
-#: include/classes/api/services/CItemPrototype.php:335
+#: include/classes/api/services/CItemPrototype.php:346
 #, c-format
 msgid "Duplicate \"name\" value \"%1$s\" for application prototype in item prototype \"%2$s\"."
 msgstr "\"%2$s\"与\"%1$s\"的名字有冲突。"
@@ -5354,7 +5354,7 @@ msgstr "场景\"%1$s\"配置了空的SSL证书文件"
 msgid "Empty action condition."
 msgstr "空的动作条件。"
 
-#: include/classes/api/services/CItemPrototype.php:319
+#: include/classes/api/services/CItemPrototype.php:330
 #, c-format
 msgid "Empty application prototype name in item prototype \"%1$s\"."
 msgstr "该项目的原型应用名称为 \"%1$s\" 里面是空的。"
@@ -5372,12 +5372,12 @@ msgstr "空的关联ID。"
 msgid "Empty filter condition formula ID for action \"%1$s\"."
 msgstr "针对动作\"%1$s\"的过滤器条件表达式ID为空"
 
-#: include/classes/api/services/CDiscoveryRule.php:1108
+#: include/classes/api/services/CDiscoveryRule.php:1118
 #, c-format
 msgid "Empty filter condition formula ID for discovery rule \"%1$s\"."
 msgstr "针对自动发现规则 \"%1$s\"的过滤器条件表达式ID为空"
 
-#: include/classes/api/services/CDiscoveryRule.php:1100
+#: include/classes/api/services/CDiscoveryRule.php:1110
 #, c-format
 msgid "Empty filter condition macro for discovery rule \"%1$s\"."
 msgstr "针对自动发现规则 \"%1$s\"的过滤器条件宏变量为空"
@@ -5395,7 +5395,7 @@ msgstr ""
 #: include/classes/api/services/CAction.php:2810
 #: include/classes/api/services/CCorrelation.php:516
 #: include/classes/api/services/CCorrelation.php:693
-#: include/classes/api/services/CDiscoveryRule.php:463
+#: include/classes/api/services/CDiscoveryRule.php:473
 #: include/classes/api/services/CDRule.php:187
 #: include/classes/api/services/CDRule.php:313
 #: include/classes/api/services/CHostGeneral.php:154
@@ -6348,22 +6348,22 @@ msgstr "梯度线"
 msgid "Graph"
 msgstr "图形"
 
-#: include/classes/api/services/CGraph.php:429
-#: include/classes/api/services/CGraphPrototype.php:439
+#: include/classes/api/services/CGraph.php:430
+#: include/classes/api/services/CGraphPrototype.php:440
 #, c-format
 msgid "Graph \"%1$s\" already exists on \"%2$s\" (inherited from another template)."
 msgstr "图形\"%1$s\"已存在于\"%2$s\"中 (继承自其它的模板)."
 
-#: include/classes/api/services/CGraph.php:450
-#: include/classes/api/services/CGraph.php:457
-#: include/classes/api/services/CGraphPrototype.php:465
-#: include/classes/api/services/CGraphPrototype.php:472
+#: include/classes/api/services/CGraph.php:451
+#: include/classes/api/services/CGraph.php:458
+#: include/classes/api/services/CGraphPrototype.php:466
+#: include/classes/api/services/CGraphPrototype.php:473
 #, c-format
 msgid "Graph \"%1$s\" already exists on \"%2$s\" (items are not identical)."
 msgstr "图形\"%1$s\"已存在于\"%2$s\"中 (项目不一致)."
 
-#: include/classes/api/services/CGraph.php:404
-#: include/classes/api/services/CGraphPrototype.php:414
+#: include/classes/api/services/CGraph.php:405
+#: include/classes/api/services/CGraphPrototype.php:415
 #: include/graphs.inc.php:435
 #, c-format
 msgid "Graph \"%1$s\" already exists on \"%2$s\"."
@@ -6424,12 +6424,12 @@ msgstr "图形组件"
 msgid "Graph prototype"
 msgstr "图形原型"
 
-#: include/classes/api/services/CGraphPrototype.php:766
+#: include/classes/api/services/CGraphPrototype.php:767
 #, c-format
 msgid "Graph prototype \"%1$s\" contains item prototypes from multiple discovery rules."
 msgstr "数据图模板 \"%1$s\" 包含来自多个自动发现规则上的监控项目模板"
 
-#: include/classes/api/services/CGraphPrototype.php:772
+#: include/classes/api/services/CGraphPrototype.php:773
 #, c-format
 msgid "Graph prototype \"%1$s\" must have at least one item prototype."
 msgstr "数据图模板\"%1$s\"必须要有至少一个监控项目模板"
@@ -6498,10 +6498,10 @@ msgstr "ID为 \"%1$s\" 的图表不可用。"
 msgid "Graph with name \"%1$s\" already exists in graphs or graph prototypes."
 msgstr "图表名称 \"%1$s\" 已经存在在图表或者图表原型."
 
-#: include/classes/api/services/CGraph.php:411
-#: include/classes/api/services/CGraph.php:432
-#: include/classes/api/services/CGraphPrototype.php:421
-#: include/classes/api/services/CGraphPrototype.php:442
+#: include/classes/api/services/CGraph.php:412
+#: include/classes/api/services/CGraph.php:433
+#: include/classes/api/services/CGraphPrototype.php:422
+#: include/classes/api/services/CGraphPrototype.php:443
 msgid "Graph with same name but other type exist."
 msgstr "同名但不同类型的图形已存在."
 
@@ -7793,14 +7793,14 @@ msgstr "函数传入了错误的参数"
 #: include/classes/api/services/CHost.php:1203
 #: include/classes/api/services/CHostPrototype.php:392
 #: include/classes/api/services/CHostPrototype.php:413
-#: include/classes/api/services/CItemGeneral.php:257
-#: include/classes/api/services/CItemGeneral.php:1248
-#: include/classes/api/services/CItemGeneral.php:1266
-#: include/classes/api/services/CItemGeneral.php:1288
-#: include/classes/api/services/CItemGeneral.php:1320
-#: include/classes/api/services/CItemGeneral.php:1333
-#: include/classes/api/services/CItemGeneral.php:1362
+#: include/classes/api/services/CItemGeneral.php:271
+#: include/classes/api/services/CItemGeneral.php:1262
+#: include/classes/api/services/CItemGeneral.php:1280
+#: include/classes/api/services/CItemGeneral.php:1302
+#: include/classes/api/services/CItemGeneral.php:1334
+#: include/classes/api/services/CItemGeneral.php:1347
 #: include/classes/api/services/CItemGeneral.php:1376
+#: include/classes/api/services/CItemGeneral.php:1390
 #: include/classes/api/services/CMapElement.php:46
 #: include/classes/api/services/CMapElement.php:117
 #: include/classes/api/services/CMapElement.php:129
@@ -7831,7 +7831,7 @@ msgstr "函数传入了错误的参数。"
 msgid "Incorrect arguments passed to method."
 msgstr "方法传入了错误的参数。"
 
-#: include/classes/api/services/CItemGeneral.php:588
+#: include/classes/api/services/CItemGeneral.php:602
 #, c-format
 msgid "Incorrect authentication protocol for item \"%1$s\"."
 msgstr "监控项\"%1$s\" 出现了错误的身份验证协议."
@@ -7869,7 +7869,7 @@ msgstr "模板名称\"%1$s\"使用了不正确的名称."
 msgid "Incorrect conditions for action \"%1$s\"."
 msgstr "动作\"%1$s\"的条件不正确"
 
-#: include/classes/api/services/CDiscoveryRule.php:1074
+#: include/classes/api/services/CDiscoveryRule.php:1084
 #, c-format
 msgid "Incorrect conditions for discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的条件不正确."
@@ -7888,7 +7888,7 @@ msgstr "动作\"%1$s\": %3$s自定义的表达式\"%2$s\" 不正确."
 msgid "Incorrect custom expression \"%2$s\" for correlation \"%1$s\": %3$s."
 msgstr "在关联项\"%1$s\": %3$s中使用了错误的表达式\"%2$s\"。"
 
-#: include/classes/api/services/CDiscoveryRule.php:1079
+#: include/classes/api/services/CDiscoveryRule.php:1089
 #, c-format
 msgid "Incorrect custom expression \"%2$s\" for discovery rule \"%1$s\": %3$s."
 msgstr "自动发现规则\"%1$s\": %3$s自定义的表达式 \"%2$s\"不正确."
@@ -7939,7 +7939,7 @@ msgstr "错误的文件上传."
 msgid "Incorrect filter condition formula ID for action \"%1$s\"."
 msgstr "动作\"%1$s\"的过滤器条件计算式ID不正确."
 
-#: include/classes/api/services/CDiscoveryRule.php:1109
+#: include/classes/api/services/CDiscoveryRule.php:1119
 #, c-format
 msgid "Incorrect filter condition formula ID for discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的条件计算式ID不正确."
@@ -7949,7 +7949,7 @@ msgstr "自动发现规则\"%1$s\"的条件计算式ID不正确."
 msgid "Incorrect filter condition formula ID given for correlation \"%1$s\"."
 msgstr "错误的过滤条件公式给出相关ID \"%1$s\" 。"
 
-#: include/classes/api/services/CDiscoveryRule.php:1101
+#: include/classes/api/services/CDiscoveryRule.php:1111
 #, c-format
 msgid "Incorrect filter condition macro for discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的过滤器条件宏变量不正确"
@@ -7960,7 +7960,7 @@ msgstr "自动发现规则\"%1$s\"的过滤器条件宏变量不正确"
 msgid "Incorrect filter condition operator for action \"%1$s\"."
 msgstr "动作\"%1$s\"过滤器条件行为不正确."
 
-#: include/classes/api/services/CDiscoveryRule.php:1113
+#: include/classes/api/services/CDiscoveryRule.php:1123
 #, c-format
 msgid "Incorrect filter condition operator for discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的过滤器条件行为不正确"
@@ -8180,7 +8180,7 @@ msgstr "错误的上层服务."
 msgid "Incorrect port range."
 msgstr "错误的端口范围."
 
-#: include/classes/api/services/CItemGeneral.php:597
+#: include/classes/api/services/CItemGeneral.php:611
 #, c-format
 msgid "Incorrect privacy protocol for item \"%1$s\"."
 msgstr "错误的隐私协议对于监控项\"%1$s\"."
@@ -8313,7 +8313,7 @@ msgstr "动作\"%1$s\"的计算类型不正确."
 msgid "Incorrect type of calculation for correlation \"%1$s\"."
 msgstr "\"%1$s\"的关联项计算类型错误。"
 
-#: include/classes/api/services/CDiscoveryRule.php:1067
+#: include/classes/api/services/CDiscoveryRule.php:1077
 #, c-format
 msgid "Incorrect type of calculation for discovery rule \"%1$s\"."
 msgstr "自动发现规则 \"%1$s\"的计算类型不正确."
@@ -8361,7 +8361,7 @@ msgstr ""
 #: include/classes/api/services/CAction.php:1849
 #: include/classes/api/services/CAction.php:2870
 #: include/classes/api/services/CAction.php:3015
-#: include/classes/api/services/CDiscoveryRule.php:1015
+#: include/classes/api/services/CDiscoveryRule.php:1025
 #: include/classes/api/services/CDRule.php:237
 #: include/classes/api/services/CDRule.php:244
 #: include/classes/api/services/CDRule.php:292
@@ -8371,8 +8371,8 @@ msgstr ""
 #: include/classes/api/services/CDRule.php:497
 #: include/classes/api/services/CDRule.php:558
 #: include/classes/api/services/CDRule.php:571
-#: include/classes/api/services/CItemGeneral.php:528
-#: include/classes/api/services/CItemGeneral.php:2022
+#: include/classes/api/services/CItemGeneral.php:542
+#: include/classes/api/services/CItemGeneral.php:2036
 #: include/classes/validators/CNewValidator.php:116
 #: include/classes/validators/CNewValidator.php:129
 #: include/classes/validators/CNewValidator.php:142
@@ -8469,8 +8469,8 @@ msgstr "\"%1$s\" 字段的值不正确。"
 #: include/classes/api/services/CCorrelation.php:1101
 #: include/classes/api/services/CCorrelation.php:1118
 #: include/classes/api/services/CCorrelation.php:1137
-#: include/classes/api/services/CDiscoveryRule.php:1135
-#: include/classes/api/services/CDiscoveryRule.php:1308
+#: include/classes/api/services/CDiscoveryRule.php:1145
+#: include/classes/api/services/CDiscoveryRule.php:1318
 #: include/classes/api/services/CDRule.php:203
 #: include/classes/api/services/CDRule.php:209
 #: include/classes/api/services/CDRule.php:214
@@ -8507,37 +8507,37 @@ msgstr "\"%1$s\" 字段的值不正确。"
 #: include/classes/api/services/CHost.php:1938
 #: include/classes/api/services/CHttpTest.php:959
 #: include/classes/api/services/CHttpTest.php:1057
-#: include/classes/api/services/CItemGeneral.php:216
-#: include/classes/api/services/CItemGeneral.php:336
-#: include/classes/api/services/CItemGeneral.php:473
-#: include/classes/api/services/CItemGeneral.php:484
-#: include/classes/api/services/CItemGeneral.php:490
+#: include/classes/api/services/CItemGeneral.php:230
+#: include/classes/api/services/CItemGeneral.php:350
+#: include/classes/api/services/CItemGeneral.php:487
 #: include/classes/api/services/CItemGeneral.php:498
-#: include/classes/api/services/CItemGeneral.php:510
-#: include/classes/api/services/CItemGeneral.php:516
-#: include/classes/api/services/CItemGeneral.php:522
-#: include/classes/api/services/CItemGeneral.php:535
-#: include/classes/api/services/CItemGeneral.php:1271
-#: include/classes/api/services/CItemGeneral.php:1277
-#: include/classes/api/services/CItemGeneral.php:1292
-#: include/classes/api/services/CItemGeneral.php:1307
-#: include/classes/api/services/CItemGeneral.php:1325
-#: include/classes/api/services/CItemGeneral.php:1338
-#: include/classes/api/services/CItemGeneral.php:1345
-#: include/classes/api/services/CItemGeneral.php:1351
-#: include/classes/api/services/CItemGeneral.php:1367
+#: include/classes/api/services/CItemGeneral.php:504
+#: include/classes/api/services/CItemGeneral.php:512
+#: include/classes/api/services/CItemGeneral.php:524
+#: include/classes/api/services/CItemGeneral.php:530
+#: include/classes/api/services/CItemGeneral.php:536
+#: include/classes/api/services/CItemGeneral.php:549
+#: include/classes/api/services/CItemGeneral.php:1285
+#: include/classes/api/services/CItemGeneral.php:1291
+#: include/classes/api/services/CItemGeneral.php:1306
+#: include/classes/api/services/CItemGeneral.php:1321
+#: include/classes/api/services/CItemGeneral.php:1339
+#: include/classes/api/services/CItemGeneral.php:1352
+#: include/classes/api/services/CItemGeneral.php:1359
+#: include/classes/api/services/CItemGeneral.php:1365
 #: include/classes/api/services/CItemGeneral.php:1381
-#: include/classes/api/services/CItemGeneral.php:1669
-#: include/classes/api/services/CItemGeneral.php:1689
-#: include/classes/api/services/CItemGeneral.php:1696
-#: include/classes/api/services/CItemGeneral.php:1706
-#: include/classes/api/services/CItemGeneral.php:1786
+#: include/classes/api/services/CItemGeneral.php:1395
+#: include/classes/api/services/CItemGeneral.php:1683
+#: include/classes/api/services/CItemGeneral.php:1703
+#: include/classes/api/services/CItemGeneral.php:1710
+#: include/classes/api/services/CItemGeneral.php:1720
 #: include/classes/api/services/CItemGeneral.php:1800
-#: include/classes/api/services/CItemGeneral.php:1961
-#: include/classes/api/services/CItem.php:771
-#: include/classes/api/services/CItem.php:779
-#: include/classes/api/services/CItemPrototype.php:942
-#: include/classes/api/services/CItemPrototype.php:950
+#: include/classes/api/services/CItemGeneral.php:1814
+#: include/classes/api/services/CItemGeneral.php:1975
+#: include/classes/api/services/CItem.php:782
+#: include/classes/api/services/CItem.php:790
+#: include/classes/api/services/CItemPrototype.php:953
+#: include/classes/api/services/CItemPrototype.php:961
 #: include/classes/api/services/CMaintenance.php:490
 #: include/classes/api/services/CMaintenance.php:713
 #: include/classes/api/services/CMapElement.php:101
@@ -8879,17 +8879,17 @@ msgstr "内部存储期 %1$s 无效。"
 msgid "Invalid interval \"%1$s\"."
 msgstr "无效的间隔 \"%1$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:37
+#: include/classes/api/services/CDiscoveryRule.php:47
 #, c-format
 msgid "Invalid key \"%1$s\" for discovery rule \"%2$s\" on \"%3$s\": %4$s."
 msgstr "\"%3$s\"：%4$s上的自动发现规则 \"%2$s\" 引用了不合法的关键字 \"%1$s\"。"
 
-#: include/classes/api/services/CItem.php:37
+#: include/classes/api/services/CItem.php:48
 #, c-format
 msgid "Invalid key \"%1$s\" for item \"%2$s\" on \"%3$s\": %4$s."
 msgstr "\"%3$s\": %4$s上的监控项目 \"%2$s\"使用了不合法的关键字 \"%1$s\""
 
-#: include/classes/api/services/CItemPrototype.php:37
+#: include/classes/api/services/CItemPrototype.php:48
 #, c-format
 msgid "Invalid key \"%1$s\" for item prototype \"%2$s\" on \"%3$s\": %4$s."
 msgstr "\"%3$s\": %4$s上的监控项目模板 \"%2$s\" 使用了不合法的关键字 \"%1$s\"。"
@@ -8933,15 +8933,15 @@ msgstr "无效的参数个数."
 #: app/controllers/CControllerDashboardUpdate.php:134
 #: app/controllers/CControllerDashboardUpdate.php:142
 #: app/controllers/CControllerPopupHttpStep.php:100
-#: include/classes/api/services/CItemGeneral.php:1977
-#: include/classes/api/services/CItemGeneral.php:1984
-#: include/classes/api/services/CItemGeneral.php:1992
-#: include/classes/api/services/CItemGeneral.php:2001
-#: include/classes/api/services/CItemGeneral.php:2008
-#: include/classes/api/services/CItemGeneral.php:2039
-#: include/classes/api/services/CItemGeneral.php:2044
-#: include/classes/api/services/CItemGeneral.php:2054
-#: include/classes/api/services/CItemGeneral.php:2083
+#: include/classes/api/services/CItemGeneral.php:1991
+#: include/classes/api/services/CItemGeneral.php:1998
+#: include/classes/api/services/CItemGeneral.php:2006
+#: include/classes/api/services/CItemGeneral.php:2015
+#: include/classes/api/services/CItemGeneral.php:2022
+#: include/classes/api/services/CItemGeneral.php:2053
+#: include/classes/api/services/CItemGeneral.php:2058
+#: include/classes/api/services/CItemGeneral.php:2068
+#: include/classes/api/services/CItemGeneral.php:2097
 #: include/classes/api/services/CTriggerGeneral.php:1650
 #: include/classes/api/services/CTriggerGeneral.php:1666
 #: include/classes/api/services/CUser.php:668
@@ -9155,17 +9155,17 @@ msgid "Item"
 msgstr "监控项"
 
 #: include/classes/api/services/CHostPrototype.php:981
-#: include/classes/api/services/CItem.php:35
+#: include/classes/api/services/CItem.php:46
 #, c-format
 msgid "Item \"%1$s\" already exists on \"%2$s\", inherited from another template."
 msgstr "键值为 \"%1$s\"的监控项已存在于 \"%2$s\", 继承自其他模板."
 
-#: include/classes/api/services/CItem.php:36
+#: include/classes/api/services/CItem.php:47
 #, c-format
 msgid "Item \"%1$s\" already exists on \"%2$s\"."
 msgstr "监控项\"%1$s\"已经存在于\"%2$s\"."
 
-#: include/classes/api/services/CItem.php:890
+#: include/classes/api/services/CItem.php:901
 #, c-format
 msgid "Item \"%1$s\" cannot populate a missing host inventory field number \"%2$d\". Choices are: from 0 (do not populate) to %3$d."
 msgstr "监控项\"%1$s\"不能填入一个不存在的主机资产纪录栏位号码\"%2$d\". 选择为: 从0(不填入)到%3$d."
@@ -9175,8 +9175,8 @@ msgstr "监控项\"%1$s\"不能填入一个不存在的主机资产纪录栏位�
 msgid "Item \"%1$s\" does not exist on template \"%2$s\"."
 msgstr "监控项\"%1$s\"不存在于模板\"%2$s\"中."
 
-#: include/classes/api/services/CDiscoveryRule.php:1309
-#: include/classes/api/services/CItemGeneral.php:1670
+#: include/classes/api/services/CDiscoveryRule.php:1319
+#: include/classes/api/services/CItemGeneral.php:1684
 #, c-format
 msgid "Item \"%1$s\" does not exist or you have no access to this item"
 msgstr "项目 \"%1$s\" 不存在或您无权访问此项目"
@@ -9191,7 +9191,7 @@ msgstr "监控项 \"%1$s\" 有主监控项并且不能被复制。"
 msgid "Item \"%1$s\" on \"%2$s\": application \"%3$s\" does not exist."
 msgstr "\"%2$s\"上的监控项\"%1$s\" : 应用集\"%3$s\"不存在."
 
-#: include/classes/api/services/CItemGeneral.php:579
+#: include/classes/api/services/CItemGeneral.php:593
 #, c-format
 msgid "Item \"%1$s:%2$s\" has invalid port: \"%3$s\"."
 msgstr "监控项\"%1$s:%2$s\"有无效的端口: \"%3$s\"."
@@ -9231,12 +9231,12 @@ msgstr "监控项在“不支持”的状态"
 msgid "Item not selected"
 msgstr "项目未被选择"
 
-#: include/classes/api/services/CItemGeneral.php:1261
+#: include/classes/api/services/CItemGeneral.php:1275
 #, c-format
 msgid "Item pre-processing is missing parameters: %1$s"
 msgstr "项目预处理缺少参数：%1$s"
 
-#: include/classes/api/services/CDiscoveryRule.php:1140
+#: include/classes/api/services/CDiscoveryRule.php:1150
 msgid "Item pre-processing is not allowed for discovery rules."
 msgstr "发现规则不允许进行项目预处理。"
 
@@ -9245,17 +9245,17 @@ msgstr "发现规则不允许进行项目预处理。"
 msgid "Item prototype"
 msgstr "监控项原型"
 
-#: include/classes/api/services/CItemPrototype.php:35
+#: include/classes/api/services/CItemPrototype.php:46
 #, c-format
 msgid "Item prototype \"%1$s\" already exists on \"%2$s\", inherited from another template."
 msgstr "监控项原型\"%1$s\"已经存在于\"%2$s\",继承自其它的模板."
 
-#: include/classes/api/services/CItemGeneral.php:1041
+#: include/classes/api/services/CItemGeneral.php:1055
 #, c-format
 msgid "Item prototype \"%1$s\" already exists on \"%2$s\", linked to another rule."
 msgstr "监控项原型 \"%1$s\" 已经在 \"%2$s\" 中存在，链接到另一个规则。"
 
-#: include/classes/api/services/CItemPrototype.php:36
+#: include/classes/api/services/CItemPrototype.php:47
 #, c-format
 msgid "Item prototype \"%1$s\" already exists on \"%2$s\"."
 msgstr "\"%2$s\"上的项目模板\"%1$s\"已经存在."
@@ -9293,11 +9293,11 @@ msgstr "项目模板已删除"
 msgid "Item updated"
 msgstr "监控项已更新"
 
-#: include/classes/api/services/CItemGeneral.php:405
+#: include/classes/api/services/CItemGeneral.php:419
 msgid "Item uses host interface from non-parent host."
 msgstr "监控项使用来自非上层主机的主机接口."
 
-#: include/classes/api/services/CItemGeneral.php:408
+#: include/classes/api/services/CItemGeneral.php:422
 msgid "Item uses incorrect interface type."
 msgstr "监控项使用错误的接口类型."
 
@@ -9305,15 +9305,15 @@ msgstr "监控项使用错误的接口类型."
 msgid "Item values"
 msgstr "项目值"
 
-#: include/classes/api/services/CItemGeneral.php:377
+#: include/classes/api/services/CItemGeneral.php:391
 msgid "Item will not be refreshed. Please enter a correct update interval."
 msgstr "监控项将不会被刷新. 请输入正确的更新间隔."
 
-#: include/classes/api/services/CItemGeneral.php:360
+#: include/classes/api/services/CItemGeneral.php:374
 msgid "Item will not be refreshed. Specified update interval requires having at least one either flexible or scheduling interval."
 msgstr "监控项不会刷新。指定的更新间隔要求至少具有一个灵活或调度间隔。"
 
-#: include/classes/api/services/CItemGeneral.php:365
+#: include/classes/api/services/CItemGeneral.php:379
 msgid "Item will not be refreshed. Update interval should be between 1s and 1d. Also Scheduled/Flexible intervals can be used."
 msgstr "监控项不会被刷新。更新间隔应该在 1s 到 1d 之间。还要指定调度/灵活间隔方式。"
 
@@ -9322,32 +9322,32 @@ msgstr "监控项不会被刷新。更新间隔应该在 1s 到 1d 之间。还�
 msgid "Item with ID \"%1$s\" is not available."
 msgstr "ID为 \"%1$s\" 的项目不可用。"
 
-#: include/classes/api/services/CItemGeneral.php:667
+#: include/classes/api/services/CItemGeneral.php:681
 #, c-format
 msgid "Item with key \"%1$s\" already exists on \"%2$s\" as a discovery rule."
 msgstr "键值为 \"%1$s\"的监控项已存在于\"%2$s\" 为探索规则."
 
-#: include/classes/api/services/CItemGeneral.php:673
+#: include/classes/api/services/CItemGeneral.php:687
 #, c-format
 msgid "Item with key \"%1$s\" already exists on \"%2$s\" as an item created from item prototype."
 msgstr "键值为 \"%1$s\"的监控项已存在于\"%2$s\" 为创建自监控项原型的项目."
 
-#: include/classes/api/services/CItemGeneral.php:670
+#: include/classes/api/services/CItemGeneral.php:684
 #, c-format
 msgid "Item with key \"%1$s\" already exists on \"%2$s\" as an item prototype."
 msgstr "键值为 \"%1$s\"的监控项已存在于\"%2$s\" 为监控项原型."
 
-#: include/classes/api/services/CItemGeneral.php:664
+#: include/classes/api/services/CItemGeneral.php:678
 #, c-format
 msgid "Item with key \"%1$s\" already exists on \"%2$s\" as an item."
 msgstr "键值为 \"%1$s\"的监控项已存在于\"%2$s\" 为监控项."
 
-#: include/classes/api/services/CItemGeneral.php:676
+#: include/classes/api/services/CItemGeneral.php:690
 #, c-format
 msgid "Item with key \"%1$s\" already exists on \"%2$s\" as unknown item element."
 msgstr "键值为 \"%1$s\"的监控项已存在于\"%2$s\" 为未知的监控项组件."
 
-#: include/classes/api/services/CItemGeneral.php:1553
+#: include/classes/api/services/CItemGeneral.php:1567
 #, c-format
 msgid "Item with key \"%1$s\" already exists on \"%2$s\"."
 msgstr "键值为 \"%1$s\"的监控项已存在于\"%2$s\" ."
@@ -9422,8 +9422,8 @@ msgstr "JSON 路径"
 msgid "JSON data"
 msgstr "JSON 数据"
 
-#: include/classes/api/services/CItemGeneral.php:2054
-#: include/classes/api/services/CItemGeneral.php:2083
+#: include/classes/api/services/CItemGeneral.php:2068
+#: include/classes/api/services/CItemGeneral.php:2097
 msgid "JSON is expected"
 msgstr ""
 
@@ -9494,7 +9494,7 @@ msgstr "资源周期不足"
 msgid "Key"
 msgstr "键值"
 
-#: include/classes/api/services/CItemGeneral.php:457
+#: include/classes/api/services/CItemGeneral.php:471
 #, c-format
 msgid "Key \"%1$s\" does not match <grpmax|grpmin|grpsum|grpavg>[\"Host group(s)\", \"Item key\", \"<last|min|max|avg|sum|count>\", \"parameter\"]."
 msgstr "键值 \"%1$s\" 不符 <grpmax|grpmin|grpsum|grpavg>[\"Host group(s)\", \"Item key\", \"<last|min|max|avg|sum|count>\", \"parameter\"]."
@@ -10526,7 +10526,7 @@ msgstr "项目丢失\"gitemid\"字段"
 msgid "Missing \"itemid\" field for item."
 msgstr "缺少\"itemid\" 的监控项栏位"
 
-#: include/classes/api/services/CItemPrototype.php:313
+#: include/classes/api/services/CItemPrototype.php:324
 #, c-format
 msgid "Missing \"name\" field for application prototype in item prototype \"%1$s\"."
 msgstr "找不到应用项目原型 \"name\" 字段 \"%1$s\"。"
@@ -11001,7 +11001,7 @@ msgstr "聚合图形的 \"%1$s\"未配置"
 msgid "No \"%2$s\" given for a filter condition of action \"%1$s\"."
 msgstr "动作\"%1$s\"的过滤器条件未配置 \"%2$s\" "
 
-#: include/classes/api/services/CDiscoveryRule.php:1117
+#: include/classes/api/services/CDiscoveryRule.php:1127
 #, c-format
 msgid "No \"%2$s\" given for a filter condition of discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的过滤器条件的\"%2$s\"未配置"
@@ -11011,7 +11011,7 @@ msgstr "自动发现规则\"%1$s\"的过滤器条件的\"%2$s\"未配置"
 msgid "No \"%2$s\" given for the filter of action \"%1$s\"."
 msgstr "动作 \"%1$s\"的过滤器未配置\"%2$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1085
+#: include/classes/api/services/CDiscoveryRule.php:1095
 #, c-format
 msgid "No \"%2$s\" given for the filter of discovery rule \"%1$s\"."
 msgstr "自动发现规则 \"%1$s\"的过滤器未配置\"%2$s\"."
@@ -11026,11 +11026,11 @@ msgstr "没有发现IPMI接口"
 msgid "No JMX interfaces found."
 msgstr "没有发现JMX接口"
 
-#: include/classes/api/services/CItemGeneral.php:567
+#: include/classes/api/services/CItemGeneral.php:581
 msgid "No SNMP OID specified."
 msgstr "没有发现指定的SNMP OID值."
 
-#: include/classes/api/services/CItemGeneral.php:573
+#: include/classes/api/services/CItemGeneral.php:587
 msgid "No SNMP community specified."
 msgstr "没有发现指定的SNMP团体名"
 
@@ -11063,7 +11063,7 @@ msgstr "没有指定给动作操作命令\"%s\"的认证类型."
 msgid "No authentication user name specified for action operation command \"%s\"."
 msgstr "没有指定给动作操作命令\"%s\"的认证用户名称."
 
-#: include/classes/api/services/CItemGeneral.php:545
+#: include/classes/api/services/CItemGeneral.php:559
 msgid "No authentication user name specified."
 msgstr "没有指定的认证用户名称"
 
@@ -11115,7 +11115,7 @@ msgstr "在\"%2$s\"上的\"%1$s\"类型无默认接口."
 msgid "No details"
 msgstr "没有细节"
 
-#: include/classes/api/services/CDiscoveryRule.php:601
+#: include/classes/api/services/CDiscoveryRule.php:611
 msgid "No discovery rule IDs given."
 msgstr "没有所称的自动发现规则ID"
 
@@ -11156,7 +11156,7 @@ msgstr "没有图表元素指定的数据图模板ID."
 msgid "No graphs added."
 msgstr "未添加数据图."
 
-#: include/classes/api/services/CDiscoveryRule.php:604
+#: include/classes/api/services/CDiscoveryRule.php:614
 msgid "No host IDs given."
 msgstr "没有所知的主机IDs"
 
@@ -11200,7 +11200,7 @@ msgstr "没有图片"
 msgid "No interface found"
 msgstr "没有找到接口"
 
-#: include/classes/api/services/CItemGeneral.php:402
+#: include/classes/api/services/CItemGeneral.php:416
 msgid "No interface found."
 msgstr "没有找到接口."
 
@@ -11302,9 +11302,9 @@ msgstr "没有系统访问权限。"
 #: include/classes/api/services/CDashboard.php:368
 #: include/classes/api/services/CDashboard.php:393
 #: include/classes/api/services/CDashboard.php:1233
-#: include/classes/api/services/CDiscoveryRule.php:479
-#: include/classes/api/services/CDiscoveryRule.php:580
-#: include/classes/api/services/CDiscoveryRule.php:616
+#: include/classes/api/services/CDiscoveryRule.php:489
+#: include/classes/api/services/CDiscoveryRule.php:590
+#: include/classes/api/services/CDiscoveryRule.php:626
 #: include/classes/api/services/CDRule.php:183
 #: include/classes/api/services/CDRule.php:309
 #: include/classes/api/services/CDRule.php:336
@@ -11314,11 +11314,11 @@ msgstr "没有系统访问权限。"
 #: include/classes/api/services/CEvent.php:894
 #: include/classes/api/services/CGraphGeneral.php:64
 #: include/classes/api/services/CGraphGeneral.php:86
-#: include/classes/api/services/CGraph.php:554
-#: include/classes/api/services/CGraph.php:688
-#: include/classes/api/services/CGraphPrototype.php:570
-#: include/classes/api/services/CGraphPrototype.php:655
-#: include/classes/api/services/CGraphPrototype.php:717
+#: include/classes/api/services/CGraph.php:555
+#: include/classes/api/services/CGraph.php:689
+#: include/classes/api/services/CGraphPrototype.php:571
+#: include/classes/api/services/CGraphPrototype.php:656
+#: include/classes/api/services/CGraphPrototype.php:718
 #: include/classes/api/services/CHostBase.php:49
 #: include/classes/api/services/CHostGeneral.php:56
 #: include/classes/api/services/CHostGroup.php:727
@@ -11353,11 +11353,11 @@ msgstr "没有系统访问权限。"
 #: include/classes/api/services/CImage.php:433
 #: include/classes/api/services/CImage.php:485
 #: include/classes/api/services/CImage.php:507
-#: include/classes/api/services/CItemGeneral.php:208
-#: include/classes/api/services/CItemGeneral.php:310
-#: include/classes/api/services/CItemGeneral.php:325
-#: include/classes/api/services/CItem.php:696
-#: include/classes/api/services/CItemPrototype.php:867
+#: include/classes/api/services/CItemGeneral.php:222
+#: include/classes/api/services/CItemGeneral.php:324
+#: include/classes/api/services/CItemGeneral.php:339
+#: include/classes/api/services/CItem.php:707
+#: include/classes/api/services/CItemPrototype.php:878
 #: include/classes/api/services/CMaintenance.php:263
 #: include/classes/api/services/CMaintenance.php:292
 #: include/classes/api/services/CMaintenance.php:305
@@ -11425,7 +11425,7 @@ msgstr "没有权限退回物件的或其不存在!"
 msgid "No private key file specified for action operation command \"%s\"."
 msgstr "没有指定给动作操作命令\"%s\"的私钥."
 
-#: include/classes/api/services/CItemGeneral.php:553
+#: include/classes/api/services/CItemGeneral.php:567
 msgid "No private key file specified."
 msgstr "没有指定的私钥."
 
@@ -11438,7 +11438,7 @@ msgstr "没有agent代理程序"
 msgid "No public key file specified for action operation command \"%s\"."
 msgstr "没有指定给动作操作命令\"%s\"的公钥文件."
 
-#: include/classes/api/services/CItemGeneral.php:550
+#: include/classes/api/services/CItemGeneral.php:564
 msgid "No public key file specified."
 msgstr "没有指定的公钥文件"
 
@@ -11949,7 +11949,7 @@ msgstr "只允许管理员设置幻灯片的所有者。"
 msgid "Only items assigned to enabled hosts are counted"
 msgstr "只计算指派给启用的主机的监控项"
 
-#: include/classes/api/services/CItemGeneral.php:1387
+#: include/classes/api/services/CItemGeneral.php:1401
 msgid "Only one change step is allowed."
 msgstr "只允许一次更改步骤。"
 
@@ -13815,7 +13815,7 @@ msgstr "SNMP接口"
 msgid "SNMP trap"
 msgstr "SNMP trap"
 
-#: include/classes/api/services/CItemGeneral.php:561
+#: include/classes/api/services/CItemGeneral.php:575
 msgid "SNMP trap key is invalid."
 msgstr "SNMP采集键值是无效的"
 
@@ -16138,7 +16138,7 @@ msgstr "周二"
 msgid "Turkish (tr_TR)"
 msgstr "土耳其语 (tr_TR)"
 
-#: include/classes/api/services/CItem.php:951
+#: include/classes/api/services/CItem.php:962
 #, c-format
 msgid "Two items (\"%1$s\" and \"%2$s\") cannot populate one host inventory field \"%3$s\", this would lead to a conflict."
 msgstr "两个项目 (\"%1$s\"和\"%2$s\")不能填入一个主机资产纪录栏位\"%3$s\", 这会造成冲突."
@@ -16231,7 +16231,7 @@ msgstr "计算方式"
 msgid "Type of information"
 msgstr "信息类型"
 
-#: include/classes/api/services/CItemGeneral.php:466
+#: include/classes/api/services/CItemGeneral.php:480
 msgid "Type of information must be \"Numeric (unsigned)\" or \"Numeric (float)\" for aggregate items."
 msgstr "信息的类型必须是“数字（符号）”或“数字（浮点）”为总项目。"
 
@@ -16526,7 +16526,7 @@ msgstr "未支持的导入格式\"%1$s\"."
 msgid "Unsupported parameter \"%2$s\" for a filter condition of action \"%1$s\"."
 msgstr "动作\"%1$s\"的过滤器条件不支持参数\"%2$s\""
 
-#: include/classes/api/services/CDiscoveryRule.php:1118
+#: include/classes/api/services/CDiscoveryRule.php:1128
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for a filter condition of discovery rule \"%1$s\"."
 msgstr "自动发现规则 \"%1$s\"的过滤器条件不支持参数\"%2$s\""
@@ -16536,7 +16536,7 @@ msgstr "自动发现规则 \"%1$s\"的过滤器条件不支持参数\"%2$s\""
 msgid "Unsupported parameter \"%2$s\" for the filter of action \"%1$s\"."
 msgstr "动作\"%1$s\"的过滤器不支持参数\"%2$s\"."
 
-#: include/classes/api/services/CDiscoveryRule.php:1086
+#: include/classes/api/services/CDiscoveryRule.php:1096
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for the filter of discovery rule \"%1$s\"."
 msgstr "自动发现规则\"%1$s\"的过滤器不支持参数\"%2$s\"."
@@ -17665,7 +17665,7 @@ msgstr "XML 数据"
 msgid "XML is empty"
 msgstr "XML空"
 
-#: include/classes/api/services/CItemGeneral.php:2039
+#: include/classes/api/services/CItemGeneral.php:2053
 msgid "XML is expected"
 msgstr ""
 
@@ -18019,7 +18019,7 @@ msgid "a number is too large"
 msgstr "数字过大"
 
 #: include/classes/api/services/CDRule.php:320
-#: include/classes/api/services/CItemGeneral.php:1308
+#: include/classes/api/services/CItemGeneral.php:1322
 #: include/classes/api/services/CScreen.php:423
 msgid "a numeric value is expected"
 msgstr "一个数值预计"
@@ -18092,8 +18092,8 @@ msgstr "所有介质"
 
 #: include/classes/api/services/CDRule.php:463
 #: include/classes/api/services/CDRule.php:470
-#: include/classes/api/services/CItemGeneral.php:1977
-#: include/classes/api/services/CItemGeneral.php:2001
+#: include/classes/api/services/CItemGeneral.php:1991
+#: include/classes/api/services/CItemGeneral.php:2015
 #: include/classes/import/validators/CXmlValidatorGeneral.php:207
 #: include/classes/validators/CApiInputValidator.php:402
 #: include/classes/validators/CApiInputValidator.php:534
@@ -18195,7 +18195,7 @@ msgstr "band() - 将最近的 T 值和掩码进行按位与运算"
 msgid "blinking"
 msgstr "闪烁"
 
-#: include/classes/api/services/CItemGeneral.php:491
+#: include/classes/api/services/CItemGeneral.php:505
 msgid "both username and password should be either present or empty"
 msgstr "用户名和密码都应该存在或为空"
 
@@ -18206,7 +18206,7 @@ msgstr "用户名和密码都应该存在或为空"
 msgid "calculated"
 msgstr "计算的"
 
-#: include/classes/api/services/CItemGeneral.php:216
+#: include/classes/api/services/CItemGeneral.php:230
 msgid "cannot be changed"
 msgstr "不能变更"
 
@@ -18229,14 +18229,14 @@ msgstr "不能变更"
 #: include/classes/api/services/CEvent.php:847
 #: include/classes/api/services/CHost.php:1624
 #: include/classes/api/services/CHost.php:1630
-#: include/classes/api/services/CItemGeneral.php:484
-#: include/classes/api/services/CItemGeneral.php:511
-#: include/classes/api/services/CItemGeneral.php:517
-#: include/classes/api/services/CItemGeneral.php:523
-#: include/classes/api/services/CItemGeneral.php:1271
-#: include/classes/api/services/CItemGeneral.php:1292
-#: include/classes/api/services/CItemGeneral.php:1325
-#: include/classes/api/services/CItemGeneral.php:1338
+#: include/classes/api/services/CItemGeneral.php:498
+#: include/classes/api/services/CItemGeneral.php:525
+#: include/classes/api/services/CItemGeneral.php:531
+#: include/classes/api/services/CItemGeneral.php:537
+#: include/classes/api/services/CItemGeneral.php:1285
+#: include/classes/api/services/CItemGeneral.php:1306
+#: include/classes/api/services/CItemGeneral.php:1339
+#: include/classes/api/services/CItemGeneral.php:1352
 #: include/classes/api/services/CMapElement.php:122
 #: include/classes/api/services/CMapElement.php:147
 #: include/classes/api/services/CMapElement.php:185
@@ -18267,7 +18267,7 @@ msgstr "不能变更"
 msgid "cannot be empty"
 msgstr "不能为空"
 
-#: include/classes/api/services/CItemGeneral.php:1993
+#: include/classes/api/services/CItemGeneral.php:2007
 msgid "cannot convert to JSON, result value too long"
 msgstr "无法转换到 JSON，结果值太长"
 
@@ -18284,7 +18284,7 @@ msgstr "change() - 最新值和前一个值的差异"
 msgid "check expression starting from \"%1$s\""
 msgstr "检查表达式从\"%1$s\"开始"
 
-#: include/classes/api/services/CItemGeneral.php:1707
+#: include/classes/api/services/CItemGeneral.php:1721
 #: include/classes/import/CConfigurationImport.php:2715
 msgid "circular item dependency is not allowed"
 msgstr "不允许循环项依赖"
@@ -18418,7 +18418,7 @@ msgstr "无法解析 JSON"
 msgid "first"
 msgstr "第一"
 
-#: include/classes/api/services/CItemGeneral.php:1346
+#: include/classes/api/services/CItemGeneral.php:1360
 msgid "first parameter is expected"
 msgstr "第一个参数是预设的"
 
@@ -18477,7 +18477,7 @@ msgstr "主机不受监控"
 msgid "host pattern"
 msgstr "主机样式"
 
-#: include/classes/api/services/CItemGeneral.php:1690
+#: include/classes/api/services/CItemGeneral.php:1704
 msgid "hostid of dependent item and master item should match"
 msgstr "依赖项目和主项目的hostid应该匹配"
 
@@ -18532,7 +18532,7 @@ msgstr "无效地址范围 \"%1$s\""
 msgid "invalid byte sequence in UTF-8"
 msgstr "UTF-8中无效的字节排序"
 
-#: include/classes/api/services/CItemGeneral.php:336
+#: include/classes/api/services/CItemGeneral.php:350
 #: include/classes/graphdraw/CLineGraphDraw.php:112
 msgid "invalid delay"
 msgstr "无效延迟"
@@ -18690,11 +18690,11 @@ msgstr "最大"
 msgid "max() - Maximum value for period T"
 msgstr "max() - 周期 T 内的最大值"
 
-#: include/classes/api/services/CItemGeneral.php:1801
+#: include/classes/api/services/CItemGeneral.php:1815
 msgid "maximum dependent items count reached"
 msgstr "达到最大依赖项数"
 
-#: include/classes/api/services/CItemGeneral.php:1787
+#: include/classes/api/services/CItemGeneral.php:1801
 #: include/classes/import/CConfigurationImport.php:2669
 #: include/classes/import/CConfigurationImport.php:2730
 msgid "maximum number of dependency levels reached"
@@ -18789,8 +18789,8 @@ msgstr "nodata() - 在周期 T 内没有收到数据（1 - true，0 - false）"
 msgid "none"
 msgstr "无"
 
-#: include/classes/api/services/CItemGeneral.php:1984
-#: include/classes/api/services/CItemGeneral.php:2008
+#: include/classes/api/services/CItemGeneral.php:1998
+#: include/classes/api/services/CItemGeneral.php:2022
 msgid "nonempty key and value pair expected"
 msgstr "期望非空键和值对"
 
@@ -18945,7 +18945,7 @@ msgstr "正确"
 msgid "root"
 msgstr "root"
 
-#: include/classes/api/services/CItemGeneral.php:1697
+#: include/classes/api/services/CItemGeneral.php:1711
 msgid "ruleid of dependent item and master item should match"
 msgstr "依赖项和主监控项的 ruleid 应匹配"
 
@@ -18959,7 +18959,7 @@ msgctxt "adjective"
 msgid "second"
 msgstr "秒"
 
-#: include/classes/api/services/CItemGeneral.php:1352
+#: include/classes/api/services/CItemGeneral.php:1366
 msgid "second parameter is expected"
 msgstr "预设的第二参数"
 
@@ -18977,11 +18977,11 @@ msgstr "简要描述"
 #: include/classes/api/services/CHost.php:1670
 #: include/classes/api/services/CHttpTest.php:959
 #: include/classes/api/services/CHttpTest.php:1057
-#: include/classes/api/services/CItemGeneral.php:498
-#: include/classes/api/services/CItemGeneral.php:536
-#: include/classes/api/services/CItemGeneral.php:1367
+#: include/classes/api/services/CItemGeneral.php:512
+#: include/classes/api/services/CItemGeneral.php:550
 #: include/classes/api/services/CItemGeneral.php:1381
-#: include/classes/api/services/CItemGeneral.php:1961
+#: include/classes/api/services/CItemGeneral.php:1395
+#: include/classes/api/services/CItemGeneral.php:1975
 #: include/classes/api/services/CMaintenance.php:490
 #: include/classes/api/services/CMaintenance.php:713
 #: include/classes/api/services/CProxy.php:662
@@ -19164,7 +19164,7 @@ msgstr "异常的文本 \"%1$s\""
 #: include/classes/api/services/CEvent.php:905
 #: include/classes/api/services/CHost.php:1604
 #: include/classes/api/services/CHost.php:1610
-#: include/classes/api/services/CItemGeneral.php:1278
+#: include/classes/api/services/CItemGeneral.php:1292
 #: include/classes/api/services/CProxy.php:559
 #: include/classes/api/services/CProxy.php:566
 #: include/classes/api/services/CTriggerGeneral.php:717
