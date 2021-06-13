@@ -28,7 +28,7 @@ if (isset($_POST['sig_response'])) {
 	}
 }
 
-$name = CWebUser::$data['alias'];
+$name = CWebUser::$data['username'];
 if (!$name || $name == ZBX_GUEST_USER) {
   // User is not authenticated
   redirect('index.php');
