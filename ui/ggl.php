@@ -14,8 +14,8 @@ if (isset($_POST['code'])) {
 	// Verify entered code and log in user.
 	// Find current user's secret
 	$db_users = DB::select('users', [
-		'output' => ['userid', 'alias', 'ggl_secret', 'ggl_enrolled'],
-		'filter' => ['alias' => $_POST['name']]
+		'output' => ['userid', 'username', 'ggl_secret', 'ggl_enrolled'],
+		'filter' => ['username' => $_POST['name']]
 	]);
 	if (count($db_users) == 0) {
 		// Should never be the case as we get here only after regular auth is done
@@ -55,7 +55,7 @@ if (isset($_POST['code'])) {
 	}
 }
 
-$name = CWebUser::$data['alias'];
+$name = CWebUser::$data['username'];
 if (!$name || $name == ZBX_GUEST_USER) {
   // User is not authenticated
   redirect('index.php');
@@ -67,8 +67,8 @@ CSessionHelper::clear();
 
 // Find out whether the user is already enrolled in Google Authenticator
 $db_users = DB::select('users', [
-	'output' => ['userid', 'alias', 'ggl_secret', 'ggl_enrolled'],
-	'filter' => ['alias' => $name]
+	'output' => ['userid', 'username', 'ggl_secret', 'ggl_enrolled'],
+	'filter' => ['username' => $name]
 ]);
 if (count($db_users) == 0) {
 	// Should never be the case as we get here only after regular auth is done
