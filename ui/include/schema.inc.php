@@ -2807,6 +2807,7 @@ return [
 				'type' => DB::FIELD_TYPE_CHAR,
 				'length' => 1024,
 				'default' => ''
+			],
 			'2fa_type' => [
 				'null' => false,
 				'type' => DB::FIELD_TYPE_INT,

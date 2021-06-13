@@ -240,6 +240,8 @@ class CRouter {
 		'timeselector.update'						=> ['CControllerTimeSelectorUpdate',					'layout.json',			null],
 		'trigdisplay.edit'							=> ['CControllerTrigDisplayEdit',						'layout.htmlpage',		'administration.trigdisplay.edit'],
 		'trigdisplay.update'						=> ['CControllerTrigDisplayUpdate',						null,					null],
+		'twofa.edit'							=> ['CControllerTwofaEdit',						'layout.htmlpage',				'administration.twofa.edit'],
+		'twofa.update'							=> ['CControllerTwofaUpdate',								null,					null],
 		'user.create'								=> ['CControllerUserCreate',							null,					null],
 		'user.delete'								=> ['CControllerUserDelete',							null,					null],
 		'user.edit'									=> ['CControllerUserEdit',								'layout.htmlpage',		'administration.user.edit'],
