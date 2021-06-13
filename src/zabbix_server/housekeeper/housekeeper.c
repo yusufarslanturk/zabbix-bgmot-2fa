@@ -561,7 +561,11 @@ static void	hk_history_delete_queue_clear(zbx_hk_history_rule_t *rule)
 static void	hk_drop_partition_for_rule(zbx_hk_history_rule_t *rule, int now)
 {
 #if defined(HAVE_POSTGRESQL)
+<<<<<<< HEAD
 	int		history_seconds;
+=======
+	int		keep_from, history_seconds;
+>>>>>>> 5.2.6-bg
 	DB_RESULT	result;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() now:%d", __func__, now);
@@ -570,17 +574,32 @@ static void	hk_drop_partition_for_rule(zbx_hk_history_rule_t *rule, int now)
 
 	if (0 == history_seconds)
 	{
+<<<<<<< HEAD
 		zabbix_log(LOG_LEVEL_TRACE, "%s: table=%s delete all", __func__, rule->table);
 
 		result = DBselect(1 == ZBX_DB_TSDB_V1 ?
 				"select drop_chunks(table_name=>'%s',newer_than=>0)" :
 				"select drop_chunks(relation=>'%s',newer_than=>0)",
 				rule->table);
+=======
+		keep_from = INT_MAX;
+	}
+	else
+	{
+		if (ZBX_HK_HISTORY_MIN > history_seconds || ZBX_HK_PERIOD_MAX < history_seconds)
+		{
+			zabbix_log(LOG_LEVEL_WARNING, "invalid history storage period for table '%s'", rule->table);
+			return;
+		}
+
+		keep_from = now - history_seconds;
+>>>>>>> 5.2.6-bg
 	}
 	else
 	{
 		int	keep_from;
 
+<<<<<<< HEAD
 		if (ZBX_HK_HISTORY_MIN > history_seconds || ZBX_HK_PERIOD_MAX < history_seconds)
 		{
 			zabbix_log(LOG_LEVEL_WARNING, "invalid history storage period for table '%s'", rule->table);
@@ -597,6 +616,14 @@ static void	hk_drop_partition_for_rule(zbx_hk_history_rule_t *rule, int now)
 				rule->table, keep_from);
 	}
 
+=======
+	zabbix_log(LOG_LEVEL_TRACE, "%s: table=%s keep_from=%d", __func__, rule->table, keep_from);
+
+	result = DBselect(1 == ZBX_DB_TSDB_V1 ?
+				"select drop_chunks(table_name=>'%s',older_than=>%d)" :
+				"select drop_chunks(relation=>'%s',older_than=>%d)",
+				rule->table, keep_from);
+>>>>>>> 5.2.6-bg
 
 	if (NULL == result)
 		zabbix_log(LOG_LEVEL_ERR, "cannot drop chunks for %s", rule->table);

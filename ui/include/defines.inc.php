@@ -134,6 +134,9 @@ define('ZBX_AUTH_FORM_ZABBIX',	0);
 define('ZBX_AUTH_FORM_HTTP',	1);
 define('ZBX_AUTH_CASE_INSENSITIVE',	0);
 define('ZBX_AUTH_CASE_SENSITIVE',	1);
+define('ZBX_AUTH_2FA_NONE',	0);
+define('ZBX_AUTH_2FA_DUO',	1);
+define('ZBX_AUTH_2FA_GGL',	2);
 
 define('ZBX_DB_MYSQL',		'MYSQL');
 define('ZBX_DB_ORACLE',		'ORACLE');
@@ -263,6 +266,7 @@ define('AUDIT_RESOURCE_TEMPLATE_DASHBOARD',	43);
 define('AUDIT_RESOURCE_USER_ROLE',			44);
 define('AUDIT_RESOURCE_AUTH_TOKEN',			45);
 define('AUDIT_RESOURCE_SCHEDULED_REPORT',	46);
+define('AUDIT_RESOURCE_AD_GROUP',		100);
 
 define('CONDITION_TYPE_HOST_GROUP',			0);
 define('CONDITION_TYPE_HOST',				1);
@@ -1355,7 +1359,11 @@ define('API_FLOATS',				13);
 define('API_UINTS64',				14);
 // specific types
 define('API_HG_NAME',				15);
+<<<<<<< HEAD
 define('API_SCRIPT_MENU_PATH',		16);
+=======
+define('API_SCRIPT_NAME',			16);
+>>>>>>> 5.2.6-bg
 define('API_USER_MACRO',			17);
 define('API_TIME_PERIOD',			18);
 define('API_REGEX',					19);
@@ -1379,9 +1387,12 @@ define('API_TRIGGER_EXPRESSION',	36);
 define('API_EVENT_NAME',			37);
 define('API_JSONRPC_PARAMS',		38);
 define('API_JSONRPC_ID',			39);
+<<<<<<< HEAD
 define('API_DATE',					40);
 define('API_NUMERIC_RANGES',		41);
 define('API_UUID',					42);
+=======
+>>>>>>> 5.2.6-bg
 
 // flags
 define('API_REQUIRED',					0x0001);

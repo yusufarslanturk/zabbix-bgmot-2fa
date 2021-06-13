@@ -267,10 +267,20 @@ class CMenuHelper {
 				? (new CMenuItem(_('Authentication')))
 					->setAction('authentication.edit')
 				: null,
+			CWebUser::checkAccess(CRoleHelper::UI_ADMINISTRATION_2FA)
+				? (new CMenuItem(_('2FA')))
+					->setAction('twofa.edit')
+					->setAliases(['twofa.update'])
+				: null,
 			CWebUser::checkAccess(CRoleHelper::UI_ADMINISTRATION_USER_GROUPS)
 				? (new CMenuItem(_('User groups')))
 					->setAction('usergroup.list')
 					->setAliases(['usergroup.edit'])
+				: null,
+			CWebUser::checkAccess(CRoleHelper::UI_ADMINISTRATION_LDAP_GROUPS)
+				? (new CMenuItem(_('LDAP groups')))
+					->setAction('adusergrps.list')
+					->setAliases(['adusergrps.edit'])
 				: null,
 			CWebUser::checkAccess(CRoleHelper::UI_ADMINISTRATION_USER_ROLES)
 				? (new CMenuItem(_('User roles')))

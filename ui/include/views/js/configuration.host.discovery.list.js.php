@@ -25,6 +25,7 @@
 ?>
 
 <script type="text/javascript">
+<<<<<<< HEAD
 	jQuery(function($) {
 		// Disable the status filter when using the state filter.
 		$('#filter_state')
@@ -32,5 +33,13 @@
 				$('input[name=filter_status]').prop('disabled', $('input[name=filter_state]:checked').val() != -1);
 			})
 			.trigger('change');
+=======
+	$(() => {
+		const $status = $('#filter_status');
+
+		$('#filter_state').on('change', (e) => {
+			$status.prop('disabled', e.target.value != -1);
+		}).trigger('change');
+>>>>>>> 5.2.6-bg
 	});
 </script>

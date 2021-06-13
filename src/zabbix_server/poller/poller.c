@@ -905,6 +905,7 @@ static int	get_values(unsigned char poller_type, int *nextcheck)
 	DCconfig_clean_items(items, NULL, num);
 	zbx_vector_ptr_clear_ext(&add_results, (zbx_mem_free_func_t)zbx_free_result_ptr);
 	zbx_vector_ptr_destroy(&add_results);
+<<<<<<< HEAD
 
 	if (NULL != data)
 	{
@@ -912,6 +913,8 @@ static int	get_values(unsigned char poller_type, int *nextcheck)
 		zbx_free(data);
 	}
 
+=======
+>>>>>>> 5.2.6-bg
 	if (items != &item)
 		zbx_free(items);
 exit:

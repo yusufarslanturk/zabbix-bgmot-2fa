@@ -9586,8 +9586,13 @@ int	DCconfig_get_poller_items(unsigned char poller_type, DC_ITEM **items)
 
 		dc_item_prev = dc_item;
 		dc_item->location = ZBX_LOC_POLLER;
+<<<<<<< HEAD
 		DCget_host(&(*items)[num].host, dc_host, ZBX_ITEM_GET_ALL);
 		DCget_item(&(*items)[num], dc_item, ZBX_ITEM_GET_ALL);
+=======
+		DCget_host(&(*items)[num].host, dc_host);
+		DCget_item(&(*items)[num], dc_item);
+>>>>>>> 5.2.6-bg
 		num++;
 	}
 

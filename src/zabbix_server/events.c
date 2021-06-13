@@ -1736,7 +1736,12 @@ static void	zbx_clean_event(DB_EVENT *event)
 	{
 		zbx_db_trigger_clean(&event->trigger);
 		zbx_free(event->trigger.correlation_tag);
+<<<<<<< HEAD
 	}
+=======
+		zbx_free(event->trigger.opdata);
+		zbx_free(event->trigger.event_name);
+>>>>>>> 5.2.6-bg
 
 	if (EVENT_SOURCE_TRIGGERS == event->source || EVENT_SOURCE_INTERNAL == event->source)
 	{

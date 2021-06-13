@@ -811,6 +811,7 @@ $form_list
 		'row_logtimefmt'
 	);
 
+<<<<<<< HEAD
 if ($data['host']['flags'] != ZBX_FLAG_DISCOVERY_CREATED) {
 	$form_list->addRow(new CLabel(_('Value mapping'), 'valuemapid_ms'),
 		(new CMultiSelect([
@@ -837,6 +838,43 @@ if ($data['host']['flags'] != ZBX_FLAG_DISCOVERY_CREATED) {
 }
 
 $form_list
+=======
+if ($readonly) {
+	if ($data['valuemaps']) {
+		$valuemaps = [['valuemapid' => $data['valuemapid'], 'name' => $data['valuemaps']]];
+	}
+	else {
+		$valuemaps = [['valuemapid' => $data['valuemapid'], 'name' => _('As is')]];
+	}
+}
+else {
+	$valuemaps = $data['valuemaps'];
+	array_unshift($valuemaps, ['valuemapid' => 0, 'name' => _('As is')]);
+}
+
+$valuemap_select = (new CSelect('valuemapid'))
+	->setId('valuemapid')
+	->setValue($data['valuemapid'])
+	->setFocusableElementId('label-valuemap')
+	->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+	->setReadonly($readonly);
+
+foreach ($valuemaps as $valuemap) {
+	$valuemap_select->addOption(new CSelectOption($valuemap['valuemapid'], $valuemap['name']));
+}
+
+if (CWebUser::getType() == USER_TYPE_SUPER_ADMIN) {
+	$valuemap_select = [$valuemap_select, '&nbsp;',
+		(new CLink(_('show value mappings'), (new CUrl('zabbix.php'))
+			->setArgument('action', 'valuemap.list')
+			->getUrl()
+		))->setAttribute('target', '_blank')
+	];
+}
+
+$form_list
+	->addRow(new CLabel(_('Show value'), 'label-valuemap'), $valuemap_select, 'row_valuemap')
+>>>>>>> 5.2.6-bg
 	->addRow(
 		new CLabel(_('Enable trapping'), 'allow_traps'),
 		[
@@ -853,6 +891,40 @@ $form_list
 		'row_trapper_hosts'
 	);
 
+<<<<<<< HEAD
+=======
+// Add "New application" and list of applications to form list.
+if ($discovered_item) {
+	$form->addVar('new_application', '');
+	foreach ($data['db_applications'] as $db_application) {
+		foreach ($data['applications'] as $application) {
+			if ($db_application['applicationid'] == $application) {
+				$form->addVar('applications[]', $db_application['applicationid']);
+			}
+		}
+	}
+
+	$application_list_box = new CListBox('applications_names[]', $data['applications'], 6);
+	foreach ($data['db_applications'] as $application) {
+		$application_list_box->addItem($application['applicationid'], CHtml::encode($application['name']));
+	}
+	$application_list_box->setEnabled(!$discovered_item);
+}
+else {
+	$form_list->addRow(new CLabel(_('New application'), 'new_application'), (new CSpan(
+		(new CTextBox('new_application', $data['new_application']))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+	))->addClass(ZBX_STYLE_FORM_NEW_GROUP));
+
+	$application_list_box = new CListBox('applications[]', $data['applications'], 6);
+	$application_list_box->addItem(0, '-'._('None').'-');
+	foreach ($data['db_applications'] as $application) {
+		$application_list_box->addItem($application['applicationid'], CHtml::encode($application['name']));
+	}
+}
+
+$form_list->addRow(_('Applications'), $application_list_box);
+
+>>>>>>> 5.2.6-bg
 // Append populate host to form list.
 if ($discovered_item) {
 	$form->addVar('inventory_link', 0);

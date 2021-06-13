@@ -699,6 +699,7 @@ else {
 	$conditions = CConditionHelper::sortConditionsByFormulaId($conditions);
 }
 
+<<<<<<< HEAD
 $operators = CSelect::createOptionsFromArray([
 	CONDITION_OPERATOR_REGEXP => _('matches'),
 	CONDITION_OPERATOR_NOT_REGEXP => _('does not match'),
@@ -706,6 +707,8 @@ $operators = CSelect::createOptionsFromArray([
 	CONDITION_OPERATOR_NOT_EXISTS => _('does not exist')
 ]);
 
+=======
+>>>>>>> 5.2.6-bg
 // fields
 foreach ($conditions as $i => $condition) {
 	// formula id
@@ -745,12 +748,23 @@ foreach ($conditions as $i => $condition) {
 			->addClass('element-table-remove')
 	];
 
+<<<<<<< HEAD
 	$row = [
 		$formulaid,
 		$macro,
 		$operator_select,
 		(new CDiv($value))->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH),
 		(new CCol($delete_button_cell))->addClass(ZBX_STYLE_NOWRAP)
+=======
+	$row = [$formulaId, $macro,
+		(new CSelect('conditions['.$i.'][operator]'))
+			->addOption(new CSelectOption(CONDITION_OPERATOR_REGEXP, _('matches')))
+			->addOption(new CSelectOption(CONDITION_OPERATOR_NOT_REGEXP, _('does not match')))
+			->setValue($condition['operator'])
+			->addClass('operator'),
+		$value,
+		(new CCol($deleteButtonCell))->addClass(ZBX_STYLE_NOWRAP)
+>>>>>>> 5.2.6-bg
 	];
 
 	$conditionTable->addRow($row, 'form_row');

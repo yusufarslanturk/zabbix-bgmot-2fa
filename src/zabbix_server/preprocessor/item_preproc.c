@@ -2119,9 +2119,12 @@ int	zbx_item_preproc(unsigned char value_type, zbx_variant_t *value, const zbx_t
 			break;
 		case ZBX_PREPROC_VALIDATE_NOT_SUPPORTED:
 			ret = item_preproc_validate_notsupport(error);
+<<<<<<< HEAD
 			break;
 		case ZBX_PREPROC_XML_TO_JSON:
 			ret = item_preproc_xml_to_json(value, error);
+=======
+>>>>>>> 5.2.6-bg
 			break;
 		default:
 			*error = zbx_dsprintf(*error, "unknown preprocessing operation");

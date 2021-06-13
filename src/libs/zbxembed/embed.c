@@ -27,6 +27,11 @@
 #include "xml.h"
 #include "embed.h"
 
+<<<<<<< HEAD
+=======
+#include "duktape.h"
+
+>>>>>>> 5.2.6-bg
 #define ZBX_ES_MEMORY_LIMIT	(1024 * 1024 * 64)
 #define ZBX_ES_TIMEOUT		10
 

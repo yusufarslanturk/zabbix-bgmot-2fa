@@ -288,7 +288,11 @@ class CRouter {
 		'widget.url.view'							=> ['CControllerWidgetUrlView',							'layout.widget',		'monitoring.widget.url.view'],
 		'widget.web.view'							=> ['CControllerWidgetWebView',							'layout.widget',		'monitoring.widget.web.view'],
 
-		// legacy actions
+		'adusergrps.create'				=> ['CControllerAdUsergroupCreate',					null,					null],
+		'adusergrps.delete'				=> ['CControllerAdUsergroupDelete',					null,					null],
+		'adusergrps.list'				=> ['CControllerAdUsergroupList',					'layout.htmlpage',		'administration.adusergroups.list'],
+		'adusergrps.edit'				=> ['CControllerAdUsergroupEdit',					'layout.htmlpage',		'administration.adusergroups.edit'],
+		'adusergrps.update'				=> ['CControllerAdUsergroupUpdate',					null,					null],
 		'actionconf.php'				=> ['CLegacyAction', null, null],
 		'adm.housekeeper.php'			=> ['CLegacyAction', null, null],
 		'adm.iconmapping.php'			=> ['CLegacyAction', null, null],
@@ -310,6 +314,8 @@ class CRouter {
 		'chart6.php'					=> ['CLegacyAction', null, null],
 		'chart7.php'					=> ['CLegacyAction', null, null],
 		'disc_prototypes.php'			=> ['CLegacyAction', null, null],
+		'duo.php'					=> ['CLegacyAction', null, null],
+		'ggl.php'					=> ['CLegacyAction', null, null],
 		'graphs.php'					=> ['CLegacyAction', null, null],
 		'history.php'					=> ['CLegacyAction', null, null],
 		'host_discovery.php'			=> ['CLegacyAction', null, null],

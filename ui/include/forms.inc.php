@@ -77,6 +77,7 @@ function prepareSubfilterOutput($label, $data, $subfilter, $subfilterName) {
 	return $output;
 }
 
+<<<<<<< HEAD
 /**
  * Make subfilter for tags.
  *
@@ -93,13 +94,163 @@ function prepareTagsSubfilterOutput(array $data, array &$subfilter): array {
 	foreach ($data as $tag_hash => $tag) {
 		$element_name = ($tag['value'] === '') ? $tag['tag'] : $tag['tag'].': '.$tag['value'];
 		$element_name = CHtml::encode($element_name);
+=======
+function getItemFilterForm(&$items) {
+	$filter_groupids			= $_REQUEST['filter_groupids'];
+	$filter_hostids				= $_REQUEST['filter_hostids'];
+	$filter_application			= $_REQUEST['filter_application'];
+	$filter_name				= $_REQUEST['filter_name'];
+	$filter_type				= $_REQUEST['filter_type'];
+	$filter_key					= $_REQUEST['filter_key'];
+	$filter_snmp_oid			= $_REQUEST['filter_snmp_oid'];
+	$filter_value_type			= $_REQUEST['filter_value_type'];
+	$filter_delay				= $_REQUEST['filter_delay'];
+	$filter_history				= $_REQUEST['filter_history'];
+	$filter_trends				= $_REQUEST['filter_trends'];
+	$filter_status				= $_REQUEST['filter_status'];
+	$filter_state				= $_REQUEST['filter_state'];
+	$filter_templated_items		= $_REQUEST['filter_templated_items'];
+	$filter_with_triggers		= $_REQUEST['filter_with_triggers'];
+	$filter_discovery           = $_REQUEST['filter_discovery'];
+	$subfilter_hosts			= $_REQUEST['subfilter_hosts'];
+	$subfilter_apps				= $_REQUEST['subfilter_apps'];
+	$subfilter_types			= $_REQUEST['subfilter_types'];
+	$subfilter_value_types		= $_REQUEST['subfilter_value_types'];
+	$subfilter_status			= $_REQUEST['subfilter_status'];
+	$subfilter_state			= $_REQUEST['subfilter_state'];
+	$subfilter_templated_items	= $_REQUEST['subfilter_templated_items'];
+	$subfilter_with_triggers	= $_REQUEST['subfilter_with_triggers'];
+	$subfilter_discovery        = $_REQUEST['subfilter_discovery'];
+	$subfilter_history			= $_REQUEST['subfilter_history'];
+	$subfilter_trends			= $_REQUEST['subfilter_trends'];
+	$subfilter_interval			= $_REQUEST['subfilter_interval'];
+
+	$filter = (new CFilter(new CUrl('items.php')))
+		->setProfile('web.items.filter')
+		->setActiveTab(CProfile::get('web.items.filter.active', 1))
+		->addVar('subfilter_hosts', $subfilter_hosts)
+		->addVar('subfilter_apps', $subfilter_apps)
+		->addVar('subfilter_types', $subfilter_types)
+		->addVar('subfilter_value_types', $subfilter_value_types)
+		->addVar('subfilter_status', $subfilter_status)
+		->addVar('subfilter_state', $subfilter_state)
+		->addVar('subfilter_templated_items', $subfilter_templated_items)
+		->addVar('subfilter_with_triggers', $subfilter_with_triggers)
+		->addVar('subfilter_discovery', $subfilter_discovery)
+		->addVar('subfilter_history', $subfilter_history)
+		->addVar('subfilter_trends', $subfilter_trends)
+		->addVar('subfilter_interval', $subfilter_interval);
+
+	$filterColumn1 = new CFormList();
+	$filterColumn2 = new CFormList();
+	$filterColumn3 = new CFormList();
+	$filterColumn4 = new CFormList();
+
+	// type select
+	$fTypeVisibility = [];
+	$type_select = (new CSelect('filter_type'))
+		->setId('filter_type')
+		->setValue($filter_type)
+		->setFocusableElementId('label-filter-type')
+		->addOption(new CSelectOption(-1, _('all')));
+
+	zbx_subarray_push($fTypeVisibility, -1, 'filter_delay_row');
+	zbx_subarray_push($fTypeVisibility, -1, 'filter_delay');
+
+	$item_types = item_type2str();
+	unset($item_types[ITEM_TYPE_HTTPTEST]); // httptest items are only for internal zabbix logic
+
+	$type_select->addOptions(CSelect::createOptionsFromArray($item_types));
+
+	foreach ($item_types as $type => $name) {
+		if ($type != ITEM_TYPE_TRAPPER && $type != ITEM_TYPE_SNMPTRAP) {
+			zbx_subarray_push($fTypeVisibility, $type, 'filter_delay_row');
+			zbx_subarray_push($fTypeVisibility, $type, 'filter_delay');
+		}
+		if ($type == ITEM_TYPE_SNMP) {
+			zbx_subarray_push($fTypeVisibility, $type, 'filter_snmp_oid_row');
+		}
+	}
+
+	zbx_add_post_js("var filterTypeSwitcher = new CViewSwitcher('filter_type', 'change', ".zbx_jsvalue($fTypeVisibility, true).');');
+
+	// row 1
+	$group_filter = !empty($filter_groupids)
+		? CArrayHelper::renameObjectsKeys(API::HostGroup()->get([
+			'output' => ['groupid', 'name'],
+			'groupids' => $filter_groupids,
+			'editable' => true
+		]), ['groupid' => 'id'])
+		: [];
+
+	$filterColumn1->addRow((new CLabel(_('Host groups'), 'filter_groupid_ms')),
+		(new CMultiSelect([
+			'name' => 'filter_groupids[]',
+			'object_name' => 'hostGroup',
+			'data' => $group_filter,
+			'popup' => [
+				'parameters' => [
+					'srctbl' => 'host_groups',
+					'srcfld1' => 'groupid',
+					'dstfrm' => $filter->getName(),
+					'dstfld1' => 'filter_groupids_',
+					'editable' => true
+				]
+			]
+		]))->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH)
+	);
+
+	$filterColumn2->addRow(new CLabel(_('Type'), $type_select->getFocusableElementId()), $type_select);
+	$filterColumn3->addRow(new CLabel(_('Type of information'), 'label-filter-value-type'),
+		(new CSelect('filter_value_type'))
+			->setFocusableElementId('label-filter-value-type')
+			->setValue($filter_value_type)
+			->addOptions(CSelect::createOptionsFromArray([
+				-1 => _('all'),
+				ITEM_VALUE_TYPE_UINT64 => _('Numeric (unsigned)'),
+				ITEM_VALUE_TYPE_FLOAT => _('Numeric (float)'),
+				ITEM_VALUE_TYPE_STR => _('Character'),
+				ITEM_VALUE_TYPE_LOG => _('Log'),
+				ITEM_VALUE_TYPE_TEXT => _('Text')
+			]))
+	);
+	$filterColumn4->addRow(new CLabel(_('State'), 'label-filter-state'),
+		(new CSelect('filter_state'))
+			->setId('filter_state')
+			->setFocusableElementId('label-filter-state')
+			->setValue($filter_state)
+			->addOptions(CSelect::createOptionsFromArray([
+				-1 => _('all'),
+				ITEM_STATE_NORMAL => itemState(ITEM_STATE_NORMAL),
+				ITEM_STATE_NOTSUPPORTED => itemState(ITEM_STATE_NOTSUPPORTED)
+			]))
+	);
+>>>>>>> 5.2.6-bg
 
 		$tag['tag'] = json_encode($tag['tag']);
 		$tag['value'] = json_encode($tag['value']);
 
+<<<<<<< HEAD
 		// is activated
 		if (array_key_exists($tag_hash, $subfilter)) {
 			$subfilter[$tag_hash]['num'] = $i;
+=======
+	$filterColumn2->addRow(_('Update interval'),
+		(new CTextBox('filter_delay', $filter_delay))->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH),
+		'filter_delay_row'
+	);
+	$filterColumn4->addRow(new CLabel(_('Status'), 'label-filter-status'),
+		(new CSelect('filter_status'))
+			->setId('filter_status')
+			->setFocusableElementId('label-filter-status')
+			->setValue($filter_status)
+			->addOptions(CSelect::createOptionsFromArray([
+				-1 => _('all'),
+				ITEM_STATUS_ACTIVE => item_status2str(ITEM_STATUS_ACTIVE),
+				ITEM_STATUS_DISABLED => item_status2str(ITEM_STATUS_DISABLED)
+			]))
+	);
+>>>>>>> 5.2.6-bg
 
 			$output[] = (new CSpan([
 				(new CLinkAction($element_name))
@@ -133,6 +284,7 @@ function prepareTagsSubfilterOutput(array $data, array &$subfilter): array {
 						'create_var("zbx_filter", "subfilter_tags['.$i.'][value]", '.$tag['value'].', true);'
 					));
 
+<<<<<<< HEAD
 				$output[] = (new CSpan([
 					$link,
 					' ',
@@ -148,6 +300,58 @@ function prepareTagsSubfilterOutput(array $data, array &$subfilter): array {
 
 	return $output;
 }
+=======
+	$filterColumn3->addRow(_('History'),
+		(new CTextBox('filter_history', $filter_history))->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH)
+	);
+	$filterColumn4->addRow(new CLabel(_('Triggers'), 'label-filter-with-triggers'),
+		(new CSelect('filter_with_triggers'))
+			->setFocusableElementId('label-filter-with-triggers')
+			->setValue($filter_with_triggers)
+			->addOptions(CSelect::createOptionsFromArray([
+				-1 => _('all'),
+				1 => _('With triggers'),
+				0 => _('Without triggers')
+			]))
+	);
+
+	// row 4
+	$filterColumn1->addRow(_('Name'),
+		(new CTextBox('filter_name', $filter_name))->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH)
+	);
+	$filterColumn2->addRow(_('SNMP OID'),
+		(new CTextBox('filter_snmp_oid', $filter_snmp_oid, '', 255))->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH),
+		'filter_snmp_oid_row'
+	);
+	$filterColumn3->addRow(_('Trends'),
+		(new CTextBox('filter_trends', $filter_trends))->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH)
+	);
+	$filterColumn4->addRow(new CLabel(_('Template'), 'label-filter-templated-items'),
+		(new CSelect('filter_templated_items'))
+			->setFocusableElementId('label-filter-templated-items')
+			->setValue($filter_templated_items)
+			->addOptions(CSelect::createOptionsFromArray([
+				-1 => _('all'),
+				1 => _('Inherited items'),
+				0 => _('Not inherited items')
+			]))
+	);
+
+	// row 5
+	$filterColumn1->addRow(_('Key'),
+		(new CTextBox('filter_key', $filter_key))->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH)
+	);
+	$filterColumn4->addRow(new CLabel(_('Discovery'), 'label-filter-discovery'),
+		(new CSelect('filter_discovery'))
+			->setFocusableElementId('label-filter-discovery')
+			->setValue($filter_discovery)
+			->addOptions(CSelect::createOptionsFromArray([
+				-1 => _('all'),
+				ZBX_FLAG_DISCOVERY_CREATED => _('Discovered items'),
+				ZBX_FLAG_DISCOVERY_NORMAL => _('Regular items')
+			]))
+	);
+>>>>>>> 5.2.6-bg
 
 function makeItemSubfilter(array &$filter_data, array $items = [], string $context) {
 	// subfilters

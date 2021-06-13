@@ -46,7 +46,11 @@ if (array_key_exists('itemid', $fields)) {
 	$scripts[] = $field_itemid->getPostJS();
 }
 
+<<<<<<< HEAD
 $scripts[] = '$("#time_type").on("change", () => ZABBIX.Dashboard.reloadWidgetProperties());';
+=======
+$scripts[] = '$("#time_type").on("change", updateWidgetConfigDialogue);';
+>>>>>>> 5.2.6-bg
 
 $form->addItem($form_list);
 

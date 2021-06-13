@@ -45,7 +45,7 @@ class testTimezone extends CWebTest {
 		$etc_time = $this->getProblemTime('Trigger for tag permissions Oracle');
 
 		// UTC -3 hours.
-		$this->setTimezone('UTC', 'gui');
+		$this->setTimezone('(UTC+00:00) UTC', 'gui');
 		date_modify($etc_time,'-3 hours');
 
 		// Return to problem page and check time.
@@ -126,7 +126,7 @@ class testTimezone extends CWebTest {
 						],
 						'Password' => 'test',
 						'Password (once again)' => 'test',
-						'Time zone' => 'UTC'
+						'Time zone' => '(UTC+00:00) UTC'
 					],
 					'time_diff' => '-3 hours',
 					'timezone_db' => 'UTC'
@@ -141,7 +141,7 @@ class testTimezone extends CWebTest {
 						],
 						'Password' => 'test',
 						'Password (once again)' => 'test',
-						'Time zone' => 'System default'
+						'Time zone' => 'System default: (UTC+02:00) Europe/Riga'
 					],
 					'time_diff' => '+0 hours',
 					'timezone_db' => 'default'
@@ -171,7 +171,7 @@ class testTimezone extends CWebTest {
 						],
 						'Password' => 'test',
 						'Password (once again)' => 'test',
-						'Time zone' => 'Asia/Magadan'
+						'Time zone' => '(UTC+11:00) Asia/Magadan'
 					],
 					'time_diff' => '+8 hours',
 					'timezone_db' => 'Asia/Magadan'

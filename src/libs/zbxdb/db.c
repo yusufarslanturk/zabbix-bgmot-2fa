@@ -101,8 +101,12 @@ static ub4	OCI_DBserver_status(void);
 #elif defined(HAVE_POSTGRESQL)
 static PGconn			*conn = NULL;
 static unsigned int		ZBX_PG_BYTEAOID = 0;
+<<<<<<< HEAD
 static int			ZBX_TSDB_VERSION = -1;
 static zbx_uint32_t		ZBX_PG_SVERSION = ZBX_DBVERSION_UNDEFINED;
+=======
+static int			ZBX_PG_SVERSION = 0, ZBX_TSDB_VERSION = -1;
+>>>>>>> 5.2.6-bg
 char				ZBX_PG_ESCAPE_BACKSLASH = 1;
 #elif defined(HAVE_SQLITE3)
 static sqlite3			*conn = NULL;
@@ -2445,6 +2449,10 @@ int	zbx_db_strlen_n(const char *text_loc, size_t maxlen)
 	return zbx_strlen_utf8_nchars(text_loc, maxlen);
 }
 
+<<<<<<< HEAD
+=======
+#if defined(HAVE_POSTGRESQL)
+>>>>>>> 5.2.6-bg
 /******************************************************************************
  *                                                                            *
  * Function: zbx_db_version_check                                             *
@@ -2529,6 +2537,7 @@ void	zbx_db_version_json_create(struct zbx_json *json, const char *database, con
  *          M = major version part                                            *
  *          m = minor version part                                            *
  *          u = patch version part                                            *
+<<<<<<< HEAD
  *                                                                            *
  * Example: if the original DB version was 1.2.34 then 10234 gets returned    *
  *                                                                            *
@@ -2539,6 +2548,8 @@ void	zbx_db_version_json_create(struct zbx_json *json, const char *database, con
  *          RR = release update version revision part                         *
  *          iv = increment version part                                       *
  *          UU = unused, reserved for future use                              *
+=======
+>>>>>>> 5.2.6-bg
  *                                                                            *
  * Example: if the OracleDB version was 18.1.0.0.7 then 1801000007 gets       *
  *          returned                                                          *
@@ -2573,6 +2584,71 @@ int	zbx_dbms_mariadb_used(void)
 {
 	return ZBX_MARIADB_SFORK;
 }
+
+/******************************************************************************
+ *                                                                            *
+ * Function: zbx_tsdb_get_version                                             *
+ *                                                                            *
+ * Purpose: returns TimescaleDB (TSDB) version as integer: MMmmuu             *
+ *          M = major version part                                            *
+ *          m = minor version part                                            *
+ *          u = patch version part                                            *
+ *                                                                            *
+ * Example: TSDB 1.5.1 version will be returned as 10501                      *
+ *                                                                            *
+ * Return value: TSDB version or 0 if unknown or the extension not installed  *
+ *                                                                            *
+ ******************************************************************************/
+int	zbx_tsdb_get_version(void)
+{
+	int		ver, major, minor, patch;
+	DB_RESULT	result;
+	DB_ROW		row;
+
+	if (-1 == ZBX_TSDB_VERSION)
+	{
+		/* catalog pg_extension not available */
+		if (90001 > ZBX_PG_SVERSION)
+		{
+			ver = ZBX_TSDB_VERSION = 0;
+			goto out;
+		}
+
+		result = zbx_db_select("select extversion from pg_extension where extname = 'timescaledb'");
+
+		/* database down, can re-query in the next call */
+		if ((DB_RESULT)ZBX_DB_DOWN == result)
+		{
+			ver = 0;
+			goto out;
+		}
+
+		/* extension is not installed */
+		if (NULL == result)
+		{
+			ver = ZBX_TSDB_VERSION = 0;
+			goto out;
+		}
+
+		if (NULL != (row = zbx_db_fetch(result)) &&
+				3 == sscanf((const char*)row[0], "%d.%d.%d", &major, &minor, &patch))
+		{
+			ver = major * 10000;
+			ver += minor * 100;
+			ver += patch;
+			ZBX_TSDB_VERSION = ver;
+		}
+		else
+			ver = ZBX_TSDB_VERSION = 0;
+
+		DBfree_result(result);
+	}
+	else
+		ver = ZBX_TSDB_VERSION;
+out:
+	return ver;
+}
+
 #endif
 
 /***************************************************************************************************************

@@ -393,7 +393,7 @@ class CUser extends CApiService {
 
 			// strings
 			$field_names = ['username', 'name', 'surname', 'autologout', 'passwd', 'refresh', 'url', 'lang', 'theme',
-				'timezone'
+				'timezone', 'ggl_secret'
 			];
 			foreach ($field_names as $field_name) {
 				if (array_key_exists($field_name, $user) && $user[$field_name] !== $db_user[$field_name]) {
@@ -402,7 +402,7 @@ class CUser extends CApiService {
 			}
 
 			// integers
-			foreach (['autologin', 'rows_per_page', 'roleid'] as $field_name) {
+			foreach (['autologin', 'rows_per_page', 'roleid', 'ggl_enrolled'] as $field_name) {
 				if (array_key_exists($field_name, $user) && $user[$field_name] != $db_user[$field_name]) {
 					$upd_user[$field_name] = $user[$field_name];
 				}
@@ -471,7 +471,9 @@ class CUser extends CApiService {
 				'active' =>			['type' => API_INT32, 'in' => implode(',', [MEDIA_STATUS_ACTIVE, MEDIA_STATUS_DISABLED])],
 				'severity' =>		['type' => API_INT32, 'in' => '0:63'],
 				'period' =>			['type' => API_TIME_PERIOD, 'flags' => API_ALLOW_USER_MACRO, 'length' => DB::getFieldLength('media', 'period')]
-			]]
+			]],
+			'ggl_secret' =>				['type' => API_STRING_UTF8, 'flags' => API_NOT_EMPTY, 'length' => 255],
+			'ggl_enrolled' =>			['type' => API_ID]
 		]];
 
 		reset($users);
@@ -1323,7 +1325,7 @@ class CUser extends CApiService {
 	 *
 	 * @param array $user
 	 *
-	 * @return bool
+	 * @return false if fails. Array with AD info about user if succeeds.
 	 */
 	protected function ldapLogin(array $user) {
 		$cnf = [];
@@ -1350,8 +1352,9 @@ class CUser extends CApiService {
 
 		$ldapValidator = new CLdapAuthValidator(['conf' => $cnf]);
 
-		if ($ldapValidator->validate($user)) {
-			return true;
+		$user_info = $ldapValidator->validate($user);
+		if ($user_info) {
+			return $user_info;
 		}
 		else {
 			self::exception($ldapValidator->isConnectionError()
@@ -1435,6 +1438,88 @@ class CUser extends CApiService {
 			GROUP_GUI_ACCESS_DISABLED => CAuthenticationHelper::get(CAuthenticationHelper::AUTHENTICATION_TYPE)
 		];
 
+		// Find out whether the user exists in internal DB
+		$user_found_in_db = false;
+		if (CAuthenticationHelper::get(CAuthenticationHelper::LDAP_CASE_SENSITIVE) == ZBX_AUTH_CASE_SENSITIVE) {
+			$db_users = DB::select('users', [
+				'output' => ['userid', 'username'],
+				'filter' => ['username' => $user['user']]
+			]);
+			if (count($db_users) > 0) {
+				$user_found_in_db = true;
+			}
+		}
+		else {
+			$db_users_rows = DBfetchArray(DBselect(
+				'SELECT '.implode(',', $fields).
+				' FROM users'.
+					' WHERE LOWER(username)='.zbx_dbstr(strtolower($user['user']))
+			));
+			if (count($db_users_rows) > 0) {
+				$user_found_in_db = true;
+			}
+		}
+
+		$user_info = [];
+		if (!$user_found_in_db) {
+			// When user not found in DB check if we use LDAP as default(system) method of authentication
+			if (CAuthenticationHelper::get(CAuthenticationHelper::AUTHENTICATION_TYPE) == ZBX_AUTH_LDAP &&
+				CAuthenticationHelper::get(CAuthenticationHelper::LDAP_CONFIGURED) == ZBX_AUTH_LDAP_ENABLED) {
+				// LDAP authenticate user to map its AD group to User Group(s)
+				$user_info = $this->ldapLogin($user);
+				$adgroups = $user_info['memberof']; // Array of all AD groups the user is member of
+				// Get User Groups associated with at least one of AD group from all AD Groups the user is member of
+				$usrgrps_and_role = $this->getAdUserGroupsData($adgroups);
+				// Create User in local DB
+				if (array_key_exists('mail', $user_info)) {
+					$medias = [
+						[
+							'mediatypeid' => 1,
+							'sendto' => [$user_info['mail'][0]],
+							'active' => 1,
+							'severity' => 63,
+							'period' => '1-7,00:00-24:00'
+						]
+					];
+				}
+				else {
+					$medias = [];
+				}
+				if (array_key_exists('name', $user_info)) {
+					if (is_array($user_info['name'])) {
+						$user_name = $user_info['name'][0];
+					} else {
+						$user_name = $user_info['name'];
+					}
+				} else {
+					$user_name = '';
+				}
+				$new_user = [
+					'username' => $user['user'],
+					'name' => $user_name,
+					'surname' => '',
+					'url' => '',
+					'passwd' => md5($user['password']),
+					'roleid' => $usrgrps_and_role['roleid']
+				];
+				// This will not work here as we are not Admin at this point
+				// $result = (bool) API::User()->create($user);
+				$userid = DB::insert('users', [$new_user]);
+				$new_user['userid'] = $userid[0];
+				$new_user['user_medias'] = $medias;
+				$new_user['usrgrps'] = $usrgrps_and_role['groups'];
+
+				$this->updateUsersGroups([$new_user], __FUNCTION__);
+				$this->updateMedias([$new_user], __FUNCTION__);
+
+		                self::$userData = $new_user;
+				$this->addAuditBulk(AUDIT_ACTION_ADD, AUDIT_RESOURCE_USER, [$new_user]);
+			}
+			else {
+				self::exception(ZBX_API_ERROR_PARAMETERS, _('Login name or password is incorrect.'));
+			}
+		}
+
 		$db_user = $this->findByUsername($user['username'],
 			(CAuthenticationHelper::get(CAuthenticationHelper::LDAP_CASE_SENSITIVE) == ZBX_AUTH_CASE_SENSITIVE),
 			CAuthenticationHelper::get(CAuthenticationHelper::AUTHENTICATION_TYPE), true
@@ -1454,7 +1539,11 @@ class CUser extends CApiService {
 		try {
 			switch ($group_to_auth_map[$db_user['gui_access']]) {
 				case ZBX_AUTH_LDAP:
-					$this->ldapLogin($user);
+					if (empty($user_info)) {
+						// Perform authentication only if it has not already been done.
+						// The user would be already authenticated if it did not exist in local DB.
+						$this->ldapLogin($user);
+					}
 					break;
 
 				case ZBX_AUTH_INTERNAL:
@@ -1691,6 +1780,68 @@ class CUser extends CApiService {
 		}
 
 		return $usrgrps;
+	}
+
+	private function getAdUserGroupsData($adgroups) {
+		// $adgroups is an array of records like this
+		// 'CN=<cn_name>,OU=<ouX>,OU=<ouY>...etc'
+		// We use only CN field to map groups
+		$adgrps = array();
+		foreach ($adgroups as $adgroup) {
+			if (preg_match('/CN=(.+?),OU=/i', $adgroup, $matches)) {
+				$adgrps[] = $matches[1];
+			}
+		}
+
+		$adgrp_id = -1;
+		$adgrp_name = '';
+		$user_type = -1;
+		$roleid = -1;
+		$user_groups = [];
+		foreach ($adgrps as $adgrp) {
+			$db_adgrp =  DB::select('adusrgrp', [
+				'output' => ['adusrgrpid', 'name', 'roleid'],
+				'filter' => ['name' => $adgrp]
+			]);
+
+			if (!empty($db_adgrp)) {
+				// AD group found in internal DB
+				$role =  DB::select('role', [
+					'output' => ['roleid', 'type'],
+					'filter' => ['roleid' => $db_adgrp[0]['roleid']]
+				]);
+				$adgrp_id = $db_adgrp[0]['adusrgrpid'];
+				$adgrp_name = $db_adgrp[0]['name'];
+				if ($role[0]['type'] > $user_type) {
+					// The highest privilege wins
+					$user_type = $role[0]['type'];
+					$roleid = $role[0]['roleid'];
+				}
+				$db_usrgrps =  DB::select('adgroups_groups', [
+					'output' => ['usrgrpid'],
+					'filter' => ['adusrgrpid' => $adgrp_id]
+				]);
+				if (!empty($db_usrgrps)) {
+					foreach ($db_usrgrps as $db_usrgrp) {
+						$user_groups[] = $db_usrgrp;
+					}
+				}
+			}
+		}
+
+		if (count($user_groups) == 0) {
+			// Something is wrong - AD group exists in DB but not associated with any User Group
+			self::exception(ZBX_API_ERROR_PARAMETERS, _('Login name or password is incorrect.'));
+		}
+
+		// Need to return:
+		// - an array of User Groups found associated with this AD group
+		// - UserType associated with this AD group
+		$ret = [
+			'groups' => $user_groups,
+			'roleid' => $roleid
+		];
+		return $ret;
 	}
 
 	/**

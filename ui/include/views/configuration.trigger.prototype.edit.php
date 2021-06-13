@@ -28,10 +28,13 @@ require_once dirname(__FILE__).'/js/configuration.triggers.edit.js.php';
 $triggersWidget = (new CWidget())
 	->setTitle(_('Trigger prototypes'))
 	->setNavigation(getHostNavigation('triggers', $data['hostid'], $data['parent_discoveryid']));
+<<<<<<< HEAD
 
 $url = (new CUrl('trigger_prototypes.php'))
 	->setArgument('context', $data['context'])
 	->getUrl();
+=======
+>>>>>>> 5.2.6-bg
 
 // create form
 $triggersForm = (new CForm('post', $url))

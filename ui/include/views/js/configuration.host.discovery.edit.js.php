@@ -54,6 +54,7 @@ include dirname(__FILE__).'/configuration.host.discovery.edit.overr.js.php';
 				->setAttribute('placeholder', '{#MACRO}')
 				->setAttribute('data-formulaid', '#{formulaId}'),
 			(new CSelect('conditions[#{rowNum}][operator]'))
+<<<<<<< HEAD
 				->setValue(CONDITION_OPERATOR_REGEXP)
 				->addClass('js-operator')
 				->addOptions(CSelect::createOptionsFromArray([
@@ -68,6 +69,15 @@ include dirname(__FILE__).'/configuration.host.discovery.edit.overr.js.php';
 					->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH)
 					->setAttribute('placeholder', _('regular expression'))
 			))->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH),
+=======
+				->addOption(new CSelectOption(CONDITION_OPERATOR_REGEXP, _('matches')))
+				->addOption(new CSelectOption(CONDITION_OPERATOR_NOT_REGEXP, _('does not match')))
+				->setValue(CONDITION_OPERATOR_REGEXP)
+				->addClass('operator'),
+			(new CTextBox('conditions[#{rowNum}][value]', '', false, 255))
+				->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH)
+				->setAttribute('placeholder', _('regular expression')),
+>>>>>>> 5.2.6-bg
 			(new CCol(
 				(new CButton('conditions_#{rowNum}_remove', _('Remove')))
 					->addClass(ZBX_STYLE_BTN_LINK)

@@ -528,6 +528,16 @@ class testItemTest extends CWebTest {
 			],
 			[
 				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Type' => 'Zabbix aggregate',
+						'Key' => 'key'
+					],
+					'error' => 'Key "key" does not match <grpmax|grpmin|grpsum|grpavg>["Host group(s)", "Item key", "<last|min|max|avg|sum|count>", "parameter"].'
+				]
+			],
+			[
+				[
 					'expected' => TEST_GOOD,
 					'fields' => [
 						'Type' => 'Zabbix agent',
@@ -583,6 +593,19 @@ class testItemTest extends CWebTest {
 						'Type' => 'Zabbix agent',
 						'Key' => 'test.item.preproc.change.per.second'
 					],
+					'preprocessing' => [
+						['type' => 'Change per second']
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Type' => 'Zabbix agent',
+						'Key' => 'test.item.preproc.change.per.second'
+					],
+					'host_value' => false,
 					'preprocessing' => [
 						['type' => 'Change per second']
 					]

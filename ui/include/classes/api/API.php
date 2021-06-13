@@ -431,6 +431,13 @@ class API {
 	}
 
 	/**
+	 * @return CAdUserGroup
+	 */
+	public static function AdUserGroup() {
+		return self::getApi('adusergroup');
+	}
+
+	/**
 	 * @return CUserMacro
 	 */
 	public static function UserMacro() {
@@ -449,5 +456,12 @@ class API {
 	 */
 	public static function HttpTest() {
 		return self::getApi('httptest');
+	}
+
+	/**
+	 * @return CTwofa
+	 */
+	public static function Twofa() {
+		return self::getApi('twofa');
 	}
 }

@@ -36,6 +36,14 @@ $widget = (new CWidget())
 		))->setAttribute('aria-label', _('Content controls'))
 	)
 	->setNavigation(getHostNavigation('triggers', $this->data['hostid'], $this->data['parent_discoveryid']));
+<<<<<<< HEAD
+=======
+
+// create form
+$triggersForm = (new CForm())
+	->setName('triggersForm')
+	->addVar('parent_discoveryid', $this->data['parent_discoveryid']);
+>>>>>>> 5.2.6-bg
 
 $url = (new CUrl('trigger_prototypes.php'))
 	->setArgument('parent_discoveryid', $data['parent_discoveryid'])

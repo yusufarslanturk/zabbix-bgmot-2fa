@@ -28,6 +28,17 @@ require_once dirname(__FILE__).'/behaviors/CMessageBehavior.php';
  */
 class testInheritanceTrigger extends CLegacyWebTest {
 
+	/**
+	 * Attach MessageBehavior to the test.
+	 *
+	 * @return array
+	 */
+	public function getBehaviors() {
+		return [
+			'class' => CMessageBehavior::class
+		];
+	}
+
 	private $templateid = 15000;	// 'Inheritance test template'
 	private $template = 'Inheritance test template';
 
@@ -175,9 +186,15 @@ class testInheritanceTrigger extends CLegacyWebTest {
 				->asTable()->waitUntilReady()->one();
 		$triggers_table->findRow('Name', $inherited_trigger)->getColumn('Name')->query('tag:a')->one()->click();
 
+<<<<<<< HEAD
 		$triggers_form = $this->query('name:triggersForm')->waitUntilPresent()->asForm()->one();
 		// Fill tags on trigger.
 		$triggers_form->selectTab('Tags');
+=======
+		$trigger_form = $this->query('name:triggersForm')->waitUntilPresent()->asForm()->one();
+		// Fill tags on trigger.
+		$trigger_form->selectTab('Tags');
+>>>>>>> 5.2.6-bg
 
 		$templated_trigger_tags = [
 			['name'=>'tag1', 'value'=>'trigger'],
@@ -186,7 +203,11 @@ class testInheritanceTrigger extends CLegacyWebTest {
 		$templated_trigger_tags_count = count($templated_trigger_tags);
 
 		$this->fillTags($templated_trigger_tags, $templated_trigger_tags_count);
+<<<<<<< HEAD
 		$triggers_form->submit();
+=======
+		$trigger_form->submit();
+>>>>>>> 5.2.6-bg
 		$this->page->waitUntilReady();
 		$this->assertMessage(TEST_GOOD, 'Trigger updated');
 
@@ -198,22 +219,35 @@ class testInheritanceTrigger extends CLegacyWebTest {
 					->waitUntilPresent()->asTable()->one();
 		$host_triggers_table->query('link', $inherited_trigger)->one()->click();
 		// Check trigger name.
+<<<<<<< HEAD
 		$triggers_form->invalidate();
 		$name = $triggers_form->getField('Name')->getValue();
 		$this->assertEquals($name, $inherited_trigger);
 		// Check tags.
 		$triggers_form->selectTab('Tags');
+=======
+		$trigger_form->invalidate();
+		$name = $trigger_form->getField('Name')->getValue();
+		$this->assertEquals($name, $inherited_trigger);
+		// Check tags.
+		$trigger_form->selectTab('Tags');
+>>>>>>> 5.2.6-bg
 		$trigger_tags_table = $this->query('id:tags-table')->asTable()->one();
 		// Check trigger tags.
 		$triggers_tags_slice_1 = $trigger_tags_table->getRows()->slice(0, -1); // Remove Add button from cycle.
 		$this->checkTags($triggers_tags_slice_1, $templated_trigger_tags);
 
 		// Click on inherited and trigger tags radio.
+<<<<<<< HEAD
 		$triggers_form->getField('id:show_inherited_tags')->fill('Inherited and trigger tags');
 
 		$triggers_tags_slice_2 = $trigger_tags_table->getRows()->slice(0, -($template_tags_count+1)); // Remove templated tags and Add button from cycle.
 		$template_tags_slice = $trigger_tags_table->getRows()->slice($templated_trigger_tags_count, -1); // Remove trigger tags and Add button from cycle.
 
+=======
+		$trigger_form->getField('id:show_inherited_tags')->fill('Inherited and trigger tags');
+
+>>>>>>> 5.2.6-bg
 		// All expected trigger tags including host and template tags.
 		$inherited_trigger_tags = [
 			['name'=>'host_tag', 'value'=>'host_tag_value'],

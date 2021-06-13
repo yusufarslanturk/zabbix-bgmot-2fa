@@ -1082,10 +1082,17 @@ function getDataOverviewCellData(array $db_items, array $data, int $show_suppres
 						}
 					}
 					$trigger = $db_triggers[$max_priority_triggerid];
+<<<<<<< HEAD
 				}
 				else {
 					$trigger = null;
 				}
+=======
+				}
+				else {
+					$trigger = null;
+				}
+>>>>>>> 5.2.6-bg
 
 				$item += [
 					'value' => array_key_exists($itemid, $history) ? $history[$itemid][0]['value'] : null,
@@ -1107,6 +1114,7 @@ function getDataOverviewCellData(array $db_items, array $data, int $show_suppres
  *
  * @return array
  */
+<<<<<<< HEAD
 function getDataOverviewItems(?array $groupids = null, ?array $hostids = null, ?array $tags,
 		int $evaltype = TAG_EVAL_TYPE_AND_OR): array {
 
@@ -1115,10 +1123,61 @@ function getDataOverviewItems(?array $groupids = null, ?array $hostids = null, ?
 		$db_hosts = API::Host()->get([
 			'output' => [],
 			'groupids' => $groupids,
+=======
+function getDataOverviewItems(?array $groupids = null, ?array $hostids = null, ?string $application = ''): array {
+	if ($application !== '') {
+		$db_applications = API::Application()->get([
+			'output' => ['hostid'],
+			'hostids' => $hostids,
+			'groupids' => $groupids,
+			'search' => ['name' => $application],
+			'preservekeys' => true
+		]);
+
+		$applicationids = array_keys($db_applications);
+		$hostids = array_keys(array_flip(array_column($db_applications, 'hostid')));
+	}
+	else {
+		$applicationids = null;
+	}
+
+	if ($hostids === null) {
+		$limit = (int) CSettingsHelper::get(CSettingsHelper::MAX_OVERVIEW_TABLE_SIZE) + 1;
+		$db_hosts = API::Host()->get([
+			'output' => [],
+			'groupids' => $groupids,
+			'applicationids' => $applicationids,
+>>>>>>> 5.2.6-bg
 			'monitored_hosts' => true,
 			'with_monitored_items' => true,
 			'preservekeys' => true,
 			'limit' => $limit
+<<<<<<< HEAD
+=======
+		]);
+		$hostids = array_keys($db_hosts);
+	}
+
+	if ($application !== '') {
+		$db_items = API::Item()->get([
+			'output' => ['itemid', 'hostid', 'name', 'key_', 'value_type', 'units', 'valuemapid'],
+			'selectHosts' => ['name'],
+			'applicationids' => $applicationids,
+			'monitored' => true,
+			'webitems' => true,
+			'preservekeys' => true
+		]);
+	}
+	else {
+		$db_items = API::Item()->get([
+			'output' => ['itemid', 'hostid', 'name', 'key_', 'value_type', 'units', 'valuemapid'],
+			'selectHosts' => ['name'],
+			'hostids' => $hostids,
+			'groupids' => $groupids,
+			'monitored' => true,
+			'webitems' => true,
+			'preservekeys' => true
+>>>>>>> 5.2.6-bg
 		]);
 		$hostids = array_keys($db_hosts);
 	}
@@ -1147,16 +1206,25 @@ function getDataOverviewItems(?array $groupids = null, ?array $hostids = null, ?
 }
 
 /**
+<<<<<<< HEAD
  * @param array  $groupids
  * @param array  $hostids
  * @param array  $filter
  * @param array  $filter['tags']
  * @param int    $filter['evaltype']
  * @param int    $filter['show_suppressed']
+=======
+ * @param array   $groupids
+ * @param array   $hostids
+ * @param array   $filter
+ * @param string  $filter['application']
+ * @param int     $filter['show_suppressed']
+>>>>>>> 5.2.6-bg
  *
  * @return array
  */
 function getDataOverview(?array $groupids, ?array $hostids, array $filter): array {
+<<<<<<< HEAD
 	$tags = (array_key_exists('tags', $filter) && $filter['tags']) ? $filter['tags'] : null;
 	$evaltype = array_key_exists('evaltype', $filter) ? $filter['evaltype'] : TAG_EVAL_TYPE_AND_OR;
 
@@ -1182,11 +1250,39 @@ function getDataOverview(?array $groupids, ?array $hostids, array $filter): arra
 		$item_place = $item_counter[$host_name][$item_name];
 		$item_counter[$host_name][$item_name]++;
 
+=======
+	[$db_items, $hostids] = getDataOverviewItems($groupids, $hostids, $filter['application']);
+
+	$data = [];
+	$item_counter = [];
+	$db_hosts = [];
+
+	foreach ($db_items as $db_item) {
+		$item_name = $db_item['name_expanded'];
+		$host_name = $db_item['hosts'][0]['name'];
+		$db_hosts[$db_item['hostid']] = $db_item['hosts'][0];
+
+		if (!array_key_exists($host_name, $item_counter)) {
+			$item_counter[$host_name] = [];
+		}
+
+		if (!array_key_exists($item_name, $item_counter[$host_name])) {
+			$item_counter[$host_name][$item_name] = 0;
+		}
+
+		$item_place = $item_counter[$host_name][$item_name];
+		$item_counter[$host_name][$item_name]++;
+
+>>>>>>> 5.2.6-bg
 		$item = [
 			'itemid' => $db_item['itemid'],
 			'value_type' => $db_item['value_type'],
 			'units' => $db_item['units'],
+<<<<<<< HEAD
 			'valuemap' => $db_item['valuemap'],
+=======
+			'valuemapid' => $db_item['valuemapid'],
+>>>>>>> 5.2.6-bg
 			'acknowledged' => array_key_exists('acknowledged', $db_item) ? $db_item['acknowledged'] : 0
 		];
 
@@ -1196,6 +1292,7 @@ function getDataOverview(?array $groupids, ?array $hostids, array $filter): arra
 				'severity' => $db_item['priority'],
 				'tr_value' => $db_item['value']
 			];
+<<<<<<< HEAD
 		}
 		else {
 			$item += [
@@ -1204,6 +1301,16 @@ function getDataOverview(?array $groupids, ?array $hostids, array $filter): arra
 				'tr_value' => null
 			];
 		}
+=======
+		}
+		else {
+			$item += [
+				'triggerid' => null,
+				'severity' => null,
+				'tr_value' => null
+			];
+		}
+>>>>>>> 5.2.6-bg
 
 		$data[$item_name][$item_place][$host_name] = $item;
 	}
@@ -1211,6 +1318,7 @@ function getDataOverview(?array $groupids, ?array $hostids, array $filter): arra
 	CArrayHelper::sort($db_hosts, [
 		['field' => 'name', 'order' => ZBX_SORT_UP]
 	]);
+<<<<<<< HEAD
 
 	$data_display_limit = (int) CSettingsHelper::get(CSettingsHelper::MAX_OVERVIEW_TABLE_SIZE);
 	$has_hidden_hosts = (count($db_hosts) > $data_display_limit);
@@ -1236,6 +1344,33 @@ function getDataOverview(?array $groupids, ?array $hostids, array $filter): arra
 	});
 	$data = array_filter($data);
 
+=======
+
+	$data_display_limit = (int) CSettingsHelper::get(CSettingsHelper::MAX_OVERVIEW_TABLE_SIZE);
+	$has_hidden_hosts = (count($db_hosts) > $data_display_limit);
+	$db_hosts = array_slice($db_hosts, 0, $data_display_limit, true);
+
+	$data = array_slice($data, 0, $data_display_limit);
+	$items_left = $data_display_limit;
+	$itemids = [];
+	array_walk($data, function (array &$item_columns) use ($data_display_limit, &$itemids, &$items_left) {
+		if ($items_left != 0) {
+			$item_columns = array_slice($item_columns, 0, min($data_display_limit, $items_left));
+			$items_left -= count($item_columns);
+		}
+		else {
+			$item_columns = null;
+			return;
+		}
+
+		array_walk($item_columns, function (array &$item_column) use ($data_display_limit, &$itemids) {
+			$item_column = array_slice($item_column, 0, $data_display_limit);
+			$itemids += array_column($item_column, 'itemid', 'itemid');
+		});
+	});
+	$data = array_filter($data);
+
+>>>>>>> 5.2.6-bg
 	$has_hidden_items = (count($db_items) != count($itemids));
 
 	$db_items = array_intersect_key($db_items, $itemids);

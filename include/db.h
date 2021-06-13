@@ -534,6 +534,10 @@ int		DBcheck_capabilities(zbx_uint32_t db_version);
 char	*zbx_db_get_schema_esc(void);
 #endif
 
+#ifdef HAVE_POSTGRESQL
+char	*zbx_db_get_schema_esc(void);
+#endif
+
 /******************************************************************************
  *                                                                            *
  * Type: ZBX_GRAPH_ITEMS                                                      *

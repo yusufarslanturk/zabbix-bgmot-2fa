@@ -686,8 +686,13 @@ function getTriggersOverviewTableData(array $db_hosts, array $db_triggers): arra
  *
  * @return array
  */
+<<<<<<< HEAD
 function getTriggersOverviewData(array $groupids, array $host_options = [], array $trigger_options = [],
 		array $problem_options = []): array {
+=======
+function getTriggersOverviewData(array $groupids, string $application, array $host_options = [],
+		array $trigger_options = [], array $problem_options = []): array {
+>>>>>>> 5.2.6-bg
 
 	$host_options = [
 		'output' => ['hostid', 'name'],
@@ -715,10 +720,27 @@ function getTriggersOverviewData(array $groupids, array $host_options = [], arra
 		$db_hosts = API::Host()->get(['limit' => $limit + 1] + $host_options);
 		$fetch_hosts = (count($db_hosts) > $limit);
 
+<<<<<<< HEAD
 		$db_triggers = getTriggersWithActualSeverity([
 			'hostids' => array_keys($db_hosts)
 		] + $trigger_options, $problem_options);
 
+=======
+		$applicationids = ($application !== '')
+			? array_keys(API::Application()->get([
+				'output' => [],
+				'hostids' => array_keys($db_hosts),
+				'search' => ['name' => $application],
+				'preservekeys' => true
+			]))
+			: null;
+
+		$db_triggers = getTriggersWithActualSeverity([
+			'applicationids' => $applicationids,
+			'hostids' => array_keys($db_hosts)
+		] + $trigger_options, $problem_options);
+
+>>>>>>> 5.2.6-bg
 		if (!$db_triggers) {
 			$db_hosts = [];
 		}

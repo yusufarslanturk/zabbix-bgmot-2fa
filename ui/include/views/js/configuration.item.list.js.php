@@ -25,6 +25,7 @@
 ?>
 
 <script type="text/javascript">
+<<<<<<< HEAD
 	jQuery(function($) {
 		// Disable the status filter when using the state filter.
 		$('#filter_state')
@@ -44,6 +45,14 @@
 		document.querySelectorAll('#filter-tags .form_row').forEach(row => {
 			new CTagFilterItem(row);
 		});
+=======
+	$(() => {
+		const $status = $('#filter_status');
+
+		$('#filter_state').on('change', (e) => {
+			$status.prop('disabled', e.target.value != -1);
+		}).trigger('change');
+>>>>>>> 5.2.6-bg
 	});
 </script>
 
