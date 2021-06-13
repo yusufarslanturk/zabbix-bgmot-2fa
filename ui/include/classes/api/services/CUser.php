@@ -1443,7 +1443,7 @@ class CUser extends CApiService {
 		if (CAuthenticationHelper::get(CAuthenticationHelper::LDAP_CASE_SENSITIVE) == ZBX_AUTH_CASE_SENSITIVE) {
 			$db_users = DB::select('users', [
 				'output' => ['userid', 'username'],
-				'filter' => ['username' => $user['user']]
+				'filter' => ['username' => $user['username']]
 			]);
 			if (count($db_users) > 0) {
 				$user_found_in_db = true;
@@ -1453,7 +1453,7 @@ class CUser extends CApiService {
 			$db_users_rows = DBfetchArray(DBselect(
 				'SELECT '.implode(',', $fields).
 				' FROM users'.
-					' WHERE LOWER(username)='.zbx_dbstr(strtolower($user['user']))
+					' WHERE LOWER(username)='.zbx_dbstr(strtolower($user['username']))
 			));
 			if (count($db_users_rows) > 0) {
 				$user_found_in_db = true;
@@ -1495,7 +1495,7 @@ class CUser extends CApiService {
 					$user_name = '';
 				}
 				$new_user = [
-					'username' => $user['user'],
+					'username' => $user['username'],
 					'name' => $user_name,
 					'surname' => '',
 					'url' => '',

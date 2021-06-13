@@ -56,7 +56,7 @@ class CLdapAuthValidator extends CValidator {
 
 		$ldap = new CLdap($this->conf);
 
-		$user_info = $ldap->checkPass($value['user'], $value['password']);
+		$user_info = $ldap->checkPass($value['username'], $value['password']);
 
 		if (!$user_info) {
 			$this->setError($ldap->error);
