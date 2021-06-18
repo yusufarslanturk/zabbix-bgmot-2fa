@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-11 19:50+0300\n"
+"POT-Creation-Date: 2021-06-18 19:50+0300\n"
 "PO-Revision-Date: 2018-11-30 14:01+0300\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: none\n"
@@ -16395,11 +16395,11 @@ msgstr "ארה״ב (160 תווים)"
 msgid "Ukrainian (uk_UA)"
 msgstr "אוקראינית (uk_UA)"
 
-#: include/classes/core/CConfigFile.php:150
+#: include/classes/core/CConfigFile.php:154
 msgid "Unable to change configuration file permissions to 0600."
 msgstr ""
 
-#: include/classes/core/CConfigFile.php:160
+#: include/classes/core/CConfigFile.php:163
 msgid "Unable to create the configuration file."
 msgstr "לא ניתן ליצור את קובץ התצורה."
 
@@ -16411,7 +16411,7 @@ msgstr "לא ניתן ליצור את קובץ התצורה."
 msgid "Unable to determine current Zabbix database version: %1$s."
 msgstr ""
 
-#: include/classes/core/CConfigFile.php:156
+#: include/classes/core/CConfigFile.php:159
 msgid "Unable to overwrite the existing configuration file."
 msgstr "לא ניתן לשכתב על קובץ התצורה הקיים."
 
