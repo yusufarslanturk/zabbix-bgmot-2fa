@@ -199,3 +199,50 @@ function _xn($message, $messagePlural, $num, $context) {
 function _params($format, array $arguments) {
 	return vsprintf($format, $arguments);
 }
+
+/**
+ * Initialize gettext translations depending on language selected by user.
+ *
+ * Note: should be called before translateDefines are included.
+ *
+ * @param string $language              Locale language prefix like en_US, ru_RU etc.
+ * @param bool   $output_error_on_fail  Output error to UI if locale is not installed.
+ *
+ * @return bool Whether a matching locale has been found/set.
+ */
+function gettext_locale_switch(string $language, bool $output_error_on_fail = false): bool {
+	static $defaultLocales = [
+		'C', 'POSIX', 'en', 'en_US', 'en_US.UTF-8', 'English_United States.1252', 'en_GB', 'en_GB.UTF-8'
+	];
+	$locales = zbx_locale_variants($language);
+	$locale_found = false;
+
+	init_mbstrings();
+
+	foreach ($locales as $locale) {
+		// since LC_MESSAGES may be unavailable on some systems, try to set all of the locales
+		// and then revert some of them back
+		putenv('LC_ALL='.$locale);
+		putenv('LANG='.$locale);
+		putenv('LANGUAGE='.$locale);
+
+		if (setlocale(LC_ALL, $locale)) {
+			$locale_found = true;
+			break;
+		}
+	}
+
+	if ($output_error_on_fail && !$locale_found && $language != 'en_GB' && $language != 'en_gb') {
+		error('Locale for language "'.$language.'" is not found on the web server. Tried to set: '.
+			implode(', ', $locales).'. Unable to translate Zabbix interface.');
+	}
+
+	bindtextdomain('frontend', 'locale');
+	bind_textdomain_codeset('frontend', 'UTF-8');
+	textdomain('frontend');
+
+	// reset the LC_NUMERIC locale so that PHP would always use a point instead of a comma for decimal numbers
+	setlocale(LC_NUMERIC, $defaultLocales);
+
+	return $locale_found;
+}
