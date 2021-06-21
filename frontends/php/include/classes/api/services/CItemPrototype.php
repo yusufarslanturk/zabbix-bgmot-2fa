@@ -368,6 +368,7 @@ class CItemPrototype extends CItemGeneral {
 		foreach ($items as &$item) {
 			unset($item['itemid']);
 		}
+		unset($item);
 
 		$this->validateDependentItems($items);
 
