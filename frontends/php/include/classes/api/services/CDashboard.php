@@ -1019,6 +1019,8 @@ class CDashboard extends CApiService {
 
 						foreach ($field_names['str'] as $field_name) {
 							if (array_key_exists($field_name, $widget)) {
+								$widget[$field_name] = trim($widget[$field_name]);
+
 								if ($widget[$field_name] !== $db_widget[$field_name]) {
 									$upd_widget[$field_name] = $widget[$field_name];
 								}
@@ -1155,6 +1157,8 @@ class CDashboard extends CApiService {
 
 				foreach ($field_names['str'] as $field_name) {
 					if (array_key_exists($field_name, $widget_field)) {
+						$upd_widget_field[$field_name] = trim($upd_widget_field[$field_name]);
+
 						if ($widget_field[$field_name] !== $db_widget_field[$field_name]) {
 							$upd_widget_field[$field_name] = $widget_field[$field_name];
 						}
