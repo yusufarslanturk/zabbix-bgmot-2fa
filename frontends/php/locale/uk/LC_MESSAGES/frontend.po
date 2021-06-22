@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 19:50+0300\n"
+"POT-Creation-Date: 2021-06-22 10:55+0300\n"
 "PO-Revision-Date: 2019-03-19 11:55+0300\n"
 "Last-Translator: Oleksii <oleksii.zagorskyi@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
@@ -2082,7 +2082,7 @@ msgstr "Не вдалося видалити шаблонний графік."
 msgid "Cannot delete templated host prototype."
 msgstr "Не вдалося видалити шаблонний прототип вузла мережі."
 
-#: include/classes/api/services/CItemPrototype.php:885
+#: include/classes/api/services/CItemPrototype.php:886
 msgid "Cannot delete templated item prototype."
 msgstr "Не вдалося видалити шаблонний прототип елемента даних."
 
@@ -8667,8 +8667,8 @@ msgstr "Некоректне значення для поля \"%1$s\"."
 #: include/classes/api/services/CItemGeneral.php:1975
 #: include/classes/api/services/CItem.php:782
 #: include/classes/api/services/CItem.php:790
-#: include/classes/api/services/CItemPrototype.php:953
-#: include/classes/api/services/CItemPrototype.php:961
+#: include/classes/api/services/CItemPrototype.php:954
+#: include/classes/api/services/CItemPrototype.php:962
 #: include/classes/api/services/CMaintenance.php:490
 #: include/classes/api/services/CMaintenance.php:713
 #: include/classes/api/services/CMapElement.php:101
@@ -11517,7 +11517,7 @@ msgstr "Немає прав доступу до системи."
 #: include/classes/api/services/CItemGeneral.php:324
 #: include/classes/api/services/CItemGeneral.php:339
 #: include/classes/api/services/CItem.php:707
-#: include/classes/api/services/CItemPrototype.php:878
+#: include/classes/api/services/CItemPrototype.php:879
 #: include/classes/api/services/CMaintenance.php:263
 #: include/classes/api/services/CMaintenance.php:292
 #: include/classes/api/services/CMaintenance.php:305
