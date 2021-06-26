@@ -463,11 +463,7 @@ loop:
 				closeChan <- true
 				break loop
 			default:
-<<<<<<< HEAD
 				log.Debugf("unsupported windows service command '%s' received", getCmdName(c.Cmd))
-=======
-				log.Warningf("unsupported windows service command received")
->>>>>>> 5.2.6-bg
 			}
 		case <-stopChan:
 			changes <- svc.Status{State: svc.StopPending}

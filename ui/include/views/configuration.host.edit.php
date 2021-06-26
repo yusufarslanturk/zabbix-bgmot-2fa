@@ -470,7 +470,6 @@ $encryption_form_list = (new CFormList('encryption'))
 				->setLabel(_('Certificate'))
 				->setEnabled(!$data['readonly'])
 			)
-<<<<<<< HEAD
 	);
 
 if ($data['psk_edit_mode']) {
@@ -503,22 +502,6 @@ else {
 }
 
 $encryption_form_list
-=======
-	)
-	->addRow(
-		(new CLabel(_('PSK identity'), 'tls_psk_identity'))->setAsteriskMark(),
-		(new CTextBox('tls_psk_identity', $data['tls_psk_identity'], $data['readonly'], 128))
-			->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
-			->setAriaRequired()
-	)
-	->addRow(
-		(new CLabel(_('PSK'), 'tls_psk'))->setAsteriskMark(),
-		(new CTextBox('tls_psk', $data['tls_psk'], $data['readonly'], 512))
-			->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
-			->setAriaRequired()
-			->disableAutocomplete()
-	)
->>>>>>> 5.2.6-bg
 	->addRow(_('Issuer'),
 		(new CTextBox('tls_issuer', $data['tls_issuer'], $data['readonly'], 1024))
 			->setWidth(ZBX_TEXTAREA_BIG_WIDTH)

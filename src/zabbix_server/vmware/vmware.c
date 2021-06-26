@@ -294,7 +294,6 @@ static zbx_uint64_t	evt_req_chunk_size;
 #define ZBX_XPATH_VMWARE_ABOUT(property)								\
 	"/*/*/*/*/*[local-name()='about']/*[local-name()='" property "']"
 
-<<<<<<< HEAD
 #define ZBX_XPATH_HV_SCSI_TOPOLOGY									\
 		"/*/*/*/*/*/*[local-name()='propSet'][*[local-name()='name']"				\
 		"[text()='config.storageDevice.scsiTopology']][1]"					\
@@ -313,20 +312,6 @@ static zbx_uint64_t	evt_req_chunk_size;
 #define ZBX_XPATH_HV_MULTIPATH_PATHS()	ZBX_XPATH_HV_MULTIPATH("")
 #define ZBX_XPATH_HV_MULTIPATH_ACTIVE_PATHS()								\
 		ZBX_XPATH_HV_MULTIPATH("[*[local-name()='state'][text()='active']]")
-=======
-#define ZBX_XPATH_HV_MULTIPATH_ACTIVE_PATHS()								\
-		"count(/*/*/*/*/*/*/*[local-name()='val']/*[local-name()='lun']"			\
-		"/*[local-name()='path'][*[local-name()='state'][text()='active'] and "			\
-		"../*[local-name()='id']=../../../../*[local-name()='propSet']/*[local-name()='val']"	\
-		"/*[local-name()='ScsiLun']/*[local-name()='uuid'][../*[local-name()='canonicalName']"	\
-		"[text()='%s']]])"
-
-#define ZBX_XPATH_HV_MULTIPATH_PATHS()									\
-		"count(/*/*/*/*/*/*/*[local-name()='val']/*[local-name()='lun']"			\
-		"/*[local-name()='path'][../*[local-name()='id']=../../../../*[local-name()='propSet']"	\
-		"/*[local-name()='val']/*[local-name()='ScsiLun']/*[local-name()='uuid']"		\
-		"[../*[local-name()='canonicalName'][text()='%s']]])"
->>>>>>> 5.2.6-bg
 
 #define ZBX_XPATH_DS_INFO_EXTENT()									\
 		ZBX_XPATH_PROP_NAME("info") "/*/*[local-name()='extent']"
@@ -2895,14 +2880,7 @@ static int	vmware_service_get_diskextents_list(xmlDoc *doc, zbx_vector_vmware_di
 		goto out;
 
 	if (0 != xmlXPathNodeSetIsEmpty(xpathObj->nodesetval))
-<<<<<<< HEAD
 		goto out;
-=======
-	{
-		xmlXPathFreeObject(xpathObj);
-		goto out;
-	}
->>>>>>> 5.2.6-bg
 
 	nodeset = xpathObj->nodesetval;
 
@@ -2928,7 +2906,6 @@ static int	vmware_service_get_diskextents_list(xmlDoc *doc, zbx_vector_vmware_di
 		zbx_vector_vmware_diskextent_append(diskextents, diskextent);
 	}
 
-<<<<<<< HEAD
 	zbx_vector_vmware_diskextent_sort(diskextents, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC);
 
 	ret = SUCCEED;
@@ -2936,11 +2913,6 @@ out:
 	if (NULL != xpathObj)
 		xmlXPathFreeObject(xpathObj);
 
-=======
-	ret = SUCCEED;
-	xmlXPathFreeObject(xpathObj);
-out:
->>>>>>> 5.2.6-bg
 	xmlXPathFreeContext(xpathCtx);
 
 	return ret;
@@ -3106,12 +3078,7 @@ static int	vmware_service_get_hv_data(const zbx_vmware_service_t *service, CURL 
 					"<ns0:pathSet>parent</ns0:pathSet>"				\
 					"<ns0:pathSet>datastore</ns0:pathSet>"				\
 					"<ns0:pathSet>config.virtualNicManagerInfo.netConfig</ns0:pathSet>"\
-<<<<<<< HEAD
 					"<ns0:pathSet>config.storageDevice.scsiTopology</ns0:pathSet>"	\
-=======
-					"<ns0:pathSet>config.storageDevice.scsiLun</ns0:pathSet>"	\
-					"<ns0:pathSet>config.storageDevice.multipathInfo</ns0:pathSet>"	\
->>>>>>> 5.2.6-bg
 					"%s"								\
 				"</ns0:propSet>"							\
 				"<ns0:propSet>"								\
@@ -3523,47 +3490,6 @@ clean:
 
 /******************************************************************************
  *                                                                            *
-<<<<<<< HEAD
-=======
- * Function: vmware_get_multipath_count                                       *
- *                                                                            *
- * Purpose: retrieves multipath count                                         *
- *                                                                            *
- * Parameters: xdoc           - [IN] xml document                             *
- *             xpath          - [IN] xpath                                    *
- *             multipath_num  - [OUT] count                                   *
- *                                                                            *
- * Return value: SUCCEED - the count was retrieved successfully               *
- *               FAIL    - otherwise                                          *
- *                                                                            *
- ******************************************************************************/
-static int	vmware_get_multipath_count(xmlDoc *xdoc, const char *xpath, int *multipath_num)
-{
-	xmlXPathContext	*xpathCtx;
-	xmlXPathObject	*xpathObj;
-	int		ret = FAIL;
-
-	xpathCtx = xmlXPathNewContext(xdoc);
-
-	if (NULL == (xpathObj = xmlXPathEvalExpression((xmlChar *)xpath, xpathCtx)))
-		goto out;
-
-	if (XPATH_NUMBER == xpathObj->type)
-	{
-		*multipath_num = (int)xpathObj->floatval;
-		ret = SUCCEED;
-	}
-
-	xmlXPathFreeObject(xpathObj);
-out:
-	xmlXPathFreeContext(xpathCtx);
-
-	return ret;
-}
-
-/******************************************************************************
- *                                                                            *
->>>>>>> 5.2.6-bg
  * Function: vmware_dsname_compare                                            *
  *                                                                            *
  * Purpose: sorting function to sort Datastore names vector by name           *
@@ -3641,14 +3567,11 @@ static int	vmware_service_init_hv(zbx_vmware_service_t *service, CURL *easyhandl
 
 	zbx_xml_read_values(details, ZBX_XPATH_HV_DATASTORES(), &datastores);
 	zbx_vector_vmware_dsname_reserve(&hv->dsnames, datastores.values_num);
-<<<<<<< HEAD
 	zabbix_log(LOG_LEVEL_DEBUG, "%s(): %d datastores are connected to hypervisor \"%s\"", __func__,
 			datastores.values_num, hv->id);
 
 	if (SUCCEED != vmware_service_hv_get_multipath_data(service, easyhandle, details, id, &multipath_data, error))
 		goto out;
-=======
->>>>>>> 5.2.6-bg
 
 	for (i = 0; i < datastores.values_num; i++)
 	{
@@ -3672,7 +3595,6 @@ static int	vmware_service_init_hv(zbx_vmware_service_t *service, CURL *easyhandl
 		dsname = (zbx_vmware_dsname_t *)zbx_malloc(NULL, sizeof(zbx_vmware_dsname_t));
 		dsname->name = zbx_strdup(NULL, ds->name);
 		zbx_vector_vmware_hvdisk_create(&dsname->hvdisks);
-<<<<<<< HEAD
 		zabbix_log(LOG_LEVEL_DEBUG, "%s(): for %d diskextents check multipath at ds:\"%s\"", __func__,
 				ds->diskextents.values_num, ds->name);
 
@@ -3705,31 +3627,11 @@ static int	vmware_service_init_hv(zbx_vmware_service_t *service, CURL *easyhandl
 			zbx_snprintf(tmp, sizeof(tmp), ZBX_XPATH_HV_MULTIPATH_ACTIVE_PATHS(), lun);
 
 			if (SUCCEED != zbx_xml_read_doc_num(multipath_data, tmp, &hvdisk.multipath_active))
-=======
-
-		for (j = 0; j < ds->diskextents.values_num; j++)
-		{
-			zbx_vmware_diskextent_t	*diskextent = ds->diskextents.values[j];
-			zbx_vmware_hvdisk_t	hvdisk;
-			char			tmp[MAX_STRING_LEN];
-
-			zbx_snprintf(tmp, sizeof(tmp), ZBX_XPATH_HV_MULTIPATH_PATHS(), diskextent->diskname);
-
-			if (SUCCEED != vmware_get_multipath_count(details, tmp, &hvdisk.multipath_total))
-				continue;
-
-			zbx_snprintf(tmp, sizeof(tmp), ZBX_XPATH_HV_MULTIPATH_ACTIVE_PATHS(), diskextent->diskname);
-
-			if (SUCCEED != vmware_get_multipath_count(details, tmp, &hvdisk.multipath_active))
->>>>>>> 5.2.6-bg
 				hvdisk.multipath_active = 0;
 
 			hvdisk.partitionid = diskextent->partitionid;
 			zbx_vector_vmware_hvdisk_append(&dsname->hvdisks, hvdisk);
-<<<<<<< HEAD
 			zbx_free(lun);
-=======
->>>>>>> 5.2.6-bg
 		}
 
 		zbx_vector_vmware_hvdisk_sort(&dsname->hvdisks, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
@@ -5422,22 +5324,15 @@ static void	vmware_service_update(zbx_vmware_service_t *service)
 				evt_skip_old = 0;
 		}
 	}
-<<<<<<< HEAD
 	else if (0 != service->eventlog.req_sz)
-=======
-	else
->>>>>>> 5.2.6-bg
 	{
 		zabbix_log(LOG_LEVEL_WARNING, "Postponed VMware events requires up to " ZBX_FS_UI64
 				" bytes of free VMwareCache memory. Reading events skipped", service->eventlog.req_sz);
 	}
-<<<<<<< HEAD
 	else
 	{
 		zabbix_log(LOG_LEVEL_DEBUG, "Previous events have not been read. Reading new events skipped");
 	}
-=======
->>>>>>> 5.2.6-bg
 
 	if (ZBX_VMWARE_TYPE_VCENTER == service->type &&
 			SUCCEED != vmware_service_get_cluster_list(easyhandle, &data->clusters, &data->error))

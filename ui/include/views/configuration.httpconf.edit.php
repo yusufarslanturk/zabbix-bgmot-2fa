@@ -64,24 +64,6 @@ $name_text_box = (new CTextBox('name', $this->data['name'], $this->data['templat
 if (!$this->data['templated']) {
 	$name_text_box->setAttribute('autofocus', 'autofocus');
 }
-<<<<<<< HEAD
-=======
-$http_form_list->addRow((new CLabel(_('Name'), 'name'))->setAsteriskMark(), $name_text_box);
-
-// Application
-if ($this->data['application_list']) {
-	$applications = zbx_array_merge([''], $this->data['application_list']);
-	$http_form_list->addRow(new CLabel(_('Application'), 'label-application'),
-		(new CSelect('applicationid'))
-			->setFocusableElementId('label-application')
-			->setValue($this->data['applicationid'])
-			->addOptions(CSelect::createOptionsFromArray($applications))
-	);
-}
-else {
-	$http_form_list->addRow(_('Application'), new CSpan(_('No applications found.')));
-}
->>>>>>> 5.2.6-bg
 
 $http_form_list
 	->addRow((new CLabel(_('Name'), 'name'))->setAsteriskMark(), $name_text_box)

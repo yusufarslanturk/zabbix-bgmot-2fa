@@ -303,11 +303,7 @@ function getHostNavigation($current_element, $hostid, $lld_ruleid = 0) {
 		$list
 			->addItem(new CBreadcrumbs([new CSpan(new CLink(_('All hosts'), new CUrl('hosts.php'))), $host]))
 			->addItem($status)
-<<<<<<< HEAD
 			->addItem(getHostAvailabilityTable($db_host['interfaces']));
-=======
-			->addItem(getHostAvailabilityTable($db_host));
->>>>>>> 5.2.6-bg
 
 		if ($db_host['flags'] == ZBX_FLAG_DISCOVERY_CREATED && $db_host['hostDiscovery']['ts_delete'] != 0) {
 			$info_icons = [getHostLifetimeIndicator(time(), $db_host['hostDiscovery']['ts_delete'])];
@@ -434,10 +430,7 @@ function getHostNavigation($current_element, $hostid, $lld_ruleid = 0) {
 				(new CUrl('host_discovery.php'))
 					->setArgument('filter_set', '1')
 					->setArgument('filter_hostids', [$db_host['hostid']])
-<<<<<<< HEAD
 					->setArgument('context', $context)
-=======
->>>>>>> 5.2.6-bg
 			)),
 			$discovery_rule
 		]));

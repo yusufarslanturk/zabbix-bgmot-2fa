@@ -543,10 +543,7 @@ static duk_ret_t	es_httprequest_set_httpauth(duk_context *ctx)
 
 	if (NULL != password)
 		ZBX_CURL_SETOPT(ctx, request->handle, CURLOPT_PASSWORD, password, err);
-<<<<<<< HEAD
 
-=======
->>>>>>> 5.2.6-bg
 out:
 	zbx_free(password);
 	zbx_free(username);
@@ -557,11 +554,7 @@ out:
 	return 0;
 }
 
-<<<<<<< HEAD
 static const duk_function_list_entry	curlhttprequest_methods[] = {
-=======
-static const duk_function_list_entry	httprequest_methods[] = {
->>>>>>> 5.2.6-bg
 	{"AddHeader", es_httprequest_add_header, 1},
 	{"ClearHeader", es_httprequest_clear_header, 0},
 	{"Get", es_httprequest_get, 2},
@@ -572,7 +565,6 @@ static const duk_function_list_entry	httprequest_methods[] = {
 	{"SetProxy", es_httprequest_set_proxy, 1},
 	{"GetHeaders", es_httprequest_get_headers, 0},
 	{"SetHttpAuth", es_httprequest_set_httpauth, 3},
-<<<<<<< HEAD
 	{NULL, NULL, 0}
 };
 
@@ -587,8 +579,6 @@ static const duk_function_list_entry	httprequest_methods[] = {
 	{"setProxy", es_httprequest_set_proxy, 1},
 	{"getHeaders", es_httprequest_get_headers, 0},
 	{"setHttpAuth", es_httprequest_set_httpauth, 3},
-=======
->>>>>>> 5.2.6-bg
 	{NULL, NULL, 0}
 };
 

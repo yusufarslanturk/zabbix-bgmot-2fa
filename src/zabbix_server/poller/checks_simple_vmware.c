@@ -914,11 +914,7 @@ int	check_vcenter_hv_cpu_usage(AGENT_REQUEST *request, const char *username, con
 int	check_vcenter_hv_cpu_usage_perf(AGENT_REQUEST *request, const char *username, const char *password,
 		AGENT_RESULT *result)
 {
-<<<<<<< HEAD
 	const char		*url, *uuid;
-=======
-	char			*url, *uuid;
->>>>>>> 5.2.6-bg
 	zbx_vmware_service_t	*service;
 	zbx_vmware_hv_t		*hv;
 	int			ret = SYSINFO_RET_FAIL;
@@ -964,11 +960,7 @@ out:
 int	check_vcenter_hv_cpu_utilization(AGENT_REQUEST *request, const char *username, const char *password,
 		AGENT_RESULT *result)
 {
-<<<<<<< HEAD
 	const char		*url, *uuid;
-=======
-	char			*url, *uuid;
->>>>>>> 5.2.6-bg
 	zbx_vmware_service_t	*service;
 	zbx_vmware_hv_t		*hv;
 	int			ret = SYSINFO_RET_FAIL;
@@ -1008,12 +1000,7 @@ out:
 int	check_vcenter_hv_power(AGENT_REQUEST *request, const char *username, const char *password,
 		AGENT_RESULT *result)
 {
-<<<<<<< HEAD
 	const char		*path, *url, *uuid, *max;
-=======
-	char			*url, *uuid, *max;
-	const char		*path;
->>>>>>> 5.2.6-bg
 	zbx_vmware_service_t	*service;
 	zbx_vmware_hv_t		*hv;
 	int 			ret = SYSINFO_RET_FAIL;
@@ -1650,12 +1637,7 @@ int	check_vcenter_hv_datastore_discovery(AGENT_REQUEST *request, const char *use
 	for (i = 0; i < hv->dsnames.values_num; i++)
 	{
 		zbx_vmware_dsname_t	*dsname = hv->dsnames.values[i];
-<<<<<<< HEAD
 		int			j, total = 0;
-=======
-		zbx_uint64_t		total = 0;
-		int			j;
->>>>>>> 5.2.6-bg
 
 
 		for (j = 0; j < dsname->hvdisks.values_num; j++)
@@ -1663,14 +1645,9 @@ int	check_vcenter_hv_datastore_discovery(AGENT_REQUEST *request, const char *use
 
 		zbx_json_addobject(&json_data, NULL);
 		zbx_json_addstring(&json_data, "{#DATASTORE}", dsname->name, ZBX_JSON_TYPE_STRING);
-<<<<<<< HEAD
 		zbx_json_adduint64(&json_data, "{#MULTIPATH.COUNT}", (unsigned int)total);
 		zbx_json_adduint64(&json_data, "{#MULTIPATH.PARTITION.COUNT}",
 				(unsigned int)dsname->hvdisks.values_num);
-=======
-		zbx_json_adduint64(&json_data, "{#MULTIPATH.COUNT}", total);
-		zbx_json_adduint64(&json_data, "{#MULTIPATH.PARTITION.COUNT}", dsname->hvdisks.values_num);
->>>>>>> 5.2.6-bg
 
 		zbx_json_close(&json_data);
 	}
@@ -2121,18 +2098,10 @@ int	check_vcenter_hv_perfcounter(AGENT_REQUEST *request, const char *username, c
 		goto unlock;
 	}
 
-<<<<<<< HEAD
 	if (FAIL == zbx_vmware_service_get_counterid(service, path, &counterid))
 	{
 		SET_MSG_RESULT(result, zbx_strdup(NULL, "Performance counter is not available."));
 		goto unlock;
-=======
-	for (i = 0; i < hv->dsnames.values_num; i++)
-	{
-		zbx_vmware_dsname_t	*dsname = hv->dsnames.values[i];
-
-		ds_list = zbx_strdcatf(ds_list, "%s\n", dsname->name);
->>>>>>> 5.2.6-bg
 	}
 
 	/* FAIL is returned if counter already exists */
@@ -2152,134 +2121,7 @@ out:
 	return ret;
 }
 
-<<<<<<< HEAD
 int	check_vcenter_hv_datastore_list(AGENT_REQUEST *request, const char *username, const char *password,
-=======
-int	check_vcenter_hv_datastore_multipath(AGENT_REQUEST *request, const char *username, const char *password,
-		AGENT_RESULT *result)
-{
-	char			*url, *hv_uuid, *ds_name, *partition;
-	zbx_vmware_service_t	*service;
-	zbx_vmware_hv_t		*hv;
-	zbx_vmware_dsname_t	*dsname;
-	int			ret = SYSINFO_RET_FAIL, i, j;
-	zbx_uint64_t		partitionid = 0, multipath_count = 0;
-
-	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
-
-	if (2 > request->nparam || request->nparam > 4)
-	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, "Invalid number of parameters."));
-		goto out;
-	}
-
-	url = get_rparam(request, 0);
-	hv_uuid = get_rparam(request, 1);
-	ds_name = get_rparam(request, 2);
-	partition = get_rparam(request, 3);
-
-	if ('\0' == *hv_uuid)
-	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, "Invalid second parameter."));
-		goto out;
-	}
-
-	if (NULL != partition && '\0' != *partition)
-	{
-		if (NULL == ds_name || '\0' == *ds_name)
-		{
-			SET_MSG_RESULT(result, zbx_strdup(NULL, "Invalid fourth parameter."));
-			goto out;
-		}
-
-		partitionid = (unsigned int) atoi(partition);
-	}
-
-	zbx_vmware_lock();
-
-	if (NULL == (service = get_vmware_service(url, username, password, result, &ret)))
-		goto unlock;
-
-	if (NULL == (hv = hv_get(&service->data->hvs, hv_uuid)))
-	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, "Unknown hypervisor uuid."));
-		goto unlock;
-	}
-
-	if (NULL != ds_name && '\0' != *ds_name)
-	{
-		zbx_vmware_datastore_t	*datastore;
-		zbx_vmware_dsname_t	dsnames_cmp;
-		zbx_vmware_hvdisk_t	hvdisk_cmp;
-
-		datastore = ds_get(&service->data->datastores, ds_name);
-
-		if (NULL == datastore)
-		{
-			SET_MSG_RESULT(result, zbx_strdup(NULL, "Unknown datastore name."));
-			goto unlock;
-		}
-
-		dsnames_cmp.name = datastore->name;
-
-		if (FAIL == (i = zbx_vector_vmware_dsname_bsearch(&hv->dsnames, &dsnames_cmp, vmware_dsname_compare)))
-		{
-			SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Datastore \"%s\" not found on this hypervisor.",
-					datastore->name));
-			goto unlock;
-		}
-
-		if (NULL == datastore->uuid)
-		{
-			SET_MSG_RESULT(result, zbx_strdup(NULL, "Unknown datastore uuid."));
-			goto unlock;
-		}
-
-		dsname = hv->dsnames.values[i];
-
-		if (NULL != partition)
-		{
-			hvdisk_cmp.partitionid = partitionid;
-
-			if (FAIL == (i = zbx_vector_vmware_hvdisk_bsearch(&dsname->hvdisks, hvdisk_cmp,
-					ZBX_DEFAULT_UINT64_COMPARE_FUNC)))
-			{
-				SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Unknown partition id:" ZBX_FS_UI64,
-						partitionid));
-				goto unlock;
-			}
-
-			multipath_count = dsname->hvdisks.values[i].multipath_active;
-		}
-		else
-		{
-			for (j = 0; j < dsname->hvdisks.values_num; j++)
-				multipath_count += dsname->hvdisks.values[j].multipath_active;
-		}
-	}
-	else
-	{
-		for (i = 0; i < hv->dsnames.values_num; i++)
-		{
-			dsname = hv->dsnames.values[i];
-
-			for (j = 0; j < dsname->hvdisks.values_num; j++)
-				multipath_count += dsname->hvdisks.values[j].multipath_active;
-		}
-	}
-
-	SET_UI64_RESULT(result, multipath_count);
-	ret = SYSINFO_RET_OK;
-unlock:
-	zbx_vmware_unlock();
-out:
-	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_sysinfo_ret_string(ret));
-
-	return ret;
-}
-
-int	check_vcenter_datastore_hv_list(AGENT_REQUEST *request, const char *username, const char *password,
->>>>>>> 5.2.6-bg
 		AGENT_RESULT *result)
 {
 	const char		*url, *hv_uuid;
@@ -2369,7 +2211,6 @@ int	check_vcenter_hv_datastore_multipath(AGENT_REQUEST *request, const char *use
 			goto out;
 		}
 
-<<<<<<< HEAD
 		partitionid = (unsigned int) atoi(partition);
 	}
 
@@ -2560,12 +2401,6 @@ int	check_vcenter_datastore_discovery(AGENT_REQUEST *request, const char *userna
 		AGENT_RESULT *result)
 {
 	const char		*url;
-=======
-int	check_vcenter_datastore_discovery(AGENT_REQUEST *request, const char *username, const char *password,
-		AGENT_RESULT *result)
-{
-	char			*url;
->>>>>>> 5.2.6-bg
 	zbx_vmware_service_t	*service;
 	struct zbx_json		json_data;
 	int			i, j, ret = SYSINFO_RET_FAIL;
@@ -3908,15 +3743,9 @@ out:
 int	check_vcenter_vm_net_if_usage(AGENT_REQUEST *request, const char *username, const char *password,
 		AGENT_RESULT *result)
 {
-<<<<<<< HEAD
 	zbx_vmware_service_t	*service;
 	int			ret = SYSINFO_RET_FAIL;
 	const char		*url, *uuid, *instance;
-=======
-	char			*url, *uuid, *instance;
-	zbx_vmware_service_t	*service;
-	int 			ret = SYSINFO_RET_FAIL;
->>>>>>> 5.2.6-bg
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
 

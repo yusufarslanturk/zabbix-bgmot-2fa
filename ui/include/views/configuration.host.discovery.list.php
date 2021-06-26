@@ -147,7 +147,6 @@ $filter_column2 = (new CFormList())
 		'filter_snmp_oid_row'
 	);
 
-<<<<<<< HEAD
 $filter_column3 = (new CFormList());
 
 if ($data['context'] === 'host') {
@@ -157,30 +156,6 @@ if ($data['context'] === 'host') {
 			->addValue(_('Normal'), ITEM_STATE_NORMAL)
 			->addValue(_('Not supported'), ITEM_STATE_NOTSUPPORTED)
 			->setModern(true)
-=======
-$filter_column3 = (new CFormList())
-	->addRow(new CLabel(_('State'), 'label-state'),
-		(new CSelect('filter_state'))
-			->setId('filter_state')
-			->setValue($data['filter']['state'])
-			->setFocusableElementId('label-state')
-			->addOptions(CSelect::createOptionsFromArray([
-				-1 => _('all'),
-				ITEM_STATE_NORMAL => itemState(ITEM_STATE_NORMAL),
-				ITEM_STATE_NOTSUPPORTED => itemState(ITEM_STATE_NOTSUPPORTED)
-			]))
-	)
-	->addRow(new CLabel(_('Status'), 'label-status'),
-		(new CSelect('filter_status'))
-			->setId('filter_status')
-			->setFocusableElementId('label-status')
-			->setValue($data['filter']['status'])
-			->addOptions(CSelect::createOptionsFromArray([
-				-1 => _('all'),
-				ITEM_STATUS_ACTIVE => item_status2str(ITEM_STATUS_ACTIVE),
-				ITEM_STATUS_DISABLED => item_status2str(ITEM_STATUS_DISABLED)
-			]))
->>>>>>> 5.2.6-bg
 	);
 }
 

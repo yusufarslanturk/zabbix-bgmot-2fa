@@ -102,11 +102,7 @@
 						->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH),
 					'row_snmpv3_securityname_#{iface.interfaceid}'
 				)
-<<<<<<< HEAD
 				->addRow(new CLabel(_('Security level'), 'label_interfaces_#{iface.interfaceid}_details_securitylevel'),
-=======
-				->addRow(new CLabel(_('Security level'), 'interfaces[#{iface.interfaceid}][details][securitylevel]'),
->>>>>>> 5.2.6-bg
 					(new CSelect('interfaces[#{iface.interfaceid}][details][securitylevel]'))
 						->addOptions(CSelect::createOptionsFromArray([
 							ITEM_SNMPV3_SECURITYLEVEL_NOAUTHNOPRIV => 'noAuthNoPriv',

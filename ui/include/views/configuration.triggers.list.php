@@ -230,10 +230,7 @@ foreach ($data['triggers'] as $tnum => $trigger) {
 		(new CUrl('triggers.php'))
 			->setArgument('form', 'update')
 			->setArgument('triggerid', $triggerid)
-<<<<<<< HEAD
 			->setArgument('context', $data['context'])
-=======
->>>>>>> 5.2.6-bg
 	))->addClass(ZBX_STYLE_WORDWRAP);
 
 	if ($trigger['dependencies']) {

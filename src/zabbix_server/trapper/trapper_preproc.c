@@ -23,12 +23,9 @@
 #include "preproc.h"
 #include "../preprocessor/preproc_history.h"
 
-<<<<<<< HEAD
 #include "trapper_auth.h"
 #include "trapper_preproc.h"
 
-=======
->>>>>>> 5.2.6-bg
 #define ZBX_STATE_NOT_SUPPORTED	1
 
 extern int	CONFIG_DOUBLE_PRECISION;
@@ -46,11 +43,7 @@ extern int	CONFIG_DOUBLE_PRECISION;
  *             values_num   - [OUT] the number of values                      *
  *             value_type   - [OUT] the value type                            *
  *             steps        - [OUT] the preprocessing steps                   *
-<<<<<<< HEAD
  *             single     - [OUT] is preproc step single                      *
-=======
- *             single       - [OUT] the single tag                            *
->>>>>>> 5.2.6-bg
  *             state        - [OUT] the item state                            *
  *             bypass_first - [OUT] the flag to bypass first step             *
  *             error      - [OUT] the error message                           *

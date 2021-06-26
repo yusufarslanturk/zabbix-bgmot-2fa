@@ -1,14 +1,5 @@
-<<<<<<< HEAD
 // +build  windows
 
-=======
-<<<<<<< HEAD:ui/app/partials/js/common.filter.item.js.php
-<?php declare(strict_types=1);
-=======
-// +build  windows
-
->>>>>>> 5.2.6-bg:src/go/plugins/smart/smart_windows.go
->>>>>>> 5.2.6-bg
 /*
 ** Zabbix
 ** Copyright (C) 2001-2021 Zabbix SIA
@@ -37,37 +28,6 @@ import (
 	"zabbix.com/pkg/zbxcmd"
 )
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD:ui/app/partials/js/common.filter.item.js.php
-/**
- * @var CPartial $this
- */
-?>
-
-<script type="text/x-jquery-tmpl" id="filter-tag-row-tmpl">
-	<?= CTagFilterFieldHelper::getTemplate(); ?>
-</script>
-
-<script type="text/javascript">
-	(function($) {
-		$(function() {
-			$('#filter-tags')
-				.dynamicRows({ template: '#filter-tag-row-tmpl' })
-				.on('afteradd.dynamicRows', function() {
-					var rows = this.querySelectorAll('.form_row');
-					new CTagFilterItem(rows[rows.length - 1]);
-				});
-
-			// Init existing fields once loaded.
-			document.querySelectorAll('#filter-tags .form_row').forEach(row => {
-				new CTagFilterItem(row);
-			});
-		});
-	})(jQuery);
-</script>
-=======
->>>>>>> 5.2.6-bg
 func (p *Plugin) executeSmartctl(args string, strict bool) ([]byte, error) {
 	path := "smartctl"
 
@@ -87,7 +47,3 @@ func (p *Plugin) executeSmartctl(args string, strict bool) ([]byte, error) {
 
 	return []byte(out), err
 }
-<<<<<<< HEAD
-=======
->>>>>>> 5.2.6-bg:src/go/plugins/smart/smart_windows.go
->>>>>>> 5.2.6-bg

@@ -671,11 +671,7 @@ static void	int_array_debug(char *pfx, int *a, int alen, int emptyval)
 	int		i, max = MAX_STRING_LEN, len;
 
 	ptr = str;
-<<<<<<< HEAD
 	len = (int)zbx_snprintf(ptr, (size_t)max, "[ ");
-=======
-	len = zbx_snprintf(ptr, max, "[ ");
->>>>>>> 5.2.6-bg
 	ptr += len;
 	max -= len;
 
@@ -683,11 +679,7 @@ static void	int_array_debug(char *pfx, int *a, int alen, int emptyval)
 	{
 		if (emptyval != a[i])
 		{
-<<<<<<< HEAD
 			len = (int)zbx_snprintf(ptr, (size_t)max, "%d:%d ", i, a[i]);
-=======
-			len = zbx_snprintf(ptr, max, "%d:%d ", i, a[i]);
->>>>>>> 5.2.6-bg
 			ptr += len;
 			max -= len;
 		}
@@ -1234,11 +1226,7 @@ static int	DBpatch_add_widget(uint64_t dashboardid, zbx_db_widget_t *widget, zbx
 
 	for (i = 0; SUCCEED == ret && i < fields->values_num; i++)
 	{
-<<<<<<< HEAD
 		char			*url_esc;
-=======
-		char			s1[ZBX_MAX_UINT64_LEN + 1], s2[ZBX_MAX_UINT64_LEN + 1], *url_esc;
->>>>>>> 5.2.6-bg
 		zbx_db_widget_field_t	*f;
 
 		f = (zbx_db_widget_field_t *)fields->values[i];
@@ -1246,13 +1234,8 @@ static int	DBpatch_add_widget(uint64_t dashboardid, zbx_db_widget_t *widget, zbx
 
 		if (ZBX_DB_OK > DBexecute("insert into widget_field (widget_fieldid,widgetid,type,name,value_int,"
 				"value_str,value_itemid,value_graphid) values (" ZBX_FS_UI64 "," ZBX_FS_UI64 ",%d,"
-<<<<<<< HEAD
 				"'%s',%d,'%s',%s,%s)", new_fieldid++, widget->widgetid, f->type, f->name, f->value_int,
 				url_esc, DBsql_id_ins(f->value_itemid), DBsql_id_ins(f->value_graphid)))
-=======
-				"'%s',%d,'%s',%s,%s)", new_fieldid++, widget->widgetid,
-				f->type, f->name, f->value_int, url_esc, s1, s2))
->>>>>>> 5.2.6-bg
 		{
 			ret = FAIL;
 		}

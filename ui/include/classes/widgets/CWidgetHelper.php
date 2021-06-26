@@ -69,14 +69,9 @@ class CWidgetHelper {
 					->setAttribute('placeholder', _('default'))
 					->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			)
-<<<<<<< HEAD
 			->addItem(
 				(new CScriptTag('$("z-select#type").on("change", () => ZABBIX.Dashboard.reloadWidgetProperties());'))
 					->setOnDocumentReady()
-=======
-			->addItem((new CScriptTag('$("z-select#type").on("change", updateWidgetConfigDialogue);'))
-				->setOnDocumentReady()
->>>>>>> 5.2.6-bg
 			);
 
 

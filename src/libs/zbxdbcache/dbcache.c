@@ -37,14 +37,10 @@
 #include "zbxjson.h"
 #include "zbxhistory.h"
 #include "daemon.h"
-<<<<<<< HEAD
 #include "zbxavailability.h"
 #include "zbxtrends.h"
 #include "zbxalgo.h"
 #include "../zbxalgo/vectorimpl.h"
-=======
-#include "zbxalgo.h"
->>>>>>> 5.2.6-bg
 
 static zbx_mem_info_t	*hc_index_mem = NULL;
 static zbx_mem_info_t	*hc_mem = NULL;

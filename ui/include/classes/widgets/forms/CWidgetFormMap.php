@@ -54,11 +54,7 @@ class CWidgetFormMap extends CWidgetForm {
 		if ($field_source_type->getValue() === WIDGET_SYSMAP_SOURCETYPE_FILTER) {
 			// Select filter widget field.
 			$field_filter_widget = (new CWidgetFieldWidgetSelect('filter_widget_reference', _('Filter'),
-<<<<<<< HEAD
 				WIDGET_NAV_TREE
-=======
-				'type', 'navtree'
->>>>>>> 5.2.6-bg
 			))
 				->setDefault('')
 				->setFlags(CWidgetField::FLAG_NOT_EMPTY | CWidgetField::FLAG_LABEL_ASTERISK);

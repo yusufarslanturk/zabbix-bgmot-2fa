@@ -37,14 +37,6 @@ $widget = (new CWidget())
 		))->setAttribute('aria-label', _('Content controls'))
 	)
 	->setNavigation(getHostNavigation('items', $data['hostid'], $data['parent_discoveryid']));
-<<<<<<< HEAD
-=======
-
-// create form
-$itemForm = (new CForm())
-	->setName('items')
-	->addVar('parent_discoveryid', $data['parent_discoveryid']);
->>>>>>> 5.2.6-bg
 
 $url = (new CUrl('disc_prototypes.php'))
 	->setArgument('parent_discoveryid', $data['parent_discoveryid'])

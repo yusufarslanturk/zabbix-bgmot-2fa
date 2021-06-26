@@ -341,12 +341,7 @@ static void	lld_queue_request(zbx_lld_manager_t *manager, const zbx_ipc_message_
 	}
 	else
 	{
-<<<<<<< HEAD
 		if (0 == data->meta)
-=======
-		if (0 == data->meta && 0 == zbx_strcmp_null(data->error, rule->tail->error) &&
-				0 == zbx_strcmp_null(data->value, rule->tail->value))
->>>>>>> 5.2.6-bg
 		{
 			zbx_lld_data_t	*data_ptr;
 

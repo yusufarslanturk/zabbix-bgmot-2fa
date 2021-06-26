@@ -244,7 +244,6 @@
 					}
 				}
 				return;
-<<<<<<< HEAD
 			}
 
 			for (let select of $preproc_steps_ns) {
@@ -268,16 +267,6 @@
 			let obj = prep_elem;
 			if (prep_elem.tagName === 'SPAN') {
 				obj = prep_elem.originalObject;
-=======
-			}
-
-			for (let select of $preproc_steps_ns) {
-				for (let option of select.getOptions()) {
-					if (option.value == <?= ZBX_PREPROC_VALIDATE_NOT_SUPPORTED ?>) {
-						option.disabled = true;
-					}
-				}
->>>>>>> 5.2.6-bg
 			}
 
 			$preprocessing = $(obj.querySelector('#preprocessing'));
