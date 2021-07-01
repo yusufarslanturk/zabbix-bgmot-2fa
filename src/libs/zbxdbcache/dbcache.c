@@ -907,6 +907,20 @@ static void	DCmass_update_trends(const ZBX_DC_HISTORY *history, int history_num,
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __function_name);
 }
 
+static int	zbx_trend_compare(const void *d1, const void *d2)
+{
+	const ZBX_DC_TREND	*p1 = (const ZBX_DC_TREND *)d1;
+	const ZBX_DC_TREND	*p2 = (const ZBX_DC_TREND *)d2;
+
+	if (p1->itemid < p2->itemid)
+		return -1;
+
+	if (p1->itemid > p2->itemid)
+		return +1;
+
+	return (p1->clock > p2->clock) - (p2->clock > p1->clock);
+}
+
 /******************************************************************************
  *                                                                            *
  * Function: DBmass_update_trends                                             *
@@ -927,6 +941,7 @@ static void	DBmass_update_trends(const ZBX_DC_TREND *trends, int trends_num,
 	{
 		trends_tmp = (ZBX_DC_TREND *)zbx_malloc(NULL, trends_num * sizeof(ZBX_DC_TREND));
 		memcpy(trends_tmp, trends, trends_num * sizeof(ZBX_DC_TREND));
+		qsort(trends_tmp, trends_num, sizeof(ZBX_DC_TREND), zbx_trend_compare);
 
 		while (0 < trends_num)
 			DBflush_trends(trends_tmp, &trends_num, trends_diff);
