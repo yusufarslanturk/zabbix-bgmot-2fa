@@ -1051,7 +1051,6 @@ class CImportDataAdapterTest extends TestCase {
 							'key_' => 'lld-item-jmx',
 							'trigger_prototypes' => [],
 							'trapper_hosts' => '',
-							'application_prototypes' => [],
 							'preprocessing' => []
 						],
 						[
@@ -1900,48 +1899,6 @@ class CImportDataAdapterTest extends TestCase {
 		]);
 	}
 
-	public function testGetScreens() {
-		$adapter = $this->getAdapter($this->getScreenXml());
-
-		$this->assertEquals($adapter->getScreens(), [
-			[
-				'name' => 'empty-screen',
-				'hsize' => '1',
-				'vsize' => '1',
-				'screenitems' => []
-			],
-			[
-				'name' => 'screen',
-				'hsize' => '1',
-				'vsize' => '1',
-				'screenitems' => [
-					[
-						'resourcetype' => '0',
-						'width' => '500',
-						'height' => '100',
-						'x' => '0',
-						'y' => '0',
-						'colspan' => '1',
-						'rowspan' => '1',
-						'elements' => '0',
-						'valign' => '0',
-						'halign' => '0',
-						'style' => '0',
-						'url' => '',
-						'dynamic' => '0',
-						'sort_triggers' => '0',
-						'resource' => [
-							'name' => 'simple',
-							'host' => 'export-host'
-						],
-						'max_columns' => '1',
-						'application' => ''
-					]
-				]
-			]
-		]);
-	}
-
 	public function testGetMediaTypes() {
 		$adapter = $this->getAdapter($this->getMediaTypeXml());
 
@@ -2519,44 +2476,6 @@ class CImportDataAdapterTest extends TestCase {
 					'macros' => [],
 					'tags' => [],
 					'valuemaps' => []
-					'templates' => [],
-					'tls_issuer' => '',
-					'tls_psk' => '',
-					'tls_psk_identity' => '',
-					'tls_subject' => ''
-				]
-			]
-		);
-
-		$this->assertEquals($adapter->getScreens(), [
-				[
-					'name' => 'test',
-					'hsize' => 'test',
-					'vsize' => 'test',
-					'screenitems' => [
-						[
-							'resourcetype' => '1',
-							'width' => 'test',
-							'height' => 'test',
-							'x' => 'test',
-							'y' => 'test',
-							'colspan' => '1',
-							'rowspan' => '1',
-							'elements' => 'test',
-							'valign' => 'test',
-							'halign' => 'test',
-							'style' => 'test',
-							'dynamic' => 'test',
-							'url' => 'test',
-							'resource' => [
-								'host' => 'Template_Simple',
-								'key' => 'ftp,21'
-							],
-							'sort_triggers' => '',
-							'application' => '',
-							'max_columns' => ''
-						]
-					]
 				]
 			]
 		);

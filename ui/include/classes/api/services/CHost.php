@@ -1546,8 +1546,6 @@ class CHost extends CHostGeneral {
 
 		$this->addAuditBulk(AUDIT_ACTION_DELETE, AUDIT_RESOURCE_HOST, $db_hosts);
 
-		$this->addAuditBulk(AUDIT_ACTION_DELETE, AUDIT_RESOURCE_HOST, $db_hosts);
-
 		return ['hostids' => $hostIds];
 	}
 

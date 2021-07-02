@@ -30,7 +30,7 @@ class testFormAdministrationGeneralGUI extends testFormAdministrationGeneral {
 
 	public $default = [
 		'Default language' => 'English (en_GB)',
-		'Default time zone' => 'System: (UTC+02:00) Europe/Riga',
+		'Default time zone' => 'System',
 		'Default theme' => 'Blue',
 		'Limit for search and filter results' => '1000',
 		'Max number of columns and rows in overview tables' => '50',
