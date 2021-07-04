@@ -97,8 +97,4 @@
 
 		init();
 	}
-
-	$(() => {
-		$('#dashboardid').on('change', (e) => $(e.target).closest('form').submit());
-	});
 </script>
