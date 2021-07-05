@@ -1490,6 +1490,7 @@ class CDiscoveryRule extends CItemGeneral {
 		$items = API::Item()->get([
 			'itemids' => $srcItemIds,
 			'output' => ['itemid', 'key_'],
+			'webitems' => true,
 			'preservekeys' => true,
 			'filter' => ['flags' => null]
 		]);
@@ -1504,6 +1505,7 @@ class CDiscoveryRule extends CItemGeneral {
 		// fetch newly cloned items
 		$newItems = API::Item()->get([
 			'hostids' => $dstDiscovery['hostid'],
+			'webitems' => true,
 			'filter' => [
 				'key_' => $itemKeys,
 				'flags' => null
