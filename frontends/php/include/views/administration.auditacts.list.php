@@ -81,23 +81,6 @@ foreach ($this->data['alerts'] as $alert) {
 		$status = (new CSpan(_('Failed')))->addClass(ZBX_STYLE_RED);
 	}
 
-	$message = ($alert['alerttype'] == ALERT_TYPE_MESSAGE)
-		? [
-			bold(_('Subject').':'),
-			BR(),
-			$alert['subject'],
-			BR(),
-			BR(),
-			bold(_('Message').':'),
-			BR(),
-			zbx_nl2br($alert['message'])
-		]
-		: [
-			bold(_('Command').':'),
-			BR(),
-			zbx_nl2br($alert['message'])
-		];
-
 	$info_icons = [];
 	if ($alert['error'] !== '') {
 		$info_icons[] = makeErrorIcon($alert['error']);
@@ -112,7 +95,7 @@ foreach ($this->data['alerts'] as $alert) {
 		$this->data['actions'][$alert['actionid']]['name'],
 		($mediatype) ? $mediatype['description'] : '',
 		$recipient,
-		$message,
+		CViewHelper::formattedAlertMessage($alert),
 		$status,
 		makeInformationList($info_icons)
 	]);
