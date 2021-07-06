@@ -46,7 +46,7 @@ class CViewHelper {
 	 *
 	 * @param array $alert
 	 *
-	 * @return string Formatted Alert details
+	 * @return array Formatted Alert details
 	 */
 	public static function formattedAlertMessage(array $alert) {
 		return ($alert['alerttype'] == ALERT_TYPE_MESSAGE)
