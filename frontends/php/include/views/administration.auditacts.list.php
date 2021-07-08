@@ -95,7 +95,7 @@ foreach ($this->data['alerts'] as $alert) {
 		$this->data['actions'][$alert['actionid']]['name'],
 		($mediatype) ? $mediatype['description'] : '',
 		$recipient,
-		CViewHelper::formattedAlertMessage($alert),
+		formattedAlertMessage($alert),
 		$status,
 		makeInformationList($info_icons)
 	]);

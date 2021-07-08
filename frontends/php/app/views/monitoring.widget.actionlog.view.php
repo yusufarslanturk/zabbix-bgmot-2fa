@@ -54,7 +54,7 @@ foreach ($data['alerts'] as $alert) {
 		array_key_exists($alert['actionid'], $data['actions']) ? $data['actions'][$alert['actionid']]['name'] : '',
 		$alert['description'],
 		makeEventDetailsTableUser($alert, $data['db_users']),
-		CViewHelper::formattedAlertMessage($alert),
+		formattedAlertMessage($alert),
 		makeActionTableStatus($alert),
 		makeInformationList($info_icons)
 	]);
