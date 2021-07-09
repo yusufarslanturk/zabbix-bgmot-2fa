@@ -549,7 +549,7 @@ class testDashboardGraphWidget extends CWebTest {
 				[
 					'Time period' => [
 						'Set custom time period' => true,
-						'From' => '2021-07-04 15:53:07',
+						'From' => '2021-02-30 00:00:00',
 						'To' => '2021-07-04 15:53:07'
 					],
 					'error' => [
