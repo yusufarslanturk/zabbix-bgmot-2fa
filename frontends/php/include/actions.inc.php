@@ -2221,29 +2221,3 @@ function makeActionTableInfo(array $action, array $mediatypes) {
 		return '';
 	}
 }
-
-/**
- * Formats Alert in a uniform style for Action logs
- *
- * @param array $alert
- *
- * @return array Formatted Alert details
- */
-function formattedAlertMessage(array $alert) {
-	return ($alert['alerttype'] == ALERT_TYPE_MESSAGE)
-		? [
-			bold(_('Subject').':'),
-			BR(),
-			$alert['subject'],
-			BR(),
-			BR(),
-			bold(_('Message').':'),
-			BR(),
-			zbx_nl2br($alert['message'])
-		]
-		: [
-			bold(_('Command').':'),
-			BR(),
-			zbx_nl2br($alert['message'])
-		];
-}
