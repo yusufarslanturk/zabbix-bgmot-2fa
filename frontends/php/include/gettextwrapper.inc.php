@@ -166,7 +166,8 @@ function _xs($message, $context) {
 }
 
 /**
- * Translates the string with respect to the given context and plural forms, also replaces placeholders with supplied arguments.
+ * Translates the string with respect to the given context and plural forms,
+ * also replaces placeholders with supplied arguments.
  * If no translation is found, the original string will be used. Unlimited number of parameters supplied.
  * Parameter placeholders must be defined as %1$s, %2$s etc.
  *
@@ -205,21 +206,25 @@ function _params($format, array $arguments) {
  *
  * Note: should be called before translateDefines are included.
  *
- * @param string $language          Locale language prefix like en_US, ru_RU etc.
- * @param bool   $locales           List of locales matched/tried to set.
+ * @param string $language            Locale language prefix like en_US, ru_RU etc.
+ * @param bool   $locales_probed      List of locale variants matched/tried to set.
  *
  * @return bool Whether a matching locale could be set.
  */
-function setUserLocale(string $language, &$locales = null): bool {
-	$numeric_locales = ['C', 'POSIX', 'en', 'en_US', 'en_US.UTF-8', 'English_United States.1252', 'en_GB', 'en_GB.UTF-8'];
-	$locales = zbx_locale_variants($language);
+function setUserLocale(string $language, &$locales_probed = null) {
+	$numeric_locales = [
+		'C', 'POSIX', 'en', 'en_US', 'en_US.UTF-8', 'English_United States.1252', 'en_GB', 'en_GB.UTF-8'
+	];
+	$locales_probed = zbx_locale_variants($language);
 	$locale_set = false;
 
 	init_mbstrings();
 
-	// Since LC_MESSAGES may be unavailable on some systems, try to set all of the locales and then make adjustments.
-
-	foreach ($locales as $locale) {
+	/*
+	* Since LC_MESSAGES may be unavailable on some systems,
+	* try to set all of the locales and then make adjustments.
+	*/
+	foreach ($locales_probed as $locale) {
 		putenv('LC_ALL='.$locale);
 		putenv('LANG='.$locale);
 		putenv('LANGUAGE='.$locale);
@@ -230,12 +235,12 @@ function setUserLocale(string $language, &$locales = null): bool {
 		}
 	}
 
+	// Force PHP to always use a point instead of a comma for decimal numbers.
+	setlocale(LC_NUMERIC, $numeric_locales);
+
 	bindtextdomain('frontend', 'locale');
 	bind_textdomain_codeset('frontend', 'UTF-8');
 	textdomain('frontend');
-
-	// Reset the LC_NUMERIC locale so that PHP would always use a point instead of a comma for decimal numbers.
-	setlocale(LC_NUMERIC, $numeric_locales);
 
 	return $locale_set;
 }

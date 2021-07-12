@@ -320,9 +320,10 @@ class ZBase {
 	protected function initLocales(array $user_data) {
 		$language = $user_data['lang'];
 
-		if (!setUserLocale($language, $locales) && strtolower($language) != 'en_gb') {
+		if (!setUserLocale($language, $locales_probed) && strtolower($language) !== 'en_gb') {
 			error('Locale for language "'.$language.'" is not found on the web server. Tried to set: '.
-				implode(', ', $locales).'. Unable to translate Zabbix interface.');
+				implode(', ', $locales_probed).'. Unable to translate Zabbix interface.'
+			);
 		}
 
 		require_once $this->getRootDir().'/include/translateDefines.inc.php';
