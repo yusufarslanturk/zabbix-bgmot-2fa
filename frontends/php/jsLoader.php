@@ -24,7 +24,7 @@ require_once dirname(__FILE__).'/include/locales.inc.php';
 require_once dirname(__FILE__).'/include/gettextwrapper.inc.php';
 
 if (isset($_GET['lang'])) {
-	gettext_locale_switch($_GET['lang'], false);
+	setUserLocale($_GET['lang']);
 }
 
 require_once dirname(__FILE__).'/include/translateDefines.inc.php';

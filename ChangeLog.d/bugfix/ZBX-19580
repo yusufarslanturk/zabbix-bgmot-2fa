@@ -1,1 +1,1 @@
-..F....... [ZBX-19580] fixed date format mismatch in dashboards, a.o. UI elements that are loaded/updated via JavaScript (jfreibergs)
+..F....... [ZBX-19580] fixed date format mismatch in dashboards, other UI elements that are loaded/updated via JavaScript (jfreibergs)
