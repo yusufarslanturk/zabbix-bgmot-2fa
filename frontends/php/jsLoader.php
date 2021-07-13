@@ -23,9 +23,7 @@
 require_once dirname(__FILE__).'/include/locales.inc.php';
 require_once dirname(__FILE__).'/include/gettextwrapper.inc.php';
 
-if (isset($_GET['lang'])) {
-	setUserLocale($_GET['lang']);
-}
+setupLocale(isset($_GET['lang']) ? htmlspecialchars($_GET['lang'], ENT_QUOTES, 'UTF-8') : 'en_GB');
 
 require_once dirname(__FILE__).'/include/translateDefines.inc.php';
 require_once dirname(__FILE__).'/include/js.inc.php';

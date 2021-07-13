@@ -384,7 +384,13 @@ class CSvgGraph extends CSvg {
 		}
 
 		$start = $this->time_from + $step - $this->time_from % $step;
-		$time_formats = [DATE_FORMAT_NOZERO, DAY_FORMAT_NOZERO, DATE_TIME_FORMAT_SHORT_NOZERO, TIME_FORMAT, TIME_FORMAT_SECONDS];
+		$time_formats = [
+			SVG_GRAPH_DATE_FORMAT,
+			SVG_GRAPH_DATE_FORMAT_SHORT,
+			SVG_GRAPH_DATE_TIME_FORMAT_SHORT,
+			TIME_FORMAT,
+			TIME_FORMAT_SECONDS
+		];
 
 		// Search for most appropriate time format.
 		foreach ($time_formats as $fmt) {
@@ -990,9 +996,9 @@ class CSvgGraph extends CSvg {
 					? zbx_date2str(TIME_FORMAT_SECONDS, $problem['clock'])
 					: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['clock']),
 				'r_clock' => ($problem['r_clock'] != 0)
-					? ($problem['r_clock'] >= $today)
+					? (($problem['r_clock'] >= $today)
 						? zbx_date2str(TIME_FORMAT_SECONDS, $problem['r_clock'])
-						: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['r_clock'])
+						: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['r_clock']))
 					: '',
 				'url' => (new CUrl('tr_events.php'))
 					->setArgument('triggerid', $problem['objectid'])

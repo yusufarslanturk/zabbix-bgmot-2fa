@@ -202,16 +202,15 @@ function _params($format, array $arguments) {
 }
 
 /**
- * Initialize gettext translations depending on language selected by user.
+ * Initialize locale environment and gettext translations depending on language selected by user.
  *
  * Note: should be called before translateDefines are included.
  *
  * @param string $language            Locale language prefix like en_US, ru_RU etc.
- * @param bool   $locales_probed      List of locale variants matched/tried to set.
  *
- * @return bool Whether a matching locale could be set.
+ * @return string Empty on success, message if a matching locale could not be set.
  */
-function setUserLocale(string $language, &$locales_probed = null) {
+function setupLocale(string $language) {
 	$numeric_locales = [
 		'C', 'POSIX', 'en', 'en_US', 'en_US.UTF-8', 'English_United States.1252', 'en_GB', 'en_GB.UTF-8'
 	];
@@ -238,9 +237,13 @@ function setUserLocale(string $language, &$locales_probed = null) {
 	// Force PHP to always use a point instead of a comma for decimal numbers.
 	setlocale(LC_NUMERIC, $numeric_locales);
 
-	bindtextdomain('frontend', 'locale');
-	bind_textdomain_codeset('frontend', 'UTF-8');
-	textdomain('frontend');
+	if (function_exists('bindtextdomain')) {
+		bindtextdomain('frontend', 'locale');
+		bind_textdomain_codeset('frontend', 'UTF-8');
+		textdomain('frontend');
+	}
 
-	return $locale_set;
+	return ($locale_set ? '': 'Locale for language "'.$language.'" is not found on the web server. Tried to set: '.
+			implode(', ', $locales_probed).'. Unable to translate Zabbix interface.'
+	);
 }
