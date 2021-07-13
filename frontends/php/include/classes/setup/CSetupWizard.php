@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -210,7 +210,7 @@ class CSetupWizard extends CForm {
 	}
 
 	function stage2() {
-		$DB['TYPE'] = $this->getConfig('DB_TYPE');
+		$DB['TYPE'] = $this->getConfig('DB_TYPE', key(CFrontendSetup::getSupportedDatabases()));
 
 		$table = new CFormList();
 
@@ -371,7 +371,7 @@ class CSetupWizard extends CForm {
 				new CTag('ol', true, [
 					new CTag('li', true, new CLink(_('Download the configuration file'), 'setup.php?save_config=1')),
 					new CTag('li', true, _s('Save it as "%1$s"', $config_file_name))
-				]),
+				])
 			];
 		}
 		else {
@@ -419,25 +419,28 @@ class CSetupWizard extends CForm {
 		}
 		else {
 			$result = true;
+
 			if (!zbx_empty($DB['SCHEMA']) && $DB['TYPE'] == ZBX_DB_DB2) {
-				$db_schema = DBselect('SELECT schemaname FROM syscat.schemata WHERE schemaname=\''.db2_escape_string($DB['SCHEMA']).'\'');
+				$db_schema = DBselect(
+					"SELECT schemaname FROM syscat.schemata WHERE schemaname='".db2_escape_string($DB['SCHEMA'])."'"
+				);
 				$result = DBfetch($db_schema);
 			}
 
 			if (!zbx_empty($DB['SCHEMA']) && $DB['TYPE'] == ZBX_DB_POSTGRESQL) {
-				$db_schema = DBselect('SELECT schema_name FROM information_schema.schemata WHERE schema_name = \''.pg_escape_string($DB['SCHEMA']).'\';');
+				$db_schema = DBselect(
+					"SELECT schema_name".
+					" FROM information_schema.schemata".
+					" WHERE schema_name='".pg_escape_string($DB['SCHEMA'])."'"
+				);
 				$result = DBfetch($db_schema);
-			}
-
-			if ($result) {
-				$result = DBexecute('CREATE TABLE zabbix_installation_test (test_row INTEGER)');
-				$result &= DBexecute('DROP TABLE zabbix_installation_test');
 			}
 
 			$db = DB::getDbBackend();
 
 			if (!$db->checkEncoding()) {
 				error($db->getWarning());
+
 				return false;
 			}
 		}
@@ -445,6 +448,7 @@ class CSetupWizard extends CForm {
 		DBclose();
 
 		$DB = null;
+
 		return $result;
 	}
 

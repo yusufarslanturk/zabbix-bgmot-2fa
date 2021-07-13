@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -45,7 +45,8 @@ class CWidgetElement extends CElement {
 	 * @return string
 	 */
 	public function getHeaderText() {
-		return $this->query('xpath:.//div[contains(@class, "dashbrd-grid-widget-head")]/h4')->one()->getText();
+		return $this->query('xpath:.//div[contains(@class, "dashbrd-grid-widget-head") or'.
+				' contains(@class, "dashbrd-grid-iterator-head")]/h4')->one()->getText();
 	}
 
 	/**
@@ -54,16 +55,17 @@ class CWidgetElement extends CElement {
 	 * @return CElement
 	 */
 	public function getContent() {
-		return $this->query('xpath:.//div[contains(@class, "dashbrd-grid-widget-content")]')->one();
+		return $this->query('xpath:.//div[contains(@class, "dashbrd-grid-widget-content") or'.
+				' contains(@class, "dashbrd-grid-iterator-content")]')->one();
 	}
 
 	/**
-	 * Check if widget is editable (dashboard is set to edit mode).
+	 * Check if widget is editable (widget edit button is present).
 	 *
 	 * @return boolean
 	 */
 	public function isEditable() {
-		return $this->query('xpath:.//button[@class="btn-widget-edit"]')->one()->isDisplayed();
+		return $this->query('xpath:.//button[@class="btn-widget-edit"]')->one()->isPresent();
 	}
 
 	/**
@@ -72,7 +74,7 @@ class CWidgetElement extends CElement {
 	 * @return CFormElement
 	 */
 	public function edit() {
-		$this->query('xpath:.//button[@class="btn-widget-edit"]')->one()->click(true);
+		$this->query('xpath:.//button[@class="btn-widget-edit"]')->one()->waitUntilPresent()->click(true);
 		return $this->query('xpath://div[@data-dialogueid="widgetConfg"]//form')->waitUntilVisible()->asForm()->one();
 	}
 
@@ -87,4 +89,3 @@ class CWidgetElement extends CElement {
 		};
 	}
 }
-

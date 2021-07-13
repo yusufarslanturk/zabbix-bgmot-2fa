@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -66,7 +66,6 @@ require_once dirname(__FILE__).'/testPageStatusOfZabbix.php';
 require_once dirname(__FILE__).'/testPageTemplates.php';
 require_once dirname(__FILE__).'/testPageUserGroups.php';
 require_once dirname(__FILE__).'/testPageUsers.php';
-require_once dirname(__FILE__).'/dashboard/testProblemsBySeverityWidget.php';
 require_once dirname(__FILE__).'/testFormAction.php';
 require_once dirname(__FILE__).'/testFormAdministrationAuthenticationHttp.php';
 require_once dirname(__FILE__).'/testFormAdministrationAuthenticationLdap.php';
@@ -74,14 +73,13 @@ require_once dirname(__FILE__).'/testFormAdministrationDMProxies.php';
 require_once dirname(__FILE__).'/testFormAdministrationGeneralGUI.php';
 require_once dirname(__FILE__).'/testFormAdministrationGeneralHousekeeper.php';
 require_once dirname(__FILE__).'/testFormAdministrationGeneralIconMapping.php';
-require_once dirname(__FILE__).'/testFormAdministrationGeneralImages.php';
+//require_once dirname(__FILE__).'/testFormAdministrationGeneralImages.php';
 require_once dirname(__FILE__).'/testFormAdministrationGeneralMacro.php';
 require_once dirname(__FILE__).'/testFormAdministrationGeneralOtherParams.php';
 require_once dirname(__FILE__).'/testFormAdministrationGeneralRegexp.php';
 require_once dirname(__FILE__).'/testFormAdministrationGeneralTrigDisplOptions.php';
 require_once dirname(__FILE__).'/testFormAdministrationGeneralValuemap.php';
 require_once dirname(__FILE__).'/testFormAdministrationGeneralWorkperiod.php';
-require_once dirname(__FILE__).'/testFormAdministrationGeneralInstallation.php';
 require_once dirname(__FILE__).'/testFormAdministrationMediaTypes.php';
 require_once dirname(__FILE__).'/testFormAdministrationScripts.php';
 require_once dirname(__FILE__).'/testFormAdministrationUserGroups.php';
@@ -102,12 +100,14 @@ require_once dirname(__FILE__).'/testFormMaintenance.php';
 require_once dirname(__FILE__).'/testFormMap.php';
 require_once dirname(__FILE__).'/testFormNetworkDiscovery.php';
 require_once dirname(__FILE__).'/testFormScreen.php';
+require_once dirname(__FILE__).'/testFormSetup.php';
 require_once dirname(__FILE__).'/testFormSysmap.php';
 require_once dirname(__FILE__).'/testFormTrigger.php';
 require_once dirname(__FILE__).'/testFormTemplate.php';
 require_once dirname(__FILE__).'/testFormTemplateMacros.php';
 require_once dirname(__FILE__).'/testFormTriggerPrototype.php';
 require_once dirname(__FILE__).'/testFormUser.php';
+require_once dirname(__FILE__).'/testFormUserMedia.php';
 require_once dirname(__FILE__).'/testFormUserProfile.php';
 require_once dirname(__FILE__).'/testFormWeb.php';
 require_once dirname(__FILE__).'/testFormWebStep.php';
@@ -134,7 +134,9 @@ require_once dirname(__FILE__).'/testUrlUserPermissions.php';
 require_once dirname(__FILE__).'/testZBX6339.php';
 require_once dirname(__FILE__).'/testZBX6648.php';
 require_once dirname(__FILE__).'/testZBX6663.php';
-require_once dirname(__FILE__).'/dashboard/testGraphWidget.php';
+require_once dirname(__FILE__).'/dashboard/testDashboardDynamicItemWidgets.php';
+require_once dirname(__FILE__).'/dashboard/testDashboardGraphWidget.php';
+require_once dirname(__FILE__).'/dashboard/testDashboardProblemsBySeverityWidget.php';
 
 class SeleniumTests {
 	public static function suite() {
@@ -188,7 +190,6 @@ class SeleniumTests {
 		$suite->addTestSuite('testPageUserGroups');
 		$suite->addTestSuite('testPageUsers');
 		$suite->addTestSuite('testPageWeb');
-		$suite->addTestSuite('testProblemsBySeverityWidget');
 		$suite->addTestSuite('testFormAction');
 		$suite->addTestSuite('testFormAdministrationAuthenticationHttp');
 		$suite->addTestSuite('testFormAdministrationAuthenticationLdap');
@@ -196,14 +197,13 @@ class SeleniumTests {
 		$suite->addTestSuite('testFormAdministrationGeneralGUI');
 		$suite->addTestSuite('testFormAdministrationGeneralHousekeeper');
 		$suite->addTestSuite('testFormAdministrationGeneralIconMapping');
-		$suite->addTestSuite('testFormAdministrationGeneralImages');
+//		$suite->addTestSuite('testFormAdministrationGeneralImages');
 		$suite->addTestSuite('testFormAdministrationGeneralMacro');
 		$suite->addTestSuite('testFormAdministrationGeneralOtherParams');
 		$suite->addTestSuite('testFormAdministrationGeneralRegexp');
 		$suite->addTestSuite('testFormAdministrationGeneralTrigDisplOptions');
 		$suite->addTestSuite('testFormAdministrationGeneralValuemap');
 		$suite->addTestSuite('testFormAdministrationGeneralWorkperiod');
-		$suite->addTestSuite('testFormAdministrationGeneralInstallation');
 		$suite->addTestSuite('testFormAdministrationMediaTypes');
 		$suite->addTestSuite('testFormAdministrationScripts');
 		$suite->addTestSuite('testFormAdministrationUserGroups');
@@ -224,12 +224,14 @@ class SeleniumTests {
 		$suite->addTestSuite('testFormMap');
 		$suite->addTestSuite('testFormNetworkDiscovery');
 		$suite->addTestSuite('testFormScreen');
+		$suite->addTestSuite('testFormSetup');
 		$suite->addTestSuite('testFormSysmap');
 		$suite->addTestSuite('testFormTemplate');
 		$suite->addTestSuite('testFormTemplateMacros');
 		$suite->addTestSuite('testFormTrigger');
 		$suite->addTestSuite('testFormTriggerPrototype');
 		$suite->addTestSuite('testFormUser');
+		$suite->addTestSuite('testFormUserMedia');
 		$suite->addTestSuite('testFormUserProfile');
 		$suite->addTestSuite('testFormWeb');
 		$suite->addTestSuite('testFormWebStep');
@@ -256,7 +258,9 @@ class SeleniumTests {
 		$suite->addTestSuite('testZBX6339');
 		$suite->addTestSuite('testZBX6648');
 		$suite->addTestSuite('testZBX6663');
-		$suite->addTestSuite('testGraphWidget');
+		$suite->addTestSuite('testDashboardDynamicItemWidgets');
+		$suite->addTestSuite('testDashboardGraphWidget');
+		$suite->addTestSuite('testDashboardProblemsBySeverityWidget');
 
 		return $suite;
 	}

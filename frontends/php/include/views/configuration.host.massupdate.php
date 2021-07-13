@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -251,14 +251,18 @@ $ipmiFormList->addRow(
 	(new CVisibilityBox('visible[ipmi_username]', 'ipmi_username', _('Original')))
 		->setLabel(_('IPMI username'))
 		->setChecked(isset($data['visible']['ipmi_username'])),
-	(new CTextBox('ipmi_username', $data['ipmi_username']))->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+	(new CTextBox('ipmi_username', $data['ipmi_username']))
+		->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+		->disableAutocomplete()
 );
 
 $ipmiFormList->addRow(
 	(new CVisibilityBox('visible[ipmi_password]', 'ipmi_password', _('Original')))
 		->setLabel(_('IPMI password'))
 		->setChecked(isset($data['visible']['ipmi_password'])),
-	(new CTextBox('ipmi_password', $data['ipmi_password']))->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+	(new CTextBox('ipmi_password', $data['ipmi_password']))
+		->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+		->disableAutocomplete()
 );
 
 $inventoryFormList = new CFormList('inventoryFormList');
@@ -335,7 +339,9 @@ $encryption_table = (new CTable())
 		(new CTextBox('tls_psk_identity', $data['tls_psk_identity'], false, 128))->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
 	])
 	->addRow([_('PSK'),
-		(new CTextBox('tls_psk', $data['tls_psk'], false, 512))->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
+		(new CTextBox('tls_psk', $data['tls_psk'], false, 512))
+			->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
+			->disableAutocomplete()
 	])
 	->addRow([_('Issuer'),
 		(new CTextBox('tls_issuer', $data['tls_issuer'], false, 1024))->setWidth(ZBX_TEXTAREA_BIG_WIDTH)

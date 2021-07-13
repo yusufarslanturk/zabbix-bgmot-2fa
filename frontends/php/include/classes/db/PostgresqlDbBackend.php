@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -33,15 +33,18 @@ class PostgresqlDbBackend extends DbBackend {
 		global $DB;
 
 		$schema = zbx_dbstr($DB['SCHEMA'] ? $DB['SCHEMA'] : 'public');
-
-		$tableExists = DBfetch(DBselect('SELECT 1 FROM information_schema.tables'.
+		$table_exists = DBfetch(DBselect(
+			'SELECT 1 FROM information_schema.tables'.
 			' WHERE table_catalog='.zbx_dbstr($DB['DATABASE']).
 				' AND table_schema='.$schema.
 				" AND table_name='dbversion'"
 		));
 
-		if (!$tableExists) {
-			$this->setError(_('The frontend does not match Zabbix database.'));
+		if (!$table_exists) {
+			$this->setError(_s('Unable to determine current Zabbix database version: %1$s.',
+				_s('the table "%1$s" was not found', 'dbversion')
+			));
+
 			return false;
 		}
 

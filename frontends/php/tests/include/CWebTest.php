@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ class CWebTest extends CTest {
 
 	// Network throttling emulation modes.
 	const NETWORK_THROTTLING_NONE		= 'none';
-	const NETWORK_THROTTLING_OFFLINE		= 'offline';
+	const NETWORK_THROTTLING_OFFLINE	= 'offline';
 	const NETWORK_THROTTLING_SLOW		= 'slow';
 	const NETWORK_THROTTLING_FAST		= 'fast';
 
@@ -105,12 +105,6 @@ class CWebTest extends CTest {
 		$errors = [];
 		if (self::$shared_page !== null) {
 				foreach (self::$shared_page->getBrowserLog() as $log) {
-					// Workaround for ID duplicates.
-					// TODO: remove workaround after fix ZBX-17220
-					if (strpos($log['message'], 'elements with non-unique id') !== false) {
-						continue;
-					}
-
 					$errors[] = $log['message'];
 				}
 		}
@@ -237,6 +231,8 @@ class CWebTest extends CTest {
 	 * @after
 	 */
 	public function onAfterTestCase() {
+		// Reset default fill mode for multiselect elements.
+		CMultiselectElement::setDefaultFillMode(CMultiselectElement::MODE_TYPE);
 		if (!self::$shared_page->cleanup()) {
 			self::closePage();
 		}
@@ -297,6 +293,15 @@ class CWebTest extends CTest {
 		}
 
 		$this->assertEquals($title, $this->page->getTitle());
+	}
+
+	/**
+	 * Check page header
+	 *
+	 * @param string $header	page header to be compared
+	 */
+	public function assertPageHeader($header) {
+		$this->assertEquals($header, $this->query('xpath://h1[@id="page-title-general"]')->one()->getText());
 	}
 
 	/**
@@ -464,6 +469,11 @@ class CWebTest extends CTest {
 
 			if (file_put_contents(PHPUNIT_SCREENSHOT_DIR.'ref_'.$name, $screenshot) === false) {
 				$this->fail($message."\n".'Cannot save current screenshot.');
+			}
+
+			if ($compare['ref'] !== null
+					&& file_put_contents(PHPUNIT_SCREENSHOT_DIR.'src_'.$name, $compare['ref']) === false) {
+				$this->fail($message."\n".'Cannot save reference screenshot.');
 			}
 
 			if ($compare['diff'] !== null) {

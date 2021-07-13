@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
 
+use Facebook\WebDriver\WebDriverBy;
+
 class testPageReportsTriggerTop extends CLegacyWebTest {
 
 	public function testPageReportsTriggerTop_FilterLayout() {
@@ -30,11 +32,11 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 		$this->zbxTestTextPresent('Host groups', 'Hosts', 'Severity', 'Filter', 'From', 'Till');
 		$this->zbxTestClickXpathWait('//button[text()="Reset"]');
 
-		// Check selected severities
+		// Check unselected severities
 		$severities = ['Not classified', 'Warning', 'High', 'Information', 'Average', 'Disaster'];
 		foreach ($severities as $severity) {
 			$severity_id = $this->zbxTestGetAttributeValue('//label[text()=\''.$severity.'\']', 'for');
-			$this->assertTrue($this->zbxTestCheckboxSelected($severity_id));
+			$this->assertTrue($this->query('id', $severity_id)->waitUntilPresent()->one()->isSelected(false));
 		}
 
 		// Check closed filter
@@ -54,7 +56,7 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 						'host_group' => 'Zabbix servers'
 					],
 					'date' => [
-						'from' => '2018-10-23 00:00',
+						'from' => '2020-10-23 00:00',
 						'to' => 'now/d'
 					],
 					'result' => [
@@ -81,7 +83,7 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 						'host' => 'ЗАББИКС Сервер'
 					],
 					'date' => [
-						'from' => '2018-10-23 14:00'
+						'from' => '2020-10-23 17:00'
 					],
 					'result' => [
 						'Test trigger with tag'
@@ -107,8 +109,8 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 						'host' => 'ЗАББИКС Сервер'
 					],
 					'date' => [
-						'from' => '2018-10-22 01:01',
-						'to' => '2018-10-24 01:01'
+						'from' => '2020-10-22 04:01',
+						'to' => '2020-10-24 04:01'
 					],
 					'result' => [
 						'Test trigger to check tag filter on problem page',
@@ -123,7 +125,7 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 						'host' => 'ЗАББИКС Сервер'
 					],
 					'date' => [
-						'from' => '2019-08-18 00:00',
+						'from' => '2020-10-26 00:00',
 						'to' => 'now/d'
 					]
 				]
@@ -131,8 +133,8 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 			[
 				[
 					'date' => [
-						'from' => '2018-10-23 12:35',
-						'to' => '2018-10-23 12:36'
+						'from' => '2020-10-23 15:35',
+						'to' => '2020-10-23 15:36'
 					],
 					'result' => [
 						'Trigger for tag permissions MySQL'
@@ -143,13 +145,13 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 				[
 					'filter' => [
 						'severities' => [
-							'Not classified',
-							'Information',
-							'Warning'
+							'Average',
+							'High',
+							'Disaster'
 						]
 					],
 					'date' => [
-						'from' => '2018-10-22 00:00'
+						'from' => '2020-10-22 00:00'
 					],
 					'result' => [
 						'Test trigger to check tag filter on problem page'
@@ -160,22 +162,20 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 				[
 					'filter' => [
 						'severities' => [
-							'Not classified',
-							'Warning',
-							'Information',
-							'Average'
+							'High',
+							'Disaster'
 						]
 					],
 					'date' => [
-						'from' => '2018-10-22 00:00'
+						'from' => '2020-10-22 00:00'
 					]
 				]
 			],
 			[
 				[
 					'date' => [
-						'from' => '2018-10-23 12:33',
-						'to' => '2018-10-23 12:36'
+						'from' => '2020-10-23 15:33',
+						'to' => '2020-10-23 15:36'
 					],
 					'result' => [
 						'Test trigger to check tag filter on problem page',

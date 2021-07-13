@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -46,10 +46,10 @@ class CDashboard extends CApiService {
 				'dashboardid' =>			['type' => API_IDS, 'flags' => API_ALLOW_NULL | API_NORMALIZE],
 				'name' =>					['type' => API_STRINGS_UTF8, 'flags' => API_ALLOW_NULL | API_NORMALIZE],
 				'userid' =>					['type' => API_IDS, 'flags' => API_ALLOW_NULL | API_NORMALIZE],
-				'private' =>				['type' => API_INTS32, 'flags' => API_ALLOW_NULL | API_NORMALIZE, 'in' => implode(',', [PUBLIC_SHARING, PRIVATE_SHARING])],
+				'private' =>				['type' => API_INTS32, 'flags' => API_ALLOW_NULL | API_NORMALIZE, 'in' => implode(',', [PUBLIC_SHARING, PRIVATE_SHARING])]
 			]],
 			'search' =>					['type' => API_OBJECT, 'flags' => API_ALLOW_NULL, 'default' => null, 'fields' => [
-				'name' =>					['type' => API_STRINGS_UTF8, 'flags' => API_ALLOW_NULL | API_NORMALIZE],
+				'name' =>					['type' => API_STRINGS_UTF8, 'flags' => API_ALLOW_NULL | API_NORMALIZE]
 			]],
 			'searchByAny' =>			['type' => API_BOOLEAN, 'default' => false],
 			'startSearch' =>			['type' => API_FLAG, 'default' => false],
@@ -63,7 +63,7 @@ class CDashboard extends CApiService {
 			'countOutput' =>			['type' => API_FLAG, 'default' => false],
 			// sort and limit
 			'sortfield' =>				['type' => API_STRINGS_UTF8, 'flags' => API_NORMALIZE, 'in' => implode(',', $this->sortColumns), 'uniq' => true, 'default' => []],
-			'sortorder' =>				['type' => API_STRINGS_UTF8, 'flags' => API_NORMALIZE, 'in' => implode(',', [ZBX_SORT_UP, ZBX_SORT_DOWN]), 'default' => []],
+			'sortorder' =>				['type' => API_SORTORDER, 'default' => []],
 			'limit' =>					['type' => API_INT32, 'flags' => API_ALLOW_NULL, 'in' => '1:'.ZBX_MAX_INT32, 'default' => null],
 			// flags
 			'editable' =>				['type' => API_BOOLEAN, 'default' => false],
@@ -129,7 +129,7 @@ class CDashboard extends CApiService {
 		$sql_parts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sql_parts);
 		$sql_parts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sql_parts);
 
-		$result = DBselect($this->createSelectQueryFromParts($sql_parts), $options['limit']);
+		$result = DBselect(self::createSelectQueryFromParts($sql_parts), $options['limit']);
 
 		while ($row = DBfetch($result)) {
 			if ($options['countOutput']) {
@@ -1256,12 +1256,17 @@ class CDashboard extends CApiService {
 		// Adding user shares.
 		if ($options['selectUsers'] !== null) {
 			$relation_map = $this->createRelationMap($result, 'dashboardid', 'userid', 'dashboard_user');
-			// Get all allowed users.
-			$db_users = API::User()->get([
-				'output' => [],
-				'userids' => $relation_map->getRelatedIds(),
-				'preservekeys' => true
-			]);
+			$related_ids = $relation_map->getRelatedIds();
+			$db_users = [];
+
+			if ($related_ids) {
+				// Get all allowed users.
+				$db_users = API::User()->get([
+					'output' => [],
+					'userids' => $related_ids,
+					'preservekeys' => true
+				]);
+			}
 
 			if ($db_users) {
 				$db_dashboard_users = API::getApiService()->select('dashboard_user', [
@@ -1292,12 +1297,17 @@ class CDashboard extends CApiService {
 		// Adding user group shares.
 		if ($options['selectUserGroups'] !== null) {
 			$relation_map = $this->createRelationMap($result, 'dashboardid', 'usrgrpid', 'dashboard_usrgrp');
-			// Get all allowed groups.
-			$db_usrgrps = API::UserGroup()->get([
-				'output' => [],
-				'usrgrpids' => $relation_map->getRelatedIds(),
-				'preservekeys' => true
-			]);
+			$related_ids = $relation_map->getRelatedIds();
+			$db_usrgrps = [];
+
+			if ($related_ids) {
+				// Get all allowed groups.
+				$db_usrgrps = API::UserGroup()->get([
+					'output' => [],
+					'usrgrpids' => $related_ids,
+					'preservekeys' => true
+				]);
+			}
 
 			if ($db_usrgrps) {
 				$db_dashboard_usrgrps = API::getApiService()->select('dashboard_usrgrp', [

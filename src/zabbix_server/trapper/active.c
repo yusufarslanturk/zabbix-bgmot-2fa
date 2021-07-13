@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -70,7 +70,13 @@ static void	db_register_host(const char *host, const char *ip, unsigned short po
  *                                                                            *
  * Purpose: check for host name and return hostid                             *
  *                                                                            *
- * Parameters: host - [IN] require size 'HOST_HOST_LEN_MAX'                   *
+ * Parameters: sock          - [IN] open socket of server-agent connection    *
+ *             host          - [IN] host name                                 *
+ *             ip            - [IN] IP address of the host                    *
+ *             port          - [IN] port of the host                          *
+ *             host_metadata - [IN] host metadata                             *
+ *             hostid        - [OUT] host ID                                  *
+ *             error         - [OUT] error message                            *
  *                                                                            *
  * Return value:  SUCCEED - host is found                                     *
  *                FAIL - an error occurred or host not found                  *
@@ -86,7 +92,7 @@ static int	get_hostid_by_host(const zbx_socket_t *sock, const char *host, const 
 {
 	const char	*__function_name = "get_hostid_by_host";
 
-	char		*host_esc, *ch_error, *old_metadata;
+	char		*host_esc, *ch_error, *old_metadata, *autoreg_hostid_ptr;
 	DB_RESULT	result;
 	DB_ROW		row;
 	int		ret = FAIL;
@@ -106,7 +112,7 @@ static int	get_hostid_by_host(const zbx_socket_t *sock, const char *host, const 
 #if defined(HAVE_POLARSSL) || defined(HAVE_GNUTLS) || defined(HAVE_OPENSSL)
 		DBselect(
 			"select h.hostid,h.status,h.tls_accept,h.tls_issuer,h.tls_subject,h.tls_psk_identity,"
-			"a.host_metadata"
+			"a.host_metadata,a.autoreg_hostid"
 			" from hosts h"
 				" left join autoreg_host a"
 					" on a.proxy_hostid is null and a.host=h.host"
@@ -117,7 +123,7 @@ static int	get_hostid_by_host(const zbx_socket_t *sock, const char *host, const 
 			host_esc, HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED, ZBX_FLAG_DISCOVERY_PROTOTYPE);
 #else
 		DBselect(
-			"select h.hostid,h.status,h.tls_accept,a.host_metadata"
+			"select h.hostid,h.status,h.tls_accept,a.host_metadata,a.autoreg_hostid"
 			" from hosts h"
 				" left join autoreg_host a"
 					" on a.proxy_hostid is null and a.host=h.host"
@@ -189,14 +195,14 @@ static int	get_hostid_by_host(const zbx_socket_t *sock, const char *host, const 
 		}
 #endif
 		old_metadata = row[6];
+		autoreg_hostid_ptr = row[7];
 #else
 		old_metadata = row[3];
+		autoreg_hostid_ptr = row[4];
 #endif
 		/* metadata is available only on Zabbix server */
-		if (SUCCEED == DBis_null(old_metadata) || 0 != strcmp(old_metadata, host_metadata))
-		{
+		if (SUCCEED == DBis_null(autoreg_hostid_ptr) || 0 != strcmp(old_metadata, host_metadata))
 			db_register_host(host, ip, port, host_metadata);
-		}
 
 		if (HOST_STATUS_MONITORED != atoi(row[1]))
 		{
@@ -449,14 +455,12 @@ out:
  * Purpose: send list of active checks to the host                            *
  *                                                                            *
  * Parameters: sock - open socket of server-agent connection                  *
- *             json - request buffer                                          *
+ *             jp   - request buffer                                          *
  *                                                                            *
  * Return value:  SUCCEED - list of active checks sent successfully           *
  *                FAIL - an error occurred                                    *
  *                                                                            *
  * Author: Alexander Vladishev                                                *
- *                                                                            *
- * Comments:                                                                  *
  *                                                                            *
  ******************************************************************************/
 int	send_list_of_active_checks_json(zbx_socket_t *sock, struct zbx_json_parse *jp)

@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -78,23 +78,6 @@ function copy_expression(id, type) {
 		element.value = src.innerText;
 	}
 }
-
-/*
- * Graph related stuff
- */
-var graphs = {
-	graphtype : 0,
-
-	submit : function(obj) {
-		if (obj.name == 'graphtype') {
-			if ((obj.selectedIndex > 1 && this.graphtype < 2) || (obj.selectedIndex < 2 && this.graphtype > 1)) {
-				var refr = document.getElementsByName('form_refresh');
-				refr[0].value = 0;
-			}
-		}
-		document.getElementsByName('frm_graph')[0].submit();
-	}
-};
 
 function cloneRow(elementid, count) {
 	if (typeof(cloneRow.count) == 'undefined') {

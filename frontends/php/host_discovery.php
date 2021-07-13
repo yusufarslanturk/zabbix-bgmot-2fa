@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -145,7 +145,11 @@ $fields = [
 	'jmx_endpoint' =>			[T_ZBX_STR, O_OPT, null,	NOT_EMPTY,
 		'(isset({add}) || isset({update})) && isset({type}) && {type} == '.ITEM_TYPE_JMX
 	],
-	'timeout' =>				[T_ZBX_STR, O_OPT, null,	null,		null],
+	'timeout' => 				[T_ZBX_TU, O_OPT, P_ALLOW_USER_MACRO,	null,
+									'(isset({add}) || isset({update})) && isset({type})'.
+										' && {type} == '.ITEM_TYPE_HTTPAGENT,
+									_('Timeout')
+								],
 	'url' =>					[T_ZBX_STR, O_OPT, null,	NOT_EMPTY,
 									'(isset({add}) || isset({update})) && isset({type})'.
 										' && {type} == '.ITEM_TYPE_HTTPAGENT,
@@ -593,7 +597,8 @@ else {
 		'host' => $host,
 		'showInfoColumn' => ($host['status'] != HOST_STATUS_TEMPLATE),
 		'sort' => $sortField,
-		'sortorder' => $sortOrder
+		'sortorder' => $sortOrder,
+		'is_template' => true
 	];
 
 	// discoveries
@@ -601,6 +606,7 @@ else {
 		'hostids' => $data['hostid'],
 		'output' => API_OUTPUT_EXTEND,
 		'editable' => true,
+		'selectHosts' => ['hostid', 'name', 'status'],
 		'selectItems' => API_OUTPUT_COUNT,
 		'selectGraphs' => API_OUTPUT_COUNT,
 		'selectTriggers' => API_OUTPUT_COUNT,
@@ -622,6 +628,22 @@ else {
 
 		default:
 			order_result($data['discoveries'], $sortField, $sortOrder);
+	}
+
+	$data['discoveries'] = expandItemNamesWithMasterItems($data['discoveries'], 'items');
+
+	// Set is_template false, when one of hosts is not template.
+	if ($data['discoveries']) {
+		$hosts_status = [];
+		foreach ($data['discoveries'] as $discovery) {
+			$hosts_status[$discovery['hosts'][0]['status']] = true;
+		}
+		foreach ($hosts_status as $key => $value) {
+			if ($key != HOST_STATUS_TEMPLATE) {
+				$data['is_template'] = false;
+				break;
+			}
+		}
 	}
 
 	// paging

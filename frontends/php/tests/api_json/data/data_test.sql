@@ -225,6 +225,40 @@ INSERT INTO httpstep (httpstepid, httptestid, name, no, url, posts) VALUES (1501
 INSERT INTO httptest (httptestid, name, delay, agent, hostid) VALUES (15011, 'Api web scenario for delete as zabbix-user', 60, 'Zabbix', 50009);
 INSERT INTO httpstep (httpstepid, httptestid, name, no, url, posts) VALUES (15011, 15011, 'Api step for delete as zabbix-user', 1, 'http://api.com', '');
 
+-- web scenario for webitem update testing
+INSERT INTO applications (applicationid,hostid,name,flags) VALUES (15015,50009,'Webtest key_name application',0);
+INSERT INTO applications (applicationid,hostid,name,flags) VALUES (15016,50009,'Webtest key_name application2',0);
+INSERT INTO httptest (httptestid, name, delay, agent, hostid, applicationid) VALUES (15015, 'Webtest key_name', 60, 'Zabbix', 50009, 15015);
+INSERT INTO httpstep (httpstepid, httptestid, name, no, url, posts) VALUES (15015, 15015, 'Webstep name 1', 1, 'http://api.com', '');
+INSERT INTO httpstep (httpstepid, httptestid, name, no, url, posts) VALUES (15016, 15015, 'Webstep name 2', 2, 'http://api.com', '');
+INSERT INTO items (itemid,hostid,interfaceid,type,value_type,name,key_,delay,history,status,params,description,flags,posts,headers) VALUES (150151, 50009, 1, 9, 0,'Download speed for scenario "$1".','web.test.in[Webtest key_name,,bps]','2m','30d',0,'','',0,'','');
+INSERT INTO items (itemid,hostid,interfaceid,type,value_type,name,key_,delay,history,status,params,description,flags,posts,headers) VALUES (150152, 50009, 1, 9, 3,'Failed step of scenario "$1".','web.test.fail[Webtest key_name]','2m','30d',0,'','',0,'','');
+INSERT INTO items (itemid,hostid,interfaceid,type,value_type,name,key_,delay,history,status,params,description,flags,posts,headers) VALUES (150153, 50009, 1, 9, 1,'Last error message of scenario "$1".','web.test.error[Webtest key_name]','2m','30d',0,'','',0,'','');
+INSERT INTO items (itemid,hostid,interfaceid,type,value_type,name,key_,delay,history,status,params,description,flags,posts,headers) VALUES (150154, 50009, 1, 9, 0,'Download speed for step "$2" of scenario "$1".','web.test.in[Webtest key_name,Webstep name 1,bps]','1m','30d',0,'','',0,'','');
+INSERT INTO items (itemid,hostid,interfaceid,type,value_type,name,key_,delay,history,status,params,description,flags,posts,headers) VALUES (150155, 50009, 1, 9, 0,'Response time for step "$2" of scenario "$1".','web.test.time[Webtest key_name,Webstep name 1,resp]','1m','30d',0,'','',0,'','');
+INSERT INTO items (itemid,hostid,interfaceid,type,value_type,name,key_,delay,history,status,params,description,flags,posts,headers) VALUES (150156, 50009, 1, 9, 3,'Response code for step "$2" of scenario "$1".','web.test.rspcode[Webtest key_name,Webstep name 1]','1m','30d',0,'','',0,'','');
+INSERT INTO items (itemid,hostid,interfaceid,type,value_type,name,key_,delay,history,status,params,description,flags,posts,headers) VALUES (150157, 50009, 1, 9, 0,'Download speed for step "$2" of scenario "$1".','web.test.in[Webtest key_name,Webstep name 2,bps]','1m','30d',0,'','',0,'','');
+INSERT INTO items (itemid,hostid,interfaceid,type,value_type,name,key_,delay,history,status,params,description,flags,posts,headers) VALUES (150158, 50009, 1, 9, 0,'Response time for step "$2" of scenario "$1".','web.test.time[Webtest key_name,Webstep name 2,resp]','1m','30d',0,'','',0,'','');
+INSERT INTO items (itemid,hostid,interfaceid,type,value_type,name,key_,delay,history,status,params,description,flags,posts,headers) VALUES (150159, 50009, 1, 9, 3,'Response code for step "$2" of scenario "$1".','web.test.rspcode[Webtest key_name,Webstep name 2]','1m','30d',0,'','',0,'','');
+INSERT INTO httptestitem (httptestitemid, httptestid, itemid, type) VALUES (150151, 15015, 150151, 2);
+INSERT INTO httptestitem (httptestitemid, httptestid, itemid, type) VALUES (150152, 15015, 150152, 3);
+INSERT INTO httptestitem (httptestitemid, httptestid, itemid, type) VALUES (150153, 15015, 150153, 4);
+INSERT INTO httpstepitem (httpstepitemid, httpstepid, itemid, type) VALUES (150154, 15015, 150154, 2);
+INSERT INTO httpstepitem (httpstepitemid, httpstepid, itemid, type) VALUES (150155, 15015, 150155, 1);
+INSERT INTO httpstepitem (httpstepitemid, httpstepid, itemid, type) VALUES (150156, 15015, 150156, 0);
+INSERT INTO httpstepitem (httpstepitemid, httpstepid, itemid, type) VALUES (150157, 15016, 150157, 2);
+INSERT INTO httpstepitem (httpstepitemid, httpstepid, itemid, type) VALUES (150158, 15016, 150158, 1);
+INSERT INTO httpstepitem (httpstepitemid, httpstepid, itemid, type) VALUES (150159, 15016, 150159, 0);
+INSERT INTO items_applications (itemappid,applicationid,itemid) VALUES (150151,15015,150151);
+INSERT INTO items_applications (itemappid,applicationid,itemid) VALUES (150152,15015,150152);
+INSERT INTO items_applications (itemappid,applicationid,itemid) VALUES (150153,15015,150153);
+INSERT INTO items_applications (itemappid,applicationid,itemid) VALUES (150154,15015,150154);
+INSERT INTO items_applications (itemappid,applicationid,itemid) VALUES (150155,15015,150155);
+INSERT INTO items_applications (itemappid,applicationid,itemid) VALUES (150156,15015,150156);
+INSERT INTO items_applications (itemappid,applicationid,itemid) VALUES (150157,15015,150157);
+INSERT INTO items_applications (itemappid,applicationid,itemid) VALUES (150158,15015,150158);
+INSERT INTO items_applications (itemappid,applicationid,itemid) VALUES (150159,15015,150159);
+
 -- proxy
 INSERT INTO hosts (hostid, host, status, description) VALUES (99000, 'Api active proxy for delete0', 5, '');
 INSERT INTO hosts (hostid, host, status, description) VALUES (99001, 'Api active proxy for delete1', 5, '');
@@ -816,3 +850,330 @@ INSERT INTO history_text (itemid, clock, value, ns) VALUES
 (133762, 1549350998, '1', 450920469),
 (133762, 1549350999, '2', 882825407),
 (133762, 1549351001, '3', 242835912);
+
+-- trigger permissions: BEGIN
+
+INSERT INTO hstgrp (groupid, name) VALUES
+(50101, 'test-trigger-permissions-group-N'),
+(50102, 'test-trigger-permissions-group-D'),
+(50103, 'test-trigger-permissions-group-R'),
+(50104, 'test-trigger-permissions-group-W');
+
+INSERT INTO usrgrp (usrgrpid, name) VALUES (50101, 'test-trigger-permissions-user-group');
+INSERT INTO users (userid, alias, passwd, type) VALUES (50101, 'test-trigger-permissions-user', '5fce1b3e34b520afeffb37ce08c7cd66', 1);
+INSERT INTO users_groups (id, usrgrpid, userid) VALUES (50101, 50101, 50101);
+INSERT INTO rights (rightid, groupid, id, permission) VALUES (50101, 50101, 50102, 0), (50102, 50101, 50103, 2), (50103, 50101, 50104, 3);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50101, 'test-trigger-permissions-host-N', 'test-trigger-permissions-host-N', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50101, 50101, 50101);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50101, 50101, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50101, 50101, 50101, 'test-trigger-permissions-item-N', 0, 'test-trigger-permissions-item-N', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50102, 'test-trigger-permissions-host-D', 'test-trigger-permissions-host-D', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50102, 50102, 50102);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50102, 50102, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50102, 50102, 50102, 'test-trigger-permissions-item-D', 0, 'test-trigger-permissions-item-D', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50103, 'test-trigger-permissions-host-R', 'test-trigger-permissions-host-R', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50103, 50103, 50103);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50103, 50103, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50103, 50103, 50103, 'test-trigger-permissions-item-R', 0, 'test-trigger-permissions-item-R', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50104, 'test-trigger-permissions-host-W', 'test-trigger-permissions-host-W', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50104, 50104, 50104);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50104, 50104, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50104, 50104, 50104, 'test-trigger-permissions-item-W', 0, 'test-trigger-permissions-item-W', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50105, 'test-trigger-permissions-host-ND', 'test-trigger-permissions-host-ND', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50105, 50105, 50101), (50106, 50105, 50102);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50105, 50105, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50105, 50105, 50105, 'test-trigger-permissions-item-ND', 0, 'test-trigger-permissions-item-ND', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50106, 'test-trigger-permissions-host-NR', 'test-trigger-permissions-host-NR', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50107, 50106, 50101), (50108, 50106, 50103);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50106, 50106, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50106, 50106, 50106, 'test-trigger-permissions-item-NR', 0, 'test-trigger-permissions-item-NR', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50107, 'test-trigger-permissions-host-NW', 'test-trigger-permissions-host-NW', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50109, 50107, 50101), (50110, 50107, 50104);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50107, 50107, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50107, 50107, 50107, 'test-trigger-permissions-item-NW', 0, 'test-trigger-permissions-item-NW', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50108, 'test-trigger-permissions-host-DR', 'test-trigger-permissions-host-DR', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50111, 50108, 50102), (50112, 50108, 50103);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50108, 50108, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50108, 50108, 50108, 'test-trigger-permissions-item-DR', 0, 'test-trigger-permissions-item-DR', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50109, 'test-trigger-permissions-host-DW', 'test-trigger-permissions-host-DW', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50113, 50109, 50102), (50114, 50109, 50104);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50109, 50109, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50109, 50109, 50109, 'test-trigger-permissions-item-DW', 0, 'test-trigger-permissions-item-DW', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50110, 'test-trigger-permissions-host-RW', 'test-trigger-permissions-host-RW', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50115, 50110, 50103), (50116, 50110, 50104);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50110, 50110, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50110, 50110, 50110, 'test-trigger-permissions-item-RW', 0, 'test-trigger-permissions-item-RW', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50111, 'test-trigger-permissions-host-NDR', 'test-trigger-permissions-host-NDR', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50117, 50111, 50101), (50118, 50111, 50102), (50119, 50111, 50103);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50111, 50111, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50111, 50111, 50111, 'test-trigger-permissions-item-NDR', 0, 'test-trigger-permissions-item-NDR', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50112, 'test-trigger-permissions-host-NDW', 'test-trigger-permissions-host-NDW', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50120, 50112, 50101), (50121, 50112, 50102), (50122, 50112, 50104);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50112, 50112, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50112, 50112, 50112, 'test-trigger-permissions-item-NDW', 0, 'test-trigger-permissions-item-NDW', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50113, 'test-trigger-permissions-host-NRW', 'test-trigger-permissions-host-NRW', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50123, 50113, 50101), (50124, 50113, 50103), (50125, 50113, 50104);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50113, 50113, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50113, 50113, 50113, 'test-trigger-permissions-item-NRW', 0, 'test-trigger-permissions-item-NRW', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50114, 'test-trigger-permissions-host-DRW', 'test-trigger-permissions-host-DRW', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50126, 50114, 50102), (50127, 50114, 50103), (50128, 50114, 50104);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50114, 50114, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50114, 50114, 50114, 'test-trigger-permissions-item-DRW', 0, 'test-trigger-permissions-item-DRW', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (50115, 'test-trigger-permissions-host-NDRW', 'test-trigger-permissions-host-NDRW', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50129, 50115, 50101), (50130, 50115, 50102), (50131, 50115, 50103), (50132, 50115, 50104);
+INSERT INTO interface (interfaceid, hostid, type, ip, dns, useip, port, main) VALUES (50115, 50115, 1, '127.0.0.1', '', 1, '10050', 1);
+INSERT INTO items (itemid, hostid, interfaceid, name, type, key_, value_type, delay, history, trends, params, description, posts, headers, status) VALUES (50115, 50115, 50115, 'test-trigger-permissions-item-NDRW', 0, 'test-trigger-permissions-item-NDRW', 3, '1m', '90d', '365d', '', '', '', '', 0);
+
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50101, 'test-trigger-permissions-trigger-{N}', '{50101}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50101, 50101, 50101, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50102, 'test-trigger-permissions-trigger-{D}', '{50102}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50102, 50102, 50102, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50103, 'test-trigger-permissions-trigger-{R}', '{50103}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50103, 50103, 50103, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50104, 'test-trigger-permissions-trigger-{W}', '{50104}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50104, 50104, 50104, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50105, 'test-trigger-permissions-trigger-{N}-{D}', '{50105} or {50106}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50105, 50105, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50106, 50105, 50102, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50106, 'test-trigger-permissions-trigger-{N}-{R}', '{50107} or {50108}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50107, 50106, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50108, 50106, 50103, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50107, 'test-trigger-permissions-trigger-{N}-{W}', '{50109} or {50110}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50109, 50107, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50110, 50107, 50104, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50108, 'test-trigger-permissions-trigger-{D}-{R}', '{50111} or {50112}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50111, 50108, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50112, 50108, 50103, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50109, 'test-trigger-permissions-trigger-{D}-{W}', '{50113} or {50114}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50113, 50109, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50114, 50109, 50104, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50110, 'test-trigger-permissions-trigger-{R}-{W}', '{50115} or {50116}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50115, 50110, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50116, 50110, 50104, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50111, 'test-trigger-permissions-trigger-{N}-{D}-{R}', '{50117} or {50118} or {50119}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50117, 50111, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50118, 50111, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50119, 50111, 50103, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50112, 'test-trigger-permissions-trigger-{N}-{D}-{W}', '{50120} or {50121} or {50122}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50120, 50112, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50121, 50112, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50122, 50112, 50104, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50113, 'test-trigger-permissions-trigger-{N}-{R}-{W}', '{50123} or {50124} or {50125}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50123, 50113, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50124, 50113, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50125, 50113, 50104, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50114, 'test-trigger-permissions-trigger-{D}-{R}-{W}', '{50126} or {50127} or {50128}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50126, 50114, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50127, 50114, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50128, 50114, 50104, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50115, 'test-trigger-permissions-trigger-{N}-{D}-{R}-{W}', '{50129} or {50130} or {50131} or {50132}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50129, 50115, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50130, 50115, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50131, 50115, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50132, 50115, 50104, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50116, 'test-trigger-permissions-trigger-{ND}', '{50133}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50133, 50116, 50105, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50117, 'test-trigger-permissions-trigger-{NR}', '{50134}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50134, 50117, 50106, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50118, 'test-trigger-permissions-trigger-{NW}', '{50135}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50135, 50118, 50107, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50119, 'test-trigger-permissions-trigger-{DR}', '{50136}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50136, 50119, 50108, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50120, 'test-trigger-permissions-trigger-{DW}', '{50137}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50137, 50120, 50109, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50121, 'test-trigger-permissions-trigger-{RW}', '{50138}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50138, 50121, 50110, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50122, 'test-trigger-permissions-trigger-{NDR}', '{50139}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50139, 50122, 50111, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50123, 'test-trigger-permissions-trigger-{NDW}', '{50140}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50140, 50123, 50112, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50124, 'test-trigger-permissions-trigger-{NRW}', '{50141}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50141, 50124, 50113, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50125, 'test-trigger-permissions-trigger-{DRW}', '{50142}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50142, 50125, 50114, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50126, 'test-trigger-permissions-trigger-{NDRW}', '{50143}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50143, 50126, 50115, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50127, 'test-trigger-permissions-trigger-{N}-{ND}', '{50144} or {50145}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50144, 50127, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50145, 50127, 50105, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50128, 'test-trigger-permissions-trigger-{N}-{NR}', '{50146} or {50147}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50146, 50128, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50147, 50128, 50106, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50129, 'test-trigger-permissions-trigger-{N}-{NW}', '{50148} or {50149}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50148, 50129, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50149, 50129, 50107, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50130, 'test-trigger-permissions-trigger-{N}-{DR}', '{50150} or {50151}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50150, 50130, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50151, 50130, 50108, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50131, 'test-trigger-permissions-trigger-{N}-{DW}', '{50152} or {50153}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50152, 50131, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50153, 50131, 50109, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50132, 'test-trigger-permissions-trigger-{N}-{RW}', '{50154} or {50155}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50154, 50132, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50155, 50132, 50110, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50133, 'test-trigger-permissions-trigger-{N}-{NDR}', '{50156} or {50157}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50156, 50133, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50157, 50133, 50111, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50134, 'test-trigger-permissions-trigger-{N}-{NDW}', '{50158} or {50159}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50158, 50134, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50159, 50134, 50112, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50135, 'test-trigger-permissions-trigger-{N}-{NRW}', '{50160} or {50161}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50160, 50135, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50161, 50135, 50113, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50136, 'test-trigger-permissions-trigger-{N}-{DRW}', '{50162} or {50163}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50162, 50136, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50163, 50136, 50114, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50137, 'test-trigger-permissions-trigger-{N}-{NDRW}', '{50164} or {50165}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50164, 50137, 50101, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50165, 50137, 50115, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50138, 'test-trigger-permissions-trigger-{D}-{ND}', '{50166} or {50167}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50166, 50138, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50167, 50138, 50105, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50139, 'test-trigger-permissions-trigger-{D}-{NR}', '{50168} or {50169}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50168, 50139, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50169, 50139, 50106, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50140, 'test-trigger-permissions-trigger-{D}-{NW}', '{50170} or {50171}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50170, 50140, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50171, 50140, 50107, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50142, 'test-trigger-permissions-trigger-{D}-{DR}', '{50172} or {50173}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50172, 50142, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50173, 50142, 50108, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50143, 'test-trigger-permissions-trigger-{D}-{DW}', '{50174} or {50175}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50174, 50143, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50175, 50143, 50109, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50144, 'test-trigger-permissions-trigger-{D}-{RW}', '{50176} or {50177}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50176, 50144, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50177, 50144, 50110, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50145, 'test-trigger-permissions-trigger-{D}-{NDR}', '{50178} or {50179}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50178, 50145, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50179, 50145, 50111, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50146, 'test-trigger-permissions-trigger-{D}-{NDW}', '{50180} or {50181}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50180, 50146, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50181, 50146, 50112, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50147, 'test-trigger-permissions-trigger-{D}-{NRW}', '{50182} or {50183}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50182, 50147, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50183, 50147, 50113, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50148, 'test-trigger-permissions-trigger-{D}-{DRW}', '{50184} or {50185}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50184, 50148, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50185, 50148, 50114, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50149, 'test-trigger-permissions-trigger-{D}-{NDRW}', '{50186} or {50187}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50186, 50149, 50102, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50187, 50149, 50115, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50150, 'test-trigger-permissions-trigger-{R}-{ND}', '{50188} or {50189}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50188, 50150, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50189, 50150, 50105, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50151, 'test-trigger-permissions-trigger-{R}-{NR}', '{50190} or {50191}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50190, 50151, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50191, 50151, 50106, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50152, 'test-trigger-permissions-trigger-{R}-{NW}', '{50192} or {50193}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50192, 50152, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50193, 50152, 50107, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50153, 'test-trigger-permissions-trigger-{R}-{DR}', '{50194} or {50195}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50194, 50153, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50195, 50153, 50108, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50154, 'test-trigger-permissions-trigger-{R}-{DW}', '{50196} or {50197}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50196, 50154, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50197, 50154, 50109, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50155, 'test-trigger-permissions-trigger-{R}-{RW}', '{50198} or {50199}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50198, 50155, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50199, 50155, 50110, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50156, 'test-trigger-permissions-trigger-{R}-{NDR}', '{50200} or {50201}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50200, 50156, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50201, 50156, 50111, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50157, 'test-trigger-permissions-trigger-{R}-{NDW}', '{50202} or {50203}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50202, 50157, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50203, 50157, 50112, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50158, 'test-trigger-permissions-trigger-{R}-{NRW}', '{50204} or {50205}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50204, 50158, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50205, 50158, 50113, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50159, 'test-trigger-permissions-trigger-{R}-{DRW}', '{50206} or {50207}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50206, 50159, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50207, 50159, 50114, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50160, 'test-trigger-permissions-trigger-{R}-{NDRW}', '{50208} or {50209}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50208, 50160, 50103, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50209, 50160, 50115, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50161, 'test-trigger-permissions-trigger-{W}-{ND}', '{50210} or {50211}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50210, 50161, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50211, 50161, 50105, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50162, 'test-trigger-permissions-trigger-{W}-{NR}', '{50212} or {50213}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50212, 50162, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50213, 50162, 50106, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50163, 'test-trigger-permissions-trigger-{W}-{NW}', '{50214} or {50215}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50214, 50163, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50215, 50163, 50107, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50164, 'test-trigger-permissions-trigger-{W}-{DR}', '{50216} or {50217}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50216, 50164, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50217, 50164, 50108, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50165, 'test-trigger-permissions-trigger-{W}-{DW}', '{50218} or {50219}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50218, 50165, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50219, 50165, 50109, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50166, 'test-trigger-permissions-trigger-{W}-{RW}', '{50220} or {50221}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50220, 50166, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50221, 50166, 50110, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50167, 'test-trigger-permissions-trigger-{W}-{NDR}', '{50222} or {50223}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50222, 50167, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50223, 50167, 50111, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50168, 'test-trigger-permissions-trigger-{W}-{NDW}', '{50224} or {50225}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50224, 50168, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50225, 50168, 50112, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50169, 'test-trigger-permissions-trigger-{W}-{NRW}', '{50226} or {50227}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50226, 50169, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50227, 50169, 50113, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50170, 'test-trigger-permissions-trigger-{W}-{DRW}', '{50228} or {50229}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50228, 50170, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50229, 50170, 50114, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50171, 'test-trigger-permissions-trigger-{W}-{NDRW}', '{50230} or {50231}', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50230, 50171, 50104, 'last', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50231, 50171, 50115, 'last', '');
+
+-- trigger permissions: END
+
+-- test discovered host groups after import parent host
+INSERT INTO hstgrp (groupid, name, internal) VALUES (50025, 'Master group', 0);
+INSERT INTO hstgrp (groupid, name, internal, flags) VALUES (50026, 'host group discovered', 0, 4);
+INSERT INTO hosts (hostid, host, name, status, flags, description) VALUES (99010, 'Host having discovered hosts', 'Host having discovered hosts', 0, 0, '');
+INSERT INTO hosts (hostid, host, name, status, flags, description) VALUES (99011, '{#VALUE}', '{#VALUE}', 0, 2, '');
+INSERT INTO hosts (hostid, host, name, status, flags, description) VALUES (99012, 'discovered', 'discovered', 0, 4, '');
+INSERT INTO items (itemid, type, hostid, name, key_, delay, history, trends, status, value_type, flags, params, description, posts, headers) VALUES (58735, 2, 99010, 'trap', 'trap', '0', '90d', '0', 0, 4, 1, '', '', '', '');
+INSERT INTO group_prototype (group_prototypeid, hostid, name) VALUES (10, 99011, 'host group {#VALUE}');
+INSERT INTO group_prototype (group_prototypeid, hostid, groupid) VALUES (11, 99011, 50025);
+INSERT INTO group_discovery (groupid, parent_group_prototypeid, name) VALUES (50026, 10, 'host group {#VALUE}');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50020, 99010, 50025);
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50021, 99012, 50025);
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50022, 99012, 50026);
+INSERT INTO host_discovery (hostid, parent_itemid, host) VALUES (99011, 58735, '');
+INSERT INTO host_discovery (hostid, parent_hostid, host) VALUES (99012, 99011, '{#VALUE}');
+INSERT INTO interface (interfaceid, hostid, main, type, useip, ip, port) VALUES (50026, 99010, 1, 1, 1, '127.0.0.1', '10050');
+INSERT INTO interface (interfaceid, hostid, main, type, useip, ip, port) VALUES (50027, 99012, 1, 1, 1, '127.0.0.1', '10050');
+INSERT INTO interface_discovery (interfaceid, parent_interfaceid) VALUES (50027, 50026);
+
+-- test trigger validation
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (99013, 'Trigger validation test host', 'Trigger validation test host', 0, '');
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (99014, 'Trigger validation test template', 'Trigger validation test template', 3, '');
+INSERT INTO interface (interfaceid, hostid, main, type, useip, ip, dns, port) values (50028, 99013, 1, 1, 1, '127.0.0.1', '', '10050');
+INSERT INTO hstgrp (groupid, name, internal) VALUES (50027, 'Trigger validation test host group', 0);
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50023, 99013, 50027);
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (50024, 99014, 50027);
+INSERT INTO items (itemid, hostid, interfaceid, type, value_type, name, key_, delay, history, status, params, description, posts, headers) VALUES (58736, 99013, NULL, 2, 3, 'item', 'item', '1d', '90d', 0, '', '', '', '');
+INSERT INTO items (itemid, hostid, interfaceid, type, value_type, name, key_, delay, history, status, params, description, posts, headers) VALUES (58737, 99014, NULL, 2, 3, 'item', 'item', '1d', '90d', 0, '', '', '', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50172, 'test-trigger-1', '{50232}=0', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50232, 50172, 58736, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50173, 'test-trigger-2', '{50233}=0', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50233, 50173, 58736, 'last', '');
+INSERT INTO triggers (triggerid, description, expression, comments) VALUES (50174, 'template-trigger', '{50234}=0', '');
+INSERT INTO functions (functionid, triggerid, itemid, name, parameter) VALUES (50234, 50174, 58737, 'last', '');

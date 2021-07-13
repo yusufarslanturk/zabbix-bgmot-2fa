@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -113,7 +113,7 @@ class CHostPrototype extends CHostBase {
 				' FROM items i,host_discovery hd,hosts h'.
 				' WHERE i.itemid=hd.parent_itemid'.
 					' AND hd.hostid=h.hostid'.
-					' AND '.implode(' OR ', $sql_where),
+					' AND ('.implode(' OR ', $sql_where).')',
 				1
 		));
 
@@ -685,7 +685,7 @@ class CHostPrototype extends CHostBase {
 			'selectGroupLinks' => API_OUTPUT_EXTEND,
 			'selectGroupPrototypes' => API_OUTPUT_EXTEND,
 			'selectDiscoveryRule' => ['itemid'],
-			'discoveryids' => zbx_objectValues($childDiscoveryRules, 'itemid'),
+			'discoveryids' => zbx_objectValues($childDiscoveryRules, 'itemid')
 		]);
 		foreach ($childDiscoveryRules as &$childDiscoveryRule) {
 			$childDiscoveryRule['hostPrototypes'] = [];
@@ -1197,6 +1197,7 @@ class CHostPrototype extends CHostBase {
 
 		// adding host
 		if ($options['selectParentHost'] !== null && $options['selectParentHost'] != API_OUTPUT_COUNT) {
+			$hosts = [];
 			$relationMap = new CRelationMap();
 			$dbRules = DBselect(
 				'SELECT hd.hostid,i.hostid AS parent_hostid'.
@@ -1208,25 +1209,36 @@ class CHostPrototype extends CHostBase {
 				$relationMap->addRelation($relation['hostid'], $relation['parent_hostid']);
 			}
 
-			$hosts = API::Host()->get([
-				'output' => $options['selectParentHost'],
-				'hostids' => $relationMap->getRelatedIds(),
-				'templated_hosts' => true,
-				'nopermissions' => true,
-				'preservekeys' => true
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$hosts = API::Host()->get([
+					'output' => $options['selectParentHost'],
+					'hostids' => $related_ids,
+					'templated_hosts' => true,
+					'nopermissions' => true,
+					'preservekeys' => true
+				]);
+			}
+
 			$result = $relationMap->mapOne($result, $hosts, 'parentHost');
 		}
 
 		// adding templates
 		if ($options['selectTemplates'] !== null) {
 			if ($options['selectTemplates'] != API_OUTPUT_COUNT) {
+				$templates = [];
 				$relationMap = $this->createRelationMap($result, 'hostid', 'templateid', 'hosts_templates');
-				$templates = API::Template()->get([
-					'output' => $options['selectTemplates'],
-					'templateids' => $relationMap->getRelatedIds(),
-					'preservekeys' => true
-				]);
+				$related_ids = $relationMap->getRelatedIds();
+
+				if ($related_ids) {
+					$templates = API::Template()->get([
+						'output' => $options['selectTemplates'],
+						'templateids' => $related_ids,
+						'preservekeys' => true
+					]);
+				}
+
 				$result = $relationMap->mapMany($result, $templates, 'templates');
 			}
 			else {

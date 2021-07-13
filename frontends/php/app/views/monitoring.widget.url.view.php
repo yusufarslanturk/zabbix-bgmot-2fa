@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,9 +19,16 @@
 **/
 
 
-$item = ($data['url']['error'] !== null)
-	? (new CTableInfo())->setNoDataMessage($data['url']['error'])
-	: (new CIFrame($data['url']['url'], '100%', '100%', 'auto'))->addClass(ZBX_STYLE_WIDGET_URL);
+if ($data['url']['error'] !== null) {
+	$item = (new CTableInfo())->setNoDataMessage($data['url']['error']);
+}
+else {
+	$item = (new CIFrame($data['url']['url'], '100%', '100%', 'auto'))->addClass(ZBX_STYLE_WIDGET_URL);
+
+	if (ZBX_IFRAME_SANDBOX !== false) {
+		$item->setAttribute('sandbox', ZBX_IFRAME_SANDBOX);
+	}
+}
 
 $output = [
 	'header' => $data['name'],

@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -145,6 +145,15 @@ char	*CONFIG_TLS_SERVER_CERT_SUBJECT	= NULL;
 char	*CONFIG_TLS_PSK_IDENTITY	= NULL;
 char	*CONFIG_TLS_PSK_FILE		= NULL;
 #endif
+/* not used, defined for linking with tls.c */
+char	*CONFIG_TLS_CIPHER_CERT13	= NULL;
+char	*CONFIG_TLS_CIPHER_CERT		= NULL;
+char	*CONFIG_TLS_CIPHER_PSK13	= NULL;
+char	*CONFIG_TLS_CIPHER_PSK		= NULL;
+char	*CONFIG_TLS_CIPHER_ALL13	= NULL;
+char	*CONFIG_TLS_CIPHER_ALL		= NULL;
+char	*CONFIG_TLS_CIPHER_CMD13	= NULL;
+char	*CONFIG_TLS_CIPHER_CMD		= NULL;
 
 char	*CONFIG_SOCKET_PATH			= NULL;
 char	*CONFIG_HISTORY_STORAGE_URL		= NULL;

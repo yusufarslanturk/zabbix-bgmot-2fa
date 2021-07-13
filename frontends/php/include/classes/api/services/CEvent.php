@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -475,7 +475,7 @@ class CEvent extends CApiService {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$res = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$res = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($event = DBfetch($res)) {
 			if ($options['countOutput']) {
 				if ($options['groupCount']) {
@@ -935,31 +935,26 @@ class CEvent extends CApiService {
 		$sqlParts = parent::applyQueryOutputOptions($tableName, $tableAlias, $options, $sqlParts);
 
 		if (!$options['countOutput']) {
+			// Select fields from event_recovery table using LEFT JOIN.
 			if ($this->outputIsRequested('r_eventid', $options['output'])) {
-				// Select fields from event_recovery table using LEFT JOIN.
-
 				$sqlParts['select']['r_eventid'] = 'er1.r_eventid';
-				$sqlParts['left_join'][] = ['from' => 'event_recovery er1', 'on' => 'er1.eventid=e.eventid'];
-				$sqlParts['left_table'] = 'e';
+				$sqlParts['left_join'][] = ['alias' => 'er1', 'table' => 'event_recovery', 'using' => 'eventid'];
+				$sqlParts['left_table'] = ['alias' => $this->tableAlias, 'table' => $this->tableName];
 			}
 
-			if ($this->outputIsRequested('c_eventid', $options['output'])
-					|| $this->outputIsRequested('correlationid', $options['output'])
-					|| $this->outputIsRequested('userid', $options['output'])) {
-				// Select fields from event_recovery table using LEFT JOIN.
+			// Select fields from event_recovery table using LEFT JOIN.
+			$left_join = false;
 
-				if ($this->outputIsRequested('c_eventid', $options['output'])) {
-					$sqlParts['select']['c_eventid'] = 'er2.c_eventid';
+			foreach (['c_eventid', 'correlationid', 'userid'] as $field) {
+				if ($this->outputIsRequested($field, $options['output'])) {
+					$sqlParts['select'][$field] = 'er2.'.$field;
+					$left_join = true;
 				}
-				if ($this->outputIsRequested('correlationid', $options['output'])) {
-					$sqlParts['select']['correlationid'] = 'er2.correlationid';
-				}
-				if ($this->outputIsRequested('userid', $options['output'])) {
-					$sqlParts['select']['userid'] = 'er2.userid';
-				}
+			}
 
-				$sqlParts['left_join'][] = ['from' => 'event_recovery er2', 'on' => 'er2.r_eventid=e.eventid'];
-				$sqlParts['left_table'] = 'e';
+			if ($left_join) {
+				$sqlParts['left_join'][] = ['alias' => 'er2', 'table' => 'event_recovery', 'using' => 'r_eventid'];
+				$sqlParts['left_table'] = ['alias' => $this->tableAlias, 'table' => $this->tableName];
 			}
 
 			if ($options['selectRelatedObject'] !== null || $options['selectHosts'] !== null) {
@@ -978,6 +973,9 @@ class CEvent extends CApiService {
 
 		// adding hosts
 		if ($options['selectHosts'] !== null && $options['selectHosts'] != API_OUTPUT_COUNT) {
+			$hosts = [];
+			$relationMap = new CRelationMap();
+
 			// trigger events
 			if ($options['object'] == EVENT_OBJECT_TRIGGER) {
 				$query = DBselect(
@@ -1002,17 +1000,21 @@ class CEvent extends CApiService {
 				);
 			}
 
-			$relationMap = new CRelationMap();
 			while ($relation = DBfetch($query)) {
 				$relationMap->addRelation($relation['eventid'], $relation['hostid']);
 			}
 
-			$hosts = API::Host()->get([
-				'output' => $options['selectHosts'],
-				'hostids' => $relationMap->getRelatedIds(),
-				'nopermissions' => true,
-				'preservekeys' => true
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$hosts = API::Host()->get([
+					'output' => $options['selectHosts'],
+					'hostids' => $related_ids,
+					'nopermissions' => true,
+					'preservekeys' => true
+				]);
+			}
+
 			$result = $relationMap->mapMany($result, $hosts, 'hosts');
 		}
 
@@ -1054,16 +1056,22 @@ class CEvent extends CApiService {
 
 		// adding alerts
 		if ($options['select_alerts'] !== null && $options['select_alerts'] != API_OUTPUT_COUNT) {
+			$alerts = [];
 			$relationMap = $this->createRelationMap($result, 'eventid', 'alertid', 'alerts');
-			$alerts = API::Alert()->get([
-				'output' => $options['select_alerts'],
-				'selectMediatypes' => API_OUTPUT_EXTEND,
-				'alertids' => $relationMap->getRelatedIds(),
-				'nopermissions' => true,
-				'preservekeys' => true,
-				'sortfield' => 'clock',
-				'sortorder' => ZBX_SORT_DOWN
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$alerts = API::Alert()->get([
+					'output' => $options['select_alerts'],
+					'selectMediatypes' => API_OUTPUT_EXTEND,
+					'alertids' => $related_ids,
+					'nopermissions' => true,
+					'preservekeys' => true,
+					'sortfield' => 'clock',
+					'sortorder' => ZBX_SORT_DOWN
+				]);
+			}
+
 			$result = $relationMap->mapMany($result, $alerts, 'alerts');
 		}
 
@@ -1079,7 +1087,7 @@ class CEvent extends CApiService {
 				]);
 				$sqlParts['order'][] = 'a.clock DESC';
 
-				$acknowledges = DBFetchArrayAssoc(DBselect($this->createSelectQueryFromParts($sqlParts)), 'acknowledgeid');
+				$acknowledges = DBFetchArrayAssoc(DBselect(self::createSelectQueryFromParts($sqlParts)), 'acknowledgeid');
 
 				// if the user data is requested via extended output or specified fields, join the users table
 				$userFields = ['alias', 'name', 'surname'];

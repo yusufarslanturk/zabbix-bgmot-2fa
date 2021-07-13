@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@
 **/
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
+
+use Facebook\WebDriver\WebDriverBy;
 
 /**
  * @backup profiles
@@ -192,7 +194,7 @@ class testPageDashboard extends CLegacyWebTest {
 		$this->zbxTestAssertElementNotPresentXpath("//ul[contains(@class, 'filter-breadcrumb')]");
 		$this->zbxTestAssertAttribute("//button[contains(@class, 'btn-min')]", 'title', 'Normal view');
 
-		$this->webDriver->executeScript('arguments[0].click();', [$this->webDriver->findElement(WebDriverBy::className('btn-min'))]);
+		$this->query('class:btn-min')->one()->forceClick();
 		$this->zbxTestWaitForPageToLoad();
 		$this->zbxTestWaitUntilElementPresent(WebDriverBy::xpath("//button[contains(@class, 'btn-max')]"));
 		$this->zbxTestAssertAttribute("//button[contains(@class, 'btn-max')]", 'title', 'Fullscreen');

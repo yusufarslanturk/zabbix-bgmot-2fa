@@ -1,7 +1,6 @@
-<?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -18,14 +17,32 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-require_once dirname(__FILE__).'/agent/AgentTests.php';
+public class Hello implements HelloMBean
+{
+	private String message = null;
 
-class All {
-	public static function suite() {
-		$suite = new PHPUnit_Framework_TestSuite('Project');
+	public Hello()
+	{
+		message = "secret badger message";
+	}
 
-		$suite->addTest(AgentTests::suite());
+	public Hello(String message)
+	{
+		this.message = message;
+	}
 
-		return $suite;
+	public void setMessage(String message)
+	{
+		this.message = message;
+	}
+
+	public String getMessage()
+	{
+		return message;
+	}
+
+	public void sayHello()
+	{
+		System.out.println(message);
 	}
 }

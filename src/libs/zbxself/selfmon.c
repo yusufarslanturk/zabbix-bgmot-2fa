@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -125,7 +125,7 @@ extern int		process_num;
  *                                                                            *
  * Purpose: Returns number of processes depending on process type             *
  *                                                                            *
- * Parameters: process_type - [IN] process type; ZBX_PROCESS_TYPE_*           *
+ * Parameters: proc_type - [IN] process type; ZBX_PROCESS_TYPE_*              *
  *                                                                            *
  * Return value: number of processes                                          *
  *                                                                            *
@@ -478,8 +478,8 @@ out:
  * Author: Alexander Vladishev                                                *
  *                                                                            *
  ******************************************************************************/
-void	get_selfmon_stats(unsigned char proc_type, unsigned char aggr_func, int proc_num,
-		unsigned char state, double *value)
+void	get_selfmon_stats(unsigned char proc_type, unsigned char aggr_func, int proc_num, unsigned char state,
+		double *value)
 {
 	const char	*__function_name = "get_selfmon_stats";
 	unsigned int	total = 0, counter = 0;

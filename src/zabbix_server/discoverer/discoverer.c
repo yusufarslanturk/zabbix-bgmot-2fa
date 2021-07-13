@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -274,7 +274,7 @@ static int	discover_service(const DB_DCHECK *dcheck, char *ip, int port, char **
 								NULL, 0);
 					}
 
-					if (SUCCEED == get_value_snmp(&item, &result) &&
+					if (SUCCEED == get_value_snmp(&item, &result, ZBX_NO_POLLER) &&
 							NULL != (pvalue = GET_TEXT_RESULT(&result)))
 					{
 						zbx_strcpy_alloc(value, value_alloc, &value_offset, *pvalue);
@@ -307,7 +307,7 @@ static int	discover_service(const DB_DCHECK *dcheck, char *ip, int port, char **
 				memset(&host, 0, sizeof(host));
 				host.addr = strdup(ip);
 
-				if (SUCCEED != do_ping(&host, 1, 3, 0, 0, 0, error, sizeof(error)) || 0 == host.rcv)
+				if (SUCCEED != zbx_ping(&host, 1, 3, 0, 0, 0, error, sizeof(error)) || 0 == host.rcv)
 					ret = FAIL;
 
 				zbx_free(host.addr);

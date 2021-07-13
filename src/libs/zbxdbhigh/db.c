@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -55,6 +55,18 @@ static int	connection_failure;
 void	DBclose(void)
 {
 	zbx_db_close();
+}
+
+/******************************************************************************
+ *                                                                            *
+ * Function: DBinit_autoincrement_options                                     *
+ *                                                                            *
+ * Purpose: specify the autoincrement options when connecting to the database *
+ *                                                                            *
+ ******************************************************************************/
+void	DBinit_autoincrement_options(void)
+{
+	zbx_db_init_autoincrement_options();
 }
 
 /******************************************************************************
@@ -321,6 +333,22 @@ int	DBexecute_once(const char *fmt, ...)
 	return rc;
 }
 
+/******************************************************************************
+ *                                                                            *
+ * Function: DBis_null                                                        *
+ *                                                                            *
+ * Purpose: check if numeric field value is null                              *
+ *                                                                            *
+ * Parameters: field - [IN] field value to be checked                         *
+ *                                                                            *
+ * Return value: SUCCEED - field value is null                                *
+ *               FAIL    - otherwise                                          *
+ *                                                                            *
+ * Comments: ATTENTION! This function should only be used with numeric fields *
+ *           since on Oracle empty string is returned instead of NULL and it  *
+ *           is not possible to differentiate empty string from NULL string   *
+ *                                                                            *
+ ******************************************************************************/
 int	DBis_null(const char *field)
 {
 	return zbx_db_is_null(field);
@@ -1302,7 +1330,7 @@ static int	DBregister_host_active(void)
 			" from actions"
 			" where eventsource=%d"
 				" and status=%d",
-			EVENT_SOURCE_AUTO_REGISTRATION,
+			EVENT_SOURCE_AUTOREGISTRATION,
 			ACTION_STATUS_ACTIVE);
 
 	if (NULL == DBfetch(result))
@@ -1387,7 +1415,7 @@ static void	process_autoreg_hosts(zbx_vector_ptr_t *autoreg_hosts, zbx_uint64_t 
 		/* delete from vector if already exist in hosts table */
 		sql_offset = 0;
 		zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
-				"select h.host,h.hostid,h.proxy_hostid,a.host_metadata"
+				"select h.host,h.hostid,h.proxy_hostid,a.host_metadata,a.autoreg_hostid"
 				" from hosts h"
 				" left join autoreg_host a"
 					" on a.proxy_hostid=h.proxy_hostid and a.host=h.host"
@@ -1409,7 +1437,7 @@ static void	process_autoreg_hosts(zbx_vector_ptr_t *autoreg_hosts, zbx_uint64_t 
 				ZBX_STR2UINT64(autoreg_host->hostid, row[1]);
 				ZBX_DBROW2UINT64(current_proxy_hostid, row[2]);
 
-				if (current_proxy_hostid != proxy_hostid || SUCCEED == DBis_null(row[3]) ||
+				if (current_proxy_hostid != proxy_hostid || SUCCEED == DBis_null(row[4]) ||
 						0 != strcmp(autoreg_host->host_metadata, row[3]))
 				{
 					break;
@@ -1572,7 +1600,7 @@ void	DBregister_host_flush(zbx_vector_ptr_t *autoreg_hosts, zbx_uint64_t proxy_h
 		autoreg_host = (zbx_autoreg_host_t *)autoreg_hosts->values[i];
 
 		ts.sec = autoreg_host->now;
-		zbx_add_event(EVENT_SOURCE_AUTO_REGISTRATION, EVENT_OBJECT_ZABBIX_ACTIVE, autoreg_host->autoreg_hostid,
+		zbx_add_event(EVENT_SOURCE_AUTOREGISTRATION, EVENT_OBJECT_ZABBIX_ACTIVE, autoreg_host->autoreg_hostid,
 				&ts, TRIGGER_VALUE_PROBLEM, NULL, NULL, NULL, 0, 0, NULL, 0, NULL, 0, NULL);
 	}
 

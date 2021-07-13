@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -21,6 +21,9 @@
 require_once 'vendor/autoload.php';
 
 require_once dirname(__FILE__).'/CWebTest.php';
+
+use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\Exception\StaleElementReferenceException;
 
 /**
  * Base class for legacy Selenium tests.
@@ -65,7 +68,7 @@ class CLegacyWebTest extends CWebTest {
 			$this->zbxTestWaitUntilMessageTextPresent('server-name', $ZBX_SERVER_NAME);
 		}
 
-		$this->zbxTestTextNotPresent('Login name or password is incorrect');
+		$this->zbxTestTextNotPresent('Incorrect user name or password or account is temporarily blocked.');
 	}
 
 	public function zbxTestLogout() {
@@ -131,25 +134,33 @@ class CLegacyWebTest extends CWebTest {
 		}
 	}
 
-	public function zbxTestTextVisibleOnPage($strings) {
+	public function zbxTestTextVisible($strings, $context = null) {
 		if (!is_array($strings)) {
 			$strings = [$strings];
+		}
+
+		if ($context === null) {
+			$context = $this;
 		}
 
 		foreach ($strings as $string) {
 			if (!empty($string)) {
-				$this->assertTrue($this->query('xpath://*[contains(text(),"'.$string.'")]')->count() !== 0, '"'.$string.'" must exist.');
+				$this->assertTrue($context->query('xpath://*[contains(text(),"'.$string.'")]')->count() !== 0, '"'.$string.'" must exist.');
 			}
 		}
 	}
 
-	public function zbxTestTextNotVisibleOnPage($strings) {
+	public function zbxTestTextNotVisible($strings, $context = null) {
 		if (!is_array($strings)) {
 			$strings = [$strings];
 		}
 
+		if ($context === null) {
+			$context = $this;
+		}
+
 		foreach ($strings as $string) {
-			$elements = $this->query('xpath://*[contains(text(),"'.$string.'")]')->all();
+			$elements = $context->query('xpath:.//*[contains(text(),"'.$string.'")]')->all();
 			foreach ($elements as $element) {
 				$this->assertFalse($element->isDisplayed());
 			}
@@ -351,36 +362,12 @@ class CLegacyWebTest extends CWebTest {
 	}
 
 	public function zbxTestDropdownSelect($id, $string) {
-		// Simplified escaping of xpath string.
-		if (strpos($string, '"') !== false) {
-			$string = '\''.$string.'\'';
-		}
-		else {
-			$string = '"'.$string.'"';
-		}
-
-		$option = $this->getDropdown($id)->query('xpath:.//option[text()='.$string.']')->one();
-
-		if (!$option->isSelected()) {
-			$option->click();
-
-			return $option;
-		}
-
-		return null;
+		return $this->getDropdown($id)->select($string);
 	}
 
 	public function zbxTestDropdownSelectWait($id, $string) {
-		$option = $this->zbxTestDropdownSelect($id, $string);
-
-		if ($option !== null) {
-			try {
-				$option->waitUntilSelected();
-			} catch (StaleElementReferenceException $e) {
-				// Element not found in the cache, looks like page changed.
-				$this->zbxTestWaitForPageToLoad();
-			}
-		}
+		$this->zbxTestDropdownSelect($id, $string);
+		$this->zbxTestWaitForPageToLoad();
 	}
 
 	public function zbxTestDropdownAssertSelected($name, $text) {
@@ -388,11 +375,7 @@ class CLegacyWebTest extends CWebTest {
 	}
 
 	public function zbxTestGetSelectedLabel($id) {
-		foreach ($this->getDropdownOptions($id) as $option) {
-			if ($option->isSelected()) {
-				return $option->getText();
-			}
-		}
+		return $this->getDropdown($id)->getText();
 	}
 
 	public function zbxTestElementPresentId($id) {
@@ -503,7 +486,8 @@ class CLegacyWebTest extends CWebTest {
 	}
 
 	public function zbxTestLaunchOverlayDialog($header) {
-		$this->zbxTestWaitUntilElementPresent(WebDriverBy::xpath("//div[@id='overlay_dialogue']/div[@class='dashbrd-widget-head']/h4[text()='$header']"));
+		$this->zbxTestWaitUntilElementPresent(WebDriverBy::xpath("//div[contains(@class, 'overlay-dialogue modal')]".
+				"/div[@class='dashbrd-widget-head']/h4[text()='$header']"));
 	}
 
 	public function zbxTestClickAndAcceptAlert($id) {
@@ -702,8 +686,12 @@ class CLegacyWebTest extends CWebTest {
 	protected function getDropdown($id) {
 		foreach (['id', 'name'] as $type) {
 			foreach ($this->query($type, $id)->all() as $element) {
-				if ($element->getTagName() === 'select') {
-					return $element;
+				switch ($element->getTagName()) {
+					case 'select':
+						return $element->asDropdown();
+
+					case 'z-select':
+						return $element->asZDropdown();
 				}
 			}
 		}
@@ -719,7 +707,7 @@ class CLegacyWebTest extends CWebTest {
 	 * @return array of WebDriverElement
 	 */
 	protected function getDropdownOptions($id) {
-		return $this->getDropdown($id)->findElements(WebDriverBy::tagName('option'));
+		return $this->getDropdown($id)->getOptions();
 	}
 
 	public function __get($attribute) {

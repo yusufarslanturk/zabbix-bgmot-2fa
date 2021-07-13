@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -166,7 +166,11 @@ $fields = [
 	'jmx_endpoint' =>				[T_ZBX_STR, O_OPT, null,	NOT_EMPTY,
 		'(isset({add}) || isset({update})) && isset({type}) && {type} == '.ITEM_TYPE_JMX
 	],
-	'timeout' =>					[T_ZBX_STR, O_OPT, null,	null,		null],
+	'timeout' =>	 				[T_ZBX_TU, O_OPT, P_ALLOW_USER_MACRO|P_ALLOW_LLD_MACRO,	null,
+										'(isset({add}) || isset({update})) && isset({type})'.
+											' && {type} == '.ITEM_TYPE_HTTPAGENT,
+										_('Timeout')
+									],
 	'url' =>						[T_ZBX_STR, O_OPT, null,	NOT_EMPTY,
 		'(isset({add}) || isset({update})) && isset({type}) && {type} == '.ITEM_TYPE_HTTPAGENT, _('URL')],
 	'query_fields' =>				[T_ZBX_STR, O_OPT, null,	null,		null],

@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,9 +19,11 @@
 **/
 
 
-class CConditionHelperTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
 
-	public function testGetFormulaProvider() {
+class CConditionHelperTest extends TestCase {
+
+	public function dataProviderGetFormula() {
 		return [
 			[
 				[], CONDITION_EVAL_TYPE_AND, ''
@@ -37,7 +39,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 			[
 				[
 					1 => 'condition1',
-					2 => 'condition2',
+					2 => 'condition2'
 				],
 				CONDITION_EVAL_TYPE_AND, '{1} and {2}'
 			],
@@ -45,7 +47,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 				[
 					1 => 'condition1',
 					2 => 'condition2',
-					3 => 'condition3',
+					3 => 'condition3'
 				],
 				CONDITION_EVAL_TYPE_AND, '{1} and {2} and {3}'
 			],
@@ -53,7 +55,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 			[
 				[
 					1 => 'condition1',
-					2 => 'condition1',
+					2 => 'condition1'
 				],
 				CONDITION_EVAL_TYPE_AND, '{1} and {2}'
 			],
@@ -61,7 +63,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 				[
 					1 => 'condition1',
 					2 => 'condition1',
-					3 => 'condition2',
+					3 => 'condition2'
 				],
 				CONDITION_EVAL_TYPE_AND, '({1} and {2}) and {3}'
 			],
@@ -70,7 +72,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 					1 => 'condition1',
 					2 => 'condition1',
 					3 => 'condition2',
-					4 => 'condition2',
+					4 => 'condition2'
 				],
 				CONDITION_EVAL_TYPE_AND, '({1} and {2}) and ({3} and {4})'
 			],
@@ -85,7 +87,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 			[
 				[
 					1 => 'condition1',
-					2 => 'condition2',
+					2 => 'condition2'
 				],
 				CONDITION_EVAL_TYPE_OR, '{1} or {2}'
 			],
@@ -93,7 +95,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 				[
 					1 => 'condition1',
 					2 => 'condition2',
-					3 => 'condition3',
+					3 => 'condition3'
 				],
 				CONDITION_EVAL_TYPE_OR, '{1} or {2} or {3}'
 			],
@@ -101,7 +103,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 			[
 				[
 					1 => 'condition1',
-					2 => 'condition1',
+					2 => 'condition1'
 				],
 				CONDITION_EVAL_TYPE_OR, '{1} or {2}'
 			],
@@ -109,7 +111,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 				[
 					1 => 'condition1',
 					2 => 'condition1',
-					3 => 'condition2',
+					3 => 'condition2'
 				],
 				CONDITION_EVAL_TYPE_OR, '({1} or {2}) or {3}'
 			],
@@ -118,7 +120,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 					1 => 'condition1',
 					2 => 'condition1',
 					3 => 'condition2',
-					4 => 'condition2',
+					4 => 'condition2'
 				],
 				CONDITION_EVAL_TYPE_OR, '({1} or {2}) or ({3} or {4})'
 			],
@@ -133,7 +135,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 			[
 				[
 					1 => 'condition1',
-					2 => 'condition2',
+					2 => 'condition2'
 				],
 				CONDITION_EVAL_TYPE_AND_OR, '{1} and {2}'
 			],
@@ -141,7 +143,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 				[
 					1 => 'condition1',
 					2 => 'condition2',
-					3 => 'condition3',
+					3 => 'condition3'
 				],
 				CONDITION_EVAL_TYPE_AND_OR, '{1} and {2} and {3}'
 			],
@@ -149,7 +151,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 			[
 				[
 					1 => 'condition1',
-					2 => 'condition1',
+					2 => 'condition1'
 				],
 				CONDITION_EVAL_TYPE_AND_OR, '{1} or {2}'
 			],
@@ -157,7 +159,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 				[
 					1 => 'condition1',
 					2 => 'condition1',
-					3 => 'condition2',
+					3 => 'condition2'
 				],
 				CONDITION_EVAL_TYPE_AND_OR, '({1} or {2}) and {3}'
 			],
@@ -166,15 +168,15 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 					1 => 'condition1',
 					2 => 'condition1',
 					3 => 'condition2',
-					4 => 'condition2',
+					4 => 'condition2'
 				],
 				CONDITION_EVAL_TYPE_AND_OR, '({1} or {2}) and ({3} or {4})'
-			],
+			]
 		];
 	}
 
 	/**
-	 * @dataProvider testGetFormulaProvider
+	 * @dataProvider dataProviderGetFormula
 	 *
 	 * @param array $conditions
 	 * @param $evaltype
@@ -186,18 +188,18 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($expectedFormula, $formula);
 	}
 
-	public function testGetFormulaIdsProvider() {
+	public function dataProviderGetFormulaIds() {
 		return [
 			['', []],
 			['1', [1 => 'A']],
 			['1 and 2', [1 => 'A', 2 => 'B']],
 			['1 and 2 and 1', [1 => 'A', 2 => 'B']],
-			['(1 and 2) and 3', [1 => 'A', 2 => 'B', 3 => 'C']],
+			['(1 and 2) and 3', [1 => 'A', 2 => 'B', 3 => 'C']]
 		];
 	}
 
 	/**
-	 * @dataProvider testGetFormulaIdsProvider
+	 * @dataProvider dataProviderGetFormulaIds
 	 *
 	 * @param $formula
 	 * @param array $expectedIds
@@ -208,7 +210,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($ids, $expectedIds);
 	}
 
-	public function testReplaceNumericIdsProvider() {
+	public function dataProviderReplaceNumericIds() {
 		return [
 			[
 				'', [], ''
@@ -224,12 +226,12 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 			],
 			[
 				'{1} and {2} or {1}', [1 => 'A', 2 => 'B'], 'A and B or A'
-			],
+			]
 		];
 	}
 
 	/**
-	 * @dataProvider testReplaceNumericIdsProvider
+	 * @dataProvider dataProviderReplaceNumericIds
 	 *
 	 * @param $formula
 	 * @param array $ids
@@ -241,7 +243,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($expectedFormula, $generatedFormula);
 	}
 
-	public function testReplaceLetterIdsProvider() {
+	public function dataProviderReplaceLetterIds() {
 		return [
 			[
 				'', [], ''
@@ -265,7 +267,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testReplaceLetterIdsProvider
+	 * @dataProvider dataProviderReplaceLetterIds
 	 *
 	 * @param $formula
 	 * @param array $ids
@@ -278,7 +280,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testSortConditionsByFormulaIdProvider
+	 * @dataProvider dataProviderSortConditionsByFormulaId
 	 *
 	 * @param array $conditions
 	 * @param array $expectedConditions
@@ -292,7 +294,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return array
 	 */
-	public function testSortConditionsByFormulaIdProvider() {
+	public function dataProviderSortConditionsByFormulaId() {
 		return [
 			[
 				[0 => ['formulaid' => 'A'], 1 => ['formulaid' => 'B'], 2 => ['formulaid' => 'C']],
@@ -314,7 +316,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testGetNextFormulaIdProvider
+	 * @dataProvider dataProviderGetNextFormulaId
 	 *
 	 * @param array $formulaIds
 	 * @param string $expectedFormulaId
@@ -328,7 +330,7 @@ class CConditionHelperTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return array
 	 */
-	public function testGetNextFormulaIdProvider() {
+	public function dataProviderGetNextFormulaId() {
 		return [
 			[
 				[], 'A'

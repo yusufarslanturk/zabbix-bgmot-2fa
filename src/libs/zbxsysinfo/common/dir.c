@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -271,7 +271,7 @@ static int	etypes_to_mask(char *etypes, AGENT_RESULT *result)
 	num = num_param(etypes);
 	for (n = 1; n <= num; n++)
 	{
-		if (NULL == (etype = get_param_dyn(etypes, n)))
+		if (NULL == (etype = get_param_dyn(etypes, n, NULL)))
 			continue;
 
 		if (DET_OVERFLOW & (type = etype_to_mask(etype)))
@@ -329,7 +329,14 @@ static int	prepare_count_parameters(const AGENT_REQUEST *request, AGENT_RESULT *
 	time_t	now;
 
 	types_incl = etypes_to_mask(get_rparam(request, 3), result);
+
+	if (ISSET_MSG(result))
+		return FAIL;
+
 	types_excl = etypes_to_mask(get_rparam(request, 4), result);
+
+	if (ISSET_MSG(result))
+		return FAIL;
 
 	if (DET_OVERFLOW & (types_incl | types_excl))
 		return FAIL;

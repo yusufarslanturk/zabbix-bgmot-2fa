@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -578,6 +578,7 @@ class CWidgetHelper {
 					(new CButton())
 						->setAttribute('title', _('Delete'))
 						->addClass(ZBX_STYLE_REMOVE_BTN)
+						->removeId()
 				))
 					->addClass(ZBX_STYLE_COLUMN_5)
 			]))
@@ -617,9 +618,7 @@ class CWidgetHelper {
 	 * @return CList
 	 */
 	public static function getGraphOverride($field, $form_name) {
-		$list = (new CList())
-			->addClass(ZBX_STYLE_OVERRIDES_LIST)
-			->setId('overrides');
+		$list = (new CList())->addClass(ZBX_STYLE_OVERRIDES_LIST);
 
 		$values = $field->getValue();
 
@@ -889,7 +888,8 @@ class CWidgetHelper {
 						(new CButton())
 							->addClass(ZBX_STYLE_COLOR_PREVIEW_BOX)
 							->addStyle('background-color: #'.$value['color'].';')
-							->setAttribute('title', $is_opened ? _('Collapse') : _('Expand')),
+							->setAttribute('title', $is_opened ? _('Collapse') : _('Expand'))
+							->removeId(),
 						(new CDiv([
 							(new CTextArea($field_name.'['.$row_num.'][hosts]',
 								self::makeStringFromChunks($value['hosts']), ['rows' => 1])
@@ -936,7 +936,7 @@ class CWidgetHelper {
 							)
 					]))
 						->addClass(CMultiSelect::ZBX_STYLE_CLASS)
-						->addClass(ZBX_STYLE_COLUMN_50),
+						->addClass(ZBX_STYLE_COLUMN_50)
 				]))
 					->addClass(ZBX_STYLE_COLUMN_95)
 					->addClass(ZBX_STYLE_COLUMNS),
@@ -944,6 +944,7 @@ class CWidgetHelper {
 					(new CButton())
 						->setAttribute('title', _('Delete'))
 						->addClass(ZBX_STYLE_REMOVE_BTN)
+						->removeId()
 				]))->addClass(ZBX_STYLE_COLUMN_5)
 			]))
 				->addClass(ZBX_STYLE_LIST_ACCORDION_ITEM_HEAD)
@@ -1033,7 +1034,7 @@ class CWidgetHelper {
 									->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 							)
 					))
-						->addClass(ZBX_STYLE_COLUMN_50),
+						->addClass(ZBX_STYLE_COLUMN_50)
 				]))
 					->addClass(ZBX_STYLE_COLUMNS)
 					->addClass(ZBX_STYLE_COLUMN_95)

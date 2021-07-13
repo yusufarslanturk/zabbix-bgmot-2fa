@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -89,7 +89,7 @@ static int	calcitem_parse_expression(DC_ITEM *dc_item, expression_t *exp, char *
 	const char	*__function_name = "calcitem_parse_expression";
 
 	char		*e, *buf = NULL;
-	size_t		exp_alloc = 128, exp_offset = 0, f_pos, par_l, par_r;
+	size_t		exp_alloc = 128, exp_offset = 0, f_pos, par_l = 0, par_r = 0;
 	int		ret = NOTSUPPORTED;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() expression:'%s'", __function_name, dc_item->params);

@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,7 +19,9 @@
 **/
 
 
-class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class CApiInputValidatorTest extends TestCase {
 
 	public function dataProviderInput() {
 		return [
@@ -792,31 +794,31 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 				['type' => API_FLOAT],
 				1.23E+11,
 				'/1/float',
-				1.23E+11,
+				1.23E+11
 			],
 			[
 				['type' => API_FLOAT],
 				'1.23E+11',
 				'/1/float',
-				1.23E+11,
+				1.23E+11
 			],
 			[
 				['type' => API_FLOAT],
 				'1.23e+11',
 				'/1/float',
-				1.23E+11,
+				1.23E+11
 			],
 			[
 				['type' => API_FLOAT],
 				'-1.23e+11',
 				'/1/float',
-				-1.23E+11,
+				-1.23E+11
 			],
 			[
 				['type' => API_FLOAT],
 				'.23E11',
 				'/1/float',
-				0.23E+11,
+				0.23E+11
 			],
 			[
 				['type' => API_FLOATS],
@@ -1124,6 +1126,20 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 				],
 				'/',
 				'Invalid parameter "/": the parameter "name" is missing.'
+			],
+			[
+				['type' => API_OBJECT, 'fields' => [
+					'roles' => ['type' => API_OBJECT, 'default' => [], 'fields' => [
+						'value' => ['type' => API_STRING_UTF8, 'default' => 'test']
+					]]
+				]],
+				[],
+				'/',
+				[
+					'roles' => [
+						'value' => 'test'
+					]
+				]
 			],
 			[
 				['type' => API_IDS],
@@ -1442,7 +1458,7 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 			[
 				['type' => API_OBJECT, 'fields' => [
 					'tags' => ['type' => API_OBJECT, 'flags' => API_ALLOW_NULL, 'fields' => [
-						'tag'	=> ['type' => API_STRING_UTF8],
+						'tag'	=> ['type' => API_STRING_UTF8]
 					]]
 				]],
 				[
@@ -1563,7 +1579,7 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 			[
 				['type' => API_OBJECTS, 'fields' => [
 					'host' =>	['type' => API_H_NAME, 'flags' => API_REQUIRED],
-					'name' =>	['type' => API_STRING_UTF8, 'default_source' => 'host'],
+					'name' =>	['type' => API_STRING_UTF8, 'default_source' => 'host']
 				]],
 				[
 					['host' => 'host 0'],
@@ -2714,6 +2730,91 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 				'Invalid parameter "/output/3": value (name) already exists.'
 			],
 			[
+				['type' => API_SORTORDER],
+				null,
+				'/sortorder',
+				'Invalid parameter "/sortorder": an array or a character string is expected.'
+			],
+			[
+				['type' => API_SORTORDER],
+				[],
+				'/sortorder',
+				[]
+			],
+			[
+				['type' => API_SORTORDER],
+				'DESC',
+				'/sortorder',
+				'DESC'
+			],
+			[
+				['type' => API_SORTORDER],
+				'ASC',
+				'/sortorder',
+				'ASC'
+			],
+			[
+				['type' => API_SORTORDER],
+				['ASC'],
+				'/sortorder',
+				['ASC']
+			],
+			[
+				['type' => API_SORTORDER],
+				['DESC'],
+				'count',
+				['DESC']
+			],
+			[
+				['type' => API_SORTORDER],
+				['ASC', 'ASC', 'DESC', 'DESC'],
+				'/sortorder',
+				['ASC', 'ASC', 'DESC', 'DESC']
+			],
+			[
+				['type' => API_SORTORDER],
+				'',
+				'/sortorder',
+				'Invalid parameter "/sortorder": value must be one of ASC, DESC.'
+			],
+			[
+				['type' => API_SORTORDER],
+				['asc'],
+				'/sortorder',
+				'Invalid parameter "/sortorder/1": value must be one of ASC, DESC.'
+			],
+			[
+				['type' => API_SORTORDER],
+				true,
+				'/sortorder',
+				'Invalid parameter "/sortorder": an array or a character string is expected.'
+			],
+			[
+				['type' => API_SORTORDER],
+				123,
+				'/sortorder',
+				'Invalid parameter "/sortorder": an array or a character string is expected.'
+			],
+			[
+				['type' => API_SORTORDER],
+				123.5,
+				'/sortorder',
+				'Invalid parameter "/sortorder": an array or a character string is expected.'
+			],
+			[
+				['type' => API_SORTORDER],
+				['DESC', []],
+				'/sortorder',
+				'Invalid parameter "/sortorder/2": a character string is expected.'
+			],
+			[
+				['type' => API_SORTORDER],
+				// broken UTF-8 byte sequence
+				'abc'."\xd1".'e',
+				'/sortorder',
+				'Invalid parameter "/sortorder": invalid byte sequence in UTF-8.'
+			],
+			[
 				['type' => API_URL],
 				'',
 				'/1/url',
@@ -2820,13 +2921,7 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 				['type' => API_URL],
 				'/chart_bar.php?a=1&b=2',
 				'/1/url',
-				'Invalid parameter "/1/url": unacceptable URL.'
-			],
-			[
-				['type' => API_URL],
-				'{$URL}',
-				'/1/url',
-				'Invalid parameter "/1/url": unacceptable URL.'
+				'/chart_bar.php?a=1&b=2'
 			],
 			[
 				['type' => API_URL, 'flags' => API_ALLOW_USER_MACRO],
@@ -2839,6 +2934,144 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 				'javascript:{$URL}',
 				'/1/url',
 				'javascript:{$URL}'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION],
+				null,
+				'/1/expression',
+				'Invalid parameter "/1/expression": a character string is expected.'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION, 'flags' => API_NOT_EMPTY],
+				'',
+				'/1/expression',
+				'Invalid parameter "/1/expression": cannot be empty.'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION],
+				[],
+				'/1/expression',
+				'Invalid parameter "/1/expression": a character string is expected.'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION, 'length' => 10],
+				'{host:item.last()} = 0',
+				'/1/expression',
+				'Invalid parameter "/1/expression": value is too long.'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION],
+				'{host:item.last() = 0',
+				'/1/expression',
+				'Invalid parameter "/1/expression": incorrect trigger expression starting from "{host:item.last() = 0".'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION],
+				'9 and 1',
+				'/1/expression',
+				'Invalid parameter "/1/expression": trigger expression must contain at least one host:key reference.'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION],
+				'{host:item.last()} = {#LLD_MACRO}',
+				'/1/expression',
+				'Invalid parameter "/1/expression": incorrect trigger expression starting from " {#LLD_MACRO}".'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION, 'flags' => API_ALLOW_LLD_MACRO],
+				'{host:item.last()} = {#LLD_MACRO}',
+				'/1/expression',
+				'{host:item.last()} = {#LLD_MACRO}'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION],
+				'{host:item.last()} = 0',
+				'/1/expression',
+				'{host:item.last()} = 0'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION],
+				'{host:item.last()} = {$USER_MACRO}',
+				'/1/expression',
+				'{host:item.last()} = {$USER_MACRO}'
+			],
+			[
+				['type' => API_TRIGGER_EXPRESSION],
+				'',
+				'/1/expression',
+				''
+			],
+			[
+				['type' => API_JSONRPC_PARAMS],
+				[],
+				'/params',
+				[]
+			],
+			[
+				['type' => API_JSONRPC_PARAMS],
+				'',
+				'/params',
+				'Invalid parameter "/params": an array or object is expected.'
+			],
+			[
+				['type' => API_JSONRPC_PARAMS],
+				1,
+				'/params',
+				'Invalid parameter "/params": an array or object is expected.'
+			],
+			[
+				['type' => API_JSONRPC_PARAMS],
+				true,
+				'/params',
+				'Invalid parameter "/params": an array or object is expected.'
+			],
+			[
+				['type' => API_JSONRPC_PARAMS],
+				'23',
+				'/params',
+				'Invalid parameter "/params": an array or object is expected.'
+			],
+			[
+				['type' => API_JSONRPC_PARAMS],
+				null,
+				'/params',
+				'Invalid parameter "/params": an array or object is expected.'
+			],
+			[
+				['type' => API_JSONRPC_ID],
+				[],
+				'/id',
+				'Invalid parameter "/id": a string, number or null value is expected.'
+			],
+			[
+				['type' => API_JSONRPC_ID],
+				'id',
+				'/id',
+				'id'
+			],
+			[
+				['type' => API_JSONRPC_ID],
+				1,
+				'/id',
+				1
+			],
+			[
+				['type' => API_JSONRPC_ID],
+				true,
+				'/id',
+				'Invalid parameter "/id": a string, number or null value is expected.'
+			],
+			[
+				['type' => API_JSONRPC_ID],
+				'23',
+				'/id',
+				'23'
+			],
+			[
+				['type' => API_JSONRPC_ID],
+				null,
+				'/id',
+				null
 			]
 		];
 	}

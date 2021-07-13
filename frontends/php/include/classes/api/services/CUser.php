@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -168,7 +168,7 @@ class CUser extends CApiService {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$res = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$res = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 
 		while ($user = DBfetch($res)) {
 			unset($user['passwd']);
@@ -1185,7 +1185,7 @@ class CUser extends CApiService {
 
 			if ($sec_left > 0) {
 				self::exception(ZBX_API_ERROR_PERMISSIONS,
-					_n('Account is blocked for %1$s second.', 'Account is blocked for %1$s seconds.', $sec_left)
+					_('Incorrect user name or password or account is temporarily blocked.')
 				);
 			}
 		}
@@ -1198,7 +1198,9 @@ class CUser extends CApiService {
 
 				case ZBX_AUTH_INTERNAL:
 					if (md5($user['password']) !== $db_user['passwd']) {
-						self::exception(ZBX_API_ERROR_PERMISSIONS, _('Login name or password is incorrect.'));
+						self::exception(ZBX_API_ERROR_PERMISSIONS,
+							_('Incorrect user name or password or account is temporarily blocked.')
+						);
 					}
 					break;
 
@@ -1227,7 +1229,7 @@ class CUser extends CApiService {
 
 			if ($e->getCode() == ZBX_API_ERROR_PERMISSIONS && $db_user['attempt_failed'] >= ZBX_LOGIN_ATTEMPTS) {
 				self::exception(ZBX_API_ERROR_PERMISSIONS,
-					_n('Account is blocked for %1$s second.', 'Account is blocked for %1$s seconds.', ZBX_LOGIN_BLOCK)
+					_('Incorrect user name or password or account is temporarily blocked.')
 				);
 			}
 
@@ -1450,12 +1452,18 @@ class CUser extends CApiService {
 
 		// adding media types
 		if ($options['selectMediatypes'] !== null && $options['selectMediatypes'] != API_OUTPUT_COUNT) {
+			$mediaTypes = [];
 			$relationMap = $this->createRelationMap($result, 'userid', 'mediatypeid', 'media');
-			$mediaTypes = API::Mediatype()->get([
-				'output' => $options['selectMediatypes'],
-				'mediatypeids' => $relationMap->getRelatedIds(),
-				'preservekeys' => true
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$mediaTypes = API::Mediatype()->get([
+					'output' => $options['selectMediatypes'],
+					'mediatypeids' => $related_ids,
+					'preservekeys' => true
+				]);
+			}
+
 			$result = $relationMap->mapMany($result, $mediaTypes, 'mediatypes');
 		}
 
@@ -1546,7 +1554,9 @@ class CUser extends CApiService {
 		}
 
 		if (!$db_users) {
-			self::exception(ZBX_API_ERROR_PARAMETERS, _('Login name or password is incorrect.'));
+			self::exception(ZBX_API_ERROR_PARAMETERS,
+				_('Incorrect user name or password or account is temporarily blocked.')
+			);
 		}
 		elseif (count($db_users) > 1) {
 			self::exception(ZBX_API_ERROR_PARAMETERS,

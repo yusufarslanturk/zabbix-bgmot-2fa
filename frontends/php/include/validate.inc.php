@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -370,7 +370,7 @@ function invalid_url($msg = null) {
 	}
 
 	// required global parameters for correct including page_header.php
-	global $DB, $ZBX_MESSAGES;
+	global $DB, $ZBX_MESSAGES, $page;
 
 	// backup messages before including page_header.php
 	$temp = $ZBX_MESSAGES;

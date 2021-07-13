@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,9 +19,11 @@
 **/
 
 
+use PHPUnit\Framework\TestCase;
+
 class CIdValidatorTest extends CValidatorTest {
 
-	public function validParamProvider() {
+	public function dataProviderValidParam() {
 		return [
 			[[
 				'empty' => true,
@@ -31,17 +33,17 @@ class CIdValidatorTest extends CValidatorTest {
 		];
 	}
 
-	public function validValuesProvider() {
+	public function dataProviderValidValues() {
 		return [
 			[[], 1],
 			[[], '1'],
 			[[], '9223372036854775807'],
 			[['empty' => true], 0],
-			[['empty' => true], '0'],
+			[['empty' => true], '0']
 		];
 	}
 
-	public function invalidValuesProvider() {
+	public function dataProviderInvalidValues() {
 		return [
 			[
 				['messageInvalid' => 'Invalid ID type'],
@@ -111,7 +113,7 @@ class CIdValidatorTest extends CValidatorTest {
 		];
 	}
 
-	public function invalidValuesWithObjectsProvider() {
+	public function dataProviderInvalidValuesWithObjects() {
 		return [
 			[
 				['messageInvalid' => 'Invalid ID for "%1$s"'],

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,12 +19,20 @@
 **/
 
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
+require_once dirname(__FILE__).'/../../include/helpers/CDataHelper.php';
 
 /**
  * @backup widget
  * @backup profiles
  */
-class testProblemsBySeverityWidget extends CWebTest {
+class testDashboardProblemsBySeverityWidget extends CWebTest {
+
+	/**
+	 * Id of the dashboard that is created within this test specifically for the update scenario.
+	 *
+	 * @var integer
+	 */
+	protected static $dashboardid;
 
 	/*
 	 * SQL query to get widget and widget_field tables to compare hash values, but without widget_fieldid
@@ -35,7 +43,8 @@ class testProblemsBySeverityWidget extends CWebTest {
 			' w.width, w.height'.
 			' FROM widget_field wf'.
 			' INNER JOIN widget w'.
-			' ON w.widgetid=wf.widgetid ORDER BY wf.widgetid, wf.name, wf.value_int, wf.value_groupid';
+			' ON w.widgetid=wf.widgetid ORDER BY wf.widgetid, wf.name, wf.value_int, wf.value_str, wf.value_groupid,'.
+			' wf.value_itemid, wf.value_graphid';
 
 	public function getCreateWidgetData() {
 		return [
@@ -247,7 +256,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 	/**
 	 * @dataProvider getCreateWidgetData
 	 */
-	public function testProblemsBySeverityWidget_Create($data) {
+	public function testDashboardProblemsBySeverityWidget_Create($data) {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=104');
 		$dashboard = CDashboardElement::find()->one();
 		$old_widget_count = $dashboard->getWidgets()->count();
@@ -269,11 +278,47 @@ class testProblemsBySeverityWidget extends CWebTest {
 		}
 	}
 
+	/**
+	 * Function used to create a dashboard with widgets required for the Update scenario.
+	 */
+	public function prepareUpdateData() {
+		// Form an array with widget configuration
+		$widgets = [];
+		$id = 1;
+		for ($y = 0; $y <= 25; $y += 5) {
+			for ($x = 0; $x <= 6; $x += 6) {
+				if ($id === 12) {
+					break 2;
+				}
+				$widgets[] = [
+					'type' => 'problemsbysv',
+					'name' => 'Reference widget '.$id,
+					'x' => $x,
+					'y' => $y,
+					'width' => 6,
+					'height' => 5
+				];
+
+				$id++;
+			}
+		}
+
+		// Create dashboard
+		$response = CDataHelper::call('dashboard.create', [
+			'name' => 'Problems by severity update dashboard',
+			'widgets' => array_values($widgets)
+		]);
+
+		$this->assertArrayHasKey('dashboardids', $response);
+		self::$dashboardid = $response['dashboardids'][0];
+	}
+
 	public function getUpdateWidgetData() {
 		return [
 			// Update widget to have a default name.
 			[
 				[
+					'widget to update' => 'Reference widget 1',
 					'fields' => [
 						'Name' => ''
 					]
@@ -282,6 +327,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			// Hide host groups without problems and remove timeline.
 			[
 				[
+					'widget to update' => 'Reference widget 2',
 					'fields' => [
 						'Name' => 'Hide timeline and groupt without problems',
 						'Refresh interval' => 'Default (1 minute)',
@@ -314,6 +360,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			// Show only average problems including suppressed ones, problem display - separated, exclude hostgroups without problems.
 			[
 				[
+					'widget to update' => 'Reference widget 3',
 					'fields' => [
 						'Name' => 'Show only average problems including suppressed ones',
 						'Hide groups without problems' => true,
@@ -340,6 +387,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			// Update widget to display only unaknowledged problems and to show latest values.
 			[
 				[
+					'widget to update' => 'Reference widget 4',
 					'fields' => [
 						'Name' => 'Display only unacknowledged problems',
 						'Problem display' => 'Unacknowledged only',
@@ -367,6 +415,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			// Update the widget to return only "Group to check Overview" hostgroup problems.
 			[
 				[
+					'widget to update' => 'Reference widget 5',
 					'fields' => [
 						'Name' => 'Show only problems of hostgroup Group to check Overview',
 						'Host groups' => 'Group to check Overview'
@@ -386,6 +435,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			// Empty widget output: return problems of 'Zabbix servers' hostroup and a host that doesn't belong to it.
 			[
 				[
+					'widget to update' => 'Reference widget 6',
 					'fields' => [
 						'Name' => 'Return "Zabbix servers" and "Another group to check Overview" problems',
 						'Host groups' => ['Zabbix servers'],
@@ -400,6 +450,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			// Update widget to exclude 'Group to check Overview' host group.
 			[
 				[
+					'widget to update' => 'Reference widget 7',
 					'fields' => [
 						'Name' => 'Exclude "Group to check Overview"',
 						'Exclude host groups' => ['Group to check Overview']
@@ -421,6 +472,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			// Update widget to return problems of 'ЗАББИКС Сервер' host.
 			[
 				[
+					'widget to update' => 'Reference widget 8',
 					'fields' => [
 						'Name' => 'Return "ЗАББИКС Сервер" problems',
 						'Hosts' => [
@@ -439,6 +491,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			// Empty widget output: problems of "ЗАББИКС Сервер" host with excluded "Zabbix servers" hostgroup.
 			[
 				[
+					'widget to update' => 'Reference widget 9',
 					'fields' => [
 						'Name' => 'Display ЗАББИКС Сервер problems with excluded "Zabbix servers"',
 						'Exclude host groups' => ['Zabbix servers'],
@@ -454,6 +507,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			// Update widget to show a non existing problem.
 			[
 				[
+					'widget to update' => 'Reference widget 10',
 					'fields' => [
 						'Name' => 'No problems should be returned',
 						'Problem' => 'Please place Your problem name here'
@@ -464,6 +518,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 			// Update widget to show only warning and information problems that contain '_trigger_'.
 			[
 				[
+					'widget to update' => 'Reference widget 11',
 					'fields' => [
 						'Name' => 'Display only warning and information problems containing "_trigger_',
 						'Problem' => '_trigger_',
@@ -481,14 +536,14 @@ class testProblemsBySeverityWidget extends CWebTest {
 	}
 
 	/**
-	 * @backup widget
+	 * @on-before-once prepareUpdateData
 	 * @dataProvider getUpdateWidgetData
 	 */
-	public function testProblemsBySeverityWidget_Update($data) {
-		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=104');
+	public function testDashboardProblemsBySeverityWidget_Update($data) {
+		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.self::$dashboardid);
 		$dashboard = CDashboardElement::find()->one();
 		$dashboard->edit();
-		$form = $dashboard->getWidget('Reference widget')->edit();
+		$form = $dashboard->getWidget($data['widget to update'])->edit();
 
 		// Attempt to update the widget.
 		$header = ($data['fields']['Name'] === '') ? 'Problems by severity' : $data['fields']['Name'];
@@ -505,7 +560,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 		}
 	}
 
-	public function testProblemsBySeverityWidget_SimpleUpdate() {
+	public function testDashboardProblemsBySeverityWidget_SimpleUpdate() {
 		$old_hash = CDBHelper::getHash($this->sql);
 
 		// Open a dashboard widget and then save it without applying any changes
@@ -560,7 +615,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 	/**
 	 * @dataProvider getCancelActionsData
 	 */
-	public function testProblemsBySeverityWidget_Cancel($data) {
+	public function testDashboardProblemsBySeverityWidget_Cancel($data) {
 		$old_hash = CDBHelper::getHash($this->sql);
 
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=104');
@@ -611,7 +666,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 		$this->assertEquals($old_hash, CDBHelper::getHash($this->sql));
 	}
 
-	public function testProblemsBySeverityWidget_Delete() {
+	public function testDashboardProblemsBySeverityWidget_Delete() {
 		$name = 'Reference PBS widget to delete';
 
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=104');
@@ -634,8 +689,10 @@ class testProblemsBySeverityWidget extends CWebTest {
 	private function fillFormAndSaveDashboard($dashboard, $form, $data, $header) {
 		$form->fill($data['fields']);
 		$form->submit();
+		$this->query('id:overlay_bg')->waitUntilNotVisible();
 		$this->page->waitUntilReady();
 		$dashboard->getWidget($header);
+		sleep(1);
 		$dashboard->save();
 	}
 
@@ -725,7 +782,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 	private function checkPopupContent($data, $widget){
 		$expected_popup = [
 			'fields' => [
-				'Time' => '2018-10-23 12:33:48',
+				'Time' => '2020-10-23 15:33:48',
 				'Host' => 'ЗАББИКС Сервер',
 				'Problem' => 'Test trigger to check tag filter on problem page',
 				'Ack' => 'No'

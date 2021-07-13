@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -648,7 +648,7 @@ class testUrlParameters extends CLegacyWebTest {
 						'url' => 'events.php',
 						'text_not_present' => 'Events',
 						'text_present' => [
-							'Not Found',
+							'Not Found'
 						]
 					],
 					[
@@ -703,7 +703,7 @@ class testUrlParameters extends CLegacyWebTest {
 							'Fatal error, please report to the Zabbix team',
 							'Controller: problem.view'
 						]
-					],
+					]
 				]
 			],
 			[
@@ -906,7 +906,7 @@ class testUrlParameters extends CLegacyWebTest {
 					[
 						'url' => 'zabbix.php?action=discovery.view&filter_rst=1',
 						'text_present' => 'Status of discovery'
-					],
+					]
 				]
 			],
 			[

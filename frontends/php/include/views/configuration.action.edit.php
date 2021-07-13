@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -763,19 +763,18 @@ if (!empty($data['new_operation'])) {
 						->setAttribute('style', 'min-width: '.ZBX_TEXTAREA_STANDARD_WIDTH.'px;')
 				);
 
-			$mediaTypeComboBox = (new CComboBox('new_operation[opmessage][mediatypeid]', $data['new_operation']['opmessage']['mediatypeid']))
-				->addItem(0, '- '._('All').' -');
+			$media_type_combobox = (new CComboBox('new_operation[opmessage][mediatypeid]',
+				$data['new_operation']['opmessage']['mediatypeid']
+			))->addItem(0, '- '._('All').' -');
 
-			$dbMediaTypes = DBfetchArray(DBselect('SELECT mt.mediatypeid,mt.description FROM media_type mt'));
-
-			order_result($dbMediaTypes, 'description');
-
-			foreach ($dbMediaTypes as $dbMediaType) {
-				$mediaTypeComboBox->addItem($dbMediaType['mediatypeid'], $dbMediaType['description']);
+			foreach ($data['available_mediatypes'] as $value) {
+				$media_type_combobox->addItem($value['mediatypeid'], $value['description'], null, true,
+					($value['status'] == MEDIA_TYPE_STATUS_DISABLED) ? ZBX_STYLE_RED : null
+				);
 			}
 
 			$new_operation_formlist
-				->addRow(_('Send only to'), $mediaTypeComboBox)
+				->addRow(_('Send only to'), $media_type_combobox)
 				->addRow(_('Default message'),
 					(new CCheckBox('new_operation[opmessage][default_msg]'))
 						->setChecked($data['new_operation']['opmessage']['default_msg'] == 1)
@@ -957,6 +956,7 @@ if (!empty($data['new_operation'])) {
 					))
 						->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
 						->setAriaRequired()
+						->disableAutocomplete()
 				)
 				->addRow(
 					(new CLabel(_('Public key file'), 'new_operation[opcommand][publickey]'))->setAsteriskMark(),
@@ -977,7 +977,9 @@ if (!empty($data['new_operation'])) {
 				->addRow(_('Password'),
 					(new CTextBox('new_operation[opcommand][password]',
 						$data['new_operation']['opcommand']['password']
-					))->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+					))
+						->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+						->disableAutocomplete()
 				)
 				// set custom id because otherwise they are set based on name (sick!) and produce duplicate ids
 				->addRow(_('Key passphrase'),
@@ -986,6 +988,7 @@ if (!empty($data['new_operation'])) {
 					))
 						->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
 						->setId('new_operation_opcommand_passphrase')
+						->disableAutocomplete()
 				)
 				// ssh && telnet
 				->addRow(_('Port'),
@@ -1508,20 +1511,18 @@ if ($data['eventsource'] == EVENT_SOURCE_TRIGGERS || $data['eventsource'] == EVE
 							->setAttribute('style', 'min-width: '.ZBX_TEXTAREA_STANDARD_WIDTH.'px;')
 					);
 
-				$mediaTypeComboBox = (new CComboBox('new_recovery_operation[opmessage][mediatypeid]',
-					$data['new_recovery_operation']['opmessage']['mediatypeid'])
-				)->addItem(0, '- '._('All').' -');
-
-				$dbMediaTypes = DBfetchArray(DBselect('SELECT mt.mediatypeid,mt.description FROM media_type mt'));
-
-				order_result($dbMediaTypes, 'description');
-
-				foreach ($dbMediaTypes as $dbMediaType) {
-					$mediaTypeComboBox->addItem($dbMediaType['mediatypeid'], $dbMediaType['description']);
+				$media_type_combobox = new CComboBox('new_recovery_operation[opmessage][mediatypeid]',
+					$data['new_recovery_operation']['opmessage']['mediatypeid']
+				);
+				$media_type_combobox->addItem(0, '- '._('All').' -');
+				foreach ($data['available_mediatypes'] as $value) {
+					$media_type_combobox->addItem($value['mediatypeid'], $value['description'], null, true,
+						($value['status'] == MEDIA_TYPE_STATUS_DISABLED) ? ZBX_STYLE_RED : null
+					);
 				}
 
 				$new_operation_formlist
-					->addRow(_('Send only to'), $mediaTypeComboBox)
+					->addRow(_('Send only to'), $media_type_combobox)
 					->addRow(_('Default message'),
 						(new CCheckBox('new_recovery_operation[opmessage][default_msg]'))
 							->setChecked($data['new_recovery_operation']['opmessage']['default_msg'] == 1)
@@ -1730,6 +1731,7 @@ if ($data['eventsource'] == EVENT_SOURCE_TRIGGERS || $data['eventsource'] == EVE
 					))
 						->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
 						->setAriaRequired()
+						->disableAutocomplete()
 				);
 				$new_operation_formlist->addRow(
 					(new CLabel(_('Public key file'), 'new_recovery_operation[opcommand][publickey]'))
@@ -1752,7 +1754,9 @@ if ($data['eventsource'] == EVENT_SOURCE_TRIGGERS || $data['eventsource'] == EVE
 				$new_operation_formlist->addRow(_('Password'),
 					(new CTextBox('new_recovery_operation[opcommand][password]',
 						$data['new_recovery_operation']['opcommand']['password']
-					))->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+					))
+						->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+						->disableAutocomplete()
 				);
 
 				// set custom id because otherwise they are set based on name (sick!) and produce duplicate ids
@@ -1760,7 +1764,8 @@ if ($data['eventsource'] == EVENT_SOURCE_TRIGGERS || $data['eventsource'] == EVE
 					$data['new_recovery_operation']['opcommand']['password']
 				))
 					->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
-					->setId('new_recovery_operation_opcommand_passphrase');
+					->setId('new_recovery_operation_opcommand_passphrase')
+					->disableAutocomplete();
 				$new_operation_formlist->addRow(_('Key passphrase'), $passphraseCB);
 
 				// ssh && telnet
@@ -2193,6 +2198,7 @@ if ($data['eventsource'] == EVENT_SOURCE_TRIGGERS) {
 					))
 						->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
 						->setAriaRequired()
+						->disableAutocomplete()
 				)
 				->addRow(
 					(new CLabel(_('Public key file'), 'new_ack_operation[opcommand][publickey]'))->setAsteriskMark(),
@@ -2213,7 +2219,9 @@ if ($data['eventsource'] == EVENT_SOURCE_TRIGGERS) {
 				->addRow(_('Password'),
 					(new CTextBox('new_ack_operation[opcommand][password]',
 						$data['new_ack_operation']['opcommand']['password']
-					))->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+					))
+						->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+						->disableAutocomplete()
 				)
 				->addRow(_('Key passphrase'),
 					(new CTextBox('new_ack_operation[opcommand][password]',
@@ -2221,6 +2229,7 @@ if ($data['eventsource'] == EVENT_SOURCE_TRIGGERS) {
 					))
 						->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
 						->setId('new_ack_operation_opcommand_passphrase')
+						->disableAutocomplete()
 				)
 				->addRow(_('Port'),
 					(new CTextBox('new_ack_operation[opcommand][port]',
@@ -2271,22 +2280,24 @@ if ($data['eventsource'] == EVENT_SOURCE_TRIGGERS) {
 
 		if (array_key_exists('opmessage', $data['new_ack_operation'])
 				&& $data['new_ack_operation']['operationtype'] != OPERATION_TYPE_COMMAND) {
-			$mediatype_cbox = (new CComboBox('new_ack_operation[opmessage][mediatypeid]',
-				$data['new_ack_operation']['opmessage']['mediatypeid'])
-			)->addItem(0, '- '._('All').' -');
-
-			foreach ($data['available_mediatypes'] as $mediatype) {
-				$mediatype_cbox->addItem($mediatype['mediatypeid'], $mediatype['description']);
+			$media_type_combobox = new CComboBox('new_ack_operation[opmessage][mediatypeid]',
+				$data['new_ack_operation']['opmessage']['mediatypeid']
+			);
+			$media_type_combobox->addItem(0, '- '._('All').' -');
+			foreach ($data['available_mediatypes'] as $value) {
+				$media_type_combobox->addItem($value['mediatypeid'], $value['description'], null, true,
+					($value['status'] == MEDIA_TYPE_STATUS_DISABLED) ? ZBX_STYLE_RED : null
+				);
 			}
+
+			$label = ($data['new_ack_operation']['operationtype'] == OPERATION_TYPE_ACK_MESSAGE)
+				? _('Default media type')
+				: _('Send only to');
+
+			$new_operation_formlist->addRow($label, $media_type_combobox);
+
 			$is_default_msg = (array_key_exists('default_msg', $data['new_ack_operation']['opmessage'])
 				&& $data['new_ack_operation']['opmessage']['default_msg'] == 1);
-
-			if ($data['new_ack_operation']['operationtype'] == OPERATION_TYPE_ACK_MESSAGE) {
-				$new_operation_formlist->addRow(_('Default media type'), $mediatype_cbox);
-			}
-			else {
-				$new_operation_formlist->addRow(_('Send only to'), $mediatype_cbox);
-			}
 
 			$new_operation_formlist
 				->addRow(_('Default message'),

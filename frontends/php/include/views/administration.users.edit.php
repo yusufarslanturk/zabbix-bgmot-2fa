@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -99,31 +99,34 @@ if (!$data['is_profile']) {
 // append password to form list
 if ($data['userid'] == 0 || $data['change_password']) {
 	$userForm->disablePasswordAutofill();
-	$password_box = new CPassBox('password1', $data['password1']);
+
+	$password1 = (new CPassBox('password1', $data['password1']))
+		->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+		->setAriaRequired();
 
 	if (!$form_autofocus) {
 		$form_autofocus = true;
-		$password_box->setAttribute('autofocus', 'autofocus');
+		$password1->setAttribute('autofocus', 'autofocus');
 	}
 
-	$userFormList->addRow(
-		(new CLabel(_('Password'), 'password1'))->setAsteriskMark(),
-		$password_box
-			->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
-			->setAriaRequired()
-	);
-	$userFormList->addRow(
-		(new CLabel(_('Password (once again)'), 'password2'))->setAsteriskMark(),
-		(new CPassBox('password2', $data['password2']))
-			->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
-			->setAriaRequired()
-	);
+	$userFormList
+		->addRow((new CLabel(_('Password'), 'password1'))->setAsteriskMark(), [
+			// Hidden dummy login field for protection against chrome error when password autocomplete.
+			(new CInput('text', null, null))
+				->setAttribute('tabindex', '-1')
+				->addStyle('position: absolute; left: -100vw;'),
+			$password1
+		])
+		->addRow((new CLabel(_('Password (once again)'), 'password2'))->setAsteriskMark(),
+			(new CPassBox('password2', $data['password2']))
+				->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+				->setAriaRequired()
+		)
+		->addRow('', _('Password is not mandatory for non internal authentication type.'));
 
 	if ($data['change_password']) {
 		$userForm->addVar('change_password', $data['change_password']);
 	}
-
-	$userFormList->addRow('', _('Password is not mandatory for non internal authentication type.'));
 }
 else {
 	$passwdButton = (new CSimpleButton(_('Change password')))
@@ -328,7 +331,7 @@ if (uint_in_array(CWebUser::$data['type'], [USER_TYPE_ZABBIX_ADMIN, USER_TYPE_SU
 						'dstfrm' => $userForm->getName()
 					]).', null, this);'
 				)
-				->addClass(ZBX_STYLE_BTN_LINK),
+				->addClass(ZBX_STYLE_BTN_LINK)
 		]))
 			->addClass(ZBX_STYLE_TABLE_FORMS_SEPARATOR)
 			->setAttribute('style', 'min-width: '.ZBX_TEXTAREA_BIG_WIDTH.'px;')

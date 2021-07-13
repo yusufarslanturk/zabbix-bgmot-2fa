@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1349,6 +1349,9 @@ static int	dbsync_compare_item(const ZBX_DC_ITEM *item, const DB_ROW dbrow)
 			trends_sec = dbsync_env.cache->config->hk.trends;
 
 		if (numitem->trends != (0 != trends_sec))
+			return FAIL;
+
+		if (numitem->trends_sec != trends_sec)
 			return FAIL;
 
 		if (FAIL == dbsync_compare_str(dbrow[35], numitem->units))

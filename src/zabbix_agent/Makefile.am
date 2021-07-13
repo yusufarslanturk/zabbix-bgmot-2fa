@@ -17,7 +17,8 @@ libzbxagent_a_SOURCES = \
 	logfiles.c logfiles.h \
 	zbxconf.c zbxconf.h \
 	listener.c listener.h \
-	procstat.c procstat.h
+	procstat.c procstat.h \
+	zbxkstat.c zbxkstat.h
 
 libzbxagent_a_CFLAGS = \
 	-DZABBIX_DAEMON

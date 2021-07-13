@@ -8,7 +8,8 @@
 		'&rArr;',
 		(new CTextBox('macros[#{rowNum}][value]', '', false, 255))
 			->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH)
-			->setAttribute('placeholder', _('value')),
+			->setAttribute('placeholder', _('value'))
+			->disableAutocomplete(),
 		(new CCol(
 			(new CButton('macros[#{rowNum}][remove]', _('Remove')))
 				->addClass(ZBX_STYLE_BTN_LINK)

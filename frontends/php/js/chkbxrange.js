@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -260,7 +260,13 @@ var chkbxRange = {
 		var selectedCountSpan = jQuery('#selected_count');
 		selectedCountSpan.text(count + ' ' + selectedCountSpan.text().split(' ')[1]);
 
-		jQuery('#action_buttons button').prop('disabled', count == 0);
+		jQuery('#action_buttons button').each(function() {
+			var $elem = jQuery(this);
+
+			if (!$elem.data('disabled')) {
+				$elem.prop('disabled', count == 0);
+			}
+		});
 	},
 
 	// check if all checkboxes are selected and select main checkbox, else disable checkbox, select options and button

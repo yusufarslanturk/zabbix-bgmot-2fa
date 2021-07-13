@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,9 +19,11 @@
 **/
 
 
+use PHPUnit\Framework\TestCase;
+
 class CColorValidatorTest extends CValidatorTest {
 
-	public function validParamProvider() {
+	public function dataProviderValidParam() {
 		return [
 			[[
 				'empty' => true,
@@ -32,18 +34,18 @@ class CColorValidatorTest extends CValidatorTest {
 		];
 	}
 
-	public function validValuesProvider() {
+	public function dataProviderValidValues() {
 		return [
 			[[], '000000'],
 			[[], 'AAAAAA'],
 			[[], 'F3F3F3'],
 			[[], 'FFFFFF'],
 			[[], 'ffffff'],
-			[['empty' => true], ''],
+			[['empty' => true], '']
 		];
 	}
 
-	public function invalidValuesProvider() {
+	public function dataProviderInvalidValues() {
 		return [
 			[
 				['messageEmpty' => 'Empty color'],
@@ -69,11 +71,11 @@ class CColorValidatorTest extends CValidatorTest {
 				['messageRegex' => 'Incorrect color "%1$s"'],
 				'fff',
 				'Incorrect color "fff"'
-			],
+			]
 		];
 	}
 
-	public function invalidValuesWithObjectsProvider() {
+	public function dataProviderInvalidValuesWithObjects() {
 		return [
 			[
 				['messageEmpty' => 'Empty color for "%1$s"'],
@@ -99,7 +101,7 @@ class CColorValidatorTest extends CValidatorTest {
 				['messageRegex' => 'Incorrect color "%2$s" for "%1$s"'],
 				'fff',
 				'Incorrect color "fff" for "object"'
-			],
+			]
 		];
 	}
 

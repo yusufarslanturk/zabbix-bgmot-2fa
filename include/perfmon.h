@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -92,6 +92,6 @@ PDH_STATUS	calculate_counter_value(const char *function, const char *counterpath
 wchar_t		*get_counter_name(DWORD pdhIndex);
 int		check_counter_path(char *counterPath, int convert_from_numeric);
 int		init_builtin_counter_indexes(void);
-DWORD 		get_builtin_counter_index(zbx_builtin_counter_ref_t ref);
+DWORD 		get_builtin_counter_index(zbx_builtin_counter_ref_t counter_ref);
 
 #endif /* ZABBIX_PERFMON_H */

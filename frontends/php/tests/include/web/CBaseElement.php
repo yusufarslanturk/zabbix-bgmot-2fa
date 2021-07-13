@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -17,6 +17,10 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
+
+use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\Remote\RemoteWebElement;
+use Facebook\WebDriver\Exception\StaleElementReferenceException;
 
 /**
  * Base class for web page elements.
@@ -69,6 +73,9 @@ abstract class CBaseElement extends RemoteWebElement {
 		}
 		catch (StaleElementReferenceException $exception) {
 			return true;
+		}
+		catch (Exception $exception) {
+			// Code is not missing here.
 		}
 
 		return false;

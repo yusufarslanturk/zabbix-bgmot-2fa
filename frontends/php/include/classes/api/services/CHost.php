@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -426,7 +426,7 @@ class CHost extends CHostGeneral {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$res = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$res = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($host = DBfetch($res)) {
 			if ($options['countOutput']) {
 				if ($options['groupCount']) {
@@ -497,71 +497,99 @@ class CHost extends CHostGeneral {
 
 		$this->validateCreate($hosts);
 
-		$hostids = [];
-
-		foreach ($hosts as $host) {
+		foreach ($hosts as &$host) {
 			// If visible name is not given or empty it should be set to host name.
-			if (!array_key_exists('name', $host) || !trim($host['name'])) {
+			if (!array_key_exists('name', $host) || trim($host['name']) === '') {
 				$host['name'] = $host['host'];
 			}
+		}
+		unset($host);
 
-			$hostid = DB::insert('hosts', [$host]);
-			$hostid = reset($hostid);
-			$host['hostid'] = $hostid;
-			$hostids[] = $hostid;
+		$hosts_groups = [];
+		$hosts_interfaces = [];
+		$hosts_macros = [];
+		$hosts_inventory = [];
+		$templates_hostids = [];
 
-			// Save groups. Groups must be added before calling massAdd() for permission validation to work.
-			$groupsToAdd = [];
-			foreach ($host['groups'] as $group) {
-				$groupsToAdd[] = [
-					'hostid' => $hostid,
+		$hostids = DB::insert('hosts', $hosts);
+
+		foreach ($hosts as $index => &$host) {
+			$host['hostid'] = $hostids[$index];
+
+			foreach (zbx_toArray($host['groups']) as $group) {
+				$hosts_groups[] = [
+					'hostid' => $host['hostid'],
 					'groupid' => $group['groupid']
 				];
 			}
-			DB::insert('hosts_groups', $groupsToAdd);
 
-			$options = [
-				'hosts' => $host
-			];
-
-			if (isset($host['templates']) && !is_null($host['templates'])) {
-				$options['templates'] = $host['templates'];
+			if (array_key_exists('interfaces', $host)) {
+				foreach (zbx_toArray($host['interfaces']) as $interface) {
+					$hosts_interfaces[] = ['hostid' => $host['hostid']] + $interface;
+				}
 			}
 
-			if (isset($host['macros']) && !is_null($host['macros'])) {
-				$options['macros'] = $host['macros'];
+			if (array_key_exists('macros', $host)) {
+				foreach (zbx_toArray($host['macros']) as $macro) {
+					$hosts_macros[] = ['hostid' => $host['hostid']] + $macro;
+				}
 			}
 
-			if (isset($host['interfaces']) && !is_null($host['interfaces'])) {
-				$options['interfaces'] = $host['interfaces'];
+			if (array_key_exists('templates', $host)) {
+				foreach (zbx_toArray($host['templates']) as $template) {
+					$templates_hostids[$template['templateid']][] = $host['hostid'];
+				}
 			}
 
-			$result = API::Host()->massAdd($options);
-			if (!$result) {
-				self::exception();
-			}
-
+			$host_inventory = [];
 			if (array_key_exists('inventory', $host) && $host['inventory']) {
-				$hostInventory = $host['inventory'];
-				$hostInventory['inventory_mode'] = HOST_INVENTORY_MANUAL;
-			}
-			else {
-				$hostInventory = [];
+				$host_inventory = $host['inventory'];
+				$host_inventory['inventory_mode'] = HOST_INVENTORY_MANUAL;
 			}
 
 			if (array_key_exists('inventory_mode', $host) && $host['inventory_mode'] != HOST_INVENTORY_DISABLED) {
-				$hostInventory['inventory_mode'] = $host['inventory_mode'];
+				$host_inventory['inventory_mode'] = $host['inventory_mode'];
 			}
 
-			if (array_key_exists('inventory_mode', $hostInventory)
-					&& ($hostInventory['inventory_mode'] == HOST_INVENTORY_MANUAL
-						|| $hostInventory['inventory_mode'] == HOST_INVENTORY_AUTOMATIC)) {
-				$hostInventory['hostid'] = $hostid;
-				DB::insert('host_inventory', [$hostInventory], false);
+			if (array_key_exists('inventory_mode', $host_inventory)) {
+				$hosts_inventory[] = ['hostid' => $host['hostid']] + $host_inventory;
 			}
 		}
+		unset($host);
 
-		return ['hostids' => $hostids];
+		DB::insertBatch('hosts_groups', $hosts_groups);
+
+		if ($hosts_interfaces) {
+			API::HostInterface()->create($hosts_interfaces);
+		}
+
+		if ($hosts_macros) {
+			API::UserMacro()->create($hosts_macros);
+		}
+
+		while ($templates_hostids) {
+			$templateid = key($templates_hostids);
+			$link_hostids = reset($templates_hostids);
+			$link_templateids = [$templateid];
+			unset($templates_hostids[$templateid]);
+
+			foreach ($templates_hostids as $templateid => $hostids) {
+				if ($link_hostids === $hostids) {
+					$link_templateids[] = $templateid;
+					unset($templates_hostids[$templateid]);
+				}
+			}
+
+			$this->link($link_templateids, $link_hostids);
+		}
+
+		if ($hosts_inventory) {
+			DB::insert('host_inventory', $hosts_inventory, false);
+		}
+
+		$this->addAuditBulk(AUDIT_ACTION_ADD, AUDIT_RESOURCE_HOST, $hosts);
+
+		return ['hostids' => zbx_objectValues($hosts, 'hostid')];
 	}
 
 	/**
@@ -604,6 +632,11 @@ class CHost extends CHostGeneral {
 	 */
 	public function update($hosts) {
 		$hosts = zbx_toArray($hosts);
+
+		if (!$hosts) {
+			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+		}
+
 		$hostids = zbx_objectValues($hosts, 'hostid');
 
 		$db_hosts = $this->get([
@@ -640,7 +673,7 @@ class CHost extends CHostGeneral {
 		$macros = [];
 		foreach ($hosts as &$host) {
 			if (isset($host['macros'])) {
-				$macros[$host['hostid']] = $host['macros'];
+				$macros[$host['hostid']] = zbx_toArray($host['macros']);
 
 				unset($host['macros']);
 			}
@@ -750,7 +783,10 @@ class CHost extends CHostGeneral {
 		sort($hostids);
 
 		$db_hosts = $this->get([
-			'output' => ['hostid', 'host'],
+			'output' => ['hostid', 'proxy_hostid', 'host', 'status', 'ipmi_authtype', 'ipmi_privilege', 'ipmi_username',
+				'ipmi_password', 'name', 'description', 'tls_connect', 'tls_accept', 'tls_issuer', 'tls_subject',
+				'tls_psk_identity', 'tls_psk'
+			],
 			'hostids' => $hostids,
 			'editable' => true,
 			'preservekeys' => true
@@ -896,22 +932,14 @@ class CHost extends CHostGeneral {
 			$updateInventory['inventory_mode'] = $data['inventory_mode'];
 		}
 
-		if (isset($data['status'])) {
-			$updateStatus = $data['status'];
-		}
-
 		unset($data['hosts'], $data['groups'], $data['interfaces'], $data['templates_clear'], $data['templates'],
-			$data['macros'], $data['inventory'], $data['inventory_mode'], $data['status']);
+			$data['macros'], $data['inventory'], $data['inventory_mode']);
 
 		if (!zbx_empty($data)) {
 			DB::update('hosts', [
 				'values' => $data,
 				'where' => ['hostid' => $hostids]
 			]);
-		}
-
-		if (isset($updateStatus)) {
-			updateHostStatus($hostids, $updateStatus);
 		}
 
 		/*
@@ -1105,6 +1133,18 @@ class CHost extends CHostGeneral {
 			}
 		}
 
+		$new_hosts = [];
+		foreach ($db_hosts as $hostid => $db_host) {
+			$new_host = $data + $db_host;
+			if ($new_host['status'] != $db_host['status']) {
+				info(_s('Updated status of host "%1$s".', $new_host['host']));
+			}
+
+			$new_hosts[] = $new_host;
+		}
+
+		$this->addAuditBulk(AUDIT_ACTION_UPDATE, AUDIT_RESOURCE_HOST, $new_hosts, $db_hosts);
+
 		return ['hostids' => $inputHostIds];
 	}
 
@@ -1116,18 +1156,24 @@ class CHost extends CHostGeneral {
 	 * Additional supported $data parameters are:
 	 * - interfaces  - an array of interfaces to delete from the hosts
 	 *
+	 * @throws APIException if the input is invalid.
+	 *
 	 * @param array $data
 	 *
 	 * @return array
 	 */
 	public function massRemove(array $data) {
-		$hostids = zbx_toArray($data['hostids']);
+		if (!array_key_exists('hostids', $data) || $data['hostids'] === null) {
+			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+		}
 
-		$this->checkPermissions($hostids, _('No permissions to referred object or it does not exist!'));
+		$data['hostids'] = zbx_toArray($data['hostids']);
+
+		$this->checkPermissions($data['hostids'], _('No permissions to referred object or it does not exist!'));
 
 		if (isset($data['interfaces'])) {
 			$options = [
-				'hostids' => $hostids,
+				'hostids' => $data['hostids'],
 				'interfaces' => zbx_toArray($data['interfaces'])
 			];
 			API::HostInterface()->massRemove($options);
@@ -1154,7 +1200,7 @@ class CHost extends CHostGeneral {
 	 */
 	protected function validateDelete(array $hostIds, $nopermissions = false) {
 		if (!$hostIds) {
-			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+			self::exception(ZBX_API_ERROR_PARAMETERS, _('Incorrect arguments passed to function.'));
 		}
 
 		if (!$nopermissions) {
@@ -1304,7 +1350,7 @@ class CHost extends CHostGeneral {
 		}
 
 		DB::delete('opcommand_hst', [
-			'hostid' => $hostIds,
+			'hostid' => $hostIds
 		]);
 
 		// delete empty operations
@@ -1319,14 +1365,11 @@ class CHost extends CHostGeneral {
 		}
 
 		DB::delete('operations', [
-			'operationid' => $delOperationids,
+			'operationid' => $delOperationids
 		]);
 
-		$hosts = API::Host()->get([
-			'output' => [
-				'hostid',
-				'name'
-			],
+		$db_hosts = API::Host()->get([
+			'output' => ['hostid', 'host', 'name'],
 			'hostids' => $hostIds,
 			'nopermissions' => true
 		]);
@@ -1341,13 +1384,14 @@ class CHost extends CHostGeneral {
 		DB::delete('hosts', ['hostid' => $hostIds]);
 
 		// TODO: remove info from API
-		foreach ($hosts as $host) {
-			info(_s('Deleted: Host "%1$s".', $host['name']));
-			add_audit_ext(AUDIT_ACTION_DELETE, AUDIT_RESOURCE_HOST, $host['hostid'], $host['name'], 'hosts', NULL, NULL);
+		foreach ($db_hosts as $db_host) {
+			info(_s('Deleted: Host "%1$s".', $db_host['name']));
 		}
 
 		// remove Monitoring > Latest data toggle profile values related to given hosts
 		DB::delete('profiles', ['idx' => 'web.latest.toggle_other', 'idx2' => $hostIds]);
+
+		$this->addAuditBulk(AUDIT_ACTION_DELETE, AUDIT_RESOURCE_HOST, $db_hosts);
 
 		return ['hostids' => $hostIds];
 	}
@@ -1638,6 +1682,10 @@ class CHost extends CHostGeneral {
 	 * @throws APIException if the input is invalid.
 	 */
 	protected function validateCreate(array $hosts) {
+		if (!$hosts) {
+			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+		}
+
 		$host_name_parser = new CHostNameParser();
 
 		$host_db_fields = ['host' => null];
@@ -1676,7 +1724,19 @@ class CHost extends CHostGeneral {
 				);
 			}
 
-			$groupids = array_merge($groupids, zbx_objectValues($host['groups'], 'groupid'));
+			$host['groups'] = zbx_toArray($host['groups']);
+
+			foreach ($host['groups'] as $group) {
+				if (!is_array($group) || (is_array($group) && !array_key_exists('groupid', $group))) {
+					self::exception(ZBX_API_ERROR_PARAMETERS,
+						_s('Incorrect value for field "%1$s": %2$s.', 'groups',
+							_s('the parameter "%1$s" is missing', 'groupid')
+						)
+					);
+				}
+
+				$groupids[$group['groupid']] = true;
+			}
 		}
 		unset($host);
 
@@ -1696,14 +1756,14 @@ class CHost extends CHostGeneral {
 		}
 
 		// Validate permissions to host groups.
-		if ($groupids) {
-			$db_groups = API::HostGroup()->get([
+		$db_groups = $groupids
+			? API::HostGroup()->get([
 				'output' => ['groupid'],
-				'groupids' => $groupids,
+				'groupids' => array_keys($groupids),
 				'editable' => true,
 				'preservekeys' => true
-			]);
-		}
+			])
+			: [];
 
 		foreach ($hosts as $host) {
 			foreach ($host['groups'] as $group) {
@@ -1825,7 +1885,7 @@ class CHost extends CHostGeneral {
 	protected function validateUpdate(array $hosts, array $db_hosts) {
 		$host_db_fields = ['hostid' => null];
 
-		foreach ($hosts as $host) {
+		foreach ($hosts as &$host) {
 			// Validate mandatory fields.
 			if (!check_db_fields($host_db_fields, $host)) {
 				self::exception(ZBX_API_ERROR_PARAMETERS,
@@ -1846,14 +1906,29 @@ class CHost extends CHostGeneral {
 			}
 
 			// Validate "groups" field.
-			if (array_key_exists('groups', $host) && (!is_array($host['groups']) || !$host['groups'])) {
-				self::exception(ZBX_API_ERROR_PARAMETERS,
-					_s('Host "%1$s" cannot be without host group.', $db_hosts[$host['hostid']]['host'])
-				);
+			if (array_key_exists('groups', $host)) {
+				if (!is_array($host['groups']) || !$host['groups']) {
+					self::exception(ZBX_API_ERROR_PARAMETERS,
+						_s('Host "%1$s" cannot be without host group.', $db_hosts[$host['hostid']]['host'])
+					);
+				}
+
+				$host['groups'] = zbx_toArray($host['groups']);
+
+				foreach ($host['groups'] as $group) {
+					if (!is_array($group) || (is_array($group) && !array_key_exists('groupid', $group))) {
+						self::exception(ZBX_API_ERROR_PARAMETERS,
+							_s('Incorrect value for field "%1$s": %2$s.', 'groups',
+								_s('the parameter "%1$s" is missing', 'groupid')
+							)
+						);
+					}
+				}
 			}
 
 			// Permissions to host groups is validated in massUpdate().
 		}
+		unset($host);
 
 		$inventory_fields = zbx_objectValues(getHostInventories(), 'db_field');
 

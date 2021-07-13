@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -318,7 +318,7 @@ class CAlert extends CApiService {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$dbRes = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$dbRes = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($alert = DBfetch($dbRes)) {
 			if ($options['countOutput']) {
 				if ($options['groupCount']) {
@@ -401,6 +401,9 @@ class CAlert extends CApiService {
 
 		// adding hosts
 		if ($options['selectHosts'] !== null && $options['selectHosts'] !== API_OUTPUT_COUNT) {
+			$hosts = [];
+			$relationMap = new CRelationMap();
+
 			// trigger events
 			if ($options['eventobject'] == EVENT_OBJECT_TRIGGER) {
 				$query = DBselect(
@@ -427,15 +430,20 @@ class CAlert extends CApiService {
 				);
 			}
 
-			$relationMap = new CRelationMap();
 			while ($relation = DBfetch($query)) {
 				$relationMap->addRelation($relation['alertid'], $relation['hostid']);
 			}
-			$hosts = API::Host()->get([
-				'output' => $options['selectHosts'],
-				'hostids' => $relationMap->getRelatedIds(),
-				'preservekeys' => true
-			]);
+
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$hosts = API::Host()->get([
+					'output' => $options['selectHosts'],
+					'hostids' => $related_ids,
+					'preservekeys' => true
+				]);
+			}
+
 			$result = $relationMap->mapMany($result, $hosts, 'hosts');
 		}
 

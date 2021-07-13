@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -75,10 +75,13 @@ zbx_db_value_t;
 #	define ZBX_ROW_DL	";\n"
 #endif
 
-int	zbx_db_init(const char *dbname, const char *const db_schema, char **error);
+int	zbx_db_init(const char *dbname, const char *const dbschema, char **error);
 void	zbx_db_deinit(void);
 
 int	zbx_db_connect(char *host, char *user, char *password, char *dbname, char *dbschema, char *dbsocket, int port);
+
+void	zbx_db_init_autoincrement_options(void);
+
 void	zbx_db_close(void);
 
 int	zbx_db_begin(void);

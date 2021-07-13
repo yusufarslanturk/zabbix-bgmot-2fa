@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
 require_once dirname(__FILE__).'/../../include/items.inc.php';
+
+use Facebook\WebDriver\WebDriverBy;
 
 /**
  * @backup items
@@ -627,7 +629,7 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//textarea[@id='params_es']", 'rows', 7);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Executed script');
+			$this->zbxTestTextNotVisible('Executed script');
 			$this->zbxTestAssertNotVisibleId('params_es');
 		}
 
@@ -637,7 +639,7 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//textarea[@id='params_f']", 'rows', 7);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Formula');
+			$this->zbxTestTextNotVisible('Formula');
 			$this->zbxTestAssertNotVisibleId('params_f');
 		}
 
@@ -668,7 +670,7 @@ class testFormItem extends CLegacyWebTest {
 					}
 					break;
 				default:
-					$this->zbxTestTextNotVisibleOnPage(['Host interface', 'No interface found']);
+					$this->zbxTestTextNotVisible(['Host interface', 'No interface found']);
 					$this->zbxTestAssertNotVisibleId('interfaceid');
 					break;
 			}
@@ -681,7 +683,7 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='ipmi_sensor']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('IPMI sensor');
+			$this->zbxTestTextNotVisible('IPMI sensor');
 			$this->zbxTestAssertNotVisibleId('ipmi_sensor');
 		}
 
@@ -691,7 +693,7 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestDropdownHasOptions('authtype', ['Password', 'Public key']);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Authentication method');
+			$this->zbxTestTextNotVisible('Authentication method');
 			$this->zbxTestAssertNotVisibleId('authtype');
 		}
 
@@ -712,7 +714,7 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='password']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage(['User name', 'Password', 'Key passphrase']);
+			$this->zbxTestTextNotVisible(['User name', 'Password', 'Key passphrase']);
 			$this->zbxTestAssertNotVisibleId('username');
 			$this->zbxTestAssertNotVisibleId('password');
 		}
@@ -729,10 +731,10 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='privatekey']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Public key file');
+			$this->zbxTestTextNotVisible('Public key file');
 			$this->zbxTestAssertNotVisibleId('publickey');
 
-			$this->zbxTestTextNotVisibleOnPage('Private key file');
+			$this->zbxTestTextNotVisible('Private key file');
 			$this->zbxTestAssertNotVisibleId('publickey');
 		}
 
@@ -751,10 +753,10 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='port']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('SNMP OID');
+			$this->zbxTestTextNotVisible('SNMP OID');
 			$this->zbxTestAssertNotVisibleId('snmp_oid');
 
-			$this->zbxTestTextNotVisibleOnPage('Port');
+			$this->zbxTestTextNotVisible('Port');
 			$this->zbxTestAssertNotVisibleId('port');
 		}
 
@@ -768,7 +770,7 @@ class testFormItem extends CLegacyWebTest {
 			}
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('SNMP community');
+			$this->zbxTestTextNotVisible('SNMP community');
 			$this->zbxTestAssertNotVisibleId('snmp_community');
 		}
 
@@ -783,10 +785,10 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestDropdownHasOptions('snmpv3_securitylevel', ['noAuthNoPriv', 'authNoPriv', 'authPriv']);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Security name');
+			$this->zbxTestTextNotVisible('Security name');
 			$this->zbxTestAssertNotVisibleId('snmpv3_securityname');
 
-			$this->zbxTestTextNotVisibleOnPage('Security level');
+			$this->zbxTestTextNotVisible('Security level');
 			$this->zbxTestAssertNotVisibleId('snmpv3_securitylevel');
 		}
 
@@ -802,12 +804,12 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='snmpv3_authpassphrase']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Authentication protocol');
+			$this->zbxTestTextNotVisible('Authentication protocol');
 			$this->zbxTestAssertNotVisibleId('row_snmpv3_authprotocol');
 			$this->zbxTestAssertNotVisibleXpath("//label[text()='MD5']");
 			$this->zbxTestAssertNotVisibleXpath("//label[text()='SHA']");
 
-			$this->zbxTestTextNotVisibleOnPage('Authentication passphrase');
+			$this->zbxTestTextNotVisible('Authentication passphrase');
 			$this->zbxTestAssertNotVisibleId('snmpv3_authpassphrase');
 		}
 
@@ -823,12 +825,12 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='snmpv3_privpassphrase']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Privacy protocol');
+			$this->zbxTestTextNotVisible('Privacy protocol');
 			$this->zbxTestAssertNotVisibleId('row_snmpv3_privprotocol');
 			$this->zbxTestAssertNotVisibleXpath("//label[text()='DES']");
 			$this->zbxTestAssertNotVisibleXpath("//label[text()='AES']");
 
-			$this->zbxTestTextNotVisibleOnPage('Privacy passphrase');
+			$this->zbxTestTextNotVisible('Privacy passphrase');
 			$this->zbxTestAssertNotVisibleId('snmpv3_privpassphrase');
 		}
 
@@ -857,7 +859,7 @@ class testFormItem extends CLegacyWebTest {
 				}
 				break;
 			default:
-				$this->zbxTestTextNotVisibleOnPage('Update interval');
+				$this->zbxTestTextNotVisible('Update interval');
 				$this->zbxTestAssertNotVisibleId('delay');
 		}
 
@@ -903,7 +905,7 @@ class testFormItem extends CLegacyWebTest {
 			}
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Units');
+			$this->zbxTestTextNotVisible('Units');
 			$this->zbxTestAssertNotVisibleId('units');
 		}
 
@@ -938,10 +940,10 @@ class testFormItem extends CLegacyWebTest {
 				$this->zbxTestAssertVisibleId('interval_add');
 				break;
 			default:
-				$this->zbxTestTextNotVisibleOnPage(['Custom intervals', 'Interval', 'Period']);
+				$this->zbxTestTextNotVisible(['Custom intervals', 'Interval', 'Period']);
 				$this->zbxTestAssertNotVisibleId('delayFlexTable');
 
-				$this->zbxTestTextNotVisibleOnPage(['Flexible', 'Scheduling']);
+				$this->zbxTestTextNotVisible(['Flexible', 'Scheduling']);
 				$this->zbxTestAssertNotVisibleId('delay_flex_0_delay');
 				$this->zbxTestAssertNotVisibleId('delay_flex_0_period');
 				$this->zbxTestAssertNotVisibleId('interval_add');
@@ -965,7 +967,7 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='trends']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Trend storage period');
+			$this->zbxTestTextNotVisible('Trend storage period');
 			$this->zbxTestAssertNotVisibleId('trends');
 		}
 
@@ -990,7 +992,7 @@ class testFormItem extends CLegacyWebTest {
 			}
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage(['Show value', 'show value mappings']);
+			$this->zbxTestTextNotVisible(['Show value', 'show value mappings']);
 			$this->zbxTestAssertNotVisibleId('valuemapid');
 		}
 
@@ -1001,7 +1003,7 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='trapper_hosts']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Allowed hosts');
+			$this->zbxTestTextNotVisible('Allowed hosts');
 			$this->zbxTestAssertNotVisibleId('trapper_hosts');
 		}
 
@@ -1012,7 +1014,7 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='logtimefmt']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Log time format');
+			$this->zbxTestTextNotVisible('Log time format');
 			$this->zbxTestAssertNotVisibleId('logtimefmt');
 		}
 
@@ -2401,7 +2403,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item empty multiplier',
 					'key' => 'item-empty-multiplier',
 					'preprocessing' => [
-						['type' => 'Custom multiplier', 'params' => ''],
+						['type' => 'Custom multiplier', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2412,7 +2414,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item string multiplier',
 					'key' => 'item-string-multiplier',
 					'preprocessing' => [
-						['type' => 'Custom multiplier', 'params' => 'abc'],
+						['type' => 'Custom multiplier', 'params' => 'abc']
 					],
 					'error' => 'Incorrect value for field "params": a numeric value is expected.'
 				]
@@ -2423,7 +2425,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item multiplier symbol',
 					'key' => 'item-symbol-multiplier',
 					'preprocessing' => [
-						['type' => 'Custom multiplier', 'params' => '0,0'],
+						['type' => 'Custom multiplier', 'params' => '0,0']
 					],
 					'error' => 'Incorrect value for field "params": a numeric value is expected.'
 				]
@@ -2434,7 +2436,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item multiplier symbol',
 					'key' => 'item-symbol-multiplier',
 					'preprocessing' => [
-						['type' => 'Custom multiplier', 'params' => '1a!@#$%^&*()-='],
+						['type' => 'Custom multiplier', 'params' => '1a!@#$%^&*()-=']
 					],
 					'error' => 'Incorrect value for field "params": a numeric value is expected.'
 				]
@@ -2446,7 +2448,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item right trim',
 					'key' => 'item-empty-right-trim',
 					'preprocessing' => [
-						['type' => 'Right trim', 'params' => ''],
+						['type' => 'Right trim', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2457,7 +2459,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item left trim',
 					'key' => 'item-empty-left-trim',
 					'preprocessing' => [
-						['type' => 'Left trim', 'params' => ''],
+						['type' => 'Left trim', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2468,7 +2470,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item trim',
 					'key' => 'item-empty-trim',
 					'preprocessing' => [
-						['type' => 'Trim', 'params' => ''],
+						['type' => 'Trim', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2480,7 +2482,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item XML XPath',
 					'key' => 'item-empty-xpath',
 					'preprocessing' => [
-						['type' => 'XML XPath', 'params' => ''],
+						['type' => 'XML XPath', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2491,7 +2493,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item JSON Path',
 					'key' => 'item-empty-jsonpath',
 					'preprocessing' => [
-						['type' => 'JSON Path', 'params' => ''],
+						['type' => 'JSON Path', 'params' => '']
 					],
 					'error' => 'Incorrect value for field "params": cannot be empty.'
 				]
@@ -2503,7 +2505,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item empty regular expression',
 					'key' => 'item-empty-first-parameter',
 					'preprocessing' => [
-						['type' => 'Regular expression', 'params' => '', 'output' => ''],
+						['type' => 'Regular expression', 'params' => '', 'output' => '']
 					],
 					'error' => 'Incorrect value for field "params": first parameter is expected.'
 				]
@@ -2514,7 +2516,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item empty regular expression',
 					'key' => 'item-empty-first-parameter',
 					'preprocessing' => [
-						['type' => 'Regular expression', 'params' => '', 'output' => 'test output'],
+						['type' => 'Regular expression', 'params' => '', 'output' => 'test output']
 					],
 					'error' => 'Incorrect value for field "params": first parameter is expected.'
 				]
@@ -2525,7 +2527,7 @@ class testFormItem extends CLegacyWebTest {
 					'name' => 'Item empty regular expression',
 					'key' => 'item-empty-second-parameter',
 					'preprocessing' => [
-						['type' => 'Regular expression', 'params' => 'expression', 'output' => ''],
+						['type' => 'Regular expression', 'params' => 'expression', 'output' => '']
 					],
 					'error' => 'Incorrect value for field "params": second parameter is expected.'
 				]

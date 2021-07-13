@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -165,11 +165,6 @@ class CScreenHostTriggers extends CScreenBase {
 	protected function getProblemsListTable($filter, $back_url) {
 		$config = select_config();
 
-		// If no hostids and groupids defined show recent problems.
-		if ($filter['hostids'] === null && $filter['groupids'] === null) {
-			$filter['show'] = TRIGGERS_OPTION_RECENT_PROBLEM;
-		}
-
 		$filter = $filter + [
 			'show' => TRIGGERS_OPTION_IN_PROBLEM,
 			'show_timeline' => 0,
@@ -179,7 +174,7 @@ class CScreenHostTriggers extends CScreenBase {
 			'sort_order' => ZBX_SORT_DOWN
 		];
 
-		$data = CScreenProblem::getData($filter, $config, true, true);
+		$data = CScreenProblem::getData($filter, $config);
 
 		$header = [
 			'hostname' => _('Host'),
@@ -207,7 +202,7 @@ class CScreenHostTriggers extends CScreenBase {
 			min($config['search_limit'], count($data['problems']))
 		);
 		$data['problems'] = array_slice($data['problems'], 0, $filter['limit'], true);
-		$data = CScreenProblem::makeData($data, $filter, true, true);
+		$data = CScreenProblem::makeData($data, $filter);
 
 		$hostids = [];
 		foreach ($data['triggers'] as $trigger) {
@@ -263,9 +258,9 @@ class CScreenHostTriggers extends CScreenBase {
 				$host_name,
 				(new CCol([
 					(new CLinkAction($problem['name']))
-						->setHint(make_popup_eventlist(['comments' => $problem['comments']] + $trigger,
-							$problem['eventid'], $back_url
-						))
+						->setAjaxHint(
+							CHintBoxHelper::getEventList($trigger['triggerid'], $problem['eventid'], $back_url)
+						)
 				]))->addClass(getSeverityStyle($problem['severity'])),
 				$clock,
 				zbx_date2age($problem['clock']),

@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -57,19 +57,26 @@ static int			cached_values;
  *             fields  - [IN]  the definition of data to be packed            *
  *             count   - [IN]  field count                                    *
  *                                                                            *
- * Return value: size of packed data                                          *
+ * Return value: size of packed data or 0 if the message size would exceed    *
+ *               4GB limit                                                    *
  *                                                                            *
  ******************************************************************************/
 static zbx_uint32_t	message_pack_data(zbx_ipc_message_t *message, zbx_packed_field_t *fields, int count)
 {
-	int 		i;
-	zbx_uint32_t	field_size, data_size = 0;
-	unsigned char	*offset = NULL;
+	int 			i;
+	zbx_uint32_t		data_size = 0;
+	zbx_uint64_t		field_size;
+	unsigned char		*offset = NULL;
+	const zbx_uint64_t	max_uint32 = ~(zbx_uint32_t)0;
 
 	if (NULL != message)
 	{
 		/* recursive call to calculate required buffer size */
 		data_size = message_pack_data(NULL, fields, count);
+
+		if (0 == data_size || max_uint32 - message->size < data_size)
+			return 0;
+
 		message->size += data_size;
 		message->data = (unsigned char *)zbx_realloc(message->data, message->size);
 		offset = message->data + (message->size - data_size);
@@ -99,11 +106,15 @@ static zbx_uint32_t	message_pack_data(zbx_ipc_message_t *message, zbx_packed_fie
 			if (PACKED_FIELD_STRING == fields[i].type)
 			{
 				field_size = (NULL != fields[i].value) ? strlen((const char *)fields[i].value) + 1 : 0;
-				fields[i].size = field_size;
+				fields[i].size = (zbx_uint32_t)field_size;
+
 				field_size += sizeof(zbx_uint32_t);
 			}
 
-			data_size += field_size;
+			if (field_size + data_size > max_uint32)
+				return 0;
+
+			data_size += (zbx_uint32_t)field_size;
 		}
 	}
 
@@ -128,7 +139,7 @@ static zbx_uint32_t	preprocessor_pack_value(zbx_ipc_message_t *message, zbx_prep
 	unsigned char		ts_marker, result_marker, log_marker;
 
 	ts_marker = (NULL != value->ts);
-	result_marker = (NULL != value->result);
+	result_marker = (NULL != value->result_ptr->result);
 
 	*offset++ = PACKED_FIELD(&value->itemid, sizeof(zbx_uint64_t));
 	*offset++ = PACKED_FIELD(&value->item_value_type, sizeof(unsigned char));
@@ -145,26 +156,26 @@ static zbx_uint32_t	preprocessor_pack_value(zbx_ipc_message_t *message, zbx_prep
 
 	*offset++ = PACKED_FIELD(&result_marker, sizeof(unsigned char));
 
-	if (NULL != value->result)
+	if (NULL != value->result_ptr->result)
 	{
-		*offset++ = PACKED_FIELD(&value->result->lastlogsize, sizeof(zbx_uint64_t));
-		*offset++ = PACKED_FIELD(&value->result->ui64, sizeof(zbx_uint64_t));
-		*offset++ = PACKED_FIELD(&value->result->dbl, sizeof(double));
-		*offset++ = PACKED_FIELD(value->result->str, 0);
-		*offset++ = PACKED_FIELD(value->result->text, 0);
-		*offset++ = PACKED_FIELD(value->result->msg, 0);
-		*offset++ = PACKED_FIELD(&value->result->type, sizeof(int));
-		*offset++ = PACKED_FIELD(&value->result->mtime, sizeof(int));
+		*offset++ = PACKED_FIELD(&value->result_ptr->result->lastlogsize, sizeof(zbx_uint64_t));
+		*offset++ = PACKED_FIELD(&value->result_ptr->result->ui64, sizeof(zbx_uint64_t));
+		*offset++ = PACKED_FIELD(&value->result_ptr->result->dbl, sizeof(double));
+		*offset++ = PACKED_FIELD(value->result_ptr->result->str, 0);
+		*offset++ = PACKED_FIELD(value->result_ptr->result->text, 0);
+		*offset++ = PACKED_FIELD(value->result_ptr->result->msg, 0);
+		*offset++ = PACKED_FIELD(&value->result_ptr->result->type, sizeof(int));
+		*offset++ = PACKED_FIELD(&value->result_ptr->result->mtime, sizeof(int));
 
-		log_marker = (NULL != value->result->log);
+		log_marker = (NULL != value->result_ptr->result->log);
 		*offset++ = PACKED_FIELD(&log_marker, sizeof(unsigned char));
-		if (NULL != value->result->log)
+		if (NULL != value->result_ptr->result->log)
 		{
-			*offset++ = PACKED_FIELD(value->result->log->value, 0);
-			*offset++ = PACKED_FIELD(value->result->log->source, 0);
-			*offset++ = PACKED_FIELD(&value->result->log->timestamp, sizeof(int));
-			*offset++ = PACKED_FIELD(&value->result->log->severity, sizeof(int));
-			*offset++ = PACKED_FIELD(&value->result->log->logeventid, sizeof(int));
+			*offset++ = PACKED_FIELD(value->result_ptr->result->log->value, 0);
+			*offset++ = PACKED_FIELD(value->result_ptr->result->log->source, 0);
+			*offset++ = PACKED_FIELD(&value->result_ptr->result->log->timestamp, sizeof(int));
+			*offset++ = PACKED_FIELD(&value->result_ptr->result->log->severity, sizeof(int));
+			*offset++ = PACKED_FIELD(&value->result_ptr->result->log->logeventid, sizeof(int));
 		}
 	}
 
@@ -419,7 +430,9 @@ zbx_uint32_t	zbx_preprocessor_unpack_value(zbx_preproc_item_value_t *value, unsi
 		agent_result->log = log;
 	}
 
-	value->result = agent_result;
+	value->result_ptr = (zbx_result_ptr_t *)zbx_malloc(NULL, sizeof(zbx_result_ptr_t));
+	value->result_ptr->result = agent_result;
+	value->result_ptr->refcount = 1;
 
 	return offset - data;
 }
@@ -654,6 +667,8 @@ void	zbx_preprocess_item_value(zbx_uint64_t itemid, unsigned char item_value_typ
 {
 	const char			*__function_name = "zbx_preprocess_item_value";
 	zbx_preproc_item_value_t	value;
+	zbx_result_ptr_t		result_ptr;
+	size_t				value_len = 0, len;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __function_name);
 
@@ -664,15 +679,47 @@ void	zbx_preprocess_item_value(zbx_uint64_t itemid, unsigned char item_value_typ
 
 		goto out;
 	}
+
+	if (ITEM_STATE_NORMAL == state)
+	{
+		if (0 != ISSET_STR(result))
+			value_len = strlen(result->str);
+
+		if (0 != ISSET_TEXT(result))
+		{
+			if (value_len < (len = strlen(result->text)))
+				value_len = len;
+		}
+
+		if (0 != ISSET_LOG(result))
+		{
+			if (value_len < (len = strlen(result->log->value)))
+				value_len = len;
+		}
+
+		if (ZBX_MAX_RECV_DATA_SIZE < value_len)
+		{
+			result = NULL;
+			state = ITEM_STATE_NOTSUPPORTED;
+			error = "Value is too large.";
+		}
+	}
+
 	value.itemid = itemid;
 	value.item_value_type = item_value_type;
-	value.result = result;
+	result_ptr.result = result;
+	value.result_ptr = &result_ptr;
 	value.error = error;
 	value.item_flags = item_flags;
 	value.state = state;
 	value.ts = ts;
 
-	preprocessor_pack_value(&cached_message, &value);
+	if (0 == preprocessor_pack_value(&cached_message, &value))
+	{
+		zbx_preprocessor_flush();
+		preprocessor_pack_value(&cached_message, &value);
+	}
+
 	cached_values++;
 
 	if (MAX_VALUES_LOCAL < cached_values)

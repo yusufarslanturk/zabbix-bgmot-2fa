@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,7 +19,9 @@
 **/
 
 
-class CalculateItServiceStatusByTriggerTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class CalculateItServiceStatusByTriggerTest extends TestCase {
 
 	public function provider() {
 		return [
@@ -27,7 +29,7 @@ class CalculateItServiceStatusByTriggerTest extends PHPUnit_Framework_TestCase {
 			[TRIGGER_STATUS_DISABLED, TRIGGER_VALUE_TRUE, TRIGGER_SEVERITY_DISASTER, SERVICE_STATUS_OK],
 
 			[TRIGGER_STATUS_ENABLED, TRIGGER_VALUE_TRUE, TRIGGER_SEVERITY_DISASTER, TRIGGER_SEVERITY_DISASTER],
-			[TRIGGER_STATUS_ENABLED, TRIGGER_VALUE_TRUE, TRIGGER_SEVERITY_AVERAGE, TRIGGER_SEVERITY_AVERAGE],
+			[TRIGGER_STATUS_ENABLED, TRIGGER_VALUE_TRUE, TRIGGER_SEVERITY_AVERAGE, TRIGGER_SEVERITY_AVERAGE]
 		];
 	}
 

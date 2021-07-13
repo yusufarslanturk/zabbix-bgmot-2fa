@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -201,7 +201,7 @@ class CApplication extends CApiService {
 		// output
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$res = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$res = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($application = DBfetch($res)) {
 			if ($options['countOutput']) {
 				if ($options['groupCount']) {
@@ -652,18 +652,25 @@ class CApplication extends CApiService {
 
 		// adding items
 		if ($options['selectItems'] !== null && $options['selectItems'] != API_OUTPUT_COUNT) {
+			$items = [];
 			$relationMap = $this->createRelationMap($result, 'applicationid', 'itemid', 'items_applications');
-			$items = API::Item()->get([
-				'output' => $options['selectItems'],
-				'itemids' => $relationMap->getRelatedIds(),
-				'nopermissions' => true,
-				'preservekeys' => true
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$items = API::Item()->get([
+					'output' => $options['selectItems'],
+					'itemids' => $related_ids,
+					'nopermissions' => true,
+					'preservekeys' => true
+				]);
+			}
+
 			$result = $relationMap->mapMany($result, $items, 'items');
 		}
 
 		// adding discovery rule
 		if ($options['selectDiscoveryRule'] !== null && $options['selectDiscoveryRule'] != API_OUTPUT_COUNT) {
+			$discoveryRules = [];
 			$relationMap = new CRelationMap();
 
 			$dbRules = DBselect(
@@ -679,12 +686,16 @@ class CApplication extends CApiService {
 				$relationMap->addRelation($rule['applicationid'], $rule['itemid']);
 			}
 
-			$discoveryRules = API::DiscoveryRule()->get([
-				'output' => $options['selectDiscoveryRule'],
-				'itemids' => $relationMap->getRelatedIds(),
-				'nopermissions' => true,
-				'preservekeys' => true
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$discoveryRules = API::DiscoveryRule()->get([
+					'output' => $options['selectDiscoveryRule'],
+					'itemids' => $related_ids,
+					'nopermissions' => true,
+					'preservekeys' => true
+				]);
+			}
 
 			$result = $relationMap->mapOne($result, $discoveryRules, 'discoveryRule');
 		}

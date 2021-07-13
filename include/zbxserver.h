@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@
 int	get_N_functionid(const char *expression, int N_functionid, zbx_uint64_t *functionid, const char **end);
 void	get_functionids(zbx_vector_uint64_t *functionids, const char *expression);
 
-int	evaluate_function(char *value, DC_ITEM *item, const char *function, const char *parameters,
+int	evaluate_function(char *value, DC_ITEM *item, const char *function, const char *parameter,
 		const zbx_timespec_t *ts, char **error);
 
 int	substitute_simple_macros(zbx_uint64_t *actionid, const DB_EVENT *event, const DB_EVENT *r_event,
@@ -79,7 +79,7 @@ void	zbx_determine_items_in_expressions(zbx_vector_ptr_t *trigger_order, const z
 int	substitute_lld_macros(char **data, const struct zbx_json_parse *jp_row, int flags, char *error,
 		size_t max_error_len);
 int	substitute_key_macros(char **data, zbx_uint64_t *hostid, DC_ITEM *dc_item, const struct zbx_json_parse *jp_row,
-		int macro_type, char *error, size_t mexerrlen);
+		int macro_type, char *error, size_t maxerrlen);
 int	substitute_function_lld_param(const char *e, size_t len, unsigned char key_in_param,
 		char **exp, size_t *exp_alloc, size_t *exp_offset, const struct zbx_json_parse *jp_row,
 		char *error, size_t max_error_len);

@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ zbx_expression_t;
 
 /* regular expressions */
 int	zbx_regexp_compile(const char *pattern, zbx_regexp_t **regexp, const char **err_msg_static);
-int	zbx_regexp_compile_ext(const char *pattern, zbx_regexp_t **regexp, int flags, const char **error);
+int	zbx_regexp_compile_ext(const char *pattern, zbx_regexp_t **regexp, int flags, const char **err_msg_static);
 void	zbx_regexp_free(zbx_regexp_t *regexp);
 int	zbx_regexp_match_precompiled(const char *string, const zbx_regexp_t *regexp);
 char	*zbx_regexp_match(const char *string, const char *pattern, int *len);

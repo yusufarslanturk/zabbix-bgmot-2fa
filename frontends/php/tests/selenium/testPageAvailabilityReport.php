@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
 
+use Facebook\WebDriver\WebDriverBy;
+
 /**
  * @backup events
  */
@@ -31,13 +33,13 @@ class testPageAvailabilityReport extends CLegacyWebTest {
 	 * @var array
 	 */
 	public static $SLA_events = [
-		[16027, '01.01.2016 00:00:00', '+1 second'],
-		[16027, '01.01.2017 22:59:00', '+1 hour 59 second'],
-		[16027, '02.01.2017 22:50:00', '+1 hour 11 minutes'],
-		[16028, '01.01.2017 22:59:10', '+1 hour 5 minutes 59 second'],
-		[16028, '10.10.2017 00:00:00', '+1 second'],
-		[16028, '31.12.2017 22:00:00', '+1 hour'],
-		[16029, '31.12.2017 23:00:00', '+1 hour']
+		[100041, '01.01.2016 00:00:00', '+1 second'],
+		[100041, '01.01.2017 22:59:00', '+1 hour 59 second'],
+		[100041, '02.01.2017 22:50:00', '+1 hour 11 minutes'],
+		[100042, '01.01.2017 22:59:10', '+1 hour 5 minutes 59 second'],
+		[100042, '10.10.2017 00:00:00', '+1 second'],
+		[100042, '31.12.2017 22:00:00', '+1 hour'],
+		[100043, '31.12.2017 23:00:00', '+1 hour']
 	];
 
 	/**
@@ -79,7 +81,7 @@ class testPageAvailabilityReport extends CLegacyWebTest {
 				['A trigger', '', '100.0000%'],
 				['B trigger', '25.0000%', '75.0000%'],
 				['C trigger', '50.0000%', '50.0000%']
-			]],
+			]]
 		];
 	}
 

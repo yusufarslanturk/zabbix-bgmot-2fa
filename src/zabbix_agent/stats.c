@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -36,6 +36,10 @@ extern int get_cpu_num_win32(void);
 #else
 #	include "daemon.h"
 #	include "ipc.h"
+#endif
+
+#if defined(HAVE_KSTAT_H) && defined(HAVE_VMINFO_T_UPDATES)
+#	include "zbxkstat.h"
 #endif
 
 ZBX_COLLECTOR_DATA	*collector = NULL;
@@ -192,6 +196,12 @@ int	init_collector_data(char **error)
 #ifdef _AIX
 	memset(&collector->vmstat, 0, sizeof(collector->vmstat));
 #endif
+
+#if defined(HAVE_KSTAT_H) && defined(HAVE_VMINFO_T_UPDATES)
+	if (SUCCEED != zbx_kstat_init(&collector->kstat, error))
+		goto out;
+#endif
+
 	ret = SUCCEED;
 #ifndef _WINDOWS
 out:
@@ -238,6 +248,11 @@ void	free_collector_data(void)
 
 	zbx_mutex_destroy(&diskstats_lock);
 #endif
+
+#if defined(HAVE_KSTAT_H) && defined(HAVE_VMINFO_T_UPDATES)
+	zbx_kstat_destroy();
+#endif
+
 	collector = NULL;
 }
 
@@ -445,6 +460,10 @@ ZBX_THREAD_ENTRY(collector_thread, args)
 #ifdef _AIX
 		if (1 == collector->vmstat.enabled)
 			collect_vmstat_data(&collector->vmstat);
+#endif
+
+#if defined(HAVE_KSTAT_H) && defined(HAVE_VMINFO_T_UPDATES)
+		zbx_kstat_collect(&collector->kstat);
 #endif
 		zbx_setproctitle("collector [idle 1 sec]");
 		zbx_sleep(1);

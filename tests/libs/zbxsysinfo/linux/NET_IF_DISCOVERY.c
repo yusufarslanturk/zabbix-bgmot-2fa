@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -59,8 +59,6 @@ void	zbx_mock_test_entry(void **state)
 
 	init_request(&request);
 	init_result(&result);
-
-	init_request(&request);
 
 	if (SUCCEED != parse_item_key("net.if.discovery", &request))
 		fail_msg("Unexpected return code from parse_item_key()");

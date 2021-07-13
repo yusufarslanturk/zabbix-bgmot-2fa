@@ -1,7 +1,7 @@
 ﻿<?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,12 +19,14 @@
 **/
 
 
-class CRangesParserTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class CRangesParserTest extends TestCase {
 
 	/**
 	 * An array of time periods and parsed results.
 	 */
-	public static function testProvider() {
+	public static function dataProvider() {
 		return [
 			// success
 			[
@@ -341,7 +343,7 @@ class CRangesParserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testProvider
+	 * @dataProvider dataProvider
 	 *
 	 * @param string $source
 	 * @param int    $pos
@@ -354,7 +356,7 @@ class CRangesParserTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($expected, [
 			'rc' => $parser->parse($source, $pos),
 			'match' => $parser->getMatch(),
-			'ranges' => $parser->getRanges(),
+			'ranges' => $parser->getRanges()
 		]);
 		$this->assertSame(strlen($expected['match']), $parser->getLength());
 	}

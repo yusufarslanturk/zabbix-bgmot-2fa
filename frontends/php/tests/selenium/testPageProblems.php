@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@
 **/
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
+
+use Facebook\WebDriver\WebDriverBy;
 
 /**
  * @backup profiles
@@ -212,10 +214,10 @@ class testPageProblems extends CLegacyWebTest {
 		// Check Tags column in result
 		$this->zbxTestAssertVisibleXpath('//thead/tr/th[text()="Tags"]');
 		$this->zbxTestAssertElementText('//tbody/tr/td[14]/span[1]', 'service: abcdef');
-		$this->zbxTestTextNotVisibleOnPage('Database');
-		$this->zbxTestTextNotVisibleOnPage('Service: abc');
-		$this->zbxTestTextNotVisibleOnPage('Tag4');
-		$this->zbxTestTextNotVisibleOnPage('Tag5: 5');
+		$this->zbxTestTextNotVisible('Database');
+		$this->zbxTestTextNotVisible('Service: abc');
+		$this->zbxTestTextNotVisible('Tag4');
+		$this->zbxTestTextNotVisible('Tag5: 5');
 
 		// Check Show tags 2
 		$this->zbxTestClickXpath('//label[@for="filter_show_tags_2"]');
@@ -223,9 +225,9 @@ class testPageProblems extends CLegacyWebTest {
 		// Check tags in result
 		$this->zbxTestAssertElementText('//tbody/tr/td[14]/span[1]', 'service: abcdef');
 		$this->zbxTestAssertElementText('//tbody/tr/td[14]/span[2]', 'Database');
-		$this->zbxTestTextNotVisibleOnPage('Service: abc');
-		$this->zbxTestTextNotVisibleOnPage('Tag4');
-		$this->zbxTestTextNotVisibleOnPage('Tag5: 5');
+		$this->zbxTestTextNotVisible('Service: abc');
+		$this->zbxTestTextNotVisible('Tag4');
+		$this->zbxTestTextNotVisible('Tag5: 5');
 		// Check Show More tags hint button
 		$this->zbxTestAssertVisibleXpath('//tr/td[14]/span/button[@class="icon-wzrd-action"]');
 
@@ -236,8 +238,8 @@ class testPageProblems extends CLegacyWebTest {
 		$this->zbxTestAssertElementText('//tbody/tr/td[14]/span[1]', 'service: abcdef');
 		$this->zbxTestAssertElementText('//tbody/tr/td[14]/span[2]', 'Database');
 		$this->zbxTestAssertElementText('//tbody/tr/td[14]/span[3]', 'Service: abc');
-		$this->zbxTestTextNotVisibleOnPage('Tag4');
-		$this->zbxTestTextNotVisibleOnPage('Tag5: 5');
+		$this->zbxTestTextNotVisible('Tag4');
+		$this->zbxTestTextNotVisible('Tag5: 5');
 		// Check Show More tags hint button
 		$this->zbxTestAssertVisibleXpath('//tr/td[14]/span/button[@class="icon-wzrd-action"]');
 	}
@@ -405,6 +407,6 @@ class testPageProblems extends CLegacyWebTest {
 
 		// Click on suppression icon and check text in hintbox.
 		$this->zbxTestClickXpathWait('//tbody/tr/td[8]/div/span[contains(@class, "icon-invisible")]');
-		$this->zbxTestAssertElementText('//div[@data-hintboxid]', 'Suppressed till: 2021-05-18 12:17 Maintenance: Maintenance for suppression test');
+		$this->zbxTestAssertElementText('//div[@data-hintboxid]', 'Suppressed till: 12:17 Maintenance: Maintenance for suppression test');
 	}
 }

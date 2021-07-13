@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -293,7 +293,7 @@ class CGraphPrototype extends CGraphGeneral {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$dbRes = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$dbRes = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($graph = DBfetch($dbRes)) {
 			if ($options['countOutput']) {
 				if ($options['groupCount']) {
@@ -394,7 +394,8 @@ class CGraphPrototype extends CGraphGeneral {
 				'output' => API_OUTPUT_EXTEND,
 				'selectGraphItems' => API_OUTPUT_EXTEND,
 				'preservekeys' => true,
-				'hostids' => $chdHost['hostid']
+				'hostids' => $chdHost['hostid'],
+				'nopermissions' => true
 			]);
 
 			if ($chdGraph = reset($chdGraphs)) {

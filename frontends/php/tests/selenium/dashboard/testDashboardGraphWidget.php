@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ require_once dirname(__FILE__).'/../traits/FilterTrait.php';
  * @on-before disableDebugMode
  * @on-after enableDebugMode
  */
-class testGraphWidget extends CWebTest {
+class testDashboardGraphWidget extends CWebTest {
 
 	use FilterTrait;
 
@@ -40,7 +40,8 @@ class testGraphWidget extends CWebTest {
 			' w.width, w.height'.
 			' FROM widget_field wf'.
 			' INNER JOIN widget w'.
-			' ON w.widgetid=wf.widgetid ORDER BY wf.widgetid, wf.name, wf.value_int';
+			' ON w.widgetid=wf.widgetid ORDER BY wf.widgetid, wf.name, wf.value_int, wf.value_str, wf.value_groupid,'.
+			' wf.value_itemid, wf.value_graphid';
 
 	/**
 	 * Open dashboard and add/edit graph widget.
@@ -86,7 +87,7 @@ class testGraphWidget extends CWebTest {
 	 * Check screenshots of graph widget form.
 	 * @browsers chrome
 	 */
-	public function testGraphWidget_FormLayout() {
+	public function testDashboardGraphWidget_FormLayout() {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
 		$dashboard = CDashboardElement::find()->one()->edit();
 		$overlay = $dashboard->addWidget();
@@ -106,6 +107,7 @@ class testGraphWidget extends CWebTest {
 			}
 
 			$this->page->removeFocus();
+			sleep(1);
 			// Collect all screenshot errors.
 			try {
 				$this->assertScreenshotExcept($overlay, [$element], 'tab_'.$tab);
@@ -463,7 +465,7 @@ class testGraphWidget extends CWebTest {
 	 * @dataProvider getDatasetValidationCreateData
 	 * @dataProvider getDatasetValidationUpdateData
 	 */
-	public function testGraphWidget_DatasetValidation($data) {
+	public function testDashboardGraphWidget_DatasetValidation($data) {
 		$this->validate($data, 'Data set');
 	}
 
@@ -487,7 +489,7 @@ class testGraphWidget extends CWebTest {
 				[
 					'Time period' => [
 						'Set custom time period' => true,
-						'From' => '2019-07-31 15:53:07',
+						'From' => '2021-07-04 15:53:07',
 						'To' => ''
 					],
 					'error' => 'Invalid parameter "To": cannot be empty.'
@@ -498,7 +500,7 @@ class testGraphWidget extends CWebTest {
 					'Time period' => [
 						'Set custom time period' => true,
 						'From' => '',
-						'To' => '2019-07-31 15:53:07'
+						'To' => '2021-07-04 15:53:07'
 					],
 					'error' => [
 						'Invalid parameter "From": cannot be empty.',
@@ -512,7 +514,7 @@ class testGraphWidget extends CWebTest {
 					'Time period' => [
 						'Set custom time period' => true,
 						'From' => '1',
-						'To' => '2019-07-31 15:53:07'
+						'To' => '2021-07-04 15:53:07'
 					],
 					'error' => [
 						'Invalid parameter "From": a time range is expected.',
@@ -524,7 +526,7 @@ class testGraphWidget extends CWebTest {
 				[
 					'Time period' => [
 						'Set custom time period' => true,
-						'From' => '2019-07-31 15:53:07',
+						'From' => '2021-07-04 15:53:07',
 						'To' => 'abc'
 					],
 					'error' => 'Invalid parameter "To": a time range is expected.'
@@ -534,8 +536,8 @@ class testGraphWidget extends CWebTest {
 				[
 					'Time period' => [
 						'Set custom time period' => true,
-						'From' => '5:53:06 2019-07-31',
-						'To' => '2019-07-31 15:53:07'
+						'From' => '5:53:06 2021-07-31',
+						'To' => '2021-07-04 15:53:07'
 					],
 					'error' => [
 						'Invalid parameter "From": a time range is expected.',
@@ -547,8 +549,8 @@ class testGraphWidget extends CWebTest {
 				[
 					'Time period' => [
 						'Set custom time period' => true,
-						'From' => '2019-02-30 00:00:00',
-						'To' => '2019-07-31 15:53:07'
+						'From' => '2021-02-30 00:00:00',
+						'To' => '2021-07-04 15:53:07'
 					],
 					'error' => [
 						'Invalid parameter "From": a time range is expected.',
@@ -560,8 +562,8 @@ class testGraphWidget extends CWebTest {
 				[
 					'Time period' => [
 						'Set custom time period' => true,
-						'From' => '2019-05-02 00:00:00',
-						'To' => '2019-25-09 00:00:00'
+						'From' => '2021-05-02 00:00:00',
+						'To' => '2021-25-09 00:00:00'
 					],
 					'error' => 'Invalid parameter "To": a time range is expected.'
 				]
@@ -570,8 +572,8 @@ class testGraphWidget extends CWebTest {
 				[
 					'Time period' => [
 						'Set custom time period' => true,
-						'From' => '2019-05-02 00:00:00',
-						'To' => '2019.07.31 15:53:07'
+						'From' => '2021-05-02 00:00:00',
+						'To' => '2021.07.31 15:53:07'
 					],
 					'error' => 'Invalid parameter "To": a time range is expected.'
 				]
@@ -580,7 +582,7 @@ class testGraphWidget extends CWebTest {
 				[
 					'Time period' => [
 						'Set custom time period' => true,
-						'From' => '2019-07-04 12:53:00',
+						'From' => '2021-07-04 12:53:00',
 						'To' => 'now-s'
 					],
 					'error' => 'Invalid parameter "To": a time range is expected.'
@@ -591,18 +593,8 @@ class testGraphWidget extends CWebTest {
 				[
 					'Time period' => [
 						'Set custom time period' => true,
-						'From' => '2019-07-04 12:53:00',
-						'To' => '2019-07-04 12:52:59'
-					],
-					'error' => 'Minimum time period to display is 1 minute.'
-				]
-			],
-			[
-				[
-					'Time period' => [
-						'Set custom time period' => true,
-						'From' => '2019-07-04 12:53:00',
-						'To' => '2019-07-04 12:52:59'
+						'From' => '2021-07-04 12:53:00',
+						'To' => '2021-07-04 12:52:59'
 					],
 					'error' => 'Minimum time period to display is 1 minute.'
 				]
@@ -664,7 +656,7 @@ class testGraphWidget extends CWebTest {
 	 * @dataProvider getTimePeriodValidationCreateData
 	 * @dataProvider getTimePeriodValidationUpdateData
 	 */
-	public function testGraphWidget_TimePeriodValidation($data) {
+	public function testDashboardGraphWidget_TimePeriodValidation($data) {
 		$this->validate($data, 'Time period');
 	}
 
@@ -880,7 +872,7 @@ class testGraphWidget extends CWebTest {
 	 * @dataProvider getAxesValidationCreateData
 	 * @dataProvider getAxesValidationUpdateData
 	 */
-	public function testGraphWidget_AxesValidation($data) {
+	public function testDashboardGraphWidget_AxesValidation($data) {
 		$this->validate($data, 'Axes');
 	}
 
@@ -1139,7 +1131,7 @@ class testGraphWidget extends CWebTest {
 						'item' => 'Agent ping'
 					],
 					'Overrides' => [
-						'item' => '*',
+						'item' => '*'
 					],
 					'error' => 'Invalid parameter "Overrides/1/hosts": cannot be empty.'
 				]
@@ -1230,7 +1222,7 @@ class testGraphWidget extends CWebTest {
 				[
 					'Widget name' => 'Test cases for update',
 					'Overrides' => [
-						'item' => '',
+						'item' => ''
 					],
 					'error' => 'Invalid parameter "Overrides/1/items": cannot be empty.'
 				]
@@ -1244,7 +1236,7 @@ class testGraphWidget extends CWebTest {
 	 * @dataProvider getOverridesValidationCreateData
 	 * @dataProvider getOverridesValidationUpdateData
 	 */
-	public function testGraphWidget_OverridesValidation($data) {
+	public function testDashboardGraphWidget_OverridesValidation($data) {
 		$this->validate($data, 'Overrides');
 	}
 
@@ -1486,7 +1478,7 @@ class testGraphWidget extends CWebTest {
 	 *
 	 * @dataProvider getCreateData
 	 */
-	public function testGraphWidget_Create($data) {
+	public function testDashboardGraphWidget_Create($data) {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
 		$form = $this->openGraphWidgetConfiguration();
 
@@ -1736,7 +1728,7 @@ class testGraphWidget extends CWebTest {
 	 *
 	 * @dataProvider getUpdateData
 	 */
-	public function testGraphWidget_Update($data) {
+	public function testDashboardGraphWidget_Update($data) {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
 		$form = $this->openGraphWidgetConfiguration('Test cases for update');
 
@@ -1756,7 +1748,7 @@ class testGraphWidget extends CWebTest {
 	/**
 	 * Test update without any modification of graph widget data.
 	 */
-	public function testGraphWidget_SimpleUpdate() {
+	public function testDashboardGraphWidget_SimpleUpdate() {
 		$name = 'Test cases for simple update and deletion';
 		$old_hash = CDBHelper::getHash($this->sql);
 
@@ -1898,7 +1890,7 @@ class testGraphWidget extends CWebTest {
 					'host' => 'id:or_'.$i.'_hosts',
 					'item' => 'id:or_'.$i.'_items',
 					'color' => 'id:or_'.$i.'__color_',
-					'time_shift' => 'name:or['.$i.'][timeshift]',
+					'time_shift' => 'name:or['.$i.'][timeshift]'
 				];
 
 				$this->fillMappedFields($override, $mapping);
@@ -1981,7 +1973,7 @@ class testGraphWidget extends CWebTest {
 					'host' => 'id:or_'.$i.'_hosts',
 					'item' => 'id:or_'.$i.'_items',
 					'color' => 'id:or_'.$i.'__color_',
-					'time_shift' => 'name:or['.$i.'][timeshift]',
+					'time_shift' => 'name:or['.$i.'][timeshift]'
 				];
 				foreach ($mapping as $field => $selector) {
 					if (!array_key_exists($field, $override)) {
@@ -2049,7 +2041,7 @@ class testGraphWidget extends CWebTest {
 	 *
 	 * @dataProvider getDashboardCancelData
 	 */
-	public function testGraphWidget_cancelDashboardUpdate($data) {
+	public function testDashboardGraphWidget_cancelDashboardUpdate($data) {
 		$old_hash = CDBHelper::getHash($this->sql);
 
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
@@ -2078,7 +2070,7 @@ class testGraphWidget extends CWebTest {
 					],
 					'Data set' => [
 						'host' => 'Cancel create',
-						'item' => 'Cancel create',
+						'item' => 'Cancel create'
 					]
 				]
 			],
@@ -2091,7 +2083,7 @@ class testGraphWidget extends CWebTest {
 					],
 					'Data set' => [
 						'host' => 'Cancel update',
-						'item' => 'Cancel update',
+						'item' => 'Cancel update'
 					]
 				]
 			]
@@ -2103,7 +2095,7 @@ class testGraphWidget extends CWebTest {
 	 *
 	 * @dataProvider getDashboardCancelData
 	 */
-	public function testGraphWidget_cancelWidgetEditing($data) {
+	public function testDashboardGraphWidget_cancelWidgetEditing($data) {
 		$old_hash = CDBHelper::getHash($this->sql);
 
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
@@ -2128,7 +2120,7 @@ class testGraphWidget extends CWebTest {
 	/**
 	 * Test deleting of graph widget.
 	 */
-	public function testGraphWidget_Delete() {
+	public function testDashboardGraphWidget_Delete() {
 		$name = 'Test cases for simple update and deletion';
 
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
@@ -2153,7 +2145,7 @@ class testGraphWidget extends CWebTest {
 	/**
 	 * Test disabled fields in "Data set" tab.
 	 */
-	public function testGraphWidget_DatasetDisabledFields() {
+	public function testDashboardGraphWidget_DatasetDisabledFields() {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
 		$form = $this->openGraphWidgetConfiguration();
 
@@ -2179,7 +2171,7 @@ class testGraphWidget extends CWebTest {
 	/*
 	 * Test "From" and "To" fields in tab "Time period" by check/uncheck "Set custom time period".
 	 */
-	public function testGraphWidget_TimePeriodDisabledFields() {
+	public function testDashboardGraphWidget_TimePeriodDisabledFields() {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
 		$form = $this->openGraphWidgetConfiguration();
 		$form->selectTab('Time period');
@@ -2194,7 +2186,7 @@ class testGraphWidget extends CWebTest {
 	/*
 	 * Test enable/disable "Number of rows" field by check/uncheck "Show legend".
 	 */
-	public function testGraphWidget_LegendDisabledFields() {
+	public function testDashboardGraphWidget_LegendDisabledFields() {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
 		$form = $this->openGraphWidgetConfiguration();
 		$form->selectTab('Legend');
@@ -2203,7 +2195,7 @@ class testGraphWidget extends CWebTest {
 		$this->assertEnabledFields('Number of rows', false);
 	}
 
-	public function testGraphWidget_ProblemsDisabledFields() {
+	public function testDashboardGraphWidget_ProblemsDisabledFields() {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
 		$form = $this->openGraphWidgetConfiguration();
 		$form->selectTab('Problems');
@@ -2273,7 +2265,7 @@ class testGraphWidget extends CWebTest {
 	 *
 	 * @dataProvider getAxesDisabledFieldsData
 	 */
-	public function testGraphWidget_AxesDisabledFields($data) {
+	public function testDashboardGraphWidget_AxesDisabledFields($data) {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=103');
 		$form = $this->openGraphWidgetConfiguration();
 

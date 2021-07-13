@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -444,7 +444,7 @@ static int	is_discovery_or_auto_registration(const DB_EVENT *event)
 		return SUCCEED;
 	}
 
-	if (event->source == EVENT_SOURCE_AUTO_REGISTRATION && event->object == EVENT_OBJECT_ZABBIX_ACTIVE)
+	if (event->source == EVENT_SOURCE_AUTOREGISTRATION && event->object == EVENT_OBJECT_ZABBIX_ACTIVE)
 		return SUCCEED;
 
 	return FAIL;

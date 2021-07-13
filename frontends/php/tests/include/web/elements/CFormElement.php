@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -22,6 +22,8 @@ require_once 'vendor/autoload.php';
 
 require_once dirname(__FILE__).'/../CElement.php';
 
+use Facebook\WebDriver\Remote\RemoteWebElement;
+
 /**
  * Form element.
  */
@@ -36,6 +38,34 @@ class CFormElement extends CElement {
 	 * @var array
 	 */
 	protected $fields;
+
+	/**
+	 * Condition to be filtered by.
+	 * @var CElementFilter
+	 */
+	protected $filter = null;
+
+	/**
+	 * Get filter.
+	 *
+	 * @return CElementFilter
+	 */
+	public function getFilter() {
+		return $this->filter;
+	}
+
+	/**
+	 * Set filter conditions.
+	 *
+	 * @param mixed $filter		conditions to be filtered by
+	 *
+	 * @return $this
+	 */
+	public function setFilter($filter) {
+		$this->filter = $filter;
+
+		return $this;
+	}
 
 	/**
 	 * @inheritdoc
@@ -69,7 +99,22 @@ class CFormElement extends CElement {
 	 * @return CElementCollection
 	 */
 	public function getLabels() {
-		return $this->query('xpath:.//'.self::TABLE_FORM.'/li/'.self::TABLE_FORM_LEFT.'/label')->all();
+		$labels = $this->query('xpath:.//'.self::TABLE_FORM.'/li/'.self::TABLE_FORM_LEFT.'/label')->all();
+
+		foreach ($labels as $key => $label) {
+			if ($label->getText() === '') {
+				$element = $this->getFieldByLabelElement($label);
+				if ($element->isValid() && get_class($element) === CCheckboxElement::class) {
+					$labels->set($key, $element->query('xpath:../label')->one(false));
+				}
+			}
+		}
+
+		if ($this->filter !== null) {
+			return $labels->filter($this->filter);
+		}
+
+		return $labels;
 	}
 
 	/**
@@ -90,7 +135,7 @@ class CFormElement extends CElement {
 		}
 
 		if ($labels->count() > 1) {
-			$labels = $labels->filter(CElementQuery::VISIBLE);
+			$labels = $labels->filter(new CElementFilter(CElementFilter::VISIBLE));
 
 			if ($labels->isEmpty()) {
 				throw new Exception('Failed to find visible form label by name: "'.$name.'".');
@@ -107,7 +152,7 @@ class CFormElement extends CElement {
 	/**
 	 * Get element field by label element.
 	 *
-	 * @param CElement $label    label element
+	 * @param CElement $label     label element
 	 *
 	 * @return CElement|CNullElement
 	 */
@@ -117,9 +162,15 @@ class CFormElement extends CElement {
 		}
 
 		// Nested table forms.
-		return $label->query('xpath', './../../'.self::TABLE_FORM_RIGHT.'//'.self::TABLE_FORM.'/..')
+		$element = $label->query('xpath', './../../'.self::TABLE_FORM_RIGHT.'//'.self::TABLE_FORM.'/..')
 				->cast('CFormElement', ['normalized' => true])
 				->one(false);
+
+		if (!$element->isValid()) {
+			$element = $label->query('xpath:./../../'.self::TABLE_FORM_RIGHT)->one(false);
+		}
+
+		return $element;
 	}
 
 	/**
@@ -132,6 +183,9 @@ class CFormElement extends CElement {
 
 		foreach ($this->getLabels() as $label) {
 			$element = $this->getFieldByLabelElement($label);
+			if ($this->filter !== null && !$this->filter->match($element)) {
+				$element = new CNullElement();
+			}
 
 			if ($element->isValid()) {
 				$fields[$label->getText()] = $element;
@@ -159,53 +213,33 @@ class CFormElement extends CElement {
 		}
 
 		$parts = explode(':', $name, 2);
-		$element = new CNullElement(['locator' => 'form field (by name or selector "'.$name.'")']);
-
-		if (count($parts) === 2
-				&& in_array($parts[0], ['id', 'name', 'css', 'class', 'tag', 'link', 'button', 'xpath'])
-				&& (($element = $this->query($name)->one(false))->isValid())) {
+		if (count($parts) === 2 && in_array($parts[0], ['id', 'name', 'css', 'class', 'tag', 'link', 'button', 'xpath'])
+				&& ($element = $this->query($name)->one(false))->isValid()) {
 			$element = $element->detect();
 		}
+		else {
+			try {
+				$label = $this->getLabel($name);
+				$element = $this->getFieldByLabelElement($label);
+			}
+			catch (\Exception $exception) {
+				$label = $this->query('xpath:.//label[text()='.CXPathHelper::escapeQuotes($name).']')->one(false);
+				if (!$label->isValid()) {
+					throw $exception;
+				}
 
-		if (!$element->isValid()) {
-			$label = $this->getLabel($name);
+				$element = CElementQuery::getInputElement($label, './../');
+				if (get_class($element) !== CCheckboxElement::class) {
+					throw $exception;
+				}
+			}
 
-			if (($element = $this->getFieldByLabelElement($label))->isValid() === false) {
+			if (!$element->isValid()) {
 				throw new Exception('Failed to find form field by label name or selector: "'.$name.'".');
 			}
 		}
 
 		$this->fields->set($name, $element);
-
-		return $element;
-	}
-
-	/**
-	 * Get field by field id.
-	 *
-	 * @param string $id    field id
-	 *
-	 * @return CElement
-	 *
-	 * @throws Exception
-	 */
-	public function getFieldById($id) {
-		$prefix = 'xpath:.//'.self::TABLE_FORM.'/li/'.self::TABLE_FORM_LEFT;
-		$label = $this->query($prefix.'/label[@for='.CXPathHelper::escapeQuotes($id).']')->one(false);
-
-		if ($label->isValid() === false) {
-			$label = $this->query('xpath:.//'.self::TABLE_FORM.'/li/'.self::TABLE_FORM_RIGHT.'//*[@id='.
-					CXPathHelper::escapeQuotes($id).']/ancestor::'.self::TABLE_FORM_RIGHT.'/../'.
-					self::TABLE_FORM_LEFT.'/label')->one(false);
-
-			if (!$label->isValid()) {
-				throw new Exception('Failed to find form label by field id: "'.$id.'".');
-			}
-		}
-
-		if (!($element = $this->getFieldByLabelElement($label))->isValid()) {
-			throw new Exception('Failed to find form field by label id: "'.$id.'".');
-		}
 
 		return $element;
 	}
@@ -221,19 +255,6 @@ class CFormElement extends CElement {
 	 */
 	public function getFieldContainer($name) {
 		return $this->getLabel($name)->query('xpath:./../../'.self::TABLE_FORM_RIGHT)->one();
-	}
-
-	/**
-	 * Get field elements by label name.
-	 *
-	 * @param string $name    field label text
-	 *
-	 * @return CElementCollection
-	 *
-	 * @throws Exception
-	 */
-	public function getFieldElements($name) {
-		return $this->getFieldContainer($name)->query('xpath:./*')->all();
 	}
 
 	/**
@@ -266,7 +287,7 @@ class CFormElement extends CElement {
 	 * @return CMessageElement
 	 */
 	public function getOverlayMessage() {
-		return $this->parents('class:overlay-dialogue-body')->one()
+		return $this->parents('class:overlay-dialogue-body')->waitUntilVisible()->one()
 				->query('tag:output')->asMessage()->waitUntilVisible()->one();
 	}
 
@@ -274,13 +295,53 @@ class CFormElement extends CElement {
 	 * @inheritdoc
 	 */
 	public function submit() {
-		$submit = $this->query('xpath:.//button[@type="submit"]')->one(false);
+		$buttons = $this->query('xpath:.//button[@type="submit"]')->all()
+				->filter(new CElementFilter(CElementFilter::VISIBLE));
+		$submit = ($buttons->count() === 0) ? (new CNullElement()) : $buttons->first();
+
 		if ($submit->isValid()) {
 			$submit->click();
 		}
 		else {
 			parent::submit();
 		}
+
+		return $this;
+	}
+
+	/**
+	 * Fill form fields with specific values.
+	 *
+	 * @param string $field   field name to filled in
+	 * @param string $values  value to be put in field
+	 *
+	 * @return $this
+	 */
+	private function setFieldValue($field, $values) {
+		$classes = [CMultifieldTableElement::class, CMultiselectElement::class, CCheckboxListElement::class];
+		$element = $this->getField($field);
+
+		if (is_array($values) && !in_array(get_class($element), $classes)) {
+			if ($values !== []) {
+				$container = $this->getFieldContainer($field);
+				if ($this->filter !== null && !$this->filter->match($container)) {
+					return $this;
+				}
+
+				foreach ($values as $name => $value) {
+					$xpath = './/*[@id='.CXPathHelper::escapeQuotes($name).' or @name='.CXPathHelper::escapeQuotes($name).']';
+					$container->query('xpath', $xpath)->one()->detect()->fill($value);
+				}
+			}
+
+			return $this;
+		}
+
+		if ($this->filter !== null && !$this->filter->match($element)) {
+			return $this;
+		}
+
+		$element->fill($values);
 
 		return $this;
 	}
@@ -294,8 +355,20 @@ class CFormElement extends CElement {
 	 */
 	public function fill($data) {
 		if ($data && is_array($data)) {
-			foreach ($data as $field => $value) {
-				$this->getField($field)->fill($value);
+			foreach ($data as $field => $values) {
+				try {
+					$this->setFieldValue($field, $values);
+				}
+				catch (\Exception $e1) {
+					sleep(1);
+
+					try {
+						$this->invalidate();
+						$this->setFieldValue($field, $values);
+					} catch (\Exception $e2) {
+						throw $e1;
+					}
+				}
 			}
 		}
 
@@ -303,17 +376,65 @@ class CFormElement extends CElement {
 	}
 
 	/**
-	 * @inheritdoc
-	 */
+	* @inheritdoc
+	*/
 	public function checkValue($expected, $raise_exception = true) {
 		if ($expected && is_array($expected)) {
 			foreach ($expected as $field => $value) {
-				if ($this->getField($field)->checkValue($value, $raise_exception) === false) {
+				if ($this->checkFieldValue($field, $value, $raise_exception) === false) {
 					return false;
 				}
 			}
 		}
 
 		return true;
+	}
+
+	/**
+	 * Check single form field value to have a specific value.
+	 *
+	 * @param string  $field              field name to filled checked
+	 * @param mixed   $values             value to be checked in field
+	 * @param boolean $raise_exception    flag to raise exceptions on error
+	 *
+	 * @return boolean
+	 *
+	 * @throws Exception
+	 */
+	private function checkFieldValue($field, $values, $raise_exception = true) {
+		$classes = [CMultifieldTableElement::class, CMultiselectElement::class, CCheckboxListElement::class];
+		$element = $this->getField($field);
+
+		if (is_array($values) && !in_array(get_class($element), $classes)) {
+			if ($values !== []) {
+				$container = $this->getFieldContainer($field);
+				if ($this->filter !== null && !$this->filter->match($container)) {
+					if ($raise_exception) {
+						throw new Exception('Failed to check value of field not matching the filter.');
+					}
+
+					return false;
+				}
+
+				foreach ($values as $name => $value) {
+					$xpath = './/*[@id='.CXPathHelper::escapeQuotes($name).' or @name='.CXPathHelper::escapeQuotes($name).']';
+					if (!$container->query('xpath', $xpath)->one()->detect()->checkValue($value, $raise_exception)) {
+						return false;
+					}
+				}
+			}
+
+			return true;
+		}
+
+		if ($this->filter !== null && !$this->filter->match($element)) {
+			if ($raise_exception) {
+				throw new Exception('Failed to check value of field not matching the filter.');
+			}
+
+			return false;
+		}
+
+		return $element->checkValue($values, $raise_exception);
 	}
 }

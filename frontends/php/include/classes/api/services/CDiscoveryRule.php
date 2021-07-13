@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -27,6 +27,16 @@ class CDiscoveryRule extends CItemGeneral {
 	protected $tableName = 'items';
 	protected $tableAlias = 'i';
 	protected $sortColumns = ['itemid', 'name', 'key_', 'delay', 'type', 'status'];
+
+	/**
+	 * Define a set of supported item types.
+	 *
+	 * @var array
+	 */
+	protected $supported_item_types = [ITEM_TYPE_ZABBIX, ITEM_TYPE_SNMPV1, ITEM_TYPE_TRAPPER, ITEM_TYPE_SIMPLE,
+		ITEM_TYPE_SNMPV2C, ITEM_TYPE_INTERNAL, ITEM_TYPE_SNMPV3, ITEM_TYPE_ZABBIX_ACTIVE, ITEM_TYPE_EXTERNAL,
+		ITEM_TYPE_DB_MONITOR, ITEM_TYPE_IPMI, ITEM_TYPE_SSH, ITEM_TYPE_TELNET, ITEM_TYPE_JMX, ITEM_TYPE_HTTPAGENT
+	];
 
 	public function __construct() {
 		parent::__construct();
@@ -220,7 +230,7 @@ class CDiscoveryRule extends CItemGeneral {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$res = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$res = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($item = DBfetch($res)) {
 			if ($options['countOutput']) {
 				if ($options['groupCount']) {
@@ -739,7 +749,9 @@ class CDiscoveryRule extends CItemGeneral {
 			['sources' => ['expression', 'recovery_expression']]
 		);
 		foreach ($dstTriggers as $id => &$trigger) {
-			unset($trigger['triggerid'], $trigger['templateid']);
+			unset($trigger['triggerid'], $trigger['templateid'], $trigger['hosts'], $trigger['functions'],
+				$trigger['items'], $trigger['discoveryRule']
+			);
 
 			// Update the destination expressions.
 			$trigger['expression'] = triggerExpressionReplaceHost($trigger['expression'], $srcHost['host'],
@@ -1618,13 +1630,19 @@ class CDiscoveryRule extends CItemGeneral {
 		// adding items
 		if (!is_null($options['selectItems'])) {
 			if ($options['selectItems'] != API_OUTPUT_COUNT) {
+				$items = [];
 				$relationMap = $this->createRelationMap($result, 'parent_itemid', 'itemid', 'item_discovery');
-				$items = API::ItemPrototype()->get([
-					'output' => $options['selectItems'],
-					'itemids' => $relationMap->getRelatedIds(),
-					'nopermissions' => true,
-					'preservekeys' => true
-				]);
+				$related_ids = $relationMap->getRelatedIds();
+
+				if ($related_ids) {
+					$items = API::ItemPrototype()->get([
+						'output' => $options['selectItems'],
+						'itemids' => $related_ids,
+						'nopermissions' => true,
+						'preservekeys' => true
+					]);
+				}
+
 				$result = $relationMap->mapMany($result, $items, 'items', $options['limitSelects']);
 			}
 			else {
@@ -1645,6 +1663,7 @@ class CDiscoveryRule extends CItemGeneral {
 		// adding triggers
 		if (!is_null($options['selectTriggers'])) {
 			if ($options['selectTriggers'] != API_OUTPUT_COUNT) {
+				$triggers = [];
 				$relationMap = new CRelationMap();
 				$res = DBselect(
 					'SELECT id.parent_itemid,f.triggerid'.
@@ -1657,11 +1676,16 @@ class CDiscoveryRule extends CItemGeneral {
 					$relationMap->addRelation($relation['parent_itemid'], $relation['triggerid']);
 				}
 
-				$triggers = API::TriggerPrototype()->get([
-					'output' => $options['selectTriggers'],
-					'triggerids' => $relationMap->getRelatedIds(),
-					'preservekeys' => true
-				]);
+				$related_ids = $relationMap->getRelatedIds();
+
+				if ($related_ids) {
+					$triggers = API::TriggerPrototype()->get([
+						'output' => $options['selectTriggers'],
+						'triggerids' => $related_ids,
+						'preservekeys' => true
+					]);
+				}
+
 				$result = $relationMap->mapMany($result, $triggers, 'triggers', $options['limitSelects']);
 			}
 			else {
@@ -1683,6 +1707,7 @@ class CDiscoveryRule extends CItemGeneral {
 		// adding graphs
 		if (!is_null($options['selectGraphs'])) {
 			if ($options['selectGraphs'] != API_OUTPUT_COUNT) {
+				$graphs = [];
 				$relationMap = new CRelationMap();
 				$res = DBselect(
 					'SELECT id.parent_itemid,gi.graphid'.
@@ -1695,11 +1720,16 @@ class CDiscoveryRule extends CItemGeneral {
 					$relationMap->addRelation($relation['parent_itemid'], $relation['graphid']);
 				}
 
-				$graphs = API::GraphPrototype()->get([
-					'output' => $options['selectGraphs'],
-					'graphids' => $relationMap->getRelatedIds(),
-					'preservekeys' => true
-				]);
+				$related_ids = $relationMap->getRelatedIds();
+
+				if ($related_ids) {
+					$graphs = API::GraphPrototype()->get([
+						'output' => $options['selectGraphs'],
+						'graphids' => $related_ids,
+						'preservekeys' => true
+					]);
+				}
+
 				$result = $relationMap->mapMany($result, $graphs, 'graphs', $options['limitSelects']);
 			}
 			else {
@@ -1721,13 +1751,19 @@ class CDiscoveryRule extends CItemGeneral {
 		// adding hosts
 		if ($options['selectHostPrototypes'] !== null) {
 			if ($options['selectHostPrototypes'] != API_OUTPUT_COUNT) {
+				$hostPrototypes = [];
 				$relationMap = $this->createRelationMap($result, 'parent_itemid', 'hostid', 'host_discovery');
-				$hostPrototypes = API::HostPrototype()->get([
-					'output' => $options['selectHostPrototypes'],
-					'hostids' => $relationMap->getRelatedIds(),
-					'nopermissions' => true,
-					'preservekeys' => true
-				]);
+				$related_ids = $relationMap->getRelatedIds();
+
+				if ($related_ids) {
+					$hostPrototypes = API::HostPrototype()->get([
+						'output' => $options['selectHostPrototypes'],
+						'hostids' => $related_ids,
+						'nopermissions' => true,
+						'preservekeys' => true
+					]);
+				}
+
 				$result = $relationMap->mapMany($result, $hostPrototypes, 'hostPrototypes', $options['limitSelects']);
 			}
 			else {

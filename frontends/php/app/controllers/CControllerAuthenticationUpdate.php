@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -31,8 +31,6 @@ class CControllerAuthenticationUpdate extends CController {
 			->setArgument('action', 'authentication.edit')
 			->getUrl()
 		);
-
-		$this->disableSIDValidation();
 	}
 
 	protected function checkInput() {
@@ -59,13 +57,6 @@ class CControllerAuthenticationUpdate extends CController {
 		];
 
 		$ret = $this->validateInput($fields);
-
-		if ($ret && $this->getInput('ldap_configured', '') == ZBX_AUTH_LDAP_ENABLED) {
-			$ret = $this->validateLdap();
-		}
-		else {
-			$ret &= $this->validateDefaultAuth();
-		}
 
 		if (!$ret) {
 			$this->response->setFormData($this->getInputAll());
@@ -150,7 +141,8 @@ class CControllerAuthenticationUpdate extends CController {
 					'bind_dn' => $config['ldap_bind_dn'],
 					'bind_password' => $config['ldap_bind_password'],
 					'search_attribute' => $config['ldap_search_attribute']
-				]
+				],
+				'detailed_errors' => true
 			]);
 
 			$login = $ldap_validator->validate([
@@ -177,6 +169,16 @@ class CControllerAuthenticationUpdate extends CController {
 	}
 
 	protected function doAction() {
+		$auth_valid = ($this->getInput('ldap_configured', '') == ZBX_AUTH_LDAP_ENABLED)
+			? $this->validateLdap()
+			: $this->validateDefaultAuth();
+
+		if (!$auth_valid) {
+			$this->response->setFormData($this->getInputAll());
+			$this->setResponse($this->response);
+			return;
+		}
+
 		// Only ZBX_AUTH_LDAP have 'Test' option.
 		if ($this->hasInput('ldap_test')) {
 			$this->response->setMessageOk(_('LDAP login successful'));

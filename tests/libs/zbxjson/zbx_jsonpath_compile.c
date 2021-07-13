@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -51,11 +51,8 @@ static void	jsonpath_token_print(char **data, size_t *data_alloc, size_t *data_o
 	switch (token->type)
 	{
 		case ZBX_JSONPATH_TOKEN_PATH_ABSOLUTE:
-			ZBX_FALLTHROUGH;
 		case ZBX_JSONPATH_TOKEN_PATH_RELATIVE:
-			ZBX_FALLTHROUGH;
 		case ZBX_JSONPATH_TOKEN_CONST_STR:
-			ZBX_FALLTHROUGH;
 		case ZBX_JSONPATH_TOKEN_CONST_NUM:
 			zbx_strcpy_alloc(data, data_alloc, data_offset, token->data);
 			break;
@@ -115,7 +112,8 @@ static void	jsonpath_token_print(char **data, size_t *data_alloc, size_t *data_o
 
 static char	*segment_data_to_str(const zbx_jsonpath_segment_t *segment)
 {
-	const char			*functions[] = {"unknown", "min()", "max()", "avg()", "length()", "first()"};
+	const char			*functions[] = {"unknown", "min()", "max()", "avg()", "length()", "first()",
+							"sum()", "~"};
 	char				*data = NULL;
 	size_t				data_alloc = 0, data_offset = 0;
 	int				i;

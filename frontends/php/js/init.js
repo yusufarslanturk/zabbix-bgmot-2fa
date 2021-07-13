@@ -1,6 +1,6 @@
 /*
  ** Zabbix
- ** Copyright (C) 2001-2020 Zabbix SIA
+ ** Copyright (C) 2001-2021 Zabbix SIA
  **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -423,4 +423,9 @@ jQuery(function($) {
 
 	// Initialize hintBox event handlers.
 	hintBox.bindEvents();
+
+	// Simulate Safari behaviour when text in a text field with autofocus becomes selected after page has loaded.
+	if (!SF) {
+		$('input[type=text][autofocus=autofocus]').filter(':visible').select();
+	}
 });

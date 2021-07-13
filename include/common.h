@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 
 #include "sysinc.h"
 #include "zbxtypes.h"
+#include "module.h"
 #include "version.h"
 #include "md5.h"
 
@@ -208,7 +209,7 @@ zbx_item_authtype_t;
 /* event sources */
 #define EVENT_SOURCE_TRIGGERS		0
 #define EVENT_SOURCE_DISCOVERY		1
-#define EVENT_SOURCE_AUTO_REGISTRATION	2
+#define EVENT_SOURCE_AUTOREGISTRATION	2
 #define EVENT_SOURCE_INTERNAL		3
 #define EVENT_SOURCE_COUNT		4
 
@@ -537,7 +538,7 @@ const char	*get_program_type_string(unsigned char program_type);
 #define ZBX_PROCESS_TYPE_PREPROCESSOR	27
 #define ZBX_PROCESS_TYPE_COUNT		28	/* number of process types */
 #define ZBX_PROCESS_TYPE_UNKNOWN	255
-const char	*get_process_type_string(unsigned char process_type);
+const char	*get_process_type_string(unsigned char proc_type);
 int		get_process_type_by_name(const char *proc_type_str);
 
 /* maintenance */
@@ -934,8 +935,8 @@ char	*string_replace(const char *str, const char *sub_str1, const char *sub_str2
 int	is_double_suffix(const char *str, unsigned char flags);
 int	is_double(const char *str, double *value);
 #define ZBX_LENGTH_UNLIMITED	0x7fffffff
-int	is_time_suffix(const char *c, int *value, int length);
-int	is_int_prefix(const char *c);
+int	is_time_suffix(const char *str, int *value, int length);
+int	is_int_prefix(const char *str);
 int	is_uint_n_range(const char *str, size_t n, void *value, size_t size, zbx_uint64_t min, zbx_uint64_t max);
 int	is_hex_n_range(const char *str, size_t n, void *value, size_t size, zbx_uint64_t min, zbx_uint64_t max);
 
@@ -976,9 +977,9 @@ void	zbx_remove_chars(char *str, const char *charlist);
 #define ZBX_WHITESPACE			" \t\r\n"
 #define zbx_remove_whitespace(str)	zbx_remove_chars(str, ZBX_WHITESPACE)
 void	del_zeros(char *s);
-int	get_param(const char *param, int num, char *buf, size_t max_len);
-int	num_param(const char *param);
-char	*get_param_dyn(const char *param, int num);
+int	get_param(const char *p, int num, char *buf, size_t max_len, zbx_request_parameter_type_t *type);
+int	num_param(const char *p);
+char	*get_param_dyn(const char *p, int num, zbx_request_parameter_type_t *type);
 
 /******************************************************************************
  *                                                                            *
@@ -1065,6 +1066,7 @@ double	zbx_time(void);
 void	zbx_timespec(zbx_timespec_t *ts);
 double	zbx_current_time(void);
 void	zbx_get_time(struct tm *tm, long *milliseconds, zbx_timezone_t *tz);
+long	zbx_get_timezone_offset(time_t t, struct tm *tm);
 int	zbx_utc_time(int year, int mon, int mday, int hour, int min, int sec, int *t);
 int	zbx_day_in_month(int year, int mon);
 
@@ -1150,11 +1152,11 @@ typedef struct
 }
 zbx_iprange_t;
 
-int	iprange_parse(zbx_iprange_t *range, const char *address);
-void	iprange_first(const zbx_iprange_t *range, int *address);
-int	iprange_next(const zbx_iprange_t *range, int *address);
-int	iprange_validate(const zbx_iprange_t *range, const int *address);
-zbx_uint64_t	iprange_volume(const zbx_iprange_t *range);
+int	iprange_parse(zbx_iprange_t *iprange, const char *address);
+void	iprange_first(const zbx_iprange_t *iprange, int *address);
+int	iprange_next(const zbx_iprange_t *iprange, int *address);
+int	iprange_validate(const zbx_iprange_t *iprange, const int *address);
+zbx_uint64_t	iprange_volume(const zbx_iprange_t *iprange);
 
 /* time related functions */
 char	*zbx_age2str(int age);
@@ -1177,7 +1179,7 @@ const char	*zbx_event_value_string(unsigned char source, unsigned char object, u
 
 #ifdef _WINDOWS
 const OSVERSIONINFOEX	*zbx_win_getversion(void);
-void	zbx_wmi_get(const char *wmi_namespace, const char *wmi_query, char **utf8_value);
+void	zbx_wmi_get(const char *wmi_namespace, const char *wmi_query, double timeout, char **utf8_value);
 wchar_t	*zbx_acp_to_unicode(const char *acp_string);
 wchar_t	*zbx_oemcp_to_unicode(const char *oemcp_string);
 int	zbx_acp_to_unicode_static(const char *acp_string, wchar_t *wide_string, int wide_size);
@@ -1230,6 +1232,7 @@ int	zbx_get_file_time(const char *path, zbx_file_time_t *time);
 void	find_cr_lf_szbyte(const char *encoding, const char **cr, const char **lf, size_t *szbyte);
 int	zbx_read(int fd, char *buf, size_t count, const char *encoding);
 int	zbx_is_regular_file(const char *path);
+char	*zbx_fgets(char *buffer, int size, FILE *fp);
 
 int	MAIN_ZABBIX_ENTRY(int flags);
 
@@ -1282,7 +1285,7 @@ char	*zbx_user_macro_quote_context_dyn(const char *context, int force_quote);
 #define ZBX_SESSION_ACTIVE	0
 #define ZBX_SESSION_PASSIVE	1
 
-char	*zbx_dyn_escape_shell_single_quote(const char *text);
+char	*zbx_dyn_escape_shell_single_quote(const char *arg);
 
 #define ZBX_DO_NOT_SEND_RESPONSE	0
 #define ZBX_SEND_RESPONSE		1
@@ -1312,9 +1315,6 @@ void	zbx_alarm_flag_clear(void);
 #ifndef _WINDOWS
 unsigned int	zbx_alarm_on(unsigned int seconds);
 unsigned int	zbx_alarm_off(void);
-#if defined(HAVE_RESOLV_H)
-void	zbx_update_resolver_conf(void);		/* handle /etc/resolv.conf update */
-#endif
 #endif
 
 int	zbx_alarm_timed_out(void);
@@ -1340,6 +1340,7 @@ int	zbx_strcmp_natural(const char *s1, const char *s2);
 #define ZBX_TOKEN_REGEXP	0x040000
 #define ZBX_TOKEN_XPATH		0x080000
 #define ZBX_TOKEN_REGEXP_OUTPUT	0x100000
+#define ZBX_TOKEN_JSONPATH	0x200000
 
 /* location of a substring */
 typedef struct
@@ -1497,8 +1498,8 @@ zbx_variant_t;
 void	zbx_variant_clear(zbx_variant_t *value);
 void	zbx_variant_set_none(zbx_variant_t *value);
 void	zbx_variant_set_str(zbx_variant_t *value, char *text);
-void	zbx_variant_set_dbl(zbx_variant_t *value, double dbl);
-void	zbx_variant_set_ui64(zbx_variant_t *value, zbx_uint64_t ui64);
+void	zbx_variant_set_dbl(zbx_variant_t *value, double value_dbl);
+void	zbx_variant_set_ui64(zbx_variant_t *value, zbx_uint64_t value_ui64);
 void	zbx_variant_set_bin(zbx_variant_t *value, void *value_bin);
 void	zbx_variant_copy(zbx_variant_t *value, const zbx_variant_t *source);
 int	zbx_variant_set_numeric(zbx_variant_t *value, const char *text);

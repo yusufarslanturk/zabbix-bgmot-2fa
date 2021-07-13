@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 
 require_once dirname(__FILE__).'/CHost.php';
 require_once dirname(__FILE__).'/CItem.php';
+require_once dirname(__FILE__).'/testJSONRPC.php';
 require_once dirname(__FILE__).'/testAPIInfo.php';
 require_once dirname(__FILE__).'/testAction.php';
 require_once dirname(__FILE__).'/testApplication.php';
@@ -30,12 +31,16 @@ require_once dirname(__FILE__).'/testDRule.php';
 require_once dirname(__FILE__).'/testHistory.php';
 require_once dirname(__FILE__).'/testHost.php';
 require_once dirname(__FILE__).'/testHostGroup.php';
+require_once dirname(__FILE__).'/testHostImport.php';
 require_once dirname(__FILE__).'/testIconMap.php';
 require_once dirname(__FILE__).'/testItem.php';
 require_once dirname(__FILE__).'/testMaintenance.php';
 require_once dirname(__FILE__).'/testProxy.php';
 require_once dirname(__FILE__).'/testScripts.php';
 require_once dirname(__FILE__).'/testTaskCreate.php';
+require_once dirname(__FILE__).'/testTemplateImport.php';
+require_once dirname(__FILE__).'/testTriggerPermissions.php';
+require_once dirname(__FILE__).'/testTriggerValidation.php';
 require_once dirname(__FILE__).'/testUserGroup.php';
 require_once dirname(__FILE__).'/testUserMacro.php';
 require_once dirname(__FILE__).'/testUsers.php';
@@ -50,6 +55,7 @@ class ApiJsonTests {
 
 //		$suite->addTestSuite('API_JSON_Host');
 //		$suite->addTestSuite('API_JSON_Item');
+		$suite->addTestSuite('testJSONRPC');
 		$suite->addTestSuite('testAPIInfo');
 		$suite->addTestSuite('testAction');
 		$suite->addTestSuite('testApplication');
@@ -60,12 +66,16 @@ class ApiJsonTests {
 		$suite->addTestSuite('testHistory');
 		$suite->addTestSuite('testHost');
 		$suite->addTestSuite('testHostGroup');
+		$suite->addTestSuite('testHostImport');
 		$suite->addTestSuite('testIconMap');
 		$suite->addTestSuite('testItem');
 		$suite->addTestSuite('testMaintenance');
 		$suite->addTestSuite('testProxy');
 		$suite->addTestSuite('testScripts');
 		$suite->addTestSuite('testTaskCreate');
+		$suite->addTestSuite('testTemplateImport');
+		$suite->addTestSuite('testTriggerPermissions');
+		$suite->addTestSuite('testTriggerValidation');
 		$suite->addTestSuite('testUserGroup');
 		$suite->addTestSuite('testUserMacro');
 		$suite->addTestSuite('testUsers');

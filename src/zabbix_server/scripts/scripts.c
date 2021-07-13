@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@
 #include "scripts.h"
 
 extern int	CONFIG_TRAPPER_TIMEOUT;
+extern int	CONFIG_IPMIPOLLER_FORKS;
 
 static int	zbx_execute_script_on_agent(const DC_HOST *host, const char *command, char **result,
 		char *error, size_t max_error_len)
@@ -470,6 +471,13 @@ int	zbx_script_execute(const zbx_script_t *script, const DC_HOST *host, char **r
 			break;
 		case ZBX_SCRIPT_TYPE_IPMI:
 #ifdef HAVE_OPENIPMI
+			if (0 == CONFIG_IPMIPOLLER_FORKS)
+			{
+				zbx_strlcpy(error, "Cannot perform IPMI request: configuration parameter"
+						" \"StartIPMIPollers\" is 0.", max_error_len);
+				break;
+			}
+
 			if (SUCCEED == (ret = zbx_ipmi_execute_command(host, script->command, error, max_error_len)))
 			{
 				if (NULL != result)
@@ -520,6 +528,8 @@ zbx_uint64_t	zbx_script_create_task(const zbx_script_t *script, const DC_HOST *h
 	else
 		port = 0;
 
+	DBbegin();
+
 	taskid = DBget_maxid("task");
 
 	task = zbx_tm_task_create(taskid, ZBX_TM_TASK_REMOTE_COMMAND, ZBX_TM_STATUS_NEW, now,
@@ -528,8 +538,6 @@ zbx_uint64_t	zbx_script_create_task(const zbx_script_t *script, const DC_HOST *h
 	task->data = zbx_tm_remote_command_create(script->type, script->command, script->execute_on, port,
 			script->authtype, script->username, script->password, script->publickey, script->privatekey,
 			taskid, host->hostid, alertid);
-
-	DBbegin();
 
 	if (FAIL == zbx_tm_save_task(task))
 		taskid = 0;

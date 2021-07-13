@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -361,7 +361,7 @@ static int	ssh_run(DC_ITEM *item, AGENT_RESULT *result, const char *encoding)
 	}
 
 	/* check which authentication methods are available */
-	if (SSH_AUTH_ERROR == ssh_userauth_none(session, item->username))
+	if (SSH_AUTH_ERROR == ssh_userauth_none(session, NULL))
 	{
 		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Error during authentication: %s", ssh_get_error(session)));
 		goto session_close;
@@ -369,7 +369,7 @@ static int	ssh_run(DC_ITEM *item, AGENT_RESULT *result, const char *encoding)
 
 	userauthlist[0] = '\0';
 
-	if (0 != (userauth = ssh_userauth_list(session, item->username)))
+	if (0 != (userauth = ssh_userauth_list(session, NULL)))
 	{
 		if (0 != (userauth & SSH_AUTH_METHOD_NONE))
 			offset += zbx_snprintf(userauthlist + offset, sizeof(userauthlist) - offset, "none, ");
@@ -394,7 +394,7 @@ static int	ssh_run(DC_ITEM *item, AGENT_RESULT *result, const char *encoding)
 			if (0 != (userauth & SSH_AUTH_METHOD_PASSWORD))
 			{
 				/* we could authenticate via password */
-				if (SSH_AUTH_SUCCESS != ssh_userauth_password(session, item->username, item->password))
+				if (SSH_AUTH_SUCCESS != ssh_userauth_password(session, NULL, item->password))
 				{
 					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Password authentication failed: %s",
 							ssh_get_error(session)));
@@ -471,21 +471,34 @@ static int	ssh_run(DC_ITEM *item, AGENT_RESULT *result, const char *encoding)
 					goto session_close;
 				}
 
-				if (SSH_AUTH_SUCCESS != ssh_userauth_try_publickey(session, item->username, pubkey))
+				if (SSH_AUTH_SUCCESS != ssh_userauth_try_publickey(session, NULL, pubkey))
 				{
 					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Public key try failed: %s",
 							ssh_get_error(session)));
 					goto session_close;
 				}
 
-				if (SSH_OK != ssh_pki_import_privkey_file(privatekey, NULL, NULL, NULL, &privkey))
+				if (SSH_OK != (rc = ssh_pki_import_privkey_file(privatekey, item->password, NULL, NULL,
+						&privkey)))
 				{
-					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Failed to import private key: %s",
+					if (SSH_EOF == rc)
+					{
+						SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Cannot import private key"
+								" file \"%s\" because it does not exist or permission"
+								" denied", privatekey));
+						goto session_close;
+					}
+
+					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Cannot import private key \"%s\"",
 							privatekey));
+
+					zabbix_log(LOG_LEVEL_DEBUG, "%s() failed to import private key \"%s\", rc:%d",
+							__func__, privatekey, rc);
+
 					goto session_close;
 				}
 
-				if (SSH_AUTH_SUCCESS != ssh_userauth_publickey(session, item->username, privkey))
+				if (SSH_AUTH_SUCCESS != ssh_userauth_publickey(session, NULL, privkey))
 				{
 					SET_MSG_RESULT(result, zbx_dsprintf(NULL, "Public key authentication failed:"
 							" %s", ssh_get_error(session)));

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -22,12 +22,23 @@ require_once 'vendor/autoload.php';
 
 require_once dirname(__FILE__).'/../CElement.php';
 
+use  \Facebook\WebDriver\Exception\UnrecognizedExceptionException;
+
 /**
  * Multifield table element.
  */
 class CMultifieldTableElement extends CTableElement {
 
-	const ROW_SELECTOR = 'xpath:./tbody/tr[contains(@class, "form_row") or contains(@class, "pairRow") or contains(@class, "editable_table_row")]';
+	/**
+	 * Element selectors.
+	 *
+	 * @var array
+	 */
+	protected $selectors = [
+		'header' => 'xpath:./thead/tr/th',
+		'row' => 'xpath:./tbody/tr[contains(@class, "form_row") or contains(@class, "pairRow") or contains(@class, "editable_table_row")]',
+		'column' => 'xpath:./td'
+	];
 
 	/**
 	 * Field mapping.
@@ -37,12 +48,38 @@ class CMultifieldTableElement extends CTableElement {
 	protected $mapping;
 
 	/**
+	 * Field mapping names.
+	 *
+	 * @var array
+	 */
+	protected $names;
+
+	/**
 	 * Get field mapping.
 	 *
 	 * @return array
 	 */
 	public function getFieldMapping() {
 		return is_array($this->mapping) ? $this->mapping : [];
+	}
+
+	/**
+	 * Set field mapping names.
+	 *
+	 * @param array $names	field name
+	 *
+	 * @return CMultifieldTableElement
+	 */
+	public function setFieldNames($names) {
+		if (!is_array($this->names)) {
+			$this->names = [];
+		}
+
+		foreach ($names as $field => $name) {
+			$this->names[$field] = $name;
+		}
+
+		return $this;
 	}
 
 	/**
@@ -92,26 +129,77 @@ class CMultifieldTableElement extends CTableElement {
 	 */
 	public function setFieldMapping($mapping) {
 		$this->mapping = $mapping;
+
+		return $this;
 	}
 
 	/**
-	 * Get collection of table rows.
+	 * Detect field mapping based on the first row elements.
 	 *
-	 * @return CElementCollection
+	 * @param array    $headers    table headers
+	 *
+	 * @return array
 	 */
-	public function getRows() {
-		return $this->query(self::ROW_SELECTOR)->asTableRow(['parent' => $this])->all();
-	}
+	public function detectFieldMapping($headers = null) {
+		$rows = $this->getRows();
 
-	/**
-	 * Get table row by index.
-	 *
-	 * @param $index    row index
-	 *
-	 * @return CTableRow
-	 */
-	public function getRow($index) {
-		return $this->query(self::ROW_SELECTOR.'['.((int)$index + 1).']')->asTableRow(['parent' => $this])->one();
+		if ($rows->count() === 0) {
+			throw new \Exception('Failed to detect mapping for an empty multifield table.');
+		}
+
+		if ($headers === null) {
+			$headers = $this->getHeadersText();
+		}
+
+		$result = [];
+		foreach ($rows->first()->query($this->selectors['column'])->all() as $i => $column) {
+			$label = CTestArrayHelper::get($headers, $i, $i);
+			$element = CElementQuery::getInputElement($column, '.')->detect();
+
+			if (!$element->isValid()) {
+				$result[$label] = null;
+
+				continue;
+			}
+
+			$value = $element->getAttribute('name');
+			if ($value !== null) {
+				$element->query('xpath', './/*[@name]')->one(false);
+				if ($element->isValid()) {
+					$value = $element->getAttribute('name');
+				}
+			}
+
+			if ($value !== null) {
+				$name = $value;
+				if (substr($value, -1) === ']') {
+					$pos = strrpos($value, '[');
+					if ($pos !== false) {
+						$name = substr($value, $pos + 1, -1);
+					}
+
+					if (!$name) {
+						$name = $label;
+					}
+				}
+			}
+			else {
+				// Element name cannot be detected, using label or index.
+				$name = $label;
+			}
+
+			if (!empty($this->names) && array_key_exists($name, $this->names)) {
+				$name = $this->names[$name];
+			}
+
+			$result[$label] = [
+				'name' => $name,
+				'class' => get_class($element),
+				'selector' => CElementQuery::getLastSelector()
+			];
+		}
+
+		return $result;
 	}
 
 	/**
@@ -129,7 +217,11 @@ class CMultifieldTableElement extends CTableElement {
 			$headers = $this->getHeadersText();
 		}
 
-		foreach ($row->query('xpath:./td|./th')->all() as $i => $column) {
+		if ($this->mapping === null) {
+			$this->mapping = $this->detectFieldMapping();
+		}
+
+		foreach ($row->query($this->selectors['column'].'|./th')->all() as $i => $column) {
 			$label = CTestArrayHelper::get($headers, $i, $i);
 			$mapping = CTestArrayHelper::get($this->mapping, $label, $label);
 			if ($mapping === null) {
@@ -215,7 +307,7 @@ class CMultifieldTableElement extends CTableElement {
 		$this->query('button:Add')->one()->click();
 
 		// Wait until new table row appears.
-		$this->query(self::ROW_SELECTOR.'['.($rows + 1).']')->waitUntilPresent();
+		$this->query('xpath:.//'.CXPathHelper::fromSelector($this->selectors['row']).'['.($rows + 1).']')->waitUntilPresent();
 		return $this->updateRow($rows, $values);
 	}
 
@@ -230,9 +322,21 @@ class CMultifieldTableElement extends CTableElement {
 	 * return $this
 	 */
 	public function updateRow($index, $values) {
-		foreach ($this->getRowControls($this->getRow($index)) as $name => $control) {
-			if (array_key_exists($name, $values)) {
-				$control->fill($values[$name]);
+		$controls = $this->getRowControls($this->getRow($index));
+		foreach ($values as $name => $value) {
+			if (array_key_exists($name, $controls)) {
+				try {
+					$controls[$name]->fill($value);
+				}
+				catch (UnrecognizedExceptionException $e1) {
+					try {
+						$controls = $this->getRowControls($this->getRow($index));
+						$controls[$name]->fill($value);
+					}
+					catch (\Exception $e2) {
+						throw $e1;
+					}
+				}
 				unset($values[$name]);
 			}
 		}
@@ -271,7 +375,7 @@ class CMultifieldTableElement extends CTableElement {
 			$row->query('button:Remove')->one()->click();
 		}
 
-		$this->query(self::ROW_SELECTOR)->waitUntilNotPresent();
+		$this->query($this->selectors['row'])->waitUntilNotPresent();
 
 		return $this;
 	}
@@ -328,6 +432,47 @@ class CMultifieldTableElement extends CTableElement {
 	 * @return $this
 	 */
 	public function fill($data) {
+		if (CTestArrayHelper::isAssociative($data)) {
+			$data = [$data];
+		}
+
+		$rows = $this->getRows()->count();
+		if (count($data) >= 1 && CTestArrayHelper::get($data[0], 'action') === null && $rows >= 1) {
+			if ($this->mapping === null) {
+				$this->mapping = $this->detectFieldMapping();
+			}
+
+			$fields = [];
+			foreach ($this->mapping as $mapping) {
+				if (!is_array($mapping) || !array_key_exists('name', $mapping) || !array_key_exists('class', $mapping)) {
+					continue;
+				}
+
+				$fields[$mapping['name']] = $mapping['class'];
+			}
+
+			$empty = true;
+			$values = $this->getRowValue($rows - 1);
+
+			foreach ($values as $key => $value) {
+				// Elements with predefined values are always ignored.
+				if (in_array(CTestArrayHelper::get($fields, $key), [CDropdownElement::class, CCheckboxElement::class,
+					CRadioButtonList::class, CSegmentedRadioElement::class])) {
+					continue;
+				}
+
+				if ($value !== '') {
+					$empty = false;
+					break;
+				}
+			}
+
+			if ($empty) {
+				$data[0]['action'] = USER_ACTION_UPDATE;
+				$data[0]['index'] = $rows - 1;
+			}
+		}
+
 		foreach ($data as $row) {
 			$action = CTestArrayHelper::get($row, 'action', USER_ACTION_ADD);
 			unset($row['action']);

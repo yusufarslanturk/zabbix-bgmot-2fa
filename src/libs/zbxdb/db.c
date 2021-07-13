@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -80,6 +80,8 @@ static int	txn_end_error = ZBX_DB_OK;	/* transaction result */
 static char	*last_db_strerror = NULL;	/* last database error message */
 
 extern int	CONFIG_LOG_SLOW_QUERIES;
+
+static int	db_auto_increment;
 
 #if defined(HAVE_IBM_DB2)
 typedef struct
@@ -354,6 +356,18 @@ static int	is_recoverable_postgresql_error(const PGconn *pg_conn, const PGresult
 
 /******************************************************************************
  *                                                                            *
+ * Function: zbx_db_init_autoincrement_options                                *
+ *                                                                            *
+ * Purpose: specify the autoincrement options during db connect               *
+ *                                                                            *
+ ******************************************************************************/
+void	zbx_db_init_autoincrement_options(void)
+{
+	db_auto_increment = 1;
+}
+
+/******************************************************************************
+ *                                                                            *
  * Function: zbx_db_connect                                                   *
  *                                                                            *
  * Purpose: connect to the database                                           *
@@ -490,7 +504,28 @@ int	zbx_db_connect(char *host, char *user, char *password, char *dbname, char *d
 		exit(EXIT_FAILURE);
 	}
 
-	if (NULL == mysql_real_connect(conn, host, user, password, dbname, port, dbsocket, CLIENT_MULTI_STATEMENTS))
+	if (1 == db_auto_increment)
+	{
+		/* Shadow global auto_increment variables. */
+		/* Setting session variables requires special permissions in MySQL 8.0.14-8.0.17. */
+
+		if (0 != MYSQL_OPTIONS(conn, MYSQL_INIT_COMMAND, MYSQL_OPTIONS_ARGS_VOID_CAST
+				"set @@session.auto_increment_increment=1"))
+		{
+			zabbix_log(LOG_LEVEL_ERR, "Cannot set auto_increment_increment option.");
+			ret = ZBX_DB_FAIL;
+		}
+
+		if (ZBX_DB_OK == ret && 0 != MYSQL_OPTIONS(conn, MYSQL_INIT_COMMAND, MYSQL_OPTIONS_ARGS_VOID_CAST
+				"set @@session.auto_increment_offset=1"))
+		{
+			zabbix_log(LOG_LEVEL_ERR, "Cannot set auto_increment_offset option.");
+			ret = ZBX_DB_FAIL;
+		}
+	}
+
+	if (ZBX_DB_OK == ret && NULL == mysql_real_connect(conn, host, user, password, dbname, port, dbsocket,
+			CLIENT_MULTI_STATEMENTS))
 	{
 		zbx_db_errlog(ERR_Z3001, mysql_errno(conn), mysql_error(conn), dbname);
 		ret = ZBX_DB_FAIL;

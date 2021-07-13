@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -304,7 +304,7 @@ if ($data['action'] == 'problem.view') {
 				(new CLabel(_('Show timeline'), 'filter_show_timeline'))->addClass(ZBX_STYLE_SECOND_COLUMN_LABEL),
 				(new CCheckBox('filter_show_timeline'))
 					->setChecked($data['filter']['show_timeline'] == 1)
-					->setEnabled($data['filter']['compact_view'] == 0),
+					->setEnabled($data['filter']['compact_view'] == 0)
 			]))->addClass(ZBX_STYLE_TABLE_FORMS_SECOND_COLUMN)
 		])
 		->addRow(_('Show details'), [

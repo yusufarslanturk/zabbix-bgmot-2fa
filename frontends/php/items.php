@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -134,7 +134,11 @@ $fields = [
 	'jmx_endpoint' =>			[T_ZBX_STR, O_OPT, null,	NOT_EMPTY,
 		'(isset({add}) || isset({update})) && isset({type}) && {type} == '.ITEM_TYPE_JMX
 	],
-	'timeout' => 				[T_ZBX_STR, O_OPT, null,	null,		null],
+	'timeout' => 				[T_ZBX_TU, O_OPT, P_ALLOW_USER_MACRO,	null,
+									'(isset({add}) || isset({update})) && isset({type})'.
+										' && {type} == '.ITEM_TYPE_HTTPAGENT,
+									_('Timeout')
+								],
 	'url' =>            		[T_ZBX_STR, O_OPT, null,	NOT_EMPTY,
 		'(isset({add}) || isset({update})) && isset({type}) && {type} == '.ITEM_TYPE_HTTPAGENT, _('URL')],
 	'query_fields' =>			[T_ZBX_STR, O_OPT, null,	null,		null],
@@ -635,7 +639,7 @@ elseif (hasRequest('add') || hasRequest('update')) {
 				'applications' => $applications,
 				'inventory_link' => getRequest('inventory_link', 0),
 				'description' => getRequest('description', ''),
-				'status' => getRequest('status', ITEM_STATUS_DISABLED),
+				'status' => getRequest('status', ITEM_STATUS_DISABLED)
 			];
 
 			if ($item['type'] == ITEM_TYPE_HTTPAGENT) {
@@ -1280,34 +1284,45 @@ elseif (hasRequest('action') && getRequest('action') === 'item.massclearhistory'
 	$items = API::Item()->get([
 		'output' => ['itemid', 'key_'],
 		'itemids' => $itemIds,
-		'selectHosts' => ['name'],
+		'selectHosts' => ['name', 'status'],
 		'editable' => true
 	]);
 
 	if ($items) {
-		DBstart();
-
-		$result = Manager::History()->deleteHistory($itemIds);
-
-		if ($result) {
-			foreach ($items as $item) {
-				$host = reset($item['hosts']);
-
-				add_audit(AUDIT_ACTION_UPDATE, AUDIT_RESOURCE_ITEM,
-					_('Item').' ['.$item['key_'].'] ['.$item['itemid'].'] '. _('Host').' ['.$host['name'].'] '.
-						_('History cleared')
-				);
-			}
+		// Check items belong only to hosts.
+		$hosts_status = [];
+		foreach ($items as $item) {
+			$hosts_status[$item['hosts'][0]['status']] = true;
 		}
 
-		$result = DBend($result);
+		if (array_key_exists(HOST_STATUS_TEMPLATE, $hosts_status)) {
+			$result = false;
+		}
+		else {
+			DBstart();
 
-		if ($result) {
-			uncheckTableRows(getRequest('hostid'));
+			$result = Manager::History()->deleteHistory($itemIds);
+
+			if ($result) {
+				foreach ($items as $item) {
+					$host = reset($item['hosts']);
+
+					add_audit(AUDIT_ACTION_UPDATE, AUDIT_RESOURCE_ITEM,
+						_('Item').' ['.$item['key_'].'] ['.$item['itemid'].'] '. _('Host').' ['.$host['name'].'] '.
+							_('History cleared')
+					);
+				}
+			}
+
+			$result = DBend($result);
+
+			if ($result) {
+				uncheckTableRows(getRequest('hostid'));
+			}
 		}
 	}
 
-	show_messages($result, _('History cleared'), _('Cannot clear history'));
+	show_messages($result, _('History cleared'), _('Cannot clear history: at least one of the selected items doesn\'t belong to any monitored host'));
 }
 elseif (hasRequest('action') && getRequest('action') === 'item.massdelete' && hasRequest('group_itemid')) {
 	$group_itemid = getRequest('group_itemid');
@@ -1688,7 +1703,8 @@ else {
 		'hostid' => getRequest('hostid'),
 		'sort' => $sortField,
 		'sortorder' => $sortOrder,
-		'config' => $config
+		'config' => $config,
+		'is_template' => true
 	];
 
 	// items
@@ -2012,7 +2028,22 @@ else {
 			order_result($data['items'], $sortField, $sortOrder);
 	}
 
+	// Set is_template false, when one of hosts is not template.
+	if ($data['items']) {
+		$hosts_status = [];
+		foreach ($data['items'] as $item) {
+			$hosts_status[$item['hosts'][0]['status']] = true;
+		}
+		foreach ($hosts_status as $key => $value) {
+			if ($key != HOST_STATUS_TEMPLATE) {
+				$data['is_template'] = false;
+				break;
+			}
+		}
+	}
+
 	$data['paging'] = getPagingLine($data['items'], $sortOrder, new CUrl('items.php'));
+
 	$data['parent_templates'] = getItemParentTemplates($data['items'], ZBX_FLAG_DISCOVERY_NORMAL);
 
 	$itemTriggerIds = [];

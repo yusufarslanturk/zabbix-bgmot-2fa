@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ foreach (range(TRIGGER_SEVERITY_NOT_CLASSIFIED, TRIGGER_SEVERITY_COUNT - 1) as $
 }
 
 $filter_column = (new CFormList())
-	->addRow((new CLabel(_('Host groups'), 'groupids__ms')),
+	->addRow(new CLabel(_('Host groups'), 'groupids__ms'),
 		(new CMultiSelect([
 			'name' => 'groupids[]',
 			'object_name' => 'hostGroup',
@@ -48,7 +48,7 @@ $filter_column = (new CFormList())
 			]
 		]))->setWidth(ZBX_TEXTAREA_FILTER_STANDARD_WIDTH)
 	)
-	->addRow((new CLabel(_('Hosts'), 'hostids__ms')),
+	->addRow(new CLabel(_('Hosts'), 'hostids__ms'),
 		(new CMultiSelect([
 			'name' => 'hostids[]',
 			'object_name' => 'hosts',
@@ -63,7 +63,7 @@ $filter_column = (new CFormList())
 			]
 		]))->setWidth(ZBX_TEXTAREA_FILTER_STANDARD_WIDTH)
 	)
-	->addRow(_('Severity'),
+	->addRow(new CLabel(_('Severity')),
 		(new CTable())
 			->addRow($severity_columns[0])
 			->addRow($severity_columns[1])

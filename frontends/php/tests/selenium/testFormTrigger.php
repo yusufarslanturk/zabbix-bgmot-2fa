@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@
 **/
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
+
+use Facebook\WebDriver\WebDriverBy;
 
 /**
  * @backup triggers
@@ -439,7 +441,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'expression' => '6 and 0 or 0',
 					'error_msg' => 'Cannot add trigger',
 					'errors' => [
-						'Trigger expression must contain at least one host:key reference.',
+						'Invalid parameter "/1/expression": trigger expression must contain at least one host:key reference.'
 					]
 				]
 			],
@@ -450,7 +452,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'expression' => '{Simple form test host}',
 					'error_msg' => 'Cannot add trigger',
 					'errors' => [
-						'Incorrect trigger expression. Check expression part starting from "{Simple form test host}".'
+						'Invalid parameter "/1/expression": incorrect trigger expression starting from "{Simple form test host}".'
 					]
 				]
 			],
@@ -588,7 +590,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'expected' => TEST_GOOD,
 					'description' => 'MyTrigger_CheckURL',
 					'expression' => '{Simple form test host:test-item-reuse.last(0)}<4',
-					'url' => 'triggers.php',
+					'url' => 'triggers.php'
 				]
 			],
 			[
@@ -596,22 +598,10 @@ class testFormTrigger extends CLegacyWebTest {
 					'expected' => TEST_BAD,
 					'description' => 'MyTrigger_CheckUrl',
 					'expression' => '{Simple form test host:test-item-reuse.last(0)}<5',
-					'url' => 'www.zabbix.com',
+					'url' => 'javascript:alert(123);',
 					'error_msg' => 'Cannot add trigger',
 					'errors' => [
-						'Wrong value for url field.'
-					]
-				]
-			],
-			[
-				[
-					'expected' => TEST_BAD,
-					'description' => 'MyTrigger_CheckUrl',
-					'expression' => '{Simple form test host:test-item-reuse.last(0)}<5',
-					'url' => 'zabbix.com',
-					'error_msg' => 'Cannot add trigger',
-					'errors' => [
-						'Wrong value for url field.'
+						'Invalid parameter "/1/url": unacceptable URL.'
 					]
 				]
 			],
@@ -655,7 +645,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'expression' => '{Simple form test host:test-item-reuse.last(0)} or {#MACRO}',
 					'error_msg' => 'Cannot add trigger',
 					'errors' => [
-						'Incorrect trigger expression. Check expression part starting from " {#MACRO}".'
+						'Invalid parameter "/1/expression": incorrect trigger expression starting from " {#MACRO}".'
 					]
 				]
 			],
@@ -718,7 +708,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host@:test-item-reuse.last(0)}".'],
+							'Incorrect trigger expression. Check expression part starting from "{Simple form test host@:test-item-reuse.last(0)}".']
 						]
 					]
 				]
@@ -731,7 +721,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}".'],
+							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}".']
 						]
 					]
 				]
@@ -744,7 +734,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}".'],
+							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:system .uptime.last(0)}".']
 						]
 					]
 				]
@@ -757,7 +747,7 @@ class testFormTrigger extends CLegacyWebTest {
 					'constructor' => [[
 						'errors' => [
 							'Expression syntax error.',
-							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:test-item-reuse.lastA(0)}".'],
+							'Incorrect trigger expression. Check expression part starting from "{Simple form test host:test-item-reuse.lastA(0)}".']
 						]
 					]
 				]

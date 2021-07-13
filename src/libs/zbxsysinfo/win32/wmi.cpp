@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@ extern "C"
 #	include "common.h"
 #	include "sysinfo.h"
 #	include "log.h"
+#	include "cfg.h"
 }
 
 #include <comdef.h>
@@ -79,6 +80,7 @@ extern "C" void	zbx_co_uninitialize()
  *                                                                            *
  * Parameters: wmi_namespace [IN]  - object path of the WMI namespace (UTF-8) *
  *             wmi_query     [IN]  - WQL query (UTF-8)                        *
+ *             timeout       [IN]  - query timeout in seconds                 *
  *             vtProp        [OUT] - pointer to memory for the queried value  *
  *                                                                            *
  * Return value: SYSINFO_RET_OK   - *vtProp contains the retrieved WMI value  *
@@ -89,7 +91,7 @@ extern "C" void	zbx_co_uninitialize()
  *           intended format using VariantChangeType()                        *
  *                                                                            *
  ******************************************************************************/
-extern "C" int	zbx_wmi_get_variant(const char *wmi_namespace, const char *wmi_query, VARIANT *vtProp)
+extern "C" int	zbx_wmi_get_variant(const char *wmi_namespace, const char *wmi_query, double timeout, VARIANT *vtProp)
 {
 	IWbemLocator		*pLoc = 0;
 	IWbemServices		*pService = 0;
@@ -145,7 +147,14 @@ extern "C" int	zbx_wmi_get_variant(const char *wmi_namespace, const char *wmi_qu
 		IWbemClassObject	*pclsObj = 0;
 		ULONG			uReturn = 0;
 
-		hres = pEnumerator->Next(WBEM_INFINITE, 1, &pclsObj, &uReturn);
+		hres = pEnumerator->Next((long)(1000 * timeout), 1, &pclsObj, &uReturn);
+
+		if (WBEM_S_TIMEDOUT == hres)
+		{
+			ret = SYSINFO_RET_FAIL;
+			zabbix_log(LOG_LEVEL_DEBUG, "WMI query timeout");
+			goto exit;
+		}
 
 		if (0 == uReturn)
 			goto exit;
@@ -214,7 +223,7 @@ exit:
  *           to check for this condition). Callers must free *utf8_value.     *
  *                                                                            *
  ******************************************************************************/
-extern "C" void	zbx_wmi_get(const char *wmi_namespace, const char *wmi_query, char **utf8_value)
+extern "C" void	zbx_wmi_get(const char *wmi_namespace, const char *wmi_query, double timeout, char **utf8_value)
 {
 	VARIANT		vtProp;
 	HRESULT		hres;
@@ -227,7 +236,7 @@ extern "C" void	zbx_wmi_get(const char *wmi_namespace, const char *wmi_query, ch
 		goto out;
 	}
 
-	if (SYSINFO_RET_FAIL == zbx_wmi_get_variant(wmi_namespace, wmi_query, &vtProp))
+	if (SYSINFO_RET_FAIL == zbx_wmi_get_variant(wmi_namespace, wmi_query, timeout, &vtProp))
 	{
 		zabbix_log(LOG_LEVEL_DEBUG, "cannot get WMI result");
 		goto out;
@@ -270,7 +279,7 @@ extern "C" int	WMI_GET(AGENT_REQUEST *request, AGENT_RESULT *result)
 		return SYSINFO_RET_FAIL;
 	}
 
-	if (SYSINFO_RET_FAIL == zbx_wmi_get_variant(wmi_namespace, wmi_query, &vtProp))
+	if (SYSINFO_RET_FAIL == zbx_wmi_get_variant(wmi_namespace, wmi_query, CONFIG_TIMEOUT, &vtProp))
 	{
 		zabbix_log(LOG_LEVEL_DEBUG, "cannot get WMI result");
 		goto out;

@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,12 +19,14 @@
 **/
 
 
-class CADNameAttributeParserTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class CADNameAttributeParserTest extends TestCase {
 
 	/**
 	 * An array of user name strings and parsed results.
 	 */
-	public static function testProvider() {
+	public static function dataProvider() {
 		$strict = ['strict' => true];
 		// Parse only sAMAccountName.
 		$only_sama = ['nametype' => CADNameAttributeParser::ZBX_TYPE_SAMA];
@@ -59,7 +61,7 @@ class CADNameAttributeParserTest extends PHPUnit_Framework_TestCase {
 					'rc' => CParser::PARSE_SUCCESS,
 					'match' => 'ainnamegoeshere\user',
 					'user' => 'user',
-					'domain' => 'ainnamegoeshere',
+					'domain' => 'ainnamegoeshere'
 				] + $should_be_sama
 			],
 			[
@@ -68,7 +70,7 @@ class CADNameAttributeParserTest extends PHPUnit_Framework_TestCase {
 					'rc' => CParser::PARSE_SUCCESS,
 					'match' => 'domain\user',
 					'user' => 'user',
-					'domain' => 'domain',
+					'domain' => 'domain'
 				] + $should_be_sama
 			],
 			[
@@ -92,7 +94,7 @@ class CADNameAttributeParserTest extends PHPUnit_Framework_TestCase {
 					'rc' => CParser::PARSE_SUCCESS,
 					'match' => 'longdomainnamegoeshere\user',
 					'user' => 'user',
-					'domain' => 'longdomainnamegoeshere',
+					'domain' => 'longdomainnamegoeshere'
 				] + $should_be_sama
 			],
 			[
@@ -132,7 +134,7 @@ class CADNameAttributeParserTest extends PHPUnit_Framework_TestCase {
 					'rc' => CParser::PARSE_SUCCESS,
 					'match' => 'anna@comp',
 					'user' => 'anna',
-					'domain' => 'comp',
+					'domain' => 'comp'
 				] + $should_be_upn
 			],
 			[
@@ -141,7 +143,7 @@ class CADNameAttributeParserTest extends PHPUnit_Framework_TestCase {
 					'rc' => CParser::PARSE_SUCCESS,
 					'match' => 'user@example.com',
 					'user' => 'user',
-					'domain' => 'example.com',
+					'domain' => 'example.com'
 				] + $should_be_upn
 			],
 			[
@@ -150,7 +152,7 @@ class CADNameAttributeParserTest extends PHPUnit_Framework_TestCase {
 					'rc' => CParser::PARSE_SUCCESS,
 					'match' => 'user@example.com',
 					'user' => 'user',
-					'domain' => 'example.com',
+					'domain' => 'example.com'
 				] + $should_be_upn
 			],
 			[
@@ -159,7 +161,7 @@ class CADNameAttributeParserTest extends PHPUnit_Framework_TestCase {
 					'rc' => CParser::PARSE_SUCCESS,
 					'match' => 'r@cameron@mydomain.com',
 					'user' => 'r@cameron',
-					'domain' => 'mydomain.com',
+					'domain' => 'mydomain.com'
 				] + $should_be_upn
 			],
 			// sAMAccountName or UPN
@@ -176,7 +178,7 @@ class CADNameAttributeParserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testProvider
+	 * @dataProvider dataProvider
 	 *
 	 * @param string $source
 	 * @param int    $pos

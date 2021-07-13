@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -195,7 +195,7 @@ class CUserMacro extends CApiService {
 		// init GLOBALS
 		if (!is_null($options['globalmacro'])) {
 			$sqlPartsGlobal = $this->applyQueryOutputOptions('globalmacro', 'gm', $options, $sqlPartsGlobal);
-			$res = DBselect($this->createSelectQueryFromParts($sqlPartsGlobal), $sqlPartsGlobal['limit']);
+			$res = DBselect(self::createSelectQueryFromParts($sqlPartsGlobal), $sqlPartsGlobal['limit']);
 			while ($macro = DBfetch($res)) {
 				if ($options['countOutput']) {
 					$result = $macro['rowscount'];
@@ -208,7 +208,7 @@ class CUserMacro extends CApiService {
 		// init HOSTS
 		else {
 			$sqlParts = $this->applyQueryOutputOptions('hostmacro', 'hm', $options, $sqlParts);
-			$res = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+			$res = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 			while ($macro = DBfetch($res)) {
 				if ($options['countOutput']) {
 					$result = $macro['rowscount'];
@@ -471,6 +471,10 @@ class CUserMacro extends CApiService {
 	 * @throws APIException if the input is invalid.
 	 */
 	protected function validateCreate(array $hostmacros) {
+		if (!$hostmacros) {
+			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+		}
+
 		// Check the data required for authorization first.
 		foreach ($hostmacros as $hostmacro) {
 			$this->checkHostId($hostmacro);
@@ -513,6 +517,10 @@ class CUserMacro extends CApiService {
 	 * @throws APIException if the input is invalid.
 	 */
 	protected function validateUpdate(array $hostmacros) {
+		if (!$hostmacros) {
+			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+		}
+
 		$required_fields = ['hostmacroid'];
 
 		foreach ($hostmacros as $hostmacro) {
@@ -528,7 +536,7 @@ class CUserMacro extends CApiService {
 		// Make sure we have all the data we need.
 		$hostmacros = $this->extendObjects($this->tableName(), $hostmacros, ['macro', 'hostid']);
 
-		$db_hostmacros = API::getApiService()->select($this->tableName(), [
+		$db_hostmacros = DB::select($this->tableName(), [
 			'output' => ['hostmacroid', 'hostid', 'macro'],
 			'hostmacroids' => zbx_objectValues($hostmacros, 'hostmacroid')
 		]);
@@ -748,6 +756,9 @@ class CUserMacro extends CApiService {
 			$count = API::Host()->get([
 				'countOutput' => true,
 				'hostids' => $hostids,
+				'filter' => [
+					'flags' => ZBX_FLAG_DISCOVERY_NORMAL
+				],
 				'editable' => true
 			]);
 
@@ -758,6 +769,9 @@ class CUserMacro extends CApiService {
 			$count += API::Template()->get([
 				'countOutput' => true,
 				'templateids' => $hostids,
+				'filter' => [
+					'flags' => ZBX_FLAG_DISCOVERY_NORMAL
+				],
 				'editable' => true
 			]);
 

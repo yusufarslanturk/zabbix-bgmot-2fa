@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -372,7 +372,7 @@ static int	evaluate_LOGSOURCE(char *value, DC_ITEM *item, const char *parameters
 
 	if (SUCCEED == zbx_vc_get_value(item->itemid, item->value_type, ts, &vc_value))
 	{
-		switch (regexp_match_ex(&regexps, vc_value.value.log->source, arg1, ZBX_CASE_SENSITIVE))
+		switch (regexp_match_ex(&regexps, ZBX_NULL2EMPTY_STR(vc_value.value.log->source), arg1, ZBX_CASE_SENSITIVE))
 		{
 			case ZBX_REGEXP_MATCH:
 				zbx_strlcpy(value, "1", MAX_BUFFER_LEN);
@@ -2652,8 +2652,8 @@ out:
  *                                                                            *
  * Purpose: evaluate function                                                 *
  *                                                                            *
- * Parameters: item - item to calculate function for                          *
- *             function - function (for example, 'max')                       *
+ * Parameters: item      - item to calculate function for                     *
+ *             function  - function (for example, 'max')                      *
  *             parameter - parameter of the function                          *
  *                                                                            *
  * Return value: SUCCEED - evaluated successfully, value contains its value   *

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -152,7 +152,7 @@ $discoveryForm->addItem([
 			'discoveryrule.massdisable' => ['name' => _('Disable'),
 				'confirm' =>_('Disable selected discovery rules?')
 			],
-			'discoveryrule.masscheck_now' => ['name' => _('Check now')],
+			'discoveryrule.masscheck_now' => ['name' => _('Check now'), 'disabled' => $data['is_template']],
 			'discoveryrule.massdelete' => ['name' => _('Delete'),
 				'confirm' =>_('Delete selected discovery rules?')
 			]

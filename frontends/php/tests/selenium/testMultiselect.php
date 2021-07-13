@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -94,7 +94,7 @@ class testMultiselect extends CWebTest {
 
 		$this->page->login()->open('zabbix.php?action=dashboard.list');
 		$this->query('button:Create dashboard')->one()->click();
-		$dialog = COverlayDialogElement::find()->one()->waitUntilReady();
+		$dialog = COverlayDialogElement::find()->waitUntilVisible()->one()->waitUntilReady();
 		$this->assertEquals('Dashboard properties', $dialog->getTitle());
 		$dialog->close();
 		$dashboard = CDashboardElement::find()->one();

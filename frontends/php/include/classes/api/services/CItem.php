@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -27,6 +27,17 @@ class CItem extends CItemGeneral {
 	protected $tableName = 'items';
 	protected $tableAlias = 'i';
 	protected $sortColumns = ['itemid', 'name', 'key_', 'delay', 'history', 'trends', 'type', 'status'];
+
+	/**
+	 * Define a set of supported item types.
+	 *
+	 * @var array
+	 */
+	protected $supported_item_types = [ITEM_TYPE_ZABBIX, ITEM_TYPE_SNMPV1, ITEM_TYPE_TRAPPER, ITEM_TYPE_SIMPLE,
+		ITEM_TYPE_SNMPV2C, ITEM_TYPE_INTERNAL, ITEM_TYPE_SNMPV3, ITEM_TYPE_ZABBIX_ACTIVE, ITEM_TYPE_AGGREGATE,
+		ITEM_TYPE_EXTERNAL, ITEM_TYPE_DB_MONITOR, ITEM_TYPE_IPMI, ITEM_TYPE_SSH, ITEM_TYPE_TELNET, ITEM_TYPE_CALCULATED,
+		ITEM_TYPE_JMX, ITEM_TYPE_SNMPTRAP, ITEM_TYPE_DEPENDENT, ITEM_TYPE_HTTPAGENT
+	];
 
 	public function __construct() {
 		parent::__construct();
@@ -361,7 +372,7 @@ class CItem extends CItemGeneral {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$res = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$res = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($item = DBfetch($res)) {
 			if ($options['countOutput']) {
 				if ($options['groupCount']) {
@@ -967,12 +978,17 @@ class CItem extends CItemGeneral {
 
 		// adding applications
 		if ($options['selectApplications'] !== null && $options['selectApplications'] != API_OUTPUT_COUNT) {
+			$applications = [];
 			$relationMap = $this->createRelationMap($result, 'itemid', 'applicationid', 'items_applications');
-			$applications = API::Application()->get([
-				'output' => $options['selectApplications'],
-				'applicationids' => $relationMap->getRelatedIds(),
-				'preservekeys' => true
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$applications = API::Application()->get([
+					'output' => $options['selectApplications'],
+					'applicationids' => $related_ids,
+					'preservekeys' => true
+				]);
+			}
 			$result = $relationMap->mapMany($result, $applications, 'applications');
 		}
 
@@ -991,16 +1007,22 @@ class CItem extends CItemGeneral {
 		// adding triggers
 		if (!is_null($options['selectTriggers'])) {
 			if ($options['selectTriggers'] != API_OUTPUT_COUNT) {
+				$triggers = [];
 				$relationMap = $this->createRelationMap($result, 'itemid', 'triggerid', 'functions');
-				$triggers = API::Trigger()->get([
-					'output' => $options['selectTriggers'],
-					'triggerids' => $relationMap->getRelatedIds(),
-					'preservekeys' => true
-				]);
+				$related_ids = $relationMap->getRelatedIds();
 
-				if (!is_null($options['limitSelects'])) {
-					order_result($triggers, 'description');
+				if ($related_ids) {
+					$triggers = API::Trigger()->get([
+						'output' => $options['selectTriggers'],
+						'triggerids' => $related_ids,
+						'preservekeys' => true
+					]);
+
+					if (!is_null($options['limitSelects'])) {
+						order_result($triggers, 'description');
+					}
 				}
+
 				$result = $relationMap->mapMany($result, $triggers, 'triggers', $options['limitSelects']);
 			}
 			else {
@@ -1022,16 +1044,22 @@ class CItem extends CItemGeneral {
 		// adding graphs
 		if (!is_null($options['selectGraphs'])) {
 			if ($options['selectGraphs'] != API_OUTPUT_COUNT) {
+				$graphs = [];
 				$relationMap = $this->createRelationMap($result, 'itemid', 'graphid', 'graphs_items');
-				$graphs = API::Graph()->get([
-					'output' => $options['selectGraphs'],
-					'graphids' => $relationMap->getRelatedIds(),
-					'preservekeys' => true
-				]);
+				$related_ids = $relationMap->getRelatedIds();
 
-				if (!is_null($options['limitSelects'])) {
-					order_result($graphs, 'name');
+				if ($related_ids) {
+					$graphs = API::Graph()->get([
+						'output' => $options['selectGraphs'],
+						'graphids' => $related_ids,
+						'preservekeys' => true
+					]);
+
+					if (!is_null($options['limitSelects'])) {
+						order_result($graphs, 'name');
+					}
 				}
+
 				$result = $relationMap->mapMany($result, $graphs, 'graphs', $options['limitSelects']);
 			}
 			else {
@@ -1052,6 +1080,7 @@ class CItem extends CItemGeneral {
 
 		// adding discoveryrule
 		if ($options['selectDiscoveryRule'] !== null && $options['selectDiscoveryRule'] != API_OUTPUT_COUNT) {
+			$discoveryRules = [];
 			$relationMap = new CRelationMap();
 			// discovered items
 			$dbRules = DBselect(
@@ -1079,12 +1108,17 @@ class CItem extends CItemGeneral {
 				$relationMap->addRelation($rule['itemid'], $rule['parent_itemid']);
 			}
 
-			$discoveryRules = API::DiscoveryRule()->get([
-				'output' => $options['selectDiscoveryRule'],
-				'itemids' => $relationMap->getRelatedIds(),
-				'nopermissions' => true,
-				'preservekeys' => true
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$discoveryRules = API::DiscoveryRule()->get([
+					'output' => $options['selectDiscoveryRule'],
+					'itemids' => $related_ids,
+					'nopermissions' => true,
+					'preservekeys' => true
+				]);
+			}
+
 			$result = $relationMap->mapOne($result, $discoveryRules, 'discoveryRule');
 		}
 
@@ -1144,7 +1178,7 @@ class CItem extends CItemGeneral {
 		if ($options['selectPreprocessing'] !== null && $options['selectPreprocessing'] != API_OUTPUT_COUNT) {
 			$db_item_preproc = API::getApiService()->select('item_preproc', [
 				'output' => $this->outputExtend($options['selectPreprocessing'], ['itemid', 'step']),
-				'filter' => ['itemid' => array_keys($result)],
+				'filter' => ['itemid' => array_keys($result)]
 			]);
 
 			CArrayHelper::sort($db_item_preproc, ['step']);

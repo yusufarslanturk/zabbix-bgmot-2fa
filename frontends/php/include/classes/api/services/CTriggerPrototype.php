@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -371,7 +371,7 @@ class CTriggerPrototype extends CTriggerGeneral {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$dbRes = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$dbRes = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($triggerPrototype = DBfetch($dbRes)) {
 			if ($options['countOutput']) {
 				if ($options['groupCount']) {
@@ -427,14 +427,9 @@ class CTriggerPrototype extends CTriggerGeneral {
 	 * @return array
 	 */
 	public function create(array $trigger_prototypes) {
-		$trigger_prototypes = zbx_toArray($trigger_prototypes);
-
 		$this->validateCreate($trigger_prototypes);
 		$this->createReal($trigger_prototypes);
-
-		foreach ($trigger_prototypes as $trigger_prototype) {
-			$this->inherit($trigger_prototype);
-		}
+		$this->inherit($trigger_prototypes);
 
 		$addDependencies = false;
 
@@ -461,15 +456,9 @@ class CTriggerPrototype extends CTriggerGeneral {
 	 * @return array
 	 */
 	public function update(array $trigger_prototypes) {
-		$trigger_prototypes = zbx_toArray($trigger_prototypes);
-		$db_triggers = [];
-
 		$this->validateUpdate($trigger_prototypes, $db_triggers);
 		$this->updateReal($trigger_prototypes, $db_triggers);
-
-		foreach ($trigger_prototypes as $trigger_prototype) {
-			$this->inherit($trigger_prototype);
-		}
+		$this->inherit($trigger_prototypes);
 
 		$updateDependencies = false;
 
@@ -610,7 +599,7 @@ class CTriggerPrototype extends CTriggerGeneral {
 			foreach ($triggerPrototype['dependencies'] as $dependency) {
 				$insert[] = [
 					'triggerid_down' => $triggerPrototype['triggerid'],
-					'triggerid_up' => $dependency['triggerid'],
+					'triggerid_up' => $dependency['triggerid']
 				];
 			}
 		}
@@ -653,22 +642,22 @@ class CTriggerPrototype extends CTriggerGeneral {
 	/**
 	 * Validates the input for the addDependencies() method.
 	 *
-	 * @param array  $triggerPrototypes
-	 * @param string $triggerPrototypes[]['triggerid']
-	 * @param array  $triggerPrototypes[]['dependencies']
-	 * @param string $triggerPrototypes[]['dependencies'][]['triggerid']
+	 * @param array  $trigger_prototypes
+	 * @param string $trigger_prototypes[]['triggerid']
+	 * @param array  $trigger_prototypes[]['dependencies']
+	 * @param string $trigger_prototypes[]['dependencies'][]['triggerid']
 	 *
 	 * @throws APIException if the given dependencies are invalid.
 	 */
-	protected function validateAddDependencies(array $triggerPrototypes) {
+	protected function validateAddDependencies(array $trigger_prototypes) {
 		$depTriggerIds = [];
 
-		foreach ($triggerPrototypes as $triggerPrototype) {
-			if (!array_key_exists('dependencies', $triggerPrototype)) {
+		foreach ($trigger_prototypes as $trigger_prototype) {
+			if (!array_key_exists('dependencies', $trigger_prototype)) {
 				continue;
 			}
 
-			foreach ($triggerPrototype['dependencies'] as $dependency) {
+			foreach ($trigger_prototype['dependencies'] as $dependency) {
 				$depTriggerIds[$dependency['triggerid']] = $dependency['triggerid'];
 			}
 		}
@@ -690,19 +679,19 @@ class CTriggerPrototype extends CTriggerGeneral {
 			$dRules = $this->get([
 				'output' => ['triggerid'],
 				'selectDiscoveryRule' => ['itemid'],
-				'triggerids' => zbx_objectValues($triggerPrototypes, 'triggerid'),
+				'triggerids' => zbx_objectValues($trigger_prototypes, 'triggerid'),
 				'preservekeys' => true
 			]);
 
-			foreach ($triggerPrototypes as $triggerPrototype) {
-				if (!array_key_exists('dependencies', $triggerPrototype)) {
+			foreach ($trigger_prototypes as $trigger_prototype) {
+				if (!array_key_exists('dependencies', $trigger_prototype)) {
 					continue;
 				}
 
-				$dRuleId = $dRules[$triggerPrototype['triggerid']]['discoveryRule']['itemid'];
+				$dRuleId = $dRules[$trigger_prototype['triggerid']]['discoveryRule']['itemid'];
 
 				// Check if current trigger prototype rules match dependent trigger prototype rules.
-				foreach ($triggerPrototype['dependencies'] as $dependency) {
+				foreach ($trigger_prototype['dependencies'] as $dependency) {
 					if (isset($depTriggerPrototypes[$dependency['triggerid']])) {
 						$depTriggerDRuleId = $depTriggerPrototypes[$dependency['triggerid']]['discoveryRule']['itemid'];
 
@@ -729,9 +718,9 @@ class CTriggerPrototype extends CTriggerGeneral {
 			self::exception(ZBX_API_ERROR_PERMISSIONS, _('No permissions to referred object or it does not exist!'));
 		}
 
-		$this->checkDependencies($triggerPrototypes);
-		$this->checkDependencyParents($triggerPrototypes);
-		$this->checkDependencyDuplicates($triggerPrototypes);
+		$this->checkDependencies($trigger_prototypes);
+		$this->checkDependencyParents($trigger_prototypes);
+		$this->checkDependencyDuplicates($trigger_prototypes);
 	}
 
 	/**
@@ -1076,26 +1065,29 @@ class CTriggerPrototype extends CTriggerGeneral {
 
 		$triggerPrototypeIds = array_keys($result);
 
+		// Add trigger prototype dependencies.
 		if ($options['selectDependencies'] !== null && $options['selectDependencies'] != API_OUTPUT_COUNT) {
-			// Add trigger prototype dependencies.
-
+			$dependencies = [];
+			$relationMap = new CRelationMap();
 			$res = DBselect(
 				'SELECT td.triggerid_up,td.triggerid_down'.
 				' FROM trigger_depends td'.
 				' WHERE '.dbConditionInt('td.triggerid_down', $triggerPrototypeIds)
 			);
 
-			$relationMap = new CRelationMap();
-
 			while ($relation = DBfetch($res)) {
 				$relationMap->addRelation($relation['triggerid_down'], $relation['triggerid_up']);
 			}
 
-			$dependencies = API::getApiService()->select($this->tableName(), [
-				'output' => $options['selectDependencies'],
-				'triggerids' => $relationMap->getRelatedIds(),
-				'preservekeys' => true
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$dependencies = API::getApiService()->select($this->tableName(), [
+					'output' => $options['selectDependencies'],
+					'triggerids' => $related_ids,
+					'preservekeys' => true
+				]);
+			}
 
 			$result = $relationMap->mapMany($result, $dependencies, 'dependencies');
 		}
@@ -1131,7 +1123,7 @@ class CTriggerPrototype extends CTriggerGeneral {
 				'output' => $options['selectDiscoveryRule'],
 				'itemids' => $relationMap->getRelatedIds(),
 				'nopermissions' => true,
-				'preservekeys' => true,
+				'preservekeys' => true
 			]);
 			$result = $relationMap->mapOne($result, $discoveryRules, 'discoveryRule');
 		}

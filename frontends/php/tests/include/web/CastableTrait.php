@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -79,6 +79,17 @@ trait CastableTrait {
 	}
 
 	/**
+	 * Cast object to ZDropdown element.
+	 *
+	 * @param array $options    additional casting options
+	 *
+	 * @return CZDropdownElement
+	 */
+	public function asZDropdown($options = []) {
+		return $this->cast(CZDropdownElement::class, $options);
+	}
+
+	/**
 	 * Cast object to Form element.
 	 *
 	 * @param array $options    additional casting options
@@ -87,6 +98,17 @@ trait CastableTrait {
 	 */
 	public function asForm($options = []) {
 		return $this->cast(CFormElement::class, $options);
+	}
+
+	/**
+	 * Cast object to CheckboxForm element.
+	 *
+	 * @param array $options    additional casting options
+	 *
+	 * @return CFormElement
+	 */
+	public function asCheckboxForm($options = []) {
+		return $this->cast(CCheckboxFormElement::class, $options);
 	}
 
 	/**
@@ -241,5 +263,27 @@ trait CastableTrait {
 	 */
 	public function asPopupButton($options = []) {
 		return $this->cast(CPopupButtonElement::class, $options);
+	}
+
+	/**
+	 * Cast object to InputGroup element.
+	 *
+	 * @param array $options    additional casting options
+	 *
+	 * @return CInputGroupElement
+	 */
+	public function asInputGroup($options = []) {
+		return $this->cast(CInputGroupElement::class, $options);
+	}
+
+	/**
+	 * Cast object to Interface element.
+	 *
+	 * @param array $options    additional casting options
+	 *
+	 * @return CHostInterfaceElement
+	 */
+	public function asHostInterfaceElement($options = []) {
+		return $this->cast(CHostInterfaceElement::class, $options);
 	}
 }

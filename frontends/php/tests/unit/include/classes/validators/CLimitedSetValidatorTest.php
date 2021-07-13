@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,9 +19,11 @@
 **/
 
 
+use PHPUnit\Framework\TestCase;
+
 class CLimitedSetValidatorTest extends CValidatorTest {
 
-	public function validParamProvider() {
+	public function dataProviderValidParam() {
 		return [
 			[[
 				'values' => [1, 2, 3],
@@ -30,17 +32,17 @@ class CLimitedSetValidatorTest extends CValidatorTest {
 		];
 	}
 
-	public function validValuesProvider() {
+	public function dataProviderValidValues() {
 		return [
 			[['values' => [1, 2, 3]], 2],
 			[['values' => [1, 2, 3]], '2'],
 			[['values' => ['1', '2', '3']], 2],
 			[['values' => ['1', '2', '3']], '2'],
-			[['values' => ['one', 'two', 'three']], 'one'],
+			[['values' => ['one', 'two', 'three']], 'one']
 		];
 	}
 
-	public function invalidValuesProvider() {
+	public function dataProviderInvalidValues() {
 		return [
 			[
 				['messageInvalid' => 'Incorrect value type'],
@@ -76,11 +78,11 @@ class CLimitedSetValidatorTest extends CValidatorTest {
 				['values' => ['one', 'two', 'three'], 'messageInvalid' => 'Incorrect value "%1$s"'],
 				'FOUR',
 				'Incorrect value "FOUR"'
-			],
+			]
 		];
 	}
 
-	public function invalidValuesWithObjectsProvider() {
+	public function dataProviderInvalidValuesWithObjects() {
 		return [
 			[
 				['messageInvalid' => 'Incorrect value type for "%1$s"'],
@@ -116,7 +118,7 @@ class CLimitedSetValidatorTest extends CValidatorTest {
 				['values' => ['one', 'two', 'three'], 'messageInvalid' => 'Incorrect value "%2$s" for "%1$s"'],
 				'FOUR',
 				'Incorrect value "FOUR" for "object"'
-			],
+			]
 		];
 	}
 

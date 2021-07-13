@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
 require_once dirname(__FILE__).'/../../include/items.inc.php';
+
+use Facebook\WebDriver\WebDriverBy;
 
 /**
  * @backup items
@@ -64,7 +66,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 				['host' => 'Simple form test host', 'form' => 'testFormDiscoveryRule1']
 			],
 			[
-				['type' => 'Zabbix agent (active)', 'host' => 'Simple form test host'],
+				['type' => 'Zabbix agent (active)', 'host' => 'Simple form test host']
 			],
 			[
 				['type' => 'Simple check', 'host' => 'Simple form test host']
@@ -366,7 +368,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 					}
 					break;
 				default:
-					$this->zbxTestTextNotVisibleOnPage(['Host interface', 'No interface found']);
+					$this->zbxTestTextNotVisible(['Host interface', 'No interface found']);
 					$this->zbxTestAssertNotVisibleId('interfaceid');
 					break;
 			}
@@ -390,7 +392,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//textarea[@id='params_es']", 'rows', 7);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Executed script');
+			$this->zbxTestTextNotVisible('Executed script');
 			$this->zbxTestAssertNotVisibleId('params_es');
 		}
 
@@ -401,7 +403,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='ipmi_sensor']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('IPMI sensor');
+			$this->zbxTestTextNotVisible('IPMI sensor');
 			$this->zbxTestAssertNotVisibleId('ipmi_sensor');
 		}
 
@@ -411,7 +413,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestDropdownHasOptions('authtype', ['Password', 'Public key']);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Authentication method');
+			$this->zbxTestTextNotVisible('Authentication method');
 			$this->zbxTestAssertNotVisibleId('authtype');
 		}
 
@@ -432,7 +434,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='password']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage(['User name', 'Password', 'Key passphrase']);
+			$this->zbxTestTextNotVisible(['User name', 'Password', 'Key passphrase']);
 			$this->zbxTestAssertNotVisibleId('username');
 			$this->zbxTestAssertNotVisibleId('password');
 		}
@@ -449,10 +451,10 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='privatekey']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Public key file');
+			$this->zbxTestTextNotVisible('Public key file');
 			$this->zbxTestAssertNotVisibleId('publickey');
 
-			$this->zbxTestTextNotVisibleOnPage('Private key file');
+			$this->zbxTestTextNotVisible('Private key file');
 			$this->zbxTestAssertNotVisibleId('publickey');
 		}
 
@@ -469,10 +471,10 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='port']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('SNMP OID');
+			$this->zbxTestTextNotVisible('SNMP OID');
 			$this->zbxTestAssertNotVisibleId('snmp_oid');
 
-			$this->zbxTestTextNotVisibleOnPage('Port');
+			$this->zbxTestTextNotVisible('Port');
 			$this->zbxTestAssertNotVisibleId('port');
 		}
 
@@ -484,7 +486,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestAssertElementValue('snmp_community', 'public');
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('SNMP community');
+			$this->zbxTestTextNotVisible('SNMP community');
 			$this->zbxTestAssertNotVisibleId('snmp_community');
 		}
 
@@ -499,10 +501,10 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestDropdownHasOptions('snmpv3_securitylevel', ['noAuthNoPriv', 'authNoPriv', 'authPriv']);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Security name');
+			$this->zbxTestTextNotVisible('Security name');
 			$this->zbxTestAssertNotVisibleId('snmpv3_securityname');
 
-			$this->zbxTestTextNotVisibleOnPage('Security level');
+			$this->zbxTestTextNotVisible('Security level');
 			$this->zbxTestAssertNotVisibleId('snmpv3_securitylevel');
 		}
 
@@ -518,12 +520,12 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='snmpv3_authpassphrase']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Authentication protocol');
+			$this->zbxTestTextNotVisible('Authentication protocol');
 			$this->zbxTestAssertNotVisibleId('row_snmpv3_authprotocol');
 			$this->zbxTestAssertNotVisibleXpath("//label[text()='MD5']");
 			$this->zbxTestAssertNotVisibleXpath("//label[text()='SHA']");
 
-			$this->zbxTestTextNotVisibleOnPage('Authentication passphrase');
+			$this->zbxTestTextNotVisible('Authentication passphrase');
 			$this->zbxTestAssertNotVisibleId('snmpv3_authpassphrase');
 		}
 
@@ -539,12 +541,12 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='snmpv3_privpassphrase']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Privacy protocol');
+			$this->zbxTestTextNotVisible('Privacy protocol');
 			$this->zbxTestAssertNotVisibleId('row_snmpv3_privprotocol');
 			$this->zbxTestAssertNotVisibleXpath("//label[text()='DES']");
 			$this->zbxTestAssertNotVisibleXpath("//label[text()='AES']");
 
-			$this->zbxTestTextNotVisibleOnPage('Privacy passphrase');
+			$this->zbxTestTextNotVisible('Privacy passphrase');
 			$this->zbxTestAssertNotVisibleId('snmpv3_privpassphrase');
 		}
 
@@ -570,7 +572,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 				}
 				break;
 			default:
-				$this->zbxTestTextNotVisibleOnPage('Update interval');
+				$this->zbxTestTextNotVisible('Update interval');
 				$this->zbxTestAssertNotVisibleId('delay');
 		}
 
@@ -608,10 +610,10 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 				$this->zbxTestAssertVisibleId('interval_add');
 				break;
 			default:
-				$this->zbxTestTextNotVisibleOnPage(['Custom intervals', 'Interval',  'Period']);
+				$this->zbxTestTextNotVisible(['Custom intervals', 'Interval',  'Period']);
 				$this->zbxTestAssertNotVisibleId('delayFlexTable');
 
-				$this->zbxTestTextNotVisibleOnPage(['Flexible', 'Scheduling']);
+				$this->zbxTestTextNotVisible(['Flexible', 'Scheduling']);
 				$this->zbxTestAssertNotVisibleId('delay_flex_0_delay');
 				$this->zbxTestAssertNotVisibleId('delay_flex_0_period');
 				$this->zbxTestAssertNotVisibleId('interval_add');
@@ -624,7 +626,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 			$this->zbxTestAssertAttribute("//input[@id='trapper_hosts']", 'size', 20);
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Allowed hosts');
+			$this->zbxTestTextNotVisible('Allowed hosts');
 			$this->zbxTestAssertNotVisibleId('trapper_hosts');
 		}
 
@@ -1832,7 +1834,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 						'name' => 'Rule with macro does not match',
 						'key' => 'macro-doesnt-match-key',
 						'macros'=> [
-							['macro' => '{#TEST_MACRO}', 'expression' => 'Test expression', 'operator' => 'does not match'],
+							['macro' => '{#TEST_MACRO}', 'expression' => 'Test expression', 'operator' => 'does not match']
 						]
 					]
 				],
@@ -1927,7 +1929,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 					'name' => 'Rule with wrong macro',
 					'key' => 'macro-wrong-key',
 					'macros'=> [
-							['macro' => '{TEST_MACRO}', 'expression' => 'Test expression', 'operator' => 'does not match'],
+							['macro' => '{TEST_MACRO}', 'expression' => 'Test expression', 'operator' => 'does not match']
 					],
 					'error_message' => 'Incorrect filter condition macro for discovery rule'
 				]
@@ -1938,7 +1940,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 					'key' => 'macro-empty-formula-key',
 					'macros'=> [
 							['macro' => '{#TEST_MACRO1}', 'expression' => 'Test expression 1', 'operator' => 'matches'],
-							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ],
+							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ]
 					],
 					'calculation' => 'Custom expression',
 					'formula' => '',
@@ -1952,7 +1954,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 					'macros'=> [
 							['macro' => '{#TEST_MACRO1}', 'expression' => 'Test expression 1', 'operator' => 'matches'],
 							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ],
-							['macro' => '{#TEST_MACRO3}', 'expression' => 'Test expression 3', 'operator' => 'does not match' ],
+							['macro' => '{#TEST_MACRO3}', 'expression' => 'Test expression 3', 'operator' => 'does not match' ]
 					],
 					'calculation' => 'Custom expression',
 					'formula' => 'A and B',
@@ -1965,7 +1967,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 					'key' => 'macro-extra-argument-key',
 					'macros'=> [
 							['macro' => '{#TEST_MACRO1}', 'expression' => 'Test expression 1', 'operator' => 'matches'],
-							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ],
+							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ]
 					],
 					'calculation' => 'Custom expression',
 					'formula' => 'A and B or C',
@@ -1978,7 +1980,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 					'key' => 'macro-wrong-formula-key',
 					'macros'=> [
 							['macro' => '{#TEST_MACRO1}', 'expression' => 'Test expression 1', 'operator' => 'matches'],
-							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ],
+							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ]
 					],
 					'calculation' => 'Custom expression',
 					'formula' => 'Wrong formula',
@@ -1991,7 +1993,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 					'key' => 'macro-not-in-formula-key',
 					'macros'=> [
 							['macro' => '{#TEST_MACRO1}', 'expression' => 'Test expression 1', 'operator' => 'matches'],
-							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ],
+							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ]
 					],
 					'calculation' => 'Custom expression',
 					'formula'=> 'A and Not B',
@@ -2004,7 +2006,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 					'key' => 'macro-wrong-operator-key',
 					'macros'=> [
 							['macro' => '{#TEST_MACRO1}', 'expression' => 'Test expression 1', 'operator' => 'matches'],
-							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ],
+							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ]
 					],
 					'calculation' => 'Custom expression',
 					'formula'=> 'NOT A and not B',
@@ -2017,7 +2019,7 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 					'key' => 'macro-not-formula',
 					'macros'=> [
 							['macro' => '{#TEST_MACRO1}', 'expression' => 'Test expression 1', 'operator' => 'matches'],
-							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ],
+							['macro' => '{#TEST_MACRO2}', 'expression' => 'Test expression 2', 'operator' => 'does not match' ]
 					],
 					'calculation' => 'Custom expression',
 					'formula'=> 'not A not B',

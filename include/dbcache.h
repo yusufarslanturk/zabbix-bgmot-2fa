@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -168,6 +168,7 @@ typedef struct
 	char			*units;
 	char			*delay;
 	int			history_sec;
+	int			trends_sec;
 	int			nextcheck;
 	int			lastclock;
 	int			mtime;
@@ -649,7 +650,7 @@ int	DCconfig_get_suggested_snmp_vars(zbx_uint64_t interfaceid, int *bulk);
 int	DCconfig_get_interface_by_type(DC_INTERFACE *interface, zbx_uint64_t hostid, unsigned char type);
 int	DCconfig_get_interface(DC_INTERFACE *interface, zbx_uint64_t hostid, zbx_uint64_t itemid);
 int	DCconfig_get_poller_nextcheck(unsigned char poller_type);
-int	DCconfig_get_poller_items(unsigned char poller_type, DC_ITEM *items);
+int	DCconfig_get_poller_items(unsigned char poller_type, DC_ITEM **items);
 int	DCconfig_get_ipmi_poller_items(int now, DC_ITEM *items, int items_num, int *nextcheck);
 int	DCconfig_get_snmp_interfaceids_by_addr(const char *addr, zbx_uint64_t **interfaceids);
 size_t	DCconfig_get_snmp_items_by_interfaceid(zbx_uint64_t interfaceid, DC_ITEM **items);
@@ -699,14 +700,14 @@ int	DCcheck_proxy_permissions(const char *host, const zbx_socket_t *sock, zbx_ui
 size_t	DCget_psk_by_identity(const unsigned char *psk_identity, unsigned char *psk_buf, size_t psk_buf_len);
 #endif
 
-void	DCget_user_macro(const zbx_uint64_t *hostids, int host_num, const char *macro, char **replace_to);
+void	DCget_user_macro(const zbx_uint64_t *hostids, int hostids_num, const char *macro, char **replace_to);
 char	*DCexpression_expand_user_macros(const char *expression);
 
 int	DChost_activate(zbx_uint64_t hostid, unsigned char agent_type, const zbx_timespec_t *ts,
 		zbx_agent_availability_t *in, zbx_agent_availability_t *out);
 
-int	DChost_deactivate(zbx_uint64_t hostid, unsigned char agent, const zbx_timespec_t *ts,
-		zbx_agent_availability_t *in, zbx_agent_availability_t *out, const char *error);
+int	DChost_deactivate(zbx_uint64_t hostid, unsigned char agent_type, const zbx_timespec_t *ts,
+		zbx_agent_availability_t *in, zbx_agent_availability_t *out, const char *error_msg);
 
 #define ZBX_QUEUE_FROM_DEFAULT	6	/* default lower limit for delay (in seconds) */
 #define ZBX_QUEUE_TO_INFINITY	-1	/* no upper limit for delay */
@@ -746,16 +747,13 @@ int	DCset_hosts_availability(zbx_vector_ptr_t *availabilities);
 int	DCreset_hosts_availability(zbx_vector_ptr_t *hosts);
 void	DCupdate_hosts_availability(void);
 
-void	zbx_dc_get_actions_eval(zbx_vector_ptr_t *actions, zbx_hashset_t *uniq_conditions, unsigned char opflags);
-void	zbx_action_eval_free(zbx_action_eval_t *action);
-void	zbx_db_condition_clean(DB_CONDITION *condition);
-void	zbx_conditions_eval_clean(zbx_hashset_t *uniq_conditions);
+void	zbx_dc_get_actions_eval(zbx_vector_ptr_t *actions, unsigned char opflags);
 
 int	DCget_hosts_availability(zbx_vector_ptr_t *hosts, int *ts);
 void	DCtouch_hosts_availability(const zbx_vector_uint64_t *hostids);
 
 void	zbx_host_availability_init(zbx_host_availability_t *availability, zbx_uint64_t hostid);
-void	zbx_host_availability_clean(zbx_host_availability_t *availability);
+void	zbx_host_availability_clean(zbx_host_availability_t *ha);
 void	zbx_host_availability_free(zbx_host_availability_t *availability);
 int	zbx_host_availability_is_set(const zbx_host_availability_t *ha);
 
@@ -767,8 +765,7 @@ void	zbx_dc_correlation_rules_free(zbx_correlation_rules_t *rules);
 void	zbx_dc_correlation_rules_get(zbx_correlation_rules_t *rules);
 
 void	zbx_dc_get_nested_hostgroupids(zbx_uint64_t *groupids, int groupids_num, zbx_vector_uint64_t *nested_groupids);
-void	zbx_dc_get_nested_hostgroupids_by_names(char **names, int names_num,
-		zbx_vector_uint64_t *nested_groupids);
+void	zbx_dc_get_nested_hostgroupids_by_names(zbx_vector_str_t *groups, zbx_vector_uint64_t *nested_groupids);
 
 #define ZBX_HC_ITEM_STATUS_NORMAL	0
 #define ZBX_HC_ITEM_STATUS_BUSY		1
@@ -841,7 +838,7 @@ zbx_trigger_dep_t;
 
 void	zbx_dc_get_trigger_dependencies(const zbx_vector_uint64_t *triggerids, zbx_vector_ptr_t *deps);
 
-void	zbx_dc_reschedule_items(const zbx_vector_uint64_t *itemids, int now, zbx_uint64_t *proxy_hostids);
+void	zbx_dc_reschedule_items(const zbx_vector_uint64_t *itemids, int nextcheck, zbx_uint64_t *proxy_hostids);
 
 void	zbx_dc_get_timer_triggerids(zbx_vector_uint64_t *triggerids, int now, int limit);
 void	zbx_dc_get_timer_triggers_by_triggerids(zbx_hashset_t *trigger_info, zbx_vector_ptr_t *trigger_order,

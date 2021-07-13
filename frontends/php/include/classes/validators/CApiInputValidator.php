@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -118,6 +118,9 @@ class CApiInputValidator {
 			case API_OUTPUT:
 				return self::validateOutput($rule, $data, $path, $error);
 
+			case API_SORTORDER:
+				return self::validateSortOrder($rule, $data, $path, $error);
+
 			case API_IDS:
 				return self::validateIds($rule, $data, $path, $error);
 
@@ -159,6 +162,15 @@ class CApiInputValidator {
 
 			case API_URL:
 				return self::validateUrl($rule, $data, $path, $error);
+
+			case API_TRIGGER_EXPRESSION:
+				return self::validateTriggerExpression($rule, $data, $path, $error);
+
+			case API_JSONRPC_PARAMS:
+				return self::validateJsonRpcParams($rule, $data, $path, $error);
+
+			case API_JSONRPC_ID:
+				return self::validateJsonRpcId($rule, $data, $path, $error);
 		}
 
 		// This message can be untranslated because warn about incorrect validation rules at a development stage.
@@ -191,6 +203,7 @@ class CApiInputValidator {
 			case API_BOOLEAN:
 			case API_FLAG:
 			case API_OUTPUT:
+			case API_SORTORDER:
 			case API_HG_NAME:
 			case API_H_NAME:
 			case API_NUMERIC:
@@ -203,6 +216,9 @@ class CApiInputValidator {
 			case API_HTTP_POST:
 			case API_VARIABLE_NAME:
 			case API_URL:
+			case API_TRIGGER_EXPRESSION:
+			case API_JSONRPC_PARAMS:
+			case API_JSONRPC_ID:
 				return true;
 
 			case API_OBJECT:
@@ -870,7 +886,7 @@ class CApiInputValidator {
 	}
 
 	/**
-	 * APPI output validator.
+	 * API output validator.
 	 *
 	 * @param array  $rule
 	 * @param int    $rule['flags']   (optional) API_ALLOW_COUNT, API_ALLOW_NULL
@@ -907,6 +923,51 @@ class CApiInputValidator {
 		$error = _s('Invalid parameter "%1$s": %2$s.', $path, _('an array or a character string is expected'));
 
 		return false;
+	}
+
+	/**
+	 * API sort order validator.
+	 *
+	 * @param array  $rule
+	 * @param mixed  $data
+	 * @param string $path
+	 * @param string $error
+	 *
+	 * @return bool
+	 */
+	private static function validateSortOrder($rule, &$data, $path, &$error) {
+		$in = ZBX_SORT_UP.','.ZBX_SORT_DOWN;
+
+		if (self::validateStringUtf8(['in' => $in], $data, $path, $e)) {
+			return true;
+		}
+
+		if (is_string($data)) {
+			$error = $e;
+			return false;
+		}
+		unset($e);
+
+		if (!is_array($data)) {
+			$error = _s('Invalid parameter "%1$s": %2$s.', $path, _('an array or a character string is expected'));
+			return false;
+		}
+
+		$data = array_values($data);
+		$rules = [
+			'type' => API_STRING_UTF8,
+			'in' => $in
+		];
+
+		foreach ($data as $index => &$value) {
+			$subpath = ($path === '/' ? $path : $path.'/').($index + 1);
+			if (!self::validateData($rules, $value, $subpath, $error)) {
+				return false;
+			}
+		}
+		unset($value);
+
+		return true;
 	}
 
 	/**
@@ -1579,5 +1640,93 @@ class CApiInputValidator {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Trigger expression validator.
+	 *
+	 * @param array  $rule
+	 * @param int    $rule['length']  (optional)
+	 * @param int    $rule['flags']   (optional) API_ALLOW_LLD_MACRO, API_NOT_EMPTY
+	 * @param mixed  $data
+	 * @param string $path
+	 * @param string $error
+	 *
+	 * @return bool
+	 */
+	private static function validateTriggerExpression($rule, &$data, $path, &$error) {
+		$flags = array_key_exists('flags', $rule) ? $rule['flags'] : 0x00;
+
+		if (self::checkStringUtf8($flags & API_NOT_EMPTY, $data, $path, $error) === false) {
+			return false;
+		}
+
+		if (($flags & API_NOT_EMPTY) == 0 && $data === '') {
+			return true;
+		}
+
+		if (array_key_exists('length', $rule) && mb_strlen($data) > $rule['length']) {
+			$error = _s('Invalid parameter "%1$s": %2$s.', $path, _('value is too long'));
+			return false;
+		}
+
+		$expression_data = new CTriggerExpression([
+			'lldmacros' => ($flags & API_ALLOW_LLD_MACRO),
+			'lowercase_errors' => true
+		]);
+
+		if (!$expression_data->parse($data)) {
+			$error = _s('Invalid parameter "%1$s": %2$s.', $path, $expression_data->error);
+			return false;
+		}
+
+		if (!$expression_data->expressions) {
+			$error = _s('Invalid parameter "%1$s": %2$s.', $path,
+				_('trigger expression must contain at least one host:key reference')
+			);
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * JSON RPC parameters validator. Parameters MUST contain an array or object value.
+	 *
+	 * @param array  $rule
+	 * @param mixed  $data
+	 * @param string $path
+	 * @param string $error
+	 *
+	 * @return bool
+	 */
+	private static function validateJsonRpcParams($rule, &$data, $path, &$error) {
+		if (is_array($data)) {
+			return true;
+		}
+
+		$error = _s('Invalid parameter "%1$s": %2$s.', $path, _('an array or object is expected'));
+
+		return false;
+	}
+
+	/**
+	 * JSON RPC identifier validator. This identifier MUST contain a String, Number, or NULL value.
+	 *
+	 * @param array  $rule
+	 * @param mixed  $data
+	 * @param string $path
+	 * @param string $error
+	 *
+	 * @return bool
+	 */
+	private static function validateJsonRpcId($rule, &$data, $path, &$error) {
+		if (is_string($data) || is_int($data) || is_float($data) || $data === null) {
+			return true;
+		}
+
+		$error = _s('Invalid parameter "%1$s": %2$s.', $path, _('a string, number or null value is expected'));
+
+		return false;
 	}
 }

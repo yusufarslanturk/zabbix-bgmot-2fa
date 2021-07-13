@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -199,7 +199,7 @@ class CHttpTest extends CApiService {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$res = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$res = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($httpTest = DBfetch($res)) {
 			if ($options['countOutput']) {
 				if ($options['groupCount']) {
@@ -864,7 +864,7 @@ class CHttpTest extends CApiService {
 					ZBX_HTTPFIELD_HEADER => 'headers',
 					ZBX_HTTPFIELD_VARIABLE => 'variables',
 					ZBX_HTTPFIELD_QUERY_FIELD => 'query_fields',
-					ZBX_HTTPFIELD_POST_FIELD => 'posts',
+					ZBX_HTTPFIELD_POST_FIELD => 'posts'
 				];
 				foreach ($fields as $type => $field) {
 					if (!$this->outputIsRequested($field, $options['selectSteps'])) {

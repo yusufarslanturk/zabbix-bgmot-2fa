@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -290,11 +290,15 @@ jQuery(function($) {
 			}
 
 			$obj
-				.on('mousedown', function() {
+				.on('mousedown', function(event) {
 					if (isSearchFieldVisible($obj) && ms.options.selectedLimit != 1) {
 						$obj.addClass('active');
 						$('.selected li.selected', $obj).removeClass('selected');
-						$('input[type="text"]', $obj).focus();
+
+						// Focus input only when not clicked on selected item.
+						if (!$(event.target).parents('.multiselect-list').length) {
+							$('input[type="text"]', $obj).focus();
+						}
 					}
 				});
 
@@ -339,6 +343,7 @@ jQuery(function($) {
 				'id': $label.length ? $label.attr('for') : null,
 				'class': 'input',
 				'type': 'text',
+				'autocomplete': 'off',
 				'placeholder': ms.options.labels['type here to search'],
 				'aria-label': ($label.length ? $label.text() + '. ' : '') + ms.options.labels['type here to search'],
 				'aria-required': ms.options.required_str
@@ -526,7 +531,8 @@ jQuery(function($) {
 									}
 								}
 								else if (e.which == KEY.BACKSPACE) {
-									/* Pressing Backspace on empty input field should select last element in
+									/*
+									 * Pressing Backspace on empty input field should select last element in
 									 * multiselect. For next Backspace press to be able to remove it.
 									 */
 									var $selected = $('.selected li:last-child', $obj).addClass('selected');
@@ -622,9 +628,6 @@ jQuery(function($) {
 							.on('click', function() {
 								if (!ms.options.disabled && !item_disabled) {
 									removeSelected($obj, item.id);
-									if (isSearchFieldVisible($obj)) {
-										$('input[type="text"]', $obj).focus();
-									}
 								}
 							})
 						)
@@ -633,7 +636,9 @@ jQuery(function($) {
 					if (isSearchFieldVisible($obj) && ms.options.selectedLimit != 1) {
 						$('.selected li.selected', $obj).removeClass('selected');
 						$(this).addClass('selected');
-						$('input[type="text"]', $obj).focus();
+
+						// preventScroll not work in IE.
+						$('input[type="text"]', $obj)[0].focus({preventScroll: true});
 					}
 				});
 
@@ -1048,7 +1053,7 @@ jQuery(function($) {
 	}
 
 	function isSearchFieldVisible($obj) {
-		return !$obj.hasClass('.search-disabled');
+		return !$obj.hasClass('search-disabled');
 	}
 
 	function getLimit($obj) {

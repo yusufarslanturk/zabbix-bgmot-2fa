@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -23,6 +23,8 @@ require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
 
 define('ACTION_GOOD', 0);
 define('ACTION_BAD', 1);
+
+use Facebook\WebDriver\WebDriverBy;
 
 /**
  * @backup actions
@@ -511,7 +513,7 @@ class testFormAction extends CLegacyWebTest {
 			}
 		}
 		else {
-			$this->zbxTestTextNotVisibleOnPage('Type of calculation');
+			$this->zbxTestTextNotVisible('Type of calculation');
 			$this->zbxTestAssertNotVisibleId('evaltype');
 		}
 
@@ -831,7 +833,7 @@ class testFormAction extends CLegacyWebTest {
 				$this->zbxTestDropdownHasOptions('new_condition_value', [
 						'Item in "not supported" state',
 						'Low-level discovery rule in "not supported" state',
-						'Trigger in "unknown" state',
+						'Trigger in "unknown" state'
 				]);
 				break;
 		}
@@ -1667,32 +1669,32 @@ class testFormAction extends CLegacyWebTest {
 				'conditions' => [
 					[
 						'type' => 'Trigger name',
-						'value' => 'trigger',
+						'value' => 'trigger'
 					],
 					[
 						'type' => 'Trigger severity',
-						'value' => 'Warning',
+						'value' => 'Warning'
 					],
 					[
 						'type' => 'Application',
-						'value' => 'application',
+						'value' => 'application'
 					],
 					[
 						'type' => 'Tag name',
 						'operator' => 'does not contain',
-						'value' => 'Does not contain Tag',
-					],
+						'value' => 'Does not contain Tag'
+					]
 				],
 				'operations' => [
 					[
 						'type' => 'Send message',
-						'media' => 'Email',
+						'media' => 'Email'
 					],
 					[
 						'type' => 'Remote command',
-						'command' => 'command',
+						'command' => 'command'
 					]
-				],
+				]
 			]],
 			[[
 				'expected' => ACTION_BAD,
@@ -1703,7 +1705,7 @@ class testFormAction extends CLegacyWebTest {
 				'def_longdata' => 'def_longdata',
 				'errors' => [
 						'Page received incorrect data',
-						'Incorrect value for field "Name": cannot be empty.',
+						'Incorrect value for field "Name": cannot be empty.'
 				]
 			]],
 			[[
@@ -1715,24 +1717,24 @@ class testFormAction extends CLegacyWebTest {
 				'conditions' => [
 					[
 						'type' => 'Service type',
-						'value' => 'FTP',
+						'value' => 'FTP'
 					],
 					[
 						'type' => 'Received value',
 						'operator' => 'does not contain',
-						'value' => 'Received value',
+						'value' => 'Received value'
 					]
 				],
 				'operations' => [
 					[
 						'type' => 'Send message',
-						'media' => 'Email',
+						'media' => 'Email'
 					],
 					[
 						'type' => 'Remote command',
-						'command' => 'command',
+						'command' => 'command'
 					]
-				],
+				]
 			]],
 			[[
 				'expected' => ACTION_BAD,
@@ -1742,7 +1744,7 @@ class testFormAction extends CLegacyWebTest {
 				'def_longdata' => 'def_longdata',
 				'errors' => [
 						'Page received incorrect data',
-						'Incorrect value for field "Name": cannot be empty.',
+						'Incorrect value for field "Name": cannot be empty.'
 				]
 			]],
 			[[
@@ -1754,24 +1756,24 @@ class testFormAction extends CLegacyWebTest {
 				'conditions' => [
 					[
 						'type' => 'Host name',
-						'value' => 'Zabbix',
+						'value' => 'Zabbix'
 					],
 					[
 						'type' => 'Host metadata',
 						'operator'=> 'does not contain',
-						'value' => 'Zabbix',
+						'value' => 'Zabbix'
 					]
 				],
 				'operations' => [
 					[
 						'type' => 'Send message',
-						'media' => 'Email',
+						'media' => 'Email'
 					],
 					[
 						'type' => 'Remote command',
-						'command' => 'command',
+						'command' => 'command'
 					]
-				],
+				]
 			]],
 			[[
 				'expected' => ACTION_BAD,
@@ -1781,7 +1783,7 @@ class testFormAction extends CLegacyWebTest {
 				'def_longdata' => 'def_longdata',
 				'errors' => [
 						'Page received incorrect data',
-						'Incorrect value for field "Name": cannot be empty.',
+						'Incorrect value for field "Name": cannot be empty.'
 				]
 			]],
 			[[
@@ -1794,17 +1796,17 @@ class testFormAction extends CLegacyWebTest {
 				'conditions' => [
 					[
 						'type' => 'Event type',
-						'value' => 'Trigger in "unknown" state',
+						'value' => 'Trigger in "unknown" state'
 					],
 					[
 						'type' => 'Application',
-						'value' => 'application',
-					],
+						'value' => 'application'
+					]
 				],
 				'operations' => [
 					[
 						'type' => 'Send message',
-						'media' => 'Email',
+						'media' => 'Email'
 					]
 				]
 			]],
@@ -1817,7 +1819,7 @@ class testFormAction extends CLegacyWebTest {
 				'def_longdata' => 'def_longdata',
 				'errors' => [
 						'Page received incorrect data',
-						'Incorrect value for field "Name": cannot be empty.',
+						'Incorrect value for field "Name": cannot be empty.'
 				]
 			]]
 		];

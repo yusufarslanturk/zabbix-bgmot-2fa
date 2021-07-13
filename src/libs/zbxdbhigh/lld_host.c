@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1466,15 +1466,15 @@ static void	lld_groups_save(zbx_vector_ptr_t *groups, const zbx_vector_ptr_t *gr
 
 	DBbegin();
 
-	if (SUCCEED != DBlock_group_prototypeids(&new_group_prototype_ids))
-	{
-		/* the host group prototype was removed while processing lld rule */
-		DBrollback();
-		goto out;
-	}
-
 	if (0 != new_group_prototype_ids.values_num)
 	{
+		if (SUCCEED != DBlock_group_prototypeids(&new_group_prototype_ids))
+		{
+			/* the host group prototype was removed while processing lld rule */
+			DBrollback();
+			goto out;
+		}
+
 		groupid = DBget_maxid_num("hstgrp", new_group_prototype_ids.values_num);
 
 		zbx_db_insert_prepare(&db_insert, "hstgrp", "groupid", "name", "flags", NULL);

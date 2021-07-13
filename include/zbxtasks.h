@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -102,12 +102,12 @@ zbx_tm_task_t	*zbx_tm_task_create(zbx_uint64_t taskid, unsigned char type, unsig
 void	zbx_tm_task_clear(zbx_tm_task_t *task);
 void	zbx_tm_task_free(zbx_tm_task_t *task);
 
-zbx_tm_remote_command_t	*zbx_tm_remote_command_create(int commandtype, const char *command, int execute_on, int port,
+zbx_tm_remote_command_t	*zbx_tm_remote_command_create(int command_type, const char *command, int execute_on, int port,
 		int authtype, const char *username, const char *password, const char *publickey, const char *privatekey,
 		zbx_uint64_t parent_taskid, zbx_uint64_t hostid, zbx_uint64_t alertid);
 
 zbx_tm_remote_command_result_t	*zbx_tm_remote_command_result_create(zbx_uint64_t parent_taskid, int status,
-		const char *error);
+		const char *info);
 
 zbx_tm_check_now_t	*zbx_tm_check_now_create(zbx_uint64_t itemid);
 

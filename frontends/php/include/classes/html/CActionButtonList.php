@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -61,6 +61,7 @@ class CActionButtonList extends CObject {
 	 * @param string       $buttons_data[]['name']      Button caption.
 	 * @param string       $buttons_data[]['confirm']   Confirmation text (optional).
 	 * @param string       $buttons_data[]['redirect']  Redirect URL (optional).
+	 * @param bool         $buttons_data[]['disabled']  Set button state disabled (optional).
 	 * @param string|null  $name_prefix                 Prefix for sessionStorage used for storing currently selected
 	 *                                                  checkboxes.
 	 */
@@ -95,6 +96,12 @@ class CActionButtonList extends CObject {
 							'$_form.attr("action", $_form.data("action"));'.
 						'}'
 					);
+			}
+
+			if (array_key_exists('disabled', $button_data)) {
+				$button
+					->setEnabled(!$button_data['disabled'])
+					->setAttribute('data-disabled', $button_data['disabled']);
 			}
 
 			if (array_key_exists('confirm', $button_data)) {

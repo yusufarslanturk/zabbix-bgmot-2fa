@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -63,24 +63,18 @@ if (isset($_REQUEST['output']) && $_REQUEST['output'] == 'ajax') {
 			'final' => true
 		];
 
-		$validator = new CRegexValidator([
-			'messageInvalid' => _('Regular expression must be a string'),
-			'messageRegex' => _('Incorrect regular expression "%1$s": "%2$s"')
-		]);
-
-		foreach ($ajaxData['expressions'] as $id => $expression) {
-			if (!in_array($expression['expression_type'], [EXPRESSION_TYPE_FALSE, EXPRESSION_TYPE_TRUE]) ||
-				$validator->validate($expression['expression'])
-			) {
-				$match = CGlobalRegexp::matchExpression($expression, $ajaxData['testString']);
-
-				$result['expressions'][$id] = $match;
-			} else {
-				$match = false;
-				$result['errors'][$id] = $validator->getError();
+		if (array_key_exists('expressions', $ajaxData)) {
+			foreach ($ajaxData['expressions'] as $id => $expression) {
+				try {
+					validateRegexp([$expression]);
+					$result['expressions'][$id] = CGlobalRegexp::matchExpression($expression, $ajaxData['testString']);
+					$result['final'] = $result['final'] && $result['expressions'][$id];
+				}
+				catch (Exception $e) {
+					$result['errors'][$id] = $e->getMessage();
+					$result['final'] = false;
+				}
 			}
-
-			$result['final'] = $result['final'] && $match;
 		}
 
 		$ajaxResponse->success($result);

@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ void	zbx_history_value2str(char *buffer, size_t size, const history_value_t *val
 int	zbx_history_init(char **error);
 void	zbx_history_destroy(void);
 
-int	zbx_history_add_values(const zbx_vector_ptr_t *values);
+int	zbx_history_add_values(const zbx_vector_ptr_t *history);
 int	zbx_history_get_values(zbx_uint64_t itemid, int value_type, int start, int count, int end,
 		zbx_vector_history_record_t *values);
 

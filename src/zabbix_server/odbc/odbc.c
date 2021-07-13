@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -333,6 +333,12 @@ zbx_odbc_query_result_t	*zbx_odbc_select(const zbx_odbc_data_source_t *data_sour
 	SQLRETURN		rc;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() query:'%s'", __function_name, query);
+
+	if (NULL == query || '\0' == *query)
+	{
+		*error = zbx_strdup(*error, "SQL query cannot be empty.");
+		goto out;
+	}
 
 	query_result = (zbx_odbc_query_result_t *)zbx_malloc(query_result, sizeof(zbx_odbc_query_result_t));
 

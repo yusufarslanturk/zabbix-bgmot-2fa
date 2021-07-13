@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -430,7 +430,7 @@ class CTrigger extends CTriggerGeneral {
 
 		// return count or grouped counts via direct SQL count
 		if ($options['countOutput'] && !$this->requiresPostSqlFiltering($options)) {
-			$dbRes = DBselect($this->createSelectQueryFromParts($sqlParts), $options['limit']);
+			$dbRes = DBselect(self::createSelectQueryFromParts($sqlParts), $options['limit']);
 			while ($trigger = DBfetch($dbRes)) {
 				if ($options['groupCount']) {
 					$result[] = $trigger;
@@ -442,7 +442,7 @@ class CTrigger extends CTriggerGeneral {
 			return $result;
 		}
 
-		$result = zbx_toHash($this->customFetch($this->createSelectQueryFromParts($sqlParts), $options), 'triggerid');
+		$result = zbx_toHash($this->customFetch(self::createSelectQueryFromParts($sqlParts), $options), 'triggerid');
 
 		// return count for post SQL filtered result sets
 		if ($options['countOutput']) {
@@ -500,30 +500,27 @@ class CTrigger extends CTriggerGeneral {
 	 * @return array
 	 */
 	public function create(array $triggers) {
-		$triggers = zbx_toArray($triggers);
-
 		$this->validateCreate($triggers);
 		$this->createReal($triggers);
+		$this->inherit($triggers);
 
-		foreach ($triggers as $trigger) {
-			$this->inherit($trigger);
-		}
-
-		// clear all dependencies on inherited triggers
+		// Clear all dependencies on inherited triggers.
 		$this->deleteDependencies($triggers);
 
-		// add new dependencies
+		// Add new dependencies.
 		foreach ($triggers as $trigger) {
-			if (!empty($trigger['dependencies'])) {
-				$newDeps = [];
-				foreach ($trigger['dependencies'] as $depTrigger) {
-					$newDeps[] = [
-						'triggerid' => $trigger['triggerid'],
-						'dependsOnTriggerid' => $depTrigger['triggerid']
-					];
-				}
-				$this->addDependencies($newDeps);
+			if (!array_key_exists('dependencies', $trigger) || !$trigger['dependencies']) {
+				continue;
 			}
+
+			$new_dependencies = [];
+			foreach ($trigger['dependencies'] as $dependency) {
+				$new_dependencies[] = [
+					'triggerid' => $trigger['triggerid'],
+					'dependsOnTriggerid' => $dependency['triggerid']
+				];
+			}
+			$this->addDependencies($new_dependencies);
 		}
 
 		return ['triggerids' => zbx_objectValues($triggers, 'triggerid')];
@@ -539,9 +536,6 @@ class CTrigger extends CTriggerGeneral {
 	 * @return array
 	 */
 	public function update(array $triggers) {
-		$triggers = zbx_toArray($triggers);
-		$db_triggers = [];
-
 		$this->validateUpdate($triggers, $db_triggers);
 
 		$validate_dependencies = [];
@@ -549,7 +543,7 @@ class CTrigger extends CTriggerGeneral {
 			$db_trigger = $db_triggers[$tnum];
 
 			$expressions_changed = ($trigger['expression'] !== $db_trigger['expression']
-				|| $trigger['recovery_expression'] !== $db_trigger['recovery_expression']);
+					|| $trigger['recovery_expression'] !== $db_trigger['recovery_expression']);
 
 			if ($expressions_changed && $db_trigger['dependencies'] && !array_key_exists('dependencies', $trigger)) {
 				$validate_dependencies[] = [
@@ -565,23 +559,22 @@ class CTrigger extends CTriggerGeneral {
 		}
 
 		$this->updateReal($triggers, $db_triggers);
+		$this->inherit($triggers);
 
 		foreach ($triggers as $trigger) {
-			$this->inherit($trigger);
-
-			// replace dependencies
-			if (isset($trigger['dependencies'])) {
+			// Replace dependencies.
+			if (array_key_exists('dependencies', $trigger)) {
 				$this->deleteDependencies($trigger);
 
 				if ($trigger['dependencies']) {
-					$newDeps = [];
-					foreach ($trigger['dependencies'] as $depTrigger) {
-						$newDeps[] = [
+					$new_dependencies = [];
+					foreach ($trigger['dependencies'] as $dependency) {
+						$new_dependencies[] = [
 							'triggerid' => $trigger['triggerid'],
-							'dependsOnTriggerid' => $depTrigger['triggerid']
+							'dependsOnTriggerid' => $dependency['triggerid']
 						];
 					}
-					$this->addDependencies($newDeps);
+					$this->addDependencies($new_dependencies);
 				}
 			}
 		}
@@ -649,17 +642,22 @@ class CTrigger extends CTriggerGeneral {
 	/**
 	 * Validates the input for the addDependencies() method.
 	 *
-	 * @throws APIException if the given dependencies are invalid
-	 *
-	 * @param array $triggersData
+	 * @param array $triggers_data
 	 * @param bool  $inherited
+	 *
+	 * @throws APIException if the given dependencies are invalid.
 	 */
-	protected function validateAddDependencies(array $triggersData, $inherited = false) {
-		if (!$triggersData) {
-			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+	protected function validateAddDependencies(array &$triggers_data, $inherited = false) {
+		$api_input_rules = ['type' => API_OBJECTS, 'flags' => API_NOT_EMPTY | API_NORMALIZE, 'uniq' => [['triggerid', 'dependsOnTriggerid']], 'fields' => [
+			'triggerid' =>			['type' => API_ID, 'flags' => API_REQUIRED],
+			'dependsOnTriggerid' =>	['type' => API_ID, 'flags' => API_REQUIRED]
+		]];
+		if (!CApiInputValidator::validate($api_input_rules, $triggers_data, '/', $error)) {
+			self::exception(ZBX_API_ERROR_PARAMETERS, $error);
 		}
 
-		$triggerids = array_unique(zbx_objectValues($triggersData, 'triggerid'));
+		$triggerids = zbx_objectValues($triggers_data, 'triggerid');
+		$triggerids = array_keys(array_flip($triggerids));
 
 		$permission_check = $inherited
 			? ['nopermissions' => true]
@@ -671,12 +669,8 @@ class CTrigger extends CTriggerGeneral {
 			'preservekeys' => true
 		] + $permission_check);
 
-		foreach ($triggerids as $triggerid) {
-			if (!array_key_exists($triggerid, $triggers)) {
-				self::exception(ZBX_API_ERROR_PERMISSIONS,
-					_('No permissions to referred object or it does not exist!')
-				);
-			}
+		if (count($triggerids) != count($triggers)) {
+			self::exception(ZBX_API_ERROR_PERMISSIONS, _('No permissions to referred object or it does not exist!'));
 		}
 
 		foreach ($triggers as $trigger) {
@@ -687,28 +681,28 @@ class CTrigger extends CTriggerGeneral {
 			}
 		}
 
-		$depTtriggerIds = [];
+		$dep_triggerids = [];
 		$triggers = [];
-		foreach ($triggersData as $dep) {
-			$triggerId = $dep['triggerid'];
+		foreach ($triggers_data as $dep) {
+			$triggerid = $dep['triggerid'];
 
-			if (!isset($triggers[$dep['triggerid']])) {
-				$triggers[$triggerId] = [
-					'triggerid' => $triggerId,
-					'dependencies' => [],
+			if (!array_key_exists($dep['triggerid'], $triggers)) {
+				$triggers[$triggerid] = [
+					'triggerid' => $triggerid,
+					'dependencies' => []
 				];
 			}
-			$triggers[$triggerId]['dependencies'][] = $dep['dependsOnTriggerid'];
-			$depTtriggerIds[$dep['dependsOnTriggerid']] = $dep['dependsOnTriggerid'];
+			$triggers[$triggerid]['dependencies'][] = $dep['dependsOnTriggerid'];
+			$dep_triggerids[$dep['dependsOnTriggerid']] = $dep['dependsOnTriggerid'];
 		}
 
-		if (!$inherited && $depTtriggerIds) {
+		if (!$inherited) {
 			$count = $this->get([
 				'countOutput' => true,
-				'triggerids' => $depTtriggerIds
+				'triggerids' => $dep_triggerids
 			]);
 
-			if ($count != count($depTtriggerIds)) {
+			if ($count != count($dep_triggerids)) {
 				self::exception(ZBX_API_ERROR_PERMISSIONS,
 					_('No permissions to referred object or it does not exist!')
 				);
@@ -723,19 +717,17 @@ class CTrigger extends CTriggerGeneral {
 	/**
 	 * Add the given dependencies and inherit them on all child triggers.
 	 *
-	 * @param array $triggersData   an array of trigger dependency pairs, each pair in the form of
-	 *                              array('triggerid' => 1, 'dependsOnTriggerid' => 2)
+	 * @param array $triggers_data  An array of trigger dependency pairs, each pair in the form of
+	 *                              ['triggerid' => 1, 'dependsOnTriggerid' => 2].
 	 * @param bool  $inherited      Determines either to check permissions for added dependencies. Permissions are not
 	 *                              validated for inherited triggers.
 	 *
 	 * @return array
 	 */
-	public function addDependencies(array $triggersData, $inherited = false) {
-		$triggersData = zbx_toArray($triggersData);
+	public function addDependencies(array $triggers_data, $inherited = false) {
+		$this->validateAddDependencies($triggers_data, $inherited);
 
-		$this->validateAddDependencies($triggersData, $inherited);
-
-		foreach ($triggersData as $dep) {
+		foreach ($triggers_data as $dep) {
 			$triggerId = $dep['triggerid'];
 			$depTriggerId = $dep['dependsOnTriggerid'];
 
@@ -767,23 +759,30 @@ class CTrigger extends CTriggerGeneral {
 			}
 		}
 
-		return ['triggerids' => array_unique(zbx_objectValues($triggersData, 'triggerid'))];
+		return ['triggerids' => array_unique(zbx_objectValues($triggers_data, 'triggerid'))];
 	}
 
 	/**
 	 * Validates the input for the deleteDependencies() method.
 	 *
-	 * @throws APIException if the given input is invalid
-	 *
 	 * @param array $triggers
 	 * @param bool  $inherited
+	 *
+	 * @throws APIException if the given input is invalid
 	 */
 	protected function validateDeleteDependencies(array $triggers, $inherited) {
 		if (!$triggers) {
 			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
 		}
 
-		$triggerids = array_unique(zbx_objectValues($triggers, 'triggerid'));
+		foreach ($triggers as $trigger) {
+			if (!check_db_fields(['triggerid' => null], $trigger)) {
+				self::exception(ZBX_API_ERROR_PARAMETERS, _('Incorrect input parameters.'));
+			}
+		}
+
+		$triggerids = zbx_objectValues($triggers, 'triggerid');
+		$triggerids = array_keys(array_flip($triggerids));
 
 		$permission_check = $inherited
 			? ['nopermissions' => true]
@@ -830,7 +829,7 @@ class CTrigger extends CTriggerGeneral {
 
 		try {
 			// delete the dependencies from the child triggers
-			$childTriggers = API::getApiService()->select($this->tableName(), [
+			$childTriggers = DB::select($this->tableName(), [
 				'output' => ['triggerid'],
 				'filter' => [
 					'templateid' => $triggerids
@@ -985,7 +984,7 @@ class CTrigger extends CTriggerGeneral {
 			$triggerDependencyTemplates = API::Template()->get([
 				'output' => ['templateid'],
 				'triggerids' => $trigger['dependencies'],
-				'nopermissions' => true,
+				'nopermissions' => true
 			]);
 			$depTemplateIds = zbx_toHash(zbx_objectValues($triggerDependencyTemplates, 'templateid'));
 
@@ -1143,21 +1142,27 @@ class CTrigger extends CTriggerGeneral {
 
 		// adding trigger dependencies
 		if ($options['selectDependencies'] !== null && $options['selectDependencies'] != API_OUTPUT_COUNT) {
+			$dependencies = [];
+			$relationMap = new CRelationMap();
 			$res = DBselect(
 				'SELECT td.triggerid_up,td.triggerid_down'.
 				' FROM trigger_depends td'.
 				' WHERE '.dbConditionInt('td.triggerid_down', $triggerids)
 			);
-			$relationMap = new CRelationMap();
 			while ($relation = DBfetch($res)) {
 				$relationMap->addRelation($relation['triggerid_down'], $relation['triggerid_up']);
 			}
 
-			$dependencies = $this->get([
-				'output' => $options['selectDependencies'],
-				'triggerids' => $relationMap->getRelatedIds(),
-				'preservekeys' => true
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$dependencies = $this->get([
+					'output' => $options['selectDependencies'],
+					'triggerids' => $related_ids,
+					'preservekeys' => true
+				]);
+			}
+
 			$result = $relationMap->mapMany($result, $dependencies, 'dependencies');
 		}
 
@@ -1176,6 +1181,8 @@ class CTrigger extends CTriggerGeneral {
 
 		// adding discoveryrule
 		if ($options['selectDiscoveryRule'] !== null && $options['selectDiscoveryRule'] != API_OUTPUT_COUNT) {
+			$discoveryRules = [];
+			$relationMap = new CRelationMap();
 			$dbRules = DBselect(
 				'SELECT id.parent_itemid,td.triggerid'.
 				' FROM trigger_discovery td,item_discovery id,functions f'.
@@ -1183,17 +1190,21 @@ class CTrigger extends CTriggerGeneral {
 					' AND td.parent_triggerid=f.triggerid'.
 					' AND f.itemid=id.itemid'
 			);
-			$relationMap = new CRelationMap();
 			while ($rule = DBfetch($dbRules)) {
 				$relationMap->addRelation($rule['triggerid'], $rule['parent_itemid']);
 			}
 
-			$discoveryRules = API::DiscoveryRule()->get([
-				'output' => $options['selectDiscoveryRule'],
-				'itemids' => $relationMap->getRelatedIds(),
-				'nopermissions' => true,
-				'preservekeys' => true,
-			]);
+			$related_ids = $relationMap->getRelatedIds();
+
+			if ($related_ids) {
+				$discoveryRules = API::DiscoveryRule()->get([
+					'output' => $options['selectDiscoveryRule'],
+					'itemids' => $related_ids,
+					'nopermissions' => true,
+					'preservekeys' => true
+				]);
+			}
+
 			$result = $relationMap->mapOne($result, $discoveryRules, 'discoveryRule');
 		}
 

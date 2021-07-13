@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -221,7 +221,7 @@ class CControllerDashboardUpdate extends CController {
 				'height' => $widget['pos']['height'],
 				'type' => $widget['type'],
 				'name' => $widget['name'],
-				'fields' => $widget['form']->fieldsToApi(),
+				'fields' => $widget['form']->fieldsToApi()
 			];
 
 			$dashboard['widgets'][] = $upd_widget;

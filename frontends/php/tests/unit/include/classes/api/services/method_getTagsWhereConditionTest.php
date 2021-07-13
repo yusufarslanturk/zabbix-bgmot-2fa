@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,7 +19,9 @@
 **/
 
 
-class method_getTagsWhereConditionTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class method_getTagsWhereConditionTest extends TestCase {
 
 	public static function provider() {
 		$sql_args = [2 => 'event_tag', 'et', 'e', 'eventid'];
@@ -53,7 +55,7 @@ class method_getTagsWhereConditionTest extends PHPUnit_Framework_TestCase {
 						['tag' => 'Tag2', 'operator' => TAG_OPERATOR_LIKE, 'value' => 'Value5'],
 						['tag' => 'Tag3', 'operator' => TAG_OPERATOR_LIKE, 'value' => 'Value1'],
 						['tag' => 'Tag3', 'operator' => TAG_OPERATOR_LIKE, 'value' => ''],
-						['tag' => 'Tag3', 'operator' => TAG_OPERATOR_EQUAL, 'value' => 'Value3'],
+						['tag' => 'Tag3', 'operator' => TAG_OPERATOR_EQUAL, 'value' => 'Value3']
 					],
 					TAG_EVAL_TYPE_AND_OR
 				] + $sql_args,
@@ -71,7 +73,7 @@ class method_getTagsWhereConditionTest extends PHPUnit_Framework_TestCase {
 						['tag' => 'Tag2', 'operator' => TAG_OPERATOR_LIKE, 'value' => 'Value5'],
 						['tag' => 'Tag3', 'operator' => TAG_OPERATOR_LIKE, 'value' => 'Value1'],
 						['tag' => 'Tag3', 'operator' => TAG_OPERATOR_LIKE, 'value' => ''],
-						['tag' => 'Tag3', 'operator' => TAG_OPERATOR_EQUAL, 'value' => 'Value3'],
+						['tag' => 'Tag3', 'operator' => TAG_OPERATOR_EQUAL, 'value' => 'Value3']
 					],
 					TAG_EVAL_TYPE_OR
 				] + $sql_args,
@@ -115,7 +117,7 @@ class method_getTagsWhereConditionTest extends PHPUnit_Framework_TestCase {
 					TAG_EVAL_TYPE_AND_OR
 				] + $sql_args,
 				'EXISTS (SELECT NULL FROM event_tag et WHERE e.eventid=et.eventid AND et.tag=\'Tag\')'
-			],
+			]
 		];
 	}
 

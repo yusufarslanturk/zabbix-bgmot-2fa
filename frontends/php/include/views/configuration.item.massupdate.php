@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -235,6 +235,7 @@ $itemFormList->addRow(
 		->setChecked(isset($data['visible']['snmpv3_authpassphrase'])),
 	(new CTextBox('snmpv3_authpassphrase', $data['snmpv3_authpassphrase']))
 		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		->disableAutocomplete()
 );
 
 // append snmpv3 privprotocol to form list
@@ -258,6 +259,7 @@ $itemFormList->addRow(
 		->setChecked(isset($data['visible']['snmpv3_privpassphrase'])),
 	(new CTextBox('snmpv3_privpassphrase', $data['snmpv3_privpassphrase']))
 		->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
+		->disableAutocomplete()
 );
 
 // append port to form list
@@ -306,7 +308,9 @@ $itemFormList->addRow(
 	(new CVisibilityBox('visible[username]', 'username', _('Original')))
 		->setLabel(_('User name'))
 		->setChecked(isset($data['visible']['username'])),
-	(new CTextBox('username', $data['username']))->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+	(new CTextBox('username', $data['username']))
+		->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+		->disableAutocomplete()
 );
 
 // append publickey to form list
@@ -330,7 +334,9 @@ $itemFormList->addRow(
 	(new CVisibilityBox('visible[password]', 'password', _('Original')))
 		->setLabel(_('Password'))
 		->setChecked(isset($data['visible']['password'])),
-	(new CTextBox('password', $data['password']))->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+	(new CTextBox('password', $data['password']))
+		->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+		->disableAutocomplete()
 );
 
 // append item pre-processing

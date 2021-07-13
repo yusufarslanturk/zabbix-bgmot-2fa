@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -771,6 +771,9 @@ static size_t	vc_release_unused_items(const zbx_vc_item_t *source_item)
 	zbx_hashset_iter_t	iter;
 	zbx_vc_item_t		*item;
 	size_t			freed = 0;
+
+	if (NULL == vc_cache)
+		return freed;
 
 	timestamp = time(NULL) - ZBX_VC_ITEM_EXPIRE_PERIOD;
 

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ class CAPITest extends CTest {
 	public function checkResult($response, $error = null) {
 		// Check response data.
 		if ($error === null || $error === false) {
-			$this->assertArrayHasKey('result', $response);
+			$this->assertArrayHasKey('result', $response, json_encode($response, JSON_PRETTY_PRINT));
 			$this->assertArrayNotHasKey('error', $response);
 		}
 		else {

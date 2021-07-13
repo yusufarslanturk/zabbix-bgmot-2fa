@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -92,7 +92,9 @@ $graphFormList
 			->setAriaRequired()
 	)
 	->addRow((new CLabel(_('Graph type'), 'graphtype')),
-		(new CComboBox('graphtype', $this->data['graphtype'], 'submit()', graphType()))->setEnabled(!$readonly)
+		(new CComboBox('graphtype', $this->data['graphtype'], 'jQuery(\'form[name="graphForm"]\').submit()',
+			graphType())
+		)->setEnabled(!$readonly)
 	)
 	->addRow(_('Show legend'),
 		(new CCheckBox('show_legend'))
@@ -417,7 +419,11 @@ foreach ($this->data['items'] as $n => $item) {
 		$item['yaxisside'] = 0;
 	}
 
-	insert_js('loadItem('.$n.', '.CJs::encodeJson($item['gitemid']).', '.$this->data['graphid'].', '.$item['itemid'].', '.
+	if (!array_key_exists('gitemid', $item)) {
+		$item['gitemid'] = '';
+	}
+
+	insert_js('loadItem('.$n.', '.CJs::encodeJson($item['gitemid']).', '.$item['itemid'].', '.
 		CJs::encodeJson($name).', '.$item['type'].', '.$item['calc_fnc'].', '.$item['drawtype'].', '.
 		$item['yaxisside'].', \''.$item['color'].'\', '.$item['flags'].');',
 		true

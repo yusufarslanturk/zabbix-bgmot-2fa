@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -27,7 +27,8 @@ class CMessageElement extends CElement {
 	 * @inheritdoc
 	 */
 	public static function find() {
-		return (new CElementQuery('xpath://main/output'))->asMessage();
+		return (new CElementQuery('xpath:.//output[@role="contentinfo" or '.
+				CXPathHelper::fromClass('msg-global').']'))->waitUntilVisible()->asMessage();
 	}
 
 	/**
@@ -36,7 +37,7 @@ class CMessageElement extends CElement {
 	 * @return boolean
 	 */
 	public function isGood() {
-		return ($this->getAttribute('class') === 'msg-good');
+		return in_array('msg-good', explode(' ', $this->getAttribute('class')));
 	}
 
 	/**
@@ -45,7 +46,7 @@ class CMessageElement extends CElement {
 	 * @return boolean
 	 */
 	public function isBad() {
-		return ($this->getAttribute('class') === 'msg-bad');
+		return in_array('msg-bad', explode(' ', $this->getAttribute('class')));
 	}
 
 	/**
@@ -54,7 +55,12 @@ class CMessageElement extends CElement {
 	 * @return string
 	 */
 	public function getTitle() {
-		return $this->query('xpath:./span')->one()->getText();
+		if ($this->getAttribute('class') === 'msg-bad msg-global'){
+			return strtok($this->getText(), "\n");
+		}
+		else {
+			return $this->query('xpath:./span')->one()->getText();
+		}
 	}
 
 	/**
@@ -81,5 +87,15 @@ class CMessageElement extends CElement {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Close message.
+	 *
+	 * @return $this
+	 */
+	public function close() {
+		$this->query('xpath:.//button[contains(@class, "overlay-close-btn")]')->one()->click();
+		return $this->waitUntilNotPresent();
 	}
 }

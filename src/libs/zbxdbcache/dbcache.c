@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ static zbx_mutex_t	trends_lock = ZBX_MUTEX_NULL;
 static zbx_mutex_t	cache_ids_lock = ZBX_MUTEX_NULL;
 
 static char		*sql = NULL;
-static size_t		sql_alloc = 64 * ZBX_KIBIBYTE;
+static size_t		sql_alloc = 4 * ZBX_KIBIBYTE;
 
 extern unsigned char	program_type;
 
@@ -419,37 +419,55 @@ static void	dc_insert_trends_in_db(ZBX_DC_TREND *trends, int trends_num, unsigne
  *                                                                            *
  * Function: dc_remove_updated_trends                                         *
  *                                                                            *
- * Purpose: helper function for DCflush trends                                *
+ * Purpose: Update trends disable_until for items without trends data past or *
+ *          equal the specified clock                                         *
+ *                                                                            *
+ * Comments: A helper function for DCflush trends                             *
  *                                                                            *
  ******************************************************************************/
 static void	dc_remove_updated_trends(ZBX_DC_TREND *trends, int trends_num, const char *table_name,
 		int value_type, zbx_uint64_t *itemids, int *itemids_num, int clock)
 {
-	int		i;
+	int		i, j, clocks_num, now, age;
 	ZBX_DC_TREND	*trend;
 	zbx_uint64_t	itemid;
 	size_t		sql_offset;
 	DB_RESULT	result;
 	DB_ROW		row;
+	int		clocks[] = {SEC_PER_DAY, SEC_PER_WEEK, SEC_PER_MONTH, SEC_PER_YEAR, INT_MAX};
 
-	sql_offset = 0;
-	zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
-			"select distinct itemid"
-			" from %s"
-			" where clock>=%d and",
-			table_name, clock);
+	now = time(NULL);
+	age = now - clock;
+	for (clocks_num = 0; age > clocks[clocks_num]; clocks_num++)
+		clocks[clocks_num] = now - clocks[clocks_num];
+	clocks[clocks_num] = clock;
 
-	DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, "itemid", itemids, *itemids_num);
-
-	result = DBselect("%s", sql);
-
-	while (NULL != (row = DBfetch(result)))
+	/* remove itemids with trends data past or equal the clock */
+	for (j = 0; j <= clocks_num && 0 < *itemids_num; j++)
 	{
-		ZBX_STR2UINT64(itemid, row[0]);
-		uint64_array_remove(itemids, itemids_num, &itemid, 1);
-	}
-	DBfree_result(result);
+		sql_offset = 0;
+		zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
+				"select distinct itemid"
+				" from %s"
+				" where clock>=%d and",
+				table_name, clocks[j]);
 
+		if (0 < j)
+			zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, " clock<%d and", clocks[j - 1]);
+
+		DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, "itemid", itemids, *itemids_num);
+
+		result = DBselect("%s", sql);
+
+		while (NULL != (row = DBfetch(result)))
+		{
+			ZBX_STR2UINT64(itemid, row[0]);
+			uint64_array_remove(itemids, itemids_num, &itemid, 1);
+		}
+		DBfree_result(result);
+	}
+
+	/* update trends disable_until for the leftover itemids */
 	while (0 != *itemids_num)
 	{
 		itemid = itemids[--*itemids_num];
@@ -573,7 +591,7 @@ static void	dc_trends_fetch_and_update(ZBX_DC_TREND *trends, int trends_num, zbx
 
 	DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, "itemid", itemids, itemids_num);
 
-	result = DBselect("%s", sql);
+	result = DBselect("%s order by itemid,clock", sql);
 
 	sql_offset = 0;
 	DBbegin_multiple_update(&sql, &sql_alloc, &sql_offset);
@@ -889,6 +907,17 @@ static void	DCmass_update_trends(const ZBX_DC_HISTORY *history, int history_num,
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __function_name);
 }
 
+static int	zbx_trend_compare(const void *d1, const void *d2)
+{
+	const ZBX_DC_TREND	*p1 = (const ZBX_DC_TREND *)d1;
+	const ZBX_DC_TREND	*p2 = (const ZBX_DC_TREND *)d2;
+
+	ZBX_RETURN_IF_NOT_EQUAL(p1->itemid, p2->itemid);
+	ZBX_RETURN_IF_NOT_EQUAL(p1->clock, p2->clock);
+
+	return 0;
+}
+
 /******************************************************************************
  *                                                                            *
  * Function: DBmass_update_trends                                             *
@@ -909,6 +938,7 @@ static void	DBmass_update_trends(const ZBX_DC_TREND *trends, int trends_num,
 	{
 		trends_tmp = (ZBX_DC_TREND *)zbx_malloc(NULL, trends_num * sizeof(ZBX_DC_TREND));
 		memcpy(trends_tmp, trends, trends_num * sizeof(ZBX_DC_TREND));
+		qsort(trends_tmp, trends_num, sizeof(ZBX_DC_TREND), zbx_trend_compare);
 
 		while (0 < trends_num)
 			DBflush_trends(trends_tmp, &trends_num, trends_diff);
@@ -1479,6 +1509,9 @@ static void	DCsync_trends(void)
 	if (SUCCEED == zbx_is_export_enabled() && 0 != trends_num)
 		DCexport_all_trends(trends, trends_num);
 
+	if (0 < trends_num)
+		qsort(trends, trends_num, sizeof(ZBX_DC_TREND), zbx_trend_compare);
+
 	DBbegin();
 
 	while (trends_num > 0)
@@ -1502,12 +1535,12 @@ static void	DCsync_trends(void)
  * Parameters: history           - [IN] array of history data                 *
  *             history_num       - [IN] number of history structures          *
  *             timer_triggerids  - [IN] the timer triggerids to process       *
+ *             ts                - [IN] timer trigger timestamp               *
  *             trigger_diff      - [OUT] trigger updates                      *
- *             timers_num        - [OUT] processed timer triggers             *
  *                                                                            *
  ******************************************************************************/
 static void	recalculate_triggers(const ZBX_DC_HISTORY *history, int history_num,
-		const zbx_vector_uint64_t *timer_triggerids, zbx_vector_ptr_t *trigger_diff)
+		const zbx_vector_uint64_t *timer_triggerids, zbx_timespec_t *ts, zbx_vector_ptr_t *trigger_diff)
 {
 	const char		*__function_name = "recalculate_triggers";
 	int			i, item_num = 0;
@@ -1552,12 +1585,7 @@ static void	recalculate_triggers(const ZBX_DC_HISTORY *history, int history_num,
 	}
 
 	if (0 != timer_triggerids->values_num)
-	{
-		zbx_timespec_t	ts;
-
-		zbx_timespec(&ts);
-		zbx_dc_get_timer_triggers_by_triggerids(&trigger_info, &trigger_order, timer_triggerids, &ts);
-	}
+		zbx_dc_get_timer_triggers_by_triggerids(&trigger_info, &trigger_order, timer_triggerids, ts);
 
 	zbx_vector_ptr_sort(&trigger_order, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC);
 	evaluate_expressions(&trigger_order);
@@ -2527,8 +2555,11 @@ static void	DCmass_prepare_history(ZBX_DC_HISTORY *history, const zbx_vector_uin
 {
 	const char	*__function_name = "DCmass_prepare_history";
 	int		i;
+	time_t		now;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() history_num:%d", __function_name, history_num);
+
+	now = time(NULL);
 
 	for (i = 0; i < history_num; i++)
 	{
@@ -2559,13 +2590,33 @@ static void	DCmass_prepare_history(ZBX_DC_HISTORY *history, const zbx_vector_uin
 		}
 
 		if (0 == item->history)
-			h->flags |= ZBX_DC_FLAG_NOHISTORY;
-
-		if ((ITEM_VALUE_TYPE_FLOAT != item->value_type && ITEM_VALUE_TYPE_UINT64 != item->value_type) ||
-				0 == item->trends)
 		{
-			h->flags |= ZBX_DC_FLAG_NOTRENDS;
+			h->flags |= ZBX_DC_FLAG_NOHISTORY;
 		}
+		else if (now - h->ts.sec > item->history_sec)
+		{
+			h->flags |= ZBX_DC_FLAG_NOHISTORY;
+			zabbix_log(LOG_LEVEL_WARNING, "item \"%s:%s\" value timestamp \"%s %s\" is outside history "
+					"storage period", item->host.host, item->key_orig, zbx_date2str(h->ts.sec),
+					zbx_time2str(h->ts.sec));
+		}
+
+		if (ITEM_VALUE_TYPE_FLOAT == item->value_type || ITEM_VALUE_TYPE_UINT64 == item->value_type)
+		{
+			if (0 == item->trends)
+			{
+				h->flags |= ZBX_DC_FLAG_NOTRENDS;
+			}
+			else if (now - h->ts.sec > item->trends_sec)
+			{
+				h->flags |= ZBX_DC_FLAG_NOTRENDS;
+				zabbix_log(LOG_LEVEL_WARNING, "item \"%s:%s\" value timestamp \"%s %s\" is outside "
+						"trends storage period", item->host.host, item->key_orig,
+						zbx_date2str(h->ts.sec), zbx_time2str(h->ts.sec));
+			}
+		}
+		else
+			h->flags |= ZBX_DC_FLAG_NOTRENDS;
 
 		normalize_item_value(item, h);
 
@@ -2919,6 +2970,7 @@ static void	sync_server_history(int *values_num, int *triggers_num, int *more)
 		int			*errcodes, trends_num = 0, timers_num = 0, ret = SUCCEED;
 		zbx_vector_uint64_t	itemids;
 		ZBX_DC_TREND		*trends = NULL;
+		zbx_timespec_t		ts;
 
 		*more = ZBX_SYNC_DONE;
 
@@ -2938,6 +2990,8 @@ static void	sync_server_history(int *values_num, int *triggers_num, int *more)
 		}
 		else
 			history_num = 0;
+
+		zbx_timespec(&ts);
 
 		if (0 != history_num)
 		{
@@ -3008,7 +3062,8 @@ static void	sync_server_history(int *values_num, int *triggers_num, int *more)
 				{
 					DBbegin();
 
-					recalculate_triggers(history, history_num, &timer_triggerids, &trigger_diff);
+					recalculate_triggers(history, history_num, &timer_triggerids, &ts,
+							&trigger_diff);
 
 					/* process trigger events generated by recalculate_triggers() */
 					zbx_process_events(&trigger_diff, &triggerids);

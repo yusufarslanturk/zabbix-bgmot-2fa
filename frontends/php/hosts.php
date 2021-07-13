@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -474,7 +474,7 @@ elseif (hasRequest('action') && getRequest('action') == 'host.massupdate' && has
 		}
 		unset($host);
 
-		$result = (bool) API::Host()->update($hosts);
+		$result = $hosts ? (bool) API::Host()->update($hosts) : true;
 
 		if ($result === false) {
 			throw new Exception();
@@ -640,8 +640,6 @@ elseif (hasRequest('add') || hasRequest('update')) {
 			else {
 				throw new Exception();
 			}
-
-			add_audit_ext(AUDIT_ACTION_ADD, AUDIT_RESOURCE_HOST, $hostId, $host['host'], null, null, null);
 		}
 		else {
 			$host['hostid'] = $hostId;
@@ -649,16 +647,6 @@ elseif (hasRequest('add') || hasRequest('update')) {
 			if (!API::Host()->update($host)) {
 				throw new Exception();
 			}
-
-			$dbHostNew = API::Host()->get([
-				'output' => API_OUTPUT_EXTEND,
-				'hostids' => $hostId,
-				'editable' => true
-			]);
-			$dbHostNew = reset($dbHostNew);
-
-			add_audit_ext(AUDIT_ACTION_UPDATE, AUDIT_RESOURCE_HOST, $dbHostNew['hostid'], $dbHostNew['host'], 'hosts',
-				$dbHost, $dbHostNew);
 		}
 
 		// full clone
@@ -796,13 +784,14 @@ elseif (hasRequest('action') && str_in_array(getRequest('action'), ['host.massen
 		'templated_hosts' => true,
 		'output' => ['hostid']
 	]);
-	$actHosts = zbx_objectValues($actHosts, 'hostid');
 
 	if ($actHosts) {
-		DBstart();
+		foreach ($actHosts as &$host) {
+			$host['status'] = $status;
+		}
+		unset($host);
 
-		$result = updateHostStatus($actHosts, $status);
-		$result = DBend($result);
+		$result = (bool) API::Host()->update($actHosts);
 
 		if ($result) {
 			uncheckTableRows();

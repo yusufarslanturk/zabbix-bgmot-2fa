@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -76,7 +76,7 @@ if ($slideshow_ownerid !== '') {
 		: [
 			'id' => $slideshow_ownerid,
 			'name' => _('Inaccessible user'),
-			'inmaccessible' => true
+			'inaccessible' => true
 		];
 }
 
@@ -280,7 +280,7 @@ if (isset($data['slideshow']['slideshowid'])) {
 }
 else {
 	$tabs->setFooter(makeFormFooter(
-		new CSubmit('add', _('Add')),
+		(new CSubmit('add', _('Add')))->removeId(),
 		[new CButtonCancel()]
 	));
 }

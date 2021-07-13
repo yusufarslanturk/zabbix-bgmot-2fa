@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -36,6 +36,7 @@
 #define ZBX_DBCONFIG_IMPL
 #include "dbconfig.h"
 #include "dbsync.h"
+#include "actions.h"
 
 int	sync_in_progress = 0;
 
@@ -2463,6 +2464,7 @@ static void	DCsync_items(zbx_dbsync_t *sync, int flags)
 				trends_sec = config->config->hk.trends;
 
 			numitem->trends = (0 != trends_sec);
+			numitem->trends_sec = trends_sec;
 
 			DCstrpool_replace(found, &numitem->units, row[35]);
 		}
@@ -6231,6 +6233,7 @@ static void	DCget_item(DC_ITEM *dst_item, const ZBX_DC_ITEM *src_item)
 			numitem = (ZBX_DC_NUMITEM *)zbx_hashset_search(&config->numitems, &src_item->itemid);
 
 			dst_item->trends = numitem->trends;
+			dst_item->trends_sec = numitem->trends_sec;
 			dst_item->units = zbx_strdup(NULL, numitem->units);
 			break;
 		case ITEM_VALUE_TYPE_LOG:
@@ -6766,10 +6769,19 @@ void	DCconfig_get_preprocessable_items(zbx_hashset_t *items, int *timestamp)
 			item = (zbx_preproc_item_t *)zbx_hashset_insert(items, &item_local, sizeof(item_local));
 		}
 
-		item->dep_itemids_num = dc_masteritem->dep_itemids.values_num;
-		item->dep_itemids = (zbx_uint64_t *)zbx_malloc(NULL, sizeof(zbx_uint64_t) * item->dep_itemids_num);
-		memcpy(item->dep_itemids, dc_masteritem->dep_itemids.values,
-				sizeof(zbx_uint64_t) * item->dep_itemids_num);
+		item->dep_itemids_num = 0;
+		item->dep_itemids = (zbx_uint64_t *)zbx_malloc(NULL, sizeof(zbx_uint64_t) *
+				dc_masteritem->dep_itemids.values_num);
+
+		for (i = 0; i < dc_masteritem->dep_itemids.values_num; i++)
+		{
+			if (NULL == (dc_item = (ZBX_DC_ITEM *)zbx_hashset_search(&config->items,
+					&dc_masteritem->dep_itemids.values[i])) || ITEM_STATUS_ACTIVE != dc_item->status)
+			{
+				continue;
+			}
+			item->dep_itemids[item->dep_itemids_num++] = dc_masteritem->dep_itemids.values[i];
+		}
 	}
 
 	zbx_hashset_iter_reset(&config->items, &iter);
@@ -7660,7 +7672,7 @@ static void	dc_requeue_item_at(ZBX_DC_ITEM *dc_item, ZBX_DC_HOST *dc_host, int n
  *           function.                                                        *
  *                                                                            *
  ******************************************************************************/
-int	DCconfig_get_poller_items(unsigned char poller_type, DC_ITEM *items)
+int	DCconfig_get_poller_items(unsigned char poller_type, DC_ITEM **items)
 {
 	const char		*__function_name = "DCconfig_get_poller_items";
 
@@ -7760,25 +7772,31 @@ int	DCconfig_get_poller_items(unsigned char poller_type, DC_ITEM *items)
 			}
 		}
 
+		if (0 == num)
+		{
+			if (ZBX_POLLER_TYPE_NORMAL == poller_type && SUCCEED == is_snmp_type(dc_item->type) &&
+					0 == (ZBX_FLAG_DISCOVERY_RULE & dc_item->flags))
+			{
+				ZBX_DC_SNMPITEM	*snmpitem;
+
+				snmpitem = (ZBX_DC_SNMPITEM *)zbx_hashset_search(&config->snmpitems, &dc_item->itemid);
+
+				if (ZBX_SNMP_OID_TYPE_NORMAL == snmpitem->snmp_oid_type ||
+						ZBX_SNMP_OID_TYPE_DYNAMIC == snmpitem->snmp_oid_type)
+				{
+					max_items = DCconfig_get_suggested_snmp_vars_nolock(dc_item->interfaceid, NULL);
+				}
+			}
+
+			if (1 < max_items)
+				*items = zbx_malloc(NULL, sizeof(DC_ITEM) * max_items);
+		}
+
 		dc_item_prev = dc_item;
 		dc_item->location = ZBX_LOC_POLLER;
-		DCget_host(&items[num].host, dc_host);
-		DCget_item(&items[num], dc_item);
+		DCget_host(&(*items)[num].host, dc_host);
+		DCget_item(&(*items)[num], dc_item);
 		num++;
-
-		if (1 == num && ZBX_POLLER_TYPE_NORMAL == poller_type && SUCCEED == is_snmp_type(dc_item->type) &&
-				0 == (ZBX_FLAG_DISCOVERY_RULE & dc_item->flags))
-		{
-			ZBX_DC_SNMPITEM	*snmpitem;
-
-			snmpitem = (ZBX_DC_SNMPITEM *)zbx_hashset_search(&config->snmpitems, &dc_item->itemid);
-
-			if (ZBX_SNMP_OID_TYPE_NORMAL == snmpitem->snmp_oid_type ||
-					ZBX_SNMP_OID_TYPE_DYNAMIC == snmpitem->snmp_oid_type)
-			{
-				max_items = DCconfig_get_suggested_snmp_vars_nolock(dc_item->interfaceid, NULL);
-			}
-		}
 	}
 
 	UNLOCK_CACHE;
@@ -8308,7 +8326,7 @@ void	zbx_host_availability_init(zbx_host_availability_t *availability, zbx_uint6
  *                                                                            *
  * Purpose: releases resources allocated to store host availability data      *
  *                                                                            *
- * Parameters: availability - [IN] host availability data                     *
+ * Parameters: ha - [IN] host availability data                               *
  *                                                                            *
  ******************************************************************************/
 void	zbx_host_availability_clean(zbx_host_availability_t *ha)
@@ -8495,7 +8513,7 @@ out:
  *                                  OUT: the host availability data in cache  *
  *                                       before changes                       *
  *             out        - [OUT] the host availability data after changes    *
- *             error      - [IN] the error message                            *
+ *             error_msg  - [IN] the error message                            *
  *                                                                            *
  * Return value: SUCCEED - the host was deactivated successfully              *
  *               FAIL    - the host was already deactivated or deactivation   *
@@ -10548,59 +10566,6 @@ void	DCtouch_hosts_availability(const zbx_vector_uint64_t *hostids)
 
 /******************************************************************************
  *                                                                            *
- * Function: zbx_db_condition_clean                                           *
- *                                                                            *
- * Purpose: cleans condition data structure                                   *
- *                                                                            *
- * Parameters: condition - [IN] the condition data to free                    *
- *                                                                            *
- ******************************************************************************/
-void	zbx_db_condition_clean(DB_CONDITION *condition)
-{
-	zbx_free(condition->value2);
-	zbx_free(condition->value);
-}
-
-/******************************************************************************
- *                                                                            *
- * Function: zbx_conditions_eval_clean                                        *
- *                                                                            *
- * Purpose: cleans condition data structures from hashset                     *
- *                                                                            *
- * Parameters: uniq_conditions - [IN] hashset with data structures to clean   *
- *                                                                            *
- ******************************************************************************/
-void	zbx_conditions_eval_clean(zbx_hashset_t *uniq_conditions)
-{
-	zbx_hashset_iter_t	iter;
-	DB_CONDITION		*condition;
-
-	zbx_hashset_iter_reset(uniq_conditions, &iter);
-
-	while (NULL != (condition = (DB_CONDITION *)zbx_hashset_iter_next(&iter)))
-		zbx_db_condition_clean(condition);
-}
-
-/******************************************************************************
- *                                                                            *
- * Function: zbx_action_eval_free                                             *
- *                                                                            *
- * Purpose: frees action evaluation data structure                            *
- *                                                                            *
- * Parameters: action - [IN] the action evaluation to free                    *
- *                                                                            *
- ******************************************************************************/
-void	zbx_action_eval_free(zbx_action_eval_t *action)
-{
-	zbx_free(action->formula);
-
-	zbx_vector_ptr_destroy(&action->conditions);
-
-	zbx_free(action);
-}
-
-/******************************************************************************
- *                                                                            *
  * Function: dc_action_copy_conditions                                        *
  *                                                                            *
  * Purpose: copies configuration cache action conditions to the specified     *
@@ -10613,7 +10578,7 @@ void	zbx_action_eval_free(zbx_action_eval_t *action)
 static void	dc_action_copy_conditions(const zbx_dc_action_t *dc_action, zbx_vector_ptr_t *conditions)
 {
 	int				i;
-	DB_CONDITION			*condition;
+	zbx_condition_t			*condition;
 	zbx_dc_action_condition_t	*dc_condition;
 
 	zbx_vector_ptr_reserve(conditions, dc_action->conditions.values_num);
@@ -10622,7 +10587,7 @@ static void	dc_action_copy_conditions(const zbx_dc_action_t *dc_action, zbx_vect
 	{
 		dc_condition = (zbx_dc_action_condition_t *)dc_action->conditions.values[i];
 
-		condition = (DB_CONDITION *)zbx_malloc(NULL, sizeof(DB_CONDITION));
+		condition = (zbx_condition_t *)zbx_malloc(NULL, sizeof(zbx_condition_t));
 
 		condition->conditionid = dc_condition->conditionid;
 		condition->actionid = dc_action->actionid;
@@ -10630,6 +10595,7 @@ static void	dc_action_copy_conditions(const zbx_dc_action_t *dc_action, zbx_vect
 		condition->op = dc_condition->op;
 		condition->value = zbx_strdup(NULL, dc_condition->value);
 		condition->value2 = zbx_strdup(NULL, dc_condition->value2);
+		zbx_vector_uint64_create(&condition->eventids);
 
 		zbx_vector_ptr_append(conditions, condition);
 	}
@@ -10669,75 +10635,6 @@ static zbx_action_eval_t	*dc_action_eval_create(const zbx_dc_action_t *dc_action
 
 /******************************************************************************
  *                                                                            *
- * Function: prepare_actions_eval                                             *
- *                                                                            *
- * Purpose: make actions to point, to conditions from hashset, where all      *
- *          conditions are unique, this ensures that we don't double check    *
- *          same conditions.                                                  *
- *                                                                            *
- * Parameters: actions         - [IN/OUT] all conditions are added to hashset *
- *                                        then cleaned, actions will now      *
- *                                        point to conditions from hashset.   *
- *                                        for custom expression also          *
- *                                        replaces formula                    *
- *             uniq_conditions - [OUT]    unique conditions that actions      *
- *                                        point to (several sources)          *
- *                                                                            *
- * Comments: The returned conditions must be freed with                       *
- *           zbx_conditions_eval_clean() function later.                      *
- *                                                                            *
- ******************************************************************************/
-static void	prepare_actions_eval(zbx_vector_ptr_t *actions, zbx_hashset_t *uniq_conditions)
-{
-	int	i, j;
-
-	for (i = 0; i < actions->values_num; i++)
-	{
-		zbx_action_eval_t	*action = (zbx_action_eval_t *)actions->values[i];
-
-		for (j = 0; j < action->conditions.values_num; j++)
-		{
-			DB_CONDITION	*uniq_condition = NULL, *condition = (DB_CONDITION *)action->conditions.values[j];
-
-			if (EVENT_SOURCE_COUNT <= action->eventsource)
-			{
-				zbx_db_condition_clean(condition);
-			}
-			else if (NULL == (uniq_condition = (DB_CONDITION *)zbx_hashset_search(&uniq_conditions[action->eventsource],
-					condition)))
-			{
-				uniq_condition = (DB_CONDITION *)zbx_hashset_insert(&uniq_conditions[action->eventsource],
-						condition, sizeof(DB_CONDITION));
-			}
-			else
-			{
-				if (CONDITION_EVAL_TYPE_EXPRESSION == action->evaltype)
-				{
-					char	search[ZBX_MAX_UINT64_LEN + 2];
-					char	replace[ZBX_MAX_UINT64_LEN + 2];
-					char	*old_formula;
-
-					zbx_snprintf(search, sizeof(search), "{" ZBX_FS_UI64 "}",
-							condition->conditionid);
-					zbx_snprintf(replace, sizeof(replace), "{" ZBX_FS_UI64 "}",
-							uniq_condition->conditionid);
-
-					old_formula = action->formula;
-					action->formula = string_replace(action->formula, search, replace);
-					zbx_free(old_formula);
-				}
-
-				zbx_db_condition_clean(condition);
-			}
-
-			zbx_free(action->conditions.values[j]);
-			action->conditions.values[j] = uniq_condition;
-		}
-	}
-}
-
-/******************************************************************************
- *                                                                            *
  * Function: zbx_dc_get_actions_eval                                          *
  *                                                                            *
  * Purpose: gets action evaluation data                                       *
@@ -10750,11 +10647,10 @@ static void	prepare_actions_eval(zbx_vector_ptr_t *actions, zbx_hashset_t *uniq_
  *                                    (see ZBX_ACTION_OPCLASS_* defines)      *
  *                                                                            *
  * Comments: The returned actions and conditions must be freed with           *
- *           zbx_action_eval_free() and zbx_conditions_eval_clean()           *
- *           functions later.                                                 *
+ *           zbx_action_eval_free() function later.                           *
  *                                                                            *
  ******************************************************************************/
-void	zbx_dc_get_actions_eval(zbx_vector_ptr_t *actions, zbx_hashset_t *uniq_conditions, unsigned char opflags)
+void	zbx_dc_get_actions_eval(zbx_vector_ptr_t *actions, unsigned char opflags)
 {
 	const char			*__function_name = "zbx_dc_get_actions_eval";
 	const zbx_dc_action_t		*dc_action;
@@ -10773,8 +10669,6 @@ void	zbx_dc_get_actions_eval(zbx_vector_ptr_t *actions, zbx_hashset_t *uniq_cond
 	}
 
 	UNLOCK_CACHE;
-
-	prepare_actions_eval(actions, uniq_conditions);
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s() actions:%d", __function_name, actions->values_num);
 }
@@ -11246,22 +11140,21 @@ void	zbx_dc_get_nested_hostgroupids(zbx_uint64_t *groupids, int groupids_num, zb
  *                                                                            *
  * Purpose: gets nested group ids for the specified host groups               *
  *                                                                            *
- * Parameter: names           - [IN] the parent group names                   *
- *            names_num       - [IN] the number of parent groups              *
+ * Parameter: groups          - [IN] the parent group names                   *
  *            nested_groupids - [OUT] the nested + parent group ids           *
  *                                                                            *
  ******************************************************************************/
-void	zbx_dc_get_nested_hostgroupids_by_names(char **names, int names_num, zbx_vector_uint64_t *nested_groupids)
+void	zbx_dc_get_nested_hostgroupids_by_names(zbx_vector_str_t *groups, zbx_vector_uint64_t *nested_groupids)
 {
 	int	i, index;
 
 	WRLOCK_CACHE;
 
-	for (i = 0; i < names_num; i++)
+	for (i = 0; i < groups->values_num; i++)
 	{
 		zbx_dc_hostgroup_t	group_local, *group;
 
-		group_local.name = names[i];
+		group_local.name = groups->values[i];
 
 		if (FAIL != (index = zbx_vector_ptr_bsearch(&config->hostgroups_name, &group_local,
 				dc_compare_hgroups)))

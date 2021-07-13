@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -323,7 +323,7 @@ class CAction extends CApiService {
 
 		$sqlParts = $this->applyQueryOutputOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
 		$sqlParts = $this->applyQuerySortOptions($this->tableName(), $this->tableAlias(), $options, $sqlParts);
-		$dbRes = DBselect($this->createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
+		$dbRes = DBselect(self::createSelectQueryFromParts($sqlParts), $sqlParts['limit']);
 		while ($action = DBfetch($dbRes)) {
 			if ($options['countOutput']) {
 				$result = $action['rowscount'];
@@ -2806,6 +2806,10 @@ class CAction extends CApiService {
 	 * @param $actions
 	 */
 	protected function validateCreate($actions) {
+		if (!$actions) {
+			self::exception(ZBX_API_ERROR_PARAMETERS, _('Empty input parameter.'));
+		}
+
 		$actionDbFields = [
 			'name'        => null,
 			'eventsource' => null

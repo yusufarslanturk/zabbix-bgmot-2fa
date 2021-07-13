@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2020 Zabbix SIA
+** Copyright (C) 2001-2021 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ void	zbx_vcmock_ds_dump(void);
 int	zbx_vcmock_str_to_cache_mode(const char *mode);
 int	zbx_vcmock_str_to_item_status(const char *str);
 
-void	zbx_vcmock_read_values(zbx_mock_handle_t handle, unsigned char value_type, zbx_vector_history_record_t *values);
+void	zbx_vcmock_read_values(zbx_mock_handle_t hdata, unsigned char value_type, zbx_vector_history_record_t *values);
 void	zbx_vcmock_check_records(const char *prefix, unsigned char value_type,
 		const zbx_vector_history_record_t *expected_values, const zbx_vector_history_record_t *returned_values);
 
