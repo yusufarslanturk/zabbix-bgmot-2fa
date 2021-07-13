@@ -100,8 +100,8 @@ class testPageLowLevelDiscovery extends CWebTest {
 				[
 					'expected' => TEST_GOOD,
 					'names' => [
-						['Name' => 'Discovery rule 2'],
-						['Name' => 'Discovery rule 3']
+						'Discovery rule 2',
+						'Discovery rule 3'
 					],
 					'message' => 'Request sent successfully',
 					'hostid' => self::HOST_ID
@@ -111,7 +111,7 @@ class testPageLowLevelDiscovery extends CWebTest {
 				[
 					'expected' => TEST_GOOD,
 					'names' => [
-						'Name' => 'Discovery rule 2'
+						'Discovery rule 2'
 					],
 					'message' => 'Request sent successfully',
 					'hostid' => self::HOST_ID
@@ -121,7 +121,7 @@ class testPageLowLevelDiscovery extends CWebTest {
 				[
 					'expected' => TEST_BAD,
 					'names' => [
-						'Name' => 'Discovery rule 2'
+						'Discovery rule 2'
 					],
 					'disabled' => true,
 					'message' => 'Cannot send request',
@@ -133,7 +133,7 @@ class testPageLowLevelDiscovery extends CWebTest {
 				[
 					'expected' => TEST_BAD,
 					'names' => [
-						'Name' => 'Temp Status Discovery'
+						'Temp Status Discovery'
 					],
 					'template' => true,
 					'hostid' => 10250
@@ -143,7 +143,7 @@ class testPageLowLevelDiscovery extends CWebTest {
 				[
 					'expected' => TEST_BAD,
 					'names' => [
-						'Name' => 'Discovery rule 1'
+						'Discovery rule 1'
 					],
 					'message' => 'Cannot send request',
 					'details' => 'Cannot send request: wrong discovery rule type.',
@@ -185,7 +185,7 @@ class testPageLowLevelDiscovery extends CWebTest {
 				[
 					'expected' => TEST_BAD,
 					'names' => [
-						'Name' => 'Template ZBX6663 Second: DiscoveryRule ZBX6663 Second'
+						'Template ZBX6663 Second: DiscoveryRule ZBX6663 Second'
 					],
 					'message' => 'Cannot delete discovery rules',
 					'details' => 'Cannot delete templated items.',
@@ -196,7 +196,7 @@ class testPageLowLevelDiscovery extends CWebTest {
 				[
 					'expected' => TEST_GOOD,
 					'names' => [
-						'Name' => 'Discovery rule 1'
+						'Discovery rule 1'
 					],
 					'message' => 'Discovery rules deleted',
 					'hostid' => self::HOST_ID
