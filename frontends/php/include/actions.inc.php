@@ -1504,13 +1504,12 @@ function getEventsAlertsOverview(array $events, array $r_events = []) {
 
 	if ($alert_eventids) {
 		$event_alert_state = array_combine(array_keys($alert_eventids), array_fill(0, count($alert_eventids), [
-			'failed_ctn' => 0,
-			'in_progress_ctn' => 0,
-			'total_ctn' => 0,
+			'failed_cnt' => 0,
+			'in_progress_cnt' => 0,
+			'total_cnt' => 0
 		]));
 
 		$alerts = API::Alert()->get([
-			'output' => [],
 			'groupCount' => true,
 			'countOutput' => true,
 			'filter' => ['status' => ALERT_STATUS_FAILED],
@@ -1518,11 +1517,10 @@ function getEventsAlertsOverview(array $events, array $r_events = []) {
 		]);
 
 		foreach ($alerts as $alert) {
-			$event_alert_state[$alert['eventid']]['failed_ctn'] = (int) $alert['rowscount'];
+			$event_alert_state[$alert['eventid']]['failed_cnt'] = (int) $alert['rowscount'];
 		}
 
 		$alerts = API::Alert()->get([
-			'output' => [],
 			'groupCount' => true,
 			'countOutput' => true,
 			'filter' => ['status' => [ALERT_STATUS_NEW, ALERT_STATUS_NOT_SENT]],
@@ -1530,18 +1528,17 @@ function getEventsAlertsOverview(array $events, array $r_events = []) {
 		]);
 
 		foreach ($alerts as $alert) {
-			$event_alert_state[$alert['eventid']]['in_progress_ctn'] = (int) $alert['rowscount'];
+			$event_alert_state[$alert['eventid']]['in_progress_cnt'] = (int) $alert['rowscount'];
 		}
 
 		$alerts = API::Alert()->get([
-			'output' => [],
 			'groupCount' => true,
 			'countOutput' => true,
 			'eventids' => array_keys($alert_eventids)
 		]);
 
 		foreach ($alerts as $alert) {
-			$event_alert_state[$alert['eventid']]['total_ctn'] = (int) $alert['rowscount'];
+			$event_alert_state[$alert['eventid']]['total_cnt'] = (int) $alert['rowscount'];
 		}
 	}
 
@@ -1550,15 +1547,15 @@ function getEventsAlertsOverview(array $events, array $r_events = []) {
 		$event_actions = $event_alert_state[$event['eventid']];
 		if ($event['r_eventid']) {
 			$r_event_actions = $event_alert_state[$event['r_eventid']];
-			$event_actions['failed_ctn'] += $r_event_actions['failed_ctn'];
-			$event_actions['total_ctn'] += $r_event_actions['total_ctn'];
-			$event_actions['in_progress_ctn'] += $r_event_actions['in_progress_ctn'];
+			$event_actions['failed_cnt'] += $r_event_actions['failed_cnt'];
+			$event_actions['total_cnt'] += $r_event_actions['total_cnt'];
+			$event_actions['in_progress_cnt'] += $r_event_actions['in_progress_cnt'];
 		}
 
 		$actions[$event['eventid']] = [
-			'count' => $event_actions['total_ctn'] + count($event['acknowledges']),
-			'has_uncomplete_action' => (bool) $event_actions['in_progress_ctn'],
-			'has_failed_action' => (bool) $event_actions['failed_ctn']
+			'count' => $event_actions['total_cnt'] + count($event['acknowledges']),
+			'has_uncomplete_action' => (bool) $event_actions['in_progress_cnt'],
+			'has_failed_action' => (bool) $event_actions['failed_cnt']
 		];
 	}
 
@@ -1606,7 +1603,8 @@ function getEventDetailsActions(array $event) {
 	return [
 		'actions' => $actions['actions'],
 		'mediatypeids' => $actions['mediatypeids'],
-		'userids' => $actions['userids']
+		'userids' => $actions['userids'],
+		'count' => $actions['count']
 	];
 }
 
@@ -1974,7 +1972,10 @@ function makeEventActionsIcon(array $data, $eventid) {
 			'button' => true,
 			'num' => $total,
 			'aria-label' => _xn('%1$s action', '%1$s actions', $total, 'screen reader', $total)
-		])->setAttribute('data-actions-table-eventid', $eventid)
+		])->setAjaxHint([
+			'type' => 'eventactions',
+			'data' => ['eventid' => $eventid]
+		])
 		: null;
 }
 
