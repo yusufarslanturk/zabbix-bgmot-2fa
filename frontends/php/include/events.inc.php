@@ -568,7 +568,25 @@ function getTagString(array $tag, $tag_name_format = PROBLEMS_TAG_NAME_FULL) {
 /**
  * Create a table with trigger events and, if defined, trigger description and a clickable URL.
  *
- * @param array $data
+ * @param array  $data
+ * @param array  $data['trigger']                        Trigger configuration details.
+ * @param string $data['trigger']['triggerid']
+ * @param array  $data['trigger']['comments']
+ * @param array  $data['trigger']['url']
+ * @param bool   $data['show_timeline']                  Either to show timeline in output.
+ * @param int    $data['show_tags']                      Maximum number of tags to display.
+ * @param array  $data['problems']                       List of problems.
+ * @param string $data['problems'][]['eventid']
+ * @param array  $data['problems'][]['tags']
+ * @param string $data['problems'][]['tags'][]['tag']
+ * @param string $data['problems'][]['tags'][]['value']
+ * @param array  $data['filter_tags']                    An array of tag filtering data.
+ * @param string $data['filter_tags'][]['tag']
+ * @param int    $data['filter_tags'][]['operator']
+ * @param string $data['filter_tags'][]['value']
+ * @param int    $data['tag_name_format']
+ * @param string $data['tag_priority']                   A list of comma-separated tag names.
+ * @param string $data['backurl']                        Backurl for problem update link.
  *
  * @return CDiv
  */
