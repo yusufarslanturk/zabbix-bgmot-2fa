@@ -210,7 +210,7 @@ function _params($format, array $arguments) {
  *
  * @return string    Empty string on success or error message on failure.
  */
-function setupLocale(string $language) {
+function setupLocale($language) {
 	$numeric_locales = [
 		'C', 'POSIX', 'en', 'en_US', 'en_US.UTF-8', 'English_United States.1252', 'en_GB', 'en_GB.UTF-8'
 	];
