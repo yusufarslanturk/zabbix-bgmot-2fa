@@ -166,9 +166,9 @@ function _xs($message, $context) {
 }
 
 /**
- * Translates the string with respect to the given context and plural forms,
- * also replaces placeholders with supplied arguments.
- * If no translation is found, the original string will be used. Unlimited number of parameters supplied.
+ * Translates the string with respect to the given context and plural forms, also replaces placeholders with supplied
+ * arguments. If no translation is found, the original string will be used. Unlimited number of parameters supplied.
+ *
  * Parameter placeholders must be defined as %1$s, %2$s etc.
  *
  * Example: _xn('%1$s message for arg1 "%2$s"', '%1$s messages for arg1 "%2$s"', 3, 'context', 'arg1Value');
@@ -204,26 +204,23 @@ function _params($format, array $arguments) {
 /**
  * Initialize locale environment and gettext translations depending on language selected by user.
  *
- * Note: should be called before translateDefines are included.
+ * Note: should be called before including file includes/translateDefines.inc.php.
  *
- * @param string $language            Locale language prefix like en_US, ru_RU etc.
+ * @param string $language    Locale language prefix like en_US, ru_RU etc.
  *
- * @return string Empty on success, message if a matching locale could not be set.
+ * @return string    Empty string on success or error message on failure.
  */
 function setupLocale(string $language) {
 	$numeric_locales = [
 		'C', 'POSIX', 'en', 'en_US', 'en_US.UTF-8', 'English_United States.1252', 'en_GB', 'en_GB.UTF-8'
 	];
-	$locales_probed = zbx_locale_variants($language);
+	$locale_variants = zbx_locale_variants($language);
 	$locale_set = false;
 
 	init_mbstrings();
 
-	/*
-	* Since LC_MESSAGES may be unavailable on some systems,
-	* try to set all of the locales and then make adjustments.
-	*/
-	foreach ($locales_probed as $locale) {
+	// Since LC_MESSAGES may be unavailable on some systems, try to set all of the locales and then make adjustments.
+	foreach ($locale_variants as $locale) {
 		putenv('LC_ALL='.$locale);
 		putenv('LANG='.$locale);
 		putenv('LANGUAGE='.$locale);
@@ -243,7 +240,15 @@ function setupLocale(string $language) {
 		textdomain('frontend');
 	}
 
-	return ($locale_set ? '': 'Locale for language "'.$language.'" is not found on the web server. Tried to set: '.
-			implode(', ', $locales_probed).'. Unable to translate Zabbix interface.'
-	);
+	if (!$locale_set) {
+		$language = htmlspecialchars($language, ENT_QUOTES, 'UTF-8');
+		$locale_variants = array_map(function ($locale) {
+			return htmlspecialchars($locale, ENT_QUOTES, 'UTF-8');
+		}, $locale_variants);
+
+		return 'Locale for language "'.$language.'" is not found on the web server. Tried to set: '.
+			implode(', ', $locale_variants).'. Unable to translate Zabbix interface.';
+	}
+
+	return '';
 }

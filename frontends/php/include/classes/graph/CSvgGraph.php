@@ -990,16 +990,23 @@ class CSvgGraph extends CSvg {
 				}
 			}
 
+			$clock_fmt = ($problem['clock'] >= $today)
+				? zbx_date2str(TIME_FORMAT_SECONDS, $problem['clock'])
+				: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['clock']);
+
+			if ($problem['r_clock'] != 0) {
+				$r_clock_fmt = ($problem['r_clock'] >= $today)
+					? zbx_date2str(TIME_FORMAT_SECONDS, $problem['r_clock'])
+					: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['r_clock']);
+			}
+			else {
+				$r_clock_fmt = '';
+			}
+
 			$info = [
 				'name' => $problem['name'],
-				'clock' => ($problem['clock'] >= $today)
-					? zbx_date2str(TIME_FORMAT_SECONDS, $problem['clock'])
-					: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['clock']),
-				'r_clock' => ($problem['r_clock'] != 0)
-					? (($problem['r_clock'] >= $today)
-						? zbx_date2str(TIME_FORMAT_SECONDS, $problem['r_clock'])
-						: zbx_date2str(DATE_TIME_FORMAT_SECONDS, $problem['r_clock']))
-					: '',
+				'clock' => $clock_fmt,
+				'r_clock' => $r_clock_fmt,
 				'url' => (new CUrl('tr_events.php'))
 					->setArgument('triggerid', $problem['objectid'])
 					->setArgument('eventid', $problem['eventid'])
