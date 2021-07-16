@@ -54,7 +54,18 @@ class CWidgetHelper {
 					->setAttribute('placeholder', _('default'))
 					->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			)
-			->addRow(self::getLabel($field_rf_rate), self::getComboBox($field_rf_rate));
+			->addRow(self::getLabel($field_rf_rate), self::getComboBox($field_rf_rate))
+			->addItem(
+				(new CTag('script', true,
+					(new CJsScript('jQuery(function($){
+							$("#widget_dialogue_form").on("blur change", \'[data-trim="1"]\', function () {
+								const $box = $(this);
+								$box.val($box.val().trim());
+							});
+						});'
+					))
+				))
+			);
 	}
 
 	/**

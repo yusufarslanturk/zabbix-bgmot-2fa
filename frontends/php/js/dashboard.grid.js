@@ -2426,15 +2426,11 @@
 
 						body.find('form').attr('aria-labeledby', header.find('h4').attr('id'));
 
-						$('#widget_dialogue_form', body)
-							.on('submit', function (e) {
-								e.preventDefault();
-								updateWidgetConfig($this, data, widget);
-							})
-							.on('blur', '[data-trim="1"]', function () {
-								const $box = $(this);
-								$box.val($box.val().trim());
-							});
+						// Change submit function for returned form.
+						$('#widget_dialogue_form', body).on('submit', function(e) {
+							e.preventDefault();
+							updateWidgetConfig($this, data, widget);
+						});
 
 						// Enable save button after successful form update.
 						$('.dialogue-widget-save', footer).prop('disabled', false);
