@@ -58,7 +58,7 @@ class CWidgetHelper {
 			->addItem(
 				(new CTag('script', true,
 					(new CJsScript('jQuery(function($){
-							$("#widget_dialogue_form").on("blur change", \'[data-trim="1"]\', function () {
+							$("#widget_dialogue_form").on("change", \'[data-trim="1"]\', function () {
 								const $box = $(this);
 								$box.val($box.val().trim());
 							});
