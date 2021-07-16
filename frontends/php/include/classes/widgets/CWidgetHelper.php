@@ -61,8 +61,8 @@ class CWidgetHelper {
 						jQuery(function($){
 							$("#widget_dialogue_form")
 								.on("change", \'[data-trim="1"]\', function () {
-									const $box = $(this);
-									$box.val($box.val().trim());
+									const $input = $(this);
+									$input.val($input.val().trim());
 								});
 						});
 					'))
