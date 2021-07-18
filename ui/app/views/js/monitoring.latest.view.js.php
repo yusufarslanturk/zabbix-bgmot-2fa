@@ -66,6 +66,7 @@
 
 	latestPage.prototype.doRefresh = function(body) {
 		this.getCurrentForm().replaceWith(body);
+		this.liveData();
 		chkbxRange.init();
 	};
 
@@ -145,6 +146,38 @@
 		this.unscheduleRefresh();
 	};
 
+	latestPage.prototype.toggleChevronCollapsed = function($chevron, collapsed) {
+		$chevron
+			.removeClass(collapsed ? '<?= ZBX_STYLE_ARROW_DOWN ?>' : '<?= ZBX_STYLE_ARROW_RIGHT ?>')
+			.addClass(collapsed ? '<?= ZBX_STYLE_ARROW_RIGHT ?>' : '<?= ZBX_STYLE_ARROW_DOWN ?>');
+	};
+
+	latestPage.prototype.isChevronCollapsed = function($chevron) {
+		return $chevron.hasClass('<?= ZBX_STYLE_ARROW_RIGHT ?>');
+	};
+
+	latestPage.prototype.toggleTagGroup = function(group, group_id, collapsed) {
+		var $chevron = $('.js-toggle[data-' + group + '="' + group_id + '"] span'),
+			$rows = $('tr[data-' + group + '="' + group_id + '"]');
+
+		this.toggleChevronCollapsed($chevron, collapsed);
+
+		$rows.toggleClass('<?= ZBX_STYLE_DISPLAY_NONE ?>', collapsed);
+	};
+
+	latestPage.prototype.updateToggleAll = function() {
+		var self = this,
+
+			$chevron_all = $('.js-toggle-all span'),
+			collapsed_all = true;
+
+		$('.js-toggle span').each(function() {
+			collapsed_all = collapsed_all && self.isChevronCollapsed($(this));
+		});
+
+		this.toggleChevronCollapsed($chevron_all, collapsed_all);
+	};
+
 	latestPage.prototype.liveFilter = function() {
 		var $filter_hostids = $('#filter_hostids_'),
 			$filter_show_without_data = $('#filter_show_without_data');
@@ -172,8 +205,81 @@
 		});
 	};
 
+	latestPage.prototype.liveData = function() {
+		var self = this;
+
+		$('.js-toggle-all').on('click', function() {
+			// For Opera browser with large tables, which renders table layout while showing/hiding rows.
+			$(this).closest('table').fadeTo(0, 0);
+
+			var $toggle_all = $(this),
+				collapsed_all = !self.isChevronCollapsed($toggle_all.find('span')),
+
+				updates = {
+					tag_combined: [],
+					hostid: []
+				};
+
+			$('.js-toggle').each(function() {
+				var $toggle = $(this),
+					collapsed = self.isChevronCollapsed($toggle.find('span'));
+
+				if (collapsed == collapsed_all) {
+					return;
+				}
+
+				var group = 'tag_combined',
+					group_id = $toggle.data(group);
+
+				if (group_id === undefined) {
+					group = 'hostid',
+					group_id = $toggle.data(group);
+				}
+				updates[group].push(group_id);
+
+				self.toggleTagGroup(group, group_id, collapsed_all);
+			});
+
+			self.updateToggleAll();
+
+			// For Opera browser with large tables, which renders table layout while showing/hiding rows.
+			$(this).closest('table').fadeTo(0, 1);
+
+			if (updates.tag_combined.length) {
+				updateUserProfile('web.latest.toggle', collapsed_all ? 0 : 1, [0], updates.tag_combined);
+			}
+			if (updates.hostid.length) {
+				updateUserProfile('web.latest.toggle_other', collapsed_all ? 0 : 1, updates.hostid);
+			}
+		});
+
+		$('.js-toggle').on('click', function() {
+			var $toggle = $(this),
+				collapsed = !self.isChevronCollapsed($toggle.find('span')),
+
+				group = 'tag_combined',
+				group_id = $toggle.data(group);
+
+			if (group_id === undefined) {
+				group = 'hostid',
+				group_id = $toggle.data(group);
+			}
+
+			self.toggleTagGroup(group, group_id, collapsed);
+			self.updateToggleAll();
+
+			if (group === 'tag_combined') {
+				updateUserProfile('web.latest.toggle', collapsed ? 0 : 1, [0], [group_id]);
+			}
+			else {
+				updateUserProfile('web.latest.toggle_other', collapsed ? 0 : 1, [group_id]);
+			}
+		});
+	};
+
 	$(function() {
 		window.latest_page = new latestPage();
 		window.latest_page.liveFilter();
+		window.latest_page.liveData();
 	});
 </script>

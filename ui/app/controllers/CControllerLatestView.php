@@ -155,6 +155,7 @@ class CControllerLatestView extends CControllerLatest {
 		$paging = CPagerHelper::paginate($this->getInput('page', 1), $prepared_data['items'], ZBX_SORT_UP, $view_curl);
 
 		$this->extendData($prepared_data);
+		$this->addCollapsedDataFromProfile($prepared_data);
 
 		// display
 		$data = [

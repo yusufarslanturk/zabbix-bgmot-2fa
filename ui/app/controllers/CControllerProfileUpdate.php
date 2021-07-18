@@ -24,8 +24,9 @@ class CControllerProfileUpdate extends CController {
 	protected function checkInput() {
 		$fields = [
 			'idx' =>		'required|string',
-			'value_int' =>	'required|int32',
-			'idx2' =>		'array_id'
+			'value_int' =>		'required|int32',
+			'idx2' =>		'array_id',
+			'value_str' =>		'array'
 		];
 
 		$ret = $this->validateInput($fields);
@@ -91,6 +92,11 @@ class CControllerProfileUpdate extends CController {
 					$ret = $this->hasInput('idx2');
 					break;
 
+				case 'web.latest.toggle':
+                                case 'web.latest.toggle_other':
+					$ret = $this->hasInput('value_str');
+                                        break;
+
 				default:
 					$ret = false;
 			}
@@ -110,6 +116,7 @@ class CControllerProfileUpdate extends CController {
 	protected function doAction() {
 		$idx = $this->getInput('idx');
 		$value_int = $this->getInput('value_int');
+		$value_str = $this->getInput('value_str');
 
 		DBstart();
 		switch ($idx) {
@@ -120,6 +127,17 @@ class CControllerProfileUpdate extends CController {
 				else {
 					foreach ($this->getInput('idx2') as $idx2) {
 						CProfile::update($idx, $value_int, PROFILE_TYPE_INT, $idx2);
+					}
+				}
+				break;
+
+			case 'web.latest.toggle':
+				if ($value_int == 1) { // default value
+					CProfile::delete_str($idx, $value_str);
+				}
+				else {
+					foreach ($value_str as $str) {
+						CProfile::update($idx, $str, PROFILE_TYPE_STR);
 					}
 				}
 				break;

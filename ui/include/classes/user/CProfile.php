@@ -65,7 +65,14 @@ class CProfile {
 
 			foreach (self::$insert as $idx => $profile) {
 				foreach ($profile as $idx2 => $data) {
-					$result &= self::insertDB($idx, $data['value'], $data['type'], $idx2);
+					if ($idx == 'web.latest.toggle') {
+						foreach($data as $t_data) {
+							$result &= self::insertDB($idx, $t_data['value'], $t_data['type'], $idx2);
+						}
+					}
+					else {
+						$result &= self::insertDB($idx, $data['value'], $data['type'], $idx2);
+					}
 				}
 			}
 
@@ -189,6 +196,57 @@ class CProfile {
 	}
 
 	/**
+	 * Return matched idx value for current user.
+	 *
+	 * @param string    $idx           Search pattern.
+	 * @param string    $value_str     Search for this pattern in value_str field.
+	 * @param mixed     $default_value Default value if no rows was found.
+	 * @param int|null  $idx2          Numerical index will be matched against idx2 index.
+	 *
+	 * @return mixed
+	 */
+	public static function get_str($idx, $value_str, $default_value = null, $idx2 = 0) {
+		// no user data available, just return the default value
+		if (!CWebUser::$data || $value_str === null) {
+			return $default_value;
+		}
+
+		if (self::$profiles === null) {
+			self::init();
+		}
+
+		if (array_key_exists($idx, self::$profiles)) {
+			if (array_key_exists($idx2, self::$profiles[$idx])) {
+				if (array_key_exists($value_str, self::$profiles[$idx][$idx2])) {
+					return self::$profiles[$idx][$idx2][$value_str];
+				}
+			}
+			else {
+				self::$profiles[$idx][$idx2] = [];
+			}
+		}
+		else {
+			self::$profiles[$idx] = [$idx2 => []];
+		}
+
+		// Aggressive caching, cache all items matched $idx key.
+		$query = DBselect(
+			'SELECT type,value_id,value_int,value_str,idx2'.
+			' FROM profiles'.
+			' WHERE userid='.self::$userDetails['userid'].
+			' AND idx='.zbx_dbstr($idx).
+			' AND idx2='.zbx_dbstr($idx2).
+			' AND value_str='.zbx_dbstr($value_str)
+		);
+
+		while ($row = DBfetch($query)) {
+			self::$profiles[$idx][$idx2][$value_str] = $row['value_str'];
+		}
+
+		return array_key_exists($value_str, self::$profiles[$idx][$idx2]) ? self::$profiles[$idx][$idx2][$value_str] : $default_value;
+	}
+
+	/**
 	 * Returns the values stored under the given $idx as an array.
 	 *
 	 * @param string    $idx
@@ -226,6 +284,27 @@ class CProfile {
 	}
 
 	/**
+	 * Removes profile STR values from DB and profiles cache.
+	 *
+	 * @param string 		$idx		first identifier
+	 * @param string|array  	$value_str	sting or list of strings
+	 */
+	public static function delete_str($idx, $value_str = '') {
+		if (self::$profiles === null) {
+			self::init();
+		}
+
+		$value_str = (array) $value_str;
+		self::deleteValuesStr($idx, $value_str);
+
+		if (array_key_exists($idx, self::$profiles)) {
+			foreach ($value_str as $str) {
+				unset(self::$profiles[$idx][0][$str]);
+			}
+		}
+	}
+
+	/**
 	 * Removes all values stored under the given idx.
 	 *
 	 * @param string $idx
@@ -248,6 +327,17 @@ class CProfile {
 	protected static function deleteValues($idx, array $idx2) {
 		// remove from DB
 		DB::delete('profiles', ['idx' => $idx, 'idx2' => $idx2, 'userid' => self::$userDetails['userid']]);
+	}
+
+	/**
+	 * Deletes the given STR values from the DB.
+	 *
+	 * @param string 	$idx
+	 * @param array 	$value_str
+	 */
+	protected static function deleteValuesStr($idx, array $value_str) {
+		// remove from DB
+		DB::delete('profiles', ['idx' => $idx, 'idx2' => 0, 'userid' => self::$userDetails['userid'], 'value_str' => $value_str]);
 	}
 
 	/**
@@ -274,12 +364,28 @@ class CProfile {
 			'idx2' => $idx2
 		];
 
-		$current = self::get($idx, null, $idx2);
+		if ($idx == 'web.latest.toggle') {
+			$current = self::get_str($idx, $value, null, $idx2);
+		}
+		else {
+			$current = self::get($idx, null, $idx2);
+		}
+
 		if (is_null($current)) {
 			if (!isset(self::$insert[$idx])) {
-				self::$insert[$idx] = [];
+				if ($idx == 'web.latest.toggle') {
+					self::$insert[$idx] = [ $idx2 => [] ];
+				}
+				else {
+					self::$insert[$idx] = [];
+				}
 			}
-			self::$insert[$idx][$idx2] = $profile;
+			if ($idx == 'web.latest.toggle') {
+				self::$insert[$idx][$idx2][$profile['value']] = $profile;
+			}
+			else {
+				self::$insert[$idx][$idx2] = $profile;
+			}
 		}
 		else {
 			if ($current != $value) {
@@ -294,7 +400,12 @@ class CProfile {
 			self::$profiles[$idx] = [];
 		}
 
-		self::$profiles[$idx][$idx2] = $value;
+		if ($idx == 'web.latest.toggle') {
+			self::$profiles[$idx][$idx2][$value] = $value;
+		}
+		else {
+			self::$profiles[$idx][$idx2] = $value;
+		}
 	}
 
 	/**

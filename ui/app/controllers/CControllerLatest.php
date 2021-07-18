@@ -55,6 +55,8 @@ abstract class CControllerLatest extends CController {
 			'monitored_hosts' => true,
 			'preservekeys' => true
 		]);
+		$hostids = array_keys($hosts);
+		$hostids_index = array_flip($hostids);
 
 		$search_limit = CSettingsHelper::get(CSettingsHelper::SEARCH_LIMIT);
 		$history_period = timeUnitToSeconds(CSettingsHelper::get(CSettingsHelper::HISTORY_PERIOD));
@@ -125,6 +127,70 @@ abstract class CControllerLatest extends CController {
 			$items = [];
 		}
 
+		$tags_combined = [];
+		foreach ($items as $itemid => $item) {
+			$tag_combined = $item['hostid'];
+			for($i=0; $i < count($item['tags']); $i++) {
+				if ($i == 0) {
+					$tag_combined .= '-';
+				}
+			       	else {
+					$tag_combined .= ', ';
+				}
+				if ($item['tags'][$i]['value'] != '') {
+					$tag_combined .= $item['tags'][$i]['tag'] . ':' . $item['tags'][$i]['value'];
+				}
+				else {
+					$tag_combined .= $item['tags'][$i]['tag'];
+				}
+			}
+			$tags_combined += [$tag_combined];
+		}
+		sort($tags_combined);
+
+		$tags_combined_size = [];
+		$items_grouped = [];
+		foreach ($items as $itemid => $item) {
+			if (!array_key_exists($item['hostid'], $tags_combined_size)) {
+				$tags_combined_size[$item['hostid']] = [];
+			}
+			$item_tags_combined = $item['hostid'];
+			for($i=0; $i < count($item['tags']); $i++) {
+				if ($i == 0) {
+					$item_tags_combined .= '-';
+				}
+				else {
+					$item_tags_combined .= ', ';
+				}
+				if ($item['tags'][$i]['value'] != '') {
+					$item_tags_combined .= $item['tags'][$i]['tag'] . ':' . $item['tags'][$i]['value'];
+				}
+				else {
+					$item_tags_combined .= $item['tags'][$i]['tag'];
+				}
+			}
+			$items_grouped[$item['hostid']][$item_tags_combined][$itemid] = $item;
+
+			if (array_key_exists($item_tags_combined, $tags_combined_size[$item['hostid']])) {
+				$tags_combined_size[$item['hostid']][$item_tags_combined]++;
+			}
+			else {
+				$tags_combined_size[$item['hostid']][$item_tags_combined] = 1;
+			}
+		}
+
+		uksort($items_grouped, function($hostid_1, $hostid_2) use ($hostids_index) {
+			return ($hostids_index[$hostid_1] <=> $hostids_index[$hostid_2]);
+		});
+
+		$items = [];
+		foreach ($items_grouped as $hostid => $item_tags_combined) {
+			ksort($item_tags_combined);
+			foreach($item_tags_combined as $item_tag_combined => $item) {
+				$items += $item;
+			}
+		}
+
 		$multiselect_host_data = $filter['hostids']
 			? API::Host()->get([
 				'output' => ['hostid', 'name'],
@@ -157,5 +223,46 @@ abstract class CControllerLatest extends CController {
 
 		$prepared_data['items'] = $items;
 		$prepared_data['history'] = $history;
+	}
+
+        /**
+	 * Add collapsed data from user profile.
+	 *
+	 * @param array $prepared_data  Data returned by prepareData method.
+	 */
+        protected function addCollapsedDataFromProfile(array &$prepared_data) {
+                $collapsed_index = [];
+                $collapsed_all = true;
+
+                foreach ($prepared_data['items'] as $itemid => $item) {
+			$hostid = $item['hostid'];
+			$tag_combined = $item['hostid'];
+			for($i=0; $i < count($item['tags']); $i++) {
+				if ($i == 0) {
+					$tag_combined .= '-';
+				}
+			       	else {
+					$tag_combined .= ', ';
+				}
+				if ($item['tags'][$i]['value'] != '') {
+					$tag_combined .= $item['tags'][$i]['tag'] . ':' . $item['tags'][$i]['value'];
+				}
+				else {
+					$tag_combined .= $item['tags'][$i]['tag'];
+				}
+			}
+
+			if (array_key_exists($hostid, $collapsed_index)
+					&& array_key_exists($tag_combined, $collapsed_index[$hostid])) {
+				continue;
+			}
+
+			$collapsed = CProfile::get_str('web.latest.toggle', $tag_combined, null) !== null;
+
+			$collapsed_index[$hostid][$tag_combined] = $collapsed;
+			$collapsed_all = $collapsed_all && $collapsed;
+		}
+		$prepared_data['collapsed_index'] = $collapsed_index;
+		$prepared_data['collapsed_all'] = $collapsed_all;
 	}
 }

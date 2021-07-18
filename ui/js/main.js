@@ -652,6 +652,25 @@ function rm4favorites(object, objectid) {
  * @param {string} 	value_int			Integer value
  * @param {object} 	idx2				An array of IDs
  */
+function updateUserProfile(idx, value_int, idx2, value_str) {
+	return sendAjaxData('zabbix.php?action=profile.update', {
+		data: {
+			idx: idx,
+			value_int: value_int,
+			idx2: idx2,
+			value_str: value_str
+		}
+	});
+}
+
+/**
+ * Toggles profile values for PROFILE_TYPE_STR.
+ *
+ * @param {string} 	idx				User profile index
+ * @param {string} 	value_str			Integer value
+ * @param {object} 	idx2				An array of IDs
+ */
+/*
 function updateUserProfile(idx, value_int, idx2) {
 	return sendAjaxData('zabbix.php?action=profile.update', {
 		data: {
@@ -661,7 +680,7 @@ function updateUserProfile(idx, value_int, idx2) {
 		}
 	});
 }
-
+*/
 function changeWidgetState(obj, widgetId, idx) {
 	var widgetObj = jQuery('#' + widgetId + '_widget'),
 		css = switchElementClass(obj, 'btn-widget-collapse', 'btn-widget-expand'),

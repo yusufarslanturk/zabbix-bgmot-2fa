@@ -31,6 +31,15 @@ $form = (new CForm('GET', 'history.php'))
 $table = (new CTableInfo())->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS);
 
 // Latest data header.
+$col_toggle_all = new CColHeader(
+	(new CSimpleButton())
+		->addClass(ZBX_STYLE_TREEVIEW)
+		->addClass('js-toggle-all')
+		->addItem(
+			(new CSpan())->addClass($data['collapsed_all'] ? ZBX_STYLE_ARROW_RIGHT : ZBX_STYLE_ARROW_DOWN)
+		)
+);
+
 $col_check_all = new CColHeader(
 	(new CCheckBox('all_items'))->onClick("checkAll('".$form->getName()."', 'all_items', 'itemids');")
 );
@@ -45,6 +54,7 @@ $update_interval_parser = new CUpdateIntervalParser(['usermacros' => true]);
 
 if ($data['filter']['show_details']) {
 	$table->setHeader([
+		$col_toggle_all->addStyle('width: 18px'),
 		$col_check_all->addStyle('width: 15px;'),
 		$col_host->addStyle('width: 13%'),
 		$col_name->addStyle('width: 21%'),
@@ -55,26 +65,70 @@ if ($data['filter']['show_details']) {
 		(new CColHeader(_('Last check')))->addStyle('width: 14%'),
 		(new CColHeader(_('Last value')))->addStyle('width: 14%'),
 		(new CColHeader(_x('Change', 'noun')))->addStyle('width: 10%'),
-		(new CColHeader(_('Tags')))->addClass(ZBX_STYLE_COLUMN_TAGS_3),
 		(new CColHeader())->addStyle('width: 6%'),
 		(new CColHeader(_('Info')))->addStyle('width: 35px')
 	]);
+	$table_columns = 13;
 }
 else {
 	$table->setHeader([
+		$col_toggle_all->addStyle('width: 18px'),
 		$col_check_all->addStyle('width: 15px'),
 		$col_host->addStyle('width: 17%'),
 		$col_name->addStyle('width: 40%'),
 		(new CColHeader(_('Last check')))->addStyle('width: 14%'),
 		(new CColHeader(_('Last value')))->addStyle('width: 14%'),
 		(new CColHeader(_x('Change', 'noun')))->addStyle('width: 10%'),
-		(new CColHeader(_('Tags')))->addClass(ZBX_STYLE_COLUMN_TAGS_3),
 		(new CColHeader())->addStyle('width: 6%')
 	]);
+	$table_columns = 8;
 }
+
+$last_hostid = null;
+$last_tagcombined = null;
 
 // Latest data rows.
 foreach ($data['items'] as $itemid => $item) {
+	$tag_combined = $item['hostid'];
+	for($i=0; $i < count($item['tags']); $i++) {
+		if ($i == 0) {
+			$tag_combined .= '-';
+		}
+		else {
+			$tag_combined .= ', ';
+		}
+		if ($item['tags'][$i]['value'] != '') {
+			$tag_combined .= $item['tags'][$i]['tag'] . ':' . $item['tags'][$i]['value'];
+		}
+		else {
+			$tag_combined .= $item['tags'][$i]['tag'];
+		}
+	}
+        $is_collapsed = $data['collapsed_index'][$item['hostid']][$tag_combined];
+
+	$is_next_host = $item['hostid'] !== $last_hostid;
+	$is_next_tag_combined = $tag_combined !== $last_tagcombined;
+
+	if ($is_next_host || $is_next_tag_combined) {
+		$host = $data['hosts'][$item['hostid']];
+		$host_name = (new CLinkAction($host['name']))
+				->addClass($host['status'] == HOST_STATUS_NOT_MONITORED ? ZBX_STYLE_RED : null)
+				->setMenuPopup(CMenuPopupHelper::getHost($item['hostid']));
+		$col_name = (new CCol([bold(preg_replace('/^\d+\-*/', '', $tag_combined))]))
+				->setColSpan($table_columns - 2);
+		$toggle_tag = (new CSimpleButton())
+				->addClass(ZBX_STYLE_TREEVIEW)
+				->addClass('js-toggle')
+				->addItem(
+					(new CSpan())->addClass($is_collapsed ? ZBX_STYLE_ARROW_RIGHT : ZBX_STYLE_ARROW_DOWN)
+				);
+		$toggle_tag->setAttribute('data-tag_combined', $tag_combined);
+                $table->addRow([$toggle_tag, '', $host_name, $col_name]);
+
+		$last_hostid = $item['hostid'];
+		$last_tagcombined = $tag_combined;
+	}
+
 	$is_graph = ($item['value_type'] == ITEM_VALUE_TYPE_FLOAT || $item['value_type'] == ITEM_VALUE_TYPE_UINT64);
 	$checkbox = (new CCheckBox('itemids['.$itemid.']', $itemid))->setEnabled($is_graph);
 	$state_css = ($item['state'] == ITEM_STATE_NOTSUPPORTED) ? ZBX_STYLE_GREY : null;
@@ -199,8 +253,9 @@ foreach ($data['items'] as $itemid => $item) {
 		}
 
 		$table_row = new CRow([
+			'',
 			$checkbox,
-			$host_name,
+			'',
 			(new CCol([$item_name, $item_key]))->addClass($state_css),
 			(new CCol($item_delay))->addClass($state_css),
 			(new CCol($item_history))->addClass($state_css),
@@ -209,24 +264,29 @@ foreach ($data['items'] as $itemid => $item) {
 			(new CCol($last_check))->addClass($state_css),
 			(new CCol($last_value))->addClass($state_css),
 			(new CCol($change))->addClass($state_css),
-			$data['tags'][$itemid],
 			$actions,
 			makeInformationList($item_icons)
 		]);
 	}
 	else {
 		$table_row = new CRow([
+			'',
 			$checkbox,
-			$host_name,
+			'',
 			(new CCol($item_name))->addClass($state_css),
 			(new CCol($last_check))->addClass($state_css),
 			(new CCol($last_value))->addClass($state_css),
 			(new CCol($change))->addClass($state_css),
-			$data['tags'][$itemid],
 			$actions
 		]);
 	}
 
+	$table_row->setAttribute('data-tag_combined', $tag_combined);
+
+	if ($is_collapsed) {
+		$table_row->addClass(ZBX_STYLE_DISPLAY_NONE);
+	}
+	
 	$table->addRow($table_row);
 }
 
