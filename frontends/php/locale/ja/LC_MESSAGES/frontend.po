@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-22 10:55+0300\n"
+"POT-Creation-Date: 2021-07-19 16:44+0300\n"
 "PO-Revision-Date: 2021-03-23 11:18+0300\n"
 "Last-Translator: Atsushi <a.tanaka77@gmail.com>\n"
 "Language-Team: Zabbix\n"
@@ -1728,11 +1728,11 @@ msgstr "ヒストリを削除できません"
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
 msgstr "ヒストリを削除できません：選択したアイテムの少なくとも1つが監視対象ホストに属していません"
 
-#: include/classes/api/services/CDiscoveryRule.php:1547
+#: include/classes/api/services/CDiscoveryRule.php:1549
 msgid "Cannot clone graph prototypes."
 msgstr "グラフのプロトタイプを複製できません。"
 
-#: include/classes/api/services/CDiscoveryRule.php:1595
+#: include/classes/api/services/CDiscoveryRule.php:1597
 msgid "Cannot clone host prototypes."
 msgstr "ホストのプロトタイプを複製できません。"
 

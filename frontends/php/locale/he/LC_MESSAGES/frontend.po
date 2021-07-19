@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-22 10:55+0300\n"
+"POT-Creation-Date: 2021-07-19 16:44+0300\n"
 "PO-Revision-Date: 2018-11-30 14:01+0300\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: none\n"
@@ -1747,11 +1747,11 @@ msgstr "לא ניתן לפנות את ההיסטוריה"
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
 msgstr ""
 
-#: include/classes/api/services/CDiscoveryRule.php:1547
+#: include/classes/api/services/CDiscoveryRule.php:1549
 msgid "Cannot clone graph prototypes."
 msgstr "לא ניתן לשכפל את האבטיפוס לתרשימים."
 
-#: include/classes/api/services/CDiscoveryRule.php:1595
+#: include/classes/api/services/CDiscoveryRule.php:1597
 msgid "Cannot clone host prototypes."
 msgstr "לא ניתן לשכפל את אבות הטיפוס של המארחים."
 
