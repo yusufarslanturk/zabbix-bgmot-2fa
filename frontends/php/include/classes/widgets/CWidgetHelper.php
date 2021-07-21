@@ -128,15 +128,6 @@ class CWidgetHelper {
 	}
 
 	/**
-	 * @param CWidgetFieldTextBox $field
-	 *
-	 * @return CTextBox
-	 */
-	public static function getProblemBox($field) {
-		return static::getTextBox($field);
-	}
-
-	/**
 	 * @param CWidgetFieldUrl $field
 	 *
 	 * @return CTextBox
