@@ -50,7 +50,6 @@ class CWidgetHelper {
 			)
 			->addRow(_('Name'),
 				(new CTextBox('name',$dialogue_name))
-					->setAttribute('data-trim', 1)
 					->setAttribute('placeholder', _('default'))
 					->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			)
@@ -58,13 +57,14 @@ class CWidgetHelper {
 			->addItem(
 				(new CTag('script', true,
 					(new CJsScript('
-						jQuery(function($){
-							$("#widget_dialogue_form")
-								.on("change", \'[data-trim="1"]\', function () {
-									const $input = $(this);
-									$input.val($input.val().trim());
-								});
-						});
+						document
+							.getElementById("widget_dialogue_form")
+							.addEventListener("change", function(e) {
+								if (jQuery(e.target).is(\'input[type="text"]:not([data-no-trim="1"]), \'+
+											\'textarea:not([data-no-trim="1"])\')) {
+									e.target.value = jQuery.trim(e.target.value);
+								}
+						}, true);
 					'))
 				))
 			);
@@ -133,7 +133,7 @@ class CWidgetHelper {
 	 * @return CTextBox
 	 */
 	public static function getProblemBox($field) {
-		return static::getTextBox($field)->setAttribute('data-trim', 1);
+		return static::getTextBox($field);
 	}
 
 	/**
@@ -144,7 +144,6 @@ class CWidgetHelper {
 	public static function getUrlBox($field) {
 		return (new CTextBox($field->getName(), $field->getValue()))
 			->setAriaRequired(self::isAriaRequired($field))
-			->setAttribute('data-trim', 1)
 			->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH);
 	}
 
@@ -415,7 +414,6 @@ class CWidgetHelper {
 		foreach ($tags as $tag) {
 			$tags_table->addRow([
 				(new CTextBox($field->getName().'['.$i.'][tag]', $tag['tag']))
-					->setAttribute('data-trim', 1)
 					->setAttribute('placeholder', _('tag'))
 					->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH)
 					->setAriaRequired(self::isAriaRequired($field))
@@ -426,7 +424,6 @@ class CWidgetHelper {
 					->setModern(true)
 					->setEnabled($enabled),
 				(new CTextBox($field->getName().'['.$i.'][value]', $tag['value']))
-					->setAttribute('data-trim', 1)
 					->setAttribute('placeholder', _('value'))
 					->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH)
 					->setAriaRequired(self::isAriaRequired($field))
