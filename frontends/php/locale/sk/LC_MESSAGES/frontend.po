@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-22 10:55+0300\n"
+"POT-Creation-Date: 2021-07-19 16:44+0300\n"
 "PO-Revision-Date: 2021-03-19 17:56+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix translation team\n"
@@ -1765,11 +1765,11 @@ msgstr "Nie je možné zmazať históriu"
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
 msgstr ""
 
-#: include/classes/api/services/CDiscoveryRule.php:1547
+#: include/classes/api/services/CDiscoveryRule.php:1549
 msgid "Cannot clone graph prototypes."
 msgstr "Nie je možné klonovať prototypy grafov."
 
-#: include/classes/api/services/CDiscoveryRule.php:1595
+#: include/classes/api/services/CDiscoveryRule.php:1597
 msgid "Cannot clone host prototypes."
 msgstr "Nie je možné klonovať prototypy hostov."
 
