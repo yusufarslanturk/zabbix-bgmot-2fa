@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-22 10:55+0300\n"
+"POT-Creation-Date: 2021-07-30 19:50+0300\n"
 "PO-Revision-Date: 2021-06-15 21:34+0300\n"
 "Last-Translator: Alexey <dotneft@gmail.com>\n"
 "Language-Team: Zabbix translation team\n"
@@ -309,7 +309,7 @@ msgstr "<вручную>"
 msgid "<sub-menu/sub-menu/...>script"
 msgstr "<подменю/подменю/...>скрипт"
 
-#: include/classes/widgets/CWidgetHelper.php:685
+#: include/classes/widgets/CWidgetHelper.php:700
 msgid "ADD OVERRIDE"
 msgstr "ДОБАВЛЕНИЕ ЗАМЕЩЕНИЯ"
 
@@ -551,7 +551,7 @@ msgstr "Активно до"
 #: app/views/popup.httpstep.php:138 app/views/popup.httpstep.php:171
 #: app/views/popup.media.php:48 app/views/popup.media.php:120
 #: app/views/popup.triggerwizard.php:104 app/views/popup.triggerwizard.php:138
-#: include/classes/widgets/CWidgetHelper.php:421
+#: include/classes/widgets/CWidgetHelper.php:436
 #: include/views/administration.auditlogs.list.php:46
 #: include/views/administration.general.iconmap.edit.php:101
 #: include/views/administration.general.iconmap.edit.php:142
@@ -698,7 +698,7 @@ msgstr "Добавить узел сети"
 msgid "Add multiple maps"
 msgstr "Добавить несколько карт"
 
-#: include/classes/widgets/CWidgetHelper.php:1093
+#: include/classes/widgets/CWidgetHelper.php:1108
 msgid "Add new data set"
 msgstr "Добавить новый набор данных"
 
@@ -710,7 +710,7 @@ msgstr "Добавить новые или существующие группы
 msgid "Add new or existing host groups"
 msgstr "Добавить новые или существующие группы узлов сети"
 
-#: include/classes/widgets/CWidgetHelper.php:640
+#: include/classes/widgets/CWidgetHelper.php:655
 msgid "Add new override"
 msgstr "Добавить новое замещение"
 
@@ -1360,8 +1360,8 @@ msgstr "Фоновое изображение"
 msgid "Base DN"
 msgstr "База для поиска (Base DN)"
 
-#: include/classes/widgets/CWidgetHelper.php:687
-#: include/classes/widgets/CWidgetHelper.php:959
+#: include/classes/widgets/CWidgetHelper.php:702
+#: include/classes/widgets/CWidgetHelper.php:974
 msgid "Base colour"
 msgstr "Основной цвет"
 
@@ -1769,11 +1769,11 @@ msgstr "Не удалось очистить историю"
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
 msgstr "Не удалось очистить историю: по крайней мере один из выбранных элементов данных не принадлежит к какому-либо узлу сети под наблюдением"
 
-#: include/classes/api/services/CDiscoveryRule.php:1547
+#: include/classes/api/services/CDiscoveryRule.php:1549
 msgid "Cannot clone graph prototypes."
 msgstr "Не удалось клонировать прототипы графиков."
 
-#: include/classes/api/services/CDiscoveryRule.php:1595
+#: include/classes/api/services/CDiscoveryRule.php:1597
 msgid "Cannot clone host prototypes."
 msgstr "Не удалось клонировать прототипы узлов сети."
 
@@ -3247,7 +3247,7 @@ msgid "Close problem"
 msgstr "Закрыть проблему"
 
 #: include/classes/html/CCollapsibleUiWidget.php:54
-#: include/classes/widgets/CWidgetHelper.php:891 jsLoader.php:222
+#: include/classes/widgets/CWidgetHelper.php:906 jsLoader.php:222
 #: jsLoader.php:227
 msgid "Collapse"
 msgstr "Свернуть"
@@ -3567,9 +3567,9 @@ msgstr "Поздравляем! Вы успешно установили Zabbix 
 msgid "Connect to"
 msgstr "Подключаться через"
 
-#: include/classes/widgets/CWidgetHelper.php:667
-#: include/classes/widgets/CWidgetHelper.php:741
-#: include/classes/widgets/CWidgetHelper.php:1016
+#: include/classes/widgets/CWidgetHelper.php:682
+#: include/classes/widgets/CWidgetHelper.php:756
+#: include/classes/widgets/CWidgetHelper.php:1031
 msgctxt "missing data function"
 msgid "Connected"
 msgstr "Соединение"
@@ -3655,8 +3655,8 @@ msgstr "Контактная информация"
 
 #: app/views/monitoring.problem.view.js.php:21
 #: app/views/monitoring.problem.view.php:240
-#: include/classes/widgets/CWidgetHelper.php:399
-#: include/classes/widgets/CWidgetHelper.php:445
+#: include/classes/widgets/CWidgetHelper.php:414
+#: include/classes/widgets/CWidgetHelper.php:460
 #: include/views/configuration.maintenance.edit.php:185
 #: include/views/configuration.maintenance.edit.php:206
 #: include/views/configuration.triggers.list.php:86
@@ -4416,8 +4416,8 @@ msgstr "Задерживается на"
 #: app/views/administration.script.list.php:111
 #: app/views/monitoring.dashboard.list.php:76
 #: include/classes/html/CButtonDelete.php:25
-#: include/classes/widgets/CWidgetHelper.php:579
-#: include/classes/widgets/CWidgetHelper.php:945 include/services.inc.php:118
+#: include/classes/widgets/CWidgetHelper.php:594
+#: include/classes/widgets/CWidgetHelper.php:960 include/services.inc.php:118
 #: include/views/administration.auditlogs.list.php:48
 #: include/views/administration.general.regularexpressions.list.php:79
 #: include/views/administration.general.valuemapping.list.php:81
@@ -5224,11 +5224,11 @@ msgstr "Загрузить конфигурационный файл"
 msgid "Downtime"
 msgstr "Недоступен"
 
-#: include/classes/widgets/CWidgetHelper.php:658
-#: include/classes/widgets/CWidgetHelper.php:701
-#: include/classes/widgets/CWidgetHelper.php:702
-#: include/classes/widgets/CWidgetHelper.php:703
-#: include/classes/widgets/CWidgetHelper.php:963
+#: include/classes/widgets/CWidgetHelper.php:673
+#: include/classes/widgets/CWidgetHelper.php:716
+#: include/classes/widgets/CWidgetHelper.php:717
+#: include/classes/widgets/CWidgetHelper.php:718
+#: include/classes/widgets/CWidgetHelper.php:978
 msgid "Draw"
 msgstr "Отрисовка"
 
@@ -5749,8 +5749,8 @@ msgstr "Английский (en_US)"
 
 #: app/views/monitoring.problem.view.js.php:22
 #: app/views/monitoring.problem.view.php:241
-#: include/classes/widgets/CWidgetHelper.php:400
-#: include/classes/widgets/CWidgetHelper.php:446
+#: include/classes/widgets/CWidgetHelper.php:415
+#: include/classes/widgets/CWidgetHelper.php:461
 #: include/views/configuration.maintenance.edit.php:186
 #: include/views/configuration.maintenance.edit.php:207
 #: include/views/configuration.triggers.list.php:87
@@ -5898,7 +5898,7 @@ msgid "Execution confirmation"
 msgstr "Подтверждение выполнения"
 
 #: include/classes/html/CCollapsibleUiWidget.php:59
-#: include/classes/widgets/CWidgetHelper.php:891 jsLoader.php:223
+#: include/classes/widgets/CWidgetHelper.php:906 jsLoader.php:223
 #: jsLoader.php:226
 msgid "Expand"
 msgstr "Раскрыть"
@@ -6166,19 +6166,19 @@ msgstr "Размер файла (в байтах). Возвращает цело
 msgid "File time information. Returns integer (Unix timestamp)"
 msgstr "Информация времени файла. Возвращает целое число (Unix timestamp)"
 
-#: include/classes/widgets/CWidgetHelper.php:663
-#: include/classes/widgets/CWidgetHelper.php:717
-#: include/classes/widgets/CWidgetHelper.php:718
-#: include/classes/widgets/CWidgetHelper.php:719
-#: include/classes/widgets/CWidgetHelper.php:720
-#: include/classes/widgets/CWidgetHelper.php:721
-#: include/classes/widgets/CWidgetHelper.php:722
-#: include/classes/widgets/CWidgetHelper.php:723
-#: include/classes/widgets/CWidgetHelper.php:724
-#: include/classes/widgets/CWidgetHelper.php:725
-#: include/classes/widgets/CWidgetHelper.php:726
-#: include/classes/widgets/CWidgetHelper.php:727
-#: include/classes/widgets/CWidgetHelper.php:996
+#: include/classes/widgets/CWidgetHelper.php:678
+#: include/classes/widgets/CWidgetHelper.php:732
+#: include/classes/widgets/CWidgetHelper.php:733
+#: include/classes/widgets/CWidgetHelper.php:734
+#: include/classes/widgets/CWidgetHelper.php:735
+#: include/classes/widgets/CWidgetHelper.php:736
+#: include/classes/widgets/CWidgetHelper.php:737
+#: include/classes/widgets/CWidgetHelper.php:738
+#: include/classes/widgets/CWidgetHelper.php:739
+#: include/classes/widgets/CWidgetHelper.php:740
+#: include/classes/widgets/CWidgetHelper.php:741
+#: include/classes/widgets/CWidgetHelper.php:742
+#: include/classes/widgets/CWidgetHelper.php:1011
 msgid "Fill"
 msgstr "Заполнение"
 
@@ -9836,9 +9836,9 @@ msgstr "Последние значения"
 msgid "Latvian (lv_LV)"
 msgstr "Латышский (lv_LV)"
 
-#: include/classes/widgets/CWidgetHelper.php:670
-#: include/classes/widgets/CWidgetHelper.php:744
-#: include/classes/widgets/CWidgetHelper.php:1027
+#: include/classes/widgets/CWidgetHelper.php:685
+#: include/classes/widgets/CWidgetHelper.php:759
+#: include/classes/widgets/CWidgetHelper.php:1042
 #: include/classes/widgets/forms/CWidgetFormDataOver.php:59
 #: include/classes/widgets/forms/CWidgetFormPlainText.php:42
 #: include/classes/widgets/forms/CWidgetFormTrigOver.php:75
@@ -9871,9 +9871,9 @@ msgstr "Легенда"
 msgid "Limit for search and filter results"
 msgstr "Лимит элементов в результатах поиска и фильтрах"
 
-#: include/classes/widgets/CWidgetHelper.php:659
-#: include/classes/widgets/CWidgetHelper.php:701
-#: include/classes/widgets/CWidgetHelper.php:965 include/graphs.inc.php:55
+#: include/classes/widgets/CWidgetHelper.php:674
+#: include/classes/widgets/CWidgetHelper.php:716
+#: include/classes/widgets/CWidgetHelper.php:980 include/graphs.inc.php:55
 #: include/views/js/monitoring.sysmaps.js.php:302
 #: include/views/js/monitoring.sysmaps.js.php:351
 #: include/views/js/monitoring.sysmaps.js.php:699
@@ -10700,11 +10700,11 @@ msgstr "Пропущенное \"name\" поле для прототипа гр�
 msgid "Missing \"name\" field for graph."
 msgstr "Пропущенное поле \"name\" для графика."
 
-#: include/classes/widgets/CWidgetHelper.php:665
-#: include/classes/widgets/CWidgetHelper.php:740
-#: include/classes/widgets/CWidgetHelper.php:741
-#: include/classes/widgets/CWidgetHelper.php:742
-#: include/classes/widgets/CWidgetHelper.php:1011
+#: include/classes/widgets/CWidgetHelper.php:680
+#: include/classes/widgets/CWidgetHelper.php:755
+#: include/classes/widgets/CWidgetHelper.php:756
+#: include/classes/widgets/CWidgetHelper.php:757
+#: include/classes/widgets/CWidgetHelper.php:1026
 msgid "Missing data"
 msgstr "Отсутствующие данные"
 
@@ -11650,9 +11650,9 @@ msgstr "Не-логические флаги устарели."
 #: app/views/administration.proxy.list.php:126
 #: app/views/monitoring.problem.view.php:265
 #: app/views/monitoring.problem.view.php:276
-#: include/classes/widgets/CWidgetHelper.php:666
-#: include/classes/widgets/CWidgetHelper.php:740
-#: include/classes/widgets/CWidgetHelper.php:1015
+#: include/classes/widgets/CWidgetHelper.php:681
+#: include/classes/widgets/CWidgetHelper.php:755
+#: include/classes/widgets/CWidgetHelper.php:1030
 #: include/classes/widgets/forms/CWidgetFormProblems.php:117
 #: include/classes/widgets/forms/CWidgetFormProblems.php:139
 #: include/hosts.inc.php:32 include/httptest.inc.php:27
@@ -12795,24 +12795,24 @@ msgstr "Пожалуйста, укажите имя хоста или IP адр�
 msgid "Please select two elements"
 msgstr "Пожалуйста, выберите два элемента"
 
-#: include/classes/widgets/CWidgetHelper.php:664
-#: include/classes/widgets/CWidgetHelper.php:729
-#: include/classes/widgets/CWidgetHelper.php:730
-#: include/classes/widgets/CWidgetHelper.php:731
-#: include/classes/widgets/CWidgetHelper.php:732
-#: include/classes/widgets/CWidgetHelper.php:733
-#: include/classes/widgets/CWidgetHelper.php:734
-#: include/classes/widgets/CWidgetHelper.php:735
-#: include/classes/widgets/CWidgetHelper.php:736
-#: include/classes/widgets/CWidgetHelper.php:737
-#: include/classes/widgets/CWidgetHelper.php:738
-#: include/classes/widgets/CWidgetHelper.php:979
+#: include/classes/widgets/CWidgetHelper.php:679
+#: include/classes/widgets/CWidgetHelper.php:744
+#: include/classes/widgets/CWidgetHelper.php:745
+#: include/classes/widgets/CWidgetHelper.php:746
+#: include/classes/widgets/CWidgetHelper.php:747
+#: include/classes/widgets/CWidgetHelper.php:748
+#: include/classes/widgets/CWidgetHelper.php:749
+#: include/classes/widgets/CWidgetHelper.php:750
+#: include/classes/widgets/CWidgetHelper.php:751
+#: include/classes/widgets/CWidgetHelper.php:752
+#: include/classes/widgets/CWidgetHelper.php:753
+#: include/classes/widgets/CWidgetHelper.php:994
 msgid "Point size"
 msgstr "Размер точек"
 
-#: include/classes/widgets/CWidgetHelper.php:660
-#: include/classes/widgets/CWidgetHelper.php:702
-#: include/classes/widgets/CWidgetHelper.php:966
+#: include/classes/widgets/CWidgetHelper.php:675
+#: include/classes/widgets/CWidgetHelper.php:717
+#: include/classes/widgets/CWidgetHelper.php:981
 #: include/views/js/monitoring.sysmaps.js.php:371
 msgid "Points"
 msgstr "Точки"
@@ -13410,8 +13410,8 @@ msgstr "Удаленная команда"
 #: app/views/monitoring.problem.view.js.php:28
 #: app/views/monitoring.problem.view.php:200
 #: app/views/monitoring.problem.view.php:247 app/views/popup.media.php:41
-#: app/views/popup.media.php:103 include/classes/widgets/CWidgetHelper.php:409
-#: include/classes/widgets/CWidgetHelper.php:453
+#: app/views/popup.media.php:103 include/classes/widgets/CWidgetHelper.php:424
+#: include/classes/widgets/CWidgetHelper.php:468
 #: include/views/administration.general.iconmap.edit.php:84
 #: include/views/administration.general.macros.edit.php:57
 #: include/views/administration.general.regularexpressions.edit.php:77
@@ -13797,9 +13797,9 @@ msgstr "Возвращает информацию относящуюся к Zabb
 msgid "Returns percentage of lost ICMP ping packets."
 msgstr "Возвращает процент потерянных ICMP ping пакетов."
 
-#: include/classes/widgets/CWidgetHelper.php:671
-#: include/classes/widgets/CWidgetHelper.php:745
-#: include/classes/widgets/CWidgetHelper.php:1028
+#: include/classes/widgets/CWidgetHelper.php:686
+#: include/classes/widgets/CWidgetHelper.php:760
+#: include/classes/widgets/CWidgetHelper.php:1043
 #: include/views/js/configuration.graph.edit.js.php:57
 #: include/views/js/configuration.graph.edit.js.php:119
 #: include/views/js/monitoring.sysmaps.js.php:12
@@ -14351,13 +14351,13 @@ msgstr "Имя безопасности"
 #: app/views/monitoring.problem.view.php:132 app/views/popup.generic.php:635
 #: app/views/popup.services.php:128 app/views/popup.triggerexpr.php:68
 #: include/classes/html/CMultiSelect.php:74
-#: include/classes/widgets/CWidgetHelper.php:156
-#: include/classes/widgets/CWidgetHelper.php:286
-#: include/classes/widgets/CWidgetHelper.php:485
-#: include/classes/widgets/CWidgetHelper.php:533
-#: include/classes/widgets/CWidgetHelper.php:555
-#: include/classes/widgets/CWidgetHelper.php:901
-#: include/classes/widgets/CWidgetHelper.php:922 include/forms.inc.php:411
+#: include/classes/widgets/CWidgetHelper.php:171
+#: include/classes/widgets/CWidgetHelper.php:301
+#: include/classes/widgets/CWidgetHelper.php:500
+#: include/classes/widgets/CWidgetHelper.php:548
+#: include/classes/widgets/CWidgetHelper.php:570
+#: include/classes/widgets/CWidgetHelper.php:916
+#: include/classes/widgets/CWidgetHelper.php:937 include/forms.inc.php:411
 #: include/views/administration.auditacts.list.php:30
 #: include/views/administration.auditlogs.list.php:31
 #: include/views/common.filter.trigger.php:72
@@ -15090,9 +15090,9 @@ msgstr "Скорость"
 msgid "Stacked"
 msgstr "Стэкируемый"
 
-#: include/classes/widgets/CWidgetHelper.php:661
-#: include/classes/widgets/CWidgetHelper.php:703
-#: include/classes/widgets/CWidgetHelper.php:967
+#: include/classes/widgets/CWidgetHelper.php:676
+#: include/classes/widgets/CWidgetHelper.php:718
+#: include/classes/widgets/CWidgetHelper.php:982
 msgid "Staircase"
 msgstr "Лестница"
 
@@ -15903,9 +15903,9 @@ msgstr "Период времени"
 #: app/controllers/CControllerPopupTriggerExpr.php:155
 #: app/controllers/CControllerPopupTriggerExpr.php:169
 #: app/controllers/CControllerPopupTriggerExpr.php:198
-#: include/classes/widgets/CWidgetHelper.php:672
-#: include/classes/widgets/CWidgetHelper.php:747
-#: include/classes/widgets/CWidgetHelper.php:1031
+#: include/classes/widgets/CWidgetHelper.php:687
+#: include/classes/widgets/CWidgetHelper.php:762
+#: include/classes/widgets/CWidgetHelper.php:1046
 msgid "Time shift"
 msgstr "Сдвиг по времени"
 
@@ -15998,19 +15998,19 @@ msgstr "Транзакция не была закрыта. Откат..."
 msgid "Transform SQL query result into a JSON object for low-level discovery."
 msgstr "Преобразование результата SQL запроса в объект JSON для низкоуровневого обнаружения."
 
-#: include/classes/widgets/CWidgetHelper.php:662
-#: include/classes/widgets/CWidgetHelper.php:705
-#: include/classes/widgets/CWidgetHelper.php:706
-#: include/classes/widgets/CWidgetHelper.php:707
-#: include/classes/widgets/CWidgetHelper.php:708
-#: include/classes/widgets/CWidgetHelper.php:709
-#: include/classes/widgets/CWidgetHelper.php:710
-#: include/classes/widgets/CWidgetHelper.php:711
-#: include/classes/widgets/CWidgetHelper.php:712
-#: include/classes/widgets/CWidgetHelper.php:713
-#: include/classes/widgets/CWidgetHelper.php:714
-#: include/classes/widgets/CWidgetHelper.php:715
-#: include/classes/widgets/CWidgetHelper.php:987
+#: include/classes/widgets/CWidgetHelper.php:677
+#: include/classes/widgets/CWidgetHelper.php:720
+#: include/classes/widgets/CWidgetHelper.php:721
+#: include/classes/widgets/CWidgetHelper.php:722
+#: include/classes/widgets/CWidgetHelper.php:723
+#: include/classes/widgets/CWidgetHelper.php:724
+#: include/classes/widgets/CWidgetHelper.php:725
+#: include/classes/widgets/CWidgetHelper.php:726
+#: include/classes/widgets/CWidgetHelper.php:727
+#: include/classes/widgets/CWidgetHelper.php:728
+#: include/classes/widgets/CWidgetHelper.php:729
+#: include/classes/widgets/CWidgetHelper.php:730
+#: include/classes/widgets/CWidgetHelper.php:1002
 msgid "Transparency"
 msgstr "Прозрачность"
 
@@ -16018,9 +16018,9 @@ msgstr "Прозрачность"
 msgid "Transport error."
 msgstr "Транспортная ошибка."
 
-#: include/classes/widgets/CWidgetHelper.php:668
-#: include/classes/widgets/CWidgetHelper.php:742
-#: include/classes/widgets/CWidgetHelper.php:1019
+#: include/classes/widgets/CWidgetHelper.php:683
+#: include/classes/widgets/CWidgetHelper.php:757
+#: include/classes/widgets/CWidgetHelper.php:1034
 msgctxt "missing data function"
 msgid "Treat as 0"
 msgstr "В виде 0"
@@ -16492,11 +16492,11 @@ msgstr "США (160 символов)"
 msgid "Ukrainian (uk_UA)"
 msgstr "Украинский (uk_UA)"
 
-#: include/classes/core/CConfigFile.php:154
+#: include/classes/core/CConfigFile.php:158
 msgid "Unable to change configuration file permissions to 0600."
 msgstr "Не удалось изменить права файла конфигурации на 0600."
 
-#: include/classes/core/CConfigFile.php:163
+#: include/classes/core/CConfigFile.php:167
 msgid "Unable to create the configuration file."
 msgstr "Не удалось создать файл конфигурации."
 
@@ -16508,7 +16508,7 @@ msgstr "Не удалось создать файл конфигурации."
 msgid "Unable to determine current Zabbix database version: %1$s."
 msgstr "Не удалось определить текущую версию базы данных: %1$s."
 
-#: include/classes/core/CConfigFile.php:159
+#: include/classes/core/CConfigFile.php:163
 msgid "Unable to overwrite the existing configuration file."
 msgstr "Не удалось перезаписать существующий файл конфигурации."
 
@@ -17713,19 +17713,19 @@ msgstr "Добро пожаловать в"
 msgid "When active"
 msgstr "Когда активен"
 
-#: graphs.php:45 include/classes/widgets/CWidgetHelper.php:657
-#: include/classes/widgets/CWidgetHelper.php:689
-#: include/classes/widgets/CWidgetHelper.php:690
-#: include/classes/widgets/CWidgetHelper.php:691
-#: include/classes/widgets/CWidgetHelper.php:692
-#: include/classes/widgets/CWidgetHelper.php:693
-#: include/classes/widgets/CWidgetHelper.php:694
-#: include/classes/widgets/CWidgetHelper.php:695
-#: include/classes/widgets/CWidgetHelper.php:696
-#: include/classes/widgets/CWidgetHelper.php:697
-#: include/classes/widgets/CWidgetHelper.php:698
-#: include/classes/widgets/CWidgetHelper.php:699
-#: include/classes/widgets/CWidgetHelper.php:971
+#: graphs.php:45 include/classes/widgets/CWidgetHelper.php:672
+#: include/classes/widgets/CWidgetHelper.php:704
+#: include/classes/widgets/CWidgetHelper.php:705
+#: include/classes/widgets/CWidgetHelper.php:706
+#: include/classes/widgets/CWidgetHelper.php:707
+#: include/classes/widgets/CWidgetHelper.php:708
+#: include/classes/widgets/CWidgetHelper.php:709
+#: include/classes/widgets/CWidgetHelper.php:710
+#: include/classes/widgets/CWidgetHelper.php:711
+#: include/classes/widgets/CWidgetHelper.php:712
+#: include/classes/widgets/CWidgetHelper.php:713
+#: include/classes/widgets/CWidgetHelper.php:714
+#: include/classes/widgets/CWidgetHelper.php:986
 #: include/views/configuration.graph.edit.php:84
 #: include/views/configuration.graph.list.php:88
 #: include/views/js/monitoring.sysmaps.js.php:92
@@ -17884,10 +17884,10 @@ msgstr "МИН значение оси Y"
 msgid "Y axis side"
 msgstr "Расположение оси"
 
-#: include/classes/widgets/CWidgetHelper.php:669
-#: include/classes/widgets/CWidgetHelper.php:744
-#: include/classes/widgets/CWidgetHelper.php:745
-#: include/classes/widgets/CWidgetHelper.php:1025
+#: include/classes/widgets/CWidgetHelper.php:684
+#: include/classes/widgets/CWidgetHelper.php:759
+#: include/classes/widgets/CWidgetHelper.php:760
+#: include/classes/widgets/CWidgetHelper.php:1040
 msgid "Y-axis"
 msgstr "Ось Y"
 
@@ -18659,8 +18659,8 @@ msgstr "группа узла сети"
 msgid "host is not monitored"
 msgstr "узел сети без наблюдения"
 
-#: include/classes/widgets/CWidgetHelper.php:529
-#: include/classes/widgets/CWidgetHelper.php:897
+#: include/classes/widgets/CWidgetHelper.php:544
+#: include/classes/widgets/CWidgetHelper.php:912
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:339
 msgid "host pattern"
 msgstr "шаблон узла сети"
@@ -18773,8 +18773,8 @@ msgstr "элемент данных"
 msgid "item is disabled"
 msgstr "элемент данных деактивирован"
 
-#: include/classes/widgets/CWidgetHelper.php:551
-#: include/classes/widgets/CWidgetHelper.php:918
+#: include/classes/widgets/CWidgetHelper.php:566
+#: include/classes/widgets/CWidgetHelper.php:933
 msgid "item pattern"
 msgstr "шаблон элемента данных"
 
@@ -18973,7 +18973,7 @@ msgstr "нет данных"
 msgid "nodata() - No data received during period of time T (1 - true, 0 - false)"
 msgstr "nodata() - Отсутствие полученных данных за период времени Т (1 - ложь, 0 - правда)"
 
-#: include/classes/widgets/CWidgetHelper.php:1033
+#: include/classes/widgets/CWidgetHelper.php:1048
 msgid "none"
 msgstr "нет"
 
@@ -19208,8 +19208,8 @@ msgstr "заданная учётная запись не уникальна"
 #: app/views/monitoring.problem.view.js.php:18
 #: app/views/monitoring.problem.view.php:237
 #: include/classes/api/services/CUserGroup.php:463
-#: include/classes/widgets/CWidgetHelper.php:394
-#: include/classes/widgets/CWidgetHelper.php:441
+#: include/classes/widgets/CWidgetHelper.php:409
+#: include/classes/widgets/CWidgetHelper.php:456
 #: include/views/administration.usergroups.edit.php:242
 #: include/views/configuration.action.edit.php:360
 #: include/views/configuration.action.edit.php:370
@@ -19372,8 +19372,8 @@ msgstr "неподдерживаемый номер версии"
 
 #: app/views/monitoring.problem.view.js.php:25
 #: app/views/monitoring.problem.view.php:244
-#: include/classes/widgets/CWidgetHelper.php:404
-#: include/classes/widgets/CWidgetHelper.php:449
+#: include/classes/widgets/CWidgetHelper.php:419
+#: include/classes/widgets/CWidgetHelper.php:464
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:174
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:247
 #: include/views/administration.general.macros.edit.php:53

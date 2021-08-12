@@ -53,7 +53,22 @@ class CWidgetHelper {
 					->setAttribute('placeholder', _('default'))
 					->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			)
-			->addRow(self::getLabel($field_rf_rate), self::getComboBox($field_rf_rate));
+			->addRow(self::getLabel($field_rf_rate), self::getComboBox($field_rf_rate))
+			->addItem(
+				(new CTag('script', true, new CJsScript('
+					document
+						.getElementById("widget_dialogue_form")
+						.addEventListener("change", function (e) {
+							const is_trimmable = jQuery(e.target).is(
+								\'input[type="text"]:not([data-no-trim="1"]), textarea:not([data-no-trim="1"])\'
+							);
+
+							if (is_trimmable) {
+								e.target.value = jQuery.trim(e.target.value);
+							}
+						}, {capture: true});
+				')))
+			);
 	}
 
 	/**
