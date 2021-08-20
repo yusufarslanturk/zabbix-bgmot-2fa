@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-30 19:50+0300\n"
+"POT-Creation-Date: 2021-08-20 19:50+0300\n"
 "PO-Revision-Date: 2019-03-19 11:55+0300\n"
 "Last-Translator: Oleksii <oleksii.zagorskyi@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
@@ -97,7 +97,7 @@ msgstr[2] "%1$s елементів даних"
 msgid "%1$s [Line: %2$s | Column: %3$s]"
 msgstr "%1$s [Рядок: %2$s | Стовпчик: %3$s]"
 
-#: include/actions.inc.php:1939
+#: include/actions.inc.php:1962
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s action"
@@ -124,7 +124,7 @@ msgstr[0] "%1$s елемент даних"
 msgstr[1] "%1$s елементи даних"
 msgstr[2] "%1$s елементів даних"
 
-#: include/actions.inc.php:1776
+#: include/actions.inc.php:1799
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s message"
@@ -176,7 +176,7 @@ msgstr[1] "%1$s проблеми всього"
 msgstr[2] "%1$s проблем всього"
 
 #: app/views/monitoring.widget.actionlog.view.php:41
-#: include/actions.inc.php:2208 include/classes/screens/CScreenActions.php:129
+#: include/actions.inc.php:2234 include/classes/screens/CScreenActions.php:129
 #: include/views/administration.auditacts.list.php:77
 #, c-format
 msgid "%1$s retry left"
@@ -195,7 +195,7 @@ msgstr[0] "%1$s секунда"
 msgstr[1] "%1$s секунди"
 msgstr[2] "%1$s секунд"
 
-#: app/views/monitoring.widget.problems.view.php:238
+#: app/views/monitoring.widget.problems.view.php:236
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s widget"
@@ -340,12 +340,13 @@ msgstr "Доступ заборонено"
 msgid "Access denied!"
 msgstr "Доступ заборонено!"
 
-#: app/views/hint.box.php:77 app/views/monitoring.widget.problems.view.php:62
-#: include/actions.inc.php:155 include/blocks.inc.php:559
+#: app/views/hintbox.eventlist.php:76
+#: app/views/monitoring.widget.problems.view.php:62
+#: include/actions.inc.php:155 include/blocks.inc.php:554
 #: include/classes/screens/CScreenHostTriggers.php:218
-#: include/classes/screens/CScreenProblem.php:855
-#: include/classes/screens/CScreenProblem.php:878
-#: include/classes/screens/CScreenProblem.php:1096 include/events.inc.php:250
+#: include/classes/screens/CScreenProblem.php:847
+#: include/classes/screens/CScreenProblem.php:870
+#: include/classes/screens/CScreenProblem.php:1086 include/events.inc.php:250
 #: include/views/configuration.action.edit.php:1117
 #: include/views/configuration.action.edit.php:1210
 msgid "Ack"
@@ -355,7 +356,7 @@ msgstr "Підтверджено"
 msgid "Acknowledge"
 msgstr "Підтвердити"
 
-#: include/actions.inc.php:2115 include/events.inc.php:175
+#: include/actions.inc.php:2141 include/events.inc.php:175
 msgid "Acknowledged"
 msgstr "Підтверджено"
 
@@ -374,7 +375,7 @@ msgstr "Підтверджені ВИРІШЕНІ події"
 #: app/views/dashboard.sharing.edit.php:45
 #: app/views/monitoring.widget.actionlog.view.php:30
 #: app/views/popup.triggerwizard.php:43 app/views/popup.triggerwizard.php:113
-#: include/actions.inc.php:1881 include/actions.inc.php:1965
+#: include/actions.inc.php:1896 include/actions.inc.php:1991
 #: include/audit.inc.php:29 include/classes/screens/CScreenActions.php:112
 #: include/views/administration.auditacts.list.php:57
 #: include/views/administration.auditlogs.list.php:42
@@ -494,12 +495,12 @@ msgid "Action updated"
 msgstr "Дію оновлено"
 
 #: app/views/monitoring.dashboard.view.php:86
-#: app/views/monitoring.widget.problems.view.php:63 include/blocks.inc.php:560
+#: app/views/monitoring.widget.problems.view.php:63 include/blocks.inc.php:555
 #: include/classes/screens/CScreenHostTriggers.php:218
-#: include/classes/screens/CScreenProblem.php:856
-#: include/classes/screens/CScreenProblem.php:879
-#: include/classes/screens/CScreenProblem.php:1097
-#: include/classes/screens/CScreenProblem.php:1137 include/events.inc.php:251
+#: include/classes/screens/CScreenProblem.php:848
+#: include/classes/screens/CScreenProblem.php:871
+#: include/classes/screens/CScreenProblem.php:1087
+#: include/classes/screens/CScreenProblem.php:1127 include/events.inc.php:251
 #: include/menu.inc.php:215 include/views/configuration.action.edit.php:24
 #: include/views/configuration.action.list.php:23
 #: include/views/monitoring.screen.list.php:81
@@ -811,7 +812,7 @@ msgstr "Інтерфейси агента"
 msgid "Agent or SNMP or JMX or IPMI interface"
 msgstr "Інтерфейс Агента або SNMP або JMX або IPMI"
 
-#: include/actions.inc.php:2142
+#: include/actions.inc.php:2168
 msgid "Alert message"
 msgstr "Повідомлення тривоги"
 
@@ -1465,11 +1466,12 @@ msgstr "По шаблону тригера"
 msgid "CERT"
 msgstr "CERT"
 
-#: app/views/hint.box.php:111 app/views/monitoring.widget.problems.view.php:93
+#: app/views/hintbox.eventlist.php:110
+#: app/views/monitoring.widget.problems.view.php:93
 #: include/classes/graph/CSvgGraph.php:980
 #: include/classes/screens/CScreenEvents.php:116
-#: include/classes/screens/CScreenProblem.php:953
-#: include/classes/screens/CScreenProblem.php:1119 include/events.inc.php:340
+#: include/classes/screens/CScreenProblem.php:945
+#: include/classes/screens/CScreenProblem.php:1109 include/events.inc.php:335
 msgid "CLOSING"
 msgstr "ЗАКРИТТЯ"
 
@@ -4312,7 +4314,7 @@ msgstr "День в тиждень"
 msgid "Days"
 msgstr "Днів"
 
-#: include/html.inc.php:920 include/html.inc.php:924
+#: include/html.inc.php:928 include/html.inc.php:932
 msgid "Debug"
 msgstr "Дебаг"
 
@@ -4811,7 +4813,7 @@ msgstr "Опис"
 msgid "Description updated"
 msgstr "Опис оновлено"
 
-#: app/views/administration.mediatype.list.php:68 include/blocks.inc.php:427
+#: app/views/administration.mediatype.list.php:68 include/blocks.inc.php:422
 #: include/func.inc.php:1899
 #: include/views/administration.auditlogs.list.php:77
 #: include/views/configuration.action.edit.php:435
@@ -5160,9 +5162,10 @@ msgstr "Відображення проблем"
 msgid "Display stacked graph"
 msgstr "Показати стекований графік"
 
-#: include/actions.inc.php:1769 include/actions.inc.php:1841
-#: include/actions.inc.php:1932 include/func.inc.php:1703 jsLoader.php:309
-#: queue.php:298 search.php:238 search.php:338 search.php:480
+#: app/controllers/CControllerHintboxActionlist.php:94
+#: include/actions.inc.php:1792 include/actions.inc.php:1865
+#: include/func.inc.php:1703 jsLoader.php:309 queue.php:298 search.php:238
+#: search.php:338 search.php:480
 #, c-format
 msgid "Displaying %1$s of %2$s found"
 msgstr "Відображено %1$s із %2$s знайдених"
@@ -5335,10 +5338,11 @@ msgstr "Дублікат usrgrpid \"%1$s\" у групах користувач�
 msgid "Duplicate usrgrpid \"%1$s\" in user groups for screen \"%2$s\"."
 msgstr "Дублікат usrgrpid \"%1$s\" у групах користувачів для комплексного екрану \"%2$s\"."
 
-#: app/views/hint.box.php:76 app/views/monitoring.widget.problems.view.php:61
-#: include/blocks.inc.php:558 include/classes/screens/CScreenProblem.php:854
-#: include/classes/screens/CScreenProblem.php:877
-#: include/classes/screens/CScreenProblem.php:1095 include/events.inc.php:249
+#: app/views/hintbox.eventlist.php:75
+#: app/views/monitoring.widget.problems.view.php:61 include/blocks.inc.php:553
+#: include/classes/screens/CScreenProblem.php:846
+#: include/classes/screens/CScreenProblem.php:869
+#: include/classes/screens/CScreenProblem.php:1085 include/events.inc.php:249
 #: include/views/configuration.action.edit.php:435
 msgid "Duration"
 msgstr "Тривалість"
@@ -5880,7 +5884,7 @@ msgstr "Виконує WMI запит та повертає перший виб�
 msgid "Execute on"
 msgstr "Виконати на"
 
-#: include/actions.inc.php:2163
+#: include/actions.inc.php:2189
 #: include/views/administration.auditacts.list.php:71
 msgid "Executed"
 msgstr "Виконано"
@@ -6013,7 +6017,7 @@ msgstr "FTP"
 msgid "Fail"
 msgstr "Помилка"
 
-#: app/views/monitoring.widget.web.view.php:26 include/actions.inc.php:2175
+#: app/views/monitoring.widget.web.view.php:26 include/actions.inc.php:2201
 #: include/views/administration.auditacts.list.php:81
 msgid "Failed"
 msgstr "Помилковий"
@@ -6457,7 +6461,7 @@ msgid "Gradient line"
 msgstr "Градієнтна лінія"
 
 #: charts.php:99 include/audit.inc.php:30
-#: include/classes/screens/CScreenProblem.php:1198
+#: include/classes/screens/CScreenProblem.php:1188
 #: include/classes/widgets/CWidgetConfig.php:46
 #: include/classes/widgets/forms/CWidgetFormGraph.php:32
 #: include/classes/widgets/forms/CWidgetFormGraph.php:62
@@ -6863,7 +6867,7 @@ msgstr "Шістнадцяткове в десяткове"
 msgid "Hidden"
 msgstr "Прихована"
 
-#: include/html.inc.php:924
+#: include/html.inc.php:932
 msgid "Hide debug"
 msgstr "Сховати діагностичну інф."
 
@@ -6902,7 +6906,7 @@ msgstr "Підсвічувати весь рядок"
 
 #: app/views/monitoring.acknowledge.edit.php:34
 #: app/views/monitoring.problem.view.php:93 history.php:27
-#: include/classes/screens/CScreenProblem.php:1203
+#: include/classes/screens/CScreenProblem.php:1193
 #: include/classes/widgets/forms/CWidgetFormProblems.php:36
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:56
 #: include/forms.inc.php:438 include/forms.inc.php:872
@@ -6962,15 +6966,15 @@ msgstr "Вирівнювання по горизонталі"
 #: app/views/popup.generic.php:53 app/views/popup.generic.php:98
 #: app/views/popup.generic.php:137 httpconf.php:189 httpconf.php:500
 #: include/actions.inc.php:48 include/audit.inc.php:27
-#: include/blocks.inc.php:555 include/classes/screens/CScreenEvents.php:32
+#: include/blocks.inc.php:550 include/classes/screens/CScreenEvents.php:32
 #: include/classes/screens/CScreenHostgroupTriggers.php:135
 #: include/classes/screens/CScreenHostTriggers.php:67
 #: include/classes/screens/CScreenHostTriggers.php:135
 #: include/classes/screens/CScreenHostTriggers.php:180
 #: include/classes/screens/CScreenHttpTest.php:115
-#: include/classes/screens/CScreenProblem.php:850
-#: include/classes/screens/CScreenProblem.php:874
-#: include/classes/screens/CScreenProblem.php:1093
+#: include/classes/screens/CScreenProblem.php:842
+#: include/classes/screens/CScreenProblem.php:866
+#: include/classes/screens/CScreenProblem.php:1083
 #: include/classes/screens/CScreenTriggersInfo.php:40
 #: include/classes/setup/CSetupWizard.php:274
 #: include/classes/widgets/forms/CWidgetFormProblems.php:200
@@ -7076,7 +7080,7 @@ msgstr[2] "Вузли мережі активовано"
 #: app/views/administration.script.list.php:61
 #: app/views/monitoring.widget.problemhosts.view.php:27
 #: app/views/monitoring.widget.web.view.php:26 include/actions.inc.php:46
-#: include/audit.inc.php:37 include/blocks.inc.php:333
+#: include/audit.inc.php:37 include/blocks.inc.php:328
 #: include/forms.inc.php:329 include/maps.inc.php:25
 #: include/views/administration.usergroups.edit.php:103
 #: include/views/administration.usergroups.edit.php:184
@@ -7620,7 +7624,7 @@ msgstr "Неможливо фільтрувати по неіснуючому п
 msgid "In maintenance"
 msgstr "В періоді сервісу"
 
-#: include/actions.inc.php:2170
+#: include/actions.inc.php:2196
 #: include/views/administration.auditacts.list.php:75
 msgid "In progress"
 msgstr "В роботі"
@@ -7665,8 +7669,8 @@ msgid "Inaccessible trigger"
 msgstr "Недоступний тригер"
 
 #: app/controllers/CControllerDashboardView.php:400
-#: include/actions.inc.php:2048 include/actions.inc.php:2071
-#: include/actions.inc.php:2076 include/events.inc.php:224
+#: include/actions.inc.php:2074 include/actions.inc.php:2097
+#: include/actions.inc.php:2102 include/events.inc.php:224
 #: include/views/monitoring.screen.edit.php:88
 #: include/views/monitoring.slideconf.edit.php:78
 #: include/views/monitoring.sysmap.edit.php:76
@@ -8044,11 +8048,11 @@ msgstr "Некоректне значення evaltype."
 msgid "Incorrect event object \"%1$s\" (%2$s) for event source \"%3$s\" (%4$s), only the following objects are supported: %5$s."
 msgstr "Некоректний об'єкт події \"%1$s\" (%2$s) для джерела події\" %3$s\" (%4$s), підтримуються тільки наступні об'єкти: %5$s."
 
-#: include/classes/api/services/CAlert.php:362
+#: include/classes/api/services/CAlert.php:372
 msgid "Incorrect eventobject value."
 msgstr "Некоректне значення eventobject."
 
-#: include/classes/api/services/CAlert.php:355
+#: include/classes/api/services/CAlert.php:365
 msgid "Incorrect eventsource value."
 msgstr "Некоректне значення eventsource."
 
@@ -8764,11 +8768,11 @@ msgstr "Індонезійська (id_ID)"
 
 #: app/views/monitoring.widget.actionlog.view.php:35
 #: app/views/monitoring.widget.problems.view.php:53
-#: include/actions.inc.php:1881 include/actions.inc.php:1965
-#: include/blocks.inc.php:554 include/classes/screens/CScreenActions.php:117
+#: include/actions.inc.php:1896 include/actions.inc.php:1991
+#: include/blocks.inc.php:549 include/classes/screens/CScreenActions.php:117
 #: include/classes/screens/CScreenHostTriggers.php:218
-#: include/classes/screens/CScreenProblem.php:849
-#: include/classes/screens/CScreenProblem.php:873
+#: include/classes/screens/CScreenProblem.php:841
+#: include/classes/screens/CScreenProblem.php:865
 #: include/views/administration.auditacts.list.php:62
 #: include/views/configuration.application.list.php:65
 #: include/views/configuration.host.discovery.list.php:60
@@ -9826,8 +9830,8 @@ msgstr "Графік за останній тиждень"
 msgid "Latest data"
 msgstr "Останні дані"
 
-#: app/views/monitoring.widget.problems.view.php:60 include/blocks.inc.php:557
-#: include/classes/screens/CScreenProblem.php:876 jsLoader.php:269
+#: app/views/monitoring.widget.problems.view.php:60 include/blocks.inc.php:552
+#: include/classes/screens/CScreenProblem.php:868 jsLoader.php:269
 msgid "Latest values"
 msgstr "Останні значення"
 
@@ -10280,7 +10284,7 @@ msgstr "Пропущено обов'язковий параметр."
 msgid "Manual"
 msgstr "Вручну"
 
-#: include/actions.inc.php:2110
+#: include/actions.inc.php:2136
 msgid "Manually closed"
 msgstr "Закритий вручну"
 
@@ -10405,7 +10409,7 @@ msgstr "Помітити тільки відібрані"
 msgid "Mask"
 msgstr "Маска"
 
-#: include/classes/screens/CScreenProblem.php:1074
+#: include/classes/screens/CScreenProblem.php:1064
 #: include/views/configuration.host.list.php:381
 #: include/views/configuration.item.list.php:255
 #: include/views/configuration.item.massupdate.php:745
@@ -10577,8 +10581,8 @@ msgstr "Пам'ять яка використовується процесом �
 
 #: app/views/monitoring.acknowledge.edit.php:26
 #: app/views/monitoring.widget.actionlog.view.php:33
-#: include/actions.inc.php:1746 include/actions.inc.php:2015
-#: include/actions.inc.php:2119 include/classes/screens/CScreenActions.php:115
+#: include/actions.inc.php:1768 include/actions.inc.php:2041
+#: include/actions.inc.php:2145 include/classes/screens/CScreenActions.php:115
 #: include/views/administration.auditacts.list.php:60
 #: include/views/administration.auditacts.list.php:91
 #: include/views/configuration.action.edit.php:786
@@ -10597,11 +10601,11 @@ msgstr "Обреження тексту повідомлення"
 msgid "Message timeout"
 msgstr "Таймаут повідомлення"
 
-#: include/actions.inc.php:1881 include/actions.inc.php:1965
+#: include/actions.inc.php:1896 include/actions.inc.php:1991
 msgid "Message/Command"
 msgstr "Повідомлення/Команда"
 
-#: include/classes/screens/CScreenProblem.php:1130
+#: include/classes/screens/CScreenProblem.php:1120
 msgid "Messages"
 msgstr "Повідомлення"
 
@@ -11079,14 +11083,14 @@ msgstr "Нові тригери"
 msgid "Next step"
 msgstr "Наступний крок"
 
-#: app/views/hint.box.php:168
+#: app/views/hintbox.eventlist.php:167
 #: app/views/monitoring.widget.problems.view.php:219
-#: include/actions.inc.php:33 include/blocks.inc.php:434
-#: include/blocks.inc.php:633
+#: include/actions.inc.php:33 include/blocks.inc.php:429
+#: include/blocks.inc.php:628
 #: include/classes/screens/CScreenHostTriggers.php:268
-#: include/classes/screens/CScreenProblem.php:1043
-#: include/classes/screens/CScreenProblem.php:1152 include/events.inc.php:176
-#: include/events.inc.php:376 include/triggers.inc.php:1286
+#: include/classes/screens/CScreenProblem.php:1035
+#: include/classes/screens/CScreenProblem.php:1142 include/events.inc.php:176
+#: include/events.inc.php:371 include/triggers.inc.php:1286
 #: include/triggers.inc.php:1291
 #: include/views/administration.users.list.php:111
 #: include/views/administration.users.list.php:115
@@ -11432,7 +11436,8 @@ msgstr "Немає прав доступу до системи."
 #: app/controllers/CControllerDashboardView.php:195
 #: app/controllers/CControllerDashboardView.php:231
 #: app/controllers/CControllerExportXml.php:103
-#: app/controllers/CControllerHintBox.php:155
+#: app/controllers/CControllerHintboxActionlist.php:50
+#: app/controllers/CControllerHintboxEventlist.php:54
 #: app/controllers/CControllerMenuPopup.php:76
 #: app/controllers/CControllerMenuPopup.php:106
 #: app/controllers/CControllerMenuPopup.php:190
@@ -11779,11 +11784,11 @@ msgstr "Кількість CPU. Повертає ціле число"
 msgid "Number of enabled items on the host."
 msgstr "Кількість активованих елементів даних у вузла мережі."
 
-#: include/blocks.inc.php:438
+#: include/blocks.inc.php:433
 msgid "Number of hosts (enabled/disabled/templates)"
 msgstr "Кількість вузлів мережі (активовані/дезактивовані/шаблони)"
 
-#: include/blocks.inc.php:448
+#: include/blocks.inc.php:443
 msgid "Number of items (enabled/disabled/not supported)"
 msgstr "Кількість елементів даних (активовані/дезактивовані/не підтримуються)"
 
@@ -11851,7 +11856,7 @@ msgstr "Кількість змін стану"
 msgid "Number of steps"
 msgstr "Кількість кроків"
 
-#: include/blocks.inc.php:459
+#: include/blocks.inc.php:454
 msgid "Number of triggers (enabled/disabled [problem/ok])"
 msgstr "Кількість тригерів (активовані/дезактивовані [проблема/ок])"
 
@@ -11867,7 +11872,7 @@ msgstr "Кількість елементів даних в базі даних 
 msgid "Number of unsupported items on the host."
 msgstr "Кількість елементів даних у вузла мережі, які не підтримуються."
 
-#: include/blocks.inc.php:471
+#: include/blocks.inc.php:466
 msgid "Number of users (online)"
 msgstr "Кількість користувачів (підключених в даний момент)"
 
@@ -12105,7 +12110,7 @@ msgstr "Тільки адміністратори можуть задавати 
 msgid "Only administrators can set slide show owner."
 msgstr "Тільки адміністратори можуть задавати власника слайд шоу."
 
-#: include/blocks.inc.php:449
+#: include/blocks.inc.php:444
 msgid "Only items assigned to enabled hosts are counted"
 msgstr "Підраховуються елементи даних тільки у вузлів мережі під спостереженням"
 
@@ -12153,7 +12158,7 @@ msgstr "Тільки супер адміністратори можуть оно
 msgid "Only the last 20%% of the indicator is displayed."
 msgstr "Індикатор відображує тільки останні 20%%."
 
-#: include/blocks.inc.php:460
+#: include/blocks.inc.php:455
 msgid "Only triggers assigned to enabled hosts and depending on enabled items are counted"
 msgstr "Підраховуються тригери тільки у вузлів мережі під спостереженням та які залежать від активних елементів даних"
 
@@ -12514,11 +12519,12 @@ msgstr "Розширення PHP xmlwriter відсутнє."
 msgid "POP"
 msgstr "POP"
 
-#: app/views/hint.box.php:111 app/views/monitoring.widget.problems.view.php:93
-#: chart5.php:199 include/classes/graph/CSvgGraph.php:975
+#: app/views/hintbox.eventlist.php:110
+#: app/views/monitoring.widget.problems.view.php:93 chart5.php:199
+#: include/classes/graph/CSvgGraph.php:975
 #: include/classes/screens/CScreenEvents.php:116
-#: include/classes/screens/CScreenProblem.php:953
-#: include/classes/screens/CScreenProblem.php:1119 include/events.inc.php:340
+#: include/classes/screens/CScreenProblem.php:945
+#: include/classes/screens/CScreenProblem.php:1109 include/events.inc.php:335
 #: include/maps.inc.php:291 include/maps.inc.php:375 include/maps.inc.php:468
 #: include/maps.inc.php:556 include/triggers.inc.php:232
 #: include/views/monitoring.overview.items.php:32
@@ -12567,7 +12573,7 @@ msgstr "PSK занадто короткий. Мінімум це %1$s шістн
 msgid "Page received incorrect data"
 msgstr "Сторінка отримала некоректні дані"
 
-#: app/views/administration.mediatype.edit.php:103 include/blocks.inc.php:427
+#: app/views/administration.mediatype.edit.php:103 include/blocks.inc.php:422
 msgid "Parameter"
 msgstr "Параметр"
 
@@ -12969,11 +12975,11 @@ msgid "Privilege level"
 msgstr "Рівень привілеїв"
 
 #: app/views/monitoring.problem.view.php:163
-#: app/views/monitoring.widget.problems.view.php:56 include/blocks.inc.php:556
-#: include/classes/screens/CScreenProblem.php:852
-#: include/classes/screens/CScreenProblem.php:875
-#: include/classes/screens/CScreenProblem.php:1010
-#: include/classes/screens/CScreenProblem.php:1094
+#: app/views/monitoring.widget.problems.view.php:56 include/blocks.inc.php:551
+#: include/classes/screens/CScreenProblem.php:844
+#: include/classes/screens/CScreenProblem.php:867
+#: include/classes/screens/CScreenProblem.php:1002
+#: include/classes/screens/CScreenProblem.php:1084
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:58
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:58
 #: include/classes/widgets/forms/CWidgetFormProblems.php:75
@@ -12988,7 +12994,7 @@ msgstr "Рівень привілеїв"
 msgid "Problem"
 msgstr "Проблема"
 
-#: include/actions.inc.php:2099
+#: include/actions.inc.php:2125
 msgid "Problem created"
 msgstr "Виникла Проблема"
 
@@ -13020,7 +13026,7 @@ msgstr "Проблему подавлено"
 msgid "Problem on"
 msgstr "Проблема на"
 
-#: include/actions.inc.php:2102
+#: include/actions.inc.php:2128
 msgid "Problem resolved"
 msgstr "Проблему вирішено"
 
@@ -13071,7 +13077,8 @@ msgid "Properties"
 msgstr "Властивості"
 
 #: app/controllers/CControllerMenuPopup.php:562
-#: app/controllers/CControllerWidgetUrlView.php:56 app/views/hint.box.php:45
+#: app/controllers/CControllerWidgetUrlView.php:56
+#: app/views/hintbox.eventlist.php:44
 #: include/classes/screens/CScreenUrl.php:70
 #, c-format
 msgid "Provided URL \"%1$s\" is invalid."
@@ -13188,11 +13195,12 @@ msgstr "Черга"
 msgid "Queue of items to be updated"
 msgstr "Черга елементів даних які очікують оновлення"
 
-#: app/views/hint.box.php:97 app/views/monitoring.widget.problems.view.php:79
+#: app/views/hintbox.eventlist.php:96
+#: app/views/monitoring.widget.problems.view.php:79
 #: include/classes/graph/CSvgGraph.php:971
 #: include/classes/screens/CScreenEvents.php:121
-#: include/classes/screens/CScreenProblem.php:939
-#: include/classes/screens/CScreenProblem.php:1107 include/events.inc.php:345
+#: include/classes/screens/CScreenProblem.php:931
+#: include/classes/screens/CScreenProblem.php:1097 include/events.inc.php:340
 msgid "RESOLVED"
 msgstr "ВИРІШЕНО"
 
@@ -13280,7 +13288,7 @@ msgstr "Отримувач (у порядку зростання)"
 msgid "Recipient (descending)"
 msgstr "Отримувач (в порядку спадання)"
 
-#: include/classes/screens/CScreenProblem.php:1011
+#: include/classes/screens/CScreenProblem.php:1003
 #: include/views/administration.users.edit.php:380
 #: include/views/configuration.item.list.php:174
 #: include/views/configuration.trigger.prototype.list.php:130
@@ -13306,11 +13314,12 @@ msgstr "Синтаксична помилка у виразі для відно�
 msgid "Recovery operations"
 msgstr "Операції відновлення"
 
-#: app/views/hint.box.php:74 app/views/monitoring.widget.problems.view.php:51
+#: app/views/hintbox.eventlist.php:73
+#: app/views/monitoring.widget.problems.view.php:51
 #: include/classes/screens/CScreenEvents.php:32
-#: include/classes/screens/CScreenProblem.php:847
-#: include/classes/screens/CScreenProblem.php:870
-#: include/classes/screens/CScreenProblem.php:1091 include/events.inc.php:246
+#: include/classes/screens/CScreenProblem.php:839
+#: include/classes/screens/CScreenProblem.php:862
+#: include/classes/screens/CScreenProblem.php:1081 include/events.inc.php:246
 msgid "Recovery time"
 msgstr "Час відновлення"
 
@@ -13396,8 +13405,8 @@ msgstr "Відпустіть для створення нового віджет
 msgid "Remember me for 30 days"
 msgstr "Запам'ятати мене на 30 днів"
 
-#: include/actions.inc.php:1101 include/actions.inc.php:1894
-#: include/actions.inc.php:2141
+#: include/actions.inc.php:1101 include/actions.inc.php:1909
+#: include/actions.inc.php:2167
 msgid "Remote command"
 msgstr "Віддалена команда"
 
@@ -13625,7 +13634,7 @@ msgstr "Необхідна продуктивність (знач/сек)"
 msgid "Required performance of the Zabbix server, in new values per second expected."
 msgstr "Необхідна швидкодія Zabbix сервера, в одиницях очікуваної кількості нових значень в секунду."
 
-#: include/blocks.inc.php:475
+#: include/blocks.inc.php:470
 msgid "Required server performance, new values per second"
 msgstr "Необхідна потужність сервера, нових значень в секунду"
 
@@ -13677,26 +13686,26 @@ msgstr "Вирішено цим"
 
 #: app/views/monitoring.widget.problems.view.php:133
 #: include/classes/screens/CScreenHostTriggers.php:234
-#: include/classes/screens/CScreenProblem.php:970
+#: include/classes/screens/CScreenProblem.php:962
 #, c-format
 msgid "Resolved by correlation rule \"%1$s\"."
 msgstr "Вирішено правилом кореляції \"%1$s\"."
 
 #: app/views/monitoring.widget.problems.view.php:136
 #: include/classes/screens/CScreenHostTriggers.php:237
-#: include/classes/screens/CScreenProblem.php:973
+#: include/classes/screens/CScreenProblem.php:965
 msgid "Resolved by correlation rule."
 msgstr "Вирішено правилом кореляції."
 
 #: app/views/monitoring.widget.problems.view.php:143
 #: include/classes/screens/CScreenHostTriggers.php:244
-#: include/classes/screens/CScreenProblem.php:980
+#: include/classes/screens/CScreenProblem.php:972
 msgid "Resolved by inaccessible user."
 msgstr ""
 
 #: app/views/monitoring.widget.problems.view.php:142
 #: include/classes/screens/CScreenHostTriggers.php:243
-#: include/classes/screens/CScreenProblem.php:979
+#: include/classes/screens/CScreenProblem.php:971
 #, c-format
 msgid "Resolved by user \"%1$s\"."
 msgstr "Вирішено користувачем \"%1$s\"."
@@ -14477,7 +14486,7 @@ msgstr "Надіслати користувачам"
 msgid "Send to back"
 msgstr "Перемістити на самий зад"
 
-#: include/actions.inc.php:2164
+#: include/actions.inc.php:2190
 #: include/views/administration.auditacts.list.php:70
 msgid "Sent"
 msgstr "Надіслано"
@@ -14652,9 +14661,9 @@ msgstr "Не вдалося встановити партнерів LDAP в \"Of
 #: app/views/popup.triggerwizard.php:83
 #: include/classes/screens/CScreenEvents.php:33
 #: include/classes/screens/CScreenHistory.php:275
-#: include/classes/screens/CScreenProblem.php:844
-#: include/classes/screens/CScreenProblem.php:866
-#: include/classes/screens/CScreenProblem.php:1089
+#: include/classes/screens/CScreenProblem.php:836
+#: include/classes/screens/CScreenProblem.php:858
+#: include/classes/screens/CScreenProblem.php:1079
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:67
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:67
 #: include/classes/widgets/forms/CWidgetFormProblems.php:84
@@ -14679,22 +14688,22 @@ msgstr "Важливість"
 msgid "Severity (descending)"
 msgstr "Важливість (в порядку спадання)"
 
-#: include/actions.inc.php:1830
+#: include/actions.inc.php:1853
 msgctxt "screen reader"
 msgid "Severity changed"
 msgstr "Важливість змінено"
 
-#: include/actions.inc.php:1800
-#: include/classes/screens/CScreenProblem.php:1133
+#: include/actions.inc.php:1823
+#: include/classes/screens/CScreenProblem.php:1123
 msgid "Severity changes"
 msgstr "Зміна важливості"
 
-#: include/actions.inc.php:1822
+#: include/actions.inc.php:1845
 msgctxt "screen reader"
 msgid "Severity decreased"
 msgstr "Важливість зменшено"
 
-#: include/actions.inc.php:1826
+#: include/actions.inc.php:1849
 msgctxt "screen reader"
 msgid "Severity increased"
 msgstr "Важливість збільшено"
@@ -15133,16 +15142,17 @@ msgstr ""
 #: app/controllers/CControllerPopupGeneric.php:201
 #: app/controllers/CControllerPopupGeneric.php:264
 #: app/views/administration.mediatype.list.php:43
-#: app/views/administration.mediatype.list.php:66 app/views/hint.box.php:75
+#: app/views/administration.mediatype.list.php:66
+#: app/views/hintbox.eventlist.php:74
 #: app/views/monitoring.widget.actionlog.view.php:34
 #: app/views/monitoring.widget.problems.view.php:52
-#: include/actions.inc.php:1881 include/actions.inc.php:1965
+#: include/actions.inc.php:1896 include/actions.inc.php:1991
 #: include/classes/screens/CScreenActions.php:116
 #: include/classes/screens/CScreenHttpTestDetails.php:86
 #: include/classes/screens/CScreenHttpTest.php:119
-#: include/classes/screens/CScreenProblem.php:848
-#: include/classes/screens/CScreenProblem.php:872
-#: include/classes/screens/CScreenProblem.php:1092
+#: include/classes/screens/CScreenProblem.php:840
+#: include/classes/screens/CScreenProblem.php:864
+#: include/classes/screens/CScreenProblem.php:1082
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:35
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:36
 #: include/events.inc.php:247 include/forms.inc.php:398
@@ -15216,7 +15226,7 @@ msgstr "Тільки статус"
 msgid "Status problem"
 msgstr "Стан проблеми"
 
-#: include/actions.inc.php:1965
+#: include/actions.inc.php:1991
 #: include/classes/screens/CScreenHttpTestDetails.php:82
 msgid "Step"
 msgstr "Крок"
@@ -15473,11 +15483,12 @@ msgstr "Ім'я тегу"
 msgid "Tag value"
 msgstr "Значення тегу"
 
-#: app/views/hint.box.php:78 app/views/monitoring.problem.view.php:283
-#: app/views/monitoring.widget.problems.view.php:64 include/blocks.inc.php:561
-#: include/classes/screens/CScreenProblem.php:826
-#: include/classes/screens/CScreenProblem.php:880
-#: include/classes/screens/CScreenProblem.php:1098
+#: app/views/hintbox.eventlist.php:77
+#: app/views/monitoring.problem.view.php:283
+#: app/views/monitoring.widget.problems.view.php:64 include/blocks.inc.php:556
+#: include/classes/screens/CScreenProblem.php:818
+#: include/classes/screens/CScreenProblem.php:872
+#: include/classes/screens/CScreenProblem.php:1088
 #: include/classes/widgets/forms/CWidgetFormProblems.php:93
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:377
 #: include/events.inc.php:235
@@ -15851,17 +15862,17 @@ msgstr "До"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:45
 #: app/controllers/CControllerPopupTriggerExpr.php:174
-#: app/views/hint.box.php:62 app/views/hint.box.php:68
+#: app/views/hintbox.eventlist.php:61 app/views/hintbox.eventlist.php:67
 #: app/views/monitoring.widget.actionlog.view.php:29
 #: app/views/monitoring.widget.problems.view.php:36
 #: app/views/popup.triggerexpr.php:131 app/views/popup.triggerexpr.php:135
-#: include/actions.inc.php:1746 include/actions.inc.php:1800
-#: include/actions.inc.php:1881 include/actions.inc.php:1965
-#: include/actions.inc.php:2015 include/blocks.inc.php:536
+#: include/actions.inc.php:1768 include/actions.inc.php:1823
+#: include/actions.inc.php:1896 include/actions.inc.php:1991
+#: include/actions.inc.php:2041 include/blocks.inc.php:531
 #: include/classes/screens/CScreenActions.php:111
 #: include/classes/screens/CScreenEvents.php:32
-#: include/classes/screens/CScreenProblem.php:803
-#: include/classes/screens/CScreenProblem.php:1090
+#: include/classes/screens/CScreenProblem.php:795
+#: include/classes/screens/CScreenProblem.php:1080
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:32
 #: include/classes/widgets/forms/CWidgetFormProblems.php:194
@@ -15946,7 +15957,7 @@ msgstr "До"
 msgid "To set a host interface select a single item type for all items"
 msgstr "Для встановлення інтерфейсу вузла мережі виберіть один тип елемента даних для всіх елементів даних"
 
-#: include/classes/screens/CScreenProblem.php:699 include/func.inc.php:2695
+#: include/classes/screens/CScreenProblem.php:691 include/func.inc.php:2695
 #: srv_status.php:39
 msgid "Today"
 msgstr "Сьогодні"
@@ -16875,8 +16886,8 @@ msgstr "Використовується в діях"
 msgid "Used in items"
 msgstr "Використовується в елементах даних"
 
-#: httpconf.php:59 include/actions.inc.php:1746 include/actions.inc.php:1800
-#: include/actions.inc.php:2015 include/audit.inc.php:24
+#: httpconf.php:59 include/actions.inc.php:1768 include/actions.inc.php:1823
+#: include/actions.inc.php:2041 include/audit.inc.php:24
 #: include/classes/setup/CSetupWizard.php:245 include/hosts.inc.php:61
 #: include/views/administration.auditlogs.list.php:26
 #: include/views/administration.auditlogs.list.php:71
@@ -16918,7 +16929,7 @@ msgstr "Користувач \"%1$s\" є власником слайд шоу \"
 msgid "User \"%1$s\" is used in \"%2$s\" action."
 msgstr "Користувач \"%1$s\" використовується в дії \"%2$s\"."
 
-#: include/actions.inc.php:2015
+#: include/actions.inc.php:2041
 msgid "User action"
 msgstr "Дія користувача"
 
@@ -17114,7 +17125,7 @@ msgstr "Користувач з ID \"%1$s\" недоступний."
 msgid "User with alias \"%s\" already exists."
 msgstr "Користувач з псевдонімом \"%s\" вже існує."
 
-#: include/actions.inc.php:1881 include/actions.inc.php:1965
+#: include/actions.inc.php:1896 include/actions.inc.php:1991
 msgid "User/Recipient"
 msgstr "Користувач/Отримувач"
 
@@ -17375,7 +17386,7 @@ msgstr "Час роботи (uptime) віртуальної машини VMware,
 #: app/views/monitoring.widget.plaintext.view.php:46
 #: app/views/popup.httpstep.php:66 app/views/popup.httpstep.php:92
 #: app/views/popup.httpstep.php:116 app/views/popup.httpstep.php:135
-#: app/views/popup.testtriggerexpr.php:30 include/blocks.inc.php:427
+#: app/views/popup.testtriggerexpr.php:30 include/blocks.inc.php:422
 #: include/classes/graphdraw/CPieGraphDraw.php:346
 #: include/classes/screens/CScreenEvents.php:32
 #: include/classes/screens/CScreenHistory.php:280
@@ -17934,14 +17945,14 @@ msgstr "Рік"
 msgid "Yearly"
 msgstr "Щороку"
 
-#: app/views/hint.box.php:168
+#: app/views/hintbox.eventlist.php:167
 #: app/views/monitoring.widget.problems.view.php:219
-#: include/actions.inc.php:32 include/blocks.inc.php:434
-#: include/blocks.inc.php:633
+#: include/actions.inc.php:32 include/blocks.inc.php:429
+#: include/blocks.inc.php:628
 #: include/classes/screens/CScreenHostTriggers.php:268
-#: include/classes/screens/CScreenProblem.php:1043
-#: include/classes/screens/CScreenProblem.php:1152 include/events.inc.php:176
-#: include/events.inc.php:376 include/triggers.inc.php:1285
+#: include/classes/screens/CScreenProblem.php:1035
+#: include/classes/screens/CScreenProblem.php:1142 include/events.inc.php:176
+#: include/events.inc.php:371 include/triggers.inc.php:1285
 #: include/triggers.inc.php:1290
 #: include/views/administration.general.valuemapping.list.php:65
 #: include/views/administration.users.list.php:109
@@ -17954,7 +17965,7 @@ msgstr "Щороку"
 msgid "Yes"
 msgstr "Так"
 
-#: include/classes/screens/CScreenProblem.php:707 include/func.inc.php:2689
+#: include/classes/screens/CScreenProblem.php:699 include/func.inc.php:2689
 msgid "Yesterday"
 msgstr "Вчора"
 
@@ -18136,7 +18147,7 @@ msgstr "Деталі Zabbix сервера"
 msgid "Zabbix server is not running: the information displayed may not be current."
 msgstr "Zabbix сервер не запущено: відображувана інформація може бути не актуальною."
 
-#: include/blocks.inc.php:433
+#: include/blocks.inc.php:428
 msgid "Zabbix server is running"
 msgstr "Zabbix сервер в запущеному стані"
 
@@ -19005,7 +19016,7 @@ msgid "number"
 msgstr "число"
 
 #: app/views/monitoring.widget.problemhosts.view.php:116
-#: include/blocks.inc.php:400
+#: include/blocks.inc.php:395
 msgid "of"
 msgstr "із"
 
