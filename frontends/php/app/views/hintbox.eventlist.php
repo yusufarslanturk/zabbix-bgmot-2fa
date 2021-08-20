@@ -62,7 +62,8 @@ if (array_key_exists('problems', $data)) {
 			(new CColHeader())->addClass(ZBX_STYLE_TIMELINE_TH),
 			(new CColHeader())->addClass(ZBX_STYLE_TIMELINE_TH)
 		];
-	} else {
+	}
+	else {
 		$header = [[_('Time'), $sort_div]];
 	}
 
@@ -94,7 +95,8 @@ if (array_key_exists('problems', $data)) {
 			$value = TRIGGER_VALUE_FALSE;
 			$value_str = _('RESOLVED');
 			$value_clock = $problem['r_clock'];
-		} else {
+		}
+		else {
 			$in_closing = false;
 
 			foreach ($problem['acknowledges'] as $acknowledge) {
@@ -122,7 +124,8 @@ if (array_key_exists('problems', $data)) {
 			$cell_r_clock = (new CCol(new CLink($cell_r_clock, $url_details)))
 				->addClass(ZBX_STYLE_NOWRAP)
 				->addClass(ZBX_STYLE_RIGHT);
-		} else {
+		}
+		else {
 			$cell_r_clock = '';
 		}
 
@@ -144,7 +147,8 @@ if (array_key_exists('problems', $data)) {
 					->addClass(ZBX_STYLE_TIMELINE_DOT),
 				(new CCol())->addClass(ZBX_STYLE_TIMELINE_TD)
 			];
-		} else {
+		}
+		else {
 			$row = [
 				$cell_clock
 					->addClass(ZBX_STYLE_NOWRAP)
