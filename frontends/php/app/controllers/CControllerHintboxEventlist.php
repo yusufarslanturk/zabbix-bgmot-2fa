@@ -96,8 +96,8 @@ class CControllerHintboxEventlist extends CController {
 	}
 
 	protected function doAction() {
-		$resolved_triggers = CMacrosResolverHelper::resolveTriggerUrls([$this->trigger]);
-		$trigger = $resolved_triggers[0];
+		$resolved_triggers = CMacrosResolverHelper::resolveTriggerUrls([$this->trigger['triggerid'] => $this->trigger]);
+		$trigger = reset($resolved_triggers);
 
 		$options = [
 			'output' => ['eventid', 'r_eventid', 'clock', 'ns', 'acknowledged'],
@@ -105,7 +105,7 @@ class CControllerHintboxEventlist extends CController {
 			'source' => EVENT_SOURCE_TRIGGERS,
 			'object' => EVENT_OBJECT_TRIGGER,
 			'eventid_till' => $this->getInput('eventid_till'),
-			'objectids' => $this->getInput('triggerid'),
+			'objectids' => $this->trigger['triggerid'],
 			'value' => TRIGGER_VALUE_TRUE,
 			'sortfield' => ['eventid'],
 			'sortorder' => ZBX_SORT_DOWN,
