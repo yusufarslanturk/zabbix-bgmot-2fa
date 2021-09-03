@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-20 19:50+0300\n"
+"POT-Creation-Date: 2021-09-03 19:50+0300\n"
 "PO-Revision-Date: 2021-01-22 16:26+0300\n"
 "Last-Translator: Imagunet <soporte@imagunet.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -7062,7 +7062,7 @@ msgstr ""
 
 #: include/classes/api/services/CDashboard.php:693
 #: include/classes/api/services/CScript.php:459
-#: include/classes/api/services/CUserGroup.php:445
+#: include/classes/api/services/CUserGroup.php:438
 #, c-format
 msgid "Host group with ID \"%1$s\" is not available."
 msgstr ""
@@ -8654,7 +8654,7 @@ msgstr ""
 #: include/classes/api/services/CTriggerGeneral.php:716
 #: include/classes/api/services/CTriggerGeneral.php:723
 #: include/classes/api/services/CTriggerGeneral.php:729
-#: include/classes/api/services/CUserGroup.php:463
+#: include/classes/api/services/CUserGroup.php:456
 #: include/classes/api/services/CUser.php:536
 #: include/classes/graphdraw/CLineGraphDraw.php:112
 #: include/classes/graphdraw/CLineGraphDraw.php:240
@@ -11493,8 +11493,8 @@ msgstr ""
 #: include/classes/api/services/CTriggerPrototype.php:522
 #: include/classes/api/services/CTriggerPrototype.php:700
 #: include/classes/api/services/CTriggerPrototype.php:718
-#: include/classes/api/services/CUserGroup.php:329
-#: include/classes/api/services/CUserGroup.php:876
+#: include/classes/api/services/CUserGroup.php:322
+#: include/classes/api/services/CUserGroup.php:869
 #: include/classes/api/services/CUserMacro.php:373
 #: include/classes/api/services/CUserMacro.php:460
 #: include/classes/api/services/CUserMacro.php:780
@@ -11996,7 +11996,7 @@ msgstr ""
 msgid "Only Super Admins can create media types."
 msgstr ""
 
-#: include/classes/api/services/CUserGroup.php:205
+#: include/classes/api/services/CUserGroup.php:198
 msgid "Only Super Admins can create user groups."
 msgstr ""
 
@@ -12004,7 +12004,7 @@ msgstr ""
 msgid "Only Super Admins can delete media types."
 msgstr ""
 
-#: include/classes/api/services/CUserGroup.php:856
+#: include/classes/api/services/CUserGroup.php:849
 msgid "Only Super Admins can delete user groups."
 msgstr ""
 
@@ -12012,7 +12012,7 @@ msgstr ""
 msgid "Only Super Admins can edit media types."
 msgstr ""
 
-#: include/classes/api/services/CUserGroup.php:292
+#: include/classes/api/services/CUserGroup.php:285
 msgid "Only Super Admins can update user groups."
 msgstr ""
 
@@ -16813,7 +16813,7 @@ msgstr "Usado en elementos"
 msgid "User"
 msgstr "Usuario"
 
-#: include/classes/api/services/CUserGroup.php:610
+#: include/classes/api/services/CUserGroup.php:603
 #, c-format
 msgid "User \"%1$s\" cannot be without user group."
 msgstr ""
@@ -16859,7 +16859,7 @@ msgstr ""
 msgid "User can't change type for himself"
 msgstr "Los usuarios no se pueden cambiar a sí mismos"
 
-#: include/classes/api/services/CUserGroup.php:535
+#: include/classes/api/services/CUserGroup.php:528
 #: include/classes/api/services/CUser.php:739
 msgid "User cannot add himself to a disabled group or a group with disabled GUI access."
 msgstr ""
@@ -16882,22 +16882,22 @@ msgstr "Usuario eliminado"
 msgid "User group"
 msgstr "Un grupo de usuarios"
 
-#: include/classes/api/services/CUserGroup.php:365
+#: include/classes/api/services/CUserGroup.php:358
 #, c-format
 msgid "User group \"%1$s\" already exists."
 msgstr ""
 
-#: include/classes/api/services/CUserGroup.php:897
+#: include/classes/api/services/CUserGroup.php:890
 #, c-format
 msgid "User group \"%1$s\" is used in \"%2$s\" action."
 msgstr ""
 
-#: include/classes/api/services/CUserGroup.php:920
+#: include/classes/api/services/CUserGroup.php:913
 #, c-format
 msgid "User group \"%1$s\" is used in configuration for database down messages."
 msgstr ""
 
-#: include/classes/api/services/CUserGroup.php:910
+#: include/classes/api/services/CUserGroup.php:903
 #, c-format
 msgid "User group \"%1$s\" is used in script \"%2$s\"."
 msgstr ""
@@ -17027,7 +17027,7 @@ msgstr "Usuario actualizado"
 
 #: app/controllers/CControllerDashboardPropertiesCheck.php:73
 #: include/classes/api/services/CDashboard.php:488
-#: include/classes/api/services/CUserGroup.php:402
+#: include/classes/api/services/CUserGroup.php:395
 #, c-format
 msgid "User with ID \"%1$s\" is not available."
 msgstr ""
@@ -18353,7 +18353,7 @@ msgstr ""
 #: include/classes/api/services/CProxy.php:584
 #: include/classes/api/services/CTriggerGeneral.php:690
 #: include/classes/api/services/CTriggerGeneral.php:723
-#: include/classes/api/services/CUserGroup.php:463
+#: include/classes/api/services/CUserGroup.php:456
 #: include/classes/api/services/CUser.php:536
 #: include/classes/api/services/CUser.php:679
 #: include/classes/validators/CApiInputValidator.php:272
@@ -19121,7 +19121,7 @@ msgstr ""
 
 #: app/views/monitoring.problem.view.js.php:18
 #: app/views/monitoring.problem.view.php:237
-#: include/classes/api/services/CUserGroup.php:463
+#: include/classes/api/services/CUserGroup.php:456
 #: include/classes/widgets/CWidgetHelper.php:409
 #: include/classes/widgets/CWidgetHelper.php:456
 #: include/views/administration.usergroups.edit.php:242
