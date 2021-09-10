@@ -1378,7 +1378,7 @@ int	zbx_user_macro_parse(const char *macro, int *macro_r, int *context_l, int *c
 int	zbx_user_macro_parse_dyn(const char *macro, char **name, char **context, int *length,
 		unsigned char *context_op);
 char	*zbx_user_macro_unquote_context_dyn(const char *context, int len);
-char	*zbx_user_macro_quote_context_dyn(const char *context, int force_quote);
+char	*zbx_user_macro_quote_context_dyn(const char *context, int force_quote, char **error);
 
 #define ZBX_SESSION_ACTIVE		0
 #define ZBX_SESSION_PASSIVE		1
@@ -1704,5 +1704,9 @@ int	zbx_get_report_nextcheck(int now, unsigned char cycle, unsigned char weekday
 /* */
 char	*zbx_substr(const char *src, size_t left, size_t right);
 char	*zbx_substr_unquote(const char *src, size_t left, size_t right);
+
+/* UTF-8 trimming */
+void	zbx_ltrim_utf8(char *str, const char *charlist);
+void	zbx_rtrim_utf8(char *str, const char *charlist);
 
 #endif
