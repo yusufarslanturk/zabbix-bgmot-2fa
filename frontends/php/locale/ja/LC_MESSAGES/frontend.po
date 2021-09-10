@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 19:50+0300\n"
+"POT-Creation-Date: 2021-09-10 19:50+0300\n"
 "PO-Revision-Date: 2021-03-23 11:18+0300\n"
 "Last-Translator: Atsushi <a.tanaka77@gmail.com>\n"
 "Language-Team: Zabbix\n"
@@ -61,7 +61,7 @@ msgid "%1$d day"
 msgid_plural "%1$d days"
 msgstr[0] "%1$d 日"
 
-#: jsLoader.php:243
+#: jsLoader.php:225
 #, c-format
 msgctxt "screen reader"
 msgid "%1$d matches for %2$s found"
@@ -122,8 +122,8 @@ msgstr[0] "メッセージ%1$s件"
 #: include/classes/widgets/CWidgetConfig.php:155
 #: include/classes/widgets/CWidgetConfig.php:156
 #: include/classes/widgets/CWidgetConfig.php:157
-#: include/classes/widgets/CWidgetConfig.php:158 jsLoader.php:284
-#: jsLoader.php:285 jsLoader.php:286 jsLoader.php:287
+#: include/classes/widgets/CWidgetConfig.php:158 jsLoader.php:266
+#: jsLoader.php:267 jsLoader.php:268 jsLoader.php:269
 #, c-format
 msgid "%1$s minute"
 msgid_plural "%1$s minutes"
@@ -135,7 +135,7 @@ msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
 msgstr[0] "%2$s台中%1$s台の要素で障害発生中"
 
-#: jsLoader.php:244
+#: jsLoader.php:226
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s preselected, use down,up arrow keys and enter to select"
@@ -162,8 +162,8 @@ msgid_plural "%1$s retries left"
 msgstr[0] "リトライ残り%1$s回"
 
 #: include/classes/widgets/CWidgetConfig.php:153
-#: include/classes/widgets/CWidgetConfig.php:154 jsLoader.php:282
-#: jsLoader.php:283
+#: include/classes/widgets/CWidgetConfig.php:154 jsLoader.php:264
+#: jsLoader.php:265
 #, c-format
 msgid "%1$s second"
 msgid_plural "%1$s seconds"
@@ -182,13 +182,13 @@ msgctxt "screen reader"
 msgid "%1$s, Severity, %2$s"
 msgstr "%1$sの深刻度は%2$s"
 
-#: jsLoader.php:238
+#: jsLoader.php:220
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, read only"
 msgstr "%1$sは読み込み専用です"
 
-#: jsLoader.php:288
+#: jsLoader.php:270
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, selected"
@@ -322,7 +322,7 @@ msgstr "アクセスは拒否されました！"
 msgid "Ack"
 msgstr "確認済"
 
-#: app/views/monitoring.acknowledge.edit.php:72 jsLoader.php:248
+#: app/views/monitoring.acknowledge.edit.php:72 jsLoader.php:230
 msgid "Acknowledge"
 msgstr "障害確認"
 
@@ -471,7 +471,7 @@ msgstr "アクションを更新しました"
 #: include/views/configuration.action.list.php:23
 #: include/views/monitoring.screen.list.php:81
 #: include/views/monitoring.slideconf.list.php:66
-#: include/views/monitoring.sysmap.list.php:61 jsLoader.php:247
+#: include/views/monitoring.sysmap.list.php:61 jsLoader.php:229
 #: tr_events.php:146
 msgid "Actions"
 msgstr "アクション"
@@ -640,12 +640,12 @@ msgstr "設定有効期間の終了日時"
 #: include/views/monitoring.sysmap.edit.php:274
 #: include/views/monitoring.sysmap.edit.php:294
 #: include/views/monitoring.sysmap.edit.php:330
-#: include/views/monitoring.sysmap.edit.php:398 jsLoader.php:115
-#: jsLoader.php:300
+#: include/views/monitoring.sysmap.edit.php:398 jsLoader.php:97
+#: jsLoader.php:282
 msgid "Add"
 msgstr "追加"
 
-#: jsLoader.php:123
+#: jsLoader.php:105
 msgid "Add a new widget"
 msgstr "新しいウィジェットを追加"
 
@@ -653,7 +653,7 @@ msgstr "新しいウィジェットを追加"
 msgid "Add child"
 msgstr "子を追加"
 
-#: jsLoader.php:302
+#: jsLoader.php:284
 msgid "Add child element"
 msgstr "子の要素を追加"
 
@@ -661,7 +661,7 @@ msgstr "子の要素を追加"
 msgid "Add host"
 msgstr "ホストを追加"
 
-#: jsLoader.php:303
+#: jsLoader.php:285
 msgid "Add multiple maps"
 msgstr "複数のマップを追加"
 
@@ -703,7 +703,7 @@ msgstr "ホストグループに追加"
 msgid "Add to host groups"
 msgstr "ホストグループに追加"
 
-#: app/views/monitoring.dashboard.view.php:97 jsLoader.php:113
+#: app/views/monitoring.dashboard.view.php:97 jsLoader.php:95
 msgid "Add widget"
 msgstr "ウィジェットの追加"
 
@@ -711,13 +711,13 @@ msgstr "ウィジェットの追加"
 msgid "Added"
 msgstr "追加"
 
-#: jsLoader.php:236
+#: jsLoader.php:218
 #, c-format
 msgctxt "screen reader"
 msgid "Added, %1$s"
 msgstr "%1$sを追加しました"
 
-#: jsLoader.php:126
+#: jsLoader.php:108
 msgid "Adjust widget refresh interval"
 msgstr "ウィジェットのリフレッシュ間隔調整"
 
@@ -824,7 +824,7 @@ msgstr "すべてのグループ"
 msgid "All hosts"
 msgstr "すべてのホスト"
 
-#: jsLoader.php:198
+#: jsLoader.php:180
 msgid "All links should have \"Name\" and \"URL\" specified"
 msgstr "すべてのリンクに\"名前\"と\"URL\"を設定する必要があります"
 
@@ -996,8 +996,8 @@ msgstr "アプリケーション"
 #: include/views/js/monitoring.sysmaps.js.php:419
 #: include/views/js/monitoring.sysmaps.js.php:539
 #: include/views/js/monitoring.sysmaps.js.php:634
-#: include/views/js/monitoring.sysmaps.js.php:734 jsLoader.php:114
-#: jsLoader.php:299
+#: include/views/js/monitoring.sysmaps.js.php:734 jsLoader.php:96
+#: jsLoader.php:281
 msgid "Apply"
 msgstr "適用"
 
@@ -1016,7 +1016,7 @@ msgid "Apr"
 msgstr "4月"
 
 #: include/forms.inc.php:1972 include/func.inc.php:119
-#: include/func.inc.php:256 jsLoader.php:150
+#: include/func.inc.php:256 jsLoader.php:132
 msgid "April"
 msgstr "4月"
 
@@ -1028,7 +1028,7 @@ msgstr "この操作を実行しても良いですか？"
 msgid "Are you sure you want to delete"
 msgstr "次の件数のマクロを削除します"
 
-#: jsLoader.php:120
+#: jsLoader.php:102
 msgid "Are you sure, you want to leave this page?"
 msgstr "本当にこのページから遷移しますか？"
 
@@ -1166,7 +1166,7 @@ msgid "Aug"
 msgstr "8月"
 
 #: include/forms.inc.php:1959 include/func.inc.php:123
-#: include/func.inc.php:260 jsLoader.php:154
+#: include/func.inc.php:260 jsLoader.php:136
 msgid "August"
 msgstr "8月"
 
@@ -1398,11 +1398,11 @@ msgstr "境界幅"
 msgid "Bottom"
 msgstr "下"
 
-#: jsLoader.php:190
+#: jsLoader.php:172
 msgid "Bring forward"
 msgstr "前面へ"
 
-#: jsLoader.php:189
+#: jsLoader.php:171
 msgid "Bring to front"
 msgstr "最前面へ"
 
@@ -1428,7 +1428,7 @@ msgstr "証明書"
 
 #: app/views/hintbox.eventlist.php:110
 #: app/views/monitoring.widget.problems.view.php:93
-#: include/classes/graph/CSvgGraph.php:980
+#: include/classes/graph/CSvgGraph.php:986
 #: include/classes/screens/CScreenEvents.php:116
 #: include/classes/screens/CScreenProblem.php:945
 #: include/classes/screens/CScreenProblem.php:1109 include/events.inc.php:335
@@ -1475,7 +1475,7 @@ msgstr "引数に基づいて最小値を計算。Zabbixサーバーは直接デ
 msgid "Calculates the sum of values, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
 msgstr "引数に基づいて合計値を計算。Zabbixサーバーは直接データベークエリを実行して情報を収集する。"
 
-#: jsLoader.php:146
+#: jsLoader.php:128
 msgid "Calendar"
 msgstr "カレンダー"
 
@@ -1483,7 +1483,7 @@ msgstr "カレンダー"
 msgid "Callback"
 msgstr "コールバック"
 
-#: jsLoader.php:239
+#: jsLoader.php:221
 msgctxt "screen reader"
 msgid "Can not be removed"
 msgstr "削除できません"
@@ -1515,8 +1515,8 @@ msgstr "カナダ (136文字)"
 #: include/views/js/configuration.discovery.edit.js.php:645
 #: include/views/js/configuration.discovery.edit.js.php:675
 #: include/views/js/conf.import.js.php:16
-#: include/views/monitoring.slideconf.edit.php:277 jsLoader.php:117
-#: jsLoader.php:131 jsLoader.php:301 jsLoader.php:313
+#: include/views/monitoring.slideconf.edit.php:277 jsLoader.php:99
+#: jsLoader.php:113 jsLoader.php:283 jsLoader.php:295
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -1706,11 +1706,11 @@ msgstr "値のマッピングを追加できません"
 msgid "Cannot add web scenario"
 msgstr "Webシナリオを追加できません"
 
-#: jsLoader.php:128
+#: jsLoader.php:110
 msgid "Cannot add widget: not enough free space on the dashboard."
 msgstr "ウィジェットが追加できません: ダッシュボードの空き領域が足りません。"
 
-#: jsLoader.php:121
+#: jsLoader.php:103
 msgid "Cannot add widgets in kiosk mode"
 msgstr "閲覧モードではウィジェットを追加できません"
 
@@ -2180,7 +2180,7 @@ msgstr[0] "Webシナリオを有効にできません"
 msgid "Cannot execute script"
 msgstr "スクリプトを実行できません"
 
-#: jsLoader.php:201
+#: jsLoader.php:183
 msgid "Cannot expand macros."
 msgstr "マクロを展開できません。"
 
@@ -2509,7 +2509,7 @@ msgstr "無効の状態のインベントリのフィールドは設定できま
 msgid "Cannot set resource ID for screen element."
 msgstr "スクリーンの要素のリソースIDが設定できません。"
 
-#: jsLoader.php:209
+#: jsLoader.php:191
 msgid "Cannot support notification audio for this device."
 msgstr "このデバイスでは音声通知をサポートしません。"
 
@@ -3051,7 +3051,7 @@ msgstr "テンプレート%1$sに循環参照が存在します。"
 msgid "Circular template linkage is not allowed."
 msgstr "テンプレートの循環リンクは行えません。"
 
-#: jsLoader.php:211
+#: jsLoader.php:193
 msgid "Clear"
 msgstr "クリア"
 
@@ -3069,7 +3069,7 @@ msgstr "ヒストリとトレンドを削除"
 msgid "Clear when unlinking"
 msgstr "リンク削除時にクリア"
 
-#: jsLoader.php:125
+#: jsLoader.php:107
 msgid "Click and drag to desired size."
 msgstr "希望のサイズにクリックしてドラッグします。"
 
@@ -3101,7 +3101,7 @@ msgstr "時刻"
 #: include/views/configuration.triggers.edit.php:644
 #: include/views/monitoring.screen.edit.php:222
 #: include/views/monitoring.slideconf.edit.php:275
-#: include/views/monitoring.sysmap.edit.php:389 jsLoader.php:250
+#: include/views/monitoring.sysmap.edit.php:389 jsLoader.php:232
 msgid "Clone"
 msgstr "複製"
 
@@ -3109,8 +3109,8 @@ msgstr "複製"
 #: include/views/js/monitoring.sysmaps.js.php:426
 #: include/views/js/monitoring.sysmaps.js.php:546
 #: include/views/js/monitoring.sysmaps.js.php:641
-#: include/views/js/monitoring.sysmaps.js.php:738 jsLoader.php:132
-#: jsLoader.php:228 jsLoader.php:306
+#: include/views/js/monitoring.sysmaps.js.php:738 jsLoader.php:114
+#: jsLoader.php:210 jsLoader.php:288
 msgid "Close"
 msgstr "閉じる"
 
@@ -3134,8 +3134,8 @@ msgid "Close problem"
 msgstr "障害のクローズ"
 
 #: include/classes/html/CCollapsibleUiWidget.php:54
-#: include/classes/widgets/CWidgetHelper.php:906 jsLoader.php:222
-#: jsLoader.php:227
+#: include/classes/widgets/CWidgetHelper.php:906 jsLoader.php:204
+#: jsLoader.php:209
 msgid "Collapse"
 msgstr "縮小"
 
@@ -3148,7 +3148,7 @@ msgid "Colour"
 msgstr "色"
 
 #: include/classes/validators/CColorValidator.php:32
-#: include/validate.inc.php:208 jsLoader.php:203
+#: include/validate.inc.php:208 jsLoader.php:185
 #, c-format
 msgid "Colour \"%1$s\" is not correct: expecting hexadecimal colour code (6 symbols)."
 msgstr "色\"%1$s\"の設定が正しくありません: 16進数のカラーコードを指定してください(6文字)。"
@@ -3262,7 +3262,7 @@ msgid "Conditions duplicates for correlation \"%1$s\"."
 msgstr "相関関係\"%1$s\"の実行条件が重複しています。"
 
 #: include/menu.inc.php:175 include/views/inventory.host.view.php:179
-#: jsLoader.php:249
+#: jsLoader.php:231
 msgid "Configuration"
 msgstr "設定"
 
@@ -3639,7 +3639,7 @@ msgstr "座標"
 #: include/views/configuration.copy.elements.php:73
 #: include/views/configuration.graph.list.php:150
 #: include/views/configuration.item.list.php:254
-#: include/views/configuration.triggers.list.php:301 jsLoader.php:195
+#: include/views/configuration.triggers.list.php:301 jsLoader.php:177
 msgid "Copy"
 msgstr "コピー"
 
@@ -3744,7 +3744,7 @@ msgstr "相関関係の作成"
 msgid "Create dashboard"
 msgstr "ダッシュボードの作成"
 
-#: jsLoader.php:253
+#: jsLoader.php:235
 msgid "Create dependent item"
 msgstr "依存アイテムの作成"
 
@@ -3844,7 +3844,7 @@ msgstr "マップの作成"
 msgid "Create media type"
 msgstr "メディアタイプの作成"
 
-#: include/views/conf.import.php:25 jsLoader.php:251
+#: include/views/conf.import.php:25 jsLoader.php:233
 msgid "Create new"
 msgstr "新規作成"
 
@@ -3869,7 +3869,7 @@ msgid "Create template"
 msgstr "テンプレートの作成"
 
 #: include/views/configuration.triggers.list.php:28
-#: include/views/configuration.triggers.list.php:135 jsLoader.php:252
+#: include/views/configuration.triggers.list.php:135 jsLoader.php:234
 msgid "Create trigger"
 msgstr "トリガーの作成"
 
@@ -4213,7 +4213,7 @@ msgid "Dec"
 msgstr "12月"
 
 #: include/forms.inc.php:1991 include/func.inc.php:127
-#: include/func.inc.php:264 jsLoader.php:158
+#: include/func.inc.php:264 jsLoader.php:140
 msgid "December"
 msgstr "12月"
 
@@ -4226,7 +4226,7 @@ msgstr "12月"
 #: include/views/inventory.host.view.php:75
 #: include/views/js/monitoring.sysmaps.js.php:118
 #: include/views/js/monitoring.sysmaps.js.php:220
-#: include/views/js/monitoring.sysmaps.js.php:593 jsLoader.php:184
+#: include/views/js/monitoring.sysmaps.js.php:593 jsLoader.php:166
 msgid "Default"
 msgstr "標準"
 
@@ -4322,8 +4322,8 @@ msgstr "遅延時間"
 #: include/views/configuration.triggers.list.php:303
 #: include/views/monitoring.screen.list.php:126
 #: include/views/monitoring.slideconf.list.php:97
-#: include/views/monitoring.sysmap.list.php:99 jsLoader.php:118
-#: jsLoader.php:254
+#: include/views/monitoring.sysmap.list.php:99 jsLoader.php:100
+#: jsLoader.php:236
 msgid "Delete"
 msgstr "削除"
 
@@ -4356,7 +4356,7 @@ msgstr "現在のアクションを削除しますか？"
 msgid "Delete current correlation?"
 msgstr "現在の相関関係を削除しますか？"
 
-#: jsLoader.php:255
+#: jsLoader.php:237
 msgid "Delete dashboard?"
 msgstr "ダッシュボードを削除しますか？"
 
@@ -4400,7 +4400,7 @@ msgstr "アイテムのプロトタイプを削除しますか？"
 msgid "Delete item?"
 msgstr "アイテムを削除しますか？"
 
-#: jsLoader.php:200
+#: jsLoader.php:182
 msgid "Delete links between selected elements?"
 msgstr "選択した要素間のリンクを削除しますか？"
 
@@ -4453,7 +4453,7 @@ msgstr "選択したダッシュボードを削除しますか？"
 msgid "Delete selected discovery rules?"
 msgstr "選択したディスカバリルールを削除しますか？"
 
-#: jsLoader.php:187
+#: jsLoader.php:169
 msgid "Delete selected elements?"
 msgstr "選択した要素を削除しますか？"
 
@@ -4538,7 +4538,7 @@ msgstr "選択したスクリーンを削除しますか？"
 msgid "Delete selected scripts?"
 msgstr "選択したスクリプトを削除しますか？"
 
-#: jsLoader.php:188
+#: jsLoader.php:170
 msgid "Delete selected shapes?"
 msgstr "選択した図形を削除しますか？"
 
@@ -4683,7 +4683,7 @@ msgstr "配布ステータス"
 #: include/views/configuration.template.edit.php:108
 #: include/views/configuration.trigger.prototype.edit.php:536
 #: include/views/configuration.triggers.edit.php:570
-#: include/views/inventory.host.view.php:123 jsLoader.php:256
+#: include/views/inventory.host.view.php:123 jsLoader.php:238
 msgid "Description"
 msgstr "説明"
 
@@ -5038,7 +5038,7 @@ msgstr "積算グラフ表示"
 
 #: app/controllers/CControllerHintboxActionlist.php:94
 #: include/actions.inc.php:1792 include/actions.inc.php:1865
-#: include/func.inc.php:1703 jsLoader.php:309 queue.php:298 search.php:238
+#: include/func.inc.php:1703 jsLoader.php:291 queue.php:298 search.php:238
 #: search.php:338 search.php:480
 #, c-format
 msgid "Displaying %1$s of %2$s found"
@@ -5069,7 +5069,7 @@ msgstr "ヒストリを保存しない"
 msgid "Do not keep trends"
 msgstr "トレンドを保存しない"
 
-#: jsLoader.php:140 jsLoader.php:257
+#: jsLoader.php:122 jsLoader.php:239
 msgid "Do you wish to replace the conditional expression?"
 msgstr "条件式を置き換えますか？"
 
@@ -5235,7 +5235,7 @@ msgstr "ダイナミックアイテム"
 msgid "Dynamic items"
 msgstr "ダイナミックアイテム"
 
-#: jsLoader.php:199
+#: jsLoader.php:181
 msgid "Each URL should have a unique name. Please make sure there is only one URL named"
 msgstr "各URLの名前は重複できません。同じURL名が使用されていないか確認してください"
 
@@ -5252,8 +5252,8 @@ msgstr "各URLの名前は重複できません。同じURL名が使用されて
 #: include/views/configuration.triggers.edit.php:323
 #: include/views/js/configuration.discovery.edit.js.php:7
 #: include/views/js/monitoring.sysmaps.js.php:755
-#: include/views/js/monitoring.sysmaps.js.php:770 jsLoader.php:116
-#: jsLoader.php:295
+#: include/views/js/monitoring.sysmaps.js.php:770 jsLoader.php:98
+#: jsLoader.php:277
 msgid "Edit"
 msgstr "変更"
 
@@ -5273,15 +5273,15 @@ msgstr "スクリーンの変更"
 msgid "Edit slide show"
 msgstr "スライドショーの変更"
 
-#: jsLoader.php:298
+#: jsLoader.php:280
 msgid "Edit tree element"
 msgstr "ツリー要素の変更"
 
-#: jsLoader.php:258
+#: jsLoader.php:240
 msgid "Edit trigger"
 msgstr "トリガーの変更"
 
-#: jsLoader.php:112
+#: jsLoader.php:94
 msgid "Edit widget"
 msgstr "ウィジェットの変更"
 
@@ -5646,7 +5646,7 @@ msgstr "エラー"
 msgid "Error in search request for table \"%1$s\"."
 msgstr "テーブル\"%1$s\"の検索リクエストに失敗しました。"
 
-#: include/func.inc.php:1938 jsLoader.php:142
+#: include/func.inc.php:1938 jsLoader.php:124
 msgid "Error message"
 msgstr "エラーメッセージ"
 
@@ -5733,7 +5733,7 @@ msgstr "含めない"
 msgid "Exclude host groups"
 msgstr "除外するホストグループ"
 
-#: jsLoader.php:133
+#: jsLoader.php:115
 msgid "Execute"
 msgstr "実行"
 
@@ -5768,13 +5768,13 @@ msgstr "実行"
 msgid "Executed script"
 msgstr "実行するスクリプト"
 
-#: jsLoader.php:134
+#: jsLoader.php:116
 msgid "Execution confirmation"
 msgstr "実行の確認"
 
 #: include/classes/html/CCollapsibleUiWidget.php:59
-#: include/classes/widgets/CWidgetHelper.php:906 jsLoader.php:223
-#: jsLoader.php:226
+#: include/classes/widgets/CWidgetHelper.php:906 jsLoader.php:205
+#: jsLoader.php:208
 msgid "Expand"
 msgstr "展開"
 
@@ -5870,7 +5870,7 @@ msgstr "外部チェック"
 msgid "Ez Texting"
 msgstr "Ez Texting"
 
-#: jsLoader.php:170
+#: jsLoader.php:152
 msgctxt "Friday short"
 msgid "F"
 msgstr "F"
@@ -5936,7 +5936,7 @@ msgid "Feb"
 msgstr "2月"
 
 #: include/forms.inc.php:1956 include/func.inc.php:117
-#: include/func.inc.php:254 jsLoader.php:148
+#: include/func.inc.php:254 jsLoader.php:130
 msgid "February"
 msgstr "2月"
 
@@ -6193,7 +6193,7 @@ msgid "Fri"
 msgstr "金"
 
 #: include/forms.inc.php:1924 include/forms.inc.php:2039
-#: include/func.inc.php:139 include/func.inc.php:229 jsLoader.php:163
+#: include/func.inc.php:139 include/func.inc.php:229 jsLoader.php:145
 msgid "Friday"
 msgstr "金曜"
 
@@ -6316,7 +6316,7 @@ msgstr "グローバル値"
 msgid "Go back to %1$s"
 msgstr "%1$sに戻る"
 
-#: jsLoader.php:263
+#: jsLoader.php:245
 msgid "Go to"
 msgstr "次のページへ移動"
 
@@ -6514,7 +6514,7 @@ msgstr "同じ名前で異なるタイプのグラフが存在します。"
 #: include/views/conf.import.php:37 include/views/inventory.host.view.php:148
 #: include/views/inventory.host.view.php:163
 #: include/views/inventory.host.view.php:174
-#: include/views/monitoring.charts.php:63 jsLoader.php:264 search.php:130
+#: include/views/monitoring.charts.php:63 jsLoader.php:246 search.php:130
 #: search.php:136 search.php:172 search.php:191 search.php:221 search.php:273
 #: search.php:327 search.php:393 search.php:427 search.php:450
 msgid "Graphs"
@@ -6731,7 +6731,7 @@ msgstr "ヘルプ"
 msgid "Hexadecimal to decimal"
 msgstr "16進数から10進数"
 
-#: include/views/monitoring.sysmap.constructor.php:54 jsLoader.php:177
+#: include/views/monitoring.sysmap.constructor.php:54 jsLoader.php:159
 msgid "Hidden"
 msgstr "非表示"
 
@@ -6781,7 +6781,7 @@ msgstr "行を強調表示"
 #: include/views/administration.general.housekeeper.edit.php:117
 #: include/views/configuration.item.list.php:67
 #: include/views/configuration.item.prototype.list.php:55 items.php:242
-#: jsLoader.php:265 latest.php:407 latest.php:544 latest.php:696
+#: jsLoader.php:247 latest.php:407 latest.php:544 latest.php:696
 msgid "History"
 msgstr "ヒストリ"
 
@@ -6872,7 +6872,7 @@ msgstr "横位置"
 #: include/views/monitoring.screen.php:78
 #: include/views/monitoring.slides.php:75
 #: include/views/reports.toptriggers.php:79 items.php:921 items.php:1311
-#: jsLoader.php:179 latest.php:404 latest.php:421 queue.php:263
+#: jsLoader.php:161 latest.php:404 latest.php:421 queue.php:263
 #: report2.php:432 report2.php:455 search.php:125
 msgid "Host"
 msgid_plural "Hosts"
@@ -6952,7 +6952,7 @@ msgstr[0] "ホストを有効にしました"
 #: include/views/js/configuration.action.edit.js.php:200
 #: include/views/js/monitoring.sysmaps.js.php:71
 #: include/views/js/monitoring.sysmaps.js.php:77
-#: include/views/js/monitoring.sysmaps.js.php:125 jsLoader.php:182
+#: include/views/js/monitoring.sysmaps.js.php:125 jsLoader.php:164
 #: report2.php:393 report2.php:431 search.php:270
 msgid "Host group"
 msgstr "ホストグループ"
@@ -7028,7 +7028,7 @@ msgstr "ホストインターフェース"
 #: include/views/configuration.host.edit.php:504
 #: include/views/configuration.host.prototype.edit.php:373
 #: include/views/inventory.host.list.php:23
-#: include/views/inventory.host.view.php:221 jsLoader.php:266
+#: include/views/inventory.host.view.php:221 jsLoader.php:248
 msgid "Host inventory"
 msgstr "ホストインベントリ"
 
@@ -7117,7 +7117,7 @@ msgstr "ホストのプロトタイプを削除しました"
 msgid "Host router"
 msgstr "ホストルータ"
 
-#: host_screen.php:27 jsLoader.php:267
+#: host_screen.php:27 jsLoader.php:249
 msgid "Host screens"
 msgstr "ホストスクリーン"
 
@@ -7399,7 +7399,7 @@ msgstr "このメッセージが間違っている場合は、必要な権限を
 #: include/maps.inc.php:623
 #: include/views/administration.general.image.edit.php:56
 #: include/views/administration.general.image.edit.php:59
-#: include/views/js/monitoring.sysmaps.js.php:72 jsLoader.php:183
+#: include/views/js/monitoring.sysmaps.js.php:72 jsLoader.php:165
 msgid "Image"
 msgstr "イメージ"
 
@@ -8672,7 +8672,7 @@ msgid "Insert"
 msgstr "挿入"
 
 #: include/views/configuration.trigger.prototype.edit.php:111
-#: include/views/configuration.triggers.edit.php:136 jsLoader.php:259
+#: include/views/configuration.triggers.edit.php:136 jsLoader.php:241
 msgid "Insert expression"
 msgstr "条件式の挿入"
 
@@ -9445,7 +9445,7 @@ msgid "Jan"
 msgstr "1月"
 
 #: include/forms.inc.php:1948 include/func.inc.php:116
-#: include/func.inc.php:253 jsLoader.php:147
+#: include/func.inc.php:253 jsLoader.php:129
 msgid "January"
 msgstr "1月"
 
@@ -9458,7 +9458,7 @@ msgid "Jul"
 msgstr "7月"
 
 #: include/forms.inc.php:1951 include/func.inc.php:122
-#: include/func.inc.php:259 jsLoader.php:153
+#: include/func.inc.php:259 jsLoader.php:135
 msgid "July"
 msgstr "7月"
 
@@ -9467,7 +9467,7 @@ msgid "Jun"
 msgstr "6月"
 
 #: include/forms.inc.php:1988 include/func.inc.php:121
-#: include/func.inc.php:258 jsLoader.php:152
+#: include/func.inc.php:258 jsLoader.php:134
 msgid "June"
 msgstr "6月"
 
@@ -9633,11 +9633,11 @@ msgstr "最新の変更 (降順)"
 msgid "Last check"
 msgstr "最新のチェック時刻"
 
-#: jsLoader.php:270
+#: jsLoader.php:252
 msgid "Last hour graph"
 msgstr "最新1時間のグラフ"
 
-#: jsLoader.php:271
+#: jsLoader.php:253
 msgid "Last month graph"
 msgstr "最新1ヶ月のグラフ"
 
@@ -9660,18 +9660,18 @@ msgstr "最新データ受信時刻 (経過時間)"
 msgid "Last value"
 msgstr "最新の値"
 
-#: jsLoader.php:272
+#: jsLoader.php:254
 msgid "Last week graph"
 msgstr "最新1週間のグラフ"
 
 #: include/menu.inc.php:68 include/views/inventory.host.view.php:134
-#: jsLoader.php:268 latest.php:26 latest.php:306 search.php:128 search.php:214
+#: jsLoader.php:250 latest.php:26 latest.php:306 search.php:128 search.php:214
 #: search.php:271 search.php:320
 msgid "Latest data"
 msgstr "最新データ"
 
 #: app/views/monitoring.widget.problems.view.php:60 include/blocks.inc.php:552
-#: include/classes/screens/CScreenProblem.php:868 jsLoader.php:269
+#: include/classes/screens/CScreenProblem.php:868 jsLoader.php:251
 msgid "Latest values"
 msgstr "最新の値"
 
@@ -9947,7 +9947,7 @@ msgstr "ローレベルディスカバリが\"取得不可\"の状態"
 msgid "M"
 msgstr "M"
 
-#: jsLoader.php:166
+#: jsLoader.php:148
 msgctxt "Monday short"
 msgid "M"
 msgstr "M"
@@ -10134,7 +10134,7 @@ msgstr "手動クローズ済"
 #: include/screens.inc.php:34 include/views/js/monitoring.sysmaps.js.php:69
 #: include/views/js/monitoring.sysmaps.js.php:182
 #: include/views/monitoring.screen.constructor.edit.php:385
-#: include/views/monitoring.sysmap.edit.php:287 jsLoader.php:180 map.php:25
+#: include/views/monitoring.sysmap.edit.php:287 jsLoader.php:162 map.php:25
 msgid "Map"
 msgstr "マップ"
 
@@ -10229,7 +10229,7 @@ msgid "Mar"
 msgstr "3月"
 
 #: include/forms.inc.php:1964 include/func.inc.php:118
-#: include/func.inc.php:255 jsLoader.php:149
+#: include/func.inc.php:255 jsLoader.php:131
 msgid "March"
 msgstr "3月"
 
@@ -10322,7 +10322,7 @@ msgid "Maximum total length of email address exceeded for media type with ID \"%
 msgstr "ID \"%1$s\"のメディアタイプのメールアドレスが最大長を超えています。"
 
 #: include/forms.inc.php:1980 include/func.inc.php:120
-#: include/func.inc.php:257 jsLoader.php:151
+#: include/func.inc.php:257 jsLoader.php:133
 msgid "May"
 msgstr "5月"
 
@@ -10571,7 +10571,7 @@ msgid "Mon"
 msgstr "月"
 
 #: include/forms.inc.php:1904 include/forms.inc.php:2019
-#: include/func.inc.php:135 include/func.inc.php:225 jsLoader.php:159
+#: include/func.inc.php:135 include/func.inc.php:225 jsLoader.php:141
 msgid "Monday"
 msgstr "月曜"
 
@@ -10606,11 +10606,11 @@ msgstr "月"
 msgid "Monthly"
 msgstr "毎月"
 
-#: include/classes/html/CMultiSelect.php:71 jsLoader.php:232
+#: include/classes/html/CMultiSelect.php:71 jsLoader.php:214
 msgid "More matches found..."
 msgstr "条件に一致するデータがさらに存在します..."
 
-#: jsLoader.php:242
+#: jsLoader.php:224
 #, c-format
 msgctxt "screen reader"
 msgid "More than %1$d matches for %2$s found"
@@ -10638,7 +10638,7 @@ msgstr "複数"
 msgid "Multiple PROBLEM events"
 msgstr "障害イベントを継続して生成"
 
-#: jsLoader.php:208
+#: jsLoader.php:190
 msgid "Mute"
 msgstr "ミュート"
 
@@ -10871,7 +10871,7 @@ msgstr "新規条件"
 msgid "New dashboard"
 msgstr "新規ダッシュボード"
 
-#: jsLoader.php:194
+#: jsLoader.php:176
 msgid "New element"
 msgstr "新規要素"
 
@@ -11190,7 +11190,7 @@ msgstr "イメージは存在しません"
 #: include/views/configuration.host.discovery.edit.php:387
 #: include/views/configuration.item.edit.php:480
 #: include/views/configuration.item.massupdate.php:78
-#: include/views/configuration.item.prototype.edit.php:468 jsLoader.php:292
+#: include/views/configuration.item.prototype.edit.php:468 jsLoader.php:274
 msgid "No interface found"
 msgstr "インターフェースが見つかりません。"
 
@@ -11244,7 +11244,7 @@ msgstr "スクリーンの要素にマップIDが設定されていません。"
 msgid "No maps added."
 msgstr "マップが追加されていません。"
 
-#: include/classes/html/CMultiSelect.php:70 jsLoader.php:231
+#: include/classes/html/CMultiSelect.php:70 jsLoader.php:213
 msgid "No matches found"
 msgstr "条件に一致するデータはありません"
 
@@ -11441,7 +11441,7 @@ msgstr "公開鍵ファイルが設定されていません。"
 msgid "No recipients for action operation message."
 msgstr "実行するアクションのメッセージに送信先が設定されていません。"
 
-#: include/classes/widgets/CWidgetConfig.php:152 jsLoader.php:281
+#: include/classes/widgets/CWidgetConfig.php:152 jsLoader.php:263
 msgid "No refresh"
 msgstr "リフレッシュなし"
 
@@ -11601,7 +11601,7 @@ msgid "Nov"
 msgstr "11月"
 
 #: include/forms.inc.php:1983 include/func.inc.php:126
-#: include/func.inc.php:263 jsLoader.php:157
+#: include/func.inc.php:263 jsLoader.php:139
 msgid "November"
 msgstr "11月"
 
@@ -11832,13 +11832,13 @@ msgid "Octal to decimal"
 msgstr "8進数から10進数"
 
 #: include/forms.inc.php:1975 include/func.inc.php:125
-#: include/func.inc.php:262 jsLoader.php:156
+#: include/func.inc.php:262 jsLoader.php:138
 msgid "October"
 msgstr "10月"
 
 #: app/views/administration.proxy.list.php:145
 #: include/views/monitoring.sysmap.constructor.php:48
-#: include/views/monitoring.sysmap.constructor.php:58 jsLoader.php:176
+#: include/views/monitoring.sysmap.constructor.php:58 jsLoader.php:158
 msgid "Off"
 msgstr "OFF"
 
@@ -11864,7 +11864,7 @@ msgstr "古いイベントタグの値"
 
 #: app/views/administration.proxy.list.php:144
 #: include/views/monitoring.sysmap.constructor.php:48
-#: include/views/monitoring.sysmap.constructor.php:58 jsLoader.php:175
+#: include/views/monitoring.sysmap.constructor.php:58 jsLoader.php:157
 msgid "On"
 msgstr "ON"
 
@@ -12349,7 +12349,7 @@ msgstr "POP"
 
 #: app/views/hintbox.eventlist.php:110
 #: app/views/monitoring.widget.problems.view.php:93 chart5.php:199
-#: include/classes/graph/CSvgGraph.php:975
+#: include/classes/graph/CSvgGraph.php:981
 #: include/classes/screens/CScreenEvents.php:116
 #: include/classes/screens/CScreenProblem.php:945
 #: include/classes/screens/CScreenProblem.php:1109 include/events.inc.php:335
@@ -12508,11 +12508,11 @@ msgstr "パスワードは内部認証タイプ以外には必須ではありま
 msgid "Password should not be empty"
 msgstr "パスワードを設定してください"
 
-#: jsLoader.php:196
+#: jsLoader.php:178
 msgid "Paste"
 msgstr "貼り付け"
 
-#: jsLoader.php:197
+#: jsLoader.php:179
 msgid "Paste without external links"
 msgstr "リンクなしで貼り付け"
 
@@ -12624,7 +12624,7 @@ msgstr "データベースを手動で作成してください。そしてデー
 msgid "Please enter the host name or host IP address and port number of the Zabbix server, as well as the name of the installation (optional)."
 msgstr "Zabbixサーバーのホスト名かホストのIPアドレスとポート番号をを入力してください。必要に応じて名前も入力してください。"
 
-#: jsLoader.php:185
+#: jsLoader.php:167
 msgid "Please select two elements"
 msgstr "2つの要素を選択してください"
 
@@ -12850,7 +12850,7 @@ msgstr "メンテナンス期間外"
 msgid "Problem is suppressed"
 msgstr "メンテナンス期間中"
 
-#: jsLoader.php:206
+#: jsLoader.php:188
 msgid "Problem on"
 msgstr "障害"
 
@@ -12883,7 +12883,7 @@ msgstr "子に一つでも障害があった場合に障害として検知"
 #: include/maps.inc.php:390 include/maps.inc.php:471 include/maps.inc.php:483
 #: include/maps.inc.php:559 include/maps.inc.php:571 include/menu.inc.php:52
 #: include/views/common.filter.trigger.php:42
-#: include/views/inventory.host.view.php:142 jsLoader.php:273 report2.php:455
+#: include/views/inventory.host.view.php:142 jsLoader.php:255 report2.php:455
 #: search.php:129 search.php:215 search.php:272 search.php:321
 msgid "Problems"
 msgstr "障害"
@@ -13023,7 +13023,7 @@ msgstr "更新待ちアイテムのキュー"
 
 #: app/views/hintbox.eventlist.php:96
 #: app/views/monitoring.widget.problems.view.php:79
-#: include/classes/graph/CSvgGraph.php:971
+#: include/classes/graph/CSvgGraph.php:977
 #: include/classes/screens/CScreenEvents.php:121
 #: include/classes/screens/CScreenProblem.php:931
 #: include/classes/screens/CScreenProblem.php:1097 include/events.inc.php:340
@@ -13159,11 +13159,11 @@ msgid "Refresh"
 msgstr "リフレッシュ"
 
 #: include/classes/widgets/forms/CWidgetForm.php:53 include/html.inc.php:192
-#: jsLoader.php:274
+#: jsLoader.php:256
 msgid "Refresh interval"
 msgstr "リフレッシュ間隔"
 
-#: jsLoader.php:275
+#: jsLoader.php:257
 msgid "Refresh interval multiplier"
 msgstr "リフレッシュ間隔の乗数"
 
@@ -13221,7 +13221,7 @@ msgstr "正規表現"
 msgid "Regular items"
 msgstr "通常アイテム"
 
-#: jsLoader.php:124
+#: jsLoader.php:106
 msgid "Release to create a new widget."
 msgstr "離して新しいウィジェットを作成します。"
 
@@ -13344,8 +13344,8 @@ msgstr "リモートコマンド"
 #: include/views/monitoring.sysmap.constructor.php:37
 #: include/views/monitoring.sysmap.constructor.php:43
 #: include/views/monitoring.sysmap.edit.php:242
-#: include/views/monitoring.sysmap.edit.php:260 jsLoader.php:193
-#: jsLoader.php:296
+#: include/views/monitoring.sysmap.edit.php:260 jsLoader.php:175
+#: jsLoader.php:278
 msgid "Remove"
 msgstr "削除"
 
@@ -13381,7 +13381,7 @@ msgctxt "screen reader"
 msgid "Remove, %1$s"
 msgstr "%1$sの削除"
 
-#: jsLoader.php:237
+#: jsLoader.php:219
 #, c-format
 msgctxt "screen reader"
 msgid "Removed, %1$s"
@@ -13498,7 +13498,7 @@ msgstr "リセットの確認"
 msgid "Reset defaults"
 msgstr "デフォルトにリセット"
 
-#: jsLoader.php:207
+#: jsLoader.php:189
 msgid "Resolved"
 msgstr "解決済"
 
@@ -13725,12 +13725,12 @@ msgstr "ホスト上で指定したコマンドの実行。コマンドの実行
 msgid "Russian (ru_RU)"
 msgstr "ロシア語 (ru_RU)"
 
-#: jsLoader.php:171
+#: jsLoader.php:153
 msgctxt "Saturday short"
 msgid "S"
 msgstr "S"
 
-#: jsLoader.php:172
+#: jsLoader.php:154
 msgctxt "Sunday short"
 msgid "S"
 msgstr "S"
@@ -13921,7 +13921,7 @@ msgid "Sat"
 msgstr "土"
 
 #: include/forms.inc.php:1929 include/forms.inc.php:2044
-#: include/func.inc.php:140 include/func.inc.php:230 jsLoader.php:164
+#: include/func.inc.php:140 include/func.inc.php:230 jsLoader.php:146
 msgid "Saturday"
 msgstr "土曜"
 
@@ -14112,7 +14112,7 @@ msgstr "スクリプトを更新しました"
 #: app/controllers/CControllerPopupScriptExec.php:58
 #: app/views/administration.script.edit.php:25
 #: app/views/administration.script.list.php:27 include/menu.inc.php:283
-#: jsLoader.php:276
+#: jsLoader.php:258
 msgid "Scripts"
 msgstr "スクリプト"
 
@@ -14212,7 +14212,7 @@ msgstr "セキュリティ名"
 #: include/views/monitoring.screen.constructor.edit.php:332
 #: include/views/monitoring.screen.constructor.edit.php:390
 #: include/views/monitoring.screen.constructor.edit.php:651
-#: include/views/monitoring.screen.constructor.edit.php:699 jsLoader.php:235
+#: include/views/monitoring.screen.constructor.edit.php:699 jsLoader.php:217
 #: latest.php:357
 msgid "Select"
 msgstr "選択"
@@ -14253,19 +14253,19 @@ msgstr "選択した要素"
 msgid "Selected items only"
 msgstr "選択したアイテムのみ"
 
-#: jsLoader.php:240
+#: jsLoader.php:222
 #, c-format
 msgctxt "screen reader"
 msgid "Selected, %1$s in position %2$d of %3$d"
 msgstr "%3$dの%2$dの位置にある%1$sを選択しました"
 
-#: jsLoader.php:241
+#: jsLoader.php:223
 #, c-format
 msgctxt "screen reader"
 msgid "Selected, %1$s, read only, in position %2$d of %3$d"
 msgstr "%3$dの%2$dの位置にある読み込み専用の%1$sを選択しました"
 
-#: jsLoader.php:191
+#: jsLoader.php:173
 msgid "Send backward"
 msgstr "後面へ"
 
@@ -14304,7 +14304,7 @@ msgstr "ユーザーグループに送信"
 msgid "Send to Users"
 msgstr "ユーザーに送信"
 
-#: jsLoader.php:192
+#: jsLoader.php:174
 msgid "Send to back"
 msgstr "再後面へ"
 
@@ -14324,7 +14324,7 @@ msgid "Separated"
 msgstr "障害数と未確認数を表示"
 
 #: include/forms.inc.php:1967 include/func.inc.php:124
-#: include/func.inc.php:261 jsLoader.php:155
+#: include/func.inc.php:261 jsLoader.php:137
 msgid "September"
 msgstr "9月"
 
@@ -14538,7 +14538,7 @@ msgstr "図形"
 
 #: include/views/monitoring.screen.edit.php:215
 #: include/views/monitoring.slideconf.edit.php:268
-#: include/views/monitoring.sysmap.edit.php:382 jsLoader.php:260
+#: include/views/monitoring.sysmap.edit.php:382 jsLoader.php:242
 msgid "Sharing"
 msgstr "共有"
 
@@ -14671,7 +14671,7 @@ msgstr "Zabbixサーバー停止時にワーニングを表示"
 msgid "Show working time"
 msgstr "ワーキングタイムの表示"
 
-#: include/views/monitoring.sysmap.constructor.php:54 jsLoader.php:178
+#: include/views/monitoring.sysmap.constructor.php:54 jsLoader.php:160
 msgid "Shown"
 msgstr "表示"
 
@@ -14826,7 +14826,7 @@ msgstr "スライド"
 msgid "Slovak (sk_SK)"
 msgstr "スロバキア語 (sk_SK)"
 
-#: jsLoader.php:212
+#: jsLoader.php:194
 msgid "Snooze"
 msgstr "スヌーズ"
 
@@ -15129,7 +15129,7 @@ msgctxt "encryption certificate"
 msgid "Subject"
 msgstr "サブジェクト"
 
-#: jsLoader.php:277
+#: jsLoader.php:259
 msgid "Submap"
 msgstr "サブマップ"
 
@@ -15137,7 +15137,7 @@ msgstr "サブマップ"
 msgid "Success Audit"
 msgstr "成功の監査"
 
-#: include/func.inc.php:1938 jsLoader.php:141
+#: include/func.inc.php:1938 jsLoader.php:123
 msgid "Success message"
 msgstr "成功メッセージ"
 
@@ -15151,7 +15151,7 @@ msgid "Sun"
 msgstr "日"
 
 #: include/forms.inc.php:1934 include/forms.inc.php:2049
-#: include/func.inc.php:142 include/func.inc.php:224 jsLoader.php:165
+#: include/func.inc.php:142 include/func.inc.php:224 jsLoader.php:147
 msgid "Sunday"
 msgstr "日曜"
 
@@ -15239,12 +15239,12 @@ msgstr "システム時間。typeがutcであった場合は整数値を返し�
 msgid "System uptime in seconds. Returns integer"
 msgstr "システムの稼働秒数。整数値を返す。"
 
-#: jsLoader.php:169
+#: jsLoader.php:151
 msgctxt "Thursday short"
 msgid "T"
 msgstr "T"
 
-#: jsLoader.php:167
+#: jsLoader.php:149
 msgctxt "Tuesday short"
 msgid "T"
 msgstr "T"
@@ -15667,7 +15667,7 @@ msgid "Thu"
 msgstr "木"
 
 #: include/forms.inc.php:1919 include/forms.inc.php:2034
-#: include/func.inc.php:138 include/func.inc.php:228 jsLoader.php:162
+#: include/func.inc.php:138 include/func.inc.php:228 jsLoader.php:144
 msgid "Thursday"
 msgstr "木曜"
 
@@ -15771,7 +15771,7 @@ msgstr "タイムスタンプ"
 msgid "To"
 msgstr "終了"
 
-#: jsLoader.php:291
+#: jsLoader.php:273
 msgid "To set a host interface select a single item type for all items"
 msgstr "すべてのアイテムのため1つのホストインターフェースを選択する必要があります"
 
@@ -15889,7 +15889,7 @@ msgstr "トレンド"
 #: include/views/configuration.triggers.edit.php:582
 #: include/views/js/monitoring.sysmaps.js.php:70
 #: include/views/js/monitoring.sysmaps.js.php:711
-#: include/views/reports.toptriggers.php:79 jsLoader.php:181 jsLoader.php:278
+#: include/views/reports.toptriggers.php:79 jsLoader.php:163 jsLoader.php:260
 #: services.php:357
 msgid "Trigger"
 msgstr "トリガー"
@@ -16068,11 +16068,11 @@ msgstr "トリガーの深刻度"
 msgid "Trigger severity"
 msgstr "トリガーの深刻度"
 
-#: jsLoader.php:261
+#: jsLoader.php:243
 msgid "Trigger status \"OK\""
 msgstr "トリガーのステータス \"正常\""
 
-#: jsLoader.php:262
+#: jsLoader.php:244
 msgid "Trigger status \"Problem\""
 msgstr "トリガーのステータス \"障害\""
 
@@ -16126,7 +16126,7 @@ msgid "Tue"
 msgstr "火"
 
 #: include/forms.inc.php:1909 include/forms.inc.php:2024
-#: include/func.inc.php:136 include/func.inc.php:226 jsLoader.php:160
+#: include/func.inc.php:136 include/func.inc.php:226 jsLoader.php:142
 msgid "Tuesday"
 msgstr "火曜"
 
@@ -16139,7 +16139,7 @@ msgstr "トルコ語 (tr_TR)"
 msgid "Two items (\"%1$s\" and \"%2$s\") cannot populate one host inventory field \"%3$s\", this would lead to a conflict."
 msgstr "2つのアイテム(\"%1$s\"と\"%2$s\")から1つのホストのインベントリフィールド\"%3$s\"を自動的に設定することはできません。"
 
-#: jsLoader.php:186
+#: jsLoader.php:168
 msgid "Two map elements should be selected"
 msgstr "2つのマップ要素を選択する必要があります"
 
@@ -16254,7 +16254,7 @@ msgstr "不明"
 #: include/views/configuration.triggers.edit.php:569
 #: include/views/js/monitoring.sysmaps.js.php:254
 #: include/views/monitoring.screen.constructor.edit.php:843
-#: include/views/monitoring.sysmap.edit.php:230 items.php:143 jsLoader.php:279
+#: include/views/monitoring.sysmap.edit.php:230 items.php:143 jsLoader.php:261
 msgid "URL"
 msgstr "URL"
 
@@ -16300,7 +16300,7 @@ msgid "URL should have both \"name\" and \"url\" fields for map \"%1$s\"."
 msgstr "マップ\"%1$s\"のURLには\"name\"と\"url\"の両方のフィールドが必要です。"
 
 #: include/views/js/monitoring.sysmaps.js.php:251
-#: include/views/monitoring.sysmap.edit.php:281 jsLoader.php:280
+#: include/views/monitoring.sysmap.edit.php:281 jsLoader.php:262
 msgid "URLs"
 msgstr "URL"
 
@@ -16496,7 +16496,7 @@ msgstr "リンク削除: \"%2$s\"のアイテムのプロトタイプ\"%1$s\"。
 msgid "Unlinked: Web scenario \"%1$s\" on \"%2$s\"."
 msgstr "リンク削除: \"%2$s\"のWebシナリオ\"%1$s\"。"
 
-#: jsLoader.php:210
+#: jsLoader.php:192
 msgid "Unmute"
 msgstr "ミュートを解除"
 
@@ -17403,7 +17403,7 @@ msgstr "表示名"
 msgid "Visible name cannot be empty if host name is missing."
 msgstr "ホスト名を設定しない場合、表示名は必須項目です。"
 
-#: jsLoader.php:168
+#: jsLoader.php:150
 msgctxt "Wednesday short"
 msgid "W"
 msgstr "W"
@@ -17420,11 +17420,11 @@ msgctxt "setup"
 msgid "Warning"
 msgstr "警告"
 
-#: jsLoader.php:143
+#: jsLoader.php:125
 msgid "Warning message"
 msgstr "警告メッセージ"
 
-#: jsLoader.php:215
+#: jsLoader.php:197
 msgid "We are sorry, the maximum possible number of elements to remember has been reached."
 msgstr "要素を保存できる最大値に達しました"
 
@@ -17499,7 +17499,7 @@ msgid "Wed"
 msgstr "水"
 
 #: include/forms.inc.php:1914 include/forms.inc.php:2029
-#: include/func.inc.php:137 include/func.inc.php:227 jsLoader.php:161
+#: include/func.inc.php:137 include/func.inc.php:227 jsLoader.php:143
 msgid "Wednesday"
 msgstr "水曜"
 
@@ -17711,6 +17711,10 @@ msgstr "Y/m/d H:i"
 msgid "Y-m-d H:i:s"
 msgstr "Y/m/d H:i:s"
 
+#: include/translateDefines.inc.php:37
+msgid "Y-n-d"
+msgstr ""
+
 #: include/views/js/monitoring.sysmaps.js.php:385
 msgid "Y1"
 msgstr "Y1"
@@ -17831,7 +17835,7 @@ msgstr "操作に対する権限がありません。"
 msgid "You do not have permissions to create users."
 msgstr "ユーザーを作成する権限がありません。"
 
-#: jsLoader.php:122
+#: jsLoader.php:104
 msgid "You do not have permissions to edit dashboard"
 msgstr "ダッシュボードを編集する権限がありません"
 
@@ -17839,7 +17843,7 @@ msgstr "ダッシュボードを編集する権限がありません"
 msgid "You have no permissions to access this page."
 msgstr "このページを表示する権限がありません。"
 
-#: jsLoader.php:119
+#: jsLoader.php:101
 msgid "You have unsaved changes."
 msgstr "保存していない変更があります。"
 
@@ -18285,7 +18289,7 @@ msgstr "\"%1$s\"から始まる条件式を確認してください"
 msgid "circular item dependency is not allowed"
 msgstr "循環するアイテムの依存関係は許可されていません"
 
-#: jsLoader.php:218
+#: jsLoader.php:200
 msgid "colour"
 msgstr "色"
 
@@ -18307,7 +18311,7 @@ msgstr "含む"
 msgid "count() - Number of successfully retrieved values V (which fulfill operator O) for period T"
 msgstr "count() - 期間Tで収集された値V(オペレータOを満たす)の数"
 
-#: include/func.inc.php:622 jsLoader.php:137
+#: include/func.inc.php:622 jsLoader.php:119
 msgctxt "day short"
 msgid "d"
 msgstr "d"
@@ -18438,7 +18442,7 @@ msgctxt "item_form"
 msgid "global housekeeping settings"
 msgstr "データの保存期間設定(全体設定)"
 
-#: include/func.inc.php:623 jsLoader.php:138
+#: include/func.inc.php:623 jsLoader.php:120
 msgctxt "hour short"
 msgid "h"
 msgstr "h"
@@ -18634,12 +18638,12 @@ msgstr "logsource() - 最新ログのソースのパラメーターTとのマッ
 msgid "low-level discovery rule"
 msgstr "ローレベルディスカバリルール"
 
-#: include/func.inc.php:624 jsLoader.php:109 jsLoader.php:139 jsLoader.php:310
+#: include/func.inc.php:624 jsLoader.php:91 jsLoader.php:121 jsLoader.php:292
 msgctxt "minute short"
 msgid "m"
 msgstr "m"
 
-#: include/func.inc.php:621 jsLoader.php:136
+#: include/func.inc.php:621 jsLoader.php:118
 msgctxt "month short"
 msgid "m"
 msgstr "m"
@@ -18748,6 +18752,14 @@ msgstr "\"%1$s\"から\"%2$s\"の値で設定してください"
 msgid "must contain at least one low-level discovery macro"
 msgstr "少なくとも1つのLLDマクロを含めることが必要です"
 
+#: include/translateDefines.inc.php:38
+msgid "n-d"
+msgstr ""
+
+#: include/translateDefines.inc.php:36
+msgid "n-d H:i"
+msgstr ""
+
 #: include/views/configuration.host.discovery.edit.php:125
 #: include/views/configuration.host.discovery.edit.php:222
 #: include/views/configuration.item.edit.php:157
@@ -18758,7 +18770,7 @@ msgstr "少なくとも1つのLLDマクロを含めることが必要です"
 msgid "name"
 msgstr "名前"
 
-#: include/classes/html/CMultiSelect.php:73 jsLoader.php:234
+#: include/classes/html/CMultiSelect.php:73 jsLoader.php:216
 msgid "new"
 msgstr "新規"
 
@@ -18937,7 +18949,7 @@ msgstr "右"
 #: include/views/configuration.services.parent.list.php:42
 #: include/views/configuration.services.parent.list.php:45
 #: include/views/configuration.services.parent.list.php:47
-#: include/views/configuration.services.parent.list.php:48 jsLoader.php:297
+#: include/views/configuration.services.parent.list.php:48 jsLoader.php:279
 msgid "root"
 msgstr "ルート"
 
@@ -19078,7 +19090,7 @@ msgstr "タグ\"%1$s\"が設定されていません"
 msgid "third"
 msgstr "第3"
 
-#: jsLoader.php:219
+#: jsLoader.php:201
 msgid "time shift"
 msgstr "タイムシフト"
 
@@ -19120,7 +19132,7 @@ msgid "trigger with linkages cannot be moved to another template or host"
 msgstr "リンクのあるトリガーは他のテンプレートやホストに移動できません"
 
 #: app/views/layout.htmlpage.menu.php:30
-#: include/classes/html/CMultiSelect.php:72 jsLoader.php:233
+#: include/classes/html/CMultiSelect.php:72 jsLoader.php:215
 msgid "type here to search"
 msgstr "検索文字列を入力"
 
@@ -19276,7 +19288,7 @@ msgstr "ディスカバリルールのタイプが間違っている"
 msgid "wrong item type"
 msgstr "アイテムのタイプが間違っている"
 
-#: include/func.inc.php:620 jsLoader.php:135
+#: include/func.inc.php:620 jsLoader.php:117
 msgctxt "year short"
 msgid "y"
 msgstr "y"
