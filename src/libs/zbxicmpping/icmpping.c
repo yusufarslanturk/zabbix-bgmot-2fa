@@ -22,6 +22,7 @@
 #include "comms.h"
 #include "zbxexec.h"
 #include "log.h"
+#include <signal.h>
 
 extern char	*CONFIG_SOURCE_IP;
 extern char	*CONFIG_FPING_LOCATION;
@@ -274,7 +275,8 @@ static int	process_ping(ZBX_FPING_HOST *hosts, int hosts_count, int count, int i
 	size_t		tmp_size;
 	size_t		offset;
 	double		sec;
-	int 		i, ret = NOTSUPPORTED, index;
+	int 		i, ret = NOTSUPPORTED, index, rc;
+	sigset_t	mask, orig_mask;
 
 #ifdef HAVE_IPV6
 	int		family;
@@ -534,11 +536,21 @@ static int	process_ping(ZBX_FPING_HOST *hosts, int hosts_count, int count, int i
 
 	zabbix_log(LOG_LEVEL_DEBUG, "%s", tmp);
 
+	sigemptyset(&mask);
+	sigaddset(&mask, SIGINT);
+	sigaddset(&mask, SIGQUIT);
+
+	if (0 > sigprocmask(SIG_BLOCK, &mask, &orig_mask))
+		zbx_error("cannot set sigprocmask to block the user signal");
+
 	if (NULL == (f = popen(tmp, "r")))
 	{
 		zbx_snprintf(error, max_error_len, "%s: %s", tmp, zbx_strerror(errno));
 
 		unlink(filename);
+
+		if (0 > sigprocmask(SIG_SETMASK, &orig_mask, NULL))
+			zbx_error("cannot restore sigprocmask");
 
 		goto out;
 	}
@@ -671,11 +683,16 @@ static int	process_ping(ZBX_FPING_HOST *hosts, int hosts_count, int count, int i
 		for (i = 0; i < hosts_count; i++)
 			zbx_free(hosts[i].status);
 	}
-	pclose(f);
+	rc = pclose(f);
+
+	if (0 > sigprocmask(SIG_SETMASK, &orig_mask, NULL))
+		zbx_error("cannot restore sigprocmask");
 
 	unlink(filename);
 
-	if (NOTSUPPORTED == ret)
+	if (WIFSIGNALED(rc))
+		ret = FAIL;
+	else
 		zbx_snprintf(error, max_error_len, "fping failed: %s", tmp);
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __function_name);
