@@ -725,7 +725,7 @@ int	check_vcenter_eventlog(AGENT_REQUEST *request, const DC_ITEM *item, AGENT_RE
 	}
 	else if (0 == strcmp(skip, "skip"))
 	{
-		skip_old = 1;
+		skip_old = (0 == request->lastlogsize ? 1 : 0);
 	}
 	else
 	{
@@ -738,8 +738,10 @@ int	check_vcenter_eventlog(AGENT_REQUEST *request, const DC_ITEM *item, AGENT_RE
 	if (NULL == (service = get_vmware_service(url, item->username, item->password, result, &ret)))
 		goto unlock;
 
-	if (ZBX_VMWARE_EVENT_KEY_UNINITIALIZED == service->eventlog.last_key)
+	if (ZBX_VMWARE_EVENT_KEY_UNINITIALIZED == service->eventlog.last_key ||
+			(0 != skip_old && 0 != service->eventlog.last_key))
 	{
+		/* this may happen if recreate item vmware.eventlog for the same service URL */
 		service->eventlog.last_key = request->lastlogsize;
 		service->eventlog.skip_old = skip_old;
 	}
@@ -748,7 +750,7 @@ int	check_vcenter_eventlog(AGENT_REQUEST *request, const DC_ITEM *item, AGENT_RE
 		SET_MSG_RESULT(result, zbx_strdup(NULL, "Not enough shared memory to store VMware events."));
 		goto unlock;
 	}
-	else if (request->lastlogsize < service->eventlog.last_key)
+	else if (request->lastlogsize < service->eventlog.last_key && 0 != request->lastlogsize)
 	{
 		/* this may happen if there are multiple vmware.eventlog items for the same service URL or item has  */
 		/* been polled, but values got stuck in history cache and item's lastlogsize hasn't been updated yet */
@@ -2180,6 +2182,14 @@ static int	check_vcenter_datastore_latency(AGENT_REQUEST *request, const char *u
 		if (SYSINFO_RET_OK != (ret = vmware_service_get_counter_value_by_id(service, "HostSystem", hv->id,
 				counterid, datastore->uuid, 1, result)))
 		{
+			char	*err, *msg = *GET_MSG_RESULT(result);
+
+			*msg = (char)tolower(*msg);
+			err = zbx_dsprintf(NULL, "Counter %s for datastore %s is not available for hypervisor %s: %s",
+					perfcounter, datastore->name,
+					ZBX_NULL2EMPTY_STR(hv->props[ZBX_VMWARE_HVPROP_NAME]), msg);
+			UNSET_MSG_RESULT(result);
+			SET_MSG_RESULT(result, err);
 			goto unlock;
 		}
 
