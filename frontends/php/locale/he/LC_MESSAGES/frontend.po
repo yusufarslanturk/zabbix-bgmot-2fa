@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-10 19:50+0300\n"
-"PO-Revision-Date: 2018-11-30 14:01+0300\n"
+"PO-Revision-Date: 2021-10-05 12:00+0300\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: none\n"
 "Language: he\n"
@@ -12,14 +12,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.3\n"
-"X-POOTLE-MTIME: 1543579291.000000\n"
+"X-POOTLE-MTIME: 1633428053.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:70
 #: include/classes/db/OracleDbBackend.php:89
 #: include/classes/db/PostgresqlDbBackend.php:79
 #, c-format
 msgid "\"%1$s\" instead \"%2$s\""
-msgstr ""
+msgstr "„%1$s” במקום „%2$s”"
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -58,7 +58,7 @@ msgstr "%1$d תווים חורגים מהאורך המרבי המותר של %2$
 #, c-format
 msgid "%1$d day"
 msgid_plural "%1$d days"
-msgstr[0] "יום %1$d"
+msgstr[0] "יום אחד"
 msgstr[1] "%1$d ימים"
 
 #: jsLoader.php:225
@@ -72,8 +72,8 @@ msgstr "נמצאו %1$d תוצאות לחיפוש %2$s"
 #, c-format
 msgid "%1$d of %3$d%2$s problem is shown"
 msgid_plural "%1$d of %3$d%2$s problems are shown"
-msgstr[0] "מוצגת בעיה %1$d מתוך %3$d%2$s"
-msgstr[1] "מוצגות %1$d מתוך %3$d%2$s בעיות"
+msgstr[0] "מוצגת תקלה %1$d מתוך %3$d%2$s"
+msgstr[1] "מוצגות %1$d מתוך %3$d%2$s תקלות"
 
 #: chart4.php:94 chart5.php:89
 #, c-format
@@ -106,7 +106,7 @@ msgstr[1] "%1$s משימות"
 #, c-format
 msgid "%1$s event"
 msgid_plural "%1$s events"
-msgstr[0] "אירוע %1$s"
+msgstr[0] "אירוע אחד"
 msgstr[1] "%1$s אירועים"
 
 #: app/controllers/CControllerWidgetPlainTextView.php:119
@@ -114,7 +114,7 @@ msgstr[1] "%1$s אירועים"
 #, c-format
 msgid "%1$s item"
 msgid_plural "%1$s items"
-msgstr[0] "פריט %1$s"
+msgstr[0] "פריט אחד"
 msgstr[1] "%1$s פריטים"
 
 #: include/actions.inc.php:1799
@@ -133,7 +133,7 @@ msgstr[1] "%1$s הודעות"
 #, c-format
 msgid "%1$s minute"
 msgid_plural "%1$s minutes"
-msgstr[0] "דקה %1$s"
+msgstr[0] "דקה אחת"
 msgstr[1] "%1$s דקות"
 
 #: include/classes/helpers/CMapHelper.php:243
@@ -153,14 +153,14 @@ msgstr "%1$s נבחר מראש, ניתן להשתמש בחצים למטה, למ�
 #, c-format
 msgid "%1$s problem"
 msgid_plural "%1$s problems"
-msgstr[0] "תקלה %1$s"
+msgstr[0] "תקלה אחת"
 msgstr[1] "%1$s תקלות"
 
 #: include/classes/helpers/CMapHelper.php:246
 #, c-format
 msgid "%1$s problem in total"
 msgid_plural "%1$s problems in total"
-msgstr[0] "תקלה %1$s בסך הכול"
+msgstr[0] "תקלה אחת בסך הכול"
 msgstr[1] "%1$s תקלות בסך הכול"
 
 #: app/views/monitoring.widget.actionlog.view.php:41
@@ -169,7 +169,7 @@ msgstr[1] "%1$s תקלות בסך הכול"
 #, c-format
 msgid "%1$s retry left"
 msgid_plural "%1$s retries left"
-msgstr[0] "נותר ניסיון %1$s"
+msgstr[0] "נותר ניסיון אחד"
 msgstr[1] "נותרו %1$s ניסיונות"
 
 #: include/classes/widgets/CWidgetConfig.php:153
@@ -178,7 +178,7 @@ msgstr[1] "נותרו %1$s ניסיונות"
 #, c-format
 msgid "%1$s second"
 msgid_plural "%1$s seconds"
-msgstr[0] "שנייה %1$s"
+msgstr[0] "שנייה אחת"
 msgstr[1] "%1$s שניות"
 
 #: app/views/monitoring.widget.problems.view.php:236
@@ -204,20 +204,20 @@ msgstr "%1$s, קריאה בלבד"
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, selected"
-msgstr ""
+msgstr "%1$s, בבחירה"
 
 #: app/views/layout.htmlpage.php:106 include/page_header.php:263
 #, c-format
 msgid "%4$s failed login attempt logged. Last failed attempt was from %1$s on %2$s at %3$s."
 msgid_plural "%4$s failed login attempts logged. Last failed attempt was from %1$s on %2$s at %3$s."
-msgstr[0] "ניסיון גישה כושל %4$s נרשם. הניסיון האחרון היה מהמיקום %1$s ב־%2$s בשעה %3$s."
+msgstr[0] "ניסיון גישה כושל אחד נרשם. הניסיון האחרון היה מהמיקום %1$s ב־%2$s בשעה %3$s."
 msgstr[1] "%4$s ניסיונות גישה כושלים נרשמו. הניסיון האחרון היה מהמיקום %1$s ב־%2$s בשעה %3$s."
 
 #: include/classes/screens/CScreenDiscovery.php:213
 #, c-format
 msgid "%d device"
 msgid_plural "%d devices"
-msgstr[0] "התקן %d"
+msgstr[0] "התקן אחד"
 msgstr[1] "%d התקנים"
 
 #: include/users.inc.php:158
@@ -757,7 +757,7 @@ msgstr "גיל"
 #: app/views/monitoring.problem.view.php:177
 #: include/views/common.filter.trigger.php:57
 msgid "Age less than"
-msgstr "הגיל פחות מ־"
+msgstr "הגיל קטן מ־"
 
 #: include/views/monitoring.overview.triggers.php:67
 #, c-format
@@ -1067,7 +1067,7 @@ msgstr "חשבוני"
 #: include/views/configuration.item.prototype.edit.php:725
 #: include/views/configuration.item.prototype.edit.php:731
 msgid "As is"
-msgstr "כמו שהוא"
+msgstr "כפי שזה"
 
 #: include/views/monitoring.history.php:93
 msgid "As plain text"
@@ -1641,7 +1641,7 @@ msgstr "לא ניתן להוסיף עבודת תחזוקה"
 #: include/classes/api/services/CMap.php:1487
 #, c-format
 msgid "Cannot add map element of the map \"%1$s\" due to circular reference."
-msgstr ""
+msgstr "לא ניתן להוסיף רכיב מפה למפה „%1$s” עקב הפניה מעגלית."
 
 #: app/controllers/CControllerMediatypeCreate.php:69
 #: app/controllers/CControllerMediatypeCreate.php:159
@@ -1727,7 +1727,7 @@ msgstr "לא ניתן להוסיף תרחיש רשת"
 
 #: jsLoader.php:110
 msgid "Cannot add widget: not enough free space on the dashboard."
-msgstr ""
+msgstr "לא ניתן להוסיף וידג׳ט: אין מספיק מקום פנוי בלוח המחוונים."
 
 #: jsLoader.php:103
 msgid "Cannot add widgets in kiosk mode"
@@ -1747,7 +1747,7 @@ msgstr "לא ניתן לפנות את ההיסטוריה"
 
 #: items.php:1325
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
-msgstr ""
+msgstr "לא ניתן לפנות את ההיסטוריה: לפחות אחד מהפריטים הנבחרים לא שייך לאף מארח שתחת מעקב"
 
 #: include/classes/api/services/CDiscoveryRule.php:1549
 msgid "Cannot clone graph prototypes."
@@ -1770,7 +1770,7 @@ msgstr "לא ניתן לשכפל את אבות הטיפוס של ההקפצות.
 #: include/classes/api/services/CEvent.php:875
 #, c-format
 msgid "Cannot close problem: %1$s."
-msgstr "לא ניתן לסגור את הבעיה: %1$s."
+msgstr "לא ניתן לסגור את התקלה: %1$s."
 
 #: include/classes/validators/CLdapAuthValidator.php:77
 msgid "Cannot connect to LDAP server."
@@ -1782,7 +1782,7 @@ msgstr "לא ניתן להתחבר למסד הנתונים."
 
 #: include/views/js/configuration.httpconf.edit.js.php:79
 msgid "Cannot convert POST data:"
-msgstr ""
+msgstr "לא ניתן להמיר נתוני POST:"
 
 #: graphs.php:390
 msgid "Cannot copy graph"
@@ -1866,6 +1866,7 @@ msgstr[0] "לא ניתן למחוק יישום"
 msgstr[1] "לא ניתן למחוק יישומים"
 
 #: correlation.php:162
+#, fuzzy
 msgid "Cannot delete correlation"
 msgstr "לא ניתן למחוק את היחס"
 
@@ -1886,8 +1887,9 @@ msgid "Cannot delete discovered application \"%1$s\"."
 msgstr "לא ניתן למחוק את היישום שנמצא „%1$s”."
 
 #: discoveryconf.php:186 host_discovery.php:278
+#, fuzzy
 msgid "Cannot delete discovery rule"
-msgstr "לא ניתן למחוק כלל גילוי"
+msgstr "לא ניתן למחוק את כלל הגילוי"
 
 #: discoveryconf.php:228 host_discovery.php:521
 msgid "Cannot delete discovery rules"
@@ -1923,15 +1925,15 @@ msgstr "לא ניתן למחוק מארח"
 #, c-format
 msgid "Cannot delete host because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must contain at least one host or host group."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "לא ניתן למחוק את המארח כיוון שעל משימת התחזוקה „%1$s” להכיל מארח אחד ומעלה או קבוצת מארחים אחת ומעלה."
+msgstr[1] "לא ניתן למחוק את המארחים הנבחרים כיוון שעל משימת התחזוקה „%1$s” להכיל מארח אחד ומעלה או קבוצת מארחים אחת ומעלה."
 
 #: include/classes/api/services/CHostGroup.php:1535
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "לא ניתן למחוק את קבוצת המארחים כיוון שעל משימת התחזוקה „%1$s” להכיל מארח אחד ומעלה או קבוצת מארחים אחת ומעלה."
+msgstr[1] "לא ניתן למחוק את קבוצות המארחים הנבחרות כיוון שעל משימת התחזוקה „%1$s” להכיל מארח אחד ומעלה או קבוצת מארחים אחת ומעלה."
 
 #: include/classes/api/services/CDiscoveryRule.php:541
 msgid "Cannot delete host prototype."
@@ -1952,7 +1954,7 @@ msgstr "לא ניתן למחוק את התמונה"
 #: include/classes/api/services/CHostInterface.php:434
 #, c-format
 msgid "Cannot delete interface for discovered host \"%1$s\"."
-msgstr ""
+msgstr "לא ניתן למחוק מנשק למארח שהתגלה „%1$s”."
 
 #: include/classes/api/services/CHost.php:1026
 msgid "Cannot delete inventory."
@@ -2024,6 +2026,7 @@ msgid "Cannot delete selected correlations"
 msgstr "לא ניתן למחוק את היחסים הנבחרים"
 
 #: services.php:108
+#, fuzzy
 msgid "Cannot delete service"
 msgstr "לא ניתן למחוק שירות"
 
@@ -2041,11 +2044,11 @@ msgstr "לא ניתן למחוק יישומים בתבנית."
 
 #: include/classes/api/services/CGraphPrototype.php:576
 msgid "Cannot delete templated graph prototype."
-msgstr ""
+msgstr "נא ניתן למחוק אבטיפוס תרשים מתבנית."
 
 #: include/classes/api/services/CGraph.php:560
 msgid "Cannot delete templated graph."
-msgstr ""
+msgstr "לא ניתן למחוק תרשים מתבנית."
 
 #: include/classes/api/services/CHostPrototype.php:1079
 msgid "Cannot delete templated host prototype."
@@ -2053,7 +2056,7 @@ msgstr "לא ניתן למחוק אבטיפוס מארח בתבנית."
 
 #: include/classes/api/services/CItemPrototype.php:886
 msgid "Cannot delete templated item prototype."
-msgstr ""
+msgstr "לא ניתן למחוק אבטיפוס פריט מתבנית."
 
 #: include/classes/api/services/CItem.php:714
 msgid "Cannot delete templated item."
@@ -2071,7 +2074,7 @@ msgstr "לא ניתן למחוק הקפצה בתבנית „%1$s:%2$s”."
 #: include/classes/api/services/CTriggerPrototype.php:530
 #, c-format
 msgid "Cannot delete templated trigger prototype \"%1$s:%2$s\"."
-msgstr ""
+msgstr "לא ניתן למחוק אבטיפוס של הקפצה מתבנית „%1$s:%2$s”."
 
 #: include/classes/api/services/CHttpTest.php:549
 #, c-format
@@ -2095,6 +2098,7 @@ msgid "Cannot delete triggers"
 msgstr "לא ניתן למחוק הקפצות"
 
 #: users.php:233 users.php:267
+#, fuzzy
 msgid "Cannot delete user"
 msgstr "לא ניתן למחוק משתמש"
 
@@ -2290,17 +2294,17 @@ msgstr "לא ניתן למצוא את מפת הסמלים „%1$s” בה נעש
 #: include/classes/import/CConfigurationImport.php:955
 #, c-format
 msgid "Cannot find interface \"%1$s\" used for discovery rule \"%2$s\" on \"%3$s\"."
-msgstr ""
+msgstr "לא ניתן למצוא את המנשק „%1$s” בו נעשה שימוש בכלל הגילוי „%2$s” על גבי „%3$s”."
 
 #: include/classes/import/CConfigurationImport.php:751
 #, c-format
 msgid "Cannot find interface \"%1$s\" used for item \"%2$s\" on \"%3$s\"."
-msgstr ""
+msgstr "לא ניתן למצוא את המנשק „%1$s” בו נעשה שימוש בפריט „%2$s” על גבי „%3$s”."
 
 #: include/classes/import/CConfigurationImport.php:1073
 #, c-format
 msgid "Cannot find interface \"%1$s\" used for item prototype \"%2$s\" of discovery rule \"%3$s\" on \"%4$s\"."
-msgstr ""
+msgstr "לא ניתן למצוא את המנשק „%1$s” בו נעשה שימוש באבטיפוס של הפריט „%2$s” של כלל הגילוי „%3$s” על גבי „%4$s”."
 
 #: include/classes/import/CConfigurationImport.php:1564
 #, c-format
@@ -2563,7 +2567,7 @@ msgstr "לא ניתן להגדיר מזהה משאב עבור פריט מסך."
 
 #: jsLoader.php:191
 msgid "Cannot support notification audio for this device."
-msgstr ""
+msgstr "לא ניתן לתמוך בהתראה קולית עבור התקן זה."
 
 #: include/classes/api/services/CHostInterface.php:244
 msgid "Cannot switch host for interface."
@@ -3040,7 +3044,7 @@ msgstr "בודקת אם קובץ קיים. מחזירה 0 - לא נמצא; 1 - �
 
 #: include/classes/items/CHelpItems.php:723
 msgid "Checks if host is accessible by ICMP ping. 0 - ICMP ping fails. 1 - ICMP ping successful."
-msgstr ""
+msgstr "בודקת אם מארח נגיש באמצעות פינג ICMP.‏ 0 - פינג ICMP כשל. 1- פינג ICMP צלח."
 
 #: include/classes/items/CHelpItems.php:121
 #: include/classes/items/CHelpItems.php:451
@@ -3127,7 +3131,7 @@ msgstr "פינוי בעת ניתוק"
 
 #: jsLoader.php:107
 msgid "Click and drag to desired size."
-msgstr ""
+msgstr "יש לגרור לגודל הרצוי."
 
 #: include/classes/widgets/CWidgetConfig.php:34 include/screens.inc.php:28
 msgid "Clock"
@@ -3324,7 +3328,7 @@ msgstr "הגדרות"
 
 #: include/classes/items/CHelpItems.php:1115
 msgid "Configuration cache statistics. Cache - buffer (modes: pfree, total, used, free)."
-msgstr "הגדרות זיכרון מטמון לסטטיסטיקה. מטמון - חוצץ (מצבים: pfree,‏ total,‏ used,‏ free)."
+msgstr "הגדרות זיכרון מטמון לסטטיסטיקה. זיכרון מטמון - buffer (מצבים: pfree,‏ total,‏ used,‏ free)."
 
 #: include/classes/setup/CSetupWizard.php:385
 #, c-format
@@ -3714,8 +3718,9 @@ msgid "Correlation added"
 msgstr "נוסף יחס"
 
 #: correlation.php:162
+#, fuzzy
 msgid "Correlation deleted"
-msgstr "יחס נמחק"
+msgstr "היחס נמחק"
 
 #: correlation.php:358
 msgid "Correlation disabled"
@@ -3776,7 +3781,7 @@ msgstr "מספר השורות שתואמות בקובץ היומן שבמעקב.
 
 #: include/classes/items/CHelpItems.php:1095
 msgid "Count of values enqueued in the preprocessing queue."
-msgstr ""
+msgstr "ספירת הערכים שממתינים בתור העיבוד המקדים."
 
 #: include/views/configuration.action.list.php:38
 msgid "Create action"
@@ -4967,31 +4972,31 @@ msgstr "פריט גילוי"
 
 #: include/classes/items/CHelpItems.php:751
 msgid "Discovery of VMware clusters, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "גילוי קלאסטרים של VMware,‏ <url> כתובת שירות VMWare. מחזירה JSON"
 
 #: include/classes/items/CHelpItems.php:759
 msgid "Discovery of VMware datastores, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "גילוי מאגרי נתונים של VMware,‏ <url> כתובת שירות VMWare. מחזירה JSON"
 
 #: include/classes/items/CHelpItems.php:803
 msgid "Discovery of VMware hypervisor datastores, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns JSON"
-msgstr ""
+msgstr "גילוי מאגרי נתונים של hypervisor VMWare,‏ <url> - כתובת שירות VMware,‏ <uuid> - שם מארח ה־VMware hypervisor. מחזירה JSON"
 
 #: include/classes/items/CHelpItems.php:823
 msgid "Discovery of VMware hypervisors, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "גילוי hypervisors של VMware,‏ <url> - כתובת שירות VMware. מחזירה JSON"
 
 #: include/classes/items/CHelpItems.php:1003
 msgid "Discovery of VMware virtual machine disk devices, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns JSON"
-msgstr ""
+msgstr "גילוי התקני כוננים של מכונות וירטואליות של VMware.‏ <url> - כתובת שירות VMware,‏ <uuid> שם מארח של מכונה וירטואלית ב־VMWare. מחזירה JSON"
 
 #: include/classes/items/CHelpItems.php:1015
 msgid "Discovery of VMware virtual machine file systems, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns JSON"
-msgstr ""
+msgstr "גילוי מערכות קבצים של מכונות וירטואליות של VMware.‏‏ <url> - כתובת שירות VMware,‏ <uuid> שם מארח של מכונה וירטואלית ב־VMWare. מחזירה JSON"
 
 #: include/classes/items/CHelpItems.php:927
 msgid "Discovery of VMware virtual machines, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "גילוי מכונות וירטואליות של VMware.‏ <url> - כתובת שירות VMware. מחזירה JSON"
 
 #: app/views/monitoring.discovery.view.php:42
 #: app/views/monitoring.widget.discovery.view.php:28
@@ -5030,6 +5035,7 @@ msgid "Discovery rule created"
 msgstr "כלל הגילוי נוצר"
 
 #: discoveryconf.php:186 host_discovery.php:278
+#, fuzzy
 msgid "Discovery rule deleted"
 msgstr "כלל הגילוי נמחק"
 
@@ -5092,7 +5098,7 @@ msgstr "הצגת תרשים"
 
 #: include/views/monitoring.sysmap.edit.php:132
 msgid "Display problems"
-msgstr "הצגת בעיות"
+msgstr "הצגת תקלות"
 
 #: latest.php:789
 msgid "Display stacked graph"
@@ -5113,7 +5119,7 @@ msgstr "מוצגים %1$s עד %2$s מתוך %3$s פריטים שנמצאו"
 
 #: include/classes/widgets/views/widget.svggraph.form.view.php:250
 msgid "Displaying options"
-msgstr ""
+msgstr "אפשרויות הצגה"
 
 #: include/services.inc.php:26
 msgid "Do not calculate"
@@ -5123,13 +5129,13 @@ msgstr "לא לחשב"
 #: include/views/configuration.item.massupdate.php:528
 #: include/views/configuration.item.prototype.edit.php:692
 msgid "Do not keep history"
-msgstr ""
+msgstr "לא לשמור היסטוריה"
 
 #: include/views/configuration.item.edit.php:828
 #: include/views/configuration.item.massupdate.php:545
 #: include/views/configuration.item.prototype.edit.php:705
 msgid "Do not keep trends"
-msgstr ""
+msgstr "לא לשמור מגמות"
 
 #: jsLoader.php:122 jsLoader.php:239
 msgid "Do you wish to replace the conditional expression?"
@@ -5445,12 +5451,12 @@ msgstr "מאקרו תנאי מסנן ריק לכלל הגילוי „%1$s”."
 #: include/classes/api/services/CAction.php:2752
 #, c-format
 msgid "Empty filter condition operator for action \"%1$s\"."
-msgstr ""
+msgstr "סימן פעולת תנאי מסנן ריק לפעולה „%1$s”."
 
 #: include/classes/api/services/CAction.php:2736
 #, c-format
 msgid "Empty filter condition type for action \"%1$s\"."
-msgstr ""
+msgstr "סוג תנאי מסנן ריק לפעולה „%1$s”."
 
 #: include/classes/api/services/CAction.php:2810
 #: include/classes/api/services/CCorrelation.php:516
@@ -5847,7 +5853,7 @@ msgstr "הרחבת מאקרואים"
 
 #: include/views/monitoring.sysmap.edit.php:134
 msgid "Expand single problem"
-msgstr "הרחבת בעיה יחידה"
+msgstr "הרחבת תקלה יחידה"
 
 #: include/views/configuration.maintenance.list.php:55
 #: include/views/configuration.maintenance.list.php:83
@@ -6807,7 +6813,7 @@ msgstr "הסתרת ניפוי שגיאות"
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:86
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:86
 msgid "Hide groups without problems"
-msgstr "הסתרת קבוצות בלי בעיות"
+msgstr "הסתרת קבוצות בלי תקלות"
 
 #: include/views/monitoring.history.php:158
 msgid "Hide selected"
@@ -7406,7 +7412,7 @@ msgstr "סמל (מצב תחזוקה)"
 
 #: include/views/js/monitoring.sysmaps.js.php:616
 msgid "Icon (problem)"
-msgstr "סמל (בעיה)"
+msgstr "סמל (תקלה)"
 
 #: include/views/monitoring.sysmap.edit.php:125
 msgid "Icon highlight"
@@ -7580,7 +7586,7 @@ msgstr "פריט בלתי נגיש"
 #: include/views/configuration.host.list.php:190
 #: include/views/inventory.host.view.php:36
 msgid "Inaccessible maintenance"
-msgstr ""
+msgstr "תחזוקה בלתי נגישה"
 
 #: app/controllers/CControllerDashboardWidgetEdit.php:108
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:85
@@ -7965,7 +7971,7 @@ msgstr "נתונים שגויים."
 #: include/classes/db/PostgresqlDbBackend.php:78
 #, c-format
 msgid "Incorrect default charset for Zabbix database: %1$s."
-msgstr ""
+msgstr "ערכת תווי בררת המחדל למסד הנתונים של Zabbix שגויה: %1$s."
 
 #: include/classes/api/services/CEvent.php:594
 #: include/classes/api/services/CProblem.php:393
@@ -8206,7 +8212,7 @@ msgstr "ערך פריט שגוי."
 #: include/classes/db/OracleDbBackend.php:88
 #, c-format
 msgid "Incorrect parameter \"%1$s\" value: %2$s."
-msgstr ""
+msgstr "משתנה שגוי „%1$s” ערך: %2$s."
 
 #: include/classes/api/services/CAction.php:2824
 #, c-format
@@ -8416,7 +8422,7 @@ msgstr "קבוצת משתמשים שגויה."
 #: include/classes/api/services/CUser.php:1558
 #: include/classes/validators/CLdapAuthValidator.php:88 index_http.php:84
 msgid "Incorrect user name or password or account is temporarily blocked."
-msgstr ""
+msgstr "שם המשתמש או הססמה או החשבון חסומים זמנית."
 
 #: app/controllers/CControllerPopupGeneric.php:390
 #: include/classes/api/services/CAction.php:823
@@ -8516,7 +8522,7 @@ msgstr "ערך שגוי „%1$s” בשדה „%2$s” עבור סוג המדי�
 #: include/validate.inc.php:358
 #, c-format
 msgid "Incorrect value for \"%1$s\" field."
-msgstr ""
+msgstr "ערך שגוי לשדה „%1$s”."
 
 #: app/controllers/CControllerAuthenticationUpdate.php:86
 #: app/controllers/CControllerPopupHttpStep.php:94
@@ -9493,7 +9499,7 @@ msgstr "נתוני JSON"
 #: include/classes/api/services/CItemGeneral.php:2068
 #: include/classes/api/services/CItemGeneral.php:2097
 msgid "JSON is expected"
-msgstr ""
+msgstr "אמור היה להיות JSON"
 
 #: include/classes/validators/CNewValidator.php:101
 msgid "JSON string is expected"
@@ -9502,7 +9508,7 @@ msgstr "אמורה להיות מחרוזת JSON"
 #: include/classes/core/CJsonRpc.php:153
 #, c-format
 msgid "JSON-RPC error generation failed. No such error \"%1$s\"."
-msgstr ""
+msgstr "יצירת שגיאת JSON-RPC נכשלה. אין כזאת שגיאה „%1$s”."
 
 #: app/views/administration.mediatype.edit.php:54 include/media.inc.php:27
 msgid "Jabber"
@@ -9634,7 +9640,7 @@ msgstr "שפה"
 #: include/classes/api/services/CUser.php:553
 #, c-format
 msgid "Language \"%1$s\" is not supported."
-msgstr ""
+msgstr "השפה „%1$s” אינה נתמכת."
 
 #: include/func.inc.php:1690
 msgctxt "page navigation"
@@ -9886,12 +9892,12 @@ msgstr "הרשימה ריקה"
 #: include/classes/items/CHelpItems.php:185
 #: include/classes/items/CHelpItems.php:515
 msgid "List of detected CPUs/CPU cores. Returns JSON"
-msgstr ""
+msgstr "רשימה של המעבדים/ליבות המעבדים שזוהו. מחזירה JSON"
 
 #: include/classes/items/CHelpItems.php:329
 #: include/classes/items/CHelpItems.php:659
 msgid "List of mounted filesystems, their types, disk space and inode statistics. Returns JSON"
-msgstr ""
+msgstr "רשימה של מערכות קבצים מעוגנות, הסוג שלהן, השטח בכונן וסטטיסטיקת inodes. מחזירה JSON"
 
 #: include/classes/items/CHelpItems.php:325
 #: include/classes/items/CHelpItems.php:655
@@ -9901,7 +9907,7 @@ msgstr ""
 #: include/classes/items/CHelpItems.php:97
 #: include/classes/items/CHelpItems.php:427
 msgid "List of network interfaces. Returns JSON"
-msgstr ""
+msgstr "רשימת מנשקי הרשת. מחזירה JSON"
 
 #: app/views/dashboard.sharing.edit.php:79
 #: include/views/monitoring.screen.edit.php:203
@@ -10254,7 +10260,7 @@ msgstr "סוג תווית רכיב במפה"
 
 #: sysmap.php:102
 msgid "Map is updated! Return to map list?"
-msgstr ""
+msgstr "המפה עודכנה! לחזור לרשימת המפות?"
 
 #: include/views/monitoring.sysmap.edit.php:176
 msgid "Map label type"
@@ -10720,7 +10726,7 @@ msgstr "מרובים"
 
 #: include/triggers.inc.php:1280
 msgid "Multiple PROBLEM events"
-msgstr "מגוון אירועי בעיות"
+msgstr "מגוון אירועי תקלה"
 
 #: jsLoader.php:190
 msgid "Mute"
@@ -10965,7 +10971,7 @@ msgstr "קבוצת אירועים למארחים חדשה"
 
 #: include/correlation.inc.php:50 include/correlation.inc.php:202
 msgid "New event tag name"
-msgstr ""
+msgstr "שם תגית אירוע חדש"
 
 #: include/correlation.inc.php:54
 msgid "New event tag value"
@@ -11722,7 +11728,7 @@ msgstr "מספר הפריטים בתור שהושהו למשך תקופת שני
 #: include/classes/items/CHelpItems.php:699
 #: include/classes/items/CHelpItems.php:1127
 msgid "Number of items in the queue which are delayed in Zabbix server or proxy by \"from\" till \"to\" seconds, inclusive."
-msgstr ""
+msgstr "מספר הפריטים שמעוכבים בתור בשרת או במתווך ה־Zabbix לפי „מ־” ועד „עד”, כולל."
 
 #: include/classes/items/CHelpItems.php:1079
 msgid "Number of monitored hosts"
@@ -11735,11 +11741,11 @@ msgstr "מספר התנגשויות out-of-window (מחוץ למסגרת). מח�
 
 #: include/views/monitoring.sysmap.edit.php:135
 msgid "Number of problems"
-msgstr "מספר בעיות"
+msgstr "מספר תקלות"
 
 #: include/views/monitoring.sysmap.edit.php:136
 msgid "Number of problems and expand most critical one"
-msgstr "מספר בעיות והרחבה של הקריטית ביותר"
+msgstr "מספר תקלות והרחבה של הקריטית ביותר"
 
 #: include/classes/items/CHelpItems.php:839
 msgid "Number of processor cores on VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -11772,7 +11778,7 @@ msgstr "מספר השלבים"
 
 #: include/blocks.inc.php:454
 msgid "Number of triggers (enabled/disabled [problem/ok])"
-msgstr "מספר ההקפצות (פעיל/מנוטרל [תקלה/תקין])"
+msgstr "מספר ההקפצות (פעיל/מושבת [תקלה/תקין])"
 
 #: include/classes/items/CHelpItems.php:1139
 msgid "Number of triggers in Zabbix database."
@@ -11940,7 +11946,7 @@ msgstr "בסדר"
 
 #: include/correlation.inc.php:49 include/correlation.inc.php:197
 msgid "Old event tag name"
-msgstr ""
+msgstr "שם תגית אירוע ישן"
 
 #: include/correlation.inc.php:53
 msgid "Old event tag value"
@@ -12039,8 +12045,8 @@ msgstr "רק בדיקה אחת יכולה להיות ייחודית."
 #: app/views/monitoring.acknowledge.edit.php:49
 msgid "Only selected problem"
 msgid_plural "Only selected problems"
-msgstr[0] "רק בעיה נבחרת"
-msgstr[1] "רק בעיות נבחרות"
+msgstr[0] "רק תקלה נבחרת"
+msgstr[1] "רק תקלות נבחרות"
 
 #: include/classes/api/services/CCorrelation.php:512
 msgid "Only super admins can create correlations."
@@ -12937,7 +12943,7 @@ msgstr "התקלה מוסתרת"
 
 #: jsLoader.php:188
 msgid "Problem on"
-msgstr "בעיה עם"
+msgstr "תקלה עם"
 
 #: include/actions.inc.php:2128
 msgid "Problem resolved"
@@ -12945,7 +12951,7 @@ msgstr "התקלה נפתרה"
 
 #: srv_status.php:148
 msgid "Problem time"
-msgstr "זמן התקלה"
+msgstr "מועד תקלה"
 
 #: include/services.inc.php:25
 msgid "Problem, if all children have problems"
@@ -13612,7 +13618,7 @@ msgstr "נפתר על ידי כלל יחס."
 #: include/classes/screens/CScreenHostTriggers.php:244
 #: include/classes/screens/CScreenProblem.php:972
 msgid "Resolved by inaccessible user."
-msgstr ""
+msgstr "נפתר על ידי משתמש בלתי נגיש."
 
 #: app/views/monitoring.widget.problems.view.php:142
 #: include/classes/screens/CScreenHostTriggers.php:243
@@ -13694,7 +13700,7 @@ msgstr "מחזירה תגובת ping מסוג ICMP בשניות. למשל: 0.02"
 #: include/classes/items/CHelpItems.php:695
 #: include/classes/items/CHelpItems.php:1123
 msgid "Returns a JSON object containing Zabbix server or proxy internal metrics."
-msgstr ""
+msgstr "מחזירה עצם JSON שמכיל מדדים פנימיים של שרת או מתווך Zabbix."
 
 #: include/classes/items/CHelpItems.php:1071
 msgid "Returns a JSON object describing the host network interfaces configured in Zabbix. Can be used for LLD."
@@ -14327,7 +14333,7 @@ msgstr "הפעולה הנבחרת נמחקה"
 
 #: app/views/monitoring.acknowledge.edit.php:54
 msgid "Selected and all other problems of related triggers"
-msgstr "הבעיות הנבחרות וכל השאר של ההקפצות הקשורות"
+msgstr "התקלות הנבחרות וכל השאר של ההקפצות הקשורות"
 
 #: correlation.php:374
 msgid "Selected correlations deleted"
@@ -14486,7 +14492,7 @@ msgstr "שירות נוצר"
 
 #: adm.housekeeper.php:45
 msgid "Service data storage period"
-msgstr "תקופת אחסון נתוני שירות"
+msgstr "תקופת אחסנה של נתוני שירות"
 
 #: include/profiles.inc.php:226
 #, c-format
@@ -14494,6 +14500,7 @@ msgid "Service data storage period \"%1$s\"."
 msgstr "תקופת אחסון נתוני שירות „%1$s”."
 
 #: services.php:108
+#, fuzzy
 msgid "Service deleted"
 msgstr "שירות נמחק"
 
@@ -14696,7 +14703,7 @@ msgstr "הצגת קווים"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:308
 msgid "Show problems"
-msgstr "הצגת בעיות"
+msgstr "הצגת תקלות"
 
 #: include/views/monitoring.history.php:157
 msgid "Show selected"
@@ -15045,7 +15052,7 @@ msgstr "סטטית"
 
 #: include/classes/items/CHelpItems.php:1159
 msgid "Statistics and availability of Zabbix write cache. Cache - one of values (modes: all, float, uint, str, log, text, not supported), history (modes: pfree, free, total, used, pused), index (modes: pfree, free, total, used, pused), trend (modes: pfree, free, total, used, pused)."
-msgstr ""
+msgstr "סטטיסטיקה וזמינות זיכרון מטמון הכתיבה של Zabbix. זיכרון מטמון - אחד מבין values (מצבים: all,‏ float,‏ uint,‏ str,‏ log,‏ text,‏ not supported), history (מצבים: pfree,‏ free,‏ total,‏ used,‏ pused), index (מצבים: pfree,‏ free,‏ total,‏ used,‏ pused) ו־trend (מצבים: pfree,‏ free,‏ total,‏ used,‏ pused)."
 
 #: app/controllers/CControllerPopupGeneric.php:145
 #: app/controllers/CControllerPopupGeneric.php:159
@@ -15179,7 +15186,7 @@ msgstr "עצירה"
 #: include/views/configuration.item.prototype.edit.php:693
 #: include/views/configuration.item.prototype.edit.php:706
 msgid "Storage period"
-msgstr ""
+msgstr "תקופת אחסון"
 
 #: include/hosts.inc.php:35
 msgid "Straight"
@@ -15477,7 +15484,7 @@ msgstr "נוספה תבנית"
 
 #: include/views/conf.import.php:97
 msgid "Template and host properties that are inherited through template linkage will be unlinked and cleared."
-msgstr ""
+msgstr "מאפייני תבנית ומארח שמתקבלים בירושה דרך קישור בין תבניות ינותקו ויימחקו."
 
 #: include/classes/api/services/CHostBase.php:285
 msgid "Template cannot be linked to another template more than once even through other templates."
@@ -15515,7 +15522,7 @@ msgstr "מסכים של תבנית"
 
 #: report2.php:392
 msgid "Template trigger"
-msgstr "הקפצה של תבנית"
+msgstr "הקפצה מתבנית"
 
 #: templates.php:180
 msgid "Template updated"
@@ -15634,7 +15641,7 @@ msgstr "נקודת הציון בציר ה־X של רכיב המסך הממוקם
 #: include/classes/db/DbBackend.php:51
 #, c-format
 msgid "The Zabbix database version does not match current requirements. Your database version: %1$s. Required version: %2$s. Please contact your system administrator."
-msgstr ""
+msgstr "גרסת מסד הנתונים של Zabbix אינה תואמת לדרישות הנוכחיות. גרסת מסד הנתונים שלך: %1$s. גרסה נדרשת: %2$s. נא ליצור קשר עם הנהלת המערכת שלך."
 
 #: include/html.inc.php:687
 #, c-format
@@ -16168,7 +16175,7 @@ msgstr "מצב ההקפצה הוא „תקין“"
 
 #: jsLoader.php:244
 msgid "Trigger status \"Problem\""
-msgstr "מצב ההקפצה הוא „בעיה”"
+msgstr "מצב ההקפצה הוא „תקלה”"
 
 #: triggers.php:373 triggers.php:460
 msgid "Trigger updated"
@@ -16408,7 +16415,7 @@ msgstr "אוקראינית (uk_UA)"
 
 #: include/classes/core/CConfigFile.php:158
 msgid "Unable to change configuration file permissions to 0600."
-msgstr ""
+msgstr "לא ניתן לשנות את הרשאות קובץ ההגדרות ל־0600."
 
 #: include/classes/core/CConfigFile.php:167
 msgid "Unable to create the configuration file."
@@ -16420,7 +16427,7 @@ msgstr "לא ניתן ליצור את קובץ התצורה."
 #: include/classes/db/PostgresqlDbBackend.php:44
 #, c-format
 msgid "Unable to determine current Zabbix database version: %1$s."
-msgstr ""
+msgstr "לא ניתן לאתר את גרסת מסד הנתונים הנוכחית של Zabbix:‏ %1$s."
 
 #: include/classes/core/CConfigFile.php:163
 msgid "Unable to overwrite the existing configuration file."
@@ -16436,12 +16443,12 @@ msgstr "לא ניתן להעלות קובץ כיוון שהאפשרות „file_
 
 #: include/maps.inc.php:402 include/maps.inc.php:495 include/maps.inc.php:583
 msgid "Unacknowledged"
-msgstr "לא מוכר"
+msgstr "לא הוכר"
 
 #: adm.triggerdisplayoptions.php:33
 #: include/views/administration.general.trigger.options.edit.php:41
 msgid "Unacknowledged PROBLEM events"
-msgstr "אירועים מסוג בעיה שלא קיבלו הכרה"
+msgstr "אירועים מסוג תקלה שלא קיבלו הכרה"
 
 #: adm.triggerdisplayoptions.php:39
 #: include/views/administration.general.trigger.options.edit.php:61
@@ -16599,7 +16606,8 @@ msgstr "ביטול השתקה"
 #, c-format
 msgid "Unsupported charset or collation for table: %1$s."
 msgid_plural "Unsupported charset or collation for tables: %1$s."
-msgstr[0] ""
+msgstr[0] "ערכת תווים או איסוף בלתי נתמכים בטבלה: %1$s."
+msgstr[1] "ערכת תווים או איסוף בלתי נתמכים בטבלאות: %1$s."
 
 #: include/classes/import/readers/CImportReaderFactory.php:65
 #, c-format
@@ -16723,7 +16731,7 @@ msgstr "עדכון תקלה"
 
 #: auditlogs.php:132
 msgid "Updated"
-msgstr "עודכן"
+msgstr "מעודכן"
 
 #: include/classes/api/services/CHost.php:1140
 #, c-format
@@ -16859,6 +16867,7 @@ msgid "User cannot change their user type."
 msgstr "למשתמש אין אפשרות לשנות את סוג המשתמש של עצמו."
 
 #: users.php:233 users.php:267
+#, fuzzy
 msgid "User deleted"
 msgstr "משתמש נמחק"
 
@@ -17070,28 +17079,28 @@ msgstr "מצב קלאסטר VMware,‏ <url> - כתובת שירות VMware,‏ 
 
 #: include/classes/items/CHelpItems.php:779
 msgid "VMware datacenters and their IDs. Returns JSON"
-msgstr ""
+msgstr "חוות (datacenters) של VMware והמזהים שלהם. מחזירה JSON"
 
 #: include/classes/items/CHelpItems.php:771
 #: include/classes/items/CHelpItems.php:815
 msgid "VMware datastore capacity statistics in bytes or in percentage from total. Returns integer for bytes; float for percentage"
-msgstr "סטטיסטיקת נפח אחסון הנתונים של VMWare בבתים או באחוזים מהכלל. מחזירה מספר שלם לבתים, שבר עשרוני לאחוזים"
+msgstr "סטטיסטיקת נפח מאגר הנתונים של VMWare בבתים או באחוזים מהכלל. מחזירה מספר שלם לבתים, שבר עשרוני לאחוזים"
 
 #: include/classes/items/CHelpItems.php:763
 msgid "VMware datastore hypervisors list, <url> - VMware service URL, <datastore> - datastore name"
-msgstr ""
+msgstr "רשימת מאגרי הנתונים של ה־Hypervisors של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <datastore> - שם מאגר הנתונים"
 
 #: include/classes/items/CHelpItems.php:767
 msgid "VMware datastore read statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
-msgstr ""
+msgstr "סטטיסטיקת קריאה ממאגרי נתונים של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <datastore> - שם מאגר הנתונים, <mode>‏ - latency/maxlatency - ממוצע או מקסימום"
 
 #: include/classes/items/CHelpItems.php:775
 msgid "VMware datastore write statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
-msgstr ""
+msgstr "סטטיסטיקת כתיבה למאגרי נתונים של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <datastore> - שם מאגר הנתונים, <mode>‏ - latency/maxlatency - ממוצע או מקסימום"
 
 #: include/classes/items/CHelpItems.php:783
 msgid "VMware event log, <url> - VMware service URL, <mode> - all (default), skip - skip processing of older data"
-msgstr ""
+msgstr "יומן אירועים של VMware,‏ <url> - כתובת שירות VMware,‏ <mode>‏ - all (הכול - בררת מחדל), skip - לדלג על נתונים ישנים"
 
 #: include/classes/items/CHelpItems.php:855
 msgid "VMware hypervisor BIOS uuid, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -17107,7 +17116,7 @@ msgstr "שם הקלאסטר של ה־hypervisor מבית VMware,‏ <url> - כת
 
 #: include/classes/items/CHelpItems.php:799
 msgid "VMware hypervisor datacenter name, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns string"
-msgstr ""
+msgstr "שם חווה (datacenter) של VMware hypervisor,‏ <url> - כתובת שירות VMware,‏ <uuid> שם מארח של hypervisor של VMWare. מחזירה מחרוזת"
 
 #: include/classes/items/CHelpItems.php:811
 msgid "VMware hypervisor datastore read statistics, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <datastore> - datastore name, <mode> - latency"
@@ -17119,11 +17128,11 @@ msgstr "סטטיסטיקת הכתיבה למאגר הנתונים של ה־Hyper
 
 #: include/classes/items/CHelpItems.php:807
 msgid "VMware hypervisor datastores list, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr ""
+msgstr "רשימת מאגרי הנתונים של ה־Hypervisor של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־Hypervisor של VMware"
 
 #: include/classes/items/CHelpItems.php:883
 msgid "VMware hypervisor health state rollup sensor, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns 0 - gray; 1 - green; 2 - yellow; 3 - red"
-msgstr ""
+msgstr "מצב בריאות חיישן rollup של VMware hypervisor,‏ <url> - כתובת שירות VMware,‏ <uuid> - שם מארח של מכונה וירטואלית ב־VMware. מחזירה 0 - אפור, 1 - ירוק, 2 - צהוב, 3 - אדום"
 
 #: include/classes/items/CHelpItems.php:851
 msgid "VMware hypervisor model, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -17203,7 +17212,7 @@ msgstr "גודל זיכרון דחוס של מכונה וירטואלית ב־VM
 
 #: include/classes/items/CHelpItems.php:923
 msgid "VMware virtual machine datacenter name, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns string"
-msgstr ""
+msgstr "שם של חוות (datacenter) של מכונה וירטואליתVMware,‏ <url> - כתובת שירותVMware,‏ <uuid> - שם מארח המכונה הווירטואלית ב־VMware. מחזירה מחרוזת"
 
 #: include/classes/items/CHelpItems.php:1007
 msgid "VMware virtual machine disk device read statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance, <mode> - bps/ops - bytes/operations per second"
@@ -17407,7 +17416,7 @@ msgstr "מיפויי הערכים למפות הערכים יעודכנו!"
 #: include/classes/items/CHelpItems.php:149
 #: include/classes/items/CHelpItems.php:479
 msgid "Value of any Windows performance counter in English. Returns integer, float, string or text (depending on the request)"
-msgstr ""
+msgstr "ערך של כל מונה ביצועים של Windows באנגלית. מחזירה מספר שלם, שבר עשרוני, מחרוזת או טקסט (בהתאם לבקשה)"
 
 #: include/classes/items/CHelpItems.php:145
 #: include/classes/items/CHelpItems.php:475
@@ -17416,15 +17425,15 @@ msgstr "ערך של מונה ביצועים כלשהו של Windows. מחזיר�
 
 #: include/correlation.inc.php:227
 msgid "Value of new event tag"
-msgstr ""
+msgstr "ערך של תגית אירוע חדשה"
 
 #: include/correlation.inc.php:212 include/correlation.inc.php:220
 msgid "Value of old event tag"
-msgstr ""
+msgstr "ערך של תגית אירוע ישנה"
 
 #: include/actions.inc.php:331
 msgid "Value of tag"
-msgstr ""
+msgstr "ערך התגית"
 
 #: include/classes/graphdraw/CPieGraphDraw.php:357
 msgid "Value: no data"
@@ -17519,7 +17528,7 @@ msgstr "אזהרה"
 
 #: jsLoader.php:125
 msgid "Warning message"
-msgstr ""
+msgstr "הודעת אזהרה"
 
 #: jsLoader.php:197
 msgid "We are sorry, the maximum possible number of elements to remember has been reached."
@@ -17762,7 +17771,7 @@ msgstr "ה־XML ריק"
 
 #: include/classes/api/services/CItemGeneral.php:2053
 msgid "XML is expected"
-msgstr ""
+msgstr "אמור להיות XML"
 
 #: include/views/js/monitoring.sysmaps.js.php:247
 #: include/views/js/monitoring.sysmaps.js.php:384
@@ -17776,7 +17785,7 @@ msgstr "ערך מרבי של ציר ה־Y"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:491
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:515
 msgid "Y axis MAX value must be greater than Y axis MIN value"
-msgstr ""
+msgstr "הערך המרבי של ציר ה־Y חייב להיות גדול מהערך המזערי של ציר ה־Y"
 
 #: include/classes/api/services/CGraphGeneral.php:314
 #: include/classes/graphdraw/CLineGraphDraw.php:710
@@ -17952,7 +17961,7 @@ msgstr "עליך להיכנס כדי לצפות בעמוד זה."
 
 #: include/classes/db/DB.php:136
 msgid "Your database is not working properly. Please wait a few minutes and try to repeat this action. If the problem still persists, please contact system administrator. The problem might be caused by long running transaction or row level lock accomplished by your database management system."
-msgstr "מסד הנתונים שלך אינו פועל כראוי. נא להמתין מספר דקות ולנסות לחזור על פעולה זו. אם הבעיה עדיין מתרחשת, נא ליצור קשר עם מנהל המערכת. הבעיה מתרחשת כנראה עקב פעולות ממושכרות או נעילה ברמת שורה שנגרמו על ידי מערכת ניהול מסד הנתונים שלך."
+msgstr "מסד הנתונים שלך אינו פועל כראוי. נא להמתין מספר דקות ולנסות לחזור על פעולה זו. אם התקלה עדיין מתרחשת, נא ליצור קשר עם מנהל המערכת. התקלה מתרחשת כנראה עקב פעולות ממושכרות או נעילה ברמת שורה שנגרמו על ידי מערכת ניהול מסד הנתונים שלך."
 
 #: index.php:28
 msgid "ZABBIX"
@@ -18098,7 +18107,7 @@ msgstr "אמור להיות מחרוזת תווים"
 
 #: include/classes/validators/CApiInputValidator.php:579
 msgid "a floating point value is expected"
-msgstr ""
+msgstr "אמור להיות ערך עם נקודה עשרונית"
 
 #: include/classes/validators/CApiInputValidator.php:303
 msgid "a hexadecimal colour code (6 symbols) is expected"
@@ -18125,7 +18134,7 @@ msgstr "אמור להיות ערך מספרי"
 
 #: include/classes/validators/CApiInputValidator.php:1728
 msgid "a string, number or null value is expected"
-msgstr ""
+msgstr "אמור להיות מחרוזת, מספר או ריק"
 
 #: include/classes/validators/CNewValidator.php:267
 msgid "a time is expected"
@@ -18211,7 +18220,7 @@ msgstr "אמור להיות מערך או מחרוזת תווים"
 
 #: include/classes/validators/CApiInputValidator.php:1708
 msgid "an array or object is expected"
-msgstr ""
+msgstr "אמור להיות מערך"
 
 #: include/classes/import/validators/C10XmlValidator.php:397
 #: include/classes/import/validators/C10XmlValidator.php:419
@@ -18228,11 +18237,11 @@ msgstr "אמורה להיות שעה מפורשת"
 
 #: include/classes/validators/CApiInputValidator.php:449
 msgid "an integer is expected"
-msgstr ""
+msgstr "אמור להיות ערך שלם"
 
 #: include/classes/validators/CApiInputValidator.php:488
 msgid "an unsigned integer is expected"
-msgstr ""
+msgstr "אמור להיות ערך שלם וחיובי"
 
 #: include/views/monitoring.history.php:168
 msgid "as Blue"
@@ -18531,7 +18540,7 @@ msgstr "רביעי"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:338
 msgid "fuzzytime() - Difference between item value (as timestamp) and Zabbix server timestamp is less than or equal to T seconds (1 - true, 0 - false)"
-msgstr ""
+msgstr "fuzzytime()‎ - ההפרש בין ערך פריט (בתור חותמת זמן) וחותמת הזמן של שרת ה־Zabbix קטנה או שווה ל־T שניות (1 - אמת, 0 - שקר)"
 
 #: include/views/configuration.item.edit.php:778
 #: include/views/configuration.item.edit.php:780
@@ -19177,7 +19186,7 @@ msgstr "הפרמטר „%1$s” חסר"
 #: include/classes/db/PostgresqlDbBackend.php:45
 #, c-format
 msgid "the table \"%1$s\" was not found"
-msgstr ""
+msgstr "הטבלה „%1$s” לא נמצאה"
 
 #: include/classes/import/validators/CXmlValidatorGeneral.php:106
 #: include/classes/import/validators/CXmlValidatorGeneral.php:125
@@ -19237,7 +19246,7 @@ msgstr "יש להקליד כאן כדי לחפש"
 
 #: include/classes/validators/CApiInputValidator.php:1638
 msgid "unacceptable URL"
-msgstr ""
+msgstr "כתובת לא מקובלת"
 
 #: include/classes/parsers/CItemKey.php:55
 msgid "unexpected end of key"
@@ -19372,7 +19381,7 @@ msgstr "הערך חייב להיות אחד מבין %1$s"
 
 #: include/correlation.inc.php:215
 msgid "value of new event tag"
-msgstr ""
+msgstr "ערך של תגית אירוע חדשה"
 
 #: include/actions.inc.php:566 include/actions.inc.php:584
 #: include/actions.inc.php:729 include/actions.inc.php:747
