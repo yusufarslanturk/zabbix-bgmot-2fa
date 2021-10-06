@@ -5777,7 +5777,7 @@ static void	substitute_macros_in_xml_elements(const DC_ITEM *item, const struct 
 				else
 					substitute_lld_macros(&value_tmp, jp_row, ZBX_MACRO_ANY, NULL, 0);
 
-				xmlNodeSetContent(node, (xmlChar *)"");
+				xmlNodeSetContent(node, NULL);
 				xmlNodeAddContent(node, (xmlChar *)value_tmp);
 
 				zbx_free(value_tmp);
@@ -5797,7 +5797,7 @@ static void	substitute_macros_in_xml_elements(const DC_ITEM *item, const struct 
 				else
 					substitute_lld_macros(&value_tmp, jp_row, ZBX_MACRO_ANY, NULL, 0);
 
-				xmlNodeSetContent(node, (xmlChar *)"");
+				xmlNodeSetContent(node, NULL);
 				xmlNodeAddContent(node, (xmlChar *)value_tmp);
 
 				zbx_free(value_tmp);
