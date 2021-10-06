@@ -399,7 +399,12 @@ class CLegacyWebTest extends CWebTest {
 	}
 
 	public function zbxTestAssertAttribute($xpath, $attribute, $value = 'true') {
-		$this->assertEquals($value, $this->query('xpath:'.$xpath)->one()->getAttribute($attribute));
+		if ($attribute === 'selected') {
+			$this->assertTrue($this->query('xpath:'.$xpath)->one()->isSelected());
+		}
+		else {
+			$this->assertEquals($value, $this->query('xpath:'.$xpath)->one()->getAttribute($attribute));
+		}
 	}
 
 	public function zbxTestAssertElementNotPresentId($id) {
