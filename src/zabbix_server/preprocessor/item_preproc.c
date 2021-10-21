@@ -311,8 +311,8 @@ static int	item_preproc_delta_uint64(zbx_variant_t *value, const zbx_timespec_t 
 static int	item_preproc_delta(unsigned char value_type, zbx_variant_t *value, const zbx_timespec_t *ts,
 		unsigned char op_type, zbx_item_history_value_t *history_value, char **errmsg)
 {
-	int				ret = FAIL;
-	zbx_variant_t			value_num;
+	zbx_variant_t	value_num;
+	int		ret;
 
 	if (FAIL == zbx_item_preproc_convert_value_to_numeric(&value_num, value, value_type, errmsg))
 		return FAIL;

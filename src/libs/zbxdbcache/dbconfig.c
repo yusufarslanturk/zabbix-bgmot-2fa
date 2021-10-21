@@ -986,7 +986,6 @@ static int	DCsync_config(zbx_dbsync_t *sync, int *flags)
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __function_name);
 
 	return SUCCEED;
-
 #undef SELECTED_FIELD_COUNT
 }
 
@@ -1272,7 +1271,7 @@ static void	DCsync_hosts(zbx_dbsync_t *sync)
 done:
 		if (NULL != host->tls_dc_psk && NULL == psk_owner)
 		{
-			if (NULL == (psk_owner = (zbx_ptr_pair_t *)zbx_hashset_search(&psk_owners, &host->tls_dc_psk->tls_psk_identity)))
+			if (NULL == zbx_hashset_search(&psk_owners, &host->tls_dc_psk->tls_psk_identity))
 			{
 				/* register this host as the PSK identity owner, against which to report conflicts */
 
@@ -6790,7 +6789,7 @@ void	DCconfig_get_preprocessable_items(zbx_hashset_t *items, int *timestamp)
 		if (ITEM_TYPE_INTERNAL != dc_item->type)
 			continue;
 
-		if (NULL == (item = (zbx_preproc_item_t *)zbx_hashset_search(items, &dc_item->itemid)))
+		if (NULL == zbx_hashset_search(items, &dc_item->itemid))
 		{
 			if (FAIL == dc_preproc_item_init(&item_local, dc_item->itemid))
 				continue;
@@ -11625,10 +11624,9 @@ void	zbx_dc_update_proxy(zbx_proxy_diff_t *diff)
 
 		if (0 != (diff->flags & ZBX_FLAGS_PROXY_DIFF_UPDATE_COMPRESS))
 		{
-			if (proxy->auto_compress != diff->compress)
-				proxy->auto_compress = diff->compress;
-			else
+			if (proxy->auto_compress == diff->compress)
 				diff->flags &= (~ZBX_FLAGS_PROXY_DIFF_UPDATE_COMPRESS);
+			proxy->auto_compress = diff->compress;
 		}
 		if (0 != (diff->flags & ZBX_FLAGS_PROXY_DIFF_UPDATE_LASTERROR))
 		{
