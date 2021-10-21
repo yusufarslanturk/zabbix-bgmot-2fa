@@ -71,7 +71,6 @@ zbx_sysinfo_proc_t;
 static int	zbx_solaris_version_get(unsigned int *major_version, unsigned int *minor_version)
 {
 	const char	*__function_name = "zbx_solaris_version_get";
-	int		res;
 	struct utsname	name;
 
 	if (-1 == uname(&name))
