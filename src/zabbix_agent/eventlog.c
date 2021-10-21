@@ -431,7 +431,6 @@ static int	zbx_get_handle_eventlog6(const wchar_t *wsource, zbx_uint64_t *lastlo
 {
 	const char	*__function_name = "zbx_get_handle_eventlog6";
 	wchar_t		*event_query = NULL;
-	DWORD		status = 0;
 	char		*tmp_str = NULL;
 	int		ret = FAIL;
 
@@ -445,6 +444,8 @@ static int	zbx_get_handle_eventlog6(const wchar_t *wsource, zbx_uint64_t *lastlo
 	*query = EvtQuery(NULL, wsource, event_query, EvtQueryChannelPath);
 	if (NULL == *query)
 	{
+		DWORD	status;
+
 		if (ERROR_EVT_CHANNEL_NOT_FOUND == (status = GetLastError()))
 			*error = zbx_dsprintf(*error, "EvtQuery channel missed:%s", strerror_from_system(status));
 		else
