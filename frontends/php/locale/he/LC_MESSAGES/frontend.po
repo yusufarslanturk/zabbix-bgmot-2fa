@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-10 19:50+0300\n"
-"PO-Revision-Date: 2021-10-17 12:02+0300\n"
+"PO-Revision-Date: 2021-10-19 06:37+0300\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: none\n"
 "Language: he\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.3\n"
-"X-POOTLE-MTIME: 1634464956.000000\n"
+"X-POOTLE-MTIME: 1634618254.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:70
 #: include/classes/db/OracleDbBackend.php:89
@@ -1480,19 +1480,19 @@ msgstr "מחושב"
 
 #: include/classes/items/CHelpItems.php:705
 msgid "Calculates the average value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "מחשבת את הערך הממוצע, על בסיס המשתנים השונים שסופקו. שרת Zabbix אוסף מידע ריכוזי על ידי תשאול מסד הנתונים באופן ישיר."
 
 #: include/classes/items/CHelpItems.php:713
 msgid "Calculates the maximum value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "מחשבת את הערך המרבי, על בסיס המשתנים השונים שסופקו. שרת Zabbix אוסף מידע ריכוזי על ידי תשאול מסד הנתונים באופן ישיר."
 
 #: include/classes/items/CHelpItems.php:709
 msgid "Calculates the minimum value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "מחשבת את הערך המזערי, על בסיס המשתנים השונים שסופקו. שרת Zabbix אוסף מידע ריכוזי על ידי תשאול מסד הנתונים באופן ישיר."
 
 #: include/classes/items/CHelpItems.php:717
 msgid "Calculates the sum of values, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "מחשבת את סכום הערכים, על בסיס המשתנים השונים שסופקו. שרת Zabbix אוסף מידע ריכוזי על ידי תשאול מסד הנתונים באופן ישיר."
 
 #: jsLoader.php:128
 msgid "Calendar"
@@ -18616,7 +18616,7 @@ msgstr "ביטוי הקפצה שגוי"
 #: include/classes/parsers/CTriggerExpression.php:471
 #, c-format
 msgid "incorrect trigger expression starting from \"%1$s\""
-msgstr ""
+msgstr "ביטוי הקפצה שגוי החל מ־„%1$s”"
 
 #: include/events.inc.php:37
 msgctxt "event source"
@@ -19221,7 +19221,7 @@ msgstr "ההקפצה אינה מאפשרת סגירה ידנית"
 
 #: include/classes/validators/CApiInputValidator.php:1685
 msgid "trigger expression must contain at least one host:key reference"
-msgstr ""
+msgstr "ביטוי ההקפצה חייב להכיל לפחות הפניה אחת של מארח:מפתח"
 
 #: include/classes/api/services/CTriggerGeneral.php:1602
 msgid "trigger prototype cannot be moved to another template or host"
