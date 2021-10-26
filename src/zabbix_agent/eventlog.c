@@ -23,8 +23,6 @@
 #include "winmeta.h"
 #include "eventlog.h"
 
-#define	DEFAULT_EVENT_CONTENT_SIZE 256
-
 static const wchar_t	*RENDER_ITEMS[] = {
 	L"/Event/System/Provider/@Name",
 	L"/Event/System/Provider/@EventSourceName",
