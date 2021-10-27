@@ -1,0 +1,14 @@
+--- frontends/php/tests/include/CTest.php
++++ frontends/php/tests/include/CTest.php
+@@ -405,6 +426,11 @@ class CTest extends PHPUnit_Framework_TestCase {
+ 	public static function onAfterTestSuite() {
+ 		global $DB;
+ 
++		if (self::$suite_backup_config) {
++			CConfigHelper::restoreConfig();
++			self::$suite_backup_config = false;
++		}
++
+ 		if (self::$suite_backup === null && self::$case_backup_once === null && !self::$suite_callbacks['afterOnce']
+ 				&& !self::$suite_callbacks['after']) {
+ 
