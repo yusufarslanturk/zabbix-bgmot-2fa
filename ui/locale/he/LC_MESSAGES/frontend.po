@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-08 19:53+0300\n"
+"POT-Creation-Date: 2021-10-26 16:06+0300\n"
 "PO-Revision-Date: 2021-10-17 11:56+0300\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: none\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Pootle 2.5.1.3\n"
 "X-POOTLE-MTIME: 1634464599.000000\n"
 
-#: include/classes/items/CHelpItems.php:1073
+#: include/classes/items/CHelpItems.php:1081
 msgid "\tThe average time a read from the virtual disk takes , <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance"
 msgstr "\tהזמן הממוצע שלוקח לקרוא מהכונן הווירטואלי , <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מכונה וירטואלית ב־VMware, ‏<instance> - מופע התקן כונן"
 
@@ -34,9 +34,9 @@ msgstr "„%1$s” במקום „%2$s”"
 #: include/classes/import/validators/C40XmlValidator.php:1258
 #: include/classes/import/validators/C42XmlValidator.php:1316
 #: include/classes/import/validators/C44XmlValidator.php:1721
-#: include/classes/import/validators/C50XmlValidator.php:1864
-#: include/classes/import/validators/C52XmlValidator.php:1986
-#: include/classes/import/validators/C54XmlValidator.php:2041
+#: include/classes/import/validators/C50XmlValidator.php:1871
+#: include/classes/import/validators/C52XmlValidator.php:1993
+#: include/classes/import/validators/C54XmlValidator.php:2048
 #, c-format
 msgid "\"%1$s\" is expected"
 msgstr "אמור להיות „%1$s”"
@@ -88,7 +88,7 @@ msgid_plural "%1$d days"
 msgstr[0] "יום אחד"
 msgstr[1] "%1$d ימים"
 
-#: jsLoader.php:306
+#: jsLoader.php:307
 #, c-format
 msgctxt "screen reader"
 msgid "%1$d matches for %2$s found"
@@ -129,6 +129,16 @@ msgid "%1$s action"
 msgid_plural "%1$s actions"
 msgstr[0] "משימה אחת"
 msgstr[1] "%1$s משימות"
+
+#: jsLoader.php:288
+#, c-format
+msgid "%1$s characters"
+msgstr ""
+
+#: jsLoader.php:289
+#, c-format
+msgid "%1$s characters remaining"
+msgstr ""
 
 #: app/views/popup.acknowledge.edit.php:60
 #: app/views/popup.acknowledge.edit.php:65
@@ -187,7 +197,7 @@ msgid_plural "%1$s of %2$s elements in problem state"
 msgstr[0] "%1$s מתוך רכיב %2$s נמצא במצב תקלה"
 msgstr[1] "%1$s מתוך %2$s רכיבים נמצאים במצב תקלה"
 
-#: jsLoader.php:307
+#: jsLoader.php:308
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s preselected, use down,up arrow keys and enter to select"
@@ -227,11 +237,6 @@ msgid_plural "%1$s seconds"
 msgstr[0] "שנייה אחת"
 msgstr[1] "%1$s שניות"
 
-#: jsLoader.php:288
-#, c-format
-msgid "%1$s symbols remaining"
-msgstr "נותרו %1$s סמלים"
-
 #: include/maps.inc.php:368 include/maps.inc.php:371 include/maps.inc.php:378
 #: include/maps.inc.php:383
 #, c-format
@@ -247,13 +252,13 @@ msgctxt "screen reader"
 msgid "%1$s, Severity, %2$s"
 msgstr "%1$s, דרגת חומרה, %2$s"
 
-#: jsLoader.php:301
+#: jsLoader.php:302
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, read only"
 msgstr "%1$s, קריאה בלבד"
 
-#: jsLoader.php:344
+#: jsLoader.php:345
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, selected"
@@ -487,7 +492,7 @@ msgstr "גישה למודולים"
 msgid "Ack"
 msgstr "מוכר"
 
-#: app/views/popup.acknowledge.edit.php:83 jsLoader.php:311
+#: app/views/popup.acknowledge.edit.php:83 jsLoader.php:312
 msgid "Acknowledge"
 msgstr "הכרה"
 
@@ -650,7 +655,7 @@ msgstr "המשימה עודכנה"
 #: include/classes/screens/CScreenProblem.php:1223 include/events.inc.php:288
 #: include/forms.inc.php:1222 include/views/configuration.action.edit.php:28
 #: include/views/monitoring.sysmap.list.php:68 jsLoader.php:127
-#: jsLoader.php:155 jsLoader.php:170 jsLoader.php:184 jsLoader.php:310
+#: jsLoader.php:155 jsLoader.php:170 jsLoader.php:184 jsLoader.php:311
 #: tr_events.php:182
 msgid "Actions"
 msgstr "פעולות"
@@ -922,7 +927,7 @@ msgstr "הוספת וידג׳ט"
 msgid "Added"
 msgstr "נוסף"
 
-#: jsLoader.php:299
+#: jsLoader.php:300
 #, c-format
 msgctxt "screen reader"
 msgid "Added, %1$s"
@@ -1018,7 +1023,7 @@ msgstr "יישור רכיבים במפה"
 #: app/views/reports.scheduledreport.list.php:55
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:122
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:178
-#: include/views/monitoring.sysmap.edit.php:261 jsLoader.php:367
+#: include/views/monitoring.sysmap.edit.php:261 jsLoader.php:368
 msgid "All"
 msgstr "הכול"
 
@@ -1087,11 +1092,11 @@ msgstr "שיטות מורשות"
 msgid "Alternatively, you can install it manually:"
 msgstr "לחלופין, ניתן להתקין ידנית:"
 
-#: include/classes/items/CHelpItems.php:989
+#: include/classes/items/CHelpItems.php:997
 msgid "Amount of guest physical memory that is swapped out to the swap space, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "כמות הזיכרון הפיזי של האורח שהוחלף בשטח ההחלפה, <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1013
+#: include/classes/items/CHelpItems.php:1021
 msgid "Amount of host physical memory consumed for backing up guest physical memory pages, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "כמות הזיכרון הפיזי שנצרך לטובת גיבוי עמודי הזיכרון הפיזי של המערכת האורחת, <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח של המכונה הווירטואלית ב־VMware"
 
@@ -1168,7 +1173,7 @@ msgstr "שגיאת יישום."
 #: include/views/js/monitoring.sysmaps.js.php:604
 #: include/views/js/monitoring.sysmaps.js.php:709
 #: include/views/js/monitoring.sysmaps.js.php:815 jsLoader.php:177
-#: jsLoader.php:290
+#: jsLoader.php:291
 msgid "Apply"
 msgstr "החלה"
 
@@ -1481,11 +1486,11 @@ msgstr "זמין"
 msgid "Average"
 msgstr "ממוצע"
 
-#: include/classes/items/CHelpItems.php:1069
+#: include/classes/items/CHelpItems.php:1077
 msgid "Average number of outstanding read requests to the virtual disk during the collection interval , <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance"
 msgstr "מספר ממוצע של בקשות קריאה ממתינות לכונן הווירטואלי במשך מקטע האיסוף, <url> - כתובת שירות VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware,‏ <instance> - מופע של התקן כונן"
 
-#: include/classes/items/CHelpItems.php:1089
+#: include/classes/items/CHelpItems.php:1097
 msgid "Average number of outstanding write requests to the virtual disk during the collection interval, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance"
 msgstr "מספר ממוצע של בקשות כתיבה ממתינות לכונן הווירטואלי במשך מקטע האיסוף, <url> - כתובת שירות VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware,‏ <instance> - מופע של התקן כונן"
 
@@ -1652,7 +1657,7 @@ msgstr "פרטי מעבד. מחזירה מחרוזת או מספר שלם וחי
 msgid "CPU load. Returns float"
 msgstr "עומס על המעבד. מחזירה שבר עשרוני"
 
-#: include/classes/items/CHelpItems.php:969
+#: include/classes/items/CHelpItems.php:977
 msgid "CPU time spent waiting for swap-in, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - CPU instance"
 msgstr "זמן המעבד שהושקע בהמתנה לכניסה לזיכרון ההחלפה,<url> - כתובת שירות VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware,‏ <instance> - מופע של מעבד"
 
@@ -1664,7 +1669,7 @@ msgstr "ניצולת מעבד כאחוז במשך זמן מסוים כתלות �
 msgid "CPU usage as a percentage during the interval, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "ניצולת המעבד כאחוז בטווח זמן, <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor של ה־VMware"
 
-#: include/classes/items/CHelpItems.php:977
+#: include/classes/items/CHelpItems.php:985
 msgid "CPU usage as a percentage during the interval, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "ניצולת המעבד כאחוז בטווח זמן, <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח המכונה הווירטואלית ב־VMware"
 
@@ -1698,7 +1703,7 @@ msgstr "לוח שנה"
 msgid "Callback"
 msgstr "קריאה"
 
-#: jsLoader.php:302
+#: jsLoader.php:303
 msgctxt "screen reader"
 msgid "Can not be removed"
 msgstr "אין אפשרות להסיר"
@@ -1733,7 +1738,7 @@ msgstr "אין אפשרות להסיר"
 #: app/views/popup.import.compare.php:162
 #: include/classes/html/CButtonCancel.php:25
 #: include/classes/setup/CSetupWizard.php:130 jsLoader.php:178
-#: jsLoader.php:188 jsLoader.php:291 jsLoader.php:363
+#: jsLoader.php:188 jsLoader.php:292 jsLoader.php:364
 msgid "Cancel"
 msgstr "ביטול"
 
@@ -3111,11 +3116,11 @@ msgstr "כניסה תלוית רישיות"
 msgid "Catalan (ca_ES)"
 msgstr "קטלאנית (ca_ES)"
 
-#: include/classes/items/CHelpItems.php:1123
+#: include/classes/items/CHelpItems.php:1131
 msgid "Catches all SNMP traps that match regex. If regexp is unspecified, catches any trap."
 msgstr "תופסת את כל מלכודות ה־SNMP שתואמות לביטוי רגולרי. אם לא צוין ביטוי רגולרי, כל המלכודות תיתפסנה."
 
-#: include/classes/items/CHelpItems.php:1119
+#: include/classes/items/CHelpItems.php:1127
 msgid "Catches all SNMP traps that were not caught by any of snmptrap[] items."
 msgstr "תופסת את כל מלכודות ה־SNMP שלא נתפסו על ידי פריטי snmptrap[]‎ כלשהם."
 
@@ -3352,7 +3357,7 @@ msgstr "פינוי בעת ניתוק"
 msgid "Click and drag to desired size."
 msgstr "יש לגרור לגודל הרצוי."
 
-#: jsLoader.php:289
+#: jsLoader.php:290
 msgid "Click to view or edit"
 msgstr "יש ללחוץ כדי לצפות או לערוך"
 
@@ -3382,7 +3387,7 @@ msgstr "שעון"
 #: include/views/configuration.template.edit.php:237
 #: include/views/configuration.trigger.prototype.edit.php:654
 #: include/views/configuration.triggers.edit.php:647
-#: include/views/monitoring.sysmap.edit.php:421 jsLoader.php:313
+#: include/views/monitoring.sysmap.edit.php:421 jsLoader.php:314
 msgid "Clone"
 msgstr "שכפול"
 
@@ -3394,7 +3399,7 @@ msgstr "שכפול"
 #: include/views/js/monitoring.sysmaps.js.php:611
 #: include/views/js/monitoring.sysmaps.js.php:716
 #: include/views/js/monitoring.sysmaps.js.php:819 jsLoader.php:189
-#: jsLoader.php:268 jsLoader.php:285 jsLoader.php:356
+#: jsLoader.php:268 jsLoader.php:285 jsLoader.php:357
 msgid "Close"
 msgstr "סגירה"
 
@@ -3569,11 +3574,11 @@ msgstr "תנאים משוכפלים עבור היחס „%1$s”."
 #: app/views/search.php:37 app/views/search.php:195 app/views/search.php:275
 #: include/classes/helpers/CMenuHelper.php:219
 #: include/classes/helpers/CRoleHelper.php:355
-#: include/views/inventory.host.view.php:222 jsLoader.php:312
+#: include/views/inventory.host.view.php:222 jsLoader.php:313
 msgid "Configuration"
 msgstr "הגדרות"
 
-#: include/classes/items/CHelpItems.php:1213
+#: include/classes/items/CHelpItems.php:1221
 msgid "Configuration cache statistics. Cache - buffer (modes: pfree, total, used, free)."
 msgstr "הגדרות זיכרון מטמון לסטטיסטיקה. זיכרון מטמון - buffer (מצבים: pfree,‏ total,‏ used,‏ free)."
 
@@ -4031,11 +4036,11 @@ msgstr "מספר השורות שתואמות בקובץ היומן שבמעקב 
 msgid "Count of matched lines in log file monitoring. Returns integer"
 msgstr "מספר השורות שתואמות בקובץ היומן שבמעקב. מחזירה מספר שלם וחיובי"
 
-#: include/classes/items/CHelpItems.php:1189
+#: include/classes/items/CHelpItems.php:1197
 msgid "Count of values enqueued in the low-level discovery processing queue."
 msgstr "ספירת הערכים שממתינים בתור לעיבוד הגילוי ברמה נמוכה."
 
-#: include/classes/items/CHelpItems.php:1193
+#: include/classes/items/CHelpItems.php:1201
 msgid "Count of values enqueued in the preprocessing queue."
 msgstr "ספירת הערכים שממתינים בתור העיבוד המקדים."
 
@@ -4073,11 +4078,11 @@ msgstr "יצירת יחס"
 msgid "Create dashboard"
 msgstr "יצירת לוח מחוונים"
 
-#: jsLoader.php:317
+#: jsLoader.php:318
 msgid "Create dependent discovery rule"
 msgstr "יצירת כלל גילוי תלוי"
 
-#: jsLoader.php:316
+#: jsLoader.php:317
 msgid "Create dependent item"
 msgstr "יצירת פריט תלוי"
 
@@ -4194,7 +4199,7 @@ msgstr "יצירת מפה"
 msgid "Create media type"
 msgstr "יצירת סוג מדיה"
 
-#: app/views/popup.import.php:130 jsLoader.php:314
+#: app/views/popup.import.php:130 jsLoader.php:315
 msgid "Create new"
 msgstr "יצירת חדש"
 
@@ -4214,7 +4219,7 @@ msgstr "יצירת סקריפט"
 msgid "Create template"
 msgstr "יצירת תבנית"
 
-#: include/views/configuration.triggers.list.php:148 jsLoader.php:315
+#: include/views/configuration.triggers.list.php:148 jsLoader.php:316
 msgid "Create trigger"
 msgstr "יצירת הקפצה"
 
@@ -4464,7 +4469,7 @@ msgstr "לוח מחוונים עם המזהה „%1$s” אינו זמין."
 #: include/html.inc.php:371 include/views/configuration.template.list.php:121
 #: include/views/configuration.template.list.php:233
 #: include/views/inventory.host.view.php:168
-#: include/views/inventory.host.view.php:172 jsLoader.php:318
+#: include/views/inventory.host.view.php:172 jsLoader.php:319
 msgid "Dashboards"
 msgstr "לוחות מחוונים"
 
@@ -4473,7 +4478,7 @@ msgstr "לוחות מחוונים"
 msgid "Dashed line"
 msgstr "קו מרוסק"
 
-#: include/classes/graphdraw/CLineGraphDraw.php:2214
+#: include/classes/graphdraw/CLineGraphDraw.php:2223
 #: include/classes/graphdraw/CPieGraphDraw.php:772
 #, c-format
 msgid "Data from %1$s. Generated in %2$s sec."
@@ -4634,7 +4639,7 @@ msgstr "יום בשבוע"
 msgid "Days"
 msgstr "ימים"
 
-#: app/controllers/CControllerPopupMediatypeTestSend.php:172 jsLoader.php:347
+#: app/controllers/CControllerPopupMediatypeTestSend.php:172 jsLoader.php:348
 msgid "Debug"
 msgstr "ניפוי שגיאות"
 
@@ -4779,7 +4784,7 @@ msgstr "בהשהיה של"
 #: include/views/configuration.trigger.prototype.list.php:207
 #: include/views/configuration.triggers.list.php:349
 #: include/views/monitoring.sysmap.list.php:109 jsLoader.php:131
-#: jsLoader.php:157 jsLoader.php:319
+#: jsLoader.php:157 jsLoader.php:320
 msgid "Delete"
 msgstr "מחיקה"
 
@@ -4808,7 +4813,7 @@ msgstr "למחוק את המשימה הנוכחית?"
 msgid "Delete current correlation?"
 msgstr "למחוק את היחס הנוכחי?"
 
-#: jsLoader.php:320
+#: jsLoader.php:321
 msgid "Delete dashboard?"
 msgstr "למחוק את לוח המחוונים?"
 
@@ -5431,15 +5436,15 @@ msgstr "גילוי מאגרי נתונים של hypervisor VMWare,‏ <url> - כ
 msgid "Discovery of VMware hypervisors, <url> - VMware service URL. Returns JSON"
 msgstr "גילוי hypervisors של VMware,‏ <url> - כתובת שירות VMware. מחזירה JSON"
 
-#: include/classes/items/CHelpItems.php:1097
+#: include/classes/items/CHelpItems.php:1105
 msgid "Discovery of VMware virtual machine disk devices, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns JSON"
 msgstr "גילוי התקני כוננים של מכונות וירטואליות של VMware.‏ <url> - כתובת שירות VMware,‏ <uuid> שם מארח של מכונה וירטואלית ב־VMWare. מחזירה JSON"
 
-#: include/classes/items/CHelpItems.php:1109
+#: include/classes/items/CHelpItems.php:1117
 msgid "Discovery of VMware virtual machine file systems, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns JSON"
 msgstr "גילוי מערכות קבצים של מכונות וירטואליות של VMware.‏‏ <url> - כתובת שירות VMware,‏ <uuid> שם מארח של מכונה וירטואלית ב־VMWare. מחזירה JSON"
 
-#: include/classes/items/CHelpItems.php:985
+#: include/classes/items/CHelpItems.php:993
 msgid "Discovery of VMware virtual machines, <url> - VMware service URL. Returns JSON"
 msgstr "גילוי מכונות וירטואליות של VMware.‏ <url> - כתובת שירות VMware. מחזירה JSON"
 
@@ -5561,7 +5566,7 @@ msgstr "הצגת תרשים מוערם"
 #: app/views/administration.queue.details.php:85 app/views/search.php:184
 #: app/views/search.php:268 app/views/search.php:367
 #: include/actions.inc.php:1669 include/actions.inc.php:1741
-#: include/classes/helpers/CPagerHelper.php:147 jsLoader.php:359
+#: include/classes/helpers/CPagerHelper.php:147 jsLoader.php:360
 #, c-format
 msgid "Displaying %1$s of %2$s found"
 msgstr "מוצגים %1$s מתוך %2$s שנמצאו"
@@ -5597,7 +5602,7 @@ msgstr "לא לשמור היסטוריה"
 msgid "Do not keep trends"
 msgstr "לא לשמור מגמות"
 
-#: jsLoader.php:197 jsLoader.php:321
+#: jsLoader.php:197 jsLoader.php:322
 msgid "Do you wish to replace the conditional expression?"
 msgstr "להחליף את הביטוי המותנה?"
 
@@ -5800,7 +5805,7 @@ msgstr "עריכת פעולה"
 msgid "Edit tree element"
 msgstr "עריכת רכיב בעץ"
 
-#: jsLoader.php:322
+#: jsLoader.php:323
 msgid "Edit trigger"
 msgstr "עריכת הקפצה"
 
@@ -6959,7 +6964,7 @@ msgstr "קבלת תוכן של עמוד באינטרנט. מחזירה את מק
 msgid "Get value"
 msgstr "קבלת ערך"
 
-#: app/views/js/popup.itemtestedit.view.js.php:505
+#: app/views/js/popup.itemtestedit.view.js.php:503
 #: app/views/popup.itemtestedit.view.php:431
 msgid "Get value and test"
 msgstr "קבלת ערך ובדיקה"
@@ -6987,7 +6992,7 @@ msgstr "ערך גלובלי"
 msgid "Go back to %1$s"
 msgstr "חזרה אל %1$s"
 
-#: jsLoader.php:327
+#: jsLoader.php:328
 msgid "Go to"
 msgstr "מעבר אל"
 
@@ -7201,7 +7206,7 @@ msgstr "תרשים בשם „%1$s” כבר קיים בתרשימים או בא�
 #: include/views/inventory.host.view.php:158
 #: include/views/inventory.host.view.php:166
 #: include/views/inventory.host.view.php:194
-#: include/views/inventory.host.view.php:217 jsLoader.php:328
+#: include/views/inventory.host.view.php:217 jsLoader.php:329
 msgid "Graphs"
 msgstr "תרשימים"
 
@@ -7405,7 +7410,7 @@ msgstr "הקסדצימלי לעשרוני"
 msgid "Hidden"
 msgstr "מוסתר"
 
-#: jsLoader.php:348
+#: jsLoader.php:349
 msgid "Hide debug"
 msgstr "הסתרת ניפוי שגיאות"
 
@@ -7457,7 +7462,7 @@ msgstr "הדגשת שורה שלמה"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:49
 #: include/forms.inc.php:550 include/views/configuration.item.list.php:89
 #: include/views/configuration.item.prototype.list.php:62 items.php:261
-#: jsLoader.php:329
+#: jsLoader.php:330
 msgid "History"
 msgstr "היסטוריה"
 
@@ -7545,7 +7550,7 @@ msgstr "יישור אופקי"
 #: include/views/js/monitoring.sysmaps.js.php:92
 #: include/views/js/monitoring.sysmaps.js.php:161
 #: include/views/reports.toptriggers.php:83 items.php:982 items.php:1101
-#: jsLoader.php:236 jsLoader.php:330 report2.php:506
+#: jsLoader.php:236 jsLoader.php:331 report2.php:506
 msgid "Host"
 msgid_plural "Hosts"
 msgstr[0] "מארח"
@@ -8002,7 +8007,7 @@ msgstr "מנשקי IPMI"
 msgid "IPMI sensor"
 msgstr "חיישן IPMI"
 
-#: include/classes/items/CHelpItems.php:1299
+#: include/classes/items/CHelpItems.php:1307
 msgid "IPMI sensor IDs and other sensor-related parameters. Returns JSON."
 msgstr "מזהי חיישני IPMI ומשתנים נוספים שקשורים בחיישנים. מחזירה JSON."
 
@@ -9439,7 +9444,7 @@ msgid "Insert"
 msgstr "הוספה"
 
 #: include/views/configuration.trigger.prototype.edit.php:136
-#: include/views/configuration.triggers.edit.php:162 jsLoader.php:323
+#: include/views/configuration.triggers.edit.php:162 jsLoader.php:324
 msgid "Insert expression"
 msgstr "הוספת ביטוי"
 
@@ -9851,27 +9856,27 @@ msgstr "קוד התגובה שגוי „%1$s”."
 #: include/classes/import/validators/C44XmlValidator.php:2115
 #: include/classes/import/validators/C44XmlValidator.php:2139
 #: include/classes/import/validators/C44XmlValidator.php:2181
-#: include/classes/import/validators/C50XmlValidator.php:1864
-#: include/classes/import/validators/C50XmlValidator.php:2126
-#: include/classes/import/validators/C50XmlValidator.php:2238
-#: include/classes/import/validators/C50XmlValidator.php:2258
-#: include/classes/import/validators/C50XmlValidator.php:2282
-#: include/classes/import/validators/C50XmlValidator.php:2324
-#: include/classes/import/validators/C52XmlValidator.php:1986
-#: include/classes/import/validators/C52XmlValidator.php:2216
-#: include/classes/import/validators/C52XmlValidator.php:2403
-#: include/classes/import/validators/C52XmlValidator.php:2423
-#: include/classes/import/validators/C52XmlValidator.php:2447
-#: include/classes/import/validators/C52XmlValidator.php:2489
-#: include/classes/import/validators/C52XmlValidator.php:2566
-#: include/classes/import/validators/C52XmlValidator.php:2572
-#: include/classes/import/validators/C54XmlValidator.php:2041
-#: include/classes/import/validators/C54XmlValidator.php:2271
-#: include/classes/import/validators/C54XmlValidator.php:2458
-#: include/classes/import/validators/C54XmlValidator.php:2478
-#: include/classes/import/validators/C54XmlValidator.php:2502
-#: include/classes/import/validators/C54XmlValidator.php:2579
-#: include/classes/import/validators/C54XmlValidator.php:2585
+#: include/classes/import/validators/C50XmlValidator.php:1871
+#: include/classes/import/validators/C50XmlValidator.php:2133
+#: include/classes/import/validators/C50XmlValidator.php:2245
+#: include/classes/import/validators/C50XmlValidator.php:2265
+#: include/classes/import/validators/C50XmlValidator.php:2289
+#: include/classes/import/validators/C50XmlValidator.php:2331
+#: include/classes/import/validators/C52XmlValidator.php:1993
+#: include/classes/import/validators/C52XmlValidator.php:2223
+#: include/classes/import/validators/C52XmlValidator.php:2410
+#: include/classes/import/validators/C52XmlValidator.php:2430
+#: include/classes/import/validators/C52XmlValidator.php:2454
+#: include/classes/import/validators/C52XmlValidator.php:2496
+#: include/classes/import/validators/C52XmlValidator.php:2573
+#: include/classes/import/validators/C52XmlValidator.php:2579
+#: include/classes/import/validators/C54XmlValidator.php:2048
+#: include/classes/import/validators/C54XmlValidator.php:2278
+#: include/classes/import/validators/C54XmlValidator.php:2465
+#: include/classes/import/validators/C54XmlValidator.php:2485
+#: include/classes/import/validators/C54XmlValidator.php:2509
+#: include/classes/import/validators/C54XmlValidator.php:2586
+#: include/classes/import/validators/C54XmlValidator.php:2592
 #: include/classes/import/validators/CXmlValidatorGeneral.php:163
 #: include/classes/import/validators/CXmlValidatorGeneral.php:182
 #: include/classes/import/validators/CXmlValidatorGeneral.php:201
@@ -9892,7 +9897,7 @@ msgstr "פרק הזמן שגוי."
 #: include/classes/helpers/CMenuHelper.php:103
 #: include/classes/helpers/CRoleHelper.php:350
 #: include/views/configuration.host.edit.php:446
-#: include/views/configuration.host.prototype.edit.php:363 jsLoader.php:331
+#: include/views/configuration.host.prototype.edit.php:363 jsLoader.php:332
 msgid "Inventory"
 msgstr "מאגר"
 
@@ -10082,7 +10087,7 @@ msgstr "אבות הטיפוס של הפריט עודכנו"
 msgid "Item tags"
 msgstr "תגיות פריט"
 
-#: jsLoader.php:353
+#: jsLoader.php:354
 msgid "Item type does not use interface"
 msgstr "סוג הפריט אינו משתמש במנשק"
 
@@ -10456,11 +10461,11 @@ msgstr "גישה אחרונה ב־"
 msgid "Last check"
 msgstr "הבדיקה האחרונה"
 
-#: jsLoader.php:334
+#: jsLoader.php:335
 msgid "Last hour graph"
 msgstr "תרשים של השעה האחרונה"
 
-#: jsLoader.php:335
+#: jsLoader.php:336
 msgid "Last month graph"
 msgstr "תרשים של החודש שעבר"
 
@@ -10490,7 +10495,7 @@ msgstr "נשלח לאחרונה"
 msgid "Last value"
 msgstr "ערך אחרון"
 
-#: jsLoader.php:336
+#: jsLoader.php:337
 msgid "Last week graph"
 msgstr "תרשים השבוע שעבר"
 
@@ -10503,11 +10508,11 @@ msgstr "תרשים השבוע שעבר"
 #: include/classes/helpers/CMenuHelper.php:61
 #: include/classes/helpers/CRoleHelper.php:383
 #: include/views/inventory.host.view.php:143
-#: include/views/inventory.host.view.php:149 jsLoader.php:332
+#: include/views/inventory.host.view.php:149 jsLoader.php:333
 msgid "Latest data"
 msgstr "נתונים עדכניים"
 
-#: jsLoader.php:333
+#: jsLoader.php:334
 msgid "Latest values"
 msgstr "ערכים אחרונים"
 
@@ -11629,11 +11634,11 @@ msgstr "חודש"
 msgid "Monthly"
 msgstr "חודשי"
 
-#: include/classes/html/CMultiSelect.php:83 jsLoader.php:295
+#: include/classes/html/CMultiSelect.php:83 jsLoader.php:296
 msgid "More matches found..."
 msgstr "נמצאו תוצאות נוספות…"
 
-#: jsLoader.php:305
+#: jsLoader.php:306
 #, c-format
 msgctxt "screen reader"
 msgid "More than %1$d matches for %2$s found"
@@ -11913,7 +11918,7 @@ msgstr "שגיאת תום זמן המתנה לבדיקת דוח מתוזמן"
 msgid "Network timeout for script execution"
 msgstr "תום זמן המתנה לרשת להפעלת סקריפט"
 
-#: include/classes/items/CHelpItems.php:1053
+#: include/classes/items/CHelpItems.php:1061
 msgid "Network utilization (combined transmit-rates and receive-rates) during the interval, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - network interface instance"
 msgstr "ניצולת תעבורת רשת (שילוב בין מהירות שליחה לקבלה) במשך זמן מסוים, <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor של VMware,‏ <instance> - כרטיס רשת מסוים"
 
@@ -12195,7 +12200,7 @@ msgstr "אין תמונה"
 #: app/views/popup.massupdate.item.php:67
 #: include/views/configuration.host.discovery.edit.php:493
 #: include/views/configuration.item.edit.php:546
-#: include/views/configuration.item.prototype.edit.php:533 jsLoader.php:352
+#: include/views/configuration.item.prototype.edit.php:533 jsLoader.php:353
 msgid "No interface found"
 msgstr "לא נמצא מנשק"
 
@@ -12235,7 +12240,7 @@ msgstr "לא נמצאו מאקרואים."
 msgid "No maps added."
 msgstr "לא נוספו מפות."
 
-#: include/classes/html/CMultiSelect.php:82 jsLoader.php:294
+#: include/classes/html/CMultiSelect.php:82 jsLoader.php:295
 msgid "No matches found"
 msgstr "לא נמצאו התאמות"
 
@@ -12624,7 +12629,7 @@ msgstr "מספר המעבדים. מחזירה מספר שלם וחיובי"
 msgid "Number of available DS paths, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <datastore> - Datastore name, <partitionid> - internal id of physical device from vmware.hv.datastore.discovery"
 msgstr "מספר נתיבי מאגרי נתונים, <url> - כתובת שירות ה־VMware,‏ <datastore> - שם מאגר הנתונים, <partitionid> - המזהה הפנימי של ההתקן הפיזי מתוך vmware.hv.datastore.discovery"
 
-#: include/classes/items/CHelpItems.php:1153
+#: include/classes/items/CHelpItems.php:1161
 msgid "Number of enabled items on the host."
 msgstr "מספר הפריטים הפעילים על המארח."
 
@@ -12636,25 +12641,25 @@ msgstr "מספר המארחים (מופעל/כבוי)"
 msgid "Number of items (enabled/disabled/not supported)"
 msgstr "מספר פריטים (פעילים/מושבתים/לא נתמכים)"
 
-#: include/classes/items/CHelpItems.php:1177
+#: include/classes/items/CHelpItems.php:1185
 msgid "Number of items in Zabbix database."
 msgstr "מספר הפריטים במסד הנתונים של Zabbix."
 
-#: include/classes/items/CHelpItems.php:1205
+#: include/classes/items/CHelpItems.php:1213
 msgid "Number of items in proxy history that are not yet sent to the server"
 msgstr "מספר הפריטים בהיסטוריה של המתווך שלא נשלחו עדיין לשרת"
 
-#: include/classes/items/CHelpItems.php:1209
+#: include/classes/items/CHelpItems.php:1217
 msgid "Number of items in the queue which are delayed by from to to seconds, inclusive."
 msgstr "מספר הפריטים בתור שהושהו למשך תקופת שניות מ־ עד, כולל."
 
 #: include/classes/items/CHelpItems.php:389
 #: include/classes/items/CHelpItems.php:739
-#: include/classes/items/CHelpItems.php:1225
+#: include/classes/items/CHelpItems.php:1233
 msgid "Number of items in the queue which are delayed in Zabbix server or proxy by \"from\" till \"to\" seconds, inclusive."
 msgstr "מספר הפריטים שמעוכבים בתור בשרת או במתווך ה־Zabbix לפי „מ־” ועד „עד”, כולל."
 
-#: include/classes/items/CHelpItems.php:1173
+#: include/classes/items/CHelpItems.php:1181
 msgid "Number of monitored hosts"
 msgstr "מספר המארחים בפיקוח"
 
@@ -12679,7 +12684,7 @@ msgstr "מספר ליבות המעבד ב־Hypervisor של VMware,‏ <url> - כ
 msgid "Number of processor threads on VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "מספר תהליכי המעבד ב־Hypervisor של VMware,‏ <url> - כתובת השירות של VMware,‏ <uuid> - שם המארח של ה־Hypervisor של VMware"
 
-#: include/classes/items/CHelpItems.php:957
+#: include/classes/items/CHelpItems.php:965
 msgid "Number of processors on VMware virtual machine, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "מספר המעבדים במכונה וירטואלית של VMware,‏ <url> - כתובת השירות של VMware,‏ <uuid> - שם המכונה הווירטואלית של VMware"
 
@@ -12704,15 +12709,15 @@ msgstr "מספר התבניות"
 msgid "Number of triggers (enabled/disabled [problem/ok])"
 msgstr "מספר ההקפצות (פעיל/מושבת [תקלה/תקין])"
 
-#: include/classes/items/CHelpItems.php:1241
+#: include/classes/items/CHelpItems.php:1249
 msgid "Number of triggers in Zabbix database."
 msgstr "מספר ההקפצות במסד הנתונים של Zabbix."
 
-#: include/classes/items/CHelpItems.php:1181
+#: include/classes/items/CHelpItems.php:1189
 msgid "Number of unsupported items in Zabbix database."
 msgstr "מספר הפריטים שאינם נתמכים במסד הנתונים של Zabbix."
 
-#: include/classes/items/CHelpItems.php:1157
+#: include/classes/items/CHelpItems.php:1165
 msgid "Number of unsupported items on the host."
 msgstr "מספר הפריטים שאינם נתמכים במארח."
 
@@ -12725,35 +12730,35 @@ msgstr "מספר המשתמשים (מקוונים)"
 msgid "Number of users logged in. Returns integer"
 msgstr "מספר המשתמשים שנכנסו למערכת. מחזירה מספר שלם וחיובי"
 
-#: include/classes/items/CHelpItems.php:1133
+#: include/classes/items/CHelpItems.php:1141
 msgid "Number of values stored in table HISTORY."
 msgstr "מספר הערכים המאוחסנים בטבלה HISTORY."
 
-#: include/classes/items/CHelpItems.php:1137
+#: include/classes/items/CHelpItems.php:1145
 msgid "Number of values stored in table HISTORY_LOG."
 msgstr "מספר הערכים המאוחסנים בטבלה HISTORY_LOG."
 
-#: include/classes/items/CHelpItems.php:1141
+#: include/classes/items/CHelpItems.php:1149
 msgid "Number of values stored in table HISTORY_STR."
 msgstr "מספר הערכים המאוחסנים בטבלה HISTORY_STR."
 
-#: include/classes/items/CHelpItems.php:1145
+#: include/classes/items/CHelpItems.php:1153
 msgid "Number of values stored in table HISTORY_TEXT."
 msgstr "מספר הערכים המאוחסנים בטבלה HISTORY_TEXT."
 
-#: include/classes/items/CHelpItems.php:1149
+#: include/classes/items/CHelpItems.php:1157
 msgid "Number of values stored in table HISTORY_UINT."
 msgstr "מספר הערכים המאוחסנים בטבלה HISTORY_UINT."
 
-#: include/classes/items/CHelpItems.php:1233
+#: include/classes/items/CHelpItems.php:1241
 msgid "Number of values stored in table TRENDS."
 msgstr "מספר הערכים המאוחסנים בטבלה TRENDS."
 
-#: include/classes/items/CHelpItems.php:1237
+#: include/classes/items/CHelpItems.php:1245
 msgid "Number of values stored in table TRENDS_UINT."
 msgstr "מספר הערכים המאוחסנים בטבלה TRENDS_UINT."
 
-#: include/classes/items/CHelpItems.php:941
+#: include/classes/items/CHelpItems.php:949
 msgid "Number of virtual machines on VMware hypervisor, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "מספר המכונות הווירטואליות ב־Hypervisor של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־Hypervisor"
 
@@ -12869,7 +12874,7 @@ msgstr "כבוי"
 #: app/views/report.services.php:82 app/views/report.services.php:83
 #: include/views/configuration.triggers.list.php:94
 #: include/views/js/common.item.edit.js.php:334
-#: include/views/js/configuration.httpconf.edit.js.php:103 jsLoader.php:364
+#: include/views/js/configuration.httpconf.edit.js.php:103 jsLoader.php:365
 #: report2.php:506
 msgid "Ok"
 msgstr "בסדר"
@@ -13643,7 +13648,7 @@ msgstr "השהיית פעולות לתקלות מוסתרות"
 msgid "Peak memory usage: %1$s"
 msgstr "השימוש המרבי בזיכרון: %1$s"
 
-#: include/classes/items/CHelpItems.php:953
+#: include/classes/items/CHelpItems.php:961
 msgid "Percent of time the virtual machine is unable to run because it is contending for access to the physical CPU(s), <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "אחוז הזמן שמכונה וירטואלית לא יכולה לרוץ כי היא מתחרה על גישה למעבדים פיזיים, <url> - כתובת שירות VMware,‏ <uuid> - שם מארח של מכונה וירטואלית ב־VMware"
 
@@ -13651,11 +13656,11 @@ msgstr "אחוז הזמן שמכונה וירטואלית לא יכולה לרו
 msgid "Percentage"
 msgstr "אחוז"
 
-#: include/classes/items/CHelpItems.php:1037
+#: include/classes/items/CHelpItems.php:1045
 msgid "Percentage of host physical memory that has been consumed, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "אחוז הזיכרון הפיזי של המארח שנצרך, <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח מכונה וירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:961
+#: include/classes/items/CHelpItems.php:969
 msgid "Percentage of time that the virtual machine was ready, but could not get scheduled to run on the physical CPU, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - CPU instance"
 msgstr "אחוז הזמן שהמכונה הווירטואלית הייתה מכונה אך לא קיבלה משבצת זמן לרוץ על המעבד הפיזי, <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח מכונה וירטואלית ב־VMware,‏ <instance> - מס׳ מעבד"
 
@@ -13839,7 +13844,7 @@ msgstr "שדות Post"
 msgid "Post type"
 msgstr "סוג Post"
 
-#: include/classes/items/CHelpItems.php:921
+#: include/classes/items/CHelpItems.php:925
 msgid "Power usage , <url> - VMware service URL, <uuid> - VMware hypervisor host name, <max> - Maximum allowed power usage"
 msgstr "ניצולת חשמל , <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של ה־VMware hypervisor,‏ <max> - ניצולת החשמל המרבית המותרת"
 
@@ -14074,7 +14079,7 @@ msgstr "תקלה, אם לפחות לאחד מהצאצאים יש תקלה"
 #: include/classes/widgets/forms/CWidgetFormTrigOver.php:35
 #: include/classes/widgets/views/widget.svggraph.form.view.php:295
 #: include/views/inventory.host.view.php:151
-#: include/views/inventory.host.view.php:156 jsLoader.php:337 report2.php:506
+#: include/views/inventory.host.view.php:156 jsLoader.php:338 report2.php:506
 msgid "Problems"
 msgstr "תקלות"
 
@@ -14637,7 +14642,7 @@ msgstr "הסרה, %1$s"
 msgid "Removed"
 msgstr "הוסר"
 
-#: jsLoader.php:300
+#: jsLoader.php:301
 #, c-format
 msgctxt "screen reader"
 msgid "Removed, %1$s"
@@ -14761,7 +14766,7 @@ msgstr "הרשאות מארח נדרשות"
 msgid "Required performance (vps)"
 msgstr "ביצועים נדרשים (ערכים לשנייה)"
 
-#: include/classes/items/CHelpItems.php:1217
+#: include/classes/items/CHelpItems.php:1225
 msgid "Required performance of the Zabbix server, in new values per second expected."
 msgstr "ביצועים נדרשים משרת ה־Zabbix, בציפייה לערכים חדשים בשנייה."
 
@@ -14919,19 +14924,19 @@ msgstr "קבלת תוכן של קובץ. מחזירה טקסט"
 msgid "Retry"
 msgstr "ניסיון חוזר"
 
-#: include/classes/items/CHelpItems.php:1289
+#: include/classes/items/CHelpItems.php:1297
 msgid "Return a JSON array with LLD macros describing the MBean objects or their attributes. Can be used for LLD."
 msgstr "מחזירה מערך JSON עם רכיבי MBean או המאפיינים שלהם. ניתן להשתמש לטובת גילוי ברמה נמוכה."
 
-#: include/classes/items/CHelpItems.php:1293
+#: include/classes/items/CHelpItems.php:1301
 msgid "Return a JSON array with MBean objects or their attributes. Compared to jmx.discovery it does not define LLD macros. Can be used for LLD."
 msgstr "מחזירה מערך JSON עם רכיבי MBean או המאפיינים שלהם. בהשוואה ל־jmx.discovery לא מוגדרים תסריטי מאקרו של גילוי ברמה נמוכה. ניתן להשתמש לטובת גילוי ברמה נמוכה."
 
-#: include/classes/items/CHelpItems.php:1271
+#: include/classes/items/CHelpItems.php:1279
 msgid "Return first column of the first row of the SQL query result."
 msgstr "החזרת העמודה הראשונה של השורה הראשונה מתוצאת שאילתת ה־SQL."
 
-#: include/classes/items/CHelpItems.php:1285
+#: include/classes/items/CHelpItems.php:1293
 msgid "Return value of an attribute of MBean object."
 msgstr "מחזירה ערך של מאפיין של רכיב MBean."
 
@@ -14939,25 +14944,25 @@ msgstr "מחזירה ערך של מאפיין של רכיב MBean."
 msgid "Returns ICMP ping response time in seconds. Example: 0.02"
 msgstr "מחזירה תגובת ping מסוג ICMP בשניות. למשל: 0.02"
 
-#: include/classes/items/CHelpItems.php:1165
+#: include/classes/items/CHelpItems.php:1173
 msgid "Returns a JSON array describing the host network interfaces configured in Zabbix. Can be used for LLD."
 msgstr "מזירה מערך JSON שמתאר את מנשקי הרשת של המארח שמוגדרים ב־Zabbix. ניתן להשתמש בזה לגילוי ברמה נמוכה."
 
 #: include/classes/items/CHelpItems.php:385
 #: include/classes/items/CHelpItems.php:735
-#: include/classes/items/CHelpItems.php:1221
+#: include/classes/items/CHelpItems.php:1229
 msgid "Returns a JSON object containing Zabbix server or proxy internal metrics."
 msgstr "מחזירה עצם JSON שמכיל מדדים פנימיים של שרת או מתווך Zabbix."
 
-#: include/classes/items/CHelpItems.php:1169
+#: include/classes/items/CHelpItems.php:1177
 msgid "Returns availability of a particular type of checks on the host. Value of this item corresponds to availability icons in the host list. Valid types are: agent, snmp, ipmi, jmx."
 msgstr "מחזירה זמינות של סוג מסוים של בדיקות על המארח. הערך של הפריט הזה תואם לסמלי הזמינות ברשימת המארחים. הסוגים הזמינים הם: agent,‏ snmp,‏ ipmi,‏ jmx."
 
-#: include/classes/items/CHelpItems.php:1161
+#: include/classes/items/CHelpItems.php:1169
 msgid "Returns current maintenance status of the host."
 msgstr "מחזירה את מצב התחזוקה הנוכחי של המארח."
 
-#: include/classes/items/CHelpItems.php:1185
+#: include/classes/items/CHelpItems.php:1193
 msgid "Returns information associated with Zabbix Java gateway. Valid params are: ping, version."
 msgstr "מחזירה מידע הקשור בשער הגישה ל־Zabbix ב־Java. הפרמטרים האפשריים הם: ping,‏ version."
 
@@ -15443,7 +15448,7 @@ msgstr "הסקריפט עודכן"
 #: app/views/administration.script.edit.php:31
 #: app/views/administration.script.list.php:31
 #: include/classes/helpers/CMenuHelper.php:291
-#: include/classes/helpers/CRoleHelper.php:463 jsLoader.php:338
+#: include/classes/helpers/CRoleHelper.php:463 jsLoader.php:339
 msgid "Scripts"
 msgstr "סקריפטים"
 
@@ -15523,7 +15528,7 @@ msgstr "שם אבטחה"
 #: include/views/configuration.item.prototype.edit.php:83
 #: include/views/configuration.item.prototype.edit.php:479
 #: include/views/configuration.services.edit.php:99
-#: include/views/js/monitoring.sysmaps.js.php:216 jsLoader.php:298
+#: include/views/js/monitoring.sysmaps.js.php:216 jsLoader.php:299
 msgid "Select"
 msgstr "בחירה"
 
@@ -15559,13 +15564,13 @@ msgstr "רכיבים שנבחרו"
 msgid "Selected items only"
 msgstr "פריטים נבחרים בלבד"
 
-#: jsLoader.php:303
+#: jsLoader.php:304
 #, c-format
 msgctxt "screen reader"
 msgid "Selected, %1$s in position %2$d of %3$d"
 msgstr "נבחר, %1$s במיקום %2$d מתוך %3$d"
 
-#: jsLoader.php:304
+#: jsLoader.php:305
 #, c-format
 msgctxt "screen reader"
 msgid "Selected, %1$s, read only, in position %2$d of %3$d"
@@ -15778,7 +15783,7 @@ msgstr "הגדרת תאריך ושעת תפוגה"
 msgid "Set host inventory mode"
 msgstr "הגדרת מצב מלאי למארח"
 
-#: include/classes/html/CInputSecret.php:80 jsLoader.php:370
+#: include/classes/html/CInputSecret.php:80 jsLoader.php:371
 msgid "Set new value"
 msgstr "הגדרת ערך חדש"
 
@@ -15868,7 +15873,7 @@ msgstr "שיתוף"
 msgid "Shared"
 msgstr "משותף"
 
-#: include/views/monitoring.sysmap.edit.php:414 jsLoader.php:324
+#: include/views/monitoring.sysmap.edit.php:414 jsLoader.php:325
 msgid "Sharing"
 msgstr "שיתוף"
 
@@ -16259,7 +16264,7 @@ msgstr "שעת התחלה"
 msgid "Starting TLS failed."
 msgstr "הפעלת TLS נכשלה."
 
-#: include/classes/items/CHelpItems.php:1129
+#: include/classes/items/CHelpItems.php:1137
 msgid "Startup time of Zabbix server, Unix timestamp."
 msgstr "מועד ההפעלה של שרת ה־Zabbix, חותמת זמן יוניקס."
 
@@ -16277,7 +16282,7 @@ msgctxt "history source selection method"
 msgid "Static"
 msgstr "סטטית"
 
-#: include/classes/items/CHelpItems.php:1265
+#: include/classes/items/CHelpItems.php:1273
 msgid "Statistics and availability of Zabbix write cache. Cache - one of values (modes: all, float, uint, str, log, text, not supported), history (modes: pfree, free, total, used, pused), index (modes: pfree, free, total, used, pused), trend (modes: pfree, free, total, used, pused)."
 msgstr "סטטיסטיקה וזמינות זיכרון מטמון הכתיבה של Zabbix. זיכרון מטמון - אחד מבין values (מצבים: all,‏ float,‏ uint,‏ str,‏ log,‏ text,‏ not supported), history (מצבים: pfree,‏ free,‏ total,‏ used,‏ pused), index (מצבים: pfree,‏ free,‏ total,‏ used,‏ pused) ו־trend (מצבים: pfree,‏ free,‏ total,‏ used,‏ pused)."
 
@@ -16482,7 +16487,7 @@ msgctxt "encryption certificate"
 msgid "Subject"
 msgstr "נושא"
 
-#: jsLoader.php:339
+#: jsLoader.php:340
 msgid "Submap"
 msgstr "תת־מפה"
 
@@ -16903,7 +16908,7 @@ msgstr "תבניות עודכנו"
 #: app/views/administration.authentication.edit.php:271
 #: app/views/administration.mediatype.list.php:139
 #: app/views/administration.regex.edit.php:140
-#: app/views/js/popup.itemtestedit.view.js.php:573
+#: app/views/js/popup.itemtestedit.view.js.php:571
 #: app/views/popup.itemtestedit.view.php:431
 #: app/views/popup.mediatypetest.edit.php:99
 #: app/views/popup.testtriggerexpr.php:124 include/forms.inc.php:1457
@@ -16991,7 +16996,7 @@ msgstr "לשיטה „%1$s.%2$s” יש לקרוא ללא המשתנה „auth�
 msgid "The Zabbix database version does not match current requirements. Your database version: %1$s. Required version: %2$s. Please contact your system administrator."
 msgstr "גרסת מסד הנתונים של Zabbix אינה תואמת לדרישות הנוכחיות. גרסת מסד הנתונים שלך: %1$s. גרסה נדרשת: %2$s. נא ליצור קשר עם הנהלת המערכת שלך."
 
-#: include/classes/items/CHelpItems.php:1077
+#: include/classes/items/CHelpItems.php:1085
 msgid "The average time a write to the virtual disk takes, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance"
 msgstr "משך זמן בממוצע לכתיבה לכונן הווירטואלי, <url> - כתובת שירות ה־VMware,‏ <uuid> שם מארח המכונה הווירטואלית ב־VMware,‏ <instance> - מופע התקן הכונן"
 
@@ -17182,7 +17187,7 @@ msgstr "עד"
 msgid "Time"
 msgstr "שעה"
 
-#: include/classes/items/CHelpItems.php:1197
+#: include/classes/items/CHelpItems.php:1205
 msgid "Time a particular Zabbix process or a group of processes (identified by <type> and <mode>) spent in <state> in percentage."
 msgstr "הזמן שתהליך או קבוצת תהליכים של Zabbix (מזוהים ב־<type>וב־<mode>) היו במצב <state> באחוזים."
 
@@ -17195,7 +17200,7 @@ msgstr "זמן שחלף:"
 msgid "Time filter default period"
 msgstr "משך הזמן כבררת המחדל של מסנן הזמן"
 
-#: include/classes/items/CHelpItems.php:1201
+#: include/classes/items/CHelpItems.php:1209
 msgid "Time of proxy last access. Name - proxy name. Valid params are: lastaccess - Unix timestamp, delay - seconds."
 msgstr "זמן הגישה האחרונה למתווך. שם - שם המתווך. משתנים תקפים הם: lastaccess - חותמת זמן יוניקס, delay - בשניות."
 
@@ -17251,7 +17256,7 @@ msgstr "חותמת זמן"
 msgid "To"
 msgstr "עד"
 
-#: jsLoader.php:351
+#: jsLoader.php:352
 msgid "To set a host interface select a single item type for all items"
 msgstr "כדי להגדיר מנשק מארח יש לבחור בסוג פריט אחד לכל הפריטים"
 
@@ -17294,7 +17299,7 @@ msgstr "זמן ה־Elasticsearch הכולל: %1$s"
 msgid "Total SQL time: %1$s"
 msgstr "זמן ה־SQL הכללי: %1$s"
 
-#: include/classes/items/CHelpItems.php:993
+#: include/classes/items/CHelpItems.php:1001
 msgid "Total time elapsed, in seconds, since last operating system boot-up, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "סך כל הזמן שעבר, בשניות, מאשר העלייה האחרונה של מערכת ההפעלה, <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח המכונה הווירטואלית ב־VMware"
 
@@ -17315,11 +17320,11 @@ msgstr "מעקב"
 msgid "Transaction has not been closed. Aborting..."
 msgstr "ההעברה לא נסגרה. מתבצע ביטול…"
 
-#: include/classes/items/CHelpItems.php:1275
+#: include/classes/items/CHelpItems.php:1283
 msgid "Transform SQL query result into a JSON array for low-level discovery."
 msgstr "התמרת תוצאת שאילתת SQL לכדי מערך JSON לטובת גילוי ברמה נמוכה."
 
-#: include/classes/items/CHelpItems.php:1279
+#: include/classes/items/CHelpItems.php:1287
 msgid "Transform SQL query result into a JSON array."
 msgstr "התמרת תוצאת שאילתת SQL לכדי מערך JSON."
 
@@ -17350,7 +17355,7 @@ msgctxt "missing data function"
 msgid "Treat as 0"
 msgstr "להתייחס כ־0"
 
-#: include/classes/items/CHelpItems.php:1229
+#: include/classes/items/CHelpItems.php:1237
 msgid "Trend function cache statistics. Valid parameters are: all, hits, phits, misses, pmisses, items, pitems and requests."
 msgstr "סטטיסטיקת זיכרון מטמון פונקציית מגמה. המשתנים התקפים הם: all,‏ hits,‏ phits,‏ misses,‏ pmisses,‏ items,‏ pitems ו־requests."
 
@@ -17383,7 +17388,7 @@ msgstr "מגמות"
 #: include/views/configuration.triggers.edit.php:571
 #: include/views/js/monitoring.sysmaps.js.php:94
 #: include/views/js/monitoring.sysmaps.js.php:792
-#: include/views/reports.toptriggers.php:83 jsLoader.php:238 jsLoader.php:340
+#: include/views/reports.toptriggers.php:83 jsLoader.php:238 jsLoader.php:341
 #: services.php:355
 msgid "Trigger"
 msgstr "הקפצה"
@@ -17558,11 +17563,11 @@ msgstr "אבות טיפוס של הקפצות עודכנו"
 msgid "Trigger severity"
 msgstr "חומרת הקפצה"
 
-#: jsLoader.php:325
+#: jsLoader.php:326
 msgid "Trigger status \"OK\""
 msgstr "מצב ההקפצה הוא „תקין“"
 
-#: jsLoader.php:326
+#: jsLoader.php:327
 msgid "Trigger status \"Problem\""
 msgstr "מצב ההקפצה הוא „תקלה”"
 
@@ -17728,7 +17733,7 @@ msgstr "לא ידוע"
 #: include/views/configuration.trigger.prototype.edit.php:530
 #: include/views/configuration.triggers.edit.php:557
 #: include/views/js/monitoring.sysmaps.js.php:314
-#: include/views/monitoring.sysmap.edit.php:278 items.php:158 jsLoader.php:341
+#: include/views/monitoring.sysmap.edit.php:278 items.php:158 jsLoader.php:342
 msgid "URL"
 msgstr "כתובת"
 
@@ -17774,7 +17779,7 @@ msgid "URL should have both \"name\" and \"url\" fields for map \"%1$s\"."
 msgstr "לכתובת אמורים להיות שני השדות: „name” ו־„url” (שם וכתובת) עבור המפה „%1$s”."
 
 #: include/views/js/monitoring.sysmaps.js.php:311
-#: include/views/monitoring.sysmap.edit.php:311 jsLoader.php:342
+#: include/views/monitoring.sysmap.edit.php:311 jsLoader.php:343
 msgid "URLs"
 msgstr "כתובות"
 
@@ -18138,7 +18143,7 @@ msgstr "מפות ברמות עליונות"
 msgid "Uptime"
 msgstr "זמן פעילות"
 
-#: include/classes/items/CHelpItems.php:1245
+#: include/classes/items/CHelpItems.php:1253
 msgid "Uptime of Zabbix server process in seconds."
 msgstr "זמן פעילות של שרת ה־Zabbix בשניות."
 
@@ -18492,7 +18497,7 @@ msgstr "מאפיין שם משתמש"
 msgid "Users"
 msgstr "משתמשים"
 
-#: include/classes/items/CHelpItems.php:1261
+#: include/classes/items/CHelpItems.php:1269
 msgid "VMware cache statistics. Valid modes are: total, free, pfree, used and pused."
 msgstr "סטטיסטיקת זיכרון מטמון של VMware. המצבים האפשריים הם: total,‏ free,‏ pfree,‏ used ו־pused."
 
@@ -18533,7 +18538,11 @@ msgstr "יומן אירועים של VMware,‏ <url> - כתובת שירות VM
 msgid "VMware hypervisor BIOS uuid, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "המזהה הייחודי של ה־BIOS של ה־Hypervisor של VMware,‏ <url> - כתובת שירות VMware,‏ <uuid> - שם מארח ה־Hypervisor של VMware"
 
-#: include/classes/items/CHelpItems.php:901
+#: include/classes/items/CHelpItems.php:929
+msgid "VMware hypervisor HW vendor state sensors, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns JSON"
+msgstr ""
+
+#: include/classes/items/CHelpItems.php:905
 msgid "VMware hypervisor ballooned memory size, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "גודל הזיכרון המנופח של ה־Hypervisor של VMware,‏ <url> - כתובת שירות VMware,‏ <uuid> - שם מארח ה־Hypervisor של VMware"
 
@@ -18557,9 +18566,13 @@ msgstr "סטטיסטיקת הכתיבה למאגר הנתונים של ה־Hyper
 msgid "VMware hypervisor datastores list, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "רשימת מאגרי הנתונים של ה־Hypervisor של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־Hypervisor של VMware"
 
-#: include/classes/items/CHelpItems.php:925
+#: include/classes/items/CHelpItems.php:933
 msgid "VMware hypervisor health state rollup sensor, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns 0 - gray; 1 - green; 2 - yellow; 3 - red"
 msgstr "מצב בריאות חיישן rollup של VMware hypervisor,‏ <url> - כתובת שירות VMware,‏ <uuid> - שם מארח של מכונה וירטואלית ב־VMware. מחזירה 0 - אפור, 1 - ירוק, 2 - צהוב, 3 - אדום"
+
+#: include/classes/items/CHelpItems.php:901
+msgid "VMware hypervisor maintenance status, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
+msgstr ""
 
 #: include/classes/items/CHelpItems.php:889
 msgid "VMware hypervisor model, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -18569,15 +18582,15 @@ msgstr "דגם hypervisor של VMware,‏ <url> כתובת שירות ה־VMware
 msgid "VMware hypervisor name, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "שם ה־hypervisor של VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware"
 
-#: include/classes/items/CHelpItems.php:909
+#: include/classes/items/CHelpItems.php:913
 msgid "VMware hypervisor network input statistics, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <mode> - bps"
 msgstr "סטטיסטיקת קלט הרשת של ה־hypervisor של VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware,‏ <mode>‏ - bps/בתים לשנייה"
 
-#: include/classes/items/CHelpItems.php:913
+#: include/classes/items/CHelpItems.php:917
 msgid "VMware hypervisor network output statistics, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <mode> - bps"
 msgstr "סטטיסטיקת פלט הרשת של ה־hypervisor של VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware,‏ <mode>‏ - bps/בתים לשנייה"
 
-#: include/classes/items/CHelpItems.php:917
+#: include/classes/items/CHelpItems.php:921
 msgid "VMware hypervisor performance counter, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <path> - performance counter path, <instance> - performance counter instance"
 msgstr "מודד הביצועים של ה־hypervisor של VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware,‏ <path> - נתיב מודד ביצועים, <instance> - מופע מודד ביצועים"
 
@@ -18593,7 +18606,7 @@ msgstr "דגם מעבד של ה־hypervisor מבית VMware,‏ <url> כתובת
 msgid "VMware hypervisor processor usage in Hz, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "ניצול תהליך hypervisor של VMware בהרץ,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware"
 
-#: include/classes/items/CHelpItems.php:929
+#: include/classes/items/CHelpItems.php:937
 msgid "VMware hypervisor status, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "מצב ה־hypervisor של VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware"
 
@@ -18601,11 +18614,11 @@ msgstr "מצב ה־hypervisor של VMware,‏ <url> כתובת שירות ה־VM
 msgid "VMware hypervisor total memory size, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "סך כל גודל הזיכרון ב־hypervisor של VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware"
 
-#: include/classes/items/CHelpItems.php:933
+#: include/classes/items/CHelpItems.php:941
 msgid "VMware hypervisor uptime, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "זמן פעולה של ה־hypervisor של VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware"
 
-#: include/classes/items/CHelpItems.php:905
+#: include/classes/items/CHelpItems.php:909
 msgid "VMware hypervisor used memory size, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "הזיכרון המנוצל ב־hypervisor של VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware"
 
@@ -18613,7 +18626,7 @@ msgstr "הזיכרון המנוצל ב־hypervisor של VMware,‏ <url> כתו�
 msgid "VMware hypervisor vendor name, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "שם יצרן ה־hypervisor של VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware"
 
-#: include/classes/items/CHelpItems.php:937
+#: include/classes/items/CHelpItems.php:945
 msgid "VMware hypervisor version, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
 msgstr "גרסת hypervisor של VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware"
 
@@ -18621,103 +18634,103 @@ msgstr "גרסת hypervisor של VMware,‏ <url> כתובת שירות ה־VMwa
 msgid "VMware service full name, <url> - VMware service URL"
 msgstr "שם מלא של שירות ה־VMware,‏ <url> - כתובת שירות ה־VMware"
 
-#: include/classes/items/CHelpItems.php:945
+#: include/classes/items/CHelpItems.php:953
 msgid "VMware service version, <url> - VMware service URL"
 msgstr "גרסת שירות ה־VMware,‏ <url> - כתובת שירות ה־VMware"
 
-#: include/classes/items/CHelpItems.php:1005
+#: include/classes/items/CHelpItems.php:1013
 msgid "VMware virtual machine ballooned memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "גודל הזיכרון המיותר המיועד להחזרה למארח במכונה וירטואלית ב־VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1065
+#: include/classes/items/CHelpItems.php:1073
 msgid "VMware virtual machine committed storage space, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "שטח האחסון הבלתי מוקצה במכונה וירטואלית ב־VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1009
+#: include/classes/items/CHelpItems.php:1017
 msgid "VMware virtual machine compressed memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "גודל זיכרון דחוס של מכונה וירטואלית ב־VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:981
+#: include/classes/items/CHelpItems.php:989
 msgid "VMware virtual machine datacenter name, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns string"
 msgstr "שם של חוות (datacenter) של מכונה וירטואליתVMware,‏ <url> - כתובת שירותVMware,‏ <uuid> - שם מארח המכונה הווירטואלית ב־VMware. מחזירה מחרוזת"
 
-#: include/classes/items/CHelpItems.php:1101
+#: include/classes/items/CHelpItems.php:1109
 msgid "VMware virtual machine disk device read statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance, <mode> - bps/ops - bytes/operations per second"
 msgstr "סטטיסטיקת קריאה מהתקן כונן של מכונה וירטואלית ב־VMware,‏ <url> - כתובת שירות VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware,‏ <instance> - מופע של התקן כונן, <mode> - ‏(bps/‏ops) בתים / פעולות לשנייה"
 
-#: include/classes/items/CHelpItems.php:1105
+#: include/classes/items/CHelpItems.php:1113
 msgid "VMware virtual machine disk device write statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance, <mode> - bps/ops - bytes/operations per second"
 msgstr "סטטיסטיקת כתיבה להתקן כונן של מכונה וירטואלית של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח המכונה הווירטואלית ב־VMware,‏ <instance> - מופע של התקן כונן, <mode>‏ - bps/ops - בתים/פעולות לשנייה"
 
-#: include/classes/items/CHelpItems.php:1113
+#: include/classes/items/CHelpItems.php:1121
 msgid "VMware virtual machine file system statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <fsname> - file system name, <mode> - total/free/used/pfree/pused"
 msgstr "סטטיסטיקת מערכת קבצים של המכונה הווירטואלית ב־VMware,‏ <url> - כתובת שירות VMware,‏ <uuid> - שם מארח של מכונה וירטואלית ב־VMware,‏ <fsname> - שם מערכת הקבצים, <mode>‏ - total/free/used/pfree/pused (סך הכול/פנוי/מנוצל/אחוזים פנויים/אחוזים מנוצלים)"
 
-#: include/classes/items/CHelpItems.php:1029
+#: include/classes/items/CHelpItems.php:1037
 msgid "VMware virtual machine guest memory usage, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "ניצולת זיכרון של אורח במכונה וירטואלית ב־VMware,‏ <url> - כתובת שירות VMware,‏ <uuid> - שם מארח של מכונה וירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1033
+#: include/classes/items/CHelpItems.php:1041
 msgid "VMware virtual machine host memory usage, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "ניצולת זיכרון של מארח מכונות וירטואליות ב־VMware,‏ <url> - כתובת שירות VMware,‏ <uuid> - שם מארח של מכונה וירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:997
+#: include/classes/items/CHelpItems.php:1005
 msgid "VMware virtual machine hypervisor name, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "שם ה־hypervisor של מכונה וירטואלית ב־VMware,‏ <url> כתובת שירות ה־VMware,‏ <uuid> - שם מארח ה־hypervisor מבית VMware"
 
-#: include/classes/items/CHelpItems.php:949
+#: include/classes/items/CHelpItems.php:957
 msgid "VMware virtual machine name, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "שם מכונה וירטואלית ב־VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - מכונה וירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1045
+#: include/classes/items/CHelpItems.php:1053
 msgid "VMware virtual machine network interface input statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - network interface instance, <mode> - bps/pps - bytes/packets per second"
 msgstr "סטטיסטיקת קלט מנשק רשת של מכונה וירטואלית ב־VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - מכונה וירטואלית ב־VMware,‏ <instance> - מופע של מנשק רשת, <mode>‏ - bps/pps - בתים/חבילות לשנייה"
 
-#: include/classes/items/CHelpItems.php:1049
+#: include/classes/items/CHelpItems.php:1057
 msgid "VMware virtual machine network interface output statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - network interface instance, <mode> - bps/pps - bytes/packets per second"
 msgstr "סטטיסטיקת פלט מנשק רשת של מכונה וירטואלית ב־VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - מכונה וירטואלית ב־VMware,‏ <instance> - מופע של מנשק רשת, <mode>‏ - bps/pps - בתים/חבילות לשנייה"
 
-#: include/classes/items/CHelpItems.php:1057
+#: include/classes/items/CHelpItems.php:1065
 msgid "VMware virtual machine performance counter, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <path> - performance counter path, <instance> - performance counter instance"
 msgstr "מדד ביצועים למכונה וירטואלית של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם מארח המכונה הווירטואלית ב־VMware,‏ <path> - נתיב מדד הביצועים, <instance> - מופע מדד הביצועים"
 
-#: include/classes/items/CHelpItems.php:1061
+#: include/classes/items/CHelpItems.php:1069
 msgid "VMware virtual machine power state, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "מצב ההפעלה של מכונה וירטואלית ב־VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1017
+#: include/classes/items/CHelpItems.php:1025
 msgid "VMware virtual machine private memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "גודל זיכרון פרטי של מכונה וירטואלית ב־VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:965
+#: include/classes/items/CHelpItems.php:973
 msgid "VMware virtual machine processor ready time ms, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "זמן במילישניות של זמן המתנת מעבד במכונה וירטואלית ב־VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:973
+#: include/classes/items/CHelpItems.php:981
 msgid "VMware virtual machine processor usage in Hz, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "ניצולת מעבד במכונה וירטואלית של VMWare בהרץ (Hz), <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1021
+#: include/classes/items/CHelpItems.php:1029
 msgid "VMware virtual machine shared memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "גודל זיכרון שיתופי במכונה וירטואלית של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1025
+#: include/classes/items/CHelpItems.php:1033
 msgid "VMware virtual machine swapped memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "גודל זיכרון החלפה במכונה וירטואלית של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1001
+#: include/classes/items/CHelpItems.php:1009
 msgid "VMware virtual machine total memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "גודל זיכרון כולל במכונה וירטואלית של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1081
+#: include/classes/items/CHelpItems.php:1089
 msgid "VMware virtual machine uncommitted storage space, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "נפח אחסון בלתי מוקצה במכונה וירטואלית של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1085
+#: include/classes/items/CHelpItems.php:1093
 msgid "VMware virtual machine unshared storage space, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "נפח אחסון בלתי משותף במכונה וירטואלית של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
-#: include/classes/items/CHelpItems.php:1093
+#: include/classes/items/CHelpItems.php:1101
 msgid "VMware virtual machine uptime, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
 msgstr "זמן הפעילות של מכונה וירטואלית של VMware,‏ <url> - כתובת שירות ה־VMware,‏ <uuid> - שם המארח של המכונה הווירטואלית ב־VMware"
 
@@ -18812,11 +18825,11 @@ msgstr "הערך %1$s הוא שגוי עבור המשתנה „grid_show” (ה�
 msgid "Value \"%1$s\" is too long for field \"%2$s\" - %3$d characters. Allowed length is %4$d characters."
 msgstr "הערך %1$s\" ארוך מדי לשדה „%2$s”‏ - %3$d תווים. האורך המותר הוא %4$d תווים."
 
-#: include/classes/items/CHelpItems.php:1253
+#: include/classes/items/CHelpItems.php:1261
 msgid "Value cache effectiveness. Valid parameters are: requests, hits and misses."
 msgstr "יעילות זכרון המטמון של הערכים. המשתנים האפשריים הם: requests,‏ hits ו־misses (בקשות, פגיעות והחמצות בהתאמה)."
 
-#: include/classes/items/CHelpItems.php:1249
+#: include/classes/items/CHelpItems.php:1257
 msgid "Value cache statistics. Valid modes are: total, free, pfree, used and pused."
 msgstr "סטטיסטיקת זכרון המטמון של הערכים. המשתנים האפשריים הם: total,‏ free,‏ pfree,‏ used ו־pused (סך הכול, פנוי, אחוז פנוי, מנוצל ואחוז מנוצל בהתאמה)."
 
@@ -18954,7 +18967,7 @@ msgstr "גרסה"
 msgid "Version of Zabbix agent. Returns string"
 msgstr "גרסת שרת Zabbix. מחזירה מחרוזת"
 
-#: include/classes/items/CHelpItems.php:1257
+#: include/classes/items/CHelpItems.php:1265
 msgid "Version of Zabbix server or proxy"
 msgstr "גרסת שרת ה־Zabbix או המתווך"
 
@@ -19035,7 +19048,7 @@ msgstr "אנו מתנצלים, כמות הרכיבים המרבית האפשרי
 #: include/views/inventory.host.view.php:136
 #: include/views/inventory.host.view.php:141
 #: include/views/inventory.host.view.php:206
-#: include/views/inventory.host.view.php:219 jsLoader.php:343
+#: include/views/inventory.host.view.php:219 jsLoader.php:344
 msgid "Web"
 msgstr "אינטרנט"
 
@@ -19313,7 +19326,7 @@ msgid "Y axis MAX value must be greater than Y axis MIN value"
 msgstr "הערך המרבי של ציר ה־Y חייב להיות גדול מהערך המזערי של ציר ה־Y"
 
 #: include/classes/api/services/CGraphGeneral.php:343
-#: include/classes/graphdraw/CLineGraphDraw.php:1872
+#: include/classes/graphdraw/CLineGraphDraw.php:1881
 msgid "Y axis MAX value must be greater than Y axis MIN value."
 msgstr "הערך המרבי של ציר ה־Y חייב להיות גדול מהערך המזערי של ציר ה־Y."
 
@@ -19385,9 +19398,9 @@ msgstr "YYYY-MM-DD hh:mm:ss"
 #: include/classes/import/validators/C40XmlValidator.php:1258
 #: include/classes/import/validators/C42XmlValidator.php:1316
 #: include/classes/import/validators/C44XmlValidator.php:1721
-#: include/classes/import/validators/C50XmlValidator.php:1864
-#: include/classes/import/validators/C52XmlValidator.php:1986
-#: include/classes/import/validators/C54XmlValidator.php:2041
+#: include/classes/import/validators/C50XmlValidator.php:1871
+#: include/classes/import/validators/C52XmlValidator.php:1993
+#: include/classes/import/validators/C54XmlValidator.php:2048
 msgctxt "XML date and time format"
 msgid "YYYY-MM-DDThh:mm:ssZ"
 msgstr "YYYY-MM-DDThh:mm:ssZ"
@@ -19768,14 +19781,14 @@ msgstr "אמורה להיות כתובת IP"
 #: include/classes/api/services/CModule.php:298
 #: include/classes/import/validators/C44XmlValidator.php:2095
 #: include/classes/import/validators/C44XmlValidator.php:2115
-#: include/classes/import/validators/C50XmlValidator.php:2238
-#: include/classes/import/validators/C50XmlValidator.php:2258
-#: include/classes/import/validators/C52XmlValidator.php:2403
-#: include/classes/import/validators/C52XmlValidator.php:2423
-#: include/classes/import/validators/C52XmlValidator.php:2572
-#: include/classes/import/validators/C54XmlValidator.php:2458
-#: include/classes/import/validators/C54XmlValidator.php:2478
-#: include/classes/import/validators/C54XmlValidator.php:2585
+#: include/classes/import/validators/C50XmlValidator.php:2245
+#: include/classes/import/validators/C50XmlValidator.php:2265
+#: include/classes/import/validators/C52XmlValidator.php:2410
+#: include/classes/import/validators/C52XmlValidator.php:2430
+#: include/classes/import/validators/C52XmlValidator.php:2579
+#: include/classes/import/validators/C54XmlValidator.php:2465
+#: include/classes/import/validators/C54XmlValidator.php:2485
+#: include/classes/import/validators/C54XmlValidator.php:2592
 #: include/classes/import/validators/CXmlValidatorGeneral.php:283
 #: include/classes/validators/CApiInputValidator.php:497
 #: include/classes/validators/CApiInputValidator.php:629
@@ -20631,7 +20644,7 @@ msgstr "כלל גילוי ברמה נמוכה"
 msgid "ltrim() - Remove specified characters from the beginning of a string"
 msgstr "ltrim()‎ - מסירה תווים מסוימים מהתחלה של מחרוזת"
 
-#: include/func.inc.php:581 jsLoader.php:121 jsLoader.php:196 jsLoader.php:360
+#: include/func.inc.php:581 jsLoader.php:121 jsLoader.php:196 jsLoader.php:361
 msgctxt "minute short"
 msgid "m"
 msgstr "m"
@@ -20799,7 +20812,7 @@ msgstr "n-d H:i"
 msgid "name"
 msgstr "שם"
 
-#: include/classes/html/CMultiSelect.php:85 jsLoader.php:297
+#: include/classes/html/CMultiSelect.php:85 jsLoader.php:298
 msgid "new"
 msgstr "חדש"
 
@@ -20934,7 +20947,7 @@ msgstr "פלט"
 msgid "path/to/secret"
 msgstr "נתיב/אל/סוד"
 
-#: include/classes/html/CMacroValue.php:139 jsLoader.php:371
+#: include/classes/html/CMacroValue.php:139 jsLoader.php:372
 msgid "path/to/secret:key"
 msgstr "נתיב/אל/סוד:מפתח"
 
@@ -21222,9 +21235,9 @@ msgstr "הטבלה „%1$s” לא נמצאה"
 
 #: include/classes/export/CConfigurationExportBuilder.php:87
 #: include/classes/import/validators/C44XmlValidator.php:1983
-#: include/classes/import/validators/C50XmlValidator.php:2126
-#: include/classes/import/validators/C52XmlValidator.php:2216
-#: include/classes/import/validators/C54XmlValidator.php:2271
+#: include/classes/import/validators/C50XmlValidator.php:2133
+#: include/classes/import/validators/C52XmlValidator.php:2223
+#: include/classes/import/validators/C54XmlValidator.php:2278
 #: include/classes/import/validators/CXmlValidatorGeneral.php:183
 #: include/classes/import/validators/CXmlValidatorGeneral.php:202
 #, c-format
@@ -21306,7 +21319,7 @@ msgid "truncate() - Truncates a value to decimal places"
 msgstr "truncate()‎ - קוצץ ערך למקומות עשרוניים"
 
 #: app/partials/layout.htmlpage.aside.php:74
-#: include/classes/html/CMultiSelect.php:84 jsLoader.php:296
+#: include/classes/html/CMultiSelect.php:84 jsLoader.php:297
 msgid "type here to search"
 msgstr "יש להקליד כאן כדי לחפש"
 
@@ -21315,8 +21328,8 @@ msgid "unacceptable URL"
 msgstr "כתובת לא מקובלת"
 
 #: include/classes/import/validators/C44XmlValidator.php:2182
-#: include/classes/import/validators/C50XmlValidator.php:2325
-#: include/classes/import/validators/C52XmlValidator.php:2490
+#: include/classes/import/validators/C50XmlValidator.php:2332
+#: include/classes/import/validators/C52XmlValidator.php:2497
 #: include/classes/import/validators/CXmlValidatorGeneral.php:298
 #, c-format
 msgid "unexpected constant \"%1$s\""
@@ -21325,9 +21338,9 @@ msgstr "קבוע לא צפוי „%1$s”"
 #: include/classes/export/CConfigurationExportBuilder.php:119
 #: include/classes/import/converters/CConstantImportConverter.php:60
 #: include/classes/import/validators/C44XmlValidator.php:2140
-#: include/classes/import/validators/C50XmlValidator.php:2283
-#: include/classes/import/validators/C52XmlValidator.php:2448
-#: include/classes/import/validators/C54XmlValidator.php:2503
+#: include/classes/import/validators/C50XmlValidator.php:2290
+#: include/classes/import/validators/C52XmlValidator.php:2455
+#: include/classes/import/validators/C54XmlValidator.php:2510
 #, c-format
 msgid "unexpected constant value \"%1$s\""
 msgstr "ערך הקבוע אינו צפוי „%1$s”"
@@ -21420,7 +21433,7 @@ msgstr "מספר הגרסה אינו נתמך"
 #: app/partials/monitoring.problem.filter.php:369
 #: app/views/administration.usergroup.edit.php:187
 #: app/views/js/popup.itemtestedit.view.js.php:446
-#: app/views/js/popup.itemtestedit.view.js.php:457
+#: app/views/js/popup.itemtestedit.view.js.php:456
 #: app/views/js/popup.valuemap.edit.js.php:29
 #: app/views/js/popup.valuemap.edit.js.php:30
 #: app/views/js/popup.valuemap.edit.js.php:31
@@ -21445,7 +21458,7 @@ msgstr "מספר הגרסה אינו נתמך"
 #: include/views/js/configuration.httpconf.edit.js.php:73
 #: include/views/js/configuration.maintenance.edit.js.php:37
 #: include/views/js/configuration.maintenance.edit.js.php:61
-#: include/views/js/item.preprocessing.js.php:416 jsLoader.php:372
+#: include/views/js/item.preprocessing.js.php:416 jsLoader.php:373
 msgid "value"
 msgstr "ערך"
 
@@ -21538,8 +21551,8 @@ msgstr "הערך לא יכול להיות פחות מאשר „%1$s”"
 #: include/classes/api/services/CMap.php:1157
 #: include/classes/api/services/CReport.php:209
 #: include/classes/api/services/CReport.php:612
-#: include/classes/import/validators/C52XmlValidator.php:2567
-#: include/classes/import/validators/C54XmlValidator.php:2580
+#: include/classes/import/validators/C52XmlValidator.php:2574
+#: include/classes/import/validators/C54XmlValidator.php:2587
 #: include/classes/validators/CApiInputValidator.php:459
 #: include/classes/validators/CApiInputValidator.php:784
 #: include/classes/validators/CNewValidator.php:517
