@@ -49,7 +49,7 @@
 				}))
 			)
 		);
-		widget['container'] = $('<div>', {'class': 'dashbrd-grid-widget-container'})
+		widget['container'] = $('<div>', {class: 'dashbrd-grid-widget-container'})
 			.append(widget['content_header'])
 			.append(widget['content_body'])
 			.append(widget['content_script']);
@@ -79,7 +79,7 @@
 						.addClass(btn.icon)
 				);
 				info_btns.push(
-					$('<div></div>')
+					$('<div>')
 						.html(btn.hint)
 						.addClass('hint-box')
 						.hide()
