@@ -1,8 +1,7 @@
 Changes for 4.0.37rc1
 
-New features:
-
 Bug fixes:
+..F....... [ZBX-20382] updated jquery version (ashubin)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.36
