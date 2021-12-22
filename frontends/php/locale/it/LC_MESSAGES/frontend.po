@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 19:50+0300\n"
+"POT-Creation-Date: 2021-12-22 17:21+0200\n"
 "PO-Revision-Date: 2021-03-19 17:54+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -246,7 +246,7 @@ msgstr "(Solo i super amministratori possono creare gruppi)"
 msgid "(no proxy)"
 msgstr "(nessun proxy)"
 
-#: include/classes/setup/CSetupWizard.php:231
+#: include/classes/setup/CSetupWizard.php:233
 msgid "0 - use default port"
 msgstr "0 - usa porta di default"
 
@@ -890,7 +890,7 @@ msgstr "Consenti chiusura manuale"
 msgid "Allowed hosts"
 msgstr "Host consentiti"
 
-#: include/classes/setup/CSetupWizard.php:370
+#: include/classes/setup/CSetupWizard.php:386
 msgid "Alternatively, you can install it manually:"
 msgstr "In alternativa, e' possibile installarlo manualmente:"
 
@@ -1315,8 +1315,8 @@ msgstr "Media"
 msgid "Axes"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:124
-#: include/classes/setup/CSetupWizard.php:327
+#: include/classes/setup/CSetupWizard.php:126
+#: include/classes/setup/CSetupWizard.php:329
 msgid "Back"
 msgstr "Indietro"
 
@@ -1516,7 +1516,7 @@ msgstr "Canada (136 caratteri)"
 #: app/views/monitoring.acknowledge.edit.php:88
 #: app/views/monitoring.dashboard.view.php:100
 #: include/classes/html/CButtonCancel.php:25
-#: include/classes/setup/CSetupWizard.php:106
+#: include/classes/setup/CSetupWizard.php:108
 #: include/views/configuration.action.edit.php:1224
 #: include/views/configuration.action.edit.php:1244
 #: include/views/configuration.action.edit.php:1845
@@ -1775,7 +1775,7 @@ msgstr "Impossibile chiudere il problema: %1$s."
 msgid "Cannot connect to LDAP server."
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:255
+#: include/classes/setup/CSetupWizard.php:257
 msgid "Cannot connect to the database."
 msgstr "Non è possibile connettersi al database."
 
@@ -1840,7 +1840,7 @@ msgstr "Impossibile creare mappa icone"
 msgid "Cannot create new application, web scenario is already assigned to application."
 msgstr "Impossibile creare nuova applicazione, uno scenario web è già assegnato all'applicazione.Impossibile creare nuova applicazione, uno scenario web è già assegnato all'applicazione."
 
-#: include/classes/setup/CSetupWizard.php:368
+#: include/classes/setup/CSetupWizard.php:384
 msgid "Cannot create the configuration file."
 msgstr "Impossibile creare il file di configurazione."
 
@@ -3008,7 +3008,7 @@ msgid "Check now"
 msgstr ""
 
 #: include/classes/setup/CSetupWizard.php:37
-#: include/classes/setup/CSetupWizard.php:207
+#: include/classes/setup/CSetupWizard.php:209
 msgid "Check of pre-requisites"
 msgstr "Verifica prerequisiti"
 
@@ -3325,7 +3325,7 @@ msgstr "Configurazione"
 msgid "Configuration cache statistics. Cache - buffer (modes: pfree, total, used, free)."
 msgstr "Statistiche della cache di configurazione. Cache - buffer (modalità: pfree, total, used, free)."
 
-#: include/classes/setup/CSetupWizard.php:385
+#: include/classes/setup/CSetupWizard.php:413
 #, c-format
 msgid "Configuration file \"%1$s\" created."
 msgstr "File configurazione \"%1$s\" creato."
@@ -3488,7 +3488,7 @@ msgid "Configuration updated"
 msgstr "Configurazione aggiornata"
 
 #: include/classes/setup/CSetupWizard.php:41
-#: include/classes/setup/CSetupWizard.php:262
+#: include/classes/setup/CSetupWizard.php:264
 msgid "Configure DB connection"
 msgstr "Configura connessione DB"
 
@@ -3496,7 +3496,7 @@ msgstr "Configura connessione DB"
 msgid "Confirmation text"
 msgstr "Testo di conferma"
 
-#: include/classes/setup/CSetupWizard.php:383
+#: include/classes/setup/CSetupWizard.php:411
 msgid "Congratulations! You have successfully installed Zabbix frontend."
 msgstr "Complimenti! Hai installato con successo il frontend di Zabbix."
 
@@ -3976,7 +3976,7 @@ msgstr "Critico"
 msgid "Current host"
 msgstr "Host corrente"
 
-#: include/classes/setup/CSetupWizard.php:165
+#: include/classes/setup/CSetupWizard.php:167
 msgid "Current value"
 msgstr "Valore corrente"
 
@@ -4169,7 +4169,7 @@ msgstr ""
 msgid "Data storage period"
 msgstr "Periodo storicizzazione dati"
 
-#: include/classes/setup/CSetupWizard.php:221
+#: include/classes/setup/CSetupWizard.php:223
 msgid "Database host"
 msgstr "Host del database"
 
@@ -4177,35 +4177,35 @@ msgstr "Host del database"
 msgid "Database monitor"
 msgstr "Database monitor"
 
-#: include/classes/setup/CSetupWizard.php:234
-#: include/classes/setup/CSetupWizard.php:311 setup.php:44
+#: include/classes/setup/CSetupWizard.php:236
+#: include/classes/setup/CSetupWizard.php:313 setup.php:44
 msgid "Database name"
 msgstr "Nome del database"
 
-#: include/classes/setup/CSetupWizard.php:313
+#: include/classes/setup/CSetupWizard.php:315
 msgid "Database password"
 msgstr "Password del database"
 
-#: include/classes/setup/CSetupWizard.php:226
-#: include/classes/setup/CSetupWizard.php:310 setup.php:43
+#: include/classes/setup/CSetupWizard.php:228
+#: include/classes/setup/CSetupWizard.php:312 setup.php:43
 msgid "Database port"
 msgstr "Porta del database"
 
-#: include/classes/setup/CSetupWizard.php:240
-#: include/classes/setup/CSetupWizard.php:315
+#: include/classes/setup/CSetupWizard.php:242
+#: include/classes/setup/CSetupWizard.php:317
 msgid "Database schema"
 msgstr "Schema del database"
 
-#: include/classes/setup/CSetupWizard.php:309
+#: include/classes/setup/CSetupWizard.php:311
 msgid "Database server"
 msgstr "Server del database"
 
-#: include/classes/setup/CSetupWizard.php:217
-#: include/classes/setup/CSetupWizard.php:304
+#: include/classes/setup/CSetupWizard.php:219
+#: include/classes/setup/CSetupWizard.php:306
 msgid "Database type"
 msgstr "Tipo di database"
 
-#: include/classes/setup/CSetupWizard.php:312
+#: include/classes/setup/CSetupWizard.php:314
 msgid "Database user"
 msgstr "Utente del database"
 
@@ -5149,7 +5149,7 @@ msgctxt "discovery status"
 msgid "Down"
 msgstr "Giù"
 
-#: include/classes/setup/CSetupWizard.php:372
+#: include/classes/setup/CSetupWizard.php:388
 msgid "Download the configuration file"
 msgstr "Scarica il file di configurazione"
 
@@ -5948,7 +5948,7 @@ msgstr "FALSO"
 msgid "FTP"
 msgstr "FTP"
 
-#: include/classes/setup/CSetupWizard.php:181
+#: include/classes/setup/CSetupWizard.php:183
 msgid "Fail"
 msgstr "Fallito"
 
@@ -6176,7 +6176,7 @@ msgstr "Trova stringa in un file. Restituisce la riga contenente la stringa corr
 msgid "Find string on a web page. Returns the matched string, or as specified by the optional output parameter"
 msgstr "Trova stringa su una pagina web. Restituisce la stringa corrispondente, o come specificato dal parametro di uscita opzionale"
 
-#: include/classes/setup/CSetupWizard.php:121
+#: include/classes/setup/CSetupWizard.php:123
 msgid "Finish"
 msgstr "Termina"
 
@@ -6909,7 +6909,7 @@ msgstr "Allinea in orizzontale"
 #: include/classes/screens/CScreenProblem.php:866
 #: include/classes/screens/CScreenProblem.php:1083
 #: include/classes/screens/CScreenTriggersInfo.php:40
-#: include/classes/setup/CSetupWizard.php:274
+#: include/classes/setup/CSetupWizard.php:276
 #: include/classes/widgets/forms/CWidgetFormProblems.php:200
 #: include/classes/widgets/forms/CWidgetFormProblems.php:201
 #: include/forms.inc.php:375 include/hostgroups.inc.php:251
@@ -8747,11 +8747,12 @@ msgid "Insert expression"
 msgstr "Inserire espressione"
 
 #: include/classes/setup/CSetupWizard.php:53
-#: include/classes/setup/CSetupWizard.php:390
+#: include/classes/setup/CSetupWizard.php:394
+#: include/classes/setup/CSetupWizard.php:417
 msgid "Install"
 msgstr "Installa"
 
-#: setup.php:101
+#: setup.php:85
 msgid "Installation"
 msgstr "Installazione"
 
@@ -10992,9 +10993,9 @@ msgstr "Nuovo orario di servizio"
 msgid "New triggers"
 msgstr "Nuovi trigger"
 
-#: include/classes/setup/CSetupWizard.php:118
-#: include/classes/setup/CSetupWizard.php:264
-#: include/classes/setup/CSetupWizard.php:327
+#: include/classes/setup/CSetupWizard.php:120
+#: include/classes/setup/CSetupWizard.php:266
+#: include/classes/setup/CSetupWizard.php:329
 msgid "Next step"
 msgstr "Prossimo step"
 
@@ -12555,7 +12556,7 @@ msgstr "Passivo"
 
 #: app/views/administration.mediatype.edit.php:163 disc_prototypes.php:231
 #: host_discovery.php:211 httpconf.php:65
-#: include/classes/setup/CSetupWizard.php:248
+#: include/classes/setup/CSetupWizard.php:250
 #: include/views/administration.users.edit.php:113
 #: include/views/administration.users.edit.php:144
 #: include/views/configuration.action.edit.php:947
@@ -12697,17 +12698,17 @@ msgstr "Riproduci"
 msgid "Play sound"
 msgstr "Riproduci suono"
 
-#: include/classes/setup/CSetupWizard.php:327
+#: include/classes/setup/CSetupWizard.php:329
 #, c-format
 msgid "Please check configuration parameters. If all is correct, press \"%1$s\" button, or \"%2$s\" button to change configuration parameters."
 msgstr "Si prega di controllare i parametri di configurazione. Se tutto è corretto, premere il pulsante \"%1$s\", o il pulsante \"%2$s\" per modificare i parametri di configurazione."
 
-#: include/classes/setup/CSetupWizard.php:264
+#: include/classes/setup/CSetupWizard.php:266
 #, c-format
 msgid "Please create database manually, and set the configuration parameters for connection to this database. Press \"%1$s\" button when done."
 msgstr "Si prega di creare il database manualmente ed impostare i parametri di configurazione per la connessione al database. Premere \"%1$s\" quando eseguito."
 
-#: include/classes/setup/CSetupWizard.php:293
+#: include/classes/setup/CSetupWizard.php:295
 msgid "Please enter the host name or host IP address and port number of the Zabbix server, as well as the name of the installation (optional)."
 msgstr "Si prega di inserire il nome host o indirizzo IP dell'host e porta del server Zabbix, ed eventuale nome dell'installazione (opzionale)."
 
@@ -12747,7 +12748,7 @@ msgstr "Popola campo inventario host"
 
 #: app/views/administration.authentication.edit.php:92
 #: app/views/administration.proxy.edit.php:43 disc_prototypes.php:105
-#: host_discovery.php:105 include/classes/setup/CSetupWizard.php:279
+#: host_discovery.php:105 include/classes/setup/CSetupWizard.php:281
 #: include/forms.inc.php:472 include/views/configuration.action.edit.php:994
 #: include/views/configuration.action.edit.php:1772
 #: include/views/configuration.action.edit.php:2234
@@ -12789,7 +12790,7 @@ msgid "Post type"
 msgstr "Tipo POST"
 
 #: include/classes/setup/CSetupWizard.php:49
-#: include/classes/setup/CSetupWizard.php:325
+#: include/classes/setup/CSetupWizard.php:327
 msgid "Pre-installation summary"
 msgstr "Sommario pre-installazione"
 
@@ -13530,7 +13531,7 @@ msgstr ""
 msgid "Request type"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:165
+#: include/classes/setup/CSetupWizard.php:167
 #: include/views/configuration.httpconf.edit.php:205
 msgid "Required"
 msgstr "Necessario"
@@ -14018,7 +14019,7 @@ msgstr "Sabato"
 msgid "Save changes"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:373
+#: include/classes/setup/CSetupWizard.php:389
 #, c-format
 msgid "Save it as \"%1$s\""
 msgstr "Salva come \"%1$s\""
@@ -16794,7 +16795,7 @@ msgstr "Usati negli item"
 
 #: httpconf.php:59 include/actions.inc.php:1768 include/actions.inc.php:1823
 #: include/actions.inc.php:2041 include/audit.inc.php:24
-#: include/classes/setup/CSetupWizard.php:245 include/hosts.inc.php:61
+#: include/classes/setup/CSetupWizard.php:247 include/hosts.inc.php:61
 #: include/views/administration.auditlogs.list.php:26
 #: include/views/administration.auditlogs.list.php:71
 #: include/views/administration.users.edit.php:456
@@ -17514,7 +17515,7 @@ msgstr "M"
 msgid "Warning"
 msgstr "Bassa"
 
-#: include/classes/setup/CSetupWizard.php:177
+#: include/classes/setup/CSetupWizard.php:179
 msgctxt "setup"
 msgid "Warning"
 msgstr "Attenzione"
@@ -17614,7 +17615,7 @@ msgstr "Per settimane"
 msgid "Welcome"
 msgstr "Benvenuto"
 
-#: include/classes/setup/CSetupWizard.php:157
+#: include/classes/setup/CSetupWizard.php:159
 msgid "Welcome to"
 msgstr "Benvenuto a"
 
@@ -18019,7 +18020,7 @@ msgid "Zabbix login form"
 msgstr ""
 
 #: app/views/administration.script.edit.php:52 include/actions.inc.php:905
-#: include/classes/setup/CSetupWizard.php:320
+#: include/classes/setup/CSetupWizard.php:322
 #: include/views/configuration.action.edit.php:939
 #: include/views/configuration.action.edit.php:1713
 #: include/views/configuration.action.edit.php:2184
@@ -18045,7 +18046,7 @@ msgid "Zabbix server (proxy)"
 msgstr "Zabbix server (proxy)"
 
 #: include/classes/setup/CSetupWizard.php:45
-#: include/classes/setup/CSetupWizard.php:291
+#: include/classes/setup/CSetupWizard.php:293
 msgid "Zabbix server details"
 msgstr "Zabbix server dettagli"
 
@@ -18062,11 +18063,11 @@ msgstr "Il server Zabbix è in esecuzione"
 msgid "Zabbix server is running check interval \"%1$s\"."
 msgstr "Il server Zabbix sta eseguendo un intervallo di controllo \"%1$s\"."
 
-#: include/classes/setup/CSetupWizard.php:322
+#: include/classes/setup/CSetupWizard.php:324
 msgid "Zabbix server name"
 msgstr "Nome server Zabbix"
 
-#: include/classes/setup/CSetupWizard.php:321
+#: include/classes/setup/CSetupWizard.php:323
 msgid "Zabbix server port"
 msgstr "Porta server Zabbix"
 
@@ -18440,7 +18441,7 @@ msgid "days"
 msgstr "giorni"
 
 #: include/classes/pagefilter/CPageFilter.php:659
-#: include/classes/setup/CSetupWizard.php:306
+#: include/classes/setup/CSetupWizard.php:308
 #: include/classes/widgets/CWidgetHelper.php:53
 #: include/views/js/monitoring.slideconf.edit.js.php:14
 #: include/views/monitoring.slideconf.edit.php:132

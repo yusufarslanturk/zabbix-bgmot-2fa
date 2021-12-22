@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 19:50+0300\n"
+"POT-Creation-Date: 2021-12-22 17:21+0200\n"
 "PO-Revision-Date: 2021-03-19 17:56+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix translation team\n"
@@ -262,7 +262,7 @@ msgstr "(Skupiny môžu vytvárať iba super administrátori)"
 msgid "(no proxy)"
 msgstr "(bez proxy)"
 
-#: include/classes/setup/CSetupWizard.php:231
+#: include/classes/setup/CSetupWizard.php:233
 msgid "0 - use default port"
 msgstr "0 - použiť predvolený port"
 
@@ -908,7 +908,7 @@ msgstr ""
 msgid "Allowed hosts"
 msgstr "Povolené hosty"
 
-#: include/classes/setup/CSetupWizard.php:370
+#: include/classes/setup/CSetupWizard.php:386
 msgid "Alternatively, you can install it manually:"
 msgstr "Eventuálne to môžete napísať manuálne:"
 
@@ -1334,8 +1334,8 @@ msgstr "Priemerná"
 msgid "Axes"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:124
-#: include/classes/setup/CSetupWizard.php:327
+#: include/classes/setup/CSetupWizard.php:126
+#: include/classes/setup/CSetupWizard.php:329
 msgid "Back"
 msgstr "Späť"
 
@@ -1535,7 +1535,7 @@ msgstr "Kanada (136 znakov)"
 #: app/views/monitoring.acknowledge.edit.php:88
 #: app/views/monitoring.dashboard.view.php:100
 #: include/classes/html/CButtonCancel.php:25
-#: include/classes/setup/CSetupWizard.php:106
+#: include/classes/setup/CSetupWizard.php:108
 #: include/views/configuration.action.edit.php:1224
 #: include/views/configuration.action.edit.php:1244
 #: include/views/configuration.action.edit.php:1845
@@ -1794,7 +1794,7 @@ msgstr ""
 msgid "Cannot connect to LDAP server."
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:255
+#: include/classes/setup/CSetupWizard.php:257
 msgid "Cannot connect to the database."
 msgstr "Nie je možné sa spojiť s databázou."
 
@@ -1862,7 +1862,7 @@ msgstr "Nie je možné vytvoriť mapu ikon"
 msgid "Cannot create new application, web scenario is already assigned to application."
 msgstr "Nie je možné vytvoriť novú aplikáciu, web scenár je už priradený k aplikácii."
 
-#: include/classes/setup/CSetupWizard.php:368
+#: include/classes/setup/CSetupWizard.php:384
 msgid "Cannot create the configuration file."
 msgstr "Nie je možné vytvoriť konfiguračný súbor."
 
@@ -3067,7 +3067,7 @@ msgid "Check now"
 msgstr ""
 
 #: include/classes/setup/CSetupWizard.php:37
-#: include/classes/setup/CSetupWizard.php:207
+#: include/classes/setup/CSetupWizard.php:209
 msgid "Check of pre-requisites"
 msgstr "Kontrola požiadaviek"
 
@@ -3384,7 +3384,7 @@ msgstr "Nastavenie"
 msgid "Configuration cache statistics. Cache - buffer (modes: pfree, total, used, free)."
 msgstr "Nastavenie cache štatistík. Cache - buffer (módy: pfree, total, used, free)."
 
-#: include/classes/setup/CSetupWizard.php:385
+#: include/classes/setup/CSetupWizard.php:413
 #, c-format
 msgid "Configuration file \"%1$s\" created."
 msgstr "Konfiguračný súbor \"%1$s\" vytvorený."
@@ -3547,7 +3547,7 @@ msgid "Configuration updated"
 msgstr "Nastavenie bolo aktulizované"
 
 #: include/classes/setup/CSetupWizard.php:41
-#: include/classes/setup/CSetupWizard.php:262
+#: include/classes/setup/CSetupWizard.php:264
 msgid "Configure DB connection"
 msgstr "Konfigurovať DB spojenie"
 
@@ -3555,7 +3555,7 @@ msgstr "Konfigurovať DB spojenie"
 msgid "Confirmation text"
 msgstr "Potvrdzujúci text"
 
-#: include/classes/setup/CSetupWizard.php:383
+#: include/classes/setup/CSetupWizard.php:411
 msgid "Congratulations! You have successfully installed Zabbix frontend."
 msgstr "Gratulácia! Práve ste úspešne nainštalovali Zabbix frontend."
 
@@ -4037,7 +4037,7 @@ msgstr "Kritický"
 msgid "Current host"
 msgstr "Aktuálny host"
 
-#: include/classes/setup/CSetupWizard.php:165
+#: include/classes/setup/CSetupWizard.php:167
 msgid "Current value"
 msgstr "Aktuálna hodnota"
 
@@ -4231,7 +4231,7 @@ msgstr ""
 msgid "Data storage period"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:221
+#: include/classes/setup/CSetupWizard.php:223
 msgid "Database host"
 msgstr "Databázový server"
 
@@ -4239,35 +4239,35 @@ msgstr "Databázový server"
 msgid "Database monitor"
 msgstr "Databázový monitor"
 
-#: include/classes/setup/CSetupWizard.php:234
-#: include/classes/setup/CSetupWizard.php:311 setup.php:44
+#: include/classes/setup/CSetupWizard.php:236
+#: include/classes/setup/CSetupWizard.php:313 setup.php:44
 msgid "Database name"
 msgstr "Meno databázy"
 
-#: include/classes/setup/CSetupWizard.php:313
+#: include/classes/setup/CSetupWizard.php:315
 msgid "Database password"
 msgstr "Heslo databázy"
 
-#: include/classes/setup/CSetupWizard.php:226
-#: include/classes/setup/CSetupWizard.php:310 setup.php:43
+#: include/classes/setup/CSetupWizard.php:228
+#: include/classes/setup/CSetupWizard.php:312 setup.php:43
 msgid "Database port"
 msgstr "Port databázy"
 
-#: include/classes/setup/CSetupWizard.php:240
-#: include/classes/setup/CSetupWizard.php:315
+#: include/classes/setup/CSetupWizard.php:242
+#: include/classes/setup/CSetupWizard.php:317
 msgid "Database schema"
 msgstr "Databázová schéma"
 
-#: include/classes/setup/CSetupWizard.php:309
+#: include/classes/setup/CSetupWizard.php:311
 msgid "Database server"
 msgstr "Databázový server"
 
-#: include/classes/setup/CSetupWizard.php:217
-#: include/classes/setup/CSetupWizard.php:304
+#: include/classes/setup/CSetupWizard.php:219
+#: include/classes/setup/CSetupWizard.php:306
 msgid "Database type"
 msgstr "Typ databázy"
 
-#: include/classes/setup/CSetupWizard.php:312
+#: include/classes/setup/CSetupWizard.php:314
 msgid "Database user"
 msgstr "Databázový používateľ"
 
@@ -5214,7 +5214,7 @@ msgctxt "discovery status"
 msgid "Down"
 msgstr "Nedostupné"
 
-#: include/classes/setup/CSetupWizard.php:372
+#: include/classes/setup/CSetupWizard.php:388
 msgid "Download the configuration file"
 msgstr "Stiahnuť konfiguračný súbor"
 
@@ -6013,7 +6013,7 @@ msgstr "NEPRAVDA"
 msgid "FTP"
 msgstr "FTP"
 
-#: include/classes/setup/CSetupWizard.php:181
+#: include/classes/setup/CSetupWizard.php:183
 msgid "Fail"
 msgstr "Zlyhalo"
 
@@ -6241,7 +6241,7 @@ msgstr "Nájdi reťazec v súbore. Vráti riadok obsahujúci vybraný reťazec a
 msgid "Find string on a web page. Returns the matched string, or as specified by the optional output parameter"
 msgstr "Nájdi reťazec vo web stránke. Vráti vybraný reťazec alebo výstup definovaný vo voliteľnom výstupnom parametri"
 
-#: include/classes/setup/CSetupWizard.php:121
+#: include/classes/setup/CSetupWizard.php:123
 msgid "Finish"
 msgstr "Ukončiť"
 
@@ -6976,7 +6976,7 @@ msgstr "Vodorovné zarovnanie"
 #: include/classes/screens/CScreenProblem.php:866
 #: include/classes/screens/CScreenProblem.php:1083
 #: include/classes/screens/CScreenTriggersInfo.php:40
-#: include/classes/setup/CSetupWizard.php:274
+#: include/classes/setup/CSetupWizard.php:276
 #: include/classes/widgets/forms/CWidgetFormProblems.php:200
 #: include/classes/widgets/forms/CWidgetFormProblems.php:201
 #: include/forms.inc.php:375 include/hostgroups.inc.php:251
@@ -8818,11 +8818,12 @@ msgid "Insert expression"
 msgstr "Vložiť výraz"
 
 #: include/classes/setup/CSetupWizard.php:53
-#: include/classes/setup/CSetupWizard.php:390
+#: include/classes/setup/CSetupWizard.php:394
+#: include/classes/setup/CSetupWizard.php:417
 msgid "Install"
 msgstr "Inštalovať"
 
-#: setup.php:101
+#: setup.php:85
 msgid "Installation"
 msgstr "Inštalácia"
 
@@ -11079,9 +11080,9 @@ msgstr "Nový čas služby"
 msgid "New triggers"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:118
-#: include/classes/setup/CSetupWizard.php:264
-#: include/classes/setup/CSetupWizard.php:327
+#: include/classes/setup/CSetupWizard.php:120
+#: include/classes/setup/CSetupWizard.php:266
+#: include/classes/setup/CSetupWizard.php:329
 msgid "Next step"
 msgstr "Ďalší krok"
 
@@ -12642,7 +12643,7 @@ msgstr "Pasívny"
 
 #: app/views/administration.mediatype.edit.php:163 disc_prototypes.php:231
 #: host_discovery.php:211 httpconf.php:65
-#: include/classes/setup/CSetupWizard.php:248
+#: include/classes/setup/CSetupWizard.php:250
 #: include/views/administration.users.edit.php:113
 #: include/views/administration.users.edit.php:144
 #: include/views/configuration.action.edit.php:947
@@ -12784,17 +12785,17 @@ msgstr "Prehrať"
 msgid "Play sound"
 msgstr "Prehrávať zvuk"
 
-#: include/classes/setup/CSetupWizard.php:327
+#: include/classes/setup/CSetupWizard.php:329
 #, c-format
 msgid "Please check configuration parameters. If all is correct, press \"%1$s\" button, or \"%2$s\" button to change configuration parameters."
 msgstr "Prosím skontrolujte konfiguračné parametre. Ak sú v poriadku stlačte tlačidlo \"%1$s\", prípadne tlačidlo \"%2$s\" pre zmenu konfiguračných parametrov."
 
-#: include/classes/setup/CSetupWizard.php:264
+#: include/classes/setup/CSetupWizard.php:266
 #, c-format
 msgid "Please create database manually, and set the configuration parameters for connection to this database. Press \"%1$s\" button when done."
 msgstr "Prosím vytvorte databázu a nastavte konfiguračné parametre databázy manuálne. Stlačte tlačidlo \"%1$s\", keď to vykonáte."
 
-#: include/classes/setup/CSetupWizard.php:293
+#: include/classes/setup/CSetupWizard.php:295
 msgid "Please enter the host name or host IP address and port number of the Zabbix server, as well as the name of the installation (optional)."
 msgstr "Prosím zadajte meno Zabbix hosta alebo jeho IP adresu a číslo portu Zabbix servera. Meno inštalácie je nepovinné."
 
@@ -12834,7 +12835,7 @@ msgstr "Vypĺňa polia hostovho inventára"
 
 #: app/views/administration.authentication.edit.php:92
 #: app/views/administration.proxy.edit.php:43 disc_prototypes.php:105
-#: host_discovery.php:105 include/classes/setup/CSetupWizard.php:279
+#: host_discovery.php:105 include/classes/setup/CSetupWizard.php:281
 #: include/forms.inc.php:472 include/views/configuration.action.edit.php:994
 #: include/views/configuration.action.edit.php:1772
 #: include/views/configuration.action.edit.php:2234
@@ -12876,7 +12877,7 @@ msgid "Post type"
 msgstr ""
 
 #: include/classes/setup/CSetupWizard.php:49
-#: include/classes/setup/CSetupWizard.php:325
+#: include/classes/setup/CSetupWizard.php:327
 msgid "Pre-installation summary"
 msgstr "Predinštalačné zhrnutie"
 
@@ -13619,7 +13620,7 @@ msgstr ""
 msgid "Request type"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:165
+#: include/classes/setup/CSetupWizard.php:167
 #: include/views/configuration.httpconf.edit.php:205
 msgid "Required"
 msgstr "Požadované"
@@ -14107,7 +14108,7 @@ msgstr "Sobota"
 msgid "Save changes"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:373
+#: include/classes/setup/CSetupWizard.php:389
 #, c-format
 msgid "Save it as \"%1$s\""
 msgstr "Uložiť ako \"%1$s\""
@@ -16891,7 +16892,7 @@ msgstr "Použité v položkách"
 
 #: httpconf.php:59 include/actions.inc.php:1768 include/actions.inc.php:1823
 #: include/actions.inc.php:2041 include/audit.inc.php:24
-#: include/classes/setup/CSetupWizard.php:245 include/hosts.inc.php:61
+#: include/classes/setup/CSetupWizard.php:247 include/hosts.inc.php:61
 #: include/views/administration.auditlogs.list.php:26
 #: include/views/administration.auditlogs.list.php:71
 #: include/views/administration.users.edit.php:456
@@ -17614,7 +17615,7 @@ msgstr "St"
 msgid "Warning"
 msgstr "Varovná"
 
-#: include/classes/setup/CSetupWizard.php:177
+#: include/classes/setup/CSetupWizard.php:179
 msgctxt "setup"
 msgid "Warning"
 msgstr "Varovanie"
@@ -17715,7 +17716,7 @@ msgstr "Týždenne"
 msgid "Welcome"
 msgstr "Vitajte"
 
-#: include/classes/setup/CSetupWizard.php:157
+#: include/classes/setup/CSetupWizard.php:159
 msgid "Welcome to"
 msgstr "Vitajte"
 
@@ -18120,7 +18121,7 @@ msgid "Zabbix login form"
 msgstr ""
 
 #: app/views/administration.script.edit.php:52 include/actions.inc.php:905
-#: include/classes/setup/CSetupWizard.php:320
+#: include/classes/setup/CSetupWizard.php:322
 #: include/views/configuration.action.edit.php:939
 #: include/views/configuration.action.edit.php:1713
 #: include/views/configuration.action.edit.php:2184
@@ -18146,7 +18147,7 @@ msgid "Zabbix server (proxy)"
 msgstr ""
 
 #: include/classes/setup/CSetupWizard.php:45
-#: include/classes/setup/CSetupWizard.php:291
+#: include/classes/setup/CSetupWizard.php:293
 msgid "Zabbix server details"
 msgstr "Detaily Zabbix servera"
 
@@ -18163,11 +18164,11 @@ msgstr "Zabbix server v prevádzke"
 msgid "Zabbix server is running check interval \"%1$s\"."
 msgstr "Zabbix server používa kontrolný interval \"%1$s\"."
 
-#: include/classes/setup/CSetupWizard.php:322
+#: include/classes/setup/CSetupWizard.php:324
 msgid "Zabbix server name"
 msgstr "Zabbix server meno"
 
-#: include/classes/setup/CSetupWizard.php:321
+#: include/classes/setup/CSetupWizard.php:323
 msgid "Zabbix server port"
 msgstr "Port Zabbix servera"
 
@@ -18541,7 +18542,7 @@ msgid "days"
 msgstr "dní"
 
 #: include/classes/pagefilter/CPageFilter.php:659
-#: include/classes/setup/CSetupWizard.php:306
+#: include/classes/setup/CSetupWizard.php:308
 #: include/classes/widgets/CWidgetHelper.php:53
 #: include/views/js/monitoring.slideconf.edit.js.php:14
 #: include/views/monitoring.slideconf.edit.php:132
