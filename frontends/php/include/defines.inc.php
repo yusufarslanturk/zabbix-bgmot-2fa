@@ -19,7 +19,7 @@
 **/
 
 
-define('ZABBIX_VERSION',		'4.0.37rc1');
+define('ZABBIX_VERSION',		'4.0.37');
 define('ZABBIX_API_VERSION',	'4.0.37');
 define('ZABBIX_EXPORT_VERSION',	'4.0');
 define('ZABBIX_DB_VERSION',		4000000);
