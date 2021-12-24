@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-05 19:58+0200\n"
+"POT-Creation-Date: 2021-12-22 17:24+0200\n"
 "PO-Revision-Date: 2021-09-15 12:05+0300\n"
 "Last-Translator: Joachim <joachim.schwender@web.de>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -1095,7 +1095,7 @@ msgstr "Zugelassene Hosts"
 msgid "Allowed methods"
 msgstr "Erlaubte Methoden"
 
-#: include/classes/setup/CSetupWizard.php:682
+#: include/classes/setup/CSetupWizard.php:696
 msgid "Alternatively, you can install it manually:"
 msgstr "Alternativ können Sie es manuell installieren:"
 
@@ -1787,7 +1787,7 @@ msgid "Cannot add dashboard page: maximum number of %1$d dashboard pages has bee
 msgstr "Dashboard-Seite kann nicht hinzugefügt werden: Es wurde die maximale Anzahl von %1$d Dashboard-Seiten hinzugefügt."
 
 #: include/classes/api/services/CTrigger.php:966
-#: include/classes/api/services/CTriggerPrototype.php:773
+#: include/classes/api/services/CTriggerPrototype.php:788
 msgid "Cannot add dependency from a host to a template."
 msgstr "Abhängigkeit von einem Host zu einer Vorlage nicht möglich."
 
@@ -2019,7 +2019,7 @@ msgid "Cannot create another database connection."
 msgstr "Kann keine weitere Datenbankverbindung aufbauen."
 
 #: include/classes/api/services/CTrigger.php:1000
-#: include/classes/api/services/CTriggerPrototype.php:804
+#: include/classes/api/services/CTriggerPrototype.php:819
 msgid "Cannot create circular dependencies."
 msgstr "Kann keine zirkuläre Abhängigkeit erstellen."
 
@@ -2027,7 +2027,7 @@ msgstr "Kann keine zirkuläre Abhängigkeit erstellen."
 msgid "Cannot create dependency on trigger itself."
 msgstr "Auslöser kann nicht von sich selbst abhängig sein."
 
-#: include/classes/api/services/CTriggerPrototype.php:743
+#: include/classes/api/services/CTriggerPrototype.php:758
 msgid "Cannot create dependency on trigger prototype itself."
 msgstr "Auslöservorlage kann nicht von sich selbst abhängig sein."
 
@@ -2044,7 +2044,7 @@ msgstr "Kann Symbolzuordnung nicht erstellen"
 msgid "Cannot create scheduled report"
 msgstr "Kann keinen geplanten Bericht erstellen"
 
-#: include/classes/setup/CSetupWizard.php:678
+#: include/classes/setup/CSetupWizard.php:692
 msgid "Cannot create the configuration file."
 msgstr "Kann die Konfigurationsdatei nicht erzeugen."
 
@@ -2248,7 +2248,7 @@ msgstr "Kann vorlagengestützte Diagramm-Prototypen nicht löschen."
 msgid "Cannot delete templated graph."
 msgstr "Kann vorlagengestütztes Diagramm nicht löschen."
 
-#: include/classes/api/services/CHostPrototype.php:1311
+#: include/classes/api/services/CHostPrototype.php:1313
 msgid "Cannot delete templated host prototype."
 msgstr "Kann vorlagenbasierten Hostprototyp nicht löschen."
 
@@ -3596,7 +3596,7 @@ msgstr "Konfiguration"
 msgid "Configuration cache statistics. Cache - buffer (modes: pfree, total, used, free)."
 msgstr "Konfiguration-Cache-Statistik. Cache - Puffer (Modi: pfree, total, used, free)."
 
-#: include/classes/setup/CSetupWizard.php:700
+#: include/classes/setup/CSetupWizard.php:723
 #, c-format
 msgid "Configuration file \"%1$s\" created."
 msgstr "Konfigurationsdatei \"%1$s\" erstellt."
@@ -3757,7 +3757,7 @@ msgstr "Konfiguration Datenbankverbindung"
 msgid "Confirmation text"
 msgstr "Bestätigungstext"
 
-#: include/classes/setup/CSetupWizard.php:698
+#: include/classes/setup/CSetupWizard.php:721
 msgid "Congratulations! You have successfully installed Zabbix frontend."
 msgstr "Herzlichen Glückwunsch! Sie haben das Zabbix Frontend erfolgreich installiert."
 
@@ -4518,14 +4518,14 @@ msgstr "Daten Speicherdauer"
 
 #: include/classes/setup/CSetupWizard.php:388
 #: include/classes/setup/CSetupWizard.php:534
-#: include/classes/setup/CSetupWizard.php:740
+#: include/classes/setup/CSetupWizard.php:762
 msgid "Database TLS CA file"
 msgstr ""
 
 #: include/classes/setup/CFrontendSetup.php:668
 #: include/classes/setup/CSetupWizard.php:400
 #: include/classes/setup/CSetupWizard.php:540
-#: include/classes/setup/CSetupWizard.php:748
+#: include/classes/setup/CSetupWizard.php:770
 msgid "Database TLS certificate file"
 msgstr ""
 
@@ -4545,7 +4545,7 @@ msgstr "Datenbank TLS Verschlüsselung"
 
 #: include/classes/setup/CSetupWizard.php:394
 #: include/classes/setup/CSetupWizard.php:537
-#: include/classes/setup/CSetupWizard.php:744
+#: include/classes/setup/CSetupWizard.php:766
 msgid "Database TLS key file"
 msgstr "Datenbank TLS Schlüsseldatei"
 
@@ -5071,7 +5071,7 @@ msgstr "Web-Szenario löschen?"
 msgid "Deleted: Host \"%1$s\"."
 msgstr "Gelöscht: Host \"%1$s\"."
 
-#: include/classes/api/services/CHostPrototype.php:1179
+#: include/classes/api/services/CHostPrototype.php:1181
 #, c-format
 msgid "Deleted: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr "Gelöscht: Host-Prototyp \"%1$s\" auf \"%2$s\"."
@@ -5671,7 +5671,7 @@ msgstr "Nicht erreichbar"
 msgid "Download image"
 msgstr "Abbild herunterladen"
 
-#: include/classes/setup/CSetupWizard.php:684
+#: include/classes/setup/CSetupWizard.php:698
 msgid "Download the configuration file"
 msgstr "Konfigurationsdatei herunterladen"
 
@@ -5719,7 +5719,7 @@ msgstr "Doppelter \"name\" Wert \"%1$s\" für Karte."
 msgid "Duplicate dependencies in trigger \"%1$s\"."
 msgstr "Abhängigkeits-Duplikat bei Auslöser \"%1$s\"."
 
-#: include/classes/api/services/CTriggerPrototype.php:974
+#: include/classes/api/services/CTriggerPrototype.php:989
 #, c-format
 msgid "Duplicate dependencies in trigger prototype \"%1$s\"."
 msgstr "Doppelte Abhängigkeiten im Auslöser-Prototyp \"%1$s\"."
@@ -5917,7 +5917,7 @@ msgstr "Leere Filterbedingungsart für Aktion \"%1$s\"."
 #: include/classes/api/services/CHost.php:1319
 #: include/classes/api/services/CHost.php:1850
 #: include/classes/api/services/CHost.php:2075
-#: include/classes/api/services/CHostPrototype.php:1107
+#: include/classes/api/services/CHostPrototype.php:1109
 #: include/classes/api/services/CImage.php:430
 #: include/classes/api/services/CImage.php:482
 #: include/classes/api/services/CMaintenance.php:542
@@ -6937,7 +6937,7 @@ msgstr "GSM-Modem"
 msgid "GUI"
 msgstr "Oberfläche"
 
-#: include/classes/user/CWebUser.php:63 index_sso.php:245
+#: include/classes/user/CWebUser.php:63 index_sso.php:260
 msgid "GUI access disabled."
 msgstr "Zugriff auf Oberfläche deaktiviert."
 
@@ -7280,7 +7280,7 @@ msgstr "Gruppe für entdeckte Hosts"
 msgid "Group name"
 msgstr "Gruppenname"
 
-#: include/classes/api/services/CHostPrototype.php:1269
+#: include/classes/api/services/CHostPrototype.php:1271
 #, c-format
 msgid "Group prototype cannot be based on a discovered host group \"%1$s\"."
 msgstr "Gruppen-Prototyp kann nicht auf einer per Suchlauf entdeckten Host-Gruppe \"%1$s\" basieren."
@@ -7783,12 +7783,12 @@ msgstr "Hostnetzwerke"
 msgid "Host prototype"
 msgstr "Host Prototyp"
 
-#: include/classes/api/services/CHostPrototype.php:976
+#: include/classes/api/services/CHostPrototype.php:978
 #, c-format
 msgid "Host prototype \"%1$s\" already exists on \"%2$s\", inherited from another template."
 msgstr "Host Prototyp \"%1$s\" existiert bereits auf \"%2$s\", von einer anderen Vorlage geerbt."
 
-#: include/classes/api/services/CHostPrototype.php:964
+#: include/classes/api/services/CHostPrototype.php:966
 #, c-format
 msgid "Host prototype \"%1$s\" already exists on \"%2$s\"."
 msgstr "Host Prototyp \"%1$s\" ist bereits auf \"%2$s\" vorhanden."
@@ -7797,7 +7797,7 @@ msgstr "Host Prototyp \"%1$s\" ist bereits auf \"%2$s\" vorhanden."
 msgid "Host prototype added"
 msgstr "Host-Prototyp hinzugefügt"
 
-#: include/classes/api/services/CHostPrototype.php:1757
+#: include/classes/api/services/CHostPrototype.php:1759
 msgid "Host prototype cannot have more than one default interface of the same type."
 msgstr "Der Host-Prototyp kann nicht mehr als eine Standardschnittstelle desselben Typs haben."
 
@@ -8693,9 +8693,9 @@ msgstr "Unzulässiges Feld \"%1$s\" Name oder Wert in Where-Klausel für Tabelle
 msgid "Incorrect fields for sysmap."
 msgstr "Unzulässige Felder für Karte."
 
-#: include/classes/setup/CSetupWizard.php:740
-#: include/classes/setup/CSetupWizard.php:744
-#: include/classes/setup/CSetupWizard.php:748
+#: include/classes/setup/CSetupWizard.php:762
+#: include/classes/setup/CSetupWizard.php:766
+#: include/classes/setup/CSetupWizard.php:770
 #, c-format
 msgid "Incorrect file path for \"%1$s\": %2$s."
 msgstr ""
@@ -9467,11 +9467,12 @@ msgid "Insert expression"
 msgstr "Ausdruck einfügen"
 
 #: include/classes/setup/CSetupWizard.php:69
-#: include/classes/setup/CSetupWizard.php:705
+#: include/classes/setup/CSetupWizard.php:704
+#: include/classes/setup/CSetupWizard.php:727
 msgid "Install"
 msgstr "Installieren"
 
-#: setup.php:174
+#: setup.php:162
 msgid "Installation"
 msgstr "Installation"
 
@@ -9695,15 +9696,15 @@ msgstr "Ungültige Methoden-Parameter."
 #: include/classes/api/services/CGraphGeneral.php:743
 #: include/classes/api/services/CHostBase.php:522
 #: include/classes/api/services/CHostPrototype.php:325
-#: include/classes/api/services/CHostPrototype.php:1657
-#: include/classes/api/services/CHostPrototype.php:1662
-#: include/classes/api/services/CHostPrototype.php:1669
-#: include/classes/api/services/CHostPrototype.php:1674
-#: include/classes/api/services/CHostPrototype.php:1685
-#: include/classes/api/services/CHostPrototype.php:1690
-#: include/classes/api/services/CHostPrototype.php:1697
-#: include/classes/api/services/CHostPrototype.php:1703
-#: include/classes/api/services/CHostPrototype.php:1713
+#: include/classes/api/services/CHostPrototype.php:1659
+#: include/classes/api/services/CHostPrototype.php:1664
+#: include/classes/api/services/CHostPrototype.php:1671
+#: include/classes/api/services/CHostPrototype.php:1676
+#: include/classes/api/services/CHostPrototype.php:1687
+#: include/classes/api/services/CHostPrototype.php:1692
+#: include/classes/api/services/CHostPrototype.php:1699
+#: include/classes/api/services/CHostPrototype.php:1705
+#: include/classes/api/services/CHostPrototype.php:1715
 #: include/classes/api/services/CHttpTest.php:372
 #: include/classes/api/services/CItemGeneral.php:603
 #: include/classes/api/services/CItemGeneral.php:616
@@ -9967,7 +9968,7 @@ msgstr "Italienisch (it_IT)"
 msgid "Item"
 msgstr "Datenpunkt"
 
-#: include/classes/api/services/CHostPrototype.php:1213
+#: include/classes/api/services/CHostPrototype.php:1215
 #: include/classes/api/services/CItem.php:61
 #, c-format
 msgid "Item \"%1$s\" already exists on \"%2$s\", inherited from another template."
@@ -10581,7 +10582,7 @@ msgstr "Legende"
 msgid "Length"
 msgstr "Länge"
 
-#: setup.php:197
+#: setup.php:185
 msgid "Licensed under"
 msgstr "Lizensiert unter "
 
@@ -10813,7 +10814,7 @@ msgstr "Nicht verarbeitbare SNMP-Traps protokollieren"
 #: app/controllers/CControllerAuditLogList.php:166
 #: app/views/administration.authentication.edit.php:132
 #: app/views/administration.user.list.php:112 include/func.inc.php:1523
-#: include/func.inc.php:1539 index_http.php:90 index_sso.php:265
+#: include/func.inc.php:1539 index_http.php:90 index_sso.php:280
 msgid "Login"
 msgstr "Anmelden"
 
@@ -12146,7 +12147,7 @@ msgid "No data."
 msgstr "Keine Daten."
 
 #: include/classes/api/services/CHostInterface.php:1023
-#: include/classes/api/services/CHostPrototype.php:1750
+#: include/classes/api/services/CHostPrototype.php:1752
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "Keine Standardschnittstelle für Typ \"%1$s\" bei \"%2$s\"."
@@ -12367,9 +12368,9 @@ msgstr ""
 #: include/classes/api/services/CHostPrototype.php:543
 #: include/classes/api/services/CHostPrototype.php:602
 #: include/classes/api/services/CHostPrototype.php:623
-#: include/classes/api/services/CHostPrototype.php:1238
-#: include/classes/api/services/CHostPrototype.php:1260
-#: include/classes/api/services/CHostPrototype.php:1294
+#: include/classes/api/services/CHostPrototype.php:1240
+#: include/classes/api/services/CHostPrototype.php:1262
+#: include/classes/api/services/CHostPrototype.php:1296
 #: include/classes/api/services/CHousekeeping.php:169
 #: include/classes/api/services/CHttpTest.php:505
 #: include/classes/api/services/CHttpTest.php:602
@@ -12434,8 +12435,9 @@ msgstr ""
 #: include/classes/api/services/CTrigger.php:730
 #: include/classes/api/services/CTrigger.php:823
 #: include/classes/api/services/CTriggerPrototype.php:515
-#: include/classes/api/services/CTriggerPrototype.php:693
-#: include/classes/api/services/CTriggerPrototype.php:711
+#: include/classes/api/services/CTriggerPrototype.php:701
+#: include/classes/api/services/CTriggerPrototype.php:709
+#: include/classes/api/services/CTriggerPrototype.php:724
 #: include/classes/api/services/CUserGroup.php:329
 #: include/classes/api/services/CUserGroup.php:877
 #: include/classes/api/services/CUserMacro.php:353
@@ -12561,7 +12563,7 @@ msgid "Not all results are displayed. Please provide more specific search criter
 msgstr "Es werden nicht alle Ergebnisse angezeigt. Bitte geben Sie genauere Suchkriterien ein."
 
 #: include/classes/api/services/CTrigger.php:1045
-#: include/classes/api/services/CTriggerPrototype.php:852
+#: include/classes/api/services/CTriggerPrototype.php:867
 #, c-format
 msgid "Not all templates are linked to \"%1$s\"."
 msgstr ""
@@ -13794,7 +13796,7 @@ msgstr ""
 msgid "Please create database manually, and set the configuration parameters for connection to this database. Press \"%1$s\" button when done."
 msgstr "Bitte erstellen Sie Datenbank manuell und legen Sie die Konfigurationsparameter für die Verbindung zu dieser Datenbank fest. Drücken Sie anschließend \"%1$s\"."
 
-#: include/classes/setup/CSetupWizard.php:888
+#: include/classes/setup/CSetupWizard.php:922
 msgid "Please enable \"allow_url_fopen\" directive."
 msgstr ""
 
@@ -15325,7 +15327,7 @@ msgstr "Speichern als"
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
-#: include/classes/setup/CSetupWizard.php:685
+#: include/classes/setup/CSetupWizard.php:699
 #, c-format
 msgid "Save it as \"%1$s\""
 msgstr "Es speichern als \"%1$s\""
@@ -15787,6 +15789,7 @@ msgid "Services form a circular dependency."
 msgstr "Dienste bilden eine zirkläre Abhängigkeit."
 
 #: include/classes/core/ZBase.php:242 include/classes/core/ZBase.php:470
+#: index_sso.php:242 index_sso.php:249
 msgid "Session initialization error."
 msgstr "Fehler bei der Sitzungsinitialisierung."
 
@@ -17567,7 +17570,7 @@ msgstr ""
 msgid "Trigger prototype added"
 msgstr "Auslöser-Prototyp hinzugefügt"
 
-#: include/classes/api/services/CTriggerPrototype.php:909
+#: include/classes/api/services/CTriggerPrototype.php:924
 msgid "Trigger prototype cannot be dependent on a trigger that is inherited from it."
 msgstr ""
 
@@ -18511,8 +18514,8 @@ msgstr "Benutzername"
 msgid "Username and password"
 msgstr "Benutzername und Passwort"
 
-#: include/classes/setup/CSetupWizard.php:600
-#: include/classes/setup/CSetupWizard.php:906
+#: include/classes/setup/CSetupWizard.php:614
+#: include/classes/setup/CSetupWizard.php:940
 msgid "Username and password must be stored in Vault secret keys \"username\" and \"password\"."
 msgstr ""
 
@@ -18973,7 +18976,7 @@ msgid "Vault authentication token"
 msgstr ""
 
 #: include/classes/core/ZBase.php:229
-#: include/classes/setup/CSetupWizard.php:902 include/config.inc.php:53
+#: include/classes/setup/CSetupWizard.php:936 include/config.inc.php:53
 msgid "Vault connection failed."
 msgstr ""
 
@@ -19508,7 +19511,7 @@ msgstr "Sie sind angemeldet als \"%1$s\"."
 msgid "You are not able to choose some of the languages, because locales for them are not installed on the web server."
 msgstr "Sie können einige der Sprachen nicht auswählen, weil die nötige Locale nicht auf dem Web-Server installiert ist."
 
-#: include/func.inc.php:1533 index_http.php:87 index_sso.php:262
+#: include/func.inc.php:1533 index_http.php:87 index_sso.php:277
 msgid "You are not logged in"
 msgstr "Du bist nicht eingeloggt"
 
@@ -20040,9 +20043,9 @@ msgstr "nicht änderbar"
 #: include/classes/api/services/CEvent.php:819
 #: include/classes/api/services/CHost.php:1786
 #: include/classes/api/services/CHost.php:1792
-#: include/classes/api/services/CHostPrototype.php:1663
-#: include/classes/api/services/CHostPrototype.php:1675
-#: include/classes/api/services/CHostPrototype.php:1691
+#: include/classes/api/services/CHostPrototype.php:1665
+#: include/classes/api/services/CHostPrototype.php:1677
+#: include/classes/api/services/CHostPrototype.php:1693
 #: include/classes/api/services/CItemGeneral.php:481
 #: include/classes/api/services/CItemGeneral.php:508
 #: include/classes/api/services/CItemGeneral.php:514
@@ -21130,7 +21133,7 @@ msgstr "Kurzbeschreibung"
 #: include/classes/api/services/CHost.php:1817
 #: include/classes/api/services/CHost.php:1826
 #: include/classes/api/services/CHost.php:1832
-#: include/classes/api/services/CHostPrototype.php:1714
+#: include/classes/api/services/CHostPrototype.php:1716
 #: include/classes/api/services/CHttpTest.php:983
 #: include/classes/api/services/CHttpTest.php:1079
 #: include/classes/api/services/CItemGeneral.php:495
@@ -21246,10 +21249,10 @@ msgstr "Vorlagen ID \"%1$s\" kommt %2$s mal vor"
 #: include/classes/api/services/CHostBase.php:523
 #: include/classes/api/services/CHost.php:1907
 #: include/classes/api/services/CHost.php:2140
-#: include/classes/api/services/CHostPrototype.php:1658
-#: include/classes/api/services/CHostPrototype.php:1670
-#: include/classes/api/services/CHostPrototype.php:1686
-#: include/classes/api/services/CHostPrototype.php:1698
+#: include/classes/api/services/CHostPrototype.php:1660
+#: include/classes/api/services/CHostPrototype.php:1672
+#: include/classes/api/services/CHostPrototype.php:1688
+#: include/classes/api/services/CHostPrototype.php:1700
 #: include/classes/api/services/CHttpTest.php:744
 #: include/classes/api/services/CReport.php:203
 #: include/classes/api/services/CReport.php:592
@@ -21404,7 +21407,7 @@ msgstr "unerwartetes Ende des Makros"
 #: include/classes/api/services/CGraphGeneral.php:621
 #: include/classes/api/services/CGraphGeneral.php:743
 #: include/classes/api/services/CHostPrototype.php:325
-#: include/classes/api/services/CHostPrototype.php:1704
+#: include/classes/api/services/CHostPrototype.php:1706
 #: include/classes/api/services/CHttpTest.php:372
 #: include/classes/api/services/CHttpTest.php:515
 #: include/classes/api/services/CHttpTest.php:539

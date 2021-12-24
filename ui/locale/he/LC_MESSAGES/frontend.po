@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-05 19:58+0200\n"
+"POT-Creation-Date: 2021-12-22 17:24+0200\n"
 "PO-Revision-Date: 2021-11-07 10:00+0300\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: none\n"
@@ -1093,7 +1093,7 @@ msgstr "מארחים מורשים"
 msgid "Allowed methods"
 msgstr "שיטות מורשות"
 
-#: include/classes/setup/CSetupWizard.php:682
+#: include/classes/setup/CSetupWizard.php:696
 msgid "Alternatively, you can install it manually:"
 msgstr "לחלופין, ניתן להתקין ידנית:"
 
@@ -1779,7 +1779,7 @@ msgid "Cannot add dashboard page: maximum number of %1$d dashboard pages has bee
 msgstr "לא ניתן להוסיף עמוד ללוח מחוונים: נוספו כבר %1$d עמודי לוחות מחוונים שזו הכמות המרבית."
 
 #: include/classes/api/services/CTrigger.php:966
-#: include/classes/api/services/CTriggerPrototype.php:773
+#: include/classes/api/services/CTriggerPrototype.php:788
 msgid "Cannot add dependency from a host to a template."
 msgstr "לא ניתן להוסיף תלות ממארח לתבנית."
 
@@ -2010,7 +2010,7 @@ msgid "Cannot create another database connection."
 msgstr "לא ניתן ליצור חיבור נוסף למסד נתונים."
 
 #: include/classes/api/services/CTrigger.php:1000
-#: include/classes/api/services/CTriggerPrototype.php:804
+#: include/classes/api/services/CTriggerPrototype.php:819
 msgid "Cannot create circular dependencies."
 msgstr "לא ניתן ליצור תלות מעגלית."
 
@@ -2018,7 +2018,7 @@ msgstr "לא ניתן ליצור תלות מעגלית."
 msgid "Cannot create dependency on trigger itself."
 msgstr "לא ניתן ליצור תלות על הקפצה עצמה."
 
-#: include/classes/api/services/CTriggerPrototype.php:743
+#: include/classes/api/services/CTriggerPrototype.php:758
 msgid "Cannot create dependency on trigger prototype itself."
 msgstr "לא ניתן ליצור תלות על אבטיפוס ההקפצה עצמו."
 
@@ -2035,7 +2035,7 @@ msgstr "לא ניתן ליצור מפת סמלים"
 msgid "Cannot create scheduled report"
 msgstr "לא ניתן ליצור דוח מתוזמן"
 
-#: include/classes/setup/CSetupWizard.php:678
+#: include/classes/setup/CSetupWizard.php:692
 msgid "Cannot create the configuration file."
 msgstr "לא ניתן ליצור קובץ תצורה."
 
@@ -2239,7 +2239,7 @@ msgstr "נא ניתן למחוק אבטיפוס תרשים מתבנית."
 msgid "Cannot delete templated graph."
 msgstr "לא ניתן למחוק תרשים מתבנית."
 
-#: include/classes/api/services/CHostPrototype.php:1311
+#: include/classes/api/services/CHostPrototype.php:1313
 msgid "Cannot delete templated host prototype."
 msgstr "לא ניתן למחוק אבטיפוס מארח בתבנית."
 
@@ -3587,7 +3587,7 @@ msgstr "הגדרות"
 msgid "Configuration cache statistics. Cache - buffer (modes: pfree, total, used, free)."
 msgstr "הגדרות זיכרון מטמון לסטטיסטיקה. זיכרון מטמון - buffer (מצבים: pfree,‏ total,‏ used,‏ free)."
 
-#: include/classes/setup/CSetupWizard.php:700
+#: include/classes/setup/CSetupWizard.php:723
 #, c-format
 msgid "Configuration file \"%1$s\" created."
 msgstr "קובץ ההגדרות „%1$s“ נוצר."
@@ -3748,7 +3748,7 @@ msgstr "הגדרת חיבור למסד הנתונים"
 msgid "Confirmation text"
 msgstr "טקסט אימות"
 
-#: include/classes/setup/CSetupWizard.php:698
+#: include/classes/setup/CSetupWizard.php:721
 msgid "Congratulations! You have successfully installed Zabbix frontend."
 msgstr "ברכותינו! התקנת בהצלחה את מנשק המשתמש של Zabbix."
 
@@ -4516,14 +4516,14 @@ msgstr "תקופת אחסון נתונים"
 
 #: include/classes/setup/CSetupWizard.php:388
 #: include/classes/setup/CSetupWizard.php:534
-#: include/classes/setup/CSetupWizard.php:740
+#: include/classes/setup/CSetupWizard.php:762
 msgid "Database TLS CA file"
 msgstr "קובץ CA ל־TLS של מסד הנתונים"
 
 #: include/classes/setup/CFrontendSetup.php:668
 #: include/classes/setup/CSetupWizard.php:400
 #: include/classes/setup/CSetupWizard.php:540
-#: include/classes/setup/CSetupWizard.php:748
+#: include/classes/setup/CSetupWizard.php:770
 msgid "Database TLS certificate file"
 msgstr "קובץ אישור ל־TLS של מסד הנתונים"
 
@@ -4543,7 +4543,7 @@ msgstr "הצפנת TLS של מסד הנתונים"
 
 #: include/classes/setup/CSetupWizard.php:394
 #: include/classes/setup/CSetupWizard.php:537
-#: include/classes/setup/CSetupWizard.php:744
+#: include/classes/setup/CSetupWizard.php:766
 msgid "Database TLS key file"
 msgstr "קובץ מפתח TLS של מסד הנתונים"
 
@@ -5069,7 +5069,7 @@ msgstr "למחוק תרחיש רשת?"
 msgid "Deleted: Host \"%1$s\"."
 msgstr "נמחק: המארח „%1$s“."
 
-#: include/classes/api/services/CHostPrototype.php:1179
+#: include/classes/api/services/CHostPrototype.php:1181
 #, c-format
 msgid "Deleted: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr "נמחק: אבטיפוס המארח „%1$s“ ב־„%2$s“."
@@ -5667,7 +5667,7 @@ msgstr "למטה"
 msgid "Download image"
 msgstr "הורדת תמונה"
 
-#: include/classes/setup/CSetupWizard.php:684
+#: include/classes/setup/CSetupWizard.php:698
 msgid "Download the configuration file"
 msgstr "הורדת קובץ ההגדרות"
 
@@ -5715,7 +5715,7 @@ msgstr "ערך „name” (שם) כפול „%1$s” עבור מפה."
 msgid "Duplicate dependencies in trigger \"%1$s\"."
 msgstr "תלויות כפולות בהקפצה „%1$s”."
 
-#: include/classes/api/services/CTriggerPrototype.php:974
+#: include/classes/api/services/CTriggerPrototype.php:989
 #, c-format
 msgid "Duplicate dependencies in trigger prototype \"%1$s\"."
 msgstr "תלויות כפולות באבטיפוס הקפצה „%1$s”."
@@ -5910,7 +5910,7 @@ msgstr "סוג תנאי מסנן ריק לפעולה „%1$s”."
 #: include/classes/api/services/CHost.php:1319
 #: include/classes/api/services/CHost.php:1850
 #: include/classes/api/services/CHost.php:2075
-#: include/classes/api/services/CHostPrototype.php:1107
+#: include/classes/api/services/CHostPrototype.php:1109
 #: include/classes/api/services/CImage.php:430
 #: include/classes/api/services/CImage.php:482
 #: include/classes/api/services/CMaintenance.php:542
@@ -6928,7 +6928,7 @@ msgstr "מודם GSM"
 msgid "GUI"
 msgstr "מנשק משתמש"
 
-#: include/classes/user/CWebUser.php:63 index_sso.php:245
+#: include/classes/user/CWebUser.php:63 index_sso.php:260
 msgid "GUI access disabled."
 msgstr "הגישה למנשק המשתמש מושבתת."
 
@@ -7271,7 +7271,7 @@ msgstr "קבוצה עבור מארחים שהתגלו"
 msgid "Group name"
 msgstr "שם קבוצה"
 
-#: include/classes/api/services/CHostPrototype.php:1269
+#: include/classes/api/services/CHostPrototype.php:1271
 #, c-format
 msgid "Group prototype cannot be based on a discovered host group \"%1$s\"."
 msgstr "אי אפשר לבסס את אבטיפוס הקבוצה על קבוצת מארחים שהתגלתה „%1$s”."
@@ -7770,12 +7770,12 @@ msgstr "רשתות המארח"
 msgid "Host prototype"
 msgstr "אבטיפוס מארח"
 
-#: include/classes/api/services/CHostPrototype.php:976
+#: include/classes/api/services/CHostPrototype.php:978
 #, c-format
 msgid "Host prototype \"%1$s\" already exists on \"%2$s\", inherited from another template."
 msgstr "אבטיפוס מארח „%1$s” כבר קיים על „%2$s”, התקבל מירושה מתבנית אחרת."
 
-#: include/classes/api/services/CHostPrototype.php:964
+#: include/classes/api/services/CHostPrototype.php:966
 #, c-format
 msgid "Host prototype \"%1$s\" already exists on \"%2$s\"."
 msgstr "אבטיפוס המארח „%1$s” כבר קיים על „%2$s”."
@@ -7784,7 +7784,7 @@ msgstr "אבטיפוס המארח „%1$s” כבר קיים על „%2$s”."
 msgid "Host prototype added"
 msgstr "נוסף אבטיפוס מארח"
 
-#: include/classes/api/services/CHostPrototype.php:1757
+#: include/classes/api/services/CHostPrototype.php:1759
 msgid "Host prototype cannot have more than one default interface of the same type."
 msgstr "לאבטיפוס המארח לא יכול להיות יותר ממנשק בררת מחדל אחד בו־זמנית."
 
@@ -8680,9 +8680,9 @@ msgstr "שם או ערך שגוי לשדה „%1$s” בביטוי where בטב�
 msgid "Incorrect fields for sysmap."
 msgstr "שדות שגויים למערכת המפות."
 
-#: include/classes/setup/CSetupWizard.php:740
-#: include/classes/setup/CSetupWizard.php:744
-#: include/classes/setup/CSetupWizard.php:748
+#: include/classes/setup/CSetupWizard.php:762
+#: include/classes/setup/CSetupWizard.php:766
+#: include/classes/setup/CSetupWizard.php:770
 #, c-format
 msgid "Incorrect file path for \"%1$s\": %2$s."
 msgstr "נתיב הקובץ של „%1$s” שגוי: %2$s."
@@ -9454,11 +9454,12 @@ msgid "Insert expression"
 msgstr "הוספת ביטוי"
 
 #: include/classes/setup/CSetupWizard.php:69
-#: include/classes/setup/CSetupWizard.php:705
+#: include/classes/setup/CSetupWizard.php:704
+#: include/classes/setup/CSetupWizard.php:727
 msgid "Install"
 msgstr "התקנה"
 
-#: setup.php:174
+#: setup.php:162
 msgid "Installation"
 msgstr "התקנה"
 
@@ -9682,15 +9683,15 @@ msgstr "הפרמטרים לשיטה שגויים."
 #: include/classes/api/services/CGraphGeneral.php:743
 #: include/classes/api/services/CHostBase.php:522
 #: include/classes/api/services/CHostPrototype.php:325
-#: include/classes/api/services/CHostPrototype.php:1657
-#: include/classes/api/services/CHostPrototype.php:1662
-#: include/classes/api/services/CHostPrototype.php:1669
-#: include/classes/api/services/CHostPrototype.php:1674
-#: include/classes/api/services/CHostPrototype.php:1685
-#: include/classes/api/services/CHostPrototype.php:1690
-#: include/classes/api/services/CHostPrototype.php:1697
-#: include/classes/api/services/CHostPrototype.php:1703
-#: include/classes/api/services/CHostPrototype.php:1713
+#: include/classes/api/services/CHostPrototype.php:1659
+#: include/classes/api/services/CHostPrototype.php:1664
+#: include/classes/api/services/CHostPrototype.php:1671
+#: include/classes/api/services/CHostPrototype.php:1676
+#: include/classes/api/services/CHostPrototype.php:1687
+#: include/classes/api/services/CHostPrototype.php:1692
+#: include/classes/api/services/CHostPrototype.php:1699
+#: include/classes/api/services/CHostPrototype.php:1705
+#: include/classes/api/services/CHostPrototype.php:1715
 #: include/classes/api/services/CHttpTest.php:372
 #: include/classes/api/services/CItemGeneral.php:603
 #: include/classes/api/services/CItemGeneral.php:616
@@ -9954,7 +9955,7 @@ msgstr "איטלקית (it_IT)"
 msgid "Item"
 msgstr "פריט"
 
-#: include/classes/api/services/CHostPrototype.php:1213
+#: include/classes/api/services/CHostPrototype.php:1215
 #: include/classes/api/services/CItem.php:61
 #, c-format
 msgid "Item \"%1$s\" already exists on \"%2$s\", inherited from another template."
@@ -10567,7 +10568,7 @@ msgstr "מקרא"
 msgid "Length"
 msgstr "אורך"
 
-#: setup.php:197
+#: setup.php:185
 msgid "Licensed under"
 msgstr "כפוף לרישיון"
 
@@ -10799,7 +10800,7 @@ msgstr "תיעוד מלכודות SNMP שאינן תואמות"
 #: app/controllers/CControllerAuditLogList.php:166
 #: app/views/administration.authentication.edit.php:132
 #: app/views/administration.user.list.php:112 include/func.inc.php:1523
-#: include/func.inc.php:1539 index_http.php:90 index_sso.php:265
+#: include/func.inc.php:1539 index_http.php:90 index_sso.php:280
 msgid "Login"
 msgstr "כניסה"
 
@@ -12129,7 +12130,7 @@ msgid "No data."
 msgstr "אין נתונים."
 
 #: include/classes/api/services/CHostInterface.php:1023
-#: include/classes/api/services/CHostPrototype.php:1750
+#: include/classes/api/services/CHostPrototype.php:1752
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "אין מנשק בררת מחדל עבור הסוג „%1$s” תחת „%2$s”."
@@ -12350,9 +12351,9 @@ msgstr "אין הרשאות לקרוא ל־„%1$s.%2$s”."
 #: include/classes/api/services/CHostPrototype.php:543
 #: include/classes/api/services/CHostPrototype.php:602
 #: include/classes/api/services/CHostPrototype.php:623
-#: include/classes/api/services/CHostPrototype.php:1238
-#: include/classes/api/services/CHostPrototype.php:1260
-#: include/classes/api/services/CHostPrototype.php:1294
+#: include/classes/api/services/CHostPrototype.php:1240
+#: include/classes/api/services/CHostPrototype.php:1262
+#: include/classes/api/services/CHostPrototype.php:1296
 #: include/classes/api/services/CHousekeeping.php:169
 #: include/classes/api/services/CHttpTest.php:505
 #: include/classes/api/services/CHttpTest.php:602
@@ -12417,8 +12418,9 @@ msgstr "אין הרשאות לקרוא ל־„%1$s.%2$s”."
 #: include/classes/api/services/CTrigger.php:730
 #: include/classes/api/services/CTrigger.php:823
 #: include/classes/api/services/CTriggerPrototype.php:515
-#: include/classes/api/services/CTriggerPrototype.php:693
-#: include/classes/api/services/CTriggerPrototype.php:711
+#: include/classes/api/services/CTriggerPrototype.php:701
+#: include/classes/api/services/CTriggerPrototype.php:709
+#: include/classes/api/services/CTriggerPrototype.php:724
 #: include/classes/api/services/CUserGroup.php:329
 #: include/classes/api/services/CUserGroup.php:877
 #: include/classes/api/services/CUserMacro.php:353
@@ -12544,7 +12546,7 @@ msgid "Not all results are displayed. Please provide more specific search criter
 msgstr "לא כל התוצאות מוצגות. נא לספק תנאי חיפוש יותר נקודתיים."
 
 #: include/classes/api/services/CTrigger.php:1045
-#: include/classes/api/services/CTriggerPrototype.php:852
+#: include/classes/api/services/CTriggerPrototype.php:867
 #, c-format
 msgid "Not all templates are linked to \"%1$s\"."
 msgstr "לא כל התבנויות מקושרות אל „%1$s”."
@@ -13771,7 +13773,7 @@ msgstr "נא לאשר שברצונך להסיר את כל מיפויי הערכ�
 msgid "Please create database manually, and set the configuration parameters for connection to this database. Press \"%1$s\" button when done."
 msgstr "נא ליצור מסד נתונים ידנית ולהגדיר את משתני התצורה לחיבור למסד הנתונים הזה. יש ללחוץ על הכפתור „%1$s” לאחר סיום הפעולה."
 
-#: include/classes/setup/CSetupWizard.php:888
+#: include/classes/setup/CSetupWizard.php:922
 msgid "Please enable \"allow_url_fopen\" directive."
 msgstr "נא להפעיל את ההנחיה „allow_url_fopen” (לאפשר פתיחת קישורים)."
 
@@ -15297,7 +15299,7 @@ msgstr "שמירה בשם"
 msgid "Save changes"
 msgstr "שמירת השינויים"
 
-#: include/classes/setup/CSetupWizard.php:685
+#: include/classes/setup/CSetupWizard.php:699
 #, c-format
 msgid "Save it as \"%1$s\""
 msgstr "שמירה בתור „%1$s“"
@@ -15759,6 +15761,7 @@ msgid "Services form a circular dependency."
 msgstr "שירותים מתלות מעגלית."
 
 #: include/classes/core/ZBase.php:242 include/classes/core/ZBase.php:470
+#: index_sso.php:242 index_sso.php:249
 msgid "Session initialization error."
 msgstr "שגיאת אתחול הפעלה."
 
@@ -17532,7 +17535,7 @@ msgstr "אבטיפוס הקפצה „%1$s” חייב להכיל לפחות אב
 msgid "Trigger prototype added"
 msgstr "נוסף אבטיפוס הקפצה"
 
-#: include/classes/api/services/CTriggerPrototype.php:909
+#: include/classes/api/services/CTriggerPrototype.php:924
 msgid "Trigger prototype cannot be dependent on a trigger that is inherited from it."
 msgstr "אבטיפוס הקפצה לא יכול להיות תלוי בהקפצה שממנה הוא יורש."
 
@@ -18475,8 +18478,8 @@ msgstr "שם משתמש"
 msgid "Username and password"
 msgstr "שם משתמש וססמה"
 
-#: include/classes/setup/CSetupWizard.php:600
-#: include/classes/setup/CSetupWizard.php:906
+#: include/classes/setup/CSetupWizard.php:614
+#: include/classes/setup/CSetupWizard.php:940
 msgid "Username and password must be stored in Vault secret keys \"username\" and \"password\"."
 msgstr "יש לאחסן את שם המשתמש והססמה במפתחות הסודיים של הכספת „username” ו־„password” (שם משתמש וססמה)."
 
@@ -18937,7 +18940,7 @@ msgid "Vault authentication token"
 msgstr "אסימון אימות כספת"
 
 #: include/classes/core/ZBase.php:229
-#: include/classes/setup/CSetupWizard.php:902 include/config.inc.php:53
+#: include/classes/setup/CSetupWizard.php:936 include/config.inc.php:53
 msgid "Vault connection failed."
 msgstr "החיבור לכספת נכשל."
 
@@ -19471,7 +19474,7 @@ msgstr "נכנסת בשם „%1$s“."
 msgid "You are not able to choose some of the languages, because locales for them are not installed on the web server."
 msgstr "אין לך אפשרות לבחור בחלק מהשפות כיוון שההגדרות עבורן אינן מותקנות בשרת."
 
-#: include/func.inc.php:1533 index_http.php:87 index_sso.php:262
+#: include/func.inc.php:1533 index_http.php:87 index_sso.php:277
 msgid "You are not logged in"
 msgstr "לא נכנסת"
 
@@ -20006,9 +20009,9 @@ msgstr "לא ניתן לשנות"
 #: include/classes/api/services/CEvent.php:819
 #: include/classes/api/services/CHost.php:1786
 #: include/classes/api/services/CHost.php:1792
-#: include/classes/api/services/CHostPrototype.php:1663
-#: include/classes/api/services/CHostPrototype.php:1675
-#: include/classes/api/services/CHostPrototype.php:1691
+#: include/classes/api/services/CHostPrototype.php:1665
+#: include/classes/api/services/CHostPrototype.php:1677
+#: include/classes/api/services/CHostPrototype.php:1693
 #: include/classes/api/services/CItemGeneral.php:481
 #: include/classes/api/services/CItemGeneral.php:508
 #: include/classes/api/services/CItemGeneral.php:514
@@ -21095,7 +21098,7 @@ msgstr "תיאור קצר"
 #: include/classes/api/services/CHost.php:1817
 #: include/classes/api/services/CHost.php:1826
 #: include/classes/api/services/CHost.php:1832
-#: include/classes/api/services/CHostPrototype.php:1714
+#: include/classes/api/services/CHostPrototype.php:1716
 #: include/classes/api/services/CHttpTest.php:983
 #: include/classes/api/services/CHttpTest.php:1079
 #: include/classes/api/services/CItemGeneral.php:495
@@ -21211,10 +21214,10 @@ msgstr "מזהה התבנית %1$s מועבר %2$s פעמים"
 #: include/classes/api/services/CHostBase.php:523
 #: include/classes/api/services/CHost.php:1907
 #: include/classes/api/services/CHost.php:2140
-#: include/classes/api/services/CHostPrototype.php:1658
-#: include/classes/api/services/CHostPrototype.php:1670
-#: include/classes/api/services/CHostPrototype.php:1686
-#: include/classes/api/services/CHostPrototype.php:1698
+#: include/classes/api/services/CHostPrototype.php:1660
+#: include/classes/api/services/CHostPrototype.php:1672
+#: include/classes/api/services/CHostPrototype.php:1688
+#: include/classes/api/services/CHostPrototype.php:1700
 #: include/classes/api/services/CHttpTest.php:744
 #: include/classes/api/services/CReport.php:203
 #: include/classes/api/services/CReport.php:592
@@ -21369,7 +21372,7 @@ msgstr "סוף המאקרו בלתי צפוי"
 #: include/classes/api/services/CGraphGeneral.php:621
 #: include/classes/api/services/CGraphGeneral.php:743
 #: include/classes/api/services/CHostPrototype.php:325
-#: include/classes/api/services/CHostPrototype.php:1704
+#: include/classes/api/services/CHostPrototype.php:1706
 #: include/classes/api/services/CHttpTest.php:372
 #: include/classes/api/services/CHttpTest.php:515
 #: include/classes/api/services/CHttpTest.php:539

@@ -139,7 +139,7 @@
 					.forEach((element) => { element.remove(); });
 
 				const update_btn = document.querySelector('#update');
-				update_btn.innerHTML = <?= json_encode(_('Add')) ?>;
+				update_btn.textContent = <?= json_encode(_('Add')) ?>;
 				update_btn.setAttribute('value', 'userrole.create');
 				update_btn.setAttribute('id', 'add');
 

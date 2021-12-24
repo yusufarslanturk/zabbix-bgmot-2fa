@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-05 19:58+0200\n"
+"POT-Creation-Date: 2021-12-22 17:24+0200\n"
 "PO-Revision-Date: 2016-01-22 16:15+0300\n"
 "Last-Translator: JONGKWON <jkkim.photo@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -1072,7 +1072,7 @@ msgstr "허가된 호스트"
 msgid "Allowed methods"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:682
+#: include/classes/setup/CSetupWizard.php:696
 msgid "Alternatively, you can install it manually:"
 msgstr "혹은, 수동으로 인스톨 하실 수 있습니다:"
 
@@ -1756,7 +1756,7 @@ msgid "Cannot add dashboard page: maximum number of %1$d dashboard pages has bee
 msgstr ""
 
 #: include/classes/api/services/CTrigger.php:966
-#: include/classes/api/services/CTriggerPrototype.php:773
+#: include/classes/api/services/CTriggerPrototype.php:788
 msgid "Cannot add dependency from a host to a template."
 msgstr "호스트에서 템플릿에 의존관계는 작성할 수 없습니다."
 
@@ -1983,7 +1983,7 @@ msgid "Cannot create another database connection."
 msgstr "데이터베이스에 커넥션을 작성할 수 없습니다."
 
 #: include/classes/api/services/CTrigger.php:1000
-#: include/classes/api/services/CTriggerPrototype.php:804
+#: include/classes/api/services/CTriggerPrototype.php:819
 msgid "Cannot create circular dependencies."
 msgstr "순환하는 의존관계는 작성할 수 없습니다."
 
@@ -1991,7 +1991,7 @@ msgstr "순환하는 의존관계는 작성할 수 없습니다."
 msgid "Cannot create dependency on trigger itself."
 msgstr "재귀적 의존관계(dependency on itself)는 허용되지 않습니다."
 
-#: include/classes/api/services/CTriggerPrototype.php:743
+#: include/classes/api/services/CTriggerPrototype.php:758
 msgid "Cannot create dependency on trigger prototype itself."
 msgstr "트리거 프로토타입 자신에 대한 의존관계는 작성할 수 없습니다."
 
@@ -2008,7 +2008,7 @@ msgstr "아이콘 맵을 작성할 수 없습니다"
 msgid "Cannot create scheduled report"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:678
+#: include/classes/setup/CSetupWizard.php:692
 msgid "Cannot create the configuration file."
 msgstr "설정 파일을 작성할 수 없습니다."
 
@@ -2201,7 +2201,7 @@ msgstr ""
 msgid "Cannot delete templated graph."
 msgstr ""
 
-#: include/classes/api/services/CHostPrototype.php:1311
+#: include/classes/api/services/CHostPrototype.php:1313
 msgid "Cannot delete templated host prototype."
 msgstr "템플릿 호스트 프로토타입을 삭제할 수 없습니다."
 
@@ -3516,7 +3516,7 @@ msgstr "설정"
 msgid "Configuration cache statistics. Cache - buffer (modes: pfree, total, used, free)."
 msgstr "설정한 캐쉬의 통계. cache - buffer (mode: pfree, total, used, free)."
 
-#: include/classes/setup/CSetupWizard.php:700
+#: include/classes/setup/CSetupWizard.php:723
 #, c-format
 msgid "Configuration file \"%1$s\" created."
 msgstr "설정 파일 \"%1$s\"를 작성하였습니다."
@@ -3677,7 +3677,7 @@ msgstr "DB접속 설정"
 msgid "Confirmation text"
 msgstr "확인 텍스트"
 
-#: include/classes/setup/CSetupWizard.php:698
+#: include/classes/setup/CSetupWizard.php:721
 msgid "Congratulations! You have successfully installed Zabbix frontend."
 msgstr "축하합니다! Zabbix frontend 설치가 종료되었습니다."
 
@@ -4431,14 +4431,14 @@ msgstr "데이터 보존기간"
 
 #: include/classes/setup/CSetupWizard.php:388
 #: include/classes/setup/CSetupWizard.php:534
-#: include/classes/setup/CSetupWizard.php:740
+#: include/classes/setup/CSetupWizard.php:762
 msgid "Database TLS CA file"
 msgstr ""
 
 #: include/classes/setup/CFrontendSetup.php:668
 #: include/classes/setup/CSetupWizard.php:400
 #: include/classes/setup/CSetupWizard.php:540
-#: include/classes/setup/CSetupWizard.php:748
+#: include/classes/setup/CSetupWizard.php:770
 msgid "Database TLS certificate file"
 msgstr ""
 
@@ -4458,7 +4458,7 @@ msgstr ""
 
 #: include/classes/setup/CSetupWizard.php:394
 #: include/classes/setup/CSetupWizard.php:537
-#: include/classes/setup/CSetupWizard.php:744
+#: include/classes/setup/CSetupWizard.php:766
 msgid "Database TLS key file"
 msgstr ""
 
@@ -4984,7 +4984,7 @@ msgstr "Web시나리오를 삭제하시겠습니까?"
 msgid "Deleted: Host \"%1$s\"."
 msgstr "삭제: 호스트\"%1$s\"."
 
-#: include/classes/api/services/CHostPrototype.php:1179
+#: include/classes/api/services/CHostPrototype.php:1181
 #, c-format
 msgid "Deleted: Host prototype \"%1$s\" on \"%2$s\"."
 msgstr "삭제: \"%2$s\" 호스트 프로토타입\"%1$s\"."
@@ -5581,7 +5581,7 @@ msgstr "Down"
 msgid "Download image"
 msgstr ""
 
-#: include/classes/setup/CSetupWizard.php:684
+#: include/classes/setup/CSetupWizard.php:698
 msgid "Download the configuration file"
 msgstr "설정 파일 다운로드"
 
@@ -5629,7 +5629,7 @@ msgstr "맵을 위한 \"name\"의 값 \"%1$s\"이 중복되었습니다."
 msgid "Duplicate dependencies in trigger \"%1$s\"."
 msgstr "트리거\"%1$s\"의 의존관계가 중복되어 있습니다."
 
-#: include/classes/api/services/CTriggerPrototype.php:974
+#: include/classes/api/services/CTriggerPrototype.php:989
 #, c-format
 msgid "Duplicate dependencies in trigger prototype \"%1$s\"."
 msgstr "트리거 프로토타입 \"%1$s\"의 의존관계가 중복되었습니다."
@@ -5824,7 +5824,7 @@ msgstr ""
 #: include/classes/api/services/CHost.php:1319
 #: include/classes/api/services/CHost.php:1850
 #: include/classes/api/services/CHost.php:2075
-#: include/classes/api/services/CHostPrototype.php:1107
+#: include/classes/api/services/CHostPrototype.php:1109
 #: include/classes/api/services/CImage.php:430
 #: include/classes/api/services/CImage.php:482
 #: include/classes/api/services/CMaintenance.php:542
@@ -6841,7 +6841,7 @@ msgstr "GSM 모뎀"
 msgid "GUI"
 msgstr "표시 설정"
 
-#: include/classes/user/CWebUser.php:63 index_sso.php:245
+#: include/classes/user/CWebUser.php:63 index_sso.php:260
 msgid "GUI access disabled."
 msgstr "GUI 액세스를 비활성 하였습니다"
 
@@ -7182,7 +7182,7 @@ msgstr "디스커버리에서 발견한 호스트 그룹"
 msgid "Group name"
 msgstr "그룹 이름"
 
-#: include/classes/api/services/CHostPrototype.php:1269
+#: include/classes/api/services/CHostPrototype.php:1271
 #, c-format
 msgid "Group prototype cannot be based on a discovered host group \"%1$s\"."
 msgstr "그룹 프로토타입에 발견된 호스트용의 그룹 \"%1$s\"을이용하는 것은 할 수 없습니다."
@@ -7678,12 +7678,12 @@ msgstr "호스트 네트워크"
 msgid "Host prototype"
 msgstr "호스트 프로토타입"
 
-#: include/classes/api/services/CHostPrototype.php:976
+#: include/classes/api/services/CHostPrototype.php:978
 #, c-format
 msgid "Host prototype \"%1$s\" already exists on \"%2$s\", inherited from another template."
 msgstr "호스트 프로토타입 \"%1$s\"는 \"%2$s\"에 이미 존재하고 있습니다. (다른 템플릿에서 계승)"
 
-#: include/classes/api/services/CHostPrototype.php:964
+#: include/classes/api/services/CHostPrototype.php:966
 #, c-format
 msgid "Host prototype \"%1$s\" already exists on \"%2$s\"."
 msgstr "호스트 프로토타입 \"%1$s\"는 \"%2$s\"에 이미 존재하고 있습니다."
@@ -7692,7 +7692,7 @@ msgstr "호스트 프로토타입 \"%1$s\"는 \"%2$s\"에 이미 존재하고 �
 msgid "Host prototype added"
 msgstr "호스트 프로토타입을 추가하였습니다."
 
-#: include/classes/api/services/CHostPrototype.php:1757
+#: include/classes/api/services/CHostPrototype.php:1759
 msgid "Host prototype cannot have more than one default interface of the same type."
 msgstr ""
 
@@ -8587,9 +8587,9 @@ msgstr "테이블 \"%2$s\"에 where 스테이트먼트의 필드 \"%1$s\"의 이
 msgid "Incorrect fields for sysmap."
 msgstr "맵의 설정이 올바르지 않습니다."
 
-#: include/classes/setup/CSetupWizard.php:740
-#: include/classes/setup/CSetupWizard.php:744
-#: include/classes/setup/CSetupWizard.php:748
+#: include/classes/setup/CSetupWizard.php:762
+#: include/classes/setup/CSetupWizard.php:766
+#: include/classes/setup/CSetupWizard.php:770
 #, c-format
 msgid "Incorrect file path for \"%1$s\": %2$s."
 msgstr ""
@@ -9361,11 +9361,12 @@ msgid "Insert expression"
 msgstr "조건식의 삽입"
 
 #: include/classes/setup/CSetupWizard.php:69
-#: include/classes/setup/CSetupWizard.php:705
+#: include/classes/setup/CSetupWizard.php:704
+#: include/classes/setup/CSetupWizard.php:727
 msgid "Install"
 msgstr "설치"
 
-#: setup.php:174
+#: setup.php:162
 msgid "Installation"
 msgstr "설치"
 
@@ -9589,15 +9590,15 @@ msgstr "메소드의 파라미터가 올바르지 않습니다."
 #: include/classes/api/services/CGraphGeneral.php:743
 #: include/classes/api/services/CHostBase.php:522
 #: include/classes/api/services/CHostPrototype.php:325
-#: include/classes/api/services/CHostPrototype.php:1657
-#: include/classes/api/services/CHostPrototype.php:1662
-#: include/classes/api/services/CHostPrototype.php:1669
-#: include/classes/api/services/CHostPrototype.php:1674
-#: include/classes/api/services/CHostPrototype.php:1685
-#: include/classes/api/services/CHostPrototype.php:1690
-#: include/classes/api/services/CHostPrototype.php:1697
-#: include/classes/api/services/CHostPrototype.php:1703
-#: include/classes/api/services/CHostPrototype.php:1713
+#: include/classes/api/services/CHostPrototype.php:1659
+#: include/classes/api/services/CHostPrototype.php:1664
+#: include/classes/api/services/CHostPrototype.php:1671
+#: include/classes/api/services/CHostPrototype.php:1676
+#: include/classes/api/services/CHostPrototype.php:1687
+#: include/classes/api/services/CHostPrototype.php:1692
+#: include/classes/api/services/CHostPrototype.php:1699
+#: include/classes/api/services/CHostPrototype.php:1705
+#: include/classes/api/services/CHostPrototype.php:1715
 #: include/classes/api/services/CHttpTest.php:372
 #: include/classes/api/services/CItemGeneral.php:603
 #: include/classes/api/services/CItemGeneral.php:616
@@ -9861,7 +9862,7 @@ msgstr "이탈리아어 (it_IT)"
 msgid "Item"
 msgstr "아이템"
 
-#: include/classes/api/services/CHostPrototype.php:1213
+#: include/classes/api/services/CHostPrototype.php:1215
 #: include/classes/api/services/CItem.php:61
 #, c-format
 msgid "Item \"%1$s\" already exists on \"%2$s\", inherited from another template."
@@ -10464,7 +10465,7 @@ msgstr "범례"
 msgid "Length"
 msgstr ""
 
-#: setup.php:197
+#: setup.php:185
 msgid "Licensed under"
 msgstr ""
 
@@ -10696,7 +10697,7 @@ msgstr "매치하지 않은 SNMP트랩을 로그에 기록"
 #: app/controllers/CControllerAuditLogList.php:166
 #: app/views/administration.authentication.edit.php:132
 #: app/views/administration.user.list.php:112 include/func.inc.php:1523
-#: include/func.inc.php:1539 index_http.php:90 index_sso.php:265
+#: include/func.inc.php:1539 index_http.php:90 index_sso.php:280
 msgid "Login"
 msgstr "로그인"
 
@@ -12017,7 +12018,7 @@ msgid "No data."
 msgstr "데이터가 없습니다."
 
 #: include/classes/api/services/CHostInterface.php:1023
-#: include/classes/api/services/CHostPrototype.php:1750
+#: include/classes/api/services/CHostPrototype.php:1752
 #, c-format
 msgid "No default interface for \"%1$s\" type on \"%2$s\"."
 msgstr "\"%2$s\"상의 \"%1$s\"타입의 디폴트인터페이스가 설정되어 있지 않습니다"
@@ -12238,9 +12239,9 @@ msgstr ""
 #: include/classes/api/services/CHostPrototype.php:543
 #: include/classes/api/services/CHostPrototype.php:602
 #: include/classes/api/services/CHostPrototype.php:623
-#: include/classes/api/services/CHostPrototype.php:1238
-#: include/classes/api/services/CHostPrototype.php:1260
-#: include/classes/api/services/CHostPrototype.php:1294
+#: include/classes/api/services/CHostPrototype.php:1240
+#: include/classes/api/services/CHostPrototype.php:1262
+#: include/classes/api/services/CHostPrototype.php:1296
 #: include/classes/api/services/CHousekeeping.php:169
 #: include/classes/api/services/CHttpTest.php:505
 #: include/classes/api/services/CHttpTest.php:602
@@ -12305,8 +12306,9 @@ msgstr ""
 #: include/classes/api/services/CTrigger.php:730
 #: include/classes/api/services/CTrigger.php:823
 #: include/classes/api/services/CTriggerPrototype.php:515
-#: include/classes/api/services/CTriggerPrototype.php:693
-#: include/classes/api/services/CTriggerPrototype.php:711
+#: include/classes/api/services/CTriggerPrototype.php:701
+#: include/classes/api/services/CTriggerPrototype.php:709
+#: include/classes/api/services/CTriggerPrototype.php:724
 #: include/classes/api/services/CUserGroup.php:329
 #: include/classes/api/services/CUserGroup.php:877
 #: include/classes/api/services/CUserMacro.php:353
@@ -12432,7 +12434,7 @@ msgid "Not all results are displayed. Please provide more specific search criter
 msgstr ""
 
 #: include/classes/api/services/CTrigger.php:1045
-#: include/classes/api/services/CTriggerPrototype.php:852
+#: include/classes/api/services/CTriggerPrototype.php:867
 #, c-format
 msgid "Not all templates are linked to \"%1$s\"."
 msgstr ""
@@ -13658,7 +13660,7 @@ msgstr ""
 msgid "Please create database manually, and set the configuration parameters for connection to this database. Press \"%1$s\" button when done."
 msgstr "데이터베이스를 수동으로 작성해주세요. 그리고 데이터베이스에 접속하기 위한 설정치를 설정해 주세요. 종료하였다면 \"%1$s\"버튼을 눌러주세요."
 
-#: include/classes/setup/CSetupWizard.php:888
+#: include/classes/setup/CSetupWizard.php:922
 msgid "Please enable \"allow_url_fopen\" directive."
 msgstr ""
 
@@ -15182,7 +15184,7 @@ msgstr ""
 msgid "Save changes"
 msgstr "변경을 저장"
 
-#: include/classes/setup/CSetupWizard.php:685
+#: include/classes/setup/CSetupWizard.php:699
 #, c-format
 msgid "Save it as \"%1$s\""
 msgstr "\"%1$s\"로 저장하였습니다"
@@ -15640,6 +15642,7 @@ msgid "Services form a circular dependency."
 msgstr "서비스의 의존관계가 모순되어있습니다."
 
 #: include/classes/core/ZBase.php:242 include/classes/core/ZBase.php:470
+#: index_sso.php:242 index_sso.php:249
 msgid "Session initialization error."
 msgstr ""
 
@@ -17408,7 +17411,7 @@ msgstr "트리거 프로토타입\"%1$s\"은 적어도 하나 이상의 아이�
 msgid "Trigger prototype added"
 msgstr "트리거 프로토타입을 추가하였습니다"
 
-#: include/classes/api/services/CTriggerPrototype.php:909
+#: include/classes/api/services/CTriggerPrototype.php:924
 msgid "Trigger prototype cannot be dependent on a trigger that is inherited from it."
 msgstr "트리거 프로토타입은 자신을 계승한 트리거에 의존할 수 없습니다."
 
@@ -18344,8 +18347,8 @@ msgstr "유저 이름"
 msgid "Username and password"
 msgstr "유저 이름과 비밀번호"
 
-#: include/classes/setup/CSetupWizard.php:600
-#: include/classes/setup/CSetupWizard.php:906
+#: include/classes/setup/CSetupWizard.php:614
+#: include/classes/setup/CSetupWizard.php:940
 msgid "Username and password must be stored in Vault secret keys \"username\" and \"password\"."
 msgstr ""
 
@@ -18806,7 +18809,7 @@ msgid "Vault authentication token"
 msgstr ""
 
 #: include/classes/core/ZBase.php:229
-#: include/classes/setup/CSetupWizard.php:902 include/config.inc.php:53
+#: include/classes/setup/CSetupWizard.php:936 include/config.inc.php:53
 msgid "Vault connection failed."
 msgstr ""
 
@@ -19338,7 +19341,7 @@ msgstr "\"%1$s\"로 로그인 하였습니다."
 msgid "You are not able to choose some of the languages, because locales for them are not installed on the web server."
 msgstr "Web서버의 언어가 인스톨되어있지 않기 때문에 몇 언어를 이용할 수 없습니다."
 
-#: include/func.inc.php:1533 index_http.php:87 index_sso.php:262
+#: include/func.inc.php:1533 index_http.php:87 index_sso.php:277
 msgid "You are not logged in"
 msgstr "당신은 로그인 되지 않았습니다"
 
@@ -19870,9 +19873,9 @@ msgstr "변경할 수 없습니다"
 #: include/classes/api/services/CEvent.php:819
 #: include/classes/api/services/CHost.php:1786
 #: include/classes/api/services/CHost.php:1792
-#: include/classes/api/services/CHostPrototype.php:1663
-#: include/classes/api/services/CHostPrototype.php:1675
-#: include/classes/api/services/CHostPrototype.php:1691
+#: include/classes/api/services/CHostPrototype.php:1665
+#: include/classes/api/services/CHostPrototype.php:1677
+#: include/classes/api/services/CHostPrototype.php:1693
 #: include/classes/api/services/CItemGeneral.php:481
 #: include/classes/api/services/CItemGeneral.php:508
 #: include/classes/api/services/CItemGeneral.php:514
@@ -20960,7 +20963,7 @@ msgstr "짧은 설명"
 #: include/classes/api/services/CHost.php:1817
 #: include/classes/api/services/CHost.php:1826
 #: include/classes/api/services/CHost.php:1832
-#: include/classes/api/services/CHostPrototype.php:1714
+#: include/classes/api/services/CHostPrototype.php:1716
 #: include/classes/api/services/CHttpTest.php:983
 #: include/classes/api/services/CHttpTest.php:1079
 #: include/classes/api/services/CItemGeneral.php:495
@@ -21076,10 +21079,10 @@ msgstr "템플릿ID \"%1$s\"가 %2$s번 사용되고 있습니다"
 #: include/classes/api/services/CHostBase.php:523
 #: include/classes/api/services/CHost.php:1907
 #: include/classes/api/services/CHost.php:2140
-#: include/classes/api/services/CHostPrototype.php:1658
-#: include/classes/api/services/CHostPrototype.php:1670
-#: include/classes/api/services/CHostPrototype.php:1686
-#: include/classes/api/services/CHostPrototype.php:1698
+#: include/classes/api/services/CHostPrototype.php:1660
+#: include/classes/api/services/CHostPrototype.php:1672
+#: include/classes/api/services/CHostPrototype.php:1688
+#: include/classes/api/services/CHostPrototype.php:1700
 #: include/classes/api/services/CHttpTest.php:744
 #: include/classes/api/services/CReport.php:203
 #: include/classes/api/services/CReport.php:592
@@ -21234,7 +21237,7 @@ msgstr "매크로의 끝부분이 잘못되어 있습니다"
 #: include/classes/api/services/CGraphGeneral.php:621
 #: include/classes/api/services/CGraphGeneral.php:743
 #: include/classes/api/services/CHostPrototype.php:325
-#: include/classes/api/services/CHostPrototype.php:1704
+#: include/classes/api/services/CHostPrototype.php:1706
 #: include/classes/api/services/CHttpTest.php:372
 #: include/classes/api/services/CHttpTest.php:515
 #: include/classes/api/services/CHttpTest.php:539
