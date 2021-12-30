@@ -21,9 +21,11 @@
 require_once dirname(__FILE__).'/testDataCollection.php';
 require_once dirname(__FILE__).'/testLowLevelDiscovery.php';
 
+use PHPUnit\Framework\TestSuite;
+
 class IntegrationTests {
 	public static function suite() {
-		$suite = new PHPUnit_Framework_TestSuite('Integration');
+		$suite = new TestSuite('Integration');
 		$suite->addTestSuite('testDataCollection');
 		$suite->addTestSuite('testLowLevelDiscovery');
 
