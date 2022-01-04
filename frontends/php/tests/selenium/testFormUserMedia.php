@@ -544,7 +544,7 @@ class testFormUserMedia extends CWebTest {
 		// Check that the removed email is not present in 'Send to' field.
 		$user_form = $this->query('name:userForm')->asForm()->waitUntilVisible()->one();
 		$row = $user_form->getField('Media')->asTable()->getRow(0);
-		$this->assertNotContains($email, $row->getColumn('Send to')->getText());
+		$this->assertStringNotContainsString($email, $row->getColumn('Send to')->getText());
 	}
 
 	private function setMediaValues($data) {
@@ -629,7 +629,7 @@ class testFormUserMedia extends CWebTest {
 			// Check that when no severities are passed - they all are turned on by default
 			for ($i = 1; $i < 7; $i++) {
 				$severity =  $row->query('xpath:./td[4]/div/div['.$i.']')->one()->getText();
-				$this->assertContains('(on)', $severity);
+				$this->assertStringContainsString('(on)', $severity);
 			}
 		}
 	}

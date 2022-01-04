@@ -128,7 +128,7 @@ class testPageTriggerUrl extends CWebTest {
 		$row->query('xpath://td[contains(@class, "normal-bg")]')->asPopupButton()->one()->fill('URL');
 		// Check opened page.
 		$this->assertEquals('Triggers', $this->query('tag:h1')->waitUntilVisible()->one()->getText());
-		$this->assertContains($url, $this->page->getCurrentUrl());
+		$this->assertStringContainsString($url, $this->page->getCurrentUrl());
 	}
 
 	/*
@@ -208,6 +208,6 @@ class testPageTriggerUrl extends CWebTest {
 
 		// Check opened page.
 		$this->assertEquals('Triggers', $this->query('tag:h1')->waitUntilVisible()->one()->getText());
-		$this->assertContains($this->url, $this->page->getCurrentUrl());
+		$this->assertStringContainsString($this->url, $this->page->getCurrentUrl());
 	}
 }

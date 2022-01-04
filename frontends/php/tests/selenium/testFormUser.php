@@ -537,7 +537,7 @@ class testFormUser extends CWebTest {
 			$password = CTestArrayHelper::get($data['fields'], 'Password', $data['fields']['Password'] = 'zabbix');
 			$this->page->userLogin($data['fields']['Alias'], $password);
 			// Verification of URL after login.
-			$this->assertContains($data['fields']['URL (after login)'], $this->page->getCurrentURL());
+			$this->assertStringContainsString($data['fields']['URL (after login)'], $this->page->getCurrentURL());
 			// Verification of the number of rows per page parameter.
 			$rows = $this->query('name:frm_maps')->asTable()->waitUntilVisible()->one()->getRows();
 			$this->assertEquals($data['fields']['Rows per page'], $rows->count());
@@ -934,12 +934,12 @@ class testFormUser extends CWebTest {
 			$this->page->logout();
 
 			// Atempt to sign in with old password.
-			$this->page->userLogin($data['alias'],$data['old_password']);
+			$this->page->userLogin($data['alias'], $data['old_password']);
 			$message = $this->query('class:red')->one()->getText();
 			$this->assertEquals($message, $data['error_message']);
 
 			// Sign in with new password.
-			$this->page->userLogin($data['alias'],$data['new_password']);
+			$this->page->userLogin($data['alias'], $data['new_password']);
 			$attempt_message = CMessageElement::find()->one();
 			$this->assertTrue($attempt_message->hasLine($data['attempt_message']));
 			$this->page->logout();
@@ -1083,7 +1083,7 @@ class testFormUser extends CWebTest {
 		$form_create->fill($data);
 		$this->query('button:Cancel')->one()->click();
 		$cancel_url = $this->page->getCurrentURL();
-		$this->assertContains('users.php?cancel=1', $cancel_url);
+		$this->assertStringContainsString('users.php?cancel=1', $cancel_url);
 		$this->assertEquals($user_hash, CDBHelper::getHash($sql_users));
 
 		// Check Cancellation when updating users.
