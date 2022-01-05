@@ -801,7 +801,7 @@ class testDashboardProblemsBySeverityWidget extends CWebTest {
 		}
 		foreach ($expected_popup['Tags'] as $tag) {
 			$tag_array = $popup->getRow(0)->getColumn('Tags')->getText();
-			$this->assertContains($tag, $tag_array);
+			$this->assertStringContainsString($tag, $tag_array);
 		}
 		if (CTestArrayHelper::get($data['fields'], 'Show latest values', false)) {
 			$this->assertEquals('*UNKNOWN*', $popup->getRow(0)->getColumn('Latest values')->getText());

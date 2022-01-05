@@ -563,7 +563,7 @@ jQuery(function($) {
 					$('[data-problems' + sev + ']', $obj).each(function() {
 						var obj = $(this);
 
-						$('>.tree-row>.problems', this).append($('<span/>', {
+						$('>.tree-row>.problems', this).append($('<span>', {
 								'style': 'background: #' + conf['color'],
 								'class': 'problems-per-item',
 								'title': conf['name']
@@ -670,7 +670,7 @@ jQuery(function($) {
 															)
 															.empty()
 															.attr('title', resp['map_name'])
-															.append($('<span/>').text(resp['map_name']));
+															.append($('<span>').text(resp['map_name']));
 													}
 													else {
 														root = $('.tree-item[data-id=' + parent + ']>ul.tree-list',

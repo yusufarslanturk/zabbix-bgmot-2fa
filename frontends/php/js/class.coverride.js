@@ -26,7 +26,7 @@ jQuery(function ($) {
 	"use strict";
 
 	function createOverrideElement($override, option, value) {
-		var close = $('<button></button>', {'type': 'button'})
+		var close = $('<button>', {'type': 'button'})
 				.on('click', function(e) {
 					$override.overrides('removeOverride', $override, option);
 					e.stopPropagation();
@@ -38,24 +38,28 @@ jQuery(function ($) {
 
 		if (option === 'color') {
 			var id = field_name.replace(/\]/g, '_').replace(/\[/g, '_'),
-				input = $('<input>')
-					.attr({'name': field_name, 'type': 'text', 'maxlength': 6, 'id': id, 'placeholder': t('S_COLOR')})
-					.val(value);
+				input = $('<input>', {
+					id: id,
+					name: field_name,
+					type: 'text',
+					maxlength: 6,
+					placeholder: t('S_COLOR')
+				}).val(value);
 
-			return $('<div></div>')
+			return $('<div>')
 				.addClass('input-color-picker')
 				.append(input)
 				.append(close);
 		}
 		else if (option === 'timeshift') {
-			return $('<div></div>')
-				.append($('<input>', {
-						'name': field_name,
-						'maxlength': 10,
-						'type': 'text',
-						'placeholder': t('S_TIME_SHIFT')
-					})
-					.val(value)
+			return $('<div>')
+				.append(
+					$('<input>', {
+						name: field_name,
+						maxlength: 10,
+						type: 'text',
+						placeholder: t('S_TIME_SHIFT')
+					}).val(value)
 				)
 				.append(close);
 		}
@@ -71,11 +75,11 @@ jQuery(function ($) {
 			}
 
 			var content = [
-				$('<span></span>', {'data-option': option}).text(visible_name + ': ' + visible_value),
-				$('<input>').attr({'name': field_name, 'type': 'hidden'}).val(value)
+				$('<span>', {'data-option': option}).text(visible_name + ': ' + visible_value),
+				$('<input>', {name: field_name, type: 'hidden'}).val(value)
 			];
 
-			return $('<div></div>')
+			return $('<div>')
 				.append(content)
 				.append(close);
 		}
@@ -269,7 +273,7 @@ jQuery(function ($) {
 			}
 			else {
 				var elmnt = createOverrideElement($override, option, value);
-				$('<li></li>')
+				$('<li>')
 					.append(elmnt)
 					.insertBefore($('li:last', $override));
 
