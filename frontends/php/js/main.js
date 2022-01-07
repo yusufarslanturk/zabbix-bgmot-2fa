@@ -452,7 +452,11 @@ var hintBox = {
 		});
 	},
 
-	displayHint: function(e, $target, delay = 0) {
+	displayHint: function (e, $target, delay) {
+		if (typeof delay === 'undefined') {
+			delay = 0;
+		}
+
 		clearTimeout(hintBox.show_hint_timer);
 
 		switch (e.handleObj.origType) {
