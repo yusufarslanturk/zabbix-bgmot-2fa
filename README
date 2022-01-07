@@ -35,6 +35,11 @@ In case you lockout yourself (enable 2FA but for some reason cannot go through D
 echo 'update config set 2fa_type=0;' | mysql -u <db_zabbix_user> -p<db_zabbix_password> zabbix
 ```
 
+If 'Google Authenticator' 2FA is in use and a user "lost his phone" and needs to re-enroll with new one then execute following to request enrollment procedure on his next login:
+```
+echo 'update users where username="<username>" set ggl_enrolled=0;' | mysql -u <db_zabbix_user> -p<db_zabbix_password> zabbix
+```
+
 ### LDAP authentication with LDAP(ActiveDirectory) groups
 Problem: with large installation a request to give access to Zabbix to all members of some LDAP group is quite common but currently you need to manually (or via API) add every user.
 My solution: create Zabbix internal User Groups and just map LDAP groups to these internal groups.
