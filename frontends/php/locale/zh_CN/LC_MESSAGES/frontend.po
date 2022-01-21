@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-22 17:21+0200\n"
+"POT-Creation-Date: 2022-01-21 19:50+0200\n"
 "PO-Revision-Date: 2019-01-29 07:38+0300\n"
 "Last-Translator: YunXi <tech@gootoo.top>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -237,7 +237,7 @@ msgstr "(只有超级管理员能创建群组)"
 msgid "(no proxy)"
 msgstr "(无agent代理程序)"
 
-#: include/classes/setup/CSetupWizard.php:233
+#: include/classes/setup/CSetupWizard.php:231
 msgid "0 - use default port"
 msgstr "0 - 使用默认端口"
 
@@ -879,7 +879,7 @@ msgstr "允许手动关闭"
 msgid "Allowed hosts"
 msgstr "允许的主机"
 
-#: include/classes/setup/CSetupWizard.php:386
+#: include/classes/setup/CSetupWizard.php:370
 msgid "Alternatively, you can install it manually:"
 msgstr "另外，您也可以手动安装:"
 
@@ -1303,8 +1303,8 @@ msgstr "一般严重"
 msgid "Axes"
 msgstr "坐标轴"
 
-#: include/classes/setup/CSetupWizard.php:126
-#: include/classes/setup/CSetupWizard.php:329
+#: include/classes/setup/CSetupWizard.php:124
+#: include/classes/setup/CSetupWizard.php:327
 msgid "Back"
 msgstr "返回"
 
@@ -1504,7 +1504,7 @@ msgstr "加拿大 (136 字节)"
 #: app/views/monitoring.acknowledge.edit.php:88
 #: app/views/monitoring.dashboard.view.php:100
 #: include/classes/html/CButtonCancel.php:25
-#: include/classes/setup/CSetupWizard.php:108
+#: include/classes/setup/CSetupWizard.php:106
 #: include/views/configuration.action.edit.php:1224
 #: include/views/configuration.action.edit.php:1244
 #: include/views/configuration.action.edit.php:1845
@@ -1763,7 +1763,7 @@ msgstr "无法关闭问题: %1$s."
 msgid "Cannot connect to LDAP server."
 msgstr "无法连接到 LDAP 服务器。"
 
-#: include/classes/setup/CSetupWizard.php:257
+#: include/classes/setup/CSetupWizard.php:255
 msgid "Cannot connect to the database."
 msgstr "不能连接到数据库。"
 
@@ -1825,7 +1825,7 @@ msgstr "无法创建图标映射"
 msgid "Cannot create new application, web scenario is already assigned to application."
 msgstr "无法创建新的应用集, web 场景已分配给应用集."
 
-#: include/classes/setup/CSetupWizard.php:384
+#: include/classes/setup/CSetupWizard.php:368
 msgid "Cannot create the configuration file."
 msgstr "无法创建配置文件。"
 
@@ -2959,7 +2959,7 @@ msgid "Check now"
 msgstr "现在检查"
 
 #: include/classes/setup/CSetupWizard.php:37
-#: include/classes/setup/CSetupWizard.php:209
+#: include/classes/setup/CSetupWizard.php:207
 msgid "Check of pre-requisites"
 msgstr "必要条件检测"
 
@@ -3276,7 +3276,7 @@ msgstr "配置"
 msgid "Configuration cache statistics. Cache - buffer (modes: pfree, total, used, free)."
 msgstr "配置缓存统计.缓存—缓冲(模式：空闲的百分数，总计，已使用，未使用"
 
-#: include/classes/setup/CSetupWizard.php:413
+#: include/classes/setup/CSetupWizard.php:385
 #, c-format
 msgid "Configuration file \"%1$s\" created."
 msgstr "配置文件 \"%1$s\" 已创建。"
@@ -3439,7 +3439,7 @@ msgid "Configuration updated"
 msgstr "配置已更新"
 
 #: include/classes/setup/CSetupWizard.php:41
-#: include/classes/setup/CSetupWizard.php:264
+#: include/classes/setup/CSetupWizard.php:262
 msgid "Configure DB connection"
 msgstr "配置DB连接"
 
@@ -3447,7 +3447,7 @@ msgstr "配置DB连接"
 msgid "Confirmation text"
 msgstr "确认文字"
 
-#: include/classes/setup/CSetupWizard.php:411
+#: include/classes/setup/CSetupWizard.php:383
 msgid "Congratulations! You have successfully installed Zabbix frontend."
 msgstr "恩！不错zabbix前端已经配置好了！千山万水第一步！加油，少年！"
 
@@ -3925,7 +3925,7 @@ msgstr "严重"
 msgid "Current host"
 msgstr "当前主机"
 
-#: include/classes/setup/CSetupWizard.php:167
+#: include/classes/setup/CSetupWizard.php:165
 msgid "Current value"
 msgstr "当前值"
 
@@ -4117,7 +4117,7 @@ msgstr "数据设置"
 msgid "Data storage period"
 msgstr "数据存储期"
 
-#: include/classes/setup/CSetupWizard.php:223
+#: include/classes/setup/CSetupWizard.php:221
 msgid "Database host"
 msgstr "数据库主机"
 
@@ -4125,35 +4125,35 @@ msgstr "数据库主机"
 msgid "Database monitor"
 msgstr "数据库监控"
 
-#: include/classes/setup/CSetupWizard.php:236
-#: include/classes/setup/CSetupWizard.php:313 setup.php:44
+#: include/classes/setup/CSetupWizard.php:234
+#: include/classes/setup/CSetupWizard.php:311 setup.php:44
 msgid "Database name"
 msgstr "数据库名称"
 
-#: include/classes/setup/CSetupWizard.php:315
+#: include/classes/setup/CSetupWizard.php:313
 msgid "Database password"
 msgstr "数据库密码"
 
-#: include/classes/setup/CSetupWizard.php:228
-#: include/classes/setup/CSetupWizard.php:312 setup.php:43
+#: include/classes/setup/CSetupWizard.php:226
+#: include/classes/setup/CSetupWizard.php:310 setup.php:43
 msgid "Database port"
 msgstr "数据库端口"
 
-#: include/classes/setup/CSetupWizard.php:242
-#: include/classes/setup/CSetupWizard.php:317
+#: include/classes/setup/CSetupWizard.php:240
+#: include/classes/setup/CSetupWizard.php:315
 msgid "Database schema"
 msgstr "数据库概要"
 
-#: include/classes/setup/CSetupWizard.php:311
+#: include/classes/setup/CSetupWizard.php:309
 msgid "Database server"
 msgstr "数据库服务器"
 
-#: include/classes/setup/CSetupWizard.php:219
-#: include/classes/setup/CSetupWizard.php:306
+#: include/classes/setup/CSetupWizard.php:217
+#: include/classes/setup/CSetupWizard.php:304
 msgid "Database type"
 msgstr "数据库类型"
 
-#: include/classes/setup/CSetupWizard.php:314
+#: include/classes/setup/CSetupWizard.php:312
 msgid "Database user"
 msgstr "数据库用户"
 
@@ -5094,7 +5094,7 @@ msgctxt "discovery status"
 msgid "Down"
 msgstr "下"
 
-#: include/classes/setup/CSetupWizard.php:388
+#: include/classes/setup/CSetupWizard.php:372
 msgid "Download the configuration file"
 msgstr "下载配置文件"
 
@@ -5891,7 +5891,7 @@ msgstr "假"
 msgid "FTP"
 msgstr "FTP"
 
-#: include/classes/setup/CSetupWizard.php:183
+#: include/classes/setup/CSetupWizard.php:181
 msgid "Fail"
 msgstr "失败"
 
@@ -6119,7 +6119,7 @@ msgstr "查找文件中的字符串，返回内容是被匹配内容的整行字
 msgid "Find string on a web page. Returns the matched string, or as specified by the optional output parameter"
 msgstr "查找网页中的字符串，返回内容是被匹配内容的整行字符串，或者其他可选参数"
 
-#: include/classes/setup/CSetupWizard.php:123
+#: include/classes/setup/CSetupWizard.php:121
 msgid "Finish"
 msgstr "完成"
 
@@ -6853,7 +6853,7 @@ msgstr "横向对齐"
 #: include/classes/screens/CScreenProblem.php:866
 #: include/classes/screens/CScreenProblem.php:1083
 #: include/classes/screens/CScreenTriggersInfo.php:40
-#: include/classes/setup/CSetupWizard.php:276
+#: include/classes/setup/CSetupWizard.php:274
 #: include/classes/widgets/forms/CWidgetFormProblems.php:200
 #: include/classes/widgets/forms/CWidgetFormProblems.php:201
 #: include/forms.inc.php:375 include/hostgroups.inc.php:251
@@ -8686,12 +8686,11 @@ msgid "Insert expression"
 msgstr "插入表达式"
 
 #: include/classes/setup/CSetupWizard.php:53
-#: include/classes/setup/CSetupWizard.php:394
-#: include/classes/setup/CSetupWizard.php:417
+#: include/classes/setup/CSetupWizard.php:390
 msgid "Install"
 msgstr "安装"
 
-#: setup.php:85
+#: setup.php:101
 msgid "Installation"
 msgstr "安装"
 
@@ -10918,9 +10917,9 @@ msgstr "新的服务时间"
 msgid "New triggers"
 msgstr "新触发器"
 
-#: include/classes/setup/CSetupWizard.php:120
-#: include/classes/setup/CSetupWizard.php:266
-#: include/classes/setup/CSetupWizard.php:329
+#: include/classes/setup/CSetupWizard.php:118
+#: include/classes/setup/CSetupWizard.php:264
+#: include/classes/setup/CSetupWizard.php:327
 msgid "Next step"
 msgstr "下一步"
 
@@ -12479,7 +12478,7 @@ msgstr "被动式"
 
 #: app/views/administration.mediatype.edit.php:163 disc_prototypes.php:231
 #: host_discovery.php:211 httpconf.php:65
-#: include/classes/setup/CSetupWizard.php:250
+#: include/classes/setup/CSetupWizard.php:248
 #: include/views/administration.users.edit.php:113
 #: include/views/administration.users.edit.php:144
 #: include/views/configuration.action.edit.php:947
@@ -12622,17 +12621,17 @@ msgstr "播放"
 msgid "Play sound"
 msgstr "播放声音"
 
-#: include/classes/setup/CSetupWizard.php:329
+#: include/classes/setup/CSetupWizard.php:327
 #, c-format
 msgid "Please check configuration parameters. If all is correct, press \"%1$s\" button, or \"%2$s\" button to change configuration parameters."
 msgstr "请检查配置参数。如果无误请按%1$s\" ，如果需要修改请按 \"%2$s\" "
 
-#: include/classes/setup/CSetupWizard.php:266
+#: include/classes/setup/CSetupWizard.php:264
 #, c-format
 msgid "Please create database manually, and set the configuration parameters for connection to this database. Press \"%1$s\" button when done."
 msgstr "请手动创建数据并且完成一些必要的设置。完成后按\"%1$s\"来结束。"
 
-#: include/classes/setup/CSetupWizard.php:295
+#: include/classes/setup/CSetupWizard.php:293
 msgid "Please enter the host name or host IP address and port number of the Zabbix server, as well as the name of the installation (optional)."
 msgstr "请输入主机名或主机IP地址和zabbix服务器的端口号，以及安装的名称（可选）。"
 
@@ -12672,7 +12671,7 @@ msgstr "填入主机资产纪录栏位"
 
 #: app/views/administration.authentication.edit.php:92
 #: app/views/administration.proxy.edit.php:43 disc_prototypes.php:105
-#: host_discovery.php:105 include/classes/setup/CSetupWizard.php:281
+#: host_discovery.php:105 include/classes/setup/CSetupWizard.php:279
 #: include/forms.inc.php:472 include/views/configuration.action.edit.php:994
 #: include/views/configuration.action.edit.php:1772
 #: include/views/configuration.action.edit.php:2234
@@ -12714,7 +12713,7 @@ msgid "Post type"
 msgstr "发布类型"
 
 #: include/classes/setup/CSetupWizard.php:49
-#: include/classes/setup/CSetupWizard.php:327
+#: include/classes/setup/CSetupWizard.php:325
 msgid "Pre-installation summary"
 msgstr "安装前汇总"
 
@@ -13455,7 +13454,7 @@ msgstr "请求发送成功"
 msgid "Request type"
 msgstr "请求类型"
 
-#: include/classes/setup/CSetupWizard.php:167
+#: include/classes/setup/CSetupWizard.php:165
 #: include/views/configuration.httpconf.edit.php:205
 msgid "Required"
 msgstr "要求的"
@@ -13944,7 +13943,7 @@ msgstr "周六"
 msgid "Save changes"
 msgstr "保存设置"
 
-#: include/classes/setup/CSetupWizard.php:389
+#: include/classes/setup/CSetupWizard.php:373
 #, c-format
 msgid "Save it as \"%1$s\""
 msgstr "保存为 \"%1$s\""
@@ -16714,7 +16713,7 @@ msgstr "用于监控项"
 
 #: httpconf.php:59 include/actions.inc.php:1768 include/actions.inc.php:1823
 #: include/actions.inc.php:2041 include/audit.inc.php:24
-#: include/classes/setup/CSetupWizard.php:247 include/hosts.inc.php:61
+#: include/classes/setup/CSetupWizard.php:245 include/hosts.inc.php:61
 #: include/views/administration.auditlogs.list.php:26
 #: include/views/administration.auditlogs.list.php:71
 #: include/views/administration.users.edit.php:456
@@ -17431,7 +17430,7 @@ msgstr "W"
 msgid "Warning"
 msgstr "警告"
 
-#: include/classes/setup/CSetupWizard.php:179
+#: include/classes/setup/CSetupWizard.php:177
 msgctxt "setup"
 msgid "Warning"
 msgstr "设置"
@@ -17528,7 +17527,7 @@ msgstr "每周"
 msgid "Welcome"
 msgstr "欢迎"
 
-#: include/classes/setup/CSetupWizard.php:159
+#: include/classes/setup/CSetupWizard.php:157
 msgid "Welcome to"
 msgstr "欢迎来到"
 
@@ -17933,7 +17932,7 @@ msgid "Zabbix login form"
 msgstr "Zabbix 登录表单"
 
 #: app/views/administration.script.edit.php:52 include/actions.inc.php:905
-#: include/classes/setup/CSetupWizard.php:322
+#: include/classes/setup/CSetupWizard.php:320
 #: include/views/configuration.action.edit.php:939
 #: include/views/configuration.action.edit.php:1713
 #: include/views/configuration.action.edit.php:2184
@@ -17959,7 +17958,7 @@ msgid "Zabbix server (proxy)"
 msgstr "Zabbix server (代理)"
 
 #: include/classes/setup/CSetupWizard.php:45
-#: include/classes/setup/CSetupWizard.php:293
+#: include/classes/setup/CSetupWizard.php:291
 msgid "Zabbix server details"
 msgstr "zabbix 服务器 详细信息"
 
@@ -17976,11 +17975,11 @@ msgstr "Zabbix服务器端运行中"
 msgid "Zabbix server is running check interval \"%1$s\"."
 msgstr "Zabbix主机正运行检查间隔\"%1$s\"."
 
-#: include/classes/setup/CSetupWizard.php:324
+#: include/classes/setup/CSetupWizard.php:322
 msgid "Zabbix server name"
 msgstr "Zabbix主机名称"
 
-#: include/classes/setup/CSetupWizard.php:323
+#: include/classes/setup/CSetupWizard.php:321
 msgid "Zabbix server port"
 msgstr "Zabbix主机端口"
 
@@ -18354,7 +18353,7 @@ msgid "days"
 msgstr "日"
 
 #: include/classes/pagefilter/CPageFilter.php:659
-#: include/classes/setup/CSetupWizard.php:308
+#: include/classes/setup/CSetupWizard.php:306
 #: include/classes/widgets/CWidgetHelper.php:53
 #: include/views/js/monitoring.slideconf.edit.js.php:14
 #: include/views/monitoring.slideconf.edit.php:132
