@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2021 Zabbix SIA
+** Copyright (C) 2001-2022 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -408,6 +408,8 @@ class testPageLowLevelDiscovery extends CWebTest {
 					],
 					'expected' => [
 						'Linux block devices by Zabbix agent: Block devices discovery',
+						// TODO: remove this template when ZBX-20499 is fixed
+						'Zabbix server health: Zabbix stats cluster: High availability cluster node discovery',
 						'Linux filesystems by Zabbix agent: Mounted filesystem discovery',
 						'Linux network interfaces by Zabbix agent: Network interface discovery'
 					]
