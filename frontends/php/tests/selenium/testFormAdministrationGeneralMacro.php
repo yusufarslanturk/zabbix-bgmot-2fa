@@ -26,12 +26,10 @@ use Facebook\WebDriver\WebDriverBy;
  * @backup globalmacro
  */
 class testFormAdministrationGeneralMacro extends CLegacyWebTest {
-	private $macroSize = 20;
 	private $macroMaxLength = 255;
 	private $macroPlaceholder = '{$MACRO}';
 	private $macroClass = 'macro';
 
-	private $valueSize = 20;
 	private $valueMaxLength = 255;
 	private $valuePlaceholder = 'value';
 
@@ -153,12 +151,10 @@ class testFormAdministrationGeneralMacro extends CLegacyWebTest {
 			$this->zbxTestAssertElementPresentId('macros_'.$i.'_value');
 			$this->zbxTestAssertElementPresentId('macros_'.$i.'_remove');
 
-			$this->zbxTestAssertAttribute("//input[@id='macros_${i}_macro']", "size", $this->macroSize);
 			$this->zbxTestAssertAttribute("//input[@id='macros_${i}_macro']", "maxlength", $this->macroMaxLength);
 			$this->zbxTestAssertAttribute("//input[@id='macros_${i}_macro']", "placeholder", $this->macroPlaceholder);
 			$this->zbxTestAssertAttribute("//input[@id='macros_${i}_macro']", "class", $this->macroClass);
 
-			$this->zbxTestAssertAttribute("//input[@id='macros_${i}_value']", "size", $this->valueSize);
 			$this->zbxTestAssertAttribute("//input[@id='macros_${i}_value']", "maxlength", $this->valueMaxLength);
 			$this->zbxTestAssertAttribute("//input[@id='macros_${i}_value']", "placeholder", $this->valuePlaceholder);
 		}
