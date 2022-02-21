@@ -102,7 +102,6 @@ class testFormAdministrationMediaTypes extends CLegacyWebTest {
 
 		$this->zbxTestAssertElementPresentId('description');
 		$this->zbxTestAssertAttribute("//input[@id='description']", "maxlength", 100);
-		$this->zbxTestAssertAttribute("//input[@id='description']", "size", 20);
 
 		$this->zbxTestAssertElementPresentId('type');
 		$this->zbxTestDropdownAssertSelected('type', 'Email');
@@ -131,18 +130,15 @@ class testFormAdministrationMediaTypes extends CLegacyWebTest {
 			case 'Email':
 				$this->zbxTestAssertElementValue('smtp_server', $data['smtp_server']);
 				$this->zbxTestAssertAttribute("//input[@id='smtp_server']", "maxlength", 255);
-				$this->zbxTestAssertAttribute("//input[@id='smtp_server']", "size", 20);
 
 				$this->zbxTestAssertElementValue('smtp_port', $data['smtp_port']);
 				$this->zbxTestAssertAttribute("//input[@id='smtp_port']", "maxlength", 5);
 
 				$this->zbxTestAssertElementValue('smtp_helo', $data['smtp_helo']);
 				$this->zbxTestAssertAttribute("//input[@id='smtp_helo']", "maxlength", 255);
-				$this->zbxTestAssertAttribute("//input[@id='smtp_helo']", "size", 20);
 
 				$this->zbxTestAssertElementValue('smtp_email', $data['smtp_email']);
 				$this->zbxTestAssertAttribute("//input[@id='smtp_email']", "maxlength", 255);
-				$this->zbxTestAssertAttribute("//input[@id='smtp_email']", "size", 20);
 
 				if (array_key_exists('smtp_security', $data)) {
 					$smtp_security_id = $data['smtp_security']=='STARTTLS' ? 'smtp_security_1' : 'smtp_security_2';
