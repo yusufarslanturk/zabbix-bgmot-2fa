@@ -95,6 +95,7 @@ class testFormSetup extends CWebTest {
 
 		global $DB;
 		$php_version = $this->query('xpath://td[text()="PHP version"]/following-sibling::td')->one();
+		$this->page->removeFocus();
 		$this->assertScreenshotExcept($this->query('xpath://form')->one(), $php_version, 'Prerequisites_'.$DB['TYPE']);
 	}
 
