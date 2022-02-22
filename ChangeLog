@@ -1,9 +1,7 @@
 Changes for 4.0.39rc1
 
-New features:
-........S. [ZBX-19789] added SourceIP support to ldap simple checks (dgoloscapov)
-
 Bug fixes:
+........S. [ZBX-19789] added SourceIP support to ldap simple checks (dgoloscapov)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.38
