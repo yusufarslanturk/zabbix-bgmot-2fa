@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 19:50+0200\n"
+"POT-Creation-Date: 2022-02-22 13:27+0200\n"
 "PO-Revision-Date: 2020-02-17 09:52+0300\n"
 "Last-Translator: Yurii <jurijs.klopovskis@zabbix.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -417,7 +417,7 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:794
 #: include/views/configuration.maintenance.edit.php:77
 #: include/views/configuration.services.edit.php:117
-#: include/views/configuration.services.edit.php:170
+#: include/views/configuration.services.edit.php:171
 #: include/views/configuration.template.edit.php:126
 #: include/views/configuration.trigger.prototype.edit.php:174
 #: include/views/configuration.trigger.prototype.edit.php:368
@@ -622,9 +622,9 @@ msgstr "Aktywne do"
 #: include/views/configuration.maintenance.edit.php:137
 #: include/views/configuration.maintenance.edit.php:224
 #: include/views/configuration.maintenance.edit.php:295
-#: include/views/configuration.services.edit.php:155
-#: include/views/configuration.services.edit.php:324
-#: include/views/configuration.services.edit.php:361
+#: include/views/configuration.services.edit.php:156
+#: include/views/configuration.services.edit.php:325
+#: include/views/configuration.services.edit.php:362
 #: include/views/configuration.template.edit.php:188
 #: include/views/configuration.template.edit.php:240
 #: include/views/configuration.trigger.prototype.edit.php:87
@@ -4756,7 +4756,7 @@ msgstr "Ogranicznik"
 msgid "Deny"
 msgstr "Zabroń"
 
-#: include/views/configuration.services.edit.php:341
+#: include/views/configuration.services.edit.php:342
 #: include/views/configuration.trigger.prototype.edit.php:587
 #: include/views/configuration.trigger.prototype.edit.php:622
 #: include/views/configuration.triggers.edit.php:615
@@ -4773,7 +4773,7 @@ msgid "Dependent item"
 msgstr ""
 
 #: app/views/popup.generic.php:293 include/triggers.inc.php:2738
-#: include/views/configuration.services.edit.php:152
+#: include/views/configuration.services.edit.php:153
 #: include/views/configuration.trigger.prototype.list.php:81
 #: include/views/configuration.triggers.list.php:207
 msgid "Depends on"
@@ -5217,8 +5217,8 @@ msgstr "Pobranie pliku konfiguracyjnego"
 #: app/views/report.services.php:66 app/views/report.services.php:67
 #: app/views/report.services.php:68 app/views/report.services.php:69
 #: include/classes/screens/CScreenDiscovery.php:120
-#: include/views/configuration.services.edit.php:183
-#: include/views/configuration.services.edit.php:231
+#: include/views/configuration.services.edit.php:184
+#: include/views/configuration.services.edit.php:232
 msgid "Downtime"
 msgstr "Czas przerwy w pracy"
 
@@ -6323,8 +6323,8 @@ msgstr "Piątek"
 
 #: app/views/report.services.php:68 include/classes/html/CFilter.php:282
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:86
-#: include/views/configuration.services.edit.php:245
-#: include/views/configuration.services.edit.php:291
+#: include/views/configuration.services.edit.php:246
+#: include/views/configuration.services.edit.php:292
 #: include/views/js/monitoring.sysmaps.js.php:673 report4.php:199
 #: services.php:47 services.php:182
 msgid "From"
@@ -8914,7 +8914,7 @@ msgstr "Internet Explorer"
 #: include/views/configuration.item.massupdate.php:462
 #: include/views/configuration.item.prototype.edit.php:642
 #: include/views/configuration.item.prototype.list.php:54
-#: include/views/configuration.services.edit.php:170 latest.php:406
+#: include/views/configuration.services.edit.php:171 latest.php:406
 msgid "Interval"
 msgstr "Interwał"
 
@@ -11065,7 +11065,7 @@ msgstr "Nowa operacja"
 msgid "New regular expression"
 msgstr "Nowe wyrażenie regularne"
 
-#: include/views/configuration.services.edit.php:321
+#: include/views/configuration.services.edit.php:322
 msgid "New service time"
 msgstr "Nowy czas obsługi"
 
@@ -11731,8 +11731,8 @@ msgid "Not supported"
 msgstr "Niewspierane"
 
 #: app/views/popup.services.php:67
-#: include/views/configuration.services.edit.php:170
-#: include/views/configuration.services.edit.php:239
+#: include/views/configuration.services.edit.php:171
+#: include/views/configuration.services.edit.php:240
 #: include/views/configuration.services.parent.list.php:57
 msgid "Note"
 msgstr "Notatka"
@@ -12055,8 +12055,8 @@ msgstr "Jeden z obiektów nadal nie ma grupy hostów."
 msgid "One time only"
 msgstr "Jednorazowo"
 
-#: include/views/configuration.services.edit.php:189
-#: include/views/configuration.services.edit.php:232
+#: include/views/configuration.services.edit.php:190
+#: include/views/configuration.services.edit.php:233
 msgid "One-time downtime"
 msgstr "Jednorazowa przerwa w pracy"
 
@@ -12722,7 +12722,7 @@ msgstr "Okres"
 
 #: include/forms.inc.php:1864
 #: include/views/configuration.maintenance.edit.php:77
-#: include/views/configuration.services.edit.php:228
+#: include/views/configuration.services.edit.php:229
 msgid "Period type"
 msgstr "Typ okresu"
 
@@ -13450,7 +13450,7 @@ msgstr "Zdalne polecenie"
 #: include/views/configuration.maintenance.edit.php:193
 #: include/views/configuration.maintenance.edit.php:213
 #: include/views/configuration.services.edit.php:134
-#: include/views/configuration.services.edit.php:208
+#: include/views/configuration.services.edit.php:209
 #: include/views/configuration.trigger.prototype.edit.php:219
 #: include/views/configuration.trigger.prototype.edit.php:414
 #: include/views/configuration.trigger.prototype.edit.php:502
@@ -14531,7 +14531,7 @@ msgid "Server time"
 msgstr "Czas serwera"
 
 #: app/views/popup.services.php:42 include/actions.inc.php:74
-#: include/audit.inc.php:42 include/views/configuration.services.edit.php:340
+#: include/audit.inc.php:42 include/views/configuration.services.edit.php:341
 #: include/views/configuration.services.parent.list.php:35 services.php:354
 #: srv_status.php:145
 msgid "Service"
@@ -14600,7 +14600,7 @@ msgstr "Port usługi"
 msgid "Service start time must be less than end time."
 msgstr "Czas początkowy usługi musi być mniejszy od czasu końcowego."
 
-#: include/views/configuration.services.edit.php:219
+#: include/views/configuration.services.edit.php:220
 msgid "Service times"
 msgstr "Czasy usługi"
 
@@ -15850,8 +15850,8 @@ msgid "Thursday"
 msgstr "Czwartek"
 
 #: app/views/report.services.php:68
-#: include/views/configuration.services.edit.php:252
-#: include/views/configuration.services.edit.php:305 report4.php:199
+#: include/views/configuration.services.edit.php:253
+#: include/views/configuration.services.edit.php:306 report4.php:199
 #: services.php:48 services.php:191
 msgid "Till"
 msgstr "Do"
@@ -15876,9 +15876,9 @@ msgstr "Do"
 #: include/events.inc.php:171 include/events.inc.php:245
 #: include/views/administration.auditacts.list.php:56
 #: include/views/administration.auditlogs.list.php:70
-#: include/views/configuration.services.edit.php:295
-#: include/views/configuration.services.edit.php:309
-#: include/views/configuration.services.edit.php:342
+#: include/views/configuration.services.edit.php:296
+#: include/views/configuration.services.edit.php:310
+#: include/views/configuration.services.edit.php:343
 msgid "Time"
 msgstr "Czas"
 
@@ -16366,7 +16366,7 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:642
 #: include/views/configuration.item.prototype.list.php:57
 #: include/views/configuration.maintenance.list.php:71
-#: include/views/configuration.services.edit.php:170
+#: include/views/configuration.services.edit.php:171
 #: include/views/inventory.host.list.php:67
 #: include/views/js/monitoring.sysmaps.js.php:66
 #: include/views/js/monitoring.sysmaps.js.php:353
@@ -16774,7 +16774,7 @@ msgstr "Działa"
 #: include/views/configuration.item.prototype.edit.php:919
 #: include/views/configuration.maintenance.edit.php:134
 #: include/views/configuration.maintenance.edit.php:285
-#: include/views/configuration.services.edit.php:355
+#: include/views/configuration.services.edit.php:356
 #: include/views/configuration.template.edit.php:223
 #: include/views/configuration.trigger.prototype.edit.php:635
 #: include/views/configuration.trigger.prototype.massupdate.php:188
@@ -16846,8 +16846,8 @@ msgid "Upper level maps"
 msgstr "Mapy wyższego poziomu"
 
 #: include/classes/screens/CScreenDiscovery.php:120
-#: include/views/configuration.services.edit.php:177
-#: include/views/configuration.services.edit.php:230
+#: include/views/configuration.services.edit.php:178
+#: include/views/configuration.services.edit.php:231
 msgid "Uptime"
 msgstr "Czas pracy"
 
@@ -17922,8 +17922,8 @@ msgstr ""
 #: include/forms.inc.php:2084
 #: include/views/configuration.maintenance.edit.php:57
 #: include/views/configuration.maintenance.edit.php:63
-#: include/views/configuration.services.edit.php:248
-#: include/views/configuration.services.edit.php:255
+#: include/views/configuration.services.edit.php:249
+#: include/views/configuration.services.edit.php:256
 msgid "YYYY-MM-DD hh:mm"
 msgstr ""
 
@@ -18643,8 +18643,8 @@ msgctxt "hour short"
 msgid "h"
 msgstr "h"
 
-#: include/views/configuration.services.edit.php:272
-#: include/views/configuration.services.edit.php:282
+#: include/views/configuration.services.edit.php:273
+#: include/views/configuration.services.edit.php:283
 msgid "hh"
 msgstr "hh"
 
@@ -18915,8 +18915,8 @@ msgstr ""
 msgid "minimum length is %1$s characters"
 msgstr "minimalna ilość znaków: %1$s"
 
-#: include/views/configuration.services.edit.php:277
-#: include/views/configuration.services.edit.php:287
+#: include/views/configuration.services.edit.php:278
+#: include/views/configuration.services.edit.php:288
 msgid "mm"
 msgstr "mm"
 
@@ -19171,7 +19171,7 @@ msgstr ""
 msgid "selected"
 msgstr "wybrane"
 
-#: include/views/configuration.services.edit.php:242
+#: include/views/configuration.services.edit.php:243
 msgid "short description"
 msgstr "krótki opis"
 

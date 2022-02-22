@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 19:50+0200\n"
+"POT-Creation-Date: 2022-02-22 13:27+0200\n"
 "PO-Revision-Date: 2021-03-19 17:57+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -390,7 +390,7 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:794
 #: include/views/configuration.maintenance.edit.php:77
 #: include/views/configuration.services.edit.php:117
-#: include/views/configuration.services.edit.php:170
+#: include/views/configuration.services.edit.php:171
 #: include/views/configuration.template.edit.php:126
 #: include/views/configuration.trigger.prototype.edit.php:174
 #: include/views/configuration.trigger.prototype.edit.php:368
@@ -591,9 +591,9 @@ msgstr "作用中直到"
 #: include/views/configuration.maintenance.edit.php:137
 #: include/views/configuration.maintenance.edit.php:224
 #: include/views/configuration.maintenance.edit.php:295
-#: include/views/configuration.services.edit.php:155
-#: include/views/configuration.services.edit.php:324
-#: include/views/configuration.services.edit.php:361
+#: include/views/configuration.services.edit.php:156
+#: include/views/configuration.services.edit.php:325
+#: include/views/configuration.services.edit.php:362
 #: include/views/configuration.template.edit.php:188
 #: include/views/configuration.template.edit.php:240
 #: include/views/configuration.trigger.prototype.edit.php:87
@@ -4646,7 +4646,7 @@ msgstr "分隔符"
 msgid "Deny"
 msgstr "禁止"
 
-#: include/views/configuration.services.edit.php:341
+#: include/views/configuration.services.edit.php:342
 #: include/views/configuration.trigger.prototype.edit.php:587
 #: include/views/configuration.trigger.prototype.edit.php:622
 #: include/views/configuration.triggers.edit.php:615
@@ -4663,7 +4663,7 @@ msgid "Dependent item"
 msgstr ""
 
 #: app/views/popup.generic.php:293 include/triggers.inc.php:2738
-#: include/views/configuration.services.edit.php:152
+#: include/views/configuration.services.edit.php:153
 #: include/views/configuration.trigger.prototype.list.php:81
 #: include/views/configuration.triggers.list.php:207
 msgid "Depends on"
@@ -5103,8 +5103,8 @@ msgstr ""
 #: app/views/report.services.php:66 app/views/report.services.php:67
 #: app/views/report.services.php:68 app/views/report.services.php:69
 #: include/classes/screens/CScreenDiscovery.php:120
-#: include/views/configuration.services.edit.php:183
-#: include/views/configuration.services.edit.php:231
+#: include/views/configuration.services.edit.php:184
+#: include/views/configuration.services.edit.php:232
 msgid "Downtime"
 msgstr "斷線時間"
 
@@ -6207,8 +6207,8 @@ msgstr "週五"
 
 #: app/views/report.services.php:68 include/classes/html/CFilter.php:282
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:86
-#: include/views/configuration.services.edit.php:245
-#: include/views/configuration.services.edit.php:291
+#: include/views/configuration.services.edit.php:246
+#: include/views/configuration.services.edit.php:292
 #: include/views/js/monitoring.sysmaps.js.php:673 report4.php:199
 #: services.php:47 services.php:182
 msgid "From"
@@ -8788,7 +8788,7 @@ msgstr "IE瀏覽器"
 #: include/views/configuration.item.massupdate.php:462
 #: include/views/configuration.item.prototype.edit.php:642
 #: include/views/configuration.item.prototype.list.php:54
-#: include/views/configuration.services.edit.php:170 latest.php:406
+#: include/views/configuration.services.edit.php:171 latest.php:406
 msgid "Interval"
 msgstr "間隔"
 
@@ -10911,7 +10911,7 @@ msgstr ""
 msgid "New regular expression"
 msgstr "新的正規表示式"
 
-#: include/views/configuration.services.edit.php:321
+#: include/views/configuration.services.edit.php:322
 msgid "New service time"
 msgstr "新的服務時間"
 
@@ -11577,8 +11577,8 @@ msgid "Not supported"
 msgstr "不支持的"
 
 #: app/views/popup.services.php:67
-#: include/views/configuration.services.edit.php:170
-#: include/views/configuration.services.edit.php:239
+#: include/views/configuration.services.edit.php:171
+#: include/views/configuration.services.edit.php:240
 #: include/views/configuration.services.parent.list.php:57
 msgid "Note"
 msgstr "備註"
@@ -11901,8 +11901,8 @@ msgstr ""
 msgid "One time only"
 msgstr "一次性"
 
-#: include/views/configuration.services.edit.php:189
-#: include/views/configuration.services.edit.php:232
+#: include/views/configuration.services.edit.php:190
+#: include/views/configuration.services.edit.php:233
 msgid "One-time downtime"
 msgstr " 單次停機"
 
@@ -12566,7 +12566,7 @@ msgstr "期間"
 
 #: include/forms.inc.php:1864
 #: include/views/configuration.maintenance.edit.php:77
-#: include/views/configuration.services.edit.php:228
+#: include/views/configuration.services.edit.php:229
 msgid "Period type"
 msgstr "期間類型"
 
@@ -13290,7 +13290,7 @@ msgstr "遠端命令"
 #: include/views/configuration.maintenance.edit.php:193
 #: include/views/configuration.maintenance.edit.php:213
 #: include/views/configuration.services.edit.php:134
-#: include/views/configuration.services.edit.php:208
+#: include/views/configuration.services.edit.php:209
 #: include/views/configuration.trigger.prototype.edit.php:219
 #: include/views/configuration.trigger.prototype.edit.php:414
 #: include/views/configuration.trigger.prototype.edit.php:502
@@ -14369,7 +14369,7 @@ msgid "Server time"
 msgstr "伺服器時間"
 
 #: app/views/popup.services.php:42 include/actions.inc.php:74
-#: include/audit.inc.php:42 include/views/configuration.services.edit.php:340
+#: include/audit.inc.php:42 include/views/configuration.services.edit.php:341
 #: include/views/configuration.services.parent.list.php:35 services.php:354
 #: srv_status.php:145
 msgid "Service"
@@ -14438,7 +14438,7 @@ msgstr "服務端口"
 msgid "Service start time must be less than end time."
 msgstr "服務的開始時間不能晚於截止時間."
 
-#: include/views/configuration.services.edit.php:219
+#: include/views/configuration.services.edit.php:220
 msgid "Service times"
 msgstr "服務次數"
 
@@ -15684,8 +15684,8 @@ msgid "Thursday"
 msgstr "週四"
 
 #: app/views/report.services.php:68
-#: include/views/configuration.services.edit.php:252
-#: include/views/configuration.services.edit.php:305 report4.php:199
+#: include/views/configuration.services.edit.php:253
+#: include/views/configuration.services.edit.php:306 report4.php:199
 #: services.php:48 services.php:191
 msgid "Till"
 msgstr "直到"
@@ -15710,9 +15710,9 @@ msgstr "直到"
 #: include/events.inc.php:171 include/events.inc.php:245
 #: include/views/administration.auditacts.list.php:56
 #: include/views/administration.auditlogs.list.php:70
-#: include/views/configuration.services.edit.php:295
-#: include/views/configuration.services.edit.php:309
-#: include/views/configuration.services.edit.php:342
+#: include/views/configuration.services.edit.php:296
+#: include/views/configuration.services.edit.php:310
+#: include/views/configuration.services.edit.php:343
 msgid "Time"
 msgstr "時間"
 
@@ -16192,7 +16192,7 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:642
 #: include/views/configuration.item.prototype.list.php:57
 #: include/views/configuration.maintenance.list.php:71
-#: include/views/configuration.services.edit.php:170
+#: include/views/configuration.services.edit.php:171
 #: include/views/inventory.host.list.php:67
 #: include/views/js/monitoring.sysmaps.js.php:66
 #: include/views/js/monitoring.sysmaps.js.php:353
@@ -16600,7 +16600,7 @@ msgstr "上"
 #: include/views/configuration.item.prototype.edit.php:919
 #: include/views/configuration.maintenance.edit.php:134
 #: include/views/configuration.maintenance.edit.php:285
-#: include/views/configuration.services.edit.php:355
+#: include/views/configuration.services.edit.php:356
 #: include/views/configuration.template.edit.php:223
 #: include/views/configuration.trigger.prototype.edit.php:635
 #: include/views/configuration.trigger.prototype.massupdate.php:188
@@ -16672,8 +16672,8 @@ msgid "Upper level maps"
 msgstr "上層拓墣圖"
 
 #: include/classes/screens/CScreenDiscovery.php:120
-#: include/views/configuration.services.edit.php:177
-#: include/views/configuration.services.edit.php:230
+#: include/views/configuration.services.edit.php:178
+#: include/views/configuration.services.edit.php:231
 msgid "Uptime"
 msgstr "在線時間"
 
@@ -17738,8 +17738,8 @@ msgstr ""
 #: include/forms.inc.php:2084
 #: include/views/configuration.maintenance.edit.php:57
 #: include/views/configuration.maintenance.edit.php:63
-#: include/views/configuration.services.edit.php:248
-#: include/views/configuration.services.edit.php:255
+#: include/views/configuration.services.edit.php:249
+#: include/views/configuration.services.edit.php:256
 msgid "YYYY-MM-DD hh:mm"
 msgstr ""
 
@@ -18459,8 +18459,8 @@ msgctxt "hour short"
 msgid "h"
 msgstr "h"
 
-#: include/views/configuration.services.edit.php:272
-#: include/views/configuration.services.edit.php:282
+#: include/views/configuration.services.edit.php:273
+#: include/views/configuration.services.edit.php:283
 msgid "hh"
 msgstr "hh"
 
@@ -18731,8 +18731,8 @@ msgstr ""
 msgid "minimum length is %1$s characters"
 msgstr ""
 
-#: include/views/configuration.services.edit.php:277
-#: include/views/configuration.services.edit.php:287
+#: include/views/configuration.services.edit.php:278
+#: include/views/configuration.services.edit.php:288
 msgid "mm"
 msgstr "mm"
 
@@ -18987,7 +18987,7 @@ msgstr ""
 msgid "selected"
 msgstr ""
 
-#: include/views/configuration.services.edit.php:242
+#: include/views/configuration.services.edit.php:243
 msgid "short description"
 msgstr "簡述"
 
