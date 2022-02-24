@@ -55,7 +55,10 @@ cp js/Duo-Web-v2.js ${ZABBIX_INSTALL_PATH}/js
 cp ${ZABBIX_INSTALL_PATH}/index.php  ${ZABBIX_INSTALL_PATH}/index.php-`date +%s`.bak
 cd include
 cp ${ZABBIX_INSTALL_PATH}/include/defines.inc.php ${ZABBIX_INSTALL_PATH}/include/defines.inc.php-`date +%s`.bak
-cp defines.inc.php ${ZABBIX_INSTALL_PATH}/include/
+if [[ ! $(grep ZBX_AUTH_2FA_NONE include/defines.inc.php) ]]; then echo "define('ZBX_AUTH_2FA_NONE',    0);" >> include/defines.inc.php; fi
+if [[ ! $(grep ZBX_AUTH_2FA_DUO include/defines.inc.php) ]]; then echo "define('ZBX_AUTH_2FA_DUO',    1);" >> include/defines.inc.php; fi
+if [[ ! $(grep ZBX_AUTH_2FA_GGL include/defines.inc.php) ]]; then echo "define('ZBX_AUTH_2FA_GGL',    2);" >> include/defines.inc.php; fi
+if [[ ! $(grep AUDIT_RESOURCE_AD_GROUP include/defines.inc.php) ]]; then echo "define('AUDIT_RESOURCE_AD_GROUP',    100);" >> include/defines.inc.php; fi
 cp ${ZABBIX_INSTALL_PATH}/include/menu.inc.php ${ZABBIX_INSTALL_PATH}/include/menu.inc.php-`date +%s`.bak
 cp menu.inc.php ${ZABBIX_INSTALL_PATH}/include
 cp ${ZABBIX_INSTALL_PATH}/include/perm.inc.php ${ZABBIX_INSTALL_PATH}/include/perm.inc.php-`date +%s`.bak
