@@ -59,19 +59,22 @@ final class GoogleQrUrl
     public static function generate(string $accountName, string $secret, ?string $issuer = null, int $size = 200): string
     {
         if ('' === $accountName || false !== strpos($accountName, ':')) {
-            throw RuntimeException::InvalidAccountName($accountName);
+	    throw new \ErrorException('Invalid account name');
         }
 
         if ('' === $secret) {
-            throw RuntimeException::InvalidSecret();
+	    throw new \ErrorException('Invalid secret');
         }
 
         $label = $accountName;
         $otpauthString = 'otpauth://totp/%s?secret=%s';
 
         if (null !== $issuer) {
-            if ('' === $issuer || false !== strpos($issuer, ':')) {
-                throw RuntimeException::InvalidIssuer($issuer);
+            if ('' === $issuer) {
+                $issuer = 'zabbix';
+            }
+            if (false !== strpos($issuer, ':')) {
+	        throw new \ErrorException('Invalid issuer');
             }
 
             // use both the issuer parameter and label prefix as recommended by Google for BC reasons
