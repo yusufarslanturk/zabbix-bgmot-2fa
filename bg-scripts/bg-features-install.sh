@@ -12,7 +12,6 @@ ZABBIX_INSTALL_PATH=/usr/share/zabbix
 
 TMPDIR=/tmp/`date +%s`
 VERSION=5.0.20
-BGVERSION=5.0.20-bg
 ZABBIX_INSTALLED_VERSION=`grep ZABBIX_VERSION ${ZABBIX_INSTALL_PATH}/include/defines.inc.php | cut -d\' -f 4`
 
 if [ "$VERSION" != "$ZABBIX_INSTALLED_VERSION" ]
@@ -22,9 +21,9 @@ then
 fi
 
 mkdir $TMPDIR && cd $TMPDIR
-curl -L -o zabbix-${BGVERSION}.zip https://github.com/BGmot/zabbix/archive/${BGVERSION}.zip
-unzip zabbix-${BGVERSION}.zip
-cd zabbix-${BGVERSION}
+curl -L -o bg-patch-${VERSION}.zip https://github.com/BGmot/zabbix/raw/release/5.0-bg/bg-patch-${VERSION}.zip
+unzip bg-patch-${VERSION}.zip
+cd bg-patch-${VERSION}
 
 # Check if DB is already patched
 echo 'show tables' | mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} ${DB_NAME} | grep adusrgrp
