@@ -1,4 +1,4 @@
-#ALTER TABLE config ADD COLUMN 2fa_type INT(11) DEFAULT 0;
+ALTER TABLE config ADD COLUMN 2fa_type INT(11) DEFAULT 0;
 ALTER TABLE config ADD COLUMN 2fa_duo_api_hostname TINYTEXT;
 ALTER TABLE config ADD COLUMN 2fa_duo_integration_key TINYTEXT;
 ALTER TABLE config ADD COLUMN 2fa_duo_secret_key TINYTEXT;
