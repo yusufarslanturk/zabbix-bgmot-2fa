@@ -53,7 +53,9 @@ class CRoleHelper {
 	public const UI_ADMINISTRATION_GENERAL = 'ui.administration.general';
 	public const UI_ADMINISTRATION_PROXIES = 'ui.administration.proxies';
 	public const UI_ADMINISTRATION_AUTHENTICATION = 'ui.administration.authentication';
+	public const UI_ADMINISTRATION_2FA= 'ui.administration.twofa';
 	public const UI_ADMINISTRATION_USER_GROUPS = 'ui.administration.user_groups';
+	public const UI_ADMINISTRATION_LDAP_GROUPS = 'ui.administration.ldap_groups';
 	public const UI_ADMINISTRATION_USER_ROLES = 'ui.administration.user_roles';
 	public const UI_ADMINISTRATION_USERS = 'ui.administration.users';
 	public const UI_ADMINISTRATION_MEDIA_TYPES = 'ui.administration.media_types';
@@ -248,12 +250,14 @@ class CRoleHelper {
 		if ($user_type === USER_TYPE_SUPER_ADMIN) {
 			$rules = array_merge($rules, [
 				self::UI_ADMINISTRATION_AUTHENTICATION,
+				self::UI_ADMINISTRATION_2FA,
 				self::UI_ADMINISTRATION_GENERAL,
 				self::UI_ADMINISTRATION_MEDIA_TYPES,
 				self::UI_ADMINISTRATION_PROXIES,
 				self::UI_ADMINISTRATION_QUEUE,
 				self::UI_ADMINISTRATION_SCRIPTS,
 				self::UI_ADMINISTRATION_USER_GROUPS,
+				self::UI_ADMINISTRATION_LDAP_GROUPS,
 				self::UI_ADMINISTRATION_USER_ROLES,
 				self::UI_ADMINISTRATION_USERS,
 				self::UI_CONFIGURATION_EVENT_CORRELATION,
@@ -422,7 +426,9 @@ class CRoleHelper {
 						self::UI_ADMINISTRATION_GENERAL => _('General'),
 						self::UI_ADMINISTRATION_PROXIES => _('Proxies'),
 						self::UI_ADMINISTRATION_AUTHENTICATION => _('Authentication'),
+						self::UI_ADMINISTRATION_2FA => _('2FA'),
 						self::UI_ADMINISTRATION_USER_GROUPS => _('User groups'),
+						self::UI_ADMINISTRATION_LDAP_GROUPS => _('LDAP groups'),
 						self::UI_ADMINISTRATION_USER_ROLES => _('User roles'),
 						self::UI_ADMINISTRATION_USERS => _('Users'),
 						self::UI_ADMINISTRATION_MEDIA_TYPES => _('Media types'),

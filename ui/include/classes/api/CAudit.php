@@ -82,6 +82,8 @@ class CAudit {
 	public const RESOURCE_SCHEDULED_REPORT = 46;
 	public const RESOURCE_HA_NODE = 47;
 	public const RESOURCE_SLA = 48;
+	public const RESOURCE_AD_GROUP = 100;
+	public const RESOURCE_TWOFA = 101;
 
 	/**
 	 * Audit details actions.
@@ -131,7 +133,9 @@ class CAudit {
 		self::RESOURCE_TEMPLATE => 'hosts',
 		self::RESOURCE_TEMPLATE_DASHBOARD => 'dashboard',
 		self::RESOURCE_USER => 'users',
-		self::RESOURCE_USER_GROUP => 'usrgrp'
+		self::RESOURCE_USER_GROUP => 'usrgrp',
+		self::RESOURCE_AD_GROUP=> 'adusrgrp',
+		self::RESOURCE_TWOFA => 'config'
 	];
 
 	/**
@@ -177,7 +181,9 @@ class CAudit {
 		self::RESOURCE_TEMPLATE => 'host',
 		self::RESOURCE_TEMPLATE_DASHBOARD => 'name',
 		self::RESOURCE_USER => 'username',
-		self::RESOURCE_USER_GROUP => 'name'
+		self::RESOURCE_USER_GROUP => 'name',
+		self::RESOURCE_AD_GROUP => 'name',
+		self::RESOURCE_TWOFA => null
 	];
 
 	/**
@@ -212,7 +218,9 @@ class CAudit {
 		self::RESOURCE_TEMPLATE => 'template',
 		self::RESOURCE_TEMPLATE_DASHBOARD => 'templatedashboard',
 		self::RESOURCE_USER => 'user',
-		self::RESOURCE_USER_GROUP => 'usergroup'
+		self::RESOURCE_USER_GROUP => 'usergroup',
+		self::RESOURCE_AD_GROUP => 'adusergroup',
+		self::RESOURCE_TWOFA => 'twofa'
 	];
 
 	/**
@@ -237,7 +245,10 @@ class CAudit {
 			'paths' => ['template.macros.value'],
 			'conditions' => ['type' => ZBX_MACRO_TYPE_SECRET]
 		],
-		self::RESOURCE_USER => ['paths' => ['user.passwd']]
+		self::RESOURCE_USER => ['paths' => ['user.passwd']],
+		self::RESOURCE_TWOFA => [
+			'paths' => ['twofa.2fa_duo_integration_key', 'twofa.2fa_duo_secret_key']
+		]
 	];
 
 	/**
@@ -317,7 +328,9 @@ class CAudit {
 		'user.usrgrps' => 'users_groups',
 		'usergroup.rights' => 'rights',
 		'usergroup.tag_filters' => 'tag_filter',
-		'usergroup.users' => 'users_groups'
+		'usergroup.users' => 'users_groups',
+		'adusergroup.rights' => 'rights',
+		'adusergroup.usrgrps' => 'adgroups_groups'
 	];
 
 	/**
@@ -387,7 +400,8 @@ class CAudit {
 		'user.usrgrps' => 'id',
 		'usergroup.rights' => 'rightid',
 		'usergroup.tag_filters' => 'tag_filterid',
-		'usergroup.users' => 'id'
+		'usergroup.users' => 'id',
+		'adusergroup.usrgrps' => 'usrgrpid'
 	];
 
 	/**
@@ -716,7 +730,6 @@ class CAudit {
 			if (strpos($object_path, '[') !== false) {
 				$object_path = preg_replace('/\[[0-9]+\]/', '', $object_path);
 			}
-
 			$table_name = self::NESTED_OBJECTS_TABLE_NAMES[$object_path];
 		}
 
