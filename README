@@ -68,3 +68,13 @@ Modify the script to provide proper values for DB_HOST, DB_USERNAME, DB_PASSWORD
 ```
 sudo bash bg-features-install.sh
 ```
+
+### Upgrade from 5.0 to 5.4 or 6.0
+User roles were introduced in 5.2 release so now users must be mapped to a Role instead of just having User Type thus table `adusrgrp` should be modified.
+After you perform the upgrade following official documentation connect to your database and execute following:
+```
+alter table adusrgrp drop column user_type;
+alter table adusrgrp 'roleid' bigint unsigned default 1;
+ALTER TABLE `adusrgrp` ADD CONSTRAINT `c_adusrgrp_1` FOREIGN KEY (`roleid`) REFERENCES `role` (`roleid`) ON DELETE CASCADE;
+```
+then proceed to steps described in Installation section.
