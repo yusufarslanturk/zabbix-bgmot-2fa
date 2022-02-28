@@ -1,7 +1,13 @@
+Changes for 4.0.39
+
+4.0.39rc1 was released as 4.0.39 without any changes
+
+--------------------------------------------------------------------------------
 Changes for 4.0.39rc1
 
 Bug fixes:
 ........S. [ZBX-19789] added SourceIP support to ldap simple checks (dgoloscapov)
+..F....... [ZBX-20680] fixed reflected XSS issues (averza)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.38
