@@ -1568,10 +1568,9 @@ class CUser extends CApiService {
 					'roleid' => $usrgrps_and_role['roleid']
 				];
 				// This will not work here as we are not Admin at this point
-				// $result = (bool) API::User()->create($user);
 				$userid = DB::insert('users', [$new_user]);
 				$new_user['userid'] = $userid[0];
-				$new_user['user_medias'] = $medias;
+				$new_user['medias'] = $medias;
 				$new_user['usrgrps'] = $usrgrps_and_role['groups'];
 
 				$new_user_arr = [$new_user];
@@ -1579,7 +1578,6 @@ class CUser extends CApiService {
 				$this->updateMedias($new_user_arr, __FUNCTION__);
 
 		                self::$userData = $new_user_arr[0];
-			//++	$this->addAuditLog(CAudit::ACTION_ADD, CAudit::RESOURCE_USER, $new_user_arr);
 				self::addAuditLogByUser(null, CWebUser::getIp(), 'System', CAudit::ACTION_ADD, CAudit::RESOURCE_USER, $new_user_arr);
 			}
 			else {
