@@ -472,7 +472,11 @@ close:
 				if (SUCCEED == zbx_alarm_timed_out())
 					ret = TIMEOUT_ERROR;
 				else
+				{
 					ret = SIG_ERROR;
+					zbx_strlcpy(error, "Signal received while executing a shell script.",
+							max_error_len);
+				}
 			}
 			else
 				zbx_snprintf(error, max_error_len, "zbx_waitpid() failed: %s", zbx_strerror(errno));
