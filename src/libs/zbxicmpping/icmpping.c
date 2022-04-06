@@ -142,7 +142,7 @@ static int	get_interval_option(const char *fping, const char *dst, int *value, c
 			goto out;
 		}
 
-		if (FAIL == ret_exec)
+		if (SUCCEED != ret_exec)
 		{
 			zbx_snprintf(error, max_error_len, "Cannot execute \"%s\": %s", tmp, err);
 			goto out;

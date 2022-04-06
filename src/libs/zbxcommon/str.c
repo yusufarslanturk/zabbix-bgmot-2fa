@@ -1392,6 +1392,8 @@ const char	*zbx_result_string(int result)
 			return "AGENT_ERROR";
 		case GATEWAY_ERROR:
 			return "GATEWAY_ERROR";
+		case SIG_ERROR:
+			return "SIG_ERROR";
 		default:
 			return "unknown";
 	}

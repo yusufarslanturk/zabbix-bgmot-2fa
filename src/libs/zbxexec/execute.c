@@ -294,7 +294,8 @@ exit:
  *             flag          - [IN] indicates if exit code must be checked    *
  *                                                                            *
  * Return value: SUCCEED if processed successfully, TIMEOUT_ERROR if          *
- *               timeout occurred or FAIL otherwise                           *
+ *               timeout occurred, SIG_ERROR if interrupted by signal or FAIL *
+ *               otherwise                                                    *
  *                                                                            *
  * Author: Alexander Vladishev                                                *
  *                                                                            *
@@ -467,7 +468,12 @@ close:
 		if (-1 == rc || -1 == zbx_waitpid(pid, &status))
 		{
 			if (EINTR == errno)
-				ret = TIMEOUT_ERROR;
+			{
+				if (SUCCEED == zbx_alarm_timed_out())
+					ret = TIMEOUT_ERROR;
+				else
+					ret = SIG_ERROR;
+			}
 			else
 				zbx_snprintf(error, max_error_len, "zbx_waitpid() failed: %s", zbx_strerror(errno));
 
@@ -495,6 +501,7 @@ close:
 				{
 					zbx_snprintf(error, max_error_len, "Process killed by signal: %d.",
 							WTERMSIG(status));
+					ret = SIG_ERROR;
 				}
 				else
 					zbx_strlcpy(error, "Process terminated unexpectedly.", max_error_len);
