@@ -341,8 +341,8 @@ msgid "Access denied!"
 msgstr "Piekļuve liegta!"
 
 #: app/views/hintbox.eventlist.php:76
-#: app/views/monitoring.widget.problems.view.php:62
-#: include/actions.inc.php:155 include/blocks.inc.php:554
+#: app/views/monitoring.widget.problems.view.php:62 include/actions.inc.php:155
+#: include/blocks.inc.php:554
 #: include/classes/screens/CScreenHostTriggers.php:218
 #: include/classes/screens/CScreenProblem.php:847
 #: include/classes/screens/CScreenProblem.php:870
@@ -1012,8 +1012,7 @@ msgid "Application with applicationid \"%1$s\" does not exist."
 msgstr ""
 
 #: app/controllers/CControllerPopupGeneric.php:123 include/forms.inc.php:832
-#: include/html.inc.php:357
-#: include/views/configuration.application.edit.php:23
+#: include/html.inc.php:357 include/views/configuration.application.edit.php:23
 #: include/views/configuration.application.list.php:23
 #: include/views/configuration.host.list.php:129
 #: include/views/configuration.host.list.php:333
@@ -1054,8 +1053,8 @@ msgstr ""
 msgid "Apr"
 msgstr "Apr"
 
-#: include/forms.inc.php:1972 include/func.inc.php:119
-#: include/func.inc.php:256 jsLoader.php:132
+#: include/forms.inc.php:1972 include/func.inc.php:119 include/func.inc.php:256
+#: jsLoader.php:132
 msgid "April"
 msgstr "Aprīlis"
 
@@ -1204,8 +1203,8 @@ msgstr ""
 msgid "Aug"
 msgstr "Aug"
 
-#: include/forms.inc.php:1959 include/func.inc.php:123
-#: include/func.inc.php:260 jsLoader.php:136
+#: include/forms.inc.php:1959 include/func.inc.php:123 include/func.inc.php:260
+#: jsLoader.php:136
 msgid "August"
 msgstr "Augusts"
 
@@ -3800,8 +3799,7 @@ msgstr ""
 msgid "Could not save image!"
 msgstr "Attēlu nevar saglabāt!"
 
-#: app/controllers/CControllerPopupTriggerExpr.php:46
-#: include/graphs.inc.php:74
+#: app/controllers/CControllerPopupTriggerExpr.php:46 include/graphs.inc.php:74
 msgid "Count"
 msgstr "Skaits"
 
@@ -4261,8 +4259,8 @@ msgid "Database user"
 msgstr "Datubāzes lietotājs"
 
 #: include/classes/api/services/CMaintenance.php:397
-#: include/classes/api/services/CMaintenance.php:673
-#: include/forms.inc.php:1996 include/forms.inc.php:2081 maintenance.php:50
+#: include/classes/api/services/CMaintenance.php:673 include/forms.inc.php:1996
+#: include/forms.inc.php:2081 maintenance.php:50
 msgid "Date"
 msgstr "Datums"
 
@@ -4321,8 +4319,8 @@ msgstr "Atkļūdošanas režīms atjaunots"
 msgid "Dec"
 msgstr "Dec"
 
-#: include/forms.inc.php:1991 include/func.inc.php:127
-#: include/func.inc.php:264 jsLoader.php:140
+#: include/forms.inc.php:1991 include/func.inc.php:127 include/func.inc.php:264
+#: jsLoader.php:140
 msgid "December"
 msgstr "Decembris"
 
@@ -4803,8 +4801,7 @@ msgid "Description updated"
 msgstr ""
 
 #: app/views/administration.mediatype.list.php:68 include/blocks.inc.php:422
-#: include/func.inc.php:1899
-#: include/views/administration.auditlogs.list.php:77
+#: include/func.inc.php:1899 include/views/administration.auditlogs.list.php:77
 #: include/views/configuration.action.edit.php:435
 #: include/views/configuration.action.edit.php:439
 #: include/views/configuration.action.edit.php:1276
@@ -5045,9 +5042,8 @@ msgid "Discovery of VMware virtual machines, <url> - VMware service URL. Returns
 msgstr ""
 
 #: app/views/monitoring.discovery.view.php:42
-#: app/views/monitoring.widget.discovery.view.php:28
-#: include/actions.inc.php:50 include/audit.inc.php:46
-#: include/forms.inc.php:1110
+#: app/views/monitoring.widget.discovery.view.php:28 include/actions.inc.php:50
+#: include/audit.inc.php:46 include/forms.inc.php:1110
 #: include/views/configuration.discovery.edit.php:102
 msgid "Discovery rule"
 msgstr ""
@@ -5689,9 +5685,9 @@ msgstr ""
 
 #: app/views/administration.mediatype.edit.php:171
 #: app/views/administration.mediatype.list.php:46
-#: app/views/administration.mediatype.list.php:124
-#: app/views/popup.media.php:81 app/views/popup.triggerwizard.php:128
-#: auditlogs.php:144 include/discovery.inc.php:107 include/html.inc.php:314
+#: app/views/administration.mediatype.list.php:124 app/views/popup.media.php:81
+#: app/views/popup.triggerwizard.php:128 auditlogs.php:144
+#: include/discovery.inc.php:107 include/html.inc.php:314
 #: include/httptest.inc.php:45 include/items.inc.php:142
 #: include/items.inc.php:145 include/items.inc.php:186
 #: include/triggers.inc.php:1289 include/triggers.inc.php:2214
@@ -6053,8 +6049,8 @@ msgstr ""
 msgid "Feb"
 msgstr "Feb"
 
-#: include/forms.inc.php:1956 include/func.inc.php:117
-#: include/func.inc.php:254 jsLoader.php:130
+#: include/forms.inc.php:1956 include/func.inc.php:117 include/func.inc.php:254
+#: jsLoader.php:130
 msgid "February"
 msgstr "Februāris"
 
@@ -6186,8 +6182,7 @@ msgstr "Aizpildīts reģions"
 #: app/views/monitoring.problem.view.php:339
 #: include/classes/html/CFilter.php:394
 #: include/classes/widgets/forms/CWidgetFormMap.php:56
-#: include/forms.inc.php:886
-#: include/views/administration.auditacts.list.php:47
+#: include/forms.inc.php:886 include/views/administration.auditacts.list.php:47
 #: include/views/administration.auditlogs.list.php:61
 #: include/views/administration.usergroups.list.php:34
 #: include/views/administration.users.list.php:51
@@ -6841,8 +6836,7 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:408
 #: include/views/monitoring.screen.constructor.edit.php:863
 #: include/views/monitoring.sysmap.edit.php:100
-#: include/views/monitoring.sysmap.list.php:60 screenedit.php:70
-#: sysmaps.php:42
+#: include/views/monitoring.sysmap.list.php:60 screenedit.php:70 sysmaps.php:42
 msgid "Height"
 msgstr "Augstums"
 
@@ -6995,8 +6989,8 @@ msgstr ""
 #: include/views/monitoring.screen.php:78
 #: include/views/monitoring.slides.php:75
 #: include/views/reports.toptriggers.php:79 items.php:921 items.php:1311
-#: jsLoader.php:161 latest.php:404 latest.php:421 queue.php:263
-#: report2.php:432 report2.php:455 search.php:125
+#: jsLoader.php:161 latest.php:404 latest.php:421 queue.php:263 report2.php:432
+#: report2.php:455 search.php:125
 #, fuzzy
 msgid "Host"
 msgid_plural "Hosts"
@@ -7130,8 +7124,8 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:31
 #: include/classes/widgets/forms/CWidgetFormProblems.php:48
 #: include/classes/widgets/forms/CWidgetFormTrigOver.php:46
-#: include/classes/widgets/forms/CWidgetFormWeb.php:31
-#: include/menu.inc.php:184 include/views/configuration.action.edit.php:1027
+#: include/classes/widgets/forms/CWidgetFormWeb.php:31 include/menu.inc.php:184
+#: include/views/configuration.action.edit.php:1027
 #: include/views/configuration.copy.elements.php:57
 #: include/views/configuration.hostgroups.edit.php:22
 #: include/views/configuration.hostgroups.list.php:23
@@ -8728,11 +8722,10 @@ msgstr ""
 #: include/classes/validators/CNewValidator.php:91
 #: include/classes/validators/CNewValidator.php:101
 #: include/classes/validators/CNewValidator.php:267
-#: include/classes/validators/CNewValidator.php:279
-#: include/screens.inc.php:321 include/screens.inc.php:335
-#: include/screens.inc.php:450 include/screens.inc.php:464
-#: include/sounds.inc.php:112 usergrps.php:318 usergrps.php:358
-#: usergrps.php:361
+#: include/classes/validators/CNewValidator.php:279 include/screens.inc.php:321
+#: include/screens.inc.php:335 include/screens.inc.php:450
+#: include/screens.inc.php:464 include/sounds.inc.php:112 usergrps.php:318
+#: usergrps.php:358 usergrps.php:361
 #, c-format
 msgid "Incorrect value for field \"%1$s\": %2$s."
 msgstr ""
@@ -9221,8 +9214,7 @@ msgstr ""
 msgid "Invalid view name given \"%s\". Allowed chars: \"a-z\" and \".\"."
 msgstr ""
 
-#: include/menu.inc.php:122
-#: include/views/configuration.host.massupdate.php:368
+#: include/menu.inc.php:122 include/views/configuration.host.massupdate.php:368
 msgid "Inventory"
 msgstr "Uzskaite"
 
@@ -9584,8 +9576,8 @@ msgstr "Jabber identifikators"
 msgid "Jan"
 msgstr "Jan"
 
-#: include/forms.inc.php:1948 include/func.inc.php:116
-#: include/func.inc.php:253 jsLoader.php:129
+#: include/forms.inc.php:1948 include/func.inc.php:116 include/func.inc.php:253
+#: jsLoader.php:129
 msgid "January"
 msgstr "Janvāris"
 
@@ -9597,8 +9589,8 @@ msgstr "Japāņu (ja_JP)"
 msgid "Jul"
 msgstr "Jūl"
 
-#: include/forms.inc.php:1951 include/func.inc.php:122
-#: include/func.inc.php:259 jsLoader.php:135
+#: include/forms.inc.php:1951 include/func.inc.php:122 include/func.inc.php:259
+#: jsLoader.php:135
 msgid "July"
 msgstr "Jūlijs"
 
@@ -9606,8 +9598,8 @@ msgstr "Jūlijs"
 msgid "Jun"
 msgstr "Jūn"
 
-#: include/forms.inc.php:1988 include/func.inc.php:121
-#: include/func.inc.php:258 jsLoader.php:134
+#: include/forms.inc.php:1988 include/func.inc.php:121 include/func.inc.php:258
+#: jsLoader.php:134
 msgid "June"
 msgstr "Jūnijs"
 
@@ -10069,8 +10061,8 @@ msgid "Log unmatched SNMP traps"
 msgstr ""
 
 #: app/views/administration.authentication.edit.php:123 auditlogs.php:138
-#: include/func.inc.php:1835 include/func.inc.php:1850
-#: include/menu.inc.php:292 include/views/administration.auditlogs.list.php:44
+#: include/func.inc.php:1835 include/func.inc.php:1850 include/menu.inc.php:292
+#: include/views/administration.auditlogs.list.php:44
 #: include/views/administration.users.list.php:89 index_http.php:91
 msgid "Login"
 msgstr "Pieslēgties"
@@ -10371,8 +10363,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupGeneric.php:268
 #: app/views/monitoring.map.view.php:29 include/menu.inc.php:91
-#: include/views/conf.import.php:40
-#: include/views/monitoring.sysmap.list.php:23
+#: include/views/conf.import.php:40 include/views/monitoring.sysmap.list.php:23
 msgid "Maps"
 msgstr "Kartes"
 
@@ -10380,8 +10371,8 @@ msgstr "Kartes"
 msgid "Mar"
 msgstr "Mar"
 
-#: include/forms.inc.php:1964 include/func.inc.php:118
-#: include/func.inc.php:255 jsLoader.php:131
+#: include/forms.inc.php:1964 include/func.inc.php:118 include/func.inc.php:255
+#: jsLoader.php:131
 msgid "March"
 msgstr "Marts"
 
@@ -10475,8 +10466,8 @@ msgstr[2] ""
 msgid "Maximum total length of email address exceeded for media type with ID \"%1$s\"."
 msgstr ""
 
-#: include/forms.inc.php:1980 include/func.inc.php:120
-#: include/func.inc.php:257 jsLoader.php:133
+#: include/forms.inc.php:1980 include/func.inc.php:120 include/func.inc.php:257
+#: jsLoader.php:133
 msgid "May"
 msgstr "Mai"
 
@@ -10816,8 +10807,8 @@ msgstr "NNTP"
 msgid "NTLM"
 msgstr ""
 
-#: actionconf.php:36 adm.regexps.php:36 adm.regexps.php:152
-#: adm.regexps.php:183 app/controllers/CControllerPopupGeneric.php:71
+#: actionconf.php:36 adm.regexps.php:36 adm.regexps.php:152 adm.regexps.php:183
+#: app/controllers/CControllerPopupGeneric.php:71
 #: app/controllers/CControllerPopupGeneric.php:83
 #: app/controllers/CControllerPopupGeneric.php:95
 #: app/controllers/CControllerPopupGeneric.php:107
@@ -11076,9 +11067,8 @@ msgid "Next step"
 msgstr ""
 
 #: app/views/hintbox.eventlist.php:167
-#: app/views/monitoring.widget.problems.view.php:219
-#: include/actions.inc.php:33 include/blocks.inc.php:429
-#: include/blocks.inc.php:628
+#: app/views/monitoring.widget.problems.view.php:219 include/actions.inc.php:33
+#: include/blocks.inc.php:429 include/blocks.inc.php:628
 #: include/classes/screens/CScreenHostTriggers.php:268
 #: include/classes/screens/CScreenProblem.php:1035
 #: include/classes/screens/CScreenProblem.php:1142 include/events.inc.php:176
@@ -11689,8 +11679,7 @@ msgstr ""
 msgid "Norwegian (nb_NO)"
 msgstr ""
 
-#: include/actions.inc.php:155
-#: include/views/configuration.action.edit.php:1117
+#: include/actions.inc.php:155 include/views/configuration.action.edit.php:1117
 #: include/views/configuration.action.edit.php:1209
 msgid "Not Ack"
 msgstr "Nav Apst"
@@ -11762,8 +11751,8 @@ msgstr ""
 msgid "Nov"
 msgstr "Nov"
 
-#: include/forms.inc.php:1983 include/func.inc.php:126
-#: include/func.inc.php:263 jsLoader.php:139
+#: include/forms.inc.php:1983 include/func.inc.php:126 include/func.inc.php:263
+#: jsLoader.php:139
 msgid "November"
 msgstr "Novembris"
 
@@ -11993,8 +11982,8 @@ msgstr "Okt"
 msgid "Octal to decimal"
 msgstr ""
 
-#: include/forms.inc.php:1975 include/func.inc.php:125
-#: include/func.inc.php:262 jsLoader.php:138
+#: include/forms.inc.php:1975 include/func.inc.php:125 include/func.inc.php:262
+#: jsLoader.php:138
 msgid "October"
 msgstr "Oktobris"
 
@@ -12004,10 +11993,9 @@ msgstr "Oktobris"
 msgid "Off"
 msgstr ""
 
-#: app/views/monitoring.widget.web.view.php:26
-#: app/views/report.services.php:66 app/views/report.services.php:67
-#: app/views/report.services.php:68 app/views/report.services.php:69
-#: include/classes/html/CTriggersInfo.php:76
+#: app/views/monitoring.widget.web.view.php:26 app/views/report.services.php:66
+#: app/views/report.services.php:67 app/views/report.services.php:68
+#: app/views/report.services.php:69 include/classes/html/CTriggersInfo.php:76
 #: include/views/administration.users.list.php:124
 #: include/views/configuration.triggers.list.php:58
 #: include/views/js/common.item.edit.js.php:579
@@ -13070,8 +13058,7 @@ msgstr ""
 
 #: app/controllers/CControllerMenuPopup.php:562
 #: app/controllers/CControllerWidgetUrlView.php:56
-#: app/views/hintbox.eventlist.php:44
-#: include/classes/screens/CScreenUrl.php:70
+#: app/views/hintbox.eventlist.php:44 include/classes/screens/CScreenUrl.php:70
 #, c-format
 msgid "Provided URL \"%1$s\" is invalid."
 msgstr ""
@@ -14019,8 +14006,7 @@ msgstr ""
 msgid "SQL statement execution has failed \"%1$s\"."
 msgstr ""
 
-#: include/discovery.inc.php:47
-#: include/views/configuration.action.edit.php:921
+#: include/discovery.inc.php:47 include/views/configuration.action.edit.php:921
 #: include/views/configuration.action.edit.php:1677
 #: include/views/configuration.action.edit.php:2156
 #: include/views/js/configuration.discovery.edit.js.php:195
@@ -14493,8 +14479,8 @@ msgstr "Sep"
 msgid "Separated"
 msgstr ""
 
-#: include/forms.inc.php:1967 include/func.inc.php:124
-#: include/func.inc.php:261 jsLoader.php:137
+#: include/forms.inc.php:1967 include/func.inc.php:124 include/func.inc.php:261
+#: jsLoader.php:137
 msgid "September"
 msgstr "Septembris"
 
@@ -14685,8 +14671,7 @@ msgctxt "screen reader"
 msgid "Severity changed"
 msgstr ""
 
-#: include/actions.inc.php:1823
-#: include/classes/screens/CScreenProblem.php:1123
+#: include/actions.inc.php:1823 include/classes/screens/CScreenProblem.php:1123
 msgid "Severity changes"
 msgstr ""
 
@@ -15148,8 +15133,7 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:35
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:36
 #: include/events.inc.php:247 include/forms.inc.php:398
-#: include/forms.inc.php:847
-#: include/views/administration.auditacts.list.php:61
+#: include/forms.inc.php:847 include/views/administration.auditacts.list.php:61
 #: include/views/administration.usergroups.list.php:40
 #: include/views/administration.usergroups.list.php:64
 #: include/views/administration.users.list.php:92
@@ -15475,8 +15459,7 @@ msgstr ""
 msgid "Tag value"
 msgstr ""
 
-#: app/views/hintbox.eventlist.php:77
-#: app/views/monitoring.problem.view.php:283
+#: app/views/hintbox.eventlist.php:77 app/views/monitoring.problem.view.php:283
 #: app/views/monitoring.widget.problems.view.php:64 include/blocks.inc.php:556
 #: include/classes/screens/CScreenProblem.php:818
 #: include/classes/screens/CScreenProblem.php:872
@@ -15518,8 +15501,7 @@ msgstr ""
 msgid "Target type"
 msgstr ""
 
-#: include/discovery.inc.php:61
-#: include/views/configuration.action.edit.php:922
+#: include/discovery.inc.php:61 include/views/configuration.action.edit.php:922
 #: include/views/configuration.action.edit.php:1678
 #: include/views/configuration.action.edit.php:2157
 #: include/views/js/configuration.discovery.edit.js.php:196
@@ -16559,8 +16541,7 @@ msgid "Units"
 msgstr "Vienības"
 
 #: app/views/monitoring.widget.web.view.php:26 include/actions.inc.php:116
-#: include/actions.inc.php:1122
-#: include/classes/screens/CScreenHostsInfo.php:89
+#: include/actions.inc.php:1122 include/classes/screens/CScreenHostsInfo.php:89
 #: include/classes/screens/CScreenHttpTestDetails.php:116
 #: include/correlation.inc.php:127 include/discovery.inc.php:115
 #: include/discovery.inc.php:151 include/events.inc.php:47
@@ -16865,8 +16846,7 @@ msgstr ""
 msgid "Use custom event status colours"
 msgstr ""
 
-#: app/views/popup.media.php:80
-#: include/views/administration.users.edit.php:247
+#: app/views/popup.media.php:80 include/views/administration.users.edit.php:247
 msgid "Use if severity"
 msgstr ""
 
@@ -17733,8 +17713,7 @@ msgstr "Kad aktīvs"
 #: include/views/js/monitoring.sysmaps.js.php:399
 #: include/views/monitoring.screen.constructor.edit.php:860
 #: include/views/monitoring.sysmap.edit.php:95
-#: include/views/monitoring.sysmap.list.php:59 screenedit.php:69
-#: sysmaps.php:41
+#: include/views/monitoring.sysmap.list.php:59 screenedit.php:69 sysmaps.php:41
 msgid "Width"
 msgstr "Platums"
 
@@ -17942,9 +17921,8 @@ msgid "Yearly"
 msgstr "Ik gadu"
 
 #: app/views/hintbox.eventlist.php:167
-#: app/views/monitoring.widget.problems.view.php:219
-#: include/actions.inc.php:32 include/blocks.inc.php:429
-#: include/blocks.inc.php:628
+#: app/views/monitoring.widget.problems.view.php:219 include/actions.inc.php:32
+#: include/blocks.inc.php:429 include/blocks.inc.php:628
 #: include/classes/screens/CScreenHostTriggers.php:268
 #: include/classes/screens/CScreenProblem.php:1035
 #: include/classes/screens/CScreenProblem.php:1142 include/events.inc.php:176
