@@ -1,3 +1,4 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
@@ -11,9 +12,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.1.3\n"
-"X-Poedit-Basepath: ../../\n"
+"X-Generator: Pontoon\n"
 "X-POOTLE-MTIME: 1616169235.000000\n"
+"X-Poedit-Basepath: ../../\n"
 
 #: include/classes/db/MysqlDbBackend.php:70
 #: include/classes/db/OracleDbBackend.php:89
@@ -343,7 +344,7 @@ msgstr "Visszaigazolás"
 
 #: include/actions.inc.php:2141 include/events.inc.php:175
 msgid "Acknowledged"
-msgstr "Nyugtázva"
+msgstr ""
 
 #: adm.triggerdisplayoptions.php:36
 #: include/views/administration.general.trigger.options.edit.php:51
@@ -1083,12 +1084,14 @@ msgstr ""
 msgid "At %1$s:%2$s %3$s of every week"
 msgid_plural "At %1$s:%2$s %3$s of every %4$s weeks"
 msgstr[0] ""
+msgstr[1] ""
 
 #: include/maintenances.inc.php:56
 #, c-format
 msgid "At %1$s:%2$s every day"
 msgid_plural "At %1$s:%2$s every %3$s days"
 msgstr[0] ""
+msgstr[1] ""
 
 #: include/maintenances.inc.php:118
 #, c-format
@@ -16576,6 +16579,7 @@ msgstr ""
 msgid "Unsupported charset or collation for table: %1$s."
 msgid_plural "Unsupported charset or collation for tables: %1$s."
 msgstr[0] ""
+msgstr[1] ""
 
 #: include/classes/import/readers/CImportReaderFactory.php:65
 #, c-format
