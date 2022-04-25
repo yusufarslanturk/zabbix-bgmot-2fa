@@ -3081,8 +3081,8 @@ int	vmware_hvds_name_compare(const void *d1, const void *d2)
  ******************************************************************************/
 int	vmware_ds_uuid_compare(const void *d1, const void *d2)
 {
-	const zbx_vmware_datastore_t	*ds1 = *(const zbx_vmware_datastore_t **)d1;
-	const zbx_vmware_datastore_t	*ds2 = *(const zbx_vmware_datastore_t **)d2;
+	const zbx_vmware_datastore_t	*ds1 = *(const zbx_vmware_datastore_t * const *)d1;
+	const zbx_vmware_datastore_t	*ds2 = *(const zbx_vmware_datastore_t * const *)d2;
 
 	return strcmp(ds1->uuid, ds2->uuid);
 }
@@ -3294,7 +3294,11 @@ static int	vmware_service_init_hv(zbx_vmware_service_t *service, CURL *easyhandl
 		zbx_vector_str_uint64_pair_append_ptr(&ds->hv_uuids_access, &hv_ds_access);
 
 		if (NULL == ds->uuid)
+		{
+			zabbix_log(LOG_LEVEL_WARNING, "%s(): Datastore \"%s\" does not have uuid.", __func__,
+					datastores.values[i]);
 			continue;
+		}
 
 		ds_name.name = zbx_strdup(NULL, ds->name);
 		ds_name.uuid = zbx_strdup(NULL, ds->uuid);

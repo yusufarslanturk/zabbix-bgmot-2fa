@@ -1748,6 +1748,12 @@ static int	check_vcenter_ds_size(const char *url, const char *hv_uuid, const cha
 		datastore = service->data->datastores.values[i];
 	}
 
+	if (NULL == datastore)
+	{
+		SET_MSG_RESULT(result, zbx_strdup(NULL, "Unknown datastore name."));
+		goto unlock;
+	}
+
 	if (NULL != hv_uuid &&
 			FAIL == zbx_vector_str_uint64_pair_bsearch(&datastore->hv_uuids_access, uuid_cmp,
 			zbx_str_uint64_pair_name_compare))
