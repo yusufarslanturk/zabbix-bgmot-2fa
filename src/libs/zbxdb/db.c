@@ -625,7 +625,7 @@ int	zbx_db_connect(char *host, char *user, char *password, char *dbname, char *d
 		{
 			case OCI_SUCCESS_WITH_INFO:
 				zabbix_log(LOG_LEVEL_WARNING, "%s", zbx_oci_error(err, NULL));
-				/* break; is not missing here */
+				ZBX_FALLTHROUGH;
 			case OCI_SUCCESS:
 				err = OCIAttrGet((void *)oracle.svchp, OCI_HTYPE_SVCCTX, (void *)&oracle.srvhp,
 						(ub4 *)0, OCI_ATTR_SERVER, oracle.errhp);
@@ -1178,7 +1178,7 @@ static sb4 db_bind_dynamic_cb(dvoid *ctxp, OCIBind *bindp, ub4 iter, ub4 index, 
 				*alenp = 0;
 				break;
 			}
-			/* break; is not missing here */
+			ZBX_FALLTHROUGH;
 		case ZBX_TYPE_UINT:
 			*bufpp = &((OCINumber *)context->data)[iter];
 			*alenp = sizeof(OCINumber);
