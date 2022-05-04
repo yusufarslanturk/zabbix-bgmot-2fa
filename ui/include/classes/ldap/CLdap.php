@@ -197,7 +197,7 @@ class CLdap {
 			return $this->info;
 		}
 
-		return false;
+		return true;
 	}
 
 	private function getUserData($user) {
