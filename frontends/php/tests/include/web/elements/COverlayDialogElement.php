@@ -58,7 +58,7 @@ class COverlayDialogElement extends CElement {
 			return $this;
 		}
 
-		$query = $this->query('xpath:./div[@class="overlay-dialogue-controls"]//select')->asDropdown()->waitUntilPresent();
+		$query = $this->query('xpath:./div[@class="overlay-dialogue-controls"]//select')->asList()->waitUntilPresent();
 
 		if (!is_array($context)) {
 			$query->one()->select($context);
