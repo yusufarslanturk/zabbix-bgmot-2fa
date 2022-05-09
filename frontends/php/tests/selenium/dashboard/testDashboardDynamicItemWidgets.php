@@ -568,8 +568,8 @@ class testDashboardDynamicItemWidgets extends CWebTest {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid=105');
 		$dashboard = CDashboardElement::find()->one();
 		$filter = $dashboard->getControls()->waitUntilVisible();
-		$filter->query('name:groupid')->asDropdown()->one()->select($data['filter']['Group']);
-		$filter->query('name:hostid')->asDropdown()->one()->select($data['filter']['Host']);
+		$filter->query('name:groupid')->asList()->one()->select($data['filter']['Group']);
+		$filter->query('name:hostid')->asList()->one()->select($data['filter']['Host']);
 		$this->page->waitUntilReady();
 		$widgets = $dashboard->getWidgets();
 		$this->assertEquals(count($data['widgets']), $widgets->count());
