@@ -91,8 +91,21 @@ if (isset($_REQUEST['yaxismax']) && zbx_empty($_REQUEST['yaxismax'])) {
 check_fields($fields);
 
 $gitems = [];
-foreach (getRequest('items', []) as $gitem) {
-	$gitems[] = json_decode($gitem, true);
+foreach (getRequest('items', []) as $item) {
+	$gitem = json_decode($item, true);
+	if (array_key_exists('itemid', $gitem)) {
+		$gitem['itemid'] = zbx_is_int($gitem['itemid'])
+			? $gitem['itemid']
+			: (int) $gitem['itemid'];
+	}
+
+	if (array_key_exists('type', $gitem)) {
+		$gitem['type'] = zbx_is_int($gitem['type'])
+			? $gitem['type']
+			: (int) $gitem['type'];
+	}
+
+	$gitems[] = $gitem;
 }
 
 $_REQUEST['items'] = $gitems;
