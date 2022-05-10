@@ -1,6 +1,7 @@
 Changes for 4.0.41rc1
 
 New features:
+..F....... [ZBX-20946] enabled Bulgarian, Chinese (zh_TW), German, Greek, Indonesian, Romanian, Spanish and Vietnamese languages in frontend (miks)
 
 Bug fixes:
 
