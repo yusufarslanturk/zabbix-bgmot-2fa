@@ -680,7 +680,33 @@ Template tooling version used: 0.38</description>
                <item_prototypes/>
                <trigger_prototypes/>
                <graph_prototypes/>
-               <host_prototypes/>
+               <host_prototypes>
+                  <host_prototype>
+                     <host>{#HV.UUID}</host>
+                     <name>{#HV.NAME}</name>
+                     <status>1</status>
+                     <group_links>
+                        <group_link>
+                           <group>
+                              <name>Templates/Applications</name>
+                           </group>
+                        </group_link>
+                     </group_links>
+                     <group_prototypes>
+                        <group_prototype>
+                           <name>{#CLUSTER.NAME}</name>
+                        </group_prototype>
+                        <group_prototype>
+                           <name>{#DATACENTER.NAME}</name>
+                        </group_prototype>
+                     </group_prototypes>
+                     <templates>
+                        <template>
+                           <name>Template VM VMware Hypervisor</name>
+                        </template>
+                     </templates>
+                  </host_prototype>
+               </host_prototypes>
                <jmx_endpoint/>
                <posts/>
                <timeout>3s</timeout>
@@ -734,7 +760,36 @@ Template tooling version used: 0.38</description>
                <item_prototypes/>
                <trigger_prototypes/>
                <graph_prototypes/>
-               <host_prototypes/>
+               <host_prototypes>
+                  <host_prototype>
+                     <host>{#VM.UUID}</host>
+                     <name>{#VM.NAME}</name>
+                     <status>1</status>
+                     <group_links>
+                        <group_link>
+                           <group>
+                              <name>Templates/Applications</name>
+                           </group>
+                        </group_link>
+                     </group_links>
+                     <group_prototypes>
+                        <group_prototype>
+                           <name>{#CLUSTER.NAME} (vm)</name>
+                        </group_prototype>
+                        <group_prototype>
+                           <name>{#DATACENTER.NAME} (vm)</name>
+                        </group_prototype>
+                        <group_prototype>
+                           <name>{#HV.NAME}</name>
+                        </group_prototype>
+                     </group_prototypes>
+                     <templates>
+                        <template>
+                           <name>Template VM VMware Guest</name>
+                        </template>
+                     </templates>
+                  </host_prototype>
+               </host_prototypes>
                <jmx_endpoint/>
                <posts/>
                <timeout>3s</timeout>
