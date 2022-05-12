@@ -371,6 +371,11 @@ class CFormElement extends CElement {
 				}
 			}
 		}
+		elseif ($values instanceof \Closure) {
+			$values($this, $field, $element);
+
+			return $this;
+		}
 
 		return $this;
 	}
@@ -436,5 +441,21 @@ class CFormElement extends CElement {
 		}
 
 		return $element->checkValue($values, $raise_exception);
+	}
+
+	/**
+	 * Wait for form reload after form element select.
+	 *
+	 * @param string $value		text to be written into the field
+	 *
+	 * @return Closure
+	 */
+	public static function RELOADABLE_FILL($value) {
+		return function ($form, $field, $element) use ($value) {
+			if (!($element instanceof CDropdownElement) || $element->getText() !== $value) {
+				$element->fill($value);
+				$form->waitUntilReloaded();
+			}
+		};
 	}
 }
