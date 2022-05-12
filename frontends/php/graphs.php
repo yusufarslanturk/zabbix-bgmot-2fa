@@ -105,6 +105,12 @@ foreach (getRequest('items', []) as $item) {
 			: (int) $gitem['type'];
 	}
 
+	if (array_key_exists('drawtype', $gitem)) {
+		$gitem['drawtype'] = in_array($gitem['drawtype'], range(0, 5))
+			? $gitem['drawtype']
+			: 0;
+	}
+
 	$gitems[] = $gitem;
 }
 
