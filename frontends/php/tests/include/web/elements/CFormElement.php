@@ -336,6 +336,11 @@ class CFormElement extends CElement {
 
 			return $this;
 		}
+		elseif ($values instanceof \Closure) {
+			$values($this, $field, $element);
+
+			return $this;
+		}
 
 		if ($this->filter !== null && !$this->filter->match($element)) {
 			return $this;
@@ -370,11 +375,6 @@ class CFormElement extends CElement {
 					}
 				}
 			}
-		}
-		elseif ($values instanceof \Closure) {
-			$values($this, $field, $element);
-
-			return $this;
 		}
 
 		return $this;
