@@ -94,21 +94,15 @@ $gitems = [];
 foreach (getRequest('items', []) as $item) {
 	$gitem = json_decode($item, true);
 	if (array_key_exists('itemid', $gitem)) {
-		$gitem['itemid'] = zbx_is_int($gitem['itemid'])
-			? $gitem['itemid']
-			: (int) $gitem['itemid'];
+		$gitem['itemid'] = bcadd($gitem['itemid'], 0);
 	}
 
 	if (array_key_exists('type', $gitem)) {
-		$gitem['type'] = zbx_is_int($gitem['type'])
-			? $gitem['type']
-			: (int) $gitem['type'];
+		$gitem['type'] = (int) $gitem['type'];
 	}
 
 	if (array_key_exists('drawtype', $gitem)) {
-		$gitem['drawtype'] = in_array($gitem['drawtype'], range(0, 5))
-			? $gitem['drawtype']
-			: 0;
+		$gitem['drawtype'] = (int) $gitem['drawtype'];
 	}
 
 	$gitems[] = $gitem;
