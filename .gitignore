@@ -1,7 +1,6 @@
 /.buildpath
 /.project
 /.settings
-/.github
 Makefile
 Makefile.in
 !/build/win32/**/Makefile
