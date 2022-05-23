@@ -1691,7 +1691,7 @@ class CUser extends CApiService {
 		}
 		else {
 			$db_users_rows = DBfetchArray(DBselect(
-				'SELECT '.implode(',', $fields).
+				'SELECT userid'.
 				' FROM users'.
 					' WHERE LOWER(alias)='.zbx_dbstr(strtolower($alias))
 			));
