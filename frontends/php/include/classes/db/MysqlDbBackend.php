@@ -69,7 +69,7 @@ class MysqlDbBackend extends DbBackend {
 
 		if ($row && !in_array(strtoupper($row['db_charset']), $allowed_charsets)) {
 			$this->setWarning(_s('Incorrect default charset for Zabbix database: %1$s.',
-				_s('"%1$s" instead "%2$s"', $row['db_charset'], implode(', ', $allowed_charsets))
+				_s('"%1$s" instead "%2$s"', $row['db_charset'], ZBX_DB_MYSQL_ALLOWED_CHARSETS)
 			));
 			return false;
 		}
