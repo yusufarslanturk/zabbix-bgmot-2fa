@@ -61,15 +61,13 @@ class MysqlDbBackend extends DbBackend {
 	 * @return bool
 	 */
 	protected function checkDatabaseEncoding(array $DB) {
-		$allowed_charsets = explode(',', ZBX_DB_MYSQL_ALLOWED_CHARSETS);
-
 		$row = DBfetch(DBselect('SELECT default_character_set_name db_charset FROM information_schema.schemata'.
 			' WHERE schema_name='.zbx_dbstr($DB['DATABASE'])
 		));
 
-		if ($row && !in_array(strtoupper($row['db_charset']), $allowed_charsets)) {
+		if ($row && strtoupper($row['db_charset']) != ZBX_DB_DEFAULT_CHARSET) {
 			$this->setWarning(_s('Incorrect default charset for Zabbix database: %1$s.',
-				_s('"%1$s" instead "%2$s"', $row['db_charset'], implode(', ', $allowed_charsets))
+				_s('"%1$s" instead "%2$s"', $row['db_charset'], ZBX_DB_DEFAULT_CHARSET)
 			));
 			return false;
 		}
@@ -85,17 +83,14 @@ class MysqlDbBackend extends DbBackend {
 	 * @return bool
 	 */
 	protected function checkTablesEncoding(array $DB) {
-		$allowed_charsets = explode(',', ZBX_DB_MYSQL_ALLOWED_CHARSETS);
-		$allowed_collations = explode(',', ZBX_DB_MYSQL_ALLOWED_COLLATIONS);
-
 		// Aliasing table_name to ensure field name is lowercase.
 		$tables = DBfetchColumn(DBSelect('SELECT table_name AS table_name FROM information_schema.columns'.
 			' WHERE table_schema='.zbx_dbstr($DB['DATABASE']).
 				' AND '.dbConditionString('table_name', array_keys(DB::getSchema())).
 				' AND '.dbConditionString('data_type', ['text', 'varchar', 'longtext']).
 				' AND ('.
-					dbConditionString('UPPER(character_set_name)', $allowed_charsets, true).
-					' OR '.dbConditionString('collation_name', $allowed_collations, true).
+					' UPPER(character_set_name)!='.zbx_dbstr(ZBX_DB_DEFAULT_CHARSET).
+					' OR collation_name!='.zbx_dbstr(ZBX_DB_MYSQL_DEFAULT_COLLATION).
 				')'
 		), 'table_name');
 

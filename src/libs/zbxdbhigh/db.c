@@ -26,12 +26,11 @@
 #include "dbcache.h"
 #include "zbxalgo.h"
 
-#if defined(HAVE_ORACLE) || defined(HAVE_POSTGRESQL)
-#	define ZBX_SUPPORTED_DB_CHARACTER_SET	"utf8"
-#elif defined(HAVE_MYSQL)
-#	define ZBX_DB_STRLIST_DELIM		','
-#	define ZBX_SUPPORTED_DB_CHARACTER_SET	"utf8,utf8mb3"
-#	define ZBX_SUPPORTED_DB_COLLATION	"utf8_bin,utf8mb3_bin"
+#if defined(HAVE_MYSQL) || defined(HAVE_ORACLE) || defined(HAVE_POSTGRESQL)
+#define ZBX_SUPPORTED_DB_CHARACTER_SET	"utf8"
+#endif
+#if defined(HAVE_MYSQL)
+#define ZBX_SUPPORTED_DB_COLLATION	"utf8_bin"
 #endif
 
 typedef struct
@@ -2167,7 +2166,7 @@ int	DBexecute_multiple_query(const char *query, const char *field_name, zbx_vect
 #if defined(HAVE_MYSQL) || defined(HAVE_POSTGRESQL)
 static void	zbx_warn_char_set(const char *db_name, const char *char_set)
 {
-	zabbix_log(LOG_LEVEL_WARNING, "Zabbix supports only \"" ZBX_SUPPORTED_DB_CHARACTER_SET "\" character set(s)."
+	zabbix_log(LOG_LEVEL_WARNING, "Zabbix supports only \"" ZBX_SUPPORTED_DB_CHARACTER_SET "\" character set."
 			" Database \"%s\" has default character set \"%s\"", db_name, char_set);
 }
 #endif
@@ -2179,29 +2178,10 @@ static void	zbx_warn_no_charset_info(const char *db_name)
 }
 #endif
 
-#if defined(HAVE_MYSQL)
-static char	*db_strlist_quote(const char *strlist, char delimiter)
-{
-	const char	*delim;
-	char		*str = NULL;
-	size_t		str_alloc = 0, str_offset = 0;
-
-	while (NULL != (delim = strchr(strlist, delimiter)))
-	{
-		zbx_snprintf_alloc(&str, &str_alloc, &str_offset, "'%.*s',", (int)(delim - strlist), strlist);
-		strlist = delim + 1;
-	}
-
-	zbx_snprintf_alloc(&str, &str_alloc, &str_offset, "'%s'", strlist);
-
-	return str;
-}
-#endif
-
 void	DBcheck_character_set(void)
 {
 #if defined(HAVE_MYSQL)
-	char		*database_name_esc, *charset_list, *collation_list;
+	char		*database_name_esc;
 	DB_RESULT	result;
 	DB_ROW		row;
 
@@ -2222,12 +2202,12 @@ void	DBcheck_character_set(void)
 		char	*char_set = row[0];
 		char	*collation = row[1];
 
-		if (SUCCEED != str_in_list(ZBX_SUPPORTED_DB_CHARACTER_SET, char_set, ZBX_DB_STRLIST_DELIM))
+		if (0 != strcasecmp(char_set, ZBX_SUPPORTED_DB_CHARACTER_SET))
 			zbx_warn_char_set(CONFIG_DBNAME, char_set);
 
-		if (SUCCEED != str_in_list(ZBX_SUPPORTED_DB_COLLATION, collation, ZBX_DB_STRLIST_DELIM))
+		if (0 != zbx_strncasecmp(collation, ZBX_SUPPORTED_DB_COLLATION, sizeof(ZBX_SUPPORTED_DB_COLLATION)))
 		{
-			zabbix_log(LOG_LEVEL_WARNING, "Zabbix supports only \"%s\" collation(s)."
+			zabbix_log(LOG_LEVEL_WARNING, "Zabbix supports only \"%s\" collation."
 					" Database \"%s\" has default collation \"%s\"", ZBX_SUPPORTED_DB_COLLATION,
 					CONFIG_DBNAME, collation);
 		}
@@ -2235,19 +2215,13 @@ void	DBcheck_character_set(void)
 
 	DBfree_result(result);
 
-	charset_list = db_strlist_quote(ZBX_SUPPORTED_DB_CHARACTER_SET, ZBX_DB_STRLIST_DELIM);
-	collation_list = db_strlist_quote(ZBX_SUPPORTED_DB_COLLATION, ZBX_DB_STRLIST_DELIM);
-
 	result = DBselect(
 			"select count(*)"
 			" from information_schema.`COLUMNS`"
 			" where table_schema='%s'"
 				" and data_type in ('text','varchar','longtext')"
-				" and (character_set_name not in (%s) or collation_name not in (%s))",
-			database_name_esc, charset_list, collation_list);
-
-	zbx_free(collation_list);
-	zbx_free(charset_list);
+				" and (character_set_name<>'%s' or collation_name<>'%s')",
+			database_name_esc, ZBX_SUPPORTED_DB_CHARACTER_SET, ZBX_SUPPORTED_DB_COLLATION);
 
 	if (NULL == result || NULL == (row = DBfetch(result)))
 	{
@@ -2257,9 +2231,8 @@ void	DBcheck_character_set(void)
 	{
 		zabbix_log(LOG_LEVEL_WARNING, "character set name or collation name that is not supported by Zabbix"
 				" found in %s column(s) of database \"%s\"", row[0], CONFIG_DBNAME);
-		zabbix_log(LOG_LEVEL_WARNING, "only character set(s) \"%s\" and corresponding collation(s) \"%s\""
-				" should be used in database", ZBX_SUPPORTED_DB_CHARACTER_SET,
-				ZBX_SUPPORTED_DB_COLLATION);
+		zabbix_log(LOG_LEVEL_WARNING, "only character set \"%s\" and collation \"%s\" should be used in "
+				"database", ZBX_SUPPORTED_DB_CHARACTER_SET, ZBX_SUPPORTED_DB_COLLATION);
 	}
 
 	DBfree_result(result);
