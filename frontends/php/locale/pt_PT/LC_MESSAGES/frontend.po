@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-04-23 21:11+0000\n"
+"PO-Revision-Date: 2022-05-23 09:06+0000\n"
 "Last-Translator: Hugo <hugopedrosantos@gmail.com>\n"
 "Language-Team: none\n"
 "Language: pt_PT\n"
@@ -1020,7 +1020,7 @@ msgstr "Aplicar"
 
 #: include/views/configuration.hostgroups.edit.php:42
 msgid "Apply permissions and tag filters to all subgroups"
-msgstr ""
+msgstr "Aplicar permissões e filtros de tags a todos os subgrupos"
 
 #: include/views/configuration.maintenance.list.php:54
 #: include/views/configuration.maintenance.list.php:86

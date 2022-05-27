@@ -1,26 +1,27 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2019-05-06 14:15+0300\n"
-"Last-Translator: martinds <kotyk@datasys.cz>\n"
+"PO-Revision-Date: 2022-05-23 19:57+0000\n"
+"Last-Translator: Tomáš Heřmánek <tomas.hermanek@initmax.cz>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Pootle 2.5.1.3\n"
-"X-Poedit-Basepath: ../../\n"
+"X-Generator: Pontoon\n"
 "X-POOTLE-MTIME: 1557144905.000000\n"
+"X-Poedit-Basepath: ../../\n"
 
 #: include/classes/db/MysqlDbBackend.php:70
 #: include/classes/db/OracleDbBackend.php:89
 #: include/classes/db/PostgresqlDbBackend.php:79
 #, c-format
 msgid "\"%1$s\" instead \"%2$s\""
-msgstr ""
+msgstr "„%1$s“ místo „%2$s“"
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -1500,19 +1501,19 @@ msgstr "Vypočítaná"
 
 #: include/classes/items/CHelpItems.php:705
 msgid "Calculates the average value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Vypočítá průměrnou hodnotu na základě různých dodaných parametrů. Zabbix server shromažďuje souhrnné informace prováděním přímých databázových dotazů."
 
 #: include/classes/items/CHelpItems.php:713
 msgid "Calculates the maximum value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Vypočítá maximální hodnotu na základě různých dodaných parametrů. Zabbix server shromažďuje souhrnné informace prováděním přímých databázových dotazů."
 
 #: include/classes/items/CHelpItems.php:709
 msgid "Calculates the minimum value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Vypočítá minimální hodnotu na základě různých dodaných parametrů. Zabbix server shromažďuje souhrnné informace prováděním přímých databázových dotazů."
 
 #: include/classes/items/CHelpItems.php:717
 msgid "Calculates the sum of values, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Vypočítá součet hodnot na základě různých dodaných parametrů. Zabbix server shromažďuje souhrnné informace prováděním přímých databázových dotazů."
 
 #: jsLoader.php:128
 msgid "Calendar"
@@ -1747,7 +1748,7 @@ msgstr "Není možné přidat webový scénář"
 
 #: jsLoader.php:110
 msgid "Cannot add widget: not enough free space on the dashboard."
-msgstr ""
+msgstr "Widget nelze přidat: na řídicím panelu není dostatek volného místa."
 
 #: jsLoader.php:103
 msgid "Cannot add widgets in kiosk mode"
@@ -1767,7 +1768,7 @@ msgstr "Nelze smazat historii"
 
 #: items.php:1325
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
-msgstr ""
+msgstr "Nelze vymazat historii: alespoň jedna z vybraných položek nepatří žádnému monitorovanému hostiteli"
 
 #: include/classes/api/services/CDiscoveryRule.php:1549
 msgid "Cannot clone graph prototypes."
@@ -1802,7 +1803,7 @@ msgstr "Není možné se připojit k databázi."
 
 #: include/views/js/configuration.httpconf.edit.js.php:79
 msgid "Cannot convert POST data:"
-msgstr ""
+msgstr "Nelze převést POST data:"
 
 #: graphs.php:390
 msgid "Cannot copy graph"
@@ -1980,7 +1981,7 @@ msgstr "Nelze smazat obrázek"
 #: include/classes/api/services/CHostInterface.php:434
 #, c-format
 msgid "Cannot delete interface for discovered host \"%1$s\"."
-msgstr ""
+msgstr "Rozhraní nalezeného hostitele \"%1$s\" nelze smazat."
 
 #: include/classes/api/services/CHost.php:1026
 msgid "Cannot delete inventory."
@@ -2341,12 +2342,12 @@ msgstr "Mapa ikon \"%1$s\" použitá v mapě \"%2$s\" nebyla nalezena."
 #: include/classes/import/CConfigurationImport.php:955
 #, c-format
 msgid "Cannot find interface \"%1$s\" used for discovery rule \"%2$s\" on \"%3$s\"."
-msgstr ""
+msgstr "Nelze najít rozhraní \"%1$s\" použité pro pravidlo zjišťování \"%2$s\" na \"%3$s\"."
 
 #: include/classes/import/CConfigurationImport.php:751
 #, c-format
 msgid "Cannot find interface \"%1$s\" used for item \"%2$s\" on \"%3$s\"."
-msgstr ""
+msgstr "Nelze najít rozhraní \"%1$s\" použité pro položku \"%2$s\" na \"%3$s\"."
 
 #: include/classes/import/CConfigurationImport.php:1073
 #, c-format
@@ -2616,7 +2617,7 @@ msgstr "Není možné nastavit ID zdroje pro prvek obrazovky."
 
 #: jsLoader.php:191
 msgid "Cannot support notification audio for this device."
-msgstr ""
+msgstr "Pro toto zařízení není podporovaný zvuk oznámení."
 
 #: include/classes/api/services/CHostInterface.php:244
 msgid "Cannot switch host for interface."
@@ -3097,7 +3098,7 @@ msgstr "Kontrola existence souboru. Vráti 0 - nenalezený, 1 - soubor nebo link
 
 #: include/classes/items/CHelpItems.php:723
 msgid "Checks if host is accessible by ICMP ping. 0 - ICMP ping fails. 1 - ICMP ping successful."
-msgstr ""
+msgstr "Zkontroluje, zda je hostitel přístupný pomocí ICMP ping. 0 - ICMP ping selhal. 1 - ICMP ping úspěšný."
 
 #: include/classes/items/CHelpItems.php:121
 #: include/classes/items/CHelpItems.php:451
@@ -3834,7 +3835,7 @@ msgstr "Počet spárovaných řádků v monitorovaném log souboru. Vrací celé
 
 #: include/classes/items/CHelpItems.php:1095
 msgid "Count of values enqueued in the preprocessing queue."
-msgstr ""
+msgstr "Počet hodnot zařazených do fronty předběžného zpracování."
 
 #: include/views/configuration.action.list.php:38
 msgid "Create action"
@@ -5183,13 +5184,13 @@ msgstr "Nevypočítávat"
 #: include/views/configuration.item.massupdate.php:528
 #: include/views/configuration.item.prototype.edit.php:692
 msgid "Do not keep history"
-msgstr ""
+msgstr "Neuchovávat historii"
 
 #: include/views/configuration.item.edit.php:828
 #: include/views/configuration.item.massupdate.php:545
 #: include/views/configuration.item.prototype.edit.php:705
 msgid "Do not keep trends"
-msgstr ""
+msgstr "Neuchovávat trendy"
 
 #: jsLoader.php:122 jsLoader.php:239
 msgid "Do you wish to replace the conditional expression?"
@@ -9560,7 +9561,7 @@ msgstr "JSON data"
 #: include/classes/api/services/CItemGeneral.php:2068
 #: include/classes/api/services/CItemGeneral.php:2097
 msgid "JSON is expected"
-msgstr ""
+msgstr "Je očekáván JSON"
 
 #: include/classes/validators/CNewValidator.php:101
 msgid "JSON string is expected"
@@ -9701,7 +9702,7 @@ msgstr "Jazyk"
 #: include/classes/api/services/CUser.php:553
 #, c-format
 msgid "Language \"%1$s\" is not supported."
-msgstr ""
+msgstr "Jazyk „%1$s“ není podporován."
 
 #: include/func.inc.php:1690
 msgctxt "page navigation"
@@ -11042,7 +11043,7 @@ msgstr "Nová událost host skupiny"
 
 #: include/correlation.inc.php:50 include/correlation.inc.php:202
 msgid "New event tag name"
-msgstr ""
+msgstr "Nový název značky události"
 
 #: include/correlation.inc.php:54
 msgid "New event tag value"
@@ -12014,7 +12015,7 @@ msgstr "Ok"
 
 #: include/correlation.inc.php:49 include/correlation.inc.php:197
 msgid "Old event tag name"
-msgstr ""
+msgstr "Starý název značky události"
 
 #: include/correlation.inc.php:53
 msgid "Old event tag value"
@@ -13688,7 +13689,7 @@ msgstr "Vyřešená korelační pravidla."
 #: include/classes/screens/CScreenHostTriggers.php:244
 #: include/classes/screens/CScreenProblem.php:972
 msgid "Resolved by inaccessible user."
-msgstr ""
+msgstr "Vyřešeno nepřístupným uživatelem."
 
 #: app/views/monitoring.widget.problems.view.php:142
 #: include/classes/screens/CScreenHostTriggers.php:243
@@ -15253,7 +15254,7 @@ msgstr "Zastavit"
 #: include/views/configuration.item.prototype.edit.php:693
 #: include/views/configuration.item.prototype.edit.php:706
 msgid "Storage period"
-msgstr ""
+msgstr "Doba uložení"
 
 #: include/hosts.inc.php:35
 msgid "Straight"
@@ -16677,6 +16678,8 @@ msgstr "Povolit zvuky"
 msgid "Unsupported charset or collation for table: %1$s."
 msgid_plural "Unsupported charset or collation for tables: %1$s."
 msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: include/classes/import/readers/CImportReaderFactory.php:65
 #, c-format
@@ -17495,15 +17498,15 @@ msgstr "Hodnota Windows čítače výkonu. Vráti celé, desetinné číslo, ře
 
 #: include/correlation.inc.php:227
 msgid "Value of new event tag"
-msgstr ""
+msgstr "Hodnota nové značky události"
 
 #: include/correlation.inc.php:212 include/correlation.inc.php:220
 msgid "Value of old event tag"
-msgstr ""
+msgstr "Hodnota staré značky události"
 
 #: include/actions.inc.php:331
 msgid "Value of tag"
-msgstr ""
+msgstr "Hodnota značky"
 
 #: include/classes/graphdraw/CPieGraphDraw.php:357
 msgid "Value: no data"
@@ -17598,7 +17601,7 @@ msgstr "Varování"
 
 #: jsLoader.php:125
 msgid "Warning message"
-msgstr ""
+msgstr "Varovná zpráva"
 
 #: jsLoader.php:197
 msgid "We are sorry, the maximum possible number of elements to remember has been reached."
@@ -17842,7 +17845,7 @@ msgstr "XML je prázdný"
 
 #: include/classes/api/services/CItemGeneral.php:2053
 msgid "XML is expected"
-msgstr ""
+msgstr "Je očekáváno XML"
 
 #: include/views/js/monitoring.sysmaps.js.php:247
 #: include/views/js/monitoring.sysmaps.js.php:384
@@ -17892,7 +17895,7 @@ msgstr "d.m.Y H:i:s"
 
 #: include/translateDefines.inc.php:37
 msgid "Y-n-d"
-msgstr ""
+msgstr "Y-n-d"
 
 #: include/views/js/monitoring.sysmaps.js.php:385
 msgid "Y1"
@@ -18015,7 +18018,7 @@ msgstr "Nemáte oprávnění na vytváření uživatelů."
 
 #: jsLoader.php:104
 msgid "You do not have permissions to edit dashboard"
-msgstr ""
+msgstr "Nemáte oprávnění upravovat řídicí panel"
 
 #: include/func.inc.php:1827
 msgid "You have no permissions to access this page."
@@ -18307,7 +18310,7 @@ msgstr "přesný čas je očekáván"
 
 #: include/classes/validators/CApiInputValidator.php:449
 msgid "an integer is expected"
-msgstr ""
+msgstr "očekává se celé číslo"
 
 #: include/classes/validators/CApiInputValidator.php:488
 msgid "an unsigned integer is expected"
@@ -18689,7 +18692,7 @@ msgstr "nesprávná syntaxe u \"%1$s\""
 
 #: include/classes/parsers/CTriggerExpression.php:462
 msgid "incorrect trigger expression"
-msgstr ""
+msgstr "nesprávný spouštěcí výraz"
 
 #: include/classes/parsers/CTriggerExpression.php:471
 #, c-format
@@ -18932,11 +18935,11 @@ msgstr "musí obsahovat minimálně jedno základní vyhledávací makro"
 
 #: include/translateDefines.inc.php:38
 msgid "n-d"
-msgstr ""
+msgstr "n-d"
 
 #: include/translateDefines.inc.php:36
 msgid "n-d H:i"
-msgstr ""
+msgstr "n-d H:i"
 
 #: include/views/configuration.host.discovery.edit.php:125
 #: include/views/configuration.host.discovery.edit.php:222
@@ -18960,7 +18963,7 @@ msgstr "nový"
 
 #: include/views/configuration.correlation.edit.php:142
 msgid "new event tag name"
-msgstr ""
+msgstr "nový název značky události"
 
 #: include/classes/graphdraw/CLineGraphDraw.php:1948
 #: include/classes/graphdraw/CPieGraphDraw.php:359
@@ -19035,7 +19038,7 @@ msgstr "pryč"
 
 #: include/views/configuration.correlation.edit.php:145
 msgid "old event tag name"
-msgstr ""
+msgstr "starý název značky události"
 
 #: include/classes/setup/CFrontendSetup.php:311
 #: include/classes/setup/CFrontendSetup.php:328
@@ -19256,7 +19259,7 @@ msgstr "parametr \"%1$s\" chybí"
 #: include/classes/db/PostgresqlDbBackend.php:45
 #, c-format
 msgid "the table \"%1$s\" was not found"
-msgstr ""
+msgstr "tabulka \"%1$s\" nebyla nalezena"
 
 #: include/classes/import/validators/CXmlValidatorGeneral.php:106
 #: include/classes/import/validators/CXmlValidatorGeneral.php:125
@@ -19316,7 +19319,7 @@ msgstr "pište zde pro vyhledávání"
 
 #: include/classes/validators/CApiInputValidator.php:1638
 msgid "unacceptable URL"
-msgstr ""
+msgstr "nepřijatelná adresa URL"
 
 #: include/classes/parsers/CItemKey.php:55
 msgid "unexpected end of key"
@@ -19451,7 +19454,7 @@ msgstr "hodnota musí být jedna z %1$s"
 
 #: include/correlation.inc.php:215
 msgid "value of new event tag"
-msgstr ""
+msgstr "hodnotu nové značky události"
 
 #: include/actions.inc.php:566 include/actions.inc.php:584
 #: include/actions.inc.php:729 include/actions.inc.php:747
