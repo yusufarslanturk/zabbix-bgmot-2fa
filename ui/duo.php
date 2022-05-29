@@ -14,7 +14,7 @@ if (isset($_POST['sig_response'])) {
 	*/
 	$resp = CDuoWeb::verifyResponse($_POST['sig_response'], $_POST['name']);
 	if ($resp === true) {
-		API::getWrapper()->auth =$_POST['sessionid'];
+		API::getWrapper()->auth = $_POST['sessionid'];
 		CSessionHelper::set('sessionid', $_POST['sessionid']);
 		// 2FA successfull
 		redirect('index.php');
