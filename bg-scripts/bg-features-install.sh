@@ -25,11 +25,47 @@ curl -L -o bg-patch-${VERSION}.zip https://github.com/BGmot/zabbix/raw/release/6
 unzip bg-patch-${VERSION}.zip
 cd bg-patch-${VERSION}
 
+if [ "$(which mysql)" != "" ]
+then
+  DB_TYPE='MySQL'
+elif [ "$(which psql)" != "" ]
+then
+  DB_TYPE='PostgreSQL'
+else
+  echo 'Only MySQL and PostgreSQL databases supported. Aborting...'
+  exit -1
+fi
 # Check if DB is already patched
-echo 'show tables' | mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} ${DB_NAME} | grep adusrgrp
+if [ "$DB_TYPE" == "MySQL" ]
+then
+  echo 'show tables' | mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} ${DB_NAME} | grep adusrgrp
+elif [ "$DB_TYPE" == "PostgreSQL" ]
+then
+  PGPASSWORD="$DB_PASSWORD" psql -U $DB_USERNAME -h DB_HOST -d $DB_NAME -c '\dt' | grep adusrgrp
+fi
 if [ "$?" -eq "0" ]
 then
-  echo 'Database already patched. No changes to DB will be made'
+  # DB already patched
+  if [ "$DB_TYPE" == "MySQL" ]
+  then
+    # Check if the old patch was applied
+    echo 'describe config' | mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} ${DB_NAME} | grep 2fa
+    if [ "$?" -eq "0" ]
+    then
+      # Old patch was applied need to rename 2fa columns
+      mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} ${DB_NAME} < bg-scripts/db-rename-columns.sql
+      if [ "$?" == "0" ]
+      then
+        echo 'Database column names were successfully updated.'
+      else
+        echo 'Failed to update database column names. Aborting...'
+        exit -1
+      fi
+    fi
+  elif [ "$DB_TYPE" == "PostgreSQL" ]
+  then
+    echo 'Database already patched. No changes to DB will be made'
+  fi
 else
   echo 'Patching DB...'
   mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} ${DB_NAME} < bg-scripts/db-update.sql
