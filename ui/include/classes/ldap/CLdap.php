@@ -232,8 +232,15 @@ class CLdap {
 		$result = is_resource($sr) ? @ldap_get_entries($this->ds, $sr) : [];
 
 		// don't accept more or less than one response
+		if ($this->cnf['search_attribute'] == 'uid'){
+			# OpenLDAP
+			$attr = 'cn';
+		} else {
+			# Active Directory
+			$attr = strtolower($this->cnf['search_attribute']);
+		}
 		if (!$result || $result['count'] != 1 ||
-		   ($this->cnf['case_sensitive'] == '1' && $result[0]['cn'][0] != $user)) {
+		   ($this->cnf['case_sensitive'] == '1' && $result[0][$attr][0] != $user)) {
 			$this->error = $result ? static::ERR_USER_NOT_FOUND : static::ERR_BIND_FAILED;
 
 			return false;
