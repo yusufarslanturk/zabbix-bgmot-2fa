@@ -23,7 +23,7 @@ if (isset($_POST['sig_response'])) {
 	// login failed, fall back to a guest account
 	else {
 		CWebUser::logout();
-		redirect(index.php);
+		redirect('index.php');
 		exit;
 	}
 }
