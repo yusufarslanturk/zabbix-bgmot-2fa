@@ -236,7 +236,7 @@ class CLdap {
 			$attr = strtolower($this->cnf['search_attribute']);
 		}
 		$sr = @ldap_search($this->ds, $base, $filter, [$attr, 'memberof', 'mail']);
-		$result = is_resource($sr) ? @ldap_get_entries($this->ds, $sr) : [];
+		$result = $sr ? @ldap_get_entries($this->ds, $sr) : [];
 
 		// don't accept more or less than one response
 		if (!$result || $result['count'] != 1 ||
