@@ -76,7 +76,7 @@ final class GoogleQrUrl
         if (null !== $issuer) {
             if ('' === $issuer || false !== strpos($issuer, ':')) {
                 \CWebUser::setDefault();
-                redirect("index.php?twofa_error=The%20server%20name%20may%20not%20contain%20a%20double%20colon%20(:)%20and%20may%20not%20be%20an%20empty%20string.%20Given%20\"$issuer\".");
+                redirect("index.php?twofa_error=The%20server%20name%20may%20not%20contain%20a%20double%20colon%20(:)%20and%20may%20not%20be%20an%20empty%20string.%20Given%20\"$issuer\".%20Please%20correct%20\$ZBX_SERVER_NAME%20in%20zabbix.php.conf.");
                 exit;
             }
 
