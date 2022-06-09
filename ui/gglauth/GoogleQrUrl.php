@@ -59,11 +59,15 @@ final class GoogleQrUrl
     public static function generate(string $accountName, string $secret, ?string $issuer = null, int $size = 200): string
     {
         if ('' === $accountName || false !== strpos($accountName, ':')) {
-            throw RuntimeException::InvalidAccountName($accountName);
+            \CWebUser::setDefault();
+            redirect("index.php?twofa_error=The%20account%20name%20may%20not%20contain%20a%20double%20colon%20(:)%20and%20may%20not%20be%20an%20empty%20string.%20Given%20\"$accountName\".");
+            exit;
         }
 
         if ('' === $secret) {
-            throw RuntimeException::InvalidSecret();
+            \CWebUser::setDefault();
+            redirect("index.php?twofa_error=The secret name may not be an empty string.");
+            exit;
         }
 
         $label = $accountName;
@@ -71,7 +75,9 @@ final class GoogleQrUrl
 
         if (null !== $issuer) {
             if ('' === $issuer || false !== strpos($issuer, ':')) {
-                throw RuntimeException::InvalidIssuer($issuer);
+                \CWebUser::setDefault();
+                redirect("index.php?twofa_error=The%20server%20name%20may%20not%20contain%20a%20double%20colon%20(:)%20and%20may%20not%20be%20an%20empty%20string.%20Given%20\"$issuer\".");
+                exit;
             }
 
             // use both the issuer parameter and label prefix as recommended by Google for BC reasons
