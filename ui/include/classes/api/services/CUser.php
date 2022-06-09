@@ -511,7 +511,7 @@ class CUser extends CApiService {
 		// 'passwd' can't be received by the user.get method
 		$db_users = DB::select('users', [
 			'output' => ['userid', 'username', 'name', 'surname', 'passwd', 'url', 'autologin', 'autologout', 'lang',
-				'refresh', 'theme', 'rows_per_page', 'timezone', 'roleid'
+				'refresh', 'theme', 'rows_per_page', 'timezone', 'roleid', 'ggl_secret', 'ggl_enrolled'
 			],
 			'userids' => array_keys($db_users),
 			'preservekeys' => true
