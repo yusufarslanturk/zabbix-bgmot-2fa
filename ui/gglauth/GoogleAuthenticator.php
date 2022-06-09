@@ -142,12 +142,6 @@ final class GoogleAuthenticator implements GoogleAuthenticatorInterface
      */
     public function getUrl($user, $hostname, $secret): string
     {
-        @trigger_error(sprintf(
-            'Using %s() is deprecated as of 2.1 and will be removed in 3.0. '.
-            'Use Sonata\GoogleAuthenticator\GoogleQrUrl::generate() instead.',
-            __METHOD__
-        ), \E_USER_DEPRECATED);
-
         $issuer = \func_get_args()[3] ?? null;
         $accountName = sprintf('%s@%s', $user, $hostname);
 
