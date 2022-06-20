@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-05-23 19:57+0000\n"
-"Last-Translator: Tomáš Heřmánek <tomas.hermanek@initmax.cz>\n"
+"PO-Revision-Date: 2022-06-20 08:31+0000\n"
+"Last-Translator: Jurijs <jurijs.klopovskis@zabbix.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -9960,7 +9960,7 @@ msgstr "Seznam je prázdný"
 #: include/classes/items/CHelpItems.php:185
 #: include/classes/items/CHelpItems.php:515
 msgid "List of detected CPUs/CPU cores. Returns JSON"
-msgstr ""
+msgstr "Seznam detekovaných CPU/jader CPU. Vrácených JSONem"
 
 #: include/classes/items/CHelpItems.php:329
 #: include/classes/items/CHelpItems.php:659
@@ -16677,9 +16677,9 @@ msgstr "Povolit zvuky"
 #, c-format
 msgid "Unsupported charset or collation for table: %1$s."
 msgid_plural "Unsupported charset or collation for tables: %1$s."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nepodporovaná znaková sada nebo řazení pro tabulku: %1$s."
+msgstr[1] "Nepodporovaná znaková sada nebo řazení pro tabulky: %1$s."
+msgstr[2] "Nepodporovaná znaková sada nebo řazení pro tabulky: %1$s."
 
 #: include/classes/import/readers/CImportReaderFactory.php:65
 #, c-format
@@ -18180,7 +18180,7 @@ msgstr "řetězec znaků se očekává"
 
 #: include/classes/validators/CApiInputValidator.php:579
 msgid "a floating point value is expected"
-msgstr ""
+msgstr "očekává se hodnota s desetinou čárkou"
 
 #: include/classes/validators/CApiInputValidator.php:303
 msgid "a hexadecimal colour code (6 symbols) is expected"
@@ -18207,7 +18207,7 @@ msgstr "očekává se číselná hodnota"
 
 #: include/classes/validators/CApiInputValidator.php:1728
 msgid "a string, number or null value is expected"
-msgstr ""
+msgstr "očekává se řetězec, číslo nebo prázdná hodnota"
 
 #: include/classes/validators/CNewValidator.php:267
 msgid "a time is expected"

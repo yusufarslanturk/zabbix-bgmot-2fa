@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-05-23 09:06+0000\n"
+"PO-Revision-Date: 2022-04-01 14:12+0000\n"
 "Last-Translator: Hugo <hugopedrosantos@gmail.com>\n"
 "Language-Team: none\n"
 "Language: pt_PT\n"
@@ -1246,7 +1246,7 @@ msgstr "Configurações de autenticação actualizadas"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:228
 msgctxt "history source selection method"
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: include/views/configuration.action.list.php:34
 msgid "Auto registration"
@@ -1314,7 +1314,7 @@ msgstr "Média"
 
 #: include/classes/widgets/views/widget.svggraph.form.view.php:252
 msgid "Axes"
-msgstr ""
+msgstr "Eixos"
 
 #: include/classes/setup/CSetupWizard.php:124
 #: include/classes/setup/CSetupWizard.php:327
@@ -1342,7 +1342,7 @@ msgstr "Base DN"
 #: include/classes/widgets/CWidgetHelper.php:702
 #: include/classes/widgets/CWidgetHelper.php:974
 msgid "Base colour"
-msgstr ""
+msgstr "Cor primária"
 
 #: include/httptest.inc.php:28
 #: include/views/configuration.host.discovery.edit.php:288
@@ -1376,13 +1376,13 @@ msgstr "Azul"
 #: include/views/configuration.item.edit.php:295
 #: include/views/configuration.item.prototype.edit.php:283
 msgid "Body"
-msgstr ""
+msgstr "Corpo"
 
 #: include/views/configuration.host.discovery.edit.php:265
 #: include/views/configuration.item.edit.php:297
 #: include/views/configuration.item.prototype.edit.php:285
 msgid "Body and headers"
-msgstr ""
+msgstr "Corpo e cabeçalhos"
 
 #: include/graphs.inc.php:59 include/views/js/monitoring.sysmaps.js.php:700
 #: include/views/js/monitoring.sysmaps.js.php:788
@@ -1480,23 +1480,23 @@ msgstr "Calculado"
 
 #: include/classes/items/CHelpItems.php:705
 msgid "Calculates the average value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula o valor médio, com base nos vários parâmetros fornecidos. O servidor Zabbix recolhe informações agregadas fazendo consultas diretas na base de dados."
 
 #: include/classes/items/CHelpItems.php:713
 msgid "Calculates the maximum value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula o valor máximo, com base nos vários parâmetros fornecidos. O servidor Zabbix recolhe informações agregadas fazendo consultas diretas na base de dados."
 
 #: include/classes/items/CHelpItems.php:709
 msgid "Calculates the minimum value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula o valor minímo, com base nos vários parâmetros fornecidos. O servidor Zabbix recolhe informações agregadas fazendo consultas diretas na base de dados."
 
 #: include/classes/items/CHelpItems.php:717
 msgid "Calculates the sum of values, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula a soma dos valores, com base nos vários parâmetros fornecidos. O servidor Zabbix recolhe informações agregadas fazendo consultas diretas na base de dados."
 
 #: jsLoader.php:128
 msgid "Calendar"
-msgstr ""
+msgstr "Calendário"
 
 #: include/hosts.inc.php:60
 msgid "Callback"
@@ -1505,7 +1505,7 @@ msgstr "Callback"
 #: jsLoader.php:221
 msgctxt "screen reader"
 msgid "Can not be removed"
-msgstr ""
+msgstr "Não pode ser removido"
 
 #: app/views/administration.mediatype.edit.php:169
 msgid "Canada (136 characters)"
@@ -5725,7 +5725,6 @@ msgid "Event ID"
 msgstr "ID do evento"
 
 #: include/actions.inc.php:59
-#, fuzzy
 msgid "Event acknowledged"
 msgstr "Evento reconhecido"
 
