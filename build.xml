@@ -66,6 +66,17 @@
 		<replace file="frontends/php/tests/bootstrap.php" token="{PHPUNIT_DRIVER_ADDRESS}" value="${phpunit_driver_address}"/>
 	</target>
 
+	<target name="mariadb-patch-schema">
+		<!-- Fixing MariaDB error: "Row size too large (> 8126)" -->
+		<exec executable="sed" failonerror="on">
+			<arg line="-i"/>
+			<arg line="create/src/schema.tmpl"/>
+			<arg line="-r"/>
+			<arg line="-e"/>
+			<arg line="/^TABLE\|host_inventory/,+20{s/^(FIELD\t+\|(name|alias|os|os_short)\t+\|t_varchar\()64(\).*)$/\1128\3/g}"/>
+		</exec>
+	</target>
+
 	<target name="make-dbschema">
 		<!-- Create database schema -->
 		<exec executable="./bootstrap.sh" failonerror="on"/>
@@ -239,7 +250,7 @@
 
 	<target name="init-dast-postgresql" depends="create-frontend-configs,make-dbschema,create-db-postgresql"/>
 
-	<target name="make-binaries-mysql">
+	<target name="make-binaries-mysql" depends="mariadb-patch-schema">
 		<!-- Binaries for integration tests -->
 		<exec executable="./bootstrap.sh" failonerror="on"/>
 		<exec executable="./configure" failonerror="on">
@@ -330,7 +341,7 @@
 		</exec>
 	</target>
 
-	<target name="init-frontend-mysql" depends="create-configs,make-dbschema,make-gettext,create-db-mysql">
+	<target name="init-frontend-mysql" depends="create-configs,mariadb-patch-schema,make-dbschema,make-gettext,create-db-mysql">
 		<exec executable="mysql" input="frontends/php/tests/selenium/data/data_test.sql" failonerror="on">
 			<env key="MYSQL_PWD" value="${dbpassword}"/>
 			<arg line="--host=${dbhost}"/>
@@ -340,7 +351,7 @@
 		</exec>
 	</target>
 
-	<target name="init-api-mysql" depends="create-configs,make-dbschema,create-db-mysql">
+	<target name="init-api-mysql" depends="create-configs,mariadb-patch-schema,make-dbschema,create-db-mysql">
 		<exec executable="mysql" input="frontends/php/tests/api_json/data/data_test.sql" failonerror="on">
 			<env key="MYSQL_PWD" value="${dbpassword}"/>
 			<arg line="--host=${dbhost}"/>
@@ -360,7 +371,7 @@
 		</exec>
 	</target>
 
-	<target name="init-dast-mysql" depends="create-frontend-configs,make-dbschema,create-db-mysql"/>
+	<target name="init-dast-mysql" depends="create-frontend-configs,mariadb-patch-schema,make-dbschema,create-db-mysql"/>
 
 	<target name="test-phpunit" depends="init-common">
 		<exec executable="phpunit" dir="frontends/php/tests/unit" failonerror="off">
