@@ -704,7 +704,7 @@
 	jQuery(document).ready(function() {
 		addPopupValues(<?= zbx_jsvalue(array_values($this->data['drule']['dchecks'])) ?>);
 
-		jQuery("input:radio[name='uniqueness_criteria'][value=<?= zbx_jsvalue($this->data['drule']['uniqueness_criteria']) ?>]").attr('checked', 'checked');
+		jQuery("input:radio[name='uniqueness_criteria'][value="+jQuery.escapeSelector(<?= zbx_jsvalue($this->data['drule']['uniqueness_criteria']) ?>)+"]").attr('checked', 'checked');
 
 		jQuery('#newCheck').click(showNewCheckForm);
 		jQuery('#clone').click(function() {
