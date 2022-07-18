@@ -1,8 +1,8 @@
 Changes for 4.0.43rc1
 
-New features:
-
 Bug fixes:
+..F....... [ZBX-21306] fixed xss in discovery rules (rlataria)
+..F....... [ZBX-21305] fixed xss in graph (rlataria)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.42
