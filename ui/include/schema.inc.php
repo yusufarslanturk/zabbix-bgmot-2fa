@@ -130,6 +130,18 @@ return [
 				'length' => 20,
 				'ref_table' => 'role',
 				'ref_field' => 'roleid'
+			],
+			'ggl_secret' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_CHAR,
+				'length' => 100,
+				'default' => ''
+			],
+			'ggl_enrolled' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_INT,
+				'length' => 10,
+				'default' => '0'
 			]
 		]
 	],
@@ -1584,6 +1596,53 @@ return [
 			]
 		]
 	],
+	'adusrgrp' => [
+		'key' => 'adusrgrpid',
+		'fields' => [
+			'adusrgrpid' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_ID,
+				'length' => 20,
+			],
+			'name' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_CHAR,
+				'length' => 64,
+				'default' => '',
+			],
+			'roleid' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_ID,
+				'length' => 20,
+				'ref_table' => 'role',
+				'ref_field' => 'roleid'
+			]
+		]
+	],
+	'adgroups_groups' => [
+		'key' => 'id',
+		'fields' => [
+			'id' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_ID,
+				'length' => 20
+			],
+			'usrgrpid' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_ID,
+				'length' => 20,
+				'ref_table' => 'usrgrp',
+				'ref_field' => 'usrgrpid'
+			],
+			'adusrgrpid' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_ID,
+				'length' => 20,
+				'ref_table' => 'adusrgrp',
+				'ref_field' => 'adusrgrpid',
+			]
+		]
+	],
 	'scripts' => [
 		'key' => 'scriptid',
 		'fields' => [
@@ -2787,6 +2846,28 @@ return [
 				'default' => NULL,
 				'ref_table' => 'userdirectory',
 				'ref_field' => 'userdirectoryid'
+			],
+			'twofa_type' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_INT,
+				'length' => 10,
+				'default' => '0'
+			],
+			'twofa_duo_api_hostname' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_TEXT
+			],
+			'twofa_duo_integration_key' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_TEXT
+			],
+			'twofa_duo_secret_key' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_TEXT
+			],
+			'twofa_duo_a_key' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_TEXT
 			]
 		]
 	],

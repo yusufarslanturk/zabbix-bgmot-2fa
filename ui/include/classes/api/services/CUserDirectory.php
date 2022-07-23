@@ -413,9 +413,9 @@ class CUserDirectory extends CApiService {
 	 *
 	 * @throws APIException
 	 *
-	 * @return bool
+	 * @return false if fails. Array with AD info about user if succeeds.
 	 */
-	public function test(array $userdirectory): bool {
+	public function test(array $userdirectory) {
 		self::validateTest($userdirectory);
 
 		$user = [
@@ -424,14 +424,15 @@ class CUserDirectory extends CApiService {
 		];
 		$ldap_validator = new CLdapAuthValidator(['conf' => $userdirectory]);
 
-		if (!$ldap_validator->validate($user)) {
+		$user_info = $ldap_validator->validate($user);
+		if ($user_info == false) {
 			self::exception(
 				$ldap_validator->isConnectionError() ? ZBX_API_ERROR_PARAMETERS : ZBX_API_ERROR_PERMISSIONS,
 				$ldap_validator->getError()
 			);
 		}
 
-		return true;
+		return $user_info;
 	}
 
 	/**

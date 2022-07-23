@@ -85,6 +85,8 @@ class CAudit {
 	public const RESOURCE_SLA = 48;
 	public const RESOURCE_USERDIRECTORY = 49;
 	public const RESOURCE_TEMPLATE_GROUP = 50;
+	public const RESOURCE_AD_GROUP = 100;
+	public const RESOURCE_TWOFA = 101;
 
 
 	/**
@@ -139,7 +141,9 @@ class CAudit {
 		self::RESOURCE_TEMPLATE_GROUP => 'hstgrp',
 		self::RESOURCE_USER => 'users',
 		self::RESOURCE_USERDIRECTORY => 'userdirectory',
-		self::RESOURCE_USER_GROUP => 'usrgrp'
+		self::RESOURCE_USER_GROUP => 'usrgrp',
+		self::RESOURCE_AD_GROUP=> 'adusrgrp',
+		self::RESOURCE_TWOFA => 'config'
 	];
 
 	/**
@@ -189,7 +193,9 @@ class CAudit {
 		self::RESOURCE_TEMPLATE_GROUP => 'name',
 		self::RESOURCE_USER => 'username',
 		self::RESOURCE_USERDIRECTORY => 'name',
-		self::RESOURCE_USER_GROUP => 'name'
+		self::RESOURCE_USER_GROUP => 'name',
+		self::RESOURCE_AD_GROUP => 'name',
+		self::RESOURCE_TWOFA => null
 	];
 
 	/**
@@ -228,7 +234,9 @@ class CAudit {
 		self::RESOURCE_TEMPLATE_GROUP => 'templategroup',
 		self::RESOURCE_USER => 'user',
 		self::RESOURCE_USERDIRECTORY => 'userdirectory',
-		self::RESOURCE_USER_GROUP => 'usergroup'
+		self::RESOURCE_USER_GROUP => 'usergroup',
+		self::RESOURCE_AD_GROUP => 'adusergroup',
+		self::RESOURCE_TWOFA => 'twofa'
 	];
 
 	/**
@@ -258,7 +266,10 @@ class CAudit {
 			'conditions' => ['type' => ZBX_MACRO_TYPE_SECRET]
 		],
 		self::RESOURCE_USER => ['paths' => ['user.passwd']],
-		self::RESOURCE_USERDIRECTORY => ['paths' => ['userdirectory.bind_dn', 'userdirectory.bind_password']]
+		self::RESOURCE_USERDIRECTORY => ['paths' => ['userdirectory.bind_dn', 'userdirectory.bind_password']],
+		self::RESOURCE_TWOFA => [
+			'paths' => ['twofa.twofa_duo_integration_key', 'twofa.twofa_duo_secret_key']
+		]
 	];
 
 	/**
@@ -346,7 +357,11 @@ class CAudit {
 		'usergroup.hostgroup_rights' => 'rights',
 		'usergroup.templategroup_rights' => 'rights',
 		'usergroup.tag_filters' => 'tag_filter',
-		'usergroup.users' => 'users_groups'
+		'usergroup.users' => 'users_groups',
+		'adusergroup.rights' => 'rights',
+		'adusergroup.usrgrps' => 'adgroups_groups',
+		'adusergroup.rights' => 'rights',
+		'adusergroup.usrgrps' => 'adgroups_groups'
 	];
 
 	/**
@@ -423,7 +438,8 @@ class CAudit {
 		'usergroup.hostgroup_rights' => 'rightid',
 		'usergroup.templategroup_rights' => 'rightid',
 		'usergroup.tag_filters' => 'tag_filterid',
-		'usergroup.users' => 'id'
+		'usergroup.users' => 'id',
+		'adusergroup.usrgrps' => 'usrgrpid'
 	];
 
 	/**

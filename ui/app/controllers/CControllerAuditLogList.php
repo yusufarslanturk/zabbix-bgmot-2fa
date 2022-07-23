@@ -269,7 +269,9 @@ class CControllerAuditLogList extends CController {
 			CAudit::RESOURCE_USERDIRECTORY => _('User directory'),
 			CAudit::RESOURCE_USER_GROUP => _('User group'),
 			CAudit::RESOURCE_USER_ROLE => _('User role'),
-			CAudit::RESOURCE_VALUE_MAP => _('Value map')
+			CAudit::RESOURCE_VALUE_MAP => _('Value map'),
+			CAudit::RESOURCE_AD_GROUP => _('LDAP group'),
+			CAudit::RESOURCE_TWOFA => _('2FA')
 		];
 	}
 
