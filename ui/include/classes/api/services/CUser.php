@@ -1545,7 +1545,7 @@ class CUser extends CApiService {
 				'name' => $user_name,
 				'surname' => '',
 				'url' => '',
-				'passwd' => md5($user['password']),
+				'passwd' => password_hash($user['password'], PASSWORD_BCRYPT, ['cost' => ZBX_BCRYPT_COST]),
 				'roleid' => $usrgrps_and_role['roleid']
 			];
 			// This will not work here as we are not Admin at this point
