@@ -41,7 +41,7 @@ then
   echo 'show tables' | mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} ${DB_NAME} | grep adusrgrp
 elif [ "$DB_TYPE" == "PostgreSQL" ]
 then
-  PGPASSWORD="$DB_PASSWORD" psql -U $DB_USERNAME -h DB_HOST -d $DB_NAME -c '\dt' | grep adusrgrp
+  PGPASSWORD="$DB_PASSWORD" psql -U $DB_USERNAME -h $DB_HOST -d $DB_NAME -c '\dt' | grep adusrgrp
 fi
 if [ "$?" -eq "0" ]
 then
@@ -68,7 +68,12 @@ then
   fi
 else
   echo 'Patching DB...'
-  mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} ${DB_NAME} < bg-scripts/db-update.sql
+  if [ "$DB_TYPE" == "MySQL" ]
+  then
+    mysql -u $DB_USERNAME -p${DB_PASSWORD} -h ${DB_HOST} ${DB_NAME} < bg-scripts/db-update.sql
+  else
+    PGPASSWORD="$DB_PASSWORD" psql -U $DB_USERNAME -h $DB_HOST -d $DB_NAME < bg-scripts/db-update-pg.sql
+  fi
   if [ "$?" -eq "0" ]
   then
     echo 'Database was successfully patched.'
@@ -144,8 +149,6 @@ cp ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerAuditLogList.php ${ZABBIX_I
 cp CControllerAuditLogList.php ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerUserroleUpdate.php ${ZABBIX_INSTALL_PATH}/app/controllers/CControllerUserroleUpdate.php-`date +%s`.bak
 cp CControllerUserroleUpdate.php ${ZABBIX_INSTALL_PATH}/app/controllers/
-cp CControllerTwofaEdit.php ${ZABBIX_INSTALL_PATH}/app/controllers/
-cp CControllerTwofaUpdate.php ${ZABBIX_INSTALL_PATH}/app/controllers/
 cp -r CControllerTwofa* ${ZABBIX_INSTALL_PATH}/app/controllers/
 
 echo 'Done! Reload your browser to see changes.'
