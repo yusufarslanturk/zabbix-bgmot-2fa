@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-04-01 14:06+0000\n"
-"Last-Translator: Anonymous Pootle User\n"
+"PO-Revision-Date: 2022-07-23 08:30+0000\n"
+"Last-Translator: Brian <brian@oicts.nl>\n"
 "Language-Team: NL\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -17885,9 +17885,9 @@ msgid "You did not specify targets for action operation command \"%s\"."
 msgstr "Je hebt geen doel opgegeven voor het commando \"%s\"."
 
 #: include/classes/api/services/CAction.php:1933
-#, fuzzy, c-format
+#, c-format
 msgid "You did not specify targets for action operation global script \"%s\"."
-msgstr "Je hebt geen doel opgegeven voor het globale script \"%s\"."
+msgstr "Je hebt geen doel opgegeven voor de actie operatie in het globale script \"%s\"."
 
 #: include/classes/api/services/CCorrelation.php:474
 #: include/classes/api/services/CHost.php:732
@@ -19028,9 +19028,8 @@ msgstr ""
 #: include/views/configuration.services.parent.list.php:45
 #: include/views/configuration.services.parent.list.php:47
 #: include/views/configuration.services.parent.list.php:48 jsLoader.php:279
-#, fuzzy
 msgid "root"
-msgstr "wortel"
+msgstr "root"
 
 #: include/classes/api/services/CItemGeneral.php:1711
 msgid "ruleid of dependent item and master item should match"
