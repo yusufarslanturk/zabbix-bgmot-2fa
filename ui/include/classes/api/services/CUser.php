@@ -1489,9 +1489,7 @@ class CUser extends CApiService {
 			}
 
 			// LDAP authenticate user to map its AD group to User Group(s)
-			$id = $db_user['userdirectoryid'] != 0
-				? $db_user['userdirectoryid']
-				: CAuthenticationHelper::get(CAuthenticationHelper::LDAP_USERDIRECTORYID);
+			$id = CAuthenticationHelper::get(CAuthenticationHelper::LDAP_USERDIRECTORYID);
 			$userdirectory = [];
 
 			if ($id != 0) {
