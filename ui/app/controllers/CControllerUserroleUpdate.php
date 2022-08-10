@@ -63,7 +63,7 @@ class CControllerUserroleUpdate extends CControllerUserroleEditGeneral {
 			'ui_administration_authentication' => 		'in 0,1',
 			'ui_administration_twofa' =>				'in 0,1',
 			'ui_administration_user_groups' => 			'in 0,1',
-+			'ui_administration_ldap_groups' =>			'in 0,1',
+			'ui_administration_ldap_groups' =>			'in 0,1',
 			'ui_administration_user_roles' => 			'in 0,1',
 			'ui_administration_users' => 				'in 0,1',
 			'ui_administration_media_types' => 			'in 0,1',
