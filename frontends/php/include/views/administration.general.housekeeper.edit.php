@@ -158,7 +158,7 @@ $houseKeeperView = (new CTabView())
 	));
 
 $widget->addItem((new CForm())
-	->setAttribute('aria-labeledby', ZBX_STYLE_PAGE_TITLE)
+	->setAttribute('aria-labelledby', ZBX_STYLE_PAGE_TITLE)
 	->addItem($houseKeeperView)
 );
 

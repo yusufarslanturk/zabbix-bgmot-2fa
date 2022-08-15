@@ -68,7 +68,7 @@ $guiView = (new CTabView())
 	->setFooter(makeFormFooter(new CSubmit('update', _('Update'))));
 
 $guiForm = (new CForm())
-	->setAttribute('aria-labeledby', ZBX_STYLE_PAGE_TITLE)
+	->setAttribute('aria-labelledby', ZBX_STYLE_PAGE_TITLE)
 	->addItem($guiView);
 
 $widget->addItem($guiForm);
