@@ -34,7 +34,7 @@ $widget = (new CWidget())
 	);
 
 $form = (new CForm())
-	->setAttribute('aria-labeledby', ZBX_STYLE_PAGE_TITLE)
+	->setAttribute('aria-labelledby', ZBX_STYLE_PAGE_TITLE)
 	->addVar('form', $data['form']);
 
 if ($data['valuemapid'] != 0) {

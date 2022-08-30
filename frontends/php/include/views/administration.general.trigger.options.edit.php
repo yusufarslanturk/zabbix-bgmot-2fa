@@ -93,7 +93,7 @@ $triggerDOFormList = (new CFormList())
 	]);
 
 $severityForm = (new CForm())
-	->setAttribute('aria-labeledby', ZBX_STYLE_PAGE_TITLE)
+	->setAttribute('aria-labelledby', ZBX_STYLE_PAGE_TITLE)
 	->addItem(
 		(new CTabView())
 			->addTab('triggerdo', _('Trigger displaying options'), $triggerDOFormList)
