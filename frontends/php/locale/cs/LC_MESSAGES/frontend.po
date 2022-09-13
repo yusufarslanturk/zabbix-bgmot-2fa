@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-06-30 22:10+0000\n"
+"PO-Revision-Date: 2022-08-08 14:06+0000\n"
 "Last-Translator: Tomáš Heřmánek <tomas.hermanek@initmax.cz>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: cs\n"
@@ -2352,7 +2352,7 @@ msgstr "Nelze najít rozhraní \"%1$s\" použité pro položku \"%2$s\" na \"%3$
 #: include/classes/import/CConfigurationImport.php:1073
 #, c-format
 msgid "Cannot find interface \"%1$s\" used for item prototype \"%2$s\" of discovery rule \"%3$s\" on \"%4$s\"."
-msgstr ""
+msgstr "Nelze najít rozhraní „%1$s“ použité pro prototyp položky „%2$s“ pravidla zjišťování „%3$s“ na „%4$s“."
 
 #: include/classes/import/CConfigurationImport.php:1564
 #, c-format
@@ -5027,31 +5027,31 @@ msgstr "Objekt objevování"
 
 #: include/classes/items/CHelpItems.php:751
 msgid "Discovery of VMware clusters, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "Zjištění clusterů VMware, <url> – URL služby VMware. Vrátí JSON"
 
 #: include/classes/items/CHelpItems.php:759
 msgid "Discovery of VMware datastores, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "Zjištění datových úložišť VMware, <url> – URL služby VMware. Vrátí JSON"
 
 #: include/classes/items/CHelpItems.php:803
 msgid "Discovery of VMware hypervisor datastores, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns JSON"
-msgstr ""
+msgstr "Zjištění datových úložišť hypervisoru VMware, <url> - URL služby VMware, <uuid> - název hostitele hypervisoru VMware. Vrátí JSON"
 
 #: include/classes/items/CHelpItems.php:823
 msgid "Discovery of VMware hypervisors, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "Zjištění hypervizorů VMware, <url> – URL služby VMware. Vrátí JSON"
 
 #: include/classes/items/CHelpItems.php:1003
 msgid "Discovery of VMware virtual machine disk devices, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns JSON"
-msgstr ""
+msgstr "Zjištění diskových zařízení virtuálního stroje VMware, <url> - URL služby VMware, <uuid> - název hostitele virtuálního stroje VMware. Vrátí JSON"
 
 #: include/classes/items/CHelpItems.php:1015
 msgid "Discovery of VMware virtual machine file systems, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns JSON"
-msgstr ""
+msgstr "Zjištění systémů souborů virtuálního stroje VMware, <url> - URL služby VMware, <uuid> - název hostitele virtuálního stroje VMware. Vrátí JSON"
 
 #: include/classes/items/CHelpItems.php:927
 msgid "Discovery of VMware virtual machines, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "Zjištění virtuálních strojů VMware, <url> – URL služby VMware. Vrátí JSON"
 
 #: app/views/monitoring.discovery.view.php:42
 #: app/views/monitoring.widget.discovery.view.php:28 include/actions.inc.php:50
@@ -8031,7 +8031,7 @@ msgstr "Nesprávné údaje."
 #: include/classes/db/PostgresqlDbBackend.php:78
 #, c-format
 msgid "Incorrect default charset for Zabbix database: %1$s."
-msgstr ""
+msgstr "Nesprávná výchozí znaková sada pro databázi Zabbix: %1$s."
 
 #: include/classes/api/services/CEvent.php:594
 #: include/classes/api/services/CProblem.php:393
@@ -8272,7 +8272,7 @@ msgstr "Neplatná hodnota objektu."
 #: include/classes/db/OracleDbBackend.php:88
 #, c-format
 msgid "Incorrect parameter \"%1$s\" value: %2$s."
-msgstr ""
+msgstr "Nesprávný parametr „%1$s“ hodnota: %2$s."
 
 #: include/classes/api/services/CAction.php:2824
 #, c-format
@@ -8482,7 +8482,7 @@ msgstr "Neplatná skupina uživatelů."
 #: include/classes/api/services/CUser.php:1558
 #: include/classes/validators/CLdapAuthValidator.php:88 index_http.php:84
 msgid "Incorrect user name or password or account is temporarily blocked."
-msgstr ""
+msgstr "Nesprávné uživatelské jméno nebo heslo nebo účet je dočasně zablokován."
 
 #: app/controllers/CControllerPopupGeneric.php:390
 #: include/classes/api/services/CAction.php:823
@@ -9570,7 +9570,7 @@ msgstr "JSON řetězec je očekáván"
 #: include/classes/core/CJsonRpc.php:153
 #, c-format
 msgid "JSON-RPC error generation failed. No such error \"%1$s\"."
-msgstr ""
+msgstr "Generování chyby JSON-RPC se nezdařilo. Chyba „%1$s“ nenalezena."
 
 #: app/views/administration.mediatype.edit.php:54 include/media.inc.php:27
 msgid "Jabber"
@@ -9965,12 +9965,12 @@ msgstr "Seznam detekovaných CPU/jader CPU. Vrácených JSONem"
 #: include/classes/items/CHelpItems.php:329
 #: include/classes/items/CHelpItems.php:659
 msgid "List of mounted filesystems, their types, disk space and inode statistics. Returns JSON"
-msgstr ""
+msgstr "Seznam připojených souborových systémů, jejich typů, místa na disku a statistiky inodů. Vrátí JSON"
 
 #: include/classes/items/CHelpItems.php:325
 #: include/classes/items/CHelpItems.php:655
 msgid "List of mounted filesystems. Returns JSON"
-msgstr ""
+msgstr "Seznam připojených souborových systémů. Vrátí JSON"
 
 #: include/classes/items/CHelpItems.php:97
 #: include/classes/items/CHelpItems.php:427
@@ -15121,7 +15121,7 @@ msgstr "Statický"
 
 #: include/classes/items/CHelpItems.php:1159
 msgid "Statistics and availability of Zabbix write cache. Cache - one of values (modes: all, float, uint, str, log, text, not supported), history (modes: pfree, free, total, used, pused), index (modes: pfree, free, total, used, pused), trend (modes: pfree, free, total, used, pused)."
-msgstr ""
+msgstr "Statistiky a dostupnost mezipaměti pro zápis Zabbix. Cache - jedna z hodnot (typu: all, float, uint, str, log, text, nepodporováno), historie (typ: pfree, free, total, used, pussed), index (typ: pfree, free, total, used , pussed), trend (typ: pfree, free, total, used, pussed)."
 
 #: app/controllers/CControllerPopupGeneric.php:145
 #: app/controllers/CControllerPopupGeneric.php:159
@@ -15550,7 +15550,7 @@ msgstr "Šablona přidána"
 
 #: include/views/conf.import.php:97
 msgid "Template and host properties that are inherited through template linkage will be unlinked and cleared."
-msgstr ""
+msgstr "Vlastnosti šablony a hostitele, které jsou zděděny propojením šablon, budou odpojeny a vymazány."
 
 #: include/classes/api/services/CHostBase.php:285
 msgid "Template cannot be linked to another template more than once even through other templates."
@@ -15707,7 +15707,7 @@ msgstr "Souřadnice Y prvku obrazovky umístěného na X - %1$s a Y - %2$s obraz
 #: include/classes/db/DbBackend.php:51
 #, c-format
 msgid "The Zabbix database version does not match current requirements. Your database version: %1$s. Required version: %2$s. Please contact your system administrator."
-msgstr ""
+msgstr "Verze databáze Zabbix neodpovídá aktuálním požadavkům. Verze vaší databáze: %1$s. Požadovaná verze: %2$s. Kontaktujte svého správce systému."
 
 #: include/html.inc.php:687
 #, c-format
@@ -16487,7 +16487,7 @@ msgstr "Ukrajinsky (uk_UA)"
 
 #: include/classes/core/CConfigFile.php:158
 msgid "Unable to change configuration file permissions to 0600."
-msgstr ""
+msgstr "Nelze změnit oprávnění konfiguračního souboru na 0600."
 
 #: include/classes/core/CConfigFile.php:167
 msgid "Unable to create the configuration file."
@@ -17151,7 +17151,7 @@ msgstr "VMware stav klastru, <url> - URL VMware služby, <name> - VMware jméno 
 
 #: include/classes/items/CHelpItems.php:779
 msgid "VMware datacenters and their IDs. Returns JSON"
-msgstr ""
+msgstr "Datová centra VMware a jejich ID. Vrátí JSON"
 
 #: include/classes/items/CHelpItems.php:771
 #: include/classes/items/CHelpItems.php:815
@@ -17160,15 +17160,15 @@ msgstr "VMware statistika datového úložiště kapacity v bytech nebo v procen
 
 #: include/classes/items/CHelpItems.php:763
 msgid "VMware datastore hypervisors list, <url> - VMware service URL, <datastore> - datastore name"
-msgstr ""
+msgstr "Seznam hypervizorů datového úložiště VMware, <url> – URL služby VMware, <úložiště dat> – název datového úložiště"
 
 #: include/classes/items/CHelpItems.php:767
 msgid "VMware datastore read statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
-msgstr ""
+msgstr "Statistiky čtení datového úložiště VMware, <url> – adresa URL služby VMware, <datastore> – název datového úložiště, <mode> – latence/maxlatence – průměrná nebo maximální"
 
 #: include/classes/items/CHelpItems.php:775
 msgid "VMware datastore write statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
-msgstr ""
+msgstr "Statistika zápisu datového úložiště VMware, <url> – adresa URL služby VMware, <datastore> – název datového úložiště, <mode> – latence/maxlatence – průměrná nebo maximální"
 
 #: include/classes/items/CHelpItems.php:783
 msgid "VMware event log, <url> - VMware service URL, <mode> - all (default), skip - skip processing of older data"
@@ -17188,7 +17188,7 @@ msgstr "VMware klastr jméno, <url> - URL VMware služby, <uuid> - VMware jméno
 
 #: include/classes/items/CHelpItems.php:799
 msgid "VMware hypervisor datacenter name, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns string"
-msgstr ""
+msgstr "Název datového centra hypervisoru VMware, <url> – URL služby VMware, <uuid> – název hostitele hypervizoru VMware. Vrátí řetězec"
 
 #: include/classes/items/CHelpItems.php:811
 msgid "VMware hypervisor datastore read statistics, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <datastore> - datastore name, <mode> - latency"
@@ -17200,11 +17200,11 @@ msgstr "VMware statistika zápisů datastore, <url> - URL VMware služby, <uuid>
 
 #: include/classes/items/CHelpItems.php:807
 msgid "VMware hypervisor datastores list, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr ""
+msgstr "Seznam datových úložišť hypervisoru VMware, <url> – URL služby VMware, <uuid> – název hostitele hypervisoru VMware"
 
 #: include/classes/items/CHelpItems.php:883
 msgid "VMware hypervisor health state rollup sensor, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns 0 - gray; 1 - green; 2 - yellow; 3 - red"
-msgstr ""
+msgstr "Senzor rollupu stavu hypervizoru VMware, <url> – URL služby VMware, <uuid> – název hostitele hypervizoru VMware. Vrací 0 - šedá; 1 - zelená; 2 - žlutá; 3 - červená"
 
 #: include/classes/items/CHelpItems.php:851
 msgid "VMware hypervisor model, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -17284,7 +17284,7 @@ msgstr "VMware velikost komprimované paměti virtuálního stroje, <url> - URL 
 
 #: include/classes/items/CHelpItems.php:923
 msgid "VMware virtual machine datacenter name, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns string"
-msgstr ""
+msgstr "Název datového centra virtuálního stroje VMware, <url> – URL služby VMware, <uuid> – název hostitele virtuálního stroje VMware. Vrátí řetězec"
 
 #: include/classes/items/CHelpItems.php:1007
 msgid "VMware virtual machine disk device read statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance, <mode> - bps/ops - bytes/operations per second"
@@ -17489,7 +17489,7 @@ msgstr "Mapování hodnot pro mapu hodnot bude aktualizované!"
 #: include/classes/items/CHelpItems.php:149
 #: include/classes/items/CHelpItems.php:479
 msgid "Value of any Windows performance counter in English. Returns integer, float, string or text (depending on the request)"
-msgstr ""
+msgstr "Hodnota libovolného čítače výkonu systému Windows v angličtině. Vrátí integer, float, string nebo text (v závislosti na požadavku)"
 
 #: include/classes/items/CHelpItems.php:145
 #: include/classes/items/CHelpItems.php:475
@@ -18697,7 +18697,7 @@ msgstr "nesprávný spouštěcí výraz"
 #: include/classes/parsers/CTriggerExpression.php:471
 #, c-format
 msgid "incorrect trigger expression starting from \"%1$s\""
-msgstr ""
+msgstr "nesprávný spouštěcí výraz začínající od „%1$s“"
 
 #: include/events.inc.php:37
 msgctxt "event source"
@@ -19302,7 +19302,7 @@ msgstr "spouštěč neumožňuje manuální zavírání"
 
 #: include/classes/validators/CApiInputValidator.php:1685
 msgid "trigger expression must contain at least one host:key reference"
-msgstr ""
+msgstr "spouštěcí výraz musí obsahovat alespoň jeden odkaz hostitel:klíč"
 
 #: include/classes/api/services/CTriggerGeneral.php:1602
 msgid "trigger prototype cannot be moved to another template or host"
