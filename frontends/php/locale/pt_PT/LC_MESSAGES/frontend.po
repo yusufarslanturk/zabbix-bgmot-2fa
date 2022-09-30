@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-04-01 14:12+0000\n"
+"PO-Revision-Date: 2022-09-29 12:57+0000\n"
 "Last-Translator: Hugo <hugopedrosantos@gmail.com>\n"
 "Language-Team: none\n"
 "Language: pt_PT\n"
@@ -1109,7 +1109,7 @@ msgstr "Às (horas:minutos)"
 #: include/classes/api/services/CMaintenance.php:702
 #: include/views/configuration.maintenance.edit.php:233
 msgid "At least one host group or host must be selected."
-msgstr ""
+msgstr "Deve ser selecionado, pelo menos um host ou grupo de hosts."
 
 #: include/views/configuration.host.edit.php:101
 msgid "At least one interface must exist."
