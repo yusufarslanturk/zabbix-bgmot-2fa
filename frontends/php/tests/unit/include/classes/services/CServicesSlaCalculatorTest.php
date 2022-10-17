@@ -108,8 +108,8 @@ class CServicesSlaCalculatorTest extends TestCase {
 					'problemTime' => 3600,
 					'okTime' => 2552400,
 					'downtimeTime' => 32400,
-					'problem' => 0.14084507042254,
-					'ok' => 99.859154929577
+					'problem' => 0.14084507042253522,
+					'ok' => 99.85915492957747
 				]
 			],
 			[
