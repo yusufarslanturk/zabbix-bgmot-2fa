@@ -258,4 +258,13 @@ class CWebUser {
 	public static function getLang() {
 		return (self::$data) ? substr(self::$data['lang'], 0, strpos(self::$data['lang'], '_')) : 'en';
 	}
+
+	/**
+	 * Get user IP address.
+	 *
+	 * @return string
+	 */
+	public static function getIp() {
+		return $_SERVER['REMOTE_ADDR'];
+	}
 }
