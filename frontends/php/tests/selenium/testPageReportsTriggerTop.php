@@ -152,7 +152,7 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 						]
 					],
 					'date' => [
-						'from' => '2020-10-22 00:00'
+						'from' => '2022-10-22 00:00'
 					],
 					'result' => [
 						'Test trigger to check tag filter on problem page'
@@ -168,15 +168,15 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 						]
 					],
 					'date' => [
-						'from' => '2020-10-22 00:00'
+						'from' => '2022-10-22 00:00'
 					]
 				]
 			],
 			[
 				[
 					'date' => [
-						'from' => '2020-10-23 15:33',
-						'to' => '2020-10-23 15:36'
+						'from' => '2022-10-23 15:33',
+						'to' => '2022-10-23 15:36'
 					],
 					'result' => [
 						'Test trigger to check tag filter on problem page',
