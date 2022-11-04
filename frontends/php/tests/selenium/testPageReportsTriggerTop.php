@@ -134,8 +134,8 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 			[
 				[
 					'date' => [
-						'from' => '2022-10-23 15:35',
-						'to' => '2022-10-23 15:36'
+						'from' => '2022-10-23 18:33',
+						'to' => '2022-10-23 18:36'
 					],
 					'result' => [
 						'Trigger for tag permissions MySQL'
@@ -176,7 +176,7 @@ class testPageReportsTriggerTop extends CLegacyWebTest {
 				[
 					'date' => [
 						'from' => '2022-10-23 15:33',
-						'to' => '2022-10-23 15:36'
+						'to' => '2022-10-23 18:36'
 					],
 					'result' => [
 						'Test trigger to check tag filter on problem page',
