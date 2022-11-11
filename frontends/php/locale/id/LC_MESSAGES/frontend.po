@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-11-03 20:34+0000\n"
+"PO-Revision-Date: 2022-11-07 20:34+0000\n"
 "Last-Translator: Muhammad Y Efendi <myusufe@gmail.com>\n"
 "Language-Team: none\n"
 "Language: id\n"
@@ -96,28 +96,28 @@ msgstr ""
 msgctxt "screen reader"
 msgid "%1$s action"
 msgid_plural "%1$s actions"
-msgstr[0] ""
+msgstr[0] "%1$s aksi"
 
 #: app/views/monitoring.acknowledge.edit.php:51
 #: app/views/monitoring.acknowledge.edit.php:56
 #, c-format
 msgid "%1$s event"
 msgid_plural "%1$s events"
-msgstr[0] ""
+msgstr[0] "%1$s event"
 
 #: app/controllers/CControllerWidgetPlainTextView.php:119
 #: include/views/monitoring.history.php:27
 #, c-format
 msgid "%1$s item"
 msgid_plural "%1$s items"
-msgstr[0] ""
+msgstr[0] "%1$s item"
 
 #: include/actions.inc.php:1799
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s message"
 msgid_plural "%1$s messages"
-msgstr[0] ""
+msgstr[0] "%1$s pesan"
 
 #: include/classes/widgets/CWidgetConfig.php:155
 #: include/classes/widgets/CWidgetConfig.php:156
@@ -127,13 +127,13 @@ msgstr[0] ""
 #, c-format
 msgid "%1$s minute"
 msgid_plural "%1$s minutes"
-msgstr[0] ""
+msgstr[0] "%1$s menit"
 
 #: include/classes/helpers/CMapHelper.php:243
 #, c-format
 msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
-msgstr[0] ""
+msgstr[0] "%1$s dari %2$s elemen dalam masalah"
 
 #: jsLoader.php:226
 #, c-format
@@ -145,13 +145,13 @@ msgstr ""
 #, c-format
 msgid "%1$s problem"
 msgid_plural "%1$s problems"
-msgstr[0] ""
+msgstr[0] "%1$s masalah"
 
 #: include/classes/helpers/CMapHelper.php:246
 #, c-format
 msgid "%1$s problem in total"
 msgid_plural "%1$s problems in total"
-msgstr[0] ""
+msgstr[0] "%1$s total masalah"
 
 #: app/views/monitoring.widget.actionlog.view.php:41
 #: include/actions.inc.php:2234 include/classes/screens/CScreenActions.php:129
@@ -159,7 +159,7 @@ msgstr[0] ""
 #, c-format
 msgid "%1$s retry left"
 msgid_plural "%1$s retries left"
-msgstr[0] ""
+msgstr[0] "mencoba %1$s kali lagi "
 
 #: include/classes/widgets/CWidgetConfig.php:153
 #: include/classes/widgets/CWidgetConfig.php:154 jsLoader.php:264
@@ -167,32 +167,32 @@ msgstr[0] ""
 #, c-format
 msgid "%1$s second"
 msgid_plural "%1$s seconds"
-msgstr[0] ""
+msgstr[0] "%1$s detik"
 
 #: app/views/monitoring.widget.problems.view.php:236
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s widget"
-msgstr ""
+msgstr "%1$s widget"
 
 #: app/views/monitoring.widget.problemhosts.view.php:98
 #: app/views/monitoring.widget.problems.view.php:158
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, Severity, %2$s"
-msgstr ""
+msgstr "%1$s, Severiti, %2$s"
 
 #: jsLoader.php:220
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, read only"
-msgstr ""
+msgstr "%1$s, baca saja"
 
 #: jsLoader.php:270
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, selected"
-msgstr ""
+msgstr "%1$s, terpilih"
 
 #: app/views/layout.htmlpage.php:106 include/page_header.php:263
 #, c-format
@@ -210,11 +210,11 @@ msgstr[0] "%d perangkat"
 #, c-format
 msgctxt "user fullname"
 msgid "(%1$s %2$s)"
-msgstr ""
+msgstr "(%1$s %2$s)"
 
 #: include/views/configuration.action.edit.php:601
 msgid "(0 - infinitely)"
-msgstr ""
+msgstr "(0 - tak-terhingga)"
 
 #: include/views/configuration.action.edit.php:608
 msgid "(0 - use action default)"
@@ -222,7 +222,7 @@ msgstr ""
 
 #: include/views/configuration.hostgroups.list.php:30
 msgid "(Only super admins can create groups)"
-msgstr ""
+msgstr "(Hanya super admin bisa membuat group)"
 
 #: include/views/configuration.host.edit.php:270
 #: include/views/configuration.host.edit.php:274
@@ -233,7 +233,7 @@ msgstr "(tanpa proxy)"
 
 #: include/classes/setup/CSetupWizard.php:231
 msgid "0 - use default port"
-msgstr ""
+msgstr "0 - memakai port default"
 
 #: include/triggers.inc.php:1889
 msgid "0 or 1"
@@ -249,7 +249,7 @@ msgstr "10 detik"
 
 #: include/views/reports.toptriggers.php:112 toptriggers.php:25
 msgid "100 busiest triggers"
-msgstr ""
+msgstr "100 trigger tersibuk"
 
 #: queue.php:112 queue.php:173
 msgid "30 seconds"
@@ -277,11 +277,11 @@ msgstr "<petunjuk>"
 
 #: app/views/administration.script.edit.php:39
 msgid "<sub-menu/sub-menu/...>script"
-msgstr ""
+msgstr "<sub-menu/sub-menu/...>script"
 
 #: include/classes/widgets/CWidgetHelper.php:700
 msgid "ADD OVERRIDE"
-msgstr ""
+msgstr "Menambahkan override"
 
 #: include/views/configuration.host.discovery.edit.php:445
 #: include/views/configuration.item.edit.php:572
@@ -290,7 +290,7 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:526
 #: include/views/js/configuration.discovery.edit.js.php:111
 msgid "AES"
-msgstr ""
+msgstr "AES"
 
 #: app/views/popup.triggerwizard.php:95
 msgid "AND"
@@ -304,7 +304,7 @@ msgstr "SLA yang dapat diterima"
 
 #: include/func.inc.php:1825
 msgid "Access denied"
-msgstr ""
+msgstr "Tidak ada akses"
 
 #: sysmap.php:78
 msgid "Access denied!"
@@ -338,7 +338,7 @@ msgstr "Pemberitahuan event MASALAH"
 #: adm.triggerdisplayoptions.php:42
 #: include/views/administration.general.trigger.options.edit.php:71
 msgid "Acknowledged RESOLVED events"
-msgstr ""
+msgstr "event TERSELESAIKAN yang diakui"
 
 #: app/views/administration.mediatype.edit.php:103
 #: app/views/dashboard.sharing.edit.php:24
@@ -419,13 +419,13 @@ msgstr "Tindakan"
 #: include/classes/api/services/CAction.php:3057
 #, c-format
 msgid "Action \"%1$s\" already exists."
-msgstr ""
+msgstr "Aksi \"%1$s\" sudah tersedia"
 
 #: include/classes/api/services/CAction.php:2900
 #: include/classes/api/services/CAction.php:3101
 #, c-format
 msgid "Action \"%1$s\" no operations defined."
-msgstr ""
+msgstr "Aksi \"%1$s\" tidak terdefinisi di operasi"
 
 #: actionconf.php:232
 msgid "Action added"
@@ -433,7 +433,7 @@ msgstr "Aksi ditambahkan"
 
 #: include/classes/validators/CActionCondValidator.php:160
 msgid "Action condition value must be empty."
-msgstr ""
+msgstr "Nilai kondisi aksi harus kosong."
 
 #: actionconf.php:254
 msgid "Action deleted"
@@ -442,7 +442,7 @@ msgstr "Aksi dihapus"
 #: actionconf.php:500
 msgid "Action disabled"
 msgid_plural "Actions disabled"
-msgstr[0] ""
+msgstr[0] "Aksi dinonaktifkan"
 
 #: actionconf.php:499
 msgid "Action enabled"
