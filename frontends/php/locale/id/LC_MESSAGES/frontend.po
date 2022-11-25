@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-11-07 20:34+0000\n"
+"PO-Revision-Date: 2022-11-15 18:15+0000\n"
 "Last-Translator: Muhammad Y Efendi <myusufe@gmail.com>\n"
 "Language-Team: none\n"
 "Language: id\n"
@@ -53,7 +53,7 @@ msgstr "\"host:key\" nilai adalah yang diharapkan"
 #: include/classes/api/services/CDRule.php:520
 #, c-format
 msgid "%1$d characters exceeds maximum length of %2$d characters"
-msgstr ""
+msgstr "%1$d karakter melebihi panjang maksimum %2$d karakter"
 
 #: include/func.inc.php:510
 #, c-format
@@ -65,14 +65,14 @@ msgstr[0] "%1$d hari"
 #, c-format
 msgctxt "screen reader"
 msgid "%1$d matches for %2$s found"
-msgstr ""
+msgstr "%1$d cocok untuk %2$s ditemukan"
 
 #: app/controllers/CControllerWidgetProblemsView.php:56
 #: include/classes/screens/CScreenHostTriggers.php:199
 #, c-format
 msgid "%1$d of %3$d%2$s problem is shown"
 msgid_plural "%1$d of %3$d%2$s problems are shown"
-msgstr[0] ""
+msgstr[0] "%1$d dari %3$d%2$s masalah ditampilkan"
 
 #: chart4.php:94 chart5.php:89
 #, c-format
@@ -89,7 +89,7 @@ msgstr[0] "%1$s Buah"
 #: include/classes/import/readers/CXmlImportReader.php:46
 #, c-format
 msgid "%1$s [Line: %2$s | Column: %3$s]"
-msgstr ""
+msgstr "%1$s [Baris: %2$s | Kolom: %3$s]"
 
 #: include/actions.inc.php:1962
 #, c-format
@@ -139,7 +139,7 @@ msgstr[0] "%1$s dari %2$s elemen dalam masalah"
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s preselected, use down,up arrow keys and enter to select"
-msgstr ""
+msgstr "%1$s telah dipilih sebelumnya, gunakan tombol panah bawah, atas dan enter untuk memilih"
 
 #: include/maps.inc.php:1095
 #, c-format
@@ -218,7 +218,7 @@ msgstr "(0 - tak-terhingga)"
 
 #: include/views/configuration.action.edit.php:608
 msgid "(0 - use action default)"
-msgstr ""
+msgstr "(0 - gunakan tindakan default)"
 
 #: include/views/configuration.hostgroups.list.php:30
 msgid "(Only super admins can create groups)"
@@ -447,14 +447,14 @@ msgstr[0] "Aksi dinonaktifkan"
 #: actionconf.php:499
 msgid "Action enabled"
 msgid_plural "Actions enabled"
-msgstr[0] ""
+msgstr[0] "Aksi diaktifkan"
 
 #: auditacts.php:27 include/classes/screens/CScreenActions.php:168
 #: include/classes/widgets/CWidgetConfig.php:33 include/menu.inc.php:164
 #: include/screens.inc.php:31
 #: include/views/administration.auditacts.list.php:21
 msgid "Action log"
-msgstr ""
+msgstr "Aksi log"
 
 #: actionconf.php:224
 msgid "Action updated"
@@ -647,11 +647,11 @@ msgstr "Tambah"
 
 #: jsLoader.php:105
 msgid "Add a new widget"
-msgstr ""
+msgstr "Tambahkan widget baru"
 
 #: include/services.inc.php:75 include/services.inc.php:114
 msgid "Add child"
-msgstr ""
+msgstr "Tambahkan child"
 
 #: jsLoader.php:284
 msgid "Add child element"
