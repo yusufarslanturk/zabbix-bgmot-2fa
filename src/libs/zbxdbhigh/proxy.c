@@ -1921,6 +1921,19 @@ static int	process_proxyconfig_table(const ZBX_TABLE *table, struct zbx_json_par
 			goto clean;
 	}
 
+	if (0 != ins.values_num && 0 == strcmp("hstgrp", table->table))
+	{
+		/* Host groups are not used by proxy and the discovery group record is sent  */
+		/* only because of config table foreign key. To keep compatibility between   */
+		/* minor versions and comply with hstgrp unique index (name, type) force the */
+		/* group name to groupid.                                                    */
+		if (ZBX_DB_OK > DBexecute("update hstgrp set name='"  ZBX_FS_UI64 "' where groupid=" ZBX_FS_UI64,
+				ins.values[0], ins.values[0]))
+		{
+			goto clean;
+		}
+	}
+
 	/* delete operations are performed by the caller using the returned del vector */
 
 	if (0 != availability_interfaceids.values_num)
@@ -3525,7 +3538,7 @@ static int	process_history_data_by_itemids(zbx_socket_t *sock, zbx_client_item_v
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
 
-	items = (DC_ITEM *)zbx_malloc(NULL, sizeof(DC_ITEM) * ZBX_HISTORY_VALUES_MAX);
+	items = (DC_ITEM *)zbx_calloc(NULL, 1, sizeof(DC_ITEM) * ZBX_HISTORY_VALUES_MAX);
 	errcodes = (int *)zbx_malloc(NULL, sizeof(int) * ZBX_HISTORY_VALUES_MAX);
 
 	sec = zbx_time();
