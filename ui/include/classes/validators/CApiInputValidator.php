@@ -2194,6 +2194,11 @@ class CApiInputValidator {
 					$_uniq = &$uniq;
 					$values = [];
 					$level = 1;
+					$field_names_count = count($field_names);
+
+					if (($field_names_count > 1) && ($field_names[1] === 'menu_path')) {
+						$level = $field_names_count;
+					}
 
 					foreach ($field_names as $field_name) {
 						if (!array_key_exists($field_name, $object)) {
@@ -2215,11 +2220,50 @@ class CApiInputValidator {
 						}
 						else {
 							if (array_key_exists($value, $_uniq)) {
-								$subpath = ($path === '/' ? $path : $path.'/').($index + 1);
-								$error = _s('Invalid parameter "%1$s": %2$s.', $subpath, _s('value %1$s already exists',
-									'('.implode(', ', $field_names).')=('.implode(', ', $values).')'
-								));
-								return false;
+								if (array_search('menu_path', $field_names)) {
+									$menu_path = [];
+									$_menu_path = &$menu_path;
+
+									foreach ($data as $data_field) {
+										$path_name = (array_key_exists('menu_path', $data_field))
+											? $data_field['menu_path']
+											: '';
+
+										if ($data_field['name'] == $value) {
+											$trim_path_name = trim($path_name, '/');
+
+											if (array_key_exists($trim_path_name, $menu_path)) {
+												$duplicate = (($path_name != null)
+													? $trim_path_name . '/' . $value
+													: $value);
+
+												$subpath = ($path === '/' ? $path : $path . '/') . ($index + 1);
+
+												$parameter  = (array_key_first($menu_path) === '')
+													? $field_names[0]
+													: implode(', ', $field_names) ;
+
+												$error = _s('Invalid parameter "%1$s": %2$s.',
+													$subpath,
+													_s('value %1$s already exists',
+														'(' .  $parameter . ')=(' . $duplicate . ')'
+													));
+												return false;
+											}
+
+											$_menu_path[$path_name] = true;
+										}
+									}
+								}
+								else {
+									$subpath = ($path === '/' ? $path : $path . '/') . ($index + 1);
+									$error = _s('Invalid parameter "%1$s": %2$s.',
+										$subpath,
+										_s('value %1$s already exists',
+											'(' . implode(', ', $field_names) . ')=(' . implode(', ', $values) . ')'
+										));
+									return false;
+								}
 							}
 
 							$_uniq[$value] = true;
