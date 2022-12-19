@@ -1392,7 +1392,7 @@ class CScript extends CApiService {
 				$duplicates['menu_path'] = $trim_menu_path;
 
 				if (array_key_exists('scriptid', $scripts[0])) {
-					$duplicateScripts = !(($key === $scripts[0]['scriptid']));
+					$duplicateScripts = (($key === $scripts[0]['scriptid']));
 				}
 				else {
 					$duplicateScripts = true;
