@@ -1383,7 +1383,7 @@ class CScript extends CApiService {
 		$trim_names = trim($names[0], '/');
 		$trim_menu_paths = trim($menu_paths[0], '/');
 
-		foreach ($dbScripts as $key => $dbScript) {
+		foreach ($dbScripts as $dbScript) {
 			$trim_name = trim($dbScript['name'], '/');
 			$trim_menu_path = trim($dbScript['menu_path'], '/');
 
