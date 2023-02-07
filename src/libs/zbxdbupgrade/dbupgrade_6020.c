@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2022 Zabbix SIA
+** Copyright (C) 2001-2023 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -196,6 +196,14 @@ static int	DBpatch_6020013(void)
 	return zbx_dbupgrade_attach_trigger_with_function_on_update("items", "name", "name_upper", "upper", "itemid");
 }
 
+static int	DBpatch_6020014(void)
+{
+	const ZBX_FIELD	old_field = {"info", "", NULL, NULL, 0, ZBX_TYPE_TEXT, ZBX_NOTNULL, 0};
+	const ZBX_FIELD	field = {"info", "", NULL, NULL, 0, ZBX_TYPE_LONGTEXT, ZBX_NOTNULL, 0};
+
+	return DBmodify_field_type("task_result", &field, &old_field);
+}
+
 #endif
 
 DBPATCH_START(6020)
@@ -216,4 +224,5 @@ DBPATCH_ADD(6020010, 0, 0)
 DBPATCH_ADD(6020011, 0, 0)
 DBPATCH_ADD(6020012, 0, 0)
 DBPATCH_ADD(6020013, 0, 0)
+DBPATCH_ADD(6020014, 0, 0)
 DBPATCH_END()
