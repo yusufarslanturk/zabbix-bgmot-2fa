@@ -2215,7 +2215,7 @@ class CApiInputValidator {
 						}
 						else {
 							if (array_key_exists($value, $_uniq)) {
-								$subpath = ($path === '/' ? $path : $path . '/') . ($index + 1);
+								$subpath = ($path === '/' ? $path : $path.'/').($index + 1);
 								$error = _s('Invalid parameter "%1$s": %2$s.', $subpath, _s('value %1$s already exists',
 									'('.implode(', ', $field_names).')=('.implode(', ', $values).')'
 								));
