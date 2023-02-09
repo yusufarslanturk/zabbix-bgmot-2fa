@@ -1331,7 +1331,7 @@ class CScript extends CApiService {
 
 		if ($method === 'update') {
 			$scripts = array_filter($scripts,
-				fn($script) => array_key_exists('name', $script) || array_key_exists('menu_path', $script)
+				static fn($script) => array_key_exists('name', $script) || array_key_exists('menu_path', $script)
 			);
 
 			if (!$scripts) {
@@ -1382,7 +1382,7 @@ class CScript extends CApiService {
 
 			// Remove unchanged scripts and only continue validation on for scripts that have changed name or menu path.
 			$scripts = array_filter($scripts,
-				fn($script) => $script['name'] !== $db_scripts[$script['scriptid']]['name']
+				static fn($script) => $script['name'] !== $db_scripts[$script['scriptid']]['name']
 					|| $script['menu_path'] !== $db_scripts[$script['scriptid']]['menu_path']
 			);
 
