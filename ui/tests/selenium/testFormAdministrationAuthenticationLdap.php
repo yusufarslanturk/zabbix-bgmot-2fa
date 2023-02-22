@@ -143,9 +143,12 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 			[
 				[
 					'ldap_settings' => [
-						'Host' => PHPUNIT_LDAP_HOST ,
-						'Base DN' => 'cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-						'Search attribute' => 'uid'
+						'Host' => PHPUNIT_LDAP_HOST,
+						'Port' => '389',
+						'Base DN' => 'DC=zbx,DC=local',
+						'Search attribute' => 'sAMAccountName',
+						'Bind DN' => 'CN=Admin,OU=Users,OU=Zabbix,DC=zbx,DC=local',
+						'Bind password' => PHPUNIT_LDAP_BIND_PASSWORD
 					],
 					'test_settings' => [
 						'Login' => PHPUNIT_LDAP_USERNAME,
@@ -232,7 +235,6 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 						'Base DN' => 'DC=zbx,DC=local',
 						'Search attribute' => 'sAMAccountName',
 						'Bind DN' => 'CN=Admin,OU=Users,OU=Zabbix,DC=zbx,DC=local',
-						'Case sensitive login' => true,
 						'Bind password' => PHPUNIT_LDAP_BIND_PASSWORD
 					],
 					'test_settings' => [
@@ -706,7 +708,6 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 							'Base DN' => 'DC=zbx,DC=local',
 							'Search attribute' => 'sAMAccountName',
 							'Bind DN' => 'CN=Admin,OU=Users,OU=Zabbix,DC=zbx,DC=local',
-							'Case sensitive login' => true,
 							'Bind password' => PHPUNIT_LDAP_BIND_PASSWORD,
 							'Description' => 'description',
 							'Advanced configuration' => true,
