@@ -143,12 +143,12 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 			[
 				[
 					'ldap_settings' => [
-						'Host' => 'ipa.demo1.freeipa.org',
+						'Host' => PHPUNIT_LDAP_HOST ,
 						'Base DN' => 'cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
 						'Search attribute' => 'uid'
 					],
 					'test_settings' => [
-						'Login' => 'test',
+						'Login' => PHPUNIT_LDAP_USERNAME,
 						'User password' => 'test'
 					],
 					'test_error' => 'Login failed',
@@ -227,7 +227,7 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 				[
 					'expected' => TEST_GOOD,
 					'ldap_settings' => [
-						'LDAP host' => PHPUNIT_LDAP_HOST,
+						'Host' => PHPUNIT_LDAP_HOST,
 						'Port' => '389',
 						'Base DN' => 'DC=zbx,DC=local',
 						'Search attribute' => 'sAMAccountName',
@@ -607,7 +607,8 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 							'Search attribute' => 'uid'
 						]
 					],
-					'error' => 'Invalid parameter "/2": value (name)=(TEST) already exists.'
+					'error' => 'Cannot update authentication',
+					'error_details' => 'Invalid parameter "/2": value (name)=(TEST) already exists.'
 				]
 			],
 			// #6 Using cyrillic in settings.
@@ -700,7 +701,7 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 					'ldap_settings' => [
 						[
 							'Name' => 'LDAP',
-							'LDAP host' => PHPUNIT_LDAP_HOST,
+							'Host' => PHPUNIT_LDAP_HOST,
 							'Port' => '389',
 							'Base DN' => 'DC=zbx,DC=local',
 							'Search attribute' => 'sAMAccountName',
@@ -745,7 +746,7 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 			$this->assertEquals($data['db_check'], CDBHelper::getRow($sql));
 		}
 		else {
-			$this->assertMessage(TEST_BAD, $data['error']);
+			$this->assertMessage(TEST_BAD, $data['error'], CTestArrayHelper::get($data, 'error_details'));
 		}
 	}
 
