@@ -227,13 +227,17 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 				[
 					'expected' => TEST_GOOD,
 					'ldap_settings' => [
-						'Host' => 'ipa.demo1.freeipa.org',
-						'Base DN' => 'cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-						'Search attribute' => 'uid'
+						'LDAP host' => PHPUNIT_LDAP_HOST,
+						'Port' => '389',
+						'Base DN' => 'DC=zbx,DC=local',
+						'Search attribute' => 'sAMAccountName',
+						'Bind DN' => 'CN=Admin,OU=Users,OU=Zabbix,DC=zbx,DC=local',
+						'Case sensitive login' => true,
+						'Bind password' => PHPUNIT_LDAP_BIND_PASSWORD
 					],
 					'test_settings' => [
-						'Login' => 'employee',
-						'User password' => 'Secret123'
+						'Login' => PHPUNIT_LDAP_USERNAME ,
+						'User password' => PHPUNIT_LDAP_USER_PASSWORD
 					]
 				]
 			]
@@ -587,26 +591,25 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 				]
 			],
 			// #5 Two LDAP servers with same names.
-			// TODO: Uncomment this part after ZBX-21061 fix.
-//			[
-//				[
-//					'ldap_settings' => [
-//						[
-//							'Name' => 'TEST',
-//							'Host' => 'ldap.forumsys.com',
-//							'Base DN' => 'dc=example,dc=com',
-//							'Search attribute' => 'uid'
-//						],
-//						[
-//							'Name' => 'TEST',
-//							'Host' => 'ldap.forumsys.com',
-//							'Base DN' => 'dc=example,dc=com',
-//							'Search attribute' => 'uid'
-//						]
-//					],
-//					'error' => 'Invalid parameter "/2": value (name)=(TEST) already exists.'
-//				]
-//			],
+			[
+				[
+					'ldap_settings' => [
+						[
+							'Name' => 'TEST',
+							'Host' => 'ldap.forumsys.com',
+							'Base DN' => 'dc=example,dc=com',
+							'Search attribute' => 'uid'
+						],
+						[
+							'Name' => 'TEST',
+							'Host' => 'ldap.forumsys.com',
+							'Base DN' => 'dc=example,dc=com',
+							'Search attribute' => 'uid'
+						]
+					],
+					'error' => 'Invalid parameter "/2": value (name)=(TEST) already exists.'
+				]
+			],
 			// #6 Using cyrillic in settings.
 			[
 				[
@@ -697,12 +700,13 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 					'ldap_settings' => [
 						[
 							'Name' => 'LDAP',
-							'Host' => 'ipa.demo1.freeipa.org',
+							'LDAP host' => PHPUNIT_LDAP_HOST,
 							'Port' => '389',
-							'Base DN' => 'cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-							'Search attribute' => 'uid',
-							'Bind DN' => 'uid=admin,cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-							'Bind password' => 'Secret123',
+							'Base DN' => 'DC=zbx,DC=local',
+							'Search attribute' => 'sAMAccountName',
+							'Bind DN' => 'CN=Admin,OU=Users,OU=Zabbix,DC=zbx,DC=local',
+							'Case sensitive login' => true,
+							'Bind password' => PHPUNIT_LDAP_BIND_PASSWORD,
 							'Description' => 'description',
 							'Advanced configuration' => true,
 							'StartTLS' => true,
@@ -711,12 +715,12 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 					],
 					'db_check' => [
 						'name' => 'LDAP',
-						'host' => 'ipa.demo1.freeipa.org',
+						'host' => PHPUNIT_LDAP_HOST,
 						'port' => '389',
-						'base_dn' => 'cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-						'bind_dn' => 'uid=admin,cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-						'bind_password' => 'Secret123',
-						'search_attribute' => 'uid'
+						'base_dn' => 'DC=zbx,DC=local',
+						'bind_dn' => 'CN=Admin,OU=Users,OU=Zabbix,DC=zbx,DC=local',
+						'bind_password' => PHPUNIT_LDAP_BIND_PASSWORD,
+						'search_attribute' => 'sAMAccountName'
 					]
 				]
 			]
