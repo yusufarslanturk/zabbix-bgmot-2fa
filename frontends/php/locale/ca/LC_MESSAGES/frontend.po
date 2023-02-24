@@ -1,17 +1,18 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2021-03-19 17:52+0300\n"
-"Last-Translator: Anonymous Pootle User\n"
+"PO-Revision-Date: 2023-02-23 19:17+0000\n"
+"Last-Translator: Xevi Noè i Nogueiras <xevi.noe@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.1.3\n"
+"X-Generator: Pontoon\n"
 "X-POOTLE-MTIME: 1616169144.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:70
@@ -19,7 +20,7 @@ msgstr ""
 #: include/classes/db/PostgresqlDbBackend.php:79
 #, c-format
 msgid "\"%1$s\" instead \"%2$s\""
-msgstr ""
+msgstr "\"%1$s\" en lloc de \"%2$s\""
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -52,7 +53,7 @@ msgstr "s'espera una parella \"amfitrió:clau\""
 #: include/classes/api/services/CDRule.php:520
 #, c-format
 msgid "%1$d characters exceeds maximum length of %2$d characters"
-msgstr ""
+msgstr "%1$d caràcters supera la longitud màxima de %2$d caràcters"
 
 #: include/func.inc.php:510
 #, c-format
@@ -65,15 +66,15 @@ msgstr[1] "%1$d dies"
 #, c-format
 msgctxt "screen reader"
 msgid "%1$d matches for %2$s found"
-msgstr ""
+msgstr "S'han trobat %1$d coincidències per a %2$s"
 
 #: app/controllers/CControllerWidgetProblemsView.php:56
 #: include/classes/screens/CScreenHostTriggers.php:199
 #, c-format
 msgid "%1$d of %3$d%2$s problem is shown"
 msgid_plural "%1$d of %3$d%2$s problems are shown"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Es mostra %1$d de %3$d%2$s problema"
+msgstr[1] "Es mostren %1$d de %3$d%2$s problemes"
 
 #: chart4.php:94 chart5.php:89
 #, c-format
@@ -98,8 +99,8 @@ msgstr "%1$s [Línia: %2$s | Columna: %3$s]"
 msgctxt "screen reader"
 msgid "%1$s action"
 msgid_plural "%1$s actions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Acció de %1$s"
+msgstr[1] "Accions de %1$s"
 
 #: app/views/monitoring.acknowledge.edit.php:51
 #: app/views/monitoring.acknowledge.edit.php:56
@@ -122,8 +123,8 @@ msgstr[1] "%1$s elements"
 msgctxt "screen reader"
 msgid "%1$s message"
 msgid_plural "%1$s messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Missatge de %1$s"
+msgstr[1] "Missatges  %1$s"
 
 #: include/classes/widgets/CWidgetConfig.php:155
 #: include/classes/widgets/CWidgetConfig.php:156
@@ -140,28 +141,28 @@ msgstr[1] "%1$s minuts"
 #, c-format
 msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s de %2$s element en estat problemàtic"
+msgstr[1] "%1$s de %2$s elements en estat problemàtic"
 
 #: jsLoader.php:226
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s preselected, use down,up arrow keys and enter to select"
-msgstr ""
+msgstr "%1$s preseleccionats, utilitzeu les tecles de fletxa avall, amunt i Intro per seleccionar"
 
 #: include/maps.inc.php:1095
 #, c-format
 msgid "%1$s problem"
 msgid_plural "%1$s problems"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s problema"
+msgstr[1] "%1$s problemes"
 
 #: include/classes/helpers/CMapHelper.php:246
 #, c-format
 msgid "%1$s problem in total"
 msgid_plural "%1$s problems in total"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s problemes en total"
+msgstr[1] "%1$s problema en total"
 
 #: app/views/monitoring.widget.actionlog.view.php:41
 #: include/actions.inc.php:2234 include/classes/screens/CScreenActions.php:129
@@ -185,117 +186,117 @@ msgstr[1] "%1$s segons"
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s widget"
-msgstr ""
+msgstr "%1$s giny"
 
 #: app/views/monitoring.widget.problemhosts.view.php:98
 #: app/views/monitoring.widget.problems.view.php:158
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, Severity, %2$s"
-msgstr ""
+msgstr "%1$s, gravetat, %2$s"
 
 #: jsLoader.php:220
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, read only"
-msgstr ""
+msgstr "%1$s, només lectura"
 
 #: jsLoader.php:270
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, selected"
-msgstr ""
+msgstr "%1$s, triat"
 
 #: app/views/layout.htmlpage.php:106 include/page_header.php:263
 #, c-format
 msgid "%4$s failed login attempt logged. Last failed attempt was from %1$s on %2$s at %3$s."
 msgid_plural "%4$s failed login attempts logged. Last failed attempt was from %1$s on %2$s at %3$s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha registrat un intent d'inici de sessió fallit de %4$s. L'últim intent fallit va ser de %1$s el %2$s a les %3$s."
+msgstr[1] "S'han registrat intents d'inici de sessió fallits de %4$s. El darrer intent fou de %1$s el %2$s a les %3$s."
 
 #: include/classes/screens/CScreenDiscovery.php:213
 #, c-format
 msgid "%d device"
 msgid_plural "%d devices"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d dispositiu"
+msgstr[1] "%d dispositius"
 
 #: include/users.inc.php:158
 #, c-format
 msgctxt "user fullname"
 msgid "(%1$s %2$s)"
-msgstr ""
+msgstr "(%1$s %2$s)"
 
 #: include/views/configuration.action.edit.php:601
 msgid "(0 - infinitely)"
-msgstr ""
+msgstr "(0 - infinitament)"
 
 #: include/views/configuration.action.edit.php:608
 msgid "(0 - use action default)"
-msgstr ""
+msgstr "(0 - emprar l'acció per defecte)"
 
 #: include/views/configuration.hostgroups.list.php:30
 msgid "(Only super admins can create groups)"
-msgstr ""
+msgstr "(Només els superadministradors poden crear grups)"
 
 #: include/views/configuration.host.edit.php:270
 #: include/views/configuration.host.edit.php:274
 #: include/views/configuration.host.massupdate.php:168
 #: include/views/configuration.host.prototype.edit.php:158
 msgid "(no proxy)"
-msgstr ""
+msgstr "(sense proxy)"
 
 #: include/classes/setup/CSetupWizard.php:231
 msgid "0 - use default port"
-msgstr ""
+msgstr "0 - empra el port predeterminat"
 
 #: include/triggers.inc.php:1889
 msgid "0 or 1"
-msgstr ""
+msgstr "0 o 1"
 
 #: queue.php:113 queue.php:174
 msgid "1 minute"
-msgstr ""
+msgstr "1 minut"
 
 #: queue.php:111 queue.php:172
 msgid "10 seconds"
-msgstr ""
+msgstr "10 segons"
 
 #: include/views/reports.toptriggers.php:112 toptriggers.php:25
 msgid "100 busiest triggers"
-msgstr ""
+msgstr "100 triggers més ocupats"
 
 #: queue.php:112 queue.php:173
 msgid "30 seconds"
-msgstr ""
+msgstr "30 segons"
 
 #: include/views/configuration.graph.edit.php:321
 msgid "3D view"
-msgstr ""
+msgstr "vista 3D"
 
 #: queue.php:114 queue.php:175
 msgid "5 minutes"
-msgstr ""
+msgstr "5 minuts"
 
 #: queue.php:110 queue.php:171
 msgid "5 seconds"
-msgstr ""
+msgstr "5 segons"
 
 #: include/views/monitoring.history.php:73
 msgid "500 latest values"
-msgstr ""
+msgstr "500 darrers valors"
 
 #: include/views/monitoring.sysmap.edit.php:116
 msgid "<manual>"
-msgstr ""
+msgstr "<manual>"
 
 #: app/views/administration.script.edit.php:39
 msgid "<sub-menu/sub-menu/...>script"
-msgstr ""
+msgstr "<submenú/submenú/...>script"
 
 #: include/classes/widgets/CWidgetHelper.php:700
 msgid "ADD OVERRIDE"
-msgstr ""
+msgstr "AFEGIR INVALIDACIÓ"
 
 #: include/views/configuration.host.discovery.edit.php:445
 #: include/views/configuration.item.edit.php:572
@@ -304,25 +305,25 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:526
 #: include/views/js/configuration.discovery.edit.js.php:111
 msgid "AES"
-msgstr ""
+msgstr "AES"
 
 #: app/views/popup.triggerwizard.php:95
 msgid "AND"
-msgstr ""
+msgstr "I"
 
 #: app/views/report.services.php:66 app/views/report.services.php:67
 #: app/views/report.services.php:68 app/views/report.services.php:69
 #: srv_status.php:150
 msgid "Acceptable SLA"
-msgstr ""
+msgstr "SLA Acceptable"
 
 #: include/func.inc.php:1825
 msgid "Access denied"
-msgstr ""
+msgstr "Accés denegat"
 
 #: sysmap.php:78
 msgid "Access denied!"
-msgstr ""
+msgstr "Accés denegat!"
 
 #: app/views/hintbox.eventlist.php:76
 #: app/views/monitoring.widget.problems.view.php:62 include/actions.inc.php:155
@@ -334,25 +335,25 @@ msgstr ""
 #: include/views/configuration.action.edit.php:1117
 #: include/views/configuration.action.edit.php:1210
 msgid "Ack"
-msgstr ""
+msgstr "Ack"
 
 #: app/views/monitoring.acknowledge.edit.php:72 jsLoader.php:230
 msgid "Acknowledge"
-msgstr ""
+msgstr "Reconèixer"
 
 #: include/actions.inc.php:2141 include/events.inc.php:175
 msgid "Acknowledged"
-msgstr ""
+msgstr "Reconegut"
 
 #: adm.triggerdisplayoptions.php:36
 #: include/views/administration.general.trigger.options.edit.php:51
 msgid "Acknowledged PROBLEM events"
-msgstr ""
+msgstr "Esdeveniments PROBLEMA reconeguts"
 
 #: adm.triggerdisplayoptions.php:42
 #: include/views/administration.general.trigger.options.edit.php:71
 msgid "Acknowledged RESOLVED events"
-msgstr ""
+msgstr "Esdeveniments RESOLTS reconeguts"
 
 #: app/views/administration.mediatype.edit.php:103
 #: app/views/dashboard.sharing.edit.php:24
@@ -425,7 +426,7 @@ msgstr ""
 #: include/views/monitoring.sysmap.edit.php:291
 #: include/views/monitoring.sysmap.edit.php:327 services.php:355
 msgid "Action"
-msgstr ""
+msgstr "Acció"
 
 #: include/classes/api/services/CAction.php:2829
 #: include/classes/api/services/CAction.php:2847
@@ -433,48 +434,48 @@ msgstr ""
 #: include/classes/api/services/CAction.php:3057
 #, c-format
 msgid "Action \"%1$s\" already exists."
-msgstr ""
+msgstr "L'acció \"%1$s\" ja existeix."
 
 #: include/classes/api/services/CAction.php:2900
 #: include/classes/api/services/CAction.php:3101
 #, c-format
 msgid "Action \"%1$s\" no operations defined."
-msgstr ""
+msgstr "Cap operació definida per l'acció \"%1$s\"."
 
 #: actionconf.php:232
 msgid "Action added"
-msgstr ""
+msgstr "Acció afegida"
 
 #: include/classes/validators/CActionCondValidator.php:160
 msgid "Action condition value must be empty."
-msgstr ""
+msgstr "El valor de la condició d'acció ha d'ésser buit."
 
 #: actionconf.php:254
 msgid "Action deleted"
-msgstr ""
+msgstr "S'ha esborrat l'acció"
 
 #: actionconf.php:500
 msgid "Action disabled"
 msgid_plural "Actions disabled"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Acció desactivada"
+msgstr[1] "Accions desactivades"
 
 #: actionconf.php:499
 msgid "Action enabled"
 msgid_plural "Actions enabled"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Acció activada"
+msgstr[1] "Accions activades"
 
 #: auditacts.php:27 include/classes/screens/CScreenActions.php:168
 #: include/classes/widgets/CWidgetConfig.php:33 include/menu.inc.php:164
 #: include/screens.inc.php:31
 #: include/views/administration.auditacts.list.php:21
 msgid "Action log"
-msgstr ""
+msgstr "Registre d'accions"
 
 #: actionconf.php:224
 msgid "Action updated"
-msgstr ""
+msgstr "Acció actualitzada"
 
 #: app/views/monitoring.dashboard.view.php:86
 #: app/views/monitoring.widget.problems.view.php:63 include/blocks.inc.php:555
@@ -490,19 +491,19 @@ msgstr ""
 #: include/views/monitoring.sysmap.list.php:61 jsLoader.php:229
 #: tr_events.php:146
 msgid "Actions"
-msgstr ""
+msgstr "Accions"
 
 #: app/views/administration.proxy.edit.php:66
 #: app/views/administration.proxy.list.php:46
 #: app/views/administration.proxy.list.php:141
 msgid "Active"
-msgstr ""
+msgstr "Actiu"
 
 #: include/views/configuration.maintenance.list.php:53
 #: include/views/configuration.maintenance.list.php:89
 msgctxt "maintenance status"
 msgid "Active"
-msgstr ""
+msgstr "Actiu"
 
 #: include/classes/api/services/CMaintenance.php:351
 #: include/classes/api/services/CMaintenance.php:587
@@ -510,7 +511,7 @@ msgstr ""
 #: include/views/configuration.maintenance.list.php:72 maintenance.php:45
 #: maintenance.php:139
 msgid "Active since"
-msgstr ""
+msgstr "Actiu des de"
 
 #: include/classes/api/services/CMaintenance.php:356
 #: include/classes/api/services/CMaintenance.php:603
@@ -518,7 +519,7 @@ msgstr ""
 #: include/views/configuration.maintenance.list.php:73 maintenance.php:48
 #: maintenance.php:145
 msgid "Active till"
-msgstr ""
+msgstr "Actius fins"
 
 #: app/views/administration.mediatype.edit.js.php:84
 #: app/views/administration.mediatype.edit.php:118
@@ -659,155 +660,155 @@ msgstr ""
 #: include/views/monitoring.sysmap.edit.php:398 jsLoader.php:97
 #: jsLoader.php:282
 msgid "Add"
-msgstr ""
+msgstr "Afegeix"
 
 #: jsLoader.php:105
 msgid "Add a new widget"
-msgstr ""
+msgstr "Afegeix un giny nou"
 
 #: include/services.inc.php:75 include/services.inc.php:114
 msgid "Add child"
-msgstr ""
+msgstr "Afegeix un fill"
 
 #: jsLoader.php:284
 msgid "Add child element"
-msgstr ""
+msgstr "Afegeix un element fill"
 
 #: include/actions.inc.php:632 include/actions.inc.php:1102
 msgid "Add host"
-msgstr ""
+msgstr "Afegir equip"
 
 #: jsLoader.php:285
 msgid "Add multiple maps"
-msgstr ""
+msgstr "Afegeix múltiples mapes"
 
 #: include/classes/widgets/CWidgetHelper.php:1108
 msgid "Add new data set"
-msgstr ""
+msgstr "Afegeix un conjunt de dades nou"
 
 #: include/views/configuration.item.massupdate.php:690
 msgid "Add new or existing applications"
-msgstr ""
+msgstr "Afegir noves aplicacions o aplicacions ja existents"
 
 #: include/views/configuration.host.massupdate.php:103
 msgid "Add new or existing host groups"
-msgstr ""
+msgstr "Afegir nous grups d'equips o grups d'equips ja existents"
 
 #: include/classes/widgets/CWidgetHelper.php:655
 msgid "Add new override"
-msgstr ""
+msgstr "Afegeix una substitució nova"
 
 #: include/views/configuration.graph.edit.php:400
 #: include/views/configuration.trigger.prototype.edit.php:606
 #: include/views/configuration.trigger.prototype.massupdate.php:109
 msgid "Add prototype"
-msgstr ""
+msgstr "Afegeix un prototip"
 
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:117
 msgid "Add submaps"
-msgstr ""
+msgstr "Afegeix submapes"
 
 #: app/controllers/CControllerFavouriteDelete.php:72 include/html.inc.php:153
 msgid "Add to favourites"
-msgstr ""
+msgstr "Afegir a preferits"
 
 #: include/actions.inc.php:1106
 msgid "Add to host group"
-msgstr ""
+msgstr "Afegeix al grup d'equips"
 
 #: include/actions.inc.php:660
 msgid "Add to host groups"
-msgstr ""
+msgstr "Afegeix als grups d'equips"
 
 #: app/views/monitoring.dashboard.view.php:97 jsLoader.php:95
 msgid "Add widget"
-msgstr ""
+msgstr "Afegeix un giny"
 
 #: auditlogs.php:129
 msgid "Added"
-msgstr ""
+msgstr "Afegit"
 
 #: jsLoader.php:218
 #, c-format
 msgctxt "screen reader"
 msgid "Added, %1$s"
-msgstr ""
+msgstr "S'ha afegit, %1$s"
 
 #: jsLoader.php:108
 msgid "Adjust widget refresh interval"
-msgstr ""
+msgstr "Ajustar l'interval d'actualització del giny"
 
 #: include/hosts.inc.php:63
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 #: include/menu.inc.php:233
 msgid "Administration"
-msgstr ""
+msgstr "Administració"
 
 #: include/views/monitoring.sysmap.edit.php:140
 msgid "Advanced labels"
-msgstr ""
+msgstr "Etiquetes avançades"
 
 #: include/classes/screens/CScreenHostTriggers.php:218
 #: include/events.inc.php:248
 msgid "Age"
-msgstr ""
+msgstr "Edat"
 
 #: app/views/monitoring.problem.view.php:177
 #: include/views/common.filter.trigger.php:57
 msgid "Age less than"
-msgstr ""
+msgstr "Edat inferior a"
 
 #: include/views/monitoring.overview.triggers.php:67
 #, c-format
 msgid "Age less than %s"
-msgstr ""
+msgstr "Edat inferior a %s"
 
 #: app/views/administration.script.list.php:78 app/views/popup.generic.php:607
 #: include/items.inc.php:349 include/views/configuration.httpconf.edit.php:100
 msgid "Agent"
-msgstr ""
+msgstr "Agent"
 
 #: include/classes/items/CHelpItems.php:69
 #: include/classes/items/CHelpItems.php:379
 msgid "Agent availability check. Returns nothing - unavailable; 1 - available"
-msgstr ""
+msgstr "Comprovació de disponibilitat de l'agent. No retorna res - no disponible; 1 - disponible"
 
 #: include/views/configuration.host.list.php:139
 msgid "Agent encryption"
-msgstr ""
+msgstr "Xifratge de l'agent"
 
 #: include/classes/items/CHelpItems.php:65
 #: include/classes/items/CHelpItems.php:375
 msgid "Agent host name. Returns string"
-msgstr ""
+msgstr "Nom d'equip de l'agent. Retorna una cadena"
 
 #: include/views/configuration.host.edit.php:120
 #: include/views/configuration.host.edit.php:205
 #: include/views/configuration.host.prototype.edit.php:97
 #: include/views/inventory.host.view.php:58
 msgid "Agent interfaces"
-msgstr ""
+msgstr "Interfícies d'agent"
 
 #: hosts.php:56
 msgid "Agent or SNMP or JMX or IPMI interface"
-msgstr ""
+msgstr "Interfície SNMP, JMX o IMPI de l'agent"
 
 #: include/actions.inc.php:2168
 msgid "Alert message"
-msgstr ""
+msgstr "Missatge d'alerta"
 
 #: app/controllers/CControllerPopupGeneric.php:183 include/hosts.inc.php:114
 #: include/views/administration.users.edit.php:51
 #: include/views/administration.users.list.php:52
 #: include/views/administration.users.list.php:83 users.php:44
 msgid "Alias"
-msgstr ""
+msgstr "Àlies"
 
 #: include/views/monitoring.sysmap.constructor.php:68
 msgid "Align map elements"
-msgstr ""
+msgstr "Alinear els elements del mapa"
 
 #: app/views/administration.script.edit.php:70
 #: app/views/administration.script.edit.php:79
@@ -824,55 +825,55 @@ msgstr ""
 #: include/views/configuration.action.edit.php:2286
 #: include/views/monitoring.sysmap.edit.php:213
 msgid "All"
-msgstr ""
+msgstr "Tots"
 
 #: app/views/monitoring.dashboard.breadcrumbs.php:25
 msgid "All dashboards"
-msgstr ""
+msgstr "Tots els taulers"
 
 #: include/views/administration.usergroups.edit.php:109
 #: include/views/administration.users.edit.php:485
 #: include/views/administration.users.edit.php:491
 msgid "All groups"
-msgstr ""
+msgstr "Tots els grups"
 
 #: include/html.inc.php:334
 msgid "All hosts"
-msgstr ""
+msgstr "Tots els equips"
 
 #: jsLoader.php:180
 msgid "All links should have \"Name\" and \"URL\" specified"
-msgstr ""
+msgstr "Tots els enllaços han de tindre especificats \"Nom\" i \"URL\"."
 
 #: include/html.inc.php:513
 msgid "All maps"
-msgstr ""
+msgstr "Tots els mapes"
 
 #: include/views/configuration.trigger.prototype.edit.php:476
 #: include/views/configuration.triggers.edit.php:502
 msgid "All problems"
-msgstr ""
+msgstr "Tots els problemes"
 
 #: include/views/configuration.trigger.prototype.edit.php:477
 #: include/views/configuration.triggers.edit.php:503
 msgid "All problems if tag values match"
-msgstr ""
+msgstr "Tots els problemes si els valors de l'etiqueta coincideixen"
 
 #: include/views/monitoring.screen.php:35
 msgid "All screens"
-msgstr ""
+msgstr "Totes les pantalles"
 
 #: include/views/monitoring.slides.php:35
 msgid "All slide shows"
-msgstr ""
+msgstr "Totes les diapositives"
 
 #: include/views/administration.usergroups.edit.php:208
 msgid "All tags"
-msgstr ""
+msgstr "Totes les etiquetes"
 
 #: include/html.inc.php:298
 msgid "All templates"
-msgstr ""
+msgstr "Totes les plantilles"
 
 #: include/triggers.inc.php:1284
 #: include/views/configuration.trigger.prototype.edit.php:520
@@ -880,18 +881,18 @@ msgstr ""
 #: include/views/configuration.triggers.edit.php:554
 #: include/views/configuration.triggers.massupdate.php:156
 msgid "Allow manual close"
-msgstr ""
+msgstr "Permet el tancament manual"
 
 #: include/views/configuration.host.discovery.edit.php:587
 #: include/views/configuration.item.edit.php:880
 #: include/views/configuration.item.massupdate.php:603
 #: include/views/configuration.item.prototype.edit.php:745
 msgid "Allowed hosts"
-msgstr ""
+msgstr "Equips permesos"
 
 #: include/classes/setup/CSetupWizard.php:370
 msgid "Alternatively, you can install it manually:"
-msgstr ""
+msgstr "Alternativament, podeu instal·lar-lo manualment:"
 
 #: include/triggers.inc.php:1352
 #: include/views/configuration.action.edit.php:112
@@ -903,7 +904,7 @@ msgstr ""
 #: include/views/configuration.triggers.edit.php:151
 #: include/views/configuration.triggers.edit.php:345
 msgid "And"
-msgstr ""
+msgstr "I"
 
 #: app/views/monitoring.problem.view.php:227
 #: include/classes/widgets/forms/CWidgetFormProblems.php:94
@@ -915,7 +916,7 @@ msgstr ""
 #: include/views/configuration.maintenance.edit.php:170
 #: include/views/configuration.triggers.list.php:73
 msgid "And/Or"
-msgstr ""
+msgstr "I/o"
 
 #: app/views/administration.mediatype.list.php:45
 #: app/views/administration.proxy.list.php:45
@@ -929,11 +930,11 @@ msgstr ""
 #: include/views/configuration.host.list.php:83
 #: include/views/configuration.maintenance.list.php:52
 msgid "Any"
-msgstr ""
+msgstr "Qualsevol"
 
 #: include/regexp.inc.php:223 include/views/js/adm.regexprs.edit.js.php:140
 msgid "Any character string included"
-msgstr ""
+msgstr "Qualsevol cadena de caràcters inclosa"
 
 #: app/views/monitoring.problem.view.php:128 httpconf.php:40
 #: include/actions.inc.php:60 include/audit.inc.php:34
@@ -950,44 +951,44 @@ msgstr ""
 #: include/views/monitoring.overview.items.php:83
 #: include/views/monitoring.screen.constructor.edit.php:647 latest.php:354
 msgid "Application"
-msgstr ""
+msgstr "Aplicació"
 
 #: httpconf.php:314 include/classes/api/services/CApplication.php:266
 #, c-format
 msgid "Application \"%1$s\" already exists."
-msgstr ""
+msgstr "L'aplicació \"%1$s\" ja existeix."
 
 #: applications.php:113
 msgid "Application added"
-msgstr ""
+msgstr "Aplicació afegida"
 
 #: applications.php:132 applications.php:143
 msgid "Application deleted"
 msgid_plural "Applications deleted"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha esborrat l'aplicació"
+msgstr[1] "S'han esborrat les aplicacions"
 
 #: include/classes/core/CJsonRpc.php:203
 msgid "Application error."
-msgstr ""
+msgstr "Error a l'aplicació."
 
 #: include/views/configuration.item.prototype.edit.php:775
 msgid "Application prototypes"
-msgstr ""
+msgstr "Prototipus d'aplicacions"
 
 #: applications.php:105
 msgid "Application updated"
-msgstr ""
+msgstr "Aplicació actualitzada"
 
 #: include/classes/api/services/CItemGeneral.php:633
 #, c-format
 msgid "Application with ID \"%1$s\" is not available on \"%2$s\"."
-msgstr ""
+msgstr "L'aplicació amb l'identificador \"%1$s\" no és pas disponible a \"%2$s\"."
 
 #: include/classes/api/services/CHttpTest.php:694
 #, c-format
 msgid "Application with applicationid \"%1$s\" does not exist."
-msgstr ""
+msgstr "L'aplicació amb l'applicationid \"%1$s\" no existeix pas."
 
 #: app/controllers/CControllerPopupGeneric.php:123 include/forms.inc.php:832
 #: include/html.inc.php:357 include/views/configuration.application.edit.php:23
@@ -1004,7 +1005,7 @@ msgstr ""
 #: search.php:133 search.php:160 search.php:188 search.php:390 search.php:415
 #: search.php:447
 msgid "Applications"
-msgstr ""
+msgstr "Aplicacions"
 
 #: app/views/dashboard.properties.edit.php:65
 #: include/classes/html/CFilter.php:207 include/classes/html/CFilter.php:298
@@ -1015,50 +1016,50 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:734 jsLoader.php:96
 #: jsLoader.php:281
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 #: include/views/configuration.hostgroups.edit.php:42
 msgid "Apply permissions and tag filters to all subgroups"
-msgstr ""
+msgstr "Apliqueu permisos i filtres d'etiquetes a tots els subgrups"
 
 #: include/views/configuration.maintenance.list.php:54
 #: include/views/configuration.maintenance.list.php:86
 msgctxt "maintenance status"
 msgid "Approaching"
-msgstr ""
+msgstr "Apropant-se"
 
 #: include/func.inc.php:239
 msgid "Apr"
-msgstr ""
+msgstr "Abr"
 
 #: include/forms.inc.php:1972 include/func.inc.php:119 include/func.inc.php:256
 #: jsLoader.php:132
 msgid "April"
-msgstr ""
+msgstr "Abril"
 
 #: include/classes/html/CButtonQMessage.php:46
 msgid "Are you sure you want perform this action?"
-msgstr ""
+msgstr "Segur que voleu dur a terme aquesta acció?"
 
 #: include/views/js/administration.general.macros.edit.js.php:43
 msgid "Are you sure you want to delete"
-msgstr ""
+msgstr "Segur que voleu suprimir-lo?"
 
 #: jsLoader.php:102
 msgid "Are you sure, you want to leave this page?"
-msgstr ""
+msgstr "Segur que voleu sortir d'aquesta pàgina?"
 
 #: include/views/js/monitoring.sysmaps.js.php:91
 msgid "Area size"
-msgstr ""
+msgstr "Mida de l'àrea"
 
 #: include/views/js/monitoring.sysmaps.js.php:84
 msgid "Area type"
-msgstr ""
+msgstr "Tipus d'àrea"
 
 #: include/items.inc.php:1723
 msgid "Arithmetic"
-msgstr ""
+msgstr "Aritmètica"
 
 #: include/views/configuration.item.edit.php:850
 #: include/views/configuration.item.edit.php:856
@@ -1066,125 +1067,127 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:725
 #: include/views/configuration.item.prototype.edit.php:731
 msgid "As is"
-msgstr ""
+msgstr "Com és"
 
 #: include/views/monitoring.history.php:93
 msgid "As plain text"
-msgstr ""
+msgstr "Com a text pla"
 
 #: include/hosts.inc.php:149
 msgid "Asset tag"
-msgstr ""
+msgstr "Etiqueta d'actiu"
 
 #: include/maintenances.inc.php:76
 #, c-format
 msgid "At %1$s:%2$s %3$s of every week"
 msgid_plural "At %1$s:%2$s %3$s of every %4$s weeks"
-msgstr[0] ""
+msgstr[0] "A %1$s:%2$s %3$s de cada setmana"
+msgstr[1] "%1$s:%2$s %3$s  de cada %4$s setmanes"
 
 #: include/maintenances.inc.php:56
 #, c-format
 msgid "At %1$s:%2$s every day"
 msgid_plural "At %1$s:%2$s every %3$s days"
-msgstr[0] ""
+msgstr[0] "A %1$s:%2$s cada dia"
+msgstr[1] "A %1$s:%2$s cada %3$s dies"
 
 #: include/maintenances.inc.php:118
 #, c-format
 msgid "At %1$s:%2$s on %3$s %4$s of every %5$s"
-msgstr ""
+msgstr "A %1$s:%2$s el %3$s %4$s de cada %5$s"
 
 #: include/maintenances.inc.php:127
 #, c-format
 msgid "At %1$s:%2$s on day %3$s of every %4$s"
-msgstr ""
+msgstr "A %1$s:%2$s el dia %3$s de cada %4$s"
 
 #: include/forms.inc.php:2090
 msgid "At (hour:minute)"
-msgstr ""
+msgstr "A les (hora:minut)"
 
 #: include/classes/api/services/CMaintenance.php:279
 #: include/classes/api/services/CMaintenance.php:702
 #: include/views/configuration.maintenance.edit.php:233
 msgid "At least one host group or host must be selected."
-msgstr ""
+msgstr "S'ha de triar, com a mínim, almenys un grup d'equips o un equip."
 
 #: include/views/configuration.host.edit.php:101
 msgid "At least one interface must exist."
-msgstr ""
+msgstr "Com a mínim ha d'existir una interfície."
 
 #: include/classes/api/services/CMaintenance.php:367
 #: include/classes/api/services/CMaintenance.php:375
 #: include/classes/api/services/CMaintenance.php:623
 #: include/classes/api/services/CMaintenance.php:631
 msgid "At least one maintenance period must be created."
-msgstr ""
+msgstr "Com a mínim s'ha de crear un període de manteniment."
 
 #: include/classes/setup/CFrontendSetup.php:255
 msgid "At least one of MySQL, PostgreSQL, Oracle or IBM DB2 should be supported."
-msgstr ""
+msgstr "Com a mínim MySQL, PostgreSQL, Oracle o IBM DB2 haurien d'ésser suportats."
 
 #: include/views/configuration.action.edit.php:1261
 msgid "At least one operation must exist."
-msgstr ""
+msgstr "S'ha d'escollir com a mínim una operació."
 
 #: include/views/configuration.action.edit.php:1265
 msgid "At least one operation or recovery operation must exist."
-msgstr ""
+msgstr "Com a mínim hi ha d'haver una operació o operació de recuperació."
 
 #: include/views/configuration.action.edit.php:1862
 msgid "At least one operation, recovery operation or update operation must exist."
-msgstr ""
+msgstr "Com a mínim hi ha d'haver una operació, una operació de recuperació o una operació d'actualització."
 
 #: app/controllers/CControllerAcknowledgeCreate.php:131
 msgid "At least one update operation is mandatory"
-msgstr ""
+msgstr "Com a mínim cal una operació d'actualització"
 
 #: app/views/monitoring.acknowledge.edit.php:83
 msgid "At least one update operation or message must exist."
-msgstr ""
+msgstr "Com a mínim hi ha d'haver una operació d'actualització o un missatge."
 
 #: include/views/configuration.action.edit.php:754
 #: include/views/configuration.action.edit.php:1500
 #: include/views/configuration.action.edit.php:2260
 msgid "At least one user or user group must be selected."
-msgstr ""
+msgstr "Com a mínim s'ha d'escollir un usuari o un grup d'usuaris."
 
 #: app/views/administration.mediatype.edit.php:215
 msgid "Attempt interval"
-msgstr ""
+msgstr "Interval d'intent"
 
 #: app/views/administration.mediatype.edit.php:210 httpconf.php:45
 #: include/views/configuration.httpconf.edit.php:85
 #: include/views/configuration.httpconf.list.php:91
 msgid "Attempts"
-msgstr ""
+msgstr "Intents"
 
 #: include/menu.inc.php:159
 #: include/views/administration.general.housekeeper.edit.php:89
 msgid "Audit"
-msgstr ""
+msgstr "Auditoria"
 
 #: adm.housekeeper.php:49
 msgid "Audit data storage period"
-msgstr ""
+msgstr "Període d'emmagatzematge de les dades d'auditoria"
 
 #: include/profiles.inc.php:229
 #, c-format
 msgid "Audit data storage period \"%1$s\"."
-msgstr ""
+msgstr "Període d'emmagatzematge de les dades d'auditoria \"%1$s\"."
 
 #: auditlogs.php:27 include/views/administration.auditlogs.list.php:21
 msgid "Audit log"
-msgstr ""
+msgstr "Registre d'auditoria"
 
 #: include/func.inc.php:243
 msgid "Aug"
-msgstr ""
+msgstr "Ago"
 
 #: include/forms.inc.php:1959 include/func.inc.php:123 include/func.inc.php:260
 #: jsLoader.php:136
 msgid "August"
-msgstr ""
+msgstr "Agost"
 
 #: app/views/administration.authentication.edit.php:137
 #: app/views/administration.authentication.edit.php:146
@@ -1192,17 +1195,17 @@ msgstr ""
 #: include/views/configuration.httpconf.edit.php:237
 #: include/views/configuration.httpconf.list.php:92
 msgid "Authentication"
-msgstr ""
+msgstr "Autenticació"
 
 #: include/views/configuration.host.edit.php:413
 #: include/views/configuration.host.prototype.edit.php:328
 msgid "Authentication algorithm"
-msgstr ""
+msgstr "Algorisme d'autenticació"
 
 #: include/classes/api/services/CUser.php:1563
 #, c-format
 msgid "Authentication failed: %1$s."
-msgstr ""
+msgstr "Ha fallat l'autenticació: %1$s."
 
 #: include/views/configuration.action.edit.php:943
 #: include/views/configuration.action.edit.php:1726
@@ -1212,11 +1215,11 @@ msgstr ""
 #: include/views/configuration.item.massupdate.php:298
 #: include/views/configuration.item.prototype.edit.php:552
 msgid "Authentication method"
-msgstr ""
+msgstr "Mètode d'autenticació"
 
 #: app/controllers/CControllerAuthenticationUpdate.php:240
 msgid "Authentication method changed"
-msgstr ""
+msgstr "Mètode d'autenticació modificat"
 
 #: include/views/configuration.host.discovery.edit.php:436
 #: include/views/configuration.item.edit.php:560
@@ -1224,7 +1227,7 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:517
 #: include/views/js/configuration.discovery.edit.js.php:100
 msgid "Authentication passphrase"
-msgstr ""
+msgstr "Frase de pas d'autenticació"
 
 #: include/views/configuration.host.discovery.edit.php:429
 #: include/views/configuration.item.edit.php:554
@@ -1232,47 +1235,47 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:510
 #: include/views/js/configuration.discovery.edit.js.php:92
 msgid "Authentication protocol"
-msgstr ""
+msgstr "Protocol d'autenticació"
 
 #: app/controllers/CControllerAuthenticationUpdate.php:239
 msgid "Authentication settings updated"
-msgstr ""
+msgstr "S'ha actualitzat la configuració de l'autenticació"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:55
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:155
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:228
 msgctxt "history source selection method"
 msgid "Auto"
-msgstr ""
+msgstr "Automàtic"
 
 #: include/views/configuration.action.list.php:34
 msgid "Auto registration"
-msgstr ""
+msgstr "Enregistrament automàtic"
 
 #: include/views/administration.users.edit.php:215
 msgid "Auto-login"
-msgstr ""
+msgstr "Inici de sessió automàtic"
 
 #: include/classes/api/services/CUser.php:772
 msgid "Auto-login and auto-logout options cannot be enabled together."
-msgstr ""
+msgstr "Les opcions d'inici i de tancament de sessió automàtica no poden pas activar-se alhora."
 
 #: include/views/administration.users.edit.php:216 profile.php:49 users.php:59
 msgid "Auto-logout"
-msgstr ""
+msgstr "Tancament de sessió automàtica"
 
 #: include/views/administration.general.housekeeper.edit.php:67
 msgid "Auto-registration data storage period"
-msgstr ""
+msgstr "Període d'emmagatzematge de les dades de registre automàtic"
 
 #: adm.housekeeper.php:41
 msgid "Auto-registration event and alert data storage period"
-msgstr ""
+msgstr "Període d'emmagatzematge dels esdeveniments i alertes d'enregistrament automàtic"
 
 #: include/profiles.inc.php:221
 #, c-format
 msgid "Auto-registration event and alert data storage period \"%1$s\"."
-msgstr ""
+msgstr "Període d'emmagatzematge dels esdeveniments i alertes d'enregistrament automàtic \"%1$s\"."
 
 #: include/hosts.inc.php:1274
 #: include/views/administration.general.other.edit.php:59
@@ -1281,130 +1284,130 @@ msgstr ""
 #: include/views/configuration.host.massupdate.php:279
 #: include/views/configuration.host.prototype.edit.php:368
 msgid "Automatic"
-msgstr ""
+msgstr "Automàtic"
 
 #: include/views/monitoring.sysmap.edit.php:122
 msgid "Automatic icon mapping"
-msgstr ""
+msgstr "Mapatge automàtic d'icones"
 
 #: include/views/js/monitoring.sysmaps.js.php:213
 #: include/views/js/monitoring.sysmaps.js.php:603
 msgid "Automatic icon selection"
-msgstr ""
+msgstr "Selecció automàtica d'icones"
 
 #: include/views/configuration.host.list.php:138
 msgid "Availability"
-msgstr ""
+msgstr "Disponibilitat"
 
 #: include/menu.inc.php:150 report2.php:25 report2.php:159
 msgid "Availability report"
-msgstr ""
+msgstr "Informe de disponibilitat"
 
 #: include/classes/screens/CScreenHostsInfo.php:87
 msgid "Available"
-msgstr ""
+msgstr "Disponible"
 
 #: adm.triggerseverities.php:37 adm.triggerseverities.php:38
 #: include/views/administration.general.trigseverity.edit.php:62
 msgid "Average"
-msgstr ""
+msgstr "Mitjana"
 
 #: include/classes/widgets/views/widget.svggraph.form.view.php:252
 msgid "Axes"
-msgstr ""
+msgstr "Eixos"
 
 #: include/classes/setup/CSetupWizard.php:124
 #: include/classes/setup/CSetupWizard.php:327
 msgid "Back"
-msgstr ""
+msgstr "Enrere"
 
 #: include/views/administration.general.image.edit.php:65
 #: include/views/administration.general.image.list.php:34
 #: include/views/js/monitoring.sysmaps.js.php:340
 msgid "Background"
-msgstr ""
+msgstr "Fons"
 
 #: include/views/js/monitoring.sysmaps.js.php:502
 msgid "Background colour"
-msgstr ""
+msgstr "Color de fons"
 
 #: include/views/monitoring.sysmap.edit.php:112
 msgid "Background image"
-msgstr ""
+msgstr "Imatge de fons"
 
 #: app/views/administration.authentication.edit.php:98
 msgid "Base DN"
-msgstr ""
+msgstr "DN base"
 
 #: include/classes/widgets/CWidgetHelper.php:702
 #: include/classes/widgets/CWidgetHelper.php:974
 msgid "Base colour"
-msgstr ""
+msgstr "Color base"
 
 #: include/httptest.inc.php:28
 #: include/views/configuration.host.discovery.edit.php:288
 #: include/views/configuration.item.edit.php:329
 #: include/views/configuration.item.prototype.edit.php:317
 msgid "Basic"
-msgstr ""
+msgstr "Bàsic"
 
 #: app/views/administration.authentication.edit.php:110
 msgid "Bind DN"
-msgstr ""
+msgstr "Enllaçar DN"
 
 #: app/views/administration.authentication.edit.php:121
 msgid "Bind password"
-msgstr ""
+msgstr "Enllaçar el mot de pas"
 
 #: adm.triggerdisplayoptions.php:44 adm.triggerdisplayoptions.php:45
 #: adm.triggerdisplayoptions.php:46 adm.triggerdisplayoptions.php:47
 msgid "Blinking"
-msgstr ""
+msgstr "Pampallugues"
 
 #: include/views/administration.users.list.php:120
 msgid "Blocked"
-msgstr ""
+msgstr "Blocat"
 
 #: include/classes/core/ZBase.php:269
 msgid "Blue"
-msgstr ""
+msgstr "Blau"
 
 #: include/views/configuration.host.discovery.edit.php:263
 #: include/views/configuration.item.edit.php:295
 #: include/views/configuration.item.prototype.edit.php:283
 msgid "Body"
-msgstr ""
+msgstr "Cos"
 
 #: include/views/configuration.host.discovery.edit.php:265
 #: include/views/configuration.item.edit.php:297
 #: include/views/configuration.item.prototype.edit.php:285
 msgid "Body and headers"
-msgstr ""
+msgstr "Cos i capçaleres"
 
 #: include/graphs.inc.php:59 include/views/js/monitoring.sysmaps.js.php:700
 #: include/views/js/monitoring.sysmaps.js.php:788
 msgid "Bold line"
-msgstr ""
+msgstr "Línia en negreta"
 
 #: include/items.inc.php:1738
 msgid "Boolean to decimal"
-msgstr ""
+msgstr "De booleà a decimal"
 
 #: include/views/js/monitoring.sysmaps.js.php:350
 msgid "Border"
-msgstr ""
+msgstr "Vora"
 
 #: include/views/js/monitoring.sysmaps.js.php:531
 msgid "Border colour"
-msgstr ""
+msgstr "Color de la vora"
 
 #: include/views/js/monitoring.sysmaps.js.php:511
 msgid "Border type"
-msgstr ""
+msgstr "Tipus de vora"
 
 #: include/views/js/monitoring.sysmaps.js.php:521
 msgid "Border width"
-msgstr ""
+msgstr "Amplada de la vora"
 
 #: include/views/js/monitoring.sysmaps.js.php:18
 #: include/views/js/monitoring.sysmaps.js.php:119
@@ -1412,27 +1415,27 @@ msgstr ""
 #: include/views/monitoring.screen.constructor.edit.php:899
 #: include/views/monitoring.sysmap.edit.php:203
 msgid "Bottom"
-msgstr ""
+msgstr "A baix"
 
 #: jsLoader.php:172
 msgid "Bring forward"
-msgstr ""
+msgstr "Dur endavant"
 
 #: jsLoader.php:171
 msgid "Bring to front"
-msgstr ""
+msgstr "Dur al davant"
 
 #: include/locales.inc.php:54
 msgid "Bulgarian (bg_BG)"
-msgstr ""
+msgstr "Búlgar (bg_BG)"
 
 #: report2.php:191
 msgid "By host"
-msgstr ""
+msgstr "Per equip"
 
 #: report2.php:192
 msgid "By trigger template"
-msgstr ""
+msgstr "Per plantilla de trigger"
 
 #: app/views/administration.proxy.list.php:119
 #: app/views/administration.proxy.list.php:132
@@ -1440,7 +1443,7 @@ msgstr ""
 #: include/views/configuration.host.list.php:320
 #: include/views/configuration.host.list.php:323
 msgid "CERT"
-msgstr ""
+msgstr "CERT"
 
 #: app/views/hintbox.eventlist.php:110
 #: app/views/monitoring.widget.problems.view.php:93
@@ -1449,64 +1452,64 @@ msgstr ""
 #: include/classes/screens/CScreenProblem.php:945
 #: include/classes/screens/CScreenProblem.php:1109 include/events.inc.php:335
 msgid "CLOSING"
-msgstr ""
+msgstr "TANCANT"
 
 #: include/classes/items/CHelpItems.php:217
 #: include/classes/items/CHelpItems.php:547
 msgid "CPU information. Returns string or integer"
-msgstr ""
+msgstr "Informació de CPU. Retorna una cadena o un enter"
 
 #: include/classes/items/CHelpItems.php:193
 #: include/classes/items/CHelpItems.php:523
 msgid "CPU load. Returns float"
-msgstr ""
+msgstr "Càrrega de la CPU. Retorns un flotant"
 
 #: include/classes/items/CHelpItems.php:205
 #: include/classes/items/CHelpItems.php:535
 msgid "CPU utilisation percentage. Returns float"
-msgstr ""
+msgstr "Percentatge d'ús de la CPU. Retorna un nombre flotant"
 
 #: include/views/configuration.services.edit.php:82 services.php:40
 msgid "Calculate SLA, acceptable SLA (in %)"
-msgstr ""
+msgstr "SLA calculat, SLA acceptable (en %)"
 
 #: include/items.inc.php:102 include/views/configuration.graph.edit.php:157
 #: include/views/configuration.graph.edit.php:239
 msgid "Calculated"
-msgstr ""
+msgstr "Calculat"
 
 #: include/classes/items/CHelpItems.php:705
 msgid "Calculates the average value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula la mitjana, en funció dels diferents paràmetres proveïts. El servidor Zabbix recull la informació afegida fent peticions directament a la base de dades."
 
 #: include/classes/items/CHelpItems.php:713
 msgid "Calculates the maximum value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula el valor màxim, en funció dels diferents paràmetres proveïts. El servidor Zabbix recull la informació afegida fent peticions directament a la base de dades."
 
 #: include/classes/items/CHelpItems.php:709
 msgid "Calculates the minimum value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula el valor mínim, en funció dels diferents paràmetres proveïts. El servidor Zabbix recull la informació afegida fent peticions directament a la base de dades."
 
 #: include/classes/items/CHelpItems.php:717
 msgid "Calculates the sum of values, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula la suma de valors, en funció dels diferents paràmetres proveïts. El servidor Zabbix recull la informació afegida fent peticions directament a la base de dades."
 
 #: jsLoader.php:128
 msgid "Calendar"
-msgstr ""
+msgstr "Calendari"
 
 #: include/hosts.inc.php:60
 msgid "Callback"
-msgstr ""
+msgstr "Tornar la trucada"
 
 #: jsLoader.php:221
 msgctxt "screen reader"
 msgid "Can not be removed"
-msgstr ""
+msgstr "No es pot pas esborrar"
 
 #: app/views/administration.mediatype.edit.php:169
 msgid "Canada (136 characters)"
-msgstr ""
+msgstr "Canada (136 caràcters)"
 
 #: app/views/administration.mediatype.edit.php:223
 #: app/views/administration.proxy.edit.php:123
@@ -1534,305 +1537,305 @@ msgstr ""
 #: include/views/monitoring.slideconf.edit.php:277 jsLoader.php:99
 #: jsLoader.php:113 jsLoader.php:283 jsLoader.php:295
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·lar"
 
 #: include/classes/api/services/CHttpTest.php:702
 #, c-format
 msgid "Cannot add a discovered application \"%1$s\" to a web scenario."
-msgstr ""
+msgstr "No es pot pas afegir l'aplicació descoberta \"%1$s\" a un escenari web."
 
 #: include/classes/api/services/CGraph.php:703
 #: include/classes/api/services/CGraph.php:717
 #: include/classes/api/services/CGraph.php:731
 #, c-format
 msgid "Cannot add a non-numeric item \"%1$s\" to graph \"%2$s\"."
-msgstr ""
+msgstr "No es pot afegir un element no numèric \"%1$s\" al gràfic \"%2$s\"."
 
 #: include/classes/api/services/CGraphPrototype.php:670
 #: include/classes/api/services/CGraphPrototype.php:734
 #, c-format
 msgid "Cannot add a non-numeric item \"%1$s\" to graph prototype \"%2$s\"."
-msgstr ""
+msgstr "No es pot afegir un element no numèric \"%1$s\" al prototip de gràfic \"%2$s\"."
 
 #: actionconf.php:233
 msgid "Cannot add action"
-msgstr ""
+msgstr "No es pot pas afegir l'acció"
 
 #: actionconf.php:317
 msgid "Cannot add action condition"
-msgstr ""
+msgstr "No es pot pas afegir una condició d'acció"
 
 #: applications.php:113
 msgid "Cannot add application"
-msgstr ""
+msgstr "No es pot pas afegir l'aplicació"
 
 #: correlation.php:146
 msgid "Cannot add correlation"
-msgstr ""
+msgstr "No es pot pas afegir la correlació"
 
 #: correlation.php:228 correlation.php:238 correlation.php:244
 #: correlation.php:264 correlation.php:268 correlation.php:281
 msgid "Cannot add correlation condition"
-msgstr ""
+msgstr "No es pot pas afegir una condició de correlació"
 
 #: include/classes/api/services/CTrigger.php:943
 #: include/classes/api/services/CTriggerPrototype.php:780
 msgid "Cannot add dependency from a host to a template."
-msgstr ""
+msgstr "No es pot pas afegir la dependència d'un equip a una plantilla."
 
 #: include/classes/api/services/CDiscoveryRule.php:857
 #: include/triggers.inc.php:527
 #, c-format
 msgid "Cannot add dependency from trigger \"%1$s:%2$s\" to non existing trigger \"%3$s:%4$s\"."
-msgstr ""
+msgstr "No es pot pas afegir la dependència del trigger \"%1$s:%2$s\" al trigger inexistent \"%3$s:%4$s\"."
 
 #: host_discovery.php:478
 msgid "Cannot add discovery rule"
-msgstr ""
+msgstr "No es pot pas afegir una regla de descobriment"
 
 #: graphs.php:246
 msgid "Cannot add graph"
-msgstr ""
+msgstr "No es pot pas afegir el gràfic"
 
 #: graphs.php:228
 msgid "Cannot add graph prototype"
-msgstr ""
+msgstr "No es pot pas afegir el prototip de gràfic"
 
 #: hostgroups.php:113 usergrps.php:143
 msgid "Cannot add group"
-msgstr ""
+msgstr "No es pot pas afegir el grup"
 
 #: hosts.php:521
 msgid "Cannot add host"
-msgstr ""
+msgstr "No es pot afegir l'equip"
 
 #: host_prototypes.php:215
 msgid "Cannot add host prototype"
-msgstr ""
+msgstr "No es pot afegir el prototip d'equip"
 
 #: adm.images.php:63
 msgid "Cannot add image"
-msgstr ""
+msgstr "No es pot pas afegir la imatge"
 
 #: items.php:879
 msgid "Cannot add item"
-msgstr ""
+msgstr "No es pot pas afegir l'element"
 
 #: include/classes/api/services/CApplication.php:558
 #, c-format
 msgid "Cannot add item \"%1$s\" from \"%2$s\" to application \"%3$s\" from \"%4$s\"."
-msgstr ""
+msgstr "No es pot pas afegir l'element \"%1$s\" de \"%2$s\" a l'aplicació \"%3$s\" de \"%4$s\"."
 
 #: disc_prototypes.php:612
 msgid "Cannot add item prototype"
-msgstr ""
+msgstr "No es pot pas afegir un prototip d'element"
 
 #: include/classes/api/services/CApplication.php:611
 msgid "Cannot add items."
-msgstr ""
+msgstr "No es poden pas afegir els elements"
 
 #: maintenance.php:125
 msgid "Cannot add maintenance"
-msgstr ""
+msgstr "No es pot pas afegir el manteniment"
 
 #: include/classes/api/services/CMap.php:1487
 #, c-format
 msgid "Cannot add map element of the map \"%1$s\" due to circular reference."
-msgstr ""
+msgstr "No es pot pas afegir l'element del mapa \"%1$s\" a causa d'una referència circular."
 
 #: app/controllers/CControllerMediatypeCreate.php:69
 #: app/controllers/CControllerMediatypeCreate.php:159
 msgid "Cannot add media type"
-msgstr ""
+msgstr "No es pot pas afegir el tipus de suport"
 
 #: include/classes/api/services/CGraph.php:40
 #, c-format
 msgid "Cannot add more than one item with type \"Graph sum\" on graph \"%1$s\"."
-msgstr ""
+msgstr "No es pot pas afegir més d'un element amb el tipus \"Suma del gràfic\" al gràfic \"%1$s\"."
 
 #: include/classes/api/services/CGraphPrototype.php:40
 #, c-format
 msgid "Cannot add more than one item with type \"Graph sum\" on graph prototype \"%1$s\"."
-msgstr ""
+msgstr "No es pot pas afegir més d'un element amb el tipus \"Suma gràfica\" al prototip de gràfic \"%1$s\"."
 
 #: sysmaps.php:211
 msgid "Cannot add network map"
-msgstr ""
+msgstr "No es pot pas afegir el mapa de xarxa"
 
 #: httpconf.php:329
 #, c-format
 msgid "Cannot add new application \"%1$s\"."
-msgstr ""
+msgstr "No es pot pas afegir la nova aplicació \"%1$s\"."
 
 #: app/controllers/CControllerProxyCreate.php:56
 #: app/controllers/CControllerProxyCreate.php:106
 msgid "Cannot add proxy"
-msgstr ""
+msgstr "No es pot pas afegir el proxy"
 
 #: adm.regexps.php:147
 msgid "Cannot add regular expression"
-msgstr ""
+msgstr "No es pot pas afegir una expressió regular"
 
 #: screenconf.php:175
 msgid "Cannot add screen"
-msgstr ""
+msgstr "No es pot pas afegir la pantalla"
 
 #: app/controllers/CControllerScriptCreate.php:47
 #: app/controllers/CControllerScriptCreate.php:91
 msgid "Cannot add script"
-msgstr ""
+msgstr "No es pot pas afegir l'script"
 
 #: services.php:154
 msgid "Cannot add service"
-msgstr ""
+msgstr "No es pot pas afegir el servei"
 
 #: slideconf.php:156
 msgid "Cannot add slide show"
-msgstr ""
+msgstr "No es pot pas afegir la presentació"
 
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:112
 msgid "Cannot add submaps. Max depth reached."
-msgstr ""
+msgstr "No es poden pas afegir submapes. S'ha arribat a la profunditat màxima."
 
 #: templates.php:177
 msgid "Cannot add template"
-msgstr ""
+msgstr "No es pot pas afegir la plantilla"
 
 #: app/controllers/CControllerPopupTriggerWizard.php:205 triggers.php:278
 msgid "Cannot add trigger"
-msgstr ""
+msgstr "No es pot pas afegir el trigger"
 
 #: trigger_prototypes.php:229
 msgid "Cannot add trigger prototype"
-msgstr ""
+msgstr "No es pot pas afegir un prototip de trigger"
 
 #: users.php:208
 msgid "Cannot add user"
-msgstr ""
+msgstr "No es pot pas afegir l'usuari"
 
 #: users.php:158
 msgid "Cannot add user. Both passwords must be equal."
-msgstr ""
+msgstr "No es pot pas afegir l'usuari. Els mots de pas han d'ésser idèntics."
 
 #: adm.valuemapping.php:80
 msgid "Cannot add value map"
-msgstr ""
+msgstr "No es pot pas afegir el mapa de valors"
 
 #: httpconf.php:205
 msgid "Cannot add web scenario"
-msgstr ""
+msgstr "No es pot pas afegir l'escenari web"
 
 #: jsLoader.php:110
 msgid "Cannot add widget: not enough free space on the dashboard."
-msgstr ""
+msgstr "No es pot pas afegir el giny: no hi ha prou espai lliure al tauler."
 
 #: jsLoader.php:103
 msgid "Cannot add widgets in kiosk mode"
-msgstr ""
+msgstr "No es poden pas afegir els ginys en mode quiosc"
 
 #: include/classes/validators/CLdapAuthValidator.php:79
 msgid "Cannot bind anonymously to LDAP server."
-msgstr ""
+msgstr "No es pot vincular de manera anònima al servidor LDAP."
 
 #: include/classes/validators/CLdapAuthValidator.php:78
 msgid "Cannot bind to LDAP server."
-msgstr ""
+msgstr "No es pot pas vincular al servidor LDAP."
 
 #: httpconf.php:196 httpconf.php:512 items.php:928
 msgid "Cannot clear history"
-msgstr ""
+msgstr "No es pot pas esborrar l'historial"
 
 #: items.php:1325
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
-msgstr ""
+msgstr "No es pot pas netejar l'històric: com a mínim un dels elements triats no pertany a cap equip monitorat"
 
 #: include/classes/api/services/CDiscoveryRule.php:1549
 msgid "Cannot clone graph prototypes."
-msgstr ""
+msgstr "No es poden pas clonar prototips de gràfics."
 
 #: include/classes/api/services/CDiscoveryRule.php:1597
 msgid "Cannot clone host prototypes."
-msgstr ""
+msgstr "No es poden pas clonar prototips d'equips."
 
 #: include/classes/api/services/CDiscoveryRule.php:1352
 #: include/classes/api/services/CDiscoveryRule.php:1408
 #: include/classes/api/services/CDiscoveryRule.php:1426
 msgid "Cannot clone item prototypes."
-msgstr ""
+msgstr "No es poden pas clonar prototips d'elements."
 
 #: include/classes/api/services/CDiscoveryRule.php:770
 msgid "Cannot clone trigger prototypes."
-msgstr ""
+msgstr "No es poden pas clonar prototips de triggers."
 
 #: include/classes/api/services/CEvent.php:875
 #, c-format
 msgid "Cannot close problem: %1$s."
-msgstr ""
+msgstr "No es pot pas tancar el problema: %1$s."
 
 #: include/classes/validators/CLdapAuthValidator.php:77
 msgid "Cannot connect to LDAP server."
-msgstr ""
+msgstr "No es pot pas connectar amb el servidor LDAP."
 
 #: include/classes/setup/CSetupWizard.php:255
 msgid "Cannot connect to the database."
-msgstr ""
+msgstr "No es pot connectar a la base de dades."
 
 #: include/views/js/configuration.httpconf.edit.js.php:79
 msgid "Cannot convert POST data:"
-msgstr ""
+msgstr "No es poden pas convertir les dades POST:"
 
 #: graphs.php:390
 msgid "Cannot copy graph"
 msgid_plural "Cannot copy graphs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas copiar el gràfic"
+msgstr[1] "No es poden pas copiar els gràfics"
 
 #: items.php:1270
 msgid "Cannot copy item"
 msgid_plural "Cannot copy items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas copiar l'element"
+msgstr[1] "No es poden pas copiar els elements"
 
 #: triggers.php:538
 msgid "Cannot copy trigger"
 msgid_plural "Cannot copy triggers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas copiar el trigger"
+msgstr[1] "No es poden pas copiar els triggers"
 
 #: include/triggers.inc.php:384
 #, c-format
 msgid "Cannot copy trigger \"%1$s:%2$s\", because it has multiple hosts in the expression."
-msgstr ""
+msgstr "No es pot copiar el trigger \"%1$s:%2$s\", perquè té diversos equips a l'expressió."
 
 #: include/classes/api/services/CHostPrototype.php:193
 #, c-format
 msgid "Cannot create a host prototype on a discovered host \"%1$s\"."
-msgstr ""
+msgstr "No es pot crear un prototip d'equip en un equip descobert \"%1$s\"."
 
 #: include/db.inc.php:34
 msgid "Cannot create another database connection."
-msgstr ""
+msgstr "No es pot crear una altra connexió a la base de dades."
 
 #: include/classes/api/services/CTrigger.php:977
 #: include/classes/api/services/CTriggerPrototype.php:811
 msgid "Cannot create circular dependencies."
-msgstr ""
+msgstr "No es poden pas crear dependències circulars."
 
 #: include/classes/api/services/CTrigger.php:949
 msgid "Cannot create dependency on trigger itself."
-msgstr ""
+msgstr "No es pot pas crear dependència del propi trigger."
 
 #: include/classes/api/services/CTriggerPrototype.php:750
 msgid "Cannot create dependency on trigger prototype itself."
-msgstr ""
+msgstr "No es pot pas crear dependència del propi prototip de trigger."
 
 #: discoveryconf.php:162
 msgid "Cannot create discovery rule"
-msgstr ""
+msgstr "No es pot pas crear una regla de descobriment"
 
 #: adm.iconmapping.php:71
 msgid "Cannot create icon map"
-msgstr ""
+msgstr "No es pot pas crear un mapa d'icones"
 
 #: httpconf.php:214
 msgid "Cannot create new application, web scenario is already assigned to application."
@@ -16568,6 +16571,7 @@ msgstr ""
 msgid "Unsupported charset or collation for table: %1$s."
 msgid_plural "Unsupported charset or collation for tables: %1$s."
 msgstr[0] ""
+msgstr[1] ""
 
 #: include/classes/import/readers/CImportReaderFactory.php:65
 #, c-format
