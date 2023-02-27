@@ -255,12 +255,13 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 		$form = $this->openLdapForm();
 		$form->query('button:Add')->one()->click();
 		COverlayDialogElement::find()->waitUntilReady()->asForm()->one()->fill($data['ldap_settings']);
-		$this->query('button:Test')->waitUntilClickable()->one()->click();
+		$this->query('button:Test')->waitUntilClickable()->one()->click()->waitUntilReady();
 
 		// Fill login and user password in Test authentication form.
 		if (array_key_exists('test_settings', $data)) {
-			$test_form = COverlayDialogElement::find()->waitUntilReady()->asForm()->all()->last();
-			$test_form->fill($data['test_settings'])->submit()->waitUntilReady();
+			$test_dialog = COverlayDialogElement::find()->waitUntilReady()->all()->last();
+			$test_dialog->asForm()->all()->last()->fill($data['test_settings'])->submit();
+			$test_dialog->waitUntilReady();
 		}
 
 		// Check error messages testing LDAP settings.
