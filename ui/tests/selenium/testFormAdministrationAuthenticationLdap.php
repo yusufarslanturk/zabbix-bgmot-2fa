@@ -260,7 +260,7 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 		// Fill login and user password in Test authentication form.
 		if (array_key_exists('test_settings', $data)) {
 			$test_dialog = COverlayDialogElement::find()->waitUntilReady()->all()->last();
-			$test_dialog->asForm()->all()->last()->fill($data['test_settings'])->submit();
+			$test_dialog->asForm()->fill($data['test_settings'])->submit();
 			$test_dialog->waitUntilReady();
 		}
 
