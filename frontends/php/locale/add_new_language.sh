@@ -1,6 +1,6 @@
 #!/bin/bash
 
-messagetemplate=frontend.pot
+messagetemplate=en/LC_MESSAGES/frontend.pot
 
 [[ $1 ]] || {
 	echo "Specify language code"
@@ -9,7 +9,7 @@ messagetemplate=frontend.pot
 
 [ -f $messagetemplate ] && {
 	mkdir -p $1/LC_MESSAGES
-	msginit --no-translator --no-wrap --locale=$1 --input=frontend.pot \
+	msginit --no-translator --no-wrap --locale=$1 --input=$messagetemplate \
 	-o $1/LC_MESSAGES/frontend.po || exit 1
 	echo "frontend.mo" >> $1/LC_MESSAGES/.gitignore
 	git add $1
