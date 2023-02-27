@@ -77,6 +77,19 @@
 		</exec>
 	</target>
 
+	<target name="create-ldap-configs">
+		<property name="phpunit_ldap_host" value="${PHPUNIT_LDAP_HOST}"/>
+		<property name="phpunit_ldap_bind_password" value="${PHPUNIT_LDAP_BIND_PASSWORD}"/>
+		<property name="phpunit_ldap_username" value="${PHPUNIT_LDAP_USERNAME}"/>
+		<property name="phpunit_ldap_user_password" value="${PHPUNIT_LDAP_USER_PASSWORD}"/>
+
+		<!-- LDAP settings -->
+		<replace file="frontends/php/tests/bootstrap.php" token="{PHPUNIT_LDAP_HOST}" value="${phpunit_ldap_host}"/>
+		<replace file="frontends/php/tests/bootstrap.php" token="{PHPUNIT_LDAP_BIND_PASSWORD}" value="${phpunit_ldap_bind_password}"/>
+		<replace file="frontends/php/tests/bootstrap.php" token="{PHPUNIT_LDAP_USERNAME}" value="${phpunit_ldap_username}"/>
+		<replace file="frontends/php/tests/bootstrap.php" token="{PHPUNIT_LDAP_USER_PASSWORD}" value="${phpunit_ldap_user_password}"/>
+	</target>
+
 	<target name="make-dbschema">
 		<!-- Create database schema -->
 		<exec executable="./bootstrap.sh" failonerror="on"/>
@@ -209,7 +222,7 @@
 		</exec>
 	</target>
 
-	<target name="init-frontend-postgresql" depends="create-configs,make-dbschema,make-gettext,create-db-postgresql">
+	<target name="init-frontend-postgresql" depends="create-configs,create-ldap-configs,make-dbschema,make-gettext,create-db-postgresql">
 		<exec executable="psql" input="frontends/php/tests/selenium/data/data_test.sql" failonerror="on">
 			<env key="PGPASSWORD" value="${dbpassword}"/>
 			<arg line="-q"/>
@@ -341,7 +354,7 @@
 		</exec>
 	</target>
 
-	<target name="init-frontend-mysql" depends="create-configs,mariadb-patch-schema,make-dbschema,make-gettext,create-db-mysql">
+	<target name="init-frontend-mysql" depends="create-configs,mariadb-patch-schema,create-ldap-configs,make-dbschema,make-gettext,create-db-mysql">
 		<exec executable="mysql" input="frontends/php/tests/selenium/data/data_test.sql" failonerror="on">
 			<env key="MYSQL_PWD" value="${dbpassword}"/>
 			<arg line="--host=${dbhost}"/>
