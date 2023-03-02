@@ -18,7 +18,7 @@
 **/
 
 #include "zbxdbhigh.h"
-#include "zbx_dbver_constants.h"
+#include "zbx_dbversion_constants.h"
 
 #include "log.h"
 #include "events.h"
