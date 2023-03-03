@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2023-02-23 19:17+0000\n"
+"PO-Revision-Date: 2023-03-03 08:51+0000\n"
 "Last-Translator: Xevi Noè i Nogueiras <xevi.noe@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ca\n"
@@ -1839,201 +1839,201 @@ msgstr "No es pot pas crear un mapa d'icones"
 
 #: httpconf.php:214
 msgid "Cannot create new application, web scenario is already assigned to application."
-msgstr ""
+msgstr "No es pot pas crear una nova aplicació, l'escenari web ja s'ha assignat a una aplicació."
 
 #: include/classes/setup/CSetupWizard.php:368
 msgid "Cannot create the configuration file."
-msgstr ""
+msgstr "No es pot pas crear el fitxer de configuració."
 
 #: include/classes/api/services/CDashboard.php:385
 #, c-format
 msgid "Cannot create widget: %1$s."
-msgstr ""
+msgstr "No es pot pas crear el giny: %1$s."
 
 #: include/classes/api/services/CUser.php:998
 #, c-format
 msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
-msgstr ""
+msgstr "No es pot pas esborrar l'usuari intern de Zabbix \"%1$s\"; proveu a desactivar aquest usuari."
 
 #: actionconf.php:254
 msgid "Cannot delete action"
-msgstr ""
+msgstr "No es pot pas esborrar l'acció"
 
 #: applications.php:132 applications.php:144
 msgid "Cannot delete application"
 msgid_plural "Cannot delete applications"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas esborrar l'aplicació"
+msgstr[1] "No es poden pas esborrar les aplicacions"
 
 #: correlation.php:162
 msgid "Cannot delete correlation"
-msgstr ""
+msgstr "No es pot pas esborrar la correlació"
 
 #: app/controllers/CControllerDashboardDelete.php:62
 msgid "Cannot delete dashboard"
 msgid_plural "Cannot delete dashboards"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas esborrar el tauler"
+msgstr[1] "No es poden pas esborrar els taulers"
 
 #: include/classes/api/services/CTrigger.php:847
 #: include/classes/api/services/CTriggerPrototype.php:577
 msgid "Cannot delete dependency"
-msgstr ""
+msgstr "No es pot pas esborrar la dependència"
 
 #: include/classes/api/services/CApplication.php:461
 #, c-format
 msgid "Cannot delete discovered application \"%1$s\"."
-msgstr ""
+msgstr "No es pot pas esborrar l'aplicació descoberta \"%1$s\"."
 
 #: discoveryconf.php:186 host_discovery.php:278
 msgid "Cannot delete discovery rule"
-msgstr ""
+msgstr "No es pot pas esborrar la regla de descoberta"
 
 #: discoveryconf.php:228 host_discovery.php:521
 msgid "Cannot delete discovery rules"
-msgstr ""
+msgstr "No es poden pas esborrar les regles de descoberta"
 
 #: graphs.php:289
 msgid "Cannot delete graph"
-msgstr ""
+msgstr "No es pot pas esborrar el gràfic"
 
 #: graphs.php:281
 msgid "Cannot delete graph prototype"
-msgstr ""
+msgstr "No es pot pas esborrar el prototip de gràfic"
 
 #: graphs.php:314
 msgid "Cannot delete graph prototypes"
-msgstr ""
+msgstr "No es poden pas esborrar els prototips de gràfics"
 
 #: graphs.php:331
 msgid "Cannot delete graphs"
-msgstr ""
+msgstr "No es poden pas esborrar gràfics"
 
 #: hostgroups.php:133 hostgroups.php:155 usergrps.php:158 usergrps.php:173
 msgid "Cannot delete group"
 msgid_plural "Cannot delete groups"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas esborrar el grup"
+msgstr[1] "No es poden pas esborrar els grups"
 
 #: hosts.php:754 hosts.php:775
 msgid "Cannot delete host"
-msgstr ""
+msgstr "No es pot esborrar l'equip"
 
 #: include/classes/api/services/CHost.php:1239
 #, c-format
 msgid "Cannot delete host because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected hosts because maintenance \"%1$s\" must contain at least one host or host group."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot esborrar l'equip perquè el manteniment \"%1$s\" ha de contindre, com a mínim, un equip o grup d'equips."
+msgstr[1] "No es poden pas esborrar els equips perquè el manteniment \"%1$s\" ha de contindre, com a mínim, un equip o grup d'equips."
 
 #: include/classes/api/services/CHostGroup.php:1535
 #, c-format
 msgid "Cannot delete host group because maintenance \"%1$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete selected host groups because maintenance \"%1$s\" must contain at least one host or host group."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas esborrar el grup d'equips perquè el manteniment \"%1$s\" ha de contindre, com a mínim, un equip o grup d'equips."
+msgstr[1] "No es poden pas esborrar els grups d'equips perquè el manteniment \"%1$s\" ha de contindre, com a mínim, un equip o grup d'equips."
 
 #: include/classes/api/services/CDiscoveryRule.php:541
 msgid "Cannot delete host prototype."
-msgstr ""
+msgstr "No es pot pas esborrar el prototip d'equips"
 
 #: host_prototypes.php:126 host_prototypes.php:259
 msgid "Cannot delete host prototypes"
-msgstr ""
+msgstr "No es poden pas esborrar els prototips d'equips"
 
 #: adm.iconmapping.php:85
 msgid "Cannot delete icon map"
-msgstr ""
+msgstr "No es pot pas esborrar el mapa d'icones"
 
 #: adm.images.php:124
 msgid "Cannot delete image"
-msgstr ""
+msgstr "No es pot pas esborrar la imatge"
 
 #: include/classes/api/services/CHostInterface.php:434
 #, c-format
 msgid "Cannot delete interface for discovered host \"%1$s\"."
-msgstr ""
+msgstr "No es pot pas actualitzar la interfície de l'equip descobert \"%1$s\"."
 
 #: include/classes/api/services/CHost.php:1026
 msgid "Cannot delete inventory."
-msgstr ""
+msgstr "No es pot pas esborrar l'inventari."
 
 #: items.php:493
 msgid "Cannot delete item"
-msgstr ""
+msgstr "No es pot pas esborrar l'element"
 
 #: disc_prototypes.php:292
 msgid "Cannot delete item prototype"
-msgstr ""
+msgstr "No es pot pas esborrar el prototip d'element"
 
 #: disc_prototypes.php:654
 msgid "Cannot delete item prototypes"
-msgstr ""
+msgstr "No es poden pas esborrar els prototips d'elements"
 
 #: items.php:1335
 msgid "Cannot delete items"
-msgstr ""
+msgstr "No es poden pas esborrar els elements"
 
 #: maintenance.php:224
 msgid "Cannot delete maintenance"
-msgstr ""
+msgstr "No es pot pas esborrar el manteniment"
 
 #: app/controllers/CControllerMediatypeDelete.php:65
 msgid "Cannot delete media type"
 msgid_plural "Cannot delete media types"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas esborrar el tipus de suport"
+msgstr[1] "No es poden pas esborrar els tipus de suport"
 
 #: sysmaps.php:259
 msgid "Cannot delete network map"
-msgstr ""
+msgstr "No es pot pas esborrar el mapa de xarxa"
 
 #: app/controllers/CControllerProxyDelete.php:65
 msgid "Cannot delete proxy"
 msgid_plural "Cannot delete proxies"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas esborrar el proxy"
+msgstr[1] "No es poden pas esborrar els proxys"
 
 #: adm.regexps.php:197
 msgid "Cannot delete regular expression"
 msgid_plural "Cannot delete regular expressions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas esborrar l'expressió regular"
+msgstr[1] "No es poden pas esborrar les expressions regulars"
 
 #: screenconf.php:283
 msgid "Cannot delete screen"
-msgstr ""
+msgstr "No es pot pas esborrar la pantalla"
 
 #: app/controllers/CControllerScriptDelete.php:65
 msgid "Cannot delete script"
 msgid_plural "Cannot delete scripts"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es pot pas esborrar l'script"
+msgstr[1] "No es poden pas esborrar els scripts"
 
 #: include/classes/api/services/CScript.php:594
 #, c-format
 msgid "Cannot delete scripts. Script \"%1$s\" is used in action operation \"%2$s\"."
-msgstr ""
+msgstr "No es poden pas esborrar els scripts. L'script \"%1$s\" s'empra en l'operació d'acció \"%2$s\"."
 
 #: actionconf.php:519
 msgid "Cannot delete selected actions"
-msgstr ""
+msgstr "No es poden pas esborrar les accions triades"
 
 #: correlation.php:374
 msgid "Cannot delete selected correlations"
-msgstr ""
+msgstr "No es poden pas esborrar les correlacions triades"
 
 #: services.php:108
 msgid "Cannot delete service"
-msgstr ""
+msgstr "No es pot pas esborrar el servei"
 
 #: slideconf.php:187 slideconf.php:208
 msgid "Cannot delete slide show"
-msgstr ""
+msgstr "No es pot pas esborrar la presentació"
 
 #: templates.php:364 templates.php:378 templates.php:411
 msgid "Cannot delete template"
-msgstr ""
+msgstr "No es pot pas esborrar la plantilla"
 
 #: include/classes/api/services/CApplication.php:468
 msgid "Cannot delete templated application."
