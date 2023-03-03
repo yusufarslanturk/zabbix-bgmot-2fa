@@ -829,7 +829,7 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 
 		// Fill LDAP server form.
 		foreach ($ldaps as $ldap) {
-			$form->query($query)->one()->click();
+			$form->query($query)->one()->waitUntilCLickable()->click();
 			$ldap_form = COverlayDialogElement::find()->waitUntilReady()->asForm()->one();
 			$ldap_form->fill($ldap)->submit();
 		}
