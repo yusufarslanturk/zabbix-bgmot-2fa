@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-03-03 20:20+0000\n"
-"Last-Translator: Tomáš Heřmánek <tomas.hermanek@initmax.cz>\n"
+"PO-Revision-Date: 2023-03-08 11:42+0000\n"
+"Last-Translator: Sergejs <sergejs.maklakovs@zabbix.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -3066,42 +3066,42 @@ msgstr "Nelze připojit šablonu \"%1$s\" k šabloně \"%2$s\" kvůli výrazu v 
 #: include/classes/api/services/CHostBase.php:502
 #, c-format
 msgid "Cannot link template \"%1$s\" to template \"%2$s\", because a circular linkage (%3$s) would occur."
-msgstr ""
+msgstr "Nelze propojit šablonu \"%1$s\" se šablonou \"%2$s\", protože by došlo ke kruhové závislosti (%3$s)."
 
 #: include/classes/api/services/CHostBase.php:638
 #, c-format
 msgid "Cannot link template \"%1$s\" to template \"%2$s\", because its parent template \"%3$s\" would be linked twice."
-msgstr ""
+msgstr "Nelze propojit šablonu \"%1$s\" se šablonou \"%2$s\", protože její nadřazená šablona \"%3$s\" by byla propojena dvakrát."
 
 #: include/classes/api/services/CHostBase.php:705
 #, c-format
 msgid "Cannot link template \"%1$s\" without template \"%2$s\" to host \"%3$s\" due to dependency of trigger \"%4$s\"."
-msgstr ""
+msgstr "Nelze propojit šablonu \"%1$s\" bez šablony \"%2$s\" k hostovi \"%3$s\" kvůli závislosti na triggeru \"%4$s\"."
 
 #: include/classes/api/services/CHostBase.php:832
 #, c-format
 msgid "Cannot link template \"%1$s\" without template \"%2$s\" to host \"%3$s\" due to expression of trigger \"%4$s\"."
-msgstr ""
+msgstr "Nelze propojit šablonu \"%1$s\" bez šablony \"%2$s\" k hostovi \"%3$s\" kvůli výrazu v triggeru \"%4$s\"."
 
 #: include/classes/api/services/CHostBase.php:702
 #, c-format
 msgid "Cannot link template \"%1$s\" without template \"%2$s\" to host prototype \"%3$s\" due to dependency of trigger \"%4$s\"."
-msgstr ""
+msgstr "Nelze propojit šablonu \"%1$s\" bez šablony \"%2$s\" k prototypu hosta \"%3$s\" kvůli závislosti na triggeru \"%4$s\"."
 
 #: include/classes/api/services/CHostBase.php:829
 #, c-format
 msgid "Cannot link template \"%1$s\" without template \"%2$s\" to host prototype \"%3$s\" due to expression of trigger \"%4$s\"."
-msgstr ""
+msgstr "Nelze propojit šablonu \"%1$s\" bez šablony \"%2$s\" k prototypu hosta \"%3$s\" kvůli výrazu v triggeru \"%4$s\"."
 
 #: include/classes/api/services/CHostBase.php:699
 #, c-format
 msgid "Cannot link template \"%1$s\" without template \"%2$s\" to template \"%3$s\" due to dependency of trigger \"%4$s\"."
-msgstr ""
+msgstr "Nelze propojit šablonu \"%1$s\" bez šablony \"%2$s\" k hostovi \"%3$s\" kvůli závislosti na triggeru \"%4$s\"."
 
 #: include/classes/api/services/CHostBase.php:826
 #, c-format
 msgid "Cannot link template \"%1$s\" without template \"%2$s\" to template \"%3$s\" due to expression of trigger \"%4$s\"."
-msgstr ""
+msgstr "Nelze propojit šablonu \"%1$s\" bez šablony \"%2$s\" k šabloně \"%3$s\" kvůli výrazu v triggeru \"%4$s\"."
 
 #: app/controllers/CControllerModuleEdit.php:106
 #: include/classes/core/ZBase.php:674
@@ -3169,7 +3169,7 @@ msgstr "Není možné číst odpověď, zkontrolujte spojení se Zabbix serverem
 #: app/controllers/CControllerPopupMassupdateHost.php:362
 #, c-format
 msgid "Cannot remove the tag with name \"%1$s\" and value \"%2$s\", defined in a host prototype, from host \"%3$s\"."
-msgstr ""
+msgstr "Nelze odebrat tag se jménem \"%1$s\" a hodnotou \"%2$s\" definovaný v prototypu hosta, z hosta \"%3$s\"."
 
 #: include/classes/api/services/CUser.php:556
 msgid "Cannot rename guest user."
@@ -3267,37 +3267,37 @@ msgstr "Nelze odpojit Šablonu \"%1$s\" od hosta \"%2$s\" kvůli závislosti na 
 #: include/classes/api/services/CHostBase.php:415
 #, c-format
 msgid "Cannot unlink template \"%1$s\" from template \"%2$s\" due to dependency of trigger \"%3$s\" on host \"%4$s\"."
-msgstr ""
+msgstr "Nelze odpojit šablonu \"%1$s\" ze šablony \"%2$s\" kvůli závislosti na triggeru \"%3$s\" na hostovi \"%4$s\"."
 
 #: include/classes/api/services/CHostBase.php:414
 #, c-format
 msgid "Cannot unlink template \"%1$s\" from template \"%2$s\" due to dependency of trigger \"%3$s\" on template \"%4$s\"."
-msgstr ""
+msgstr "Nelze odpojit šablonu \"%1$s\" ze šablony \"%2$s\" kvůli závislosti na triggeru \"%3$s\" na šabloně \"%4$s\"."
 
 #: include/classes/api/services/CHostBase.php:330
 #, c-format
 msgid "Cannot unlink template \"%1$s\" from template \"%2$s\" due to dependency of trigger \"%3$s\"."
-msgstr ""
+msgstr "Nelze odpojit šablonu \"%1$s\" ze šablony \"%2$s\" kvůli závislosti na triggeru \"%3$s\"."
 
 #: include/classes/api/services/CHostBase.php:256
 #, c-format
 msgid "Cannot unlink template \"%1$s\" without template \"%2$s\" from host \"%3$s\" due to dependency of trigger \"%4$s\"."
-msgstr ""
+msgstr "Nelze odpojit šablonu \"%1$s\" bez šablony \"%2$s\" z hosta \"%3$s\" kvůli závislosti na triggeru \"%4$s\"."
 
 #: include/classes/api/services/CHostBase.php:300
 #, c-format
 msgid "Cannot unlink template \"%1$s\" without template \"%2$s\" from host \"%3$s\" due to expression of trigger \"%4$s\"."
-msgstr ""
+msgstr "Nelze odpojit šablonu \"%1$s\" bez šablony \"%2$s\" z hosta \"%3$s\" kvůli výrazu v triggeru \"%4$s\"."
 
 #: include/classes/api/services/CHostBase.php:255
 #, c-format
 msgid "Cannot unlink template \"%1$s\" without template \"%2$s\" from template \"%3$s\" due to dependency of trigger \"%4$s\"."
-msgstr ""
+msgstr "Nelze odpojit šablonu \"%1$s\" bez šablony \"%2$s\" ze šablony \"%3$s\" kvůli závislosti na triggeru \"%4$s\"."
 
 #: include/classes/api/services/CHostBase.php:299
 #, c-format
 msgid "Cannot unlink template \"%1$s\" without template \"%2$s\" from template \"%3$s\" due to expression of trigger \"%4$s\"."
-msgstr ""
+msgstr "Nelze odpojit šablonu \"%1$s\" bez šablony \"%2$s\" ze šablony \"%3$s\" kvůli výrazu v triggeru \"%4$s\"."
 
 #: include/classes/api/services/CHostGeneral.php:1037
 #, c-format
@@ -9029,7 +9029,7 @@ msgstr "Pokud nejsou specifikovány žádné skupiny uživatelů, alespoň jeden
 #: include/classes/helpers/CServiceHelper.php:110
 #, c-format
 msgid "If weight of child services with %1$s status or above is at least %2$s"
-msgstr ""
+msgstr "Pokud je váha podřízených služeb ve stavu %1$s vyšším nebo alespoň %2$s"
 
 #: include/classes/helpers/CServiceHelper.php:65
 #: include/classes/helpers/CServiceHelper.php:70
@@ -10076,7 +10076,7 @@ msgstr "Info"
 
 #: include/classes/data/CItemData.php:1428
 msgid "Info about internal disks of hypervisor required for vmware.datastore.perfcounter, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns JSON"
-msgstr ""
+msgstr "Informace o interních discích hypervisoru vyžadované pro vmware.datastore.perfcounter, <url> - URL služby VMware, <uuid> - název hostitele hypervisoru VMware. Vrátí JSON"
 
 #: app/views/administration.trigdisplay.edit.php:110 include/items.inc.php:31
 #: jsLoader.php:177
@@ -12145,7 +12145,7 @@ msgstr "Limit paměti: %1$s"
 
 #: include/classes/data/CItemData.php:1433
 msgid "Memory metrics of VMware Resource Pool, <url> - VMware service URL, <rpid> - VMware resource pool id, <mode> - consumed(default)/ballooned/overhead memory"
-msgstr ""
+msgstr "Metriky paměti fondu zdrojů VMware, <url> - URL služby VMware, <rpid> - ID fondu prostředků VMware, <režim> - spotřebovaná (výchozí)/nabalená/režijní paměť"
 
 #: include/classes/data/CItemData.php:1210
 msgid "Memory size in bytes or in percentage from total. Returns integer for bytes; float for percentage"
@@ -12803,7 +12803,7 @@ msgstr "Časový limit sítě pro spuštění skriptu"
 
 #: include/classes/data/CItemData.php:1506
 msgid "Network utilization (combined transmit-rates and receive-rates) during the interval, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - network interface instance"
-msgstr ""
+msgstr "Využití sítě (kombinované rychlosti odesílání a rychlosti příjmu) během intervalu, <url> - URL služby VMware, <uuid> - název hostitele virtuálního počítače VMware, <instance> - instance síťového rozhraní"
 
 #: app/views/administration.proxy.list.php:170 include/func.inc.php:196
 msgid "Never"
@@ -14148,7 +14148,7 @@ msgstr "Výstup"
 #: include/classes/api/services/CDashboardGeneral.php:336
 #, c-format
 msgid "Overlapping widgets at X:%3$d, Y:%4$d on page #%2$d of dashboard \"%1$s\"."
-msgstr ""
+msgstr "Překrývající se widgety na X:%3$d, Y:%4$d na stránce #%2$d dashboardu \"%1$s\"."
 
 #: include/views/configuration.item.edit.php:838
 #: include/views/configuration.item.edit.php:875
@@ -14607,7 +14607,7 @@ msgstr "Vrchol využití paměti: %1$s"
 
 #: include/classes/data/CItemData.php:1406
 msgid "Percent of time the virtual machine is unable to run because it is contending for access to the physical CPU(s), <url> - VMware service URL, <uuid> - VMware virtual machine host name"
-msgstr ""
+msgstr "Procento času, kdy se virtuální počítač nemůže spustit, protože vyžaduje přístup k fyzickému CPU, <url> - URL služby VMware, <uuid> - název hostitele virtuálního počítače VMware"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:244
 msgid "Percentage"
@@ -14615,11 +14615,11 @@ msgstr "Procento"
 
 #: include/classes/data/CItemData.php:1490
 msgid "Percentage of host physical memory that has been consumed, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
-msgstr ""
+msgstr "Procento fyzické paměti hostitele, která byla spotřebována, <url> – URL služby VMware, <uuid> – název hostitele virtuálního počítače VMware"
 
 #: include/classes/data/CItemData.php:1414
 msgid "Percentage of time that the virtual machine was ready, but could not get scheduled to run on the physical CPU, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - CPU instance"
-msgstr ""
+msgstr "Procento času, po který byl virtuální počítač připraven, ale nebylo možné naplánovat spuštění na fyzickém CPU, <url> – URL služby VMware, <uuid> – název hostitele virtuálního stroje VMware, <instance> – instance CPU"
 
 #: graphs.php:55 include/views/configuration.graph.edit.php:153
 msgid "Percentile line (left)"
@@ -18133,7 +18133,7 @@ msgstr "Template \"%1$s\" nemůže být bez hostitelské skupiny."
 #: include/classes/api/services/CTemplateGroup.php:942
 #, c-format
 msgid "Template \"%1$s\" cannot be without template group."
-msgstr ""
+msgstr "Šablona \"%1$s\" nemůže existovat bez skupiny šablon."
 
 #: include/classes/import/importers/CHostImporter.php:54
 #, c-format
@@ -18171,7 +18171,7 @@ msgstr "Skupina šablon"
 #: include/classes/api/services/CTemplateGroup.php:540
 #, c-format
 msgid "Template group \"%1$s\" already exists."
-msgstr ""
+msgstr "Skupina šablon \"%1$s\" již existuje."
 
 #: app/controllers/CControllerTemplateGroupCreate.php:62
 msgid "Template group added"
@@ -19069,37 +19069,37 @@ msgstr "Prototyp triggeru \"%1$s\" nemůže záviset na triggeru \"%2$s\" ze ša
 #: include/classes/api/services/CTriggerGeneral.php:2424
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger \"%2$s\", because dependencies of host triggers on template triggers are not allowed."
-msgstr ""
+msgstr "Prototyp triggeru \"%1$s\" nemůže záviset na triggeru \"%2$s\", protože závistlosti triggerů hosta v šabloně triggerů nejsou povoleny."
 
 #: include/classes/api/services/CTriggerGeneral.php:2813
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger \"%2$s\", because the template \"%3$s\" is not linked to the host \"%4$s\"."
-msgstr ""
+msgstr "Prototyp triggeru \"%1$s\" nemůže záviset na triggeru \"%2$s\", protože šablona \"%3$s\" není nalinkovaná na hosta \"%4$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2812
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger \"%2$s\", because the template \"%3$s\" is not linked to the template \"%4$s\"."
-msgstr ""
+msgstr "Prototyp triggeru \"%1$s\" nemůže záviset na triggeru \"%2$s\", protože šablona \"%3$s\" není nalinkovaná na šablonu \"%4$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2306
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger prototype \"%2$s\", because a circular linkage (%3$s) would occur for host \"%4$s\"."
-msgstr ""
+msgstr "Prototyp triggeru\"%1$s\" nemůže záviset na prototypu triggeru \"%2$s\", protože by u hosta \"%4$s\" došlo ke kruhovému propojení (%3$s)."
 
 #: include/classes/api/services/CTriggerGeneral.php:2301
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger prototype \"%2$s\", because a circular linkage (%3$s) would occur for template \"%4$s\"."
-msgstr ""
+msgstr "Prototyp triggeru\"%1$s\" nemůže záviset na prototypu triggeru \"%2$s\", protože by u šablony \"%4$s\" došlo ke kruhovému propojení (%3$s)."
 
 #: include/classes/api/services/CTriggerGeneral.php:2317
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger prototype \"%2$s\", because a circular linkage (%3$s) would occur."
-msgstr ""
+msgstr "Prototyp triggeru \"%1$s\" nemůže záviset na prototypu triggeru \"%2$s\", protože by došlo ke kruhově vazbě (%3$s)."
 
 #: include/classes/api/services/CTriggerGeneral.php:1325
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger prototype \"%2$s\", because dependencies on trigger prototypes from another LLD rule are not allowed."
-msgstr ""
+msgstr "Prototyp triggeru \"%1$s\" nemůže záviset na prototypu triggeru \"%2$s\", protože závistlosti prototypů triggerů z jiného LLD pravidla nejsou povoleny."
 
 #: include/classes/api/services/CTriggerGeneral.php:1715
 #, c-format
@@ -19491,7 +19491,7 @@ msgstr "Odblokovat vybrané uživatele?"
 
 #: app/views/popup.acknowledge.edit.php:125
 msgid "Undo problem acknowledgement."
-msgstr ""
+msgstr "Vrátit zpět odsouhlasení problému."
 
 #: include/classes/core/ZBase.php:574
 #, c-format
@@ -19862,7 +19862,7 @@ msgstr "Použít výchozí"
 
 #: app/partials/configuration.host.edit.html.php:188
 msgid "Use host prototype configuration form to remove automatically linked templates on upcoming discovery."
-msgstr ""
+msgstr "Použijte formulář ke konfiguraci prototypu hosta k odebrání automaticky linkovaných šablon na blížící se objevování."
 
 #: app/views/administration.user.edit.php:300 app/views/popup.media.php:88
 msgid "Use if severity"
@@ -19970,7 +19970,7 @@ msgstr "Uživatelský adresář"
 #: include/classes/api/services/CUserDirectory.php:330
 #, c-format
 msgid "User directory \"%1$s\" already exists."
-msgstr ""
+msgstr "Uživatelský adresář \"%1$s\" již existuje."
 
 #: app/controllers/CControllerAuditLogList.php:245
 #: app/partials/js/scheduledreport.subscription.js.php:83
@@ -20199,7 +20199,7 @@ msgstr "Jméno uživatele a heslo"
 
 #: include/classes/vaults/CVaultCyberArk.php:112
 msgid "Username and password must be stored in Vault secret keys \"UserName\" and \"Content\"."
-msgstr ""
+msgstr "Uživatelské jméno a heslo musí být uloženo v zabezpečeném úložišti pod klíči \"UserName\" a \"Content\"."
 
 #: include/classes/setup/CSetupWizard.php:206
 #: include/classes/setup/CSetupWizard.php:802
@@ -20230,11 +20230,11 @@ msgstr "Uživatelé"
 
 #: include/classes/data/CItemData.php:1255
 msgid "VMware Distributed Virtual Switch, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "VMWare distibuovaný virtuální switch, <url> - URL služby VMWare. Vrátí JSON"
 
 #: include/classes/data/CItemData.php:1259
 msgid "VMware FetchDVPorts wrapper, <url> - VMware service URL, <filter> - vmware data object DistributedVirtualSwitchPortCriteria, <mode> - state(default)/full. Returns JSON"
-msgstr ""
+msgstr "VMware FetchDVPorts wrapper, <url> - URL služby VMware, <filtr> - datový objekt VMware DistributedVirtualSwitchPortCriteria, <mode> - stav(výchozí)/plný. Vrátí JSON"
 
 #: include/classes/data/CItemData.php:1702
 msgid "VMware cache statistics. Valid modes are: total, free, pfree, used and pused."
@@ -20242,15 +20242,15 @@ msgstr "VMware statistiky cache. Platné módy jsou: total, free, pfree, used a 
 
 #: include/classes/data/CItemData.php:1256
 msgid "VMware cluster alarms data, returns JSON, <url> - VMware service URL, <id> - VMware cluster id"
-msgstr ""
+msgstr "Data alarmů clusteru VMware, vrací JSON, <url> – URL služby VMware, <id> – ID clusteru VMware"
 
 #: include/classes/data/CItemData.php:1218
 msgid "VMware cluster performance counter, <url> - VMware service URL, <id> - VMware cluster id, <path> - performance counter path, <instance> - performance counter instance"
-msgstr ""
+msgstr "Čítač výkonu clusteru VMware, <url> – URL služby VMware, <id> – ID clusteru VMware, <cesta> – cesta čítače výkonu, <instance> – instance čítače výkonu"
 
 #: include/classes/data/CItemData.php:1264
 msgid "VMware cluster property, <url> - VMware service URL, <id> - VMware cluster id, <prop> - property path"
-msgstr ""
+msgstr "Vlastnost clusteru VMware, <url> – URL služby VMware, <id> – ID clusteru VMware, <prop> – cesta k vlastnosti"
 
 #: include/classes/data/CItemData.php:1226
 msgid "VMware cluster status, <url> - VMware service URL, <name> - VMware cluster name"
@@ -20258,19 +20258,19 @@ msgstr "VMware stav klastru, <url> - URL VMware služby, <name> - VMware jméno 
 
 #: include/classes/data/CItemData.php:1272
 msgid "VMware cluster tags array, <url> - VMware service URL, <id> - VMware cluster id"
-msgstr ""
+msgstr "Pole tagů clusteru VMware, <url> – URL služby VMware, <id> – ID clusteru VMware"
 
 #: include/classes/data/CItemData.php:1308
 msgid "VMware datacenter alarms data, returns JSON, <url> - VMware service URL, <id> - VMware datacenter id"
-msgstr ""
+msgstr "Data alarmů datacentra VMware, vrací JSON, <url> – URL služby VMware, <id> – ID datového centra VMware"
 
 #: include/classes/data/CItemData.php:1316
 msgid "VMware datacenter tags array, <url> - VMware service URL, <id> - VMware datacenter id. Returns JSON"
-msgstr ""
+msgstr "Pole tagů datového centra VMware, <url> – URL služby VMware, <id> – ID datového centra VMware. Vrátí JSON"
 
 #: include/classes/data/CItemData.php:1251
 msgid "VMware datacenters and their IDs, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "Datová centra VMware a jejich ID, <url> – URL služby VMware. Vrátí JSON"
 
 #: include/classes/data/CItemData.php:1250
 msgid "VMware datacenters and their IDs. Returns JSON"
@@ -20278,7 +20278,7 @@ msgstr "Datová centra VMware a jejich ID. Vrátí JSON"
 
 #: include/classes/data/CItemData.php:1276
 msgid "VMware datastore alarms data, returns JSON, <url> - VMware service URL, <uuid> - VMware datastore name"
-msgstr ""
+msgstr "Data alarmů datového úložiště VMware, vrací JSON, <url> – URL služby VMware, <uuid> – název datového úložiště VMware"
 
 #: include/classes/data/CItemData.php:1242
 #: include/classes/data/CItemData.php:1298
@@ -20291,11 +20291,11 @@ msgstr "Seznam hypervizorů datového úložiště VMware, <url> – URL služby
 
 #: include/classes/data/CItemData.php:1320
 msgid "VMware datastore performance counter, <url> - VMware service URL, <id> - VMware datastore uuid, <path> - performance counter path, <instance> - performance counter instance"
-msgstr ""
+msgstr "Čítač výkonu datového úložiště VMware, <url> – URL služby VMware, <id> – uuid datového úložiště VMware, <cesta> – cesta čítače výkonu, <instance> – instance čítače výkonu"
 
 #: include/classes/data/CItemData.php:1288
 msgid "VMware datastore property, <url> - VMware service URL, <uuid> - datastore name, <prop> - property path"
-msgstr ""
+msgstr "Vlastnost datového úložiště VMware, <url> – adresa URL služby VMware, <uuid> – název úložiště dat, <prop> – cesta k vlastnosti"
 
 #: include/classes/data/CItemData.php:1238
 msgid "VMware datastore read statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
@@ -20303,7 +20303,7 @@ msgstr "Statistiky čtení datového úložiště VMware, <url> – adresa URL s
 
 #: include/classes/data/CItemData.php:1300
 msgid "VMware datastore tags array, <url> - VMware service URL, <uuid> - VMware datastore uuid. Returns JSON"
-msgstr ""
+msgstr "Pole tagů datového úložiště VMware, <url> – URL služby VMware, <uuid> – uuid datového úložiště VMware. Vrátí JSON"
 
 #: include/classes/data/CItemData.php:1246
 msgid "VMware datastore write statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
@@ -20315,7 +20315,7 @@ msgstr "VMware event log, <url> - VMware service URL, <mode> - vše (výchozí),
 
 #: include/classes/data/CItemData.php:1338
 msgid "VMware hypervisor BIOS UUID, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr ""
+msgstr "VMware BIOS UUID, <url> - URL služby VMware, <uuid> - jméno hosta VMware"
 
 #: include/classes/data/CItemData.php:1378
 msgid "VMware hypervisor HW vendor state sensors, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns JSON"
@@ -20323,7 +20323,7 @@ msgstr "Stav senzorů výrobce HW hypervisoru VMware, <url> – URL služby VMwa
 
 #: include/classes/data/CItemData.php:1336
 msgid "VMware hypervisor alarms data, returns JSON, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr ""
+msgstr "Data alarmů hypervisoru VMware, vrací JSON, <url> – URL služby VMware, <uuid> – název hostitele hypervisoru VMware"
 
 #: include/classes/data/CItemData.php:1350
 msgid "VMware hypervisor ballooned memory size, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -20335,7 +20335,7 @@ msgstr "VMware klastr jméno, <url> - URL VMware služby, <uuid> - VMware jméno
 
 #: include/classes/data/CItemData.php:1275
 msgid "VMware hypervisor connection state, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr ""
+msgstr "Stav připojení k hypervisoru VMware, <url> – URL služby VMware, <uuid> – název hostitele hypervizoru VMware"
 
 #: include/classes/data/CItemData.php:1278
 msgid "VMware hypervisor datacenter name, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns string"
@@ -20371,7 +20371,7 @@ msgstr "VMware vstupní síťové statistiky, <url> - URL VMware služby, <uuid>
 
 #: include/classes/data/CItemData.php:1387
 msgid "VMware hypervisor network interface speed, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <ifname> - interface name"
-msgstr ""
+msgstr "Rychlost síťového rozhraní hypervisoru VMware, <url> – URL služby VMware, <uuid> – název hostitele hypervizoru VMware, <ifname> – název rozhraní"
 
 #: include/classes/data/CItemData.php:1362
 msgid "VMware hypervisor network output statistics, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <mode> - bps"
@@ -20395,15 +20395,15 @@ msgstr "VMware využití procesoru v Hz, <url> - URL VMware služby, <uuid> - VM
 
 #: include/classes/data/CItemData.php:1472
 msgid "VMware hypervisor property , <url> - VMware service URL, <uuid> - VMware hypervisor host name, <prop> - property path"
-msgstr ""
+msgstr "Vlastnost hypervisoru VMware , <url> – URL služby VMware, <uuid> – název hostitele hypervizoru VMware, <prop> – cesta k vlastnosti"
 
 #: include/classes/data/CItemData.php:1351
 msgid "VMware hypervisor sensors value, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns JSON"
-msgstr ""
+msgstr "Hodnota senzorů hypervisoru VMware, <url> – URL služby VMware, <uuid> – název hostitele hypervizoru VMware. Vrátí JSON"
 
 #: include/classes/data/CItemData.php:1355
 msgid "VMware hypervisor serialnumber, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr ""
+msgstr "Sériové číslo hypervisoru VMware, <url> – adresa URL služby VMware, <uuid> – název hostitele hypervizoru VMware"
 
 #: include/classes/data/CItemData.php:1382
 msgid "VMware hypervisor status, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -20411,7 +20411,7 @@ msgstr "VMware status, <url> - URL VMware služby, <uuid> - VMware jméno hosta"
 
 #: include/classes/data/CItemData.php:1488
 msgid "VMware hypervisor tags array, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns JSON"
-msgstr ""
+msgstr "Pole tagů hypervisoru VMware, <url> – URL služby VMware, <uuid> – název hostitele hypervisoru VMware. Vrátí JSON"
 
 #: include/classes/data/CItemData.php:1330
 msgid "VMware hypervisor total memory size, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -20443,11 +20443,11 @@ msgstr "VMware verze, <url> - URL VMware služby"
 
 #: include/classes/data/CItemData.php:1248
 msgid "VMware virtual center alarms data, returns JSON, <url> - VMware service URL"
-msgstr ""
+msgstr "Data alarmů virtuálního centra VMware, vrací JSON, <url> – URL služby VMware"
 
 #: include/classes/data/CItemData.php:1516
 msgid "VMware virtual machine alarms data, returns JSON, <url> - VMware service URL, <uuid> - VMware virtual machine name"
-msgstr ""
+msgstr "Data alarmů virtuálních strojů VMware, vrací JSON, <url> – URL služby VMware, <uuid> – název virtuálního stroje VMware"
 
 #: include/classes/data/CItemData.php:1454
 msgid "VMware virtual machine ballooned memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
@@ -20463,7 +20463,7 @@ msgstr "VMware velikost komprimované paměti virtuálního stroje, <url> - URL 
 
 #: include/classes/data/CItemData.php:1431
 msgid "VMware virtual machine custom attribute value, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <name> - custom attribute name"
-msgstr ""
+msgstr "Hodnota vlastního atributu virtuálního počítače VMware, <url> – adresa URL služby VMware, <uuid> – název hostitele virtuálního počítače VMware, <název> – název vlastního atributu"
 
 #: include/classes/data/CItemData.php:1434
 msgid "VMware virtual machine datacenter name, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns string"
@@ -20479,7 +20479,7 @@ msgstr "VMware statistika zápisů disků virtuálního stroje, <url> - URL VMwa
 
 #: include/classes/data/CItemData.php:1439
 msgid "VMware virtual machine disk requires consolidation, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
-msgstr ""
+msgstr "Disk virtuálního počítače VMware vyžadující konsolidaci, <url> - URL služby VMware, <uuid> - název hostitele virtuálního počítače VMware"
 
 #: include/classes/data/CItemData.php:1566
 msgid "VMware virtual machine file system statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <fsname> - file system name, <mode> - total/free/used/pfree/pused"
@@ -20531,7 +20531,7 @@ msgstr "VMware využití procesoru virtuálního stroje v Hz, <url> - URL VMware
 
 #: include/classes/data/CItemData.php:1644
 msgid "VMware virtual machine property, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <prop> - property path"
-msgstr ""
+msgstr "Vlastnost virtuálního počítače VMware, <url> – URL služby VMware, <uuid> – název hostitele virtuálního počítače VMware, <prop> – cesta k vlastnosti"
 
 #: include/classes/data/CItemData.php:1470
 msgid "VMware virtual machine shared memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
@@ -20539,11 +20539,11 @@ msgstr "VMware velikost zdílené paměti virtuálního stroje, <url> - URL VMwa
 
 #: include/classes/data/CItemData.php:1555
 msgid "VMware virtual machine snapshot state, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns JSON"
-msgstr ""
+msgstr "Stav snímku virtuálního stroje VMware, <url> – URL služby VMware, <uuid> – název hostitele virtuálního stroje VMware. Vrátí JSON"
 
 #: include/classes/data/CItemData.php:1559
 msgid "VMware virtual machine state, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
-msgstr ""
+msgstr "Stav virtuálního počítače VMware, <url> – URL služby VMware, <uuid> – název hostitele virtuálního počítače VMware"
 
 #: include/classes/data/CItemData.php:1474
 msgid "VMware virtual machine swapped memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
@@ -20551,11 +20551,11 @@ msgstr "VMware velikost swapovací paměti virtuálního stroje, <url> - URL VMw
 
 #: include/classes/data/CItemData.php:1684
 msgid "VMware virtual machine tags array, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns JSON"
-msgstr ""
+msgstr "Pole tagů virtuálního počítače VMware, <url> - URL služby VMware, <uuid> - název hostitele virtuálního počítače VMware. Vrátí JSON"
 
 #: include/classes/data/CItemData.php:1591
 msgid "VMware virtual machine tools state, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <mode> - version or status"
-msgstr ""
+msgstr "Stav nástrojů virtuálního stroje VMware, <url> – URL služby VMware, <uuid> – název hostitele virtuálního stroje VMware, <režim> – verze nebo stav"
 
 #: include/classes/data/CItemData.php:1486
 msgid "VMware virtual machine total memory size, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
@@ -20575,7 +20575,7 @@ msgstr "VMware čas provozu virtuálního stroje, <url> - URL VMware služby, <u
 
 #: include/classes/data/CItemData.php:1346
 msgid "VVMware hypervisor maintenance status, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns 0 - not in maintenance; 1 - in maintenance"
-msgstr ""
+msgstr "Stav údržby hypervisoru VMware, <url> – URL služby VMware, <uuid> – název hostitele hypervizoru VMware. Vrátí 0 – není v údržbě; 1 - je v údržbě"
 
 #: app/views/administration.miscconfig.edit.php:105
 msgid "Valid URI schemes"
@@ -20692,7 +20692,7 @@ msgstr "Hodnota nesmí být prázdná."
 
 #: include/classes/data/CItemData.php:1017
 msgid "Value data for value name in Windows Registry key."
-msgstr ""
+msgstr "Data hodnot pro název hodnoty v klíči Windows registru."
 
 #: app/controllers/CControllerAuditLogList.php:247
 msgid "Value map"
@@ -20811,7 +20811,7 @@ msgstr "Cesta k tajnosti v trezoru"
 #: include/classes/setup/CSetupWizard.php:609
 #: include/classes/setup/CSetupWizard.php:813
 msgid "Vault secret query string"
-msgstr ""
+msgstr "Dotazovací řezězec pro bezpečné úložiště"
 
 #: include/hosts.inc.php:249
 msgid "Vendor"
@@ -20921,17 +20921,17 @@ msgstr "Pozor! Nelze získat verzi databáze."
 #: app/partials/administration.system.info.php:166
 #, c-format
 msgid "Warning! Unsupported %1$s database server version. Should be at least %2$s."
-msgstr ""
+msgstr "Varování! Verze %1$s databáze serveru není podporovaná. Měla by být alespoň %2$s."
 
 #: app/partials/administration.system.info.php:167
 #, c-format
 msgid "Warning! Unsupported %1$s database server version. Should be at least (%2$s)"
-msgstr ""
+msgstr "Varování! Verze databáze serveru %1$s není podporovaná. Měla by být alespoň (%2$s)"
 
 #: app/partials/administration.system.info.php:179
 #, c-format
 msgid "Warning! Unsupported %1$s database server version. Should not be higher than %2$s."
-msgstr ""
+msgstr "Varování! Nepodporovaná verze databázového serveru %1$s. Neměla by být vyšší než %2$s."
 
 #: jsLoader.php:301
 msgid "We are sorry, the maximum possible number of elements to remember has been reached."
@@ -21061,7 +21061,7 @@ msgstr "Kdy je aktivní"
 #: include/classes/api/services/CDashboardGeneral.php:349
 #, c-format
 msgid "Widget at X:%3$d, Y:%4$d on page #%2$d of dashboard \"%1$s\" is out of bounds."
-msgstr ""
+msgstr "Widget na X: %3$d, Y: %4$d na stránce #%2$d dashboardu \"%1$s\" je mimo rozsah."
 
 #: include/classes/widgets/CWidgetHelper.php:68
 msgid "Widget is deprecated."
@@ -21076,7 +21076,7 @@ msgstr "Widget je pro zadaný počet sloupců a řádků příliš malý."
 #: app/controllers/CControllerDashboardWidgetEdit.php:47
 #: app/controllers/CControllerDashboardWidgetsSanitize.php:66
 msgid "Widget type is not supported in this context."
-msgstr ""
+msgstr "Typ widgetu není podporován v tomto kontextu."
 
 #: graphs.php:44 include/classes/widgets/CWidgetHelper.php:923
 #: include/classes/widgets/CWidgetHelper.php:956
@@ -21135,7 +21135,7 @@ msgstr "S problémy"
 
 #: app/views/popup.tophosts.column.edit.php:119
 msgid "With this setting only numeric items will be displayed in this column."
-msgstr ""
+msgstr "S tímto nastavením budou v tomto sloupci zobrazeny pouze numerické hodnoty."
 
 #: include/forms.inc.php:346 include/forms.inc.php:566
 msgid "With triggers"
@@ -21414,7 +21414,7 @@ msgstr "Nemůžete změnit hosty pro aktuální označení."
 
 #: app/views/popup.generic.php:88
 msgid "You cannot switch templates for current selection."
-msgstr ""
+msgstr "Nemůžete změnit šablony pro aktuální označení."
 
 #: include/classes/api/services/CAuditLog.php:73
 #: include/classes/api/services/CHaNode.php:45
@@ -21498,6 +21498,9 @@ msgid ""
 "1. Incorrect \"NodeAddress\" or \"ListenPort\" in the \"zabbix_server.conf\" or server IP/DNS override in the \"zabbix.conf.php\";\n"
 "2. Incorrect network configuration.\n"
 msgstr ""
+"Zabbix server \"%1$s\" je nedostupný. Možné důvody:\n"
+"1. Nesprávné \"NodeAddress\" nebo \"ListenPort\" v \"zabbix_server.conf\" nebo přepsání IP/DNS serveru v \"zabbix.conf.php\";\n"
+"2. Nesprávná konfigurace sítě.\n"
 
 #: include/classes/server/CZabbixServer.php:601
 #, c-format
@@ -21572,7 +21575,7 @@ msgstr "očekává se znakový řetězec, celé číslo nebo hodnota s plovoucí
 
 #: include/classes/validators/CApiInputValidator.php:2560
 msgid "a date in YYYY-MM-DD format is expected"
-msgstr ""
+msgstr "je očekáváno datum ve formátu YYYY-MM-DD"
 
 #: include/classes/validators/CNewValidator.php:266
 #: include/classes/widgets/fields/CWidgetFieldDatePicker.php:130
@@ -21774,7 +21777,7 @@ msgstr "přesný čas je očekáván"
 #: include/classes/api/services/CAction.php:2722
 #: include/classes/api/services/CCorrelation.php:730
 msgid "an identifier is not defined in the formula"
-msgstr ""
+msgstr "ve vzorci není definovaný identifikátor"
 
 #: include/classes/validators/CApiInputValidator.php:677
 msgid "an integer is expected"
@@ -21787,7 +21790,7 @@ msgstr "očekává se celé číslo"
 
 #: app/views/administration.authentication.edit.php:72
 msgid "an uppercase and a lowercase Latin letter"
-msgstr ""
+msgstr "velké a malé písmeno latinky"
 
 #: app/views/administration.geomaps.edit.php:47
 msgid "and"
@@ -21818,17 +21821,17 @@ msgstr "vzestupný"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:346
 msgid "ascii() - Returns the ASCII code of the leftmost character of the value"
-msgstr ""
+msgstr "ascii() - Vráti kód ASCII znaku hodnoty úplně vlevo"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:353
 msgid "asin() - The arcsine of a value as an angle, expressed in radians"
-msgstr ""
+msgstr "asin() – Arkussínus hodnoty jako úhel vyjadře ný v radiánech"
 
 #: app/controllers/CControllerPopupScheduledReportCreate.php:71
 #: app/controllers/CControllerScheduledReportCreate.php:83
 #: app/controllers/CControllerScheduledReportUpdate.php:87
 msgid "at least one day of the week must be selected"
-msgstr ""
+msgstr "musí byť vybraný aspoň jeden den v týdnu"
 
 #: include/classes/widgets/fields/CWidgetFieldGraphOverride.php:129
 msgid "at least one override option must be specified"
@@ -21836,11 +21839,11 @@ msgstr "minimálně jedna možnost přepsání musí být specifikována"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:360
 msgid "atan() - The arctangent of a value as an angle, expressed in radians"
-msgstr ""
+msgstr "atan() - Arkustangent hodnoty jako úhel vyjádřený v radiánech"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:367
 msgid "atan2() - The arctangent of the ordinate (exprue) and abscissa coordinates specified as an angle, expressed in radians"
-msgstr ""
+msgstr "atan2() – Arkustangens souřadnic (vyjádřených) a souřadnic zadaných jako úhel, vyjádřený v radiánech"
 
 #: include/events.inc.php:63
 msgid "autoregistered host"
@@ -21867,43 +21870,43 @@ msgstr "avg() - Průměrná hodnota periody T"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1053
 msgid "baselinedev() - Returns the number of deviations between data periods in seasons and the last data period"
-msgstr ""
+msgstr "baselinedev() – Vráti počet odchýlek mezi obdobími údajov v ročných obdobiach a posledným obdobím údajov"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1060
 msgid "baselinewma() - Calculates baseline by averaging data periods in seasons"
-msgstr ""
+msgstr "baselinewma() - Vypočítá základní linii průměrováním dat v ročních obdobích"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:387
 msgid "between() - Checks if a value belongs to the given range (1 - in range, 0 - otherwise)"
-msgstr ""
+msgstr "between() – Kontroluje zda hodnota patří do daného rozsahu (1 – v rozsahu, 0 – jinak)"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:405
 msgid "bitand() - Bitwise AND"
-msgstr ""
+msgstr "bitand() - Bitové A"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:418
 msgid "bitlength() - Returns the length in bits"
-msgstr ""
+msgstr "bitlength() - Vrátí délku v bitech"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:425
 msgid "bitlshift() - Bitwise shift left"
-msgstr ""
+msgstr "bitlshift() - Bitový posun doleva"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:438
 msgid "bitnot() - Bitwise NOT"
-msgstr ""
+msgstr "bitnot() - Bitové NE"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:445
 msgid "bitor() - Bitwise OR"
-msgstr ""
+msgstr "bitor() - Bitové NEBO"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:458
 msgid "bitrshift() - Bitwise shift right"
-msgstr ""
+msgstr "bitrshift() - Bitový posun doprava"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:471
 msgid "bitxor() - Bitwise exclusive OR"
-msgstr ""
+msgstr "bitxor() - Bitové výlučné NEBO"
 
 #: app/views/administration.trigdisplay.edit.php:49
 #: app/views/administration.trigdisplay.edit.php:61
@@ -21918,7 +21921,7 @@ msgstr "uživatelské jméno a heslo by měly být buď přítomné, nebo prázd
 
 #: app/controllers/CControllerPopupTriggerExpr.php:484
 msgid "bytelength() - Returns the length in bytes"
-msgstr ""
+msgstr "bytelength() - Vrátí délku v bytech"
 
 #: app/views/popup.tophosts.column.edit.php:180
 #: app/views/popup.tophosts.column.edit.php:190
@@ -21931,7 +21934,7 @@ msgstr "vypočítáno"
 
 #: app/views/administration.geomaps.edit.php:52
 msgid "can be used to add \"@2x\" to the URL to load retina tiles."
-msgstr ""
+msgstr "možno použít pro přidáni \"@2x\" k adrese URL na načtení retina dlaždic."
 
 #: include/classes/api/services/CItemGeneral.php:229
 msgid "cannot be changed"
@@ -22036,13 +22039,13 @@ msgstr "nemůže být prázdný"
 #: include/classes/validators/CApiInputValidator.php:2982
 #, c-format
 msgid "cannot be less than or equal to the value of parameter \"%1$s\""
-msgstr ""
+msgstr "nemůže být menší nebo stejná hodnotě parametru \"%1$s\""
 
 #: include/classes/api/services/CHostBase.php:57
 #: include/classes/api/services/CTemplate.php:1019
 #, c-format
 msgid "cannot be specified the value of parameter \"%1$s\""
-msgstr ""
+msgstr "nemožno zadat hodnotu parametru \"%1$s\""
 
 #: include/classes/api/services/CHostBase.php:111
 msgid "cannot be unlinked"
@@ -22058,7 +22061,7 @@ msgstr "Nelze odstranit prototyp šablony hosta."
 
 #: include/classes/api/services/CHostPrototype.php:1197
 msgid "cannot have more than one default interface of the same type"
-msgstr ""
+msgstr "nelze mít víc jak jedno výchozí rozhraní stejného typu"
 
 #: include/classes/helpers/CElasticsearchHelper.php:87
 msgid "cannot perform Scroll API request, data could be truncated"
@@ -22071,20 +22074,20 @@ msgstr "nelze aktualizovat soubor pro šablonu pravidla nálezu"
 #: include/classes/validators/CApiInputValidator.php:3031
 #, c-format
 msgid "cannot update readonly parameter \"%1$s\" of discovered object"
-msgstr ""
+msgstr "nelze aktualizovat parametr pouze pro čtení \"%1$s\" objeveného objektu"
 
 #: include/classes/validators/CApiInputValidator.php:3025
 #, c-format
 msgid "cannot update readonly parameter \"%1$s\" of inherited object"
-msgstr ""
+msgstr "nelze aktualizovat parametr pouze pro čtení \"%1$s\" zděděného objektu"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:491
 msgid "cbrt() - Cube root"
-msgstr ""
+msgstr "cbrt() - Kubický kořen"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:498
 msgid "ceil() - Rounds up to the nearest greater integer"
-msgstr ""
+msgstr "ceil() - Zaokrouhlí nahoru na nejbližší vyšší celé číslo"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:505
 msgid "change() - Difference between last and previous value"
@@ -22092,11 +22095,11 @@ msgstr "change() - Rozdíl mezi poslední a předchozí hodnotou"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:511
 msgid "changecount() - Number of changes between adjacent values, Mode (all - all changes, inc - only increases, dec - only decreases)"
-msgstr ""
+msgstr "changecount() - Počet změn mezi sousedními hodnotami, Režimy (všechny - všechny změny, inc - pouze zvýšení, dec - pouze snížení)"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:518
 msgid "char() - Returns the character which represents the given ASCII code"
-msgstr ""
+msgstr "char() - Vráti znak, který představuje daný kód ASCII"
 
 #: include/classes/parsers/CConditionFormula.php:219
 #, c-format
@@ -22118,7 +22121,7 @@ msgstr "barva"
 
 #: app/controllers/CControllerSlaCreateUpdate.php:35
 msgid "comma separated list of time periods is expected for scheduled week days"
-msgstr ""
+msgstr "pro naplánování dnů v týdnu se očekává seznam časových období oddělených čárkami"
 
 #: app/partials/monitoring.latest.filter.php:176
 #: app/partials/monitoring.problem.filter.php:236
@@ -22163,7 +22166,7 @@ msgstr "count() - Počet úspěšně přijatých hodnot V (za které ručí oper
 
 #: app/controllers/CControllerPopupTriggerExpr.php:566
 msgid "countunique() - The number of unique values"
-msgstr ""
+msgstr "countunique() - Počet unikátních hodnot"
 
 #: include/func.inc.php:593 jsLoader.php:223
 msgctxt "day short"
@@ -22202,7 +22205,7 @@ msgstr "výchozí"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:591
 msgid "degrees() - Converts a value from radians to degrees"
-msgstr ""
+msgstr "degrees() - Převede hodnotu z radiánů na stupně"
 
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
@@ -22230,7 +22233,7 @@ msgstr "popis"
 
 #: include/classes/validators/CApiInputValidator.php:1707
 msgid "directory cannot be empty"
-msgstr ""
+msgstr "adresář nemůže být prázdný"
 
 #: include/events.inc.php:61
 msgid "discovered host"
@@ -22305,7 +22308,7 @@ msgstr "exp() - Eulerovo číslo umocněné hodnotou"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:610
 msgid "expm1() - Euler's number at a power of a value minus 1"
-msgstr ""
+msgstr "expm1() - Eulerovo číslo při mocnině hodnoty minus 1"
 
 #: include/classes/parsers/CConditionFormula.php:214
 msgid "expression is empty"
@@ -22321,7 +22324,7 @@ msgstr "formát souboru není podporován"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:617
 msgid "find() - Check occurrence of pattern V (which fulfill operator O) for period T (1 - match, 0 - no match)"
-msgstr ""
+msgstr "find() - Kontrola výskytu vzoru V (který splní operátor O) pro období T (1 - shoda, 0 - neshoda)"
 
 #: app/views/popup.maintenance.period.php:124
 #: app/views/popup.tophosts.column.edit.php:131 include/graphs.inc.php:86
@@ -22356,7 +22359,7 @@ msgstr "fuzzytime() - Rozdíl mezi hodnotou položky (časovou značkou) a časo
 
 #: include/classes/validators/CApiInputValidator.php:2846
 msgid "geographical coordinates (values of comma separated latitude and longitude) are expected"
-msgstr ""
+msgstr "očekávají se zeměpisné souřadnice (hodnoty zemepisné šířky a delky oddělené čárkou)"
 
 #: include/views/configuration.item.edit.php:830
 #: include/views/configuration.item.edit.php:835
@@ -22405,7 +22408,7 @@ msgstr "obrázek"
 #: include/classes/validators/CApiInputValidator.php:2774
 #, c-format
 msgid "image size must be less than %1$s"
-msgstr ""
+msgstr "velikosť obrázku musí být menší jako %1$s"
 
 #: include/actions.inc.php:28
 msgid "in"
@@ -22417,7 +22420,7 @@ msgstr "v rozsahu"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:652
 msgid "in() - Checks if a value equals to one of the listed values (1 - equals, 0 - otherwise)"
-msgstr ""
+msgstr "in() - Zkontroluje zda hodnota se rovná jedné z uvedených hodnot (1 - odpovídá, 0 - jinak)"
 
 #: app/partials/administration.usergroup.grouprights.html.php:61
 #: app/views/administration.user.edit.php:436
@@ -22445,7 +22448,7 @@ msgstr "neplatný počet prvků"
 #: include/classes/parsers/CExpressionParser.php:140
 #, c-format
 msgid "incorrect expression starting from \"%1$s\""
-msgstr ""
+msgstr "nesprávný výraz začínající od \"%1$s\""
 
 #: include/classes/api/services/CAction.php:2715
 #: include/classes/api/services/CCorrelation.php:723
@@ -22467,7 +22470,7 @@ msgstr "nesprávné použití funkce \"%1$s\""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:665
 msgid "insert() - Inserts specified characters or spaces into a character string, beginning at a specified position in the string"
-msgstr ""
+msgstr "insert() - Vloží zadané znaky nebo mezery do řetězce znaků, počínaje zadanou pozicí v řetězci"
 
 #: include/events.inc.php:37
 msgctxt "event source"
@@ -22508,17 +22511,17 @@ msgstr "neplatné zdržení"
 #: include/classes/validators/CHistFunctionValidator.php:67
 #, c-format
 msgid "invalid fifth parameter in function \"%1$s\""
-msgstr ""
+msgstr "neplatný pátý parametr ve funkci \"%1$s\""
 
 #: include/classes/validators/CHistFunctionValidator.php:63
 #, c-format
 msgid "invalid first parameter in function \"%1$s\""
-msgstr ""
+msgstr "neplatný pátý parametr ve funkci \"%1$s\""
 
 #: include/classes/validators/CHistFunctionValidator.php:66
 #, c-format
 msgid "invalid fourth parameter in function \"%1$s\""
-msgstr ""
+msgstr "neplatný čtvrtý parametr ve funkci \"%1$s\""
 
 #: app/controllers/CControllerWidgetTopHostsView.php:410
 #: include/classes/graphdraw/CLineGraphDraw.php:240
@@ -22539,7 +22542,7 @@ msgstr "neplatné jméno hosta"
 #: include/classes/validators/CMathFunctionValidator.php:86
 #, c-format
 msgid "invalid number of parameters in function \"%1$s\""
-msgstr ""
+msgstr "neplatný počet parametrůl ve funkci \"%1$s\""
 
 #: app/controllers/CControllerPopupValueMapUpdate.php:117
 #: include/classes/validators/CApiInputValidator.php:1042
@@ -22555,26 +22558,26 @@ msgstr "neplatný regulérní výraz"
 #: include/classes/validators/CHistFunctionValidator.php:64
 #, c-format
 msgid "invalid second parameter in function \"%1$s\""
-msgstr ""
+msgstr "neplatný druhý parametr ve funkci \"%1$s\""
 
 #: include/classes/validators/CHistFunctionValidator.php:69
 #, c-format
 msgid "invalid seventh parameter in function \"%1$s\""
-msgstr ""
+msgstr "neplatný sedmý parametr ve funkci \"%1$s\""
 
 #: include/classes/validators/CHistFunctionValidator.php:68
 #, c-format
 msgid "invalid sixth parameter in function \"%1$s\""
-msgstr ""
+msgstr "neplatný šestý parametr ve funkci \"%1$s\""
 
 #: include/classes/validators/CApiInputValidator.php:3078
 msgid "invalid template group name"
-msgstr ""
+msgstr "neplatný název skupiny šablon"
 
 #: include/classes/validators/CHistFunctionValidator.php:65
 #, c-format
 msgid "invalid third parameter in function \"%1$s\""
-msgstr ""
+msgstr "neplatný třetí parametr ve funkci \"%1$s\""
 
 #: app/controllers/CControllerPopupAcknowledgeCreate.php:101
 msgid "invalid time"
@@ -22619,7 +22622,7 @@ msgstr "klíč je prázdný"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:688
 msgid "kurtosis() - Measures the \"tailedness\" of the probability distribution"
-msgstr ""
+msgstr "kurtosis() - Měří \"tailedness\" rozdělení pravděpodobnosti"
 
 #: include/forms.inc.php:1394 include/views/js/item.preprocessing.js.php:119
 msgid "label"
@@ -22652,7 +22655,7 @@ msgstr "left() - Vrátí počet znaků zvleva"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:715
 msgid "length() - Length of last (most recent) T value in characters"
-msgstr ""
+msgstr "length() - Délka poslední (nejnovější) hodnoty T ve znacích"
 
 #: include/forms.inc.php:1323 include/views/js/item.preprocessing.js.php:157
 msgid "list of characters"
@@ -22668,15 +22671,15 @@ msgstr "log10() - Dekadický logaritmus"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:736
 msgid "logeventid() - Event ID of last log entry matching regular expression V for period T (1 - match, 0 - no match)"
-msgstr ""
+msgstr "logeventid() - ID události posledního zápisu do logu v souladu s regulérním výrazem V pro periodu T (1 - soulad, 0 - nesoulad)"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:743
 msgid "logseverity() - Log severity of the last log entry for period T"
-msgstr ""
+msgstr "logseverity() - Severita posledního zápisu do logu pro periodu T"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:750
 msgid "logsource() - Log source of the last log entry matching parameter V for period T (1 - match, 0 - no match)"
-msgstr ""
+msgstr "logsource() - Zdroj log z posledního vstupu logu je v souladu s parametrem V pro periodu T (1 - soulad, 0 - nesoulad)"
 
 #: include/events.inc.php:65
 msgid "low-level discovery rule"
@@ -22684,7 +22687,7 @@ msgstr "základní pravidlo nálezu"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:757
 msgid "ltrim() - Remove specified characters from the beginning of a string"
-msgstr ""
+msgstr "ltrim() - Odebere určené znaky ze začátku řetězce"
 
 #: include/func.inc.php:595 jsLoader.php:126 jsLoader.php:225 jsLoader.php:406
 msgctxt "minute short"
@@ -22717,7 +22720,7 @@ msgstr "makro(a)"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:770
 msgid "mad() - Median absolute deviation"
-msgstr ""
+msgstr "mad() - Střední absolutní odchylka"
 
 #: include/classes/parsers/CVaultSecretParser.php:180
 msgid "mandatory key is missing"
@@ -22726,12 +22729,12 @@ msgstr "chybí důležitý klíč"
 #: include/classes/parsers/CVaultSecretParser.php:177
 #, c-format
 msgid "mandatory parameter \"%1$s\" is missing"
-msgstr ""
+msgstr "chybí povinný parametr \"%1$s\""
 
 #: include/classes/validators/CHistFunctionValidator.php:93
 #, c-format
 msgid "mandatory parameter is missing in function \"%1$s\""
-msgstr ""
+msgstr "ve funkci \"%1$s\" chybí povinný parametr"
 
 #: include/classes/api/services/CMap.php:861
 #: include/classes/api/services/CMap.php:1329
@@ -22763,7 +22766,7 @@ msgstr "max"
 
 #: include/classes/api/services/CSettings.php:288
 msgid "max period is less than time filter default period"
-msgstr ""
+msgstr "maximální perioda je kratší než výchozí perioda časového filtru"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:777
 msgid "max() - Maximum value for period T"
@@ -22781,7 +22784,7 @@ msgstr "maximální počet úrovní závislostí dosažen"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:784
 msgid "mid() - Returns a substring beginning at the character position specified by start for N characters"
-msgstr ""
+msgstr "mid() - Vrátí podřetězec začínající na pozici znaku zadaného jako začátek pro N znaků"
 
 #: app/views/popup.tophosts.column.edit.php:126
 #: include/classes/api/services/CItemGeneral.php:1399
@@ -22809,15 +22812,15 @@ msgstr "minimální délka je %1$s znaků"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:809
 msgid "mod() - Division remainder"
-msgstr ""
+msgstr "mod() - Zbytek po dělení"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:822
 msgid "monodec() - Check for continuous item value decrease (1 - data is monotonic, 0 - otherwise), Mode (strict - require strict monotonicity)"
-msgstr ""
+msgstr "monodec() - Kontrola nepřetržitého poklesu hodnoty položky (1 - údaje jsoiu monotónní, 0 - jinak), Režim (přísný - vyžaduje přísnou monotónnost)"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:829
 msgid "monoinc() - Check for continuous item value increase (1 - data is monotonic, 0 - otherwise), Mode (strict - require strict monotonicity)"
-msgstr ""
+msgstr "monoinc() - Kontrola nepřetržitého růstu hodnoty položky (1 - pdaje jsou monotónní, 0 - jinak), Režim (přísný - vyžaduje přísnou monotónnost)"
 
 #: include/func.inc.php:597
 msgctxt "millisecond short"
@@ -22828,7 +22831,7 @@ msgstr "ms"
 #: include/classes/validators/CApiInputValidator.php:2711
 #, c-format
 msgid "must be %1$s characters long"
-msgstr ""
+msgstr "musí být %1$s znaků dlouhý"
 
 #: app/views/administration.authentication.edit.php:199
 msgid "must be a valid LDAP user"
@@ -22838,13 +22841,13 @@ msgstr "musí být platný uživatel LDAP"
 #: include/classes/validators/CPasswordComplexityValidator.php:74
 #, c-format
 msgid "must be at least %1$d characters long"
-msgstr ""
+msgstr "musí být alespoň %1$d znaků dlouhý"
 
 #: app/views/administration.authentication.edit.php:55
 #: app/views/administration.user.edit.php:136
 #: include/classes/validators/CPasswordComplexityValidator.php:88
 msgid "must contain at least one digit"
-msgstr ""
+msgstr "musí obsahovat alespoň jedno číslo"
 
 #: include/classes/validators/CApiInputValidator.php:1534
 #: include/classes/validators/CApiInputValidator.php:1578
@@ -22855,25 +22858,25 @@ msgstr "musí obsahovat minimálně jedno základní vyhledávací makro"
 #: app/views/administration.user.edit.php:128
 #: include/classes/validators/CPasswordComplexityValidator.php:81
 msgid "must contain at least one lowercase and one uppercase Latin letter"
-msgstr ""
+msgstr "musí obsahovat alespoň jedno malé a jedno velké písmeno z Latinky"
 
 #: app/views/administration.authentication.edit.php:59
 #: app/views/administration.user.edit.php:143
 #: include/classes/validators/CPasswordComplexityValidator.php:95
 msgid "must contain at least one special character"
-msgstr ""
+msgstr "musí obsahovat alespoň jeden zvláštní znak"
 
 #: app/views/administration.authentication.edit.php:98
 #: app/views/administration.user.edit.php:150
 #: include/classes/validators/CPasswordComplexityValidator.php:108
 msgid "must not be one of common or context-specific passwords"
-msgstr ""
+msgstr "nesmí být jedním z běžných nebo kontextově-specifických hesel"
 
 #: app/views/administration.authentication.edit.php:97
 #: app/views/administration.user.edit.php:149
 #: include/classes/validators/CPasswordComplexityValidator.php:102
 msgid "must not contain user's name, surname or username"
-msgstr ""
+msgstr "nesmí obsahovat uživatelské jméno, křestní jméno nebo příjmení"
 
 #: include/translateDefines.inc.php:41
 msgid "n-d"
@@ -22914,39 +22917,39 @@ msgstr "žádná data"
 #: include/classes/api/services/CHostPrototype.php:1205
 #, c-format
 msgid "no default interface for \"%1$s\" type."
-msgstr ""
+msgstr "žádné výchozí rozhraní pro typ \"%1$s\"."
 
 #: include/classes/api/services/CEvent.php:773
 msgid "no permissions to acknowledge problems"
-msgstr ""
+msgstr "bez oprávnění k odsouhlasování problémů"
 
 #: include/classes/api/services/CEvent.php:762
 msgid "no permissions to add problem comments"
-msgstr ""
+msgstr "bez oprávnění k přidávání komentářů k problémům"
 
 #: include/classes/api/services/CEvent.php:767
 msgid "no permissions to change problem severity"
-msgstr ""
+msgstr "bez oprávnění na změnu severit problémů"
 
 #: include/classes/api/services/CEvent.php:757
 msgid "no permissions to close problems"
-msgstr ""
+msgstr "bez oprávnění uzavírat problémy"
 
 #: include/classes/api/services/CConfiguration.php:168
 msgid "no permissions to create and edit maps"
-msgstr ""
+msgstr "bez oprávnění k vytváření a editaci map"
 
 #: include/classes/api/services/CEvent.php:863
 msgid "no permissions to suppress problems"
-msgstr ""
+msgstr "bez oprávnění k potlačování problémů"
 
 #: include/classes/api/services/CEvent.php:774
 msgid "no permissions to unacknowledge problems"
-msgstr ""
+msgstr "bez oprávnění k rušení odsouhlasení problémů"
 
 #: include/classes/api/services/CEvent.php:864
 msgid "no permissions to unsuppress problems"
-msgstr ""
+msgstr "bez oprávnění k rušení potlačování problémů"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:836
 msgid "nodata() - No data received during period of time T (1 - true, 0 - false), Mode (strict - ignore proxy time delay in sending data)"
@@ -23089,23 +23092,23 @@ msgstr "rate() - Vrátí průměrnou rychlost za sekundu pro monotónně rostouc
 #: include/classes/api/services/CService.php:2392
 #, c-format
 msgid "read-write access to the child service \"%1$s\" is required"
-msgstr ""
+msgstr "je vyžadován přístup pro čtení i zápis k podřízené službě \"%1$s\""
 
 #: include/classes/api/services/CService.php:467
 #, c-format
 msgid "read-write access to the child service \"%1$s\" must be retained"
-msgstr ""
+msgstr "je třeba zachovat přístup pro čtení i zápis k podřízené službě \"%1$s\""
 
 #: include/classes/api/services/CService.php:454
 #: include/classes/api/services/CService.php:2309
 #: include/classes/api/services/CService.php:2369
 msgid "read-write access to the service is required"
-msgstr ""
+msgstr "je vyžadován přístup pro čtení i zápis ke službám"
 
 #: include/classes/api/services/CService.php:2368
 #: include/classes/api/services/CService.php:2429
 msgid "read-write access to the service must be retained"
-msgstr ""
+msgstr "musí být zachován přístup pro čtení i zápis ke službě"
 
 #: include/classes/widgets/fields/CWidgetFieldNavTree.php:110
 msgid "reference to a non-existent tree element"
@@ -23138,11 +23141,11 @@ msgstr "regulární výraz"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:893
 msgid "repeat() - Returns a string composed of value repeated count times"
-msgstr ""
+msgstr "repeat() - Vrátí řetězec složený z opakovaných počtu hodnot"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:906
 msgid "replace() - Search value for occurrences of pattern, and replace with replacement"
-msgstr ""
+msgstr "replace() - Vyhledá výskyty hledaného vzoru a nahradí je"
 
 #: include/forms.inc.php:1442 include/views/js/item.preprocessing.js.php:247
 msgid "replacement"
@@ -23154,11 +23157,11 @@ msgstr "reprezentuje souřadnice dlaždic;"
 
 #: app/views/administration.geomaps.edit.php:40
 msgid "represents one of the available subdomains;"
-msgstr ""
+msgstr "představuje jednu z dostupných subdomén;"
 
 #: app/views/administration.geomaps.edit.php:44
 msgid "represents zoom level parameter in the URL;"
-msgstr ""
+msgstr "představuje parametr úrovně priblížení v adrese URL;"
 
 #: include/classes/graphdraw/CLineGraphDraw.php:1506
 msgid "right"
@@ -23166,15 +23169,15 @@ msgstr "pravý"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:924
 msgid "right() - Returns the rightmost count characters"
-msgstr ""
+msgstr "right() - Vrátí počet znaků zprava"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:937
 msgid "round() - Rounds a value to decimal places"
-msgstr ""
+msgstr "round() - Zaokrouhlí hodnotu na desetinná místa"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:950
 msgid "rtrim() - Removes specified characters from the end of a string"
-msgstr ""
+msgstr "rtrim() – Odstraní zadané znaky z konce retězce"
 
 #: include/func.inc.php:596
 msgctxt "second short"
@@ -23263,19 +23266,19 @@ msgstr "přihlásit se jako host"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:963
 msgid "signum() - Returns -1 if a value is negative, 0 if a value is zero, 1 if a value is positive"
-msgstr ""
+msgstr "signum() - Vráti -1, pokud je hodnota záporná, 0, pokud je hodnota nula, 1, pokud je hodnota kladná"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:970
 msgid "sin() - The sine of a value, where the value is an angle expressed in radians"
-msgstr ""
+msgstr "sin() – Sínus hodnoty, kde hodnota je úhel vyjadřený v radiánech"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:977
 msgid "sinh() - The hyperbolic sine of a value"
-msgstr ""
+msgstr "sinh() - Hyperbolický sínus hodnoty"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:984
 msgid "skewness() - Measures the asymmetry of the probability distribution"
-msgstr ""
+msgstr "skewness() - Měří asymetrii rozdělení pravděpodobnosti"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:991
 msgid "sqrt() - Square root of a value"
@@ -23287,11 +23290,11 @@ msgstr "samostatný server"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:998
 msgid "stddevpop() - Population standard deviation"
-msgstr ""
+msgstr "stddevpop() – Standardní odchylka populace"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1005
 msgid "stddevsamp() - Sample standard deviation"
-msgstr ""
+msgstr "stddevsamp() - Vzorová standardní odchylka"
 
 #: app/views/popup.tophosts.column.edit.php:130 include/graphs.inc.php:84
 msgid "sum"
@@ -23303,7 +23306,7 @@ msgstr "sum() - Souhrn hodnot za periodu T"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1019
 msgid "sumofsquares() - The sum of squares"
-msgstr ""
+msgstr "sumofsquares() – Součet čtverců"
 
 #: include/classes/api/services/CUser.php:2022
 msgid "supplied credentials are not unique"
@@ -23333,7 +23336,7 @@ msgstr "značka"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1026
 msgid "tan() - The tangent of a value"
-msgstr ""
+msgstr "tan() – tangens hodnoty"
 
 #: include/classes/api/services/CHostBase.php:1076
 #, c-format
@@ -23342,7 +23345,7 @@ msgstr "šablona ID \"%1$s\" je použitá %2$s krát"
 
 #: include/classes/validators/CApiInputValidator.php:2813
 msgid "the last new line feed is missing"
-msgstr ""
+msgstr "chybí nový řádek na konci"
 
 #: app/controllers/CControllerDashboardUpdate.php:192
 #: app/controllers/CControllerDashboardUpdate.php:201
@@ -23403,7 +23406,7 @@ msgstr "očekává se třetí parametr"
 
 #: include/classes/api/services/CSettings.php:284
 msgid "time filter default period exceeds the max period"
-msgstr ""
+msgstr "časový filtr výchozí periody přesahuje maximální periodu"
 
 #: jsLoader.php:305
 msgid "time shift"
@@ -23419,27 +23422,27 @@ msgstr "timeleft() - Odhad čas pro dosažení limitu je založen na periodě T"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1046
 msgid "trendavg() - Average value of a period T with exact period shift"
-msgstr ""
+msgstr "trendavg() - Průměrná hodnota periody T s přesným posunem periody"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1067
 msgid "trendcount() - Number of successfully retrieved values for period T"
-msgstr ""
+msgstr "trendcount() - Počet úspešně získaných hodnot za období T"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1074
 msgid "trendmax() - Maximum value for period T with exact period shift"
-msgstr ""
+msgstr "trendmax() - Maximální hodnota pro periodu T s přesným posunem periody"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1081
 msgid "trendmin() - Minimum value for period T with exact period shift"
-msgstr ""
+msgstr "trendmin() - Minimální hodnota pro periodu T s přesným posunem periody"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1088
 msgid "trendstl() - Anomaly detection for period T"
-msgstr ""
+msgstr "trendstl() - Detekce anomálií pro období T"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1131
 msgid "trendsum() - Sum of values of a period T with exact period shift"
-msgstr ""
+msgstr "trendavg() - Průměrná hodnota periody T s přesným posunem periody"
 
 #: include/classes/api/services/CMap.php:857
 #: include/classes/api/services/CMap.php:1325 include/events.inc.php:34
@@ -23465,11 +23468,11 @@ msgstr "spouštěc s vazbami nelze přesunout do jiné šablony nebo hosta"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1138
 msgid "trim() - Remove specified characters from the beginning and the end of a string"
-msgstr ""
+msgstr "trim() - Odstranění zadaných znaků ze začátku a konce řetězce"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1151
 msgid "truncate() - Truncates a value to decimal places"
-msgstr ""
+msgstr "truncate() – Zkráti hodnotu na desetinné místa"
 
 #: app/partials/layout.htmlpage.aside.php:74
 #: include/classes/html/CMultiSelect.php:84 jsLoader.php:337
@@ -23502,7 +23505,7 @@ msgstr "neočekávaná hodnota konstanty \"%1$s\""
 
 #: include/classes/parsers/CExpressionMacroParser.php:108
 msgid "unexpected end of expression macro"
-msgstr ""
+msgstr "neočekávaný konec výrazového makra"
 
 #: include/classes/parsers/CItemKey.php:55
 msgid "unexpected end of key"
@@ -23574,7 +23577,7 @@ msgstr "neznáma funkce \"%1$s\""
 
 #: include/classes/api/services/CItemGeneral.php:1557
 msgid "unsupported Prometheus function"
-msgstr ""
+msgstr "nepodporovaná funkce Prometheus"
 
 #: app/controllers/CControllerPopupItemTestSend.php:192
 msgid "unsupported time suffix"
@@ -23586,7 +23589,7 @@ msgstr "nepodporované číslo verze"
 
 #: include/classes/validators/CApiInputValidator.php:509
 msgid "uppercase identifier expected"
-msgstr ""
+msgstr "je očekáván identifikátor velkými písmeny"
 
 #: app/partials/configuration.tags.tab.php:67
 #: app/partials/monitoring.host.filter.php:57
@@ -23791,7 +23794,7 @@ msgstr "přes"
 #: include/func.inc.php:659
 msgctxt "week short"
 msgid "w"
-msgstr ""
+msgstr "w"
 
 #: include/classes/api/services/CTask.php:443
 msgid "wrong discovery rule type"
