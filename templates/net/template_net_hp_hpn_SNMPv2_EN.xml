@@ -412,7 +412,6 @@ This trigger uses temperature sensor values as well as temperature sensor status
                <headers/>
                <retrieve_mode>0</retrieve_mode>
                <request_method>0</request_method>
-               <output_format>0</output_format>
                <allow_traps>0</allow_traps>
                <ssl_cert_file/>
                <ssl_key_file/>
@@ -700,7 +699,6 @@ The number of available (unallocated) bytes.</description>
                <headers/>
                <retrieve_mode>0</retrieve_mode>
                <request_method>0</request_method>
-               <output_format>0</output_format>
                <allow_traps>0</allow_traps>
                <ssl_cert_file/>
                <ssl_key_file/>
@@ -873,7 +871,6 @@ Please check the fan unit</description>
                <headers/>
                <retrieve_mode>0</retrieve_mode>
                <request_method>0</request_method>
-               <output_format>0</output_format>
                <allow_traps>0</allow_traps>
                <ssl_cert_file/>
                <ssl_key_file/>
@@ -1046,7 +1043,6 @@ Please check the power supply unit for errors</description>
                <headers/>
                <retrieve_mode>0</retrieve_mode>
                <request_method>0</request_method>
-               <output_format>0</output_format>
                <allow_traps>0</allow_traps>
                <ssl_cert_file/>
                <ssl_key_file/>
@@ -1178,7 +1174,6 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
                <headers/>
                <retrieve_mode>0</retrieve_mode>
                <request_method>0</request_method>
-               <output_format>0</output_format>
                <allow_traps>0</allow_traps>
                <ssl_cert_file/>
                <ssl_key_file/>
@@ -1361,7 +1356,6 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
                <headers/>
                <retrieve_mode>0</retrieve_mode>
                <request_method>0</request_method>
-               <output_format>0</output_format>
                <allow_traps>0</allow_traps>
                <ssl_cert_file/>
                <ssl_key_file/>
