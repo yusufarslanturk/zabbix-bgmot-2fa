@@ -321,6 +321,24 @@ percent of memory are used.</description>
                </graph_prototypes>
                <host_prototypes/>
                <jmx_endpoint/>
+               <timeout/>
+               <url/>
+               <query_fields/>
+               <posts/>
+               <status_codes>200</status_codes>
+               <follow_redirects>1</follow_redirects>
+               <post_type>0</post_type>
+               <http_proxy/>
+               <headers/>
+               <retrieve_mode>0</retrieve_mode>
+               <request_method>0</request_method>
+               <output_format>0</output_format>
+               <allow_traps>0</allow_traps>
+               <ssl_cert_file/>
+               <ssl_key_file/>
+               <ssl_key_password/>
+               <verify_peer>0</verify_peer>
+               <verify_host>0</verify_host>
             </discovery_rule>
             <discovery_rule>
                <name>Temperature Discovery</name>
@@ -496,6 +514,24 @@ This trigger uses temperature sensor values as well as temperature sensor status
                <graph_prototypes/>
                <host_prototypes/>
                <jmx_endpoint/>
+               <timeout/>
+               <url/>
+               <query_fields/>
+               <posts/>
+               <status_codes>200</status_codes>
+               <follow_redirects>1</follow_redirects>
+               <post_type>0</post_type>
+               <http_proxy/>
+               <headers/>
+               <retrieve_mode>0</retrieve_mode>
+               <request_method>0</request_method>
+               <output_format>0</output_format>
+               <allow_traps>0</allow_traps>
+               <ssl_cert_file/>
+               <ssl_key_file/>
+               <ssl_key_password/>
+               <verify_peer>0</verify_peer>
+               <verify_host>0</verify_host>
             </discovery_rule>
             <discovery_rule>
                <name>FAN Discovery</name>
@@ -623,6 +659,24 @@ Please check the fan unit</description>
                <graph_prototypes/>
                <host_prototypes/>
                <jmx_endpoint/>
+               <timeout/>
+               <url/>
+               <query_fields/>
+               <posts/>
+               <status_codes>200</status_codes>
+               <follow_redirects>1</follow_redirects>
+               <post_type>0</post_type>
+               <http_proxy/>
+               <headers/>
+               <retrieve_mode>0</retrieve_mode>
+               <request_method>0</request_method>
+               <output_format>0</output_format>
+               <allow_traps>0</allow_traps>
+               <ssl_cert_file/>
+               <ssl_key_file/>
+               <ssl_key_password/>
+               <verify_peer>0</verify_peer>
+               <verify_host>0</verify_host>
             </discovery_rule>
             <discovery_rule>
                <name>PSU Discovery</name>
@@ -751,6 +805,24 @@ Please check the power supply unit for errors</description>
                <graph_prototypes/>
                <host_prototypes/>
                <jmx_endpoint/>
+               <timeout/>
+               <url/>
+               <query_fields/>
+               <posts/>
+               <status_codes>200</status_codes>
+               <follow_redirects>1</follow_redirects>
+               <post_type>0</post_type>
+               <http_proxy/>
+               <headers/>
+               <retrieve_mode>0</retrieve_mode>
+               <request_method>0</request_method>
+               <output_format>0</output_format>
+               <allow_traps>0</allow_traps>
+               <ssl_cert_file/>
+               <ssl_key_file/>
+               <ssl_key_password/>
+               <verify_peer>0</verify_peer>
+               <verify_host>0</verify_host>
             </discovery_rule>
             <discovery_rule>
                <name>Entity Discovery</name>
@@ -1131,6 +1203,24 @@ Firmware version has changed. Ack to close</description>
                <graph_prototypes/>
                <host_prototypes/>
                <jmx_endpoint/>
+               <timeout/>
+               <url/>
+               <query_fields/>
+               <posts/>
+               <status_codes>200</status_codes>
+               <follow_redirects>1</follow_redirects>
+               <post_type>0</post_type>
+               <http_proxy/>
+               <headers/>
+               <retrieve_mode>0</retrieve_mode>
+               <request_method>0</request_method>
+               <output_format>0</output_format>
+               <allow_traps>0</allow_traps>
+               <ssl_cert_file/>
+               <ssl_key_file/>
+               <ssl_key_password/>
+               <verify_peer>0</verify_peer>
+               <verify_host>0</verify_host>
             </discovery_rule>
          </discovery_rules>
          <httptests/>
