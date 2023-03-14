@@ -328,7 +328,7 @@ This is the memory pool utilization currently.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -459,7 +459,7 @@ Return the current temperature of the FastSwitch.The temperature display is not 
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -598,7 +598,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -698,7 +698,7 @@ Please check the power supply unit for errors</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>

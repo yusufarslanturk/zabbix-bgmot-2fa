@@ -263,7 +263,7 @@ Temperature readings of testpoint: {#SNMPVALUE}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -408,7 +408,7 @@ Temperature readings of testpoint: Ambient</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -553,7 +553,7 @@ Temperature readings of testpoint: CPU</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -691,7 +691,7 @@ A description of the power module status.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -790,7 +790,7 @@ A description of the fan component status.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#FAN_DESCR}: Fan speed, %</name>
@@ -841,7 +841,7 @@ If the fan is determined not to be running or the fan speed cannot be determined
                      </preprocessing>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -939,7 +939,7 @@ Please check the fan unit</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#SNMPINDEX}: Physical disk part number</name>
@@ -982,7 +982,7 @@ disk module FRU name.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>

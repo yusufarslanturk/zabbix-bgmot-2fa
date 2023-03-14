@@ -136,7 +136,7 @@ is not sensible with the number of CPU on the entity</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#MODULE_NAME}: Memory utilization</name>
@@ -180,7 +180,7 @@ percent of memory are used.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -378,7 +378,7 @@ The temperature for the {#SNMPVALUE}.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -526,7 +526,7 @@ fanError(41) means that the fan stops working.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -636,7 +636,7 @@ rpsError(61) means the redundant power supply is in the state of fault.</descrip
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -741,7 +741,7 @@ Please check the power supply unit for errors</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#ENT_NAME}: Hardware serial number</name>
@@ -783,7 +783,7 @@ Please check the power supply unit for errors</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#ENT_NAME}: Firmware version</name>
@@ -825,7 +825,7 @@ Please check the power supply unit for errors</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#ENT_NAME}: Hardware version(revision)</name>
@@ -867,7 +867,7 @@ Please check the power supply unit for errors</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#ENT_NAME}: Operating system</name>
@@ -909,7 +909,7 @@ Please check the power supply unit for errors</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>

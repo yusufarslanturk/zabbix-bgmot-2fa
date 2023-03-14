@@ -118,7 +118,7 @@ This string should include the name of the manufacturer, the product name and th
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -270,7 +270,7 @@ This string should include the name of the manufacturer, the product name and th
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes/>

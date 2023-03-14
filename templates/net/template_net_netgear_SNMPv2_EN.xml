@@ -415,7 +415,7 @@ The temperature value reported by sensor</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>#{#SNMPVALUE}: Temperature status</name>
@@ -460,7 +460,7 @@ The state of temperature sensor</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -606,7 +606,7 @@ The status of fan</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -707,7 +707,7 @@ The status of power supply</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>

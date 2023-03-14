@@ -265,7 +265,7 @@ entPhySensorScale, and entPhySensorPrecision objects must also be examined.</des
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -403,7 +403,7 @@ The number of currently allocated bytes.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>#{#SNMPVALUE}: Available memory</name>
@@ -446,7 +446,7 @@ The number of available (unallocated) bytes.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>#{#SNMPVALUE}: Memory utilization</name>
@@ -488,7 +488,7 @@ The number of available (unallocated) bytes.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -634,7 +634,7 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -771,7 +771,7 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -908,7 +908,7 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes/>
@@ -995,7 +995,7 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#ENT_NAME}: Hardware version(revision)</name>
@@ -1037,7 +1037,7 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes/>

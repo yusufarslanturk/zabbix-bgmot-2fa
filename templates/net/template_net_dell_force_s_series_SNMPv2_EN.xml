@@ -114,7 +114,7 @@ CPU utilization in percentage for last 1 minute.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>#{#SNMPINDEX}: Memory utilization</name>
@@ -157,7 +157,7 @@ Total memory usage in percentage.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -338,7 +338,7 @@ The status of the power supply {#SNMPVALUE}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -462,7 +462,7 @@ The status of the fan tray {#SNMPVALUE}.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -584,7 +584,7 @@ The temperature of the unit.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>#{#SNMPVALUE}: Hardware model name</name>
@@ -627,7 +627,7 @@ The plugged-in model ID for this unit.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>#{#SNMPVALUE}: Hardware serial number</name>
@@ -670,7 +670,7 @@ The unit's serial number.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>#{#SNMPVALUE}: Hardware version(revision)</name>
@@ -713,7 +713,7 @@ The unit manufacturer's product revision</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>#{#SNMPVALUE}: Operating system</name>
@@ -756,7 +756,7 @@ Current code version of this unit.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>

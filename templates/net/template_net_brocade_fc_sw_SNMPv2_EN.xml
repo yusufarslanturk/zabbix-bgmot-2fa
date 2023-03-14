@@ -344,7 +344,7 @@ Temperature readings of testpoint: {#SENSOR_INFO}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#SENSOR_INFO}: Temperature status</name>
@@ -389,7 +389,7 @@ Temperature status of testpoint: {#SENSOR_INFO}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -537,7 +537,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -667,7 +667,7 @@ Please check the power supply unit for errors</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#SENSOR_INFO}: Fan speed</name>
@@ -712,7 +712,7 @@ The fan value will be in RPM(revolution per minute)</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>

@@ -350,7 +350,7 @@ This attribute defines the firmware version of a remote access card.</descriptio
                      </preprocessing>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#SENSOR_LOCALE}: Temperature status</name>
@@ -395,7 +395,7 @@ This attribute defines the firmware version of a remote access card.</descriptio
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -557,7 +557,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                      </preprocessing>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#SENSOR_LOCALE}: Temperature status</name>
@@ -602,7 +602,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -752,7 +752,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -883,7 +883,7 @@ Please check the power supply unit for errors</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#FAN_DESCR}: Fan speed</name>
@@ -931,7 +931,7 @@ coolingDeviceSubTypeIsDiscrete, a value is not returned for this attribute.</des
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -1062,7 +1062,7 @@ Possible values:&#13;
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_NAME}: Physical disk serial number</name>
@@ -1105,7 +1105,7 @@ The physical disk's unique identification number from the manufacturer.</descrip
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_NAME}: Physical disk S.M.A.R.T. status</name>
@@ -1150,7 +1150,7 @@ Indicates whether the physical disk has received a predictive failure alert.</de
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_NAME}: Physical disk model name</name>
@@ -1193,7 +1193,7 @@ The model number of the physical disk.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_NAME}: Physical disk part number</name>
@@ -1236,7 +1236,7 @@ The part number of the disk.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_NAME}: Physical disk media type</name>
@@ -1284,7 +1284,7 @@ The media type of the physical disk. Possible Values:&#13;
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_NAME}: Disk size</name>
@@ -1332,7 +1332,7 @@ The size of the physical disk in megabytes.</description>
                      </preprocessing>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -1507,7 +1507,7 @@ Possible values:&#13;
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>Disk {#SNMPVALUE}({#DISK_NAME}): Current state</name>
@@ -1558,7 +1558,7 @@ Possible values:&#13;
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>Disk {#SNMPVALUE}({#DISK_NAME}): Read policy</name>
@@ -1605,7 +1605,7 @@ Possible values:&#13;
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>Disk {#SNMPVALUE}({#DISK_NAME}): Write policy</name>
@@ -1654,7 +1654,7 @@ Possible values:&#13;
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>Disk {#SNMPVALUE}({#DISK_NAME}): Disk size</name>
@@ -1702,7 +1702,7 @@ The size of the virtual disk in megabytes.</description>
                      </preprocessing>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>Disk {#SNMPVALUE}({#DISK_NAME}): Status</name>
@@ -1753,7 +1753,7 @@ The data on the virtual disk might no longer be fault tolerant.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -1884,7 +1884,7 @@ Possible values:&#13;
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#CNTLR_NAME}: Disk array controller model</name>
@@ -1927,7 +1927,7 @@ The controller's name as represented in Storage Management.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -2087,7 +2087,7 @@ Possible values:&#13;
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>

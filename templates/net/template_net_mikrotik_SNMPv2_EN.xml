@@ -478,7 +478,7 @@ The average, over the last minute, of the percentage of time that this processor
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -615,7 +615,7 @@ Since temperature of CPU is not available on all Mikrotik hardware, this is done
                      </preprocessing>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -771,7 +771,7 @@ The amount of the storage represented by this entry that is allocated, in units 
                      </preprocessing>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>Disk-{#SNMPINDEX}: Total space</name>
@@ -827,7 +827,7 @@ might be modified.</description>
                      </preprocessing>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>Disk-{#SNMPINDEX}: Storage utilization</name>
@@ -869,7 +869,7 @@ might be modified.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>

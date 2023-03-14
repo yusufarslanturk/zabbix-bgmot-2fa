@@ -308,7 +308,7 @@ Temperature readings of testpoint: {#SNMPINDEX}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#SNMPINDEX}: Temperature sensor location</name>
@@ -353,7 +353,7 @@ This specifies the location of the temperature sensor present in the system.</de
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -504,7 +504,7 @@ Temperature readings of testpoint: Ambient</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -649,7 +649,7 @@ Temperature readings of testpoint: CPU-{#SNMPINDEX}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -794,7 +794,7 @@ Temperature readings of testpoint: Memory-{#SNMPINDEX}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -939,7 +939,7 @@ Temperature readings of testpoint: PSU-{#SNMPINDEX}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -1084,7 +1084,7 @@ Temperature readings of testpoint: I/O-{#SNMPINDEX}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -1229,7 +1229,7 @@ Temperature readings of testpoint: System-{#SNMPINDEX}</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -1373,7 +1373,7 @@ failed(4)  A power supply component detects a condition that could  permanently 
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -1502,7 +1502,7 @@ failed(4)  A non-redundant fan is not operating properly.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -1627,7 +1627,7 @@ and any associated logical drives,physical drives, and array accelerators.</desc
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#CNTLR_LOCATION}: Disk array controller model</name>
@@ -1672,7 +1672,7 @@ Array Controller Model. The type of controller card.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -1797,7 +1797,7 @@ Note that for some controller models, a cache module board that physically attac
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>#{#CACHE_CNTRL_INDEX}: Disk array cache controller battery status</name>
@@ -1861,7 +1861,7 @@ Capacitor Failed (7)  The flash backed cache module capacitor is below the suffi
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -2058,7 +2058,7 @@ predictiveFailure(4)  Indicates that the drive has a predictive failure error an
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_LOCATION}: Physical disk S.M.A.R.T. status</name>
@@ -2106,7 +2106,7 @@ replaceDrive(3)  Indicates that the drive has a S.M.A.R.T predictive failure  er
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_LOCATION}: Physical disk serial number</name>
@@ -2152,7 +2152,7 @@ but may have been modified due to space limitations.  This can be used for ident
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_LOCATION}: Physical disk model name</name>
@@ -2198,7 +2198,7 @@ If a model number is not present, you may not have properly initialized the driv
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_LOCATION}: Physical disk media type</name>
@@ -2246,7 +2246,7 @@ solidState(3)  The physical drive media is composed of solid state electronics.<
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>{#DISK_LOCATION}: Disk size</name>
@@ -2300,7 +2300,7 @@ or if the controller does not support SCSI drives.</description>
                      </preprocessing>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
@@ -2463,7 +2463,7 @@ Disk serial number has changed. Ack to close</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>Disk {#SNMPINDEX}({#DISK_NAME}): Layout type</name>
@@ -2508,7 +2508,7 @@ This shows the fault tolerance mode of the logical drive.</description>
                      <preprocessing/>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                   <item_prototype>
                      <name>Disk {#SNMPINDEX}({#DISK_NAME}): Disk size</name>
@@ -2560,7 +2560,7 @@ differ from the advertised size of a drive.</description>
                      </preprocessing>
                      <jmx_endpoint/>
                      <application_prototypes/>
-                     <master_item_prototype/>
+                     <master_item/>
                   </item_prototype>
                </item_prototypes>
                <trigger_prototypes>
