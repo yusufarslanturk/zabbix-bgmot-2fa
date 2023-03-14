@@ -36,6 +36,7 @@
                <value_type>3</value_type>
                <allowed_hosts/>
                <units/>
+               <timeout/>
                <snmpv3_contextname/>
                <snmpv3_securityname/>
                <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -79,6 +80,7 @@
                <value_type>0</value_type>
                <allowed_hosts/>
                <units>%</units>
+               <timeout/>
                <snmpv3_contextname/>
                <snmpv3_securityname/>
                <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -120,6 +122,7 @@
                <value_type>0</value_type>
                <allowed_hosts/>
                <units>s</units>
+               <timeout/>
                <snmpv3_contextname/>
                <snmpv3_securityname/>
                <snmpv3_securitylevel>0</snmpv3_securitylevel>
