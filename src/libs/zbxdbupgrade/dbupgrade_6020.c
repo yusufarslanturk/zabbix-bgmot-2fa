@@ -204,6 +204,15 @@ static int	DBpatch_6020014(void)
 	return DBmodify_field_type("task_result", &field, &old_field);
 }
 
+static int	DBpatch_6020015(void)
+{
+	return DBdrop_index("scripts", "scripts_3");
+}
+
+static int	DBpatch_6020016(void)
+{
+	return DBcreate_index("scripts", "scripts_3", "name,menu_path", 1);
+}
 #endif
 
 DBPATCH_START(6020)
@@ -225,4 +234,6 @@ DBPATCH_ADD(6020011, 0, 0)
 DBPATCH_ADD(6020012, 0, 0)
 DBPATCH_ADD(6020013, 0, 0)
 DBPATCH_ADD(6020014, 0, 0)
+DBPATCH_ADD(6020015, 0, 0)
+DBPATCH_ADD(6020016, 0, 0)
 DBPATCH_END()

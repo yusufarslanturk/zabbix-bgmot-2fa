@@ -146,8 +146,8 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 						'Host' => PHPUNIT_LDAP_HOST,
 						'Port' => '389',
 						'Base DN' => 'DC=zbx,DC=local',
-						'Search attribute' => 'sAMAccountName',
-						'Bind DN' => 'CN=Admin,OU=Users,OU=Zabbix,DC=zbx,DC=local',
+						'Search attribute' => 'uid',
+						'Bind DN' => 'cn=admin,dc=zbx,dc=local',
 						'Bind password' => PHPUNIT_LDAP_BIND_PASSWORD
 					],
 					'test_settings' => [
@@ -232,9 +232,9 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 					'ldap_settings' => [
 						'Host' => PHPUNIT_LDAP_HOST,
 						'Port' => '389',
-						'Base DN' => 'DC=zbx,DC=local',
-						'Search attribute' => 'sAMAccountName',
-						'Bind DN' => 'CN=Admin,OU=Users,OU=Zabbix,DC=zbx,DC=local',
+						'Base DN' => 'dc=zbx,dc=local',
+						'Search attribute' => 'uid',
+						'Bind DN' => 'cn=admin,dc=zbx,dc=local',
 						'Bind password' => PHPUNIT_LDAP_BIND_PASSWORD
 					],
 					'test_settings' => [
@@ -829,7 +829,7 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 
 		// Fill LDAP server form.
 		foreach ($ldaps as $ldap) {
-			$form->query($query)->one()->click();
+			$form->query($query)->one()->waitUntilCLickable()->click();
 			$ldap_form = COverlayDialogElement::find()->waitUntilReady()->asForm()->one();
 			$ldap_form->fill($ldap)->submit();
 		}
