@@ -1263,7 +1263,7 @@ static void	zbx_check_db(void)
 	}
 
 	DBclose();
-
+out:
 	if (SUCCEED != result)
 	{
 		zabbix_log(LOG_LEVEL_INFORMATION, "Zabbix Server stopped. Zabbix %s (revision %s).",

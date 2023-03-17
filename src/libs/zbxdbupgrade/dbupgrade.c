@@ -19,12 +19,10 @@
 
 #include "zbxdbupgrade.h"
 #include "dbupgrade.h"
-#include "zbxdbschema.h"
 
 #include "zbxdbhigh.h"
 #include "log.h"
 #include "zbxha.h"
-#include "zbxtime.h"
 
 typedef struct
 {
@@ -913,21 +911,21 @@ static int	DBcheck_nodes(void)
 
 	zbx_db_begin();
 
-	result = zbx_db_select("select " ZBX_DB_TIMESTAMP() ",ha_failover_delay from config");
+	result = DBselect("select " ZBX_DB_TIMESTAMP() ",ha_failover_delay from config");
 	if (NULL != (row = zbx_db_fetch(result)))
 	{
 		db_time = atoi(row[0]);
 
-		if (SUCCEED != zbx_is_time_suffix(row[1], &failover_delay, ZBX_LENGTH_UNLIMITED))
+		if (SUCCEED != is_time_suffix(row[1], &failover_delay, ZBX_LENGTH_UNLIMITED))
 			THIS_SHOULD_NEVER_HAPPEN;
 	}
 	else
 		zabbix_log(LOG_LEVEL_WARNING, "cannot retrieve database time");
 
-	zbx_db_free_result(result);
+	DBfree_result(result);
 
 	/* check if there are recently accessed ZBX_NODE_STATUS_STANDBY or ZBX_NODE_STATUS_ACTIVE nodes */
-	result = zbx_db_select("select lastaccess,name"
+	result = DBselect("select lastaccess,name"
 			" from ha_node"
 			" where status not in (%d,%d)"
 			" order by ha_nodeid" ZBX_FOR_UPDATE,
@@ -947,7 +945,7 @@ static int	DBcheck_nodes(void)
 
 		ret = FAIL;
 	}
-	zbx_db_free_result(result);
+	DBfree_result(result);
 
 	if (SUCCEED == ret)
 	{
@@ -1063,7 +1061,7 @@ int	DBcheck_version(zbx_ha_mode_t ha_mode)
 	if (0 != mandatory_num)
 	{
 		zabbix_log(LOG_LEVEL_INFORMATION, "mandatory patches were found");
-		if (SUCCEED == zbx_db_table_exists(ha_node_table_name))
+		if (SUCCEED == DBtable_exists(ha_node_table_name))
 			ret = DBcheck_nodes();
 
 		if (ZBX_HA_MODE_CLUSTER == ha_mode)
@@ -1106,11 +1104,11 @@ int	DBcheck_version(zbx_ha_mode_t ha_mode)
 
 			DBbegin();
 
-			result = zbx_db_select("select optional,mandatory from dbversion" ZBX_FOR_UPDATE);
+			result = DBselect("select optional,mandatory from dbversion" ZBX_FOR_UPDATE);
 			if (NULL != (row = zbx_db_fetch(result)))
 				db_optional = atoi(row[0]);
 
-			zbx_db_free_result(result);
+			DBfree_result(result);
 			if (db_optional >= patches[i].version)
 			{
 				zabbix_log(LOG_LEVEL_INFORMATION, "cannot perform database upgrade:"
