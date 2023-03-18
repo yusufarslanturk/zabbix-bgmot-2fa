@@ -1212,17 +1212,24 @@ static void	zbx_check_db(void)
 	result = zbx_db_check_version_info(&db_version_info, CONFIG_ALLOW_UNSUPPORTED_DB_VERSIONS);
 
 	if (SUCCEED == result)
-	{
 		zbx_db_extract_dbextension_info(&db_version_info);
-	}
 
-	if (SUCCEED == result && (
 #ifdef HAVE_POSTGRESQL
-			SUCCEED != zbx_db_check_tsdb_capabilities(&db_version_info, CONFIG_ALLOW_UNSUPPORTED_DB_VERSIONS) ||
+	if (SUCCEED == result)
+		result = zbx_db_check_tsdb_capabilities(&db_version_info, CONFIG_ALLOW_UNSUPPORTED_DB_VERSIONS);
 #endif
-			SUCCEED != DBcheck_version()))
+
+	if (SUCCEED == result)
 	{
-		result = FAIL;
+		zbx_ha_mode_t	ha_mode;
+
+		if (NULL != CONFIG_HA_NODE_NAME && '\0' != *CONFIG_HA_NODE_NAME)
+			ha_mode = ZBX_HA_MODE_CLUSTER;
+		else
+			ha_mode = ZBX_HA_MODE_STANDALONE;
+
+		if (SUCCEED != (result = DBcheck_version(ha_mode)))
+			goto out;
 	}
 
 	DBconnect(ZBX_DB_CONNECT_NORMAL);
@@ -1256,9 +1263,11 @@ static void	zbx_check_db(void)
 	}
 
 	DBclose();
-
+out:
 	if (SUCCEED != result)
 	{
+		zabbix_log(LOG_LEVEL_INFORMATION, "Zabbix Server stopped. Zabbix %s (revision %s).",
+				ZABBIX_VERSION, ZABBIX_REVISION);
 		zbx_db_version_info_clear();
 		exit(EXIT_FAILURE);
 	}

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-03-05 11:03+0000\n"
+"PO-Revision-Date: 2023-03-14 19:21+0000\n"
 "Last-Translator: Xevi Noè i Nogueiras <xevi.noe@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ca\n"
@@ -9261,7 +9261,7 @@ msgstr "Proxy de condició d'acció incorrecta. El proxy no existeix o no hi ten
 
 #: include/classes/api/services/CAction.php:3401
 msgid "Incorrect action condition service. Service does not exist or you have no access to it."
-msgstr "Activador de la condició de trigger incorrecta. El trigger no existeix o no hi teniu pas accés."
+msgstr "Acció de la condició de trigger incorrecta. El trigger no existeix o no hi teniu pas accés."
 
 #: include/classes/validators/CActionCondValidator.php:155
 msgid "Incorrect action condition trigger severity."
@@ -9269,7 +9269,7 @@ msgstr "Acció de condició de gravetat del trigger incorrecta."
 
 #: include/classes/api/services/CAction.php:3238
 msgid "Incorrect action condition trigger. Trigger does not exist or you have no access to it."
-msgstr "Activador de la condició de trigger incorrecta. El trigger no existeix o no hi teniu pas accés."
+msgstr "Acció de la condició de trigger incorrecta. El trigger no existeix o no hi teniu pas accés."
 
 #: include/classes/validators/CActionCondValidator.php:211
 msgid "Incorrect action condition type."
@@ -9649,7 +9649,7 @@ msgstr "Valor \"%1$s\" incorrecte per al camp \"%2$s\"."
 #: include/validate.inc.php:336
 #, c-format
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field: must be between %3$s and %4$s, and have no more than %5$s digits after the decimal point."
-msgstr "El valor \"%1$s\" per al camp \"%2$s\" és incorrecte: ha d'ésser entre %3$s i %4$s i no tintre més de %5$s dígits després del punt decimal."
+msgstr "El valor \"%1$s\" per al camp \"%2$s\" és incorrecte: ha d'ésser entre %3$s i %4$s i no tindre més de %5$s dígits després del punt decimal."
 
 #: app/controllers/CControllerAuthenticationUpdate.php:153
 #: include/validate.inc.php:341
@@ -12311,24 +12311,24 @@ msgstr "Dilluns"
 
 #: app/views/configuration.host.list.php:129
 msgid "Monitored by"
-msgstr "Monitoritzat per"
+msgstr "Monitorat per"
 
 #: app/partials/configuration.host.edit.html.php:269
 #: app/views/popup.massupdate.host.php:128
 #: include/views/configuration.host.prototype.edit.php:280
 msgid "Monitored by proxy"
-msgstr "Monitoritzat per proxy"
+msgstr "Monitorat per proxy"
 
 #: include/classes/screens/CScreenDiscovery.php:119
 msgid "Monitored host"
-msgstr "Equip monitoritzat"
+msgstr "Equip monitorat"
 
 #: app/views/search.php:36 app/views/search.php:192
 #: include/classes/helpers/CMenuHelper.php:69
 #: include/classes/helpers/CRoleHelper.php:305
 #: include/views/inventory.host.view.php:135
 msgid "Monitoring"
-msgstr "Monitoritzant"
+msgstr "Monitorant"
 
 #: include/views/js/monitoring.sysmaps.js.php:70
 msgid "Monospace"
@@ -13292,11 +13292,11 @@ msgstr "No s'han triat pas objectius per a l'script global d'operacions d'acció
 #: include/triggers.inc.php:91
 #, c-format
 msgid "No trigger with trigger ID \"%1$s\"."
-msgstr "No hi ha activador amb l'identificador d'activador \"%1$s\"."
+msgstr "No hi ha trigger amb l'identificador de trigger \"%1$s\"."
 
 #: chart4.php:42
 msgid "No triggers defined."
-msgstr "No s'han definit pas activadors."
+msgstr "No s'han definit pas triggers."
 
 #: app/views/js/popup.itemtestedit.view.js.php:41
 msgid "No value"
@@ -16696,11 +16696,11 @@ msgstr "Setembre"
 
 #: include/hosts.inc.php:134 include/views/inventory.host.list.php:91
 msgid "Serial number A"
-msgstr "Número de sèrie A"
+msgstr "Nombre de sèrie A"
 
 #: include/hosts.inc.php:139
 msgid "Serial number B"
-msgstr "Número de sèrie B"
+msgstr "Nombre de sèrie B"
 
 #: include/views/js/monitoring.sysmaps.js.php:55
 msgid "Serif"
@@ -18100,7 +18100,7 @@ msgstr "Permisos de plantilles"
 
 #: report2.php:396
 msgid "Template trigger"
-msgstr "Activador de la plantilla"
+msgstr "Trigger de la plantilla"
 
 #: templates.php:208
 msgid "Template updated"
@@ -18384,7 +18384,7 @@ msgstr "El trigger ja no es troba pas i s'esborrarà a %1$s (el %2$s a %3$s)."
 
 #: include/html.inc.php:713
 msgid "The trigger is not discovered anymore and will be deleted the next time discovery rule is processed."
-msgstr "L'activador ja no es troba pas i s'esborrarà el pròxim cop que es processi la regla de descobriment."
+msgstr "El trigger ja no es troba pas i s'esborrarà el pròxim cop que es processi la regla de descobriment."
 
 #: app/views/administration.user.edit.php:255
 msgid "Theme"
@@ -18783,7 +18783,7 @@ msgstr "El trigger \"%1$s\" no pot pas dependre del trigger \"%2$s\", doncs es p
 #: include/classes/api/services/CTriggerGeneral.php:2300
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\", because a circular linkage (%3$s) would occur for template \"%4$s\"."
-msgstr "El trigger \"%1$s\" no pot dependre pas de l'activador \"%2$s\", doncs es produiria un enllaç circular (%3$s) per a la plantilla \"%4$s\"."
+msgstr "El trigger \"%1$s\" no pot dependre pas del trigger \"%2$s\", doncs es produiria un enllaç circular (%3$s) per a la plantilla \"%4$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2316
 #, c-format
@@ -18793,7 +18793,7 @@ msgstr "El trigger \"%1$s\" no pot dependre pas del trigger \"%2$s\", perquè es
 #: include/classes/api/services/CTriggerGeneral.php:2423
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\", because dependencies of host triggers on template triggers are not allowed."
-msgstr "El trigger \"%1$s\" no pot dependre pas del trigger \"%2$s\", doncs no es permeten les dependències dels activadors de l'equip a les plantilles de triggers."
+msgstr "El trigger \"%1$s\" no pot dependre pas del trigger \"%2$s\", doncs no es permeten les dependències dels triggers de l'equip a les plantilles de triggers."
 
 #: include/classes/api/services/CTriggerGeneral.php:2808
 #, c-format
@@ -19020,7 +19020,7 @@ msgstr "Actualitzats els prototips de triggers"
 
 #: app/views/administration.user.edit.php:743 include/actions.inc.php:45
 msgid "Trigger severity"
-msgstr "Gravitat del trigger"
+msgstr "Gravetat del trigger"
 
 #: app/views/popup.condition.common.php:228
 msgid "Trigger source"
@@ -20818,7 +20818,7 @@ msgstr "Web"
 #: include/views/configuration.httpconf.edit.php:27
 #: include/views/configuration.httpconf.list.php:92
 msgid "Web monitoring"
-msgstr "Monitorització web"
+msgstr "Monitoratge web"
 
 #: app/controllers/CControllerAuditLogList.php:235
 msgid "Web scenario"
@@ -23442,7 +23442,7 @@ msgstr "sufix de temps no compatible"
 
 #: include/classes/import/validators/CXmlValidator.php:64
 msgid "unsupported version number"
-msgstr "número de versió no compatible"
+msgstr "nombre de versió no compatible"
 
 #: include/classes/validators/CApiInputValidator.php:509
 msgid "uppercase identifier expected"

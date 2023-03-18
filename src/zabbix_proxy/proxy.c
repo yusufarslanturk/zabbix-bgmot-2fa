@@ -1318,7 +1318,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 	DBcheck_character_set();
 	zbx_check_db();
 
-	if (SUCCEED != DBcheck_version())
+	if (SUCCEED != DBcheck_version(ZBX_HA_MODE_STANDALONE))
 		exit(EXIT_FAILURE);
 
 	change_proxy_history_count(proxy_get_history_count());
