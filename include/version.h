@@ -24,7 +24,7 @@
 #define ZBX_STR(str)	ZBX_STR2(str)
 
 #define APPLICATION_NAME	"Zabbix Agent"
-#define ZABBIX_REVDATE		"19 September 2022"
+#define ZABBIX_REVDATE		"20 March 2023"
 #define ZABBIX_VERSION_MAJOR	4
 #define ZABBIX_VERSION_MINOR	0
 #define ZABBIX_VERSION_PATCH	45
