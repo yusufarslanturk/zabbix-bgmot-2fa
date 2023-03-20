@@ -1,7 +1,5 @@
 Changes for 4.0.45rc1
 
-New features:
-
 Bug fixes:
 .........T [ZBX-22520] fixed versions of integrations (aiantsen)
 .......PS. [ZBX-22026] fixed SNMP agent item going to unsupported state on NULL result (vso)
