@@ -1,6 +1,12 @@
+Changes for 4.0.45
+
+4.0.45rc2 was released as 4.0.45 without any changes
+
+--------------------------------------------------------------------------------
 Changes for 4.0.45rc2
 
 Bug fixes:
+........S. [ZBX-22622] fixed alert script path validation (vso)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.45rc1
