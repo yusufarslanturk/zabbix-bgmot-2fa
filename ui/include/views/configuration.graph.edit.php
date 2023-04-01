@@ -112,7 +112,7 @@ $graphFormList
 			->setFocusableElementId('label-graphtype')
 			->setValue($data['graphtype'])
 			->addOptions(CSelect::createOptionsFromArray(graphType()))
-			->setDisabled($readonly)
+			->setReadonly($readonly)
 	)
 	->addRow(_('Show legend'),
 		(new CCheckBox('show_legend'))
@@ -501,7 +501,7 @@ if ($data['graphid'] != 0) {
 		url_params(['graphid', 'parent_discoveryid', 'hostid', 'context']), 'context'
 	);
 
-	if ($readonly) {
+	if ($readonly && $data['parent_discoveryid'] === null) {
 		$updateButton->setEnabled(false);
 	}
 

@@ -20,7 +20,13 @@
 #ifndef ZABBIX_UPGRADE_H
 #define ZABBIX_UPGRADE_H
 
-int	DBcheck_version(void);
+typedef enum {
+	ZBX_HA_MODE_STANDALONE,
+	ZBX_HA_MODE_CLUSTER
+}
+zbx_ha_mode_t;
+
+int	DBcheck_version(zbx_ha_mode_t ha_mode);
 int	DBcheck_double_type(void);
 
 #endif

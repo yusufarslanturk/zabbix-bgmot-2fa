@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-01-13 11:35+0000\n"
+"PO-Revision-Date: 2023-03-20 12:47+0000\n"
 "Last-Translator: 璞玉 <puyu@bbqi.cc>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: zh_CN\n"
@@ -3223,6 +3223,11 @@ msgstr "无法更新一个被自动发现的数据图"
 msgid "Cannot update a discovered host group \"%1$s\"."
 msgstr "无法更新自动发现的主机组 \"%1$s\"。"
 
+#: include/classes/api/services/CGraphGeneral.php:82
+#, c-format
+msgid "Cannot update a templated graph \"%1$s\"."
+msgstr "无法更新模板中图表 \"%1$s\"。"
+
 #: include/classes/api/services/CHttpTest.php:514
 #, c-format
 msgid "Cannot update a templated web scenario \"%1$s\": %2$s."
@@ -4471,11 +4476,11 @@ msgstr "监控日志文件行数统计。返回 整数"
 
 #: include/classes/data/CItemData.php:1638
 msgid "Count of values enqueued in the low-level discovery processing queue."
-msgstr "在LLD处理队列中排队的值的计数。"
+msgstr "在LLD处理队列中排队的值个数。"
 
 #: include/classes/data/CItemData.php:1642
 msgid "Count of values enqueued in the preprocessing queue."
-msgstr "在预处理队列中排队的值的计数。"
+msgstr "在预处理队列中排队的值个数。"
 
 #: app/views/administration.token.list.php:106
 #: app/views/administration.user.token.list.php:72
@@ -14595,7 +14600,7 @@ msgstr "预测函数"
 #: include/views/configuration.item.edit.php:1028
 #: include/views/configuration.item.prototype.edit.php:891
 msgid "Preprocessing"
-msgstr "进程"
+msgstr "预处理"
 
 #: app/views/popup.itemtestedit.view.php:354
 #: app/views/popup.massupdate.item.php:209
@@ -16716,6 +16721,10 @@ msgstr "服务形成了一个环."
 #: app/controllers/CControllerPopupMassupdateService.php:150
 msgid "Services updated"
 msgstr "服务已更新"
+
+#: include/classes/api/services/CUser.php:1650
+msgid "Session ID or token is expected."
+msgstr "会话ID或令牌已过期"
 
 #: include/classes/core/ZBase.php:244 include/classes/core/ZBase.php:471
 #: index_sso.php:242 index_sso.php:249

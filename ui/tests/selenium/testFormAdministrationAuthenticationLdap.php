@@ -143,12 +143,15 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 			[
 				[
 					'ldap_settings' => [
-						'Host' => 'ipa.demo1.freeipa.org',
-						'Base DN' => 'cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-						'Search attribute' => 'uid'
+						'Host' => PHPUNIT_LDAP_HOST,
+						'Port' => '389',
+						'Base DN' => 'DC=zbx,DC=local',
+						'Search attribute' => 'uid',
+						'Bind DN' => 'cn=admin,dc=zbx,dc=local',
+						'Bind password' => PHPUNIT_LDAP_BIND_PASSWORD
 					],
 					'test_settings' => [
-						'Login' => 'test',
+						'Login' => PHPUNIT_LDAP_USERNAME,
 						'User password' => 'test'
 					],
 					'test_error' => 'Login failed',
@@ -227,13 +230,16 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 				[
 					'expected' => TEST_GOOD,
 					'ldap_settings' => [
-						'Host' => 'ipa.demo1.freeipa.org',
-						'Base DN' => 'cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-						'Search attribute' => 'uid'
+						'Host' => PHPUNIT_LDAP_HOST,
+						'Port' => '389',
+						'Base DN' => 'dc=zbx,dc=local',
+						'Search attribute' => 'uid',
+						'Bind DN' => 'cn=admin,dc=zbx,dc=local',
+						'Bind password' => PHPUNIT_LDAP_BIND_PASSWORD
 					],
 					'test_settings' => [
-						'Login' => 'employee',
-						'User password' => 'Secret123'
+						'Login' => PHPUNIT_LDAP_USERNAME ,
+						'User password' => PHPUNIT_LDAP_USER_PASSWORD
 					]
 				]
 			]
@@ -249,12 +255,13 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 		$form = $this->openLdapForm();
 		$form->query('button:Add')->one()->click();
 		COverlayDialogElement::find()->waitUntilReady()->asForm()->one()->fill($data['ldap_settings']);
-		$this->query('button:Test')->waitUntilClickable()->one()->click();
+		$this->query('button:Test')->waitUntilClickable()->one()->click()->waitUntilReady();
 
 		// Fill login and user password in Test authentication form.
 		if (array_key_exists('test_settings', $data)) {
-			$test_form = COverlayDialogElement::find()->waitUntilReady()->asForm()->all()->last();
-			$test_form->fill($data['test_settings'])->submit()->waitUntilReady();
+			$test_dialog = COverlayDialogElement::find()->waitUntilReady()->all()->last();
+			$test_dialog->asForm()->fill($data['test_settings'])->submit();
+			$test_dialog->waitUntilReady();
 		}
 
 		// Check error messages testing LDAP settings.
@@ -587,26 +594,26 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 				]
 			],
 			// #5 Two LDAP servers with same names.
-			// TODO: Uncomment this part after ZBX-21061 fix.
-//			[
-//				[
-//					'ldap_settings' => [
-//						[
-//							'Name' => 'TEST',
-//							'Host' => 'ldap.forumsys.com',
-//							'Base DN' => 'dc=example,dc=com',
-//							'Search attribute' => 'uid'
-//						],
-//						[
-//							'Name' => 'TEST',
-//							'Host' => 'ldap.forumsys.com',
-//							'Base DN' => 'dc=example,dc=com',
-//							'Search attribute' => 'uid'
-//						]
-//					],
-//					'error' => 'Invalid parameter "/2": value (name)=(TEST) already exists.'
-//				]
-//			],
+			[
+				[
+					'ldap_settings' => [
+						[
+							'Name' => 'TEST',
+							'Host' => 'ldap.forumsys.com',
+							'Base DN' => 'dc=example,dc=com',
+							'Search attribute' => 'uid'
+						],
+						[
+							'Name' => 'TEST',
+							'Host' => 'ldap.forumsys.com',
+							'Base DN' => 'dc=example,dc=com',
+							'Search attribute' => 'uid'
+						]
+					],
+					'error' => 'Cannot update authentication',
+					'error_details' => 'Invalid parameter "/2": value (name)=(TEST) already exists.'
+				]
+			],
 			// #6 Using cyrillic in settings.
 			[
 				[
@@ -697,12 +704,12 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 					'ldap_settings' => [
 						[
 							'Name' => 'LDAP',
-							'Host' => 'ipa.demo1.freeipa.org',
+							'Host' => PHPUNIT_LDAP_HOST,
 							'Port' => '389',
-							'Base DN' => 'cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-							'Search attribute' => 'uid',
-							'Bind DN' => 'uid=admin,cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-							'Bind password' => 'Secret123',
+							'Base DN' => 'DC=zbx,DC=local',
+							'Search attribute' => 'sAMAccountName',
+							'Bind DN' => 'CN=Admin,OU=Users,OU=Zabbix,DC=zbx,DC=local',
+							'Bind password' => PHPUNIT_LDAP_BIND_PASSWORD,
 							'Description' => 'description',
 							'Advanced configuration' => true,
 							'StartTLS' => true,
@@ -711,12 +718,12 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 					],
 					'db_check' => [
 						'name' => 'LDAP',
-						'host' => 'ipa.demo1.freeipa.org',
+						'host' => PHPUNIT_LDAP_HOST,
 						'port' => '389',
-						'base_dn' => 'cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-						'bind_dn' => 'uid=admin,cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org',
-						'bind_password' => 'Secret123',
-						'search_attribute' => 'uid'
+						'base_dn' => 'DC=zbx,DC=local',
+						'bind_dn' => 'CN=Admin,OU=Users,OU=Zabbix,DC=zbx,DC=local',
+						'bind_password' => PHPUNIT_LDAP_BIND_PASSWORD,
+						'search_attribute' => 'sAMAccountName'
 					]
 				]
 			]
@@ -741,7 +748,7 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 			$this->assertEquals($data['db_check'], CDBHelper::getRow($sql));
 		}
 		else {
-			$this->assertMessage(TEST_BAD, $data['error']);
+			$this->assertMessage(TEST_BAD, $data['error'], CTestArrayHelper::get($data, 'error_details'));
 		}
 	}
 
@@ -822,7 +829,7 @@ class testFormAdministrationAuthenticationLdap extends CWebTest {
 
 		// Fill LDAP server form.
 		foreach ($ldaps as $ldap) {
-			$form->query($query)->one()->click();
+			$form->query($query)->one()->waitUntilCLickable()->click();
 			$ldap_form = COverlayDialogElement::find()->waitUntilReady()->asForm()->one();
 			$ldap_form->fill($ldap)->submit();
 		}
