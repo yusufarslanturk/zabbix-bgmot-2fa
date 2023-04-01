@@ -284,7 +284,7 @@ class testFormGraph extends CLegacyWebTest {
 		}
 
 		if (isset($data['templatedHost'])) {
-			$this->zbxTestAssertAttribute("//z-select[@id='graphtype']", 'disabled');
+			$this->zbxTestAssertAttribute("//z-select[@id='graphtype']", 'readonly');
 		}
 		else {
 			$this->zbxTestAssertElementNotPresentXpath("//z-select[@id='graphtype'][@disabled]");
@@ -696,8 +696,10 @@ class testFormGraph extends CLegacyWebTest {
 					'name' => 'graphNormal4',
 					'graphtype' => 'Normal',
 					'addItems' => [
-						['itemName' => 'testFormItem']
-					]
+						['itemName' => 'testFormItem'],
+						['itemName' => 'testFormItem2']
+					],
+					'screenshot' => true
 				]
 			],
 			[
@@ -866,6 +868,13 @@ class testFormGraph extends CLegacyWebTest {
 					$this->zbxTestTextNotPresent($link);
 				}
 			}
+
+			// Take a screenshot to test draggable object position of items list.
+			if (array_key_exists('screenshot', $data)) {
+				$this->page->removeFocus();
+				$this->assertScreenshot($this->query('id:itemsTable')->one(), 'Graph - Items');
+			}
+
 		}
 
 		if (isset($data['width'])) {
