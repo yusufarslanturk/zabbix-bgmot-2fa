@@ -18,7 +18,7 @@ $twofaFormList->addRow(_('Two factor authentication'),
 		->setAttribute('autofocus', 'autofocus')
 		->addValue(_('None'), ZBX_AUTH_2FA_NONE, null, 'submit()')
 		->addValue(_('DUO'), ZBX_AUTH_2FA_DUO, null, 'submit()')
-		->addValue(_('Google Authenticator'), ZBX_AUTH_2FA_GGL, null, 'submit()')
+		->addValue(_('Authenticator app'), ZBX_AUTH_2FA_GGL, null, 'submit()')
 		->setModern(true)
 );
 
@@ -46,7 +46,7 @@ if ($data['twofa_type'] == ZBX_AUTH_2FA_DUO) {
 	);
 } else if ($data['twofa_type'] == ZBX_AUTH_2FA_GGL) {
         $twofaFormList->addRow(
-		_('All users will be required to use Google Authenticator application on their devices')
+		_('All users will be required to use Google or Microsoft Authenticator application on their devices')
 	);
 }
 
