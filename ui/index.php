@@ -27,6 +27,8 @@ require_once dirname(__FILE__).'/include/forms.inc.php';
 $page['title'] = _('ZABBIX');
 $page['file'] = 'index.php';
 
+$twofa_error = getRequest('twofa_error', '');
+
 // VAR	TYPE	OPTIONAL	FLAGS	VALIDATION	EXCEPTION
 $fields = [
 	'name' =>		[T_ZBX_STR, O_NO,	null,	null,	'isset({enter}) && {enter} != "'.ZBX_GUEST_USER.'"', _('Username')],
@@ -78,8 +80,24 @@ if (hasRequest('enter') && CWebUser::login(getRequest('name', ZBX_GUEST_USER), g
 		]);
 	}
 
-	$redirect = array_filter([CWebUser::isGuest() ? '' : $request, CWebUser::$data['url'], CMenuHelper::getFirstUrl()]);
-	redirect(reset($redirect));
+	$twofa_type = CTwofaHelper::get(CTwofaHelper::TWOFA_TYPE);
+	if ($twofa_type == ZBX_AUTH_2FA_NONE || CWebUser::isGuest()) {
+		$redirect = array_filter([CWebUser::isGuest() ? '' : $request, CWebUser::$data['url'], CMenuHelper::getFirstUrl()]);
+		redirect(reset($redirect));
+	} else {
+		// Perform 2FA
+		switch($twofa_type) {
+			case ZBX_AUTH_2FA_DUO:
+				$redirect = 'duo.php';
+				break;
+			case ZBX_AUTH_2FA_GGL:
+				$redirect = 'ggl.php';
+				break;
+			default:
+				$redirect = array_filter([CWebUser::isGuest() ? '' : $request, CWebUser::$data['url'], CMenuHelper::getFirstUrl()]);
+		}
+		redirect($redirect);
+	}
 }
 
 if (CWebUser::isLoggedIn() && !CWebUser::isGuest()) {
@@ -87,6 +105,14 @@ if (CWebUser::isLoggedIn() && !CWebUser::isGuest()) {
 }
 
 $messages = get_and_clear_messages();
+
+if ($twofa_error != '') {
+	$messages[] = [
+		'type' => 'error',
+		'message' => $twofa_error,
+		'source' => ''
+	];
+}
 
 echo (new CView('general.login', [
 	'http_login_url' => (CAuthenticationHelper::get(CAuthenticationHelper::HTTP_AUTH_ENABLED) == ZBX_AUTH_HTTP_ENABLED)
@@ -97,7 +123,7 @@ echo (new CView('general.login', [
 		: '',
 	'guest_login_url' => CWebUser::isGuestAllowed() ? (new CUrl())->setArgument('enter', ZBX_GUEST_USER) : '',
 	'autologin' => $autologin == 1,
-	'error' => (hasRequest('enter') && $messages) ? array_pop($messages) : null
+	'error' => ((hasRequest('enter') && $messages) || ($twofa_error != '')) ? array_pop($messages) : null
 ]))->getOutput();
 
 session_write_close();

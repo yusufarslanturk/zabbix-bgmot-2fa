@@ -86,6 +86,7 @@ class CAudit {
 	public const RESOURCE_USERDIRECTORY = 49;
 	public const RESOURCE_TEMPLATE_GROUP = 50;
 	public const RESOURCE_CONNECTOR = 51;
+	public const RESOURCE_TWOFA = 101;
 
 	/**
 	 * Audit details actions.
@@ -142,7 +143,8 @@ class CAudit {
 		self::RESOURCE_TEMPLATE_GROUP => 'hstgrp',
 		self::RESOURCE_USER => 'users',
 		self::RESOURCE_USERDIRECTORY => 'userdirectory',
-		self::RESOURCE_USER_GROUP => 'usrgrp'
+		self::RESOURCE_USER_GROUP => 'usrgrp',
+		self::RESOURCE_TWOFA => 'config'
 	];
 
 	/**
@@ -195,7 +197,8 @@ class CAudit {
 		self::RESOURCE_TEMPLATE_GROUP => 'name',
 		self::RESOURCE_USER => 'username',
 		self::RESOURCE_USERDIRECTORY => 'name',
-		self::RESOURCE_USER_GROUP => 'name'
+		self::RESOURCE_USER_GROUP => 'name',
+		self::RESOURCE_TWOFA => null
 	];
 
 	/**
@@ -236,7 +239,8 @@ class CAudit {
 		self::RESOURCE_TEMPLATE_GROUP => 'templategroup',
 		self::RESOURCE_USER => 'user',
 		self::RESOURCE_USERDIRECTORY => 'userdirectory',
-		self::RESOURCE_USER_GROUP => 'usergroup'
+		self::RESOURCE_USER_GROUP => 'usergroup',
+		self::RESOURCE_TWOFA => 'twofa'
 	];
 
 	/**
@@ -318,7 +322,10 @@ class CAudit {
 			'conditions' => ['type' => ZBX_MACRO_TYPE_SECRET]
 		],
 		self::RESOURCE_USER => ['paths' => ['user.passwd']],
-		self::RESOURCE_USERDIRECTORY => ['paths' => ['userdirectory.bind_password']]
+		self::RESOURCE_USERDIRECTORY => ['paths' => ['userdirectory.bind_password']],
+		self::RESOURCE_TWOFA => [
+			'paths' => ['twofa.twofa_duo_integration_key', 'twofa.twofa_duo_secret_key']
+		]
 	];
 
 	/**

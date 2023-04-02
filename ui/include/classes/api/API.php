@@ -492,4 +492,11 @@ class API {
 	public static function HttpTest() {
 		return self::getApi('httptest');
 	}
+
+	/**
+	* @return CTwofa
+	*/
+	public static function Twofa() {
+		return self::getApi('twofa');
+	}
 }

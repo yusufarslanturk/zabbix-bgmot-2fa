@@ -262,3 +262,20 @@ function getUserGroupsByUserId($userId) {
 
 	return $userGroups[$userId];
 }
+
+/**
+ * Get 2FA authentication label.
+ *
+ * @param int $type
+ *
+ * @return string
+ */
+function twofa2str($type) {
+	$authentications = [
+		ZBX_AUTH_2FA_NONE => _('No 2FA'),
+		ZBX_AUTH_2FA_DUO => _('DUO two factor authentication'),
+		ZBX_AUTH_2FA_GGL => _('Google Authenticator app')
+	];
+
+	return $authentications[$type];
+}

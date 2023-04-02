@@ -410,7 +410,9 @@ class CUser extends CApiService {
 				'severity' =>		['type' => API_INT32, 'in' => '0:63'],
 				'period' =>			['type' => API_TIME_PERIOD, 'flags' => API_ALLOW_USER_MACRO, 'length' => DB::getFieldLength('media', 'period')]
 			]],
-			'userdirectoryid' =>	['type' => API_ID]
+			'userdirectoryid' =>	['type' => API_ID],
+			'ggl_secret' =>		['type' => API_STRING_UTF8, 'flags' => API_NOT_EMPTY, 'length' => 255],
+			'ggl_enrolled' =>	['type' => API_ID]
 		]];
 
 		if (!CApiInputValidator::validate($api_input_rules, $users, '/', $error)) {
@@ -427,7 +429,7 @@ class CUser extends CApiService {
 		// 'passwd' can't be received by the user.get method
 		$db_users = DB::select('users', [
 			'output' => ['userid', 'username', 'name', 'surname', 'passwd', 'url', 'autologin', 'autologout', 'lang',
-				'refresh', 'theme', 'rows_per_page', 'timezone', 'roleid', 'userdirectoryid'
+				'refresh', 'theme', 'rows_per_page', 'timezone', 'roleid', 'userdirectoryid', 'ggl_secret', 'ggl_enrolled'
 			],
 			'userids' => array_keys($db_users),
 			'preservekeys' => true
@@ -568,9 +570,9 @@ class CUser extends CApiService {
 	private function updateReal(array &$users, array $db_users) {
 		$upd_users = [];
 		$fields_strings = array_flip(['username', 'name', 'surname', 'autologout', 'passwd', 'refresh', 'url',
-			'lang', 'theme', 'timezone'
+			'lang', 'theme', 'timezone', 'ggl_secret'
 		]);
-		$fields_integers = array_flip(['autologin', 'rows_per_page', 'roleid', 'userdirectoryid', 'ts_provisioned']);
+		$fields_integers = array_flip(['autologin', 'rows_per_page', 'roleid', 'userdirectoryid', 'ts_provisioned', 'ggl_enrolled']);
 
 		foreach ($users as $user) {
 			$db_user = $db_users[$user['userid']];

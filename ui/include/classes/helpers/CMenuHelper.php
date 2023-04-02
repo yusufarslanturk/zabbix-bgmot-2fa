@@ -320,6 +320,11 @@ class CMenuHelper {
 			CWebUser::checkAccess(CRoleHelper::UI_ADMINISTRATION_AUTHENTICATION)
 				? (new CMenuItem(_('Authentication')))
 					->setAction('authentication.edit')
+				: null,
+			CWebUser::checkAccess(CRoleHelper::UI_ADMINISTRATION_2FA)
+				? (new CMenuItem(_('2FA')))
+					->setAction('twofa.edit')
+					->setAliases(['twofa.update'])
 				: null
 		];
 		$submenu_users = array_filter($submenu_users);

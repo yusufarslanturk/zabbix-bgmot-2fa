@@ -60,6 +60,7 @@ class CRoleHelper {
 	public const UI_ADMINISTRATION_PROXIES = 'ui.administration.proxies';
 	public const UI_ADMINISTRATION_MACROS = 'ui.administration.macros';
 	public const UI_ADMINISTRATION_AUTHENTICATION = 'ui.administration.authentication';
+	public const UI_ADMINISTRATION_2FA= 'ui.administration.twofa';
 	public const UI_ADMINISTRATION_USER_GROUPS = 'ui.administration.user_groups';
 	public const UI_ADMINISTRATION_USER_ROLES = 'ui.administration.user_roles';
 	public const UI_ADMINISTRATION_USERS = 'ui.administration.users';
@@ -285,6 +286,7 @@ class CRoleHelper {
 				self::UI_ADMINISTRATION_USERS,
 				self::UI_ADMINISTRATION_API_TOKENS,
 				self::UI_ADMINISTRATION_AUTHENTICATION,
+				self::UI_ADMINISTRATION_2FA,
 				self::UI_ADMINISTRATION_GENERAL,
 				self::UI_ADMINISTRATION_AUDIT_LOG,
 				self::UI_ADMINISTRATION_HOUSEKEEPING,
@@ -493,7 +495,8 @@ class CRoleHelper {
 						self::UI_ADMINISTRATION_USER_ROLES => _('User roles'),
 						self::UI_ADMINISTRATION_USERS => _('Users'),
 						self::UI_ADMINISTRATION_API_TOKENS => _('API tokens'),
-						self::UI_ADMINISTRATION_AUTHENTICATION => _('Authentication')
+						self::UI_ADMINISTRATION_AUTHENTICATION => _('Authentication'),
+						self::UI_ADMINISTRATION_2FA => _('2FA')
 					];
 				}
 

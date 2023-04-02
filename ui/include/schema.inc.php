@@ -145,6 +145,18 @@ return [
 				'type' => DB::FIELD_TYPE_INT,
 				'length' => 10,
 				'default' => '0'
+			],
+			'ggl_secret' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_CHAR,
+				'length' => 100,
+				'default' => ''
+			],
+			'ggl_enrolled' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_INT,
+				'length' => 10,
+				'default' => '0'
 			]
 		]
 	],
@@ -2791,6 +2803,28 @@ return [
 				'default' => NULL,
 				'ref_table' => 'usrgrp',
 				'ref_field' => 'usrgrpid'
+			],
+			'twofa_type' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_INT,
+				'length' => 10,
+				'default' => '0'
+			],
+			'twofa_duo_api_hostname' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_TEXT
+			],
+			'twofa_duo_integration_key' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_TEXT
+			],
+			'twofa_duo_secret_key' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_TEXT
+			],
+			'twofa_duo_a_key' => [
+				'null' => false,
+				'type' => DB::FIELD_TYPE_TEXT
 			]
 		]
 	],
