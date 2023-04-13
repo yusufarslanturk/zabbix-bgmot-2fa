@@ -6,7 +6,7 @@
 			<input id="macros_#{rowNum}_type" type="hidden" value="2" name="macros[#{rowNum}][type]">
 		<?php endif ?>
 		</td>
-		<td>&rArr;</td>
+		<td><?= RARR()->toString() ?></td>
 		<td>
 			<input type="text" id="macros_#{rowNum}_value" name="macros[#{rowNum}][value]" style="width: <?= ZBX_TEXTAREA_MACRO_VALUE_WIDTH ?>px" maxlength="255" placeholder="<?= _('value') ?>" autocomplete="off">
 		</td>

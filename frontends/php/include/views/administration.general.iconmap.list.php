@@ -44,7 +44,7 @@ foreach ($this->data['iconmaps'] as $iconMap) {
 	foreach ($iconMap['mappings'] as $mapping) {
 		$mappings[] = [
 			$data['inventoryList'][$mapping['inventory_link']].NAME_DELIMITER.$mapping['expression'],
-			NBSP(), '&rArr;', NBSP(),
+			NBSP(), RARR(), NBSP(),
 			$data['iconList'][$mapping['iconid']],
 			BR()
 		];

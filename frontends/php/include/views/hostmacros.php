@@ -85,7 +85,7 @@ else {
 			->disableAutocomplete()
 			->setAttribute('placeholder', _('value'));
 
-		$row = [$macro_cell, '&rArr;', $value_input];
+		$row = [$macro_cell, RARR(), $value_input];
 
 		if (!$data['readonly']) {
 			if ($data['show_inherited_macros']) {
