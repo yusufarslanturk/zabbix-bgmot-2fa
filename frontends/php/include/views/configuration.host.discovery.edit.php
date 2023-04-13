@@ -616,7 +616,7 @@ $conditionFormList->addRow(_('Type of calculation'),
 		(new CTextBox('formula', $this->data['formula']))
 			->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			->setId('formula')
-			->setAttribute('placeholder', 'A or (B and C) &hellip;')
+			->setAttribute('placeholder', 'A or (B and C) ...')
 	],
 	'conditionRow'
 );

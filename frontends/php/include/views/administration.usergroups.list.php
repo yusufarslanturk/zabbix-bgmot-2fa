@@ -130,7 +130,7 @@ foreach ($this->data['usergroups'] as $usrgrp) {
 			$i++;
 
 			if ($i > $this->data['config']['max_in_table']) {
-				$users[] = ' &hellip;';
+				$users[] = [' ', HELLIP()];
 
 				break;
 			}
