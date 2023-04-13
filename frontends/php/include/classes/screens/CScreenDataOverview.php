@@ -37,7 +37,7 @@ class CScreenDataOverview extends CScreenBase {
 		$header = (new CDiv([
 			new CTag('h4', true, _('Data overview')),
 			(new CList())
-				->addItem([_('Group'), ':', SPACE, $groups[0]['name']])
+				->addItem([_('Group'), ':', NBSP(), $groups[0]['name']])
 		]))->addClass(ZBX_STYLE_DASHBRD_WIDGET_HEAD);
 
 		$table = getItemsDataOverview((array) $groupid, $this->screenitem['application'], $this->screenitem['style'],

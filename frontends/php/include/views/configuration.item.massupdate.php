@@ -588,7 +588,7 @@ $itemFormList
 		(new CVisibilityBox('visible[valuemapid]', 'valuemap', _('Original')))
 			->setLabel(_('Show value'))
 			->setChecked(isset($data['visible']['valuemapid'])),
-		(new CDiv([$valueMapsComboBox, SPACE, $valueMapLink]))
+		(new CDiv([$valueMapsComboBox, NBSP(), $valueMapLink]))
 			->setId('valuemap')
 	)
 	->addRow(

@@ -39,16 +39,20 @@ $iconMapTable = (new CTableInfo())
 	]);
 
 foreach ($this->data['iconmaps'] as $iconMap) {
-	$row = [];
+	$mappings = [];
+
 	foreach ($iconMap['mappings'] as $mapping) {
-		$row[] = $this->data['inventoryList'][$mapping['inventory_link']].NAME_DELIMITER.
-				$mapping['expression'].SPACE.'&rArr;'.SPACE.$this->data['iconList'][$mapping['iconid']];
-		$row[] = BR();
+		$mappings[] = [
+			$data['inventoryList'][$mapping['inventory_link']].NAME_DELIMITER.$mapping['expression'],
+			NBSP(), '&rArr;', NBSP(),
+			$data['iconList'][$mapping['iconid']],
+			BR()
+		];
 	}
 
 	$iconMapTable->addRow([
 		new CLink($iconMap['name'], 'adm.iconmapping.php?form=update&iconmapid='.$iconMap['iconmapid']),
-		$row
+		$mappings
 	]);
 }
 

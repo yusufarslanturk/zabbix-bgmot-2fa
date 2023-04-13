@@ -860,7 +860,7 @@ else {
 }
 
 if (CWebUser::getType() == USER_TYPE_SUPER_ADMIN) {
-	$valuemapComboBox = [$valuemapComboBox, '&nbsp;',
+	$valuemapComboBox = [$valuemapComboBox, NBSP(),
 		(new CLink(_('show value mappings'), 'adm.valuemapping.php'))->setAttribute('target', '_blank')
 	];
 }

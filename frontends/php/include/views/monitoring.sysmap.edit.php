@@ -119,7 +119,7 @@ foreach ($data['iconMaps'] as $iconMap) {
 }
 $icon_mapping_link = (new CLink(_('show icon mappings'), 'adm.iconmapping.php'))
 	->setAttribute('target', '_blank');
-$map_tab->addRow(_('Automatic icon mapping'), [$icon_mapping, SPACE, $icon_mapping_link]);
+$map_tab->addRow(_('Automatic icon mapping'), [$icon_mapping, NBSP(), $icon_mapping_link]);
 
 // Append multiple checkboxes to form list.
 $map_tab->addRow(_('Icon highlight'),

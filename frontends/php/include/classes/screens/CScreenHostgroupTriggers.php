@@ -64,7 +64,7 @@ class CScreenHostgroupTriggers extends CScreenHostTriggers {
 
 			$header = (new CDiv([
 				new CTag('h4', true, _('Host group issues')),
-				(new CList())->addItem([_('Group'), ':', SPACE, $groups[0]['name']])
+				(new CList())->addItem([_('Group'), ':', NBSP(), $groups[0]['name']])
 			]))->addClass(ZBX_STYLE_DASHBRD_WIDGET_HEAD);
 
 			$params['groupids'] = $this->screenitem['resourceid'];
@@ -130,9 +130,9 @@ class CScreenHostgroupTriggers extends CScreenHostTriggers {
 				(new CForm('get', $this->pageFile))
 					->addItem(
 						(new CList())
-							->addItem([_('Group'), '&nbsp;', $groups_cb])
-							->addItem('&nbsp;')
-							->addItem([_('Host'), '&nbsp;', $hosts_cb])
+							->addItem([_('Group'), NBSP(), $groups_cb])
+							->addItem(NBSP())
+							->addItem([_('Host'), NBSP(), $hosts_cb])
 					)
 			]))->addClass(ZBX_STYLE_DASHBRD_WIDGET_HEAD);
 		}

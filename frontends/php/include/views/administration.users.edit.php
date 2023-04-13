@@ -185,7 +185,7 @@ if (!$form_autofocus && $languageComboBox->getAttribute('disabled') === null) {
 $userFormList->addRow(
 	_('Language'),
 	$languageError
-		? [$languageComboBox, SPACE, (new CSpan($languageError))->addClass('red')->addClass('wrap')]
+		? [$languageComboBox, NBSP(), (new CSpan($languageError))->addClass('red')->addClass('wrap')]
 		: $languageComboBox
 );
 
@@ -470,7 +470,7 @@ if (!$data['is_profile']) {
 
 	if ($data['userid'] != 0 && bccomp(CWebUser::$data['userid'], $data['userid']) == 0) {
 		$userTypeComboBox->setEnabled(false);
-		$permissionsFormList->addRow(_('User type'), [$userTypeComboBox, SPACE, new CSpan(_('User can\'t change type for himself'))]);
+		$permissionsFormList->addRow(_('User type'), [$userTypeComboBox, NBSP(), new CSpan(_('User can\'t change type for himself'))]);
 		$userForm->addItem((new CVar('user_type', $data['user_type']))->removeId());
 	}
 	else {
@@ -489,7 +489,7 @@ if (!$data['is_profile']) {
 			if (array_key_exists('grouped', $group_rights) && $group_rights['grouped']) {
 				$group_name = ($groupid == 0)
 					? italic(_('All groups'))
-					: [$group_rights['name'], SPACE, italic('('._('including subgroups').')')];
+					: [$group_rights['name'], NBSP(), italic('('._('including subgroups').')')];
 			}
 			else {
 				$group_name = $group_rights['name'];

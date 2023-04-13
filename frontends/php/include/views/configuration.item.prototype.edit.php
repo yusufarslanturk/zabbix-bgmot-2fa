@@ -735,7 +735,7 @@ else {
 }
 $link = (new CLink(_('show value mappings'), 'adm.valuemapping.php'))->setAttribute('target', '_blank');
 $itemFormList
-	->addRow(_('Show value'), [$valuemapComboBox, SPACE, $link], 'row_valuemap')
+	->addRow(_('Show value'), [$valuemapComboBox, NBSP(), $link], 'row_valuemap')
 	->addRow(
 		new CLabel(_('Enable trapping'), 'allow_traps'),
 		(new CCheckBox('allow_traps', HTTPCHECK_ALLOW_TRAPS_ON))

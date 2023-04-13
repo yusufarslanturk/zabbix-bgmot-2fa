@@ -481,7 +481,7 @@ if ($admin) {
 }
 
 (new CWidget())
-	->setTitle(_('Search').':'.SPACE.$search)
+	->setTitle([_('Search'), ':', NBSP(), $search])
 	->addItem(new CDiv($widgets))
 	->show();
 

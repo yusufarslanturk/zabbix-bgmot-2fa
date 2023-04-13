@@ -485,7 +485,7 @@ function getItemFilterForm(&$items) {
 	$table_subfilter = (new CTableInfo())
 		->addRow([
 			new CTag('h4', true, [
-				_('Subfilter'), SPACE, (new CSpan(_('affects only filtered data')))->addClass(ZBX_STYLE_GREY)
+				_('Subfilter'), NBSP(), (new CSpan(_('affects only filtered data')))->addClass(ZBX_STYLE_GREY)
 			])
 		]);
 
@@ -2105,9 +2105,9 @@ function getTimeperiodForm(array $data) {
 		(new CDiv([
 			(new CNumericBox('new_timeperiod[period_days]', $new_timeperiod['period_days'], 3))
 				->setWidth(ZBX_TEXTAREA_NUMERIC_STANDARD_WIDTH),
-			_('Days').SPACE.SPACE,
+			_('Days'), NBSP(), NBSP(),
 			$perHours,
-			_('Hours').SPACE.SPACE,
+			_('Hours'), NBSP(), NBSP(),
 			$perMinutes,
 			_('Minutes')
 		]))->setId('new_timeperiod')

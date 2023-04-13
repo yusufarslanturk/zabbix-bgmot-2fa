@@ -138,17 +138,21 @@ function BR() {
 	return new CTag('br');
 }
 
+function NBSP() {
+	return new CHtmlEntity('&nbsp;');
+}
+
 function get_icon($type, $params = []) {
 	switch ($type) {
 		case 'favourite':
 			if (CFavorite::exists($params['fav'], $params['elid'], $params['elname'])) {
-				$icon = (new CRedirectButton(SPACE, null))
+				$icon = (new CRedirectButton(NBSP(), null))
 					->addClass(ZBX_STYLE_BTN_REMOVE_FAV)
 					->setTitle(_('Remove from favourites'))
 					->onClick('rm4favorites("'.$params['elname'].'", "'.$params['elid'].'");');
 			}
 			else {
-				$icon = (new CRedirectButton(SPACE, null))
+				$icon = (new CRedirectButton(NBSP(), null))
 					->addClass(ZBX_STYLE_BTN_ADD_FAV)
 					->setTitle(_('Add to favourites'))
 					->onClick('add2favorites("'.$params['elname'].'", "'.$params['elid'].'");');
@@ -160,7 +164,7 @@ function get_icon($type, $params = []) {
 		case 'fullscreen':
 			switch (CView::getLayoutMode()) {
 				case ZBX_LAYOUT_KIOSKMODE:
-					$icon = (new CButton(null, '&nbsp;'))
+					$icon = (new CButton(null, NBSP()))
 						->setTitle(_('Normal view'))
 						->setAttribute('data-layout-mode', ZBX_LAYOUT_NORMAL)
 						->addClass(ZBX_LAYOUT_MODE)
@@ -169,7 +173,7 @@ function get_icon($type, $params = []) {
 					break;
 
 				case ZBX_LAYOUT_FULLSCREEN:
-					$icon = (new CButton(null, '&nbsp;'))
+					$icon = (new CButton(null, NBSP()))
 						->setTitle(_('Kiosk mode'))
 						->setAttribute('data-layout-mode', ZBX_LAYOUT_KIOSKMODE)
 						->addClass(ZBX_LAYOUT_MODE)
@@ -177,7 +181,7 @@ function get_icon($type, $params = []) {
 					break;
 
 				default:
-					$icon = (new CButton(null, '&nbsp;'))
+					$icon = (new CButton(null, NBSP()))
 						->setTitle(_('Fullscreen'))
 						->setAttribute('data-layout-mode', ZBX_LAYOUT_FULLSCREEN)
 						->addClass(ZBX_LAYOUT_MODE)
@@ -187,12 +191,12 @@ function get_icon($type, $params = []) {
 			return $icon;
 
 		case 'screenconf':
-			return (new CRedirectButton(SPACE, null))
+			return (new CRedirectButton(NBSP(), null))
 				->addClass(ZBX_STYLE_BTN_CONF)
 				->setTitle(_('Refresh interval'));
 
 		case 'overviewhelp':
-			return (new CRedirectButton(SPACE, null))
+			return (new CRedirectButton(NBSP(), null))
 				->addClass(ZBX_STYLE_BTN_INFO);
 	}
 }

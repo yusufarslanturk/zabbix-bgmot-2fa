@@ -113,7 +113,7 @@ foreach ($data['groups_rights'] as $groupid => $group_rights) {
 	else {
 		if (array_key_exists('grouped', $group_rights) && $group_rights['grouped']) {
 			$userGroupForm->addVar('groups_rights['.$groupid.'][grouped]', $group_rights['grouped']);
-			$group_name = [$group_rights['name'], SPACE, italic('('._('including subgroups').')')];
+			$group_name = [$group_rights['name'], NBSP(), italic('('._('including subgroups').')')];
 		}
 		else {
 			$group_name = $group_rights['name'];
