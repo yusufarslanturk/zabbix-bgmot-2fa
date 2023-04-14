@@ -96,7 +96,7 @@ foreach ($data['scripts'] as $script) {
 		))->addClass(ZBX_STYLE_NOWRAP),
 		$scriptType,
 		$scriptExecuteOn,
-		zbx_nl2br(htmlspecialchars($script['command'], ENT_COMPAT, 'UTF-8')),
+		zbx_nl2br($script['command']),
 		($script['userGroupName'] === null) ? _('All') : $script['userGroupName'],
 		($script['hostGroupName'] === null) ? _('All') : $script['hostGroupName'],
 		($script['host_access'] == PERM_READ_WRITE) ? _('Write') : _('Read')
