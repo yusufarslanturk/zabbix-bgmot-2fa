@@ -133,7 +133,7 @@ else {
 					$link = new CSpan(CHtml::encode($macro['template']['name']));
 				}
 
-				$row[] = '&lArr;';
+				$row[] = LARR();
 				$row[] = (new CDiv([$link, NAME_DELIMITER, '"'.$macro['template']['value'].'"']))
 					->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS)
 					->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH);
@@ -147,7 +147,7 @@ else {
 			}
 
 			if (array_key_exists('global', $macro)) {
-				$row[] = '&lArr;';
+				$row[] = LARR();
 				$row[] = (new CDiv('"'.$macro['global']['value'].'"'))
 					->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS)
 					->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH);
