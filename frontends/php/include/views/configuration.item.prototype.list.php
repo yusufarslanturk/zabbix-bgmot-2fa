@@ -67,14 +67,14 @@ foreach ($data['items'] as $item) {
 
 	if ($item['type'] == ITEM_TYPE_DEPENDENT) {
 		if ($item['master_item']['type'] == ITEM_TYPE_HTTPTEST) {
-			$description[] = CHtml::encode($item['master_item']['name_expanded']);
+			$description[] = $item['master_item']['name_expanded'];
 		}
 		else {
 			$link = ($item['master_item']['source'] === 'itemprototypes')
 				? (new CUrl('disc_prototypes.php'))->setArgument('parent_discoveryid', $data['parent_discoveryid'])
 				: (new CUrl('items.php'))->setArgument('hostid', $item['hostid']);
 
-			$description[] = (new CLink(CHtml::encode($item['master_item']['name_expanded']),
+			$description[] = (new CLink($item['master_item']['name_expanded'],
 				$link
 					->setArgument('form', 'update')
 					->setArgument('itemid', $item['master_item']['itemid'])

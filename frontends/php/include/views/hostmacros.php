@@ -123,14 +123,14 @@ else {
 		if ($data['show_inherited_macros']) {
 			if (array_key_exists('template', $macro)) {
 				if ($macro['template']['rights'] == PERM_READ_WRITE) {
-					$link = (new CLink(CHtml::encode($macro['template']['name']),
+					$link = (new CLink($macro['template']['name'],
 						'templates.php?form=update&templateid='.$macro['template']['templateid'])
 					)
 						->addClass('unknown')
 						->setAttribute('target', '_blank');
 				}
 				else {
-					$link = new CSpan(CHtml::encode($macro['template']['name']));
+					$link = new CSpan($macro['template']['name']);
 				}
 
 				$row[] = LARR();

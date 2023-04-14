@@ -191,7 +191,7 @@ foreach ($data['triggers'] as $tnum => $trigger) {
 
 	if ($trigger['discoveryRule']) {
 		$description[] = (new CLink(
-			CHtml::encode($trigger['discoveryRule']['name']),
+			$trigger['discoveryRule']['name'],
 			'trigger_prototypes.php?parent_discoveryid='.$trigger['discoveryRule']['itemid']))
 			->addClass(ZBX_STYLE_LINK_ALT)
 			->addClass(ZBX_STYLE_ORANGE);
@@ -199,7 +199,7 @@ foreach ($data['triggers'] as $tnum => $trigger) {
 	}
 
 	$description[] = (new CLink(
-		CHtml::encode($trigger['description']),
+		$trigger['description'],
 		'triggers.php?form=update&hostid='.$data['hostid'].'&triggerid='.$triggerid
 	))->addClass(ZBX_STYLE_WORDWRAP);
 
@@ -210,9 +210,8 @@ foreach ($data['triggers'] as $tnum => $trigger) {
 		foreach ($trigger['dependencies'] as $dependency) {
 			$depTrigger = $data['dependencyTriggers'][$dependency['triggerid']];
 
-			$depTriggerDescription = CHtml::encode(
-				implode(', ', zbx_objectValues($depTrigger['hosts'], 'name')).NAME_DELIMITER.$depTrigger['description']
-			);
+			$depTriggerDescription =
+				implode(', ', zbx_objectValues($depTrigger['hosts'], 'name')).NAME_DELIMITER.$depTrigger['description'];
 
 			$triggerDependencies[] = (new CLink($depTriggerDescription,
 				'triggers.php?form=update&triggerid='.$depTrigger['triggerid']

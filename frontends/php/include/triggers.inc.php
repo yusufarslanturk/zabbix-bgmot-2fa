@@ -166,7 +166,7 @@ function getSeverityColor($severity, $value = TRIGGER_VALUE_TRUE) {
  */
 function getSeverityCell($severity, array $config = null, $text = null, $force_normal = false) {
 	if ($text === null) {
-		$text = CHtml::encode(getSeverityName($severity, $config));
+		$text = getSeverityName($severity, $config);
 	}
 
 	if ($force_normal) {
@@ -2554,10 +2554,10 @@ function makeTriggerTemplatePrefix($triggerid, array $parent_templates, $flag) {
 					->setArgument('filter_set', 1);
 			}
 
-			$name = (new CLink(CHtml::encode($template['name']), $url))->addClass(ZBX_STYLE_LINK_ALT);
+			$name = (new CLink($template['name'], $url))->addClass(ZBX_STYLE_LINK_ALT);
 		}
 		else {
-			$name = new CSpan(CHtml::encode($template['name']));
+			$name = new CSpan($template['name']);
 		}
 
 		$list[] = $name->addClass(ZBX_STYLE_GREY);
@@ -2613,10 +2613,10 @@ function makeTriggerTemplatesHtml($triggerid, array $parent_templates, $flag) {
 						->setArgument('hostid', $template['hostid']);
 				}
 
-				$name = new CLink(CHtml::encode($template['name']), $url);
+				$name = new CLink($template['name'], $url);
 			}
 			else {
-				$name = (new CSpan(CHtml::encode($template['name'])))->addClass(ZBX_STYLE_GREY);
+				$name = (new CSpan($template['name']))->addClass(ZBX_STYLE_GREY);
 			}
 
 			$list_item[] = $name;

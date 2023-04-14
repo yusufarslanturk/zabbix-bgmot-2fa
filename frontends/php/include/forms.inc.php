@@ -179,16 +179,13 @@ function prepareSubfilterOutput($label, $data, $subfilter, $subfilterName) {
 	$output = [new CTag('h3', true, $label)];
 
 	foreach ($data as $id => $element) {
-		$element['name'] = CHtml::encode($element['name']);
-
 		// is activated
 		if (str_in_array($id, $subfilter)) {
 			$output[] = (new CSpan([
 				(new CLinkAction($element['name']))
-					->onClick(CHtml::encode(
-						'javascript: create_var("zbx_filter", "subfilter_set", "1", false);'.
+					->onClick('javascript: create_var("zbx_filter", "subfilter_set", "1", false);'.
 						'create_var("zbx_filter", '.CJs::encodeJson($subfilterName.'['.$id.']').', null, true);'
-					)),
+					),
 				' ',
 				new CSup($element['count'])
 			]))
@@ -208,14 +205,13 @@ function prepareSubfilterOutput($label, $data, $subfilter, $subfilterName) {
 			}
 			else {
 				$link = (new CLinkAction($element['name']))
-					->onClick(CHtml::encode(
-						'javascript: create_var("zbx_filter", "subfilter_set", "1", false);'.
+					->onClick('javascript: create_var("zbx_filter", "subfilter_set", "1", false);'.
 						'create_var("zbx_filter", '.
 							CJs::encodeJson($subfilterName.'['.$id.']').', '.
 							CJs::encodeJson($id).', '.
 							'true'.
 						');'
-					));
+					);
 
 				$output[] = (new CSpan([
 					$link,

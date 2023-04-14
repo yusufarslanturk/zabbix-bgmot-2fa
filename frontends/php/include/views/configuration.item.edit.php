@@ -855,7 +855,7 @@ else {
 	$valuemapComboBox = new CComboBox('valuemapid', $data['valuemapid']);
 	$valuemapComboBox->addItem(0, _('As is'));
 	foreach ($data['valuemaps'] as $valuemap) {
-		$valuemapComboBox->addItem($valuemap['valuemapid'], CHtml::encode($valuemap['name']));
+		$valuemapComboBox->addItem($valuemap['valuemapid'], $valuemap['name']);
 	}
 }
 
@@ -896,7 +896,7 @@ if ($discovered_item) {
 
 	$applicationComboBox = new CListBox('applications_names[]', $data['applications'], 6);
 	foreach ($data['db_applications'] as $application) {
-		$applicationComboBox->addItem($application['applicationid'], CHtml::encode($application['name']));
+		$applicationComboBox->addItem($application['applicationid'], $application['name']);
 	}
 	$applicationComboBox->setEnabled(!$discovered_item);
 }
@@ -908,7 +908,7 @@ else {
 	$applicationComboBox = new CListBox('applications[]', $data['applications'], 6);
 	$applicationComboBox->addItem(0, '-'._('None').'-');
 	foreach ($data['db_applications'] as $application) {
-		$applicationComboBox->addItem($application['applicationid'], CHtml::encode($application['name']));
+		$applicationComboBox->addItem($application['applicationid'], $application['name']);
 	}
 }
 

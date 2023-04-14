@@ -113,7 +113,7 @@ foreach ($data['graphs'] as $graph) {
 	);
 
 	if ($graph['discoveryRule'] && $data['parent_discoveryid'] === null) {
-		$name[] = (new CLink(CHtml::encode($graph['discoveryRule']['name']),
+		$name[] = (new CLink($graph['discoveryRule']['name'],
 			(new CUrl('host_discovery.php'))
 				->setArgument('form', 'update')
 				->setArgument('itemid', $graph['discoveryRule']['itemid'])
@@ -132,7 +132,7 @@ foreach ($data['graphs'] as $graph) {
 		$url->setArgument('hostid', $this->data['hostid']);
 	}
 
-	$name[] = new CLink(CHtml::encode($graph['name']), $url);
+	$name[] = new CLink($graph['name'], $url);
 
 	$graphTable->addRow([
 		new CCheckBox('group_graphid['.$graphid.']', $graphid),

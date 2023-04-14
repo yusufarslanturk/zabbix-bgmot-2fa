@@ -730,7 +730,7 @@ else {
 	$valuemapComboBox = new CComboBox('valuemapid', $this->data['valuemapid']);
 	$valuemapComboBox->addItem(0, _('As is'));
 	foreach ($this->data['valuemaps'] as $valuemap) {
-		$valuemapComboBox->addItem($valuemap['valuemapid'], CHtml::encode($valuemap['name']));
+		$valuemapComboBox->addItem($valuemap['valuemapid'], $valuemap['name']);
 	}
 }
 $link = (new CLink(_('show value mappings'), 'adm.valuemapping.php'))->setAttribute('target', '_blank');
@@ -755,7 +755,7 @@ $itemFormList
 $applicationComboBox = new CListBox('applications[]', $this->data['applications'], 6);
 $applicationComboBox->addItem(0, '-'._('None').'-');
 foreach ($this->data['db_applications'] as $application) {
-	$applicationComboBox->addItem($application['applicationid'], CHtml::encode($application['name']));
+	$applicationComboBox->addItem($application['applicationid'], $application['name']);
 }
 $itemFormList->addRow(_('Applications'), $applicationComboBox);
 
