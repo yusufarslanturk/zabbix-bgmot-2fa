@@ -74,6 +74,10 @@ class CControllerActionLogList extends CController {
 		$this->getInputs($timeselector_options, ['from', 'to']);
 		updateTimeSelectorPeriod($timeselector_options);
 
+		if ($this->hasInput('filter_set')) {
+			validateTimeSelectorPeriod($this->getInput('from'), $this->getInput('to'));
+		}
+
 		$data = [
 			'page' => $this->getInput('page', 1),
 			'userids' => CProfile::getArray('web.actionlog.filter.userids', []),
