@@ -26,11 +26,11 @@ class CHtmlEntity {
 	 */
 	private $entity = '';
 
-	public function __construct(string $entity) {
+	public function __construct($entity) {
 		$this->entity = $entity;
 	}
 
-	public function toString(): string {
+	public function toString() {
 		return $this->entity;
 	}
 }

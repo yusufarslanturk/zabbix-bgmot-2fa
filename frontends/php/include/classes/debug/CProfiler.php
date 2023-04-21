@@ -341,7 +341,7 @@ class CProfiler {
 	 *
 	 * @return array
 	 */
-	public function formatCallStack(array $callStack = null): array {
+	public function formatCallStack(array $callStack = null) {
 		if (!$callStack) {
 			$callStack = debug_backtrace(false);
 
