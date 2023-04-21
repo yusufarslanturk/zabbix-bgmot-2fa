@@ -339,7 +339,7 @@ class CProfiler {
 	 *
 	 * @param array $callStack
 	 *
-	 * @return array
+	 * @return string
 	 */
 	public function formatCallStack(array $callStack = null) {
 		if (!$callStack) {
@@ -376,14 +376,11 @@ class CProfiler {
 			}
 		}
 
-		$callStackString = [];
+		$callStackString = '';
 
 		if ($functions) {
-			$callStackString[] = pathinfo($firstCall['file'], PATHINFO_BASENAME).':'.$firstCall['line'];
-			foreach ($functions as $function) {
-				$callStackString[] = [' ', RARR(), ' '];
-				$callStackString[] = $function;
-			}
+			$callStackString .= pathinfo($firstCall['file'], PATHINFO_BASENAME).':'.$firstCall['line'].' → '.
+				implode(' → ', $functions);
 		}
 
 		if ($callWithFile) {
@@ -392,7 +389,7 @@ class CProfiler {
 			if (substr_compare($file_name, $this->root_dir, 0, strlen($this->root_dir)) === 0) {
 				$file_name = substr($file_name, strlen($this->root_dir) + 1);
 			}
-			$callStackString[] = ' in '.$file_name.':'.$callWithFile['line'];
+			$callStackString .= ' in '.$file_name.':'.$callWithFile['line'];
 		}
 
 		return $callStackString;
