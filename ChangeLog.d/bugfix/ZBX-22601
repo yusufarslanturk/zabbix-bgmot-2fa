@@ -1,1 +1,1 @@
-..F....... [ZBX-22601] fixed action log filter should not filter by time period less than one minute (esekace)
+..F....... [ZBX-22601] fixed filters to prevent filtering with invalid time period (esekace)
