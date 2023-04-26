@@ -33,13 +33,10 @@ $fields = [
 	'groupids' =>	[T_ZBX_INT,			O_OPT,	P_SYS|P_ONLY_ARRAY,	DB_ID,	null],
 	'hostids' =>	[T_ZBX_INT,			O_OPT,	P_SYS|P_ONLY_ARRAY,	DB_ID,	null],
 	'severities' =>	[T_ZBX_INT,			O_OPT,	P_SYS|P_ONLY_ARRAY,	null,	null],
-	'from' =>		[T_ZBX_RANGE_TIME,	O_OPT,	P_SYS,	null,	null],
-	'to' =>			[T_ZBX_RANGE_TIME,	O_OPT,	P_SYS,	null,	null],
 	'filter_rst' =>	[T_ZBX_STR,			O_OPT,	P_SYS,	null,	null],
 	'filter_set' =>	[T_ZBX_STR,			O_OPT,	P_SYS,	null,	null]
 ];
 check_fields($fields);
-validateTimeSelectorPeriod(getRequest('from'), getRequest('to'));
 
 /*
  * Filter
@@ -60,10 +57,9 @@ elseif (hasRequest('filter_rst')) {
 $timeselector_options = [
 	'profileIdx' => 'web.toptriggers.filter',
 	'profileIdx2' => 0,
-	'from' => getRequest('from'),
-	'to' => getRequest('to')
+	'from' => CProfile::get('web.toptriggers.filter.from'),
+	'to' => CProfile::get('web.toptriggers.filter.to')
 ];
-updateTimeSelectorPeriod($timeselector_options);
 
 $data['filter'] = [
 	'severities' => CProfile::getArray('web.toptriggers.filter.severities', []),

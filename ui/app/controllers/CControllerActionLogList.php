@@ -38,9 +38,7 @@ class CControllerActionLogList extends CController {
 			'filter_actionids' =>		'array_db actions.actionid',
 			'filter_mediatypeids' =>	'array_db media_type.mediatypeid',
 			'filter_statuses' =>		'array_db alerts.status',
-			'filter_messages' =>		'string',
-			'from' =>					'range_time',
-			'to' =>						'range_time'
+			'filter_messages' =>		'string'
 		];
 
 		$ret = $this->validateInput($fields);
@@ -67,16 +65,9 @@ class CControllerActionLogList extends CController {
 		$timeselector_options = [
 			'profileIdx' => 'web.actionlog.filter',
 			'profileIdx2' => 0,
-			'from' => null,
-			'to' => null
+			'from' => CProfile::get('web.actionlog.filter.from'),
+			'to' => CProfile::get('web.actionlog.filter.to')
 		];
-
-		$this->getInputs($timeselector_options, ['from', 'to']);
-		updateTimeSelectorPeriod($timeselector_options);
-
-		if ($this->hasInput('filter_set')) {
-			validateTimeSelectorPeriod($this->getInput('from'), $this->getInput('to'));
-		}
 
 		$data = [
 			'page' => $this->getInput('page', 1),

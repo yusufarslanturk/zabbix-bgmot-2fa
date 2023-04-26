@@ -34,9 +34,7 @@ class CControllerAuditLogList extends CController {
 			'filter_set' =>				'in 1',
 			'filter_userids' =>			'array_db users.userid',
 			'filter_resourceid' =>		'string',
-			'filter_recordsetid' =>		'string',
-			'from' =>					'range_time',
-			'to' =>						'range_time'
+			'filter_recordsetid' =>		'string'
 		];
 
 		$ret = $this->validateInput($fields);
@@ -63,11 +61,9 @@ class CControllerAuditLogList extends CController {
 		$timeselector_options = [
 			'profileIdx' => 'web.auditlog.filter',
 			'profileIdx2' => 0,
-			'from' => null,
-			'to' => null
+			'from' => CProfile::get('web.auditlog.filter.from'),
+			'to' => CProfile::get('web.auditlog.filter.to')
 		];
-		$this->getInputs($timeselector_options, ['from', 'to']);
-		updateTimeSelectorPeriod($timeselector_options);
 
 		$data = [
 			'page' => $this->getInput('page', 1),
