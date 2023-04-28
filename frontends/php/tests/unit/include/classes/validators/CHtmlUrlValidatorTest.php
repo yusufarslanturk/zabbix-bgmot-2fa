@@ -72,7 +72,6 @@ class CHtmlUrlValidatorTest extends TestCase {
 			['../',														true,	true],
 			['/..',														true,	true],
 			['../././not_so_zabbix',									true,	true],
-			['jav&#x09;ascript:alert(1];',								true,	true], // "jav" is a valid path with everything else in "fragment".
 			['ftp://user@host:21',										true,	true],
 			['ftp://somehost',											true,	true],
 			['ftp://user@host',											true,	true],
@@ -88,6 +87,8 @@ class CHtmlUrlValidatorTest extends TestCase {
 			['http://localhost/hosts.php?hostid=1#comment={$COMMENT}',	false,	true],
 			['http://localhost/{NOT_AUSER_MACRO}/',						false,	true], // Macros not allowed, but it's not a macro.
 			// Invalid URLs.
+			["ht tps://zabbix.com",										true,	false], // Invalid scheme.
+			["ht\ttps://zabbix.com",									true,	false], // Invalid scheme.
 			['http:?abc',												true,	false], // Scheme with no host.
 			['http:/',													true,	false], // Special case where single "/" is not allowed in path.
 			['http://',													true,	false], // url_parse() returs false.
