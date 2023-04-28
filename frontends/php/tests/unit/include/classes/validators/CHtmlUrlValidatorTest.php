@@ -87,8 +87,11 @@ class CHtmlUrlValidatorTest extends TestCase {
 			['http://localhost/hosts.php?hostid=1#comment={$COMMENT}',	false,	true],
 			['http://localhost/{NOT_AUSER_MACRO}/',						false,	true], // Macros not allowed, but it's not a macro.
 			// Invalid URLs.
-			["ht tps://zabbix.com",										true,	false], // Invalid scheme.
-			["ht\ttps://zabbix.com",									true,	false], // Invalid scheme.
+			['ht tps://zabbix.com',										true,	false], // Whitespace characters are not allowed in scheme.
+			["ht\ttps://zabbix.com",									true,	false], // Whitespace characters are not allowed in scheme.
+			["ht\rtps://zabbix.com",									true,	false], // Line terminators are not allowed in scheme.
+			["ht\ntps://zabbix.com",									true,	false], // Line terminators are not allowed in scheme.
+			["ht\r\ntps://zabbix.com",									true,	false], // Line terminators are not allowed in scheme.
 			['http:?abc',												true,	false], // Scheme with no host.
 			['http:/',													true,	false], // Special case where single "/" is not allowed in path.
 			['http://',													true,	false], // url_parse() returs false.
