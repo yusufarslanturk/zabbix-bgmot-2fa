@@ -59,7 +59,7 @@ foreach($data['db_exps'] as $exp) {
 
 	$expressions[$exp['regexpid']]->addRow([
 		new CCol($values[$exp['regexpid']]),
-		new CCol(' &raquo; '),
+		new CCol([' ', RARR(), ' ']),
 		new CCol($exp['expression']),
 		new CCol(' ['.expression_type2str($exp['expression_type']).']')
 	]);

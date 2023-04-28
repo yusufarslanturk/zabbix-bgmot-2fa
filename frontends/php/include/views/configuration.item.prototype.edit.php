@@ -144,7 +144,7 @@ $itemFormList->addRow(
 				(new CTextBox('query_fields[name][#{index}]', '#{name}', $readonly))
 					->setAttribute('placeholder', _('name'))
 					->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
-				'&rArr;',
+				RARR(),
 				(new CTextBox('query_fields[value][#{index}]', '#{value}', $readonly))
 					->setAttribute('placeholder', _('value'))
 					->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
@@ -241,7 +241,7 @@ $itemFormList->addRow(
 				(new CTextBox('headers[name][#{index}]', '#{name}', $readonly))
 					->setAttribute('placeholder', _('name'))
 					->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
-				'&rArr;',
+				RARR(),
 				(new CTextBox('headers[value][#{index}]', '#{value}', $readonly, 2000))
 					->setAttribute('placeholder', _('value'))
 					->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
@@ -730,12 +730,12 @@ else {
 	$valuemapComboBox = new CComboBox('valuemapid', $this->data['valuemapid']);
 	$valuemapComboBox->addItem(0, _('As is'));
 	foreach ($this->data['valuemaps'] as $valuemap) {
-		$valuemapComboBox->addItem($valuemap['valuemapid'], CHtml::encode($valuemap['name']));
+		$valuemapComboBox->addItem($valuemap['valuemapid'], $valuemap['name']);
 	}
 }
 $link = (new CLink(_('show value mappings'), 'adm.valuemapping.php'))->setAttribute('target', '_blank');
 $itemFormList
-	->addRow(_('Show value'), [$valuemapComboBox, SPACE, $link], 'row_valuemap')
+	->addRow(_('Show value'), [$valuemapComboBox, NBSP(), $link], 'row_valuemap')
 	->addRow(
 		new CLabel(_('Enable trapping'), 'allow_traps'),
 		(new CCheckBox('allow_traps', HTTPCHECK_ALLOW_TRAPS_ON))
@@ -755,7 +755,7 @@ $itemFormList
 $applicationComboBox = new CListBox('applications[]', $this->data['applications'], 6);
 $applicationComboBox->addItem(0, '-'._('None').'-');
 foreach ($this->data['db_applications'] as $application) {
-	$applicationComboBox->addItem($application['applicationid'], CHtml::encode($application['name']));
+	$applicationComboBox->addItem($application['applicationid'], $application['name']);
 }
 $itemFormList->addRow(_('Applications'), $applicationComboBox);
 

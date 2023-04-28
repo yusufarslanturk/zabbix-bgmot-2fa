@@ -656,7 +656,7 @@ class CPageFilter {
 			$severityName = getSeverityName($severity, $config);
 
 			if ($severity == $default) {
-				$this->data['severitiesMin'][] = $severityName.SPACE.'('._('default').')';
+				$this->data['severitiesMin'][] = [$severityName, NBSP(), '('._('default').')'];
 			}
 			else {
 				$this->data['severitiesMin'][] = $severityName;

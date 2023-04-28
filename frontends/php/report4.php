@@ -269,7 +269,7 @@ else {
 				array_push($row, '');
 			}
 			else {
-				array_push($row, [$s['total'], ($media_type == 0) ? SPACE.'('.implode('/', $s['medias']).')' : '']);
+				array_push($row, [$s['total'], ($media_type == 0) ? [NBSP(), '('.implode('/', $s['medias']).')'] : '']);
 			}
 		}
 
@@ -286,11 +286,11 @@ else {
 			$links[] = (CWebUser::getType() < USER_TYPE_SUPER_ADMIN)
 				? $description
 				: new CLink($description, 'zabbix.php?action=mediatype.edit&mediatypeid='.$id);
-			$links[] = SPACE.'/'.SPACE;
+			$links[] = [NBSP(), '/', NBSP()];
 		}
 		array_pop($links);
 
-		$linksDiv = new CDiv([SPACE._('all').SPACE.'('.SPACE, $links, SPACE.')']);
+		$linksDiv = new CDiv([NBSP(), _('all'), NBSP(), '(', NBSP(), $links, NBSP(), ')']);
 		$linksDiv->show();
 	}
 }
