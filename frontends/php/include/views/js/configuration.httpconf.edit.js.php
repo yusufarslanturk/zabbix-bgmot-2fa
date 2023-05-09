@@ -41,7 +41,7 @@
 				->setAttribute('placeholder', _('name'))
 				->setAttribute('data-type', 'name')
 				->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
-			'&rArr;',
+			RARR(),
 			(new CTextBox(null, '#{value}'))
 				->setAttribute('placeholder', _('value'))
 				->setAttribute('data-type', 'value')

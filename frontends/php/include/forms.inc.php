@@ -179,16 +179,13 @@ function prepareSubfilterOutput($label, $data, $subfilter, $subfilterName) {
 	$output = [new CTag('h3', true, $label)];
 
 	foreach ($data as $id => $element) {
-		$element['name'] = CHtml::encode($element['name']);
-
 		// is activated
 		if (str_in_array($id, $subfilter)) {
 			$output[] = (new CSpan([
 				(new CLinkAction($element['name']))
-					->onClick(CHtml::encode(
-						'javascript: create_var("zbx_filter", "subfilter_set", "1", false);'.
+					->onClick('javascript: create_var("zbx_filter", "subfilter_set", "1", false);'.
 						'create_var("zbx_filter", '.CJs::encodeJson($subfilterName.'['.$id.']').', null, true);'
-					)),
+					),
 				' ',
 				new CSup($element['count'])
 			]))
@@ -208,14 +205,13 @@ function prepareSubfilterOutput($label, $data, $subfilter, $subfilterName) {
 			}
 			else {
 				$link = (new CLinkAction($element['name']))
-					->onClick(CHtml::encode(
-						'javascript: create_var("zbx_filter", "subfilter_set", "1", false);'.
+					->onClick('javascript: create_var("zbx_filter", "subfilter_set", "1", false);'.
 						'create_var("zbx_filter", '.
 							CJs::encodeJson($subfilterName.'['.$id.']').', '.
 							CJs::encodeJson($id).', '.
 							'true'.
 						');'
-					));
+					);
 
 				$output[] = (new CSpan([
 					$link,
@@ -485,7 +481,7 @@ function getItemFilterForm(&$items) {
 	$table_subfilter = (new CTableInfo())
 		->addRow([
 			new CTag('h4', true, [
-				_('Subfilter'), SPACE, (new CSpan(_('affects only filtered data')))->addClass(ZBX_STYLE_GREY)
+				_('Subfilter'), NBSP(), (new CSpan(_('affects only filtered data')))->addClass(ZBX_STYLE_GREY)
 			])
 		]);
 
@@ -2105,9 +2101,9 @@ function getTimeperiodForm(array $data) {
 		(new CDiv([
 			(new CNumericBox('new_timeperiod[period_days]', $new_timeperiod['period_days'], 3))
 				->setWidth(ZBX_TEXTAREA_NUMERIC_STANDARD_WIDTH),
-			_('Days').SPACE.SPACE,
+			_('Days'), NBSP(), NBSP(),
 			$perHours,
-			_('Hours').SPACE.SPACE,
+			_('Hours'), NBSP(), NBSP(),
 			$perMinutes,
 			_('Minutes')
 		]))->setId('new_timeperiod')

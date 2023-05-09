@@ -63,7 +63,7 @@ foreach ($data['macros'] as $i => $macro) {
 	}
 
 	$table->addRow([
-		$macro_input, '&rArr;', $value_input, (new CCol($button_cell))->addClass(ZBX_STYLE_NOWRAP)
+		$macro_input, RARR(), $value_input, (new CCol($button_cell))->addClass(ZBX_STYLE_NOWRAP)
 	], 'form_row');
 }
 

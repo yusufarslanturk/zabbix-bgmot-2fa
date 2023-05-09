@@ -308,10 +308,10 @@ function makeGraphTemplatePrefix($graphid, array $parent_templates, $flag) {
 			$url->setArgument('hostid', $template['hostid']);
 		}
 
-		$name = (new CLink(CHtml::encode($template['name']), $url))->addClass(ZBX_STYLE_LINK_ALT);
+		$name = (new CLink($template['name'], $url))->addClass(ZBX_STYLE_LINK_ALT);
 	}
 	else {
-		$name = new CSpan(CHtml::encode($template['name']));
+		$name = new CSpan($template['name']);
 	}
 
 	return [$name->addClass(ZBX_STYLE_GREY), NAME_DELIMITER];
@@ -345,13 +345,13 @@ function makeGraphTemplatesHtml($graphid, array $parent_templates, $flag) {
 				$url->setArgument('hostid', $template['hostid']);
 			}
 
-			$name = new CLink(CHtml::encode($template['name']), $url);
+			$name = new CLink($template['name'], $url);
 		}
 		else {
-			$name = (new CSpan(CHtml::encode($template['name'])))->addClass(ZBX_STYLE_GREY);
+			$name = (new CSpan($template['name']))->addClass(ZBX_STYLE_GREY);
 		}
 
-		array_unshift($list, $name, '&nbsp;&rArr;&nbsp;');
+		array_unshift($list, $name, [NBSP(), RARR(), NBSP()]);
 
 		$graphid = $parent_templates['links'][$graphid]['graphid'];
 	}
@@ -667,6 +667,8 @@ function imageVerticalMarks($im, $x, $y, $offset, $color, $marks) {
  * @param string	$string
  */
 function imageText($image, $fontsize, $angle, $x, $y, $color, $string) {
+	$string = strtr($string, ['&' => '&#38;']);
+
 	if ((preg_match(ZBX_PREG_DEF_FONT_STRING, $string) && $angle != 0) || ZBX_FONT_NAME == ZBX_GRAPH_FONT_NAME) {
 		$ttf = ZBX_FONTPATH.'/'.ZBX_FONT_NAME.'.ttf';
 		imagettftext($image, $fontsize, $angle, $x, $y, $color, $ttf, $string);
@@ -707,6 +709,8 @@ function imageText($image, $fontsize, $angle, $x, $y, $color, $string) {
  * @return array
  */
 function imageTextSize($fontsize, $angle, $string) {
+	$string = strtr($string, ['&' => '&#38;']);
+
 	if (preg_match(ZBX_PREG_DEF_FONT_STRING, $string) && $angle != 0) {
 		$ttf = ZBX_FONTPATH.'/'.ZBX_FONT_NAME.'.ttf';
 	}
