@@ -49,7 +49,6 @@ $availableJScripts = [
 	'jquery.js' => 'vendors/',
 	'jquery-ui.js' => 'vendors/',
 	// classes
-	'class.bbcode.js' => '',
 	'class.calendar.js' => '',
 	'class.cclock.js' => '',
 	'class.cdate.js' => '',
@@ -310,7 +309,6 @@ if (empty($_GET['files'])) {
 		'class.cookie.js',
 		'class.curl.js',
 		'class.rpc.js',
-		'class.bbcode.js',
 		'class.csuggest.js',
 		'main.js',
 		'chkbxrange.js',

@@ -165,7 +165,7 @@ $itemFormList->addRow(
 			->addItem(new CRow([
 				(new CCol((new CDiv)->addClass(ZBX_STYLE_DRAG_ICON)))->addClass(ZBX_STYLE_TD_DRAG_ICON),
 				(new CTextBox('headers[name][#{index}]', '#{name}'))->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
-				'&rArr;',
+				RARR(),
 				(new CTextBox('headers[value][#{index}]', '#{value}', false, 2000))->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
 				(new CButton(null, _('Remove')))
 					->addClass(ZBX_STYLE_BTN_LINK)
@@ -588,7 +588,7 @@ $itemFormList
 		(new CVisibilityBox('visible[valuemapid]', 'valuemap', _('Original')))
 			->setLabel(_('Show value'))
 			->setChecked(isset($data['visible']['valuemapid'])),
-		(new CDiv([$valueMapsComboBox, SPACE, $valueMapLink]))
+		(new CDiv([$valueMapsComboBox, NBSP(), $valueMapLink]))
 			->setId('valuemap')
 	)
 	->addRow(

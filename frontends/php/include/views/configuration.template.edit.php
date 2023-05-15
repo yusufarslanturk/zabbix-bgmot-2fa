@@ -37,11 +37,6 @@ $templateIds = getRequest('templates', []);
 $clear_templates = getRequest('clear_templates', []);
 $macros = getRequest('macros', []);
 
-$frm_title = _('Template');
-
-if ($data['templateid'] != 0) {
-	$frm_title .= SPACE.' ['.$this->data['dbTemplate']['name'].']';
-}
 $frmHost = (new CForm())
 	->setName('templatesForm')
 	->setAttribute('aria-labelledby', ZBX_STYLE_PAGE_TITLE)

@@ -132,7 +132,7 @@ if ($this->data['graphtype'] == GRAPH_TYPE_NORMAL || $this->data['graphtype'] ==
 			$percentLeftCheckbox->setChecked(false);
 		}
 
-		$graphFormList->addRow(_('Percentile line (left)'), [$percentLeftCheckbox, SPACE, $percentLeftTextBox]);
+		$graphFormList->addRow(_('Percentile line (left)'), [$percentLeftCheckbox, NBSP(), $percentLeftTextBox]);
 
 		// Percent right.
 		$percentRightTextBox = (new CTextBox('percent_right', $this->data['percent_right'], $readonly, 7))
@@ -150,7 +150,7 @@ if ($this->data['graphtype'] == GRAPH_TYPE_NORMAL || $this->data['graphtype'] ==
 			$percentRightCheckbox->setChecked(false);
 		}
 
-		$graphFormList->addRow(_('Percentile line (right)'), [$percentRightCheckbox, SPACE, $percentRightTextBox]);
+		$graphFormList->addRow(_('Percentile line (right)'), [$percentRightCheckbox, NBSP(), $percentRightTextBox]);
 	}
 
 	$yaxisMinData = [(new CComboBox('ymin_type', $this->data['ymin_type'], null, [

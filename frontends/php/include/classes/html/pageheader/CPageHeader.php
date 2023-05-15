@@ -63,7 +63,7 @@ class CPageHeader {
 	 * @param string $title
 	 */
 	public function __construct($title = '') {
-		$this->title = CHtml::encode($title);
+		$this->title = $title;
 		$this->sid = substr(get_cookie(ZBX_SESSION_NAME), 16, 16);
 	}
 
@@ -129,7 +129,9 @@ class CPageHeader {
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="Author" content="Zabbix SIA" />
-		<title>$this->title</title>
+HTML;
+		echo (new CTag('title', true))->addItem($this->title);
+		echo <<<HTML
 		<link rel="icon" href="favicon.ico">
 		<link rel="apple-touch-icon-precomposed" sizes="76x76" href="assets/img/apple-touch-icon-76x76-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/img/apple-touch-icon-120x120-precomposed.png">
@@ -148,7 +150,10 @@ HTML;
 				$path .= '?'.(int) filemtime($path);
 			}
 
-			echo '<link rel="stylesheet" type="text/css" href="'.htmlspecialchars($path).'" />'."\n";
+			echo (new CTag('link'))
+				->setAttribute('rel', 'stylesheet')
+				->setAttribute('type', 'text/css')
+				->setAttribute('href', $path);
 		}
 
 		if ($this->styles) {
@@ -168,7 +173,7 @@ HTML;
 				$path .= '?'.(int) filemtime($path);
 			}
 
-			echo '<script src="'.htmlspecialchars($path).'"></script>'."\n";
+			echo (new CTag('script', true))->setAttribute('src', $path);
 		}
 
 		if ($this->js) {

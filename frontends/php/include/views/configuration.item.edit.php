@@ -156,7 +156,7 @@ $itemFormList->addRow(
 				(new CTextBox('query_fields[name][#{index}]', '#{name}', $readonly))
 					->setAttribute('placeholder', _('name'))
 					->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
-				'&rArr;',
+				RARR(),
 				(new CTextBox('query_fields[value][#{index}]', '#{value}', $readonly))
 					->setAttribute('placeholder', _('value'))
 					->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
@@ -253,7 +253,7 @@ $itemFormList->addRow(
 				(new CTextBox('headers[name][#{index}]', '#{name}', $readonly))
 					->setAttribute('placeholder', _('name'))
 					->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
-				'&rArr;',
+				RARR(),
 				(new CTextBox('headers[value][#{index}]', '#{value}', $readonly, 2000))
 					->setAttribute('placeholder', _('value'))
 					->setWidth(ZBX_TEXTAREA_TAG_WIDTH),
@@ -855,12 +855,12 @@ else {
 	$valuemapComboBox = new CComboBox('valuemapid', $data['valuemapid']);
 	$valuemapComboBox->addItem(0, _('As is'));
 	foreach ($data['valuemaps'] as $valuemap) {
-		$valuemapComboBox->addItem($valuemap['valuemapid'], CHtml::encode($valuemap['name']));
+		$valuemapComboBox->addItem($valuemap['valuemapid'], $valuemap['name']);
 	}
 }
 
 if (CWebUser::getType() == USER_TYPE_SUPER_ADMIN) {
-	$valuemapComboBox = [$valuemapComboBox, '&nbsp;',
+	$valuemapComboBox = [$valuemapComboBox, NBSP(),
 		(new CLink(_('show value mappings'), 'adm.valuemapping.php'))->setAttribute('target', '_blank')
 	];
 }
@@ -896,7 +896,7 @@ if ($discovered_item) {
 
 	$applicationComboBox = new CListBox('applications_names[]', $data['applications'], 6);
 	foreach ($data['db_applications'] as $application) {
-		$applicationComboBox->addItem($application['applicationid'], CHtml::encode($application['name']));
+		$applicationComboBox->addItem($application['applicationid'], $application['name']);
 	}
 	$applicationComboBox->setEnabled(!$discovered_item);
 }
@@ -908,7 +908,7 @@ else {
 	$applicationComboBox = new CListBox('applications[]', $data['applications'], 6);
 	$applicationComboBox->addItem(0, '-'._('None').'-');
 	foreach ($data['db_applications'] as $application) {
-		$applicationComboBox->addItem($application['applicationid'], CHtml::encode($application['name']));
+		$applicationComboBox->addItem($application['applicationid'], $application['name']);
 	}
 }
 
