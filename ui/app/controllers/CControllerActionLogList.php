@@ -38,10 +38,22 @@ class CControllerActionLogList extends CController {
 			'filter_actionids' =>		'array_db actions.actionid',
 			'filter_mediatypeids' =>	'array_db media_type.mediatypeid',
 			'filter_statuses' =>		'array_db alerts.status',
-			'filter_messages' =>		'string'
+			'filter_messages' =>		'string',
+			'from' =>					'string',
+			'to' =>						'string'
 		];
 
 		$ret = $this->validateInput($fields);
+
+		$timeselector_from = $this->hasInput('from')
+			? $this->getInput('from')
+			: CProfile::get('web.actionlog.filter.from', '');
+
+		$timeselector_to = $this->hasInput('to')
+			? $this->getInput('to')
+			: CProfile::get('web.actionlog.filter.to', '');
+
+		validateTimeSelector($timeselector_from, $timeselector_to);
 
 		if (!$ret) {
 			$this->setResponse(new CControllerResponseFatal());
@@ -65,9 +77,11 @@ class CControllerActionLogList extends CController {
 		$timeselector_options = [
 			'profileIdx' => 'web.actionlog.filter',
 			'profileIdx2' => 0,
-			'from' => CProfile::get('web.actionlog.filter.from'),
-			'to' => CProfile::get('web.actionlog.filter.to')
+			'from' => CProfile::get('web.actionlog.filter.from', ''),
+			'to' => CProfile::get('web.actionlog.filter.to', '')
 		];
+
+		$this->getInputs($timeselector_options, ['from', 'to']);
 
 		$data = [
 			'page' => $this->getInput('page', 1),
@@ -82,7 +96,7 @@ class CControllerActionLogList extends CController {
 			'messages' => CProfile::get('web.actionlog.filter.messages', ''),
 			'alerts' => [],
 			'action' => $this->getAction(),
-			'timeline' => getTimeSelectorPeriod($timeselector_options),
+			'timeline' => hasErrorMessages() ? $timeselector_options : getTimeSelectorPeriod($timeselector_options),
 			'active_tab' => CProfile::get('web.actionlog.filter.active', 1)
 		];
 
@@ -128,29 +142,31 @@ class CControllerActionLogList extends CController {
 		$search = $data['messages'] === '' ? null : $data['messages'];
 		$limit = CSettingsHelper::get(CSettingsHelper::SEARCH_LIMIT) + 1;
 
-		foreach (eventSourceObjects() as $event_source) {
-			$data['alerts'] = array_merge($data['alerts'], API::Alert()->get([
-				'output' => ['alertid', 'actionid', 'userid', 'clock', 'sendto', 'subject', 'message', 'status',
-					'retries', 'error', 'alerttype'
-				],
-				'filter' => ['status' => $data['actionlog_statuses']],
-				'selectMediatypes' => ['mediatypeid', 'name', 'maxattempts'],
-				'userids' => $userids ?: null,
-				'actionids' => $actionids ?: null,
-				'mediatypeids' => $mediatypeids ?: null,
-				'search' => [
-					'subject' => $search,
-					'message' => $search
-				],
-				'searchByAny' => true,
-				'time_from' => $data['timeline']['from_ts'] - 1,
-				'time_till' => $data['timeline']['to_ts'] + 1,
-				'eventsource' => $event_source['source'],
-				'eventobject' => $event_source['object'],
-				'sortfield' => 'alertid',
-				'sortorder' => ZBX_SORT_DOWN,
-				'limit' => $limit
-			]));
+		if (!hasErrorMessages()) {
+			foreach (eventSourceObjects() as $event_source) {
+				$data['alerts'] = array_merge($data['alerts'], API::Alert()->get([
+					'output' => ['alertid', 'actionid', 'userid', 'clock', 'sendto', 'subject', 'message', 'status',
+						'retries', 'error', 'alerttype'
+					],
+					'filter' => ['status' => $data['actionlog_statuses']],
+					'selectMediatypes' => ['mediatypeid', 'name', 'maxattempts'],
+					'userids' => $userids ?: null,
+					'actionids' => $actionids ?: null,
+					'mediatypeids' => $mediatypeids ?: null,
+					'search' => [
+						'subject' => $search,
+						'message' => $search
+					],
+					'searchByAny' => true,
+					'time_from' => $data['timeline']['from_ts'] - 1,
+					'time_till' => $data['timeline']['to_ts'] + 1,
+					'eventsource' => $event_source['source'],
+					'eventobject' => $event_source['object'],
+					'sortfield' => 'alertid',
+					'sortorder' => ZBX_SORT_DOWN,
+					'limit' => $limit
+				]));
+			}
 		}
 
 		CArrayHelper::sort($data['alerts'], [

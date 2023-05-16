@@ -34,9 +34,16 @@ $fields = [
 	'hostids' =>	[T_ZBX_INT,			O_OPT,	P_SYS|P_ONLY_ARRAY,	DB_ID,	null],
 	'severities' =>	[T_ZBX_INT,			O_OPT,	P_SYS|P_ONLY_ARRAY,	null,	null],
 	'filter_rst' =>	[T_ZBX_STR,			O_OPT,	P_SYS,	null,	null],
+	'from' =>		[T_ZBX_STR,			O_OPT,	P_SYS,	null,	null],
+	'to' =>			[T_ZBX_STR,			O_OPT,	P_SYS,	null,	null],
 	'filter_set' =>	[T_ZBX_STR,			O_OPT,	P_SYS,	null,	null]
 ];
 check_fields($fields);
+
+$timeselector_from = hasRequest('from') ? getRequest('from') : CProfile::get('web.actionlog.filter.from', '');
+$timeselector_to = hasRequest('to') ? getRequest('to') : CProfile::get('web.actionlog.filter.to', '');
+
+validateTimeSelector($timeselector_from, $timeselector_to);
 
 /*
  * Filter
@@ -57,13 +64,13 @@ elseif (hasRequest('filter_rst')) {
 $timeselector_options = [
 	'profileIdx' => 'web.toptriggers.filter',
 	'profileIdx2' => 0,
-	'from' => CProfile::get('web.toptriggers.filter.from'),
-	'to' => CProfile::get('web.toptriggers.filter.to')
+	'from' => getRequest('from'),
+	'to' => getRequest('to')
 ];
 
 $data['filter'] = [
 	'severities' => CProfile::getArray('web.toptriggers.filter.severities', []),
-	'timeline' => getTimeSelectorPeriod($timeselector_options),
+	'timeline' => hasErrorMessages() ? $timeselector_options: getTimeSelectorPeriod($timeselector_options),
 	'active_tab' => CProfile::get('web.toptriggers.filter.active', 1)
 ];
 
@@ -96,64 +103,67 @@ if ($hostids) {
 // data generation
 $triggersEventCount = [];
 
-// get 100 triggerids with max event count
-$sql = 'SELECT e.objectid,count(distinct e.eventid) AS cnt_event'.
+if (!hasErrorMessages()) {
+	// get 100 triggerids with max event count
+	$sql = 'SELECT e.objectid,count(distinct e.eventid) AS cnt_event'.
 		' FROM triggers t,events e'.
 		' WHERE t.triggerid=e.objectid'.
-			' AND e.source='.EVENT_SOURCE_TRIGGERS.
-			' AND e.object='.EVENT_OBJECT_TRIGGER.
-			' AND e.clock>='.zbx_dbstr($data['filter']['timeline']['from_ts']).
-			' AND e.clock<='.zbx_dbstr($data['filter']['timeline']['to_ts']);
+		' AND e.source='.EVENT_SOURCE_TRIGGERS.
+		' AND e.object='.EVENT_OBJECT_TRIGGER.
+		' AND e.clock>='.zbx_dbstr($data['filter']['timeline']['from_ts']).
+		' AND e.clock<='.zbx_dbstr($data['filter']['timeline']['to_ts']);
 
-if ($data['filter']['severities']) {
-	$sql .= ' AND '.dbConditionInt('t.priority', $data['filter']['severities']);
-}
+	if ($data['filter']['severities']) {
+		$sql .= ' AND '.dbConditionInt('t.priority', $data['filter']['severities']);
+	}
 
-if ($hostids) {
-	$inHosts = ' AND '.dbConditionInt('i.hostid', $hostids);
-}
+	if ($hostids) {
+		$inHosts = ' AND '.dbConditionInt('i.hostid', $hostids);
+	}
 
-if ($groupids) {
-	$inGroups = ' AND '.dbConditionInt('hgg.groupid', $groupids);
-}
+	if ($groupids) {
+		$inGroups = ' AND '.dbConditionInt('hgg.groupid', $groupids);
+	}
 
-if (CWebUser::getType() == USER_TYPE_SUPER_ADMIN && ($groupids || $hostids)) {
-	$sql .= ' AND EXISTS ('.
-				'SELECT NULL'.
-				' FROM functions f,items i,hosts_groups hgg'.
-				' WHERE t.triggerid=f.triggerid'.
-					' AND f.itemid=i.itemid'.
-					' AND i.hostid=hgg.hostid'.
-					($hostids ? $inHosts : '').
-					($groupids ? $inGroups : '').
+	if (CWebUser::getType() == USER_TYPE_SUPER_ADMIN && ($groupids || $hostids)) {
+		$sql .= ' AND EXISTS ('.
+			'SELECT NULL'.
+			' FROM functions f,items i,hosts_groups hgg'.
+			' WHERE t.triggerid=f.triggerid'.
+			' AND f.itemid=i.itemid'.
+			' AND i.hostid=hgg.hostid'.
+			($hostids ? $inHosts : '').
+			($groupids ? $inGroups : '').
 			')';
-}
-elseif (CWebUser::getType() != USER_TYPE_SUPER_ADMIN) {
-	// add permission filter
-	$userId = CWebUser::$data['userid'];
-	$userGroups = getUserGroupsByUserId($userId);
-	$sql .= ' AND EXISTS ('.
-				'SELECT NULL'.
-				' FROM functions f,items i,hosts_groups hgg'.
-				' JOIN rights r'.
-					' ON r.id=hgg.groupid'.
-						' AND '.dbConditionInt('r.groupid', $userGroups).
-				' WHERE t.triggerid=f.triggerid'.
-					' AND f.itemid=i.itemid'.
-					' AND i.hostid=hgg.hostid'.
-					($hostids ? $inHosts : '').
-					($groupids ? $inGroups : '').
-				' GROUP BY f.triggerid'.
-				' HAVING MIN(r.permission)>'.PERM_DENY.
+	}
+	elseif (CWebUser::getType() != USER_TYPE_SUPER_ADMIN) {
+		// add permission filter
+		$userId = CWebUser::$data['userid'];
+		$userGroups = getUserGroupsByUserId($userId);
+		$sql .= ' AND EXISTS ('.
+			'SELECT NULL'.
+			' FROM functions f,items i,hosts_groups hgg'.
+			' JOIN rights r'.
+			' ON r.id=hgg.groupid'.
+			' AND '.dbConditionInt('r.groupid', $userGroups).
+			' WHERE t.triggerid=f.triggerid'.
+			' AND f.itemid=i.itemid'.
+			' AND i.hostid=hgg.hostid'.
+			($hostids ? $inHosts : '').
+			($groupids ? $inGroups : '').
+			' GROUP BY f.triggerid'.
+			' HAVING MIN(r.permission)>'.PERM_DENY.
 			')';
-}
-$sql .= ' AND '.dbConditionInt('t.flags', [ZBX_FLAG_DISCOVERY_NORMAL, ZBX_FLAG_DISCOVERY_CREATED]).
+	}
+	$sql .= ' AND '.dbConditionInt('t.flags', [ZBX_FLAG_DISCOVERY_NORMAL, ZBX_FLAG_DISCOVERY_CREATED]).
 		' GROUP BY e.objectid'.
 		' ORDER BY cnt_event DESC';
-$result = DBselect($sql, 100);
-while ($row = DBfetch($result)) {
-	$triggersEventCount[$row['objectid']] = $row['cnt_event'];
+	$result = DBselect($sql, 100);
+	while ($row = DBfetch($result)) {
+		$triggersEventCount[$row['objectid']] = $row['cnt_event'];
+	}
 }
+
 
 $data['triggers'] = API::Trigger()->get([
 	'output' => ['triggerid', 'description', 'expression', 'priority', 'lastchange'],

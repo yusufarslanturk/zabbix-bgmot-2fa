@@ -639,3 +639,66 @@ function validateTimeUnit($value, $min, $max, $allow_zero, &$error, array $optio
 
 	return true;
 }
+
+/**
+ * Validate "from" and "to" parameters for allowed time period.
+ *
+ * @param string from
+ * @param string to
+ */
+function validateTimeSelector($from, $to) {
+	$period_from = null;
+	$period_to = null;
+	$ts = [];
+	$ts['now'] = time();
+	$range_time_parser = new CRangeTimeParser();
+
+	if (($from !== '') && $range_time_parser->parse($from) == CParser::PARSE_SUCCESS) {
+		$period_from = $range_time_parser
+			->getDateTime(true)
+			->getTimestamp();
+	}
+	else {
+		error(_s('Incorrect value for field "%1$s": %2$s.', _s('From'), _('a date is expected')));
+	}
+
+
+	if (($to !== '') && $range_time_parser->parse($to) == CParser::PARSE_SUCCESS) {
+		$period_to = $range_time_parser
+			->getDateTime(true)
+			->getTimestamp();
+	}
+	else {
+		error(_s('Incorrect value for field "%1$s": %2$s.', _s('To'), _('a date is expected')));
+	}
+
+	if ($from !== '' && $to !== '' && $range_time_parser->parse($to) == CParser::PARSE_SUCCESS
+			&& $range_time_parser->parse($from) == CParser::PARSE_SUCCESS) {
+		foreach (['from' => $from, 'to' => $to] as $field => $value) {
+			$range_time_parser->parse($value);
+
+			$ts[$field] = $range_time_parser->getDateTime($field === 'from')->getTimestamp();
+		}
+	}
+
+	if ($from !== '' && $to !== '' && $range_time_parser->parse($to) == CParser::PARSE_SUCCESS
+			&& $range_time_parser->parse($from) == CParser::PARSE_SUCCESS) {
+		$period = $ts['to'] - $ts['from'] + 1;
+		$range_time_parser->parse('now-'.CSettingsHelper::get(CSettingsHelper::MAX_PERIOD));
+		$max_period = 1 + $ts['now'] - $range_time_parser->getDateTime(true)->getTimestamp();
+
+		if ($period_from !== null && $period_to !== null && $period_to < $period_from) {
+			error(_s('"%1$s" date must be less than "%2$s" date.', _('From'), _('To')));
+		}
+		elseif ($period < ZBX_MIN_PERIOD) {
+			error(_n('Minimum time period to display is %1$s minute.',
+				'Minimum time period to display is %1$s minutes.', (int)(ZBX_MIN_PERIOD / SEC_PER_MIN)
+			));
+		}
+		elseif ($period > $max_period) {
+			error(_n('Maximum time period to display is %1$s day.',
+				'Maximum time period to display is %1$s days.', (int)round($max_period / SEC_PER_DAY)
+			));
+		}
+	}
+}
