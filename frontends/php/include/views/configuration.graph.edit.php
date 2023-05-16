@@ -416,7 +416,7 @@ foreach ($this->data['items'] as $n => $item) {
 	$name = $item['host'].NAME_DELIMITER.$item['name_expanded'];
 
 	if (zbx_empty($item['drawtype'])) {
-		$item['drawtype'] = 0;
+		$item[] = 0;
 	}
 
 	if (zbx_empty($item['yaxisside'])) {
@@ -427,9 +427,14 @@ foreach ($this->data['items'] as $n => $item) {
 		$item['gitemid'] = '';
 	}
 
+	if (!array_key_exists('color', $item)) {
+		$item['color'] = '';
+	}
+
 	insert_js('loadItem('.$n.', '.CJs::encodeJson($item['gitemid']).', '.$item['itemid'].', '.
-		CJs::encodeJson($name).', '.$item['type'].', '.$item['calc_fnc'].', '.$item['drawtype'].', '.
-		$item['yaxisside'].', \''.$item['color'].'\', '.$item['flags'].');',
+		CJs::encodeJson($name).', '.$item['type'].', '.CJs::encodeJson($item['calc_fnc']).', '.$item['drawtype'].', '.
+		CJs::encodeJson($item['yaxisside']).', '.CJs::encodeJson($item['color']).', '.
+		CJs::encodeJson($item['flags']).');',
 		true
 	);
 }
