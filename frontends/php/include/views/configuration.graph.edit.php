@@ -427,6 +427,10 @@ foreach ($this->data['items'] as $n => $item) {
 		$item['gitemid'] = '';
 	}
 
+	if (!array_key_exists('calc_fnc', $item)) {
+		$item['calc_fnc'] = CALC_FNC_AVG;
+	}
+
 	if (!array_key_exists('color', $item)) {
 		$item['color'] = '';
 	}
