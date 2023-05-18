@@ -34,22 +34,10 @@ class CControllerAuditLogList extends CController {
 			'filter_set' =>				'in 1',
 			'filter_userids' =>			'array_db users.userid',
 			'filter_resourceid' =>		'string',
-			'filter_recordsetid' =>		'string',
-			'from' =>					'string',
-			'to' =>						'string'
+			'filter_recordsetid' =>		'string'
 		];
 
 		$ret = $this->validateInput($fields);
-
-		$timeselector_from = $this->hasInput('from')
-			? $this->getInput('from')
-			: CProfile::get('web.actionlog.filter.from', '');
-
-		$timeselector_to = $this->hasInput('to')
-			? $this->getInput('to')
-			: CProfile::get('web.actionlog.filter.to', '');
-
-		validateTimeSelector($timeselector_from, $timeselector_to);
 
 		if (!$ret) {
 			$this->setResponse(new CControllerResponseFatal());
@@ -77,8 +65,6 @@ class CControllerAuditLogList extends CController {
 			'to' => CProfile::get('web.auditlog.filter.to')
 		];
 
-		$this->getInputs($timeselector_options, ['from', 'to']);
-
 		$data = [
 			'page' => $this->getInput('page', 1),
 			'userids' => CProfile::getArray('web.auditlog.filter.userids', []),
@@ -89,7 +75,7 @@ class CControllerAuditLogList extends CController {
 			'action' => $this->getAction(),
 			'actions' => self::getActionsList(),
 			'resources' => self::getResourcesList(),
-			'timeline' => hasErrorMessages() ? $timeselector_options : getTimeSelectorPeriod($timeselector_options),
+			'timeline' => getTimeSelectorPeriod($timeselector_options),
 			'auditlogs' => [],
 			'active_tab' => CProfile::get('web.auditlog.filter.active', 1)
 		];
@@ -122,11 +108,11 @@ class CControllerAuditLogList extends CController {
 			'limit' => CSettingsHelper::get(CSettingsHelper::SEARCH_LIMIT) + 1
 		];
 
-		if (array_key_exists('from_ts', $data['timeline']) && $data['timeline']['from_ts'] !== null) {
+		if ($data['timeline']['from_ts'] !== null) {
 			$params['time_from'] = $data['timeline']['from_ts'];
 		}
 
-		if (array_key_exists('to_ts', $data['timeline']) && $data['timeline']['to_ts'] !== null) {
+		if ($data['timeline']['to_ts'] !== null) {
 			$params['time_till'] = $data['timeline']['to_ts'];
 		}
 

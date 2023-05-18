@@ -41,16 +41,9 @@ $fields = [
 	'filter_hostids' =>		[T_ZBX_INT,			O_OPT,	P_SYS|P_ONLY_ARRAY,	DB_ID,	null],
 	'filter_templateid' =>	[T_ZBX_INT,			O_OPT,	P_SYS,				DB_ID,	null],
 	'filter_rst'=>			[T_ZBX_STR,			O_OPT,	P_SYS,			null,		null],
-	'from' =>				[T_ZBX_STR,			O_OPT,	P_SYS,			null,		null],
-	'to' =>					[T_ZBX_STR,			O_OPT,	P_SYS,			null,		null],
 	'filter_set' =>			[T_ZBX_STR,			O_OPT,	P_SYS,			null,		null]
 ];
 check_fields($fields);
-
-$timeselector_from = hasRequest('from') ? getRequest('from') : CProfile::get('web.actionlog.filter.from', '');
-$timeselector_to = hasRequest('to') ? getRequest('to') : CProfile::get('web.actionlog.filter.to', '');
-
-validateTimeSelector($timeselector_from, $timeselector_to);
 
 $report_mode = getRequest('mode', CProfile::get('web.avail_report.mode', AVAILABILITY_REPORT_BY_HOST));
 CProfile::update('web.avail_report.mode', $report_mode, PROFILE_TYPE_INT);
@@ -136,8 +129,8 @@ $data['filter'] = ($report_mode == AVAILABILITY_REPORT_BY_TEMPLATE)
 $timeselector_options = [
 	'profileIdx' => 'web.avail_report.filter',
 	'profileIdx2' => 0,
-	'from' => getRequest('from'),
-	'to' => getRequest('to')
+	'from' => CProfile::get('web.avail_report.filter.from'),
+	'to' => CProfile::get('web.avail_report.filter.to')
 ];
 
 /*
@@ -207,7 +200,7 @@ else {
 	 * Filter
 	 */
 	$data['filter'] += [
-		'timeline' => hasErrorMessages() ? $timeselector_options: getTimeSelectorPeriod($timeselector_options),
+		'timeline' => getTimeSelectorPeriod($timeselector_options),
 		'active_tab' => CProfile::get('web.avail_report.filter.active', 1)
 	];
 
@@ -513,31 +506,29 @@ else {
 	$paging = CPagerHelper::paginate($page_num, $triggers, ZBX_SORT_UP, new CUrl('report2.php'));
 	$allowed_ui_problems = CWebUser::checkAccess(CRoleHelper::UI_MONITORING_PROBLEMS);
 
-	if (!hasErrorMessages()) {
-		foreach ($triggers as $trigger) {
-			$availability = calculateAvailability($trigger['triggerid'], $data['filter']['timeline']['from_ts'],
-				$data['filter']['timeline']['to_ts']
-			);
+	foreach ($triggers as $trigger) {
+		$availability = calculateAvailability($trigger['triggerid'], $data['filter']['timeline']['from_ts'],
+			$data['filter']['timeline']['to_ts']
+		);
 
-			$triggerTable->addRow([
-				$trigger['host_name'],
-				$allowed_ui_problems
-					? new CLink($trigger['description'],
+		$triggerTable->addRow([
+			$trigger['host_name'],
+			$allowed_ui_problems
+				? new CLink($trigger['description'],
 					(new CUrl('zabbix.php'))
 						->setArgument('action', 'problem.view')
 						->setArgument('filter_set', '1')
 						->setArgument('triggerids', [$trigger['triggerid']])
 				)
-					: $trigger['description'],
-				($availability['true'] < 0.00005)
-					? ''
-					: (new CSpan(sprintf('%.4f%%', $availability['true'])))->addClass(ZBX_STYLE_RED),
-				($availability['false'] < 0.00005)
-					? ''
-					: (new CSpan(sprintf('%.4f%%', $availability['false'])))->addClass(ZBX_STYLE_GREEN),
-				new CLink(_('Show'), (new CUrl('report2.php'))->setArgument('triggerid', $trigger['triggerid']))
-			]);
-		}
+				: $trigger['description'],
+			($availability['true'] < 0.00005)
+				? ''
+				: (new CSpan(sprintf('%.4f%%', $availability['true'])))->addClass(ZBX_STYLE_RED),
+			($availability['false'] < 0.00005)
+				? ''
+				: (new CSpan(sprintf('%.4f%%', $availability['false'])))->addClass(ZBX_STYLE_GREEN),
+			new CLink(_('Show'), (new CUrl('report2.php'))->setArgument('triggerid', $trigger['triggerid']))
+		]);
 	}
 
 	$obj_data = [
