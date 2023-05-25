@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-09-29 12:57+0000\n"
-"Last-Translator: Hugo <hugopedrosantos@gmail.com>\n"
+"PO-Revision-Date: 2023-05-22 06:57+0000\n"
+"Last-Translator: Sergejs <sergejs.maklakovs@zabbix.com>\n"
 "Language-Team: none\n"
 "Language: pt_PT\n"
 "MIME-Version: 1.0\n"
@@ -1081,15 +1081,15 @@ msgstr "Etiqueta do activo"
 #, c-format
 msgid "At %1$s:%2$s %3$s of every week"
 msgid_plural "At %1$s:%2$s %3$s of every %4$s weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Às %1$s:%2$s %3$s de cada semana"
+msgstr[1] "Às %1$s:%2$s %3$s de cada %4$s semanas"
 
 #: include/maintenances.inc.php:56
 #, c-format
 msgid "At %1$s:%2$s every day"
 msgid_plural "At %1$s:%2$s every %3$s days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Às %1$s:%2$s todo o dia"
+msgstr[1] "Às %1$s:%2$s a cada %3$s dias"
 
 #: include/maintenances.inc.php:118
 #, c-format
@@ -12718,7 +12718,7 @@ msgstr "Por favor seleccione dois elementos"
 #: include/classes/widgets/CWidgetHelper.php:753
 #: include/classes/widgets/CWidgetHelper.php:994
 msgid "Point size"
-msgstr ""
+msgstr "Tamanho do ponto"
 
 #: include/classes/widgets/CWidgetHelper.php:675
 #: include/classes/widgets/CWidgetHelper.php:717
@@ -12803,15 +12803,15 @@ msgstr "Prévisualizar"
 
 #: include/func.inc.php:2693
 msgid "Previous month"
-msgstr ""
+msgstr "Mês anterior"
 
 #: include/func.inc.php:2692
 msgid "Previous week"
-msgstr ""
+msgstr "Semana anterior"
 
 #: include/func.inc.php:2694
 msgid "Previous year"
-msgstr ""
+msgstr "Ano anterior"
 
 #: include/hosts.inc.php:399
 msgid "Primary POC cell"
@@ -12901,7 +12901,7 @@ msgstr "Problema"
 
 #: include/actions.inc.php:2125
 msgid "Problem created"
-msgstr ""
+msgstr "Problema criado"
 
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:95
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:105
@@ -12933,7 +12933,7 @@ msgstr "Problema em"
 
 #: include/actions.inc.php:2128
 msgid "Problem resolved"
-msgstr ""
+msgstr "Problema resolvido"
 
 #: srv_status.php:148
 msgid "Problem time"
@@ -12968,7 +12968,7 @@ msgstr "Problemas"
 #: include/classes/screens/CScreenSystemStatus.php:54
 #: include/classes/widgets/CWidgetConfig.php:45 include/screens.inc.php:41
 msgid "Problems by severity"
-msgstr ""
+msgstr "Problemas por severidade"
 
 #: include/classes/items/CHelpItems.php:153
 #: include/classes/items/CHelpItems.php:483
@@ -13255,7 +13255,7 @@ msgstr "Atualizar itens não suportados: %1$s."
 
 #: include/forms.inc.php:695
 msgid "Regular"
-msgstr ""
+msgstr "Regular"
 
 #: include/audit.inc.php:49 include/items.inc.php:1709
 #: include/views/configuration.host.discovery.edit.php:628
@@ -13297,7 +13297,7 @@ msgstr "Expressões regulares"
 
 #: include/forms.inc.php:480
 msgid "Regular items"
-msgstr ""
+msgstr "Items regulares"
 
 #: jsLoader.php:106
 msgid "Release to create a new widget."

@@ -132,7 +132,7 @@ if ($this->data['graphtype'] == GRAPH_TYPE_NORMAL || $this->data['graphtype'] ==
 			$percentLeftCheckbox->setChecked(false);
 		}
 
-		$graphFormList->addRow(_('Percentile line (left)'), [$percentLeftCheckbox, SPACE, $percentLeftTextBox]);
+		$graphFormList->addRow(_('Percentile line (left)'), [$percentLeftCheckbox, NBSP(), $percentLeftTextBox]);
 
 		// Percent right.
 		$percentRightTextBox = (new CTextBox('percent_right', $this->data['percent_right'], $readonly, 7))
@@ -150,7 +150,7 @@ if ($this->data['graphtype'] == GRAPH_TYPE_NORMAL || $this->data['graphtype'] ==
 			$percentRightCheckbox->setChecked(false);
 		}
 
-		$graphFormList->addRow(_('Percentile line (right)'), [$percentRightCheckbox, SPACE, $percentRightTextBox]);
+		$graphFormList->addRow(_('Percentile line (right)'), [$percentRightCheckbox, NBSP(), $percentRightTextBox]);
 	}
 
 	$yaxisMinData = [(new CComboBox('ymin_type', $this->data['ymin_type'], null, [
@@ -427,9 +427,18 @@ foreach ($this->data['items'] as $n => $item) {
 		$item['gitemid'] = '';
 	}
 
+	if (!array_key_exists('calc_fnc', $item)) {
+		$item['calc_fnc'] = CALC_FNC_AVG;
+	}
+
+	if (!array_key_exists('color', $item)) {
+		$item['color'] = '';
+	}
+
 	insert_js('loadItem('.$n.', '.CJs::encodeJson($item['gitemid']).', '.$item['itemid'].', '.
-		CJs::encodeJson($name).', '.$item['type'].', '.$item['calc_fnc'].', '.$item['drawtype'].', '.
-		$item['yaxisside'].', \''.$item['color'].'\', '.$item['flags'].');',
+		CJs::encodeJson($name).', '.$item['type'].', '.CJs::encodeJson($item['calc_fnc']).', '.$item['drawtype'].', '.
+		CJs::encodeJson($item['yaxisside']).', '.CJs::encodeJson($item['color']).', '.
+		CJs::encodeJson($item['flags']).');',
 		true
 	);
 }

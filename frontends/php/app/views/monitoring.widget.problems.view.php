@@ -54,7 +54,7 @@ $table = (new CTableInfo())
 		($data['sortfield'] === 'host') ? [_('Host'), $sort_div] : _('Host'),
 		[
 			($data['sortfield'] === 'name') ? [_('Problem'), $sort_div] : _('Problem'),
-			' &bullet; ',
+			' ', BULLET(), ' ',
 			($data['sortfield'] === 'severity') ? [_('Severity'), $sort_div] : _('Severity')
 		],
 		$data['fields']['show_latest_values'] ? _('Latest values') : null,

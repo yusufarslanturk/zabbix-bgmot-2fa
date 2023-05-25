@@ -85,7 +85,7 @@ else {
 			->disableAutocomplete()
 			->setAttribute('placeholder', _('value'));
 
-		$row = [$macro_cell, '&rArr;', $value_input];
+		$row = [$macro_cell, RARR(), $value_input];
 
 		if (!$data['readonly']) {
 			if ($data['show_inherited_macros']) {
@@ -123,17 +123,17 @@ else {
 		if ($data['show_inherited_macros']) {
 			if (array_key_exists('template', $macro)) {
 				if ($macro['template']['rights'] == PERM_READ_WRITE) {
-					$link = (new CLink(CHtml::encode($macro['template']['name']),
+					$link = (new CLink($macro['template']['name'],
 						'templates.php?form=update&templateid='.$macro['template']['templateid'])
 					)
 						->addClass('unknown')
 						->setAttribute('target', '_blank');
 				}
 				else {
-					$link = new CSpan(CHtml::encode($macro['template']['name']));
+					$link = new CSpan($macro['template']['name']);
 				}
 
-				$row[] = '&lArr;';
+				$row[] = LARR();
 				$row[] = (new CDiv([$link, NAME_DELIMITER, '"'.$macro['template']['value'].'"']))
 					->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS)
 					->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH);
@@ -147,7 +147,7 @@ else {
 			}
 
 			if (array_key_exists('global', $macro)) {
-				$row[] = '&lArr;';
+				$row[] = LARR();
 				$row[] = (new CDiv('"'.$macro['global']['value'].'"'))
 					->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS)
 					->setWidth(ZBX_TEXTAREA_MACRO_VALUE_WIDTH);
