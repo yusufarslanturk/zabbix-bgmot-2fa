@@ -18,7 +18,9 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
+
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
+require_once dirname(__FILE__).'/behaviors/CMessageBehavior.php';
 
 /**
  * @on-before disableDebugMode
@@ -50,6 +52,15 @@ class testPageActions extends CLegacyWebTest {
 	private $oldHashOpTemplate = '';
 	private $sqlHashOpConditions = '';
 	private $oldHashOpConditions = '';
+
+	/**
+	 * Attach MessageBehavior to the test.
+	 *
+	 * @return array
+	 */
+	public function getBehaviors() {
+		return [CMessageBehavior::class];
+	}
 
 	private function calculateHash($actionid) {
 		$this->sqlHashAction = 'SELECT actionid,name,eventsource,evaltype,status,def_shortdata,def_longdata,r_shortdata,'
@@ -196,7 +207,7 @@ class testPageActions extends CLegacyWebTest {
 		$this->zbxTestClickLinkText($action['name']);
 		$this->zbxTestClickWait('update');
 		$this->zbxTestCheckTitle('Configuration of actions');
-		$this->zbxTestTextPresent('Action updated');
+		$this->assertMessage(TEST_GOOD, 'Action updated');
 		$this->zbxTestTextPresent($action['name']);
 
 		$this->verifyHash();
@@ -215,12 +226,12 @@ class testPageActions extends CLegacyWebTest {
 		switch ($action['status']) {
 			case ACTION_STATUS_ENABLED:
 				$this->zbxTestClickXpathWait("//a[contains(@onclick,'actionid[]=".$action['actionid']."')]");
-				$this->zbxTestTextPresent('Action disabled');
+				$this->assertMessage(TEST_GOOD, 'Action disabled');
 				$newStatus = ACTION_STATUS_DISABLED;
 				break;
 			case ACTION_STATUS_DISABLED:
 				$this->zbxTestClickXpath("//a[contains(@onclick,'actionid[]=".$action['actionid']."')]");
-				$this->zbxTestTextPresent('Action enabled');
+				$this->assertMessage(TEST_GOOD, 'Action enabled');
 				$newStatus = ACTION_STATUS_ENABLED;
 				break;
 			default:
@@ -256,7 +267,7 @@ class testPageActions extends CLegacyWebTest {
 		$this->zbxTestAcceptAlert();
 
 		$this->zbxTestCheckTitle('Configuration of actions');
-		$this->zbxTestTextPresent('Action disabled');
+		$this->assertMessage(TEST_GOOD, 'Action disabled');
 		$this->zbxTestTextPresent('Disabled');
 
 		$this->assertEquals(1, CDBHelper::getCount(
@@ -286,7 +297,7 @@ class testPageActions extends CLegacyWebTest {
 		$this->zbxTestAcceptAlert();
 
 		$this->zbxTestCheckTitle('Configuration of actions');
-		$this->zbxTestWaitUntilMessageTextPresent('msg-good', 'Action enabled');
+		$this->assertMessage(TEST_GOOD, 'Action enabled');
 		$this->zbxTestTextPresent('Enabled');
 
 		$this->assertEquals(1, CDBHelper::getCount(
@@ -317,7 +328,7 @@ class testPageActions extends CLegacyWebTest {
 		$this->zbxTestAcceptAlert();
 
 		$this->zbxTestCheckTitle('Configuration of actions');
-		$this->zbxTestWaitUntilMessageTextPresent('msg-good', 'Selected actions deleted');
+		$this->assertMessage(TEST_GOOD, 'Selected actions deleted');
 
 		$this->assertEquals(0, CDBHelper::getCount('SELECT * FROM actions WHERE actionid='.$action['actionid']));
 
