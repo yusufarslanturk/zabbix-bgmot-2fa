@@ -504,6 +504,13 @@ class CMenuHelper {
 				$menu = $section_submenu
 					->getSubMenu()
 					->getMenuItems();
+
+				if ($menu[0]->hasSubMenu()) {
+					$menu = $menu[0]
+						->getSubMenu()
+						->getMenuItems();
+				}
+
 				return $menu[0];
 			}
 		}
