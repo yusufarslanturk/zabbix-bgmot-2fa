@@ -1855,9 +1855,9 @@ function get_item_function_info(string $expr) {
  *
  * @return string
  */
-function quoteFunctionParam($param, $forced = false) {
+function quoteFunctionParam(string $param, bool $forced = false): string {
 	if (!$forced) {
-		if (!isset($param[0]) || ($param[0] != '"' && false === strpbrk($param, ',)'))) {
+		if ($param === '' || ($param[0] != '"' && false === strpbrk($param, ',)'))) {
 			return $param;
 		}
 	}

@@ -31,7 +31,8 @@ class CMacrosResolverTest extends TestCase {
 				'hostids' => [10084],
 				'macros' => [
 					'{$TMG.PROXY.CHECK.URL1}' => 'http://zabbix.com',
-					'{$CITY}' => 'Tokyo'
+					'{$CITY}' => 'Tokyo',
+					'{$QUOTED_STRING}' => '"string"'
 				]
 			]
 		];
