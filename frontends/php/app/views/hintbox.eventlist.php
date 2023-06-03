@@ -41,9 +41,7 @@ if (array_key_exists('problems', $data)) {
 	if ($data['trigger']['url'] !== '') {
 		$trigger_url = CHtmlUrlValidator::validate($data['trigger']['url'], false)
 			? $data['trigger']['url']
-			: 'javascript: alert(\'' . _s('Provided URL "%1$s" is invalid.',
-				CJs::encodeJson($data['trigger']['url'])) .
-			'\');';
+			: 'javascript: alert('.CJs::encodeJson(_s('Provided URL "%1$s" is invalid.', $data['trigger']['url'])).');';
 
 		$div->addItem(
 			(new CDiv())
