@@ -80,6 +80,8 @@ class CHtmlUrlValidatorTest extends TestCase {
 			['{$USER_URL_MACRO}?a=1',									true,	true],
 			['http://{$USER_URL_MACRO}?a=1',							true,	true],
 			['http://{$USER_URL_MACRO}',								true,	true],
+			["h\tt\rt\nps://zabbix.com",								true,	true], // CR, LF and TAB characters are ingored by browsers.
+			['ht tps://zabbix.com',										true,	true], // URL with spaces in schema is treated as a path.
 			// Macros not allowed.
 			['http://{$USER_URL_MACRO}',								false,	true], // Macros not allowed, but it's a host.
 			['{$USER_URL_MACRO}',										false,	true], // Macros not allowed, but it's a whole URL.
@@ -94,6 +96,7 @@ class CHtmlUrlValidatorTest extends TestCase {
 			['http:///',												true,	false], // url_parse() returs false.
 			['http:',													true,	false], // Scheme with no host.
 			['http://?',												true,	false], // url_parse() returns false.
+			["ja\tva\rsc\nript:alert(1)",								true,	false], // Invalid scheme. CR, LF and TAB characters are ingored by browsers.
 			['javascript:alert(]',										true,	false], // Invalid scheme.
 			['protocol://{$INVALID!MACRO}',								true,	false], // Invalid scheme. Also macro is not valid, but that's secondary.
 			['',														true,	false], // Cannot be empty.
