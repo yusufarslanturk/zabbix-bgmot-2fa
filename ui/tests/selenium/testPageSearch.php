@@ -296,6 +296,12 @@ class testPageSearch extends CWebTest {
 					'search_string' => 'testdns.example.com',
 					'hosts' => [['Host' => '🙂🙃', 'IP' => '99.99.99.99', 'DNS' => 'testdns.example.com']]
 				]
+			],
+			[
+				[
+					'search_string' => 'templates/applications',
+					'template_groups' => [['Template group' => 'Templates/Applications']]
+				]
 			]
 		];
 	}
@@ -310,12 +316,13 @@ class testPageSearch extends CWebTest {
 		if (CTestArrayHelper::get($data, 'count_from_db')) {
 			$template_sql = 'SELECT NULL FROM hosts WHERE LOWER(host) LIKE \'%'.$data['search_string'].'%\' AND status=3';
 			$hostgroup_sql = 'SELECT NULL FROM hstgrp WHERE type=0 AND LOWER(name) LIKE \'%'.$data['search_string'].'%\'';
+			$templategroup_sql = 'SELECT NULL FROM hstgrp WHERE type=1 AND LOWER(name) LIKE \'%'.$data['search_string'].'%\'';
 			$host_sql = 'SELECT DISTINCT(h.host) FROM hosts h LEFT JOIN interface i on i.hostid=h.hostid '.
 				'WHERE h.status=0 AND h.flags=0 AND (LOWER(h.host) LIKE \'%'.$data['search_string'].'%\' OR LOWER(h.name) LIKE \'%'.$data['search_string'].'%\''.
 				'OR i.dns LIKE \'%'.$data['search_string'].'%\' OR i.ip LIKE \'%'.$data['search_string'].'%\')';
 
 			$db_count = [];
-			foreach (['hosts' => $host_sql, 'host_groups' => $hostgroup_sql, 'templates' => $template_sql] as $type => $sql) {
+			foreach (['hosts' => $host_sql, 'host_groups' => $hostgroup_sql, 'templates' => $template_sql, 'template_groups' => $templategroup_sql] as $type => $sql) {
 				$db_count[$type] = CDBHelper::getCount($sql);
 			}
 		}
