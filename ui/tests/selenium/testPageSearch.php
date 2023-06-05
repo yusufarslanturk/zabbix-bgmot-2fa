@@ -42,9 +42,9 @@ class testPageSearch extends CWebTest {
 			'title' => 'Hosts',
 			'column_groups' => ['Host', 'IP', 'DNS', 'Monitoring', 'Configuration'],
 			'columns' => [
-				['skip_text_check' => true, 'href' => 'zabbix.php?action=host.edit'],
-				['skip_text_check' => true],
-				['skip_text_check' => true],
+				['href' => 'zabbix.php?action=host.edit'],
+				[],
+				[],
 				['name' => 'Latest data', 'href' => 'zabbix.php?action=latest.view'],
 				['name' => 'Problems', 'href' => 'zabbix.php?action=problem.view'],
 				['name' => 'Graphs', 'href' => 'zabbix.php?action=charts.view'],
@@ -63,7 +63,7 @@ class testPageSearch extends CWebTest {
 			'title' => 'Host groups',
 			'column_groups' => ['Host group', 'Monitoring', 'Configuration'],
 			'columns' => [
-				['skip_text_check' => true, 'href' => 'zabbix.php?action=hostgroup.edit'],
+				['href' => 'zabbix.php?action=hostgroup.edit'],
 				['name' => 'Latest data', 'href' => 'zabbix.php?action=latest.view'],
 				['name' => 'Problems', 'href' => 'zabbix.php?action=problem.view'],
 				['name' => 'Web', 'href' => 'zabbix.php?action=web.view'],
@@ -76,7 +76,7 @@ class testPageSearch extends CWebTest {
 			'title' => 'Templates',
 			'column_groups' => ['Template', 'Configuration'],
 			'columns' => [
-				['skip_text_check' => true, 'href' => 'templates.php?form=update'],
+				['href' => 'templates.php?form=update'],
 				['name' => 'Items', 'href' => 'items.php?filter_set=1'],
 				['name' => 'Triggers', 'href' => 'triggers.php?filter_set=1'],
 				['name' => 'Graphs', 'href' => 'graphs.php?filter_set=1'],
@@ -91,7 +91,7 @@ class testPageSearch extends CWebTest {
 			'title' => 'Template groups',
 			'column_groups' => ['Template group','Configuration'],
 			'columns' => [
-				['skip_text_check' => true, 'href' => 'zabbix.php?action=templategroup.edit'],
+				['href' => 'zabbix.php?action=templategroup.edit'],
 				['name' => 'Templates', 'href' => 'templates.php?filter_set=1']
 			]
 		]
@@ -194,7 +194,7 @@ class testPageSearch extends CWebTest {
 					// The same column name is sometimes used twice so need to access by index.
 					$link = $table_first_row->query('xpath:./td['.($col_num + 1).']//a')->one();
 
-					if (!(isset($column['skip_text_check']) && $column['skip_text_check'])) {
+					if (isset($column['name'])) {
 						$this->assertEquals($column['name'], $link->getText());
 					}
 					$this->assertStringContainsString($column['href'], $link->getAttribute('href'));
