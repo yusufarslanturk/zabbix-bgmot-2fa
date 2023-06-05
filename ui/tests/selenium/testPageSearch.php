@@ -45,16 +45,16 @@ class testPageSearch extends CWebTest {
 				['href' => 'zabbix.php?action=host.edit'],
 				[],
 				[],
-				['name' => 'Latest data', 'href' => 'zabbix.php?action=latest.view'],
-				['name' => 'Problems', 'href' => 'zabbix.php?action=problem.view'],
-				['name' => 'Graphs', 'href' => 'zabbix.php?action=charts.view'],
+				['text' => 'Latest data', 'href' => 'zabbix.php?action=latest.view'],
+				['text' => 'Problems', 'href' => 'zabbix.php?action=problem.view'],
+				['text' => 'Graphs', 'href' => 'zabbix.php?action=charts.view'],
 				['name' => 'Dashboards', 'href' => 'zabbix.php?action=host.dashboard.view'],
-				['name' => 'Web', 'href' => 'zabbix.php?action=web.view'],
-				['name' => 'Items', 'href' => 'items.php?filter_set=1'],
-				['name' => 'Triggers', 'href' => 'triggers.php?filter_set=1'],
-				['name' => 'Graphs', 'href' => 'graphs.php?filter_set=1'],
-				['name' => 'Discovery', 'href' => 'host_discovery.php?filter_set=1'],
-				['name' => 'Web', 'href' => 'httpconf.php?filter_set=1']
+				['text' => 'Web', 'href' => 'zabbix.php?action=web.view'],
+				['text' => 'Items', 'href' => 'items.php?filter_set=1'],
+				['text' => 'Triggers', 'href' => 'triggers.php?filter_set=1'],
+				['text' => 'Graphs', 'href' => 'graphs.php?filter_set=1'],
+				['text' => 'Discovery', 'href' => 'host_discovery.php?filter_set=1'],
+				['text' => 'Web', 'href' => 'httpconf.php?filter_set=1']
 			]
 		],
 		'hostgroups' => [
@@ -64,10 +64,10 @@ class testPageSearch extends CWebTest {
 			'column_groups' => ['Host group', 'Monitoring', 'Configuration'],
 			'columns' => [
 				['href' => 'zabbix.php?action=hostgroup.edit'],
-				['name' => 'Latest data', 'href' => 'zabbix.php?action=latest.view'],
-				['name' => 'Problems', 'href' => 'zabbix.php?action=problem.view'],
-				['name' => 'Web', 'href' => 'zabbix.php?action=web.view'],
-				['name' => 'Hosts', 'href' => 'zabbix.php?action=host.list']
+				['text' => 'Latest data', 'href' => 'zabbix.php?action=latest.view'],
+				['text' => 'Problems', 'href' => 'zabbix.php?action=problem.view'],
+				['text' => 'Web', 'href' => 'zabbix.php?action=web.view'],
+				['text' => 'Hosts', 'href' => 'zabbix.php?action=host.list']
 			]
 		],
 		'templates' => [
@@ -77,12 +77,12 @@ class testPageSearch extends CWebTest {
 			'column_groups' => ['Template', 'Configuration'],
 			'columns' => [
 				['href' => 'templates.php?form=update'],
-				['name' => 'Items', 'href' => 'items.php?filter_set=1'],
-				['name' => 'Triggers', 'href' => 'triggers.php?filter_set=1'],
-				['name' => 'Graphs', 'href' => 'graphs.php?filter_set=1'],
-				['name' => 'Dashboards', 'href' => 'zabbix.php?action=template.dashboard.list'],
-				['name' => 'Discovery', 'href' => 'host_discovery.php?filter_set=1'],
-				['name' => 'Web', 'href' => 'httpconf.php?filter_set=1&filter_hostids']
+				['text' => 'Items', 'href' => 'items.php?filter_set=1'],
+				['text' => 'Triggers', 'href' => 'triggers.php?filter_set=1'],
+				['text' => 'Graphs', 'href' => 'graphs.php?filter_set=1'],
+				['text' => 'Dashboards', 'href' => 'zabbix.php?action=template.dashboard.list'],
+				['text' => 'Discovery', 'href' => 'host_discovery.php?filter_set=1'],
+				['text' => 'Web', 'href' => 'httpconf.php?filter_set=1&filter_hostids']
 			]
 		],
 		'templategroups' => [
@@ -92,7 +92,7 @@ class testPageSearch extends CWebTest {
 			'column_groups' => ['Template group','Configuration'],
 			'columns' => [
 				['href' => 'zabbix.php?action=templategroup.edit'],
-				['name' => 'Templates', 'href' => 'templates.php?filter_set=1']
+				['text' => 'Templates', 'href' => 'templates.php?filter_set=1']
 			]
 		]
 	];
@@ -194,8 +194,8 @@ class testPageSearch extends CWebTest {
 					// The same column name is sometimes used twice so need to access by index.
 					$link = $table_first_row->query('xpath:./td['.($col_num + 1).']//a')->one();
 
-					if (isset($column['name'])) {
-						$this->assertEquals($column['name'], $link->getText());
+					if (isset($column['text'])) {
+						$this->assertEquals($column['text'], $link->getText());
 					}
 					$this->assertStringContainsString($column['href'], $link->getAttribute('href'));
 				}
