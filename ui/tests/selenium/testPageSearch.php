@@ -69,7 +69,7 @@ class testPageSearch extends CWebTest {
 				['text' => 'Latest data', 'href' => 'zabbix.php?action=latest.view&groupids%5B%5D={id}&filter_set=1'],
 				['text' => 'Problems', 'href' => 'zabbix.php?action=problem.view&groupids%5B0%5D={id}&filter_set=1'],
 				['text' => 'Web', 'href' => 'zabbix.php?action=web.view&filter_groupids%5B%5D={id}&filter_set=1'],
-				['text' => 'Hosts', 'href' => 'zabbix.php?action=host.list&filter_set=1&filter_groups%5B0%5D={id}', 'entity_count' => 1]
+				['text' => 'Hosts 1', 'href' => 'zabbix.php?action=host.list&filter_set=1&filter_groups%5B0%5D={id}']
 			]
 		],
 		'templates' => [
@@ -96,7 +96,7 @@ class testPageSearch extends CWebTest {
 			'column_groups' => ['Template group','Configuration'],
 			'columns' => [
 				['text' => 'Test object Templategroup', 'href' => 'zabbix.php?action=templategroup.edit&groupid={id}'],
-				['text' => 'Templates', 'href' => 'templates.php?filter_set=1&filter_groups%5B0%5D={id}', 'entity_count' => 1]
+				['text' => 'Templates 1', 'href' => 'templates.php?filter_set=1&filter_groups%5B0%5D={id}']
 			]
 		]
 	];
@@ -212,22 +212,17 @@ class testPageSearch extends CWebTest {
 			$table_first_row = $widget->query('xpath:.//table')->asTable()->one()->getRow(0);
 
 			foreach ($widget_params['columns'] as $i => $column){
-				$expected_text = $column['text'];
 				// The same column name is sometimes used twice so need to access column by index.
 				$column_element = $table_first_row->getColumn($i);
 
-				if (isset($column['href'])) {
-					// Sometimes there might be an entity counter next to the link.
-					if(isset($column['entity_count'])){
-						$expected_text = $column['text'].' '.$column['entity_count'];
-					}
+				// Assert text of the table field.
+				$this->assertEquals($column['text'], $column_element->getText());
 
+				if (isset($column['href'])) {
 					// Check that the link href matches.
 					$expected_href = str_replace('{id}', $widget_params['link_id'], $column['href']);
 					$this->assertEquals($expected_href, $column_element->query('tag:a')->one()->getAttribute('href'));
 				}
-
-				$this->assertEquals($expected_text, $column_element->getText());
 			}
 
 			// Check expanding functionality.
@@ -445,6 +440,12 @@ class testPageSearch extends CWebTest {
 				[
 					'search_string' => STRING_128,
 					'expected_suggestions' => [STRING_128]
+				]
+			],
+			[
+				[
+					'search_string' => 'st obj',
+					'expected_suggestions' => ['Test object Host']
 				]
 			]
 		];
