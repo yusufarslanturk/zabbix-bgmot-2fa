@@ -1523,7 +1523,7 @@ class CUser extends CApiService {
 
 					$userdirectoryid = $db_user['userdirectoryid'] != 0
 						? $db_user['userdirectoryid']
-						: $ldap_userdirectoryid;
+						: $user_data['permissions']['userdirectoryid'];
 					$exists = false;
 
 					if ($userdirectoryid != 0) {
