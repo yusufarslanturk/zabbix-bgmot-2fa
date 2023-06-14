@@ -723,8 +723,6 @@ class CSortable extends CBaseComponent {
 					return;
 				}
 
-				e.preventDefault();
-
 				// Save initial mouse position.
 				mouse_down_pos = this._is_vertical ? e.clientY : e.clientX;
 
