@@ -711,7 +711,6 @@ class CSortable extends CBaseComponent {
 					return;
 				}
 
-
 				// Scroll item into view if it is partially visible.
 				this.scrollItemIntoView(mouse_down_item);
 
@@ -722,6 +721,13 @@ class CSortable extends CBaseComponent {
 
 					return;
 				}
+
+				// Need to prevent default event when dragging the item, otherwise content selection, link opening
+				// or other unwanted behavior can happen.
+				e.preventDefault();
+
+				// Re-focus the item.
+				mouse_down_item.focus();
 
 				// Save initial mouse position.
 				mouse_down_pos = this._is_vertical ? e.clientY : e.clientX;
