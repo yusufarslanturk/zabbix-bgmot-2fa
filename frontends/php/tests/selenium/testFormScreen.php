@@ -224,7 +224,7 @@ class testFormScreen extends CLegacyWebTest {
 	}
 
 	/*
-	 * Test "Dynamic item"checkbox state changes after screen element update.
+	 * Test "Dynamic item" checkbox state changes after screen element update.
 	 */
 	public function testFormScreen_ZBX6030() {
 		$this->page->login()->open('screenconf.php');
@@ -261,6 +261,7 @@ class testFormScreen extends CLegacyWebTest {
 		$this->assertTrue($message->isGood());
 		$this->assertEquals('Screen updated', $message->getTitle());
 
+		$this->query('class:in-progress')->waitUntilNotPresent();
 		$this->query('link:Change')->waitUntilClickable()->one()->click();
 		// Check that "Dynamic item" checkbox is unselected.
 		$this->assertTrue($form->getField('Dynamic item', true)->isChecked(false));
