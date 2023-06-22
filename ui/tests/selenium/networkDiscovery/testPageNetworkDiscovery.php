@@ -22,7 +22,7 @@
 require_once dirname(__FILE__).'/../../include/CLegacyWebTest.php';
 
 /**
- * @dataSource DiscoveryRules
+ * @dataSource NetworkDiscovery
  */
 class testPageNetworkDiscovery extends CLegacyWebTest {
 	public function testPageNetworkDiscovery_CheckLayout() {
