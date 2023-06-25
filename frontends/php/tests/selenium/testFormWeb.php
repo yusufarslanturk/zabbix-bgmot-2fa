@@ -29,6 +29,15 @@ use Facebook\WebDriver\WebDriverBy;
 class testFormWeb extends CLegacyWebTest {
 
 	/**
+	 * Attach MessageBehavior to the test.
+	 *
+	 * @return array
+	 */
+	public function getBehaviors() {
+		return [CMessageBehavior::class];
+	}
+
+	/**
 	 * The name of the test host created in the test data set.
 	 *
 	 * @var string
@@ -406,7 +415,7 @@ class testFormWeb extends CLegacyWebTest {
 		$this->zbxTestClickLinkTextWait($name);
 		$this->zbxTestClickWait('update');
 
-		$this->zbxTestTextPresent('Web scenario updated');
+		$this->assertMessage(TEST_GOOD, 'Web scenario updated');
 		$this->zbxTestTextPresent("$name");
 		$this->zbxTestCheckTitle('Configuration of web monitoring');
 
