@@ -1,6 +1,7 @@
 Changes for 4.0.47rc1
 
 Bug fixes:
+..F....... [ZBX-22987] fixed inefficient URL schema validation (agriscenko)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.46
