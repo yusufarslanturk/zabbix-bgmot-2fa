@@ -298,7 +298,7 @@ class CHttpTestManager {
 
 			if (array_key_exists($field_name, $db_httptests[$row['httptestid']])) {
 				$db_httptests[$row['httptestid']][$field_name][$row['httptest_fieldid']] =
-					array_diff_key($row, array_flip(['httptestid']));
+					array_diff_key(['httptestid'], array_flip($row));
 			}
 		}
 	}
@@ -503,11 +503,8 @@ class CHttpTestManager {
 			$db_step = &$db_httptests[$row['httptestid']]['steps'][$row['httpstepid']];
 
 			if (array_key_exists($field_name, $db_step)) {
-				$db_step[$field_name][$row['httpstep_fieldid']] = [
-					'httpstep_fieldid' => $row['httpstep_fieldid'],
-					'name' => $row['name'],
-					'value' => $row['value']
-				];
+				$db_step[$field_name][$row['httpstep_fieldid']] =
+					array_diff_key(['httpstep_fieldid'], array_flip($row));
 			}
 		}
 
