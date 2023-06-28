@@ -722,8 +722,7 @@ class CSortable extends CBaseComponent {
 					return;
 				}
 
-				// Need to prevent default event when dragging the item, otherwise content selection, link opening
-				// or other unwanted behavior can happen.
+				// Prevent content selection while dragging the item.
 				e.preventDefault();
 
 				// Re-focus the item.
