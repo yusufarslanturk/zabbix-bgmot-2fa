@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 0);
 /*
 ** Zabbix
 ** Copyright (C) 2001-2023 Zabbix SIA
@@ -18,21 +18,23 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
 
-class testPageWeb extends CLegacyWebTest {
-	public function testPageWeb_CheckLayout() {
-		$this->zbxTestLogin('zabbix.php?action=web.view');
-		$this->zbxTestCheckTitle('Web monitoring');
-		$this->zbxTestCheckHeader('Web monitoring');
-		$this->zbxTestTextPresent(['Group', 'Host']);
-		$this->zbxTestTextPresent(['Host', 'Name', 'Number of steps', 'Last check', 'Status']);
+use Zabbix\Widgets\Fields\CWidgetFieldMultiSelectMap;
+
+class CWidgetFieldMultiSelectMapView extends CWidgetFieldMultiSelectView {
+
+	public function __construct(CWidgetFieldMultiSelectMap $field, array $data) {
+		parent::__construct($field, $data);
 	}
 
-// Check that no real host or template names displayed
-	public function testPageWeb_NoHostNames() {
-		$this->zbxTestLogin('zabbix.php?action=web.view');
-		$this->zbxTestCheckTitle('Web monitoring');
-		$this->zbxTestCheckNoRealHostnames();
+	protected function getObjectName(): string {
+		return 'sysmaps';
+	}
+
+	protected function getPopupParameters(): array {
+		return [
+			'srctbl' => 'sysmaps',
+			'srcfld1' => 'sysmapid'
+		];
 	}
 }
