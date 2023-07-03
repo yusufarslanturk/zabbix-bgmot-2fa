@@ -421,7 +421,7 @@ class testPageMonitoringWeb extends CWebTest {
 						'Template web scenario',
 						'Template web scenario 1',
 						'Template web scenario 2',
-						'Template web scenario with tags for cloning',
+						'Template web scenario with tags for full cloning',
 						'testFormWeb1',
 						'testFormWeb2',
 						'testFormWeb3',
@@ -454,7 +454,7 @@ class testPageMonitoringWeb extends CWebTest {
 						'Template web scenario',
 						'Template web scenario 1',
 						'Template web scenario 2',
-						'Template web scenario with tags for cloning',
+						'Template web scenario with tags for full cloning',
 						'testFormWeb1',
 						'testFormWeb2',
 						'testFormWeb3',
@@ -488,7 +488,7 @@ class testPageMonitoringWeb extends CWebTest {
 						'Template web scenario',
 						'Template web scenario 1',
 						'Template web scenario 2',
-						'Template web scenario with tags for cloning',
+						'Template web scenario with tags for full cloning',
 						'testFormWeb1',
 						'testFormWeb2',
 						'testFormWeb3',
@@ -522,7 +522,7 @@ class testPageMonitoringWeb extends CWebTest {
 						'Template web scenario',
 						'Template web scenario 1',
 						'Template web scenario 2',
-						'Template web scenario with tags for cloning',
+						'Template web scenario with tags for full cloning',
 						'testFormWeb1',
 						'testFormWeb2',
 						'testFormWeb3',
@@ -555,7 +555,7 @@ class testPageMonitoringWeb extends CWebTest {
 						'Template web scenario',
 						'Template web scenario 1',
 						'Template web scenario 2',
-						'Template web scenario with tags for cloning',
+						'Template web scenario with tags for full cloning',
 						'testFormWeb1',
 						'testFormWeb2',
 						'testFormWeb3',
@@ -803,10 +803,10 @@ class testPageMonitoringWeb extends CWebTest {
 		// Directly open API created Web scenario and add one more step.
 		$this->page->open('httpconf.php?context=host&form=update&hostid='.self::$hostid['WebData Host'].'&httptestid='.
 				self::$httptestid['Web scenario 3 step'])->waitUntilReady();
-		$this->query('id:webscenario-form')->asForm()->one()->selectTab('Steps');
-		$this->query('xpath://button[@class="btn-link js-add-step"]')->one()->click();
+		$this->query('id:http-form')->asForm()->one()->selectTab('Steps');
+		$this->query('xpath://button[@class="element-table-add btn-link"]')->one()->click();
 		COverlayDialogElement::find()->one()->waitUntilReady();
-		$form = $this->query('id:webscenario-step-form')->asForm()->one();
+		$form = $this->query('id:http_step')->asForm()->one();
 		$form->fill(['Name' => 'Step number 4', 'id:url' => 'test.com']);
 		$form->submit();
 		$this->query('button:Update')->one()->click();
