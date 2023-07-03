@@ -118,9 +118,8 @@ int	zbx_read_text_line_from_file(int fd, char *buf, size_t count, const char *en
 
 	/* nbytes can be smaller than szbyte. If the target file was encoded in UTF-8 and contained a single */
 	/* character, but the target encoding was mistakenly set to UTF-32. Then nbytes will be 1 and szbyte */
-	/* will be 4. Similarly, if bytes read produces a remainder that does not fit szbyte - we can safely */
-	/* assume the file contains the encoding different from the one provided to us.*/
-	if ((size_t)nbytes < szbyte || ((size_t)nbytes % szbyte != 0))
+	/* will be 4.                                                                                        */
+	if ((size_t)nbytes < szbyte)
 		return ZBX_READ_WRONG_ENCODING;
 
 	for (i = 0; i <= (size_t)nbytes - szbyte; i += szbyte)
