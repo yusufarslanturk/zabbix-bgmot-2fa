@@ -61,6 +61,10 @@
 			.toggle(show_formula)
 			.prop('disabled', !show_formula);
 
+		if (labels.length <= 1) {
+			document.querySelector('#evaltype').value = <?= CONDITION_EVAL_TYPE_AND_OR ?>;
+		}
+
 		const conditions = [];
 
 		[...labels].forEach(function (label) {
@@ -72,26 +76,6 @@
 
 		document.getElementById('expression')
 			.innerHTML = getConditionFormula(conditions, + document.querySelector('#evaltype').value);
-
-		document.querySelector('#evaltype').onchange = function() {
-			this.show_formula = document.querySelector('#evaltype').value == <?= CONDITION_EVAL_TYPE_EXPRESSION ?>;
-			document.querySelector('#expression').style.display = this.show_formula ? 'none' : '';
-			document.querySelector('#formula').style.display = this.show_formula ? '' : 'none';
-			document.querySelector('#formula').removeAttribute('readonly');
-
-			const labels = document.querySelectorAll('#condition_table .label');
-			const conditions = [];
-
-			[...labels].forEach(function (label) {
-				conditions.push({
-					id: label.dataset.formulaid,
-					type: label.dataset.conditiontype
-				});
-			});
-
-			document.getElementById('expression')
-				.innerHTML = getConditionFormula(conditions, + document.querySelector('#evaltype').value);
-		};
 	}
 
 	function createRow(input) {
