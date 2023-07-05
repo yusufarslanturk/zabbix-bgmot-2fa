@@ -198,25 +198,25 @@
 				switch (parseInt(type)) {
 					case <?= ZBX_CORR_CONDITION_OLD_EVENT_TAG?>:
 					case <?= ZBX_CORR_CONDITION_NEW_EVENT_TAG?>:
-						value = table_row.getElementsByTagName('input')[2].value;
+						value = table_row.querySelector('input[name*="tag"]').value;
 						result.push(input.type === type && input.tag === value);
 						break;
 
 					case <?= ZBX_CORR_CONDITION_NEW_EVENT_TAG_VALUE ?>:
 					case <?= ZBX_CORR_CONDITION_OLD_EVENT_TAG_VALUE?> :
-						value = table_row.getElementsByTagName('input')[2].value;
-						value2 = table_row.getElementsByTagName('input')[3].value;
+						value = table_row.querySelector('input[name*="tag"]').value;
+						value2 = table_row.querySelector('input[name*="value"]').value;
 						result.push(input.type === type && input.tag === value && input.value === value2);
 						break;
 
 					case <?= ZBX_CORR_CONDITION_EVENT_TAG_PAIR ?> :
-						value = table_row.getElementsByTagName('input')[2].value;
-						value2 = table_row.getElementsByTagName('input')[3].value;
+						value = table_row.querySelector('input[name*="oldtag"]').value;
+						value2 = table_row.querySelector('input[name*="newtag"]').value;
 						result.push(input.type === type && input.oldtag === value && input.newtag === value2);
 						break;
 
 					case <?= ZBX_CORR_CONDITION_NEW_EVENT_HOSTGROUP ?> :
-						value = table_row.getElementsByTagName('input')[2].value;
+						value = table_row.querySelector('input[name*="groupid"]').value;
 						result.push(input.type === type && input.groupid === value);
 						break;
 				}
