@@ -792,7 +792,7 @@ class testPageEventCorrelation extends CWebTest {
 		$status = ($data['action'] === 'Enable') ? ZBX_CORRELATION_ENABLED : ZBX_CORRELATION_DISABLED;
 		if (array_key_exists('name', $data)) {
 			$this->assertEquals($status, CDBHelper::getValue('SELECT status FROM correlation WHERE name IN ('.
-				CDBHelper::escape($data['name']).')')
+					CDBHelper::escape($data['name']).')')
 			);
 		}
 		else {
