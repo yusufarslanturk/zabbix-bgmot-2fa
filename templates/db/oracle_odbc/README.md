@@ -90,9 +90,9 @@ This template has been tested on:
 
     This step is required only when:
     
-    * installing Oracle Instant Client with .rpm packages with version < 19.3 (if Instant Client is the only Oracle Software installed on Zabbix server or Zabbix proxy)
+    * installing Oracle Instant Client with .rpm packages with version < 19.3 (if Instant Client is the only Oracle Software installed on Zabbix server or Zabbix proxy);
     
-    * installing Oracle Instant Client manually with .zip files
+    * installing Oracle Instant Client manually with .zip files.
   
     There are multiple ways of achieving this:
     
@@ -116,15 +116,15 @@ This template has been tested on:
           And then, adding:
         
           ```
-          # Oracle Instantclient library
+          # Oracle Instant Client library
           LD_LIBRARY_PATH=/opt/oracle/instantclient_19_18:$LD_LIBRARY_PATH
           export LD_LIBRARY_PATH
           ```
     
     Keep in mind that the library paths will vary depending on your installation.
 
-    This is a minimal configuration example. Depending on Oracle Instantclient version, required functionality and host operating system, a different set of additional packages might need to be installed.
-    For more detailed configuration instructions, see the [official Oracle instantclient installation instructions for Linux](https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html)
+    This is a minimal configuration example. Depending on Oracle Instant Client version, required functionality and host operating system, a different set of additional packages might need to be installed.
+    For more detailed configuration instructions, see the [official Oracle Instant Client installation instructions for Linux](https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html).
 
 4. Restart Zabbix server or Zabbix proxy.
 
@@ -363,7 +363,7 @@ This template has been tested on:
 
 |Name|Description|Expression|Severity|Dependencies and additional info|
 |----|-----------|----------|--------|--------------------------------|
-|Archivelog '{#DEST_NAME}': Log Archive is not valid|<p>The trigger will launch if the archive log destination is not in one of these states:2 - 'DEFERRED';3 - 'VALID'."</p>|`last(/Oracle by ODBC/oracle.archivelog_log_status["{#DEST_NAME}"])<2`|High||
+|Archivelog '{#DEST_NAME}': Log Archive is not valid|<p>The trigger will launch if the archive log destination is not in one of these states:<br>2 - 'DEFERRED';<br>3 - 'VALID'."</p>|`last(/Oracle by ODBC/oracle.archivelog_log_status["{#DEST_NAME}"])<2`|High||
 
 ### LLD rule ASM disk groups discovery
 
