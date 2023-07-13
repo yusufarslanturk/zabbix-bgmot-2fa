@@ -131,6 +131,8 @@ class CControllerActionCreate extends CController {
 			$action['filter'] = $filter;
 		}
 
+		$action['filter']['conditions'] = $this->sortConditionsByFormula($action['filter']);
+
 		foreach (['operations', 'recovery_operations', 'update_operations'] as $operation_group) {
 			foreach ($action[$operation_group] as &$operation) {
 				switch ($operation_group) {
@@ -271,5 +273,22 @@ class CControllerActionCreate extends CController {
 		}
 
 		$this->setResponse(new CControllerResponseData(['main_block' => json_encode($output)]));
+	}
+
+	protected function sortConditionsByFormula($filter):array {
+		preg_match_all('/[A-Z]/', $filter['formula'], $matches);
+		$upper_letters = $matches[0];
+
+		$sorted_conditions = [];
+		$letter_to_condition = array_column($filter['conditions'], null, 'formulaid');
+
+		foreach ($upper_letters as $letter) {
+			if (isset($letter_to_condition[$letter])) {
+				$sorted_conditions[] = $letter_to_condition[$letter];
+				unset($letter_to_condition[$letter]);
+			}
+		}
+
+		return array_merge($sorted_conditions, array_values($letter_to_condition));
 	}
 }
