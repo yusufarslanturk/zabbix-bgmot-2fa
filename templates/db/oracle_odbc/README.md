@@ -132,7 +132,7 @@ This template has been tested on:
 
 6. Set the {$ORACLE.DRIVER} and {$ORACLE.SERVICE} in the host macros.
   
-    * ```{$ORACLE.DRIVER}``` is a path to the driver location in OS. ODBC driver file should be found in __Instantclient__ directory and named ```libsqora.so.XX.Y```.
+    * ```{$ORACLE.DRIVER}``` is a path to the driver location in OS. ODBC driver file should be found in __Instant Client__ directory and named ```libsqora.so.XX.Y```.
     
     * ```{$ORACLE.SERVICE}``` is a service name to which the host will connect to. The value in this macro is important as it determines if the connection is established to a non-CDB, CDB or PDB. If you wish to monitor tablespaces of all PDBs, you will need to set a service name that points to the CDB.
       Active service names can be seen from the instance running Oracle Database with ```lsnrctl status```.
