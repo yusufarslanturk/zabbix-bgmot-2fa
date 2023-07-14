@@ -231,4 +231,29 @@ class CConditionHelper {
 
 		return $nextFormulaId;
 	}
+
+
+	/**
+	 * Sorts the conditions based on the given formula.
+	 *
+	 * @param array $filter  Array containing the formula and conditions
+	 *
+	 * @return array
+	 */
+	public static function sortConditionsByFormula($filter): array {
+		preg_match_all('/[A-Z]/', $filter['formula'], $matches);
+		$upper_letters = $matches[0];
+
+		$sorted_conditions = [];
+		$letter_to_condition = array_column($filter['conditions'], null, 'formulaid');
+
+		foreach ($upper_letters as $letter) {
+			if (isset($letter_to_condition[$letter])) {
+				$sorted_conditions[] = $letter_to_condition[$letter];
+				unset($letter_to_condition[$letter]);
+			}
+		}
+
+		return array_merge($sorted_conditions, array_values($letter_to_condition));
+	}
 }
