@@ -33,8 +33,8 @@ class CControllerProxyList extends CController {
 			'filter_name' =>	'string',
 			'sort' =>			'in '.implode(',', ['host', 'status', 'tls_accept', 'version', 'lastaccess']),
 			'sortorder' =>		'in '.ZBX_SORT_DOWN.','.ZBX_SORT_UP,
-			'filter_status' =>	'in '.implode(',', ['-1', HOST_STATUS_PROXY_ACTIVE, HOST_STATUS_PROXY_PASSIVE]),
-			'filter_version' =>	'in '.implode(',', ['-1', ZBX_PROXY_VERSION_CURRENT, ZBX_PROXY_VERSION_ANY_OUTDATED])
+			'filter_status' =>	'in -1,'.implode(',', [HOST_STATUS_PROXY_ACTIVE, HOST_STATUS_PROXY_PASSIVE]),
+			'filter_version' =>	'in -1,'.implode(',', [ZBX_PROXY_VERSION_ANY_OUTDATED, ZBX_PROXY_VERSION_CURRENT])
 		];
 
 		$ret = $this->validateInput($fields);
