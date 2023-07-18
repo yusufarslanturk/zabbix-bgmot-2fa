@@ -25,6 +25,8 @@ require_once dirname(__FILE__).'/behaviors/CMessageBehavior.php';
 
 /**
  * @backup regexps
+ *
+ * @onBefore prepareData
  */
 class testPageAdministrationGeneralRegexp extends CWebTest {
 
@@ -37,6 +39,52 @@ class testPageAdministrationGeneralRegexp extends CWebTest {
 		return [
 			'class' => CMessageBehavior::class
 		];
+	}
+
+	public function prepareData() {
+		CDataHelper::call('regexp.create', [
+			[
+				'name' => '0_case_1',
+				'expressions' => [
+					[
+						'expression' => 'test',
+						'expression_type' => EXPRESSION_TYPE_INCLUDED
+					]
+				]
+			],
+			[
+				'name' => '0_case_2',
+				'expressions' => [
+					[
+						'expression' => 'test',
+						'expression_type' => EXPRESSION_TYPE_ANY_INCLUDED,
+						'case_sensitive' => 1
+					],
+					[
+						'expression' => 'test',
+						'expression_type' => EXPRESSION_TYPE_NOT_INCLUDED,
+						'case_sensitive' => 0
+					]
+				]
+			],
+			[
+				'name' => '0_case_3',
+				'expressions' => [
+					[
+						'expression' => 'test',
+						'expression_type' => EXPRESSION_TYPE_INCLUDED
+					],
+					[
+						'expression' => 'test',
+						'expression_type' => EXPRESSION_TYPE_TRUE
+					],
+					[
+						'expression' => 'test',
+						'expression_type' => EXPRESSION_TYPE_FALSE
+					]
+				]
+			]
+		]);
 	}
 
 	/**
@@ -61,12 +109,25 @@ class testPageAdministrationGeneralRegexp extends CWebTest {
 		// Check the data table.
 		$this->assertEquals(['', 'Name', 'Expressions'], $this->query('class:list-table')->asTable()->one()->getHeadersText());
 
-		$name_list = [];
-		foreach (CDBHelper::getColumn('SELECT name FROM regexps', 'name') as $name) {
-			$name_list[] = ['Name' => $name];
-		}
+		$expected_data = [
+			[
+				'Name' => '0_case_1',
+				'Expressions' => '1 ⇒ test [Character string included]'
+			],
+			[
+				'Name' => '0_case_2',
+				'Expressions' => "1 ⇒ test [Any character string included]\n".
+						"2 ⇒ test [Character string not included]"
+			],
+			[
+				'Name' => '0_case_3',
+				'Expressions' => "1 ⇒ test [Character string included]\n".
+						"2 ⇒ test [Result is TRUE]\n".
+						"3 ⇒ test [Result is FALSE]"
+			]
+		];
 
-		$this->assertTableHasData($name_list);
+		$this->assertTableHasData($expected_data);
 
 		// Check regexp counter and Delete button status.
 		$selected_counter = $this->query('id:selected_count')->one();
@@ -74,7 +135,7 @@ class testPageAdministrationGeneralRegexp extends CWebTest {
 		$this->assertFalse($this->query('button:Delete')->one()->isEnabled());
 
 		$this->query('id:all-regexes')->asCheckbox()->one()->set(true);
-		$this->assertEquals(count($name_list).' selected', $selected_counter->getText());
+		$this->assertEquals(CDBHelper::getCount('SELECT NULL FROM regexps').' selected', $selected_counter->getText());
 		$this->assertTrue($this->query('button:Delete')->one()->isEnabled());
 	}
 
