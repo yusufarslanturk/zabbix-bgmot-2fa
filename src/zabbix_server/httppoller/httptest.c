@@ -909,9 +909,13 @@ static void	process_httptest(DC_HOST *host, zbx_httptest_t *httptest, int *delay
 			{
 				err_str = zbx_strdup(err_str, curl_easy_strerror(err));
 			}
-
+#	if LIBCURL_VERSION_NUM >= 0x075500
+			if (CURLE_OK != (err = curl_easy_getinfo(easyhandle, CURLINFO_SPEED_DOWNLOAD_T,
+					&stat.speed_download)) && NULL == err_str)
+#	else
 			if (CURLE_OK != (err = curl_easy_getinfo(easyhandle, CURLINFO_SPEED_DOWNLOAD,
 					&stat.speed_download)) && NULL == err_str)
+#	endif
 			{
 				err_str = zbx_strdup(err_str, curl_easy_strerror(err));
 			}
