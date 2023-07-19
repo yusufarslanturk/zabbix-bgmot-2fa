@@ -391,12 +391,11 @@ static void	lld_items_get(const zbx_vector_ptr_t *item_prototypes, zbx_vector_pt
 			" from items i"
 			" where");
 
-	DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, "i.itemid", itemids.values,
-			itemids.values_num);
+	zbx_db_add_condition_alloc(&sql, &sql_alloc, &sql_offset, "i.itemid", itemids.values, itemids.values_num);
 
-	result = DBselect("%s", sql);
+	result = zbx_db_select("%s", sql);
 
-	while (NULL != (row = DBfetch(result)))
+	while (NULL != (row = zbx_db_fetch(result)))
 	{
 		const item_discovery_info	*item_info;
 
