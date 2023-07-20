@@ -277,6 +277,39 @@ class CFilter extends CDiv {
 			$anchor = 'tab_'.count($this->tabs);
 
 			$this->addTab((new CLink($header, '#'.$anchor))->addClass(ZBX_STYLE_BTN_TIME), new CDiv());
+
+			$this->time_period = (new CDiv([
+				(new CDiv([
+					new CList([
+						new CLabel(_('From'), 'from'),
+						(new CDateSelector('from', $from))->setDateFormat($format)
+					]),
+					(new CList([(new CListItem(''))->addClass(ZBX_STYLE_RED)]))
+						->setAttribute('data-error-for', 'from')
+						->addClass(ZBX_STYLE_TIME_INPUT_ERROR)
+						->addStyle('display: none'),
+					new CList([
+						new CLabel(_('To'), 'to'),
+						(new CDateSelector('to', $to))->setDateFormat($format)
+					]),
+					(new CList([(new CListItem(''))->addClass(ZBX_STYLE_RED)]))
+						->setAttribute('data-error-for', 'to')
+						->addClass(ZBX_STYLE_TIME_INPUT_ERROR)
+						->addStyle('display: none'),
+					new CList([
+						new CButton('apply', _('Apply'))
+					])
+				]))->addClass(ZBX_STYLE_TIME_INPUT),
+				(new CDiv($predefined_ranges))->addClass(ZBX_STYLE_TIME_QUICK_RANGE)
+			]))
+				->addClass(ZBX_STYLE_FILTER_CONTAINER)
+				->addClass(ZBX_STYLE_TIME_SELECTION_CONTAINER)
+				->setId($anchor);
+
+			if ($profile !== null) {
+				$this->form->addItem((new CVar('from', CProfile::get($profile.'from')))->removeId());
+				$this->form->addItem((new CVar('to', CProfile::get($profile.'to')))->removeId());
+			}
 		}
 		else {
 			$this
@@ -285,39 +318,6 @@ class CFilter extends CDiv {
 					new CVar('from', $from),
 					new CVar('to', $to)
 				])));
-		}
-
-		$this->time_period = (new CDiv([
-					(new CDiv([
-						new CList([
-							new CLabel(_('From'), 'from'),
-							(new CDateSelector('from', $from))->setDateFormat($format)
-						]),
-						(new CList([(new CListItem(''))->addClass(ZBX_STYLE_RED)]))
-							->setAttribute('data-error-for', 'from')
-							->addClass(ZBX_STYLE_TIME_INPUT_ERROR)
-							->addStyle('display: none'),
-						new CList([
-							new CLabel(_('To'), 'to'),
-							(new CDateSelector('to', $to))->setDateFormat($format)
-						]),
-						(new CList([(new CListItem(''))->addClass(ZBX_STYLE_RED)]))
-							->setAttribute('data-error-for', 'to')
-							->addClass(ZBX_STYLE_TIME_INPUT_ERROR)
-							->addStyle('display: none'),
-						new CList([
-							new CButton('apply', _('Apply'))
-						])
-					]))->addClass(ZBX_STYLE_TIME_INPUT),
-					(new CDiv($predefined_ranges))->addClass(ZBX_STYLE_TIME_QUICK_RANGE)
-		]))
-			->addClass(ZBX_STYLE_FILTER_CONTAINER)
-			->addClass(ZBX_STYLE_TIME_SELECTION_CONTAINER)
-			->setId($anchor);
-
-		if ($profile !== null) {
-			$this->form->addItem((new CVar('from', CProfile::get($profile.'from')))->removeId());
-			$this->form->addItem((new CVar('to', CProfile::get($profile.'to')))->removeId());
 		}
 
 		return $this;
@@ -402,7 +402,6 @@ class CFilter extends CDiv {
 
 		$this->addItem($this->form);
 		$this->addItem($this->time_period);
-
 
 		return parent::toString($destroy).($headers_cnt ? get_js($this->getJS()) : '');
 	}
