@@ -61,7 +61,8 @@ $html_page = (new CHtmlPage())
 		->addVar('action', $data['action'])
 		->setProfile($data['timeline']['profileIdx'])
 		->setActiveTab($data['active_tab'])
-		->addTimeSelector($data['timeline']['from'], $data['timeline']['to'])
+		->addTimeSelector($data['timeline']['from'], $data['timeline']['to'], true, ZBX_FULL_DATE_TIME,
+			'web.auditlog.filter.')
 		->addFilterTab(_('Filter'), [
 			(new CFormList())
 				->addRow(new CLabel(_('Users'), 'filter_userids__ms'), [

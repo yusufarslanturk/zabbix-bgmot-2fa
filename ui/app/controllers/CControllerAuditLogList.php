@@ -34,13 +34,21 @@ class CControllerAuditLogList extends CController {
 			'filter_set' =>				'in 1',
 			'filter_userids' =>			'array_db users.userid',
 			'filter_resourceid' =>		'string',
-			'filter_recordsetid' =>		'string'
+			'filter_recordsetid' =>		'string',
+			'from' =>					'range_time',
+			'to' =>						'range_time'
 		];
 
 		$ret = $this->validateInput($fields);
 
 		if (!$ret) {
 			$this->setResponse(new CControllerResponseFatal());
+		}
+		else {
+			validateTimeSelectorPeriod(
+				$this->hasInput('from') ? $this->getInput('from') : CProfile::get('web.auditlog.filter.from'),
+				$this->hasInput('to') ? $this->getInput('to') : CProfile::get('web.auditlog.filter.to')
+			);
 		}
 
 		return $ret;
@@ -61,8 +69,8 @@ class CControllerAuditLogList extends CController {
 		$timeselector_options = [
 			'profileIdx' => 'web.auditlog.filter',
 			'profileIdx2' => 0,
-			'from' => CProfile::get('web.auditlog.filter.from'),
-			'to' => CProfile::get('web.auditlog.filter.to')
+			'from' => $this->hasInput('from') ? $this->getInput('from') : CProfile::get('web.auditlog.filter.from'),
+			'to' => $this->hasInput('to') ? $this->getInput('to') : CProfile::get('web.auditlog.filter.to')
 		];
 
 		$data = [
@@ -257,6 +265,12 @@ class CControllerAuditLogList extends CController {
 		CProfile::update('web.auditlog.filter.recordsetid', $this->getInput('filter_recordsetid', ''),
 			PROFILE_TYPE_STR
 		);
+		CProfile::update('web.auditlog.filter.from',
+			$this->hasInput('from') ? $this->getInput('from') : CProfile::get('web.auditlog.filter.from'),
+			PROFILE_TYPE_STR);
+		CProfile::update('web.auditlog.filter.to',
+			$this->hasInput('to') ? $this->getInput('to') : CProfile::get('web.auditlog.filter.to'),
+			PROFILE_TYPE_STR);
 	}
 
 	private function deleteProfiles(): void {

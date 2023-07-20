@@ -40,10 +40,17 @@ $fields = [
 	'filter_groups' =>		[T_ZBX_INT,			O_OPT,	P_SYS|P_ONLY_ARRAY,	DB_ID,	null],
 	'filter_hostids' =>		[T_ZBX_INT,			O_OPT,	P_SYS|P_ONLY_ARRAY,	DB_ID,	null],
 	'filter_templateid' =>	[T_ZBX_INT,			O_OPT,	P_SYS,				DB_ID,	null],
-	'filter_rst'=>			[T_ZBX_STR,			O_OPT,	P_SYS,			null,		null],
-	'filter_set' =>			[T_ZBX_STR,			O_OPT,	P_SYS,			null,		null]
+	'filter_rst'=>			[T_ZBX_STR,			O_OPT,	P_SYS,				null,	null],
+	'filter_set' =>			[T_ZBX_STR,			O_OPT,	P_SYS,				null,	null],
+	'from' =>				[T_ZBX_RANGE_TIME,	O_OPT,	P_SYS,				null,	null],
+	'to' =>					[T_ZBX_RANGE_TIME,	O_OPT,	P_SYS,				null,	null]
 ];
 check_fields($fields);
+
+$timeselector_from = hasRequest('from') ? getRequest('from') : CProfile::get('web.avail_report.filter.from');
+$timeselector_to = hasRequest('to') ? getRequest('to') : CProfile::get('web.avail_report.filter.to');
+
+validateTimeSelectorPeriod($timeselector_from, $timeselector_to);
 
 $report_mode = getRequest('mode', CProfile::get('web.avail_report.mode', AVAILABILITY_REPORT_BY_HOST));
 CProfile::update('web.avail_report.mode', $report_mode, PROFILE_TYPE_INT);
@@ -83,12 +90,15 @@ $key_prefix = 'web.avail_report.'.$report_mode;
 
 if (hasRequest('filter_set')) {
 	if ($report_mode == AVAILABILITY_REPORT_BY_TEMPLATE) {
+		sdff('tmpl');
 		CProfile::update($key_prefix.'.groupid', getRequest('filter_groupid', 0), PROFILE_TYPE_ID);
 		CProfile::update($key_prefix.'.hostid', getRequest('filter_templateid', 0), PROFILE_TYPE_ID);
 		CProfile::update($key_prefix.'.tpl_triggerid', getRequest('tpl_triggerid', 0), PROFILE_TYPE_ID);
 		CProfile::update($key_prefix.'.hostgroupid', getRequest('hostgroupid', 0), PROFILE_TYPE_ID);
 	}
 	else {
+		CProfile::update('web.avail_report.filter.from', $timeselector_from, PROFILE_TYPE_STR);
+		CProfile::update('web.avail_report.filter.to', $timeselector_to, PROFILE_TYPE_STR);
 		CProfile::updateArray($key_prefix.'.groupids', getRequest('filter_groups', []), PROFILE_TYPE_ID);
 		CProfile::updateArray($key_prefix.'.hostids', getRequest('filter_hostids', []), PROFILE_TYPE_ID);
 	}
@@ -129,8 +139,8 @@ $data['filter'] = ($report_mode == AVAILABILITY_REPORT_BY_TEMPLATE)
 $timeselector_options = [
 	'profileIdx' => 'web.avail_report.filter',
 	'profileIdx2' => 0,
-	'from' => CProfile::get('web.avail_report.filter.from'),
-	'to' => CProfile::get('web.avail_report.filter.to')
+	'from' => $timeselector_from,
+	'to' => $timeselector_to
 ];
 
 /*
@@ -489,7 +499,7 @@ else {
 			->setActiveTab($data['filter']['active_tab'])
 			->addFormItem((new CVar('mode', $report_mode))->removeId())
 			->addTimeSelector($data['filter']['timeline']['from'], $data['filter']['timeline']['to'], true,
-				ZBX_DATE_TIME)
+				ZBX_DATE_TIME, 'web.avail_report.filter.')
 			->addFilterTab(_('Filter'), [$filter_column])
 	);
 

@@ -38,13 +38,21 @@ class CControllerActionLogList extends CController {
 			'filter_actionids' =>		'array_db actions.actionid',
 			'filter_mediatypeids' =>	'array_db media_type.mediatypeid',
 			'filter_statuses' =>		'array_db alerts.status',
-			'filter_messages' =>		'string'
+			'filter_messages' =>		'string',
+			'from' => 					'range_time',
+			'to' =>						'range_time'
 		];
 
 		$ret = $this->validateInput($fields);
 
 		if (!$ret) {
 			$this->setResponse(new CControllerResponseFatal());
+		}
+		else {
+			validateTimeSelectorPeriod(
+				$this->hasInput('from') ? $this->getInput('from') : CProfile::get('web.actionlog.filter.from'),
+				$this->hasInput('to') ? $this->getInput('to') : CProfile::get('web.actionlog.filter.to')
+			);
 		}
 
 		return $ret;
@@ -65,8 +73,12 @@ class CControllerActionLogList extends CController {
 		$timeselector_options = [
 			'profileIdx' => 'web.actionlog.filter',
 			'profileIdx2' => 0,
-			'from' => CProfile::get('web.actionlog.filter.from'),
-			'to' => CProfile::get('web.actionlog.filter.to')
+			'from' => $this->hasInput('from')
+				? $this->getInput('from')
+				: CProfile::get('web.actionlog.filter.from'),
+			'to' => $this->hasInput('to')
+				? $this->getInput('to')
+				: CProfile::get('web.actionlog.filter.to')
 		];
 
 		$data = [
@@ -210,6 +222,12 @@ class CControllerActionLogList extends CController {
 			PROFILE_TYPE_ID);
 		CProfile::updateArray('web.actionlog.filter.statuses', $this->getInput('filter_statuses', []), PROFILE_TYPE_ID);
 		CProfile::update('web.actionlog.filter.messages', $this->getInput('filter_messages', ''), PROFILE_TYPE_STR);
+		CProfile::update('web.actionlog.filter.from',
+			$this->hasInput('from') ? $this->getInput('from') : CProfile::get('web.actionlog.filter.from'),
+			PROFILE_TYPE_STR);
+		CProfile::update('web.actionlog.filter.to',
+			$this->hasInput('to') ? $this->getInput('to') : CProfile::get('web.actionlog.filter.to'),
+			PROFILE_TYPE_STR);
 	}
 
 	private function deleteProfiles(): void {

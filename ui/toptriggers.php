@@ -34,9 +34,16 @@ $fields = [
 	'hostids' =>	[T_ZBX_INT,			O_OPT,	P_SYS|P_ONLY_ARRAY,	DB_ID,	null],
 	'severities' =>	[T_ZBX_INT,			O_OPT,	P_SYS|P_ONLY_ARRAY,	null,	null],
 	'filter_rst' =>	[T_ZBX_STR,			O_OPT,	P_SYS,	null,	null],
-	'filter_set' =>	[T_ZBX_STR,			O_OPT,	P_SYS,	null,	null]
+	'filter_set' =>	[T_ZBX_STR,			O_OPT,	P_SYS,	null,	null],
+	'from' =>		[T_ZBX_RANGE_TIME,	O_OPT,	P_SYS,	null,	null],
+	'to' =>			[T_ZBX_RANGE_TIME,	O_OPT,	P_SYS,	null,	null]
 ];
 check_fields($fields);
+
+$timeselector_from = hasRequest('from') ? getRequest('from') : CProfile::get('web.toptriggers.filter.from');
+$timeselector_to = hasRequest('to') ? getRequest('to') : CProfile::get('web.toptriggers.filter.to');
+
+validateTimeSelectorPeriod($timeselector_from, $timeselector_to);
 
 /*
  * Filter
@@ -45,6 +52,8 @@ if (hasRequest('filter_set')) {
 	CProfile::updateArray('web.toptriggers.filter.severities', getRequest('severities', []), PROFILE_TYPE_STR);
 	CProfile::updateArray('web.toptriggers.filter.groupids', getRequest('groupids', []), PROFILE_TYPE_STR);
 	CProfile::updateArray('web.toptriggers.filter.hostids', getRequest('hostids', []), PROFILE_TYPE_STR);
+	CProfile::update('web.toptriggers.filter.from', $timeselector_from, PROFILE_TYPE_STR);
+	CProfile::update('web.toptriggers.filter.to', $timeselector_to, PROFILE_TYPE_STR);
 }
 elseif (hasRequest('filter_rst')) {
 	DBstart();
@@ -57,8 +66,8 @@ elseif (hasRequest('filter_rst')) {
 $timeselector_options = [
 	'profileIdx' => 'web.toptriggers.filter',
 	'profileIdx2' => 0,
-	'from' => CProfile::get('web.toptriggers.filter.from'),
-	'to' => CProfile::get('web.toptriggers.filter.to')
+	'from' => $timeselector_from,
+	'to' => $timeselector_to
 ];
 
 $data['filter'] = [

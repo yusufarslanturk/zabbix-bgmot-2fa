@@ -48,6 +48,9 @@ class CFilter extends CDiv {
 	protected $idx = null;
 	protected $idx2 = 0;
 
+	// Time period Div element.
+	private $time_period;
+
 	/**
 	 * List of predefined time ranges.
 	 */
@@ -241,7 +244,7 @@ class CFilter extends CDiv {
 	 *
 	 * @return CFilter
 	 */
-	public function addTimeSelector($from, $to, $visible = true, $format = ZBX_FULL_DATE_TIME) {
+	public function addTimeSelector($from, $to, $visible = true, $format = ZBX_FULL_DATE_TIME, $profile = null) {
 		$header = relativeDateToText($from, $to);
 
 		if ($visible) {
@@ -273,9 +276,18 @@ class CFilter extends CDiv {
 
 			$anchor = 'tab_'.count($this->tabs);
 
-			$this->addTab(
-				(new CLink($header, '#'.$anchor))->addClass(ZBX_STYLE_BTN_TIME),
-				(new CDiv([
+			$this->addTab((new CLink($header, '#'.$anchor))->addClass(ZBX_STYLE_BTN_TIME), new CDiv());
+		}
+		else {
+			$this
+				->setAttribute('data-accessible', 0)
+				->addTab(null, (new CDiv([
+					new CVar('from', $from),
+					new CVar('to', $to)
+				])));
+		}
+
+		$this->time_period = (new CDiv([
 					(new CDiv([
 						new CList([
 							new CLabel(_('From'), 'from'),
@@ -298,19 +310,14 @@ class CFilter extends CDiv {
 						])
 					]))->addClass(ZBX_STYLE_TIME_INPUT),
 					(new CDiv($predefined_ranges))->addClass(ZBX_STYLE_TIME_QUICK_RANGE)
-				]))
-					->addClass(ZBX_STYLE_FILTER_CONTAINER)
-					->addClass(ZBX_STYLE_TIME_SELECTION_CONTAINER)
-					->setId($anchor)
-			);
-		}
-		else {
-			$this
-				->setAttribute('data-accessible', 0)
-				->addTab(null, (new CDiv([
-					new CVar('from', $from),
-					new CVar('to', $to)
-				])));
+		]))
+			->addClass(ZBX_STYLE_FILTER_CONTAINER)
+			->addClass(ZBX_STYLE_TIME_SELECTION_CONTAINER)
+			->setId($anchor);
+
+		if ($profile !== null) {
+			$this->form->addItem((new CVar('from', CProfile::get($profile.'from')))->removeId());
+			$this->form->addItem((new CVar('to', CProfile::get($profile.'to')))->removeId());
 		}
 
 		return $this;
@@ -394,6 +401,8 @@ class CFilter extends CDiv {
 		}
 
 		$this->addItem($this->form);
+		$this->addItem($this->time_period);
+
 
 		return parent::toString($destroy).($headers_cnt ? get_js($this->getJS()) : '');
 	}
