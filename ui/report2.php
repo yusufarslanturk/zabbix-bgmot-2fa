@@ -47,10 +47,16 @@ $fields = [
 ];
 check_fields($fields);
 
-$timeselector_from = hasRequest('from') ? getRequest('from') : CProfile::get('web.avail_report.filter.from');
-$timeselector_to = hasRequest('to') ? getRequest('to') : CProfile::get('web.avail_report.filter.to');
+if (hasRequest('from') || hasRequest('to')) {
+	validateTimeSelectorPeriod(
+		hasRequest('from') ? getRequest('from') : null,
+		hasRequest('to') ? getRequest('to') : null
+	);
+}
 
-validateTimeSelectorPeriod($timeselector_from, $timeselector_to);
+$timeselector_from = getRequest('from', CProfile::get('web.avail_report.filter.from',
+	'now-'.CSettingsHelper::get(CSettingsHelper::PERIOD_DEFAULT)));
+$timeselector_to = getRequest('to', CProfile::get('web.avail_report.filter.to', 'now'));
 
 $report_mode = getRequest('mode', CProfile::get('web.avail_report.mode', AVAILABILITY_REPORT_BY_HOST));
 CProfile::update('web.avail_report.mode', $report_mode, PROFILE_TYPE_INT);
@@ -90,6 +96,7 @@ $key_prefix = 'web.avail_report.'.$report_mode;
 
 if (hasRequest('filter_set')) {
 	if ($report_mode == AVAILABILITY_REPORT_BY_TEMPLATE) {
+
 		CProfile::update($key_prefix.'.groupid', getRequest('filter_groupid', 0), PROFILE_TYPE_ID);
 		CProfile::update($key_prefix.'.hostid', getRequest('filter_templateid', 0), PROFILE_TYPE_ID);
 		CProfile::update($key_prefix.'.tpl_triggerid', getRequest('tpl_triggerid', 0), PROFILE_TYPE_ID);
@@ -133,14 +140,6 @@ $data['filter'] = ($report_mode == AVAILABILITY_REPORT_BY_TEMPLATE)
 		// 'Hosts' field.
 		'hostids' => CProfile::getArray($key_prefix.'.hostids', getRequest('filter_hostids', []))
 	];
-
-// Get time selector filter values.
-$timeselector_options = [
-	'profileIdx' => 'web.avail_report.filter',
-	'profileIdx2' => 0,
-	'from' => $timeselector_from,
-	'to' => $timeselector_to
-];
 
 /*
  * Header
@@ -209,7 +208,12 @@ else {
 	 * Filter
 	 */
 	$data['filter'] += [
-		'timeline' => getTimeSelectorPeriod($timeselector_options),
+		'timeline' => getTimeSelectorPeriod([
+			'profileIdx' => 'web.avail_report.filter',
+			'profileIdx2' => 0,
+			'from' => $timeselector_from,
+			'to' => $timeselector_to
+		]),
 		'active_tab' => CProfile::get('web.avail_report.filter.active', 1)
 	];
 
