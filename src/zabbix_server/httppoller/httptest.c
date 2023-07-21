@@ -916,7 +916,7 @@ static void	process_httptest(DC_HOST *host, zbx_httptest_t *httptest, int *delay
 			}
 			else
 			{
-				speed_download += stat.speed_download;
+				speed_download += (double)stat.speed_download;
 				speed_download_num++;
 			}
 

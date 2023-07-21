@@ -2872,7 +2872,7 @@ out:
  *             values_num - [IN] number of values to format                   *
  *                                                                            *
  * Return value: formatted value list <value1>,<value2>...                    *
- *               or null if values list was empty                             *
+ *               or NULL if 'values' list was empty                           *
  *                                                                            *
  * Comments: The returned string is allocated by this function and must be    *
  *           freed by the caller later.                                       *
