@@ -307,8 +307,10 @@ class CFilter extends CDiv {
 				->setId($anchor);
 
 			if ($profile !== null) {
-				$this->form->addItem((new CVar('from', CProfile::get($profile.'from')))->removeId());
-				$this->form->addItem((new CVar('to', CProfile::get($profile.'to')))->removeId());
+				$this->form->addItem((new CVar('from',CProfile::get($profile.'from',
+					'now-'.CSettingsHelper::get(CSettingsHelper::PERIOD_DEFAULT))
+				))->removeId());
+				$this->form->addItem((new CVar('to', CProfile::get($profile.'to', 'now')))->removeId());
 			}
 		}
 		else {

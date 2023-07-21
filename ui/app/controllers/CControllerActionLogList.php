@@ -25,6 +25,16 @@
 
 class CControllerActionLogList extends CController {
 
+	/**
+	 * @var string  Time from.
+	 */
+	private $from;
+
+	/**
+	 * @var string  Time till.
+	 */
+	private $to;
+
 	protected function init(): void {
 		$this->disableCsrfValidation();
 	}
@@ -49,10 +59,17 @@ class CControllerActionLogList extends CController {
 			$this->setResponse(new CControllerResponseFatal());
 		}
 		else {
-			validateTimeSelectorPeriod(
-				$this->hasInput('from') ? $this->getInput('from') : CProfile::get('web.actionlog.filter.from'),
-				$this->hasInput('to') ? $this->getInput('to') : CProfile::get('web.actionlog.filter.to')
-			);
+			if ($this->hasInput('from') || $this->hasInput('to')) {
+				validateTimeSelectorPeriod(
+					$this->hasInput('from') ? $this->getInput('from') : null,
+					$this->hasInput('to') ? $this->getInput('to') : null
+				);
+			}
+
+			$this->from = $this->getInput('from', CProfile::get('web.actionlog.filter.from',
+				'now-'.CSettingsHelper::get(CSettingsHelper::PERIOD_DEFAULT)
+			));
+			$this->to = $this->getInput('to', CProfile::get('web.actionlog.filter.to', 'now'));
 		}
 
 		return $ret;
@@ -70,17 +87,6 @@ class CControllerActionLogList extends CController {
 			$this->deleteProfiles();
 		}
 
-		$timeselector_options = [
-			'profileIdx' => 'web.actionlog.filter',
-			'profileIdx2' => 0,
-			'from' => $this->hasInput('from')
-				? $this->getInput('from')
-				: CProfile::get('web.actionlog.filter.from'),
-			'to' => $this->hasInput('to')
-				? $this->getInput('to')
-				: CProfile::get('web.actionlog.filter.to')
-		];
-
 		$data = [
 			'page' => $this->getInput('page', 1),
 			'userids' => CProfile::getArray('web.actionlog.filter.userids', []),
@@ -94,7 +100,12 @@ class CControllerActionLogList extends CController {
 			'messages' => CProfile::get('web.actionlog.filter.messages', ''),
 			'alerts' => [],
 			'action' => $this->getAction(),
-			'timeline' => getTimeSelectorPeriod($timeselector_options),
+			'timeline' => getTimeSelectorPeriod([
+				'profileIdx' => 'web.actionlog.filter',
+				'profileIdx2' => 0,
+				'from' => $this->from,
+				'to' => $this->to
+			]),
 			'active_tab' => CProfile::get('web.actionlog.filter.active', 1)
 		];
 
@@ -222,12 +233,8 @@ class CControllerActionLogList extends CController {
 			PROFILE_TYPE_ID);
 		CProfile::updateArray('web.actionlog.filter.statuses', $this->getInput('filter_statuses', []), PROFILE_TYPE_ID);
 		CProfile::update('web.actionlog.filter.messages', $this->getInput('filter_messages', ''), PROFILE_TYPE_STR);
-		CProfile::update('web.actionlog.filter.from',
-			$this->hasInput('from') ? $this->getInput('from') : CProfile::get('web.actionlog.filter.from'),
-			PROFILE_TYPE_STR);
-		CProfile::update('web.actionlog.filter.to',
-			$this->hasInput('to') ? $this->getInput('to') : CProfile::get('web.actionlog.filter.to'),
-			PROFILE_TYPE_STR);
+		CProfile::update('web.actionlog.filter.from', $this->from, PROFILE_TYPE_STR);
+		CProfile::update('web.actionlog.filter.to', $this->to, PROFILE_TYPE_STR);
 	}
 
 	private function deleteProfiles(): void {
