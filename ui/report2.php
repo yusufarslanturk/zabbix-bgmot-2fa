@@ -96,7 +96,6 @@ $key_prefix = 'web.avail_report.'.$report_mode;
 
 if (hasRequest('filter_set')) {
 	if ($report_mode == AVAILABILITY_REPORT_BY_TEMPLATE) {
-
 		CProfile::update($key_prefix.'.groupid', getRequest('filter_groupid', 0), PROFILE_TYPE_ID);
 		CProfile::update($key_prefix.'.hostid', getRequest('filter_templateid', 0), PROFILE_TYPE_ID);
 		CProfile::update($key_prefix.'.tpl_triggerid', getRequest('tpl_triggerid', 0), PROFILE_TYPE_ID);
