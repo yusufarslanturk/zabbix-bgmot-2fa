@@ -237,14 +237,16 @@ class CFilter extends CDiv {
 	 * - time selector range change buttons: back, zoom out, forward.
 	 * - time selector range change form with predefined ranges.
 	 *
-	 * @param string $from    Start date. (can be in relative time format, example: now-1w)
-	 * @param string $to      End date. (can be in relative time format, example: now-1w)
-	 * @param bool   $visible Either to make time selector visible or hidden.
-	 * @param string $format  Date and time format used in CDateSelector.
+	 * @param string $from        Start date. (can be in relative time format, example: now-1w)
+	 * @param string $to          End date. (can be in relative time format, example: now-1w)
+	 * @param bool   $visible     Either to make time selector visible or hidden.
+	 * @param string $profileidx  Profile key.
+	 * @param string $format      Date and time format used in CDateSelector.
 	 *
 	 * @return CFilter
 	 */
-	public function addTimeSelector($from, $to, $visible = true, $format = ZBX_FULL_DATE_TIME, $profile = null) {
+	public function addTimeSelector(string $from, string $to, bool $visible = true, string $profileidx = '',
+			string $format = ZBX_FULL_DATE_TIME): CFilter {
 		$header = relativeDateToText($from, $to);
 
 		if ($visible) {
@@ -306,11 +308,11 @@ class CFilter extends CDiv {
 				->addClass(ZBX_STYLE_TIME_SELECTION_CONTAINER)
 				->setId($anchor);
 
-			if ($profile !== null) {
-				$this->form->addItem((new CVar('from',CProfile::get($profile.'from',
-					'now-'.CSettingsHelper::get(CSettingsHelper::PERIOD_DEFAULT))
+			if ($profileidx !== '') {
+				$this->form->addItem((new CVar('from',
+					CProfile::get($profileidx.'.from', 'now-'.CSettingsHelper::get(CSettingsHelper::PERIOD_DEFAULT))
 				))->removeId());
-				$this->form->addItem((new CVar('to', CProfile::get($profile.'to', 'now')))->removeId());
+				$this->form->addItem((new CVar('to', CProfile::get($profileidx.'.to', 'now')))->removeId());
 			}
 		}
 		else {

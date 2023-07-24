@@ -501,7 +501,8 @@ else {
 			->setActiveTab($data['filter']['active_tab'])
 			->addFormItem((new CVar('mode', $report_mode))->removeId())
 			->addTimeSelector($data['filter']['timeline']['from'], $data['filter']['timeline']['to'], true,
-				ZBX_DATE_TIME, 'web.avail_report.filter.')
+				'web.avail_report.filter', ZBX_DATE_TIME
+			)
 			->addFilterTab(_('Filter'), [$filter_column])
 	);
 

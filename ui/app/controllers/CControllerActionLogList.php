@@ -49,7 +49,7 @@ class CControllerActionLogList extends CController {
 			'filter_mediatypeids' =>	'array_db media_type.mediatypeid',
 			'filter_statuses' =>		'array_db alerts.status',
 			'filter_messages' =>		'string',
-			'from' => 					'range_time',
+			'from' =>					'range_time',
 			'to' =>						'range_time'
 		];
 
