@@ -70,7 +70,7 @@ class CControllerChartsView extends CControllerCharts {
 			$this->from = $this->getInput('from', CProfile::get('web.charts.filter.from',
 				'now-'.CSettingsHelper::get(CSettingsHelper::PERIOD_DEFAULT)
 			));
-			$this->to = $this->getInput('to', CProfile::get('web.charts.filter', 'now'));
+			$this->to = $this->getInput('to', CProfile::get('web.charts.filter.to', 'now'));
 		}
 
 		return $ret;
