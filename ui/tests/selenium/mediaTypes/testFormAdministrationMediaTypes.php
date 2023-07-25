@@ -24,17 +24,20 @@ require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 
 /**
  * @backup media_type
+ *
+ * @onBefore prepareData
  */
 class testFormAdministrationMediaTypes extends CWebTest {
 
-	private static $mediatype_sql = 'SELECT * FROM media_type ORDER BY mediatypeid';
+	protected static $saved_parameters = 'ZBX-22787 bug scenario';
+	protected static $mediatype_sql = 'SELECT * FROM media_type ORDER BY mediatypeid';
 
-	private static $update_mediatypes = [
+	protected static $update_mediatypes = [
 		'Email' => 'Email',
 		'SMS' => 'SMS',
 		'Script' => 'Test script'
 	];
-	private static $delete_mediatype = 'Email (HTML)';
+	protected static $delete_mediatype = 'Email (HTML)';
 
 	/**
 	 * Attach MessageBehavior to the test.
@@ -43,6 +46,17 @@ class testFormAdministrationMediaTypes extends CWebTest {
 	 */
 	public function getBehaviors() {
 		return ['class' => CMessageBehavior::class];
+	}
+
+	public function prepareData() {
+		CDataHelper::call('mediatype.create', [
+			[
+				'type' => MEDIA_TYPE_EMAIL,
+				'name' => 'ZBX-22787 bug scenario',
+				'smtp_server' => 'mail.example.com',
+				'smtp_email' => 'zabbix@example.com'
+			]
+		]);
 	}
 
 	public function testFormAdministrationMediaTypes_GeneralLayout() {
@@ -382,7 +396,7 @@ class testFormAdministrationMediaTypes extends CWebTest {
 	 * @param CFormElement	$form			form that contains the fields to be checked
 	 * @param array			$parameters		field names, their attributes and attribute values
 	 */
-	private function checkTabFields($form, $parameters) {
+	protected function checkTabFields($form, $parameters) {
 		if (CTestArrayHelper::get($parameters, 'tab name', 'Media type') !== $form->getSelectedTab()) {
 			$form->selectTab($parameters['tab name']);
 		}
@@ -1116,7 +1130,7 @@ class testFormAdministrationMediaTypes extends CWebTest {
 	 *
 	 * @param string	$action		type of action to be checked
 	 */
-	private function checkActionCancellation($action = 'create') {
+	protected function checkActionCancellation($action = 'create') {
 		$new_values = [
 			'Media type' => [
 				'Name' => 'Email for action cancellation check',
@@ -1291,6 +1305,138 @@ class testFormAdministrationMediaTypes extends CWebTest {
 
 				$form->checkValue($data['options_tab']);
 			}
+		}
+	}
+
+	public function getParametersData() {
+		return [
+			[
+				[
+					'mediatype_tab' => [
+						'Name' => 'Webhook for parameters check',
+						'Type' => 'Webhook',
+						'Script' => 'test'
+					],
+					'Parameters' => [
+						[
+							'Name' => 'HTTPProxy',
+							'Value' => ''
+						],
+						[
+							'Name' => 'Message',
+							'Value' => '{ALERT.MESSAGE}'
+						],
+						[
+							'Name' => 'Subject',
+							'Value' => '{ALERT.SUBJECT}'
+						],
+						[
+							'Name' => 'To',
+							'Value' => '{ALERT.SENDTO}'
+						],
+						[
+							'Name' => 'URL',
+							'Value' => ''
+						]
+					]
+				]
+			],
+			[
+				[
+					'mediatype_tab' => [
+						'Name' => 'Switch to Script media type with minimal set of values',
+						'Type' => 'Script',
+						'Script name' => '良い一日を過ごしてください'
+					]
+				]
+			],
+			[
+				[
+					'mediatype_tab' => [
+						'Name' => 'Switch to Script media type with parameters',
+						'Type' => 'Script',
+						'Script name' => '좋은 하루 되세요'
+					],
+					'script_parameters' => [
+						[
+							'Value' => 'first parameter'
+						],
+						[
+							'Value' => '良い一日を過ごしてください'
+						],
+						[
+							'Value' => '!@#$%^&*()_+='
+						]
+					]
+				]
+			],
+			[
+				[
+					'mediatype_tab' => [
+						'Name' => 'Switch to Webhook for parameters check',
+						'Type' => 'Webhook',
+						'Script' => 'test'
+					],
+					'Parameters' => [
+						[
+							'Name' => 'HTTPProxy',
+							'Value' => ''
+						],
+						[
+							'Name' => 'Message',
+							'Value' => '{ALERT.MESSAGE}'
+						],
+						[
+							'Name' => 'Subject',
+							'Value' => '{ALERT.SUBJECT}'
+						],
+						[
+							'Name' => 'To',
+							'Value' => '{ALERT.SENDTO}'
+						],
+						[
+							'Name' => 'URL',
+							'Value' => ''
+						]
+					]
+				]
+			]
+		];
+	}
+
+	/**
+	 * Check that parameters are saved correctly when switching type from Webhook to Script and vice versa (ZBX-22787 bug scenario).
+	 *
+	 * @dataProvider getParametersData
+	 */
+	public function testFormAdministrationMediaTypes_SavedParameters($data) {
+		$this->page->login()->open('zabbix.php?action=mediatype.list');
+		$this->query('link', self::$saved_parameters)->waitUntilClickable()->one()->click();
+		$this->page->waitUntilReady();
+		self::$saved_parameters = $data['mediatype_tab']['Name'];
+
+		$form = $this->query('id:media-type-form')->asForm()->one();
+		$form->fill($data['mediatype_tab']);
+
+		if (array_key_exists('script_parameters', $data)) {
+			$form->getField('Script parameters')->asMultifieldTable()->fill($data['script_parameters']);
+		}
+
+		$form->submit();
+		$this->page->waitUntilReady();
+		$this->assertMessage(TEST_GOOD, 'Media type updated');
+
+		$this->page->query('link', $data['mediatype_tab']['Name'])->waitUntilClickable()->one()->click();
+		$this->page->waitUntilReady();
+		$form->invalidate();
+		$form->checkValue($data['mediatype_tab']);
+
+		if (array_key_exists('script_parameters', $data)) {
+			$form->getField('Script parameters')->asMultifieldTable()->checkValue($data['script_parameters']);
+		}
+
+		if (array_key_exists('Parameters', $data)) {
+			$form->query('id:parameters_table')->asMultifieldTable()->one()->checkValue($data['Parameters']);
 		}
 	}
 }
