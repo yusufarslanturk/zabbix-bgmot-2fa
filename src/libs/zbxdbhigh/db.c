@@ -473,25 +473,6 @@ DB_ROW	zbx_db_fetch(DB_RESULT result)
  *                                                                            *
  * Purpose: execute a select statement                                        *
  *                                                                            *
- ******************************************************************************/
-DB_RESULT	zbx_db_select_once(const char *fmt, ...)
-{
-	va_list		args;
-	DB_RESULT	rc;
-
-	va_start(args, fmt);
-
-	rc = zbx_db_vselect(fmt, args);
-
-	va_end(args);
-
-	return rc;
-}
-
-/******************************************************************************
- *                                                                            *
- * Purpose: execute a select statement                                        *
- *                                                                            *
  * Comments: retry until DB is up                                             *
  *                                                                            *
  ******************************************************************************/
@@ -1344,23 +1325,23 @@ void	zbx_db_add_condition_alloc(char **sql, size_t *sql_alloc, size_t *sql_offse
 #endif
 }
 
-/******************************************************************************
- *                                                                            *
- * Purpose: This function is similar to DBadd_condition_alloc(), except it is *
- *          designed for generating WHERE conditions for strings. Hence, this *
- *          function is simpler, because only IN condition is possible.       *
- *                                                                            *
- * Parameters: sql        - [IN/OUT] buffer for SQL query construction        *
- *             sql_alloc  - [IN/OUT] size of the 'sql' buffer                 *
- *             sql_offset - [IN/OUT] current position in the 'sql' buffer     *
- *             fieldname  - [IN] field name to be used in SQL WHERE condition *
- *             values     - [IN] array of string values                       *
- *             num        - [IN] number of elements in 'values' array         *
- *                                                                            *
- * Comments: To support Oracle empty values are checked separately (is null   *
- *           for Oracle and ='' for the other databases).                     *
- *                                                                            *
- ******************************************************************************/
+/*********************************************************************************
+ *                                                                               *
+ * Purpose: This function is similar to the zbx_db_add_condition_alloc(), except *
+ *          it is designed for generating WHERE conditions for strings. Hence,   *
+ *          this function is simpler, because only IN condition is possible.     *
+ *                                                                               *
+ * Parameters: sql        - [IN/OUT] buffer for SQL query construction           *
+ *             sql_alloc  - [IN/OUT] size of the 'sql' buffer                    *
+ *             sql_offset - [IN/OUT] current position in the 'sql' buffer        *
+ *             fieldname  - [IN] field name to be used in SQL WHERE condition    *
+ *             values     - [IN] array of string values                          *
+ *             num        - [IN] number of elements in 'values' array            *
+ *                                                                               *
+ * Comments: To support Oracle empty values are checked separately (is null      *
+ *           for Oracle and ='' for the other databases).                        *
+ *                                                                               *
+ *********************************************************************************/
 void	zbx_db_add_str_condition_alloc(char **sql, size_t *sql_alloc, size_t *sql_offset, const char *fieldname,
 		const char **values, const int num)
 {
@@ -2240,7 +2221,9 @@ int	zbx_db_table_exists(const char *table_name)
 
 int	zbx_db_field_exists(const char *table_name, const char *field_name)
 {
+#if (defined(HAVE_MYSQL) || defined(HAVE_ORACLE) || defined(HAVE_POSTGRESQL) || defined(HAVE_SQLITE3))
 	DB_RESULT	result;
+#endif
 #if defined(HAVE_MYSQL)
 	char		*field_name_esc;
 	int		ret;
@@ -2884,11 +2867,12 @@ out:
  *                                                                            *
  * Purpose: format bulk operation (insert, update) value list                 *
  *                                                                            *
- * Parameters: fields     - [IN] the field list                               *
- *             values     - [IN] the corresponding value list                 *
- *             values_num - [IN] the number of values to format               *
+ * Parameters: fields     - [IN] field list                                   *
+ *             values     - [IN] corresponding value list                     *
+ *             values_num - [IN] number of values to format                   *
  *                                                                            *
- * Return value: the formatted value list <value1>,<value2>...                *
+ * Return value: formatted value list <value1>,<value2>...                    *
+ *               or NULL if 'values' list was empty                           *
  *                                                                            *
  * Comments: The returned string is allocated by this function and must be    *
  *           freed by the caller later.                                       *
@@ -3315,7 +3299,8 @@ retry_oracle:
 			char	*str;
 
 			str = zbx_db_format_values((ZBX_FIELD **)self->fields.values, values, self->fields.values_num);
-			zabbix_log(LOG_LEVEL_DEBUG, "insert [txnlev:%d] [%s]", zbx_db_txn_level(), str);
+			zabbix_log(LOG_LEVEL_DEBUG, "insert [txnlev:%d] [%s]", zbx_db_txn_level(),
+					ZBX_NULL2EMPTY_STR(str));
 			zbx_free(str);
 		}
 	}

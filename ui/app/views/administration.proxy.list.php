@@ -24,7 +24,7 @@
  * @var array $data
  */
 
-$this->includeJsFile('proxy.list.js.php');
+$this->includeJsFile('administration.proxy.list.js.php');
 
 $filter = (new CFilter())
 	->addVar('action', 'proxy.list')
@@ -64,7 +64,7 @@ $filter = (new CFilter())
 					(new CRadioButtonList('filter_version', (int) $data['filter']['version']))
 						->addValue(_('Any'), -1)
 						->addValue(_('Current'), ZBX_PROXY_VERSION_CURRENT)
-						->addValue(_('Outdated'), ZBX_PROXY_VERSION_ALL_OUTDATED)
+						->addValue(_('Outdated'), ZBX_PROXY_VERSION_ANY_OUTDATED)
 						->setModern(true)
 				)
 			])
@@ -117,7 +117,7 @@ foreach ($data['proxies'] as $proxyid => $proxy) {
 
 	foreach ($proxy['hosts'] as $host_index => $host) {
 		if ($host_index >= $data['config']['max_in_table']) {
-			$hosts[] = ' &hellip;';
+			$hosts[] = [' ', HELLIP()];
 
 			break;
 		}
@@ -184,10 +184,10 @@ foreach ($data['proxies'] as $proxyid => $proxy) {
 			(new CLink($proxy['host']))
 				->addClass('js-edit-proxy')
 				->setAttribute('data-proxyid', $proxyid)
-		))->addClass(ZBX_STYLE_WORDBREAK),
+		))->addClass(ZBX_STYLE_NOWRAP),
 		$proxy['status'] == HOST_STATUS_PROXY_ACTIVE ? _('Active') : _('Passive'),
 		$encryption,
-		$info_icons ? [$version, '&nbsp;', makeInformationList($info_icons)] : $version,
+		$info_icons ? [$version, NBSP(), makeInformationList($info_icons)] : $version,
 		$proxy['lastaccess'] == 0
 			? (new CSpan(_('Never')))->addClass(ZBX_STYLE_RED)
 			: zbx_date2age($proxy['lastaccess']),
