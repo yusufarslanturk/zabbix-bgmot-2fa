@@ -289,7 +289,7 @@ class testPermissionsWithoutCSRF extends CWebTest {
 					'actions' => [
 						[
 							'callback' => 'openFormWithLink',
-							'element' => 'xpath://a[text()="Event correlation for element remove"]'
+							'element' => 'link:Event correlation for element remove'
 						]
 					],
 					'return_button' => true

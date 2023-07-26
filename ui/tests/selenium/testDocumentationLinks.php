@@ -1484,7 +1484,7 @@ class testDocumentationLinks extends CWebTest {
 					'actions' => [
 						[
 							'callback' => 'openFormWithLink',
-							'element' => 'xpath://a[text()="Event correlation for links check"]'
+							'element' => 'link:Event correlation for links check'
 						]
 					],
 					'doc_link' => '/en/manual/config/event_correlation/global#configuration'
