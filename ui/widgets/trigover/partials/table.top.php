@@ -19,8 +19,11 @@
 **/
 
 
+use Widgets\TrigOver\Includes\ViewHelper;
+
 /**
  * @var CPartial $this
+ * @var array    $data
  */
 $table = (new CTableInfo())
 	->makeVerticalRotation()
@@ -46,7 +49,7 @@ foreach ($data['triggers_by_name'] as $trigname => $host_to_trig) {
 		}
 
 		if ($trigger) {
-			$row[] = getTriggerOverviewCell($trigger, $data['dependencies']);
+			$row[] = ViewHelper::getTriggerOverviewCell($trigger, $data['dependencies']);
 		}
 		else {
 			$row[] = new CCol();
