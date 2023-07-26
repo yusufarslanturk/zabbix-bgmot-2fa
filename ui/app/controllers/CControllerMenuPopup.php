@@ -800,11 +800,9 @@ class CControllerMenuPopup extends CController {
 
 						// Show individual menus depending on location.
 						$menu_data['show_rank_change_cause'] = array_key_exists('show_rank_change_cause', $data)
-							? (bool) $data['show_rank_change_cause']
-							: false;
+							&& $data['show_rank_change_cause'];
 						$menu_data['show_rank_change_symptom'] = array_key_exists('show_rank_change_symptom', $data)
-							? (bool) $data['show_rank_change_symptom']
-							: false;
+							&& $data['show_rank_change_symptom'];
 						$menu_data['csrf_tokens']['acknowledge'] = CCsrfTokenHelper::get('acknowledge');
 					}
 				}

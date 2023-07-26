@@ -492,7 +492,7 @@ function getMenuPopupMapElementTrigger(options) {
 				label: item.name,
 				url: url.getUrl()
 			});
-		};
+		}
 
 		items.push({
 			label: t('History'),
@@ -542,7 +542,7 @@ function getMenuPopupMapElementTrigger(options) {
 					disabled: item.params.is_webitem,
 					url: url.getUrl()
 				});
-			};
+			}
 
 			config_urls.push({
 				label: t('Items'),
