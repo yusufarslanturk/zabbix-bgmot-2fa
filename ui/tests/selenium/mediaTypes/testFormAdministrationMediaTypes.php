@@ -29,11 +29,6 @@ require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
  */
 class testFormAdministrationMediaTypes extends CWebTest {
 
-	const WEBHOOK_DEFAULT_TO_SCRIPT = 'Switch webhook to script with no params';
-	const WEBHOOK_CUSTOM_TO_SCRIPT_CUSTOM = 'Switch webhook to script with custom params';
-	const SCRIPT_TO_WEBHOOK_DEFAULT = 'Switch script to webhook with default params';
-	const SCRIPT_TO_WEBHOOK_CUSTOM = 'Switch script to webhook with custom params';
-	const SCRIPT_TO_WEBHOOK = 'Switch script to webhook with no params';
 	protected static $mediatype_sql = 'SELECT * FROM media_type ORDER BY mediatypeid';
 
 	protected static $update_mediatypes = [
@@ -56,7 +51,7 @@ class testFormAdministrationMediaTypes extends CWebTest {
 		CDataHelper::call('mediatype.create', [
 			[
 				'type' => MEDIA_TYPE_WEBHOOK,
-				'name' => self::WEBHOOK_DEFAULT_TO_SCRIPT,
+				'name' => 'Switch webhook to script with no params',
 				'script' => 'test.sh',
 				'parameters' => [
 					[
@@ -81,7 +76,7 @@ class testFormAdministrationMediaTypes extends CWebTest {
 			],
 			[
 				'type' => MEDIA_TYPE_WEBHOOK,
-				'name' => self::WEBHOOK_CUSTOM_TO_SCRIPT_CUSTOM,
+				'name' => 'Switch webhook to script with custom params',
 				'script' => 'empty.sh',
 				'parameters' => [
 					[
@@ -95,7 +90,7 @@ class testFormAdministrationMediaTypes extends CWebTest {
 			],
 			[
 				'type' => MEDIA_TYPE_EXEC,
-				'name' => self::SCRIPT_TO_WEBHOOK_DEFAULT,
+				'name' => 'Switch script to webhook with default params',
 				'exec_path' => 'script.sh',
 				'parameters' => [
 					[
@@ -106,7 +101,7 @@ class testFormAdministrationMediaTypes extends CWebTest {
 			],
 			[
 				'type' => MEDIA_TYPE_EXEC,
-				'name' => self::SCRIPT_TO_WEBHOOK,
+				'name' => 'Switch script to webhook with no params',
 				'exec_path' => 'script2.sh',
 				'parameters' => [
 					[
@@ -117,7 +112,7 @@ class testFormAdministrationMediaTypes extends CWebTest {
 			],
 			[
 				'type' => MEDIA_TYPE_EXEC,
-				'name' => self::SCRIPT_TO_WEBHOOK_CUSTOM,
+				'name' => 'Switch script to webhook with custom params',
 				'exec_path' => 'script3.sh'
 			]
 		]);
@@ -1376,7 +1371,7 @@ class testFormAdministrationMediaTypes extends CWebTest {
 		return [
 			[
 				[
-					'object' => self::SCRIPT_TO_WEBHOOK_DEFAULT,
+					'object' => 'Switch script to webhook with default params',
 					'mediatype_tab' => [
 						'Name' => 'Webhook for default parameters check',
 						'Type' => 'Webhook',
@@ -1408,17 +1403,18 @@ class testFormAdministrationMediaTypes extends CWebTest {
 			],
 			[
 				[
-					'object' => self::WEBHOOK_DEFAULT_TO_SCRIPT,
+					'object' => 'Switch webhook to script with no params',
 					'mediatype_tab' => [
 						'Name' => 'Script media type with minimal set of values',
 						'Type' => 'Script',
-						'Script name' => '良い一日を過ごしてください'
+						'Script name' => '良い一日を過ごしてください',
+						'Script parameters' => []
 					]
 				]
 			],
 			[
 				[
-					'object' => self::WEBHOOK_CUSTOM_TO_SCRIPT_CUSTOM,
+					'object' => 'Switch webhook to script with custom params',
 					'mediatype_tab' => [
 						'Name' => 'Script media type with several parameters',
 						'Type' => 'Script',
@@ -1439,7 +1435,7 @@ class testFormAdministrationMediaTypes extends CWebTest {
 			],
 			[
 				[
-					'object' => self::SCRIPT_TO_WEBHOOK,
+					'object' => 'Switch script to webhook with no params',
 					'mediatype_tab' => [
 						'Name' => 'Webhook with minimal set of values',
 						'Type' => 'Webhook',
@@ -1450,23 +1446,13 @@ class testFormAdministrationMediaTypes extends CWebTest {
 			],
 			[
 				[
-					'object' => self::SCRIPT_TO_WEBHOOK_CUSTOM,
+					'object' => 'Switch script to webhook with custom params',
 					'mediatype_tab' => [
 						'Name' => 'Webhook with custom parameters',
 						'Type' => 'Webhook',
 						'Script' => 'test custom'
 					],
 					'custom_parameters' => [
-						[
-							'Name' => 'HTTPS',
-							'Value' => 'true'
-						],
-						[
-							'Name' => 'From',
-							'Value' => 'zabbix.com'
-						]
-					],
-					'expected_parameters' => [
 						[
 							'Name' => 'From',
 							'Value' => 'zabbix.com'
@@ -1511,8 +1497,8 @@ class testFormAdministrationMediaTypes extends CWebTest {
 		$form->invalidate();
 		$form->checkValue($data['mediatype_tab']);
 
-		if (array_key_exists('expected_parameters', $data)) {
-			$form->getField('Parameters')->asMultifieldTable()->checkValue($data['expected_parameters']);
+		if (array_key_exists('custom_parameters', $data)) {
+			$form->getField('Parameters')->asMultifieldTable()->checkValue($data['custom_parameters']);
 		}
 	}
 }
