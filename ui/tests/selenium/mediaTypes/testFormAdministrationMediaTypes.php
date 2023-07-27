@@ -29,7 +29,11 @@ require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
  */
 class testFormAdministrationMediaTypes extends CWebTest {
 
-	protected static $saved_parameters = 'ZBX-22787 bug scenario';
+	const WEBHOOK_DEFAULT_TO_SCRIPT = 'Switch webhook to script with no params';
+	const WEBHOOK_CUSTOM_TO_SCRIPT_CUSTOM = 'Switch webhook to script with custom params';
+	const SCRIPT_TO_WEBHOOK_DEFAULT = 'Switch script to webhook with default params';
+	const SCRIPT_TO_WEBHOOK_CUSTOM = 'Switch script to webhook with custom params';
+	const SCRIPT_TO_WEBHOOK = 'Switch script to webhook with no params';
 	protected static $mediatype_sql = 'SELECT * FROM media_type ORDER BY mediatypeid';
 
 	protected static $update_mediatypes = [
@@ -51,10 +55,70 @@ class testFormAdministrationMediaTypes extends CWebTest {
 	public function prepareData() {
 		CDataHelper::call('mediatype.create', [
 			[
-				'type' => MEDIA_TYPE_EMAIL,
-				'name' => 'ZBX-22787 bug scenario',
-				'smtp_server' => 'mail.example.com',
-				'smtp_email' => 'zabbix@example.com'
+				'type' => MEDIA_TYPE_WEBHOOK,
+				'name' => self::WEBHOOK_DEFAULT_TO_SCRIPT,
+				'script' => 'test.sh',
+				'parameters' => [
+					[
+						'name' => 'HTTPProxy'
+					],
+					[
+						'name' => 'Message',
+						'value' => '{ALERT.MESSAGE}'
+					],
+					[
+						'name' => 'Subject',
+						'value' => '{ALERT.SUBJECT}'
+					],
+					[
+						'name' => 'To',
+						'value' => '{ALERT.SENDTO}'
+					],
+					[
+						'name' => 'URL'
+					]
+				]
+			],
+			[
+				'type' => MEDIA_TYPE_WEBHOOK,
+				'name' => self::WEBHOOK_CUSTOM_TO_SCRIPT_CUSTOM,
+				'script' => 'empty.sh',
+				'parameters' => [
+					[
+						'name' => 'Custom'
+					],
+					[
+						'name' => 'Message',
+						'value' => '{ALERT.MESSAGE}'
+					]
+				]
+			],
+			[
+				'type' => MEDIA_TYPE_EXEC,
+				'name' => self::SCRIPT_TO_WEBHOOK_DEFAULT,
+				'exec_path' => 'script.sh',
+				'parameters' => [
+					[
+						'sortorder' => '0',
+						'value' => 'custom parameter'
+					]
+				]
+			],
+			[
+				'type' => MEDIA_TYPE_EXEC,
+				'name' => self::SCRIPT_TO_WEBHOOK,
+				'exec_path' => 'script2.sh',
+				'parameters' => [
+					[
+						'sortorder' => '0',
+						'value' => 'custom parameter'
+					]
+				]
+			],
+			[
+				'type' => MEDIA_TYPE_EXEC,
+				'name' => self::SCRIPT_TO_WEBHOOK_CUSTOM,
+				'exec_path' => 'script3.sh'
 			]
 		]);
 	}
@@ -1308,16 +1372,17 @@ class testFormAdministrationMediaTypes extends CWebTest {
 		}
 	}
 
-	public function getParametersData() {
+	public function getSavedParametersData() {
 		return [
 			[
 				[
+					'object' => self::SCRIPT_TO_WEBHOOK_DEFAULT,
 					'mediatype_tab' => [
-						'Name' => 'Webhook for parameters check',
+						'Name' => 'Webhook for default parameters check',
 						'Type' => 'Webhook',
-						'Script' => 'test'
+						'Script' => 'test default'
 					],
-					'Parameters' => [
+					'expected_parameters' => [
 						[
 							'Name' => 'HTTPProxy',
 							'Value' => ''
@@ -1343,8 +1408,9 @@ class testFormAdministrationMediaTypes extends CWebTest {
 			],
 			[
 				[
+					'object' => self::WEBHOOK_DEFAULT_TO_SCRIPT,
 					'mediatype_tab' => [
-						'Name' => 'Switch to Script media type with minimal set of values',
+						'Name' => 'Script media type with minimal set of values',
 						'Type' => 'Script',
 						'Script name' => '良い一日を過ごしてください'
 					]
@@ -1352,74 +1418,88 @@ class testFormAdministrationMediaTypes extends CWebTest {
 			],
 			[
 				[
+					'object' => self::WEBHOOK_CUSTOM_TO_SCRIPT_CUSTOM,
 					'mediatype_tab' => [
-						'Name' => 'Switch to Script media type with parameters',
+						'Name' => 'Script media type with several parameters',
 						'Type' => 'Script',
-						'Script name' => '좋은 하루 되세요'
-					],
-					'script_parameters' => [
-						[
-							'Value' => 'first parameter'
-						],
-						[
-							'Value' => '良い一日を過ごしてください'
-						],
-						[
-							'Value' => '!@#$%^&*()_+='
+						'Script name' => '좋은 하루 되세요',
+						'Script parameters' => [
+							[
+								'Value' => 'first parameter'
+							],
+							[
+								'Value' => '良い一日を過ごしてください'
+							],
+							[
+								'Value' => '!@#$%^&*()_+='
+							]
 						]
 					]
 				]
 			],
 			[
 				[
+					'object' => self::SCRIPT_TO_WEBHOOK,
 					'mediatype_tab' => [
-						'Name' => 'Switch to Webhook for parameters check',
+						'Name' => 'Webhook with minimal set of values',
 						'Type' => 'Webhook',
-						'Script' => 'test'
+						'Script' => 'test no params',
 					],
-					'Parameters' => [
+					'remove_parameters' => true
+				]
+			],
+			[
+				[
+					'object' => self::SCRIPT_TO_WEBHOOK_CUSTOM,
+					'mediatype_tab' => [
+						'Name' => 'Webhook with custom parameters',
+						'Type' => 'Webhook',
+						'Script' => 'test custom'
+					],
+					'custom_parameters' => [
 						[
-							'Name' => 'HTTPProxy',
-							'Value' => ''
+							'Name' => 'HTTPS',
+							'Value' => 'true'
 						],
 						[
-							'Name' => 'Message',
-							'Value' => '{ALERT.MESSAGE}'
-						],
-						[
-							'Name' => 'Subject',
-							'Value' => '{ALERT.SUBJECT}'
-						],
-						[
-							'Name' => 'To',
-							'Value' => '{ALERT.SENDTO}'
-						],
-						[
-							'Name' => 'URL',
-							'Value' => ''
+							'Name' => 'From',
+							'Value' => 'zabbix.com'
 						]
-					]
+					],
+					'expected_parameters' => [
+						[
+							'Name' => 'From',
+							'Value' => 'zabbix.com'
+						],
+						[
+							'Name' => 'HTTPS',
+							'Value' => 'true'
+						]
+					],
+					'remove_parameters' => true
 				]
 			]
 		];
 	}
 
 	/**
-	 * Check that parameters are saved correctly when switching type from Webhook to Script and vice versa (ZBX-22787 bug scenario).
+	 * Check that parameters are saved correctly when switching type from Webhook to Script and vice versa.
 	 *
-	 * @dataProvider getParametersData
+	 * @dataProvider getSavedParametersData
 	 */
 	public function testFormAdministrationMediaTypes_SavedParameters($data) {
 		$this->page->login()->open('zabbix.php?action=mediatype.list');
-		$this->query('link', self::$saved_parameters)->waitUntilClickable()->one()->click();
-		$this->page->waitUntilReady();
-		self::$saved_parameters = $data['mediatype_tab']['Name'];
+		$this->query('link', $data['object'])->waitUntilClickable()->one()->click();
 
-		$form = $this->query('id:media-type-form')->asForm()->one();
+		$form = $this->query('id:media-type-form')->asForm()->waitUntilVisible()->one();
 		$form->fill($data['mediatype_tab']);
 
-		if (array_key_exists('script_parameters', $data)) {
-			$form->getField('Script parameters')->asMultifieldTable()->fill($data['script_parameters']);
+		if (array_key_exists('remove_parameters', $data)) {
+			$form->getField('Parameters')->asMultifieldTable()->clear();
+		}
+
+		if (array_key_exists('custom_parameters', $data)) {
+			$form->getField('Parameters')->asMultifieldTable()->fill($data['custom_parameters']);
 		}
 
 		$form->submit();
@@ -1431,12 +1511,8 @@ class testFormAdministrationMediaTypes extends CWebTest {
 		$form->invalidate();
 		$form->checkValue($data['mediatype_tab']);
 
-		if (array_key_exists('script_parameters', $data)) {
-			$form->getField('Script parameters')->asMultifieldTable()->checkValue($data['script_parameters']);
-		}
-
-		if (array_key_exists('Parameters', $data)) {
-			$form->query('id:parameters_table')->asMultifieldTable()->one()->checkValue($data['Parameters']);
+		if (array_key_exists('expected_parameters', $data)) {
+			$form->getField('Parameters')->asMultifieldTable()->checkValue($data['expected_parameters']);
 		}
 	}
 }
