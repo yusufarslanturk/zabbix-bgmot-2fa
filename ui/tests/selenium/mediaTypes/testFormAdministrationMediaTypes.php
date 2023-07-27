@@ -1443,7 +1443,7 @@ class testFormAdministrationMediaTypes extends CWebTest {
 					'mediatype_tab' => [
 						'Name' => 'Webhook with minimal set of values',
 						'Type' => 'Webhook',
-						'Script' => 'test no params',
+						'Script' => 'test no params'
 					],
 					'remove_parameters' => true
 				]
