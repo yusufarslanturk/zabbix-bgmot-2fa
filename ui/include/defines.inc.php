@@ -18,8 +18,8 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-define('ZABBIX_VERSION',		'6.4.2rc2');
-define('ZABBIX_API_VERSION',	'6.4.2');
+define('ZABBIX_VERSION',		'6.4.5rc1');
+define('ZABBIX_API_VERSION',	'6.4.5');
 define('ZABBIX_EXPORT_VERSION',	'6.4');
 
 define('ZABBIX_DB_VERSION',		6040000);
@@ -125,11 +125,11 @@ define('ZBX_SCRIPT_EXECUTE_ON_AGENT',	0);
 define('ZBX_SCRIPT_EXECUTE_ON_SERVER',	1);
 define('ZBX_SCRIPT_EXECUTE_ON_PROXY',	2);
 
+define('ZBX_PROXY_VERSION_ANY_OUTDATED', -2);
 define('ZBX_PROXY_VERSION_UNDEFINED', 0);
 define('ZBX_PROXY_VERSION_CURRENT', 1);
 define('ZBX_PROXY_VERSION_OUTDATED', 2);
 define('ZBX_PROXY_VERSION_UNSUPPORTED', 3);
-define('ZBX_PROXY_VERSION_ALL_OUTDATED', 4);
 
 define('ZBX_FLAG_DISCOVERY_NORMAL',		0x0);
 define('ZBX_FLAG_DISCOVERY_RULE',		0x1);
@@ -1330,11 +1330,6 @@ define('ZBX_TIMELINE_OFF',	0);
 define('ZBX_TIMELINE_ON',	1);
 
 /**
- * @deprecated use either a literal space " " or a non-breakable space "&nbsp;" instead
- */
-define('SPACE',	'&nbsp;');
-
-/**
  * Symbol used to separate name pairs such as "host: item" or "proxy: host".
  *
  * Should not be used as just a colon.
@@ -1368,9 +1363,15 @@ define('ZBX_TIME_SUFFIX_MULTIPLIERS', [
 	'y' => SEC_PER_YEAR
 ]);
 
-// Byte suffixes and multipliers.
-define('ZBX_BYTE_SUFFIXES', 'KMGT');
-define('ZBX_BYTE_SUFFIX_MULTIPLIERS', [
+// Size suffixes and multipliers.
+define('ZBX_SIZE_SUFFIXES', 'KMGT');
+define('ZBX_SIZE_SUFFIX_MULTIPLIERS', [
+	'K' => 1000,
+	'M' => 1000**2,
+	'G' => 1000**3,
+	'T' => 1000**4
+]);
+define('ZBX_SIZE_SUFFIX_MULTIPLIERS_BINARY', [
 	'K' => ZBX_KIBIBYTE,
 	'M' => ZBX_MEBIBYTE,
 	'G' => ZBX_GIBIBYTE,
@@ -1557,6 +1558,7 @@ if (!defined('JSON_ERROR_SYNTAX')) {
 // API errors
 define('ZBX_API_ERROR_INTERNAL',	111);
 define('ZBX_API_ERROR_PARAMETERS',	100);
+define('ZBX_API_ERROR_NO_ENTITY',	101);
 define('ZBX_API_ERROR_PERMISSIONS',	120);
 define('ZBX_API_ERROR_NO_AUTH',		200);
 define('ZBX_API_ERROR_NO_METHOD',	300);
@@ -1941,6 +1943,7 @@ define('ZBX_STYLE_FLOAT_LEFT', 'float-left');
 define('ZBX_STYLE_FORM_INPUT_MARGIN', 'form-input-margin');
 define('ZBX_STYLE_FORM_FIELDS_INLINE', 'form-fields-inline');
 define('ZBX_STYLE_FORM_NEW_GROUP', 'form-new-group');
+define('ZBX_STYLE_FORM_SUBMIT_HIDDEN', 'form-submit-hidden');
 define('ZBX_STYLE_GRAPH_WRAPPER', 'graph-wrapper');
 define('ZBX_STYLE_GREEN', 'green');
 define('ZBX_STYLE_GREEN_BG', 'green-bg');

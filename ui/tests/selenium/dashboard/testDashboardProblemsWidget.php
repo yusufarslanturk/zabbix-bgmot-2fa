@@ -126,7 +126,7 @@ class testDashboardProblemsWidget extends CWebTest {
 		$form->fill(['Type' => 'Problems']);
 		$dialog->waitUntilReady();
 
-		$this->assertEquals(['Type', 'Name', 'Refresh interval', 'Show', 'Host groups', 'Exclude host groups', 'Hosts', 'Problem',
+		$this->assertEquals(['Type', 'Show header', 'Name', 'Refresh interval', 'Show', 'Host groups', 'Exclude host groups', 'Hosts', 'Problem',
 				'Severity', 'Tags', 'Show tags', 'Tag name', 'Tag display priority', 'Show operational data', 'Show symptoms',
 				'Show suppressed problems', 'Show unacknowledged only', 'Sort entries by', 'Show timeline', 'Show lines'],
 				$form->getLabels()->asText()
@@ -463,7 +463,7 @@ class testDashboardProblemsWidget extends CWebTest {
 					]
 				]
 			],
-			// #11 Widget with several groups and hosts in correcponding fields.
+			// #11 Widget with several groups and hosts in corresponding fields.
 			[
 				[
 					'fields' => [

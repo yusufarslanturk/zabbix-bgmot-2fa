@@ -37,7 +37,8 @@ $discoveryForm = (new CForm())
 	->addItem((new CVar(CCsrfTokenHelper::CSRF_TOKEN_NAME, $csrf_token))->removeId())
 	->setId('discoveryForm')
 	->setName('discoveryForm')
-	->setAttribute('aria-labelledby', CHtmlPage::PAGE_TITLE_ID);
+	->setAttribute('aria-labelledby', CHtmlPage::PAGE_TITLE_ID)
+	->addItem((new CSubmitButton(null))->addClass(ZBX_STYLE_FORM_SUBMIT_HIDDEN));
 
 if (!empty($this->data['druleid'])) {
 	$discoveryForm->addVar('druleid', $this->data['druleid']);
@@ -69,6 +70,7 @@ $discoveryFormList
 		(new CTextArea('iprange', $this->data['drule']['iprange'], ['maxlength' => 2048]))
 			->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			->setAriaRequired()
+			->disableSpellcheck()
 	)
 	->addRow((new CLabel(_('Update interval'), 'delay'))->setAsteriskMark(),
 		(new CTextBox('delay', $data['drule']['delay']))
