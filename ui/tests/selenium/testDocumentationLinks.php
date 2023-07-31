@@ -59,6 +59,27 @@ class testDocumentationLinks extends CWebTest {
 				'url' => '{$URL}'
 			]
 		]);
+
+		// Create event correlation.
+		CDataHelper::call('correlation.create', [
+			[
+				'name' => 'Event correlation for links check',
+				'filter' => [
+					'evaltype' => 0,
+					'conditions' => [
+						[
+							'type' => ZBX_CORR_CONDITION_OLD_EVENT_TAG,
+							'tag' => 'links tag'
+						]
+					]
+				],
+				'operations' => [
+					[
+						'type' => ZBX_CORR_OPERATION_CLOSE_OLD
+					]
+				]
+			]
+		]);
 	}
 
 	/**
@@ -1459,7 +1480,13 @@ class testDocumentationLinks extends CWebTest {
 			// #150 Edit event correlation form view.
 			[
 				[
-					'url' => 'zabbix.php?correlationid=99002&action=correlation.edit',
+					'url' => 'zabbix.php?action=correlation.list',
+					'actions' => [
+						[
+							'callback' => 'openFormWithLink',
+							'element' => 'link:Event correlation for links check'
+						]
+					],
 					'doc_link' => '/en/manual/config/event_correlation/global#configuration'
 				]
 			],
