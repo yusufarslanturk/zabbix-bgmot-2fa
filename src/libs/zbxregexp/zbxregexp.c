@@ -290,10 +290,29 @@ static unsigned long int compute_recursion_limit(void)
 #endif
 }
 
+#if defined(HAVE_PCRE2_H)
+static char	*decode_pcre2_match_error(int error_code)
+{
+	/* 120 code units buffer is recommended in "man pcre2api" */
+	const size_t	err_msg_size = 120 * PCRE2_CODE_UNIT_WIDTH / 8;
+
+	char	*err_msg = (char *)zbx_malloc(NULL, err_msg_size);
+	int	ret;
+
+	if (0 > (ret = pcre2_get_error_message(error_code, (PCRE2_UCHAR *)err_msg, err_msg_size)))
+	{
+		zbx_snprintf(err_msg, err_msg_size, "pcre2_get_error_message(%d, ...) failed with error %d",
+				error_code, ret);
+	}
+
+	return err_msg;
+}
+#endif
+
 /***********************************************************************************
  *                                                                                 *
- * Purpose: wrapper for pcre_exec(), searches for a given pattern, specified by    *
- *          regexp, in the string                                                  *
+ * Purpose: wrapper for pcre_exec() and pcre2_match(), searches for a given        *
+ *          pattern, specified by regexp, in the string                            *
  *                                                                                 *
  * Parameters:                                                                     *
  *     string         - [IN] string to be matched against 'regexp'                 *
@@ -302,6 +321,7 @@ static unsigned long int compute_recursion_limit(void)
  *     count          - [IN] count of elements in matches array                    *
  *     matches        - [OUT] matches (can be NULL if matching results are         *
  *                      not required)                                              *
+ *     err_msg        - [OUT] dynamically allocated error message (can be NULL).   *
  *                                                                                 *
  * Return value: ZBX_REGEXP_MATCH     - successful match                           *
  *               ZBX_REGEXP_NO_MATCH  - no match                                   *
@@ -309,7 +329,7 @@ static unsigned long int compute_recursion_limit(void)
  *                                                                                 *
  ***********************************************************************************/
 static int	regexp_exec(const char *string, const zbx_regexp_t *regexp, int flags, int count,
-		zbx_regmatch_t *matches)
+		zbx_regmatch_t *matches, char **err_msg)
 {
 #ifdef HAVE_PCRE_H
 #define MATCHES_BUFF_SIZE	(ZBX_REGEXP_GROUPS_MAX * 3)		/* see pcre_exec() in "man pcreapi" why 3 */
@@ -338,7 +358,7 @@ static int	regexp_exec(const char *string, const zbx_regexp_t *regexp, int flags
 	pextra->match_limit_recursion = compute_recursion_limit();
 #endif
 	/* see "man pcreapi" about pcre_exec() return value and 'ovector' size and layout */
-	if (0 <= (r = pcre_exec(regexp->pcre_regexp, pextra, string, strlen(string), flags, 0, ovector, ovecsize)))
+	if (0 <= (r = pcre_exec(regexp->pcre_regexp, pextra, string, (int)strlen(string), flags, 0, ovector, ovecsize)))
 	{
 		if (NULL != matches)
 			memcpy(matches, ovector, (size_t)((0 < r) ? MIN(r, count) : count) * sizeof(zbx_regmatch_t));
@@ -351,7 +371,13 @@ static int	regexp_exec(const char *string, const zbx_regexp_t *regexp, int flags
 	}
 	else
 	{
-		zabbix_log(LOG_LEVEL_WARNING, "%s() failed with error %d", __func__, r);
+		if (NULL != err_msg)
+		{
+			*err_msg = zbx_dsprintf(NULL, "pcre_exec() returned %d. See PCRE library documentation or"
+			" \"man pcreapi\", section \"Error return values from pcre_exec()\" for explanation"
+			" or /usr/include/pcre.h", r);
+		}
+
 		result = FAIL;
 	}
 
@@ -367,8 +393,8 @@ static int	regexp_exec(const char *string, const zbx_regexp_t *regexp, int flags
 	PCRE2_SIZE		*ovector = NULL;
 
 	pcre2_set_match_limit(regexp->match_ctx, 1000000);
-	pcre2_set_recursion_limit(regexp->match_ctx, compute_recursion_limit());
-	match_data = pcre2_match_data_create(count, NULL);
+	pcre2_set_recursion_limit(regexp->match_ctx, (uint32_t)compute_recursion_limit());
+	match_data = pcre2_match_data_create((uint32_t)count, NULL);
 
 	if (NULL == match_data)
 	{
@@ -404,7 +430,9 @@ static int	regexp_exec(const char *string, const zbx_regexp_t *regexp, int flags
 		}
 		else
 		{
-			zabbix_log(LOG_LEVEL_WARNING, "%s() failed with error %d", __func__, r);
+			if (NULL != err_msg)
+				*err_msg = decode_pcre2_match_error(r);
+
 			result = FAIL;
 		}
 
@@ -457,7 +485,7 @@ void	zbx_regexp_free(zbx_regexp_t *regexp)
  ******************************************************************************/
 int     zbx_regexp_match_precompiled(const char *string, const zbx_regexp_t *regexp)
 {
-	return (ZBX_REGEXP_MATCH == regexp_exec(string, regexp, 0, 0, NULL)) ? 0 : -1;
+	return (ZBX_REGEXP_MATCH == regexp_exec(string, regexp, 0, 0, NULL, NULL)) ? 0 : -1;
 }
 
 /****************************************************************************************************
@@ -492,7 +520,7 @@ static char	*zbx_regexp(const char *string, const char *pattern, int flags, int 
 	{
 		int	r;
 
-		if (ZBX_REGEXP_MATCH == (r = regexp_exec(string, regexp, 0, 1, &match)))
+		if (ZBX_REGEXP_MATCH == (r = regexp_exec(string, regexp, 0, 1, &match, NULL)))
 		{
 			c = (char *)string + match.rm_so;
 
@@ -702,7 +730,7 @@ static int	regexp_sub(const char *string, const char *pattern, const char *outpu
 	for (i = 0; i < ARRSIZE(match); i++)
 		match[i].rm_so = match[i].rm_eo = -1;
 
-	if (ZBX_REGEXP_MATCH == regexp_exec(string, regexp, 0, ZBX_REGEXP_GROUPS_MAX, match))
+	if (ZBX_REGEXP_MATCH == regexp_exec(string, regexp, 0, ZBX_REGEXP_GROUPS_MAX, match, NULL))
 		*out = regexp_sub_replace(string, output_template, match, ZBX_REGEXP_GROUPS_MAX, 0);
 
 	return SUCCEED;
@@ -748,7 +776,7 @@ int	zbx_mregexp_sub_precompiled(const char *string, const zbx_regexp_t *regexp, 
 	for (i = 0; i < ARRSIZE(match); i++)
 		match[i].rm_so = match[i].rm_eo = -1;
 
-	if (ZBX_REGEXP_MATCH == regexp_exec(string, regexp, 0, ZBX_REGEXP_GROUPS_MAX, match) &&
+	if (ZBX_REGEXP_MATCH == regexp_exec(string, regexp, 0, ZBX_REGEXP_GROUPS_MAX, match, NULL) &&
 			NULL != (*out = regexp_sub_replace(string, output_template, match, ZBX_REGEXP_GROUPS_MAX,
 			limit)))
 	{
