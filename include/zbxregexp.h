@@ -63,6 +63,8 @@ int	zbx_regexp_match_ex(const zbx_vector_expression_t *regexps, const char *stri
 		int case_sensitive);
 int	zbx_regexp_sub_ex(const zbx_vector_expression_t *regexps, const char *string, const char *pattern,
 		int case_sensitive, const char *output_template, char **output);
+int	zbx_regexp_sub_ex2(const zbx_vector_expression_t *regexps, const char *string, const char *pattern,
+		int case_sensitive, const char *output_template, char **output, char **err_msg);
 int	zbx_global_regexp_exists(const char *name, const zbx_vector_expression_t *regexps);
 void	zbx_regexp_escape(char **string);
 
