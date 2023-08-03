@@ -73,6 +73,15 @@ class CControllerPopupLldOverride extends CController {
 			'overrides_names' => $this->getInput('overrides_names', [])
 		];
 
+		$page_options['overrides_filters'] = $page_options['overrides_filters']
+			? sortLldRuleFilterConditions($page_options['overrides_filters'], $page_options['overrides_evaltype'])
+			: [[
+				'macro' => '',
+				'operator' => CONDITION_OPERATOR_REGEXP,
+				'value' => '',
+				'formulaid' => num2letter(0)
+			]];
+
 		if ($this->hasInput('validate')) {
 			if ($page_options['name'] === '') {
 				error(_s('Incorrect value for field "%1$s": %2$s.', _('Name'), _('cannot be empty')));
@@ -97,7 +106,6 @@ class CControllerPopupLldOverride extends CController {
 					unset($page_options['overrides_filters'][$i]);
 				}
 			}
-			$page_options['overrides_filters'] = array_values($page_options['overrides_filters']);
 
 			// Return collected error messages.
 			if ($messages = get_and_clear_messages()) {
