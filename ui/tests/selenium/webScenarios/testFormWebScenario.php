@@ -162,6 +162,7 @@ class testFormWebScenario extends CWebTest {
 		// Check tabs available in the form.
 		$this->assertEquals(['Scenario', 'Steps', 'Tags', 'Authentication'], $form->getTabs());
 
+		// TODO: xpath quotes should be fixed after git-hook improvements in DEV-2396.
 		$scenario_fields = [
 			'Name' => ['autofocus' => 'true', 'maxlength' => 64],
 			'Update interval' => ['value' => '1m', 'maxlength' => 255],
@@ -273,7 +274,7 @@ class testFormWebScenario extends CWebTest {
 
 		$tags_table = $form->query('class:tags-table')->one()->asTable();
 
-		// Check tags table headers when viewing scenario tags
+		// Check tags table headers when viewing scenario tags.
 		$this->assertEquals(['Name', 'Value', ''], $tags_table->getHeaders()->asText());
 
 		// Check table tags placeholders and length.
@@ -879,6 +880,7 @@ class testFormWebScenario extends CWebTest {
 //			$table_fields[$field_name] = $form->getField($field_name)->asMultifieldTable()->getValue();
 			$field = $form->getField(ucfirst($field_name));
 
+			// TODO: xpath quotes should be fixed after git-hook improvements in DEV-2396.
 			$table_fields[$field_name]['name'] = $field->query("xpath:(//table[@data-type=".
 					CXPathHelper::escapeQuotes($field_name)."]//input)[1]")->one()->getValue();
 			$table_fields[$field_name]['value'] = $field->query("xpath:(//table[@data-type=".
@@ -906,6 +908,7 @@ class testFormWebScenario extends CWebTest {
 //			$this->assertEquals($table_fields[$field_name], $form->getField($field_name)->asMultifieldTable()->getValue());
 			$field = $form->getField(ucfirst($field_name));
 
+			// TODO: xpath quotes should be fixed after git-hook improvements in DEV-2396.
 			$this->assertEquals($table_fields[$field_name]['name'], $field->query("xpath:(//table[@data-type=".
 					CXPathHelper::escapeQuotes($field_name)."]//input)[1]")->one()->getValue()
 			);
@@ -1063,6 +1066,7 @@ class testFormWebScenario extends CWebTest {
 
 					$i = 1;
 					foreach ($data[$field_name] as $field_pair) {
+						// TODO: xpath quotes should be fixed after git-hook improvements in DEV-2396.
 						$this->assertEquals($field_pair['name'], $field->query("xpath:(//table[@data-type=".
 								CXPathHelper::escapeQuotes($field_name)."]//tr[".$i."]//input)[1]")->one()->getValue()
 						);
@@ -1109,6 +1113,7 @@ class testFormWebScenario extends CWebTest {
 				}
 
 				$i = 1;
+				// TODO: xpath quotes should be fixed after git-hook improvements in DEV-2396.
 				foreach ($data[$field_name] as $field_pair) {
 					$field->query("xpath:(//table[@data-type=".CXPathHelper::escapeQuotes($field_name)."]//tr[".
 							$i."]//input)[1]")->one()->fill($field_pair['name']);

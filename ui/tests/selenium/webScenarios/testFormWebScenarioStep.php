@@ -111,6 +111,7 @@ class testFormWebScenarioStep extends CWebTest {
 
 		$this->assertEquals('Step of web scenario', $dialog->getTitle());
 
+		// TODO: xpath quotes should be fixed after git-hook improvements in DEV-2396.
 		$step_fields = [
 			'Name' => ['maxlength' => 64],
 			'id:url' => [],
@@ -132,6 +133,7 @@ class testFormWebScenarioStep extends CWebTest {
 		];
 
 		// Differences between step creation form and update form of templated scenario step should be taken into account.
+		// TODO: xpath quotes should be fixed after git-hook improvements in DEV-2396.
 		if (array_key_exists('step_name', $data)) {
 			$step_fields['Name'] = ['value' => $data['step_name'], 'enabled' => false, 'maxlength' => 64];
 			$step_fields['id:url']['value'] = 'http://zabbix.com';
@@ -259,7 +261,7 @@ class testFormWebScenarioStep extends CWebTest {
 
 	public static function getWebScenarioStepData() {
 		return [
-			// #0 Empty name
+			// #0 Empty name.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -270,7 +272,7 @@ class testFormWebScenarioStep extends CWebTest {
 					'step_error' => 'Incorrect value for field "name": cannot be empty.'
 				]
 			],
-			// #1 Empty space in name
+			// #1 Empty space in name.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -281,7 +283,7 @@ class testFormWebScenarioStep extends CWebTest {
 					'step_error' => 'Incorrect value for field "name": cannot be empty.'
 				]
 			],
-			// #2 Empty URL
+			// #2 Empty URL.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -292,7 +294,7 @@ class testFormWebScenarioStep extends CWebTest {
 					'step_error' => 'Incorrect value for field "url": cannot be empty.'
 				]
 			],
-			// #3 Blank space in URL
+			// #3 Blank space in URL.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -952,7 +954,7 @@ class testFormWebScenarioStep extends CWebTest {
 					'resulting_url' => 'https://intranet.zabbix.com/secure/admin.jspa'
 				]
 			],
-			// #3 Invalid URL part removed during parsing
+			// #3 Invalid URL part removed during parsing.
 			[
 				[
 					'url' => 'http://www.zabbix.com/enterprise_ready#test',
@@ -1260,6 +1262,7 @@ class testFormWebScenarioStep extends CWebTest {
 				$add_button->click();
 			}
 
+			// TODO: xpath quotes should be fixed after git-hook improvements in DEV-2396.
 			$table_field->query("xpath:(.//tr[".$i."]//input)[1]")->one()->fill($row['name']);
 
 			if (array_key_exists('value', $row)) {
