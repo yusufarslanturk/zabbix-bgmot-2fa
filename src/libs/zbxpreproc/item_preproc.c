@@ -579,7 +579,7 @@ int	item_preproc_2dec(zbx_variant_t *value, int op_type, char **errmsg)
 int	item_preproc_regsub_op(zbx_variant_t *value, const char *params, char **errmsg)
 {
 	char		*pattern, *output, *new_value = NULL;
-	char		*regex_error;
+	char		*regex_error = NULL;
 	zbx_regexp_t	*regex = NULL;
 	int		ret = FAIL;
 
