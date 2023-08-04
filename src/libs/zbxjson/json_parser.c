@@ -316,7 +316,7 @@ static zbx_int64_t	json_parse_literal(const char *start, const char *text, char 
  * Purpose: Parses JSON object value                                          *
  *                                                                            *
  * Parameters: start - [IN] the JSON data                                     *
- *             obj   - [IN/OUT] the JSON object (can be NULL)                 *
+ *             obj   - [IN/OUT] JSON object (can be NULL)                     *
  *             depth - [IN]                                                   *
  *             error - [OUT] the parsing error message (can be NULL)          *
  *                                                                            *
@@ -337,7 +337,7 @@ zbx_int64_t	json_parse_value(const char *start, zbx_jsonobj_t *obj, int depth, c
 	{
 		char	err_buf[MAX_STRING_LEN];
 
-		zbx_snprintf(err_buf, sizeof(err_buf), "JSON depth exceed %d", ZBX_MAX_JSON_DEPTH);
+		zbx_snprintf(err_buf, sizeof(err_buf), "JSON depth exceeds %d", ZBX_MAX_JSON_DEPTH);
 		return json_error(err_buf, ptr, error);
 	}
 
