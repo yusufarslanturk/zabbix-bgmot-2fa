@@ -141,15 +141,15 @@ class testPageGroups extends CWebTest {
 		// Check hintbox of discovered host group in info column.
 		if ($this->object === 'host') {
 			$row = $table->findRow('Name', self::LLD.': '.self::DISCOVERED_GROUP);
-			$icon = $row->getColumn('Info')->query('tag:button')->one();
-			$this->assertTrue($icon->hasClass('zi-i-warning'));
+			$icon = $row->getColumn('Info')->query('tag:a')->one();
+			$this->assertTrue($icon->hasClass('status-yellow'));
 			$icon->click();
 			$hintbox = $this->query('xpath://div[@class="overlay-dialogue"]')->waitUntilVisible();
 			$this->assertEquals('The host group is not discovered anymore and will be deleted the next time discovery'.
 					' rule is processed.',
 					$hintbox->one()->getText()
 			);
-			$hintbox->query('class:btn-overlay-close')->one()->click()->waitUntilNotPresent();
+			$hintbox->query('class:overlay-close-btn')->one()->click()->waitUntilNotPresent();
 		}
 
 		// Check related links of group in table row.

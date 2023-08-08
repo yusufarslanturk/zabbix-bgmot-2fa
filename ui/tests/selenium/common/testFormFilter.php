@@ -305,7 +305,7 @@ class testFormFilter extends CWebTest {
 	}
 
 	/**
-	 * Return filter names from droplist.
+	 * Return filter element and names from droplist.
 	 *
 	 * @return array
 	 */

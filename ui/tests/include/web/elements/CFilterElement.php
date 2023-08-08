@@ -271,8 +271,7 @@ class CFilterElement extends CElement {
 			$this->selectTab($name);
 		}
 
-		// TODO: fix after git-hook improvements DEV-2396
-		$this->getSelectedTab()->query('xpath:.//a['.CXPathHelper::fromClass('tabfilter-edit').']')->one()->waitUntilClickable()->click();
+		$this->getSelectedTab()->query('xpath:.//a[@class="icon-edit"]')->one()->waitUntilClickable()->click();
 
 		return COverlayDialogElement::find()->one()->waitUntilReady();
 	}

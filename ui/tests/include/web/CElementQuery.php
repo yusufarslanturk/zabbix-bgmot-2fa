@@ -49,7 +49,6 @@ require_once dirname(__FILE__).'/elements/CPopupButtonElement.php';
 require_once dirname(__FILE__).'/elements/CInputGroupElement.php';
 require_once dirname(__FILE__).'/elements/CHostInterfaceElement.php';
 require_once dirname(__FILE__).'/elements/CFilterElement.php';
-require_once dirname(__FILE__).'/elements/CFieldsetElement.php';
 
 require_once dirname(__FILE__).'/IWaitable.php';
 require_once dirname(__FILE__).'/WaitableTrait.php';
