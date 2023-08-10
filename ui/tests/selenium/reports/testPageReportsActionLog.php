@@ -77,7 +77,8 @@ class testPageReportsActionLog extends CWebTest {
 		);
 
 		// Check data set values in input field.
-		$form->checkValue(['id:from' => 'now-1h', 'id:to' => 'now']);
+		$this->assertEquals('now-1h', $this->query('id:from')->one()->getAttribute('value'));
+		$this->assertEquals('now', $this->query('id:to')->one()->getAttribute('value'));
 
 		// Press to display filter.
 		$this->query('id:ui-id-2')->one()->click();
@@ -672,8 +673,6 @@ class testPageReportsActionLog extends CWebTest {
 	public function testPageReportsActionLog_CheckFilter($data) {
 		$this->page->login()->open('zabbix.php?action=actionlog.list&from=2012-02-20+09:01:00&to=2012-02-20+11:01:00&'.
 				'filter_messages=&filter_set=1')->waitUntilReady();
-
-		// Filter by time.
 		$form = $this->query('name:zbx_filter')->asForm()->one();
 
 		if (array_key_exists('time', $data)) {
@@ -683,8 +682,9 @@ class testPageReportsActionLog extends CWebTest {
 				$time_tab->one()->click();
 			}
 
-			$form->fill($data['time']);
-			$form->query('button:Apply')->one()->click();
+			$this->query('id:from')->one()->fill($data['time']['id:from']);
+			$this->query('id:to')->one()->fill($data['time']['id:to']);
+			$this->query('id:apply')->one()->click();
 			$this->page->waitUntilReady();
 		}
 
