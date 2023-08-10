@@ -101,7 +101,10 @@ foreach ($data['triggers'] as $trigger) {
 	}
 
 	$triggerDescription = (new CLinkAction($trigger['description']))
-		->setMenuPopup(CMenuPopupHelper::getTrigger($trigger['triggerid'], 0));
+		->setMenuPopup(CMenuPopupHelper::getTrigger([
+			'triggerid' => $trigger['triggerid'],
+			'backurl' => (new CUrl('toptriggers.php'))->getUrl()
+		]));
 
 	$table->addRow([
 		$hostName,
