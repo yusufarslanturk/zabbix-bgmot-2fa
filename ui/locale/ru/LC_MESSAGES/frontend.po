@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-06-28 07:19+0000\n"
+"PO-Revision-Date: 2023-08-09 03:13+0000\n"
 "Last-Translator: Alexey <alexey.pustovalov@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: ru\n"
@@ -15787,11 +15787,11 @@ msgstr "Процент времени, когда виртуальная маш�
 
 #: graphs.php:55 include/views/configuration.graph.edit.php:153
 msgid "Percentile line (left)"
-msgstr "Процентная линия (слева)"
+msgstr "Линия процентиля (слева)"
 
 #: graphs.php:56 include/views/configuration.graph.edit.php:171
 msgid "Percentile line (right)"
-msgstr "Процентная линия (справа)"
+msgstr "Линия процентиля (справа)"
 
 #: include/classes/data/CItemData.php:910
 msgid "Performs a DNS query. Returns character string with the required type of information"
@@ -16999,14 +16999,14 @@ msgstr "Отчеты"
 #: include/views/configuration.item.edit.php:365
 #: include/views/configuration.item.prototype.edit.php:351
 msgid "Request body"
-msgstr "Запрос тела"
+msgstr "Тело запроса"
 
 #: app/views/popup.massupdate.item.php:90
 #: include/views/configuration.host.discovery.edit.php:297
 #: include/views/configuration.item.edit.php:354
 #: include/views/configuration.item.prototype.edit.php:340
 msgid "Request body type"
-msgstr "Типа запроса тела"
+msgstr "Тип тела запроса"
 
 #: app/controllers/CControllerProxyConfigRefresh.php:71
 msgid "Request created successfully"
@@ -23009,7 +23009,7 @@ msgstr "МИН значение оси Y"
 
 #: include/views/configuration.graph.edit.php:354
 msgid "Y axis side"
-msgstr "Расположение оси"
+msgstr "Расположение оси Y"
 
 #: include/classes/widgets/CWidgetHelper.php:936
 #: include/classes/widgets/CWidgetHelper.php:1012
