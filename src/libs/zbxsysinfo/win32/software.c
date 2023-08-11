@@ -142,7 +142,7 @@ static char	*get_registry_value(HKEY hKey, LPCTSTR name, DWORD value_type)
 	if (ERROR_SUCCESS == RegQueryValueEx(hKey, name, NULL, NULL, NULL, &szData))
 	{
 		value = zbx_malloc(NULL, szData + 2);
-		
+
 		/* syscall RegQueryValueEx does not guarantee that the returned string will be '\0' terminated */
 		if (ERROR_SUCCESS != RegQueryValueEx(hKey, name, NULL, NULL, (LPBYTE)value, &szData))
 			zbx_free(value);
