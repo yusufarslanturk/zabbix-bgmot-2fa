@@ -821,7 +821,7 @@ class CDiscoveryRule extends CItemGeneralOld {
 			else {
 				$dst_triggers[] = array_intersect_key($src_trigger, array_flip(['expression', 'description', 'url_name',
 					'url', 'status', 'priority', 'comments', 'type', 'recovery_mode', 'recovery_expression',
-					'correlation_mode', 'manual_close', 'correlation_tag', 'opdata', 'discover', 'event_name', 'tags'
+					'correlation_mode', 'correlation_tag', 'manual_close', 'opdata', 'discover', 'event_name', 'tags'
 				]));
 			}
 		}
