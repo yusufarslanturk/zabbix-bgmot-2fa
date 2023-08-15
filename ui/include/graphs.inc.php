@@ -912,7 +912,7 @@ function calculateGraphScaleValues(float $min, float $max, bool $min_calculated,
 		string $units, bool $is_binary, int $power, int $precision_max): array {
 	$unit_base = $is_binary ? ZBX_KIBIBYTE : 1000;
 
-	$units_length = ($units !== '' && $units[0] !== '!')
+	$units_length = ($units !== '' && $units !== '!')
 		? ($power > 0 ? 1 : 0) + mb_strlen($units) + ($units[0] !== '!' ? 1 : 0)
 		: ($power > 0 ? 1 : 0);
 
