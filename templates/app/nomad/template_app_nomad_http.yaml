@@ -5779,7 +5779,7 @@ zabbix_export:
           master_item:
             key: nomad.server.stats.get
           triggers:
-            - uuid: 187f59423a4e41c286a9a6cfc9215d1b
+            - uuid: 3c7dfd5ec21144b6b58c603d60142200
               expression: 'change(/HashiCorp Nomad Server by HTTP/nomad.server.version)<>0'
               name: 'HashiCorp Nomad Server: Nomad server version has changed'
               event_name: 'HashiCorp Nomad Server: Nomad server version has changed to {ITEM.LASTVALUE}'
