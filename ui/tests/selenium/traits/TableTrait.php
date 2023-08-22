@@ -93,7 +93,7 @@ trait TableTrait {
 
 		$this->assertEquals(count($data), $rows->count(), 'Rows count does not match results count in data provider.');
 		$this->assertEquals(array_keys($data), array_keys($rows->asArray()),
-			'Row indices don\'t not match indices in data provider.'
+				'Row indices don\'t not match indices in data provider.'
 		);
 
 		foreach ($this->normalizeData($data) as $i => $values) {
@@ -148,8 +148,8 @@ trait TableTrait {
 
 			if (!$found) {
 				throw new \Exception('Row ('.implode(', ', array_map(function ($value) {
-						return '"'.$value.'"';
-					}, $data_row)).') was not found in table.');
+					return '"'.$value.'"';
+				}, $data_row)).') was not found in table.');
 			}
 		}
 	}
@@ -215,7 +215,7 @@ trait TableTrait {
 			$total = $count;
 		}
 		$this->assertEquals('Displaying '.$count.' of '.$count.' found',
-			$this->query('xpath://div[@class="table-stats"]')->one()->getText()
+				$this->query('xpath://div[@class="table-stats"]')->one()->getText()
 		);
 	}
 
