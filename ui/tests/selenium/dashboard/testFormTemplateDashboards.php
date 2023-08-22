@@ -215,7 +215,7 @@ class testFormTemplateDashboards extends CWebTest {
 
 			switch ($selector) {
 				case 'id:dashboard-config':
-					$controls->query($selector)->one()->click();
+					$controls->query($selector)->waitUntilClickable()->one()->click();
 					$this->checkDialogue('Dashboard properties');
 					break;
 
@@ -236,7 +236,6 @@ class testFormTemplateDashboards extends CWebTest {
 					break;
 			}
 		}
-
 		// Check breadcrumbs.
 		foreach (['Hierarchy', 'Content menu'] as $aria_label) {
 			$this->assertTrue($this->query('xpath://ul[@aria-label='.zbx_dbstr($aria_label).']')->one()->isClickable());
