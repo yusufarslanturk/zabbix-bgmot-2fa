@@ -191,11 +191,14 @@ func ProcessEventLogCheck(data unsafe.Pointer, item *EventLogItem, refresh int, 
 	var ctlsConfig_p *C.zbx_config_tls_t;
 
 	if tlsConfig, err = agent.GetTLSConfig(&agent.Options); err != nil {
-		result := &EventLogResult{
+		res := &EventLogResult{
 			Ts:    time.Now(),
 			Error: err,
 		}
-		item.Results = append(item.Results, result)
+		item.Results = append(item.Results, res)
+
+		log.Tracef("Calling C function \"free_eventlog_result()\"")
+		C.free_eventlog_result(result)
 
 		return
 	}
