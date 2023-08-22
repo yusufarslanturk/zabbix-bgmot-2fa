@@ -59,7 +59,7 @@ class testFormNetworkDiscovery extends CWebTest {
 	 */
 	protected static function getHash() {
 		return CDBHelper::getHash( 'SELECT * FROM drules').
-			CDBHelper::getHash('SELECT * FROM dchecks');
+				CDBHelper::getHash('SELECT * FROM dchecks');
 	}
 
 	public function testFormNetworkDiscovery_Layout() {
@@ -72,8 +72,8 @@ class testFormNetworkDiscovery extends CWebTest {
 
 		// Check that all labels present and visible.
 		$this->assertEquals(['Name', 'Discovery by proxy', 'IP range', 'Update interval',
-			'Checks', 'Device uniqueness criteria', 'Host name', 'Visible name', 'Enabled'],
-			$form->getLabels(CElementFilter::VISIBLE)->asText()
+				'Checks', 'Device uniqueness criteria', 'Host name', 'Visible name', 'Enabled'],
+				$form->getLabels(CElementFilter::VISIBLE)->asText()
 		);
 
 		// Check required fields.
@@ -98,10 +98,10 @@ class testFormNetworkDiscovery extends CWebTest {
 		foreach ($radios as $field => $radio_list) {
 			$get_field = $form->getField($field);
 			$this->assertEquals(array_keys($radio_list),
-				$get_field->query('xpath:.//input[@type="radio"]/../label')->all()->asText()
+					$get_field->query('xpath:.//input[@type="radio"]/../label')->all()->asText()
 			);
 			$this->assertEquals(array_search(true, $radio_list),
-				$get_field->query("xpath:.//input[@checked]/../label")->one()->getText()
+					$get_field->query("xpath:.//input[@checked]/../label")->one()->getText()
 			);
 		}
 
@@ -116,7 +116,7 @@ class testFormNetworkDiscovery extends CWebTest {
 		$checks_form = $checks_dialog->asForm();
 		$this->assertEquals(['Check type', 'Port range'], $checks_form->getLabels(CElementFilter::VISIBLE)->asText());
 		$this->assertEquals(['Add', 'Cancel'],
-			$checks_dialog->getFooter()->query('button')->all()->filter(CElementFilter::CLICKABLE)->asText()
+				$checks_dialog->getFooter()->query('button')->all()->filter(CElementFilter::CLICKABLE)->asText()
 		);
 
 		$check_types = [
@@ -144,7 +144,7 @@ class testFormNetworkDiscovery extends CWebTest {
 
 			if ($type === 'ICMP ping') {
 				$this->assertEquals(['Check type'],
-					array_values($checks_form->getLabels(CElementFilter::VISIBLE)->asText())
+						array_values($checks_form->getLabels(CElementFilter::VISIBLE)->asText())
 				);
 			}
 			else {
@@ -154,7 +154,7 @@ class testFormNetworkDiscovery extends CWebTest {
 				switch ($type) {
 					case 'Zabbix agent':
 						$this->assertEqualsCanonicalizing(['Check type', 'Port range', 'Key'],
-							$checks_form->getLabels(CElementFilter::VISIBLE)->asText()
+								$checks_form->getLabels(CElementFilter::VISIBLE)->asText()
 						);
 						$this->assertEquals(['Port range', 'Key'], $checks_form->getRequiredLabels());
 						$checks_form->checkValue(['Key' => '']);
@@ -164,7 +164,7 @@ class testFormNetworkDiscovery extends CWebTest {
 					case 'SNMPv1 agent':
 					case 'SNMPv2 agent':
 						$this->assertEqualsCanonicalizing(['Check type', 'Port range', 'SNMP community', 'SNMP OID'],
-							$checks_form->getLabels(CElementFilter::VISIBLE)->asText()
+								$checks_form->getLabels(CElementFilter::VISIBLE)->asText()
 						);
 						$this->assertEquals(['Port range', 'SNMP community', 'SNMP OID'], $checks_form->getRequiredLabels());
 						$checks_form->checkValue(['SNMP community' => '', 'SNMP OID' => '']);
@@ -215,13 +215,13 @@ class testFormNetworkDiscovery extends CWebTest {
 							$checks_form->checkValue($values['values']);
 							$this->assertEquals($values['required'], $checks_form->getRequiredLabels());
 							$this->assertEquals(array_keys($fields),
-								$checks_form->getField('Security level')->asDropdown()->getOptions()->asText()
+									$checks_form->getField('Security level')->asDropdown()->getOptions()->asText()
 							);
 
 							foreach (['Authentication protocol', 'Privacy protocol'] as $dropdowns) {
 								if (array_key_exists($dropdowns, $values)) {
 									$this->assertEquals($values[$dropdowns], $checks_form->getField($dropdowns)->asDropdown()
-										->getOptions()->asText()
+											->getOptions()->asText()
 									);
 								}
 							}
@@ -804,7 +804,7 @@ class testFormNetworkDiscovery extends CWebTest {
 				[
 					'fields' => [
 						'Name' => 'All fields',
-						'Discovery by proxy' => 'Active proxy 1',
+						'Discovery by proxy' => 'Proxy for Actions',
 						'IP range' => '192.168.251.253-254',
 						'Update interval' => 604800,
 						'Enabled' => false
@@ -835,34 +835,34 @@ class testFormNetworkDiscovery extends CWebTest {
 				]
 			],
 			// #40.
-			// Uncomment after ZBX-22640 is merged.
-			//			[
-			//				[
-			//					'fields' => [
-			//						'Name' => 'All checks SNMPv3'
-			//					],
-			//					'Checks' => [
-			//						[
-			//							'Check type' => 'SNMPv3 agent',
-			//							'SNMP OID' => 1,
-			//							'Security level' => 'authNoPriv',
-			//							'Authentication protocol' => 'MD5'
-			//						],
-			//						[
-			//							'Check type' => 'SNMPv3 agent',
-			//							'SNMP OID' => 1,
-			//							'Security level' => 'authNoPriv',
-			//							'Authentication protocol' => 'SHA1'
-			//						],
-			//						[
-			//							'Check type' => 'SNMPv3 agent',
-			//							'SNMP OID' => 1,
-			//							'Security level' => 'authNoPriv',
-			//							'Authentication protocol' => 'SHA512'
-			//						]
-			//					]
-			//				]
-			//			],
+// Uncomment after ZBX-22640 is merged.
+//			[
+//				[
+//					'fields' => [
+//						'Name' => 'All checks SNMPv3'
+//					],
+//					'Checks' => [
+//						[
+//							'Check type' => 'SNMPv3 agent',
+//							'SNMP OID' => 1,
+//							'Security level' => 'authNoPriv',
+//							'Authentication protocol' => 'MD5'
+//						],
+//						[
+//							'Check type' => 'SNMPv3 agent',
+//							'SNMP OID' => 1,
+//							'Security level' => 'authNoPriv',
+//							'Authentication protocol' => 'SHA1'
+//						],
+//						[
+//							'Check type' => 'SNMPv3 agent',
+//							'SNMP OID' => 1,
+//							'Security level' => 'authNoPriv',
+//							'Authentication protocol' => 'SHA512'
+//						]
+//					]
+//				]
+//			],
 			// #41.
 			[
 				[
@@ -1198,8 +1198,8 @@ class testFormNetworkDiscovery extends CWebTest {
 					foreach ($radio_labels as $label) {
 						$field = $form->getField($label);
 						$this->assertEquals(in_array($check['Check type'],
-							['Zabbix agent', 'SNMPv1 agent', 'SNMPv2 agent', 'SNMPv3 agent']),
-							$field->query('xpath:.//input[@type="radio"]/../label[text()='.
+								['Zabbix agent', 'SNMPv1 agent', 'SNMPv2 agent', 'SNMPv3 agent']),
+								$field->query('xpath:.//input[@type="radio"]/../label[text()='.
 								CXPathHelper::escapeQuotes($type_text).']')->exists()
 						);
 					}
@@ -1224,9 +1224,7 @@ class testFormNetworkDiscovery extends CWebTest {
 		$form->submit();
 
 		if (CTestArrayHelper::get($data, 'expected', TEST_GOOD) === TEST_BAD) {
-			$this->assertMessage(TEST_BAD, 'Cannot'.($update ? ' update': ' create').' discovery rule',
-				$data['error_details']
-			);
+			$this->assertMessage(TEST_BAD, 'Cannot'.($update ? ' update': ' create').' discovery rule', $data['error_details']);
 			$this->assertEquals($old_hash, $this->getHash());
 		}
 		else {
@@ -1244,7 +1242,7 @@ class testFormNetworkDiscovery extends CWebTest {
 
 			// Check saved fields in form.
 			$this->query('class:list-table')->asTable()->waitUntilVisible()->one()->findRow('Name',
-				$data['fields']['Name'])->query('tag:a')->waitUntilClickable()->one()->click();
+					$data['fields']['Name'])->query('tag:a')->waitUntilClickable()->one()->click();
 			$form->invalidate();
 			$form->checkValue($data['fields']);
 
@@ -1252,7 +1250,7 @@ class testFormNetworkDiscovery extends CWebTest {
 			if (array_key_exists('radios', $data)) {
 				foreach ($data['radios'] as $label => $value) {
 					$this->assertEquals($value, $form->getField($label)->query('class:list-check-radio')->one()
-						->asSegmentedRadio()->getValue()
+							->asSegmentedRadio()->getValue()
 					);
 				}
 			}
@@ -1288,7 +1286,7 @@ class testFormNetworkDiscovery extends CWebTest {
 
 			// Check that Discovery rule saved in DB.
 			$this->assertEquals(1, CDBHelper::getCount('SELECT * FROM drules WHERE name='.
-				zbx_dbstr($data['fields']['Name'])
+					zbx_dbstr($data['fields']['Name'])
 			));
 
 			if ($update) {
@@ -1361,27 +1359,27 @@ class testFormNetworkDiscovery extends CWebTest {
 							'SNMPv3 agent (9999) "new test SNMP OID _2"' => false
 						]
 					]
-					// TODO: Change expected_radios to commented lines when ZBX-23088 is fixed.
-					//					'expected_radios' => [
-					//						'Device uniqueness criteria' => [
-					//							'IP address' => false,
-					//							'SNMPv1 agent (200) "new test SNMP OID"' => false,
-					//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => true
-					//						],
-					//						'Host name' => [
-					//							'DNS name' => false,
-					//							'IP address' => false,
-					//							'SNMPv1 agent (200) "new test SNMP OID"' => false,
-					//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => true
-					//						],
-					//						'Visible name' => [
-					//							'Host name' => false,
-					//							'DNS name' => false,
-					//							'IP address' => false,
-					//							'SNMPv1 agent (200) "new test SNMP OID"' => true,
-					//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => false
-					//						]
-					//					]
+// TODO: Change expected_radios to commented lines when ZBX-23088 is fixed.
+//					'expected_radios' => [
+//						'Device uniqueness criteria' => [
+//							'IP address' => false,
+//							'SNMPv1 agent (200) "new test SNMP OID"' => false,
+//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => true
+//						],
+//						'Host name' => [
+//							'DNS name' => false,
+//							'IP address' => false,
+//							'SNMPv1 agent (200) "new test SNMP OID"' => false,
+//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => true
+//						],
+//						'Visible name' => [
+//							'Host name' => false,
+//							'DNS name' => false,
+//							'IP address' => false,
+//							'SNMPv1 agent (200) "new test SNMP OID"' => true,
+//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => false
+//						]
+//					]
 				]
 			],
 			// #1 Change SNMP to other type of checks.
@@ -1419,28 +1417,28 @@ class testFormNetworkDiscovery extends CWebTest {
 							'IP address' => false
 						]
 					]
-					// TODO: Change expected_radios to commented lines when ZBX-23088 is fixed (probably not needed).
-					//					'expected_radios' => [
-					//						'Device uniqueness criteria' => [
-					//							'IP address' => false,
-					//							'SNMPv1 agent (200) "new test SNMP OID"' => false,
-					//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => true
-					//						],
-					//						'Host name' => [
-					//							'DNS name' => false,
-					//							'IP address' => false,
-					//							'SNMPv1 agent (200) "new test SNMP OID"' => false,
-					//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => true
-					//						],
-					//						'Visible name' => [
-					//							'Host name' => false,
-					//							'DNS name' => false,
-					//							'IP address' => false,
-					//							'SNMPv1 agent (200) "new test SNMP OID"' => true,
-					//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => false
-					//						]
-					//					]
-					//					'error_details' => 'Only Zabbix agent, SNMPv1, SNMPv2 and SNMPv3 checks can be made unique.'
+// TODO: Change expected_radios to commented lines when ZBX-23088 is fixed (probably not needed).
+//					'expected_radios' => [
+//						'Device uniqueness criteria' => [
+//							'IP address' => false,
+//							'SNMPv1 agent (200) "new test SNMP OID"' => false,
+//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => true
+//						],
+//						'Host name' => [
+//							'DNS name' => false,
+//							'IP address' => false,
+//							'SNMPv1 agent (200) "new test SNMP OID"' => false,
+//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => true
+//						],
+//						'Visible name' => [
+//							'Host name' => false,
+//							'DNS name' => false,
+//							'IP address' => false,
+//							'SNMPv1 agent (200) "new test SNMP OID"' => true,
+//							'SNMPv3 agent (9999) "new test SNMP OID _2"' => false
+//						]
+//					]
+//					'error_details' => 'Only Zabbix agent, SNMPv1, SNMPv2 and SNMPv3 checks can be made unique.'
 				]
 			],
 			// #2 Delete two checks, one left.
@@ -1473,23 +1471,23 @@ class testFormNetworkDiscovery extends CWebTest {
 							'IP address' => false
 						]
 					]
-					// TODO: Change expected_radios to commented lines when ZBX-23088 is fixed (probably not needed).
-					//					'expected_radios' => [
-					//						'Device uniqueness criteria' => [
-					//							'SNMPv1 agent (200) "new test SNMP OID"' => false
-					//						],
-					//						'Host name' => [
-					//							'DNS name' => false,
-					//							'IP address' => false,
-					//							'SNMPv1 agent (200) "new test SNMP OID"' => true
-					//						],
-					//						'Visible name' => [
-					//							'Host name' => true,
-					//							'DNS name' => false,
-					//							'IP address' => false,
-					//							'SNMPv1 agent (200) "new test SNMP OID"' => false
-					//						]
-					//					]
+// TODO: Change expected_radios to commented lines when ZBX-23088 is fixed (probably not needed).
+//					'expected_radios' => [
+//						'Device uniqueness criteria' => [
+//							'SNMPv1 agent (200) "new test SNMP OID"' => false
+//						],
+//						'Host name' => [
+//							'DNS name' => false,
+//							'IP address' => false,
+//							'SNMPv1 agent (200) "new test SNMP OID"' => true
+//						],
+//						'Visible name' => [
+//							'Host name' => true,
+//							'DNS name' => false,
+//							'IP address' => false,
+//							'SNMPv1 agent (200) "new test SNMP OID"' => false
+//						]
+//					]
 				]
 			],
 			// #3 Add one additional check.
@@ -1750,7 +1748,7 @@ class testFormNetworkDiscovery extends CWebTest {
 		// Compare form's radios.
 		foreach ($data['radios'] as $label => $value) {
 			$this->assertEquals($value, $form->getField($label)->query('class:list-check-radio')->one()
-				->asSegmentedRadio()->getValue()
+					->asSegmentedRadio()->getValue()
 			);
 		}
 
@@ -1814,71 +1812,71 @@ class testFormNetworkDiscovery extends CWebTest {
 	 * Function for testing Discovery rule's checks validation when similar, but not the same
 	 * checks are removed and added again, but in opposite order. Issue was first discovered in ZBX-22640.
 	 */
-	// Uncomment after ZBX-22640 is merged.
-	//	public function testFormNetworkDiscovery_DuplicateChecksValidation() {
-	//		$discovery_name = 'Double checks validation';
+// Uncomment after ZBX-22640 is merged.
+//	public function testFormNetworkDiscovery_DuplicateChecksValidation() {
+//		$discovery_name = 'Double checks validation';
 
-	//		$this->page->login()->open('zabbix.php?action=discovery.list');
-	//		$this->query('button:Create discovery rule')->waitUntilClickable()->one()->click();
-	//		$form = $this->query('id:discoveryForm')->waitUntilPresent()->one()->asForm();
-	//		$form->fill(['Name' => $discovery_name]);
+//		$this->page->login()->open('zabbix.php?action=discovery.list');
+//		$this->query('button:Create discovery rule')->waitUntilClickable()->one()->click();
+//		$form = $this->query('id:discoveryForm')->waitUntilPresent()->one()->asForm();
+//		$form->fill(['Name' => $discovery_name]);
 
-	//		// Add SNMPv3 checks.
-	//		$this->changeDiscoveryChecks(
-	//			[
-	//				[
-	//					'action' => USER_ACTION_ADD,
-	//					'Check type' => 'SNMPv3 agent',
-	//					'SNMP OID' => 1
-	//				],
-	//				[
-	//					'action' => USER_ACTION_ADD,
-	//					'Check type' => 'SNMPv3 agent',
-	//					'SNMP OID' => 1,
-	//					'Context name' => 1
-	//				]
-	//			], $form
-	//		);
+//		// Add SNMPv3 checks.
+//		$this->changeDiscoveryChecks(
+//			[
+//				[
+//					'action' => USER_ACTION_ADD,
+//					'Check type' => 'SNMPv3 agent',
+//					'SNMP OID' => 1
+//				],
+//				[
+//					'action' => USER_ACTION_ADD,
+//					'Check type' => 'SNMPv3 agent',
+//					'SNMP OID' => 1,
+//					'Context name' => 1
+//				]
+//			], $form
+//		);
 
-	//		// Remove just added checks.
-	//		$this->changeDiscoveryChecks(
-	//			[
-	//				[
-	//					'action' => USER_ACTION_REMOVE,
-	//					'index' => 1
-	//				],
-	//				[
-	//					'action' => USER_ACTION_REMOVE,
-	//					'index' => 0
-	//				]
-	//			], $form
-	//		);
+//		// Remove just added checks.
+//		$this->changeDiscoveryChecks(
+//			[
+//				[
+//					'action' => USER_ACTION_REMOVE,
+//					'index' => 1
+//				],
+//				[
+//					'action' => USER_ACTION_REMOVE,
+//					'index' => 0
+//				]
+//			], $form
+//		);
 
-	//		// Add SNMP checks again in the opposite order.
-	//		$this->changeDiscoveryChecks(
-	//			[
-	//				[
-	//					'action' => USER_ACTION_ADD,
-	//					'Check type' => 'SNMPv3 agent',
-	//					'SNMP OID' => 1,
-	//					'Context name' => 1
-	//				],
-	//				[
-	//					'action' => USER_ACTION_ADD,
-	//					'Check type' => 'SNMPv3 agent',
-	//					'SNMP OID' => 1
-	//				]
-	//			], $form
-	//		);
+//		// Add SNMP checks again in the opposite order.
+//		$this->changeDiscoveryChecks(
+//			[
+//				[
+//					'action' => USER_ACTION_ADD,
+//					'Check type' => 'SNMPv3 agent',
+//					'SNMP OID' => 1,
+//					'Context name' => 1
+//				],
+//				[
+//					'action' => USER_ACTION_ADD,
+//					'Check type' => 'SNMPv3 agent',
+//					'SNMP OID' => 1
+//				]
+//			], $form
+//		);
 
-	//		$form->submit();
-	//		$this->assertMessage(TEST_GOOD, 'Discovery rule created');
-	//		$this->assertEquals(1, CDBHelper::getCount('SELECT * FROM drules WHERE name='.zbx_dbstr($discovery_name)));
-	//		$this->query('link', $discovery_name)->waitUntilClickable()->one()->click();
-	//		COverlayDialogElement::find()->one()->waitUntilReady();
-	//		$form->invalidate();
-	//		$this->assertTableDataColumn(['SNMPv3 agent "1"', 'SNMPv3 agent "1"'], 'Type', 'id:dcheckList');
-	//	}
+//		$form->submit();
+//		$this->assertMessage(TEST_GOOD, 'Discovery rule created');
+//		$this->assertEquals(1, CDBHelper::getCount('SELECT * FROM drules WHERE name='.zbx_dbstr($discovery_name)));
+//		$this->query('link', $discovery_name)->waitUntilClickable()->one()->click();
+//		COverlayDialogElement::find()->one()->waitUntilReady();
+//		$form->invalidate();
+//		$this->assertTableDataColumn(['SNMPv3 agent "1"', 'SNMPv3 agent "1"'], 'Type', 'id:dcheckList');
+//	}
 
 	public static function getNoChangesData() {
 		return [
@@ -1934,13 +1932,13 @@ class testFormNetworkDiscovery extends CWebTest {
 				// Fill form's fields.
 				$form->fill([
 					'Name' => $new_name,
-					'Discovery by proxy' => 'Passive proxy 1',
+					'Discovery by proxy' => 'Proxy for Actions',
 					'Update interval' => '15s',
 					'Enabled' => false
 				]);
 
 				$form->getFieldContainer('Checks')->query('button', $data['action'] === 'Add' ? 'Add' : 'Edit')
-					->waitUntilClickable()->one()->click();
+						->waitUntilClickable()->one()->click();
 				$checks_dialog = COverlayDialogElement::find()->all()->last()->waitUntilReady();
 				$checks_form = $checks_dialog->asForm();
 				$checks_form->fill([
@@ -1968,7 +1966,7 @@ class testFormNetworkDiscovery extends CWebTest {
 			}
 
 			$form->query('button', ($data['action'] === 'Simple update') ? 'Update' : 'Cancel')
-				->waitUntilClickable()->one()->click();
+					->waitUntilClickable()->one()->click();
 		}
 
 		$this->page->assertHeader('Discovery rules');
