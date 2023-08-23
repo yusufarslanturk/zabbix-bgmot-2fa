@@ -115,7 +115,7 @@ class Proxies {
 			];
 		}
 
-		$enabled_hosts = CDataHelper::call('host.create', $enabled_hosts_data);
+		CDataHelper::call('host.create', $enabled_hosts_data);
 		$enabled_hostids = CDataHelper::getIds('host');
 
 		// Create hosts for filtering scenario.
@@ -134,7 +134,7 @@ class Proxies {
 				'status' => 1
 			];
 		}
-		$disabled_hosts = CDataHelper::call('host.create', $disabled_hosts_data);
+		CDataHelper::call('host.create', $disabled_hosts_data);
 		$disabled_hostids = CDataHelper::getIds('host');
 
 		// Create active proxies.
@@ -146,7 +146,7 @@ class Proxies {
 			];
 		}
 
-		$active_proxies = CDataHelper::call('proxy.create', $active_proxy_data);
+		CDataHelper::call('proxy.create', $active_proxy_data);
 		$active_proxyids = CDataHelper::getIds('host');
 
 		// Create passive proxies.
@@ -164,7 +164,7 @@ class Proxies {
 			];
 		}
 
-		$passive_proxies = CDataHelper::call('proxy.create', $passive_proxy_data);
+		CDataHelper::call('proxy.create', $passive_proxy_data);
 		$passive_proxyids = CDataHelper::getIds('host');
 
 		// Add hosts to proxies.
@@ -242,6 +242,20 @@ class Proxies {
 				'hosts' => [
 					['hostid' => $filter_hostids['Host_2 with proxy']]
 				]
+			]
+		]);
+
+		$proxies = CDataHelper::call('proxy.create',
+			[['host' => 'Delete Proxy used in Network discovery rule', 'status' => 5]]
+		);
+		$delete_proxy = $proxies['proxyids'][0];
+
+		CDataHelper::call('drule.create', [
+			[
+				'name' => 'Discovery rule for proxy delete test',
+				'iprange' => '192.168.1.1-255',
+				'proxy_hostid' => $delete_proxy,
+				'dchecks' => [['type' => SVC_IMAP, 'ports' => 10050]]
 			]
 		]);
 
