@@ -62,6 +62,27 @@ class testPermissionsWithoutCSRF extends CWebTest {
 			'url' => 'http://test.url'
 		]);
 		$this->assertArrayHasKey('connectorids', $connectors);
+
+		// Create event correlation.
+		CDataHelper::call('correlation.create', [
+			[
+				'name' => 'Event correlation for element remove',
+				'filter' => [
+					'evaltype' => 0,
+					'conditions' => [
+						[
+							'type' => ZBX_CORR_CONDITION_OLD_EVENT_TAG,
+							'tag' => 'element remove'
+						]
+					]
+				],
+				'operations' => [
+					[
+						'type' => ZBX_CORR_OPERATION_CLOSE_OLD
+					]
+				]
+			]
+		]);
 	}
 
 	public static function getElementRemoveData() {
@@ -264,7 +285,13 @@ class testPermissionsWithoutCSRF extends CWebTest {
 			[
 				[
 					'db' => 'SELECT * FROM correlation',
-					'link' => 'zabbix.php?correlationid=99002&action=correlation.edit',
+					'link' => 'zabbix.php?action=correlation.list',
+					'actions' => [
+						[
+							'callback' => 'openFormWithLink',
+							'element' => 'link:Event correlation for element remove'
+						]
+					],
 					'return_button' => true
 				]
 			],
@@ -632,6 +659,12 @@ class testPermissionsWithoutCSRF extends CWebTest {
 		$old_hash = CDBHelper::getHash($data['db']);
 		$this->page->login()->open($data['link'])->waitUntilReady();
 
+		if (array_key_exists('actions', $data)) {
+			foreach ($data['actions'] as $action) {
+				call_user_func_array([$this, $action['callback']], [CTestArrayHelper::get($action, 'element', null)]);
+			}
+		}
+
 		// If form opens in the overlay dialog - open that dialog.
 		if (array_key_exists('overlay', $data)) {
 			$selectors = [
@@ -672,6 +705,15 @@ class testPermissionsWithoutCSRF extends CWebTest {
 		if (CTestArrayHelper::get($data, 'overlay')) {
 			$element->close();
 		}
+	}
+
+	/**
+	 * Find and click on the element that leads to the form.
+	 *
+	 * @param string  $locator		locator of the element that needs to be clicked to open form
+	 */
+	private function openFormWithLink($locator) {
+		$this->query($locator)->waitUntilPresent()->one()->click();
 	}
 
 	public static function getCheckTokenData() {
