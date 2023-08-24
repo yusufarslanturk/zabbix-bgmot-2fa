@@ -37,8 +37,7 @@ $discoveryForm = (new CForm())
 	->addItem((new CVar(CCsrfTokenHelper::CSRF_TOKEN_NAME, $csrf_token))->removeId())
 	->setId('discoveryForm')
 	->setName('discoveryForm')
-	->setAttribute('aria-labelledby', CHtmlPage::PAGE_TITLE_ID)
-	->addItem((new CSubmitButton(null))->addClass(ZBX_STYLE_FORM_SUBMIT_HIDDEN));
+	->setAttribute('aria-labelledby', CHtmlPage::PAGE_TITLE_ID);
 
 if (!empty($this->data['druleid'])) {
 	$discoveryForm->addVar('druleid', $this->data['druleid']);
