@@ -1,1 +1,1 @@
-..F....... [ZBX-22601] added error messages to handle invalid inputs for the filter timeselector period (esekace)
+..F....... [ZBX-22601] fixed invalid time period filter submission (esekace)
