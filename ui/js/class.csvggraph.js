@@ -817,6 +817,8 @@
 	}
 
 	jQuery.fn.svggraph = function(method) {
+		console.log('svggraph:', method);
+
 		if (methods[method]) {
 			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
 		}
