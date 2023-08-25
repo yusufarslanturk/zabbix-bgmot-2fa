@@ -98,7 +98,7 @@ This template has been tested on:
     
       1. Using `LDCONFIG` utility **(recommended option)**:
   
-          To update runtime link path, it is recommended to use ```LDCONFIG``` utility, for example:
+          To update the runtime link path, it is recommended to use the ```LDCONFIG``` utility, for example:
     
           ```
           # sh -c "echo /opt/oracle/instantclient_19_18 > /etc/ld.so.conf.d/oracle-instantclient.conf"
@@ -107,7 +107,7 @@ This template has been tested on:
   
       2. Using application configuration file:
   
-          An alternative solution is to export required variables by editing or adding a new application configuration file:
+          An alternative solution is to export the required variables by editing or adding a new application configuration file:
     
            * ```/etc/sysconfig/zabbix-server # for server```
     
@@ -123,7 +123,7 @@ This template has been tested on:
     
     Keep in mind that the library paths will vary depending on your installation.
 
-    This is a minimal configuration example. Depending on Oracle Instant Client version, required functionality and host operating system, a different set of additional packages might need to be installed.
+    This is a minimal configuration example. Depending on the Oracle Instant Client version, required functionality and host operating system, a different set of additional packages might need to be installed.
     For more detailed configuration instructions, see the [official Oracle Instant Client installation instructions for Linux](https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html).
 
 4. Restart Zabbix server or Zabbix proxy.
@@ -132,7 +132,7 @@ This template has been tested on:
 
 6. Set the {$ORACLE.DRIVER} and {$ORACLE.SERVICE} in the host macros.
   
-    * ```{$ORACLE.DRIVER}``` is a path to the driver location in OS. ODBC driver file should be found in __Instant Client__ directory and named ```libsqora.so.XX.Y```.
+    * ```{$ORACLE.DRIVER}``` is a path to the driver location in OS. The ODBC driver file should be found in __Instant Client__ directory and named ```libsqora.so.XX.Y```.
     
     * ```{$ORACLE.SERVICE}``` is a service name to which the host will connect to. The value in this macro is important as it determines if the connection is established to a non-CDB, CDB or PDB. If you wish to monitor tablespaces of all PDBs, you will need to set a service name that points to the CDB.
       Active service names can be seen from the instance running Oracle Database with ```lsnrctl status```.
