@@ -76,6 +76,13 @@ class ExecuteNowAction {
 						'type' => ITEM_TYPE_ZABBIX,
 						'value_type' => ITEM_VALUE_TYPE_TEXT,
 						'delay' => '1h'
+					],
+					[
+						'name' => 'I6-agent-char',
+						'key_' => 'I6-agent-char',
+						'type' => ITEM_TYPE_ZABBIX,
+						'value_type' => ITEM_VALUE_TYPE_STR,
+						'delay' => '1m'
 					]
 				]
 			]
