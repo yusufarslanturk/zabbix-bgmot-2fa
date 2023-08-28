@@ -375,6 +375,9 @@ static void	lld_items_get(const zbx_vector_ptr_t *item_prototypes, zbx_vector_pt
 		zbx_vector_ptr_append(&map_item_info, item_info);
 	}
 
+	if (0 == map_item_info.values_num)
+		goto out;
+
 	zbx_vector_ptr_sort(&map_item_info, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC);
 
 	sql_offset = 0;
