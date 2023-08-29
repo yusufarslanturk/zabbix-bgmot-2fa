@@ -57,10 +57,7 @@ static int	DBpatch_6040003(void)
 
 static int	DBpatch_6040004(void)
 {
-	if (FAIL == zbx_db_index_exists("event_suppress", "event_suppress_4"))
-		return DBcreate_index("event_suppress", "event_suppress_4", "userid", 0);
-
-	return SUCCEED;
+	return DBcreate_index("event_suppress", "event_suppress_4", "userid", 0);
 }
 
 static int	DBpatch_6040005(void)
