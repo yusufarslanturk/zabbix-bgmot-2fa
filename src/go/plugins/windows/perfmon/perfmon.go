@@ -24,6 +24,7 @@ package perfmon
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"sync"
 	"time"
@@ -102,8 +103,10 @@ func (p *Plugin) Collect() (err error) {
 		return
 	}
 
-	p.collectError = win32.PdhCollectQueryData(p.query)
-
+	p.collectError = nil
+	if collectError := win32.PdhCollectQueryData(p.query); nil != collectError {
+		p.collectError = fmt.Errorf("cannot collect value %s", collectError)
+	}
 	expireTime := time.Now().Add(-maxInactivityPeriod)
 	for index, c := range p.counters {
 		if c.lastAccess.Before(expireTime) || nil != p.collectError {
@@ -113,9 +116,21 @@ func (p *Plugin) Collect() (err error) {
 			delete(p.counters, index)
 			continue
 		}
-		c.history[c.tail], c.err = win32.PdhGetFormattedCounterValueDouble(c.handle)
+		var errFormat error
+		c.err = nil
+		if c.history[c.tail], errFormat = win32.PdhGetFormattedCounterValueDouble(c.handle); nil != errFormat {
+			c.err = fmt.Errorf("cannot format value %s", errFormat)
+		}
 		if c.tail = c.tail.inc(c.interval); c.tail == c.head {
 			c.head = c.head.inc(c.interval)
+		}
+	}
+
+	if nil != p.collectError {
+		errClose := win32.PdhCloseQuery(p.query)
+		p.query = 0
+		if nil != errClose {
+			p.Debugf("error while closing query '%s'", errClose)
 		}
 	}
 
@@ -129,13 +144,19 @@ func (p *Plugin) Period() int {
 // addCounter adds new performance counter to query. The plugin mutex must be locked.
 func (p *Plugin) addCounter(index perfCounterIndex, interval int64) (err error) {
 	var handle win32.PDH_HCOUNTER
+	var errAdd error
 	if index.lang == langEnglish {
-		handle, err = win32.PdhAddEnglishCounter(p.query, index.path, 0)
+		if handle, errAdd = win32.PdhAddEnglishCounter(p.query, index.path, 0); errAdd != nil {
+			err = fmt.Errorf("cannot add english counter %s", errAdd)
+		}
 	} else {
-		handle, err = win32.PdhAddCounter(p.query, index.path, 0)
+		if handle, errAdd = win32.PdhAddCounter(p.query, index.path, 0); errAdd != nil {
+			err = fmt.Errorf("cannot add counter %s", errAdd)
+		}
 	}
 	if err != nil {
-		return
+		p.collectError = err
+		return err
 	}
 	// extend the interval buffer by 1 to reserve space so tail/head doesn't overlap
 	// when the buffer is full
@@ -239,7 +260,9 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		defer p.mutex.Unlock()
 
 		if p.query == 0 {
-			if p.query, err = win32.PdhOpenQuery(nil, 0); err != nil {
+			var errOpen error
+			if p.query, errOpen = win32.PdhOpenQuery(nil, 0); errOpen != nil {
+				err = fmt.Errorf("cannot open query %s", errOpen)
 				return
 			}
 		}
