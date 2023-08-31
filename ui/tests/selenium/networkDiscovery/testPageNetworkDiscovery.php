@@ -481,18 +481,19 @@ class testPageNetworkDiscovery extends CWebTest {
 
 			$this->assertMessage(TEST_GOOD, 'Discovery rule '.($data['default'] ? 'enabled' : 'disabled'));
 			$this->assertEquals($data['default'] ? 'Enabled' : 'Disabled',
-				$row->getColumnData('Status', $data['default'] ? DRULE_STATUS_ACTIVE : DRULE_STATUS_DISABLED)
+					$row->getColumnData('Status', $data['default'] ? DRULE_STATUS_ACTIVE : DRULE_STATUS_DISABLED)
 			);
 		}
 		else {
 			$this->selectTableRows($data['name']);
 			$this->assertSelectedCount(CTestArrayHelper::get($data, 'single', false) ? 1 : count($data['name']));
 			$this->query('button:'.$data['action'])->one()->waitUntilClickable()->click();
-			$this->assertEquals($data['action'].' selected discovery '.
-				//TODO Change "rules" to "rule" if "single" true.
-					(CTestArrayHelper::get($data, 'single', false) ? 'rules' : 'rules').'?',
-					$this->page->getAlertText()
-			);
+			$this->assertEquals($data['action'].' selected discovery rules?',  $this->page->getAlertText());
+			// TODO Change assert to the following after ZBX-23347 is fixed.
+			//   $this->assertEquals($data['action'].' selected discovery '.
+			//          (CTestArrayHelper::get($data, 'single', false) ? 'rule' : 'rules').'?',
+			//          $this->page->getAlertText()
+			//    );
 
 			if (array_key_exists('cancel', $data)) {
 				$this->page->dismissAlert();
