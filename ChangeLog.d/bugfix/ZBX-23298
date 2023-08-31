@@ -1,1 +1,1 @@
-.......PS. [ZBX-23217] fixed walk[oid] sometimes not being collected when combined requests are enabled (vso)
+.......PS. [ZBX-23298] fixed walk[oid] sometimes not being collected when combined requests are enabled; fixed walk[oid] discovery rule not working as test item (vso)
