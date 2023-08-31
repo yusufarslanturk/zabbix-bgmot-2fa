@@ -55,7 +55,6 @@ int	sync_in_progress = 0;
 #define ZBX_SNMP_OID_TYPE_NORMAL	0
 #define ZBX_SNMP_OID_TYPE_DYNAMIC	1
 #define ZBX_SNMP_OID_TYPE_MACRO		2
-#define ZBX_SNMP_OID_TYPE_WALK		3
 
 /* trigger is functional unless its expression contains disabled or not monitored items */
 #define TRIGGER_FUNCTIONAL_TRUE		0
@@ -350,8 +349,10 @@ static zbx_uint64_t	get_item_nextcheck_seed(zbx_uint64_t itemid, zbx_uint64_t in
 
 		if (NULL != (snmpitem = (ZBX_DC_SNMPITEM *)zbx_hashset_search(&config->snmpitems, &itemid)))
 		{
-			if (ZBX_SNMP_OID_TYPE_WALK == snmpitem->snmp_oid_type)
+			if (0 == strncmp(snmpitem->snmp_oid, "walk[", 5))
+			{
 				return itemid;
+			}
 		}
 
 		if (NULL == (snmp = (ZBX_DC_SNMPINTERFACE *)zbx_hashset_search(&config->interfaces_snmp, &interfaceid))
@@ -2718,9 +2719,7 @@ static void	DCsync_items(zbx_dbsync_t *sync, zbx_uint64_t revision, int flags, z
 
 			if (SUCCEED == dc_strpool_replace(found, &snmpitem->snmp_oid, row[6]))
 			{
-				if (0 == strncmp(snmpitem->snmp_oid, "walk[", 5))
-					snmpitem->snmp_oid_type = ZBX_SNMP_OID_TYPE_WALK;
-				else if (NULL != strchr(snmpitem->snmp_oid, '{'))
+				if (NULL != strchr(snmpitem->snmp_oid, '{'))
 					snmpitem->snmp_oid_type = ZBX_SNMP_OID_TYPE_MACRO;
 				else if (NULL != strchr(snmpitem->snmp_oid, '['))
 					snmpitem->snmp_oid_type = ZBX_SNMP_OID_TYPE_DYNAMIC;
