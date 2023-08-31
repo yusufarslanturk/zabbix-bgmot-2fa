@@ -489,7 +489,8 @@ class testPageNetworkDiscovery extends CWebTest {
 			$this->assertSelectedCount(CTestArrayHelper::get($data, 'single', false) ? 1 : count($data['name']));
 			$this->query('button:'.$data['action'])->one()->waitUntilClickable()->click();
 			$this->assertEquals($data['action'].' selected discovery '.
-					(CTestArrayHelper::get($data, 'single', false) ? 'rule' : 'rules').'?',
+				//TODO Change "rules" to "rule" if "single" true.
+					(CTestArrayHelper::get($data, 'single', false) ? 'rules' : 'rules').'?',
 					$this->page->getAlertText()
 			);
 

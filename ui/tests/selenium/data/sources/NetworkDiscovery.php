@@ -31,12 +31,12 @@ class NetworkDiscovery {
 		$proxies = CDataHelper::call('proxy.create',
 			[
 				[
-					'name' => 'Proxy for Network discovery',
-					'operating_mode' => 0
+					'host' => 'Proxy for Network discovery',
+					'status' => 5
 				],
 				[
-					'name' => 'Proxy for Network discovery cloning',
-					'operating_mode' => 0
+					'host' => 'Proxy for Network discovery cloning',
+					'status' => 5
 				]
 			]
 		);
