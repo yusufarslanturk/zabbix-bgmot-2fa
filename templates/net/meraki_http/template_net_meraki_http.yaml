@@ -744,6 +744,8 @@ zabbix_export:
           headers:
             - name: X-Cisco-Meraki-API-Key
               value: '{$MERAKI.TOKEN}'
+            - name: User-Agent
+              value: 'ZabbixServer/1.0 Zabbix'
           tags:
             - tag: component
               value: raw
@@ -766,6 +768,8 @@ zabbix_export:
           headers:
             - name: X-Cisco-Meraki-API-Key
               value: '{$MERAKI.TOKEN}'
+            - name: User-Agent
+              value: 'ZabbixServer/1.0 Zabbix'
           tags:
             - tag: component
               value: log
@@ -792,6 +796,8 @@ zabbix_export:
           headers:
             - name: X-Cisco-Meraki-API-Key
               value: '{$MERAKI.TOKEN}'
+            - name: User-Agent
+              value: 'ZabbixServer/1.0 Zabbix'
           tags:
             - tag: component
               value: raw
