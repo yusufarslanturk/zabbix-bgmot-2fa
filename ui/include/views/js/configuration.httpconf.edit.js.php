@@ -57,6 +57,7 @@
 				->addClass('element-table-remove')
 			))->addClass(ZBX_STYLE_NOWRAP)
 		]))
+			->addClass('form_row')
 			->addClass('sortable')
 			->toString()
 	?>
@@ -82,6 +83,7 @@
 					->addClass('element-table-remove')
 			))->addClass(ZBX_STYLE_NOWRAP)
 		]))
+			->addClass('form_row')
 			->addClass('sortable')
 			->toString()
 	?>
@@ -595,10 +597,6 @@
 
 			$table.on('dynamic_rows.beforeadd', function(e, dynamic_rows) {
 
-				if (type === 'variables') {
-					e.new_node.querySelector('.' + httpconf.ZBX_STYLE_DRAG_ICON).remove();
-				}
-
 				if (type === 'variables' || type === 'headers') {
 					e.new_node.querySelector('[data-type="value"]').setAttribute('maxlength', 2000);
 				}
@@ -903,12 +901,6 @@
 			var $node = jQuery(node),
 				type = $node.data('type'),
 				data = this.step.data.pairs[type];
-
-			if (type === 'variables') {
-				$node.on('dynamic_rows.beforeadd', function(e, dynamic_rows) {
-					e.new_node.querySelector('.' + httpconf.ZBX_STYLE_DRAG_ICON).remove();
-				});
-			}
 
 			if (type === 'variables' || type === 'headers' || type === 'post_fields') {
 				$node.on('dynamic_rows.beforeadd', function(e, dynamic_rows) {
