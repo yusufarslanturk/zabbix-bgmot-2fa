@@ -231,13 +231,21 @@ elseif (hasRequest('add') || hasRequest('update')) {
 				unset($step['pairs']);
 			}
 
-			foreach ($step['variables'] as &$variable) {
-				$variable['name'] = trim($variable['name']);
+			$step_fields = ['variables', 'headers', 'post_fields', 'query_fields'];
+
+			foreach ($step_fields as $step_field) {
+				foreach ($step[$step_field] as &$field) {
+					$field['name'] = trim($field['name']);
+					$field['value'] = trim($field['value']);
+				}
+				unset($field);
 			}
-			unset($variable);
 
 			if ($step['post_type'] == ZBX_POSTTYPE_FORM) {
 				$step['posts'] = $step['post_fields'];
+			}
+			else {
+				$step['posts'] = trim($step['posts']);
 			}
 			unset($step['post_fields'], $step['post_type']);
 		}
@@ -277,10 +285,15 @@ elseif (hasRequest('add') || hasRequest('update')) {
 			}
 		}
 
-		foreach ($httpTest['variables'] as &$variable) {
-			$variable['name'] = trim($variable['name']);
+		$httpTest_fields = ['variables', 'headers'];
+
+		foreach ($httpTest_fields as $httpTest_field) {
+			foreach ($httpTest[$httpTest_field] as &$field) {
+				$field['name'] = trim($field['name']);
+				$field['value'] = trim($field['value']);
+			}
+			unset($field);
 		}
-		unset($variable);
 
 		if (isset($_REQUEST['httptestid'])) {
 			// unset fields that did not change
