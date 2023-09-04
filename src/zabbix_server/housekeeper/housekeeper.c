@@ -1133,7 +1133,7 @@ static int	housekeeping_audit(int now)
 	return 0;
 }
 
-static int	housekeeping_autoreg_host()
+static int	housekeeping_autoreg_host(void)
 {
 	DB_RESULT		result;
 	DB_ROW			row;
