@@ -598,7 +598,8 @@
 			$table.on('dynamic_rows.beforeadd', function(e, dynamic_rows) {
 
 				if (type === 'variables' || type === 'headers') {
-					e.new_node.querySelector('[data-type="value"]').setAttribute('maxlength', 2000);
+					e.new_node.querySelector('[data-type="value"]')
+						.setAttribute('maxlength', <?= DB::getFieldLength('httptest_field', 'value') ?>);
 				}
 			});
 
@@ -904,7 +905,8 @@
 
 			if (type === 'variables' || type === 'headers' || type === 'post_fields') {
 				$node.on('dynamic_rows.beforeadd', function(e, dynamic_rows) {
-					e.new_node.querySelector('[data-type="value"]').setAttribute('maxlength', 2000);
+					e.new_node.querySelector('[data-type="value"]')
+						.setAttribute('maxlength', <?= DB::getFieldLength('httptest_field', 'value') ?>);
 				});
 			}
 
