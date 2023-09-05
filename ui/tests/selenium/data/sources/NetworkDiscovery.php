@@ -315,7 +315,7 @@ class NetworkDiscovery {
 			[
 				'name' => 'Discovery rule to check delete',
 				'iprange' => '192.168.3.1-255',
-				'proxy_hostid' => 20000,
+				'proxy_hostid' => $proxyid,
 				'delay' => 600,
 				'status' => 1,
 				'dchecks' => [
@@ -330,7 +330,7 @@ class NetworkDiscovery {
 			[
 				'name' => "<img src=\"x\" onerror=\"alert('UWAGA');\"/>",
 				'iprange' => '192.168.3.1-255',
-				'proxy_hostid' => 20000,
+				'proxy_hostid' => $proxyid,
 				'delay' => 600,
 				'status' => 1,
 				'dchecks' => [
