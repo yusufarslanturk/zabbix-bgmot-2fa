@@ -113,11 +113,6 @@ static int get_eventlog_value(eventlog_result_t *result, int index, char **value
 	return SUCCEED;
 }
 
-static int get_eventlog_value_count(eventlog_result_t *result)
-{
-	return result->values.values_num;
-}
-
 static void free_eventlog_value(eventlog_value_t *log)
 {
 	zbx_free(log->value);
@@ -192,8 +187,8 @@ func ProcessEventLogCheck(data unsafe.Pointer, item *EventLogItem, refresh int, 
 
 	var tlsConfig *tls.Config
 	var err error
-	var ctlsConfig C.zbx_config_tls_t
-	var ctlsConfig_p *C.zbx_config_tls_t
+	var ctlsConfig C.zbx_config_tls_t;
+	var ctlsConfig_p *C.zbx_config_tls_t;
 
 	if tlsConfig, err = agent.GetTLSConfig(&agent.Options); err != nil {
 		res := &EventLogResult{
@@ -207,13 +202,13 @@ func ProcessEventLogCheck(data unsafe.Pointer, item *EventLogItem, refresh int, 
 
 		return
 	}
-	if nil != tlsConfig {
+	if (nil != tlsConfig) {
 		log.Tracef("Calling C function \"zbx_config_tls_init_for_agent2()\"")
 		C.zbx_config_tls_init_for_agent2(&ctlsConfig, (C.uint)(tlsConfig.Accept), (C.uint)(tlsConfig.Connect),
 			(C.CString)(tlsConfig.PSKIdentity), (C.CString)(tlsConfig.PSKKey),
 			(C.CString)(tlsConfig.CAFile), (C.CString)(tlsConfig.CRLFile), (C.CString)(tlsConfig.CertFile),
 			(C.CString)(tlsConfig.KeyFile), (C.CString)(tlsConfig.ServerCertIssuer),
-			(C.CString)(tlsConfig.ServerCertSubject))
+			(C.CString)(tlsConfig.ServerCertSubject));
 		ctlsConfig_p = &ctlsConfig
 	}
 
@@ -233,42 +228,40 @@ func ProcessEventLogCheck(data unsafe.Pointer, item *EventLogItem, refresh int, 
 		logTs = item.LastTs
 	}
 	log.Tracef("Calling C function \"get_eventlog_value()\"")
-	if C.get_eventlog_value_count(result) != 0 {
-		for i := 0; C.get_eventlog_value(result, C.int(i), &cvalue, &csource, &clogeventid, &cseverity, &ctimestamp,
-			&cstate, &clastlogsize) != C.FAIL; i++ {
+	for i := 0; C.get_eventlog_value(result, C.int(i), &cvalue, &csource, &clogeventid, &cseverity, &ctimestamp, &cstate,
+		&clastlogsize) != C.FAIL; i++ {
 
-			var value, source string
-			var logeventid, severity, timestamp int
-			var r EventLogResult
-			if cstate == C.ITEM_STATE_NORMAL {
-				value = C.GoString(cvalue)
-				source = C.GoString(csource)
-				logeventid = int(clogeventid)
-				severity = int(cseverity)
-				timestamp = int(ctimestamp)
+		var value, source string
+		var logeventid, severity, timestamp int
+		var r EventLogResult
+		if cstate == C.ITEM_STATE_NORMAL {
+			value = C.GoString(cvalue)
+			source = C.GoString(csource)
+			logeventid = int(clogeventid)
+			severity = int(cseverity)
+			timestamp = int(ctimestamp)
 
-				r = EventLogResult{
-					Value:          &value,
-					EventSource:    &source,
-					EventID:        &logeventid,
-					EventSeverity:  &severity,
-					EventTimestamp: &timestamp,
-					Ts:             logTs,
-					LastLogsize:    uint64(clastlogsize),
-				}
-
-			} else {
-				r = EventLogResult{
-					Error:       errors.New(C.GoString(cvalue)),
-					Ts:          logTs,
-					LastLogsize: uint64(clastlogsize),
-				}
-
+			r = EventLogResult{
+				Value:          &value,
+				EventSource:    &source,
+				EventID:        &logeventid,
+				EventSeverity:  &severity,
+				EventTimestamp: &timestamp,
+				Ts:             logTs,
+				LastLogsize:    uint64(clastlogsize),
 			}
 
-			item.Results = append(item.Results, &r)
-			logTs = logTs.Add(time.Nanosecond)
+		} else {
+			r = EventLogResult{
+				Error:       errors.New(C.GoString(cvalue)),
+				Ts:          logTs,
+				LastLogsize: uint64(clastlogsize),
+			}
+
 		}
+
+		item.Results = append(item.Results, &r)
+		logTs = logTs.Add(time.Nanosecond)
 	}
 	log.Tracef("Calling C function \"free_eventlog_result()\"")
 	C.free_eventlog_result(result)
