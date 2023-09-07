@@ -521,7 +521,7 @@ class testFormAdministrationProxies extends CWebTest {
 				$selector = 'xpath:.//div[@class="table-forms-separator"]/table';
 				$this->assertTrue($dialog->query($selector)->one()->isEnabled());
 				$this->assertEquals(['IP address', 'DNS name', 'Connect to', 'Port'],
-						$dialog->query($selector)->one()->asTable()->getHeadersText()
+					$dialog->query($selector)->one()->asTable()->getHeadersText()
 				);
 
 				// Check interface fields values.
@@ -557,10 +557,10 @@ class testFormAdministrationProxies extends CWebTest {
 		$condition = ($data['mode'] === 'Active')
 			? ($data['Connections to proxy'] !== 'No encryption')
 			: ($data['Connections from proxy'] !== [
-				'id:tls_accept_none' => true,
-				'id:tls_accept_psk' => false,
-				'id:tls_accept_certificate' => false
-			]);
+					'id:tls_accept_none' => true,
+					'id:tls_accept_psk' => false,
+					'id:tls_accept_certificate' => false
+				]);
 
 		$checked_proxy = ($data['mode'] === 'Active') ? 'Active' : 'Passive';
 		$opposite_proxy = ($data['mode'] === 'Active') ? 'Passive' : 'Active';
