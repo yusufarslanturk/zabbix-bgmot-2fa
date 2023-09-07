@@ -566,6 +566,9 @@ zbx_proxy_suppress_t;
 /* max length of base64 data */
 #define ZBX_MAX_B64_LEN		(16 * ZBX_KIBIBYTE)
 
+#define ZBX_STRQUOTE_DEFAULT		1
+#define ZBX_STRQUOTE_SKIP_BACKSLASH	0
+
 /* string functions that could not be moved into libzbxstr.a because they */
 /* are used by libzbxcommon.a */
 
