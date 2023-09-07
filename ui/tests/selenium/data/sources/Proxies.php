@@ -246,7 +246,7 @@ class Proxies {
 		]);
 
 		$proxies = CDataHelper::call('proxy.create',
-			[['host' => 'Delete Proxy used in Network discovery rule', 'status' => 5]]
+				[['host' => 'Delete Proxy used in Network discovery rule', 'status' => 5]]
 		);
 		$delete_proxy = $proxies['proxyids'][0];
 

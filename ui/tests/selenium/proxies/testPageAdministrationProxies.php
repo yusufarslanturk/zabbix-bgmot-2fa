@@ -75,7 +75,7 @@ class testPageAdministrationProxies extends CWebTest {
 
 		$table = $this->query('class:list-table')->asTable()->one()->waitUntilPresent();
 		$this->assertEquals(['', 'Name', 'Mode', 'Encryption', 'Version', 'Last seen (age)', 'Host count', 'Item count',
-			'Required vps', 'Hosts'], $table->getHeadersText()
+				'Required vps', 'Hosts'], $table->getHeadersText()
 		);
 
 		// Check versions and hints.
@@ -83,10 +83,10 @@ class testPageAdministrationProxies extends CWebTest {
 			'active_current' => ['version' => '6.4.0'],
 			'active_unknown' => ['version' => ''],
 			'passive_outdated' => ['version' => '6.2.0 ', 'color' => 'red', 'icon_color' => 'yellow', 'hint_text' =>
-				'Proxy version is outdated, only data collection and remote execution is available with server version 6.4.0.'
+					'Proxy version is outdated, only data collection and remote execution is available with server version 6.4.0.'
 			],
 			'passive_unsupported' => ['version' => '5.4.1 ', 'color' => 'red', 'icon_color' => 'red', 'hint_text' =>
-				'Proxy version is not supported by server version 6.4.0.', 'hint_color' => 'red'
+					'Proxy version is not supported by server version 6.4.0.', 'hint_color' => 'red'
 			]
 		];
 
@@ -97,12 +97,12 @@ class testPageAdministrationProxies extends CWebTest {
 			if (array_key_exists('color', $parameters)) {
 				// Check version text color.
 				$this->assertTrue($column->query("xpath:.//span[@class=".
-					CXPathHelper::escapeQuotes($parameters['color'])."]")->exists()
+						CXPathHelper::escapeQuotes($parameters['color'])."]")->exists()
 				);
 
 				// Check info-icon color.
 				$this->assertTrue($column->query("xpath:.//a[@class=".
-					CXPathHelper::escapeQuotes("icon-info status-".$parameters['icon_color'])."]")->exists()
+						CXPathHelper::escapeQuotes("icon-info status-".$parameters['icon_color'])."]")->exists()
 				);
 
 				// Check version hint.
@@ -112,7 +112,7 @@ class testPageAdministrationProxies extends CWebTest {
 
 				if (array_key_exists('hint_color', $parameters)) {
 					$this->assertTrue($hint->query("xpath:.//div[@class=".
-						CXPathHelper::escapeQuotes("hintbox-wrap ".$parameters['hint_color'])."]")->exists()
+							CXPathHelper::escapeQuotes("hintbox-wrap ".$parameters['hint_color'])."]")->exists()
 					);
 				}
 
