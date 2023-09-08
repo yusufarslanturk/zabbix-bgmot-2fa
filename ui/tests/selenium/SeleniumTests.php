@@ -157,8 +157,7 @@ require_once dirname(__FILE__).'/mediaTypes/testPageAdministrationMediaTypes.php
 require_once dirname(__FILE__).'/monitoring/testPageMonitoringLatestData.php';
 
 // Network discovery.
-// TODO: Uncomment when DEV-2507 is merged.
-//require_once dirname(__FILE__).'/networkDiscovery/testFormNetworkDiscovery.php';
+require_once dirname(__FILE__).'/networkDiscovery/testFormNetworkDiscovery.php';
 require_once dirname(__FILE__).'/networkDiscovery/testPageNetworkDiscovery.php';
 
 // Permissions.
@@ -437,8 +436,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testPageMonitoringLatestData');
 
 		// Network discovery.
-		// TODO: Uncomment when DEV-2507 is merged.
-//		$suite->addTestSuite('testFormNetworkDiscovery');
+		$suite->addTestSuite('testFormNetworkDiscovery');
 		$suite->addTestSuite('testPageNetworkDiscovery');
 
 		// Permissions.
