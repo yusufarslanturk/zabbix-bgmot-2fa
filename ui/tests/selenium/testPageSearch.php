@@ -377,7 +377,8 @@ class testPageSearch extends CWebTest {
 			[
 				[
 					'search_string' => '🙃',
-					'hosts' => [['Host' => '🙂🙃']]
+					'hosts' => [['Host' => '🙂🙃']],
+					'fire_keyup_event' => true
 				]
 			],
 			[
@@ -470,7 +471,7 @@ class testPageSearch extends CWebTest {
 			}
 		}
 
-		$this->openSearchResults($data['search_string']);
+		$this->openSearchResults($data['search_string'], CTestArrayHelper::get($data, 'fire_keyup_event', false));
 
 		$this->page->assertHeader('Search: '.$data['search_string']);
 
@@ -663,7 +664,8 @@ class testPageSearch extends CWebTest {
 			[
 				[
 					'search_string' => '🙃',
-					'expected_suggestions' => ['🙂🙃']
+					'expected_suggestions' => ['🙂🙃'],
+					'fire_keyup_event' => true
 				]
 			],
 			[
@@ -702,6 +704,11 @@ class testPageSearch extends CWebTest {
 		$this->page->login()->open('zabbix.php?action=dashboard.view');
 		$form = $this->query('class:form-search')->waitUntilVisible()->asForm()->one();
 		$form->fill(['id:search' => $data['search_string']]);
+
+		// Fill does not send a "keyup" event for non-standard strings, but it is needed here.
+		if (CTestArrayHelper::get($data, 'fire_keyup_event')) {
+			$form->getField('id:search')->fireEvent('keyup');
+		}
 
 		$item_selector = 'xpath://ul[@class="search-suggest"]//li';
 
@@ -752,10 +759,16 @@ class testPageSearch extends CWebTest {
 	 *
 	 * @param string  $search_string    text that will be entered in the search field
 	 */
-	protected function openSearchResults($search_string) {
+	protected function openSearchResults($search_string, $send_keyup = false) {
 		$this->page->login()->open('zabbix.php?action=dashboard.view');
 		$form = $this->query('class:form-search')->waitUntilVisible()->asForm()->one();
 		$form->fill(['id:search' => $search_string]);
+
+		// Fill does not send a "keyup" event for non-standard strings, but it is needed to enable the submit button.
+		if ($send_keyup) {
+			$form->getField('id:search')->fireEvent('keyup');
+		}
+
 		$form->submit();
 	}
 }
