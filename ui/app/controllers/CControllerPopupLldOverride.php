@@ -74,23 +74,6 @@ class CControllerPopupLldOverride extends CController {
 		];
 
 		if ($this->hasInput('validate')) {
-			foreach ($page_options['overrides_filters'] as $i => $filter) {
-				if ($filter['macro'] === '' && $filter['value'] === '') {
-					unset($page_options['overrides_filters'][$i]);
-				}
-			}
-		}
-
-		$page_options['overrides_filters'] = $page_options['overrides_filters']
-			? sortLldRuleFilterConditions($page_options['overrides_filters'], $page_options['overrides_evaltype'])
-			: [[
-				'macro' => '',
-				'operator' => CONDITION_OPERATOR_REGEXP,
-				'value' => '',
-				'formulaid' => num2letter(0)
-			]];
-
-		if ($this->hasInput('validate')) {
 			if ($page_options['name'] === '') {
 				error(_s('Incorrect value for field "%1$s": %2$s.', _('Name'), _('cannot be empty')));
 			}
@@ -107,6 +90,18 @@ class CControllerPopupLldOverride extends CController {
 						error(_s('Override with name "%1$s" already exists.', $name));
 					}
 				}
+			}
+
+			foreach ($page_options['overrides_filters'] as $i => $filter) {
+				if ($filter['macro'] === '' && $filter['value'] === '') {
+					unset($page_options['overrides_filters'][$i]);
+				}
+			}
+
+			if ($page_options['overrides_filters']) {
+				$page_options['overrides_filters'] = sortLldRuleFilterConditions($page_options['overrides_filters'],
+					$page_options['overrides_evaltype']
+				);
 			}
 
 			// Return collected error messages.
@@ -135,6 +130,15 @@ class CControllerPopupLldOverride extends CController {
 			);
 		}
 		else {
+			if (!$page_options['overrides_filters']) {
+				$page_options['overrides_filters'][] = [
+					'macro' => '',
+					'operator' => CONDITION_OPERATOR_REGEXP,
+					'value' => '',
+					'formulaid' => num2letter(0)
+				];
+			}
+
 			$data = [
 				'title' => _('Override'),
 				'options' => $page_options,
