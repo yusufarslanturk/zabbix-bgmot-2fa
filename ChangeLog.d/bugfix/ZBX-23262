@@ -1,0 +1,1 @@
+A.F....... [ZBX-23262] fixed ability to login using API method user.login for users with disabled frontend access and enabled API access (epulke)

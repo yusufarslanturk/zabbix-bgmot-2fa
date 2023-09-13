@@ -63,7 +63,7 @@ class CWebUser {
 			];
 
 			if (self::$data['gui_access'] == GROUP_GUI_ACCESS_DISABLED) {
-				error(_('GUI access disabled.'));
+				error(_('Incorrect user name or password or account is temporarily blocked.'));
 				throw new Exception();
 			}
 

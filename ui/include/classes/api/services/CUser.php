@@ -2043,6 +2043,7 @@ class CUser extends CApiService {
 			'debug_mode' => GROUP_DEBUG_MODE_DISABLED,
 			'users_status' => GROUP_STATUS_ENABLED,
 			'gui_access' => GROUP_GUI_ACCESS_SYSTEM,
+			'group_auth_type' => ZBX_AUTH_INTERNAL,
 			'deprovisioned' => false,
 			'userdirectoryid' => 0
 		];
@@ -2078,6 +2079,10 @@ class CUser extends CApiService {
 			if ($db_usrgrp['gui_access'] > $permissions['gui_access']) {
 				$permissions['gui_access'] = $db_usrgrp['gui_access'];
 				$userdirectoryids = [];
+
+				if ($db_usrgrp['gui_access'] != GROUP_GUI_ACCESS_DISABLED) {
+					$permissions['group_auth_type'] = $db_usrgrp['gui_access'];
+				}
 			}
 
 			if ($permissions['gui_access'] == $db_usrgrp['gui_access']
@@ -2380,7 +2385,7 @@ class CUser extends CApiService {
 			$db_user['timezone'] = CSettingsHelper::getGlobal(CSettingsHelper::DEFAULT_TIMEZONE);
 		}
 
-		$gui_access = $db_user['gui_access'];
+		$gui_access = $group_attrs['group_auth_type'];
 
 		if ($gui_access == GROUP_GUI_ACCESS_SYSTEM) {
 			$gui_access = CAuthenticationHelper::get(CAuthenticationHelper::AUTHENTICATION_TYPE) == ZBX_AUTH_INTERNAL
