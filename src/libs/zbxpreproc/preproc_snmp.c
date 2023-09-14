@@ -370,6 +370,13 @@ reparse_type:
 				goto eol;
 			}
 
+			if (0 == strcmp(type, "NULL") && ('\n' == *data || '\0' == *data))
+			{
+				p->type = ZBX_SNMP_TYPE_UNDEFINED;
+
+				goto eol;
+			}
+
 			*error = strdup("invalid value type format");
 			goto out;
 		}
@@ -915,12 +922,12 @@ int	item_preproc_snmp_walk_to_json(zbx_variant_t *value, const char *params, cha
 			oobj_local.key = zbx_strdup(NULL, prefix_len + p.oid + 1);
 			zbx_rtrim(oobj_local.key, " ");
 
-			output_value = (zbx_snmp_value_pair_t *)zbx_malloc(NULL,
-					sizeof(zbx_snmp_value_pair_t));
-
+			output_value = (zbx_snmp_value_pair_t *)zbx_malloc(NULL, sizeof(zbx_snmp_value_pair_t));
 
 			output_value->oid = zbx_strdup(NULL, param_field.field_name);
-			output_value->value = zbx_strdup(NULL, p.value);
+
+			if (NULL != p.value)
+				output_value->value = zbx_strdup(NULL, p.value);
 
 			if (NULL == (oobj_cached = zbx_hashset_search(&grouped_prefixes, &oobj_local)))
 			{
