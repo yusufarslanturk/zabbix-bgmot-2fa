@@ -81,8 +81,8 @@ class testPageMonitoringWebDetails extends CWebTest {
 		$form->checkValue(['id:from' => 'now-1h', 'id:to' => 'now']);
 		$this->assertEquals('selected', $form->query('link:Last 1 hour')->one()->getAttribute('class'));
 		$buttons = [
-			'xpath://button[contains(@class, "js-btn-time-left")]' => true,
-			'xpath://button[contains(@class, "js-btn-time-right")]' => false,
+			'xpath://button[contains(@class, "btn-time-left")]' => true,
+			'xpath://button[contains(@class, "btn-time-right")]' => false,
 			'button:Zoom out' => true,
 			'button:Apply' => true,
 			'id:from_calendar' => true,
@@ -111,9 +111,9 @@ class testPageMonitoringWebDetails extends CWebTest {
 					'fields' => ['id:from' => 'now-2h', 'id:to' => 'now-1h'],
 					'expected' => 'from=now-2h&to=now-1h',
 					'zoom_buttons' => [
-						'js-btn-time-left' => true,
-						'btn-time-zoomout' => true,
-						'js-btn-time-right' => true
+						'btn-time-left' => true,
+						'btn-time-out' => true,
+						'btn-time-right' => true
 					]
 				]
 			],
@@ -122,9 +122,9 @@ class testPageMonitoringWebDetails extends CWebTest {
 					'fields' => ['id:from' => 'now-2y', 'id:to' => 'now-1y'],
 					'expected' => 'from=now-2y&to=now-1y',
 					'zoom_buttons' => [
-						'js-btn-time-left' => true,
-						'btn-time-zoomout' => true,
-						'js-btn-time-right' => true
+						'btn-time-left' => true,
+						'btn-time-out' => true,
+						'btn-time-right' => true
 					]
 				]
 			],
@@ -133,9 +133,9 @@ class testPageMonitoringWebDetails extends CWebTest {
 					'link' => 'Last 30 days',
 					'expected' => 'from=now-30d&to=now',
 					'zoom_buttons' => [
-						'js-btn-time-left' => true,
-						'btn-time-zoomout' => true,
-						'js-btn-time-right' => false
+						'btn-time-left' => true,
+						'btn-time-out' => true,
+						'btn-time-right' => false
 					]
 				]
 			],
@@ -144,9 +144,9 @@ class testPageMonitoringWebDetails extends CWebTest {
 					'link' => 'Last 2 years',
 					'expected' => 'from=now-2y&to=now',
 					'zoom_buttons' => [
-						'js-btn-time-left' => true,
-						'btn-time-zoomout' => false,
-						'js-btn-time-right' => false
+						'btn-time-left' => true,
+						'btn-time-out' => false,
+						'btn-time-right' => false
 					]
 				]
 			]
