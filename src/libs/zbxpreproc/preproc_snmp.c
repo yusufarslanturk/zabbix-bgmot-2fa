@@ -276,6 +276,12 @@ static size_t	preproc_snmp_parse_value(const char *ptr, zbx_snmp_value_pair_t *p
 				while ('.' != *(ptr + 1) && '\0' != *(ptr + 1))
 					ptr++;
 			}
+			else if (ZBX_SNMP_TYPE_STRING == p->type)
+			{
+				while ('\0' != *(ptr + 1) &&
+						('\n' != *ptr || '.' != *(ptr + 1) || 0 == isdigit(*(ptr + 2))))
+					ptr++;
+			}
 
 			len = (size_t)(ptr - start);
 		}
@@ -283,8 +289,12 @@ static size_t	preproc_snmp_parse_value(const char *ptr, zbx_snmp_value_pair_t *p
 		p->value = zbx_malloc(NULL, len + 1);
 		memcpy(p->value, start, len);
 		(p->value)[len] = '\0';
-		zbx_remove_chars(p->value, "\n");
-		zbx_rtrim(p->value, " ");
+
+		if (ZBX_SNMP_TYPE_HEX == p->type || ZBX_SNMP_TYPE_BITS == p->type)
+		{
+			zbx_remove_chars(p->value, "\n");
+			zbx_rtrim(p->value, " ");
+		}
 
 		return len;
 	}
@@ -319,6 +329,7 @@ static size_t	preproc_snmp_parse_value(const char *ptr, zbx_snmp_value_pair_t *p
 			*out++ = *ptr++;
 		}
 		*out = '\0';
+
 		return len;
 	}
 }
@@ -401,6 +412,10 @@ reparse_type:
 		else if (0 == strcmp(type, "BITS"))
 		{
 			p->type = ZBX_SNMP_TYPE_BITS;
+		}
+		else if (0 == strcmp(type, "STRING"))
+		{
+			p->type = ZBX_SNMP_TYPE_STRING;
 		}
 		else
 			p->type = ZBX_SNMP_TYPE_UNDEFINED;
