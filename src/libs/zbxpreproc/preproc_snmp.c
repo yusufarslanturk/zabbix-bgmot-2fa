@@ -301,17 +301,25 @@ static size_t	preproc_snmp_parse_value(const char *ptr, zbx_snmp_value_pair_t *p
 	else
 	{
 		char	*out;
+		int	escape = 0;
+
 		ptr++;
 
-		while ('"' != *ptr)
+		while ('"' != *ptr || 0 != escape)
 		{
 			if ('\0' == *ptr)
 				return 0;
-			if ('\\' == *ptr)
+
+			if (0 == escape)
 			{
-				if ('\0' == *(++ptr))
-					return 0;
+				if ('\\' == *ptr)
+					escape = 1;
 			}
+			else
+			{
+				escape = 0;
+			}
+
 			ptr++;
 		}
 
@@ -324,7 +332,6 @@ static size_t	preproc_snmp_parse_value(const char *ptr, zbx_snmp_value_pair_t *p
 			if ('\\' == *ptr)
 			{
 				ptr++;
-				continue;
 			}
 			*out++ = *ptr++;
 		}
