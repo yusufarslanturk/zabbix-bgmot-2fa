@@ -24709,6 +24709,10 @@ msgstr "now() - Quantidade de segundos desde Epoch"
 msgid "number"
 msgstr "número"
 
+#: include/classes/api/services/CHostPrototype.php:836
+msgid "object does not exist or belongs to another object"
+msgstr ""
+
 #: app/views/monitoring.widget.problemhosts.view.php:127
 #: include/blocks.inc.php:504
 msgid "of"
