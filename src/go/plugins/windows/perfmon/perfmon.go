@@ -112,7 +112,7 @@ func (p *Plugin) Collect() error {
 	for index, c := range p.counters {
 		if c.lastAccess.Before(expireTime) || p.collectError != nil {
 			if err = win32.PdhRemoveCounter(c.handle); err != nil {
-				p.Debugf("error while removing counter '%s': %s", index.path, err)
+				p.Warningf("error while removing counter '%s': %s", index.path, err)
 			}
 			delete(p.counters, index)
 			continue
@@ -120,6 +120,7 @@ func (p *Plugin) Collect() error {
 		c.err = nil
 		if c.history[c.tail], err = win32.PdhGetFormattedCounterValueDouble(c.handle); err != nil {
 			c.err = fmt.Errorf("cannot format value %s", err)
+			p.Warningf("%s", c.err)
 		}
 		if c.tail = c.tail.inc(c.interval); c.tail == c.head {
 			c.head = c.head.inc(c.interval)
@@ -131,7 +132,7 @@ func (p *Plugin) Collect() error {
 		err = win32.PdhCloseQuery(p.query)
 		p.query = 0
 		if err != nil {
-			p.Debugf("error while closing query '%s'", err)
+			p.Warningf("error while closing query '%s'", err)
 		}
 	}
 

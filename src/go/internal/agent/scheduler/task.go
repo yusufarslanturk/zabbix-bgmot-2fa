@@ -163,9 +163,21 @@ func (t *exporterTask) perform(s Scheduler) {
 
 		if key, params, err = itemutil.ParseKey(itemkey); err == nil {
 			var ret interface{}
-			log.Debugf("executing exporter task for itemid:%d key '%s'", t.item.itemid, itemkey)
 
-			if ret, err = exporter.Export(key, params, t); err == nil {
+			tc := make(chan bool)
+
+			go func() {
+				ret, err = exporter.Export(key, params, t)
+				tc <- true
+			}()
+
+			select {
+			case <-tc:
+			case <-time.After(time.Second * time.Duration(agent.Options.Timeout)):
+				err = fmt.Errorf("Timeout occurred while gathering data.")
+			}
+
+			if err == nil {
 				log.Debugf("executed exporter task for itemid:%d key '%s'", t.item.itemid, itemkey)
 				if ret != nil {
 					rt := reflect.TypeOf(ret)
