@@ -257,7 +257,7 @@ class CDBHelper {
 			}
 
 			$file = PHPUNIT_COMPONENT_DIR.$DB['DATABASE'].$suffix.'.dump';
-			$cmd .= ' --username='.$DB['USER'].' --format=d --jobs=5 --dbname='.$DB['DATABASE'];
+			$cmd .= ' --username='.$DB['USER'].' --format=d --jobs=9 --dbname='.$DB['DATABASE'];
 			$cmd .= ' --table='.implode(' --table=', $tables).' --file='.$file;
 
 			exec($cmd, $output, $result_code);
@@ -323,7 +323,7 @@ class CDBHelper {
 			}
 
 			$file = PHPUNIT_COMPONENT_DIR.$DB['DATABASE'].$suffix.'.dump';
-			$cmd .= ' --username='.$DB['USER'].' --format=d --jobs=5 --clean --dbname='.$DB['DATABASE'];
+			$cmd .= ' --username='.$DB['USER'].' --format=d --single-transaction --clean --dbname='.$DB['DATABASE'];
 			$cmd .= ' '.$file;
 
 			exec($cmd, $output, $result_code);
