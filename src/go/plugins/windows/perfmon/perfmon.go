@@ -54,6 +54,7 @@ type perfCounter struct {
 	history    []*float64
 	head, tail historyIndex
 	err        error
+	errCode    uintptr
 }
 
 // Plugin -
@@ -117,9 +118,14 @@ func (p *Plugin) Collect() error {
 			delete(p.counters, index)
 			continue
 		}
+		rc := c.errCode
 		c.err = nil
-		if c.history[c.tail], err = win32.PdhGetFormattedCounterValueDouble(c.handle); err != nil {
-			c.err = fmt.Errorf("cannot format value %s", err)
+		if c.history[c.tail], c.errCode, err = win32.PdhGetFormattedCounterValueDoubleHelper(c.handle, false); err != nil {
+			if rc == 0 && c.errCode == win32.PDH_CALC_NEGATIVE_DENOMINATOR {
+				p.Warningf("first skipping of '%s', cannot format value: %s", index.path, err)
+				continue
+			}
+			c.err = fmt.Errorf("cannot format value of '%s': %s", index.path, err)
 			p.Warningf("%s", c.err)
 		}
 		if c.tail = c.tail.inc(c.interval); c.tail == c.head {
