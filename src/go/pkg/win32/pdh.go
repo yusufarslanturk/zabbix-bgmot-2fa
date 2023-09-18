@@ -140,10 +140,11 @@ func PdhCollectQueryData(query PDH_HQUERY) (err error) {
 }
 
 func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER) (value *float64, err error) {
-	return PdhGetFormattedCounterValueDoubleHelper(counter, true)
+	value, _, err = PdhGetFormattedCounterValueDoubleHelper(counter, true)
+	return
 }
 
-func PdhGetFormattedCounterValueDoubleHelper(counter PDH_HCOUNTER, retry bool) (value *float64, err error) {
+func PdhGetFormattedCounterValueDoubleHelper(counter PDH_HCOUNTER, retry bool) (value *float64, errCode uintptr, err error) {
 	var pdhValue PDH_FMT_COUNTERVALUE_DOUBLE
 	ret, _, _ := syscall.Syscall6(pdhGetFormattedCounterValue, 4, uintptr(counter),
 		uintptr(PDH_FMT_DOUBLE|PDH_FMT_NOCAP100), 0, uintptr(unsafe.Pointer(&pdhValue)), 0, 0)
@@ -156,11 +157,11 @@ func PdhGetFormattedCounterValueDoubleHelper(counter PDH_HCOUNTER, retry bool) (
 			}
 			log.Warningf("Detected performance counter with negative denominator the second time after retry, giving up...")
 		} else if ret == PDH_INVALID_DATA || ret == PDH_CSTATUS_INVALID_DATA {
-			return nil, nil
+			return nil, ret, nil
 		}
-		return nil, newPdhError(ret)
+		return nil, ret, newPdhError(ret)
 	}
-	return &pdhValue.Value, nil
+	return &pdhValue.Value, 0, nil
 }
 
 func PdhGetFormattedCounterValueInt64(counter PDH_HCOUNTER) (value *int64, err error) {
