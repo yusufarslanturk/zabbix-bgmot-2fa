@@ -140,23 +140,27 @@ func PdhCollectQueryData(query PDH_HQUERY) (err error) {
 }
 
 func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER) (value *float64, err error) {
-	value, _, err = PdhGetFormattedCounterValueDoubleHelper(counter, true)
+	var errCode uintptr
+	value, errCode, err = PdhGetFormattedCounterValueDoubleHelper(counter)
+	if errCode != PDH_CALC_NEGATIVE_DENOMINATOR {
+		return
+	}
+
+	log.Debugf("Detected performance counter with negative denominator, retrying in 1 second")
+	time.Sleep(time.Second)
+	value, errCode, err = PdhGetFormattedCounterValueDoubleHelper(counter)
+	if err != nil {
+		log.Warningf("Detected performance counter with negative denominator the second time after retry, giving up...")
+	}
 	return
 }
 
-func PdhGetFormattedCounterValueDoubleHelper(counter PDH_HCOUNTER, retry bool) (value *float64, errCode uintptr, err error) {
+func PdhGetFormattedCounterValueDoubleHelper(counter PDH_HCOUNTER) (value *float64, errCode uintptr, err error) {
 	var pdhValue PDH_FMT_COUNTERVALUE_DOUBLE
 	ret, _, _ := syscall.Syscall6(pdhGetFormattedCounterValue, 4, uintptr(counter),
 		uintptr(PDH_FMT_DOUBLE|PDH_FMT_NOCAP100), 0, uintptr(unsafe.Pointer(&pdhValue)), 0, 0)
 	if syscall.Errno(ret) != windows.ERROR_SUCCESS {
-		if ret == PDH_CALC_NEGATIVE_DENOMINATOR {
-			if retry {
-				log.Debugf("Detected performance counter with negative denominator, retrying in 1 second")
-				time.Sleep(time.Second)
-				return PdhGetFormattedCounterValueDoubleHelper(counter, false)
-			}
-			log.Warningf("Detected performance counter with negative denominator the second time after retry, giving up...")
-		} else if ret == PDH_INVALID_DATA || ret == PDH_CSTATUS_INVALID_DATA {
+		if ret == PDH_INVALID_DATA || ret == PDH_CSTATUS_INVALID_DATA {
 			return nil, ret, nil
 		}
 		return nil, ret, newPdhError(ret)

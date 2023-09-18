@@ -120,7 +120,7 @@ func (p *Plugin) Collect() error {
 		}
 		rc := c.errCode
 		c.err = nil
-		if c.history[c.tail], c.errCode, err = win32.PdhGetFormattedCounterValueDoubleHelper(c.handle, false); err != nil {
+		if c.history[c.tail], c.errCode, err = win32.PdhGetFormattedCounterValueDoubleHelper(c.handle); err != nil {
 			if rc == 0 && c.errCode == win32.PDH_CALC_NEGATIVE_DENOMINATOR {
 				p.Warningf("first skipping of '%s', cannot format value: %s", index.path, err)
 				continue
