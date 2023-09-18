@@ -2775,6 +2775,38 @@ in:
 out:
   return: FAIL
 ---
+test case: SNMP walk to value - backslashes in quoted string
+in:
+  value:
+    value_type: ITEM_VALUE_TYPE_STR
+    time: 2017-10-29 03:15:00 +03:00
+    data: |
+      .1.3.6.1.1 = STRING: "foo\\bar\\baz"
+  step:
+    type: ZBX_PREPROC_SNMP_WALK_TO_VALUE
+    params: |-
+      .1.3.6.1.1
+      0
+out:
+  return: SUCCEED
+  value: foo\bar\baz
+---
+test case: SNMP walk to value - backslashes in unquoted string
+in:
+  value:
+    value_type: ITEM_VALUE_TYPE_STR
+    time: 2017-10-29 03:15:00 +03:00
+    data: |
+      .1.3.6.1.1 = STRING: foo\bar\baz
+  step:
+    type: ZBX_PREPROC_SNMP_WALK_TO_VALUE
+    params: |-
+      .1.3.6.1.1
+      0
+out:
+  return: SUCCEED
+  value: foo\bar\baz
+---
 test case: SNMP walk to value - Empty type
 in:
   value:
