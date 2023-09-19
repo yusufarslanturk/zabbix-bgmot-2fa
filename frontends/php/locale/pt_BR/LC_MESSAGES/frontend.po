@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-05-12 14:00+0000\n"
-"Last-Translator: George Lemos <georgedpsl@hotmail.com>\n"
+"PO-Revision-Date: 2023-09-18 13:17+0000\n"
+"Last-Translator: Felipe L. Ewald <felipe.idj@hotmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -1486,15 +1486,15 @@ msgstr "Calcula o valor médio, com base nos vários parâmetros fornecidos. O s
 
 #: include/classes/items/CHelpItems.php:713
 msgid "Calculates the maximum value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula o valor máximo, com base nos vários parâmetros fornecidos. O servidor Zabbix coleta informações agregadas fazendo consultas diretas ao banco de dados."
 
 #: include/classes/items/CHelpItems.php:709
 msgid "Calculates the minimum value, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula o valor mínimo, com base nos vários parâmetros fornecidos. O servidor Zabbix coleta informações agregadas fazendo consultas diretas ao banco de dados."
 
 #: include/classes/items/CHelpItems.php:717
 msgid "Calculates the sum of values, based on the various parameters supplied. Zabbix server collects aggregate information by doing direct database queries."
-msgstr ""
+msgstr "Calcula a soma dos valores, com base nos vários parâmetros fornecidos. O servidor Zabbix coleta informações agregadas fazendo consultas diretas ao banco de dados."
 
 #: jsLoader.php:128
 msgid "Calendar"
@@ -1729,7 +1729,7 @@ msgstr "Não foi possível adicionar a apresentação de telas"
 
 #: jsLoader.php:110
 msgid "Cannot add widget: not enough free space on the dashboard."
-msgstr ""
+msgstr "Não foi possível adicionar o widget: não há espaço livre suficiente no painel."
 
 #: jsLoader.php:103
 msgid "Cannot add widgets in kiosk mode"
@@ -1749,7 +1749,7 @@ msgstr "Histórico não foi limpado"
 
 #: items.php:1325
 msgid "Cannot clear history: at least one of the selected items doesn't belong to any monitored host"
-msgstr ""
+msgstr "Não é possível limpar o histórico: pelo menos um dos itens selecionados não pertence a nenhum host monitorado"
 
 #: include/classes/api/services/CDiscoveryRule.php:1549
 msgid "Cannot clone graph prototypes."
@@ -1784,7 +1784,7 @@ msgstr "Não foi possível conectar ao banco de dados."
 
 #: include/views/js/configuration.httpconf.edit.js.php:79
 msgid "Cannot convert POST data:"
-msgstr ""
+msgstr "Não foi possível converter dados do POST:"
 
 #: graphs.php:390
 msgid "Cannot copy graph"
@@ -1954,7 +1954,7 @@ msgstr "A imagem não foi excluída"
 #: include/classes/api/services/CHostInterface.php:434
 #, c-format
 msgid "Cannot delete interface for discovered host \"%1$s\"."
-msgstr ""
+msgstr "Não é possível excluir a interface do host \"%1$s\" descoberto."
 
 #: include/classes/api/services/CHost.php:1026
 msgid "Cannot delete inventory."
@@ -2292,17 +2292,17 @@ msgstr "Não foi possível encontrar o mapeamento de ícones \"%1$s\" usado no m
 #: include/classes/import/CConfigurationImport.php:955
 #, c-format
 msgid "Cannot find interface \"%1$s\" used for discovery rule \"%2$s\" on \"%3$s\"."
-msgstr ""
+msgstr "Não foi possível localizar a interface \"%1$s\" utilizada para a regra de descoberta \"%2$s\" em \"%3$s\"."
 
 #: include/classes/import/CConfigurationImport.php:751
 #, c-format
 msgid "Cannot find interface \"%1$s\" used for item \"%2$s\" on \"%3$s\"."
-msgstr ""
+msgstr "Não foi possível encontrar interface \"%1$s\" utilizada para o item \"%2$s\" em \"%3$s\"."
 
 #: include/classes/import/CConfigurationImport.php:1073
 #, c-format
 msgid "Cannot find interface \"%1$s\" used for item prototype \"%2$s\" of discovery rule \"%3$s\" on \"%4$s\"."
-msgstr ""
+msgstr "Não foi possível encontrar a interface \"%1$s\" usada para o protótipo de item \"%2$s\" da regra de descoberta \"%3$s\" em \"%4$s\"."
 
 #: include/classes/import/CConfigurationImport.php:1564
 #, c-format
@@ -2565,7 +2565,7 @@ msgstr "Não foi possível definir o ID de recurso para o elemento da tela."
 
 #: jsLoader.php:191
 msgid "Cannot support notification audio for this device."
-msgstr ""
+msgstr "Não é possível suportar áudio de notificação para este dispositivo."
 
 #: include/classes/api/services/CHostInterface.php:244
 msgid "Cannot switch host for interface."
@@ -3042,7 +3042,7 @@ msgstr "Verifica se o arquivo existe. Retorna 0 - arquivo não existe; 1 - O arq
 
 #: include/classes/items/CHelpItems.php:723
 msgid "Checks if host is accessible by ICMP ping. 0 - ICMP ping fails. 1 - ICMP ping successful."
-msgstr ""
+msgstr "Verifica se o host está acessível por ping ICMP. 0 - O ping ICMP falha. 1 - Ping ICMP bem sucedido."
 
 #: include/classes/items/CHelpItems.php:121
 #: include/classes/items/CHelpItems.php:451
@@ -3777,7 +3777,7 @@ msgstr "Quantidade de linhas compatíveis no arquivo de log monitorado. Retorna 
 
 #: include/classes/items/CHelpItems.php:1095
 msgid "Count of values enqueued in the preprocessing queue."
-msgstr ""
+msgstr "Contagem de valores enfileirados na fila de pré-processamento."
 
 #: include/views/configuration.action.list.php:38
 msgid "Create action"
@@ -4968,31 +4968,31 @@ msgstr "Objeto de descoberta"
 
 #: include/classes/items/CHelpItems.php:751
 msgid "Discovery of VMware clusters, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "Descoberta de clusters VMware, <url> - URL de serviço VMware. Retorna JSON"
 
 #: include/classes/items/CHelpItems.php:759
 msgid "Discovery of VMware datastores, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "Descoberta de datastores VMware, <url> - URL de serviço VMware. Retorna JSON"
 
 #: include/classes/items/CHelpItems.php:803
 msgid "Discovery of VMware hypervisor datastores, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns JSON"
-msgstr ""
+msgstr "Descoberta de datastores do hipervisor VMware, <url> - URL do serviço VMware, <uuid> - Nome do host do hipervisor VMware. Retorna JSON"
 
 #: include/classes/items/CHelpItems.php:823
 msgid "Discovery of VMware hypervisors, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "Descoberta de hipervisores VMware, <url> - URL de serviço VMware. Retorna JSON"
 
 #: include/classes/items/CHelpItems.php:1003
 msgid "Discovery of VMware virtual machine disk devices, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns JSON"
-msgstr ""
+msgstr "Descoberta de dispositivos de disco da máquina virtual VMware, <url> - URL do serviço VMware, <uuid> - Nome do host da máquina virtual VMware. Retorna JSON"
 
 #: include/classes/items/CHelpItems.php:1015
 msgid "Discovery of VMware virtual machine file systems, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns JSON"
-msgstr ""
+msgstr "Descoberta de sistemas de arquivos de máquinas virtuais VMware, <url> - URL do serviço VMware, <uuid> - Nome do host da máquina virtual VMware. Retorna JSON"
 
 #: include/classes/items/CHelpItems.php:927
 msgid "Discovery of VMware virtual machines, <url> - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "Descoberta de máquinas virtuais VMware, <url> - URL do serviço VMware. Retorna JSON"
 
 #: app/views/monitoring.discovery.view.php:42
 #: app/views/monitoring.widget.discovery.view.php:28 include/actions.inc.php:50
@@ -5130,7 +5130,7 @@ msgstr "Não manter histórico"
 #: include/views/configuration.item.massupdate.php:545
 #: include/views/configuration.item.prototype.edit.php:705
 msgid "Do not keep trends"
-msgstr ""
+msgstr "Não mantenha tendências"
 
 #: jsLoader.php:122 jsLoader.php:239
 msgid "Do you wish to replace the conditional expression?"
@@ -7965,7 +7965,7 @@ msgstr "Dado incorreto."
 #: include/classes/db/PostgresqlDbBackend.php:78
 #, c-format
 msgid "Incorrect default charset for Zabbix database: %1$s."
-msgstr ""
+msgstr "Conjunto de caracteres padrão incorreto para o banco de dados Zabbix: %1$s."
 
 #: include/classes/api/services/CEvent.php:594
 #: include/classes/api/services/CProblem.php:393
@@ -8206,7 +8206,7 @@ msgstr "Valor inválido para o objeto."
 #: include/classes/db/OracleDbBackend.php:88
 #, c-format
 msgid "Incorrect parameter \"%1$s\" value: %2$s."
-msgstr ""
+msgstr "Parâmetro incorreto \"%1$s\" valor: %2$s."
 
 #: include/classes/api/services/CAction.php:2824
 #, c-format
@@ -8416,7 +8416,7 @@ msgstr "Grupo de usuários inválido."
 #: include/classes/api/services/CUser.php:1558
 #: include/classes/validators/CLdapAuthValidator.php:88 index_http.php:84
 msgid "Incorrect user name or password or account is temporarily blocked."
-msgstr ""
+msgstr "Nome de usuário ou senha incorretos, ou conta bloqueada temporariamente."
 
 #: app/controllers/CControllerPopupGeneric.php:390
 #: include/classes/api/services/CAction.php:823
@@ -9504,7 +9504,7 @@ msgstr "É aguardado uma string JSON"
 #: include/classes/core/CJsonRpc.php:153
 #, c-format
 msgid "JSON-RPC error generation failed. No such error \"%1$s\"."
-msgstr ""
+msgstr "Falha na geração do erro JSON-RPC. Nenhum erro \"%1$s\"."
 
 #: app/views/administration.mediatype.edit.php:54 include/media.inc.php:27
 msgid "Jabber"
@@ -9636,7 +9636,7 @@ msgstr "Idioma"
 #: include/classes/api/services/CUser.php:553
 #, c-format
 msgid "Language \"%1$s\" is not supported."
-msgstr ""
+msgstr "A linguagem \"%1$s\" não é suportada."
 
 #: include/func.inc.php:1690
 msgctxt "page navigation"
@@ -9893,12 +9893,12 @@ msgstr "Lista de CPUs/núcleos de CPU detectados. Retorna JSON"
 #: include/classes/items/CHelpItems.php:329
 #: include/classes/items/CHelpItems.php:659
 msgid "List of mounted filesystems, their types, disk space and inode statistics. Returns JSON"
-msgstr ""
+msgstr "Lista de sistemas de arquivos montados, seus tipos, espaço em disco e estatísticas de inode. Retorna JSON"
 
 #: include/classes/items/CHelpItems.php:325
 #: include/classes/items/CHelpItems.php:655
 msgid "List of mounted filesystems. Returns JSON"
-msgstr ""
+msgstr "Lista de sistemas de arquivos montados. Retorna JSON"
 
 #: include/classes/items/CHelpItems.php:97
 #: include/classes/items/CHelpItems.php:427
@@ -10966,7 +10966,7 @@ msgstr "Novo evento no grupo de hosts"
 
 #: include/correlation.inc.php:50 include/correlation.inc.php:202
 msgid "New event tag name"
-msgstr ""
+msgstr "Novo nome de etiqueta de evento"
 
 #: include/correlation.inc.php:54
 msgid "New event tag value"
@@ -11942,7 +11942,7 @@ msgstr "Ok"
 
 #: include/correlation.inc.php:49 include/correlation.inc.php:197
 msgid "Old event tag name"
-msgstr ""
+msgstr "Nome antigo da etiqueta de evento"
 
 #: include/correlation.inc.php:53
 msgid "Old event tag value"
@@ -13613,7 +13613,7 @@ msgstr "Solucionado por regra de correlação."
 #: include/classes/screens/CScreenHostTriggers.php:244
 #: include/classes/screens/CScreenProblem.php:972
 msgid "Resolved by inaccessible user."
-msgstr ""
+msgstr "Resolvido por usuário inacessível."
 
 #: app/views/monitoring.widget.problems.view.php:142
 #: include/classes/screens/CScreenHostTriggers.php:243
@@ -15044,7 +15044,7 @@ msgstr "Estático"
 
 #: include/classes/items/CHelpItems.php:1159
 msgid "Statistics and availability of Zabbix write cache. Cache - one of values (modes: all, float, uint, str, log, text, not supported), history (modes: pfree, free, total, used, pused), index (modes: pfree, free, total, used, pused), trend (modes: pfree, free, total, used, pused)."
-msgstr ""
+msgstr "Estatísticas e disponibilidade do cache de gravação do Zabbix. Cache - um dos valores (modos: all, float, uint, str, log, text, não suportado), histórico (modos: pfree, free, total, used, pused), index (modos: pfree, free, total, used , pused), tendência (modos: pfree, free, total, used, pused)."
 
 #: app/controllers/CControllerPopupGeneric.php:145
 #: app/controllers/CControllerPopupGeneric.php:159
@@ -15473,7 +15473,7 @@ msgstr "Template adicionado"
 
 #: include/views/conf.import.php:97
 msgid "Template and host properties that are inherited through template linkage will be unlinked and cleared."
-msgstr ""
+msgstr "As propriedades de modelo e host que são herdadas por meio da vinculação de modelo serão desvinculadas e limpas."
 
 #: include/classes/api/services/CHostBase.php:285
 msgid "Template cannot be linked to another template more than once even through other templates."
@@ -15630,7 +15630,7 @@ msgstr "A coordenada Y do elemento localizado entre X - %1$s e Y - %2$s na tela 
 #: include/classes/db/DbBackend.php:51
 #, c-format
 msgid "The Zabbix database version does not match current requirements. Your database version: %1$s. Required version: %2$s. Please contact your system administrator."
-msgstr ""
+msgstr "A versão do banco de dados Zabbix não atende aos requisitos atuais. Versão do seu banco de dados: %1$s. Versão necessária: %2$s. Entre em contato com o administrador do sistema."
 
 #: include/html.inc.php:687
 #, c-format
@@ -16416,7 +16416,7 @@ msgstr "Não foi possível criar o arquivo de configuração."
 #: include/classes/db/PostgresqlDbBackend.php:44
 #, c-format
 msgid "Unable to determine current Zabbix database version: %1$s."
-msgstr ""
+msgstr "Não foi possível determinar a versão atual do banco de dados Zabbix: %1$s."
 
 #: include/classes/core/CConfigFile.php:163
 msgid "Unable to overwrite the existing configuration file."
@@ -16594,8 +16594,8 @@ msgstr "Som"
 #, c-format
 msgid "Unsupported charset or collation for table: %1$s."
 msgid_plural "Unsupported charset or collation for tables: %1$s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Conjunto de caracteres ou agrupamento não suportado para a tabela: %1$s."
+msgstr[1] "Conjunto de caracteres ou agrupamento não suportado para as tabelas: %1$s."
 
 #: include/classes/import/readers/CImportReaderFactory.php:65
 #, c-format
@@ -17069,7 +17069,7 @@ msgstr "Status do cluster VMware, <url> URL de serviço do VMware, <name> nome d
 
 #: include/classes/items/CHelpItems.php:779
 msgid "VMware datacenters and their IDs. Returns JSON"
-msgstr ""
+msgstr "Datacenters VMware e seus IDs. Retorna JSON"
 
 #: include/classes/items/CHelpItems.php:771
 #: include/classes/items/CHelpItems.php:815
@@ -17078,15 +17078,15 @@ msgstr "Estatísticas de capacidade do datastore em bytes ou em percentual do to
 
 #: include/classes/items/CHelpItems.php:763
 msgid "VMware datastore hypervisors list, <url> - VMware service URL, <datastore> - datastore name"
-msgstr ""
+msgstr "Lista de hipervisores do VMware datastore, <url> - URL do serviço VMware, <datastore> - nome do armazenamento de dados"
 
 #: include/classes/items/CHelpItems.php:767
 msgid "VMware datastore read statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
-msgstr ""
+msgstr "Estatísticas de leitura do armazenamento de dados VMware, <url> - URL do serviço VMware, <datastore> - nome do armazenamento de dados, <mode> - latência/máxima latência - média ou máxima"
 
 #: include/classes/items/CHelpItems.php:775
 msgid "VMware datastore write statistics, <url> - VMware service URL, <datastore> - datastore name, <mode> - latency/maxlatency - average or maximum"
-msgstr ""
+msgstr "Estatísticas de gravação do armazenamento de dados VMware, <url> - URL do serviço VMware, <datastore> - nome do armazenamento de dados, <mode> - latência/máxima latência - média ou máxima"
 
 #: include/classes/items/CHelpItems.php:783
 msgid "VMware event log, <url> - VMware service URL, <mode> - all (default), skip - skip processing of older data"
@@ -17106,7 +17106,7 @@ msgstr "Nome do cluster do hypervisor VMware, <url> - url de serviço do VMware,
 
 #: include/classes/items/CHelpItems.php:799
 msgid "VMware hypervisor datacenter name, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns string"
-msgstr ""
+msgstr "Nome do datacenter do hipervisor VMware, <url> - URL do serviço VMware, <uuid> - Nome do host do hipervisor VMware. Retorna string"
 
 #: include/classes/items/CHelpItems.php:811
 msgid "VMware hypervisor datastore read statistics, <url> - VMware service URL, <uuid> - VMware hypervisor host name, <datastore> - datastore name, <mode> - latency"
@@ -17118,11 +17118,11 @@ msgstr "Estatísticas de gravação do armazenamento de dados do hypervisor VMwa
 
 #: include/classes/items/CHelpItems.php:807
 msgid "VMware hypervisor datastores list, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr ""
+msgstr "Lista de datastores do hypervisor VMware, <url> - URL do serviço VMware, <uuid> - nome do host do hypervisor VMware"
 
 #: include/classes/items/CHelpItems.php:883
 msgid "VMware hypervisor health state rollup sensor, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns 0 - gray; 1 - green; 2 - yellow; 3 - red"
-msgstr ""
+msgstr "Sensor cumulativo de estado de integridade do hipervisor VMware, <url> - URL do serviço VMware, <uuid> - Nome do host do hipervisor VMware. Retorna 0 - cinza; 1 - verde; 2 - amarelo; 3 - vermelho"
 
 #: include/classes/items/CHelpItems.php:851
 msgid "VMware hypervisor model, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
@@ -17202,7 +17202,7 @@ msgstr "Tamanho comprimido da memória comprometida com a máquina virtual VMwar
 
 #: include/classes/items/CHelpItems.php:923
 msgid "VMware virtual machine datacenter name, <url> - VMware service URL, <uuid> - VMware virtual machine host name. Returns string"
-msgstr ""
+msgstr "Nome do datacenter da máquina virtual VMware, <url> - URL do serviço VMware, <uuid> - Nome do host da máquina virtual VMware. Retorna string"
 
 #: include/classes/items/CHelpItems.php:1007
 msgid "VMware virtual machine disk device read statistics, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance, <mode> - bps/ops - bytes/operations per second"
@@ -17406,7 +17406,7 @@ msgstr "Os mapeamentos de valor dos mapas serão atualizados!"
 #: include/classes/items/CHelpItems.php:149
 #: include/classes/items/CHelpItems.php:479
 msgid "Value of any Windows performance counter in English. Returns integer, float, string or text (depending on the request)"
-msgstr ""
+msgstr "Valor de qualquer contador de desempenho do Windows em Inglês. Retorna inteiro, flutuante, string ou texto (dependendo da solicitação)"
 
 #: include/classes/items/CHelpItems.php:145
 #: include/classes/items/CHelpItems.php:475
@@ -17415,15 +17415,15 @@ msgstr "Valor de um contador de performance do Windows. Retorna: inteiro, númer
 
 #: include/correlation.inc.php:227
 msgid "Value of new event tag"
-msgstr ""
+msgstr "Valor da nova etiqueta de evento"
 
 #: include/correlation.inc.php:212 include/correlation.inc.php:220
 msgid "Value of old event tag"
-msgstr ""
+msgstr "Valor da antiga etiqueta de evento"
 
 #: include/actions.inc.php:331
 msgid "Value of tag"
-msgstr ""
+msgstr "Valor da etiqueta"
 
 #: include/classes/graphdraw/CPieGraphDraw.php:357
 msgid "Value: no data"
@@ -17760,7 +17760,7 @@ msgstr "O XML está vazio"
 
 #: include/classes/api/services/CItemGeneral.php:2053
 msgid "XML is expected"
-msgstr ""
+msgstr "XML é esperado"
 
 #: include/views/js/monitoring.sysmaps.js.php:247
 #: include/views/js/monitoring.sysmaps.js.php:384
@@ -17810,7 +17810,7 @@ msgstr "d-m-Y H:i:s"
 
 #: include/translateDefines.inc.php:37
 msgid "Y-n-d"
-msgstr ""
+msgstr "Y-n-d"
 
 #: include/views/js/monitoring.sysmaps.js.php:385
 msgid "Y1"
@@ -18095,7 +18095,7 @@ msgstr "um texto é esperado"
 
 #: include/classes/validators/CApiInputValidator.php:579
 msgid "a floating point value is expected"
-msgstr ""
+msgstr "é esperado um valor de ponto flutuante"
 
 #: include/classes/validators/CApiInputValidator.php:303
 msgid "a hexadecimal colour code (6 symbols) is expected"
@@ -18122,7 +18122,7 @@ msgstr "um valor numérico é esperado"
 
 #: include/classes/validators/CApiInputValidator.php:1728
 msgid "a string, number or null value is expected"
-msgstr ""
+msgstr "uma string, número ou valor nulo é esperado"
 
 #: include/classes/validators/CNewValidator.php:267
 msgid "a time is expected"
@@ -18208,7 +18208,7 @@ msgstr "é esperado um array ou sequência de caracteres"
 
 #: include/classes/validators/CApiInputValidator.php:1708
 msgid "an array or object is expected"
-msgstr ""
+msgstr "um array ou objeto é esperado"
 
 #: include/classes/import/validators/C10XmlValidator.php:397
 #: include/classes/import/validators/C10XmlValidator.php:419
@@ -18225,11 +18225,11 @@ msgstr "um horário explícito é esperado"
 
 #: include/classes/validators/CApiInputValidator.php:449
 msgid "an integer is expected"
-msgstr ""
+msgstr "um número inteiro é esperado"
 
 #: include/classes/validators/CApiInputValidator.php:488
 msgid "an unsigned integer is expected"
-msgstr ""
+msgstr "é esperado um número inteiro sem sinal"
 
 #: include/views/monitoring.history.php:168
 msgid "as Blue"
@@ -18607,12 +18607,12 @@ msgstr "sintaxe incorreta próximo de \"%1$s\""
 
 #: include/classes/parsers/CTriggerExpression.php:462
 msgid "incorrect trigger expression"
-msgstr ""
+msgstr "expressão de trigger incorreta"
 
 #: include/classes/parsers/CTriggerExpression.php:471
 #, c-format
 msgid "incorrect trigger expression starting from \"%1$s\""
-msgstr ""
+msgstr "expressão de gatilho incorreta começando em \"%1$s\""
 
 # Duplicate - Same of: include/views/administration.authentication.edit.php:35
 #: include/events.inc.php:37
@@ -18851,11 +18851,11 @@ msgstr "precisa conter ao menos uma macro de descoberta"
 
 #: include/translateDefines.inc.php:38
 msgid "n-d"
-msgstr ""
+msgstr "n-d"
 
 #: include/translateDefines.inc.php:36
 msgid "n-d H:i"
-msgstr ""
+msgstr "n-d H:i"
 
 #: include/views/configuration.host.discovery.edit.php:125
 #: include/views/configuration.host.discovery.edit.php:222
@@ -18879,7 +18879,7 @@ msgstr "novo"
 
 #: include/views/configuration.correlation.edit.php:142
 msgid "new event tag name"
-msgstr ""
+msgstr "novo nome da tag de evento"
 
 #: include/classes/graphdraw/CLineGraphDraw.php:1948
 #: include/classes/graphdraw/CPieGraphDraw.php:359
@@ -18954,7 +18954,7 @@ msgstr "off"
 
 #: include/views/configuration.correlation.edit.php:145
 msgid "old event tag name"
-msgstr ""
+msgstr "nome antigo da tag de evento"
 
 #: include/classes/setup/CFrontendSetup.php:311
 #: include/classes/setup/CFrontendSetup.php:328
@@ -19175,7 +19175,7 @@ msgstr "o parâmetro \"%1$s\" está ausente"
 #: include/classes/db/PostgresqlDbBackend.php:45
 #, c-format
 msgid "the table \"%1$s\" was not found"
-msgstr ""
+msgstr "a tabela \"%1$s\" não foi encontrada"
 
 #: include/classes/import/validators/CXmlValidatorGeneral.php:106
 #: include/classes/import/validators/CXmlValidatorGeneral.php:125
@@ -19218,7 +19218,7 @@ msgstr "a trigger não permite fechamento manual"
 
 #: include/classes/validators/CApiInputValidator.php:1685
 msgid "trigger expression must contain at least one host:key reference"
-msgstr ""
+msgstr "a expressão do gatilho deve conter pelo menos uma referência host:key"
 
 #: include/classes/api/services/CTriggerGeneral.php:1602
 msgid "trigger prototype cannot be moved to another template or host"
@@ -19235,7 +19235,7 @@ msgstr "informe aqui o argumento para pesquisa"
 
 #: include/classes/validators/CApiInputValidator.php:1638
 msgid "unacceptable URL"
-msgstr ""
+msgstr "URL inaceitável"
 
 #: include/classes/parsers/CItemKey.php:55
 msgid "unexpected end of key"
@@ -19370,7 +19370,7 @@ msgstr "o valor precisa ser um de %1$s"
 
 #: include/correlation.inc.php:215
 msgid "value of new event tag"
-msgstr ""
+msgstr "valor da nova etiqueta de evento"
 
 # need a context...
 #: include/actions.inc.php:566 include/actions.inc.php:584

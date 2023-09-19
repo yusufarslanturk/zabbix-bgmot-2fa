@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 13:27+0200\n"
-"PO-Revision-Date: 2022-07-23 08:30+0000\n"
-"Last-Translator: Brian <brian@oicts.nl>\n"
+"PO-Revision-Date: 2023-09-19 06:12+0000\n"
+"Last-Translator: Sergejs <sergejs.maklakovs@zabbix.com>\n"
 "Language-Team: NL\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: include/classes/db/PostgresqlDbBackend.php:79
 #, c-format
 msgid "\"%1$s\" instead \"%2$s\""
-msgstr ""
+msgstr "\"%1$s\" in plaats van \"%2$s\""
 
 #: include/classes/import/validators/C10XmlValidator.php:358
 #: include/classes/import/validators/C10XmlValidator.php:375
@@ -33,7 +33,7 @@ msgstr ""
 #: include/classes/import/validators/C40XmlValidator.php:1290
 #, c-format
 msgid "\"%1$s\" is expected"
-msgstr ""
+msgstr "\"%1$s\" wordt verwacht"
 
 #: include/classes/api/services/CMaintenance.php:351
 #: include/classes/api/services/CMaintenance.php:356
@@ -50,12 +50,12 @@ msgstr "\"%s\" moet vallen tussen 1970.01.01 en 2038.01.18."
 #: include/classes/import/validators/C10XmlValidator.php:415
 #: include/classes/import/validators/C10XmlValidator.php:436
 msgid "\"host:key\" pair is expected"
-msgstr ""
+msgstr "\"host:key\" paar wordt verwacht"
 
 #: include/classes/api/services/CDRule.php:520
 #, c-format
 msgid "%1$d characters exceeds maximum length of %2$d characters"
-msgstr ""
+msgstr "%1$d karakters zijn langer dan de maximum toegestane lengte van %2$d karakters"
 
 #: include/func.inc.php:510
 #, c-format
@@ -68,15 +68,15 @@ msgstr[1] "%1$d dagen"
 #, c-format
 msgctxt "screen reader"
 msgid "%1$d matches for %2$s found"
-msgstr ""
+msgstr "%1$d overeenkomsten gevonden voor %2$s"
 
 #: app/controllers/CControllerWidgetProblemsView.php:56
 #: include/classes/screens/CScreenHostTriggers.php:199
 #, c-format
 msgid "%1$d of %3$d%2$s problem is shown"
 msgid_plural "%1$d of %3$d%2$s problems are shown"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$d van %3$d%2$s problemen gevonden"
+msgstr[1] "%1$d van %3$d%2$s problemer gevonden"
 
 #: chart4.php:94 chart5.php:89
 #, c-format
@@ -94,39 +94,39 @@ msgstr[1] "%1$s Items"
 #: include/classes/import/readers/CXmlImportReader.php:46
 #, c-format
 msgid "%1$s [Line: %2$s | Column: %3$s]"
-msgstr ""
+msgstr "%1$s [Regel: %2$s | Kolom: %3$s]"
 
 #: include/actions.inc.php:1962
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s action"
 msgid_plural "%1$s actions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s actie"
+msgstr[1] "%1$s acties"
 
 #: app/views/monitoring.acknowledge.edit.php:51
 #: app/views/monitoring.acknowledge.edit.php:56
 #, c-format
 msgid "%1$s event"
 msgid_plural "%1$s events"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s evenement"
+msgstr[1] "%1$s evenementen"
 
 #: app/controllers/CControllerWidgetPlainTextView.php:119
 #: include/views/monitoring.history.php:27
 #, c-format
 msgid "%1$s item"
 msgid_plural "%1$s items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s Item"
+msgstr[1] "%1$s items"
 
 #: include/actions.inc.php:1799
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s message"
 msgid_plural "%1$s messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s bericht"
+msgstr[1] "%1$s berichten"
 
 #: include/classes/widgets/CWidgetConfig.php:155
 #: include/classes/widgets/CWidgetConfig.php:156
@@ -143,28 +143,28 @@ msgstr[1] "%1$s minuten"
 #, c-format
 msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s van %2$s element in probleem status"
+msgstr[1] "%1$s van %2$s elementen in probleem status"
 
 #: jsLoader.php:226
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s preselected, use down,up arrow keys and enter to select"
-msgstr ""
+msgstr "%1$s voorgeselecteerd, gebruik de pijltoetsen omlaag, omhoog en enter om te selecteren"
 
 #: include/maps.inc.php:1095
 #, c-format
 msgid "%1$s problem"
 msgid_plural "%1$s problems"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s probleem"
+msgstr[1] "%1$s problemen"
 
 #: include/classes/helpers/CMapHelper.php:246
 #, c-format
 msgid "%1$s problem in total"
 msgid_plural "%1$s problems in total"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s probleem in totaal"
+msgstr[1] "%1$s problemen in totaal"
 
 #: app/views/monitoring.widget.actionlog.view.php:41
 #: include/actions.inc.php:2234 include/classes/screens/CScreenActions.php:129
@@ -188,26 +188,26 @@ msgstr[1] "%1$s seconden"
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s widget"
-msgstr ""
+msgstr "%1$s widget"
 
 #: app/views/monitoring.widget.problemhosts.view.php:98
 #: app/views/monitoring.widget.problems.view.php:158
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, Severity, %2$s"
-msgstr ""
+msgstr "%1$s, Urgentie, %2$s"
 
 #: jsLoader.php:220
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, read only"
-msgstr ""
+msgstr "%1$s, alleen lezen"
 
 #: jsLoader.php:270
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, selected"
-msgstr ""
+msgstr "%1$s, geselecteerd"
 
 #: app/views/layout.htmlpage.php:106 include/page_header.php:263
 #, c-format
@@ -231,11 +231,11 @@ msgstr "(%1$s %2$s)"
 
 #: include/views/configuration.action.edit.php:601
 msgid "(0 - infinitely)"
-msgstr ""
+msgstr "(0 - oneindig)"
 
 #: include/views/configuration.action.edit.php:608
 msgid "(0 - use action default)"
-msgstr ""
+msgstr "(0 - gebruik actie standaard)"
 
 #: include/views/configuration.hostgroups.list.php:30
 msgid "(Only super admins can create groups)"
@@ -250,7 +250,7 @@ msgstr "(geen proxy)"
 
 #: include/classes/setup/CSetupWizard.php:231
 msgid "0 - use default port"
-msgstr ""
+msgstr "0 - gebruik standaard poort"
 
 #: include/triggers.inc.php:1889
 msgid "0 or 1"
@@ -266,7 +266,7 @@ msgstr "10 seconden"
 
 #: include/views/reports.toptriggers.php:112 toptriggers.php:25
 msgid "100 busiest triggers"
-msgstr ""
+msgstr "100 drukste triggers"
 
 #: queue.php:112 queue.php:173
 msgid "30 seconds"
@@ -294,11 +294,11 @@ msgstr "<handmatig>"
 
 #: app/views/administration.script.edit.php:39
 msgid "<sub-menu/sub-menu/...>script"
-msgstr ""
+msgstr "<sub-menu/sub-menu/...>script"
 
 #: include/classes/widgets/CWidgetHelper.php:700
 msgid "ADD OVERRIDE"
-msgstr ""
+msgstr "OVERRIDE TOEVOEGEN"
 
 #: include/views/configuration.host.discovery.edit.php:445
 #: include/views/configuration.item.edit.php:572
@@ -321,7 +321,7 @@ msgstr "Aanvaardbare SLA"
 
 #: include/func.inc.php:1825
 msgid "Access denied"
-msgstr ""
+msgstr "Toegang geweigerd"
 
 #: sysmap.php:78
 msgid "Access denied!"
@@ -355,7 +355,7 @@ msgstr "Bevestigde gebeurtenissen met status Probleem"
 #: adm.triggerdisplayoptions.php:42
 #: include/views/administration.general.trigger.options.edit.php:71
 msgid "Acknowledged RESOLVED events"
-msgstr ""
+msgstr "Bevestigde opgeloste gebeurtenissen"
 
 #: app/views/administration.mediatype.edit.php:103
 #: app/views/dashboard.sharing.edit.php:24
