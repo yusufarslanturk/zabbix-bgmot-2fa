@@ -1395,6 +1395,16 @@ zabbix_export:
             - name: 'APC UPS: General'
               widgets:
                 - type: graph
+                  name: Voltage
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'APC UPS by SNMP'
+                        name: 'APC UPS: Voltage'
+                - type: graph
                   name: 'Capacity of the UPS batteries'
                   'y': '5'
                   width: '12'
@@ -1416,16 +1426,6 @@ zabbix_export:
                       value:
                         host: 'APC UPS by SNMP'
                         name: 'APC UPS: Output'
-                - type: graph
-                  name: Voltage
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'APC UPS by SNMP'
-                        name: 'APC UPS: Voltage'
       valuemaps:
         - uuid: a808aadebf964e0cb6b8724bf1165013
           name: 'PowerNet-MIB::uioSensorStatusAlarmStatus'

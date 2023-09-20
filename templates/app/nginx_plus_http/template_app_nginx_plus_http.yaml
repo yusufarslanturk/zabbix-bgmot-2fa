@@ -2914,16 +2914,6 @@ zabbix_export:
                         host: 'NGINX Plus by HTTP'
                         name: 'Nginx: Connections'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'NGINX Plus by HTTP'
-                        name: 'Nginx: Requests'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -2933,6 +2923,16 @@ zabbix_export:
                       value:
                         host: 'NGINX Plus by HTTP'
                         name: 'Nginx: SSL'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'NGINX Plus by HTTP'
+                        name: 'Nginx: Requests'
                 - type: graph
                   x: '12'
                   'y': '5'
