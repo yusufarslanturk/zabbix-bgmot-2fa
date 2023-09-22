@@ -251,10 +251,10 @@ import (
 	"time"
 	"unsafe"
 
-	"zabbix.com/pkg/itemutil"
-	"zabbix.com/internal/agent"
-	"zabbix.com/pkg/tls"
 	"git.zabbix.com/ap/plugin-support/log"
+	"zabbix.com/internal/agent"
+	"zabbix.com/pkg/itemutil"
+	"zabbix.com/pkg/tls"
 )
 
 const (
@@ -313,6 +313,8 @@ func NewActiveMetric(key string, params []string, lastLogsize uint64, mtime int3
 	default:
 		return nil, errors.New("Unsupported item key.")
 	}
+
+	/* will be freed in FreeActiveMetric */
 	ckey := C.CString(itemutil.MakeKey(key, params))
 
 	log.Tracef("Calling C function \"new_metric()\"")
@@ -324,7 +326,7 @@ func FreeActiveMetric(data unsafe.Pointer) {
 	C.metric_free(C.ZBX_ACTIVE_METRIC_LP(data))
 }
 
-func ProcessLogCheck(data unsafe.Pointer, item *LogItem, refresh int, cblob unsafe.Pointer) {
+func ProcessLogCheck(data unsafe.Pointer, item *LogItem, refresh int, cblob unsafe.Pointer, itemid uint64) {
 	log.Tracef("Calling C function \"metric_set_refresh()\"")
 	C.metric_set_refresh(C.ZBX_ACTIVE_METRIC_LP(data), C.int(refresh))
 
@@ -335,43 +337,74 @@ func ProcessLogCheck(data unsafe.Pointer, item *LogItem, refresh int, cblob unsa
 	clastLogsizeLast = clastLogsizeSent
 	cmtimeLast = cmtimeSent
 
-	log.Tracef("Calling C function \"new_log_result()\"")
-	result := C.new_log_result(C.int(item.Output.PersistSlotsAvailable()))
-
 	var tlsConfig *tls.Config
 	var err error
-	var ctlsConfig C.zbx_config_tls_t;
-	var ctlsConfig_p *C.zbx_config_tls_t;
+	var ctlsConfig C.zbx_config_tls_t
+	var ctlsConfig_p *C.zbx_config_tls_t
 
 	if tlsConfig, err = agent.GetTLSConfig(&agent.Options); err != nil {
-		result := &LogResult{
+		r := &LogResult{
 			Ts:    time.Now(),
 			Error: err,
 		}
-		item.Results = append(item.Results, result)
+		item.Results = append(item.Results, r)
 
 		return
 	}
-	if (nil != tlsConfig) {
+
+	log.Tracef("Calling C function \"new_log_result()\"")
+	result := C.new_log_result(C.int(item.Output.PersistSlotsAvailable()))
+
+	if nil != tlsConfig {
+
+		cPSKIdentity := (C.CString)(tlsConfig.PSKIdentity)
+		cPSKKey := (C.CString)(tlsConfig.PSKKey)
+		cCAFile := (C.CString)(tlsConfig.CAFile)
+		cCRLFile := (C.CString)(tlsConfig.CRLFile)
+		cCertFile := (C.CString)(tlsConfig.CertFile)
+		cKeyFile := (C.CString)(tlsConfig.KeyFile)
+		cServerCertIssuer := (C.CString)(tlsConfig.ServerCertIssuer)
+		cServerCertSubject := (C.CString)(tlsConfig.ServerCertSubject)
+
+		defer func() {
+			log.Tracef("Calling C function \"free(cPSKIdentity)\"")
+			C.free(unsafe.Pointer(cPSKIdentity))
+			log.Tracef("Calling C function \"free(cPSKKey)\"")
+			C.free(unsafe.Pointer(cPSKKey))
+			log.Tracef("Calling C function \"free(cCAFile)\"")
+			C.free(unsafe.Pointer(cCAFile))
+			log.Tracef("Calling C function \"free(cCRLFile)\"")
+			C.free(unsafe.Pointer(cCRLFile))
+			log.Tracef("Calling C function \"free(cCertFile)\"")
+			C.free(unsafe.Pointer(cCertFile))
+			log.Tracef("Calling C function \"free(cKeyFile)\"")
+			C.free(unsafe.Pointer(cKeyFile))
+			log.Tracef("Calling C function \"free(cServerCertIssuer)\"")
+			C.free(unsafe.Pointer(cServerCertIssuer))
+			log.Tracef("Calling C function \"free(cServerCertSubject)\"")
+			C.free(unsafe.Pointer(cServerCertSubject))
+		}()
+
 		log.Tracef("Calling C function \"zbx_config_tls_init_for_agent2()\"")
+
 		C.zbx_config_tls_init_for_agent2(&ctlsConfig, (C.uint)(tlsConfig.Accept), (C.uint)(tlsConfig.Connect),
-			(C.CString)(tlsConfig.PSKIdentity), (C.CString)(tlsConfig.PSKKey),
-			(C.CString)(tlsConfig.CAFile), (C.CString)(tlsConfig.CRLFile), (C.CString)(tlsConfig.CertFile),
-			(C.CString)(tlsConfig.KeyFile), (C.CString)(tlsConfig.ServerCertIssuer),
-			(C.CString)(tlsConfig.ServerCertSubject));
+			cPSKIdentity, cPSKKey, cCAFile, cCRLFile, cCertFile, cKeyFile, cServerCertIssuer, cServerCertSubject)
 		ctlsConfig_p = &ctlsConfig
 	}
 
 	var cerrmsg *C.char
 	log.Tracef("Calling C function \"new_prep_vec()\"")
 	cprepVec := C.new_prep_vec() // In Agent2 it is always empty vector. Not used but required for linking.
+
+	defer func() {
+		log.Tracef("Calling C function \"free_prep_vec()\"")
+		C.free_prep_vec(cprepVec)
+	}()
+
 	log.Tracef("Calling C function \"process_log_check()\"")
 	ret := C.process_log_check(nil, C.zbx_vector_ptr_lp_t(unsafe.Pointer(result)), C.zbx_vector_expression_lp_t(cblob),
 		C.ZBX_ACTIVE_METRIC_LP(data), C.zbx_process_value_func_t(C.process_value_cb), &clastLogsizeSent,
-		&cmtimeSent, &cerrmsg, cprepVec, ctlsConfig_p, (C.int)(agent.Options.Timeout))
-
-	log.Tracef("Calling C function \"free_prep_vec()\"")
-	C.free_prep_vec(cprepVec)
+		&cmtimeSent, &cerrmsg, cprepVec, ctlsConfig_p, (C.int)(agent.Options.Timeout), C.zbx_uint64_t(itemid))
 
 	// add cached results
 	var cvalue *C.char
@@ -419,11 +452,11 @@ func ProcessLogCheck(data unsafe.Pointer, item *LogItem, refresh int, cblob unsa
 		} else {
 			err = errors.New("Unknown error.")
 		}
-		result := &LogResult{
+		r := &LogResult{
 			Ts:    time.Now(),
 			Error: err,
 		}
-		item.Results = append(item.Results, result)
+		item.Results = append(item.Results, r)
 	} else {
 		log.Tracef("Calling C function \"metric_set_supported()\"")
 		ret := C.metric_set_supported(C.ZBX_ACTIVE_METRIC_LP(data), clastLogsizeSent, cmtimeSent, clastLogsizeLast,
@@ -432,12 +465,12 @@ func ProcessLogCheck(data unsafe.Pointer, item *LogItem, refresh int, cblob unsa
 		if ret == Succeed {
 			log.Tracef("Calling C function \"metric_get_meta()\"")
 			C.metric_get_meta(C.ZBX_ACTIVE_METRIC_LP(data), &clastLogsizeLast, &cmtimeLast)
-			result := &LogResult{
+			r := &LogResult{
 				Ts:          time.Now(),
 				LastLogsize: uint64(clastLogsizeLast),
 				Mtime:       int(cmtimeLast),
 			}
-			item.Results = append(item.Results, result)
+			item.Results = append(item.Results, r)
 		}
 	}
 }

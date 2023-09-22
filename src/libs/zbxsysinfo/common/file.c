@@ -35,8 +35,6 @@
 #include "sddl.h"
 #endif
 
-#define ZBX_MAX_DB_FILE_SIZE	64 * ZBX_KIBIBYTE	/* files larger than 64 KB cannot be stored in the database */
-
 int	vfs_file_size(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
 	zbx_stat_t	buf;
@@ -353,6 +351,7 @@ int	vfs_file_exists(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 int	vfs_file_contents(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
+#define ZBX_MAX_VFS_FILE_SIZE	16 * ZBX_MEBIBYTE	/* file contents larger than 64 KB will be truncated in the database */
 	char		*filename, *tmp, encoding[32];
 	char		read_buf[MAX_BUFFER_LEN], *utf8, *contents = NULL;
 	size_t		contents_alloc = 0, contents_offset = 0;
@@ -400,7 +399,7 @@ int	vfs_file_contents(AGENT_REQUEST *request, AGENT_RESULT *result)
 		goto err;
 	}
 
-	if (ZBX_MAX_DB_FILE_SIZE < stat_buf.st_size)
+	if (ZBX_MAX_VFS_FILE_SIZE < stat_buf.st_size)
 	{
 		SET_MSG_RESULT(result, zbx_strdup(NULL, "File is too large for this check."));
 		goto err;
@@ -414,7 +413,7 @@ int	vfs_file_contents(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	flen = 0;
 
-	while (0 < (nbytes = zbx_read(f, read_buf, sizeof(read_buf), encoding)))
+	while (0 < (nbytes = read(f, read_buf, sizeof(read_buf))))
 	{
 		if (sysinfo_get_config_timeout() < zbx_time() - ts)
 		{
@@ -423,16 +422,14 @@ int	vfs_file_contents(AGENT_REQUEST *request, AGENT_RESULT *result)
 			goto err;
 		}
 
-		if (ZBX_MAX_DB_FILE_SIZE < (flen += nbytes))
+		if (ZBX_MAX_VFS_FILE_SIZE < (flen += nbytes))
 		{
 			SET_MSG_RESULT(result, zbx_strdup(NULL, "File is too large for this check."));
 			zbx_free(contents);
 			goto err;
 		}
 
-		utf8 = zbx_convert_to_utf8(read_buf, nbytes, encoding);
-		zbx_strcpy_alloc(&contents, &contents_alloc, &contents_offset, utf8);
-		zbx_free(utf8);
+		zbx_str_memcpy_alloc(&contents, &contents_alloc, &contents_offset, read_buf, nbytes);
 	}
 
 	if (-1 == nbytes)	/* error occurred */
@@ -442,16 +439,16 @@ int	vfs_file_contents(AGENT_REQUEST *request, AGENT_RESULT *result)
 		goto err;
 	}
 
-	if (0 != contents_offset)
-		contents_offset -= zbx_rtrim(contents, "\r\n");
-
-	if (0 == contents_offset) /* empty file */
+	if (NULL != contents)
 	{
+		utf8 = zbx_convert_to_utf8(contents, contents_offset, encoding);
 		zbx_free(contents);
-		contents = zbx_strdup(contents, "");
-	}
+		zbx_rtrim_utf8(utf8, "\r\n");
 
-	SET_TEXT_RESULT(result, contents);
+		SET_TEXT_RESULT(result, utf8);
+	}
+	else
+		SET_TEXT_RESULT(result, zbx_strdup(NULL, ""));
 
 	ret = SYSINFO_RET_OK;
 err:
@@ -459,6 +456,7 @@ err:
 		close(f);
 
 	return ret;
+#undef ZBX_MAX_VFS_FILE_SIZE
 }
 
 int	vfs_file_regexp(AGENT_REQUEST *request, AGENT_RESULT *result)
@@ -535,7 +533,7 @@ int	vfs_file_regexp(AGENT_REQUEST *request, AGENT_RESULT *result)
 		goto err;
 	}
 
-	while (0 < (nbytes = zbx_read(f, buf, sizeof(buf), encoding)))
+	while (0 < (nbytes = zbx_read_text_line_from_file(f, buf, sizeof(buf), encoding)))
 	{
 		if (sysinfo_get_config_timeout() < zbx_time() - ts)
 		{
@@ -565,7 +563,12 @@ int	vfs_file_regexp(AGENT_REQUEST *request, AGENT_RESULT *result)
 		}
 	}
 
-	if (-1 == nbytes)	/* error occurred */
+	if (ZBX_READ_WRONG_ENCODING == nbytes)
+	{
+		SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot read from file. Wrong encoding detected."));
+		goto err;
+	}
+	else if (ZBX_READ_ERR == nbytes)	/* general error occurred */
 	{
 		SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot read from file."));
 		goto err;
@@ -657,7 +660,7 @@ int	vfs_file_regmatch(AGENT_REQUEST *request, AGENT_RESULT *result)
 
 	res = 0;
 
-	while (0 == res && 0 < (nbytes = zbx_read(f, buf, sizeof(buf), encoding)))
+	while (0 == res && 0 < (nbytes = zbx_read_text_line_from_file(f, buf, sizeof(buf), encoding)))
 	{
 		if (sysinfo_get_config_timeout() < zbx_time() - ts)
 		{
@@ -669,6 +672,7 @@ int	vfs_file_regmatch(AGENT_REQUEST *request, AGENT_RESULT *result)
 			continue;
 
 		utf8 = zbx_convert_to_utf8(buf, nbytes, encoding);
+
 		zbx_rtrim(utf8, "\r\n");
 		if (NULL != zbx_regexp_match(utf8, regexp, NULL))
 			res = 1;
@@ -678,7 +682,12 @@ int	vfs_file_regmatch(AGENT_REQUEST *request, AGENT_RESULT *result)
 			break;
 	}
 
-	if (-1 == nbytes)	/* error occurred */
+	if (ZBX_READ_WRONG_ENCODING == nbytes)
+	{
+		SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot read from file. Wrong encoding detected."));
+		goto err;
+	}
+	else if (ZBX_READ_ERR == nbytes)	/* error occurred */
 	{
 		SET_MSG_RESULT(result, zbx_strdup(NULL, "Cannot read from file."));
 		goto err;

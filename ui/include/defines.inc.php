@@ -18,8 +18,8 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-define('ZABBIX_VERSION',		'6.4.3rc1');
-define('ZABBIX_API_VERSION',	'6.4.3');
+define('ZABBIX_VERSION',		'6.4.7rc1');
+define('ZABBIX_API_VERSION',	'6.4.7');
 define('ZABBIX_EXPORT_VERSION',	'6.4');
 
 define('ZABBIX_DB_VERSION',		6040000);
@@ -125,11 +125,11 @@ define('ZBX_SCRIPT_EXECUTE_ON_AGENT',	0);
 define('ZBX_SCRIPT_EXECUTE_ON_SERVER',	1);
 define('ZBX_SCRIPT_EXECUTE_ON_PROXY',	2);
 
+define('ZBX_PROXY_VERSION_ANY_OUTDATED', -2);
 define('ZBX_PROXY_VERSION_UNDEFINED', 0);
 define('ZBX_PROXY_VERSION_CURRENT', 1);
 define('ZBX_PROXY_VERSION_OUTDATED', 2);
 define('ZBX_PROXY_VERSION_UNSUPPORTED', 3);
-define('ZBX_PROXY_VERSION_ALL_OUTDATED', 4);
 
 define('ZBX_FLAG_DISCOVERY_NORMAL',		0x0);
 define('ZBX_FLAG_DISCOVERY_RULE',		0x1);
@@ -1363,9 +1363,15 @@ define('ZBX_TIME_SUFFIX_MULTIPLIERS', [
 	'y' => SEC_PER_YEAR
 ]);
 
-// Byte suffixes and multipliers.
-define('ZBX_BYTE_SUFFIXES', 'KMGT');
-define('ZBX_BYTE_SUFFIX_MULTIPLIERS', [
+// Size suffixes and multipliers.
+define('ZBX_SIZE_SUFFIXES', 'KMGT');
+define('ZBX_SIZE_SUFFIX_MULTIPLIERS', [
+	'K' => 1000,
+	'M' => 1000**2,
+	'G' => 1000**3,
+	'T' => 1000**4
+]);
+define('ZBX_SIZE_SUFFIX_MULTIPLIERS_BINARY', [
 	'K' => ZBX_KIBIBYTE,
 	'M' => ZBX_MEBIBYTE,
 	'G' => ZBX_GIBIBYTE,
@@ -1422,7 +1428,7 @@ define('VALUEMAP_MAPPING_TYPE_IN_RANGE',		3);
 define('VALUEMAP_MAPPING_TYPE_REGEXP',			4);
 define('VALUEMAP_MAPPING_TYPE_DEFAULT',			5);
 
-define('ZBX_SOCKET_BYTES_LIMIT',    ZBX_MEBIBYTE * 16); // socket response size limit
+define('ZBX_SOCKET_BYTES_LIMIT',    ZBX_MEBIBYTE * 32); // socket response size limit
 
 // value is also used in servercheck.js file
 define('SERVER_CHECK_INTERVAL', 10);
@@ -1552,6 +1558,7 @@ if (!defined('JSON_ERROR_SYNTAX')) {
 // API errors
 define('ZBX_API_ERROR_INTERNAL',	111);
 define('ZBX_API_ERROR_PARAMETERS',	100);
+define('ZBX_API_ERROR_NO_ENTITY',	101);
 define('ZBX_API_ERROR_PERMISSIONS',	120);
 define('ZBX_API_ERROR_NO_AUTH',		200);
 define('ZBX_API_ERROR_NO_METHOD',	300);
@@ -1936,6 +1943,7 @@ define('ZBX_STYLE_FLOAT_LEFT', 'float-left');
 define('ZBX_STYLE_FORM_INPUT_MARGIN', 'form-input-margin');
 define('ZBX_STYLE_FORM_FIELDS_INLINE', 'form-fields-inline');
 define('ZBX_STYLE_FORM_NEW_GROUP', 'form-new-group');
+define('ZBX_STYLE_FORM_SUBMIT_HIDDEN', 'form-submit-hidden');
 define('ZBX_STYLE_GRAPH_WRAPPER', 'graph-wrapper');
 define('ZBX_STYLE_GREEN', 'green');
 define('ZBX_STYLE_GREEN_BG', 'green-bg');

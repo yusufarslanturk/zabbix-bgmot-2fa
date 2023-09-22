@@ -241,6 +241,14 @@
 					curl.setArgument('action', 'dashboard.view');
 					curl.setArgument('dashboardid', response.dashboardid);
 
+					const dashboard_page_index = ZABBIX.Dashboard.getDashboardPageIndex(
+						ZABBIX.Dashboard.getSelectedDashboardPage()
+					);
+
+					if (dashboard_page_index > 0) {
+						curl.setArgument('page', dashboard_page_index + 1);
+					}
+
 					location.replace(curl.getUrl());
 				})
 				.catch((exception) => {
@@ -274,6 +282,8 @@
 		},
 
 		cancelEditing() {
+			this.disableNavigationWarning();
+
 			const curl = new Curl('zabbix.php');
 
 			curl.setArgument('action', 'dashboard.view');

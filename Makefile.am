@@ -137,7 +137,7 @@ css_icons:
 css: css_theme_blue css_theme_dark css_hc_light css_hc_dark css_icons
 
 ## cmocka test support
-if ZBXCMOCKA
+if TESTS
 WRAP_DB_FUNCS = \
 	-Wl,--wrap=zbx_db_vselect \
 	-Wl,--wrap=zbx_db_select_n_basic \
@@ -152,6 +152,7 @@ WRAP_IO_FUNCS = \
 	-Wl,--wrap=fopen \
 	-Wl,--wrap=fclose \
 	-Wl,--wrap=fgets \
+	-Wl,--wrap=fstat \
 	-Wl,--wrap=open
 
 WRAP_FS_FUNCS = \
@@ -182,13 +183,30 @@ COMMON_WRAP_FUNCS = \
 tests_build:
 	$(MAKE) $(AM_MAKEFLAGS) && \
 	cd tests && \
-	$(MAKE) $(AM_MAKEFLAGS) LDFLAGS="$(LDFLAGS) $(COMMON_WRAP_FUNCS)" LIBS="$(LIBS) -lcmocka -lyaml"
+	$(MAKE) $(AM_MAKEFLAGS) LDFLAGS="$(LDFLAGS) $(COMMON_WRAP_FUNCS)" LIBS="$(LIBS)"
 
 tests: tests_build
+	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CMOCKA_LIBRARY_PATH):$(YAML_LIBRARY_PATH); \
 	tests/tests_run.pl
 
 clean: clean-recursive
 	cd tests && $(MAKE) clean
 endif
 
-.PHONY: test tests clean
+sbom: sbom-ui
+
+sbom-ui: ui/sbom.json
+
+ui/sbom.json:
+	(cd ${@D} && \
+		composer CycloneDX:make-sbom --omit=dev --no-interaction \
+		--spec-version=1.4 \
+		--output-reproducible --output-format=JSON --output-file="${@F}")
+
+ui/sbom.xml:
+	(cd ${@D} && \
+		composer CycloneDX:make-sbom --omit=dev --no-interaction \
+		--spec-version=1.4 \
+		--output-reproducible --output-format=XML --output-file="${@F}")
+
+.PHONY: test tests clean sbom sbom-ui

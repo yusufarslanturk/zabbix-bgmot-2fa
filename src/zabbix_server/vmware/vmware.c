@@ -2788,7 +2788,12 @@ static int	vmware_service_authenticate(zbx_vmware_service_t *service, CURL *easy
 
 #if LIBCURL_VERSION_NUM >= 0x071304
 	/* CURLOPT_PROTOCOLS is supported starting with version 7.19.4 (0x071304) */
+	/* CURLOPT_PROTOCOLS was deprecated in favor of CURLOPT_PROTOCOLS_STR starting with version 7.85.0 (0x075500) */
+#	if LIBCURL_VERSION_NUM >= 0x075500
+	if (CURLE_OK != (err = curl_easy_setopt(easyhandle, opt = CURLOPT_PROTOCOLS_STR, "HTTP,HTTPS")))
+#	else
 	if (CURLE_OK != (err = curl_easy_setopt(easyhandle, opt = CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS)))
+#	endif
 	{
 		*error = zbx_dsprintf(*error, "Cannot set cURL option %d: %s.", (int)opt, curl_easy_strerror(err));
 		goto out;
@@ -10205,13 +10210,15 @@ void	zbx_vmware_shared_tags_error_set(const char *error, zbx_vmware_data_tags_t 
  *             dst - [OUT] the shared tags container                          *
  *                                                                            *
  ******************************************************************************/
-void	zbx_vmware_shared_tags_replace(const zbx_vector_vmware_entity_tags_t *src, zbx_vector_vmware_entity_tags_t *dst)
+void	zbx_vmware_shared_tags_replace(const zbx_vector_vmware_entity_tags_t *src, zbx_vmware_data_tags_t *dst)
 {
 	int	i, j;
 
 	zbx_vmware_lock();
 
-	zbx_vector_vmware_entity_tags_clear_ext(dst, vmware_shared_entity_tags_free);
+	zbx_vector_vmware_entity_tags_clear_ext(&dst->entity_tags, vmware_shared_entity_tags_free);
+	vmware_shared_strfree(dst->error);
+	dst->error = NULL;
 
 	for (i = 0; i < src->values_num; i++)
 	{
@@ -10245,7 +10252,7 @@ void	zbx_vmware_shared_tags_replace(const zbx_vector_vmware_entity_tags_t *src, 
 			zbx_vector_vmware_tag_append(&to_entity->tags, to_tag);
 		}
 
-		zbx_vector_vmware_entity_tags_append(dst, to_entity);
+		zbx_vector_vmware_entity_tags_append(&dst->entity_tags, to_entity);
 	}
 
 	zbx_vmware_unlock();

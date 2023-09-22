@@ -2478,7 +2478,7 @@ static int	get_history_log_value(const char *m, const zbx_db_trigger *trigger, c
 		int clock, int ns, const char *tz)
 {
 	zbx_uint64_t	itemid;
-	int		ret, request;
+	int		ret = FAIL, request;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
 
@@ -2506,12 +2506,16 @@ static int	get_history_log_value(const char *m, const zbx_db_trigger *trigger, c
 	{
 		request = ZBX_REQUEST_ITEM_LOG_SOURCE;
 	}
-	else	/* MVAR_ITEM_LOG_TIME */
+	else if (0 == strcmp(m, MVAR_ITEM_LOG_TIME))
+	{
 		request = ZBX_REQUEST_ITEM_LOG_TIME;
+	}
+	else
+		goto out;
 
 	if (SUCCEED == (ret = zbx_db_trigger_get_itemid(trigger, N_functionid, &itemid)))
 		ret = DBget_history_log_value(itemid, replace_to, request, clock, ns, tz);
-
+out:
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_result_string(ret));
 
 	return ret;
@@ -6443,7 +6447,13 @@ int	zbx_substitute_expression_lld_macros(char **data, zbx_uint64_t rules, const 
 			case ZBX_EVAL_TOKEN_VAR_STR:
 			case ZBX_EVAL_TOKEN_VAR_NUM:
 			case ZBX_EVAL_TOKEN_ARG_PERIOD:
-				value = zbx_substr_unquote(ctx.expression, token->loc.l, token->loc.r);
+				if (ZBX_VARIANT_STR == token->value.type)
+				{
+					value = token->value.data.str;
+					zbx_variant_set_none(&token->value);
+				}
+				else
+					value = zbx_substr_unquote(ctx.expression, token->loc.l, token->loc.r);
 
 				if (FAIL == zbx_substitute_lld_macros(&value, jp_row, lld_macro_paths, ZBX_MACRO_ANY, err,
 						sizeof(err)))
@@ -6799,7 +6809,7 @@ int	zbx_substitute_function_lld_param(const char *e, size_t len, unsigned char k
 		char **exp, size_t *exp_alloc, size_t *exp_offset, const struct zbx_json_parse *jp_row,
 		const zbx_vector_ptr_t *lld_macro_paths, char *error, size_t max_error_len)
 {
-	int		ret = SUCCEED;
+	int		ret = SUCCEED, index = 0;
 	size_t		sep_pos;
 	char		*param = NULL;
 	const char	*p;
@@ -6853,7 +6863,20 @@ int	zbx_substitute_function_lld_param(const char *e, size_t len, unsigned char k
 				param = key;
 		}
 		else
+		{
+			int	check_quoting = 0;
+
+			/* don't attempt to quote first two parameters - /host/key placeholder and time period. */
+			/* While depending on function time period might have different syntax, it still does   */
+			/* not have to be quoted.                                                               */
+			if (2 <= index && 0 == strncmp(param, "{#", 2))
+				check_quoting = 1;
+
 			zbx_substitute_lld_macros(&param, jp_row, lld_macro_paths, ZBX_MACRO_ANY, NULL, 0);
+
+			if (0 == quoted && 0 != check_quoting && SUCCEED != zbx_eval_suffixed_number_parse(param, NULL))
+				quoted = 1;
+		}
 
 		if (SUCCEED != zbx_function_param_quote(&param, quoted))
 		{
@@ -6869,6 +6892,8 @@ int	zbx_substitute_function_lld_param(const char *e, size_t len, unsigned char k
 		if (sep_pos < rel_len)
 			zbx_strncpy_alloc(exp, exp_alloc, exp_offset, p + param_pos + param_len,
 					sep_pos - param_pos - param_len + 1);
+
+		index++;
 	}
 out:
 	zbx_free(param);

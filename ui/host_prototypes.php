@@ -91,7 +91,7 @@ if (getRequest('parent_discoveryid')) {
 		$hostPrototype = API::HostPrototype()->get([
 			'output' => API_OUTPUT_EXTEND,
 			'selectGroupLinks' => ['groupid'],
-			'selectGroupPrototypes' => ['name'],
+			'selectGroupPrototypes' => ['group_prototypeid', 'name'],
 			'selectTemplates' => ['templateid', 'name'],
 			'selectParentHost' => ['hostid'],
 			'selectMacros' => ['hostmacroid', 'macro', 'value', 'type', 'description'],
@@ -143,16 +143,42 @@ elseif (isset($_REQUEST['delete']) && isset($_REQUEST['hostid'])) {
 elseif (isset($_REQUEST['clone']) && isset($_REQUEST['hostid'])) {
 	unset($_REQUEST['hostid']);
 
+	if (hasRequest('group_prototypes')) {
+		foreach ($_REQUEST['group_prototypes'] as &$group_prototype) {
+			unset($group_prototype['group_prototypeid']);
+		}
+		unset($group_prototype);
+	}
+
 	$warnings = [];
 
-	if ($macros && in_array(ZBX_MACRO_TYPE_SECRET, array_column($macros, 'type'))) {
-		// Reset macro type and value.
-		$macros = array_map(function($value) {
-			return ($value['type'] == ZBX_MACRO_TYPE_SECRET)
-				? ['value' => '', 'type' => ZBX_MACRO_TYPE_TEXT] + $value
-				: $value;
-		}, $macros);
+	// Reset macro type and value.
+	$secret_macro_reset = false;
 
+	foreach ($macros as &$macro) {
+		if (array_key_exists('allow_revert', $macro) && array_key_exists('value', $macro)) {
+			$macro['deny_revert'] = true;
+
+			unset($macro['allow_revert']);
+		}
+	}
+	unset($macro);
+
+	foreach ($macros as &$macro) {
+		if ($macro['type'] == ZBX_MACRO_TYPE_SECRET && !array_key_exists('value', $macro)) {
+			$macro = [
+				'type' => ZBX_MACRO_TYPE_TEXT,
+				'value' => ''
+			] + $macro;
+
+			$secret_macro_reset = true;
+
+			unset($macro['allow_revert']);
+		}
+	}
+	unset($macro);
+
+	if ($secret_macro_reset) {
 		$warnings[] = _('The cloned host prototype contains user defined macros with type "Secret text". The value and type of these macros were reset.');
 	}
 
@@ -396,7 +422,8 @@ if (hasRequest('form')) {
 			$data['host_prototype'] = array_merge($data['host_prototype'], $hostPrototype);
 
 			foreach ($data['host_prototype']['macros'] as &$macro) {
-				if ($macro['type'] == ZBX_MACRO_TYPE_SECRET) {
+				if ($macro['type'] == ZBX_MACRO_TYPE_SECRET
+						&& !array_key_exists('deny_revert', $macro) && !array_key_exists('value', $macro)) {
 					$macro['allow_revert'] = true;
 				}
 			}

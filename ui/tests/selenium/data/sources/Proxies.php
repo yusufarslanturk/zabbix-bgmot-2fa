@@ -27,14 +27,14 @@ class Proxies {
 	 * @var array
 	 */
 	private static $enabled_hosts = [
-			'enabled_host1',
-			'enabled_host2',
-			'enabled_host3',
-			'enabled_host4',
-			'enabled_host5',
-			'enabled_host6',
-			'enabled_host7',
-			'enabled_host8'
+		'enabled_host1',
+		'enabled_host2',
+		'enabled_host3',
+		'enabled_host4',
+		'enabled_host5',
+		'enabled_host6',
+		'enabled_host7',
+		'enabled_host8'
 	];
 
 	/**
@@ -43,14 +43,14 @@ class Proxies {
 	 * @var array
 	 */
 	private static $disabled_hosts = [
-			'disabled_host1',
-			'disabled_host2',
-			'disabled_host3',
-			'disabled_host4',
-			'disabled_host5',
-			'disabled_host6',
-			'disabled_host7',
-			'disabled_host8'
+		'disabled_host1',
+		'disabled_host2',
+		'disabled_host3',
+		'disabled_host4',
+		'disabled_host5',
+		'disabled_host6',
+		'disabled_host7',
+		'disabled_host8'
 	];
 
 	/**
@@ -59,21 +59,21 @@ class Proxies {
 	 * @var array
 	 */
 	private static $active_proxies = [
-			'active_proxy1',
-			'active_proxy2',
-			'active_proxy3',
-			'active_proxy4',
-			'active_proxy5',
-			'active_proxy6',
-			'active_proxy7',
-			'active_current',
-			'active_unknown',
-			'Active proxy 1',
-			'Active proxy 2',
-			'Active proxy 3',
-			'Active proxy to delete',
-			'Proxy_1 for filter',
-			'Proxy_2 for filter'
+		'active_proxy1',
+		'active_proxy2',
+		'active_proxy3',
+		'active_proxy4',
+		'active_proxy5',
+		'active_proxy6',
+		'active_proxy7',
+		'active_current',
+		'active_unknown',
+		'Active proxy 1',
+		'Active proxy 2',
+		'Active proxy 3',
+		'Active proxy to delete',
+		'Proxy_1 for filter',
+		'Proxy_2 for filter'
 	];
 
 	/**
@@ -82,19 +82,19 @@ class Proxies {
 	 * @var array
 	 */
 	private static $passive_proxies = [
-			'passive_proxy1',
-			'passive_proxy2',
-			'passive_proxy3',
-			'passive_proxy4',
-			'passive_proxy5',
-			'passive_proxy6',
-			'passive_proxy7',
-			'passive_outdated',
-			'passive_unsupported',
-			'Passive proxy 1',
-			'Passive proxy 2',
-			'Passive proxy 3',
-			'Passive proxy to delete'
+		'passive_proxy1',
+		'passive_proxy2',
+		'passive_proxy3',
+		'passive_proxy4',
+		'passive_proxy5',
+		'passive_proxy6',
+		'passive_proxy7',
+		'passive_outdated',
+		'passive_unsupported',
+		'Passive proxy 1',
+		'Passive proxy 2',
+		'Passive proxy 3',
+		'Passive proxy to delete'
 	];
 
 	/**
@@ -115,10 +115,10 @@ class Proxies {
 			];
 		}
 
-		$enabled_hosts = CDataHelper::call('host.create', $enabled_hosts_data);
+		CDataHelper::call('host.create', $enabled_hosts_data);
 		$enabled_hostids = CDataHelper::getIds('host');
 
-		// Create hosts fo filtering scenario.
+		// Create hosts for filtering scenario.
 		CDataHelper::call('host.create',  [
 			['host' => 'Host_1 with proxy', 'groups' => [['groupid' => 4]]],
 			['host' => 'Host_2 with proxy', 'groups' => [['groupid' => 4]]]
@@ -134,7 +134,7 @@ class Proxies {
 				'status' => 1
 			];
 		}
-		$disabled_hosts = CDataHelper::call('host.create', $disabled_hosts_data);
+		CDataHelper::call('host.create', $disabled_hosts_data);
 		$disabled_hostids = CDataHelper::getIds('host');
 
 		// Create active proxies.
@@ -146,7 +146,7 @@ class Proxies {
 			];
 		}
 
-		$active_proxies = CDataHelper::call('proxy.create', $active_proxy_data);
+		CDataHelper::call('proxy.create', $active_proxy_data);
 		$active_proxyids = CDataHelper::getIds('host');
 
 		// Create passive proxies.
@@ -164,7 +164,7 @@ class Proxies {
 			];
 		}
 
-		$passive_proxies = CDataHelper::call('proxy.create', $passive_proxy_data);
+		CDataHelper::call('proxy.create', $passive_proxy_data);
 		$passive_proxyids = CDataHelper::getIds('host');
 
 		// Add hosts to proxies.
@@ -242,6 +242,20 @@ class Proxies {
 				'hosts' => [
 					['hostid' => $filter_hostids['Host_2 with proxy']]
 				]
+			]
+		]);
+
+		$proxies = CDataHelper::call('proxy.create',
+				[['host' => 'Delete Proxy used in Network discovery rule', 'status' => 5]]
+		);
+		$delete_proxy = $proxies['proxyids'][0];
+
+		CDataHelper::call('drule.create', [
+			[
+				'name' => 'Discovery rule for proxy delete test',
+				'iprange' => '192.168.1.1-255',
+				'proxy_hostid' => $delete_proxy,
+				'dchecks' => [['type' => SVC_IMAP, 'ports' => 10050]]
 			]
 		]);
 

@@ -115,7 +115,7 @@ class CMultiselectElement extends CElement {
 			return $this->clear();
 		}
 
-		$this->edit($context)->query('link:'.$label)->one()->click()->waitUntilNotPresent();
+		$this->edit($context)->query('link:'.$label)->waitUntilVisible(3)->one()->click()->waitUntilNotPresent();
 
 		return $this;
 	}
@@ -371,5 +371,16 @@ class CMultiselectElement extends CElement {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Get list of suggested values.
+	 *
+	 * @return array
+	 */
+	public function getSuggestionsText() {
+		$id = CXPathHelper::escapeQuotes($this->query('class:multiselect')->one()->getAttribute('id'));
+		return $this->query('xpath://div[@data-opener='.$id.']/ul[@class="multiselect-suggest"]')->waitUntilVisible()
+				->query('xpath:./li[not(@class="suggest-hover")]')->all()->asText();
 	}
 }
