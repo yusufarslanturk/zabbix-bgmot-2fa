@@ -945,11 +945,8 @@ int	item_preproc_snmp_walk_to_json(zbx_variant_t *value, const char *params, cha
 			zbx_rtrim(oobj_local.key, " ");
 
 			output_value = (zbx_snmp_value_pair_t *)zbx_malloc(NULL, sizeof(zbx_snmp_value_pair_t));
-
 			output_value->oid = zbx_strdup(NULL, param_field.field_name);
-
-			if (NULL != p.value)
-				output_value->value = zbx_strdup(NULL, p.value);
+			output_value->value = NULL == p.value ? NULL : zbx_strdup(NULL, p.value);
 
 			if (NULL == (oobj_cached = zbx_hashset_search(&grouped_prefixes, &oobj_local)))
 			{
