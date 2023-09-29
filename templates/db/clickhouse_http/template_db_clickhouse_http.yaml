@@ -2010,6 +2010,21 @@ zabbix_export:
           pages:
             - name: Main
               widgets:
+                - type: item
+                  name: 'Service available'
+                  width: '4'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: 'ClickHouse by HTTP'
+                        key: clickhouse.ping
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
                 - type: graph
                   'y': '2'
                   width: '12'
@@ -2020,6 +2035,94 @@ zabbix_export:
                       value:
                         host: 'ClickHouse by HTTP'
                         name: 'ClickHouse: Memory Usage'
+                - type: graph
+                  'y': '7'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'ClickHouse by HTTP'
+                        name: 'ClickHouse: Insert/Merge bytes rate'
+                - type: graph
+                  'y': '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'ClickHouse by HTTP'
+                        name: 'ClickHouse: Current activity'
+                - type: graph
+                  'y': '17'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'ClickHouse by HTTP'
+                        name: 'ClickHouse: Distributed'
+                - type: graph
+                  'y': '22'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'ClickHouse by HTTP'
+                        name: 'ClickHouse: Syscalls in fly'
+                - type: item
+                  name: 'Port available'
+                  x: '4'
+                  width: '4'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: 'ClickHouse by HTTP'
+                        key: 'net.tcp.service[{$CLICKHOUSE.SCHEME},"{HOST.CONN}","{$CLICKHOUSE.PORT}"]'
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
+                - type: item
+                  name: Uptime
+                  x: '8'
+                  width: '4'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: 'ClickHouse by HTTP'
+                        key: clickhouse.uptime
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
+                - type: item
+                  name: Version
+                  x: '12'
+                  width: '4'
+                  fields:
+                    - type: ITEM
+                      name: itemid
+                      value:
+                        host: 'ClickHouse by HTTP'
+                        key: clickhouse.version
+                    - type: INTEGER
+                      name: show
+                      value: '2'
+                    - type: INTEGER
+                      name: show
+                      value: '4'
                 - type: graph
                   x: '12'
                   'y': '2'
@@ -2032,16 +2135,6 @@ zabbix_export:
                         host: 'ClickHouse by HTTP'
                         name: 'ClickHouse: Memory Utilization'
                 - type: graph
-                  'y': '7'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'ClickHouse by HTTP'
-                        name: 'ClickHouse: Insert/Merge bytes rate'
-                - type: graph
                   x: '12'
                   'y': '7'
                   width: '12'
@@ -2052,16 +2145,6 @@ zabbix_export:
                       value:
                         host: 'ClickHouse by HTTP'
                         name: 'ClickHouse: Insert/Merge rows rate'
-                - type: graph
-                  'y': '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'ClickHouse by HTTP'
-                        name: 'ClickHouse: Current activity'
                 - type: graph
                   x: '12'
                   'y': '12'
@@ -2074,16 +2157,6 @@ zabbix_export:
                         host: 'ClickHouse by HTTP'
                         name: 'ClickHouse: Current connections'
                 - type: graph
-                  'y': '17'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'ClickHouse by HTTP'
-                        name: 'ClickHouse: Distributed'
-                - type: graph
                   x: '12'
                   'y': '17'
                   width: '12'
@@ -2095,16 +2168,6 @@ zabbix_export:
                         host: 'ClickHouse by HTTP'
                         name: 'ClickHouse: Queries rate'
                 - type: graph
-                  'y': '22'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'ClickHouse by HTTP'
-                        name: 'ClickHouse: Syscalls in fly'
-                - type: graph
                   x: '12'
                   'y': '22'
                   width: '12'
@@ -2115,69 +2178,6 @@ zabbix_export:
                       value:
                         host: 'ClickHouse by HTTP'
                         name: 'ClickHouse: Zookeeper exceptions rate'
-                - type: item
-                  name: 'Port available'
-                  x: '4'
-                  width: '4'
-                  fields:
-                    - type: INTEGER
-                      name: show
-                      value: '4'
-                    - type: INTEGER
-                      name: show
-                      value: '2'
-                    - type: ITEM
-                      name: itemid
-                      value:
-                        host: 'ClickHouse by HTTP'
-                        key: 'net.tcp.service[{$CLICKHOUSE.SCHEME},"{HOST.CONN}","{$CLICKHOUSE.PORT}"]'
-                - type: item
-                  name: 'Service available'
-                  width: '4'
-                  fields:
-                    - type: INTEGER
-                      name: show
-                      value: '4'
-                    - type: INTEGER
-                      name: show
-                      value: '2'
-                    - type: ITEM
-                      name: itemid
-                      value:
-                        host: 'ClickHouse by HTTP'
-                        key: clickhouse.ping
-                - type: item
-                  name: Uptime
-                  x: '8'
-                  width: '4'
-                  fields:
-                    - type: INTEGER
-                      name: show
-                      value: '4'
-                    - type: INTEGER
-                      name: show
-                      value: '2'
-                    - type: ITEM
-                      name: itemid
-                      value:
-                        host: 'ClickHouse by HTTP'
-                        key: clickhouse.uptime
-                - type: item
-                  name: Version
-                  x: '12'
-                  width: '4'
-                  fields:
-                    - type: INTEGER
-                      name: show
-                      value: '4'
-                    - type: INTEGER
-                      name: show
-                      value: '2'
-                    - type: ITEM
-                      name: itemid
-                      value:
-                        host: 'ClickHouse by HTTP'
-                        key: clickhouse.version
             - name: Replicas
               widgets:
                 - type: graphprototype
@@ -2187,14 +2187,14 @@ zabbix_export:
                     - type: INTEGER
                       name: columns
                       value: '1'
-                    - type: INTEGER
-                      name: rows
-                      value: '3'
                     - type: GRAPH_PROTOTYPE
                       name: graphid
                       value:
                         host: 'ClickHouse by HTTP'
                         name: 'ClickHouse: {#DB}.{#TABLE}: Replica queues'
+                    - type: INTEGER
+                      name: rows
+                      value: '3'
                 - type: graphprototype
                   x: '12'
                   width: '12'
@@ -2203,14 +2203,14 @@ zabbix_export:
                     - type: INTEGER
                       name: columns
                       value: '1'
-                    - type: INTEGER
-                      name: rows
-                      value: '3'
                     - type: GRAPH_PROTOTYPE
                       name: graphid
                       value:
                         host: 'ClickHouse by HTTP'
                         name: 'ClickHouse: {#DB}.{#TABLE}: Replica log activity'
+                    - type: INTEGER
+                      name: rows
+                      value: '3'
       valuemaps:
         - uuid: 4d926c30529447b3816cec3f1440b47a
           name: 'Replicas state'

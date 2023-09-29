@@ -1387,6 +1387,16 @@ zabbix_export:
             - name: 'APC UPS Symmetra RX: General'
               widgets:
                 - type: graph
+                  name: Voltage
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'APC UPS Symmetra RX by SNMP'
+                        name: 'APC UPS Symmetra RX: Voltage'
+                - type: graph
                   name: 'Capacity of the UPS batteries'
                   'y': '5'
                   width: '12'
@@ -1408,16 +1418,6 @@ zabbix_export:
                       value:
                         host: 'APC UPS Symmetra RX by SNMP'
                         name: 'APC UPS Symmetra RX: Output'
-                - type: graph
-                  name: Voltage
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'APC UPS Symmetra RX by SNMP'
-                        name: 'APC UPS Symmetra RX: Voltage'
       valuemaps:
         - uuid: e2877a188bd24918992f8c7878550924
           name: 'PowerNet-MIB::uioSensorStatusAlarmStatus'
