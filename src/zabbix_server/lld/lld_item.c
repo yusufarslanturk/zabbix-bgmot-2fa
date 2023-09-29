@@ -384,6 +384,8 @@ static void	lld_items_get(const zbx_vector_ptr_t *item_prototypes, zbx_vector_pt
 		zbx_vector_item_discovery_append(&map_item_discovery, item_discovery);
 	}
 
+	zbx_db_free_result(result);
+
 	if (0 == map_item_discovery.values_num)
 		goto out;
 
@@ -394,7 +396,8 @@ static void	lld_items_get(const zbx_vector_ptr_t *item_prototypes, zbx_vector_pt
 
 	for (batch = itemids.values; batch < itemids.values + itemids.values_num; batch += ZBX_LLD_ITEMS_BATCH_SIZE)
 	{
-		int batch_size = MIN(ZBX_LLD_ITEMS_BATCH_SIZE, itemids.values + itemids.values_num - batch);
+		int	batch_size = MIN(ZBX_LLD_ITEMS_BATCH_SIZE, itemids.values + itemids.values_num - batch);
+		int	items_found = items->values_num;
 
 		sql_offset = 0;
 		zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset,
@@ -635,133 +638,134 @@ static void	lld_items_get(const zbx_vector_ptr_t *item_prototypes, zbx_vector_pt
 		}
 
 		zbx_db_free_result(result);
-	}
+		items_found = items->values_num - items_found;
 
-	zbx_vector_ptr_sort(items, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC);
+		if (0 == items_found)
+			continue;
 
-	if (0 == items->values_num)
-		goto out;
+		zbx_vector_ptr_sort(items, ZBX_DEFAULT_UINT4_PTR_COMPARE_FUNC);
 
-	for (i = items->values_num - 1; i >= 0; i--)
-	{
-		item = (zbx_lld_item_t *)items->values[i];
-		master_itemid = item->master_itemid;
+		for (i = items->values_num - 1; i >= items->values_num - items_found; i--)
+		{
+			item = (zbx_lld_item_t *)items->values[i];
+			master_itemid = item->master_itemid;
 
-		if (0 != master_itemid && FAIL != (index = zbx_vector_ptr_bsearch(items, &master_itemid,
+			if (0 != master_itemid && FAIL != (index = zbx_vector_ptr_bsearch(items, &master_itemid,
+						ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC)))
+			{
+				/* dependent items based on prototypes should contain prototype itemid */
+				master = (zbx_lld_item_t *)items->values[index];
+				master_itemid = master->parent_itemid;
+			}
+
+			if (FAIL == (index = zbx_vector_ptr_bsearch(item_prototypes, &item->parent_itemid,
 					ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC)))
-		{
-			/* dependent items based on prototypes should contain prototype itemid */
-			master = (zbx_lld_item_t *)items->values[index];
-			master_itemid = master->parent_itemid;
+			{
+				THIS_SHOULD_NEVER_HAPPEN;
+				continue;
+			}
+
+			item_prototype = (const zbx_lld_item_prototype_t *)item_prototypes->values[index];
+
+			if (master_itemid != item_prototype->master_itemid)
+			{
+				item->flags |= ZBX_FLAG_LLD_ITEM_UPDATE_MASTER_ITEM;
+				item->master_itemid_orig = master_itemid;
+			}
+
+			item->master_itemid = item_prototype->master_itemid;
 		}
 
-		if (FAIL == (index = zbx_vector_ptr_bsearch(item_prototypes, &item->parent_itemid,
-				ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC)))
+		sql_offset = 0;
+		zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset,
+				"select item_preprocid,itemid,step,type,params,error_handler,error_handler_params"
+				" from item_preproc"
+				" where");
+
+		zbx_db_add_condition_alloc(&sql, &sql_alloc, &sql_offset, "itemid", batch, batch_size);
+
+		result = zbx_db_select("%s", sql);
+
+		while (NULL != (row = zbx_db_fetch(result)))
 		{
-			THIS_SHOULD_NEVER_HAPPEN;
-			continue;
+			zbx_uint64_t	item_preprocid;
+
+			ZBX_STR2UINT64(itemid, row[1]);
+
+			if (FAIL == (index = zbx_vector_ptr_bsearch(items, &itemid, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC)))
+			{
+				THIS_SHOULD_NEVER_HAPPEN;
+				continue;
+			}
+
+			item = (zbx_lld_item_t *)items->values[index];
+			ZBX_STR2UINT64(item_preprocid, row[0]);
+			preproc_op = zbx_init_lld_item_preproc(item_preprocid, ZBX_FLAG_LLD_ITEM_PREPROC_UNSET, atoi(row[2]),
+					atoi(row[3]), row[4], atoi(row[5]), row[6]);
+			zbx_vector_ptr_append(&item->preproc_ops, preproc_op);
 		}
+		zbx_db_free_result(result);
 
-		item_prototype = (const zbx_lld_item_prototype_t *)item_prototypes->values[index];
+		sql_offset = 0;
+		zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset,
+				"select item_parameterid,itemid,name,value"
+				" from item_parameter"
+				" where");
 
-		if (master_itemid != item_prototype->master_itemid)
+		zbx_db_add_condition_alloc(&sql, &sql_alloc, &sql_offset, "itemid", batch, batch_size);
+
+		result = zbx_db_select("%s", sql);
+
+		while (NULL != (row = zbx_db_fetch(result)))
 		{
-			item->flags |= ZBX_FLAG_LLD_ITEM_UPDATE_MASTER_ITEM;
-			item->master_itemid_orig = master_itemid;
-		}
+			zbx_item_param_t	*item_param;
 
-		item->master_itemid = item_prototype->master_itemid;
+			ZBX_STR2UINT64(itemid, row[1]);
+
+			if (FAIL == (index = zbx_vector_ptr_bsearch(items, &itemid, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC)))
+			{
+				THIS_SHOULD_NEVER_HAPPEN;
+				continue;
+			}
+
+			item = (zbx_lld_item_t *)items->values[index];
+			item_param = zbx_item_param_create(row[2], row[3]);
+			ZBX_STR2UINT64(item_param->item_parameterid, row[0]);
+			zbx_vector_item_param_ptr_append(&item->item_params, item_param);
+		}
+		zbx_db_free_result(result);
+
+		sql_offset = 0;
+		zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset,
+				"select itemtagid,itemid,tag,value"
+				" from item_tag"
+				" where");
+
+		zbx_db_add_condition_alloc(&sql, &sql_alloc, &sql_offset, "itemid", batch, batch_size);
+
+		result = zbx_db_select("%s", sql);
+
+		while (NULL != (row = zbx_db_fetch(result)))
+		{
+			zbx_db_tag_t	*db_tag;
+
+			ZBX_STR2UINT64(itemid, row[1]);
+
+			if (FAIL == (index = zbx_vector_ptr_bsearch(items, &itemid, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC)))
+			{
+				THIS_SHOULD_NEVER_HAPPEN;
+				continue;
+			}
+
+			item = (zbx_lld_item_t *)items->values[index];
+
+			db_tag = zbx_db_tag_create(row[2], row[3]);
+			ZBX_STR2UINT64(db_tag->tagid, row[0]);
+			zbx_vector_db_tag_ptr_append(&item->item_tags, db_tag);
+		}
+		zbx_db_free_result(result);
 	}
-
-	sql_offset = 0;
-	zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset,
-			"select ip.item_preprocid,ip.itemid,ip.step,ip.type,ip.params,ip.error_handler,"
-				"ip.error_handler_params"
-			" from item_preproc ip"
-			" where");
-
-	zbx_db_add_condition_alloc(&sql, &sql_alloc, &sql_offset, "ip.itemid", itemids.values, itemids.values_num);
-
-	result = zbx_db_select("%s", sql);
-
-	while (NULL != (row = zbx_db_fetch(result)))
-	{
-		zbx_uint64_t	item_preprocid;
-
-		ZBX_STR2UINT64(itemid, row[1]);
-
-		if (FAIL == (index = zbx_vector_ptr_bsearch(items, &itemid, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC)))
-		{
-			THIS_SHOULD_NEVER_HAPPEN;
-			continue;
-		}
-
-		item = (zbx_lld_item_t *)items->values[index];
-		ZBX_STR2UINT64(item_preprocid, row[0]);
-		preproc_op = zbx_init_lld_item_preproc(item_preprocid, ZBX_FLAG_LLD_ITEM_PREPROC_UNSET, atoi(row[2]),
-				atoi(row[3]), row[4], atoi(row[5]), row[6]);
-		zbx_vector_ptr_append(&item->preproc_ops, preproc_op);
-	}
-	zbx_db_free_result(result);
-
-	sql_offset = 0;
-	zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset,
-			"select ip.item_parameterid,ip.itemid,ip.name,ip.value"
-			" from item_parameter ip"
-			" where");
-
-	zbx_db_add_condition_alloc(&sql, &sql_alloc, &sql_offset, "ip.itemid", itemids.values, itemids.values_num);
-
-	result = zbx_db_select("%s", sql);
-
-	while (NULL != (row = zbx_db_fetch(result)))
-	{
-		zbx_item_param_t	*item_param;
-
-		ZBX_STR2UINT64(itemid, row[1]);
-
-		if (FAIL == (index = zbx_vector_ptr_bsearch(items, &itemid, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC)))
-		{
-			THIS_SHOULD_NEVER_HAPPEN;
-			continue;
-		}
-
-		item = (zbx_lld_item_t *)items->values[index];
-		item_param = zbx_item_param_create(row[2], row[3]);
-		ZBX_STR2UINT64(item_param->item_parameterid, row[0]);
-		zbx_vector_item_param_ptr_append(&item->item_params, item_param);
-	}
-	zbx_db_free_result(result);
-
-	sql_offset = 0;
-	zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset,
-			"select it.itemtagid,it.itemid,it.tag,it.value"
-			" from item_tag it"
-			" where");
-
-	zbx_db_add_condition_alloc(&sql, &sql_alloc, &sql_offset, "it.itemid", itemids.values, itemids.values_num);
-
-	result = zbx_db_select("%s", sql);
-
-	while (NULL != (row = zbx_db_fetch(result)))
-	{
-		zbx_db_tag_t	*db_tag;
-
-		ZBX_STR2UINT64(itemid, row[1]);
-
-		if (FAIL == (index = zbx_vector_ptr_bsearch(items, &itemid, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC)))
-		{
-			THIS_SHOULD_NEVER_HAPPEN;
-			continue;
-		}
-
-		item = (zbx_lld_item_t *)items->values[index];
-
-		db_tag = zbx_db_tag_create(row[2], row[3]);
-		ZBX_STR2UINT64(db_tag->tagid, row[0]);
-		zbx_vector_db_tag_ptr_append(&item->item_tags, db_tag);
-	}
-	zbx_db_free_result(result);
+#undef ZBX_LLD_ITEMS_BATCH_SIZE
 out:
 	zbx_free(sql);
 	zbx_vector_uint64_destroy(&parent_itemids);
