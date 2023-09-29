@@ -643,7 +643,7 @@ static void	lld_items_get(const zbx_vector_ptr_t *item_prototypes, zbx_vector_pt
 		if (0 == items_found)
 			continue;
 
-		zbx_vector_ptr_sort(items, ZBX_DEFAULT_UINT4_PTR_COMPARE_FUNC);
+		zbx_vector_ptr_sort(items, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC);
 
 		for (i = items->values_num - 1; i >= items->values_num - items_found; i--)
 		{
