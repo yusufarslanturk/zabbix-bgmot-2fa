@@ -302,7 +302,7 @@ typedef struct
 ZBX_PTR_VECTOR_DECL(item_discovery, zbx_item_discovery_t *)
 ZBX_PTR_VECTOR_IMPL(item_discovery, zbx_item_discovery_t *)
 
-void zbx_item_discovery_free(zbx_item_discovery_t *data)
+static void zbx_item_discovery_free(zbx_item_discovery_t *data)
 {
 	zbx_free(data->key_proto);
 	zbx_free(data);
