@@ -1430,9 +1430,7 @@ zabbix_export:
           pages:
             - widgets:
                 - type: graph
-                  name: 'MySQL: Bandwidth'
-                  x: '12'
-                  'y': '5'
+                  name: 'MySQL: Operations'
                   width: '12'
                   height: '5'
                   fields:
@@ -1440,7 +1438,7 @@ zabbix_export:
                       name: graphid
                       value:
                         host: 'MySQL by Zabbix agent'
-                        name: 'MySQL: Bandwidth'
+                        name: 'MySQL: Operations'
                 - type: graph
                   name: 'MySQL: Connections'
                   'y': '5'
@@ -1464,16 +1462,6 @@ zabbix_export:
                         host: 'MySQL by Zabbix agent'
                         name: 'MySQL: InnoDB buffer pool'
                 - type: graph
-                  name: 'MySQL: Operations'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'MySQL by Zabbix agent'
-                        name: 'MySQL: Operations'
-                - type: graph
                   name: 'MySQL: Queries'
                   x: '12'
                   width: '12'
@@ -1484,6 +1472,18 @@ zabbix_export:
                       value:
                         host: 'MySQL by Zabbix agent'
                         name: 'MySQL: Queries'
+                - type: graph
+                  name: 'MySQL: Bandwidth'
+                  x: '12'
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'MySQL by Zabbix agent'
+                        name: 'MySQL: Bandwidth'
                 - type: graph
                   name: 'MySQL: Threads'
                   x: '12'
