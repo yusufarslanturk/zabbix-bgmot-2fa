@@ -729,16 +729,16 @@ zabbix_export:
           parameters:
             - name: AccessKeyId
               value: '{$AWS.ACCESS.KEY.ID}'
-            - name: SecretAccessKey
-              value: '{$AWS.SECRET.ACCESS.KEY}'
             - name: auth_type
               value: '{$AWS.AUTH_TYPE}'
-            - name: region
-              value: '{$AWS.REGION}'
             - name: db_instance_id
               value: '{$AWS.RDS.INSTANCE.ID}'
             - name: proxy
               value: '{$AWS.PROXY}'
+            - name: region
+              value: '{$AWS.REGION}'
+            - name: SecretAccessKey
+              value: '{$AWS.SECRET.ACCESS.KEY}'
           tags:
             - tag: component
               value: raw
@@ -962,16 +962,16 @@ zabbix_export:
           parameters:
             - name: AccessKeyId
               value: '{$AWS.ACCESS.KEY.ID}'
-            - name: SecretAccessKey
-              value: '{$AWS.SECRET.ACCESS.KEY}'
             - name: auth_type
               value: '{$AWS.AUTH_TYPE}'
-            - name: region
-              value: '{$AWS.REGION}'
             - name: db_instance_id
               value: '{$AWS.RDS.INSTANCE.ID}'
             - name: proxy
               value: '{$AWS.PROXY}'
+            - name: region
+              value: '{$AWS.REGION}'
+            - name: SecretAccessKey
+              value: '{$AWS.SECRET.ACCESS.KEY}'
           tags:
             - tag: component
               value: raw
@@ -1176,16 +1176,16 @@ zabbix_export:
           parameters:
             - name: AccessKeyId
               value: '{$AWS.ACCESS.KEY.ID}'
-            - name: SecretAccessKey
-              value: '{$AWS.SECRET.ACCESS.KEY}'
             - name: auth_type
               value: '{$AWS.AUTH_TYPE}'
-            - name: region
-              value: '{$AWS.REGION}'
             - name: db_instance_id
               value: '{$AWS.RDS.INSTANCE.ID}'
             - name: proxy
               value: '{$AWS.PROXY}'
+            - name: region
+              value: '{$AWS.REGION}'
+            - name: SecretAccessKey
+              value: '{$AWS.SECRET.ACCESS.KEY}'
           tags:
             - tag: component
               value: raw
@@ -1495,16 +1495,16 @@ zabbix_export:
           parameters:
             - name: AccessKeyId
               value: '{$AWS.ACCESS.KEY.ID}'
-            - name: SecretAccessKey
-              value: '{$AWS.SECRET.ACCESS.KEY}'
             - name: auth_type
               value: '{$AWS.AUTH_TYPE}'
-            - name: region
-              value: '{$AWS.REGION}'
             - name: db_instance_id
               value: '{$AWS.RDS.INSTANCE.ID}'
             - name: proxy
               value: '{$AWS.PROXY}'
+            - name: region
+              value: '{$AWS.REGION}'
+            - name: SecretAccessKey
+              value: '{$AWS.SECRET.ACCESS.KEY}'
           tags:
             - tag: component
               value: raw
@@ -2112,13 +2112,6 @@ zabbix_export:
           filter:
             evaltype: AND
             conditions:
-              - macro: '{#ALARM_SERVICE_NAMESPACE}'
-                value: '{$AWS.RDS.LLD.FILTER.ALARM_SERVICE_NAMESPACE.MATCHES}'
-                formulaid: C
-              - macro: '{#ALARM_SERVICE_NAMESPACE}'
-                value: '{$AWS.RDS.LLD.FILTER.ALARM_SERVICE_NAMESPACE.NOT_MATCHES}'
-                operator: NOT_MATCHES_REGEX
-                formulaid: D
               - macro: '{#ALARM_NAME}'
                 value: '{$AWS.RDS.LLD.FILTER.ALARM_NAME.MATCHES}'
                 formulaid: A
@@ -2126,6 +2119,13 @@ zabbix_export:
                 value: '{$AWS.RDS.LLD.FILTER.ALARM_NAME.NOT_MATCHES}'
                 operator: NOT_MATCHES_REGEX
                 formulaid: B
+              - macro: '{#ALARM_SERVICE_NAMESPACE}'
+                value: '{$AWS.RDS.LLD.FILTER.ALARM_SERVICE_NAMESPACE.MATCHES}'
+                formulaid: C
+              - macro: '{#ALARM_SERVICE_NAMESPACE}'
+                value: '{$AWS.RDS.LLD.FILTER.ALARM_SERVICE_NAMESPACE.NOT_MATCHES}'
+                operator: NOT_MATCHES_REGEX
+                formulaid: D
           description: 'Discovery instance alarms.'
           item_prototypes:
             - uuid: aab5aaf6e27740c6ac92f5494b3aef4b
