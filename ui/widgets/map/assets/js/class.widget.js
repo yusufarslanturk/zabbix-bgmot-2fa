@@ -93,11 +93,45 @@ class CWidgetMap extends CWidget {
 		}
 	}
 
+	updateProperties({name, view_mode, fields}) {
+		this._deactivateContentsEvents();
+
+		this._map_svg = null;
+
+		this._source_type = fields.source_type;
+		this._previous_maps = [];
+		this._sysmapid = null;
+
+		this._initial_load = true;
+		this._has_contents = false;
+
+		if (this._source_type == CWidgetMap.SOURCETYPE_FILTER) {
+			if (this._filter_widget !== null) {
+				this._filter_widget.off(CWidgetMap.WIDGET_NAVTREE_EVENT_MARK, this._events.mark);
+				this._filter_widget.off(CWidgetMap.WIDGET_NAVTREE_EVENT_SELECT, this._events.select);
+			}
+
+			for (const widget of ZABBIX.Dashboard.getSelectedDashboardPage().getWidgets()) {
+				if (widget instanceof CWidgetNavTree
+						&& widget._fields.reference === fields.filter_widget_reference) {
+					this._filter_widget = widget;
+
+					this._filter_widget.on(CWidgetMap.WIDGET_NAVTREE_EVENT_MARK, this._events.mark);
+					this._filter_widget.on(CWidgetMap.WIDGET_NAVTREE_EVENT_SELECT, this._events.select);
+				}
+			}
+
+			this._filter_itemid = this._filter_widget._navtree[this._filter_widget._navtree_item_selected].sysmapid;
+			this._sysmapid = this._filter_itemid;
+		}
+
+		super.updateProperties({name, view_mode, fields});
+	}
+
 	_promiseUpdate() {
 		if (!this._has_contents || this._map_svg === null) {
-			if (this._sysmapid !== null
-					|| this._source_type == CWidgetMap.SOURCETYPE_MAP
-					|| this._filter_widget === null) {
+
+			if (this._sysmapid !== null || this._source_type == CWidgetMap.SOURCETYPE_MAP) {
 				return super._promiseUpdate();
 			}
 
@@ -139,12 +173,6 @@ class CWidgetMap extends CWidget {
 	}
 
 	_processUpdateResponse(response) {
-		if (this._has_contents) {
-			this._deactivateContentsEvents();
-
-			this._has_contents = false;
-		}
-
 		super._processUpdateResponse(response);
 
 		if (response.sysmap_data !== undefined) {
