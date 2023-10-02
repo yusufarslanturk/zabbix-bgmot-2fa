@@ -912,13 +912,6 @@ zabbix_export:
           filter:
             evaltype: AND
             conditions:
-              - macro: '{#DBNAME}'
-                value: '{$MONGODB.LLD.FILTER.DB.MATCHES}'
-                formulaid: C
-              - macro: '{#DBNAME}'
-                value: '{$MONGODB.LLD.FILTER.DB.NOT_MATCHES}'
-                operator: NOT_MATCHES_REGEX
-                formulaid: D
               - macro: '{#COLLECTION}'
                 value: '{$MONGODB.LLD.FILTER.COLLECTION.MATCHES}'
                 formulaid: A
@@ -926,6 +919,13 @@ zabbix_export:
                 value: '{$MONGODB.LLD.FILTER.COLLECTION.NOT_MATCHES}'
                 operator: NOT_MATCHES_REGEX
                 formulaid: B
+              - macro: '{#DBNAME}'
+                value: '{$MONGODB.LLD.FILTER.DB.MATCHES}'
+                formulaid: C
+              - macro: '{#DBNAME}'
+                value: '{$MONGODB.LLD.FILTER.DB.NOT_MATCHES}'
+                operator: NOT_MATCHES_REGEX
+                formulaid: D
           description: |
             Collect collections metrics.
             Note, depending on the number of DBs and collections this discovery operation may be expensive. Use filters with macros {$MONGODB.LLD.FILTER.DB.MATCHES}, {$MONGODB.LLD.FILTER.DB.NOT_MATCHES}, {$MONGODB.LLD.FILTER.COLLECTION.MATCHES}, {$MONGODB.LLD.FILTER.COLLECTION.NOT_MATCHES}.
@@ -2415,18 +2415,6 @@ zabbix_export:
               parameters:
                 - 1h
           overrides:
-            - name: 'Arbiter metrics'
-              step: '2'
-              filter:
-                conditions:
-                  - macro: '{#NODE_STATE}'
-                    value: '7'
-                    formulaid: A
-              operations:
-                - operationobject: ITEM_PROTOTYPE
-                  operator: LIKE
-                  value: 'Replication lag'
-                  discover: NO_DISCOVER
             - name: 'Primary metrics'
               step: '1'
               filter:
@@ -2442,14 +2430,26 @@ zabbix_export:
                   discover: DISCOVER
                 - operationobject: ITEM_PROTOTYPE
                   operator: LIKE
-                  value: 'Unhealthy replicas'
+                  value: 'Number of unhealthy replicas'
                   status: ENABLED
                   discover: DISCOVER
                 - operationobject: ITEM_PROTOTYPE
                   operator: LIKE
-                  value: 'Number of unhealthy replicas'
+                  value: 'Replication lag'
+                  discover: NO_DISCOVER
+                - operationobject: ITEM_PROTOTYPE
+                  operator: LIKE
+                  value: 'Unhealthy replicas'
                   status: ENABLED
                   discover: DISCOVER
+            - name: 'Arbiter metrics'
+              step: '2'
+              filter:
+                conditions:
+                  - macro: '{#NODE_STATE}'
+                    value: '7'
+                    formulaid: A
+              operations:
                 - operationobject: ITEM_PROTOTYPE
                   operator: LIKE
                   value: 'Replication lag'
@@ -2951,14 +2951,14 @@ zabbix_export:
                     - type: INTEGER
                       name: columns
                       value: '1'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: GRAPH_PROTOTYPE
                       name: graphid
                       value:
                         host: 'MongoDB node by Zabbix agent 2'
                         name: 'MongoDB {#DBNAME}.{#COLLECTION}: Locks'
+                    - type: INTEGER
+                      name: rows
+                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -2967,14 +2967,14 @@ zabbix_export:
                     - type: INTEGER
                       name: columns
                       value: '1'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: GRAPH_PROTOTYPE
                       name: graphid
                       value:
                         host: 'MongoDB node by Zabbix agent 2'
                         name: 'MongoDB {#DBNAME}.{#COLLECTION}: Locks time'
+                    - type: INTEGER
+                      name: rows
+                      value: '1'
                 - type: graphprototype
                   'y': '10'
                   width: '24'
@@ -2983,14 +2983,14 @@ zabbix_export:
                     - type: INTEGER
                       name: columns
                       value: '1'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: GRAPH_PROTOTYPE
                       name: graphid
                       value:
                         host: 'MongoDB node by Zabbix agent 2'
                         name: 'MongoDB {#DBNAME}.{#COLLECTION}: Operations'
+                    - type: INTEGER
+                      name: rows
+                      value: '1'
                 - type: graphprototype
                   'y': '15'
                   width: '24'
@@ -2999,14 +2999,14 @@ zabbix_export:
                     - type: INTEGER
                       name: columns
                       value: '1'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: GRAPH_PROTOTYPE
                       name: graphid
                       value:
                         host: 'MongoDB node by Zabbix agent 2'
                         name: 'MongoDB {#DBNAME}.{#COLLECTION}: Operations time'
+                    - type: INTEGER
+                      name: rows
+                      value: '1'
             - name: Databases
               widgets:
                 - type: graphprototype
@@ -3016,14 +3016,14 @@ zabbix_export:
                     - type: INTEGER
                       name: columns
                       value: '1'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: GRAPH_PROTOTYPE
                       name: graphid
                       value:
                         host: 'MongoDB node by Zabbix agent 2'
                         name: 'MongoDB {#DBNAME}: Collections stats'
+                    - type: INTEGER
+                      name: rows
+                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -3032,14 +3032,14 @@ zabbix_export:
                     - type: INTEGER
                       name: columns
                       value: '1'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: GRAPH_PROTOTYPE
                       name: graphid
                       value:
                         host: 'MongoDB node by Zabbix agent 2'
                         name: 'MongoDB {#DBNAME}: Disk usage'
+                    - type: INTEGER
+                      name: rows
+                      value: '1'
             - name: Replication
               widgets:
                 - type: graphprototype
@@ -3049,14 +3049,14 @@ zabbix_export:
                     - type: INTEGER
                       name: columns
                       value: '1'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: GRAPH_PROTOTYPE
                       name: graphid
                       value:
                         host: 'MongoDB node by Zabbix agent 2'
                         name: 'MongoDB: Replication lag time [{#RS_NAME}]'
+                    - type: INTEGER
+                      name: rows
+                      value: '1'
       valuemaps:
         - uuid: 9f921e1503e74204b8f128966f9562bc
           name: 'MongoDB flag'

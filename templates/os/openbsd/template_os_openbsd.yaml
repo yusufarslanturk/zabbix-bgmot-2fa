@@ -750,16 +750,6 @@ zabbix_export:
                         host: 'OpenBSD by Zabbix agent'
                         name: 'OpenBSD: CPU load'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'OpenBSD by Zabbix agent'
-                        name: 'OpenBSD: CPU utilization'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -769,6 +759,16 @@ zabbix_export:
                       value:
                         host: 'OpenBSD by Zabbix agent'
                         name: 'OpenBSD: Memory usage'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'OpenBSD by Zabbix agent'
+                        name: 'OpenBSD: CPU utilization'
                 - type: graph
                   x: '12'
                   'y': '5'

@@ -2183,16 +2183,6 @@ zabbix_export:
                         host: 'Oracle by Zabbix agent 2'
                         name: 'Oracle: Cache Hit Ratios'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Oracle by Zabbix agent 2'
-                        name: 'Oracle: Sort Operations'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -2202,6 +2192,46 @@ zabbix_export:
                       value:
                         host: 'Oracle by Zabbix agent 2'
                         name: 'Oracle: Physical Read\Write Rate'
+                - type: graph
+                  'y': '10'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Oracle by Zabbix agent 2'
+                        name: 'Oracle: Datafiles'
+                - type: graph
+                  'y': '15'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Oracle by Zabbix agent 2'
+                        name: 'Oracle: Processes'
+                - type: graph
+                  'y': '20'
+                  width: '24'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Oracle by Zabbix agent 2'
+                        name: 'Oracle: SGA Memory Usage'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Oracle by Zabbix agent 2'
+                        name: 'Oracle: Sort Operations'
                 - type: graph
                   x: '12'
                   'y': '5'
@@ -2214,16 +2244,6 @@ zabbix_export:
                         host: 'Oracle by Zabbix agent 2'
                         name: 'Oracle: Physical Read\Write Rate, Bytes'
                 - type: graph
-                  'y': '10'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Oracle by Zabbix agent 2'
-                        name: 'Oracle: Datafiles'
-                - type: graph
                   x: '12'
                   'y': '10'
                   width: '12'
@@ -2235,16 +2255,6 @@ zabbix_export:
                         host: 'Oracle by Zabbix agent 2'
                         name: 'Oracle: PGA'
                 - type: graph
-                  'y': '15'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Oracle by Zabbix agent 2'
-                        name: 'Oracle: Processes'
-                - type: graph
                   x: '12'
                   'y': '15'
                   width: '12'
@@ -2255,16 +2265,6 @@ zabbix_export:
                       value:
                         host: 'Oracle by Zabbix agent 2'
                         name: 'Oracle: Sessions'
-                - type: graph
-                  'y': '20'
-                  width: '24'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Oracle by Zabbix agent 2'
-                        name: 'Oracle: SGA Memory Usage'
       valuemaps:
         - uuid: 5a90da8dd6124159a7f82a7a996f0a53
           name: 'Oracle Archivelog status'

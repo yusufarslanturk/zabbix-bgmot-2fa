@@ -1387,6 +1387,16 @@ zabbix_export:
             - name: 'APC Smart-UPS SRT 8000: General'
               widgets:
                 - type: graph
+                  name: Voltage
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'APC Smart-UPS SRT 8000 by SNMP'
+                        name: 'APC Smart-UPS SRT 8000: Voltage'
+                - type: graph
                   name: 'Capacity of the UPS batteries'
                   'y': '5'
                   width: '12'
@@ -1408,16 +1418,6 @@ zabbix_export:
                       value:
                         host: 'APC Smart-UPS SRT 8000 by SNMP'
                         name: 'APC Smart-UPS SRT 8000: Output'
-                - type: graph
-                  name: Voltage
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'APC Smart-UPS SRT 8000 by SNMP'
-                        name: 'APC Smart-UPS SRT 8000: Voltage'
       valuemaps:
         - uuid: 864d59cbfcc8431cb334b812bf7ef3a3
           name: 'PowerNet-MIB::uioSensorStatusAlarmStatus'
