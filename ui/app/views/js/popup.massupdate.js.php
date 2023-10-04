@@ -402,7 +402,7 @@ function submitPopup(overlay) {
 					'action': () => {}
 				}
 			]
-		}, overlay);
+		}, overlay.$btn_submit);
 
 		overlay.unsetLoading();
 		return false;
