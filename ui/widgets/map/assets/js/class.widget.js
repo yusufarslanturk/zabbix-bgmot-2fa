@@ -112,8 +112,7 @@ class CWidgetMap extends CWidget {
 			}
 
 			for (const widget of ZABBIX.Dashboard.getSelectedDashboardPage().getWidgets()) {
-				if (widget instanceof CWidgetNavTree
-						&& widget._fields.reference === fields.filter_widget_reference) {
+				if (widget instanceof CWidgetNavTree && widget._fields.reference === fields.filter_widget_reference) {
 					this._filter_widget = widget;
 
 					this._filter_widget.on(CWidgetMap.WIDGET_NAVTREE_EVENT_MARK, this._events.mark);
