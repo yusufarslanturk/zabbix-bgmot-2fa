@@ -2227,16 +2227,6 @@ zabbix_export:
                         host: 'Remote Zabbix server health'
                         name: 'Remote Zabbix server: Zabbix server performance'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Remote Zabbix server health'
-                        name: 'Remote Zabbix server: Zabbix data gathering process busy %'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -2246,6 +2236,26 @@ zabbix_export:
                       value:
                         host: 'Remote Zabbix server health'
                         name: 'Remote Zabbix server: Zabbix internal process busy %'
+                - type: graph
+                  'y': '10'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Remote Zabbix server health'
+                        name: 'Remote Zabbix server: Value cache effectiveness'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Remote Zabbix server health'
+                        name: 'Remote Zabbix server: Zabbix data gathering process busy %'
                 - type: graph
                   x: '12'
                   'y': '5'
@@ -2257,16 +2267,6 @@ zabbix_export:
                       value:
                         host: 'Remote Zabbix server health'
                         name: 'Remote Zabbix server: Zabbix cache usage, % free'
-                - type: graph
-                  'y': '10'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Remote Zabbix server health'
-                        name: 'Remote Zabbix server: Value cache effectiveness'
                 - type: graph
                   x: '12'
                   'y': '10'
@@ -2292,16 +2292,6 @@ zabbix_export:
                         host: 'Remote Zabbix server health'
                         name: 'Remote Zabbix server: Data handling processes'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Remote Zabbix server health'
-                        name: 'Remote Zabbix server: Reporting processes'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -2311,6 +2301,16 @@ zabbix_export:
                       value:
                         host: 'Remote Zabbix server health'
                         name: 'Remote Zabbix server: Internal processes'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Remote Zabbix server health'
+                        name: 'Remote Zabbix server: Reporting processes'
                 - type: graph
                   x: '12'
                   'y': '5'
