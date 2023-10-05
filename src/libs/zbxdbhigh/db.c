@@ -1003,19 +1003,6 @@ int	zbx_db_check_tsdb_capabilities(struct zbx_db_version_info_t *db_version_info
 		goto out;
 	}
 
-	/* Timescale compression feature is available in PostgreSQL 10.2 and TimescaleDB 1.5.0 and newer */
-	/* in TimescaleDB Community Edition, and it is not available in TimescaleDB Apache 2 Edition.    */
-	/* timescaledb.license parameter is available in TimescaleDB API starting from TimescaleDB 2.0.  */
-	if (ZBX_POSTGRESQL_MIN_VERSION_WITH_TIMESCALEDB > db_version_info->current_version)
-	{
-		zabbix_log(LOG_LEVEL_WARNING, "PostgreSQL version %lu is not supported with TimescaleDB, minimum"
-				" required is %d.", (unsigned long)db_version_info->current_version,
-				ZBX_POSTGRESQL_MIN_VERSION_WITH_TIMESCALEDB);
-		db_version_info->ext_err_code = ZBX_TIMESCALEDB_POSTGRES_TOO_OLD;
-		ret = FAIL;
-		goto out;
-	}
-
 	if (DB_VERSION_FAILED_TO_RETRIEVE == db_version_info->ext_flag)
 	{
 		db_version_info->ext_err_code = ZBX_TIMESCALEDB_VERSION_FAILED_TO_RETRIEVE;
@@ -1865,7 +1852,7 @@ void	zbx_db_register_host_flush(zbx_vector_ptr_t *autoreg_hosts, zbx_uint64_t pr
 		autoreg_hostid = zbx_db_get_maxid_num("autoreg_host", create);
 
 		zbx_db_insert_prepare(&db_insert, "autoreg_host", "autoreg_hostid", "proxy_hostid", "host", "listen_ip",
-				"listen_dns", "listen_port", "tls_accepted", "host_metadata", "flags", NULL);
+				"listen_dns", "listen_port", "tls_accepted", "host_metadata", "flags", (char *)NULL);
 	}
 
 	if (0 != (update = autoreg_hosts->values_num - create))
