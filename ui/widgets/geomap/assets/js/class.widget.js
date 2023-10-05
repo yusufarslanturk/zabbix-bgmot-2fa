@@ -124,7 +124,7 @@ class CWidgetGeoMap extends CWidget {
 			position: 'topright',
 			checked: config.filter.severity,
 			severity_levels: this._severity_levels,
-			disabled: this._is_edit_mode
+			disabled: this.isEditMode()
 		}).addTo(this._map);
 
 		// Navigate home btn.
@@ -264,23 +264,6 @@ class CWidgetGeoMap extends CWidget {
 		this._map.on('zoomstart movestart resize', () => {
 			this.removeHintBoxes();
 		});
-
-		// Disable severity filter in dashboard edit mode.
-		if(!this._is_edit_mode) {
-			const observer = new MutationObserver((mutationsList) => {
-				mutationsList.forEach((mutation) => {
-					if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-						this._map.severityFilterControl.close();
-						this._map.severityFilterControl.disable();
-					}
-				});
-			});
-
-			observer.observe(document.querySelector('.dashboard'), {
-				attributes: true,
-				attributeFilter: ['class']
-			});
-		}
 	}
 
 	/**
@@ -559,5 +542,12 @@ class CWidgetGeoMap extends CWidget {
 				shadowAnchor: [13, 40]
 			});
 		}
+	}
+
+	setEditMode() {
+		super.setEditMode();
+
+		this._map.severityFilterControl.close();
+		this._map.severityFilterControl.disable();
 	}
 }
