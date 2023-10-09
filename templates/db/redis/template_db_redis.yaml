@@ -2705,16 +2705,6 @@ zabbix_export:
                         host: 'Redis by Zabbix agent 2'
                         name: 'Redis: Clients'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Redis by Zabbix agent 2'
-                        name: 'Redis: Keyspace'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -2724,6 +2714,52 @@ zabbix_export:
                       value:
                         host: 'Redis by Zabbix agent 2'
                         name: 'Redis: Commands'
+                - type: graph
+                  'y': '10'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Redis by Zabbix agent 2'
+                        name: 'Redis: Persistence'
+                - type: graph
+                  'y': '15'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Redis by Zabbix agent 2'
+                        name: 'Redis: Slowlog'
+                - type: graphprototype
+                  'y': '20'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid
+                      value:
+                        host: 'Redis by Zabbix agent 2'
+                        name: 'Redis: Replication lag time{#SINGLETON}'
+                    - type: INTEGER
+                      name: rows
+                      value: '1'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Redis by Zabbix agent 2'
+                        name: 'Redis: Keyspace'
                 - type: graph
                   x: '12'
                   'y': '5'
@@ -2736,16 +2772,6 @@ zabbix_export:
                         host: 'Redis by Zabbix agent 2'
                         name: 'Redis: Expired keys'
                 - type: graph
-                  'y': '10'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Redis by Zabbix agent 2'
-                        name: 'Redis: Persistence'
-                - type: graph
                   x: '12'
                   'y': '10'
                   width: '12'
@@ -2757,16 +2783,6 @@ zabbix_export:
                         host: 'Redis by Zabbix agent 2'
                         name: 'Redis: Slaves'
                 - type: graph
-                  'y': '15'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Redis by Zabbix agent 2'
-                        name: 'Redis: Slowlog'
-                - type: graph
                   x: '12'
                   'y': '15'
                   width: '12'
@@ -2777,22 +2793,6 @@ zabbix_export:
                       value:
                         host: 'Redis by Zabbix agent 2'
                         name: 'Redis: Uptime'
-                - type: graphprototype
-                  'y': '20'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: INTEGER
-                      name: columns
-                      value: '1'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
-                    - type: GRAPH_PROTOTYPE
-                      name: graphid
-                      value:
-                        host: 'Redis by Zabbix agent 2'
-                        name: 'Redis: Replication lag time{#SINGLETON}'
         - uuid: ee4c29eb7a0f443fafb7e7d3b9df7b24
           name: 'Redis performance'
           pages:
@@ -2807,16 +2807,6 @@ zabbix_export:
                         host: 'Redis by Zabbix agent 2'
                         name: 'Redis: CPU'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Redis by Zabbix agent 2'
-                        name: 'Redis: Network'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -2826,6 +2816,16 @@ zabbix_export:
                       value:
                         host: 'Redis by Zabbix agent 2'
                         name: 'Redis: Memory'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Redis by Zabbix agent 2'
+                        name: 'Redis: Network'
                 - type: graph
                   x: '12'
                   'y': '5'

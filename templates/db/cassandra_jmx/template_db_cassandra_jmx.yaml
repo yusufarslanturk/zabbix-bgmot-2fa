@@ -1715,16 +1715,6 @@ zabbix_export:
                         host: 'Apache Cassandra by JMX'
                         name: 'Apache Cassandra: Nodes state'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Apache Cassandra by JMX'
-                        name: 'Apache Cassandra: Client connections'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -1734,6 +1724,36 @@ zabbix_export:
                       value:
                         host: 'Apache Cassandra by JMX'
                         name: 'Apache Cassandra: Dropped Messages'
+                - type: graph
+                  'y': '10'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Apache Cassandra by JMX'
+                        name: 'Apache Cassandra: Client requests Read\Write latency'
+                - type: graph
+                  'y': '15'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Apache Cassandra by JMX'
+                        name: 'Apache Cassandra: Client requests rate'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Apache Cassandra by JMX'
+                        name: 'Apache Cassandra: Client connections'
                 - type: graph
                   x: '12'
                   'y': '5'
@@ -1746,16 +1766,6 @@ zabbix_export:
                         host: 'Apache Cassandra by JMX'
                         name: 'Apache Cassandra: KeyCache Hit rate'
                 - type: graph
-                  'y': '10'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Apache Cassandra by JMX'
-                        name: 'Apache Cassandra: Client requests Read\Write latency'
-                - type: graph
                   x: '12'
                   'y': '10'
                   width: '12'
@@ -1766,16 +1776,6 @@ zabbix_export:
                       value:
                         host: 'Apache Cassandra by JMX'
                         name: 'Apache Cassandra: Tables Read\Write latency'
-                - type: graph
-                  'y': '15'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Apache Cassandra by JMX'
-                        name: 'Apache Cassandra: Client requests rate'
   graphs:
     - uuid: 445735b15ac84e42b21dbe7c44dce812
       name: 'Apache Cassandra: Client connections'
