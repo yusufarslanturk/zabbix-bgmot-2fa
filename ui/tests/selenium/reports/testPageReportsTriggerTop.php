@@ -279,8 +279,8 @@ class testPageReportsTriggerTop extends CWebTest {
 		$this->assertEquals('Last 1 hour', $filter->query('link:Last 1 hour')->one()->getText());
 
 		// Check time selector fields layout.
-		$form = $this->query('name:zbx_filter')->asForm()->one();
-		$form->checkValue(['id:from' => 'now-1h', 'id:to' => 'now']);
+		$this->assertEquals('now-1h', $this->query('id:from')->one()->getValue());
+		$this->assertEquals('now', $this->query('id:to')->one()->getValue());
 
 		$buttons = [
 			'xpath://button[contains(@class, "btn-time-left")]' => true,
@@ -295,7 +295,7 @@ class testPageReportsTriggerTop extends CWebTest {
 		}
 
 		foreach (['id:from' => 16, 'id:to' => 16] as $input => $value) {
-			$this->assertEquals($value, $form->getField($input)->getAttribute('maxlength'));
+			$this->assertEquals($value, $this->query($input)->one()->getAttribute('maxlength'));
 		}
 
 		$this->assertEquals(1, $this->query('button:Apply')->all()->filter(CElementFilter::CLICKABLE)->count());
@@ -880,24 +880,34 @@ class testPageReportsTriggerTop extends CWebTest {
 		$popup = CPopupMenuElement::find()->waitUntilVisible()->one();
 		$this->assertTrue($popup->hasTitles(array_keys($data)));
 
-		$menu_items = [];
-		foreach (array_values($data) as $menu) {
-			foreach ($menu as $label => $link) {
-				$menu_items = $label;
+		$menu_level1_items = [];
+		foreach (array_values($data) as $menu_items) {
+			foreach ($menu_items as $menu_level1 => $link) {
+				$menu_level1_items[] = $menu_level1;
 
-				// Check menu links.
-				if (str_contains($link, 'menu-popup-item')) {
-					$this->assertEquals($link, $popup->getItem($label)->getAttribute('class'));
+				if (is_array($link)) {
+					foreach ($link as $menu_level2 => $attribute) {
+						// Check 2-level menu links.
+						$item_link = $popup->getItem($menu_level1)->query('xpath:./../ul//a')->one();
+						$this->assertEquals($menu_level2, $item_link->getText());
+						$this->assertStringContainsString($attribute, $item_link->getAttribute('href'));
+					}
 				}
 				else {
-					$this->assertTrue($popup->query("xpath:.//a[text()=".CXPathHelper::escapeQuotes($label).
-							" and contains(@href, ".CXPathHelper::escapeQuotes($link).")]")->exists()
-					);
+					// Check 1-level menu links.
+					if (str_contains($link, 'menu-popup-item')) {
+						$this->assertEquals($link, $popup->getItem($menu_level1)->getAttribute('class'));
+					}
+					else {
+						$this->assertTrue($popup->query("xpath:.//a[text()=".CXPathHelper::escapeQuotes($menu_level1).
+								" and contains(@href, ".CXPathHelper::escapeQuotes($link).")]")->exists()
+						);
+					}
 				}
 			}
 		}
 
-		$this->assertTrue($popup->hasItems($menu_items));
+		$this->assertTrue($popup->hasItems($menu_level1_items));
 		$popup->close();
 	}
 }
