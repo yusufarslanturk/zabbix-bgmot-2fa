@@ -2043,7 +2043,7 @@ class CUser extends CApiService {
 			'debug_mode' => GROUP_DEBUG_MODE_DISABLED,
 			'users_status' => GROUP_STATUS_ENABLED,
 			'gui_access' => GROUP_GUI_ACCESS_SYSTEM,
-			'group_auth_type' => ZBX_AUTH_INTERNAL,
+			'group_auth_type' => GROUP_GUI_ACCESS_SYSTEM,
 			'deprovisioned' => false,
 			'userdirectoryid' => 0
 		];
