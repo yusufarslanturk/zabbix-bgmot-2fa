@@ -134,7 +134,7 @@ func (p *Plugin) Collect() error {
 	}
 
 	if p.collectError != nil {
-		p.Warningf("reset counter query: '%s'", p.collectError)
+		p.Debugf("reset counter query: '%s'", p.collectError)
 		err = win32.PdhCloseQuery(p.query)
 		p.query = 0
 		if err != nil {
