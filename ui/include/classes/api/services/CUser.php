@@ -2076,13 +2076,14 @@ class CUser extends CApiService {
 				$permissions['users_status'] = GROUP_STATUS_DISABLED;
 			}
 
+			if ($db_usrgrp['gui_access'] != GROUP_GUI_ACCESS_DISABLED
+					&& $db_usrgrp['gui_access'] > $permissions['group_auth_type']) {
+				$permissions['group_auth_type'] = $db_usrgrp['gui_access'];
+			}
+
 			if ($db_usrgrp['gui_access'] > $permissions['gui_access']) {
 				$permissions['gui_access'] = $db_usrgrp['gui_access'];
 				$userdirectoryids = [];
-
-				if ($db_usrgrp['gui_access'] != GROUP_GUI_ACCESS_DISABLED) {
-					$permissions['group_auth_type'] = $db_usrgrp['gui_access'];
-				}
 			}
 
 			if ($permissions['gui_access'] == $db_usrgrp['gui_access']
