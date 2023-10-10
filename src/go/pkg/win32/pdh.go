@@ -370,13 +370,10 @@ func getCounterValueDouble(counter PDH_HCOUNTER) (*float64, error) {
 
 	ret, _, _ := syscall.SyscallN(
 		pdhGetFormattedCounterValue,
-		4,
 		uintptr(counter),
 		uintptr(PDH_FMT_DOUBLE|PDH_FMT_NOCAP100),
 		0,
 		uintptr(unsafe.Pointer(&pdhValue)),
-		0,
-		0,
 	)
 
 	if syscall.Errno(ret) != windows.ERROR_SUCCESS {
