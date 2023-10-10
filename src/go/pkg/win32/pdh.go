@@ -30,28 +30,28 @@ import (
 	"unsafe"
 
 	"git.zabbix.com/ap/plugin-support/log"
+	"git.zabbix.com/ap/plugin-support/zbxerr"
 
 	"golang.org/x/sys/windows"
 )
 
-var (
-	hPdh Hlib
+func init() {
+	hPdh = mustLoadLibrary("pdh.dll")
 
-	pdhOpenQuery                uintptr
-	pdhCloseQuery               uintptr
-	pdhAddCounter               uintptr
-	pdhAddEnglishCounter        uintptr
-	pdhCollectQueryData         uintptr
-	pdhGetFormattedCounterValue uintptr
-	pdhParseCounterPath         uintptr
-	pdhMakeCounterPath          uintptr
-	pdhLookupPerfNameByIndex    uintptr
-	pdhLookupPerfIndexByName    uintptr
-	pdhRemoveCounter            uintptr
-	pdhEnumObjectItem           uintptr
-	pdhEnumObjectItems          uintptr
-	pdhEnumObjects              uintptr
-)
+	pdhOpenQuery = hPdh.mustGetProcAddress("PdhOpenQuery")
+	pdhCloseQuery = hPdh.mustGetProcAddress("PdhCloseQuery")
+	pdhAddCounter = hPdh.mustGetProcAddress("PdhAddCounterW")
+	pdhAddEnglishCounter = hPdh.mustGetProcAddress("PdhAddEnglishCounterW")
+	pdhCollectQueryData = hPdh.mustGetProcAddress("PdhCollectQueryData")
+	pdhGetFormattedCounterValue = hPdh.mustGetProcAddress("PdhGetFormattedCounterValue")
+	pdhParseCounterPath = hPdh.mustGetProcAddress("PdhParseCounterPathW")
+	pdhMakeCounterPath = hPdh.mustGetProcAddress("PdhMakeCounterPathW")
+	pdhLookupPerfNameByIndex = hPdh.mustGetProcAddress("PdhLookupPerfNameByIndexW")
+	pdhLookupPerfIndexByName = hPdh.mustGetProcAddress("PdhLookupPerfIndexByNameW")
+	pdhRemoveCounter = hPdh.mustGetProcAddress("PdhRemoveCounter")
+	pdhEnumObjectItems = hPdh.mustGetProcAddress("PdhEnumObjectItemsW")
+	pdhEnumObjects = hPdh.mustGetProcAddress("PdhEnumObjectsW")
+}
 
 const (
 	PDH_CSTATUS_VALID_DATA   = 0x00000000
@@ -72,19 +72,28 @@ const (
 	PERF_DETAIL_WIZARD = 400
 )
 
+var (
+	NegDenomErr = newPdhError(PDH_CALC_NEGATIVE_DENOMINATOR)
+
+	hPdh Hlib
+
+	pdhOpenQuery                uintptr
+	pdhCloseQuery               uintptr
+	pdhAddCounter               uintptr
+	pdhAddEnglishCounter        uintptr
+	pdhCollectQueryData         uintptr
+	pdhGetFormattedCounterValue uintptr
+	pdhParseCounterPath         uintptr
+	pdhMakeCounterPath          uintptr
+	pdhLookupPerfNameByIndex    uintptr
+	pdhLookupPerfIndexByName    uintptr
+	pdhRemoveCounter            uintptr
+	pdhEnumObjectItems          uintptr
+	pdhEnumObjects              uintptr
+)
+
 type Instance struct {
 	Name string `json:"{#INSTANCE}"`
-}
-
-func newPdhError(ret uintptr) (err error) {
-	flags := uint32(windows.FORMAT_MESSAGE_FROM_HMODULE | windows.FORMAT_MESSAGE_IGNORE_INSERTS)
-	var len uint32
-	buf := make([]uint16, 1024)
-	len, err = windows.FormatMessage(flags, uintptr(hPdh), uint32(ret), 0, buf, nil)
-	if len == 0 {
-		return
-	}
-	return errors.New(windows.UTF16ToString(buf))
 }
 
 func PdhOpenQuery(dataSource *string, userData uintptr) (query PDH_HQUERY, err error) {
@@ -139,33 +148,54 @@ func PdhCollectQueryData(query PDH_HQUERY) (err error) {
 	return nil
 }
 
-func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER) (value *float64, err error) {
-	var errCode uintptr
-	value, errCode, err = PdhGetFormattedCounterValueDoubleHelper(counter)
-	if errCode != PDH_CALC_NEGATIVE_DENOMINATOR {
-		return
+func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER) (*float64, error) {
+	value, err := PdhGetFormattedCounterValueDoubleHelper(counter)
+	if err != nil && !errors.Is(err, NegDenomErr) {
+		return nil, zbxerr.New("failed to retrieve pdh counter value double").Wrap(err)
+	}
+
+	if !errors.Is(err, NegDenomErr) {
+		return value, nil
 	}
 
 	log.Debugf("Detected performance counter with negative denominator, retrying in 1 second")
 	time.Sleep(time.Second)
-	value, errCode, err = PdhGetFormattedCounterValueDoubleHelper(counter)
+
+	value, err = PdhGetFormattedCounterValueDoubleHelper(counter)
 	if err != nil {
-		log.Warningf("Detected performance counter with negative denominator the second time after retry, giving up...")
+		log.Warningf(
+			"Detected performance counter with negative denominator the second time after retry, giving up...",
+		)
+
+		return nil, err
 	}
-	return
+
+	return value, nil
 }
 
-func PdhGetFormattedCounterValueDoubleHelper(counter PDH_HCOUNTER) (value *float64, errCode uintptr, err error) {
+func PdhGetFormattedCounterValueDoubleHelper(counter PDH_HCOUNTER) (*float64, error) {
 	var pdhValue PDH_FMT_COUNTERVALUE_DOUBLE
-	ret, _, _ := syscall.Syscall6(pdhGetFormattedCounterValue, 4, uintptr(counter),
-		uintptr(PDH_FMT_DOUBLE|PDH_FMT_NOCAP100), 0, uintptr(unsafe.Pointer(&pdhValue)), 0, 0)
+
+	ret, _, _ := syscall.SyscallN(
+		pdhGetFormattedCounterValue,
+		4,
+		uintptr(counter),
+		uintptr(PDH_FMT_DOUBLE|PDH_FMT_NOCAP100),
+		0,
+		uintptr(unsafe.Pointer(&pdhValue)),
+		0,
+		0,
+	)
+
 	if syscall.Errno(ret) != windows.ERROR_SUCCESS {
 		if ret == PDH_INVALID_DATA || ret == PDH_CSTATUS_INVALID_DATA {
-			return nil, ret, nil
+			return nil, nil
 		}
-		return nil, ret, newPdhError(ret)
+
+		return nil, newPdhError(ret)
 	}
-	return &pdhValue.Value, 0, nil
+
+	return &pdhValue.Value, nil
 }
 
 func PdhGetFormattedCounterValueInt64(counter PDH_HCOUNTER) (value *int64, err error) {
@@ -352,20 +382,15 @@ func PdhEnumObject() (objects []string, err error) {
 	return objects, nil
 }
 
-func init() {
-	hPdh = mustLoadLibrary("pdh.dll")
+func newPdhError(ret uintptr) (err error) {
+	flags := uint32(windows.FORMAT_MESSAGE_FROM_HMODULE | windows.FORMAT_MESSAGE_IGNORE_INSERTS)
+	var len uint32
+	buf := make([]uint16, 1024)
 
-	pdhOpenQuery = hPdh.mustGetProcAddress("PdhOpenQuery")
-	pdhCloseQuery = hPdh.mustGetProcAddress("PdhCloseQuery")
-	pdhAddCounter = hPdh.mustGetProcAddress("PdhAddCounterW")
-	pdhAddEnglishCounter = hPdh.mustGetProcAddress("PdhAddEnglishCounterW")
-	pdhCollectQueryData = hPdh.mustGetProcAddress("PdhCollectQueryData")
-	pdhGetFormattedCounterValue = hPdh.mustGetProcAddress("PdhGetFormattedCounterValue")
-	pdhParseCounterPath = hPdh.mustGetProcAddress("PdhParseCounterPathW")
-	pdhMakeCounterPath = hPdh.mustGetProcAddress("PdhMakeCounterPathW")
-	pdhLookupPerfNameByIndex = hPdh.mustGetProcAddress("PdhLookupPerfNameByIndexW")
-	pdhLookupPerfIndexByName = hPdh.mustGetProcAddress("PdhLookupPerfIndexByNameW")
-	pdhRemoveCounter = hPdh.mustGetProcAddress("PdhRemoveCounter")
-	pdhEnumObjectItems = hPdh.mustGetProcAddress("PdhEnumObjectItemsW")
-	pdhEnumObjects = hPdh.mustGetProcAddress("PdhEnumObjectsW")
+	len, err = windows.FormatMessage(flags, uintptr(hPdh), uint32(ret), 0, buf, nil)
+	if len == 0 {
+		return
+	}
+
+	return errors.New(windows.UTF16ToString(buf))
 }

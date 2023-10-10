@@ -148,6 +148,7 @@ import (
 	"errors"
 	"time"
 	"unsafe"
+
 	"zabbix.com/internal/agent"
 	"zabbix.com/pkg/tls"
 
@@ -187,8 +188,8 @@ func ProcessEventLogCheck(data unsafe.Pointer, item *EventLogItem, refresh int, 
 
 	var tlsConfig *tls.Config
 	var err error
-	var ctlsConfig C.zbx_config_tls_t;
-	var ctlsConfig_p *C.zbx_config_tls_t;
+	var ctlsConfig C.zbx_config_tls_t
+	var ctlsConfig_p *C.zbx_config_tls_t
 
 	if tlsConfig, err = agent.GetTLSConfig(&agent.Options); err != nil {
 		res := &EventLogResult{
@@ -231,11 +232,11 @@ func ProcessEventLogCheck(data unsafe.Pointer, item *EventLogItem, refresh int, 
 		C.free(unsafe.Pointer(cServerCertSubject))
 	}()
 
-	if (nil != tlsConfig) {
+	if nil != tlsConfig {
 		log.Tracef("Calling C function \"zbx_config_tls_init_for_agent2()\"")
 		C.zbx_config_tls_init_for_agent2(&ctlsConfig, (C.uint)(tlsConfig.Accept), (C.uint)(tlsConfig.Connect),
 			cPSKIdentity, cPSKKey, cCAFile, cCRLFile, cCertFile, cKeyFile, cServerCertIssuer,
-			cServerCertSubject);
+			cServerCertSubject)
 		ctlsConfig_p = &ctlsConfig
 	}
 
