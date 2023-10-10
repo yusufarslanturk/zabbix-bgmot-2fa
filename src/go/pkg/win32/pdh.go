@@ -148,29 +148,37 @@ func PdhCollectQueryData(query PDH_HQUERY) (err error) {
 	return nil
 }
 
-func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER) (*float64, error) {
-	value, err := getCounterValueDouble(counter)
-	if err != nil && !errors.Is(err, NegDenomErr) {
+func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER, retryCount int) (*float64, error) {
+	var value *float64
+	var err error
+
+	if retryCount < 0 {
+		retryCount = 0
+	}
+
+	for i := 0; i <= retryCount; i++ {
+		value, err = getCounterValueDouble(counter)
+		if err == nil {
+			return value, nil
+		}
+
+		if errors.Is(err, NegDenomErr) {
+			log.Debugf("Detected performance counter with negative denominator, retrying in 1 second")
+
+			time.Sleep(time.Second)
+
+			continue
+		}
+
 		return nil, zbxerr.New("failed to retrieve pdh counter value double").Wrap(err)
+
 	}
 
-	if !errors.Is(err, NegDenomErr) {
-		return value, nil
-	}
+	log.Warningf(
+		"Detected performance counter with negative denominator after retries, giving up...",
+	)
 
-	log.Debugf("Detected performance counter with negative denominator, retrying in 1 second")
-	time.Sleep(time.Second)
-
-	value, err = getCounterValueDouble(counter)
-	if err != nil {
-		log.Warningf(
-			"Detected performance counter with negative denominator the second time after retry, giving up...",
-		)
-
-		return nil, err
-	}
-
-	return value, nil
+	return nil, err
 }
 
 func PdhGetFormattedCounterValueInt64(counter PDH_HCOUNTER) (value *int64, err error) {

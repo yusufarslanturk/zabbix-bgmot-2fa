@@ -211,7 +211,7 @@ func (p *Plugin) setCounterData() {
 
 		c.err = nil
 
-		c.history[c.tail], err = win32.PdhGetFormattedCounterValueDouble(c.handle)
+		c.history[c.tail], err = win32.PdhGetFormattedCounterValueDouble(c.handle, 0)
 		if err != nil {
 			c.err = fmt.Errorf("cannot format value of '%s': %s", index.path, err)
 
