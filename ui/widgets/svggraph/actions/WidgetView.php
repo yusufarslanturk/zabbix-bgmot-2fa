@@ -45,9 +45,24 @@ class WidgetView extends CControllerDashboardWidgetView {
 			'content_width' => 'int32|ge '.self::GRAPH_WIDTH_MIN.'|le '.self::GRAPH_WIDTH_MAX,
 			'content_height' => 'int32|ge '.self::GRAPH_HEIGHT_MIN.'|le '.self::GRAPH_HEIGHT_MAX,
 			'preview' => 'in 1',
-			'from' => 'string',
-			'to' => 'string'
+			'from' => 'range_time',
+			'to' => 'range_time'
 		]);
+	}
+
+	protected function checkInput(): bool {
+		$ret = parent::checkInput();
+
+		if ($ret && !$this->getInput('preview', 0)) {
+			$this->addValidationRules([
+				'from' => 'required',
+				'to' => 'required'
+			]);
+
+			return parent::checkInput();
+		}
+
+		return $ret;
 	}
 
 	protected function doAction(): void {
