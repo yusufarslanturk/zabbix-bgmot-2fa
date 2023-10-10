@@ -149,7 +149,7 @@ func PdhCollectQueryData(query PDH_HQUERY) (err error) {
 }
 
 func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER) (*float64, error) {
-	value, err := PdhGetFormattedCounterValueDoubleHelper(counter)
+	value, err := getCounterValueDouble(counter)
 	if err != nil && !errors.Is(err, NegDenomErr) {
 		return nil, zbxerr.New("failed to retrieve pdh counter value double").Wrap(err)
 	}
@@ -161,7 +161,7 @@ func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER) (*float64, error) {
 	log.Debugf("Detected performance counter with negative denominator, retrying in 1 second")
 	time.Sleep(time.Second)
 
-	value, err = PdhGetFormattedCounterValueDoubleHelper(counter)
+	value, err = getCounterValueDouble(counter)
 	if err != nil {
 		log.Warningf(
 			"Detected performance counter with negative denominator the second time after retry, giving up...",
@@ -171,31 +171,6 @@ func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER) (*float64, error) {
 	}
 
 	return value, nil
-}
-
-func PdhGetFormattedCounterValueDoubleHelper(counter PDH_HCOUNTER) (*float64, error) {
-	var pdhValue PDH_FMT_COUNTERVALUE_DOUBLE
-
-	ret, _, _ := syscall.SyscallN(
-		pdhGetFormattedCounterValue,
-		4,
-		uintptr(counter),
-		uintptr(PDH_FMT_DOUBLE|PDH_FMT_NOCAP100),
-		0,
-		uintptr(unsafe.Pointer(&pdhValue)),
-		0,
-		0,
-	)
-
-	if syscall.Errno(ret) != windows.ERROR_SUCCESS {
-		if ret == PDH_INVALID_DATA || ret == PDH_CSTATUS_INVALID_DATA {
-			return nil, nil
-		}
-
-		return nil, newPdhError(ret)
-	}
-
-	return &pdhValue.Value, nil
 }
 
 func PdhGetFormattedCounterValueInt64(counter PDH_HCOUNTER) (value *int64, err error) {
@@ -380,6 +355,31 @@ func PdhEnumObject() (objects []string, err error) {
 	}
 
 	return objects, nil
+}
+
+func getCounterValueDouble(counter PDH_HCOUNTER) (*float64, error) {
+	var pdhValue PDH_FMT_COUNTERVALUE_DOUBLE
+
+	ret, _, _ := syscall.SyscallN(
+		pdhGetFormattedCounterValue,
+		4,
+		uintptr(counter),
+		uintptr(PDH_FMT_DOUBLE|PDH_FMT_NOCAP100),
+		0,
+		uintptr(unsafe.Pointer(&pdhValue)),
+		0,
+		0,
+	)
+
+	if syscall.Errno(ret) != windows.ERROR_SUCCESS {
+		if ret == PDH_INVALID_DATA || ret == PDH_CSTATUS_INVALID_DATA {
+			return nil, nil
+		}
+
+		return nil, newPdhError(ret)
+	}
+
+	return &pdhValue.Value, nil
 }
 
 func newPdhError(ret uintptr) (err error) {
