@@ -61,21 +61,16 @@ class CControllerTwofaEdit extends CController {
 			$twofa[$param] = CTwofaHelper::get($param);
 		}
 
-		if ($this->hasInput('form_refresh')) {
-			$this->getInputs($data, [
-				'form_refresh',
-				'twofa_type',
-				'twofa_duo_api_hostname',
-				'twofa_duo_integration_key',
-				'twofa_duo_secret_key',
-				'twofa_duo_a_key',
-			]);
+		$this->getInputs($data, [
+			'form_refresh',
+			'twofa_type',
+			'twofa_duo_api_hostname',
+			'twofa_duo_integration_key',
+			'twofa_duo_secret_key',
+			'twofa_duo_a_key',
+		]);
 
-			$data += $twofa;
-		}
-		else {
-			$data += $twofa;
-		}
+		$data += $twofa;
 
 		$response = new CControllerResponseData($data);
 		$response->setTitle(twofa2str($data['twofa_type']));
