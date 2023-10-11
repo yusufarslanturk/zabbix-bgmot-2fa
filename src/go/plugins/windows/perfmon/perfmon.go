@@ -35,7 +35,9 @@ import (
 )
 
 func init() {
-	plugin.RegisterMetrics(&impl, "WindowsPerfMon",
+	plugin.RegisterMetrics(
+		&impl,
+		"WindowsPerfMon",
 		"perf_counter", "Value of any Windows performance counter.",
 		"perf_counter_en", "Value of any Windows performance counter in English.",
 	)
@@ -88,8 +90,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	case "perf_counter_en":
 		lang = langEnglish
 	default:
-		return nil, zbxerr.ErrorUnsupportedMetric
-
+		return nil, zbxerr.New(fmt.Sprintf("metric key %q not found", key)).Wrap(zbxerr.ErrorUnsupportedMetric)
 	}
 
 	if ctx == nil {
@@ -103,17 +104,16 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		return nil, zbxerr.New("invalid first parameter")
 	}
 
-	var interval int64
+	var interval int64 = 1
 	var err error
 
-	if len(params) == 1 || params[1] == "" {
-		interval = 1
-	} else {
+	if len(params) == 2 && params[1] != "" {
 		if interval, err = strconv.ParseInt(params[1], 10, 32); err != nil {
-			return nil, zbxerr.New("invalid second parameter")
+			return nil, zbxerr.New("invalid second parameter").Wrap(err)
 		}
+
 		if interval < 1 || interval > maxInterval {
-			return nil, zbxerr.New("interval out of range")
+			return nil, zbxerr.New(fmt.Sprintf("interval %d out of range [%d, %d]", interval, 1, maxInterval))
 		}
 	}
 
@@ -135,20 +135,22 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	index := perfCounterIndex{path, lang}
 	counter, ok := p.counters[index]
-	if ok {
-		if p.collectError != nil {
-			return nil, p.collectError
+	if !ok {
+		err = p.addCounter(index, interval)
+		if err != nil {
+			p.collectError = zbxerr.New(
+				fmt.Sprintf("failed to get counter for path %q and lang %d", path, lang),
+			).Wrap(err)
 		}
 
-		return counter.getHistory(int(interval))
+		return nil, p.collectError
 	}
 
-	err = p.addCounter(index, interval)
-	if err != nil {
-		p.collectError = err
+	if p.collectError != nil {
+		return nil, p.collectError
 	}
 
-	return nil, p.collectError
+	return counter.getHistory(int(interval))
 }
 
 func (p *Plugin) Collect() error {
@@ -159,16 +161,14 @@ func (p *Plugin) Collect() error {
 		return nil
 	}
 
+	p.setCounterData()
+
 	p.collectError = nil
 
 	err := win32.PdhCollectQueryData(p.query)
 	if err != nil {
 		p.collectError = fmt.Errorf("cannot collect value %s", err)
-	}
 
-	p.setCounterData()
-
-	if p.collectError != nil {
 		p.Debugf("reset counter query: '%s'", p.collectError)
 
 		err = win32.PdhCloseQuery(p.query)
@@ -177,9 +177,11 @@ func (p *Plugin) Collect() error {
 		}
 
 		p.query = 0
+
+		return p.collectError
 	}
 
-	return p.collectError
+	return nil
 }
 
 func (p *Plugin) Period() int {
@@ -211,7 +213,7 @@ func (p *Plugin) setCounterData() {
 
 		c.err = nil
 
-		c.history[c.tail], err = win32.PdhGetFormattedCounterValueDouble(c.handle, 0)
+		c.history[c.tail], err = win32.PdhGetFormattedCounterValueDouble(c.handle, 1)
 		if err != nil {
 			c.err = fmt.Errorf("cannot format value of '%s': %s", index.path, err)
 

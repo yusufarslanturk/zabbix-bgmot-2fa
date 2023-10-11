@@ -35,24 +35,6 @@ import (
 	"golang.org/x/sys/windows"
 )
 
-func init() {
-	hPdh = mustLoadLibrary("pdh.dll")
-
-	pdhOpenQuery = hPdh.mustGetProcAddress("PdhOpenQuery")
-	pdhCloseQuery = hPdh.mustGetProcAddress("PdhCloseQuery")
-	pdhAddCounter = hPdh.mustGetProcAddress("PdhAddCounterW")
-	pdhAddEnglishCounter = hPdh.mustGetProcAddress("PdhAddEnglishCounterW")
-	pdhCollectQueryData = hPdh.mustGetProcAddress("PdhCollectQueryData")
-	pdhGetFormattedCounterValue = hPdh.mustGetProcAddress("PdhGetFormattedCounterValue")
-	pdhParseCounterPath = hPdh.mustGetProcAddress("PdhParseCounterPathW")
-	pdhMakeCounterPath = hPdh.mustGetProcAddress("PdhMakeCounterPathW")
-	pdhLookupPerfNameByIndex = hPdh.mustGetProcAddress("PdhLookupPerfNameByIndexW")
-	pdhLookupPerfIndexByName = hPdh.mustGetProcAddress("PdhLookupPerfIndexByNameW")
-	pdhRemoveCounter = hPdh.mustGetProcAddress("PdhRemoveCounter")
-	pdhEnumObjectItems = hPdh.mustGetProcAddress("PdhEnumObjectItemsW")
-	pdhEnumObjects = hPdh.mustGetProcAddress("PdhEnumObjectsW")
-}
-
 const (
 	PDH_CSTATUS_VALID_DATA   = 0x00000000
 	PDH_CSTATUS_NEW_DATA     = 0x00000001
@@ -73,23 +55,21 @@ const (
 )
 
 var (
-	NegDenomErr = newPdhError(PDH_CALC_NEGATIVE_DENOMINATOR)
-
-	hPdh Hlib
-
-	pdhOpenQuery                uintptr
-	pdhCloseQuery               uintptr
-	pdhAddCounter               uintptr
-	pdhAddEnglishCounter        uintptr
-	pdhCollectQueryData         uintptr
-	pdhGetFormattedCounterValue uintptr
-	pdhParseCounterPath         uintptr
-	pdhMakeCounterPath          uintptr
-	pdhLookupPerfNameByIndex    uintptr
-	pdhLookupPerfIndexByName    uintptr
-	pdhRemoveCounter            uintptr
-	pdhEnumObjectItems          uintptr
-	pdhEnumObjects              uintptr
+	NegDenomErr                 = newPdhError(PDH_CALC_NEGATIVE_DENOMINATOR)
+	hPdh                        = mustLoadLibrary("pdh.dll")
+	pdhOpenQuery                = hPdh.mustGetProcAddress("PdhOpenQuery")
+	pdhCloseQuery               = hPdh.mustGetProcAddress("PdhCloseQuery")
+	pdhAddCounter               = hPdh.mustGetProcAddress("PdhAddCounterW")
+	pdhAddEnglishCounter        = hPdh.mustGetProcAddress("PdhAddEnglishCounterW")
+	pdhCollectQueryData         = hPdh.mustGetProcAddress("PdhCollectQueryData")
+	pdhGetFormattedCounterValue = hPdh.mustGetProcAddress("PdhGetFormattedCounterValue")
+	pdhParseCounterPath         = hPdh.mustGetProcAddress("PdhParseCounterPathW")
+	pdhMakeCounterPath          = hPdh.mustGetProcAddress("PdhMakeCounterPathW")
+	pdhLookupPerfNameByIndex    = hPdh.mustGetProcAddress("PdhLookupPerfNameByIndexW")
+	pdhLookupPerfIndexByName    = hPdh.mustGetProcAddress("PdhLookupPerfIndexByNameW")
+	pdhRemoveCounter            = hPdh.mustGetProcAddress("PdhRemoveCounter")
+	pdhEnumObjectItems          = hPdh.mustGetProcAddress("PdhEnumObjectItemsW")
+	pdhEnumObjects              = hPdh.mustGetProcAddress("PdhEnumObjectsW")
 )
 
 type Instance struct {
@@ -148,15 +128,15 @@ func PdhCollectQueryData(query PDH_HQUERY) (err error) {
 	return nil
 }
 
-func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER, retryCount int) (*float64, error) {
+func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER, tryCount int) (*float64, error) {
 	var value *float64
 	var err error
 
-	if retryCount < 0 {
-		retryCount = 0
+	if tryCount < 1 {
+		tryCount = 1
 	}
 
-	for i := 0; i <= retryCount; i++ {
+	for i := 1; i <= tryCount; i++ {
 		value, err = getCounterValueDouble(counter)
 		if err == nil {
 			return value, nil
