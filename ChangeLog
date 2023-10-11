@@ -1,3 +1,18 @@
+Changes for 5.0.38
+
+5.0.38rc1 was released as 5.0.38 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 5.0.38rc1
+
+Bug fixes:
+........S. [ZBX-23303] fixed syntax of message identifier in the In-Reply-To e-mail header field (asitals)
+...G...... [ZBX-20442] fixed Ceph plugin not returning percent_used in Zabbix agent 2 (rzvejs)
+...G...... [ZBX-22695] fixed eventlog duplicate timestamps (asestakovs)
+..F....... [ZBX-17279] fixed graph widget loading (apoga)
+A......... [ZBX-21644] fixed state of "allow manual close" setting of trigger prototype getting lost on template cloning (jfreibergs)
+
+--------------------------------------------------------------------------------
 Changes for 5.0.37
 
 5.0.37rc1 was released as 5.0.37 without any changes
@@ -2832,6 +2847,17 @@ Changes for 4.2.0alpha1
 New features:
 A.F.I...S. [ZBXNEXT-4853,ZBXNEXT-517] added ability to send email messages in HTML format on demand (MVekslers, vasilijs)
 ..F.....S. [ZBXNEXT-1282,ZBXNEXT-4730] added changes to introduce regex based matching for auto-registration (vasilijs, viktors)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.49
+
+4.0.49rc1 was released as 4.0.49 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 4.0.49rc1
+
+Bug fixes:
+...G...... [ZBX-22695] fixed eventlog duplicate timestamps (asestakovs)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.48
