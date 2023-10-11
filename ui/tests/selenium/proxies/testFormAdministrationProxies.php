@@ -35,11 +35,11 @@ class testFormAdministrationProxies extends CWebTest {
 
 	private $sql = 'SELECT * FROM hosts ORDER BY hostid';
 
-	private static $update_proxy = 'Active proxy for update';
-	private static $change_active_proxy = 'Active proxy for refresh cancel simple update';
-	private static $change_passive_proxy = 'Passive proxy for refresh cancel simple update';
-	private static $delete_proxy_with_hosts = 'Proxy_2 for filter';
-	private static $delete_proxy_with_discovery_rule = 'Proxy for Discovery rule';
+	protected  static $update_proxy = 'Active proxy for update';
+	const CHANGE_ACTIVE_PROXY = 'Active proxy for refresh cancel simple update';
+	const CHANGE_PASSIVE_PROXY = 'Passive proxy for refresh cancel simple update';
+	const DELETE_PROXY_WITH_HOSTS = 'Proxy_2 for filter';
+	const DELETE_PROXY_WITH_DISCOVERY_RULE = 'Delete Proxy used in Network discovery rule';
 
 	/**
 	 * Attach MessageBehavior to the test.
@@ -63,7 +63,7 @@ class testFormAdministrationProxies extends CWebTest {
 				'tls_accept'=> 1
 			],
 			[
-				'host' => self::$change_active_proxy,
+				'host' => self::CHANGE_ACTIVE_PROXY,
 				'status' => 5,
 				'description' => 'Active description for refresh',
 				'tls_connect' => 1,
@@ -75,7 +75,7 @@ class testFormAdministrationProxies extends CWebTest {
 				'proxy_address' => '127.0.1.2'
 			],
 			[
-				'host' => self::$change_passive_proxy,
+				'host' => self::CHANGE_PASSIVE_PROXY,
 				'status' => 6,
 				'description' => '_Passive description for refresh',
 				'tls_connect' => 4,
@@ -1150,12 +1150,12 @@ class testFormAdministrationProxies extends CWebTest {
 		return [
 			[
 				[
-					'proxy' => self::$change_active_proxy
+					'proxy' => self::CHANGE_ACTIVE_PROXY
 				]
 			],
 			[
 				[
-					'proxy' => self::$change_passive_proxy
+					'proxy' => self::CHANGE_PASSIVE_PROXY
 				]
 			]
 		];
@@ -1369,15 +1369,16 @@ class testFormAdministrationProxies extends CWebTest {
 			[
 				[
 					'expected' => TEST_BAD,
-					'proxy' => self::$delete_proxy_with_hosts,
+					'proxy' => self::DELETE_PROXY_WITH_HOSTS,
 					'error' => "Host \"Host_2 with proxy\" is monitored by proxy \"Proxy_2 for filter\"."
 				]
 			],
 			[
 				[
 					'expected' => TEST_BAD,
-					'proxy' => self::$delete_proxy_with_discovery_rule,
-					'error' => "Proxy \"Proxy for Discovery rule\" is used by discovery rule \"Discovery rule for update\"."
+					'proxy' => self::DELETE_PROXY_WITH_DISCOVERY_RULE,
+					'error' => "Proxy \"Delete Proxy used in Network discovery rule\" is used by discovery rule ".
+							"\"Discovery rule for proxy delete test\"."
 				]
 			]
 		]);
