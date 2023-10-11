@@ -468,10 +468,9 @@ else {
 }
 
 $ms_groups = [];
-$filter_groupids = getSubGroups(getRequest('filter_groupids', []), $ms_groups, ['editable' => true],
-	getRequest('context')
-);
+$filter_groupids = getSubGroups(getRequest('filter_groupids', []), $ms_groups, getRequest('context'));
 $filter_hostids = getRequest('filter_hostids');
+
 if (!hasRequest('form') && $filter_hostids) {
 	if (!isset($host)) {
 		$host = API::Host()->get([
@@ -669,7 +668,7 @@ elseif (hasRequest('add') || hasRequest('update')) {
 elseif (hasRequest('del_history') && hasRequest('itemid')) {
 	$result = (bool) API::History()->clear([getRequest('itemid')]);
 
-	show_messages($result, _('History cleared'), _('Cannot clear history'));
+	show_messages($result, _('History and trends cleared'), _('Cannot clear history and trends'));
 }
 elseif (hasRequest('action') && str_in_array(getRequest('action'), ['item.massenable', 'item.massdisable']) && hasRequest('group_itemid')) {
 	$itemids = getRequest('group_itemid');
@@ -705,7 +704,7 @@ elseif (hasRequest('action') && getRequest('action') === 'item.massclearhistory'
 		$filter_hostids ? uncheckTableRows($checkbox_hash) : uncheckTableRows();
 	}
 
-	show_messages($result, _('History cleared'), _('Cannot clear history'));
+	show_messages($result, _('History and trends cleared'), _('Cannot clear history and trends'));
 }
 elseif (hasRequest('action') && getRequest('action') === 'item.massdelete' && hasRequest('group_itemid')) {
 	$group_itemid = getRequest('group_itemid');

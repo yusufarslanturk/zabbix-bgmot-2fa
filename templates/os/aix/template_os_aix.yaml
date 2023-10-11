@@ -822,16 +822,6 @@ zabbix_export:
                         host: 'AIX by Zabbix agent'
                         name: 'AIX: CPU load'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'AIX by Zabbix agent'
-                        name: 'AIX: CPU jumps'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -841,6 +831,16 @@ zabbix_export:
                       value:
                         host: 'AIX by Zabbix agent'
                         name: 'AIX: CPU utilization'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'AIX by Zabbix agent'
+                        name: 'AIX: CPU jumps'
                 - type: graph
                   x: '12'
                   'y': '5'

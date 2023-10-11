@@ -100,7 +100,7 @@ const char	*zbx_result_string(int result);
 #define ZBX_HOSTNAME_BUF_LEN	(ZBX_MAX_HOSTNAME_LEN + 1)
 #define ZBX_MAX_DNSNAME_LEN		255	/* maximum host DNS name length from RFC 1035 */
 						/*(without terminating '\0') */
-#define MAX_EXECUTE_OUTPUT_LEN		(512 * ZBX_KIBIBYTE)
+#define MAX_EXECUTE_OUTPUT_LEN		(16 * ZBX_MEBIBYTE)
 
 #define ZBX_MAX_UINT64		(~__UINT64_C(0))
 #define ZBX_MAX_UINT64_LEN	21
@@ -566,6 +566,9 @@ zbx_proxy_suppress_t;
 /* max length of base64 data */
 #define ZBX_MAX_B64_LEN		(16 * ZBX_KIBIBYTE)
 
+#define ZBX_STRQUOTE_DEFAULT		1
+#define ZBX_STRQUOTE_SKIP_BACKSLASH	0
+
 /* string functions that could not be moved into libzbxstr.a because they */
 /* are used by libzbxcommon.a */
 
@@ -582,6 +585,10 @@ size_t	zbx_snprintf(char *str, size_t count, const char *fmt, ...) __zbx_attr_fo
 /* could be moved into libzbxstr.a but it seems to be logically grouped with surrounding functions */
 void	zbx_snprintf_alloc(char **str, size_t *alloc_len, size_t *offset, const char *fmt, ...)
 		__zbx_attr_format_printf(4, 5);
+
+#if defined(__hpux)
+int	zbx_hpux_vsnprintf_is_c99(void);
+#endif
 
 /* used by log */
 size_t	zbx_vsnprintf(char *str, size_t count, const char *fmt, va_list args);
