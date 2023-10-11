@@ -163,15 +163,10 @@ func (p *Plugin) Collect() error {
 
 	p.setCounterData()
 
-	p.collectError = nil
-
-	err := win32.PdhCollectQueryData(p.query)
-	if err != nil {
-		p.collectError = fmt.Errorf("cannot collect value %s", err)
-
+	if p.collectError != nil {
 		p.Debugf("reset counter query: '%s'", p.collectError)
 
-		err = win32.PdhCloseQuery(p.query)
+		err := win32.PdhCloseQuery(p.query)
 		if err != nil {
 			p.Warningf("error while closing query '%s'", err)
 		}
@@ -195,7 +190,12 @@ func (p *Plugin) Stop() {
 }
 
 func (p *Plugin) setCounterData() {
-	var err error
+	p.collectError = nil
+
+	err := win32.PdhCollectQueryData(p.query)
+	if err != nil {
+		p.collectError = fmt.Errorf("cannot collect value %s", err)
+	}
 
 	expireTime := time.Now().Add(-maxInactivityPeriod)
 
