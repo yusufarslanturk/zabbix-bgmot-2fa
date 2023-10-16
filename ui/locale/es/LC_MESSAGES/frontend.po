@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-08-23 19:44+0000\n"
-"Last-Translator: Fernanda <fernanda.moraes@zabbix.com>\n"
+"PO-Revision-Date: 2023-10-16 12:26+0000\n"
+"Last-Translator: Jurijs <jurijs.klopovskis@zabbix.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -1775,7 +1775,7 @@ msgstr "Número promedio de solicitudes de lectura pendientes en el disco virtua
 
 #: include/classes/data/CItemData.php:1542
 msgid "Average number of outstanding write requests to the virtual disk during the collection interval, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance"
-msgstr ""
+msgstr "Número promedio de solicitudes de escritura excesivas en el disco virtual durante el intervalo de recopilación, <url>: URL del servicio de VMware, <uuid>: nombre la máquina virtual de VMware, <instance>: instancia del dispositivo de disco"
 
 #: app/views/administration.authentication.edit.php:93
 msgid "Avoid easy-to-guess passwords"
@@ -2001,27 +2001,27 @@ msgstr "Uso de la CPU como porcentaje durante el intervalo, \"url\": URL del ser
 
 #: include/classes/data/CItemData.php:1266
 msgid "CPU usage as a percentage during the interval, <url> - VMware service URL, <uuid> - VMware hypervisor host name"
-msgstr ""
+msgstr "Uso de la CPU como porcentaje durante el intervalo, <url>: URL del servicio de VMware, <uuid>: nombre del hipervisor de VMware"
 
 #: include/classes/data/CItemData.php:1426
 msgid "CPU usage as a percentage during the interval, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
-msgstr ""
+msgstr "Uso de la CPU como porcentaje durante el intervalo, <url>: URL del servicio de VMware, <uuid>: nombre de la máquina virtual de VMware"
 
 #: include/classes/data/CItemData.php:1559
 msgid "CPU usage in hertz during the interval on VMware Resource Pool, \"url\" - VMware service URL, \"rpid\" - VMware resource pool id"
-msgstr ""
+msgstr "Uso de CPU en hercios durante el intervalo en el grupo de recursos de VMware, <url>: URL del servicio de VMware, <rpid>: ID del grupo de recursos de VMware"
 
 #: include/classes/data/CItemData.php:1429
 msgid "CPU usage in hertz during the interval on VMware Resource Pool, <url> - VMware service URL, <rpid> - VMware resource pool id"
-msgstr ""
+msgstr "Uso de CPU en hercios durante el intervalo en el grupo de recursos de VMware, <url>: URL del servicio de VMware, <rpid>: ID del grupo de recursos de VMware"
 
 #: include/classes/data/CItemData.php:1054
 msgid "CPU utilization percentage. Returns float"
-msgstr ""
+msgstr "Porcentaje de utilización de CPU. Devuelve un número con coma flotante"
 
 #: app/views/popup.itemtestedit.view.php:300
 msgid "CRLF"
-msgstr ""
+msgstr "CRLF"
 
 #: include/items.inc.php:1828
 msgid "CSV to JSON"
@@ -2275,7 +2275,7 @@ msgstr "No se puede asignar el campo de inventario \"%1$s\" al elemento con la c
 #: include/classes/api/services/CItem.php:1531
 #, c-format
 msgid "Cannot assign the inventory field \"%1$s\" to the item with key \"%2$s\" of template \"%3$s\", because it is already populated by the item with key \"%4$s\"."
-msgstr ""
+msgstr "No se puede asignar el campo de inventario \"%1$s\" al elemento con la clave \"%2$s\" del template \"%3$s\", porque ya está poblado por el elemento con la clave \"%4$s\"."
 
 #: jsLoader.php:343
 msgctxt "screen reader"
@@ -2304,6 +2304,10 @@ msgstr "No se puede cambiar el tipo de usuario del propio rol."
 #: httpconf.php:189 httpconf.php:433 items.php:901 items.php:981
 msgid "Cannot clear history"
 msgstr "No se pudo eliminar el histórico"
+
+#: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
+msgid "Cannot clear history and trends"
+msgstr ""
 
 #: include/classes/api/services/CDiscoveryRule.php:2514
 msgid "Cannot clone graph prototypes."
@@ -2719,7 +2723,7 @@ msgstr "No se pudo eliminar el disparador \"%1$s:%2$s\" de la plantilla."
 #: include/classes/api/services/CTriggerPrototype.php:523
 #, c-format
 msgid "Cannot delete templated trigger prototype \"%1$s:%2$s\"."
-msgstr ""
+msgstr "No es posible eliminar el prototipo de trigger \"%1$s:%2$s\" de la plantilla."
 
 #: include/classes/api/services/CHttpTest.php:610
 #, c-format
@@ -3001,7 +3005,7 @@ msgstr "No se pudo encontrar una interfaz de equipo en \"%1$s\" para el parámet
 #: include/classes/api/services/CDiscoveryRule.php:2517
 #, c-format
 msgid "Cannot find host interface on \"%1$s\" for item prototype with key \"%2$s\"."
-msgstr ""
+msgstr "No se pudo encontrar una interfaz de equipo en \"%1$s\" para el elemento de clave \"%2$s\"."
 
 #: include/items.inc.php:640
 #, c-format
@@ -3115,7 +3119,7 @@ msgstr "No se puede tener una regla \"%2$s\" no predeterminada mientras se tiene
 #: include/classes/api/services/CRole.php:645
 #, c-format
 msgid "Cannot have non-empty tag value while having empty tag in rule \"%2$s\" for user role \"%1$s\"."
-msgstr ""
+msgstr "No se puede tener un valor de etiqueta no vacío mientras se tiene una etiqueta vacía en la regla \"%2$s\" para el rol de usuario \"%1$s\"."
 
 #: include/classes/import/importers/CTemplateImporter.php:258
 #: include/classes/import/importers/CTemplateImporter.php:410
@@ -3133,7 +3137,7 @@ msgstr "Não é possível herdar regras LDD com a chave \"%1$s\" dos modelos \"%
 #: include/classes/api/services/CItemGeneral.php:589
 #, c-format
 msgid "Cannot inherit LDD rules with key \"%1$s\" of both \"%2$s\" and \"%3$s\" templates, because the key must be unique on template \"%4$s\"."
-msgstr ""
+msgstr "No se pueden heredar reglas LDD con la clave \"%1$s\" de las plantillas \"%2$s\" y \"%3$s\", porque la clave debe ser única en la plantilla \"%4$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:704
 #: include/classes/api/services/CItemGeneral.php:716
@@ -3154,175 +3158,175 @@ msgstr "la regla LLD con la clave \"%1$s\" del template \"%2$s\" para host  \"%3
 #: include/classes/api/services/CItemGeneral.php:704
 #, c-format
 msgid "Cannot inherit LLD rule with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because an item with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar la regla LLD con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque ya existe un elemento con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:769
 #, c-format
 msgid "Cannot inherit LLD rule with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because an item with the same key is already inherited from template \"%4$s\"."
-msgstr ""
+msgstr "No se puede heredar la regla LLD con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque ya se ha heredado un elemento con la misma clave de la plantilla \"%4$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:705
 #: include/classes/api/services/CItemGeneral.php:717
 #, c-format
 msgid "Cannot inherit LLD rule with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because a discovered item with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar la regla LLD con la clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya existe un elemento descubierto con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:711
 #, c-format
 msgid "Cannot inherit LLD rule with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because an item prototype with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar la regla LLD con la clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya existe un prototipo de elemento con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:705
 #, c-format
 msgid "Cannot inherit LLD rule with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because an item with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar la regla LLD con la clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya existe un elemento con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:770
 #, c-format
 msgid "Cannot inherit LLD rule with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because an item with the same key is already inherited from template \"%4$s\"."
-msgstr ""
+msgstr "No se puede heredar la regla LLD con clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya se ha heredado un elemento con la misma clave de la plantilla \"%4$s\"."
 
 #: include/classes/api/services/CItemPrototype.php:1230
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" and LLD rule \"%3$s\" to host \"%4$s\", because an item prototype with the same key already belongs to LLD rule \"%5$s\"."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con la clave \"%1$s\" de la plantilla \"%2$s\" y la regla LLD \"%3$s\" al host \"%4$s\", porque un prototipo de elemento con la misma clave ya pertenece a la regla LLD \"%5$s\"."
 
 #: include/classes/api/services/CItemPrototype.php:1231
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" and LLD rule \"%3$s\" to template \"%4$s\", because an item prototype with the same key already belongs to LLD rule \"%5$s\"."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con la clave \"%1$s\" de la plantilla \"%2$s\" y la regla LLD \"%3$s\" a la plantilla \"%4$s\", porque un prototipo de elemento con la misma clave ya pertenece a la regla LLD \"%5$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:725
 #: include/classes/api/services/CItemGeneral.php:737
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because a discovered item with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque ya existe un elemento descubierto con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:1034
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because a host interface of type \"%4$s\" is required."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque se requiere una interfaz de host del tipo \"%4$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:731
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because an LLD rule with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque ya existe una regla LLD con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:725
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because an item with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque ya existe un elemento con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:775
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because an item with the same key is already inherited from template \"%4$s\"."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque ya se ha heredado un elemento con la misma clave de la plantilla \"%4$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:726
 #: include/classes/api/services/CItemGeneral.php:738
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because a discovered item with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con la clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya existe un elemento descubierto con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:732
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because an LLD rule with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya existe una regla LLD con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:726
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because an item with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya existe un elemento con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:776
 #, c-format
 msgid "Cannot inherit item prototype with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because an item with the same key is already inherited from template \"%4$s\"."
-msgstr ""
+msgstr "No se puede heredar el prototipo de elemento con clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya se ha heredado un elemento con la misma clave de la plantilla \"%4$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:582
 #, c-format
 msgid "Cannot inherit item prototypes with key \"%1$s\" of both \"%2$s\" and \"%3$s\" templates, because the key must be unique on host \"%4$s\"."
-msgstr ""
+msgstr "No se pueden heredar prototipos de elementos con la clave \"%1$s\" de las plantillas \"%2$s\" y \"%3$s\", porque la clave debe ser única en el host \"%4$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:583
 #, c-format
 msgid "Cannot inherit item prototypes with key \"%1$s\" of both \"%2$s\" and \"%3$s\" templates, because the key must be unique on template \"%4$s\"."
-msgstr ""
+msgstr "No se pueden heredar prototipos de elementos con la clave \"%1$s\" de las plantillas \"%2$s\" y \"%3$s\", porque la clave debe ser única en la plantilla \"%4$s\"."
 
 #: include/classes/api/services/CItem.php:1455
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" and item with key \"%3$s\" of template \"%4$s\" to host \"%5$s\", because they would populate the same inventory field \"%6$s\"."
-msgstr ""
+msgstr "No se puede heredar el artículo con la clave \"%1$s\" de la plantilla \"%2$s\" y el artículo con la clave \"%3$s\" de la plantilla \"%4$s\" al anfitrión \"%5$s\", porque rellenarían el mismo campo de inventario \"%6$s\"."
 
 #: include/classes/api/services/CItem.php:1454
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" and item with key \"%3$s\" of template \"%4$s\" to template \"%5$s\", because they would populate the same inventory field \"%6$s\"."
-msgstr ""
+msgstr "No se puede heredar el artículo con clave \"%1$s\" de la plantilla \"%2$s\" y el artículo con clave \"%3$s\" de la plantilla \"%4$s\" a la plantilla \"%5$s\", porque rellenarían el mismo campo de inventario \"%6$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:695
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because a discovered item with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el elemento con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque ya existe un elemento descubierto con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:1026
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because a host interface of type \"%4$s\" is required."
-msgstr ""
+msgstr "No se puede heredar el elemento con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque se requiere una interfaz de host del tipo \"%4$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:683
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because an LLD rule with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el elemento con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque ya existe una regla LLD con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:689
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because an item prototype with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el elemento con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque ya existe un prototipo de elemento con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:763
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because an item with the same key is already inherited from template \"%4$s\"."
-msgstr ""
+msgstr "No se puede heredar el elemento con la clave \"%1$s\" de la plantilla \"%2$s\" al host \"%3$s\", porque ya se ha heredado un elemento con la misma clave de la plantilla \"%4$s\"."
 
 #: include/classes/api/services/CItem.php:1509
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to host \"%3$s\", because its inventory field \"%4$s\" is already populated by the item with key \"%5$s\"."
-msgstr ""
+msgstr "No se puede heredar el artículo con clave \"%1$s\" de la plantilla \"%2$s\" al anfitrión \"%3$s\", porque su campo de inventario \"%4$s\" ya está poblado por el artículo con clave \"%5$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:696
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because a discovered item with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el elemento con la clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya existe un elemento descubierto con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:684
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because an LLD rule with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el elemento con la clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya existe una regla LLD con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:690
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because an item prototype with the same key already exists."
-msgstr ""
+msgstr "No se puede heredar el elemento con la clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya existe un prototipo de elemento con la misma clave."
 
 #: include/classes/api/services/CItemGeneral.php:764
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because an item with the same key is already inherited from template \"%4$s\"."
-msgstr ""
+msgstr "No se puede heredar el elemento con la clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque ya se ha heredado un elemento con la misma clave de la plantilla \"%4$s\"."
 
 #: include/classes/api/services/CItem.php:1508
 #, c-format
 msgid "Cannot inherit item with key \"%1$s\" of template \"%2$s\" to template \"%3$s\", because its inventory field \"%4$s\" is already populated by the item with key \"%5$s\"."
-msgstr ""
+msgstr "No se puede heredar el artículo con clave \"%1$s\" de la plantilla \"%2$s\" a la plantilla \"%3$s\", porque su campo de inventario \"%4$s\" ya está poblado por el artículo con clave \"%5$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:576
 #, c-format
 msgid "Cannot inherit items with key \"%1$s\" of both \"%2$s\" and \"%3$s\" templates, because the key must be unique on host \"%4$s\"."
-msgstr ""
+msgstr "No se pueden heredar elementos con la clave \"%1$s\" de las plantillas \"%2$s\" y \"%3$s\", porque la clave debe ser única en el host \"%4$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:577
 #, c-format
 msgid "Cannot inherit items with key \"%1$s\" of both \"%2$s\" and \"%3$s\" templates, because the key must be unique on template \"%4$s\"."
-msgstr ""
+msgstr "No se pueden heredar elementos con la clave \"%1$s\" de las plantillas \"%2$s\" y \"%3$s\", porque la clave debe ser única en la plantilla \"%4$s\"."
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1581
 msgid "Cannot insert trigger expression"
@@ -3335,28 +3339,28 @@ msgstr "No se puede linkar plantilla"
 #: include/classes/api/services/CHostBase.php:520
 #, c-format
 msgid "Cannot link template \"%1$s\" to host \"%2$s\" because its parent template \"%3$s\" will be linked twice."
-msgstr ""
+msgstr "No se puede vincular la plantilla \"%1$s\" al host \"%2$s\" porque su plantilla padre \"%3$s\" se vinculará dos veces."
 
 #: include/classes/api/services/CHostBase.php:678
 #: include/classes/api/services/CHostBase.php:755
 #, c-format
 msgid "Cannot link template \"%1$s\" to host \"%2$s\" due to dependency of trigger \"%3$s\"."
-msgstr ""
+msgstr "No se puede vincular la plantilla \"%1$s\" al host \"%2$s\" debido a la dependencia del activador \"%3$s\"."
 
 #: include/classes/api/services/CHostBase.php:805
 #, c-format
 msgid "Cannot link template \"%1$s\" to host \"%2$s\" due to expression of trigger \"%3$s\"."
-msgstr ""
+msgstr "No se puede vincular la plantilla \"%1$s\" al host \"%2$s\" debido a la expresión del activador \"%3$s\"."
 
 #: include/classes/api/services/CHostBase.php:806
 #, c-format
 msgid "Cannot link template \"%1$s\" to host \"%2$s\", because it would be linked twice through template \"%3$s\"."
-msgstr ""
+msgstr "No se puede vincular la plantilla \"%1$s\" al host \"%2$s\", porque se vincularía dos veces a través de la plantilla \"%3$s\"."
 
 #: include/classes/api/services/CHostBase.php:644
 #, c-format
 msgid "Cannot link template \"%1$s\" to host \"%2$s\", because its parent template \"%3$s\" would be linked twice."
-msgstr ""
+msgstr "No se puede vincular la plantilla \"%1$s\" al host \"%2$s\", porque su plantilla padre \"%3$s\" se vincularía dos veces."
 
 #: include/classes/api/services/CHostBase.php:517
 #, c-format
@@ -3485,12 +3489,12 @@ msgstr ""
 #, c-format
 msgid "Cannot load module at: %1$s."
 msgid_plural "Cannot load modules at: %1$s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No se puede cargar el módulo en: %1$s."
+msgstr[1] "No se pueden cargar módulos en: %1$s."
 
 #: include/classes/api/services/CUser.php:1449
 msgid "Cannot log out."
-msgstr ""
+msgstr "No se puede cerrar la sesión."
 
 #: include/classes/api/services/CHost.php:986
 msgid "Cannot mass update host name."
@@ -3503,11 +3507,11 @@ msgstr "No se puede actualizar en masa los nombres visibles de los equipos."
 #: include/classes/api/services/CHostBase.php:1080
 #, c-format
 msgid "Cannot pass duplicate template IDs for the linkage: %1$s."
-msgstr ""
+msgstr "No se pueden pasar IDs de plantilla duplicados para la vinculación: %1$s."
 
 #: jsLoader.php:130
 msgid "Cannot paste inaccessible widget."
-msgstr ""
+msgstr "No se puede pegar un widget inaccesible."
 
 #: include/classes/db/DB.php:958
 #, c-format
@@ -3798,12 +3802,12 @@ msgstr ""
 #: include/classes/api/services/CGraphGeneral.php:82
 #, c-format
 msgid "Cannot update a templated graph \"%1$s\"."
-msgstr ""
+msgstr "No se puede actualizar el gráfico \"%1$s\"."
 
 #: include/classes/api/services/CHttpTest.php:514
 #, c-format
 msgid "Cannot update a templated web scenario \"%1$s\": %2$s."
-msgstr ""
+msgstr "No se puede actualizar el escenario web \"%1$s\": %2$s."
 
 #: actionconf.php:294
 msgid "Cannot update action"
@@ -3811,7 +3815,7 @@ msgstr "No es posible actualizar la acción"
 
 #: app/controllers/CControllerAuthenticationUpdate.php:399
 msgid "Cannot update authentication"
-msgstr ""
+msgstr "No se puede actualizar la autenticación"
 
 #: app/controllers/CControllerAuditSettingsUpdate.php:45
 #: app/controllers/CControllerAuditSettingsUpdate.php:82
@@ -3833,7 +3837,7 @@ msgstr "No se pudo actualizar la configuración"
 #: app/controllers/CControllerConnectorUpdate.php:90
 #: app/controllers/CControllerConnectorUpdate.php:173
 msgid "Cannot update connector"
-msgstr ""
+msgstr "No se puede actualizar el conector"
 
 #: app/controllers/CControllerCorrelationCreate.php:47
 #: app/controllers/CControllerCorrelationUpdate.php:48
@@ -3845,7 +3849,7 @@ msgstr "No se pudo actualizar la correlación"
 #: include/classes/api/services/CTrigger.php:836
 #, c-format
 msgid "Cannot update dependencies of inherited trigger \"%1$s\"."
-msgstr ""
+msgstr "No se pueden actualizar las dependencias del activador heredado \"%1$s\"."
 
 #: app/controllers/CControllerDiscoveryUpdate.php:48
 #: app/controllers/CControllerDiscoveryUpdate.php:102 host_discovery.php:734
@@ -3855,12 +3859,12 @@ msgstr "No es posible actualizar la regla"
 #: app/controllers/CControllerPopupAcknowledgeCreate.php:173
 msgid "Cannot update event"
 msgid_plural "Cannot update events"
-msgstr[0] ""
+msgstr[0] "No se puede actualizar el evento"
 msgstr[1] ""
 
 #: app/controllers/CControllerPopupAcknowledgeCreate.php:134
 msgid "Cannot update events"
-msgstr ""
+msgstr "No se pueden actualizar los eventos"
 
 #: graphs.php:239 graphs.php:292
 msgid "Cannot update graph"
@@ -3930,7 +3934,7 @@ msgstr[1] "No se pudo actualizar el prototipo de ítem"
 
 #: app/controllers/CControllerPopupMassupdateItem.php:316
 msgid "Cannot update item prototypes"
-msgstr ""
+msgstr "No se pueden actualizar los prototipos de artículos"
 
 #: app/controllers/CControllerPopupMassupdateItem.php:316
 msgid "Cannot update items"
@@ -3957,7 +3961,7 @@ msgstr "No se pudo actualizar el tipo de medios"
 #: app/controllers/CControllerModuleUpdate.php:157
 #, c-format
 msgid "Cannot update module: %1$s."
-msgstr ""
+msgstr "No se puede actualizar el módulo: %1$s."
 
 #: sysmaps.php:184
 msgid "Cannot update network map"
@@ -4176,7 +4180,7 @@ msgstr "Cambiar la clasificación del problema"
 #: app/views/popup.acknowledge.edit.php:71
 #: include/classes/helpers/CRoleHelper.php:462
 msgid "Change severity"
-msgstr ""
+msgstr "Cambiar la gravedad"
 
 #: include/classes/html/CMacroValue.php:162
 msgid "Change type"
@@ -4264,11 +4268,11 @@ msgstr "Comprueba si el servicio DNS está levantado. Devuelve 0 - DNS está ca�
 
 #: include/classes/data/CItemData.php:1158
 msgid "Checks if file exists. Returns 0 - not found; 1 - file of the specified type exists"
-msgstr ""
+msgstr "Comprueba si el archivo existe. Devuelve 0: no se encuentra; 1: existe un archivo del tipo especificado."
 
 #: include/classes/data/CItemData.php:846
 msgid "Checks if host is accessible by ICMP ping. 0 - ICMP ping fails. 1 - ICMP ping successful."
-msgstr ""
+msgstr "Comprueba si el host es accesible mediante ping ICMP. 0 - El ping ICMP falla. 1 - El ping ICMP tiene éxito."
 
 #: include/classes/data/CItemData.php:946
 msgid "Checks if it is possible to make TCP connection to specified port. Returns 0 - cannot connect; 1 - can connect"
@@ -4304,7 +4308,7 @@ msgstr "Las comprobaciones deben ser únicas."
 
 #: app/views/popup.service.edit.php:314 app/views/popup.service.edit.php:327
 msgid "Child services"
-msgstr ""
+msgstr "Servicios infantiles"
 
 #: include/locales.inc.php:36
 msgid "Chinese (zh_CN)"
@@ -4342,6 +4346,14 @@ msgstr "Limpiar histórico"
 #: include/views/configuration.item.edit.php:1073
 msgid "Clear history and trends"
 msgstr "Limpiar historial y tendencias"
+
+#: include/views/configuration.item.list.php:310
+msgid "Clear history and trends of selected items?"
+msgstr ""
+
+#: include/views/configuration.httpconf.list.php:232
+msgid "Clear history and trends of selected web scenarios?"
+msgstr ""
 
 #: app/views/popup.massupdate.host.php:69
 #: app/views/popup.massupdate.template.php:72
@@ -4456,7 +4468,7 @@ msgstr "Contraer la barra lateral"
 #: include/views/js/monitoring.sysmaps.js.php:433
 #: include/views/js/monitoring.sysmaps.js.php:815
 msgid "Color"
-msgstr ""
+msgstr "Color"
 
 #: include/classes/validators/CColorValidator.php:32 jsLoader.php:289
 #, c-format
@@ -4478,7 +4490,7 @@ msgstr "Resultados combinados"
 
 #: include/classes/widgets/views/widget.geomap.form.view.php:68
 msgid "Comma separated center coordinates and zoom level to display when the widget is initially loaded."
-msgstr ""
+msgstr "Coordenadas centrales separadas por comas y nivel de zoom a mostrar cuando el widget se carga inicialmente."
 
 #: app/views/administration.script.edit.php:175 include/actions.inc.php:1943
 #: include/views/administration.auditacts.list.php:105
@@ -4692,11 +4704,11 @@ msgstr "Configuración de scripts"
 
 #: app/controllers/CControllerTemplateGroupEdit.php:88
 msgid "Configuration of template group"
-msgstr ""
+msgstr "Configuración del grupo de plantillas"
 
 #: app/controllers/CControllerTemplateGroupList.php:123
 msgid "Configuration of template groups"
-msgstr ""
+msgstr "Configuración de los grupos de plantillas"
 
 #: templates.php:27
 msgid "Configuration of templates"
@@ -4722,7 +4734,7 @@ msgstr "Configuración de grupos de usuarios"
 #: app/controllers/CControllerUserroleEdit.php:187
 #: app/controllers/CControllerUserroleList.php:130
 msgid "Configuration of user roles"
-msgstr ""
+msgstr "Configuración de los roles de usuario"
 
 #: app/controllers/CControllerUserEdit.php:243
 #: app/controllers/CControllerUserList.php:170
@@ -4735,7 +4747,7 @@ msgstr "Configuración de monitorización web"
 
 #: app/controllers/CControllerAuditLogList.php:199
 msgid "Configuration refresh"
-msgstr ""
+msgstr "Actualizar la configuración"
 
 #: app/controllers/CControllerAuditSettingsUpdate.php:78
 #: app/controllers/CControllerAutoregUpdate.php:69
@@ -4767,7 +4779,7 @@ msgstr "Texto de confirmación"
 
 #: app/views/popup.acknowledge.edit.php:114
 msgid "Confirms the problem is noticed (acknowledging user will be recorded). Status change triggers action update operation."
-msgstr ""
+msgstr "Confirma que se ha detectado el problema (se registrará el reconocimiento del usuario). El cambio de estado desencadena la operación de actualización de la acción."
 
 #: include/classes/setup/CSetupWizard.php:907
 msgid "Congratulations! You have successfully installed Zabbix frontend."
@@ -5127,36 +5139,36 @@ msgstr "Número de cambios de contexto. Devuelve un entero"
 
 #: include/classes/data/CItemData.php:1138
 msgid "Count of directory entries, recursively. Returns integer"
-msgstr ""
+msgstr "Recuento de entradas de directorio, recursivamente. Devuelve un número entero"
 
 #: include/classes/data/CItemData.php:894
 msgid "Count of matched lines in log file monitoring with log rotation support. Returns integer"
-msgstr ""
+msgstr "Recuento de líneas coincidentes en la supervisión de archivos de registro con soporte de rotación de registros. Devuelve un número entero"
 
 #: include/classes/data/CItemData.php:886
 msgid "Count of matched lines in log file monitoring. Returns integer"
-msgstr ""
+msgstr "Recuento de líneas coincidentes en la supervisión del archivo de registro. Devuelve un número entero"
 
 #: include/classes/data/CItemData.php:1802
 msgid "Count of values enqueued in the connector queue."
-msgstr ""
+msgstr "Recuento de valores en cola en el conector."
 
 #: include/classes/data/CItemData.php:1638
 msgid "Count of values enqueued in the low-level discovery processing queue."
-msgstr ""
+msgstr "Recuento de valores en la cola de procesamiento de descubrimiento de bajo nivel."
 
 #: include/classes/data/CItemData.php:1642
 msgid "Count of values enqueued in the preprocessing queue."
-msgstr ""
+msgstr "Recuento de valores en la cola de preprocesamiento."
 
 #: app/views/administration.token.list.php:106
 #: app/views/administration.user.token.list.php:72
 msgid "Create API token"
-msgstr ""
+msgstr "Crear token API"
 
 #: app/views/sla.list.php:191
 msgid "Create SLA"
-msgstr ""
+msgstr "Crear SLA"
 
 #: include/views/configuration.action.list.php:64
 msgid "Create action"
@@ -5164,15 +5176,15 @@ msgstr "Crear acción"
 
 #: include/classes/helpers/CRoleHelper.php:452
 msgid "Create and edit dashboards"
-msgstr ""
+msgstr "Crear y editar panel de control"
 
 #: include/classes/helpers/CRoleHelper.php:457
 msgid "Create and edit maintenance"
-msgstr ""
+msgstr "Crear y editar mantenimiento"
 
 #: include/classes/helpers/CRoleHelper.php:453
 msgid "Create and edit maps"
-msgstr ""
+msgstr "Crear y editar mapas"
 
 #: app/views/administration.image.list.php:62
 msgid "Create background"
@@ -5180,7 +5192,7 @@ msgstr "Crear fondo"
 
 #: app/views/connector.list.php:139
 msgid "Create connector"
-msgstr ""
+msgstr "Crear conector"
 
 #: app/views/configuration.correlation.list.php:37
 msgid "Create correlation"
@@ -5189,11 +5201,11 @@ msgstr "Crear correlación"
 #: app/views/configuration.dashboard.list.php:77
 #: app/views/monitoring.dashboard.list.php:42
 msgid "Create dashboard"
-msgstr ""
+msgstr "Crear panel de control"
 
 #: jsLoader.php:359
 msgid "Create dependent discovery rule"
-msgstr ""
+msgstr "Crear regla de detección dependiente"
 
 #: jsLoader.php:358
 msgid "Create dependent item"
@@ -5212,11 +5224,11 @@ msgstr "Crear regla de descubrimiento"
 
 #: include/views/configuration.host.discovery.list.php:47
 msgid "Create discovery rule (select host first)"
-msgstr ""
+msgstr "Crear regla de detección (seleccionar primero el anfitrión)"
 
 #: include/views/configuration.host.discovery.list.php:48
 msgid "Create discovery rule (select template first)"
-msgstr ""
+msgstr "Crear regla de detección (seleccione primero la plantilla)"
 
 #: app/views/popup.lldoperation.php:80 app/views/popup.massupdate.item.php:324
 #: include/views/configuration.host.prototype.edit.php:289
@@ -5241,7 +5253,7 @@ msgstr "Crear gráfica (seleccione un equipo primero)"
 
 #: include/views/configuration.graph.list.php:60
 msgid "Create graph (select template first)"
-msgstr ""
+msgstr "Crear gráfico (seleccione primero la plantilla)"
 
 #: include/views/configuration.graph.list.php:37
 msgid "Create graph prototype"
@@ -5263,11 +5275,11 @@ msgstr "Crear prototipo de equipo"
 
 #: include/views/configuration.host.prototype.list.php:197
 msgid "Create hosts from selected prototypes as disabled?"
-msgstr ""
+msgstr "¿Crear equipos a partir de prototipos seleccionados como desactivados?"
 
 #: include/views/configuration.host.prototype.list.php:194
 msgid "Create hosts from selected prototypes as enabled?"
-msgstr ""
+msgstr "¿Crear hosts a partir de prototipos seleccionados como habilitados?"
 
 #: app/views/administration.image.list.php:61
 msgid "Create icon"
@@ -5287,7 +5299,7 @@ msgstr "Crear ítem (seleccione un equipo primero)"
 
 #: include/views/configuration.item.list.php:47
 msgid "Create item (select template first)"
-msgstr ""
+msgstr "Crear artículo (seleccione primero la plantilla)"
 
 #: include/views/configuration.item.prototype.list.php:36
 msgid "Create item prototype"
@@ -5295,11 +5307,11 @@ msgstr "Crear prototipo de ítem"
 
 #: include/views/configuration.item.prototype.list.php:206
 msgid "Create items from selected prototypes as disabled?"
-msgstr ""
+msgstr "¿Crear artículos a partir de prototipos seleccionados como desactivados?"
 
 #: include/views/configuration.item.prototype.list.php:203
 msgid "Create items from selected prototypes as enabled?"
-msgstr ""
+msgstr "¿Crear artículos a partir de prototipos seleccionados como habilitados?"
 
 #: include/views/configuration.maintenance.list.php:33
 msgid "Create maintenance period"
@@ -5323,7 +5335,7 @@ msgstr "Crear proxy"
 
 #: app/views/reports.scheduledreport.list.php:36
 msgid "Create report"
-msgstr ""
+msgstr "Crear informe"
 
 #: app/views/administration.script.list.php:35
 msgid "Create script"
@@ -5331,7 +5343,7 @@ msgstr "Crear script"
 
 #: app/views/service.list.edit.php:129
 msgid "Create service"
-msgstr ""
+msgstr "Crear servicio"
 
 #: include/views/configuration.template.list.php:91
 msgid "Create template"
@@ -5340,7 +5352,7 @@ msgstr "Crear plantilla"
 #: app/views/configuration.templategroup.list.php:33
 #: app/views/configuration.templategroup.list.php:35
 msgid "Create template group"
-msgstr ""
+msgstr "Crear grupo de plantillas"
 
 #: include/views/configuration.triggers.list.php:153 jsLoader.php:357
 msgid "Create trigger"
@@ -5352,7 +5364,7 @@ msgstr "Crear disparador (seleccione un equipo primero)"
 
 #: include/views/configuration.triggers.list.php:162
 msgid "Create trigger (select template first)"
-msgstr ""
+msgstr "Crear activador (seleccione primero la plantilla)"
 
 #: include/views/configuration.trigger.prototype.list.php:36
 msgid "Create trigger prototype"
@@ -5360,11 +5372,11 @@ msgstr "Crear prototipo de disparador"
 
 #: include/views/configuration.trigger.prototype.list.php:205
 msgid "Create triggers from selected prototypes as disabled?"
-msgstr ""
+msgstr "¿Crear activadores a partir de prototipos seleccionados como desactivados?"
 
 #: include/views/configuration.trigger.prototype.list.php:202
 msgid "Create triggers from selected prototypes as enabled?"
-msgstr ""
+msgstr "¿Crear activadores a partir de prototipos seleccionados como activados?"
 
 #: app/views/administration.user.list.php:54
 msgid "Create user"
@@ -5376,7 +5388,7 @@ msgstr "Crear grupo de usuarios"
 
 #: app/views/administration.userrole.list.php:35
 msgid "Create user role"
-msgstr ""
+msgstr "Crear rol de usuario"
 
 #: include/views/configuration.httpconf.list.php:99
 msgid "Create web scenario"
@@ -5388,27 +5400,27 @@ msgstr "Crear escenario web (seleccionar host primero)"
 
 #: include/views/configuration.httpconf.list.php:108
 msgid "Create web scenario (select template first)"
-msgstr ""
+msgstr "Crear escenario web (seleccione primero la plantilla)"
 
 #: app/partials/service.list.edit.php:57 app/partials/service.list.php:54
 #: app/views/administration.token.list.php:137
 #: app/views/administration.user.token.list.php:98
 #: app/views/popup.service.edit.php:146
 msgid "Created at"
-msgstr ""
+msgstr "Creado en"
 
 #: app/views/monitoring.dashboard.list.php:67
 #: app/views/reports.scheduledreport.list.php:56
 msgid "Created by me"
-msgstr ""
+msgstr "Creado por mí"
 
 #: app/views/administration.token.list.php:138
 msgid "Created by user"
-msgstr ""
+msgstr "Creado por el usuario"
 
 #: app/views/administration.token.list.php:73
 msgid "Created by users"
-msgstr ""
+msgstr "Creado por los usuarios"
 
 #: app/controllers/CControllerPopupMediatypeTestSend.php:172
 #: include/items.inc.php:41
@@ -5417,7 +5429,7 @@ msgstr "Crítico"
 
 #: app/views/proxy.list.php:66
 msgid "Current"
-msgstr ""
+msgstr "Actual"
 
 #: app/partials/popup.operations.php:172
 msgid "Current host"
@@ -5426,15 +5438,15 @@ msgstr "Equipo actual"
 #: app/controllers/CControllerUserUpdateGeneral.php:85
 #: app/views/administration.user.edit.php:174
 msgid "Current password"
-msgstr ""
+msgstr "Contraseña actual"
 
 #: include/classes/api/services/CUser.php:474
 msgid "Current password is mandatory."
-msgstr ""
+msgstr "La contraseña actual es obligatoria."
 
 #: app/views/popup.scheduledreport.subscription.php:103
 msgid "Current user"
-msgstr ""
+msgstr "Usuario actual"
 
 #: include/classes/setup/CSetupWizard.php:423
 msgid "Current value"
@@ -5478,7 +5490,7 @@ msgstr "Las etiquetas personalizadas de los elementos del mapa \"%2$s\" de tipo 
 #: app/controllers/CControllerActionOperationValidate.php:121
 #: app/partials/popup.operations.php:145
 msgid "Custom message"
-msgstr ""
+msgstr "Mensaje personalizado"
 
 #: include/items.inc.php:1836
 msgid "Custom multiplier"
@@ -5487,15 +5499,15 @@ msgstr "Personalizar multiplicador"
 #: app/views/js/popup.itemtestedit.view.js.php:381 include/forms.inc.php:1262
 #: include/forms.inc.php:1502 include/views/js/item.preprocessing.js.php:64
 msgid "Custom on fail"
-msgstr ""
+msgstr "Personalizado en caso de fallo"
 
 #: include/classes/helpers/CSlaHelper.php:247
 msgid "Custom schedule"
-msgstr ""
+msgstr "Horario personalizado"
 
 #: include/items.inc.php:1859
 msgid "Custom scripts"
-msgstr ""
+msgstr "Scripts personalizados"
 
 #: app/views/administration.trigdisplay.edit.php:156
 msgid "Custom severity names affect all locales and require manual translation!"
@@ -5508,11 +5520,11 @@ msgstr "Tamaño personalizado"
 #: app/views/administration.miscconfig.edit.php:104
 #: include/classes/setup/CSetupWizard.php:563
 msgid "CyberArk Vault"
-msgstr ""
+msgstr "Bóveda CyberArk"
 
 #: app/partials/scheduledreport.formgrid.html.php:95
 msgid "Cycle"
-msgstr ""
+msgstr "Ciclo"
 
 #: include/locales.inc.php:38
 msgid "Czech (cs_CZ)"
@@ -5521,12 +5533,12 @@ msgstr "Checo (cs_CZ)"
 #: jsLoader.php:400
 msgctxt "Default color option"
 msgid "D"
-msgstr ""
+msgstr "D"
 
 #: jsLoader.php:183
 msgctxt "abbreviation of severity level"
 msgid "D"
-msgstr ""
+msgstr "D"
 
 #: include/classes/import/validators/C10XmlValidator.php:323
 msgctxt "XML date format"
@@ -5576,7 +5588,7 @@ msgstr "Ya existe el tablero \"%1$s\"."
 #: include/classes/api/services/CDashboardGeneral.php:91
 #, c-format
 msgid "Dashboard \"%1$s\" is used in report \"%2$s\"."
-msgstr ""
+msgstr "El panel \"%1$s\" se utiliza en el informe \"%2$s\"."
 
 #: app/controllers/CControllerDashboardUpdate.php:145
 #: app/controllers/CControllerTemplateDashboardUpdate.php:139
@@ -5592,15 +5604,15 @@ msgstr[1] "Tableros borrados"
 
 #: app/views/dashboard.page.properties.edit.php:60
 msgid "Dashboard page properties"
-msgstr ""
+msgstr "Propiedades de la página del panel de control"
 
 #: app/views/dashboard.properties.edit.php:88
 msgid "Dashboard properties"
-msgstr ""
+msgstr "Propiedades del panel de control"
 
 #: app/views/popup.dashboard.share.edit.php:151
 msgid "Dashboard sharing"
-msgstr ""
+msgstr "Compartir el panel de control"
 
 #: app/controllers/CControllerDashboardShareUpdate.php:94
 #: app/controllers/CControllerDashboardUpdate.php:140
@@ -8949,6 +8961,10 @@ msgstr ""
 #: jsLoader.php:372
 msgid "History"
 msgstr "Histórico"
+
+#: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
+msgid "History and trends cleared"
+msgstr ""
 
 #: app/views/administration.housekeeping.edit.php:159
 msgid "History and trends compression"

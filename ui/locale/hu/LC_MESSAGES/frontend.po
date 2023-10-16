@@ -2305,6 +2305,10 @@ msgstr ""
 msgid "Cannot clear history"
 msgstr "Előzmények törlése sikertelen"
 
+#: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
+msgid "Cannot clear history and trends"
+msgstr ""
+
 #: include/classes/api/services/CDiscoveryRule.php:2514
 msgid "Cannot clone graph prototypes."
 msgstr ""
@@ -4341,6 +4345,14 @@ msgstr ""
 #: include/views/configuration.item.edit.php:1070
 #: include/views/configuration.item.edit.php:1073
 msgid "Clear history and trends"
+msgstr ""
+
+#: include/views/configuration.item.list.php:310
+msgid "Clear history and trends of selected items?"
+msgstr ""
+
+#: include/views/configuration.httpconf.list.php:232
+msgid "Clear history and trends of selected web scenarios?"
 msgstr ""
 
 #: app/views/popup.massupdate.host.php:69
@@ -8945,6 +8957,10 @@ msgstr ""
 #: jsLoader.php:372
 msgid "History"
 msgstr "Előzmények"
+
+#: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
+msgid "History and trends cleared"
+msgstr ""
 
 #: app/views/administration.housekeeping.edit.php:159
 msgid "History and trends compression"
