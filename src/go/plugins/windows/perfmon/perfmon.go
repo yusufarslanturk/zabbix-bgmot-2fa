@@ -23,6 +23,7 @@
 package perfmon
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"sync"
@@ -215,9 +216,12 @@ func (p *Plugin) setCounterData() {
 
 		c.history[c.tail], err = win32.PdhGetFormattedCounterValueDouble(c.handle, 1)
 		if err != nil {
-			c.err = fmt.Errorf("cannot format value of '%s': %s", index.path, err)
+			zbxErr := zbxerr.New("failed to retrieve pdh counter value double").Wrap(err)
+			if !errors.Is(err, win32.NegDenomErr) {
+				c.err = zbxErr
+			}
 
-			p.Warningf("%s", c.err)
+			p.Debugf("%s", zbxErr)
 		}
 
 		if c.tail = c.tail.inc(c.interval); c.tail == c.head {

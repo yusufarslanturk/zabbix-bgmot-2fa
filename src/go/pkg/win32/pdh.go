@@ -30,7 +30,6 @@ import (
 	"unsafe"
 
 	"git.zabbix.com/ap/plugin-support/log"
-	"git.zabbix.com/ap/plugin-support/zbxerr"
 
 	"golang.org/x/sys/windows"
 )
@@ -134,8 +133,7 @@ func PdhGetFormattedCounterValueDouble(counter PDH_HCOUNTER, tryCount int) (*flo
 	value, err := getCounterValueDouble(counter)
 	if err != nil {
 		if !errors.Is(err, NegDenomErr) || tryCount <= 0 {
-			return nil, zbxerr.New("failed to retrieve pdh counter value double").
-				Wrap(err)
+			return nil, err
 		}
 
 		log.Debugf(
