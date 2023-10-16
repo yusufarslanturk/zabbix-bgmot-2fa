@@ -62,7 +62,6 @@ type perfCounterIndex struct {
 }
 
 type perfCounter struct {
-	sync.Mutex
 	lastAccess time.Time
 	interval   int
 	handle     win32.PDH_HCOUNTER

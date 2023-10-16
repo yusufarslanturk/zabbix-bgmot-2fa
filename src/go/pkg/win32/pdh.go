@@ -54,7 +54,8 @@ const (
 )
 
 var (
-	NegDenomErr                 = newPdhError(PDH_CALC_NEGATIVE_DENOMINATOR)
+	NegDenomErr = newPdhError(PDH_CALC_NEGATIVE_DENOMINATOR)
+
 	hPdh                        = mustLoadLibrary("pdh.dll")
 	pdhOpenQuery                = hPdh.mustGetProcAddress("PdhOpenQuery")
 	pdhCloseQuery               = hPdh.mustGetProcAddress("PdhCloseQuery")
