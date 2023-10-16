@@ -365,16 +365,6 @@ zabbix_export:
                         host: 'Nginx by HTTP'
                         name: 'Nginx: Connections by state'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Nginx by HTTP'
-                        name: 'Nginx: Requests per second'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -384,6 +374,16 @@ zabbix_export:
                       value:
                         host: 'Nginx by HTTP'
                         name: 'Nginx: Connections per second'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Nginx by HTTP'
+                        name: 'Nginx: Requests per second'
       valuemaps:
         - uuid: 5c0883d194e8494498474106c22be2ca
           name: 'Service state'

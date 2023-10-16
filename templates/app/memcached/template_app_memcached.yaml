@@ -600,16 +600,6 @@ zabbix_export:
                         host: 'Memcached by Zabbix agent 2'
                         name: 'Memcached: Commands'
                 - type: graph
-                  x: '12'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Memcached by Zabbix agent 2'
-                        name: 'Memcached: Keyspace'
-                - type: graph
                   'y': '5'
                   width: '12'
                   height: '5'
@@ -619,6 +609,26 @@ zabbix_export:
                       value:
                         host: 'Memcached by Zabbix agent 2'
                         name: 'Memcached: Connections'
+                - type: graph
+                  'y': '10'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Memcached by Zabbix agent 2'
+                        name: 'Memcached: Network'
+                - type: graph
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'Memcached by Zabbix agent 2'
+                        name: 'Memcached: Keyspace'
                 - type: graph
                   x: '12'
                   'y': '5'
@@ -630,16 +640,6 @@ zabbix_export:
                       value:
                         host: 'Memcached by Zabbix agent 2'
                         name: 'Memcached: Connections rate'
-                - type: graph
-                  'y': '10'
-                  width: '12'
-                  height: '5'
-                  fields:
-                    - type: GRAPH
-                      name: graphid
-                      value:
-                        host: 'Memcached by Zabbix agent 2'
-                        name: 'Memcached: Network'
                 - type: graph
                   x: '12'
                   'y': '10'

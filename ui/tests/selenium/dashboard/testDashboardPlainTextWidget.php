@@ -20,7 +20,8 @@
 
 
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
-require_once dirname(__FILE__).'/../traits/TableTrait.php';
+require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
+require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
 
 /**
  * @backup dashboard
@@ -29,16 +30,15 @@ require_once dirname(__FILE__).'/../traits/TableTrait.php';
  */
 class testDashboardPlainTextWidget extends CWebTest {
 
-	use TableTrait;
-
 	/**
-	 * Attach MessageBehavior to the test.
+	 * Attach MessageBehavior and TableBehavior to the test.
 	 *
 	 * @return array
 	 */
 	public function getBehaviors() {
 		return [
-			'class' => CMessageBehavior::class
+			CMessageBehavior::class,
+			CTableBehavior::class
 		];
 	}
 
@@ -958,17 +958,17 @@ class testDashboardPlainTextWidget extends CWebTest {
 							'Value' => '1' // value rounding is expected.
 						],
 						[
-							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('last Sunday + 7 hours 7 minutes 7 seconds')),
+							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('-15 hours')),
 							'Name' => 'ЗАББИКС Сервер: Linux: Host name of Zabbix agent running',
 							'Value' => '<b>'.STRING_128.'</b>'
 						],
 						[
-							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('last Sunday + 5 hours 5 minutes 5 seconds')),
+							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('-16 hours')),
 							'Name' => 'ЗАББИКС Сервер: Linux: Host name of Zabbix agent running',
 							'Value' => '<span style="text-transform:uppercase;">'.'test'.'</span>'
 						],
 						[
-							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('last Saturday + 3 hours 5 minutes')),
+							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('-25 hours')),
 							'Name' => 'ЗАББИКС Сервер: Linux: Host name of Zabbix agent running',
 							'Value' => STRING_255
 						]
@@ -979,24 +979,24 @@ class testDashboardPlainTextWidget extends CWebTest {
 							'Test item host: Master item' => '1'
 						],
 						[
-							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('last Sunday + 7 hours 7 minutes 7 seconds')),
+							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('-15 hours')),
 							'ЗАББИКС Сервер: Linux: Host name of Zabbix agent running' => STRING_128
 						],
 						[
-							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('last Sunday + 5 hours 5 minutes 5 seconds')),
+							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('-16 hours')),
 							'ЗАББИКС Сервер: Linux: Host name of Zabbix agent running' => 'TEST'
 						],
 						[
-							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('last Saturday + 3 hours 5 minutes')),
+							'Timestamp' =>  date('Y-m-d H:i:s', strtotime('-25 hours')),
 							'ЗАББИКС Сервер: Linux: Host name of Zabbix agent running' => STRING_255
 						]
 					],
 					'item_data' => [
 						['itemid' => '99142', 'values' => '1.00001', 'time' => strtotime('now')],
-						['itemid' => '42227', 'values' => '<b>'.STRING_128.'</b>', 'time' => strtotime('last Sunday + 7 hours 7 minutes 7 seconds')],
+						['itemid' => '42227', 'values' => '<b>'.STRING_128.'</b>', 'time' => strtotime('-15 hours')],
 						['itemid' => '42227', 'values' => '<span style="text-transform:uppercase;">'.'test'.'</span>',
-								'time' => strtotime('last Sunday + 5 hours 5 minutes 5 seconds')],
-						['itemid' => '42227', 'values' => STRING_255, 'time' => strtotime('last Saturday + 3 hours 5 minutes')]
+								'time' => strtotime('-16 hours')],
+						['itemid' => '42227', 'values' => STRING_255, 'time' => strtotime('-25 hours')]
 					]
 				]
 			],
