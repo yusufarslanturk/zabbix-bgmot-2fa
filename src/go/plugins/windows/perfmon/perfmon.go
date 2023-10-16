@@ -216,7 +216,9 @@ func (p *Plugin) setCounterData() {
 
 		c.history[c.tail], err = win32.PdhGetFormattedCounterValueDouble(c.handle, 1)
 		if err != nil {
-			zbxErr := zbxerr.New("failed to retrieve pdh counter value double").Wrap(err)
+			zbxErr := zbxerr.New(
+				fmt.Sprintf("failed to retrieve pdh counter value double for index %s", index.path),
+			).Wrap(err)
 			if !errors.Is(err, win32.NegDenomErr) {
 				c.err = zbxErr
 			}
