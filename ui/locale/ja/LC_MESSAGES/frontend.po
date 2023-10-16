@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-03-08 03:34+0000\n"
+"PO-Revision-Date: 2023-10-08 12:44+0000\n"
 "Last-Translator: Atsushi Tanaka <kha00760@nifty.com>\n"
 "Language-Team: Zabbix\n"
 "Language: ja\n"
@@ -1236,7 +1236,7 @@ msgstr "代わりに、手動でインストールすることができます:"
 
 #: include/classes/data/CItemData.php:1623
 msgid "Amount of guest physical memory that is swapped out to the swap space, \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier"
-msgstr ""
+msgstr "スワップスペースにスワップアウトされるゲスト物理メモリの量、\"url\" - VMwareサービスURL、\"uuid\" - VMware 仮想マシンの汎用一意識別子"
 
 #: include/classes/data/CItemData.php:1442
 msgid "Amount of guest physical memory that is swapped out to the swap space, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
@@ -1244,7 +1244,7 @@ msgstr "スワップ領域にスワップアウトされるゲストの物理メ
 
 #: include/classes/data/CItemData.php:1643
 msgid "Amount of host physical memory consumed for backing up guest physical memory pages, \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier"
-msgstr ""
+msgstr "ゲストの物理メモリページのバックアップに消費されるホストの物理メモリ量、\"url\" - VMwareサービス URL、\"uuid\" - VMware 仮想マシンの汎用一意識別子"
 
 #: include/classes/data/CItemData.php:1462
 msgid "Amount of host physical memory consumed for backing up guest physical memory pages, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
@@ -1739,7 +1739,7 @@ msgstr "軽度の障害"
 
 #: include/classes/data/CItemData.php:1715
 msgid "Average number of outstanding read requests to the virtual disk during the collection interval , \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier, \"instance\" - disk device instance"
-msgstr ""
+msgstr "収集間隔内の仮想ディスクへの未処理の読み込みリクエスト数の平均、\"url\" - VMwareサービスURL、\"uuid\" - VMware仮想マシンのグローバルな一意識別子、\"instance\" - ディスクデバイスのインスタンス"
 
 #: include/classes/data/CItemData.php:1522
 msgid "Average number of outstanding read requests to the virtual disk during the collection interval , <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance"
@@ -1747,7 +1747,7 @@ msgstr "収集間隔内の仮想ディスクへの未処理の読み込みリク
 
 #: include/classes/data/CItemData.php:1735
 msgid "Average number of outstanding write requests to the virtual disk during the collection interval, \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier, \"instance\" - disk device instance"
-msgstr ""
+msgstr "収集間隔内の仮想ディスクへの未処理の書き込みリクエスト数の平均、\"url\" - VMwareサービスURL、\"uuid\" - VMware仮想マシンのグローバルな一意識別子、\"instance\" - ディスクデバイスのインスタンス"
 
 #: include/classes/data/CItemData.php:1542
 msgid "Average number of outstanding write requests to the virtual disk during the collection interval, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance"
@@ -2279,6 +2279,10 @@ msgstr "自身の役割のユーザーの種類を変更できません。"
 #: httpconf.php:189 httpconf.php:433 items.php:901 items.php:981
 msgid "Cannot clear history"
 msgstr "ヒストリを削除できません"
+
+#: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
+msgid "Cannot clear history and trends"
+msgstr ""
 
 #: include/classes/api/services/CDiscoveryRule.php:2514
 msgid "Cannot clone graph prototypes."
@@ -4257,6 +4261,14 @@ msgstr "ヒストリを削除"
 #: include/views/configuration.item.edit.php:1073
 msgid "Clear history and trends"
 msgstr "ヒストリとトレンドを削除"
+
+#: include/views/configuration.item.list.php:310
+msgid "Clear history and trends of selected items?"
+msgstr ""
+
+#: include/views/configuration.httpconf.list.php:232
+msgid "Clear history and trends of selected web scenarios?"
+msgstr ""
 
 #: app/views/popup.massupdate.host.php:69
 #: app/views/popup.massupdate.template.php:72
@@ -8867,6 +8879,10 @@ msgstr "行を強調表示"
 msgid "History"
 msgstr "ヒストリ"
 
+#: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
+msgid "History and trends cleared"
+msgstr ""
+
 #: app/views/administration.housekeeping.edit.php:159
 msgid "History and trends compression"
 msgstr "ヒストリとトレンドの圧縮"
@@ -12895,7 +12911,7 @@ msgstr "メモリ上限: %1$s"
 
 #: include/classes/data/CItemData.php:1563
 msgid "Memory metrics of VMware Resource Pool, \"url\" - VMware service URL, \"rpid\" - VMware resource pool id, \"mode\"- consumed(default)/ballooned/overhead memory"
-msgstr ""
+msgstr "VMwareリソースプールのメモリメトリクス、\"url\" - VMwareサービスURL、\"rpid\" - VMwareリソースプールID、\"mode\" - consumed(デフォルト)/ballooned/overhead"
 
 #: include/classes/data/CItemData.php:1433
 msgid "Memory metrics of VMware Resource Pool, <url> - VMware service URL, <rpid> - VMware resource pool id, <mode> - consumed(default)/ballooned/overhead memory"
@@ -17958,7 +17974,7 @@ msgstr "サービスを更新しました"
 
 #: include/classes/api/services/CUser.php:1709
 msgid "Session ID or token is expected."
-msgstr ""
+msgstr "セッションIDかトークンを指定してください。"
 
 #: include/classes/core/ZBase.php:244 include/classes/core/ZBase.php:471
 #: index_sso.php:242 index_sso.php:249
