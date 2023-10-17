@@ -2927,7 +2927,6 @@ section {
     display: flex;
     flex: 1;
     justify-content: space-between;
-    background-color: #ebeef0;
     margin-top: -3px; }
   .filter-container.tabfilter-container nav > ul > li {
     margin: 0 3px 5px 0;
