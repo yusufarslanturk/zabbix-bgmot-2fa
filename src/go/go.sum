@@ -1,5 +1,9 @@
-git.zabbix.com/ap/plugin-support v1.2.2-0.20231005100923-91bf36b4fe36 h1:dpY5+Jn7X/7Rca3PplxUzC9pyqzGd8FC5NT70ZmeN5E=
-git.zabbix.com/ap/plugin-support v1.2.2-0.20231005100923-91bf36b4fe36/go.mod h1:B+HpVBZbBMBttTFc0NuChmMkWepNj7yFPCefmggo+0U=
+git.zabbix.com/ap/plugin-support v1.2.2-0.20231009071745-907d934468bc h1:pyc6tLCX1JXxBZGoj+lEqqLDHQOuPrc2+npe9WQoVf0=
+git.zabbix.com/ap/plugin-support v1.2.2-0.20231009071745-907d934468bc/go.mod h1:B+HpVBZbBMBttTFc0NuChmMkWepNj7yFPCefmggo+0U=
+git.zabbix.com/ap/plugin-support v1.2.2-0.20231017084106-a7a9dc3e4609 h1:BHflxLBbCpWha1KNf7pZ8JAm5ldaTbJJlytkDiLS/zE=
+git.zabbix.com/ap/plugin-support v1.2.2-0.20231017084106-a7a9dc3e4609/go.mod h1:B+HpVBZbBMBttTFc0NuChmMkWepNj7yFPCefmggo+0U=
+git.zabbix.com/ap/plugin-support v1.2.2-0.20231017090800-2ee690c4669b h1:b53ABrzoW7dwf1ObxQOXisyVHI0ZideepRLCWcNIAqM=
+git.zabbix.com/ap/plugin-support v1.2.2-0.20231017090800-2ee690c4669b/go.mod h1:B+HpVBZbBMBttTFc0NuChmMkWepNj7yFPCefmggo+0U=
 github.com/BurntSushi/locker v0.0.0-20171006230638-a6e239ea1c69 h1:+tu3HOoMXB7RXEINRVIpxJCT+KdYiI7LAEAUrOw3dIU=
 github.com/BurntSushi/locker v0.0.0-20171006230638-a6e239ea1c69/go.mod h1:L1AbZdiDllfyYH5l5OkAaZtk7VkWe89bPJFmnDBNHxg=
 github.com/Microsoft/go-winio v0.6.1 h1:9/kr64B9VUZrLm5YYwbGtUJnMgqWVOdUAXu6Migciow=
