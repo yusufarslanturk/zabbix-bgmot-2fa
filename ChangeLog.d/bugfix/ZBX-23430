@@ -1,1 +1,1 @@
-..F....... [ZBX-23430] fixed selected filter tab, when collapsed, being indistinguishable from other in high contrast themes (agriscenko)
+..F....... [ZBX-23430] fixed selected filter tab in high contrast themes being indistinguishable from others when collapsed (agriscenko)
