@@ -336,26 +336,27 @@
 		}
 
 		var defaults = {
-				url: '',
-				name: '',
-				labels: {
-					'No matches found': t('No matches found'),
-					'More matches found...': t('More matches found...'),
-					'type here to search': t('type here to search'),
-					'new': t('new'),
-					'Select': t('Select')
-				},
-				placeholder: t('type here to search'),
-				data: [],
-				excludeids: [],
-				addNew: false,
-				defaultValue: null,
-				disabled: false,
-				selectedLimit: 0,
-				limit: 20,
-				popup: {},
-				styles: {}
-			};
+			url: '',
+			name: '',
+			id: '',
+			labels: {
+				'No matches found': t('No matches found'),
+				'More matches found...': t('More matches found...'),
+				'type here to search': t('type here to search'),
+				'new': t('new'),
+				'Select': t('Select')
+			},
+			placeholder: t('type here to search'),
+			data: [],
+			excludeids: [],
+			addNew: false,
+			defaultValue: null,
+			disabled: false,
+			selectedLimit: 0,
+			limit: 20,
+			popup: {},
+			styles: {}
+		};
 
 		options = $.extend({}, defaults, options);
 
@@ -400,7 +401,8 @@
 
 			$obj.wrap($('<div>', {
 				'class': ZBX_STYLE_CLASS,
-				css: ms.options.styles
+				css: ms.options.styles,
+				id: ms.options.id !== '' ? ms.options.id : null
 			}));
 
 			var $selected_div = $('<div>', {'class': 'selected'}).on('click', function() {

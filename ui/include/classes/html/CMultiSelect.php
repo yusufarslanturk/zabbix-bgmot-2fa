@@ -84,6 +84,10 @@ class CMultiSelect extends CTag {
 			]
 		];
 
+		if (array_key_exists('id', $options)) {
+			$params['id'] = $options['id'];
+		}
+
 		if (array_key_exists('data', $options)) {
 			$params['data'] = zbx_cleanHashes($options['data']);
 		}
@@ -148,7 +152,7 @@ class CMultiSelect extends CTag {
 	 * @return array
 	 */
 	protected function mapOptions(array $options) {
-		$valid_fields = ['name', 'object_name', 'multiple', 'disabled', 'default_value', 'data', 'add_new',
+		$valid_fields = ['name', 'object_name', 'id', 'multiple', 'disabled', 'default_value', 'data', 'add_new',
 			'add_post_js', 'styles', 'popup', 'custom_select', 'placeholder', 'autosuggest'
 		];
 
@@ -162,6 +166,7 @@ class CMultiSelect extends CTag {
 		$mappings = [
 			'name' => 'name',
 			'object_name' => 'object_name',
+			'id' => 'id',
 			'disabled' => 'disabled',
 			'default_value' => 'defaultValue',
 			'data' => 'data',
