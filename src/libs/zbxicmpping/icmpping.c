@@ -109,13 +109,13 @@ static int	get_fping_out(const char *fping, const char *address, char **out, cha
 	sigset_t	mask, orig_mask;
 	char		filename[MAX_STRING_LEN];
 
-	if (FAIL == zbx_validate_hostname(address) && FAIL == is_supported_ip(address))
+	if (FAIL == zbx_validate_hostname(address) && FAIL == zbx_is_supported_ip(address))
 	{
 		zbx_strlcpy(error, "Invalid host name or IP address", max_error_len);
 		return FAIL;
 	}
 
-	zbx_snprintf(filename, sizeof(filename), "%s/%s_XXXXXX", CONFIG_TMPDIR, progname);
+	zbx_snprintf(filename, sizeof(filename), "%s/%s_XXXXXX", config_icmpping->get_tmpdir(), progname);
 	if (-1 == (fd = mkstemp(filename)))
 	{
 		zbx_snprintf(error, max_error_len, "Cannot create temporary file \"%s\": %s", filename,
