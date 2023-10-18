@@ -407,7 +407,9 @@ if ($data['action'] === 'user.edit' || CWebUser::$data['type'] > USER_TYPE_ZABBI
 							->setEnabled(!$data['readonly'])
 							->addClass(ZBX_STYLE_BTN_LINK)
 							->setAttribute('data-parameters', json_encode($parameters))
-							->onClick('PopUp("popup.media", JSON.parse(this.dataset.parameters));'),
+							->onClick('PopUp("popup.media", JSON.parse(this.dataset.parameters),
+								{dialogue_class: "modal-popup-generic"});'
+							),
 						(new CButton(null, _('Remove')))
 							->setEnabled(!$data['readonly'])
 							->addClass(ZBX_STYLE_BTN_LINK)
@@ -422,7 +424,10 @@ if ($data['action'] === 'user.edit' || CWebUser::$data['type'] > USER_TYPE_ZABBI
 		(new CDiv([
 			$media_table_info,
 			(new CButton(null, _('Add')))
-				->onClick('PopUp("popup.media", '.json_encode(['dstfrm' => $user_form->getName()]).');')
+				->onClick('PopUp("popup.media", '.
+					json_encode(['dstfrm' => $user_form->getName()]).
+					', {dialogue_class: "modal-popup-generic"});'
+				)
 				->addClass(ZBX_STYLE_BTN_LINK)
 				->setEnabled(!$data['readonly'])
 		]))
