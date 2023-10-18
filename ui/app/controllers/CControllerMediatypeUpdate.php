@@ -37,7 +37,7 @@ class CControllerMediatypeUpdate extends CController {
 			'exec_path' =>				'db media_type.exec_path',
 			'gsm_modem' =>				'db media_type.gsm_modem',
 			'smtp_username' =>			'db media_type.username',
-			'passwd' =>					'db media_type.passwd',
+			'passwd' =>					'db media_type.passwd|password',
 			'parameters_exec' =>		'array',
 			'parameters_webhook' =>		'array',
 			'script' => 				'db media_type.script',
