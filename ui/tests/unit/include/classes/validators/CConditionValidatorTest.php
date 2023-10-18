@@ -30,20 +30,20 @@ class CConditionValidatorTest extends TestCase {
 				[
 					'conditions' => [
 						[
-							'conditiontype' => CONDITION_TYPE_SUPPRESSED,
+							'conditiontype' => ZBX_CONDITION_TYPE_SUPPRESSED,
 							'formulaid' => 'A'
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TEMPLATE,
+							'conditiontype' => ZBX_CONDITION_TYPE_TEMPLATE,
 							'formulaid' => 'B'
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TRIGGER,
+							'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
 							'formulaid' => 'C',
 							'operator' => CONDITION_OPERATOR_EQUAL
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TRIGGER,
+							'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
 							'formulaid' => 'D',
 							'operator' => CONDITION_OPERATOR_EQUAL
 						]
@@ -61,12 +61,12 @@ class CConditionValidatorTest extends TestCase {
 				[
 					'conditions' => [
 						[
-							'conditiontype' => CONDITION_TYPE_TRIGGER,
+							'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
 							'formulaid' => 'A',
 							'operator' => CONDITION_OPERATOR_EQUAL
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TRIGGER,
+							'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
 							'formulaid' => 'B',
 							'operator' => CONDITION_OPERATOR_EQUAL
 						]
@@ -79,20 +79,20 @@ class CConditionValidatorTest extends TestCase {
 				[
 					'conditions' => [
 						[
-							'conditiontype' => CONDITION_TYPE_SUPPRESSED,
+							'conditiontype' => ZBX_CONDITION_TYPE_SUPPRESSED,
 							'formulaid' => 'A'
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TEMPLATE,
+							'conditiontype' => ZBX_CONDITION_TYPE_TEMPLATE,
 							'formulaid' => 'B'
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TRIGGER,
+							'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
 							'formulaid' => 'C',
 							'operator' => CONDITION_OPERATOR_EQUAL
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TRIGGER,
+							'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
 							'formulaid' => 'D',
 							'operator' => CONDITION_OPERATOR_EQUAL
 						]
@@ -104,19 +104,19 @@ class CConditionValidatorTest extends TestCase {
 				[
 					'conditions' => [
 						[
-							'conditiontype' => CONDITION_TYPE_SUPPRESSED,
+							'conditiontype' => ZBX_CONDITION_TYPE_SUPPRESSED,
 							'formulaid' => 'A'
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TEMPLATE,
+							'conditiontype' => ZBX_CONDITION_TYPE_TEMPLATE,
 							'formulaid' => 'B'
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_HOST,
+							'conditiontype' => ZBX_CONDITION_TYPE_HOST,
 							'formulaid' => 'C'
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TRIGGER,
+							'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
 							'formulaid' => 'D',
 							'operator' => CONDITION_OPERATOR_EQUAL
 						]
@@ -128,20 +128,20 @@ class CConditionValidatorTest extends TestCase {
 				[
 					'conditions' => [
 						[
-							'conditiontype' => CONDITION_TYPE_SUPPRESSED,
+							'conditiontype' => ZBX_CONDITION_TYPE_SUPPRESSED,
 							'formulaid' => 'A'
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TEMPLATE,
+							'conditiontype' => ZBX_CONDITION_TYPE_TEMPLATE,
 							'formulaid' => 'B'
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TRIGGER,
+							'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
 							'formulaid' => 'C',
 							'operator' => CONDITION_OPERATOR_EQUAL
 						],
 						[
-							'conditiontype' => CONDITION_TYPE_TRIGGER,
+							'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
 							'formulaid' => 'D',
 							'operator' => CONDITION_OPERATOR_NOT_EQUAL
 						]
