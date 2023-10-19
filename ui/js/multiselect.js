@@ -294,6 +294,7 @@
 	 *
 	 * @param string options['url']					backend url
 	 * @param string options['name']				input element name
+	 * @param string options['multiselect_id']      multiselect wrapper id (optional)
 	 * @param object options['labels']				translated labels (optional)
 	 * @param object options['data']				preload data {id, name, prefix} (optional)
 	 * @param string options['data'][id]
