@@ -7807,6 +7807,10 @@ msgstr "Monitoring logu událostí. Vráti log"
 msgid "Event name"
 msgstr "Název události"
 
+#: app/views/popup.condition.edit.php:819
+msgid "Event name matches Trigger name (with macros expanded) unless a custom Event name is specified in Trigger settings."
+msgstr ""
+
 #: include/classes/helpers/CCorrelationHelper.php:55
 msgid "Event tag pair"
 msgstr "Pár značky události"

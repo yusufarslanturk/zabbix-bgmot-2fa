@@ -7617,6 +7617,10 @@ msgstr "이벤트 로그의 감시. 로그 값을 리턴."
 msgid "Event name"
 msgstr "이벤트 이름"
 
+#: app/views/popup.condition.edit.php:819
+msgid "Event name matches Trigger name (with macros expanded) unless a custom Event name is specified in Trigger settings."
+msgstr ""
+
 #: include/classes/helpers/CCorrelationHelper.php:55
 msgid "Event tag pair"
 msgstr "이벤트 태그의 짝"

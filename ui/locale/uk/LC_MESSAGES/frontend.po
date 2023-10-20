@@ -7807,6 +7807,10 @@ msgstr "Моніторинг журналів подій. Повертає за�
 msgid "Event name"
 msgstr "Ім'я події"
 
+#: app/views/popup.condition.edit.php:819
+msgid "Event name matches Trigger name (with macros expanded) unless a custom Event name is specified in Trigger settings."
+msgstr ""
+
 #: include/classes/helpers/CCorrelationHelper.php:55
 msgid "Event tag pair"
 msgstr "Пара тегів події"
