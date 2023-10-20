@@ -112,7 +112,7 @@ const SQL = 'SELECT * FROM users';
 					'enabled_buttons' => ['Add', 'Cancel', 'Select'],
 					'count' => 3,
 					'hintbox_warning' => 'You are not able to choose some of the languages, '.
-							'because locales for them are not installed on the web server.',
+							'because locales for them are not installed on the web server.'
 				]
 			],
 			[
@@ -244,23 +244,24 @@ const SQL = 'SELECT * FROM users';
 				$this->assertTrue($form->getField($field)->isEnabled(false));
 			}
 
-			$form->getLabel('Password')->query('xpath:./button[@data-hintbox]')->one()->click();
+			$form->getLabel('Password')->query('class:icon-help-hint')->one()->click();
 			$hint = $form->query('xpath://div[@class="overlay-dialogue"]')->waitUntilReady();
 			$help_message = "Password requirements:".
 					"\nmust be at least 8 characters long".
 					"\nmust not contain user's name, surname or username".
 					"\nmust not be one of common or context-specific passwords";
 			$this->assertEquals($help_message, $hint->one()->getText());
-			$hint->query('class:btn-overlay-close')->one()->click();
+			$hint->query('class:overlay-close-btn')->one()->click();
 
 			$info_message = 'Password is not mandatory for non internal authentication type.';
 			$this->assertEquals($info_message, $form->query('xpath://div[contains(text(), "'.$info_message.'")]')->one()->getText());
 		}
 
 		// Check hintbox contains correct text message.
-		$this->assertEquals($data['hintbox_warning'], $this->query('xpath://button[contains(@data-hintbox-contents, "'.
-				$data['hintbox_warning'].'")]')->one()->getAttribute('data-hintbox-contents')
-		);
+		$this->query('xpath://a[contains(@class, "icon-info")]')->one()->click();
+		$hint = $form->query('xpath://div[@class="overlay-dialogue"]')->waitUntilReady();
+		$this->assertEquals($data['hintbox_warning'], $hint->one()->getText());
+		$hint->query('class:overlay-close-btn')->one()->click();
 
 		// Check required fields.
 		$this->assertEquals($data['required'], $form->getRequiredLabels());
@@ -1403,10 +1404,11 @@ const SQL = 'SELECT * FROM users';
 
 		if ($update_user === 'LDAP change password button check') {
 			$this->assertFalse($form->query('button:Change password')->one()->isClickable());
+			$this->query('xpath://a[contains(@class, "icon-info")]')->one()->click();
+			$hint = $form->query('xpath://div[@class="overlay-dialogue"]')->waitUntilReady();
 			$hintbox = 'Password can only be changed for users using the internal Zabbix authentication.';
-			$this->assertEquals($hintbox, $this->query('xpath://button[contains(@data-hintbox-contents, "'.$hintbox.'")]')
-					->one()->getAttribute('data-hintbox-contents')
-			);
+			$this->assertEquals($hintbox, $hint->one()->getText());
+			$hint->query('class:overlay-close-btn')->one()->click();
 		}
 
 		if ($update_user === 'Admin') {
