@@ -1514,7 +1514,7 @@ class testFormLowLevelDiscoveryOverrides extends CWebTest {
 										]
 									],
 									'Update interval' => [
-										'Delay' => '50m',
+										'Delay' => '1m',
 										'Custom intervals' => [
 											[
 												'action' => USER_ACTION_UPDATE,
@@ -1666,10 +1666,10 @@ class testFormLowLevelDiscoveryOverrides extends CWebTest {
 						'Create enabled' => 'Yes',
 						'Discover' => 'Yes',
 						'Update interval' => [
-							'Delay' => '50m',
+							'Delay' => '1m',
 							'Custom intervals' => [
-								['Type' => 'Flexible', 'Interval' => '60s', 'Period' => '1-5,01:01-13:05'],
-								['Type' => 'Scheduling', 'Interval' => 'wd1-3h10-17'],
+								['Type' => 'Flexible', 'Interval' => '60s', 'Period' => '1-7,00:00-24:00'],
+								['Type' => 'Scheduling', 'Interval' => 'wd1-5h9-18'],
 							]
 						],
 						'History storage period' => ['ophistory_history_mode' => 'Do not keep history'],
