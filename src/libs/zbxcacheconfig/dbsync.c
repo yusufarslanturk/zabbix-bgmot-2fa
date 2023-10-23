@@ -3061,8 +3061,16 @@ int	zbx_dbsync_compare_host_groups(zbx_dbsync_t *sync)
 	zbx_hashset_iter_t	iter;
 	zbx_uint64_t		rowid;
 	zbx_dc_hostgroup_t	*group;
+	char			*sql = NULL;
+	size_t			sql_alloc = 0, sql_offset = 0;
 
-	if (NULL == (result = zbx_db_select("select groupid,name from hstgrp")))
+	zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
+			"select groupid,name from hstgrp where type=%d", ZBX_GROUP_TYPE_HOST);
+
+	result = zbx_db_select("%s", sql);
+	zbx_free(sql);
+
+	if (NULL == result)
 		return FAIL;
 
 	dbsync_prepare(sync, 2, NULL);
