@@ -18,31 +18,33 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
+
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
-require_once dirname(__FILE__).'/../traits/TableTrait.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
+require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
 
 /**
  * @backup items
  *
- * @dataSource ExecuteNowAction, DiscoveredHosts
+ * @dataSource ExecuteNowAction, DiscoveredHosts, HostTemplateGroups
  */
 class testPageLowLevelDiscovery extends CWebTest {
 
-	use TableTrait;
-
-	const HOST_ID = 90001;
-
-	private $selector = 'xpath://form[@name="discovery"]/table[@class="list-table"]';
-
 	/**
-	 * Attach MessageBehavior to the test.
+	 * Attach MessageBehavior and TableBehavior to the test.
 	 *
 	 * @return array
 	 */
 	public function getBehaviors() {
-		return [CMessageBehavior::class];
+		return [
+			CMessageBehavior::class,
+			CTableBehavior::class
+		];
 	}
+
+	const HOST_ID = 90001;
+
+	private $selector = 'xpath://form[@name="discovery"]/table[@class="list-table"]';
 
 	public function testPageLowLevelDiscovery_CheckLayout() {
 		$this->page->login()->open('host_discovery.php?filter_set=1&filter_hostids%5B0%5D='.self::HOST_ID.'&context=host');
@@ -294,7 +296,7 @@ class testPageLowLevelDiscovery extends CWebTest {
 						'Template groups' => 'Templates/Databases'
 					],
 					'context' => 'template',
-					'rows' => 86
+					'rows' => 88
 				]
 			],
 			[
@@ -432,6 +434,7 @@ class testPageLowLevelDiscovery extends CWebTest {
 						'Last error message of scenario "Web scenario for execute now".: DR5-web-dep',
 						'Zabbix server health: Zabbix server: Zabbix stats cluster: High availability cluster node discovery',
 						'LLD for Discovered host tests',
+						'LLD for host group test',
 						'Linux by Zabbix agent: Linux: Get filesystems: Mounted filesystem discovery',
 						'Linux by Zabbix agent: Network interface discovery',
 						'Test of discovered host 1 template for unlink: Template1 discovery rule',

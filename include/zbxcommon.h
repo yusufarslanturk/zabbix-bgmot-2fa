@@ -100,7 +100,7 @@ const char	*zbx_result_string(int result);
 #define ZBX_HOSTNAME_BUF_LEN	(ZBX_MAX_HOSTNAME_LEN + 1)
 #define ZBX_MAX_DNSNAME_LEN		255	/* maximum host DNS name length from RFC 1035 */
 						/*(without terminating '\0') */
-#define MAX_EXECUTE_OUTPUT_LEN		(512 * ZBX_KIBIBYTE)
+#define MAX_EXECUTE_OUTPUT_LEN		(16 * ZBX_MEBIBYTE)
 
 #define ZBX_MAX_UINT64		(~__UINT64_C(0))
 #define ZBX_MAX_UINT64_LEN	21
@@ -177,6 +177,8 @@ extern const int	INTERFACE_TYPE_PRIORITY[INTERFACE_TYPE_COUNT];
 #define ZBX_FLAG_DISCOVERY_RULE		0x01
 #define ZBX_FLAG_DISCOVERY_PROTOTYPE	0x02
 #define ZBX_FLAG_DISCOVERY_CREATED	0x04
+
+#define ZBX_GROUP_TYPE_HOST		0
 
 #define ZBX_HOST_PROT_INTERFACES_INHERIT	0
 #define ZBX_HOST_PROT_INTERFACES_CUSTOM		1
@@ -566,6 +568,9 @@ zbx_proxy_suppress_t;
 /* max length of base64 data */
 #define ZBX_MAX_B64_LEN		(16 * ZBX_KIBIBYTE)
 
+#define ZBX_STRQUOTE_DEFAULT		1
+#define ZBX_STRQUOTE_SKIP_BACKSLASH	0
+
 /* string functions that could not be moved into libzbxstr.a because they */
 /* are used by libzbxcommon.a */
 
@@ -582,6 +587,10 @@ size_t	zbx_snprintf(char *str, size_t count, const char *fmt, ...) __zbx_attr_fo
 /* could be moved into libzbxstr.a but it seems to be logically grouped with surrounding functions */
 void	zbx_snprintf_alloc(char **str, size_t *alloc_len, size_t *offset, const char *fmt, ...)
 		__zbx_attr_format_printf(4, 5);
+
+#if defined(__hpux)
+int	zbx_hpux_vsnprintf_is_c99(void);
+#endif
 
 /* used by log */
 size_t	zbx_vsnprintf(char *str, size_t count, const char *fmt, va_list args);
@@ -644,7 +653,10 @@ zbx_file_time_t;
 
 int	zbx_get_file_time(const char *path, int sym, zbx_file_time_t *time);
 void	find_cr_lf_szbyte(const char *encoding, const char **cr, const char **lf, size_t *szbyte);
-int	zbx_read(int fd, char *buf, size_t count, const char *encoding);
+
+#define ZBX_READ_ERR		-1
+#define ZBX_READ_WRONG_ENCODING	-2
+int	zbx_read_text_line_from_file(int fd, char *buf, size_t count, const char *encoding);
 int	zbx_is_regular_file(const char *path);
 char	*zbx_fgets(char *buffer, int size, FILE *fp);
 int	zbx_write_all(int fd, const char *buf, size_t n);

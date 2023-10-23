@@ -524,7 +524,6 @@ static struct snmp_session	*zbx_snmp_open_session(const DC_ITEM *item, char *err
 
 	session.timeout = config_timeout * 1000 * 1000;	/* timeout of one attempt in microseconds */
 							/* (net-snmp default = 1 second) */
-
 #ifdef HAVE_IPV6
 	if (SUCCEED != get_address_family(item->interface.addr, &family, error, max_error_len))
 		goto end;
@@ -1217,7 +1216,7 @@ reduce_max_vars:
 		}
 		else if (STAT_SUCCESS != status || SNMP_ERR_NOERROR != response->errstat)
 		{
-			if (1 >= level)
+			if (1 >= level && 1 < max_vars)
 				goto reduce_max_vars;
 
 			ret = zbx_get_snmp_response_error(ss, &item->interface, status, response, error, max_error_len);
@@ -2499,7 +2498,11 @@ void	get_values_snmp(const DC_ITEM *items, AGENT_RESULT *results, int *errcodes,
 		goto exit;
 	}
 
-	if (0 != (ZBX_FLAG_DISCOVERY_RULE & items[j].flags) || 0 == strncmp(items[j].snmp_oid, "discovery[", 10))
+	if (0 == strncmp(items[j].snmp_oid, "walk[", 5))
+	{
+		err = zbx_snmp_process_snmp_bulkwalk(ss, &items[j], &results[j], &errcodes[j], error, sizeof(error));
+	}
+	else if (0 != (ZBX_FLAG_DISCOVERY_RULE & items[j].flags) || 0 == strncmp(items[j].snmp_oid, "discovery[", 10))
 	{
 		int	max_vars;
 
@@ -2507,10 +2510,6 @@ void	get_values_snmp(const DC_ITEM *items, AGENT_RESULT *results, int *errcodes,
 
 		err = zbx_snmp_process_discovery(ss, &items[j], &results[j], &errcodes[j], error, sizeof(error),
 				&max_succeed, &min_fail, max_vars, bulk);
-	}
-	else if (0 == strncmp(items[j].snmp_oid, "walk[", 5))
-	{
-		err = zbx_snmp_process_snmp_bulkwalk(ss, &items[j], &results[j], &errcodes[j], error, sizeof(error));
 	}
 	else if (NULL != strchr(items[j].snmp_oid, '['))
 	{

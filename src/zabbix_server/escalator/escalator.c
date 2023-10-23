@@ -453,7 +453,8 @@ static int	check_db_parent_rule_tag_match(zbx_vector_uint64_t *parent_ids, zbx_v
 		zbx_free(tag_esc);
 	}
 
-	result = zbx_db_select("%s) limit 1", sql);
+	zbx_chrcpy_alloc(&sql, &sql_alloc, &sql_offset, ')');
+	result = zbx_db_select_n(sql, 1);
 
 	if (NULL != zbx_db_fetch(result))
 	{
@@ -1178,7 +1179,7 @@ static void	add_command_alert(zbx_db_insert_t *db_insert, int alerts_num, zbx_ui
 	{
 		zbx_db_insert_prepare(db_insert, "alerts", "alertid", "actionid", "eventid", "clock", "message",
 				"status", "error", "esc_step", "alerttype", (NULL != r_event ? "p_eventid" : NULL),
-				NULL);
+				(char *)NULL);
 	}
 
 	now = (int)time(NULL);
@@ -1792,7 +1793,7 @@ static void	add_message_alert(const zbx_db_event *event, const zbx_db_event *r_e
 			zbx_db_insert_prepare(&db_insert, "alerts", "alertid", "actionid", "eventid", "userid",
 					"clock", "mediatypeid", "sendto", "subject", "message", "status", "error",
 					"esc_step", "alerttype", "acknowledgeid", "parameters",
-					(NULL != r_event ? "p_eventid" : NULL), NULL);
+					(NULL != r_event ? "p_eventid" : NULL), (char *)NULL);
 		}
 
 		if (MEDIA_TYPE_EXEC == type)
@@ -1834,7 +1835,7 @@ err_alert:
 
 		zbx_db_insert_prepare(&db_insert, "alerts", "alertid", "actionid", "eventid", "userid", "clock",
 				"subject", "message", "status", "retries", "error", "esc_step", "alerttype",
-				"acknowledgeid", (NULL != r_event ? "p_eventid" : NULL), NULL);
+				"acknowledgeid", (NULL != r_event ? "p_eventid" : NULL), (char *)NULL);
 
 		if (NULL != r_event)
 		{

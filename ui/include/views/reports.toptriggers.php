@@ -84,7 +84,9 @@ $filter_column = (new CFormList())
 $filterForm
 	->setProfile($data['filter']['timeline']['profileIdx'])
 	->setActiveTab($data['filter']['active_tab'])
-	->addTimeSelector($data['filter']['timeline']['from'], $data['filter']['timeline']['to'], true, ZBX_DATE_TIME)
+	->addTimeSelector($data['filter']['timeline']['from'], $data['filter']['timeline']['to'], true,
+		'web.toptriggers.filter', ZBX_DATE_TIME
+	)
 	->addFilterTab(_('Filter'), [$filter_column]);
 
 // table
@@ -99,7 +101,10 @@ foreach ($data['triggers'] as $trigger) {
 	}
 
 	$triggerDescription = (new CLinkAction($trigger['description']))
-		->setMenuPopup(CMenuPopupHelper::getTrigger($trigger['triggerid'], 0));
+		->setMenuPopup(CMenuPopupHelper::getTrigger([
+			'triggerid' => $trigger['triggerid'],
+			'backurl' => (new CUrl('toptriggers.php'))->getUrl()
+		]));
 
 	$table->addRow([
 		$hostName,

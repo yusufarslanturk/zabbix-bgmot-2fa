@@ -20,8 +20,8 @@
 
 
 require_once dirname(__FILE__).'/../include/CWebTest.php';
-require_once dirname(__FILE__).'/traits/TableTrait.php';
 require_once dirname(__FILE__).'/behaviors/CMessageBehavior.php';
+require_once dirname(__FILE__).'/behaviors/CTableBehavior.php';
 
 /**
  * @backup module, widget
@@ -29,16 +29,15 @@ require_once dirname(__FILE__).'/behaviors/CMessageBehavior.php';
 
 class testPageAdministrationGeneralModules extends CWebTest {
 
-	use TableTrait;
-
 	/**
-	 * Attach MessageBehavior to the test.
+	 * Attach MessageBehavior and TableBehavior to the test.
 	 *
 	 * @return array
 	 */
 	public function getBehaviors() {
 		return [
-			'class' => CMessageBehavior::class
+			CMessageBehavior::class,
+			CTableBehavior::class
 		];
 	}
 
@@ -928,7 +927,7 @@ class testPageAdministrationGeneralModules extends CWebTest {
 
 	public function getWidgetDimensions() {
 		return [
-			// Widget with pre-defined dimentions.
+			// Widget with pre-defined dimensions.
 			[
 				[
 					'module_name' => 'Clock2',
@@ -936,10 +935,10 @@ class testPageAdministrationGeneralModules extends CWebTest {
 					'widget_type' => 'ALARM CLOCK',
 					'enable' => true,
 					'page' => 'Map page',
-					'dimentions' => ['width: 33.3333%', 'height: 280px']
+					'dimensions' => ['width: 33.3333%', 'height: 280px']
 				]
 			],
-			// Widget with pre-defined dimentions on template.
+			// Widget with pre-defined dimensions on template.
 			[
 				[
 					'module_name' => 'Clock2',
@@ -947,10 +946,10 @@ class testPageAdministrationGeneralModules extends CWebTest {
 					'widget_type' => 'ALARM CLOCK',
 					'page' => 'Alarm clock page',
 					'template' => true,
-					'dimentions' => ['width: 33.3333%', 'height: 280px']
+					'dimensions' => ['width: 33.3333%', 'height: 280px']
 				]
 			],
-			// Widget with default dimentions.
+			// Widget with default dimensions.
 			[
 				[
 					'module_name' => 'Empty widget',
@@ -958,7 +957,7 @@ class testPageAdministrationGeneralModules extends CWebTest {
 					'widget_type' => 'Empty widget',
 					'enable' => true,
 					'page' => 'Map page',
-					'dimentions' => ['width: 50%', 'height: 350px']
+					'dimensions' => ['width: 50%', 'height: 350px']
 				]
 			]
 		];
@@ -970,7 +969,7 @@ class testPageAdministrationGeneralModules extends CWebTest {
 	 *
 	 * @dataProvider getWidgetDimensions
 	 */
-	public function testPageAdministrationGeneralModules_CheckWidgetDimentions($data) {
+	public function testPageAdministrationGeneralModules_CheckWidgetDimensions($data) {
 		$this->page->login();
 
 		if (array_key_exists('enable', $data)) {
@@ -978,18 +977,18 @@ class testPageAdministrationGeneralModules extends CWebTest {
 			$this->enableModule($data, 'list');
 		}
 
-		$this->checkWidgetDimentions($data);
+		$this->checkWidgetDimensions($data);
 
 		// Cancel editing dashboard not to interfere with following cases from data provider.
 		$this->query('link:Cancel')->one()->click();
 	}
 
 	/**
-	 * Add a widget of a specific type to dashboard or template dashboard and check its default dimentions.
+	 * Add a widget of a specific type to dashboard or template dashboard and check its default dimensions.
 	 *
 	 * @param array	$data	data provider.
 	 */
-	private function checkWidgetDimentions($data) {
+	private function checkWidgetDimensions($data) {
 		// Open required dashboard page in edit mode.
 		$url = (array_key_exists('template', $data))
 			? 'zabbix.php?action=template.dashboard.edit&dashboardid='.self::$template_dashboardid
@@ -1008,13 +1007,13 @@ class testPageAdministrationGeneralModules extends CWebTest {
 		$widget_form->fill(['Type' => CFormElement::RELOADABLE_FILL($data['widget_type'])]);
 		$widget_form->submit();
 
-		// Get widget dimentions from the style attribute of the widget grid element and compare with expected values.
+		// Get widget dimensions from the style attribute of the widget grid element and compare with expected values.
 		$grid_selector = 'xpath:.//div[contains(@class, "dashboard-grid-widget-head")]/../..';
-		$widget_dimentions = $dashboard->getWidget($data['widget_name'])->query($grid_selector)->one()->getAttribute('style');
-		$dimention_array = array_map('trim', explode(';', $widget_dimentions));
+		$widget_dimensions = $dashboard->getWidget($data['widget_name'])->query($grid_selector)->one()->getAttribute('style');
+		$dimension_array = array_map('trim', explode(';', $widget_dimensions));
 
-		foreach ($data['dimentions'] as $dimention) {
-			$this->assertContains($dimention, $dimention_array);
+		foreach ($data['dimensions'] as $dimension) {
+			$this->assertContains($dimension, $dimension_array);
 		}
 	}
 

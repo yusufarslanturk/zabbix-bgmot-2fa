@@ -1363,6 +1363,7 @@ form {
 		.subfilter-disable-btn {
 			background-color: $multiselect-item-disabled-bg-color;
 			color: $multiselect-item-disabled-color;
+			-webkit-text-fill-color: $multiselect-item-disabled-color;
 		}
 	}
 
@@ -1500,15 +1501,35 @@ form {
 			padding: 0 11px 0 0;
 			vertical-align: middle;
 		}
+	}
 
+	.drag-icon {
+		position: absolute;
+		top: 1px;
+		margin-right: 5px;
+	}
+
+	.list-vertical-accordion,
+	.table-forms-separator {
 		.drag-icon {
-			position: absolute;
 			top: 5px;
-			margin-right: 5px;
+		}
+	}
+
+	.httpconf-steps-dynamic-row {
+		.drag-icon {
+			top: 0;
+		}
+	}
+
+	.trigger-list {
+		.drag-icon {
+			top: 1px;
 		}
 	}
 
 	.table-forms-td-left {
+		position: relative;
 		display: table-cell;
 		padding: 5px 0;
 		text-align: right;
@@ -1524,6 +1545,12 @@ form {
 			.icon-info {
 				margin-left: 5px;
 			}
+		}
+
+		.checkbox-radio {
+			right: 0;
+			margin-right: 0;
+			margin-left: 0;
 		}
 	}
 
@@ -1751,17 +1778,14 @@ input {
 	}
 
 	&[readonly] {
-		color: $font-color !important;
-		@extend %form-disabled;
+		@extend %form-readonly;
 	}
 }
 
 textarea {
 	margin: 0;
 	padding: 4px 5px;
-	min-height: 24px;
 	overflow: auto;
-	resize: vertical;
 	font: {
 		family: $font-stack;
 		size: $font-form-size;
@@ -1777,8 +1801,7 @@ textarea {
 	}
 
 	&[readonly] {
-		color: $font-color !important;
-		@extend %form-disabled;
+		@extend %form-readonly;
 
 		&:focus {
 			border-color: $form-border-focus-color;
@@ -1989,6 +2012,12 @@ select {
 
 	&:focus {
 		border-color: $form-border-focus-color;
+	}
+
+	&::placeholder {
+		color: $input-placeholder-color;
+		-webkit-text-fill-color: $input-placeholder-color;
+		opacity: 1;
 	}
 }
 
@@ -2691,24 +2720,23 @@ $icon-widget-btn: (
 	}
 }
 
-%form-disabled {
-	color: $form-disabled-font-color;
-	background-color: $form-disabled-bg-color !important;
+%form-readonly {
+	color: $font-color;
+	-webkit-text-fill-color: $font-color;
+	background-color: $form-disabled-bg-color;
 	border-color: $form-disabled-border-color;
 }
 
-/* This is a hack to define the color for disabled input elements on Safari. Other browsers uses 'color' instead. */
-.safari {
-	%form-disabled {
-		-webkit-text-fill-color: $form-disabled-font-color;
-	}
+%form-disabled {
+	color: $form-disabled-font-color;
+	-webkit-text-fill-color: $form-disabled-font-color;
+	background-color: $form-disabled-bg-color;
+	border-color: $form-disabled-border-color;
 
-	input,
-	textarea {
-		&[readonly] {
-			-webkit-text-fill-color: $font-color !important;
-			@extend %form-disabled;
-		}
+	&::placeholder {
+		color: $input-disabled-placeholder-color;
+		-webkit-text-fill-color: $input-disabled-placeholder-color;
+		opacity: 1;
 	}
 }
 
@@ -5350,18 +5378,6 @@ a.icon-count {
 			margin-right: 5px;
 		}
 	}
-}
-
-:-ms-input-placeholder {
-	color: $input-placeholder-color !important;
-}
-
-::-ms-input-placeholder {
-	color: $input-placeholder-color;
-}
-
-::placeholder {
-	color: $input-placeholder-color;
 }
 
 .icon-action-command,

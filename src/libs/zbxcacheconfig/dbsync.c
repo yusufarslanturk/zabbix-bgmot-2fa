@@ -1737,8 +1737,9 @@ int	zbx_dbsync_compare_items(zbx_dbsync_t *sync)
 			" from items i"
 			" inner join hosts h on i.hostid=h.hostid"
 			" join item_rtdata ir on i.itemid=ir.itemid"
-			" where h.status in (%d,%d) and i.flags<>%d",
-			HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED, ZBX_FLAG_DISCOVERY_PROTOTYPE);
+			" where (h.status=%d or h.status=%d) and (i.flags=%d or i.flags=%d or i.flags=%d)",
+			HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED, ZBX_FLAG_DISCOVERY_NORMAL,
+			ZBX_FLAG_DISCOVERY_RULE, ZBX_FLAG_DISCOVERY_CREATED);
 
 	dbsync_prepare(sync, 50, dbsync_item_preproc_row);
 
@@ -3061,7 +3062,7 @@ int	zbx_dbsync_compare_host_groups(zbx_dbsync_t *sync)
 	zbx_uint64_t		rowid;
 	zbx_dc_hostgroup_t	*group;
 
-	if (NULL == (result = zbx_db_select("select groupid,name from hstgrp")))
+	if (NULL == (result = zbx_db_select("select groupid,name from hstgrp where type=%d", ZBX_GROUP_TYPE_HOST)))
 		return FAIL;
 
 	dbsync_prepare(sync, 2, NULL);

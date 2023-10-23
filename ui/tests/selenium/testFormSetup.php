@@ -19,8 +19,8 @@
 **/
 
 require_once dirname(__FILE__) . '/../include/CWebTest.php';
-require_once dirname(__FILE__).'/traits/TableTrait.php';
 require_once dirname(__FILE__).'/behaviors/CMessageBehavior.php';
+require_once dirname(__FILE__).'/behaviors/CTableBehavior.php';
 
 /**
  * @backup sessions
@@ -29,16 +29,15 @@ require_once dirname(__FILE__).'/behaviors/CMessageBehavior.php';
  */
 class testFormSetup extends CWebTest {
 
-	use TableTrait;
-
 	/**
-	 * Attach MessageBehavior to the test.
+	 * Attach MessageBehavior and TableBehavior to the test.
 	 *
 	 * @return array
 	 */
 	public function getBehaviors() {
 		return [
-			'class' => CMessageBehavior::class
+			CMessageBehavior::class,
+			CTableBehavior::class
 		];
 	}
 
@@ -275,9 +274,11 @@ class testFormSetup extends CWebTest {
 
 		// Check timezone field.
 		$timezones_field = $form->getField('Default time zone');
-
 		$timezones = $timezones_field->getOptions()->asText();
-		$this->assertEquals(427, count($timezones));
+
+		// Note that count of available timezones may differ based on the local environment configuration.
+		$this->assertEquals(420, count($timezones));
+
 		foreach (['System', 'Europe/Riga'] as $timezone_value) {
 			$timezone = CDateTimeHelper::getTimeZoneFormat($timezone_value);
 			$this->assertContains($timezone, $timezones);
