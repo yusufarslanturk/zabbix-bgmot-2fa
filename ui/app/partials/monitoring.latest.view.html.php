@@ -28,7 +28,7 @@ $form = (new CForm('GET', 'history.php'))
 	->setName('items')
 	->addItem(new CVar('action', HISTORY_BATCH_GRAPH));
 
-$table = (new CTableInfo())->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS);
+$table = (new CTableInfo())->addStyle('table-layout: fixed;');
 
 // Latest data header.
 $col_check_all = new CColHeader(
@@ -267,8 +267,10 @@ foreach ($data['items'] as $itemid => $item) {
 
 		$table_row = new CRow([
 			$checkbox,
-			$host_name_container,
-			(new CCol([$item_name, $item_key]))->addClass($state_css),
+			(new CCol($host_name_container))->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS),
+			(new CCol([$item_name, $item_key]))
+				->addClass($state_css)
+				->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS),
 			(new CCol($item_delay))->addClass($state_css),
 			(new CCol($item_history))->addClass($state_css),
 			(new CCol($item_trends))->addClass($state_css),
@@ -284,7 +286,7 @@ foreach ($data['items'] as $itemid => $item) {
 	else {
 		$table_row = new CRow([
 			$checkbox,
-			$host_name_container,
+			(new CCol($host_name_container))->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS),
 			(new CCol($item_name))->addClass($state_css),
 			(new CCol($last_check))->addClass($state_css),
 			(new CCol($last_value))->addClass($state_css),
