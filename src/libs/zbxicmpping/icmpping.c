@@ -234,7 +234,6 @@ static int	get_interval_option(const char *fping, const char *dst, int *value, c
 
 	for (i = 0; i < ARRSIZE(intervals); i++)
 	{
-		int		ret_exec;
 		char		tmp[MAX_STRING_LEN], err[255];
 		const char	*p;
 
@@ -245,7 +244,7 @@ static int	get_interval_option(const char *fping, const char *dst, int *value, c
 		zbx_free(out);
 
 		/* call fping, ignore its exit code but mind execution failures */
-		if (SUCCEED != (ret_exec = get_fping_out(tmp, dst, &out, err, sizeof(err))))
+		if (SUCCEED != get_fping_out(tmp, dst, &out, err, sizeof(err)))
 		{
 			zbx_snprintf(error, max_error_len, "Cannot execute \"%s\": %s", tmp, err);
 			goto out;
