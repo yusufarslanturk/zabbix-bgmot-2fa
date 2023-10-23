@@ -1520,14 +1520,14 @@ class testFormLowLevelDiscoveryOverrides extends CWebTest {
 												'action' => USER_ACTION_UPDATE,
 												'index' => 0,
 												'type' => 'Flexible',
-												'delay' => '60s',
-												'period' => '1-5,01:01-13:05'
+												'delay' => '50s',
+												'period' => '1-7,00:00-24:00'
 											],
 											[
 												'action' => USER_ACTION_UPDATE,
 												'index' => 1,
 												'type' => 'Scheduling',
-												'delay' => 'wd1-3h10-17'
+												'delay' => 'wd1-5h9-18'
 											]
 										]
 									]
@@ -1668,7 +1668,7 @@ class testFormLowLevelDiscoveryOverrides extends CWebTest {
 						'Update interval' => [
 							'Delay' => '1m',
 							'Custom intervals' => [
-								['Type' => 'Flexible', 'Interval' => '60s', 'Period' => '1-7,00:00-24:00'],
+								['Type' => 'Flexible', 'Interval' => '50s', 'Period' => '1-7,00:00-24:00'],
 								['Type' => 'Scheduling', 'Interval' => 'wd1-5h9-18'],
 							]
 						],
