@@ -287,7 +287,9 @@ foreach ($data['items'] as $itemid => $item) {
 		$table_row = new CRow([
 			$checkbox,
 			(new CCol($host_name_container))->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS),
-			(new CCol($item_name))->addClass($state_css),
+			(new CCol($item_name))
+				->addClass($state_css)
+				->addClass(ZBX_STYLE_OVERFLOW_ELLIPSIS),
 			(new CCol($last_check))->addClass($state_css),
 			(new CCol($last_value))->addClass($state_css),
 			(new CCol($change))->addClass($state_css),
