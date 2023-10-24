@@ -28,7 +28,7 @@ $form = (new CForm('GET', 'history.php'))
 	->setName('items')
 	->addItem(new CVar('action', HISTORY_BATCH_GRAPH));
 
-$table = (new CTableInfo())->addStyle(ZBX_STYLE_LIST_TABLE_FIXED);
+$table = (new CTableInfo())->addClass(ZBX_STYLE_LIST_TABLE_FIXED);
 
 // Latest data header.
 $col_check_all = new CColHeader(
