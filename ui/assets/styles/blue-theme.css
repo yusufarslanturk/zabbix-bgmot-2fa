@@ -3380,6 +3380,8 @@ form.is-loading {
   background-color: #ffffff;
   border-collapse: separate;
   border: 1px solid #dfe4e7; }
+  .list-table.fixed {
+    table-layout: fixed; }
   .list-table .action-container {
     display: flex;
     width: 100%;
