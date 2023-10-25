@@ -68,7 +68,6 @@ type perfCounter struct {
 	history    []*float64
 	head, tail historyIndex
 	err        error
-	errCode    uintptr
 }
 
 // Plugin -
