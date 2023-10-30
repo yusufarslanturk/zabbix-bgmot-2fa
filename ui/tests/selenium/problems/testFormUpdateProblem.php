@@ -166,7 +166,7 @@ class testFormUpdateProblem extends CWebTest {
 
 		$event = CDataHelper::call('event.get', [
 			'eventids' => $eventids['Trigger for unsigned'],
-			'selectAcknowledges' => ['clock']
+			'select_acknowledges' => ['clock']
 		]);
 		self::$acktime = CTestArrayHelper::get($event, '0.acknowledges.0.clock');
 	}
