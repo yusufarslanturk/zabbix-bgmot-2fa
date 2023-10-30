@@ -837,9 +837,6 @@ zabbix_export:
                       value:
                         host: 'Network Generic Device by SNMP'
                         name: 'Interface {#IFDESCR}: Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: df2e3dab72d94efba9a85bfd7d1c3148
           name: 'EtherLike-MIB::dot3StatsDuplexStatus'

@@ -1527,9 +1527,6 @@ zabbix_export:
                       value:
                         host: 'Windows by Zabbix agent'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
         - uuid: 5f494fac9dc94bf3827b67ea212240f2
           name: 'System performance'
           pages:
@@ -1566,9 +1563,6 @@ zabbix_export:
                       value:
                         host: 'Windows by Zabbix agent'
                         name: '{#FSLABEL}({#FSNAME}): Disk space usage'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '15'
                   width: '24'
@@ -1582,9 +1576,6 @@ zabbix_export:
                       value:
                         host: 'Windows by Zabbix agent'
                         name: '{#DEVNAME}: Disk read/write rates'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '20'
                   width: '24'
@@ -1598,9 +1589,6 @@ zabbix_export:
                       value:
                         host: 'Windows by Zabbix agent'
                         name: '{#DEVNAME}: Disk utilization and queue'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '25'
                   width: '24'
@@ -1614,9 +1602,6 @@ zabbix_export:
                       value:
                         host: 'Windows by Zabbix agent'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graph
                   x: '12'
                   width: '12'

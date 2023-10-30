@@ -2080,9 +2080,6 @@ zabbix_export:
                       value:
                         host: 'MikroTik PowerBox Pro by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: f3c5ab8576b34585a21cc5c12ea2f030
           name: 'IF-MIB::ifOperStatus'

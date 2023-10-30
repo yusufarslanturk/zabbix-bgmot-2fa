@@ -2189,9 +2189,6 @@ zabbix_export:
                       value:
                         host: 'CockroachDB by HTTP'
                         name: 'CockroachDB: Storage [{#STORE}]: Capacity'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graph
                   'y': '15'
                   width: '24'
@@ -2252,9 +2249,6 @@ zabbix_export:
                       value:
                         host: 'CockroachDB by HTTP'
                         name: 'CockroachDB: Storage [{#STORE}]: Ranges'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -2268,9 +2262,6 @@ zabbix_export:
                       value:
                         host: 'CockroachDB by HTTP'
                         key: 'cockroachdb.replication.[{#STORE},lease_holders]'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: INTEGER
                       name: source_type
                       value: '3'
@@ -2288,9 +2279,6 @@ zabbix_export:
                         host: 'CockroachDB by HTTP'
                         key: 'cockroachdb.rebalancing.queries.average.[{#STORE},rate]'
                     - type: INTEGER
-                      name: rows
-                      value: '1'
-                    - type: INTEGER
                       name: source_type
                       value: '3'
                 - type: graphprototype
@@ -2306,9 +2294,6 @@ zabbix_export:
                       value:
                         host: 'CockroachDB by HTTP'
                         name: 'CockroachDB: Storage [{#STORE}]: Replica quiescence'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
         - uuid: 0d9a3feb76ad403dac7379dbe04298f0
           name: Runtime
           pages:
@@ -2416,9 +2401,6 @@ zabbix_export:
                         host: 'CockroachDB by HTTP'
                         key: 'cockroachdb.slow_requests.[{#STORE},raft_proposals]'
                     - type: INTEGER
-                      name: rows
-                      value: '1'
-                    - type: INTEGER
                       name: source_type
                       value: '3'
                 - type: graph
@@ -2448,9 +2430,6 @@ zabbix_export:
                         host: 'CockroachDB by HTTP'
                         key: 'cockroachdb.slow_requests.[{#STORE},lease_acquisitions]'
                     - type: INTEGER
-                      name: rows
-                      value: '1'
-                    - type: INTEGER
                       name: source_type
                       value: '3'
                 - type: graphprototype
@@ -2466,9 +2445,6 @@ zabbix_export:
                       value:
                         host: 'CockroachDB by HTTP'
                         key: 'cockroachdb.slow_requests.[{#STORE},latch_acquisitions]'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: INTEGER
                       name: source_type
                       value: '3'
@@ -2644,9 +2620,6 @@ zabbix_export:
                       value:
                         host: 'CockroachDB by HTTP'
                         name: 'CockroachDB: Storage [{#STORE}]: Capacity'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '12'
@@ -2660,9 +2633,6 @@ zabbix_export:
                       value:
                         host: 'CockroachDB by HTTP'
                         key: 'cockroachdb.rocksdb.[{#STORE},read_amp]'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: INTEGER
                       name: source_type
                       value: '3'
@@ -2689,9 +2659,6 @@ zabbix_export:
                       value:
                         host: 'CockroachDB by HTTP'
                         name: 'CockroachDB: Storage [{#STORE}]: Bytes'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   x: '12'
                   'y': '5'
@@ -2706,9 +2673,6 @@ zabbix_export:
                       value:
                         host: 'CockroachDB by HTTP'
                         key: 'cockroachdb.rocksdb.[{#STORE},sstables]'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: INTEGER
                       name: source_type
                       value: '3'

@@ -1395,9 +1395,6 @@ zabbix_export:
                       value:
                         host: 'Mellanox by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
         - uuid: e41382f2a3394e52b885bb6a70df35ff
           name: 'System performance'
           pages:

@@ -1153,9 +1153,6 @@ zabbix_export:
                       value:
                         host: 'Huawei VRP by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 64bf3ebd444c4c4ca472b0846790b107
           name: 'EtherLike-MIB::dot3StatsDuplexStatus'
