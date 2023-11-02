@@ -312,6 +312,10 @@ form {
 	border-collapse: separate;
 	border: 1px solid $ui-border-color;
 
+	&.fixed {
+		table-layout: fixed;
+	}
+
 	.action-container {
 		display: flex;
 		width: 100%;
