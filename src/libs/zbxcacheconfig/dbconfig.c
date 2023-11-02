@@ -1951,6 +1951,85 @@ void	DCsync_kvs_paths(const struct zbx_json_parse *jp_kvs_paths, const zbx_confi
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
 }
 
+static int	dc_compare_macro(const char *text, const zbx_strloc_t *loc, const char *macro)
+{
+	if (0 != strncmp(macro, text + loc->l, loc->r - loc->l + 1))
+		return FAIL;
+
+	return SUCCEED;
+}
+
+/******************************************************************************
+ *                                                                            *
+ * Purpose: expand host macros in string returning new string with resolved   *
+ *          macros                                                            *
+ *                                                                            *
+ ******************************************************************************/
+char	*dc_expand_host_macros_dyn(const char *text, DC_HOST *host)
+{
+	zbx_token_t	token;
+	int		pos = 0, last_pos = 0;
+	char		*str = NULL;
+	size_t		str_alloc = 0, str_offset = 0;
+	DC_INTERFACE	interface;
+
+	if ('\0' == *text)
+		return zbx_strdup(NULL, text);
+
+	for (; SUCCEED == zbx_token_find(text, pos, &token, ZBX_TOKEN_SEARCH_BASIC); pos++)
+	{
+		const char	*value = NULL;
+
+		if (ZBX_TOKEN_MACRO != token.type)
+			continue;
+
+		zbx_strncpy_alloc(&str, &str_alloc, &str_offset, text + last_pos, token.loc.l - (size_t)last_pos);
+
+		if (SUCCEED == dc_compare_macro(text, &token.loc, "{HOST.HOST}") ||
+				SUCCEED == dc_compare_macro(text, &token.loc, "{HOSTNAME}"))
+		{
+			value = host->host;
+		}
+		else if (SUCCEED == dc_compare_macro(text, &token.loc, "{HOST.NAME}"))
+		{
+			value = host->name;
+		}
+		else if (SUCCEED == dc_compare_macro(text, &token.loc, "{HOST.IP}") ||
+				SUCCEED == dc_compare_macro(text, &token.loc, "{IPADDRESS}"))
+		{
+			if (SUCCEED == DCconfig_get_interface_by_type(&interface, host->hostid, INTERFACE_TYPE_AGENT))
+				value = interface.ip_orig;
+		}
+		else if (SUCCEED == dc_compare_macro(text, &token.loc, "{HOST.DNS}"))
+		{
+			if (SUCCEED == DCconfig_get_interface_by_type(&interface, host->hostid, INTERFACE_TYPE_AGENT))
+				value = interface.dns_orig;
+		}
+		else if (SUCCEED == dc_compare_macro(text, &token.loc, "{HOST.CONN}"))
+		{
+			if (SUCCEED == DCconfig_get_interface_by_type(&interface, host->hostid, INTERFACE_TYPE_AGENT))
+				value = interface.addr;
+		}
+
+		if (NULL != value)
+		{
+			zbx_strcpy_alloc(&str, &str_alloc, &str_offset, value);
+		}
+		else
+		{
+			zbx_strncpy_alloc(&str, &str_alloc, &str_offset, text + token.loc.l,
+					token.loc.r - token.loc.l + 1);
+		}
+
+		pos = (int)token.loc.r;
+		last_pos = pos + 1;
+	}
+
+	zbx_strcpy_alloc(&str, &str_alloc, &str_offset, text + last_pos);
+
+	return str;
+}
+
 /******************************************************************************
  *                                                                            *
  * Purpose: trying to resolve the macros in host interface                    *
@@ -1973,9 +2052,7 @@ static void	substitute_host_interface_macros(ZBX_DC_INTERFACE *interface)
 
 		if (0 != (macros & 0x01))
 		{
-			addr = zbx_strdup(NULL, interface->ip);
-			zbx_substitute_simple_macros(NULL, NULL, NULL, NULL, NULL, &host, NULL, NULL, NULL, NULL, NULL,
-					NULL, &addr, MACRO_TYPE_INTERFACE_ADDR, NULL, 0);
+			addr = dc_expand_host_macros_dyn(interface->ip, &host);
 			if (SUCCEED == zbx_is_ip(addr) || SUCCEED == zbx_validate_hostname(addr))
 				dc_strpool_replace(1, &interface->ip, addr);
 			zbx_free(addr);
@@ -1983,14 +2060,13 @@ static void	substitute_host_interface_macros(ZBX_DC_INTERFACE *interface)
 
 		if (0 != (macros & 0x02))
 		{
-			addr = zbx_strdup(NULL, interface->dns);
-			zbx_substitute_simple_macros(NULL, NULL, NULL, NULL, NULL, &host, NULL, NULL, NULL, NULL, NULL,
-					NULL, &addr, MACRO_TYPE_INTERFACE_ADDR, NULL, 0);
+			addr = dc_expand_host_macros_dyn(interface->dns, &host);
 			if (SUCCEED == zbx_is_ip(addr) || SUCCEED == zbx_validate_hostname(addr))
 				dc_strpool_replace(1, &interface->dns, addr);
 			zbx_free(addr);
 		}
 	}
+
 #undef STR_CONTAINS_MACROS
 }
 
