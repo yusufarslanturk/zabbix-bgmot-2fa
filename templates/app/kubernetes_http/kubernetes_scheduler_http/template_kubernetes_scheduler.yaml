@@ -959,9 +959,6 @@ zabbix_export:
                       value:
                         host: 'Kubernetes Scheduler by HTTP'
                         name: 'Kubernetes Scheduler: [{#SINGLETON}]Binding latency'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -975,9 +972,6 @@ zabbix_export:
                       value:
                         host: 'Kubernetes Scheduler by HTTP'
                         name: 'Kubernetes Scheduler: ["{#RESULT}"] E2e latency'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '10'
                   width: '24'
@@ -991,9 +985,6 @@ zabbix_export:
                       value:
                         host: 'Kubernetes Scheduler by HTTP'
                         name: 'Kubernetes Scheduler: [{#SINGLETON}]Scheduling algorithm duration'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
   graphs:
     - uuid: dd98f209541449f4a476718c46a0e721
       name: 'Kubernetes Scheduler: Memory usage'

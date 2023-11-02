@@ -3721,9 +3721,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'CPG [{#NAME}]: CPG space'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -3737,9 +3734,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'CPG [{#NAME}]: Number of virtual volumes'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '10'
                   width: '24'
@@ -3753,9 +3747,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'CPG [{#NAME}]: Raw space'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '15'
                   width: '24'
@@ -3769,9 +3760,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'CPG [{#NAME}]: Snapshot administration space'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '20'
                   width: '24'
@@ -3785,9 +3773,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'CPG [{#NAME}]: Snapshot data space'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '25'
                   width: '24'
@@ -3801,9 +3786,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'CPG [{#NAME}]: User data space'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
             - name: Volumes
               widgets:
                 - type: graphprototype
@@ -3818,9 +3800,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'Volume [{#NAME}]: Administrative space'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -3834,9 +3813,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'Volume [{#NAME}]: Capacity efficiency: Ratio'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '10'
                   width: '24'
@@ -3850,9 +3826,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'Volume [{#NAME}]: Capacity efficiency: Space saved'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '15'
                   width: '24'
@@ -3866,9 +3839,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'Volume [{#NAME}]: Snapshot space'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '20'
                   width: '24'
@@ -3882,9 +3852,6 @@ zabbix_export:
                       value:
                         host: 'HPE Primera by HTTP'
                         name: 'Volume [{#NAME}]: User space'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 79ba0611293541f29f8b43b34e64465d
           name: Boolean

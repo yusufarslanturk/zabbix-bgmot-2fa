@@ -2321,9 +2321,6 @@ zabbix_export:
                       value:
                         host: 'TrueNAS by SNMP'
                         name: 'TrueNAS: CPU usage{#SINGLETON}'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '15'
                   width: '12'
@@ -2337,9 +2334,6 @@ zabbix_export:
                       value:
                         host: 'TrueNAS by SNMP'
                         name: 'TrueNAS: CPU utilization{#SINGLETON}'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graph
                   'y': '20'
                   width: '24'
@@ -2386,9 +2380,6 @@ zabbix_export:
                       value:
                         host: 'TrueNAS by SNMP'
                         name: 'TrueNAS: [{#DEVNAME}]: Read/write rates'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -2402,9 +2393,6 @@ zabbix_export:
                       value:
                         host: 'TrueNAS by SNMP'
                         name: 'TrueNAS: Disk [{#DISK_NAME}]: Temperature'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
             - name: ZFS
               widgets:
                 - type: graph
@@ -2429,9 +2417,6 @@ zabbix_export:
                       value:
                         host: 'TrueNAS by SNMP'
                         name: 'TrueNAS: Pool [{#POOLNAME}]: Space usage'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '10'
                   width: '24'
@@ -2445,9 +2430,6 @@ zabbix_export:
                       value:
                         host: 'TrueNAS by SNMP'
                         name: 'TrueNAS: Pool [{#POOLNAME}]: Read/write rates'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '15'
                   width: '24'
@@ -2461,9 +2443,6 @@ zabbix_export:
                       value:
                         host: 'TrueNAS by SNMP'
                         name: 'TrueNAS: ZFS volume [{#ZVOL_NAME}]: Space usage'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '20'
                   width: '24'
@@ -2477,9 +2456,6 @@ zabbix_export:
                       value:
                         host: 'TrueNAS by SNMP'
                         name: 'TrueNAS: Dataset [{#DATASET_NAME}]: Space usage'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
             - name: 'Network interfaces'
               widgets:
                 - type: graphprototype
@@ -2494,9 +2470,6 @@ zabbix_export:
                       value:
                         host: 'TrueNAS by SNMP'
                         name: 'TrueNAS: Interface [{#IFNAME}({#IFALIAS})]: Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 1ce70fc8edf2449ea6a0c687f359441a
           name: 'FREENAS-MIB::ZPoolHealthType'

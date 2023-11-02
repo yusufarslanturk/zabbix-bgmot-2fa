@@ -2082,9 +2082,6 @@ zabbix_export:
                       value:
                         host: 'MikroTik CRS109-8G-1S-2HnD-IN by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 10ff85e100864e88910e26efd34896d3
           name: 'IF-MIB::ifOperStatus'

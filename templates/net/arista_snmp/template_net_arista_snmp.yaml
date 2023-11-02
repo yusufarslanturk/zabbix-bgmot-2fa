@@ -1749,9 +1749,6 @@ zabbix_export:
                       value:
                         host: 'Arista by SNMP'
                         name: '{#FSNAME}: Disk space usage'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   name: 'memory utilization'
                   x: '12'
@@ -1766,9 +1763,6 @@ zabbix_export:
                       value:
                         host: 'Arista by SNMP'
                         name: '{#MEMNAME}: Memory utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   name: 'network traffic'
                   x: '12'
@@ -1784,9 +1778,6 @@ zabbix_export:
                       value:
                         host: 'Arista by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 318f3041aea04848a223de86e589c232
           name: 'ENTITY-SENSORS-MIB::EntitySensorStatus'

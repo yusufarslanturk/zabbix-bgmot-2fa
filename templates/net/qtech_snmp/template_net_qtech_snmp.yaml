@@ -1195,9 +1195,6 @@ zabbix_export:
                       value:
                         host: 'QTech QSW by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
         - uuid: 6d98416da7a84f1b877f2ca3d6372514
           name: Resources
           pages:

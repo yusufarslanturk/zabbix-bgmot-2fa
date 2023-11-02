@@ -1272,9 +1272,6 @@ zabbix_export:
                       value:
                         host: 'HP Comware HH3C by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
         - uuid: 74325ab2f9e346a89eb281df04154ab2
           name: Resources
           pages:
@@ -1291,9 +1288,6 @@ zabbix_export:
                       value:
                         host: 'HP Comware HH3C by SNMP'
                         name: '{#MODULE_NAME}: CPU utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -1307,9 +1301,6 @@ zabbix_export:
                       value:
                         host: 'HP Comware HH3C by SNMP'
                         name: '{#MODULE_NAME}: Memory utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: ec3b9adaa2ad448db5a613cfb6e02fd3
           name: 'EtherLike-MIB::dot3StatsDuplexStatus'

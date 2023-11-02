@@ -1088,9 +1088,6 @@ zabbix_export:
                       value:
                         host: 'D-Link DES 7200 by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 538fac0622da44f6983715e4ab5174d8
           name: 'IF-MIB::ifOperStatus'

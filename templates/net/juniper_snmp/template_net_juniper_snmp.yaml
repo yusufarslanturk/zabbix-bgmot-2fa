@@ -1234,9 +1234,6 @@ zabbix_export:
                       value:
                         host: 'Juniper by SNMP'
                         name: '{#SNMPVALUE}: Memory utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   name: 'CPU utilization'
                   x: '12'
@@ -1251,9 +1248,6 @@ zabbix_export:
                       value:
                         host: 'Juniper by SNMP'
                         name: '{#SNMPVALUE}: CPU utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 69625f8a027542638c3ca9b64522602d
           name: 'EtherLike-MIB::dot3StatsDuplexStatus'

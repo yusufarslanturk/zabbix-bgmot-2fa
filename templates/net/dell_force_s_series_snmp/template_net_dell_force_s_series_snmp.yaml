@@ -1215,9 +1215,6 @@ zabbix_export:
                       value:
                         host: 'Dell Force S-Series by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 1962bc26a6064ee6868371f86d44dbeb
           name: 'EtherLike-MIB::dot3StatsDuplexStatus'

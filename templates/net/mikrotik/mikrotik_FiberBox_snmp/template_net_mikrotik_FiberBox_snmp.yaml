@@ -2080,9 +2080,6 @@ zabbix_export:
                       value:
                         host: 'MikroTik FiberBox by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 405ab38009ec49348abe0b0c40cf8400
           name: 'IF-MIB::ifOperStatus'

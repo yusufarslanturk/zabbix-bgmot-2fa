@@ -2680,9 +2680,6 @@ zabbix_export:
                       value:
                         host: 'HashiCorp Nomad Client by HTTP'
                         name: 'HashiCorp Nomad Client: Job [{#JOB.NAME}] task ["{#JOB.TASK.GROUP}"] namespace ["{#JOB.NAMESPACE}"] CPU utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '12'
@@ -2696,9 +2693,6 @@ zabbix_export:
                       value:
                         host: 'HashiCorp Nomad Client by HTTP'
                         key: 'nomad.client.allocs.cpu.allocated["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: INTEGER
                       name: source_type
                       value: '3'
@@ -2715,9 +2709,6 @@ zabbix_export:
                       value:
                         host: 'HashiCorp Nomad Client by HTTP'
                         name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] task ["{#JOB.TASK.GROUP}"] namespace ["{#JOB.NAMESPACE}"] memory utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   x: '12'
                   width: '12'
@@ -2731,9 +2722,6 @@ zabbix_export:
                       value:
                         host: 'HashiCorp Nomad Client by HTTP'
                         name: 'HashiCorp Nomad Client: Job [{#JOB.NAME}] task ["{#JOB.TASK.GROUP}"] namespace ["{#JOB.NAMESPACE}"] CPU throttling'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   x: '12'
                   'y': '5'
@@ -2748,9 +2736,6 @@ zabbix_export:
                       value:
                         host: 'HashiCorp Nomad Client by HTTP'
                         key: 'nomad.client.allocs.cpu.total_ticks["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: INTEGER
                       name: source_type
                       value: '3'
@@ -2791,9 +2776,6 @@ zabbix_export:
                       value:
                         host: 'HashiCorp Nomad Client by HTTP'
                         name: 'HashiCorp Nomad Client: Disk ["{#DEV.NAME}"] usage'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graph
                   x: '12'
                   'y': '5'
@@ -2819,9 +2801,6 @@ zabbix_export:
                       value:
                         host: 'HashiCorp Nomad Client by HTTP'
                         name: 'HashiCorp Nomad Client: Disk ["{#DEV.NAME}"] utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 766a3c43981147bf85e9e157eb69c510
           name: 'Detection state'
