@@ -1,3 +1,15 @@
+Changes for 5.0.39
+
+5.0.39rc1 was released as 5.0.39 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 5.0.39rc1
+
+Bug fixes:
+...G...PS. [ZBX-23542] fixed memory leaks when using certificate-based encryption in Zabbix agent and Zabbix agent 2 (akozlovs, Andris)
+........S. [ZBX-23064] simplified trend synchronization queries to improve performance (vso)
+
+--------------------------------------------------------------------------------
 Changes for 5.0.38
 
 5.0.38rc1 was released as 5.0.38 without any changes
@@ -23,6 +35,8 @@ Changes for 5.0.37rc1
 Bug fixes:
 ...G...PS. [ZBX-23097] fixed use of uninitialised value when verifying subject and issuer with TLS (vso)
 ...G...... [ZBX-22830] fixed free bytes calculation for temporary tablespace in Oracle Zabbix agent 2 plugin (esneiders)
+..F....... [ZBX-23389] fixed leading and trailing C0 control and space characters not being trimmed before parsing URLs (agriscenko)
+.......PS. [ZBX-23391] changed hidden JS properties to be read only (wiper)
 
 --------------------------------------------------------------------------------
 Changes for 5.0.36
@@ -2849,6 +2863,16 @@ A.F.I...S. [ZBXNEXT-4853,ZBXNEXT-517] added ability to send email messages in HT
 ..F.....S. [ZBXNEXT-1282,ZBXNEXT-4730] added changes to introduce regex based matching for auto-registration (vasilijs, viktors)
 
 --------------------------------------------------------------------------------
+Changes for 4.0.50
+
+4.0.50rc1 was released as 4.0.50 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 4.0.50rc1
+
+Bug fixes:
+
+--------------------------------------------------------------------------------
 Changes for 4.0.49
 
 4.0.49rc1 was released as 4.0.49 without any changes
@@ -2868,6 +2892,7 @@ Changes for 4.0.48
 Changes for 4.0.48rc1
 
 Bug fixes:
+..F....... [ZBX-23389] fixed leading and trailing C0 control and space characters not being trimmed before parsing URLs (agriscenko)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.47
@@ -3408,6 +3433,7 @@ A.F....... [ZBX-17012] fixed URL validator to also accept relative URLs (Ivo)
 ..F....... [ZBX-17507] fixed oracle query interpreted as a multistatement (talbergs)
 ........S. [ZBX-9387] fixed incorrect maintenance calculations when DST changed to summer time (akozlovs)
 ..F....... [ZBX-17390] fixed validation of the maximum selected period (Sasha)
+..F....... [ZBX-23230] fixed LDAP connection being initialized before permissions check (gcalenko)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.19
