@@ -1669,7 +1669,7 @@ class testFormLowLevelDiscoveryOverrides extends CWebTest {
 							'Delay' => '1m',
 							'Custom intervals' => [
 								['Type' => 'Flexible', 'Interval' => '50s', 'Period' => '1-7,00:00-24:00'],
-								['Type' => 'Scheduling', 'Interval' => 'wd1-5h9-18'],
+								['Type' => 'Scheduling', 'Interval' => 'wd1-5h9-18']
 							]
 						],
 						'History storage period' => ['ophistory_history_mode' => 'Do not keep history'],
