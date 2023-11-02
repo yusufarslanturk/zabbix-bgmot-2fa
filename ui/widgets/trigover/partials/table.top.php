@@ -25,15 +25,12 @@ use Widgets\TrigOver\Includes\ViewHelper;
  * @var CPartial $this
  * @var array    $data
  */
-
-$table = (new CTableInfo())
-	->makeVerticalRotation()
-	->setHeadingColumn(0);
+$table = (new CTableInfo())->setHeadingColumn(0);
 
 $headings[] = _('Triggers');
 foreach ($data['hosts_by_name'] as $hostname => $hostid) {
-	$headings[] = (new CColHeader($hostname))
-		->addClass('vertical_rotation')
+	$headings[] = (new CSpan($hostname))
+		->addClass(ZBX_STYLE_TEXT_VERTICAL)
 		->setTitle($hostname);
 }
 

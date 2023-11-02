@@ -36,7 +36,6 @@ $browser-sprite-path: '../img/browser-sprite.png?20221026';
 @import "components/dashboard/widget-clock";
 @import "components/dashboard/widget-inaccessible";
 @import "components/dashboard/widget-item";
-@import "components/dashboard/widget-slareport";
 @import "components/dashboard/widget-svggraph";
 @import "components/dashboard/widget-tophosts";
 @import "components/diff";
@@ -313,6 +312,10 @@ form {
 	border-collapse: separate;
 	border: 1px solid $ui-border-color;
 
+	&.fixed {
+		table-layout: fixed;
+	}
+
 	.action-container {
 		display: flex;
 		width: 100%;
@@ -347,7 +350,11 @@ form {
 		.icon-depend-up,
 		.icon-depend-down,
 		.icon-ackn {
-			margin: 0 4px -3px 0;
+			margin-bottom: -3px;
+
+			&:not(:first-of-type) {
+				margin-left: 4px;
+			}
 		}
 
 		// Align tags and checkboxes. Tags are too low.
@@ -726,8 +733,12 @@ form {
 			}
 		}
 
-		.vertical {
+		.text-vertical {
+			max-height: 150px;
+			overflow: hidden;
+			text-overflow: ellipsis;
 			writing-mode: vertical-lr;
+			line-height: 22px;
 			transform: rotate(180deg);
 		}
 
@@ -819,11 +830,6 @@ form {
 
 	tbody th {
 		text-align: left;
-	}
-
-	.vertical_rotation_inner {
-		transform: rotate(270deg);
-		white-space: nowrap;
 	}
 
 	.list-table-footer {
@@ -1109,12 +1115,6 @@ form {
 .wordbreak {
 	white-space: pre-wrap;
 	word-break: break-word;
-}
-
-.overflow-table {
-	overflow-x: auto;
-	position: relative;
-	@extend %webkit-hor-scrollbar;
 }
 
 .problem-expand-td {
@@ -1529,6 +1529,7 @@ form {
 	}
 
 	.table-forms-td-left {
+		position: relative;
 		display: table-cell;
 		padding: 5px 0;
 		text-align: right;
@@ -1544,6 +1545,12 @@ form {
 			.icon-info {
 				margin-left: 5px;
 			}
+		}
+
+		.checkbox-radio {
+			right: 0;
+			margin-right: 0;
+			margin-left: 0;
 		}
 	}
 
@@ -1606,6 +1613,11 @@ form {
 				margin-top: 5px;
 			}
 		}
+	}
+
+	.table-subforms {
+		margin-top: -5px;
+		margin-bottom: -5px;
 	}
 
 	h4 {
@@ -1778,9 +1790,7 @@ input {
 textarea {
 	margin: 0;
 	padding: 4px 5px;
-	min-height: 24px;
 	overflow: auto;
-	resize: vertical;
 	font: {
 		family: $font-stack;
 		size: $font-form-size;
@@ -4696,6 +4706,7 @@ $browser-logos: (
 
 	&::-webkit-scrollbar {
 		width: 9px;
+		height: 9px;
 	}
 
 	&::-webkit-scrollbar-track {
@@ -4706,15 +4717,6 @@ $browser-logos: (
 		background-color: $scrollbar-thumb-color;
 		border: 1px solid darken($scrollbar-thumb-color, $scrollbar-thumb-color-darken);
 	}
-}
-
-// TODO: Legacy
-%webkit-hor-scrollbar {
-	&::-webkit-scrollbar {
-		height: 9px;
-	}
-
-	@extend %webkit-scrollbar;
 }
 
 %cursor-drag {
@@ -5423,7 +5425,7 @@ a.icon-count {
 
 .icon-action-suppress,
 .icon-action-unsuppress,
-.icon-invisible {
+a.icon-invisible {
 	&:link,
 	&:hover,
 	&:focus {
