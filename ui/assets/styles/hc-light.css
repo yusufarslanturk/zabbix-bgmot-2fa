@@ -6734,13 +6734,13 @@ a.icon-count {
 .icon-action-unsuppress:link,
 .icon-action-unsuppress:hover,
 .icon-action-unsuppress:focus,
-.icon-invisible:link,
-.icon-invisible:hover,
-.icon-invisible:focus {
+a.icon-invisible:link,
+a.icon-invisible:hover,
+a.icon-invisible:focus {
   border-bottom: none; }
 .icon-action-suppress:focus,
 .icon-action-unsuppress:focus,
-.icon-invisible:focus {
+a.icon-invisible:focus {
   box-shadow: 0 0 0 2px #000000;
   border-radius: 2px; }
 
