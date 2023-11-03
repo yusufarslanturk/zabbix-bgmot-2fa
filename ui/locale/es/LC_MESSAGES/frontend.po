@@ -2828,6 +2828,12 @@ msgid_plural "Cannot disable media types"
 msgstr[0] "No pude desactivar el tipo de soporte"
 msgstr[1] "No pude desactivar los tipos de soporte"
 
+#: app/controllers/CControllerModuleUpdate.php:146
+msgid "Cannot disable module"
+msgid_plural "Cannot disable modules"
+msgstr[0] ""
+msgstr[1] ""
+
 #: app/controllers/CControllerModuleUpdate.php:165
 #, c-format
 msgid "Cannot disable module: %1$s."
@@ -2917,6 +2923,12 @@ msgid "Cannot enable media type"
 msgid_plural "Cannot enable media types"
 msgstr[0] "No se pudo habilitar el tipo de soporte"
 msgstr[1] "No se pudieron habilitar los tipos de soporte"
+
+#: app/controllers/CControllerModuleUpdate.php:141
+msgid "Cannot enable module"
+msgid_plural "Cannot enable modules"
+msgstr[0] ""
+msgstr[1] ""
 
 #: app/controllers/CControllerModuleUpdate.php:160
 #, c-format
@@ -3957,6 +3969,10 @@ msgstr "No se puede actualizar el período de mantenimiento"
 #: app/controllers/CControllerMediatypeUpdate.php:180
 msgid "Cannot update media type"
 msgstr "No se pudo actualizar el tipo de medios"
+
+#: app/controllers/CControllerModuleUpdate.php:137
+msgid "Cannot update module"
+msgstr ""
 
 #: app/controllers/CControllerModuleUpdate.php:157
 #, c-format
@@ -13260,10 +13276,22 @@ msgid_plural "Modules deleted: %1$s."
 msgstr[0] ""
 msgstr[1] ""
 
+#: app/controllers/CControllerModuleUpdate.php:132
+msgid "Module disabled"
+msgid_plural "Modules disabled"
+msgstr[0] ""
+msgstr[1] ""
+
 #: app/controllers/CControllerModuleUpdate.php:150
 #, c-format
 msgid "Module disabled: %1$s."
 msgid_plural "Modules disabled: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/controllers/CControllerModuleUpdate.php:129
+msgid "Module enabled"
+msgid_plural "Modules enabled"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -13273,6 +13301,10 @@ msgid "Module enabled: %1$s."
 msgid_plural "Modules enabled: %1$s."
 msgstr[0] ""
 msgstr[1] ""
+
+#: app/controllers/CControllerModuleUpdate.php:126
+msgid "Module updated"
+msgstr ""
 
 #: app/controllers/CControllerModuleUpdate.php:142
 #, c-format
