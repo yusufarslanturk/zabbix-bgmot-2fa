@@ -1080,7 +1080,7 @@ class CSvgGraph extends CSvg {
 							$sum_positive += $point_value;
 						}
 						else {
-							$value_from = $point_value + $point_value;
+							$value_from = $point_value - $point_value;
 							$value_to = $point_value;
 							$sum_negative += $point_value;
 						}
