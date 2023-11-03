@@ -806,7 +806,7 @@ class testPageAdministrationGeneralModules extends CWebTest {
 		$this->page->waitUntilReady();
 		$this->query('button:Update')->one()->click();
 
-		$this->assertMessage(TEST_GOOD, 'Module updated: 1st Module name.');
+		$this->assertMessage(TEST_GOOD, 'Module updated');
 		// Check that Module has been updated and that there are no changes took place.
 		$this->assertEquals($initial_hash, CDBHelper::getHash($sql));
 	}
@@ -1031,7 +1031,7 @@ class testPageAdministrationGeneralModules extends CWebTest {
 		// Wait for the Success message to confirm that modules were disabled before heading to the dashboard.
 		$message = CMessageElement::find()->waitUntilVisible()->one();
 		$this->assertTrue($message->isGood());
-		$this->assertStringStartsWith('Modules disabled:', $message->getText());
+		$this->assertStringStartsWith('Modules disabled', $message->getText());
 
 		// Open dashboard and check that all widgets are inaccessible.
 		$this->page->open('zabbix.php?action=dashboard.view&dashboardid='.self::$dashboardid)->waitUntilReady();
@@ -1292,15 +1292,15 @@ class testPageAdministrationGeneralModules extends CWebTest {
 		}
 		// In case of negative test check error message and confirm that module wasn't applied.
 		if (CTestArrayHelper::get($module, 'expected', TEST_GOOD) === TEST_BAD) {
-			$title = ($view === 'form') ? 'Cannot update module: ' : 'Cannot enable module: ';
-			$this->assertMessage($module['expected'], $title.$module['module_name'].'.', $module['error_details']);
+			$title = ($view === 'form') ? 'Cannot update module' : 'Cannot enable module';
+			$this->assertMessage($module['expected'], $title, $module['error_details']);
 			$this->assertModuleDisabled($module);
 
 			return;
 		}
 		// Check message and confirm that changes, made by the enabled module, took place.
-		$message = ($view === 'form') ? 'Module updated: ' : 'Module enabled: ';
-		$this->assertMessage(CTestArrayHelper::get($module, 'expected', TEST_GOOD), $message.$module['module_name'].'.');
+		$message = ($view === 'form') ? 'Module updated' : 'Module enabled';
+		$this->assertMessage(CTestArrayHelper::get($module, 'expected', TEST_GOOD), $message);
 	}
 
 	/**
@@ -1324,8 +1324,8 @@ class testPageAdministrationGeneralModules extends CWebTest {
 			$this->changeModuleStatusFromPage($module['module_name'], 'Enabled');
 		}
 		// Check message and confirm that changes, made by the module, were reversed.
-		$message = ($view === 'form') ? 'Module updated: ' : 'Module disabled: ';
-		$this->assertMessage(TEST_GOOD, $message.$module['module_name'].'.');
+		$message = ($view === 'form') ? 'Module updated' : 'Module disabled';
+		$this->assertMessage(TEST_GOOD, $message);
 	}
 
 	/**
