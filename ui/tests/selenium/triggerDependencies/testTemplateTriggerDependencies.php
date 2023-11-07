@@ -423,8 +423,8 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 		$this->page->waitUntilReady();
 
 		// Creating new template trigger - expression is mandatory.
-		$this->triggerCreateUpdate($data, 'last(/Template with everything/everything)=0', 'Trigger added',
-			'Cannot add trigger'
+		$this->triggerCreateUpdate($data, 'Trigger added', 'last(/Template with everything/everything)=0',
+				'Cannot add trigger'
 		);
 	}
 
@@ -483,7 +483,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 		)->waitUntilReady();
 		$this->query('link:Template trigger update')->one()->click();
 		$this->page->waitUntilReady();
-		$this->triggerCreateUpdate($data, null, 'Trigger updated', 'Cannot update trigger', 'Template trigger update');
+		$this->triggerCreateUpdate($data, 'Trigger updated', null, 'Cannot update trigger', 'Template trigger update');
 	}
 
 	public static function getLinkedTriggerUpdateData() {
@@ -541,7 +541,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 		)->waitUntilReady();
 		$this->query('link:trigger template linked update')->one()->click();
 		$this->page->waitUntilReady();
-		$this->triggerCreateUpdate($data, null, 'Trigger updated', 'Cannot update trigger', 'trigger template linked update');
+		$this->triggerCreateUpdate($data, 'Trigger updated', null, 'Cannot update trigger', 'trigger template linked update');
 	}
 
 	public static function getTriggerPrototypeCreateData() {
@@ -595,8 +595,8 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 		$this->page->waitUntilReady();
 
 		// Creating new template trigger prototype - expression is mandatory.
-		$this->triggerCreateUpdate($data, 'last(/Template with everything/everything_prot_[{#KEY}])=0',
-			'Trigger prototype added'
+		$this->triggerCreateUpdate($data, 'Trigger prototype added',
+				'last(/Template with everything/everything_prot_[{#KEY}])=0'
 		);
 	}
 
@@ -630,8 +630,8 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 			self::$template_druleids['Template with everything:everything_drule'].'&triggerid='.
 			self::$trigger_protids['Template trigger prototype update{#KEY}'].'&context=template'
 		)->waitUntilReady();
-		$this->triggerCreateUpdate($data, null, 'Trigger prototype updated', 'Cannot update trigger prototype',
-			'Template trigger prototype update{#KEY}'
+		$this->triggerCreateUpdate($data, 'Trigger prototype updated', null, 'Cannot update trigger prototype',
+				'Template trigger prototype update{#KEY}'
 		);
 	}
 
@@ -696,8 +696,8 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 			->query('link:Trigger prototypes')->waitUntilClickable()->one()->click();
 		$this->page->waitUntilReady();
 		$this->query('link:trigger prototype template update{#KEY}')->one()->click();
-		$this->triggerCreateUpdate($data, null, 'Trigger prototype updated', 'Cannot update trigger prototype',
-			'trigger prototype template update{#KEY}'
+		$this->triggerCreateUpdate($data, 'Trigger prototype updated', null, 'Cannot update trigger prototype',
+				'trigger prototype template update{#KEY}'
 		);
 	}
 }
