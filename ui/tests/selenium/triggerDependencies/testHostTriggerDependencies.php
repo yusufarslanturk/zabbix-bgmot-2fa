@@ -67,7 +67,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 		]);
 		$this->assertArrayHasKey('triggerids', $template_triggers);
 
-		$item_prot = CDataHelper::call('itemprototype.create', [
+		$item_prototype = CDataHelper::call('itemprototype.create', [
 			[
 				'name' => 'Item prot for linking',
 				'key_' => 'linking_prot_[{#KEY}]',
@@ -78,9 +78,9 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				'delay' => 0
 			]
 		]);
-		$this->assertArrayHasKey('itemids', $item_prot);
+		$this->assertArrayHasKey('itemids', $item_prototype);
 
-		$trigger_prot = CDataHelper::call('triggerprototype.create', [
+		$trigger_prototype = CDataHelper::call('triggerprototype.create', [
 			[
 				'description' => 'trigger prototype linked{#KEY}',
 				'expression' => 'last(/Template that linked to host/linking_prot_[{#KEY}])=0'
@@ -90,7 +90,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				'expression' => 'last(/Template that linked to host/linking_prot_[{#KEY}])=0'
 			]
 		]);
-		$this->assertArrayHasKey('triggerids', $trigger_prot);
+		$this->assertArrayHasKey('triggerids', $trigger_prototype);
 
 		$host_result = CDataHelper::createHosts([
 			[
@@ -173,7 +173,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 			]
 		]);
 
-		$host_item_prot = CDataHelper::call('itemprototype.create', [
+		$host_item_prototype = CDataHelper::call('itemprototype.create', [
 			[
 				'name' => 'Host Item prot with everything',
 				'key_' => 'host_everything_prot_[{#KEY}]',
@@ -193,9 +193,9 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				'delay' => 0
 			]
 		]);
-		$this->assertArrayHasKey('itemids', $host_item_prot);
+		$this->assertArrayHasKey('itemids', $host_item_prototype);
 
-		$host_trigger_prot = CDataHelper::call('triggerprototype.create', [
+		$host_trigger_prototype = CDataHelper::call('triggerprototype.create', [
 			[
 				'description' => 'Host trigger prototype update{#KEY}',
 				'expression' => 'last(/Host with everything/host_everything_prot_[{#KEY}])=0'
@@ -217,7 +217,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				'expression' => 'last(/Host with linked template/host_linking_prot_[{#KEY}])=0'
 			]
 		]);
-		$this->assertArrayHasKey('triggerids', $host_trigger_prot);
+		$this->assertArrayHasKey('triggerids', $host_trigger_prototype);
 		self::$trigger_protids = CDataHelper::getIds('description');
 
 		// Add dependence to already discovered trigger for one special scenario.
@@ -231,9 +231,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Simple trigger',
 					'dependencies' => [
-						'Host with everything' => [
-							'Host trigger everything'
-						]
+						'Host with everything' => ['Host trigger everything']
 					],
 					'result' => [
 						'Host with everything: Host trigger everything'
@@ -245,10 +243,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Two trigger dependencies',
 					'dependencies' => [
-						'Host with everything' => [
-							'Host trigger everything',
-							'Host trigger everything 2'
-						]
+						'Host with everything' => ['Host trigger everything', 'Host trigger everything 2']
 					],
 					'result' => [
 						'Host with everything: Host trigger everything',
@@ -261,9 +256,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Triggers from another hosts',
 					'dependencies' => [
-						'Host with linked template' => [
-							'Host trigger 2'
-						]
+						'Host with linked template' => ['Host trigger 2']
 					],
 					'result' => [
 						'Host with linked template: Host trigger 2'
@@ -275,12 +268,8 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Two triggers from different',
 					'dependencies' => [
-						'Host with linked template' => [
-							'Host trigger 2'
-						],
-						'Host with everything' => [
-							'Host trigger everything'
-						]
+						'Host with linked template' => ['Host trigger 2'],
+						'Host with everything' => ['Host trigger everything']
 					],
 					'result' => [
 						'Host with linked template: Host trigger 2',
@@ -293,9 +282,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Depends on linked trigger',
 					'dependencies' => [
-						'Host with linked template' => [
-							'trigger linked'
-						]
+						'Host with linked template' => ['trigger linked']
 					],
 					'result' => [
 						'Host with linked template: trigger linked'
@@ -329,9 +316,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 					'expected' => TEST_BAD,
 					'name' => 'Host trigger update',
 					'dependencies' => [
-						'Host with everything' => [
-							'Host trigger update'
-						]
+						'Host with everything' => ['Host trigger update']
 					],
 					'error_message' => 'Trigger "Host trigger update" cannot depend on the trigger'.
 						' "Host trigger update", because a circular linkage'.
@@ -344,9 +329,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 					'expected' => TEST_BAD,
 					'name' => 'Host trigger update',
 					'dependencies' => [
-						'Host with everything' => [
-							'Host trigger with dependence'
-						]
+						'Host with everything' => ['Host trigger with dependence']
 					],
 					'error_message' => 'Trigger "Host trigger update" cannot depend on the trigger'.
 						' "Host trigger with dependence", because a circular linkage'.
@@ -378,9 +361,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				[
 					'expected' => TEST_BAD,
 					'dependencies' => [
-						'Host with everything' => [
-							'trigger linked'
-						]
+						'Host with everything' => ['trigger linked']
 					],
 					'error_message' => 'Trigger "trigger linked" cannot depend on the trigger "trigger linked", because'.
 						' a circular linkage ("trigger linked" -> "trigger linked") would occur.'
@@ -437,9 +418,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Depends on trigger and trigger_prot',
 					'dependencies' => [
-						'Host with everything' => [
-							'Host trigger everything'
-						]
+						'Host with everything' => ['Host trigger everything']
 					],
 					'prototype_dependencies' => [
 						'Host trigger prot simple{#KEY}'
@@ -539,9 +518,7 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 						'trigger prototype linked{#KEY}'
 					],
 					'dependencies' => [
-						'Host with everything' => [
-							'Host trigger everything'
-						]
+						'Host with everything' => ['Host trigger everything']
 					],
 					'result' => [
 						'Host with everything: Host trigger everything',

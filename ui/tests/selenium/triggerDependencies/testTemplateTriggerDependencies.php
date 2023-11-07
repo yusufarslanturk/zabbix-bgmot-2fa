@@ -173,7 +173,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 			]
 		]);
 
-		$item_prot = CDataHelper::call('itemprototype.create', [
+		$item_prototype = CDataHelper::call('itemprototype.create', [
 			[
 				'name' => 'Item prot with everything',
 				'key_' => 'everything_prot_[{#KEY}]',
@@ -193,9 +193,9 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				'delay' => 0
 			]
 		]);
-		$this->assertArrayHasKey('itemids', $item_prot);
+		$this->assertArrayHasKey('itemids', $item_prototype);
 
-		$trigger_prot = CDataHelper::call('triggerprototype.create', [
+		$trigger_prototype = CDataHelper::call('triggerprototype.create', [
 			[
 				'description' => 'Template trigger prototype update{#KEY}',
 				'expression' => 'last(/Template with everything/everything_prot_[{#KEY}])=0'
@@ -213,7 +213,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				'expression' => 'last(/Template that linked to template/template_prot_[{#KEY}])=0'
 			]
 		]);
-		$this->assertArrayHasKey('triggerids', $trigger_prot);
+		$this->assertArrayHasKey('triggerids', $trigger_prototype);
 		self::$trigger_protids = CDataHelper::getIds('description');
 
 		$host_result = CDataHelper::createHosts([
@@ -256,7 +256,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 		]);
 		$this->assertArrayHasKey('triggerids', $host_triggers);
 
-		$host_item_prot = CDataHelper::call('itemprototype.create', [
+		$host_item_prototype = CDataHelper::call('itemprototype.create', [
 			[
 				'name' => 'Host Item prot with everything',
 				'key_' => 'host_everything_prot_[{#KEY}]',
@@ -267,7 +267,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				'delay' => 0
 			]
 		]);
-		$this->assertArrayHasKey('itemids', $host_item_prot);
+		$this->assertArrayHasKey('itemids', $host_item_prototype);
 	}
 
 	public static function getTriggerCreateBadData() {
@@ -278,9 +278,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 					'expected' => TEST_BAD,
 					'name' => 'Depends on linked trigger',
 					'dependencies' => [
-						'Template that linked to template' => [
-							'trigger template linked'
-						]
+						'Template that linked to template' => ['trigger template linked']
 					],
 					'error_message' => 'Trigger "Depends on linked trigger" cannot depend on the trigger "trigger'.
 						' template linked" from the template "Template that linked to template", because dependencies'.
@@ -297,9 +295,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Simple template trigger',
 					'dependencies' => [
-						'Template with everything' => [
-							'trigger simple'
-						]
+						'Template with everything' => ['trigger simple']
 					],
 					'result' => [
 						'Template with everything: trigger simple'
@@ -311,10 +307,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Two trigger dependencies',
 					'dependencies' => [
-						'Template with everything' => [
-							'trigger simple',
-							'trigger simple_2'
-						]
+						'Template with everything' => ['trigger simple', 'trigger simple_2']
 					],
 					'result' => [
 						'Template with everything: trigger simple',
@@ -327,9 +320,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Triggers from another template',
 					'dependencies' => [
-						'Template that linked to host' => [
-							'trigger linked'
-						]
+						'Template that linked to host' => ['trigger linked']
 					],
 					'result' => [
 						'Template that linked to host: trigger linked'
@@ -341,12 +332,8 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Two triggers from different',
 					'dependencies' => [
-						'Template that linked to host' => [
-							'trigger linked'
-						],
-						'Template with everything' => [
-							'trigger simple'
-						]
+						'Template that linked to host' => ['trigger linked'],
+						'Template with everything' => ['trigger simple']
 					],
 					'result' => [
 						'Template that linked to host: trigger linked',
@@ -359,9 +346,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Depends on hosts trigger',
 					'host_dependencies' => [
-						'Host with everything' => [
-							'Host trigger everything'
-						]
+						'Host with everything' => ['Host trigger everything']
 					],
 					'result' => [
 						'Host with everything: Host trigger everything'
@@ -373,10 +358,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Depends on two hosts trigger',
 					'host_dependencies' => [
-						'Host with everything' => [
-							'Host trigger everything',
-							'Host trigger everything 2'
-						]
+						'Host with everything' => ['Host trigger everything', 'Host trigger everything 2']
 					],
 					'result' => [
 						'Host with everything: Host trigger everything',
@@ -389,9 +371,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Depends on trigger that linked from another template',
 					'dependencies' => [
-						'Template with linked template' => [
-							'trigger template linked'
-						]
+						'Template with linked template' => ['trigger template linked']
 					],
 					'result' => [
 						'Template with linked template: trigger template linked'
@@ -403,14 +383,10 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Depends on trigger from template and host',
 					'host_dependencies' => [
-						'Host with everything' => [
-							'Host trigger everything'
-						]
+						'Host with everything' => ['Host trigger everything']
 					],
 					'dependencies' => [
-						'Template with everything' => [
-							'trigger simple'
-						]
+						'Template with everything' => ['trigger simple']
 					],
 					'result' => [
 						'Host with everything: Host trigger everything',
@@ -423,9 +399,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Depends on trigger that linked to this template',
 					'dependencies' => [
-						'Template with everything' => [
-							'trigger template linked'
-						]
+						'Template with everything' => ['trigger template linked']
 					],
 					'result' => [
 						'Template with everything: trigger template linked'
@@ -462,9 +436,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 					'expected' => TEST_BAD,
 					'name' => 'Template trigger update',
 					'dependencies' => [
-						'Template with everything' => [
-							'Template trigger update'
-						]
+						'Template with everything' => ['Template trigger update']
 					],
 					'error_message' => 'Trigger "Template trigger update" cannot depend on the trigger "Template trigger update",'.
 						' because a circular linkage ("Template trigger update" -> "Template trigger update") would occur.'
@@ -476,9 +448,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 					'expected' => TEST_BAD,
 					'name' => 'Depends on linked trigger',
 					'dependencies' => [
-						'Template that linked to template' => [
-							'trigger template linked'
-						]
+						'Template that linked to template' => ['trigger template linked']
 					],
 					'error_message' => 'Trigger "Template trigger update" cannot depend on the trigger "trigger'.
 						' template linked" from the template "Template that linked to template", because dependencies'.
@@ -491,9 +461,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 					'expected' => TEST_BAD,
 					'name' => 'Depends on dependent trigger',
 					'dependencies' => [
-						'Template with everything' => [
-							'Template that depends on trigger'
-						]
+						'Template with everything' => ['Template that depends on trigger']
 					],
 					'error_message' => 'Trigger "Template trigger update" cannot depend on the trigger "Template that'.
 						' depends on trigger", because a circular linkage ("Template that depends on trigger" ->'.
@@ -525,9 +493,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'expected' => TEST_BAD,
 					'dependencies' => [
-						'Template with everything' => [
-							'trigger template linked update'
-						]
+						'Template with everything' => ['trigger template linked update']
 					],
 					'error_message' => 'Trigger "trigger template linked update" cannot depend on the trigger'.
 						' "trigger template linked update", because a circular linkage ("trigger template'.
@@ -539,9 +505,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'expected' => TEST_BAD,
 					'dependencies' => [
-						'Template with everything' => [
-							'trigger that depends on linked trigger'
-						]
+						'Template with everything' => ['trigger that depends on linked trigger']
 					],
 					'error_message' => 'Trigger "trigger template linked update" cannot depend on the trigger'.
 						' "trigger that depends on linked trigger", because a circular linkage ("trigger that depends'.
@@ -555,9 +519,7 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 					'expected' => TEST_BAD,
 					'name' => 'Depends on linked trigger',
 					'dependencies' => [
-						'Template that linked to template' => [
-							'trigger template linked'
-						]
+						'Template that linked to template' => ['trigger template linked']
 					],
 					'error_message' => 'Trigger "trigger template linked update" cannot depend on the trigger "trigger'.
 						' template linked" from the template "Template that linked to template", because dependencies'.
@@ -589,14 +551,10 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 				[
 					'name' => 'Depends on trigger, hosts trigger and prototype_{#KEY}',
 					'host_dependencies' => [
-						'Host with everything' => [
-							'Host trigger everything'
-						]
+						'Host with everything' => ['Host trigger everything']
 					],
 					'dependencies' => [
-						'Template with everything' => [
-							'trigger simple'
-						]
+						'Template with everything' => ['trigger simple']
 					],
 					'prototype_dependencies' => [
 						'trigger prototype simple{#KEY}'
@@ -695,14 +653,10 @@ class testTemplateTriggerDependencies extends testTriggerDependencies {
 			[
 				[
 					'host_dependencies' => [
-						'Host with everything' => [
-							'Host trigger everything'
-						]
+						'Host with everything' => ['Host trigger everything']
 					],
 					'dependencies' => [
-						'Template with everything' => [
-							'trigger simple'
-						]
+						'Template with everything' => ['trigger simple']
 					],
 					'prototype_dependencies' => [
 						'trigger prototype template{#KEY}'
