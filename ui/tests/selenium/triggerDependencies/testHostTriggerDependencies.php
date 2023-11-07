@@ -567,6 +567,6 @@ class testHostTriggerDependencies extends testTriggerDependencies {
 		$this->assertFalse($table->query('xpath:.//button[contains(text(), "Add")]')->exists());
 
 		// Check that link with discovered trigger exists in table.
-		$table->query('link:Host for triggers filtering: Trigger disabled with tags')->one()->isClickable();
+		$this->assertTrue($table->query('link:Host for triggers filtering: Trigger disabled with tags')->one()->isClickable());
 	}
 }
