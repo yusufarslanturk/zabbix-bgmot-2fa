@@ -104,7 +104,8 @@ class COverlayDialogElement extends CElement {
 			$this->getFooter()->query('button:Cancel')->one()->click();
 		}
 		else {
-			$this->query('class:btn-overlay-close')->one()->click();
+			$selector = 'xpath:.//button[@class="overlay-close-btn"]|.//button[@class="btn-overlay-close"]';
+			$this->query($selector)->one()->click();
 		}
 
 		if ($count === 1) {
