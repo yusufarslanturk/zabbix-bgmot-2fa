@@ -24,6 +24,8 @@
  */
 class C62ImportConverter extends CConverter {
 
+	private static $import_format;
+
 	private const DASHBOARD_WIDGET_TYPE = [
 		CXmlConstantName::DASHBOARD_WIDGET_TYPE_CLOCK => CXmlConstantValue::DASHBOARD_WIDGET_TYPE_CLOCK,
 		CXmlConstantName::DASHBOARD_WIDGET_TYPE_GRAPH_CLASSIC => CXmlConstantValue::DASHBOARD_WIDGET_TYPE_GRAPH_CLASSIC,
@@ -36,11 +38,14 @@ class C62ImportConverter extends CConverter {
 	/**
 	 * Convert import data from 6.2 to 6.4 version.
 	 *
-	 * @param array $data
+	 * @param array  $data
+	 * @param string $format
 	 *
 	 * @return array
 	 */
-	public function convert(array $data): array {
+	public function convert(array $data, string $import_format = CXmlValidatorGeneral::XML): array {
+		self::$import_format = $import_format;
+
 		$data['zabbix_export']['version'] = '6.4';
 
 		unset($data['zabbix_export']['date']);
@@ -69,13 +74,34 @@ class C62ImportConverter extends CConverter {
 	 */
 	private static function convertHosts(array $hosts): array {
 		foreach ($hosts as &$host) {
+			if (array_key_exists('items', $host)) {
+				$host['items'] = self::convertItems($host['items'], [
+					'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
+					'templateid' => 0,
+					'hosts' => [['status' => HOST_STATUS_MONITORED]]
+				]);
+			}
+
 			if (array_key_exists('discovery_rules', $host)) {
-				$host['discovery_rules'] = self::convertDiscoveryRules($host['discovery_rules']);
+				$host['discovery_rules'] = self::convertDiscoveryRules($host['discovery_rules'], [
+					'flags' => ZBX_FLAG_DISCOVERY_RULE,
+					'templateid' => 0,
+					'hosts' => [['status' => HOST_STATUS_MONITORED]]
+				]);
 			}
 		}
 		unset($host);
 
 		return $hosts;
+	}
+
+	private static function convertItems(array $items, array $internal_fields): array {
+		foreach ($items as &$item) {
+			$item = self::getSanitizedItemFields($item, $internal_fields);
+		}
+		unset($item);
+
+		return $items;
 	}
 
 	/**
@@ -87,8 +113,20 @@ class C62ImportConverter extends CConverter {
 	 */
 	private static function convertTemplates(array $templates): array {
 		foreach ($templates as &$template) {
+			if (array_key_exists('items', $template)) {
+				$template['items'] = self::convertItems($template['items'], [
+					'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
+					'templateid' => 1,
+					'hosts' => [['status' => HOST_STATUS_TEMPLATE]]
+				]);
+			}
+
 			if (array_key_exists('discovery_rules', $template)) {
-				$template['discovery_rules'] = self::convertDiscoveryRules($template['discovery_rules']);
+				$template['discovery_rules'] = self::convertDiscoveryRules($template['discovery_rules'], [
+					'flags' => ZBX_FLAG_DISCOVERY_RULE,
+					'templateid' => 1,
+					'hosts' => [['status' => HOST_STATUS_TEMPLATE]]
+				]);
 			}
 
 			if (array_key_exists('dashboards', $template)) {
@@ -100,36 +138,28 @@ class C62ImportConverter extends CConverter {
 		return $templates;
 	}
 
-	/**
-	 * Convert discovery rules.
-	 *
-	 * @param array $discovery_rules
-	 *
-	 * @return array
-	 */
-	private static function convertDiscoveryRules(array $discovery_rules): array {
+	private static function convertDiscoveryRules(array $discovery_rules, array $internal_fields): array {
 		foreach ($discovery_rules as &$discovery_rule) {
 			if (array_key_exists('item_prototypes', $discovery_rule)) {
-				$discovery_rule['item_prototypes'] = self::convertItemPrototypes($discovery_rule['item_prototypes']);
+				$discovery_rule['item_prototypes'] = self::convertItemPrototypes($discovery_rule['item_prototypes'],
+					['flags' => ZBX_FLAG_DISCOVERY_PROTOTYPE] + $internal_fields
+				);
 			}
+
+			$discovery_rule = self::getSanitizedItemFields($discovery_rule, $internal_fields);
 		}
 		unset($discovery_rule);
 
 		return $discovery_rules;
 	}
 
-	/**
-	 * Convert item prototypes.
-	 *
-	 * @param array $item_prototypes
-	 *
-	 * @return array
-	 */
-	private static function convertItemPrototypes(array $item_prototypes): array {
+	private static function convertItemPrototypes(array $item_prototypes, array $internal_fields): array {
 		foreach ($item_prototypes as &$item_prototype) {
 			if (array_key_exists('inventory_link', $item_prototype)) {
 				unset($item_prototype['inventory_link']);
 			}
+
+			$item_prototype = self::getSanitizedItemFields($item_prototype, $internal_fields);
 		}
 		unset($item_prototype);
 
@@ -191,5 +221,60 @@ class C62ImportConverter extends CConverter {
 		unset($media_type);
 
 		return $media_types;
+	}
+
+	/**
+	 * Get sanitized item fields of given import input.
+	 *
+	 * @param array   $input
+	 *        int     $input['type']
+	 *        string  $input['key']
+	 * @param array   $internal_fields
+	 *        int     $internal_fields['flags']
+	 *        int     $internal_fields['templateid']
+	 *        int     $internal_fields['hosts'][0]['status']
+	 *
+	 * @return array
+	 */
+	private static function getSanitizedItemFields(array $input, array $internal_fields): array {
+		static $schema;
+
+		if ($schema === null) {
+			$import_validator_factory = new CImportValidatorFactory(self::$import_format);
+			$schema = $import_validator_factory
+				->getObject(ZABBIX_EXPORT_VERSION)
+				->getSchema();
+		}
+
+		if (!array_key_exists('key', $input) || !array_key_exists('type', $input)) {
+			return $input;
+		}
+
+		$item_convert = [
+			'zabbix_export' => [
+				'item' => $input
+			]
+		];
+		$api_input = (new CConstantImportConverter($schema))->convert($item_convert)['zabbix_export']['item'];
+		$api_input = CArrayHelper::renameKeys($api_input, ['key' => 'key_']);
+		$api_input = getSanitizedItemFields($api_input + $internal_fields + DB::getDefaults('items'));
+		$api_input = array_merge(array_intersect_key($input, array_flip(['uuid', 'name', 'key', 'type'])), $api_input);
+		$non_api_nodes = array_flip([
+			'triggers', 'trigger_prototypes', 'item_prototypes', 'graph_prototypes', 'host_prototypes'
+		]);
+
+		return self::intersectFieldsRecursive($input, $api_input) + array_intersect_key($input, $non_api_nodes);
+	}
+
+	private static function intersectFieldsRecursive(array $input, array $api_input): array {
+		$input = array_intersect_key($input, $api_input);
+
+		foreach ($input as $key => $value) {
+			if (is_array($value)) {
+				$input[$key] = self::intersectFieldsRecursive($input[$key], $api_input[$key]);
+			}
+		}
+
+		return $input;
 	}
 }
