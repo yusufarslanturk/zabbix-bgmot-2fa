@@ -48,8 +48,9 @@
 				'[name="ldap_jit_status"],[name="ldap_case_sensitive"],[name="jit_provision_interval"]'
 			);
 			this.jit_provision_interval = this.form.querySelector('[name="jit_provision_interval"]');
+			this.ldap_auth_enabled = this.form.querySelector('[type="checkbox"][name="ldap_auth_enabled"]');
 			const saml_readonly = !this.form.querySelector('[type="checkbox"][name="saml_auth_enabled"]').checked;
-			const ldap_readonly = !this.form.querySelector('[type="checkbox"][name="ldap_auth_enabled"]').checked;
+			const ldap_readonly = this.ldap_auth_enabled === null || !this.ldap_auth_enabled.checked;
 
 			this._addEventListeners();
 			this._addLdapServers(ldap_servers, ldap_default_row_index);
@@ -60,73 +61,11 @@
 			this._renderProvisionMedia(saml_provision_media);
 			this._setTableVisiblityState(this.saml_media_type_mapping_table, saml_readonly);
 
-			this.form.querySelector('[type="checkbox"][name="ldap_auth_enabled"]').dispatchEvent(new Event('change'));
 			this.form.querySelector('[type="checkbox"][name="saml_auth_enabled"]').dispatchEvent(new Event('change'));
 		}
 
 		_addEventListeners() {
-			this.ldap_servers_table.addEventListener('click', (e) => {
-				if (e.target.classList.contains('disabled')) {
-					return;
-				}
-				else if (e.target.classList.contains('js-add')) {
-					this.editLdapServer();
-				}
-				else if (e.target.classList.contains('js-edit')) {
-					this.editLdapServer(e.target.closest('tr'));
-				}
-				else if (e.target.classList.contains('js-remove')) {
-					const table = e.target.closest('table');
-					const userdirectoryid_input = e.target.closest('tr')
-						.querySelector('input[name$="[userdirectoryid]"]');
-
-					if (userdirectoryid_input !== null) {
-						const input = document.createElement('input');
-						input.type = 'hidden';
-						input.name = 'ldap_removed_userdirectoryids[]';
-						input.value = userdirectoryid_input.value;
-						this.form.appendChild(input);
-					}
-
-					e.target.closest('tr').remove();
-
-					if (table.querySelector('input[name="ldap_default_row_index"]:checked') === null) {
-						const default_ldap = table.querySelector('input[name="ldap_default_row_index"]');
-
-						if (default_ldap !== null) {
-							default_ldap.checked = true;
-						}
-					}
-				}
-			});
-
-			this.ldap_jit_status.addEventListener('change', (e) => {
-				this.jit_provision_interval.toggleAttribute('readonly', !e.target.checked);
-				this.jit_provision_interval.toggleAttribute('disabled', !e.target.checked);
-			});
-
-			this.form.querySelector('[type="checkbox"][name="ldap_auth_enabled"]').addEventListener('change', (e) => {
-				const is_readonly = !e.target.checked;
-				const default_index = this.form.querySelector('input[name="ldap_default_row_index"]:checked');
-				const default_index_hidden = this.form.querySelector('[type="hidden"][name="ldap_default_row_index"]');
-
-				this.ldap_provisioning_fields.forEach(field => {
-					field.toggleAttribute('readonly', is_readonly);
-					field.toggleAttribute('disabled', is_readonly);
-					field.setAttribute('tabindex', is_readonly ? -1 : 0);
-				});
-				this._setTableVisiblityState(this.ldap_servers_table, is_readonly);
-				this._disableRemoveLdapServersWithUserGroups();
-
-				if (!is_readonly && !this.ldap_jit_status.checked) {
-					this.jit_provision_interval.toggleAttribute('readonly', true);
-					this.jit_provision_interval.toggleAttribute('disabled', true);
-				}
-
-				if (is_readonly && default_index && ldap_default_row_index) {
-					default_index_hidden.value = default_index.value;
-				}
-			});
+			this.#addLdapSettingsEventListeners();
 
 			document.getElementById('http_auth_enabled').addEventListener('change', (e) => {
 				this.form.querySelectorAll('[name^=http_]').forEach(field => {
@@ -223,6 +162,75 @@
 			this.form.addEventListener('submit', (e) => {
 				if (!this._authFormSubmit()) {
 					e.preventDefault();
+				}
+			});
+		}
+
+		#addLdapSettingsEventListeners() {
+			if (this.ldap_auth_enabled === null) {
+				return;
+			}
+
+			this.ldap_servers_table.addEventListener('click', (e) => {
+				if (e.target.classList.contains('disabled')) {
+					return;
+				}
+				else if (e.target.classList.contains('js-add')) {
+					this.editLdapServer();
+				}
+				else if (e.target.classList.contains('js-edit')) {
+					this.editLdapServer(e.target.closest('tr'));
+				}
+				else if (e.target.classList.contains('js-remove')) {
+					const table = e.target.closest('table');
+					const userdirectoryid_input = e.target.closest('tr')
+						.querySelector('input[name$="[userdirectoryid]"]');
+
+					if (userdirectoryid_input !== null) {
+						const input = document.createElement('input');
+						input.type = 'hidden';
+						input.name = 'ldap_removed_userdirectoryids[]';
+						input.value = userdirectoryid_input.value;
+						this.form.appendChild(input);
+					}
+
+					e.target.closest('tr').remove();
+
+					if (table.querySelector('input[name="ldap_default_row_index"]:checked') === null) {
+						const default_ldap = table.querySelector('input[name="ldap_default_row_index"]');
+
+						if (default_ldap !== null) {
+							default_ldap.checked = true;
+						}
+					}
+				}
+			});
+
+			this.ldap_jit_status.addEventListener('change', (e) => {
+				this.jit_provision_interval.toggleAttribute('readonly', !e.target.checked);
+				this.jit_provision_interval.toggleAttribute('disabled', !e.target.checked);
+			});
+
+			this.ldap_auth_enabled.addEventListener('change', (e) => {
+				const is_readonly = !e.target.checked;
+				const default_index = this.form.querySelector('input[name="ldap_default_row_index"]:checked');
+				const default_index_hidden = this.form.querySelector('[type="hidden"][name="ldap_default_row_index"]');
+
+				this.ldap_provisioning_fields.forEach(field => {
+					field.toggleAttribute('readonly', is_readonly);
+					field.toggleAttribute('disabled', is_readonly);
+					field.setAttribute('tabindex', is_readonly ? -1 : 0);
+				});
+				this._setTableVisiblityState(this.ldap_servers_table, is_readonly);
+				this._disableRemoveLdapServersWithUserGroups();
+
+				if (!is_readonly && !this.ldap_jit_status.checked) {
+					this.jit_provision_interval.toggleAttribute('readonly', true);
+					this.jit_provision_interval.toggleAttribute('disabled', true);
+				}
+
+				if (is_readonly && default_index && ldap_default_row_index) {
+					default_index_hidden.value = default_index.value;
 				}
 			});
 		}
