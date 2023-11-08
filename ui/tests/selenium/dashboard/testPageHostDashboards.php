@@ -68,20 +68,12 @@ class testPageHostDashboards extends CWebTest {
 		];
 		$this->createHostWithDashboards($data);
 
-		// Create a Host with many Dashboards and another Host with many Pages.
-		$dashboard_array = [];
+		// Create a Host with many Pages.
 		$page_array = [];
 
 		for ($i = 1; $i <= self::COUNT_MANY; $i++) {
-			$dashboard_array[] = ['name' => 'Dashboard '.$i];
 			$page_array[] = ['name' => 'Page '.$i];
 		}
-
-		$data_dashboards = [
-			'host_name' => 'Many Dashboards',
-			'dashboards' => $dashboard_array
-		];
-		$this->createHostWithDashboards($data_dashboards);
 
 		$data_pages = [
 			'host_name' => 'Many Pages',
@@ -387,14 +379,14 @@ class testPageHostDashboards extends CWebTest {
 
 		$this->openDashboardsForHost($data['host_name']);
 
-		// Dashboard dropdown.
-		$dashboard_dropdown = $this->query('id:dashboardid')->one();
+		// Dashboard dropdown form.
+		$form = $this->query('class:header-controls')->asForm()->one();
 
 		// Assert dashboards and Pages.
 		foreach ($api_dashboards as $dashboard) {
 			// If not already on the correct Dashboard, then switch.
-			if ($dashboard['name'] !== $dashboard_dropdown->getValue()) {
-				$dashboard_dropdown->fill($dashboard['name']);
+			if ($dashboard['name'] !== $form->getField('id:dashboardid')->getText()) {
+				$form->fill(['id:dashboardid' => $dashboard['name']]);
 				$this->page->waitUntilReady();
 			}
 
@@ -412,7 +404,7 @@ class testPageHostDashboards extends CWebTest {
 				// When a Dashboard contains several Pages.
 
 				// Check that Slideshow button exists.
-				$this->assertTrue($this->query('class:btn-dashboard-toggle-slideshow')->exists());
+				$this->assertTrue($this->query('class:dashboard-toggle-slideshow')->exists());
 
 				// Parent to all Page tabs.
 				$page_tabs = $this->query('class:dashboard-navigation-tabs')->one();
@@ -434,52 +426,27 @@ class testPageHostDashboards extends CWebTest {
 		}
 	}
 
-	public function getCheckNavigationButtonsData() {
-		return [
-			[
-				[
-					'host_name' => 'Many Dashboards',
-					'previous_button_selector' => 'class:btn-host-dashboard-previous-dashboard',
-					'next_button_selector' => 'class:btn-host-dashboard-next-dashboard'
-				]
-			],
-			[
-				[
-					'host_name' => 'Many Pages',
-					'previous_button_selector' => 'class:btn-dashboard-previous-page',
-					'next_button_selector' => 'class:btn-dashboard-next-page'
-				]
-			]
-		];
-	}
-
 	/**
-	 * Check Dashboard and Page navigation using the buttons.
-	 *
-	 * @dataProvider getCheckNavigationButtonsData
+	 * Check Page navigation using the buttons.
 	 */
-	public function testPageHostDashboards_CheckNavigationButtons($data) {
-		$this->openDashboardsForHost($data['host_name']);
+	public function testPageHostDashboards_CheckNavigationButtons() {
+		$this->openDashboardsForHost('Many Pages');
 
-		$previous = $this->query($data['previous_button_selector'])->one();
-		$next = $this->query($data['next_button_selector'])->one();
-
-		// If these are set then use them instead of the counter for determining the correct widget name.
-		$dashboard_count = ($data['host_name'] === 'Many Dashboards') ? null : 1;
-		$page_count = ($data['host_name'] === 'Many Pages') ? null : 1;
+		$previous = $this->query('class:dashboard-previous-page')->one();
+		$next = $this->query('class:dashboard-next-page')->one();
 
 		// Cycle tabs in forward direction (by using the > button).
 		for ($i = 1; $i <= self::COUNT_MANY; $i++) {
 			$this->checkDashboardOpen(
-					['name' => 'Dashboard '.($dashboard_count === null ? $i : $dashboard_count)],
-					['name' => 'Page '.($page_count === null ? $i : $page_count)]
+					['name' => 'Dashboard 1'],
+					['name' => 'Page '.$i]
 			);
 
 			//Assert if enabled/disabled correctly.
 			$this->assertEquals($i > 1, $previous->isEnabled());
 			$this->assertEquals($i < self::COUNT_MANY, $next->isEnabled());
 
-			// Only switch the Dashboard if it is not the last one.
+			// Only switch Page if it is not the last one.
 			if ($i !== self::COUNT_MANY) {
 				$next->click();
 				$this->page->waitUntilReady();
@@ -489,54 +456,19 @@ class testPageHostDashboards extends CWebTest {
 		// Cycle tabs in backward direction (by using the < button).
 		for ($i = self::COUNT_MANY; $i >= 1; $i--) {
 			$this->checkDashboardOpen(
-				['name' => 'Dashboard '.($dashboard_count === null ? $i : $dashboard_count)],
-				['name' => 'Page '.($page_count === null ? $i : $page_count)]
+				['name' => 'Dashboard 1'],
+				['name' => 'Page '.$i]
 			);
 
 			//Assert if enabled/disabled correctly.
 			$this->assertEquals($i > 1, $previous->isEnabled());
 			$this->assertEquals($i < self::COUNT_MANY, $next->isEnabled());
 
-			// Only switch the Dashboard if it is not the first one.
+			// Only switch the Page if it is not the first one.
 			if ($i !== 1) {
 				$previous->click();
 				$this->page->waitUntilReady();
 			}
-		}
-	}
-
-	/**
-	 * Check Dashboard navigation using the dropdown.
-	 */
-	public function testPageHostDashboards_CheckNavigationDropdown() {
-		// Create a Host with some Dashboards.
-		$data = [
-			'host_name' => 'Dashboards for dropdown',
-			'dashboards' => [
-				['name' => 'Dashboard 1'],
-				['name' => '🙂🙃'],
-				['name' => '<script>alert("hi!");</script>'],
-				['name' => 'test тест 测试 テスト ทดสอบ'],
-				['name' => '&nbsp; &amp;☺♥²©™"\''],
-			]
-		];
-		$api_dashboards = $this->createHostWithDashboards($data);
-
-		// Open the newly created Host dashboard.
-		$this->openDashboardsForHost('Dashboards for dropdown');
-
-		// Click each Dashboard in the menu and assert that it opened.
-		foreach ($api_dashboards as $dashboard) {
-			$navigation = $this->query('class:host-dashboard-navigation')->one();
-
-			// Only switch if not already on the correct Dashboard.
-			if ($dashboard['name'] !== $navigation->query('xpath:.//div[@ class="selected-tab"]')->one()->getText()) {
-				$list_button = $this->query('xpath:.//button[@title="Dashboard list"]')->one();
-				$list_button->click();
-				$list_button->asPopupButton()->getMenu()->select($dashboard['name']);
-			}
-
-			$this->checkDashboardOpen($dashboard);
 		}
 	}
 
@@ -658,9 +590,12 @@ class testPageHostDashboards extends CWebTest {
 			$page = $dashboard['pages'][0];
 		}
 
-		// Check that the correct Dashboard tab is selected.
-		$navigation = $this->query('class:host-dashboard-navigation')->one();
-		$this->assertEquals($dashboard['name'], $navigation->query('xpath:.//div[@ class="selected-tab"]')->one()->getText());
+		// Check Dashboard name in header and breadcrumb.
+		$this->page->assertHeader($dashboard['name']);
+		$this->assertEquals(
+				$dashboard['name'],
+				$this->query('xpath://ul[@class="breadcrumbs"]/li')->all()->last()->getText()
+		);
 
 		// Check that the correct Page tab is selected.
 		if (count(CTestArrayHelper::get($dashboard, 'pages', [])) > 1) {
