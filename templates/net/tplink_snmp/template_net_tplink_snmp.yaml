@@ -1116,9 +1116,6 @@ zabbix_export:
                       value:
                         host: 'TP-LINK by SNMP'
                         name: 'Interface {#IFDESCR}: Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: ca6bcc5f345b46ffaa445d38a90ddcae
           name: 'IF-MIB::ifOperStatus'

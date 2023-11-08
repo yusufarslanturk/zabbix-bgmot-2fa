@@ -1493,9 +1493,6 @@ zabbix_export:
                       value:
                         host: 'GCP by HTTP'
                         name: 'GCP Compute Engine: Quota [{#GCE.QUOTA.NAME}]: Usage'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: item
                   name: 'Cloud SQL MySQL'
                   x: '6'
@@ -1581,9 +1578,6 @@ zabbix_export:
                       value:
                         host: 'GCP by HTTP'
                         key: 'gcp.gce.quota.pused[{#GCE.QUOTA.NAME}]'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: INTEGER
                       name: source_type
                       value: '3'
@@ -7001,9 +6995,6 @@ zabbix_export:
                       value:
                         host: 'GCP Cloud SQL PostgreSQL by HTTP'
                         name: 'GCP Cloud SQL PostgreSQL: Database [{#PGSQL.DB.NAME}]: Tuples'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graph
                   x: '12'
                   width: '12'
@@ -7081,9 +7072,6 @@ zabbix_export:
                       value:
                         host: 'GCP Cloud SQL PostgreSQL by HTTP'
                         key: 'gcp.cloudsql.pgsql.deadlock_count[{#PGSQL.DB.NAME}]'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: INTEGER
                       name: source_type
                       value: '3'
@@ -8888,9 +8876,6 @@ zabbix_export:
                       value:
                         host: 'GCP Compute Engine Instance by HTTP'
                         name: 'GCP Compute Engine: Disk [{#GCE.DISK.NAME}]: Read/Write bytes'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graph
                   'y': '15'
                   width: '24'
@@ -8942,9 +8927,6 @@ zabbix_export:
                       value:
                         host: 'GCP Compute Engine Instance by HTTP'
                         name: 'GCP Compute Engine: Disk [{#GCE.DISK.NAME}]: Read/Write operations'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graph
                   x: '16'
                   'y': '5'

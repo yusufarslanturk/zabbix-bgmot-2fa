@@ -1594,9 +1594,6 @@ zabbix_export:
                       value:
                         host: 'Windows by Zabbix agent active'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
         - uuid: 234161507ccb4d83b111cb31e0db8ae5
           name: 'System performance'
           pages:
@@ -1633,9 +1630,6 @@ zabbix_export:
                       value:
                         host: 'Windows by Zabbix agent active'
                         name: '{#FSLABEL}({#FSNAME}): Disk space usage'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '15'
                   width: '24'
@@ -1649,9 +1643,6 @@ zabbix_export:
                       value:
                         host: 'Windows by Zabbix agent active'
                         name: '{#DEVNAME}: Disk read/write rates'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '20'
                   width: '24'
@@ -1665,9 +1656,6 @@ zabbix_export:
                       value:
                         host: 'Windows by Zabbix agent active'
                         name: '{#DEVNAME}: Disk utilization and queue'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '25'
                   width: '24'
@@ -1681,9 +1669,6 @@ zabbix_export:
                       value:
                         host: 'Windows by Zabbix agent active'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graph
                   x: '12'
                   width: '12'
