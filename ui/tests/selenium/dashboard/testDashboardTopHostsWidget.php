@@ -1732,8 +1732,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 		$this->createTopHostsWidget($data, 'top_host_screenshots');
 
 		// Check widget added and assert screenshots.
-		$element = CDashboardElement::find()->one()->getWidget($data['main_fields']['Name'])
-				->query('class:list-table')->one();
+		$element = CDashboardElement::find()->one()->getWidget($data['main_fields']['Name']);
 		$this->assertScreenshot($element, $data['screen_name']);
 	}
 

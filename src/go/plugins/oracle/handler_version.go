@@ -1,6 +1,3 @@
-//go:build !windows
-// +build !windows
-
 /*
 ** Zabbix
 ** Copyright (C) 2001-2023 Zabbix SIA
@@ -20,46 +17,41 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-package smart
+package oracle
 
 import (
-	"fmt"
-	"os/exec"
-	"time"
+	"context"
+	"encoding/json"
 
-	"zabbix.com/pkg/zbxcmd"
+	"git.zabbix.com/ap/plugin-support/zbxerr"
 )
 
-func (p *Plugin) executeSmartctl(args string, strict bool) ([]byte, error) {
-	path := "smartctl"
+// versionHandler queries the db server for version.
+func versionHandler(
+	ctx context.Context, conn OraClient, _ map[string]string, _ ...string,
+) (any, error) {
+	const query = `SELECT VERSION_FULL FROM V$INSTANCE`
 
-	if p.options.Path != "" {
-		path = p.options.Path
-	}
-
-	var out string
-	var err error
-
-	_, err = exec.LookPath(path)
+	row, err := conn.QueryRow(ctx, query)
 	if err != nil {
-		return nil, err
+		return nil, zbxerr.New("failed to query version").Wrap(err)
 	}
+	var version string
 
-	executable := fmt.Sprintf("sudo -n %s %s", path, args)
-
-	p.Tracef("executing smartctl command: %s", executable)
-
-	if strict {
-		out, err = zbxcmd.ExecuteStrict(executable, time.Second*time.Duration(p.options.Timeout), "")
-	} else {
-		out, err = zbxcmd.Execute(executable, time.Second*time.Duration(p.options.Timeout), "")
-	}
-
-	p.Tracef("command %s smartctl raw response: %s", executable, out)
-
+	err = row.Scan(&version)
 	if err != nil {
-		return nil, err
+		return nil, zbxerr.New("failed scan version").Wrap(err)
 	}
 
-	return []byte(out), nil
+	err = row.Err()
+	if err != nil {
+		return nil, zbxerr.New("failed to get version").Wrap(err)
+	}
+
+	b, err := json.Marshal(version)
+	if err != nil {
+		return nil, zbxerr.New("failed to marshal version").Wrap(err)
+	}
+
+	return string(b), nil
 }

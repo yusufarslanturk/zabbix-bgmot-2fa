@@ -180,7 +180,7 @@ if ($data['vendor']) {
 	]));
 }
 
-$tabs->addTab('tmplTab', _('Templates'), $template_tab, false);
+$tabs->addTab('tmplTab', _('Template'), $template_tab);
 
 // tags
 $tabs->addTab('tags-tab', _('Tags'), new CPartial('configuration.tags.tab', [
