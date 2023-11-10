@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-09-20 03:28+0000\n"
+"PO-Revision-Date: 2023-11-06 02:02+0000\n"
 "Last-Translator: Felipe L. Ewald <felipe.idj@hotmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: pt_BR\n"
@@ -15681,7 +15681,7 @@ msgstr "Pausar operações para incidentes suprimidos"
 
 #: app/views/popup.action.edit.php:227
 msgid "Pause operations for symptom problems"
-msgstr "Pausar operações para problemas de sintomas"
+msgstr "Pausar as operações para problemas sintomáticos"
 
 #: include/classes/debug/CProfiler.php:163
 #, c-format
@@ -20187,7 +20187,7 @@ msgstr "URL do Trigger Script"
 #: include/classes/helpers/CMenuHelper.php:199
 #: include/views/configuration.action.list.php:34
 msgid "Trigger actions"
-msgstr "Desabilitar ações?"
+msgstr "Ações da trigger"
 
 #: triggers.php:303
 msgid "Trigger added"
@@ -21430,7 +21430,7 @@ msgstr "A função de usuário com ID \"%1$s\" não está disponível."
 #: include/classes/helpers/CMenuHelper.php:296
 #: include/classes/helpers/CRoleHelper.php:426
 msgid "User roles"
-msgstr "Papéis de utilizador"
+msgstr "Funções de usuário"
 
 #: app/views/administration.housekeeping.edit.php:109
 msgid "User sessions"
@@ -21439,7 +21439,7 @@ msgstr "Sessões de usuários"
 #: include/classes/helpers/CMenuHelper.php:390
 #: include/classes/helpers/CMenuHelper.php:403
 msgid "User settings"
-msgstr "Definições de Utilizadores"
+msgstr "Configurações do usuário"
 
 #: include/classes/api/services/CMap.php:709
 #: include/classes/api/services/CMap.php:1178
