@@ -1958,7 +1958,7 @@ void	DCsync_kvs_paths(const struct zbx_json_parse *jp_kvs_paths, const zbx_confi
  * Return value: text with resolved macros or NULL if there were no macros    *
  *                                                                            *
  ******************************************************************************/
-char	*dc_expand_host_macros_dyn(const char *text, const ZBX_DC_HOST *dc_host)
+static char	*dc_expand_host_macros_dyn(const char *text, const ZBX_DC_HOST *dc_host)
 {
 #define IF_MACRO_HOST		"{HOST."
 #define IF_MACRO_HOST_HOST	IF_MACRO_HOST "HOST}"
