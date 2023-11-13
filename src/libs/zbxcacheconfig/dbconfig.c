@@ -2242,6 +2242,8 @@ static void	dc_if_update_substitute_host_macros(zbx_dc_if_update_t *update, cons
 			zbx_free(update->ip);
 			update->ip = addr;
 		}
+		else
+			zbx_free(addr);
 	}
 
 	if (NULL != (addr = dc_expand_host_macros_dyn(update->dns, host)))
@@ -2251,6 +2253,8 @@ static void	dc_if_update_substitute_host_macros(zbx_dc_if_update_t *update, cons
 			zbx_free(update->dns);
 			update->dns = addr;
 		}
+		else
+			zbx_free(addr);
 	}
 }
 
