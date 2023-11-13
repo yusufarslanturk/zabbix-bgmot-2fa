@@ -2348,7 +2348,7 @@ static void	DCsync_interfaces(zbx_dbsync_t *sync, zbx_uint64_t revision)
 
 		/* store new information in interface structure */
 
-		if (0 == found || interface->useip != useip)
+		if (interface->useip != useip)
 			update->modified = 1;
 
 		interface->hostid = hostid;
