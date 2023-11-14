@@ -40,7 +40,7 @@ class CHostAvailability extends CTag {
 
 	protected $type_interfaces = [];
 
-	protected $passive_checks = false;
+	protected $passive_checks = true;
 
 	public function __construct() {
 		parent::__construct('div', true);
