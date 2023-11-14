@@ -58,6 +58,10 @@ abstract class CControllerUserUpdateGeneral extends CController {
 				? GROUP_GUI_ACCESS_INTERNAL
 				: GROUP_GUI_ACCESS_LDAP;
 
+		if (!$usrgrps) {
+			return $system_gui_access == GROUP_GUI_ACCESS_INTERNAL;
+		}
+
 		foreach($usrgrps as $usrgrp) {
 			$gui_access = ($usrgrp['gui_access'] == GROUP_GUI_ACCESS_SYSTEM)
 				? $system_gui_access
