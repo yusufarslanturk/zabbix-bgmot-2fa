@@ -20,7 +20,6 @@
 
 
 class CHostAvailability extends CTag {
-
 	public const TYPES = [INTERFACE_TYPE_AGENT, INTERFACE_TYPE_SNMP, INTERFACE_TYPE_IPMI, INTERFACE_TYPE_JMX,
 		INTERFACE_TYPE_AGENT_ACTIVE
 	];
@@ -40,6 +39,8 @@ class CHostAvailability extends CTag {
 	];
 
 	protected $type_interfaces = [];
+
+	protected $passive_checks = false;
 
 	public function __construct() {
 		parent::__construct('div', true);
@@ -100,28 +101,34 @@ class CHostAvailability extends CTag {
 		return $hint_table;
 	}
 
+	/**
+	 * Sets the value if the host passive checks exist
+	 *
+	 * @param bool $value has passive check items.
+	 *
+	 * @return CHostAvailability
+	 */
+	public function setPassiveChecks(bool $value): CHostAvailability {
+		$this->passive_checks = $value;
+
+		return $this;
+	}
+
 	public function toString($destroy = true) {
 		foreach ($this->type_interfaces as $type => $interfaces) {
-			// Add active checks to agent interfaces.
-			if ($type == INTERFACE_TYPE_AGENT) {
+			if ($type == INTERFACE_TYPE_AGENT && count($this->type_interfaces[INTERFACE_TYPE_AGENT_ACTIVE]) > 0) {
 				$interfaces = array_merge($interfaces, $this->type_interfaces[INTERFACE_TYPE_AGENT_ACTIVE]);
+
+				$status = $this->passive_checks
+					? getInterfaceAvailabilityStatus($interfaces)
+					: getInterfaceAvailabilityStatus($this->type_interfaces[INTERFACE_TYPE_AGENT_ACTIVE]);
 			}
+			else {
+				if (!$interfaces || !array_key_exists($type, static::LABELS)) {
+					continue;
+				}
 
-			if (!$interfaces || !array_key_exists($type, static::LABELS)) {
-				continue;
-			}
-
-			CArrayHelper::sort($interfaces, ['interface']);
-			$available = array_column($interfaces, 'available');
-			$status = in_array(INTERFACE_AVAILABLE_UNKNOWN, $available)
-				? INTERFACE_AVAILABLE_UNKNOWN
-				: INTERFACE_AVAILABLE_TRUE;
-
-			if (in_array(INTERFACE_AVAILABLE_FALSE, $available)) {
-				$status = (in_array(INTERFACE_AVAILABLE_UNKNOWN, $available)
-						|| in_array(INTERFACE_AVAILABLE_TRUE, $available))
-					? INTERFACE_AVAILABLE_MIXED
-					: INTERFACE_AVAILABLE_FALSE;
+				$status = getInterfaceAvailabilityStatus($interfaces);
 			}
 
 			$this->addItem((new CSpan(static::LABELS[$type]))
