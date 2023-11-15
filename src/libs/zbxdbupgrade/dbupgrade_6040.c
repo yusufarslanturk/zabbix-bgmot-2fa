@@ -266,8 +266,8 @@ static int	DBpatch_6040026(void)
 
 		for (i = 0; i < ctx.stack.values_num; i++)
 		{
-			int			seconds;
-			zbx_strloc_t		*loc;
+			int		seconds;
+			zbx_strloc_t	*loc;
 
 			if (ZBX_EVAL_TOKEN_ARG_PERIOD != ctx.stack.values[i].type)
 				continue;
