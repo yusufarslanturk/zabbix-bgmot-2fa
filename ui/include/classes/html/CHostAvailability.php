@@ -83,6 +83,8 @@ class CHostAvailability extends CTag {
 			INTERFACE_AVAILABLE_FALSE => _('Not available')
 		];
 
+		CArrayHelper::sort($interfaces, ['interface']);
+
 		foreach ($interfaces as $interface) {
 			$interface_tag = new CDiv($interface['interface']);
 
