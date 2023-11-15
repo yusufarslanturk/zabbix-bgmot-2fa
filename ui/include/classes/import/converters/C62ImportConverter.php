@@ -24,7 +24,7 @@
  */
 class C62ImportConverter extends CConverter {
 
-	private static $import_format;
+	private static $validator_schema;
 
 	private const DASHBOARD_WIDGET_TYPE = [
 		CXmlConstantName::DASHBOARD_WIDGET_TYPE_CLOCK => CXmlConstantValue::DASHBOARD_WIDGET_TYPE_CLOCK,
@@ -44,7 +44,9 @@ class C62ImportConverter extends CConverter {
 	 * @return array
 	 */
 	public function convert(array $data, string $import_format = CXmlValidatorGeneral::XML): array {
-		self::$import_format = $import_format;
+		self::$validator_schema = (new CImportValidatorFactory($import_format))
+			->getObject(ZABBIX_EXPORT_VERSION)
+			->getSchema();
 
 		$data['zabbix_export']['version'] = '6.4';
 
@@ -75,9 +77,8 @@ class C62ImportConverter extends CConverter {
 	private static function convertHosts(array $hosts): array {
 		foreach ($hosts as &$host) {
 			if (array_key_exists('items', $host)) {
-				$host['items'] = self::convertItems($host['items'], [
+				self::sanitizeItemFields($host['items'], [
 					'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
-					'templateid' => 0,
 					'hosts' => [['status' => HOST_STATUS_MONITORED]]
 				]);
 			}
@@ -85,7 +86,6 @@ class C62ImportConverter extends CConverter {
 			if (array_key_exists('discovery_rules', $host)) {
 				$host['discovery_rules'] = self::convertDiscoveryRules($host['discovery_rules'], [
 					'flags' => ZBX_FLAG_DISCOVERY_RULE,
-					'templateid' => 0,
 					'hosts' => [['status' => HOST_STATUS_MONITORED]]
 				]);
 			}
@@ -93,15 +93,6 @@ class C62ImportConverter extends CConverter {
 		unset($host);
 
 		return $hosts;
-	}
-
-	private static function convertItems(array $items, array $internal_fields): array {
-		foreach ($items as &$item) {
-			$item = self::getSanitizedItemFields($item, $internal_fields);
-		}
-		unset($item);
-
-		return $items;
 	}
 
 	/**
@@ -114,9 +105,8 @@ class C62ImportConverter extends CConverter {
 	private static function convertTemplates(array $templates): array {
 		foreach ($templates as &$template) {
 			if (array_key_exists('items', $template)) {
-				$template['items'] = self::convertItems($template['items'], [
+				self::sanitizeItemFields($template['items'], [
 					'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
-					'templateid' => 1,
 					'hosts' => [['status' => HOST_STATUS_TEMPLATE]]
 				]);
 			}
@@ -124,7 +114,6 @@ class C62ImportConverter extends CConverter {
 			if (array_key_exists('discovery_rules', $template)) {
 				$template['discovery_rules'] = self::convertDiscoveryRules($template['discovery_rules'], [
 					'flags' => ZBX_FLAG_DISCOVERY_RULE,
-					'templateid' => 1,
 					'hosts' => [['status' => HOST_STATUS_TEMPLATE]]
 				]);
 			}
@@ -139,14 +128,14 @@ class C62ImportConverter extends CConverter {
 	}
 
 	private static function convertDiscoveryRules(array $discovery_rules, array $internal_fields): array {
+		self::sanitizeItemFields($discovery_rules, $internal_fields);
+
 		foreach ($discovery_rules as &$discovery_rule) {
 			if (array_key_exists('item_prototypes', $discovery_rule)) {
 				$discovery_rule['item_prototypes'] = self::convertItemPrototypes($discovery_rule['item_prototypes'],
 					['flags' => ZBX_FLAG_DISCOVERY_PROTOTYPE] + $internal_fields
 				);
 			}
-
-			$discovery_rule = self::getSanitizedItemFields($discovery_rule, $internal_fields);
 		}
 		unset($discovery_rule);
 
@@ -154,12 +143,12 @@ class C62ImportConverter extends CConverter {
 	}
 
 	private static function convertItemPrototypes(array $item_prototypes, array $internal_fields): array {
+		self::sanitizeItemFields($item_prototypes, $internal_fields);
+
 		foreach ($item_prototypes as &$item_prototype) {
 			if (array_key_exists('inventory_link', $item_prototype)) {
 				unset($item_prototype['inventory_link']);
 			}
-
-			$item_prototype = self::getSanitizedItemFields($item_prototype, $internal_fields);
 		}
 		unset($item_prototype);
 
@@ -226,55 +215,79 @@ class C62ImportConverter extends CConverter {
 	/**
 	 * Get sanitized item fields of given import input.
 	 *
-	 * @param array   $input
-	 *        int     $input['type']
-	 *        string  $input['key']
+	 * @param array   $items
+	 *        int     $items[<num>]['type']
+	 *        string  $items[<num>]['key']
 	 * @param array   $internal_fields
 	 *        int     $internal_fields['flags']
-	 *        int     $internal_fields['templateid']
 	 *        int     $internal_fields['hosts'][0]['status']
 	 *
 	 * @return array
 	 */
-	private static function getSanitizedItemFields(array $input, array $internal_fields): array {
-		static $schema;
+	private static function sanitizeItemFields(array &$items, array $internal_fields): void {
+		$node_path = $internal_fields['hosts'][0]['status'] == HOST_STATUS_TEMPLATE
+			? ['zabbix_export', 'templates', 'template']
+			: ['zabbix_export', 'hosts', 'host'];
 
-		if ($schema === null) {
-			$import_validator_factory = new CImportValidatorFactory(self::$import_format);
-			$schema = $import_validator_factory
-				->getObject(ZABBIX_EXPORT_VERSION)
-				->getSchema();
+		switch ($internal_fields['flags']) {
+			case ZBX_FLAG_DISCOVERY_NORMAL:
+				array_push($node_path, 'items');
+				$non_api_nodes = ['triggers'];
+				break;
+
+			case ZBX_FLAG_DISCOVERY_PROTOTYPE:
+				array_push($node_path, 'discovery_rules', 'discovery_rule', 'item_prototypes');
+				$non_api_nodes = ['trigger_prototypes'];
+				break;
+
+			case ZBX_FLAG_DISCOVERY_RULE:
+				array_push($node_path, 'discovery_rules');
+				$non_api_nodes = ['item_prototypes', 'trigger_prototypes', 'graph_prototypes', 'host_prototypes'];
+				break;
 		}
 
-		if (!array_key_exists('key', $input) || !array_key_exists('type', $input)) {
-			return $input;
+		$partial_import = [];
+		$nested = &$partial_import;
+
+		foreach ($node_path as $node) {
+			$nested = &$nested[$node];
 		}
 
-		$item_convert = [
-			'zabbix_export' => [
-				'item' => $input
-			]
-		];
-		$api_input = (new CConstantImportConverter($schema))->convert($item_convert)['zabbix_export']['item'];
-		$api_input = CArrayHelper::renameKeys($api_input, ['key' => 'key_']);
-		$api_input = getSanitizedItemFields($api_input + $internal_fields + DB::getDefaults('items'));
-		$api_input = array_merge(array_intersect_key($input, array_flip(['uuid', 'name', 'key', 'type'])), $api_input);
-		$non_api_nodes = array_flip([
-			'triggers', 'trigger_prototypes', 'item_prototypes', 'graph_prototypes', 'host_prototypes'
-		]);
+		$nested = $items;
 
-		return self::intersectFieldsRecursive($input, $api_input) + array_intersect_key($input, $non_api_nodes);
+		$item_defaults = ['jmx_endpoint' => ZBX_DEFAULT_JMX_ENDPOINT] + DB::getDefaults('items');
+		$api_items = (new CConstantImportConverter(self::$validator_schema))->convert($partial_import);
+
+		while ($node = array_shift($node_path)) {
+			$api_items = $api_items[$node];
+		}
+
+		foreach ($items as $i => &$item) {
+			if (!array_key_exists('key', $item) || !array_key_exists('type', $item)) {
+				continue;
+			}
+
+			$api_item = $api_items[$i];
+			$api_item = CArrayHelper::renameKeys($api_item, ['key' => 'key_', 'interface_ref' => 'interfaceid']);
+			$api_item = getSanitizedItemFields($api_item + ['templateid' => '0'] + $internal_fields + $item_defaults);
+			$api_item = CArrayHelper::renameKeys($api_item, ['interfaceid' => 'interface_ref']);
+			$api_item = array_merge(array_intersect_key($item, array_flip(['uuid', 'name', 'key', 'type'])), $api_item);
+
+			$item = self::intersectFieldsRecursive($item, $api_item)
+				+ array_intersect_key($item, array_flip($non_api_nodes));
+		}
+		unset($item);
 	}
 
-	private static function intersectFieldsRecursive(array $input, array $api_input): array {
-		$input = array_intersect_key($input, $api_input);
+	private static function intersectFieldsRecursive(array $item, array $api_item): array {
+		$item = array_intersect_key($item, $api_item);
 
-		foreach ($input as $key => $value) {
+		foreach ($item as $key => $value) {
 			if (is_array($value)) {
-				$input[$key] = self::intersectFieldsRecursive($input[$key], $api_input[$key]);
+				$item[$key] = self::intersectFieldsRecursive($item[$key], $api_item[$key]);
 			}
 		}
 
-		return $input;
+		return $item;
 	}
 }
