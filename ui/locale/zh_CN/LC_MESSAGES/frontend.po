@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-10-14 01:44+0000\n"
+"PO-Revision-Date: 2023-11-09 00:26+0000\n"
 "Last-Translator: 璞玉 <puyu@bbqi.cc>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: zh_CN\n"
@@ -2285,7 +2285,7 @@ msgstr "无法清除历史数据"
 
 #: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
 msgid "Cannot clear history and trends"
-msgstr ""
+msgstr "无法清除历史和趋势"
 
 #: include/classes/api/services/CDiscoveryRule.php:2514
 msgid "Cannot clone graph prototypes."
@@ -3890,7 +3890,7 @@ msgstr "无法更新媒介类型"
 
 #: app/controllers/CControllerModuleUpdate.php:137
 msgid "Cannot update module"
-msgstr ""
+msgstr "无法更新模块"
 
 #: app/controllers/CControllerModuleUpdate.php:157
 #, c-format
@@ -4281,11 +4281,11 @@ msgstr "清除历史和趋势"
 
 #: include/views/configuration.item.list.php:310
 msgid "Clear history and trends of selected items?"
-msgstr ""
+msgstr "清除所选项目的历史和趋势？"
 
 #: include/views/configuration.httpconf.list.php:232
 msgid "Clear history and trends of selected web scenarios?"
-msgstr ""
+msgstr "清除所选web场景的历史记录和趋势？"
 
 #: app/views/popup.massupdate.host.php:69
 #: app/views/popup.massupdate.template.php:72
@@ -7630,7 +7630,7 @@ msgstr "事件名称"
 
 #: app/views/popup.condition.edit.php:819
 msgid "Event name matches Trigger name (with macros expanded) unless a custom Event name is specified in Trigger settings."
-msgstr ""
+msgstr "事件名称与触发器名称匹配（已展开宏）,在触发器设置中指定了自定义事件名称的例外。"
 
 #: include/classes/helpers/CCorrelationHelper.php:55
 msgid "Event tag pair"
@@ -8903,7 +8903,7 @@ msgstr "历史记录"
 
 #: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
 msgid "History and trends cleared"
-msgstr ""
+msgstr "历史和趋势已清除"
 
 #: app/views/administration.housekeeping.edit.php:159
 msgid "History and trends compression"
@@ -13190,7 +13190,7 @@ msgstr[0] "已启用模块：%1$s。"
 
 #: app/controllers/CControllerModuleUpdate.php:126
 msgid "Module updated"
-msgstr ""
+msgstr "模块已更新"
 
 #: app/controllers/CControllerModuleUpdate.php:142
 #, c-format
