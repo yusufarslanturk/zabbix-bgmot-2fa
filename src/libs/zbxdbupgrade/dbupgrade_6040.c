@@ -240,8 +240,10 @@ static int	DBpatch_6040026(void)
 	int			ret = SUCCEED;
 	size_t			sql_alloc = 0, sql_offset = 0;
 	char			*sql = NULL, *params = NULL;
+	zbx_eval_context_t	ctx;
 	zbx_vector_uint32_t	del_tokens;
 
+	zbx_eval_init(&ctx);
 	zbx_vector_uint32_create(&del_tokens);
 
 	zbx_db_begin_multiple_update(&sql, &sql_alloc, &sql_offset);
@@ -253,7 +255,8 @@ static int	DBpatch_6040026(void)
 	{
 		int			i;
 		char			*error = NULL;
-		zbx_eval_context_t	ctx;
+
+		zbx_eval_clear(&ctx);
 
 		if (FAIL == zbx_eval_parse_expression(&ctx, row[1], ZBX_EVAL_PARSE_CALC_EXPRESSION, &error))
 		{
@@ -320,6 +323,7 @@ static int	DBpatch_6040026(void)
 			ret = FAIL;
 	}
 
+	zbx_eval_clear(&ctx);
 	zbx_vector_uint32_destroy(&del_tokens);
 
 	zbx_free(sql);
