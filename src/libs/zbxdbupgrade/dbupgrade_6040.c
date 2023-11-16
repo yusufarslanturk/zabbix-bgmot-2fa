@@ -234,6 +234,7 @@ static int	DBpatch_6040026(void)
 /* offset in stack of tokens is relative to time period token */
 #define OFFSET_HIST_FUNC	1
 #define TOKEN_LEN(loc)		(loc->r - loc->l + 1)
+#define LAST_FOREACH		"last_foreach"
 	DB_ROW			row;
 	DB_RESULT		result;
 	int			ret = SUCCEED;
@@ -246,7 +247,7 @@ static int	DBpatch_6040026(void)
 	zbx_db_begin_multiple_update(&sql, &sql_alloc, &sql_offset);
 
 	/* ITEM_TYPE_CALCULATED = 15 */
-	result = zbx_db_select("select itemid,params from items where type=15 and params like '%%last_foreach%%'");
+	result = zbx_db_select("select itemid,params from items where type=15 and params like '%%%s%%'", LAST_FOREACH);
 
 	while (SUCCEED == ret && NULL != (row = zbx_db_fetch(result)))
 	{
@@ -277,7 +278,7 @@ static int	DBpatch_6040026(void)
 
 			loc = &ctx.stack.values[i + OFFSET_HIST_FUNC].loc;
 
-			if (0 != strncmp("last_foreach", &ctx.expression[loc->l], TOKEN_LEN(loc)))
+			if (0 != strncmp(LAST_FOREACH, &ctx.expression[loc->l], TOKEN_LEN(loc)))
 				continue;
 
 			loc = &ctx.stack.values[i].loc;
@@ -327,6 +328,7 @@ static int	DBpatch_6040026(void)
 	return ret;
 #undef OFFSET_HIST_FUNC
 #undef TOKEN_LEN
+#undef LAST_FOREACH
 }
 #endif
 
