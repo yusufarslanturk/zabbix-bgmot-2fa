@@ -1058,8 +1058,6 @@ char	*dc_expand_user_macros_in_expression(const char *text, zbx_uint64_t *hostid
 char	*dc_expand_user_macros_in_func_params(const char *params, zbx_uint64_t itemid);
 char	*dc_expand_user_macros_in_calcitem(const char *formula, zbx_uint64_t hostid);
 
-char	*dc_expand_user_macros(const char *text, const zbx_uint64_t *hostids, int hostids_num);
-
 void		DCget_interface(DC_INTERFACE *dst_interface, const ZBX_DC_INTERFACE *src_interface);
 ZBX_DC_HOST	*DCfind_host(const char *host);
 ZBX_DC_ITEM	*DCfind_item(zbx_uint64_t hostid, const char *key);

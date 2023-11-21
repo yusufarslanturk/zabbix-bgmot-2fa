@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-11-07 11:27+0000\n"
+"PO-Revision-Date: 2023-11-16 00:28+0000\n"
 "Last-Translator: Alex <save2love@gmail.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: uk\n"
@@ -10130,7 +10130,7 @@ msgstr "Статистика вхідного трафіку мережевог�
 #: include/classes/api/services/CService.php:1441
 #, c-format
 msgid "Incompatible \"propagation_rule\" and \"propagation_value\" parameters for service \"%1$s\"."
-msgstr ""
+msgstr "Несумісні параметри \"propagation_rule\" і \"propagation_value\" для служби \"%1$s\"."
 
 #: app/controllers/CControllerMediatypeEnable.php:97
 #: app/controllers/CControllerMediatypeEnable.php:108
@@ -10367,13 +10367,13 @@ msgstr "Некоректний довільний вираз \"%2$s\" для п�
 #: include/classes/api/services/CDiscoveryRule.php:1602
 #, c-format
 msgid "Incorrect custom expression \"%2$s\" for override \"%1$s\": %3$s."
-msgstr ""
+msgstr "Неправильний довільний вираз \"%2$s\" для заміни \"%1$s\": %3$s."
 
 #: include/classes/db/MysqlDbBackend.php:69
 #: include/classes/db/PostgresqlDbBackend.php:95
 #, c-format
 msgid "Incorrect default charset for Zabbix database: %1$s."
-msgstr ""
+msgstr "Неправильний набір символів за замовчуванням для бази даних Zabbix: %1$s."
 
 #: include/classes/api/services/CEvent.php:510
 #: include/classes/api/services/CProblem.php:375
@@ -10407,7 +10407,7 @@ msgstr "Некоректні поля для sysmap."
 #: include/classes/setup/CSetupWizard.php:984
 #, c-format
 msgid "Incorrect file path for \"%1$s\": %2$s."
-msgstr ""
+msgstr "Неправильний шлях до файлу для \"%1$s\": %2$s."
 
 #: include/classes/helpers/CUploadFile.php:162
 msgid "Incorrect file upload."
@@ -10426,7 +10426,7 @@ msgstr "Некоректний макрос умови фільтру для п�
 #: include/classes/api/services/CDiscoveryRule.php:1637
 #, c-format
 msgid "Incorrect filter condition macro for override \"%1$s\"."
-msgstr ""
+msgstr "Неправильний макрос умови фільтру для заміни \"%1$s\"."
 
 #: include/classes/api/services/CDiscoveryRule.php:1847
 #, c-format
@@ -10453,18 +10453,18 @@ msgstr "Некоректні вхідні параметри."
 #: include/classes/api/services/CHostInterface.php:801
 #, c-format
 msgid "Incorrect interface DNS parameter \"%1$s\" provided."
-msgstr ""
+msgstr "Для інтерфейсу вказано некоректний параметр DNS \"%1$s\"."
 
 #: include/classes/api/services/CHostInterface.php:846
 #, c-format
 msgid "Incorrect interface port \"%1$s\" provided."
-msgstr ""
+msgstr "Для інтерфейсу вказано некоректний порт \"%1$s\"."
 
 #: include/classes/api/services/CHost.php:2021
 #: include/classes/api/services/CHost.php:2224
 #, c-format
 msgid "Incorrect inventory field \"%1$s\"."
-msgstr ""
+msgstr "Некоректне поле \"%1$s\" інвентарних даних."
 
 #: app/controllers/CControllerActionOperationValidate.php:176
 msgid "Incorrect inventory mode in action operation."
@@ -10520,7 +10520,7 @@ msgstr "Некоректне значення об'єкта."
 #: include/classes/db/OracleDbBackend.php:141
 #, c-format
 msgid "Incorrect parameter \"%1$s\" value: %2$s."
-msgstr ""
+msgstr "Невірне значення: %2$s параметру \"%1$s\"."
 
 #: app/controllers/CControllerPopupDiscoveryCheck.php:58
 #: include/classes/api/services/CDRule.php:496
@@ -10543,7 +10543,7 @@ msgstr "Некоректну відповідь отримано від Zabbix �
 #: app/controllers/CControllerSlaCreateUpdate.php:84
 #, c-format
 msgid "Incorrect schedule: %1$s."
-msgstr ""
+msgstr "Неправильний розклад: %1$s."
 
 #: include/classes/api/services/CEvent.php:491
 #: include/classes/api/services/CProblem.php:356
@@ -10608,7 +10608,7 @@ msgstr "Некоректне значення ID групи користувач
 #: include/classes/api/services/CUser.php:2018
 #: include/classes/validators/CLdapAuthValidator.php:88 index_http.php:79
 msgid "Incorrect user name or password or account is temporarily blocked."
-msgstr ""
+msgstr "Неправильне ім'я користувача чи пароль або обліковий запис тимчасово заблоковано."
 
 #: app/controllers/CControllerActionOperationValidate.php:121
 #: app/controllers/CControllerPopupGeneric.php:478
@@ -10639,7 +10639,7 @@ msgstr "Некоректне значення \"%1$s\" для поля \"%2$s\".
 #: include/validate.inc.php:336
 #, c-format
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field: must be between %3$s and %4$s, and have no more than %5$s digits after the decimal point."
-msgstr ""
+msgstr "Неправильне значення \"%1$s\" для поля \"%2$s\": має бути від %3$s до %4$s і містити не більше %5$s цифр після коми."
 
 #: app/controllers/CControllerAuthenticationUpdate.php:153
 #: include/validate.inc.php:341
@@ -10968,11 +10968,11 @@ msgstr "Інформація"
 
 #: include/classes/data/CItemData.php:1443
 msgid "Info about internal disks of hypervisor required for vmware.datastore.perfcounter, \"url\" - VMware service URL, \"uuid\" - VMware hypervisor global unique identifier. Returns JSON"
-msgstr ""
+msgstr "Інформація про внутрішні диски гіпервізора необхідна для vmware.datastore.perfcounter, \"url\" - URL-адреса служби VMware, \"uuid\" - глобальний унікальний ідентифікатор гіпервізора VMware. Повертає JSON"
 
 #: include/classes/data/CItemData.php:1429
 msgid "Info about internal disks of hypervisor required for vmware.datastore.perfcounter, <url> - VMware service URL, <uuid> - VMware hypervisor host name. Returns JSON"
-msgstr ""
+msgstr "Інформація про внутрішні диски гіпервізора необхідна для vmware.datastore.perfcounter, <url> - URL-адреса служби VMware, <uuid> - ім'я вузла мережі гіпервізора VMware. Повертає JSON"
 
 #: app/views/administration.trigdisplay.edit.php:110 include/items.inc.php:31
 #: jsLoader.php:177
@@ -11002,7 +11002,7 @@ msgstr "Макроси вузла мережі та успадковані"
 
 #: include/views/configuration.host.prototype.edit.php:338
 msgid "Inherited and host prototype macros"
-msgstr ""
+msgstr "Успадковані та прототипи макросів вузла мережі"
 
 #: app/partials/configuration.tags.tab.php:140
 msgid "Inherited and item tags"
@@ -11010,7 +11010,7 @@ msgstr "Успадковані та власні теги"
 
 #: app/partials/configuration.tags.tab.php:135
 msgid "Inherited and scenario tags"
-msgstr ""
+msgstr "Успадковані та сценарні теги"
 
 #: include/views/configuration.template.edit.php:195
 msgid "Inherited and template macros"
@@ -11030,7 +11030,7 @@ msgstr "Початковий вигляд"
 
 #: include/classes/widgets/views/widget.geomap.form.view.php:78
 msgid "Initial view is ignored if the default view is set."
-msgstr ""
+msgstr "Початковий вигляд ігнорується, якщо встановлено перегляд за умовчанням."
 
 #: app/views/popup.triggerexpr.php:258
 msgid "Insert"
@@ -11060,7 +11060,7 @@ msgstr "Ім'я інсталятора"
 #: include/views/js/item.preprocessing.js.php:180
 #: include/views/js/item.preprocessing.js.php:227
 msgid "Integer from BITS"
-msgstr ""
+msgstr "BITS в ціле число"
 
 #: include/classes/helpers/CMenuHelper.php:360
 msgid "Integrations"
@@ -11081,7 +11081,7 @@ msgstr "Інтерфейс зв'язаний з елементом даних \"
 
 #: include/classes/widgets/forms/CWidgetFormHostAvail.php:39
 msgid "Interface type"
-msgstr ""
+msgstr "Тип інтерфейсу"
 
 #: include/classes/api/services/CHostInterface.php:337
 #, c-format
@@ -11102,7 +11102,7 @@ msgstr "У інтерфейсу з IP адресою \"%1$s\" не може бу
 #: app/partials/configuration.host.edit.html.php:242
 #: include/views/configuration.host.prototype.edit.php:249
 msgid "Interfaces"
-msgstr ""
+msgstr "Інтерфейси"
 
 #: app/views/administration.authentication.edit.php:33
 msgctxt "authentication"
@@ -11142,7 +11142,7 @@ msgstr "Внутрішня помилка."
 #: app/views/popup.mediatype.message.php:73
 #: include/classes/helpers/CMediatypeHelper.php:200
 msgid "Internal problem"
-msgstr ""
+msgstr "Внутрішня проблема"
 
 #: app/views/popup.mediatype.message.php:76
 #: include/classes/helpers/CMediatypeHelper.php:211
@@ -11170,7 +11170,7 @@ msgstr "Інтервал"
 #: include/classes/api/services/CRole.php:738
 #, c-format
 msgid "Invalid API method \"%2$s\" for user role \"%1$s\"."
-msgstr ""
+msgstr "Недійсний метод API \"%2$s\" для ролі користувача \"%1$s\"."
 
 #: include/classes/api/services/CHostInterface.php:829
 #, c-format
@@ -11183,30 +11183,30 @@ msgstr "Неправильний JSON. На сервері виникла пом
 
 #: app/controllers/CControllerAuthenticationUpdate.php:171
 msgid "Invalid LDAP JIT provisioning media type mapping configuration."
-msgstr ""
+msgstr "Помилкова конфігурація відповідності способів оповіщення LDAP JIT ініціалізації."
 
 #: app/controllers/CControllerAuthenticationUpdate.php:164
 msgid "Invalid LDAP JIT provisioning user group mapping configuration."
-msgstr ""
+msgstr "Помилкова конфігурація відповідності групи користувачів LDAP JIT ініціалізації."
 
 #: app/controllers/CControllerPopupLdapCheck.php:52
 #: app/controllers/CControllerPopupLdapEdit.php:49
 #: app/controllers/CControllerPopupLdapTestEdit.php:44
 #: app/controllers/CControllerPopupLdapTestSend.php:50
 msgid "Invalid LDAP configuration"
-msgstr ""
+msgstr "Помилкова конфігурація LDAP"
 
 #: app/controllers/CControllerAuthenticationUpdate.php:214
 msgid "Invalid SAML JIT provisioning media type mapping configuration."
-msgstr ""
+msgstr "Помилкова конфігурація відповідності способів оповіщення SAML JIT ініціалізації."
 
 #: app/controllers/CControllerAuthenticationUpdate.php:208
 msgid "Invalid SAML JIT provisioning user group mapping configuration."
-msgstr ""
+msgstr "Помилкова конфігурація відповідності групи користувачів SAML JIT ініціалізації."
 
 #: include/classes/import/readers/CYamlImportReader.php:55
 msgid "Invalid YAML file contents"
-msgstr ""
+msgstr "Неправильний вміст файлу YAML"
 
 #: include/classes/validators/CActionCondValidator.php:113
 #, c-format
@@ -11216,7 +11216,7 @@ msgstr "Неправильна умова дії: %1$s."
 #: app/controllers/CControllerPopupTriggerExpr.php:1571
 #, c-format
 msgid "Invalid condition: %1$s."
-msgstr ""
+msgstr "Неправильна умова: %1$s."
 
 #: app/controllers/CControllerTimeSelectorUpdate.php:219
 msgid "Invalid date."
@@ -11270,7 +11270,7 @@ msgstr "Неправильний ключ \"%1$s\": %2$s."
 #: app/controllers/CControllerPopupMediaTypeMappingCheck.php:42
 #: app/controllers/CControllerPopupMediaTypeMappingEdit.php:44
 msgid "Invalid media type mapping configuration."
-msgstr ""
+msgstr "Неправильна конфігурація зіставлення способу оповіщення."
 
 #: include/classes/core/CJsonRpc.php:187
 msgid "Invalid method parameters."
@@ -11490,7 +11490,7 @@ msgstr "Неправильні параметри."
 
 #: include/classes/core/CJsonRpc.php:176
 msgid "Invalid request."
-msgstr ""
+msgstr "Неправильний запит."
 
 #: include/classes/api/services/CHttpTest.php:786
 #, c-format
@@ -11577,12 +11577,12 @@ msgstr "Неправильний період часу."
 #: app/controllers/CControllerPopupUserGroupMappingCheck.php:42
 #: app/controllers/CControllerPopupUserGroupMappingEdit.php:44
 msgid "Invalid user group mapping configuration."
-msgstr ""
+msgstr "Неправильна конфігурація зіставлення груп користувачів."
 
 #: include/classes/validators/CApiInputValidator.php:2852
 #, c-format
 msgid "Invalid zoomparameter \"%1$s\": %2$s."
-msgstr ""
+msgstr "Неправильний параметр масштабування \"%1$s\": %2$s."
 
 #: app/partials/configuration.host.edit.html.php:526
 #: app/views/popup.massupdate.host.php:294
@@ -11678,7 +11678,7 @@ msgstr "Елемент додано"
 
 #: app/views/popup.itemtestedit.view.php:421
 msgid "Item contains user-defined macros with secret values. Values of these macros should be entered manually."
-msgstr ""
+msgstr "Елемент містить визначені користувачем макроси з секретними значеннями. Значення цих макросів слід вводити вручну."
 
 #: items.php:964
 msgid "Item copied"
@@ -11928,11 +11928,11 @@ msgstr "Інтерфейси JMX"
 
 #: include/classes/html/CButtonExport.php:75
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 #: include/classes/mvc/CController.php:231
 msgid "JSON array input is expected."
-msgstr ""
+msgstr "Очікується вхідний масив JSON."
 
 #: app/views/popup.massupdate.item.php:94
 #: include/views/configuration.host.discovery.edit.php:300
@@ -11944,7 +11944,7 @@ msgstr "JSON дані"
 #: include/classes/api/services/CItemGeneral.php:2663
 #: include/classes/api/services/CItemGeneral.php:2692
 msgid "JSON is expected"
-msgstr ""
+msgstr "Очікується JSON"
 
 #: include/classes/validators/CNewValidator.php:113
 msgid "JSON string is expected"
@@ -11953,7 +11953,7 @@ msgstr "очікувався JSON рядок"
 #: include/classes/core/CJsonRpc.php:146
 #, c-format
 msgid "JSON-RPC error generation failed. No such error \"%1$s\"."
-msgstr ""
+msgstr "Не вдалося створити помилку JSON-RPC. Немає такої помилки \"%1$s\"."
 
 #: include/items.inc.php:1824
 #: include/views/configuration.host.discovery.edit.php:866
@@ -12005,7 +12005,7 @@ msgstr "Період зберігання втрачених ресурсів"
 
 #: include/httptest.inc.php:30
 msgid "Kerberos"
-msgstr ""
+msgstr "Kerberos"
 
 #: app/controllers/CControllerPopupGeneric.php:232
 #: app/controllers/CControllerPopupGeneric.php:243
@@ -12043,7 +12043,7 @@ msgstr "LDAP"
 #: app/views/administration.usergroup.edit.php:88
 #: app/views/popup.ldap.edit.php:157
 msgid "LDAP Server"
-msgstr ""
+msgstr "LDAP сервер"
 
 #: include/perm.inc.php:49
 msgid "LDAP authentication"
@@ -12051,11 +12051,11 @@ msgstr "LDAP аутентифікація"
 
 #: include/classes/api/services/CUser.php:1491
 msgid "LDAP authentication is disabled."
-msgstr ""
+msgstr "Автентифікація LDAP вимкнена."
 
 #: app/views/popup.ldap.edit.php:235
 msgid "LDAP group pattern"
-msgstr ""
+msgstr "Шаблон групи LDAP"
 
 #: app/views/administration.authentication.edit.php:163
 msgid "LDAP host"
@@ -12071,7 +12071,7 @@ msgstr "Вдалий вхід через LDAP"
 
 #: include/classes/api/services/CAuthentication.php:171
 msgid "LDAP must be enabled"
-msgstr ""
+msgstr "LDAP має бути ввімкнено"
 
 #: app/views/administration.authentication.edit.php:336
 msgid "LDAP settings"
@@ -12079,7 +12079,7 @@ msgstr "Налаштування LDAP"
 
 #: app/views/popup.itemtestedit.view.php:299
 msgid "LF"
-msgstr ""
+msgstr "LF"
 
 #: include/views/configuration.host.discovery.edit.php:866
 msgid "LLD macro"
@@ -12092,7 +12092,7 @@ msgstr "LLD макроси"
 
 #: include/classes/api/services/CItemGeneralOld.php:700
 msgid "LLD rule with the same UUID already exists"
-msgstr ""
+msgstr "LLD правило з таким самим UUID вже існує"
 
 #: app/partials/popup.operations.php:257
 #: app/views/configuration.correlation.edit.php:59
@@ -12117,7 +12117,7 @@ msgstr "Мова"
 #: include/classes/api/services/CUser.php:775
 #, c-format
 msgid "Language \"%1$s\" is not supported."
-msgstr ""
+msgstr "Мова \"%1$s\" не підтримується."
 
 #: include/classes/helpers/CPagerHelper.php:232
 msgctxt "page navigation"
@@ -12345,13 +12345,13 @@ msgstr "Лінк"
 #: include/classes/api/services/CMap.php:1476
 #, c-format
 msgid "Link \"selementid1\" field is pointing to a nonexistent map selement ID \"%1$s\" for map \"%2$s\"."
-msgstr ""
+msgstr "Поле посилання \"selementid1\" вказує на неіснуючий ідентифікатор елемента карти \"%1$s\" для карти \"%2$s\"."
 
 #: include/classes/api/services/CMap.php:1014
 #: include/classes/api/services/CMap.php:1484
 #, c-format
 msgid "Link \"selementid2\" field is pointing to a nonexistent map selement ID \"%1$s\" for map \"%2$s\"."
-msgstr ""
+msgstr "Поле посилання \"selementid2\" вказує на неіснуючий ідентифікатор елемента карти \"%1$s\" для карти \"%2$s\"."
 
 #: include/views/js/monitoring.sysmaps.js.php:760
 #: include/views/js/monitoring.sysmaps.js.php:771
@@ -12384,7 +12384,7 @@ msgstr "Приєднані шаблони"
 
 #: include/views/configuration.template.list.php:128
 msgid "Linked to templates"
-msgstr ""
+msgstr "Зв'язано з шаблонами"
 
 #: include/views/js/monitoring.sysmaps.js.php:757
 #: include/views/js/monitoring.sysmaps.js.php:768
@@ -12397,7 +12397,7 @@ msgstr "Список пустий"
 
 #: include/classes/data/CItemData.php:983
 msgid "List of OS processes with attributes. Returns JSON array"
-msgstr ""
+msgstr "Список процесів ОС з атрибутами. Повертає JSON масив"
 
 #: include/classes/data/CItemData.php:1021
 msgid "List of Windows Registry values or keys located at given key. Returns JSON."
@@ -12405,35 +12405,35 @@ msgstr ""
 
 #: include/classes/data/CItemData.php:1831
 msgid "List of Zabbix proxies with name, mode, encryption, compression, version, last seen, host count, item count, required values per second (vps) and compatibility (current/outdated/unsupported). Returns JSON."
-msgstr ""
+msgstr "Список проксі Zabbix із назвою, режимом, шифруванням, стисненням, версією, востаннє помічено, кількість вузлів мережі, необхідні значення в секунду (vps) і сумістність (актуальний/застарілий/не підтримується). Повертає JSON."
 
 #: include/classes/data/CItemData.php:1126
 msgid "List of block devices and their type. Returns JSON"
-msgstr ""
+msgstr "Перелік блокових пристроїв та їх тип. Повертає JSON"
 
 #: include/classes/data/CItemData.php:1034
 msgid "List of detected CPUs/CPU cores. Returns JSON"
-msgstr ""
+msgstr "Список виявлених CPU/ядер CPU. Повертає JSON"
 
 #: include/classes/data/CItemData.php:1142
 msgid "List of directory entries, recursively. Returns JSON"
-msgstr ""
+msgstr "Список записів каталогу, рекурсивно. Повертає JSON"
 
 #: include/classes/data/CItemData.php:1194
 msgid "List of mounted filesystems and their types. Returns JSON"
-msgstr ""
+msgstr "Список змонтованих файлових систем та їх типи. Повертає JSON"
 
 #: include/classes/data/CItemData.php:1198
 msgid "List of mounted filesystems, their types, disk space and inode statistics. Returns JSON"
-msgstr ""
+msgstr "Список змонтованих файлових систем, їх типи, дисковий простір і статистика inode. Повертає JSON"
 
 #: include/classes/data/CItemData.php:922
 msgid "List of network interfaces. Returns JSON"
-msgstr ""
+msgstr "Список мережевих інтерфейсів. Повертає JSON"
 
 #: include/classes/data/CItemData.php:990
 msgid "List of object instances of Windows performance counters, discovered using object names in English. Returns JSON"
-msgstr ""
+msgstr "Список екземплярів об’єктів лічильників продуктивності Windows, виявлених за допомогою назв об’єктів англійською мовою. Повертає JSON"
 
 #: include/classes/data/CItemData.php:986
 msgid "List of object instances of Windows performance counters. Returns JSON"
@@ -12483,7 +12483,7 @@ msgstr "Локальний"
 
 #: include/classes/widgets/fields/CWidgetFieldTimeZone.php:58
 msgid "Local default"
-msgstr ""
+msgstr "Локальне за замовчуванням"
 
 #: include/classes/screens/CScreenHistory.php:267
 #: include/classes/widgets/forms/CWidgetFormClock.php:32
@@ -12587,7 +12587,7 @@ msgstr "Пн"
 #: include/func.inc.php:592 jsLoader.php:226
 msgctxt "month short"
 msgid "M"
-msgstr ""
+msgstr "М"
 
 #: include/hosts.inc.php:154 include/views/inventory.host.list.php:93
 msgid "MAC address A"
@@ -12602,7 +12602,7 @@ msgstr "MAC адреса B"
 #: include/views/js/item.preprocessing.js.php:178
 #: include/views/js/item.preprocessing.js.php:224
 msgid "MAC from Hex-STRING"
-msgstr ""
+msgstr "MAC з Hex-STRING"
 
 #: include/hosts.inc.php:33
 msgid "MD2"
@@ -12693,9 +12693,9 @@ msgstr "Період обслуговування створено"
 #: app/controllers/CControllerMaintenanceDelete.php:61
 msgid "Maintenance period deleted"
 msgid_plural "Maintenance periods deleted"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Період обслуговування видалено"
+msgstr[1] "Періоди обслуговування видалено"
+msgstr[2] "Періоди обслуговування видалено"
 
 #: app/views/popup.maintenance.period.php:162
 msgid "Maintenance period length"
@@ -13268,7 +13268,7 @@ msgstr "Метод не знайдено."
 
 #: include/httptest.inc.php:399
 msgid "Microsoft Edge"
-msgstr ""
+msgstr "Microsoft Edge"
 
 #: include/classes/widgets/forms/CWidgetFormItem.php:107
 #: include/classes/widgets/forms/CWidgetFormItem.php:188
@@ -13288,7 +13288,7 @@ msgstr "Мін"
 
 #: app/views/administration.authentication.edit.php:39
 msgid "Minimum password length"
-msgstr ""
+msgstr "Мінімальна довжина пароля"
 
 #: app/partials/administration.system.info.php:144
 #, c-format
@@ -13298,12 +13298,12 @@ msgstr "Мінімально потрібна версія %1$s бази дан�
 #: include/classes/setup/CFrontendSetup.php:124
 #, c-format
 msgid "Minimum required PHP memory limit is %1$s (configuration option \"memory_limit\")."
-msgstr ""
+msgstr "Мінімально необхідний об'єм пам'яті в PHP - %1$s (параметр конфігурації \"memory_limit\")."
 
 #: include/classes/setup/CFrontendSetup.php:162
 #, c-format
 msgid "Minimum required PHP upload filesize is %1$s (configuration option \"upload_max_filesize\")."
-msgstr ""
+msgstr "Мінімально необхідний розмір файлу, який завантажується в PHP - %1$s (параметр конфігурації \"upload_max_filesize\")."
 
 #: include/classes/setup/CFrontendSetup.php:106
 #, c-format
@@ -13313,7 +13313,7 @@ msgstr "Мінімально потрібна версія PHP - %1$s."
 #: app/views/administration.housekeeping.edit.php:175
 #, c-format
 msgid "Minimum required TimescaleDB version is %1$s."
-msgstr ""
+msgstr "Мінімально необхідна версія TimescaleDB - %1$s."
 
 #: include/classes/setup/CFrontendSetup.php:193
 #, c-format
