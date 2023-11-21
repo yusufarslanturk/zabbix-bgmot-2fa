@@ -2538,12 +2538,7 @@ function getMainItemFieldNames(array $input): array {
 
 		case ZBX_FLAG_DISCOVERY_CREATED:
 			return ['status'];
-
-		case ZBX_FLAG_DISCOVERY_RULE:
-			return ['filter'];
 	}
-
-	return [];
 }
 
 /**
@@ -2639,8 +2634,6 @@ function getTypeItemFieldNames(array $input): array {
 				return ['delay'];
 			}
 	}
-
-	return [];
 }
 
 /**

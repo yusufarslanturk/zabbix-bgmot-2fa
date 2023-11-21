@@ -36,8 +36,7 @@ class C62ImportConverter extends CConverter {
 	/**
 	 * Convert import data from 6.2 to 6.4 version.
 	 *
-	 * @param array  $data
-	 * @param string $format
+	 * @param array $data
 	 *
 	 * @return array
 	 */
