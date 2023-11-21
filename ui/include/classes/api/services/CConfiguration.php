@@ -264,7 +264,7 @@ class CConfiguration extends CApiService {
 
 			$data = $import_converter_factory
 				->getObject($version)
-				->convert($data, $params['format']);
+				->convert($data);
 
 			$data = $validator
 				// Must not use XML_INDEXED_ARRAY key validation for the converted data.
