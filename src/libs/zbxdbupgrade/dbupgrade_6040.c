@@ -275,8 +275,8 @@ static int	DBpatch_6040026(void)
 
 	while (SUCCEED == ret && NULL != (row = zbx_db_fetch(result)))
 	{
-		int			i;
-		char			*error = NULL;
+		int	i;
+		char	*esc, *error = NULL;
 
 		zbx_eval_clear(&ctx);
 
@@ -335,8 +335,10 @@ static int	DBpatch_6040026(void)
 			memmove(&params[l], &params[r], strlen(params) - r + 1);
 		}
 
+		esc = zbx_db_dyn_escape_string(params);
 		zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
-				"update items set params='%s' where itemid=%s;\n", params, row[0]);
+				"update items set params='%s' where itemid=%s;\n", esc, row[0]);
+		zbx_free(esc);
 
 		ret = zbx_db_execute_overflowed_sql(&sql, &sql_alloc, &sql_offset);
 	}
