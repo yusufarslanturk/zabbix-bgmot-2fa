@@ -2537,7 +2537,7 @@ class testDashboardGraphWidget extends CWebTest {
 			$this->assertFalse($input->isEnabled());
 			$this->assertEquals('', $input->getValue());
 
-			foreach (['maxlength' => 2048, 'placeholder' => 'value'] as $attribute => $value) {
+			foreach (['maxlength' => 255, 'placeholder' => 'value'] as $attribute => $value) {
 				$this->assertEquals($value, $input->getAttribute($attribute));
 			}
 		}
