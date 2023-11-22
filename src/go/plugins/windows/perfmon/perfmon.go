@@ -61,6 +61,11 @@ type perfCounterIndex struct {
 	lang int
 }
 
+type perfCounterAddInfo struct {
+	index    perfCounterIndex
+	interval int64
+}
+
 type perfCounter struct {
 	lastAccess time.Time
 	interval   int
@@ -76,6 +81,7 @@ type Plugin struct {
 	mutex        sync.Mutex
 	historyMutex sync.Mutex
 	counters     map[perfCounterIndex]*perfCounter
+	addCounters  []perfCounterAddInfo
 	query        win32.PDH_HQUERY
 	collectError error
 }
@@ -131,24 +137,12 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	if !ok {
 
-		p.mutex.Lock()
-		defer p.mutex.Unlock()
+		p.historyMutex.Lock()
+		defer p.historyMutex.Unlock()
 
-		if p.query == 0 {
-			p.query, err = win32.PdhOpenQuery(nil, 0)
-			if err != nil {
-				return nil, zbxerr.New("cannot open query").Wrap(err)
-			}
-		}
+		p.addCounters = append(p.addCounters, perfCounterAddInfo{index, interval})
 
-		err = p.addCounter(index, interval)
-		if err != nil {
-			p.collectError = zbxerr.New(
-				fmt.Sprintf("failed to get counter for path %q and lang %d", path, lang),
-			).Wrap(err)
-		}
-
-		return nil, p.collectError
+		return nil, nil
 	}
 
 	if p.collectError != nil {
@@ -175,6 +169,30 @@ func (p *Plugin) Collect() error {
 		if err != nil {
 			return zbxerr.New("cannot open query").Wrap(err)
 		}
+	}
+
+	for i := len(p.addCounters) - 1; i >= 0; i-- {
+		if p.query == 0 {
+			p.query, err = win32.PdhOpenQuery(nil, 0)
+			if err != nil {
+				return zbxerr.New("cannot open query").Wrap(err)
+			}
+		}
+
+		p.historyMutex.Lock()
+		addInfo := p.addCounters[i]
+		err = p.addCounter(addInfo.index, addInfo.interval)
+		if err != nil {
+			p.collectError = zbxerr.New(
+				fmt.Sprintf("failed to get counter for path %q and lang %d", addInfo.index.path, addInfo.index.lang),
+			).Wrap(err)
+			p.historyMutex.Unlock()
+
+			return p.collectError
+		}
+		p.addCounters = append(p.addCounters[:i], p.addCounters[i+1:]...)
+		p.historyMutex.Unlock()
+
 	}
 
 	p.setCounterData()
