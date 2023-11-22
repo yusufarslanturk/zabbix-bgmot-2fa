@@ -307,11 +307,12 @@ static int	DBpatch_6040026(void)
 			if (ZBX_EVAL_TOKEN_ARG_QUERY == ctx.stack.values[i + OFFSET_TIME].type)
 				continue;
 
+			if (ZBX_EVAL_TOKEN_ARG_NULL == ctx.stack.values[i + OFFSET_TIME].type)
+				continue;
+
 			loc = &ctx.stack.values[i + OFFSET_TIME].loc;
 
-			if ((ZBX_EVAL_TOKEN_ARG_NULL != ctx.stack.values[i + OFFSET_TIME].type) &&
-					(FAIL == zbx_is_time_suffix(&ctx.expression[loc->l], &sec,
-					(int)TOKEN_LEN(loc)) || 0 != sec))
+			if (FAIL == zbx_is_time_suffix(&ctx.expression[loc->l], &sec, (int)TOKEN_LEN(loc)) || 0 != sec)
 			{
 				continue;
 			}
