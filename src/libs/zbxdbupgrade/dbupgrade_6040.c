@@ -316,8 +316,6 @@ static int	DBpatch_6040026(void)
 				continue;
 			}
 
-			loc = &ctx.stack.values[i + OFFSET_FILTER].loc;
-
 			zbx_vector_uint32_append(&del_idx, (zbx_uint32_t)(i + OFFSET_TIME));
 		}
 
