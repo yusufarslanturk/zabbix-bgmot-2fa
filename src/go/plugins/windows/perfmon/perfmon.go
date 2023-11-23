@@ -193,14 +193,13 @@ func (p *Plugin) Collect() error {
 		return err
 	}
 
-	p.setCounterData()
-
-	p.historyMutex.Lock()
-	err = p.collectError
-	p.historyMutex.Unlock()
-
+	err = p.setCounterData()
 	if err != nil {
 		p.Debugf("reset counter query: '%s'", err)
+
+		p.historyMutex.Lock()
+		p.collectError = err
+		p.historyMutex.Unlock()
 
 		err := win32.PdhCloseQuery(p.query)
 		if err != nil {
@@ -225,21 +224,16 @@ func (p *Plugin) Start() {
 func (p *Plugin) Stop() {
 }
 
-func (p *Plugin) setCounterData() {
-	err := win32.PdhCollectQueryData(p.query)
-	p.historyMutex.Lock()
-	if err != nil {
-		p.collectError = fmt.Errorf("cannot collect value %s", err)
-	} else {
-		p.collectError = nil
+func (p *Plugin) setCounterData() error {
+	errCollect := win32.PdhCollectQueryData(p.query)
+	if errCollect != nil {
+		errCollect = fmt.Errorf("cannot collect value %s", errCollect)
 	}
-	err = p.collectError
-	p.historyMutex.Unlock()
 
 	expireTime := time.Now().Add(-maxInactivityPeriod)
 
 	for index, c := range p.counters {
-		if c.lastAccess.Before(expireTime) || err != nil {
+		if c.lastAccess.Before(expireTime) || errCollect != nil {
 			err2 := win32.PdhRemoveCounter(c.handle)
 			if err2 != nil {
 				p.Warningf("error while removing counter '%s': %s", index.path, err2)
@@ -274,6 +268,8 @@ func (p *Plugin) setCounterData() {
 		}
 		p.historyMutex.Unlock()
 	}
+
+	return errCollect
 }
 
 // addCounter adds new performance counter to query. The plugin mutex must be locked.
