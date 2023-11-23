@@ -201,14 +201,14 @@ func (p *Plugin) Collect() error {
 		p.collectError = err
 		p.historyMutex.Unlock()
 
-		err := win32.PdhCloseQuery(p.query)
-		if err != nil {
-			p.Warningf("error while closing query '%s'", err)
+		err2 := win32.PdhCloseQuery(p.query)
+		if err2 != nil {
+			p.Warningf("error while closing query '%s'", err2)
 		}
 
 		p.query = 0
 
-		return err
+		return err2
 	}
 
 	return nil
