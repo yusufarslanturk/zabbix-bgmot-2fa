@@ -208,7 +208,7 @@ func (p *Plugin) Collect() error {
 
 		p.query = 0
 
-		return err2
+		return err
 	}
 
 	return nil
