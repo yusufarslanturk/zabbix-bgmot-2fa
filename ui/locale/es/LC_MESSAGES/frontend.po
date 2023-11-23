@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-11-17 10:32+0000\n"
+"PO-Revision-Date: 2023-11-20 17:37+0000\n"
 "Last-Translator: Vicente Salvador <vicentesalvadorcubedo@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: es\n"
@@ -543,7 +543,7 @@ msgstr "Acceso a los servicios"
 #: include/classes/screens/CScreenProblem.php:888
 #: include/classes/screens/CScreenProblem.php:1157 include/events.inc.php:290
 msgid "Ack"
-msgstr "Reconocer"
+msgstr "Reconocido"
 
 #: app/views/monitoring.widget.problems.view.php:81
 msgctxt "compact table header"
@@ -552,7 +552,7 @@ msgstr "Reconocer"
 
 #: app/views/popup.acknowledge.edit.php:83 jsLoader.php:353
 msgid "Acknowledge"
-msgstr "Aceptada"
+msgstr "Reconocer"
 
 #: include/classes/helpers/CRoleHelper.php:463
 msgid "Acknowledge problems"
@@ -1089,7 +1089,7 @@ msgstr "Edad"
 
 #: app/partials/monitoring.problem.filter.php:116
 msgid "Age less than"
-msgstr "Edad menor que"
+msgstr "Edad menor de"
 
 #: app/views/administration.script.list.php:164 include/hosts.inc.php:1191
 #: include/items.inc.php:347 include/views/configuration.httpconf.edit.php:98
@@ -1195,7 +1195,7 @@ msgstr "Todos los grupos"
 
 #: app/views/monitoring.host.dashboard.view.php:120 include/html.inc.php:305
 msgid "All hosts"
-msgstr "Todos los hosts"
+msgstr "Todos los equipos"
 
 #: jsLoader.php:284
 msgid "All links should have \"Name\" and \"URL\" specified"
@@ -1275,12 +1275,12 @@ msgstr "Cantidad de memoria física del anfitrión consumida para respaldar las 
 #: include/classes/api/services/CItemGeneral.php:1544
 #, c-format
 msgid "An LLD rule with key \"%1$s\" already exists on the host \"%2$s\"."
-msgstr "Ya existe una regla LLD con una clave \"%1$s\" en el host \"%2$s\"."
+msgstr "Ya existe una regla LLD con una clave \"%1$s\" en el equipo \"%2$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:1543
 #, c-format
 msgid "An LLD rule with key \"%1$s\" already exists on the template \"%2$s\"."
-msgstr "Ya existe una regla LLD con la clave \"%1$s\" en el template \"%2$s\"."
+msgstr "Ya existe una regla LLD con la clave \"%1$s\" en la plantilla \"%2$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:1538
 #, c-format
@@ -1497,7 +1497,7 @@ msgstr "Debe comprobarse al menos un elemento de la interfaz de usuario."
 #: include/classes/api/services/CRole.php:487
 #, c-format
 msgid "At least one UI element must be enabled for user role \"%1$s\"."
-msgstr "Debe ser un activado al menos un elemento de la interfaz de usuario para el rol de usuario \"%1$s\"."
+msgstr "Debe ser activado al menos un elemento de la interfaz de usuario para el rol de usuario \"%1$s\"."
 
 #: app/controllers/CControllerPopupLldOperation.php:122
 msgid "At least one action is mandatory."
@@ -2183,8 +2183,8 @@ msgstr "No se pudo agregar el tipo de medios"
 #, c-format
 msgid "Cannot add module: %1$s."
 msgid_plural "Cannot add modules: %1$s."
-msgstr[0] "No se pueden añadir el módulo: %1$s."
-msgstr[1] "No se pueden añadir el módulos: %1$s."
+msgstr[0] "No se puede añadir el módulo: %1$s."
+msgstr[1] "No se pueden añadir los módulos: %1$s."
 
 #: include/classes/api/services/CGraph.php:40
 #, c-format
@@ -2343,14 +2343,14 @@ msgstr "No se pueden convertir datos POST:"
 #: graphs.php:390
 msgid "Cannot copy graph"
 msgid_plural "Cannot copy graphs"
-msgstr[0] "No se pudieron copiar la gráfica"
+msgstr[0] "No se pudo copiar la gráfica"
 msgstr[1] "No se pudieron copiar las gráficas"
 
 #: items.php:965
 msgid "Cannot copy item"
 msgid_plural "Cannot copy items"
 msgstr[0] "No se pudo copiar la métrica"
-msgstr[1] "No se pudo copiar las métricas"
+msgstr[1] "No se pudieron copiar las métricas"
 
 #: include/classes/api/services/CDiscoveryRule.php:2475
 #, c-format
@@ -2395,7 +2395,7 @@ msgstr "No se pudo crear otra conexión a la base de datos."
 #: include/classes/api/services/CTrigger.php:1013
 #: include/classes/api/services/CTriggerPrototype.php:819
 msgid "Cannot create circular dependencies."
-msgstr "No se pudo crear las dependencias de circular."
+msgstr "No se pueden crear dependencias circulares."
 
 #: app/controllers/CControllerConnectorCreate.php:89
 #: app/controllers/CControllerConnectorCreate.php:164
@@ -2482,13 +2482,13 @@ msgstr "No se puede eliminar el rol de usuario asignado \"%1$s\"."
 msgid "Cannot delete connector"
 msgid_plural "Cannot delete connectors"
 msgstr[0] "No se puede borrar el conector"
-msgstr[1] "No se puede borrar los conectores"
+msgstr[1] "No se pueden borrar los conectores"
 
 #: app/controllers/CControllerCorrelationDelete.php:68
 msgid "Cannot delete correlation"
 msgid_plural "Cannot delete correlations"
-msgstr[0] "No se pudo borrar la correlación"
-msgstr[1] "No se pudo borrar la correlación"
+msgstr[0] "No se puede borrar la correlación"
+msgstr[1] "No se pueden borrar las correlaciones"
 
 #: app/controllers/CControllerDashboardDelete.php:63
 #: app/controllers/CControllerTemplateDashboardDelete.php:61
@@ -2546,8 +2546,8 @@ msgstr "No se pudo eliminar el equipo"
 #, c-format
 msgid "Cannot delete host %1$s because maintenance \"%2$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete hosts %1$s because maintenance \"%2$s\" must contain at least one host or host group."
-msgstr[0] "No se puede eliminar el host %1$s porque el mantenimiento \"%2$s\" debe contener al menos un host o grupo de hosts."
-msgstr[1] "No se puede eliminar el host %1$s porque el mantenimiento \"%2$s\" debe contener al menos un host o grupo de hosts."
+msgstr[0] "No se puede eliminar el equipo %1$s porque el mantenimiento \"%2$s\" debe contener al menos un equipo o grupo de equipos."
+msgstr[1] "No se pueden eliminar los equipos %1$s porque el mantenimiento \"%2$s\" debe contener al menos un equipo o grupo de equipos."
 
 #: app/controllers/CControllerHostGroupDelete.php:75
 msgid "Cannot delete host group"
@@ -8871,7 +8871,7 @@ msgstr "Hardware"
 
 #: include/hosts.inc.php:169
 msgid "Hardware (Full details)"
-msgstr "Hardware (detallado)"
+msgstr "Hardware (Todos los detalles)"
 
 #: include/classes/data/CItemData.php:1010
 msgid "Hardware sensor reading. Returns float"
@@ -12132,7 +12132,7 @@ msgstr "Gráfico de la última semana"
 #: include/views/inventory.host.view.php:145
 #: include/views/inventory.host.view.php:151 jsLoader.php:375
 msgid "Latest data"
-msgstr "Última fecha"
+msgstr "Últimos datos"
 
 #: jsLoader.php:376
 msgid "Latest values"
@@ -15982,31 +15982,31 @@ msgstr "Año anterior"
 
 #: include/hosts.inc.php:399
 msgid "Primary POC cell"
-msgstr "Celda POC primaria"
+msgstr "Celular de la PdC principal"
 
 #: include/hosts.inc.php:384
 msgid "Primary POC email"
-msgstr "Correo electrónico de POC principal"
+msgstr "Correo electrónico de la PdC principal"
 
 #: include/hosts.inc.php:379
 msgid "Primary POC name"
-msgstr "Nombre de POC principal"
+msgstr "Nombre de la PdC principal"
 
 #: include/hosts.inc.php:409
 msgid "Primary POC notes"
-msgstr "Notas de POC principal"
+msgstr "Notas de la PdC principal"
 
 #: include/hosts.inc.php:389
 msgid "Primary POC phone A"
-msgstr "Teléfono A de POC principal"
+msgstr "Teléfono A de la PdC principal"
 
 #: include/hosts.inc.php:394
 msgid "Primary POC phone B"
-msgstr "Teléfono B de POC principal"
+msgstr "Teléfono B de la PdC principal"
 
 #: include/hosts.inc.php:404
 msgid "Primary POC screen name"
-msgstr "Nombre de pantalla de POC principal"
+msgstr "Nombre de usuario de la PdC principal"
 
 #: app/partials/configuration.host.interface.row.php:179
 #: app/views/popup.discovery.check.php:117
@@ -17213,7 +17213,7 @@ msgstr "Revertir cambios"
 #: include/views/js/monitoring.sysmaps.js.php:685
 #: include/views/monitoring.sysmap.edit.php:252
 msgid "Right"
-msgstr "Derecho"
+msgstr "Derecha"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:184
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:197
@@ -17818,31 +17818,31 @@ msgstr "Ventana de desviación de temporada"
 
 #: include/hosts.inc.php:434
 msgid "Secondary POC cell"
-msgstr "Celda POC secundaria"
+msgstr "Celular de la PdC secundaria"
 
 #: include/hosts.inc.php:419
 msgid "Secondary POC email"
-msgstr "Correo electrónico POC secundario"
+msgstr "Correo electrónico de la PdC secundaria"
 
 #: include/hosts.inc.php:414
 msgid "Secondary POC name"
-msgstr "Nombre de POC secundario"
+msgstr "Nombre de la PdC secundaria"
 
 #: include/hosts.inc.php:444
 msgid "Secondary POC notes"
-msgstr "Notas POC secundarias"
+msgstr "Notas de la PdC secundaria"
 
 #: include/hosts.inc.php:424
 msgid "Secondary POC phone A"
-msgstr "Teléfono A de POC secundario"
+msgstr "Teléfono A de la PdC secundaria"
 
 #: include/hosts.inc.php:429
 msgid "Secondary POC phone B"
-msgstr "Teléfono B de POC secundario"
+msgstr "Teléfono B de la PdC secundaria"
 
 #: include/hosts.inc.php:439
 msgid "Secondary POC screen name"
-msgstr "Nombre de pantalla de POC secundario"
+msgstr "Nombre de usuario de la PdC secundaria"
 
 #: include/classes/widgets/forms/CWidgetFormClock.php:173
 msgid "Seconds"
