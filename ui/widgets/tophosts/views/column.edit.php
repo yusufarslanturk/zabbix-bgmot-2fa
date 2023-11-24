@@ -45,18 +45,19 @@ if (array_key_exists('edit', $data)) {
 
 // Name.
 $form_grid->addItem([
-	new CLabel(_('Name'), 'name'),
+	new CLabel(_('Name'), 'column_name'),
 	new CFormField(
 		(new CTextBox('name', $data['name'], false))
 			->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			->setAttribute('autofocus', 'autofocus')
 			->setAriaRequired()
+			->setId('column_name')
 	)
 ]);
 
 // Data.
 $form_grid->addItem([
-	new CLabel(_('Data'), 'data'),
+	new CLabel(_('Data'), 'label_data'),
 	new CFormField(
 		(new CSelect('data'))
 			->setValue($data['data'])
@@ -65,6 +66,7 @@ $form_grid->addItem([
 				CWidgetFieldColumnsList::DATA_HOST_NAME => _('Host name'),
 				CWidgetFieldColumnsList::DATA_TEXT => _('Text')
 			]))
+			->setFocusableElementId('label_data')
 	)
 ]);
 
@@ -99,7 +101,7 @@ $item_select = (new CPatternSelect([
 $scripts[] = $item_select->getPostJS();
 
 $form_grid->addItem([
-	(new CLabel(_('Item'), 'item'))->setAsteriskMark(),
+	(new CLabel(_('Item'), 'item_ms'))->setAsteriskMark(),
 	new CFormField($item_select)
 ]);
 
@@ -124,7 +126,7 @@ $form_grid->addItem([
 			_('Aggregation function'),
 			$numeric_only_warning->setId('tophosts-column-aggregate-function-warning')
 		],
-		'aggregate_function'
+		'label_aggregate_function'
 	),
 	new CFormField(
 		(new CSelect('aggregate_function'))
@@ -139,6 +141,7 @@ $form_grid->addItem([
 				AGGREGATE_FIRST => _('first'),
 				AGGREGATE_LAST => _('last')
 			]))
+			->setFocusableElementId('label_aggregate_function')
 	)
 ]);
 
