@@ -306,8 +306,8 @@ $button_list = [
 
 if ($data['context'] === 'host') {
 	$massclearhistory = [
-		'name' => _('Clear history'),
-		'confirm' => _('Delete history of selected items?'),
+		'name' => _('Clear history and trends'),
+		'confirm' => _('Clear history and trends of selected items?'),
 		'csrf_token' => $csrf_token
 	];
 

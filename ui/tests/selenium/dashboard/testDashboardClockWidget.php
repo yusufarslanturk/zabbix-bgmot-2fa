@@ -21,8 +21,8 @@
 
 require_once dirname(__FILE__) . '/../../include/CWebTest.php';
 require_once dirname(__FILE__).'/../../include/helpers/CDataHelper.php';
-require_once dirname(__FILE__).'/../traits/TableTrait.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
+require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
 
 /**
  * @backup widget, profiles
@@ -32,7 +32,17 @@ require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 
 class testDashboardClockWidget extends CWebTest {
 
-	use TableTrait;
+	/**
+	 * Attach MessageBehavior and TableBehavior to the test.
+	 *
+	 * @return array
+	 */
+	public function getBehaviors() {
+		return [
+			CMessageBehavior::class,
+			CTableBehavior::class
+		];
+	}
 
 	/**
 	 * Id of the dashboard with widgets.
@@ -40,15 +50,6 @@ class testDashboardClockWidget extends CWebTest {
 	 * @var integer
 	 */
 	protected static $dashboardid;
-
-	/**
-	 * Attach MessageBehavior to the test.
-	 *
-	 * @return array
-	 */
-	public function getBehaviors() {
-		return ['class' => CMessageBehavior::class];
-	}
 
 	/**
 	 * SQL query to get widget and widget_field tables to compare hash values, but without widget_fieldid
@@ -282,7 +283,8 @@ class testDashboardClockWidget extends CWebTest {
 					],
 					// This is Time zone field found by xpath, because we have one more field with Time zone label.
 					'xpath:.//div[@class="fields-group fields-group-tzone"]' => ['id:tzone_size' => 20, 'id:tzone_bold' => false,
-							'id:tzone_color' => null, 'id:tzone_timezone' => 'Local default: (UTC+03:00) Europe/Riga',
+							'id:tzone_color' => null,
+							'id:tzone_timezone' => 'Local default: '.CDateTimeHelper::getTimeZoneFormat('Europe/Riga'),
 							'id:tzone_format' => 'Short'
 					]
 				];

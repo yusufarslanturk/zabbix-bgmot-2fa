@@ -271,7 +271,7 @@ class testInitialConfSync extends CIntegrationTest
 		[
 			'hgroups' =>
 			[
-				'insert' => '16',
+				'insert' => '3',
 				'update' => '0',
 				'delete' => '0'
 			]
@@ -1262,7 +1262,7 @@ class testInitialConfSync extends CIntegrationTest
 			'filter' => [
 				'conditions' => [
 					[
-						'conditiontype' => CONDITION_TYPE_TRIGGER_NAME,
+						'conditiontype' => ZBX_CONDITION_TYPE_EVENT_NAME,
 						'operator' => CONDITION_OPERATOR_LIKE,
 						'value' => 'qqq'
 					]
@@ -1312,7 +1312,7 @@ class testInitialConfSync extends CIntegrationTest
 			'filter' => [
 				'conditions' => [
 					[
-						'conditiontype' => CONDITION_TYPE_TRIGGER_NAME,
+						'conditiontype' => ZBX_CONDITION_TYPE_EVENT_NAME,
 						'operator' => CONDITION_OPERATOR_NOT_LIKE,
 						'value' => 'qqq'
 					]

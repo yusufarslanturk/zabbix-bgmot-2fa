@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-07-31 08:31+0000\n"
+"PO-Revision-Date: 2023-11-06 16:42+0000\n"
 "Last-Translator: Tomáš Skočdopole <tomas.skocdopole@initmax.cz>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: cs\n"
@@ -2330,6 +2330,10 @@ msgstr "Nelze změnit typ uživatele vlastní role."
 msgid "Cannot clear history"
 msgstr "Nelze smazat historii"
 
+#: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
+msgid "Cannot clear history and trends"
+msgstr "Historii a trendy nelze vymazat"
+
 #: include/classes/api/services/CDiscoveryRule.php:2514
 msgid "Cannot clone graph prototypes."
 msgstr "Nelze klonovat předlohy pro grafy."
@@ -2883,6 +2887,13 @@ msgstr[0] "Není možné vypnout typ média"
 msgstr[1] "Není možné vypnout typ média"
 msgstr[2] "Není možné vypnout typ média"
 
+#: app/controllers/CControllerModuleUpdate.php:146
+msgid "Cannot disable module"
+msgid_plural "Cannot disable modules"
+msgstr[0] "Modul nelze zakázat"
+msgstr[1] "Moduly nelze zakázat"
+msgstr[2] "Moduly nelze zakázat"
+
 #: app/controllers/CControllerModuleUpdate.php:165
 #, c-format
 msgid "Cannot disable module: %1$s."
@@ -2985,6 +2996,13 @@ msgid_plural "Cannot enable media types"
 msgstr[0] "Není možné povolit typ média"
 msgstr[1] "Není možné povolit typy médií"
 msgstr[2] "Není možné povolit typy médií"
+
+#: app/controllers/CControllerModuleUpdate.php:141
+msgid "Cannot enable module"
+msgid_plural "Cannot enable modules"
+msgstr[0] "Modul nelze povolit"
+msgstr[1] "Moduly nelze povolit"
+msgstr[2] "Moduly nelze povolit"
 
 #: app/controllers/CControllerModuleUpdate.php:160
 #, c-format
@@ -4037,6 +4055,10 @@ msgstr "Nelze aktualizovat servisní okno"
 msgid "Cannot update media type"
 msgstr "Není možné aktualizovat typ média"
 
+#: app/controllers/CControllerModuleUpdate.php:137
+msgid "Cannot update module"
+msgstr "Modul nelze aktualizovat"
+
 #: app/controllers/CControllerModuleUpdate.php:157
 #, c-format
 msgid "Cannot update module: %1$s."
@@ -4427,6 +4449,14 @@ msgstr "Vyčistit historii"
 #: include/views/configuration.item.edit.php:1073
 msgid "Clear history and trends"
 msgstr "Vyčistit historii a trendy"
+
+#: include/views/configuration.item.list.php:310
+msgid "Clear history and trends of selected items?"
+msgstr "Vyčistit historii a trendy vybraných itemů?"
+
+#: include/views/configuration.httpconf.list.php:232
+msgid "Clear history and trends of selected web scenarios?"
+msgstr "Vyčistit historii a trendy vybraných webových scénářů?"
 
 #: app/views/popup.massupdate.host.php:69
 #: app/views/popup.massupdate.template.php:72
@@ -7795,6 +7825,10 @@ msgstr "Monitoring logu událostí. Vráti log"
 msgid "Event name"
 msgstr "Název události"
 
+#: app/views/popup.condition.edit.php:819
+msgid "Event name matches Trigger name (with macros expanded) unless a custom Event name is specified in Trigger settings."
+msgstr "Název Eventu odpovídá názvu Triggeru (s expandovanými makry), pokud není v nastavení Triggeru určen vlastní název Eventu."
+
 #: include/classes/helpers/CCorrelationHelper.php:55
 msgid "Event tag pair"
 msgstr "Pár značky události"
@@ -9068,6 +9102,10 @@ msgstr "Označ celý řádek"
 #: jsLoader.php:372
 msgid "History"
 msgstr "Historie"
+
+#: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
+msgid "History and trends cleared"
+msgstr "Historie a trendy vyčištěny"
 
 #: app/views/administration.housekeeping.edit.php:159
 msgid "History and trends compression"
@@ -13380,6 +13418,13 @@ msgstr[0] "Modul smazán: %1$s."
 msgstr[1] "Moduly smazány: %1$s."
 msgstr[2] "Moduly smazány: %1$s."
 
+#: app/controllers/CControllerModuleUpdate.php:132
+msgid "Module disabled"
+msgid_plural "Modules disabled"
+msgstr[0] "Modul zakázán"
+msgstr[1] "Moduly zakázány"
+msgstr[2] "Moduly zakázány"
+
 #: app/controllers/CControllerModuleUpdate.php:150
 #, c-format
 msgid "Module disabled: %1$s."
@@ -13388,6 +13433,13 @@ msgstr[0] "Modul zakázán: %1$s."
 msgstr[1] "Moduly zakázány: %1$s."
 msgstr[2] "Moduly zakázány: %1$s."
 
+#: app/controllers/CControllerModuleUpdate.php:129
+msgid "Module enabled"
+msgid_plural "Modules enabled"
+msgstr[0] "Modul povolen"
+msgstr[1] "Moduly povoleny"
+msgstr[2] "Moduly povoleny"
+
 #: app/controllers/CControllerModuleUpdate.php:145
 #, c-format
 msgid "Module enabled: %1$s."
@@ -13395,6 +13447,10 @@ msgid_plural "Modules enabled: %1$s."
 msgstr[0] "Modul povolen: %1$s."
 msgstr[1] "Moduly povoleny: %1$s."
 msgstr[2] "Moduly povoleny: %1$s."
+
+#: app/controllers/CControllerModuleUpdate.php:126
+msgid "Module updated"
+msgstr "Modul aktualizován"
 
 #: app/controllers/CControllerModuleUpdate.php:142
 #, c-format
@@ -24875,6 +24931,10 @@ msgstr "now() - Počet sekund od Období"
 #: include/forms.inc.php:1315 include/views/js/item.preprocessing.js.php:149
 msgid "number"
 msgstr "číslo"
+
+#: include/classes/api/services/CHostPrototype.php:836
+msgid "object does not exist or belongs to another object"
+msgstr "objekt neexistuje nebo patří jinému objektu"
 
 #: app/views/monitoring.widget.problemhosts.view.php:127
 #: include/blocks.inc.php:504
