@@ -33,6 +33,46 @@ class C62ImportConverter extends CConverter {
 		CXmlConstantName::DASHBOARD_WIDGET_TYPE_URL => CXmlConstantValue::DASHBOARD_WIDGET_TYPE_URL
 	];
 
+	private const ITEM_MAIN_FIELDS = [
+		ZBX_FLAG_DISCOVERY_NORMAL => ['name', 'type', 'key', 'value_type', 'units', 'history', 'trends',
+			'valuemapid', 'inventory_link', 'logtimefmt', 'description', 'status', 'tags', 'preprocessing',
+			'triggers'
+		],
+		ZBX_FLAG_DISCOVERY_PROTOTYPE => ['name', 'type', 'key', 'value_type', 'units', 'history', 'trends',
+			'valuemapid', 'logtimefmt', 'description', 'status', 'discover', 'tags', 'preprocessing',
+			'trigger_prototypes'
+		],
+		ZBX_FLAG_DISCOVERY_RULE => ['name', 'key', 'type', 'filter', 'item_prototypes', 'trigger_prototypes',
+			'graph_prototypes', 'host_prototypes'
+		]
+	];
+
+	private const ITEM_TYPE_FIELDS = [
+		CXmlConstantName::ZABBIX_PASSIVE => ['interface_ref', 'delay'],
+		CXmlConstantName::TRAP => ['trapper_hosts'],
+		CXmlConstantName::SIMPLE => ['interface_ref', 'username', 'password', 'delay'],
+		CXmlConstantName::INTERNAL => ['delay'],
+		CXmlConstantName::ZABBIX_ACTIVE => ['delay'],
+		CXmlConstantName::EXTERNAL => ['interface_ref', 'delay'],
+		CXmlConstantName::ODBC => ['username', 'password', 'params', 'delay'],
+		CXmlConstantName::IPMI => ['interface_ref', 'ipmi_sensor', 'delay'],
+		CXmlConstantName::SSH => ['interface_ref', 'authtype', 'username', 'publickey', 'privatekey', 'password',
+			'params', 'delay'
+		],
+		CXmlConstantName::TELNET => ['interface_ref', 'username', 'password', 'params', 'delay'],
+		CXmlConstantName::CALCULATED => ['params', 'delay'],
+		CXmlConstantName::JMX => ['interface_ref', 'jmx_endpoint', 'username', 'password', 'delay'],
+		CXmlConstantName::SNMP_TRAP => ['interface_ref'],
+		CXmlConstantName::DEPENDENT => ['master_itemid'],
+		CXmlConstantName::HTTP_AGENT => ['url', 'query_fields', 'request_method', 'post_type', 'posts', 'headers',
+			'status_codes', 'follow_redirects', 'retrieve_mode', 'output_format', 'http_proxy', 'interface_ref',
+			'authtype', 'username', 'password', 'verify_peer', 'verify_host', 'ssl_cert_file', 'ssl_key_file',
+			'ssl_key_password', 'timeout', 'delay', 'allow_traps', 'trapper_hosts'
+		],
+		CXmlConstantName::SNMP_AGENT => ['interface_ref', 'snmp_oid', 'delay'],
+		CXmlConstantName::SCRIPT => ['parameters', 'params', 'timeout', 'delay']
+	];
+
 	/**
 	 * Convert import data from 6.2 to 6.4 version.
 	 *
@@ -72,14 +112,14 @@ class C62ImportConverter extends CConverter {
 			if (array_key_exists('items', $host)) {
 				self::sanitizeItemFields($host['items'], [
 					'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
-					'hosts' => [['status' => HOST_STATUS_MONITORED]]
+					'host_status' => HOST_STATUS_MONITORED
 				]);
 			}
 
 			if (array_key_exists('discovery_rules', $host)) {
 				$host['discovery_rules'] = self::convertDiscoveryRules($host['discovery_rules'], [
 					'flags' => ZBX_FLAG_DISCOVERY_RULE,
-					'hosts' => [['status' => HOST_STATUS_MONITORED]]
+					'host_status' => HOST_STATUS_MONITORED
 				]);
 			}
 		}
@@ -100,14 +140,14 @@ class C62ImportConverter extends CConverter {
 			if (array_key_exists('items', $template)) {
 				self::sanitizeItemFields($template['items'], [
 					'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
-					'hosts' => [['status' => HOST_STATUS_TEMPLATE]]
+					'host_status' => HOST_STATUS_TEMPLATE
 				]);
 			}
 
 			if (array_key_exists('discovery_rules', $template)) {
 				$template['discovery_rules'] = self::convertDiscoveryRules($template['discovery_rules'], [
 					'flags' => ZBX_FLAG_DISCOVERY_RULE,
-					'hosts' => [['status' => HOST_STATUS_TEMPLATE]]
+					'host_status' => HOST_STATUS_TEMPLATE
 				]);
 			}
 
@@ -120,6 +160,13 @@ class C62ImportConverter extends CConverter {
 		return $templates;
 	}
 
+	/**
+	* Convert discovery rules.
+	*
+	* @param array $discovery_rules
+	*
+	* @return array
+	*/
 	private static function convertDiscoveryRules(array $discovery_rules, array $internal_fields): array {
 		self::sanitizeItemFields($discovery_rules, $internal_fields);
 
@@ -135,6 +182,13 @@ class C62ImportConverter extends CConverter {
 		return $discovery_rules;
 	}
 
+	/**
+	* Convert item prototypes.
+	*
+	* @param array $item_prototypes
+	*
+	* @return array
+	*/
 	private static function convertItemPrototypes(array $item_prototypes, array $internal_fields): array {
 		self::sanitizeItemFields($item_prototypes, $internal_fields);
 
@@ -214,167 +268,76 @@ class C62ImportConverter extends CConverter {
 	 *        string  $items[<num>]['value_type']             (optional)
 	 * @param array   $internal_fields
 	 *        int     $internal_fields['flags']
-	 *        int     $internal_fields['hosts'][0]['status']
+	 *        int     $internal_fields['host_status']
 	 *
 	 * @return array
 	 */
 	private static function sanitizeItemFields(array &$items, array $internal_fields): void {
-		$item_defaults = [
-			'value_type' => CXmlConstantName::UNSIGNED,
-			'jmx_endpoint' => ZBX_DEFAULT_JMX_ENDPOINT
-		];
+		$internal_fields['value_type'] = $internal_fields['flags'] == ZBX_FLAG_DISCOVERY_RULE
+			? CXmlConstantName::TEXT
+			: CXmlConstantName::UNSIGNED;
 
 		foreach ($items as &$item) {
 			if (!array_key_exists('key', $item) || !array_key_exists('type', $item)) {
 				continue;
 			}
 
-			$item = self::getSanitizedItemFields($item + $internal_fields + $item_defaults);
+			$field_names = array_merge(
+				self::ITEM_MAIN_FIELDS[$internal_fields['flags']], self::ITEM_TYPE_FIELDS[$item['type']]
+			);
+			$field_names = self::getConditionalItemFieldNames($field_names, $item + $internal_fields);
+
+			if ($internal_fields['host_status'] == HOST_STATUS_TEMPLATE) {
+				array_unshift($field_names, 'uuid');
+			}
+
+			$item = array_intersect_key($item, array_flip($field_names));
 		}
 		unset($item);
 	}
 
-	private static function getSanitizedItemFields(array $input): array {
-		$field_names = self::getMainItemFieldNames($input);
-
-		if ($input['hosts'][0]['status'] == HOST_STATUS_TEMPLATE) {
-			array_unshift($field_names, 'uuid');
-		}
-
-		if ($input['flags'] != ZBX_FLAG_DISCOVERY_CREATED) {
-			$field_names = array_merge($field_names, self::getTypeItemFieldNames($input));
-			$field_names = self::getConditionalItemFieldNames($field_names, $input);
-		}
-
-		return array_intersect_key($input, array_flip($field_names));
-	}
-
-	private static function getMainItemFieldNames(array $input): array {
-		switch ($input['flags']) {
-			case ZBX_FLAG_DISCOVERY_NORMAL:
-				return ['name', 'type', 'key', 'value_type', 'units', 'history', 'trends', 'valuemapid',
-					'inventory_link', 'logtimefmt', 'description', 'status', 'tags', 'preprocessing', 'triggers'
-				];
-
-			case ZBX_FLAG_DISCOVERY_PROTOTYPE:
-				return ['name', 'type', 'key', 'value_type', 'units', 'history', 'trends', 'valuemapid', 'logtimefmt',
-					'description', 'status', 'discover', 'tags', 'preprocessing', 'trigger_prototypes'
-				];
-
-			case ZBX_FLAG_DISCOVERY_RULE:
-				return ['name', 'key', 'type', 'filter', 'item_prototypes', 'trigger_prototypes', 'graph_prototypes',
-					'host_prototypes'
-				];
-		}
-
-		return [];
-	}
-
-	private static function getTypeItemFieldNames(array $input): array {
-		switch ($input['type']) {
-			case CXmlConstantName::ZABBIX_PASSIVE:
-				return ['interface_ref', 'delay'];
-
-			case CXmlConstantName::TRAP:
-				return ['trapper_hosts'];
-
-			case CXmlConstantName::SIMPLE:
-				return ['interface_ref', 'username', 'password', 'delay'];
-
-			case CXmlConstantName::INTERNAL:
-				return ['delay'];
-
-			case CXmlConstantName::ZABBIX_ACTIVE:
-				return ['delay'];
-
-			case CXmlConstantName::EXTERNAL:
-				return ['interface_ref', 'delay'];
-
-			case ITEM_TYPE_DB_MONITOR:
-				return ['username', 'password', 'params', 'delay'];
-
-			case ITEM_TYPE_IPMI:
-				return ['interface_ref', 'ipmi_sensor', 'delay'];
-
-			case CXmlConstantName::SSH:
-				return ['interface_ref', 'authtype', 'username', 'publickey', 'privatekey', 'password', 'params',
-					'delay'
-				];
-
-			case CXmlConstantName::TELNET:
-				return ['interface_ref', 'username', 'password', 'params', 'delay'];
-
-			case CXmlConstantName::CALCULATED:
-				return ['params', 'delay'];
-
-			case CXmlConstantName::JMX:
-				return ['interface_ref', 'jmx_endpoint', 'username', 'password', 'delay'];
-
-			case CXmlConstantName::SNMP_TRAP:
-				return ['interface_ref'];
-
-			case CXmlConstantName::DEPENDENT:
-				return ['master_itemid'];
-
-			case CXmlConstantName::HTTP_AGENT:
-				return ['url', 'query_fields', 'request_method', 'post_type', 'posts', 'headers', 'status_codes',
-					'follow_redirects', 'retrieve_mode', 'output_format', 'http_proxy', 'interface_ref', 'authtype',
-					'username', 'password', 'verify_peer', 'verify_host', 'ssl_cert_file', 'ssl_key_file',
-					'ssl_key_password', 'timeout', 'delay', 'allow_traps', 'trapper_hosts'
-				];
-
-			case CXmlConstantName::SNMP_AGENT:
-				return ['interface_ref', 'snmp_oid', 'delay'];
-
-			case CXmlConstantName::SCRIPT:
-				return ['parameters', 'params', 'timeout', 'delay'];
-		}
-
-		return [];
-	}
-
-	private static function getConditionalItemFieldNames(array $field_names, array $input): array {
-		return array_filter($field_names, static function ($field_name) use ($input): bool {
+	private static function getConditionalItemFieldNames(array $field_names, array $item): array {
+		return array_filter($field_names, static function ($field_name) use ($item): bool {
 			switch ($field_name) {
 				case 'units':
 				case 'trends':
-					return in_array($input['value_type'], [CXmlConstantName::FLOAT, CXmlConstantName::UNSIGNED]);
+					return in_array($item['value_type'], [CXmlConstantName::FLOAT, CXmlConstantName::UNSIGNED]);
 
 				case 'valuemapid':
-					return in_array($input['value_type'],
+					return in_array($item['value_type'],
 						[CXmlConstantName::FLOAT, CXmlConstantName::CHAR, CXmlConstantName::UNSIGNED]
 					);
 
 				case 'inventory_link':
-					return in_array($input['value_type'], [
+					return in_array($item['value_type'], [
 						CXmlConstantName::FLOAT, CXmlConstantName::CHAR, CXmlConstantName::UNSIGNED,
 						CXmlConstantName::TEXT
 					]);
 
 				case 'logtimefmt':
-					return $input['value_type'] == CXmlConstantName::LOG;
+					return $item['value_type'] == CXmlConstantName::LOG;
 
 				case 'interface_ref':
-					return in_array($input['hosts'][0]['status'], [HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED]);
+					return in_array($item['host_status'], [HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED]);
 
 				case 'username':
 				case 'password':
-					return $input['type'] != CXmlConstantName::HTTP_AGENT || in_array($input['authtype'], [
+					return $item['type'] != CXmlConstantName::HTTP_AGENT || in_array($item['authtype'], [
 						CXmlConstantName::BASIC, CXmlConstantName::NTLM, CXmlConstantName::KERBEROS,
 						CXmlConstantName::DIGEST
 					]);
 
 				case 'delay':
-					return $input['type'] != CXmlConstantName::ZABBIX_ACTIVE
-						|| strncmp($input['key'], 'mqtt.get', 8) != 0;
+					return $item['type'] != CXmlConstantName::ZABBIX_ACTIVE
+						|| strncmp($item['key'], 'mqtt.get', 8) != 0;
 
 				case 'trapper_hosts':
-					return $input['type'] != CXmlConstantName::HTTP_AGENT
-						|| $input['allow_traps'] == CXmlConstantName::YES;
+					return $item['type'] != CXmlConstantName::HTTP_AGENT
+						|| $item['allow_traps'] == CXmlConstantName::YES;
 
 				case 'publickey':
 				case 'privatekey':
-					return $input['authtype'] == CXmlConstantName::PUBLIC_KEY;
+					return $item['authtype'] == CXmlConstantName::PUBLIC_KEY;
 			}
 
 			return true;
