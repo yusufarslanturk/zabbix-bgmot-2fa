@@ -726,9 +726,6 @@ zabbix_export:
                       value:
                         host: 'Cisco Meraki device by HTTP'
                         name: 'Uplink [{#IP}]: [{#UPLINK}]: Loss'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   name: Latency
                   x: '12'
@@ -743,9 +740,6 @@ zabbix_export:
                       value:
                         host: 'Cisco Meraki device by HTTP'
                         name: 'Uplink [{#IP}]: [{#UPLINK}]: Latency'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 24967dff65a048578eae18b2485907cb
           name: 'Device status'
@@ -3008,9 +3002,6 @@ zabbix_export:
                       value:
                         host: 'Cisco Meraki organization by HTTP'
                         name: 'VPN [{#NETWORK.NAME}][{#SENDER.UPLINK}]=>[{#PEER.NETWORK.NAME}][{#RECEIVER.UPLINK}]: latency'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   name: loss
                   'y': '5'
@@ -3025,9 +3016,6 @@ zabbix_export:
                       value:
                         host: 'Cisco Meraki organization by HTTP'
                         name: 'VPN [{#NETWORK.NAME}][{#SENDER.UPLINK}]=>[{#PEER.NETWORK.NAME}][{#RECEIVER.UPLINK}]: jitter'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   name: loss
                   x: '12'
@@ -3042,9 +3030,6 @@ zabbix_export:
                       value:
                         host: 'Cisco Meraki organization by HTTP'
                         name: 'VPN [{#NETWORK.NAME}][{#SENDER.UPLINK}]=>[{#PEER.NETWORK.NAME}][{#RECEIVER.UPLINK}]: loss'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
             - name: 'Meraki: License'
               widgets:
                 - type: graphprototype
@@ -3060,9 +3045,6 @@ zabbix_export:
                       value:
                         host: 'Cisco Meraki organization by HTTP'
                         name: 'Meraki: license [{#LICENSE.ID}] date'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: ec79f04ded684421b644b38500fe8b26
           name: 'Boolean format'

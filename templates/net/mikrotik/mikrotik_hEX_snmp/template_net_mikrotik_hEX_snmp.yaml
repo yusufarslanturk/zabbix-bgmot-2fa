@@ -2081,9 +2081,6 @@ zabbix_export:
                       value:
                         host: 'MikroTik hEX by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: e440d3590aee41198de71b1b8d03b4b9
           name: 'IF-MIB::ifOperStatus'

@@ -2016,9 +2016,6 @@ zabbix_export:
                       value:
                         host: 'Linux by Prom'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
         - uuid: 558606056f464970a7c544ba75d544f2
           name: 'System performance'
           pages:
@@ -2055,9 +2052,6 @@ zabbix_export:
                       value:
                         host: 'Linux by Prom'
                         name: '{#FSNAME}: Disk space usage'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '15'
                   width: '24'
@@ -2071,9 +2065,6 @@ zabbix_export:
                       value:
                         host: 'Linux by Prom'
                         name: '{#DEVNAME}: Disk read/write rates'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '20'
                   width: '24'
@@ -2087,9 +2078,6 @@ zabbix_export:
                       value:
                         host: 'Linux by Prom'
                         name: '{#DEVNAME}: Disk average waiting time'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '25'
                   width: '24'
@@ -2103,9 +2091,6 @@ zabbix_export:
                       value:
                         host: 'Linux by Prom'
                         name: '{#DEVNAME}: Disk utilization and queue'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '30'
                   width: '24'
@@ -2119,9 +2104,6 @@ zabbix_export:
                       value:
                         host: 'Linux by Prom'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graph
                   x: '12'
                   width: '12'

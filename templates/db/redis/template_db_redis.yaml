@@ -2747,9 +2747,6 @@ zabbix_export:
                       value:
                         host: 'Redis by Zabbix agent 2'
                         name: 'Redis: Replication lag time{#SINGLETON}'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graph
                   x: '12'
                   width: '12'
