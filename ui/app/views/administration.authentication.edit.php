@@ -210,7 +210,7 @@ $ldap_tab = (new CFormGrid())
 			(new CCheckBox('ldap_jit_status', JIT_PROVISIONING_ENABLED))
 				->setChecked($data['ldap_jit_status'] == JIT_PROVISIONING_ENABLED)
 				->setUncheckedValue(JIT_PROVISIONING_DISABLED)
-				->setEnabled($ldap_auth_enabled)
+				->setReadonly(!$ldap_auth_enabled)
 		)
 	])
 	->addItem([
@@ -250,7 +250,7 @@ $ldap_tab = (new CFormGrid())
 			(new CCheckBox('ldap_case_sensitive', ZBX_AUTH_CASE_SENSITIVE))
 				->setChecked($data['ldap_case_sensitive'] == ZBX_AUTH_CASE_SENSITIVE)
 				->setUncheckedValue(ZBX_AUTH_CASE_INSENSITIVE)
-				->setEnabled($ldap_auth_enabled)
+				->setReadonly(!$ldap_auth_enabled)
 		)
 	])
 	->addItem([
@@ -258,7 +258,7 @@ $ldap_tab = (new CFormGrid())
 		new CFormField(
 			(new CTextBox('jit_provision_interval', $data['jit_provision_interval']))
 				->setWidth(ZBX_TEXTAREA_4DIGITS_WIDTH)
-				->setEnabled($ldap_auth_enabled && $data['ldap_jit_status'] != JIT_PROVISIONING_DISABLED)
+				->setReadonly(!$ldap_auth_enabled || $data['ldap_jit_status'] == JIT_PROVISIONING_DISABLED)
 		)
 	]);
 

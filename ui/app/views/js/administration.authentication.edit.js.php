@@ -65,6 +65,14 @@
 		}
 
 		_addEventListeners() {
+			// Prevent checkbox:readonly value toggle by clicking on associated label.
+			this.form.addEventListener('click', e => {
+				if (e.target.hasAttribute('for')
+						&& this.form.querySelector(`#${e.target.getAttribute('for')}[type="checkbox"][readonly]`)) {
+					return cancelEvent(e);
+				}
+			});
+
 			this.#addLdapSettingsEventListeners();
 
 			document.getElementById('http_auth_enabled').addEventListener('change', (e) => {
@@ -206,33 +214,21 @@
 				}
 			});
 
-			this.ldap_jit_status.addEventListener('change', (e) => {
-				this.jit_provision_interval.toggleAttribute('readonly', !e.target.checked);
-				this.jit_provision_interval.toggleAttribute('disabled', !e.target.checked);
+			this.ldap_jit_status.addEventListener('change', this.#updateLdapFieldsState.bind(this));
+			this.ldap_auth_enabled.addEventListener('change', this.#updateLdapFieldsState.bind(this));
+		}
+
+		#updateLdapFieldsState() {
+			const ldap_readonly = this.ldap_auth_enabled === null || !this.ldap_auth_enabled.checked;
+			const provision_readonly = ldap_readonly || !this.ldap_jit_status.checked;
+
+			this.ldap_provisioning_fields.forEach(field => {
+				field.toggleAttribute('readonly', ldap_readonly);
+				field.setAttribute('tabindex', ldap_readonly ? -1 : 0);
 			});
-
-			this.ldap_auth_enabled.addEventListener('change', (e) => {
-				const is_readonly = !e.target.checked;
-				const default_index = this.form.querySelector('input[name="ldap_default_row_index"]:checked');
-				const default_index_hidden = this.form.querySelector('[type="hidden"][name="ldap_default_row_index"]');
-
-				this.ldap_provisioning_fields.forEach(field => {
-					field.toggleAttribute('readonly', is_readonly);
-					field.toggleAttribute('disabled', is_readonly);
-					field.setAttribute('tabindex', is_readonly ? -1 : 0);
-				});
-				this._setTableVisiblityState(this.ldap_servers_table, is_readonly);
-				this._disableRemoveLdapServersWithUserGroups();
-
-				if (!is_readonly && !this.ldap_jit_status.checked) {
-					this.jit_provision_interval.toggleAttribute('readonly', true);
-					this.jit_provision_interval.toggleAttribute('disabled', true);
-				}
-
-				if (is_readonly && default_index && ldap_default_row_index) {
-					default_index_hidden.value = default_index.value;
-				}
-			});
+			this._setTableVisiblityState(this.ldap_servers_table, ldap_readonly);
+			this._disableRemoveLdapServersWithUserGroups();
+			this.jit_provision_interval.toggleAttribute('readonly', provision_readonly);
 		}
 
 		_authFormSubmit() {
