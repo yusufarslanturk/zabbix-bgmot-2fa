@@ -110,11 +110,11 @@ class C62ImportConverter extends CConverter {
 	private static function convertHosts(array $hosts): array {
 		foreach ($hosts as &$host) {
 			if (array_key_exists('items', $host)) {
-				$host['items'] = self::convertItems($host['items'], HOST_STATUS_MONITORED);
+				$host['items'] = self::convertItems($host['items']);
 			}
 
 			if (array_key_exists('discovery_rules', $host)) {
-				$host['discovery_rules'] = self::convertDiscoveryRules($host['discovery_rules'], HOST_STATUS_MONITORED);
+				$host['discovery_rules'] = self::convertDiscoveryRules($host['discovery_rules']);
 			}
 		}
 		unset($host);
@@ -132,13 +132,11 @@ class C62ImportConverter extends CConverter {
 	private static function convertTemplates(array $templates): array {
 		foreach ($templates as &$template) {
 			if (array_key_exists('items', $template)) {
-				$template['items'] = self::convertItems($template['items'], HOST_STATUS_TEMPLATE);
+				$template['items'] = self::convertItems($template['items']);
 			}
 
 			if (array_key_exists('discovery_rules', $template)) {
-				$template['discovery_rules'] = self::convertDiscoveryRules($template['discovery_rules'],
-					HOST_STATUS_TEMPLATE
-				);
+				$template['discovery_rules'] = self::convertDiscoveryRules($template['discovery_rules']);
 			}
 
 			if (array_key_exists('dashboards', $template)) {
@@ -154,21 +152,15 @@ class C62ImportConverter extends CConverter {
 	 * Convert discovery rules.
 	 *
 	 * @param array $discovery_rules
-	 * @param int   $host_status
 	 *
 	 * @return array
 	 */
-	private static function convertDiscoveryRules(array $discovery_rules, int $host_status): array {
-		self::sanitizeItemFields($discovery_rules, [
-			'flags' => ZBX_FLAG_DISCOVERY_RULE,
-			'host_status' => $host_status
-		]);
+	private static function convertDiscoveryRules(array $discovery_rules): array {
+		self::sanitizeItemFields($discovery_rules, ZBX_FLAG_DISCOVERY_RULE);
 
 		foreach ($discovery_rules as &$discovery_rule) {
 			if (array_key_exists('item_prototypes', $discovery_rule)) {
-				$discovery_rule['item_prototypes'] = self::convertItemPrototypes($discovery_rule['item_prototypes'],
-					$host_status
-				);
+				$discovery_rule['item_prototypes'] = self::convertItemPrototypes($discovery_rule['item_prototypes']);
 			}
 		}
 		unset($discovery_rule);
@@ -180,15 +172,11 @@ class C62ImportConverter extends CConverter {
 	 * Convert items.
 	 *
 	 * @param array $items
-	 * @param int   $host_status
 	 *
 	 * @return array
 	 */
-	private static function convertItems(array $items, int $host_status): array {
-		self::sanitizeItemFields($items, [
-			'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
-			'host_status' => $host_status
-		]);
+	private static function convertItems(array $items): array {
+		self::sanitizeItemFields($items, ZBX_FLAG_DISCOVERY_NORMAL);
 
 		foreach ($items as &$item) {
 			$item += ['type' => CXmlConstantName::ZABBIX_PASSIVE];
@@ -214,15 +202,11 @@ class C62ImportConverter extends CConverter {
 	 * Convert item prototypes.
 	 *
 	 * @param array $item_prototypes
-	 * @param int   $host_status
 	 *
 	 * @return array
 	 */
-	private static function convertItemPrototypes(array $item_prototypes, int $host_status): array {
-		self::sanitizeItemFields($item_prototypes, [
-			'flags' => ZBX_FLAG_DISCOVERY_PROTOTYPE,
-			'host_status' => $host_status
-		]);
+	private static function convertItemPrototypes(array $item_prototypes): array {
+		self::sanitizeItemFields($item_prototypes, ZBX_FLAG_DISCOVERY_PROTOTYPE);
 
 		foreach ($item_prototypes as &$item_prototype) {
 			$item_prototype += ['type' => CXmlConstantName::ZABBIX_PASSIVE];
@@ -372,17 +356,16 @@ class C62ImportConverter extends CConverter {
 	 *        string  $items[<num>]['value_type']             (optional)
 	 *        string  $items[<num>]['authtype']               (optional)
 	 *        string  $items[<num>]['allow_traps']            (optional)
-	 * @param array   $internal_fields
-	 *        int     $internal_fields['flags']
-	 *        int     $internal_fields['host_status']
+	 * @param int     $flags
 	 */
-	private static function sanitizeItemFields(array &$items, array $internal_fields): void {
-		$internal_fields += [
-			'value_type' => $internal_fields['flags'] == ZBX_FLAG_DISCOVERY_RULE
+	private static function sanitizeItemFields(array &$items, int $flags): void {
+		$internal_fields = [
+			'flags' => $flags,
+			'value_type' => $flags == ZBX_FLAG_DISCOVERY_RULE
 				? CXmlConstantName::TEXT
 				: CXmlConstantName::UNSIGNED,
-			'authtype' => DB::getDefault('items', 'authtype'),
-			'allow_traps' => DB::getDefault('items', 'allow_traps')
+			'authtype' => CXmlConstantName::NONE,
+			'allow_traps' => CXmlConstantName::NO
 		];
 
 		foreach ($items as &$item) {
@@ -391,13 +374,11 @@ class C62ImportConverter extends CConverter {
 			}
 
 			$field_names = array_merge(
-				self::ITEM_MAIN_FIELDS[$internal_fields['flags']], self::ITEM_TYPE_FIELDS[$item['type']]
+				['uuid'],
+				self::ITEM_MAIN_FIELDS[$flags],
+				self::ITEM_TYPE_FIELDS[$item['type']]
 			);
 			$field_names = self::getConditionalItemFieldNames($field_names, $item + $internal_fields);
-
-			if ($internal_fields['host_status'] == HOST_STATUS_TEMPLATE) {
-				array_unshift($field_names, 'uuid');
-			}
 
 			$item = array_intersect_key($item, array_flip($field_names));
 		}
@@ -424,9 +405,6 @@ class C62ImportConverter extends CConverter {
 
 				case 'logtimefmt':
 					return $item['value_type'] == CXmlConstantName::LOG;
-
-				case 'interface_ref':
-					return in_array($item['host_status'], [HOST_STATUS_MONITORED, HOST_STATUS_NOT_MONITORED]);
 
 				case 'username':
 				case 'password':
