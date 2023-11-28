@@ -178,19 +178,13 @@ abstract class CControllerUserUpdateGeneral extends CController {
 		if ($this instanceof CControllerUserProfileUpdate) {
 			$usrgrps = API::UserGroup()->get([
 				'output' => ['gui_access'],
-				'userids' => CWebUser::$data['userid'],
-				'filter' => [
-					'gui_access' => [GROUP_GUI_ACCESS_SYSTEM, GROUP_GUI_ACCESS_INTERNAL]
-				]
+				'userids' => CWebUser::$data['userid']
 			]);
 		}
 		elseif ($this->getInput('user_groups', [])) {
 			$usrgrps = API::UserGroup()->get([
 				'output' => ['gui_access'],
-				'usrgrpids' => $this->getInput('user_groups'),
-				'filter' => [
-					'gui_access' => [GROUP_GUI_ACCESS_SYSTEM, GROUP_GUI_ACCESS_INTERNAL]
-				]
+				'usrgrpids' => $this->getInput('user_groups')
 			]);
 		}
 
