@@ -20,7 +20,7 @@
 
 
 /**
- * @var array $this
+ * @var array $data
  */
 
 function local_showHeader(array $data): void {
