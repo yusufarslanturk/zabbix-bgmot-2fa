@@ -18,19 +18,22 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
+
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 require_once dirname(__FILE__).'/../behaviors/CTagBehavior.php';
 require_once dirname(__FILE__).'/../../include/helpers/CDataHelper.php';
+require_once dirname(__FILE__).'/../common/testWidgets.php';
+
 
 /**
- * @dataSource TopHostsWidget
+ * @dataSource TopHostsWidget, AllItemValueTypes
  *
  * @backup widget, profiles
  *
  * @onAfter clearData
  */
-class testDashboardTopHostsWidget extends CWebTest {
+class testDashboardTopHostsWidget extends testWidgets {
 
 	/**
 	 * Attach MessageBehavior and TagBehavior to the test.
@@ -41,20 +44,21 @@ class testDashboardTopHostsWidget extends CWebTest {
 			[
 				'class' => CTagBehavior::class,
 				'tag_selector' => 'id:tags_table_tags'
-			]
+			],
+			CTableBehavior::class
 		];
 	}
 
 	/**
 	 * Widget name for update.
 	 */
-	private static $updated_name = 'Top hosts update';
+	protected static $updated_name = 'Top hosts update';
 
 	/**
 	 * SQL query to get widget and widget_field tables to compare hash values, but without widget_fieldid
 	 * because it can change.
 	 */
-	private $sql = 'SELECT wf.widgetid, wf.type, wf.name, wf.value_int, wf.value_str, wf.value_groupid, wf.value_hostid,'.
+	protected $sql = 'SELECT wf.widgetid, wf.type, wf.name, wf.value_int, wf.value_str, wf.value_groupid, wf.value_hostid,'.
 			' wf.value_itemid, wf.value_graphid, wf.value_sysmapid, w.widgetid, w.dashboard_pageid, w.type, w.name, w.x, w.y,'.
 			' w.width, w.height'.
 			' FROM widget_field wf'.
@@ -84,30 +88,200 @@ class testDashboardTopHostsWidget extends CWebTest {
 		])->waitUntilVisible()->one();
 	}
 
+	public function testDashboardTopHostsWidget_Layout() {
+		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.
+				CDataHelper::get('TopHostsWidget.dashboardids.top_host_create')
+		);
+		$dialog = CDashboardElement::find()->one()->edit()->addWidget();
+		$form = $dialog->asForm();
+		$this->assertEquals('Add widget', $dialog->getTitle());
+		$form->fill(['Type' => CFormElement::RELOADABLE_FILL('Top hosts')]);
+		$this->assertEquals(['Type', 'Show header', 'Name', 'Refresh interval', 'Host groups', 'Hosts', 'Host tags',
+				'Show hosts in maintenance', 'Columns', 'Order', 'Order column', 'Host count'], $form->getLabels()->asText()
+		);
+		$form->getRequiredLabels(['Columns', 'Order column', 'Host count']);
+
+		// Check default fields.
+		$fields = [
+			'Name' => ['value' => '', 'placeholder' => 'default', 'maxlength' => 255],
+			'Refresh interval' => ['value' => 'Default (1 minute)'],
+			'Show header' => ['value' => true],
+			'id:groupids__ms' => ['value' => '', 'placeholder' => 'type here to search'],
+			'id:evaltype' => ['value' => 'And/Or', 'labels' => ['And/Or', 'Or']],
+			'id:tags_0_tag' => ['value' => '', 'placeholder' => 'tag', 'maxlength' => 255],
+			'id:tags_0_operator' => ['value' => 'Contains', 'options' => ['Exists', 'Equals', 'Contains',
+					'Does not exist', 'Does not equal', 'Does not contain']
+			],
+			'id:tags_0_value' => ['value' => '', 'placeholder' => 'value', 'maxlength' => 255],
+			'Order' => ['value' => 'Top N', 'labels' => ['Top N', 'Bottom N']],
+			'Host count' => ['value' => 10, 'maxlength' => 3]
+		];
+		$this->checkFieldsAttributes($fields, $form);
+
+		// Check Columns table.
+		$this->assertEquals(['', 'Name', 'Data', 'Action'], $form->getFieldContainer('Columns')->asTable()->getHeadersText());
+
+		// Check clickable buttons.
+		$dialog_buttons = [
+			['count' => 2, 'query' => $dialog->getFooter()->query('button', ['Add', 'Cancel'])],
+			['count' => 2, 'query' => $form->query('id:tags_table_tags')->one()->query('button', ['Add', 'Remove'])],
+			['count' => 1, 'query' => $form->getFieldContainer('Columns')->query('button:Add')]
+		];
+
+		foreach ($dialog_buttons as $field) {
+			$this->assertEquals($field['count'], $field['query']->all()->filter(CElementFilter::CLICKABLE)->count());
+		}
+
+		// Check Columns popup.
+		$form->getFieldContainer('Columns')->query('button:Add')->one()->waitUntilClickable()->click();
+		$column_dialog = COverlayDialogElement::find()->all()->last()->waitUntilReady();
+		$column_form = $column_dialog->asForm();
+
+		$this->assertEquals('New column', $column_dialog->getTitle());
+		$this->assertEquals(['Name', 'Data', 'Text', 'Item', 'Time shift', 'Aggregation function', 'Aggregation interval',
+				'Display', 'History data', 'Base colour', 'Min', 'Max', 'Decimal places', 'Thresholds'],
+				$column_form->getLabels()->asText()
+		);
+		$form->getRequiredLabels(['Name', 'Item', 'Aggregation interval']);
+
+		$column_default_fields = [
+			'Name' => ['value' => '', 'maxlength' => 255],
+			'Data' => ['value' => 'Item value', 'options' => ['Item value', 'Host name', 'Text']],
+			'Text' => ['value' => '', 'placeholder' => 'Text, supports {INVENTORY.*}, {HOST.*} macros','maxlength' => 255,
+					'visible' => false, 'enabled' => false
+			],
+			'Aggregation function' => ['value' => 'none', 'options' => ['none', 'min', 'max', 'avg', 'count', 'sum',
+					'first', 'last']
+			],
+			'Aggregation interval' => ['value' => '1h', 'maxlength' => 255, 'visible' => false, 'enabled' => false],
+			'Item' => ['value' => ''],
+			'Time shift' => ['value' => '', 'placeholder' => 'none', 'maxlength' => 255],
+			'Display' => ['value' => 'As is', 'labels' => ['As is', 'Bar', 'Indicators']],
+			'History data' => ['value' => 'Auto', 'labels' => ['Auto', 'History', 'Trends']],
+			'xpath:.//input[@id="base_color"]/..' => ['color' => ''],
+			'Min' => ['value' => '', 'placeholder' => 'calculated', 'maxlength' => 255, 'visible' => false, 'enabled' => false],
+			'Max' => ['value' => '', 'placeholder' => 'calculated', 'maxlength' => 255, 'visible' => false, 'enabled' => false],
+			'Decimal places' => ['value' => 2, 'maxlength' => 2] ,
+			'Thresholds' => ['visible' => true]
+		];
+		$this->checkFieldsAttributes($column_default_fields, $column_form);
+
+		// Reassign new fields' values for comparing them in other 'Data' values.
+		foreach (['Aggregation function', 'Item', 'Time shift', 'Display', 'History data', 'Min',
+				'Max', 'Decimal places','Thresholds' ] as $field) {
+			$column_default_fields[$field]['visible'] = false;
+			$column_default_fields[$field]['enabled'] = false;
+		}
+
+		foreach (['Host name', 'Text'] as $data) {
+			$column_form->fill(['Data' => CFormElement::RELOADABLE_FILL($data)]);
+
+			$column_default_fields['Data']['value'] = ($data === 'Host name') ? 'Host name' : 'Text';
+			$column_default_fields['Text']['visible'] = $data === 'Text';
+			$column_default_fields['Text']['enabled'] = $data === 'Text';
+			$this->checkFieldsAttributes($column_default_fields, $column_form);
+		}
+
+		// Check hintboxes.
+		$column_form->fill(['Data' => CFormElement::RELOADABLE_FILL('Item value')]);
+
+		// Adding those fields new info icons appear.
+		$warning_visibility = [
+			'Aggregation function' => ['none' => false, 'min' => true, 'max' => true, 'avg' => true, 'count' => true,
+					'sum' => true, 'first' => true, 'last' => true
+			],
+			'Display' => ['As is' => false, 'Bar' => true, 'Indicators' => true],
+			'History data' => ['Auto' => false, 'History' => false, 'Trends' => true]
+		];
+
+		// Check warning and hintbox message, as well as Aggregation interval, Min/Max and Thresholds fields visibility.
+		foreach ($warning_visibility as $warning_label => $options) {
+			$hint_text = ($warning_label === 'History data')
+				? 'This setting applies only to numeric data. Non-numeric data will always be taken from history.'
+				: 'With this setting only numeric items will be displayed in this column.';
+			$warning_button = $column_form->getLabel($warning_label)->query('xpath:.//button[@data-hintbox]')->one();
+
+			foreach ($options as $option => $visible) {
+				$column_form->fill([$warning_label => $option]);
+				$this->assertTrue($warning_button->isVisible($visible));
+
+				if ($visible) {
+					$warning_button->click();
+
+					// Check hintbox text.
+					$hint_dialog = $this->query('xpath://div[@class="overlay-dialogue"]')->one()->waitUntilVisible();
+					$this->assertEquals($hint_text, $hint_dialog->getText());
+
+					// Close the hintbox.
+					$hint_dialog->query('xpath:.//button[@class="btn-overlay-close"]')->one()->click();
+					$hint_dialog->waitUntilNotPresent();
+				}
+
+				// Together with hintbox there are some additional fields' dependency.
+				if ($warning_label === 'Aggregation function') {
+					$this->assertTrue($column_form->getField('Aggregation interval')->isVisible($visible));
+				}
+
+				if ($warning_label === 'Display') {
+					foreach (['Min', 'Max'] as $field) {
+						$this->assertTrue($column_form->getField($field)->isVisible($visible));
+					}
+				}
+			}
+		}
+
+		// Check Thresholds table.
+		$thresholds_container = $column_form->getFieldContainer('Thresholds');
+		$this->assertEquals(['', 'Threshold', 'Action'], $thresholds_container->asTable()->getHeadersText());
+		$thresholds_icon = $column_form->getLabel('Thresholds')->query('xpath:.//button[@data-hintbox]')->one();
+		$this->assertFalse($thresholds_icon->isVisible());
+		$thresholds_container->query('button:Add')->one()->waitUntilClickable()->click();
+
+		$this->checkFieldsAttributes([
+				'xpath:.//input[@id="thresholds_0_color"]/..' => ['color' => 'FF465C'],
+				'id:thresholds_0_threshold' => ['value' => '', 'maxlength' => 255]
+				], $column_form
+		);
+
+		$this->assertEquals(2, $thresholds_container->query('button', ['Add', 'Remove'])->all()
+				->filter(CElementFilter::CLICKABLE)->count()
+		);
+
+		$thresholds_icon->click();
+		$hint_dialog = $this->query('xpath://div[@class="overlay-dialogue"]')->one()->waitUntilVisible();
+		$this->assertEquals('With this setting only numeric items will be displayed in this column.',
+				$hint_dialog->getText()
+		);
+		$hint_dialog->query('xpath:.//button[@class="btn-overlay-close"]')->one()->click();
+		$hint_dialog->waitUntilNotPresent();
+	}
+
 	public static function getCreateData() {
 		return [
-			// #0 minimum needed values to create and submit widget.
+			// #0 Minimum needed values to create and submit widget.
 			[
 				[
 					'expected' => TEST_GOOD,
 					'main_fields' =>  [],
 					'column_fields' => [
 						[
+							'Name' => 'Min values',
 							'Data' => 'Item value',
 							'Item' => 'Available memory'
 						]
 					]
 				]
 			],
-			// #1 all fields filled for main form with all tags.
+			// #1 All fields filled for main form with all tags.
 			[
 				[
 					'expected' => TEST_GOOD,
 					'main_fields' =>  [
-						'Name' => 'Name of Top hosts widget',
+						'Name' => 'Name of Top hosts widget 😅',
 						'Refresh interval' => 'Default (1 minute)',
 						'Host groups' => 'Zabbix servers',
 						'Hosts' => 'ЗАББИКС Сервер',
+						'Show hosts in maintenance' => true,
 						'Order' => 'Bottom N',
 						'Host count' => '99'
 					],
@@ -117,42 +291,45 @@ class testDashboardTopHostsWidget extends CWebTest {
 						['name' => 'AvF%21', 'operator' => 'Exists'],
 						['name' => '_', 'operator' => 'Does not exist'],
 						['name' => 'кириллица', 'value' => 'BcDa', 'operator' => 'Does not equal'],
-						['name' => 'aaa6', 'value' => 'bbb6', 'operator' => 'Does not contain']
+						['name' => 'aaa6 😅', 'value' => 'bbb6 😅', 'operator' => 'Does not contain']
 					],
 					'column_fields' => [
 						[
+							'Name' => 'All fields 😅',
 							'Data' => 'Item value',
 							'Item' => 'Available memory'
 						]
 					]
 				]
 			],
-			// #2 change order column for several items.
+			// #2 Change order column for several items.
 			[
 				[
 					'expected' => TEST_GOOD,
 					'main_fields' =>  [
 						'Name' => 'Several item columns',
-						'Order column' => 'Available memory in %'
+						'Order column' => 'duplicated colum name'
 					],
 					'column_fields' => [
 						[
+							'Name' => 'duplicated colum name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory'
 						],
 						[
+							'Name' => 'duplicated colum name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory in %'
 						]
 					]
 				]
 			],
-			// #3 several item columns with different Aggregation function
+			// #3 Several item columns with different Aggregation function
 			[
 				[
 					'expected' => TEST_GOOD,
 					'main_fields' =>  [
-						'Name' => 'All available aggregatino function'
+						'Name' => 'All available aggregation function'
 					],
 					'column_fields' => [
 						[
@@ -208,7 +385,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					'screenshot' => true
 				]
 			],
-			// #4 several item columns with different display, time shift, min/max and history data.
+			// #4 Several item columns with different display, time shift, min/max and history data.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -217,6 +394,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'Column_1',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Display' => 'As is',
@@ -224,12 +402,14 @@ class testDashboardTopHostsWidget extends CWebTest {
 							'Time shift' => '1'
 						],
 						[
+							'Name' => 'Column_2',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Display' => 'As is',
 							'History data' => 'Trends'
 						],
 						[
+							'Name' => 'Column_3',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Display' => 'Bar',
@@ -238,6 +418,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 							'Max' => ''
 						],
 						[
+							'Name' => 'Column_4',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Display' => 'Bar',
@@ -246,6 +427,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 							'Max' => '100'
 						],
 						[
+							'Name' => 'Column_5',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Display' => 'Bar',
@@ -254,6 +436,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 							'Max' => '100'
 						],
 						[
+							'Name' => 'Column_6',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Display' => 'Indicators',
@@ -262,6 +445,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 							'Max' => ''
 						],
 						[
+							'Name' => 'Column_7',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Display' => 'Indicators',
@@ -270,6 +454,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 							'Max' => '100'
 						],
 						[
+							'Name' => 'Column_8',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Display' => 'Indicators',
@@ -280,7 +465,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #5 add column with different Base color.
+			// #5 Add column with different Base color.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -289,14 +474,15 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'Column name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
-							'Base color' => '039BE5'
+							'Base colour' => '039BE5'
 						]
 					]
 				]
 			],
-			// #6 add column with Threshold without color change.
+			// #6 Add column with Threshold without color change.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -305,6 +491,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'Column with threshold',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Thresholds' => [
@@ -316,7 +503,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #7 add several columns with Threshold without color change.
+			// #7 Add several columns with Threshold without color change.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -325,6 +512,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'Column with some thresholds',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Thresholds' => [
@@ -342,7 +530,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #8 add several columns with Threshold with color change and without color.
+			// #8 Add several columns with Threshold with color change and without color.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -351,6 +539,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'Thresholds with colors',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Thresholds' => [
@@ -375,7 +564,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #9 add Host name columns.
+			// #9 Add Host name columns.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -386,19 +575,21 @@ class testDashboardTopHostsWidget extends CWebTest {
 						[
 							'Data' => 'Host name',
 							'Name' => 'This is host name',
-							'Base color' => '039BE5'
+							'Base colour' => '039BE5'
 						],
 						[
+							'Name' => 'Host name column 2',
 							'Data' => 'Host name'
 						],
 						[
+							'Name' => 'Host name column 3',
 							'Data' => 'Item value',
 							'Item' => 'Available memory'
 						]
 					]
 				]
 			],
-			// #10 add Text columns.
+			// #10 Add Text columns.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -407,28 +598,30 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'Text column name 1',
 							'Data' => 'Text',
-							'Text' => 'Here is some text'
+							'Text' => 'Here is some text 😅'
 						],
 						[
 							'Data' => 'Text',
 							'Text' => 'Here is some text 2',
-							'Name' => 'Text column name'
+							'Name' => 'Text column name 2'
 						],
 						[
 							'Data' => 'Text',
 							'Text' => 'Here is some text 3',
-							'Name' => 'Text column name 2',
-							'Base color' => '039BE5'
+							'Name' => 'Text column name 3',
+							'Base colour' => '039BE5'
 						],
 						[
+							'Name' => 'Text column name 4',
 							'Data' => 'Item value',
 							'Item' => 'Available memory'
 						]
 					]
 				]
 			],
-			// #11 error message adding widget without any column.
+			// #11 Error message adding widget without any column.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -436,7 +629,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 						'Name' => 'Widget without columns'
 					],
 					'main_error' => [
-						'Invalid parameter "Columns": an array is expected.',
+						'Invalid parameter "Columns": cannot be empty.',
 						'Invalid parameter "Order column": an integer is expected.'
 					]
 				]
@@ -446,19 +639,19 @@ class testDashboardTopHostsWidget extends CWebTest {
 				[
 					'expected' => TEST_BAD,
 					'main_fields' =>  [
-						'Name' => 'Widget without item column'
+						'Name' => 'Widget without item column name'
 					],
 					'column_fields' => [
 						[
 							'Data' => 'Host name'
 						]
 					],
-					'main_error' => [
-						'Invalid parameter "Order column": an integer is expected.'
+					'column_error' => [
+						'Invalid parameter "/1/name": cannot be empty.'
 					]
 				]
 			],
-			// #13 add characters in host count field.
+			// #13 Add characters in host count field.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -468,6 +661,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory'
 						]
@@ -477,7 +671,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #14 add incorrect value to host count field without item column.
+			// #14 Add incorrect value to host count field without item column.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -487,6 +681,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Host name'
 						]
 					],
@@ -496,7 +691,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #15 color error in host name column.
+			// #15 Color error in host name column.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -505,16 +700,17 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Host name',
-							'Base color' => '!@#$%^'
+							'Base colour' => '!@#$%^'
 						]
 					],
 					'column_error' => [
-						'Invalid parameter "/1/base_color": a hexadecimal color code (6 symbols) is expected.'
+						'Invalid parameter "/1/base_color": a hexadecimal colour code (6 symbols) is expected.'
 					]
 				]
 			],
-			// #16 check error adding text column without any value.
+			// #16 Check error adding text column without any value.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -523,6 +719,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Text'
 						]
 					],
@@ -531,7 +728,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #17 color error in text column.
+			// #17 Color error in text column.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -540,17 +737,18 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Text',
 							'Text' => 'Here is some text',
-							'Base color' => '!@#$%^'
+							'Base colour' => '!@#$%^'
 						]
 					],
 					'column_error' => [
-						'Invalid parameter "/1/base_color": a hexadecimal color code (6 symbols) is expected.'
+						'Invalid parameter "/1/base_color": a hexadecimal colour code (6 symbols) is expected.'
 					]
 				]
 			],
-			// #18 error when there is no item in item column.
+			// #18 Error when there is no item in item column.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -559,6 +757,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value'
 						]
 					],
@@ -567,7 +766,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #19 error when incorrect time shift added.
+			// #19 Error when incorrect time shift added.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -576,6 +775,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Time shift' => 'zzz'
@@ -586,7 +786,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #20 error when 1M time shift added.
+			// #20 Error when 1M time shift added.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -595,6 +795,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Time shift' => '1M'
@@ -605,7 +806,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #21 error when 1y time shift added.
+			// #21 Error when 1y time shift added.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -614,6 +815,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Time shift' => '1y'
@@ -624,7 +826,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #22 error when incorrect aggregation interval added.
+			// #22 Error when incorrect aggregation interval added.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -633,6 +835,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Aggregation function' => 'count',
@@ -644,7 +847,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #23 error when empty aggregation function added.
+			// #23 Error when empty aggregation function added.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -653,6 +856,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Aggregation function' => 'count',
@@ -664,7 +868,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #24 error when incorrect min value added.
+			// #24 Error when incorrect min value added.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -673,6 +877,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Display' => 'Bar',
@@ -684,7 +889,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #25 error when incorrect max value added.
+			// #25 Error when incorrect max value added.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -693,6 +898,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Display' => 'Bar',
@@ -704,7 +910,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #26 color error in item column.
+			// #26 Color error in item column.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -713,17 +919,18 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
-							'Base color' => '!@#$%^'
+							'Base colour' => '!@#$%^'
 						]
 					],
 					'column_error' => [
-						'Invalid parameter "/1/base_color": a hexadecimal color code (6 symbols) is expected.'
+						'Invalid parameter "/1/base_color": a hexadecimal colour code (6 symbols) is expected.'
 					]
 				]
 			],
-			// #27 color error when incorrect hexadecimal added in first threshold.
+			// #27 Color error when incorrect hexadecimal added in first threshold.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -732,6 +939,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Thresholds' => [
@@ -743,11 +951,11 @@ class testDashboardTopHostsWidget extends CWebTest {
 						]
 					],
 					'column_error' => [
-						'Invalid parameter "/1/thresholds/1/color": a hexadecimal color code (6 symbols) is expected.'
+						'Invalid parameter "/1/thresholds/1/color": a hexadecimal colour code (6 symbols) is expected.'
 					]
 				]
 			],
-			// #28 color error when incorrect hexadecimal added in second threshold.
+			// #28 Color error when incorrect hexadecimal added in second threshold.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -756,6 +964,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Thresholds' => [
@@ -771,11 +980,11 @@ class testDashboardTopHostsWidget extends CWebTest {
 						]
 					],
 					'column_error' => [
-						'Invalid parameter "/1/thresholds/2/color": a hexadecimal color code (6 symbols) is expected.'
+						'Invalid parameter "/1/thresholds/2/color": a hexadecimal colour code (6 symbols) is expected.'
 					]
 				]
 			],
-			// #29 error message when incorrect value added to threshold.
+			// #29 Error message when incorrect value added to threshold.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -784,6 +993,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test name',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Thresholds' => [
@@ -798,6 +1008,106 @@ class testDashboardTopHostsWidget extends CWebTest {
 						'Invalid parameter "/1/thresholds/1/threshold": a number is expected.'
 					]
 				]
+			],
+			// #30 Spaces in fields' values.
+			[
+				[
+					'trim' => true,
+					'main_fields' =>  [
+						'Name' => '            Spaces            ',
+						'Host count' => ' 1 '
+					],
+					'tags' => [
+						['name' => '   tag     ', 'value' => '     value       ', 'operator' => 'Equals']
+					],
+					'column_fields' => [
+						[
+							'Name' => '     Text column name with spaces 1     ',
+							'Data' => 'Text',
+							'Text' => '          Spaces in text          '
+						],
+						[
+							'Name' => '     Text column name with spaces 2     ',
+							'Data' => 'Host name',
+							'Base colour' => '0040FF'
+						],
+						[
+							'Name' => '     Text column name with spaces 3     ',
+							'Data' => 'Item value',
+							'Item' => 'Available memory',
+							'Time shift' => '     5m       ',
+							'Aggregation function' => 'avg',
+							'Aggregation interval' => '       10m       ',
+							'Display' => 'Bar',
+							'Min' => '         2       ',
+							'Max' => '         200     ',
+							'Decimal places' => ' 2',
+							'Thresholds' => [
+								[
+									'threshold' => '    5       '
+								]
+							]
+						]
+					]
+				]
+			],
+			// #31 User macros in fields' values.
+			[
+				[
+					'trim' => true,
+					'main_fields' =>  [
+						'Name' => '{$USERMACRO}'
+					],
+					'tags' => [
+						['name' => '{$USERMACRO}', 'value' => '{$USERMACRO}', 'operator' => 'Equals']
+					],
+					'column_fields' => [
+						[
+							'Name' => '{$USERMACRO1}',
+							'Data' => 'Text',
+							'Text' => '{$USERMACRO2}'
+						],
+						[
+							'Name' => '{$USERMACRO2}',
+							'Data' => 'Host name',
+							'Base colour' => '0040DD'
+						],
+						[
+							'Name' => '{$USERMACRO3}',
+							'Data' => 'Item value',
+							'Item' => 'Available memory'
+						]
+					]
+				],
+				// #32 Global macros in fields' values.
+				[
+					[
+						'trim' => true,
+						'main_fields' =>  [
+							'Name' => '{HOST.HOST}'
+						],
+						'tags' => [
+							['name' => '{HOST.NAME}', 'value' => '{ITEM.NAME}', 'operator' => 'Equals']
+						],
+						'column_fields' => [
+							[
+								'Name' => '{INVENTORY.ALIAS}',
+								'Data' => 'Text',
+								'Text' => '{HOST.DNS}'
+							],
+							[
+								'Name' => '{INVENTORY.ALIAS}',
+								'Data' => 'Host name',
+								'Base colour' => '0040DD'
+							],
+							[
+								'Name' => '{HOST.IP}',
+								'Data' => 'Item value',
+								'Item' => 'Available memory'
+							]
+						]
+					]
+				]
 			]
 		];
 	}
@@ -808,8 +1118,9 @@ class testDashboardTopHostsWidget extends CWebTest {
 	 * @dataProvider getCreateData
 	 */
 	public function testDashboardTopHostsWidget_Create($data) {
-		$dashboardid = CDataHelper::get('TopHostsWidget.dashboardids.top_host_create');
-		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.$dashboardid);
+		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.
+				CDataHelper::get('TopHostsWidget.dashboardids.top_host_create')
+		);
 		$dashboard = CDashboardElement::find()->one();
 		$old_widget_count = $dashboard->getWidgets()->count();
 		$form = $dashboard->edit()->addWidget()->asForm();
@@ -835,18 +1146,31 @@ class testDashboardTopHostsWidget extends CWebTest {
 		$form->submit();
 		$this->page->waitUntilReady();
 
+		// Trim trailing and leading spaces in expected values before comparison.
+		if (CTestArrayHelper::get($data, 'trim', false)) {
+			$this->trimArray($data);
+		}
+
 		// Check error message in main widget form.
 		if (array_key_exists('main_error', $data)) {
 			$this->assertMessage(TEST_BAD, null, $data['main_error']);
 		}
 
-		if ($data['expected'] === TEST_GOOD) {
+		if (CTestArrayHelper::get($data, 'expected', TEST_GOOD) === TEST_BAD) {
+			COverlayDialogElement::find()->one()->close();
+			$dashboard->save();
+
+			// Check message that widget added.
+			$this->assertMessage(TEST_GOOD, 'Dashboard updated');
+			$this->assertEquals($old_widget_count, $dashboard->getWidgets()->count());
+		}
+		else {
 			// Make sure that the widget is present before saving the dashboard.
 			$header = CTestArrayHelper::get($data['main_fields'], 'Name', 'Top hosts');
 			$dashboard->getWidget($header);
 			$dashboard->save();
 
-			// Check message that widget added.
+			// Check message that dashboard saved.
 			$this->assertMessage(TEST_GOOD, 'Dashboard updated');
 
 			// Check widget amount that it is added.
@@ -870,8 +1194,9 @@ class testDashboardTopHostsWidget extends CWebTest {
 		// Hash before simple update.
 		$old_hash = CDBHelper::getHash($this->sql);
 
-		$dashboardid = CDataHelper::get('TopHostsWidget.dashboardids.top_host_update');
-		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.$dashboardid);
+		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.
+				CDataHelper::get('TopHostsWidget.dashboardids.top_host_update')
+		);
 		$dashboard = CDashboardElement::find()->one();
 		$dashboard->edit()->getWidget(self::$updated_name)->edit()->submit();
 		$dashboard->save();
@@ -884,12 +1209,13 @@ class testDashboardTopHostsWidget extends CWebTest {
 
 	public static function getUpdateData() {
 		return [
-			// #0 incorrecct threshold color.
+			// #0 Incorrect threshold color.
 			[
 				[
 					'expected' => TEST_BAD,
 					'column_fields' => [
 						[
+							'Name' => 'Incorrect threshold color',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
 							'Thresholds' => [
@@ -903,11 +1229,11 @@ class testDashboardTopHostsWidget extends CWebTest {
 						]
 					],
 					'column_error' => [
-						'Invalid parameter "/1/thresholds/1/color": a hexadecimal color code (6 symbols) is expected.'
+						'Invalid parameter "/1/thresholds/1/color": a hexadecimal colour code (6 symbols) is expected.'
 					]
 				]
 			],
-			// #1 incorrecct min value.
+			// #1 Incorrect min value.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -925,7 +1251,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #2 incorrecct max value.
+			// #2 Incorrect max value.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -943,27 +1269,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #3 incorrecct threshold value.
-			[
-				[
-					'expected' => TEST_BAD,
-					'column_fields' => [
-						[
-							'Data' => 'Item value',
-							'Item' => 'Available memory',
-							'Thresholds' => [
-								[
-									'threshold' => '     '
-								]
-							]
-						]
-					],
-					'column_error' => [
-						'Invalid parameter "/1/thresholds/3/threshold": a number is expected.'
-					]
-				]
-			],
-			// #4 error message when update Host count incorrectly.
+			// #3 Error message when update Host count incorrectly.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -975,25 +1281,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #5 error message when there is no item column.
-			[
-				[
-					'expected' => TEST_BAD,
-					'main_fields' =>  [],
-					'column_fields' => [
-						[
-							'Data' => 'Host name'
-						],
-						[
-							'Data' => 'Host name'
-						]
-					],
-					'main_error' => [
-						'Invalid parameter "Order column": an integer is expected.'
-					]
-				]
-			],
-			// #6 time shift error in column.
+			// #4 Time shift error in column.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -1008,7 +1296,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #7 time shift error in column when add 1M.
+			// #5 Time shift error in column when add 1M.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -1023,7 +1311,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #8 time shift error in column when add 1y.
+			// #6 Time shift error in column when add 1y.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -1038,7 +1326,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #9 aggregation interval error in column.
+			// #7 Aggregation interval error in column.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -1054,7 +1342,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #10 empty aggregation interval error in column.
+			// #8 Empty aggregation interval error in column.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -1070,7 +1358,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #11 no item error in column.
+			// #9 No item error in column.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -1085,7 +1373,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #12 incorrecct base color.
+			// #10 Incorrect base color.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -1093,15 +1381,15 @@ class testDashboardTopHostsWidget extends CWebTest {
 						[
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
-							'Base color' => '#$%$@@'
+							'Base colour' => '#$%$@@'
 						]
 					],
 					'column_error' => [
-						'Invalid parameter "/1/base_color": a hexadecimal color code (6 symbols) is expected.'
+						'Invalid parameter "/1/base_color": a hexadecimal colour code (6 symbols) is expected.'
 					]
 				]
 			],
-			// #13 update all main fields.
+			// #11 Update all main fields.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -1110,30 +1398,32 @@ class testDashboardTopHostsWidget extends CWebTest {
 						'Refresh interval' => '2 minutes',
 						'Host groups' => 'Zabbix servers',
 						'Hosts' => 'ЗАББИКС Сервер',
+						'Show hosts in maintenance' => true,
 						'Order' => 'Bottom N',
-						'Order column' => 'Available memory in %',
+						'Order column' => 'test update column 2',
 						'Host count' => '2'
 					]
 				]
 			],
-			// #14 update first item column to Text column and add some values.
+			// #12 Update first item column to Text column and add some values.
 			[
 				[
 					'expected' => TEST_GOOD,
 					'main_fields' =>  [
-						'Name' => 'Updated column type to text'
+						'Name' => 'Updated column type to text',
+						'Show hosts in maintenance' => false
 					],
 					'column_fields' => [
 						[
 							'Name' => 'Text column changed',
 							'Data' => 'Text',
-							'Text' => 'some text',
-							'Base color' => '039BE5'
+							'Text' => 'some text 😅',
+							'Base colour' => '039BE5'
 						]
 					]
 				]
 			],
-			// #15 update first column to Host name column and add some values.
+			// #13 Update first column to Host name column and add some values.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -1144,12 +1434,12 @@ class testDashboardTopHostsWidget extends CWebTest {
 						[
 							'Name' => 'Host name column update',
 							'Data' => 'Host name',
-							'Base color' => 'FF8F00'
+							'Base colour' => 'FF8F00'
 						]
 					]
 				]
 			],
-			// #16 update first column to Item column and check time suffix - seconds.
+			// #14 Update first column to Item column and check time suffix - seconds.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -1165,7 +1455,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #17 time suffix "minutes" is checked in this case.
+			// #15 Time suffix "minutes" is checked in this case.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -1181,7 +1471,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #18 time suffix "hours" is checked in this case.
+			// #16 Time suffix "hours" is checked in this case.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -1197,7 +1487,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #19 time suffix "weeks" is checked in this case.
+			// #17 Time suffix "weeks" is checked in this case.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -1213,52 +1503,142 @@ class testDashboardTopHostsWidget extends CWebTest {
 					]
 				]
 			],
-			// #20 update item column adding new values and fields.
+			// #18 Spaces in fields' values.
 			[
 				[
-					'expected' => TEST_GOOD,
+					'trim' => true,
 					'main_fields' =>  [
-						'Name' => 'Updated values for item column'
+						'Name' => '            Updated Spaces            ',
+						'Host count' => ' 1 '
+					],
+					'tags' => [
+						['name' => '   tag     ', 'value' => '     value       ', 'operator' => 'Equals']
 					],
 					'column_fields' => [
 						[
-							'Data' => 'Host name',
-							'Name' => 'Only name changed'
+							'Name' => '     Text column name with spaces 1     ',
+							'Data' => 'Text',
+							'Text' => '          Spaces in text 😅          '
 						],
 						[
+							'Name' => '     Text column name with spaces2      ',
 							'Data' => 'Item value',
 							'Item' => 'Available memory',
-							'Time shift' => '1',
-							'Display' => 'Indicators',
-							'History data' => 'Trends',
-							'Min' => '50',
-							'Max' => '100',
+							'Time shift' => '     5m       ',
 							'Aggregation function' => 'avg',
-							'Aggregation interval' => '20h',
-							'Base color' => '039BE5',
+							'Aggregation interval' => '       10m       ',
+							'Display' => 'Bar',
+							'Min' => '         2       ',
+							'Max' => '         200     ',
+							'Decimal places' => ' 2',
 							'Thresholds' => [
 								[
 									'action' => USER_ACTION_UPDATE,
 									'index' => 0,
-									'threshold' => '1',
-									'color' => 'FFEB3B'
+									'threshold' => '    5       '
 								],
-								[
-									'action' => USER_ACTION_UPDATE,
+								[  'action' => USER_ACTION_UPDATE,
 									'index' => 1,
-									'threshold' => '100',
-									'color' => 'AAAAAA'
+									'threshold' => '    10      '
 								]
 							]
 						]
+					]
+				]
+			],
+			// #19 User macros in fields' values.
+			[
+				[
+					'trim' => true,
+					'main_fields' =>  [
+						'Name' => '{$UPDATED_USERMACRO}'
 					],
 					'tags' => [
-						['name' => 'value', 'value' => '12345', 'operator' => 'Contains'],
-						['name' => '@#$%@', 'value' => 'a1b2c3d4', 'operator' => 'Equals'],
-						['name' => 'AvF%21', 'operator' => 'Exists'],
-						['name' => '_', 'operator' => 'Does not exist'],
-						['name' => 'кириллица', 'value' => 'BcDa', 'operator' => 'Does not equal'],
-						['name' => 'aaa6', 'value' => 'bbb6', 'operator' => 'Does not contain']
+						['name' => '{$USERMACRO}', 'value' => '{$USERMACRO}', 'operator' => 'Equals']
+					],
+					'column_fields' => [
+						[
+							'Name' => '{$USERMACRO1}',
+							'Data' => 'Text',
+							'Text' => '{$USERMACRO3}'
+						],
+						[
+							'Name' => '{$USERMACRO2}',
+							'Data' => 'Item value',
+							'Item' => 'Available memory'
+						]
+					]
+				],
+				// #20 Global macros in fields' values.
+				[
+					[
+						'trim' => true,
+						'main_fields' =>  [
+							'Name' => '{HOST.HOST} updated'
+						],
+						'tags' => [
+							['name' => '{HOST.NAME}', 'value' => '{ITEM.NAME}', 'operator' => 'Equals']
+						],
+						'column_fields' => [
+							[
+								'Name' => '{INVENTORY.ALIAS}',
+								'Data' => 'Text',
+								'Text' => '{HOST.DNS}'
+							],
+							[
+								'Name' => '{HOST.IP}',
+								'Data' => 'Item value',
+								'Item' => 'Available memory'
+							]
+						]
+					]
+				],
+				// #21 Update item column adding new values and fields.
+				[
+					[
+						'main_fields' =>  [
+							'Name' => 'Updated values for item column 😅'
+						],
+						'column_fields' => [
+							[
+								'Data' => 'Host name',
+								'Name' => 'Only name changed'
+							],
+							[
+								'Data' => 'Item value 😅',
+								'Item' => 'Available memory',
+								'Time shift' => '1',
+								'Display' => 'Indicators',
+								'History data' => 'Trends',
+								'Min' => '50',
+								'Max' => '100',
+								'Aggregation function' => 'avg',
+								'Aggregation interval' => '20h',
+								'Base colour' => '039BE5',
+								'Thresholds' => [
+									[
+										'action' => USER_ACTION_UPDATE,
+										'index' => 0,
+										'threshold' => '1',
+										'color' => 'FFEB3B'
+									],
+									[
+										'action' => USER_ACTION_UPDATE,
+										'index' => 1,
+										'threshold' => '100',
+										'color' => 'AAAAAA'
+									]
+								]
+							]
+						],
+						'tags' => [
+							['name' => 'value', 'value' => '12345', 'operator' => 'Contains'],
+							['name' => '@#$%@', 'value' => 'a1b2c3d4', 'operator' => 'Equals'],
+							['name' => 'AvF%21', 'operator' => 'Exists'],
+							['name' => '_', 'operator' => 'Does not exist'],
+							['name' => 'кириллица', 'value' => 'BcDa', 'operator' => 'Does not equal'],
+							['name' => 'aaa6 😅', 'value' => 'bbb6 😅', 'operator' => 'Does not contain']
+						]
 					]
 				]
 			]
@@ -1271,13 +1651,14 @@ class testDashboardTopHostsWidget extends CWebTest {
 	 * @dataProvider getUpdateData
 	 */
 	public function testDashboardTopHostsWidget_Update($data) {
-		if ($data['expected'] === TEST_BAD) {
+		if (CTestArrayHelper::get($data, 'expected', TEST_GOOD) === TEST_BAD) {
 			// Hash before update.
 			$old_hash = CDBHelper::getHash($this->sql);
 		}
 
-		$dashboardid = CDataHelper::get('TopHostsWidget.dashboardids.top_host_update');
-		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.$dashboardid);
+		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.
+				CDataHelper::get('TopHostsWidget.dashboardids.top_host_update')
+		);
 		$dashboard = CDashboardElement::find()->one();
 		$form = $dashboard->edit()->getWidget(self::$updated_name)->edit();
 
@@ -1296,15 +1677,28 @@ class testDashboardTopHostsWidget extends CWebTest {
 			$this->page->waitUntilReady();
 		}
 
+		// Trim trailing and leading spaces in expected values before comparison.
+		if (CTestArrayHelper::get($data, 'trim', false)) {
+			$this->trimArray($data);
+		}
+
 		// Check error message in main widget form.
 		if (array_key_exists('main_error', $data)) {
 			$this->assertMessage(TEST_BAD, null, $data['main_error']);
 		}
 
-		if ($data['expected'] === TEST_GOOD) {
+		if (CTestArrayHelper::get($data, 'expected', TEST_GOOD) === TEST_BAD) {
+			COverlayDialogElement::find()->one()->close();
+			$dashboard->save();
+			$this->assertMessage(TEST_GOOD, 'Dashboard updated');
+
+			// Compare old hash and new one.
+			$this->assertEquals($old_hash, CDBHelper::getHash($this->sql));
+		}
+		else {
 			self::$updated_name = (array_key_exists('Name', $data['main_fields']))
-					? $data['main_fields']['Name']
-					: self::$updated_name;
+				? $data['main_fields']['Name']
+				: self::$updated_name;
 
 			// Make sure that the widget is present before saving the dashboard.
 			$header = CTestArrayHelper::get($data['main_fields'], 'Name', self::$updated_name);
@@ -1332,8 +1726,9 @@ class testDashboardTopHostsWidget extends CWebTest {
 	public function testDashboardTopHostsWidget_Delete() {
 		$name = 'Top hosts delete';
 
-		$dashboardid = CDataHelper::get('TopHostsWidget.dashboardids.top_host_delete');
-		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.$dashboardid);
+		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.
+				CDataHelper::get('TopHostsWidget.dashboardids.top_host_delete')
+		);
 		$dashboard = CDashboardElement::find()->one()->edit();
 		$dashboard->deleteWidget($name);
 		$this->page->waitUntilReady();
@@ -1352,21 +1747,21 @@ class testDashboardTopHostsWidget extends CWebTest {
 
 	public static function getRemoveData() {
 		return [
-			// #0 remove column.
+			// #0 Remove column.
 			[
 				[
 					'table_id' => 'id:list_columns',
 					'remove_selector' => 'xpath:(.//button[@name="remove"])[2]'
 				]
 			],
-			// #1 remove tag.
+			// #1 Remove tag.
 			[
 				[
 					'table_id' => 'id:tags_table_tags',
 					'remove_selector' => 'id:tags_0_remove'
 				]
 			],
-			// #2 remove threshold.
+			// #2 Remove threshold.
 			[
 				[
 					'table_id' => 'id:thresholds_table',
@@ -1382,8 +1777,9 @@ class testDashboardTopHostsWidget extends CWebTest {
 	 * @dataProvider getRemoveData
 	 */
 	public function testDashboardTopHostsWidget_Remove($data) {
-		$dashboardid = CDataHelper::get('TopHostsWidget.dashboardids.top_host_remove');
-		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.$dashboardid);
+		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.
+				CDataHelper::get('TopHostsWidget.dashboardids.top_host_remove')
+		);
 		$dashboard = CDashboardElement::find()->one();
 		$form = $dashboard->edit()->getWidget('Top hosts for remove')->edit();
 
@@ -1430,11 +1826,11 @@ class testDashboardTopHostsWidget extends CWebTest {
 	/**
 	 * Check widget after update/creation.
 	 *
-	 * @param string $header		widget name
-	 * @param array	 $data			values from dataprovider
-	 * @param string $action		check after creation or update
+	 * @param string    $header        widget name
+	 * @param array     $data          values from data provider
+	 * @param string    $action        check after creation or update
 	 */
-	private function checkWidget($header, $data, $action) {
+	protected function checkWidget($header, $data, $action) {
 		$dashboard = CDashboardElement::find()->one();
 		$form = $dashboard->edit()->getWidget($header)->edit();
 		$form->checkValue($data['main_fields']);
@@ -1503,12 +1899,12 @@ class testDashboardTopHostsWidget extends CWebTest {
 	}
 
 	/**
-	 * Create or update top hosts widget.
+	 * Create or update "Top hosts" widget.
 	 *
-	 * @param array  $data			values from dataprovider
-	 * @param string $action		create or update action
+	 * @param array     $data      values from data provider
+	 * @param string    $action    create or update action
 	 */
-	private function fillColumnForm($data, $action) {
+	protected function fillColumnForm($data, $action) {
 		// Starting counting column amount from 1 for xpath.
 		if ($action === 'update') {
 			$column_count = 1;
@@ -1539,8 +1935,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 			if (array_key_exists('column_error', $data)) {
 				$this->assertMessage(TEST_BAD, null, $data['column_error']);
 				$selector = ($action === 'update') ? 'Update column' : 'New column';
-				$this->query('xpath://div/h4[text()="'.$selector.'"]/../button[@title="Close"]')
-						->one()->click();
+				$this->query('xpath://div/h4[text()="'.$selector.'"]/../button[@title="Close"]')->one()->click();
 			}
 
 			$column_form->waitUntilNotVisible();
@@ -1558,6 +1953,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test column 1',
 							'Data' => 'Item value',
 							'Item' => '1_item'
 						]
@@ -1573,6 +1969,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test column 1',
 							'Data' => 'Item value',
 							'Item' => '1_item',
 							'Display' => 'Bar',
@@ -1596,6 +1993,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test column 1',
 							'Data' => 'Item value',
 							'Item' => '1_item',
 							'Display' => 'Bar',
@@ -1619,6 +2017,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test column 1',
 							'Data' => 'Item value',
 							'Item' => '1_item',
 							'Display' => 'Indicators',
@@ -1642,6 +2041,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test column 1',
 							'Data' => 'Item value',
 							'Item' => '1_item',
 							'Display' => 'Indicators',
@@ -1665,10 +2065,12 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'test column 0',
 							'Data' => 'Item value',
 							'Item' => '1_item'
 						],
 						[
+							'Name' => 'test column 1',
 							'Data' => 'Item value',
 							'Item' => '1_item',
 							'Display' => 'Indicators',
@@ -1681,6 +2083,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 							]
 						],
 						[
+							'Name' => 'test column 2',
 							'Data' => 'Item value',
 							'Item' => '1_item',
 							'Display' => 'Indicators',
@@ -1693,6 +2096,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 							]
 						],
 						[
+							'Name' => 'test column 3',
 							'Data' => 'Item value',
 							'Item' => '1_item',
 							'Display' => 'Bar',
@@ -1705,6 +2109,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 							]
 						],
 						[
+							'Name' => 'test column 4',
 							'Data' => 'Item value',
 							'Item' => '1_item',
 							'Display' => 'Bar',
@@ -1784,7 +2189,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 
 	public static function getCheckTextItemsData() {
 		return [
-			// #0 text item - value displayed.
+			// #0 Text item - value displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1792,14 +2197,15 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_text'
 						]
 					],
-					'text' => 'Text for text item'
+					'text' => "column1\nText for text item"
 				]
 			],
-			// #1 text item, history data Trends - value displayed.
+			// #1 Text item, history data Trends - value displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1807,15 +2213,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_text',
 							'History data' => 'Trends'
 						]
 					],
-					'text' => 'Text for text item'
+					'text' => "column1\nText for text item"
 				]
 			],
-			// #2 text item, display Bar - value not displayed.
+			// #2 Text item, display Bar - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1823,14 +2230,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_text',
 							'Display' => 'Bar'
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #3 text item, display Indicators - value not displayed.
+			// #3 Text item, display Indicators - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1838,14 +2247,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_text',
 							'Display' => 'Indicators'
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #4 text item, Aggregation function max - value not displayed.
+			// #4 Text item, Aggregation function max - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1853,14 +2264,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_text',
 							'Aggregation function' => 'max'
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #5 text item, Threshold - value not displayed.
+			// #5 Text item, Threshold - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1868,6 +2281,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_text',
 							'Thresholds' => [
@@ -1876,10 +2290,11 @@ class testDashboardTopHostsWidget extends CWebTest {
 								]
 							]
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #6 log item - value displayed.
+			// #6 Log item - value displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1887,14 +2302,15 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_log'
 						]
 					],
-					'text' => 'Logs for text item'
+					'text' => "column1\nLogs for text item"
 				]
 			],
-			// #7 log item, history data Trends - value displayed.
+			// #7 Log item, history data Trends - value displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1902,15 +2318,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_log',
 							'History data' => 'Trends'
 						]
 					],
-					'text' => 'Logs for text item'
+					'text' => "column1\nLogs for text item"
 				]
 			],
-			// #8 log item, display Bar - value not displayed.
+			// #8 Log item, display Bar - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1918,14 +2335,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_log',
 							'Display' => 'Bar'
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #9 log item, display Indicators - value not displayed.
+			// #9 Log item, display Indicators - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1933,14 +2352,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_log',
 							'Display' => 'Indicators'
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #10 log item, Aggregation function max - value not displayed.
+			// #10 Log item, Aggregation function max - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1948,14 +2369,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_log',
 							'Aggregation function' => 'max'
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #11 log item, Threshold - value not displayed.
+			// #11 Log item, Threshold - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1963,6 +2386,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_log',
 							'Thresholds' => [
@@ -1971,10 +2395,11 @@ class testDashboardTopHostsWidget extends CWebTest {
 								]
 							]
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #12 char item - value displayed.
+			// #12 Char item - value displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1982,14 +2407,15 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_char'
 						]
 					],
-					'text' => 'characters_here'
+					'text' => "column1\ncharacters_here"
 				]
 			],
-			// #13 char item, history data Trends - value displayed.
+			// #13 Char item, history data Trends - value displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -1997,15 +2423,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_char',
 							'History data' => 'Trends'
 						]
 					],
-					'text' => 'characters_here'
+					'text' => "column1\ncharacters_here"
 				]
 			],
-			// #14 char item, display Bar - value not displayed.
+			// #14 Char item, display Bar - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -2013,14 +2440,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_char',
 							'Display' => 'Bar'
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #15 char item, display Indicators - value not displayed.
+			// #15 Char item, display Indicators - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -2028,14 +2457,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_char',
 							'Display' => 'Indicators'
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #16 char item, Aggregation function max - value not displayed.
+			// #16 Char item, Aggregation function max - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -2043,14 +2474,16 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_char',
 							'Aggregation function' => 'max'
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			],
-			// #17 char item, Threshold - value not displayed.
+			// #17 Char item, Threshold - value not displayed.
 			[
 				[
 					'main_fields' =>  [
@@ -2058,6 +2491,7 @@ class testDashboardTopHostsWidget extends CWebTest {
 					],
 					'column_fields' => [
 						[
+							'Name' => 'column1',
 							'Data' => 'Item value',
 							'Item' => 'top_hosts_trap_char',
 							'Thresholds' => [
@@ -2066,7 +2500,8 @@ class testDashboardTopHostsWidget extends CWebTest {
 								]
 							]
 						]
-					]
+					],
+					'text' => "column1\nNo data found."
 				]
 			]
 		];
@@ -2081,18 +2516,18 @@ class testDashboardTopHostsWidget extends CWebTest {
 		$this->createTopHostsWidget($data, 'top_host_text_items');
 
 		// Check if value displayed in column table.
-		$value = (array_key_exists('text', $data)) ? $data['text'] : 'No data found.';
-		$this->assertEquals($value, CDashboardElement::find()->one()->getWidget($data['main_fields']['Name'])
-				->getContent()->getText());
+		$this->assertEquals($data['text'], CDashboardElement::find()->one()->getWidget($data['main_fields']['Name'])
+				->getContent()->getText()
+		);
 	}
 
 	/**
 	 * Function used to create Top Hosts widget with special columns for CheckTextItems and WidgetAppearance scenarios.
 	 *
-	 * @param type $data	dataprovider values.
-	 * @param type $name	name of the dashboard where to create Top Hosts widget.
+	 * @param array     $data    data provider values
+	 * @param string    $name    name of the dashboard where to create Top Hosts widget
 	 */
-	private function createTopHostsWidget($data, $name) {
+	protected function createTopHostsWidget($data, $name) {
 		$dashboardid = CDataHelper::get('TopHostsWidget.dashboardids.'.$name);
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.$dashboardid);
 		$dashboard = CDashboardElement::find()->one();
@@ -2107,6 +2542,70 @@ class testDashboardTopHostsWidget extends CWebTest {
 		$dashboard->getWidget($data['main_fields']['Name'])->waitUntilReady();
 		$dashboard->save();
 		$this->assertMessage(TEST_GOOD, 'Dashboard updated');
+	}
+
+	/**
+	 * Check fields attributes for given form.
+	 *
+	 * @param array           $data    provided data
+	 * @param CFormElement    $form    form to be checked
+	 */
+	protected function checkFieldsAttributes($data, $form) {
+		foreach ($data as $label => $attributes) {
+			$field = $form->getField($label);
+			$this->assertTrue($field->isVisible(CTestArrayHelper::get($attributes, 'visible', true)));
+			$this->assertTrue($field->isEnabled(CTestArrayHelper::get($attributes, 'enabled', true)));
+
+			if (array_key_exists('value', $attributes)) {
+				$this->assertEquals($attributes['value'], $field->getValue());
+			}
+
+			if (array_key_exists('maxlength', $attributes)) {
+				$this->assertEquals($attributes['maxlength'], $field->getAttribute('maxlength'));
+			}
+
+			if (array_key_exists('placeholder', $attributes)) {
+				$this->assertEquals($attributes['placeholder'], $field->getAttribute('placeholder'));
+			}
+
+			if (array_key_exists('labels', $attributes)) {
+				$this->assertEquals($attributes['labels'], $field->asSegmentedRadio()->getLabels()->asText());
+			}
+
+			if (array_key_exists('options', $attributes)) {
+				$this->assertEquals($attributes['options'], $field->asDropdown()->getOptions()->asText());
+			}
+
+			if (array_key_exists('color', $attributes)) {
+				$this->assertEquals($attributes['color'], $form->query($label)->asColorPicker()->one()->getValue());
+			}
+		}
+	}
+
+	/**
+	 * Recursive function for trimming all values in multi-level array.
+	 *
+	 * @param array    $array    array to be trimmed
+	 */
+	protected function trimArray(&$array) {
+		foreach ($array as &$value) {
+			if (!is_array($value)) {
+				$value = trim($value);
+			}
+			else {
+				$this->trimArray($value);
+			}
+		}
+		unset($value);
+	}
+
+	/**
+	 * Test function for assuring that binary items are not available in Top hosts widget.
+	 */
+	public function testDashboardTopHostsWidget_CheckAvailableItems() {
+		$dashboardid = CDataHelper::get('TopHostsWidget.dashboardids.top_host_create');
+		$url = 'zabbix.php?action=dashboard.view&dashboardid='.$dashboardid;
+		$this->checkAvailableItems($url, 'Top hosts');
 	}
 
 	/**

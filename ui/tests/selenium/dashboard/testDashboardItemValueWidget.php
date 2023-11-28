@@ -1,5 +1,4 @@
 <?php
-
 /*
 ** Zabbix
 ** Copyright (C) 2001-2023 Zabbix SIA
@@ -22,24 +21,30 @@
 
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
+require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
+require_once dirname(__FILE__).'/../common/testWidgets.php';
+
 
 /**
+ * Test for checking Item Value Widget.
+ *
  * @backup dashboard
  *
  * @onBefore prepareDashboardData
  *
- * @dataSource WebScenarios
+ * @dataSource WebScenarios, AllItemValueTypes
  */
-class testDashboardItemValueWidget extends CWebTest {
+class testDashboardItemValueWidget extends testWidgets {
 
 	/**
-	 * Attach MessageBehavior to the test.
+	 * Attach MessageBehavior and TableBehavior to the test.
 	 *
 	 * @return array
 	 */
 	public function getBehaviors() {
 		return [
-			'class' => CMessageBehavior::class
+			CMessageBehavior::class,
+			CTableBehavior::class
 		];
 	}
 
@@ -165,22 +170,22 @@ class testDashboardItemValueWidget extends CWebTest {
 									],
 									[
 										'type' => '1',
-										'name' => 'thresholds.color.0',
+										'name' => 'thresholds.0.color',
 										'value' => 'BF00FF'
 									],
 									[
 										'type' => '1',
-										'name' => 'thresholds.threshold.0',
+										'name' => 'thresholds.0.threshold',
 										'value' => '0'
 									],
 									[
 										'type' => '1',
-										'name' => 'thresholds.color.1',
+										'name' => 'thresholds.1.color',
 										'value' => 'FF0080'
 									],
 									[
 										'type' => '1',
-										'name' => 'thresholds.threshold.1',
+										'name' => 'thresholds.1.threshold',
 										'value' => '0.01'
 									]
 								]
@@ -209,8 +214,7 @@ class testDashboardItemValueWidget extends CWebTest {
 	}
 
 	/**
-	 * Test to check Item Value Widget.
-	 * Check authentication form fields layout.
+	 * Test of the Item Value widget form fields layout.
 	 */
 	public function testDashboardItemValueWidget_FormLayout() {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.self::$dashboardid)->waitUntilReady();
@@ -225,12 +229,12 @@ class testDashboardItemValueWidget extends CWebTest {
 			'Name' => '',
 			'Refresh interval' => 'Default (1 minute)',
 			'id:show_header' => true,
-			'id:show_1' => true,
-			'id:show_2' => true,
-			'id:show_3' => true,
-			'id:show_4' => true,
+			'id:show_1' => true, // Description.
+			'id:show_2' => true, // Value.
+			'id:show_3' => true, // Time.
+			'id:show_4' => true, // Change indicator.
 			'Advanced configuration' => false,
-			'id:dynamic' => false
+			'id:override_hostid_ms' => ''
 		];
 
 		foreach ($default_values as $field => $value) {
@@ -280,13 +284,13 @@ class testDashboardItemValueWidget extends CWebTest {
 		];
 
 		// Merge all Advanced fields into one array.
-		$fields = array_merge($description, $values, $units, $time, $indicator_colors, ['Background color']);
+		$fields = array_merge($description, $values, $units, $time, $indicator_colors, ['Background colour']);
 
 		foreach ([false, true] as $advanced_config) {
 			$form->fill(['Advanced configuration' => $advanced_config]);
 
 			// Check that dynamic item checkbox is not depending on Advanced configuration checkbox state.
-			$dynamic_field = $form->getField('Enable host selection');
+			$dynamic_field = $form->getField('Override host');
 			$this->assertTrue($dynamic_field->isVisible());
 			$this->assertTrue($dynamic_field->isEnabled());
 
@@ -296,9 +300,9 @@ class testDashboardItemValueWidget extends CWebTest {
 			}
 
 			// Check advanced fields when Advanced configuration is true.
-			if ($advanced_config){
+			if ($advanced_config) {
 				// Check hintbox.
-				$form->query('class:icon-help-hint')->one()->click();
+				$form->getLabel('Description')->query('class:zi-help-filled-small')->one()->click();
 				$hint = $this->query('xpath:.//div[@data-hintboxid]')->waitUntilPresent();
 
 				// Assert text.
@@ -309,7 +313,7 @@ class testDashboardItemValueWidget extends CWebTest {
 						"\nUser macros", $hint->one()->getText());
 
 				// Close the hint-box.
-				$hint->one()->query('xpath:.//button[@class="overlay-close-btn"]')->one()->click();
+				$hint->one()->query('xpath:.//button[@class="btn-overlay-close"]')->one()->click();
 				$hint->waitUntilNotPresent();
 
 				// Check default values with Advanced configuration = true.
@@ -338,7 +342,7 @@ class testDashboardItemValueWidget extends CWebTest {
 				// Check fields' lengths.
 				$field_lenghts = [
 					'Name' =>  255,
-					'id:description' => 255,
+					'id:description' => 2048,
 					'id:desc_size' => 3,
 					'id:decimal_places' => 2,
 					'id:decimal_size' => 3,
@@ -371,10 +375,38 @@ class testDashboardItemValueWidget extends CWebTest {
 				}
 			}
 		}
+
+		$this->assertEquals(['Item', 'Show', 'Description'], $form->getRequiredLabels());
+
+		// Check Override host field.
+		$override = $form->getField('Override host');
+		$popup_menu_selector = 'xpath:.//button[contains(@class, "zi-chevron-down")]';
+
+		foreach (['button:Select', $popup_menu_selector] as $button) {
+			$this->assertTrue($override->query($button)->one()->isClickable());
+		}
+
+		$menu = $override->query($popup_menu_selector)->asPopupButton()->one()->getMenu();
+		$this->assertEquals(['Widget', 'Dashboard'], $menu->getItems()->asText());
+
+		$override->query($popup_menu_selector)->asPopupButton()->one()->getMenu()->select('Dashboard');
+		$form->checkValue(['Override host' => 'Dashboard']);
+		$this->assertTrue($override->query('xpath:.//span[@data-hintbox-contents="Dashboard is used as data source."]')
+			->one()->isVisible()
+		);
+
+		$override->query('button:Select')->waitUntilCLickable()->one()->click();
+		$dialogs = COverlayDialogElement::find()->all();
+		$this->assertEquals('Widget', $dialogs->last()->getTitle());
+
+		for ($i = $dialogs->count() - 1; $i >= 0; $i--) {
+			$dialogs->get($i)->close(true);
+		}
 	}
 
 	public static function getWidgetData() {
 		return [
+			// #0.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -392,6 +424,22 @@ class testDashboardItemValueWidget extends CWebTest {
 					'error' => ['Invalid parameter "Item": cannot be empty.']
 				]
 			],
+			// #1.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Type' => 'Item value',
+						'Item' => 'Available memory in %',
+						'id:show_1' => false, // Description.
+						'id:show_2' => false, // Value.
+						'id:show_3' => false, // Time.
+						'id:show_4' => false  // Change indicator.
+					],
+					'error' => ['Invalid parameter "Show": at least one option must be selected.']
+				]
+			],
+			// #2.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -419,6 +467,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #3.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -446,6 +495,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #4.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -473,6 +523,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #5.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -500,6 +551,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #6.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -514,6 +566,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #7.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -528,6 +581,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #8.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -542,6 +596,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #9.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -558,6 +613,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #10.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -574,6 +630,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #11.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -590,6 +647,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #12.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -606,6 +664,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #13.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -623,6 +682,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #14.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -640,6 +700,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #15.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -656,6 +717,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #16.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -673,6 +735,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #17.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -689,6 +752,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #18.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -704,6 +768,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #19.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -715,6 +780,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #20.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -754,6 +820,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #21.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -782,6 +849,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #22.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -832,10 +900,11 @@ class testDashboardItemValueWidget extends CWebTest {
 						// Time size in % relative to the size of the widget.
 						'id:time_size' => '13',
 						'id:time_bold' => true,
-						'Enable host selection' => true
+						'Override host' => 'Dashboard'
 					]
 				]
 			],
+			// #23.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -860,7 +929,7 @@ class testDashboardItemValueWidget extends CWebTest {
 						// Value units size in % relative to the size of the widget.
 						'id:units_size' => '99',
 						'id:units_bold' => true,
-						'Background color' => 'FFAAAA',
+						'Background colour' => 'FFAAAA',
 						'xpath://button[@id="lbl_desc_color"]/..' => 'AABBCC',
 						'xpath://button[@id="lbl_value_color"]/..' => 'CC11CC',
 						'xpath://button[@id="lbl_units_color"]/..' => 'BBCC55',
@@ -871,6 +940,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #24.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -886,6 +956,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #25.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -901,6 +972,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #26.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -933,6 +1005,7 @@ class testDashboardItemValueWidget extends CWebTest {
 
 	public static function getWidgetUpdateData() {
 		return [
+			// #27.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -949,6 +1022,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					]
 				]
 			],
+			// #28.
 			[
 				[
 					'expected' => TEST_GOOD,
@@ -1031,6 +1105,13 @@ class testDashboardItemValueWidget extends CWebTest {
 
 			// Check new widget form fields and values in frontend.
 			$saved_form = $dashboard->getWidget($header)->edit();
+
+			// Open "Advanced configuration" block if it was filled with data.
+			if (CTestArrayHelper::get($data, 'fields.Advanced configuration', false)) {
+				// After form submit "Advanced configuration" is closed.
+				$saved_form->checkValue(['Advanced configuration' => false]);
+				$saved_form->fill(['Advanced configuration' => true]);
+			}
 			$this->assertEquals($values, $saved_form->getFields()->filter(new CElementFilter(CElementFilter::VISIBLE))->asValues());
 
 			// As form is quite complex, show_header field should be checked separately.
@@ -1264,7 +1345,7 @@ class testDashboardItemValueWidget extends CWebTest {
 	 */
 	public function testDashboardItemValueWidget_ThresholdWarningMessage($data) {
 		$warning = 'id:item-value-thresholds-warning';
-		$info = 'class:icon-info';
+		$info = 'class:zi-i-warning';
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.self::$dashboardid);
 		$dashboard = CDashboardElement::find()->one();
 		$form = $dashboard->edit()->addWidget()->asForm();
@@ -1280,7 +1361,7 @@ class testDashboardItemValueWidget extends CWebTest {
 			$this->assertTrue($form->query($warning)->one()->isVisible());
 
 			// Check that info icon is displayed.
-			$this->assertTrue($form->query($info)->one()->isVisible());
+			$this->assertTrue($form->getLabel('Thresholds')->query($info)->one()->isVisible());
 
 			// Check hint-box.
 			$form->query($warning)->one()->click();
@@ -1288,14 +1369,14 @@ class testDashboardItemValueWidget extends CWebTest {
 			$this->assertEquals('This setting applies only to numeric data.', $hint->getText());
 
 			// Close the hint-box.
-			$hint->query('xpath:.//button[@class="overlay-close-btn"]')->one()->click()->waitUntilNotVisible();
+			$hint->query('xpath:.//button[@class="btn-overlay-close"]')->one()->click()->waitUntilNotVisible();
 		}
 		else {
 			// Check that warning item is not displayed.
 			$this->assertFalse($form->query($warning)->one()->isVisible());
 
 			// Check that info icon is not displayed.
-			$this->assertFalse($form->query($info)->one()->isVisible());
+			$this->assertFalse($form->getLabel('Thresholds')->query($info)->one()->isVisible());
 		}
 	}
 
@@ -1338,9 +1419,17 @@ class testDashboardItemValueWidget extends CWebTest {
 			$rgb = implode(', ', sscanf($threshold['color'], "%02x%02x%02x"));
 
 			$this->assertEquals('rgba('.$rgb.', 1)', $dashboard->getWidget($data['fields']['Name'])
-					->query('xpath:.//div[contains(@class, "dashboard-widget-item")]/div')->one()->getCSSValue('background-color')
+					->query('xpath:.//div[contains(@class, "dashboard-widget-item")]/div/div')->one()->getCSSValue('background-color')
 			);
 			$index++;
 		}
+	}
+
+	/**
+	 * Test function for assuring that binary items are not available in Item Value widget.
+	 */
+	public function testDashboardItemValueWidget_CheckAvailableItems() {
+		$url = 'zabbix.php?action=dashboard.view&dashboardid='.self::$dashboardid;
+		$this->checkAvailableItems($url, 'Item value');
 	}
 }
