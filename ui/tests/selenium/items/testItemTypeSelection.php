@@ -24,7 +24,6 @@ require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 require_once dirname(__FILE__).'/../behaviors/CPreprocessingBehavior.php';
 require_once dirname(__FILE__).'/../../include/helpers/CDataHelper.php';
 
-
 /**
  * @backup items
  *
