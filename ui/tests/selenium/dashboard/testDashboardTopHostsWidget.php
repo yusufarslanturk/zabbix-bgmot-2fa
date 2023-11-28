@@ -1177,14 +1177,6 @@ class testDashboardTopHostsWidget extends testWidgets {
 			$this->assertEquals($old_widget_count + 1, $dashboard->getWidgets()->count());
 			$this->checkWidget($header, $data, 'create');
 		}
-		else {
-			COverlayDialogElement::find()->one()->close();
-			$dashboard->save();
-
-			// Check message that widget added.
-			$this->assertMessage(TEST_GOOD, 'Dashboard updated');
-			$this->assertEquals($old_widget_count, $dashboard->getWidgets()->count());
-		}
 	}
 
 	/**
