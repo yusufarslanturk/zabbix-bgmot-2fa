@@ -186,9 +186,11 @@ class C62ImportConverter extends CConverter {
 			}
 
 			if (!array_key_exists('trends', $item)) {
-				$_item = $item +  ['value_type' => CXmlConstantName::UNSIGNED];
+				$value_type = array_key_exists('value_type', $item)
+					? $item['value_type']
+					: CXmlConstantName::UNSIGNED;
 
-				if (!in_array($_item['value_type'], [CXmlConstantName::FLOAT, CXmlConstantName::UNSIGNED])) {
+				if (!in_array($value_type, [CXmlConstantName::FLOAT, CXmlConstantName::UNSIGNED])) {
 					$item['trends'] = '0';
 				}
 			}
@@ -221,10 +223,12 @@ class C62ImportConverter extends CConverter {
 			}
 
 			if (!array_key_exists('trends', $item_prototype)) {
-				$_item_prototype = $item_prototype +  ['value_type' => CXmlConstantName::UNSIGNED];
+				$value_type = array_key_exists('value_type', $item_prototype)
+					? $item_prototype['value_type']
+					: CXmlConstantName::UNSIGNED;
 
-				if (!in_array($_item_prototype['value_type'], [CXmlConstantName::FLOAT, CXmlConstantName::UNSIGNED])) {
-					$item['trends'] = '0';
+				if (!in_array($value_type, [CXmlConstantName::FLOAT, CXmlConstantName::UNSIGNED])) {
+					$item_prototype['trends'] = '0';
 				}
 			}
 
