@@ -1017,7 +1017,7 @@ static void	tm_process_passive_proxy_cache_reload_request(zbx_ipc_async_socket_t
 	zbx_audit_flush();
 }
 
-static void	tm_service_manager_send_suppression_action(const zbx_uint64_t eventid, int action)
+static void	tm_service_manager_send_suppression_action(zbx_uint64_t eventid, zbx_uint64_t action)
 {
 	unsigned char   *data = NULL;
 	size_t          data_alloc = 0, data_offset = 0;

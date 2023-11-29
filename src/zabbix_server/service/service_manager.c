@@ -3379,7 +3379,6 @@ ZBX_THREAD_ENTRY(service_manager_thread, args)
 	int				process_num = ((zbx_thread_args_t *)args)->info.process_num;
 	unsigned char			process_type = ((zbx_thread_args_t *)args)->info.process_type;
 	zbx_ipc_async_socket_t		rtc;
-	zbx_uint32_t			rtc_msgs[] = {};
 	zbx_thread_service_manager_args	*serviceman_args_in;
 
 #define	STAT_INTERVAL	5	/* if a process is busy and does not sleep then update status not faster than */
@@ -3410,8 +3409,7 @@ ZBX_THREAD_ENTRY(service_manager_thread, args)
 
 	db_get_events(&service_manager.problem_events);
 
-	zbx_rtc_subscribe(process_type, process_num, rtc_msgs, ARRSIZE(rtc_msgs), serviceman_args_in->config_timeout,
-			&rtc);
+	zbx_rtc_subscribe(process_type, process_num, NULL, 0, serviceman_args_in->config_timeout, &rtc);
 
 	zbx_setproctitle("%s #%d started", get_process_type_string(process_type), process_num);
 

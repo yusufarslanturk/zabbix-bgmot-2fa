@@ -235,6 +235,7 @@ int	zbx_rtc_parse_options(const char *opt, zbx_uint32_t *code, struct zbx_json *
  * Parameters:                                                                *
  *      config_timeout - [IN]                                                 *
  *      code           - [IN]  the RTC code to be sent                        *
+ *      process_name   - [IN]  the process name to be logged                  *
  *      rtc            - [OUT] the RTC notification subscription socket       *
  *                                                                            *
  ******************************************************************************/
