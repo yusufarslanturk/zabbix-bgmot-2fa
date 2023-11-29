@@ -115,9 +115,7 @@ class CControllerMiscConfigEdit extends CController {
 
 		$x_frame_options = $this->getInput('x_frame_options', CSettingsHelper::get(CSettingsHelper::X_FRAME_OPTIONS));
 		$data['x_frame_header_enabled'] = strcasecmp('null', $x_frame_options) == 0 ? 0 : 1;
-		$data['x_frame_options'] = $data['x_frame_header_enabled'] == 1
-			? $x_frame_options
-			: '';
+		$data['x_frame_options'] = $data['x_frame_header_enabled'] == 1 ? $x_frame_options : '';
 
 		$data['vault_provider'] = $this->getInput('vault_provider',
 			CSettingsHelper::get(CSettingsHelper::VAULT_PROVIDER)
