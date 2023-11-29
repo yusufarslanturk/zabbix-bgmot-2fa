@@ -1702,6 +1702,14 @@ class testDashboardTopHostsWidget extends testWidgets {
 
 			$this->checkWidget(self::$updated_name, $data, 'update');
 		}
+		else {
+			COverlayDialogElement::find()->one()->close();
+			$dashboard->save();
+			$this->assertMessage(TEST_GOOD, 'Dashboard updated');
+
+			// Compare old hash and new one.
+			$this->assertEquals($old_hash, CDBHelper::getHash($this->sql));
+		}
 	}
 
 	/**
