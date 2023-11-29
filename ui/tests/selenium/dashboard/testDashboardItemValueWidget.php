@@ -24,6 +24,7 @@ require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
 require_once dirname(__FILE__).'/../common/testWidgets.php';
 
+
 /**
  * Test for checking Item Value Widget.
  *
