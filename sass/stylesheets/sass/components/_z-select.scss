@@ -62,6 +62,8 @@ z-select,
 		display: none;
 		z-index: 20000;
 		max-height: 362px;
+		width: inherit;
+		overflow-x: hidden;
 		overflow-y: auto;
 		border: 1px solid;
 		box-shadow: 0 6px 10px 0 $action-shadow-color;
@@ -73,6 +75,7 @@ z-select,
 			display: block;
 			height: inherit;
 			box-sizing: border-box;
+			min-width: fit-content;
 			min-height: 24px;
 			padding: 5px;
 			line-height: normal;
@@ -109,6 +112,7 @@ z-select,
 				margin: 5px -5px -5px;
 
 				li {
+					padding-right: 15px;
 					padding-left: 15px;
 				}
 			}
@@ -123,6 +127,7 @@ z-select,
 		> ul {
 			display: block;
 			position: fixed;
+			min-width: fit-content;
 		}
 	}
 

@@ -320,7 +320,11 @@ class ZSelect extends HTMLElement {
 				this._list.style.maxHeight = `${space_above - offset_top}px`;
 			}
 		}
-		this._list.style.width = `${this.scrollWidth}px`;
+
+		if (this.getAttribute('width') === 'auto') {
+			this._list.style.minWidth = window.getComputedStyle(this).width;
+			this._list.style.width = 'fit-content';
+		}
 
 		this._highlight(this._preselected_index);
 
