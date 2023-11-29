@@ -32,7 +32,7 @@ class CControllerPopupConditionOperations extends CControllerPopupConditionCommo
 									EVENT_SOURCE_INTERNAL, EVENT_SOURCE_SERVICE
 								]),
 			'validate' =>		'in 1',
-			'condition_type' =>	'in '.CONDITION_TYPE_EVENT_ACKNOWLEDGED,
+			'condition_type' =>	'in '.ZBX_CONDITION_TYPE_EVENT_ACKNOWLEDGED,
 			'operator' =>		'in '.CONDITION_OPERATOR_EQUAL,
 			'value' =>			'in '.implode(',', [EVENT_NOT_ACKNOWLEDGED, EVENT_ACKNOWLEDGED]),
 			'row_index' =>		'int32'
@@ -40,7 +40,7 @@ class CControllerPopupConditionOperations extends CControllerPopupConditionCommo
 	}
 
 	protected function getConditionLastType() {
-		return CONDITION_TYPE_EVENT_ACKNOWLEDGED;
+		return ZBX_CONDITION_TYPE_EVENT_ACKNOWLEDGED;
 	}
 
 	protected function validateFieldsManually() {
