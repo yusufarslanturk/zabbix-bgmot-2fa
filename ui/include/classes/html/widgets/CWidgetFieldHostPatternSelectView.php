@@ -60,9 +60,11 @@ class CWidgetFieldHostPatternSelectView extends CWidgetFieldView {
 	public function getLabel(): ?CLabel {
 		$label = parent::getLabel();
 
-		return $label !== null
-			? $label->setFor($this->field->getName().'__ms')
-			: null;
+		if ($label !== null) {
+			$label->setFor(zbx_formatDomId($this->field->getName().'[]').'_ms');
+		}
+
+		return $label;
 	}
 
 	public function getJavaScript(): string {
