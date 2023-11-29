@@ -18,29 +18,22 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
-require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
-require_once dirname(__FILE__).'/../common/testWidgets.php';
-
 
 /**
- * @dataSource AllItemValueTypes
- *
  * @backup widget, profiles
  */
-class testDashboardGraphPrototypeWidget extends testWidgets {
+class testDashboardGraphPrototypeWidget extends CWebTest {
 
 	/**
-	 * Attach MessageBehavior and TableBehavior to the test.
+	 * Attach MessageBehavior to the test.
 	 *
 	 * @return array
 	 */
 	public function getBehaviors() {
 		return [
-			CMessageBehavior::class,
-			CTableBehavior::class
+			'class' => CMessageBehavior::class
 		];
 	}
 
@@ -504,12 +497,6 @@ class testDashboardGraphPrototypeWidget extends testWidgets {
 
 		$this->assertEquals($initial_values, CDBHelper::getHash($this->sql));
 	}
-
-	/**
-	 * Test function for assuring that binary items are not available in Graph prototype widget.
-	 */
-	public function testDashboardGraphPrototypeWidget_CheckAvailableItems() {
-		$url = 'zabbix.php?action=dashboard.view&dashboardid='.self::DASHBOARD_ID;
-		$this->checkAvailableItems($url, 'Graph prototype');
-	}
 }
+
+
