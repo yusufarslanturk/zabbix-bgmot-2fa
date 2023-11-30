@@ -63,7 +63,7 @@ AS_HELP_STRING([--with-libxml2@<:@=ARG@:>@],
             AC_REQUIRE([PKG_PROG_PKG_CONFIG])
             m4_ifdef([PKG_PROG_PKG_CONFIG], [PKG_PROG_PKG_CONFIG()], [:])
 
-                if test -x "$PKG_CONFIG"; then
+            if test -x "$PKG_CONFIG"; then
 
                 LIBXML2_CFLAGS="`$PKG_CONFIG --cflags libxml-2.0`"
 
@@ -107,6 +107,20 @@ AS_HELP_STRING([--with-libxml2@<:@=ARG@:>@],
                 done
             fi
 
+            if test "$_libxml2_with" != "yes"; then
+                if test -f $_libxml2_with/include/libxml2/libxml/xmlversion.h; then
+                    LIBXML2_VERSION=`cat $_libxml2_with/include/libxml2/libxml/xmlversion.h \
+                                  | grep '#define.*LIBXML_DOTTED_VERSION.*' \
+                                  | sed -e 's/#define LIBXML_DOTTED_VERSION  *//' \
+                                  | sed -e 's/  *\/\*.*\*\///' \
+                                  | sed -e 's/\"//g'`
+                else
+                    AC_MSG_ERROR([Not found libxml2 library])
+                fi
+            else
+                LIBXML2_VERSION=`$PKG_CONFIG --version libxml-2.0`
+            fi
+
             _save_libxml2_libs="${LIBS}"
             _save_libxml2_ldflags="${LDFLAGS}"
             _save_libxml2_cflags="${CFLAGS}"
@@ -126,16 +140,6 @@ AS_HELP_STRING([--with-libxml2@<:@=ARG@:>@],
             unset _save_libxml2_libs
             unset _save_libxml2_ldflags
             unset _save_libxml2_cflags
-
-            if test "$_libxml2_with" != "yes"; then
-                LIBXML2_VERSION=`cat $_libxml2_with/include/libxml2/libxml/xmlversion.h \
-                                  | grep '#define.*LIBXML_DOTTED_VERSION.*' \
-                                  | sed -e 's/#define LIBXML_DOTTED_VERSION  *//' \
-                                  | sed -e 's/  *\/\*.*\*\///' \
-                                  | sed -e 's/\"//g'`
-            else
-                LIBXML2_VERSION=`$PKG_CONFIG --version libxml-2.0`
-            fi
 
             AC_DEFINE([HAVE_LIBXML2], [1], [Define to 1 if libxml2 libraries are available])
 
