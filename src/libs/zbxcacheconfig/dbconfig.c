@@ -9542,7 +9542,8 @@ static void	dc_preproc_sync_preprocitem(zbx_pp_item_preproc_t *preproc, zbx_uint
 		preproc->steps[i].error_handler = op->error_handler;
 
 		preproc->steps[i].params = dc_expand_user_macros_dyn(op->params, &hostid, 1, ZBX_MACRO_ENV_NONSECURE);
-		preproc->steps[i].error_handler_params = zbx_strdup(NULL, op->error_handler_params);
+		preproc->steps[i].error_handler_params = dc_expand_user_macros_dyn(op->error_handler_params, &hostid, 1,
+				ZBX_MACRO_ENV_NONSECURE);
 	}
 
 	preproc->steps_num = preprocitem->preproc_ops.values_num;
