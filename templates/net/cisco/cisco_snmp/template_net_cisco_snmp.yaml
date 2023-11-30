@@ -1685,9 +1685,6 @@ zabbix_export:
                       value:
                         host: 'Cisco IOS by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: fb67666002524322b1b9ae9ed1611be5
           name: 'CISCO-ENVMON-MIB::CiscoEnvMonState'
@@ -4870,9 +4867,6 @@ zabbix_export:
                       value:
                         host: 'Cisco IOS versions 12.0_3_T-12.2_3.5 by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: d811f4c78e8246f6a3ed1e903ade574d
           name: 'CISCO-ENVMON-MIB::CiscoEnvMonState'

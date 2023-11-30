@@ -837,9 +837,6 @@ zabbix_export:
                         host: 'IBM IMM by SNMP'
                         key: 'sensor.temp.value[tempReading.{#SNMPINDEX}]'
                     - type: INTEGER
-                      name: rows
-                      value: '1'
-                    - type: INTEGER
                       name: source_type
                       value: '3'
                 - type: graphprototype
@@ -855,9 +852,6 @@ zabbix_export:
                       value:
                         host: 'IBM IMM by SNMP'
                         key: 'sensor.temp.value[tempReading.Ambient.{#SNMPINDEX}]'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: INTEGER
                       name: source_type
                       value: '3'
@@ -875,9 +869,6 @@ zabbix_export:
                         host: 'IBM IMM by SNMP'
                         key: 'sensor.temp.value[tempReading.CPU.{#SNMPINDEX}]'
                     - type: INTEGER
-                      name: rows
-                      value: '1'
-                    - type: INTEGER
                       name: source_type
                       value: '3'
             - name: Fan
@@ -894,9 +885,6 @@ zabbix_export:
                       value:
                         host: 'IBM IMM by SNMP'
                         key: 'sensor.fan.speed.percentage[fanSpeed.{#SNMPINDEX}]'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                     - type: INTEGER
                       name: source_type
                       value: '3'

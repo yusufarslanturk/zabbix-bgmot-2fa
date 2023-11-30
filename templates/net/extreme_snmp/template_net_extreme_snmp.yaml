@@ -1267,9 +1267,6 @@ zabbix_export:
                       value:
                         host: 'Extreme EXOS by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 60e2bd909e284621a8a21810623b0e94
           name: 'EtherLike-MIB::dot3StatsDuplexStatus'
