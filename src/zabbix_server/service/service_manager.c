@@ -280,7 +280,7 @@ static void	db_get_events(zbx_hashset_t *problem_events)
 	}
 	zbx_db_free_result(result);
 
-	result = zbx_db_select("select distinct(eventid) from event_suppress");
+	result = zbx_db_select("select eventid, count(eventid) from event_suppress where eventid group by eventid");
 	while (NULL != (row = zbx_db_fetch(result)))
 	{
 		zbx_event_t	event_local, *event_p, **ptr;
@@ -291,7 +291,7 @@ static void	db_get_events(zbx_hashset_t *problem_events)
 		if (NULL != (ptr = zbx_hashset_search(problem_events, &event_p)))
 		{
 			event_p = *ptr;
-			event_p->suppressed = 1;
+			ZBX_STR2UINT64(event_p->suppressed, row[1]);
 		}
 	}
 	zbx_db_free_result(result);
@@ -2605,7 +2605,7 @@ static void	db_update_services(zbx_service_manager_t *manager)
 			{
 				event = *ptr;
 
-				if (1 == event->suppressed)
+				if (0 < event->suppressed)
 					continue;
 			}
 
@@ -2751,9 +2751,9 @@ static void	process_deleted_problems(zbx_vector_uint64_t *eventids, zbx_service_
 }
 
 static void	process_problem_suppression(zbx_vector_uint64_t *eventids, zbx_service_manager_t *service_manager,
-		int suppressed)
+		int is_suppressed)
 {
-	int		i;
+	int	i;
 
 	for (i = 0; i < eventids->values_num; i++)
 	{
@@ -2768,8 +2768,11 @@ static void	process_problem_suppression(zbx_vector_uint64_t *eventids, zbx_servi
 			continue;
 		}
 
-		(*pevent)->suppressed = suppressed;
+		(*pevent)->suppressed += is_suppressed;
 		(*pevent)->mtime = (int)time(NULL);
+
+		if (-1 == is_suppressed && 0 != (*pevent)->suppressed)
+			continue;
 
 		pi_local.eventid = eventids->values[i];
 
@@ -3528,7 +3531,7 @@ ZBX_THREAD_ENTRY(service_manager_thread, args)
 					break;
 				case ZBX_IPC_SERVICE_SERVICE_EVENTS_UNSUPPRESS:
 					zbx_service_deserialize_ids(message->data, message->size, &eventids);
-					process_problem_suppression(&eventids, &service_manager, 0);
+					process_problem_suppression(&eventids, &service_manager, -1);
 					break;
 				case ZBX_IPC_SERVICE_SERVICE_EVENTS_SUPPRESS:
 					zbx_service_deserialize_ids(message->data, message->size, &eventids);

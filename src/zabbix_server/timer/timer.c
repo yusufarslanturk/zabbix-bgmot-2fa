@@ -313,7 +313,7 @@ static void	db_get_query_events(zbx_vector_ptr_t *event_queries, zbx_vector_ptr_
 
 	result = zbx_db_select("select eventid,maintenanceid,suppress_until"
 			" from event_suppress"
-			" where " ZBX_SQL_MOD(eventid, %d) "=%d"
+			" where " ZBX_SQL_MOD(eventid, %d) "=%d and maintenanceid is not null"
 			" order by eventid",
 			CONFIG_FORKS[ZBX_PROCESS_TYPE_TIMER], process_num - 1);
 
