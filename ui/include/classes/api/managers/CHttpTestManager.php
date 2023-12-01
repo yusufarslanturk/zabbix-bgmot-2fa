@@ -1130,8 +1130,6 @@ class CHttpTestManager {
 								}
 							}
 							else {
-								$type = '';
-
 								switch ($step_field) {
 									case 'headers':
 										$type = ZBX_HTTPFIELD_HEADER;
@@ -1165,7 +1163,7 @@ class CHttpTestManager {
 						foreach ($step['posts'] as &$post) {
 							$db_post = array_shift($db_posts);
 
-							if ($db_post) {
+							if ($db_post !== null) {
 								$upd_field = DB::getUpdatedValues('httpstep_field', $post, $db_post);
 
 								if ($upd_field) {
