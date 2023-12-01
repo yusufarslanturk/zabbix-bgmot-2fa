@@ -50,11 +50,11 @@
 			this.jit_provision_interval = this.form.querySelector('[name="jit_provision_interval"]');
 			this.ldap_auth_enabled = this.form.querySelector('[type="checkbox"][name="ldap_auth_enabled"]');
 			const saml_readonly = !this.form.querySelector('[type="checkbox"][name="saml_auth_enabled"]').checked;
-			const ldap_readonly = this.ldap_auth_enabled === null || !this.ldap_auth_enabled.checked;
+			const ldap_disabled = this.ldap_auth_enabled === null || !this.ldap_auth_enabled.checked;
 
 			this._addEventListeners();
 			this._addLdapServers(ldap_servers, ldap_default_row_index);
-			this._setTableVisiblityState(this.ldap_servers_table, ldap_readonly);
+			this._setTableVisiblityState(this.ldap_servers_table, ldap_disabled);
 			this._disableRemoveLdapServersWithUserGroups();
 			this._renderProvisionGroups(saml_provision_groups);
 			this._setTableVisiblityState(this.saml_provision_groups_table, saml_readonly);
@@ -65,14 +65,6 @@
 		}
 
 		_addEventListeners() {
-			// Prevent checkbox:readonly value toggle by clicking on associated label.
-			this.form.addEventListener('click', e => {
-				if (e.target.hasAttribute('for')
-						&& this.form.querySelector(`#${e.target.getAttribute('for')}[type="checkbox"][readonly]`)) {
-					return cancelEvent(e);
-				}
-			});
-
 			this.#addLdapSettingsEventListeners();
 
 			document.getElementById('http_auth_enabled').addEventListener('change', (e) => {
@@ -219,16 +211,13 @@
 		}
 
 		#updateLdapFieldsState() {
-			const ldap_readonly = this.ldap_auth_enabled === null || !this.ldap_auth_enabled.checked;
-			const provision_readonly = ldap_readonly || !this.ldap_jit_status.checked;
+			const ldap_disabled = this.ldap_auth_enabled === null || !this.ldap_auth_enabled.checked;
+			const provision_disabled = ldap_disabled || !this.ldap_jit_status.checked;
 
-			this.ldap_provisioning_fields.forEach(field => {
-				field.toggleAttribute('readonly', ldap_readonly);
-				field.setAttribute('tabindex', ldap_readonly ? -1 : 0);
-			});
-			this._setTableVisiblityState(this.ldap_servers_table, ldap_readonly);
+			this.ldap_provisioning_fields.forEach(field => field.toggleAttribute('disabled', ldap_disabled));
+			this._setTableVisiblityState(this.ldap_servers_table, ldap_disabled);
 			this._disableRemoveLdapServersWithUserGroups();
-			this.jit_provision_interval.toggleAttribute('readonly', provision_readonly);
+			this.jit_provision_interval.toggleAttribute('disabled', provision_disabled);
 		}
 
 		_authFormSubmit() {
