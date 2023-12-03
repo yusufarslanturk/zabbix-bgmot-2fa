@@ -734,7 +734,10 @@ class CHttpTestManager {
 		$ins_fields = [];
 		$upd_fields = [];
 		$del_fieldids = [];
-		$httptest_fields = [ZBX_HTTPFIELD_VARIABLE => 'variables', ZBX_HTTPFIELD_HEADER => 'headers'];
+		$httptest_fields = [
+			ZBX_HTTPFIELD_VARIABLE => 'variables',
+			ZBX_HTTPFIELD_HEADER => 'headers'
+		];
 
 		foreach ($httptests as $httptest) {
 			foreach ($httptest_fields as $field_type => $httptest_field) {
