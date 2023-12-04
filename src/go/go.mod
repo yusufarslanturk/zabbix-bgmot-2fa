@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	git.zabbix.com/ap/plugin-support v1.2.2-0.20231017090800-2ee690c4669b
+	git.zabbix.com/ap/plugin-support v1.2.2-0.20231130142234-bac0d8ee34da
 	github.com/BurntSushi/locker v0.0.0-20171006230638-a6e239ea1c69
 	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/Microsoft/go-winio v0.6.1
