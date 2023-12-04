@@ -49,7 +49,7 @@ class C62ImportConverter extends CConverter {
 
 	private const ITEM_TYPE_FIELDS = [
 		CXmlConstantName::ZABBIX_PASSIVE => ['interface_ref', 'delay'],
-		CXmlConstantName::TRAP => ['trapper_hosts'],
+		CXmlConstantName::TRAP => ['allowed_hosts'],
 		CXmlConstantName::SIMPLE => ['interface_ref', 'username', 'password', 'delay'],
 		CXmlConstantName::INTERNAL => ['delay'],
 		CXmlConstantName::ZABBIX_ACTIVE => ['delay'],
@@ -67,7 +67,7 @@ class C62ImportConverter extends CConverter {
 		CXmlConstantName::HTTP_AGENT => ['url', 'query_fields', 'request_method', 'post_type', 'posts', 'headers',
 			'status_codes', 'follow_redirects', 'retrieve_mode', 'output_format', 'http_proxy', 'interface_ref',
 			'authtype', 'username', 'password', 'verify_peer', 'verify_host', 'ssl_cert_file', 'ssl_key_file',
-			'ssl_key_password', 'timeout', 'delay', 'allow_traps', 'trapper_hosts'
+			'ssl_key_password', 'timeout', 'delay', 'allow_traps', 'allowed_hosts'
 		],
 		CXmlConstantName::SNMP_AGENT => ['interface_ref', 'snmp_oid', 'delay'],
 		CXmlConstantName::SCRIPT => ['parameters', 'params', 'timeout', 'delay']
@@ -421,7 +421,7 @@ class C62ImportConverter extends CConverter {
 					return $item['type'] != CXmlConstantName::ZABBIX_ACTIVE
 						|| strncmp($item['key'], 'mqtt.get', 8) != 0;
 
-				case 'trapper_hosts':
+				case 'allowed_hosts':
 					return $item['type'] != CXmlConstantName::HTTP_AGENT
 						|| $item['allow_traps'] == CXmlConstantName::YES;
 
