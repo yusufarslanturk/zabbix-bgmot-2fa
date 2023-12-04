@@ -280,7 +280,7 @@ static void	db_get_events(zbx_hashset_t *problem_events)
 	}
 	zbx_db_free_result(result);
 
-	result = zbx_db_select("select eventid, count(eventid) from event_suppress where eventid group by eventid");
+	result = zbx_db_select("select eventid,count(eventid) from event_suppress group by eventid");
 	while (NULL != (row = zbx_db_fetch(result)))
 	{
 		zbx_event_t	event_local, *event_p, **ptr;
@@ -291,7 +291,7 @@ static void	db_get_events(zbx_hashset_t *problem_events)
 		if (NULL != (ptr = zbx_hashset_search(problem_events, &event_p)))
 		{
 			event_p = *ptr;
-			ZBX_STR2UINT64(event_p->suppressed, row[1]);
+			event_p->suppressed = atoi(row[1]);
 		}
 	}
 	zbx_db_free_result(result);
