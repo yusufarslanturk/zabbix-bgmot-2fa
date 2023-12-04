@@ -2510,8 +2510,6 @@ static void	db_update_services(zbx_service_manager_t *manager)
 	zbx_vector_uint64_t	service_problemids;
 	zbx_hashset_t		service_updates;
 
-	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
-
 	zbx_vector_ptr_create(&alarms);
 	zbx_vector_ptr_create(&service_problems_new);
 	zbx_vector_uint64_create(&service_problemids);
@@ -2759,27 +2757,27 @@ static void	process_problem_suppression(zbx_vector_uint64_t *eventids, zbx_servi
 	{
 		zbx_event_t			event_local, *event = &event_local, **pevent;
 		zbx_service_problem_index_t	*pi, pi_local;
-		zbx_services_diff_t	*services_diff, services_diff_local;
+		zbx_services_diff_t		*services_diff, services_diff_local;
+		int				suppressed_old;
 
 		event_local.eventid = eventids->values[i];
 
 		if (NULL == (pevent = (zbx_event_t **)zbx_hashset_search(&service_manager->problem_events, &event)))
-		{
 			continue;
-		}
+
+		suppressed_old = (*pevent)->suppressed;
 
 		(*pevent)->suppressed += is_suppressed;
-		(*pevent)->mtime = (int)time(NULL);
 
-		if (-1 == is_suppressed && 0 != (*pevent)->suppressed)
+		if (0 != suppressed_old && 0 != (*pevent)->suppressed)
 			continue;
+
+		(*pevent)->mtime = (int)time(NULL);
 
 		pi_local.eventid = eventids->values[i];
 
 		if (NULL == (pi = zbx_hashset_search(&service_manager->service_problems_index, &pi_local)))
-		{
 			continue;
-		}
 
 		for (int j = 0; j < pi->services.values_num; j++)
 		{
