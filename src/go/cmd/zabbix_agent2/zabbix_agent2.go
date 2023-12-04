@@ -147,7 +147,7 @@ func processVersionCommand(c *runtimecontrol.Client) (err error) {
 }
 
 func processHelpCommand(c *runtimecontrol.Client) (err error) {
-	help := `Remote control interface, available commands:
+	help := `Runtime control interface, available commands:
 	log_level_increase - Increase log level
 	log_level_decrease - Decrease log level
 	userparameter_reload - Reload user parameters
@@ -189,7 +189,7 @@ func processUserParamReloadCommand(c *runtimecontrol.Client) error {
 	return nil
 }
 
-func processRemoteCommand(c *runtimecontrol.Client) (err error) {
+func processRuntimeCommand(c *runtimecontrol.Client) (err error) {
 	params := strings.Fields(c.Request())
 	switch len(params) {
 	case 0:
@@ -240,11 +240,11 @@ func run() error {
 				return nil
 			}
 		case client := <-control.Client():
-			err := processRemoteCommand(client)
+			err := processRuntimeCommand(client)
 			if err != nil {
 				rerr := client.Reply(fmt.Sprintf("error: %s", err.Error()))
 				if rerr != nil {
-					log.Warningf("cannot reply to remote command: %s", rerr)
+					log.Warningf("cannot reply to runtime command: %s", rerr)
 				}
 			}
 
@@ -280,7 +280,7 @@ func main() {
 	}
 
 	if args.help {
-		fmt.Println(helpMessage(flagsUsage))
+		fmt.Printf(helpMessage(flagsUsage))
 
 		os.Exit(0)
 	}
@@ -356,7 +356,7 @@ func main() {
 
 	if args.runtimeCommand != "" {
 		if agent.Options.ControlSocket == "" {
-			log.Errf("Cannot send remote command: ControlSocket configuration parameter is not defined")
+			log.Errf("Cannot send runtime command: ControlSocket configuration parameter is not defined")
 			os.Exit(0)
 		}
 
@@ -364,7 +364,7 @@ func main() {
 			agent.Options.ControlSocket, args.runtimeCommand, runtimeCommandSendingTimeout,
 		)
 		if err != nil {
-			log.Errf("Cannot send remote command: %s", err)
+			log.Errf("Cannot send runtime command: %s", err)
 			os.Exit(1)
 		}
 
