@@ -2510,6 +2510,8 @@ static void	db_update_services(zbx_service_manager_t *manager)
 	zbx_vector_uint64_t	service_problemids;
 	zbx_hashset_t		service_updates;
 
+	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
+
 	zbx_vector_ptr_create(&alarms);
 	zbx_vector_ptr_create(&service_problems_new);
 	zbx_vector_uint64_create(&service_problemids);
