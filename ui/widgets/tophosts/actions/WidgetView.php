@@ -76,6 +76,7 @@ class WidgetView extends CControllerDashboardWidgetView {
 		$time_now = time();
 
 		$master_column = $configuration[$this->fields_values['column']];
+
 		$master_items = self::getItems($master_column['item'], self::isNumericOnlyColumn($master_column), $groupids,
 			$hostids
 		);
