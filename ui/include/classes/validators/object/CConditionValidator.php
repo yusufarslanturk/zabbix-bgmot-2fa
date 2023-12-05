@@ -69,7 +69,7 @@ class CConditionValidator extends CValidator {
 			$trigger_count = 0;
 			foreach ($object['conditions'] as $condition) {
 				if (array_key_exists('conditiontype', $condition) && array_key_exists('operator', $condition)
-						&& $condition['conditiontype'] == CONDITION_TYPE_TRIGGER
+						&& $condition['conditiontype'] == ZBX_CONDITION_TYPE_TRIGGER
 						&& $condition['operator'] == CONDITION_OPERATOR_EQUAL) {
 					$trigger_count++;
 				}

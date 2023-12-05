@@ -172,12 +172,11 @@ $connector_tab = (new CFormGrid())
 			->addClass('js-field-max-records')
 			->setAsteriskMark(),
 		(new CFormField([
-			(new CDiv(
-				(new CRadioButtonList('max_records_mode', $data['form']['max_records_mode']))
-					->addValue(_('Unlimited'), 0)
-					->addValue(_('Custom'), 1)
-					->setModern()
-			))->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
+			(new CRadioButtonList('max_records_mode', $data['form']['max_records_mode']))
+				->addValue(_('Unlimited'), 0)
+				->addValue(_('Custom'), 1)
+				->setModern()
+				->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
 			(new CNumericBox('max_records', $data['form']['max_records'], 10, false, false, false))
 				->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 				->setAriaRequired()

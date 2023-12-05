@@ -1952,7 +1952,12 @@ static int	jsonpath_prepare_numeric_arg(zbx_variant_t *var)
 static void	jsonpath_index_append_result(zbx_hashset_t *index, const char *name, zbx_jsonobj_t *obj,
 		zbx_jsonobj_t *value)
 {
+#if defined(__hpux)
+	/* fix for compiling with HP-UX bundled cc compiler */
+	zbx_jsonobj_index_el_t	el_local = {NULL}, *el;
+#else
 	zbx_jsonobj_index_el_t	el_local = {.value = NULL}, *el;
+#endif
 	size_t			value_alloc = 0, value_offset = 0;
 	zbx_jsonobj_ref_t	ref;
 
