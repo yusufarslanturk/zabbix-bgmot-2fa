@@ -18,7 +18,6 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 require_once dirname(__FILE__).'/../behaviors/CPreprocessingBehavior.php';
@@ -26,8 +25,6 @@ require_once dirname(__FILE__).'/../../include/helpers/CDataHelper.php';
 
 /**
  * @backup items
- *
- * @dataSource AllItemValueTypes
  */
 class testItemTypeSelection extends CWebTest {
 
@@ -136,18 +133,6 @@ class testItemTypeSelection extends CWebTest {
 					'hint_text' => 'This type of information may not match the key.',
 					'automatic_type' => 'Text'
 				]
-			] ,
-			[
-				[
-					'fields' => [
-						'Type' => 'Dependent item',
-						'Name' => 'Binary',
-						'Key' => 'Binary_item_type_for_dependent_item[{#KEY}]',
-						'Type of information' => 'Binary'
-					],
-					'type' => 'Binary',
-					'hint' => false
-				]
 			]
 		];
 	}
@@ -182,9 +167,6 @@ class testItemTypeSelection extends CWebTest {
 
 		// Make names unique for items and prototypes.
 		$data['fields']['Name'] = $data['fields']['Name'].microtime();
-		if (CTestArrayHelper::get($data['fields'], 'Type of information') === 'Binary' && !$prototype) {
-			$data['fields']['Master item'] = 'testFormItem';
-		}
 		$form->fill($data['fields']);
 
 		// Check hintbox text.
@@ -203,21 +185,14 @@ class testItemTypeSelection extends CWebTest {
 			$this->assertEquals($data['type'], $form->getField('Type of information')->getValue());
 		}
 
-		// Check dependent item type for item prototype, select Master item manually.
-		if (CTestArrayHelper::get($data['fields'], 'Type of information') === 'Binary' && $prototype) {
-			$form->getFieldContainer('Master item')->query('button:Select')->waitUntilClickable()->one()->click();
-			COverlayDialogElement::find()->all()->last()->waitUntilReady()->query('link:Master Item for testItemTypeSelection')
-					->one()->click();
-		}
-
 		$form->submit();
 		$this->assertMessage(TEST_GOOD, ($prototype) ? 'Item prototype added' : 'Item added');
 
 		// Check saved item form in DB and Frontend.
-		$this->assertEquals(1, CDBHelper::getCount('SELECT itemid FROM items'.
+		$id = CDBHelper::getValue('SELECT itemid FROM items'.
 				' WHERE key_ ='.zbx_dbstr($data['fields']['Key']).
-				' AND name ='.zbx_dbstr($data['fields']['Name'])
-		));
+					' AND name ='.zbx_dbstr($data['fields']['Name'])
+		);
 
 		$saved_link = ($prototype)
 			? 'disc_prototypes.php?form=update&parent_discoveryid='.self::LLDID.'&itemid='.$id.'&context=host'
@@ -226,13 +201,6 @@ class testItemTypeSelection extends CWebTest {
 		$this->page->open($saved_link)->waitUntilReady();
 
 		$form->invalidate();
-
-		if (CTestArrayHelper::get($data['fields'], 'Type of information') === 'Binary') {
-			$data['fields']['Master item'] = $prototype
-				? 'Host for host prototype tests: Master Item for testItemTypeSelection'
-				: 'Simple form test host: testFormItem';
-		}
-
 		$form->checkValue($data['fields']);
 
 		if (CTestArrayHelper::get($data, 'hint')) {

@@ -26,7 +26,7 @@ require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
 /**
  * @backup items
  *
- * @dataSource ExecuteNowAction, DiscoveredHosts, HostTemplateGroups, AllItemValueTypes
+ * @dataSource ExecuteNowAction, DiscoveredHosts, HostTemplateGroups
  */
 class testPageLowLevelDiscovery extends CWebTest {
 
@@ -435,7 +435,6 @@ class testPageLowLevelDiscovery extends CWebTest {
 						'Zabbix server health: Zabbix server: Zabbix stats cluster: High availability cluster node discovery',
 						'LLD for Discovered host tests',
 						'LLD for host group test',
-						'LLD rule for item types',
 						'Linux by Zabbix agent: Linux: Get filesystems: Mounted filesystem discovery',
 						'Linux by Zabbix agent: Network interface discovery',
 						'Test of discovered host 1 template for unlink: Template1 discovery rule',
