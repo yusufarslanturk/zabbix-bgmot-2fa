@@ -3144,7 +3144,8 @@ z-select,
     display: none;
     z-index: 20000;
     max-height: 362px;
-    width: inherit;
+    max-width: 453px;
+    box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: auto;
     border: 1px solid;
@@ -3154,7 +3155,6 @@ z-select,
       display: block;
       height: inherit;
       box-sizing: border-box;
-      min-width: fit-content;
       min-height: 24px;
       padding: 5px;
       line-height: normal;
@@ -3180,6 +3180,8 @@ z-select,
         font-weight: bold; }
     z-select .list > li > ul,
     .z-select .list > li > ul {
+      display: grid;
+      grid-template-columns: minmax(max-content, 1fr);
       margin: 5px -5px -5px; }
       z-select .list > li > ul li,
       .z-select .list > li > ul li {
@@ -3191,8 +3193,7 @@ z-select,
   z-select.is-expanded > ul,
   .z-select.is-expanded > ul {
     display: block;
-    position: fixed;
-    min-width: fit-content; }
+    position: fixed; }
   z-select[disabled] .focusable,
   .z-select[disabled] .focusable {
     pointer-events: none; }

@@ -62,7 +62,8 @@ z-select,
 		display: none;
 		z-index: 20000;
 		max-height: 362px;
-		width: inherit;
+		max-width: 453px;
+		box-sizing: border-box;
 		overflow-x: hidden;
 		overflow-y: auto;
 		border: 1px solid;
@@ -75,7 +76,6 @@ z-select,
 			display: block;
 			height: inherit;
 			box-sizing: border-box;
-			min-width: fit-content;
 			min-height: 24px;
 			padding: 5px;
 			line-height: normal;
@@ -109,6 +109,8 @@ z-select,
 
 		> li {
 			> ul {
+				display: grid;
+				grid-template-columns: minmax(max-content, 1fr);
 				margin: 5px -5px -5px;
 
 				li {
@@ -127,7 +129,6 @@ z-select,
 		> ul {
 			display: block;
 			position: fixed;
-			min-width: fit-content;
 		}
 	}
 
