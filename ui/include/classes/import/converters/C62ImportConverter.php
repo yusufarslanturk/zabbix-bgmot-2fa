@@ -38,12 +38,13 @@ class C62ImportConverter extends CConverter {
 			'valuemapid', 'inventory_link', 'logtimefmt', 'description', 'status', 'tags', 'preprocessing',
 			'triggers'
 		],
+		ZBX_FLAG_DISCOVERY_RULE => ['name', 'type', 'key', 'lifetime', 'description', 'status', 'preprocessing',
+			'lld_macro_paths', 'filter', 'overrides', 'item_prototypes', 'trigger_prototypes', 'graph_prototypes',
+			'host_prototypes'
+		],
 		ZBX_FLAG_DISCOVERY_PROTOTYPE => ['name', 'type', 'key', 'value_type', 'units', 'history', 'trends',
 			'valuemapid', 'logtimefmt', 'description', 'status', 'discover', 'tags', 'preprocessing',
 			'trigger_prototypes'
-		],
-		ZBX_FLAG_DISCOVERY_RULE => ['name', 'key', 'type', 'filter', 'item_prototypes', 'trigger_prototypes',
-			'graph_prototypes', 'host_prototypes'
 		]
 	];
 
@@ -218,10 +219,6 @@ class C62ImportConverter extends CConverter {
 				$item_prototype['params'] = self::convertCalcItemFormula($item_prototype['params'], true);
 			}
 
-			if (array_key_exists('inventory_link', $item_prototype)) {
-				unset($item_prototype['inventory_link']);
-			}
-
 			if (!array_key_exists('trends', $item_prototype)) {
 				$value_type = array_key_exists('value_type', $item_prototype)
 					? $item_prototype['value_type']
@@ -364,7 +361,6 @@ class C62ImportConverter extends CConverter {
 	 */
 	private static function sanitizeItemFields(array &$items, int $flags): void {
 		$internal_fields = [
-			'flags' => $flags,
 			'value_type' => $flags == ZBX_FLAG_DISCOVERY_RULE
 				? CXmlConstantName::TEXT
 				: CXmlConstantName::UNSIGNED,
