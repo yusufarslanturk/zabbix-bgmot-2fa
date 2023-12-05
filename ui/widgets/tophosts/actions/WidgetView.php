@@ -88,7 +88,7 @@ class WidgetView extends CControllerDashboardWidgetView {
 			];
 		}
 
-		$master_items_only_numeric_present = $master_items_only_numeric_allowed && !array_filter($master_items,
+		$master_items_only_numeric_present = !array_filter($master_items,
 			static function(array $item): bool {
 				return !in_array($item['value_type'], [ITEM_VALUE_TYPE_FLOAT, ITEM_VALUE_TYPE_UINT64]);
 			}
