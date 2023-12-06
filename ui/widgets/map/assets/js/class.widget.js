@@ -120,7 +120,7 @@ class CWidgetMap extends CWidget {
 				}
 			}
 
-			this._filter_itemid = this._filter_widget._navtree[this._filter_widget._navtree_item_selected].sysmapid;
+			this._filter_itemid = this._filter_widget._navtree[this._filter_widget._navtree_item_selected]?.sysmapid;
 			this._sysmapid = this._filter_itemid;
 		}
 
@@ -136,9 +136,10 @@ class CWidgetMap extends CWidget {
 				this._sysmapid = this._filter_itemid;
 			}
 
-			if (this._sysmapid !== null
+			if ((this._sysmapid !== null
 					|| this._source_type == CWidgetMap.SOURCETYPE_MAP
-					|| this._filter_widget === null) {
+					|| this._filter_widget === null)
+					&& (this._source_type == CWidgetMap.SOURCETYPE_FILTER && !this._is_new)) {
 				return super._promiseUpdate();
 			}
 
