@@ -1,1 +1,1 @@
-..F....... [ZBX-23568] added clean up of incompatible item, item prototype and LLD rule properties from configuration import generated before v6.4 (jfreibergs)
+A......... [ZBX-23568] added clean up of incompatible item, item prototype and LLD rule properties from configuration import generated before v6.4 (jfreibergs)
