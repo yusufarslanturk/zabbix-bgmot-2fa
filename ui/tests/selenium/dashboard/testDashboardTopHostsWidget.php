@@ -2113,7 +2113,7 @@ class testDashboardTopHostsWidget extends testWidgets  {
 	}
 
 	/**
-	 * Test function for assuring that binary items are not available in Top hosts widget.
+	 * Test function for assuring that only specific item types are available in Top hosts widget.
 	 */
 	public function testDashboardTopHostsWidget_CheckAvailableItems() {
 		$dashboardid = CDataHelper::get('TopHostsWidget.dashboardids.top_host_create');
