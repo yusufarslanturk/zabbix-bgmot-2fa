@@ -242,6 +242,7 @@ tests/libs/zbxtrends/zbx_trends_parse_range
 tests/libs/zbxsysinfo/process_http
 tests/zabbix_server/pinger/zbx_pinger_test
 tests/zabbix_server/poller/zbx_poller_test
+tests/libs/zbxhttp/zbx_determine_charset
 tests/zabbix_server/preprocessor/item_preproc_csv_to_json
 tests/zabbix_server/preprocessor/item_preproc_xpath
 tests/zabbix_server/preprocessor/zbx_item_preproc
