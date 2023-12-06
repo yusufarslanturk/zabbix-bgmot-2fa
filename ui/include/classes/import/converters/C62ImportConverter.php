@@ -228,7 +228,6 @@ class C62ImportConverter extends CConverter {
 					$item_prototype['trends'] = '0';
 				}
 			}
-
 		}
 		unset($item_prototype);
 
@@ -429,5 +428,4 @@ class C62ImportConverter extends CConverter {
 			return true;
 		});
 	}
-
 }
