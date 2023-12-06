@@ -849,8 +849,7 @@ static void	process_httptest(DC_HOST *host, zbx_httptest_t *httptest, int *delay
 
 		if (CURLE_OK == err)
 		{
-			char	*var_err_str = NULL;
-			char	*data;
+			char	*var_err_str = NULL, *data = NULL;
 
 			if (NULL != body.data)
 			{
@@ -869,7 +868,7 @@ static void	process_httptest(DC_HOST *host, zbx_httptest_t *httptest, int *delay
 				data = header.data;
 			}
 
-			if (data == NULL)
+			if (NULL == data)
 				data = "";
 
 			zabbix_log(LOG_LEVEL_TRACE, "%s() page.data from %s:'%s'", __func__, httpstep.url, data);
