@@ -136,10 +136,9 @@ class CWidgetMap extends CWidget {
 				this._sysmapid = this._filter_itemid;
 			}
 
-			if ((this._sysmapid !== null
+			if (this._sysmapid !== null
 					|| this._source_type == CWidgetMap.SOURCETYPE_MAP
-					|| this._filter_widget === null)
-					&& (this._source_type == CWidgetMap.SOURCETYPE_FILTER && !this._is_new)) {
+					|| this._filter_widget === null) {
 				return super._promiseUpdate();
 			}
 
