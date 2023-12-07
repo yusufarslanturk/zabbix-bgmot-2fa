@@ -250,6 +250,8 @@ void	zbx_mock_test_entry(void **state)
 
 	ZBX_UNUSED(state);
 
+	pp_context_init(&ctx);
+
 #ifdef HAVE_NETSNMP
 	int				mib_translation_case = 0;
 
