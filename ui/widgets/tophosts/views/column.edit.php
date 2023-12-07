@@ -48,10 +48,10 @@ $form_grid->addItem([
 	new CLabel(_('Name'), 'column_name'),
 	new CFormField(
 		(new CTextBox('name', $data['name'], false))
+			->setId('column_name')
 			->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 			->setAttribute('autofocus', 'autofocus')
 			->setAriaRequired()
-			->setId('column_name')
 	)
 ]);
 
@@ -126,7 +126,7 @@ $form_grid->addItem([
 			_('Aggregation function'),
 			$numeric_only_warning->setId('tophosts-column-aggregate-function-warning')
 		],
-		'column_aggregate_function'
+		'aggregate_function'
 	),
 	new CFormField(
 		(new CSelect('aggregate_function'))
@@ -141,7 +141,7 @@ $form_grid->addItem([
 				AGGREGATE_FIRST => _('first'),
 				AGGREGATE_LAST => _('last')
 			]))
-			->setFocusableElementId('column_aggregate_function')
+			->setFocusableElementId('aggregate_function')
 	)
 ]);
 
