@@ -155,6 +155,7 @@ func (p *Plugin) Collect() error {
 		return nil
 	}
 
+	t := time.Now().UnixMilli()
 	var err error
 	if p.query == 0 {
 		p.query, err = win32.PdhOpenQuery(nil, 0)
@@ -195,7 +196,7 @@ func (p *Plugin) Collect() error {
 
 	err = p.setCounterData()
 	if err != nil {
-		p.Debugf("reset counter query: '%s'", err)
+		p.Warningf("reset counter query: '%s'", err)
 
 		p.historyMutex.Lock()
 		p.collectError = err
@@ -209,6 +210,11 @@ func (p *Plugin) Collect() error {
 		p.query = 0
 
 		return err
+	}
+
+	t = time.Now().UnixMilli() - t
+	if t > int64(time.Millisecond) {
+		p.Warningf("long perfCounter collection:%f", float64(t/int64(time.Millisecond)))
 	}
 
 	return nil
