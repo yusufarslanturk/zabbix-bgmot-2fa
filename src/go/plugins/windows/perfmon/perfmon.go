@@ -91,23 +91,40 @@ type historyIndex int
 // Export -
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (any, error) {
 	var lang int
+	t := time.Now().UnixMilli()
 	switch key {
 	case "perf_counter":
 		lang = langDefault
 	case "perf_counter_en":
 		lang = langEnglish
 	default:
+		tDuration := time.Now().UnixMilli() - t
+		if tDuration-t > int64(time.Second) {
+			p.Warningf("input error 1, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
+		}
 		return nil, zbxerr.New(fmt.Sprintf("metric key %q not found", key)).Wrap(zbxerr.ErrorUnsupportedMetric)
 	}
 
 	if ctx == nil {
+		tDuration := time.Now().UnixMilli() - t
+		if tDuration-t > int64(time.Second) {
+			p.Warningf("input error 2, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
+		}
 		return nil, zbxerr.New("this item is available only in daemon mode")
 	}
 
 	if len(params) > 2 {
+		tDuration := time.Now().UnixMilli() - t
+		if tDuration-t > int64(time.Second) {
+			p.Warningf("input error 3, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
+		}
 		return nil, zbxerr.ErrorTooManyParameters
 	}
 	if len(params) == 0 || params[0] == "" {
+		tDuration := time.Now().UnixMilli() - t
+		if tDuration-t > int64(time.Second) {
+			p.Warningf("input error 4, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
+		}
 		return nil, zbxerr.New("invalid first parameter")
 	}
 
@@ -116,10 +133,18 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	if len(params) == 2 && params[1] != "" {
 		if interval, err = strconv.ParseInt(params[1], 10, 32); err != nil {
+			tDuration := time.Now().UnixMilli() - t
+			if tDuration-t > int64(time.Second) {
+				p.Warningf("input error 5, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
+			}
 			return nil, zbxerr.New("invalid second parameter").Wrap(err)
 		}
 
 		if interval < 1 || interval > maxInterval {
+			tDuration := time.Now().UnixMilli() - t
+			if tDuration-t > int64(time.Second) {
+				p.Warningf("input error 6, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
+			}
 			return nil, zbxerr.New(fmt.Sprintf("interval %d out of range [%d, %d]", interval, 1, maxInterval))
 		}
 	}
@@ -127,27 +152,53 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	path, err := pdh.ConvertPath(params[0])
 	if err != nil {
 		p.Debugf("cannot convert performance counter path: %s", err)
+		tDuration := time.Now().UnixMilli() - t
+		if tDuration-t > int64(time.Second) {
+			p.Warningf("input error 7, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
+		}
 		return nil, zbxerr.New("invalid performance counter path")
 	}
+
+	t1 := time.Now().UnixMilli()
 
 	index := perfCounterIndex{path, lang}
 	p.historyMutex.Lock()
 	defer p.historyMutex.Unlock()
+	t2 := time.Now().UnixMilli()
 	counter, ok := p.counters[index]
 	if !ok {
 		p.addCounters = append(p.addCounters, perfCounterAddInfo{index, interval})
+		tDuration := time.Now().UnixMilli() - t
+		if tDuration-t > int64(time.Second) {
+			p.Warningf("append new counter, long perfCounter exporter:%f t: %d t1: %d t2: %d", float64(tDuration/int64(time.Millisecond)), t, t1, t2)
+		}
 
 		return nil, nil
 	}
 
 	if p.collectError != nil {
+		tDuration := time.Now().UnixMilli() - t
+		if tDuration-t > int64(time.Millisecond) {
+			p.Warningf("p.collectError != nil, long perfCounter exporter:%f t: %d t1: %d t2: %d", float64(tDuration/int64(time.Millisecond)), t, t1, t2)
+		}
+
 		return nil, p.collectError
 	}
 
-	return counter.getHistory(int(interval))
+	t3 := time.Now().UnixMilli()
+	retValue, retErrror := counter.getHistory(int(interval))
+
+	tDuration := time.Now().UnixMilli() - t
+	if tDuration-t > int64(time.Millisecond) {
+		p.Warningf("long perfCounter exporter:%f t: %d t1: %d t2: %d t3: %d", float64(tDuration/int64(time.Millisecond)), t, t1, t2, t3)
+	}
+
+	return retValue, retErrror
 }
 
 func (p *Plugin) Collect() error {
+	t := time.Now().UnixMilli()
+
 	p.mutex.Lock()
 	defer p.mutex.Unlock()
 
@@ -155,7 +206,6 @@ func (p *Plugin) Collect() error {
 		return nil
 	}
 
-	t := time.Now().UnixMilli()
 	var err error
 	if p.query == 0 {
 		p.query, err = win32.PdhOpenQuery(nil, 0)

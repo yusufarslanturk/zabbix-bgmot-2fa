@@ -48,7 +48,7 @@ func (pc *passiveCheck) handleCheck(data []byte) {
 	s, err := pc.scheduler.PerformTask(string(data), timeoutForSinglePassiveChecks, agent.PassiveChecksClientID)
 
 	if err != nil {
-		log.Debugf("sending passive check response: %s: '%s' to '%s'", notsupported, err.Error(), pc.conn.Address())
+		log.Warningf("sending passive check response: %s: '%s' to '%s'", notsupported, err.Error(), pc.conn.Address())
 		_, err = pc.conn.Write(pc.formatError(err.Error()))
 	} else {
 		log.Debugf("sending passive check response: '%s' to '%s'", s, pc.conn.Address())
