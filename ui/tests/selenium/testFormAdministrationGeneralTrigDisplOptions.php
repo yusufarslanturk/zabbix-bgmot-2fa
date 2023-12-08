@@ -419,7 +419,7 @@ class testFormAdministrationGeneralTrigDisplOptions extends testFormAdministrati
 			],
 			// #7 Valid zero values in minutes.
 			[
-				[,
+				[
 					'fields' => [
 						'Display OK triggers for' => '0m',
 						'On status change triggers blink for' => '0m'
