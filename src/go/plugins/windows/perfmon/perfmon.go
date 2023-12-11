@@ -99,7 +99,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 		lang = langEnglish
 	default:
 		tDuration := time.Now().UnixMilli() - t
-		if tDuration-t > int64(time.Second) {
+		if tDuration > int64(time.Second) {
 			p.Warningf("input error 1, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
 		}
 		return nil, zbxerr.New(fmt.Sprintf("metric key %q not found", key)).Wrap(zbxerr.ErrorUnsupportedMetric)
@@ -107,7 +107,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	if ctx == nil {
 		tDuration := time.Now().UnixMilli() - t
-		if tDuration-t > int64(time.Second) {
+		if tDuration > int64(time.Second) {
 			p.Warningf("input error 2, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
 		}
 		return nil, zbxerr.New("this item is available only in daemon mode")
@@ -115,14 +115,14 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	if len(params) > 2 {
 		tDuration := time.Now().UnixMilli() - t
-		if tDuration-t > int64(time.Second) {
+		if tDuration > int64(time.Second) {
 			p.Warningf("input error 3, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
 		}
 		return nil, zbxerr.ErrorTooManyParameters
 	}
 	if len(params) == 0 || params[0] == "" {
 		tDuration := time.Now().UnixMilli() - t
-		if tDuration-t > int64(time.Second) {
+		if tDuration > int64(time.Second) {
 			p.Warningf("input error 4, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
 		}
 		return nil, zbxerr.New("invalid first parameter")
@@ -134,7 +134,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	if len(params) == 2 && params[1] != "" {
 		if interval, err = strconv.ParseInt(params[1], 10, 32); err != nil {
 			tDuration := time.Now().UnixMilli() - t
-			if tDuration-t > int64(time.Second) {
+			if tDuration > int64(time.Second) {
 				p.Warningf("input error 5, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
 			}
 			return nil, zbxerr.New("invalid second parameter").Wrap(err)
@@ -142,7 +142,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 		if interval < 1 || interval > maxInterval {
 			tDuration := time.Now().UnixMilli() - t
-			if tDuration-t > int64(time.Second) {
+			if tDuration > int64(time.Second) {
 				p.Warningf("input error 6, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
 			}
 			return nil, zbxerr.New(fmt.Sprintf("interval %d out of range [%d, %d]", interval, 1, maxInterval))
@@ -153,7 +153,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	if err != nil {
 		p.Debugf("cannot convert performance counter path: %s", err)
 		tDuration := time.Now().UnixMilli() - t
-		if tDuration-t > int64(time.Second) {
+		if tDuration > int64(time.Second) {
 			p.Warningf("input error 7, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
 		}
 		return nil, zbxerr.New("invalid performance counter path")
@@ -169,7 +169,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	if !ok {
 		p.addCounters = append(p.addCounters, perfCounterAddInfo{index, interval})
 		tDuration := time.Now().UnixMilli() - t
-		if tDuration-t > int64(time.Second) {
+		if tDuration > int64(time.Second) {
 			p.Warningf("append new counter, long perfCounter exporter:%f t: %d t1: %d t2: %d", float64(tDuration/int64(time.Millisecond)), t, t1, t2)
 		}
 
@@ -178,7 +178,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	if p.collectError != nil {
 		tDuration := time.Now().UnixMilli() - t
-		if tDuration-t > int64(time.Millisecond) {
+		if tDuration > int64(time.Millisecond) {
 			p.Warningf("p.collectError != nil, long perfCounter exporter:%f t: %d t1: %d t2: %d", float64(tDuration/int64(time.Millisecond)), t, t1, t2)
 		}
 
@@ -189,7 +189,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	retValue, retErrror := counter.getHistory(int(interval))
 
 	tDuration := time.Now().UnixMilli() - t
-	if tDuration-t > int64(time.Millisecond) {
+	if tDuration > int64(time.Millisecond) {
 		p.Warningf("long perfCounter exporter:%f t: %d t1: %d t2: %d t3: %d", float64(tDuration/int64(time.Millisecond)), t, t1, t2, t3)
 	}
 
