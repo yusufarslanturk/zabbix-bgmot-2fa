@@ -191,7 +191,7 @@ class testFormAdministrationGeneral extends CWebTest {
 
 		// Check trimming symbols in Login attempts field.
 		if (CTestArrayHelper::get($values, 'Login attempts') === '3M') {
-			$data['fields']['Login attempts'] = '3';
+			$values['Login attempts'] = '3';
 		}
 
 		if (CTestArrayHelper::get($values, 'Default time zone')) {
