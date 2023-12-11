@@ -211,7 +211,7 @@
 		}
 
 		#updateLdapFieldsState() {
-			const ldap_disabled = this.ldap_auth_enabled === null || !this.ldap_auth_enabled.checked;
+			const ldap_disabled = !this.ldap_auth_enabled.checked;
 			const provision_disabled = ldap_disabled || !this.ldap_jit_status.checked;
 
 			this.ldap_provisioning_fields.forEach(field => field.toggleAttribute('disabled', ldap_disabled));
