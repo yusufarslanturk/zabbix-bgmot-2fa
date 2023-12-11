@@ -904,8 +904,17 @@ class testDashboardURLWidget extends CWebTest {
 		$dashboard = CDashboardElement::find()->one();
 		$widget = $dashboard->getWidget(self::$frame_widget)->getContent();
 		$this->page->switchTo($widget->query('id:iframe')->one());
-		$error_details = $this->query('id:sub-frame-error-details')->one()->getText();
-		$this->assertStringContainsString( 'refused to connect.', $error_details);
+
+		if (CTestArrayHelper::get($data, 'refused')) {
+			// Assert refused to connect iframe.
+			$error_details = $this->query('id:sub-frame-error-details')->one()->getText();
+			$this->assertStringContainsString( 'refused to connect.', $error_details);
+		}
+		else {
+			// Assert the iframe with Host form loaded.
+			$this->page->assertHeader('Host');
+		}
+
 		$this->page->switchTo();
 	}
 }
