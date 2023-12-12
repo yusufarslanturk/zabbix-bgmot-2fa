@@ -1210,8 +1210,7 @@ class CHttpTestManager {
 
 						foreach ($step['posts'] as &$post) {
 							if ($db_fieldid !== false
-									&& ($post['name'] !== $db_post['name']
-										|| $post['value'] !== $db_post['value'])) {
+									&& ($post['name'] !== $db_post['name'] || $post['value'] !== $db_post['value'])) {
 								$db_fieldid = false;
 							}
 
