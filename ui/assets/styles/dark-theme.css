@@ -3184,6 +3184,7 @@ z-select,
       height: inherit;
       box-sizing: border-box;
       min-height: 24px;
+      max-width: 453px;
       padding: 5px;
       line-height: normal;
       color: #f2f2f2;
