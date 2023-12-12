@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"id": "testcsrf",
-	"name": "CSRF token test",
+	"name": "Test CSRF token",
 	"author": "",
 	"description": "Test CSRF token support for modules",
 	"version": "0.1",
