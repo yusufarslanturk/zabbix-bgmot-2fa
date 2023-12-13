@@ -1277,7 +1277,7 @@ class testPageAdministrationGeneralModules extends CWebTest {
 
 		$top_entry = $this->query('link', $top_entry_name)->one();
 
-		// Click on tom level menu only in case if it is not expanded already.
+		// Click on top level menu only in case if it is not expanded already.
 		if (!$top_entry->parents('tag:li')->one()->hasClass('is-expanded')) {
 			$top_entry->waitUntilClickable()->click();
 		}
