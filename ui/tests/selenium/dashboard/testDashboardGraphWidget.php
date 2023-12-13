@@ -22,13 +22,16 @@
 require_once dirname(__FILE__) . '/../../include/CWebTest.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 require_once dirname(__FILE__).'/../behaviors/CTagBehavior.php';
+require_once dirname(__FILE__).'/../common/testWidgets.php';
 
 /**
  * @backup widget, profiles
  *
+ * @dataSource AllItemValueTypes
+ *
  * @onBefore setDefaultWidgetType
  */
-class testDashboardGraphWidget extends CWebTest {
+class testDashboardGraphWidget extends testWidgets {
 
 	/**
 	 * Attach MessageBehavior and TagBehavior to the test.
@@ -39,11 +42,12 @@ class testDashboardGraphWidget extends CWebTest {
 			[
 				'class' => CTagBehavior::class,
 				'tag_selector' => 'id:tags_table_tags'
-			]
+			],
+			CTableBehavior::class
 		];
 	}
 
-	/*
+	/**
 	 * SQL query to get widget and widget_field tables to compare hash values, but without widget_fieldid
 	 * because it can change.
 	 */
@@ -57,7 +61,7 @@ class testDashboardGraphWidget extends CWebTest {
 
 	const DASHBOARD_URL = 'zabbix.php?action=dashboard.view&dashboardid=1030';
 
-	/*
+	/**
 	 * Set "Graph" as default widget type.
 	 */
 	public function setDefaultWidgetType() {
@@ -2734,6 +2738,13 @@ class testDashboardGraphWidget extends CWebTest {
 		// Check Data set names in created widget configuration form.
 		$data_set_labels = $form->query('xpath:.//label[@class="sortable-drag-handle js-dataset-label"]')->all()->asText();
 		$this->assertEquals($displayed_data['Data sets'], array_values($data_set_labels));
+	}
+
+	/**
+	 * Test function for assuring that specific items are available in Graph widget.
+	 */
+	public function testDashboardGraphWidget_CheckAvailableItems() {
+		$this->checkAvailableItems(self::DASHBOARD_URL, 'Graph');
 	}
 
 	/**
