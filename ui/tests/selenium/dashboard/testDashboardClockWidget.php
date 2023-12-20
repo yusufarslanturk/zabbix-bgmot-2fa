@@ -1181,7 +1181,7 @@ class testDashboardClockWidget extends testWidgets {
 	}
 
 	/**
-	 * Check if binary items are not available for Clock widget.
+	 * Check if specific item types are only available for Clock widget.
 	 */
 	public function testDashboardClockWidget_CheckAvailableItems() {
 		$url = 'zabbix.php?action=dashboard.view&dashboardid='.self::$dashboardid['Dashboard for updating clock widgets'];

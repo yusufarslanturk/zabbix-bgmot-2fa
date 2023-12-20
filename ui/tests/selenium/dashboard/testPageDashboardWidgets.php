@@ -22,7 +22,7 @@ require_once dirname(__FILE__) . '/../../include/CWebTest.php';
 
 /**
  * @backup dashboard, profiles
- * @dataSource LoginUsers
+ * @dataSource LoginUsers, AllItemValueTypes
  */
 class testPageDashboardWidgets extends CWebTest {
 

@@ -25,8 +25,6 @@ require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 require_once dirname(__FILE__).'/../common/testWidgets.php';
 
 /**
- * @dataSource AllItemValueTypes
- *
  * @backup widget, profiles
  */
 class testDashboardGraphPrototypeWidget extends testWidgets {
@@ -38,7 +36,7 @@ class testDashboardGraphPrototypeWidget extends testWidgets {
 	 */
 	public function getBehaviors() {
 		return [
-			CMessageBehavior::class,
+			'class' => CMessageBehavior::class,
 			CTableBehavior::class
 		];
 	}
@@ -505,7 +503,7 @@ class testDashboardGraphPrototypeWidget extends testWidgets {
 	}
 
 	/**
-	 * Test function for assuring that binary items are not available in Graph prototype widget.
+	 * Test function for assuring that specific items are available in Graph prototype widget.
 	 */
 	public function testDashboardGraphPrototypeWidget_CheckAvailableItems() {
 		$url = 'zabbix.php?action=dashboard.view&dashboardid='.self::DASHBOARD_ID;

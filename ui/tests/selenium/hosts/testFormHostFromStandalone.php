@@ -235,7 +235,6 @@ class testFormHostFromStandalone extends testFormHost {
 		$form->submit();
 		$this->page->waitUntilReady();
 
-		// TODO: Update the message details after ZBX-21366 is merged.
 		$message_details = [
 			'Templates "Test of discovered host 2 template for clear" unlinked from hosts "Discovered host from prototype 1".',
 			'Templates "Test of discovered host 1 template for unlink" unlinked from hosts "Discovered host from prototype 1".'

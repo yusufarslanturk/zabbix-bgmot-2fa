@@ -53,7 +53,6 @@ class AllItemValueTypes {
 		];
 
 		$dependent_items = [
-			'Binary' => ITEM_VALUE_TYPE_BINARY,
 			'Unsigned_dependent' => ITEM_VALUE_TYPE_UINT64
 		];
 
@@ -113,7 +112,6 @@ class AllItemValueTypes {
 		// Add dependent item.
 		$dependent_items_data = [];
 		$dependent_items = [
-			'Binary' => ITEM_VALUE_TYPE_BINARY,
 			'Unsigned_dependent' => ITEM_VALUE_TYPE_UINT64
 		];
 
