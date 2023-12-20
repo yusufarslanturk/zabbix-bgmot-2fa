@@ -36,8 +36,7 @@ class testUsers extends CAPITest {
 			'user_with_disabled_usergroup' => null,
 			'user_for_token_tests' => null,
 			'user_with_valid_session' => null,
-			'user_for_extend_parameter_tests' => null,
-			'user_with_disabled_frontend' => null
+			'user_for_extend_parameter_tests' => null
 		],
 		'sessionids' => [
 			'not_authorized_session' => null,
@@ -45,16 +44,14 @@ class testUsers extends CAPITest {
 			'passive_session' => null,
 			'valid_for_user_with_disabled_usergroup' => null,
 			'valid' => null,
-			'for_extend_parameter_tests' => null,
-			'for_user_with_disabled_frontend' => null
+			'for_extend_parameter_tests' => null
 		],
 		'tokens' => [
 			'not_authorized' => null,
 			'expired' => null,
 			'disabled' => null,
 			'valid' => null,
-			'valid_for_user_with_disabled_usergroup' => null,
-			'valid_for_user_with_disabled_frontend' => null
+			'valid_for_user_with_disabled_usergroup' => null
 		]
 	];
 
@@ -70,10 +67,6 @@ class testUsers extends CAPITest {
 			[
 				'name' => 'API test users status disabled',
 				'users_status' => GROUP_STATUS_DISABLED
-			],
-			[
-				'name' => 'API test users frontend access disabled',
-				'gui_access' => GROUP_GUI_ACCESS_DISABLED
 			]
 		];
 
@@ -82,7 +75,6 @@ class testUsers extends CAPITest {
 
 		$usergroupids['users_status_enabled'] = $usergroups['usrgrpids'][0];
 		$usergroupids['users_status_disabled'] = $usergroups['usrgrpids'][1];
-		$usergroupids['users_frontend_disabled'] = $usergroups['usrgrpids'][2];
 
 		$roleids = CDataHelper::call('role.create', [
 			[
@@ -133,14 +125,6 @@ class testUsers extends CAPITest {
 				'usrgrps' => [
 					['usrgrpid' => $usergroupids['users_status_enabled']]
 				]
-			],
-			[
-				'username' => 'API test user with disabled frontend access',
-				'roleid' => $admin_roleid,
-				'passwd' => 'zabbix123456',
-				'usrgrps' => [
-					['usrgrpid' => $usergroupids['users_frontend_disabled']]
-				]
 			]
 		];
 
@@ -153,7 +137,6 @@ class testUsers extends CAPITest {
 		self::$data['userids']['user_with_valid_session'] = $users['userids'][3];
 		self::$data['userids']['user_for_extend_parameter_tests'] = $users['userids'][4];
 		self::$data['userids']['user_for_token_tests'] = $users['userids'][0];
-		self::$data['userids']['user_with_disabled_frontend'] = $users['userids'][5];
 
 		$login_data = [
 			[
@@ -200,15 +183,6 @@ class testUsers extends CAPITest {
 					'password' => 'zabbix123456'
 				],
 				'id' => self::$data['userids']['user_for_extend_parameter_tests']
-			],
-			[
-				'jsonrpc' => '2.0',
-				'method' => 'user.login',
-				'params' => [
-					'username' => 'API test user with disabled frontend access',
-					'password' => 'zabbix123456'
-				],
-				'id' => self::$data['userids']['user_with_disabled_frontend']
 			]
 		];
 
@@ -221,7 +195,6 @@ class testUsers extends CAPITest {
 		self::$data['sessionids']['valid_for_user_with_disabled_usergroup'] = $login[2]['result'];
 		self::$data['sessionids']['valid'] = $login[3]['result'];
 		self::$data['sessionids']['for_extend_parameter_tests'] = $login[4]['result'];
-		self::$data['sessionids']['for_user_with_disabled_frontend'] = $login[5]['result'];
 
 		// Add disabled user group to authenticated user.
 		CDataHelper::call('user.update', [
@@ -279,12 +252,6 @@ class testUsers extends CAPITest {
 				'userid' => self::$data['userids']['user_with_disabled_usergroup'],
 				'status' => ZBX_AUTH_TOKEN_ENABLED,
 				'expires_at' => $now + 100
-			],
-			[
-				'name' => 'API test valid token for user with disabled frontend access',
-				'userid' => self::$data['userids']['user_with_disabled_frontend'],
-				'status' => ZBX_AUTH_TOKEN_ENABLED,
-				'expires_at' => $now + 100
 			]
 		];
 
@@ -299,7 +266,6 @@ class testUsers extends CAPITest {
 		self::$data['tokens']['disabled'] = $tokens[1]['token'];
 		self::$data['tokens']['valid'] = $tokens[2]['token'];
 		self::$data['tokens']['valid_for_user_with_disabled_usergroup'] = $tokens[3]['token'];
-		self::$data['tokens']['valid_for_user_with_disabled_frontend'] = $tokens[4]['token'];
 	}
 
 	public static function user_create() {
@@ -2286,13 +2252,6 @@ class testUsers extends CAPITest {
 					'password' => ''
 				],
 				'expected_error' => null
-			],
-			[
-				'login' => [
-					'username' => 'API test user with disabled frontend access',
-					'password' => 'zabbix123456'
-				],
-				'expected_error' => null
 			]
 		];
 	}
@@ -2662,7 +2621,7 @@ class testUsers extends CAPITest {
 	 *
 	 * @return array
 	 */
-	public static function getUsersCheckAuthenticationDataValidAuthorization(): array {
+	public static function getUsersCheckAuthenticationDataValidAuthorization(): array	{
 		return [
 			'Test user.checkAuthentication user with valid session ID' => [
 				'data' => ['sessionids' => 'valid'],
@@ -2670,14 +2629,6 @@ class testUsers extends CAPITest {
 			],
 			'Test user.checkAuthentication user with valid token' => [
 				'data' => ['tokens' => 'valid'],
-				'expected_error' => null
-			],
-			'Test user.checkAuthentication user with valid session ID and disabled frontend access' => [
-				'data' => ['sessionids' => 'for_user_with_disabled_frontend'],
-				'expected_error' => null
-			],
-			'Test user.checkAuthentication user with valid token and disabled frontend access' => [
-				'data' => ['tokens' => 'valid_for_user_with_disabled_frontend'],
 				'expected_error' => null
 			]
 		];
