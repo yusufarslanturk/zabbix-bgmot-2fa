@@ -1719,7 +1719,7 @@ class CUser extends CApiService {
 
 		$userdirectoryids = [];
 
-		while ($row = DBselect($result)) {
+		while ($row = DBfetch($result)) {
 			if ($row['debug_mode'] == GROUP_DEBUG_MODE_ENABLED) {
 				$db_user['debug_mode'] = $row['debug_mode'];
 			}
@@ -1836,7 +1836,7 @@ class CUser extends CApiService {
 			'output' => ['passwd'],
 			'userids' => $db_user['userid']
 		];
-		[$db_passwd] = DBfetch(DBselect(DB::makeSql('users', $options)));
+		[$db_passwd] = DBfetchColumn(DBselect(DB::makeSql('users', $options)), 'passwd');
 
 		if (!password_verify($data['password'], $db_passwd)) {
 			self::increaseFailedLoginAttempts($db_user);
