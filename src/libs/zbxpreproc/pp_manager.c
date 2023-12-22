@@ -34,6 +34,7 @@
 
 #ifdef HAVE_LIBXML2
 #	include <libxml/xpath.h>
+#	include <libxml/parser.h>
 #endif
 
 #define PP_STARTUP_TIMEOUT	10
