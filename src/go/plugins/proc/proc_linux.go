@@ -38,6 +38,7 @@ import (
 	"sync"
 	"time"
 
+	"git.zabbix.com/ap/plugin-support/errs"
 	"git.zabbix.com/ap/plugin-support/log"
 	"git.zabbix.com/ap/plugin-support/plugin"
 	"zabbix.com/pkg/procfs"
@@ -69,6 +70,24 @@ var impl Plugin = Plugin{
 var implExport PluginExport = PluginExport{}
 
 type historyIndex int
+
+func init() {
+	err := plugin.RegisterMetrics(&impl, "Proc", "proc.cpu.util", "Process CPU utilization percentage.")
+	if err != nil {
+		panic(errs.Wrap(err, "failed to register metrics"))
+	}
+
+	err = plugin.RegisterMetrics(
+		&implExport, "ProcExporter",
+		"proc.mem", "Process memory utilization values.",
+		"proc.num", "The number of processes.",
+		"proc.get", "List of OS processes with statistics.",
+	)
+	if err != nil {
+		panic(errs.Wrap(err, "failed to register metrics"))
+	}
+}
+
 
 func (h historyIndex) inc() historyIndex {
 	h++
@@ -491,6 +510,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	}
 	return
 }
+
 func (p *PluginExport) prepareQuery(q *procQuery) (query *cpuUtilQuery, flags int, err error) {
 	regxp, err := regexp.Compile(q.cmdline)
 	if err != nil {
@@ -1038,13 +1058,4 @@ func (p *PluginExport) validFile(proc *procInfo, name string, uid int64, cmdRgx 
 	}
 
 	return true
-}
-
-func init() {
-	plugin.RegisterMetrics(&impl, "Proc", "proc.cpu.util", "Process CPU utilization percentage.")
-	plugin.RegisterMetrics(&implExport, "ProcExporter",
-		"proc.mem", "Process memory utilization values.",
-		"proc.num", "The number of processes.",
-		"proc.get", "List of OS processes with statistics.",
-	)
 }

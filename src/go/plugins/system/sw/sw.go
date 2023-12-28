@@ -20,9 +20,19 @@
 package sw
 
 import (
+	"errors"
+	"fmt"
+	"regexp"
+	"sort"
+	"strings"
+	"time"
+
+	"git.zabbix.com/ap/plugin-support/errs"
 	"git.zabbix.com/ap/plugin-support/plugin"
 	"git.zabbix.com/ap/plugin-support/zbxerr"
 )
+
+var impl Plugin
 
 // Plugin -
 type Plugin struct {
@@ -36,7 +46,25 @@ type Options struct {
 	Timeout              int
 }
 
-var impl Plugin
+type manager struct {
+	name    string
+	testCmd string
+	cmd     string
+	parser  func(in []string, regex string) ([]string, error)
+}
+
+func init() {
+	err := plugin.RegisterMetrics(
+		&impl, "Sw",
+		"system.sw.packages", "Lists installed packages whose name matches the given package regular expression.",
+		"system.sw.packages.get", "Lists matching installed packages with details in JSON format.",
+		"system.sw.os", "Operating system information.",
+		"system.sw.os.get", "Operating system information in JSON format.",
+	)
+	if err != nil {
+		panic(errs.Wrap(err, "failed to register metrics"))
+	}
+}
 
 // Configure -
 func (p *Plugin) Configure(global *plugin.GlobalOptions, options interface{}) {
@@ -79,13 +107,4 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	}
 
 	return
-}
-
-func init() {
-	plugin.RegisterMetrics(&impl, "Sw",
-		"system.sw.packages", "Lists installed packages whose name matches the given package regular expression.",
-		"system.sw.packages.get", "Lists matching installed packages with details in JSON format.",
-		"system.sw.os", "Operating system information.",
-		"system.sw.os.get", "Operating system information in JSON format.",
-	)
 }
