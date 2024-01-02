@@ -256,7 +256,6 @@ var jqBlink = {
  */
 var hintBox = {
 
-	preload_hint_timer: null,
 	show_hint_timer: null,
 
 	/**
