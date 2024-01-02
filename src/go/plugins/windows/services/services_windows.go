@@ -72,7 +72,7 @@ func init() {
 		&impl, "WindowsServices",
 		"service.discovery", "List of Windows services for low-level discovery.",
 		"service.info", "Information about a service.",
-		"services", "Filtered list of Windows sercices.",
+		"services", "Filtered list of Windows services.",
 	)
 	if err != nil {
 		panic(zbxerr.New("failed to register metrics").Wrap(err))

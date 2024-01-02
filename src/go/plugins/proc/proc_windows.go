@@ -20,9 +20,9 @@
 package proc
 
 import (
-	"fmt"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strings"
 	"syscall"
 	"unsafe"
@@ -54,7 +54,7 @@ func init() {
 	}
 }
 
-func getProcessUsername(pid uint32, wsid bool) (result string, sidStr string, err error) {
+func getProcessUsername(pid uint32, wsid bool) (result, sidStr string, err error) {
 	h, err := syscall.OpenProcess(windows.PROCESS_QUERY_LIMITED_INFORMATION, false, pid)
 	if err != nil {
 		return
@@ -132,7 +132,8 @@ type numEnumerator struct {
 
 func (e *numEnumerator) inspect(p *syscall.ProcessEntry32) {
 	if e.user != "" {
-		if procUser, _, err := getProcessUsername(p.ProcessID, false); err != nil || e.user != strings.ToUpper(procUser) {
+		if procUser, _, err := getProcessUsername(p.ProcessID, false); err != nil ||
+			e.user != strings.ToUpper(procUser) {
 			return
 		}
 	}
@@ -177,31 +178,31 @@ const (
 )
 
 type procStatus struct {
-	Pid           uint32   `json:"pid"`
-	PPid          uint32   `json:"ppid"`
-	Name          string   `json:"name"`
-	User          string   `json:"user"`
-	Sid           string   `json:"sid"`
-	Vmsize        float64  `json:"vmsize"`
-	Wkset         float64  `json:"wkset"`
-	CpuTimeUser   float64  `json:"cputime_user"`
-	CpuTimeSystem float64  `json:"cputime_system"`
-	Threads       uint32   `json:"threads"`
-	PageFaults    int64    `json:"page_faults"`
-	Handles       int64    `json:"handles"`
-	IoReadsB      int64    `json:"io_read_b"`
-	IoWritesB     int64    `json:"io_write_b"`
-	IoReadsOp     int64    `json:"io_read_op"`
-	IoWritesOp    int64    `json:"io_write_op"`
-	IoOtherB      int64    `json:"io_other_b"`
-	IoOtherOp     int64    `json:"io_other_op"`
+	Pid           uint32  `json:"pid"`
+	PPid          uint32  `json:"ppid"`
+	Name          string  `json:"name"`
+	User          string  `json:"user"`
+	Sid           string  `json:"sid"`
+	Vmsize        float64 `json:"vmsize"`
+	Wkset         float64 `json:"wkset"`
+	CpuTimeUser   float64 `json:"cputime_user"`
+	CpuTimeSystem float64 `json:"cputime_system"`
+	Threads       uint32  `json:"threads"`
+	PageFaults    int64   `json:"page_faults"`
+	Handles       int64   `json:"handles"`
+	IoReadsB      int64   `json:"io_read_b"`
+	IoWritesB     int64   `json:"io_write_b"`
+	IoReadsOp     int64   `json:"io_read_op"`
+	IoWritesOp    int64   `json:"io_write_op"`
+	IoOtherB      int64   `json:"io_other_b"`
+	IoOtherOp     int64   `json:"io_other_op"`
 }
 
 type procSummary struct {
-	Name	      string  `json:"name"`
+	Name          string  `json:"name"`
 	Processes     int     `json:"processes"`
-	Vmsize	      float64 `json:"vmsize"`
-	Wkset	      float64 `json:"wkset"`
+	Vmsize        float64 `json:"vmsize"`
+	Wkset         float64 `json:"wkset"`
 	CpuTimeUser   float64 `json:"cputime_user"`
 	CpuTimeSystem float64 `json:"cputime_system"`
 	Threads       uint32  `json:"threads"`
@@ -216,12 +217,12 @@ type procSummary struct {
 }
 
 type thread struct {
-	Pid           uint32  `json:"pid"`
-	PPid          uint32  `json:"ppid"`
-	Name          string  `json:"name"`
-	User          string  `json:"user"`
-	Sid           string  `json:"sid"`
-	Tid           uint32  `json:"tid"`
+	Pid  uint32 `json:"pid"`
+	PPid uint32 `json:"ppid"`
+	Name string `json:"name"`
+	User string `json:"user"`
+	Sid  string `json:"sid"`
+	Tid  uint32 `json:"tid"`
 }
 
 var attrMap map[string]infoAttr = map[string]infoAttr{
@@ -455,8 +456,10 @@ func (p *Plugin) exportProcGet(params []string) (interface{}, error) {
 			sid = "-1"
 		}
 
-		proc := procStatus{Pid: pe.ProcessID, PPid: pe.ParentProcessID, Name: procName, Threads: pe.Threads,
-			User: uname, Sid: sid}
+		proc := procStatus{
+			Pid: pe.ProcessID, PPid: pe.ParentProcessID, Name: procName, Threads: pe.Threads,
+			User: uname, Sid: sid,
+		}
 
 		// process might not exist anymore already, skipping silently
 		h, err := syscall.OpenProcess(windows.PROCESS_QUERY_LIMITED_INFORMATION, false, pe.ProcessID)
@@ -499,8 +502,8 @@ func (p *Plugin) exportProcGet(params []string) (interface{}, error) {
 
 		var creationTime, exitTime, kernelTime, userTime syscall.Filetime
 		if err = syscall.GetProcessTimes(h, &creationTime, &exitTime, &kernelTime, &userTime); err == nil {
-			proc.CpuTimeUser = float64(uint64(userTime.HighDateTime)<<32 | uint64(userTime.LowDateTime)) / 1e7
-			proc.CpuTimeSystem = float64(uint64(kernelTime.HighDateTime)<<32 | uint64(kernelTime.LowDateTime)) / 1e7
+			proc.CpuTimeUser = float64(uint64(userTime.HighDateTime)<<32|uint64(userTime.LowDateTime)) / 1e7
+			proc.CpuTimeSystem = float64(uint64(kernelTime.HighDateTime)<<32|uint64(kernelTime.LowDateTime)) / 1e7
 		} else {
 			proc.CpuTimeUser = -1
 			proc.CpuTimeSystem = -1
@@ -521,12 +524,14 @@ func (p *Plugin) exportProcGet(params []string) (interface{}, error) {
 		for procerr = windows.Thread32First(ht, &te); procerr == nil; procerr = windows.Thread32Next(ht, &te) {
 			for _, proc := range array {
 				if te.OwnerProcessID == proc.Pid {
-					threadArray = append(threadArray, thread{proc.Pid, proc.PPid, proc.Name,
-						proc.User, proc.Sid, te.ThreadID})
+					threadArray = append(threadArray, thread{
+						proc.Pid, proc.PPid, proc.Name,
+						proc.User, proc.Sid, te.ThreadID,
+					})
 					break
 				}
 			}
-                }
+		}
 		defer windows.CloseHandle(ht)
 	}
 
@@ -534,7 +539,7 @@ func (p *Plugin) exportProcGet(params []string) (interface{}, error) {
 	switch mode {
 	case "summary":
 		var processed []string
-		processes:
+	processes:
 		for i, proc := range array {
 			for _, j := range processed {
 				if j == proc.Name {
@@ -542,14 +547,16 @@ func (p *Plugin) exportProcGet(params []string) (interface{}, error) {
 				}
 			}
 
-			procSum := procSummary{proc.Name, 1, proc.Vmsize, proc.Wkset,
+			procSum := procSummary{
+				proc.Name, 1, proc.Vmsize, proc.Wkset,
 				proc.CpuTimeUser, proc.CpuTimeSystem, proc.Threads,
 				proc.PageFaults, proc.Handles, proc.IoReadsB,
 				proc.IoWritesB, proc.IoReadsOp, proc.IoWritesOp,
-				proc.IoOtherB, proc.IoOtherOp}
+				proc.IoOtherB, proc.IoOtherOp,
+			}
 
-			if len(array) > i + 1 {
-				for _, procCmp := range array[i + 1:] {
+			if len(array) > i+1 {
+				for _, procCmp := range array[i+1:] {
 					if procCmp.Name != proc.Name {
 						continue
 					}

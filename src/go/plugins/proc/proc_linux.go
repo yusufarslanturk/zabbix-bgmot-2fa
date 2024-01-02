@@ -88,7 +88,6 @@ func init() {
 	}
 }
 
-
 func (h historyIndex) inc() historyIndex {
 	h++
 	if h == maxHistory {
@@ -880,19 +879,21 @@ func (p *PluginExport) exportProcGet(params []string) (interface{}, error) {
 
 			pi := procInfo{int64(data.Pid), data.Name, data.UserID, data.Cmdline, data.Name, ""}
 			if query.match(&pi) {
-				threadArray = append(threadArray, thread{data.Tgid, data.Ppid,
+				threadArray = append(threadArray, thread{
+					data.Tgid, data.Ppid,
 					data.Name, data.User, data.Group, data.UserID, data.GroupID,
 					data.Pid, data.ThreadName, data.CpuTimeUser, data.CpuTimeSystem,
-					data.State, data.CtxSwitches, data.PageFaults})
-				}
+					data.State, data.CtxSwitches, data.PageFaults,
+				})
 			}
 		}
+	}
 
 	var jsonArray []byte
 	switch mode {
 	case "summary":
 		var processed []string
-		processes:
+	processes:
 		for i, proc := range array {
 			for _, j := range processed {
 				if j == proc.Name {
@@ -900,13 +901,15 @@ func (p *PluginExport) exportProcGet(params []string) (interface{}, error) {
 				}
 			}
 
-			procSum := procSummary{proc.Name, 1, proc.Vsize, proc.Pmem, proc.Rss, proc.Data,
+			procSum := procSummary{
+				proc.Name, 1, proc.Vsize, proc.Pmem, proc.Rss, proc.Data,
 				proc.Exe, proc.Lck, proc.Lib, proc.Pin, proc.Pte, proc.Size, proc.Stk,
 				proc.Swap, proc.CpuTimeUser, proc.CpuTimeSystem, proc.CtxSwitches, proc.Threads,
-				proc.PageFaults}
+				proc.PageFaults,
+			}
 
-			if len(array) > i + 1 {
-				for _, procCmp := range array[i + 1:] {
+			if len(array) > i+1 {
+				for _, procCmp := range array[i+1:] {
 					if procCmp.Name != proc.Name {
 						continue
 					}

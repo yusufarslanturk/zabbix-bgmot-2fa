@@ -20,13 +20,6 @@
 package sw
 
 import (
-	"errors"
-	"fmt"
-	"regexp"
-	"sort"
-	"strings"
-	"time"
-
 	"git.zabbix.com/ap/plugin-support/errs"
 	"git.zabbix.com/ap/plugin-support/plugin"
 	"git.zabbix.com/ap/plugin-support/zbxerr"
@@ -44,13 +37,6 @@ type Plugin struct {
 type Options struct {
 	plugin.SystemOptions `conf:"optional,name=System"`
 	Timeout              int
-}
-
-type manager struct {
-	name    string
-	testCmd string
-	cmd     string
-	parser  func(in []string, regex string) ([]string, error)
 }
 
 func init() {
