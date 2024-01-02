@@ -1484,7 +1484,7 @@ class CUser extends CApiService {
 			self::checkLoginTemporarilyBlocked($db_user);
 
 			if ($db_user['auth_type'] == ZBX_AUTH_LDAP) {
-				self::checkLdapAuthenticationEnabled($data, $db_user);
+				self::checkLdapAuthenticationEnabled($db_user);
 
 				$idp_user_data = self::verifyLdapCredentials($data, $db_user, $group_userdirectoryid);
 				$this->tryToUpdateLdapProvisionedUser($db_user, $group_status, $idp_user_data);
