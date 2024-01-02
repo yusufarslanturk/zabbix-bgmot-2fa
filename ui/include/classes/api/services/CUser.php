@@ -1586,13 +1586,13 @@ class CUser extends CApiService {
 	 * @param string $username
 	 */
 	private static function unsetCaseInsensitiveUsersOfInternalAuthType(array &$db_users, string $username): void {
-		$gui_accesses = DBfetchArrayAssoc(DBselect(
+		$gui_accesses = array_column(DBfetchArray(DBselect(
 			'SELECT ug.userid,MAX(g.gui_access) AS gui_access'.
 			' FROM users_groups ug,usrgrp g'.
 			' WHERE ug.usrgrpid=g.usrgrpid'.
 				' AND '.dbConditionId('ug.userid', array_column($db_users, 'userid')).
 			' GROUP BY ug.userid'
-		), 'userid');
+		)), 'gui_access', 'userid');
 
 		$auth_types = [];
 
