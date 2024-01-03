@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-12-15 12:18+0000\n"
-"Last-Translator: Lidija <lidija.marsova@zabbix.com>\n"
+"PO-Revision-Date: 2023-12-19 09:09+0000\n"
+"Last-Translator: Deleted User <deleted-user-07756573ba8b4952afbef018761016f2@example.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -2473,7 +2473,7 @@ msgstr "Не удалось создать регулярный отчет"
 #: app/controllers/CControllerServiceCreate.php:96
 #: app/controllers/CControllerServiceCreate.php:184
 msgid "Cannot create service"
-msgstr "Не удалось создать сервис"
+msgstr "Не удалось создать услугу"
 
 #: include/classes/api/services/CService.php:2373
 #: include/classes/api/services/CService.php:2397
@@ -13431,9 +13431,9 @@ msgstr[2] "Модулей удалено: %1$s."
 #: app/controllers/CControllerModuleUpdate.php:132
 msgid "Module disabled"
 msgid_plural "Modules disabled"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Модуль деактивирован"
+msgstr[1] "Модули деактивированы"
+msgstr[2] "Модули деактивированы"
 
 #: app/controllers/CControllerModuleUpdate.php:150
 #, c-format
@@ -13446,9 +13446,9 @@ msgstr[2] "Модулей деактивировано: %1$s."
 #: app/controllers/CControllerModuleUpdate.php:129
 msgid "Module enabled"
 msgid_plural "Modules enabled"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Модуль активирован"
+msgstr[1] "Модули активированы"
+msgstr[2] "Модули активированы"
 
 #: app/controllers/CControllerModuleUpdate.php:145
 #, c-format
