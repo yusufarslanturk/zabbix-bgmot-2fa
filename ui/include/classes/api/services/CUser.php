@@ -2276,8 +2276,9 @@ class CUser extends CApiService {
 	 * @return array
 	 */
 	public function updateProvisionedUser(array $idp_user_data): array {
-		$attrs = array_flip(array_merge(self::PROVISIONED_FIELDS, ['userdirectoryid', 'userid']));
-		unset($attrs['passwd']);
+		$attrs = array_flip(array_merge(
+			array_diff(self::PROVISIONED_FIELDS, ['username', 'passwd']), ['userdirectoryid', 'userid']
+		));
 		$user = array_intersect_key($idp_user_data, $attrs);
 
 		$userid = $user['userid'];
@@ -2314,7 +2315,7 @@ class CUser extends CApiService {
 
 		self::updateForce(array_values($users), $db_users);
 
-		return $user;
+		return $user + ['username' => $db_users[$userid]['username']];
 	}
 
 	/**
