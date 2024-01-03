@@ -1806,7 +1806,7 @@ class CUser extends CApiService {
 				self::increaseFailedLoginAttempts($db_user);
 
 				self::loginException($db_user['userid'], $db_user['username'], ZBX_API_ERROR_PERMISSIONS,
-					_('LDAP authentication is disabled.')
+					_('Incorrect user name or password or account is temporarily blocked.')
 				);
 			}
 
