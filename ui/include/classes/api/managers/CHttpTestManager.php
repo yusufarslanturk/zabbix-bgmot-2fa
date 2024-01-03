@@ -269,13 +269,13 @@ class CHttpTestManager {
 		foreach ($httptests as $httptest) {
 			if (array_key_exists('headers', $httptest)) {
 				$httptestids[$httptest['httptestid']] = true;
-				$types[] = ZBX_HTTPFIELD_HEADER;
+				$types[ZBX_HTTPFIELD_HEADER] = true;
 				$db_httptests[$httptest['httptestid']]['headers'] = [];
 			}
 
 			if (array_key_exists('variables', $httptest)) {
 				$httptestids[$httptest['httptestid']] = true;
-				$types[] = ZBX_HTTPFIELD_VARIABLE;
+				$types[ZBX_HTTPFIELD_VARIABLE] = true;
 				$db_httptests[$httptest['httptestid']]['variables'] = [];
 			}
 		}
@@ -288,7 +288,7 @@ class CHttpTestManager {
 			'output' => ['httptest_fieldid', 'httptestid', 'type', 'name', 'value'],
 			'filter' => [
 				'httptestid' => array_keys($httptestids),
-				'type' => $types
+				'type' => array_keys($types)
 			],
 			'sortfield' => ['httptest_fieldid']
 		];
