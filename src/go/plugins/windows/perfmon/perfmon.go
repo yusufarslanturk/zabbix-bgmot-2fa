@@ -50,20 +50,31 @@ const (
 
 	langDefault = 0
 	langEnglish = 1
+
+	debugRetNum = 255
 )
 
 var impl Plugin = Plugin{
-	counters: make(map[perfCounterIndex]*perfCounter),
+	counters:  make(map[perfCounterIndex]*perfCounter),
+	indexOrig: make(map[string]*perfIndexOrig),
 }
 
 type perfCounterIndex struct {
-	path string
-	lang int
+	pathPdh string
+	lang    int
+}
+
+type perfIndexOrig struct {
+	indexPdh   perfCounterIndex
+	interval   int64
+	err        error
+	lastAccess time.Time
 }
 
 type perfCounterAddInfo struct {
-	index    perfCounterIndex
+	indexPdh perfCounterIndex
 	interval int64
+	pathOrig string
 }
 
 type perfCounter struct {
@@ -81,50 +92,81 @@ type Plugin struct {
 	mutex        sync.Mutex
 	historyMutex sync.Mutex
 	counters     map[perfCounterIndex]*perfCounter
-	addCounters  []perfCounterAddInfo
+	indexOrig    map[string]*perfIndexOrig
 	query        win32.PDH_HQUERY
 	collectError error
 }
 
+type debugPoint struct {
+	tDuration int64
+	number    int
+}
+
 type historyIndex int
+
+func (p *Plugin) debugExport(dp chan debugPoint) {
+	var dpLocal debugPoint
+
+	for {
+		select {
+		case dpLocal = <-dp:
+
+			if dpLocal.tDuration > 2 /* ms */ {
+				p.Warningf("long perfCounter exporter dpid %d: %f ms", dpLocal.number,
+					float64(dpLocal.tDuration))
+
+				return
+			}
+			if dpLocal.number >= debugRetNum {
+				return
+			}
+		case <-time.After(20 * time.Millisecond):
+			p.Warningf("perfCounter exporter longer that 20ms last dpid: %d", dpLocal.number)
+
+			return
+		}
+	}
+}
 
 // Export -
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (any, error) {
 	var lang int
-	t := time.Now().UnixMilli()
+	var dp debugPoint
+
+	dpChan := make(chan debugPoint, 1)
+
+	go p.debugExport(dpChan)
+
+	tStart := time.Now().UnixMilli()
+	dpChan <- dp
 	switch key {
 	case "perf_counter":
 		lang = langDefault
 	case "perf_counter_en":
 		lang = langEnglish
 	default:
-		tDuration := time.Now().UnixMilli() - t
-		if tDuration > int64(time.Second) {
-			p.Warningf("input error 1, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
-		}
+		dp.number = debugRetNum + 1
+		dp.tDuration = time.Now().UnixMilli() - tStart
+		dpChan <- dp
 		return nil, zbxerr.New(fmt.Sprintf("metric key %q not found", key)).Wrap(zbxerr.ErrorUnsupportedMetric)
 	}
 
 	if ctx == nil {
-		tDuration := time.Now().UnixMilli() - t
-		if tDuration > int64(time.Second) {
-			p.Warningf("input error 2, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
-		}
+		dp.number = debugRetNum + 2
+		dp.tDuration = time.Now().UnixMilli() - tStart
 		return nil, zbxerr.New("this item is available only in daemon mode")
 	}
 
 	if len(params) > 2 {
-		tDuration := time.Now().UnixMilli() - t
-		if tDuration > int64(time.Second) {
-			p.Warningf("input error 3, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
-		}
+		dp.number = debugRetNum + 3
+		dp.tDuration = time.Now().UnixMilli() - tStart
+		dpChan <- dp
 		return nil, zbxerr.ErrorTooManyParameters
 	}
 	if len(params) == 0 || params[0] == "" {
-		tDuration := time.Now().UnixMilli() - t
-		if tDuration > int64(time.Second) {
-			p.Warningf("input error 4, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
-		}
+		dp.number = debugRetNum + 4
+		dp.tDuration = time.Now().UnixMilli() - tStart
+		dpChan <- dp
 		return nil, zbxerr.New("invalid first parameter")
 	}
 
@@ -133,76 +175,153 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 
 	if len(params) == 2 && params[1] != "" {
 		if interval, err = strconv.ParseInt(params[1], 10, 32); err != nil {
-			tDuration := time.Now().UnixMilli() - t
-			if tDuration > int64(time.Second) {
-				p.Warningf("input error 5, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
-			}
+			dp.number = debugRetNum + 5
+			dp.tDuration = time.Now().UnixMilli() - tStart
+			dpChan <- dp
 			return nil, zbxerr.New("invalid second parameter").Wrap(err)
 		}
 
 		if interval < 1 || interval > maxInterval {
-			tDuration := time.Now().UnixMilli() - t
-			if tDuration > int64(time.Second) {
-				p.Warningf("input error 6, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
-			}
+			dp.number = debugRetNum + 6
+			dp.tDuration = time.Now().UnixMilli() - tStart
+			dpChan <- dp
 			return nil, zbxerr.New(fmt.Sprintf("interval %d out of range [%d, %d]", interval, 1, maxInterval))
 		}
 	}
 
-	path, err := pdh.ConvertPath(params[0])
-	if err != nil {
-		p.Debugf("cannot convert performance counter path: %s", err)
-		tDuration := time.Now().UnixMilli() - t
-		if tDuration > int64(time.Second) {
-			p.Warningf("input error 7, long perfCounter exporter:%f t: %d", float64(tDuration/int64(time.Millisecond)), t)
-		}
-		return nil, zbxerr.New("invalid performance counter path")
-	}
+	dp.number = 1
+	dp.tDuration = time.Now().UnixMilli() - tStart
+	dpChan <- dp
 
-	t1 := time.Now().UnixMilli()
-
-	index := perfCounterIndex{path, lang}
 	p.historyMutex.Lock()
 	defer p.historyMutex.Unlock()
-	t2 := time.Now().UnixMilli()
+	indexExt, ok := p.indexOrig[params[0]]
+	if !ok {
+		p.indexOrig[params[0]] = &perfIndexOrig{
+			indexPdh:   perfCounterIndex{lang: lang},
+			interval:   interval,
+			lastAccess: time.Now(),
+		}
+		dp.number = debugRetNum + 7
+		dp.tDuration = time.Now().UnixMilli() - tStart
+		dpChan <- dp
+
+		return nil, nil
+	}
+
+	indexExt.interval = interval
+	indexExt.lastAccess = time.Now()
+
+	if indexExt.err != nil {
+		dp.number = debugRetNum + 8
+		dp.tDuration = time.Now().UnixMilli() - tStart
+		dpChan <- dp
+
+		return nil, indexExt.err
+	}
+
+	index := indexExt.indexPdh
+	dp.number = 2
+	dp.tDuration = time.Now().UnixMilli() - tStart
+	dpChan <- dp
 	counter, ok := p.counters[index]
 	if !ok {
-		p.addCounters = append(p.addCounters, perfCounterAddInfo{index, interval})
-		tDuration := time.Now().UnixMilli() - t
-		if tDuration > int64(time.Second) {
-			p.Warningf("append new counter, long perfCounter exporter:%f t: %d t1: %d t2: %d", float64(tDuration/int64(time.Millisecond)), t, t1, t2)
-		}
+		dp.number = debugRetNum + 7
+		dp.tDuration = time.Now().UnixMilli() - tStart
+		dpChan <- dp
+		p.Debugf(`Performance counter %s not found while is present in added counters list, will be added on the`,
+			` next collector step`, index.pathPdh)
 
 		return nil, nil
 	}
 
 	if p.collectError != nil {
-		tDuration := time.Now().UnixMilli() - t
-		if tDuration > int64(time.Millisecond) {
-			p.Warningf("p.collectError != nil, long perfCounter exporter:%f t: %d t1: %d t2: %d", float64(tDuration/int64(time.Millisecond)), t, t1, t2)
-		}
+		dp.number = debugRetNum + 8
+		dp.tDuration = time.Now().UnixMilli() - tStart
+		dpChan <- dp
 
 		return nil, p.collectError
 	}
 
-	t3 := time.Now().UnixMilli()
+	dp.number = 3
+	dp.tDuration = time.Now().UnixMilli() - tStart
+	dpChan <- dp
 	retValue, retErrror := counter.getHistory(int(interval))
 
-	tDuration := time.Now().UnixMilli() - t
-	if tDuration > int64(time.Millisecond) {
-		p.Warningf("long perfCounter exporter:%f t: %d t1: %d t2: %d t3: %d", float64(tDuration/int64(time.Millisecond)), t, t1, t2, t3)
-	}
+	dp.number = debugRetNum
+	dp.tDuration = time.Now().UnixMilli() - tStart
+	dpChan <- dp
 
 	return retValue, retErrror
 }
 
+func (p *Plugin) debugCollect(dp chan debugPoint) {
+	var dpLocal debugPoint
+
+	for {
+		select {
+		case dpLocal = <-dp:
+
+			if dpLocal.tDuration > 2 /* ms */ {
+				p.Warningf("long perfCounter collector dpid %d: %f ms", dpLocal.number,
+					float64(dpLocal.tDuration))
+
+				return
+			}
+			if dpLocal.number >= debugRetNum {
+				return
+			}
+		case <-time.After(20 * time.Millisecond):
+			p.Warningf("perfCounter collector longer that 20ms last dpid: %d", dpLocal.number)
+
+			return
+		}
+	}
+}
+
 func (p *Plugin) Collect() error {
-	t := time.Now().UnixMilli()
+	var dp debugPoint
+	var addCounters []perfCounterAddInfo
+
+	dpChan := make(chan debugPoint, 1)
+	go p.debugCollect(dpChan)
+
+	tStart := time.Now().UnixMilli()
+	dpChan <- dp
+
+	expireTime := time.Now().Add(-maxInactivityPeriod)
 
 	p.mutex.Lock()
 	defer p.mutex.Unlock()
 
-	if len(p.counters) == 0 && len(p.addCounters) == 0 {
+	p.historyMutex.Lock()
+	for pathOrig, indexExt := range p.indexOrig {
+		if indexExt.lastAccess.Before(expireTime) {
+			p.historyMutex.Lock()
+			delete(p.indexOrig, pathOrig)
+			p.historyMutex.Unlock()
+
+			continue
+		}
+
+		if indexExt.err == nil && indexExt.indexPdh.pathPdh == "" {
+			addCounters = append(addCounters, perfCounterAddInfo{
+				pathOrig: pathOrig,
+				indexPdh: indexExt.indexPdh,
+				interval: indexExt.interval,
+			})
+		}
+	}
+	p.historyMutex.Unlock()
+
+	dp.number = 1
+	dp.tDuration = time.Now().UnixMilli() - tStart
+	dpChan <- dp
+
+	if len(p.counters) == 0 && len(addCounters) == 0 {
+		dp.number = debugRetNum + 1
+		dp.tDuration = time.Now().UnixMilli() - tStart
+		dpChan <- dp
 		return nil
 	}
 
@@ -210,41 +329,57 @@ func (p *Plugin) Collect() error {
 	if p.query == 0 {
 		p.query, err = win32.PdhOpenQuery(nil, 0)
 		if err != nil {
+			dp.number = debugRetNum + 2
+			dp.tDuration = time.Now().UnixMilli() - tStart
+			dpChan <- dp
 			return zbxerr.New("cannot open query").Wrap(err)
 		}
 	}
 
+	dp.number = 2
+	dp.tDuration = time.Now().UnixMilli() - tStart
+	dpChan <- dp
+
 	p.historyMutex.Lock()
-	addCountersLocal := p.addCounters
-	p.addCounters = nil
 	p.collectError = nil
 	p.historyMutex.Unlock()
 
-	for i := len(addCountersLocal) - 1; i >= 0; i-- {
-		addInfo := addCountersLocal[i]
-		err = p.addCounter(addInfo.index, addInfo.interval)
+	for _, c := range addCounters {
+		c.indexPdh.pathPdh, err = pdh.ConvertPath(c.pathOrig)
 		if err != nil {
 			p.historyMutex.Lock()
-			p.collectError = zbxerr.New(
-				fmt.Sprintf("failed to get counter for path %q and lang %d", addInfo.index.path, addInfo.index.lang),
+			p.indexOrig[c.pathOrig].err = zbxerr.New(
+				fmt.Sprintf("failed to convert performance counter path %s", c.pathOrig),
 			).Wrap(err)
-			err = p.collectError
 			p.historyMutex.Unlock()
-			addCountersLocal = addCountersLocal[:i]
 
-			break
+			continue
+		}
+
+		p.historyMutex.Lock()
+		p.indexOrig[c.pathOrig].indexPdh.pathPdh = c.indexPdh.pathPdh
+		p.historyMutex.Unlock()
+
+		err = p.addCounter(c.indexPdh, c.interval)
+		if err != nil {
+			p.historyMutex.Lock()
+			p.indexOrig[c.pathOrig].err = zbxerr.New(
+				fmt.Sprintf("failed to get counter for path %q and lang %d", c.indexPdh.pathPdh, c.indexPdh.lang),
+			).Wrap(err)
+			p.historyMutex.Unlock()
 		}
 	}
 
-	if err != nil {
-		p.historyMutex.Lock()
-		defer p.historyMutex.Unlock()
-		p.addCounters = append(p.addCounters, addCountersLocal...)
-
-		return err
-	}
+	dp.number = 3
+	dp.tDuration = time.Now().UnixMilli() - tStart
+	dpChan <- dp
 
 	err = p.setCounterData()
+
+	dp.number = 4
+	dp.tDuration = time.Now().UnixMilli() - tStart
+	dpChan <- dp
+
 	if err != nil {
 		p.Warningf("reset counter query: '%s'", err)
 
@@ -259,13 +394,15 @@ func (p *Plugin) Collect() error {
 
 		p.query = 0
 
+		dp.number = debugRetNum + 4
+		dp.tDuration = time.Now().UnixMilli() - tStart
+		dpChan <- dp
 		return err
 	}
 
-	t = time.Now().UnixMilli() - t
-	if t > int64(time.Millisecond) {
-		p.Warningf("long perfCounter collection:%f", float64(t/int64(time.Millisecond)))
-	}
+	dp.number = debugRetNum
+	dp.tDuration = time.Now().UnixMilli() - tStart
+	dpChan <- dp
 
 	return nil
 }
@@ -292,7 +429,7 @@ func (p *Plugin) setCounterData() error {
 		if c.lastAccess.Before(expireTime) || errCollect != nil {
 			err2 := win32.PdhRemoveCounter(c.handle)
 			if err2 != nil {
-				p.Warningf("error while removing counter '%s': %s", index.path, err2)
+				p.Warningf("error while removing counter '%s': %s", index.pathPdh, err2)
 			}
 
 			p.historyMutex.Lock()
@@ -308,7 +445,7 @@ func (p *Plugin) setCounterData() error {
 		p.historyMutex.Lock()
 		if err != nil {
 			zbxErr := zbxerr.New(
-				fmt.Sprintf("failed to retrieve pdh counter value double for index %s", index.path),
+				fmt.Sprintf("failed to retrieve pdh counter value double for index %s", index.pathPdh),
 			).Wrap(err)
 			if !errors.Is(err, win32.NegDenomErr) {
 				c.err = zbxErr
@@ -354,7 +491,7 @@ func (p *Plugin) getCounters(index perfCounterIndex) (win32.PDH_HCOUNTER, error)
 	var err error
 
 	if index.lang == langEnglish {
-		counter, err = win32.PdhAddEnglishCounter(p.query, index.path, 0)
+		counter, err = win32.PdhAddEnglishCounter(p.query, index.pathPdh, 0)
 		if err != nil {
 			return 0, zbxerr.New("cannot add english counter").Wrap(err)
 		}
@@ -362,7 +499,7 @@ func (p *Plugin) getCounters(index perfCounterIndex) (win32.PDH_HCOUNTER, error)
 		return counter, nil
 	}
 
-	counter, err = win32.PdhAddCounter(p.query, index.path, 0)
+	counter, err = win32.PdhAddCounter(p.query, index.pathPdh, 0)
 	if err != nil {
 		return 0, zbxerr.New("cannot add counter").Wrap(err)
 	}
