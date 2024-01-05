@@ -34,7 +34,7 @@ class testFormLogin extends CWebTest {
 					'login' => 'LDAP user',
 					'password' => 'zabbix12345',
 					'expected' => TEST_BAD,
-					'error_message' => 'LDAP authentication is disabled.'
+					'error_message' => 'Incorrect user name or password or account is temporarily blocked.'
 				]
 			],
 			[
