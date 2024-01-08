@@ -1769,9 +1769,6 @@ zabbix_export:
                       value:
                         host: 'Cisco UCS Manager by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 8648df22d8be42359900e11ea395a98c
           name: 'CISCO-UNIFIED-COMPUTING-TC-MIB::CucsEquipmentOperability'

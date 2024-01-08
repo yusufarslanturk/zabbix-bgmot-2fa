@@ -864,6 +864,3 @@ zabbix_export:
                       value:
                         host: 'Kubernetes Kubelet by HTTP'
                         name: 'Kubernetes: [{#OP_TYPE}] Operations latency'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'

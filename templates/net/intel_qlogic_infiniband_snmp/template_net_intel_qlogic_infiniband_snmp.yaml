@@ -1076,9 +1076,6 @@ zabbix_export:
                       value:
                         host: 'Intel_Qlogic Infiniband by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 39299506ad14445fa7b7a9e78cc54619
           name: 'ICS-CHASSIS-MIB::icsChassisFanOperStatus'

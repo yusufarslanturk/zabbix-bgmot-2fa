@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-09-20 03:28+0000\n"
+"PO-Revision-Date: 2023-11-06 02:02+0000\n"
 "Last-Translator: Felipe L. Ewald <felipe.idj@hotmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: pt_BR\n"
@@ -204,6 +204,16 @@ msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
 msgstr[0] "%1$s de %2$s elemento em estado de incidente"
 msgstr[1] "%1$s de %2$s elementos em estado de incidente"
+
+#: app/views/administration.miscconfig.edit.php:127
+#, c-format
+msgid "%1$s or %2$s - allows the page to be displayed only in a frame on the same origin as the page itself"
+msgstr ""
+
+#: app/views/administration.miscconfig.edit.php:130
+#, c-format
+msgid "%1$s or %2$s - prevents the page from being displayed in a frame, regardless of the site attempting to do so"
+msgstr ""
 
 #: jsLoader.php:348
 #, c-format
@@ -2829,6 +2839,12 @@ msgid_plural "Cannot disable media types"
 msgstr[0] "Não é possível desabilitar o tipo de midia"
 msgstr[1] "Não é possível desabilitar os tipos de midia"
 
+#: app/controllers/CControllerModuleUpdate.php:146
+msgid "Cannot disable module"
+msgid_plural "Cannot disable modules"
+msgstr[0] ""
+msgstr[1] ""
+
 #: app/controllers/CControllerModuleUpdate.php:165
 #, c-format
 msgid "Cannot disable module: %1$s."
@@ -2918,6 +2934,12 @@ msgid "Cannot enable media type"
 msgid_plural "Cannot enable media types"
 msgstr[0] "Não é possível ativar o tipo de mídia"
 msgstr[1] "Não é possível ativar os tipos de mídia"
+
+#: app/controllers/CControllerModuleUpdate.php:141
+msgid "Cannot enable module"
+msgid_plural "Cannot enable modules"
+msgstr[0] ""
+msgstr[1] ""
 
 #: app/controllers/CControllerModuleUpdate.php:160
 #, c-format
@@ -3958,6 +3980,10 @@ msgstr "Não é possível atualizar o período de manutenção"
 #: app/controllers/CControllerMediatypeUpdate.php:180
 msgid "Cannot update media type"
 msgstr "Não é possível atualizar o tipo de mídia"
+
+#: app/controllers/CControllerModuleUpdate.php:137
+msgid "Cannot update module"
+msgstr ""
 
 #: app/controllers/CControllerModuleUpdate.php:157
 #, c-format
@@ -7711,6 +7737,10 @@ msgstr "Monitoração do log de eventos. Retorna: log"
 #: include/views/configuration.triggers.edit.php:102
 msgid "Event name"
 msgstr "Nome do Evento"
+
+#: app/views/popup.condition.edit.php:819
+msgid "Event name matches Trigger name (with macros expanded) unless a custom Event name is specified in Trigger settings."
+msgstr ""
 
 #: include/classes/helpers/CCorrelationHelper.php:55
 msgid "Event tag pair"
@@ -13276,6 +13306,12 @@ msgid_plural "Modules deleted: %1$s."
 msgstr[0] "Módulo excluído: %1$s."
 msgstr[1] "Módulos excluídos: %1$s."
 
+#: app/controllers/CControllerModuleUpdate.php:132
+msgid "Module disabled"
+msgid_plural "Modules disabled"
+msgstr[0] ""
+msgstr[1] ""
+
 #: app/controllers/CControllerModuleUpdate.php:150
 #, c-format
 msgid "Module disabled: %1$s."
@@ -13283,12 +13319,22 @@ msgid_plural "Modules disabled: %1$s."
 msgstr[0] "Módulo desativado: %1$s."
 msgstr[1] "Módulos desativados: %1$s."
 
+#: app/controllers/CControllerModuleUpdate.php:129
+msgid "Module enabled"
+msgid_plural "Modules enabled"
+msgstr[0] ""
+msgstr[1] ""
+
 #: app/controllers/CControllerModuleUpdate.php:145
 #, c-format
 msgid "Module enabled: %1$s."
 msgid_plural "Modules enabled: %1$s."
 msgstr[0] "Módulo ativado: %1$s."
 msgstr[1] "Módulos ativados: %1$s."
+
+#: app/controllers/CControllerModuleUpdate.php:126
+msgid "Module updated"
+msgstr ""
 
 #: app/controllers/CControllerModuleUpdate.php:142
 #, c-format
@@ -14488,6 +14534,11 @@ msgstr "Itens não herdados"
 msgid "Not supported"
 msgstr "Não suportado"
 
+#: app/views/administration.miscconfig.edit.php:138
+#, c-format
+msgid "Note that %1$s or %2$s will be regarded as hostnames if used without single quotes."
+msgstr ""
+
 #: include/hosts.inc.php:229
 msgid "Notes"
 msgstr "Notas"
@@ -15645,7 +15696,7 @@ msgstr "Pausar operações para incidentes suprimidos"
 
 #: app/views/popup.action.edit.php:227
 msgid "Pause operations for symptom problems"
-msgstr "Pausar operações para problemas de sintomas"
+msgstr "Pausar as operações para problemas sintomáticos"
 
 #: include/classes/debug/CProfiler.php:163
 #, c-format
@@ -20151,7 +20202,7 @@ msgstr "URL do Trigger Script"
 #: include/classes/helpers/CMenuHelper.php:199
 #: include/views/configuration.action.list.php:34
 msgid "Trigger actions"
-msgstr "Desabilitar ações?"
+msgstr "Ações da trigger"
 
 #: triggers.php:303
 msgid "Trigger added"
@@ -21078,6 +21129,10 @@ msgstr "Uptime/Downtime"
 msgid "Use %{ref} in group filter to reference value of this user attribute."
 msgstr "Use %{ref} no filtro de grupo para fazer referência ao valor desse atributo de usuário."
 
+#: app/views/administration.miscconfig.edit.php:123
+msgid "Use X-Frame-Options HTTP header"
+msgstr ""
+
 #: app/partials/configuration.host.interface.row.php:194
 msgid "Use bulk requests"
 msgstr "Usar requisições em lote"
@@ -21394,7 +21449,7 @@ msgstr "A função de usuário com ID \"%1$s\" não está disponível."
 #: include/classes/helpers/CMenuHelper.php:296
 #: include/classes/helpers/CRoleHelper.php:426
 msgid "User roles"
-msgstr "Papéis de utilizador"
+msgstr "Funções de usuário"
 
 #: app/views/administration.housekeeping.edit.php:109
 msgid "User sessions"
@@ -21403,7 +21458,7 @@ msgstr "Sessões de usuários"
 #: include/classes/helpers/CMenuHelper.php:390
 #: include/classes/helpers/CMenuHelper.php:403
 msgid "User settings"
-msgstr "Definições de Utilizadores"
+msgstr "Configurações do usuário"
 
 #: include/classes/api/services/CMap.php:709
 #: include/classes/api/services/CMap.php:1178
@@ -22815,6 +22870,10 @@ msgstr "Eixo-X"
 msgid "X-Frame-Options HTTP header"
 msgstr "Cabeçalho HTTP X-Frame-Options"
 
+#: app/views/administration.miscconfig.edit.php:125
+msgid "X-Frame-Options HTTP header supported values:"
+msgstr ""
+
 #: include/views/js/monitoring.sysmaps.js.php:448
 msgid "X1"
 msgstr "X1"
@@ -23263,6 +23322,11 @@ msgstr "espera-se um tempo relativo"
 #: app/views/administration.authentication.edit.php:86
 msgid "a special character"
 msgstr "um caractere especial"
+
+#: app/views/administration.miscconfig.edit.php:133
+#, c-format
+msgid "a string of space-separated hostnames; adding %1$s to the list allows the page to be displayed in a frame on the same origin as the page itself"
+msgstr ""
 
 #: include/classes/validators/CApiInputValidator.php:2530
 msgid "a string, number or null value is expected"
