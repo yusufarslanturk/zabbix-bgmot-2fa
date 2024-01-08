@@ -3,7 +3,7 @@ module zabbix.com
 go 1.19
 
 require (
-	git.zabbix.com/ap/plugin-support v1.2.2-0.20240105112034-ad62c3bec664
+	git.zabbix.com/ap/plugin-support v1.2.2-0.20240108113659-d0cbae4b8c00
 	github.com/BurntSushi/locker v0.0.0-20171006230638-a6e239ea1c69
 	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/Microsoft/go-winio v0.6.1
