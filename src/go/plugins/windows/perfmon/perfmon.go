@@ -226,7 +226,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	dpChan <- dp
 	counter, ok := p.counters[index]
 	if !ok {
-		dp.number = debugRetNum + 7
+		dp.number = debugRetNum + 9
 		dp.tDuration = time.Now().UnixMilli() - tStart
 		dpChan <- dp
 		p.Debugf(`Performance counter %s not found while is present in added counters list, will be added on the`,
@@ -236,7 +236,7 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	}
 
 	if p.collectError != nil {
-		dp.number = debugRetNum + 8
+		dp.number = debugRetNum + 10
 		dp.tDuration = time.Now().UnixMilli() - tStart
 		dpChan <- dp
 
@@ -297,10 +297,7 @@ func (p *Plugin) Collect() error {
 	p.historyMutex.Lock()
 	for pathOrig, indexExt := range p.indexOrig {
 		if indexExt.lastAccess.Before(expireTime) {
-			p.historyMutex.Lock()
 			delete(p.indexOrig, pathOrig)
-			p.historyMutex.Unlock()
-
 			continue
 		}
 
