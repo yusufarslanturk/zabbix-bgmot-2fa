@@ -73,7 +73,7 @@ clean-sbom:
 	-rm -f sbom-zws.xml
 
 install-zabbix.com/cmd/zabbix_agent2:
-	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" GOBIN=${GOBIN} \
+	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" GOBIN="$(DESTDIR)$(sbindir)" \
 		go install -ldflags="${AGENT_GOLDFLAGS}" ${TARGETS}
 	$(MKDIR_P) "$(DESTDIR)$(AGENT2_CONFIG_PLUGINS_PATH)"
 	test -f "$(DESTDIR)$(AGENT2_CONFIG_FILE)" || cp "conf/zabbix_agent2.conf" "$(DESTDIR)$(AGENT2_CONFIG_FILE)"
@@ -83,7 +83,7 @@ install-zabbix.com/cmd/zabbix_agent2:
 	done
 
 install-zabbix.com/cmd/zabbix_web_service:
-	GOBIN=${GOBIN} go install -ldflags="${WEBSERVICE_GOLDFLAGS}" zabbix.com/cmd/zabbix_web_service
+	GOBIN="$(DESTDIR)$(sbindir)" go install -ldflags="${WEBSERVICE_GOLDFLAGS}" zabbix.com/cmd/zabbix_web_service
 
 install-exec-local: ${INSTALL_TARGETS}
 
