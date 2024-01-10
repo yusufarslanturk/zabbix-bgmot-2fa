@@ -111,16 +111,14 @@ func (p *Plugin) debugExport(dp chan debugPoint) {
 		select {
 		case dpLocal = <-dp:
 
-			if dpLocal.tDuration > 2 /* ms */ {
+			if dpLocal.tDuration > 1000 /* ms */ {
 				p.Warningf("long perfCounter exporter dpid %d: %f ms", dpLocal.number,
 					float64(dpLocal.tDuration))
-
-				return
 			}
 			if dpLocal.number >= debugRetNum {
 				return
 			}
-		case <-time.After(20 * time.Millisecond):
+		case <-time.After(30 * time.Second):
 			p.Warningf("perfCounter exporter longer that 20ms last dpid: %d", dpLocal.number)
 
 			return
@@ -262,16 +260,14 @@ func (p *Plugin) debugCollect(dp chan debugPoint) {
 		select {
 		case dpLocal = <-dp:
 
-			if dpLocal.tDuration > 2 /* ms */ {
+			if dpLocal.tDuration > 1000 /* ms */ {
 				p.Warningf("long perfCounter collector dpid %d: %f ms", dpLocal.number,
 					float64(dpLocal.tDuration))
-
-				return
 			}
 			if dpLocal.number >= debugRetNum {
 				return
 			}
-		case <-time.After(20 * time.Millisecond):
+		case <-time.After(30 * time.Second):
 			p.Warningf("perfCounter collector longer that 20ms last dpid: %d", dpLocal.number)
 
 			return
