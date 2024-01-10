@@ -49,10 +49,18 @@ endif
 all: build
 
 zabbix.com/cmd/zabbix_agent2:
-	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" $(GO) build -tags="${AGENT_GOTAGS}" -ldflags="${AGENT_GOLDFLAGS}" -o bin zabbix.com/cmd/zabbix_agent2
+	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" \
+		$(GO) build \
+		-tags="${AGENT_GOTAGS}" \
+		-ldflags="${AGENT_GOLDFLAGS}" \
+		-o bin \
+		zabbix.com/cmd/zabbix_agent2
 
 zabbix.com/cmd/zabbix_web_service:
-	$(GO) build -ldflags="${WEBSERVICE_GOLDFLAGS}" -o bin zabbix.com/cmd/zabbix_web_service
+	$(GO) build \
+	-ldflags="${WEBSERVICE_GOLDFLAGS}" \
+	-o bin \
+	zabbix.com/cmd/zabbix_web_service
 
 build: ${TARGETS}
 
@@ -74,7 +82,9 @@ clean-sbom:
 
 install-zabbix.com/cmd/zabbix_agent2:
 	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" GOBIN="$(DESTDIR)$(sbindir)" \
-		$(GO) install -ldflags="${AGENT_GOLDFLAGS}" ${TARGETS}
+		$(GO) install \
+		-ldflags="${AGENT_GOLDFLAGS}" \
+		${TARGETS}
 	$(MKDIR_P) "$(DESTDIR)$(AGENT2_CONFIG_PLUGINS_PATH)"
 	test -f "$(DESTDIR)$(AGENT2_CONFIG_FILE)" || cp "conf/zabbix_agent2.conf" "$(DESTDIR)$(AGENT2_CONFIG_FILE)"
 	for cfg in conf/zabbix_agent2.d/plugins.d/*.conf; do \
@@ -83,7 +93,10 @@ install-zabbix.com/cmd/zabbix_agent2:
 	done
 
 install-zabbix.com/cmd/zabbix_web_service:
-	GOBIN="$(DESTDIR)$(sbindir)" $(GO) install -ldflags="${WEBSERVICE_GOLDFLAGS}" zabbix.com/cmd/zabbix_web_service
+	GOBIN="$(DESTDIR)$(sbindir)" \
+		$(GO) install \
+		-ldflags="${WEBSERVICE_GOLDFLAGS}" \
+		zabbix.com/cmd/zabbix_web_service
 
 install-exec-local: ${INSTALL_TARGETS}
 
