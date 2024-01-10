@@ -49,17 +49,17 @@ endif
 all: build
 
 zabbix.com/cmd/zabbix_agent2:
-	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" go build -tags="${AGENT_GOTAGS}" -ldflags="${AGENT_GOLDFLAGS}" -o bin zabbix.com/cmd/zabbix_agent2
+	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" $(GO) build -tags="${AGENT_GOTAGS}" -ldflags="${AGENT_GOLDFLAGS}" -o bin zabbix.com/cmd/zabbix_agent2
 
 zabbix.com/cmd/zabbix_web_service:
-	go build -ldflags="${WEBSERVICE_GOLDFLAGS}" -o bin zabbix.com/cmd/zabbix_web_service
+	$(GO) build -ldflags="${WEBSERVICE_GOLDFLAGS}" -o bin zabbix.com/cmd/zabbix_web_service
 
 build: ${TARGETS}
 
 clean: clean-go-build clean-sbom
 
 clean-go-build:
-	-go clean ./...
+	-$(GO) clean ./...
 	-rm -f bin/mock_server
 	-rm -f bin/zabbix_agent2
 	-rm -f bin/zabbix_web_service
@@ -74,7 +74,7 @@ clean-sbom:
 
 install-zabbix.com/cmd/zabbix_agent2:
 	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" GOBIN="$(DESTDIR)$(sbindir)" \
-		go install -ldflags="${AGENT_GOLDFLAGS}" ${TARGETS}
+		$(GO) install -ldflags="${AGENT_GOLDFLAGS}" ${TARGETS}
 	$(MKDIR_P) "$(DESTDIR)$(AGENT2_CONFIG_PLUGINS_PATH)"
 	test -f "$(DESTDIR)$(AGENT2_CONFIG_FILE)" || cp "conf/zabbix_agent2.conf" "$(DESTDIR)$(AGENT2_CONFIG_FILE)"
 	for cfg in conf/zabbix_agent2.d/plugins.d/*.conf; do \
@@ -83,7 +83,7 @@ install-zabbix.com/cmd/zabbix_agent2:
 	done
 
 install-zabbix.com/cmd/zabbix_web_service:
-	GOBIN="$(DESTDIR)$(sbindir)" go install -ldflags="${WEBSERVICE_GOLDFLAGS}" zabbix.com/cmd/zabbix_web_service
+	GOBIN="$(DESTDIR)$(sbindir)" $(GO) install -ldflags="${WEBSERVICE_GOLDFLAGS}" zabbix.com/cmd/zabbix_web_service
 
 install-exec-local: ${INSTALL_TARGETS}
 
@@ -151,10 +151,10 @@ sbom-mod: sbom-mod.json
 sbom: sbom-apps sbom-mod
 
 check:
-	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" go test ./...
+	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" $(GO) test ./...
 style:
 	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" golangci-lint run --new-from-rev=$(NEW_FROM_REV)  ./...
 format:
-	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" go fmt ./... 
+	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" $(GO) fmt ./...
 
 .PHONY: all build check clean clean-go-build clean-sbom format sbom sbom-apps sbom-mod sbom-za2 sbom-zws style
