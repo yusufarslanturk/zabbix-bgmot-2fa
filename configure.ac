@@ -1899,10 +1899,8 @@ AC_SUBST(CURL_SSL_KEY_LOCATION)
 AC_SUBST(LOAD_MODULE_PATH)
 
 GOCMD=go
-GOWORKDIR=$ac_abs_confdir/go/src/zabbix
 
 AC_SUBST(GOCMD)
-AC_SUBST(GOWORKDIR)
 
 dnl *****************************************************************
 dnl *                                                               *
