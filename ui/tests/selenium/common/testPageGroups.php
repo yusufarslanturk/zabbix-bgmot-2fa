@@ -181,7 +181,7 @@ class testPageGroups extends CWebTest {
 			$this->page->open($this->link)->waitUntilReady();
 		}
 
-		// Check link to hosts or templates page with selected group in filer.
+		// Check link to hosts or templates page with selected group in filter.
 		$group_id = CDBHelper::getValue('SELECT groupid FROM hstgrp WHERE name='.zbx_dbstr($links['name']));
 		$row->getColumn('Count')->query('link', $links['count'])->one()->click();
 		$this->assertStringContainsString((($this->object === 'host')
