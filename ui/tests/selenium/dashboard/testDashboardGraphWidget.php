@@ -2155,7 +2155,7 @@ class testDashboardGraphWidget extends testWidgets {
 					],
 					'Data set' => [
 						'host' => 'Zabbix*, new widget',
-						'item' => 'Agetn*, new widget'
+						'item' => 'Agent*, new widget'
 					]
 				]
 			],
