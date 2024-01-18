@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -40,11 +40,12 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 		// Storage of secrets
 		'Vault provider' => 'HashiCorp Vault',
 		// Security.
-		'Validate URI schemes' => true,
-		'Valid URI schemes' => 'http,https,ftp,file,mailto,tel,ssh',
-		'X-Frame-Options HTTP header' => 'SAMEORIGIN',
-		'Use iframe sandboxing' => true,
-		'Iframe sandboxing exceptions' => '',
+		'id:validate_uri_schemes' => true,
+		'id:uri_valid_schemes' => 'http,https,ftp,file,mailto,tel,ssh',
+		'id:x_frame_header_enabled' => true,
+		'id:x_frame_options' => 'SAMEORIGIN',
+		'id:iframe_sandboxing_enabled' => true,
+		'id:iframe_sandboxing_exceptions' => '',
 		// Communication with Zabbix server.
 		'Network timeout' => '3s',
 		'Connection timeout' => '3s',
@@ -90,11 +91,12 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 		// Storage of secrets
 		'Vault provider' => 'CyberArk Vault',
 		// Security.
-		'Validate URI schemes' => true,
-		'Valid URI schemes' => 'custom_scheme',
-		'X-Frame-Options HTTP header' => 'SOME_NEW_VALUE',
-		'Use iframe sandboxing' => true,
-		'Iframe sandboxing exceptions' => 'some-new-flag',
+		'id:validate_uri_schemes' => true,
+		'id:uri_valid_schemes' => 'custom_scheme',
+		'id:x_frame_header_enabled' => true,
+		'id:x_frame_options' => 'SOME-NEW-VALUE',
+		'id:iframe_sandboxing_enabled' => true,
+		'id:iframe_sandboxing_exceptions' => 'some-new-flag',
 		// Communication with Zabbix server.
 		'Network timeout' => '7s',
 		'Connection timeout' => '4s',
@@ -137,16 +139,31 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 			$checkboxes = [
 				'snmptrap_logging',
 				'validate_uri_schemes',
+				'x_frame_header_enabled',
 				'iframe_sandboxing_enabled'
 			];
 			foreach ($checkboxes as $checkbox) {
 				$form->getField('id:'.$checkbox)->fill($status);
 			}
 
-			foreach (['uri_valid_schemes','iframe_sandboxing_exceptions'] as $input) {
+			foreach (['uri_valid_schemes','iframe_sandboxing_exceptions', 'x_frame_options'] as $input) {
 				$this->assertTrue($this->query('id', $input)->one()->isEnabled($status));
 			}
 		}
+
+		// Check X-Frame-Options hintbox.
+		$form->getLabel('Use X-Frame-Options HTTP header')->query('xpath:./a[@data-hintbox]')->one()->waitUntilClickable()->click();
+		$hint = $this->query('xpath://div[@class="overlay-dialogue"]')->asOverlayDialog()->waitUntilPresent()->one();
+
+		$hint_text = "X-Frame-Options HTTP header supported values:\n".
+				"SAMEORIGIN or 'self' - allows the page to be displayed only in a frame on the same origin as the page itself\n".
+				"DENY or 'none' - prevents the page from being displayed in a frame, regardless of the site attempting to do so\n".
+				"a string of space-separated hostnames; adding 'self' to the list allows the page to be displayed in a frame on the same origin as the page itself\n".
+				"\n".
+				"Note that 'self' or 'none' will be regarded as hostnames if used without single quotes.";
+
+		$this->assertEquals($hint_text, $hint->getText());
+		$hint->close();
 
 		foreach (['Update', 'Reset defaults'] as $button) {
 			$this->assertTrue($this->query('button', $button)->one()->isEnabled());
@@ -172,11 +189,10 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 	 */
 	public function getCheckFormData() {
 		return [
-			// Minimal valid values. In period fields minimal valid time in seconds with 's'.
+			// #0 Minimal valid values. In period fields minimal valid time in seconds with 's'.
 			[
 				[
-					'expected' => TEST_GOOD,
-					'fields' =>  [
+					'fields' => [
 						'Frontend URL' => 'a',
 						'Group for discovered hosts' => 'Hypervisors',
 						'Default host inventory mode' => 'Manual',
@@ -186,9 +202,10 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 						'Login attempts' => 1,
 						'Login blocking interval' => '30s',
 						// Security.
-						'Validate URI schemes' => false,
-						'X-Frame-Options HTTP header' => 'X',
-						'Use iframe sandboxing' => false,
+						'id:validate_uri_schemes' => false,
+						'id:x_frame_header_enabled' => true,
+						'id:x_frame_options' => 'X',
+						'id:iframe_sandboxing_enabled' => false,
 						// Communication with Zabbix server.
 						'Network timeout' => '1s',
 						'Connection timeout' => '1s',
@@ -218,21 +235,20 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Minimal valid values. In period fields minimal valid time in seconds without 's'.
+			// #1 Minimal valid values. In period fields minimal valid time in seconds without 's'.
 			[
 				[
-					'expected' => TEST_GOOD,
-					'fields' =>  [
+					'fields' => [
 						'Frontend URL' => 'zabbix.php',
 						'Default host inventory mode' => 'Automatic',
 						'Log unmatched SNMP traps' => true,
 						// Authorization.
 						'Login blocking interval' => '30',
 						// Security.
-						'Validate URI schemes' => true,
-						'Valid URI schemes' => '',
-						'Use iframe sandboxing' => true,
-						'Iframe sandboxing exceptions' => '',
+						'id:validate_uri_schemes' => true,
+						'id:uri_valid_schemes' => '',
+						'id:iframe_sandboxing_enabled' => true,
+						'id:iframe_sandboxing_exceptions' => '',
 						// Communication with Zabbix server.
 						'Network timeout' => '1',
 						'Connection timeout' => '1',
@@ -260,11 +276,10 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// In period fields minimal valid time in minutes.
+			// #2 In period fields minimal valid time in minutes.
 			[
 				[
-					'expected' => TEST_GOOD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '1m',
 						// Communication with Zabbix server.
@@ -284,11 +299,10 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// In period fields minimal valid time in hours.
+			// #3 In period fields minimal valid time in hours.
 			[
 				[
-					'expected' => TEST_GOOD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '1h'
 					],
@@ -298,24 +312,24 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Maximal valid values in seconds with "s".
+			// #4 Maximal valid values in seconds with "s".
 			[
 				[
-					'expected' => TEST_GOOD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login attempts' => 32,
 						'Login blocking interval' => '3600s',
 						// Security.
-						'Validate URI schemes' => true,
-						'Valid URI schemes' => 'http,https,ftp,file,mailto,tel,ssh,http,https,ftp,file,mailto,tel,ssh,http,'.
+						'id:validate_uri_schemes' => true,
+						'id:uri_valid_schemes' => 'http,https,ftp,file,mailto,tel,ssh,http,https,ftp,file,mailto,tel,ssh,http,'.
 								'https,ftp,file,mailto,tel,ssh,http,https,ftp,file,mailto,tel,ssh,http,https,ftp,file,mailto,'.
 								'tel,ssh,http,https,ftp,file,mailto,tel,ssh,http,https,ftp,file,mailto,tel,ssh,http,https',
-						'X-Frame-Options HTTP header' => 'SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,'.
-								'SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,'.
-								'SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SA',
-						'Use iframe sandboxing' => true,
-						'Iframe sandboxing exceptions' => 'some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-'.
+						'id:x_frame_header_enabled' => true,
+						'id:x_frame_options' => 'SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN '.
+								'SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN '.
+								'SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SA',
+						'id:iframe_sandboxing_enabled' => true,
+						'id:iframe_sandboxing_exceptions' => 'some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-'.
 								'flag-some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-'.
 								'flag-some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-flag-som',
 						// Communication with Zabbix server.
@@ -334,9 +348,9 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 						'uri_valid_schemes' => 'http,https,ftp,file,mailto,tel,ssh,http,https,ftp,file,mailto,tel,ssh,http,https,'.
 								'ftp,file,mailto,tel,ssh,http,https,ftp,file,mailto,tel,ssh,http,https,ftp,file,mailto,tel,ssh,'.
 						'http,https,ftp,file,mailto,tel,ssh,http,https,ftp,file,mailto,tel,ssh,http,https',
-						'x_frame_options' => 'SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,'.
-								'SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,'.
-								'SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SAMEORIGIN,SA',
+						'x_frame_options' => 'SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN '.
+								'SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN '.
+								'SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SAMEORIGIN SA',
 						'iframe_sandboxing_enabled' => 1,
 						'iframe_sandboxing_exceptions' => 'some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-flag'.
 								'-some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-flag-some-new-flag'.
@@ -350,11 +364,10 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// In period fields maximal valid values in seconds without "s".
+			// #5 In period fields maximal valid values in seconds without "s".
 			[
 				[
-					'expected' => TEST_GOOD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '3600',
 						// Communication with Zabbix server.
@@ -376,11 +389,10 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// In period fields maximal valid values in minutes.
+			// #6 In period fields maximal valid values in minutes.
 			[
 				[
-					'expected' => TEST_GOOD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '60m',
 						// Communication with Zabbix server.
@@ -400,11 +412,10 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Symbol trimming in Login attempts.
+			// #7 Symbol trimming in Login attempts.
 			[
 				[
-					'expected' => TEST_GOOD,
-					'fields' =>  [
+					'fields' => [
 						'Login attempts' => '3M'
 					],
 					'db' => [
@@ -412,18 +423,18 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Invalid empty values.
+			// #8 Invalid empty values.
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						'Group for discovered hosts' => '',
 						'User group for database down message' => '',
 						// Authorization.
 						'Login attempts' => '',
 						'Login blocking interval' => '',
 						// Security.
-						'X-Frame-Options HTTP header' => '',
+						'id:x_frame_options' => '',
 						// Communication with Zabbix server.
 						'Network timeout' => '',
 						'Connection timeout' => '',
@@ -434,7 +445,6 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					'details' => [
 						'Incorrect value for field "login_attempts": value must be no less than "1".',
 						'Incorrect value for field "login_block": a time unit is expected.',
-						'Incorrect value for field "x_frame_options": cannot be empty.',
 						'Incorrect value for field "socket_timeout": a time unit is expected.',
 						'Incorrect value for field "connect_timeout": a time unit is expected.',
 						'Incorrect value for field "media_type_test_timeout": a time unit is expected.',
@@ -443,11 +453,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Invalid string values.
+			// #9 Invalid string values.
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login attempts' => 'text',
 						'Login blocking interval' => 'text',
@@ -469,11 +479,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Invalid special symbol values.
+			// #10 Invalid special symbol values.
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login attempts' => '!@#$%^&*()_+',
 						'Login blocking interval' => '!@#$%^&*()_+',
@@ -495,11 +505,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Invalid zero values.
+			// #11 Invalid zero values.
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login attempts' => 0,
 						'Login blocking interval' => 0,
@@ -521,11 +531,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Invalid zero values in seconds with "s".
+			// #12 Invalid zero values in seconds with "s".
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '0s',
 						// Communication with Zabbix server.
@@ -545,11 +555,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// In period fields minimal invalid time in seconds without "s".
+			// #13 In period fields minimal invalid time in seconds without "s".
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '29'
 					],
@@ -558,11 +568,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// In period fields minimal invalid time in seconds with "s".
+			// #14 In period fields minimal invalid time in seconds with "s".
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '29s'
 					],
@@ -571,11 +581,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// In period fields maximal invalid time in seconds without "s".
+			// #15 In period fields maximal invalid time in seconds without "s".
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login attempts' => 33,
 						'Login blocking interval' => '3601',
@@ -597,11 +607,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Maximal invalid time in seconds with "s".
+			// #16 Maximal invalid time in seconds with "s".
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '3601s',
 						// Communication with Zabbix server.
@@ -621,11 +631,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Maximal invalid time in minutes.
+			// #17 Maximal invalid time in minutes.
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '61m',
 						// Communication with Zabbix server.
@@ -645,11 +655,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Maximal invalid time in hours.
+			// #18 Maximal invalid time in hours.
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '2h',
 						// Communication with Zabbix server.
@@ -669,11 +679,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Maximal invalid time in weeks.
+			// #19 Maximal invalid time in weeks.
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '1w',
 						// Communication with Zabbix server.
@@ -693,11 +703,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Maximal invalid time in Months (Months not supported).
+			// #20 Maximal invalid time in Months (Months not supported).
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '1M',
 						// Communication with Zabbix server.
@@ -717,11 +727,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Maximal invalid time in years (years not supported).
+			// #21 Maximal invalid time in years (years not supported).
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login blocking interval' => '1y',
 						// Communication with Zabbix server.
@@ -741,11 +751,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Maximal invalid values.
+			// #22 Maximal invalid values.
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login attempts' => '99',
 						'Login blocking interval' => '99999999999999999999999999999999',
@@ -767,11 +777,11 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 					]
 				]
 			],
-			// Negative values.
+			// #23 Negative values.
 			[
 				[
 					'expected' => TEST_BAD,
-					'fields' =>  [
+					'fields' => [
 						// Authorization.
 						'Login attempts' => '-1',
 						'Login blocking interval' => '-1',
@@ -789,6 +799,46 @@ class testFormAdministrationGeneralOtherParams extends testFormAdministrationGen
 						'Incorrect value for field "media_type_test_timeout": a time unit is expected.',
 						'Incorrect value for field "script_timeout": a time unit is expected.',
 						'Incorrect value for field "item_test_timeout": a time unit is expected.'
+					]
+				]
+			],
+			// #24 Trimming spaces.
+			[
+				[
+					'trim' => true,
+					'fields' => [
+						'Frontend URL' => '    zabbix.php    ',
+						// Authorization.
+						'Login attempts' => ' 5',
+						'Login blocking interval' => '    32s   ',
+						// Security.
+						'id:uri_valid_schemes' => '   mailto,tel,ssh   ',
+						'id:x_frame_options' => '    SAMEORIGIN    ',
+						'id:iframe_sandboxing_exceptions' => '   test   ',
+						// Communication with Zabbix server.
+						'Network timeout' => '  1m   ',
+						'Connection timeout' => '   3s    ',
+						'Network timeout for media type test' => '    1m    ',
+						'Network timeout for script execution' => '    1m    ',
+						'Network timeout for item test' => '    1m    ',
+						'Network timeout for scheduled report test' => '    1m    '
+					],
+					'db' => [
+						'url' => 'zabbix.php',
+						// Authorization.
+						'login_attempts' => 5,
+						'login_block' => '32s',
+						// Security.
+						'uri_valid_schemes' => 'mailto,tel,ssh',
+						'x_frame_options' => 'SAMEORIGIN',
+						'iframe_sandboxing_exceptions' => 'test',
+						// Communication with Zabbix server.
+						'socket_timeout' => '1m',
+						'connect_timeout' => '3s',
+						'media_type_test_timeout' => '1m',
+						'script_timeout' => '1m',
+						'item_test_timeout' => '1m',
+						'report_test_timeout' => '1m'
 					]
 				]
 			]

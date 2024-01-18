@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -2213,6 +2213,7 @@ typedef struct
 	char			*ip;
 	char			*dns;
 	int			modified;
+	int			found;
 }
 zbx_dc_if_update_t;
 
@@ -2404,7 +2405,7 @@ static void	DCsync_interfaces(zbx_dbsync_t *sync, zbx_uint64_t revision)
 			if (SUCCEED == dc_strpool_replace(found, &interface->dns, update->dns))
 				update->modified = 1;
 		}
-
+		update->found = found;
 		zbx_vector_dc_if_update_ptr_append(&updates, update);
 
 		if (0 == found)
@@ -2440,10 +2441,10 @@ static void	DCsync_interfaces(zbx_dbsync_t *sync, zbx_uint64_t revision)
 		{
 			dc_if_update_substitute_host_macros(update, update->host);
 
-			if (SUCCEED == dc_strpool_replace(found, &update->interface->ip, update->ip))
+			if (SUCCEED == dc_strpool_replace(update->found, &update->interface->ip, update->ip))
 				update->modified = 1;
 
-			if (SUCCEED == dc_strpool_replace(found, &update->interface->dns, update->dns))
+			if (SUCCEED == dc_strpool_replace(update->found, &update->interface->dns, update->dns))
 				update->modified = 1;
 		}
 
@@ -9542,7 +9543,8 @@ static void	dc_preproc_sync_preprocitem(zbx_pp_item_preproc_t *preproc, zbx_uint
 		preproc->steps[i].error_handler = op->error_handler;
 
 		preproc->steps[i].params = dc_expand_user_macros_dyn(op->params, &hostid, 1, ZBX_MACRO_ENV_NONSECURE);
-		preproc->steps[i].error_handler_params = zbx_strdup(NULL, op->error_handler_params);
+		preproc->steps[i].error_handler_params = dc_expand_user_macros_dyn(op->error_handler_params, &hostid, 1,
+				ZBX_MACRO_ENV_NONSECURE);
 	}
 
 	preproc->steps_num = preprocitem->preproc_ops.values_num;
