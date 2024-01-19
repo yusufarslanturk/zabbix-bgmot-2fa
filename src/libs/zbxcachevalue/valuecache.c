@@ -2914,7 +2914,3 @@ void	zbx_vc_add_new_items(const zbx_vector_uint64_pair_t *items)
 
 	UNLOCK_CACHE;
 }
-
-#ifdef HAVE_TESTS
-#	include "../../../tests/libs/zbxdbcache/valuecache_test.c"
-#endif
