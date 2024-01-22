@@ -7256,10 +7256,7 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 	FINISH_SYNC;
 
 	if (NULL != pnew_items)
-	{
 		dc_add_new_items_to_valuecache(pnew_items);
-		zbx_vector_dc_item_ptr_destroy(pnew_items);
-	}
 
 	dc_flush_history();	/* misconfigured items generate pseudo-historic values to become notsupported */
 
@@ -7850,6 +7847,9 @@ clean:
 
 	if (ZBX_DBSYNC_INIT == mode)
 		zbx_hashset_destroy(&trend_queue);
+
+	if (NULL != pnew_items)
+		zbx_vector_dc_item_ptr_destroy(pnew_items);
 
 	zbx_dbsync_env_clear();
 
