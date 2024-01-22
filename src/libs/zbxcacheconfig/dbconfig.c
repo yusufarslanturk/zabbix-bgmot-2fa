@@ -6926,7 +6926,7 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 	{
 		changelog_sync_mode = ZBX_DBSYNC_INIT;
 	}
-	else
+	else if (0 != (program_type & ZBX_PROGRAM_TYPE_SERVER))
 	{
 		zbx_vector_dc_item_ptr_create(&new_items);
 		pnew_items = &new_items;
