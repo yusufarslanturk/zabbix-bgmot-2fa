@@ -185,6 +185,7 @@ static int	preproc_snmp_walk_to_json_params(const char *params, zbx_vector_snmp_
 			parsed_param.field_name = zbx_strdup(NULL, field_name);
 			parsed_param.format_flag = format_flag;
 			parsed_param.oid_prefix = oid_prefix;
+			oid_prefix = NULL;
 
 			zbx_vector_snmp_walk_to_json_param_append(parsed_params, parsed_param);
 		}
@@ -207,13 +208,10 @@ static int	preproc_snmp_walk_to_json_params(const char *params, zbx_vector_snmp_
 	}
 
 	zbx_free(params2);
+	zbx_free(oid_prefix);
 
 	if (0 != idx % 3)
-	{
-		zbx_free(oid_prefix);
-
 		return FAIL;
-	}
 
 	return SUCCEED;
 }
