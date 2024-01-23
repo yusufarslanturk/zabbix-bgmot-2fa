@@ -920,12 +920,6 @@ static int	proxy_add_hist_data(struct zbx_json *j, int records_num, const DC_ITE
 		if (HOST_STATUS_MONITORED != dc_items[i].host.status)
 			continue;
 
-		if (PROXY_HISTORY_FLAG_NOVALUE == (hd->flags & PROXY_HISTORY_MASK_NOVALUE))
-		{
-			if (SUCCEED != zbx_is_counted_in_item_queue(dc_items[i].type, dc_items[i].key_orig))
-				continue;
-		}
-
 		if (0 == records_num)
 			zbx_json_addarray(j, ZBX_PROTO_TAG_HISTORY_DATA);
 
