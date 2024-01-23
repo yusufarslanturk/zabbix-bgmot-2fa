@@ -4160,10 +4160,6 @@ void	dc_add_history(zbx_uint64_t itemid, unsigned char item_value_type, unsigned
 	if (NULL == result)
 		return;
 
-	/* allow proxy to send timestamps of empty (throttled etc) values to update nextchecks for queue */
-	if (!ZBX_ISSET_VALUE(result) && !ZBX_ISSET_META(result) && 0 != (program_type & ZBX_PROGRAM_TYPE_SERVER))
-		return;
-
 	value_flags = 0;
 
 	if (!ZBX_ISSET_VALUE(result))
@@ -4173,7 +4169,7 @@ void	dc_add_history(zbx_uint64_t itemid, unsigned char item_value_type, unsigned
 		value_flags |= ZBX_DC_FLAG_META;
 
 	/* Add data to the local history cache if:                                           */
-	/*   1) the NOVALUE flag is set (data contains either meta information or timestamp) */
+	/*   1) the NOVALUE flag is set                                                      */
 	/*   2) the NOVALUE flag is not set and value conversion succeeded                   */
 
 	if (0 == (value_flags & ZBX_DC_FLAG_NOVALUE))
