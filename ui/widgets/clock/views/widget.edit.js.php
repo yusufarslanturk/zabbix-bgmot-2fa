@@ -44,10 +44,7 @@ window.widget_clock_form = new class {
 			});
 		}
 
-		this._time_type.addEventListener('change', () => {
-			ZABBIX.Dashboard.reloadWidgetProperties();
-			this.updateForm();
-		});
+		this._time_type.addEventListener('change', () => this.updateForm());
 
 		for (const checkbox of this._clock_type.querySelectorAll('input')) {
 			checkbox.addEventListener('change', () => this.updateForm());
@@ -72,6 +69,22 @@ window.widget_clock_form = new class {
 	}
 
 	updateForm() {
+		this._form.querySelectorAll('.js-row-itemid').forEach(element => {
+			element.style.display = this._time_type.value == <?= TIME_TYPE_HOST ?> ? '' : 'none'
+		});
+
+		$('#itemid').multiSelect(this._time_type.value != <?= TIME_TYPE_HOST ?> ? 'disable' : 'enable');
+
+		if (this._form.querySelector('[name="itemid"]') !== null && this._time_type.value != <?= TIME_TYPE_HOST ?>) {
+			this._form.querySelector('[name="itemid"]').disabled = 'true';
+		}
+
+		const ms_itemid_input = this._form.querySelector('[name="itemid"]');
+
+		if (ms_itemid_input !== null && this._time_type.value !== <?= TIME_TYPE_HOST ?>) {
+			ms_itemid_input.disabled = true;
+		}
+
 		const is_digital = this._clock_type.querySelector('input:checked').value == <?= Widget::TYPE_DIGITAL ?>;
 
 		const show_date_row = is_digital && this._advanced_configuration.checked && this._show_date.checked;
