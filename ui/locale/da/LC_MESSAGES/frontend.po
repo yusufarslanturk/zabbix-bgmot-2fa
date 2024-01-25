@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-10-02 11:40+0000\n"
+"PO-Revision-Date: 2024-01-15 21:14+0000\n"
 "Last-Translator: Kim Anthonisen <kim@anthonisen.dk>\n"
 "Language-Team: none\n"
 "Language: da\n"
@@ -1880,7 +1880,7 @@ msgstr "Blå"
 #: include/views/configuration.item.edit.php:458
 #: include/views/configuration.item.prototype.edit.php:436
 msgid "Body"
-msgstr "Body"
+msgstr ""
 
 #: app/views/popup.httpstep.php:162
 #: include/views/configuration.host.discovery.edit.php:402
@@ -1945,7 +1945,7 @@ msgstr "Bring frem"
 
 #: jsLoader.php:275
 msgid "Bring to front"
-msgstr "Bring forrest"
+msgstr "Flyt forrest"
 
 #: include/locales.inc.php:34
 msgid "Bulgarian (bg_BG)"
