@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -104,8 +104,7 @@ class COverlayDialogElement extends CElement {
 			$this->getFooter()->query('button:Cancel')->one()->click();
 		}
 		else {
-			$selector = 'xpath:.//button[@class="overlay-close-btn"]|.//button[@class="btn-overlay-close"]';
-			$this->query($selector)->one()->click();
+			$this->query('class:overlay-close-btn')->one()->click();
 		}
 
 		if ($count === 1) {

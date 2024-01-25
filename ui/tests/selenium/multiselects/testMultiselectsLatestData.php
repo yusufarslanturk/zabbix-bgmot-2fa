@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -21,6 +21,9 @@
 
 require_once dirname(__FILE__).'/../common/testMultiselectDialogs.php';
 
+/**
+ * Test for checking that multiselects' dialogs do not contain any errors before and after filling.
+ */
 class testMultiselectsLatestData extends testMultiselectDialogs {
 
 	public static function getCheckDialogsData() {

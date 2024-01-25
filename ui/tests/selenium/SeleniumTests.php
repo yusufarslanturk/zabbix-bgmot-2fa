@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -70,6 +70,7 @@ require_once dirname(__FILE__).'/dashboard/testDashboardViewMode.php';
 require_once dirname(__FILE__).'/dashboard/testFormTemplateDashboards.php';
 require_once dirname(__FILE__).'/dashboard/testPageDashboardList.php';
 require_once dirname(__FILE__).'/dashboard/testPageDashboardWidgets.php';
+require_once dirname(__FILE__).'/dashboard/testPageHostDashboards.php';
 require_once dirname(__FILE__).'/dashboard/testPageTemplateDashboards.php';
 
 // Event correlation.
@@ -86,6 +87,7 @@ require_once dirname(__FILE__).'/geomaps/testFormAdministrationGeneralGeomaps.ph
 require_once dirname(__FILE__).'/geomaps/testGeomapWidgetScreenshots.php';
 
 // Graphs.
+require_once dirname(__FILE__).'/graphs/testDataDisplayInGraphs.php';
 require_once dirname(__FILE__).'/graphs/testFormGraph.php';
 require_once dirname(__FILE__).'/graphs/testFormGraphPrototype.php';
 require_once dirname(__FILE__).'/graphs/testGraphAxis.php';
@@ -368,6 +370,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testFormTemplateDashboards');
 		$suite->addTestSuite('testPageDashboardList');
 		$suite->addTestSuite('testPageDashboardWidgets');
+		$suite->addTestSuite('testPageHostDashboards');
 		$suite->addTestSuite('testPageTemplateDashboards');
 
 		// Event correlation.
@@ -384,6 +387,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testGeomapWidgetScreenshots');
 
 		// Graphs.
+		$suite->addTestSuite('testDataDisplayInGraphs');
 		$suite->addTestSuite('testFormGraph');
 		$suite->addTestSuite('testFormGraphPrototype');
 		$suite->addTestSuite('testGraphAxis');

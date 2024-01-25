@@ -39,7 +39,7 @@ zabbix_export:
             var request = new HttpRequest();
             
             request.addHeader('X-Cisco-Meraki-API-Key:' + params.token);
-            request.addHeader('User-Agent: ZabbixServer/1.0 Zabbix');
+            request.addHeader('User-Agent: ZabbixServer/1.1 Zabbix');
             
             var response,
                 error_msg = '',
@@ -122,7 +122,7 @@ zabbix_export:
                 'error': error_msg.toString()
             });
           description: 'Item for gathering all the organizations and devices from Meraki API.'
-          timeout: 60s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           parameters:
             - name: httpproxy
               value: '{$MERAKI.HTTP_PROXY}'
@@ -214,7 +214,6 @@ zabbix_export:
                   value: '{#SERIAL}'
           master_item:
             key: meraki.get.data
-          timeout: 30s
           lld_macro_paths:
             - lld_macro: '{#MAC}'
               path: $.mac
@@ -289,6 +288,9 @@ zabbix_export:
         - macro: '{$MERAKI.API.URL}'
           value: api.meraki.com/api/v1
           description: 'Cisco Meraki dashboard API URL, e.g., api.meraki.com/api/v1'
+        - macro: '{$MERAKI.DATA.TIMEOUT}'
+          value: '60'
+          description: 'Response timeout for an API.'
         - macro: '{$MERAKI.DEVICE.NAME.MATCHES}'
           value: .+
           description: 'This macro is used in devices discovery. Can be overridden on the host or linked template level.'
@@ -323,6 +325,30 @@ zabbix_export:
         - name: Templates/Applications
         - name: 'Templates/Network devices'
       items:
+        - uuid: 0c97a8fcad764133b4e7c35d0134665c
+          name: 'Meraki: Get status'
+          type: HTTP_AGENT
+          key: meraki.device.get.status
+          delay: '{$MERAKI.GET.STATUS.INTERVAL}'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: 'Item for gathering device status from Meraki API.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0]'
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
+          url: 'https://{$MERAKI.API.URL}/organizations/{$ORGANIZATION_ID}/devices/statuses?serials[]={$SERIAL}'
+          http_proxy: '{$MERAKI.HTTP_PROXY}'
+          headers:
+            - name: X-Cisco-Meraki-API-Key
+              value: '{$MERAKI.TOKEN}'
+            - name: User-Agent
+              value: 'ZabbixServer/1.1 Zabbix'
+          tags:
+            - tag: component
+              value: raw
         - uuid: 2280b9212c474d99835ec1334ff780eb
           name: 'Meraki: public IP'
           type: DEPENDENT
@@ -338,9 +364,9 @@ zabbix_export:
           preprocessing:
             - type: JSONPATH
               parameters:
-                - '$.device[0].publicIp'
+                - $.publicIp
           master_item:
-            key: meraki.get.device
+            key: meraki.device.get.status
           tags:
             - tag: component
               value: network
@@ -359,7 +385,7 @@ zabbix_export:
           preprocessing:
             - type: JSONPATH
               parameters:
-                - '$.device[0].status'
+                - $.status
             - type: JAVASCRIPT
               parameters:
                 - |
@@ -374,7 +400,7 @@ zabbix_export:
                           return 10
                   }
           master_item:
-            key: meraki.get.device
+            key: meraki.device.get.status
           tags:
             - tag: component
               value: health
@@ -400,7 +426,7 @@ zabbix_export:
             var request = new HttpRequest();
             
             request.addHeader('X-Cisco-Meraki-API-Key:' + params.token);
-            request.addHeader('User-Agent: ZabbixServer/1.0 Zabbix');
+            request.addHeader('User-Agent: ZabbixServer/1.1 Zabbix');
             
             var response,
                 error_msg = '',
@@ -471,7 +497,6 @@ zabbix_export:
                     throw 'Incorrect "timespan" parameter given: ' + timespan + ' Must be between 1 and 86400 seconds.';
                 }
             
-                device = getHttpData(params.url + 'organizations/' + encodeURIComponent(params.organizationId) + '/devices/statuses?serials[]=' + encodeURIComponent(params.serial));
                 uplinksLL = getHttpData(params.url + 'organizations/' + encodeURIComponent(params.organizationId) + '/devices/uplinksLossAndLatency?timespan=' + timespan);
             
                 if (uplinksLL.length > 0) {
@@ -485,12 +510,11 @@ zabbix_export:
             };
             
             return JSON.stringify({
-                'device': device,
                 'uplinksLL': uplinksLL,
                 'error': error_msg.toString()
             });
           description: 'Item for gathering device data from Meraki API.'
-          timeout: 60s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           parameters:
             - name: httpproxy
               value: '{$MERAKI.HTTP_PROXY}'
@@ -658,7 +682,6 @@ zabbix_export:
                     key: 'meraki.device.loss.pct[{#IP},{#UPLINK}]'
           master_item:
             key: meraki.get.device
-          timeout: 30s
           lld_macro_paths:
             - lld_macro: '{#IP}'
               path: $.ip
@@ -681,6 +704,9 @@ zabbix_export:
         - macro: '{$MERAKI.API.URL}'
           value: api.meraki.com/api/v1
           description: 'Cisco Meraki dashboard API URL, e.g., api.meraki.com/api/v1'
+        - macro: '{$MERAKI.DATA.TIMEOUT}'
+          value: '60'
+          description: 'Response timeout for an API.'
         - macro: '{$MERAKI.DEVICE.LATENCY}'
           value: '0.15'
           description: 'Devices uplink latency threshold, in seconds.'
@@ -699,6 +725,9 @@ zabbix_export:
         - macro: '{$MERAKI.DEVICE.UPLINK.NOT_MATCHES}'
           value: ^null$
           description: 'This macro is used in loss and latency checks discovery. Can be overridden on the host or linked template level.'
+        - macro: '{$MERAKI.GET.STATUS.INTERVAL}'
+          value: '300'
+          description: 'Update interval for get status item.'
         - macro: '{$MERAKI.HTTP_PROXY}'
           description: 'HTTP proxy for API requests. You can specify it using the format [protocol://][username[:password]@]proxy.example.com[:port]. See documentation at https://www.zabbix.com/documentation/6.4/manual/config/items/itemtypes/http'
         - macro: '{$MERAKI.TOKEN}'
@@ -788,14 +817,14 @@ zabbix_export:
           trends: '0'
           value_type: TEXT
           description: 'Item for adaptive policy aggregate statistics for the organization.'
-          timeout: 30s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/adaptivePolicy/overview'
           http_proxy: '{$MERAKI.HTTP_PROXY}'
           headers:
             - name: X-Cisco-Meraki-API-Key
               value: '{$MERAKI.TOKEN}'
             - name: User-Agent
-              value: 'ZabbixServer/1.0 Zabbix'
+              value: 'ZabbixServer/1.1 Zabbix'
           tags:
             - tag: component
               value: raw
@@ -808,12 +837,14 @@ zabbix_export:
           trends: '0'
           value_type: TEXT
           description: 'Get list of the dashboard administrators in this organization.'
-          timeout: 30s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/admins'
           http_proxy: '{$MERAKI.HTTP_PROXY}'
           headers:
             - name: X-Cisco-Meraki-API-Key
               value: '{$MERAKI.TOKEN}'
+            - name: User-Agent
+              value: 'ZabbixServer/1.1 Zabbix'
           tags:
             - tag: component
               value: raw
@@ -830,14 +861,14 @@ zabbix_export:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
                 - 2h
-          timeout: 30s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/configurationChanges?timespan={$MERAKI.CONFIG.CHANGE.TIMESPAN}'
           http_proxy: '{$MERAKI.HTTP_PROXY}'
           headers:
             - name: X-Cisco-Meraki-API-Key
               value: '{$MERAKI.TOKEN}'
             - name: User-Agent
-              value: 'ZabbixServer/1.0 Zabbix'
+              value: 'ZabbixServer/1.1 Zabbix'
           tags:
             - tag: component
               value: log
@@ -858,14 +889,14 @@ zabbix_export:
           trends: '0'
           value_type: TEXT
           description: 'Return overview of the license state for the organization.'
-          timeout: 30s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/licenses/overview'
           http_proxy: '{$MERAKI.HTTP_PROXY}'
           headers:
             - name: X-Cisco-Meraki-API-Key
               value: '{$MERAKI.TOKEN}'
             - name: User-Agent
-              value: 'ZabbixServer/1.0 Zabbix'
+              value: 'ZabbixServer/1.1 Zabbix'
           tags:
             - tag: component
               value: raw
@@ -883,7 +914,7 @@ zabbix_export:
             var request = new HttpRequest();
             
             request.addHeader('X-Cisco-Meraki-API-Key:' + params.token);
-            request.addHeader('User-Agent: ZabbixServer/1.0 Zabbix');
+            request.addHeader('User-Agent: ZabbixServer/1.1 Zabbix');
             
             var response,
                 error_msg = '',
@@ -982,7 +1013,7 @@ zabbix_export:
                 'error': error_msg.toString()
             });
           description: 'Return list of the licenses for the organization.'
-          timeout: 30s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           parameters:
             - name: httpproxy
               value: '{$MERAKI.HTTP_PROXY}'
@@ -1004,12 +1035,14 @@ zabbix_export:
           trends: '0'
           value_type: TEXT
           description: 'Return the login security settings for the organization.'
-          timeout: 30s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/loginSecurity'
           http_proxy: '{$MERAKI.HTTP_PROXY}'
           headers:
             - name: X-Cisco-Meraki-API-Key
               value: '{$MERAKI.TOKEN}'
+            - name: User-Agent
+              value: 'ZabbixServer/1.1 Zabbix'
           tags:
             - tag: component
               value: raw
@@ -1027,7 +1060,7 @@ zabbix_export:
             var request = new HttpRequest();
             
             request.addHeader('X-Cisco-Meraki-API-Key:' + params.token);
-            request.addHeader('User-Agent: ZabbixServer/1.0 Zabbix');
+            request.addHeader('User-Agent: ZabbixServer/1.1 Zabbix');
             
             var response,
                 error_msg = '',
@@ -1122,7 +1155,7 @@ zabbix_export:
                 'error': error_msg.toString()
             });
           description: 'Item for gathering all the networks of organization from Meraki API.'
-          timeout: 30s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           parameters:
             - name: httpproxy
               value: '{$MERAKI.HTTP_PROXY}'
@@ -1180,12 +1213,14 @@ zabbix_export:
             - type: BOOL_TO_DECIMAL
               parameters:
                 - ''
-          timeout: 30s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/saml'
           http_proxy: '{$MERAKI.HTTP_PROXY}'
           headers:
             - name: X-Cisco-Meraki-API-Key
               value: '{$MERAKI.TOKEN}'
+            - name: User-Agent
+              value: 'ZabbixServer/1.1 Zabbix'
           tags:
             - tag: component
               value: saml
@@ -1198,12 +1233,14 @@ zabbix_export:
           trends: '0'
           value_type: TEXT
           description: 'Get list of the SAML roles for this organization.'
-          timeout: 30s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/samlRoles'
           http_proxy: '{$MERAKI.HTTP_PROXY}'
           headers:
             - name: X-Cisco-Meraki-API-Key
               value: '{$MERAKI.TOKEN}'
+            - name: User-Agent
+              value: 'ZabbixServer/1.1 Zabbix'
           tags:
             - tag: component
               value: raw
@@ -1221,7 +1258,7 @@ zabbix_export:
             var request = new HttpRequest();
             
             request.addHeader('X-Cisco-Meraki-API-Key:' + params.token);
-            request.addHeader('User-Agent: ZabbixServer/1.0 Zabbix');
+            request.addHeader('User-Agent: ZabbixServer/1.1 Zabbix');
             
             var response,
                 error_msg = '',
@@ -1340,7 +1377,7 @@ zabbix_export:
                 'error': error_msg.toString()
             });
           description: 'Item for gathering all the VPN stats of the organization.'
-          timeout: 30s
+          timeout: '{$MERAKI.DATA.TIMEOUT}'
           parameters:
             - name: httpproxy
               value: '{$MERAKI.HTTP_PROXY}'
@@ -2112,7 +2149,6 @@ zabbix_export:
                   value: '{#NETWORK.NAME}'
           master_item:
             key: meraki.get.networks
-          timeout: 30s
           lld_macro_paths:
             - lld_macro: '{#NETWORK.ID}'
               path: $.id
@@ -2316,7 +2352,6 @@ zabbix_export:
                       value: availability
           master_item:
             key: meraki.get.networks
-          timeout: 30s
           lld_macro_paths:
             - lld_macro: '{#INTERFACE}'
               path: $.interface
@@ -2666,7 +2701,6 @@ zabbix_export:
                     key: 'meraki.vpn.stat.loss.min[{#NETWORK.ID}, {#SENDER.UPLINK}, {#PEER.NETWORK.ID}, {#RECEIVER.UPLINK}]'
           master_item:
             key: meraki.get.vpn.stats
-          timeout: 30s
           lld_macro_paths:
             - lld_macro: '{#NETWORK.ID}'
               path: $.networkId
@@ -2757,6 +2791,7 @@ zabbix_export:
                 - type: JSONPATH
                   parameters:
                     - $.merakiVpnPeers..networkId.first()
+                  error_handler: DISCARD_VALUE
               master_item:
                 key: 'meraki.vpn.statuses.raw[{#NETWORK.ID}, {#NETWORK.NAME}]'
               tags:
@@ -2775,6 +2810,7 @@ zabbix_export:
                 - type: JSONPATH
                   parameters:
                     - $.merakiVpnPeers..networkName.first()
+                  error_handler: DISCARD_VALUE
               master_item:
                 key: 'meraki.vpn.statuses.raw[{#NETWORK.ID}, {#NETWORK.NAME}]'
               tags:
@@ -2793,6 +2829,7 @@ zabbix_export:
                 - type: JSONPATH
                   parameters:
                     - $.merakiVpnPeers..reachability.first()
+                  error_handler: DISCARD_VALUE
               master_item:
                 key: 'meraki.vpn.statuses.raw[{#NETWORK.ID}, {#NETWORK.NAME}]'
               tags:
@@ -2875,7 +2912,6 @@ zabbix_export:
                   value: vpn
           master_item:
             key: meraki.get.vpn.stats
-          timeout: 30s
           lld_macro_paths:
             - lld_macro: '{#NETWORK.ID}'
               path: $.networkId
@@ -2909,6 +2945,9 @@ zabbix_export:
         - macro: '{$MERAKI.CONFIG.CHANGE.TIMESPAN}'
           value: '1200'
           description: 'Timespan in seconds for gathering configuration change log. Used in the metric configuration and in the URL query.'
+        - macro: '{$MERAKI.DATA.TIMEOUT}'
+          value: '60'
+          description: 'Response timeout for an API.'
         - macro: '{$MERAKI.HTTP_PROXY}'
           description: 'HTTP proxy for API requests. You can specify it using the format [protocol://][username[:password]@]proxy.example.com[:port]. See documentation at https://www.zabbix.com/documentation/6.4/manual/config/items/itemtypes/http'
         - macro: '{$MERAKI.LICENSE.EXPIRE}'
