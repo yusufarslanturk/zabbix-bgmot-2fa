@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -24,10 +24,7 @@ require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 require_once dirname(__FILE__).'/../common/testWidgets.php';
 
-
 /**
- * @dataSource AllItemValueTypes
- *
  * @backup widget, profiles
  */
 class testDashboardGraphPrototypeWidget extends testWidgets {
@@ -39,7 +36,7 @@ class testDashboardGraphPrototypeWidget extends testWidgets {
 	 */
 	public function getBehaviors() {
 		return [
-			CMessageBehavior::class,
+			'class' => CMessageBehavior::class,
 			CTableBehavior::class
 		];
 	}
@@ -506,7 +503,7 @@ class testDashboardGraphPrototypeWidget extends testWidgets {
 	}
 
 	/**
-	 * Test function for assuring that binary items are not available in Graph prototype widget.
+	 * Test function for assuring that specific items are available in Graph prototype widget.
 	 */
 	public function testDashboardGraphPrototypeWidget_CheckAvailableItems() {
 		$url = 'zabbix.php?action=dashboard.view&dashboardid='.self::DASHBOARD_ID;

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@ require_once dirname(__FILE__).'/../../include/helpers/CDataHelper.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
 require_once dirname(__FILE__).'/../common/testWidgets.php';
-
 
 /**
  * @backup widget, profiles
@@ -254,7 +253,7 @@ class testDashboardClockWidget extends testWidgets {
 				->filter(new CElementFilter(CElementFilter::CLICKABLE))->count()
 		);
 
-		// Check fileds' visibility depending on Analog or Digital clock type.
+		// Check fields' visibility depending on Analog or Digital clock type.
 		foreach (['Analog' => false, 'Digital' => true] as $type => $status) {
 			$form->fill(['Clock type' => $type]);
 
@@ -1182,7 +1181,7 @@ class testDashboardClockWidget extends testWidgets {
 	}
 
 	/**
-	 * Check if binary items are not available for Clock widget.
+	 * Check if specific item types are only available for Clock widget.
 	 */
 	public function testDashboardClockWidget_CheckAvailableItems() {
 		$url = 'zabbix.php?action=dashboard.view&dashboardid='.self::$dashboardid['Dashboard for updating clock widgets'];

@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-10-27 13:46+0000\n"
-"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"PO-Revision-Date: 2023-12-06 07:05+0000\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: none\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormSlaReport.php:104
 #, c-format
 msgid "\"%1$s\" date must be less than \"%2$s\" date."
-msgstr ""
+msgstr "\"%1$s\" თარიღი \"%2$s\" თარიღზე მცირე უნდა იყოს."
 
 #: include/classes/db/MysqlDbBackend.php:70
 #: include/classes/db/OracleDbBackend.php:142
@@ -50,7 +50,7 @@ msgstr "\"%1$s\" მოსალოდნელია"
 #: include/classes/api/services/CReport.php:636
 #, c-format
 msgid "\"%1$s\" must be an empty string or greater than \"%2$s\"."
-msgstr ""
+msgstr "\"%1$s\" ცარიელი სტრიქონი, ან \"%2$s\"-ზე მეტი უნდა იყოს."
 
 #: include/classes/api/services/CItemGeneral.php:1399
 #, c-format
@@ -81,7 +81,7 @@ msgstr "$.ბილიკი.კვანძამდე"
 #: include/classes/api/services/CDRule.php:556
 #, c-format
 msgid "%1$d characters exceeds maximum length of %2$d characters"
-msgstr ""
+msgstr "%1$d სიმბოლო დასაშვებ მაქსიმუმს, %2$d სიმბოლოს სცდება"
 
 #: include/func.inc.php:488
 #, c-format
@@ -99,7 +99,7 @@ msgstr ""
 #, c-format
 msgid "%1$d of %3$d%2$s problem is shown"
 msgid_plural "%1$d of %3$d%2$s problems are shown"
-msgstr[0] ""
+msgstr[0] "ნაჩვენებია %1$d პრობლემა %3$d%2$s-დან"
 
 #: app/controllers/CControllerPopupAcknowledgeEdit.php:117
 #, c-format
@@ -192,7 +192,17 @@ msgstr[0] "%1$s წუთი"
 #, c-format
 msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
-msgstr[0] ""
+msgstr[0] "%1$s ელემენტი %2$s-დან პრობლემურ მდგომარეობაშია"
+
+#: app/views/administration.miscconfig.edit.php:127
+#, c-format
+msgid "%1$s or %2$s - allows the page to be displayed only in a frame on the same origin as the page itself"
+msgstr ""
+
+#: app/views/administration.miscconfig.edit.php:130
+#, c-format
+msgid "%1$s or %2$s - prevents the page from being displayed in a frame, regardless of the site attempting to do so"
+msgstr ""
 
 #: jsLoader.php:348
 #, c-format
@@ -274,7 +284,7 @@ msgstr "%1$s: %2$s"
 #: include/classes/graph/CSvgGraph.php:1262
 #, c-format
 msgid "%1$sth percentile: %2$s"
-msgstr ""
+msgstr "%1$s-ე პროცენტი: %2$s"
 
 #: include/func.inc.php:1947
 #, c-format
@@ -325,7 +335,7 @@ msgstr "(პროქსის გარეშე)"
 
 #: include/classes/setup/CSetupWizard.php:494
 msgid "0 - use default port"
-msgstr "0 - ნაგულისხმევი პორტის გამოყენება"
+msgstr "0 - ნაგულისხმები პორტის გამოყენება"
 
 #: include/triggers.inc.php:1594
 msgid "0 or 1"
@@ -397,16 +407,16 @@ msgstr "<ხელით>"
 #: include/views/js/item.preprocessing.js.php:218
 #: include/views/js/item.preprocessing.js.php:227
 msgid "<metric name>{<label name>=\"<label value>\", ...} == <value>"
-msgstr ""
+msgstr "<metric name>{<label name>=\"<label value>\", ...} == <value>"
 
 #: app/views/administration.script.edit.php:111
 msgid "<sub-menu/sub-menu/...>"
-msgstr ""
+msgstr "<sub-menu/sub-menu/...>"
 
 #: jsLoader.php:185
 msgctxt "abbreviation of severity level"
 msgid "A"
-msgstr ""
+msgstr "A"
 
 #: include/classes/widgets/CWidgetHelper.php:952
 msgid "ADD OVERRIDE"
@@ -680,7 +690,7 @@ msgstr "მოქმედება განახლდა"
 #: include/classes/api/services/CDashboardGeneral.php:672
 #, c-format
 msgid "Action with ID \"%1$s\" is not available."
-msgstr ""
+msgstr "ქმედება ID-ით \"%1$s\" ხელმისაწვდომი არაა."
 
 #: app/views/administration.mediatype.edit.php:283
 #: app/views/configuration.discovery.edit.php:80
@@ -1096,7 +1106,7 @@ msgstr "აგენტის ინტერფეისები"
 
 #: include/classes/data/CItemData.php:822
 msgid "Agent variant check. Returns 1 - for Zabbix agent; 2 - for Zabbix agent 2"
-msgstr "აგენტის ვარიანტის შემოწმება. აბრუნებს 1 - Zabbix აგენტისთვის; 2 - Zabbix აგენტისთვის 2"
+msgstr ""
 
 #: include/classes/widgets/CWidgetHelper.php:1317
 msgid "Aggregate"
@@ -1345,7 +1355,7 @@ msgstr "ნებისმიერი"
 #: app/views/js/administration.regex.edit.js.php:164
 #: include/classes/helpers/CRegexHelper.php:27
 msgid "Any character string included"
-msgstr ""
+msgstr "ნებისმიერი ჩასმული სტრიქონი"
 
 #: include/classes/core/CJsonRpc.php:196
 msgid "Application error."
@@ -1373,7 +1383,7 @@ msgstr ""
 
 #: app/partials/configuration.templategroup.edit.html.php:47
 msgid "Apply permissions to all subgroups"
-msgstr ""
+msgstr "წვდომების გადატარება ყველა ქვეჯგუფზე"
 
 #: include/views/configuration.maintenance.list.php:71
 #: include/views/configuration.maintenance.list.php:105
@@ -1463,11 +1473,11 @@ msgstr "დრო (სთ:წთ)"
 
 #: app/controllers/CControllerAuthenticationUpdate.php:125
 msgid "At least one LDAP server must exist."
-msgstr ""
+msgstr "უნდა არსებობდეს ერთი LDAP სერვერი მაინც."
 
 #: app/views/administration.userrole.edit.php:117
 msgid "At least one UI element must be checked."
-msgstr ""
+msgstr "საჭიროა, ერთი ინტერფეისის ელემენტი მაინც ჩართოთ."
 
 #: include/classes/api/services/CRole.php:487
 #, c-format
@@ -1558,7 +1568,7 @@ msgstr ""
 
 #: app/views/administration.geomaps.edit.php:86
 msgid "Attribution text"
-msgstr ""
+msgstr "ავტორობის ტექსტი"
 
 #: app/views/administration.housekeeping.edit.php:179
 #: include/classes/helpers/CMenuHelper.php:148
@@ -1614,7 +1624,7 @@ msgstr "ავთენტიფიკაციის ალგორითმ�
 #: include/classes/api/services/CUser.php:2022
 #, c-format
 msgid "Authentication failed: %1$s."
-msgstr ""
+msgstr "ავთენტიკაცია ჩავარდა: %1$s."
 
 #: app/views/administration.script.edit.php:131
 #: app/views/popup.massupdate.item.php:169
@@ -1639,7 +1649,7 @@ msgstr "ავთენტიფიკაციის ოქმი"
 #: app/controllers/CControllerAuthenticationUpdate.php:395
 #: app/controllers/CControllerAuthenticationUpdate.php:403
 msgid "Authentication settings updated"
-msgstr ""
+msgstr "ავთენტიფიკაციის პარამეტრები განახლდა"
 
 #: app/views/administration.module.edit.php:40
 #: app/views/administration.module.list.php:77
@@ -1708,7 +1718,7 @@ msgstr "ავტორეგისტრაციის ქმედებე�
 
 #: app/views/administration.housekeeping.edit.php:87
 msgid "Autoregistration data storage period"
-msgstr ""
+msgstr "ავტორეგისტრაციის მონაცემების შენახვის შუალედი"
 
 #: app/partials/monitoring.host.view.html.php:36
 #: app/views/configuration.host.list.php:196
@@ -1730,7 +1740,7 @@ msgstr "ხელმისაწვდომია"
 #: app/views/monitoring.widget.hostavail.view.php:37
 msgctxt "compact table header"
 msgid "Available"
-msgstr "ხელმისაწვდომია"
+msgstr "ხელმისაწვდომი"
 
 #: app/views/administration.trigdisplay.edit.php:128 jsLoader.php:179
 msgid "Average"
@@ -1754,7 +1764,7 @@ msgstr ""
 
 #: app/views/administration.authentication.edit.php:93
 msgid "Avoid easy-to-guess passwords"
-msgstr ""
+msgstr "ადვილად მისახვედრი პაროლების თავიდან აცილება"
 
 #: include/classes/widgets/views/widget.svggraph.form.view.php:307
 msgid "Axes"
@@ -1803,11 +1813,11 @@ msgstr "ჩვეულებრივი"
 
 #: app/views/connector.edit.php:136
 msgid "Bearer"
-msgstr ""
+msgstr "Bearer"
 
 #: app/views/connector.edit.php:156
 msgid "Bearer token"
-msgstr ""
+msgstr "წარმომდგენის კოდი"
 
 #: include/classes/widgets/forms/CWidgetFormItem.php:250
 msgid "Before value"
@@ -1832,7 +1842,7 @@ msgstr "წასანაცვლებელი ბიტები"
 
 #: app/views/popup.triggerexpr.php:110
 msgid "Bitwise functions"
-msgstr ""
+msgstr "ბიტური ფუნქციები"
 
 #: app/views/administration.user.list.php:144
 msgid "Blocked"
@@ -1861,7 +1871,7 @@ msgstr "სხეული და თავსართები"
 #: include/classes/widgets/forms/CWidgetFormItem.php:275
 #: include/classes/widgets/forms/CWidgetFormItem.php:335
 msgid "Bold"
-msgstr "გასქელება"
+msgstr "სქელი"
 
 #: include/graphs.inc.php:59 include/views/js/monitoring.sysmaps.js.php:804
 #: include/views/js/monitoring.sysmaps.js.php:894
@@ -1890,7 +1900,7 @@ msgstr "საზღვრის სიგანე"
 
 #: app/controllers/CControllerUserUpdateGeneral.php:106
 msgid "Both passwords must be equal."
-msgstr ""
+msgstr "ორივე პაროლი უნდა ემთხვეოდეს."
 
 #: include/classes/widgets/forms/CWidgetFormItem.php:108
 #: include/classes/widgets/forms/CWidgetFormItem.php:189
@@ -1904,7 +1914,7 @@ msgstr "ქვედა"
 
 #: include/classes/widgets/forms/CWidgetFormTopHosts.php:133
 msgid "Bottom N"
-msgstr ""
+msgstr "ქვედა N"
 
 #: jsLoader.php:276
 msgid "Bring forward"
@@ -1912,7 +1922,7 @@ msgstr "უკან გადატანა"
 
 #: jsLoader.php:275
 msgid "Bring to front"
-msgstr "წინ გამოტანა"
+msgstr "წინა პლანზე გამოტანა"
 
 #: include/locales.inc.php:34
 msgid "Bulgarian (bg_BG)"
@@ -1992,7 +2002,7 @@ msgstr ""
 
 #: include/classes/data/CItemData.php:1054
 msgid "CPU utilization percentage. Returns float"
-msgstr ""
+msgstr "CPU-ის გამოყენების პროცენტული დატვირთვა. აბრუნებს float-ს"
 
 #: app/views/popup.itemtestedit.view.php:300
 msgid "CRLF"
@@ -2005,7 +2015,7 @@ msgstr "CSV-დან JSON-ში"
 #: include/classes/validators/CApiInputValidator.php:2717
 #: include/classes/validators/CNewValidator.php:352
 msgid "CUID is expected"
-msgstr ""
+msgstr "მოველოდი CUID-ს"
 
 #: include/items.inc.php:100 include/views/configuration.graph.edit.php:179
 #: include/views/configuration.graph.edit.php:254
@@ -2361,7 +2371,7 @@ msgstr ""
 
 #: include/db.inc.php:34
 msgid "Cannot create another database connection."
-msgstr ""
+msgstr "კიდევ ერთი ბაზასთან მიერთების შექმნა შეუძლებელია."
 
 #: include/classes/api/services/CTrigger.php:1013
 #: include/classes/api/services/CTriggerPrototype.php:819
@@ -2771,7 +2781,7 @@ msgstr[0] "მედიის ტიპის გათიშვა შეუძ
 #: app/controllers/CControllerModuleUpdate.php:146
 msgid "Cannot disable module"
 msgid_plural "Cannot disable modules"
-msgstr[0] ""
+msgstr[0] "მოდულის გათიშვა შეუძლებელია"
 
 #: app/controllers/CControllerModuleUpdate.php:165
 #, c-format
@@ -2853,7 +2863,7 @@ msgstr[0] "მედიის ტიპის ჩართვა შეუძლ
 #: app/controllers/CControllerModuleUpdate.php:141
 msgid "Cannot enable module"
 msgid_plural "Cannot enable modules"
-msgstr[0] ""
+msgstr[0] "მოდულის ჩართვა შეუძლებელია"
 
 #: app/controllers/CControllerModuleUpdate.php:160
 #, c-format
@@ -2882,7 +2892,7 @@ msgstr "გამოსახულების შემოწმება შ�
 
 #: include/classes/api/services/CScript.php:1064
 msgid "Cannot execute URL type script."
-msgstr ""
+msgstr "URL ტიპის სკრიპტის შესრულება შეუძლებელია."
 
 #: app/controllers/CControllerItemMassCheckNow.php:243
 #: app/controllers/CControllerItemMassCheckNow.php:251
@@ -3266,7 +3276,7 @@ msgstr "ტრიგერის გამოსახულების ჩა�
 
 #: include/classes/api/services/CHost.php:1120
 msgid "Cannot link template"
-msgstr ""
+msgstr "ნიმუშის მიბმა შეუძლებელია"
 
 #: include/classes/api/services/CHostBase.php:520
 #, c-format
@@ -3421,7 +3431,7 @@ msgstr ""
 #, c-format
 msgid "Cannot load module at: %1$s."
 msgid_plural "Cannot load modules at: %1$s."
-msgstr[0] ""
+msgstr[0] "ვერ ჩავტვირთე მოდული მისამართზე: %1$s."
 
 #: include/classes/api/services/CUser.php:1449
 msgid "Cannot log out."
@@ -3429,11 +3439,11 @@ msgstr "გასვლა შეუძლებელია."
 
 #: include/classes/api/services/CHost.php:986
 msgid "Cannot mass update host name."
-msgstr ""
+msgstr "ჰოსტის სახელის მასიური განახლება შეუძლებელია."
 
 #: include/classes/api/services/CHost.php:972
 msgid "Cannot mass update visible host name."
-msgstr ""
+msgstr "ხილული ჰოსტი სახელის მასიური განახლება შეუძლებელია."
 
 #: include/classes/api/services/CHostBase.php:1080
 #, c-format
@@ -3462,7 +3472,7 @@ msgstr ""
 #: app/controllers/CControllerUserProvision.php:69
 msgid "Cannot provision user"
 msgid_plural "Cannot provision users"
-msgstr[0] ""
+msgstr[0] "მომხმარებლის მუშაობისთვის მომზადება შეუძლებელია"
 
 #: include/classes/import/readers/CJsonImportReader.php:35
 #, c-format
@@ -3498,12 +3508,12 @@ msgstr "სტუმარ მომხმარებელს სახელ�
 #: include/classes/api/services/CDRule.php:264
 #: include/classes/api/services/CDRule.php:414
 msgid "Cannot save discovery rule without checks."
-msgstr ""
+msgstr "აღმოჩენის წესის შემოწმებების გარეშე შენახვა შეუძლებელია."
 
 #: include/classes/helpers/CDashboardHelper.php:466
 #, c-format
 msgid "Cannot save widget \"%1$s\"."
-msgstr ""
+msgstr "ვერ შევინახე ვიჯეტი \"%1$s\"."
 
 #: include/classes/server/CZabbixServer.php:484
 #, c-format
@@ -3518,7 +3528,7 @@ msgstr ""
 #: include/classes/api/services/CTask.php:454
 #, c-format
 msgid "Cannot send request: %1$s."
-msgstr ""
+msgstr "ვერ გავაგზავნე მოთხოვნა: %1$s."
 
 #: include/classes/api/services/CGraphGeneral.php:535
 #, c-format
@@ -3579,7 +3589,7 @@ msgstr ""
 #: include/classes/api/services/CHost.php:2015
 #: include/classes/api/services/CHost.php:2218
 msgid "Cannot set inventory fields for disabled inventory."
-msgstr ""
+msgstr "გათიშული ინვენტარისთვის ველების დაყენება შეუძლებელია."
 
 #: include/classes/core/CCookieSession.php:127
 msgid "Cannot set session cookie."
@@ -3592,16 +3602,16 @@ msgstr ""
 
 #: jsLoader.php:295
 msgid "Cannot support notification audio for this device."
-msgstr ""
+msgstr "ამ მოწყობილობისთვის გაფრთხილების ხმის მხარდაჭერა არ არსებობს."
 
 #: include/classes/api/services/CHostInterface.php:306
 msgid "Cannot switch host for interface."
-msgstr ""
+msgstr "ინტერფეისისთვის ჰოსტის გადართვა შეუძლებელია."
 
 #: app/controllers/CControllerPopupMediatypeTestEdit.php:71
 #: app/controllers/CControllerPopupMediatypeTestSend.php:81
 msgid "Cannot test disabled media type."
-msgstr ""
+msgstr "გამორთული მედიის ტიპის ტესტი შეუძლებელია."
 
 #: app/controllers/CControllerUserUnblock.php:68
 msgid "Cannot unblock user"
@@ -3615,7 +3625,7 @@ msgstr ""
 
 #: include/classes/api/services/CHost.php:1095
 msgid "Cannot unlink template"
-msgstr ""
+msgstr "ნიმუშის მიბმის მოხსნა შეუძლებელია"
 
 #: include/classes/api/services/CHostBase.php:331
 #, c-format
@@ -3886,7 +3896,7 @@ msgstr "მედიის ტიპის განახლება შეუ
 
 #: app/controllers/CControllerModuleUpdate.php:137
 msgid "Cannot update module"
-msgstr ""
+msgstr "მოდულის განახლება შეუძლებელია"
 
 #: app/controllers/CControllerModuleUpdate.php:157
 #, c-format
@@ -4019,7 +4029,7 @@ msgstr "ვებ სცენარის განახლება შეუ
 
 #: app/views/administration.regex.edit.php:51
 msgid "Case sensitive"
-msgstr "რეგისტრზე-დამოკიდებული"
+msgstr "დიდი და პატარა ასოების განსხვავება"
 
 #: app/views/administration.authentication.edit.php:130
 #: app/views/administration.authentication.edit.php:192
@@ -4067,7 +4077,7 @@ msgstr "სერტიფიკატი"
 #: include/items.inc.php:1843
 msgctxt "noun"
 msgid "Change"
-msgstr "ცვლილება"
+msgstr "შეცვლა"
 
 #: app/partials/hostmacros.inherited.list.html.php:114
 #: include/classes/screens/CScreenBase.php:361
@@ -4232,7 +4242,7 @@ msgstr ""
 
 #: include/classes/api/services/CDRule.php:658
 msgid "Checks should be unique."
-msgstr ""
+msgstr "შემოწმებები უნიკალური უნდა იყოს."
 
 #: app/views/popup.service.edit.php:314 app/views/popup.service.edit.php:327
 msgid "Child services"
@@ -4290,7 +4300,7 @@ msgstr ""
 
 #: jsLoader.php:150
 msgid "Click and drag to desired size."
-msgstr ""
+msgstr "დააწკაპუნეთ და გადაათრიეთ სასურველ ზომამდე."
 
 #: jsLoader.php:330
 msgid "Click to view or edit"
@@ -4355,7 +4365,7 @@ msgstr "დახურვა"
 #: include/views/configuration.triggers.edit.php:320
 #: include/views/configuration.triggers.edit.php:523
 msgid "Close expression constructor"
-msgstr ""
+msgstr "გამოსახულების კონსტრუქტორის დახურვა"
 
 #: app/views/configuration.correlation.edit.php:157
 #: include/classes/helpers/CCorrelationHelper.php:71
@@ -4441,17 +4451,17 @@ msgstr "საზგადოება"
 
 #: app/partials/monitoring.problem.filter.php:263
 msgid "Compact view"
-msgstr "კომპაქტური ხედი"
+msgstr "შემჭიდროებული ხედი"
 
 #: include/classes/core/CComponentRegistry.php:53
 #, c-format
 msgid "Component %1$s already registered."
-msgstr ""
+msgstr "კომპონენტი %1$s უკვე რეგისტრირებული."
 
 #: include/classes/core/CComponentRegistry.php:37
 #, c-format
 msgid "Component %1$s is not registered."
-msgstr ""
+msgstr "კომპონენტი %1$s რეგისტრირებული არაა."
 
 #: app/views/administration.housekeeping.edit.php:166
 msgid "Compress records older than"
@@ -4511,7 +4521,7 @@ msgstr "პირობები"
 #: include/classes/helpers/CRoleHelper.php:312
 #: include/views/inventory.host.view.php:220 jsLoader.php:354
 msgid "Configuration"
-msgstr "კონფიგურაცია"
+msgstr "გამართვა"
 
 #: include/classes/data/CItemData.php:1662
 msgid "Configuration cache statistics. Cache - buffer (modes: pfree, total, used, free)."
@@ -4520,7 +4530,7 @@ msgstr ""
 #: include/classes/setup/CSetupWizard.php:909
 #, c-format
 msgid "Configuration file \"%1$s\" created."
-msgstr ""
+msgstr "კონფიგურაციის ფაილი \"%1$s\" შეიქმნა."
 
 #: app/controllers/CControllerGuiEdit.php:96
 msgid "Configuration of GUI"
@@ -4570,7 +4580,7 @@ msgstr "ჰოსტის ჯგუფების მორგება"
 
 #: host_prototypes.php:27
 msgid "Configuration of host prototypes"
-msgstr ""
+msgstr "ჰოსტის პროტოტიპების მორგება"
 
 #: app/controllers/CControllerHostList.php:358
 msgid "Configuration of hosts"
@@ -4578,7 +4588,7 @@ msgstr "ჰოსტების მორგება"
 
 #: app/controllers/CControllerHousekeepingEdit.php:115
 msgid "Configuration of housekeeping"
-msgstr ""
+msgstr "ისტორიის გასუფთავების მორგება"
 
 #: app/controllers/CControllerIconMapEdit.php:98
 #: app/controllers/CControllerIconMapList.php:75
@@ -4695,7 +4705,7 @@ msgstr "ბაზასთან მიერთების მორგებ�
 #: app/views/administration.authentication.edit.php:417
 #: app/views/popup.ldap.edit.php:115
 msgid "Configure JIT provisioning"
-msgstr ""
+msgstr "JIT ინიციალიზაციის მორგება"
 
 #: app/views/js/administration.authentication.edit.js.php:137
 msgid "Confirm changes"
@@ -4990,19 +5000,19 @@ msgstr "კოპირება"
 #, c-format
 msgid "Copy %1$s graph"
 msgid_plural "Copy %1$s graphs"
-msgstr[0] ""
+msgstr[0] "%1$s გრაფიკის კოპირება"
 
 #: app/views/copy.edit.php:36
 #, c-format
 msgid "Copy %1$s item"
 msgid_plural "Copy %1$s items"
-msgstr[0] ""
+msgstr[0] "%1$s ელემენტის კოპირება"
 
 #: app/views/copy.edit.php:43
 #, c-format
 msgid "Copy %1$s trigger"
 msgid_plural "Copy %1$s triggers"
-msgstr[0] ""
+msgstr[0] "%1$s ტრიგერის კოპირება"
 
 #: app/views/popup.token.view.php:54
 msgid "Copy to clipboard"
@@ -5123,7 +5133,7 @@ msgstr "სამუშაო დაფის შექმნა"
 
 #: jsLoader.php:359
 msgid "Create dependent discovery rule"
-msgstr ""
+msgstr "დამოკიდებული აღმოჩენის წესის შექმნა"
 
 #: jsLoader.php:358
 msgid "Create dependent item"
@@ -5193,11 +5203,11 @@ msgstr "ჰოსტის პროტოტიპის შექმნა"
 
 #: include/views/configuration.host.prototype.list.php:197
 msgid "Create hosts from selected prototypes as disabled?"
-msgstr ""
+msgstr "შევქმნა ჰოსტები მონიშნული პროტოტიპებიდან, როგორც გათიშული?"
 
 #: include/views/configuration.host.prototype.list.php:194
 msgid "Create hosts from selected prototypes as enabled?"
-msgstr ""
+msgstr "შევქმნა ჰოსტები მონიშნული პროტოტიპებიდან, როგორც ჩართული?"
 
 #: app/views/administration.image.list.php:61
 msgid "Create icon"
@@ -5225,11 +5235,11 @@ msgstr "ელემენტის პროტოტიპის შექმ�
 
 #: include/views/configuration.item.prototype.list.php:206
 msgid "Create items from selected prototypes as disabled?"
-msgstr ""
+msgstr "შევქმნა ელემენტები მონიშნული პროტოტიპებიდან, როგორც გათიშული?"
 
 #: include/views/configuration.item.prototype.list.php:203
 msgid "Create items from selected prototypes as enabled?"
-msgstr ""
+msgstr "შევქმნა ელემენტები მონიშნული პროტოტიპებიდან, როგორც ჩართული?"
 
 #: include/views/configuration.maintenance.list.php:33
 msgid "Create maintenance period"
@@ -5290,11 +5300,11 @@ msgstr "ტრიგერის პროტოტიპის შექმნ�
 
 #: include/views/configuration.trigger.prototype.list.php:205
 msgid "Create triggers from selected prototypes as disabled?"
-msgstr ""
+msgstr "შევქმნა ტრიგერები მონიშნული პროტოტიპებიდან, როგორც გათიშული?"
 
 #: include/views/configuration.trigger.prototype.list.php:202
 msgid "Create triggers from selected prototypes as enabled?"
-msgstr ""
+msgstr "შევქმნა ტრიგერები მონიშნული პროტოტიპებიდან, როგორც ჩართული?"
 
 #: app/views/administration.user.list.php:54
 msgid "Create user"
@@ -5451,12 +5461,12 @@ msgstr "ჩეხური (cs_CZ)"
 #: jsLoader.php:400
 msgctxt "Default color option"
 msgid "D"
-msgstr ""
+msgstr "D"
 
 #: jsLoader.php:183
 msgctxt "abbreviation of severity level"
 msgid "D"
-msgstr ""
+msgstr "D"
 
 #: include/classes/import/validators/C10XmlValidator.php:323
 msgctxt "XML date format"
@@ -5745,7 +5755,7 @@ msgstr "თვის დღე"
 
 #: include/classes/api/services/CMaintenance.php:689
 msgid "Day of the week and day of the month cannot be specified simultaneously."
-msgstr ""
+msgstr "კვირის დღეს და თვის დღეს ერთდროულად ვერ შეცვლით."
 
 #: app/views/popup.maintenance.period.php:96
 #: app/views/popup.maintenance.period.php:115
@@ -5788,7 +5798,7 @@ msgstr ""
 
 #: include/classes/helpers/CServiceHelper.php:150
 msgid "Decrease by"
-msgstr ""
+msgstr "შემცირება"
 
 #: app/views/administration.iconmap.edit.php:109
 #: include/classes/widgets/forms/CWidgetForm.php:54 include/hosts.inc.php:31
@@ -5832,7 +5842,7 @@ msgstr "ნაგულისხმევი ჰოსტის ინვენ�
 #: app/views/administration.gui.edit.php:73
 #: include/classes/setup/CSetupWizard.php:413
 msgid "Default language"
-msgstr "ნაგულისხმევი ენა"
+msgstr "ნაგულისხმები ენა"
 
 #: app/views/administration.authentication.edit.php:115
 msgid "Default login form"
@@ -5853,7 +5863,7 @@ msgstr "ნაგულისხმევი გვერდის ჩვენ�
 #: app/views/administration.gui.edit.php:85
 #: include/classes/setup/CSetupWizard.php:628
 msgid "Default theme"
-msgstr "ნაგულისხმევი თემა"
+msgstr "ნაგულისხმები თემა"
 
 #: app/views/administration.gui.edit.php:78
 #: include/classes/setup/CSetupWizard.php:621
@@ -5862,7 +5872,7 @@ msgstr "ნაგულისხმევი დროის სარტყე�
 
 #: app/views/popup.lldoperation.php:105 app/views/popup.massupdate.item.php:217
 msgid "Delay"
-msgstr "შეყოვნება"
+msgstr "დაყოვნება"
 
 #: app/views/administration.queue.details.php:47
 msgid "Delayed by"
@@ -6380,7 +6390,7 @@ msgstr "აღმოჩენის პერიოდი"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1111
 msgid "Deviations"
-msgstr ""
+msgstr "გადახვევა"
 
 #: include/actions.inc.php:76
 msgid "Device"
@@ -6388,11 +6398,11 @@ msgstr "მოწყობილობა"
 
 #: include/classes/data/CItemData.php:1038
 msgid "Device interrupts. Returns integer"
-msgstr ""
+msgstr "მოწყობილობის წყვეტები. აბრუნებს მთელ რიცხვს"
 
 #: app/views/configuration.discovery.edit.php:97
 msgid "Device uniqueness criteria"
-msgstr ""
+msgstr "მოწყობილობის უნიკალურობის პირობა"
 
 #: include/httptest.inc.php:31
 msgid "Digest"
@@ -6429,11 +6439,11 @@ msgstr "გამორთვა"
 
 #: app/views/administration.usergroup.list.php:232
 msgid "Disable debug mode"
-msgstr ""
+msgstr "გამართვის რეჟიმის გათიშვა"
 
 #: app/views/administration.usergroup.list.php:232
 msgid "Disable debug mode in selected groups?"
-msgstr ""
+msgstr "გავთიშო გამართვის რეჟიმი მონიშნულ ჯგუფებში?"
 
 #: include/actions.inc.php:698 include/actions.inc.php:1032
 msgid "Disable host"
@@ -6573,7 +6583,7 @@ msgstr "გავთიშო მონიშნული ვებ-სცენ
 #: include/views/configuration.host.prototype.edit.php:363
 #: include/views/js/monitoring.sysmaps.js.php:295
 msgid "Disabled"
-msgstr "გამორთული"
+msgstr "გამორთულია"
 
 #: app/views/administration.trigdisplay.edit.php:146 jsLoader.php:181
 msgid "Disaster"
@@ -7041,7 +7051,7 @@ msgstr "ხანგრძლივობა"
 #: app/views/monitoring.widget.problems.view.php:80
 msgctxt "compact table header"
 msgid "Duration"
-msgstr "ხანგრძლოვობა"
+msgstr "ხანგრძლივობა"
 
 #: include/locales.inc.php:39
 msgid "Dutch (nl_NL)"
@@ -7128,7 +7138,7 @@ msgstr ""
 #: include/classes/helpers/CElasticsearchHelper.php:195
 #, c-format
 msgid "Elasticsearch error: %1$s."
-msgstr ""
+msgstr "Elasticsearch-ის შეცდომა: %1$s."
 
 #: include/views/monitoring.sysmap.edit.php:280
 msgid "Element"
@@ -7433,7 +7443,7 @@ msgstr ""
 #: include/views/configuration.item.edit.php:997
 #: include/views/configuration.triggers.edit.php:578
 msgid "Enabled"
-msgstr "გააქტიურებულია"
+msgstr "აქტიური"
 
 #: app/views/administration.authentication.edit.php:299
 msgid "Encrypt"
@@ -7510,12 +7520,12 @@ msgstr "შეცდომა"
 #: app/views/monitoring.widget.slareport.view.php:101
 #: app/views/slareport.list.php:167
 msgid "Error budget"
-msgstr ""
+msgstr "შეცდომის ბიუჯეტი"
 
 #: app/views/monitoring.widget.slareport.view.php:101
 msgctxt "compact table header"
 msgid "Error budget"
-msgstr ""
+msgstr "შეცდომის ბიუჯეტი"
 
 #: include/db.inc.php:518
 #, c-format
@@ -7825,7 +7835,7 @@ msgstr ""
 #: include/views/configuration.triggers.edit.php:204
 #: include/views/configuration.triggers.edit.php:404
 msgid "Expression constructor"
-msgstr ""
+msgstr "გამოსახულების კონსტრუქტორი"
 
 #: include/forms.inc.php:1933 include/forms.inc.php:1940
 #: include/forms.inc.php:1950
@@ -7849,12 +7859,12 @@ msgstr "გამოთქმები"
 
 #: include/items.inc.php:93
 msgid "External check"
-msgstr ""
+msgstr "გარე შემოწმება"
 
 #: jsLoader.php:256
 msgctxt "Friday short"
 msgid "F"
-msgstr "ფა"
+msgstr "F"
 
 #: app/views/js/administration.regex.edit.js.php:155
 #: app/views/js/administration.regex.edit.js.php:200
@@ -7867,7 +7877,7 @@ msgstr "FTP"
 
 #: include/classes/setup/CSetupWizard.php:439
 msgid "Fail"
-msgstr ""
+msgstr "ჩავარდნა"
 
 #: app/partials/administration.ha.nodes.php:78
 #: app/partials/administration.system.info.php:182
@@ -7878,12 +7888,12 @@ msgstr ""
 #: app/views/monitoring.widget.web.view.php:30 include/actions.inc.php:2139
 #: include/views/administration.auditacts.list.php:90
 msgid "Failed"
-msgstr "ჩავარდა"
+msgstr "ჩაიშალა"
 
 #: app/views/monitoring.widget.web.view.php:34
 msgctxt "compact table header"
 msgid "Failed"
-msgstr "ჩავარდა"
+msgstr "ჩაიშალა"
 
 #: app/controllers/CControllerAuditLogList.php:192
 msgid "Failed login"
@@ -7939,7 +7949,7 @@ msgstr ""
 
 #: include/items.inc.php:37
 msgid "Failure Audit"
-msgstr ""
+msgstr "ჩავარდნის აუდიტი"
 
 #: app/views/system.warning.php:26 app/views/system.warning.php:38
 msgid "Fatal error, please report to the Zabbix team"
@@ -7947,11 +7957,11 @@ msgstr ""
 
 #: include/classes/widgets/CWidgetConfig.php:56
 msgid "Favorite graphs"
-msgstr ""
+msgstr "რჩეული გრაფიკები"
 
 #: include/classes/widgets/CWidgetConfig.php:57
 msgid "Favorite maps"
-msgstr ""
+msgstr "რჩეული რუკები"
 
 #: include/func.inc.php:237
 msgid "Feb"
@@ -8167,7 +8177,7 @@ msgstr "ფიქსირებული"
 
 #: include/classes/helpers/CServiceHelper.php:152
 msgid "Fixed status"
-msgstr ""
+msgstr "მითითებული მდგომარეობა"
 
 #: app/views/js/popup.massupdate.tmpl.js.php:81
 #: app/views/popup.lldoperation.php:124 app/views/popup.massupdate.item.php:233
@@ -8185,12 +8195,12 @@ msgstr "მოქნილი"
 #: include/views/configuration.item.edit.php:448
 #: include/views/configuration.item.prototype.edit.php:426
 msgid "Follow redirects"
-msgstr ""
+msgstr "გადამისამართებების მიყოლა"
 
 #: include/views/js/monitoring.sysmaps.js.php:384
 #: include/views/js/monitoring.sysmaps.js.php:546
 msgid "Font"
-msgstr "შრიფტი"
+msgstr "ფონტი"
 
 #: include/views/js/monitoring.sysmaps.js.php:558
 msgid "Font color"
@@ -8247,7 +8257,7 @@ msgstr "პარასკევი"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:79
 #: include/views/js/monitoring.sysmaps.js.php:771 report4.php:193
 msgid "From"
-msgstr "საიდან"
+msgstr "ვისგან"
 
 #: app/views/administration.miscconfig.edit.php:34
 msgid "Frontend URL"
@@ -8294,12 +8304,12 @@ msgstr "ინტერფეისი"
 
 #: include/classes/user/CWebUser.php:63 index_sso.php:260
 msgid "GUI access disabled."
-msgstr ""
+msgstr "გრაფიკულ ინტერფეისთან წვდომა გათიშულია."
 
 #: include/classes/helpers/CMenuHelper.php:245
 #: include/classes/helpers/CRoleHelper.php:422
 msgid "General"
-msgstr "ზოგადი"
+msgstr "საერთო"
 
 #: app/partials/scheduledreport.subscription.php:34
 #: app/views/popup.scheduledreport.subscription.php:100
@@ -8336,21 +8346,21 @@ msgstr ""
 
 #: app/views/popup.itemtestedit.view.php:251
 msgid "Get value"
-msgstr ""
+msgstr "მნიშვნელობის მიღება"
 
 #: app/views/js/popup.itemtestedit.view.js.php:503
 #: app/views/popup.itemtestedit.view.php:432
 msgid "Get value and test"
-msgstr ""
+msgstr "მნიშვნელობის მიღება და დატესტვა"
 
 #: app/views/popup.itemtestedit.view.php:94
 msgid "Get value from host"
-msgstr ""
+msgstr "მნიშვნელობის მიღება ჰოსტიდან"
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:48
 #: include/triggers.inc.php:1143
 msgid "Given expression is not a macro"
-msgstr ""
+msgstr "მითითებული გამოსახულება მაკრო არაა"
 
 #: include/classes/api/services/CIconMap.php:366
 #, c-format
@@ -8364,7 +8374,7 @@ msgstr "გლობალური მნიშვნელობა"
 #: include/classes/html/CDashboardWidgetMap.php:163
 #, c-format
 msgid "Go back to %1$s"
-msgstr ""
+msgstr "%1$s-ზე დაბრუნება"
 
 #: jsLoader.php:369
 msgid "Go to"
@@ -8373,7 +8383,7 @@ msgstr "გადასვლა"
 #: app/views/system.warning.php:31 include/func.inc.php:1594
 #, c-format
 msgid "Go to \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\"-ზე გადასვლა"
 
 #: include/classes/helpers/CPagerHelper.php:188
 msgid "Go to first page"
@@ -8382,27 +8392,27 @@ msgstr "პირველ გვერდზე"
 #: include/classes/helpers/CPagerHelper.php:233
 #, c-format
 msgid "Go to last page, %1$s"
-msgstr ""
+msgstr "გადასვლა ბოლო გვერდზე, %1$s"
 
 #: include/classes/helpers/CPagerHelper.php:227
 #, c-format
 msgid "Go to next page, %1$s"
-msgstr ""
+msgstr "გადასვლა შემდეგ გვერდზე, %1$s"
 
 #: include/classes/helpers/CPagerHelper.php:218
 #, c-format
 msgid "Go to page %1$s"
-msgstr ""
+msgstr "გადასვლა გვერდზე %1$s"
 
 #: include/classes/helpers/CPagerHelper.php:214
 #, c-format
 msgid "Go to page %1$s, current page"
-msgstr ""
+msgstr "გადასვლა გვერდზე %1$s, მიმდიინარე გვერდი"
 
 #: include/classes/helpers/CPagerHelper.php:199
 #, c-format
 msgid "Go to previous page, %1$s"
-msgstr ""
+msgstr "გადასვლა წინა გვერდზე, %1$s"
 
 #: include/httptest.inc.php:414
 msgid "Google Chrome"
@@ -8410,7 +8420,7 @@ msgstr "Google Chrome"
 
 #: include/graphs.inc.php:65
 msgid "Gradient line"
-msgstr ""
+msgstr "გრადიენტის ხაზი"
 
 #: app/controllers/CControllerAuditLogList.php:216
 #: app/partials/monitoring.latest.view.html.php:188
@@ -8632,11 +8642,11 @@ msgstr[0] ""
 
 #: app/views/popup.ldap.edit.php:182
 msgid "Group filter"
-msgstr ""
+msgstr "ჯგუფების ფილტრი"
 
 #: app/views/administration.miscconfig.edit.php:40
 msgid "Group for discovered hosts"
-msgstr ""
+msgstr "ჯგუფი აღმოჩენილი ჰოსტებისთვის"
 
 #: app/views/popup.ldap.edit.php:156
 msgid "Group member attribute"
@@ -8650,7 +8660,7 @@ msgstr "ჯგუფის სახელი"
 #: app/views/administration.authentication.edit.php:427
 #: app/views/popup.ldap.edit.php:148
 msgid "Group name attribute"
-msgstr ""
+msgstr "ჯგუფის სახელის ატრიბუტი"
 
 #: include/classes/api/services/CHostPrototype.php:1165
 #, c-format
@@ -8749,7 +8759,7 @@ msgstr "აპარატურა (სრული დეტალები)"
 
 #: include/classes/data/CItemData.php:1010
 msgid "Hardware sensor reading. Returns float"
-msgstr ""
+msgstr "აპარატურული სენსორის წაკითხვა. აბრუნებს float-ს"
 
 #: include/classes/setup/CSetupWizard.php:513
 msgid "HashiCorp Vault"
@@ -8798,7 +8808,7 @@ msgstr "დახმარება"
 
 #: include/items.inc.php:1856
 msgid "Hexadecimal to decimal"
-msgstr ""
+msgstr "თექვსმეტობითიდან ათობითამდე"
 
 #: include/views/monitoring.sysmap.constructor.php:57 jsLoader.php:263
 msgid "Hidden"
@@ -8811,7 +8821,7 @@ msgstr "გამართვის ინფორმაციის დამ�
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:112
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:164
 msgid "Hide groups without problems"
-msgstr ""
+msgstr "პრობლემების არმქონი ჯგუფების დამალვა"
 
 #: include/views/monitoring.history.php:174
 msgid "Hide selected"
@@ -8876,11 +8886,11 @@ msgstr "ისტორია"
 
 #: httpconf.php:189 httpconf.php:433 items.php:671 items.php:707
 msgid "History and trends cleared"
-msgstr ""
+msgstr "ტრენდები და ისტორია გასუფთავდა"
 
 #: app/views/administration.housekeeping.edit.php:159
 msgid "History and trends compression"
-msgstr ""
+msgstr "ისტორიისა და ტრენდების შეკუმშვა"
 
 #: include/classes/api/services/CHistory.php:353
 msgid "History cleanup is not supported if compression is enabled"
@@ -8897,7 +8907,7 @@ msgstr ""
 #: include/views/configuration.httpconf.edit.php:264
 #: include/views/configuration.item.edit.php:1074
 msgid "History clearing can take a long time. Continue?"
-msgstr ""
+msgstr "ისტორიის გასუფთავებას დიდი დრო შეიძლება, დასჭირდეს. გავაგრძელო?"
 
 #: app/views/popup.tophosts.column.edit.php:159
 msgid "History data"
@@ -8987,7 +8997,7 @@ msgstr "ჰოსტი"
 #: include/classes/import/importers/CHostImporter.php:71
 #, c-format
 msgid "Host \"%1$s\" already exists."
-msgstr ""
+msgstr "ჰოსტი \"%1$s\" უკვე არსებობს."
 
 #: include/classes/api/services/CHostGroup.php:1370
 #: include/classes/api/services/CHost.php:958
@@ -9004,7 +9014,7 @@ msgstr ""
 
 #: include/actions.inc.php:55
 msgid "Host IP"
-msgstr "ჰოსტის იპ"
+msgstr "ჰოსტის IP"
 
 #: app/views/administration.script.list.php:83
 msgid "Host access"
@@ -9276,7 +9286,7 @@ msgstr ""
 #: include/views/configuration.host.prototype.edit.php:33
 #: include/views/configuration.host.prototype.list.php:29
 msgid "Host prototypes"
-msgstr ""
+msgstr "ჰოსტის პროტოტიპები"
 
 #: host_prototypes.php:356
 msgid "Host prototypes deleted"
@@ -9423,7 +9433,7 @@ msgstr ""
 
 #: include/discovery.inc.php:60
 msgid "ICMP ping"
-msgstr ""
+msgstr "ICMP პინგი"
 
 #: app/views/reports.auditlog.list.php:94
 msgid "ID"
@@ -9608,7 +9618,7 @@ msgstr ""
 
 #: app/views/popup.lldoverride.php:54
 msgid "If filter matches"
-msgstr ""
+msgstr "თუ ფილტრი ემთხვევა"
 
 #: include/classes/helpers/CServiceHelper.php:95
 #, c-format
@@ -9657,7 +9667,7 @@ msgstr ""
 
 #: include/classes/helpers/CServiceHelper.php:151
 msgid "Ignore this service"
-msgstr ""
+msgstr "ამ სერვისის გამოტოვება"
 
 #: app/controllers/CControllerAuditLogList.php:224
 #: app/views/administration.image.edit.php:61
@@ -9671,7 +9681,7 @@ msgstr "გამოსახულება"
 #: include/classes/api/services/CImage.php:501
 #, c-format
 msgid "Image \"%1$s\" already exists."
-msgstr ""
+msgstr "გამოსახულება \"%1$s\" უკვე არსებობს."
 
 #: app/controllers/CControllerImageCreate.php:123
 msgid "Image added"
@@ -9698,7 +9708,7 @@ msgstr "გამოსახულება განახლდა"
 #: app/views/administration.image.list.php:30 app/views/popup.import.php:44
 #: include/classes/helpers/CMenuHelper.php:255 include/html.inc.php:893
 msgid "Images"
-msgstr "გამოსახულებები"
+msgstr "სურათები"
 
 #: app/views/popup.import.php:91
 msgid "Images for all maps will be updated!"
@@ -9747,7 +9757,7 @@ msgstr "რემონტშია"
 #: include/actions.inc.php:2134
 #: include/views/administration.auditacts.list.php:84
 msgid "In progress"
-msgstr "მიმდინარეობს"
+msgstr "პროცესშია"
 
 #: include/items.inc.php:1864
 msgid "In range"
@@ -9892,7 +9902,7 @@ msgstr ""
 #: app/controllers/CControllerMediatypeEnable.php:97
 #: app/controllers/CControllerMediatypeEnable.php:108
 msgid "Incomplete configuration"
-msgstr ""
+msgstr "არასრული კონფიგურაცია"
 
 #: include/classes/api/services/CMap.php:655
 #: include/classes/api/services/CMap.php:1138
@@ -9939,11 +9949,11 @@ msgstr ""
 #: include/classes/api/clients/CLocalApiClient.php:71
 #, c-format
 msgid "Incorrect API \"%1$s\"."
-msgstr ""
+msgstr "არასწორი API \"%1$s\"."
 
 #: include/classes/api/services/CDRule.php:579
 msgid "Incorrect SNMP OID."
-msgstr ""
+msgstr "არასწორი SNMP OID."
 
 #: include/classes/api/services/CDRule.php:573
 msgid "Incorrect SNMP community."
@@ -10678,7 +10688,7 @@ msgstr ""
 #: app/views/popup.acknowledge.edit.php:90 include/actions.inc.php:1774
 #: include/actions.inc.php:2216 include/html.inc.php:978
 msgid "Indefinitely"
-msgstr ""
+msgstr "უსასრულოდ"
 
 #: app/views/popup.tophosts.column.edit.php:152
 msgid "Indicators"
@@ -10951,7 +10961,7 @@ msgstr ""
 #: app/controllers/CControllerPopupLdapTestEdit.php:44
 #: app/controllers/CControllerPopupLdapTestSend.php:50
 msgid "Invalid LDAP configuration"
-msgstr ""
+msgstr "არასწორი LDAP კონფგურაცია"
 
 #: app/controllers/CControllerAuthenticationUpdate.php:214
 msgid "Invalid SAML JIT provisioning media type mapping configuration."
@@ -10963,17 +10973,17 @@ msgstr ""
 
 #: include/classes/import/readers/CYamlImportReader.php:55
 msgid "Invalid YAML file contents"
-msgstr ""
+msgstr "არასწორი YAML ფაილის შემცველობა"
 
 #: include/classes/validators/CActionCondValidator.php:113
 #, c-format
 msgid "Invalid action condition: %1$s."
-msgstr ""
+msgstr "არასწორი ქმედების პირობა: %1$s."
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1571
 #, c-format
 msgid "Invalid condition: %1$s."
-msgstr ""
+msgstr "არასწორი პირობა: %1$s."
 
 #: app/controllers/CControllerTimeSelectorUpdate.php:219
 msgid "Invalid date."
@@ -10982,7 +10992,7 @@ msgstr "არასწორი თარიღი."
 #: include/classes/validators/CEmailValidator.php:39
 #, c-format
 msgid "Invalid email address \"%1$s\"."
-msgstr ""
+msgstr "არასწორი ელფოსტის მისამართი \"%1$s\"."
 
 #: include/classes/api/services/CUser.php:934
 #, c-format
@@ -11000,7 +11010,7 @@ msgstr ""
 #: items.php:558 items.php:563 items.php:576
 #, c-format
 msgid "Invalid interval \"%1$s\"."
-msgstr ""
+msgstr "არასწორი ინტერვალი \"%1$s\"."
 
 #: include/classes/api/services/CDiscoveryRule.php:62
 #, c-format
@@ -11021,17 +11031,17 @@ msgstr ""
 #: include/classes/api/services/CDRule.php:563
 #, c-format
 msgid "Invalid key \"%1$s\": %2$s."
-msgstr ""
+msgstr "არასწორი გასაღები \"%1$s\": %2$s."
 
 #: app/controllers/CControllerPopupLdapCheck.php:67
 #: app/controllers/CControllerPopupMediaTypeMappingCheck.php:42
 #: app/controllers/CControllerPopupMediaTypeMappingEdit.php:44
 msgid "Invalid media type mapping configuration."
-msgstr ""
+msgstr "არასწორი მედიის ტიპის ასახვის კონფიგურაცია."
 
 #: include/classes/core/CJsonRpc.php:187
 msgid "Invalid method parameters."
-msgstr ""
+msgstr "არასწორ მეთოდის პარამეტრები."
 
 #: app/controllers/CControllerDashboardUpdate.php:191
 #: app/controllers/CControllerDashboardUpdate.php:200
@@ -11239,7 +11249,7 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:503
 #, c-format
 msgid "Invalid parameter \"%1$s\": %2$s."
-msgstr ""
+msgstr "არასწორი პარამეტრი \"%1$s\": %2$s."
 
 #: include/classes/core/CJsonRpc.php:186
 msgid "Invalid params."
@@ -11252,7 +11262,7 @@ msgstr "არასწორი მოთხოვნა."
 #: include/classes/api/services/CHttpTest.php:786
 #, c-format
 msgid "Invalid response code \"%1$s\"."
-msgstr ""
+msgstr "არასწორი პასუხის კოდი \"%1$s\"."
 
 #: include/classes/export/CConfigurationExportBuilder.php:86
 #: include/classes/export/CConfigurationExportBuilder.php:118
@@ -11324,7 +11334,7 @@ msgstr ""
 #: include/classes/import/validators/CXmlValidator.php:64
 #, c-format
 msgid "Invalid tag \"%1$s\": %2$s."
-msgstr ""
+msgstr "არასწორი ჭდე \"%1$s\": %2$s."
 
 #: include/classes/validators/CActionCondValidator.php:103
 msgid "Invalid time period."
@@ -11334,12 +11344,12 @@ msgstr "არასწორი დროის შუალედი."
 #: app/controllers/CControllerPopupUserGroupMappingCheck.php:42
 #: app/controllers/CControllerPopupUserGroupMappingEdit.php:44
 msgid "Invalid user group mapping configuration."
-msgstr ""
+msgstr "არასწორი მომხმარებლის ჯგუფის ასახვის კონფიგურაცია."
 
 #: include/classes/validators/CApiInputValidator.php:2852
 #, c-format
 msgid "Invalid zoomparameter \"%1$s\": %2$s."
-msgstr ""
+msgstr "არასწორი გადიდების პარამეტრი \"%1$s\": %2$s."
 
 #: app/partials/configuration.host.edit.html.php:526
 #: app/views/popup.massupdate.host.php:294
@@ -11352,7 +11362,7 @@ msgstr "ინვენტარი"
 #: include/classes/api/services/CHost.php:1161
 #, c-format
 msgid "Inventory disabled for host \"%1$s\"."
-msgstr ""
+msgstr "ინვენტარი გაითიშა ჰოსტისთვის \"%1$s\"."
 
 #: app/views/administration.iconmap.edit.php:59
 msgid "Inventory field"
@@ -11635,7 +11645,7 @@ msgstr ""
 #: include/views/inventory.host.view.php:180
 #: include/views/inventory.host.view.php:213 items.php:1160
 msgid "Items"
-msgstr "ელემენტი"
+msgstr "ელემენტები"
 
 #: items.php:991
 msgid "Items deleted"
@@ -11681,23 +11691,23 @@ msgstr "JSON"
 
 #: include/classes/mvc/CController.php:231
 msgid "JSON array input is expected."
-msgstr ""
+msgstr "მოველოდი JSON მასივის შეყვანას."
 
 #: app/views/popup.massupdate.item.php:94
 #: include/views/configuration.host.discovery.edit.php:300
 #: include/views/configuration.item.edit.php:357
 #: include/views/configuration.item.prototype.edit.php:343
 msgid "JSON data"
-msgstr ""
+msgstr "JSON მონაცემები"
 
 #: include/classes/api/services/CItemGeneral.php:2663
 #: include/classes/api/services/CItemGeneral.php:2692
 msgid "JSON is expected"
-msgstr ""
+msgstr "მოველოდი JSON"
 
 #: include/classes/validators/CNewValidator.php:113
 msgid "JSON string is expected"
-msgstr ""
+msgstr "მოველოდი JSON სტრიქონს"
 
 #: include/classes/core/CJsonRpc.php:146
 #, c-format
@@ -11707,7 +11717,7 @@ msgstr ""
 #: include/items.inc.php:1824
 #: include/views/configuration.host.discovery.edit.php:866
 msgid "JSONPath"
-msgstr ""
+msgstr "JSONPath"
 
 #: include/func.inc.php:236
 msgid "Jan"
@@ -11769,16 +11779,16 @@ msgstr "Kerberos"
 #: include/views/configuration.item.prototype.edit.php:119
 #: include/views/configuration.item.prototype.list.php:66 items.php:49
 msgid "Key"
-msgstr ""
+msgstr "გასაღები"
 
 #: app/views/administration.script.edit.php:160
 #: include/views/js/common.item.edit.js.php:56
 msgid "Key passphrase"
-msgstr ""
+msgstr "გასაღების საკვანძო ფრაზა"
 
 #: include/html.inc.php:171
 msgid "Kiosk mode"
-msgstr ""
+msgstr "კიოსკის რეჟიმი"
 
 #: include/locales.inc.php:49
 msgid "Korean (ko_KR)"
@@ -11866,7 +11876,7 @@ msgstr "ენა"
 #: include/classes/api/services/CUser.php:775
 #, c-format
 msgid "Language \"%1$s\" is not supported."
-msgstr ""
+msgstr "ენა \"%1$s\" მხარდაჭერილი არაა."
 
 #: include/classes/helpers/CPagerHelper.php:232
 msgctxt "page navigation"
@@ -11958,11 +11968,11 @@ msgstr "გვარი"
 #: app/controllers/CControllerPopupTriggerExpr.php:252
 #: app/controllers/CControllerPopupTriggerExpr.php:281
 msgid "Last of"
-msgstr ""
+msgstr "ბოლო"
 
 #: app/views/administration.proxy.list.php:81
 msgid "Last seen (age)"
-msgstr ""
+msgstr "ბოლოს ნანახი (ასაკი)"
 
 #: app/partials/scheduledreport.table.html.php:43
 msgid "Last sent"
@@ -12027,7 +12037,7 @@ msgstr "მარცხენა"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:140
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:487
 msgid "Left Y"
-msgstr ""
+msgstr "მარცხენა Y"
 
 #: include/items.inc.php:1816
 msgid "Left trim"
@@ -12044,7 +12054,7 @@ msgstr "სიგრძე"
 
 #: setup.php:182
 msgid "Licensed under"
-msgstr ""
+msgstr "ლიცენზია"
 
 #: app/views/administration.gui.edit.php:93
 msgid "Limit for search and filter results"
@@ -12094,13 +12104,13 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:771
 #: include/views/js/monitoring.sysmaps.js.php:812
 msgid "Link indicators"
-msgstr ""
+msgstr "ბმულის მაჩვენებლები"
 
 #: app/controllers/CControllerPopupLldOperation.php:143
 #: app/views/popup.lldoperation.php:238 app/views/popup.massupdate.host.php:74
 #: app/views/popup.massupdate.template.php:78
 msgid "Link templates"
-msgstr ""
+msgstr "ბმულის ნიმუშები"
 
 #: include/actions.inc.php:1035
 msgid "Link to template"
@@ -12112,16 +12122,16 @@ msgstr ""
 
 #: app/views/monitoring.widget.navtreeitem.edit.php:40
 msgid "Linked map"
-msgstr ""
+msgstr "მიბმული რუკა"
 
 #: include/views/configuration.template.list.php:64
 #: include/views/configuration.template.list.php:127
 msgid "Linked templates"
-msgstr ""
+msgstr "მიბმული ნიმუშები"
 
 #: include/views/configuration.template.list.php:128
 msgid "Linked to templates"
-msgstr ""
+msgstr "მიბმულია ნიმუშებზე"
 
 #: include/views/js/monitoring.sysmaps.js.php:757
 #: include/views/js/monitoring.sysmaps.js.php:768
@@ -12234,11 +12244,11 @@ msgstr "მდებარეობა"
 
 #: include/hosts.inc.php:219
 msgid "Location latitude"
-msgstr "გეოლოკაციის განედი"
+msgstr "მდებარეობის განედი"
 
 #: include/hosts.inc.php:224
 msgid "Location longitude"
-msgstr "გეოლოკაციის გრძედი"
+msgstr "მდებარეობის გრძედი"
 
 #: app/partials/configuration.filter.items.php:140
 #: app/views/popup.massupdate.item.php:158 include/items.inc.php:129
@@ -12286,7 +12296,7 @@ msgstr "შესვლის შეცდომა"
 
 #: include/classes/validators/CLdapAuthValidator.php:87
 msgid "Login name or password is incorrect."
-msgstr ""
+msgstr "მომხმარებელი ან პაროლი არასწორია."
 
 #: app/controllers/CControllerPopupLdapTestSend.php:76
 msgid "Login successful"
@@ -12314,12 +12324,12 @@ msgstr ""
 
 #: include/classes/graphdraw/CLineGraphDraw.php:965
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #: jsLoader.php:252
 msgctxt "Monday short"
 msgid "M"
-msgstr "ორშ"
+msgstr "ო"
 
 #: include/func.inc.php:592 jsLoader.php:226
 msgctxt "month short"
@@ -12369,7 +12379,7 @@ msgstr ""
 #: include/classes/api/services/CUserMacro.php:411
 #, c-format
 msgid "Macro \"%1$s\" already exists."
-msgstr ""
+msgstr "მაკრო \"%1$s\" უკვე არსებობს."
 
 #: app/partials/configuration.host.edit.html.php:525
 #: app/partials/massupdate.macros.tab.php:120
@@ -12386,7 +12396,7 @@ msgstr "მაკროები"
 
 #: app/controllers/CControllerMacrosUpdate.php:129
 msgid "Macros updated"
-msgstr ""
+msgstr "მაკროები განახლდა"
 
 #: app/views/administration.user.list.php:39
 #: app/views/monitoring.dashboard.view.php:80
@@ -12464,7 +12474,7 @@ msgstr ""
 #: include/html.inc.php:978
 #, c-format
 msgid "Maintenance: %1$s"
-msgstr ""
+msgstr "რემონტი: %1$s"
 
 #: app/views/administration.geomaps.edit.php:60
 msgid "Make sure the code comes from a reliable source and does not contain malicious scripts."
@@ -12476,15 +12486,15 @@ msgstr ""
 
 #: include/classes/helpers/CRoleHelper.php:466
 msgid "Manage API tokens"
-msgstr ""
+msgstr "API კოდების მართვა"
 
 #: include/classes/helpers/CRoleHelper.php:472
 msgid "Manage SLA"
-msgstr ""
+msgstr "SLA-ის მართვა"
 
 #: include/classes/helpers/CRoleHelper.php:471
 msgid "Manage scheduled reports"
-msgstr ""
+msgstr "დაგეგმილი ანგარიშების მართვა"
 
 #: app/partials/configuration.host.edit.html.php:359
 #: app/partials/popup.operations.php:227
@@ -12534,7 +12544,7 @@ msgstr "რუკა"
 #: include/classes/api/services/CMap.php:1092
 #, c-format
 msgid "Map \"%1$s\" already exists."
-msgstr ""
+msgstr "რუკა \"%1$s\" უკვე არსებობს."
 
 #: include/classes/api/services/CMap.php:737
 #: include/classes/api/services/CMap.php:812
@@ -12547,7 +12557,7 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:78
 #: include/views/monitoring.sysmap.constructor.php:31
 msgid "Map element"
-msgstr ""
+msgstr "რუკის ელემენტი"
 
 #: include/classes/api/services/CMapElement.php:55
 #: include/classes/api/services/CMapElement.php:96
@@ -12559,11 +12569,11 @@ msgstr ""
 
 #: include/views/monitoring.sysmap.edit.php:245
 msgid "Map element label location"
-msgstr ""
+msgstr "რუკის ელემენტი ჭდის მდებარეობა"
 
 #: include/views/monitoring.sysmap.edit.php:236
 msgid "Map element label type"
-msgstr ""
+msgstr "რუკის ელემენტის ჭდის ტიპი"
 
 #: sysmap.php:131
 msgid "Map is updated! Return to map list?"
@@ -12571,7 +12581,7 @@ msgstr ""
 
 #: include/views/monitoring.sysmap.edit.php:208
 msgid "Map label type"
-msgstr ""
+msgstr "რუკის ჭდს ტიპი"
 
 #: include/classes/api/services/CMap.php:1062
 msgid "Map name cannot be empty."
@@ -12589,11 +12599,11 @@ msgstr ""
 
 #: include/views/js/monitoring.sysmaps.js.php:353
 msgid "Map shape"
-msgstr ""
+msgstr "რუკის მოხაზულობა"
 
 #: sysmap.php:136
 msgid "Map update failed."
-msgstr ""
+msgstr "რუკის განახლება ჩავარდა."
 
 #: app/views/popup.ldap.edit.php:257
 msgid "Map user's LDAP media attributes (e.g. email) to Zabbix user media for sending notifications."
@@ -12619,7 +12629,7 @@ msgstr ""
 #: app/controllers/CControllerPopupValueMapUpdate.php:94
 #: app/views/popup.valuemap.edit.php:51
 msgid "Mapped to"
-msgstr ""
+msgstr "ასახულია"
 
 #: app/controllers/CControllerPopupGeneric.php:366
 msgid "Mapping"
@@ -12657,11 +12667,11 @@ msgstr ""
 
 #: include/views/monitoring.history.php:176
 msgid "Mark others"
-msgstr ""
+msgstr "სხვების დანიშვნა"
 
 #: include/views/monitoring.history.php:175
 msgid "Mark selected"
-msgstr ""
+msgstr "მონიშნულის დანიშვნა"
 
 #: jsLoader.php:362
 msgid "Mark selected as symptoms"
@@ -12687,15 +12697,15 @@ msgstr "ნიღაბი"
 #: include/views/configuration.trigger.prototype.list.php:208
 #: include/views/configuration.triggers.list.php:349
 msgid "Mass update"
-msgstr ""
+msgstr "მასიური განახლება"
 
 #: include/views/js/monitoring.sysmaps.js.php:642
 msgid "Mass update elements"
-msgstr ""
+msgstr "ელემენტების მასიური განახლება"
 
 #: include/views/js/monitoring.sysmaps.js.php:512
 msgid "Mass update shapes"
-msgstr ""
+msgstr "მოხაზულობების მასიური განახლება"
 
 #: app/views/popup.massupdate.item.php:455 disc_prototypes.php:51
 #: host_discovery.php:54
@@ -12703,15 +12713,15 @@ msgstr ""
 #: include/views/configuration.item.edit.php:561
 #: include/views/configuration.item.prototype.edit.php:584 items.php:53
 msgid "Master item"
-msgstr ""
+msgstr "ძირითადი ელემენტი"
 
 #: include/items.inc.php:1868
 msgid "Matches regular expression"
-msgstr ""
+msgstr "ემთხვევა რეგულარულ გამოსახულებას"
 
 #: app/views/popup.triggerexpr.php:113
 msgid "Mathematical functions"
-msgstr ""
+msgstr "მათემატიკური ფუნქციები"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:395
 #: app/views/popup.tophosts.column.edit.php:187
@@ -12742,7 +12752,7 @@ msgstr ""
 
 #: app/views/connector.edit.php:171
 msgid "Max records per message"
-msgstr ""
+msgstr "მაქს. ჩანაწერები თითოეულ შეტყობინებაში"
 
 #: app/controllers/CControllerPopupItemTest.php:1313
 #: app/controllers/CControllerPopupItemTest.php:1319
@@ -12751,7 +12761,7 @@ msgstr ""
 #: app/partials/configuration.host.interface.row.php:105
 #: app/views/popup.itemtestedit.view.php:154
 msgid "Max repetition count"
-msgstr ""
+msgstr "მაქს. გამეორებების რაოდენობა"
 
 #: app/partials/configuration.host.interface.row.php:106
 msgid "Max repetition count is applicable to discovery and snmp.walk only."
@@ -12763,7 +12773,7 @@ msgstr ""
 
 #: app/views/administration.geomaps.edit.php:98
 msgid "Max zoom level"
-msgstr ""
+msgstr "მაქს გადიდების დონე"
 
 #: include/classes/data/CItemData.php:874
 msgid "Maximum number of opened files supported by OS. Returns integer"
@@ -13095,7 +13105,7 @@ msgstr ""
 #: include/classes/widgets/CWidgetHelper.php:1010
 #: include/classes/widgets/CWidgetHelper.php:1263
 msgid "Missing data"
-msgstr ""
+msgstr "ნაკლული მონაცემები"
 
 #: include/classes/api/services/CGraph.php:38
 #, c-format
@@ -13142,7 +13152,7 @@ msgstr[0] "მოდული წაიშალა: %1$s."
 #: app/controllers/CControllerModuleUpdate.php:132
 msgid "Module disabled"
 msgid_plural "Modules disabled"
-msgstr[0] ""
+msgstr[0] "მოდული გაითიშა"
 
 #: app/controllers/CControllerModuleUpdate.php:150
 #, c-format
@@ -13153,7 +13163,7 @@ msgstr[0] ""
 #: app/controllers/CControllerModuleUpdate.php:129
 msgid "Module enabled"
 msgid_plural "Modules enabled"
-msgstr[0] ""
+msgstr[0] "მოდული ჩაირთო"
 
 #: app/controllers/CControllerModuleUpdate.php:145
 #, c-format
@@ -13163,7 +13173,7 @@ msgstr[0] ""
 
 #: app/controllers/CControllerModuleUpdate.php:126
 msgid "Module updated"
-msgstr ""
+msgstr "მოდული განახლდა"
 
 #: app/controllers/CControllerModuleUpdate.php:142
 #, c-format
@@ -13257,7 +13267,7 @@ msgstr ""
 #: app/views/administration.queue.overview.php:52
 #: app/views/administration.queue.overview.proxy.php:52
 msgid "More than 10 minutes"
-msgstr ""
+msgstr "10 წუთზე მეტი"
 
 #: include/classes/api/services/CGraphGeneral.php:872
 #, c-format
@@ -13296,12 +13306,12 @@ msgstr "ჩემი"
 #: include/classes/helpers/CServiceHelper.php:37
 #: include/classes/helpers/CServiceHelper.php:47
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #: jsLoader.php:188
 msgctxt "abbreviation of severity level"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #: include/classes/helpers/CServiceHelper.php:42
 #: include/classes/helpers/CServiceHelper.php:52
@@ -13527,7 +13537,7 @@ msgstr "სახელების სივრცე"
 
 #: app/views/popup.usergroupmapping.edit.php:80
 msgid "Naming requirements:"
-msgstr ""
+msgstr "სახელის მოთხოვნები:"
 
 #: jsLoader.php:189
 msgid "Navigate to default view"
@@ -13647,11 +13657,11 @@ msgstr "ახალი მოვლენის ჰოსტის ჯგუფ
 #: include/classes/helpers/CCorrelationHelper.php:53
 #: include/classes/helpers/CCorrelationHelper.php:123
 msgid "New event tag name"
-msgstr "ახალი მოვლების ჭდის სახელი"
+msgstr "ახალი მოვლენის ჭდის სახელი"
 
 #: include/classes/helpers/CCorrelationHelper.php:57
 msgid "New event tag value"
-msgstr "ახალი მოვლების ჭდის მნიშვნელობა"
+msgstr "ახალი მოვლენის ჭდის მნიშვნელობა"
 
 #: app/controllers/CControllerPopupSlaExcludedDowntimeEdit.php:94
 msgid "New excluded downtime"
@@ -13800,12 +13810,12 @@ msgstr ""
 
 #: app/views/monitoring.widget.item.view.php:157
 msgid "No data"
-msgstr ""
+msgstr "მონაცემების გარეშე"
 
 #: include/views/configuration.maintenance.edit.php:107
 #: include/views/configuration.maintenance.list.php:115
 msgid "No data collection"
-msgstr ""
+msgstr "მონაცემების კოლექციის გარეშე"
 
 #: include/classes/html/CTableInfo.php:30
 msgid "No data found."
@@ -13814,7 +13824,7 @@ msgstr "მონაცემების გარეშე."
 #: app/controllers/CControllerWidgetPlainTextView.php:49
 #: app/controllers/CControllerWidgetUrlView.php:43
 msgid "No data."
-msgstr ""
+msgstr "მონაცემების გარეშე."
 
 #: include/classes/api/services/CHostInterface.php:1023
 #, c-format
@@ -13824,7 +13834,7 @@ msgstr ""
 #: include/classes/core/CJsonRpc.php:197 include/classes/core/CJsonRpc.php:202
 #: include/classes/core/CJsonRpc.php:207
 msgid "No details"
-msgstr ""
+msgstr "დეტალების გარეშე"
 
 #: include/classes/api/services/CDiscoveryRule.php:636
 msgid "No discovery rule IDs given."
@@ -13889,7 +13899,7 @@ msgstr "გამოსახულების გარეშე"
 #: include/views/configuration.item.edit.php:627
 #: include/views/configuration.item.prototype.edit.php:605 jsLoader.php:396
 msgid "No interface found"
-msgstr ""
+msgstr "ინტერფეისი ვერ ვიპოვე"
 
 #: include/classes/api/services/CItemGeneral.php:420
 msgid "No interface found."
@@ -13897,7 +13907,7 @@ msgstr ""
 
 #: jsLoader.php:321
 msgid "No interfaces are defined."
-msgstr ""
+msgstr "ინტერფეისები აღწერილი არაა."
 
 #: app/controllers/CControllerActionOperationValidate.php:169
 msgid "No inventory mode specified for action operation."
@@ -13905,7 +13915,7 @@ msgstr ""
 
 #: include/classes/widgets/CWidgetHelper.php:1240
 msgid "No item selected."
-msgstr ""
+msgstr "მონიშნული ელემენტის გარეშე."
 
 #: include/items.inc.php:742
 #, c-format
@@ -13914,16 +13924,16 @@ msgstr ""
 
 #: chart3.php:145 chart7.php:56
 msgid "No items defined."
-msgstr ""
+msgstr "ელემენტები აღწერილი არაა."
 
 #: app/partials/hostmacros.inherited.list.html.php:27
 #: app/partials/hostmacros.list.html.php:27
 msgid "No macros found."
-msgstr ""
+msgstr "მაკროები ვერ ვიპოვე."
 
 #: app/views/monitoring.widget.favmaps.view.php:26
 msgid "No maps added."
-msgstr ""
+msgstr "რუკები არ დამატებულა."
 
 #: include/classes/html/CMultiSelect.php:82 jsLoader.php:335
 msgid "No matches found"
@@ -13931,7 +13941,7 @@ msgstr "არაფერი მოიძებნა"
 
 #: app/controllers/CControllerModuleScan.php:128
 msgid "No new modules discovered"
-msgstr ""
+msgstr "ახალი მოდულები აღმოჩენილი არაა"
 
 #: include/classes/api/services/CAction.php:2779
 #, c-format
@@ -14265,7 +14275,7 @@ msgstr ""
 #: include/views/configuration.triggers.edit.php:333
 #: include/views/js/monitoring.sysmaps.js.php:27
 msgid "None"
-msgstr "არაფერი"
+msgstr "არაა"
 
 #: app/partials/configuration.filter.items.php:177
 #: app/views/popup.generic.php:506 include/graphs.inc.php:24
@@ -14348,7 +14358,7 @@ msgstr "გარკვეული არაა"
 
 #: app/controllers/CControllerMediatypeEnable.php:95
 msgid "Not enabled"
-msgstr ""
+msgstr "არ არის ჩართული"
 
 #: include/forms.inc.php:315
 msgid "Not inherited items"
@@ -14360,6 +14370,11 @@ msgstr ""
 #: include/views/configuration.host.discovery.list.php:162
 msgid "Not supported"
 msgstr "მხარდაუჭერელია"
+
+#: app/views/administration.miscconfig.edit.php:138
+#, c-format
+msgid "Note that %1$s or %2$s will be regarded as hostnames if used without single quotes."
+msgstr ""
 
 #: include/hosts.inc.php:229
 msgid "Notes"
@@ -14376,7 +14391,7 @@ msgstr ""
 #: include/classes/helpers/CMenuHelper.php:154
 #: include/classes/helpers/CRoleHelper.php:389 report4.php:65
 msgid "Notifications"
-msgstr "გაფრთხილებები"
+msgstr "შეტყობინებები"
 
 #: actionconf.php:87 include/views/configuration.action.edit.php:481
 msgid "Notify about canceled escalations"
@@ -14681,13 +14696,13 @@ msgstr ""
 
 #: app/views/popup.condition.common.php:118
 msgid "Old tag name"
-msgstr ""
+msgstr "ძველი ჭდის სახელი"
 
 #: app/views/administration.proxy.list.php:167
 #: include/views/monitoring.sysmap.constructor.php:51
 #: include/views/monitoring.sysmap.constructor.php:61 jsLoader.php:261
 msgid "On"
-msgstr "ჩართ"
+msgstr "ჩართული"
 
 #: app/views/administration.trigdisplay.edit.php:95
 msgid "On status change triggers blink for"
@@ -14703,7 +14718,7 @@ msgstr "ერთი"
 
 #: app/views/popup.maintenance.period.php:75 include/maintenances.inc.php:25
 msgid "One time only"
-msgstr ""
+msgstr "მხოლოდ ერთხელ"
 
 #: include/classes/api/services/CDRule.php:488
 msgid "Only Zabbix agent, SNMPv1, SNMPv2 and SNMPv3 checks can be made unique."
@@ -14751,15 +14766,15 @@ msgstr ""
 #: app/views/popup.acknowledge.edit.php:58
 msgid "Only selected problem"
 msgid_plural "Only selected problems"
-msgstr[0] ""
+msgstr[0] "მხოლოდ მონიშნული პრობლემა"
 
 #: app/views/service.list.edit.php:86
 msgid "Only services without children"
-msgstr ""
+msgstr "მხოლოდ, სერვისები შვილების გარეშე"
 
 #: app/views/service.list.edit.php:94
 msgid "Only services without problem tags"
-msgstr ""
+msgstr "მხოლოდ, სერვისები პრობლემის ჭდეის გარეშე"
 
 #: include/classes/api/services/CDashboard.php:414
 msgid "Only super admins can set dashboard owner."
@@ -14920,7 +14935,7 @@ msgstr "დალაგება"
 
 #: include/classes/widgets/forms/CWidgetFormTopHosts.php:145
 msgid "Order column"
-msgstr ""
+msgstr "სვეტით დალაგება"
 
 #: app/partials/massupdate.macros.tab.php:119
 #: app/partials/massupdate.valuemaps.tab.php:89
@@ -14989,11 +15004,11 @@ msgstr "სხვა"
 #: app/controllers/CControllerMiscConfigEdit.php:134
 #: app/views/administration.miscconfig.edit.php:29
 msgid "Other configuration parameters"
-msgstr ""
+msgstr "სხვა პარამეტრები"
 
 #: app/views/administration.miscconfig.edit.php:188
 msgid "Other parameters"
-msgstr ""
+msgstr "სხვა პარამეტრები"
 
 #: include/httptest.inc.php:432
 #: include/views/configuration.httpconf.edit.php:90
@@ -15045,7 +15060,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:957
 #: include/views/configuration.host.discovery.edit.php:980
 msgid "Overrides"
-msgstr ""
+msgstr "გადაფარავს"
 
 #: include/classes/helpers/CMenuHelper.php:112
 #: include/classes/helpers/CRoleHelper.php:365
@@ -15204,7 +15219,7 @@ msgstr "PHP-ის სტრიქონებთან სამუშაო �
 
 #: include/classes/setup/CFrontendSetup.php:102
 msgid "PHP version"
-msgstr "PHP ვერსია"
+msgstr "PHP version"
 
 #: include/classes/setup/CFrontendSetup.php:513
 msgid "PHP xmlreader"
@@ -15224,7 +15239,7 @@ msgstr "PHP-ის გაფართოება xmlwriter აღმოჩე�
 
 #: include/discovery.inc.php:52
 msgid "POP"
-msgstr ""
+msgstr "POP"
 
 #: app/views/hintbox.eventlist.php:116
 #: app/views/monitoring.widget.problems.view.php:109
@@ -15270,12 +15285,12 @@ msgstr "PSK"
 #: app/views/administration.proxy.edit.php:112
 #: app/views/popup.massupdate.host.php:254
 msgid "PSK identity"
-msgstr ""
+msgstr "PSK იდენტიფიკატორი"
 
 #: jsLoader.php:142
 #, c-format
 msgid "Page %1$d"
-msgstr ""
+msgstr "გვერდი %1$d"
 
 #: app/views/dashboard.page.properties.edit.php:55
 msgid "Page display period"
@@ -15603,7 +15618,7 @@ msgstr "პერიოდები"
 #: include/views/monitoring.sysmap.edit.php:324
 #: include/views/monitoring.sysmap.edit.php:361
 msgid "Permissions"
-msgstr "ნებართვები"
+msgstr "უფლებები"
 
 #: app/views/administration.user.edit.php:451
 msgid "Permissions can be assigned for user groups only."
@@ -15619,7 +15634,7 @@ msgstr "სექტორი"
 
 #: include/views/js/monitoring.sysmaps.js.php:135
 msgid "Placing algorithm"
-msgstr ""
+msgstr "განთავსების ალგორითმი"
 
 #: app/views/administration.mediatype.edit.php:210
 #: include/classes/setup/CSetupWizard.php:512
@@ -15630,7 +15645,7 @@ msgstr "ტექსტი"
 #: app/views/administration.user.edit.php:691
 #: app/views/administration.user.edit.php:726
 msgid "Play"
-msgstr "დაკვრა"
+msgstr "თამაში"
 
 #: app/views/administration.user.edit.php:664
 msgid "Play sound"
@@ -15856,13 +15871,13 @@ msgstr "ძირითადი კონტაქტის საჩვენ�
 #: app/views/popup.discovery.check.php:117
 #: app/views/popup.itemtestedit.view.php:223
 msgid "Privacy passphrase"
-msgstr ""
+msgstr "კონფიდენციალობის საკვანძო ფრაზა"
 
 #: app/partials/configuration.host.interface.row.php:169
 #: app/views/popup.discovery.check.php:110
 #: app/views/popup.itemtestedit.view.php:213
 msgid "Privacy protocol"
-msgstr ""
+msgstr "კონფიდენციალობის პროტოკოლი"
 
 #: app/views/popup.dashboard.share.edit.php:125
 #: include/views/monitoring.sysmap.edit.php:400
@@ -15875,7 +15890,7 @@ msgstr "პირადი"
 #: include/views/configuration.item.edit.php:696
 #: include/views/configuration.item.prototype.edit.php:671
 msgid "Private key file"
-msgstr ""
+msgstr "პირადი გასაღების ფაილი"
 
 #: app/partials/configuration.host.edit.html.php:310
 #: app/views/popup.massupdate.host.php:156
@@ -15935,11 +15950,11 @@ msgstr "პრობლემური ჰოსტები"
 
 #: include/actions.inc.php:360
 msgid "Problem is not suppressed"
-msgstr ""
+msgstr "პრობლემა ჩახშობილი არაა"
 
 #: include/actions.inc.php:43 include/actions.inc.php:359
 msgid "Problem is suppressed"
-msgstr ""
+msgstr "პრობლემა ჩახშობილია"
 
 #: jsLoader.php:292
 msgid "Problem on"
@@ -16053,7 +16068,7 @@ msgstr ""
 
 #: app/views/administration.user.list.php:301
 msgid "Provision now"
-msgstr ""
+msgstr "მუშაობისთვის მომზადება ახლავე"
 
 #: app/views/administration.user.list.php:303
 msgid "Provision selected LDAP users?"
@@ -16257,7 +16272,7 @@ msgstr "წაკითხვა"
 
 #: include/perm.inc.php:32
 msgid "Read only"
-msgstr "მხოლოდ-კითხვადი"
+msgstr "მხოლოდ-წაკითხვადი"
 
 #: app/views/popup.dashboard.share.edit.php:80
 #: app/views/popup.dashboard.share.edit.php:101
@@ -16343,7 +16358,7 @@ msgstr ""
 
 #: app/views/reports.actionlog.list.csv.php:40
 msgid "Recipient's name"
-msgstr "მიმღების სახელი"
+msgstr ""
 
 #: app/views/reports.actionlog.list.csv.php:41
 msgid "Recipient's surname"
@@ -16390,12 +16405,12 @@ msgstr ""
 #: include/classes/screens/CScreenProblem.php:878
 #: include/classes/screens/CScreenProblem.php:1151 include/events.inc.php:286
 msgid "Recovery time"
-msgstr ""
+msgstr "აღდგენის დრო"
 
 #: app/views/monitoring.widget.problems.view.php:59
 msgctxt "compact table header"
 msgid "Recovery time"
-msgstr ""
+msgstr "აღდგენის დრო"
 
 #: include/views/js/monitoring.sysmaps.js.php:371
 #: include/views/js/monitoring.sysmaps.js.php:531
@@ -16428,7 +16443,7 @@ msgstr "განახლების ინტერვალი"
 
 #: app/views/popup.token.edit.php:132
 msgid "Regenerate"
-msgstr "რეგენერაცია"
+msgstr ""
 
 #: app/views/popup.token.edit.php:133
 msgid "Regenerate selected API token? Previously generated token will become invalid."
@@ -16640,7 +16655,7 @@ msgstr "ყველას წაშლა"
 
 #: app/views/administration.authentication.edit.php:125
 msgid "Remove domain name"
-msgstr ""
+msgstr "დომენის სახელის წაშლა"
 
 #: app/controllers/CControllerFavouriteCreate.php:63 include/html.inc.php:147
 msgid "Remove from favorites"
@@ -16648,11 +16663,11 @@ msgstr "რჩეულებიდან წაშლა"
 
 #: include/actions.inc.php:1034
 msgid "Remove from host group"
-msgstr ""
+msgstr "ჰოსტების ჯგუფიდან წაშლა"
 
 #: include/actions.inc.php:717
 msgid "Remove from host groups"
-msgstr ""
+msgstr "ჰოსტის ჯგუფებიდან წაშლა"
 
 #: include/actions.inc.php:690 include/actions.inc.php:1030
 msgid "Remove host"
@@ -16677,7 +16692,7 @@ msgstr "წაიშალა, %1$s"
 
 #: app/partials/massupdate.valuemaps.tab.php:96
 msgid "Rename"
-msgstr "გადარქმევა"
+msgstr "სახელის გადარქმევა"
 
 #: app/controllers/CControllerPopupScheduledReportCreate.php:70
 #: app/controllers/CControllerScheduledReportCreate.php:82
@@ -16828,7 +16843,7 @@ msgstr ""
 #: app/views/popup.service.edit.php:305 app/views/popup.services.php:51
 #: include/classes/html/CFilter.php:215 include/classes/html/CTabFilter.php:102
 msgid "Reset"
-msgstr "დაბრუნება"
+msgstr "საწყისი მნიშვნელობები"
 
 #: app/views/js/administration.audit.settings.edit.js.php:43
 #: app/views/js/administration.gui.edit.js.php:33
@@ -17055,7 +17070,7 @@ msgstr "ცვლილებების დაბრუნება"
 #: include/views/js/monitoring.sysmaps.js.php:685
 #: include/views/monitoring.sysmap.edit.php:252
 msgid "Right"
-msgstr "მარჯვენა"
+msgstr "Right"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:184
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:197
@@ -17291,7 +17306,7 @@ msgstr "SNMP აგენტი"
 #: app/views/popup.discovery.check.php:68
 #: app/views/popup.itemtestedit.view.php:141
 msgid "SNMP community"
-msgstr "SNMP community"
+msgstr ""
 
 #: include/views/inventory.host.view.php:65
 msgid "SNMP interfaces"
@@ -17944,7 +17959,7 @@ msgstr "სერვსის ტიპი"
 #: app/views/popup.mediatype.message.php:64
 #: include/classes/helpers/CMediatypeHelper.php:144
 msgid "Service update"
-msgstr "სერვისის განახლება"
+msgstr ""
 
 #: app/controllers/CControllerServiceUpdate.php:187
 msgid "Service updated"
@@ -18052,7 +18067,7 @@ msgstr ""
 #: include/classes/setup/CSetupWizard.php:66
 #: include/classes/setup/CSetupWizard.php:638
 msgid "Settings"
-msgstr "პარამეტრები"
+msgstr "მორგება"
 
 #: app/controllers/CControllerPopupGeneric.php:178
 #: app/controllers/CControllerPopupGeneric.php:192
@@ -18285,7 +18300,7 @@ msgstr ""
 
 #: app/views/administration.authentication.edit.php:265
 msgid "Sign"
-msgstr ""
+msgstr "ხელმოწერა"
 
 #: include/views/general.login.php:65 include/views/general.login.php:80
 msgid "Sign in"
@@ -18507,7 +18522,7 @@ msgstr "უქმე"
 #: app/controllers/CControllerPopupTriggerExpr.php:668
 #: app/controllers/CControllerPopupTriggerExpr.php:787
 msgid "Start"
-msgstr "დაწყება"
+msgstr "გაშვება"
 
 #: app/partials/scheduledreport.formgrid.html.php:151
 msgid "Start date"
@@ -18532,7 +18547,7 @@ msgstr ""
 #: app/views/popup.sla.edit.php:185
 #: app/views/popup.sla.excludeddowntime.edit.php:49
 msgid "Start time"
-msgstr ""
+msgstr "გაშვების დრო"
 
 #: include/classes/api/services/CSla.php:578
 #, c-format
@@ -18695,7 +18710,7 @@ msgstr ""
 #: include/actions.inc.php:1921
 #: include/classes/screens/CScreenHttpTestDetails.php:81
 msgid "Step"
-msgstr "ნაბიჯი"
+msgstr "Step"
 
 #: include/classes/screens/CScreenHttpTest.php:131
 #: include/views/configuration.httpconf.list.php:172
@@ -18910,7 +18925,7 @@ msgstr ""
 #: include/actions.inc.php:2041 include/classes/screens/CScreenProblem.php:1479
 #: include/events.inc.php:274 widgets/problems/includes/WidgetProblems.php:375
 msgid "Symptom"
-msgstr "სიმპტომი"
+msgstr ""
 
 #: app/controllers/CControllerGuiEdit.php:33
 #: include/classes/setup/CSetupWizard.php:611
@@ -18926,7 +18941,7 @@ msgstr ""
 #: app/views/administration.user.edit.php:195 app/views/popup.sla.edit.php:91
 #: app/views/sla.list.php:148 include/users.inc.php:81
 msgid "System default"
-msgstr "სისტემის ნაგულისხმევი"
+msgstr "სისტემის ნაგულისხმები"
 
 #: include/func.inc.php:1745
 msgid "System error occurred. Please contact Zabbix administrator."
@@ -19008,7 +19023,7 @@ msgstr ""
 #: app/views/popup.condition.common.php:323 include/hosts.inc.php:144
 #: include/views/inventory.host.list.php:92
 msgid "Tag"
-msgstr "ჭდე"
+msgstr "იარლიყი"
 
 #: app/partials/monitoring.latest.filter.php:172
 #: app/partials/monitoring.problem.filter.php:233
@@ -19115,7 +19130,7 @@ msgstr "ჭდეები"
 #: include/views/configuration.triggers.edit.php:427 trigger_prototypes.php:53
 #: trigger_prototypes.php:55 triggers.php:60 triggers.php:62
 msgid "Target"
-msgstr "სამიზნე"
+msgstr "სამიზნე წერტილი"
 
 #: app/partials/popup.operations.php:168
 msgid "Target list"
@@ -19242,7 +19257,7 @@ msgstr ""
 
 #: include/views/configuration.template.edit.php:56 templates.php:41
 msgid "Template name"
-msgstr "შაბლონის სახელი"
+msgstr "ნიმუშის სახელი"
 
 #: app/views/administration.usergroup.edit.php:273
 msgid "Template permissions"
@@ -19389,7 +19404,7 @@ msgstr ""
 
 #: app/views/administration.regex.edit.php:120
 msgid "Test string"
-msgstr ""
+msgstr "სატესტო სტრიქონი"
 
 #: app/controllers/CControllerPopupMediatypeTestEdit.php:81
 msgid "Test subject"
@@ -19639,7 +19654,7 @@ msgstr "ზღვარი"
 
 #: app/views/popup.tophosts.column.edit.php:232
 msgid "Thresholds"
-msgstr ""
+msgstr "შეზღუდვები"
 
 #: include/items.inc.php:1891 include/items.inc.php:1895
 msgid "Throttling"
@@ -19753,7 +19768,7 @@ msgstr "დროის სარტყელი"
 #: include/views/configuration.item.edit.php:344
 #: include/views/configuration.item.prototype.edit.php:330 items.php:151
 msgid "Timeout"
-msgstr "ვადა"
+msgstr "მოლოდინის ვადა"
 
 #: app/views/monitoring.widget.plaintext.view.php:32
 #: include/classes/screens/CScreenHistory.php:265
@@ -19770,7 +19785,7 @@ msgstr "დროის შტამპი"
 
 #: app/views/sla.list.php:91
 msgid "Timezone"
-msgstr "დროის ზონა"
+msgstr "დროის სარტყელი"
 
 #: app/controllers/CControllerSlaReportList.php:181
 #: app/partials/massupdate.valuemaps.tab.php:46
@@ -19782,7 +19797,7 @@ msgstr "დროის ზონა"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:93
 #: include/views/js/monitoring.sysmaps.js.php:771
 msgid "To"
-msgstr "ვის"
+msgstr "სადამდე"
 
 #: jsLoader.php:395
 msgid "To set a host interface select a single item type for all items"
@@ -19807,7 +19822,7 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:686
 #: include/views/monitoring.sysmap.edit.php:253
 msgid "Top"
-msgstr "თავში"
+msgstr ""
 
 #: include/classes/widgets/forms/CWidgetFormTopHosts.php:132
 msgid "Top N"
@@ -20592,7 +20607,7 @@ msgstr ""
 #: app/views/js/popup.tophosts.column.edit.js.php:113
 #: app/views/js/service.list.js.php:189 app/views/js/sla.list.js.php:171
 msgid "Unexpected server error."
-msgstr ""
+msgstr "მოულოდნელი სერვერის შეცდომა."
 
 #: app/views/popup.massupdate.item.php:164
 #: include/classes/widgets/forms/CWidgetFormItem.php:231
@@ -20646,7 +20661,7 @@ msgstr "უცნობი ქმედება"
 #: include/classes/screens/CScreenHttpTest.php:128
 #: include/views/configuration.httpconf.list.php:176
 msgid "Unknown error"
-msgstr "უცნობ შეცდომა"
+msgstr "უცნობი შეცდომა"
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:47
 #: app/controllers/CControllerPopupTriggerExpr.php:1347
@@ -20661,21 +20676,21 @@ msgstr ""
 
 #: include/hosts.inc.php:474
 msgid "Unknown interface type."
-msgstr ""
+msgstr "უცნობი ინტერფესისის ტიპი."
 
 #: app/views/reports.auditlog.list.php:109
 msgid "Unknown resource"
-msgstr ""
+msgstr "უცნობი რესურსი"
 
 #: include/classes/screens/CScreenHttpTest.php:136
 #: include/views/configuration.httpconf.list.php:178
 #, c-format
 msgid "Unknown step failed: %1$s"
-msgstr ""
+msgstr "უცნობი ნაბიჯი ჩავარდა: %1$s"
 
 #: include/items.inc.php:1413
 msgid "Unknown value type"
-msgstr ""
+msgstr "უცნობი მნიშვნელობის ტიპი"
 
 #: app/views/administration.mediatype.edit.php:328
 msgid "Unlimited"
@@ -20784,12 +20799,12 @@ msgstr "უსახელო"
 #: app/views/monitoring.widget.discovery.view.php:33
 msgctxt "discovery results in dashboard"
 msgid "Up"
-msgstr "ჩართული"
+msgstr "Up"
 
 #: include/discovery.inc.php:136
 msgctxt "discovery status"
 msgid "Up"
-msgstr "ჩართული"
+msgstr "Up"
 
 #: app/controllers/CControllerAuditLogList.php:195
 #: app/partials/massupdate.macros.tab.php:125
@@ -20932,6 +20947,10 @@ msgstr ""
 msgid "Use %{ref} in group filter to reference value of this user attribute."
 msgstr ""
 
+#: app/views/administration.miscconfig.edit.php:123
+msgid "Use X-Frame-Options HTTP header"
+msgstr ""
+
 #: app/partials/configuration.host.interface.row.php:194
 msgid "Use bulk requests"
 msgstr ""
@@ -20946,7 +20965,7 @@ msgstr ""
 
 #: jsLoader.php:402
 msgid "Use default"
-msgstr "ნაგულისხმევის გამოყენება"
+msgstr "ნაგულისხმების გამოყენება"
 
 #: app/partials/configuration.host.edit.html.php:188
 msgid "Use host prototype configuration form to remove automatically linked templates on upcoming discovery."
@@ -21191,7 +21210,7 @@ msgstr "მომხმარებლის მენიუ"
 #: include/views/configuration.item.prototype.edit.php:473
 #: include/views/configuration.item.prototype.edit.php:655 items.php:94
 msgid "User name"
-msgstr "მომხმარებლის სახელი"
+msgstr ""
 
 #: app/views/administration.authentication.edit.php:443
 #: app/views/popup.ldap.edit.php:210
@@ -21205,7 +21224,7 @@ msgstr "მომხმარებლის პაროლი"
 #: app/controllers/CControllerUserProfileEdit.php:139
 #: app/views/administration.user.edit.php:39 include/html.inc.php:819
 msgid "User profile"
-msgstr ""
+msgstr "მომხმარებლის პროფილი"
 
 #: app/controllers/CControllerAuditLogList.php:246
 #: app/views/administration.user.list.php:110
@@ -21221,16 +21240,16 @@ msgstr ""
 
 #: app/controllers/CControllerUserroleCreate.php:144
 msgid "User role created"
-msgstr ""
+msgstr "მომხმარებლის როლი შეიქმნა"
 
 #: app/controllers/CControllerUserroleDelete.php:56
 msgid "User role deleted"
 msgid_plural "User roles deleted"
-msgstr[0] ""
+msgstr[0] "მომხმარებლის როლი წაიშალა"
 
 #: app/controllers/CControllerUserroleUpdate.php:168
 msgid "User role updated"
-msgstr ""
+msgstr "მომხმარებლის როლი განახლდა"
 
 #: include/classes/api/services/CUser.php:796
 #, c-format
@@ -21265,7 +21284,7 @@ msgstr ""
 #: app/views/administration.userrole.edit.php:55
 #: app/views/administration.userrole.edit.php:70
 msgid "User type"
-msgstr "მომხმარებლის ტიპი"
+msgstr ""
 
 #: app/controllers/CControllerUserUnblock.php:65
 msgid "User unblocked"
@@ -22035,7 +22054,7 @@ msgstr ""
 
 #: app/views/administration.miscconfig.edit.php:105
 msgid "Valid URI schemes"
-msgstr ""
+msgstr "სწორი URI სქემები"
 
 #: app/views/administration.miscconfig.edit.php:100
 msgid "Validate URI schemes"
@@ -22321,7 +22340,7 @@ msgstr "ვიეტნამური (vi_VN)"
 #: app/views/service.list.edit.php:138 app/views/service.list.php:114
 #: include/views/js/configuration.host.discovery.edit.overr.js.php:106
 msgid "View"
-msgstr "ხედი"
+msgstr "ნახვა"
 
 #: include/views/monitoring.history.php:91
 msgid "View as"
@@ -22346,29 +22365,29 @@ msgstr ""
 #: include/classes/helpers/CServiceHelper.php:57
 #: include/classes/helpers/CServiceHelper.php:67
 msgid "W"
-msgstr "ორ"
+msgstr "დ"
 
 #: jsLoader.php:254
 msgctxt "Wednesday short"
 msgid "W"
-msgstr "ორ"
+msgstr "დ"
 
 #: jsLoader.php:186
 msgctxt "abbreviation of severity level"
 msgid "W"
-msgstr "ორ"
+msgstr "დ"
 
 #: app/controllers/CControllerPopupMediatypeTestSend.php:172
 #: app/views/administration.trigdisplay.edit.php:119
 #: app/views/js/popup.massupdate.js.php:422 include/items.inc.php:33
 #: include/views/general.warning.php:26 jsLoader.php:178
 msgid "Warning"
-msgstr "გაფრთხილება"
+msgstr "ყურადღება"
 
 #: include/classes/setup/CSetupWizard.php:435
 msgctxt "setup"
 msgid "Warning"
-msgstr "გაფთხილება"
+msgstr "ყურადღება"
 
 #: include/func.inc.php:1710 jsLoader.php:229
 msgid "Warning message"
@@ -22587,7 +22606,7 @@ msgstr ""
 #: app/views/monitoring.widget.problemhosts.view.php:34
 msgctxt "compact table header"
 msgid "With problems"
-msgstr ""
+msgstr "პრობლემებით"
 
 #: app/views/popup.tophosts.column.edit.php:119
 msgid "With this setting only numeric items will be displayed in this column."
@@ -22660,6 +22679,10 @@ msgstr "X-ღერძი"
 
 #: app/views/administration.miscconfig.edit.php:113
 msgid "X-Frame-Options HTTP header"
+msgstr "X-Frame-Options HTTP თავსართი"
+
+#: app/views/administration.miscconfig.edit.php:125
+msgid "X-Frame-Options HTTP header supported values:"
 msgstr ""
 
 #: include/views/js/monitoring.sysmaps.js.php:448
@@ -22676,26 +22699,26 @@ msgstr "XML"
 
 #: include/items.inc.php:1820
 msgid "XML XPath"
-msgstr ""
+msgstr "XML XPath"
 
 #: app/views/popup.massupdate.item.php:95
 #: include/views/configuration.host.discovery.edit.php:301
 #: include/views/configuration.item.edit.php:358
 #: include/views/configuration.item.prototype.edit.php:344
 msgid "XML data"
-msgstr ""
+msgstr "XML მონაცემები"
 
 #: include/classes/import/readers/CXmlImportReader.php:35
 msgid "XML is empty"
-msgstr ""
+msgstr "XML ცარიელია"
 
 #: include/classes/api/services/CItemGeneral.php:2648
 msgid "XML is expected"
-msgstr ""
+msgstr "მოველოდი XML-ს"
 
 #: include/items.inc.php:1832
 msgid "XML to JSON"
-msgstr ""
+msgstr "XML-დან JSON-ში"
 
 #: include/forms.inc.php:1329 include/views/js/item.preprocessing.js.php:164
 msgid "XPath"
@@ -22708,7 +22731,7 @@ msgstr "Y"
 
 #: include/views/configuration.graph.edit.php:315
 msgid "Y axis MAX value"
-msgstr ""
+msgstr "Y ღერძის მაქს. მნიშვნელობა"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:488
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:504
@@ -22848,7 +22871,7 @@ msgstr "წლიურად"
 #: include/views/configuration.triggers.list.php:133
 #: include/views/js/configuration.host.discovery.edit.overr.js.php:163
 msgid "Yes"
-msgstr "დიახ"
+msgstr ""
 
 #: include/classes/screens/CScreenProblem.php:704 include/func.inc.php:2466
 msgid "Yesterday"
@@ -22867,7 +22890,7 @@ msgstr ""
 
 #: include/func.inc.php:1600 index_http.php:83 index_sso.php:277
 msgid "You are not logged in"
-msgstr ""
+msgstr "შესული არ ბრძანდებით"
 
 #: app/views/popup.generic.php:80
 msgid "You cannot switch hosts for current selection."
@@ -22919,11 +22942,11 @@ msgstr "Zabbix-ის ინტეგრაციები"
 
 #: app/views/connector.edit.php:49
 msgid "Zabbix Streaming Protocol v1.0"
-msgstr ""
+msgstr "Zabbix Streaming Protocol v1.0"
 
 #: include/classes/helpers/CMenuHelper.php:356
 msgid "Zabbix Technical Support"
-msgstr ""
+msgstr "Zabbix-ის ტექნიკური მხარდაჭერა"
 
 #: app/views/administration.script.edit.php:125
 #: app/views/monitoring.widget.hostavail.view.php:27
@@ -22995,7 +23018,7 @@ msgstr ""
 
 #: include/classes/html/CFilter.php:251 include/classes/html/CTabFilter.php:333
 msgid "Zoom out"
-msgstr "დაპატარავება"
+msgstr ""
 
 #: include/func.inc.php:129
 #, c-format
@@ -23105,6 +23128,11 @@ msgstr ""
 msgid "a special character"
 msgstr ""
 
+#: app/views/administration.miscconfig.edit.php:133
+#, c-format
+msgid "a string of space-separated hostnames; adding %1$s to the list allows the page to be displayed in a frame on the same origin as the page itself"
+msgstr ""
+
 #: include/classes/validators/CApiInputValidator.php:2530
 msgid "a string, number or null value is expected"
 msgstr ""
@@ -23152,7 +23180,7 @@ msgstr "მოქმედებს მხოლოდ გაფილტრუ�
 
 #: include/hosts.inc.php:462
 msgid "agent"
-msgstr "აგენტი"
+msgstr ""
 
 #: app/partials/configuration.filter.items.php:129
 #: app/partials/configuration.filter.items.php:136
@@ -23179,7 +23207,7 @@ msgstr "ყველა"
 
 #: include/actions.inc.php:586 include/actions.inc.php:764
 msgid "all media"
-msgstr "ყველა მედია"
+msgstr ""
 
 #: include/classes/api/services/CItemGeneral.php:1877
 msgid "allowed count of dependency levels would be exceeded"
@@ -23285,7 +23313,7 @@ msgstr "და"
 
 #: include/views/monitoring.history.php:186
 msgid "as Blue"
-msgstr "როგორც ლურჯი"
+msgstr ""
 
 #: include/views/monitoring.history.php:185
 msgid "as Green"
@@ -23381,23 +23409,23 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:425
 msgid "bitlshift() - Bitwise shift left"
-msgstr ""
+msgstr "bitlshift() - ბიტური წანაცვლება მარცხნივ"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:438
 msgid "bitnot() - Bitwise NOT"
-msgstr ""
+msgstr "bitnot() - ბიტური არ"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:445
 msgid "bitor() - Bitwise OR"
-msgstr ""
+msgstr "bitor() - ბიტური ან"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:458
 msgid "bitrshift() - Bitwise shift right"
-msgstr ""
+msgstr "bitrshift() - ბიტური მარჯვნივ წანაცვლება"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:471
 msgid "bitxor() - Bitwise exclusive OR"
-msgstr ""
+msgstr "bitxor() - ბიტური ექსკლუზიური ან"
 
 #: app/views/administration.trigdisplay.edit.php:49
 #: app/views/administration.trigdisplay.edit.php:61
@@ -23416,7 +23444,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:484
 msgid "bytelength() - Returns the length in bytes"
-msgstr ""
+msgstr "bytelength() - აბრუნებს სიგრძეს ბაიტებში"
 
 #: app/views/popup.tophosts.column.edit.php:180
 #: app/views/popup.tophosts.column.edit.php:190
@@ -23425,7 +23453,7 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:196
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:211
 msgid "calculated"
-msgstr ""
+msgstr "გამოთვლილია"
 
 #: app/views/administration.geomaps.edit.php:52
 msgid "can be used to add \"@2x\" to the URL to load retina tiles."
@@ -23545,7 +23573,7 @@ msgstr "არ შეიძლება შეიცვალოს"
 #: include/classes/validators/CNewValidator.php:103
 #: include/validate.inc.php:330
 msgid "cannot be empty"
-msgstr ""
+msgstr "ცარიელი ვერ იქნება"
 
 #: include/classes/validators/CApiInputValidator.php:3560
 msgid "cannot be equal to zero without custom intervals"
@@ -23662,7 +23690,7 @@ msgstr ""
 
 #: app/partials/hostmacros.inherited.list.html.php:39
 msgid "configure"
-msgstr "კონფიგურაცია"
+msgstr "მორგება"
 
 #: app/views/popup.lldoperation.php:66 include/actions.inc.php:26
 #: include/classes/helpers/CCorrelationHelper.php:36
@@ -23732,7 +23760,7 @@ msgstr "ნაგულისხმები"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:591
 msgid "degrees() - Converts a value from radians to degrees"
-msgstr ""
+msgstr "degrees() - მნიშვნელობის გადაყვანა რადიანებიდან გრადუსებში"
 
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
@@ -23848,7 +23876,7 @@ msgstr "გამოსახულება ცარელია"
 
 #: include/classes/helpers/CElasticsearchHelper.php:185
 msgid "failed to parse JSON"
-msgstr ""
+msgstr "შეცდომა JSON-ის დამუშავებისას"
 
 #: include/classes/validators/CApiInputValidator.php:2780
 msgid "file format is unsupported"
@@ -23922,7 +23950,7 @@ msgstr "სთ"
 #: include/classes/import/validators/C10XmlValidator.php:341
 msgctxt "XML time format"
 msgid "hh.mm"
-msgstr ""
+msgstr "სს.წწ"
 
 #: include/classes/api/services/CMap.php:853
 #: include/classes/api/services/CMap.php:1321
@@ -23936,7 +23964,7 @@ msgstr "ჰოსტების ჯგუფი"
 
 #: include/classes/api/services/CHostGroup.php:795
 msgid "host group with the same UUID already exists"
-msgstr ""
+msgstr "ჰოსტის ჯგუფი იგივე UUID-ით უკვე არსებობს"
 
 #: include/classes/widgets/CWidgetHelper.php:799
 #: include/classes/widgets/CWidgetHelper.php:1158
@@ -23946,7 +23974,7 @@ msgstr "ჰოსტის ნიმუში"
 
 #: include/classes/api/services/CHostPrototype.php:1190
 msgid "host prototype with the same UUID already exists"
-msgstr ""
+msgstr "ჰოსტის პროტოტიპი იგივე UUID-ით უკვე არსებობს"
 
 #: include/classes/api/services/CMap.php:844
 #: include/classes/api/services/CMap.php:1311
@@ -23956,7 +23984,7 @@ msgstr "ხატულა"
 #: include/classes/api/services/CMap.php:865
 #: include/classes/api/services/CMap.php:1333
 msgid "image"
-msgstr "გამოსახულება"
+msgstr "ნახატი"
 
 #: include/classes/validators/CApiInputValidator.php:2774
 #, c-format
@@ -23982,7 +24010,7 @@ msgstr "ქვეჯგუფების ჩათვლით"
 
 #: include/classes/parsers/C10TriggerExpression.php:525
 msgid "incorrect calculated item formula"
-msgstr ""
+msgstr "არასწორი გამოთვლილი ელემენტის ფორმულა"
 
 #: include/classes/parsers/C10TriggerExpression.php:541
 #, c-format
@@ -24053,7 +24081,7 @@ msgstr ""
 #: include/classes/parsers/CIPRangeParser.php:135
 #, c-format
 msgid "invalid address range \"%1$s\""
-msgstr ""
+msgstr "არასწორი მისამართის შუალედი \"%1$s\""
 
 #: include/classes/api/services/CItemGeneral.php:1526
 msgid "invalid aggregation method"
@@ -24091,7 +24119,7 @@ msgstr ""
 #: include/classes/graphdraw/CPieGraphDraw.php:166
 #: include/classes/helpers/CSvgGraphHelper.php:369
 msgid "invalid history storage period"
-msgstr ""
+msgstr "არასწორი ისტორიის საცავის შუალედი"
 
 #: include/classes/validators/CApiInputValidator.php:1527
 msgid "invalid host group name"
@@ -24135,7 +24163,7 @@ msgstr ""
 
 #: include/classes/validators/CApiInputValidator.php:3078
 msgid "invalid template group name"
-msgstr ""
+msgstr "არასწორი ნიმუშის ჯგუფის სახელი"
 
 #: include/classes/validators/CHistFunctionValidator.php:65
 #, c-format
@@ -24177,7 +24205,7 @@ msgstr ""
 #: include/classes/widgets/CWidgetHelper.php:819
 #: include/classes/widgets/CWidgetHelper.php:1175
 msgid "item pattern"
-msgstr "ელემენტის ნიმუში"
+msgstr ""
 
 #: include/classes/api/services/CItemGeneral.php:486
 msgid "item prototype with the same UUID already exists"
@@ -24238,7 +24266,7 @@ msgstr "log() - ნატურალური ალგორითმი"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:729
 msgid "log10() - Decimal logarithm"
-msgstr ""
+msgstr "log10() - ათობითი ლოგარითმი"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:736
 msgid "logeventid() - Event ID of last log entry matching regular expression V for period T (1 - match, 0 - no match)"
@@ -24287,7 +24315,7 @@ msgstr "მაკრო ცარიელია"
 
 #: app/views/js/administration.macros.edit.js.php:87
 msgid "macro(s)"
-msgstr ""
+msgstr "მაკრო (ებ)-ი"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:770
 msgid "mad() - Median absolute deviation"
@@ -24341,7 +24369,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:777
 msgid "max() - Maximum value for period T"
-msgstr ""
+msgstr "max() - მაქსიმალური მნიშვნელობა პერიოდისთვის T"
 
 #: include/classes/api/services/CItemGeneral.php:2410
 msgid "maximum dependent items count reached"
@@ -24382,7 +24410,7 @@ msgstr "მინ"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:802
 msgid "min() - Minimum value for period T"
-msgstr ""
+msgstr "min() - მინიმალური მნიშვნელობა პერიოდისთვის T"
 
 #: include/classes/api/services/CHost.php:1822
 #: include/classes/validators/CApiInputValidator.php:1330
@@ -24411,7 +24439,7 @@ msgstr "მწმ"
 #: include/classes/validators/CApiInputValidator.php:2711
 #, c-format
 msgid "must be %1$s characters long"
-msgstr ""
+msgstr "უნდა იყოს %1$s სიმბოლო"
 
 #: app/views/administration.authentication.edit.php:199
 msgid "must be a valid LDAP user"
@@ -24421,30 +24449,30 @@ msgstr ""
 #: include/classes/validators/CPasswordComplexityValidator.php:74
 #, c-format
 msgid "must be at least %1$d characters long"
-msgstr ""
+msgstr "უნდა იყოს სულ ცოტა %1$d სიმბოლო"
 
 #: app/views/administration.authentication.edit.php:55
 #: app/views/administration.user.edit.php:136
 #: include/classes/validators/CPasswordComplexityValidator.php:88
 msgid "must contain at least one digit"
-msgstr ""
+msgstr "უნდა შეიცავდეს სულ ცოტა ერთ ციფრს"
 
 #: include/classes/validators/CApiInputValidator.php:1534
 #: include/classes/validators/CApiInputValidator.php:1578
 msgid "must contain at least one low-level discovery macro"
-msgstr ""
+msgstr "უნდა შეიცავდეს სულ ცოტა ერთ დაბალი დონის აღმოჩენის მაკროს"
 
 #: app/views/administration.authentication.edit.php:50
 #: app/views/administration.user.edit.php:128
 #: include/classes/validators/CPasswordComplexityValidator.php:81
 msgid "must contain at least one lowercase and one uppercase Latin letter"
-msgstr ""
+msgstr "უნდა შეიცავდეს სულ ცოტა ერთი დაბალი და ერთი მაღალი რეგსტრის მქონე ლათინურ სიმბოლოს"
 
 #: app/views/administration.authentication.edit.php:59
 #: app/views/administration.user.edit.php:143
 #: include/classes/validators/CPasswordComplexityValidator.php:95
 msgid "must contain at least one special character"
-msgstr ""
+msgstr "უნდა შეიცავდეს სულ ცოტა ერთ სპეციალურ სიმბოლოს"
 
 #: include/classes/validators/CApiInputValidator.php:3818
 msgid "must have a polling interval not blocked by non-active interval periods"
@@ -24452,7 +24480,7 @@ msgstr ""
 
 #: include/classes/validators/CApiInputValidator.php:3653
 msgid "must have at least one interval greater than 0"
-msgstr ""
+msgstr "უნდა ჰქონდეს ერთი 0-ზე მეტი ინტერვალი მაინც"
 
 #: app/views/administration.authentication.edit.php:98
 #: app/views/administration.user.edit.php:150
@@ -24464,7 +24492,7 @@ msgstr ""
 #: app/views/administration.user.edit.php:149
 #: include/classes/validators/CPasswordComplexityValidator.php:102
 msgid "must not contain user's name, surname or username"
-msgstr ""
+msgstr "არ უნდა შეიცავდეს მომხმარებლის სახელს, გვარს ან მომხმარებლისსახელს"
 
 #: include/translateDefines.inc.php:41
 msgid "n-d"
@@ -24564,7 +24592,7 @@ msgstr ""
 #: app/views/popup.tophosts.column.edit.php:125
 #: include/classes/widgets/CWidgetHelper.php:1285 include/graphs.inc.php:74
 msgid "none"
-msgstr "არა"
+msgstr "არც ერთი"
 
 #: include/classes/api/services/CItemGeneral.php:2595
 #: include/classes/api/services/CItemGeneral.php:2617
@@ -24577,15 +24605,15 @@ msgstr ""
 
 #: hostinventoriesoverview.php:146 include/forms.inc.php:948
 msgid "not selected"
-msgstr "არჩეული არაა"
+msgstr "მოუნიშნავი"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:843
 msgid "now() - Number of seconds since the Epoch"
-msgstr ""
+msgstr "now() - წამების რაოდენობა ეპოქის შემდეგ"
 
 #: include/forms.inc.php:1315 include/views/js/item.preprocessing.js.php:149
 msgid "number"
-msgstr "რიცხვი"
+msgstr "ნომერი"
 
 #: include/classes/api/services/CHostPrototype.php:836
 msgid "object does not exist or belongs to another object"
@@ -24617,7 +24645,7 @@ msgstr ""
 #: include/classes/setup/CFrontendSetup.php:610
 #: include/classes/setup/CFrontendSetup.php:626
 msgid "off"
-msgstr "გამორთ"
+msgstr "გათიშვა"
 
 #: app/views/administration.user.edit.php:333
 #: include/classes/setup/CFrontendSetup.php:291
@@ -24673,7 +24701,7 @@ msgstr ""
 #: include/views/js/item.preprocessing.js.php:178
 #: include/views/js/item.preprocessing.js.php:193
 msgid "pattern"
-msgstr "ნიმუში"
+msgstr "შაბლონი"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:849
 msgid "percentile() - Percentile P of a period T"
@@ -24681,7 +24709,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:856
 msgid "pi() - Returns the Pi constant"
-msgstr ""
+msgstr "pi() - აბრუნებს კონსტანტას პი"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:861
 msgid "power() - The power of a base value to a power value"
@@ -24828,7 +24856,7 @@ msgstr "წამი"
 
 #: include/classes/html/CActionButtonList.php:129
 msgid "selected"
-msgstr "მონიშნულია"
+msgstr "მონიშნული"
 
 #: include/events.inc.php:38 include/events.inc.php:66
 msgid "service"
@@ -24868,15 +24896,15 @@ msgstr "მოკლე აღწერა"
 #: include/classes/validators/CActionCondValidator.php:146
 #: include/classes/validators/CApiInputValidator.php:1186
 msgid "should be empty"
-msgstr ""
+msgstr "ცარიელი უნდა იყოს"
 
 #: app/controllers/CControllerPopupItemTestSend.php:197
 msgid "should be less than current time"
-msgstr ""
+msgstr "მიმდინარე დროზე ნაკლები უნდა იყოს"
 
 #: include/views/monitoring.sysmap.edit.php:135
 msgid "show icon mappings"
-msgstr ""
+msgstr "ხატულის ასახვების ჩვენება"
 
 #: include/views/general.login.php:41
 msgid "sign in as guest"
@@ -24888,11 +24916,11 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:970
 msgid "sin() - The sine of a value, where the value is an angle expressed in radians"
-msgstr ""
+msgstr "sin() - მნიშვნელობის სინუსი. სადაც სინუსი რადიანებში გამოსახული კუთხეა"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:977
 msgid "sinh() - The hyperbolic sine of a value"
-msgstr ""
+msgstr "sinh() - მნიშვნელობის ჰიპერბოლური სინუსი"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:984
 msgid "skewness() - Measures the asymmetry of the probability distribution"
@@ -24900,7 +24928,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:991
 msgid "sqrt() - Square root of a value"
-msgstr ""
+msgstr "sqrt() - მნიშვნელობის კვადრატული ფესვი"
 
 #: app/partials/administration.ha.nodes.php:63
 msgid "standalone server"
@@ -24916,7 +24944,7 @@ msgstr ""
 
 #: widgets/actionlog/views/widget.edit.php:49
 msgid "subject or body text"
-msgstr ""
+msgstr "სათაურის ან სხეულის ტექსტი"
 
 #: app/views/popup.tophosts.column.edit.php:130 include/graphs.inc.php:84
 msgid "sum"
@@ -24958,7 +24986,7 @@ msgstr "ჭდე"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1026
 msgid "tan() - The tangent of a value"
-msgstr ""
+msgstr "tan() - მნიშვნელობის ტანგენსი"
 
 #: include/classes/api/services/CHostBase.php:1076
 #, c-format
@@ -25019,14 +25047,14 @@ msgstr ""
 #: include/classes/validators/CApiInputValidator.php:1258
 #, c-format
 msgid "the parameter \"%1$s\" is missing"
-msgstr ""
+msgstr "პარამეტრი \"%1$s\" ვერ ვიპოვე"
 
 #: include/classes/db/MysqlDbBackend.php:36
 #: include/classes/db/OracleDbBackend.php:37
 #: include/classes/db/PostgresqlDbBackend.php:62
 #, c-format
 msgid "the table \"%1$s\" was not found"
-msgstr ""
+msgstr "ცხრილი \"%1$s\" ვერ ვიპოვე"
 
 #: include/classes/export/CConfigurationExportBuilder.php:87
 #: include/classes/import/validators/C44XmlValidator.php:1971
@@ -25039,7 +25067,7 @@ msgstr ""
 #: include/classes/import/validators/CXmlValidatorGeneral.php:202
 #, c-format
 msgid "the tag \"%1$s\" is missing"
-msgstr ""
+msgstr "ჭდე \"%1$s\" ვერ ვიპოვე"
 
 #: app/views/popup.maintenance.period.php:126 include/maintenances.inc.php:107
 msgid "third"
@@ -25056,11 +25084,11 @@ msgstr ""
 
 #: jsLoader.php:305
 msgid "time shift"
-msgstr ""
+msgstr "დროის წანაცვლება"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1033
 msgid "time() - Current time"
-msgstr ""
+msgstr "time() - მიმდინარე დრო"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1039
 msgid "timeleft() - Time to reach threshold estimated based on period T"
@@ -25135,7 +25163,7 @@ msgstr "შეიყვანეთ საძებნი სტრიქონ�
 
 #: include/classes/validators/CApiInputValidator.php:2215
 msgid "unacceptable URL"
-msgstr ""
+msgstr "მიუღებელი URL"
 
 #: include/classes/import/validators/C44XmlValidator.php:2166
 #: include/classes/import/validators/C50XmlValidator.php:2315
@@ -25143,7 +25171,7 @@ msgstr ""
 #: include/classes/import/validators/CXmlValidatorGeneral.php:298
 #, c-format
 msgid "unexpected constant \"%1$s\""
-msgstr ""
+msgstr "მოულოდნელი კონსტანტა \"%1$s\""
 
 #: include/classes/export/CConfigurationExportBuilder.php:119
 #: include/classes/import/converters/CConstantImportConverter.php:60
@@ -25155,19 +25183,19 @@ msgstr ""
 #: include/classes/import/validators/C62XmlValidator.php:2512
 #, c-format
 msgid "unexpected constant value \"%1$s\""
-msgstr ""
+msgstr "მოულოდნელი კონსტანტის მნიშვნელობა \"%1$s\""
 
 #: include/classes/parsers/CExpressionMacroParser.php:108
 msgid "unexpected end of expression macro"
-msgstr ""
+msgstr "გამოსახულების მაკროს მოულოდნელი დასასრული"
 
 #: include/classes/parsers/CItemKey.php:55
 msgid "unexpected end of key"
-msgstr ""
+msgstr "მოულოდნელი გასაღების დასასრული"
 
 #: include/classes/parsers/CUserMacroParser.php:38
 msgid "unexpected end of macro"
-msgstr ""
+msgstr "მოულოდნელი მაკროს დასასრული"
 
 #: include/classes/api/services/CDiscoveryRule.php:1670
 #: include/classes/api/services/CDiscoveryRule.php:1702
@@ -25188,20 +25216,20 @@ msgstr ""
 #: include/classes/validators/CApiInputValidator.php:3017
 #, c-format
 msgid "unexpected parameter \"%1$s\""
-msgstr ""
+msgstr "მოულოდნელი პარამეტრი \"%1$s\""
 
 #: include/classes/import/validators/CXmlValidatorGeneral.php:164
 #: include/classes/import/validators/CXmlValidatorGeneral.php:230
 #, c-format
 msgid "unexpected tag \"%1$s\""
-msgstr ""
+msgstr "მოულოდნელი ჭდე \"%1$s\""
 
 #: include/classes/import/readers/CXmlImportReader.php:78
 #: include/classes/import/readers/CXmlImportReader.php:117
 #: include/classes/import/readers/CXmlImportReader.php:135
 #, c-format
 msgid "unexpected text \"%1$s\""
-msgstr ""
+msgstr "მოულოდნელი ტექსტი \"%1$s\""
 
 #: include/classes/api/services/CEvent.php:744
 #: include/classes/api/services/CEvent.php:878
@@ -25216,7 +25244,7 @@ msgstr ""
 #: include/classes/api/services/CTriggerGeneral.php:821
 #, c-format
 msgid "unexpected value \"%1$s\""
-msgstr ""
+msgstr "მოულოდნელი მნიშვნელობა \"%1$s\""
 
 #: include/classes/setup/CFrontendSetup.php:365
 #: include/classes/setup/CFrontendSetup.php:474
@@ -25227,7 +25255,7 @@ msgstr "უცნობი"
 #: include/classes/validators/CMathFunctionValidator.php:55
 #, c-format
 msgid "unknown function \"%1$s\""
-msgstr ""
+msgstr "უცნობი ფუნქცია \"%1$s\""
 
 #: include/classes/api/services/CItemGeneral.php:1557
 msgid "unsupported Prometheus function"
@@ -25235,11 +25263,11 @@ msgstr ""
 
 #: app/controllers/CControllerPopupItemTestSend.php:192
 msgid "unsupported time suffix"
-msgstr ""
+msgstr "მხარდაუჭერელი დროის სუფიქსი"
 
 #: include/classes/import/validators/CXmlValidator.php:64
 msgid "unsupported version number"
-msgstr ""
+msgstr "მხარდაუჭერელი ვერსიის ნომერი"
 
 #: include/classes/validators/CApiInputValidator.php:3626
 #, c-format
@@ -25295,7 +25323,7 @@ msgstr "მნიშვნელობა"
 #: include/classes/api/services/CDiscoveryRule.php:1890
 #, c-format
 msgid "value \"%1$s\" already exists"
-msgstr ""
+msgstr "მნიშვნელობა \"%1$s\" უკვე არსებობს"
 
 #: include/classes/import/CConfigurationImport.php:843
 #: include/classes/import/CConfigurationImport.php:880
@@ -25304,7 +25332,7 @@ msgstr ""
 #: include/classes/import/CConfigurationImport.php:2822
 #, c-format
 msgid "value \"%1$s\" not found"
-msgstr ""
+msgstr "მნიშვნელობა \"%1$s\" ვერ ვიპოვე"
 
 #: app/controllers/CControllerPopupValueMapUpdate.php:71
 #: app/controllers/CControllerPopupValueMapUpdate.php:137
@@ -25314,7 +25342,7 @@ msgstr ""
 #: include/classes/validators/CApiInputValidator.php:2075
 #, c-format
 msgid "value %1$s already exists"
-msgstr ""
+msgstr "მნიშვნელობა %1$s უკვე არსებობს"
 
 #: include/classes/api/services/CTriggerGeneral.php:1773
 #: include/classes/api/services/CTriggerGeneral.php:1793
@@ -25347,11 +25375,11 @@ msgstr ""
 #: include/classes/validators/CApiInputValidator.php:2808
 #: include/classes/validators/CApiInputValidator.php:2838
 msgid "value is too long"
-msgstr ""
+msgstr "მნიშვნელობა ძალიან გრძელია"
 
 #: include/classes/api/services/CValueMap.php:501
 msgid "value map with the same UUID already exists"
-msgstr ""
+msgstr "მნიშვნელობების რუკა იგივე UUID-ით უკვე არსებობს"
 
 #: include/classes/api/services/CReport.php:207
 #: include/classes/api/services/CReport.php:603
@@ -25361,33 +25389,33 @@ msgstr ""
 #, c-format
 msgid "value must be %1$s"
 msgid_plural "value must be one of %1$s"
-msgstr[0] ""
+msgstr[0] "მნიშვნელობა %1$s უნდა იყოს"
 
 #: include/classes/validators/CActionCondValidator.php:171
 #: include/classes/validators/CApiInputValidator.php:2566
 #, c-format
 msgid "value must be between \"%1$s\" and \"%2$s\""
-msgstr ""
+msgstr "მნიშვნელობა \"%1$s\"-სა და \"%2$s\"-ს შორის უნდა იყოს"
 
 #: include/classes/validators/CApiInputValidator.php:589
 msgid "value must be empty"
-msgstr ""
+msgstr "მნიშვნელობა ცარიელი უნდა იყოს"
 
 #: include/classes/validators/CApiInputValidator.php:584
 #, c-format
 msgid "value must be empty or %1$s"
 msgid_plural "value must be empty or one of %1$s"
-msgstr[0] ""
+msgstr[0] "მნიშვნელობა ცარიელი ან %1$s-ის ტოლი უნდა იყოს"
 
 #: include/classes/validators/CNewValidator.php:220
 #, c-format
 msgid "value must be no greater than \"%1$s\""
-msgstr ""
+msgstr "მნიშვნელობა \"%1$s\"-ზე მეტი არ უნდა იყოს"
 
 #: include/classes/validators/CNewValidator.php:208
 #, c-format
 msgid "value must be no less than \"%1$s\""
-msgstr ""
+msgstr "მნიშვნელობა \"%1$s\"-ზე ნაკლები არ უნდა იყოს"
 
 #: app/controllers/CControllerPopupHttpStep.php:101
 #: include/classes/api/services/CDiscoveryRule.php:1683
@@ -25413,12 +25441,12 @@ msgstr ""
 #: include/validate.inc.php:587
 #, c-format
 msgid "value must be one of %1$s"
-msgstr ""
+msgstr "მნიშვნელობა %1$s-დან ერთ-ერთი უნდა იყოს"
 
 #: include/classes/validators/CApiInputValidator.php:947
 #, c-format
 msgid "value must be within the range of %1$s"
-msgstr ""
+msgstr "მნიშვნელობა %1$s-ის შუალედში უნდა იყოს"
 
 #: include/classes/api/services/CItemGeneral.php:1606
 msgid "value of first parameter is too long"
@@ -25426,7 +25454,7 @@ msgstr ""
 
 #: include/classes/helpers/CCorrelationHelper.php:141
 msgid "value of new event tag"
-msgstr ""
+msgstr "ახალი მოვლენის ჭდის მნიშვნელობა"
 
 #: include/classes/api/services/CItemGeneral.php:1612
 msgid "value of second parameter is too long"
@@ -25443,7 +25471,7 @@ msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1171
 msgid "varsamp() - Sample variance"
-msgstr ""
+msgstr "varsamp() - არჩევითი გაბნევა"
 
 #: include/actions.inc.php:605 include/actions.inc.php:623
 #: include/actions.inc.php:783 include/actions.inc.php:801
@@ -25457,29 +25485,29 @@ msgstr "კვ"
 
 #: include/classes/api/services/CHttpTest.php:440
 msgid "web scenario with the same UUID already exists"
-msgstr ""
+msgstr "ვებსცენარი იგივე UUID-ით უკვე არსებობს"
 
 #: app/views/popup.usergroupmapping.edit.php:83
 msgid "wildcard patterns with '*' may be used"
-msgstr ""
+msgstr "შეგიძლიათ, ვაილდკარდის ნიმუშები '*'-ით გამოიყენოთ"
 
 #: include/classes/api/services/CTask.php:443
 msgid "wrong discovery rule type"
-msgstr ""
+msgstr "არასწორი აღმოჩენის წესის ტიპი"
 
 #: include/classes/api/services/CTask.php:444
 msgid "wrong item type"
-msgstr ""
+msgstr "არასწორი ელემენტის ტიპი"
 
 #: app/controllers/CControllerItemMassCheckNow.php:178
 #: include/classes/api/services/CTask.php:591
 msgid "wrong master item type"
-msgstr ""
+msgstr "არასწორი ძირითადი ელემენტის ტიპი"
 
 #: include/func.inc.php:591 jsLoader.php:221
 msgctxt "year short"
 msgid "y"
-msgstr "წ"
+msgstr "წლ"
 
 #: include/classes/validators/CApiInputValidator.php:2853
 #, c-format
