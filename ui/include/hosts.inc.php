@@ -1458,7 +1458,6 @@ function getSanitizedHostPrototypeInterfaceDetailsFields(array $details): array 
  *
  * @return int
  */
-
 function getInterfaceAvailabilityStatus(array $interfaces): int {
 	$available = array_column($interfaces, 'available');
 
