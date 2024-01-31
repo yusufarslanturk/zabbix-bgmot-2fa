@@ -1452,7 +1452,7 @@ function getSanitizedHostPrototypeInterfaceDetailsFields(array $details): array 
 }
 
 /**
- * Get summary interface availability status
+ * Get summary interface availability status.
  *
  * @param array  $interfaces
  *
