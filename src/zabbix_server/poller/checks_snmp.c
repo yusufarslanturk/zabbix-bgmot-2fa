@@ -2096,8 +2096,7 @@ static int	snmp_quote_string_value(char *buffer, size_t buffer_size, struct vari
 	buf = strstr(buffer, " = ");
 	if (NULL == buf)
 	{
-		zabbix_log(LOG_LEVEL_WARNING, "%s() ' = ' not found in buffer", __func__);
-		zabbix_log(LOG_LEVEL_WARNING, "%s() buffer:'%s'", __func__, buffer);
+		zabbix_log(LOG_LEVEL_WARNING, "%s() ' = ' not found in buffer '%s'", __func__, buffer);
 		THIS_SHOULD_NEVER_HAPPEN;
 		ret = FAIL;
 		goto out;
@@ -2118,8 +2117,7 @@ static int	snmp_quote_string_value(char *buffer, size_t buffer_size, struct vari
 
 	if (0 != strncmp(buf, TYPE_STR_STRING, sizeof(TYPE_STR_STRING) - 1))
 	{
-		zabbix_log(LOG_LEVEL_WARNING, "%s() expected 'STRING' type in buffer", __func__);
-		zabbix_log(LOG_LEVEL_WARNING, "%s() buffer:'%s'", __func__, buffer);
+		zabbix_log(LOG_LEVEL_WARNING, "%s() expected 'STRING' type in buffer '%s'", __func__, buffer);
 		THIS_SHOULD_NEVER_HAPPEN;
 		ret = FAIL;
 		goto out;
