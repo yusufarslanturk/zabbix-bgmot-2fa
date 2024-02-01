@@ -112,9 +112,6 @@ func (c *Connection) write(w io.Writer, data []byte) (err error) {
 	}
 	b.Write(buf.Bytes())
 	_, err = w.Write(b.Bytes())
-	if err != nil {
-		log.Warningf("Error writing '%s' to the network", string(data))
-	}
 
 	return err
 }
