@@ -1074,16 +1074,16 @@ zabbix_export:
               parameters:
                 - |
                   try {
-                      var data = JSON.parse(value);
+                  	var data = JSON.parse(value);
                   }
                   catch (error) {
-                      throw 'Failed to parse JSON of EtherLike-MIB discovery.';
+                  	throw 'Failed to parse JSON of EtherLike-MIB discovery.';
                   }
                   var fields = ['{#SNMPVALUE}','{#IFOPERSTATUS}','{#IFALIAS}','{#IFNAME}','{#IFDESCR}'];
                   data.forEach(function (element) {
-                      fields.forEach(function (field) {
-                          element[field] = element[field] || '';
-                      });
+                  	fields.forEach(function (field) {
+                  		element[field] = element[field] || '';
+                  	});
                   });
                   return JSON.stringify(data);
         - uuid: 75ff389432a443dd89075f5a89bfbc1e
@@ -1341,9 +1341,6 @@ zabbix_export:
                       value:
                         host: 'HP Enterprise Switch by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
         - uuid: 8d3bf7d0ded74f42bed66fcbc1eaec62
           name: Resources
           pages:
@@ -1370,9 +1367,6 @@ zabbix_export:
                       value:
                         host: 'HP Enterprise Switch by SNMP'
                         name: '#{#SNMPVALUE}: Memory usage'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '10'
                   width: '24'
@@ -1386,9 +1380,6 @@ zabbix_export:
                       value:
                         host: 'HP Enterprise Switch by SNMP'
                         name: '#{#SNMPVALUE}: Memory utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 846197beea984cc783b84822437bbace
           name: 'EtherLike-MIB::dot3StatsDuplexStatus'

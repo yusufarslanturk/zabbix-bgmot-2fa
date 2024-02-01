@@ -2080,9 +2080,6 @@ zabbix_export:
                       value:
                         host: 'MikroTik netPower Lite 7R by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: c3ca1fe6814948818bde09a430c55d56
           name: 'IF-MIB::ifOperStatus'

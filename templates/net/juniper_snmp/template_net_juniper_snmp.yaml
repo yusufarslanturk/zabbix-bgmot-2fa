@@ -1137,16 +1137,16 @@ zabbix_export:
               parameters:
                 - |
                   try {
-                      var data = JSON.parse(value);
+                  	var data = JSON.parse(value);
                   }
                   catch (error) {
-                      throw 'Failed to parse JSON of EtherLike-MIB discovery.';
+                  	throw 'Failed to parse JSON of EtherLike-MIB discovery.';
                   }
                   var fields = ['{#SNMPVALUE}','{#IFOPERSTATUS}','{#IFALIAS}','{#IFNAME}','{#IFDESCR}'];
                   data.forEach(function (element) {
-                      fields.forEach(function (field) {
-                          element[field] = element[field] || '';
-                      });
+                  	fields.forEach(function (field) {
+                  		element[field] = element[field] || '';
+                  	});
                   });
                   return JSON.stringify(data);
       tags:
@@ -1234,9 +1234,6 @@ zabbix_export:
                       value:
                         host: 'Juniper by SNMP'
                         name: '{#SNMPVALUE}: Memory utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   name: 'CPU utilization'
                   x: '12'
@@ -1251,9 +1248,6 @@ zabbix_export:
                       value:
                         host: 'Juniper by SNMP'
                         name: '{#SNMPVALUE}: CPU utilization'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 69625f8a027542638c3ca9b64522602d
           name: 'EtherLike-MIB::dot3StatsDuplexStatus'

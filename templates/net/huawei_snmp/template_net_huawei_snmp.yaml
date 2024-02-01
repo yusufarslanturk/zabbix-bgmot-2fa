@@ -1064,16 +1064,16 @@ zabbix_export:
               parameters:
                 - |
                   try {
-                      var data = JSON.parse(value);
+                  	var data = JSON.parse(value);
                   }
                   catch (error) {
-                      throw 'Failed to parse JSON of EtherLike-MIB discovery.';
+                  	throw 'Failed to parse JSON of EtherLike-MIB discovery.';
                   }
                   var fields = ['{#SNMPVALUE}','{#IFOPERSTATUS}','{#IFALIAS}','{#IFNAME}','{#IFDESCR}'];
                   data.forEach(function (element) {
-                      fields.forEach(function (field) {
-                          element[field] = element[field] || '';
-                      });
+                  	fields.forEach(function (field) {
+                  		element[field] = element[field] || '';
+                  	});
                   });
                   return JSON.stringify(data);
       tags:
@@ -1153,9 +1153,6 @@ zabbix_export:
                       value:
                         host: 'Huawei VRP by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 64bf3ebd444c4c4ca472b0846790b107
           name: 'EtherLike-MIB::dot3StatsDuplexStatus'

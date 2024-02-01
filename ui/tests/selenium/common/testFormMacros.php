@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -662,12 +662,12 @@ abstract class testFormMacros extends CLegacyWebTest {
 							'index' => 0,
 							'macro' => '{$SNMP_COMMUNITY}',
 							'value' => 'new redefined value 1',
-							'description' => 'new redifined description 1'
+							'description' => 'new redefined description 1'
 						],
 						[
 							'macro' => '{$_}',
-							'value' => 'new redifined value 2',
-							'description' => 'new redifined description 2'
+							'value' => 'new redefined value 2',
+							'description' => 'new redefined description 2'
 						]
 					]
 				]
@@ -1324,7 +1324,7 @@ abstract class testFormMacros extends CLegacyWebTest {
 				[
 					'macro' => '{$SECRET_HOST_MACRO}',
 					'type' => 'Secret text',
-					'chenge_type' => true
+					'change_type' => true
 				]
 			],
 			[
@@ -1414,7 +1414,7 @@ abstract class testFormMacros extends CLegacyWebTest {
 
 				$value_field->invalidate();
 
-				$this->assertFalse($change_button->isEnabled());
+				$this->assertFalse($value_field->getNewValueButton()->isEnabled());
 				$this->assertTrue($revert_button->isClickable());
 			}
 			else {
@@ -2457,7 +2457,7 @@ abstract class testFormMacros extends CLegacyWebTest {
 	private function checkItemFields($url, $name, $key) {
 		$this->page->login()->open($url)->waitUntilReady();
 		$table = $this->query('xpath://form[@name="items"]/table[@class="list-table"] | '.
-				'//table[contains(@class, "overflow-ellipsis")]')->asTable()->waitUntilPresent()->one();
+				'//table[contains(@class, "list-table fixed")]')->asTable()->waitUntilPresent()->one();
 
 		$name_column = $table->findRow('Name', $name, true)->getColumn('Name');
 		$this->assertEquals($name, $name_column->query('tag:a')->one()->getText());
