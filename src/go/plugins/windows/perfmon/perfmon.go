@@ -45,7 +45,8 @@ const (
 )
 
 var impl Plugin = Plugin{
-	counters: make(map[perfCounterIndex]*perfCounter),
+	counters:    make(map[perfCounterIndex]*perfCounter),
+	countersErr: make(map[perfCounterIndex]*perfCounterErrorInfo),
 }
 
 type perfCounterIndex struct {
@@ -56,6 +57,11 @@ type perfCounterIndex struct {
 type perfCounterAddInfo struct {
 	index    perfCounterIndex
 	interval int64
+}
+
+type perfCounterErrorInfo struct {
+	lastAccess time.Time
+	err        error
 }
 
 type perfCounter struct {
@@ -73,6 +79,7 @@ type Plugin struct {
 	mutex        sync.Mutex
 	historyMutex sync.Mutex
 	counters     map[perfCounterIndex]*perfCounter
+	countersErr  map[perfCounterIndex]*perfCounterErrorInfo
 	addCounters  []perfCounterAddInfo
 	query        win32.PDH_HQUERY
 	collectError error
@@ -138,6 +145,21 @@ func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider)
 	defer p.historyMutex.Unlock()
 	counter, ok := p.counters[index]
 	if !ok {
+		counterErr, ok := p.countersErr[index]
+		if ok {
+			counterErr.lastAccess = time.Now()
+
+			return nil, counterErr.err
+		}
+
+		for _, addCnt := range p.addCounters {
+			if addCnt.index == index {
+				addCnt.interval = interval
+
+				return nil, nil
+			}
+		}
+
 		p.addCounters = append(p.addCounters, perfCounterAddInfo{index, interval})
 
 		return nil, nil
@@ -166,10 +188,18 @@ func (p *Plugin) Collect() error {
 		}
 	}
 
+	expireTime := time.Now().Add(-maxInactivityPeriod)
+
 	p.historyMutex.Lock()
 	addCountersLocal := p.addCounters
 	p.addCounters = nil
 	p.collectError = nil
+
+	for index, c := range p.countersErr {
+		if c.lastAccess.Before(expireTime) {
+			delete(p.countersErr, index)
+		}
+	}
 	p.historyMutex.Unlock()
 
 	for i := len(addCountersLocal) - 1; i >= 0; i-- {
@@ -177,23 +207,19 @@ func (p *Plugin) Collect() error {
 		err = p.addCounter(addInfo.index, addInfo.interval)
 		if err != nil {
 			p.historyMutex.Lock()
-			p.collectError = zbxerr.New(
-				fmt.Sprintf("failed to get counter for path %q and lang %d", addInfo.index.path, addInfo.index.lang),
-			).Wrap(err)
-			err = p.collectError
-			p.historyMutex.Unlock()
-			addCountersLocal = addCountersLocal[:i]
 
-			break
+			p.countersErr[addInfo.index] = &perfCounterErrorInfo{
+				lastAccess: time.Now(),
+				err: errs.Wrap(err, fmt.Sprintf("failed to get counter for path %q and lang %d", addInfo.index.path,
+					addInfo.index.lang)),
+			}
+
+			p.historyMutex.Unlock()
 		}
 	}
 
-	if err != nil {
-		p.historyMutex.Lock()
-		defer p.historyMutex.Unlock()
-		p.addCounters = append(p.addCounters, addCountersLocal...)
-
-		return err
+	if len(p.counters) == 0 {
+		return nil
 	}
 
 	err = p.setCounterData()
