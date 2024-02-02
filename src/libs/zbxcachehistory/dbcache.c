@@ -3169,6 +3169,9 @@ static void	proxy_prepare_history(ZBX_DC_HISTORY *history, int history_num, zbx_
 
 	for (i = 0; i < history_num; i++)
 	{
+		if (SUCCEED != errcodes[i])
+			continue;
+
 		zbx_item_diff_t	*diff = (zbx_item_diff_t *)zbx_malloc(NULL, sizeof(zbx_item_diff_t));
 		ZBX_DC_HISTORY	*h = &history[i];
 
@@ -3196,9 +3199,6 @@ static void	proxy_prepare_history(ZBX_DC_HISTORY *history, int history_num, zbx_
 		}
 
 		zbx_vector_ptr_append(item_diff, diff);
-
-		if (SUCCEED != errcodes[i])
-			continue;
 
 		/* store numeric items to handle data conversion errors on server and trends */
 		if (ITEM_VALUE_TYPE_FLOAT == items[i].value_type || ITEM_VALUE_TYPE_UINT64 == items[i].value_type)
@@ -4701,17 +4701,19 @@ static void	hc_add_item_values(dc_item_value_t *values, int values_num)
 
 		/* a record with metadata and no value can be dropped if  */
 		/* the metadata update is copied to the last queued value */
-		if (NULL != (item = hc_get_item(item_value->itemid)) &&
-				0 != (item_value->flags & ZBX_DC_FLAG_NOVALUE) &&
-				0 != (item_value->flags & ZBX_DC_FLAG_META))
+		if (NULL != (item = hc_get_item(item_value->itemid)) && 0 != (item_value->flags & ZBX_DC_FLAG_NOVALUE))
 		{
 			/* skip metadata updates when only one value is queued, */
 			/* because the item might be already being processed    */
 			if (item->head != item->tail)
 			{
-				item->head->lastlogsize = item_value->lastlogsize;
-				item->head->mtime = item_value->mtime;
-				item->head->flags |= ZBX_DC_FLAG_META;
+				if (0 != (item_value->flags & ZBX_DC_FLAG_META))
+				{
+					item->head->lastlogsize = item_value->lastlogsize;
+					item->head->mtime = item_value->mtime;
+					item->head->flags |= ZBX_DC_FLAG_META;
+				}
+
 				continue;
 			}
 		}
