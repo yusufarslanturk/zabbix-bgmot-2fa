@@ -75,10 +75,6 @@ window.widget_clock_form = new class {
 
 		$('#itemid').multiSelect(this._time_type.value != <?= TIME_TYPE_HOST ?> ? 'disable' : 'enable');
 
-		if (this._form.querySelector('[name="itemid"]') !== null && this._time_type.value != <?= TIME_TYPE_HOST ?>) {
-			this._form.querySelector('[name="itemid"]').disabled = 'true';
-		}
-
 		const ms_itemid_input = this._form.querySelector('[name="itemid"]');
 
 		if (ms_itemid_input !== null && this._time_type.value !== <?= TIME_TYPE_HOST ?>) {

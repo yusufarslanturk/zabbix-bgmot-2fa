@@ -77,7 +77,7 @@ class WidgetForm extends CWidgetForm {
 				]))->setDefault(TIME_TYPE_LOCAL)
 			)
 			->addField(
-				(new CWidgetFieldMultiSelectItem('itemid', _('Item')))
+				(new CWidgetFieldMultiSelectItem('itemid', _('Item'), $this->templateid))
 					->setFlags(CWidgetField::FLAG_LABEL_ASTERISK)
 					->setMultiple(false)
 			)

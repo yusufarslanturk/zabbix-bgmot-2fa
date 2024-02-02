@@ -82,15 +82,13 @@ class WidgetForm extends CWidgetForm {
 			$field_item_prototype->setFilterParameter('with_simple_graph_item_prototypes', true);
 		}
 
-		$this->addField($field_item_prototype);
-
-		$this->addField(
-			(new CWidgetFieldMultiSelectGraphPrototype('graphid', _('Graph prototype'), $this->templateid))
-				->setFlags(CWidgetField::FLAG_LABEL_ASTERISK)
-				->setMultiple(false)
-		);
-
 		$this
+			->addField($field_item_prototype)
+			->addField(
+				(new CWidgetFieldMultiSelectGraphPrototype('graphid', _('Graph prototype'), $this->templateid))
+					->setFlags(CWidgetField::FLAG_LABEL_ASTERISK)
+					->setMultiple(false)
+			)
 			->addField(
 				(new CWidgetFieldCheckBox('show_legend', _('Show legend')))->setDefault(1)
 			)

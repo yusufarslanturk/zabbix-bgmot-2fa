@@ -33,12 +33,14 @@
 	->addField(
 		new CWidgetFieldMultiSelectGraphPrototypeView($data['fields']['graphid'],
 			$data['captions']['graph_prototypes']['graphid']
-		), 'js-row-graphid'
+		),
+		'js-row-graphid'
 	)
 	->addField(
 		new CWidgetFieldMultiSelectItemPrototypeView($data['fields']['itemid'],
 			$data['captions']['item_prototypes']['itemid']
-		), 'js-row-itemid'
+		),
+		'js-row-itemid'
 	)
 	->addField(
 		new CWidgetFieldCheckBoxView($data['fields']['show_legend'])
