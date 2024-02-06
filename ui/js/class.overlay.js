@@ -455,7 +455,7 @@ Overlay.prototype.unsetProperty = function(key) {
 				else {
 					// Dialogue was closed.
 					if (dialogues[dialogues.length - 1].dialogueid === this.dialogueid
-						&& isVisible(this.$dialogue[0])) {
+							&& isVisible(this.$dialogue[0])) {
 						// Ignore last dialogue in stack, because it is same as "this" (which was closed).
 						dialogues.pop();
 
@@ -466,7 +466,7 @@ Overlay.prototype.unsetProperty = function(key) {
 					// Dialogue was opened.
 					else {
 						if (dialogues.some((dialogue) => dialogue.$dialogue[0].dataset.preventNavigation === 'true')
-							|| this.$dialogue[0].dataset.preventNavigation === 'true') {
+								|| this.$dialogue[0].dataset.preventNavigation === 'true') {
 							prevent_navigation = true;
 						}
 					}
