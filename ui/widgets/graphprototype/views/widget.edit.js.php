@@ -57,6 +57,7 @@ window.widget_graph_prototype_form = new class {
 		if (ms_itemid_input !== null) {
 			ms_itemid_input.disabled = is_graph_prototype;
 		}
+
 		if (ms_graphid_input !== null) {
 			ms_graphid_input.disabled = !is_graph_prototype;
 		}
