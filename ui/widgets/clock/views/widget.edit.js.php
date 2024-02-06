@@ -77,8 +77,8 @@ window.widget_clock_form = new class {
 
 		const ms_itemid_input = this._form.querySelector('[name="itemid"]');
 
-		if (ms_itemid_input !== null && this._time_type.value !== <?= TIME_TYPE_HOST ?>) {
-			ms_itemid_input.disabled = true;
+		if (ms_itemid_input !== null) {
+			ms_itemid_input.disabled = this._time_type.value != <?= TIME_TYPE_HOST ?>;
 		}
 
 		const is_digital = this._clock_type.querySelector('input:checked').value == <?= Widget::TYPE_DIGITAL ?>;
