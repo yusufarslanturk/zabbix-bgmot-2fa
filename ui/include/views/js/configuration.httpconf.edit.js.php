@@ -873,7 +873,11 @@
 			retrieve_mode:    this.data.retrieve_mode,
 			follow_redirects: this.data.follow_redirects,
 			steps_names:      httpconf.steps.getStepNames()
-		}, {dialogue_class: 'modal-popup-generic', trigger_element});
+		}, {
+			dialogue_class: 'modal-popup-generic',
+			trigger_element,
+			prevent_navigation: true
+		});
 	};
 
 	/**
