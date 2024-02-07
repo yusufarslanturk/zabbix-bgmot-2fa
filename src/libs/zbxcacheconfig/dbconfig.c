@@ -6860,7 +6860,7 @@ static void	dc_add_new_items_to_valuecache(const zbx_vector_dc_item_ptr_t *items
 			}
 		}
 
-		if (0 != items->values_num)
+		if (0 != vc_items.values_num)
 			zbx_vc_add_new_items(&vc_items);
 
 		zbx_vector_uint64_pair_destroy(&vc_items);
@@ -6898,7 +6898,7 @@ static void	dc_add_new_items_to_trends(const zbx_vector_dc_item_ptr_t *items)
 
 		}
 
-		if (0 != items->values_num)
+		if (0 != itemids.values_num)
 			zbx_trend_add_new_items(&itemids);
 
 		zbx_vector_uint64_destroy(&itemids);
