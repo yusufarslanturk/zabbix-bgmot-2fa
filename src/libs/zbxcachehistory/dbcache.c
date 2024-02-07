@@ -905,17 +905,17 @@ static void	DCmass_update_trends(const ZBX_DC_HISTORY *history, int history_num,
 
 				trend->clock = 0;
 				trend->num = 0;
-				memset(&trend->value_min, 0, sizeof(history_value_t));
-				memset(&trend->value_avg, 0, sizeof(value_avg_t));
-				memset(&trend->value_max, 0, sizeof(history_value_t));
+				memset(&trend->value_min, 0, sizeof(zbx_history_value_t));
+				memset(&trend->value_avg, 0, sizeof(zbx_value_avg_t));
+				memset(&trend->value_max, 0, sizeof(zbx_history_value_t));
 			}
 			else
 			{
 				if (SUCCEED == zbx_history_requires_trends(trend->value_type) && 0 != trend->num)
 					DCflush_trend(trend, trends, &trends_alloc, trends_num);
 
-				/* last trend added more than 24 hours ago, check if it should be cleared from cache */
-				if (0 != trend->disable_from && trend->disable_from <= hour - SEC_PER_DAY)
+				/* trend is missing an hour, check if it should be cleared from cache */
+				if (0 != trend->disable_from && trend->disable_from < hour - SEC_PER_HOUR)
 					zbx_vector_uint64_append(&del_itemids, trend->itemid);
 			}
 		}

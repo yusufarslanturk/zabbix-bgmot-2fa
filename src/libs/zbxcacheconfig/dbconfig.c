@@ -6889,11 +6889,36 @@ static void	dc_add_new_items_to_trends(const zbx_vector_dc_item_ptr_t *items)
 			if (ITEM_VALUE_TYPE_FLOAT == item->value_type || ITEM_VALUE_TYPE_UINT64 == item->value_type)
 			{
 				ZBX_DC_NUMITEM	*numitem;
+				int		trends_sec;
 
 				numitem = (ZBX_DC_NUMITEM *)zbx_hashset_search(&config->numitems, &item->itemid);
 
-				if (NULL != numitem && 0 != numitem->trends)
-					zbx_vector_uint64_append(&itemids, items->values[i]->itemid);
+				if (NULL == numitem)
+					continue;
+
+				if (NULL != strstr(numitem->trends_period, "{$"))
+				{
+					const char		*value = NULL;
+
+					um_cache_resolve_const(config->um_cache, &item->hostid, 1,
+							numitem->trends_period, ZBX_MACRO_ENV_NONSECURE, &value);
+
+					if (NULL == value)
+						continue;
+
+					trends_sec = zbx_dc_config_history_get_trends_sec(value,
+							config->config->hk.trends_global, config->config->hk.trends);
+				}
+				else
+				{
+					trends_sec = zbx_dc_config_history_get_trends_sec(numitem->trends_period,
+							config->config->hk.trends_global, config->config->hk.trends);
+				}
+
+				if (0 == trends_sec)
+					continue;
+
+				zbx_vector_uint64_append(&itemids, items->values[i]->itemid);
 			}
 
 		}

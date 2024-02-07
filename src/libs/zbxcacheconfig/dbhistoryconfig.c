@@ -113,11 +113,8 @@ static void	dc_items_convert_hk_periods(const zbx_config_hk_t *config_hk, zbx_hi
 		zbx_substitute_simple_macros(NULL, NULL, NULL, NULL, &item->host.hostid, NULL, NULL, NULL, NULL, NULL,
 				NULL, NULL, &item->trends_period, MACRO_TYPE_COMMON, NULL, 0);
 
-		if (SUCCEED != zbx_is_time_suffix(item->trends_period, &item->trends_sec, ZBX_LENGTH_UNLIMITED))
-			item->trends_sec = ZBX_HK_PERIOD_MAX;
-
-		if (0 != item->trends_sec && ZBX_HK_OPTION_ENABLED == config_hk->trends_global)
-			item->trends_sec = config_hk->trends;
+		item->trends_sec = zbx_dc_config_history_get_trends_sec(item->trends_period, config_hk->trends_global,
+				config_hk->trends);
 
 		item->trends = (0 != item->trends_sec);
 	}
@@ -226,6 +223,19 @@ void	zbx_dc_config_clean_history_sync_items(zbx_history_sync_item_t *items, int 
 	}
 }
 
+int	zbx_dc_config_history_get_trends_sec(const char *trends_period, int trends_global, int hk_trends)
+{
+	int	trends_sec;
+
+	if (SUCCEED != zbx_is_time_suffix(trends_period, &trends_sec, ZBX_LENGTH_UNLIMITED))
+		trends_sec = ZBX_HK_PERIOD_MAX;
+
+	if (0 != trends_sec && ZBX_HK_OPTION_ENABLED == trends_global)
+		trends_sec = hk_trends;
+
+	return trends_sec;
+}
+
 void	zbx_dc_config_history_sync_unset_existing_itemids(zbx_vector_uint64_t *itemids)
 {
 	int	i;
@@ -234,15 +244,8 @@ void	zbx_dc_config_history_sync_unset_existing_itemids(zbx_vector_uint64_t *item
 
 	for (i = 0; i < itemids->values_num; i++)
 	{
-		const ZBX_DC_NUMITEM	*numitem;
-
-		if (NULL == (numitem = zbx_hashset_search(&config->numitems, &itemids->values[i])))
-			continue;
-
-		if (0 == numitem->trends)
-			continue;
-
-		zbx_vector_uint64_remove_noorder(itemids, i--);
+		if (NULL != zbx_hashset_search(&config->items, &itemids->values[i]))
+			zbx_vector_uint64_remove_noorder(itemids, i--);
 	}
 
 	UNLOCK_CACHE_CONFIG_HISTORY;
