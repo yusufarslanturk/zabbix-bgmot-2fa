@@ -6905,7 +6905,7 @@ static void	dc_add_new_items_to_trends(const zbx_vector_dc_item_ptr_t *items)
 						ZBX_MACRO_ENV_NONSECURE, &value);
 			}
 
-			if (0 == zbx_dc_config_history_get_trends_sec(value, config->config->hk.trends_global, 
+			if (0 == zbx_dc_config_history_get_trends_sec(value, config->config->hk.trends_global,
 					config->config->hk.trends))
 			{
 				continue;
