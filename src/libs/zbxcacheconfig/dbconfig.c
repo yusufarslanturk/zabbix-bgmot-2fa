@@ -20,6 +20,7 @@
 #include "dbconfig.h"
 
 #include "log.h"
+#include "zbxcommon.h"
 #include "zbxtasks.h"
 #include "zbxserver.h"
 #include "zbxshmem.h"
@@ -6886,41 +6887,31 @@ static void	dc_add_new_items_to_trends(const zbx_vector_dc_item_ptr_t *items)
 		{
 			ZBX_DC_ITEM	*item = items->values[i];
 
-			if (ITEM_VALUE_TYPE_FLOAT == item->value_type || ITEM_VALUE_TYPE_UINT64 == item->value_type)
+			if (ITEM_VALUE_TYPE_FLOAT != item->value_type && ITEM_VALUE_TYPE_UINT64 != item->value_type)
+				continue;
+
+			ZBX_DC_NUMITEM	*numitem;
+
+			numitem = (ZBX_DC_NUMITEM *)zbx_hashset_search(&config->numitems, &item->itemid);
+
+			if (NULL == numitem)
+				continue;
+
+			const char	*value = numitem->trends_period;
+
+			if (0 == strncmp(numitem->trends_period, "{$", ZBX_CONST_STRLEN("{$")))
 			{
-				ZBX_DC_NUMITEM	*numitem;
-				int		trends_sec;
-
-				numitem = (ZBX_DC_NUMITEM *)zbx_hashset_search(&config->numitems, &item->itemid);
-
-				if (NULL == numitem)
-					continue;
-
-				if (NULL != strstr(numitem->trends_period, "{$"))
-				{
-					const char		*value = NULL;
-
-					um_cache_resolve_const(config->um_cache, &item->hostid, 1,
-							numitem->trends_period, ZBX_MACRO_ENV_NONSECURE, &value);
-
-					if (NULL == value)
-						continue;
-
-					trends_sec = zbx_dc_config_history_get_trends_sec(value,
-							config->config->hk.trends_global, config->config->hk.trends);
-				}
-				else
-				{
-					trends_sec = zbx_dc_config_history_get_trends_sec(numitem->trends_period,
-							config->config->hk.trends_global, config->config->hk.trends);
-				}
-
-				if (0 == trends_sec)
-					continue;
-
-				zbx_vector_uint64_append(&itemids, items->values[i]->itemid);
+				um_cache_resolve_const(config->um_cache, &item->hostid, 1, numitem->trends_period,
+						ZBX_MACRO_ENV_NONSECURE, &value);
 			}
 
+			if (0 == zbx_dc_config_history_get_trends_sec(value, config->config->hk.trends_global, 
+					config->config->hk.trends))
+			{
+				continue;
+			}
+
+			zbx_vector_uint64_append(&itemids, items->values[i]->itemid);
 		}
 
 		if (0 != itemids.values_num)
