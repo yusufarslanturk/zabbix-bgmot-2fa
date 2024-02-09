@@ -167,6 +167,7 @@ foreach ($data['items'] as $item) {
 					: 'item.massdisable'
 				)
 				->setArgument('context', $data['context'])
+				->setArgument('backurl', $url)
 				->setArgument('checkbox_hash', $data['checkbox_hash'])
 				->getUrl()
 		))
@@ -177,10 +178,6 @@ foreach ($data['items'] as $item) {
 
 	// triggers info
 	$triggerHintTable = (new CTableInfo())->setHeader([_('Severity'), _('Name'), _('Expression'), _('Status')]);
-
-	$backurl = (new CUrl('items.php'))
-		->setArgument('context', $data['context'])
-		->getUrl();
 
 	foreach ($item['triggers'] as $num => &$trigger) {
 		$trigger = $data['itemTriggers'][$trigger['triggerid']];
@@ -199,7 +196,7 @@ foreach ($data['items'] as $item) {
 				->setArgument('hostid', key($trigger['hosts']))
 				->setArgument('triggerid', $trigger['triggerid'])
 				->setArgument('context', $data['context'])
-				->setArgument('backurl', $backurl)
+				->setArgument('backurl', $url)
 		);
 
 		if ($trigger['state'] == TRIGGER_STATE_UNKNOWN) {
@@ -242,7 +239,7 @@ foreach ($data['items'] as $item) {
 		->setMenuPopup(CMenuPopupHelper::getItem([
 			'itemid' => $item['itemid'],
 			'context' => $data['context'],
-			'backurl' => $backurl
+			'backurl' => $url
 		]));
 
 	if (in_array($item['value_type'], [ITEM_VALUE_TYPE_STR, ITEM_VALUE_TYPE_LOG, ITEM_VALUE_TYPE_TEXT])) {
