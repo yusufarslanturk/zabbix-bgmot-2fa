@@ -2905,7 +2905,7 @@ class CConfigurationImport {
 			foreach ($items as $item) {
 				$resolved_masters_cache[$host_name][$item['key_']] = [
 					'type' => $item['type'],
-					$master_item_key => $item[$master_item_key]
+					$master_item_key => $item['type'] == ITEM_TYPE_DEPENDENT ? $item[$master_item_key] : []
 				];
 
 				if ($item['type'] == ITEM_TYPE_DEPENDENT && array_key_exists('key', $item[$master_item_key])) {
