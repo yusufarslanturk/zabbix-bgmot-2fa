@@ -96,6 +96,8 @@ func init() {
 	if err != nil {
 		panic(errs.Wrap(err, "failed to register metrics"))
 	}
+
+	impl.SetCapacity(1000)
 }
 
 // Export -
