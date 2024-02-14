@@ -20,6 +20,7 @@
 #include "dbconfig.h"
 
 #include "log.h"
+#include "zbxcommon.h"
 #include "zbxtasks.h"
 #include "zbxserver.h"
 #include "zbxshmem.h"
@@ -6860,10 +6861,63 @@ static void	dc_add_new_items_to_valuecache(const zbx_vector_dc_item_ptr_t *items
 			}
 		}
 
-		if (0 != items->values_num)
+		if (0 != vc_items.values_num)
 			zbx_vc_add_new_items(&vc_items);
 
 		zbx_vector_uint64_pair_destroy(&vc_items);
+	}
+}
+
+/******************************************************************************
+ *                                                                            *
+ * Purpose: add new items with triggers to trend cache                        *
+ *                                                                            *
+ ******************************************************************************/
+static void	dc_add_new_items_to_trends(const zbx_vector_dc_item_ptr_t *items)
+{
+	if (0 != items->values_num)
+	{
+		zbx_vector_uint64_t	itemids;
+		int			i;
+
+		zbx_vector_uint64_create(&itemids);
+		zbx_vector_uint64_reserve(&itemids, (size_t)items->values_num);
+
+		for (i = 0; i < items->values_num; i++)
+		{
+			ZBX_DC_ITEM	*item = items->values[i];
+
+			if (ITEM_VALUE_TYPE_FLOAT != item->value_type && ITEM_VALUE_TYPE_UINT64 != item->value_type)
+				continue;
+
+			ZBX_DC_NUMITEM	*numitem;
+
+			numitem = (ZBX_DC_NUMITEM *)zbx_hashset_search(&config->numitems, &item->itemid);
+
+			if (NULL == numitem)
+				continue;
+
+			const char	*value = numitem->trends_period;
+
+			if (0 == strncmp(numitem->trends_period, "{$", ZBX_CONST_STRLEN("{$")))
+			{
+				um_cache_resolve_const(config->um_cache, &item->hostid, 1, numitem->trends_period,
+						ZBX_MACRO_ENV_NONSECURE, &value);
+			}
+
+			if (0 == zbx_dc_config_history_get_trends_sec(value, config->config->hk.trends_global,
+					config->config->hk.trends))
+			{
+				continue;
+			}
+
+			zbx_vector_uint64_append(&itemids, items->values[i]->itemid);
+		}
+
+		if (0 != itemids.values_num)
+			zbx_trend_add_new_items(&itemids);
+
+		zbx_vector_uint64_destroy(&itemids);
 	}
 }
 
@@ -7256,7 +7310,10 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 	FINISH_SYNC;
 
 	if (NULL != pnew_items)
+	{
 		dc_add_new_items_to_valuecache(pnew_items);
+		dc_add_new_items_to_trends(pnew_items);
+	}
 
 	dc_flush_history();	/* misconfigured items generate pseudo-historic values to become notsupported */
 
