@@ -1,1 +1,1 @@
-.......PS. [ZBX-23124] fixed items without history sometimes being stuck in not-supported state on server (wiper)
+.......P.. [ZBX-23124] fixed items with disabled history being sometimes stuck in non-supported state (wiper)
