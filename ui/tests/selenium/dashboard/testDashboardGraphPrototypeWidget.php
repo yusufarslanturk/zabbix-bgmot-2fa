@@ -25,6 +25,8 @@ require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 require_once dirname(__FILE__).'/../common/testWidgets.php';
 
 /**
+ * @dataSource AllItemValueTypes
+ *
  * @backup widget, profiles
  */
 class testDashboardGraphPrototypeWidget extends testWidgets {
@@ -162,13 +164,6 @@ class testDashboardGraphPrototypeWidget extends testWidgets {
 				]
 			]
 		];
-	}
-
-	/**
-	 * TODO remove after DEV-1535 is fixed.
-	 */
-	public function cleanupProfile() {
-		DBexecute('DELETE FROM profiles WHERE idx LIKE \'web.popup.generic.%\'');
 	}
 
 	/**
