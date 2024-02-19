@@ -71,6 +71,7 @@ class testDashboardViewMode extends CLegacyWebTest {
 		$this->zbxTestOpen('zabbix.php?action=dashboard.view&dashboardid=1');
 		$this->zbxTestCheckTitle('Dashboard');
 		$this->zbxTestCheckHeader('Global view');
+
 		if ($data['username'] !== 'super-admin') {
 			$this->zbxTestAssertElementText("//div[@class='dashboard-grid']/div[2]//tr[@class='nothing-to-show']/td",
 					'No data found.');
@@ -81,6 +82,7 @@ class testDashboardViewMode extends CLegacyWebTest {
 			$this->zbxTestCheckNoRealHostnames();
 			$this->zbxTestAssertElementPresentXpath("//div[@class='dashboard-grid']/div[3]//h4[text()='Performance']");
 		}
+
 		$this->zbxTestAssertElementText("//div[@class='dashboard-grid']/div[2]//h4", 'Top hosts by CPU utilization');
 		$this->zbxTestAssertElementText("//div[@class='dashboard-grid']/div[4]//h4", 'System information');
 		$this->zbxTestAssertElementText("//div[@class='dashboard-grid']/div[7]//h4", 'Host availability');
