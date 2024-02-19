@@ -1203,9 +1203,6 @@ static void	proxy_db_init(void)
 {
 	char		*error = NULL;
 	int		db_type, version_check;
-#ifdef HAVE_SQLITE3
-	zbx_stat_t	db_stat;
-#endif
 
 	if (SUCCEED != zbx_db_init(DCget_nextid, program_type, &error))
 	{
