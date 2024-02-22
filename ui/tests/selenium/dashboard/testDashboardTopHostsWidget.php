@@ -855,6 +855,8 @@ class testDashboardTopHostsWidget extends testWidgets  {
 			// Check widget amount that it is added.
 			$this->assertEquals($old_widget_count + 1, $dashboard->getWidgets()->count());
 			$this->checkWidget($header, $data, 'create');
+
+			COverlayDialogElement::find()->one()->close();
 		}
 		else {
 			COverlayDialogElement::find()->one()->close();
@@ -1316,8 +1318,9 @@ class testDashboardTopHostsWidget extends testWidgets  {
 
 			// Check message that widget added.
 			$this->assertMessage(TEST_GOOD, 'Dashboard updated');
-
 			$this->checkWidget(self::$updated_name, $data, 'update');
+
+			COverlayDialogElement::find()->one()->close();
 		}
 		else {
 			COverlayDialogElement::find()->one()->close();
@@ -1428,6 +1431,12 @@ class testDashboardTopHostsWidget extends testWidgets  {
 
 		// Check that tag/column/threshold removed.
 		$this->assertEquals($amount_before - 1, $table->getRows()->count());
+
+		if ($data['table_id'] === 'id:thresholds_table') {
+			COverlayDialogElement::find()->all()->last()->close();
+		}
+
+		COverlayDialogElement::find()->one()->close();
 	}
 
 	/**
@@ -1751,7 +1760,7 @@ class testDashboardTopHostsWidget extends testWidgets  {
 		$dashboard = CDashboardElement::find()->one();
 		$form = $dashboard->edit()->addWidget()->asForm();
 		$form->fill(['Type' => 'Top hosts']);
-		COverlayDialogElement::find()->waitUntilReady()->one();
+		$dialog = COverlayDialogElement::find()->waitUntilReady()->one();
 
 		// Add column.
 		$form->query('id:add')->waitUntilClickable()->one()->click();
@@ -1783,6 +1792,8 @@ class testDashboardTopHostsWidget extends testWidgets  {
 			$hint->query('xpath://button[@class="overlay-close-btn"]')->one()->click();
 			$hint->waitUntilNotPresent();
 		}
+
+		$dialog->close();
 	}
 
 	public static function getCheckTextItemsData() {

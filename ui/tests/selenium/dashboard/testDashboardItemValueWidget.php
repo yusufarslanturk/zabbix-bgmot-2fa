@@ -372,6 +372,8 @@ class testDashboardItemValueWidget extends testWidgets {
 				}
 			}
 		}
+
+		COverlayDialogElement::find()->one()->close();
 	}
 
 	public static function getWidgetData() {
@@ -1013,6 +1015,8 @@ class testDashboardItemValueWidget extends testWidgets {
 		if (CTestArrayHelper::get($data, 'expected', TEST_GOOD) === TEST_BAD) {
 			$this->assertMessage($data['expected'], null, $data['error']);
 			$this->assertEquals($old_hash, CDBHelper::getHash('SELECT * FROM widget ORDER BY widgetid'));
+
+			COverlayDialogElement::find()->one()->close();
 		}
 		else {
 			COverlayDialogElement::ensureNotPresent();
@@ -1187,6 +1191,8 @@ class testDashboardItemValueWidget extends testWidgets {
 		// Check that updating widget form values did not change in frontend.
 		if (!$create && !$save_dashboard) {
 			$this->assertEquals($values, $dashboard->getWidget(self::$old_name)->edit()->getFields()->asValues());
+
+			COverlayDialogElement::find()->one()->close();
 		}
 
 		// Check that DB hash is not changed.
@@ -1298,6 +1304,8 @@ class testDashboardItemValueWidget extends testWidgets {
 			// Check that info icon is not displayed.
 			$this->assertFalse($form->query($info)->one()->isVisible());
 		}
+
+		COverlayDialogElement::find()->one()->close();
 	}
 
 	public function testDashboardItemValueWidget_ThresholdColor() {
