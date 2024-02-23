@@ -1764,7 +1764,8 @@ class testDashboardTopHostsWidget extends testWidgets  {
 
 		// Add column.
 		$form->query('id:add')->waitUntilClickable()->one()->click();
-		$column_form = COverlayDialogElement::find()->waitUntilReady()->asForm()->all()->last();
+		$column_dialog = COverlayDialogElement::find()->waitUntilReady()->all()->last();
+		$column_form = $column_dialog->asForm();
 
 		// Check that no warning icon displayed before adding fields.
 		$warnings = array_merge($warnings, [$history_data]);
@@ -1793,6 +1794,7 @@ class testDashboardTopHostsWidget extends testWidgets  {
 			$hint->waitUntilNotPresent();
 		}
 
+		$column_dialog->close();
 		$dialog->close();
 	}
 

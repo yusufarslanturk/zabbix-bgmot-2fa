@@ -602,7 +602,7 @@ class testFormTags extends CWebTest {
 			// Check the results in form.
 			$this->checkTagFields($data, $object, $form);
 
-			if ($object === 'connector') {
+			if (in_array($object, ['connector', 'service'])) {
 				COverlayDialogElement::find()->one()->close();
 			}
 		}
@@ -761,7 +761,7 @@ class testFormTags extends CWebTest {
 
 		$element->checkValue($tags);
 
-		if ($object === 'host' || $object === 'discovered host' || $object === 'connector') {
+		if (in_array($object, ['host', 'discovered host', 'connector', 'service'])) {
 			COverlayDialogElement::find()->one()->close();
 		}
 	}

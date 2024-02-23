@@ -339,6 +339,9 @@ class testFormServicesServices extends CWebTest {
 		foreach (['Add', 'Cancel'] as $button) {
 			$this->assertTrue($dialog->getFooter()->query('button', $button)->one()->isClickable());
 		}
+
+		$children_dialog->close();
+		$dialog->close();
 	}
 
 	public function getServicesData() {
@@ -780,8 +783,8 @@ class testFormServicesServices extends CWebTest {
 			$this->query('button:Create service')->waitUntilClickable()->one()->click();
 		}
 
-		COverlayDialogElement::find()->one()->waitUntilReady();
-		$form = $this->query('id:service-form')->asForm()->one()->waitUntilReady();
+		$dialog = COverlayDialogElement::find()->one()->waitUntilReady();
+		$form = $dialog->query('id:service-form')->asForm()->one()->waitUntilReady();
 		$form->fill($data['fields']);
 
 		// Remove additional rule if no substitute rules are defined in data provider or edit rule if such exists.
@@ -805,12 +808,15 @@ class testFormServicesServices extends CWebTest {
 			if (!array_key_exists('existing_rule', $data)) {
 				$form->getFieldContainer('Additional rules')->query('button:Add')->waitUntilClickable()->one()->click();
 			}
-			$rules_form = COverlayDialogElement::find()->all()->last()->waitUntilReady()->asForm();
+			$rules_dialog = COverlayDialogElement::find()->all()->last()->waitUntilReady();
+			$rules_form = $rules_dialog->asForm();
 			$rules_form->fill($rule_fields);
 			$rules_form->submit();
 
 			if ($expected === TEST_BAD) {
 				$this->assertMessage(TEST_BAD, null, $data['error']);
+				$rules_dialog->close();
+				$dialog->close();
 
 				return;
 			}
@@ -836,6 +842,7 @@ class testFormServicesServices extends CWebTest {
 		if ($expected === TEST_BAD) {
 			$this->assertMessage(TEST_BAD, null, $data['error']);
 			$this->assertEquals($old_hash, CDBHelper::getHash(self::$service_sql));
+			$dialog->close();
 		}
 		else {
 			$this->assertMessage(TEST_GOOD, ($update ? 'Service updated' : 'Service created'));
@@ -904,6 +911,8 @@ class testFormServicesServices extends CWebTest {
 					$this->assertFalse(in_array($data['existing_rule'], $existing_rules));
 				}
 			}
+
+			COverlayDialogElement::find()->one()->close();
 		}
 	}
 
@@ -999,6 +1008,8 @@ class testFormServicesServices extends CWebTest {
 			$form->selectTab('Child services');
 			$this->assertEquals('', $form->query('xpath:.//table[@id="children"]/tbody')->one()->getText());
 		}
+
+		COverlayDialogElement::find()->one()->close();
 	}
 
 	public static function getCancelData() {
@@ -1138,7 +1149,7 @@ class testFormServicesServices extends CWebTest {
 			// Find necessary row and then find Add child button right in that row.
 			$table->findRow('Name', $data['parent'], true)->query('xpath:.//button[@title="Add child service"]')
 					->waitUntilClickable()->one()->click();
-			COverlayDialogElement::find()->one()->waitUntilReady();
+			$dialog = COverlayDialogElement::find()->one()->waitUntilReady();
 			$form = $this->query('id:service-form')->asForm()->one()->waitUntilReady();
 			$form->fill($data['fields']);
 
@@ -1164,6 +1175,8 @@ class testFormServicesServices extends CWebTest {
 		if ($expected === TEST_BAD) {
 			$this->assertMessage(TEST_BAD, null, $data['error']);
 			$this->assertEquals($old_hash, CDBHelper::getHash(self::$service_sql));
+
+			$dialog->close();
 		}
 		else {
 			$this->assertMessage(TEST_GOOD, 'Service created');
@@ -1184,7 +1197,7 @@ class testFormServicesServices extends CWebTest {
 					->waitUntilClickable()->one()->click();
 			$table->findRow('Name', $data['fields']['Name'])->query(self::EDIT_BUTTON_PATH)->waitUntilClickable()
 					->one()->click();
-			COverlayDialogElement::find()->one()->waitUntilReady();
+			$dialog = COverlayDialogElement::find()->one()->waitUntilReady();
 			$form = $this->query('id:service-form')->asForm()->one();
 
 			// Check that all form fields were saved correctly.
@@ -1192,6 +1205,7 @@ class testFormServicesServices extends CWebTest {
 
 			// Check parent field separately, because it was not present in data[fields] array.
 			$this->assertEquals([$data['parent']], $form->getField('Parent services')->getValue());
+			$dialog->close();
 		}
 	}
 
