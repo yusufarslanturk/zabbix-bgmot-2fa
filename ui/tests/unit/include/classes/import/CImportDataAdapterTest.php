@@ -340,7 +340,7 @@ class CImportDataAdapterTest extends TestCase {
 	public function testGetItems() {
 		$adapter = $this->getAdapter($this->getHostAndTemplateXml());
 
-		$this->assertEquals($adapter->getItems(), [
+		$this->checkMatchesNested($adapter->getItems(), [
 			'export-host' => [
 				'item' => [
 					'name' => 'item',
@@ -647,7 +647,7 @@ class CImportDataAdapterTest extends TestCase {
 	public function testGetDiscoveryRules() {
 		$adapter = $this->getAdapter($this->getHostAndTemplateXml());
 
-		$this->assertEquals($adapter->getDiscoveryRules(), [
+		$this->checkMatchesNested($adapter->getDiscoveryRules(), [
 			'export-host' => [
 				'empty-lld-rule' => [
 					'name' => 'empty-lld-rule',
@@ -1926,7 +1926,7 @@ class CImportDataAdapterTest extends TestCase {
 			]
 		);
 
-		$this->assertEquals($adapter->getItems(), [
+		$this->checkMatchesNested($adapter->getItems(), [
 				'Template_Simple' => [
 					'net.tcp.service[ftp,,21]' => [
 						'uuid' => 'c1e7021d16814cde8d17c783a987bb18',
@@ -2206,7 +2206,7 @@ class CImportDataAdapterTest extends TestCase {
 			]
 		]);
 
-		$this->assertEquals($adapter->getItems(), [
+		$this->checkMatchesNested($adapter->getItems(), [
 			'Test 1' => [
 				'test' => [
 					'uuid' => '86491ebd3d2549eaab7bbba6537c5e9b',
@@ -2325,7 +2325,7 @@ class CImportDataAdapterTest extends TestCase {
 			]
 		]);
 
-		$this->assertEquals($adapter->getDiscoveryRules(), [
+		$this->checkMatchesNested($adapter->getDiscoveryRules(), [
 			'Test 1' => [
 				'drule' => [
 					'uuid' => '3b7d292c10354838805205cfcbc444cc',
@@ -2460,831 +2460,477 @@ class CImportDataAdapterTest extends TestCase {
 		]);
 	}
 
-	// public function testHostSnmpConverter() {
-	// 	$adapter = $this->getAdapter($this->getSNMPHostXml());
+	public function testHostSnmpConverter() {
+		$adapter = $this->getAdapter($this->getSNMPHostXml());
 
-	// 	$this->assertEquals($adapter->getHosts(), [
-	// 		[
-	// 			'inventory' => [],
-	// 			'proxy' => [],
-	// 			'groups' => [
-	// 				[
-	// 					'name' => 'Templates'
-	// 				]
-	// 			],
-	// 			'templates' => [],
-	// 			'macros' => [],
-	// 			'interfaces' => [
-	// 				[
-	// 					'interface_ref' => 'if1',
-	// 					'type' => '1',
-	// 					'useip' => '1',
-	// 					'ip' => '127.0.0.1',
-	// 					'dns' => '',
-	// 					'port' => '10050',
-	// 					'details' => [],
-	// 					'main' => '1'
-	// 				],
-	// 				[
-	// 					'interface_ref' => 'if3',
-	// 					'type' => '2',
-	// 					'port' => '161',
-	// 					'details' => [
-	// 						'bulk' => '1',
-	// 						'version' => '1',
-	// 						'community' => 'public',
-	// 						'max_repetitions' => '10',
-	// 						'contextname' => '',
-	// 						'securityname' => '',
-	// 						'securitylevel' => '0',
-	// 						'authprotocol' => '0',
-	// 						'authpassphrase' => '',
-	// 						'privprotocol' => '0',
-	// 						'privpassphrase' => ''
-	// 					],
-	// 					'useip' => '1',
-	// 					'ip' => '127.0.0.1',
-	// 					'dns' => '',
-	// 					'main' => '1'
-	// 				],
-	// 				[
-	// 					'interface_ref' => 'if4',
-	// 					'type' => '2',
-	// 					'port' => '162',
-	// 					'details' => [
-	// 						'bulk' => '1',
-	// 						'version' => '1',
-	// 						'community' => 'public',
-	// 						'max_repetitions' => '10',
-	// 						'contextname' => '',
-	// 						'securityname' => '',
-	// 						'securitylevel' => '0',
-	// 						'authprotocol' => '0',
-	// 						'authpassphrase' => '',
-	// 						'privprotocol' => '0',
-	// 						'privpassphrase' => ''
-	// 					],
-	// 					'useip' => '1',
-	// 					'ip' => '127.0.0.1',
-	// 					'dns' => '',
-	// 					'main' => '0'
-	// 				],
-	// 				[
-	// 					'interface_ref' => 'if5',
-	// 					'type' => '2',
-	// 					'port' => '161',
-	// 					'details' => [
-	// 						'bulk' => '1',
-	// 						'version' => '2',
-	// 						'community' => 'public',
-	// 						'max_repetitions' => '10',
-	// 						'contextname' => '',
-	// 						'securityname' => '',
-	// 						'securitylevel' => '0',
-	// 						'authprotocol' => '0',
-	// 						'authpassphrase' => '',
-	// 						'privprotocol' => '0',
-	// 						'privpassphrase' => ''
-	// 					],
-	// 					'useip' => '1',
-	// 					'ip' => '127.0.0.1',
-	// 					'dns' => '',
-	// 					'main' => '0'
-	// 				],
-	// 				[
-	// 					'interface_ref' => 'if6',
-	// 					'type' => '2',
-	// 					'port' => '163',
-	// 					'details' => [
-	// 						'bulk' => '1',
-	// 						'version' => '2',
-	// 						'community' => 'public',
-	// 						'max_repetitions' => '10',
-	// 						'contextname' => '',
-	// 						'securityname' => '',
-	// 						'securitylevel' => '0',
-	// 						'authprotocol' => '0',
-	// 						'authpassphrase' => '',
-	// 						'privprotocol' => '0',
-	// 						'privpassphrase' => ''
-	// 					],
-	// 					'useip' => '1',
-	// 					'ip' => '127.0.0.1',
-	// 					'dns' => '',
-	// 					'main' => '0'
-	// 				],
-	// 				[
-	// 					'interface_ref' => 'if7',
-	// 					'type' => '2',
-	// 					'port' => '161',
-	// 					'details' => [
-	// 						'bulk' => '1',
-	// 						'version' => '3',
-	// 						'contextname' => 'test',
-	// 						'securityname' => 'test',
-	// 						'securitylevel' => '2',
-	// 						'authprotocol' => '0',
-	// 						'authpassphrase' => 'test',
-	// 						'privprotocol' => '0',
-	// 						'privpassphrase' => 'test',
-	// 						'community' => '',
-	// 						'max_repetitions' => '10'
-	// 					],
-	// 					'useip' => '1',
-	// 					'ip' => '127.0.0.1',
-	// 					'dns' => '',
-	// 					'main' => '0'
-	// 				],
-	// 				[
-	// 					'interface_ref' => 'if8',
-	// 					'type' => '2',
-	// 					'port' => '164',
-	// 					'details' => [
-	// 						'bulk' => '1',
-	// 						'version' => '3',
-	// 						'contextname' => 'test',
-	// 						'securityname' => 'test',
-	// 						'securitylevel' => '2',
-	// 						'authprotocol' => '0',
-	// 						'authpassphrase' => 'test',
-	// 						'privprotocol' => '0',
-	// 						'privpassphrase' => 'test',
-	// 						'community' => '',
-	// 						'max_repetitions' => '10'
-	// 					],
-	// 					'useip' => '1',
-	// 					'ip' => '127.0.0.1',
-	// 					'dns' => '',
-	// 					'main' => '0'
-	// 				],
-	// 				[
-	// 					'interface_ref' => 'if9',
-	// 					'type' => '2',
-	// 					'port' => '161',
-	// 					'details' => [
-	// 						'bulk' => '1',
-	// 						'version' => '3',
-	// 						'contextname' => 'test',
-	// 						'securityname' => 'test',
-	// 						'securitylevel' => '2',
-	// 						'authprotocol' => '1',
-	// 						'authpassphrase' => 'test',
-	// 						'privprotocol' => '0',
-	// 						'privpassphrase' => 'test',
-	// 						'community' => '',
-	// 						'max_repetitions' => '10'
-	// 					],
-	// 					'useip' => '1',
-	// 					'ip' => '127.0.0.1',
-	// 					'dns' => '',
-	// 					'main' => '0'
-	// 				]
-	// 			],
-	// 			'host' => 'SNMP host',
-	// 			'status' => '0',
-	// 			'description' => '',
-	// 			'ipmi_authtype' => '-1',
-	// 			'ipmi_privilege' => '2',
-	// 			'ipmi_username' => '',
-	// 			'ipmi_password' => '',
-	// 			'name' => 'SNMP host',
-	// 			'inventory_mode' => '-1',
-	// 			'tags' => [],
-	// 			'valuemaps' => []
-	// 		]
-	// 	]);
+		$this->assertEquals($adapter->getHosts(), [
+			[
+				'inventory' => [],
+				'proxy' => [],
+				'groups' => [
+					[
+						'name' => 'Templates'
+					]
+				],
+				'templates' => [],
+				'macros' => [],
+				'interfaces' => [
+					[
+						'interface_ref' => 'if1',
+						'type' => '1',
+						'useip' => '1',
+						'ip' => '127.0.0.1',
+						'dns' => '',
+						'port' => '10050',
+						'details' => [],
+						'main' => '1'
+					],
+					[
+						'interface_ref' => 'if3',
+						'type' => '2',
+						'port' => '161',
+						'details' => [
+							'bulk' => '1',
+							'version' => '1',
+							'community' => 'public',
+							'max_repetitions' => '10',
+							'contextname' => '',
+							'securityname' => '',
+							'securitylevel' => '0',
+							'authprotocol' => '0',
+							'authpassphrase' => '',
+							'privprotocol' => '0',
+							'privpassphrase' => ''
+						],
+						'useip' => '1',
+						'ip' => '127.0.0.1',
+						'dns' => '',
+						'main' => '1'
+					],
+					[
+						'interface_ref' => 'if4',
+						'type' => '2',
+						'port' => '162',
+						'details' => [
+							'bulk' => '1',
+							'version' => '1',
+							'community' => 'public',
+							'max_repetitions' => '10',
+							'contextname' => '',
+							'securityname' => '',
+							'securitylevel' => '0',
+							'authprotocol' => '0',
+							'authpassphrase' => '',
+							'privprotocol' => '0',
+							'privpassphrase' => ''
+						],
+						'useip' => '1',
+						'ip' => '127.0.0.1',
+						'dns' => '',
+						'main' => '0'
+					],
+					[
+						'interface_ref' => 'if5',
+						'type' => '2',
+						'port' => '161',
+						'details' => [
+							'bulk' => '1',
+							'version' => '2',
+							'community' => 'public',
+							'max_repetitions' => '10',
+							'contextname' => '',
+							'securityname' => '',
+							'securitylevel' => '0',
+							'authprotocol' => '0',
+							'authpassphrase' => '',
+							'privprotocol' => '0',
+							'privpassphrase' => ''
+						],
+						'useip' => '1',
+						'ip' => '127.0.0.1',
+						'dns' => '',
+						'main' => '0'
+					],
+					[
+						'interface_ref' => 'if6',
+						'type' => '2',
+						'port' => '163',
+						'details' => [
+							'bulk' => '1',
+							'version' => '2',
+							'community' => 'public',
+							'max_repetitions' => '10',
+							'contextname' => '',
+							'securityname' => '',
+							'securitylevel' => '0',
+							'authprotocol' => '0',
+							'authpassphrase' => '',
+							'privprotocol' => '0',
+							'privpassphrase' => ''
+						],
+						'useip' => '1',
+						'ip' => '127.0.0.1',
+						'dns' => '',
+						'main' => '0'
+					],
+					[
+						'interface_ref' => 'if7',
+						'type' => '2',
+						'port' => '161',
+						'details' => [
+							'bulk' => '1',
+							'version' => '3',
+							'contextname' => 'test',
+							'securityname' => 'test',
+							'securitylevel' => '2',
+							'authprotocol' => '0',
+							'authpassphrase' => 'test',
+							'privprotocol' => '0',
+							'privpassphrase' => 'test',
+							'community' => '',
+							'max_repetitions' => '10'
+						],
+						'useip' => '1',
+						'ip' => '127.0.0.1',
+						'dns' => '',
+						'main' => '0'
+					],
+					[
+						'interface_ref' => 'if8',
+						'type' => '2',
+						'port' => '164',
+						'details' => [
+							'bulk' => '1',
+							'version' => '3',
+							'contextname' => 'test',
+							'securityname' => 'test',
+							'securitylevel' => '2',
+							'authprotocol' => '0',
+							'authpassphrase' => 'test',
+							'privprotocol' => '0',
+							'privpassphrase' => 'test',
+							'community' => '',
+							'max_repetitions' => '10'
+						],
+						'useip' => '1',
+						'ip' => '127.0.0.1',
+						'dns' => '',
+						'main' => '0'
+					],
+					[
+						'interface_ref' => 'if9',
+						'type' => '2',
+						'port' => '161',
+						'details' => [
+							'bulk' => '1',
+							'version' => '3',
+							'contextname' => 'test',
+							'securityname' => 'test',
+							'securitylevel' => '2',
+							'authprotocol' => '1',
+							'authpassphrase' => 'test',
+							'privprotocol' => '0',
+							'privpassphrase' => 'test',
+							'community' => '',
+							'max_repetitions' => '10'
+						],
+						'useip' => '1',
+						'ip' => '127.0.0.1',
+						'dns' => '',
+						'main' => '0'
+					]
+				],
+				'host' => 'SNMP host',
+				'status' => '0',
+				'description' => '',
+				'ipmi_authtype' => '-1',
+				'ipmi_privilege' => '2',
+				'ipmi_username' => '',
+				'ipmi_password' => '',
+				'name' => 'SNMP host',
+				'inventory_mode' => '-1',
+				'tags' => [],
+				'valuemaps' => []
+			]
+		]);
 
-	// 	$this->assertEquals($adapter->getItems(), [
-	// 		'SNMP host' => [
-	// 			'test' => [
-	// 				'name' => 'Item SNMPv1 without port',
-	// 				'type' => '20',
-	// 				'snmp_oid' => 'test',
-	// 				'interface_ref' => 'if3',
-	// 				'delay' => '1m',
-	// 				'history' => '90d',
-	// 				'trends' => '365d',
-	// 				'status' => '0',
-	// 				'value_type' => '3',
-	// 				'units' => '',
-	// 				'params' => '',
-	// 				'ipmi_sensor' => '',
-	// 				'authtype' => '0',
-	// 				'username' => '',
-	// 				'password' => '',
-	// 				'publickey' => '',
-	// 				'privatekey' => '',
-	// 				'description' => '',
-	// 				'inventory_link' => '0',
-	// 				'tags' => [],
-	// 				'valuemap' => [],
-	// 				'logtimefmt' => '',
-	// 				'preprocessing' => [],
-	// 				'jmx_endpoint' => '',
-	// 				'master_item' => [],
-	// 				'timeout' => '3s',
-	// 				'url' => '',
-	// 				'query_fields' => [],
-	// 				'parameters' => [],
-	// 				'posts' => '',
-	// 				'status_codes' => '200',
-	// 				'follow_redirects' => '1',
-	// 				'post_type' => '0',
-	// 				'http_proxy' => '',
-	// 				'headers' => [],
-	// 				'retrieve_mode' => '0',
-	// 				'request_method' => '0',
-	// 				'output_format' => '0',
-	// 				'allow_traps' => '0',
-	// 				'ssl_cert_file' => '',
-	// 				'ssl_key_file' => '',
-	// 				'ssl_key_password' => '',
-	// 				'verify_peer' => '0',
-	// 				'verify_host' => '0',
-	// 				'triggers' => [],
-	// 				'key_' => 'test',
-	// 				'trapper_hosts' => ''
-	// 			],
-	// 			'test2' => [
-	// 				'name' => 'Item SNMPv1 with port',
-	// 				'type' => '20',
-	// 				'snmp_oid' => 'test',
-	// 				'interface_ref' => 'if4',
-	// 				'delay' => '1m',
-	// 				'history' => '90d',
-	// 				'trends' => '365d',
-	// 				'status' => '0',
-	// 				'value_type' => '3',
-	// 				'units' => '',
-	// 				'params' => '',
-	// 				'ipmi_sensor' => '',
-	// 				'authtype' => '0',
-	// 				'username' => '',
-	// 				'password' => '',
-	// 				'publickey' => '',
-	// 				'privatekey' => '',
-	// 				'description' => '',
-	// 				'inventory_link' => '0',
-	// 				'tags' => [],
-	// 				'valuemap' => [],
-	// 				'logtimefmt' => '',
-	// 				'preprocessing' => [],
-	// 				'jmx_endpoint' => '',
-	// 				'master_item' => [],
-	// 				'timeout' => '3s',
-	// 				'url' => '',
-	// 				'query_fields' => [],
-	// 				'parameters' => [],
-	// 				'posts' => '',
-	// 				'status_codes' => '200',
-	// 				'follow_redirects' => '1',
-	// 				'post_type' => '0',
-	// 				'http_proxy' => '',
-	// 				'headers' => [],
-	// 				'retrieve_mode' => '0',
-	// 				'request_method' => '0',
-	// 				'output_format' => '0',
-	// 				'allow_traps' => '0',
-	// 				'ssl_cert_file' => '',
-	// 				'ssl_key_file' => '',
-	// 				'ssl_key_password' => '',
-	// 				'verify_peer' => '0',
-	// 				'verify_host' => '0',
-	// 				'triggers' => [],
-	// 				'key_' => 'test2',
-	// 				'trapper_hosts' => ''
-	// 			],
-	// 			'test3' => [
-	// 				'name' => 'Item SNMPv2 without port',
-	// 				'type' => '20',
-	// 				'snmp_oid' => 'test',
-	// 				'interface_ref' => 'if5',
-	// 				'delay' => '1m',
-	// 				'history' => '90d',
-	// 				'trends' => '365d',
-	// 				'status' => '0',
-	// 				'value_type' => '3',
-	// 				'units' => '',
-	// 				'params' => '',
-	// 				'ipmi_sensor' => '',
-	// 				'authtype' => '0',
-	// 				'username' => '',
-	// 				'password' => '',
-	// 				'publickey' => '',
-	// 				'privatekey' => '',
-	// 				'description' => '',
-	// 				'inventory_link' => '0',
-	// 				'tags' => [],
-	// 				'valuemap' => [],
-	// 				'logtimefmt' => '',
-	// 				'preprocessing' => [],
-	// 				'jmx_endpoint' => '',
-	// 				'master_item' => [],
-	// 				'timeout' => '3s',
-	// 				'url' => '',
-	// 				'query_fields' => [],
-	// 				'parameters' => [],
-	// 				'posts' => '',
-	// 				'status_codes' => '200',
-	// 				'follow_redirects' => '1',
-	// 				'post_type' => '0',
-	// 				'http_proxy' => '',
-	// 				'headers' => [],
-	// 				'retrieve_mode' => '0',
-	// 				'request_method' => '0',
-	// 				'output_format' => '0',
-	// 				'allow_traps' => '0',
-	// 				'ssl_cert_file' => '',
-	// 				'ssl_key_file' => '',
-	// 				'ssl_key_password' => '',
-	// 				'verify_peer' => '0',
-	// 				'verify_host' => '0',
-	// 				'triggers' => [],
-	// 				'key_' => 'test3',
-	// 				'trapper_hosts' => ''
-	// 			],
-	// 			'test4' => [
-	// 				'name' => 'Item SNMPv2 with port',
-	// 				'type' => '20',
-	// 				'snmp_oid' => 'test',
-	// 				'interface_ref' => 'if6',
-	// 				'delay' => '1m',
-	// 				'history' => '90d',
-	// 				'trends' => '365d',
-	// 				'status' => '0',
-	// 				'value_type' => '3',
-	// 				'units' => '',
-	// 				'params' => '',
-	// 				'ipmi_sensor' => '',
-	// 				'authtype' => '0',
-	// 				'username' => '',
-	// 				'password' => '',
-	// 				'publickey' => '',
-	// 				'privatekey' => '',
-	// 				'description' => '',
-	// 				'inventory_link' => '0',
-	// 				'tags' => [],
-	// 				'valuemap' => [],
-	// 				'logtimefmt' => '',
-	// 				'preprocessing' => [],
-	// 				'jmx_endpoint' => '',
-	// 				'master_item' => [],
-	// 				'timeout' => '3s',
-	// 				'url' => '',
-	// 				'query_fields' => [],
-	// 				'parameters' => [],
-	// 				'posts' => '',
-	// 				'status_codes' => '200',
-	// 				'follow_redirects' => '1',
-	// 				'post_type' => '0',
-	// 				'http_proxy' => '',
-	// 				'headers' => [],
-	// 				'retrieve_mode' => '0',
-	// 				'request_method' => '0',
-	// 				'output_format' => '0',
-	// 				'allow_traps' => '0',
-	// 				'ssl_cert_file' => '',
-	// 				'ssl_key_file' => '',
-	// 				'ssl_key_password' => '',
-	// 				'verify_peer' => '0',
-	// 				'verify_host' => '0',
-	// 				'triggers' => [],
-	// 				'key_' => 'test4',
-	// 				'trapper_hosts' => ''
-	// 			],
-	// 			'test5' => [
-	// 				'name' => 'Item SNMPv3 without port',
-	// 				'type' => '20',
-	// 				'snmp_oid' => 'test',
-	// 				'interface_ref' => 'if7',
-	// 				'delay' => '1m',
-	// 				'history' => '90d',
-	// 				'trends' => '365d',
-	// 				'status' => '0',
-	// 				'value_type' => '3',
-	// 				'units' => '',
-	// 				'params' => '',
-	// 				'ipmi_sensor' => '',
-	// 				'authtype' => '0',
-	// 				'username' => '',
-	// 				'password' => '',
-	// 				'publickey' => '',
-	// 				'privatekey' => '',
-	// 				'description' => '',
-	// 				'inventory_link' => '0',
-	// 				'tags' => [],
-	// 				'valuemap' => [],
-	// 				'logtimefmt' => '',
-	// 				'preprocessing' => [],
-	// 				'jmx_endpoint' => '',
-	// 				'master_item' => [],
-	// 				'timeout' => '3s',
-	// 				'url' => '',
-	// 				'query_fields' => [],
-	// 				'parameters' => [],
-	// 				'posts' => '',
-	// 				'status_codes' => '200',
-	// 				'follow_redirects' => '1',
-	// 				'post_type' => '0',
-	// 				'http_proxy' => '',
-	// 				'headers' => [],
-	// 				'retrieve_mode' => '0',
-	// 				'request_method' => '0',
-	// 				'output_format' => '0',
-	// 				'allow_traps' => '0',
-	// 				'ssl_cert_file' => '',
-	// 				'ssl_key_file' => '',
-	// 				'ssl_key_password' => '',
-	// 				'verify_peer' => '0',
-	// 				'verify_host' => '0',
-	// 				'triggers' => [],
-	// 				'key_' => 'test5',
-	// 				'trapper_hosts' => ''
-	// 			],
-	// 			'test6' => [
-	// 				'name' => 'Item SNMPv3 with port',
-	// 				'type' => '20',
-	// 				'snmp_oid' => 'test',
-	// 				'interface_ref' => 'if8',
-	// 				'delay' => '1m',
-	// 				'history' => '90d',
-	// 				'trends' => '365d',
-	// 				'status' => '0',
-	// 				'value_type' => '3',
-	// 				'units' => '',
-	// 				'params' => '',
-	// 				'ipmi_sensor' => '',
-	// 				'authtype' => '0',
-	// 				'username' => '',
-	// 				'password' => '',
-	// 				'publickey' => '',
-	// 				'privatekey' => '',
-	// 				'description' => '',
-	// 				'inventory_link' => '0',
-	// 				'tags' => [],
-	// 				'valuemap' => [],
-	// 				'logtimefmt' => '',
-	// 				'preprocessing' => [],
-	// 				'jmx_endpoint' => '',
-	// 				'master_item' => [],
-	// 				'timeout' => '3s',
-	// 				'url' => '',
-	// 				'query_fields' => [],
-	// 				'parameters' => [],
-	// 				'posts' => '',
-	// 				'status_codes' => '200',
-	// 				'follow_redirects' => '1',
-	// 				'post_type' => '0',
-	// 				'http_proxy' => '',
-	// 				'headers' => [],
-	// 				'retrieve_mode' => '0',
-	// 				'request_method' => '0',
-	// 				'output_format' => '0',
-	// 				'allow_traps' => '0',
-	// 				'ssl_cert_file' => '',
-	// 				'ssl_key_file' => '',
-	// 				'ssl_key_password' => '',
-	// 				'verify_peer' => '0',
-	// 				'verify_host' => '0',
-	// 				'triggers' => [],
-	// 				'key_' => 'test6',
-	// 				'trapper_hosts' => ''
-	// 			]
-	// 		]
-	// 	]);
+		$this->checkMatchesNested($adapter->getItems(), [
+			'SNMP host' => [
+				'test' => [
+					'name' => 'Item SNMPv1 without port',
+					'type' => '20',
+					'snmp_oid' => 'test',
+					'interface_ref' => 'if3',
+					'delay' => '1m',
+					'history' => '90d',
+					'trends' => '365d',
+					'status' => '0',
+					'value_type' => '3',
+					'units' => '',
+					'description' => '',
+					'inventory_link' => '0',
+					'tags' => [],
+					'valuemap' => [],
+					'preprocessing' => [],
+					'triggers' => [],
+					'key_' => 'test'
+				],
+				'test2' => [
+					'name' => 'Item SNMPv1 with port',
+					'type' => '20',
+					'snmp_oid' => 'test',
+					'interface_ref' => 'if4',
+					'delay' => '1m',
+					'history' => '90d',
+					'trends' => '365d',
+					'status' => '0',
+					'value_type' => '3',
+					'units' => '',
+					'description' => '',
+					'inventory_link' => '0',
+					'tags' => [],
+					'valuemap' => [],
+					'preprocessing' => [],
+					'triggers' => [],
+					'key_' => 'test2'
+				],
+				'test3' => [
+					'name' => 'Item SNMPv2 without port',
+					'type' => '20',
+					'snmp_oid' => 'test',
+					'interface_ref' => 'if5',
+					'delay' => '1m',
+					'history' => '90d',
+					'trends' => '365d',
+					'status' => '0',
+					'value_type' => '3',
+					'units' => '',
+					'description' => '',
+					'inventory_link' => '0',
+					'tags' => [],
+					'valuemap' => [],
+					'preprocessing' => [],
+					'triggers' => [],
+					'key_' => 'test3'
+				],
+				'test4' => [
+					'name' => 'Item SNMPv2 with port',
+					'type' => '20',
+					'snmp_oid' => 'test',
+					'interface_ref' => 'if6',
+					'delay' => '1m',
+					'history' => '90d',
+					'trends' => '365d',
+					'status' => '0',
+					'value_type' => '3',
+					'units' => '',
+					'description' => '',
+					'inventory_link' => '0',
+					'tags' => [],
+					'valuemap' => [],
+					'preprocessing' => [],
+					'triggers' => [],
+					'key_' => 'test4'
+				],
+				'test5' => [
+					'name' => 'Item SNMPv3 without port',
+					'type' => '20',
+					'snmp_oid' => 'test',
+					'interface_ref' => 'if7',
+					'delay' => '1m',
+					'history' => '90d',
+					'trends' => '365d',
+					'status' => '0',
+					'value_type' => '3',
+					'units' => '',
+					'description' => '',
+					'inventory_link' => '0',
+					'tags' => [],
+					'valuemap' => [],
+					'preprocessing' => [],
+					'triggers' => [],
+					'key_' => 'test5'
+				],
+				'test6' => [
+					'name' => 'Item SNMPv3 with port',
+					'type' => '20',
+					'snmp_oid' => 'test',
+					'interface_ref' => 'if8',
+					'delay' => '1m',
+					'history' => '90d',
+					'trends' => '365d',
+					'status' => '0',
+					'value_type' => '3',
+					'units' => '',
+					'description' => '',
+					'inventory_link' => '0',
+					'tags' => [],
+					'valuemap' => [],
+					'preprocessing' => [],
+					'triggers' => [],
+					'key_' => 'test6'
+				]
+			]
+		]);
 
-	// 	$this->assertEquals($adapter->getDiscoveryRules(), [
-	// 		'SNMP host' => [
-	// 			'drule' => [
-	// 				'name' => 'Discovery Rule 1',
-	// 				'type' => '20',
-	// 				'snmp_oid' => 'test',
-	// 				'interface_ref' => 'if3',
-	// 				'item_prototypes' => [
-	// 					[
-	// 						'name' => 'Drule Item SNMP v1',
-	// 						'type' => '20',
-	// 						'snmp_oid' => 'test',
-	// 						'interface_ref' => 'if3',
-	// 						'delay' => '1m',
-	// 						'history' => '90d',
-	// 						'trends' => '365d',
-	// 						'status' => '0',
-	// 						'discover' => '0',
-	// 						'value_type' => '3',
-	// 						'units' => '',
-	// 						'params' => '',
-	// 						'ipmi_sensor' => '',
-	// 						'authtype' => '0',
-	// 						'username' => '',
-	// 						'password' => '',
-	// 						'publickey' => '',
-	// 						'privatekey' => '',
-	// 						'description' => '',
-	// 						'tags' => [],
-	// 						'valuemap' => [],
-	// 						'logtimefmt' => '',
-	// 						'preprocessing' => [],
-	// 						'jmx_endpoint' => '',
-	// 						'master_item' => [],
-	// 						'timeout' => '3s',
-	// 						'url' => '',
-	// 						'query_fields' => [],
-	// 						'parameters' => [],
-	// 						'posts' => '',
-	// 						'status_codes' => '200',
-	// 						'follow_redirects' => '1',
-	// 						'post_type' => '0',
-	// 						'http_proxy' => '',
-	// 						'headers' => [],
-	// 						'retrieve_mode' => '0',
-	// 						'request_method' => '0',
-	// 						'output_format' => '0',
-	// 						'allow_traps' => '0',
-	// 						'ssl_cert_file' => '',
-	// 						'ssl_key_file' => '',
-	// 						'ssl_key_password' => '',
-	// 						'verify_peer' => '0',
-	// 						'verify_host' => '0',
-	// 						'key_' => 'test7',
-	// 						'trigger_prototypes' => [],
-	// 						'trapper_hosts' => ''
-	// 					]
-	// 				],
-	// 				'filter' => [
-	// 					'conditions' => [],
-	// 					'evaltype' => '0',
-	// 					'formula' => ''
-	// 				],
-	// 				'delay' => '1m',
-	// 				'status' => '0',
-	// 				'params' => '',
-	// 				'ipmi_sensor' => '',
-	// 				'authtype' => '0',
-	// 				'username' => '',
-	// 				'password' => '',
-	// 				'publickey' => '',
-	// 				'privatekey' => '',
-	// 				'lifetime' => '30d',
-	// 				'description' => '',
-	// 				'trigger_prototypes' => [],
-	// 				'graph_prototypes' => [],
-	// 				'host_prototypes' => [],
-	// 				'jmx_endpoint' => '',
-	// 				'master_item' => [],
-	// 				'timeout' => '3s',
-	// 				'url' => '',
-	// 				'query_fields' => [],
-	// 				'parameters' => [],
-	// 				'posts' => '',
-	// 				'status_codes' => '200',
-	// 				'follow_redirects' => '1',
-	// 				'post_type' => '0',
-	// 				'http_proxy' => '',
-	// 				'headers' => [],
-	// 				'retrieve_mode' => '0',
-	// 				'request_method' => '0',
-	// 				'allow_traps' => '0',
-	// 				'ssl_cert_file' => '',
-	// 				'ssl_key_file' => '',
-	// 				'ssl_key_password' => '',
-	// 				'verify_peer' => '0',
-	// 				'verify_host' => '0',
-	// 				'lld_macro_paths' => [],
-	// 				'preprocessing' => [],
-	// 				'overrides' => [],
-	// 				'key_' => 'drule',
-	// 				'trapper_hosts' => ''
-	// 			],
-	// 			'drule2' => [
-	// 				'name' => 'Discovery Rule 2',
-	// 				'type' => '20',
-	// 				'snmp_oid' => 'test',
-	// 				'interface_ref' => 'if5',
-	// 				'item_prototypes' => [
-	// 					[
-	// 						'name' => 'Drule Item SNMP v2',
-	// 						'type' => '20',
-	// 						'snmp_oid' => 'test',
-	// 						'interface_ref' => 'if5',
-	// 						'delay' => '1m',
-	// 						'history' => '90d',
-	// 						'trends' => '365d',
-	// 						'status' => '0',
-	// 						'discover' => '0',
-	// 						'value_type' => '3',
-	// 						'units' => '',
-	// 						'params' => '',
-	// 						'ipmi_sensor' => '',
-	// 						'authtype' => '0',
-	// 						'username' => '',
-	// 						'password' => '',
-	// 						'publickey' => '',
-	// 						'privatekey' => '',
-	// 						'description' => '',
-	// 						'tags' => [],
-	// 						'valuemap' => [],
-	// 						'logtimefmt' => '',
-	// 						'preprocessing' => [],
-	// 						'jmx_endpoint' => '',
-	// 						'master_item' => [],
-	// 						'timeout' => '3s',
-	// 						'url' => '',
-	// 						'query_fields' => [],
-	// 						'parameters' => [],
-	// 						'posts' => '',
-	// 						'status_codes' => '200',
-	// 						'follow_redirects' => '1',
-	// 						'post_type' => '0',
-	// 						'http_proxy' => '',
-	// 						'headers' => [],
-	// 						'retrieve_mode' => '0',
-	// 						'request_method' => '0',
-	// 						'output_format' => '0',
-	// 						'allow_traps' => '0',
-	// 						'ssl_cert_file' => '',
-	// 						'ssl_key_file' => '',
-	// 						'ssl_key_password' => '',
-	// 						'verify_peer' => '0',
-	// 						'verify_host' => '0',
-	// 						'key_' => 'test8',
-	// 						'trigger_prototypes' => [],
-	// 						'trapper_hosts' => ''
-	// 					]
-	// 				],
-	// 				'filter' => [
-	// 					'conditions' => [],
-	// 					'evaltype' => '0',
-	// 					'formula' => ''
-	// 				],
-	// 				'delay' => '1m',
-	// 				'status' => '0',
-	// 				'params' => '',
-	// 				'ipmi_sensor' => '',
-	// 				'authtype' => '0',
-	// 				'username' => '',
-	// 				'password' => '',
-	// 				'publickey' => '',
-	// 				'privatekey' => '',
-	// 				'lifetime' => '30d',
-	// 				'description' => '',
-	// 				'trigger_prototypes' => [],
-	// 				'graph_prototypes' => [],
-	// 				'host_prototypes' => [],
-	// 				'jmx_endpoint' => '',
-	// 				'master_item' => [],
-	// 				'timeout' => '3s',
-	// 				'url' => '',
-	// 				'query_fields' => [],
-	// 				'parameters' => [],
-	// 				'posts' => '',
-	// 				'status_codes' => '200',
-	// 				'follow_redirects' => '1',
-	// 				'post_type' => '0',
-	// 				'http_proxy' => '',
-	// 				'headers' => [],
-	// 				'retrieve_mode' => '0',
-	// 				'request_method' => '0',
-	// 				'allow_traps' => '0',
-	// 				'ssl_cert_file' => '',
-	// 				'ssl_key_file' => '',
-	// 				'ssl_key_password' => '',
-	// 				'verify_peer' => '0',
-	// 				'verify_host' => '0',
-	// 				'lld_macro_paths' => [],
-	// 				'preprocessing' => [],
-	// 				'overrides' => [],
-	// 				'key_' => 'drule2',
-	// 				'trapper_hosts' => ''
-	// 			],
-	// 			'drule3' => [
-	// 				'name' => 'Discovery Rule 3',
-	// 				'type' => '20',
-	// 				'snmp_oid' => 'test',
-	// 				'interface_ref' => 'if7',
-	// 				'item_prototypes' => [
-	// 					[
-	// 						'name' => 'Drule Item SNMP v3',
-	// 						'type' => '20',
-	// 						'snmp_oid' => 'test',
-	// 						'interface_ref' => 'if9',
-	// 						'delay' => '1m',
-	// 						'history' => '90d',
-	// 						'trends' => '365d',
-	// 						'status' => '0',
-	// 						'discover' => '0',
-	// 						'value_type' => '3',
-	// 						'units' => '',
-	// 						'params' => '',
-	// 						'ipmi_sensor' => '',
-	// 						'authtype' => '0',
-	// 						'username' => '',
-	// 						'password' => '',
-	// 						'publickey' => '',
-	// 						'privatekey' => '',
-	// 						'description' => '',
-	// 						'tags' => [],
-	// 						'valuemap' => [],
-	// 						'logtimefmt' => '',
-	// 						'preprocessing' => [],
-	// 						'jmx_endpoint' => '',
-	// 						'master_item' => [],
-	// 						'timeout' => '3s',
-	// 						'url' => '',
-	// 						'query_fields' => [],
-	// 						'parameters' => [],
-	// 						'posts' => '',
-	// 						'status_codes' => '200',
-	// 						'follow_redirects' => '1',
-	// 						'post_type' => '0',
-	// 						'http_proxy' => '',
-	// 						'headers' => [],
-	// 						'retrieve_mode' => '0',
-	// 						'request_method' => '0',
-	// 						'output_format' => '0',
-	// 						'allow_traps' => '0',
-	// 						'ssl_cert_file' => '',
-	// 						'ssl_key_file' => '',
-	// 						'ssl_key_password' => '',
-	// 						'verify_peer' => '0',
-	// 						'verify_host' => '0',
-	// 						'key_' => 'test9',
-	// 						'trigger_prototypes' => [],
-	// 						'trapper_hosts' => ''
-	// 					]
-	// 				],
-	// 				'filter' => [
-	// 					'conditions' => [],
-	// 					'evaltype' => '0',
-	// 					'formula' => ''
-	// 				],
-	// 				'delay' => '1m',
-	// 				'status' => '0',
-	// 				'params' => '',
-	// 				'ipmi_sensor' => '',
-	// 				'authtype' => '0',
-	// 				'username' => '',
-	// 				'password' => '',
-	// 				'publickey' => '',
-	// 				'privatekey' => '',
-	// 				'lifetime' => '30d',
-	// 				'description' => '',
-	// 				'trigger_prototypes' => [],
-	// 				'graph_prototypes' => [],
-	// 				'host_prototypes' => [],
-	// 				'jmx_endpoint' => '',
-	// 				'master_item' => [],
-	// 				'timeout' => '3s',
-	// 				'url' => '',
-	// 				'query_fields' => [],
-	// 				'parameters' => [],
-	// 				'posts' => '',
-	// 				'status_codes' => '200',
-	// 				'follow_redirects' => '1',
-	// 				'post_type' => '0',
-	// 				'http_proxy' => '',
-	// 				'headers' => [],
-	// 				'retrieve_mode' => '0',
-	// 				'request_method' => '0',
-	// 				'allow_traps' => '0',
-	// 				'ssl_cert_file' => '',
-	// 				'ssl_key_file' => '',
-	// 				'ssl_key_password' => '',
-	// 				'verify_peer' => '0',
-	// 				'verify_host' => '0',
-	// 				'lld_macro_paths' => [],
-	// 				'preprocessing' => [],
-	// 				'overrides' => [],
-	// 				'key_' => 'drule3',
-	// 				'trapper_hosts' => ''
-	// 			]
-	// 		]
-	// 	]);
-	// }
+		$this->checkMatchesNested($adapter->getDiscoveryRules(), [
+			'SNMP host' => [
+				'drule' => [
+					'name' => 'Discovery Rule 1',
+					'type' => '20',
+					'snmp_oid' => 'test',
+					'interface_ref' => 'if3',
+					'item_prototypes' => [
+						[
+							'name' => 'Drule Item SNMP v1',
+							'type' => '20',
+							'snmp_oid' => 'test',
+							'interface_ref' => 'if3',
+							'delay' => '1m',
+							'history' => '90d',
+							'trends' => '365d',
+							'status' => '0',
+							'discover' => '0',
+							'value_type' => '3',
+							'units' => '',
+							'description' => '',
+							'tags' => [],
+							'valuemap' => [],
+							'preprocessing' => [],
+							'key_' => 'test7',
+							'trigger_prototypes' => []
+						]
+					],
+					'filter' => [
+						'conditions' => [],
+						'evaltype' => '0',
+						'formula' => ''
+					],
+					'delay' => '1m',
+					'status' => '0',
+					'lifetime' => '30d',
+					'description' => '',
+					'trigger_prototypes' => [],
+					'graph_prototypes' => [],
+					'host_prototypes' => [],
+					'lld_macro_paths' => [],
+					'preprocessing' => [],
+					'overrides' => [],
+					'key_' => 'drule'
+				],
+				'drule2' => [
+					'name' => 'Discovery Rule 2',
+					'type' => '20',
+					'snmp_oid' => 'test',
+					'interface_ref' => 'if5',
+					'item_prototypes' => [
+						[
+							'name' => 'Drule Item SNMP v2',
+							'type' => '20',
+							'snmp_oid' => 'test',
+							'interface_ref' => 'if5',
+							'delay' => '1m',
+							'history' => '90d',
+							'trends' => '365d',
+							'status' => '0',
+							'discover' => '0',
+							'value_type' => '3',
+							'units' => '',
+							'description' => '',
+							'tags' => [],
+							'valuemap' => [],
+							'preprocessing' => [],
+							'key_' => 'test8',
+							'trigger_prototypes' => []
+						]
+					],
+					'filter' => [
+						'conditions' => [],
+						'evaltype' => '0',
+						'formula' => ''
+					],
+					'delay' => '1m',
+					'status' => '0',
+					'lifetime' => '30d',
+					'description' => '',
+					'trigger_prototypes' => [],
+					'graph_prototypes' => [],
+					'host_prototypes' => [],
+					'lld_macro_paths' => [],
+					'preprocessing' => [],
+					'overrides' => [],
+					'key_' => 'drule2'
+				],
+				'drule3' => [
+					'name' => 'Discovery Rule 3',
+					'type' => '20',
+					'snmp_oid' => 'test',
+					'interface_ref' => 'if7',
+					'item_prototypes' => [
+						[
+							'name' => 'Drule Item SNMP v3',
+							'type' => '20',
+							'snmp_oid' => 'test',
+							'interface_ref' => 'if9',
+							'delay' => '1m',
+							'history' => '90d',
+							'trends' => '365d',
+							'status' => '0',
+							'discover' => '0',
+							'value_type' => '3',
+							'units' => '',
+							'description' => '',
+							'tags' => [],
+							'valuemap' => [],
+							'preprocessing' => [],
+							'key_' => 'test9',
+							'trigger_prototypes' => []
+						]
+					],
+					'filter' => [
+						'conditions' => [],
+						'evaltype' => '0',
+						'formula' => ''
+					],
+					'delay' => '1m',
+					'status' => '0',
+					'lifetime' => '30d',
+					'description' => '',
+					'trigger_prototypes' => [],
+					'graph_prototypes' => [],
+					'host_prototypes' => [],
+					'lld_macro_paths' => [],
+					'preprocessing' => [],
+					'overrides' => [],
+					'key_' => 'drule3'
+				]
+			]
+		]);
+	}
 
-	// public function testTemplateVendorFields() {
-	// 	$adapter = $this->getAdapter($this->getFile('vendor_fields.xml'));
+	public function testTemplateVendorFields() {
+		$adapter = $this->getAdapter($this->getFile('vendor_fields.xml'));
 
-	// 	$this->assertEquals($adapter->getTemplates(), [
-	// 		[
-	// 			'groups' => [
-	// 				[
-	// 					'name' => 'Templates'
-	// 				]
-	// 			],
-	// 			'macros' => [],
-	// 			'templates' => [],
-	// 			'uuid' => '0c45e5ed44ea494dabfa4136f420aa65',
-	// 			'host' => 'vendor test',
-	// 			'name' => 'vendor test',
-	// 			'description' => '',
-	// 			'vendor_name' => 'Zabbix',
-	// 			'vendor_version' => '6.4-0',
-	// 			'tags' => [],
-	// 			'valuemaps' => []
-	// 		]
-	// 	]);
-	// }
+		$this->assertEquals($adapter->getTemplates(), [
+			[
+				'groups' => [
+					[
+						'name' => 'Templates'
+					]
+				],
+				'macros' => [],
+				'templates' => [],
+				'uuid' => '0c45e5ed44ea494dabfa4136f420aa65',
+				'host' => 'vendor test',
+				'name' => 'vendor test',
+				'description' => '',
+				'vendor_name' => 'Zabbix',
+				'vendor_version' => '6.4-0',
+				'tags' => [],
+				'valuemaps' => []
+			]
+		]);
+	}
 
 	protected function getAdapter($source) {
 		$reader = CImportReaderFactory::getReader(CImportReaderFactory::XML);
@@ -3372,5 +3018,46 @@ class CImportDataAdapterTest extends TestCase {
 		}
 
 		return $this->sources[$name];
+	}
+
+	private function checkMatchesNested(array $input, array $expected) {
+		$nested_objects = ['item_prototypes', 'trigger_prototypes', 'graph_prototypes', 'host_prototypes', 'interfaces'];
+
+		foreach ($expected as $parent_label => $expected_objects) {
+			$parent_input = array_shift($input);
+
+			foreach ($expected_objects as $expected_object_label => $expected_object) {
+				$input_object = array_shift($parent_input);
+				$object_label = $parent_label.'.'.$expected_object_label;
+
+				foreach ($nested_objects as $nested_object) {
+					if (!array_key_exists($nested_object, $expected_object)) {
+						continue;
+					}
+
+					$this->assertArrayHasKey($nested_object, $input_object,
+						$object_label.' expected to have '.$nested_object
+					);
+
+					$nested_input = $input_object[$nested_object];
+					$nested_expected = $expected_object[$nested_object];
+
+					foreach ($nested_expected as $child_label => $nested_child) {
+						$input_child = array_shift($nested_input);
+
+						$this->assertEquals($input_child, $nested_child,
+							$object_label.'.'.$nested_object.'['.$child_label.'] expected to match.'
+						);
+					}
+
+					unset($input_object[$nested_object]);
+					unset($expected_object[$nested_object]);
+				}
+
+				$this->assertEquals($input_object, $expected_object, $object_label.' expected to match.');
+			}
+		}
+
+		$this->assertEmpty($input);
 	}
 }
