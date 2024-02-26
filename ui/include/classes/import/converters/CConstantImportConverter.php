@@ -69,9 +69,12 @@ class CConstantImportConverter extends CConverter {
 					$matched_multiple_rule = null;
 
 					foreach ($tag_rules['rules'] as $multiple_rule) {
-						if ($this->multipleRuleMatched($multiple_rule, $data, $rules['rules'])) {
-							$matched_multiple_rule =
-								$multiple_rule + array_intersect_key($tag_rules, array_flip(['default']));
+						$multiple_rule += array_intersect_key($tag_rules, array_flip(['default']));
+
+						if ($this->multipleRuleMatched($multiple_rule, $data)) {
+							$multiple_rule['type'] = ($tag_rules['type'] & XML_REQUIRED) | $multiple_rule['type'];
+							$matched_multiple_rule = $multiple_rule;
+
 							break;
 						}
 					}
@@ -108,7 +111,7 @@ class CConstantImportConverter extends CConverter {
 		return $data;
 	}
 
-	private function multipleRuleMatched(array $multiple_rule, array $data, array $rules): bool {
+	private function multipleRuleMatched(array $multiple_rule, array $data): bool {
 		if (array_key_exists('else', $multiple_rule)) {
 			return true;
 		}
@@ -116,13 +119,12 @@ class CConstantImportConverter extends CConverter {
 			$field_name = $multiple_rule['if']['tag'];
 
 			if (array_key_exists($field_name, $data)) {
-				$field_value = $data[$field_name];
-			}
-			else {
-				$field_value = $rules[$field_name]['default'];
+				return in_array($data[$field_name], $multiple_rule['if']['in']);
 			}
 
-			return array_key_exists($field_value, $multiple_rule['if']['in']);
+			return array_key_exists('default', $multiple_rule)
+				? array_key_exists($multiple_rule['default'], $multiple_rule['if']['in'])
+				: false;
 		}
 		elseif ($multiple_rule['if'] instanceof Closure) {
 			return call_user_func($multiple_rule['if'], $data);
