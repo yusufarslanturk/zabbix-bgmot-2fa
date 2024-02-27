@@ -2340,44 +2340,6 @@ static void	DBmass_update_items(const zbx_vector_ptr_t *item_diff, const zbx_vec
 
 /******************************************************************************
  *                                                                            *
- * Purpose: prepare itemdiff after receiving new values                       *
- *                                                                            *
- * Parameters: history     - array of history data                            *
- *             history_num - number of history structures                     *
- *             item_diff   - vector to store prepared diff                    *
- *                                                                            *
- ******************************************************************************/
-static void	DCmass_proxy_prepare_itemdiff(ZBX_DC_HISTORY *history, int history_num, zbx_vector_ptr_t *item_diff)
-{
-	int	i;
-
-	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
-
-	zbx_vector_ptr_reserve(item_diff, history_num);
-
-	for (i = 0; i < history_num; i++)
-	{
-		zbx_item_diff_t	*diff = (zbx_item_diff_t *)zbx_malloc(NULL, sizeof(zbx_item_diff_t));
-
-		diff->itemid = history[i].itemid;
-		diff->state = history[i].state;
-		diff->flags = ZBX_FLAGS_ITEM_DIFF_UPDATE_STATE;
-
-		if (0 != (ZBX_DC_FLAG_META & history[i].flags))
-		{
-			diff->lastlogsize = history[i].lastlogsize;
-			diff->mtime = history[i].mtime;
-			diff->flags |= ZBX_FLAGS_ITEM_DIFF_UPDATE_LASTLOGSIZE | ZBX_FLAGS_ITEM_DIFF_UPDATE_MTIME;
-		}
-
-		zbx_vector_ptr_append(item_diff, diff);
-	}
-
-	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
-}
-
-/******************************************************************************
- *                                                                            *
  * Purpose: update items info after new value is received                     *
  *                                                                            *
  * Parameters: item_diff - diff of items to be updated                        *
@@ -2394,10 +2356,7 @@ static void	DBmass_proxy_update_items(zbx_vector_ptr_t *item_diff)
 		zbx_vector_ptr_sort(item_diff, ZBX_DEFAULT_UINT64_PTR_COMPARE_FUNC);
 
 		zbx_db_begin_multiple_update(&sql, &sql_alloc, &sql_offset);
-
-		zbx_db_save_item_changes(&sql, &sql_alloc, &sql_offset, item_diff,
-				ZBX_FLAGS_ITEM_DIFF_UPDATE_LASTLOGSIZE | ZBX_FLAGS_ITEM_DIFF_UPDATE_MTIME);
-
+		zbx_db_save_item_changes(&sql, &sql_alloc, &sql_offset, item_diff, ZBX_FLAGS_ITEM_DIFF_UPDATE_DB);
 		zbx_db_end_multiple_update(&sql, &sql_alloc, &sql_offset);
 
 		if (sql_offset > 16)	/* In ORACLE always present begin..end; */
@@ -3212,13 +3171,16 @@ static void	DCmodule_sync_history(int history_float_num, int history_integer_num
  *                                                                            *
  * Parameters: history     - [IN/OUT] the history values                      *
  *             history_num - [IN] the number of history values                *
+ *             item_diff   - vector to store prepared diff                    *
  *                                                                            *
  ******************************************************************************/
-static void	proxy_prepare_history(ZBX_DC_HISTORY *history, int history_num)
+static void	proxy_prepare_history(ZBX_DC_HISTORY *history, int history_num, zbx_vector_ptr_t *item_diff)
 {
 	int			i, *errcodes;
 	zbx_history_sync_item_t	*items;
 	zbx_vector_uint64_t	itemids;
+
+	zbx_vector_ptr_reserve(item_diff, history_num);
 
 	zbx_vector_uint64_create(&itemids);
 	zbx_vector_uint64_reserve(&itemids, history_num);
@@ -3237,9 +3199,33 @@ static void	proxy_prepare_history(ZBX_DC_HISTORY *history, int history_num)
 		if (SUCCEED != errcodes[i])
 			continue;
 
-		/* store items with enabled history  */
-		if (0 != items[i].history)
-			continue;
+		zbx_item_diff_t	*diff = (zbx_item_diff_t *)zbx_malloc(NULL, sizeof(zbx_item_diff_t));
+		ZBX_DC_HISTORY	*h = &history[i];
+
+		diff->itemid = h->itemid;
+		diff->flags = ZBX_FLAGS_ITEM_DIFF_UNSET;
+
+		if (items[i].state != h->state)
+		{
+			diff->state = h->state;
+			diff->error = (ITEM_STATE_NOTSUPPORTED == h->state ? h->value.err : "");
+			diff->flags |= ZBX_FLAGS_ITEM_DIFF_UPDATE_STATE | ZBX_FLAGS_ITEM_DIFF_UPDATE_ERROR;
+		}
+		else if (ITEM_STATE_NOTSUPPORTED == h->state &&
+				0 != strcmp(ZBX_NULL2EMPTY_STR(items[i].error), h->value.err))
+		{
+			diff->error = h->value.err;
+			diff->flags |= ZBX_FLAGS_ITEM_DIFF_UPDATE_ERROR;
+		}
+
+		if (0 != (ZBX_DC_FLAG_META & history[i].flags))
+		{
+			diff->lastlogsize = history[i].lastlogsize;
+			diff->mtime = history[i].mtime;
+			diff->flags |= ZBX_FLAGS_ITEM_DIFF_UPDATE_LASTLOGSIZE | ZBX_FLAGS_ITEM_DIFF_UPDATE_MTIME;
+		}
+
+		zbx_vector_ptr_append(item_diff, diff);
 
 		/* store numeric items to handle data conversion errors on server and trends */
 		if (ITEM_VALUE_TYPE_FLOAT == items[i].value_type || ITEM_VALUE_TYPE_UINT64 == items[i].value_type)
@@ -3249,18 +3235,20 @@ static void	proxy_prepare_history(ZBX_DC_HISTORY *history, int history_num)
 		if (0 != (items[i].flags & ZBX_FLAG_DISCOVERY_RULE))
 			continue;
 
-		/* store errors or first value after an error */
-		if (ITEM_STATE_NOTSUPPORTED == history[i].state || ITEM_STATE_NOTSUPPORTED == items[i].state)
+		/* store errors */
+		if (ITEM_STATE_NOTSUPPORTED == history[i].state)
 			continue;
 
 		/* store items linked to host inventory */
 		if (0 != items[i].inventory_link)
 			continue;
 
-		dc_history_clean_value(history + i);
-
-		/* all checks passed, item value must not be stored in proxy history/sent to server */
-		history[i].flags |= ZBX_DC_FLAG_NOVALUE;
+		/* values of items without history storage or any use of this history must be discarded */
+		if (0 == items[i].history)
+		{
+			dc_history_clean_value(history + i);
+			history[i].flags |= ZBX_DC_FLAG_NOVALUE;
+		}
 	}
 
 	zbx_dc_config_clean_history_sync_items(items, errcodes, (size_t)history_num);
@@ -3298,9 +3286,7 @@ static void	sync_proxy_history(int *total_num, int *more)
 			break;
 
 		hc_get_item_values(history, &history_items);	/* copy item data from history cache */
-		proxy_prepare_history(history, history_items.values_num);
-
-		DCmass_proxy_prepare_itemdiff(history, history_num, &item_diff);
+		proxy_prepare_history(history, history_items.values_num, &item_diff);
 
 		do
 		{
@@ -4209,10 +4195,6 @@ void	dc_add_history(zbx_uint64_t itemid, unsigned char item_value_type, unsigned
 	if (NULL == result)
 		return;
 
-	/* allow proxy to send timestamps of empty (throttled etc) values to update nextchecks for queue */
-	if (!ZBX_ISSET_VALUE(result) && !ZBX_ISSET_META(result) && 0 != (program_type & ZBX_PROGRAM_TYPE_SERVER))
-		return;
-
 	value_flags = 0;
 
 	if (!ZBX_ISSET_VALUE(result))
@@ -4222,7 +4204,7 @@ void	dc_add_history(zbx_uint64_t itemid, unsigned char item_value_type, unsigned
 		value_flags |= ZBX_DC_FLAG_META;
 
 	/* Add data to the local history cache if:                                           */
-	/*   1) the NOVALUE flag is set (data contains either meta information or timestamp) */
+	/*   1) the NOVALUE flag is set                                                      */
 	/*   2) the NOVALUE flag is not set and value conversion succeeded                   */
 
 	if (0 == (value_flags & ZBX_DC_FLAG_NOVALUE))
@@ -4754,17 +4736,19 @@ static void	hc_add_item_values(dc_item_value_t *values, int values_num)
 
 		/* a record with metadata and no value can be dropped if  */
 		/* the metadata update is copied to the last queued value */
-		if (NULL != (item = hc_get_item(item_value->itemid)) &&
-				0 != (item_value->flags & ZBX_DC_FLAG_NOVALUE) &&
-				0 != (item_value->flags & ZBX_DC_FLAG_META))
+		if (NULL != (item = hc_get_item(item_value->itemid)) && 0 != (item_value->flags & ZBX_DC_FLAG_NOVALUE))
 		{
 			/* skip metadata updates when only one value is queued, */
 			/* because the item might be already being processed    */
 			if (item->head != item->tail)
 			{
-				item->head->lastlogsize = item_value->lastlogsize;
-				item->head->mtime = item_value->mtime;
-				item->head->flags |= ZBX_DC_FLAG_META;
+				if (0 != (item_value->flags & ZBX_DC_FLAG_META))
+				{
+					item->head->lastlogsize = item_value->lastlogsize;
+					item->head->mtime = item_value->mtime;
+					item->head->flags |= ZBX_DC_FLAG_META;
+				}
+
 				continue;
 			}
 		}
