@@ -1144,9 +1144,11 @@ class CConfigurationImport {
 				}
 
 				foreach ($discovery_rule['preprocessing'] as &$preprocessing_step) {
-					$preprocessing_step['params'] = implode("\n", $preprocessing_step['parameters']);
+					if (array_key_exists('parameters', $preprocessing_step)) {
+						$preprocessing_step['params'] = implode("\n", $preprocessing_step['parameters']);
 
-					unset($preprocessing_step['parameters']);
+						unset($preprocessing_step['parameters']);
+					}
 				}
 				unset($preprocessing_step);
 
