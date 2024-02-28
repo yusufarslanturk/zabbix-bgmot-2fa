@@ -1404,10 +1404,10 @@ abstract class CItemGeneralOld extends CApiService {
 			];
 
 			foreach ($item['preprocessing'] as &$preprocessing) {
-				$preprocessing += $preproc_defaults;
 				$missing_keys = array_diff($required_fields, array_keys($preprocessing));
+				$preprocessing += $preproc_defaults;
 
-				if ($missing_keys) {
+				if (array_diff($required_fields, array_keys($preprocessing))) {
 					self::exception(ZBX_API_ERROR_PARAMETERS,
 						_s('Item pre-processing is missing parameters: %1$s', implode(', ', $missing_keys))
 					);
