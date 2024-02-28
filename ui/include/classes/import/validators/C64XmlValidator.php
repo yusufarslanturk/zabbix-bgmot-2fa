@@ -369,6 +369,7 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 		CXmlConstantValue::ITEM_TYPE_ODBC => CXmlConstantName::ODBC,
 		CXmlConstantValue::ITEM_TYPE_SSH => CXmlConstantName::SSH,
 		CXmlConstantValue::ITEM_TYPE_TELNET => CXmlConstantName::TELNET,
+		CXmlConstantValue::ITEM_TYPE_CALCULATED => CXmlConstantName::CALCULATED,
 		CXmlConstantValue::ITEM_TYPE_SCRIPT => CXmlConstantName::SCRIPT
 	];
 
