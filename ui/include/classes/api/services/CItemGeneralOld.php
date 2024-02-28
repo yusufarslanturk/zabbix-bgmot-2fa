@@ -2022,6 +2022,7 @@ abstract class CItemGeneralOld extends CApiService {
 	 */
 	protected function createItemPreprocessing(array $items) {
 		$item_preproc = [];
+		$conditional_fields = array_flip(['params', 'error_handler', 'error_handler_params']);
 
 		foreach ($items as $item) {
 			if (array_key_exists('preprocessing', $item)) {
@@ -2032,11 +2033,8 @@ abstract class CItemGeneralOld extends CApiService {
 					$item_preproc[] = [
 						'itemid' => $item['itemid'],
 						'step' => ($preprocessing['type'] == ZBX_PREPROC_VALIDATE_NOT_SUPPORTED) ? 0 : $step++,
-						'type' => $preprocessing['type'],
-						'params' => $preprocessing['params'],
-						'error_handler' => $preprocessing['error_handler'],
-						'error_handler_params' => $preprocessing['error_handler_params']
-					];
+						'type' => $preprocessing['type']
+					] + array_intersect_key($preprocessing, $conditional_fields);
 				}
 			}
 		}
