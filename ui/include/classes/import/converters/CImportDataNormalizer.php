@@ -138,6 +138,11 @@ class CImportDataNormalizer {
 		}
 		elseif (is_array($multiple_rule['if'])) {
 			$field_name = $multiple_rule['if']['tag'];
+
+			if (!array_key_exists($field_name, $data)) {
+				return false;
+			}
+
 			$field_value = $data[$field_name];
 
 			return $this->value_mode === CXmlConstantValue::class
