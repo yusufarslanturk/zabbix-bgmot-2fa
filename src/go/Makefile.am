@@ -36,7 +36,6 @@ INSTALL_TARGETS =
 if AGENT2
 TARGETS += zabbix.com/cmd/zabbix_agent2
 INSTALL_TARGETS += install-zabbix.com/cmd/zabbix_agent2
-DBGTARGETS = zabbix.com/cmd/mock_server
 dist_sysconf_DATA += conf/zabbix_agent2.conf
 endif
 
