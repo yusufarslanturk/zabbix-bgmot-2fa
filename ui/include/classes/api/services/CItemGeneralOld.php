@@ -3151,6 +3151,10 @@ abstract class CItemGeneralOld extends CApiService {
 	 */
 	protected function normalizeItemPreprocessingSteps(array $preprocessing): array {
 		foreach ($preprocessing as &$step) {
+			if (!array_key_exists('params', $step)) {
+				continue;
+			}
+
 			$step['params'] = str_replace("\r\n", "\n", $step['params']);
 			$params = explode("\n", $step['params']);
 
