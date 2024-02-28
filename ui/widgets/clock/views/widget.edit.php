@@ -32,9 +32,9 @@ $form
 	->addField(
 		new CWidgetFieldSelectView($data['fields']['time_type'])
 	)
-	->addField(array_key_exists('itemid', $data['fields'])
-		? new CWidgetFieldMultiSelectItemView($data['fields']['itemid'], $data['captions']['items']['itemid'])
-		: null
+	->addField(
+		new CWidgetFieldMultiSelectItemView($data['fields']['itemid'], $data['captions']['items']['itemid']),
+		'js-row-itemid'
 	)
 	->addField(
 		new CWidgetFieldRadioButtonListView($data['fields']['clock_type'])

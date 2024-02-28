@@ -38,6 +38,26 @@ use Zabbix\Widgets\Fields\{
  */
 class WidgetForm extends CWidgetForm {
 
+	public function validate(bool $strict = false): array {
+		$errors = parent::validate($strict);
+
+		if ($errors) {
+			return $errors;
+		}
+
+		if ($this->getFieldValue('source_type') == ZBX_WIDGET_FIELD_RESOURCE_SIMPLE_GRAPH
+				&& !$this->getFieldValue('itemid')) {
+			$errors[] = _s('Invalid parameter "%1$s": %2$s.', _('Item'), _('cannot be empty'));
+		}
+
+		if ($this->getFieldValue('source_type') == ZBX_WIDGET_FIELD_RESOURCE_GRAPH
+				&& !$this->getFieldValue('graphid')) {
+			$errors[] = _s('Invalid parameter "%1$s": %2$s.', _('Graph'), _('cannot be empty'));
+		}
+
+		return $errors;
+	}
+
 	public function addFields(): self {
 		$this->addField(
 			(new CWidgetFieldRadioButtonList('source_type', _('Source'), [
@@ -45,32 +65,24 @@ class WidgetForm extends CWidgetForm {
 				ZBX_WIDGET_FIELD_RESOURCE_SIMPLE_GRAPH => _('Simple graph')
 			]))
 				->setDefault(ZBX_WIDGET_FIELD_RESOURCE_GRAPH)
-				->setAction('ZABBIX.Dashboard.reloadWidgetProperties()')
 		);
 
-		if (array_key_exists('source_type', $this->values)
-				&& $this->values['source_type'] == ZBX_WIDGET_FIELD_RESOURCE_SIMPLE_GRAPH) {
+		$field_item = (new CWidgetFieldMultiSelectItem('itemid', _('Item'), $this->templateid))
+			->setFlags(CWidgetField::FLAG_LABEL_ASTERISK)
+			->setMultiple(false)
+			->setFilterParameter('numeric', true);
 
-			$field_item = (new CWidgetFieldMultiSelectItem('itemid', _('Item'), $this->templateid))
-				->setFlags(CWidgetField::FLAG_NOT_EMPTY | CWidgetField::FLAG_LABEL_ASTERISK)
-				->setMultiple(false)
-				->setFilterParameter('numeric', true);
-
-			if ($this->templateid === null) {
-				$field_item->setFilterParameter('with_simple_graph_items', true);
-			}
-
-			$this->addField($field_item);
-		}
-		else {
-			$this->addField(
-				(new CWidgetFieldMultiSelectGraph('graphid', _('Graph'), $this->templateid))
-					->setFlags(CWidgetField::FLAG_NOT_EMPTY | CWidgetField::FLAG_LABEL_ASTERISK)
-					->setMultiple(false)
-			);
+		if ($this->templateid === null) {
+			$field_item->setFilterParameter('with_simple_graph_items', true);
 		}
 
 		$this
+			->addField($field_item)
+			->addField(
+				(new CWidgetFieldMultiSelectGraph('graphid', _('Graph'), $this->templateid))
+					->setFlags(CWidgetField::FLAG_LABEL_ASTERISK)
+					->setMultiple(false)
+			)
 			->addField(
 				(new CWidgetFieldCheckBox('show_legend', _('Show legend')))->setDefault(1)
 			)

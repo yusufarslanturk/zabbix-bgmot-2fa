@@ -70,7 +70,7 @@ class testWidgets extends CWebTest {
 				break;
 
 			case 'Graph prototype':
-				$widget_dialog->fill(['Source' => CFormElement::RELOADABLE_FILL('Simple graph prototype')]);
+				$widget_dialog->fill(['Source' => 'Simple graph prototype']);
 				$this->assertTrue($widget_dialog->getField('Item prototype')->isVisible());
 
 				// For Graph prototype only numeric item prototypes are available.
@@ -79,7 +79,7 @@ class testWidgets extends CWebTest {
 		}
 
 		$select_button = ($widget === 'Graph') ? 'xpath:(.//button[text()="Select"])[2]' : 'button:Select';
-		$select_dialog->query($select_button)->one()->waitUntilClickable()->click();
+		$select_dialog->query($select_button)->all()->filter(CElementFilter::VISIBLE)->waitUntilClickable()->click();
 
 		// Open the dialog where items will be tested.
 		$items_dialog = COverlayDialogElement::find()->all()->last()->waitUntilReady();
