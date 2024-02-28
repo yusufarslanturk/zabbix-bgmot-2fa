@@ -34,20 +34,20 @@ TARGETS =
 INSTALL_TARGETS =
 
 if AGENT2
-TARGETS += zabbix.com/cmd/zabbix_agent2
+TARGETS += bin/zabbix_agent2
 INSTALL_TARGETS += install-zabbix.com/cmd/zabbix_agent2
 dist_sysconf_DATA += conf/zabbix_agent2.conf
 endif
 
 if WEBSERVICE
-TARGETS += zabbix.com/cmd/zabbix_web_service
+TARGETS += bin/zabbix_web_service
 INSTALL_TARGETS += install-zabbix.com/cmd/zabbix_web_service
 dist_sysconf_DATA += conf/zabbix_web_service.conf
 endif
 
 all: build
 
-zabbix.com/cmd/zabbix_agent2:
+bin/zabbix_agent2:
 	CGO_CFLAGS="${CGO_CFLAGS}" CGO_LDFLAGS="${CGO_LDFLAGS}" \
 		$(GO) build \
 		-tags="${AGENT_GOTAGS}" \
@@ -55,7 +55,7 @@ zabbix.com/cmd/zabbix_agent2:
 		-o bin \
 		zabbix.com/cmd/zabbix_agent2
 
-zabbix.com/cmd/zabbix_web_service:
+bin/zabbix_web_service:
 	$(GO) build \
 	-ldflags="${WEBSERVICE_GOLDFLAGS}" \
 	-o bin \
