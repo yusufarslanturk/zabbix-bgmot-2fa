@@ -1636,7 +1636,7 @@ class CUser extends CApiService {
 			$auth_type = ZBX_AUTH_LDAP;
 		}
 		else {
-			$auth_type = CAuthenticationHelper::get(CAuthenticationHelper::AUTHENTICATION_TYPE);
+			$auth_type = CAuthenticationHelper::getPublic(CAuthenticationHelper::AUTHENTICATION_TYPE);
 		}
 
 		return $auth_type;
@@ -1715,7 +1715,7 @@ class CUser extends CApiService {
 				' AND '.dbConditionId('ug.userid', [$db_user['userid']])
 		);
 
-		$deprovision_groupid = CAuthenticationHelper::get(CAuthenticationHelper::DISABLED_USER_GROUPID);
+		$deprovision_groupid = CAuthenticationHelper::getPublic(CAuthenticationHelper::DISABLED_USER_GROUPID);
 
 		$userdirectoryids = [];
 
@@ -1896,11 +1896,11 @@ class CUser extends CApiService {
 		$db_user['userip'] = CWebUser::getIp();
 
 		if ($db_user['lang'] === LANG_DEFAULT) {
-			$db_user['lang'] = CSettingsHelper::getGlobal(CSettingsHelper::DEFAULT_LANG);
+			$db_user['lang'] = CSettingsHelper::getPublic(CSettingsHelper::DEFAULT_LANG);
 		}
 
 		if ($db_user['timezone'] === TIMEZONE_DEFAULT) {
-			$db_user['timezone'] = CSettingsHelper::getGlobal(CSettingsHelper::DEFAULT_TIMEZONE);
+			$db_user['timezone'] = CSettingsHelper::getPublic(CSettingsHelper::DEFAULT_TIMEZONE);
 		}
 	}
 
