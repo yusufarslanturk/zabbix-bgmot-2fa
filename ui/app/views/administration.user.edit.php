@@ -265,13 +265,14 @@ if ($data['action'] === 'userprofile.edit' || $data['db_user']['username'] !== Z
 			->setId('autologout_visible')
 			->setChecked($data['autologout'] !== '0'),
 		(new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
-		(new CTextBox('autologout', $autologout))->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
+		(new CTextBox('autologout', $autologout, false, DB::getFieldLength('users', 'autologout')))
+			->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 	]);
 }
 
 $user_form_list
 	->addRow((new CLabel(_('Refresh'), 'refresh'))->setAsteriskMark(),
-		(new CTextBox('refresh', $data['refresh']))
+		(new CTextBox('refresh', $data['refresh'], false, DB::getFieldLength('users', 'refresh')))
 			->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
 			->setAriaRequired()
 	)
@@ -357,7 +358,12 @@ if ($data['action'] === 'user.edit' || CWebUser::$data['type'] > USER_TYPE_ZABBI
 					new CHorList([
 						(new CButton(null, _('Edit')))
 							->addClass(ZBX_STYLE_BTN_LINK)
-							->onClick('return PopUp("popup.media", '.json_encode($parameters).');'),
+							->onClick(
+								'return PopUp("popup.media", '.
+									json_encode($parameters).
+									', {dialogue_class: "modal-popup-generic"}
+								);'
+							),
 						(new CButton(null, _('Remove')))
 							->addClass(ZBX_STYLE_BTN_LINK)
 							->onClick('javascript: removeMedia('.$index.');')
@@ -371,7 +377,12 @@ if ($data['action'] === 'user.edit' || CWebUser::$data['type'] > USER_TYPE_ZABBI
 		(new CDiv([
 			$media_table_info,
 			(new CButton(null, _('Add')))
-				->onClick('return PopUp("popup.media", '.json_encode(['dstfrm' => $user_form->getName()]).');')
+				->onClick(
+					'return PopUp("popup.media", '.
+						json_encode(['dstfrm' => $user_form->getName()]).
+						', {dialogue_class: "modal-popup-generic"}
+					);'
+				)
 				->addClass(ZBX_STYLE_BTN_LINK)
 		]))
 			->addClass(ZBX_STYLE_TABLE_FORMS_SEPARATOR)
