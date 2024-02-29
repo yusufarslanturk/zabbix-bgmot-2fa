@@ -30,6 +30,7 @@
 #include "zbxpreproc.h"
 #include "libs/zbxpreproc/pp_execute.h"
 #include "libs/zbxpreproc/preproc_snmp.h"
+#include "libs/zbxpreproc/pp_cache.h"
 
 #ifdef HAVE_NETSNMP
 #define SNMP_NO_DEBUGGING
@@ -253,7 +254,6 @@ void	zbx_mock_test_entry(void **state)
 	int				mib_translation_case = 0;
 
 	preproc_init_snmp();
-	pp_context_init(&ctx);
 
 	if (ZBX_MOCK_SUCCESS == zbx_mock_parameter_exists("in.netsnmp_required"))
 		mib_translation_case = 1;
@@ -263,6 +263,8 @@ void	zbx_mock_test_entry(void **state)
 #endif
 
 	ZBX_UNUSED(state);
+
+	pp_context_init(&ctx);
 
 	read_value("in.value", &value_type, &value, &ts);
 	read_step("in.step", &step);

@@ -1382,9 +1382,6 @@ zabbix_export:
                       value:
                         host: 'Kubernetes API server by HTTP'
                         name: 'Kubernetes API: ["{#VERB}"] Requests latency'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
   graphs:
     - uuid: 749ed49ec625449db0a345d639f7d8fd
       name: 'Kubernetes API: HTTP requests rate'

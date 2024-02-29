@@ -1204,9 +1204,6 @@ zabbix_export:
                       value:
                         host: 'D-Link DES_DGS Switch by SNMP'
                         name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: e7ab460cf1bf4fca8afc22566257fc3a
           name: 'EQUIPMENT-MIB::swFanStatus'

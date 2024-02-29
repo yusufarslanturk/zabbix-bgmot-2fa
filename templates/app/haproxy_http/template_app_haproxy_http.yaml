@@ -2131,9 +2131,6 @@ zabbix_export:
                       value:
                         host: 'HAProxy by HTTP'
                         name: 'HAProxy: Backend {#PXNAME} Redispatched requests and retried connections per second'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -2147,9 +2144,6 @@ zabbix_export:
                       value:
                         host: 'HAProxy by HTTP'
                         name: 'HAProxy: Backend {#PXNAME} Responses by HTTP code'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '10'
                   width: '24'
@@ -2163,9 +2157,6 @@ zabbix_export:
                       value:
                         host: 'HAProxy by HTTP'
                         name: 'HAProxy: Backend {#PXNAME} In/Out traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
         - uuid: d6ba5079de1c49bb9e0e5c47112b3ff9
           name: 'HAProxy Frontend performance'
           pages:
@@ -2182,9 +2173,6 @@ zabbix_export:
                       value:
                         host: 'HAProxy by HTTP'
                         name: 'HAProxy: Frontend {#PXNAME} Requests and sessions per second'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -2198,9 +2186,6 @@ zabbix_export:
                       value:
                         host: 'HAProxy by HTTP'
                         name: 'HAProxy: Frontend {#PXNAME} Errors and denials per second'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '10'
                   width: '24'
@@ -2214,9 +2199,6 @@ zabbix_export:
                       value:
                         host: 'HAProxy by HTTP'
                         name: 'HAProxy: Frontend {#PXNAME} Responses by HTTP code'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '15'
                   width: '24'
@@ -2230,9 +2212,6 @@ zabbix_export:
                       value:
                         host: 'HAProxy by HTTP'
                         name: 'HAProxy: Frontend {#PXNAME} In/Out traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
         - uuid: f41c3a3976dc483d98a386273ab5678f
           name: 'HAProxy Server performance'
           pages:
@@ -2249,9 +2228,6 @@ zabbix_export:
                       value:
                         host: 'HAProxy by HTTP'
                         name: 'HAProxy: {#PXNAME} {#SVNAME} Response time and time in queue'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '5'
                   width: '24'
@@ -2265,9 +2241,6 @@ zabbix_export:
                       value:
                         host: 'HAProxy by HTTP'
                         name: 'HAProxy: {#PXNAME} {#SVNAME} Responses by HTTP code'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
                 - type: graphprototype
                   'y': '10'
                   width: '24'
@@ -2281,9 +2254,6 @@ zabbix_export:
                       value:
                         host: 'HAProxy by HTTP'
                         name: 'HAProxy: {#PXNAME} {#SVNAME} In/Out traffic'
-                    - type: INTEGER
-                      name: rows
-                      value: '1'
       valuemaps:
         - uuid: 450c1b2c6d58432b8a5b34dd3b5e8870
           name: 'Server mode'

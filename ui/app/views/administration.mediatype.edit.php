@@ -340,13 +340,12 @@ $mediaOptionsForm = (new CFormList('options'))
 		(new CDiv())
 			->addClass(ZBX_STYLE_NOWRAP)
 			->addItem([
-				(new CDiv(
-					(new CRadioButtonList('maxsessions_type', $data['maxsessions_type']))
-						->addValue(_('One'), 'one')
-						->addValue(_('Unlimited'), 'unlimited')
-						->addValue(_('Custom'), 'custom')
-						->setModern(true)
-				))->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
+				(new CRadioButtonList('maxsessions_type', $data['maxsessions_type']))
+					->addValue(_('One'), 'one')
+					->addValue(_('Unlimited'), 'unlimited')
+					->addValue(_('Custom'), 'custom')
+					->setModern(true)
+					->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
 				(new CNumericBox('maxsessions', $max_sessions, 3, false, false, false))
 					->setAriaRequired()
 					->setWidth(ZBX_TEXTAREA_TINY_WIDTH)
