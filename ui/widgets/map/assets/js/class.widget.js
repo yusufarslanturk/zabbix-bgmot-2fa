@@ -46,6 +46,11 @@ class CWidgetMap extends CWidget {
 		this._initial_load = true;
 
 		this._has_contents = false;
+
+		this._map_created_promise_resolve = null;
+		this._map_created_promise = new Promise(resolve => {
+			this._map_created_promise_resolve = resolve;
+		});
 	}
 
 	_doActivate() {
@@ -171,9 +176,10 @@ class CWidgetMap extends CWidget {
 	_promiseReady() {
 		const readiness = [super._promiseReady()];
 
-		if (this._map_svg !== null) {
-			readiness.push(this._map_svg.promiseRendered());
-		}
+		readiness.push(
+			this._map_created_promise
+				.then(() => this._map_svg.promiseRendered())
+		);
 
 		return Promise.all(readiness);
 	}
@@ -264,6 +270,7 @@ class CWidgetMap extends CWidget {
 		options.container = this._target.querySelector('.sysmap-widget-container');
 
 		this._map_svg = new SVGMap(options);
+		this._map_created_promise_resolve();
 	}
 
 	navigateToSubmap(sysmapid) {
