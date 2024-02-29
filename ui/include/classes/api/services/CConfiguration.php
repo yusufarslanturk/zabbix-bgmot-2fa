@@ -349,7 +349,7 @@ class CConfiguration extends CApiService {
 
 		// Normalize array keys and strings.
 		$data = (new CImportDataNormalizer($schema))
-			->setValueMode(CXmlConstantValue::class)
+			->setValueMode(CXmlConstantName::class)
 			->normalize($data);
 
 		$adapter = new CImportDataAdapter();
