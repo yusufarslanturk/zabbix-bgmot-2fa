@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -105,7 +105,7 @@ class CControllerMediatypeEnable extends CController {
 			CMessageHelper::setErrorTitle(_n('Cannot enable media type', 'Cannot enable media types', $updated));
 
 			if ($incomplete_configurations) {
-				error(_s('%1$s: %2$s', _('Incomplete configuration'), implode(',', $incomplete_configurations)));
+				info(_s('%1$s: %2$s', _('Incomplete configuration'), implode(',', $incomplete_configurations)));
 			}
 		}
 

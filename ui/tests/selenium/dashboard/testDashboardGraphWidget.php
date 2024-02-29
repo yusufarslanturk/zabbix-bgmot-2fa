@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -22,13 +22,16 @@
 require_once dirname(__FILE__) . '/../../include/CWebTest.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 require_once dirname(__FILE__).'/../behaviors/CTagBehavior.php';
+require_once dirname(__FILE__).'/../common/testWidgets.php';
 
 /**
  * @backup widget, profiles
  *
+ * @dataSource AllItemValueTypes
+ *
  * @onBefore setDefaultWidgetType
  */
-class testDashboardGraphWidget extends CWebTest {
+class testDashboardGraphWidget extends testWidgets {
 
 	/**
 	 * Attach MessageBehavior and TagBehavior to the test.
@@ -39,11 +42,12 @@ class testDashboardGraphWidget extends CWebTest {
 			[
 				'class' => CTagBehavior::class,
 				'tag_selector' => 'id:tags_table_tags'
-			]
+			],
+			CTableBehavior::class
 		];
 	}
 
-	/*
+	/**
 	 * SQL query to get widget and widget_field tables to compare hash values, but without widget_fieldid
 	 * because it can change.
 	 */
@@ -57,7 +61,7 @@ class testDashboardGraphWidget extends CWebTest {
 
 	const DASHBOARD_URL = 'zabbix.php?action=dashboard.view&dashboardid=1030';
 
-	/*
+	/**
 	 * Set "Graph" as default widget type.
 	 */
 	public function setDefaultWidgetType() {
@@ -2151,7 +2155,7 @@ class testDashboardGraphWidget extends CWebTest {
 					],
 					'Data set' => [
 						'host' => 'Zabbix*, new widget',
-						'item' => 'Agetn*, new widget'
+						'item' => 'Agent*, new widget'
 					]
 				]
 			],
@@ -2370,8 +2374,8 @@ class testDashboardGraphWidget extends CWebTest {
 			[
 				[
 					'fields' => [
-						'Number of rows' => 1,
-						'Number of columns' => 1
+						'id:legend_lines' => 1,
+						'id:legend_columns' => 1
 					],
 					'expected' => [
 						'Number of rows' => 1,
@@ -2386,40 +2390,8 @@ class testDashboardGraphWidget extends CWebTest {
 			[
 				[
 					'fields' => [
-						'Number of rows' => 10,
-						'Number of columns' => 4
-					],
-					'expected' => [
-						'Number of rows' => 10,
-						'Number of columns' => 4
-					],
-					'range_percentage' => [
-						'Number of rows' => 100,
-						'Number of columns' => 100
-					]
-				]
-			],
-			[
-				[
-					'fields' => [
-						'Number of rows' => 0,
-						'Number of columns' => 0
-					],
-					'expected' => [
-						'Number of rows' => 1,
-						'Number of columns' => 1
-					],
-					'range_percentage' => [
-						'Number of rows' => 0,
-						'Number of columns' => 0
-					]
-				]
-			],
-			[
-				[
-					'fields' => [
-						'Number of rows' => 11,
-						'Number of columns' => 5
+						'id:legend_lines' => 10,
+						'id:legend_columns' => 4
 					],
 					'expected' => [
 						'Number of rows' => 10,
@@ -2434,8 +2406,8 @@ class testDashboardGraphWidget extends CWebTest {
 			[
 				[
 					'fields' => [
-						'Number of rows' => -1,
-						'Number of columns' => -1
+						'id:legend_lines' => 0,
+						'id:legend_columns' => 0
 					],
 					'expected' => [
 						'Number of rows' => 1,
@@ -2450,8 +2422,40 @@ class testDashboardGraphWidget extends CWebTest {
 			[
 				[
 					'fields' => [
-						'Number of rows' => 'a',
-						'Number of columns' => 'a'
+						'id:legend_lines' => 11,
+						'id:legend_columns' => 5
+					],
+					'expected' => [
+						'Number of rows' => 10,
+						'Number of columns' => 4
+					],
+					'range_percentage' => [
+						'Number of rows' => 100,
+						'Number of columns' => 100
+					]
+				]
+			],
+			[
+				[
+					'fields' => [
+						'id:legend_lines' => -1,
+						'id:legend_columns' => -1
+					],
+					'expected' => [
+						'Number of rows' => 1,
+						'Number of columns' => 1
+					],
+					'range_percentage' => [
+						'Number of rows' => 0,
+						'Number of columns' => 0
+					]
+				]
+			],
+			[
+				[
+					'fields' => [
+						'id:legend_lines' => 'a',
+						'id:legend_columns' => 'a'
 					],
 					'expected' => [
 						'Number of rows' => 1,
@@ -2466,8 +2470,8 @@ class testDashboardGraphWidget extends CWebTest {
 			[
 				[
 					'fields' => [
-						'Number of rows' => 6,
-						'Number of columns' => 3
+						'id:legend_lines' => 6,
+						'id:legend_columns' => 3
 					],
 					'expected' => [
 						'Number of rows' => 6,
@@ -2487,23 +2491,29 @@ class testDashboardGraphWidget extends CWebTest {
 	 *
 	 * @dataProvider getSlidebarData
 	 */
-	// TODO: Uncomment the below scenario when DEV-2709 will be fixed.
-//	public function testDashboardGraphWidget_LegendRangeControlsValidation($data) {
-//		$this->page->login()->open(self::DASHBOARD_URL);
-//		$form = $this->openGraphWidgetConfiguration();
-//		$form->selectTab('Legend');
-//		$form->fill($data['fields']);
-//
-//		// Check the resulting value in input element and check positioning of the range control thumb element.
-//		foreach ($data['expected'] as $field_name => $value) {
-//			$field = $form->getField($field_name);
-//			$this->assertEquals($value, $field->query('xpath:.//input[@type="text"]')->one()->getValue());
-//
-//			$this->assertEquals('left: '.$data['range_percentage'][$field_name].'%;', $field->query('class:range-control-thumb')
-//					->one()->getAttribute('style')
-//			);
-//		}
-//	}
+	public function testDashboardGraphWidget_LegendRangeControlsValidation($data) {
+		$this->page->login()->open(self::DASHBOARD_URL);
+		$form = $this->openGraphWidgetConfiguration();
+		$form->selectTab('Legend');
+
+		foreach ($data['fields'] as $field_selector => $value) {
+			$field = $form->getField($field_selector);
+			$field->fill($value);
+
+			// JS should trigger a change action for the input, so that these changes would apply to the range control.
+			CElementQuery::getDriver()->executeScript('return jQuery(arguments[0]).trigger("change");', [$field]);
+		}
+
+		// Check the resulting value in input element and check positioning of the range control thumb element.
+		foreach ($data['expected'] as $field_name => $value) {
+			$field = $form->getField($field_name);
+			$this->assertEquals($value, $field->query('xpath:.//input[@type="text"]')->one()->getValue());
+
+			$this->assertEquals('left: '.$data['range_percentage'][$field_name].'%;', $field->query('class:range-control-thumb')
+					->one()->getAttribute('style')
+			);
+		}
+	}
 
 	/**
 	 * Check "Displaying options" tab layout.
@@ -2734,6 +2744,13 @@ class testDashboardGraphWidget extends CWebTest {
 		// Check Data set names in created widget configuration form.
 		$data_set_labels = $form->query('xpath:.//label[@class="sortable-drag-handle js-dataset-label"]')->all()->asText();
 		$this->assertEquals($displayed_data['Data sets'], array_values($data_set_labels));
+	}
+
+	/**
+	 * Test function for assuring that specific items are available in Graph widget.
+	 */
+	public function testDashboardGraphWidget_CheckAvailableItems() {
+		$this->checkAvailableItems(self::DASHBOARD_URL, 'Graph');
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -360,8 +360,6 @@ class CIntegrationTest extends CAPITest {
 
 			sleep(self::WAIT_ITERATION_DELAY);
 		}
-
-		var_dump(file_get_contents(self::getLogPath(self::COMPONENT_SERVER)));
 
 		throw new Exception('Failed to wait for component "'.$component.'" to start.');
 	}

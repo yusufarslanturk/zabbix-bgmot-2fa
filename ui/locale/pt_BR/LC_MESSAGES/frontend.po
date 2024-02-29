@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-11-06 02:02+0000\n"
-"Last-Translator: Felipe L. Ewald <felipe.idj@hotmail.com>\n"
+"PO-Revision-Date: 2024-01-09 17:17+0000\n"
+"Last-Translator: Cesar Inacio Martins <cesar.inacio.martins@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -204,6 +204,16 @@ msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
 msgstr[0] "%1$s de %2$s elemento em estado de incidente"
 msgstr[1] "%1$s de %2$s elementos em estado de incidente"
+
+#: app/views/administration.miscconfig.edit.php:127
+#, c-format
+msgid "%1$s or %2$s - allows the page to be displayed only in a frame on the same origin as the page itself"
+msgstr ""
+
+#: app/views/administration.miscconfig.edit.php:130
+#, c-format
+msgid "%1$s or %2$s - prevents the page from being displayed in a frame, regardless of the site attempting to do so"
+msgstr ""
 
 #: jsLoader.php:348
 #, c-format
@@ -14524,6 +14534,11 @@ msgstr "Itens não herdados"
 msgid "Not supported"
 msgstr "Não suportado"
 
+#: app/views/administration.miscconfig.edit.php:138
+#, c-format
+msgid "Note that %1$s or %2$s will be regarded as hostnames if used without single quotes."
+msgstr ""
+
 #: include/hosts.inc.php:229
 msgid "Notes"
 msgstr "Notas"
@@ -21114,6 +21129,10 @@ msgstr "Uptime/Downtime"
 msgid "Use %{ref} in group filter to reference value of this user attribute."
 msgstr "Use %{ref} no filtro de grupo para fazer referência ao valor desse atributo de usuário."
 
+#: app/views/administration.miscconfig.edit.php:123
+msgid "Use X-Frame-Options HTTP header"
+msgstr ""
+
 #: app/partials/configuration.host.interface.row.php:194
 msgid "Use bulk requests"
 msgstr "Usar requisições em lote"
@@ -22776,7 +22795,7 @@ msgstr "Com incidentes"
 #: app/views/monitoring.widget.problemhosts.view.php:34
 msgctxt "compact table header"
 msgid "With problems"
-msgstr "Os seguintes problemas foram detectados na lista branca para o erro {0}:"
+msgstr "Com incidentes"
 
 #: app/views/popup.tophosts.column.edit.php:119
 msgid "With this setting only numeric items will be displayed in this column."
@@ -22797,7 +22816,7 @@ msgstr "Sem incidentes"
 #: app/views/monitoring.widget.problemhosts.view.php:33
 msgctxt "compact table header"
 msgid "Without problems"
-msgstr "Sem problemas"
+msgstr "Sem incidentes"
 
 #: include/forms.inc.php:343
 msgid "Without triggers"
@@ -22850,6 +22869,10 @@ msgstr "Eixo-X"
 #: app/views/administration.miscconfig.edit.php:113
 msgid "X-Frame-Options HTTP header"
 msgstr "Cabeçalho HTTP X-Frame-Options"
+
+#: app/views/administration.miscconfig.edit.php:125
+msgid "X-Frame-Options HTTP header supported values:"
+msgstr ""
 
 #: include/views/js/monitoring.sysmaps.js.php:448
 msgid "X1"
@@ -23299,6 +23322,11 @@ msgstr "espera-se um tempo relativo"
 #: app/views/administration.authentication.edit.php:86
 msgid "a special character"
 msgstr "um caractere especial"
+
+#: app/views/administration.miscconfig.edit.php:133
+#, c-format
+msgid "a string of space-separated hostnames; adding %1$s to the list allows the page to be displayed in a frame on the same origin as the page itself"
+msgstr ""
 
 #: include/classes/validators/CApiInputValidator.php:2530
 msgid "a string, number or null value is expected"
