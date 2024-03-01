@@ -472,7 +472,7 @@ class testTriggerLinking extends CIntegrationTest {
 		sleep(1);
 		$this->startComponent(self::COMPONENT_AGENT);
 		/*$this->waitForLogLineToBePresent(self::COMPONENT_SERVER, ['End of DBregister_host_active():SUCCEED']);*/
-		$this->waitForLogLineToBePresent(self::COMPONENT_SERVER, 'End of DBcopy_template_elements', true, 120);
+		$this->waitForLogLineToBePresent(self::COMPONENT_SERVER, 'End of zbx_db_copy_template_elements()', true, 120);
 		$this->checkTriggersCreate();
 		$this->setupActionToLinkTemplateXThatConflictsWithAlreadyLinkedTemplates();
 		$this->stopComponent(self::COMPONENT_SERVER);
@@ -504,7 +504,7 @@ class testTriggerLinking extends CIntegrationTest {
 
 		$this->startComponent(self::COMPONENT_AGENT2);
 		$this->waitForLogLineToBePresent(self::COMPONENT_SERVER, 'query [txnlev:1] [insert into triggers', true, 120);
-		$this->waitForLogLineToBePresent(self::COMPONENT_SERVER, 'End of DBcopy_template_elements', true, 120);
+		$this->waitForLogLineToBePresent(self::COMPONENT_SERVER, 'End of zbx_db_copy_template_elements()', true, 120);
 		$this->reloadConfigurationCache();
 		sleep(1);
 
