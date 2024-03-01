@@ -1962,7 +1962,7 @@ class testDashboardSlaReportWidget extends testSlaReport {
 					],
 					'reporting_period' => 'Daily',
 					'equivalent_timestamps' => [
-						'From' => 'today - 1 day - 1 week - 1 year'
+						'From' => 'today - 1 year - 1 week - 1 day'
 					]
 				]
 			],
@@ -2042,7 +2042,7 @@ class testDashboardSlaReportWidget extends testSlaReport {
 					],
 					'reporting_period' => 'Daily',
 					'equivalent_timestamps' => [
-						'To' => 'now - 1 day - 1 week - 1 year'
+						'To' => 'now - 1 year - 1 week - 1 day'
 					]
 				]
 			],
