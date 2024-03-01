@@ -156,11 +156,13 @@ class testPagePrototypes extends CWebTest {
 				$table->getRow(0)->query('xpath:.//button')->one()->click();
 				$popup_menu = CPopupMenuElement::find()->waitUntilPresent()->one();
 				$this->assertEquals(['CONFIGURATION'], $popup_menu->getTitles()->asText());
-				$this->assertEquals(['Create trigger prototype', 'Create dependent item'],
+				$this->assertEquals(['Item prototype', 'Trigger prototypes', 'Create trigger prototype', 'Create dependent item'],
 						$popup_menu->getItems()->asText()
 				);
 
 				$menu_item_statuses = [
+					'Item prototype' => true,
+					'Trigger prototypes' => false,
 					'Create trigger prototype' => true,
 					'Create dependent item' => true
 				];
