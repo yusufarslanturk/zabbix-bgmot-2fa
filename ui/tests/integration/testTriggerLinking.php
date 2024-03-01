@@ -471,7 +471,6 @@ class testTriggerLinking extends CIntegrationTest {
 		$this->startComponent(self::COMPONENT_SERVER);
 		sleep(1);
 		$this->startComponent(self::COMPONENT_AGENT);
-		/*$this->waitForLogLineToBePresent(self::COMPONENT_SERVER, ['End of DBregister_host_active():SUCCEED']);*/
 		$this->waitForLogLineToBePresent(self::COMPONENT_SERVER, 'End of zbx_db_copy_template_elements()', true, 120);
 		$this->checkTriggersCreate();
 		$this->setupActionToLinkTemplateXThatConflictsWithAlreadyLinkedTemplates();
