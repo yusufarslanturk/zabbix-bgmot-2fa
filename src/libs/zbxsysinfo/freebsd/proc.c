@@ -237,7 +237,7 @@ int     proc_mem(AGENT_REQUEST *request, AGENT_RESULT *result)
 #define ZBX_DSIZE	6
 #define ZBX_SSIZE	7
 	char		*procname, *proccomm, *param, *args, *mem_type = NULL, *rxp_error = NULL;
-	int		do_task, pagesize, count, i, proccount = 0, invalid_user = 0, mem_type_code, mib[4];
+	int		do_task, pagesize, count, i, proccount = 0, invalid_user = 0, mem_type_code, mib[4],
 			ret = SYSINFO_RET_OK;
 	unsigned int	mibs;
 	zbx_uint64_t	mem_size = 0, byte_value = 0;
