@@ -5829,7 +5829,7 @@ out:
 
 /******************************************************************************
  *                                                                            *
- * Purpose: sorting function to sort Datastore names vector by name           *
+ * Purpose: comparison function to sort Datastore names vector by name        *
  *                                                                            *
  ******************************************************************************/
 int	vmware_dsname_compare(const void *d1, const void *d2)
@@ -5940,6 +5940,19 @@ static const char	*vmware_hv_vsan_uuid(zbx_vector_vmware_datastore_t *dss, zbx_v
 	}
 
 	return NULL;
+}
+
+/******************************************************************************
+ *                                                                            *
+ * Purpose: comparison function to sort Datastore names vector by UUID        *
+ *                                                                            *
+ ******************************************************************************/
+int	vmware_dsname_compare_uuid(const void *d1, const void *d2)
+{
+	const zbx_vmware_dsname_t	*ds1 = *(const zbx_vmware_dsname_t * const *)d1;
+	const zbx_vmware_dsname_t	*ds2 = *(const zbx_vmware_dsname_t * const *)d2;
+
+	return strcmp(ds1->uuid, ds2->uuid);
 }
 
 /******************************************************************************
