@@ -488,7 +488,7 @@ type pluginOptions struct {
 	Capacity int `conf:"optional"`
 	System   struct {
 		ForceActiveChecksOnStart *int `conf:"optional"`
-		Capacity                 int  `conf:"optional"`
+		Capacity                 int  `conf:"default=100"`
 	} `conf:"optional"`
 }
 
