@@ -15893,7 +15893,11 @@ void	zbx_dc_get_proxy_config_updates(zbx_uint64_t proxy_hostid, zbx_uint64_t rev
 				zbx_vector_uint64_append(updated_hostids, host->hostid);
 
 				for (j = 0; j < host->httptests.values_num; j++)
-					zbx_vector_uint64_append(httptestids, host->httptests.values[j]->httptestid);
+				{
+					if (HTTPTEST_STATUS_MONITORED == host->httptests.values[j]->status)
+						zbx_vector_uint64_append(httptestids,
+							host->httptests.values[j]->httptestid);
+				}
 			}
 		}
 
