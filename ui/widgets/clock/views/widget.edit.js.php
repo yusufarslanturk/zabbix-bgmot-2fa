@@ -1,7 +1,7 @@
 <?php declare(strict_types = 0);
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -44,10 +44,7 @@ window.widget_clock_form = new class {
 			});
 		}
 
-		this._time_type.addEventListener('change', () => {
-			ZABBIX.Dashboard.reloadWidgetProperties();
-			this.updateForm();
-		});
+		this._time_type.addEventListener('change', () => this.updateForm());
 
 		for (const checkbox of this._clock_type.querySelectorAll('input')) {
 			checkbox.addEventListener('change', () => this.updateForm());
@@ -72,6 +69,18 @@ window.widget_clock_form = new class {
 	}
 
 	updateForm() {
+		this._form.querySelectorAll('.js-row-itemid').forEach(element => {
+			element.style.display = this._time_type.value == <?= TIME_TYPE_HOST ?> ? '' : 'none'
+		});
+
+		$('#itemid').multiSelect(this._time_type.value != <?= TIME_TYPE_HOST ?> ? 'disable' : 'enable');
+
+		const ms_itemid_input = this._form.querySelector('[name="itemid"]');
+
+		if (ms_itemid_input !== null) {
+			ms_itemid_input.disabled = this._time_type.value != <?= TIME_TYPE_HOST ?>;
+		}
+
 		const is_digital = this._clock_type.querySelector('input:checked').value == <?= Widget::TYPE_DIGITAL ?>;
 
 		const show_date_row = is_digital && this._advanced_configuration.checked && this._show_date.checked;

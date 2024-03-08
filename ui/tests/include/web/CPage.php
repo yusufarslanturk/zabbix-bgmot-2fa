@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -201,8 +201,8 @@ class CPage {
 
 		if (!$session) {
 			$secret = bin2hex(random_bytes(16));
-			DBexecute('INSERT INTO sessions (sessionid,userid,secret)'.
-				' VALUES ('.zbx_dbstr($sessionid).','.$userid.','.zbx_dbstr($secret).')'
+			DBexecute('INSERT INTO sessions (sessionid,userid,lastaccess,secret)'.
+				' VALUES ('.zbx_dbstr($sessionid).','.$userid.','.time().','.zbx_dbstr($secret).')'
 			);
 		}
 		elseif ($session['status'] != 0) {	/* ZBX_SESSION_ACTIVE */

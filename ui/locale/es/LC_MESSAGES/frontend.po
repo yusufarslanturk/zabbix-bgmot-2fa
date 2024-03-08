@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-11-28 18:04+0000\n"
+"PO-Revision-Date: 2024-01-20 20:37+0000\n"
 "Last-Translator: Vicente Salvador <vicentesalvadorcubedo@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: es\n"
@@ -208,12 +208,12 @@ msgstr[1] "%1$s elementos de %2$s en estado de problema"
 #: app/views/administration.miscconfig.edit.php:127
 #, c-format
 msgid "%1$s or %2$s - allows the page to be displayed only in a frame on the same origin as the page itself"
-msgstr ""
+msgstr "%1$s o %2$s: permite que la página se muestre solo en un marco en el mismo origen que la misma página"
 
 #: app/views/administration.miscconfig.edit.php:130
 #, c-format
 msgid "%1$s or %2$s - prevents the page from being displayed in a frame, regardless of the site attempting to do so"
-msgstr ""
+msgstr "%1$s o %2$s: evita que la página se muestre en un marco, independientemente del sitio que intente hacerlo"
 
 #: jsLoader.php:348
 #, c-format
@@ -470,20 +470,20 @@ msgstr "Testigo de API añadido"
 #: app/controllers/CControllerTokenDelete.php:67
 msgid "API token deleted"
 msgid_plural "API tokens deleted"
-msgstr[0] "Testigo de API borrado"
-msgstr[1] "Testigos de API borrados"
+msgstr[0] "Token de API borrado"
+msgstr[1] "Tokens de API borrados"
 
 #: app/controllers/CControllerTokenDisable.php:63
 msgid "API token disabled"
 msgid_plural "API tokens disabled"
-msgstr[0] "Testigo de API desactivado"
-msgstr[1] "Testigos de API desactivados"
+msgstr[0] "Token de API desactivado"
+msgstr[1] "Tokens de API desactivados"
 
 #: app/controllers/CControllerTokenEnable.php:63
 msgid "API token enabled"
 msgid_plural "API tokens enabled"
-msgstr[0] "Testigo de API activado"
-msgstr[1] "Testigos de API activados"
+msgstr[0] "Token de API activado"
+msgstr[1] "Tokens de API activados"
 
 #: include/classes/api/clients/CLocalApiClient.php:198
 msgid "API token expired."
@@ -504,7 +504,7 @@ msgstr "Testigo de API actualizado"
 #: include/classes/helpers/CMenuHelper.php:396 include/html.inc.php:820
 #: include/html.inc.php:900
 msgid "API tokens"
-msgstr "Testigos de API"
+msgstr "Tokens de API"
 
 #: include/classes/widgets/forms/CWidgetFormItem.php:251
 msgid "Above value"
@@ -752,7 +752,7 @@ msgstr "Activo"
 
 #: include/hosts.inc.php:497
 msgid "Active checks"
-msgstr "Cheques activos"
+msgstr "Comprobación activa"
 
 #: include/views/configuration.maintenance.edit.php:112
 #: include/views/configuration.maintenance.list.php:91 maintenance.php:44
@@ -6732,7 +6732,7 @@ msgstr "Descartar valor"
 #: include/views/configuration.trigger.prototype.edit.php:549
 #: include/views/configuration.trigger.prototype.list.php:68
 msgid "Discover"
-msgstr "Descubrimiento"
+msgstr "Descubrir"
 
 #: app/partials/configuration.filter.items.php:207
 #: include/discovery.inc.php:138 include/forms.inc.php:374
@@ -12888,7 +12888,7 @@ msgstr "Período máximo de visualización del historial"
 
 #: app/views/administration.gui.edit.php:99
 msgid "Max number of columns and rows in overview tables"
-msgstr "Número máximo de columnas y filas en tablas de descripción general"
+msgstr "Número máximo de columnas y filas en tablas de vista general"
 
 #: app/views/administration.gui.edit.php:138
 msgid "Max period for time selector"
@@ -14529,7 +14529,7 @@ msgstr "No soportado"
 #: app/views/administration.miscconfig.edit.php:138
 #, c-format
 msgid "Note that %1$s or %2$s will be regarded as hostnames if used without single quotes."
-msgstr ""
+msgstr "Tenga en cuenta que %1$s o %2$s se considerarán nombres de equipo si se usan sin comillas simples."
 
 #: include/hosts.inc.php:229
 msgid "Notes"
@@ -16383,7 +16383,7 @@ msgstr "Detalles de la cola"
 #: app/views/administration.queue.overview.proxy.php:33
 #: include/classes/helpers/CMenuHelper.php:318
 msgid "Queue overview"
-msgstr "Descripción general de la cola"
+msgstr "Vista general de la cola"
 
 #: app/views/administration.queue.details.php:36
 #: app/views/administration.queue.overview.php:36
@@ -16391,7 +16391,7 @@ msgstr "Descripción general de la cola"
 #: app/views/administration.queue.overview.proxy.php:36
 #: include/classes/helpers/CMenuHelper.php:320
 msgid "Queue overview by proxy"
-msgstr "Descripción general por proxy"
+msgstr "Vista general por proxy"
 
 #: app/views/hintbox.eventlist.php:100
 #: app/views/monitoring.widget.problems.view.php:93
@@ -20115,7 +20115,7 @@ msgstr "Tendencias"
 #: include/views/js/monitoring.sysmaps.js.php:815
 #: include/views/reports.toptriggers.php:86 jsLoader.php:267 jsLoader.php:383
 msgid "Trigger"
-msgstr "Iniciadores"
+msgstr "Iniciador"
 
 #: include/classes/api/services/CTriggerGeneral.php:636
 #, c-format
@@ -21123,7 +21123,7 @@ msgstr "Utilice %{ref} en el filtro de grupo para hacer referencia al valor de e
 
 #: app/views/administration.miscconfig.edit.php:123
 msgid "Use X-Frame-Options HTTP header"
-msgstr ""
+msgstr "Utilice el encabezado HTTP X-Frame-Options"
 
 #: app/partials/configuration.host.interface.row.php:194
 msgid "Use bulk requests"
@@ -22864,7 +22864,7 @@ msgstr "Encabezado HTTP X-Frame-Options"
 
 #: app/views/administration.miscconfig.edit.php:125
 msgid "X-Frame-Options HTTP header supported values:"
-msgstr ""
+msgstr "Valores admitidos del encabezado HTTP X-Frame-Options:"
 
 #: include/views/js/monitoring.sysmaps.js.php:448
 msgid "X1"
@@ -23201,7 +23201,7 @@ msgstr "Nombre del servidor Zabbix"
 
 #: include/items.inc.php:92
 msgid "Zabbix trapper"
-msgstr "Trapper ZABBIX"
+msgstr "Captura ZABBIX"
 
 #: include/classes/html/CFilter.php:251 include/classes/html/CTabFilter.php:333
 msgid "Zoom out"
@@ -23318,7 +23318,7 @@ msgstr "un caracter especial"
 #: app/views/administration.miscconfig.edit.php:133
 #, c-format
 msgid "a string of space-separated hostnames; adding %1$s to the list allows the page to be displayed in a frame on the same origin as the page itself"
-msgstr ""
+msgstr "una cadena de nombres de equipo separados por espacios; agregar %1$s a la lista permite que la página se muestre en un marco en el mismo origen que la misma página"
 
 #: include/classes/validators/CApiInputValidator.php:2530
 msgid "a string, number or null value is expected"
@@ -23492,7 +23492,7 @@ msgstr "se esperaba un entero sin signo"
 
 #: app/views/administration.authentication.edit.php:72
 msgid "an uppercase and a lowercase Latin letter"
-msgstr "una letra latina mayúscula y minúscula"
+msgstr "una letra latina mayúscula y una minúscula"
 
 #: app/views/administration.geomaps.edit.php:47
 msgid "and"

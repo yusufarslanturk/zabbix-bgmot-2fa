@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1999,6 +1999,8 @@ int	zbx_db_execute_overflowed_sql(char **sql, size_t *sql_alloc, size_t *sql_off
 			(*sql_offset)--;
 			zbx_strcpy_alloc(sql, sql_alloc, sql_offset, ";\n");
 		}
+#else
+		ZBX_UNUSED(sql_alloc);
 #endif
 #if defined(HAVE_ORACLE) && 0 == ZBX_MAX_OVERFLOW_SQL_SIZE
 		/* make sure we are not called twice without */
