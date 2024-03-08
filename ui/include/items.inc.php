@@ -418,7 +418,7 @@ function copyItemsToHosts(string $src_type, array $src_ids, bool $dst_is_templat
 
 	$src_items = API::Item()->get([
 		'output' => ['itemid', 'name', 'type', 'key_', 'value_type', 'units', 'history', 'trends',
-			'valuemapid', 'inventory_link', 'logtimefmt', 'flags', 'description', 'status',
+			'valuemapid', 'inventory_link', 'logtimefmt', 'description', 'status',
 
 			// Type fields.
 			// The fields used for multiple item types.
@@ -449,7 +449,6 @@ function copyItemsToHosts(string $src_type, array $src_ids, bool $dst_is_templat
 		],
 		'selectPreprocessing' => ['type', 'params', 'error_handler', 'error_handler_params'],
 		'selectTags' => ['tag', 'value'],
-		'selectHosts' => ['status'],
 		$src_type => $src_ids,
 		'preservekeys' => true
 	] + $options);
@@ -661,19 +660,13 @@ function copyItemsToHosts(string $src_type, array $src_ids, bool $dst_is_templat
 					$dst_item['master_itemid'] = $master_item_links[$src_item['master_itemid']][$dst_hostid];
 				}
 
-				$dst_items[] = [
-					'hostid' => $dst_hostid,
-					'flags' => $src_item['flags'],
-					'hosts' => $src_item['hosts'],
+				$dst_items[] = ['hostid' => $dst_hostid] + getSanitizedItemFields([
+					'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
+					'hosts' => [['status' => $dst_is_template ? HOST_STATUS_TEMPLATE : HOST_STATUS_MONITORED]],
 					'templateid' => 0
-				] + $dst_item;
+				] + $dst_item);
 			}
 		}
-
-		foreach ($dst_items as &$item) {
-			$item = ['hostid' => $item['hostid']] + getSanitizedItemFields($item);
-		}
-		unset($item);
 
 		$response = API::Item()->create($dst_items);
 

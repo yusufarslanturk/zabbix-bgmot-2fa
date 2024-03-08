@@ -2309,6 +2309,7 @@ class CDiscoveryRule extends CItemGeneralOld {
 	 * @param string $dst_host['hostid']
 	 * @param string $dst_host['host']
 	 * @param array  $dst_host['interfaces']
+	 * @param int    $dst_host['status']
 	 *
 	 * @throws APIException
 	 */
@@ -2529,7 +2530,11 @@ class CDiscoveryRule extends CItemGeneralOld {
 					$dst_item['master_itemid'] = $master_item_links[$src_item['master_itemid']][$dst_host['hostid']];
 				}
 
-				$dst_items[] = ['hostid' => $dst_host['hostid'], 'ruleid' => $dst_ruleid] + $dst_item;
+				$dst_items[] = ['hostid' => $dst_host['hostid'], 'ruleid' => $dst_ruleid] + getSanitizedItemFields([
+					'flags' => ZBX_FLAG_DISCOVERY_PROTOTYPE,
+					'hosts' => [$dst_host],
+					'templateid' => 0
+				] + $dst_item);
 			}
 
 			$response = API::ItemPrototype()->create($dst_items);
