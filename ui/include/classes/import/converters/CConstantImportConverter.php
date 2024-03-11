@@ -70,7 +70,6 @@ class CConstantImportConverter extends CConverter {
 
 					foreach ($tag_rules['rules'] as $multiple_rule) {
 						if ($this->multipleRuleMatched($multiple_rule, $data, $rules['rules'])) {
-							$multiple_rule['type'] = ($tag_rules['type'] & XML_REQUIRED) | $multiple_rule['type'];
 							$matched_multiple_rule = $multiple_rule
 								+ array_intersect_key($tag_rules, array_flip(['default']));
 							break;

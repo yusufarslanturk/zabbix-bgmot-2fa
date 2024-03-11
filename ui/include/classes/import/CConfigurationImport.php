@@ -1050,6 +1050,12 @@ class CConfigurationImport {
 			}
 		}
 
+		$preprocessing_defaults = [
+			'params' => DB::getDefault('item_preproc', 'params'),
+			'error_handler' => DB::getDefault('item_preproc', 'error_handler'),
+			'error_handler_params' => DB::getDefault('item_preproc', 'error_handler_params')
+		];
+
 		foreach ($discovery_rules_by_hosts as $host => $discovery_rules) {
 			$hostid = $this->referencer->findTemplateidOrHostidByHost($host);
 
@@ -1149,6 +1155,8 @@ class CConfigurationImport {
 
 						unset($preprocessing_step['parameters']);
 					}
+
+					$preprocessing_step += $preprocessing_defaults;
 				}
 				unset($preprocessing_step);
 

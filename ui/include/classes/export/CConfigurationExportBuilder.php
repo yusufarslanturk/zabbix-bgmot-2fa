@@ -194,9 +194,8 @@ class CConfigurationExportBuilder {
 		}
 		elseif (is_array($multiple_rule['if'])) {
 			$field_name = $multiple_rule['if']['tag'];
-			$field_value = $data[$field_name];
 
-			return array_key_exists($field_value, $multiple_rule['if']['in']);
+			return array_key_exists($data[$field_name], $multiple_rule['if']['in']);
 		}
 		elseif ($multiple_rule['if'] instanceof Closure) {
 			return call_user_func($multiple_rule['if'], $data);

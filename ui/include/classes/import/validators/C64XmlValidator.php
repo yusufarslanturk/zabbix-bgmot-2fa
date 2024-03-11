@@ -339,14 +339,14 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 	private $ITEM_TYPE_INTERFACE = [
 		CXmlConstantValue::ITEM_TYPE_ZABBIX_PASSIVE => CXmlConstantName::ZABBIX_PASSIVE,
 		CXmlConstantValue::ITEM_TYPE_SIMPLE => CXmlConstantName::SIMPLE,
-		CXmlConstantValue::ITEM_TYPE_SNMP => CXmlConstantName::SNMP_AGENT,
-		CXmlConstantValue::ITEM_TYPE_SNMP_TRAP => CXmlConstantName::SNMP_TRAP,
 		CXmlConstantValue::ITEM_TYPE_EXTERNAL => CXmlConstantName::EXTERNAL,
-		CXmlConstantValue::ITEM_TYPE_HTTP_AGENT => CXmlConstantName::HTTP_AGENT,
 		CXmlConstantValue::ITEM_TYPE_IPMI => CXmlConstantName::IPMI,
 		CXmlConstantValue::ITEM_TYPE_SSH => CXmlConstantName::SSH,
 		CXmlConstantValue::ITEM_TYPE_TELNET => CXmlConstantName::TELNET,
-		CXmlConstantValue::ITEM_TYPE_JMX => CXmlConstantName::JMX
+		CXmlConstantValue::ITEM_TYPE_JMX => CXmlConstantName::JMX,
+		CXmlConstantValue::ITEM_TYPE_SNMP_TRAP => CXmlConstantName::SNMP_TRAP,
+		CXmlConstantValue::ITEM_TYPE_HTTP_AGENT => CXmlConstantName::HTTP_AGENT,
+		CXmlConstantValue::ITEM_TYPE_SNMP => CXmlConstantName::SNMP_AGENT
 	];
 
 	private $HTTP_ITEM_AUTHTYPE = [

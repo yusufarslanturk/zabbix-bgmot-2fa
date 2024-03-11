@@ -1368,7 +1368,7 @@ abstract class CItemGeneralOld extends CApiService {
 	 *                                                                  3 - ZBX_PREPROC_FAIL_SET_ERROR.
 	 * @param string $item['preprocessing'][]['error_handler_params']  Error handler parameters.
 	 */
-	protected function validateItemPreprocessing(array &$item) {
+	protected function validateItemPreprocessing(array $item) {
 		if (array_key_exists('preprocessing', $item)) {
 			if (!is_array($item['preprocessing'])) {
 				self::exception(ZBX_API_ERROR_PARAMETERS, _('Incorrect arguments passed to function.'));
@@ -1397,17 +1397,11 @@ abstract class CItemGeneralOld extends CApiService {
 			$delta = false;
 			$throttling = false;
 			$prometheus = false;
-			$preproc_defaults = [
-				'params' => DB::getDefault('item_preproc', 'params'),
-				'error_handler' => DB::getDefault('item_preproc', 'error_handler'),
-				'error_handler_params' => DB::getDefault('item_preproc', 'error_handler_params')
-			];
 
 			foreach ($item['preprocessing'] as &$preprocessing) {
 				$missing_keys = array_diff($required_fields, array_keys($preprocessing));
-				$preprocessing += $preproc_defaults;
 
-				if (array_diff($required_fields, array_keys($preprocessing))) {
+				if ($missing_keys) {
 					self::exception(ZBX_API_ERROR_PARAMETERS,
 						_s('Item pre-processing is missing parameters: %1$s', implode(', ', $missing_keys))
 					);
@@ -1990,7 +1984,6 @@ abstract class CItemGeneralOld extends CApiService {
 						}
 				}
 			}
-			unset($preprocessing);
 		}
 	}
 
@@ -2022,7 +2015,6 @@ abstract class CItemGeneralOld extends CApiService {
 	 */
 	protected function createItemPreprocessing(array $items) {
 		$item_preproc = [];
-		$conditional_fields = array_flip(['params', 'error_handler', 'error_handler_params']);
 
 		foreach ($items as $item) {
 			if (array_key_exists('preprocessing', $item)) {
@@ -2033,8 +2025,11 @@ abstract class CItemGeneralOld extends CApiService {
 					$item_preproc[] = [
 						'itemid' => $item['itemid'],
 						'step' => ($preprocessing['type'] == ZBX_PREPROC_VALIDATE_NOT_SUPPORTED) ? 0 : $step++,
-						'type' => $preprocessing['type']
-					] + array_intersect_key($preprocessing, $conditional_fields);
+						'type' => $preprocessing['type'],
+						'params' => $preprocessing['params'],
+						'error_handler' => $preprocessing['error_handler'],
+						'error_handler_params' => $preprocessing['error_handler_params']
+					];
 				}
 			}
 		}
@@ -2057,11 +2052,6 @@ abstract class CItemGeneralOld extends CApiService {
 	 */
 	protected function updateItemPreprocessing(array $items) {
 		$item_preprocs = [];
-		$preproc_defaults = [
-			'params' => DB::getDefault('item_preproc', 'params'),
-			'error_handler' => DB::getDefault('item_preproc', 'error_handler'),
-			'error_handler_params' => DB::getDefault('item_preproc', 'error_handler_params')
-		];
 
 		foreach ($items as $item) {
 			if (array_key_exists('preprocessing', $item)) {
@@ -2071,7 +2061,6 @@ abstract class CItemGeneralOld extends CApiService {
 
 				foreach ($item['preprocessing'] as $item_preproc) {
 					$curr_step = ($item_preproc['type'] == ZBX_PREPROC_VALIDATE_NOT_SUPPORTED) ? 0 : $step++;
-					$item_preproc += $preproc_defaults;
 					$item_preprocs[$item['itemid']][$curr_step] = [
 						'type' => $item_preproc['type'],
 						'params' => $item_preproc['params'],
@@ -3149,10 +3138,6 @@ abstract class CItemGeneralOld extends CApiService {
 	 */
 	protected function normalizeItemPreprocessingSteps(array $preprocessing): array {
 		foreach ($preprocessing as &$step) {
-			if (!array_key_exists('params', $step)) {
-				continue;
-			}
-
 			$step['params'] = str_replace("\r\n", "\n", $step['params']);
 			$params = explode("\n", $step['params']);
 
