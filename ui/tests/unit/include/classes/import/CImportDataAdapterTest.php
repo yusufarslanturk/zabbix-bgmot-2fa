@@ -340,7 +340,7 @@ class CImportDataAdapterTest extends TestCase {
 	public function testGetItems() {
 		$adapter = $this->getAdapter($this->getHostAndTemplateXml());
 
-		$this->checkMatchesNested($adapter->getItems(), [
+		$this->assertEquals($adapter->getItems(), [
 			'export-host' => [
 				'item' => [
 					'name' => 'item',
@@ -647,7 +647,7 @@ class CImportDataAdapterTest extends TestCase {
 	public function testGetDiscoveryRules() {
 		$adapter = $this->getAdapter($this->getHostAndTemplateXml());
 
-		$this->checkMatchesNested($adapter->getDiscoveryRules(), [
+		$this->assertEquals($adapter->getDiscoveryRules(), [
 			'export-host' => [
 				'empty-lld-rule' => [
 					'name' => 'empty-lld-rule',
@@ -1926,7 +1926,7 @@ class CImportDataAdapterTest extends TestCase {
 			]
 		);
 
-		$this->checkMatchesNested($adapter->getItems(), [
+		$this->assertEquals($adapter->getItems(), [
 				'Template_Simple' => [
 					'net.tcp.service[ftp,,21]' => [
 						'uuid' => 'c1e7021d16814cde8d17c783a987bb18',
@@ -2206,7 +2206,7 @@ class CImportDataAdapterTest extends TestCase {
 			]
 		]);
 
-		$this->checkMatchesNested($adapter->getItems(), [
+		$this->assertEquals($adapter->getItems(), [
 			'Test 1' => [
 				'test' => [
 					'uuid' => '86491ebd3d2549eaab7bbba6537c5e9b',
@@ -2325,7 +2325,7 @@ class CImportDataAdapterTest extends TestCase {
 			]
 		]);
 
-		$this->checkMatchesNested($adapter->getDiscoveryRules(), [
+		$this->assertEquals($adapter->getDiscoveryRules(), [
 			'Test 1' => [
 				'drule' => [
 					'uuid' => '3b7d292c10354838805205cfcbc444cc',
@@ -2654,7 +2654,7 @@ class CImportDataAdapterTest extends TestCase {
 			]
 		]);
 
-		$this->checkMatchesNested($adapter->getItems(), [
+		$this->assertEquals($adapter->getItems(), [
 			'SNMP host' => [
 				'test' => [
 					'name' => 'Item SNMPv1 without port',
@@ -2773,7 +2773,7 @@ class CImportDataAdapterTest extends TestCase {
 			]
 		]);
 
-		$this->checkMatchesNested($adapter->getDiscoveryRules(), [
+		$this->assertEquals($adapter->getDiscoveryRules(), [
 			'SNMP host' => [
 				'drule' => [
 					'name' => 'Discovery Rule 1',
@@ -3018,46 +3018,5 @@ class CImportDataAdapterTest extends TestCase {
 		}
 
 		return $this->sources[$name];
-	}
-
-	private function checkMatchesNested(array $input, array $expected) {
-		$nested_objects = ['item_prototypes', 'trigger_prototypes', 'graph_prototypes', 'host_prototypes', 'interfaces'];
-
-		foreach ($expected as $parent_label => $expected_objects) {
-			$parent_input = array_shift($input);
-
-			foreach ($expected_objects as $expected_object_label => $expected_object) {
-				$input_object = array_shift($parent_input);
-				$object_label = $parent_label.'.'.$expected_object_label;
-
-				foreach ($nested_objects as $nested_object) {
-					if (!array_key_exists($nested_object, $expected_object)) {
-						continue;
-					}
-
-					$this->assertArrayHasKey($nested_object, $input_object,
-						$object_label.' expected to have '.$nested_object
-					);
-
-					$nested_input = $input_object[$nested_object];
-					$nested_expected = $expected_object[$nested_object];
-
-					foreach ($nested_expected as $child_label => $nested_child) {
-						$input_child = array_shift($nested_input);
-
-						$this->assertEquals($input_child, $nested_child,
-							$object_label.'.'.$nested_object.'['.$child_label.'] expected to match.'
-						);
-					}
-
-					unset($input_object[$nested_object]);
-					unset($expected_object[$nested_object]);
-				}
-
-				$this->assertEquals($input_object, $expected_object, $object_label.' expected to match.');
-			}
-		}
-
-		$this->assertEmpty($input);
 	}
 }
