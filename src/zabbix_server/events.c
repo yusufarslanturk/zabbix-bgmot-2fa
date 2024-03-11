@@ -714,9 +714,6 @@ static int	correlation_match_event_hostgroup(const zbx_db_event *event, zbx_uint
 static const char	*correlation_condition_match_new_event(zbx_corr_condition_t *condition,
 		const zbx_db_event *event, int old_value)
 {
-	int		i, ret;
-	zbx_tag_t	*tag;
-
 	/* return SUCCEED for conditions using old events */
 	switch (condition->type)
 	{
@@ -725,12 +722,14 @@ static const char	*correlation_condition_match_new_event(zbx_corr_condition_t *c
 			return (SUCCEED == old_value) ? ZBX_UNKNOWN_STR "0" : "0";
 	}
 
+	int	ret;
+
 	switch (condition->type)
 	{
 		case ZBX_CORR_CONDITION_NEW_EVENT_TAG:
-			for (i = 0; i < event->tags.values_num; i++)
+			for (int i = 0; i < event->tags.values_num; i++)
 			{
-				tag = event->tags.values[i];
+				const zbx_tag_t	*tag = event->tags.values[i];
 
 				if (0 == strcmp(tag->tag, condition->data.tag.tag))
 					return "1";
@@ -738,11 +737,10 @@ static const char	*correlation_condition_match_new_event(zbx_corr_condition_t *c
 			break;
 
 		case ZBX_CORR_CONDITION_NEW_EVENT_TAG_VALUE:
-			for (i = 0; i < event->tags.values_num; i++)
+			for (int i = 0; i < event->tags.values_num; i++)
 			{
-				zbx_corr_condition_tag_value_t	*cond = &condition->data.tag_value;
-
-				tag = event->tags.values[i];
+				const zbx_corr_condition_tag_value_t	*cond = &condition->data.tag_value;
+				const zbx_tag_t				*tag = event->tags.values[i];
 
 				if (0 == strcmp(tag->tag, cond->tag) &&
 					SUCCEED == zbx_strmatch_condition(tag->value, cond->value, cond->op))
@@ -761,9 +759,9 @@ static const char	*correlation_condition_match_new_event(zbx_corr_condition_t *c
 			return (SUCCEED == ret ? "1" : "0");
 
 		case ZBX_CORR_CONDITION_EVENT_TAG_PAIR:
-			for (i = 0; i < event->tags.values_num; i++)
+			for (int i = 0; i < event->tags.values_num; i++)
 			{
-				tag = event->tags.values[i];
+				const zbx_tag_t	*tag = event->tags.values[i];
 
 				if (0 == strcmp(tag->tag, condition->data.tag_pair.newtag))
 					return (SUCCEED == old_value) ? ZBX_UNKNOWN_STR "0" : "0";

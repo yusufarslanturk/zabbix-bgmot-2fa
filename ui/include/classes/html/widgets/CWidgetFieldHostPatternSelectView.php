@@ -57,6 +57,16 @@ class CWidgetFieldHostPatternSelectView extends CWidgetFieldView {
 			->setAriaRequired($this->isRequired());
 	}
 
+	public function getLabel(): ?CLabel {
+		$label = parent::getLabel();
+
+		if ($label !== null) {
+			$label->setFor(zbx_formatDomId($this->field->getName().'[]').'_ms');
+		}
+
+		return $label;
+	}
+
 	public function getJavaScript(): string {
 		$field_id = zbx_formatDomId($this->field->getName().'[]');
 

@@ -43,6 +43,8 @@
 #undef zbx_db_begin
 #undef zbx_db_commit
 
+int	__wrap_zbx_db_commit(void);
+
 #define ZBX_MOCK_DB_RESULT_COLUMNS_MAX	128
 
 typedef struct

@@ -1155,7 +1155,7 @@ class testDashboardItemValueWidget extends testWidgets {
 			$values = $form->getFields()->asValues();
 		}
 		else {
-			$form->fill(['Type' => 'Item value']);
+			$form->fill(['Type' => CFormElement::RELOADABLE_FILL('Item value')]);
 		}
 
 		if ($cancel || !$save_dashboard) {

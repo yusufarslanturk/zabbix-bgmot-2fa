@@ -43,7 +43,7 @@ $form
 		new CWidgetFieldCheckBoxView($data['fields']['adv_conf'])
 	)
 	->addFieldsGroup([
-		(new CLabel(_('Description')))->setAsteriskMark(),
+		(new CLabel(_('Description'), 'description'))->setAsteriskMark(),
 		makeHelpIcon([
 			_('Supported macros:'),
 			(new CList([

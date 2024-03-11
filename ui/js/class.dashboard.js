@@ -22,6 +22,7 @@ const ZBX_STYLE_DASHBOARD_IS_MULTIPAGE = 'dashboard-is-multipage';
 const ZBX_STYLE_DASHBOARD_IS_EDIT_MODE = 'dashboard-is-edit-mode';
 const ZBX_STYLE_DASHBOARD_NAVIGATION_IS_SCROLLABLE = 'is-scrollable';
 const ZBX_STYLE_DASHBOARD_SELECTED_TAB = 'selected-tab';
+const ZBX_STYLE_DASHBOARD_IS_READY = 'is-ready';
 
 const DASHBOARD_STATE_INITIAL = 'initial';
 const DASHBOARD_STATE_ACTIVE = 'active';
@@ -500,7 +501,7 @@ class CDashboard extends CBaseComponent {
 			unique_id: this._createUniqueId()
 		});
 
-		this._dashboard_pages.set(dashboard_page, {});
+		this._dashboard_pages.set(dashboard_page, {is_ready: false});
 
 		for (const widget_data of widgets) {
 			dashboard_page.addWidget({
@@ -552,7 +553,7 @@ class CDashboard extends CBaseComponent {
 		}
 
 		if (dashboard_page.getState() !== DASHBOARD_PAGE_STATE_INITIAL) {
-			dashboard_page.destroy();
+			this._destroyDashboardPage(dashboard_page);
 		}
 
 		if (!this._is_kiosk_mode) {
@@ -928,6 +929,8 @@ class CDashboard extends CBaseComponent {
 
 		this._promiseSelectDashboardPage(dashboard_page, {is_async})
 			.then(() => {
+				this._updateReadyState();
+
 				if (!this._is_edit_mode) {
 					this._keepSteadyConfigurationChecker();
 
@@ -972,7 +975,7 @@ class CDashboard extends CBaseComponent {
 		this._selected_dashboard_page = dashboard_page;
 
 		if (this._selected_dashboard_page.getState() === DASHBOARD_PAGE_STATE_INITIAL) {
-			this._selected_dashboard_page.start();
+			this._startDashboardPage(this._selected_dashboard_page);
 		}
 
 		this._activatePage(this._selected_dashboard_page);
@@ -980,6 +983,12 @@ class CDashboard extends CBaseComponent {
 		if (this._is_kiosk_mode) {
 			this._resetHeaderLines();
 		}
+	}
+
+	_startDashboardPage(dashboard_page) {
+		dashboard_page.on(DASHBOARD_PAGE_EVENT_READY, this._events.dashboardPageReady);
+
+		dashboard_page.start();
 	}
 
 	_activatePage(dashboard_page) {
@@ -1018,6 +1027,12 @@ class CDashboard extends CBaseComponent {
 		if (this._is_kiosk_mode) {
 			dashboard_page.off(DASHBOARD_PAGE_EVENT_RESERVE_HEADER_LINES, this._events.dashboardPageReserveHeaderLines);
 		}
+	}
+
+	_destroyDashboardPage(dashboard_page) {
+		dashboard_page.off(DASHBOARD_PAGE_EVENT_READY, this._events.dashboardPageReady);
+
+		dashboard_page.destroy();
 	}
 
 	_setInitialDashboardPage(dashboard_page) {
@@ -1065,6 +1080,17 @@ class CDashboard extends CBaseComponent {
 		const data = this._dashboard_pages.get(dashboard_page);
 
 		return tabs.indexOf(data.tab);
+	}
+
+	/**
+	 * Update readiness state of the dashboard.
+	 *
+	 * Readiness state is updated on switching dashboard pages and as soon as the selected page gets fully loaded.
+	 */
+	_updateReadyState() {
+		const data = this._dashboard_pages.get(this._selected_dashboard_page);
+
+		this._target.classList.toggle(ZBX_STYLE_DASHBOARD_IS_READY, data.is_ready);
 	}
 
 	save() {
@@ -1884,6 +1910,14 @@ class CDashboard extends CBaseComponent {
 		let user_interaction_animation_frame = null;
 
 		this._events = {
+			dashboardPageReady: (e) => {
+				const data = this._dashboard_pages.get(e.detail.target);
+
+				data.is_ready = true;
+
+				this._updateReadyState();
+			},
+
 			dashboardPageEdit: () => {
 				this.setEditMode({is_internal_call: true});
 			},

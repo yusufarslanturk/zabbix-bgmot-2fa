@@ -2740,3 +2740,20 @@ function sortLldRuleFilterConditions(array $conditions, int $evaltype): array {
 
 	return array_values($conditions);
 }
+
+/**
+ * @param int   $item_type
+ * @param array $hostids
+ *
+ * @return array
+ */
+function getItemTypeCountByHostId(int $item_type, array $hostids): array {
+	$items_count = API::Item()->get([
+		'countOutput' => true,
+		'groupCount' => true,
+		'hostids' => $hostids,
+		'filter' => ['type' => $item_type]
+	]);
+
+	return array_column($items_count, 'rowscount', 'hostid');
+}
