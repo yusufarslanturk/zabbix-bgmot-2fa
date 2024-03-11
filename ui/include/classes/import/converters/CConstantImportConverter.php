@@ -115,9 +115,12 @@ class CConstantImportConverter extends CConverter {
 		elseif (is_array($multiple_rule['if'])) {
 			$field_name = $multiple_rule['if']['tag'];
 
-			return array_key_exists($field_name, $data)
-				? array_key_exists($data[$field_name], $multiple_rule['if']['in'])
-				: array_key_exists($rules[$field_name]['default'], $multiple_rule['if']['in']);
+			if (array_key_exists($field_name, $data)) {
+				return array_key_exists($data[$field_name], $multiple_rule['if']['in']);
+			}
+			elseif (array_key_exists('default', $rules[$field_name])) {
+				return array_key_exists($rules[$field_name]['default'], $multiple_rule['if']['in']);
+			}
 		}
 		elseif ($multiple_rule['if'] instanceof Closure) {
 			return call_user_func($multiple_rule['if'], $data);
