@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-11-17 10:32+0000\n"
+"PO-Revision-Date: 2024-01-20 20:37+0000\n"
 "Last-Translator: Vicente Salvador <vicentesalvadorcubedo@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: es\n"
@@ -204,6 +204,16 @@ msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
 msgstr[0] "%1$s elemento de %2$s en estado de problema"
 msgstr[1] "%1$s elementos de %2$s en estado de problema"
+
+#: app/views/administration.miscconfig.edit.php:127
+#, c-format
+msgid "%1$s or %2$s - allows the page to be displayed only in a frame on the same origin as the page itself"
+msgstr "%1$s o %2$s: permite que la página se muestre solo en un marco en el mismo origen que la misma página"
+
+#: app/views/administration.miscconfig.edit.php:130
+#, c-format
+msgid "%1$s or %2$s - prevents the page from being displayed in a frame, regardless of the site attempting to do so"
+msgstr "%1$s o %2$s: evita que la página se muestre en un marco, independientemente del sitio que intente hacerlo"
 
 #: jsLoader.php:348
 #, c-format
@@ -460,20 +470,20 @@ msgstr "Testigo de API añadido"
 #: app/controllers/CControllerTokenDelete.php:67
 msgid "API token deleted"
 msgid_plural "API tokens deleted"
-msgstr[0] "Testigo de API borrado"
-msgstr[1] "Testigos de API borrados"
+msgstr[0] "Token de API borrado"
+msgstr[1] "Tokens de API borrados"
 
 #: app/controllers/CControllerTokenDisable.php:63
 msgid "API token disabled"
 msgid_plural "API tokens disabled"
-msgstr[0] "Testigo de API desactivado"
-msgstr[1] "Testigos de API desactivados"
+msgstr[0] "Token de API desactivado"
+msgstr[1] "Tokens de API desactivados"
 
 #: app/controllers/CControllerTokenEnable.php:63
 msgid "API token enabled"
 msgid_plural "API tokens enabled"
-msgstr[0] "Testigo de API activado"
-msgstr[1] "Testigos de API activados"
+msgstr[0] "Token de API activado"
+msgstr[1] "Tokens de API activados"
 
 #: include/classes/api/clients/CLocalApiClient.php:198
 msgid "API token expired."
@@ -494,7 +504,7 @@ msgstr "Testigo de API actualizado"
 #: include/classes/helpers/CMenuHelper.php:396 include/html.inc.php:820
 #: include/html.inc.php:900
 msgid "API tokens"
-msgstr "Testigos de API"
+msgstr "Tokens de API"
 
 #: include/classes/widgets/forms/CWidgetFormItem.php:251
 msgid "Above value"
@@ -543,16 +553,16 @@ msgstr "Acceso a los servicios"
 #: include/classes/screens/CScreenProblem.php:888
 #: include/classes/screens/CScreenProblem.php:1157 include/events.inc.php:290
 msgid "Ack"
-msgstr "Reconocer"
+msgstr "Reconocido"
 
 #: app/views/monitoring.widget.problems.view.php:81
 msgctxt "compact table header"
 msgid "Ack"
-msgstr "Reconocer"
+msgstr "Reconocido"
 
 #: app/views/popup.acknowledge.edit.php:83 jsLoader.php:353
 msgid "Acknowledge"
-msgstr "Aceptada"
+msgstr "Reconocer"
 
 #: include/classes/helpers/CRoleHelper.php:463
 msgid "Acknowledge problems"
@@ -742,7 +752,7 @@ msgstr "Activo"
 
 #: include/hosts.inc.php:497
 msgid "Active checks"
-msgstr "Cheques activos"
+msgstr "Comprobación activa"
 
 #: include/views/configuration.maintenance.edit.php:112
 #: include/views/configuration.maintenance.list.php:91 maintenance.php:44
@@ -1089,7 +1099,7 @@ msgstr "Edad"
 
 #: app/partials/monitoring.problem.filter.php:116
 msgid "Age less than"
-msgstr "Edad menor que"
+msgstr "Edad menor de"
 
 #: app/views/administration.script.list.php:164 include/hosts.inc.php:1191
 #: include/items.inc.php:347 include/views/configuration.httpconf.edit.php:98
@@ -1195,7 +1205,7 @@ msgstr "Todos los grupos"
 
 #: app/views/monitoring.host.dashboard.view.php:120 include/html.inc.php:305
 msgid "All hosts"
-msgstr "Todos los hosts"
+msgstr "Todos los equipos"
 
 #: jsLoader.php:284
 msgid "All links should have \"Name\" and \"URL\" specified"
@@ -1275,12 +1285,12 @@ msgstr "Cantidad de memoria física del anfitrión consumida para respaldar las 
 #: include/classes/api/services/CItemGeneral.php:1544
 #, c-format
 msgid "An LLD rule with key \"%1$s\" already exists on the host \"%2$s\"."
-msgstr "Ya existe una regla LLD con una clave \"%1$s\" en el host \"%2$s\"."
+msgstr "Ya existe una regla LLD con una clave \"%1$s\" en el equipo \"%2$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:1543
 #, c-format
 msgid "An LLD rule with key \"%1$s\" already exists on the template \"%2$s\"."
-msgstr "Ya existe una regla LLD con la clave \"%1$s\" en el template \"%2$s\"."
+msgstr "Ya existe una regla LLD con la clave \"%1$s\" en la plantilla \"%2$s\"."
 
 #: include/classes/api/services/CItemGeneral.php:1538
 #, c-format
@@ -1497,7 +1507,7 @@ msgstr "Debe comprobarse al menos un elemento de la interfaz de usuario."
 #: include/classes/api/services/CRole.php:487
 #, c-format
 msgid "At least one UI element must be enabled for user role \"%1$s\"."
-msgstr "Debe ser un activado al menos un elemento de la interfaz de usuario para el rol de usuario \"%1$s\"."
+msgstr "Debe ser activado al menos un elemento de la interfaz de usuario para el rol de usuario \"%1$s\"."
 
 #: app/controllers/CControllerPopupLldOperation.php:122
 msgid "At least one action is mandatory."
@@ -2183,8 +2193,8 @@ msgstr "No se pudo agregar el tipo de medios"
 #, c-format
 msgid "Cannot add module: %1$s."
 msgid_plural "Cannot add modules: %1$s."
-msgstr[0] "No se pueden añadir el módulo: %1$s."
-msgstr[1] "No se pueden añadir el módulos: %1$s."
+msgstr[0] "No se puede añadir el módulo: %1$s."
+msgstr[1] "No se pueden añadir los módulos: %1$s."
 
 #: include/classes/api/services/CGraph.php:40
 #, c-format
@@ -2343,14 +2353,14 @@ msgstr "No se pueden convertir datos POST:"
 #: graphs.php:390
 msgid "Cannot copy graph"
 msgid_plural "Cannot copy graphs"
-msgstr[0] "No se pudieron copiar la gráfica"
+msgstr[0] "No se pudo copiar la gráfica"
 msgstr[1] "No se pudieron copiar las gráficas"
 
 #: items.php:965
 msgid "Cannot copy item"
 msgid_plural "Cannot copy items"
 msgstr[0] "No se pudo copiar la métrica"
-msgstr[1] "No se pudo copiar las métricas"
+msgstr[1] "No se pudieron copiar las métricas"
 
 #: include/classes/api/services/CDiscoveryRule.php:2475
 #, c-format
@@ -2395,7 +2405,7 @@ msgstr "No se pudo crear otra conexión a la base de datos."
 #: include/classes/api/services/CTrigger.php:1013
 #: include/classes/api/services/CTriggerPrototype.php:819
 msgid "Cannot create circular dependencies."
-msgstr "No se pudo crear las dependencias de circular."
+msgstr "No se pueden crear dependencias circulares."
 
 #: app/controllers/CControllerConnectorCreate.php:89
 #: app/controllers/CControllerConnectorCreate.php:164
@@ -2482,13 +2492,13 @@ msgstr "No se puede eliminar el rol de usuario asignado \"%1$s\"."
 msgid "Cannot delete connector"
 msgid_plural "Cannot delete connectors"
 msgstr[0] "No se puede borrar el conector"
-msgstr[1] "No se puede borrar los conectores"
+msgstr[1] "No se pueden borrar los conectores"
 
 #: app/controllers/CControllerCorrelationDelete.php:68
 msgid "Cannot delete correlation"
 msgid_plural "Cannot delete correlations"
-msgstr[0] "No se pudo borrar la correlación"
-msgstr[1] "No se pudo borrar la correlación"
+msgstr[0] "No se puede borrar la correlación"
+msgstr[1] "No se pueden borrar las correlaciones"
 
 #: app/controllers/CControllerDashboardDelete.php:63
 #: app/controllers/CControllerTemplateDashboardDelete.php:61
@@ -2546,8 +2556,8 @@ msgstr "No se pudo eliminar el equipo"
 #, c-format
 msgid "Cannot delete host %1$s because maintenance \"%2$s\" must contain at least one host or host group."
 msgid_plural "Cannot delete hosts %1$s because maintenance \"%2$s\" must contain at least one host or host group."
-msgstr[0] "No se puede eliminar el host %1$s porque el mantenimiento \"%2$s\" debe contener al menos un host o grupo de hosts."
-msgstr[1] "No se puede eliminar el host %1$s porque el mantenimiento \"%2$s\" debe contener al menos un host o grupo de hosts."
+msgstr[0] "No se puede eliminar el equipo %1$s porque el mantenimiento \"%2$s\" debe contener al menos un equipo o grupo de equipos."
+msgstr[1] "No se pueden eliminar los equipos %1$s porque el mantenimiento \"%2$s\" debe contener al menos un equipo o grupo de equipos."
 
 #: app/controllers/CControllerHostGroupDelete.php:75
 msgid "Cannot delete host group"
@@ -6722,7 +6732,7 @@ msgstr "Descartar valor"
 #: include/views/configuration.trigger.prototype.edit.php:549
 #: include/views/configuration.trigger.prototype.list.php:68
 msgid "Discover"
-msgstr "Descubrimiento"
+msgstr "Descubrir"
 
 #: app/partials/configuration.filter.items.php:207
 #: include/discovery.inc.php:138 include/forms.inc.php:374
@@ -8871,7 +8881,7 @@ msgstr "Hardware"
 
 #: include/hosts.inc.php:169
 msgid "Hardware (Full details)"
-msgstr "Hardware (detallado)"
+msgstr "Hardware (Todos los detalles)"
 
 #: include/classes/data/CItemData.php:1010
 msgid "Hardware sensor reading. Returns float"
@@ -12132,7 +12142,7 @@ msgstr "Gráfico de la última semana"
 #: include/views/inventory.host.view.php:145
 #: include/views/inventory.host.view.php:151 jsLoader.php:375
 msgid "Latest data"
-msgstr "Última fecha"
+msgstr "Últimos datos"
 
 #: jsLoader.php:376
 msgid "Latest values"
@@ -12878,7 +12888,7 @@ msgstr "Período máximo de visualización del historial"
 
 #: app/views/administration.gui.edit.php:99
 msgid "Max number of columns and rows in overview tables"
-msgstr "Número máximo de columnas y filas en tablas de descripción general"
+msgstr "Número máximo de columnas y filas en tablas de vista general"
 
 #: app/views/administration.gui.edit.php:138
 msgid "Max period for time selector"
@@ -14516,6 +14526,11 @@ msgstr "No hay métricas heredadas"
 msgid "Not supported"
 msgstr "No soportado"
 
+#: app/views/administration.miscconfig.edit.php:138
+#, c-format
+msgid "Note that %1$s or %2$s will be regarded as hostnames if used without single quotes."
+msgstr "Tenga en cuenta que %1$s o %2$s se considerarán nombres de equipo si se usan sin comillas simples."
+
 #: include/hosts.inc.php:229
 msgid "Notes"
 msgstr "Notas"
@@ -15982,31 +15997,31 @@ msgstr "Año anterior"
 
 #: include/hosts.inc.php:399
 msgid "Primary POC cell"
-msgstr "Celda POC primaria"
+msgstr "Celular de la PdC principal"
 
 #: include/hosts.inc.php:384
 msgid "Primary POC email"
-msgstr "Correo electrónico de POC principal"
+msgstr "Correo electrónico de la PdC principal"
 
 #: include/hosts.inc.php:379
 msgid "Primary POC name"
-msgstr "Nombre de POC principal"
+msgstr "Nombre de la PdC principal"
 
 #: include/hosts.inc.php:409
 msgid "Primary POC notes"
-msgstr "Notas de POC principal"
+msgstr "Notas de la PdC principal"
 
 #: include/hosts.inc.php:389
 msgid "Primary POC phone A"
-msgstr "Teléfono A de POC principal"
+msgstr "Teléfono A de la PdC principal"
 
 #: include/hosts.inc.php:394
 msgid "Primary POC phone B"
-msgstr "Teléfono B de POC principal"
+msgstr "Teléfono B de la PdC principal"
 
 #: include/hosts.inc.php:404
 msgid "Primary POC screen name"
-msgstr "Nombre de pantalla de POC principal"
+msgstr "Nombre de usuario de la PdC principal"
 
 #: app/partials/configuration.host.interface.row.php:179
 #: app/views/popup.discovery.check.php:117
@@ -16368,7 +16383,7 @@ msgstr "Detalles de la cola"
 #: app/views/administration.queue.overview.proxy.php:33
 #: include/classes/helpers/CMenuHelper.php:318
 msgid "Queue overview"
-msgstr "Descripción general de la cola"
+msgstr "Vista general de la cola"
 
 #: app/views/administration.queue.details.php:36
 #: app/views/administration.queue.overview.php:36
@@ -16376,7 +16391,7 @@ msgstr "Descripción general de la cola"
 #: app/views/administration.queue.overview.proxy.php:36
 #: include/classes/helpers/CMenuHelper.php:320
 msgid "Queue overview by proxy"
-msgstr "Descripción general por proxy"
+msgstr "Vista general por proxy"
 
 #: app/views/hintbox.eventlist.php:100
 #: app/views/monitoring.widget.problems.view.php:93
@@ -17213,7 +17228,7 @@ msgstr "Revertir cambios"
 #: include/views/js/monitoring.sysmaps.js.php:685
 #: include/views/monitoring.sysmap.edit.php:252
 msgid "Right"
-msgstr "Derecho"
+msgstr "Derecha"
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:184
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:197
@@ -17818,31 +17833,31 @@ msgstr "Ventana de desviación de temporada"
 
 #: include/hosts.inc.php:434
 msgid "Secondary POC cell"
-msgstr "Celda POC secundaria"
+msgstr "Celular de la PdC secundaria"
 
 #: include/hosts.inc.php:419
 msgid "Secondary POC email"
-msgstr "Correo electrónico POC secundario"
+msgstr "Correo electrónico de la PdC secundaria"
 
 #: include/hosts.inc.php:414
 msgid "Secondary POC name"
-msgstr "Nombre de POC secundario"
+msgstr "Nombre de la PdC secundaria"
 
 #: include/hosts.inc.php:444
 msgid "Secondary POC notes"
-msgstr "Notas POC secundarias"
+msgstr "Notas de la PdC secundaria"
 
 #: include/hosts.inc.php:424
 msgid "Secondary POC phone A"
-msgstr "Teléfono A de POC secundario"
+msgstr "Teléfono A de la PdC secundaria"
 
 #: include/hosts.inc.php:429
 msgid "Secondary POC phone B"
-msgstr "Teléfono B de POC secundario"
+msgstr "Teléfono B de la PdC secundaria"
 
 #: include/hosts.inc.php:439
 msgid "Secondary POC screen name"
-msgstr "Nombre de pantalla de POC secundario"
+msgstr "Nombre de usuario de la PdC secundaria"
 
 #: include/classes/widgets/forms/CWidgetFormClock.php:173
 msgid "Seconds"
@@ -20100,7 +20115,7 @@ msgstr "Tendencias"
 #: include/views/js/monitoring.sysmaps.js.php:815
 #: include/views/reports.toptriggers.php:86 jsLoader.php:267 jsLoader.php:383
 msgid "Trigger"
-msgstr "Iniciadores"
+msgstr "Iniciador"
 
 #: include/classes/api/services/CTriggerGeneral.php:636
 #, c-format
@@ -21105,6 +21120,10 @@ msgstr "Tiempo operativo/Tiempo inoperativo"
 #: app/views/popup.ldap.edit.php:169
 msgid "Use %{ref} in group filter to reference value of this user attribute."
 msgstr "Utilice %{ref} en el filtro de grupo para hacer referencia al valor de este atributo de usuario."
+
+#: app/views/administration.miscconfig.edit.php:123
+msgid "Use X-Frame-Options HTTP header"
+msgstr "Utilice el encabezado HTTP X-Frame-Options"
 
 #: app/partials/configuration.host.interface.row.php:194
 msgid "Use bulk requests"
@@ -22843,6 +22862,10 @@ msgstr "Eje X"
 msgid "X-Frame-Options HTTP header"
 msgstr "Encabezado HTTP X-Frame-Options"
 
+#: app/views/administration.miscconfig.edit.php:125
+msgid "X-Frame-Options HTTP header supported values:"
+msgstr "Valores admitidos del encabezado HTTP X-Frame-Options:"
+
 #: include/views/js/monitoring.sysmaps.js.php:448
 msgid "X1"
 msgstr "X1"
@@ -23178,7 +23201,7 @@ msgstr "Nombre del servidor Zabbix"
 
 #: include/items.inc.php:92
 msgid "Zabbix trapper"
-msgstr "Trapper ZABBIX"
+msgstr "Captura ZABBIX"
 
 #: include/classes/html/CFilter.php:251 include/classes/html/CTabFilter.php:333
 msgid "Zoom out"
@@ -23291,6 +23314,11 @@ msgstr "se esperaba un tiempo relativo"
 #: app/views/administration.authentication.edit.php:86
 msgid "a special character"
 msgstr "un caracter especial"
+
+#: app/views/administration.miscconfig.edit.php:133
+#, c-format
+msgid "a string of space-separated hostnames; adding %1$s to the list allows the page to be displayed in a frame on the same origin as the page itself"
+msgstr "una cadena de nombres de equipo separados por espacios; agregar %1$s a la lista permite que la página se muestre en un marco en el mismo origen que la misma página"
 
 #: include/classes/validators/CApiInputValidator.php:2530
 msgid "a string, number or null value is expected"
@@ -23464,7 +23492,7 @@ msgstr "se esperaba un entero sin signo"
 
 #: app/views/administration.authentication.edit.php:72
 msgid "an uppercase and a lowercase Latin letter"
-msgstr "una letra latina mayúscula y minúscula"
+msgstr "una letra latina mayúscula y una minúscula"
 
 #: app/views/administration.geomaps.edit.php:47
 msgid "and"

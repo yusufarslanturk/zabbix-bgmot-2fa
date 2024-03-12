@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -21,8 +21,9 @@
 require_once dirname(__FILE__) . '/../../include/CWebTest.php';
 
 /**
- * @backup dashboard, profiles
- * @dataSource LoginUsers
+ * @backup dashboard
+ *
+ * @dataSource LoginUsers, AllItemValueTypes, Proxies
  */
 class testPageDashboardWidgets extends CWebTest {
 
@@ -150,10 +151,9 @@ class testPageDashboardWidgets extends CWebTest {
 		// Expected table values.
 		$expected = [
 			'Host group for tag permissions'	=> 1,
-			'Zabbix servers'					=> 17,
-			'ZBX6648 All Triggers'				=> 1,
-			'ZBX6648 Disabled Triggers'			=> 1,
-			'ZBX6648 Enabled Triggers'			=> 1
+			'Zabbix servers'					=> 18,
+			'Inheritance test'					=> 1,
+			'Host group for suppression'		=> 1
 		];
 
 		/*

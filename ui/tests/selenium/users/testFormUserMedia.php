@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -247,7 +247,7 @@ class testFormUserMedia extends CWebTest {
 					'fields' => [
 						'Type' => 'SMS',
 						'Send to' => '192.168.0.1',
-						'When active' => 'allways'
+						'When active' => 'always'
 					],
 					'error_message' => 'Incorrect value for field "period": a time period is expected'
 				]
@@ -410,7 +410,7 @@ class testFormUserMedia extends CWebTest {
 
 		$this->assertEquals('Media type disabled by Administration.', $type_column->query('class:hint-box')->one()->getText());
 
-		// Check that status of disabled media types is not cickable.
+		// Check that status of disabled media types is not clickable.
 		$this->assertFalse($discord_row->getColumn('Status')->query('xpath:.//a')->one(false)->isValid());
 
 		// Check that disabled media types are shown in red color in media configuration form.
@@ -427,7 +427,7 @@ class testFormUserMedia extends CWebTest {
 			$this->assertFalse($type_column->query($selector)->one(false)->isValid());
 		}
 
-		// Check that status of disabled user media is cickable.
+		// Check that status of disabled user media is clickable.
 		$this->assertTrue($email_row->getColumn('Status')->query('button:Disabled')->one()->isValid());
 
 		// Check that disabled media types are not shown if user media with enabled media type is edited.

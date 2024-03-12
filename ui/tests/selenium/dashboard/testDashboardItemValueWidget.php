@@ -1,8 +1,7 @@
 <?php
-
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -22,24 +21,27 @@
 
 require_once dirname(__FILE__).'/../../include/CWebTest.php';
 require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
+require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
+require_once dirname(__FILE__).'/../common/testWidgets.php';
 
 /**
  * @backup dashboard
  *
  * @onBefore prepareDashboardData
  *
- * @dataSource WebScenarios
+ * @dataSource WebScenarios, AllItemValueTypes
  */
-class testDashboardItemValueWidget extends CWebTest {
+class testDashboardItemValueWidget extends testWidgets {
 
 	/**
-	 * Attach MessageBehavior to the test.
+	 * Attach MessageBehavior and TableBehavior to the test.
 	 *
 	 * @return array
 	 */
 	public function getBehaviors() {
 		return [
-			'class' => CMessageBehavior::class
+			'class' => CMessageBehavior::class,
+			CTableBehavior::class
 		];
 	}
 
@@ -209,8 +211,7 @@ class testDashboardItemValueWidget extends CWebTest {
 	}
 
 	/**
-	 * Test to check Item Value Widget.
-	 * Check authentication form fields layout.
+	 * Test of the Item Value widget form fields layout.
 	 */
 	public function testDashboardItemValueWidget_FormLayout() {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.self::$dashboardid)->waitUntilReady();
@@ -336,7 +337,7 @@ class testDashboardItemValueWidget extends CWebTest {
 				}
 
 				// Check fields' lengths.
-				$field_lenghts = [
+				$field_lengths = [
 					'Name' =>  255,
 					'id:description' => 255,
 					'id:desc_size' => 3,
@@ -347,7 +348,7 @@ class testDashboardItemValueWidget extends CWebTest {
 					'id:units_size' => 3
 				];
 
-				foreach ($field_lenghts as $field => $length) {
+				foreach ($field_lengths as $field => $length) {
 					$this->assertEquals($length, $form->getField($field)->getAttribute('maxlength'));
 				}
 
@@ -1150,7 +1151,7 @@ class testDashboardItemValueWidget extends CWebTest {
 			$values = $form->getFields()->asValues();
 		}
 		else {
-			$form->fill(['Type' => 'Item value']);
+			$form->fill(['Type' => CFormElement::RELOADABLE_FILL('Item value')]);
 		}
 
 		if ($cancel || !$save_dashboard) {
@@ -1342,5 +1343,13 @@ class testDashboardItemValueWidget extends CWebTest {
 			);
 			$index++;
 		}
+	}
+
+	/**
+	 * Test function for assuring that only specific item types are available in Item Value widget.
+	 */
+	public function testDashboardItemValueWidget_CheckAvailableItems() {
+		$url = 'zabbix.php?action=dashboard.view&dashboardid='.self::$dashboardid;
+		$this->checkAvailableItems($url, 'Item value');
 	}
 }

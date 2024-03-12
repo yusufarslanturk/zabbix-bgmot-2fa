@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1157,6 +1157,40 @@ class testFormAdministrationProxies extends CWebTest {
 				[
 					'proxy' => self::CHANGE_PASSIVE_PROXY
 				]
+			],
+			[
+				[
+					'proxy' => 'Active proxy to delete',
+					'encryption_fields' => [
+						'id:tls_accept_none' => true,
+						'id:tls_accept_psk' => true,
+						'id:tls_accept_certificate' => true,
+						'PSK identity' => "~`!@#$%^&*()_+-=”№;:?Х[]{}|\\|//",
+						'PSK' => '41b4d07b27a8efdcc15d4742e03857eba377fe010853a1499b0522df171282cb',
+						'Issuer' => 'test test',
+						'Subject' => 'test test'
+					]
+				]
+			],
+			[
+				[
+					'proxy' => 'Passive proxy 2',
+					'encryption_fields' => [
+						'Connections to proxy' => 'PSK',
+						'PSK identity' => "~`!@#$%^&*()_+-=”№;:?Х[]{}|\\|//",
+						'PSK' => '41b4d07b27a8efdcc15d4742e03857eba377fe010853a1499b0522df171282cb'
+					]
+				]
+			],
+			[
+				[
+					'proxy' => 'Passive proxy 3',
+					'encryption_fields' => [
+						'Connections to proxy' => 'Certificate',
+						'Issuer' => 'test test',
+						'Subject' => 'test test'
+					]
+				]
 			]
 		];
 	}
@@ -1204,7 +1238,7 @@ class testFormAdministrationProxies extends CWebTest {
 		$original_fields = $form->getFields()->asValues();
 
 		// Get original passive proxy interface fields.
-		if (strpos($data['proxy'], 'passive')) {
+		if (str_contains($data['proxy'], 'Passive')) {
 			$original_fields = $this->getInterfaceValues($dialog, $original_fields);
 		}
 
@@ -1216,6 +1250,8 @@ class testFormAdministrationProxies extends CWebTest {
 		$form->fill(['Proxy name' => $new_name]);
 		$form->submit();
 		$this->assertMessage(TEST_GOOD, 'Proxy added');
+		// The next message 'Proxy updated' may not update on time.
+		CMessageElement::find()->one()->close();
 
 		// Check cloned proxy form fields.
 		$this->query('link', $new_name)->one()->waitUntilClickable()->click();
@@ -1225,12 +1261,22 @@ class testFormAdministrationProxies extends CWebTest {
 		$cloned_fields = $form->getFields()->asValues();
 
 		// Get cloned passive proxy interface fields.
-		if (strpos($data['proxy'], 'passive')) {
+		if (str_contains($data['proxy'], 'Passive')) {
 			$cloned_fields = $this->getInterfaceValues($dialog, $cloned_fields);
 		}
 
 		$this->assertEquals($original_fields, $cloned_fields);
-		$dialog->close();
+
+		// Check "Encryption" tabs functionality.
+		if (CTestArrayHelper::get($data, 'encryption_fields')) {
+			$form->selectTab('Encryption');
+			$form->fill($data['encryption_fields']);
+			$form->submit();
+			$this->assertMessage(TEST_GOOD, 'Proxy updated');
+		}
+		else {
+			$dialog->close();
+		}
 	}
 
 	/**
