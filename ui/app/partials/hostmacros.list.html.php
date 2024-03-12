@@ -72,7 +72,7 @@ else {
 				$macro_cell[] = new CVar('macros['.$i.'][allow_revert]', '1');
 			}
 
-			if ($macro['discovery_state'] != CControllerHostMacrosList::DISCOVERY_STATE_MANUAL && $macro['original']) {
+			if ($macro['discovery_state'] != CControllerHostMacrosList::DISCOVERY_STATE_MANUAL) {
 				$macro_cell[] = new CVar('macros['.$i.'][original_value]', $macro['original']['value']);
 				$macro_cell[] = new CVar('macros['.$i.'][original_description]', $macro['original']['description']);
 				$macro_cell[] = new CVar('macros['.$i.'][original_macro_type]', $macro['original']['type']);
