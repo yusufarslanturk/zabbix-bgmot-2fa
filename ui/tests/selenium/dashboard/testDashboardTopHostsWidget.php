@@ -1432,11 +1432,7 @@ class testDashboardTopHostsWidget extends testWidgets  {
 		// Check that tag/column/threshold removed.
 		$this->assertEquals($amount_before - 1, $table->getRows()->count());
 
-		if ($data['table_id'] === 'id:thresholds_table') {
-			COverlayDialogElement::find()->all()->last()->close();
-		}
-
-		COverlayDialogElement::find()->one()->close();
+		COverlayDialogElement::closeAll();
 	}
 
 	/**
@@ -1760,12 +1756,11 @@ class testDashboardTopHostsWidget extends testWidgets  {
 		$dashboard = CDashboardElement::find()->one();
 		$form = $dashboard->edit()->addWidget()->asForm();
 		$form->fill(['Type' => 'Top hosts']);
-		$dialog = COverlayDialogElement::find()->waitUntilReady()->one();
+		COverlayDialogElement::find()->waitUntilReady()->one();
 
 		// Add column.
 		$form->query('id:add')->waitUntilClickable()->one()->click();
-		$column_dialog = COverlayDialogElement::find()->waitUntilReady()->all()->last();
-		$column_form = $column_dialog->asForm();
+		$column_form = COverlayDialogElement::find()->waitUntilReady()->all()->last()->asForm();
 
 		// Check that no warning icon displayed before adding fields.
 		$warnings = array_merge($warnings, [$history_data]);
@@ -1794,8 +1789,7 @@ class testDashboardTopHostsWidget extends testWidgets  {
 			$hint->waitUntilNotPresent();
 		}
 
-		$column_dialog->close();
-		$dialog->close();
+		COverlayDialogElement::closeAll();
 	}
 
 	public static function getCheckTextItemsData() {
