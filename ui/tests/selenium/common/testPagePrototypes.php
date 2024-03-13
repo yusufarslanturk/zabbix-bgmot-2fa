@@ -155,12 +155,14 @@ class testPagePrototypes extends CWebTest {
 				// Check additional popup configuration for item prototype page.
 				$table->getRow(0)->query('xpath:.//button')->one()->click();
 				$popup_menu = CPopupMenuElement::find()->waitUntilPresent()->one();
-				$this->assertEquals(['3A ITEM PROTOTYPE MONITORED DISCOVERED'], $popup_menu->getTitles()->asText());
-				$this->assertEquals(['Create trigger prototype', 'Create dependent item'],
+				$this->assertEquals(['CONFIGURATION'], $popup_menu->getTitles()->asText());
+				$this->assertEquals(['Item prototype', 'Trigger prototypes', 'Create trigger prototype', 'Create dependent item'],
 						$popup_menu->getItems()->asText()
 				);
 
 				$menu_item_statuses = [
+					'Item prototype' => true,
+					'Trigger prototypes' => false,
 					'Create trigger prototype' => true,
 					'Create dependent item' => true
 				];
