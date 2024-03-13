@@ -288,7 +288,6 @@ $form_list
 	)
 	->addRow(_('Operations'),
 		(new CCheckBoxList())
-			->setVertical(true)
 			->setOptions([
 				[
 					'label' => _('Close old events'),
