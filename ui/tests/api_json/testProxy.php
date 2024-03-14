@@ -195,6 +195,14 @@ class testProxy extends CAPITest {
 			'delete_used_in_discovery' => [
 				'host' => 'API test proxy.delete - used in discovery rules',
 				'status' => HOST_STATUS_PROXY_ACTIVE
+			],
+			'filter_tests' => [
+				'host' => 'Filtered proxy',
+				'status' => HOST_STATUS_PROXY_ACTIVE,
+				'proxy_address' => '192.168.15.15',
+				'tls_accept' => HOST_ENCRYPTION_NONE | HOST_ENCRYPTION_PSK | HOST_ENCRYPTION_CERTIFICATE,
+				'tls_psk_identity' => 'Test PSK',
+				'tls_psk' => '9b8eafedfaae00cece62e85d5f4792c7d9c9bcc851b23216a1d300311cc4f7cb'
 			]
 		];
 		$db_proxies = CDataHelper::call('proxy.create', array_values($proxies));

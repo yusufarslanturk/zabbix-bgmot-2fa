@@ -1552,6 +1552,3 @@ INSERT INTO ha_node (name,address,port,status,ha_nodeid) VALUES ('node6','192.16
 INSERT INTO ha_node (name,address,port,status,ha_nodeid) VALUES ('node7','192.168.1.11','10053','2','ckuo7i1nw000f0sajtzv1c6v3');
 INSERT INTO ha_node (name,address,port,status,ha_nodeid) VALUES ('z-node','192.168.1.12','10051','1','ckuo7i1nw000g0sajjsjre7e3');
 INSERT INTO ha_node (name,address,port,status,ha_nodeid) VALUES ('node-active','192.168.1.13','10051','3','ckuo7i1nw000h0sajj3l3hh8u');
-
--- proxy filtering
-INSERT INTO hosts (hostid, host, status, description, proxy_address, tls_accept, tls_psk_identity, tls_psk) VALUES (99007, 'Filtered proxy', 5, '', '192.168.15.15', 7, 'Test PSK', '9b8eafedfaae00cece62e85d5f4792c7d9c9bcc851b23216a1d300311cc4f7cb');
