@@ -67,7 +67,7 @@ class CProxy extends CApiService {
 
 		$api_input_rules = ['type' => API_OBJECT, 'fields' => [
 			'proxyids' =>				['type' => API_IDS, 'flags' => API_ALLOW_NULL | API_NORMALIZE, 'default' => null],
-			'filter' =>					['type' => API_FILTER, 'flags' => API_ALLOW_NULL, 'default' => null, 'fields' => ['host', 'status', 'lastaccess', 'version', 'compatibility']],
+			'filter' =>					['type' => API_FILTER, 'flags' => API_ALLOW_NULL, 'default' => null, 'fields' => ['proxyid', 'host', 'status', 'lastaccess', 'tls_connect', 'tls_accept', 'tls_issuer', 'tls_subject', 'proxy_address', 'auto_compress', 'version', 'compatibility']],
 			'search' =>					['type' => API_FILTER, 'flags' => API_ALLOW_NULL, 'default' => null, 'fields' => ['host', 'description']],
 			'searchByAny' =>			['type' => API_BOOLEAN, 'default' => false],
 			'startSearch' =>			['type' => API_FLAG, 'default' => false],
@@ -126,6 +126,9 @@ class CProxy extends CApiService {
 		// filter
 		if ($options['filter'] === null) {
 			$options['filter'] = [];
+		}
+		else {
+			$options['filter'] = CArrayHelper::renameKeys($options['filter'], ['proxyid' => 'hostid']);
 		}
 
 		$this->dbFilter('hosts h', $options, $sql_parts);
