@@ -1627,7 +1627,7 @@ class testProxy extends CAPITest {
 					['host' => 'Filtered proxy']
 				],
 				'expected_error' => null
-			],
+			]
 		];
 	}
 
