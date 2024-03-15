@@ -7038,13 +7038,13 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 	zbx_dbsync_init(&gmacro_sync, mode);
 	zbx_dbsync_init(&hmacro_sync, mode);
 	zbx_dbsync_init(&if_sync, mode);
-	zbx_dbsync_init(&items_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&items_sync, changelog_sync_mode);
 	zbx_dbsync_init(&template_items_sync, mode);
 	zbx_dbsync_init(&prototype_items_sync, mode);
 	zbx_dbsync_init(&item_discovery_sync, mode);
-	zbx_dbsync_init(&triggers_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&triggers_sync, changelog_sync_mode);
 	zbx_dbsync_init(&tdep_sync, mode);
-	zbx_dbsync_init(&func_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&func_sync, changelog_sync_mode);
 	zbx_dbsync_init(&expr_sync, mode);
 	zbx_dbsync_init(&action_sync, mode);
 
@@ -7054,15 +7054,15 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 	zbx_dbsync_init(&action_op_sync, ZBX_DBSYNC_UPDATE);
 
 	zbx_dbsync_init(&action_condition_sync, mode);
-	zbx_dbsync_init(&trigger_tag_sync, changelog_sync_mode);
-	zbx_dbsync_init(&item_tag_sync, changelog_sync_mode);
-	zbx_dbsync_init(&host_tag_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&trigger_tag_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&item_tag_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&host_tag_sync, changelog_sync_mode);
 	zbx_dbsync_init(&correlation_sync, mode);
 	zbx_dbsync_init(&corr_condition_sync, mode);
 	zbx_dbsync_init(&corr_operation_sync, mode);
 	zbx_dbsync_init(&hgroups_sync, mode);
 	zbx_dbsync_init(&hgroup_host_sync, mode);
-	zbx_dbsync_init(&itempp_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&itempp_sync, changelog_sync_mode);
 	zbx_dbsync_init(&itemscrp_sync, mode);
 
 	zbx_dbsync_init(&maintenance_sync, mode);
@@ -7071,16 +7071,16 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 	zbx_dbsync_init(&maintenance_group_sync, mode);
 	zbx_dbsync_init(&maintenance_host_sync, mode);
 
-	zbx_dbsync_init(&drules_sync, changelog_sync_mode);
-	zbx_dbsync_init(&dchecks_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&drules_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&dchecks_sync, changelog_sync_mode);
 
-	zbx_dbsync_init(&httptest_sync, changelog_sync_mode);
-	zbx_dbsync_init(&httptest_field_sync, changelog_sync_mode);
-	zbx_dbsync_init(&httpstep_sync, changelog_sync_mode);
-	zbx_dbsync_init(&httpstep_field_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&httptest_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&httptest_field_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&httpstep_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&httpstep_field_sync, changelog_sync_mode);
 
-	zbx_dbsync_init(&connector_sync, changelog_sync_mode);
-	zbx_dbsync_init(&connector_tag_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&connector_sync, changelog_sync_mode);
+	zbx_dbsync_init_changelog(&connector_tag_sync, changelog_sync_mode);
 
 #ifdef HAVE_ORACLE
 	/* With Oracle fetch statements can fail before all data has been fetched. */
@@ -7865,9 +7865,16 @@ out:
 	{
 		case ZBX_DB_OK:
 			if (ZBX_DBSYNC_INIT != changelog_sync_mode)
+			{
 				zbx_dbsync_env_flush_changelog();
+			}
 			else
-				sync_status = ZBX_DBSYNC_STATUS_INITIALIZED;
+			{
+				/* set changelog initialized only if database records were synced and */
+				/* next time differential sync must be used                           */
+				if (SUCCEED == zbx_dbsync_env_changelog_dbsyncs_new_records())
+					sync_status = ZBX_DBSYNC_STATUS_INITIALIZED;
+			}
 			break;
 		case ZBX_DB_FAIL:
 			/* non recoverable database error is encountered */
