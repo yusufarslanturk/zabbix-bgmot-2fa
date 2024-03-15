@@ -618,10 +618,10 @@ int	zbx_dbsync_env_changelog_dbsyncs_new_records(void)
 		zbx_dbsync_t	*sync = dbsync_env.changelog_dbsyncs.values[i];
 
 		if (0 != sync->add_num)
-			return FAIL;
+			return SUCCEED;
 	}
 
-	return SUCCEED;
+	return FAIL;
 }
 
 /******************************************************************************

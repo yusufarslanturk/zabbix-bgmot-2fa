@@ -7040,7 +7040,7 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 	zbx_dbsync_init(&if_sync, mode);
 	zbx_dbsync_init_changelog(&items_sync, changelog_sync_mode);
 	zbx_dbsync_init(&template_items_sync, mode);
-	zbx_dbsync_init(&prototype_items_sync, mode);
+	zbx_dbsync_init_changelog(&prototype_items_sync, changelog_sync_mode);
 	zbx_dbsync_init(&item_discovery_sync, mode);
 	zbx_dbsync_init_changelog(&triggers_sync, changelog_sync_mode);
 	zbx_dbsync_init(&tdep_sync, mode);
@@ -7873,7 +7873,16 @@ out:
 				/* set changelog initialized only if database records were synced and */
 				/* next time differential sync must be used                           */
 				if (SUCCEED == zbx_dbsync_env_changelog_dbsyncs_new_records())
+				{
 					sync_status = ZBX_DBSYNC_STATUS_INITIALIZED;
+					zabbix_log(LOG_LEVEL_DEBUG, "initialized changelog support");
+				}
+				else
+				{
+					zabbix_log(LOG_LEVEL_DEBUG, "skipped changelog support initialization"
+							" because of empty database");
+				}
+
 			}
 			break;
 		case ZBX_DB_FAIL:
