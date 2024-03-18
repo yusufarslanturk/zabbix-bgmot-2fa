@@ -2531,9 +2531,9 @@ class CDiscoveryRule extends CItemGeneralOld {
 				}
 
 				$dst_items[] = ['hostid' => $dst_host['hostid'], 'ruleid' => $dst_ruleid] + getSanitizedItemFields([
+					'templateid' => 0,
 					'flags' => ZBX_FLAG_DISCOVERY_PROTOTYPE,
-					'hosts' => [$dst_host],
-					'templateid' => 0
+					'hosts' => [$dst_host]
 				] + $dst_item);
 			}
 

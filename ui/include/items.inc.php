@@ -661,9 +661,9 @@ function copyItemsToHosts(string $src_type, array $src_ids, bool $dst_is_templat
 				}
 
 				$dst_items[] = ['hostid' => $dst_hostid] + getSanitizedItemFields([
+					'templateid' => 0,
 					'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
-					'hosts' => [['status' => $dst_is_template ? HOST_STATUS_TEMPLATE : HOST_STATUS_MONITORED]],
-					'templateid' => 0
+					'hosts' => [['status' => $dst_is_template ? HOST_STATUS_TEMPLATE : HOST_STATUS_MONITORED]]
 				] + $dst_item);
 			}
 		}
