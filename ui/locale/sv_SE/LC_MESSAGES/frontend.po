@@ -2033,6 +2033,18 @@ msgstr ""
 msgid "CRLF"
 msgstr ""
 
+#: tests/selenium/modules/module_number_7/Module.php:17
+msgid "CSRF test"
+msgstr ""
+
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:25
+msgid "CSRF token test"
+msgstr ""
+
+#: tests/selenium/modules/module_number_7/actions/CsrfFormUpdate.php:35
+msgid "CSRF token validation succeeded."
+msgstr ""
+
 #: include/items.inc.php:1828
 msgid "CSV to JSON"
 msgstr ""
@@ -18975,6 +18987,10 @@ msgstr ""
 msgid "Submap"
 msgstr ""
 
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
+msgid "Submit"
+msgstr ""
+
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:168
 msgid "Subscription"
 msgstr ""
@@ -23921,6 +23937,10 @@ msgstr ""
 msgid "degrees() - Converts a value from radians to degrees"
 msgstr ""
 
+#: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
+msgid "delimiter"
+msgstr ""
+
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:35
@@ -24876,6 +24896,10 @@ msgstr ""
 
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:361
 msgid "problem pattern"
+msgstr ""
+
+#: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
+msgid "qualifier"
 msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
