@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1250,6 +1250,8 @@ class testFormAdministrationProxies extends CWebTest {
 		$form->fill(['Proxy name' => $new_name]);
 		$form->submit();
 		$this->assertMessage(TEST_GOOD, 'Proxy added');
+		// The next message 'Proxy updated' may not update on time.
+		CMessageElement::find()->one()->close();
 
 		// Check cloned proxy form fields.
 		$this->query('link', $new_name)->one()->waitUntilClickable()->click();
@@ -1264,7 +1266,6 @@ class testFormAdministrationProxies extends CWebTest {
 		}
 
 		$this->assertEquals($original_fields, $cloned_fields);
-		//$dialog->close();
 
 		// Check "Encryption" tabs functionality.
 		if (CTestArrayHelper::get($data, 'encryption_fields')) {

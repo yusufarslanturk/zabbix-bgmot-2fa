@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -42,6 +42,8 @@
 #undef zbx_db_execute_multiple_query
 #undef zbx_db_begin
 #undef zbx_db_commit
+
+int	__wrap_zbx_db_commit(void);
 
 #define ZBX_MOCK_DB_RESULT_COLUMNS_MAX	128
 

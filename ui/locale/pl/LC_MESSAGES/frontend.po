@@ -215,6 +215,16 @@ msgstr[0] "%1$s z %2$s element jest w stanie problem"
 msgstr[1] "%1$s z %2$s elementów jest w stanie problem"
 msgstr[2] "%1$s z %2$s elementów jest w stanie problem"
 
+#: app/views/administration.miscconfig.edit.php:127
+#, c-format
+msgid "%1$s or %2$s - allows the page to be displayed only in a frame on the same origin as the page itself"
+msgstr ""
+
+#: app/views/administration.miscconfig.edit.php:130
+#, c-format
+msgid "%1$s or %2$s - prevents the page from being displayed in a frame, regardless of the site attempting to do so"
+msgstr ""
+
 #: jsLoader.php:348
 #, c-format
 msgctxt "screen reader"
@@ -2046,6 +2056,18 @@ msgstr "Zużycie procesora w procentach. Zwraca liczę zmiennoprzecinkową"
 #: app/views/popup.itemtestedit.view.php:300
 msgid "CRLF"
 msgstr "CRLF"
+
+#: tests/selenium/modules/module_number_7/Module.php:17
+msgid "CSRF test"
+msgstr ""
+
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:25
+msgid "CSRF token test"
+msgstr ""
+
+#: tests/selenium/modules/module_number_7/actions/CsrfFormUpdate.php:35
+msgid "CSRF token validation succeeded."
+msgstr ""
 
 #: include/items.inc.php:1828
 msgid "CSV to JSON"
@@ -14648,6 +14670,11 @@ msgstr "Elementy niedziedziczone"
 msgid "Not supported"
 msgstr "Niewspierane"
 
+#: app/views/administration.miscconfig.edit.php:138
+#, c-format
+msgid "Note that %1$s or %2$s will be regarded as hostnames if used without single quotes."
+msgstr ""
+
 #: include/hosts.inc.php:229
 msgid "Notes"
 msgstr "Notatki"
@@ -19125,6 +19152,10 @@ msgstr "Temat"
 msgid "Submap"
 msgstr "Podrzędna mapa"
 
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
+msgid "Submit"
+msgstr ""
+
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:168
 msgid "Subscription"
 msgstr "Subskrypcja"
@@ -21257,6 +21288,10 @@ msgstr "Czas dostępności/niedostępności"
 msgid "Use %{ref} in group filter to reference value of this user attribute."
 msgstr "Użyj %{ref} w filtrze grupy, by odnieść się do wartości tego atrybutu użytkownika."
 
+#: app/views/administration.miscconfig.edit.php:123
+msgid "Use X-Frame-Options HTTP header"
+msgstr ""
+
 #: app/partials/configuration.host.interface.row.php:194
 msgid "Use bulk requests"
 msgstr "Użyj żądań zbiorowych"
@@ -23001,6 +23036,10 @@ msgstr "Oś X"
 msgid "X-Frame-Options HTTP header"
 msgstr "Nagłówek HTTP X-Frame-Options"
 
+#: app/views/administration.miscconfig.edit.php:125
+msgid "X-Frame-Options HTTP header supported values:"
+msgstr ""
+
 #: include/views/js/monitoring.sysmaps.js.php:448
 msgid "X1"
 msgstr "X1"
@@ -23449,6 +23488,11 @@ msgstr "spodziewano się względnego czasu"
 #: app/views/administration.authentication.edit.php:86
 msgid "a special character"
 msgstr "znak specjalny"
+
+#: app/views/administration.miscconfig.edit.php:133
+#, c-format
+msgid "a string of space-separated hostnames; adding %1$s to the list allows the page to be displayed in a frame on the same origin as the page itself"
+msgstr ""
 
 #: include/classes/validators/CApiInputValidator.php:2530
 msgid "a string, number or null value is expected"
@@ -24078,6 +24122,10 @@ msgstr "domyślny"
 #: app/controllers/CControllerPopupTriggerExpr.php:591
 msgid "degrees() - Converts a value from radians to degrees"
 msgstr "degrees() - Konwertuje wartość z radianów na stopnie"
+
+#: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
+msgid "delimiter"
+msgstr ""
 
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
@@ -25035,6 +25083,10 @@ msgstr "power() - Podnosi wartość do potęgi zgodnie z podanym wykładnikiem"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:361
 msgid "problem pattern"
 msgstr "wzorzec problemu"
+
+#: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
+msgid "qualifier"
+msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
 msgid "radians() - Converts a value from degrees to radians"

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -94,6 +94,7 @@ require_once dirname(__FILE__).'/graphs/testGraphAxis.php';
 require_once dirname(__FILE__).'/graphs/testInheritanceGraph.php';
 require_once dirname(__FILE__).'/graphs/testInheritanceGraphPrototype.php';
 require_once dirname(__FILE__).'/graphs/testPageGraphPrototypes.php';
+require_once dirname(__FILE__).'/graphs/testPageGraphPrototypesTemplate.php';
 require_once dirname(__FILE__).'/graphs/testPageHostGraph.php';
 require_once dirname(__FILE__).'/graphs/testPageMonitoringHostsGraph.php';
 
@@ -115,6 +116,7 @@ require_once dirname(__FILE__).'/hosts/testFormHostLinkTemplates.php';
 require_once dirname(__FILE__).'/hosts/testFormHostPrototype.php';
 require_once dirname(__FILE__).'/hosts/testPageHostInterfaces.php';
 require_once dirname(__FILE__).'/hosts/testPageHostPrototypes.php';
+require_once dirname(__FILE__).'/hosts/testPageHostPrototypesTemplate.php';
 require_once dirname(__FILE__).'/hosts/testPageHosts.php';
 require_once dirname(__FILE__).'/hosts/testPageMonitoringHosts.php';
 
@@ -130,6 +132,7 @@ require_once dirname(__FILE__).'/items/testInheritanceItem.php';
 require_once dirname(__FILE__).'/items/testInheritanceItemPrototype.php';
 require_once dirname(__FILE__).'/items/testItemTypeSelection.php';
 require_once dirname(__FILE__).'/items/testPageItemPrototypes.php';
+require_once dirname(__FILE__).'/items/testPageItemPrototypesTemplate.php';
 require_once dirname(__FILE__).'/items/testPageItems.php';
 
 // LLD.
@@ -237,8 +240,8 @@ require_once dirname(__FILE__).'/templates/testFormTemplate.php';
 require_once dirname(__FILE__).'/templates/testPageTemplates.php';
 
 // Trigger dependence
-require_once dirname(__FILE__).'/triggerDependencies/testHostTriggerDependencies.php';
-require_once dirname(__FILE__).'/triggerDependencies/testTemplateTriggerDependencies.php';
+require_once dirname(__FILE__).'/triggers/testHostTriggerDependencies.php';
+require_once dirname(__FILE__).'/triggers/testTemplateTriggerDependencies.php';
 
 // Users.
 require_once dirname(__FILE__).'/users/testFormUser.php';
@@ -265,7 +268,8 @@ require_once dirname(__FILE__).'/testPageHistory.php';
 require_once dirname(__FILE__).'/testPageInventory.php';
 require_once dirname(__FILE__).'/testPageTriggers.php';
 require_once dirname(__FILE__).'/testPageTriggerUrl.php';
-require_once dirname(__FILE__).'/testPageTriggerPrototypes.php';
+require_once dirname(__FILE__).'/triggers/testPageTriggerPrototypes.php';
+require_once dirname(__FILE__).'/triggers/testPageTriggerPrototypesTemplate.php';
 require_once dirname(__FILE__).'/testPageMaps.php';
 require_once dirname(__FILE__).'/testPageMassUpdateItems.php';
 require_once dirname(__FILE__).'/testPageMassUpdateItemPrototypes.php';
@@ -310,7 +314,6 @@ require_once dirname(__FILE__).'/testTimezone.php';
 require_once dirname(__FILE__).'/testTriggerExpressions.php';
 require_once dirname(__FILE__).'/testSidebarMenu.php';
 require_once dirname(__FILE__).'/testUrlParameters.php';
-require_once dirname(__FILE__).'/testZBX6648.php';
 require_once dirname(__FILE__).'/testZBX6663.php';
 
 use PHPUnit\Framework\TestSuite;
@@ -394,6 +397,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testInheritanceGraph');
 		$suite->addTestSuite('testInheritanceGraphPrototype');
 		$suite->addTestSuite('testPageGraphPrototypes');
+		$suite->addTestSuite('testPageGraphPrototypesTemplate');
 		$suite->addTestSuite('testPageHostGraph');
 		$suite->addTestSuite('testPageMonitoringHostsGraph');
 
@@ -415,6 +419,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testFormHostPrototype');
 		$suite->addTestSuite('testPageHostInterfaces');
 		$suite->addTestSuite('testPageHostPrototypes');
+		$suite->addTestSuite('testPageHostPrototypesTemplate');
 		$suite->addTestSuite('testPageHosts');
 		$suite->addTestSuite('testPageMonitoringHosts');
 
@@ -430,6 +435,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testInheritanceItemPrototype');
 		$suite->addTestSuite('testItemTypeSelection');
 		$suite->addTestSuite('testPageItemPrototypes');
+		$suite->addTestSuite('testPageItemPrototypesTemplate');
 		$suite->addTestSuite('testPageItems');
 
 		// LLD.
@@ -557,6 +563,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testPageTriggerDescription');
 		$suite->addTestSuite('testPageTriggerUrl');
 		$suite->addTestSuite('testPageTriggerPrototypes');
+		$suite->addTestSuite('testPageTriggerPrototypesTemplate');
 		$suite->addTestSuite('testPageMaintenance');
 		$suite->addTestSuite('testPageMaps');
 		$suite->addTestSuite('testPageMassUpdateItems');
@@ -602,7 +609,6 @@ class SeleniumTests {
 		$suite->addTestSuite('testTriggerExpressions');
 		$suite->addTestSuite('testSidebarMenu');
 		$suite->addTestSuite('testUrlParameters');
-		$suite->addTestSuite('testZBX6648');
 		$suite->addTestSuite('testZBX6663');
 
 		return $suite;

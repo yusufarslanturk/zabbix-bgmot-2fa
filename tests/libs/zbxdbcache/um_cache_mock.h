@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -72,6 +72,7 @@ void	um_mock_config_init(void);
 void	um_mock_config_destroy(void);
 
 void	um_mock_cache_init(zbx_um_mock_cache_t *cache, zbx_mock_handle_t handle);
+char	*um_mock_format_macro(const char *name, const char *context);
 void	um_mock_cache_init_from_config(zbx_um_mock_cache_t *cache, zbx_um_cache_t *cfg);
 void	um_mock_cache_clear(zbx_um_mock_cache_t *cache);
 void	um_mock_cache_dump(zbx_um_mock_cache_t *cache);

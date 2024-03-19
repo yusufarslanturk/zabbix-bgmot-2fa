@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -35,6 +35,12 @@ ZBX_PTR_VECTOR_IMPL(um_mock_host, zbx_um_mock_host_t *)
 
 ZBX_PTR_VECTOR_IMPL(um_mock_kv, zbx_um_mock_kv_t *)
 ZBX_PTR_VECTOR_IMPL(um_mock_kvset, zbx_um_mock_kvset_t *)
+
+void	*__wrap___zbx_shmem_malloc(const char *file, int line, zbx_shmem_info_t *info, const void *old, size_t size);
+
+void	*__wrap___zbx_shmem_realloc(const char *file, int line, zbx_shmem_info_t *info, void *old, size_t size);
+
+void	__wrap___zbx_shmem_free(const char *file, int line, zbx_shmem_info_t *info, void *ptr);
 
 static void	um_mock_macro_free(zbx_um_mock_macro_t *macro)
 {

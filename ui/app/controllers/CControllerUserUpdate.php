@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -36,9 +36,9 @@ class CControllerUserUpdate extends CControllerUserUpdateGeneral {
 			'name' =>				'db users.name',
 			'surname' =>			'db users.surname',
 			'user_groups' =>		'array_id',
-			'current_password' =>	'password',
-			'password1' =>			'password',
-			'password2' =>			'password',
+			'current_password' =>	'string',
+			'password1' =>			'string',
+			'password2' =>			'string',
 			'medias' =>				'array',
 			'lang' =>				'db users.lang|in '.implode(',', $locales),
 			'timezone' =>			'db users.timezone|in '.implode(',', $this->timezones),

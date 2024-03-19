@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-11-23 14:26+0000\n"
-"Last-Translator: Lidija <lidija.marsova@zabbix.com>\n"
+"PO-Revision-Date: 2024-01-12 04:01+0000\n"
+"Last-Translator: Alexey <alexey.pustovalov@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -214,6 +214,16 @@ msgid_plural "%1$s of %2$s elements in problem state"
 msgstr[0] "%1$s из %2$s элемента в состоянии проблемы"
 msgstr[1] "%1$s из %2$s элементов в состоянии проблемы"
 msgstr[2] "%1$s из %2$s элементов в состоянии проблемы"
+
+#: app/views/administration.miscconfig.edit.php:127
+#, c-format
+msgid "%1$s or %2$s - allows the page to be displayed only in a frame on the same origin as the page itself"
+msgstr ""
+
+#: app/views/administration.miscconfig.edit.php:130
+#, c-format
+msgid "%1$s or %2$s - prevents the page from being displayed in a frame, regardless of the site attempting to do so"
+msgstr ""
 
 #: jsLoader.php:348
 #, c-format
@@ -1521,7 +1531,7 @@ msgstr "Необходимо выбрать по крайней мере оди�
 #: include/classes/api/services/CRole.php:487
 #, c-format
 msgid "At least one UI element must be enabled for user role \"%1$s\"."
-msgstr "По крайней мере один UI элемент должен быть включен для роли пользователей \"%1$s\"."
+msgstr "По крайней мере один UI элемент должен быть активирован для роли пользователя \"%1$s\"."
 
 #: app/controllers/CControllerPopupLldOperation.php:122
 msgid "At least one action is mandatory."
@@ -1953,7 +1963,7 @@ msgstr "По нижнему краю"
 
 #: include/classes/widgets/forms/CWidgetFormTopHosts.php:133
 msgid "Bottom N"
-msgstr "По нижнему краю"
+msgstr "Последние N"
 
 #: jsLoader.php:276
 msgid "Bring forward"
@@ -2046,6 +2056,18 @@ msgstr "Утилизация CPU в процентах. Возвращает ч�
 #: app/views/popup.itemtestedit.view.php:300
 msgid "CRLF"
 msgstr "CRLF"
+
+#: tests/selenium/modules/module_number_7/Module.php:17
+msgid "CSRF test"
+msgstr ""
+
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:25
+msgid "CSRF token test"
+msgstr ""
+
+#: tests/selenium/modules/module_number_7/actions/CsrfFormUpdate.php:35
+msgid "CSRF token validation succeeded."
+msgstr ""
 
 #: include/items.inc.php:1828
 msgid "CSV to JSON"
@@ -2463,7 +2485,7 @@ msgstr "Не удалось создать регулярный отчет"
 #: app/controllers/CControllerServiceCreate.php:96
 #: app/controllers/CControllerServiceCreate.php:184
 msgid "Cannot create service"
-msgstr "Не удалось создать сервис"
+msgstr "Не удалось создать услугу"
 
 #: include/classes/api/services/CService.php:2373
 #: include/classes/api/services/CService.php:2397
@@ -3000,9 +3022,9 @@ msgstr[2] "Не удалось активировать способы опов�
 #: app/controllers/CControllerModuleUpdate.php:141
 msgid "Cannot enable module"
 msgid_plural "Cannot enable modules"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Не удалось активировать модуль"
+msgstr[1] "Не удалось активировать модули"
+msgstr[2] "Не удалось активировать модули"
 
 #: app/controllers/CControllerModuleUpdate.php:160
 #, c-format
@@ -11826,11 +11848,11 @@ msgstr "Элемент данных не обновлен. Пожалуйста,
 
 #: include/items.inc.php:2089
 msgid "Item will not be refreshed. Specified update interval requires having at least one either flexible or scheduling interval."
-msgstr "Элемент данных не будет обновляться. Заданное значение интервала обновления требует по крайней мере одного из интервалов гибкого или по расписанию."
+msgstr "Элемент данных не будет обновляться. Заданное значение интервала обновления требует по крайней мере одного из интервалов - переменного или по расписанию."
 
 #: include/items.inc.php:2094
 msgid "Item will not be refreshed. Update interval should be between 1s and 1d. Also Scheduled/Flexible intervals can be used."
-msgstr "Элемент данных не будет обновляться. Интервал обновления должен быть между 1s и 1d. Также можно использовать интервалы по расписанию/гибкие."
+msgstr "Элемент данных не будет обновляться. Интервал обновления должен быть между 1s и 1d. Также можно использовать интервалы по расписанию/переменные."
 
 #: include/classes/api/services/CDashboardGeneral.php:447
 #: include/classes/api/services/CDashboardGeneral.php:454
@@ -13421,9 +13443,9 @@ msgstr[2] "Модулей удалено: %1$s."
 #: app/controllers/CControllerModuleUpdate.php:132
 msgid "Module disabled"
 msgid_plural "Modules disabled"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Модуль деактивирован"
+msgstr[1] "Модули деактивированы"
+msgstr[2] "Модули деактивированы"
 
 #: app/controllers/CControllerModuleUpdate.php:150
 #, c-format
@@ -13436,9 +13458,9 @@ msgstr[2] "Модулей деактивировано: %1$s."
 #: app/controllers/CControllerModuleUpdate.php:129
 msgid "Module enabled"
 msgid_plural "Modules enabled"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Модуль активирован"
+msgstr[1] "Модули активированы"
+msgstr[2] "Модули активированы"
 
 #: app/controllers/CControllerModuleUpdate.php:145
 #, c-format
@@ -14647,6 +14669,11 @@ msgstr "Без унаследованных элементов данных"
 #: include/views/configuration.host.discovery.list.php:162
 msgid "Not supported"
 msgstr "Не поддерживается"
+
+#: app/views/administration.miscconfig.edit.php:138
+#, c-format
+msgid "Note that %1$s or %2$s will be regarded as hostnames if used without single quotes."
+msgstr ""
 
 #: include/hosts.inc.php:229
 msgid "Notes"
@@ -19125,6 +19152,10 @@ msgstr "Субъект"
 msgid "Submap"
 msgstr "Подкарта"
 
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
+msgid "Submit"
+msgstr ""
+
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:168
 msgid "Subscription"
 msgstr "Подписка"
@@ -20126,7 +20157,7 @@ msgstr "По верхнему краю"
 
 #: include/classes/widgets/forms/CWidgetFormTopHosts.php:132
 msgid "Top N"
-msgstr "Топ N"
+msgstr "Первые N"
 
 #: include/classes/widgets/CWidgetConfig.php:75
 msgid "Top hosts"
@@ -21256,6 +21287,10 @@ msgstr "Доступен/Недоступен"
 #: app/views/popup.ldap.edit.php:169
 msgid "Use %{ref} in group filter to reference value of this user attribute."
 msgstr "Используйте %{ref} в фильтре группы для ссылки на значение этого пользовательского атрибута."
+
+#: app/views/administration.miscconfig.edit.php:123
+msgid "Use X-Frame-Options HTTP header"
+msgstr ""
 
 #: app/partials/configuration.host.interface.row.php:194
 msgid "Use bulk requests"
@@ -23001,6 +23036,10 @@ msgstr "Ось X"
 msgid "X-Frame-Options HTTP header"
 msgstr "HTTP заголовок X-Frame-Options"
 
+#: app/views/administration.miscconfig.edit.php:125
+msgid "X-Frame-Options HTTP header supported values:"
+msgstr ""
+
 #: include/views/js/monitoring.sysmaps.js.php:448
 msgid "X1"
 msgstr "X1"
@@ -23449,6 +23488,11 @@ msgstr "ожидается относительное время"
 #: app/views/administration.authentication.edit.php:86
 msgid "a special character"
 msgstr "спецсимвол"
+
+#: app/views/administration.miscconfig.edit.php:133
+#, c-format
+msgid "a string of space-separated hostnames; adding %1$s to the list allows the page to be displayed in a frame on the same origin as the page itself"
+msgstr ""
 
 #: include/classes/validators/CApiInputValidator.php:2530
 msgid "a string, number or null value is expected"
@@ -24078,6 +24122,10 @@ msgstr "по умолчанию"
 #: app/controllers/CControllerPopupTriggerExpr.php:591
 msgid "degrees() - Converts a value from radians to degrees"
 msgstr "degrees() - Конвертация значения из радианов в градусы"
+
+#: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
+msgid "delimiter"
+msgstr ""
 
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
@@ -25035,6 +25083,10 @@ msgstr "power() - Степень основного значения к знач
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:361
 msgid "problem pattern"
 msgstr "шаблон проблем"
+
+#: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
+msgid "qualifier"
+msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
 msgid "radians() - Converts a value from degrees to radians"

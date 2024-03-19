@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-11-28 18:04+0000\n"
+"PO-Revision-Date: 2024-01-20 20:37+0000\n"
 "Last-Translator: Vicente Salvador <vicentesalvadorcubedo@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: es\n"
@@ -204,6 +204,16 @@ msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
 msgstr[0] "%1$s elemento de %2$s en estado de problema"
 msgstr[1] "%1$s elementos de %2$s en estado de problema"
+
+#: app/views/administration.miscconfig.edit.php:127
+#, c-format
+msgid "%1$s or %2$s - allows the page to be displayed only in a frame on the same origin as the page itself"
+msgstr "%1$s o %2$s: permite que la página se muestre solo en un marco en el mismo origen que la misma página"
+
+#: app/views/administration.miscconfig.edit.php:130
+#, c-format
+msgid "%1$s or %2$s - prevents the page from being displayed in a frame, regardless of the site attempting to do so"
+msgstr "%1$s o %2$s: evita que la página se muestre en un marco, independientemente del sitio que intente hacerlo"
 
 #: jsLoader.php:348
 #, c-format
@@ -460,20 +470,20 @@ msgstr "Testigo de API añadido"
 #: app/controllers/CControllerTokenDelete.php:67
 msgid "API token deleted"
 msgid_plural "API tokens deleted"
-msgstr[0] "Testigo de API borrado"
-msgstr[1] "Testigos de API borrados"
+msgstr[0] "Token de API borrado"
+msgstr[1] "Tokens de API borrados"
 
 #: app/controllers/CControllerTokenDisable.php:63
 msgid "API token disabled"
 msgid_plural "API tokens disabled"
-msgstr[0] "Testigo de API desactivado"
-msgstr[1] "Testigos de API desactivados"
+msgstr[0] "Token de API desactivado"
+msgstr[1] "Tokens de API desactivados"
 
 #: app/controllers/CControllerTokenEnable.php:63
 msgid "API token enabled"
 msgid_plural "API tokens enabled"
-msgstr[0] "Testigo de API activado"
-msgstr[1] "Testigos de API activados"
+msgstr[0] "Token de API activado"
+msgstr[1] "Tokens de API activados"
 
 #: include/classes/api/clients/CLocalApiClient.php:198
 msgid "API token expired."
@@ -494,7 +504,7 @@ msgstr "Testigo de API actualizado"
 #: include/classes/helpers/CMenuHelper.php:396 include/html.inc.php:820
 #: include/html.inc.php:900
 msgid "API tokens"
-msgstr "Testigos de API"
+msgstr "Tokens de API"
 
 #: include/classes/widgets/forms/CWidgetFormItem.php:251
 msgid "Above value"
@@ -742,7 +752,7 @@ msgstr "Activo"
 
 #: include/hosts.inc.php:497
 msgid "Active checks"
-msgstr "Cheques activos"
+msgstr "Comprobación activa"
 
 #: include/views/configuration.maintenance.edit.php:112
 #: include/views/configuration.maintenance.list.php:91 maintenance.php:44
@@ -2022,6 +2032,18 @@ msgstr "Porcentaje de utilización de CPU. Devuelve un número con coma flotante
 #: app/views/popup.itemtestedit.view.php:300
 msgid "CRLF"
 msgstr "CRLF"
+
+#: tests/selenium/modules/module_number_7/Module.php:17
+msgid "CSRF test"
+msgstr ""
+
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:25
+msgid "CSRF token test"
+msgstr ""
+
+#: tests/selenium/modules/module_number_7/actions/CsrfFormUpdate.php:35
+msgid "CSRF token validation succeeded."
+msgstr ""
 
 #: include/items.inc.php:1828
 msgid "CSV to JSON"
@@ -6722,7 +6744,7 @@ msgstr "Descartar valor"
 #: include/views/configuration.trigger.prototype.edit.php:549
 #: include/views/configuration.trigger.prototype.list.php:68
 msgid "Discover"
-msgstr "Descubrimiento"
+msgstr "Descubrir"
 
 #: app/partials/configuration.filter.items.php:207
 #: include/discovery.inc.php:138 include/forms.inc.php:374
@@ -12878,7 +12900,7 @@ msgstr "Período máximo de visualización del historial"
 
 #: app/views/administration.gui.edit.php:99
 msgid "Max number of columns and rows in overview tables"
-msgstr "Número máximo de columnas y filas en tablas de descripción general"
+msgstr "Número máximo de columnas y filas en tablas de vista general"
 
 #: app/views/administration.gui.edit.php:138
 msgid "Max period for time selector"
@@ -14515,6 +14537,11 @@ msgstr "No hay métricas heredadas"
 #: include/views/configuration.host.discovery.list.php:162
 msgid "Not supported"
 msgstr "No soportado"
+
+#: app/views/administration.miscconfig.edit.php:138
+#, c-format
+msgid "Note that %1$s or %2$s will be regarded as hostnames if used without single quotes."
+msgstr "Tenga en cuenta que %1$s o %2$s se considerarán nombres de equipo si se usan sin comillas simples."
 
 #: include/hosts.inc.php:229
 msgid "Notes"
@@ -16368,7 +16395,7 @@ msgstr "Detalles de la cola"
 #: app/views/administration.queue.overview.proxy.php:33
 #: include/classes/helpers/CMenuHelper.php:318
 msgid "Queue overview"
-msgstr "Descripción general de la cola"
+msgstr "Vista general de la cola"
 
 #: app/views/administration.queue.details.php:36
 #: app/views/administration.queue.overview.php:36
@@ -16376,7 +16403,7 @@ msgstr "Descripción general de la cola"
 #: app/views/administration.queue.overview.proxy.php:36
 #: include/classes/helpers/CMenuHelper.php:320
 msgid "Queue overview by proxy"
-msgstr "Descripción general por proxy"
+msgstr "Vista general por proxy"
 
 #: app/views/hintbox.eventlist.php:100
 #: app/views/monitoring.widget.problems.view.php:93
@@ -18982,6 +19009,10 @@ msgstr "Asunto"
 msgid "Submap"
 msgstr "Submapa"
 
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
+msgid "Submit"
+msgstr ""
+
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:168
 msgid "Subscription"
 msgstr "Suscripción"
@@ -20100,7 +20131,7 @@ msgstr "Tendencias"
 #: include/views/js/monitoring.sysmaps.js.php:815
 #: include/views/reports.toptriggers.php:86 jsLoader.php:267 jsLoader.php:383
 msgid "Trigger"
-msgstr "Iniciadores"
+msgstr "Iniciador"
 
 #: include/classes/api/services/CTriggerGeneral.php:636
 #, c-format
@@ -21105,6 +21136,10 @@ msgstr "Tiempo operativo/Tiempo inoperativo"
 #: app/views/popup.ldap.edit.php:169
 msgid "Use %{ref} in group filter to reference value of this user attribute."
 msgstr "Utilice %{ref} en el filtro de grupo para hacer referencia al valor de este atributo de usuario."
+
+#: app/views/administration.miscconfig.edit.php:123
+msgid "Use X-Frame-Options HTTP header"
+msgstr "Utilice el encabezado HTTP X-Frame-Options"
 
 #: app/partials/configuration.host.interface.row.php:194
 msgid "Use bulk requests"
@@ -22843,6 +22878,10 @@ msgstr "Eje X"
 msgid "X-Frame-Options HTTP header"
 msgstr "Encabezado HTTP X-Frame-Options"
 
+#: app/views/administration.miscconfig.edit.php:125
+msgid "X-Frame-Options HTTP header supported values:"
+msgstr "Valores admitidos del encabezado HTTP X-Frame-Options:"
+
 #: include/views/js/monitoring.sysmaps.js.php:448
 msgid "X1"
 msgstr "X1"
@@ -23178,7 +23217,7 @@ msgstr "Nombre del servidor Zabbix"
 
 #: include/items.inc.php:92
 msgid "Zabbix trapper"
-msgstr "Trapper ZABBIX"
+msgstr "Captura ZABBIX"
 
 #: include/classes/html/CFilter.php:251 include/classes/html/CTabFilter.php:333
 msgid "Zoom out"
@@ -23291,6 +23330,11 @@ msgstr "se esperaba un tiempo relativo"
 #: app/views/administration.authentication.edit.php:86
 msgid "a special character"
 msgstr "un caracter especial"
+
+#: app/views/administration.miscconfig.edit.php:133
+#, c-format
+msgid "a string of space-separated hostnames; adding %1$s to the list allows the page to be displayed in a frame on the same origin as the page itself"
+msgstr "una cadena de nombres de equipo separados por espacios; agregar %1$s a la lista permite que la página se muestre en un marco en el mismo origen que la misma página"
 
 #: include/classes/validators/CApiInputValidator.php:2530
 msgid "a string, number or null value is expected"
@@ -23464,7 +23508,7 @@ msgstr "se esperaba un entero sin signo"
 
 #: app/views/administration.authentication.edit.php:72
 msgid "an uppercase and a lowercase Latin letter"
-msgstr "una letra latina mayúscula y minúscula"
+msgstr "una letra latina mayúscula y una minúscula"
 
 #: app/views/administration.geomaps.edit.php:47
 msgid "and"
@@ -23920,6 +23964,10 @@ msgstr "por defecto"
 #: app/controllers/CControllerPopupTriggerExpr.php:591
 msgid "degrees() - Converts a value from radians to degrees"
 msgstr "degrees() - Convierte un valor de radianes a grados"
+
+#: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
+msgid "delimiter"
+msgstr ""
 
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
@@ -24877,6 +24925,10 @@ msgstr "power() - La potencia de un valor base a un valor de potencia"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:361
 msgid "problem pattern"
 msgstr "patrón de problema"
+
+#: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
+msgid "qualifier"
+msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
 msgid "radians() - Converts a value from degrees to radians"

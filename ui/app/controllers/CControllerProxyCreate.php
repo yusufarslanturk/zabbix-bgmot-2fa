@@ -1,7 +1,7 @@
 <?php declare(strict_types = 0);
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -59,7 +59,7 @@ class CControllerProxyCreate extends CController {
 				case HOST_STATUS_PROXY_ACTIVE:
 					if (!$this->hasInput('tls_accept_none') && !$this->hasInput('tls_accept_psk')
 							&& !$this->hasInput('tls_accept_certificate')) {
-						error(_s('Incorrect value for field "%1$s": %2$s.', _('Connections from proxy'),
+						info(_s('Incorrect value for field "%1$s": %2$s.', _('Connections from proxy'),
 							_('cannot be empty')
 						));
 
@@ -71,20 +71,20 @@ class CControllerProxyCreate extends CController {
 				case HOST_STATUS_PROXY_PASSIVE:
 					if ($this->getInput('useip', INTERFACE_USE_IP) == INTERFACE_USE_IP
 							&& $this->getInput('ip', '') === '') {
-						error(_s('Incorrect value for field "%1$s": %2$s.', _('IP address'), _('cannot be empty')));
+						info(_s('Incorrect value for field "%1$s": %2$s.', _('IP address'), _('cannot be empty')));
 
 						$ret = false;
 					}
 
 					if ($this->getInput('useip', INTERFACE_USE_IP) == INTERFACE_USE_DNS
 							&& $this->getInput('dns', '') === '') {
-						error(_s('Incorrect value for field "%1$s": %2$s.', _('DNS name'), _('cannot be empty')));
+						info(_s('Incorrect value for field "%1$s": %2$s.', _('DNS name'), _('cannot be empty')));
 
 						$ret = false;
 					}
 
 					if ($this->getInput('port', '') === '') {
-						error(_s('Incorrect value for field "%1$s": %2$s.', _('Port'), _('cannot be empty')));
+						info(_s('Incorrect value for field "%1$s": %2$s.', _('Port'), _('cannot be empty')));
 
 						$ret = false;
 					}
@@ -97,13 +97,13 @@ class CControllerProxyCreate extends CController {
 						|| ($this->getInput('status') == HOST_STATUS_PROXY_PASSIVE
 							&& $this->getInput('tls_connect', 0) == HOST_ENCRYPTION_PSK)) {
 					if ($this->getInput('tls_psk_identity', '') === '') {
-						error(_s('Incorrect value for field "%1$s": %2$s.', _('PSK identity'), _('cannot be empty')));
+						info(_s('Incorrect value for field "%1$s": %2$s.', _('PSK identity'), _('cannot be empty')));
 
 						$ret = false;
 					}
 
 					if ($this->getInput('tls_psk', '') === '') {
-						error(_s('Incorrect value for field "%1$s": %2$s.', _('PSK'), _('cannot be empty')));
+						info(_s('Incorrect value for field "%1$s": %2$s.', _('PSK'), _('cannot be empty')));
 
 						$ret = false;
 					}

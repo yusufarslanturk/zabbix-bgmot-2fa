@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2023 Zabbix SIA
+** Copyright (C) 2001-2024 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -76,13 +76,6 @@ abstract class CController {
 	 * @var bool
 	 */
 	private bool $validate_csrf_token = true;
-
-	/**
-	 * Validation rules array set when controller performs validation the first time.
-	 *
-	 * @var array
-	 */
-	private static $validation_rules = [];
 
 	public function __construct() {
 		$this->init();
@@ -216,12 +209,9 @@ abstract class CController {
 					}
 
 					$input = array_replace($input, $data['form']);
-
-					// Remove these fields, so that they are not passed again in future redirects if any.
-					unset($input['formdata'], $input['data'], $input['sign']);
 				}
 				else {
-					error(_('Operation cannot be performed due to unauthorized request.'));
+					info(_('Operation cannot be performed due to unauthorized request.'));
 				}
 
 				// Replace window.history to avoid resubmission warning dialog.
@@ -247,20 +237,11 @@ abstract class CController {
 				$input += $json_input;
 			}
 			else {
-				error(_('JSON array input is expected.'));
+				info(_('JSON array input is expected.'));
 			}
 		}
 
 		return $input;
-	}
-
-	/**
-	 * Get current controller validation rules. Rules are set when input is being validated.
-	 *
-	 * @return array
-	 */
-	public static function getValidationRules(): array {
-		return self::$validation_rules;
 	}
 
 	/**
@@ -271,9 +252,6 @@ abstract class CController {
 	 * @return bool
 	 */
 	protected function validateInput(array $validation_rules): bool {
-		// Not nice, but beats writing a setValidationRules() in several hundred places.
-		self::$validation_rules = $validation_rules;
-
 		if ($this->raw_input === null) {
 			$this->validation_result = self::VALIDATION_FATAL_ERROR;
 
@@ -283,7 +261,7 @@ abstract class CController {
 		$validator = new CNewValidator($this->raw_input, $validation_rules);
 
 		foreach ($validator->getAllErrors() as $error) {
-			error($error);
+			info($error);
 		}
 
 		if ($validator->isErrorFatal()) {
@@ -334,14 +312,14 @@ abstract class CController {
 			->getTimestamp();
 
 		if ($period < ZBX_MIN_PERIOD) {
-			error(_n('Minimum time period to display is %1$s minute.',
+			info(_n('Minimum time period to display is %1$s minute.',
 				'Minimum time period to display is %1$s minutes.', (int) (ZBX_MIN_PERIOD / SEC_PER_MIN)
 			));
 
 			return false;
 		}
 		elseif ($period > $max_period) {
-			error(_n('Maximum time period to display is %1$s day.',
+			info(_n('Maximum time period to display is %1$s day.',
 				'Maximum time period to display is %1$s days.', (int) round($max_period / SEC_PER_DAY)
 			));
 
@@ -447,6 +425,10 @@ abstract class CController {
 			return false;
 		}
 
+		if (strpos(get_class($this), 'Modules\\') === 0) {
+			return CCsrfTokenHelper::check($csrf_token_form, $this->action);
+		}
+
 		foreach (explode('.', $this->action) as $segment) {
 			if (!in_array($segment, $skip, true)) {
 				return CCsrfTokenHelper::check($csrf_token_form, $segment);
@@ -476,15 +458,6 @@ abstract class CController {
 			default:
 				$this->raw_input = null;
 		}
-	}
-
-	/**
-	 * Get raw input from controller.
-	 *
-	 * @return array|null
-	 */
-	public function getRawInput(): ?array {
-		return $this->raw_input;
 	}
 
 	/**
