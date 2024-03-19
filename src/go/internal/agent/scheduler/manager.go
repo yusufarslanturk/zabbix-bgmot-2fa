@@ -488,7 +488,7 @@ type pluginOptions struct {
 	Capacity int `conf:"optional"`
 	System   struct {
 		ForceActiveChecksOnStart *int `conf:"optional"`
-		Capacity                 int  `conf:"default=100"`
+		Capacity                 int  `conf:"optional"`
 	} `conf:"optional"`
 }
 
@@ -777,15 +777,16 @@ func getPluginOpts(
 	name string,
 ) (pluginCap, pluginSystemCap int, forceActiveChecksOnStart *int) {
 	var opt pluginOptions
-	var err error
+	const defaultSysCapacity = 100
 
 	if optsRaw == nil {
-		err = conf.StructDefaultsInit(&opt)
-	} else {
-		err = conf.Unmarshal(optsRaw, &opt, false)
+		pluginSystemCap = defaultSysCapacity
+
+		return
 	}
-	if err != nil {
-		log.Warningf("invalid plugin '%s' configuration: %s", name, err)
+
+	if err := conf.Unmarshal(optsRaw, &opt, false); err != nil {
+		log.Warningf("invalid plugin %s configuration: %s", name, err)
 
 		return
 	}
