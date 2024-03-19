@@ -21,7 +21,7 @@
 
 class CNumericBox extends CInput {
 
-	public function __construct($name = 'number', $value = '0', $maxlength = 20, $readonly = false, $allowempty = false, $allownegative = true) {
+	public function __construct($name = 'number', $value = '0', $maxlength = 15, $readonly = false, $allowempty = false, $allownegative = true) {
 		parent::__construct('text', $name, $value);
 		$this->setReadonly($readonly);
 		$this->setAttribute('maxlength', $maxlength);
