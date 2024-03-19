@@ -792,7 +792,11 @@ func getPluginOpts(
 	}
 
 	pluginCap = opt.Capacity
-	pluginSystemCap = opt.System.Capacity
+	if opt.System.Capacity == 0 {
+		pluginSystemCap = defaultSysCapacity
+	} else {
+		pluginSystemCap = opt.System.Capacity
+	}
 	forceActiveChecksOnStart = opt.System.ForceActiveChecksOnStart
 
 	return

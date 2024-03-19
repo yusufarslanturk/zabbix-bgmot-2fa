@@ -1851,7 +1851,7 @@ func Test_getCapacity(t *testing.T) {
 			50,
 		},
 		{
-			"depriceted_cap",
+			"deprecated_cap",
 			args{
 				&conf.Node{
 					Name: "Test",
@@ -1865,7 +1865,7 @@ func Test_getCapacity(t *testing.T) {
 					},
 				},
 			},
-			10,
+			100,
 		},
 		{
 			"system_cap",
