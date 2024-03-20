@@ -697,8 +697,6 @@ function getSelementsInfo(array $sysmap, array $options = []): array {
 						$selement['evaltype']
 					);
 				}
-
-				$trigger['problems'] = array_column($trigger['problems'], null, 'eventid');
 			}
 			unset($trigger);
 
@@ -937,8 +935,9 @@ function countSelementProblems(array $selement): array {
 			continue;
 		}
 
-		foreach ($trigger['problems'] as $eventid => $problem) {
+		foreach ($trigger['problems'] as $problem) {
 			if ($problem['r_clock'] == 0) {
+				$eventid = $problem['eventid'];
 				$counter_problems[$eventid] = $eventid;
 
 				if ($problem['acknowledged'] == EVENT_NOT_ACKNOWLEDGED) {
