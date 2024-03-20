@@ -41,10 +41,12 @@ import (
 )
 
 const (
-	// number of seconds to wait for plugins to finish during scheduler shutdown
+	// Number of seconds to wait for plugins to finish during scheduler shutdown.
 	shutdownTimeout = 5
-	// inactive shutdown value
+	// Inactive shutdown value.
 	shutdownInactive = -1
+	// Default value of Plugins.<plugin name>.System.Capacity parameter in plugin config file.
+	defaultSysCapacity = 100
 )
 
 // Manager implements Scheduler interface and manages plugin interface usage.
@@ -777,11 +779,10 @@ func getPluginOpts(
 	name string,
 ) (pluginCap, pluginSystemCap int, forceActiveChecksOnStart *int) {
 	var opt pluginOptions
-	const defaultSysCapacity = 100
+
+	pluginSystemCap = defaultSysCapacity
 
 	if optsRaw == nil {
-		pluginSystemCap = defaultSysCapacity
-
 		return
 	}
 
@@ -792,11 +793,11 @@ func getPluginOpts(
 	}
 
 	pluginCap = opt.Capacity
-	if opt.System.Capacity == 0 {
-		pluginSystemCap = defaultSysCapacity
-	} else {
+
+	if opt.System.Capacity > 0 {
 		pluginSystemCap = opt.System.Capacity
 	}
+
 	forceActiveChecksOnStart = opt.System.ForceActiveChecksOnStart
 
 	return
