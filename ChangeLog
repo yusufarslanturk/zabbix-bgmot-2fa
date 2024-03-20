@@ -1,9 +1,3 @@
-Changes for 6.4.13rc2
-
-Bug fixes:
-....I..... [ZBX-23441] fixed broken autoconf test when searching for go (jxl)
-
---------------------------------------------------------------------------------
 Changes for 6.4.13rc1
 
 New features:

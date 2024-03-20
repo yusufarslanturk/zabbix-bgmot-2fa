@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2024-03-18 16:45+0000\n"
-"Last-Translator: Ryan Skov <rsk@capmon.dk>\n"
+"PO-Revision-Date: 2024-03-18 08:32+0000\n"
+"Last-Translator: natalja.romancaka <natalja.romancaka@zabbix.com>\n"
 "Language-Team: none\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -10158,7 +10158,7 @@ msgstr "Forkert handligs betingelse for proxy. Proxy findes ikke, eller du har i
 
 #: include/classes/api/services/CAction.php:3401
 msgid "Incorrect action condition service. Service does not exist or you have no access to it."
-msgstr "Forkert handling tilstand service. Tjenesten findes ikke, eller du har ikke adgang til den."
+msgstr ""
 
 #: include/classes/validators/CActionCondValidator.php:155
 msgid "Incorrect action condition trigger severity."
@@ -13765,7 +13765,7 @@ msgstr "Netværksudnyttelse (kombinerede transmissions- og modtagehastigheder) u
 
 #: include/classes/data/CItemData.php:1506
 msgid "Network utilization (combined transmit-rates and receive-rates) during the interval, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - network interface instance"
-msgstr "Netværksudnyttelse (kombinerede transmissions- og modtagehastigheder) under intervallet, <url> - VMware-tjenestens URL, <uuid> - VMware virtuel maskine-værtsnavn, <instance> - netværksgrænsefladeinstans"
+msgstr ""
 
 #: app/views/administration.proxy.list.php:170 include/func.inc.php:196
 msgid "Never"
