@@ -1398,7 +1398,7 @@ abstract class CItemGeneralOld extends CApiService {
 			$throttling = false;
 			$prometheus = false;
 
-			foreach ($item['preprocessing'] as &$preprocessing) {
+			foreach ($item['preprocessing'] as $preprocessing) {
 				$missing_keys = array_diff($required_fields, array_keys($preprocessing));
 
 				if ($missing_keys) {
