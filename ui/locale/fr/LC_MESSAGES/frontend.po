@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2024-02-18 13:50+0000\n"
+"PO-Revision-Date: 2024-03-18 19:05+0000\n"
 "Last-Translator: ERIC <eric78.zabbix@orange.fr>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: fr\n"
@@ -2035,15 +2035,15 @@ msgstr "CRLF"
 
 #: tests/selenium/modules/module_number_7/Module.php:17
 msgid "CSRF test"
-msgstr ""
+msgstr "Test CSRF"
 
 #: tests/selenium/modules/module_number_7/views/csrf.form.view.php:25
 msgid "CSRF token test"
-msgstr ""
+msgstr "Test du token CSRF"
 
 #: tests/selenium/modules/module_number_7/actions/CsrfFormUpdate.php:35
 msgid "CSRF token validation succeeded."
-msgstr ""
+msgstr "La validation du token CSRF a réussi."
 
 #: include/items.inc.php:1828
 msgid "CSV to JSON"
@@ -19011,7 +19011,7 @@ msgstr "Sous-carte"
 
 #: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
 msgid "Submit"
-msgstr ""
+msgstr "Soumettre"
 
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:168
 msgid "Subscription"
@@ -23967,7 +23967,7 @@ msgstr "degrees() - Convertit une valeur de radians en degrés"
 
 #: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
 msgid "delimiter"
-msgstr ""
+msgstr "délimiteur"
 
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
@@ -24928,7 +24928,7 @@ msgstr "modèle de problème"
 
 #: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
 msgid "qualifier"
-msgstr ""
+msgstr "qualificatif"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
 msgid "radians() - Converts a value from degrees to radians"

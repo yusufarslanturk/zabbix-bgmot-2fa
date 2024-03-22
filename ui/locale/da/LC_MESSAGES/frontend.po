@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2024-03-18 08:32+0000\n"
-"Last-Translator: natalja.romancaka <natalja.romancaka@zabbix.com>\n"
+"PO-Revision-Date: 2024-03-21 10:47+0000\n"
+"Last-Translator: Ryan Skov <rsk@capmon.dk>\n"
 "Language-Team: none\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -506,7 +506,7 @@ msgstr "API-tokens"
 
 #: include/classes/widgets/forms/CWidgetFormItem.php:251
 msgid "Above value"
-msgstr "Værdien ovenfor"
+msgstr "Værdien over"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:370
 msgid "Abscissa"
@@ -1832,7 +1832,7 @@ msgstr "Grundfarve"
 
 #: include/httptest.inc.php:28
 msgid "Basic"
-msgstr "Basic"
+msgstr "Basal"
 
 #: app/views/connector.edit.php:136
 msgid "Bearer"
@@ -1953,7 +1953,7 @@ msgstr "Bulgarisk (bg_BG)"
 
 #: report2.php:195
 msgid "By host"
-msgstr "efter vært"
+msgstr "Efter vært"
 
 #: report2.php:196
 msgid "By trigger template"
@@ -3681,7 +3681,7 @@ msgstr "Kan ikke indstille afhængighed for datapunkt med nøglen \"%1$s\" på h
 #: include/classes/api/services/CHost.php:2015
 #: include/classes/api/services/CHost.php:2218
 msgid "Cannot set inventory fields for disabled inventory."
-msgstr ""
+msgstr "Kan ikke angive inventarfelter i deaktiveret inventar liste."
 
 #: include/classes/core/CCookieSession.php:127
 msgid "Cannot set session cookie."
@@ -5968,7 +5968,7 @@ msgstr "Standardgodkendelse"
 
 #: app/views/administration.miscconfig.edit.php:58
 msgid "Default host inventory mode"
-msgstr ""
+msgstr "Standard værtsinventar tilstand"
 
 #: app/views/administration.gui.edit.php:73
 #: include/classes/setup/CSetupWizard.php:413
@@ -9332,11 +9332,11 @@ msgstr "Værts interface"
 #: include/views/inventory.host.list.php:27
 #: include/views/inventory.host.view.php:263
 msgid "Host inventory"
-msgstr ""
+msgstr "Værts inventar"
 
 #: hostinventoriesoverview.php:26 hostinventoriesoverview.php:150
 msgid "Host inventory overview"
-msgstr ""
+msgstr "Oversigt over værtsinventar"
 
 #: include/views/monitoring.sysmap.edit.php:180
 msgid "Host label type"
@@ -10158,11 +10158,11 @@ msgstr "Forkert handligs betingelse for proxy. Proxy findes ikke, eller du har i
 
 #: include/classes/api/services/CAction.php:3401
 msgid "Incorrect action condition service. Service does not exist or you have no access to it."
-msgstr ""
+msgstr "Forkert handling tilstand service. Tjenesten findes ikke, eller du har ikke adgang til den."
 
 #: include/classes/validators/CActionCondValidator.php:155
 msgid "Incorrect action condition trigger severity."
-msgstr ""
+msgstr "Ukorrekt handlings betingelse udløser alvorlighedsgrad."
 
 #: include/classes/api/services/CAction.php:3238
 msgid "Incorrect action condition trigger. Trigger does not exist or you have no access to it."
@@ -11501,7 +11501,7 @@ msgstr "Ugyldig zoomparameter \"%1$s\": %2$s."
 #: include/classes/helpers/CRoleHelper.php:307
 #: include/views/configuration.host.prototype.edit.php:358 jsLoader.php:374
 msgid "Inventory"
-msgstr ""
+msgstr "Inventar"
 
 #: include/classes/api/services/CHost.php:1161
 #, c-format
@@ -11510,12 +11510,12 @@ msgstr "Inventarkartotek deaktiveret for værten \"%1$s\"."
 
 #: app/views/administration.iconmap.edit.php:59
 msgid "Inventory field"
-msgstr ""
+msgstr "Inventar felt"
 
 #: app/partials/popup.operations.php:225
 #: app/views/popup.massupdate.host.php:179
 msgid "Inventory mode"
-msgstr ""
+msgstr "Inventar tilstand"
 
 #: include/classes/helpers/CRoleHelper.php:480
 msgid "Invoke \"Execute now\" on read-only hosts"
@@ -13765,7 +13765,7 @@ msgstr "Netværksudnyttelse (kombinerede transmissions- og modtagehastigheder) u
 
 #: include/classes/data/CItemData.php:1506
 msgid "Network utilization (combined transmit-rates and receive-rates) during the interval, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - network interface instance"
-msgstr ""
+msgstr "Netværksudnyttelse (kombinerede transmissions- og modtagehastigheder) under intervallet, <url> - VMware-tjenestens URL, <uuid> - VMware virtuel maskine-værtsnavn, <instance> - netværksgrænsefladeinstans"
 
 #: app/views/administration.proxy.list.php:170 include/func.inc.php:196
 msgid "Never"
@@ -13804,7 +13804,7 @@ msgstr "Ny betingelse"
 
 #: app/views/connector.edit.php:312 app/views/connector.edit.php:341
 msgid "New connector"
-msgstr ""
+msgstr "Ny Connector"
 
 #: app/controllers/CControllerDashboardView.php:154
 #: app/controllers/CControllerTemplateDashboardEdit.php:80
@@ -13930,7 +13930,7 @@ msgstr "Næste skridt"
 #: include/views/configuration.triggers.list.php:134
 #: include/views/js/configuration.host.discovery.edit.overr.js.php:164
 msgid "No"
-msgstr ""
+msgstr "Ingen"
 
 #: include/classes/api/services/CGraphPrototype.php:39
 #, c-format
@@ -14077,7 +14077,7 @@ msgstr "Ingen interfaces er defineret."
 
 #: app/controllers/CControllerActionOperationValidate.php:169
 msgid "No inventory mode specified for action operation."
-msgstr ""
+msgstr "Ingen inventar tilstand angivet for handlingsoperationen."
 
 #: include/classes/widgets/CWidgetHelper.php:1240
 msgid "No item selected."
@@ -14367,7 +14367,7 @@ msgstr "Der er ikke angivet nogen offentlig nøglefil."
 #: app/controllers/CControllerActionOperationValidate.php:110
 #: include/classes/api/services/CAction.php:2836
 msgid "No recipients specified for action operation message."
-msgstr ""
+msgstr "Ingen modtagere angivet for handlingsoperationsmeddelelse."
 
 #: include/classes/widgets/CWidgetConfig.php:305 jsLoader.php:167
 msgid "No refresh"
@@ -14393,7 +14393,7 @@ msgstr "Der er ikke angivet nogen mål for det globale script for handlingsopera
 #: include/triggers.inc.php:91
 #, c-format
 msgid "No trigger with trigger ID \"%1$s\"."
-msgstr ""
+msgstr "Ingen udløser med udløser-id \"%1$s\"."
 
 #: chart4.php:42
 msgid "No triggers defined."
@@ -14462,7 +14462,7 @@ msgstr "Norsk (nb_NO)"
 
 #: include/actions.inc.php:161
 msgid "Not Ack"
-msgstr ""
+msgstr "Ikke aksepteret"
 
 #: app/partials/dataoverview.table.left.php:60
 #: app/partials/dataoverview.table.top.php:57
@@ -14498,7 +14498,7 @@ msgstr "Ikke tilladt at indstille tema for brugeren \"gæst\"."
 #: include/classes/api/services/CUser.php:484
 #, c-format
 msgid "Not allowed to update field \"%1$s\" for provisioned user."
-msgstr ""
+msgstr "Ikke tilladt at opdatere feltet \"%1$s\" for klargjort bruger."
 
 #: include/classes/api/clients/CLocalApiClient.php:164
 #: include/classes/api/clients/CLocalApiClient.php:192
@@ -15605,11 +15605,11 @@ msgstr ""
 #: include/views/configuration.item.edit.php:158
 #: include/views/configuration.item.prototype.edit.php:144
 msgid "Parse"
-msgstr ""
+msgstr "Parse"
 
 #: include/classes/core/CJsonRpc.php:171
 msgid "Parse error"
-msgstr ""
+msgstr "Parse fejl"
 
 #: app/views/administration.proxy.edit.php:75
 #: app/views/administration.proxy.list.php:56
@@ -15872,7 +15872,7 @@ msgstr "Polsk (pl_PL)"
 
 #: include/views/configuration.item.edit.php:979
 msgid "Populates host inventory field"
-msgstr ""
+msgstr "Udfylder værts intentar felt"
 
 #: app/controllers/CControllerPopupItemTest.php:1310
 #: app/partials/monitoring.host.filter.php:113
@@ -16429,7 +16429,7 @@ msgstr "Rådata"
 
 #: app/views/popup.httpstep.php:110
 msgid "Raw post"
-msgstr ""
+msgstr "Rå indlæg"
 
 #: app/partials/administration.usergroup.grouprights.html.php:70
 #: app/views/administration.script.edit.php:246
@@ -16556,12 +16556,12 @@ msgstr "Genopretning"
 #: include/views/configuration.triggers.edit.php:416 trigger_prototypes.php:41
 #: trigger_prototypes.php:54 triggers.php:49 triggers.php:61
 msgid "Recovery expression"
-msgstr ""
+msgstr "Gendannelses udtryk"
 
 #: include/forms.inc.php:1984 include/forms.inc.php:1991
 #: include/forms.inc.php:2001
 msgid "Recovery expression syntax error."
-msgstr ""
+msgstr "Syntaksfejl i gendannelsesudtryk."
 
 #: include/views/configuration.action.edit.php:392
 msgid "Recovery operations"
@@ -16573,12 +16573,12 @@ msgstr ""
 #: include/classes/screens/CScreenProblem.php:878
 #: include/classes/screens/CScreenProblem.php:1151 include/events.inc.php:286
 msgid "Recovery time"
-msgstr ""
+msgstr "Gendannelsestid"
 
 #: app/views/monitoring.widget.problems.view.php:59
 msgctxt "compact table header"
 msgid "Recovery time"
-msgstr ""
+msgstr "Gendannelsestid"
 
 #: include/views/js/monitoring.sysmaps.js.php:371
 #: include/views/js/monitoring.sysmaps.js.php:531
@@ -16872,7 +16872,7 @@ msgstr ""
 
 #: app/partials/scheduledreport.table.html.php:41
 msgid "Repeats"
-msgstr ""
+msgstr "Gentagelser"
 
 #: app/views/popup.massupdate.host.php:46
 #: app/views/popup.massupdate.host.php:87
@@ -17661,7 +17661,7 @@ msgstr "Gem det som \"%1$s\""
 
 #: app/views/administration.module.list.php:35
 msgid "Scan directory"
-msgstr ""
+msgstr "Scan bibliotek"
 
 #: include/views/configuration.httpconf.edit.php:237
 msgid "Scenario"
@@ -18205,7 +18205,7 @@ msgstr "Indstil udløbsdato og -tidspunkt"
 
 #: include/actions.inc.php:1037
 msgid "Set host inventory mode"
-msgstr ""
+msgstr "Indstil værts inventar tilstand"
 
 #: include/classes/html/CInputSecret.php:80 jsLoader.php:416
 msgid "Set new value"
@@ -19010,7 +19010,7 @@ msgstr "Underkort"
 
 #: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
 msgid "Submit"
-msgstr ""
+msgstr "Indsend"
 
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:168
 msgid "Subscription"
@@ -19038,50 +19038,50 @@ msgstr "Søn"
 
 #: include/func.inc.php:126 include/func.inc.php:224 jsLoader.php:251
 msgid "Sunday"
-msgstr ""
+msgstr "Søndag"
 
 #: include/users.inc.php:54
 msgid "Super admin"
-msgstr ""
+msgstr "Super admin"
 
 #: include/classes/helpers/CMenuHelper.php:353
 #: include/views/general.login.php:94
 msgid "Support"
-msgstr ""
+msgstr "Support"
 
 #: app/partials/administration.system.info.php:124
 msgid "Support for the old numeric type is deprecated. Please upgrade to numeric values of extended range."
-msgstr ""
+msgstr "Understøttelse af den gamle numeriske type er forældet. Opgrader til numeriske værdier for udvidet rækkevidde."
 
 #: include/classes/widgets/views/widget.geomap.form.view.php:70
 msgid "Supported formats:"
-msgstr ""
+msgstr "Understøttede formater:"
 
 #: include/classes/widgets/views/widget.item.form.view.php:59
 msgid "Supported macros:"
-msgstr ""
+msgstr "Understøttede makroer:"
 
 #: app/controllers/CControllerPopupAcknowledgeCreate.php:101
 #: app/views/popup.acknowledge.edit.php:82
 msgid "Suppress"
-msgstr ""
+msgstr "Undertrykke"
 
 #: include/classes/helpers/CRoleHelper.php:471
 msgid "Suppress problems"
-msgstr ""
+msgstr "Undertrykke problemer"
 
 #: include/actions.inc.php:1761
 msgid "Suppress until"
-msgstr ""
+msgstr "Undertryk indtil"
 
 #: include/actions.inc.php:1771 include/classes/screens/CScreenProblem.php:1259
 msgid "Suppressed"
-msgstr ""
+msgstr "Undertrykt"
 
 #: include/html.inc.php:973
 #, c-format
 msgid "Suppressed till: %1$s"
-msgstr ""
+msgstr "Undertrykt indtil: %1$s"
 
 #: include/classes/data/CItemData.php:1102
 msgid "Swap in (from device into memory) statistics. Returns integer"
@@ -19097,104 +19097,104 @@ msgstr ""
 
 #: include/locales.inc.php:62
 msgid "Swedish (sv_SE)"
-msgstr ""
+msgstr "Svensk (sv_SE)"
 
 #: app/views/js/administration.authentication.edit.js.php:36
 msgid "Switching authentication method will reset all except this session! Continue?"
-msgstr ""
+msgstr "Skift af godkendelsesmetode vil nulstille alle undtagen denne session! Blive ved?"
 
 #: include/actions.inc.php:2041 include/classes/screens/CScreenProblem.php:1479
 #: include/events.inc.php:274 widgets/problems/includes/WidgetProblems.php:375
 msgid "Symptom"
-msgstr ""
+msgstr "Symptom"
 
 #: app/controllers/CControllerGuiEdit.php:33
 #: include/classes/setup/CSetupWizard.php:611
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: include/classes/data/CItemData.php:1030
 msgid "System boot time. Returns integer (Unix timestamp)"
-msgstr ""
+msgstr "Systemstarttid. Returnerer heltal (Unix-tidsstempel)"
 
 #: app/controllers/CControllerUserEditGeneral.php:49
 #: app/views/administration.user.edit.php:189
 #: app/views/administration.user.edit.php:195 app/views/popup.sla.edit.php:91
 #: app/views/sla.list.php:148 include/users.inc.php:81
 msgid "System default"
-msgstr ""
+msgstr "System standard"
 
 #: include/func.inc.php:1745
 msgid "System error occurred. Please contact Zabbix administrator."
-msgstr ""
+msgstr "Systemfejl opstod. Kontakt venligst Zabbix administrator."
 
 #: include/classes/core/CJsonRpc.php:201
 msgid "System error."
-msgstr ""
+msgstr "Systemfejl."
 
 #: include/classes/data/CItemData.php:1058
 msgid "System host name. Returns string"
-msgstr ""
+msgstr "Systemværtsnavn. Returnerer streng"
 
 #: app/controllers/CControllerReportStatus.php:42
 #: app/views/report.status.php:30 include/classes/helpers/CMenuHelper.php:132
 #: include/classes/helpers/CRoleHelper.php:372
 #: include/classes/widgets/CWidgetConfig.php:71
 msgid "System information"
-msgstr ""
+msgstr "Systemoplysninger"
 
 #: include/classes/data/CItemData.php:1086
 msgid "System statistics. Returns integer or float"
-msgstr ""
+msgstr "Systemstatistik. Returnerer heltal eller decimaltal"
 
 #: include/classes/widgets/forms/CWidgetFormSystemInfo.php:31
 msgid "System stats"
-msgstr ""
+msgstr "Systemstatistik"
 
 #: include/classes/data/CItemData.php:1078
 msgid "System time. Returns integer with type as UTC; string - with type as local"
-msgstr ""
+msgstr "System tid. Returnerer heltal med type som UTC; streng - med type som lokal"
 
 #: include/classes/data/CItemData.php:1118
 msgid "System uptime in seconds. Returns integer"
-msgstr ""
+msgstr "Systemets oppetid på få sekunder. Returnerer heltal"
 
 #: jsLoader.php:255
 msgctxt "Thursday short"
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #: jsLoader.php:253
 msgctxt "Tuesday short"
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #: include/discovery.inc.php:55
 msgid "TCP"
-msgstr ""
+msgstr "TCP"
 
 #: include/items.inc.php:98
 msgid "TELNET agent"
-msgstr ""
+msgstr "TELNET agent"
 
 #: include/classes/screens/CScreenHttpTestDetails.php:190
 msgid "TOTAL"
-msgstr ""
+msgstr "I ALT"
 
 #: app/views/js/administration.regex.edit.js.php:155
 #: app/views/js/administration.regex.edit.js.php:200
 msgid "TRUE"
-msgstr ""
+msgstr "SANDT"
 
 #: include/classes/db/DB.php:220
 #, c-format
 msgid "Table \"%1$s\" does not exist."
-msgstr ""
+msgstr "Tabel \"%1$s\" findes ikke."
 
 #: include/classes/db/DB.php:497
 #, c-format
 msgid "Table \"%1$s\" doesn't have a field named \"%2$s\"."
-msgstr ""
+msgstr "Tabel \"%1$s\" har ikke et felt med navnet \"%2$s\"."
 
 #: app/controllers/CControllerPopupLldOperation.php:131
 #: app/controllers/CControllerUsergroupTagfilterAdd.php:47
@@ -19204,37 +19204,37 @@ msgstr ""
 #: app/views/popup.condition.common.php:323 include/hosts.inc.php:144
 #: include/views/inventory.host.list.php:92
 msgid "Tag"
-msgstr ""
+msgstr "Tag"
 
 #: app/partials/monitoring.latest.filter.php:172
 #: app/partials/monitoring.problem.filter.php:233
 #: include/classes/widgets/forms/CWidgetFormProblems.php:151
 msgid "Tag display priority"
-msgstr ""
+msgstr "Tag visningsprioritet"
 
 #: app/views/administration.usergroup.edit.php:210
 msgid "Tag filter"
-msgstr ""
+msgstr "Tag filter"
 
 #: include/views/configuration.trigger.prototype.edit.php:521
 #: include/views/configuration.triggers.edit.php:550
 msgid "Tag for matching"
-msgstr ""
+msgstr "Tag til matchning"
 
 #: app/partials/monitoring.latest.filter.php:151
 #: app/partials/monitoring.problem.filter.php:219 include/actions.inc.php:65
 #: include/classes/widgets/forms/CWidgetFormProblems.php:137
 msgid "Tag name"
-msgstr ""
+msgstr "Tag navn"
 
 #: include/actions.inc.php:66
 msgid "Tag value"
-msgstr ""
+msgstr "Tag værdi"
 
 #: app/partials/monitoring.charts.subfilter.php:199
 #: app/partials/monitoring.latest.subfilter.php:178
 msgid "Tag values"
-msgstr ""
+msgstr "Tag værdier"
 
 #: app/controllers/CControllerPopupLldOperation.php:138
 #: app/partials/administration.usergroup.tagfilters.html.php:29
@@ -19297,12 +19297,12 @@ msgstr ""
 #: include/views/configuration.triggers.list.php:201
 #: include/views/js/monitoring.sysmaps.js.php:235
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: app/views/monitoring.widget.problems.view.php:83
 msgctxt "compact table header"
 msgid "Tags"
-msgstr ""
+msgstr "Tag"
 
 #: include/views/configuration.copy.elements.php:69
 #: include/views/configuration.trigger.prototype.edit.php:202
@@ -19311,20 +19311,20 @@ msgstr ""
 #: include/views/configuration.triggers.edit.php:427 trigger_prototypes.php:53
 #: trigger_prototypes.php:55 triggers.php:60 triggers.php:62
 msgid "Target"
-msgstr ""
+msgstr "Mål"
 
 #: app/partials/popup.operations.php:168
 msgid "Target list"
-msgstr ""
+msgstr "Målliste"
 
 #: include/views/configuration.copy.elements.php:60
 msgid "Target type"
-msgstr ""
+msgstr "Måltype"
 
 #: app/views/administration.script.edit.php:119
 #: app/views/administration.script.list.php:153 include/discovery.inc.php:61
 msgid "Telnet"
-msgstr ""
+msgstr "Telnet"
 
 #: app/controllers/CControllerAuditLogList.php:240
 #: app/views/administration.mediatype.edit.php:282
@@ -19447,7 +19447,7 @@ msgstr "Skabelontilladelser"
 
 #: report2.php:396
 msgid "Template trigger"
-msgstr ""
+msgstr "Skabelonudløser"
 
 #: templates.php:208
 msgid "Template updated"
@@ -19542,27 +19542,27 @@ msgstr "Skabeloner opdateret"
 #: include/views/configuration.triggers.edit.php:496
 #: include/views/js/item.preprocessing.js.php:53
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: include/forms.inc.php:1553
 msgid "Test all steps"
-msgstr ""
+msgstr "Test alle trin"
 
 #: app/views/administration.authentication.edit.php:199
 msgid "Test authentication"
-msgstr ""
+msgstr "Test godkendelse"
 
 #: app/views/administration.script.edit.php:260
 msgid "Test confirmation"
-msgstr ""
+msgstr "Test bekræftelse"
 
 #: app/views/popup.testtriggerexpr.php:39
 msgid "Test data"
-msgstr ""
+msgstr "Test data"
 
 #: app/views/administration.regex.edit.php:123
 msgid "Test expressions"
-msgstr ""
+msgstr "Test udtryk"
 
 #: app/controllers/CControllerPopupItemTestEdit.php:354
 msgid "Test item"
@@ -19571,7 +19571,7 @@ msgstr "Test datapunkt"
 #: app/controllers/CControllerPopupMediatypeTestEdit.php:77
 #, c-format
 msgid "Test media type \"%1$s\""
-msgstr ""
+msgstr "Test medietype \"%1$s\""
 
 #: app/controllers/CControllerPopupItemTestEdit.php:110
 #: app/controllers/CControllerPopupItemTestGetValue.php:84
@@ -19582,15 +19582,15 @@ msgstr "Test af \"%1$s\" datapunkter er ikke understøttet."
 
 #: app/controllers/CControllerPopupScheduledReportTest.php:79
 msgid "Test report generating"
-msgstr ""
+msgstr "Generering af testrapport"
 
 #: app/views/administration.regex.edit.php:120
 msgid "Test string"
-msgstr ""
+msgstr "Teststreng"
 
 #: app/controllers/CControllerPopupMediatypeTestEdit.php:81
 msgid "Test subject"
-msgstr ""
+msgstr "Testemne"
 
 #: app/partials/configuration.filter.items.php:141
 #: app/views/popup.massupdate.item.php:159
@@ -19604,21 +19604,21 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:377
 #: include/views/js/monitoring.sysmaps.js.php:538
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #: app/views/popup.tophosts.column.edit.php:75
 msgid "Text, supports {INVENTORY.*}, {HOST.*} macros"
-msgstr ""
+msgstr "Tekst, understøtter {INVENTORY.*}, {HOST.*} makroer"
 
 #: include/classes/api/clients/CLocalApiClient.php:96
 #, c-format
 msgid "The \"%1$s.%2$s\" method must be called without authorization header."
-msgstr ""
+msgstr "Metoden \"%1$s.%2$s\" skal kaldes uden authorization header."
 
 #: include/classes/api/clients/CLocalApiClient.php:89
 #, c-format
 msgid "The \"%1$s.%2$s\" method must be called without the \"auth\" parameter."
-msgstr ""
+msgstr "Metoden \"%1$s.%2$s\" skal kaldes uden parameteren \"auth\"."
 
 #: app/views/administration.geomaps.edit.php:30
 msgid "The URL template is used to load and display the tile layer on geographical maps."
@@ -19627,19 +19627,19 @@ msgstr ""
 #: include/classes/db/DbBackend.php:130
 #, c-format
 msgid "The Zabbix database version does not match current requirements. Your database version: %1$s. Required version: %2$s. Please contact your system administrator."
-msgstr ""
+msgstr "Zabbix-databaseversionen matcher ikke de nuværende krav. Din databaseversion: %1$s. Påkrævet version: %2$s. Kontakt venligst din systemadministrator."
 
 #: include/classes/data/CItemData.php:1719
 msgid "The average time a read from the virtual disk takes, \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier, \"instance\" - disk device instance"
-msgstr ""
+msgstr "Den gennemsnitlige tid en læsning fra den virtuelle disk tager, \"url\" - VMware service URL, \"uuid\" - VMware virtuel maskine global unik identifikator, \"instans\" - disk enhed instans"
 
 #: include/classes/data/CItemData.php:1526
 msgid "The average time a read from the virtual disk takes, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance"
-msgstr ""
+msgstr "Den gennemsnitlige tid en læsning fra den virtuelle disk tager, <url> - VMware service URL, <uuid> - VMware virtuel maskine værtsnavn, <instance> - disk enhed instans"
 
 #: include/classes/data/CItemData.php:1723
 msgid "The average time a write to the virtual disk takes, \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier, \"instance\" - disk device instance"
-msgstr ""
+msgstr "Den gennemsnitlige tid en skrivning til den virtuelle disk tager, \"url\" - VMware service URL, \"uuid\" - VMware virtuel maskine global unik identifikator, \"instans\" - disk enhed instans"
 
 #: include/classes/data/CItemData.php:1530
 msgid "The average time a write to the virtual disk takes, <url> - VMware service URL, <uuid> - VMware virtual machine host name, <instance> - disk device instance"
@@ -19647,64 +19647,64 @@ msgstr ""
 
 #: app/controllers/CControllerHostEdit.php:240
 msgid "The cloned host contains user defined macros with type \"Secret text\". The value and type of these macros were reset."
-msgstr ""
+msgstr "Den klonede vært indeholder brugerdefinerede makroer med typen \"Hemmelig tekst\". Værdien og typen af disse makroer blev nulstillet."
 
 #: host_prototypes.php:162
 msgid "The cloned host prototype contains user defined macros with type \"Secret text\". The value and type of these macros were reset."
-msgstr ""
+msgstr "Den klonede værtsprototype indeholder brugerdefinerede makroer med typen \"Hemmelig tekst\". Værdien og typen af disse makroer blev nulstillet."
 
 #: templates.php:180
 msgid "The cloned template contains user defined macros with type \"Secret text\". The value and type of these macros were reset."
-msgstr ""
+msgstr "Den klonede skabelon indeholder brugerdefinerede makroer med typen \"Hemmelig tekst\". Værdien og typen af disse makroer blev nulstillet."
 
 #: app/views/administration.geomaps.edit.php:36
 msgid "The following placeholders are supported:"
-msgstr ""
+msgstr "Følgende pladsholdere understøttes:"
 
 #: include/html.inc.php:691
 #, c-format
 msgid "The graph is not discovered anymore and will be deleted in %1$s (on %2$s at %3$s)."
-msgstr ""
+msgstr "Grafen ikke opdaget længere og vil blive slettet om %1$s (på %2$s ved %3$s)."
 
 #: include/html.inc.php:686
 msgid "The graph is not discovered anymore and will be deleted the next time discovery rule is processed."
-msgstr ""
+msgstr "Grafen er ikke opdaget længere og vil blive slettet, næste gang registreringsreglen behandles."
 
 #: app/controllers/CControllerHostEdit.php:284 host_prototypes.php:171
 msgid "The host being cloned belongs to a host group you don't have write permissions to. Non-writable group has been removed from the new host."
-msgstr ""
+msgstr "Værten, der klones, tilhører en værtsgruppe, du ikke har skrivetilladelser til. Ikke-skrivbar gruppe er blevet fjernet fra den nye vært."
 
 #: include/html.inc.php:637
 #, c-format
 msgid "The host group is not discovered anymore and will be deleted in %1$s (on %2$s at %3$s)."
-msgstr ""
+msgstr "Værtsgruppen er ikke opdager længere og vil blive slettet om %1$s (på %2$s ved %3$s)."
 
 #: include/html.inc.php:632
 msgid "The host group is not discovered anymore and will be deleted the next time discovery rule is processed."
-msgstr ""
+msgstr "Værtsgruppen er ikke opdaget længere og vil blive slettet, næste gang registreringsreglen behandles."
 
 #: include/html.inc.php:664
 #, c-format
 msgid "The host is not discovered anymore and will be deleted in %1$s (on %2$s at %3$s)."
-msgstr ""
+msgstr "Værtsgruppen er ikke opdaget længere og vil blive slettet om %1$s (på %2$s ved %3$s)."
 
 #: include/html.inc.php:659
 msgid "The host is not discovered anymore and will be deleted the next time discovery rule is processed."
-msgstr ""
+msgstr "Værtsgruppen er ikke opdaget længere og vil blive slettet, næste gang registreringsreglen behandles."
 
 #: include/classes/api/services/CImage.php:555
 #, c-format
 msgid "The image is used in icon map %1$s."
 msgid_plural "The image is used in icon maps %1$s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Billedet bruges i ikonkortet %1$s."
+msgstr[1] "Billedet bruges i ikonkortet %1$s."
 
 #: include/classes/api/services/CImage.php:591
 #, c-format
 msgid "The image is used in map %1$s."
 msgid_plural "The image is used in maps %1$s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Billedet bruges på kortet %1$s."
+msgstr[1] "Billedet bruges på kortet %1$s."
 
 #: include/html.inc.php:745
 #, c-format
@@ -19718,54 +19718,54 @@ msgstr "Datapunktet opdages ikke længere og vil blive slettet, næste gang opda
 #: include/classes/widgets/views/widget.geomap.form.view.php:76
 #, c-format
 msgid "The maximum zoom level is \"%1$s\"."
-msgstr ""
+msgstr "Det maksimale zoomniveau er \"%1$s\"."
 
 #: include/classes/data/CItemData.php:1002
 msgid "The number of processes. Returns integer"
-msgstr ""
+msgstr "Antallet af processer. Returnerer heltal"
 
 #: index_sso.php:193
 #, c-format
 msgid "The parameter \"%1$s\" is missing from the user attributes."
-msgstr ""
+msgstr "Parameteren \"%1$s\" mangler i brugerattributterne."
 
 #: include/classes/core/CJsonRpc.php:177
 msgid "The received JSON is not a valid JSON-RPC request."
-msgstr ""
+msgstr "Den modtagne JSON er ikke en gyldig JSON-RPC-anmodning."
 
 #: include/classes/core/CJsonRpc.php:182
 msgid "The requested remote-procedure does not exist / is not available"
-msgstr ""
+msgstr "Den ønskede fjernprocedure findes ikke/er ikke tilgængelig"
 
 #: templates.php:182
 msgid "The template being cloned belongs to a template group you don't have write permissions to. Non-writable group has been removed from the new template."
-msgstr ""
+msgstr "Skabelonen, der klones, tilhører en skabelongruppe, du ikke har skrivetilladelser til. Ikke-skrivbar gruppe er blevet fjernet fra den nye skabelon."
 
 #: app/views/popup.token.view.php:64
 msgid "The token has expired. Please update the expiry date to use the token."
-msgstr ""
+msgstr "Tokenet er udløbet. Opdater venligst udløbsdatoen for at bruge tokenet."
 
 #: include/html.inc.php:718
 #, c-format
 msgid "The trigger is not discovered anymore and will be deleted in %1$s (on %2$s at %3$s)."
-msgstr ""
+msgstr "Udløseren opdages ikke længere og vil blive slettet om %1$s (på %2$s ved %3$s)."
 
 #: include/html.inc.php:713
 msgid "The trigger is not discovered anymore and will be deleted the next time discovery rule is processed."
-msgstr ""
+msgstr "Udløseren opdages ikke længere og vil blive slettet, næste gang opdagelsesreglen behandles."
 
 #: app/views/administration.user.edit.php:255
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: app/views/administration.mediatype.edit.php:139
 #: app/views/popup.mediatypetest.edit.php:47
 msgid "These parameters will be passed to the script as command-line arguments in the specified order."
-msgstr ""
+msgstr "Disse parametre sendes til scriptet som kommandolinjeargumenter i den angivne rækkefølge."
 
 #: include/func.inc.php:2468
 msgid "This day last week"
-msgstr ""
+msgstr "Denne dag i sidste uge"
 
 #: app/partials/configuration.host.edit.html.php:398
 #, c-format
@@ -19774,83 +19774,83 @@ msgstr "Dette felt udfyldes automatisk af datapunktet \"%1$s\"."
 
 #: include/classes/scim/API.php:77
 msgid "This filter is not supported"
-msgstr ""
+msgstr "Dette filter er ikke understøttet"
 
 #: app/controllers/CControllerPopupMediatypeTestEdit.php:82
 msgid "This is the test message from Zabbix"
-msgstr ""
+msgstr "Dette er testbeskeden fra Zabbix"
 
 #: include/func.inc.php:2476
 msgid "This month"
-msgstr ""
+msgstr "Denne måned"
 
 #: include/func.inc.php:2477
 msgid "This month so far"
-msgstr ""
+msgstr "Indtil videre denne måned"
 
 #: include/classes/widgets/views/widget.item.form.view.php:231
 msgid "This setting applies only to numeric data."
-msgstr ""
+msgstr "Denne indstilling gælder kun for numeriske data."
 
 #: app/views/popup.tophosts.column.edit.php:172
 msgid "This setting applies only to numeric data. Non-numeric data will always be taken from history."
-msgstr ""
+msgstr "Denne indstilling gælder kun for numeriske data. Ikke-numeriske data vil altid blive taget fra historikken."
 
 #: app/partials/administration.system.info.php:199
 #: app/views/administration.housekeeping.edit.php:134
 msgid "This setting should be enabled, because history tables contain compressed chunks."
-msgstr ""
+msgstr "Denne indstilling bør være aktiveret, fordi historietabeller indeholder komprimerede bidder."
 
 #: app/partials/administration.system.info.php:213
 #: app/views/administration.housekeeping.edit.php:163
 msgid "This setting should be enabled, because trend tables contain compressed chunks."
-msgstr ""
+msgstr "Denne indstilling bør være aktiveret, fordi trendtabeller indeholder komprimerede bidder."
 
 #: include/views/configuration.item.edit.php:125
 #: include/views/configuration.item.prototype.edit.php:111
 msgid "This type of information may not match the key."
-msgstr ""
+msgstr "Denne type oplysninger matcher muligvis ikke nøglen."
 
 #: app/views/administration.user.edit.php:59
 msgid "This user is IdP provisioned. Manual changes for provisioned fields are not allowed."
-msgstr ""
+msgstr "Denne bruger er IdP-provisioneret. Manuelle ændringer for klargjorte felter er ikke tilladt."
 
 #: include/func.inc.php:2474
 msgid "This week"
-msgstr ""
+msgstr "Denne uge"
 
 #: include/func.inc.php:2475
 msgid "This week so far"
-msgstr ""
+msgstr "Denne uge indtil videre"
 
 #: include/func.inc.php:2478
 msgid "This year"
-msgstr ""
+msgstr "Dette år"
 
 #: include/func.inc.php:2479
 msgid "This year so far"
-msgstr ""
+msgstr "I år indtil videre"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:292
 #: app/views/popup.tophosts.column.edit.php:198
 msgid "Threshold"
-msgstr ""
+msgstr "Grænseværdi"
 
 #: app/views/popup.tophosts.column.edit.php:232
 msgid "Thresholds"
-msgstr ""
+msgstr "Grænseværdier"
 
 #: include/items.inc.php:1891 include/items.inc.php:1895
 msgid "Throttling"
-msgstr ""
+msgstr "Drossel"
 
 #: include/func.inc.php:216
 msgid "Thu"
-msgstr ""
+msgstr "Tor"
 
 #: include/func.inc.php:122 include/func.inc.php:228 jsLoader.php:248
 msgid "Thursday"
-msgstr ""
+msgstr "Torsdag"
 
 #: app/views/administration.geomaps.edit.php:77
 msgid "Tile URL"
@@ -19889,7 +19889,7 @@ msgstr ""
 #: include/events.inc.php:192 include/events.inc.php:285
 #: include/views/administration.auditacts.list.php:65
 msgid "Time"
-msgstr ""
+msgstr "Tid"
 
 #: app/views/monitoring.widget.actionlog.view.php:35
 #: app/views/monitoring.widget.actionlog.view.php:36
@@ -19897,20 +19897,20 @@ msgstr ""
 #: app/views/monitoring.widget.problems.view.php:41
 msgctxt "compact table header"
 msgid "Time"
-msgstr ""
+msgstr "Tid"
 
 #: include/classes/data/CItemData.php:1646
 msgid "Time a particular Zabbix process or a group of processes (identified by <type> and <mode>) spent in <state> in percentage."
-msgstr ""
+msgstr "Tid en bestemt Zabbix-proces eller en gruppe af processer (identificeret ved <type> og <mode>) brugt i <state> i procent."
 
 #: app/views/js/popup.mediatypetest.edit.js.php:103
 #: app/views/js/popup.scriptexec.js.php:44
 msgid "Time elapsed:"
-msgstr ""
+msgstr "Tid der er gået:"
 
 #: app/views/administration.gui.edit.php:132
 msgid "Time filter default period"
-msgstr ""
+msgstr "Standardperiode for tidsfilter"
 
 #: include/classes/data/CItemData.php:1650
 msgid "Time of proxy last access. Name - proxy name. Valid params are: lastaccess - Unix timestamp, delay - seconds."
@@ -19919,7 +19919,7 @@ msgstr "Tidspunkt for sidste adgang til proxy. Navn - proxy navn. Gyldige parame
 #: include/actions.inc.php:51
 #: include/classes/widgets/views/widget.svggraph.form.view.php:306
 msgid "Time period"
-msgstr ""
+msgstr "Tidsperiode"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:69
 #: app/controllers/CControllerPopupTriggerExpr.php:83
@@ -19933,15 +19933,15 @@ msgstr ""
 #: include/classes/widgets/CWidgetHelper.php:1015
 #: include/classes/widgets/CWidgetHelper.php:1283
 msgid "Time shift"
-msgstr ""
+msgstr "Tidsforskydning"
 
 #: include/classes/widgets/forms/CWidgetFormClock.php:31
 msgid "Time type"
-msgstr ""
+msgstr "Tidstype"
 
 #: app/views/administration.user.edit.php:254 app/views/popup.sla.edit.php:83
 msgid "Time zone"
-msgstr ""
+msgstr "Tidszone"
 
 #: app/views/administration.mediatype.edit.php:232
 #: app/views/administration.script.edit.php:199
@@ -19952,7 +19952,7 @@ msgstr ""
 #: include/views/configuration.item.edit.php:344
 #: include/views/configuration.item.prototype.edit.php:330 items.php:151
 msgid "Timeout"
-msgstr ""
+msgstr "Tiden er gået"
 
 #: app/views/monitoring.widget.plaintext.view.php:32
 #: include/classes/screens/CScreenHistory.php:265
@@ -19960,16 +19960,16 @@ msgstr ""
 #: include/classes/screens/CScreenHistory.php:444
 #: include/views/monitoring.history.php:291
 msgid "Timestamp"
-msgstr ""
+msgstr "Tidsstempel"
 
 #: app/views/monitoring.widget.plaintext.view.php:33
 msgctxt "compact table header"
 msgid "Timestamp"
-msgstr ""
+msgstr "Tidsstempel"
 
 #: app/views/sla.list.php:91
 msgid "Timezone"
-msgstr ""
+msgstr "Tidszone"
 
 #: app/controllers/CControllerSlaReportList.php:181
 #: app/partials/massupdate.valuemaps.tab.php:46
@@ -19981,7 +19981,7 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:93
 #: include/views/js/monitoring.sysmaps.js.php:771
 msgid "To"
-msgstr ""
+msgstr "Til"
 
 #: jsLoader.php:395
 msgid "To set a host interface select a single item type for all items"
@@ -19989,11 +19989,11 @@ msgstr "For at indstille et værts interfaece skal du vælge et enkelt datapunkt
 
 #: include/classes/screens/CScreenProblem.php:696 include/func.inc.php:2472
 msgid "Today"
-msgstr ""
+msgstr "I dag"
 
 #: include/func.inc.php:2473
 msgid "Today so far"
-msgstr ""
+msgstr "I dag indtil videre"
 
 #: include/classes/widgets/forms/CWidgetFormDataOver.php:86
 #: include/classes/widgets/forms/CWidgetFormItem.php:106
@@ -20006,15 +20006,15 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:686
 #: include/views/monitoring.sysmap.edit.php:253
 msgid "Top"
-msgstr ""
+msgstr "Top"
 
 #: include/classes/widgets/forms/CWidgetFormTopHosts.php:132
 msgid "Top N"
-msgstr ""
+msgstr "Top N"
 
 #: include/classes/widgets/CWidgetConfig.php:75
 msgid "Top hosts"
-msgstr ""
+msgstr "Top værter"
 
 #: app/views/administration.queue.overview.proxy.php:98
 #: app/views/monitoring.widget.hostavail.view.php:34
@@ -20022,40 +20022,40 @@ msgstr ""
 #: app/views/monitoring.widget.hostavail.view.php:105
 #: app/views/monitoring.widget.problemhosts.view.php:34
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: app/views/monitoring.widget.hostavail.view.php:40
 #: app/views/monitoring.widget.problemhosts.view.php:35
 msgctxt "compact table header"
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: include/classes/debug/CProfiler.php:153
 #, c-format
 msgid "Total Elasticsearch time: %1$s"
-msgstr ""
+msgstr "Samlet tid for Elasticsearch: %1$s"
 
 #: include/classes/debug/CProfiler.php:149
 #, c-format
 msgid "Total SQL time: %1$s"
-msgstr ""
+msgstr "Samlet SQL-tid: %1$s"
 
 #: include/classes/data/CItemData.php:1627
 msgid "Total time elapsed, in seconds, since last operating system boot-up, \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier"
-msgstr ""
+msgstr "Samlet tid, der er forløbet, i sekunder, siden sidste opstart af operativsystemet, \"url\" - VMware service URL, \"uuid\" - VMware virtuel maskine globalt unikt id"
 
 #: include/classes/data/CItemData.php:1446
 msgid "Total time elapsed, in seconds, since last operating system boot-up, <url> - VMware service URL, <uuid> - VMware virtual machine host name"
-msgstr ""
+msgstr "Samlet tid, der er forløbet, i sekunder, siden sidste opstart af operativsystemet, <url> - VMware-tjenestens URL, <uuid> - VMware-værtsnavnet på den virtuelle maskine"
 
 #: include/classes/debug/CProfiler.php:147
 #, c-format
 msgid "Total time: %1$s"
-msgstr ""
+msgstr "Samlet tid: %1$s"
 
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:104
 msgid "Totals"
-msgstr ""
+msgstr "Totaler"
 
 #: app/controllers/CControllerPopupMediatypeTestSend.php:172
 msgid "Trace"
@@ -20063,15 +20063,15 @@ msgstr ""
 
 #: include/page_footer.php:40
 msgid "Transaction has not been closed. Aborting..."
-msgstr ""
+msgstr "Transaktionen er ikke afsluttet. Afbryder..."
 
 #: include/classes/data/CItemData.php:830
 msgid "Transform SQL query result into a JSON array for low-level discovery."
-msgstr ""
+msgstr "Transform SQL-forespørgselsresultatet til et JSON-array til LLD opdagelse."
 
 #: include/classes/data/CItemData.php:834
 msgid "Transform SQL query result into a JSON array."
-msgstr ""
+msgstr "Transform SQL-forespørgselsresultatet til et JSON-array."
 
 #: include/classes/widgets/CWidgetHelper.php:929
 #: include/classes/widgets/CWidgetHelper.php:973
@@ -20087,18 +20087,18 @@ msgstr ""
 #: include/classes/widgets/CWidgetHelper.php:983
 #: include/classes/widgets/CWidgetHelper.php:1239
 msgid "Transparency"
-msgstr ""
+msgstr "Gennemsigtighed"
 
 #: include/classes/core/CJsonRpc.php:206
 msgid "Transport error."
-msgstr ""
+msgstr "Transportfejl."
 
 #: include/classes/widgets/CWidgetHelper.php:935
 #: include/classes/widgets/CWidgetHelper.php:1010
 #: include/classes/widgets/CWidgetHelper.php:1271
 msgctxt "missing data function"
 msgid "Treat as 0"
-msgstr ""
+msgstr "Behandle som 0"
 
 #: include/classes/data/CItemData.php:1678
 msgid "Trend function cache statistics. Valid parameters are: all, hits, phits, misses, pmisses, items, pitems and requests."
@@ -20109,7 +20109,7 @@ msgstr "Trend funktion cache statistik. Gyldige parametre er: all, hits, phits, 
 #: disc_prototypes.php:139 include/views/configuration.item.edit.php:885
 #: include/views/configuration.item.prototype.edit.php:797 items.php:84
 msgid "Trend storage period"
-msgstr ""
+msgstr "Trend opbevaringsperiode"
 
 #: app/partials/configuration.filter.items.php:156
 #: app/partials/monitoring.latest.view.html.php:75
@@ -20119,7 +20119,7 @@ msgstr ""
 #: include/forms.inc.php:587 include/views/configuration.item.list.php:94
 #: include/views/configuration.item.prototype.list.php:69 items.php:260
 msgid "Trends"
-msgstr ""
+msgstr "Trends"
 
 #: app/controllers/CControllerAuditLogList.php:242
 #: app/views/popup.massupdate.trigger.php:148 include/actions.inc.php:46
@@ -20130,130 +20130,130 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:815
 #: include/views/reports.toptriggers.php:86 jsLoader.php:267 jsLoader.php:383
 msgid "Trigger"
-msgstr ""
+msgstr "Udløser"
 
 #: include/classes/api/services/CTriggerGeneral.php:636
 #, c-format
 msgid "Trigger \"%1$s\" already exists on \"%2$s\"."
-msgstr ""
+msgstr "Udløseren \"%1$s\" findes allerede på \"%2$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:1813
 #, c-format
 msgid "Trigger \"%1$s\" belongs to templates with different linkages."
-msgstr ""
+msgstr "Udløseren \"%1$s\" hører skabeloner med forskellige koblinger."
 
 #: include/triggers.inc.php:372 include/triggers.inc.php:433
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the non-existent trigger \"%2$s\" on the host \"%3$s\"."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af den ikke-eksisterende udløser \"%2$s\" på værten \"%3$s\"."
 
 #: include/triggers.inc.php:373 include/triggers.inc.php:434
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the non-existent trigger \"%2$s\" on the template \"%3$s\"."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af den ikke-eksisterende udløser \"%2$s\" på skabelonen \"%3$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2679
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\" from the host \"%3$s\", because dependencies on triggers from a child template or host are not allowed."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af udløseren \"%2$s\" fra værten \"%3$s\", fordi afhængigheder af udløseren fra en underordnet skabelon eller vært ikke er tilladt."
 
 #: include/classes/api/services/CTriggerGeneral.php:2678
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\" from the template \"%3$s\", because dependencies on triggers from a child template or host are not allowed."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af udløseren \"%2$s\" fra skabelonen \"%3$s\", fordi afhængigheder af udløsere fra en underskabelon eller vært ikke er tilladt."
 
 #: include/classes/api/services/CTriggerGeneral.php:2572
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\" from the template \"%3$s\", because dependencies on triggers from the parent template are not allowed."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af udløseren \"%2$s\" fra skabelonen \"%3$s\", fordi afhængigheder af udløsere fra overskabelon ikke er tilladt."
 
 #: include/classes/api/services/CTriggerGeneral.php:2305
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\", because a circular linkage (%3$s) would occur for host \"%4$s\"."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af udløseren \"%2$s\", fordi en cirkulær kobling (%3$s) ville forekomme for værten \"%4$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2300
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\", because a circular linkage (%3$s) would occur for template \"%4$s\"."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af udløseren \"%2$s\", fordi en cirkulær kobling (%3$s) ville forekomme for skabelonen \"%4$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2316
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\", because a circular linkage (%3$s) would occur."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af udløseren \"%2$s\", fordi en cirkulær kobling (%3$s) ville forekomme."
 
 #: include/classes/api/services/CTriggerGeneral.php:2423
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\", because dependencies of host triggers on template triggers are not allowed."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af udløseren \"%2$s\", fordi afhængigheder af værtsudløsere på skabelonudløsere ikke er tilladt."
 
 #: include/classes/api/services/CTriggerGeneral.php:2808
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\", because the template \"%3$s\" is not linked to the host \"%4$s\"."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af udløseren \"%2$s\", fordi skabelonen \"%3$s\" ikke er knyttet til værten \"%4$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2807
 #, c-format
 msgid "Trigger \"%1$s\" cannot depend on the trigger \"%2$s\", because the template \"%3$s\" is not linked to the template \"%4$s\"."
-msgstr ""
+msgstr "Udløseren \"%1$s\" kan ikke afhænge af udløseren \"%2$s\", fordi skabelonen \"%3$s\" ikke er knyttet til skabelonen \"%4$s\"."
 
 #: include/classes/import/CConfigurationImport.php:1800
 #, c-format
 msgid "Trigger \"%1$s\" depends on trigger \"%2$s\", which does not exist."
-msgstr ""
+msgstr "Udløseren \"%1$s\" afhænger af udløseren \"%2$s\", som ikke eksisterer."
 
 #: app/controllers/CControllerMenuPopup.php:644
 msgid "Trigger URL"
-msgstr ""
+msgstr "Udløser URL"
 
 #: include/classes/helpers/CMenuHelper.php:199
 #: include/views/configuration.action.list.php:34
 msgid "Trigger actions"
-msgstr ""
+msgstr "Udløser handlinger"
 
 #: triggers.php:303
 msgid "Trigger added"
-msgstr ""
+msgstr "Udløser tilføjet"
 
 #: include/classes/api/services/CTrigger.php:1101
 msgid "Trigger cannot be dependent on a trigger that is inherited from it."
-msgstr ""
+msgstr "Udløseren kan ikke være afhængig af en udløser, der er nedarvet fra den."
 
 #: triggers.php:537
 msgid "Trigger copied"
 msgid_plural "Triggers copied"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Udløser kopieret"
+msgstr[1] "Udløsere kopieret"
 
 #: app/views/administration.housekeeping.edit.php:50
 msgid "Trigger data storage period"
-msgstr ""
+msgstr "Udløser datalagringsperiode"
 
 #: triggers.php:434
 msgid "Trigger deleted"
-msgstr ""
+msgstr "Udløser slettet"
 
 #: tr_events.php:174
 msgid "Trigger details"
-msgstr ""
+msgstr "Udløser detaljer"
 
 #: triggers.php:487
 msgid "Trigger disabled"
 msgid_plural "Triggers disabled"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Udløser deaktiveret"
+msgstr[1] "Udløserne deaktiveret"
 
 #: app/views/administration.trigdisplay.edit.php:31
 #: app/views/administration.trigdisplay.edit.php:166
 #: include/classes/helpers/CMenuHelper.php:266 include/html.inc.php:897
 msgid "Trigger displaying options"
-msgstr ""
+msgstr "Udløser visningsmuligheder"
 
 #: triggers.php:486
 msgid "Trigger enabled"
 msgid_plural "Triggers enabled"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Udløser aktiveret"
+msgstr[1] "Udløsere aktiveret"
 
 #: include/classes/api/services/CHostBase.php:1189
 #, c-format
@@ -20262,24 +20262,24 @@ msgstr "Udløseren har datapunkter fra skabelonen \"%1$s\" der ikke er knyttet t
 
 #: include/actions.inc.php:1267
 msgid "Trigger in \"unknown\" state"
-msgstr ""
+msgstr "Udløser i \"ukendt\" tilstand"
 
 #: include/classes/api/services/CHostBase.php:1134
 #, c-format
 msgid "Trigger in template \"%1$s\" has dependency with trigger in template \"%2$s\"."
-msgstr ""
+msgstr "Udløseren i skabelonen \"%1$s\" er afhængig af udløseren i skabelonen \"%2$s\"."
 
 #: include/views/monitoring.sysmap.edit.php:194
 msgid "Trigger label type"
-msgstr ""
+msgstr "Udløser etikettype"
 
 #: include/actions.inc.php:44
 msgid "Trigger name"
-msgstr ""
+msgstr "Udløsernavn"
 
 #: include/classes/widgets/CWidgetConfig.php:72
 msgid "Trigger overview"
-msgstr ""
+msgstr "Udløser oversigt"
 
 #: app/controllers/CControllerAuditLogList.php:243
 #: app/views/popup.lldoperation.php:52
@@ -20287,77 +20287,77 @@ msgstr ""
 #: include/views/configuration.trigger.prototype.edit.php:560
 #: include/views/js/configuration.host.discovery.edit.overr.js.php:166
 msgid "Trigger prototype"
-msgstr ""
+msgstr "Udløser prototype"
 
 #: include/classes/api/services/CTriggerGeneral.php:637
 #, c-format
 msgid "Trigger prototype \"%1$s\" already exists on \"%2$s\"."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" findes allerede på \"%2$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:1817
 #, c-format
 msgid "Trigger prototype \"%1$s\" belongs to templates with different linkages."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" tilhører skabeloner med forskellige koblinger."
 
 #: include/classes/api/services/CDiscoveryRule.php:916
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the non-existent trigger \"%2$s\" on the host \"%3$s\"."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af den ikke-eksisterende udløser \"%2$s\" på værten \"%3$s\"."
 
 #: include/classes/api/services/CDiscoveryRule.php:915
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the non-existent trigger \"%2$s\" on the template \"%3$s\"."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af den ikke-eksisterende udløser \"%2$s\" på skabelonen \"%3$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2684
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger \"%2$s\" from the host \"%3$s\", because dependencies on triggers from a child template or host are not allowed."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af udløseren \"%2$s\" fra værten \"%3$s\", fordi afhængigheder af udløseren fra en underskabelon eller vært ikke er tilladt."
 
 #: include/classes/api/services/CTriggerGeneral.php:2683
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger \"%2$s\" from the template \"%3$s\", because dependencies on triggers from a child template or host are not allowed."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af udløseren \"%2$s\" fra skabelonen \"%3$s\", fordi afhængigheder af udløsere fra en underskabelon eller vært ikke er tilladt."
 
 #: include/classes/api/services/CTriggerGeneral.php:2573
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger \"%2$s\" from the template \"%3$s\", because dependencies on triggers from the parent template are not allowed."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af udløseren \"%2$s\" fra skabelonen \"%3$s\", fordi afhængigheder af udløsere fra den overordnede skabelon ikke er tilladt."
 
 #: include/classes/api/services/CTriggerGeneral.php:2424
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger \"%2$s\", because dependencies of host triggers on template triggers are not allowed."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af udløseren \"%2$s\", fordi afhængigheder af værtsudløsere på skabelonudløsere ikke er tilladt."
 
 #: include/classes/api/services/CTriggerGeneral.php:2813
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger \"%2$s\", because the template \"%3$s\" is not linked to the host \"%4$s\"."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af udløseren \"%2$s\", fordi skabelonen \"%3$s\" ikke er knyttet til værten \"%4$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2812
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger \"%2$s\", because the template \"%3$s\" is not linked to the template \"%4$s\"."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af udløseren \"%2$s\", fordi skabelonen \"%3$s\" ikke er knyttet til skabelonen \"%4$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2306
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger prototype \"%2$s\", because a circular linkage (%3$s) would occur for host \"%4$s\"."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af udløserprototypen \"%2$s\", fordi en cirkulær kobling (%3$s) ville forekomme for værten \"%4$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2301
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger prototype \"%2$s\", because a circular linkage (%3$s) would occur for template \"%4$s\"."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af udløserprototypen \"%2$s\", fordi en cirkulær kobling (%3$s) ville forekomme for skabelonen \"%4$s\"."
 
 #: include/classes/api/services/CTriggerGeneral.php:2317
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger prototype \"%2$s\", because a circular linkage (%3$s) would occur."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af udløserprototypen \"%2$s\", fordi en cirkulær kobling (%3$s) ville forekomme."
 
 #: include/classes/api/services/CTriggerGeneral.php:1325
 #, c-format
 msgid "Trigger prototype \"%1$s\" cannot depend on the trigger prototype \"%2$s\", because dependencies on trigger prototypes from another LLD rule are not allowed."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" kan ikke afhænge af udløserprototypen \"%2$s\", fordi afhængigheder af udløserprototyper fra en anden LLD-regel ikke er tilladt."
 
 #: include/classes/api/services/CTriggerGeneral.php:1715
 #, c-format
@@ -20367,7 +20367,7 @@ msgstr "Udløserprototype \"%1$s\" indeholder datapunktprototyper fra flere regi
 #: include/classes/import/CConfigurationImport.php:1481
 #, c-format
 msgid "Trigger prototype \"%1$s\" depends on trigger \"%2$s\", which does not exist."
-msgstr ""
+msgstr "Udløserprototypen \"%1$s\" afhænger af udløseren \"%2$s\", som ikke eksisterer."
 
 #: include/classes/api/services/CTriggerGeneral.php:1710
 #, c-format
@@ -20376,22 +20376,22 @@ msgstr "Udløserprototypen \"%1$s\" skal indeholde mindst én datapunktprototype
 
 #: trigger_prototypes.php:254
 msgid "Trigger prototype added"
-msgstr ""
+msgstr "Udløser prototype tilføjet"
 
 #: include/classes/api/services/CTriggerPrototype.php:924
 msgid "Trigger prototype cannot be dependent on a trigger that is inherited from it."
-msgstr ""
+msgstr "Udløserprototype kan ikke være afhængig af en udløser, der er nedarvet fra den."
 
 #: trigger_prototypes.php:383
 msgid "Trigger prototype deleted"
-msgstr ""
+msgstr "Udløserprototype slettet"
 
 #: trigger_prototypes.php:362 trigger_prototypes.php:439
 #: trigger_prototypes.php:487
 msgid "Trigger prototype updated"
 msgid_plural "Trigger prototypes updated"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Udløserprototype opdateret"
+msgstr[1] "Udløserprototyper opdateret"
 
 #: app/controllers/CControllerPopupGeneric.php:183
 #: app/controllers/CControllerPopupImportCompare.php:174
@@ -20400,39 +20400,39 @@ msgstr[1] ""
 #: include/views/configuration.trigger.prototype.edit.php:29
 #: include/views/configuration.trigger.prototype.list.php:29
 msgid "Trigger prototypes"
-msgstr ""
+msgstr "Udløserprototyper"
 
 #: trigger_prototypes.php:450
 msgid "Trigger prototypes deleted"
-msgstr ""
+msgstr "Udløserprototyper slettet"
 
 #: app/controllers/CControllerPopupMassupdateTrigger.php:217
 msgid "Trigger prototypes updated"
-msgstr ""
+msgstr "Udløserprototyper opdateret"
 
 #: app/views/administration.user.edit.php:743 include/actions.inc.php:45
 msgid "Trigger severity"
-msgstr ""
+msgstr "Udløser alvorlighedsgrad"
 
 #: app/views/popup.condition.common.php:228
 msgid "Trigger source"
-msgstr ""
+msgstr "Udløserkilde"
 
 #: jsLoader.php:367
 msgid "Trigger status \"OK\""
-msgstr ""
+msgstr "Udløserstatus \"OK\""
 
 #: jsLoader.php:368
 msgid "Trigger status \"Problem\""
-msgstr ""
+msgstr "Udløserstatus \"Problem\""
 
 #: app/partials/configuration.tags.tab.php:130
 msgid "Trigger tags"
-msgstr ""
+msgstr "Udløser tags"
 
 #: app/controllers/CControllerPopupMassupdateTrigger.php:218 triggers.php:413
 msgid "Trigger updated"
-msgstr ""
+msgstr "Udløser opdateret"
 
 #: app/controllers/CControllerPopupGeneric.php:169
 #: app/controllers/CControllerPopupImportCompare.php:166
@@ -20455,32 +20455,32 @@ msgstr ""
 #: include/views/inventory.host.view.php:214
 #: include/views/js/monitoring.sysmaps.js.php:176 triggers.php:600
 msgid "Triggers"
-msgstr ""
+msgstr "Udløsere"
 
 #: triggers.php:552
 msgid "Triggers deleted"
-msgstr ""
+msgstr "Udløsere slettet"
 
 #: include/classes/helpers/CMenuHelper.php:145
 #: include/classes/helpers/CRoleHelper.php:377
 msgid "Triggers top 100"
-msgstr ""
+msgstr "Udløser top 100"
 
 #: include/items.inc.php:1808
 msgid "Trim"
-msgstr ""
+msgstr "Trimme"
 
 #: include/func.inc.php:214
 msgid "Tue"
-msgstr ""
+msgstr "Tir"
 
 #: include/func.inc.php:120 include/func.inc.php:226 jsLoader.php:246
 msgid "Tuesday"
-msgstr ""
+msgstr "Tirsdag"
 
 #: include/locales.inc.php:63
 msgid "Turkish (tr_TR)"
-msgstr ""
+msgstr "Tyrkisk (tr_TR)"
 
 #: include/classes/api/services/CItem.php:1021
 #, c-format
@@ -20489,11 +20489,11 @@ msgstr "To datapunkter (\"%1$s\" og \"%2$s\") kan ikke udfylde ét værtsinventa
 
 #: jsLoader.php:272
 msgid "Two map elements should be selected"
-msgstr ""
+msgstr "Der skal vælges to kortelementer"
 
 #: include/classes/widgets/forms/CWidgetFormItem.php:442
 msgid "Two or more fields cannot occupy same space."
-msgstr ""
+msgstr "To eller flere felter kan ikke optage samme plads."
 
 #: app/controllers/CControllerPopupGeneric.php:233
 #: app/controllers/CControllerPopupGeneric.php:284
@@ -20538,21 +20538,21 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:815
 #: include/views/monitoring.sysmap.edit.php:398
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: app/views/monitoring.widget.actionlog.view.php:39
 #: app/views/monitoring.widget.actionlog.view.php:40
 msgctxt "compact table header"
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: include/hosts.inc.php:104
 msgid "Type (Full details)"
-msgstr ""
+msgstr "Type (Fuld detaljer)"
 
 #: include/views/js/monitoring.sysmaps.js.php:799
 msgid "Type (OK)"
-msgstr ""
+msgstr "Type (OK)"
 
 #: app/partials/popup.operations.php:243
 #: app/views/configuration.correlation.edit.php:112
@@ -20560,7 +20560,7 @@ msgstr ""
 #: include/views/configuration.action.edit.php:120
 #: include/views/configuration.host.discovery.edit.php:744
 msgid "Type of calculation"
-msgstr ""
+msgstr "Type beregning"
 
 #: app/controllers/CControllerPopupGeneric.php:234
 #: app/controllers/CControllerPopupGeneric.php:285
@@ -20571,25 +20571,25 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:123
 #: include/views/configuration.item.prototype.edit.php:901
 msgid "Type of information"
-msgstr ""
+msgstr "Type af information"
 
 #: include/forms.inc.php:531
 msgid "Types"
-msgstr ""
+msgstr "Typer"
 
 #: include/classes/api/services/CRole.php:478
 #, c-format
 msgid "UI element \"%2$s\" is not available for user role \"%1$s\"."
-msgstr ""
+msgstr "UI-elementet \"%2$s\" er ikke tilgængeligt for brugerrollen \"%1$s\"."
 
 #: app/views/js/administration.regex.edit.js.php:194
 #: include/translateDefines.inc.php:25
 msgid "UNKNOWN"
-msgstr ""
+msgstr "UKENDT"
 
 #: include/events.inc.php:336 include/events.inc.php:343
 msgid "UPDATING"
-msgstr ""
+msgstr "OPDATERER"
 
 #: app/views/popup.httpstep.php:52 app/views/popup.massupdate.item.php:83
 #: disc_prototypes.php:152 host_discovery.php:127
@@ -20604,97 +20604,97 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:319
 #: include/views/monitoring.sysmap.edit.php:280 items.php:156 jsLoader.php:384
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: app/views/administration.user.edit.php:286
 msgid "URL (after login)"
-msgstr ""
+msgstr "URL (efter login)"
 
 #: include/hosts.inc.php:269
 msgid "URL A"
-msgstr ""
+msgstr "URL A"
 
 #: include/hosts.inc.php:274
 msgid "URL B"
-msgstr ""
+msgstr "URL B"
 
 #: include/hosts.inc.php:279
 msgid "URL C"
-msgstr ""
+msgstr "URL C"
 
 #: include/views/js/common.item.edit.js.php:203
 #: include/views/js/configuration.httpconf.edit.js.php:181
 msgid "URL is not properly encoded."
-msgstr ""
+msgstr "URL er ikke korrekt kodet."
 
 #: include/classes/api/services/CMap.php:961
 #: include/classes/api/services/CMap.php:1436
 #, c-format
 msgid "URL name should be unique for map \"%1$s\"."
-msgstr ""
+msgstr "URL-navnet skal være unikt for kortet \"%1$s\"."
 
 #: include/html.inc.php:104
 msgid "URL parameter cannot be array."
-msgstr ""
+msgstr "URL-parameter kan ikke være matrix."
 
 #: include/html.inc.php:110
 msgid "URL parameter name is empty."
-msgstr ""
+msgstr "URL-parameternavnet er tomt."
 
 #: include/classes/api/services/CMap.php:955
 #: include/classes/api/services/CMap.php:1430
 #, c-format
 msgid "URL should have both \"name\" and \"url\" fields for map \"%1$s\"."
-msgstr ""
+msgstr "URL skal have både \"navn\" og \"url\" felter for kortet \"%1$s\"."
 
 #: include/views/js/monitoring.sysmaps.js.php:316
 #: include/views/monitoring.sysmap.edit.php:313 jsLoader.php:385
 msgid "URLs"
-msgstr ""
+msgstr "URL'er"
 
 #: include/forms.inc.php:1453 include/forms.inc.php:1485
 #: include/views/js/item.preprocessing.js.php:140
 #: include/views/js/item.preprocessing.js.php:177
 #: include/views/js/item.preprocessing.js.php:223
 msgid "UTF-8 from Hex-STRING"
-msgstr ""
+msgstr "UTF-8 fra Hex-STRING"
 
 #: include/classes/validators/CApiInputValidator.php:2638
 #: include/classes/validators/CApiInputValidator.php:2644
 msgid "UUIDv4 is expected"
-msgstr ""
+msgstr "UUIDv4 forventes"
 
 #: include/locales.inc.php:64
 msgid "Ukrainian (uk_UA)"
-msgstr ""
+msgstr "Ukrainsk (uk_UA)"
 
 #: include/classes/core/CConfigFile.php:252
 msgid "Unable to change configuration file permissions to 0600."
-msgstr ""
+msgstr "Kan ikke ændre konfigurationsfiltilladelser til 0600."
 
 #: include/classes/core/CConfigFile.php:261
 msgid "Unable to create the configuration file."
-msgstr ""
+msgstr "Kan ikke oprette konfigurationsfilen."
 
 #: include/classes/db/MysqlDbBackend.php:35
 #: include/classes/db/OracleDbBackend.php:36
 #: include/classes/db/PostgresqlDbBackend.php:61
 #, c-format
 msgid "Unable to determine current Zabbix database version: %1$s."
-msgstr ""
+msgstr "Kan ikke bestemme den aktuelle Zabbix-databaseversion: %1$s."
 
 #: include/classes/helpers/CAuthenticationHelper.php:88
 #: include/classes/helpers/CAuthenticationHelper.php:107
 msgid "Unable to find SAML userdirectory."
-msgstr ""
+msgstr "Kan ikke finde SAML-brugermappe."
 
 #: include/classes/helpers/CAuthenticationHelper.php:75
 msgid "Unable to load authentication API parameters."
-msgstr ""
+msgstr "Kan ikke indlæse autentificerings-API-parametre."
 
 #: include/classes/core/CConfigFile.php:187
 msgid "Unable to load database credentials from Vault."
-msgstr ""
+msgstr "Kan ikke indlæse databaselegitimationsoplysninger fra Vault."
 
 #: include/classes/helpers/CHousekeepingHelper.php:66
 msgid "Unable to load housekeeping API parameters."
@@ -20702,57 +20702,57 @@ msgstr ""
 
 #: include/classes/helpers/CSettingsHelper.php:113
 msgid "Unable to load settings API parameters."
-msgstr ""
+msgstr "Kan ikke indlæse API-parametre for indstillinger."
 
 #: include/classes/core/CConfigFile.php:257
 msgid "Unable to overwrite the existing configuration file."
-msgstr ""
+msgstr "Kan ikke overskrive den eksisterende konfigurationsfil."
 
 #: app/views/administration.housekeeping.edit.php:160
 msgid "Unable to retrieve TimescaleDB compression support status."
-msgstr ""
+msgstr "Kan ikke hente TimescaleDB-komprimeringsunderstøttelsesstatus."
 
 #: app/views/administration.housekeeping.edit.php:170
 msgid "Unable to retrieve TimescaleDB version."
-msgstr ""
+msgstr "Kan ikke hente TimescaleDB-versionen."
 
 #: app/partials/administration.system.info.php:156
 msgid "Unable to retrieve database version."
-msgstr ""
+msgstr "Kan ikke hente databaseversionen."
 
 #: include/classes/db/DbBackend.php:147
 msgid "Unable to select configuration."
-msgstr ""
+msgstr "Kan ikke vælge konfiguration."
 
 #: include/classes/helpers/CUploadFile.php:57
 msgid "Unable to upload file because \"file_uploads\" is disabled."
-msgstr ""
+msgstr "Filen kunne ikke uploades, fordi \"file_uploads\" er deaktiveret."
 
 #: app/views/popup.acknowledge.edit.php:91
 msgid "Unacknowledge"
-msgstr ""
+msgstr "Afvis bekræftelse"
 
 #: include/actions.inc.php:2079
 msgid "Unacknowledged"
-msgstr ""
+msgstr "Ubekræftet"
 
 #: app/views/administration.trigdisplay.edit.php:41
 msgid "Unacknowledged PROBLEM events"
-msgstr ""
+msgstr "Ikke bekræftet PROBLEM begivenheder"
 
 #: app/views/administration.trigdisplay.edit.php:65
 msgid "Unacknowledged RESOLVED events"
-msgstr ""
+msgstr "Ubekræftede LØST begivenheder"
 
 #: include/classes/widgets/forms/CWidgetFormProblemHosts.php:124
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:180
 #: include/views/monitoring.sysmap.edit.php:265
 msgid "Unacknowledged only"
-msgstr ""
+msgstr "Kun ubekræftede"
 
 #: app/partials/administration.ha.nodes.php:56
 msgid "Unavailable"
-msgstr ""
+msgstr "Ikke tilgængelig"
 
 #: app/views/administration.user.list.php:250
 msgid "Unblock"
@@ -20767,7 +20767,7 @@ msgstr ""
 #: include/views/js/item.preprocessing.js.php:176
 #: include/views/js/item.preprocessing.js.php:222
 msgid "Unchanged"
-msgstr ""
+msgstr "Uændret"
 
 #: app/views/popup.acknowledge.edit.php:125
 msgid "Undo problem acknowledgement."
