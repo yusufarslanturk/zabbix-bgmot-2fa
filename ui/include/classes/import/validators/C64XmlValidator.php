@@ -2849,6 +2849,41 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 	}
 
 	/**
+	 * Validate master item.
+	 *
+	 * @param string      $data         Import data.
+	 * @param array|null  $parent_data  Data's parent array.
+	 * @param string      $path         XML path.
+	 *
+	 * @return array
+	 */
+	public function validateMasterItem($data, ?array $parent_data, $path) {
+		$prefix = substr(strrchr($path, '/'), 1);
+		$rules = ['type' => XML_ARRAY | XML_REQUIRED, 'prefix' => $prefix, 'rules' => ['key' => ['type' => XML_STRING]]];
+
+		if ($parent_data['type'] == ITEM_TYPE_DEPENDENT) {
+			$rules['rules']['key']['type'] |= XML_REQUIRED;
+		}
+
+		return $this->doValidate($rules, $data, $path);
+	}
+
+	/**
+	 * Validate authtype.
+	 *
+	 * @param string      $data         Import data.
+	 * @param array|null  $parent_data  Data's parent array.
+	 * @param string      $path         XML path.
+	 *
+	 * @return array
+	 */
+	public function validateAuthType($data, ?array $parent_data, $path) {
+		$rules = $this->getAuthTypeExtendedRules($parent_data);
+
+		return $this->doValidate($rules, $data, $path);
+	}
+
+	/**
 	 * Validate graph_items tag.
 	 *
 	 * @param array       $data         Import data.
@@ -2868,6 +2903,27 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 	}
 
 	/**
+	 * Validate preprocessing step error handler.
+	 *
+	 * @param string|array  $data         Import data.
+	 * @param array|null    $parent_data  Data's parent array.
+	 * @param string        $path         XML path.
+	 *
+	 * @return string|array
+	 */
+	public function validatePreprocErrHandler($data, ?array $parent_data, $path) {
+		$in = $this->ITEM_PREPROCESSING_ERROR_HANDLER;
+
+		if ($parent_data['type'] == CXmlConstantName::CHECK_NOT_SUPPORTED) {
+			unset($in[CXmlConstantValue::ORIGINAL_ERROR]);
+		}
+
+		$rules = ['type' => XML_STRING, 'in' => $in];
+
+		return $this->doValidate($rules, $data, $path);
+	}
+
+	/**
 	 * Validate widget field "value" tag.
 	 *
 	 * @param string|array  $data         Import data.
@@ -2880,6 +2936,23 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 		$rules = $this->getWidgetFieldValueExtendedRules($parent_data);
 
 		return $this->doValidate($rules, $data, $path);
+	}
+
+	/**
+	 * Get extended validation rules.
+	 *
+	 * @param array $data  Import data.
+	 *
+	 * @return array
+	 */
+	public function getAuthTypeExtendedRules(array $data) {
+		if (array_key_exists('type', $data)) {
+			if ($data['type'] == CXmlConstantValue::ITEM_TYPE_SSH || $data['type'] == CXmlConstantName::SSH) {
+				return ['type' => XML_STRING, 'default' => CXmlConstantValue::PASSWORD, 'in' => [CXmlConstantValue::PASSWORD => CXmlConstantName::PASSWORD, CXmlConstantValue::PUBLIC_KEY => CXmlConstantName::PUBLIC_KEY]];
+			}
+		}
+
+		return ['type' => XML_STRING, 'default' => CXmlConstantValue::NONE, 'in' => [CXmlConstantValue::NONE => CXmlConstantName::NONE, CXmlConstantValue::BASIC => CXmlConstantName::BASIC, CXmlConstantValue::NTLM => CXmlConstantName::NTLM, CXmlConstantValue::KERBEROS => CXmlConstantName::KERBEROS, CXmlConstantValue::DIGEST => CXmlConstantName::DIGEST]];
 	}
 
 	/**
