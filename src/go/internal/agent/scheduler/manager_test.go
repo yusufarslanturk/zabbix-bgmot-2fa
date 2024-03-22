@@ -1865,7 +1865,7 @@ func Test_getCapacity(t *testing.T) {
 					},
 				},
 			},
-			100,
+			10,
 		},
 		{
 			"system_cap",
