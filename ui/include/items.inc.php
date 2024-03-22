@@ -404,16 +404,11 @@ function interfaceIdsByType(array $interfaces) {
  *
  * @param string $src_type
  * @param array  $src_ids
- * @param bool   $dst_is_template
- * @param array  $dst_hostids
+ * @param array  $dst_hosts
  *
  * @return bool
  */
-function copyItemsToHosts(string $src_type, array $src_ids, bool $dst_is_template, array $dst_hostids): bool {
-	if (!$dst_hostids) {
-		return true;
-	}
-
+function copyItemsToHosts(string $src_type, array $src_ids, array $dst_hosts): bool {
 	$options = in_array($src_type, ['templateids', 'hostids']) ? ['inherited' => false] : [];
 
 	if ($src_type === 'hostids') {
@@ -488,6 +483,7 @@ function copyItemsToHosts(string $src_type, array $src_ids, bool $dst_is_templat
 		}
 	}
 
+	$dst_hostids = array_keys($dst_hosts);
 	$valuemap_links = [];
 
 	if ($src_valuemapids) {
@@ -519,18 +515,7 @@ function copyItemsToHosts(string $src_type, array $src_ids, bool $dst_is_templat
 
 	$interface_links = [];
 	$dst_interfaceids = [];
-	$dst_hosts = $dst_is_template
-		? API::Template()->get([
-			'output' => ['host', 'status'],
-			'templateids' => $dst_hostids,
-			'preservekeys' => true
-		])
-		: API::Host()->get([
-			'output' => ['host', 'status'],
-			'hostids' => $dst_hostids,
-			'selectInterfaces' => ['interfaceid', 'main', 'type', 'useip', 'ip', 'dns', 'port', 'details'],
-			'preservekeys' => true
-		]);
+	$dst_is_template = reset($dst_hosts)['status'] == HOST_STATUS_TEMPLATE;
 
 	if (!$dst_is_template) {
 		$src_interfaces = [];
