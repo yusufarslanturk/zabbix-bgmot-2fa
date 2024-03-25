@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-12-24 07:17+0000\n"
+"PO-Revision-Date: 2024-03-24 22:45+0000\n"
 "Last-Translator: 璞玉 <puyu@bbqi.cc>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: zh_CN\n"
@@ -2014,15 +2014,15 @@ msgstr "换行"
 
 #: tests/selenium/modules/module_number_7/Module.php:17
 msgid "CSRF test"
-msgstr ""
+msgstr "CSRF测试"
 
 #: tests/selenium/modules/module_number_7/views/csrf.form.view.php:25
 msgid "CSRF token test"
-msgstr ""
+msgstr "CSRF令牌测试"
 
 #: tests/selenium/modules/module_number_7/actions/CsrfFormUpdate.php:35
 msgid "CSRF token validation succeeded."
-msgstr ""
+msgstr "CSRF令牌验证成功。"
 
 #: include/items.inc.php:1828
 msgid "CSV to JSON"
@@ -18872,7 +18872,7 @@ msgstr "子拓扑图"
 
 #: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
 msgid "Submit"
-msgstr ""
+msgstr "提交"
 
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:168
 msgid "Subscription"
@@ -23813,7 +23813,7 @@ msgstr "degree() - 将弧度转换为度数"
 
 #: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
 msgid "delimiter"
-msgstr ""
+msgstr "分隔符"
 
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
@@ -24774,7 +24774,7 @@ msgstr "问题模式"
 
 #: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
 msgid "qualifier"
-msgstr ""
+msgstr "限定符"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
 msgid "radians() - Converts a value from degrees to radians"
