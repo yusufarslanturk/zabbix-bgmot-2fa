@@ -67,7 +67,7 @@ class CProxy extends CApiService {
 
 		$api_input_rules = ['type' => API_OBJECT, 'fields' => [
 			'proxyids' =>				['type' => API_IDS, 'flags' => API_ALLOW_NULL | API_NORMALIZE, 'default' => null],
-			'filter' =>					['type' => API_FILTER, 'flags' => API_ALLOW_NULL, 'default' => null, 'fields' => ['proxyid', 'host', 'status', 'lastaccess', 'tls_connect', 'tls_accept', 'tls_issuer', 'tls_subject', 'proxy_address', 'auto_compress', 'version', 'compatibility']],
+			'filter' =>					['type' => API_FILTER, 'flags' => API_ALLOW_NULL, 'default' => null, 'fields' => ['proxyid', 'host', 'status', 'proxy_address', 'tls_connect', 'tls_accept', 'tls_issuer', 'tls_subject', 'auto_compress', 'lastaccess', 'version', 'compatibility']],
 			'search' =>					['type' => API_FILTER, 'flags' => API_ALLOW_NULL, 'default' => null, 'fields' => ['host', 'description']],
 			'searchByAny' =>			['type' => API_BOOLEAN, 'default' => false],
 			'startSearch' =>			['type' => API_FLAG, 'default' => false],
@@ -124,24 +124,21 @@ class CProxy extends CApiService {
 		}
 
 		// filter
-		if ($options['filter'] === null) {
-			$options['filter'] = [];
-		}
-		else {
+		if ($options['filter'] !== null) {
 			$options['filter'] = CArrayHelper::renameKeys($options['filter'], ['proxyid' => 'hostid']);
-		}
 
-		$this->dbFilter('hosts h', $options, $sql_parts);
+			$this->dbFilter('hosts h', $options, $sql_parts);
 
-		$rt_filter = [];
-		foreach (['lastaccess', 'version', 'compatibility'] as $field) {
-			if (array_key_exists($field, $options['filter']) && $options['filter'][$field] !== null) {
-				$rt_filter[$field] = $options['filter'][$field];
+			$rt_filter = [];
+			foreach (['lastaccess', 'version', 'compatibility'] as $field) {
+				if (array_key_exists($field, $options['filter']) && $options['filter'][$field] !== null) {
+					$rt_filter[$field] = $options['filter'][$field];
+				}
 			}
-		}
 
-		if ($rt_filter) {
-			$this->dbFilter('host_rtdata hr', ['filter' => $rt_filter] + $options, $sql_parts);
+			if ($rt_filter) {
+				$this->dbFilter('host_rtdata hr', ['filter' => $rt_filter] + $options, $sql_parts);
+			}
 		}
 
 		// search
