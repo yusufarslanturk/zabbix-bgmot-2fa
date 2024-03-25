@@ -2766,6 +2766,21 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 	}
 
 	/**
+	 * Chooses default value for preprocessing step error handler.
+	 *
+	 * @param array $parent_data  Data's parent array.
+	 *
+	 * @return int
+	 */
+	public function defaultPreprocErrHandler(array $parent_data): int {
+		if ($parent_data['type'] == CXmlConstantValue::CHECK_NOT_SUPPORTED) {
+			return CXmlConstantValue::DISCARD_VALUE;
+		}
+
+		return CXmlConstantValue::ORIGINAL_ERROR;
+	}
+
+	/**
 	 * Validate "ymin_item_1" tag.
 	 *
 	 * @param string      $data         Import data.
