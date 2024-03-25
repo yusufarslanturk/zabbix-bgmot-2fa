@@ -30,10 +30,16 @@ class CImportDataAdapterTest extends TestCase {
 	 */
 	protected $sources = [];
 
-	public function testEmptyXml() {
+	/**
+	 * @beforeClass prepareData
+	 */
+	public static function prepareData() {
 		global $DB;
-		$DB['TYPE'] = ZBX_DB_ORACLE;
 
+		$DB['TYPE'] = ZBX_DB_ORACLE;
+	}
+
+	public function testEmptyXml() {
 		$adapter = $this->getAdapter($this->getEmptyXml());
 
 		$this->assertEquals($adapter->getHostGroups(), []);
