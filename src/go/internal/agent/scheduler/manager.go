@@ -41,11 +41,11 @@ import (
 )
 
 const (
-	// Number of seconds to wait for plugins to finish during scheduler shutdown.
+	// shutdownTimeout is number of seconds to wait for plugins to finish during scheduler shutdown.
 	shutdownTimeout = 5
-	// Inactive shutdown value.
+	// shutdownInactive is inactive shutdown value.
 	shutdownInactive = -1
-	// Default plugin capacity if Plugins.<Name>.System.Capacity and Plugins.<Name>.Capacity are not defined.
+	// defaultCapacity is default plugin capacity if System.Capacity and Capacity are not defined in plugin config.
 	defaultCapacity = 100
 )
 
