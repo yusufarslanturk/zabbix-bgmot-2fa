@@ -374,8 +374,8 @@ elseif (hasRequest('add') || hasRequest('update')) {
 				throw new Exception();
 			}
 
-			if (!copyItemsToHosts('templateids', [$cloneTemplateId],
-					[$template['templateid'] => $template + ['status' => HOST_STATUS_TEMPLATE]])) {
+			$dst_templates = [$template['templateid'] => $template + ['status' => HOST_STATUS_TEMPLATE]];
+			if (!copyItemsToHosts('templateids', [$cloneTemplateId], $dst_templates)) {
 				throw new Exception();
 			}
 

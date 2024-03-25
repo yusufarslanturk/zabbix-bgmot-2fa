@@ -600,7 +600,7 @@ function copyItemsToHosts(string $src_type, array $src_ids, array $dst_hosts): b
 	do {
 		$dst_items = [];
 
-		foreach ($dst_hostids as $dst_hostid) {
+		foreach ($dst_hosts as $dst_hostid => $dst_host) {
 			foreach ($src_items as $src_item) {
 				$dst_item = array_diff_key($src_item, array_flip(['itemid']));
 
@@ -633,7 +633,7 @@ function copyItemsToHosts(string $src_type, array $src_ids, array $dst_hosts): b
 							}
 							else {
 								error(_s('Cannot find host interface on "%1$s" for item with key "%2$s".',
-									$dst_hosts[$dst_hostid]['host'], $src_item['key_']
+									$dst_host['host'], $src_item['key_']
 								));
 
 								return false;
@@ -649,7 +649,7 @@ function copyItemsToHosts(string $src_type, array $src_ids, array $dst_hosts): b
 				$dst_items[] = ['hostid' => $dst_hostid] + getSanitizedItemFields([
 					'templateid' => 0,
 					'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
-					'hosts' => [$dst_hosts[$dst_hostid]],
+					'hosts' => [$dst_host],
 				] + $dst_item);
 			}
 		}
