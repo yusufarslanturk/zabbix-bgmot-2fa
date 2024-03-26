@@ -620,14 +620,19 @@ class CUser extends CApiService {
 			}
 		}
 
-		if ($userids['usrgrps']) {
-			$options = [
-				'output' => ['id', 'usrgrpid', 'userid'],
-				'filter' => ['userid' => $userids['usrgrps']]
-			];
-			$db_usrgrps = DBselect(DB::makeSql('users_groups', $options));
+		if (!$userids) {
+			return;
+		}
 
-			while ($db_usrgrp = DBfetch($db_usrgrps)) {
+		if ($userids['usrgrps']) {
+			$result = DBselect(
+				'SELECT ug.id,ug.usrgrpid,ug.userid,g.gui_access'.
+				' FROM users_groups ug,usrgrp g'.
+				' WHERE ug.usrgrpid=g.usrgrpid'.
+					' AND '.dbConditionId('ug.userid', $userids['usrgrps'])
+			);
+
+			while ($db_usrgrp = DBfetch($result)) {
 				$db_users[$db_usrgrp['userid']]['usrgrps'][$db_usrgrp['id']] =
 					array_diff_key($db_usrgrp, array_flip(['userid']));
 			}
