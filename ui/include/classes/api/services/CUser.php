@@ -334,17 +334,10 @@ class CUser extends CApiService {
 						_s('Not allowed to update field "%1$s" for provisioned user.', 'passwd')
 					);
 				}
-
-				$this->checkPassword($user, '/'.($i + 1).'/passwd');
+				elseif ($this->checkPassword($user, '/'.($i + 1).'/passwd')) {
+					$user['passwd'] = password_hash($user['passwd'], PASSWORD_BCRYPT, ['cost' => ZBX_BCRYPT_COST]);
+				}
 			}
-
-			/*
-			 * If user is created without a password (e.g. for GROUP_GUI_ACCESS_LDAP), store an empty string
-			 * as his password in database.
-			 */
-			$user['passwd'] = array_key_exists('passwd', $user)
-				? password_hash($user['passwd'], PASSWORD_BCRYPT, ['cost' => ZBX_BCRYPT_COST])
-				: '';
 		}
 		unset($user);
 
