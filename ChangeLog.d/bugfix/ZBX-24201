@@ -1,1 +1,1 @@
-A......... [ZBX-24201] fixed LDAP users unable to update profile settings without specifying password (jfreibergs)
+A......... [ZBX-24201] fixed issue of LDAP users being unable to update profile settings without specifying password (jfreibergs)
