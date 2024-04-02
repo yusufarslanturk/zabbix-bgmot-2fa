@@ -444,7 +444,7 @@ class CUserGroup extends CApiService {
 		$userids = array_keys($userids);
 
 		$db_users = DB::select('users', [
-			'output' => ['userdirectoryid'],
+			'output' => [],
 			'userids' => $userids,
 			'preservekeys' => true
 		]);
@@ -452,14 +452,6 @@ class CUserGroup extends CApiService {
 		foreach ($userids as $userid) {
 			if (!array_key_exists($userid, $db_users)) {
 				self::exception(ZBX_API_ERROR_PARAMETERS, _s('User with ID "%1$s" is not available.', $userid));
-			}
-
-			if ($db_users[$userid]['userdirectoryid'] != 0) {
-				self::exception(ZBX_API_ERROR_PARAMETERS,
-					_s('User with ID "%1$s" is IdP provisioned. Manual changes for provisioned fields are not allowed.',
-						$userid
-					)
-				);
 			}
 		}
 	}
