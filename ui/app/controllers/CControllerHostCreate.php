@@ -108,9 +108,14 @@ class CControllerHostCreate extends CControllerHostUpdateGeneral {
 
 			$result = API::Host()->create($host);
 
-			if ($result === false
-					|| !$this->createValueMaps($result['hostids'][0])
-					|| ($full_clone && !$this->copyFromCloneSourceHost($src_hostid, $result['hostids'][0]))) {
+			if ($result === false) {
+				throw new Exception();
+			}
+
+			$host = ['hostid' => $result['hostids'][0]] + $host;
+
+			if (!$this->createValueMaps($result['hostids'][0])
+					|| ($full_clone && !$this->copyFromCloneSourceHost($src_hostid, $host))) {
 				throw new Exception();
 			}
 
@@ -195,23 +200,23 @@ class CControllerHostCreate extends CControllerHostUpdateGeneral {
 	/**
 	 * Copy http tests, items, triggers, discovery rules and graphs from source host to target host.
 	 *
-	 * @param string $src_hostid  Source hostid.
-	 * @param string $hostid      Target hostid.
+	 * @param string $src_hostid
+	 * @param array  $dst_host
 	 *
 	 * @return bool
 	 */
-	private function copyFromCloneSourceHost(string $src_hostid, string $hostid): bool {
+	private function copyFromCloneSourceHost(string $src_hostid, array $dst_host): bool {
 		// First copy web scenarios with web items, so that later regular items can use web item as their master item.
-		if (!copyHttpTests($src_hostid, $hostid)) {
+		if (!copyHttpTests($src_hostid, $dst_host['hostid'])) {
 			return false;
 		}
 
-		if (!copyItemsToHosts('hostids', [$src_hostid], false, [$hostid])) {
+		if (!copyItemsToHosts('hostids', [$src_hostid], [$dst_host['hostid'] => $dst_host])) {
 			return false;
 		}
 
 		// Copy triggers.
-		if (!copyTriggersToHosts([$hostid], $src_hostid)) {
+		if (!copyTriggersToHosts([$dst_host['hostid']], $src_hostid)) {
 			return false;
 		}
 
@@ -225,7 +230,7 @@ class CControllerHostCreate extends CControllerHostUpdateGeneral {
 		if ($db_discovery_rules) {
 			$copy_discovery_rules = API::DiscoveryRule()->copy([
 				'discoveryids' => array_column($db_discovery_rules, 'itemid'),
-				'hostids' => [$hostid]
+				'hostids' => [$dst_host['hostid']]
 			]);
 
 			if (!$copy_discovery_rules) {
@@ -252,7 +257,7 @@ class CControllerHostCreate extends CControllerHostUpdateGeneral {
 				continue;
 			}
 
-			if (!copyGraphToHost($db_graph['graphid'], $hostid)) {
+			if (!copyGraphToHost($db_graph['graphid'], $dst_host['hostid'])) {
 				return false;
 			}
 		}
