@@ -1,0 +1,1 @@
+....I..... [ZBX-23441] fixed Go agent Makefile template not respecting DESTDIR (jxl)
