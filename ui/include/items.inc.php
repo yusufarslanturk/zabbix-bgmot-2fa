@@ -649,7 +649,7 @@ function copyItemsToHosts(string $src_type, array $src_ids, array $dst_hosts): b
 				$dst_items[] = ['hostid' => $dst_hostid] + getSanitizedItemFields([
 					'templateid' => 0,
 					'flags' => ZBX_FLAG_DISCOVERY_NORMAL,
-					'hosts' => [$dst_host],
+					'hosts' => [$dst_host]
 				] + $dst_item);
 			}
 		}
