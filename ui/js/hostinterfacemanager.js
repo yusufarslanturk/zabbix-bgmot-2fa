@@ -486,6 +486,7 @@ class HostInterfaceManager {
 
 		if (tag_name === 'INPUT') {
 			const type = el.getAttribute('type');
+			const {checked, name, value} = el;
 
 			switch (type) {
 				case 'text':
@@ -494,7 +495,7 @@ class HostInterfaceManager {
 
 				case 'radio':
 				case 'checkbox':
-					const {checked, name, value} = el;
+					el.readOnly = true;
 					el.disabled = true;
 
 					if (checked) {

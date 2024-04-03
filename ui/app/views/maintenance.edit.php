@@ -88,7 +88,8 @@ $tags = (new CTable())
 				->addValue(_('And/Or'), MAINTENANCE_TAG_EVAL_TYPE_AND_OR)
 				->addValue(_('Or'), MAINTENANCE_TAG_EVAL_TYPE_OR)
 				->setModern()
-				->setEnabled($data['allowed_edit'] && $data['maintenance_type'] == MAINTENANCE_TYPE_NORMAL)
+				->setEnabled($data['maintenance_type'] == MAINTENANCE_TYPE_NORMAL)
+				->setReadonly(!$data['allowed_edit'])
 		))
 	)
 	->setFooter(
@@ -177,7 +178,7 @@ $form->addItem(
 					'name' => 'groupids[]',
 					'object_name' => 'hostGroup',
 					'data' => $data['groups_ms'],
-					'disabled' => !$data['allowed_edit'],
+					'readonly' => !$data['allowed_edit'],
 					'popup' => [
 						'parameters' => [
 							'srctbl' => 'host_groups',
@@ -197,7 +198,7 @@ $form->addItem(
 					'name' => 'hostids[]',
 					'object_name' => 'hosts',
 					'data' => $data['hosts_ms'],
-					'disabled' => !$data['allowed_edit'],
+					'readonly' => !$data['allowed_edit'],
 					'popup' => [
 						'parameters' => [
 							'srctbl' => 'hosts',

@@ -2625,6 +2625,9 @@ div.dashboard-widget-tophosts z-bar-gauge {
     .radio-list-control input[type="radio"][disabled] + label {
       transition: none;
       cursor: default; }
+    .radio-list-control input[type="radio"]:checked[readonly] + label {
+      background-color: #d6dde1 !important;
+      -webkit-text-fill-color: #1f2c33 !important; }
   .radio-list-control + .icon-info {
     margin-left: 5px; }
 
@@ -4017,6 +4020,10 @@ form.is-loading {
       background-color: #ccd5d9;
       color: #768d99;
       -webkit-text-fill-color: #768d99; }
+  .multiselect [aria-readonly] .subfilter-enabled,
+  .multiselect [aria-readonly] .subfilter-disable-btn {
+    cursor: default;
+    background-color: #ccd5d9; }
   .multiselect div[aria-live] {
     overflow: hidden;
     position: absolute;
@@ -4324,6 +4331,8 @@ select {
     transform: translate(-50%, -50%) rotate(-45deg); }
   .checkbox-radio[type="checkbox"]:checked[disabled] + label span::after {
     border-color: #acbbc2 !important; }
+  .checkbox-radio[type="checkbox"]:checked[readonly] + label span::after {
+    border-color: #1f2c33 !important; }
   .checkbox-radio[type="radio"] + label span {
     border-radius: 50%; }
   .checkbox-radio[type="radio"]:checked + label span::after {
@@ -4338,6 +4347,8 @@ select {
     border-radius: 50%; }
   .checkbox-radio[type="radio"]:checked[disabled] + label span::after {
     background-color: #acbbc2 !important; }
+  .checkbox-radio[type="radio"]:checked[readonly] + label span::after {
+    background-color: #1f2c33 !important; }
   .checkbox-radio:focus + label span {
     border-color: #02659f; }
   .checkbox-radio:checked[disabled] + label span {
@@ -4869,8 +4880,8 @@ button[disabled], button[disabled]:hover, button[disabled]:active {
     opacity: .3;
     background-color: transparent; }
 
-z-select[readonly] .focusable,
-.z-select[readonly] .focusable, input[readonly], textarea[readonly] {
+.radio-list-control input[type="radio"]:checked[readonly] + label, .radio-list-control input[type="radio"][readonly] + label, z-select[readonly] .focusable,
+.z-select[readonly] .focusable, .multiselect[aria-readonly], input[readonly], textarea[readonly] {
   color: #1f2c33;
   -webkit-text-fill-color: #1f2c33;
   background-color: #ebebeb;
@@ -7299,7 +7310,7 @@ button.icon-action-command, button.icon-action-close, button.icon-action-msg, bu
   width: 85px; }
 #itemsTable .table-col-y-axis-side {
   width: 85px; }
-#itemsTable .table-col-colour {
+#itemsTable .table-col-color {
   width: 55px; }
 #itemsTable .table-col-action {
   width: 55px; }

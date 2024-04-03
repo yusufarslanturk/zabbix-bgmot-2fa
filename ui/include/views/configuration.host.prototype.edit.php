@@ -21,6 +21,7 @@
 
 /**
  * @var CView $this
+ * @var array $data
  */
 
 require_once __DIR__.'/js/configuration.host.prototype.edit.js.php';
@@ -186,7 +187,7 @@ $host_tab->addRow(
 	(new CMultiSelect([
 		'name' => 'group_links[]',
 		'object_name' => 'hostGroup',
-		'disabled' => (bool) $host_prototype['templateid'],
+		'readonly' => (bool) $host_prototype['templateid'],
 		'data' => $data['groups_ms'],
 		'popup' => [
 			'parameters' => [
@@ -392,7 +393,8 @@ $encryption_tab = (new CFormList('encryption'))
 			->addValue(_('PSK'), HOST_ENCRYPTION_PSK)
 			->addValue(_('Certificate'), HOST_ENCRYPTION_CERTIFICATE)
 			->setModern(true)
-			->setEnabled(false)
+			->setEnabled($data['context'] !== 'template')
+			->setReadonly($data['context'] !== 'template')
 	)
 	->addRow(_('Connections from host'),
 		(new CList())
@@ -400,14 +402,17 @@ $encryption_tab = (new CFormList('encryption'))
 			->addItem((new CCheckBox('tls_in_none'))
 				->setLabel(_('No encryption'))
 				->setAttribute('disabled', 'disabled')
+				->setReadonly($data['context'] !== 'template')
 			)
 			->addItem((new CCheckBox('tls_in_psk'))
 				->setLabel(_('PSK'))
 				->setAttribute('disabled', 'disabled')
+				->setReadonly($data['context'] !== 'template')
 			)
 			->addItem((new CCheckBox('tls_in_cert'))
 				->setLabel(_('Certificate'))
 				->setAttribute('disabled', 'disabled')
+				->setReadonly($data['context'] !== 'template')
 			)
 	)
 	->addRow(_('PSK'),
@@ -420,12 +425,14 @@ $encryption_tab = (new CFormList('encryption'))
 	->addRow(_('Issuer'),
 		(new CTextBox('tls_issuer', $parent_host['tls_issuer'], false, 1024))
 			->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
-			->setAttribute('disabled', 'disabled')
+			->setEnabled($data['context'] !== 'template')
+			->setReadonly($data['context'] !== 'template')
 	)
 	->addRow(_x('Subject', 'encryption certificate'),
 		(new CTextBox('tls_subject', $parent_host['tls_subject'], false, 1024))
 			->setWidth(ZBX_TEXTAREA_BIG_WIDTH)
-			->setAttribute('disabled', 'disabled')
+			->setEnabled($data['context'] !== 'template')
+			->setReadonly($data['context'] !== 'template')
 	);
 
 $tabs->addTab('encryptionTab', _('Encryption'), $encryption_tab, TAB_INDICATOR_ENCRYPTION);
