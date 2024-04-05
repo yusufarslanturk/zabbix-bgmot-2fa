@@ -11246,6 +11246,10 @@ msgstr "アイテムが\"取得不可\"の状態"
 msgid "Item list"
 msgstr "アイテムリスト"
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "アイテムが選択されていません"

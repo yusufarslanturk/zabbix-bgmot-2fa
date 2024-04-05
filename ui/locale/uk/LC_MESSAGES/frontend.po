@@ -11468,6 +11468,10 @@ msgstr "Елемент даних в стані \"не підтримуєтьс�
 msgid "Item list"
 msgstr "Список елементів даних"
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "Елемент даних не вибрано"

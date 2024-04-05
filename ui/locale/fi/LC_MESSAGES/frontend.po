@@ -11344,6 +11344,10 @@ msgstr ""
 msgid "Item list"
 msgstr ""
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr ""

@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2023-12-26 22:02+0000\n"
-"Last-Translator: Tomáš Skočdopole <tomas.skocdopole@initmax.cz>\n"
+"PO-Revision-Date: 2024-04-03 19:55+0000\n"
+"Last-Translator: Tomáš Heřmánek <tomas.hermanek@initmax.cz>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -692,12 +692,11 @@ msgid "Action class %1$s must extend %2$s class."
 msgstr "Třída akcí %1$s musí rozšířit třídu %2$s."
 
 #: app/controllers/CControllerActionDelete.php:79
-#, fuzzy
 msgid "Action deleted"
 msgid_plural "Actions deleted"
 msgstr[0] "Akce byla smazána"
-msgstr[1] "Akce byla smazána"
-msgstr[2] "Akce byla smazána"
+msgstr[1] ""
+msgstr[2] ""
 
 #: app/controllers/CControllerActionDisable.php:84
 msgid "Action disabled"
@@ -2025,15 +2024,15 @@ msgstr "CRLF"
 
 #: tests/selenium/modules/module_number_7/Module.php:17
 msgid "CSRF test"
-msgstr ""
+msgstr "CSRF test"
 
 #: tests/selenium/modules/module_number_7/views/csrf.form.view.php:25
 msgid "CSRF token test"
-msgstr ""
+msgstr "Test CSRF tokenu"
 
 #: tests/selenium/modules/module_number_7/actions/CsrfFormUpdate.php:35
 msgid "CSRF token validation succeeded."
-msgstr ""
+msgstr "Ověření CSRF tokenu bylo úspěšné."
 
 #: include/items.inc.php:1879
 msgid "CSV to JSON"
@@ -2448,12 +2447,11 @@ msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "Není možné smazat interního Zabbix uživatele \"%1$s\", zkuste ho vypnout."
 
 #: app/controllers/CControllerActionDelete.php:87
-#, fuzzy
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
 msgstr[0] "Nelze smazat akci"
-msgstr[1] "Nelze smazat akci"
-msgstr[2] "Nelze smazat akci"
+msgstr[1] ""
+msgstr[2] ""
 
 #: include/classes/api/services/CRole.php:368
 #, c-format
@@ -11468,6 +11466,10 @@ msgstr "Položka je v \"not supported\" stavu"
 msgid "Item list"
 msgstr "Seznam položek"
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "Položka nevybraná"
@@ -18729,7 +18731,7 @@ msgstr "Podmapa"
 
 #: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
 msgid "Submit"
-msgstr ""
+msgstr "Odeslat"
 
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:167
 msgid "Subscription"
@@ -23371,7 +23373,7 @@ msgstr "degrees() - Převede hodnotu z radiánů na stupně"
 
 #: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
 msgid "delimiter"
-msgstr ""
+msgstr "oddělovač"
 
 #: widgets/actionlog/includes/WidgetForm.php:65
 #: widgets/actionlog/includes/WidgetForm.php:67
@@ -24326,7 +24328,7 @@ msgstr "vzorec problému"
 
 #: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
 msgid "qualifier"
-msgstr ""
+msgstr "kvalifikátor"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
 msgid "radians() - Converts a value from degrees to radians"

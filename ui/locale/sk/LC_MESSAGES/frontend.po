@@ -11469,6 +11469,10 @@ msgstr "Položka je v \"not supported\" stave"
 msgid "Item list"
 msgstr "Zoznam itemov"
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "Položka nie je označená"

@@ -11356,6 +11356,10 @@ msgstr "פריט במצב „לא נתמך”"
 msgid "Item list"
 msgstr "פריט ברשימה"
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "לא נבחר פריט"

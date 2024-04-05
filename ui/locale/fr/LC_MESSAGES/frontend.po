@@ -11357,6 +11357,10 @@ msgstr "Élément dans l'état \"non supporté\""
 msgid "Item list"
 msgstr "Liste d'éléments"
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "Élément non sélectionné"

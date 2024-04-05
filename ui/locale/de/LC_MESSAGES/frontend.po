@@ -11364,6 +11364,10 @@ msgstr "Datenpunkt im Zustand \"nicht unterstützt\""
 msgid "Item list"
 msgstr "Liste von Datenpunkten"
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "Datenpunkt nicht ausgewählt"

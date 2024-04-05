@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-03-18 08:45+0000\n"
+"PO-Revision-Date: 2024-04-02 13:52+0000\n"
 "Last-Translator: Xevi Noè i Nogueiras <xevi.noe@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ca\n"
@@ -671,11 +671,10 @@ msgid "Action class %1$s must extend %2$s class."
 msgstr "La classe d'acció %1$s ha d'ampliar la classe %2$s."
 
 #: app/controllers/CControllerActionDelete.php:79
-#, fuzzy
 msgid "Action deleted"
 msgid_plural "Actions deleted"
 msgstr[0] "S'ha esborrat l'acció"
-msgstr[1] "S'ha esborrat l'acció"
+msgstr[1] ""
 
 #: app/controllers/CControllerActionDisable.php:84
 msgid "Action disabled"
@@ -2416,11 +2415,10 @@ msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "No es pot pas esborrar l'usuari intern de Zabbix \"%1$s\"; proveu a desactivar aquest usuari."
 
 #: app/controllers/CControllerActionDelete.php:87
-#, fuzzy
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
 msgstr[0] "No es pot pas esborrar l'acció"
-msgstr[1] "No es pot pas esborrar l'acció"
+msgstr[1] ""
 
 #: include/classes/api/services/CRole.php:368
 #, c-format
@@ -11355,6 +11353,10 @@ msgstr "Element amb estat \"no compatible\""
 #: widgets/svggraph/views/widget.edit.js.php:297
 msgid "Item list"
 msgstr "Llistat d'elements"
+
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"

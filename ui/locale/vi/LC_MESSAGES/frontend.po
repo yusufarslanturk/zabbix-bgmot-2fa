@@ -11243,6 +11243,10 @@ msgstr "Item trong trạng thái \"không được hỗ trợ\""
 msgid "Item list"
 msgstr ""
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "Item không được lựa chọn"
