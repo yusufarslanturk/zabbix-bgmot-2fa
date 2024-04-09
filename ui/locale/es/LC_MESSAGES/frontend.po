@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2024-01-20 20:37+0000\n"
+"PO-Revision-Date: 2024-03-21 19:26+0000\n"
 "Last-Translator: Vicente Salvador <vicentesalvadorcubedo@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: es\n"
@@ -2032,6 +2032,18 @@ msgstr "Porcentaje de utilización de CPU. Devuelve un número con coma flotante
 #: app/views/popup.itemtestedit.view.php:300
 msgid "CRLF"
 msgstr "CRLF"
+
+#: tests/selenium/modules/module_number_7/Module.php:17
+msgid "CSRF test"
+msgstr "Prueba CSRF"
+
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:25
+msgid "CSRF token test"
+msgstr "Prueba de token CSRF"
+
+#: tests/selenium/modules/module_number_7/actions/CsrfFormUpdate.php:35
+msgid "CSRF token validation succeeded."
+msgstr "La validación del token CSRF fue exitosa."
 
 #: include/items.inc.php:1828
 msgid "CSV to JSON"
@@ -18997,6 +19009,10 @@ msgstr "Asunto"
 msgid "Submap"
 msgstr "Submapa"
 
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
+msgid "Submit"
+msgstr "Enviar"
+
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:168
 msgid "Subscription"
 msgstr "Suscripción"
@@ -23949,6 +23965,10 @@ msgstr "por defecto"
 msgid "degrees() - Converts a value from radians to degrees"
 msgstr "degrees() - Convierte un valor de radianes a grados"
 
+#: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
+msgid "delimiter"
+msgstr "delimitador"
+
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:35
@@ -24905,6 +24925,10 @@ msgstr "power() - La potencia de un valor base a un valor de potencia"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:361
 msgid "problem pattern"
 msgstr "patrón de problema"
+
+#: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
+msgid "qualifier"
+msgstr "calificador"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
 msgid "radians() - Converts a value from degrees to radians"

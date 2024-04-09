@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-12-24 07:17+0000\n"
+"PO-Revision-Date: 2024-03-24 22:45+0000\n"
 "Last-Translator: 璞玉 <puyu@bbqi.cc>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: zh_CN\n"
@@ -2011,6 +2011,18 @@ msgstr "CPU 使用率百分比。返回浮点数"
 #: app/views/popup.itemtestedit.view.php:300
 msgid "CRLF"
 msgstr "换行"
+
+#: tests/selenium/modules/module_number_7/Module.php:17
+msgid "CSRF test"
+msgstr "CSRF测试"
+
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:25
+msgid "CSRF token test"
+msgstr "CSRF令牌测试"
+
+#: tests/selenium/modules/module_number_7/actions/CsrfFormUpdate.php:35
+msgid "CSRF token validation succeeded."
+msgstr "CSRF令牌验证成功。"
 
 #: include/items.inc.php:1828
 msgid "CSV to JSON"
@@ -18858,6 +18870,10 @@ msgstr "主体"
 msgid "Submap"
 msgstr "子拓扑图"
 
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
+msgid "Submit"
+msgstr "提交"
+
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:168
 msgid "Subscription"
 msgstr "订阅"
@@ -23795,6 +23811,10 @@ msgstr "默认的"
 msgid "degrees() - Converts a value from radians to degrees"
 msgstr "degree() - 将弧度转换为度数"
 
+#: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
+msgid "delimiter"
+msgstr "分隔符"
+
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:35
@@ -24751,6 +24771,10 @@ msgstr "power() - 基值的幂"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:361
 msgid "problem pattern"
 msgstr "问题模式"
+
+#: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
+msgid "qualifier"
+msgstr "限定符"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
 msgid "radians() - Converts a value from degrees to radians"

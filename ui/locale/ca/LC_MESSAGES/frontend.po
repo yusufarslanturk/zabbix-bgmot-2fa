@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-17 15:53+0200\n"
-"PO-Revision-Date: 2023-12-16 13:08+0000\n"
+"PO-Revision-Date: 2024-03-18 08:45+0000\n"
 "Last-Translator: Xevi Noè i Nogueiras <xevi.noe@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ca\n"
@@ -2031,6 +2031,18 @@ msgstr "Percentatge d'ús de la CPU. Retorna un nombre flotant"
 #: app/views/popup.itemtestedit.view.php:300
 msgid "CRLF"
 msgstr "CRLF"
+
+#: tests/selenium/modules/module_number_7/Module.php:17
+msgid "CSRF test"
+msgstr "Prova CSRF"
+
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:25
+msgid "CSRF token test"
+msgstr "Prova de token CSRF"
+
+#: tests/selenium/modules/module_number_7/actions/CsrfFormUpdate.php:35
+msgid "CSRF token validation succeeded."
+msgstr "La validació del token CSRF ha funcionat."
 
 #: include/items.inc.php:1828
 msgid "CSV to JSON"
@@ -18996,6 +19008,10 @@ msgstr "Assumpte"
 msgid "Submap"
 msgstr "Submapa"
 
+#: tests/selenium/modules/module_number_7/views/csrf.form.view.php:20
+msgid "Submit"
+msgstr "Enviar"
+
 #: app/controllers/CControllerPopupScheduledReportSubscriptionEdit.php:168
 msgid "Subscription"
 msgstr "Subscripció"
@@ -23948,6 +23964,10 @@ msgstr "per defecte"
 msgid "degrees() - Converts a value from radians to degrees"
 msgstr "degrees() - Converteix un valor de radians a graus"
 
+#: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
+msgid "delimiter"
+msgstr "delimitador"
+
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:31
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:33
 #: include/classes/widgets/forms/CWidgetFormActionLog.php:35
@@ -24904,6 +24924,10 @@ msgstr "power() - La potència d'un valor base a un valor de potència"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:361
 msgid "problem pattern"
 msgstr "patró del problema"
+
+#: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
+msgid "qualifier"
+msgstr "qualificador"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
 msgid "radians() - Converts a value from degrees to radians"
