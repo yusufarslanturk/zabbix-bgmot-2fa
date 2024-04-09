@@ -1,3 +1,15 @@
+Changes for 5.0.41
+
+5.0.41rc1 was released as 5.0.41 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 5.0.41rc1
+
+Bug fixes:
+...G...... [ZBX-23890] removed non-existing headers from compiler checks: mtent.h and knlist.h (arimdjonoks)
+..F....... [ZBX-23733] fixed error when downloading graph as .png image if item name contains multibyte characters (gcalenko)
+
+--------------------------------------------------------------------------------
 Changes for 5.0.40
 
 5.0.40rc1 was released as 5.0.40 without any changes
@@ -9,6 +21,7 @@ Bug fixes:
 .......P.. [ZBX-22493] fixed foreign key support with SQLite3 database (wiper)
 .........T [ZBX-23639] changed value type for item prototype 'Pool Percent Used' in Ceph by Zabbix agent 2 template (akotsegubov)
 ..F....... [ZBX-21891] fixed messages about enabling, disabling and updating modules being different from other places (agriscenko)
+...G...... [ZBX-23855] fixed buffer overread in DNS response (askolmeisters)
 
 --------------------------------------------------------------------------------
 Changes for 5.0.39
@@ -21,6 +34,8 @@ Changes for 5.0.39rc1
 Bug fixes:
 ...G...PS. [ZBX-23542] fixed memory leaks when using certificate-based encryption in Zabbix agent and Zabbix agent 2 (akozlovs, Andris)
 ........S. [ZBX-23064] simplified trend synchronization queries to improve performance (vso)
+.......PS. [ZBX-23857] remove group/all access flags when creating fping input file for testing fping features (Andris)
+...G...... [ZBX-23858] fixed injection vulnerability in Zabbix agent 2 smartctl plugin (esneiders)
 
 --------------------------------------------------------------------------------
 Changes for 5.0.38
@@ -2884,6 +2899,7 @@ Changes for 4.0.50
 Changes for 4.0.50rc1
 
 Bug fixes:
+.......PS. [ZBX-23857] remove group/all access flags when creating fping input file for testing fping features (Andris)
 
 --------------------------------------------------------------------------------
 Changes for 4.0.49
