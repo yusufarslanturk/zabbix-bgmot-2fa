@@ -25,8 +25,8 @@
 		<property name="conf2" value="--enable-server ${with.db}"/>
 		<property name="conf3" value="--enable-proxy ${with.db}"/>
 		<property name="conf4" value="--enable-server --enable-agent --enable-proxy ${with.db}"/>
-		<property name="conf6" value="--enable-server --enable-agent --enable-proxy ${with.db} --with-libxml2 --with-unixodbc --with-net-snmp --with-ssh2 --with-openipmi --with-libevent --with-openssl --with-ldap  --with-libcurl"/>
-		<property name="conf7" value="--enable-server --enable-agent --enable-proxy ${with.db} --with-libxml2 --with-unixodbc --with-net-snmp --with-ssh2 --with-openipmi --with-libevent --with-gnutls --with-ldap  --with-libcurl"/>
+		<property name="conf6" value="--enable-server --enable-agent --enable-proxy ${with.db} --with-libxml2 --with-unixodbc --with-net-snmp --with-ssh2 --with-openipmi --with-libevent --with-openssl --with-ldap --with-libcurl"/>
+		<property name="conf7" value="--enable-server --enable-agent --enable-proxy ${with.db} --with-libxml2 --with-unixodbc --with-net-snmp --with-ssh2 --with-openipmi --with-libevent --with-gnutls --with-ldap --with-libcurl"/>
 	</target>
 
 	<!-- Additional Zabbix configuration parameters -->
@@ -133,8 +133,6 @@
 			<trycatch>
 				<try>
 					<exec executable="make" failonerror="on">
-						<arg line="-s"/>
-						<arg line="-j5"/>
 						<arg line="@{target}"/>
 					</exec>
 					<if>
@@ -193,8 +191,6 @@
 			<trycatch>
 				<try>
 					<exec executable="make" failonerror="on">
-						<arg line="-s"/>
-						<arg line="-j5"/>
 						<arg line="tests_build"/>
 					</exec>
 					<mkdir dir="tests_results/@{conf-name}"/>
@@ -224,11 +220,12 @@
 		<!-- Zabbix various configuration parameters for cmocka tests -->
 		<!-- Configuration option name must consist of prefix 'cmocka-', configuration order number
 			and configuration title: cmocka-<number>-<title> -->
-		<property name="cmocka-1-default" value="-q CFLAGS='-Wall -Wextra -Wdeclaration-after-statement -Wpointer-arith -Wno-maybe-uninitialized -Wformat -Wmissing-prototypes' --enable-server --enable-agent --enable-proxy --enable-ipv6 --with-mysql --with-libxml2 --with-unixodbc --with-net-snmp --with-ssh2 --with-openipmi --with-libevent --with-openssl --with-ldap --with-libcurl --with-iconv --with-libpcre"/>
-		<property name="cmocka-2-agent-only" value="-q --enable-agent"/>
-		<property name="cmocka-3-server-only" value="-q --enable-server --with-mysql"/>
-		<property name="cmocka-4-proxy-only" value="-q --enable-proxy --with-sqlite3"/>
-		<property name="cmocka-5-sanitizer" value="CC=clang CFLAGS='-Wall -Wextra -Wenum-conversion -g -fsanitize=leak,address' LDFLAGS='-fsanitize=leak,address' -q --enable-server --enable-agent --enable-proxy --enable-ipv6 --with-mysql --with-libxml2 --with-unixodbc --with-net-snmp --with-ssh2 --with-openipmi --with-libevent --with-openssl --with-ldap --with-libcurl --with-iconv --with-libpcre"/>
+		<property name="COMP_FLAGS_CMOCKA" value="-Wall -Wextra -Wdeclaration-after-statement -Wno-null-pointer-subtraction -Wno-missing-field-initializers -Wno-deprecated-declarations -Wpointer-arith -Wno-maybe-uninitialized -Wformat -Wmissing-prototypes"/>
+		<property name="cmocka-1-default" value="-q CFLAGS='${COMP_FLAGS_CMOCKA}' --enable-server --enable-agent --enable-proxy --enable-ipv6 --with-mysql --with-libxml2 --with-unixodbc --with-net-snmp --with-ssh2 --with-openipmi --with-libevent --with-openssl --with-ldap --with-libcurl --with-iconv --with-libpcre"/>
+		<property name="cmocka-2-agent-only" value="-q CFLAGS='${COMP_FLAGS_CMOCKA}' --enable-agent"/>
+		<property name="cmocka-3-server-only" value="-q CFLAGS='${COMP_FLAGS_CMOCKA}' --enable-server --with-mysql"/>
+		<property name="cmocka-4-proxy-only" value="-q CFLAGS='${COMP_FLAGS_CMOCKA}' --enable-proxy --with-sqlite3"/>
+		<property name="cmocka-5-sanitizer" value="CC=clang CFLAGS='${COMP_FLAGS_CMOCKA} -Wenum-conversion -g -fsanitize=leak,address' LDFLAGS='-fsanitize=leak,address' -q --enable-server --enable-agent --enable-proxy --enable-ipv6 --with-mysql --with-libxml2 --with-unixodbc --with-net-snmp --with-ssh2 --with-openipmi --with-libevent --with-openssl --with-ldap --with-libcurl --with-iconv --with-libpcre"/>
 	</target>
 
 	<target name="cmocka-tests" depends="init-cmocka-test-conf-options">

@@ -1,3 +1,15 @@
+Changes for 5.0.42
+
+5.0.42rc1 was released as 5.0.42 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 5.0.42rc1
+
+Bug fixes:
+.....J.... [ZBX-24093] fixed JMX monitoring when using "remote+http" protocol (dimir)
+.......PS. [ZBX-23145,ZBX-24032] disabled deprecated automatic reconnection in MySQL (mprihodko)
+
+--------------------------------------------------------------------------------
 Changes for 5.0.41
 
 5.0.41rc1 was released as 5.0.41 without any changes
@@ -22,6 +34,7 @@ Bug fixes:
 .........T [ZBX-23639] changed value type for item prototype 'Pool Percent Used' in Ceph by Zabbix agent 2 template (akotsegubov)
 ..F....... [ZBX-21891] fixed messages about enabling, disabling and updating modules being different from other places (agriscenko)
 ...G...... [ZBX-23855] fixed buffer overread in DNS response (askolmeisters)
+..F....... [ZBX-24070] removed ability to run XSS in graph item names (epulke)
 
 --------------------------------------------------------------------------------
 Changes for 5.0.39
