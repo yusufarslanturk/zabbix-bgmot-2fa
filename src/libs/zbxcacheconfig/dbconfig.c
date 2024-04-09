@@ -7008,10 +7008,6 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 
 	zbx_hashset_create(&activated_hosts, 100, ZBX_DEFAULT_UINT64_HASH_FUNC, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 
-	sec = zbx_time();
-	changelog_num = zbx_dbsync_env_prepare(mode);
-	changelog_sec = zbx_time() - sec;
-
 	if (ZBX_DBSYNC_INIT == mode)
 	{
 		zbx_hashset_create(&trend_queue, 1000, ZBX_DEFAULT_UINT64_HASH_FUNC, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
@@ -7026,6 +7022,10 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 		zbx_vector_dc_item_ptr_create(&new_items);
 		pnew_items = &new_items;
 	}
+
+	sec = zbx_time();
+	changelog_num = zbx_dbsync_env_prepare(changelog_sync_mode);
+	changelog_sec = zbx_time() - sec;
 
 	/* global configuration must be synchronized directly with database */
 	zbx_dbsync_init(&config_sync, ZBX_DBSYNC_INIT);
