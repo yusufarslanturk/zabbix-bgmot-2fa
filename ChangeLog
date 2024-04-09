@@ -1,3 +1,16 @@
+Changes for 5.0.40
+
+5.0.40rc1 was released as 5.0.40 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 5.0.40rc1
+
+Bug fixes:
+.......P.. [ZBX-22493] fixed foreign key support with SQLite3 database (wiper)
+.........T [ZBX-23639] changed value type for item prototype 'Pool Percent Used' in Ceph by Zabbix agent 2 template (akotsegubov)
+..F....... [ZBX-21891] fixed messages about enabling, disabling and updating modules being different from other places (agriscenko)
+
+--------------------------------------------------------------------------------
 Changes for 5.0.39
 
 5.0.39rc1 was released as 5.0.39 without any changes
