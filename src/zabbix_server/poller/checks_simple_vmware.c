@@ -989,84 +989,15 @@ out:
 	return ret;
 }
 
-int	check_vcenter_cluster_tags_get(AGENT_REQUEST *request, const char *username, const char *password,
-		AGENT_RESULT *result)
+static void	vmware_get_events(const zbx_vector_ptr_t *events, const DC_ITEM *item, zbx_vector_ptr_t *add_results)
 {
-	zbx_vmware_service_t		*service;
-	zbx_vmware_cluster_t		*cl = NULL;
-	int				ret = SYSINFO_RET_FAIL;
-	const char			*url, *id;
-	struct zbx_json			json_data;
-	char				*error = NULL;
-
-	if (2 != request->nparam)
-	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, "Invalid number of parameters."));
-		goto out;
-	}
-
-	url = get_rparam(request, 0);
-	id = get_rparam(request, 1);
-
-	if ('\0' == *id)
-	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, "Invalid second parameter."));
-		goto out;
-	}
-
-	zbx_vmware_lock();
-
-	if (NULL == (service = get_vmware_service(url, username, password, result, &ret)))
-		goto unlock;
-
-	if (NULL == (cl = cluster_get(&service->data->clusters, id)))
-	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, "Unknown cluster id."));
-		goto unlock;
-	}
-
-	if (NULL != service->data_tags.error)
-	{
-		SET_MSG_RESULT(result, zbx_strdup(NULL, service->data_tags.error));
-		goto unlock;
-	}
-
-	zbx_json_initarray(&json_data, ZBX_JSON_STAT_BUF_LEN);
-	vmware_tags_id_json(&service->data_tags, ZBX_VMWARE_SOAP_CLUSTER, cl->id, NULL, &json_data, &error);
-	zbx_json_close(&json_data);
-
-	if (NULL == error)
-	{
-		SET_TEXT_RESULT(result, zbx_strdup(NULL, json_data.buffer));
-		ret = SYSINFO_RET_OK;
-	}
-	else
-		SET_STR_RESULT(result, error);
-
-	zbx_json_free(&json_data);
-unlock:
-	zbx_vmware_unlock();
-out:
-	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_sysinfo_ret_string(ret));
-
-	return ret;
-}
-
-static void	vmware_get_events(const zbx_vector_ptr_t *events, zbx_uint64_t eventlog_last_key, const DC_ITEM *item,
-		zbx_vector_ptr_t *add_results)
-{
-	int	i;
-
-	zabbix_log(LOG_LEVEL_DEBUG, "In %s() eventlog_last_key:" ZBX_FS_UI64, __func__, eventlog_last_key);
+	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
 
 	/* events were retrieved in reverse chronological order */
-	for (i = events->values_num - 1; i >= 0; i--)
+	for (int i = events->values_num - 1; i >= 0; i--)
 	{
 		const zbx_vmware_event_t	*event = (zbx_vmware_event_t *)events->values[i];
 		AGENT_RESULT			*add_result = NULL;
-
-		if (event->key <= eventlog_last_key)
-			continue;
 
 		add_result = (AGENT_RESULT *)zbx_malloc(add_result, sizeof(AGENT_RESULT));
 		zbx_init_agent_result(add_result);
@@ -1132,6 +1063,7 @@ int	check_vcenter_eventlog(AGENT_REQUEST *request, const DC_ITEM *item, AGENT_RE
 	{
 		/* this may happen if recreate item vmware.eventlog for the same service URL */
 		service->eventlog.last_key = request->lastlogsize;
+		service->eventlog.last_ts = 0;
 		service->eventlog.skip_old = skip_old;
 	}
 	else if (0 != service->eventlog.oom)
@@ -1148,8 +1080,9 @@ int	check_vcenter_eventlog(AGENT_REQUEST *request, const DC_ITEM *item, AGENT_RE
 	}
 	else if (0 < service->data->events.values_num)
 	{
-		vmware_get_events(&service->data->events, request->lastlogsize, item, add_results);
+		vmware_get_events(&service->data->events, item, add_results);
 		service->eventlog.last_key = ((const zbx_vmware_event_t *)service->data->events.values[0])->key;
+		service->eventlog.last_ts = ((const zbx_vmware_event_t *)service->data->events.values[0])->timestamp;
 	}
 
 	ret = SYSINFO_RET_OK;
