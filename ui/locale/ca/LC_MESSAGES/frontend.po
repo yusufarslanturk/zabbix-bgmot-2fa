@@ -674,7 +674,7 @@ msgstr "La classe d'acció %1$s ha d'ampliar la classe %2$s."
 msgid "Action deleted"
 msgid_plural "Actions deleted"
 msgstr[0] "S'ha esborrat l'acció"
-msgstr[1] ""
+msgstr[1] "S'ha esborrat l'acció"
 
 #: app/controllers/CControllerActionDisable.php:84
 msgid "Action disabled"
@@ -2418,7 +2418,7 @@ msgstr "No es pot pas esborrar l'usuari intern de Zabbix \"%1$s\"; proveu a desa
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
 msgstr[0] "No es pot pas esborrar l'acció"
-msgstr[1] ""
+msgstr[1] "No es pot pas esborrar l'acció"
 
 #: include/classes/api/services/CRole.php:368
 #, c-format

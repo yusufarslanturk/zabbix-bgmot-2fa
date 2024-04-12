@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-03-18 19:05+0000\n"
+"PO-Revision-Date: 2024-04-02 13:57+0000\n"
 "Last-Translator: ERIC <eric78.zabbix@orange.fr>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: fr\n"
@@ -672,10 +672,9 @@ msgid "Action class %1$s must extend %2$s class."
 msgstr "La classe d'action %1$s doit étendre la classe %2$s."
 
 #: app/controllers/CControllerActionDelete.php:79
-#, fuzzy
 msgid "Action deleted"
 msgid_plural "Actions deleted"
-msgstr[0] "Action supprimée"
+msgstr[0] ""
 msgstr[1] "Action supprimée"
 
 #: app/controllers/CControllerActionDisable.php:84
@@ -2417,10 +2416,9 @@ msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "Impossible de supprimer l'utilisateur interne Zabbix \"%1$s\", essayez de désactiver cet utilisateur."
 
 #: app/controllers/CControllerActionDelete.php:87
-#, fuzzy
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
-msgstr[0] "Impossible de supprimer l'action"
+msgstr[0] ""
 msgstr[1] "Impossible de supprimer l'action"
 
 #: include/classes/api/services/CRole.php:368
