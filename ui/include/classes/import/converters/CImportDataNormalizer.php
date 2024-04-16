@@ -118,7 +118,7 @@ class CImportDataNormalizer {
 	/**
 	 * Add CR to string type fields.
 	 *
-	 * @param string $data  Import data.
+	 * @param string $data   Import data.
 	 * @param array  $rules  Schema rules.
 	 *
 	 * @return string
