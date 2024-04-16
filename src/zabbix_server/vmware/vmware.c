@@ -177,7 +177,7 @@ typedef struct
 {
 	zbx_uint64_t	id;
 	xmlNode		*xml_node;
-	int		created_time;
+	time_t		created_time;
 }
 zbx_id_xmlnode_t;
 
@@ -6947,10 +6947,10 @@ static int	vmware_service_put_event_data(zbx_vector_ptr_t *events, zbx_id_xmlnod
  *               0 - otherwise                                                *
  *                                                                            *
  ******************************************************************************/
-static int	vmware_service_parse_event_ts(xmlDoc *doc, xmlNode *node, zbx_uint64_t eventid)
+static time_t	vmware_service_parse_event_ts(xmlDoc *doc, xmlNode *node, zbx_uint64_t eventid)
 {
 	char	*ts;
-	int	created_time = 0;
+	time_t	created_time = 0;
 
 	if (NULL == (ts = zbx_xml_node_read_value(doc, node, ZBX_XPATH_NN("createdTime"))))
 	{
@@ -6959,13 +6959,11 @@ static int	vmware_service_parse_event_ts(xmlDoc *doc, xmlNode *node, zbx_uint64_
 		return 0;
 	}
 
-	if (FAIL == zbx_iso8601_utc(ts, &timestamp))	/* 2013-06-04T14:19:23.406298Z */
+	if (FAIL == zbx_iso8601_utc(ts, &created_time))	/* 2013-06-04T14:19:23.406298Z */
 	{
-		zabbix_log(LOG_LEVEL_TRACE, "unexpected format of createdTime '%s' for event key '" ZBX_FS_UI64 "'",
-				time_str, xml_event.id);
+		zabbix_log(LOG_LEVEL_TRACE, "unexpected format of createdTime '%s' for event key '" ZBX_FS_TIME_T "'",
+				ts, id);
 	}
-	else
-		created_time = (int)timestamp;
 
 	zbx_free(ts);
 
@@ -6983,13 +6981,13 @@ static int	vmware_service_parse_event_ts(xmlDoc *doc, xmlNode *node, zbx_uint64_
  *             xdoc       - [IN] xml document with eventlog records           *
  *             alloc_sz   - [OUT] allocated memory size for events            *
  *             node_count - [OUT] count of xml event nodes                    *
- *             is_reset   - [OUT] detected event key reset                    *
+ *             skip_old   - [OUT] detected event key reset                    *
  *                                                                            *
  * Return value: The count of events successfully parsed                      *
  *                                                                            *
  ******************************************************************************/
-static int	vmware_service_parse_event_data(zbx_vector_ptr_t *events, zbx_uint64_t last_key, int last_ts,
-		const int is_prop, xmlDoc *xdoc, zbx_uint64_t *alloc_sz, int *node_count, int *is_reset)
+static int	vmware_service_parse_event_data(zbx_vector_ptr_t *events, zbx_uint64_t last_key, time_t last_ts,
+		const int is_prop, xmlDoc *xdoc, zbx_uint64_t *alloc_sz, int *node_count, unsigned char *skip_old)
 {
 #	define LAST_KEY(evs)	(((const zbx_vmware_event_t *)evs->values[evs->values_num - 1])->key)
 
@@ -7004,6 +7002,7 @@ static int	vmware_service_parse_event_data(zbx_vector_ptr_t *events, zbx_uint64_
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() last_key:" ZBX_FS_UI64, __func__, last_key);
 
 	xpathCtx = xmlXPathNewContext(xdoc);
+	zbx_vector_id_xmlnode_create(&ids);
 
 	if (NULL == (xpathObj = xmlXPathEvalExpression((const xmlChar *)(0 == is_prop ? "/*/*/*"
 			ZBX_XPATH_LN("returnval") : "/*/*/*" ZBX_XPATH_LN("returnval") "/*/*/*"ZBX_XPATH_LN("Event")),
@@ -7023,7 +7022,6 @@ static int	vmware_service_parse_event_data(zbx_vector_ptr_t *events, zbx_uint64_
 	}
 
 	nodeset = xpathObj->nodesetval;
-	zbx_vector_id_xmlnode_create(&ids);
 	zbx_vector_id_xmlnode_reserve(&ids, (size_t)nodeset->nodeNr);
 
 	if (NULL != node_count)
@@ -7051,9 +7049,6 @@ static int	vmware_service_parse_event_data(zbx_vector_ptr_t *events, zbx_uint64_
 
 		zbx_free(value);
 
-		xml_event.id = key;
-		xml_event.created_time = 0;
-		xml_event.xml_node = nodeset->nodeTab[i];
 		xml_event.created_time = vmware_service_parse_event_ts(xdoc, nodeset->nodeTab[i], key);
 
 		if (key <= last_key)
@@ -7065,15 +7060,15 @@ static int	vmware_service_parse_event_data(zbx_vector_ptr_t *events, zbx_uint64_
 				continue;
 			}
 
-			if (0 == *is_reset)
-			{
-				zabbix_log(LOG_LEVEL_TRACE, "event key reset, key: '" ZBX_FS_UI64 "', last_key: '"
-						ZBX_FS_UI64 "', createdTime: '%d', last_ts: '%d'", key, last_key,
-						xml_event.created_time, last_ts);
-				*is_reset = 1;
-			}
+			zabbix_log(LOG_LEVEL_TRACE, "event key reset, key: '" ZBX_FS_UI64 "', last_key: '"
+					ZBX_FS_UI64 "', createdTime: '%d', last_ts: '%d'", key, last_key,
+					xml_event.created_time, (int)last_ts);
+			*skip_old = 1;
+			goto clean;
 		}
 
+		xml_event.id = key;
+		xml_event.xml_node = nodeset->nodeTab[i];
 		zbx_vector_id_xmlnode_append(&ids, xml_event);
 	}
 
@@ -7083,8 +7078,7 @@ static int	vmware_service_parse_event_data(zbx_vector_ptr_t *events, zbx_uint64_
 		zbx_vector_ptr_reserve(events, (size_t)(ids.values_num + events->values_alloc));
 
 		/* validate that last event from "latestPage" is connected with first event from ReadPreviousEvents */
-		if (0 == *is_reset && 0 != events->values_num &&
-				LAST_KEY(events) != ids.values[ids.values_num -1].id + 1)
+		if (0 != events->values_num && LAST_KEY(events) != ids.values[ids.values_num -1].id + 1)
 		{
 			zabbix_log(LOG_LEVEL_DEBUG, "%s() events:%d is_clear:%d id gap:%d", __func__,
 					events->values_num, is_clear,
@@ -7103,7 +7097,7 @@ static int	vmware_service_parse_event_data(zbx_vector_ptr_t *events, zbx_uint64_
 				parsed_num++;
 		}
 	}
-	else if (0 == *is_reset && 0 != last_key && 0 != events->values_num && LAST_KEY(events) != last_key + 1)
+	else if (0 != last_key && 0 != events->values_num && LAST_KEY(events) != last_key + 1)
 	{
 		zabbix_log(LOG_LEVEL_DEBUG, "%s() events:%d is_clear:%d last_key id gap:%d", __func__,
 				events->values_num, is_clear, (int)(LAST_KEY(events) - (last_key + 1)));
@@ -7113,8 +7107,8 @@ static int	vmware_service_parse_event_data(zbx_vector_ptr_t *events, zbx_uint64_
 			zbx_vector_ptr_clear_ext(events, (zbx_clean_func_t)vmware_event_free);
 	}
 
-	zbx_vector_id_xmlnode_destroy(&ids);
 clean:
+	zbx_vector_id_xmlnode_destroy(&ids);
 	xmlXPathFreeObject(xpathObj);
 	xmlXPathFreeContext(xpathCtx);
 	is_clear = is_prop;
@@ -7133,6 +7127,8 @@ clean:
  * Parameters: service      - [IN] the vmware service                         *
  *             easyhandle   - [IN] the CURL handle                            *
  *             last_key     - [IN] the ID of last processed event             *
+ *             last_ts      - [IN] the create time of last processed event    *
+ *             skip_old     - [IN/OUT] reset last_key of event                *
  *             events       - [OUT] a pointer to the output variable          *
  *             alloc_sz     - [OUT] allocated memory size for events          *
  *             error        - [OUT] the error message in the case of failure  *
@@ -7142,7 +7138,8 @@ clean:
  *                                                                            *
  ******************************************************************************/
 static int	vmware_service_get_event_data(const zbx_vmware_service_t *service, CURL *easyhandle,
-		zbx_uint64_t last_key, int last_ts, zbx_vector_ptr_t *events, zbx_uint64_t *alloc_sz, char **error)
+		zbx_uint64_t last_key, time_t last_ts, unsigned char *skip_old, zbx_vector_ptr_t *events,
+		zbx_uint64_t *alloc_sz, char **error)
 {
 #	define ATTEMPTS_NUM	4
 #	define EVENT_TAG	1
@@ -7150,10 +7147,11 @@ static int	vmware_service_get_event_data(const zbx_vmware_service_t *service, CU
 #	define LAST_KEY(evs)	(((const zbx_vmware_event_t *)evs->values[evs->values_num - 1])->key)
 
 	char		*event_session = NULL, *err = NULL;
-	int		ret = FAIL, node_count = 1, soap_retry = ATTEMPTS_NUM, eventlog_last_ts, is_reset = 0,
+	int		ret = FAIL, node_count = 1, soap_retry = ATTEMPTS_NUM,
 			soap_count = 5; /* 10 - initial value of eventlog records number in one response */
 	xmlDoc		*doc = NULL;
 	zbx_uint64_t	eventlog_last_key;
+	time_t		eventlog_last_ts;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
 
@@ -7179,7 +7177,7 @@ static int	vmware_service_get_event_data(const zbx_vmware_service_t *service, CU
 		goto end_session;
 
 	if (0 < vmware_service_parse_event_data(events, eventlog_last_key, eventlog_last_ts, EVENT_TAG, doc, alloc_sz,
-			NULL, &is_reset) && (0 != is_reset || LAST_KEY(events) == eventlog_last_key + 1))
+			NULL, skip_old) && (0 != *skip_old || LAST_KEY(events) == eventlog_last_key + 1))
 	{
 		zabbix_log(LOG_LEVEL_TRACE, "%s() latestPage events:%d", __func__, events->values_num);
 
@@ -7212,10 +7210,9 @@ static int	vmware_service_get_event_data(const zbx_vmware_service_t *service, CU
 			soap_retry = ATTEMPTS_NUM;
 	}
 	while ((0 < vmware_service_parse_event_data(events, eventlog_last_key, eventlog_last_ts, RETURNVAL_TAG, doc,
-			alloc_sz, &node_count, &is_reset) && 0 == is_reset) || (0 == node_count && 0 < soap_retry--));
+			alloc_sz, &node_count, skip_old) || (0 == node_count && 0 < soap_retry--)) && 0 == *skip_old);
 
-	if (0 == is_reset && 0 != eventlog_last_key && 0 != events->values_num &&
-			LAST_KEY(events) != eventlog_last_key + 1)
+	if (0 != eventlog_last_key && 0 != events->values_num && LAST_KEY(events) != eventlog_last_key + 1)
 	{
 		zabbix_log(LOG_LEVEL_DEBUG, "%s() events:%d id gap:%d", __func__, events->values_num,
 				(int)(LAST_KEY(events) - (eventlog_last_key + 1)));
@@ -8616,10 +8613,11 @@ int	zbx_vmware_service_update(zbx_vmware_service_t *service)
 	zbx_vector_ptr_t	events;
 	zbx_vector_cq_value_t	dvs_query_values, prop_query_values, cust_query_values;
 	zbx_vmware_alarms_data_t	alarms_data;
-	int			i, evt_last_ts, ret = FAIL;
+	int			i, ret = FAIL;
 	ZBX_HTTPPAGE		page;	/* 347K/87K */
 	unsigned char		evt_pause = 0, evt_skip_old;
 	zbx_uint64_t		evt_last_key, events_sz = 0;
+	time_t			evt_last_ts;
 	char			msg[MAX_STRING_LEN / 8];
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() '%s'@'%s'", __func__, service->username, service->url);
@@ -8762,7 +8760,7 @@ int	zbx_vmware_service_update(zbx_vmware_service_t *service)
 		/* we stopped last time or item can't accept values 	*/
 		if (ZBX_VMWARE_EVENT_KEY_UNINITIALIZED != evt_last_key && 0 == evt_skip_old &&
 				SUCCEED != vmware_service_get_event_data(service, easyhandle, evt_last_key, evt_last_ts,
-				&data->events, &events_sz, &data->error))
+				&evt_skip_old, &data->events, &events_sz, &data->error))
 		{
 			goto clean;
 		}
