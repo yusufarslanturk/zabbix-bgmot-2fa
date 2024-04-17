@@ -2151,8 +2151,10 @@ function getTriggerFormData(array $data) {
  * @param array      $options
  * @param bool       $options['add_post_js']          (optional) Parameter passed to CTextAreaFlexible.
  * @param bool       $options['show_inherited_tags']  (optional) Render row in inherited tag mode. This enables usage of $tag['type'].
+ * @param bool       $options['with_automatic']       (optional) Render row with 'automatic' input. This enables usage of $tag['automatic'].
  * @param string     $options['field_name']           (optional) Re-define default field name.
  * @param bool       $options['readonly']             (optional) Render row in read-only mode.
+ * @param string     $options['source']               (optional) The origin of tag.
  *
  * @return CRow
  */
