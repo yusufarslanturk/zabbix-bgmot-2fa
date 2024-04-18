@@ -760,6 +760,7 @@ class CImportDataAdapterTest extends TestCase {
 					'lld_macro_paths' => [],
 					'trapper_hosts' => '',
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'overrides' => [],
 					'master_item' => []
 				],
@@ -1072,6 +1073,7 @@ class CImportDataAdapterTest extends TestCase {
 					'trapper_hosts' => '',
 					'lld_macro_paths' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'overrides' => [],
 					'master_item' => []
 				],
