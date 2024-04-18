@@ -353,7 +353,7 @@ class CImportDataAdapterTest extends TestCase {
 			'export-host' => [
 				'item' => [
 					'name' => 'item',
-					'type' => '0',
+					'type' => (string) ITEM_TYPE_ZABBIX,
 					'delay' => '30',
 					'history' => '90d',
 					'trends' => '365d',
@@ -367,11 +367,12 @@ class CImportDataAdapterTest extends TestCase {
 					'interface_ref' => 'if1',
 					'triggers' => [],
 					'key_' => 'item',
-					'preprocessing' => []
+					'preprocessing' => [],
+					'timeout' => '3s'
 				],
 				'item-jmx' => [
 					'name' => 'item-jmx',
-					'type' => '16',
+					'type' => (string) ITEM_TYPE_JMX,
 					'delay' => '30',
 					'history' => '90d',
 					'trends' => '365d',
@@ -392,7 +393,7 @@ class CImportDataAdapterTest extends TestCase {
 				],
 				'item2' => [
 					'name' => 'item2',
-					'type' => '0',
+					'type' => (string) ITEM_TYPE_ZABBIX,
 					'delay' => '30',
 					'history' => '90d',
 					'trends' => '365d',
@@ -411,14 +412,15 @@ class CImportDataAdapterTest extends TestCase {
 					'interface_ref' => 'if1',
 					'triggers' => [],
 					'key_' => 'item2',
-					'preprocessing' => []
+					'preprocessing' => [],
+					'timeout' => '3s'
 				]
 			],
 			'export-template' => [
 				'item' => [
 					'uuid' => 'cfe34a246c054d0483796f5bb71631b6',
 					'name' => 'item',
-					'type' => '0',
+					'type' => (string) ITEM_TYPE_ZABBIX,
 					'delay' => '30',
 					'history' => '90d',
 					'trends' => '365d',
@@ -431,12 +433,13 @@ class CImportDataAdapterTest extends TestCase {
 					'valuemap' => [],
 					'triggers' => [],
 					'key_' => 'item',
-					'preprocessing' => []
+					'preprocessing' => [],
+					'timeout' => '3s'
 				],
 				'item-jmx' => [
 					'uuid' => '4164d2d034dc41ccb151a46b546110bc',
 					'name' => 'item-jmx',
-					'type' => '16',
+					'type' => (string) ITEM_TYPE_JMX,
 					'delay' => '30',
 					'history' => '90d',
 					'trends' => '365d',
@@ -457,7 +460,7 @@ class CImportDataAdapterTest extends TestCase {
 				'item2' => [
 					'uuid' => '3dc664d55caf4f008fb8d6db770d22e8',
 					'name' => 'item2',
-					'type' => '0',
+					'type' => (string) ITEM_TYPE_ZABBIX,
 					'delay' => '30',
 					'history' => '90d',
 					'trends' => '365d',
@@ -475,7 +478,8 @@ class CImportDataAdapterTest extends TestCase {
 					'valuemap' => [],
 					'triggers' => [],
 					'key_' => 'item2',
-					'preprocessing' => []
+					'preprocessing' => [],
+					'timeout' => '3s'
 				]
 			]
 		]);
@@ -660,7 +664,7 @@ class CImportDataAdapterTest extends TestCase {
 			'export-host' => [
 				'empty-lld-rule' => [
 					'name' => 'empty-lld-rule',
-					'type' => '0',
+					'type' => (string) ITEM_TYPE_ZABBIX,
 					'snmp_oid' => '',
 					'delay' => '30',
 					'status' => '0',
@@ -711,7 +715,7 @@ class CImportDataAdapterTest extends TestCase {
 				],
 				'empty-lld-rule-jmx' => [
 					'name' => 'empty-lld-rule-jmx',
-					'type' => '16',
+					'type' => (string) ITEM_TYPE_JMX,
 					'snmp_oid' => '',
 					'delay' => '30',
 					'status' => '0',
@@ -735,7 +739,6 @@ class CImportDataAdapterTest extends TestCase {
 					'host_prototypes' => [],
 					'interface_ref' => 'if3',
 					'jmx_endpoint' => 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi',
-					'timeout' => '3s',
 					'url' => '',
 					'posts' => '',
 					'status_codes' => '200',
@@ -762,7 +765,7 @@ class CImportDataAdapterTest extends TestCase {
 				],
 				'lld-rule' => [
 					'name' => 'lld-rule',
-					'type' => '0',
+					'type' => (string) ITEM_TYPE_ZABBIX,
 					'delay' => '30',
 					'snmp_oid' => '',
 					'status' => '0',
@@ -797,7 +800,7 @@ class CImportDataAdapterTest extends TestCase {
 					'item_prototypes' => [
 						[
 							'name' => 'lld-item',
-							'type' => '0',
+							'type' => (string) ITEM_TYPE_ZABBIX,
 							'discover' => '0',
 							'delay' => '30',
 							'history' => '90d',
@@ -811,11 +814,12 @@ class CImportDataAdapterTest extends TestCase {
 							'interface_ref' => 'if1',
 							'key_' => 'lld-item',
 							'trigger_prototypes' => [],
-							'preprocessing' => []
+							'preprocessing' => [],
+							'timeout' => '3s'
 						],
 						[
 							'name' => 'lld-item-jmx',
-							'type' => '16',
+							'type' => (string) ITEM_TYPE_JMX,
 							'discover' => '0',
 							'delay' => '30',
 							'history' => '90d',
@@ -836,7 +840,7 @@ class CImportDataAdapterTest extends TestCase {
 						],
 						[
 							'name' => 'lld-item2',
-							'type' => '0',
+							'type' => (string) ITEM_TYPE_ZABBIX,
 							'discover' => '0',
 							'delay' => '30',
 							'history' => '90d',
@@ -855,7 +859,8 @@ class CImportDataAdapterTest extends TestCase {
 							'interface_ref' => 'if1',
 							'key_' => 'lld-item2',
 							'trigger_prototypes' => [],
-							'preprocessing' => []
+							'preprocessing' => [],
+							'timeout' => '3s'
 						]
 					],
 					'trigger_prototypes' => [
@@ -972,7 +977,7 @@ class CImportDataAdapterTest extends TestCase {
 				'empty-lld-rule' => [
 					'uuid' => '6ff04b5a5e8443c7aa9d5ce5f60ea4f9',
 					'name' => 'empty-lld-rule',
-					'type' => '0',
+					'type' => (string) ITEM_TYPE_ZABBIX,
 					'snmp_oid' => '',
 					'delay' => '30',
 					'status' => '0',
@@ -1023,7 +1028,7 @@ class CImportDataAdapterTest extends TestCase {
 				'lld-rule-jmx' => [
 					'uuid' => '96c257b7f1104833ad3bb18f6a2e8d96',
 					'name' => 'lld-rule-jmx',
-					'type' => '16',
+					'type' => (string) ITEM_TYPE_JMX,
 					'snmp_oid' => '',
 					'delay' => '30',
 					'status' => '0',
@@ -1046,7 +1051,6 @@ class CImportDataAdapterTest extends TestCase {
 					'graph_prototypes' => [],
 					'host_prototypes' => [],
 					'jmx_endpoint' => 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi',
-					'timeout' => '3s',
 					'url' => '',
 					'posts' => '',
 					'status_codes' => '200',
@@ -1074,7 +1078,7 @@ class CImportDataAdapterTest extends TestCase {
 				'lld-rule' => [
 					'uuid' => 'cdcd6fb3277e481baa22573c8c349b3b',
 					'name' => 'lld-rule',
-					'type' => '0',
+					'type' => (string) ITEM_TYPE_ZABBIX,
 					'snmp_oid' => '',
 					'delay' => '30',
 					'status' => '0',
@@ -1109,7 +1113,7 @@ class CImportDataAdapterTest extends TestCase {
 						[
 							'uuid' => '2d2820fb2c2244df8dc75c92b2fc0f52',
 							'name' => 'lld-item',
-							'type' => '0',
+							'type' => (string) ITEM_TYPE_ZABBIX,
 							'discover' => '0',
 							'delay' => '30',
 							'history' => '90d',
@@ -1121,13 +1125,14 @@ class CImportDataAdapterTest extends TestCase {
 							'tags' => [],
 							'valuemap' => [],
 							'preprocessing' => [],
+							'timeout' => '3s',
 							'key_' => 'lld-item',
 							'trigger_prototypes' => []
 						],
 						[
 							'uuid' => 'd51ab907cd2840d99a1deda0bc6ba887',
 							'name' => 'lld-item-jmx',
-							'type' => '16',
+							'type' => (string) ITEM_TYPE_JMX,
 							'discover' => '0',
 							'delay' => '30',
 							'history' => '90d',
@@ -1148,7 +1153,7 @@ class CImportDataAdapterTest extends TestCase {
 						[
 							'uuid' => '350f8c141fd94a8385a83a3dca077126',
 							'name' => 'lld-item2',
-							'type' => '0',
+							'type' => (string) ITEM_TYPE_ZABBIX,
 							'discover' => '0',
 							'delay' => '30',
 							'history' => '90d',
@@ -1165,6 +1170,7 @@ class CImportDataAdapterTest extends TestCase {
 							],
 							'valuemap' => [],
 							'preprocessing' => [],
+							'timeout' => '3s',
 							'key_' => 'lld-item2',
 							'trigger_prototypes' => []
 						]
@@ -1179,7 +1185,7 @@ class CImportDataAdapterTest extends TestCase {
 							'status' => '0',
 							'priority' => '0',
 							'comments' => '',
-							'type' => '0',
+							'type' => (string) ITEM_TYPE_ZABBIX,
 							'recovery_mode' => (string) ZBX_RECOVERY_MODE_EXPRESSION,
 							'recovery_expression' => '',
 							'correlation_mode' => (string) ZBX_TRIGGER_CORRELATION_NONE,
@@ -1745,7 +1751,7 @@ class CImportDataAdapterTest extends TestCase {
 				'Template_Linux' => [
 					'vfs.fs.size[/,pfree]' => [
 						'uuid' => '1af0599983904849aed77e1bc145a8c2',
-						'type' => '0',
+						'type' => (string) ITEM_TYPE_ZABBIX,
 						'value_type' => '0',
 						'delay' => '30',
 						'history' => '7d',
@@ -1768,13 +1774,14 @@ class CImportDataAdapterTest extends TestCase {
 						'description' => 'Free disk space on / in %',
 						'inventory_link' => '0',
 						'preprocessing' => [],
+						'timeout' => '3s',
 						'valuemap' => []
 					]
 				],
 				'Template_Simple' => [
 					'net.tcp.service[ftp,,21]' => [
 						'uuid' => 'c1e7021d16814cde8d17c783a987bb18',
-						'type' => '3',
+						'type' => (string) ITEM_TYPE_SIMPLE,
 						'value_type' => '3',
 						'delay' => '30',
 						'history' => '90d',
@@ -1795,11 +1802,12 @@ class CImportDataAdapterTest extends TestCase {
 						'description' => 'FTP check',
 						'inventory_link' => '0',
 						'preprocessing' => [],
+						'timeout' => '3s',
 						'valuemap' => []
 					],
 					'net.tcp.service[ftp,,{$PORT.FTP}]' => [
 						'uuid' => '37c5c2d56a1c49ecaa7d6d0f70eb8a35',
-						'type' => '3',
+						'type' => (string) ITEM_TYPE_SIMPLE,
 						'value_type' => '3',
 						'delay' => '30',
 						'history' => '90d',
@@ -1820,6 +1828,7 @@ class CImportDataAdapterTest extends TestCase {
 						'description' => 'FTP check with macro',
 						'inventory_link' => '0',
 						'preprocessing' => [],
+						'timeout' => '3s',
 						'valuemap' => []
 					]
 				]
@@ -2107,7 +2116,7 @@ class CImportDataAdapterTest extends TestCase {
 				'Template_Simple' => [
 					'net.tcp.service[ftp,,21]' => [
 						'uuid' => 'c1e7021d16814cde8d17c783a987bb18',
-						'type' => '3',
+						'type' => (string) ITEM_TYPE_SIMPLE,
 						'value_type' => '3',
 						'description' => 'FTP check',
 						'delay' => '30',
@@ -2124,6 +2133,7 @@ class CImportDataAdapterTest extends TestCase {
 						'inventory_link' => '0',
 						'password' => '',
 						'preprocessing' => [],
+						'timeout' => '3s',
 						'triggers' => [],
 						'units' => '',
 						'username' => '',
@@ -2132,7 +2142,7 @@ class CImportDataAdapterTest extends TestCase {
 					],
 					'net.tcp.service[ftp,,{$PORT.FTP}]' => [
 						'uuid' => '37c5c2d56a1c49ecaa7d6d0f70eb8a35',
-						'type' => '3',
+						'type' => (string) ITEM_TYPE_SIMPLE,
 						'value_type' => '3',
 						'description' => 'FTP check with macro',
 						'delay' => '30',
@@ -2149,6 +2159,7 @@ class CImportDataAdapterTest extends TestCase {
 						'inventory_link' => '0',
 						'password' => '',
 						'preprocessing' => [],
+						'timeout' => '3s',
 						'triggers' => [],
 						'units' => '',
 						'username' => '',
@@ -2401,6 +2412,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test'
 				],
@@ -2420,6 +2432,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test2'
 				],
@@ -2439,6 +2452,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test3'
 				],
@@ -2458,6 +2472,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test4'
 				],
@@ -2477,6 +2492,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test5'
 				],
@@ -2496,6 +2512,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test6'
 				]
@@ -2526,6 +2543,7 @@ class CImportDataAdapterTest extends TestCase {
 							'tags' => [],
 							'valuemap' => [],
 							'preprocessing' => [],
+							'timeout' => '3s',
 							'key_' => 'test7',
 							'trigger_prototypes' => []
 						]
@@ -2597,6 +2615,7 @@ class CImportDataAdapterTest extends TestCase {
 							'tags' => [],
 							'valuemap' => [],
 							'preprocessing' => [],
+							'timeout' => '3s',
 							'key_' => 'test8',
 							'trigger_prototypes' => []
 						]
@@ -2668,6 +2687,7 @@ class CImportDataAdapterTest extends TestCase {
 							'tags' => [],
 							'valuemap' => [],
 							'preprocessing' => [],
+							'timeout' => '3s',
 							'key_' => 'test9',
 							'trigger_prototypes' => []
 						]
@@ -2933,6 +2953,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test'
 				],
@@ -2952,6 +2973,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test2'
 				],
@@ -2971,6 +2993,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test3'
 				],
@@ -2990,6 +3013,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test4'
 				],
@@ -3009,6 +3033,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test5'
 				],
@@ -3028,6 +3053,7 @@ class CImportDataAdapterTest extends TestCase {
 					'tags' => [],
 					'valuemap' => [],
 					'preprocessing' => [],
+					'timeout' => '3s',
 					'triggers' => [],
 					'key_' => 'test6'
 				]
@@ -3058,6 +3084,7 @@ class CImportDataAdapterTest extends TestCase {
 							'tags' => [],
 							'valuemap' => [],
 							'preprocessing' => [],
+							'timeout' => '3s',
 							'key_' => 'test7',
 							'trigger_prototypes' => []
 						]
@@ -3129,6 +3156,7 @@ class CImportDataAdapterTest extends TestCase {
 							'tags' => [],
 							'valuemap' => [],
 							'preprocessing' => [],
+							'timeout' => '3s',
 							'key_' => 'test8',
 							'trigger_prototypes' => []
 						]
@@ -3200,6 +3228,7 @@ class CImportDataAdapterTest extends TestCase {
 							'tags' => [],
 							'valuemap' => [],
 							'preprocessing' => [],
+							'timeout' => '3s',
 							'key_' => 'test9',
 							'trigger_prototypes' => []
 						]

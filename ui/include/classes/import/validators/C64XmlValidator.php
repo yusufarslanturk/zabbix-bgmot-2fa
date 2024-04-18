@@ -321,6 +321,19 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 		CXmlConstantValue::ITEM_TYPE_SCRIPT => CXmlConstantName::SCRIPT
 	];
 
+	private $ITEM_TYPE_TIMEOUT = [
+		CXmlConstantValue::ITEM_TYPE_ZABBIX_PASSIVE => CXmlConstantName::ZABBIX_PASSIVE,
+		CXmlConstantValue::ITEM_TYPE_SIMPLE => CXmlConstantName::SIMPLE,
+		CXmlConstantValue::ITEM_TYPE_ZABBIX_ACTIVE => CXmlConstantName::ZABBIX_ACTIVE,
+		CXmlConstantValue::ITEM_TYPE_EXTERNAL => CXmlConstantName::EXTERNAL,
+		CXmlConstantValue::ITEM_TYPE_ODBC => CXmlConstantName::ODBC,
+		CXmlConstantValue::ITEM_TYPE_SSH => CXmlConstantName::SSH,
+		CXmlConstantValue::ITEM_TYPE_TELNET => CXmlConstantName::TELNET,
+		CXmlConstantValue::ITEM_TYPE_HTTP_AGENT => CXmlConstantName::HTTP_AGENT,
+		CXmlConstantValue::ITEM_TYPE_SNMP => CXmlConstantName::SNMP_AGENT,
+		CXmlConstantValue::ITEM_TYPE_SCRIPT => CXmlConstantName::SCRIPT
+	];
+
 	private $ITEM_TYPE_INTERFACE = [
 		CXmlConstantValue::ITEM_TYPE_ZABBIX_PASSIVE => CXmlConstantName::ZABBIX_PASSIVE,
 		CXmlConstantValue::ITEM_TYPE_SIMPLE => CXmlConstantName::SIMPLE,
@@ -702,7 +715,7 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 															['else' => true, 'type' => XML_IGNORE_TAG]
 							]],
 							'timeout' =>				['type' => XML_MULTIPLE, 'rules' => [
-															['if' => ['tag' => 'type', 'in' => [CXmlConstantValue::ITEM_TYPE_HTTP_AGENT => CXmlConstantName::HTTP_AGENT, CXmlConstantValue::ITEM_TYPE_SCRIPT => CXmlConstantName::SCRIPT]], 'type' => XML_STRING, 'default' => '3s'],
+															['if' => ['tag' => 'type', 'in' => $this->ITEM_TYPE_TIMEOUT], 'type' => XML_STRING, 'default' => '3s'],
 															['else' => true, 'type' => XML_IGNORE_TAG]
 							]],
 							'url' =>					['type' => XML_MULTIPLE, 'rules' => [
@@ -992,7 +1005,7 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 																	['else' => true, 'type' => XML_IGNORE_TAG]
 									]],
 									'timeout' =>				['type' => XML_MULTIPLE, 'rules' => [
-																	['if' => ['tag' => 'type', 'in' => [CXmlConstantValue::ITEM_TYPE_HTTP_AGENT => CXmlConstantName::HTTP_AGENT, CXmlConstantValue::ITEM_TYPE_SCRIPT => CXmlConstantName::SCRIPT]], 'type' => XML_STRING, 'default' => '3s'],
+																	['if' => ['tag' => 'type', 'in' => $this->ITEM_TYPE_TIMEOUT], 'type' => XML_STRING, 'default' => '3s'],
 																	['else' => true, 'type' => XML_IGNORE_TAG]
 									]],
 									'url' =>					['type' => XML_MULTIPLE, 'rules' => [
@@ -1257,7 +1270,10 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 							'master_item' =>			['type' => XML_ARRAY, 'ex_validate' => [$this, 'validateMasterItem'], 'rules' => [
 								'key' =>					['type' => XML_STRING | XML_REQUIRED]
 							]],
-							'timeout' =>				['type' => XML_STRING, 'default' => '3s'],
+							'timeout' =>				['type' => XML_MULTIPLE, 'rules' => [
+															['if' => ['tag' => 'type', 'in' => $this->ITEM_TYPE_TIMEOUT], 'type' => XML_STRING, 'default' => '3s'],
+															['else' => true, 'type' => XML_IGNORE_TAG]
+							]],
 							'url' =>					['type' => XML_STRING, 'default' => ''],
 							'query_fields' =>			['type' => XML_INDEXED_ARRAY, 'prefix' => 'query_field', 'rules' => [
 								'query_field' =>			['type' => XML_ARRAY, 'rules' => [
@@ -1678,7 +1694,7 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 															['else' => true, 'type' => XML_IGNORE_TAG]
 							]],
 							'timeout' =>				['type' => XML_MULTIPLE, 'rules' => [
-															['if' => ['tag' => 'type', 'in' => [CXmlConstantValue::ITEM_TYPE_HTTP_AGENT => CXmlConstantName::HTTP_AGENT, CXmlConstantValue::ITEM_TYPE_SCRIPT => CXmlConstantName::SCRIPT]], 'type' => XML_STRING, 'default' => '3s'],
+															['if' => ['tag' => 'type', 'in' => $this->ITEM_TYPE_TIMEOUT], 'type' => XML_STRING, 'default' => '3s'],
 															['else' => true, 'type' => XML_IGNORE_TAG]
 							]],
 							'url' =>					['type' => XML_MULTIPLE, 'rules' => [
@@ -1966,7 +1982,7 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 																	['else' => true, 'type' => XML_IGNORE_TAG]
 									]],
 									'timeout' =>				['type' => XML_MULTIPLE, 'rules' => [
-																	['if' => ['tag' => 'type', 'in' => [CXmlConstantValue::ITEM_TYPE_HTTP_AGENT => CXmlConstantName::HTTP_AGENT, CXmlConstantValue::ITEM_TYPE_SCRIPT => CXmlConstantName::SCRIPT]], 'type' => XML_STRING, 'default' => '3s'],
+																	['if' => ['tag' => 'type', 'in' => $this->ITEM_TYPE_TIMEOUT], 'type' => XML_STRING, 'default' => '3s'],
 																	['else' => true, 'type' => XML_IGNORE_TAG]
 									]],
 									'url' =>					['type' => XML_MULTIPLE, 'rules' => [
@@ -2234,7 +2250,10 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 							'master_item' =>			['type' => XML_ARRAY, 'ex_validate' => [$this, 'validateMasterItem'], 'rules' => [
 								'key' =>					['type' => XML_STRING | XML_REQUIRED]
 							]],
-							'timeout' =>				['type' => XML_STRING, 'default' => '3s'],
+							'timeout' =>				['type' => XML_MULTIPLE, 'rules' => [
+															['if' => ['tag' => 'type', 'in' => $this->ITEM_TYPE_TIMEOUT], 'type' => XML_STRING, 'default' => '3s'],
+															['else' => true, 'type' => XML_IGNORE_TAG]
+							]],
 							'url' =>					['type' => XML_STRING, 'default' => ''],
 							'query_fields' =>			['type' => XML_INDEXED_ARRAY, 'prefix' => 'query_field', 'rules' => [
 								'query_field' =>			['type' => XML_ARRAY, 'rules' => [
