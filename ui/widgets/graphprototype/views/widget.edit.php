@@ -30,17 +30,17 @@
 	->addField(
 		new CWidgetFieldRadioButtonListView($data['fields']['source_type'])
 	)
-	->addField(array_key_exists('graphid', $data['fields'])
-		? new CWidgetFieldMultiSelectGraphPrototypeView($data['fields']['graphid'],
+	->addField(
+		new CWidgetFieldMultiSelectGraphPrototypeView($data['fields']['graphid'],
 			$data['captions']['graph_prototypes']['graphid']
-		)
-		: null
+		),
+		'js-row-graphid'
 	)
-	->addField(array_key_exists('itemid', $data['fields'])
-		? new CWidgetFieldMultiSelectItemPrototypeView($data['fields']['itemid'],
+	->addField(
+		new CWidgetFieldMultiSelectItemPrototypeView($data['fields']['itemid'],
 			$data['captions']['item_prototypes']['itemid']
-		)
-		: null
+		),
+		'js-row-itemid'
 	)
 	->addField(
 		new CWidgetFieldCheckBoxView($data['fields']['show_legend'])
@@ -55,4 +55,6 @@
 	->addField(
 		new CWidgetFieldIntegerBoxView($data['fields']['rows'])
 	)
+	->includeJsFile('widget.edit.js.php')
+	->addJavaScript('widget_graph_prototype_form.init();')
 	->show();
