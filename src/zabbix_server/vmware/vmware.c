@@ -6961,7 +6961,7 @@ static time_t	vmware_service_parse_event_ts(xmlDoc *doc, xmlNode *node, zbx_uint
 
 	if (FAIL == zbx_iso8601_utc(ts, &created_time))	/* 2013-06-04T14:19:23.406298Z */
 	{
-		zabbix_log(LOG_LEVEL_TRACE, "unexpected format of createdTime '%s' for event key '" ZBX_FS_TIME_T "'",
+		zabbix_log(LOG_LEVEL_TRACE, "unexpected format of createdTime '%s' for event key '" ZBX_FS_UI64 "'",
 				ts, eventid);
 	}
 
