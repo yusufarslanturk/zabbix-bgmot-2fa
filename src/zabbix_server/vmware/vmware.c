@@ -6929,7 +6929,7 @@ static int	vmware_service_put_event_data(zbx_vector_ptr_t *events, zbx_id_xmlnod
 	zbx_vector_ptr_append(events, event);
 
 	if (0 < sz)
-		*alloc_sz += zbx_mem_required_chunk_size(sz);
+		*alloc_sz += zbx_shmem_required_chunk_size(sz);
 
 	return SUCCEED;
 }
@@ -6962,7 +6962,7 @@ static time_t	vmware_service_parse_event_ts(xmlDoc *doc, xmlNode *node, zbx_uint
 	if (FAIL == zbx_iso8601_utc(ts, &created_time))	/* 2013-06-04T14:19:23.406298Z */
 	{
 		zabbix_log(LOG_LEVEL_TRACE, "unexpected format of createdTime '%s' for event key '" ZBX_FS_TIME_T "'",
-				ts, id);
+				ts, eventid);
 	}
 
 	zbx_free(ts);
