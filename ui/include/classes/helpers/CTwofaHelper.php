@@ -3,7 +3,7 @@
 /**
  * A class for accessing once loaded parameters of Authentication API object.
  */
-class CTwofaHelper extends CConfigGeneralHelper {
+class CTwofaHelper {
 
 	public const TWOFA_TYPE = 'twofa_type';
 	public const TWOFA_DUO_API_HOSTNAME = 'twofa_duo_api_hostname';
@@ -23,7 +23,7 @@ class CTwofaHelper extends CConfigGeneralHelper {
 	/**
 	 * @inheritdoc
 	 */
-	protected static function loadParams(?string $param = null, bool $is_global = false): void {
+	public static function get(?string $param = null, bool $is_global = false): string {
 		if (!self::$params) {
 			self::$params = API::Twofa()->get(['output' => 'extend']);
 
@@ -31,5 +31,6 @@ class CTwofaHelper extends CConfigGeneralHelper {
 				throw new Exception(_('Unable to load 2FA API parameters.'));
 			}
 		}
+		return self::$params[$param];
 	}
 }
