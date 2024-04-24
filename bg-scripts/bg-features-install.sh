@@ -113,8 +113,6 @@ cp ${ZABBIX_INSTALL_PATH}/include/classes/api/CAudit.php ${ZABBIX_INSTALL_PATH}/
 cp CAudit.php ${ZABBIX_INSTALL_PATH}/include/classes/api/
 cd services
 cp CAdUserGroup.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/
-cp ${ZABBIX_INSTALL_PATH}/include/classes/api/services/CAuditLog.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/CAuditLog.php-`date +%s`.bak
-cp CAuditLog.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/
 cp ${ZABBIX_INSTALL_PATH}/include/classes/api/services/CUser.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/CUser.php-`date +%s`.bak
 cp CUser.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/
 cp ${ZABBIX_INSTALL_PATH}/include/classes/api/services/CUserGroup.php ${ZABBIX_INSTALL_PATH}/include/classes/api/services/CUserGroup.php-`date +%s`.bak
