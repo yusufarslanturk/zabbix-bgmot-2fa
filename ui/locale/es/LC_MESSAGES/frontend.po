@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-04-12 15:56+0000\n"
+"PO-Revision-Date: 2024-04-02 13:55+0000\n"
 "Last-Translator: Vicente Salvador <vicentesalvadorcubedo@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: es\n"
@@ -675,7 +675,7 @@ msgstr "La clase de acción %1$s debe extender la clase %2$s."
 msgid "Action deleted"
 msgid_plural "Actions deleted"
 msgstr[0] "Acción eliminada"
-msgstr[1] ""
+msgstr[1] "Acción eliminada"
 
 #: app/controllers/CControllerActionDisable.php:84
 msgid "Action disabled"
@@ -2419,7 +2419,7 @@ msgstr "No se puede borrar el usuario \"%1$s\", prueba deshabilitandolo primero.
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
 msgstr[0] "No es posible eliminar la acción"
-msgstr[1] ""
+msgstr[1] "No es posible eliminar la acción"
 
 #: include/classes/api/services/CRole.php:368
 #, c-format

@@ -674,7 +674,7 @@ msgstr "La classe d'action %1$s doit étendre la classe %2$s."
 #: app/controllers/CControllerActionDelete.php:79
 msgid "Action deleted"
 msgid_plural "Actions deleted"
-msgstr[0] ""
+msgstr[0] "Action supprimée"
 msgstr[1] "Action supprimée"
 
 #: app/controllers/CControllerActionDisable.php:84
@@ -2418,7 +2418,7 @@ msgstr "Impossible de supprimer l'utilisateur interne Zabbix \"%1$s\", essayez d
 #: app/controllers/CControllerActionDelete.php:87
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
-msgstr[0] ""
+msgstr[0] "Impossible de supprimer l'action"
 msgstr[1] "Impossible de supprimer l'action"
 
 #: include/classes/api/services/CRole.php:368
