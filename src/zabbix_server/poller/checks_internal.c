@@ -275,7 +275,7 @@ int	get_value_internal(const DC_ITEM *item, AGENT_RESULT *result, const zbx_conf
 		goto out;
 	}
 
-	if (FAIL != (ret = zbx_get_value_internal_ext(tmp, &request, result)))
+	if (FAIL != (ret = zbx_get_value_internal_ext(item, tmp, &request, result)))
 		goto out;
 
 	ret = NOTSUPPORTED;
@@ -425,42 +425,6 @@ int	get_value_internal(const DC_ITEM *item, AGENT_RESULT *result, const zbx_conf
 			}
 
 			result->ui64 = 2 - result->ui64;
-		}
-		else if (0 == strcmp(tmp, "maintenance"))	/* zabbix["host",,"maintenance"] */
-		{
-			/* this item is always processed by server */
-			if (NULL != (tmp = get_rparam(&request, 1)) && '\0' != *tmp)
-			{
-				SET_MSG_RESULT(result, zbx_strdup(NULL, "Invalid second parameter."));
-				goto out;
-			}
-
-			if (HOST_MAINTENANCE_STATUS_ON == item->host.maintenance_status)
-				SET_UI64_RESULT(result, item->host.maintenance_type + 1);
-			else
-				SET_UI64_RESULT(result, 0);
-		}
-		else if (0 == strcmp(tmp, "items"))	/* zabbix["host",,"items"] */
-		{
-			/* this item is always processed by server */
-			if (NULL != (tmp = get_rparam(&request, 1)) && '\0' != *tmp)
-			{
-				SET_MSG_RESULT(result, zbx_strdup(NULL, "Invalid second parameter."));
-				goto out;
-			}
-
-			SET_UI64_RESULT(result, DCget_item_count(item->host.hostid));
-		}
-		else if (0 == strcmp(tmp, "items_unsupported"))	/* zabbix["host",,"items_unsupported"] */
-		{
-			/* this item is always processed by server */
-			if (NULL != (tmp = get_rparam(&request, 1)) && '\0' != *tmp)
-			{
-				SET_MSG_RESULT(result, zbx_strdup(NULL, "Invalid second parameter."));
-				goto out;
-			}
-
-			SET_UI64_RESULT(result, DCget_item_unsupported_count(item->host.hostid));
 		}
 		else if (0 == strcmp(tmp, "interfaces"))	/* zabbix["host","discovery","interfaces"] */
 		{
