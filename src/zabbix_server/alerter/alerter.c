@@ -32,6 +32,8 @@
 #include "zbxstr.h"
 #include "zbxtime.h"
 #include "zbxtypes.h"
+#include "zbxserver.h"
+#include "zbxdbwrap.h"
 
 #define	ALARM_ACTION_TIMEOUT	40
 
@@ -152,19 +154,47 @@ static char	*create_email_inreplyto(zbx_uint64_t mediatypeid, const char *sendto
  ******************************************************************************/
 static void	alerter_process_email(zbx_ipc_socket_t *socket, zbx_ipc_message_t *ipc_message)
 {
-	zbx_uint64_t	alertid, mediatypeid, eventid;
+	zbx_uint64_t	alertid, mediatypeid, eventid, objectid;
 	char		*sendto, *subject, *message, *smtp_server, *smtp_helo, *smtp_email, *username, *password,
-			*inreplyto;
+			*inreplyto, *expression, *recovery_expression;
 	unsigned short	smtp_port;
 	unsigned char	smtp_security, smtp_verify_peer, smtp_verify_host, smtp_authentication, content_type;
-	int		ret;
+	int		object, source, ret;
 	char		error[MAX_STRING_LEN];
 
-	zbx_alerter_deserialize_email(ipc_message->data, &alertid, &mediatypeid, &eventid, &sendto, &subject, &message,
-			&smtp_server, &smtp_port, &smtp_helo, &smtp_email, &smtp_security, &smtp_verify_peer,
-			&smtp_verify_host, &smtp_authentication, &username, &password, &content_type);
+	zbx_alerter_deserialize_email(ipc_message->data, &alertid, &mediatypeid, &eventid, &source, &object, &objectid,
+			&sendto, &subject, &message, &smtp_server, &smtp_port, &smtp_helo, &smtp_email, &smtp_security,
+			&smtp_verify_peer, &smtp_verify_host, &smtp_authentication, &username, &password,
+			&content_type, &expression, &recovery_expression);
 
 	inreplyto = create_email_inreplyto(mediatypeid, sendto, eventid);
+
+	if (SMTP_AUTHENTICATION_NORMAL_PASSWORD == smtp_authentication)
+	{
+		/* fill data required by substitute_simple_macros_unmasked() for MACRO_TYPE_ALERT_EMAIL */
+
+		zbx_db_event	event = {.eventid = eventid, .source = source, .object = object, .objectid = objectid};
+
+		memset(&event.trigger, 0, sizeof(zbx_db_trigger));
+		event.trigger.expression = expression;
+		event.trigger.recovery_expression = recovery_expression;
+
+		zbx_dc_um_handle_t	*um_handle = zbx_dc_open_user_macros();
+
+		zbx_substitute_simple_macros_unmasked(NULL, &event, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+				NULL, NULL, NULL, &username, MACRO_TYPE_ALERT_EMAIL, NULL, 0);
+		zbx_substitute_simple_macros_unmasked(NULL, &event, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+				NULL, NULL, NULL, &password, MACRO_TYPE_ALERT_EMAIL, NULL, 0);
+
+		zbx_dc_close_user_macros(um_handle);
+		zbx_db_trigger_clean(&event.trigger);
+	}
+	else
+	{
+		zbx_free(expression);
+		zbx_free(recovery_expression);
+	}
+
 	ret = send_email(smtp_server, smtp_port, smtp_helo, smtp_email, sendto, inreplyto, subject, message,
 			smtp_security, smtp_verify_peer, smtp_verify_host, smtp_authentication, username, password,
 			content_type, ALARM_ACTION_TIMEOUT, error, sizeof(error));
