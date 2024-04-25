@@ -20,7 +20,6 @@
 #include "zbxcommon.h"
 #include "zbxcachehistory.h"
 #include "checks_internal.h"
-#include "dbcache.h"
 
 /******************************************************************************
  *                                                                            *

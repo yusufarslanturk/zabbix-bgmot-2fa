@@ -25,7 +25,7 @@
 #include "zbxjson.h"
 #include "zbxtime.h"
 #include "zbxconnector.h"
-
+#include "zbx_host_constants.h"
 #include "checks_internal.h"
 
 /******************************************************************************
@@ -49,7 +49,7 @@ int	zbx_get_value_internal_ext(const DC_ITEM *item, const char *param1, const AG
 	AGENT_RESULT *result)
 {
 	int		nparams, ret = NOTSUPPORTED;
-	const char	*param2;
+	const char	*param2, *param3;
 
 	nparams = get_rparams_num(request);
 
@@ -100,7 +100,7 @@ int	zbx_get_value_internal_ext(const DC_ITEM *item, const char *param1, const AG
 		}
 		else
 		{
-			const char	*param3 = get_rparam(request, 2);
+			param3 = get_rparam(request, 2);
 
 			if (0 == strcmp(param3, "lastaccess"))
 			{
@@ -136,7 +136,6 @@ int	zbx_get_value_internal_ext(const DC_ITEM *item, const char *param1, const AG
 	}
 	else if (0 == strcmp(param1, "vcache"))
 	{
-		const char	*param3;
 		zbx_vc_stats_t	stats;
 
 		if (FAIL == zbx_vc_get_statistics(&stats))
