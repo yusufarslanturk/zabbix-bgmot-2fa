@@ -50,7 +50,7 @@ import (
 	"errors"
 	"unsafe"
 
-	"git.zabbix.com/ap/plugin-support/log"
+	"golang.zabbix.com/sdk/log"
 )
 
 func NewGlobalRegexp() (grxp unsafe.Pointer) {
