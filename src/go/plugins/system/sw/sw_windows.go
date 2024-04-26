@@ -23,14 +23,14 @@
 package sw
 
 import (
-	"errors"
 	"encoding/json"
+	"errors"
+	"fmt"
 	"strconv"
 	"strings"
-	"fmt"
 
 	"golang.org/x/sys/windows/registry"
-	"git.zabbix.com/ap/plugin-support/plugin"
+	"golang.zabbix.com/sdk/plugin"
 	"zabbix.com/pkg/win32"
 )
 
@@ -56,7 +56,7 @@ const (
 	regLab            = "BuildLab"
 	regLabEX          = "BuildLabEx"
 
-	regVersionKey     = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
+	regVersionKey = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
 )
 
 type system_info struct {
@@ -128,7 +128,7 @@ func getBuildString(handle registry.Key, inclDesc bool) (result string, err erro
 	result = joinNonEmptyStrings(".", []string{major, minor})
 	if len(result) > 0 {
 		if inclDesc {
-			result = fmt.Sprintf("Build %s", result);
+			result = fmt.Sprintf("Build %s", result)
 		}
 		return result, nil
 	}
@@ -157,7 +157,7 @@ func getFullOSInfoString(handle registry.Key) (result string, err error) {
 	}
 
 	build, _ = getBuildString(handle, true)
-	
+
 	return createWinInfoLineOrErr([]string{name, lab, build})
 }
 
@@ -223,7 +223,7 @@ func (p *Plugin) getOSVersionJSON() (result interface{}, err error) {
 
 	info.VersionFull, _ = getFullOSInfoString(handle)
 	info.VersionPretty, _ = getPrettyOSInfoString(handle)
-	info.Build, _ =  getBuildString(handle, false)
+	info.Build, _ = getBuildString(handle, false)
 
 	info.ProductName, _ = getRegistryValue(handle, regProductName, registry.SZ)
 	info.Major, _ = getRegistryValue(handle, regMajor, registry.SZ)
