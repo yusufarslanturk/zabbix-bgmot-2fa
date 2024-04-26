@@ -4928,7 +4928,8 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 			if ((EVENT_SOURCE_INTERNAL == event->source && EVENT_OBJECT_TRIGGER == event->object) ||
 					EVENT_SOURCE_TRIGGERS == event->source)
 			{
-				if (SUCCEED == zbx_db_trigger_get_all_hostids(&event->trigger, &phostids))
+				if (NULL != event->trigger.expression && NULL != event->trigger.recovery_expression &&
+						SUCCEED == zbx_db_trigger_get_all_hostids(&event->trigger, &phostids))
 				{
 					zbx_dc_get_user_macro(um_handle, m, phostids->values, phostids->values_num,
 							&replace_to);
