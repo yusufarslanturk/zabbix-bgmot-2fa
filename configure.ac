@@ -19,7 +19,7 @@ dnl
 
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([Zabbix],[6.4.13])
+AC_INIT([Zabbix],[6.4.14])
 AC_CONFIG_SRCDIR(src/zabbix_server/server.c)
 AM_INIT_AUTOMAKE([subdir-objects tar-pax])
 
@@ -1652,19 +1652,18 @@ fi
 AM_CONDITIONAL(HAVE_LIBMODBUS, [test "x$have_libmodbus" = "xyes"])
 
 if test "x$agent2" = "xyes"; then
-	AC_CHECK_PROGS([GO], [go], [no])
-	if test "x$GO" = "xno"; then
-		AC_MSG_ERROR([Unable to find "go" executable in path])
-	fi
 	AC_DEFINE(ZBX_BUILD_AGENT2,1,[Define to 1 if Agent2 is being built.])
 fi
 
 if test "x$webservice" = "xyes"; then
+	AC_DEFINE(ZBX_BUILD_WEBSERVICE,1,[Define to 1 if Web Service is being built.])
+fi
+
+if test "x$agent2" = "xyes" || test "x$webservice" = "xyes"; then
 	AC_CHECK_PROGS([GO], [go], [no])
 	if test "x$GO" = "xno"; then
 		AC_MSG_ERROR([Unable to find "go" executable in path])
 	fi
-	AC_DEFINE(ZBX_BUILD_WEBSERVICE,1,[Define to 1 if Web Service is being built.])
 fi
 
 if test "x$java" = "xyes"; then
@@ -1807,8 +1806,8 @@ SERVER_CONFIG_FILE="${sysconfdir}/zabbix_server.conf"
 PROXY_CONFIG_FILE="${sysconfdir}/zabbix_proxy.conf"
 AGENT_CONFIG_FILE="${sysconfdir}/zabbix_agentd.conf"
 AGENT2_CONFIG_FILE="${sysconfdir}/zabbix_agent2.conf"
-AGENT2_CONFIG_PATH="${sysconfdir}/zabbix_agent2.d"
-AGENT2_CONFIG_PLUGINS_PATH="${AGENT2_CONFIG_PATH}/plugins.d"
+AGENT2_CONFIG_DIR="${sysconfdir}/zabbix_agent2.d"
+AGENT2_PLUGIN_CONFIG_DIR="${AGENT2_CONFIG_DIR}/plugins.d"
 WEBSERVICE_CONFIG_FILE="${sysconfdir}/zabbix_web_service.conf"
 
 EXTERNAL_SCRIPTS_PATH="${datadir}/zabbix/externalscripts"
@@ -1887,8 +1886,8 @@ AC_SUBST(SERVER_CONFIG_FILE)
 AC_SUBST(PROXY_CONFIG_FILE)
 AC_SUBST(AGENT_CONFIG_FILE)
 AC_SUBST(AGENT2_CONFIG_FILE)
-AC_SUBST(AGENT2_CONFIG_PATH)
-AC_SUBST(AGENT2_CONFIG_PLUGINS_PATH)
+AC_SUBST(AGENT2_CONFIG_DIR)
+AC_SUBST(AGENT2_PLUGIN_CONFIG_DIR)
 AC_SUBST(WEBSERVICE_CONFIG_FILE)
 
 AC_SUBST(EXTERNAL_SCRIPTS_PATH)
@@ -1899,14 +1898,7 @@ AC_SUBST(CURL_SSL_KEY_LOCATION)
 
 AC_SUBST(LOAD_MODULE_PATH)
 
-GOBIN=${sbindir}
-GOCMD=go
-GOWORKDIR=$ac_abs_confdir/go/src/zabbix
-
-export GOBIN=${GOBIN}
-AC_SUBST(GOBIN)
-AC_SUBST(GOCMD)
-AC_SUBST(GOWORKDIR)
+AC_SUBST(GO)
 
 dnl *****************************************************************
 dnl *                                                               *
@@ -2109,11 +2101,11 @@ AGENT_CONFIG_FILE=`eval echo "${AGENT_CONFIG_FILE}"`
 AGENT2_CONFIG_FILE=`eval echo "${AGENT2_CONFIG_FILE}"`
 AGENT2_CONFIG_FILE=`eval echo "${AGENT2_CONFIG_FILE}"`
 
-AGENT2_CONFIG_PATH=`eval echo "${AGENT2_CONFIG_PATH}"`
-AGENT2_CONFIG_PATH=`eval echo "${AGENT2_CONFIG_PATH}"`
+AGENT2_CONFIG_DIR=`eval echo "${AGENT2_CONFIG_DIR}"`
+AGENT2_CONFIG_DIR=`eval echo "${AGENT2_CONFIG_DIR}"`
 
-AGENT2_CONFIG_PLUGINS_PATH=`eval echo "${AGENT2_CONFIG_PLUGINS_PATH}"`
-AGENT2_CONFIG_PLUGINS_PATH=`eval echo "${AGENT2_CONFIG_PLUGINS_PATH}"`
+AGENT2_PLUGIN_CONFIG_DIR=`eval echo "${AGENT2_PLUGIN_CONFIG_DIR}"`
+AGENT2_PLUGIN_CONFIG_DIR=`eval echo "${AGENT2_PLUGIN_CONFIG_DIR}"`
 
 WEBSERVICE_CONFIG_FILE=`eval echo "${WEBSERVICE_CONFIG_FILE}"`
 WEBSERVICE_CONFIG_FILE=`eval echo "${WEBSERVICE_CONFIG_FILE}"`
