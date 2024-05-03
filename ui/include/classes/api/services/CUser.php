@@ -334,9 +334,12 @@ class CUser extends CApiService {
 						_s('Not allowed to update field "%1$s" for provisioned user.', 'passwd')
 					);
 				}
-				elseif ($this->checkPassword($user, '/'.($i + 1).'/passwd')) {
-					$user['passwd'] = password_hash($user['passwd'], PASSWORD_BCRYPT, ['cost' => ZBX_BCRYPT_COST]);
-				}
+
+				$this->checkPassword($user, '/'.($i + 1).'/passwd');
+			}
+
+			if (array_key_exists('passwd', $user)) {
+				$user['passwd'] = password_hash($user['passwd'], PASSWORD_BCRYPT, ['cost' => ZBX_BCRYPT_COST]);
 			}
 		}
 		unset($user);
@@ -1652,16 +1655,13 @@ class CUser extends CApiService {
 	 */
 	private static function getAuthTypeByGuiAccess(int $gui_access): int {
 		if ($gui_access == GROUP_GUI_ACCESS_INTERNAL) {
-			$auth_type = ZBX_AUTH_INTERNAL;
+			return ZBX_AUTH_INTERNAL;
 		}
 		elseif ($gui_access == GROUP_GUI_ACCESS_LDAP) {
-			$auth_type = ZBX_AUTH_LDAP;
-		}
-		else {
-			$auth_type = CAuthenticationHelper::getPublic(CAuthenticationHelper::AUTHENTICATION_TYPE);
+			return ZBX_AUTH_LDAP;
 		}
 
-		return $auth_type;
+		return CAuthenticationHelper::getPublic(CAuthenticationHelper::AUTHENTICATION_TYPE);
 	}
 
 	private function tryToCreateLdapProvisionedUser(array $data, array &$db_users): bool {
