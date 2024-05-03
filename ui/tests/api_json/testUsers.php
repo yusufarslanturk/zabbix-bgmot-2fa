@@ -279,7 +279,7 @@ class testUsers extends CAPITest {
 						['usrgrpid' => 7]
 					]
 				],
-				'Incorrect value for field "passwd": cannot be empty.'
+				'User "API user create without password" must have a password, because internal authentication is in effect.'
 			],
 			// Check user username.
 			[
@@ -402,7 +402,7 @@ class testUsers extends CAPITest {
 						['usrgrpid' => '123456']
 					]
 				],
-				'expected_error' => 'User group with ID "123456" is not available.'
+				'expected_error' => 'Invalid parameter "/1/usrgrps/1": object does not exist.'
 			],
 			[
 				'user' => [
@@ -739,7 +739,7 @@ class testUsers extends CAPITest {
 						['usrgrpid' => '123456']
 					]
 				]],
-				'expected_error' => 'User group with ID "123456" is not available.'
+				'expected_error' => 'Invalid parameter "/1/usrgrps/1": object does not exist.'
 			],
 			[
 				'user' => [[
