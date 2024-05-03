@@ -5305,6 +5305,10 @@ msgstr "DNS 이름"
 msgid "Daily"
 msgstr "일간"
 
+#: include/locales.inc.php:40
+msgid "Danish (da_DK)"
+msgstr ""
+
 #: include/classes/core/ZBase.php:380
 msgid "Dark"
 msgstr "Dark"
@@ -20679,6 +20683,11 @@ msgstr "유저 \"%1$s\"는 \"%2$s\" 액션 내에서 이용되고 있습니다."
 msgid "User \"%1$s\" is user on whose behalf report \"%2$s\" is created."
 msgstr "사용자 \"%1$s\"는 대신 보고서 \"%2$s\"가 생성된 사용자입니다."
 
+#: include/classes/api/services/CUser.php:814
+#, c-format
+msgid "User \"%1$s\" must have a password, because internal authentication is in effect."
+msgstr ""
+
 #: app/controllers/CControllerUserProvision.php:61
 #, c-format
 msgid "User \"%1$s\" provisioned."
@@ -23932,6 +23941,10 @@ msgstr "now() - Epoch를 기준으로 한 경과 시간 (초단위)"
 #: include/forms.inc.php:1306 include/views/js/item.preprocessing.js.php:263
 msgid "number"
 msgstr "수치"
+
+#: include/classes/api/services/CUser.php:736
+msgid "object does not exist"
+msgstr ""
 
 #: include/classes/api/services/CHostPrototype.php:836
 msgid "object does not exist or belongs to another object"
