@@ -20,8 +20,7 @@ zabbix_export:
         
         Known Issues:
         
-          - Node Exporter 0.16.0 renamed many metrics. CPU utilization for "guest" and "guest_nice" metrics are not supported in this template with Node Exporter < 0.16. Disk IO metrics are not supported. Other metrics provided as best effort. See https://github.com/prometheus/node_exporter/releases/tag/v0.16.0 for details
-        See https://github.com/prometheus/node_exporter/releases/tag/v0.16.0 for details.
+          - Node Exporter 0.16.0 renamed many metrics. CPU utilization for "guest" and "guest_nice" metrics are not supported in this template with Node Exporter < 0.16. Disk IO metrics are not supported. Other metrics provided as best effort. See https://github.com/prometheus/node_exporter/releases/tag/v0.16.0 for details.
             - version: below 0.16.0
           - metric node_network_info with label 'device' cannot be found, so network discovery is not possible.
             - version: below 0.18
@@ -2081,7 +2080,7 @@ zabbix_export:
           description: 'Used for network interface discovery. Can be overridden on the host or linked template level.'
         - macro: '{$NET.IF.IFNAME.NOT_MATCHES}'
           value: '(^Software Loopback Interface|^NULL[0-9.]*$|^[Ll]o[0-9.]*$|^[Ss]ystem$|^Nu[0-9.]*$|^veth[0-9A-z]+$|docker[0-9]+|br-[a-z0-9]{12})'
-          description: 'Filters out `loopbacks`, `nulls`, `docker veth` links and `docker0` bridge by default.'
+          description: 'Filters out `loopbacks`, `nulls`, docker `veth` links and `docker0` bridge by default.'
         - macro: '{$NET.IF.IFOPERSTATUS.MATCHES}'
           value: '^.*$'
           description: 'Used in network interface discovery rule filters.'

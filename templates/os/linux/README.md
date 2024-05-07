@@ -54,7 +54,7 @@ Install Zabbix agent on Linux OS following Zabbix [documentation](https://www.za
 |{$IF.ERRORS.WARN}|<p>Warning threshold of error packet rate. Can be used with interface name as context.</p>|`2`|
 |{$IFCONTROL}|<p>Link status trigger will be fired only for interfaces where the context macro equals "1".</p>|`1`|
 |{$NET.IF.IFNAME.MATCHES}|<p>Used for network interface discovery. Can be overridden on the host or linked template level.</p>|`^.*$`|
-|{$NET.IF.IFNAME.NOT_MATCHES}|<p>Filters out `loopbacks`, `nulls`, `docker veth` links and `docker0` bridge by default.</p>|`Macro too long. Please see the template.`|
+|{$NET.IF.IFNAME.NOT_MATCHES}|<p>Filters out `loopbacks`, `nulls`, docker `veth` links and `docker0` bridge by default.</p>|`Macro too long. Please see the template.`|
 |{$IF.UTIL.MAX}|<p>Used as a threshold in the interface utilization trigger.</p>|`90`|
 |{$SYSTEM.FUZZYTIME.MAX}|<p>The threshold for the difference of system time in seconds.</p>|`60`|
 |{$KERNEL.MAXPROC.MIN}||`1024`|
