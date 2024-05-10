@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-03-31 15:58+0000\n"
+"PO-Revision-Date: 2024-05-04 09:42+0000\n"
 "Last-Translator: Ryan Skov <rsk@capmon.dk>\n"
 "Language-Team: none\n"
 "Language: da\n"
@@ -9867,7 +9867,7 @@ msgstr "Ukorrekt handlings betingelse udløser alvorlighedsgrad."
 
 #: include/classes/api/services/CAction.php:3235
 msgid "Incorrect action condition trigger. Trigger does not exist or you have no access to it."
-msgstr ""
+msgstr "Udløser for forkert handlingstilstand. Udløseren findes ikke, eller du har ikke adgang til den."
 
 #: include/classes/validators/CActionCondValidator.php:211
 msgid "Incorrect action condition type."
@@ -14274,7 +14274,7 @@ msgstr "Antal CPU'er. Returnerer heltal"
 
 #: include/classes/data/CItemData.php:1423
 msgid "Number of available DS paths, \"url\" - VMware service URL, \"uuid\" - VMware hypervisor global unique identifier, \"datastore\" - Datastore name, \"partitionid\" - internal id of physical device from vmware.hv.datastore.discovery"
-msgstr ""
+msgstr "Antal tilgængelige DS-stier, \"url\" - VMware service URL, \"uuid\" - VMware hypervisor global unik identifikator, \"datastore\" - Datastore navn, \"partitionid\" - intern id for fysisk enhed fra vmware.hv.datastore.discovery"
 
 #: widgets/svggraph/includes/WidgetForm.php:385
 msgid "Number of columns"
@@ -14331,15 +14331,15 @@ msgstr "Antal problemer og udvide mest kritiske"
 
 #: include/classes/data/CItemData.php:1459
 msgid "Number of processor cores on VMware hypervisor, \"url\" - VMware service URL, \"uuid\" - VMware hypervisor global unique identifier"
-msgstr ""
+msgstr "Antal processorkerner på VMware hypervisor, \"url\" - VMware service URL, \"uuid\" - VMware hypervisor global unik identifikator"
 
 #: include/classes/data/CItemData.php:1463
 msgid "Number of processor threads on VMware hypervisor, \"url\" - VMware service URL, \"uuid\" - VMware hypervisor global unique identifier"
-msgstr ""
+msgstr "Antal processortråde på VMware hypervisor, \"url\" - VMware service URL, \"uuid\" - VMware hypervisor global unik identifikator"
 
 #: include/classes/data/CItemData.php:1591
 msgid "Number of processors on VMware virtual machine, \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier"
-msgstr ""
+msgstr "Antal processorer på VMware virtuel maskine, \"url\" - VMware service URL, \"uuid\" - VMware virtuel maskine global unik identifikator"
 
 #: widgets/svggraph/includes/WidgetForm.php:378
 msgid "Number of rows"
@@ -14388,7 +14388,7 @@ msgstr "Antal brugere, der er logget ind. Returnerer heltal"
 
 #: include/classes/data/CItemData.php:1555
 msgid "Number of virtual machines on VMware hypervisor, \"url\" - VMware service URL, \"uuid\" - VMware hypervisor global unique identifier"
-msgstr ""
+msgstr "Antal virtuelle maskiner på VMware hypervisor, \"url\" - VMware service URL, \"uuid\" - VMware hypervisor global unik identifikator"
 
 #: include/classes/data/CItemData.php:1279
 msgid "Number or percentage of inodes. Returns integer for number; float for percentage"
@@ -15184,11 +15184,11 @@ msgstr "Forældreopdagelsesregler"
 
 #: include/views/configuration.graph.edit.php:68
 msgid "Parent graphs"
-msgstr ""
+msgstr "Overordnede grafer"
 
 #: app/partials/hostmacros.inherited.list.html.php:53
 msgid "Parent host value"
-msgstr ""
+msgstr "Overordnet værtsværdi"
 
 #: include/views/configuration.item.edit.php:60
 #: include/views/configuration.item.prototype.edit.php:57
@@ -15198,7 +15198,7 @@ msgstr "Forældre datapunkter"
 #: app/partials/service.info.php:111 app/partials/service.list.edit.php:41
 #: app/partials/service.list.php:35 app/views/popup.service.edit.php:56
 msgid "Parent services"
-msgstr ""
+msgstr "Overordnede tjenester"
 
 #: app/partials/configuration.tags.tab.php:44
 msgid "Parent templates"
@@ -15326,7 +15326,7 @@ msgstr "Maksimal hukommelsesbrug: %1$s"
 
 #: include/classes/data/CItemData.php:1587
 msgid "Percent of time the virtual machine is unable to run because it is contending for access to the physical CPU(s), \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier"
-msgstr ""
+msgstr "Procentdel af tiden, hvor den virtuelle maskine ikke er i stand til at køre, fordi den kæmper om adgang til den eller de fysiske CPU'er, \"url\" - VMware service URL, \"uuid\" - VMware virtuel maskine globalt unikt id"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:244
 msgid "Percentage"
@@ -15334,11 +15334,11 @@ msgstr "Procent"
 
 #: include/classes/data/CItemData.php:1671
 msgid "Percentage of host physical memory that has been consumed, \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier"
-msgstr ""
+msgstr "Procentdel af værtens fysiske hukommelse, der er blevet brugt, \"url\" - VMware service URL, \"uuid\" - VMware virtuel maskine globalt unikt id"
 
 #: include/classes/data/CItemData.php:1595
 msgid "Percentage of time that the virtual machine was ready, but could not get scheduled to run on the physical CPU, \"url\" - VMware service URL, \"uuid\" - VMware virtual machine global unique identifier, \"instance\" - CPU instance"
-msgstr ""
+msgstr "Procentdel af tid, hvor den virtuelle maskine var klar, men ikke kunne planlægges til at køre på den fysiske CPU, \"url\" - VMware service URL, \"uuid\" - VMware virtuel maskine global unik identifikator, \"instans\" - CPU instans"
 
 #: graphs.php:50 include/views/configuration.graph.edit.php:154
 #: widgets/svggraph/includes/WidgetForm.php:91
@@ -16161,7 +16161,7 @@ msgstr "Syntaksfejl i gendannelsesudtryk."
 
 #: app/views/popup.action.edit.php:214
 msgid "Recovery operations"
-msgstr ""
+msgstr "Gedannelsesoperationer"
 
 #: app/views/hintbox.eventlist.php:71
 #: include/classes/screens/CScreenProblem.php:1074
@@ -16216,7 +16216,7 @@ msgstr "Vil du regenererer den valgte API-token? Tidligere genereret token blive
 
 #: include/forms.inc.php:364
 msgid "Regular"
-msgstr ""
+msgstr "Regulær"
 
 #: app/controllers/CControllerAuditLogList.php:235
 #: app/views/popup.lldoverride.php:101 include/items.inc.php:1851
@@ -17680,7 +17680,7 @@ msgstr "Lagringsperiode for tjenestedata"
 msgid "Service deleted"
 msgid_plural "Services deleted"
 msgstr[0] "Tjenesten er slettet"
-msgstr[1] ""
+msgstr[1] "Tjenesterne er slettet"
 
 #: app/views/administration.userrole.edit.php:167
 #: app/views/administration.userrole.edit.php:208
@@ -18672,15 +18672,15 @@ msgstr "Undertrykt indtil: %1$s"
 
 #: include/classes/data/CItemData.php:1179
 msgid "Swap in (from device into memory) statistics. Returns integer"
-msgstr ""
+msgstr "Swap ind (fra enhed til hukommelse) statistik. Returnerer heltal"
 
 #: include/classes/data/CItemData.php:1183
 msgid "Swap out (from memory onto device) statistics. Returns integer"
-msgstr ""
+msgstr "Swap ud (fra hukommelse til enhed) statistik. Returnerer heltal"
 
 #: include/classes/data/CItemData.php:1187
 msgid "Swap space size in bytes or in percentage from total. Returns integer for bytes; float for percentage"
-msgstr ""
+msgstr "Swap størrelse i bytes eller i procent af totalen. Returnerer heltal for bytes; decimal for procent"
 
 #: include/locales.inc.php:63
 msgid "Swedish (sv_SE)"
@@ -19207,7 +19207,7 @@ msgstr "Metoden \"%1$s.%2$s\" skal kaldes uden parameteren \"auth\"."
 
 #: app/views/administration.geomaps.edit.php:30
 msgid "The URL template is used to load and display the tile layer on geographical maps."
-msgstr ""
+msgstr "URL-skabelonen bruges til at indlæse og vise lag på geografiske kort."
 
 #: include/classes/db/DbBackend.php:130
 #, c-format
@@ -19642,7 +19642,7 @@ msgstr "Totaler"
 
 #: app/controllers/CControllerPopupMediatypeTestSend.php:188
 msgid "Trace"
-msgstr ""
+msgstr "Spor"
 
 #: include/page_footer.php:40
 msgid "Transaction has not been closed. Aborting..."
@@ -20319,7 +20319,7 @@ msgstr ""
 
 #: app/views/administration.user.list.php:307
 msgid "Unblock selected users?"
-msgstr ""
+msgstr "Vil du fjerne blokeringen af valgte brugere?"
 
 #: include/forms.inc.php:1444 include/forms.inc.php:1477
 #: include/views/js/item.preprocessing.js.php:139
@@ -20330,12 +20330,12 @@ msgstr "Uændret"
 
 #: app/views/popup.acknowledge.edit.php:126
 msgid "Undo problem acknowledgement."
-msgstr ""
+msgstr "Fortryd problembekræftelse."
 
 #: include/classes/core/ZBase.php:682
 #, c-format
 msgid "Unexpected response for action %1$s."
-msgstr ""
+msgstr "Uventet svar for handling %1$s."
 
 #: app/controllers/CControllerSlaCreateUpdate.php:45
 #: app/controllers/CControllerSlaCreateUpdate.php:49
@@ -20388,7 +20388,7 @@ msgstr ""
 #: include/views/js/configuration.item.list.js.php:201 jsLoader.php:264
 #: jsLoader.php:389 widgets/tophosts/views/column.edit.js.php:152
 msgid "Unexpected server error."
-msgstr ""
+msgstr "Uventet serverfejl."
 
 #: app/views/popup.massupdate.item.php:164
 #: include/views/configuration.item.edit.php:758
@@ -20398,7 +20398,7 @@ msgstr ""
 #: widgets/svggraph/includes/WidgetForm.php:327
 #: widgets/svggraph/includes/WidgetForm.php:352
 msgid "Units"
-msgstr ""
+msgstr "Enheder"
 
 #: app/controllers/CControllerPopupMediatypeTestSend.php:193
 #: app/partials/action.operations.php:77
@@ -20422,17 +20422,17 @@ msgstr ""
 #: widgets/hostavail/views/widget.view.php:75
 #: widgets/hostavail/views/widget.view.php:113
 msgid "Unknown"
-msgstr ""
+msgstr "Ukendt"
 
 #: widgets/hostavail/views/widget.view.php:41
 #: widgets/web/views/widget.view.php:37
 msgctxt "compact table header"
 msgid "Unknown"
-msgstr ""
+msgstr "Ukendt"
 
 #: app/views/reports.auditlog.list.php:132
 msgid "Unknown action"
-msgstr ""
+msgstr "Ukendt handling"
 
 #: include/classes/helpers/CElasticsearchHelper.php:193
 #: include/classes/screens/CScreenHttpTestDetails.php:110
@@ -20440,7 +20440,7 @@ msgstr ""
 #: include/classes/screens/CScreenHttpTest.php:125
 #: include/views/configuration.httpconf.list.php:182
 msgid "Unknown error"
-msgstr ""
+msgstr "Ukendt fejl"
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:47
 #: app/controllers/CControllerPopupTriggerExpr.php:1341
@@ -20451,7 +20451,7 @@ msgstr "Ukendt værtsdatapunkt, datapunktet findes ikke på den valgte vært"
 #: app/controllers/CControllerPopupTestTriggerExpr.php:46
 #: include/triggers.inc.php:1115
 msgid "Unknown host, no such host present in system"
-msgstr ""
+msgstr "Ukendt vært, ingen sådan vært til stede i systemet"
 
 #: include/hosts.inc.php:474
 msgid "Unknown interface type."
@@ -20459,22 +20459,22 @@ msgstr ""
 
 #: app/views/reports.auditlog.list.php:122
 msgid "Unknown resource"
-msgstr ""
+msgstr "Ukendt ressource"
 
 #: include/classes/screens/CScreenHttpTest.php:133
 #: include/views/configuration.httpconf.list.php:184
 #, c-format
 msgid "Unknown step failed: %1$s"
-msgstr ""
+msgstr "Ukendt trin mislykkedes: %1$s"
 
 #: include/items.inc.php:1439
 msgid "Unknown value type"
-msgstr ""
+msgstr "Ukendt værditype"
 
 #: app/views/administration.mediatype.edit.php:345
 #: app/views/connector.edit.php:176
 msgid "Unlimited"
-msgstr ""
+msgstr "Ubegrænset"
 
 #: app/partials/configuration.host.edit.html.php:147
 #: app/views/popup.massupdate.host.php:47
@@ -20482,12 +20482,12 @@ msgstr ""
 #: include/views/configuration.host.prototype.edit.php:146
 #: include/views/configuration.template.edit.php:102
 msgid "Unlink"
-msgstr ""
+msgstr "Fjern linket"
 
 #: app/partials/configuration.host.edit.html.php:151
 #: include/views/configuration.template.edit.php:109
 msgid "Unlink and clear"
-msgstr ""
+msgstr "Fjern linket og ryd det"
 
 #: include/actions.inc.php:864
 msgid "Unlink from template"
@@ -20499,68 +20499,68 @@ msgstr "Fjern link fra skabeloner"
 
 #: jsLoader.php:261
 msgid "Unmute"
-msgstr ""
+msgstr "Slå lyden til"
 
 #: app/partials/administration.system.info.php:162
 #, c-format
 msgid "Unsupported %1$s database server version. Must be at least %2$s."
-msgstr ""
+msgstr "Ikke-understøttet %1$s databaseserverversion. Skal være mindst %2$s."
 
 #: app/partials/administration.system.info.php:175
 #, c-format
 msgid "Unsupported %1$s database server version. Must not be higher than %2$s."
-msgstr ""
+msgstr "Ikke-understøttet %1$s databaseserverversion. Må ikke være højere end %2$s."
 
 #: app/views/administration.housekeeping.edit.php:190
 #, c-format
 msgid "Unsupported TimescaleDB version. Should be at least %1$s."
-msgstr ""
+msgstr "Ikke-understøttet TimescaleDB-version. Bør være mindst %1$s."
 
 #: app/views/administration.housekeeping.edit.php:200
 #, c-format
 msgid "Unsupported TimescaleDB version. Should not be higher than %1$s."
-msgstr ""
+msgstr "Ikke-understøttet TimescaleDB-version. Bør ikke være højere end %1$s."
 
 #: include/classes/db/MysqlDbBackend.php:99
 #: include/classes/db/PostgresqlDbBackend.php:131
 #, c-format
 msgid "Unsupported charset or collation for table: %1$s."
 msgid_plural "Unsupported charset or collation for tables: %1$s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ikke-understøttet tegnsæt eller sortering for tabel: %1$s."
+msgstr[1] "Ikke-understøttet tegnsæt eller sortering for tabel: %1$s."
 
 #: include/classes/import/readers/CImportReaderFactory.php:79
 #, c-format
 msgid "Unsupported import file extension \"%1$s\"."
-msgstr ""
+msgstr "Ikke-understøttet importfiludvidelse \"%1$s\"."
 
 #: include/classes/import/readers/CImportReaderFactory.php:51
 #, c-format
 msgid "Unsupported import format \"%1$s\"."
-msgstr ""
+msgstr "Ikke-understøttet importformat \"%1$s\"."
 
 #: app/controllers/CControllerPopupActionOperationEdit.php:63
 msgid "Unsupported operation."
-msgstr ""
+msgstr "Ikke-understøttet handling."
 
 #: include/classes/api/services/CDiscoveryRule.php:1953
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for a filter condition of discovery rule \"%1$s\"."
-msgstr ""
+msgstr "Ikke-understøttet parameter \"%2$s\" for en filterbetingelse for opdagelsesreglen \"%1$s\"."
 
 #: include/classes/api/services/CDiscoveryRule.php:1919
 #, c-format
 msgid "Unsupported parameter \"%2$s\" for the filter of discovery rule \"%1$s\"."
-msgstr ""
+msgstr "Ikke-understøttet parameter \"%2$s\" for filteret for opdagelsesreglen \"%1$s\"."
 
 #: app/views/popup.acknowledge.edit.php:103
 msgid "Unsuppress"
-msgstr ""
+msgstr "Undertrykke"
 
 #: include/actions.inc.php:1623 include/actions.inc.php:2092
 #: include/classes/screens/CScreenProblem.php:1256
 msgid "Unsuppressed"
-msgstr ""
+msgstr "Ikke undertrykt"
 
 #: include/blocks.inc.php:675 include/classes/screens/CScreenProblem.php:1428
 #: widgets/problems/includes/WidgetProblems.php:283
@@ -20570,22 +20570,22 @@ msgstr ""
 
 #: app/views/popup.acknowledge.edit.php:92
 msgid "Until"
-msgstr ""
+msgstr "Indtil"
 
 #: app/controllers/CControllerPopupTabFilterEdit.php:96
 #: include/classes/services/CTabFilterProfile.php:95
 msgid "Untitled"
-msgstr ""
+msgstr "Uden titel"
 
 #: widgets/discovery/views/widget.view.php:36
 msgctxt "discovery results in dashboard"
 msgid "Up"
-msgstr ""
+msgstr "Op"
 
 #: include/discovery.inc.php:136
 msgctxt "discovery status"
 msgid "Up"
-msgstr ""
+msgstr "Op"
 
 #: app/controllers/CControllerAuditLogList.php:194
 #: app/partials/massupdate.macros.tab.php:126
@@ -20663,16 +20663,16 @@ msgstr ""
 #: widgets/problems/includes/WidgetProblems.php:494
 #: widgets/tophosts/views/column.edit.php:292
 msgid "Update"
-msgstr ""
+msgstr "Opdater"
 
 #: widgets/tophosts/views/column.edit.php:287
 msgid "Update column"
-msgstr ""
+msgstr "Opdater kolonne"
 
 #: app/partials/massupdate.macros.tab.php:87
 #: app/partials/massupdate.valuemaps.tab.php:33 app/views/popup.import.php:142
 msgid "Update existing"
-msgstr ""
+msgstr "Opdater eksisterende"
 
 #: app/controllers/CControllerPopupLldOperation.php:152
 #: app/controllers/CControllerPopupLldOperation.php:207
@@ -20687,7 +20687,7 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:732 items.php:56
 #: items.php:251
 msgid "Update interval"
-msgstr ""
+msgstr "Opdateringsinterval"
 
 #: app/views/popup.action.edit.php:225
 msgid "Update operations"
@@ -20701,20 +20701,20 @@ msgstr ""
 #: app/controllers/CControllerAuditLogList.php:370
 #: app/controllers/CControllerPopupImportCompare.php:166
 msgid "Updated"
-msgstr ""
+msgstr "Opdateret"
 
 #: include/classes/api/services/CHost.php:1303
 #, c-format
 msgid "Updated status of host \"%1$s\"."
-msgstr ""
+msgstr "Opdateret status for værten \"%1$s\"."
 
 #: include/events.inc.php:346
 msgid "Updating"
-msgstr ""
+msgstr "Opdatering"
 
 #: app/views/administration.image.edit.php:56
 msgid "Upload"
-msgstr ""
+msgstr "Upload"
 
 #: include/html.inc.php:579 include/html.inc.php:580
 msgid "Upper level maps"
@@ -20723,57 +20723,57 @@ msgstr ""
 #: app/partials/service.info.php:61 app/views/slareport.list.php:165
 #: include/classes/screens/CScreenDiscovery.php:120
 msgid "Uptime"
-msgstr ""
+msgstr "Oppetid"
 
 #: widgets/slareport/views/widget.view.php:101
 msgctxt "compact table header"
 msgid "Uptime"
-msgstr ""
+msgstr "Oppetid"
 
 #: include/classes/data/CItemData.php:1895
 msgid "Uptime of Zabbix server process in seconds."
-msgstr ""
+msgstr "Oppetid for Zabbix-serverprocessen i sekunder."
 
 #: include/actions.inc.php:61
 msgid "Uptime/Downtime"
-msgstr ""
+msgstr "Oppetid/nedetid"
 
 #: app/views/popup.ldap.edit.php:173
 msgid "Use %{ref} in group filter to reference value of this user attribute."
-msgstr ""
+msgstr "Brug %{ref} i gruppefilteret til at referere til værdien af denne brugerattribut."
 
 #: app/views/administration.miscconfig.edit.php:123
 msgid "Use X-Frame-Options HTTP header"
-msgstr ""
+msgstr "Brug X-Frame-Options HTTP-header"
 
 #: app/partials/configuration.host.interface.row.php:207
 msgid "Use combined requests"
-msgstr ""
+msgstr "Brug kombinerede anmodninger"
 
 #: app/views/administration.trigdisplay.edit.php:36
 msgid "Use custom event status colors"
-msgstr ""
+msgstr "Brug tilpassede hændelsesstatusfarver"
 
 #: jsLoader.php:380
 msgid "Use default"
-msgstr ""
+msgstr "Brug standard"
 
 #: app/partials/configuration.host.edit.html.php:191
 msgid "Use host prototype configuration form to remove automatically linked templates on upcoming discovery."
-msgstr ""
+msgstr "Brug værtsprototypekonfigurationsformular til at fjerne automatisk linkede skabeloner ved kommende opdagelse."
 
 #: app/views/administration.user.edit.php:340 app/views/popup.media.php:101
 msgid "Use if severity"
-msgstr ""
+msgstr "Brug hvis sværhedsgrad"
 
 #: app/views/administration.miscconfig.edit.php:157
 msgid "Use iframe sandboxing"
-msgstr ""
+msgstr "Brug iframe sandboxing"
 
 #: app/views/administration.mediatype.list.php:92
 #: app/views/administration.script.list.php:79
 msgid "Used in actions"
-msgstr ""
+msgstr "Bruges i handlinger"
 
 #: app/controllers/CControllerAuditLogList.php:246
 #: app/partials/js/scheduledreport.subscription.js.php:78
@@ -20785,42 +20785,42 @@ msgstr ""
 #: include/classes/setup/CSetupWizard.php:571 include/hosts.inc.php:61
 #: include/users.inc.php:44 include/views/configuration.httpconf.edit.php:167
 msgid "User"
-msgstr ""
+msgstr "Bruger"
 
 #: include/classes/api/services/CUserGroup.php:709
 #, c-format
 msgid "User \"%1$s\" cannot be without user group."
-msgstr ""
+msgstr "Bruger \"%1$s\" kan ikke være uden brugergruppe."
 
 #: include/classes/api/services/CUser.php:1356
 #, c-format
 msgid "User \"%1$s\" is dashboard \"%2$s\" owner."
-msgstr ""
+msgstr "Brugeren \"%1$s\" er ejer af dashboardet \"%2$s\"."
 
 #: include/classes/api/services/CUser.php:1341
 #, c-format
 msgid "User \"%1$s\" is map \"%2$s\" owner."
-msgstr ""
+msgstr "Brugeren \"%1$s\" er ejer af kortet \"%2$s\"."
 
 #: include/classes/api/services/CUser.php:1379
 #, c-format
 msgid "User \"%1$s\" is report \"%2$s\" owner."
-msgstr ""
+msgstr "Brugeren \"%1$s\" er ejer af rapporten \"%2$s\"."
 
 #: include/classes/api/services/CUser.php:1387
 #, c-format
 msgid "User \"%1$s\" is report \"%2$s\" recipient."
-msgstr ""
+msgstr "Bruger \"%1$s\" er rapport \"%2$s\" modtager."
 
 #: include/classes/api/services/CUser.php:1327
 #, c-format
 msgid "User \"%1$s\" is used in \"%2$s\" action."
-msgstr ""
+msgstr "Brugeren \"%1$s\" bruges i handlingen \"%2$s\"."
 
 #: include/classes/api/services/CUser.php:1400
 #, c-format
 msgid "User \"%1$s\" is user on whose behalf report \"%2$s\" is created."
-msgstr ""
+msgstr "Bruger \"%1$s\" er bruger, på hvis vegne rapporten \"%2$s\" er oprettet."
 
 #: include/classes/api/services/CUser.php:814
 #, c-format
@@ -20839,11 +20839,11 @@ msgstr ""
 
 #: include/actions.inc.php:1953
 msgid "User action"
-msgstr ""
+msgstr "Brugerhandling"
 
 #: app/controllers/CControllerUserCreate.php:112
 msgid "User added"
-msgstr ""
+msgstr "Bruger tilføjet"
 
 #: include/views/configuration.httpconf.edit.php:100
 msgid "User agent string"
@@ -20917,49 +20917,49 @@ msgstr "Brugergruppen \"%1$s\" bruges i handlingen \"%2$s\"."
 #: include/classes/api/services/CUserGroup.php:1059
 #, c-format
 msgid "User group \"%1$s\" is used in configuration for database down messages."
-msgstr ""
+msgstr "Brugergruppen \"%1$s\" bruges i konfigurationen til database nede meddelelser."
 
 #: include/classes/api/services/CUserGroup.php:1051
 #, c-format
 msgid "User group \"%1$s\" is used in script \"%2$s\"."
-msgstr ""
+msgstr "Brugergruppen \"%1$s\" bruges i scriptet \"%2$s\"."
 
 #: app/controllers/CControllerUsergroupCreate.php:112
 msgid "User group added"
-msgstr ""
+msgstr "Brugergruppe tilføjet"
 
 #: app/controllers/CControllerUsergroupDelete.php:56
 msgid "User group deleted"
 msgid_plural "User groups deleted"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Brugergruppe slettet"
+msgstr[1] "Brugergruppe slettet"
 
 #: app/views/administration.miscconfig.edit.php:65
 msgid "User group for database down message"
-msgstr ""
+msgstr "Brugergruppe til database nede meddelelse"
 
 #: app/views/administration.authentication.edit.php:477
 #: app/views/popup.ldap.edit.php:230
 #: app/views/popup.usergroupmapping.edit.php:124
 msgid "User group mapping"
-msgstr ""
+msgstr "Brugergruppekortlægning"
 
 #: app/views/popup.ldap.edit.php:200
 msgid "User group membership attribute"
-msgstr ""
+msgstr "Brugergruppemedlemskabsattribut"
 
 #: include/classes/api/services/CMap.php:784
 #: include/classes/api/services/CMap.php:1252
 #, c-format
 msgid "User group sharing is missing parameters: %1$s for map \"%2$s\"."
-msgstr ""
+msgstr "Brugergruppedeling mangler parametre: %1$s for kortet \"%2$s\"."
 
 #: app/controllers/CControllerUsergroupMassUpdate.php:66
 #: app/controllers/CControllerUsergroupUpdate.php:115
 msgid "User group updated"
 msgid_plural "User groups updated"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Brugergruppe opdateret"
+msgstr[1] "Brugergruppe opdateret"
 
 #: include/classes/api/services/CDashboard.php:473
 #: include/classes/api/services/CReport.php:465
@@ -20968,7 +20968,7 @@ msgstr[1] ""
 #: include/classes/api/services/CUser.php:736
 #, c-format
 msgid "User group with ID \"%1$s\" is not available."
-msgstr ""
+msgstr "Brugergruppe med ID \"%1$s\" er ikke tilgængelig."
 
 #: app/controllers/CControllerPopupGeneric.php:269
 #: app/views/administration.authentication.edit.php:227
@@ -20983,24 +20983,24 @@ msgstr ""
 #: include/classes/helpers/CRoleHelper.php:492
 #: include/views/monitoring.sysmap.edit.php:331
 msgid "User groups"
-msgstr ""
+msgstr "Brugergrupper"
 
 #: include/classes/api/services/CUser.php:1277
 msgid "User is not allowed to delete himself."
-msgstr ""
+msgstr "Brugeren må ikke slette sig selv."
 
 #: app/views/administration.authentication.edit.php:463
 #: app/views/popup.ldap.edit.php:222
 msgid "User last name attribute"
-msgstr ""
+msgstr "Bruger efternavn attribut"
 
 #: widgets/item/views/widget.edit.php:53
 msgid "User macros"
-msgstr ""
+msgstr "Brugermakroer"
 
 #: app/partials/layout.htmlpage.aside.php:93
 msgid "User menu"
-msgstr ""
+msgstr "Brugermenu"
 
 #: app/views/popup.massupdate.item.php:181 disc_prototypes.php:82
 #: host_discovery.php:79
@@ -21011,21 +21011,21 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:474
 #: include/views/configuration.item.prototype.edit.php:662 items.php:89
 msgid "User name"
-msgstr ""
+msgstr "Brugernavn"
 
 #: app/views/administration.authentication.edit.php:449
 #: app/views/popup.ldap.edit.php:214
 msgid "User name attribute"
-msgstr ""
+msgstr "Brugernavn attribut"
 
 #: app/views/popup.ldap.test.edit.php:42
 msgid "User password"
-msgstr ""
+msgstr "Brugeradgangskode"
 
 #: app/controllers/CControllerUserProfileEdit.php:163
 #: app/views/administration.user.edit.php:40 include/html.inc.php:857
 msgid "User profile"
-msgstr ""
+msgstr "Brugerprofil"
 
 #: app/controllers/CControllerAuditLogList.php:249
 #: app/views/administration.authentication.edit.php:489
@@ -21035,31 +21035,31 @@ msgstr ""
 #: app/views/popup.ldap.edit.php:239 app/views/popup.ldap.test.edit.php:54
 #: app/views/popup.usergroupmapping.edit.php:101
 msgid "User role"
-msgstr ""
+msgstr "Brugerrolle"
 
 #: include/classes/api/services/CRole.php:407
 #, c-format
 msgid "User role \"%1$s\" already exists."
-msgstr ""
+msgstr "Brugerrollen \"%1$s\" eksisterer allerede."
 
 #: app/controllers/CControllerUserroleCreate.php:155
 msgid "User role created"
-msgstr ""
+msgstr "Brugerrolle oprettet"
 
 #: app/controllers/CControllerUserroleDelete.php:56
 msgid "User role deleted"
 msgid_plural "User roles deleted"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Brugerrolle slettet"
+msgstr[1] "Brugerroller slettet"
 
 #: app/controllers/CControllerUserroleUpdate.php:179
 msgid "User role updated"
-msgstr ""
+msgstr "Brugerrolle opdateret"
 
 #: include/classes/api/services/CUser.php:792
 #, c-format
 msgid "User role with ID \"%1$s\" is not available."
-msgstr ""
+msgstr "Brugerrolle med ID \"%1$s\" er ikke tilgængelig."
 
 #: app/controllers/CControllerPopupGeneric.php:409
 #: app/views/administration.user.list.php:76
@@ -21068,28 +21068,28 @@ msgstr ""
 #: include/classes/helpers/CMenuHelper.php:306
 #: include/classes/helpers/CRoleHelper.php:493
 msgid "User roles"
-msgstr ""
+msgstr "Brugerroller"
 
 #: app/views/administration.housekeeping.edit.php:109
 msgid "User sessions"
-msgstr ""
+msgstr "Brugersessioner"
 
 #: include/classes/helpers/CMenuHelper.php:459
 #: include/classes/helpers/CMenuHelper.php:472
 msgid "User settings"
-msgstr ""
+msgstr "Brugerindstillinger"
 
 #: include/classes/api/services/CMap.php:709
 #: include/classes/api/services/CMap.php:1178
 #, c-format
 msgid "User sharing is missing parameters: %1$s for map \"%2$s\"."
-msgstr ""
+msgstr "Brugerdeling mangler parametre: %1$s for kortet \"%2$s\"."
 
 #: app/views/administration.user.edit.php:485
 #: app/views/administration.userrole.edit.php:60
 #: app/views/administration.userrole.edit.php:75
 msgid "User type"
-msgstr ""
+msgstr "Brugertype"
 
 #: app/controllers/CControllerUserUnblock.php:65
 msgid "User unblocked"
@@ -21100,7 +21100,7 @@ msgstr[1] ""
 #: app/controllers/CControllerUserProfileUpdate.php:122
 #: app/controllers/CControllerUserUpdate.php:143
 msgid "User updated"
-msgstr ""
+msgstr "Bruger opdateret"
 
 #: include/classes/api/services/CDashboardGeneral.php:654
 #: include/classes/api/services/CDashboard.php:434
@@ -21110,16 +21110,16 @@ msgstr ""
 #: include/classes/api/services/CUserGroup.php:454
 #, c-format
 msgid "User with ID \"%1$s\" is not available."
-msgstr ""
+msgstr "Bruger med ID \"%1$s\" er ikke tilgængelig."
 
 #: include/classes/api/services/CUser.php:663
 #, c-format
 msgid "User with username \"%1$s\" already exists."
-msgstr ""
+msgstr "Bruger med brugernavn \"%1$s\" findes allerede."
 
 #: include/actions.inc.php:1797 include/actions.inc.php:1891
 msgid "User/Recipient"
-msgstr ""
+msgstr "Bruger/modtager"
 
 #: app/controllers/CControllerPopupGeneric.php:289
 #: app/partials/configuration.host.edit.html.php:303
@@ -21133,24 +21133,24 @@ msgstr ""
 #: include/views/configuration.host.prototype.edit.php:324
 #: include/views/general.login.php:69 index.php:31 items.php:205
 msgid "Username"
-msgstr ""
+msgstr "Brugernavn"
 
 #: app/views/administration.mediatype.edit.php:103
 #: app/views/js/administration.mediatype.edit.js.php:376
 msgid "Username and password"
-msgstr ""
+msgstr "Brugernavn og adgangskode"
 
 #: include/classes/vaults/CVaultCyberArk.php:112
 msgid "Username and password must be stored in Vault secret keys \"UserName\" and \"Content\"."
-msgstr ""
+msgstr "Brugernavn og adgangskode skal gemmes i Vaults hemmelige nøgler \"Brugernavn\" og \"Indhold\"."
 
 #: include/classes/vaults/CVaultHashiCorp.php:101
 msgid "Username and password must be stored in Vault secret keys \"username\" and \"password\"."
-msgstr ""
+msgstr "Brugernavn og adgangskode skal gemmes i Vaults hemmelige nøgler \"brugernavn\" og \"adgangskode\"."
 
 #: app/views/administration.authentication.edit.php:324
 msgid "Username attribute"
-msgstr ""
+msgstr "Brugernavn attribut"
 
 #: app/controllers/CControllerPopupGeneric.php:281
 #: app/views/administration.token.list.php:46
@@ -21170,67 +21170,67 @@ msgstr ""
 #: include/classes/helpers/CRoleHelper.php:494
 #: include/views/monitoring.sysmap.edit.php:368
 msgid "Users"
-msgstr ""
+msgstr "Brugere"
 
 #: include/classes/data/CItemData.php:1371
 msgid "VMware Distributed Virtual Switch, \"url\" - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "VMware Distributed Virtual Switch, \"url\" - VMware service URL. Returnerer JSON"
 
 #: include/classes/data/CItemData.php:1375
 msgid "VMware FetchDVPorts wrapper, \"url\" - VMware service URL, \"uuid\" - VMware DVSwitch global unique identifier, \"filter\" - vmware data object DistributedVirtualSwitchPortCriteria, \"mode\"- state(default)/full. Returns JSON"
-msgstr ""
+msgstr "VMware FetchDVPorts wrapper, \"url\" - VMware service URL, \"uuid\" - VMware DVSwitch global unik identifikator, \"filter\" - vmware dataobjekt DistributedVirtualSwitchPortCriteria, \"mode\"- tilstand(standard)/fuld. Returnerer JSON"
 
 #: include/classes/data/CItemData.php:1911
 msgid "VMware cache statistics. Valid modes are: total, free, pfree, used and pused."
-msgstr ""
+msgstr "VMware cache statistik. Gyldige tilstande er: total, free, pfree, used og pused."
 
 #: include/classes/data/CItemData.php:1303
 msgid "VMware cluster alarms data, returns JSON, \"url\" - VMware service URL, \"id\" - VMware cluster id"
-msgstr ""
+msgstr "VMware cluster alarmer data, returnerer JSON, \"url\" - VMware service URL, \"id\" - VMware cluster id"
 
 #: include/classes/data/CItemData.php:1299
 msgid "VMware cluster performance counter, \"url\" - VMware service URL, \"id\" - VMware cluster id, \"path\" - performance counter path, \"instance\" - performance counter instance"
-msgstr ""
+msgstr "VMware cluster performance counter, \"url\" - VMware service URL, \"id\" - VMware cluster id, \"path\" - performance counter path, \"instance\" - performance counter instans"
 
 #: include/classes/data/CItemData.php:1311
 msgid "VMware cluster property, \"url\" - VMware service URL, \"id\" - VMware cluster id, \"prop\" - property path"
-msgstr ""
+msgstr "VMware-klyngeegenskab, \"url\" - VMware-tjeneste-URL, \"id\" - VMware-klynge-id, \"prop\" - egenskabssti"
 
 #: include/classes/data/CItemData.php:1315
 msgid "VMware cluster status, \"url\" - VMware service URL, \"name\" - VMware cluster name"
-msgstr ""
+msgstr "VMware cluster status, \"url\" - VMware tjeneste URL, \"navn\" - VMware cluster navn"
 
 #: include/classes/data/CItemData.php:1319
 msgid "VMware cluster tags array, \"url\" - VMware service URL, \"id\" - VMware cluster id"
-msgstr ""
+msgstr "VMware cluster tags array, \"url\" - VMware service URL, \"id\" - VMware cluster id"
 
 #: include/classes/data/CItemData.php:1359
 msgid "VMware datacenter alarms data, returns JSON, \"url\" - VMware service URL, \"id\" - VMware datacenter id"
-msgstr ""
+msgstr "VMware datacenter alarmerer data, returnerer JSON, \"url\" - VMware service URL, \"id\" - VMware datacenter id"
 
 #: include/classes/data/CItemData.php:1367
 msgid "VMware datacenter tags array, \"url\" - VMware service URL, \"id\" - VMware datacenter id. Returns JSON"
-msgstr ""
+msgstr "VMware datacenter tags array, \"url\" - VMware service URL, \"id\" - VMware datacenter id. Returnerer JSON"
 
 #: include/classes/data/CItemData.php:1363
 msgid "VMware datacenters and their IDs, \"url\" - VMware service URL. Returns JSON"
-msgstr ""
+msgstr "VMware datacentre og deres ID'er, \"url\" - VMware-tjenestens URL. Returnerer JSON"
 
 #: include/classes/data/CItemData.php:1323
 msgid "VMware datastore alarms data, returns JSON, \"url\" - VMware service URL, \"uuid\" - VMware datastore global unique identifier"
-msgstr ""
+msgstr "VMware datastore alarmerer data, returnerer JSON, \"url\" - VMware service URL, \"uuid\" - VMware datastore global unik identifikator"
 
 #: include/classes/data/CItemData.php:1431
 msgid "VMware datastore capacity statistics in bytes or in percentage from total, \"url\" - VMware service URL, \"uuid\" - VMware hypervisor global unique identifier, \"datastore\" - datastore name, \"mode\" - total(default)/free/pfree/uncommitted. Returns integer for bytes; float for percentage"
-msgstr ""
+msgstr "VMware datalager kapacitets statistikker i bytes eller i procent af total, \"url\" - VMware tjeneste URL, \"uuid\" - VMware hypervisor global unik identifikator, \"datastore\" - datalagernavn, \"mode\" - total(standard)/free/pfree/ uengageret. Returnerer heltal for bytes; decimal i procent"
 
 #: include/classes/data/CItemData.php:1347
 msgid "VMware datastore capacity statistics in bytes or in percentage from total. Returns integer for bytes; float for percentage"
-msgstr ""
+msgstr "VMware datalager kapacitets statistikker i bytes eller i procent af totalen. Returnerer heltal for bytes; decimal i procent"
 
 #: include/classes/data/CItemData.php:1331
 msgid "VMware datastore hypervisors list, \"url\" - VMware service URL, \"datastore\" - datastore name"
-msgstr ""
+msgstr "VMware datastore hypervisors liste, \"url\" - VMware service URL, \"datastore\" - datastore navn"
 
 #: include/classes/data/CItemData.php:1335
 msgid "VMware datastore performance counter, \"url\" - VMware service URL, \"uuid\" - VMware datastore global unique identifier, \"path\" - performance counter path, \"instance\" - datastore perfcounter instance from vmware.hv.diskinfo.get"
