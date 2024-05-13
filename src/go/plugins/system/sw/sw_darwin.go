@@ -23,7 +23,7 @@
 package sw
 
 import (
-	"git.zabbix.com/ap/plugin-support/plugin"
+	"golang.zabbix.com/sdk/plugin"
 )
 
 func (p *Plugin) systemSwPackages(params []string) (result interface{}, err error) {

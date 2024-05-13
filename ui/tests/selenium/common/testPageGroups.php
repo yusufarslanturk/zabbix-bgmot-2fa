@@ -141,7 +141,7 @@ class testPageGroups extends CWebTest {
 			$icon = $row->getColumn('Info')->query('tag:a')->one();
 			$this->assertTrue($icon->hasClass('status-yellow'));
 			$icon->click();
-			$hintbox = $this->query('xpath://div[@class="overlay-dialogue"]')->waitUntilVisible();
+			$hintbox = $this->query('xpath://div[@class="overlay-dialogue wordbreak"]')->waitUntilVisible();
 			$this->assertEquals('The host group is not discovered anymore and will be deleted the next time discovery'.
 					' rule is processed.',
 					$hintbox->one()->getText()

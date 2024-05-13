@@ -1285,7 +1285,7 @@ class testDashboardItemValueWidget extends testWidgets {
 
 			// Check hint-box.
 			$form->query($warning)->one()->click();
-			$hint = $form->query('xpath://div[@class="overlay-dialogue"]')->one()->waitUntilVisible();
+			$hint = $form->query('xpath://div[@class="overlay-dialogue wordbreak"]')->one()->waitUntilVisible();
 			$this->assertEquals('This setting applies only to numeric data.', $hint->getText());
 
 			// Close the hint-box.

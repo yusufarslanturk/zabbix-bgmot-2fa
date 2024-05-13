@@ -352,6 +352,7 @@ typedef struct
 	unsigned char	skip_old;	/* skip old event log records */
 	unsigned char	oom;		/* no enough memory to store new events */
 	zbx_uint64_t	req_sz;		/* memory size required to store events */
+	time_t		last_ts;	/* timestamp when vmware.eventlog[] item was polled last time */
 }
 zbx_vmware_eventlog_state_t;
 
@@ -360,7 +361,7 @@ typedef struct
 {
 	zbx_uint64_t	key;		/* event's key, used to fill logeventid */
 	char		*message;	/* event's fullFormattedMessage */
-	int		timestamp;	/* event's time stamp */
+	time_t		timestamp;	/* event's time stamp */
 }
 zbx_vmware_event_t;
 
