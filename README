@@ -38,9 +38,9 @@ PGPASSWORD="<db_zabbix_password>" psql -U <db_zabbix_user> -h <db_host> -d zabbi
 If 'Authenticator app' 2FA is in use and a user "lost his phone" and needs to re-enroll with new one then execute following to request enrollment procedure on his next login:
 ```
 # For MySQL
-echo 'update users where username="<username>" set ggl_enrolled=0;' | mysql -u <db_zabbix_user> -p<db_zabbix_password> zabbix
+echo 'update users set ggl_enrolled=0 where username="<username>" ;' | mysql -u <db_zabbix_user> -p<db_zabbix_password> zabbix
 # For PostgreSQL
-PGPASSWORD="<db_zabbix_password>" psql -U <db_zabbix_user> -h <db_host> -d zabbix -c 'update users where username="<username>" set ggl_enrolled=0;'
+PGPASSWORD="<db_zabbix_password>" psql -U <db_zabbix_user> -h <db_host> -d zabbix -c 'update users set ggl_enrolled=0 where username="<username>";'
 ```
 
 ### Installation
