@@ -21,8 +21,9 @@
 require_once dirname(__FILE__) . '/../../include/CWebTest.php';
 
 /**
- * @backup dashboard, profiles
- * @dataSource LoginUsers, AllItemValueTypes
+ * @backup dashboard
+ *
+ * @dataSource LoginUsers, AllItemValueTypes, Proxies
  */
 class testPageDashboardWidgets extends CWebTest {
 
@@ -151,9 +152,8 @@ class testPageDashboardWidgets extends CWebTest {
 		$expected = [
 			'Host group for tag permissions'	=> 1,
 			'Zabbix servers'					=> 18,
-			'ZBX6648 All Triggers'				=> 1,
-			'ZBX6648 Disabled Triggers'			=> 1,
-			'ZBX6648 Enabled Triggers'			=> 1
+			'Inheritance test'					=> 1,
+			'Host group for suppression'		=> 1
 		];
 
 		/*

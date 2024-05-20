@@ -149,10 +149,9 @@ import (
 	"time"
 	"unsafe"
 
-	"zabbix.com/internal/agent"
-	"zabbix.com/pkg/tls"
-
-	"git.zabbix.com/ap/plugin-support/log"
+	"golang.zabbix.com/agent2/internal/agent"
+	"golang.zabbix.com/agent2/pkg/tls"
+	"golang.zabbix.com/sdk/log"
 )
 
 type EventLogItem struct {

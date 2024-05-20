@@ -60,6 +60,22 @@ class CWidgetUrl extends CWidget {
 		this._target.removeEventListener('mousedown', this._events.mousedown);
 	}
 
+	_promiseReady() {
+		const readiness = [super._promiseReady()];
+
+		const iframe = this._target.querySelector('iframe');
+
+		if (iframe !== null) {
+			readiness.push(
+				new Promise(resolve => {
+					iframe.addEventListener('load', () => setTimeout(resolve, 200));
+				})
+			);
+		}
+
+		return Promise.all(readiness);
+	}
+
 	_hasPadding() {
 		return false;
 	}

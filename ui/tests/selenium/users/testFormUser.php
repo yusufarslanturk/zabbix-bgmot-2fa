@@ -245,7 +245,7 @@ class testFormUser extends CWebTest {
 					'maxlength' => '255'
 				],
 				'Refresh' => [
-					'maxlength' => '255'
+					'maxlength' => '32'
 				],
 				'Rows per page' => [
 					'maxlength' => '6'
@@ -263,7 +263,7 @@ class testFormUser extends CWebTest {
 			}
 
 			$form->getLabel('Password')->query('class:icon-help-hint')->one()->click();
-			$hint = $this->query('xpath://div[@class="overlay-dialogue"]')->waitUntilReady();
+			$hint = $this->query('xpath://div[@class="overlay-dialogue wordbreak"]')->waitUntilReady();
 			$help_message = "Password requirements:\n".
 					"must be at least 8 characters long\n".
 					"must not contain user's name, surname or username\n".
@@ -280,7 +280,7 @@ class testFormUser extends CWebTest {
 		// Check hintbox contains correct text message.
 		foreach ($data['hintbox_warning'] as $field => $text) {
 			$form->getField($field)->query('xpath:./..//a[@data-hintbox]')->one()->waitUntilClickable()->click();
-			$hint = $this->query('xpath://div[@class="overlay-dialogue"]')->asOverlayDialog()->waitUntilReady()->one();
+			$hint = $this->query('xpath://div[@class="overlay-dialogue wordbreak"]')->asOverlayDialog()->waitUntilReady()->one();
 			$this->assertEquals($text, $hint->getText());
 			$hint->close();
 		}
@@ -1432,7 +1432,7 @@ class testFormUser extends CWebTest {
 		if ($update_user === 'LDAP change password button check') {
 			$this->assertFalse($form->query('button:Change password')->one()->isClickable());
 			$this->query('xpath://a[contains(@class, "icon-info")]')->one()->click();
-			$hint = $form->query('xpath://div[@class="overlay-dialogue"]')->waitUntilReady();
+			$hint = $form->query('xpath://div[@class="overlay-dialogue wordbreak"]')->waitUntilReady();
 			$hintbox = 'Password can only be changed for users using the internal Zabbix authentication.';
 			$this->assertEquals($hintbox, $hint->one()->getText());
 			$hint->query('class:overlay-close-btn')->one()->click();

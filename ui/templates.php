@@ -299,12 +299,12 @@ elseif (hasRequest('add') || hasRequest('update')) {
 		if ($input_templateid == 0) {
 			$result = API::Template()->create($template);
 
-			if ($result) {
-				$input_templateid = reset($result['templateids']);
-			}
-			else {
+			if (!$result) {
 				throw new Exception();
 			}
+
+			$template['templateid'] = reset($result['templateids']);
+			$input_templateid = $template['templateid'];
 		}
 		else {
 			$templates_clear = array_diff(
@@ -374,7 +374,8 @@ elseif (hasRequest('add') || hasRequest('update')) {
 				throw new Exception();
 			}
 
-			if (!copyItemsToHosts('templateids', [$cloneTemplateId], true, [$input_templateid])) {
+			$dst_templates = [$template['templateid'] => $template + ['status' => HOST_STATUS_TEMPLATE]];
+			if (!copyItemsToHosts('templateids', [$cloneTemplateId], $dst_templates)) {
 				throw new Exception();
 			}
 
