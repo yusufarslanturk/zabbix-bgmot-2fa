@@ -275,10 +275,10 @@ import (
 	"time"
 	"unsafe"
 
-	"git.zabbix.com/ap/plugin-support/log"
-	"zabbix.com/internal/agent"
-	"zabbix.com/pkg/itemutil"
-	"zabbix.com/pkg/tls"
+	"golang.zabbix.com/agent2/internal/agent"
+	"golang.zabbix.com/agent2/pkg/itemutil"
+	"golang.zabbix.com/agent2/pkg/tls"
+	"golang.zabbix.com/sdk/log"
 )
 
 const (

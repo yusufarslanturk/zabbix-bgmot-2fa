@@ -327,8 +327,7 @@
 		</exec>
 	</target>
 
-	<target name="init-integration-tsdb" depends="create-configs,init-integration,make-binaries-postgresql,create-db-tsdb,init-proxy-postgresql">
-	</target>
+	<target name="init-integration-tsdb" depends="create-configs,init-integration,make-binaries-postgresql,create-db-tsdb,init-proxy-postgresql"/>
 
 	<target name="init-dast-postgresql" depends="create-frontend-configs,make-dbschema,create-db-postgresql"/>
 
