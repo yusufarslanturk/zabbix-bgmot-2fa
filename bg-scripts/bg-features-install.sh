@@ -21,7 +21,7 @@ then
 fi
 
 mkdir $TMPDIR && cd $TMPDIR
-curl -L -o bg-patch-${VERSION}.zip https://github.com/BGmot/zabbix/raw/release/6.0-bg/bg-patch-${VERSION}.zip
+curl -L -o bg-patch-${VERSION}.zip https://github.com/BGmot/zabbix/raw/${VERSION}-bg/bg-patch-${VERSION}.zip
 unzip bg-patch-${VERSION}.zip
 cd bg-patch-${VERSION}
 
