@@ -195,6 +195,14 @@ class testProxy extends CAPITest {
 			'delete_used_in_discovery' => [
 				'host' => 'API test proxy.delete - used in discovery rules',
 				'status' => HOST_STATUS_PROXY_ACTIVE
+			],
+			'filter_tests' => [
+				'host' => 'Filtered proxy',
+				'status' => HOST_STATUS_PROXY_ACTIVE,
+				'proxy_address' => '192.168.15.15',
+				'tls_accept' => HOST_ENCRYPTION_NONE | HOST_ENCRYPTION_PSK | HOST_ENCRYPTION_CERTIFICATE,
+				'tls_psk_identity' => 'Test PSK',
+				'tls_psk' => '9b8eafedfaae00cece62e85d5f4792c7d9c9bcc851b23216a1d300311cc4f7cb'
 			]
 		];
 		$db_proxies = CDataHelper::call('proxy.create', array_values($proxies));
@@ -1215,17 +1223,6 @@ class testProxy extends CAPITest {
 				'expected_error' => 'Invalid parameter "/filter": an array is expected.'
 			],
 
-			// Check unexpected parameters that exist in object, but not in filter.
-			'Test proxy.get: unexpected parameter in "filter"' => [
-				'request' => [
-					'filter' => [
-						'proxy_address' => 'proxy_address'
-					]
-				],
-				'expected_result' => [],
-				'expected_error' => 'Invalid parameter "/filter": unexpected parameter "proxy_address".'
-			],
-
 			// Check "search" option.
 			'Test proxy.get: invalid "search" (string)' => [
 				'request' => [
@@ -1580,6 +1577,63 @@ class testProxy extends CAPITest {
 					]
 				],
 				'expected_result' => [],
+				'expected_error' => null
+			],
+			'Test proxy.get filter: invalid param `hostid`' => [
+				'request' => [
+					'output' => ['host'],
+					'filter' => [
+						'hostid' => 123
+					]
+				],
+				'expected_result' => [],
+				'expected_error' => 'Invalid parameter "/filter": unexpected parameter "hostid".'
+			],
+			'Test proxy.get filter: invalid param `tls_psk`' => [
+				'request' => [
+					'output' => ['host'],
+					'filter' => [
+						'tls_psk' => 'Test PSK'
+					]
+				],
+				'expected_result' => [],
+				'expected_error' => 'Invalid parameter "/filter": unexpected parameter "tls_psk".'
+			],
+			'Test proxy.get filter: invalid param `tls_psk_identity`' => [
+				'request' => [
+					'output' => ['host'],
+					'filter' => [
+						'tls_psk_identity' => 'Test PSK'
+					]
+				],
+				'expected_result' => [],
+				'expected_error' => 'Invalid parameter "/filter": unexpected parameter "tls_psk_identity".'
+			],
+			'Test proxy.get filter: proxy_address' => [
+				'request' => [
+					'output' => ['host'],
+					'filter' => [
+						'proxy_address' => '192.168.15.15'
+					]
+				],
+				'expected_result' => [
+					['host' => 'Filtered proxy']
+				],
+				'expected_error' => null
+			],
+			'Test proxy.get filter: tls_accept' => [
+				'request' => [
+					'output' => ['host'],
+					'filter' => [
+						'tls_accept' => 7
+					],
+					'search' => [
+						'host' => 'Filtered'
+					]
+				],
+				'expected_result' => [
+					['host' => 'Filtered proxy']
+				],
 				'expected_error' => null
 			]
 		];
