@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-05-04 09:42+0000\n"
+"PO-Revision-Date: 2024-04-02 13:53+0000\n"
 "Last-Translator: Ryan Skov <rsk@capmon.dk>\n"
 "Language-Team: none\n"
 "Language: da\n"
@@ -2415,11 +2415,10 @@ msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "Kan ikke slette Zabbix intern bruger \"%1$s\", prøv at deaktivere den bruger."
 
 #: app/controllers/CControllerActionDelete.php:87
-#, fuzzy
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
 msgstr[0] "Kan ikke slette handling"
-msgstr[1] "Kan ikke slette handling"
+msgstr[1] ""
 
 #: include/classes/api/services/CRole.php:368
 #, c-format
