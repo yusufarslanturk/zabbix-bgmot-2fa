@@ -5394,6 +5394,10 @@ msgstr "Nom DNS"
 msgid "Daily"
 msgstr "Journalier"
 
+#: include/locales.inc.php:40
+msgid "Danish (da_DK)"
+msgstr ""
+
 #: include/classes/core/ZBase.php:380
 msgid "Dark"
 msgstr "Sombre"
@@ -20817,6 +20821,11 @@ msgstr "L'utilisateur \"%1$s\" est utilisé dans l'action \"%2$s\"."
 msgid "User \"%1$s\" is user on whose behalf report \"%2$s\" is created."
 msgstr "L'utilisateur \"%1$s\" est l'utilisateur pour le compte duquel le rapport \"%2$s\" est créé."
 
+#: include/classes/api/services/CUser.php:814
+#, c-format
+msgid "User \"%1$s\" must have a password, because internal authentication is in effect."
+msgstr ""
+
 #: app/controllers/CControllerUserProvision.php:61
 #, c-format
 msgid "User \"%1$s\" provisioned."
@@ -24076,6 +24085,10 @@ msgstr "now () - Nombre de secondes écoulées depuis le temps Epoch"
 #: include/forms.inc.php:1306 include/views/js/item.preprocessing.js.php:263
 msgid "number"
 msgstr "nombre"
+
+#: include/classes/api/services/CUser.php:736
+msgid "object does not exist"
+msgstr ""
 
 #: include/classes/api/services/CHostPrototype.php:836
 msgid "object does not exist or belongs to another object"
