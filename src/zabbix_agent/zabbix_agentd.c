@@ -1077,10 +1077,27 @@ static int	zbx_exec_service_task(const char *name, const ZBX_TASK_EX *t)
 }
 #endif	/* _WINDOWS */
 
-static void	zbx_on_exit(int ret)
+typedef struct
 {
-	zabbix_log(LOG_LEVEL_DEBUG, "zbx_on_exit() called with ret:%d", ret);
+	zbx_socket_t	*listen_sock;
+}
+zbx_on_exit_args_t;
 
+static void	zbx_on_exit(int ret, void *on_exit_args)
+{
+#ifdef _WINDOWS
+	ZBX_UNUSED(on_exit_args);
+#endif
+	zabbix_log(LOG_LEVEL_DEBUG, "zbx_on_exit() called with ret:%d", ret);
+#ifndef _WINDOWS
+	if (NULL != on_exit_args)
+	{
+		zbx_on_exit_args_t	*args = (zbx_on_exit_args_t *)on_exit_args;
+
+		if (NULL != args->listen_sock)
+			zbx_tcp_unlisten(args->listen_sock);
+	}
+#endif
 	zbx_free_service_resources(ret);
 
 #if defined(_WINDOWS) && (defined(HAVE_GNUTLS) || defined(HAVE_OPENSSL))
@@ -1095,6 +1112,7 @@ static void	zbx_on_exit(int ret)
 	while (0 == WSACleanup())
 		;
 #endif
+
 	exit(EXIT_SUCCESS);
 }
 
@@ -1142,11 +1160,12 @@ static void	signal_redirect_cb(int flags, zbx_signal_handler_f sigusr_handler)
 
 int	MAIN_ZABBIX_ENTRY(int flags)
 {
-	zbx_socket_t	listen_sock;
-	char		*error = NULL;
-	int		i, j = 0, ret = SUCCEED;
+	zbx_socket_t		listen_sock = {0};
+	zbx_on_exit_args_t	exit_args = {NULL};
+	char			*error = NULL;
+	int			i, j = 0, ret = SUCCEED;
 #ifdef _WINDOWS
-	DWORD		res;
+	DWORD			res;
 
 #ifdef _M_X64
 	if (NULL == AddVectoredExceptionHandler(0, (PVECTORED_EXCEPTION_HANDLER)&zbx_win_veh_handler))
@@ -1221,6 +1240,10 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 
 	if (0 != CONFIG_FORKS[ZBX_PROCESS_TYPE_LISTENER])
 	{
+#ifndef _WINDOWS
+		exit_args.listen_sock = &listen_sock;
+		zbx_set_on_exit_args(&exit_args);
+#endif
 		if (FAIL == zbx_tcp_listen(&listen_sock, CONFIG_LISTEN_IP, (unsigned short)CONFIG_LISTEN_PORT))
 		{
 			zabbix_log(LOG_LEVEL_CRIT, "listener failed: %s", zbx_socket_strerror());
@@ -1363,7 +1386,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 	ret = ZBX_EXIT_STATUS();
 
 #endif
-	zbx_on_exit(ret);
+	zbx_on_exit(ret, &exit_args);
 
 	return SUCCEED;
 }

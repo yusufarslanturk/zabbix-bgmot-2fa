@@ -141,33 +141,27 @@ class CControllerCopyCreate extends CController {
 	}
 
 	protected function doAction(): void {
-		$copy_targetids = $this->getTargetIds();
-		$source = $this->getInput('source');
+		$dst_hosts = $this->getTargets();
 		$output = [];
 
-		switch ($source) {
+		switch ($this->getInput('source')) {
 			case 'items':
-				$items_count = count($this->getInput('itemids'));
+				$itemids = $this->getInput('itemids');
+				$success = !$dst_hosts || copyItemsToHosts('itemids', $itemids, $dst_hosts);
 
-				if ($this->copyItems($copy_targetids)) {
-					$output['success']['title'] = _n('Item copied', 'Items copied', $items_count);
-
-					if ($messages = get_and_clear_messages()) {
-						$output['success']['messages'] = array_column($messages, 'message');
-					}
-				}
-				else {
-					$output['error'] = [
-						'title' => _n('Cannot copy item', 'Cannot copy items', $items_count),
-						'messages' => array_column(get_and_clear_messages(), 'message')
-					];
-				}
+				$title = $success
+					? _n('Item copied', 'Items copied', count($itemids))
+					: _n('Cannot copy item', 'Cannot copy items', count($itemids));
+				$messages = array_filter(['messages' => array_column(get_and_clear_messages(), 'message')]);
+				$output = $success
+					? ['success' => ['title' => $title] + $messages]
+					: ['error' => ['title' => $title] + $messages];
 				break;
 
 			case 'triggers':
 				$triggers_count = count($this->getInput('triggerids'));
 
-				if ($this->copyTriggers($copy_targetids)) {
+				if ($this->copyTriggers(array_keys($dst_hosts))) {
 					$output['success']['title'] = _n('Trigger copied', 'Triggers copied', $triggers_count);
 
 					if ($messages = get_and_clear_messages()) {
@@ -185,7 +179,7 @@ class CControllerCopyCreate extends CController {
 			case 'graphs':
 				$graphs_count = count($this->getInput('graphids'));
 
-				if ($this->copyGraphs($copy_targetids)) {
+				if ($this->copyGraphs(array_keys($dst_hosts))) {
 					$output['success']['title'] = _n('Graph copied', 'Graphs copied', $graphs_count);
 
 					if ($messages = get_and_clear_messages()) {
@@ -204,14 +198,6 @@ class CControllerCopyCreate extends CController {
 		$this->setResponse(new CControllerResponseData(['main_block' => json_encode($output)]));
 	}
 
-	private function copyItems(array $copy_targetids): bool {
-		$itemids = $this->getInput('itemids');
-		$copy_type = $this->getInput('copy_type');
-		$is_template = $copy_type == COPY_TYPE_TO_TEMPLATE || $copy_type == COPY_TYPE_TO_TEMPLATE_GROUP;
-
-		return copyItemsToHosts('itemids', $itemids, $is_template, $copy_targetids);
-	}
-
 	private function copyTriggers(array $copy_targetids): bool {
 		$triggerids = $this->getInput('triggerids');
 
@@ -219,44 +205,67 @@ class CControllerCopyCreate extends CController {
 	}
 
 	private function copyGraphs(array $copy_targetids): bool {
-		$result = true;
 		$graphids = $this->getInput('graphids');
 
 		DBstart();
 		foreach ($graphids as $graphid) {
 			foreach ($copy_targetids as $host) {
 				if (!copyGraphToHost($graphid, $host)) {
-					$result = false;
+					return DBend(false);
 				}
 			}
 		}
 
-		return DBend($result);
+		return DBend(true);
 	}
 
-	private function getTargetIds(): array {
-		$copy_targetids = $this->getInput('copy_targetids', []);
+	private function getTargets(): array {
+		$targetids = $this->getInput('copy_targetids', []);
 		$copy_type = $this->getInput('copy_type');
-		$targetids = [];
 
-		if ($copy_type == COPY_TYPE_TO_HOST || $copy_type == COPY_TYPE_TO_TEMPLATE) {
-			$targetids = $copy_targetids;
-		}
-		elseif ($copy_type == COPY_TYPE_TO_HOST_GROUP) {
-			$targetids = array_keys(API::Host()->get([
-				'output' => [],
-				'groupids' => $copy_targetids,
-				'preservekeys' => true
-			]));
-		}
-		elseif ($copy_type == COPY_TYPE_TO_TEMPLATE_GROUP) {
-			$targetids = array_keys(API::Template()->get([
-				'output' => [],
-				'groupids' => $copy_targetids,
-				'preservekeys' => true
-			]));
+		switch ($copy_type) {
+			case COPY_TYPE_TO_HOST:
+				$dst_hosts = API::Host()->get([
+					'output' => ['host', 'status'],
+					'selectInterfaces' => ['interfaceid', 'main', 'type', 'useip', 'ip', 'dns', 'port', 'details'],
+					'hostids' => $targetids,
+					'preservekeys' => true
+				]);
+				break;
+
+			case COPY_TYPE_TO_HOST_GROUP:
+				$dst_hosts = API::Host()->get([
+					'output' => ['host', 'status'],
+					'selectInterfaces' => ['interfaceid', 'main', 'type', 'useip', 'ip', 'dns', 'port', 'details'],
+					'groupids' => $targetids,
+					'preservekeys' => true
+				]);
+				break;
+
+			case COPY_TYPE_TO_TEMPLATE:
+				$dst_hosts = API::Template()->get([
+					'output' => ['host'],
+					'templateids' => $targetids,
+					'preservekeys' => true
+				]);
+				break;
+
+			case COPY_TYPE_TO_TEMPLATE_GROUP:
+				$dst_hosts = API::Template()->get([
+					'output' => ['host'],
+					'groupids' => $targetids,
+					'preservekeys' => true
+				]);
+				break;
+		};
+
+		if (in_array($copy_type, [COPY_TYPE_TO_TEMPLATE, COPY_TYPE_TO_TEMPLATE_GROUP])) {
+			foreach ($dst_hosts as &$dst_host) {
+				$dst_host['status'] = HOST_STATUS_TEMPLATE;
+			}
+			unset($dst_host);
 		}
 
-		return $targetids;
+		return $dst_hosts;
 	}
 }

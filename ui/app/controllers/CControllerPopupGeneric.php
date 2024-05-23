@@ -580,7 +580,8 @@ class CControllerPopupGeneric extends CController {
 			'hostids' =>							'array',
 			'host_pattern' =>						'array|not_empty',
 			'host_pattern_wildcard_allowed' =>		'in 1',
-			'host_pattern_multiple' =>				'in 1'
+			'host_pattern_multiple' =>				'in 1',
+			'exclude_provisioned' =>				'in 1'
 		];
 
 		// Set destination and source field validation roles.
@@ -1195,13 +1196,6 @@ class CControllerPopupGeneric extends CController {
 				}
 				break;
 
-			case 'items':
-				foreach ($records as $itemid => $row) {
-					$records[$row['name']] = ['pattern' => $row['name']] + $row;
-					unset($records[$itemid]);
-				}
-				break;
-
 			case 'graphs':
 				foreach ($records as $graphid => $row) {
 					$records[$row['name']] = [
@@ -1262,6 +1256,10 @@ class CControllerPopupGeneric extends CController {
 				$options += [
 					'output' => ['userid', 'username', 'name', 'surname', 'type', 'theme', 'lang']
 				];
+
+				if ($this->hasInput('exclude_provisioned')) {
+					$options['filter']['userdirectoryid'] = 0;
+				}
 
 				$records = API::User()->get($options);
 

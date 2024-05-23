@@ -791,7 +791,7 @@ class testDashboardItemValueWidget extends testWidgets {
 					'fields' => [
 						'Type' => 'Item value',
 						'Name' => 'New Single Item Widget',
-						'Refresh interval' => '2 minutes',
+						'Refresh interval' => 'Default (1 minute)',
 						'Item' => 'Http agent item form',
 						// Description checkbox.
 						'id:show_1' => true,
@@ -1067,7 +1067,7 @@ class testDashboardItemValueWidget extends testWidgets {
 
 			// Check new widget update interval.
 			$refresh = (CTestArrayHelper::get($data['fields'], 'Refresh interval') === 'Default (1 minute)')
-				? '15 minutes'
+				? '1 minute'
 				: (CTestArrayHelper::get($data['fields'], 'Refresh interval', '1 minute'));
 			$this->assertEquals($refresh, CDashboardElement::find()->one()->getWidget($header)->getRefreshInterval());
 
@@ -1291,7 +1291,7 @@ class testDashboardItemValueWidget extends testWidgets {
 
 			// Check hint-box.
 			$form->query($warning)->one()->click();
-			$hint = $form->query('xpath://div[@class="overlay-dialogue"]')->one()->waitUntilVisible();
+			$hint = $form->query('xpath://div[@class="overlay-dialogue wordbreak"]')->one()->waitUntilVisible();
 			$this->assertEquals('This setting applies only to numeric data.', $hint->getText());
 
 			// Close the hint-box.

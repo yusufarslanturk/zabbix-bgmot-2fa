@@ -102,6 +102,8 @@ class CSetupWizard extends CForm {
 
 		if ($this->getStep() == self::STAGE_REQUIREMENTS) {
 			if (hasRequest('next') && array_key_exists(self::STAGE_REQUIREMENTS, getRequest('next'))) {
+				$default_lang = getRequest('default_lang', $this->getConfig('default_lang'));
+				$this->frontend_setup->setDefaultLang($default_lang);
 				$finalResult = CFrontendSetup::CHECK_OK;
 
 				foreach ($this->frontend_setup->checkRequirements() as $req) {
@@ -307,8 +309,8 @@ class CSetupWizard extends CForm {
 						$vault_config['VAULT'] = CVaultCyberArk::NAME;
 						$vault_config['VAULT_URL'] = $this->getConfig('DB_VAULT_URL');
 						$vault_config['VAULT_DB_PATH'] = $this->getConfig('DB_VAULT_DB_PATH');
-						$vault_config['VAULT_CERT_FILE'] = $this->getConfig('VAULT_CERT_FILE');
-						$vault_config['VAULT_KEY_FILE'] = $this->getConfig('VAULT_KEY_FILE');
+						$vault_config['VAULT_CERT_FILE'] = $this->getConfig('DB_VAULT_CERT_FILE');
+						$vault_config['VAULT_KEY_FILE'] = $this->getConfig('DB_VAULT_KEY_FILE');
 						break;
 
 					default:
@@ -472,6 +474,8 @@ class CSetupWizard extends CForm {
 			->setHeader(['', _('Current value'), _('Required'), '']);
 
 		$messages = [];
+		$default_lang = getRequest('default_lang', $this->getConfig('default_lang'));
+		$this->frontend_setup->setDefaultLang($default_lang);
 		$finalResult = CFrontendSetup::CHECK_OK;
 
 		foreach ($this->frontend_setup->checkRequirements() as $req) {
@@ -623,7 +627,7 @@ class CSetupWizard extends CForm {
 				($db_creds_storage != DB_STORE_CREDS_VAULT_CYBERARK) ? ZBX_STYLE_DISPLAY_NONE : null
 			)
 			->addRow(_('SSL certificate file'),
-				(new CTextBox('vault_cert_file', $this->getConfig('VAULT_CERT_FILE', 'conf/certs/cyberark-cert.pem')))
+				(new CTextBox('vault_cert_file', $this->getConfig('DB_VAULT_CERT_FILE', 'conf/certs/cyberark-cert.pem')))
 					->setWidth(ZBX_TEXTAREA_MEDIUM_WIDTH)
 					->setAttribute('maxlength', 2048),
 				'vault_cert_file',
@@ -632,7 +636,7 @@ class CSetupWizard extends CForm {
 					: null
 			)
 			->addRow(_('SSL key file'),
-				(new CTextBox('vault_key_file', $this->getConfig('VAULT_KEY_FILE', 'conf/certs/cyberark-key.pem')))
+				(new CTextBox('vault_key_file', $this->getConfig('DB_VAULT_KEY_FILE', 'conf/certs/cyberark-key.pem')))
 					->setWidth(ZBX_TEXTAREA_MEDIUM_WIDTH)
 					->setAttribute('maxlength', 2048),
 				'vault_key_file',
@@ -822,11 +826,11 @@ class CSetupWizard extends CForm {
 				$table
 					->addRow(
 						(new CSpan(_('SSL certificate file')))->addClass(ZBX_STYLE_GREY),
-						$this->getConfig('VAULT_CERT_FILE') ? $this->getConfig('VAULT_CERT_FILE') : ''
+						$this->getConfig('DB_VAULT_CERT_FILE') ? $this->getConfig('DB_VAULT_CERT_FILE') : ''
 					)
 					->addRow(
 						(new CSpan(_('SSL key file')))->addClass(ZBX_STYLE_GREY),
-						$this->getConfig('VAULT_KEY_FILE') ? $this->getConfig('VAULT_KEY_FILE') : ''
+						$this->getConfig('DB_VAULT_KEY_FILE') ? $this->getConfig('DB_VAULT_KEY_FILE') : ''
 					);
 			}
 		}
