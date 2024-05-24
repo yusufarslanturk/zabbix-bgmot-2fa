@@ -20,11 +20,22 @@
 
 require_once dirname(__FILE__).'/../include/CIntegrationTest.php';
 
+class CAutoregClient extends CZabbixClient {
+	public function sendRequest($host, $ip) {
+		parent::request([
+			'request' => 'active checks',
+			'host' => $host,
+			'ip' => $ip
+		]);
+	}
+}
+
 /**
  * Test suite for action notifications
  *
  * @required-components server, agent
  * @configurationDataProvider defaultConfigurationProvider
+ * @onAfter clearData
  * @hosts test_hostconn
  */
 class testHostConnMacroValidation extends CIntegrationTest {
@@ -36,13 +47,13 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	private static $triggerid_action_neg;
 	private static $trigger_actionid;
 	private static $trigger_actionid_neg;
-	private static $eventid;
 	private static $scriptid_action;
 	private static $scriptid;
 	private static $hostmacroid;
 	private static $interfaceid;
 
 	const ITEM_TRAP = 'trap1';
+	const INT_TRAP = 'trap_internal';
 	const HOST_NAME = 'test_hostconn';
 
 	/**
@@ -83,15 +94,17 @@ class testHostConnMacroValidation extends CIntegrationTest {
 		$this->assertArrayHasKey(0, $response['result'][0]['interfaces']);
 		self::$interfaceid = $response['result'][0]['interfaces'][0]['interfaceid'];
 
-		$response = $this->call('item.create', [
-			'hostid' => self::$hostid,
-			'name' => self::ITEM_TRAP,
-			'key_' => self::ITEM_TRAP,
-			'type' => ITEM_TYPE_TRAPPER,
-			'value_type' => ITEM_VALUE_TYPE_UINT64
-		]);
-		$this->assertArrayHasKey('itemids', $response['result']);
-		$this->assertEquals(1, count($response['result']['itemids']));
+		foreach ([self::ITEM_TRAP, self::INT_TRAP] as $value) {
+			$response = $this->call('item.create', [
+				'hostid' => self::$hostid,
+				'name' => $value,
+				'key_' => $value,
+				'type' => ITEM_TYPE_TRAPPER,
+				'value_type' => ITEM_VALUE_TYPE_UINT64
+			]);
+			$this->assertArrayHasKey('itemids', $response['result']);
+			$this->assertEquals(1, count($response['result']['itemids']));
+		}
 
 		$response = $this->call('trigger.create', [
 			'description' => 'Trigger for HOST.CONN test',
@@ -251,7 +264,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 		return [
 			self::COMPONENT_SERVER => [
 				'DebugLevel' => 4,
-				'LogFileSize' => 20
+				'LogFileSize' => 0
 			],
 			self::COMPONENT_AGENT => [
 				'Hostname' => self::HOST_NAME,
@@ -406,20 +419,42 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	 * @configurationDataProvider defaultConfigurationProvider
 	 */
 	public function testHostConnMacroValidation_testInvalidMacroAction() {
-		$this->sendSenderValue(self::HOST_NAME, self::ITEM_TRAP, 101);
+		$this->sendSenderValue(self::HOST_NAME, self::ITEM_TRAP, 9999);
 
 		$response = $this->callUntilDataIsPresent('alert.get', [
 			'actionids' => [self::$trigger_actionid_neg],
-			'sortfield' => 'alertid',
-			'sortorder' => 'DESC',
-			'limit' => 1,
-			'filter' => [
-				'status' => 0
-			]
-		], 5, 2);
+		], 30, 2);
 		$this->assertArrayHasKey(0, $response['result']);
 		$this->assertEquals("Invalid macro '{HOST.CONN}' value", $response['result'][0]['error']);
 
 		$this->sendSenderValue(self::HOST_NAME, self::ITEM_TRAP, 0);
+	}
+
+	/**
+	 * Test code injection via HOST.CONN macro.
+	 *
+	 * @required-components server, agent
+	 * @configurationDataProvider defaultConfigurationProvider
+	 */
+	public function testHostConnMacroValidation_testInvalidMacroAutoregistration() {
+		$this->clearLog(self::COMPONENT_SERVER);
+		$c = new CAutoregClient('localhost', self::getConfigurationValue(self::COMPONENT_SERVER, 'ListenPort', 10051), 3, 3,
+			ZBX_SOCKET_BYTES_LIMIT
+		);
+		$c->sendRequest(self::HOST_NAME, '127.250.250.250;uname');
+
+		$this->waitForLogLineToBePresent(self::COMPONENT_SERVER,
+			'cannot send list of active checks to "127.0.0.1": "127.250.250.250;uname" is not a valid IP address',
+			true, 30, 2, true
+		);
+	}
+
+	/**
+	 * Delete all created data after test.
+	 */
+	public static function clearData(): void {
+		CDataHelper::call('action.delete', [self::$trigger_actionid, self::$trigger_actionid_neg]);
+		CDataHelper::call('host.delete', [self::$hostid]);
+		CDataHelper::call('script.delete', [self::$scriptid_action, self::$scriptid]);
 	}
 }
