@@ -2857,29 +2857,11 @@ static int	resolve_host_target_macros(const char *m, const DC_HOST *dc_host, DC_
 
 	if (0 == strcmp(m, MVAR_HOST_TARGET_DNS))
 	{
-		if (SUCCEED == (ret = DCconfig_get_interface(interface, dc_host->hostid, 0)))
-		{
-			if (FAIL == zbx_is_ip(interface->dns_orig) &&
-					FAIL == zbx_validate_hostname(interface->dns_orig))
-			{
-				return FAIL;
-			}
-
-			*replace_to = zbx_strdup(*replace_to, interface->dns_orig);
-		}
+		ret = get_interface_value(dc_host->hostid, 0, replace_to, ZBX_REQUEST_HOST_DNS);
 	}
 	else if (0 == strcmp(m, MVAR_HOST_TARGET_CONN))
 	{
-		if (SUCCEED == (ret = DCconfig_get_interface(interface, dc_host->hostid, 0)))
-		{
-			if (FAIL == zbx_is_ip(interface->addr) &&
-					FAIL == zbx_validate_hostname(interface->addr))
-			{
-				return FAIL;
-			}
-
-			*replace_to = zbx_strdup(*replace_to, interface->addr);
-		}
+		ret = get_interface_value(dc_host->hostid, 0, replace_to, ZBX_REQUEST_HOST_CONN);
 	}
 	else if (0 == strcmp(m, MVAR_HOST_TARGET_HOST))
 	{
@@ -2887,13 +2869,7 @@ static int	resolve_host_target_macros(const char *m, const DC_HOST *dc_host, DC_
 	}
 	else if (0 == strcmp(m, MVAR_HOST_TARGET_IP))
 	{
-		if (SUCCEED == (ret = DCconfig_get_interface(interface, dc_host->hostid, 0)))
-		{
-			if (FAIL == zbx_is_ip(interface->ip_orig))
-				return FAIL;
-
-			*replace_to = zbx_strdup(*replace_to, interface->ip_orig);
-		}
+		ret = get_interface_value(dc_host->hostid, 0, replace_to, ZBX_REQUEST_HOST_IP);
 	}
 	else if (0 == strcmp(m, MVAR_HOST_TARGET_NAME))
 	{
