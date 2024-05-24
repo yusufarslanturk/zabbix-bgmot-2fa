@@ -31,8 +31,11 @@ class testHostConnMacroValidation extends CIntegrationTest {
 
 	private static $hostid;
 	private static $triggerid;
-	private static $triggerid2;
+	private static $triggerid_action;
+	private static $triggerid_neg;
+	private static $triggerid_action_neg;
 	private static $trigger_actionid;
+	private static $trigger_actionid_neg;
 	private static $eventid;
 	private static $scriptid_action;
 	private static $scriptid;
@@ -99,12 +102,28 @@ class testHostConnMacroValidation extends CIntegrationTest {
 		self::$triggerid = $response['result']['triggerids'][0];
 
 		$response = $this->call('trigger.create', [
-			'description' => 'Trigger2 for HOST.CONN test',
+			'description' => 'Trigger for HOST.CONN test via action',
 			'expression' => 'last(/'.self::HOST_NAME.'/'.self::ITEM_TRAP.')>100'
 		]);
 		$this->assertArrayHasKey('triggerids', $response['result']);
 		$this->assertCount(1, $response['result']['triggerids']);
-		self::$triggerid2 = $response['result']['triggerids'][0];
+		self::$triggerid_action = $response['result']['triggerids'][0];
+
+		$response = $this->call('trigger.create', [
+			'description' => 'Trigger for negative HOST.CONN test',
+			'expression' => 'last(/'.self::HOST_NAME.'/'.self::ITEM_TRAP.')>0'
+		]);
+		$this->assertArrayHasKey('triggerids', $response['result']);
+		$this->assertCount(1, $response['result']['triggerids']);
+		self::$triggerid_neg = $response['result']['triggerids'][0];
+
+		$response = $this->call('trigger.create', [
+			'description' => 'Trigger for negative HOST.CONN test via action',
+			'expression' => 'last(/'.self::HOST_NAME.'/'.self::ITEM_TRAP.')>2000'
+		]);
+		$this->assertArrayHasKey('triggerids', $response['result']);
+		$this->assertCount(1, $response['result']['triggerids']);
+		self::$triggerid_action_neg = $response['result']['triggerids'][0];
 
 		$response = $this->call('usermacro.create', [
 			'hostid' => self::$hostid,
@@ -153,7 +172,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 					[
 						'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
 						'operator' => CONDITION_OPERATOR_EQUAL,
-						'value' => self::$triggerid2
+						'value' => self::$triggerid_action
 					]
 				],
 				'evaltype' => CONDITION_EVAL_TYPE_AND_OR
@@ -181,6 +200,44 @@ class testHostConnMacroValidation extends CIntegrationTest {
 		$this->assertArrayHasKey('actionids', $response['result']);
 		$this->assertEquals(1, count($response['result']['actionids']));
 		self::$trigger_actionid = $response['result']['actionids'][0];
+
+		$response = $this->call('action.create', [
+			'esc_period' => '1m',
+			'eventsource' => EVENT_SOURCE_TRIGGERS,
+			'status' => 0,
+			'filter' => [
+				'conditions' => [
+					[
+						'conditiontype' => ZBX_CONDITION_TYPE_TRIGGER,
+						'operator' => CONDITION_OPERATOR_EQUAL,
+						'value' => self::$triggerid_action_neg
+					]
+				],
+				'evaltype' => CONDITION_EVAL_TYPE_AND_OR
+			],
+			'name' => 'Action on trigger (negative case)',
+			'operations' => [
+				[
+					'operationtype' => OPERATION_TYPE_COMMAND,
+					'esc_period' => '0s',
+					'esc_step_from' => 1,
+					'esc_step_to' => 2,
+					'evaltype' => CONDITION_EVAL_TYPE_AND_OR,
+					'opcommand_grp' => [
+						[
+							'groupid' => 4
+						]
+					],
+					'opcommand' => [
+						'scriptid' => self::$scriptid_action
+					]
+				]
+			],
+			'pause_suppressed' => 0
+		]);
+		$this->assertArrayHasKey('actionids', $response['result']);
+		$this->assertEquals(1, count($response['result']['actionids']));
+		self::$trigger_actionid_neg = $response['result']['actionids'][0];
 
 		return true;
 	}
@@ -321,6 +378,8 @@ class testHostConnMacroValidation extends CIntegrationTest {
 		]);
 		$this->assertArrayHasKey('scriptids', $response['result']);
 
+		$this->sendSenderValue(self::HOST_NAME, self::ITEM_TRAP, 222);
+
 		$response = $this->callUntilDataIsPresent('event.get', [
 			'objectids' => self::$triggerid,
 			'sortfield' => 'clock',
@@ -330,14 +389,13 @@ class testHostConnMacroValidation extends CIntegrationTest {
 		$this->assertArrayHasKey(0, $response['result']);
 		$eventid = $response['result'][0]['eventid'];
 
-		$response = $this->callUntilDataIsPresent('script.execute', [
+		$response = CAPIHelper::call('script.execute', [
 			'scriptid' => self::$scriptid,
 			'eventid' => $eventid
-		], 30, 2);
-		$this->assertArrayHasKey('response', $response['result']);
-		$this->assertEquals('success', $response['result']['response']);
-		$this->assertArrayHasKey('value', $response['result']);
-		$this->assertEquals('hello 127.0.0.1', $response['result']['value']);
+		]);
+		$this->assertArrayHasKey('error', $response);
+		$this->assertArrayHasKey('data', $response['error']);
+		$this->assertEquals("Invalid macro '{HOST.CONN}' value", $response['error']['data']);
 		$this->sendSenderValue(self::HOST_NAME, self::ITEM_TRAP, 0);
 	}
 
@@ -351,7 +409,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 		$this->sendSenderValue(self::HOST_NAME, self::ITEM_TRAP, 101);
 
 		$response = $this->callUntilDataIsPresent('alert.get', [
-			'actionids' => [self::$trigger_actionid],
+			'actionids' => [self::$trigger_actionid_neg],
 			'sortfield' => 'alertid',
 			'sortorder' => 'DESC',
 			'limit' => 1,
