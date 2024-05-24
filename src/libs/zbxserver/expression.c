@@ -3341,16 +3341,19 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 				{
 					ret = DBget_trigger_value(&c_event->trigger, &replace_to,
 							N_functionid, ZBX_REQUEST_HOST_IP);
+					require_address = 1;
 				}
 				else if (0 == strcmp(m, MVAR_HOST_DNS))
 				{
 					ret = DBget_trigger_value(&c_event->trigger, &replace_to,
 							N_functionid, ZBX_REQUEST_HOST_DNS);
+					require_address = 1;
 				}
 				else if (0 == strcmp(m, MVAR_HOST_CONN))
 				{
 					ret = DBget_trigger_value(&c_event->trigger, &replace_to,
 							N_functionid, ZBX_REQUEST_HOST_CONN);
+					require_address = 1;
 				}
 				else if (0 == strcmp(m, MVAR_HOST_PORT))
 				{
