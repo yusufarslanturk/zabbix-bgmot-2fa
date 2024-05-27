@@ -2847,8 +2847,7 @@ static void	resolve_user_macros(zbx_uint64_t userid, const char *m, char **user_
 	}
 }
 
-static int	resolve_host_target_macros(const char *m, const DC_HOST *dc_host, DC_INTERFACE *interface,
-		char **replace_to)
+static int	resolve_host_target_macros(const char *m, const DC_HOST *dc_host, char **replace_to)
 {
 	int	ret = SUCCEED;
 
@@ -3081,6 +3080,21 @@ out:
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
 }
 
+static int	is_strict_macro(const char *macro)
+{
+	const char	*strict_macros[] = {MVAR_HOST_IP, MVAR_IPADDRESS, MVAR_HOST_DNS,
+			MVAR_HOST_CONN, MVAR_HOST_TARGET_DNS, MVAR_HOST_TARGET_CONN,
+			MVAR_HOST_TARGET_IP};
+
+	for (int i = 0; i < (int)ARRSIZE(strict_macros); i++)
+	{
+		if (0 == strcmp(strict_macros[i], macro))
+			return SUCCEED;
+	}
+
+	return FAIL;
+}
+
 /******************************************************************************
  *                                                                            *
  * Purpose: substitute simple macros in data string with real values          *
@@ -3097,7 +3111,6 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 	int				N_functionid, indexed_macro, ret, res = SUCCEED,
 					pos = 0, found, user_names_found = 0, raw_value;
 	size_t				data_alloc, data_len;
-	DC_INTERFACE			interface;
 	zbx_vector_uint64_t		hostids;
 	const zbx_vector_uint64_t	*phostids;
 	zbx_token_t			token, inner_token;
@@ -3588,7 +3601,7 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 				}
 				else if (0 == (macro_type & (MACRO_TYPE_SCRIPT_NORMAL | MACRO_TYPE_SCRIPT_RECOVERY)))
 				{
-					ret = resolve_host_target_macros(m, dc_host, &interface, &replace_to);
+					ret = resolve_host_target_macros(m, dc_host, &replace_to);
 				}
 			}
 			else if (EVENT_SOURCE_INTERNAL == c_event->source && EVENT_OBJECT_TRIGGER == c_event->object)
@@ -3993,7 +4006,7 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 				}
 				else
 				{
-					ret = resolve_host_target_macros(m, dc_host, &interface, &replace_to);
+					ret = resolve_host_target_macros(m, dc_host, &replace_to);
 				}
 			}
 			else if (0 == indexed_macro && EVENT_SOURCE_AUTOREGISTRATION == c_event->source)
@@ -4093,7 +4106,7 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 				}
 				else
 				{
-					ret = resolve_host_target_macros(m, dc_host, &interface, &replace_to);
+					ret = resolve_host_target_macros(m, dc_host, &replace_to);
 				}
 			}
 			else if (0 == indexed_macro && EVENT_SOURCE_INTERNAL == c_event->source &&
@@ -5171,30 +5184,18 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 
 		if (FAIL == ret)
 		{
-			const char	*strict_macros[] = {MVAR_HOST_IP, MVAR_IPADDRESS, MVAR_HOST_DNS,
-					MVAR_HOST_CONN, MVAR_HOST_TARGET_DNS, MVAR_HOST_TARGET_CONN,
-					MVAR_HOST_TARGET_IP};
-
 			zabbix_log(LOG_LEVEL_DEBUG, "cannot resolve macro '%.*s'",
 					(int)(token.loc.r - token.loc.l + 1), *data + token.loc.l);
 
-			replace_to = zbx_strdup(replace_to, STR_UNKNOWN_VARIABLE);
-
-			if (ZBX_TOKEN_MACRO == token.type)
+			if (ZBX_TOKEN_MACRO == token.type && SUCCEED == is_strict_macro(m))
 			{
-				for (int i = 0; i < (int)ARRSIZE(strict_macros); i++)
-				{
-					if (0 != strcmp(strict_macros[i], m))
-						continue;
-
-					/* Macros should be already expanded. An unexpanded user macro means either unknown */
-					/* macro or macro value validation failure.                                         */
-					zbx_snprintf(error, maxerrlen, "Invalid macro '%.*s' value",
-							(int)(token.loc.r - token.loc.l + 1), *data + token.loc.l);
-					res = FAIL;
-					break;
-				}
+				/* return error if strict macro resolving failed */
+				zbx_snprintf(error, maxerrlen, "Invalid macro '%.*s' value",
+						(int)(token.loc.r - token.loc.l + 1), *data + token.loc.l);
+				res = FAIL;
 			}
+			else
+				replace_to = zbx_strdup(replace_to, STR_UNKNOWN_VARIABLE);
 		}
 
 		if (ZBX_TOKEN_USER_MACRO == token.type || (ZBX_TOKEN_MACRO == token.type && 0 == indexed_macro))
