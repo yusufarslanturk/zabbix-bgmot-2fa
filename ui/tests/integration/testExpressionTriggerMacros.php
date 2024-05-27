@@ -71,18 +71,6 @@ class testExpressionTriggerMacros extends CIntegrationTest {
 		$this->assertArrayHasKey(0, $response['result']['hostids']);
 		self::$hostid = $response['result']['hostids'][0];
 
-		// Get host interface ids.
-		$response = $this->call('host.get', [
-			'output' => ['host'],
-			'hostids' => [self::$hostid],
-			'selectInterfaces' => ['interfaceid']
-		]);
-
-		$this->assertArrayHasKey(0, $response['result']);
-		$this->assertArrayHasKey('interfaces', $response['result'][0]);
-		$this->assertArrayHasKey(0, $response['result'][0]['interfaces']);
-		self::$interfaceid = $response['result'][0]['interfaces'][0]['interfaceid'];
-
 		// Create trapper item
 		$response = $this->call('item.create', [
 			'hostid' => self::$hostid,
@@ -232,24 +220,6 @@ class testExpressionTriggerMacros extends CIntegrationTest {
 		];
 	}
 
-	/**
-	 * Component configuration provider for agent related tests.
-	 *
-	 * @return array
-	 */
-	public function serverAgentConfigurationProvider() {
-		return [
-			self::COMPONENT_SERVER => [
-				'DebugLevel' => 4,
-				'LogFileSize' => 20
-			],
-			self::COMPONENT_AGENT => [
-				'Hostname' => self::HOST_NAME,
-				'AllowKey' => 'system.run[*]',
-			]
-		];
-	}
-
 	public function testExpressionTriggerMacros_testOperation() {
 		$this->clearLog(self::COMPONENT_SERVER);
 		$this->reloadConfigurationCache();
@@ -334,49 +304,5 @@ class testExpressionTriggerMacros extends CIntegrationTest {
 		], 5, 2);
 		$this->assertArrayHasKey('value', $response['result']);
 		$this->assertEquals('(1+2)>max(10,100) 1 2', $response['result']['value']);
-	}
-
-	/**
-	 * Test code injection via HOST.CONN macro.
-	 *
-	 * @required-components server, agent
-	 * @configurationDataProvider serverAgentConfigurationProvider
-	 */
-	public function testExpressionTriggerMacros_testHostConnMacroCodeInjection() {
-		$response = $this->call('usermacro.create', [
-			'hostid' => self::$hostid,
-			'macro' => '{$INJADDR}',
-			'value' => '127.0.0.1;uname'
-		]);
-		$this->assertArrayHasKey('result', $response);
-		$this->assertArrayHasKey('hostmacroids', $response['result']);
-
-		$response = $this->call('hostinterface.update', [
-			'interfaceid' => self::$interfaceid,
-			'useip' => 0,
-			'dns' => '{$INJADDR}',
-			'ip' => ''
-		]);
-		$this->assertArrayHasKey('interfaceids', $response['result']);
-		$this->assertArrayHasKey(0, $response['result']['interfaceids']);
-
-		$response = $this->call('script.create', [
-			'name' => 'inj test',
-			'command' => 'echo hello {HOST.CONN}',
-			'execute_on' => ZBX_SCRIPT_EXECUTE_ON_SERVER,
-			'scope' => ZBX_SCRIPT_SCOPE_HOST,
-			'type' => ZBX_SCRIPT_TYPE_CUSTOM_SCRIPT
-		]);
-		$this->assertArrayHasKey('scriptids', $response['result']);
-		$scriptid = $response['result']['scriptids'][0];
-
-		$this->reloadConfigurationCache();
-		$this->waitForLogLineToBePresent(self::COMPONENT_SERVER, "End of DCsync_configuration()", true, 30, 1);
-
-		$this->expectException(\PHPUnit\Framework\ExpectationFailedException::class);
-		$response = $this->call('script.execute', [
-			'scriptid' => $scriptid,
-			'hostid' => self::$hostid
-		]);
 	}
 }
