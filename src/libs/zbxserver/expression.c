@@ -5189,9 +5189,12 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 
 			if (ZBX_TOKEN_MACRO == token.type && SUCCEED == is_strict_macro(m))
 			{
-				/* return error if strict macro resolving failed */
-				zbx_snprintf(error, maxerrlen, "Invalid macro '%.*s' value",
-						(int)(token.loc.r - token.loc.l + 1), *data + token.loc.l);
+				if (NULL != error)
+				{
+					/* return error if strict macro resolving failed */
+					zbx_snprintf(error, maxerrlen, "Invalid macro '%.*s' value",
+							(int)(token.loc.r - token.loc.l + 1), *data + token.loc.l);
+				}
 				res = FAIL;
 			}
 			else
