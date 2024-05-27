@@ -1984,14 +1984,21 @@ void	DCsync_kvs_paths(const struct zbx_json_parse *jp_kvs_paths, const zbx_confi
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
 }
 
+#define EXPAND_INTERFACE_MACROS		1
+
 /******************************************************************************
  *                                                                            *
  * Purpose: expand host macros in string                                      *
  *                                                                            *
+ * Parameters: text    - [IN] input string                                    *
+ *             dc_host - [IN]                                                 *
+ *             flags   - [IN] specifies if interface related macros must      *
+ *                            be resolved (EXPAND_INTERFACE_MACROS)           *
+ *                                                                            *
  * Return value: text with resolved macros or NULL if there were no macros    *
  *                                                                            *
  ******************************************************************************/
-static char	*dc_expand_host_macros_dyn(const char *text, const ZBX_DC_HOST *dc_host)
+static char	*dc_expand_host_macros_dyn(const char *text, const ZBX_DC_HOST *dc_host, int flags)
 {
 #define IF_MACRO_HOST		"{HOST."
 #define IF_MACRO_HOST_HOST	IF_MACRO_HOST "HOST}"
@@ -2038,21 +2045,35 @@ static char	*dc_expand_host_macros_dyn(const char *text, const ZBX_DC_HOST *dc_h
 		{
 			value = dc_host->name;
 		}
-		else if (SUCCEED == zbx_strloc_cmp(text, &token.loc, IF_MACRO_HOST_IP, IF_MACRO_HOST_IP_LEN) ||
-				SUCCEED == zbx_strloc_cmp(text, &token.loc, IF_MACRO_IPADDRESS, IF_MACRO_IPADDRESS_LEN))
+		else if (0 != (flags & EXPAND_INTERFACE_MACROS))
 		{
-			if (SUCCEED == DCconfig_get_interface_by_type(&interface, dc_host->hostid, INTERFACE_TYPE_AGENT))
-				value = interface.ip_orig;
-		}
-		else if (SUCCEED == zbx_strloc_cmp(text, &token.loc, IF_MACRO_HOST_DNS, IF_MACRO_HOST_DNS_LEN))
-		{
-			if (SUCCEED == DCconfig_get_interface_by_type(&interface, dc_host->hostid, INTERFACE_TYPE_AGENT))
-				value = interface.dns_orig;
-		}
-		else if (SUCCEED == zbx_strloc_cmp(text, &token.loc, IF_MACRO_HOST_CONN, IF_MACRO_HOST_CONN_LEN))
-		{
-			if (SUCCEED == DCconfig_get_interface_by_type(&interface, dc_host->hostid, INTERFACE_TYPE_AGENT))
-				value = interface.addr;
+			if (SUCCEED == zbx_strloc_cmp(text, &token.loc, IF_MACRO_HOST_IP, IF_MACRO_HOST_IP_LEN) ||
+					SUCCEED == zbx_strloc_cmp(text, &token.loc, IF_MACRO_IPADDRESS,
+							IF_MACRO_IPADDRESS_LEN))
+			{
+				if (SUCCEED == DCconfig_get_interface_by_type(&interface, dc_host->hostid,
+						INTERFACE_TYPE_AGENT))
+				{
+					value = interface.ip_orig;
+				}
+			}
+			else if (SUCCEED == zbx_strloc_cmp(text, &token.loc, IF_MACRO_HOST_DNS, IF_MACRO_HOST_DNS_LEN))
+			{
+				if (SUCCEED == DCconfig_get_interface_by_type(&interface, dc_host->hostid,
+						INTERFACE_TYPE_AGENT))
+				{
+					value = interface.dns_orig;
+				}
+			}
+			else if (SUCCEED == zbx_strloc_cmp(text, &token.loc, IF_MACRO_HOST_CONN,
+					IF_MACRO_HOST_CONN_LEN))
+			{
+				if (SUCCEED == DCconfig_get_interface_by_type(&interface, dc_host->hostid,
+						INTERFACE_TYPE_AGENT))
+				{
+					value = interface.addr;
+				}
+			}
 		}
 
 		if (NULL != value)
@@ -2265,13 +2286,13 @@ static void	dc_if_update_free(zbx_dc_if_update_t *update)
  * Purpose: resolve host macros in host interface update                      *
  *                                                                            *
  ******************************************************************************/
-static void	dc_if_update_substitute_host_macros(zbx_dc_if_update_t *update, const ZBX_DC_HOST *host)
+static void	dc_if_update_substitute_host_macros(zbx_dc_if_update_t *update, const ZBX_DC_HOST *host, int flags)
 {
 	char	*addr;
 
-	if (NULL != (addr = dc_expand_host_macros_dyn(update->ip, host)))
+	if (NULL != (addr = dc_expand_host_macros_dyn(update->ip, host, flags)))
 	{
-		if (SUCCEED == zbx_is_ip(addr))
+		if (SUCCEED == zbx_is_ip(addr) || 0)
 		{
 			zbx_free(update->ip);
 			update->ip = addr;
@@ -2280,7 +2301,7 @@ static void	dc_if_update_substitute_host_macros(zbx_dc_if_update_t *update, cons
 			zbx_free(addr);
 	}
 
-	if (NULL != (addr = dc_expand_host_macros_dyn(update->dns, host)))
+	if (NULL != (addr = dc_expand_host_macros_dyn(update->dns, host, flags)))
 	{
 		if (SUCCEED == zbx_is_ip(addr) || SUCCEED == zbx_validate_hostname(addr))
 		{
@@ -2430,7 +2451,7 @@ static void	DCsync_interfaces(zbx_dbsync_t *sync, zbx_uint64_t revision)
 		/* with {HOST.IP} and {HOST.DNS} macros                                */
 		if (1 == interface->main && INTERFACE_TYPE_AGENT == interface->type)
 		{
-			dc_if_update_substitute_host_macros(update, host);
+			dc_if_update_substitute_host_macros(update, host, 0);
 
 			if (SUCCEED == dc_strpool_replace(found, &interface->ip, update->ip))
 				update->modified = 1;
@@ -2472,7 +2493,7 @@ static void	DCsync_interfaces(zbx_dbsync_t *sync, zbx_uint64_t revision)
 
 		if (1 != update->interface->main || INTERFACE_TYPE_AGENT != update->interface->type)
 		{
-			dc_if_update_substitute_host_macros(update, update->host);
+			dc_if_update_substitute_host_macros(update, update->host, EXPAND_INTERFACE_MACROS);
 
 			if (SUCCEED == dc_strpool_replace(update->found, &update->interface->ip, update->ip))
 				update->modified = 1;
