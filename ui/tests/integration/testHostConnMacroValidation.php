@@ -274,7 +274,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	}
 
 	/**
-	 * Test code injection via HOST.CONN macro.
+	 * Test regression of validation.
 	 *
 	 * @required-components server, agent
 	 * @configurationDataProvider defaultConfigurationProvider
@@ -291,7 +291,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	}
 
 	/**
-	 * Test code injection via HOST.CONN macro.
+	 * Test regression of validation.
 	 *
 	 * @required-components server, agent
 	 * @configurationDataProvider defaultConfigurationProvider
@@ -326,7 +326,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	}
 
 	/**
-	 * Test code injection via HOST.CONN macro.
+	 * Test regression of validation.
 	 *
 	 * @required-components server, agent
 	 * @configurationDataProvider defaultConfigurationProvider
@@ -347,12 +347,12 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	}
 
 	/**
-	 * Test code injection via HOST.CONN macro.
+	 * Test injection via invalid macro provided to manual host script.
 	 *
 	 * @required-components server, agent
 	 * @configurationDataProvider defaultConfigurationProvider
 	 */
-	public function testHostConnMacroValidation_testInvalidMacro() {
+	public function testHostConnMacroValidation_testInvalidMacroManualHostScript() {
 		$response = $this->call('script.update', [
 			'scriptid' => self::$scriptid,
 			'scope' => ZBX_SCRIPT_SCOPE_HOST
@@ -379,7 +379,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	}
 
 	/**
-	 * Test code injection via HOST.CONN macro.
+	 * Test injection via manual event script.
 	 *
 	 * @required-components server, agent
 	 * @configurationDataProvider defaultConfigurationProvider
@@ -413,7 +413,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	}
 
 	/**
-	 * Test code injection via HOST.CONN macro.
+	 * Test injection via invalid trigger action operation.
 	 *
 	 * @required-components server, agent
 	 * @configurationDataProvider defaultConfigurationProvider
@@ -431,7 +431,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	}
 
 	/**
-	 * Test code injection via HOST.CONN macro.
+	 * Test injection via malicious autoregistration request.
 	 *
 	 * @required-components server, agent
 	 * @configurationDataProvider defaultConfigurationProvider
