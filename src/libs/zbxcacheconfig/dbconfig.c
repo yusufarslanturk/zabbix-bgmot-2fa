@@ -2292,7 +2292,7 @@ static void	dc_if_update_substitute_host_macros(zbx_dc_if_update_t *update, cons
 
 	if (NULL != (addr = dc_expand_host_macros_dyn(update->ip, host, flags)))
 	{
-		if (SUCCEED == zbx_is_ip(addr) || 0)
+		if (SUCCEED == zbx_is_ip(addr))
 		{
 			zbx_free(update->ip);
 			update->ip = addr;
