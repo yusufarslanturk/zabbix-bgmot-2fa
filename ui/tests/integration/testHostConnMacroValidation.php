@@ -363,6 +363,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	 * Test regression of validation.
 	 *
 	 * @required-components server, agent
+	 * @depends testHostConnMacroValidation_testValidMacroManualHostScript
 	 * @configurationDataProvider defaultConfigurationProvider
 	 */
 	public function testHostConnMacroValidation_testValidMacroManualEventScript() {
@@ -398,6 +399,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	 * Test regression of validation.
 	 *
 	 * @required-components server, agent
+	 * @depends testHostConnMacroValidation_testValidMacroManualEventScript
 	 * @configurationDataProvider defaultConfigurationProvider
 	 */
 	public function testHostConnMacroValidation_testValidMacroAction() {
@@ -419,6 +421,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	 * Test regression of validation.
 	 *
 	 * @required-components server, agent
+	 * @depends testHostConnMacroValidation_testValidMacroAction
 	 * @configurationDataProvider defaultConfigurationProvider
 	 */
 	public function testHostConnMacroValidation_testValidMacroAllowedHosts() {
@@ -495,6 +498,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	 * Test injection via manual event script.
 	 *
 	 * @required-components server, agent
+	 * @depends testHostConnMacroValidation_testInvalidMacroManualHostScript
 	 * @configurationDataProvider defaultConfigurationProvider
 	 */
 	public function testHostConnMacroValidation_testInvalidMacroManualEventScript() {
@@ -529,6 +533,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	 * Test injection via invalid trigger action operation.
 	 *
 	 * @required-components server, agent
+	 * @depends testHostConnMacroValidation_testInvalidMacroManualEventScript
 	 * @configurationDataProvider defaultConfigurationProvider
 	 */
 	public function testHostConnMacroValidation_testInvalidMacroAction() {
@@ -598,7 +603,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 	}
 
 	/**
-	 * Test injection via running an action operator for discovery.
+	 * Test injection via running an action operation for discovery.
 	 *
 	 * @required-components server, agent
 	 * @configurationDataProvider defaultConfigurationProvider
