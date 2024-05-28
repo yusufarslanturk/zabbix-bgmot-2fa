@@ -273,7 +273,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 			'key_' => 'script[{HOST.CONN}]',
 			'type' => ITEM_TYPE_EXTERNAL,
 			'delay' => '30s',
-			'value_type' => ITEM_VALUE_TYPE_UINT64,
+			'value_type' => ITEM_VALUE_TYPE_UINT64
 		]);
 		$this->assertArrayHasKey('itemids', $response['result']);
 		$this->assertEquals(1, count($response['result']['itemids']));
@@ -337,7 +337,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 			],
 			self::COMPONENT_AGENT => [
 				'Hostname' => self::HOST_NAME,
-				'AllowKey' => 'system.run[*]',
+				'AllowKey' => 'system.run[*]'
 			]
 		];
 	}
@@ -540,7 +540,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 		$this->sendSenderValue(self::HOST_NAME, self::ITEM_TRAP, 9999);
 
 		$response = $this->callUntilDataIsPresent('alert.get', [
-			'actionids' => [self::$trigger_actionid_neg],
+			'actionids' => [self::$trigger_actionid_neg]
 		], 30, 2);
 		$this->assertArrayHasKey(0, $response['result']);
 		$this->assertEquals("Invalid macro '{HOST.CONN}' value", $response['result'][0]['error']);
@@ -613,7 +613,7 @@ class testHostConnMacroValidation extends CIntegrationTest {
 		$this->reloadConfigurationCache(self::COMPONENT_SERVER);
 
 		$response = $this->callUntilDataIsPresent('alert.get', [
-			'actionids' => [self::$trigger_actionid_neg],
+			'actionids' => [self::$trigger_actionid_neg]
 		], 30, 2);
 		$this->assertArrayHasKey(0, $response['result']);
 		$this->assertEquals("Invalid macro '{HOST.CONN}' value", $response['result'][0]['error']);
