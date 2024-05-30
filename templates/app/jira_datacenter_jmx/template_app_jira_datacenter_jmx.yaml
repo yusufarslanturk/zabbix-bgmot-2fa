@@ -269,7 +269,7 @@ zabbix_export:
             - tag: component
               value: issue
         - uuid: bb565c20d5ad4cf1a94aea5966ec12fa
-          name: 'DB: Connections: failed per minute'
+          name: 'DB: Connections: Failed per minute'
           type: JMX
           key: 'jmx["com.atlassian.jira:type=metrics,category00=db,category01=connection,category02=failures,name=counter",Count]'
           delay: 0;m0-59
