@@ -1672,6 +1672,7 @@ zabbix_export:
             key: 'jmx["com.atlassian.jira:type=metrics,category00=mail,category01=queue,category02=numItems,name=value",Value]'
         - sortorder: '1'
           color: FF0000
+          yaxisside: RIGHT
           item:
             host: 'Jira Data Center by JMX'
             key: 'jmx["com.atlassian.jira:type=metrics,category00=mail,category01=queue,category02=numErrors,name=value",Value]'
