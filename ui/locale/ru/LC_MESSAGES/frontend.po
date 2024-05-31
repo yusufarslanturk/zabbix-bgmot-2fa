@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-01-12 04:01+0000\n"
+"PO-Revision-Date: 2024-05-27 08:03+0000\n"
 "Last-Translator: Alexey <alexey.pustovalov@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: ru\n"
@@ -218,12 +218,12 @@ msgstr[2] "%1$s из %2$s элементов в состоянии пробле�
 #: app/views/administration.miscconfig.edit.php:127
 #, c-format
 msgid "%1$s or %2$s - allows the page to be displayed only in a frame on the same origin as the page itself"
-msgstr ""
+msgstr "%1$s или %2$s - позволяет странице отображаться только во фрейме того же источника, что и сама страница"
 
 #: app/views/administration.miscconfig.edit.php:130
 #, c-format
 msgid "%1$s or %2$s - prevents the page from being displayed in a frame, regardless of the site attempting to do so"
-msgstr ""
+msgstr "%1$s или %2$s - запрещает отображение страницы во фрейме, независимо от того какой сайт пытается это сделать"
 
 #: jsLoader.php:316
 #, c-format
@@ -692,12 +692,11 @@ msgid "Action class %1$s must extend %2$s class."
 msgstr "Класс действия %1$s должен расширять %2$s класс."
 
 #: app/controllers/CControllerActionDelete.php:79
-#, fuzzy
 msgid "Action deleted"
 msgid_plural "Actions deleted"
 msgstr[0] "Действие удалено"
-msgstr[1] "Действие удалено"
-msgstr[2] "Действие удалено"
+msgstr[1] ""
+msgstr[2] ""
 
 #: app/controllers/CControllerActionDisable.php:84
 msgid "Action disabled"
@@ -2303,7 +2302,7 @@ msgstr "Не удалось изменить тип пользователя с�
 
 #: httpconf.php:189 httpconf.php:436 items.php:671 items.php:707
 msgid "Cannot clear history and trends"
-msgstr ""
+msgstr "Не удалось очистить историю и динамику изменений"
 
 #: include/classes/api/services/CDiscoveryRule.php:2674
 msgid "Cannot clone graph prototypes."
@@ -2448,12 +2447,11 @@ msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "Невозможно удалить внутреннего пользователя Zabbix \"%1$s\", попробуйте отключить его."
 
 #: app/controllers/CControllerActionDelete.php:87
-#, fuzzy
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
 msgstr[0] "Не удалось удалить действие"
-msgstr[1] "Не удалось удалить действие"
-msgstr[2] "Не удалось удалить действие"
+msgstr[1] ""
+msgstr[2] ""
 
 #: include/classes/api/services/CRole.php:368
 #, c-format
@@ -2816,9 +2814,9 @@ msgstr[2] "Не удалось деактивировать способы оп�
 #: app/controllers/CControllerModuleUpdate.php:146
 msgid "Cannot disable module"
 msgid_plural "Cannot disable modules"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Не удалось деактивировать модуль"
+msgstr[1] "Не удалось деактивировать модули"
+msgstr[2] "Не удалось деактивировать модули"
 
 #: app/controllers/CControllerScheduledReportDisable.php:78
 msgid "Cannot disable scheduled report"
@@ -3891,7 +3889,7 @@ msgstr "Не удалось обновить способ оповещений"
 
 #: app/controllers/CControllerModuleUpdate.php:137
 msgid "Cannot update module"
-msgstr ""
+msgstr "Не удалось обновить модуль"
 
 #: sysmaps.php:189
 msgid "Cannot update network map"
@@ -4275,11 +4273,11 @@ msgstr "Очистить историю и динамику изменений"
 
 #: include/views/configuration.item.list.php:310
 msgid "Clear history and trends of selected items?"
-msgstr ""
+msgstr "Очистить историю и динамику изменений выбранных элементов данных?"
 
 #: include/views/configuration.httpconf.list.php:232
 msgid "Clear history and trends of selected web scenarios?"
-msgstr ""
+msgstr "Очистить историю и динамику изменений выбранных веб-сценариев?"
 
 #: app/views/popup.massupdate.host.php:68
 #: app/views/popup.massupdate.template.php:71
@@ -7548,7 +7546,7 @@ msgstr "Имя события"
 
 #: app/views/popup.condition.edit.php:819
 msgid "Event name matches Trigger name (with macros expanded) unless a custom Event name is specified in Trigger settings."
-msgstr ""
+msgstr "Имя события совпадает с именем триггера (с раскрытыми макросами), если в настройках триггера не указано пользовательское имя события."
 
 #: include/classes/helpers/CCorrelationHelper.php:55
 msgid "Event tag pair"
@@ -8826,7 +8824,7 @@ msgstr "История"
 
 #: httpconf.php:189 httpconf.php:436 items.php:671 items.php:707
 msgid "History and trends cleared"
-msgstr ""
+msgstr "История и динамика изменений очищены"
 
 #: app/views/administration.housekeeping.edit.php:223
 msgid "History and trends compression"
@@ -14361,7 +14359,7 @@ msgstr "Не поддерживается"
 #: app/views/administration.miscconfig.edit.php:138
 #, c-format
 msgid "Note that %1$s or %2$s will be regarded as hostnames if used without single quotes."
-msgstr ""
+msgstr "Обратите внимание, что %1$s и %2$s будут считаться именами хостов, если заданы без одинарных кавычек."
 
 #: include/hosts.inc.php:229
 msgid "Notes"
@@ -16860,6 +16858,12 @@ msgstr "Результат ЛОЖЬ"
 msgid "Result is TRUE"
 msgstr "Результат ИСТИНА"
 
+#: app/controllers/CControllerPopupItemTestSend.php:453
+#: app/controllers/CControllerPopupItemTestSend.php:481
+#, c-format
+msgid "Result is truncated due to its size (%1$s)."
+msgstr ""
+
 #: app/views/popup.testtriggerexpr.php:30
 msgid "Result type"
 msgstr "Тип результата"
@@ -18200,7 +18204,7 @@ msgstr "Управление боковой панелью"
 
 #: app/views/administration.authentication.edit.php:357
 msgid "Sign"
-msgstr "Войти"
+msgstr "Подпись"
 
 #: include/views/general.login.php:64 include/views/general.login.php:82
 msgid "Sign in"
@@ -20892,7 +20896,7 @@ msgstr "Используйте %{ref} в фильтре группы для сс
 
 #: app/views/administration.miscconfig.edit.php:123
 msgid "Use X-Frame-Options HTTP header"
-msgstr ""
+msgstr "HTTP заголовок X-Frame-Options"
 
 #: app/partials/configuration.host.interface.row.php:207
 msgid "Use combined requests"
@@ -22298,7 +22302,7 @@ msgstr "HTTP заголовок X-Frame-Options"
 
 #: app/views/administration.miscconfig.edit.php:125
 msgid "X-Frame-Options HTTP header supported values:"
-msgstr ""
+msgstr "HTTP заголовок X-Frame-Options поддерживает следующие значения:"
 
 #: include/views/js/monitoring.sysmaps.js.php:435
 msgid "X1"
@@ -22734,7 +22738,7 @@ msgstr "спецсимвол"
 #: app/views/administration.miscconfig.edit.php:133
 #, c-format
 msgid "a string of space-separated hostnames; adding %1$s to the list allows the page to be displayed in a frame on the same origin as the page itself"
-msgstr ""
+msgstr "строка имен хостов, разделенных пробелами; добавление %1$s в список разрешит отображение страницы во фрейме того же источника, что и сама страница"
 
 #: include/classes/validators/CApiInputValidator.php:2898
 msgid "a string, number or null value is expected"
@@ -23384,7 +23388,7 @@ msgstr "degrees() - Конвертация значения из радиано�
 
 #: include/forms.inc.php:1416 include/views/js/item.preprocessing.js.php:350
 msgid "delimiter"
-msgstr ""
+msgstr "разделитель"
 
 #: widgets/actionlog/includes/WidgetForm.php:65
 #: widgets/actionlog/includes/WidgetForm.php:67
@@ -24343,7 +24347,7 @@ msgstr "шаблон проблем"
 
 #: include/forms.inc.php:1420 include/views/js/item.preprocessing.js.php:352
 msgid "qualifier"
-msgstr ""
+msgstr "определитель"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:874
 msgid "radians() - Converts a value from degrees to radians"
