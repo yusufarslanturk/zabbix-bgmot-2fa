@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-03-18 08:45+0000\n"
+"PO-Revision-Date: 2024-04-02 13:52+0000\n"
 "Last-Translator: Xevi Noè i Nogueiras <xevi.noe@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ca\n"
@@ -671,7 +671,6 @@ msgid "Action class %1$s must extend %2$s class."
 msgstr "La classe d'acció %1$s ha d'ampliar la classe %2$s."
 
 #: app/controllers/CControllerActionDelete.php:79
-#, fuzzy
 msgid "Action deleted"
 msgid_plural "Actions deleted"
 msgstr[0] "S'ha esborrat l'acció"
@@ -2416,7 +2415,6 @@ msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "No es pot pas esborrar l'usuari intern de Zabbix \"%1$s\"; proveu a desactivar aquest usuari."
 
 #: app/controllers/CControllerActionDelete.php:87
-#, fuzzy
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
 msgstr[0] "No es pot pas esborrar l'acció"
@@ -5394,6 +5392,10 @@ msgstr "Nom DNS"
 #: include/classes/helpers/CSlaHelper.php:39 report4.php:90
 msgid "Daily"
 msgstr "Diàriament"
+
+#: include/locales.inc.php:40
+msgid "Danish (da_DK)"
+msgstr ""
 
 #: include/classes/core/ZBase.php:380
 msgid "Dark"
@@ -11356,6 +11358,10 @@ msgstr "Element amb estat \"no compatible\""
 msgid "Item list"
 msgstr "Llistat d'elements"
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "Element no triat"
@@ -16720,6 +16726,12 @@ msgstr "El resultat és FALS"
 msgid "Result is TRUE"
 msgstr "El resultat és CERT"
 
+#: app/controllers/CControllerPopupItemTestSend.php:453
+#: app/controllers/CControllerPopupItemTestSend.php:481
+#, c-format
+msgid "Result is truncated due to its size (%1$s)."
+msgstr ""
+
 #: app/views/popup.testtriggerexpr.php:30
 msgid "Result type"
 msgstr "Tipus de resultat"
@@ -20814,6 +20826,11 @@ msgstr "L'usuari \"%1$s\" s'empra a l'acció \"%2$s\"."
 msgid "User \"%1$s\" is user on whose behalf report \"%2$s\" is created."
 msgstr "L'usuari \"%1$s\" és l'usuari en nom del qual es crea l'informe \"%2$s\"."
 
+#: include/classes/api/services/CUser.php:814
+#, c-format
+msgid "User \"%1$s\" must have a password, because internal authentication is in effect."
+msgstr ""
+
 #: app/controllers/CControllerUserProvision.php:61
 #, c-format
 msgid "User \"%1$s\" provisioned."
@@ -24073,6 +24090,10 @@ msgstr "now() - Nombre de segons des de l'època"
 #: include/forms.inc.php:1306 include/views/js/item.preprocessing.js.php:263
 msgid "number"
 msgstr "nombre"
+
+#: include/classes/api/services/CUser.php:736
+msgid "object does not exist"
+msgstr ""
 
 #: include/classes/api/services/CHostPrototype.php:836
 msgid "object does not exist or belongs to another object"

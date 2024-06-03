@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-03-18 19:05+0000\n"
+"PO-Revision-Date: 2024-04-02 13:57+0000\n"
 "Last-Translator: ERIC <eric78.zabbix@orange.fr>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: fr\n"
@@ -672,7 +672,6 @@ msgid "Action class %1$s must extend %2$s class."
 msgstr "La classe d'action %1$s doit étendre la classe %2$s."
 
 #: app/controllers/CControllerActionDelete.php:79
-#, fuzzy
 msgid "Action deleted"
 msgid_plural "Actions deleted"
 msgstr[0] "Action supprimée"
@@ -2417,7 +2416,6 @@ msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "Impossible de supprimer l'utilisateur interne Zabbix \"%1$s\", essayez de désactiver cet utilisateur."
 
 #: app/controllers/CControllerActionDelete.php:87
-#, fuzzy
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
 msgstr[0] "Impossible de supprimer l'action"
@@ -5395,6 +5393,10 @@ msgstr "Nom DNS"
 #: include/classes/helpers/CSlaHelper.php:39 report4.php:90
 msgid "Daily"
 msgstr "Journalier"
+
+#: include/locales.inc.php:40
+msgid "Danish (da_DK)"
+msgstr ""
 
 #: include/classes/core/ZBase.php:380
 msgid "Dark"
@@ -11357,6 +11359,10 @@ msgstr "Élément dans l'état \"non supporté\""
 msgid "Item list"
 msgstr "Liste d'éléments"
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "Élément non sélectionné"
@@ -16721,6 +16727,12 @@ msgstr "Le résultat est FAUX"
 msgid "Result is TRUE"
 msgstr "Le résultat est VRAI"
 
+#: app/controllers/CControllerPopupItemTestSend.php:453
+#: app/controllers/CControllerPopupItemTestSend.php:481
+#, c-format
+msgid "Result is truncated due to its size (%1$s)."
+msgstr ""
+
 #: app/views/popup.testtriggerexpr.php:30
 msgid "Result type"
 msgstr "Type de résultat"
@@ -20815,6 +20827,11 @@ msgstr "L'utilisateur \"%1$s\" est utilisé dans l'action \"%2$s\"."
 msgid "User \"%1$s\" is user on whose behalf report \"%2$s\" is created."
 msgstr "L'utilisateur \"%1$s\" est l'utilisateur pour le compte duquel le rapport \"%2$s\" est créé."
 
+#: include/classes/api/services/CUser.php:814
+#, c-format
+msgid "User \"%1$s\" must have a password, because internal authentication is in effect."
+msgstr ""
+
 #: app/controllers/CControllerUserProvision.php:61
 #, c-format
 msgid "User \"%1$s\" provisioned."
@@ -24074,6 +24091,10 @@ msgstr "now () - Nombre de secondes écoulées depuis le temps Epoch"
 #: include/forms.inc.php:1306 include/views/js/item.preprocessing.js.php:263
 msgid "number"
 msgstr "nombre"
+
+#: include/classes/api/services/CUser.php:736
+msgid "object does not exist"
+msgstr ""
 
 #: include/classes/api/services/CHostPrototype.php:836
 msgid "object does not exist or belongs to another object"

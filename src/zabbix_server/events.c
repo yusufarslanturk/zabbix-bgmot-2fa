@@ -1783,8 +1783,9 @@ void	zbx_export_events(int events_export_enabled, zbx_vector_connector_filter_t 
 
 	for (i = 0; i < events.values_num; i++)
 	{
-		DC_HOST		*host;
-		zbx_db_event	*event;
+		DC_HOST			*host;
+		zbx_db_event		*event;
+		zbx_vector_str_t	groups;
 
 		event = (zbx_db_event *)events.values[i];
 
@@ -1859,8 +1860,18 @@ void	zbx_export_events(int events_export_enabled, zbx_vector_connector_filter_t 
 
 		zbx_json_addarray(&json, ZBX_PROTO_TAG_GROUPS);
 
+		zbx_vector_str_create(&groups);
 		while (NULL != (row = zbx_db_fetch(result)))
-			zbx_json_addstring(&json, NULL, row[0], ZBX_JSON_TYPE_STRING);
+			zbx_vector_str_append(&groups, zbx_strdup(NULL, row[0]));
+
+		zbx_vector_str_sort(&groups, ZBX_DEFAULT_STR_COMPARE_FUNC);
+
+		for (j = 0; j < groups.values_num; j++)
+			zbx_json_addstring(&json, NULL, groups.values[j], ZBX_JSON_TYPE_STRING);
+
+		zbx_vector_str_clear_ext(&groups, zbx_str_free);
+		zbx_vector_str_destroy(&groups);
+
 		zbx_db_free_result(result);
 
 		zbx_json_close(&json);
@@ -2031,6 +2042,7 @@ static void	add_event_suppress_data(zbx_vector_ptr_t *event_refs, zbx_vector_uin
 		query = (zbx_event_suppress_query_t *)zbx_malloc(NULL, sizeof(zbx_event_suppress_query_t));
 		query->eventid = event->eventid;
 
+		zbx_vector_uint64_create(&query->hostids);
 		zbx_vector_uint64_create(&query->functionids);
 		zbx_db_trigger_get_all_functionids(&event->trigger, &query->functionids);
 

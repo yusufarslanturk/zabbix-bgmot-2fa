@@ -26,6 +26,6 @@
 int	get_value_internal(const DC_ITEM *item, AGENT_RESULT *result, const zbx_config_comms_args_t *config_comms,
 		int config_startup_time);
 
-int	zbx_get_value_internal_ext(const char *param1, const AGENT_REQUEST *request, AGENT_RESULT *result);
+int	zbx_get_value_internal_ext(const DC_ITEM *item, const char *param1, const AGENT_REQUEST *request, AGENT_RESULT *result);
 
 #endif

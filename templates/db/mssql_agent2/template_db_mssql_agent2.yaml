@@ -12,7 +12,17 @@ zabbix_export:
         
         Setup:
         
-        1. Deploy Zabbix agent 2 with the MSSQL plugin. You can use this template starting with Zabbix versions 6.0.26 / 6.4.11
+        1. Deploy Zabbix agent 2 with the MSSQL plugin. You can use this template starting with Zabbix versions 6.0.27 / 6.4.12.
+        
+          For more information, see MSSQL plugin documentation: https://git.zabbix.com/projects/AP/repos/mssql/browse?at=release%2F6.4
+          
+          Loadable plugin requires installation of one of the following:
+        
+          - Separate package: https://repo.zabbix.com/zabbix/6.4/
+          
+          - Binary file: https://cdn.zabbix.com/zabbix/binaries/stable/6.4/
+          
+          - Compilation from sources: https://www.zabbix.com/documentation/6.4/manual/extensions/plugins/build
         
         2. Create an MSSQL user for monitoring.
         
@@ -31,7 +41,7 @@ zabbix_export:
         
         4. Set the connection string for the MSSQL instance in the {$MSSQL.URI} macro as a URI, such as <protocol://host:port>, or specify the named session - <sessionname>.
         
-        The "Service's TCP port state" item uses the {HOST.CONN} and {$MSSQL.PORT} macros to check the availability of the MSSQL instance.
+        The "Service's TCP port state" item uses the {$MSSQL.HOST} and {$MSSQL.PORT} macros to check the availability of the MSSQL instance, change these if necessary.
         
         Note: You can use the context macros {$MSSQL.BACKUP_FULL.USED}, {$MSSQL.BACKUP_LOG.USED}, and {$MSSQL.BACKUP_DIFF.USED} to disable backup age triggers for a certain database. If set to a value other than "1", the trigger expression for the backup age will not fire.
         
@@ -1717,7 +1727,7 @@ zabbix_export:
               description: 'Zabbix has not received any data for items for the last 30 minutes.'
               dependencies:
                 - name: 'MSSQL: Service is unavailable'
-                  expression: 'last(/MSSQL by Zabbix agent 2/net.tcp.service[tcp,{HOST.CONN},{$MSSQL.PORT}])=0'
+                  expression: 'last(/MSSQL by Zabbix agent 2/net.tcp.service[tcp,{$MSSQL.HOST},{$MSSQL.PORT}])=0'
               tags:
                 - tag: scope
                   value: availability
@@ -1885,7 +1895,7 @@ zabbix_export:
         - uuid: 7fc4f1f9c3df45269972e617ce81f4b2
           name: 'MSSQL: Service''s TCP port state'
           type: SIMPLE
-          key: 'net.tcp.service[tcp,{HOST.CONN},{$MSSQL.PORT}]'
+          key: 'net.tcp.service[tcp,{$MSSQL.HOST},{$MSSQL.PORT}]'
           delay: 30s
           history: 7d
           description: 'Test the availability of MSSQL Server on a TCP port.'
@@ -1900,7 +1910,7 @@ zabbix_export:
               value: network
           triggers:
             - uuid: 2ea9eaf463144defbd85340a824f7986
-              expression: 'last(/MSSQL by Zabbix agent 2/net.tcp.service[tcp,{HOST.CONN},{$MSSQL.PORT}])=0'
+              expression: 'last(/MSSQL by Zabbix agent 2/net.tcp.service[tcp,{$MSSQL.HOST},{$MSSQL.PORT}])=0'
               name: 'MSSQL: Service is unavailable'
               priority: DISASTER
               description: 'The TCP port of the MSSQL Server service is currently unavailable.'
@@ -3999,6 +4009,9 @@ zabbix_export:
         - macro: '{$MSSQL.FREE_LIST_STALLS.MAX}'
           value: '2'
           description: 'The maximum free list stalls per second - for the trigger expression.'
+        - macro: '{$MSSQL.HOST}'
+          value: localhost
+          description: 'The hostname or IP address of the MSSQL instance.'
         - macro: '{$MSSQL.JOB.MATCHES}'
           value: '.*'
           description: 'This macro is used in job discovery. It can be overridden on the host or linked template level.'

@@ -211,6 +211,11 @@ class CControllerHostCreate extends CControllerHostUpdateGeneral {
 			return false;
 		}
 
+		$dst_host['interfaces'] = API::HostInterface()->get([
+			'output' => ['interfaceid', 'main', 'type', 'useip', 'ip', 'dns', 'port', 'details'],
+			'hostids' => [$dst_host['hostid']]
+		]);
+
 		if (!copyItemsToHosts('hostids', [$src_hostid], [$dst_host['hostid'] => $dst_host])) {
 			return false;
 		}

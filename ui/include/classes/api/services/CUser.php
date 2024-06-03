@@ -338,13 +338,9 @@ class CUser extends CApiService {
 				$this->checkPassword($user, '/'.($i + 1).'/passwd');
 			}
 
-			/*
-			 * If user is created without a password (e.g. for GROUP_GUI_ACCESS_LDAP), store an empty string
-			 * as his password in database.
-			 */
-			$user['passwd'] = array_key_exists('passwd', $user)
-				? password_hash($user['passwd'], PASSWORD_BCRYPT, ['cost' => ZBX_BCRYPT_COST])
-				: '';
+			if (array_key_exists('passwd', $user)) {
+				$user['passwd'] = password_hash($user['passwd'], PASSWORD_BCRYPT, ['cost' => ZBX_BCRYPT_COST]);
+			}
 		}
 		unset($user);
 
@@ -359,7 +355,8 @@ class CUser extends CApiService {
 		}
 
 		$this->checkUserdirectories($users);
-		$this->checkUserGroups($users, []);
+		$this->checkUserGroups($users, $db_user_groups);
+		self::checkEmptyPassword($users, $db_user_groups);
 		$db_mediatypes = $this->checkMediaTypes($users);
 		$this->validateMediaRecipients($users, $db_mediatypes);
 	}
@@ -556,7 +553,8 @@ class CUser extends CApiService {
 		}
 
 		$this->checkUserdirectories($users);
-		$this->checkUserGroups($users, $db_users);
+		$this->checkUserGroups($users, $db_user_groups);
+		self::checkEmptyPassword($users, $db_user_groups, $db_users);
 		$db_mediatypes = $this->checkMediaTypes($users);
 		$this->validateMediaRecipients($users, $db_mediatypes);
 		$this->checkHimself($users);
@@ -606,7 +604,8 @@ class CUser extends CApiService {
 		$userids = ['usrgrps' => [], 'medias' => []];
 
 		foreach ($users as $user) {
-			if (array_key_exists('usrgrps', $user)) {
+			if (array_key_exists('usrgrps', $user)
+					|| self::emptyPasswordCheckRequired($user, $db_users[$user['userid']])) {
 				$userids['usrgrps'][] = $user['userid'];
 				$db_users[$user['userid']]['usrgrps'] = [];
 			}
@@ -617,14 +616,19 @@ class CUser extends CApiService {
 			}
 		}
 
-		if ($userids['usrgrps']) {
-			$options = [
-				'output' => ['id', 'usrgrpid', 'userid'],
-				'filter' => ['userid' => $userids['usrgrps']]
-			];
-			$db_usrgrps = DBselect(DB::makeSql('users_groups', $options));
+		if (!$userids) {
+			return;
+		}
 
-			while ($db_usrgrp = DBfetch($db_usrgrps)) {
+		if ($userids['usrgrps']) {
+			$result = DBselect(
+				'SELECT ug.id,ug.usrgrpid,ug.userid,g.gui_access'.
+				' FROM users_groups ug,usrgrp g'.
+				' WHERE ug.usrgrpid=g.usrgrpid'.
+					' AND '.dbConditionId('ug.userid', $userids['usrgrps'])
+			);
+
+			while ($db_usrgrp = DBfetch($result)) {
 				$db_users[$db_usrgrp['userid']]['usrgrps'][$db_usrgrp['id']] =
 					array_diff_key($db_usrgrp, array_flip(['userid']));
 			}
@@ -642,6 +646,10 @@ class CUser extends CApiService {
 					array_diff_key($db_media, array_flip(['userid']));
 			}
 		}
+	}
+
+	private static function emptyPasswordCheckRequired(array $user, array $db_user): bool {
+		return !array_key_exists('passwd', $user) && $db_user['passwd'] === '';
 	}
 
 	/**
@@ -695,67 +703,125 @@ class CUser extends CApiService {
 		}
 	}
 
-	/**
-	 * Check for valid user groups.
-	 * Check is it allowed to have 'password' field empty.
-	 *
-	 * @param array $users
-	 * @param int   $users[]['userid']          (optional)
-	 * @param array $users[]['passwd']          (optional)
-	 * @param array $users[]['usrgrps']         (optional)
-	 * @param int   $users[]['userdirectoryid]  (optional)
-	 * @param array $db_users
-	 * @param array $db_users[]['passwd']
-	 * @param int   $db_users[]['userdirectoryid']
-	 *
-	 * @throws APIException  if user groups is not exists.
-	 */
-	private function checkUserGroups(array $users, array $db_users) {
-		$usrgrpids = [];
-		$db_usrgrps = [];
+	private function checkUserGroups(array $users, array &$db_user_groups = null): void {
+		$user_group_indexes = [];
 
-		foreach ($users as $user) {
-			if (array_key_exists('usrgrps', $user)) {
-				foreach ($user['usrgrps'] as $usrgrp) {
-					$usrgrpids[$usrgrp['usrgrpid']] = true;
-				}
+		foreach ($users as $i1 => $user) {
+			if (!array_key_exists('usrgrps', $user)) {
+				continue;
+			}
+
+			foreach ($user['usrgrps'] as $i2 => $user_group) {
+				$user_group_indexes[$user_group['usrgrpid']][$i1] = $i2;
 			}
 		}
 
-		if ($usrgrpids) {
-			$usrgrpids = array_keys($usrgrpids);
-
-			$db_usrgrps = DB::select('usrgrp', [
-				'output' => ['gui_access'],
-				'usrgrpids' => $usrgrpids,
-				'preservekeys' => true
-			]);
-
-			foreach ($usrgrpids as $usrgrpid) {
-				if (!array_key_exists($usrgrpid, $db_usrgrps)) {
-					self::exception(ZBX_API_ERROR_PARAMETERS, _s('User group with ID "%1$s" is not available.', $usrgrpid));
-				}
-			}
+		if (!$user_group_indexes) {
+			return;
 		}
 
-		foreach ($users as $user) {
-			if (array_key_exists('userid', $user) && array_key_exists($user['userid'], $db_users)) {
-				$user += $db_users[$user['userid']];
-			}
-			else {
-				$user += ['userdirectoryid' => 0, 'passwd' => ''];
-			}
+		$db_user_groups = DB::select('usrgrp', [
+			'output' => ['gui_access'],
+			'usrgrpids' => array_keys($user_group_indexes),
+			'preservekeys' => true
+		]);
 
-			/**
-			 * Do not allow empty password for users with GROUP_GUI_ACCESS_INTERNAL except provisioned users.
-			 * Only groups passed in 'usrgrps' property will be checked for frontend access.
-			 */
-			if ($user['passwd'] === '' && self::hasInternalAuth($user, $db_usrgrps)) {
+		foreach ($user_group_indexes as $usrgrpid => $indexes) {
+			if (!array_key_exists($usrgrpid, $db_user_groups)) {
+				$i1 = key($indexes);
+				$i2 = $indexes[$i1];
+
 				self::exception(ZBX_API_ERROR_PARAMETERS,
-					_s('Incorrect value for field "%1$s": %2$s.', 'passwd', _('cannot be empty'))
+					_s('Invalid parameter "%1$s": %2$s.', '/'.($i1 + 1).'/usrgrps/'.($i2 + 1),
+						_('object does not exist')
+					)
 				);
 			}
 		}
+	}
+
+	private static function checkEmptyPassword(array $users, ?array $db_user_groups, array $db_users = null): void {
+		foreach ($users as $i => $user) {
+			$check = false;
+
+			if ($db_users === null) {
+				if (!array_key_exists('passwd', $user)
+						&& (!array_key_exists('userdirectoryid', $user) || $user['userdirectoryid'] == 0)) {
+					$check = true;
+				}
+			}
+			else {
+				$db_user = $db_users[$user['userid']];
+
+				if (!array_key_exists('passwd', $user) && $db_user['passwd'] === ''
+						&& ((!array_key_exists('userdirectoryid', $user) && $db_user['userdirectoryid'] == 0)
+							|| (array_key_exists('userdirectoryid', $user) && $user['userdirectoryid'] == 0))) {
+					$userdirectory_changed = array_key_exists('userdirectoryid', $user)
+						&& bccomp($user['userdirectoryid'], $db_user['userdirectoryid']) != 0;
+
+					$user_groups_changed = array_key_exists('usrgrps', $user)
+						&& self::userGroupsChanged($user, $db_user);
+
+					$user_groups_empty = array_key_exists('usrgrps', $user) ? !$user['usrgrps'] : !$db_user['usrgrps'];
+
+					if (!$userdirectory_changed && !$user_groups_changed && !$user_groups_empty) {
+						continue;
+					}
+
+					$check = true;
+				}
+			}
+
+			if (!$check) {
+				unset($users[$i]);
+			}
+		}
+
+		if (!$users) {
+			return;
+		}
+
+		foreach ($users as $i => $user) {
+			$gui_access = GROUP_GUI_ACCESS_SYSTEM;
+
+			if (array_key_exists('usrgrps', $user)) {
+				foreach ($user['usrgrps'] as $user_group) {
+					if ($db_user_groups[$user_group['usrgrpid']]['gui_access'] > $gui_access) {
+						$gui_access = $db_user_groups[$user_group['usrgrpid']]['gui_access'];
+					}
+				}
+			}
+			elseif ($db_users !== null) {
+				foreach ($db_users[$user['userid']]['usrgrps'] as $db_user_group) {
+					if ($db_user_group['gui_access'] > $gui_access) {
+						$gui_access = $db_user_group['gui_access'];
+					}
+				}
+			}
+
+			if ($gui_access != GROUP_GUI_ACCESS_DISABLED
+					&& self::getAuthTypeByGuiAccess($gui_access) == ZBX_AUTH_INTERNAL) {
+				if ($db_users === null) {
+					$username = $user['username'];
+				}
+				else {
+					$username = array_key_exists('username', $user)
+						? $user['username']
+						: $db_users[$user['userid']]['username'];
+				}
+
+				self::exception(ZBX_API_ERROR_PARAMETERS,
+					_s('User "%1$s" must have a password, because internal authentication is in effect.', $username)
+				);
+			}
+		}
+	}
+
+	private static function userGroupsChanged(array $user, array $db_user): bool {
+		$usrgrpids = array_column($user['usrgrps'], 'usrgrpid');
+		$db_usrgrpids = array_column($db_user['usrgrps'], 'usrgrpid');
+
+		return array_diff($usrgrpids, $db_usrgrpids) || array_diff($db_usrgrpids, $usrgrpids);
 	}
 
 	/**
@@ -792,47 +858,6 @@ class CUser extends CApiService {
 				self::exception(ZBX_API_ERROR_PARAMETERS, _s('User role with ID "%1$s" is not available.', $roleid));
 			}
 		}
-	}
-
-	/**
-	 * Check does the user belong to at least one group with GROUP_GUI_ACCESS_INTERNAL frontend access.
-	 * Check does the user belong to at least one group with GROUP_GUI_ACCESS_SYSTEM when default frontend access
-	 * is set to GROUP_GUI_ACCESS_INTERNAL.
-	 * If user is without user groups default frontend access method is checked.
-	 *
-	 * @param array  $user
-	 * @param int    $user['userdirectoryid']
-	 * @param array  $user['usrgrps']                     (optional)
-	 * @param string $user['usrgrps'][]['usrgrpid']
-	 * @param array  $db_usrgrps
-	 * @param int    $db_usrgrps[usrgrpid]['gui_access']
-	 *
-	 * @return bool
-	 */
-	private static function hasInternalAuth($user, $db_usrgrps) {
-		if ($user['userdirectoryid']) {
-			return false;
-		}
-
-		$system_gui_access =
-			(CAuthenticationHelper::get(CAuthenticationHelper::AUTHENTICATION_TYPE) == ZBX_AUTH_INTERNAL)
-				? GROUP_GUI_ACCESS_INTERNAL
-				: GROUP_GUI_ACCESS_LDAP;
-
-		if (!array_key_exists('usrgrps', $user) || !$user['usrgrps']) {
-			return $system_gui_access == GROUP_GUI_ACCESS_INTERNAL;
-		}
-
-		foreach($user['usrgrps'] as $usrgrp) {
-			$gui_access = (int) $db_usrgrps[$usrgrp['usrgrpid']]['gui_access'];
-			$gui_access = ($gui_access == GROUP_GUI_ACCESS_SYSTEM) ? $system_gui_access : $gui_access;
-
-			if ($gui_access == GROUP_GUI_ACCESS_INTERNAL) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	/**
@@ -1630,16 +1655,13 @@ class CUser extends CApiService {
 	 */
 	private static function getAuthTypeByGuiAccess(int $gui_access): int {
 		if ($gui_access == GROUP_GUI_ACCESS_INTERNAL) {
-			$auth_type = ZBX_AUTH_INTERNAL;
+			return ZBX_AUTH_INTERNAL;
 		}
 		elseif ($gui_access == GROUP_GUI_ACCESS_LDAP) {
-			$auth_type = ZBX_AUTH_LDAP;
-		}
-		else {
-			$auth_type = CAuthenticationHelper::getPublic(CAuthenticationHelper::AUTHENTICATION_TYPE);
+			return ZBX_AUTH_LDAP;
 		}
 
-		return $auth_type;
+		return CAuthenticationHelper::getPublic(CAuthenticationHelper::AUTHENTICATION_TYPE);
 	}
 
 	private function tryToCreateLdapProvisionedUser(array $data, array &$db_users): bool {
@@ -1746,8 +1768,9 @@ class CUser extends CApiService {
 			if (array_key_exists(0, $userdirectoryids)) {
 				unset($userdirectoryids[0]);
 
-				if (CAuthenticationHelper::get(CAuthenticationHelper::LDAP_USERDIRECTORYID) != 0) {
-					$userdirectoryids[CAuthenticationHelper::get(CAuthenticationHelper::LDAP_USERDIRECTORYID)] = true;
+				if (CAuthenticationHelper::getPublic(CAuthenticationHelper::LDAP_USERDIRECTORYID) != 0) {
+					$userdirectoryids[CAuthenticationHelper::getPublic(CAuthenticationHelper::LDAP_USERDIRECTORYID)] =
+						true;
 				}
 			}
 

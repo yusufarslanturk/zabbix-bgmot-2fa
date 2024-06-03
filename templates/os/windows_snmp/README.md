@@ -3,7 +3,33 @@
 
 ## Overview
 
-This template is designed for the effortless deployment of Windows monitoring by Zabbix via SNMP and doesn't require any external scripts.
+This is an official Windows template. It requires an SNMP client.
+
+MIBs used:
+- HOST-RESOURCES-MIB
+- SNMPv2-MIB
+- IF-MIB
+
+### Known Issues
+
+- 64-bit I/O is not supported even though `IfxTable` is present.
+  Currently, Windows gets its interface status from MIB-2. Since these 64-bit SNMP counters (`ifHCInOctets`, `ifHCOutOctets`, etc.) are defined as an extension to IF-MIB, Microsoft has not implemented it.
+  https://social.technet.microsoft.com/Forums/windowsserver/en-US/07b62ff0-94f6-40ca-a99d-d129c1b33d70/windows-2008-r2-snmp-64bit-counters-support?forum=winservergen
+  - version: Win2008, Win2012R2.
+- `ifXTable` is not supported.
+  - version: WindowsXP
+- EtherLike MIB is not supported
+  - version: any
+- HOST-RESOURCES-MIB::hrStorageSize is limited to number 2147483647.
+  Storage size is calculated using: `hrStorageSize` and `hrStorageAllocationUnits`.
+  An allocation size of 512 bytes, sets the limit of monitored device to 1TB.
+  |hrStorageAllocationUnits|Max size (TB)|
+  |---|---|
+  |512 bytes|1|
+  |1024 bytes|2|
+  |2048 bytes|4|
+  |64 KB|128|
+  - version: any
 
 ## Requirements
 
@@ -29,20 +55,18 @@ Refer to the vendor documentation.
 |{$SNMP.TIMEOUT}||`5m`|
 |{$ICMP_LOSS_WARN}||`20`|
 |{$ICMP_RESPONSE_TIME_WARN}||`0.15`|
-|{$VFS.FS.FSNAME.NOT_MATCHES}|<p>This macro is used in filesystems discovery. Can be overridden on the host or linked template level.</p>|`^(/dev\|/sys\|/run\|/proc\|.+/shm$)`|
-|{$VFS.FS.FSNAME.MATCHES}|<p>This macro is used in filesystems discovery. Can be overridden on the host or linked template level.</p>|`.+`|
-|{$VFS.FS.FSTYPE.NOT_MATCHES}|<p>This macro is used in filesystems discovery. Can be overridden on the host or linked template level.</p>|`CHANGE_IF_NEEDED`|
-|{$VFS.FS.FSTYPE.MATCHES}|<p>This macro is used in filesystems discovery. Can be overridden on the host or linked template level.</p>|`.*(\.4\|\.9\|hrStorageFixedDisk\|hrStorageFlashMemory)$`|
-|{$VFS.FS.FREE.MIN.CRIT}|<p>The critical threshold of the filesystem utilization.</p>|`5G`|
-|{$VFS.FS.FREE.MIN.WARN}|<p>The warning threshold of the filesystem utilization.</p>|`10G`|
-|{$VFS.FS.PUSED.MAX.CRIT}||`90`|
-|{$VFS.FS.PUSED.MAX.WARN}||`80`|
+|{$VFS.FS.FSNAME.NOT_MATCHES}|<p>Used in filesystem discovery. Can be overridden on the host or linked template level.</p>|`^(/dev\|/sys\|/run\|/proc\|.+/shm$)`|
+|{$VFS.FS.FSNAME.MATCHES}|<p>Used in filesystem discovery. Can be overridden on the host or linked template level.</p>|`.+`|
+|{$VFS.FS.FSTYPE.NOT_MATCHES}|<p>Used in filesystem discovery. Can be overridden on the host or linked template level.</p>|`CHANGE_IF_NEEDED`|
+|{$VFS.FS.FSTYPE.MATCHES}|<p>Used in filesystem discovery. Can be overridden on the host or linked template level.</p>|`.*(\.4\|\.9\|hrStorageFixedDisk\|hrStorageFlashMemory)$`|
+|{$VFS.FS.PUSED.MAX.CRIT}|<p>The critical threshold of the filesystem utilization.</p>|`90`|
+|{$VFS.FS.PUSED.MAX.WARN}|<p>The warning threshold of the filesystem utilization.</p>|`80`|
 |{$MEMORY.UTIL.MAX}|<p>The warning threshold of the "Physical memory: Memory utilization" item.</p>|`90`|
-|{$MEMORY.TYPE.NOT_MATCHES}|<p>This macro is used in memory discovery. Can be overridden on the host or linked template level if you need to filter out results.</p>|`CHANGE_IF_NEEDED`|
-|{$MEMORY.TYPE.MATCHES}|<p>This macro is used in memory discovery. Can be overridden on the host or linked template level.</p>|`.*(\.2\|hrStorageRam)$`|
-|{$MEMORY.NAME.MATCHES}|<p>This macro is used in memory discovery. Can be overridden on the host or linked template level.</p>|`.*`|
-|{$MEMORY.NAME.NOT_MATCHES}|<p>This macro is used in memory discovery. Can be overridden on the host or linked template level if you need to filter out results.</p>|`CHANGE_IF_NEEDED`|
-|{$CPU.UTIL.CRIT}||`90`|
+|{$MEMORY.TYPE.NOT_MATCHES}|<p>Used in memory discovery. Can be overridden on the host or linked template level if you need to filter out results.</p>|`CHANGE_IF_NEEDED`|
+|{$MEMORY.TYPE.MATCHES}|<p>Used in memory discovery. Can be overridden on the host or linked template level.</p>|`.*(\.2\|hrStorageRam)$`|
+|{$MEMORY.NAME.MATCHES}|<p>Used in memory discovery. Can be overridden on the host or linked template level.</p>|`.*`|
+|{$MEMORY.NAME.NOT_MATCHES}|<p>Used in memory discovery. Can be overridden on the host or linked template level if you need to filter out results.</p>|`CHANGE_IF_NEEDED`|
+|{$CPU.UTIL.CRIT}|<p>Critical threshold of CPU utilization expressed in %.</p>|`90`|
 |{$IFCONTROL}||`1`|
 |{$NET.IF.IFNAME.MATCHES}||`^.*$`|
 |{$NET.IF.IFNAME.NOT_MATCHES}|<p>Filter out loopbacks, nulls, docker veth links and docker0 bridge by default</p>|`Macro too long. Please see the template.`|
@@ -75,7 +99,7 @@ Refer to the vendor documentation.
 |Windows: ICMP ping||Simple check|icmpping|
 |Windows: ICMP loss||Simple check|icmppingloss|
 |Windows: ICMP response time||Simple check|icmppingsec|
-|Windows: SNMP walk mounted filesystems|<p>HOST-RESOURCES-MIB::hrStorage discovery.</p>|SNMP agent|vfs.fs.walk|
+|Windows: SNMP walk mounted filesystems|<p>HOST-RESOURCES-MIB::hrStorage discovery.</p>|SNMP agent|vfs.fs.walk<p>**Preprocessing**</p><ul><li><p>SNMP walk to JSON</p></li></ul>|
 |Windows: CPU utilization|<p>MIB: HOST-RESOURCES-MIB</p><p>The average, over the last minute, of the percentage of time that processors was not idle.</p><p>Implementations may approximate this one minute smoothing period if necessary.</p>|SNMP agent|system.cpu.util<p>**Preprocessing**</p><ul><li><p>JSON Path: `$..['{#CPU.UTIL}'].avg()`</p></li></ul>|
 |Windows: SNMP walk network interfaces|<p>Discovering interfaces from IF-MIB.</p>|SNMP agent|net.if.walk|
 
@@ -89,48 +113,50 @@ Refer to the vendor documentation.
 |Windows: Unavailable by ICMP ping|<p>Last three attempts returned timeout.  Please check device connectivity.</p>|`max(/Windows by SNMP/icmpping,#3)=0`|High||
 |Windows: High ICMP ping loss||`min(/Windows by SNMP/icmppingloss,5m)>{$ICMP_LOSS_WARN} and min(/Windows by SNMP/icmppingloss,5m)<100`|Warning|**Depends on**:<br><ul><li>Windows: Unavailable by ICMP ping</li></ul>|
 |Windows: High ICMP ping response time||`avg(/Windows by SNMP/icmppingsec,5m)>{$ICMP_RESPONSE_TIME_WARN}`|Warning|**Depends on**:<br><ul><li>Windows: High ICMP ping loss</li><li>Windows: Unavailable by ICMP ping</li></ul>|
-|Windows: High CPU utilization|<p>The CPU utilization is too high. The system might be slow to respond.</p>|`min(/Windows by SNMP/system.cpu.util,5m)>{$CPU.UTIL.CRIT}`|Warning||
+|Windows: High CPU utilization|<p>CPU utilization is too high. The system might be slow to respond.</p>|`min(/Windows by SNMP/system.cpu.util,5m)>{$CPU.UTIL.CRIT}`|Warning||
 
-### LLD rule Storage discovery
-
-|Name|Description|Type|Key and additional info|
-|----|-----------|----|-----------------------|
-|Storage discovery|<p>HOST-RESOURCES-MIB::hrStorage discovery with storage filter.</p>|Dependent item|vfs.fs.discovery[snmp]<p>**Preprocessing**</p><ul><li><p>SNMP walk to JSON</p></li><li><p>Discard unchanged with heartbeat: `1h`</p></li></ul>|
-
-### Item prototypes for Storage discovery
+### LLD rule Mounted filesystem discovery
 
 |Name|Description|Type|Key and additional info|
 |----|-----------|----|-----------------------|
-|{#FSNAME}: Used space|<p>MIB: HOST-RESOURCES-MIB</p><p>The amount of the storage represented by this entry that is allocated, in units of hrStorageAllocationUnits.</p>|Dependent item|vfs.fs.used[hrStorageUsed.{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>SNMP walk value: `1.3.6.1.2.1.25.2.3.1.6.{#SNMPINDEX}`</p></li><li><p>Custom multiplier: `{#ALLOC_UNITS}`</p></li></ul>|
-|{#FSNAME}: Total space|<p>MIB: HOST-RESOURCES-MIB</p><p>The size of the storage represented by this entry, in units of hrStorageAllocationUnits.</p><p>This object is writable to allow remote configuration of the size of the storage area in those cases where such an operation makes sense and is possible on the underlying system.</p><p>For example, the amount of main storage allocated to a buffer pool might be modified or the amount of disk space allocated to virtual storage might be modified.</p>|Dependent item|vfs.fs.total[hrStorageSize.{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>SNMP walk value: `1.3.6.1.2.1.25.2.3.1.5.{#SNMPINDEX}`</p></li><li><p>Custom multiplier: `{#ALLOC_UNITS}`</p></li></ul>|
-|{#FSNAME}: Space utilization|<p>The space utilization expressed in % for {#FSNAME}.</p>|Calculated|vfs.fs.pused[storageUsedPercentage.{#SNMPINDEX}]|
+|Mounted filesystem discovery|<p>HOST-RESOURCES-MIB::hrStorage discovery with storage filter.</p>|Dependent item|vfs.fs.discovery[snmp]<p>**Preprocessing**</p><ul><li><p>JavaScript: `The text is too long. Please see the template.`</p></li><li><p>Discard unchanged with heartbeat: `1h`</p></li></ul>|
 
-### Trigger prototypes for Storage discovery
+### Item prototypes for Mounted filesystem discovery
+
+|Name|Description|Type|Key and additional info|
+|----|-----------|----|-----------------------|
+|FS [{#FSNAME}]: Get data|<p>HOST-RESOURCES-MIB::hrStorage.</p><p>Intermediate data for subsequent processing.</p>|Dependent item|vfs.fs.walk.data[hrStorage.{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>JavaScript: `The text is too long. Please see the template.`</p></li></ul>|
+|FS [{#FSNAME}]: Space: Used|<p>MIB: HOST-RESOURCES-MIB</p><p>The amount of the storage represented by this entry that is allocated, in units of hrStorageAllocationUnits.</p>|Dependent item|vfs.fs.used[hrStorageUsed.{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>JSON Path: `$.hrStorageUsed`</p></li><li><p>Custom multiplier: `{#ALLOC_UNITS}`</p></li></ul>|
+|FS [{#FSNAME}]: Space: Total|<p>MIB: HOST-RESOURCES-MIB</p><p>The size of the storage represented by this entry, in units of hrStorageAllocationUnits.</p><p>This object is writable to allow remote configuration of the size of the storage area in those cases where such an operation makes sense and is possible on the underlying system.</p><p>For example, the amount of main storage allocated to a buffer pool might be modified or the amount of disk space allocated to virtual storage might be modified.</p>|Dependent item|vfs.fs.total[hrStorageSize.{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>JSON Path: `$.hrStorageSize`</p></li><li><p>Custom multiplier: `{#ALLOC_UNITS}`</p></li></ul>|
+|FS [{#FSNAME}]: Space: Used, in %|<p>The space utilization expressed in % for {#FSNAME}.</p>|Dependent item|vfs.fs.pused[{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>JavaScript: `The text is too long. Please see the template.`</p></li></ul>|
+
+### Trigger prototypes for Mounted filesystem discovery
 
 |Name|Description|Expression|Severity|Dependencies and additional info|
 |----|-----------|----------|--------|--------------------------------|
-|{#FSNAME}: Disk space is critically low|<p>Two conditions should match:<br>1. The first condition - utilization of the space should be above `{$VFS.FS.PUSED.MAX.CRIT:"{#FSNAME}"}`.<br>2. The second condition should be one of the following:<br>- the disk free space is less than `{$VFS.FS.FREE.MIN.CRIT:"{#FSNAME}"}`;<br>- the disk will be full in less than 24 hours.</p>|`last(/Windows by SNMP/vfs.fs.pused[storageUsedPercentage.{#SNMPINDEX}])>{$VFS.FS.PUSED.MAX.CRIT:"{#FSNAME}"} and ((last(/Windows by SNMP/vfs.fs.total[hrStorageSize.{#SNMPINDEX}])-last(/Windows by SNMP/vfs.fs.used[hrStorageUsed.{#SNMPINDEX}]))<{$VFS.FS.FREE.MIN.CRIT:"{#FSNAME}"} or timeleft(/Windows by SNMP/vfs.fs.pused[storageUsedPercentage.{#SNMPINDEX}],1h,100)<1d)`|Average|**Manual close**: Yes|
-|{#FSNAME}: Disk space is low|<p>Two conditions should match:<br>1. The first condition - utilization of the space should be above `{$VFS.FS.PUSED.MAX.WARN:"{#FSNAME}"}`.<br>2. The second condition should be one of the following:<br>- the disk free space is less than `{$VFS.FS.FREE.MIN.WARN:"{#FSNAME}"}`;<br>- the disk will be full in less than 24 hours.</p>|`last(/Windows by SNMP/vfs.fs.pused[storageUsedPercentage.{#SNMPINDEX}])>{$VFS.FS.PUSED.MAX.WARN:"{#FSNAME}"} and ((last(/Windows by SNMP/vfs.fs.total[hrStorageSize.{#SNMPINDEX}])-last(/Windows by SNMP/vfs.fs.used[hrStorageUsed.{#SNMPINDEX}]))<{$VFS.FS.FREE.MIN.WARN:"{#FSNAME}"} or timeleft(/Windows by SNMP/vfs.fs.pused[storageUsedPercentage.{#SNMPINDEX}],1h,100)<1d)`|Warning|**Manual close**: Yes<br>**Depends on**:<br><ul><li>{#FSNAME}: Disk space is critically low</li></ul>|
+|FS [{#FSNAME}]: Space is critically low|<p>The storage space usage exceeds the '{$VFS.FS.PUSED.MAX.CRIT:"{#FSNAME}"}%' limit.</p>|`min(/Windows by SNMP/vfs.fs.pused[{#SNMPINDEX}],5m)>{$VFS.FS.PUSED.MAX.CRIT:"{#FSNAME}"}`|Average|**Manual close**: Yes|
+|FS [{#FSNAME}]: Space is low|<p>The storage space usage exceeds the '{$VFS.FS.PUSED.MAX.WARN:"{#FSNAME}"}%' limit.</p>|`min(/Windows by SNMP/vfs.fs.pused[{#SNMPINDEX}],5m)>{$VFS.FS.PUSED.MAX.WARN:"{#FSNAME}"}`|Warning|**Manual close**: Yes<br>**Depends on**:<br><ul><li>FS [{#FSNAME}]: Space is critically low</li></ul>|
 
 ### LLD rule Memory discovery
 
 |Name|Description|Type|Key and additional info|
 |----|-----------|----|-----------------------|
-|Memory discovery|<p>HOST-RESOURCES-MIB::hrStorage discovery with memory filter</p>|Dependent item|vm.memory.discovery<p>**Preprocessing**</p><ul><li><p>SNMP walk to JSON</p></li><li><p>Discard unchanged with heartbeat: `1h`</p></li></ul>|
+|Memory discovery|<p>HOST-RESOURCES-MIB::hrStorage discovery with memory filter</p>|Dependent item|vm.memory.discovery<p>**Preprocessing**</p><ul><li><p>JavaScript: `The text is too long. Please see the template.`</p></li><li><p>Discard unchanged with heartbeat: `1h`</p></li></ul>|
 
 ### Item prototypes for Memory discovery
 
 |Name|Description|Type|Key and additional info|
 |----|-----------|----|-----------------------|
-|{#MEMNAME}: Used memory|<p>MIB: HOST-RESOURCES-MIB</p><p>The amount of the storage represented by this entry that is allocated, in units of hrStorageAllocationUnits.</p>|Dependent item|vm.memory.used[hrStorageUsed.{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>SNMP walk value: `1.3.6.1.2.1.25.2.3.1.6.{#SNMPINDEX}`</p></li><li><p>Custom multiplier: `{#ALLOC_UNITS}`</p></li></ul>|
-|{#MEMNAME}: Total memory|<p>MIB: HOST-RESOURCES-MIB</p><p>The size of the storage represented by this entry, in units of hrStorageAllocationUnits.</p><p>This object is writable to allow remote configuration of the size of the storage area in those cases where such an operation makes sense and is possible on the underlying system.</p><p>For example, the amount of main memory allocated to a buffer pool might be modified or the amount of disk space allocated to virtual memory might be modified.</p>|Dependent item|vm.memory.total[hrStorageSize.{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>SNMP walk value: `1.3.6.1.2.1.25.2.3.1.5.{#SNMPINDEX}`</p></li><li><p>Custom multiplier: `{#ALLOC_UNITS}`</p></li></ul>|
-|{#MEMNAME}: Memory utilization|<p>Memory utilization in %.</p>|Calculated|vm.memory.util[memoryUsedPercentage.{#SNMPINDEX}]|
+|{#MEMNAME}: Get data|<p>MIB: HOST-RESOURCES-MIB</p><p>The amount of the storage represented by this entry that is allocated, in units of hrStorageAllocationUnits.</p>|Dependent item|vm.memory.data[{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>JavaScript: `The text is too long. Please see the template.`</p></li></ul>|
+|{#MEMNAME}: Used|<p>MIB: HOST-RESOURCES-MIB</p><p>The amount of the storage represented by this entry that is allocated, in units of hrStorageAllocationUnits.</p>|Dependent item|vm.memory.used[hrStorageUsed.{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>JSON Path: `$.hrStorageUsed`</p></li><li><p>Custom multiplier: `{#ALLOC_UNITS}`</p></li></ul>|
+|{#MEMNAME}: Total|<p>MIB: HOST-RESOURCES-MIB</p><p>The size of the storage represented by this entry, in units of hrStorageAllocationUnits.</p><p>This object is writable to allow remote configuration of the size of the storage area in those cases where such an operation makes sense and is possible on the underlying system.</p><p>For example, the amount of main memory allocated to a buffer pool might be modified or the amount of disk space allocated to virtual memory might be modified.</p>|Dependent item|vm.memory.walk.data.total[hrStorageSize.{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>JSON Path: `$.hrStorageSize`</p></li><li><p>Custom multiplier: `{#ALLOC_UNITS}`</p></li></ul>|
+|{#MEMNAME}: Utilization|<p>Memory utilization in %.</p>|Dependent item|vm.memory.util[{#SNMPINDEX}]<p>**Preprocessing**</p><ul><li><p>JavaScript: `The text is too long. Please see the template.`</p></li></ul>|
 
 ### Trigger prototypes for Memory discovery
 
 |Name|Description|Expression|Severity|Dependencies and additional info|
 |----|-----------|----------|--------|--------------------------------|
-|{#MEMNAME}: High memory utilization|<p>The system is running out of free memory.</p>|`min(/Windows by SNMP/vm.memory.util[memoryUsedPercentage.{#SNMPINDEX}],5m)>{$MEMORY.UTIL.MAX}`|Average||
+|{#MEMNAME}: High memory utilization|<p>The system is running out of free memory.</p>|`min(/Windows by SNMP/vm.memory.util[{#SNMPINDEX}],5m)>{$MEMORY.UTIL.MAX}`|Average||
 
 ### LLD rule Network interfaces discovery
 

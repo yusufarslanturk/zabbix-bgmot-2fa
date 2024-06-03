@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-03-21 19:26+0000\n"
+"PO-Revision-Date: 2024-05-27 00:24+0000\n"
 "Last-Translator: Vicente Salvador <vicentesalvadorcubedo@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: es\n"
@@ -672,7 +672,6 @@ msgid "Action class %1$s must extend %2$s class."
 msgstr "La clase de acción %1$s debe extender la clase %2$s."
 
 #: app/controllers/CControllerActionDelete.php:79
-#, fuzzy
 msgid "Action deleted"
 msgid_plural "Actions deleted"
 msgstr[0] "Acción eliminada"
@@ -2417,7 +2416,6 @@ msgid "Cannot delete Zabbix internal user \"%1$s\", try disabling that user."
 msgstr "No se puede borrar el usuario \"%1$s\", prueba deshabilitandolo primero."
 
 #: app/controllers/CControllerActionDelete.php:87
-#, fuzzy
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
 msgstr[0] "No es posible eliminar la acción"
@@ -3785,7 +3783,7 @@ msgstr[1] "No se pudieron actualizar los prototipos de métrica"
 
 #: app/controllers/CControllerPopupMassupdateItem.php:270
 msgid "Cannot update item prototypes"
-msgstr "No se pueden actualizar los prototipos de artículos"
+msgstr "No se pueden actualizar los prototipos de métricas"
 
 #: app/controllers/CControllerPopupMassupdateItem.php:270
 msgid "Cannot update items"
@@ -5140,7 +5138,7 @@ msgstr "¿Crear métricas a partir de prototipos seleccionados como deshabilitad
 
 #: include/views/configuration.item.prototype.list.php:206
 msgid "Create items from selected prototypes as enabled?"
-msgstr "¿Crear métricas a partir de prototipos seleccionados como habilitadas?"
+msgstr "¿Crear métricas a partir de prototipos seleccionados como habilitados?"
 
 #: app/views/maintenance.list.php:152
 msgid "Create maintenance period"
@@ -5395,6 +5393,10 @@ msgstr "Nombre DNS"
 #: include/classes/helpers/CSlaHelper.php:39 report4.php:90
 msgid "Daily"
 msgstr "Diario"
+
+#: include/locales.inc.php:40
+msgid "Danish (da_DK)"
+msgstr ""
 
 #: include/classes/core/ZBase.php:380
 msgid "Dark"
@@ -6506,11 +6508,11 @@ msgstr "Crítica"
 
 #: include/items.inc.php:1951
 msgid "Discard unchanged"
-msgstr "Descartar no modificados"
+msgstr "Descartar sin cambios"
 
 #: include/items.inc.php:1955
 msgid "Discard unchanged with heartbeat"
-msgstr "Descartar sin cambios con el heartbeat"
+msgstr "Descartar sin cambios con heartbeat"
 
 #: app/views/js/popup.itemtestedit.view.js.php:366 include/forms.inc.php:1557
 #: include/views/js/item.preprocessing.js.php:66
@@ -11356,6 +11358,10 @@ msgstr "Métrica en estado \"no soportado\""
 #: widgets/svggraph/views/widget.edit.js.php:297
 msgid "Item list"
 msgstr "Lista de métricas"
+
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
@@ -16721,6 +16727,12 @@ msgstr "Resultado es FALSO"
 msgid "Result is TRUE"
 msgstr "RESULTADO is VERDADERO"
 
+#: app/controllers/CControllerPopupItemTestSend.php:453
+#: app/controllers/CControllerPopupItemTestSend.php:481
+#, c-format
+msgid "Result is truncated due to its size (%1$s)."
+msgstr ""
+
 #: app/views/popup.testtriggerexpr.php:30
 msgid "Result type"
 msgstr "Tipo de resultado"
@@ -19026,7 +19038,7 @@ msgstr "Permisos de plantilla"
 
 #: report2.php:390
 msgid "Template trigger"
-msgstr "Iniciador de plantilla"
+msgstr "Plantilla de iniciador"
 
 #: templates.php:247
 msgid "Template updated"
@@ -20032,7 +20044,7 @@ msgstr "Iniciadores eliminados"
 #: include/classes/helpers/CMenuHelper.php:144
 #: include/classes/helpers/CRoleHelper.php:424
 msgid "Triggers top 100"
-msgstr "Top 100 iniciadores"
+msgstr "Los 100 iniciadores principales"
 
 #: include/items.inc.php:1859
 msgid "Trim"
@@ -20814,6 +20826,11 @@ msgstr "El usuario \"%1$s\" se utiliza en la acción \"%2$s\"."
 #, c-format
 msgid "User \"%1$s\" is user on whose behalf report \"%2$s\" is created."
 msgstr "El usuario \"%1$s\" es el usuario en cuyo nombre se crea el informe \"%2$s\"."
+
+#: include/classes/api/services/CUser.php:814
+#, c-format
+msgid "User \"%1$s\" must have a password, because internal authentication is in effect."
+msgstr ""
 
 #: app/controllers/CControllerUserProvision.php:61
 #, c-format
@@ -24074,6 +24091,10 @@ msgstr "now() - Número de segundos desde la Época"
 #: include/forms.inc.php:1306 include/views/js/item.preprocessing.js.php:263
 msgid "number"
 msgstr "número"
+
+#: include/classes/api/services/CUser.php:736
+msgid "object does not exist"
+msgstr ""
 
 #: include/classes/api/services/CHostPrototype.php:836
 msgid "object does not exist or belongs to another object"

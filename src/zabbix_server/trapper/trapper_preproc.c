@@ -27,6 +27,17 @@
 
 extern int	CONFIG_DOUBLE_PRECISION;
 
+static void	json_add_string_with_limit(struct zbx_json *j, const char *tag, const char *value, zbx_json_type_t type)
+{
+	size_t	original_size = zbx_json_addstring_limit(j, tag, value, type, ZBX_JSON_TEST_DATA_MAX_SIZE);
+
+	if (ZBX_JSON_TEST_DATA_MAX_SIZE < original_size)
+	{
+		zbx_json_addstring(j, ZBX_PROTO_TAG_TRUNCATED, "true", ZBX_JSON_TYPE_TRUE);
+		zbx_json_adduint64(j, ZBX_PROTO_TAG_ORIGINAL_SIZE, original_size);
+	}
+}
+
 /******************************************************************************
  *                                                                            *
  * Purpose: parses preprocessing test request                                 *
@@ -350,7 +361,7 @@ int	trapper_preproc_test_run(const struct zbx_json_parse *jp, struct zbx_json *j
 			{
 				if (ZBX_PREPROC_FAIL_DEFAULT == result->action)
 				{
-					zbx_json_addstring(json, ZBX_PROTO_TAG_ERROR, result->value.data.err,
+					json_add_string_with_limit(json, ZBX_PROTO_TAG_ERROR, result->value.data.err,
 						ZBX_JSON_TYPE_STRING);
 				}
 			}
@@ -374,7 +385,7 @@ err:
 
 		if (ZBX_VARIANT_NONE != result->value.type)
 		{
-			zbx_json_addstring(json, ZBX_PROTO_TAG_RESULT, zbx_variant_value_desc(&result->value),
+			json_add_string_with_limit(json, ZBX_PROTO_TAG_RESULT, zbx_variant_value_desc(&result->value),
 					ZBX_JSON_TYPE_STRING);
 		}
 		else

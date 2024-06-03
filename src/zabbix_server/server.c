@@ -235,6 +235,8 @@ static unsigned char	get_program_type(void)
 	return program_type;
 }
 
+static sigset_t			orig_mask;
+
 int	CONFIG_FORKS[ZBX_PROCESS_TYPE_COUNT] = {
 	5, /* ZBX_PROCESS_TYPE_POLLER */
 	1, /* ZBX_PROCESS_TYPE_UNREACHABLE */
@@ -1144,6 +1146,17 @@ static void	zbx_on_exit(int ret, void *on_exit_args)
 	zabbix_log(LOG_LEVEL_INFORMATION, "Zabbix Server stopped. Zabbix %s (revision %s).",
 			ZABBIX_VERSION, ZABBIX_REVISION);
 
+	if (NULL != on_exit_args)
+	{
+		zbx_on_exit_args_t	*args = (zbx_on_exit_args_t *)on_exit_args;
+
+		if (NULL != args->listen_sock)
+			zbx_tcp_unlisten(args->listen_sock);
+
+		if (NULL != args->rtc)
+			zbx_ipc_service_close(&args->rtc->service);
+	}
+
 	zabbix_close_log();
 
 	zbx_locks_destroy();
@@ -1164,17 +1177,6 @@ static void	zbx_on_exit(int ret, void *on_exit_args)
 	zbx_config_tls_free(zbx_config_tls);
 	zbx_config_dbhigh_free(zbx_config_dbhigh);
 	zbx_deinit_library_export();
-
-	if (NULL != on_exit_args)
-	{
-		zbx_on_exit_args_t	*args = (zbx_on_exit_args_t *)on_exit_args;
-
-		if (NULL != args->listen_sock)
-			zbx_tcp_unlisten(args->listen_sock);
-
-		if (NULL != args->rtc)
-			zbx_ipc_service_close(&args->rtc->service);
-	}
 
 	exit(EXIT_SUCCESS);
 }
@@ -1506,12 +1508,15 @@ static int	server_startup(zbx_socket_t *listen_sock, int *ha_stat, int *ha_failo
 	if (0 != CONFIG_FORKS[ZBX_PROCESS_TYPE_TRAPPER])
 	{
 		exit_args->listen_sock = listen_sock;
+		zbx_block_signals(&orig_mask);
 
 		if (FAIL == zbx_tcp_listen(listen_sock, CONFIG_LISTEN_IP, (unsigned short)CONFIG_LISTEN_PORT))
 		{
 			zabbix_log(LOG_LEVEL_CRIT, "listener failed: %s", zbx_socket_strerror());
 			return FAIL;
 		}
+
+		zbx_unblock_signals(&orig_mask);
 	}
 
 	for (threads_num = 0, i = 0; i < ZBX_PROCESS_TYPE_COUNT; i++)
@@ -1897,6 +1902,8 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 				ZABBIX_VERSION, ZABBIX_REVISION);
 	}
 
+	zbx_block_signals(&orig_mask);
+
 	if (FAIL == zbx_ipc_service_init_env(CONFIG_SOCKET_PATH, &error))
 	{
 		zbx_error("cannot initialize IPC services: %s", error);
@@ -2023,6 +2030,8 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 		zbx_free(error);
 		exit(EXIT_FAILURE);
 	}
+
+	zbx_unblock_signals(&orig_mask);
 
 	if (SUCCEED != zbx_vault_db_credentials_get(&zbx_config_vault, &zbx_config_dbhigh->config_dbuser,
 			&zbx_config_dbhigh->config_dbpassword, &error))

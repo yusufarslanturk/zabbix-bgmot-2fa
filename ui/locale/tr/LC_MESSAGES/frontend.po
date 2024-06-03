@@ -1,32 +1,33 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2021-03-19 18:15+0300\n"
-"Last-Translator: Anonymous Pootle User\n"
+"PO-Revision-Date: 2024-04-22 06:37+0000\n"
+"Last-Translator: sergejs.olonkins <sergejs.olonkins@zabbix.com>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Pootle 2.5.1.3\n"
-"X-Poedit-Basepath: ../../\n"
+"X-Generator: Pontoon\n"
 "X-POOTLE-MTIME: 1616170518.000000\n"
+"X-Poedit-Basepath: ../../\n"
 
 #: app/controllers/CControllerSlaReportList.php:182
 #: widgets/slareport/includes/WidgetForm.php:100
 #, c-format
 msgid "\"%1$s\" date must be less than \"%2$s\" date."
-msgstr ""
+msgstr "\"%1$s\" tarihi \"%2$s\" tarihinden daha erken olmalıdır."
 
 #: include/classes/db/MysqlDbBackend.php:70
 #: include/classes/db/OracleDbBackend.php:142
 #: include/classes/db/PostgresqlDbBackend.php:96
 #, c-format
 msgid "\"%1$s\" instead \"%2$s\""
-msgstr ""
+msgstr "\"%2$s\" yerine \"%1$s\""
 
 #: include/classes/import/validators/C10XmlValidator.php:322
 #: include/classes/import/validators/C10XmlValidator.php:340
@@ -65,7 +66,7 @@ msgstr "\"anamakine:anahtar\" çifti bekleniyor"
 
 #: include/classes/api/services/CItemGeneralOld.php:2526
 msgid "\"hostid\" of dependent item and master item should match"
-msgstr ""
+msgstr "Bağımlı öğenin ve ana öğenin \"ana bilgisayar kimliği\" eşleşmelidir"
 
 #: include/classes/api/services/CItemGeneralOld.php:2533
 msgid "\"ruleid\" of dependent item and master item should match"
@@ -76,7 +77,7 @@ msgstr ""
 #: include/views/js/configuration.host.discovery.edit.js.php:87
 #: include/views/js/item.preprocessing.js.php:285
 msgid "$.path.to.node"
-msgstr ""
+msgstr "$.düğüme.yol"
 
 #: include/classes/api/services/CDRule.php:556
 #, c-format
@@ -116,7 +117,7 @@ msgstr "%1$s (yıl %2$s)"
 #: include/classes/core/CModuleManager.php:159
 #, c-format
 msgid "%1$s - thrown by module located at %2$s."
-msgstr ""
+msgstr "%1$s - %2$s konumunda bulunan modül tarafından atıldı."
 
 #: include/classes/api/services/CItemGeneralOld.php:2885
 #: include/classes/import/readers/CXmlImportReader.php:52
@@ -130,18 +131,18 @@ msgstr "%1$s [Satır: %2$s | Sütun: %3$s]"
 msgctxt "screen reader"
 msgid "%1$s action"
 msgid_plural "%1$s actions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s işlemi"
+msgstr[1] "%1$s işlemi"
 
 #: jsLoader.php:296
 #, c-format
 msgid "%1$s characters"
-msgstr ""
+msgstr "%1$s karakter"
 
 #: jsLoader.php:297
 #, c-format
 msgid "%1$s characters remaining"
-msgstr ""
+msgstr "%1$s karakter kaldı"
 
 #: app/views/popup.acknowledge.edit.php:60
 #: app/views/popup.acknowledge.edit.php:65
@@ -154,21 +155,21 @@ msgstr[1] "%1$s olay"
 #: app/views/popup.usergroupmapping.edit.php:87
 #, c-format
 msgid "%1$s group pattern"
-msgstr ""
+msgstr "%1$s grup modeli"
 
 #: include/maps.inc.php:416
 #, c-format
 msgid "%1$s host in maintenance"
 msgid_plural "%1$s hosts in maintenance"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s ana bilgisayarı bakımda"
+msgstr[1] "%1$s ana bilgisayarı bakımda"
 
 #: include/func.inc.php:2662
 #, c-format
 msgid "%1$s hour"
 msgid_plural "%1$s hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s saat"
+msgstr[1] "%1$s saat"
 
 #: include/views/monitoring.history.php:32
 #: widgets/plaintext/actions/WidgetView.php:131
@@ -184,8 +185,8 @@ msgstr[1] "%1$s öğe"
 msgctxt "screen reader"
 msgid "%1$s message"
 msgid_plural "%1$s messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s mesajı"
+msgstr[1] "%1$s mesajı"
 
 #: include/classes/core/CWidget.php:159 include/classes/core/CWidget.php:160
 #: include/classes/core/CWidget.php:161 include/classes/core/CWidget.php:162
@@ -201,18 +202,18 @@ msgstr[1] "%1$s dakika"
 #, c-format
 msgid "%1$s of %2$s element in problem state"
 msgid_plural "%1$s of %2$s elements in problem state"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%2$s öğesinden %1$s tanesi sorunlu durumda"
+msgstr[1] "%2$s öğesinden %1$s tanesi sorunlu durumda"
 
 #: app/views/administration.miscconfig.edit.php:127
 #, c-format
 msgid "%1$s or %2$s - allows the page to be displayed only in a frame on the same origin as the page itself"
-msgstr ""
+msgstr "%1$s veya %2$s - sayfanın yalnızca sayfanın kendisi ile aynı kaynaktaki bir çerçevede görüntülenmesine olanak tanır"
 
 #: app/views/administration.miscconfig.edit.php:130
 #, c-format
 msgid "%1$s or %2$s - prevents the page from being displayed in a frame, regardless of the site attempting to do so"
-msgstr ""
+msgstr "%1$s veya %2$s - site bunu yapmaya çalışırsa çalışsın, sayfanın bir çerçevede görüntülenmesini engeller"
 
 #: jsLoader.php:316
 #, c-format
@@ -225,8 +226,8 @@ msgstr ""
 #, c-format
 msgid "%1$s problem"
 msgid_plural "%1$s problems"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s sorunlar"
+msgstr[1] "%1$s'daki sorun"
 
 #: include/classes/helpers/CMapHelper.php:319
 #, c-format
@@ -258,27 +259,27 @@ msgstr[1] "%1$s saniye"
 #, c-format
 msgid "%1$s unacknowledged problem"
 msgid_plural "%1$s unacknowledged problems"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s onaylanmayan sorun"
+msgstr[1] "%1$s onaylanmayan sorun"
 
 #: widgets/problemhosts/views/widget.view.php:111
 #: widgets/problems/includes/WidgetProblems.php:352
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, Severity, %2$s"
-msgstr ""
+msgstr "%1$s, Önem Derecesi, %2$s"
 
 #: jsLoader.php:310
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, read only"
-msgstr ""
+msgstr "%1$s, salt okunur"
 
 #: jsLoader.php:366
 #, c-format
 msgctxt "screen reader"
 msgid "%1$s, selected"
-msgstr ""
+msgstr "%1$s seçildi"
 
 #: app/controllers/CControllerMediatypeEnable.php:93
 #, c-format
@@ -1074,7 +1075,7 @@ msgstr ""
 
 #: app/partials/administration.ha.nodes.php:28
 msgid "Address"
-msgstr ""
+msgstr "Adres"
 
 #: include/hosts.inc.php:63 include/users.inc.php:45
 msgid "Admin"
@@ -1092,7 +1093,7 @@ msgstr "Yönetim"
 #: widgets/clock/includes/WidgetForm.php:100
 #: widgets/item/includes/WidgetForm.php:138
 msgid "Advanced configuration"
-msgstr ""
+msgstr "Gelişmiş yapılandırma"
 
 #: include/views/monitoring.sysmap.edit.php:162
 msgid "Advanced labels"
@@ -1100,11 +1101,11 @@ msgstr "Gelişmiş etiket"
 
 #: app/views/popup.import.php:148
 msgid "Advanced options"
-msgstr ""
+msgstr "Gelişmiş seçenekler"
 
 #: widgets/item/includes/WidgetForm.php:212
 msgid "After value"
-msgstr ""
+msgstr "değerden sonra"
 
 #: include/events.inc.php:397
 msgid "Age"
@@ -1130,7 +1131,7 @@ msgstr "Aracı şifrelemesi"
 
 #: include/classes/data/CItemData.php:867
 msgid "Agent host metadata. Returns string"
-msgstr ""
+msgstr "Aracı ana bilgisayar meta verileri. Dizeyi döndürür"
 
 #: include/classes/data/CItemData.php:871
 msgid "Agent host name. Returns string"
@@ -1142,34 +1143,34 @@ msgstr "Aracı arayüzleri"
 
 #: include/classes/data/CItemData.php:879
 msgid "Agent variant check. Returns 1 - for Zabbix agent; 2 - for Zabbix agent 2"
-msgstr ""
+msgstr "Aracı değişken kontrolü. Zabbix aracısı için 1 - değerini döndürür; 2 - Zabbix ajanı 2 için"
 
 #: include/classes/html/widgets/CWidgetFieldGraphDataSetView.php:369
 msgid "Aggregate"
-msgstr ""
+msgstr "Agrega"
 
 #: app/views/popup.triggerexpr.php:117
 msgid "Aggregate functions"
-msgstr ""
+msgstr "Toplama işlevleri"
 
 #: include/classes/html/widgets/CWidgetFieldGraphDataSetView.php:336
 #: widgets/tophosts/views/column.edit.php:126
 msgid "Aggregation function"
-msgstr ""
+msgstr "Toplama işlevi"
 
 #: include/classes/html/widgets/CWidgetFieldGraphDataSetView.php:358
 #: widgets/tophosts/views/column.edit.php:150
 msgid "Aggregation interval"
-msgstr ""
+msgstr "Toplama aralığı"
 
 #: include/actions.inc.php:2120
 msgid "Alert message"
-msgstr ""
+msgstr "Uyarı mesajı"
 
 #: include/classes/helpers/CMenuHelper.php:292
 #: include/classes/helpers/CRoleHelper.php:348
 msgid "Alerts"
-msgstr ""
+msgstr "Uyarılar"
 
 #: app/controllers/CControllerPopupTriggerExpr.php:1116
 msgid "Algorithm"
@@ -1478,12 +1479,14 @@ msgstr "Varlık etiketi"
 msgid "At %1$s:%2$s %3$s of every week"
 msgid_plural "At %1$s:%2$s %3$s of every %4$s weeks"
 msgstr[0] ""
+msgstr[1] ""
 
 #: include/classes/helpers/CMaintenanceHelper.php:64
 #, c-format
 msgid "At %1$s:%2$s every day"
 msgid_plural "At %1$s:%2$s every %3$s days"
 msgstr[0] ""
+msgstr[1] ""
 
 #: include/classes/helpers/CMaintenanceHelper.php:108
 #, c-format
@@ -5388,6 +5391,10 @@ msgstr "DNS adı"
 #: include/classes/helpers/CSlaHelper.php:39 report4.php:90
 msgid "Daily"
 msgstr "Günlük"
+
+#: include/locales.inc.php:40
+msgid "Danish (da_DK)"
+msgstr ""
 
 #: include/classes/core/ZBase.php:380
 msgid "Dark"
@@ -11351,6 +11358,10 @@ msgstr "\"Desteklenmeyen\" durumundaki öğe"
 msgid "Item list"
 msgstr ""
 
+#: widgets/tophosts/views/column.edit.php:104
+msgid "Item name"
+msgstr ""
+
 #: app/controllers/CControllerPopupTriggerExpr.php:1559
 msgid "Item not selected"
 msgstr "Öğe seçilmedi"
@@ -16715,6 +16726,12 @@ msgstr "Sonuç YANLIŞ"
 msgid "Result is TRUE"
 msgstr "Sonuç DOĞRU"
 
+#: app/controllers/CControllerPopupItemTestSend.php:453
+#: app/controllers/CControllerPopupItemTestSend.php:481
+#, c-format
+msgid "Result is truncated due to its size (%1$s)."
+msgstr ""
+
 #: app/views/popup.testtriggerexpr.php:30
 msgid "Result type"
 msgstr "Sonuç türü"
@@ -20811,6 +20828,11 @@ msgstr "\"%1$s\" kullanıcısı \"%2$s\" eyleminde kullanılıyor."
 msgid "User \"%1$s\" is user on whose behalf report \"%2$s\" is created."
 msgstr ""
 
+#: include/classes/api/services/CUser.php:814
+#, c-format
+msgid "User \"%1$s\" must have a password, because internal authentication is in effect."
+msgstr ""
+
 #: app/controllers/CControllerUserProvision.php:61
 #, c-format
 msgid "User \"%1$s\" provisioned."
@@ -24067,6 +24089,10 @@ msgstr ""
 #: include/forms.inc.php:1306 include/views/js/item.preprocessing.js.php:263
 msgid "number"
 msgstr "sayı"
+
+#: include/classes/api/services/CUser.php:736
+msgid "object does not exist"
+msgstr ""
 
 #: include/classes/api/services/CHostPrototype.php:836
 msgid "object does not exist or belongs to another object"
