@@ -113,7 +113,11 @@
 
 	jQuery(document).ready(function($) {
 		$('#delayFlexTable').on('click', 'input[type="radio"]', function() {
-			var rowNum = $(this).attr('id').split('_')[2];
+			if ($(this).prop('readonly')) {
+				return;
+			}
+
+			const rowNum = $(this).attr('id').split('_')[2];
 
 			if ($(this).val() == <?= ITEM_DELAY_FLEXIBLE; ?>) {
 				$('#delay_flex_' + rowNum + '_schedule').hide();
