@@ -1272,10 +1272,8 @@ static void	proxy_db_init(void)
 	}
 
 #ifdef HAVE_ORACLE
-	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
 	zbx_db_table_prepare("items", NULL);
 	zbx_db_table_prepare("item_preproc", NULL);
-	zbx_db_close();
 #endif
 }
 
@@ -1483,9 +1481,9 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 		zbx_free(error);
 		exit(EXIT_FAILURE);
 	}
-
+	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
 	proxy_db_init();
-
+	zbx_db_close();
 	change_proxy_history_count(zbx_proxy_get_history_count());
 
 	for (threads_num = 0, i = 0; i < ZBX_PROCESS_TYPE_COUNT; i++)
