@@ -543,7 +543,7 @@ DB_RESULT	zbx_db_select_n(const char *query, int n)
 #ifdef HAVE_MYSQL
 static size_t	get_string_field_size(const ZBX_FIELD *field)
 {
-	switch(field->type)
+	switch (field->type)
 	{
 		case ZBX_TYPE_LONGTEXT:
 			return ZBX_SIZE_T_MAX;
@@ -561,7 +561,7 @@ static size_t	get_string_field_size(const ZBX_FIELD *field)
 #elif defined(HAVE_ORACLE)
 static size_t	get_string_field_size(const ZBX_FIELD *field)
 {
-	switch(field->type)
+	switch (field->type)
 	{
 		case ZBX_TYPE_LONGTEXT:
 		case ZBX_TYPE_TEXT:
@@ -853,10 +853,10 @@ void	zbx_db_extract_dbextension_info(struct zbx_db_version_info_t *version_info)
 
 	/* in case of major upgrade, db_extension may be missing */
 	if (FAIL == zbx_db_field_exists("config", "db_extension"))
-		goto out;
+		return;
 
 	if (NULL == (result = zbx_db_select("select db_extension from config")))
-		goto out;
+		return;
 
 	if (NULL == (row = zbx_db_fetch(result)) || '\0' == *row[0])
 		goto clean;
@@ -866,8 +866,6 @@ void	zbx_db_extract_dbextension_info(struct zbx_db_version_info_t *version_info)
 	zbx_tsdb_info_extract(version_info);
 clean:
 	zbx_db_free_result(result);
-out:
-	return;
 #else
 	ZBX_UNUSED(version_info);
 #endif
