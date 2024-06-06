@@ -867,6 +867,7 @@ void	zbx_db_extract_dbextension_info(struct zbx_db_version_info_t *version_info)
 clean:
 	zbx_db_free_result(result);
 out:
+	return;
 #else
 	ZBX_UNUSED(version_info);
 #endif
