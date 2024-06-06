@@ -28,6 +28,8 @@ require_once dirname(__FILE__).'/../behaviors/CTableBehavior.php';
  * @backup widget
  *
  * @onBefore prepareDiscoveryStatusWidgetData
+ *
+ * @dataSource Proxies
  */
 class testDashboardDiscoveryStatusWidget extends CWebTest {
 
@@ -128,8 +130,8 @@ class testDashboardDiscoveryStatusWidget extends CWebTest {
 		]);
 
 		self::$druleids = CDataHelper::getIds('name');
-//		$id = CDBHelper::getValue('SELECT druleid FROM drules WHERE name='.zbx_dbstr('Discovery rule for proxy delete test'));
-//		self::$druleids += ['Discovery rule for proxy delete test' => $id];
+		$id = CDBHelper::getValue('SELECT druleid FROM drules WHERE name='.zbx_dbstr('Discovery rule for proxy delete test'));
+		self::$druleids += ['Discovery rule for proxy delete test' => $id];
 
 		CDataHelper::call('dashboard.create', [
 			[
@@ -495,6 +497,11 @@ class testDashboardDiscoveryStatusWidget extends CWebTest {
 				[
 					[
 						'Discovery rule' => self::DISCOVERY_RULE_1,
+						'Up' => '',
+						'Down' => ''
+					],
+					[
+						'Discovery rule' => 'Discovery rule for proxy delete test',
 						'Up' => '',
 						'Down' => ''
 					],
