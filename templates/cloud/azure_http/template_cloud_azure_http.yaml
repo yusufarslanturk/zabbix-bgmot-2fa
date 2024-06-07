@@ -2525,7 +2525,7 @@ zabbix_export:
           description: 'This macro is used in Microsoft Cosmos DB account discovery rule.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 15s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.MSSQL.DB.LOCATION.MATCHES}'
           value: '.*'
           description: 'This macro is used in Microsoft SQL databases discovery rule.'
@@ -2569,7 +2569,7 @@ zabbix_export:
           value: CHANGE_IF_NEEDED
           description: 'This macro is used in PostgreSQL servers discovery rule.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.RESOURCE.GROUP.MATCHES}'
           value: '.*'
           description: 'This macro is used in discovery rules.'
@@ -3250,7 +3250,7 @@ zabbix_export:
           description: 'The App ID of Microsoft Azure.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 15s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.DB.COSMOS.MONGO.AVAILABILITY}'
           value: '70'
           description: 'The warning threshold of the Cosmos DB for MongoDB service availability.'
@@ -3258,7 +3258,7 @@ zabbix_export:
           type: SECRET_TEXT
           description: 'Microsoft Azure password.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.RESOURCE.ID}'
           description: 'Microsoft Azure Cosmos DB ID.'
         - macro: '{$AZURE.SUBSCRIPTION.ID}'
@@ -4158,7 +4158,7 @@ zabbix_export:
           description: 'Months to get historical data from Azure Cost Management API, no more than 11 (plus current month). The time period for pulling the data cannot exceed 1 year.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 60s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.LLD.FILTER.RESOURCE.GROUP.MATCHES}'
           value: '.*'
           description: 'Filter of discoverable resource groups by name.'
@@ -4181,7 +4181,7 @@ zabbix_export:
           type: SECRET_TEXT
           description: 'Microsoft Azure password.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.TENANT.ID}'
           description: 'Microsoft Azure tenant ID.'
       dashboards:
@@ -4353,7 +4353,7 @@ zabbix_export:
               name: 'Azure Microsoft SQL: Microsoft SQL database is degraded'
               opdata: '{ITEM.LASTVALUE1}'
               priority: AVERAGE
-              description: 'The resource is in degraded state.'
+              description: 'The resource is in a degraded state.'
               tags:
                 - tag: scope
                   value: availability
@@ -5102,7 +5102,7 @@ zabbix_export:
           description: 'The App ID of Microsoft Azure.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 15s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.DB.CPU.UTIL.CRIT}'
           value: '90'
           description: 'The critical threshold of CPU utilization, expressed in %.'
@@ -5119,7 +5119,7 @@ zabbix_export:
           type: SECRET_TEXT
           description: 'Microsoft Azure password.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.RESOURCE.ID}'
           description: 'Microsoft Azure Microsoft SQL database ID.'
         - macro: '{$AZURE.SUBSCRIPTION.ID}'
@@ -5625,7 +5625,7 @@ zabbix_export:
               name: 'Azure Microsoft SQL: Microsoft SQL database is degraded'
               opdata: '{ITEM.LASTVALUE1}'
               priority: AVERAGE
-              description: 'The resource is in degraded state.'
+              description: 'The resource is in a degraded state.'
               tags:
                 - tag: scope
                   value: availability
@@ -6279,7 +6279,7 @@ zabbix_export:
           description: 'The App ID of Microsoft Azure.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 15s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.DB.CPU.UTIL.CRIT}'
           value: '90'
           description: 'The critical threshold of CPU utilization, expressed in %.'
@@ -6296,7 +6296,7 @@ zabbix_export:
           type: SECRET_TEXT
           description: 'Microsoft Azure password.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.RESOURCE.ID}'
           description: 'Microsoft Azure Microsoft SQL database ID.'
         - macro: '{$AZURE.SUBSCRIPTION.ID}'
@@ -6752,7 +6752,7 @@ zabbix_export:
               name: 'Azure MySQL: MySQL server is degraded'
               opdata: '{ITEM.LASTVALUE1}'
               priority: AVERAGE
-              description: 'The resource is in degraded state.'
+              description: 'The resource is in a degraded state.'
               tags:
                 - tag: scope
                   value: availability
@@ -7327,7 +7327,7 @@ zabbix_export:
           description: 'The App ID of Microsoft Azure.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 15s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.DB.ABORTED.CONN.MAX.WARN}'
           value: '25'
           description: 'The number of failed attempts to connect to the MySQL server for a trigger expression.'
@@ -7344,7 +7344,7 @@ zabbix_export:
           type: SECRET_TEXT
           description: 'Microsoft Azure password.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.RESOURCE.ID}'
           description: 'Microsoft Azure MySQL server ID.'
         - macro: '{$AZURE.SUBSCRIPTION.ID}'
@@ -7799,7 +7799,7 @@ zabbix_export:
               name: 'Azure MySQL: MySQL server is degraded'
               opdata: '{ITEM.LASTVALUE1}'
               priority: AVERAGE
-              description: 'The resource is in degraded state.'
+              description: 'The resource is in a degraded state.'
               tags:
                 - tag: scope
                   value: availability
@@ -8370,7 +8370,7 @@ zabbix_export:
           description: 'The App ID of Microsoft Azure.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 15s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.DB.CPU.UTIL.CRIT}'
           value: '90'
           description: 'The critical threshold of CPU utilization, expressed in %.'
@@ -8390,7 +8390,7 @@ zabbix_export:
           type: SECRET_TEXT
           description: 'Microsoft Azure password.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.RESOURCE.ID}'
           description: 'Microsoft Azure MySQL server ID.'
         - macro: '{$AZURE.SUBSCRIPTION.ID}'
@@ -8779,7 +8779,7 @@ zabbix_export:
               name: 'Azure PostgreSQL: PostgreSQL server is degraded'
               opdata: '{ITEM.LASTVALUE1}'
               priority: AVERAGE
-              description: 'The resource is in degraded state.'
+              description: 'The resource is in a degraded state.'
               tags:
                 - tag: scope
                   value: availability
@@ -9462,7 +9462,7 @@ zabbix_export:
           description: 'The App ID of Microsoft Azure.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 15s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.DB.CPU.UTIL.CRIT}'
           value: '90'
           description: 'The critical threshold of CPU utilization, expressed in %.'
@@ -9479,7 +9479,7 @@ zabbix_export:
           type: SECRET_TEXT
           description: 'Microsoft Azure password.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.RESOURCE.ID}'
           description: 'Microsoft Azure PostgreSQL server ID.'
         - macro: '{$AZURE.SUBSCRIPTION.ID}'
@@ -9928,7 +9928,7 @@ zabbix_export:
               name: 'Azure PostgreSQL: PostgreSQL server is degraded'
               opdata: '{ITEM.LASTVALUE1}'
               priority: AVERAGE
-              description: 'The resource is in degraded state.'
+              description: 'The resource is in a degraded state.'
               tags:
                 - tag: scope
                   value: availability
@@ -10509,7 +10509,7 @@ zabbix_export:
           description: 'The App ID of Microsoft Azure.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 15s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.DB.CPU.UTIL.CRIT}'
           value: '90'
           description: 'The critical threshold of CPU utilization, expressed in %.'
@@ -10526,7 +10526,7 @@ zabbix_export:
           type: SECRET_TEXT
           description: 'Microsoft Azure password.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.RESOURCE.ID}'
           description: 'Microsoft Azure PostgreSQL server ID.'
         - macro: '{$AZURE.SUBSCRIPTION.ID}'
@@ -10915,7 +10915,7 @@ zabbix_export:
               name: 'Azure: Virtual machine is degraded'
               opdata: '{ITEM.LASTVALUE1}'
               priority: AVERAGE
-              description: 'The resource is in degraded state.'
+              description: 'The resource is in a degraded state.'
               tags:
                 - tag: scope
                   value: availability
@@ -11081,7 +11081,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'The maximum bytes per second throughput that the data disk can achieve with bursting.'
+          description: 'The maximum byte-per-second throughput that the data disk can achieve with bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -11175,7 +11175,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Baseline bytes per second throughput that the data disk can achieve without bursting.'
+          description: 'Baseline byte-per-second throughput that the data disk can achieve without bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -11783,7 +11783,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Maximum bytes per second throughput that the OS disk can achieve with bursting.'
+          description: 'Maximum byte-per-second throughput that the OS disk can achieve with bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -11839,7 +11839,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Bytes per second read from a single disk during the monitoring period for OS disk.'
+          description: 'Bytes per second read from a single disk during the monitoring period - for an OS disk.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -11858,7 +11858,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'The read IOPS from a single disk during the monitoring period for OS disk.'
+          description: 'The read IOPS from a single disk during the monitoring period - for an OS disk.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -11877,7 +11877,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Baseline bytes per second throughput that the OS disk can achieve without bursting.'
+          description: 'Baseline byte-per-second throughput that the OS disk can achieve without bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -11953,7 +11953,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Bytes per second written to a single disk during the monitoring period for OS disk.'
+          description: 'Bytes per second written to a single disk during the monitoring period - for an OS disk.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -11972,7 +11972,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'The write IOPS from a single disk during the monitoring period for OS disk.'
+          description: 'The write IOPS from a single disk during the monitoring period - for an OS disk.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12099,12 +12099,12 @@ zabbix_export:
           description: 'The App ID of Microsoft Azure.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 15s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.PASSWORD}'
           type: SECRET_TEXT
           description: 'Microsoft Azure password.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.RESOURCE.ID}'
           description: 'Microsoft Azure virtual machine ID.'
         - macro: '{$AZURE.SUBSCRIPTION.ID}'
@@ -12428,7 +12428,7 @@ zabbix_export:
       template: 'Azure VM Scale Set by HTTP'
       name: 'Azure VM Scale Set by HTTP'
       description: |
-        This template is designed to monitor MIcrosoft Azure virtual machines scale sets by HTTP.
+        This template is designed to monitor Microsoft Azure virtual machine scale sets by HTTP.
         It works without any external scripts and uses the script item.
         
         Setup:
@@ -12454,7 +12454,7 @@ zabbix_export:
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'Measure of Availability of Virtual machines over time.'
+          description: 'Measure of availability of the virtual machines over time.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12546,7 +12546,7 @@ zabbix_export:
               name: 'Azure VMSS: Virtual machine scale set is degraded'
               opdata: '{ITEM.LASTVALUE1}'
               priority: AVERAGE
-              description: 'The resource is in degraded state.'
+              description: 'The resource is in a degraded state.'
               tags:
                 - tag: scope
                   value: availability
@@ -12575,7 +12575,7 @@ zabbix_export:
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'Total number of credits consumed by the Virtual Machine. Only available on B-series burstable VMs.'
+          description: 'Total number of credits consumed by the virtual machine. Only available on B-series burstable VMs.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12611,14 +12611,14 @@ zabbix_export:
             - tag: component
               value: cpu
         - uuid: 0883913383d54b81b5c67b65dc595ae3
-          name: 'Azure VMSS: CPU Utilization'
+          name: 'Azure VMSS: CPU utilization'
           type: DEPENDENT
           key: azure.scaleset.cpu.utilization
           delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
-          description: 'The percentage of allocated compute units that are currently in use by the Virtual Machine(s).'
+          description: 'The percentage of allocated compute units that are currently in use by the virtual machine(s).'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12651,7 +12651,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Maximum bytes per second throughput data disk can achieve with bursting.'
+          description: 'Maximum byte-per-second throughput the data disk can achieve with bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12717,7 +12717,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Baseline bytes per second throughput data disk can achieve without bursting.'
+          description: 'Baseline byte-per-second throughput the data disk can achieve without bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12739,7 +12739,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'Maximum IOPS data disk can achieve with bursting.'
+          description: 'Maximum IOPS the data disk can achieve with bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12805,7 +12805,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'Baseline IOPS data disk can achieve without bursting.'
+          description: 'Baseline IOPS the data disk can achieve without bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12847,7 +12847,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Bytes/Sec read from a single disk during monitoring period.'
+          description: 'Bytes/sec read from a single disk during the monitoring period.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12869,7 +12869,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'Read IOPS from a single disk during monitoring period.'
+          description: 'Read IOPS from a single disk during the monitoring period.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12891,7 +12891,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Bytes/Sec written to a single disk during monitoring period.'
+          description: 'Bytes/sec written to a single disk during the monitoring period.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -12913,7 +12913,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'Write IOPS from a single disk during monitoring period.'
+          description: 'Write IOPS from a single disk during the monitoring period.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13095,7 +13095,7 @@ zabbix_export:
             	return JSON.stringify({ 'error': error });
             }
             
-          description: 'Gathering data of the virtual machines scale set.'
+          description: 'Gathers data of the virtual machine scale set.'
           timeout: '{$AZURE.DATA.TIMEOUT}'
           parameters:
             - name: app_id
@@ -13121,7 +13121,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: B
-          description: 'Bytes read from disk during monitoring period.'
+          description: 'Bytes read from the disk during the monitoring period.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13143,7 +13143,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'Disk Read IOPS.'
+          description: 'Disk read IOPS.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13165,7 +13165,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: B
-          description: 'Bytes written to disk during monitoring period.'
+          description: 'Bytes written to the disk during the monitoring period.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13187,7 +13187,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'Write IOPS from a single disk during monitoring period.'
+          description: 'Write IOPS from a single disk during the monitoring period.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13208,7 +13208,7 @@ zabbix_export:
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'Inbound Flows are number of current flows in the inbound direction (traffic going into the VMs).'
+          description: 'Inbound Flows are the number of current flows in the inbound direction (traffic going into the VMs).'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13223,7 +13223,7 @@ zabbix_export:
             - tag: component
               value: network
         - uuid: dacfd47b3c3142ce9ca043ebda4e7614
-          name: 'Azure VMSS: Inbound flows maximum creation rate'
+          name: 'Azure VMSS: Inbound flow maximum creation rate'
           type: DEPENDENT
           key: azure.scaleset.flows.inbound.max
           delay: '0'
@@ -13250,7 +13250,7 @@ zabbix_export:
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'Outbound Flows are number of current flows in the outbound direction (traffic going out of the VMs).'
+          description: 'Outbound Flows are the number of current flows in the outbound direction (traffic going out of the VMs).'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13265,7 +13265,7 @@ zabbix_export:
             - tag: component
               value: network
         - uuid: 15b8f8fde6e4458e8904428537a8b32a
-          name: 'Azure VMSS: Outbound flows maximum creation rate'
+          name: 'Azure VMSS: Outbound flow maximum creation rate'
           type: DEPENDENT
           key: azure.scaleset.flows.outbound.max
           delay: '0'
@@ -13293,7 +13293,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: B
-          description: 'The number of bytes received on all network interfaces by the Virtual Machine(s) (Incoming Traffic).'
+          description: 'The number of bytes received on all network interfaces by the virtual machine(s) (incoming traffic).'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13312,7 +13312,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: B
-          description: 'The number of bytes out on all network interfaces by the Virtual Machine(s) (Outgoing Traffic).'
+          description: 'The number of bytes out on all network interfaces by the virtual machine(s) (outgoing traffic).'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13375,7 +13375,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Maximum bytes per second throughput OS Disk can achieve with bursting.'
+          description: 'Maximum byte-per-second throughput the OS Disk can achieve with bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13397,7 +13397,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Baseline bytes per second throughput OS Disk can achieve without bursting.'
+          description: 'Baseline byte-per-second throughput the OS Disk can achieve without bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13463,7 +13463,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'Maximum IOPS OS Disk can achieve with bursting.'
+          description: 'Maximum IOPS the OS Disk can achieve with bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13485,7 +13485,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'Baseline IOPS that the OS disk can achieve without bursting.'
+          description: 'Baseline IOPS the OS disk can achieve without bursting.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13506,7 +13506,7 @@ zabbix_export:
           delay: '0'
           history: 7d
           value_type: FLOAT
-          description: 'OS Disk Queue Depth (or Queue Length).'
+          description: 'OS Disk queue depth (or queue length).'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13528,7 +13528,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Bytes/Sec read from a single disk during monitoring period for OS disk.'
+          description: 'Bytes/sec read from a single disk during the monitoring period - for an OS disk.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13550,7 +13550,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'Read IOPS from a single disk during monitoring period for OS disk.'
+          description: 'Read IOPS from a single disk during the monitoring period - for an OS disk.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13572,7 +13572,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: Bps
-          description: 'Bytes/Sec written to a single disk during monitoring period for OS disk.'
+          description: 'Bytes/sec written to a single disk during the monitoring period - for an OS disk.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13594,7 +13594,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: '!iops'
-          description: 'Write IOPS from a single disk during monitoring period for OS disk.'
+          description: 'Write IOPS from a single disk during the monitoring period - for an OS disk.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13741,7 +13741,7 @@ zabbix_export:
             - tag: component
               value: storage
         - uuid: 7124d8d7d2b246feaa8959fd6d5aba0f
-          name: 'Azure VMSS: Virtual machines count'
+          name: 'Azure VMSS: Virtual machine count'
           type: DEPENDENT
           key: azure.scaleset.vm.count
           delay: '0'
@@ -13778,7 +13778,7 @@ zabbix_export:
           history: 7d
           value_type: FLOAT
           units: B
-          description: 'Amount of physical memory, in bytes, immediately available for allocation to a process or for system use in the Virtual Machine.'
+          description: 'Amount of physical memory, in bytes, immediately available for allocation to a process or for system use in the virtual machine.'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -13846,12 +13846,12 @@ zabbix_export:
           description: 'The App ID of Microsoft Azure.'
         - macro: '{$AZURE.DATA.TIMEOUT}'
           value: 15s
-          description: 'A response timeout for API.'
+          description: 'API response timeout.'
         - macro: '{$AZURE.PASSWORD}'
           type: SECRET_TEXT
           description: 'Microsoft Azure password.'
         - macro: '{$AZURE.PROXY}'
-          description: 'Sets HTTP proxy value. If this macro is empty then no proxy is used.'
+          description: 'Sets the HTTP proxy value. If this macro is empty, then no proxy is used.'
         - macro: '{$AZURE.RESOURCE.ID}'
           description: 'Microsoft Azure virtual machine ID.'
         - macro: '{$AZURE.SCALESET.CPU.UTIL.CRIT}'
@@ -14794,7 +14794,7 @@ zabbix_export:
             host: 'Azure VM Scale Set by HTTP'
             key: azure.scaleset.premium.os.disk.cache.read.miss
     - uuid: 8d04afa2c9d2459e926a9c20af37e4f8
-      name: 'Azure VMSS: Virtual machines count'
+      name: 'Azure VMSS: Virtual machine count'
       graph_items:
         - color: 199C0D
           item:
