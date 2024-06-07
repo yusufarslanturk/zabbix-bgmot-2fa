@@ -1198,8 +1198,6 @@ int	DBcheck_double_type(zbx_config_dbhigh_t *config_dbhigh)
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
 
-	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
-
 #if defined(HAVE_MYSQL)
 	sql = zbx_db_dyn_escape_string(config_dbhigh->config_dbname);
 	sql = zbx_dsprintf(sql, "select count(*) from information_schema.columns"
@@ -1234,7 +1232,6 @@ int	DBcheck_double_type(zbx_config_dbhigh_t *config_dbhigh)
 
 	zbx_db_free_result(result);
 out:
-	zbx_db_close();
 	zbx_free(sql);
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
