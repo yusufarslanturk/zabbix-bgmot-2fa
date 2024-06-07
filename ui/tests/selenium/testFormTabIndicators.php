@@ -452,6 +452,7 @@ class testFormTabIndicators extends CWebTest {
 					'url' => 'zabbix.php?action=proxy.list',
 					'create_button' => 'Create proxy',
 					'form' => 'id:proxy-form',
+					'close_dialog' => true,
 					'tabs' => [
 						[
 							'name' => 'Encryption',
@@ -554,6 +555,7 @@ class testFormTabIndicators extends CWebTest {
 				[
 					'url' => 'zabbix.php?action=dashboard.view',
 					'form' => 'id:widget-dialogue-form',
+					'close_dialog' => true,
 					'tabs' => [
 						[
 							'name' => 'Data set',
@@ -719,7 +721,7 @@ class testFormTabIndicators extends CWebTest {
 			$this->assertTabIndicator($tab_selector, $old_value);
 		}
 
-		if (CTestArrayHelper::get($data, 'create_button')) {
+		if (CTestArrayHelper::get($data, 'close_dialog')) {
 			COverlayDialogElement::find()->one()->waitUntilReady()->close();
 		}
 	}
@@ -729,8 +731,8 @@ class testFormTabIndicators extends CWebTest {
 		$this->query('button:Create action')->one()->click()->waitUntilReady();
 
 		// Open Operations tab and check indicator value.
-		$dialog = COverlayDialogElement::find()->waitUntilReady();
-		$form = $dialog->asForm()->one();
+		$dialog = COverlayDialogElement::find()->one()->waitUntilReady();
+		$form = $dialog->asForm();
 		$form->selectTab('Operations');
 		$tab_selector = $form->query('xpath:.//a[text()="Operations"]')->one()->waitUntilVisible();
 		$this->assertTabIndicator($tab_selector, 0);
@@ -754,6 +756,8 @@ class testFormTabIndicators extends CWebTest {
 		// Remove the previously created operations and check indicator value.
 		$form->query('button:Remove')->all()->click();
 		$this->assertTabIndicator($tab_selector, 0);
+
+		$dialog->close();
 	}
 
 	public function testFormTabIndicators_CheckUserGroupIndicators() {
@@ -828,7 +832,7 @@ class testFormTabIndicators extends CWebTest {
 
 		// Check status indicator in Child services tab.
 		$this->query('button:Create service')->one()->waitUntilClickable()->click();
-		COverlayDialogElement::find()->one()->waitUntilReady();
+		$main_dialog = COverlayDialogElement::find()->one()->waitUntilReady();
 		$form = $this->query('id:service-form')->asForm()->one();
 		$form->selectTab('Child services');
 		$tab_selector = $form->query('xpath:.//a[text()="Child services"]')->one();
@@ -872,6 +876,8 @@ class testFormTabIndicators extends CWebTest {
 		// Remove the tags and check count indicator.
 		$form->query('class:tags-table')->one()->query('button:Remove')->all()->click();
 		$this->assertTabIndicator($tab_selector, 0);
+
+		$main_dialog->close();
 	}
 
 	/*
