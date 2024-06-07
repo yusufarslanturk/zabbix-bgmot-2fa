@@ -235,6 +235,8 @@ static unsigned char	get_program_type(void)
 	return program_type;
 }
 
+static sigset_t			orig_mask;
+
 int	CONFIG_FORKS[ZBX_PROCESS_TYPE_COUNT] = {
 	5, /* ZBX_PROCESS_TYPE_POLLER */
 	1, /* ZBX_PROCESS_TYPE_UNREACHABLE */
@@ -1342,8 +1344,6 @@ static void	zbx_check_db(void)
 			goto out;
 	}
 
-	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
-
 	if (SUCCEED == zbx_db_field_exists("config", "dbversion_status"))
 	{
 		zbx_json_initarray(&db_version_json, ZBX_JSON_STAT_BUF_LEN);
@@ -1378,8 +1378,6 @@ static void	zbx_check_db(void)
 		zbx_db_flush_version_requirements(db_version_json.buffer);
 		zbx_json_free(&db_version_json);
 	}
-
-	zbx_db_close();
 out:
 	if (SUCCEED != result)
 	{
@@ -1405,12 +1403,8 @@ static void	zbx_db_save_server_status(void)
 
 	zbx_json_close(&json);
 
-	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
-
 	if (ZBX_DB_OK > zbx_db_execute("update config set server_status='%s'", json.buffer))
 		zabbix_log(LOG_LEVEL_WARNING, "Failed to save server status to database");
-
-	zbx_db_close();
 
 	zbx_json_free(&json);
 }
@@ -1506,12 +1500,15 @@ static int	server_startup(zbx_socket_t *listen_sock, int *ha_stat, int *ha_failo
 	if (0 != CONFIG_FORKS[ZBX_PROCESS_TYPE_TRAPPER])
 	{
 		exit_args->listen_sock = listen_sock;
+		zbx_block_signals(&orig_mask);
 
 		if (FAIL == zbx_tcp_listen(listen_sock, CONFIG_LISTEN_IP, (unsigned short)CONFIG_LISTEN_PORT))
 		{
 			zabbix_log(LOG_LEVEL_CRIT, "listener failed: %s", zbx_socket_strerror());
 			return FAIL;
 		}
+
+		zbx_unblock_signals(&orig_mask);
 	}
 
 	for (threads_num = 0, i = 0; i < ZBX_PROCESS_TYPE_COUNT; i++)
@@ -1897,6 +1894,8 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 				ZABBIX_VERSION, ZABBIX_REVISION);
 	}
 
+	zbx_block_signals(&orig_mask);
+
 	if (FAIL == zbx_ipc_service_init_env(CONFIG_SOCKET_PATH, &error))
 	{
 		zbx_error("cannot initialize IPC services: %s", error);
@@ -2024,6 +2023,8 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 		exit(EXIT_FAILURE);
 	}
 
+	zbx_unblock_signals(&orig_mask);
+
 	if (SUCCEED != zbx_vault_db_credentials_get(&zbx_config_vault, &zbx_config_dbhigh->config_dbuser,
 			&zbx_config_dbhigh->config_dbpassword, &error))
 	{
@@ -2038,6 +2039,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 		zbx_free(error);
 		exit(EXIT_FAILURE);
 	}
+	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
 
 	if (ZBX_DB_UNKNOWN == (db_type = zbx_db_get_database_type()))
 	{
@@ -2073,6 +2075,7 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 
 	if (SUCCEED != zbx_db_check_instanceid())
 		exit(EXIT_FAILURE);
+	zbx_db_close();
 
 	if (FAIL == zbx_init_library_export(&zbx_config_export, &error))
 	{

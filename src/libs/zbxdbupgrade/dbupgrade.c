@@ -1003,8 +1003,6 @@ int	DBcheck_version(zbx_ha_mode_t ha_mode)
 			required = patches[i].version;
 	}
 
-	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
-
 	if (SUCCEED != zbx_db_table_exists(dbversion_table_name))
 	{
 #ifndef HAVE_SQLITE3
@@ -1184,8 +1182,6 @@ int	DBcheck_version(zbx_ha_mode_t ha_mode)
 #endif	/* not HAVE_SQLITE3 */
 
 out:
-	zbx_db_close();
-
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_result_string(ret));
 
 	return ret;

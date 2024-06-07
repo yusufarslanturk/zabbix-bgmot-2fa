@@ -16719,6 +16719,12 @@ msgstr "Resultado é FALSO"
 msgid "Result is TRUE"
 msgstr "Resultado é VERDADEIRO"
 
+#: app/controllers/CControllerPopupItemTestSend.php:453
+#: app/controllers/CControllerPopupItemTestSend.php:481
+#, c-format
+msgid "Result is truncated due to its size (%1$s)."
+msgstr ""
+
 #: app/views/popup.testtriggerexpr.php:30
 msgid "Result type"
 msgstr "Tipo de resultado"

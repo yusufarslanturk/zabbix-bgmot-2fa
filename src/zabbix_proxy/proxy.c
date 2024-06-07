@@ -204,6 +204,7 @@ static const char	*get_fping6_location(void)
 #endif
 
 static int	config_proxymode		= ZBX_PROXYMODE_ACTIVE;
+static sigset_t	orig_mask;
 
 int	CONFIG_FORKS[ZBX_PROCESS_TYPE_COUNT] = {
 	5, /* ZBX_PROCESS_TYPE_POLLER */
@@ -1271,10 +1272,8 @@ static void	proxy_db_init(void)
 	}
 
 #ifdef HAVE_ORACLE
-	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
 	zbx_db_table_prepare("items", NULL);
 	zbx_db_table_prepare("item_preproc", NULL);
-	zbx_db_close();
 #endif
 }
 
@@ -1317,6 +1316,8 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 				ZBX_PROXYMODE_PASSIVE == config_proxymode ? "passive" : "active",
 				CONFIG_HOSTNAME, ZABBIX_VERSION, ZABBIX_REVISION);
 	}
+
+	zbx_block_signals(&orig_mask);
 
 	if (FAIL == zbx_ipc_service_init_env(CONFIG_SOCKET_PATH, &error))
 	{
@@ -1422,6 +1423,8 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 	exit_args.rtc = &rtc;
 	zbx_set_on_exit_args(&exit_args);
 
+	zbx_unblock_signals(&orig_mask);
+
 	if (SUCCEED != init_database_cache(&error))
 	{
 		zabbix_log(LOG_LEVEL_CRIT, "cannot initialize database cache: %s", error);
@@ -1478,9 +1481,9 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 		zbx_free(error);
 		exit(EXIT_FAILURE);
 	}
-
+	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
 	proxy_db_init();
-
+	zbx_db_close();
 	change_proxy_history_count(zbx_proxy_get_history_count());
 
 	for (threads_num = 0, i = 0; i < ZBX_PROCESS_TYPE_COUNT; i++)
@@ -1499,11 +1502,15 @@ int	MAIN_ZABBIX_ENTRY(int flags)
 	{
 		exit_args.listen_sock = &listen_sock;
 
+		zbx_block_signals(&orig_mask);
+
 		if (FAIL == zbx_tcp_listen(&listen_sock, CONFIG_LISTEN_IP, (unsigned short)CONFIG_LISTEN_PORT))
 		{
 			zabbix_log(LOG_LEVEL_CRIT, "listener failed: %s", zbx_socket_strerror());
 			exit(EXIT_FAILURE);
 		}
+
+		zbx_unblock_signals(&orig_mask);
 	}
 
 	/* not running zbx_tls_init_parent() since proxy is only run on Unix*/
