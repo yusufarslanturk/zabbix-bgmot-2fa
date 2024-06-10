@@ -217,9 +217,7 @@ class testDashboardItemValueWidget extends testWidgets {
 		$this->page->login()->open('zabbix.php?action=dashboard.view&dashboardid='.self::$dashboardid)->waitUntilReady();
 		$dashboard = CDashboardElement::find()->waitUntilReady()->one();
 		$form = $dashboard->edit()->addWidget()->waitUntilReady()->asForm();
-		if ($form->getField('Type') !== 'Item value') {
-			$form->fill(['Type' => CFormElement::RELOADABLE_FILL('Item value')]);
-		}
+		$form->fill(['Type' => CFormElement::RELOADABLE_FILL('Item value')]);
 
 		// Check default values with default Advanced configuration (false).
 		$default_values = [
@@ -382,7 +380,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Refresh interval' => '30 seconds',
 						'Item' => [
 							'values' => '',
@@ -399,7 +396,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true,
 						// Description size in % relative to the size of the widget.
@@ -426,7 +422,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true,
 						// Description size in % relative to the size of the widget.
@@ -453,7 +448,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true,
 						// Description size in % relative to the size of the widget.
@@ -480,7 +474,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true,
 						// Description size in % relative to the size of the widget.
@@ -507,7 +500,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true,
 						'id:decimal_places' => '-1'
@@ -521,7 +513,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true,
 						'id:decimal_places' => '99'
@@ -535,7 +526,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true,
 						'id:description' => ''
@@ -549,7 +539,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true
 					],
@@ -565,7 +554,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true
 					],
@@ -581,7 +569,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true
 					],
@@ -597,7 +584,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true
 					],
@@ -613,7 +599,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true
 					],
@@ -630,7 +615,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true
 					],
@@ -647,7 +631,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true
 					],
@@ -663,7 +646,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true
 					],
@@ -680,7 +662,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Advanced configuration' => true
 					],
@@ -696,7 +677,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => [
 							'values' => 'Linux: Available memory',
 							'context' => [
@@ -711,7 +691,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Name' => 'Any name',
 						'Refresh interval' => 'No refresh',
 						'Item' => 'Available memory in %'
@@ -722,7 +701,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Name' => 'Имя виджета',
 						'Refresh interval' => '10 seconds',
 						'Item' => [
@@ -761,7 +739,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Type' => 'Item value',
 						'id:show_header' => false,
 						'Name' => '#$%^&*()!@{}[]<>,.|',
 						'Refresh interval' => '10 minutes',
@@ -789,7 +766,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Name' => 'New Single Item Widget',
 						'Refresh interval' => 'Default (1 minute)',
 						'Item' => 'Http agent item form',
@@ -843,7 +819,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Type' => 'Item value',
 						'id:show_header' => false,
 						'Name' => 'Color pick',
 						'Refresh interval' => '10 minutes',
@@ -878,7 +853,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Name' => 'Item Widget with threshold',
 						'Refresh interval' => '1 minute',
@@ -893,7 +867,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Name' => 'One threshold with color',
 						'Refresh interval' => '2 minutes',
@@ -908,7 +881,6 @@ class testDashboardItemValueWidget extends testWidgets {
 				[
 					'expected' => TEST_GOOD,
 					'fields' => [
-						'Type' => 'Item value',
 						'Item' => 'Available memory in %',
 						'Name' => 'Thresholds',
 						'Refresh interval' => '2 minutes',
@@ -998,6 +970,7 @@ class testDashboardItemValueWidget extends testWidgets {
 			: $dashboard->edit()->addWidget()->asForm();
 
 		COverlayDialogElement::find()->one()->waitUntilReady();
+		$form->fill(['Type' => CFormElement::RELOADABLE_FILL('Item value')]);
 		$form->fill($data['fields']);
 
 		if ($update && !CTestArrayHelper::get($data['fields'], 'Name')) {

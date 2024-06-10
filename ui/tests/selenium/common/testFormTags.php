@@ -1296,7 +1296,7 @@ class testFormTags extends CWebTest {
 			$table->findRow('Name', $data['name'], true)->query(self::EDIT_BUTTON_PATH)->waitUntilClickable()->one()->click();
 		}
 		else {
-			$this->query('link', $this->remove_name)->waitUntilPresent()->one()->click();
+			$this->query('link', $this->remove_name)->waitUntilClickable()->one()->hoverMouse()->click();
 		}
 
 		$locators = [

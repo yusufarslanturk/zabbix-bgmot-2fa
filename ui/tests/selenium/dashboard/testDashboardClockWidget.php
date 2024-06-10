@@ -972,6 +972,11 @@ class testDashboardClockWidget extends testWidgets {
 		$form->submit();
 
 		if ($data['expected'] === TEST_GOOD) {
+			// Wait until the created widget is ready before saving the dashboard.
+			if (!$update) {
+				$name = (CTestArrayHelper::get($data['fields'], 'Name', '') === '')  ?  'Local' : $data['fields']['Name'];
+				$dashboard->getWidget($name);
+			}
 			$dashboard->save();
 			$this->assertMessage(TEST_GOOD, 'Dashboard updated');
 
