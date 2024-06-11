@@ -530,7 +530,8 @@ class testPagePrototypes extends CWebTest {
 					'button' => 'Create disabled',
 					'column_check' => 'Create enabled',
 					'before' => 'Yes',
-					'after' => 'No'
+					'after' => 'No',
+					'message' => 'Host prototype updated'
 				]
 			],
 			// #1 Click on Create enabled button.
@@ -540,7 +541,8 @@ class testPagePrototypes extends CWebTest {
 					'button' => 'Create enabled',
 					'column_check' => 'Create enabled',
 					'before' => 'No',
-					'after' => 'Yes'
+					'after' => 'Yes',
+					'message' => 'Host prototype updated'
 				]
 			],
 			// #2 Enabled clicking on link in Create enabled column.
@@ -549,7 +551,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => 'a3 Host prototype not monitored not discovered {#H}',
 					'column_check' => 'Create enabled',
 					'before' => 'No',
-					'after' => 'Yes'
+					'after' => 'Yes',
+					'message' => 'Host prototype updated'
 				]
 			],
 			// #3 Disabled clicking on link in Create enabled column.
@@ -558,7 +561,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => 'Yw Host prototype monitored not discovered {#H}',
 					'column_check' => 'Create enabled',
 					'before' => 'Yes',
-					'after' => 'No'
+					'after' => 'No',
+					'message' => 'Host prototype updated'
 				]
 			],
 			// #4 Enable discovering clicking on link in Discover column.
@@ -567,7 +571,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => 'a3 Host prototype not monitored not discovered {#H}',
 					'column_check' => 'Discover',
 					'before' => 'No',
-					'after' => 'Yes'
+					'after' => 'Yes',
+					'message' => 'Host prototype updated'
 				]
 			],
 			// #5 Disable discovering clicking on link in Discover column.
@@ -576,7 +581,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => '21 Host prototype not monitored discovered {#H}',
 					'column_check' => 'Discover',
 					'before' => 'Yes',
-					'after' => 'No'
+					'after' => 'No',
+					'message' => 'Host prototype updated'
 				]
 			],
 			// #6 Enable all host prototypes clicking on Create enabled button.
@@ -584,7 +590,8 @@ class testPagePrototypes extends CWebTest {
 				[
 					'button' => 'Create enabled',
 					'column_check' => 'Create enabled',
-					'after' => ['Yes', 'Yes', 'Yes', 'Yes']
+					'after' => ['Yes', 'Yes', 'Yes', 'Yes'],
+					'message' => 'Host prototypes updated'
 				]
 			],
 			// #7 Disable all host prototypes clicking on Create disabled button.
@@ -592,7 +599,8 @@ class testPagePrototypes extends CWebTest {
 				[
 					'button' => 'Create disabled',
 					'column_check' => 'Create enabled',
-					'after' => ['No', 'No', 'No', 'No']
+					'after' => ['No', 'No', 'No', 'No'],
+					'message' => 'Host prototypes updated'
 				]
 			]
 		];
@@ -610,7 +618,8 @@ class testPagePrototypes extends CWebTest {
 					'button' => 'Create disabled',
 					'column_check' => 'Create enabled',
 					'before' => 'Yes',
-					'after' => 'No'
+					'after' => 'No',
+					'message' => 'Item prototype disabled'
 				]
 			],
 			// #1 Click on Create enabled button.
@@ -620,7 +629,8 @@ class testPagePrototypes extends CWebTest {
 					'button' => 'Create enabled',
 					'column_check' => 'Create enabled',
 					'before' => 'No',
-					'after' => 'Yes'
+					'after' => 'Yes',
+					'message' => 'Item prototype enabled'
 				]
 			],
 			// #2 Enabled clicking on link in Create enabled column.
@@ -629,7 +639,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => '33b4 Item prototype not monitored not discovered',
 					'column_check' => 'Create enabled',
 					'before' => 'No',
-					'after' => 'Yes'
+					'after' => 'Yes',
+					'message' => 'Item prototype enabled'
 				]
 			],
 			// #3 Disabled clicking on link in Create enabled column.
@@ -638,7 +649,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => 'a3 Item prototype monitored not discovered',
 					'column_check' => 'Create enabled',
 					'before' => 'Yes',
-					'after' => 'No'
+					'after' => 'No',
+					'message' => 'Item prototype disabled'
 				]
 			],
 			// #4 Enable discovering clicking on link in Discover column.
@@ -647,7 +659,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => '33b4 Item prototype not monitored not discovered',
 					'column_check' => 'Discover',
 					'before' => 'No',
-					'after' => 'Yes'
+					'after' => 'Yes',
+					'message' => 'Item prototype updated'
 				]
 			],
 			// #5 Disable discovering clicking on link in Discover column.
@@ -656,7 +669,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => '15 Item prototype not monitored discovered',
 					'column_check' => 'Discover',
 					'before' => 'Yes',
-					'after' => 'No'
+					'after' => 'No',
+					'message' => 'Item prototype updated'
 				]
 			],
 			// #6 Enable all host prototypes clicking on Create enabled button.
@@ -664,7 +678,8 @@ class testPagePrototypes extends CWebTest {
 				[
 					'button' => 'Create enabled',
 					'column_check' => 'Create enabled',
-					'after' => ['Yes', 'Yes', 'Yes', 'Yes', 'Yes']
+					'after' => ['Yes', 'Yes', 'Yes', 'Yes', 'Yes'],
+					'message' => 'Item prototypes enabled'
 				]
 			],
 			// #7 Disable all host prototypes clicking on Create disabled button.
@@ -672,7 +687,8 @@ class testPagePrototypes extends CWebTest {
 				[
 					'button' => 'Create disabled',
 					'column_check' => 'Create enabled',
-					'after' => ['No', 'No', 'No', 'No', 'No']
+					'after' => ['No', 'No', 'No', 'No', 'No'],
+					'message' => 'Item prototypes disabled'
 				]
 			]
 		];
@@ -690,7 +706,8 @@ class testPagePrototypes extends CWebTest {
 					'button' => 'Create disabled',
 					'column_check' => 'Create enabled',
 					'before' => 'Yes',
-					'after' => 'No'
+					'after' => 'No',
+					'message' => 'Trigger prototype disabled'
 				]
 			],
 			// #1 Click on Create enabled button.
@@ -700,7 +717,8 @@ class testPagePrototypes extends CWebTest {
 					'button' => 'Create enabled',
 					'column_check' => 'Create enabled',
 					'before' => 'No',
-					'after' => 'Yes'
+					'after' => 'Yes',
+					'message' => 'Trigger prototype enabled'
 				]
 			],
 			// #2 Enabled clicking on link in Create enabled column.
@@ -709,7 +727,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => '33b4 Trigger prototype not monitored not discovered_{#KEY}',
 					'column_check' => 'Create enabled',
 					'before' => 'No',
-					'after' => 'Yes'
+					'after' => 'Yes',
+					'message' => 'Trigger prototype enabled'
 				]
 			],
 			// #3 Disabled clicking on link in Create enabled column.
@@ -718,7 +737,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => 'a3 Trigger prototype monitored not discovered_{#KEY}',
 					'column_check' => 'Create enabled',
 					'before' => 'Yes',
-					'after' => 'No'
+					'after' => 'No',
+					'message' => 'Trigger prototype disabled'
 				]
 			],
 			// #4 Enable discovering clicking on link in Discover column.
@@ -727,7 +747,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => '33b4 Trigger prototype not monitored not discovered_{#KEY}',
 					'column_check' => 'Discover',
 					'before' => 'No',
-					'after' => 'Yes'
+					'after' => 'Yes',
+					'message' => 'Trigger prototype updated'
 				]
 			],
 			// #5 Disable discovering clicking on link in Discover column.
@@ -736,7 +757,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => '15 Trigger prototype not monitored discovered_{#KEY}',
 					'column_check' => 'Discover',
 					'before' => 'Yes',
-					'after' => 'No'
+					'after' => 'No',
+					'message' => 'Trigger prototype updated'
 				]
 			],
 			// #6 Enable all trigger prototypes clicking on Create enabled button.
@@ -744,7 +766,8 @@ class testPagePrototypes extends CWebTest {
 				[
 					'button' => 'Create enabled',
 					'column_check' => 'Create enabled',
-					'after' => ['Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes']
+					'after' => ['Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'],
+					'message' => 'Trigger prototypes enabled'
 				]
 			],
 			// #7 Disable all trigger prototypes clicking on Create disabled button.
@@ -752,7 +775,8 @@ class testPagePrototypes extends CWebTest {
 				[
 					'button' => 'Create disabled',
 					'column_check' => 'Create enabled',
-					'after' => ['No', 'No', 'No', 'No', 'No', 'No']
+					'after' => ['No', 'No', 'No', 'No', 'No', 'No'],
+					'message' => 'Trigger prototypes disabled'
 				]
 			]
 		];
@@ -769,7 +793,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => '33b4 Graph prototype not discovered_{#KEY}',
 					'column_check' => 'Discover',
 					'before' => 'No',
-					'after' => 'Yes'
+					'after' => 'Yes',
+					'message' => 'Graph prototype updated'
 				]
 			],
 			// #1 Disable discovering clicking on link in Discover column.
@@ -778,7 +803,8 @@ class testPagePrototypes extends CWebTest {
 					'name' => '2a Graph prototype discovered_{#KEY}',
 					'column_check' => 'Discover',
 					'before' => 'Yes',
-					'after' => 'No'
+					'after' => 'No',
+					'message' => 'Graph prototype updated'
 				]
 			]
 		];
@@ -813,13 +839,13 @@ class testPagePrototypes extends CWebTest {
 			$this->page->waitUntilReady();
 		}
 
+		$this->assertMessage(TEST_GOOD, $data['message']);
+
 		// Check column value for one or for all prototypes.
 		if (array_key_exists('name', $data)) {
-			$this->assertMessage(TEST_GOOD, ucfirst($this->source).' prototype updated');
 			$this->assertEquals($data['after'], $row->getColumn($data['column_check'])->getText());
 		}
 		else {
-			$this->assertMessage(TEST_GOOD, ucfirst($this->source).' prototypes updated');
 			$this->assertTableDataColumn($data['after'], $data['column_check'], $this->table_xpath);
 		}
 	}
