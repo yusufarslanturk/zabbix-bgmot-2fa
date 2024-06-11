@@ -16738,6 +16738,12 @@ msgstr "Резултатът е ЛЪЖА"
 msgid "Result is TRUE"
 msgstr "Резултатът е ИСТИНА"
 
+#: app/controllers/CControllerPopupItemTestSend.php:453
+#: app/controllers/CControllerPopupItemTestSend.php:481
+#, c-format
+msgid "Result is truncated due to its size (%1$s)."
+msgstr ""
+
 #: app/views/popup.testtriggerexpr.php:30
 msgid "Result type"
 msgstr "Тип резултат"
