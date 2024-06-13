@@ -52,8 +52,8 @@ class CVaultCyberArk extends CVault {
 	public function __construct(string $api_endpoint, string $db_path, ?string $cert_file, ?string $key_file) {
 		$this->api_endpoint = rtrim(trim($api_endpoint), '/');
 		$this->db_path = trim($db_path);
-		$this->cert_file = $cert_file !== null ? trim($cert_file) : null;
-		$this->key_file = $key_file !== null ? trim($key_file) : null;
+		$this->cert_file = trim($cert_file);
+		$this->key_file = trim($key_file);
 	}
 
 	public function validateParameters(): bool {
@@ -82,7 +82,7 @@ class CVaultCyberArk extends CVault {
 			]
 		];
 
-		if ($this->cert_file !== null && $this->key_file !== null) {
+		if ($this->cert_file !== '' && $this->key_file !== '') {
 			$context['ssl'] = [
 				'local_cert'		=> $this->cert_file,
 				'local_pk'			=> $this->key_file,
