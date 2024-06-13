@@ -49,11 +49,11 @@ class CVaultCyberArk extends CVault {
 	 */
 	protected $key_file;
 
-	public function __construct(string $api_endpoint, string $db_path, string $cert_file, string $key_file) {
+	public function __construct(string $api_endpoint, string $db_path, ?string $cert_file, ?string $key_file) {
 		$this->api_endpoint = rtrim(trim($api_endpoint), '/');
 		$this->db_path = trim($db_path);
-		$this->cert_file = trim($cert_file);
-		$this->key_file = trim($key_file);
+		$this->cert_file = trim($cert_file ?? '');
+		$this->key_file = trim($key_file ?? '');
 	}
 
 	public function validateParameters(): bool {
