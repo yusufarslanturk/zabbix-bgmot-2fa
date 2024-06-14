@@ -51,7 +51,7 @@ window.ZABBIX = Object.create({
 		var ls = this.namespace('instances.localStorage');
 		ls && ls.destruct();
 
-		redirect('index.php?reconnect=1', 'post');
+		redirect('index.php?reconnect=1', 'post', '_csrf_token', true);
 	}
 });
 
