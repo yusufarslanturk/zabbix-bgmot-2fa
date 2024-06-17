@@ -400,7 +400,7 @@ class CScreenProblem extends CScreenBase {
 
 		foreach ($problems as &$problem) {
 			foreach ($problem['suppression_data'] as &$data) {
-				if ($data['maintenanceid'] != 0) {
+				if ($data['maintenanceid'] != 0 && array_key_exists($data['maintenanceid'], $maintenances)) {
 					$data['maintenance_name'] = $maintenances[$data['maintenanceid']]['name'];
 				}
 				elseif ($data['userid'] != 0 && array_key_exists($data['userid'], $users)) {
