@@ -765,7 +765,7 @@ function redirect(uri, method, needle, invert_needle, allow_empty) {
 
 	var url = new Curl(uri);
 
-	if (method == 'get') {
+	if (method === 'get') {
 		window.location = url.getUrl();
 	}
 	else {

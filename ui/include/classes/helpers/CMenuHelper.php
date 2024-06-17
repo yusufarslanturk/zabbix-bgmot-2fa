@@ -482,6 +482,7 @@ class CMenuHelper {
 				->setUrl(new CUrl('#signout'))
 				->setTitle(_('Sign out'))
 				->onClick('ZABBIX.logout(event)')
+				->setAttribute('data-csrf_token', CCsrfTokenHelper::get('index.php'))
 		);
 
 		return $menu;

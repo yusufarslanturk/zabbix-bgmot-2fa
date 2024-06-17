@@ -48,10 +48,12 @@ window.ZABBIX = Object.create({
 	logout: function(event) {
 		cancelEvent(event);
 
-		var ls = this.namespace('instances.localStorage');
+		let ls = this.namespace('instances.localStorage');
 		ls && ls.destruct();
 
-		redirect('index.php?reconnect=1', 'post', '_csrf_token', true);
+		let csrf_token = event.currentTarget.dataset.csrf_token;
+
+		redirect('index.php?reconnect=1&_csrf_token=' + csrf_token, 'post', '_csrf_token', true);
 	}
 });
 
