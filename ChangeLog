@@ -1,3 +1,14 @@
+Changes for 6.4.16
+
+6.4.16rc2 was released as 6.4.16 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 6.4.16rc2
+
+Bug fixes:
+..F....... [ZBX-24588] fixed CyberArk Vault connection with no certificates (vmurzins)
+
+--------------------------------------------------------------------------------
 Changes for 6.4.16rc1
 
 New features:
@@ -1822,6 +1833,11 @@ A.F....PS. [ZBXNEXT-7402,ZBXNEXT-7413] added support for CyberArk Vault (acikuns
 ..F.I..... [ZBXNEXT-7397] removed support for MD5 user passwords (asestakovs, mkrisjanis)
 ........S. [ZBXNEXT-7488] removed zabbix[history*] and zabbix[trends*] internal items (akozlovs)
 ..F....... [ZBXNEXT-7138] added modal form for API tokens in User settings->API tokens and Administration->General->API tokens (epulke)
+
+--------------------------------------------------------------------------------
+Changes for 6.0.31
+
+6.0.31rc1 was released as 6.0.31 without any changes
 
 --------------------------------------------------------------------------------
 Changes for 6.0.31rc1
@@ -4921,6 +4937,7 @@ Changes for 5.0.43rc1
 New features:
 
 Bug fixes:
+.........T [ZBX-23788] added SNMP OID ifAlias in Network interfaces discovery (egordymov)
 .....J.... [ZBX-24298] allowed any JNDI service providers back in JMX monitoring (dimir)
 
 --------------------------------------------------------------------------------
