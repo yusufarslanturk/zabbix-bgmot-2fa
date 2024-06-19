@@ -1006,7 +1006,7 @@ function makeSuppressedProblemIcon(array $icon_data, bool $blink = false) {
 		if (array_key_exists('maintenance_name', $suppression)) {
 			$maintenance_names[] = $suppression['maintenance_name'];
 		}
-		else {
+		elseif (array_key_exists('username', $suppression)) {
 			$username = $suppression['username'];
 		}
 	}
