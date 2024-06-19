@@ -400,14 +400,22 @@ class CScreenProblem extends CScreenBase {
 
 		foreach ($problems as &$problem) {
 			foreach ($problem['suppression_data'] as &$data) {
-				if ($data['maintenanceid'] != 0 && array_key_exists($data['maintenanceid'], $maintenances)) {
-					$data['maintenance_name'] = $maintenances[$data['maintenanceid']]['name'];
+				if ($data['maintenanceid'] != 0) {
+					if (array_key_exists($data['maintenanceid'], $maintenances)) {
+						$data['maintenance_name'] = $maintenances[$data['maintenanceid']]['name'];
+					}
+					else {
+						$data['maintenance_name'] = _('Inaccessible maintenance');
+					}
 				}
-				elseif ($data['userid'] != 0 && array_key_exists($data['userid'], $users)) {
-					$data['username'] = getUserFullname($users[$data['userid']]);
-				}
-				else {
-					$data['username'] = _('Inaccessible user');
+
+				if ($data['userid'] != 0) {
+					if (array_key_exists($data['userid'], $users)) {
+						$data['username'] = getUserFullname($users[$data['userid']]);
+					}
+					else {
+						$data['username'] = _('Inaccessible user');
+					}
 				}
 			}
 			unset($data);

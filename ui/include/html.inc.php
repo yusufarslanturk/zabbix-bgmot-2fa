@@ -1011,7 +1011,7 @@ function makeSuppressedProblemIcon(array $icon_data, bool $blink = false) {
 		}
 	}
 
-	$maintenances = implode(',', $maintenance_names);
+	$maintenances = implode(', ', $maintenance_names);
 
 	return (new CSimpleButton())
 		->addClass(ZBX_STYLE_ACTION_ICON_SUPPRESS)
