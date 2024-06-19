@@ -45,15 +45,11 @@ window.ZABBIX = Object.create({
 	/**
 	 * Logs user out, also, handles side effects before that.
 	 */
-	logout: function(event) {
-		cancelEvent(event);
-
+	logout: function(csrf_token) {
 		let ls = this.namespace('instances.localStorage');
 		ls && ls.destruct();
 
-		let csrf_token = event.currentTarget.dataset.csrf_token;
-
-		redirect('index.php?reconnect=1&_csrf_token=' + csrf_token, 'post', '_csrf_token', true);
+		redirect(`index.php?reconnect=1&_csrf_token=${csrf_token}`, 'post', '_csrf_token', true);
 	}
 });
 
