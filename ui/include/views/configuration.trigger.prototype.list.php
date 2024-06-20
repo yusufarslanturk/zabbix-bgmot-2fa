@@ -147,12 +147,12 @@ foreach ($data['triggers'] as $trigger) {
 			->setArgument('g_triggerid[]', $triggerid)
 			->setArgument('parent_discoveryid', $data['parent_discoveryid'])
 			->setArgument('context', $data['context'])
+			->setArgument('backurl', $url)
 			->getUrl()
 	))
 		->addCsrfToken($csrf_token)
 		->addClass(ZBX_STYLE_LINK_ACTION)
 		->addClass(triggerIndicatorStyle($trigger['status']));
-
 
 	$nodiscover = ($trigger['discover'] == ZBX_PROTOTYPE_NO_DISCOVER);
 	$discover = (new CLink($nodiscover ? _('No') : _('Yes'),
@@ -164,6 +164,7 @@ foreach ($data['triggers'] as $trigger) {
 					: 'triggerprototype.discover.disable'
 				)
 				->setArgument('context', $data['context'])
+				->setArgument('backurl', $url)
 				->getUrl()
 		))
 			->addCsrfToken($csrf_token)

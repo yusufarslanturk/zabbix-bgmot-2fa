@@ -28,6 +28,8 @@ require_once dirname(__FILE__).'/../common/testWidgets.php';
  * @dataSource AllItemValueTypes
  *
  * @backup widget, profiles
+ *
+ * @dataSource AllItemValueTypes
  */
 class testDashboardGraphPrototypeWidget extends testWidgets {
 
@@ -256,6 +258,7 @@ class testDashboardGraphPrototypeWidget extends testWidgets {
 		sleep(1);
 		$dialog = COverlayDialogElement::find()->one();
 		$this->assertScreenshot($dialog);
+		$dialog->close();
 	}
 
 	public static function getWidgetScreenshotData() {
@@ -442,6 +445,8 @@ class testDashboardGraphPrototypeWidget extends testWidgets {
 				$this->assertMessage($data['expected'], null, $data['error']);
 				break;
 		}
+
+		COverlayDialogElement::find()->one()->close();
 	}
 
 	/**
@@ -494,6 +499,7 @@ class testDashboardGraphPrototypeWidget extends testWidgets {
 		if ($update) {
 			$new_values = $dashboard->getWidget(self::$previous_widget_name)->edit()->getFields()->asValues();
 			$this->assertEquals($original_values, $new_values);
+			COverlayDialogElement::find()->one()->close();
 		}
 
 		$this->assertEquals($initial_values, CDBHelper::getHash($this->sql));

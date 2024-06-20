@@ -876,7 +876,7 @@ class testPageMonitoringHosts extends CWebTest {
 				[
 					'name' => 'ЗАББИКС Сервер',
 					'link_name' => 'Dashboards',
-					'page_header' => 'Network interfaces'
+					'page_header' => 'Filesystems'
 				]
 			],
 			[
@@ -1124,7 +1124,7 @@ class testPageMonitoringHosts extends CWebTest {
 	 */
 	private function selectLink($host_name, $column, $page_header) {
 		$this->page->waitUntilReady();
-		$this->query('class:list-table')->asTable()->one()->findRow('Name', $host_name)->query('link', $column)->one()->click();
+		$this->query('class:list-table')->asTable()->waitUntilVisible()->one()->findRow('Name', $host_name)->query('link', $column)->one()->click();
 		$this->page->waitUntilReady();
 		if ($page_header !== null) {
 			$this->page->assertHeader($page_header);
@@ -1169,7 +1169,7 @@ class testPageMonitoringHosts extends CWebTest {
 					'counters' => [
 						[
 							'column' => 'Dashboards',
-							'counter' => 4
+							'counter' => 5
 						],
 						[
 							'column' => 'Problems',

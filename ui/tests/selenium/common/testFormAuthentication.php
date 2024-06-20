@@ -175,7 +175,7 @@ class testFormAuthentication extends CWebTest {
 	protected function checkHints($hintboxes, $form) {
 		foreach ($hintboxes as $label => $text) {
 			$form->query('xpath:.//label[text()='.CXPathHelper::escapeQuotes($label).']/a')->one()->click();
-			$hint = $this->query('xpath://div[@class="overlay-dialogue"]')->waitUntilPresent()->all()->last();
+			$hint = $this->query('xpath://div[@class="overlay-dialogue wordbreak"]')->waitUntilPresent()->all()->last();
 			$this->assertEquals($text, $hint->getText());
 			$hint->query('xpath:.//button[@title="Close"]')->waitUntilClickable()->one()->click();
 		}

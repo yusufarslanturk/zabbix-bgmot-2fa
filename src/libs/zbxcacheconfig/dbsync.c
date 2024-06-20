@@ -24,6 +24,7 @@
 #include "base64.h"
 #include "zbxeval.h"
 #include "zbxnum.h"
+#include "zbxip.h"
 
 /* global correlation constants */
 #define ZBX_CORRELATION_ENABLED				0
@@ -1672,10 +1673,28 @@ static char	**dbsync_interface_preproc_row(char **row)
 
 	/* expand user macros */
 	if (NULL != strstr(row[5], "{$"))
-		row[5] = dc_expand_user_macros_dyn(row[5], &hostid, 1, ZBX_MACRO_ENV_NONSECURE);
+	{
+		char	*addr;
+
+		addr = dc_expand_user_macros_dyn(row[5], &hostid, 1, ZBX_MACRO_ENV_NONSECURE);
+
+		if (SUCCEED == zbx_is_ip(addr))
+			row[5] = addr;
+		else
+			zbx_free(addr);
+	}
 
 	if (NULL != strstr(row[6], "{$"))
-		row[6] = dc_expand_user_macros_dyn(row[6], &hostid, 1, ZBX_MACRO_ENV_NONSECURE);
+	{
+		char	*addr;
+
+		addr = dc_expand_user_macros_dyn(row[6], &hostid, 1, ZBX_MACRO_ENV_NONSECURE);
+
+		if (SUCCEED == zbx_is_ip(addr) || SUCCEED == zbx_validate_hostname(addr))
+			row[6] = addr;
+		else
+			zbx_free(addr);
+	}
 
 	return row;
 }

@@ -334,6 +334,7 @@ class testDashboardClockWidget extends testWidgets {
 				}
 			}
 		}
+		$dialog->close();
 	}
 
 	/**
@@ -971,6 +972,11 @@ class testDashboardClockWidget extends testWidgets {
 		$form->submit();
 
 		if ($data['expected'] === TEST_GOOD) {
+			// Wait until the created widget is ready before saving the dashboard.
+			if (!$update) {
+				$name = (CTestArrayHelper::get($data['fields'], 'Name', '') === '')  ?  'Local' : $data['fields']['Name'];
+				$dashboard->getWidget($name);
+			}
 			$dashboard->save();
 			$this->assertMessage(TEST_GOOD, 'Dashboard updated');
 
@@ -1010,6 +1016,8 @@ class testDashboardClockWidget extends testWidgets {
 			// Check that DB hash is not changed.
 			$this->assertEquals($old_hash, CDBHelper::getHash($this->sql));
 		}
+
+		COverlayDialogElement::find()->one()->close();
 	}
 
 	/**
@@ -1060,7 +1068,7 @@ class testDashboardClockWidget extends testWidgets {
 			[
 				[
 					'cancel_form' => false,
-					'create_widget' => false,
+					'create_widget' => true,
 					'save_dashboard' => false
 				]
 			],
@@ -1150,6 +1158,7 @@ class testDashboardClockWidget extends testWidgets {
 		// Check that updating widget form values did not change in frontend.
 		if (!$create && !$save_dashboard) {
 			$this->assertEquals($values, $dashboard->getWidget('CancelClock')->edit()->getFields()->asValues());
+			COverlayDialogElement::find()->one()->close();
 		}
 
 		// Check that DB hash is not changed.

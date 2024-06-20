@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-04-02 13:55+0000\n"
+"PO-Revision-Date: 2024-06-15 12:45+0000\n"
 "Last-Translator: Vicente Salvador <vicentesalvadorcubedo@gmail.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: es\n"
@@ -3783,7 +3783,7 @@ msgstr[1] "No se pudieron actualizar los prototipos de métrica"
 
 #: app/controllers/CControllerPopupMassupdateItem.php:270
 msgid "Cannot update item prototypes"
-msgstr "No se pueden actualizar los prototipos de artículos"
+msgstr "No se pueden actualizar los prototipos de métricas"
 
 #: app/controllers/CControllerPopupMassupdateItem.php:270
 msgid "Cannot update items"
@@ -5138,7 +5138,7 @@ msgstr "¿Crear métricas a partir de prototipos seleccionados como deshabilitad
 
 #: include/views/configuration.item.prototype.list.php:206
 msgid "Create items from selected prototypes as enabled?"
-msgstr "¿Crear métricas a partir de prototipos seleccionados como habilitadas?"
+msgstr "¿Crear métricas a partir de prototipos seleccionados como habilitados?"
 
 #: app/views/maintenance.list.php:152
 msgid "Create maintenance period"
@@ -6508,11 +6508,11 @@ msgstr "Crítica"
 
 #: include/items.inc.php:1951
 msgid "Discard unchanged"
-msgstr "Descartar no modificados"
+msgstr "Descartar sin cambios"
 
 #: include/items.inc.php:1955
 msgid "Discard unchanged with heartbeat"
-msgstr "Descartar sin cambios con el heartbeat"
+msgstr "Descartar sin cambios con heartbeat"
 
 #: app/views/js/popup.itemtestedit.view.js.php:366 include/forms.inc.php:1557
 #: include/views/js/item.preprocessing.js.php:66
@@ -13145,7 +13145,7 @@ msgstr "Silenciar"
 
 #: app/views/monitoring.dashboard.list.php:95
 msgid "My"
-msgstr "Mi"
+msgstr "Mio"
 
 #: include/classes/helpers/CServiceHelper.php:37
 #: include/classes/helpers/CServiceHelper.php:47
@@ -16727,6 +16727,12 @@ msgstr "Resultado es FALSO"
 msgid "Result is TRUE"
 msgstr "RESULTADO is VERDADERO"
 
+#: app/controllers/CControllerPopupItemTestSend.php:453
+#: app/controllers/CControllerPopupItemTestSend.php:481
+#, c-format
+msgid "Result is truncated due to its size (%1$s)."
+msgstr ""
+
 #: app/views/popup.testtriggerexpr.php:30
 msgid "Result type"
 msgstr "Tipo de resultado"
@@ -17247,7 +17253,7 @@ msgstr "Guardarlo como \"%1$s\""
 
 #: app/views/administration.module.list.php:43
 msgid "Scan directory"
-msgstr "Directorio de escaneo"
+msgstr "Escanear carpeta"
 
 #: include/views/configuration.httpconf.edit.php:237
 msgid "Scenario"

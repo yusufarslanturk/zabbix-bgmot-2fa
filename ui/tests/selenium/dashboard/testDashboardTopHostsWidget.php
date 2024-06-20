@@ -855,6 +855,8 @@ class testDashboardTopHostsWidget extends testWidgets  {
 			// Check widget amount that it is added.
 			$this->assertEquals($old_widget_count + 1, $dashboard->getWidgets()->count());
 			$this->checkWidget($header, $data, 'create');
+
+			COverlayDialogElement::find()->one()->close();
 		}
 		else {
 			COverlayDialogElement::find()->one()->close();
@@ -1316,8 +1318,9 @@ class testDashboardTopHostsWidget extends testWidgets  {
 
 			// Check message that widget added.
 			$this->assertMessage(TEST_GOOD, 'Dashboard updated');
-
 			$this->checkWidget(self::$updated_name, $data, 'update');
+
+			COverlayDialogElement::find()->one()->close();
 		}
 		else {
 			COverlayDialogElement::find()->one()->close();
@@ -1428,6 +1431,8 @@ class testDashboardTopHostsWidget extends testWidgets  {
 
 		// Check that tag/column/threshold removed.
 		$this->assertEquals($amount_before - 1, $table->getRows()->count());
+
+		COverlayDialogElement::closeAll();
 	}
 
 	/**
@@ -1755,7 +1760,7 @@ class testDashboardTopHostsWidget extends testWidgets  {
 
 		// Add column.
 		$form->query('id:add')->waitUntilClickable()->one()->click();
-		$column_form = COverlayDialogElement::find()->waitUntilReady()->asForm()->all()->last();
+		$column_form = COverlayDialogElement::find()->waitUntilReady()->all()->last()->asForm();
 
 		// Check that no warning icon displayed before adding fields.
 		$warnings = array_merge($warnings, [$history_data]);
@@ -1773,7 +1778,7 @@ class testDashboardTopHostsWidget extends testWidgets  {
 			$column_form->query('xpath:'.$warning.'/a')->one()->click();
 
 			// Check hint-box.
-			$hint = $column_form->query('xpath://div[@class="overlay-dialogue"]')->waitUntilPresent();
+			$hint = $column_form->query('xpath://div[@class="overlay-dialogue wordbreak"]')->waitUntilPresent();
 			$hintbox = ($warning === $history_data)
 					? 'This setting applies only to numeric data. Non-numeric data will always be taken from history.'
 					: 'With this setting only numeric items will be displayed in this column.';
@@ -1783,6 +1788,8 @@ class testDashboardTopHostsWidget extends testWidgets  {
 			$hint->query('xpath://button[@class="overlay-close-btn"]')->one()->click();
 			$hint->waitUntilNotPresent();
 		}
+
+		COverlayDialogElement::closeAll();
 	}
 
 	public static function getCheckTextItemsData() {
