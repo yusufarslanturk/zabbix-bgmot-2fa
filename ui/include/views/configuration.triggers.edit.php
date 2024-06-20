@@ -258,6 +258,12 @@ if ($data['expression_constructor'] == IM_TREE) {
 				foreach ($e['list'] as &$obj) {
 					if ($obj instanceof CLinkAction && $obj->getAttribute('class') == ZBX_STYLE_LINK_ACTION) {
 						$obj = new CSpan($obj->items);
+
+						// Decode HTML entities in trigger expressions.
+						foreach ($obj->items as &$obj_item) {
+							$obj_item = htmlspecialchars_decode($obj_item, ENT_NOQUOTES);
+						}
+						unset($obj_item);
 					}
 				}
 				unset($obj);
@@ -463,6 +469,12 @@ if ($data['recovery_expression_constructor'] == IM_TREE) {
 				foreach ($e['list'] as &$obj) {
 					if ($obj instanceof CLinkAction && $obj->getAttribute('class') == ZBX_STYLE_LINK_ACTION) {
 						$obj = new CSpan($obj->items);
+
+						// Decode HTML entities in trigger expressions.
+						foreach ($obj->items as &$obj_item) {
+							$obj_item = htmlspecialchars_decode($obj_item, ENT_NOQUOTES);
+						}
+						unset($obj_item);
 					}
 				}
 				unset($obj);
