@@ -3135,7 +3135,7 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 			MACRO_TYPE_EVENT_NAME)))
 	{
 
-		const DB_EVENT	*c_event;
+		const zbx_db_event	*c_event;
 
 		c_event = ((NULL != r_event) ? r_event : event);
 
