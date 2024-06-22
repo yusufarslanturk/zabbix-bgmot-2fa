@@ -222,7 +222,7 @@ class testTemplateInheritance extends CLegacyWebTest {
 		$this->zbxTestAssertElementValue('description', 'Test LLD trigger1');
 		$this->zbxTestAssertElementValue('expression', 'last(/Template inheritance test host/key-item-inheritance-test,#1)=0');
 		$this->assertTrue($this->zbxTestCheckboxSelected('recovery_mode_0'));
-		$this->zbxTestAssertElementPresentXpath("//input[@id='recovery_mode_0'][@disabled]");
+		$this->zbxTestAssertElementPresentXpath("//input[@id='recovery_mode_0'][@readonly]");
 		$this->zbxTestAssertElementText('//*[@name="comments"]', 'comments');
 		$this->zbxTestAssertElementValue('url', 'zabbix.php');
 		$this->assertTrue($this->zbxTestCheckboxSelected('priority_2'));
@@ -439,7 +439,7 @@ class testTemplateInheritance extends CLegacyWebTest {
 		$this->assertEquals($getName, 'Test LLD trigger');
 		$this->zbxTestAssertElementValue('expression', 'last(/Template inheritance test host/item-discovery-prototype[{#KEY}],#1)=0');
 		$this->assertTrue($this->zbxTestCheckboxSelected('recovery_mode_0'));
-		$this->zbxTestAssertElementPresentXpath("//input[@id='recovery_mode_0'][@disabled]");
+		$this->zbxTestAssertElementPresentXpath("//input[@id='recovery_mode_0'][@readonly]");
 		$this->zbxTestAssertElementText('//*[@name="comments"]', 'comments');
 		$this->zbxTestAssertElementValue('url', 'zabbix.php');
 		$this->assertTrue($this->zbxTestCheckboxSelected('priority_2'));
