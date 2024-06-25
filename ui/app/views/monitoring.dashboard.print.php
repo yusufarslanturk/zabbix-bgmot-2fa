@@ -21,7 +21,17 @@
 
 /**
  * @var CView $this
+ * @var array $data
  */
+
+$this->addJsFile('class.dashboard.js');
+$this->addJsFile('class.dashboard.page.js');
+$this->addJsFile('class.dashboard.widget.placeholder.js');
+$this->addJsFile('class.sortable.js');
+$this->addJsFile('class.widget.js');
+$this->addJsFile('class.widget.inaccessible.js');
+$this->addJsFile('class.widget.iterator.js');
+$this->addJsFile('class.widget.paste-placeholder.js');
 
 if (array_key_exists('error', $data)) {
 	show_error_message($data['error']);
@@ -29,26 +39,18 @@ if (array_key_exists('error', $data)) {
 	return;
 }
 
+$this->addJsFile('class.csvggraph.js');
+$this->addJsFile('class.svg.canvas.js');
+$this->addJsFile('class.svg.map.js');
 $this->addJsFile('flickerfreescreen.js');
 $this->addJsFile('gtlc.js');
 $this->addJsFile('leaflet.js');
 $this->addJsFile('leaflet.markercluster.js');
-$this->addJsFile('class.dashboard.js');
-$this->addJsFile('class.dashboard.page.js');
-$this->addJsFile('class.dashboard.widget.placeholder.js');
 $this->addJsFile('class.geomaps.js');
-$this->addJsFile('class.widget.js');
-$this->addJsFile('class.widget.inaccessible.js');
-$this->addJsFile('class.widget.iterator.js');
-$this->addJsFile('class.widget.paste-placeholder.js');
-$this->addJsFile('class.csvggraph.js');
-$this->addJsFile('class.svg.canvas.js');
-$this->addJsFile('class.svg.map.js');
-$this->addJsFile('class.sortable.js');
 
 $this->includeJsFile('monitoring.dashboard.print.js.php');
 
-$this->addCssFile('assets/styles/vendors/Leaflet/Leaflet/leaflet.css');
+$this->addCssFile('assets/styles/vendors/Leaflet/leaflet.css');
 
 $this->enableLayoutModes();
 $this->setLayoutMode(ZBX_LAYOUT_KIOSKMODE);
