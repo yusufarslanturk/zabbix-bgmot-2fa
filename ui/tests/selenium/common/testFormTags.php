@@ -602,7 +602,7 @@ class testFormTags extends CWebTest {
 			// Check the results in form.
 			$this->checkTagFields($data, $object, $form);
 
-			if ($object === 'connector') {
+			if (in_array($object, ['connector', 'service'])) {
 				COverlayDialogElement::find()->one()->close();
 			}
 		}
@@ -761,7 +761,7 @@ class testFormTags extends CWebTest {
 
 		$element->checkValue($tags);
 
-		if ($object === 'host' || $object === 'discovered host' || $object === 'connector') {
+		if (in_array($object, ['host', 'discovered host', 'connector', 'service'])) {
 			COverlayDialogElement::find()->one()->close();
 		}
 	}
@@ -1296,7 +1296,7 @@ class testFormTags extends CWebTest {
 			$table->findRow('Name', $data['name'], true)->query(self::EDIT_BUTTON_PATH)->waitUntilClickable()->one()->click();
 		}
 		else {
-			$this->query('link', $this->remove_name)->waitUntilPresent()->one()->click();
+			$this->query('link', $this->remove_name)->waitUntilClickable()->one()->hoverMouse()->click();
 		}
 
 		$locators = [

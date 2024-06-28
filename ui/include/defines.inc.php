@@ -18,8 +18,8 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-define('ZABBIX_VERSION',		'6.4.15');
-define('ZABBIX_API_VERSION',	'6.4.15');
+define('ZABBIX_VERSION',		'6.4.16');
+define('ZABBIX_API_VERSION',	'6.4.16');
 define('ZABBIX_EXPORT_VERSION',	'6.4');
 
 define('ZABBIX_DB_VERSION',		6040000);
@@ -1428,7 +1428,8 @@ define('VALUEMAP_MAPPING_TYPE_IN_RANGE',		3);
 define('VALUEMAP_MAPPING_TYPE_REGEXP',			4);
 define('VALUEMAP_MAPPING_TYPE_DEFAULT',			5);
 
-define('ZBX_SOCKET_BYTES_LIMIT',    ZBX_MEBIBYTE * 32); // socket response size limit
+// Socket response size limit.
+define('ZBX_SOCKET_BYTES_LIMIT', ZBX_MEBIBYTE * 16);
 
 // value is also used in servercheck.js file
 define('SERVER_CHECK_INTERVAL', 10);

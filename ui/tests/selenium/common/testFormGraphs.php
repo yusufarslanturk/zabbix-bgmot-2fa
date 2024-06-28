@@ -10,7 +10,7 @@
 **
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 ** GNU General Public License for more details.
 **
 ** You should have received a copy of the GNU General Public License
@@ -1118,6 +1118,7 @@ class testFormGraphs extends CWebTest {
 
 		if (!str_contains($button, 'add_protoitem')) {
 			$dialog->query('xpath:.//div[@class="multiselect-control"]')->asMultiselect()->one()->fill($host);
+			$dialog->waitUntilReady();
 			$table->waitUntilReloaded();
 			$expected_items =['Float item', 'Unsigned item', 'Unsigned_dependent item'];
 		}
