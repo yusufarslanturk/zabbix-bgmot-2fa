@@ -432,7 +432,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -453,7 +453,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -488,7 +488,7 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'db_id', 'http_status_code', 'req_interval'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'db_id', 'http_status_code', 'req_interval', 'compartment_id'], params);
             var oci = new OCI('Autonomous DB', 'Get metrics ' + params['req_interval'] + 'm', params);
             
             const metrics = [
@@ -526,7 +526,7 @@ zabbix_export:
             
             var result = {};
             for (var i = 0, metricsLength = metrics.length; i < metricsLength; i++) {
-            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), metrics[i][0] + metrics[i][1] + '()', 'oci_autonomous_database'), 'aggregatedDatapoints');
+            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), metrics[i][0] + metrics[i][1] + '()', 'oci_autonomous_database'), 'aggregatedDatapoints');
             }
             return JSON.stringify(result);
           description: |
@@ -536,6 +536,8 @@ zabbix_export:
           parameters:
             - name: api_host
               value: '{$OCI.API.TELEMETRY.HOST}'
+            - name: compartment_id
+              value: '{$OCI.AUTONOMOUS.DB.COMPARTMENT.ID}'
             - name: db_id
               value: '{$OCI.AUTONOMOUS.DB.ID}'
             - name: fingerprint
@@ -665,7 +667,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -686,7 +688,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -721,7 +723,7 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'db_id', 'http_status_code', 'req_interval'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'db_id', 'http_status_code', 'req_interval', 'compartment_id'], params);
             var oci = new OCI('Autonomous DB', 'Get metrics ' + params['req_interval'] + 'm', params);
             
             const metrics = [
@@ -733,7 +735,7 @@ zabbix_export:
             
             var result = {};
             for (var i = 0, metricsLength = metrics.length; i < metricsLength; i++) {
-            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), metrics[i][0] + metrics[i][1] + '()', 'oci_autonomous_database'), 'aggregatedDatapoints');
+            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), metrics[i][0] + metrics[i][1] + '()', 'oci_autonomous_database'), 'aggregatedDatapoints');
             }
             return JSON.stringify(result);
           description: |
@@ -743,6 +745,8 @@ zabbix_export:
           parameters:
             - name: api_host
               value: '{$OCI.API.TELEMETRY.HOST}'
+            - name: compartment_id
+              value: '{$OCI.AUTONOMOUS.DB.COMPARTMENT.ID}'
             - name: db_id
               value: '{$OCI.AUTONOMOUS.DB.ID}'
             - name: fingerprint
@@ -872,7 +876,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -893,7 +897,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -928,7 +932,7 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'db_id', 'http_status_code', 'req_interval'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'db_id', 'http_status_code', 'req_interval', 'compartment_id'], params);
             var oci = new OCI('Autonomous DB', 'Get metrics ' + params['req_interval'] + 'm', params);
             
             const metrics = [
@@ -941,7 +945,7 @@ zabbix_export:
             
             var result = {};
             for (var i = 0, metricsLength = metrics.length; i < metricsLength; i++) {
-            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), metrics[i][0] + metrics[i][1] + '()', 'oci_autonomous_database'), 'aggregatedDatapoints');
+            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), metrics[i][0] + metrics[i][1] + '()', 'oci_autonomous_database'), 'aggregatedDatapoints');
             }
             return JSON.stringify(result);
           description: |
@@ -951,6 +955,8 @@ zabbix_export:
           parameters:
             - name: api_host
               value: '{$OCI.API.TELEMETRY.HOST}'
+            - name: compartment_id
+              value: '{$OCI.AUTONOMOUS.DB.COMPARTMENT.ID}'
             - name: db_id
               value: '{$OCI.AUTONOMOUS.DB.ID}'
             - name: fingerprint
@@ -1377,7 +1383,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -1398,7 +1404,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -4354,7 +4360,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -4375,7 +4381,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -4410,7 +4416,7 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'volume_id', 'http_status_code', 'req_interval'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'volume_id', 'http_status_code', 'req_interval', 'compartment_id'], params);
             var oci = new OCI('Block volume', 'Get metrics', params);
             
             const metrics = [
@@ -4427,7 +4433,7 @@ zabbix_export:
             
             var result = {};
             for (var i = 0, metricsLength = metrics.length; i < metricsLength; i++) {
-            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), metrics[i][0] + metrics[i][1] + '()', 'oci_blockstore'), 'aggregatedDatapoints');
+            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), metrics[i][0] + metrics[i][1] + '()', 'oci_blockstore'), 'aggregatedDatapoints');
             }
             return JSON.stringify(result);
           description: |
@@ -4437,6 +4443,8 @@ zabbix_export:
           parameters:
             - name: api_host
               value: '{$OCI.API.TELEMETRY.HOST}'
+            - name: compartment_id
+              value: '{$OCI.VOLUME.BLOCK.COMPARTMENT.ID}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -4609,7 +4617,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -4630,7 +4638,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -4658,7 +4666,7 @@ zabbix_export:
             validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'volume_id', 'http_status_code'], params);
             var oci = new OCI('Block volume', 'Get volume state', params);
             
-            return oci.extractData('get', oci.executeRequest('get', '/20160918/volumes/' + encodeURIComponent(params['volume_id']), '?compartmentId=' + encodeURIComponent(params['tenancy_ocid'])), 'lifecycleState');
+            return oci.extractData('get', oci.executeRequest('get', '/20160918/volumes/' + encodeURIComponent(params['volume_id']), ''), 'lifecycleState');
           description: |
             Gets the block volume state.
             
@@ -5397,7 +5405,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -5418,7 +5426,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -5453,7 +5461,7 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'volume_id', 'http_status_code', 'req_interval'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'volume_id', 'http_status_code', 'req_interval', 'compartment_id'], params);
             var oci = new OCI('Boot volume', 'Get metrics', params);
             
             const metrics = [
@@ -5470,7 +5478,7 @@ zabbix_export:
             
             var result = {};
             for (var i = 0, metricsLength = metrics.length; i < metricsLength; i++) {
-            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), metrics[i][0] + metrics[i][1] + '()', 'oci_blockstore'), 'aggregatedDatapoints');
+            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), metrics[i][0] + metrics[i][1] + '()', 'oci_blockstore'), 'aggregatedDatapoints');
             }
             return JSON.stringify(result);
           description: |
@@ -5480,6 +5488,8 @@ zabbix_export:
           parameters:
             - name: api_host
               value: '{$OCI.API.TELEMETRY.HOST}'
+            - name: compartment_id
+              value: '{$OCI.VOLUME.BOOT.COMPARTMENT.ID}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -5652,7 +5662,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -5673,7 +5683,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -5701,7 +5711,7 @@ zabbix_export:
             validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'volume_id', 'http_status_code'], params);
             var oci = new OCI('Boot volume', 'Get volume state', params);
             
-            return oci.extractData('get', oci.executeRequest('get', '/20160918/bootVolumes/' + encodeURIComponent(params['volume_id']), '?compartmentId=' + encodeURIComponent(params['tenancy_ocid'])), 'lifecycleState');
+            return oci.extractData('get', oci.executeRequest('get', '/20160918/bootVolumes/' + encodeURIComponent(params['volume_id']), ''), 'lifecycleState');
           description: |
             Gets the boot volume state.
             
@@ -6322,6 +6332,14 @@ zabbix_export:
             	});
             }
             
+            function prepareCompartments(compartments, tenancy) {
+            	if (typeof compartments === 'undefined' || compartments === '') {
+            		return [tenancy];
+            	} else {
+            		return compartments.split(',')
+            	}
+            }
+            
             function OCI(service, action, params) {
             	this.zabbixLogPrefix = '[ OCI ] [ ' + service + ' ] [ ' + action + ' ]';
             	this.request = new HttpRequest();
@@ -6415,7 +6433,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -6436,7 +6454,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -6463,8 +6481,13 @@ zabbix_export:
             const params = JSON.parse(value);
             validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'http_status_code'], params);
             var oci = new OCI('Block volume', 'Get volumes', params);
+            var compartments = prepareCompartments(params['compartment_ocid'], params['tenancy_ocid']);
             
-            return JSON.stringify(oci.extractData('get', oci.executeRequest('get', '/20160918/volumes', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid'])), ['id', 'displayName', 'lifecycleState', 'freeformTags']));
+            var buffer = [];
+            compartments.forEach(function (compartment) {
+            	Array.prototype.push.apply(buffer, oci.extractData('get', oci.executeRequest('get', '/20160918/volumes', '?compartmentId=' + encodeURIComponent(compartment)), ['id', 'displayName', 'lifecycleState', 'freeformTags'], compartment));
+            })
+            return JSON.stringify(buffer);
           filter:
             evaltype: AND
             conditions:
@@ -6493,16 +6516,23 @@ zabbix_export:
               templates:
                 - name: 'Oracle Cloud Block Volume by HTTP'
               macros:
+                - macro: '{$OCI.VOLUME.BLOCK.COMPARTMENT.ID}'
+                  value: '{#COMPARTMENT}'
+                  description: 'Block volume compartment ID.'
                 - macro: '{$OCI.VOLUME.BLOCK.ID}'
                   value: '{#ID}'
                   description: 'Block volume ID.'
               tags:
                 - tag: oci-block-vol-name
                   value: '{#NAME}'
+                - tag: oci-compartment-id
+                  value: '{#COMPARTMENT}'
           timeout: 10s
           parameters:
             - name: api_host
               value: '{$OCI.API.CORE.HOST}'
+            - name: compartment_ocid
+              value: '{$OCI.API.COMPARTMENT.VOLUME.BLOCK}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -6516,6 +6546,8 @@ zabbix_export:
             - name: user_ocid
               value: '{$OCI.API.USER}'
           lld_macro_paths:
+            - lld_macro: '{#COMPARTMENT}'
+              path: $.compartment
             - lld_macro: '{#ID}'
               path: $.id
             - lld_macro: '{#NAME}'
@@ -6534,6 +6566,14 @@ zabbix_export:
             			throw 'Required param is not set: ' + field + '.';
             		}
             	});
+            }
+            
+            function prepareCompartments(compartments, tenancy) {
+            	if (typeof compartments === 'undefined' || compartments === '') {
+            		return [tenancy];
+            	} else {
+            		return compartments.split(',')
+            	}
             }
             
             function OCI(service, action, params) {
@@ -6629,7 +6669,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -6650,7 +6690,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -6677,8 +6717,13 @@ zabbix_export:
             const params = JSON.parse(value);
             validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'http_status_code'], params);
             var oci = new OCI('Boot volume', 'Get volumes', params);
+            var compartments = prepareCompartments(params['compartment_ocid'], params['tenancy_ocid']);
             
-            return JSON.stringify(oci.extractData('get', oci.executeRequest('get', '/20160918/bootVolumes', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid'])), ['id', 'displayName', 'lifecycleState', 'freeformTags']));
+            var buffer = [];
+            compartments.forEach(function (compartment) {
+            	Array.prototype.push.apply(buffer, oci.extractData('get', oci.executeRequest('get', '/20160918/bootVolumes', '?compartmentId=' + encodeURIComponent(compartment)), ['id', 'displayName', 'lifecycleState', 'freeformTags'], compartment));
+            })
+            return JSON.stringify(buffer);
           filter:
             evaltype: AND
             conditions:
@@ -6707,16 +6752,23 @@ zabbix_export:
               templates:
                 - name: 'Oracle Cloud Boot Volume by HTTP'
               macros:
+                - macro: '{$OCI.VOLUME.BOOT.COMPARTMENT.ID}'
+                  value: '{#COMPARTMENT}'
+                  description: 'Boot volume compartment ID.'
                 - macro: '{$OCI.VOLUME.BOOT.ID}'
                   value: '{#ID}'
                   description: 'Boot volume ID.'
               tags:
                 - tag: oci-boot-vol-name
                   value: '{#NAME}'
+                - tag: oci-compartment-id
+                  value: '{#COMPARTMENT}'
           timeout: 10s
           parameters:
             - name: api_host
               value: '{$OCI.API.CORE.HOST}'
+            - name: compartment_ocid
+              value: '{$OCI.API.COMPARTMENT.VOLUME.BOOT}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -6730,6 +6782,8 @@ zabbix_export:
             - name: user_ocid
               value: '{$OCI.API.USER}'
           lld_macro_paths:
+            - lld_macro: '{#COMPARTMENT}'
+              path: $.compartment
             - lld_macro: '{#ID}'
               path: $.id
             - lld_macro: '{#NAME}'
@@ -6748,6 +6802,14 @@ zabbix_export:
             			throw 'Required param is not set: ' + field + '.';
             		}
             	});
+            }
+            
+            function prepareCompartments(compartments, tenancy) {
+            	if (typeof compartments === 'undefined' || compartments === '') {
+            		return [tenancy];
+            	} else {
+            		return compartments.split(',')
+            	}
             }
             
             function OCI(service, action, params) {
@@ -6843,7 +6905,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -6864,7 +6926,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -6891,8 +6953,13 @@ zabbix_export:
             const params = JSON.parse(value);
             validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'http_status_code'], params);
             var oci = new OCI('Compute', 'Get instances', params);
+            var compartments = prepareCompartments(params['compartment_ocid'], params['tenancy_ocid']);
             
-            return JSON.stringify(oci.extractData('get', oci.executeRequest('get', '/20160918/instances', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid'])), ['id', 'displayName', 'lifecycleState', 'freeformTags', 'availabilityDomain']));
+            var buffer = [];
+            compartments.forEach(function (compartment) {
+            	Array.prototype.push.apply(buffer, oci.extractData('get', oci.executeRequest('get', '/20160918/instances', '?compartmentId=' + encodeURIComponent(compartment)), ['id', 'displayName', 'lifecycleState', 'freeformTags', 'availabilityDomain'], compartment));
+            })
+            return JSON.stringify(buffer);
           filter:
             evaltype: AND
             conditions:
@@ -6924,16 +6991,23 @@ zabbix_export:
                 - macro: '{$OCI.COMPUTE.AVAILABILITY.DOMAIN}'
                   value: '{#DOMAIN}'
                   description: 'Availability domain for instance.'
+                - macro: '{$OCI.COMPUTE.COMPARTMENT.ID}'
+                  value: '{#COMPARTMENT}'
+                  description: 'Compartment ID of OCI compute instance.'
                 - macro: '{$OCI.COMPUTE.INSTANCE.ID}'
                   value: '{#ID}'
                   description: 'ID of OCI compute instance.'
               tags:
+                - tag: oci-compartment-id
+                  value: '{#COMPARTMENT}'
                 - tag: oci-compute-name
                   value: '{#NAME}'
           timeout: 10s
           parameters:
             - name: api_host
               value: '{$OCI.API.CORE.HOST}'
+            - name: compartment_ocid
+              value: '{$OCI.API.COMPARTMENT.COMPUTE}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -6947,6 +7021,8 @@ zabbix_export:
             - name: user_ocid
               value: '{$OCI.API.USER}'
           lld_macro_paths:
+            - lld_macro: '{#COMPARTMENT}'
+              path: $.compartment
             - lld_macro: '{#DOMAIN}'
               path: $.domain
             - lld_macro: '{#ID}'
@@ -6967,6 +7043,14 @@ zabbix_export:
             			throw 'Required param is not set: ' + field + '.';
             		}
             	});
+            }
+            
+            function prepareCompartments(compartments, tenancy) {
+            	if (typeof compartments === 'undefined' || compartments === '') {
+            		return [tenancy];
+            	} else {
+            		return compartments.split(',')
+            	}
             }
             
             function OCI(service, action, params) {
@@ -7062,7 +7146,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -7083,7 +7167,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -7110,8 +7194,13 @@ zabbix_export:
             const params = JSON.parse(value);
             validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'http_status_code'], params);
             var oci = new OCI('Autonomous DB', 'Get DBs', params);
+            var compartments = prepareCompartments(params['compartment_ocid'], params['tenancy_ocid']);
             
-            return JSON.stringify(oci.extractData('get', oci.executeRequest('get', '/20160918/autonomousDatabases', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid'])), ['id', 'dbName', 'lifecycleState', 'freeformTags']));
+            var buffer = [];
+            compartments.forEach(function (compartment) {
+            	Array.prototype.push.apply(buffer, oci.extractData('get', oci.executeRequest('get', '/20160918/autonomousDatabases', '?compartmentId=' + encodeURIComponent(compartment)), ['id', 'dbName', 'lifecycleState', 'freeformTags'], compartment));
+            })
+            return JSON.stringify(buffer);
           filter:
             evaltype: AND
             conditions:
@@ -7140,16 +7229,23 @@ zabbix_export:
               templates:
                 - name: 'Oracle Cloud Autonomous Database by HTTP'
               macros:
+                - macro: '{$OCI.AUTONOMOUS.DB.COMPARTMENT.ID}'
+                  value: '{#COMPARTMENT}'
+                  description: 'Autonomous database compartment ID.'
                 - macro: '{$OCI.AUTONOMOUS.DB.ID}'
                   value: '{#ID}'
                   description: 'ID of OCI autonomous database.'
               tags:
                 - tag: oci-aut-db-name
                   value: '{#NAME}'
+                - tag: oci-compartment-id
+                  value: '{#COMPARTMENT}'
           timeout: 10s
           parameters:
             - name: api_host
               value: '{$OCI.API.AUTONOMOUS.DB.HOST}'
+            - name: compartment_ocid
+              value: '{$OCI.API.COMPARTMENT.AUTONOMOUS.DB}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -7163,6 +7259,8 @@ zabbix_export:
             - name: user_ocid
               value: '{$OCI.API.USER}'
           lld_macro_paths:
+            - lld_macro: '{#COMPARTMENT}'
+              path: $.compartment
             - lld_macro: '{#ID}'
               path: $.id
             - lld_macro: '{#NAME}'
@@ -7181,6 +7279,14 @@ zabbix_export:
             			throw 'Required param is not set: ' + field + '.';
             		}
             	});
+            }
+            
+            function prepareCompartments(compartments, tenancy) {
+            	if (typeof compartments === 'undefined' || compartments === '') {
+            		return [tenancy];
+            	} else {
+            		return compartments.split(',')
+            	}
             }
             
             function OCI(service, action, params) {
@@ -7276,7 +7382,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -7297,7 +7403,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -7324,9 +7430,14 @@ zabbix_export:
             const params = JSON.parse(value);
             validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'http_status_code'], params);
             var oci = new OCI('Object storage', 'Get buckets', params);
+            var compartments = prepareCompartments(params['compartment_ocid'], params['tenancy_ocid']);
             const namespace = JSON.parse(oci.executeRequest('get', '/n', ''));
             
-            return JSON.stringify(oci.extractData('get', oci.executeRequest('get', '/n/' + encodeURIComponent(namespace) + '/b/', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']) + '&fields=tags'), ['name', 'freeformTags']));
+            var buffer = [];
+            compartments.forEach(function (compartment) {
+            	Array.prototype.push.apply(buffer, oci.extractData('get', oci.executeRequest('get', '/n/' + encodeURIComponent(namespace) + '/b/', '?compartmentId=' + encodeURIComponent(compartment) + '&fields=tags'), ['name', 'freeformTags'], compartment));
+            })
+            return JSON.stringify(buffer);
           filter:
             evaltype: AND
             conditions:
@@ -7351,13 +7462,20 @@ zabbix_export:
                 - macro: '{$OCI.OBJECT.STORAGE.BUCKET}'
                   value: '{#NAME}'
                   description: 'Object storage bucket name.'
+                - macro: '{$OCI.OBJECT.STORAGE.COMPARTMENT.ID}'
+                  value: '{#COMPARTMENT}'
+                  description: 'Object storage bucket compartment ID.'
               tags:
+                - tag: oci-compartment-id
+                  value: '{#COMPARTMENT}'
                 - tag: oci-obj-store-name
                   value: '{#NAME}'
           timeout: 10s
           parameters:
             - name: api_host
               value: '{$OCI.API.OBJECT.STORAGE.HOST}'
+            - name: compartment_ocid
+              value: '{$OCI.API.COMPARTMENT.OBJECT.STORAGE}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -7371,6 +7489,8 @@ zabbix_export:
             - name: user_ocid
               value: '{$OCI.API.USER}'
           lld_macro_paths:
+            - lld_macro: '{#COMPARTMENT}'
+              path: $.compartment
             - lld_macro: '{#NAME}'
               path: $.name
         - uuid: 378d760173924bf48fbc25c74a520a8b
@@ -7385,6 +7505,14 @@ zabbix_export:
             			throw 'Required param is not set: ' + field + '.';
             		}
             	});
+            }
+            
+            function prepareCompartments(compartments, tenancy) {
+            	if (typeof compartments === 'undefined' || compartments === '') {
+            		return [tenancy];
+            	} else {
+            		return compartments.split(',')
+            	}
             }
             
             function OCI(service, action, params) {
@@ -7480,7 +7608,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -7501,7 +7629,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -7528,8 +7656,13 @@ zabbix_export:
             const params = JSON.parse(value);
             validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'http_status_code'], params);
             var oci = new OCI('VCN', 'Get VCNs', params);
+            var compartments = prepareCompartments(params['compartment_ocid'], params['tenancy_ocid']);
             
-            return JSON.stringify(oci.extractData('get', oci.executeRequest('get', '/20160918/vcns', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid'])), ['id', 'displayName', 'lifecycleState', 'freeformTags']));
+            var buffer = [];
+            compartments.forEach(function (compartment) {
+            	Array.prototype.push.apply(buffer, oci.extractData('get', oci.executeRequest('get', '/20160918/vcns', '?compartmentId=' + encodeURIComponent(compartment)), ['id', 'displayName', 'lifecycleState', 'freeformTags'], compartment));
+            })
+            return JSON.stringify(buffer);
           filter:
             evaltype: AND
             conditions:
@@ -7558,16 +7691,23 @@ zabbix_export:
               templates:
                 - name: 'Oracle Cloud Networking by HTTP'
               macros:
+                - macro: '{$OCI.VCN.COMPARTMENT.ID}'
+                  value: '{#COMPARTMENT}'
+                  description: 'Compartment ID of OCI VCN (virtual cloud network).'
                 - macro: '{$OCI.VCN.ID}'
                   value: '{#ID}'
                   description: 'ID of the OCI VCN (virtual cloud network).'
               tags:
+                - tag: oci-compartment-id
+                  value: '{#COMPARTMENT}'
                 - tag: oci-vcn-name
                   value: '{#NAME}'
           timeout: 10s
           parameters:
             - name: api_host
               value: '{$OCI.API.CORE.HOST}'
+            - name: compartment_ocid
+              value: '{$OCI.API.COMPARTMENT.VCN}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -7581,6 +7721,8 @@ zabbix_export:
             - name: user_ocid
               value: '{$OCI.API.USER}'
           lld_macro_paths:
+            - lld_macro: '{#COMPARTMENT}'
+              path: $.compartment
             - lld_macro: '{#ID}'
               path: $.id
             - lld_macro: '{#NAME}'
@@ -7597,6 +7739,18 @@ zabbix_export:
       macros:
         - macro: '{$OCI.API.AUTONOMOUS.DB.HOST}'
           description: 'Host for OCI Autonomous Database API endpoint.'
+        - macro: '{$OCI.API.COMPARTMENT.AUTONOMOUS.DB}'
+          description: 'Compartment OCIDs for autonomous databases. Can be a single value or a comma separated list of values.'
+        - macro: '{$OCI.API.COMPARTMENT.COMPUTE}'
+          description: 'Compartment OCIDs for compute instances. Can be a single value or a comma separated list of values.'
+        - macro: '{$OCI.API.COMPARTMENT.OBJECT.STORAGE}'
+          description: 'Compartment OCIDs for object storage buckets. Can be a single value or a comma separated list of values.'
+        - macro: '{$OCI.API.COMPARTMENT.VCN}'
+          description: 'Compartment OCIDs for virtual cloud networks. Can be a single value or a comma separated list of values.'
+        - macro: '{$OCI.API.COMPARTMENT.VOLUME.BLOCK}'
+          description: 'Compartment OCIDs for block volumes. Can be a single value or a comma separated list of values.'
+        - macro: '{$OCI.API.COMPARTMENT.VOLUME.BOOT}'
+          description: 'Compartment OCIDs for boot volumes. Can be a single value or a comma separated list of values.'
         - macro: '{$OCI.API.CORE.HOST}'
           description: 'Host for OCI Core Services API endpoint.'
         - macro: '{$OCI.API.FINGERPRINT}'
@@ -7815,7 +7969,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -7836,7 +7990,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -7861,11 +8015,11 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'instance_id', 'http_status_code', 'req_interval'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'instance_id', 'http_status_code', 'req_interval', 'compartment_id'], params);
             var oci = new OCI('Compute', 'Get health', params);
             const mql = 'InstanceAccessibilityStatus[' + params['req_interval'] + 'm]{resourceId=' + params['instance_id'] + '}.max()';
             
-            return JSON.stringify(oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), mql, 'oci_compute_instance_health'), 'aggregatedDatapoints'));
+            return JSON.stringify(oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), mql, 'oci_compute_instance_health'), 'aggregatedDatapoints'));
           description: |
             The accessibility status of a virtual machine instance. A value of "1" indicates that the instance is unresponsive due to an issue with the infrastructure or the instance itself. A value of "0" indicates that an accessibility issue has not been detected. If the instance is stopped, then the metric does not have a value.
             
@@ -7875,6 +8029,8 @@ zabbix_export:
           parameters:
             - name: api_host
               value: '{$OCI.API.TELEMETRY.HOST}'
+            - name: compartment_id
+              value: '{$OCI.COMPUTE.COMPARTMENT.ID}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -8265,7 +8421,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -8286,7 +8442,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -8321,7 +8477,7 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'instance_id', 'http_status_code', 'req_interval'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'instance_id', 'http_status_code', 'req_interval', 'compartment_id'], params);
             var oci = new OCI('Compute', 'Get metrics', params);
             
             const metrics = [
@@ -8340,7 +8496,7 @@ zabbix_export:
             
             var result = {};
             for (var i = 0, metricsLength = metrics.length; i < metricsLength; i++) {
-            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), metrics[i][0] + metrics[i][1] + '()', 'oci_computeagent'), 'aggregatedDatapoints');
+            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), metrics[i][0] + metrics[i][1] + '()', 'oci_computeagent'), 'aggregatedDatapoints');
             }
             return JSON.stringify(result);
           description: |
@@ -8350,6 +8506,8 @@ zabbix_export:
           parameters:
             - name: api_host
               value: '{$OCI.API.TELEMETRY.HOST}'
+            - name: compartment_id
+              value: '{$OCI.COMPUTE.COMPARTMENT.ID}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -8528,7 +8686,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -8549,7 +8707,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -8745,7 +8903,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -8766,7 +8924,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -8791,10 +8949,10 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'instance_id', 'availability_domain', 'http_status_code'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'instance_id', 'availability_domain', 'http_status_code', 'compartment_id'], params);
             var oci = new OCI('Compute', 'Get VNICs', params);
             
-            return JSON.stringify(oci.extractData('get', oci.executeRequest('get', '/20160918/vnicAttachments', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']) + '&availabilityDomain=' + encodeURIComponent(params['availability_domain']) + '&instanceId=' + encodeURIComponent(params['instance_id'])), ['vnicId', 'displayName', 'lifecycleState']));
+            return JSON.stringify(oci.extractData('get', oci.executeRequest('get', '/20160918/vnicAttachments', '?compartmentId=' + encodeURIComponent(params['compartment_id']) + '&availabilityDomain=' + encodeURIComponent(params['availability_domain']) + '&instanceId=' + encodeURIComponent(params['instance_id'])), ['vnicId', 'displayName', 'lifecycleState']));
           description: |
             Gets information about all virtual network interface cards attached to the instance.
             
@@ -8804,6 +8962,8 @@ zabbix_export:
               value: '{$OCI.API.CORE.HOST}'
             - name: availability_domain
               value: '{$OCI.COMPUTE.AVAILABILITY.DOMAIN}'
+            - name: compartment_id
+              value: '{$OCI.COMPUTE.COMPARTMENT.ID}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -9074,7 +9234,7 @@ zabbix_export:
                 		}
                 	};
                 
-                	this.extractData = function (httpMethod, data, keys) {
+                	this.extractData = function (httpMethod, data, keys, compartment) {
                 		try {
                 			data = JSON.parse(data);
                 		} catch (error) {
@@ -9095,7 +9255,7 @@ zabbix_export:
                 						throw 'Received an unexpected JSON object. See logs for more information.';
                 					}
                 				}
-                
+                				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
                 				returnBuffer.push(objectBuffer);
                 			}
                 			return returnBuffer;
@@ -9130,7 +9290,7 @@ zabbix_export:
                 
                 
                 const params = JSON.parse(value);
-                validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'vnic_id', 'http_status_code', 'req_interval'], params);
+                validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'vnic_id', 'http_status_code', 'req_interval', 'compartment_id'], params);
                 var oci = new OCI('Compute - VNIC', 'Get metrics', params);
                 
                 const metrics = [
@@ -9153,7 +9313,7 @@ zabbix_export:
                 
                 var result = {};
                 for (var i = 0, metricsLength = metrics.length; i < metricsLength; i++) {
-                	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), metrics[i][0] + metrics[i][1] + '()', 'oci_vcn'), 'aggregatedDatapoints');
+                	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), metrics[i][0] + metrics[i][1] + '()', 'oci_vcn'), 'aggregatedDatapoints');
                 }
                 return JSON.stringify(result);
               description: |
@@ -9163,6 +9323,8 @@ zabbix_export:
               parameters:
                 - name: api_host
                   value: '{$OCI.API.TELEMETRY.HOST}'
+                - name: compartment_id
+                  value: '{$OCI.COMPUTE.COMPARTMENT.ID}'
                 - name: fingerprint
                   value: '{$OCI.API.FINGERPRINT}'
                 - name: http_proxy
@@ -11059,7 +11221,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -11080,7 +11242,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -11282,7 +11444,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -11303,7 +11465,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -11328,10 +11490,10 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'vcn_id', 'http_status_code'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'vcn_id', 'http_status_code', 'compartment_id'], params);
             var oci = new OCI('VCN', 'Get subnets', params);
             
-            return JSON.stringify(oci.extractData('get', oci.executeRequest('get', '/20160918/subnets', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']) + '&vcnId=' + encodeURIComponent(params['vcn_id'])), ['id', 'displayName', 'lifecycleState', 'freeformTags']));
+            return JSON.stringify(oci.extractData('get', oci.executeRequest('get', '/20160918/subnets', '?compartmentId=' + encodeURIComponent(params['compartment_id']) + '&vcnId=' + encodeURIComponent(params['vcn_id'])), ['id', 'displayName', 'lifecycleState', 'freeformTags']));
           description: |
             Get data about subnets linked to the particular VCN.
             
@@ -11339,6 +11501,8 @@ zabbix_export:
           parameters:
             - name: api_host
               value: '{$OCI.API.CORE.HOST}'
+            - name: compartment_id
+              value: '{$OCI.VCN.COMPARTMENT.ID}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -11695,7 +11859,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -11716,7 +11880,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -11751,7 +11915,7 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'bucket_name', 'http_status_code', 'req_interval'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'bucket_name', 'http_status_code', 'req_interval', 'compartment_id'], params);
             var oci = new OCI('Object storage', 'Get metrics ' + params['req_interval'] + 'm', params);
             
             const metrics = [
@@ -11766,7 +11930,7 @@ zabbix_export:
             
             var result = {};
             for (var i = 0, metricsLength = metrics.length; i < metricsLength; i++) {
-            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), metrics[i][0] + metrics[i][1] + '()', 'oci_objectstorage'), 'aggregatedDatapoints');
+            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), metrics[i][0] + metrics[i][1] + '()', 'oci_objectstorage'), 'aggregatedDatapoints');
             }
             return JSON.stringify(result);
             
@@ -11779,6 +11943,8 @@ zabbix_export:
               value: '{$OCI.API.TELEMETRY.HOST}'
             - name: bucket_name
               value: '{$OCI.OBJECT.STORAGE.BUCKET}'
+            - name: compartment_id
+              value: '{$OCI.OBJECT.STORAGE.COMPARTMENT.ID}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -11906,7 +12072,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -11927,7 +12093,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -11962,7 +12128,7 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'bucket_name', 'http_status_code', 'req_interval'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'bucket_name', 'http_status_code', 'req_interval', 'compartment_id'], params);
             var oci = new OCI('Object storage', 'Get metrics ' + params['req_interval'] + 'm', params);
             
             const metrics = [
@@ -11974,7 +12140,7 @@ zabbix_export:
             
             var result = {};
             for (var i = 0, metricsLength = metrics.length; i < metricsLength; i++) {
-            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), metrics[i][0] + metrics[i][1] + '()', 'oci_objectstorage'), 'aggregatedDatapoints');
+            	result[metrics[i][0]] = oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), metrics[i][0] + metrics[i][1] + '()', 'oci_objectstorage'), 'aggregatedDatapoints');
             }
             return JSON.stringify(result);
             
@@ -11987,6 +12153,8 @@ zabbix_export:
               value: '{$OCI.API.TELEMETRY.HOST}'
             - name: bucket_name
               value: '{$OCI.OBJECT.STORAGE.BUCKET}'
+            - name: compartment_id
+              value: '{$OCI.OBJECT.STORAGE.COMPARTMENT.ID}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy
@@ -12112,7 +12280,7 @@ zabbix_export:
             		}
             	};
             
-            	this.extractData = function (httpMethod, data, keys) {
+            	this.extractData = function (httpMethod, data, keys, compartment) {
             		try {
             			data = JSON.parse(data);
             		} catch (error) {
@@ -12133,7 +12301,7 @@ zabbix_export:
             						throw 'Received an unexpected JSON object. See logs for more information.';
             					}
             				}
-            
+            				if (typeof compartment != 'undefined' && compartment != '') objectBuffer['compartment'] = compartment;
             				returnBuffer.push(objectBuffer);
             			}
             			return returnBuffer;
@@ -12158,11 +12326,11 @@ zabbix_export:
             
             
             const params = JSON.parse(value);
-            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'bucket_name', 'http_status_code', 'req_interval'], params);
+            validateZabbixParams(['tenancy_ocid', 'user_ocid', 'private_key', 'fingerprint', 'api_host', 'bucket_name', 'http_status_code', 'req_interval', 'compartment_id'], params);
             var oci = new OCI('Object storage', 'Get metrics ' + params['req_interval'] + 'm', params);
             const mql = 'EnabledOLM[' + params['req_interval'] + 'm]{resourceDisplayName=' + params['bucket_name'] + '}.mean()';
             
-            return JSON.stringify(oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['tenancy_ocid']), mql, 'oci_objectstorage'), 'aggregatedDatapoints'));
+            return JSON.stringify(oci.extractData('post', oci.executeRequest('post', '/20180401/metrics/actions/summarizeMetricsData', '?compartmentId=' + encodeURIComponent(params['compartment_id']), mql, 'oci_objectstorage'), 'aggregatedDatapoints'));
           description: |
             Indicates whether a bucket has any executable Object Lifecycle Management policies configured. `EnabledOLM` emits:
             
@@ -12179,6 +12347,8 @@ zabbix_export:
               value: '{$OCI.API.TELEMETRY.HOST}'
             - name: bucket_name
               value: '{$OCI.OBJECT.STORAGE.BUCKET}'
+            - name: compartment_id
+              value: '{$OCI.OBJECT.STORAGE.COMPARTMENT.ID}'
             - name: fingerprint
               value: '{$OCI.API.FINGERPRINT}'
             - name: http_proxy

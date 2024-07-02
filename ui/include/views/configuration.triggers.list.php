@@ -303,6 +303,7 @@ foreach ($data['triggers'] as $tnum => $trigger) {
 			)
 			->setArgument('g_triggerid[]', $triggerid)
 			->setArgument('context', $data['context'])
+			->setArgument('backurl', $url)
 			->getUrl()
 		))
 		->addCsrfToken($csrf_token)

@@ -1003,8 +1003,6 @@ int	DBcheck_version(zbx_ha_mode_t ha_mode)
 			required = patches[i].version;
 	}
 
-	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
-
 	if (SUCCEED != zbx_db_table_exists(dbversion_table_name))
 	{
 #ifndef HAVE_SQLITE3
@@ -1184,8 +1182,6 @@ int	DBcheck_version(zbx_ha_mode_t ha_mode)
 #endif	/* not HAVE_SQLITE3 */
 
 out:
-	zbx_db_close();
-
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_result_string(ret));
 
 	return ret;
@@ -1201,8 +1197,6 @@ int	DBcheck_double_type(zbx_config_dbhigh_t *config_dbhigh)
 	int		ret = FAIL;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s()", __func__);
-
-	zbx_db_connect(ZBX_DB_CONNECT_NORMAL);
 
 #if defined(HAVE_MYSQL)
 	sql = zbx_db_dyn_escape_string(config_dbhigh->config_dbname);
@@ -1238,7 +1232,6 @@ int	DBcheck_double_type(zbx_config_dbhigh_t *config_dbhigh)
 
 	zbx_db_free_result(result);
 out:
-	zbx_db_close();
 	zbx_free(sql);
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
