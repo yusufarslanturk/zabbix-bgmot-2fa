@@ -244,7 +244,7 @@ class CConfigurationImport {
 					? ['uuid' => $item['uuid']]
 					: [];
 
-				if ($item['valuemap']) {
+				if (array_key_exists('valuemap', $item) && $item['valuemap']) {
 					$valuemaps_refs[$host][$item['valuemap']['name']] = [];
 				}
 			}
@@ -261,7 +261,7 @@ class CConfigurationImport {
 						? ['uuid' => $item_prototype['uuid']]
 						: [];
 
-					if (!empty($item_prototype['valuemap'])) {
+					if (array_key_exists('valuemap', $item_prototype) && $item_prototype['valuemap']) {
 						$valuemaps_refs[$host][$item_prototype['valuemap']['name']] = [];
 					}
 				}
@@ -771,14 +771,6 @@ class CConfigurationImport {
 
 				$levels[$level] = true;
 
-				$delay_types = [ITEM_TYPE_ZABBIX, ITEM_TYPE_SIMPLE, ITEM_TYPE_INTERNAL, ITEM_TYPE_ZABBIX_ACTIVE,
-					ITEM_TYPE_EXTERNAL, ITEM_TYPE_DB_MONITOR, ITEM_TYPE_IPMI, ITEM_TYPE_SSH, ITEM_TYPE_TELNET,
-					ITEM_TYPE_CALCULATED, ITEM_TYPE_JMX, ITEM_TYPE_HTTPAGENT, ITEM_TYPE_SNMP, ITEM_TYPE_SCRIPT
-				];
-
-				if (!in_array($item['type'], $delay_types)) {
-					unset($item['delay']);
-				}
 
 				if (array_key_exists('interface_ref', $item) && $item['interface_ref']) {
 					$interfaceid = $this->referencer->findInterfaceidByRef($hostid, $item['interface_ref']);
@@ -795,7 +787,7 @@ class CConfigurationImport {
 
 				$item['valuemapid'] = 0;
 
-				if ($item['valuemap']) {
+				if (array_key_exists('valuemap', $item) && $item['valuemap']) {
 					$valuemapid = $this->referencer->findValuemapidByName($hostid, $item['valuemap']['name']);
 
 					if ($valuemapid === null) {
@@ -848,9 +840,11 @@ class CConfigurationImport {
 				}
 
 				foreach ($item['preprocessing'] as &$preprocessing_step) {
-					$preprocessing_step['params'] = implode("\n", $preprocessing_step['parameters']);
+					if (array_key_exists('parameters', $preprocessing_step)) {
+						$preprocessing_step['params'] = implode("\n", $preprocessing_step['parameters']);
 
-					unset($preprocessing_step['parameters']);
+						unset($preprocessing_step['parameters']);
+					}
 				}
 				unset($preprocessing_step);
 
@@ -1220,15 +1214,6 @@ class CConfigurationImport {
 
 					$levels[$level] = true;
 
-					$delay_types = [ITEM_TYPE_ZABBIX, ITEM_TYPE_SIMPLE, ITEM_TYPE_INTERNAL, ITEM_TYPE_ZABBIX_ACTIVE,
-						ITEM_TYPE_EXTERNAL, ITEM_TYPE_DB_MONITOR, ITEM_TYPE_IPMI, ITEM_TYPE_SSH, ITEM_TYPE_TELNET,
-						ITEM_TYPE_CALCULATED, ITEM_TYPE_JMX, ITEM_TYPE_HTTPAGENT, ITEM_TYPE_SNMP, ITEM_TYPE_SCRIPT
-					];
-
-					if (!in_array($item_prototype['type'], $delay_types)) {
-						unset($item_prototype['delay']);
-					}
-
 					if (array_key_exists('interface_ref', $item_prototype) && $item_prototype['interface_ref']) {
 						$interfaceid = $this->referencer->findInterfaceidByRef($hostid,
 							$item_prototype['interface_ref']
@@ -1251,7 +1236,7 @@ class CConfigurationImport {
 
 					$item_prototype['valuemapid'] = 0;
 
-					if ($item_prototype['valuemap']) {
+					if (array_key_exists('valuemap', $item_prototype) && $item_prototype['valuemap']) {
 						$valuemapid = $this->referencer->findValuemapidByName($hostid,
 							$item_prototype['valuemap']['name']
 						);
@@ -1323,9 +1308,11 @@ class CConfigurationImport {
 					}
 
 					foreach ($item_prototype['preprocessing'] as &$preprocessing_step) {
-						$preprocessing_step['params'] = implode("\n", $preprocessing_step['parameters']);
+						if (array_key_exists('parameters', $preprocessing_step)) {
+							$preprocessing_step['params'] = implode("\n", $preprocessing_step['parameters']);
 
-						unset($preprocessing_step['parameters']);
+							unset($preprocessing_step['parameters']);
+						}
 					}
 					unset($preprocessing_step);
 
@@ -2466,9 +2453,9 @@ class CConfigurationImport {
 		// Unlike triggers that belong to multiple hosts, trigger prototypes do not, so we just delete them.
 		if ($trigger_prototypes_to_delete) {
 			API::TriggerPrototype()->delete(array_keys($trigger_prototypes_to_delete));
-
-			$this->referencer->refreshTriggers();
 		}
+
+		$this->referencer->refreshTriggers();
 
 		$db_graph_prototypes = API::GraphPrototype()->get([
 			'output' => [],
@@ -2483,9 +2470,9 @@ class CConfigurationImport {
 		// Unlike graphs that belong to multiple hosts, graph prototypes do not, so we just delete them.
 		if ($graph_prototypes_to_delete) {
 			API::GraphPrototype()->delete(array_keys($graph_prototypes_to_delete));
-
-			$this->referencer->refreshGraphs();
 		}
+
+		$this->referencer->refreshGraphs();
 
 		$db_item_prototypes = API::ItemPrototype()->get([
 			'output' => [],
@@ -2499,9 +2486,9 @@ class CConfigurationImport {
 
 		if ($item_prototypes_to_delete) {
 			API::ItemPrototype()->delete(array_keys($item_prototypes_to_delete));
-
-			$this->referencer->refreshItems();
 		}
+
+		$this->referencer->refreshItems();
 	}
 
 	/**
@@ -2909,7 +2896,7 @@ class CConfigurationImport {
 			foreach ($items as $item) {
 				$resolved_masters_cache[$host_name][$item['key_']] = [
 					'type' => $item['type'],
-					$master_item_key => $item[$master_item_key]
+					$master_item_key => $item['type'] == ITEM_TYPE_DEPENDENT ? $item[$master_item_key] : []
 				];
 
 				if ($item['type'] == ITEM_TYPE_DEPENDENT && array_key_exists('key', $item[$master_item_key])) {

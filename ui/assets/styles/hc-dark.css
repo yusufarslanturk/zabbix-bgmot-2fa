@@ -1697,7 +1697,8 @@ div.dashboard-widget-item .item-value {
 div.dashboard-widget-item .item-value-content {
   display: flex;
   align-items: baseline;
-  overflow: hidden; }
+  overflow: hidden;
+  white-space: nowrap; }
 div.dashboard-widget-item .item-description,
 div.dashboard-widget-item .item-time,
 div.dashboard-widget-item .type-text .value {
@@ -6078,7 +6079,7 @@ a.link-action {
   .is-loading::before {
     background-color: rgba(0, 0, 0, 0.8);
     content: 'loading';
-    text-indent: 200%;
+    text-indent: -9999px;
     overflow: hidden;
     position: absolute;
     top: 0;

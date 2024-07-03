@@ -193,7 +193,6 @@ class CControllerMenuPopup extends CController {
 
 			if (array_key_exists('urls', $data)) {
 				foreach ($data['urls'] as &$url) {
-					$url['new_window'] = ZBX_SCRIPT_URL_NEW_WINDOW_YES;
 					$url['confirmation'] = '';
 					$url['menu_path'] = '';
 					$url['name'] = $url['label'];
@@ -265,11 +264,15 @@ class CControllerMenuPopup extends CController {
 			}
 
 			foreach (array_values($urls) as $url) {
+				$target = array_key_exists('new_window', $url) && $url['new_window'] == ZBX_SCRIPT_URL_NEW_WINDOW_YES
+					? '_blank'
+					: '';
+
 				$menu_data['urls'][] = [
 					'label' => $url['name'],
 					'menu_path' => $url['menu_path'],
 					'url' => $url['url'],
-					'target' => $url['new_window'] == ZBX_SCRIPT_URL_NEW_WINDOW_YES ? '_blank' : '',
+					'target' => $target,
 					'confirmation' => $url['confirmation'],
 					'rel' => 'noopener'.(ZBX_NOREFERER ? ' noreferrer' : '')
 				];

@@ -505,13 +505,13 @@ static int	get_interface_value(zbx_uint64_t hostid, zbx_uint64_t itemid, char **
 	switch (request)
 	{
 		case ZBX_REQUEST_HOST_IP:
-			if (FAIL == zbx_is_ip(interface.ip_orig))
+			if ('\0' != *interface.ip_orig && FAIL == zbx_is_ip(interface.ip_orig))
 				return FAIL;
 
 			*replace_to = zbx_strdup(*replace_to, interface.ip_orig);
 			break;
 		case ZBX_REQUEST_HOST_DNS:
-			if (FAIL == zbx_is_ip(interface.dns_orig) &&
+			if ('\0' != *interface.dns_orig && FAIL == zbx_is_ip(interface.dns_orig) &&
 					FAIL == zbx_validate_hostname(interface.dns_orig))
 			{
 				return FAIL;
@@ -3134,7 +3134,13 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 	if (0 != (macro_type & (MACRO_TYPE_MESSAGE_NORMAL | MACRO_TYPE_MESSAGE_RECOVERY | MACRO_TYPE_MESSAGE_UPDATE |
 			MACRO_TYPE_EVENT_NAME)))
 	{
-		token_search |= ZBX_TOKEN_SEARCH_EXPRESSION_MACRO;
+
+		const zbx_db_event	*c_event;
+
+		c_event = ((NULL != r_event) ? r_event : event);
+
+		if (NULL != c_event && EVENT_SOURCE_TRIGGERS == c_event->source)
+			token_search |= ZBX_TOKEN_SEARCH_EXPRESSION_MACRO;
 	}
 
 	if (SUCCEED != zbx_token_find(*data, pos, &token, token_search))
@@ -4760,10 +4766,8 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 			{
 				if (INTERFACE_TYPE_UNKNOWN != c_interface->type)
 				{
-					if (FAIL == zbx_is_ip(c_interface->ip_orig))
-					{
+					if ('\0' != *c_interface->ip_orig && FAIL == zbx_is_ip(c_interface->ip_orig))
 						ret = FAIL;
-					}
 					else
 						replace_to = zbx_strdup(replace_to, c_interface->ip_orig);
 				}
@@ -4776,7 +4780,8 @@ static int	substitute_simple_macros_impl(const zbx_uint64_t *actionid, const zbx
 			{
 				if (INTERFACE_TYPE_UNKNOWN != c_interface->type)
 				{
-					if (FAIL == zbx_is_ip(c_interface->dns_orig) &&
+					if ('\0' != *c_interface->dns_orig &&
+							FAIL == zbx_is_ip(c_interface->dns_orig) &&
 							FAIL == zbx_validate_hostname(c_interface->dns_orig))
 					{
 						ret = FAIL;
