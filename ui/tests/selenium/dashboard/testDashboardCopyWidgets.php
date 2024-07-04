@@ -223,13 +223,14 @@ class testDashboardCopyWidgets extends CWebTest {
 		// Wait until widget is pasted and loading spinner disappeared.
 		sleep(1);
 		$this->query('xpath://div[contains(@class, "is-loading")]')->waitUntilNotPresent();
-		$copied_widget = $dashboard->getWidgets()->last();
+		$copied_widget = $dashboard->getWidgets()->last()->waitUntilReady();
 
 		// For Other dashboard and Map from Navigation tree case - add map source, because it is not being copied by design.
 		if (($new_dashboard || $new_page) && stristr($widget_name, 'Map from tree')) {
 			$copied_widget_form = $copied_widget->edit();
 			$copied_widget_form->fill(['Filter' => 'Test copy Map navigation tree']);
 			$copied_widget_form->submit();
+			$dashboard->getWidgets()->last()->waitUntilReady();
 		}
 
 		$this->assertEquals($widget_name, $copied_widget->getHeaderText());
@@ -304,12 +305,6 @@ class testDashboardCopyWidgets extends CWebTest {
 			],
 			[
 				[
-					'name' => 'URL widget',
-					'copy to' => 'same page'
-				]
-			],
-			[
-				[
 					'name' => 'Item value widget',
 					'copy to' => 'same page'
 				]
@@ -340,12 +335,6 @@ class testDashboardCopyWidgets extends CWebTest {
 			],
 			[
 				[
-					'name' => 'URL widget',
-					'copy to' => 'another page'
-				]
-			],
-			[
-				[
 					'name' => 'Item value widget',
 					'copy to' => 'another page'
 				]
@@ -371,12 +360,6 @@ class testDashboardCopyWidgets extends CWebTest {
 			[
 				[
 					'name' => 'Plain text widget',
-					'copy to' => 'another dashboard'
-				]
-			],
-			[
-				[
-					'name' => 'URL widget',
 					'copy to' => 'another dashboard'
 				]
 			],

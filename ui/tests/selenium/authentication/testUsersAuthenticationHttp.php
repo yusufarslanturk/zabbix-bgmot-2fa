@@ -32,6 +32,15 @@ class testUsersAuthenticationHttp extends CLegacyWebTest {
 	const LOGIN_USER	= 2;
 	const LOGIN_HTTP	= 3;
 
+	/**
+	 * Attach MessageBehavior to the test.
+	 *
+	 * @return array
+	 */
+	public function getBehaviors() {
+		return ['class' => CMessageBehavior::class];
+	}
+
 	public function testUsersAuthenticationHttp_Layout() {
 		$this->page->login()->open('zabbix.php?action=authentication.edit');
 		$form = $this->query('id:authentication-form')->asForm()->one();
@@ -578,10 +587,7 @@ class testUsersAuthenticationHttp extends CLegacyWebTest {
 							break;
 					}
 
-					$message = CMessageElement::find()->one();
-					$this->assertEquals('msg-bad msg-global', $message->getAttribute('class'));
-					$message_title= $message->getText();
-					$this->assertStringContainsString($check['error'], $message_title);
+					$this->assertMessage(TEST_BAD, $check['error']);
 				}
 
 				continue;
