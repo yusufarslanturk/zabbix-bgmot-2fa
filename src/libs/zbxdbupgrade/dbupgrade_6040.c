@@ -363,6 +363,15 @@ static int	DBpatch_6040026(void)
 #undef TOKEN_LEN
 #undef LAST_FOREACH
 }
+
+static int	DBpatch_6040027(void)
+{
+	if (FAIL == zbx_db_index_exists("auditlog", "auditlog_4"))
+		return DBcreate_index("auditlog", "auditlog_4", "recordsetid", 0);
+
+	return SUCCEED;
+}
+
 #endif
 
 DBPATCH_START(6040)
@@ -396,5 +405,6 @@ DBPATCH_ADD(6040023, 0, 0)
 DBPATCH_ADD(6040024, 0, 0)
 DBPATCH_ADD(6040025, 0, 0)
 DBPATCH_ADD(6040026, 0, 0)
+DBPATCH_ADD(6040027, 0, 0)
 
 DBPATCH_END()
