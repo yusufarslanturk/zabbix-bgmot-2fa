@@ -167,7 +167,7 @@ abstract class CXmlValidatorGeneral {
 
 			// validation of the values type
 			foreach ($rules['rules'] as $tag => $tag_rules) {
-				$tag_rules = self::getResultRule($tag_rules, $data, $rules['rules']);
+				$tag_rules = $this->getResultRule($tag_rules, $data, $rules['rules']);
 
 				if ($tag_rules['type'] & XML_IGNORE_TAG) {
 					continue;
@@ -303,12 +303,12 @@ abstract class CXmlValidatorGeneral {
 		}
 	}
 
-	private static function getResultRule(array $tag_rules, array &$data, array $parent_rules): array {
+	private function getResultRule(array $tag_rules, array &$data, array $parent_rules): array {
 		while ($tag_rules['type'] & XML_MULTIPLE) {
 			$matched_multiple_rule = null;
 
 			foreach ($tag_rules['rules'] as $multiple_rule) {
-				if (self::multipleRuleMatched($multiple_rule, $data, $parent_rules)) {
+				if ($this->multipleRuleMatched($multiple_rule, $data, $parent_rules)) {
 					$multiple_rule['type'] = ($tag_rules['type'] & XML_REQUIRED) | $multiple_rule['type'];
 					$matched_multiple_rule =
 						$multiple_rule + array_intersect_key($tag_rules, array_flip(['default']));
@@ -327,7 +327,7 @@ abstract class CXmlValidatorGeneral {
 		return $tag_rules;
 	}
 
-	private static function multipleRuleMatched(array $multiple_rule, array &$data, array $rules): bool {
+	private function multipleRuleMatched(array $multiple_rule, array &$data, array $rules): bool {
 		if (array_key_exists('else', $multiple_rule)) {
 			return true;
 		}
@@ -338,11 +338,13 @@ abstract class CXmlValidatorGeneral {
 				return in_array($data[$field_name], $multiple_rule['if']['in']);
 			}
 			else {
-				$tag_rules = self::getResultRule($rules[$field_name], $data, $rules);
+				$tag_rules = $this->getResultRule($rules[$field_name], $data, $rules);
 
-				$data[$field_name] = array_key_exists('in', $tag_rules)
-					? $tag_rules['in'][$tag_rules['default']]
-					: $tag_rules['default'];
+				if (!$this->isPreview()) {
+					$data[$field_name] = array_key_exists('in', $tag_rules)
+						? $tag_rules['in'][$tag_rules['default']]
+						: $tag_rules['default'];
+				}
 
 				return array_key_exists($tag_rules['default'], $multiple_rule['if']['in']);
 			}
