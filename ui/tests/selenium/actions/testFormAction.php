@@ -1480,7 +1480,7 @@ class testFormAction extends CLegacyWebTest {
 		if (array_key_exists('conditions', $data)) {
 			foreach ($data['conditions'] as $condition) {
 				$action_form->query('xpath:.//table[@id="conditionTable"]//button[text()="Add"]')->one()->click();
-				COverlayDialogElement::find()->waitUntilReady()->one();
+				COverlayDialogElement::find()->all()->last()->waitUntilReady();
 				$condition_form = $this->query('id:popup.condition')->asForm()->one();
 				$condition_form->fill($condition);
 				$condition_form->submit();
@@ -1491,8 +1491,9 @@ class testFormAction extends CLegacyWebTest {
 		if (isset($data['operations'])) {
 			$action_form->selectTab('Operations');
 			foreach ($data['operations'] as $operation) {
-				$action_form->query('xpath://table[@id="op-table"]//button[text()="Add"]')->waitUntilVisible()->one()->click();
-				COverlayDialogElement::find()->waitUntilReady()->one();
+				$operation_table = $action_form->query('xpath://table[@id="op-table"]')->asTable()->one();
+				$operation_table->query('button:Add')->waitUntilVisible()->one()->click();
+				COverlayDialogElement::find()->all()->last()->waitUntilReady();
 				$operation_form = $this->query('id:popup-operation')->asForm()->one();
 
 				if ($data['eventsource'] !== EVENT_SOURCE_INTERNAL) {
@@ -1509,7 +1510,7 @@ class testFormAction extends CLegacyWebTest {
 						$value = 'Admin';
 					}
 					$operation_form->getField($field)->query('button:Select')->one()->click();
-					$list = COverlayDialogElement::find()->all()->last();
+					$list = COverlayDialogElement::find()->all()->last()->waitUntilReady();
 					$list->query('link', $value)->waitUntilClickable()->one()->click();
 				}
 				elseif ($data['eventsource'] !== EVENT_SOURCE_SERVICE) {
@@ -1522,6 +1523,7 @@ class testFormAction extends CLegacyWebTest {
 
 				$operation_form->submit();
 				$operation_form->waitUntilNotVisible();
+				$operation_table->waitUntilReloaded();
 			}
 
 			if (array_key_exists('esc_period', $data)) {
@@ -1532,12 +1534,13 @@ class testFormAction extends CLegacyWebTest {
 		$action_form->submit();
 		$sql = 'SELECT actionid FROM actions WHERE name='.zbx_dbstr($data['name']);
 		if ($data['expected'] === ACTION_GOOD) {
+			$dialog->waitUntilNotVisible();
 			$this->page->waitUntilReady();
 			$this->assertMessage(TEST_GOOD, 'Action added');
 			$this->assertEquals(1, CDBHelper::getCount($sql), 'Action has not been created in the DB.');
 
 			$this->query('link', $data['name'])->waitUntilClickable()->one()->click();
-			$this->page->waitUntilReady();
+			$dialog = COverlayDialogElement::find()->waitUntilReady();
 
 			if (array_key_exists('conditions', $data)) {
 				$condition_table = $this->query('id:conditionTable')->waitUntilVisible()->asTable()->one();
@@ -1565,8 +1568,7 @@ class testFormAction extends CLegacyWebTest {
 					$saved_operations[] = $operations_table->getRow($i)->getColumn('Details')->getText();
 				}
 				$this->assertEquals($expected_operations, $saved_operations);
-				$action_form->submit();
-				$this->query('xpath://button[@class="overlay-close-btn"]')->waitUntilVisible()->one()->click();
+				COverlayDialogElement::closeAll();
 			}
 		}
 		else {
