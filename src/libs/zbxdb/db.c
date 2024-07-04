@@ -884,6 +884,7 @@ int	zbx_db_connect_basic(const zbx_config_dbhigh_t *config_dbhigh)
 		if (0 < (ret = zbx_db_execute_basic("set bytea_output=escape")))
 			ret = ZBX_DB_OK;
 	}
+
 	ZBX_PG_READ_ONLY_RECOVERABLE = config_dbhigh->read_only_recoverable;
 out:
 #elif defined(HAVE_SQLITE3)
