@@ -224,8 +224,8 @@ class testDashboardProblemsWidgetDisplay extends CWebTest {
 		);
 
 		// Suppress the problem: 'Trigger for widget text'.
-		DBexecute('INSERT INTO event_suppress (event_suppressid, eventid, maintenanceid, suppress_until) VALUES '.
-				'(100990, '.self::$eventid_for_widget_text.', NULL, 0)'
+		DBexecute('INSERT INTO event_suppress (event_suppressid, eventid, maintenanceid, suppress_until, userid) VALUES '.
+				'(100990, '.self::$eventid_for_widget_text.', NULL, 0, 1)'
 		);
 
 		// Acknowledge the problem: 'Trigger for widget 2 unsigned' and get acknowledge time.
@@ -311,7 +311,7 @@ class testDashboardProblemsWidgetDisplay extends CWebTest {
 					],
 					'check_suppressed_icon' => [
 						'problem' => 'Trigger for widget text',
-						'text' => "Suppressed till: Indefinitely\nManually by: Inaccessible user"
+						'text' => "Suppressed till: Indefinitely\nManually by: Admin (Zabbix Administrator)"
 					]
 				]
 			],
