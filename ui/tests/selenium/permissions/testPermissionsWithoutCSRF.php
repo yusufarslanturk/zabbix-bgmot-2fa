@@ -220,7 +220,7 @@ class testPermissionsWithoutCSRF extends CWebTest {
 			// #17 Discovery rule create.
 			[
 				[
-					'db' => 'SELECT * FROM host_Discovery',
+					'db' => 'SELECT * FROM host_discovery',
 					'link' => 'host_discovery.php?form=create&hostid=99202&context=host',
 					'incorrect_request' => true
 				]
