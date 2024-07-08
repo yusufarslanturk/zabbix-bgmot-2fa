@@ -24,7 +24,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Active Connection Count'
           type: DEPENDENT
           key: aws.elb.alb.active_connection_count
-          delay: '0'
           history: 7d
           description: 'The total number of active concurrent TCP connections from clients to the load balancer and from the load balancer to targets.'
           preprocessing:
@@ -41,9 +40,7 @@ zabbix_export:
           name: 'AWS ELB ALB: Get alarms check'
           type: DEPENDENT
           key: aws.elb.alb.alarms.check
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Check that the alarm data has been received correctly.'
           preprocessing:
@@ -74,7 +71,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB Auth Error'
           type: DEPENDENT
           key: aws.elb.alb.auth_error
-          delay: '0'
           history: 7d
           description: 'The number of user authentications that could not be completed because an authenticate action was misconfigured, the load balancer could not establish a connection with the IdP, or the load balancer could not complete the authentication flow due to an internal error.'
           preprocessing:
@@ -93,7 +89,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB Auth Failure'
           type: DEPENDENT
           key: aws.elb.alb.auth_failure
-          delay: '0'
           history: 7d
           description: 'The number of user authentications that could not be completed because the IdP denied access to the user or an authorization code was used more than once.'
           preprocessing:
@@ -112,7 +107,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB Auth Latency'
           type: DEPENDENT
           key: aws.elb.alb.auth_latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ms
@@ -133,7 +127,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB Auth Success'
           type: DEPENDENT
           key: aws.elb.alb.auth_success
-          delay: '0'
           history: 7d
           description: |
             The number of authenticate actions that were successful.
@@ -152,7 +145,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB Auth User Claims Size Exceeded'
           type: DEPENDENT
           key: aws.elb.alb.auth_user_claims_size_exceeded
-          delay: '0'
           history: 7d
           description: 'The number of times that a configured IdP returned user claims that exceeded 11K bytes in size.'
           preprocessing:
@@ -171,7 +163,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Consumed LCUs'
           type: DEPENDENT
           key: aws.elb.alb.capacity_units
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -192,7 +183,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Client TLS Negotiation Error Count'
           type: DEPENDENT
           key: aws.elb.alb.client_tls_negotiation_error_count
-          delay: '0'
           history: 7d
           description: |
             The number of TLS connections initiated by the client that did not establish a session with the load balancer due to a TLS error.
@@ -213,7 +203,6 @@ zabbix_export:
           key: aws.elb.alb.get_alarms
           delay: 0s;m/1
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -438,8 +427,6 @@ zabbix_export:
           description: '`DescribeAlarms` API method: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: '{$AWS.DATA.TIMEOUT}'
           parameters:
             - name: AccessKeyId
@@ -463,7 +450,6 @@ zabbix_export:
           key: aws.elb.alb.get_metrics
           delay: 0s;m/1
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -695,8 +681,6 @@ zabbix_export:
             Full metrics list related to Application Load Balancer: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-cloudwatch-metrics.html
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: '{$AWS.DATA.TIMEOUT}'
           parameters:
             - name: AccessKeyId
@@ -720,7 +704,6 @@ zabbix_export:
           key: aws.elb.alb.get_target_groups
           delay: 0s;m/30
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -917,8 +900,6 @@ zabbix_export:
             `DescribeTargetGroups` API method: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: '{$AWS.DATA.TIMEOUT}'
           parameters:
             - name: AccessKeyId
@@ -940,7 +921,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB HTTP 3XX Count'
           type: DEPENDENT
           key: aws.elb.alb.http_3xx_count
-          delay: '0'
           history: 7d
           description: |
             The number of HTTP 3XX redirection codes that originate from the load balancer.
@@ -961,7 +941,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB HTTP 4XX Count'
           type: DEPENDENT
           key: aws.elb.alb.http_4xx_count
-          delay: '0'
           history: 7d
           description: |
             The number of HTTP 4XX client error codes that originate from the load balancer.
@@ -994,7 +973,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB HTTP 5XX Count'
           type: DEPENDENT
           key: aws.elb.alb.http_5xx_count
-          delay: '0'
           history: 7d
           description: |
             The number of HTTP 5XX server error codes that originate from the load balancer.
@@ -1026,7 +1004,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB HTTP 500 Count'
           type: DEPENDENT
           key: aws.elb.alb.http_500_count
-          delay: '0'
           history: 7d
           description: 'The number of HTTP 500 error codes that originate from the load balancer.'
           preprocessing:
@@ -1047,7 +1024,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB HTTP 502 Count'
           type: DEPENDENT
           key: aws.elb.alb.http_502_count
-          delay: '0'
           history: 7d
           description: 'The number of HTTP 502 error codes that originate from the load balancer.'
           preprocessing:
@@ -1068,7 +1044,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB HTTP 503 Count'
           type: DEPENDENT
           key: aws.elb.alb.http_503_count
-          delay: '0'
           history: 7d
           description: 'The number of HTTP 503 error codes that originate from the load balancer.'
           preprocessing:
@@ -1089,7 +1064,6 @@ zabbix_export:
           name: 'AWS ELB ALB: ELB HTTP 504 Count'
           type: DEPENDENT
           key: aws.elb.alb.http_504_count
-          delay: '0'
           history: 7d
           description: 'The number of HTTP 504 error codes that originate from the load balancer.'
           preprocessing:
@@ -1110,7 +1084,6 @@ zabbix_export:
           name: 'AWS ELB ALB: HTTP Fixed Response Count'
           type: DEPENDENT
           key: aws.elb.alb.http_fixed_response_count
-          delay: '0'
           history: 7d
           description: 'The number of fixed-response actions that were successful.'
           preprocessing:
@@ -1127,7 +1100,6 @@ zabbix_export:
           name: 'AWS ELB ALB: HTTP Redirect Count'
           type: DEPENDENT
           key: aws.elb.alb.http_redirect_count
-          delay: '0'
           history: 7d
           description: 'The number of redirect actions that were successful.'
           preprocessing:
@@ -1144,7 +1116,6 @@ zabbix_export:
           name: 'AWS ELB ALB: HTTP Redirect Url Limit Exceeded Count'
           type: DEPENDENT
           key: aws.elb.alb.http_redirect_url_limit_exceeded_count
-          delay: '0'
           history: 7d
           description: 'The number of redirect actions that could not be completed because the URL in the response location header is larger than 8K bytes.'
           preprocessing:
@@ -1161,9 +1132,7 @@ zabbix_export:
           name: 'AWS ELB ALB: Get metrics check'
           type: DEPENDENT
           key: aws.elb.alb.metrics.check
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Check that the Application Load Balancer metrics data has been received correctly.'
           preprocessing:
@@ -1194,7 +1163,6 @@ zabbix_export:
           name: 'AWS ELB ALB: New Connection Count'
           type: DEPENDENT
           key: aws.elb.alb.new_connection_count
-          delay: '0'
           history: 7d
           description: 'The total number of new TCP connections established from clients to the load balancer and from the load balancer to targets.'
           preprocessing:
@@ -1211,7 +1179,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Desync Mitigation Mode Non Compliant Request Count'
           type: DEPENDENT
           key: aws.elb.alb.non_compliant_request_count
-          delay: '0'
           history: 7d
           description: 'The number of requests that fail to comply with HTTP protocols.'
           preprocessing:
@@ -1228,7 +1195,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Processed Bytes'
           type: DEPENDENT
           key: aws.elb.alb.processed_bytes
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -1249,7 +1215,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Rejected Connection Count'
           type: DEPENDENT
           key: aws.elb.alb.rejected_connection_count
-          delay: '0'
           history: 7d
           description: 'The number of connections that were rejected because the load balancer had reached its maximum number of connections.'
           preprocessing:
@@ -1266,7 +1231,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Requests Count'
           type: DEPENDENT
           key: aws.elb.alb.requests_count
-          delay: '0'
           history: 7d
           description: |
             The number of requests processed over IPv4 and IPv6.
@@ -1286,7 +1250,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Rule Evaluations'
           type: DEPENDENT
           key: aws.elb.alb.rule_evaluations
-          delay: '0'
           history: 7d
           description: 'The number of rules processed by the load balancer given a request rate averaged over an hour.'
           preprocessing:
@@ -1303,7 +1266,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Target Connection Error Count'
           type: DEPENDENT
           key: aws.elb.alb.target_connection_error_count
-          delay: '0'
           history: 7d
           description: |
             The number of connections that were not successfully established between the load balancer and target.
@@ -1322,7 +1284,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Target Response Time'
           type: DEPENDENT
           key: aws.elb.alb.target_response_time
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1343,7 +1304,6 @@ zabbix_export:
           name: 'AWS ELB ALB: Target TLS Negotiation Error Count'
           type: DEPENDENT
           key: aws.elb.alb.target_tls_negotiation_error_count
-          delay: '0'
           history: 7d
           description: |
             The number of TLS connections initiated by the load balancer that did not establish a session with the target.
@@ -1387,9 +1347,7 @@ zabbix_export:
               name: 'AWS ELB ALB Alarms: [{#ALARM_NAME}]: Get metrics'
               type: DEPENDENT
               key: 'aws.elb.alb.alarm.get_metrics["{#ALARM_NAME}"]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Get metrics about the alarm state and its reason.'
               preprocessing:
@@ -1406,7 +1364,6 @@ zabbix_export:
               name: 'AWS ELB ALB Alarms: [{#ALARM_NAME}]: State'
               type: DEPENDENT
               key: 'aws.elb.alb.alarm.state["{#ALARM_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 The value of the alarm state. Possible values:
@@ -1449,9 +1406,7 @@ zabbix_export:
               name: 'AWS ELB ALB Alarms: [{#ALARM_NAME}]: State reason'
               type: DEPENDENT
               key: 'aws.elb.alb.alarm.state_reason["{#ALARM_NAME}"]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: |
                 An explanation for the alarm state reason in text format.
@@ -1528,7 +1483,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Anomalous Host Count'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.anomalous_host_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of hosts detected with anomalies.'
               preprocessing:
@@ -1553,7 +1507,6 @@ zabbix_export:
               key: 'aws.elb.alb.target_groups.get_metrics["{#AWS.ELB.TARGET.GROUP.NAME}"]'
               delay: 0s;m/5
               history: '0'
-              trends: '0'
               value_type: TEXT
               params: |
                 var AWS = {
@@ -1776,8 +1729,6 @@ zabbix_export:
                 Full list of metrics related to AWS ELB here: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-cloudwatch-metrics.html#user-authentication-metric-table
               preprocessing:
                 - type: CHECK_NOT_SUPPORTED
-                  parameters:
-                    - ''
               timeout: '{$AWS.DATA.TIMEOUT}'
               parameters:
                 - name: AccessKeyId
@@ -1809,7 +1760,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Healthy Host Count'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.healthy_host_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of targets that are considered healthy.'
               preprocessing:
@@ -1834,7 +1784,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Healthy State DNS'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.healthy_state_dns["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of zones that meet the DNS healthy state requirements.'
               preprocessing:
@@ -1859,7 +1808,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Healthy State Routing'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.healthy_state_routing["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of zones that meet the routing healthy state requirements.'
               preprocessing:
@@ -1884,7 +1832,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: HTTP Code Target 2XX Count'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.http_2xx_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 The number of HTTP response 2XX codes generated by the targets.
@@ -1913,7 +1860,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: HTTP Code Target 3XX Count'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.http_3xx_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 The number of HTTP response 3XX codes generated by the targets.
@@ -1942,7 +1888,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: HTTP Code Target 4XX Count'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.http_4xx_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 The number of HTTP response 4XX codes generated by the targets.
@@ -1971,7 +1916,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: HTTP Code Target 5XX Count'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.http_5xx_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 The number of HTTP response 5XX codes generated by the targets.
@@ -2000,7 +1944,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Mitigated Host Count'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.mitigated_host_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of targets under mitigation.'
               preprocessing:
@@ -2023,7 +1966,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Request Count Per Target'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.request["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 The average request count per target, in a target group.
@@ -2050,7 +1992,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Unhealthy Host Count'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.unhealthy_host_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of targets that are considered unhealthy.'
               preprocessing:
@@ -2075,7 +2016,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Unhealthy Routing Request Count'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.unhealthy_routing_request_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The average request count per target, in a target group.'
               preprocessing:
@@ -2100,7 +2040,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Unhealthy State DNS'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.unhealthy_state_dns["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of zones that do not meet the DNS healthy state requirements and therefore were marked unhealthy in DNS.'
               preprocessing:
@@ -2125,7 +2064,6 @@ zabbix_export:
               name: 'AWS ELB ALB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Unhealthy State Routing'
               type: DEPENDENT
               key: 'aws.elb.alb.target_groups.unhealthy_state_routing["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of zones that do not meet the routing healthy state requirements, and therefore the load balancer distributes traffic to all targets in the zone, including the unhealthy targets.'
               preprocessing:
@@ -2458,7 +2396,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Active Flow Count'
           type: DEPENDENT
           key: aws.elb.nlb.active_flow_count
-          delay: '0'
           history: 7d
           description: |
             The total number of concurrent flows (or connections) from clients to targets.
@@ -2478,7 +2415,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Active Flow Count TCP'
           type: DEPENDENT
           key: aws.elb.nlb.active_flow_count_tcp
-          delay: '0'
           history: 7d
           description: |
             The total number of concurrent TCP flows (or connections) from clients to targets.
@@ -2500,7 +2436,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Active Flow Count TLS'
           type: DEPENDENT
           key: aws.elb.nlb.active_flow_count_tls
-          delay: '0'
           history: 7d
           description: |
             The total number of concurrent TLS flows (or connections) from clients to targets.
@@ -2521,7 +2456,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Active Flow Count UDP'
           type: DEPENDENT
           key: aws.elb.nlb.active_flow_count_udp
-          delay: '0'
           history: 7d
           description: 'The total number of concurrent UDP flows (or connections) from clients to targets.'
           preprocessing:
@@ -2540,9 +2474,7 @@ zabbix_export:
           name: 'AWS ELB NLB: Get alarms check'
           type: DEPENDENT
           key: aws.elb.nlb.alarms.check
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Check that the alarm data has been received correctly.'
           preprocessing:
@@ -2573,7 +2505,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Consumed LCUs'
           type: DEPENDENT
           key: aws.elb.nlb.capacity_units
-          delay: '0'
           history: 7d
           description: |
             The number of load balancer capacity units (LCU) used by your load balancer.
@@ -2593,7 +2524,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Consumed LCUs TCP'
           type: DEPENDENT
           key: aws.elb.nlb.capacity_units_tcp
-          delay: '0'
           history: 7d
           description: |
             The number of load balancer capacity units (LCU) used by your load balancer for TCP.
@@ -2615,7 +2545,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Consumed LCUs TLS'
           type: DEPENDENT
           key: aws.elb.nlb.capacity_units_tls
-          delay: '0'
           history: 7d
           description: |
             The number of load balancer capacity units (LCU) used by your load balancer for TLS.
@@ -2637,7 +2566,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Consumed LCUs UDP'
           type: DEPENDENT
           key: aws.elb.nlb.capacity_units_udp
-          delay: '0'
           history: 7d
           description: |
             The number of load balancer capacity units (LCU) used by your load balancer for UDP.
@@ -2659,7 +2587,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Client TLS Negotiation Error Count'
           type: DEPENDENT
           key: aws.elb.nlb.client_tls_negotiation_error_count
-          delay: '0'
           history: 7d
           description: 'The total number of TLS handshakes that failed during negotiation between a client and a TLS listener.'
           preprocessing:
@@ -2680,7 +2607,6 @@ zabbix_export:
           key: aws.elb.nlb.get_alarms
           delay: 0s;m/1
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -2905,8 +2831,6 @@ zabbix_export:
           description: '`DescribeAlarms` API method: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: '{$AWS.DATA.TIMEOUT}'
           parameters:
             - name: AccessKeyId
@@ -2930,7 +2854,6 @@ zabbix_export:
           key: aws.elb.nlb.get_metrics
           delay: 0s;m/1
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -3166,8 +3089,6 @@ zabbix_export:
             Full metrics list related to Network Load Balancer: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-cloudwatch-metrics.html
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: '{$AWS.DATA.TIMEOUT}'
           parameters:
             - name: AccessKeyId
@@ -3191,7 +3112,6 @@ zabbix_export:
           key: aws.elb.nlb.get_target_groups
           delay: 0s;m/30
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -3388,8 +3308,6 @@ zabbix_export:
             `DescribeTargetGroups` API method: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: '{$AWS.DATA.TIMEOUT}'
           parameters:
             - name: AccessKeyId
@@ -3411,9 +3329,7 @@ zabbix_export:
           name: 'AWS ELB NLB: Get metrics check'
           type: DEPENDENT
           key: aws.elb.nlb.metrics.check
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Check that the Network Load Balancer metrics data has been received correctly.'
           preprocessing:
@@ -3444,7 +3360,6 @@ zabbix_export:
           name: 'AWS ELB NLB: New Flow Count'
           type: DEPENDENT
           key: aws.elb.nlb.new_flow_count
-          delay: '0'
           history: 7d
           description: 'The total number of new flows (or connections) established from clients to targets in the specified time period.'
           preprocessing:
@@ -3461,7 +3376,6 @@ zabbix_export:
           name: 'AWS ELB NLB: New Flow Count TCP'
           type: DEPENDENT
           key: aws.elb.nlb.new_flow_count_tcp
-          delay: '0'
           history: 7d
           description: 'The total number of new TCP flows (or connections) established from clients to targets in the specified time period.'
           preprocessing:
@@ -3480,7 +3394,6 @@ zabbix_export:
           name: 'AWS ELB NLB: New Flow Count TLS'
           type: DEPENDENT
           key: aws.elb.nlb.new_flow_count_tls
-          delay: '0'
           history: 7d
           description: 'The total number of new TLS flows (or connections) established from clients to targets in the specified time period.'
           preprocessing:
@@ -3499,7 +3412,6 @@ zabbix_export:
           name: 'AWS ELB NLB: New Flow Count UDP'
           type: DEPENDENT
           key: aws.elb.nlb.new_flow_count_udp
-          delay: '0'
           history: 7d
           description: 'The total number of new UDP flows (or connections) established from clients to targets in the specified time period.'
           preprocessing:
@@ -3518,7 +3430,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Peak Packets per second'
           type: DEPENDENT
           key: aws.elb.nlb.peak_packets.rate
-          delay: '0'
           history: 7d
           description: |
             Highest average packet rate (packets processed per second), calculated every 10 seconds during the sampling window.
@@ -3539,7 +3450,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Port Allocation Error Count'
           type: DEPENDENT
           key: aws.elb.nlb.port_allocation_error_count
-          delay: '0'
           history: 7d
           description: |
             The total number of ephemeral port allocation errors during a client IP translation operation. A non-zero value indicates dropped client connections.
@@ -3561,7 +3471,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Processed Bytes'
           type: DEPENDENT
           key: aws.elb.nlb.processed_bytes
-          delay: '0'
           history: 7d
           units: B
           description: 'The total number of bytes processed by the load balancer, including TCP/IP headers. This count includes traffic to and from targets, minus health check traffic.'
@@ -3579,7 +3488,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Processed Bytes TCP'
           type: DEPENDENT
           key: aws.elb.nlb.processed_bytes_tcp
-          delay: '0'
           history: 7d
           units: B
           description: 'The total number of bytes processed by TCP listeners.'
@@ -3599,7 +3507,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Processed Bytes TLS'
           type: DEPENDENT
           key: aws.elb.nlb.processed_bytes_tls
-          delay: '0'
           history: 7d
           units: B
           description: 'The total number of bytes processed by TLS listeners.'
@@ -3619,7 +3526,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Processed Bytes UDP'
           type: DEPENDENT
           key: aws.elb.nlb.processed_bytes_udp
-          delay: '0'
           history: 7d
           units: B
           description: 'The total number of bytes processed by UDP listeners.'
@@ -3639,7 +3545,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Processed Packets'
           type: DEPENDENT
           key: aws.elb.nlb.processed_packets
-          delay: '0'
           history: 7d
           description: 'The total number of packets processed by the load balancer. This count includes traffic to and from targets, including health check traffic.'
           preprocessing:
@@ -3656,7 +3561,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Security Group Blocked Flow Count Inbound ICMP'
           type: DEPENDENT
           key: aws.elb.nlb.sg_blocked_inbound_icmp
-          delay: '0'
           history: 7d
           description: 'The number of new ICMP messages rejected by the inbound rules of the load balancer security groups.'
           preprocessing:
@@ -3675,7 +3579,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Security Group Blocked Flow Count Inbound TCP'
           type: DEPENDENT
           key: aws.elb.nlb.sg_blocked_inbound_tcp
-          delay: '0'
           history: 7d
           description: 'The number of new TCP flows rejected by the inbound rules of the load balancer security groups.'
           preprocessing:
@@ -3694,7 +3597,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Security Group Blocked Flow Count Inbound UDP'
           type: DEPENDENT
           key: aws.elb.nlb.sg_blocked_inbound_udp
-          delay: '0'
           history: 7d
           description: 'The number of new UDP flows rejected by the inbound rules of the load balancer security groups.'
           preprocessing:
@@ -3713,7 +3615,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Security Group Blocked Flow Count Outbound ICMP'
           type: DEPENDENT
           key: aws.elb.nlb.sg_blocked_outbound_icmp
-          delay: '0'
           history: 7d
           description: 'The number of new ICMP messages rejected by the outbound rules of the load balancer security groups.'
           preprocessing:
@@ -3732,7 +3633,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Security Group Blocked Flow Count Outbound TCP'
           type: DEPENDENT
           key: aws.elb.nlb.sg_blocked_outbound_tcp
-          delay: '0'
           history: 7d
           description: 'The number of new TCP flows rejected by the outbound rules of the load balancer security groups.'
           preprocessing:
@@ -3751,7 +3651,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Security Group Blocked Flow Count Outbound UDP'
           type: DEPENDENT
           key: aws.elb.nlb.sg_blocked_outbound_udp
-          delay: '0'
           history: 7d
           description: 'The number of new UDP flows rejected by the outbound rules of the load balancer security groups.'
           preprocessing:
@@ -3770,7 +3669,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Target TLS Negotiation Error Count'
           type: DEPENDENT
           key: aws.elb.nlb.target_tls_negotiation_error_count
-          delay: '0'
           history: 7d
           description: 'The total number of TLS handshakes that failed during negotiation between a TLS listener and a target.'
           preprocessing:
@@ -3789,7 +3687,6 @@ zabbix_export:
           name: 'AWS ELB NLB: TCP Client Reset Count'
           type: DEPENDENT
           key: aws.elb.nlb.tcp_client_reset_count
-          delay: '0'
           history: 7d
           description: |
             The total number of reset (RST) packets sent from a client to a target.
@@ -3810,7 +3707,6 @@ zabbix_export:
           name: 'AWS ELB NLB: TCP ELB Reset Count'
           type: DEPENDENT
           key: aws.elb.nlb.tcp_elb_reset_count
-          delay: '0'
           history: 7d
           description: |
             The total number of reset (RST) packets generated by the load balancer.
@@ -3831,7 +3727,6 @@ zabbix_export:
           name: 'AWS ELB NLB: TCP Target Reset Count'
           type: DEPENDENT
           key: aws.elb.nlb.tcp_target_reset_count
-          delay: '0'
           history: 7d
           description: |
             The total number of reset (RST) packets sent from a target to a client.
@@ -3852,7 +3747,6 @@ zabbix_export:
           name: 'AWS ELB NLB: Unhealthy Routing Flow Count'
           type: DEPENDENT
           key: aws.elb.nlb.unhealthy_routing_flow_count
-          delay: '0'
           history: 7d
           description: 'The number of flows (or connections) that are routed using the routing failover action (fail open).'
           preprocessing:
@@ -3894,9 +3788,7 @@ zabbix_export:
               name: 'AWS ELB NLB Alarms: [{#ALARM_NAME}]: Get metrics'
               type: DEPENDENT
               key: 'aws.elb.nlb.alarm.get_metrics["{#ALARM_NAME}"]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Get metrics about the alarm state and its reason.'
               preprocessing:
@@ -3913,7 +3805,6 @@ zabbix_export:
               name: 'AWS ELB NLB Alarms: [{#ALARM_NAME}]: State'
               type: DEPENDENT
               key: 'aws.elb.nlb.alarm.state["{#ALARM_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 The value of the alarm state. Possible values:
@@ -3956,9 +3847,7 @@ zabbix_export:
               name: 'AWS ELB NLB Alarms: [{#ALARM_NAME}]: State reason'
               type: DEPENDENT
               key: 'aws.elb.nlb.alarm.state_reason["{#ALARM_NAME}"]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: |
                 An explanation for the alarm state reason in text format.
@@ -4037,7 +3926,6 @@ zabbix_export:
               key: 'aws.elb.nlb.target_groups.get_metrics["{#AWS.ELB.TARGET.GROUP.NAME}"]'
               delay: 0s;m/5
               history: '0'
-              trends: '0'
               value_type: TEXT
               params: |
                 var AWS = {
@@ -4248,8 +4136,6 @@ zabbix_export:
                 Full list of metrics related to AWS ELB here: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-cloudwatch-metrics.html#user-authentication-metric-table
               preprocessing:
                 - type: CHECK_NOT_SUPPORTED
-                  parameters:
-                    - ''
               timeout: '{$AWS.DATA.TIMEOUT}'
               parameters:
                 - name: AccessKeyId
@@ -4281,7 +4167,6 @@ zabbix_export:
               name: 'AWS ELB NLB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Healthy Host Count'
               type: DEPENDENT
               key: 'aws.elb.nlb.target_groups.healthy_host_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of targets that are considered healthy.'
               preprocessing:
@@ -4317,7 +4202,6 @@ zabbix_export:
               name: 'AWS ELB NLB Target Groups: [{#AWS.ELB.TARGET.GROUP.NAME}]: Unhealthy Host Count'
               type: DEPENDENT
               key: 'aws.elb.nlb.target_groups.unhealthy_host_count["{#AWS.ELB.TARGET.GROUP.NAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of targets that are considered unhealthy.'
               preprocessing:

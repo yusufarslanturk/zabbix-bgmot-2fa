@@ -31,9 +31,7 @@ zabbix_export:
           name: 'Veeam: Get errors'
           type: DEPENDENT
           key: veeam.get.errors
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'The errors from API requests.'
           preprocessing:
@@ -65,7 +63,6 @@ zabbix_export:
           key: veeam.get.metrics
           delay: 5m
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var Veeam = {
@@ -220,9 +217,7 @@ zabbix_export:
               name: 'Veeam: Job states [{#NAME}] [{#TYPE}]: Last result'
               type: DEPENDENT
               key: 'veeam.jobs.last.result[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'The result of the session. The enums used: `None`, `Success`, `Warning`, `Failed`.'
               preprocessing:
@@ -252,9 +247,7 @@ zabbix_export:
               name: 'Veeam: Job states [{#NAME}] [{#TYPE}]: Get data'
               type: DEPENDENT
               key: 'veeam.jobs.states.raw[{#ID}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Gets raw data from the job states with the name `[{#NAME}]`.'
               preprocessing:
@@ -272,9 +265,7 @@ zabbix_export:
               name: 'Veeam: Job states [{#NAME}] [{#TYPE}]: Status'
               type: DEPENDENT
               key: 'veeam.jobs.status[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'The current status of the job. The enums used: `running`, `inactive`, `disabled`.'
               preprocessing:
@@ -340,7 +331,6 @@ zabbix_export:
               name: 'Veeam: Proxy [{#NAME}] [{#TYPE}]: Max Task Count'
               type: DEPENDENT
               key: 'veeam.proxy.maxtask[{#NAME}]'
-              delay: '0'
               history: 7d
               description: 'The maximum number of concurrent tasks.'
               preprocessing:
@@ -358,9 +348,7 @@ zabbix_export:
               name: 'Veeam: Proxy [{#NAME}] [{#TYPE}]: Get data'
               type: DEPENDENT
               key: 'veeam.proxy.raw[{#NAME}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Gets raw data collected by the proxy with the name `[{#NAME}]`, `[{#TYPE}]`.'
               preprocessing:
@@ -380,9 +368,7 @@ zabbix_export:
               name: 'Veeam: Proxy [{#NAME}] [{#TYPE}]: Host name'
               type: DEPENDENT
               key: 'veeam.proxy.server.name[{#NAME}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'The name of the proxy server.'
               preprocessing:
@@ -400,9 +386,7 @@ zabbix_export:
               name: 'Veeam: Server [{#NAME}]: Get data'
               type: DEPENDENT
               key: 'veeam.proxy.server.raw[{#NAME}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Gets raw data collected by the proxy server.'
               preprocessing:
@@ -422,9 +406,7 @@ zabbix_export:
               name: 'Veeam: Proxy [{#NAME}] [{#TYPE}]: Host type'
               type: DEPENDENT
               key: 'veeam.proxy.server.type[{#NAME}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'The type of the proxy server.'
               preprocessing:
@@ -486,9 +468,7 @@ zabbix_export:
               name: 'Veeam: Repository [{#NAME}] [{#TYPE}]: Get data'
               type: DEPENDENT
               key: 'veeam.repositories.raw[{#NAME}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Gets raw data from repository with the name: `[{#NAME}]`, `[{#TYPE}]`.'
               preprocessing:
@@ -508,7 +488,6 @@ zabbix_export:
               name: 'Veeam: Repository [{#NAME}] [{#TYPE}]: Used space [{#PATH}]'
               type: DEPENDENT
               key: 'veeam.repository.capacity[{#NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!GB'
@@ -528,7 +507,6 @@ zabbix_export:
               name: 'Veeam: Repository [{#NAME}] [{#TYPE}]: Free space [{#PATH}]'
               type: DEPENDENT
               key: 'veeam.repository.free.space[{#NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!GB'
@@ -596,9 +574,7 @@ zabbix_export:
               name: 'Veeam: Session [{#NAME}] [{#TYPE}]: Message'
               type: DEPENDENT
               key: 'veeam.sessions.message[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'A message that explains the session result.'
               preprocessing:
@@ -618,7 +594,6 @@ zabbix_export:
               name: 'Veeam: Session progress percent [{#NAME}] [{#TYPE}]'
               type: DEPENDENT
               key: 'veeam.sessions.progress.percent[{#ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -640,9 +615,7 @@ zabbix_export:
               name: 'Veeam: Session [{#NAME}] [{#TYPE}]: Get data'
               type: DEPENDENT
               key: 'veeam.sessions.raw[{#ID}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Gets raw data from session with the name: `[{#NAME}]`, `[{#TYPE}]`.'
               preprocessing:
@@ -661,9 +634,7 @@ zabbix_export:
               name: 'Veeam: Session [{#NAME}] [{#TYPE}]: Result'
               type: DEPENDENT
               key: 'veeam.sessions.result[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'The result of the session. The enums used: `None`, `Success`, `Warning`, `Failed`.'
               preprocessing:
@@ -693,9 +664,7 @@ zabbix_export:
               name: 'Veeam: Session [{#NAME}] [{#TYPE}]: State'
               type: DEPENDENT
               key: 'veeam.sessions.state[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'The state of the session. The enums used: `Stopped`, `Starting`, `Stopping`, `Working`, `Pausing`, `Resuming`, `WaitingTape`, `Idle`, `Postprocessing`, `WaitingRepository`, `WaitingSlot`.'
               preprocessing:

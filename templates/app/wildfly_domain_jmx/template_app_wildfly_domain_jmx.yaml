@@ -54,7 +54,6 @@ zabbix_export:
           type: JMX
           key: 'jmx["jboss.as:management-root=server","launchType"]'
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$WILDFLY.USER}'
           password: '{$WILDFLY.PASSWORD}'
@@ -72,7 +71,6 @@ zabbix_export:
           type: JMX
           key: 'jmx["jboss.as:management-root=server","name"]'
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$WILDFLY.USER}'
           password: '{$WILDFLY.PASSWORD}'
@@ -92,7 +90,6 @@ zabbix_export:
           type: JMX
           key: 'jmx["jboss.as:management-root=server","processType"]'
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$WILDFLY.USER}'
           password: '{$WILDFLY.PASSWORD}'
@@ -110,7 +107,6 @@ zabbix_export:
           type: JMX
           key: 'jmx["jboss.as:management-root=server","productVersion"]'
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$WILDFLY.USER}'
           password: '{$WILDFLY.PASSWORD}'
@@ -166,8 +162,6 @@ zabbix_export:
                 name: 'WildFly flag'
               preprocessing:
                 - type: BOOL_TO_DECIMAL
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3h
@@ -191,8 +185,6 @@ zabbix_export:
                 name: 'WildFly flag'
               preprocessing:
                 - type: BOOL_TO_DECIMAL
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3h
@@ -243,8 +235,6 @@ zabbix_export:
                 name: 'WildFly flag'
               preprocessing:
                 - type: BOOL_TO_DECIMAL
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3h
@@ -259,7 +249,6 @@ zabbix_export:
               type: JMX
               key: 'jmx["{#JMXOBJ}",group]'
               history: 7d
-              trends: '0'
               value_type: CHAR
               username: '{$WILDFLY.USER}'
               password: '{$WILDFLY.PASSWORD}'
@@ -290,7 +279,6 @@ zabbix_export:
               type: JMX
               key: 'jmx["{#JMXOBJ}",status]'
               history: 7d
-              trends: '0'
               value_type: CHAR
               username: '{$WILDFLY.USER}'
               password: '{$WILDFLY.PASSWORD}'

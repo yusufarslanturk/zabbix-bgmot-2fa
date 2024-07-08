@@ -53,9 +53,7 @@ zabbix_export:
           name: 'Etcd: Cluster version'
           type: DEPENDENT
           key: etcd.cluster.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'The version of the `etcd cluster`.'
           preprocessing:
@@ -85,7 +83,6 @@ zabbix_export:
           name: 'Etcd: CPU'
           type: DEPENDENT
           key: etcd.cpu.util
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -97,8 +94,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -108,7 +103,6 @@ zabbix_export:
           name: 'Etcd: DB size'
           type: DEPENDENT
           key: etcd.db.size
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -128,7 +122,6 @@ zabbix_export:
           name: 'Etcd: Deletes per second'
           type: DEPENDENT
           key: etcd.delete.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -140,8 +133,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -151,7 +142,6 @@ zabbix_export:
           name: 'Etcd: Pending events'
           type: DEPENDENT
           key: etcd.events.sent.rate
-          delay: '0'
           history: 7d
           description: 'The total number of pending events to be sent.'
           preprocessing:
@@ -170,7 +160,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: etcd.get_metrics
           history: '0'
-          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$ETCD.USER}'
@@ -184,7 +173,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: etcd.get_version
           history: '0'
-          trends: '0'
           value_type: TEXT
           url: '{$ETCD.SCHEME}://{$ETCD.HOST}:{$ETCD.PORT}/version'
           tags:
@@ -194,7 +182,6 @@ zabbix_export:
           name: 'Etcd: RPCs received per second'
           type: DEPENDENT
           key: etcd.grpc.received.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -211,8 +198,6 @@ zabbix_export:
                   	return acc + parseFloat(obj['value']);
                   }, 0);
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -222,7 +207,6 @@ zabbix_export:
           name: 'Etcd: RPCs sent per second'
           type: DEPENDENT
           key: etcd.grpc.sent.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -239,8 +223,6 @@ zabbix_export:
                   	return acc + parseFloat(obj['value']);
                   }, 0);
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -250,7 +232,6 @@ zabbix_export:
           name: 'Etcd: RPCs started per second'
           type: DEPENDENT
           key: etcd.grpc.started.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -267,8 +248,6 @@ zabbix_export:
                   	return acc + parseFloat(obj['value']);
                   }, 0);
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -278,7 +257,6 @@ zabbix_export:
           name: 'Etcd: Server has a leader'
           type: DEPENDENT
           key: etcd.has.leader
-          delay: '0'
           history: 7d
           description: |
             It defines - whether or not a leader exists:
@@ -324,8 +302,6 @@ zabbix_export:
               parameters:
                 - $.health
             - type: BOOL_TO_DECIMAL
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -352,7 +328,6 @@ zabbix_export:
           name: 'Etcd: HTTP 4XX'
           type: DEPENDENT
           key: etcd.http.requests.4xx.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -369,8 +344,6 @@ zabbix_export:
                   	return acc + parseFloat(obj['value']);
                   }, 0);
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -382,7 +355,6 @@ zabbix_export:
           name: 'Etcd: HTTP 5XX'
           type: DEPENDENT
           key: etcd.http.requests.5xx.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -399,8 +371,6 @@ zabbix_export:
                   	return acc + parseFloat(obj['value']);
                   }, 0);
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -422,7 +392,6 @@ zabbix_export:
           name: 'Etcd: HTTP requests received'
           type: DEPENDENT
           key: etcd.http.requests.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -439,8 +408,6 @@ zabbix_export:
                   	return acc + parseFloat(obj['value']);
                   }, 0);
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -450,7 +417,6 @@ zabbix_export:
           name: 'Etcd: Server is a leader'
           type: DEPENDENT
           key: etcd.is.leader
-          delay: '0'
           history: 7d
           description: |
             It defines - whether or not this member is a leader:
@@ -492,7 +458,6 @@ zabbix_export:
           name: 'Etcd: Keys compacted per second'
           type: DEPENDENT
           key: etcd.keys.compacted.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of DB keys compacted per second.'
@@ -505,8 +470,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -516,7 +479,6 @@ zabbix_export:
           name: 'Etcd: Keys expired per second'
           type: DEPENDENT
           key: etcd.keys.expired.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of expired keys per second.'
@@ -527,8 +489,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -538,7 +498,6 @@ zabbix_export:
           name: 'Etcd: Keys total'
           type: DEPENDENT
           key: etcd.keys.total
-          delay: '0'
           history: 7d
           description: 'The total number of keys.'
           preprocessing:
@@ -556,7 +515,6 @@ zabbix_export:
           name: 'Etcd: Leader changes'
           type: DEPENDENT
           key: etcd.leader.changes
-          delay: '0'
           history: 7d
           description: 'The number of leader changes the member has seen since its start.'
           preprocessing:
@@ -584,7 +542,6 @@ zabbix_export:
           name: 'Etcd: Maximum open file descriptors'
           type: DEPENDENT
           key: etcd.max.fds
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The Maximum number of open file descriptors.'
@@ -603,7 +560,6 @@ zabbix_export:
           name: 'Etcd: Client gRPC received bytes per second'
           type: DEPENDENT
           key: etcd.network.grpc.received.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -615,8 +571,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -626,7 +580,6 @@ zabbix_export:
           name: 'Etcd: Client gRPC sent bytes per second'
           type: DEPENDENT
           key: etcd.network.grpc.sent.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -638,8 +591,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -649,7 +600,6 @@ zabbix_export:
           name: 'Etcd: Open file descriptors'
           type: DEPENDENT
           key: etcd.open.fds
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of open file descriptors.'
@@ -668,7 +618,6 @@ zabbix_export:
           name: 'Etcd: Proposals applied per second'
           type: DEPENDENT
           key: etcd.proposals.applied.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of consensus proposals applied.'
@@ -679,8 +628,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -690,7 +637,6 @@ zabbix_export:
           name: 'Etcd: Proposals committed per second'
           type: DEPENDENT
           key: etcd.proposals.committed.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of consensus proposals committed.'
@@ -701,8 +647,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -712,7 +656,6 @@ zabbix_export:
           name: 'Etcd: Proposals failed per second'
           type: DEPENDENT
           key: etcd.proposals.failed.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of failed proposals seen.'
@@ -723,8 +666,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -744,7 +685,6 @@ zabbix_export:
           name: 'Etcd: Proposals pending'
           type: DEPENDENT
           key: etcd.proposals.pending
-          delay: '0'
           history: 7d
           description: 'The current number of pending proposals to commit.'
           preprocessing:
@@ -772,7 +712,6 @@ zabbix_export:
           name: 'Etcd: PUT per second'
           type: DEPENDENT
           key: etcd.put.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -784,8 +723,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -795,7 +732,6 @@ zabbix_export:
           name: 'Etcd: Range per second'
           type: DEPENDENT
           key: etcd.range.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -807,8 +743,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -818,7 +752,6 @@ zabbix_export:
           name: 'Etcd: Reads per second'
           type: DEPENDENT
           key: etcd.reads.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -835,8 +768,6 @@ zabbix_export:
                   	return acc + parseFloat(obj['value']);
                   }, 0);
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -846,7 +777,6 @@ zabbix_export:
           name: 'Etcd: Resident memory'
           type: DEPENDENT
           key: etcd.res.bytes
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -866,9 +796,7 @@ zabbix_export:
           name: 'Etcd: Server version'
           type: DEPENDENT
           key: etcd.server.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'The version of the `etcd server`.'
           preprocessing:
@@ -898,7 +826,6 @@ zabbix_export:
           name: 'Etcd: Transaction per second'
           type: DEPENDENT
           key: etcd.txn.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -910,8 +837,6 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -921,7 +846,6 @@ zabbix_export:
           name: 'Etcd: Uptime'
           type: DEPENDENT
           key: etcd.uptime
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -955,7 +879,6 @@ zabbix_export:
           name: 'Etcd: Virtual memory'
           type: DEPENDENT
           key: etcd.virtual.bytes
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -975,7 +898,6 @@ zabbix_export:
           name: 'Etcd: Writes per second'
           type: DEPENDENT
           key: etcd.writes.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -992,8 +914,6 @@ zabbix_export:
                   	return acc + parseFloat(obj['value']);
                   }, 0);
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: etcd.get_metrics
           tags:
@@ -1045,7 +965,6 @@ zabbix_export:
               name: 'Etcd: RPCs completed with code {#GRPC.CODE}'
               type: DEPENDENT
               key: 'etcd.grpc.handled.rate[{#GRPC.CODE}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: rps
@@ -1062,8 +981,6 @@ zabbix_export:
                       	return acc + parseFloat(obj['value']);
                       }, 0);
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: etcd.get_metrics
               tags:
@@ -1127,7 +1044,6 @@ zabbix_export:
               name: 'Etcd: Etcd peer {#ETCD.PEER}: Bytes received'
               type: DEPENDENT
               key: 'etcd.bytes.received.rate[{#ETCD.PEER}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1141,8 +1057,6 @@ zabbix_export:
                   error_handler: CUSTOM_VALUE
                   error_handler_params: '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: etcd.get_metrics
               tags:
@@ -1156,7 +1070,6 @@ zabbix_export:
               name: 'Etcd: Etcd peer {#ETCD.PEER}: Bytes sent'
               type: DEPENDENT
               key: 'etcd.bytes.sent.rate[{#ETCD.PEER}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1170,8 +1083,6 @@ zabbix_export:
                   error_handler: CUSTOM_VALUE
                   error_handler_params: '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: etcd.get_metrics
               tags:
@@ -1185,7 +1096,6 @@ zabbix_export:
               name: 'Etcd: Etcd peer {#ETCD.PEER}: Receive failures'
               type: DEPENDENT
               key: 'etcd.received.fail.rate[{#ETCD.PEER}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: rps
@@ -1199,8 +1109,6 @@ zabbix_export:
                   error_handler: CUSTOM_VALUE
                   error_handler_params: '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: etcd.get_metrics
               tags:
@@ -1214,7 +1122,6 @@ zabbix_export:
               name: 'Etcd: Etcd peer {#ETCD.PEER}: Send failures'
               type: DEPENDENT
               key: 'etcd.sent.fail.rate[{#ETCD.PEER}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: rps
@@ -1228,8 +1135,6 @@ zabbix_export:
                   error_handler: CUSTOM_VALUE
                   error_handler_params: '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: etcd.get_metrics
               tags:

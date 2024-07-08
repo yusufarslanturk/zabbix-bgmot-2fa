@@ -24,7 +24,6 @@ zabbix_export:
           type: SCRIPT
           key: velocloud.get
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var params = JSON.parse(value);
@@ -125,9 +124,7 @@ zabbix_export:
           name: 'Velocloud: Clear data'
           type: DEPENDENT
           key: velocloud.get.clear_metrics
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Clear metrics for data without errors.'
           preprocessing:
@@ -144,9 +141,7 @@ zabbix_export:
           name: 'Velocloud: Get edges'
           type: DEPENDENT
           key: velocloud.get.edges
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The JSON with result of Velocloud edge SD Wan.'
           preprocessing:
@@ -256,9 +251,7 @@ zabbix_export:
           name: 'Velocloud: Get edges data collection errors'
           type: DEPENDENT
           key: velocloud.get.edges.error
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Errors of aggregate script item.'
           preprocessing:
@@ -286,9 +279,7 @@ zabbix_export:
           name: 'Velocloud: Get data collection errors'
           type: DEPENDENT
           key: velocloud.get.error
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Errors of aggregate script item.'
           preprocessing:
@@ -316,9 +307,7 @@ zabbix_export:
           name: 'Velocloud: Orchestrator API version'
           type: DEPENDENT
           key: velocloud.orchestrator.api_version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Version of VMware SD-WAN Orchestrator API.'
           preprocessing:
@@ -345,9 +334,7 @@ zabbix_export:
           name: 'Velocloud: Orchestrator build'
           type: DEPENDENT
           key: velocloud.orchestrator.build
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Build of VMware SD-WAN Orchestrator API.'
           preprocessing:
@@ -376,9 +363,7 @@ zabbix_export:
           name: 'Velocloud: Orchestrator version'
           type: DEPENDENT
           key: velocloud.orchestrator.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Version of VMware SD-WAN Orchestrator API.'
           preprocessing:
@@ -409,7 +394,6 @@ zabbix_export:
           key: velocloud.system.properties
           delay: 6h
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'System properties of VMware SD-WAN.'
           preprocessing:
@@ -459,7 +443,6 @@ zabbix_export:
               name: 'Edge [{#NAME}]: Activation state'
               type: DEPENDENT
               key: 'velocloud.edge.activation[{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Edge activation state.'
               valuemap:
@@ -497,9 +480,7 @@ zabbix_export:
               name: 'Edge [{#NAME}]: Description'
               type: DEPENDENT
               key: 'velocloud.edge.description[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'Edge description.'
               preprocessing:
@@ -524,7 +505,6 @@ zabbix_export:
               name: 'Edge [{#NAME}]: HA state'
               type: DEPENDENT
               key: 'velocloud.edge.ha_state[{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Edge high availability state.'
               valuemap:
@@ -575,9 +555,7 @@ zabbix_export:
               name: 'Edge [{#NAME}]: Model number'
               type: DEPENDENT
               key: 'velocloud.edge.model[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'Edge model number.'
               preprocessing:
@@ -602,7 +580,6 @@ zabbix_export:
               name: 'Edge [{#NAME}]: Service uptime'
               type: DEPENDENT
               key: 'velocloud.edge.service_uptime[{#ID}]'
-              delay: '0'
               history: 7d
               units: uptime
               description: 'Edge service uptime.'
@@ -630,9 +607,7 @@ zabbix_export:
               name: 'Edge [{#NAME}]: Software version'
               type: DEPENDENT
               key: 'velocloud.edge.software_version[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'Edge software version.'
               preprocessing:
@@ -657,7 +632,6 @@ zabbix_export:
               name: 'Edge [{#NAME}]: State'
               type: DEPENDENT
               key: 'velocloud.edge.state[{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Edge state.'
               valuemap:
@@ -706,7 +680,6 @@ zabbix_export:
               name: 'Edge [{#NAME}]: System uptime'
               type: DEPENDENT
               key: 'velocloud.edge.system_uptime[{#ID}]'
-              delay: '0'
               history: 7d
               units: uptime
               description: 'Edge system uptime.'
@@ -744,9 +717,7 @@ zabbix_export:
               name: 'Edge [{#NAME}]: Raw data'
               type: DEPENDENT
               key: 'velocloud.get.edge[{#ID}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Raw data for velocloud edge.'
               preprocessing:
@@ -797,7 +768,6 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: Connected edges'
               type: DEPENDENT
               key: 'velocloud.gateway.connected_edges[{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Gateway connected edges.'
               preprocessing:
@@ -829,9 +799,7 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: Description'
               type: DEPENDENT
               key: 'velocloud.gateway.description[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'Gateway description.'
               preprocessing:
@@ -856,9 +824,7 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: IP address'
               type: DEPENDENT
               key: 'velocloud.gateway.ip_address[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'Gateway ip address.'
               preprocessing:
@@ -883,7 +849,6 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: Service uptime'
               type: DEPENDENT
               key: 'velocloud.gateway.service_uptime[{#ID}]'
-              delay: '0'
               history: 7d
               units: uptime
               description: 'Gateway service uptime.'
@@ -911,9 +876,7 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: State'
               type: DEPENDENT
               key: 'velocloud.gateway.state[{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'Gateway state.'
               preprocessing:
@@ -938,7 +901,6 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: System uptime'
               type: DEPENDENT
               key: 'velocloud.gateway.system_uptime[{#ID}]'
-              delay: '0'
               history: 7d
               units: uptime
               description: 'Gateway system uptime.'
@@ -976,7 +938,6 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: Utilization CPU'
               type: DEPENDENT
               key: 'velocloud.gateway.utilization.cpu[{#ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1002,7 +963,6 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: Utilization load'
               type: DEPENDENT
               key: 'velocloud.gateway.utilization.load[{#ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1026,7 +986,6 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: Utilization memory'
               type: DEPENDENT
               key: 'velocloud.gateway.utilization.memory[{#ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1052,7 +1011,6 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: Utilization overall'
               type: DEPENDENT
               key: 'velocloud.gateway.utilization.overall[{#ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1076,9 +1034,7 @@ zabbix_export:
               name: 'Gateway [{#NAME}]: Raw data'
               type: DEPENDENT
               key: 'velocloud.get.gateway[{#ID}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Raw data for velocloud gateway.'
               preprocessing:
@@ -1152,9 +1108,7 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: Raw data'
               type: DEPENDENT
               key: 'velocloud.get.link[{#ID}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Raw data for velocloud link.'
               preprocessing:
@@ -1170,7 +1124,6 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: Best loss rx, %'
               type: DEPENDENT
               key: 'velocloud.link.best_loss_rx.pct[{#ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Link receive best loss.'
@@ -1197,7 +1150,6 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: Best loss tx, %'
               type: DEPENDENT
               key: 'velocloud.link.best_loss_tx.pct[{#ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Link transmit best loss.'
@@ -1224,7 +1176,6 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: Bytes in'
               type: DEPENDENT
               key: 'velocloud.link.bytes_rx[{#ID}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Link received bytes.'
@@ -1251,7 +1202,6 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: Bytes out'
               type: DEPENDENT
               key: 'velocloud.link.bytes_tx[{#ID}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Link transmitted bytes.'
@@ -1278,7 +1228,6 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: Last active'
               type: DEPENDENT
               key: 'velocloud.link.last_active[{#ID}]'
-              delay: '0'
               history: 7d
               units: s
               description: 'Link last active in seconds ago.'
@@ -1308,7 +1257,6 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: Packets in'
               type: DEPENDENT
               key: 'velocloud.link.packets_rx[{#ID}]'
-              delay: '0'
               history: 7d
               units: '!packets'
               description: 'Link received packets.'
@@ -1335,7 +1283,6 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: Packets out'
               type: DEPENDENT
               key: 'velocloud.link.packets_tx[{#ID}]'
-              delay: '0'
               history: 7d
               units: '!packets'
               description: 'Link transmitted packets.'
@@ -1362,7 +1309,6 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: State'
               type: DEPENDENT
               key: 'velocloud.link.state[{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Link state.'
               valuemap:
@@ -1415,7 +1361,6 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: Total bytes'
               type: DEPENDENT
               key: 'velocloud.link.total_bytes[{#ID}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Link Total bytes.'
@@ -1442,7 +1387,6 @@ zabbix_export:
               name: 'Link [{#NAME}]:[{#IP}]: Total packets'
               type: DEPENDENT
               key: 'velocloud.link.total_packets[{#ID}]'
-              delay: '0'
               history: 7d
               units: '!packets'
               description: 'Link total packets.'
@@ -1545,9 +1489,7 @@ zabbix_export:
               name: 'Path [{#NAME}]:[{#SOURCE} => {#DESTINATION}]: Raw data'
               type: DEPENDENT
               key: 'velocloud.get.sdwan_path[{{#NAME}/{#SOURCE}/{#DESTINATION}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Raw data for velocloud sdwan peer path.'
               preprocessing:
@@ -1563,7 +1505,6 @@ zabbix_export:
               name: 'Path [{#NAME}]:[{#SOURCE} => {#DESTINATION}]: Bytes in'
               type: DEPENDENT
               key: 'velocloud.sdwanpath.bytes_rx[{#NAME}/{#SOURCE}/{#DESTINATION}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Bytes received of SDWAN peer path.'
@@ -1586,7 +1527,6 @@ zabbix_export:
               name: 'Path [{#NAME}]:[{#SOURCE} => {#DESTINATION}]: Bytes out'
               type: DEPENDENT
               key: 'velocloud.sdwanpath.bytes_tx[{#NAME}/{#SOURCE}/{#DESTINATION}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Bytes transmitted of SDWAN peer path.'
@@ -1609,7 +1549,6 @@ zabbix_export:
               name: 'Path [{#NAME}]:[{#SOURCE} => {#DESTINATION}]: Packets in'
               type: DEPENDENT
               key: 'velocloud.sdwanpath.packets_rx[{#NAME}/{#SOURCE}/{#DESTINATION}]'
-              delay: '0'
               history: 7d
               units: '!packets'
               description: 'Packets received of SDWAN peer path.'
@@ -1632,7 +1571,6 @@ zabbix_export:
               name: 'Path [{#NAME}]:[{#SOURCE} => {#DESTINATION}]: Packets out'
               type: DEPENDENT
               key: 'velocloud.sdwanpath.packets_tx[{#NAME}/{#SOURCE}/{#DESTINATION}]'
-              delay: '0'
               history: 7d
               units: '!packets'
               description: 'Packets transmitted of SDWAN peer path.'
@@ -1655,7 +1593,6 @@ zabbix_export:
               name: 'Path [{#NAME}]:[{#SOURCE} => {#DESTINATION}]: Packet Loss in'
               type: DEPENDENT
               key: 'velocloud.sdwanpath.packet_loss_rx[{#NAME}/{#SOURCE}/{#DESTINATION}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1679,7 +1616,6 @@ zabbix_export:
               name: 'Path [{#NAME}]:[{#SOURCE} => {#DESTINATION}]: Packet Loss out'
               type: DEPENDENT
               key: 'velocloud.sdwanpath.packet_loss_tx[{#NAME}/{#SOURCE}/{#DESTINATION}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1703,7 +1639,6 @@ zabbix_export:
               name: 'Path [{#NAME}]:[{#SOURCE} => {#DESTINATION}]: Bytes total'
               type: DEPENDENT
               key: 'velocloud.sdwanpath.total_bytes[{#NAME}/{#SOURCE}/{#DESTINATION}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Total bytes of SDWAN peer path.'
@@ -1726,7 +1661,6 @@ zabbix_export:
               name: 'Path [{#NAME}]:[{#SOURCE} => {#DESTINATION}]: Total packets'
               type: DEPENDENT
               key: 'velocloud.sdwanpath.total_packets[{#NAME}/{#SOURCE}/{#DESTINATION}]'
-              delay: '0'
               history: 7d
               units: '!packets'
               description: 'Total packets of SDWAN peer path.'
@@ -1772,9 +1706,7 @@ zabbix_export:
               name: 'SDWAN Peer [{#NAME}]:[{#TYPE}]: Raw data'
               type: DEPENDENT
               key: 'velocloud.get.sdwan_peer[{#EDGE.ID}/{#ID}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Raw data for velocloud sdwan peer.'
               preprocessing:
@@ -1790,7 +1722,6 @@ zabbix_export:
               name: 'SDWAN Peer [{#NAME}]:[{#TYPE}]: Dead path'
               type: DEPENDENT
               key: 'velocloud.sdwanpeer.dead_path[{#EDGE.ID}/{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Count of dead path of SDWAN peer.'
               preprocessing:
@@ -1812,9 +1743,7 @@ zabbix_export:
               name: 'SDWAN Peer [{#NAME}]:[{#TYPE}]: Description'
               type: DEPENDENT
               key: 'velocloud.sdwanpeer.description[{#EDGE.ID}/{#ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'Description of SDWAN peer.'
               preprocessing:
@@ -1839,7 +1768,6 @@ zabbix_export:
               name: 'SDWAN Peer [{#NAME}]:[{#TYPE}]: Stable path'
               type: DEPENDENT
               key: 'velocloud.sdwanpeer.stable_path[{#EDGE.ID}/{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Count of stable path of SDWAN peer.'
               preprocessing:
@@ -1861,7 +1789,6 @@ zabbix_export:
               name: 'SDWAN Peer [{#NAME}]:[{#TYPE}]: Standby path'
               type: DEPENDENT
               key: 'velocloud.sdwanpeer.standby_path[{#EDGE.ID}/{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Count of standby path of SDWAN peer.'
               preprocessing:
@@ -1883,7 +1810,6 @@ zabbix_export:
               name: 'SDWAN Peer [{#NAME}]:[{#TYPE}]: Total path'
               type: DEPENDENT
               key: 'velocloud.sdwanpeer.total_path[{#EDGE.ID}/{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Count of total path of SDWAN peer.'
               preprocessing:
@@ -1905,7 +1831,6 @@ zabbix_export:
               name: 'SDWAN Peer [{#NAME}]:[{#TYPE}]: Unknown path'
               type: DEPENDENT
               key: 'velocloud.sdwanpeer.unknown_path[{#EDGE.ID}/{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Count of unknown path of SDWAN peer.'
               preprocessing:
@@ -1927,7 +1852,6 @@ zabbix_export:
               name: 'SDWAN Peer [{#NAME}]:[{#TYPE}]: Unstable path'
               type: DEPENDENT
               key: 'velocloud.sdwanpeer.unstable_path[{#EDGE.ID}/{#ID}]'
-              delay: '0'
               history: 7d
               description: 'Count of unstable path of SDWAN peer.'
               preprocessing:

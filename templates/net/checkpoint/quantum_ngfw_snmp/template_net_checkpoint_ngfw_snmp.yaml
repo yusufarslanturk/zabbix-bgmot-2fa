@@ -113,7 +113,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.2.2.1.7,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.31.1.1.1.6,1.3.6.1.2.1.31.1.1.1.10,1.3.6.1.2.1.2.2.1.14,1.3.6.1.2.1.2.2.1.20,1.3.6.1.2.1.2.2.1.19,1.3.6.1.2.1.2.2.1.13,1.3.6.1.2.1.31.1.1.1.15]'
           key: net.if.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering interfaces from IF-MIB.'
           tags:
@@ -141,7 +140,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.8.2.1.2,1.3.6.1.4.1.2620.1.6.7.8.2.1.3,1.3.6.1.4.1.2620.1.6.7.8.2.1.4,1.3.6.1.4.1.2620.1.6.7.8.2.1.6]'
           key: sensor.fan.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering fan sensors from CHECKPOINT-MIB.'
           tags:
@@ -153,7 +151,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.9.1.1.1,1.3.6.1.4.1.2620.1.6.7.9.1.1.2]'
           key: sensor.psu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering power supply sensors from CHECKPOINT-MIB.'
           tags:
@@ -165,7 +162,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.8.1.1.2,1.3.6.1.4.1.2620.1.6.7.8.1.1.3]'
           key: sensor.temp.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering temperature sensors from CHECKPOINT-MIB.'
           tags:
@@ -177,7 +173,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.8.3.1.2,1.3.6.1.4.1.2620.1.6.7.8.3.1.3]'
           key: sensor.volt.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering voltage sensors from CHECKPOINT-MIB.'
           tags:
@@ -187,9 +182,7 @@ zabbix_export:
           name: 'Check Point: SNMP traps (fallback)'
           type: SNMP_TRAP
           key: snmptrap.fallback
-          delay: '0'
           history: 2w
-          trends: '0'
           value_type: LOG
           description: 'Used to collect all SNMP traps unmatched by other `snmptrap` items.'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
@@ -202,7 +195,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.18.1.1.4,1.3.6.1.4.1.2620.1.6.18.1.1.5,1.3.6.1.4.1.2620.1.6.18.1.1.6,1.3.6.1.4.1.2620.1.6.18.1.1.8,1.3.6.1.4.1.2620.1.6.18.1.1.9,1.3.6.1.4.1.2620.1.6.18.1.1.10]'
           key: svn.feature.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering software blades and features from CHECKPOINT-MIB.'
           tags:
@@ -215,7 +207,6 @@ zabbix_export:
           key: system.contact
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -322,8 +313,6 @@ zabbix_export:
             Number of context switches per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: cpu
@@ -386,7 +375,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.5.1.1,1.3.6.1.4.1.2620.1.6.7.5.1.2,1.3.6.1.4.1.2620.1.6.7.5.1.3,1.3.6.1.4.1.2620.1.6.7.5.1.4,1.3.6.1.4.1.2620.1.6.7.5.1.5]'
           key: system.cpu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering CPU from CHECKPOINT-MIB.'
           tags:
@@ -399,7 +387,6 @@ zabbix_export:
           key: system.descr
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -418,7 +405,6 @@ zabbix_export:
           key: system.hw.manufacturer
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: CHECKPOINT-MIB
@@ -438,7 +424,6 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: CHECKPOINT-MIB
@@ -458,7 +443,6 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: CHECKPOINT-MIB
@@ -491,7 +475,6 @@ zabbix_export:
           key: system.location
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -511,7 +494,6 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -544,7 +526,6 @@ zabbix_export:
           key: system.objectid
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -590,7 +571,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.6.1.2,1.3.6.1.4.1.2620.1.6.7.6.1.3,1.3.6.1.4.1.2620.1.6.7.6.1.4,1.3.6.1.4.1.2620.1.6.7.6.1.5,1.3.6.1.4.1.2620.1.6.7.6.1.6,1.3.6.1.4.1.2620.1.6.7.6.1.7]'
           key: vfs.fs.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering storage disks from CHECKPOINT-MIB.'
           tags:
@@ -681,8 +661,6 @@ zabbix_export:
             Number of decrypted packets per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: vpn
@@ -697,8 +675,6 @@ zabbix_export:
             Number of encrypted packets per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: vpn
@@ -708,7 +684,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.500.9002.1.1,1.3.6.1.4.1.2620.500.9002.1.2,1.3.6.1.4.1.2620.500.9002.1.3,1.3.6.1.4.1.2620.500.9002.1.4,1.3.6.1.4.1.2620.500.9002.1.6,1.3.6.1.4.1.2620.500.9002.1.7,1.3.6.1.4.1.2620.500.9002.1.8,1.3.6.1.4.1.2620.500.9002.1.9,1.3.6.1.4.1.2620.500.9002.1.10,1.3.6.1.4.1.2620.500.9002.1.11]'
           key: vpn.tunnel.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering VPN tunnels from CHECKPOINT-MIB.'
           tags:
@@ -758,7 +733,6 @@ zabbix_export:
               name: 'CPU Core {#CPU.ID}: CPU idle time'
               type: DEPENDENT
               key: 'system.core.idle[multiProcIdleTime.{#CPU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -779,7 +753,6 @@ zabbix_export:
               name: 'CPU Core {#CPU.ID}: CPU system time'
               type: DEPENDENT
               key: 'system.core.system[multiProcSystemTime.{#CPU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -800,7 +773,6 @@ zabbix_export:
               name: 'CPU Core {#CPU.ID}: CPU user time'
               type: DEPENDENT
               key: 'system.core.user[multiProcUserTime.{#CPU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -821,7 +793,6 @@ zabbix_export:
               name: 'CPU Core {#CPU.ID}: CPU utilization'
               type: DEPENDENT
               key: 'system.core.util[multiProcUsage.{#CPU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -880,7 +851,6 @@ zabbix_export:
               name: 'FAN {#SNMPINDEX}: Fan speed'
               type: DEPENDENT
               key: 'sensor.fan.speed[fanSpeedSensorValue.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!{#FAN.UNIT}'
@@ -903,7 +873,6 @@ zabbix_export:
               name: 'FAN {#SNMPINDEX}: Fan status'
               type: DEPENDENT
               key: 'sensor.fan.status[fanSpeedSensorStatus.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -976,8 +945,6 @@ zabbix_export:
                 Number of accepted packets per second.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: firewall
@@ -1016,8 +983,6 @@ zabbix_export:
                 Number of dropped packets per second.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: firewall
@@ -1047,7 +1012,6 @@ zabbix_export:
               snmp_oid: '1.3.6.1.4.1.2620.1.1.2.{#SNMPINDEX}'
               key: 'fw.filter.name[fwFilterName.{#SNMPINDEX}]'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: CHECKPOINT-MIB
@@ -1070,8 +1034,6 @@ zabbix_export:
                 Number of logged packets per second.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: firewall
@@ -1086,8 +1048,6 @@ zabbix_export:
                 Number of rejected packets per second.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: firewall
@@ -1116,8 +1076,6 @@ zabbix_export:
                 Number of dropped packets per second due to instance being fully utilized.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: firewall
@@ -1265,7 +1223,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets discarded'
               type: DEPENDENT
               key: 'net.if.in.discards[ifInDiscards.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1277,8 +1234,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: net.if.walk
               tags:
@@ -1292,7 +1247,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets with errors'
               type: DEPENDENT
               key: 'net.if.in.errors[ifInErrors.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1305,8 +1259,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: net.if.walk
               tags:
@@ -1320,7 +1272,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits received'
               type: DEPENDENT
               key: 'net.if.in[ifInOctets.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -1333,8 +1284,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1351,7 +1300,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets discarded'
               type: DEPENDENT
               key: 'net.if.out.discards[ifOutDiscards.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1363,8 +1311,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: net.if.walk
               tags:
@@ -1378,7 +1324,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets with errors'
               type: DEPENDENT
               key: 'net.if.out.errors[ifOutErrors.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1391,8 +1336,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: net.if.walk
               tags:
@@ -1406,7 +1349,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits sent'
               type: DEPENDENT
               key: 'net.if.out[ifOutOctets.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -1419,8 +1361,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1437,7 +1377,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Speed'
               type: DEPENDENT
               key: 'net.if.speed[ifSpeed.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               units: bps
@@ -1471,7 +1410,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Operational status'
               type: DEPENDENT
               key: 'net.if.status[ifOperStatus.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -1522,7 +1460,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Interface type'
               type: DEPENDENT
               key: 'net.if.type[ifType.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -1699,7 +1636,6 @@ zabbix_export:
               name: 'PSU {#SNMPINDEX}: Power supply status'
               type: DEPENDENT
               key: 'sensor.psu.status[powerSupplyStatus.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -1777,7 +1713,6 @@ zabbix_export:
               name: '{#SW.NAME}: License expiration date'
               type: DEPENDENT
               key: 'svn.sw.license.exp_date[licensingExpirationDate.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               units: unixtime
@@ -1839,7 +1774,6 @@ zabbix_export:
               name: '{#SW.NAME}: License total quota'
               type: DEPENDENT
               key: 'svn.sw.license.quota.total[licensingTotalQuota.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -1868,7 +1802,6 @@ zabbix_export:
               name: '{#SW.NAME}: License used quota'
               type: DEPENDENT
               key: 'svn.sw.license.quota.used[licensingUsedQuota.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -1897,9 +1830,7 @@ zabbix_export:
               name: '{#SW.NAME}: License state'
               type: DEPENDENT
               key: 'svn.sw.license.state[licensingState.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: CHECKPOINT-MIB
@@ -1927,7 +1858,6 @@ zabbix_export:
               name: '{#SW.NAME}: Software blade status'
               type: DEPENDENT
               key: 'svn.sw.status[licensingBladeActive.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -1982,7 +1912,6 @@ zabbix_export:
               name: '{#SENSOR.NAME}: Temperature'
               type: DEPENDENT
               key: 'sensor.temp.value[tempertureSensorValue.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!°C'
@@ -2086,7 +2015,6 @@ zabbix_export:
               name: '{#DISK.NAME}: Available disk space'
               type: DEPENDENT
               key: 'vfs.fs.avail[multiDiskFreeAvailableBytes.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: B
               description: |
@@ -2108,7 +2036,6 @@ zabbix_export:
               name: '{#DISK.NAME}: Free disk space'
               type: DEPENDENT
               key: 'vfs.fs.free[multiDiskFreeTotalBytes.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: B
               description: |
@@ -2130,7 +2057,6 @@ zabbix_export:
               name: '{#DISK.NAME}: Disk space utilization'
               type: DEPENDENT
               key: 'vfs.fs.pused[multiDiskUsagePercent.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -2154,7 +2080,6 @@ zabbix_export:
               name: '{#DISK.NAME}: Total disk space'
               type: DEPENDENT
               key: 'vfs.fs.total[multiDiskSize.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: B
               description: |
@@ -2179,7 +2104,6 @@ zabbix_export:
               name: '{#DISK.NAME}: Used disk space'
               type: DEPENDENT
               key: 'vfs.fs.used[multiDiskUsed.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: B
               description: |
@@ -2293,7 +2217,6 @@ zabbix_export:
               name: '{#SENSOR.NAME}: Voltage value'
               type: DEPENDENT
               key: 'sensor.volt.value[voltageSensorValue.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: V
@@ -2352,9 +2275,7 @@ zabbix_export:
               name: 'VPN {#VPN.NAME}: Community'
               type: DEPENDENT
               key: 'vpn.tunnel.community[tunnelCommunity.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: CHECKPOINT-MIB
@@ -2378,9 +2299,7 @@ zabbix_export:
               name: 'VPN {#VPN.NAME}: Tunnel interface'
               type: DEPENDENT
               key: 'vpn.tunnel.netif[tunnelInterface.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: CHECKPOINT-MIB
@@ -2404,9 +2323,7 @@ zabbix_export:
               name: 'VPN {#VPN.NAME}: Peer IP address'
               type: DEPENDENT
               key: 'vpn.tunnel.peer_ip[tunnelPeerIpAddr.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: CHECKPOINT-MIB
@@ -2430,7 +2347,6 @@ zabbix_export:
               name: 'VPN {#VPN.NAME}: Peer type'
               type: DEPENDENT
               key: 'vpn.tunnel.peer_type[tunnelPeerType.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: CHECKPOINT-MIB
@@ -2456,7 +2372,6 @@ zabbix_export:
               name: 'VPN {#VPN.NAME}: Link priority'
               type: DEPENDENT
               key: 'vpn.tunnel.priority[tunnelLinkPriority.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: CHECKPOINT-MIB
@@ -2482,7 +2397,6 @@ zabbix_export:
               name: 'VPN {#VPN.NAME}: Probing state'
               type: DEPENDENT
               key: 'vpn.tunnel.prob_state[tunnelProbState.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: CHECKPOINT-MIB
@@ -2508,9 +2422,7 @@ zabbix_export:
               name: 'VPN {#VPN.NAME}: Source IP'
               type: DEPENDENT
               key: 'vpn.tunnel.src_ip[tunnelSourceIpAddr.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: CHECKPOINT-MIB
@@ -2534,7 +2446,6 @@ zabbix_export:
               name: 'VPN {#VPN.NAME}: Tunnel state'
               type: DEPENDENT
               key: 'vpn.tunnel.state[tunnelState.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: CHECKPOINT-MIB
@@ -2582,7 +2493,6 @@ zabbix_export:
               name: 'VPN {#VPN.NAME}: Tunnel type'
               type: DEPENDENT
               key: 'vpn.tunnel.type[tunnelType.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: CHECKPOINT-MIB

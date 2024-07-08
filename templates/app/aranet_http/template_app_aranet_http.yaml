@@ -19,7 +19,6 @@ zabbix_export:
           type: SCRIPT
           key: aranet.get_data
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var Aranet = {
@@ -301,9 +300,7 @@ zabbix_export:
           name: 'Aranet: Sensors discovery'
           type: DEPENDENT
           key: aranet.sensor.discovery
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Discovery for Aranet Cloud sensors'
           preprocessing:
@@ -377,7 +374,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.battery.voltage["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -449,7 +445,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.co2["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -521,7 +516,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.current["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -573,7 +567,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.diff_pressure["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -625,7 +618,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.distance["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -677,7 +669,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.humidity["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -749,7 +740,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.illuminance["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -801,7 +791,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.last_update["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               units: '{#UNIT}'
               preprocessing:
@@ -864,7 +853,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.ph["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               preprocessing:
@@ -915,7 +903,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.pore_electric_cond["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -967,7 +954,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.ppfd["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -1019,7 +1005,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.pressure["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -1071,7 +1056,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.pulses["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -1123,7 +1107,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.pulses_cumulative["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -1175,7 +1158,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.rssi["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -1227,7 +1209,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.soil_dielectric_perm["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -1279,7 +1260,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.soil_electric_cond["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -1331,7 +1311,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.temp["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -1383,7 +1362,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.voltage["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -1435,7 +1413,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.volumetric.water.content["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
@@ -1487,7 +1464,6 @@ zabbix_export:
               name: '{#METRIC}: [{#GATEWAY_NAME}] {#SENSOR_NAME}'
               type: DEPENDENT
               key: 'aranet.weight["{#GATEWAY_ID}", "{#SENSOR_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#UNIT}'
