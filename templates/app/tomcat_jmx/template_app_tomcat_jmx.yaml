@@ -25,7 +25,6 @@ zabbix_export:
           type: JMX
           key: 'jmx["Catalina:type=Server",serverInfo]'
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$TOMCAT.USER}'
           password: '{$TOMCAT.PASSWORD}'
@@ -70,7 +69,6 @@ zabbix_export:
               type: JMX
               key: 'jmx[{#JMXOBJ},compression]'
               history: 7d
-              trends: '0'
               value_type: CHAR
               username: '{$TOMCAT.USER}'
               password: '{$TOMCAT.PASSWORD}'
@@ -126,8 +124,6 @@ zabbix_export:
               description: 'Bytes received rate by processor {#JMXNAME}'
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -147,8 +143,6 @@ zabbix_export:
               description: 'Bytes sent rate by processor {#JMXNAME}'
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -167,8 +161,6 @@ zabbix_export:
               description: 'Error rate of request processor {#JMXNAME}'
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -210,8 +202,6 @@ zabbix_export:
               description: 'Rate of requests served by request processor {#JMXNAME}'
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -314,8 +304,6 @@ zabbix_export:
               description: 'Rate of sessions we rejected due to maxActive being reached.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -334,8 +322,6 @@ zabbix_export:
               description: 'Rate of sessions created by this application per second.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component

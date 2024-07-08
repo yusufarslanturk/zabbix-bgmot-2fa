@@ -601,7 +601,6 @@ zabbix_export:
           type: INTERNAL
           key: 'zabbix[version]'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Version of Zabbix proxy.'
           preprocessing:
@@ -703,8 +702,6 @@ zabbix_export:
             Number of processed float values.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -719,8 +716,6 @@ zabbix_export:
             Number of processed log values.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -735,8 +730,6 @@ zabbix_export:
             Number of times item processing resulted in item becoming unsupported or keeping that state.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -751,8 +744,6 @@ zabbix_export:
             Number of processed character/string values.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -767,8 +758,6 @@ zabbix_export:
             Number of processed text values.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -783,8 +772,6 @@ zabbix_export:
             Number of processed numeric (unsigned) values.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -799,8 +786,6 @@ zabbix_export:
             Total number of values processed by Zabbix server or Zabbix proxy, except unsupported items.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system

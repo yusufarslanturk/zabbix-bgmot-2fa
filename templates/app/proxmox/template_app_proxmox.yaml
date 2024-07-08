@@ -90,13 +90,10 @@ zabbix_export:
           key: proxmox.cluster.resources
           delay: 5m
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Resources index.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: 'Error getting data'
           url: 'https://{$PVE.URL.HOST}:{$PVE.URL.PORT}/api2/json/cluster/resources'
@@ -112,13 +109,10 @@ zabbix_export:
           key: proxmox.cluster.status
           delay: 5m
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get cluster status information.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: 'Error getting data'
           url: 'https://{$PVE.URL.HOST}:{$PVE.URL.PORT}/api2/json/cluster/status'
@@ -145,7 +139,6 @@ zabbix_export:
               name: 'Proxmox: Cluster [{#RESOURCE.NAME}]: Quorate'
               type: DEPENDENT
               key: 'proxmox.cluster.quorate[{#RESOURCE.NAME}]'
-              delay: '0'
               history: 7d
               description: 'Indicates if there is a majority of nodes online to make decisions.'
               valuemap:
@@ -197,7 +190,6 @@ zabbix_export:
               name: 'Proxmox: LXC [{#NODE.NAME}/{#LXC.NAME} ({#LXC.ID})]: CPU usage'
               type: DEPENDENT
               key: 'proxmox.lxc.cpu[{#LXC.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -238,7 +230,6 @@ zabbix_export:
               name: 'Proxmox: LXC [{#NODE.NAME}/{#LXC.NAME} ({#LXC.ID})]: Disk read, rate'
               type: DEPENDENT
               key: 'proxmox.lxc.diskread[{#LXC.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -248,8 +239,6 @@ zabbix_export:
                   parameters:
                     - $.data.diskread
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 10m
@@ -268,7 +257,6 @@ zabbix_export:
               name: 'Proxmox: LXC [{#NODE.NAME}/{#LXC.NAME} ({#LXC.ID})]: Disk write, rate'
               type: DEPENDENT
               key: 'proxmox.lxc.diskwrite[{#LXC.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -278,8 +266,6 @@ zabbix_export:
                   parameters:
                     - $.data.diskwrite
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 10m
@@ -299,7 +285,6 @@ zabbix_export:
               type: HTTP_AGENT
               key: 'proxmox.lxc.get.data[{#LXC.ID}]'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Get LXC status data.'
               url: 'https://{$PVE.URL.HOST}:{$PVE.URL.PORT}/api2/json/nodes/{#NODE.NAME}/{#LXC.ID}/status/current'
@@ -319,7 +304,6 @@ zabbix_export:
               name: 'Proxmox: LXC [{#NODE.NAME}/{#LXC.NAME} ({#LXC.ID})]: Memory total'
               type: DEPENDENT
               key: 'proxmox.lxc.maxmem[{#LXC.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -346,7 +330,6 @@ zabbix_export:
               name: 'Proxmox: LXC [{#NODE.NAME}/{#LXC.NAME} ({#LXC.ID})]: Memory usage'
               type: DEPENDENT
               key: 'proxmox.lxc.mem[{#LXC.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -373,7 +356,6 @@ zabbix_export:
               name: 'Proxmox: LXC [{#NODE.NAME}/{#LXC.NAME} ({#LXC.ID})]: Incoming data, rate'
               type: DEPENDENT
               key: 'proxmox.lxc.netin[{#LXC.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: bps
@@ -383,8 +365,6 @@ zabbix_export:
                   parameters:
                     - $.data.netin
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -406,7 +386,6 @@ zabbix_export:
               name: 'Proxmox: LXC [{#NODE.NAME}/{#LXC.NAME} ({#LXC.ID})]: Outgoing data, rate'
               type: DEPENDENT
               key: 'proxmox.lxc.netout[{#LXC.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: bps
@@ -416,8 +395,6 @@ zabbix_export:
                   parameters:
                     - $.data.netout
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -439,7 +416,6 @@ zabbix_export:
               name: 'Proxmox: LXC [{#NODE.NAME}/{#LXC.NAME} ({#LXC.ID})]: Uptime'
               type: DEPENDENT
               key: 'proxmox.lxc.uptime[{#LXC.ID}]'
-              delay: '0'
               history: 7d
               trends: '0'
               units: uptime
@@ -477,9 +453,7 @@ zabbix_export:
               name: 'Proxmox: LXC [{#NODE.NAME}/{#LXC.NAME} ({#LXC.ID})]: Status'
               type: DEPENDENT
               key: 'proxmox.lxc.vmstatus[{#LXC.ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'Status of LXC container.'
               preprocessing:
@@ -596,7 +570,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: CPU, usage'
               type: DEPENDENT
               key: 'proxmox.node.cpu[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -633,7 +606,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: CPU, iowait'
               type: DEPENDENT
               key: 'proxmox.node.iowait[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -659,9 +631,7 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Kernel version'
               type: DEPENDENT
               key: 'proxmox.node.kernelversion[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'Kernel version info.'
               preprocessing:
@@ -693,7 +663,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: CPU, loadavg'
               type: DEPENDENT
               key: 'proxmox.node.loadavg[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'CPU average load.'
@@ -715,7 +684,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Localtime'
               type: DEPENDENT
               key: 'proxmox.node.localtime[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               units: unixtime
               description: 'Seconds since 1970-01-01 00:00:00 (local time).'
@@ -734,7 +702,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Memory, total'
               type: DEPENDENT
               key: 'proxmox.node.memtotal[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -757,7 +724,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Memory, used'
               type: DEPENDENT
               key: 'proxmox.node.memused[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -780,7 +746,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Incoming data, rate'
               type: DEPENDENT
               key: 'proxmox.node.netin[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: bps
@@ -806,7 +771,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Outgoing data, rate'
               type: DEPENDENT
               key: 'proxmox.node.netout[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: bps
@@ -832,7 +796,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Status'
               type: DEPENDENT
               key: 'proxmox.node.online[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               description: 'Indicates if the node is online or offline.'
               valuemap:
@@ -865,9 +828,7 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: PVE version'
               type: DEPENDENT
               key: 'proxmox.node.pveversion[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'PVE manager version.'
               preprocessing:
@@ -899,7 +860,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Root filesystem, total'
               type: DEPENDENT
               key: 'proxmox.node.roottotal[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -922,7 +882,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Root filesystem, used'
               type: DEPENDENT
               key: 'proxmox.node.rootused[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -946,7 +905,6 @@ zabbix_export:
               type: HTTP_AGENT
               key: 'proxmox.node.rrd[{#NODE.NAME}]'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Read node RRD statistics.'
               preprocessing:
@@ -974,7 +932,6 @@ zabbix_export:
               type: HTTP_AGENT
               key: 'proxmox.node.status[{#NODE.NAME}]'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Read node status.'
               url: 'https://{$PVE.URL.HOST}:{$PVE.URL.PORT}/api2/json/nodes/{#NODE.NAME}/status'
@@ -990,7 +947,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Swap filesystem, total'
               type: DEPENDENT
               key: 'proxmox.node.swaptotal[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1013,7 +969,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Swap filesystem, used'
               type: DEPENDENT
               key: 'proxmox.node.swapused[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1036,9 +991,7 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Time zone'
               type: DEPENDENT
               key: 'proxmox.node.timezone[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'Time zone.'
               preprocessing:
@@ -1060,7 +1013,6 @@ zabbix_export:
               type: HTTP_AGENT
               key: 'proxmox.node.time[{#NODE.NAME}]'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Read server time and time zone settings.'
               url: 'https://{$PVE.URL.HOST}:{$PVE.URL.PORT}/api2/json/nodes/{#NODE.NAME}/time'
@@ -1076,7 +1028,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Uptime'
               type: DEPENDENT
               key: 'proxmox.node.uptime[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               trends: '0'
               units: uptime
@@ -1110,7 +1061,6 @@ zabbix_export:
               name: 'Proxmox: Node [{#NODE.NAME}]: Time'
               type: DEPENDENT
               key: 'proxmox.node.utctime[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               units: unixtime
               description: 'Seconds since 1970-01-01 00:00:00 UTC.'
@@ -1256,7 +1206,6 @@ zabbix_export:
               name: 'Proxmox: VM [{#NODE.NAME}/{#QEMU.NAME} ({#QEMU.ID})]: CPU usage'
               type: DEPENDENT
               key: 'proxmox.qemu.cpu[{#QEMU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1297,7 +1246,6 @@ zabbix_export:
               name: 'Proxmox: VM [{#NODE.NAME}/{#QEMU.NAME} ({#QEMU.ID})]: Disk read, rate'
               type: DEPENDENT
               key: 'proxmox.qemu.diskread[{#QEMU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1307,8 +1255,6 @@ zabbix_export:
                   parameters:
                     - $.data.diskread
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 10m
@@ -1327,7 +1273,6 @@ zabbix_export:
               name: 'Proxmox: VM [{#NODE.NAME}/{#QEMU.NAME} ({#QEMU.ID})]: Disk write, rate'
               type: DEPENDENT
               key: 'proxmox.qemu.diskwrite[{#QEMU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1337,8 +1282,6 @@ zabbix_export:
                   parameters:
                     - $.data.diskwrite
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 10m
@@ -1358,7 +1301,6 @@ zabbix_export:
               type: HTTP_AGENT
               key: 'proxmox.qemu.get.data[{#QEMU.ID}]'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Get VM status data.'
               url: 'https://{$PVE.URL.HOST}:{$PVE.URL.PORT}/api2/json/nodes/{#NODE.NAME}/{#QEMU.ID}/status/current'
@@ -1378,7 +1320,6 @@ zabbix_export:
               name: 'Proxmox: VM [{#NODE.NAME}/{#QEMU.NAME} ({#QEMU.ID})]: Memory total'
               type: DEPENDENT
               key: 'proxmox.qemu.maxmem[{#QEMU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1405,7 +1346,6 @@ zabbix_export:
               name: 'Proxmox: VM [{#NODE.NAME}/{#QEMU.NAME} ({#QEMU.ID})]: Memory usage'
               type: DEPENDENT
               key: 'proxmox.qemu.mem[{#QEMU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1432,7 +1372,6 @@ zabbix_export:
               name: 'Proxmox: VM [{#NODE.NAME}/{#QEMU.NAME} ({#QEMU.ID})]: Incoming data, rate'
               type: DEPENDENT
               key: 'proxmox.qemu.netin[{#QEMU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: bps
@@ -1442,8 +1381,6 @@ zabbix_export:
                   parameters:
                     - $.data.netin
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1465,7 +1402,6 @@ zabbix_export:
               name: 'Proxmox: VM [{#NODE.NAME}/{#QEMU.NAME} ({#QEMU.ID})]: Outgoing data, rate'
               type: DEPENDENT
               key: 'proxmox.qemu.netout[{#QEMU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: bps
@@ -1475,8 +1411,6 @@ zabbix_export:
                   parameters:
                     - $.data.netout
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1498,7 +1432,6 @@ zabbix_export:
               name: 'Proxmox: VM [{#NODE.NAME}/{#QEMU.NAME} ({#QEMU.ID})]: Uptime'
               type: DEPENDENT
               key: 'proxmox.qemu.uptime[{#QEMU.ID}]'
-              delay: '0'
               history: 7d
               trends: '0'
               units: uptime
@@ -1536,9 +1469,7 @@ zabbix_export:
               name: 'Proxmox: VM [{#NODE.NAME}/{#QEMU.NAME} ({#QEMU.ID})]: Status'
               type: DEPENDENT
               key: 'proxmox.qemu.vmstatus[{#QEMU.ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'Status of Virtual Machine.'
               preprocessing:
@@ -1655,9 +1586,7 @@ zabbix_export:
               name: 'Proxmox: Storage [{#NODE.NAME}/{#STORAGE.NAME}]: Content'
               type: DEPENDENT
               key: 'proxmox.node.content[{#NODE.NAME},{#STORAGE.NAME}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'Allowed storage content types.'
               preprocessing:
@@ -1680,7 +1609,6 @@ zabbix_export:
               name: 'Proxmox: Storage [{#NODE.NAME}/{#STORAGE.NAME}]: Used'
               type: DEPENDENT
               key: 'proxmox.node.disk[{#NODE.NAME},{#STORAGE.NAME}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Used disk space in bytes.'
@@ -1704,7 +1632,6 @@ zabbix_export:
               name: 'Proxmox: Storage [{#NODE.NAME}/{#STORAGE.NAME}]: Size'
               type: DEPENDENT
               key: 'proxmox.node.maxdisk[{#NODE.NAME},{#STORAGE.NAME}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Storage size in bytes.'
@@ -1728,9 +1655,7 @@ zabbix_export:
               name: 'Proxmox: Storage [{#NODE.NAME}/{#STORAGE.NAME}]: Type'
               type: DEPENDENT
               key: 'proxmox.node.plugintype[{#NODE.NAME},{#STORAGE.NAME}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'More specific type, if available.'
               preprocessing:

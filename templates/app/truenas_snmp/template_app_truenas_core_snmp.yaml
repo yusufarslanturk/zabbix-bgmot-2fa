@@ -114,9 +114,7 @@ zabbix_export:
           name: 'TrueNAS CORE: SNMP traps (fallback)'
           type: SNMP_TRAP
           key: snmptrap.fallback
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: LOG
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items.'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
@@ -130,7 +128,6 @@ zabbix_export:
           key: system.contact
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -155,8 +152,6 @@ zabbix_export:
             Number of interrupts processed.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: cpu
@@ -227,8 +222,6 @@ zabbix_export:
             Number of context switches.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: cpu
@@ -239,7 +232,6 @@ zabbix_export:
           key: system.descr
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -258,7 +250,6 @@ zabbix_export:
           key: system.location
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -278,7 +269,6 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -311,7 +301,6 @@ zabbix_export:
           key: system.objectid
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -353,8 +342,6 @@ zabbix_export:
           description: 'The free space of the swap volume/file expressed in %.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '100'
           tags:
@@ -480,8 +467,6 @@ zabbix_export:
             Total amount of cache hits in the ARC per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: memory
@@ -534,8 +519,6 @@ zabbix_export:
             Total amount of cache misses in the ARC per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: memory
@@ -597,8 +580,6 @@ zabbix_export:
             Hits to the L2 cache per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: memory
@@ -616,8 +597,6 @@ zabbix_export:
             Misses to the L2 cache per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: memory
@@ -636,8 +615,6 @@ zabbix_export:
             Read rate from L2 cache in bytes per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: memory
@@ -679,8 +656,6 @@ zabbix_export:
             Write rate from L2 cache in bytes per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: memory
@@ -903,8 +878,6 @@ zabbix_export:
                 The amount of time the CPU has been servicing hardware interrupts.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: JAVASCRIPT
                   parameters:
                     - 'return value/{#CPU.COUNT}'
@@ -924,8 +897,6 @@ zabbix_export:
                 The amount of time the CPU has been waiting for I/O to complete.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: JAVASCRIPT
                   parameters:
                     - 'return value/{#CPU.COUNT}'
@@ -945,8 +916,6 @@ zabbix_export:
                 The time the CPU has spent running users' processes that have been niced.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: JAVASCRIPT
                   parameters:
                     - 'return value/{#CPU.COUNT}'
@@ -966,8 +935,6 @@ zabbix_export:
                 The time the CPU has spent running the kernel and its processes.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: JAVASCRIPT
                   parameters:
                     - 'return value/{#CPU.COUNT}'
@@ -987,8 +954,6 @@ zabbix_export:
                 The time the CPU has spent running users' processes that are not niced.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: JAVASCRIPT
                   parameters:
                     - 'return value/{#CPU.COUNT}'
@@ -999,7 +964,6 @@ zabbix_export:
               name: 'TrueNAS CORE: CPU utilization'
               type: DEPENDENT
               key: 'system.cpu.util[{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1145,8 +1109,6 @@ zabbix_export:
                 and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1165,8 +1127,6 @@ zabbix_export:
                 For packet-oriented interfaces, the number of inbound packets that contained errors preventing them from being deliverable to a higher-layer protocol.  For character-oriented or fixed-length interfaces, the number of inbound transmission units that contained errors preventing them from being deliverable to a higher-layer protocol. Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1202,8 +1162,6 @@ zabbix_export:
                 The total number of octets received on the interface, including framing characters. This object is a 64-bit version of ifInOctets. Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1229,8 +1187,6 @@ zabbix_export:
                 and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1249,8 +1205,6 @@ zabbix_export:
                 For packet-oriented interfaces, the number of outbound packets that contained errors preventing them from being deliverable to a higher-layer protocol.  For character-oriented or fixed-length interfaces, the number of outbound transmission units that contained errors preventing them from being deliverable to a higher-layer protocol. Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1286,8 +1240,6 @@ zabbix_export:
                 The total number of octets transmitted out of the interface, including framing characters. This object is a 64-bit version of ifOutOctets.Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1791,8 +1743,6 @@ zabbix_export:
                   parameters:
                     - '{#POOL_ALLOC_UNITS}'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: storage
@@ -1811,8 +1761,6 @@ zabbix_export:
                 The number of read I/O operations sent to the pool or device, including metadata requests (averaged since system booted).
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: storage
@@ -1875,8 +1823,6 @@ zabbix_export:
                   parameters:
                     - '{#POOL_ALLOC_UNITS}'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: storage
@@ -1895,8 +1841,6 @@ zabbix_export:
                 The number of write I/O operations sent to the pool or device (averaged since system booted).
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: storage
@@ -2096,8 +2040,6 @@ zabbix_export:
                 The number of read accesses from this device since boot.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: storage
@@ -2132,8 +2074,6 @@ zabbix_export:
                 The number of write accesses from this device since boot.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               tags:
                 - tag: component
                   value: storage

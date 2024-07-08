@@ -43,7 +43,6 @@ zabbix_export:
           name: 'ClickHouse: Current distribute connections'
           type: DEPENDENT
           key: clickhouse.connections.distribute
-          delay: '0'
           history: 7d
           description: 'Number of connections to remote servers sending data that was INSERTed into Distributed tables.'
           preprocessing:
@@ -59,7 +58,6 @@ zabbix_export:
           name: 'ClickHouse: Current HTTP connections'
           type: DEPENDENT
           key: clickhouse.connections.http
-          delay: '0'
           history: 7d
           description: 'Number of connections to HTTP server.'
           preprocessing:
@@ -75,7 +73,6 @@ zabbix_export:
           name: 'ClickHouse: Current Interserver connections'
           type: DEPENDENT
           key: clickhouse.connections.interserver
-          delay: '0'
           history: 7d
           description: 'Number of connections from other replicas to fetch parts.'
           preprocessing:
@@ -91,7 +88,6 @@ zabbix_export:
           name: 'ClickHouse: Current MySQL connections'
           type: DEPENDENT
           key: clickhouse.connections.mysql
-          delay: '0'
           history: 7d
           description: 'Number of connections to MySQL server.'
           preprocessing:
@@ -109,7 +105,6 @@ zabbix_export:
           name: 'ClickHouse: Current TCP connections'
           type: DEPENDENT
           key: clickhouse.connections.tcp
-          delay: '0'
           history: 7d
           description: 'Number of connections to TCP server (clients with native interface).'
           preprocessing:
@@ -126,7 +121,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: clickhouse.databases
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get information about databases.'
           preprocessing:
@@ -152,7 +146,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: clickhouse.dictionaries
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get information about dictionaries.'
           preprocessing:
@@ -177,7 +170,6 @@ zabbix_export:
           name: 'ClickHouse: Current distributed files to insert'
           type: DEPENDENT
           key: clickhouse.distributed.files
-          delay: '0'
           history: 7d
           description: 'Number of pending files to process for asynchronous insertion into Distributed tables. Number of files for every shard is summed.'
           preprocessing:
@@ -204,7 +196,6 @@ zabbix_export:
           name: 'ClickHouse: Distributed connection fail with retry per second'
           type: DEPENDENT
           key: clickhouse.distributed.files.fail.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Connection failures after all retries in replicated DB connection pool'
@@ -215,8 +206,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -226,7 +215,6 @@ zabbix_export:
           name: 'ClickHouse: Distributed connection fail with retry per second'
           type: DEPENDENT
           key: clickhouse.distributed.files.retry.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Connection retries in replicated DB connection pool'
@@ -237,8 +225,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -248,7 +234,6 @@ zabbix_export:
           name: 'ClickHouse: Delayed insert queries'
           type: DEPENDENT
           key: clickhouse.insert.delay
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of INSERT queries that are throttled due to high number of active data parts for partition in a MergeTree table.'
@@ -276,7 +261,6 @@ zabbix_export:
           name: 'ClickHouse: Inserted bytes per second'
           type: DEPENDENT
           key: clickhouse.inserted_bytes.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -288,8 +272,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -299,7 +281,6 @@ zabbix_export:
           name: 'ClickHouse: Inserted rows per second'
           type: DEPENDENT
           key: clickhouse.inserted_rows.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of rows inserted in all tables.'
@@ -310,8 +291,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -321,7 +300,6 @@ zabbix_export:
           name: 'ClickHouse: New INSERT queries per second'
           type: DEPENDENT
           key: clickhouse.insert_query.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of INSERT queries to be interpreted and potentially executed. Does not include queries that failed to parse or were rejected due to AST size limits, quota limits or limits on the number of simultaneously running queries. May include internal queries initiated by ClickHouse itself. Does not count subqueries.'
@@ -332,8 +310,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -343,7 +319,6 @@ zabbix_export:
           name: 'ClickHouse: Allocated bytes'
           type: DEPENDENT
           key: clickhouse.jemalloc.allocated
-          delay: '0'
           history: 7d
           units: B
           description: 'Total number of bytes allocated by the application.'
@@ -360,7 +335,6 @@ zabbix_export:
           name: 'ClickHouse: Mapped memory'
           type: DEPENDENT
           key: clickhouse.jemalloc.mapped
-          delay: '0'
           history: 7d
           units: B
           description: 'Total number of bytes in active extents mapped by the allocator.'
@@ -377,7 +351,6 @@ zabbix_export:
           name: 'ClickHouse: Resident memory'
           type: DEPENDENT
           key: clickhouse.jemalloc.resident
-          delay: '0'
           history: 7d
           units: B
           description: |
@@ -397,7 +370,6 @@ zabbix_export:
           name: 'ClickHouse: Max count of parts per partition across all tables'
           type: DEPENDENT
           key: clickhouse.max.part.count.for.partition
-          delay: '0'
           history: 7d
           description: 'Clickhouse MergeTree table engine split each INSERT query to partitions (PARTITION BY expression) and add one or more PARTS per INSERT inside each partition, after that background merge process run.'
           preprocessing:
@@ -429,7 +401,6 @@ zabbix_export:
           name: 'ClickHouse: Memory used for queries'
           type: DEPENDENT
           key: clickhouse.memory.tracking
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -447,7 +418,6 @@ zabbix_export:
           name: 'ClickHouse: Memory used for background merges'
           type: DEPENDENT
           key: clickhouse.memory.tracking.background
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -469,7 +439,6 @@ zabbix_export:
           name: 'ClickHouse: Memory used for background moves'
           type: DEPENDENT
           key: clickhouse.memory.tracking.background.moves
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -491,7 +460,6 @@ zabbix_export:
           name: 'ClickHouse: Memory used for merges'
           type: DEPENDENT
           key: clickhouse.memory.tracking.merges
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -513,7 +481,6 @@ zabbix_export:
           name: 'ClickHouse: Memory used for background schedule pool'
           type: DEPENDENT
           key: clickhouse.memory.tracking.schedule.pool
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -533,7 +500,6 @@ zabbix_export:
           name: 'ClickHouse: Current running merges'
           type: DEPENDENT
           key: clickhouse.merge.current
-          delay: '0'
           history: 7d
           description: 'Number of executing background merges'
           preprocessing:
@@ -549,7 +515,6 @@ zabbix_export:
           name: 'ClickHouse: Uncompressed bytes merged per second'
           type: DEPENDENT
           key: clickhouse.merge_bytes.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -561,8 +526,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -572,7 +535,6 @@ zabbix_export:
           name: 'ClickHouse: Merged rows per second'
           type: DEPENDENT
           key: clickhouse.merge_rows.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Rows read for background merges.'
@@ -583,8 +545,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -594,7 +554,6 @@ zabbix_export:
           name: 'ClickHouse: Network errors per second'
           type: DEPENDENT
           key: clickhouse.network.error.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Network errors (timeouts and connection failures) during query execution, background pool tasks and DNS cache update.'
@@ -605,8 +564,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -680,7 +637,6 @@ zabbix_export:
           name: 'ClickHouse: Current running queries'
           type: DEPENDENT
           key: clickhouse.query.current
-          delay: '0'
           history: 7d
           description: 'Number of executing queries'
           preprocessing:
@@ -696,7 +652,6 @@ zabbix_export:
           name: 'ClickHouse: New queries per second'
           type: DEPENDENT
           key: clickhouse.query.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of queries to be interpreted and potentially executed. Does not include queries that failed to parse or were rejected due to AST size limits, quota limits or limits on the number of simultaneously running queries. May include internal queries initiated by ClickHouse itself. Does not count subqueries.'
@@ -707,8 +662,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -718,7 +671,6 @@ zabbix_export:
           name: 'ClickHouse: Read syscalls in fly'
           type: DEPENDENT
           key: clickhouse.read
-          delay: '0'
           history: 7d
           description: 'Number of read (read, pread, io_getevents, etc.) syscalls in fly'
           preprocessing:
@@ -734,7 +686,6 @@ zabbix_export:
           name: 'ClickHouse: Read bytes per second'
           type: DEPENDENT
           key: clickhouse.read_bytes.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -746,8 +697,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -758,7 +707,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: clickhouse.replicas
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get information about replicas.'
           preprocessing:
@@ -783,7 +731,6 @@ zabbix_export:
           name: 'ClickHouse: Replication lag across all tables'
           type: DEPENDENT
           key: clickhouse.replicas.max.absolute.delay
-          delay: '0'
           history: 7d
           units: s
           description: 'Maximum replica queue delay relative to current time'
@@ -813,7 +760,6 @@ zabbix_export:
           name: 'ClickHouse: Total number read-only Replicas'
           type: DEPENDENT
           key: clickhouse.replicas.readonly.total
-          delay: '0'
           history: 7d
           description: 'Number of Replicated tables that are currently in readonly state due to re-initialization after ZooKeeper session loss or due to startup without ZooKeeper configured.'
           preprocessing:
@@ -829,7 +775,6 @@ zabbix_export:
           name: 'ClickHouse: Total replication tasks in queue'
           type: DEPENDENT
           key: clickhouse.replicas.sum.queue.size
-          delay: '0'
           history: 7d
           description: 'Number of replication tasks in queue'
           preprocessing:
@@ -845,7 +790,6 @@ zabbix_export:
           name: 'ClickHouse: Revision'
           type: DEPENDENT
           key: clickhouse.revision
-          delay: '0'
           history: 7d
           description: 'Revision of the server.'
           preprocessing:
@@ -861,7 +805,6 @@ zabbix_export:
           name: 'ClickHouse: New SELECT queries per second'
           type: DEPENDENT
           key: clickhouse.select_query.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of SELECT queries to be interpreted and potentially executed. Does not include queries that failed to parse or were rejected due to AST size limits, quota limits or limits on the number of simultaneously running queries. May include internal queries initiated by ClickHouse itself. Does not count subqueries.'
@@ -872,8 +815,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -884,7 +825,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: clickhouse.system.asynchronous_metrics
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get metrics that are calculated periodically in the background'
           preprocessing:
@@ -910,7 +850,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: clickhouse.system.events
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get information about the number of events that have occurred in the system.'
           preprocessing:
@@ -936,7 +875,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: clickhouse.system.metrics
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get metrics which can be calculated instantly, or have a current value format JSONEachRow'
           preprocessing:
@@ -962,7 +900,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: clickhouse.system.settings
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get information about settings that are currently in use.'
           preprocessing:
@@ -1002,7 +939,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: clickhouse.tables
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get information about tables.'
           preprocessing:
@@ -1027,7 +963,6 @@ zabbix_export:
           name: 'ClickHouse: Uptime'
           type: DEPENDENT
           key: clickhouse.uptime
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1070,7 +1005,6 @@ zabbix_export:
           type: HTTP_AGENT
           key: clickhouse.version
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Version of the server'
           preprocessing:
@@ -1104,7 +1038,6 @@ zabbix_export:
           name: 'ClickHouse: Write syscalls in fly'
           type: DEPENDENT
           key: clickhouse.write
-          delay: '0'
           history: 7d
           description: 'Number of write (write, pwrite, io_getevents, etc.) syscalls in fly'
           preprocessing:
@@ -1120,7 +1053,6 @@ zabbix_export:
           name: 'ClickHouse: ZooKeeper exceptions per second'
           type: DEPENDENT
           key: clickhouse.zookeeper.exceptions.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Count of ZooKeeper exceptions that does not belong to user/hardware exceptions.'
@@ -1131,8 +1063,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -1142,7 +1072,6 @@ zabbix_export:
           name: 'ClickHouse: ZooKeeper hardware exceptions per second'
           type: DEPENDENT
           key: clickhouse.zookeeper.hw_exceptions.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Count of ZooKeeper exceptions caused by session moved/expired, connection loss, marshalling error, operation timed out and invalid zhandle state.'
@@ -1153,8 +1082,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -1164,7 +1091,6 @@ zabbix_export:
           name: 'ClickHouse: ZooKeeper requests'
           type: DEPENDENT
           key: clickhouse.zookeeper.request
-          delay: '0'
           history: 7d
           description: 'Number of requests to ZooKeeper in progress.'
           preprocessing:
@@ -1180,7 +1106,6 @@ zabbix_export:
           name: 'ClickHouse: ZooKeeper sessions'
           type: DEPENDENT
           key: clickhouse.zookeeper.session
-          delay: '0'
           history: 7d
           description: 'Number of sessions (connections) to ZooKeeper. Should be no more than one.'
           preprocessing:
@@ -1207,7 +1132,6 @@ zabbix_export:
           name: 'ClickHouse: ZooKeeper user exceptions per second'
           type: DEPENDENT
           key: clickhouse.zookeeper.user_exceptions.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Count of ZooKeeper exceptions caused by no znodes, bad version, node exists, node empty and no children for ephemeral.'
@@ -1218,8 +1142,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -1229,7 +1151,6 @@ zabbix_export:
           name: 'ClickHouse: ZooKeeper wait time'
           type: DEPENDENT
           key: clickhouse.zookeeper.wait.time
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1244,8 +1165,6 @@ zabbix_export:
               parameters:
                 - '1.0E-6'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: clickhouse.system.events
           tags:
@@ -1255,7 +1174,6 @@ zabbix_export:
           name: 'ClickHouse: ZooKeeper watches'
           type: DEPENDENT
           key: clickhouse.zookeeper.watch
-          delay: '0'
           history: 7d
           description: 'Number of watches (e.g., event subscriptions) in ZooKeeper.'
           preprocessing:
@@ -1314,7 +1232,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}: Bytes'
               type: DEPENDENT
               key: 'clickhouse.db.bytes["{#DB}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Database size in bytes.'
@@ -1333,9 +1250,7 @@ zabbix_export:
               name: 'ClickHouse: {#DB}: Get DB info'
               type: DEPENDENT
               key: 'clickhouse.db.info_raw["{#DB}"]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'The item gets information about {#DB} database.'
               preprocessing:
@@ -1354,7 +1269,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}: Tables'
               type: DEPENDENT
               key: 'clickhouse.db.tables["{#DB}"]'
-              delay: '0'
               history: 7d
               description: 'Number of tables in {#DB} database.'
               preprocessing:
@@ -1394,7 +1308,6 @@ zabbix_export:
               name: 'ClickHouse: Dictionary {#NAME}: Bytes allocated'
               type: DEPENDENT
               key: 'clickhouse.dictionary.bytes_allocated["{#NAME}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'The amount of RAM the dictionary uses.'
@@ -1413,7 +1326,6 @@ zabbix_export:
               name: 'ClickHouse: Dictionary {#NAME}: Element count'
               type: DEPENDENT
               key: 'clickhouse.dictionary.element_count["{#NAME}"]'
-              delay: '0'
               history: 7d
               description: 'Number of items stored in the dictionary.'
               preprocessing:
@@ -1431,9 +1343,7 @@ zabbix_export:
               name: 'ClickHouse: Dictionary {#NAME}: Get dictionary info'
               type: DEPENDENT
               key: 'clickhouse.dictionary.info_raw["{#NAME}"]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'The item gets information about {#NAME} dictionary.'
               preprocessing:
@@ -1452,7 +1362,6 @@ zabbix_export:
               name: 'ClickHouse: Dictionary {#NAME}: Load factor'
               type: DEPENDENT
               key: 'clickhouse.dictionary.load_factor["{#NAME}"]'
-              delay: '0'
               history: 7d
               units: '%'
               description: 'The percentage filled in the dictionary (for a hashed dictionary, the percentage filled in the hash table).'
@@ -1496,7 +1405,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Active replicas'
               type: DEPENDENT
               key: 'clickhouse.replica.active_replicas["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Number of replicas of this table that have a session in ZooKeeper (i.e., the number of functioning replicas). (Have a non-zero value only where there is an active session with ZooKeeper).'
               preprocessing:
@@ -1516,7 +1424,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Replica future parts'
               type: DEPENDENT
               key: 'clickhouse.replica.future_parts["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Number of data parts that will appear as the result of INSERTs or merges that haven''t been done yet.'
               preprocessing:
@@ -1536,9 +1443,7 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Get replicas info'
               type: DEPENDENT
               key: 'clickhouse.replica.info_raw["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'The item gets information about replicas of {#TABLE} table of {#DB} database.'
               preprocessing:
@@ -1559,7 +1464,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Replica queue inserts size'
               type: DEPENDENT
               key: 'clickhouse.replica.inserts_in_queue["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Number of inserts of blocks of data that need to be made.'
               preprocessing:
@@ -1579,7 +1483,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Replica readonly'
               type: DEPENDENT
               key: 'clickhouse.replica.is_readonly["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: |
                 Whether the replica is in read-only mode.
@@ -1612,7 +1515,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Replica session expired'
               type: DEPENDENT
               key: 'clickhouse.replica.is_session_expired["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'True if the ZooKeeper session expired'
               valuemap:
@@ -1643,7 +1545,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Replica lag'
               type: DEPENDENT
               key: 'clickhouse.replica.lag["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Difference between log_max_index and log_pointer'
@@ -1673,7 +1574,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Replica log max index'
               type: DEPENDENT
               key: 'clickhouse.replica.log_max_index["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Maximum entry number in the log of general activity. (Have a non-zero value only where there is an active session with ZooKeeper).'
               preprocessing:
@@ -1693,7 +1593,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Replica log pointer'
               type: DEPENDENT
               key: 'clickhouse.replica.log_pointer["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Maximum entry number in the log of general activity that the replica copied to its execution queue, plus one. (Have a non-zero value only where there is an active session with ZooKeeper).'
               preprocessing:
@@ -1713,7 +1612,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Replica queue merges size'
               type: DEPENDENT
               key: 'clickhouse.replica.merges_in_queue["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Number of merges waiting to be made.'
               preprocessing:
@@ -1733,7 +1631,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Replica parts to check'
               type: DEPENDENT
               key: 'clickhouse.replica.parts_to_check["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Number of data parts in the queue for verification. A part is put in the verification queue if there is suspicion that it might be damaged.'
               preprocessing:
@@ -1753,7 +1650,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Replica queue size'
               type: DEPENDENT
               key: 'clickhouse.replica.queue_size["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Size of the queue for operations waiting to be performed.'
               preprocessing:
@@ -1782,7 +1678,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Total replicas'
               type: DEPENDENT
               key: 'clickhouse.replica.total_replicas["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Total number of known replicas of this table. (Have a non-zero value only where there is an active session with ZooKeeper).'
               preprocessing:
@@ -1881,7 +1776,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Bytes'
               type: DEPENDENT
               key: 'clickhouse.table.bytes["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Table size in bytes. Database: {#DB}, table: {#TABLE}'
@@ -1902,9 +1796,7 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Get table info'
               type: DEPENDENT
               key: 'clickhouse.table.info_raw["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'The item gets information about {#TABLE} table of {#DB} database.'
               preprocessing:
@@ -1925,7 +1817,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Parts'
               type: DEPENDENT
               key: 'clickhouse.table.parts["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Number of parts of the table. Database: {#DB}, table: {#TABLE}'
               preprocessing:
@@ -1945,7 +1836,6 @@ zabbix_export:
               name: 'ClickHouse: {#DB}.{#TABLE}: Rows'
               type: DEPENDENT
               key: 'clickhouse.table.rows["{#DB}.{#TABLE}"]'
-              delay: '0'
               history: 7d
               description: 'Number of rows in the table. Database: {#DB}, table: {#TABLE}'
               preprocessing:

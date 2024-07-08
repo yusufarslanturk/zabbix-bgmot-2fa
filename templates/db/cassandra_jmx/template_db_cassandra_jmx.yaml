@@ -27,7 +27,6 @@ zabbix_export:
           type: JMX
           key: 'jmx["org.apache.cassandra.db:type=StorageService","ClusterName"]'
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$CASSANDRA.USER}'
           password: '{$CASSANDRA.PASSWORD}'
@@ -44,7 +43,6 @@ zabbix_export:
           type: JMX
           key: 'jmx["org.apache.cassandra.db:type=StorageService","ReleaseVersion"]'
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$CASSANDRA.USER}'
           password: '{$CASSANDRA.PASSWORD}'
@@ -282,8 +280,6 @@ zabbix_export:
           description: 'Rate of cache hits.'
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -300,8 +296,6 @@ zabbix_export:
           description: 'Rate of cache requests.'
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -409,8 +403,6 @@ zabbix_export:
           description: 'The number of client requests per second.'
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -481,8 +473,6 @@ zabbix_export:
           description: 'The number of local write requests per second.'
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -1373,8 +1363,6 @@ zabbix_export:
               description: 'The number of client requests per second.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -1633,8 +1621,6 @@ zabbix_export:
               description: 'The number of local write requests per second.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component

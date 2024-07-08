@@ -56,9 +56,7 @@ zabbix_export:
           name: 'MSSQL: Get Access Methods counters'
           type: DEPENDENT
           key: mssql.access_methods.raw
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets server information about access methods.'
           preprocessing:
@@ -75,7 +73,6 @@ zabbix_export:
           name: 'MSSQL: Auto-param attempts per second'
           type: DEPENDENT
           key: mssql.autoparam_attempts_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of auto-parameterization attempts per second. The total should be the sum of the failed, safe, and unsafe auto-parameterizations. Auto-parameterization occurs when an instance of SQL Server tries to parameterize a Transact-SQL request by replacing some literals with parameters so that reuse of the resulting cached execution plan across multiple similar-looking requests is possible. Note that auto-parameterizations are also known as simple parameterizations in the newer versions of SQL Server. This counter does not include forced parameterizations.'
@@ -84,8 +81,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Auto-Param Attempts/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_statistics.raw
           tags:
@@ -95,7 +90,6 @@ zabbix_export:
           name: 'MSSQL: Get availability groups'
           key: 'mssql.availability.group.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets availability group states - name, primary and secondary health, synchronization health.'
           tags:
@@ -121,7 +115,6 @@ zabbix_export:
           name: 'MSSQL: Average latch wait time base'
           type: DEPENDENT
           key: mssql.average_latch_wait_time_base
-          delay: '0'
           history: 7d
           description: 'For internal use only.'
           preprocessing:
@@ -137,7 +130,6 @@ zabbix_export:
           name: 'MSSQL: Average latch wait time raw'
           type: DEPENDENT
           key: mssql.average_latch_wait_time_raw
-          delay: '0'
           history: 7d
           units: ms
           description: 'Average latch wait time (in milliseconds) for latch requests that had to wait.'
@@ -180,7 +172,6 @@ zabbix_export:
           name: 'MSSQL: Total average wait time base'
           type: DEPENDENT
           key: mssql.average_wait_time_base
-          delay: '0'
           history: 7d
           description: 'For internal use only.'
           preprocessing:
@@ -196,7 +187,6 @@ zabbix_export:
           name: 'MSSQL: Total average wait time raw'
           type: DEPENDENT
           key: mssql.average_wait_time_raw
-          delay: '0'
           history: 7d
           units: ms
           description: 'Average amount of wait time (in milliseconds) for each lock request that resulted in a wait. Information for all locks.'
@@ -213,7 +203,6 @@ zabbix_export:
           name: 'MSSQL: Batch requests per second'
           type: DEPENDENT
           key: mssql.batch_requests_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -223,8 +212,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Batch Requests/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_statistics.raw
           tags:
@@ -234,7 +221,6 @@ zabbix_export:
           name: 'MSSQL: Buffer cache hit ratio'
           type: DEPENDENT
           key: mssql.buffer_cache_hit_ratio
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -274,9 +260,7 @@ zabbix_export:
           name: 'MSSQL: Get Buffer Manager counters'
           type: DEPENDENT
           key: mssql.buffer_manager.raw
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets server information about the buffer pool.'
           preprocessing:
@@ -293,7 +277,6 @@ zabbix_export:
           name: 'MSSQL: Cache hit ratio'
           type: DEPENDENT
           key: mssql.cache_hit_ratio
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -311,9 +294,7 @@ zabbix_export:
           name: 'MSSQL: Get Cache counters'
           type: DEPENDENT
           key: mssql.cache_info.raw
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets server information about cache.'
           preprocessing:
@@ -330,7 +311,6 @@ zabbix_export:
           name: 'MSSQL: Cache objects in use'
           type: DEPENDENT
           key: mssql.cache_objects_in_use
-          delay: '0'
           history: 7d
           description: 'Number of cache objects in use.'
           preprocessing:
@@ -346,7 +326,6 @@ zabbix_export:
           name: 'MSSQL: Cache object counts'
           type: DEPENDENT
           key: mssql.cache_object_counts
-          delay: '0'
           history: 7d
           description: 'Number of cache objects in the cache.'
           preprocessing:
@@ -362,7 +341,6 @@ zabbix_export:
           name: 'MSSQL: Cache pages'
           type: DEPENDENT
           key: mssql.cache_pages
-          delay: '0'
           history: 7d
           description: 'Number of 8-kilobyte (KB) pages used by cache objects.'
           preprocessing:
@@ -380,7 +358,6 @@ zabbix_export:
           name: 'MSSQL: Checkpoint pages per second'
           type: DEPENDENT
           key: mssql.checkpoint_pages_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Indicates the number of pages flushed to the disk per second by a checkpoint or other operation which required all dirty pages to be flushed.'
@@ -389,8 +366,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Checkpoint pages/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.buffer_manager.raw
           tags:
@@ -402,7 +377,6 @@ zabbix_export:
           name: 'MSSQL: Database pages'
           type: DEPENDENT
           key: mssql.database_pages
-          delay: '0'
           history: 7d
           description: 'Indicates the number of pages in the buffer pool with database content.'
           preprocessing:
@@ -418,7 +392,6 @@ zabbix_export:
           name: 'MSSQL: Total data file size'
           type: DEPENDENT
           key: mssql.data_files_size
-          delay: '0'
           history: 7d
           units: B
           description: 'Total size of all data files.'
@@ -442,7 +415,6 @@ zabbix_export:
           key: 'mssql.db.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Getting databases - database name and recovery model.'
           tags:
@@ -452,9 +424,7 @@ zabbix_export:
           name: 'MSSQL: Get DB counters'
           type: DEPENDENT
           key: mssql.db_info.raw
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets summary information about databases.'
           preprocessing:
@@ -471,7 +441,6 @@ zabbix_export:
           name: 'MSSQL: Total errors per second'
           type: DEPENDENT
           key: mssql.errors_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of errors per second.'
@@ -480,8 +449,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Errors/sec'' && @.instance_name==''_Total'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_errors.raw
           tags:
@@ -493,7 +460,6 @@ zabbix_export:
           name: 'MSSQL: Failed auto-params per second'
           type: DEPENDENT
           key: mssql.failed_autoparams_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of failed auto-parameterization attempts per second. This number should be small. Note that auto-parameterizations are also known as simple parameterizations in the newer versions of SQL Server.'
@@ -502,8 +468,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Failed Auto-Params/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_statistics.raw
           tags:
@@ -513,7 +477,6 @@ zabbix_export:
           name: 'MSSQL: Forwarded records per second'
           type: DEPENDENT
           key: mssql.forwarded_records_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of records per second fetched through forwarded record pointers.'
@@ -522,8 +485,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Forwarded Records/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.access_methods.raw
           tags:
@@ -533,7 +494,6 @@ zabbix_export:
           name: 'MSSQL: Free list stalls per second'
           type: DEPENDENT
           key: mssql.free_list_stalls_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -543,8 +503,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Free list stalls/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.buffer_manager.raw
           tags:
@@ -564,7 +522,6 @@ zabbix_export:
           name: 'MSSQL: Full scans per second'
           type: DEPENDENT
           key: mssql.full_scans_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of unrestricted full scans per second. These can be either base-table or full-index scans. Values greater than 1 or 2 indicate that there are table / index page scans. If that is combined with high CPU, this counter requires further investigation, otherwise, if the full scans are on small tables, it can be ignored.'
@@ -573,8 +530,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Full Scans/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.access_methods.raw
           tags:
@@ -584,9 +539,7 @@ zabbix_export:
           name: 'MSSQL: Get General Statistics counters'
           type: DEPENDENT
           key: mssql.general_statistics.raw
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets general statistics information.'
           preprocessing:
@@ -603,7 +556,6 @@ zabbix_export:
           name: 'MSSQL: Granted Workspace Memory'
           type: DEPENDENT
           key: mssql.granted_workspace_memory
-          delay: '0'
           history: 7d
           units: B
           description: 'Specifies the total amount of memory currently granted to executing processes, such as hash, sort, bulk copy, and index creation operations.'
@@ -623,7 +575,6 @@ zabbix_export:
           name: 'MSSQL: Index searches per second'
           type: DEPENDENT
           key: mssql.index_searches_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of index searches per second. These are used to start a range scan, reposition a range scan, revalidate a scan point, fetch a single index record, and search down the index to locate where to insert a new row.'
@@ -632,8 +583,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Index Searches/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.access_methods.raw
           tags:
@@ -643,7 +592,6 @@ zabbix_export:
           name: 'MSSQL: Errors per second (Info errors)'
           type: DEPENDENT
           key: mssql.info_errors_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of errors per second.'
@@ -652,8 +600,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Errors/sec'' && @.instance_name==''Info Errors'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_errors.raw
           tags:
@@ -666,7 +612,6 @@ zabbix_export:
           key: 'mssql.job.status.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets the SQL agent job status.'
           tags:
@@ -676,7 +621,6 @@ zabbix_export:
           name: 'MSSQL: Errors per second (Kill connection errors)'
           type: DEPENDENT
           key: mssql.kill_connection_errors_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of errors per second.'
@@ -685,8 +629,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Errors/sec'' && @.instance_name==''Kill Connection Errors'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_errors.raw
           tags:
@@ -699,7 +641,6 @@ zabbix_export:
           key: 'mssql.last.backup.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets information about backup processes.'
           tags:
@@ -709,9 +650,7 @@ zabbix_export:
           name: 'MSSQL: Get Latches counters'
           type: DEPENDENT
           key: mssql.latches_info.raw
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets server information about latches.'
           preprocessing:
@@ -728,7 +667,6 @@ zabbix_export:
           name: 'MSSQL: Latch waits per second'
           type: DEPENDENT
           key: mssql.latch_waits_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -738,8 +676,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Latch Waits/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.latches_info.raw
           tags:
@@ -751,7 +687,6 @@ zabbix_export:
           name: 'MSSQL: Lazy writes per second'
           type: DEPENDENT
           key: mssql.lazy_writes_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Indicates the number of buffers written per second by the buffer manager''s lazy writer. The lazy writer is a system process that flushes out batches of dirty, aged buffers (buffers that contain changes that must be written back to the disk before the buffer can be reused for a different page) and makes them available to user processes. The lazy writer eliminates the need to perform frequent checkpoints in order to create available buffers.'
@@ -760,8 +695,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Lazy writes/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.buffer_manager.raw
           tags:
@@ -781,7 +714,6 @@ zabbix_export:
           name: 'MSSQL: Get local DB'
           key: 'mssql.local.db.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Getting the states of the local availability database.'
           tags:
@@ -791,9 +723,7 @@ zabbix_export:
           name: 'MSSQL: Get Locks counters'
           type: DEPENDENT
           key: mssql.locks_info.raw
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets server information about locks.'
           preprocessing:
@@ -810,7 +740,6 @@ zabbix_export:
           name: 'MSSQL: Total lock requests per second'
           type: DEPENDENT
           key: mssql.lock_requests_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -820,8 +749,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Lock Requests/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.locks_info.raw
           tags:
@@ -843,7 +770,6 @@ zabbix_export:
           name: 'MSSQL: Total lock requests per second that timed out'
           type: DEPENDENT
           key: mssql.lock_timeouts_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -853,8 +779,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Lock Timeouts/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.locks_info.raw
           tags:
@@ -876,7 +800,6 @@ zabbix_export:
           name: 'MSSQL: Total lock requests per second that required waiting'
           type: DEPENDENT
           key: mssql.lock_waits_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -886,8 +809,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Lock Waits/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.locks_info.raw
           tags:
@@ -908,7 +829,6 @@ zabbix_export:
           name: 'MSSQL: Lock wait time'
           type: DEPENDENT
           key: mssql.lock_wait_time
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ms
@@ -918,8 +838,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Lock Wait Time (ms)'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.locks_info.raw
           tags:
@@ -929,7 +847,6 @@ zabbix_export:
           name: 'MSSQL: Logins per second'
           type: DEPENDENT
           key: mssql.logins_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of logins started per second. This does not include pooled connections. Any value over 2 may indicate insufficient connection pooling.'
@@ -938,8 +855,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Logins/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.general_statistics.raw
           tags:
@@ -949,7 +864,6 @@ zabbix_export:
           name: 'MSSQL: Logouts per second'
           type: DEPENDENT
           key: mssql.logouts_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of logout operations started per second. Any value over 2 may indicate insufficient connection pooling.'
@@ -958,8 +872,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Logouts/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.general_statistics.raw
           tags:
@@ -969,7 +881,6 @@ zabbix_export:
           name: 'MSSQL: Total log file size'
           type: DEPENDENT
           key: mssql.log_files_size
-          delay: '0'
           history: 7d
           units: B
           description: 'Total size of all the transaction log files.'
@@ -992,7 +903,6 @@ zabbix_export:
           name: 'MSSQL: Total log file used size'
           type: DEPENDENT
           key: mssql.log_files_used_size
-          delay: '0'
           history: 7d
           units: B
           description: 'The cumulative size of all the log files in the database.'
@@ -1012,7 +922,6 @@ zabbix_export:
           name: 'MSSQL: Maximum workspace memory'
           type: DEPENDENT
           key: mssql.maximum_workspace_memory
-          delay: '0'
           history: 7d
           units: B
           description: 'Indicates the maximum amount of memory available for executing processes, such as hash, sort, bulk copy, and index creation operations.'
@@ -1032,7 +941,6 @@ zabbix_export:
           name: 'MSSQL: Memory grants outstanding'
           type: DEPENDENT
           key: mssql.memory_grants_outstanding
-          delay: '0'
           history: 7d
           description: 'Specifies the total number of processes that have successfully acquired a workspace memory grant.'
           preprocessing:
@@ -1048,7 +956,6 @@ zabbix_export:
           name: 'MSSQL: Memory grants pending'
           type: DEPENDENT
           key: mssql.memory_grants_pending
-          delay: '0'
           history: 7d
           description: 'Specifies the total number of processes waiting for a workspace memory grant.'
           preprocessing:
@@ -1064,9 +971,7 @@ zabbix_export:
           name: 'MSSQL: Get Memory counters'
           type: DEPENDENT
           key: mssql.mem_manager.raw
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets memory information.'
           preprocessing:
@@ -1083,7 +988,6 @@ zabbix_export:
           name: 'MSSQL: Get DB mirroring'
           key: 'mssql.mirroring.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Getting DB mirroring.'
           tags:
@@ -1093,7 +997,6 @@ zabbix_export:
           name: 'MSSQL: Get non-local DB'
           key: 'mssql.nonlocal.db.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Getting the non-local availability database.'
           tags:
@@ -1103,7 +1006,6 @@ zabbix_export:
           name: 'MSSQL: Total lock requests per second that have deadlocks'
           type: DEPENDENT
           key: mssql.number_deadlocks_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -1113,8 +1015,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Number of Deadlocks/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.locks_info.raw
           tags:
@@ -1136,7 +1036,6 @@ zabbix_export:
           name: 'MSSQL: Errors per second (DB offline errors)'
           type: DEPENDENT
           key: mssql.offline_errors_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of errors per second.'
@@ -1145,8 +1044,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Errors/sec'' && @.instance_name==''DB Offline Errors'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_errors.raw
           tags:
@@ -1158,7 +1055,6 @@ zabbix_export:
           name: 'MSSQL: Page life expectancy'
           type: DEPENDENT
           key: mssql.page_life_expectancy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1186,7 +1082,6 @@ zabbix_export:
           name: 'MSSQL: Page lookups per second'
           type: DEPENDENT
           key: mssql.page_lookups_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: rps
@@ -1196,8 +1091,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Page lookups/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.buffer_manager.raw
           tags:
@@ -1207,7 +1100,6 @@ zabbix_export:
           name: 'MSSQL: Page reads per second'
           type: DEPENDENT
           key: mssql.page_reads_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Indicates the number of physical database page reads that are issued per second. This statistic displays the total number of physical page reads across all databases. As physical I/O is expensive, you may be able to minimize the cost either by using a larger data cache, intelligent indexes, and more efficient queries, or by changing the database design.'
@@ -1216,8 +1108,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Page reads/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.buffer_manager.raw
           tags:
@@ -1239,7 +1129,6 @@ zabbix_export:
           name: 'MSSQL: Page splits per second'
           type: DEPENDENT
           key: mssql.page_splits_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of page splits per second that occur as a result of overflowing index pages.'
@@ -1248,8 +1137,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Page Splits/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.access_methods.raw
           tags:
@@ -1261,7 +1148,6 @@ zabbix_export:
           name: 'MSSQL: Page writes per second'
           type: DEPENDENT
           key: mssql.page_writes_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Indicates the number of physical database page writes that are issued per second.'
@@ -1270,8 +1156,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Page writes/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.buffer_manager.raw
           tags:
@@ -1344,7 +1228,6 @@ zabbix_export:
           key: 'mssql.perfcounter.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           delay: 0;m0-59
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets server global status information.'
           tags:
@@ -1354,7 +1237,6 @@ zabbix_export:
           name: 'MSSQL: Number of blocked processes'
           type: DEPENDENT
           key: mssql.processes_blocked
-          delay: '0'
           history: 7d
           description: 'Number of currently blocked processes.'
           preprocessing:
@@ -1373,7 +1255,6 @@ zabbix_export:
           name: 'MSSQL: Get quorum'
           key: 'mssql.quorum.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Getting quorum - cluster name, type, and state.'
           tags:
@@ -1383,7 +1264,6 @@ zabbix_export:
           name: 'MSSQL: Get quorum member'
           key: 'mssql.quorum.member.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Getting quorum members - member name, type, state, and number of quorum votes.'
           tags:
@@ -1393,7 +1273,6 @@ zabbix_export:
           name: 'MSSQL: Read-ahead pages per second'
           type: DEPENDENT
           key: mssql.readahead_pages_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Indicates the number of pages read per second in anticipation of use.'
@@ -1402,8 +1281,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Readahead pages/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.buffer_manager.raw
           tags:
@@ -1415,7 +1292,6 @@ zabbix_export:
           name: 'MSSQL: Get replica'
           key: 'mssql.replica.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Getting the database replica.'
           tags:
@@ -1425,7 +1301,6 @@ zabbix_export:
           name: 'MSSQL: Safe auto-params per second'
           type: DEPENDENT
           key: mssql.safe_autoparams_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of safe auto-parameterization attempts per second. Safe refers to a determination that a cached execution plan can be shared between different similar-looking Transact-SQL statements. SQL Server makes many auto-parameterization attempts, some of which turn out to be safe and others fail. Note that auto-parameterizations are also known as simple parameterizations in the newer versions of SQL Server. This does not include forced parameterizations.'
@@ -1434,8 +1309,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Safe Auto-Params/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_statistics.raw
           tags:
@@ -1466,7 +1339,6 @@ zabbix_export:
           name: 'MSSQL: SQL compilations per second'
           type: DEPENDENT
           key: mssql.sql_compilations_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of SQL compilations per second. Indicates the number of times the compile code path is entered. Includes runs caused by statement-level recompilations in SQL Server. After SQL Server user activity is stable, this value reaches a steady state.'
@@ -1475,8 +1347,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''SQL Compilations/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_statistics.raw
           tags:
@@ -1486,9 +1356,7 @@ zabbix_export:
           name: 'MSSQL: Get SQL Errors counters'
           type: DEPENDENT
           key: mssql.sql_errors.raw
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets SQL error information.'
           preprocessing:
@@ -1505,7 +1373,6 @@ zabbix_export:
           name: 'MSSQL: SQL re-compilations per second'
           type: DEPENDENT
           key: mssql.sql_recompilations_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of statement recompiles per second. Counts the number of times statement recompiles are triggered. Generally, you want the recompiles to be low.'
@@ -1514,8 +1381,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''SQL Re-Compilations/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_statistics.raw
           tags:
@@ -1525,9 +1390,7 @@ zabbix_export:
           name: 'MSSQL: Get SQL Statistics counters'
           type: DEPENDENT
           key: mssql.sql_statistics.raw
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The item gets SQL statistics information.'
           preprocessing:
@@ -1544,7 +1407,6 @@ zabbix_export:
           name: 'MSSQL: Table lock escalations per second'
           type: DEPENDENT
           key: mssql.table_lock_escalations.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of times locks on a table were escalated to the TABLE or HoBT granularity.'
@@ -1553,8 +1415,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Table Lock Escalations/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.access_methods.raw
           tags:
@@ -1566,7 +1426,6 @@ zabbix_export:
           name: 'MSSQL: Target pages'
           type: DEPENDENT
           key: mssql.target_pages
-          delay: '0'
           history: 7d
           description: 'The optimal number of pages in the buffer pool.'
           preprocessing:
@@ -1585,7 +1444,6 @@ zabbix_export:
           name: 'MSSQL: Target server memory'
           type: DEPENDENT
           key: mssql.target_server_memory
-          delay: '0'
           history: 7d
           units: B
           description: 'Indicates the ideal amount of memory the server can consume.'
@@ -1605,7 +1463,6 @@ zabbix_export:
           name: 'MSSQL: Total latch wait time'
           type: DEPENDENT
           key: mssql.total_latch_wait_time
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ms
@@ -1615,8 +1472,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Total Latch Wait Time (ms)'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.latches_info.raw
           tags:
@@ -1626,7 +1481,6 @@ zabbix_export:
           name: 'MSSQL: Total server memory'
           type: DEPENDENT
           key: mssql.total_server_memory
-          delay: '0'
           history: 7d
           units: B
           description: 'Specifies the amount of memory the server has committed using the memory manager.'
@@ -1646,7 +1500,6 @@ zabbix_export:
           name: 'MSSQL: Total transactions number'
           type: DEPENDENT
           key: mssql.transactions
-          delay: '0'
           history: 7d
           description: 'The number of currently active transactions of all types.'
           preprocessing:
@@ -1662,7 +1515,6 @@ zabbix_export:
           name: 'MSSQL: Total transactions per second'
           type: DEPENDENT
           key: mssql.transactions_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of transactions started for all databases per second.'
@@ -1671,8 +1523,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Transactions/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.db_info.raw
           tags:
@@ -1684,7 +1534,6 @@ zabbix_export:
           name: 'MSSQL: Unsafe auto-params per second'
           type: DEPENDENT
           key: mssql.unsafe_autoparams_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of unsafe auto-parameterization attempts per second. For example, the query has some characteristics that prevent the cached plan from being shared. These are designated as unsafe. This does not count the number of forced parameterizations.'
@@ -1693,8 +1542,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Unsafe Auto-Params/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_statistics.raw
           tags:
@@ -1704,7 +1551,6 @@ zabbix_export:
           name: 'MSSQL: Uptime'
           type: DEPENDENT
           key: mssql.uptime
-          delay: '0'
           history: 7d
           trends: '0'
           units: uptime
@@ -1745,7 +1591,6 @@ zabbix_export:
           name: 'MSSQL: Number of users connected'
           type: DEPENDENT
           key: mssql.user_connections
-          delay: '0'
           history: 7d
           description: 'Number of users connected to MSSQL Server.'
           preprocessing:
@@ -1761,7 +1606,6 @@ zabbix_export:
           name: 'MSSQL: Errors per second (User errors)'
           type: DEPENDENT
           key: mssql.user_errors_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of errors per second.'
@@ -1770,8 +1614,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Errors/sec'' && @.instance_name==''User Errors'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.sql_errors.raw
           tags:
@@ -1783,7 +1625,6 @@ zabbix_export:
           name: 'MSSQL: Version'
           key: 'mssql.version["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'MSSQL Server version.'
           preprocessing:
@@ -1808,7 +1649,6 @@ zabbix_export:
           name: 'MSSQL: Work files created per second'
           type: DEPENDENT
           key: mssql.workfiles_created_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of work files created per second. For example, work files can be used to store temporary results for hash joins and hash aggregates.'
@@ -1817,8 +1657,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Workfiles Created/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.access_methods.raw
           tags:
@@ -1838,7 +1676,6 @@ zabbix_export:
           name: 'MSSQL: Work tables created per second'
           type: DEPENDENT
           key: mssql.worktables_created_sec.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of work tables created per second. For example, work tables can be used to store temporary results for query spool, LOB variables, XML variables, and cursors.'
@@ -1847,8 +1684,6 @@ zabbix_export:
               parameters:
                 - '$[?(@.counter_name==''Worktables Created/sec'')].cntr_value.first()'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: mssql.access_methods.raw
           tags:
@@ -1868,7 +1703,6 @@ zabbix_export:
           name: 'MSSQL: Worktables from cache ratio'
           type: DEPENDENT
           key: mssql.worktables_from_cache_ratio
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -1929,7 +1763,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'': Primary replica recovery health'
               type: DEPENDENT
               key: 'mssql.primary_recovery_health["{#GROUP_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Indicates the recovery health of the primary replica:
@@ -1967,9 +1800,7 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'': Primary replica name'
               type: DEPENDENT
               key: 'mssql.primary_replica["{#GROUP_NAME}"]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'Name of the server instance that is hosting the current primary replica.'
               preprocessing:
@@ -1990,7 +1821,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'': Secondary replica recovery health'
               type: DEPENDENT
               key: 'mssql.secondary_recovery_health["{#GROUP_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Indicates the recovery health of a secondary replica:
@@ -2028,7 +1858,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'': Synchronization health'
               type: DEPENDENT
               key: 'mssql.synchronization_health["{#GROUP_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Reflects a rollup of the `synchronization_health` of all availability replicas in the availability group:
@@ -2102,7 +1931,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Last diff backup duration'
               type: DEPENDENT
               key: 'mssql.backup.diff.duration["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: s
               description: 'Duration of the last differential backup.'
@@ -2126,7 +1954,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Last diff backup (time ago)'
               type: DEPENDENT
               key: 'mssql.backup.diff["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: s
               description: 'The amount of time since the last differential backup.'
@@ -2177,7 +2004,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Last full backup duration'
               type: DEPENDENT
               key: 'mssql.backup.full.duration["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: s
               description: 'Duration of the last full backup.'
@@ -2201,7 +2027,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Last full backup (time ago)'
               type: DEPENDENT
               key: 'mssql.backup.full["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: s
               description: 'The amount of time since the last full backup.'
@@ -2250,7 +2075,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Last log backup duration'
               type: DEPENDENT
               key: 'mssql.backup.log.duration["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: s
               description: 'Duration of the last log backup.'
@@ -2274,7 +2098,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Last log backup (time ago)'
               type: DEPENDENT
               key: 'mssql.backup.log["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: s
               description: 'The amount of time since the last log backup.'
@@ -2295,9 +2118,7 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Get last backup'
               type: DEPENDENT
               key: 'mssql.backup.raw["{#DBNAME}"]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'The item gets information about backup processes for {#DBNAME}.'
               preprocessing:
@@ -2316,7 +2137,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Recovery model'
               type: DEPENDENT
               key: 'mssql.backup.recovery_model["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Recovery model selected:
@@ -2345,7 +2165,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Active transactions'
               type: DEPENDENT
               key: 'mssql.db.active_transactions["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: 'Number of active transactions for the database.'
               preprocessing:
@@ -2363,7 +2182,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Data file size'
               type: DEPENDENT
               key: 'mssql.db.data_files_size["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Cumulative size of all the data files in the database including any automatic growth. Monitoring this counter is useful, for example, for determining the correct size of `tempdb`.'
@@ -2385,7 +2203,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Log bytes flushed per second'
               type: DEPENDENT
               key: 'mssql.db.log_bytes_flushed_sec.rate["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -2395,8 +2212,6 @@ zabbix_export:
                   parameters:
                     - '$[?(@.counter_name==''Log Bytes Flushed/sec'')].cntr_value.first()'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'mssql.db.perf_raw["{#DBNAME}"]'
               tags:
@@ -2408,7 +2223,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Log file size'
               type: DEPENDENT
               key: 'mssql.db.log_files_size["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Cumulative size of all the transaction log files in the database.'
@@ -2430,7 +2244,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Log file used size'
               type: DEPENDENT
               key: 'mssql.db.log_files_used_size["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Cumulative size of all the log files in the database.'
@@ -2452,7 +2265,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Log flushes per second'
               type: DEPENDENT
               key: 'mssql.db.log_flushes_sec.rate["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Number of log flushes per second.'
@@ -2461,8 +2273,6 @@ zabbix_export:
                   parameters:
                     - '$[?(@.counter_name==''Log Flushes/sec'')].cntr_value.first()'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'mssql.db.perf_raw["{#DBNAME}"]'
               tags:
@@ -2474,7 +2284,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Log flush waits per second'
               type: DEPENDENT
               key: 'mssql.db.log_flush_waits_sec.rate["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Number of commits per second waiting for the log flush.'
@@ -2483,8 +2292,6 @@ zabbix_export:
                   parameters:
                     - '$[?(@.counter_name==''Log Flush Waits/sec'')].cntr_value.first()'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'mssql.db.perf_raw["{#DBNAME}"]'
               tags:
@@ -2508,7 +2315,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Log flush wait time'
               type: DEPENDENT
               key: 'mssql.db.log_flush_wait_time["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2518,8 +2324,6 @@ zabbix_export:
                   parameters:
                     - '$[?(@.counter_name==''Log Flush Wait Time'')].cntr_value.first()'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'mssql.db.perf_raw["{#DBNAME}"]'
               tags:
@@ -2543,7 +2347,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Log growths'
               type: DEPENDENT
               key: 'mssql.db.log_growths["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: 'Total number of times the transaction log for the database has been expanded.'
               preprocessing:
@@ -2561,7 +2364,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Log shrinks'
               type: DEPENDENT
               key: 'mssql.db.log_shrinks["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: 'Total number of times the transaction log for the database has been shrunk.'
               preprocessing:
@@ -2579,7 +2381,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Log truncations'
               type: DEPENDENT
               key: 'mssql.db.log_truncations["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: 'Number of times the transaction log has been shrunk.'
               preprocessing:
@@ -2597,7 +2398,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Percent log used'
               type: DEPENDENT
               key: 'mssql.db.percent_log_used["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -2629,9 +2429,7 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Get performance counters'
               type: DEPENDENT
               key: 'mssql.db.perf_raw["{#DBNAME}"]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'The item gets server status information for {#DBNAME}.'
               preprocessing:
@@ -2650,7 +2448,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': State'
               type: DEPENDENT
               key: 'mssql.db.state["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 0 = Online
@@ -2693,7 +2490,6 @@ zabbix_export:
               name: 'MSSQL DB ''{#DBNAME}'': Transactions per second'
               type: DEPENDENT
               key: 'mssql.db.transactions_sec.rate["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Number of transactions started for the database per second.'
@@ -2702,8 +2498,6 @@ zabbix_export:
                   parameters:
                     - '$[?(@.counter_name==''Transactions/sec'')].cntr_value.first()'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'mssql.db.perf_raw["{#DBNAME}"]'
               tags:
@@ -2823,7 +2617,6 @@ zabbix_export:
               name: 'MSSQL Job ''{#JOBNAME}'': Enabled'
               type: DEPENDENT
               key: 'mssql.job.enabled["{#JOBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 The possible values of the job status:
@@ -2849,7 +2642,6 @@ zabbix_export:
               name: 'MSSQL Job ''{#JOBNAME}'': Last run date-time'
               type: DEPENDENT
               key: 'mssql.job.lastrundatetime["{#JOBNAME}"]'
-              delay: '0'
               history: 7d
               units: unixtime
               description: 'The last date-time of the job run.'
@@ -2874,9 +2666,7 @@ zabbix_export:
               name: 'MSSQL Job ''{#JOBNAME}'': Last run status message'
               type: DEPENDENT
               key: 'mssql.job.lastrunstatusmessage["{#JOBNAME}"]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'An informational message about the last run of the job.'
               preprocessing:
@@ -2897,7 +2687,6 @@ zabbix_export:
               name: 'MSSQL Job ''{#JOBNAME}'': Next run date-time'
               type: DEPENDENT
               key: 'mssql.job.nextrundatetime["{#JOBNAME}"]'
-              delay: '0'
               history: 7d
               units: unixtime
               description: 'The next date-time of the job run.'
@@ -2922,7 +2711,6 @@ zabbix_export:
               name: 'MSSQL Job ''{#JOBNAME}'': Run status'
               type: DEPENDENT
               key: 'mssql.job.runstatus["{#JOBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 The possible values of the job status:
@@ -2963,7 +2751,6 @@ zabbix_export:
               name: 'MSSQL Job ''{#JOBNAME}'': Run duration'
               type: DEPENDENT
               key: 'mssql.job.run_duration["{#JOBNAME}"]'
-              delay: '0'
               history: 7d
               units: s
               description: 'Duration of the last-run job.'
@@ -2999,9 +2786,7 @@ zabbix_export:
               name: 'MSSQL Job ''{#JOBNAME}'': Get job status'
               type: DEPENDENT
               key: 'mssql.job.status_raw["{#JOBNAME}"]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'The item gets the status of SQL agent job {#JOBNAME}.'
               preprocessing:
@@ -3036,7 +2821,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Local DB ''{#DBNAME}'': Suspended'
               type: DEPENDENT
               key: 'mssql.local_db.is_suspended["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Database state:
@@ -3062,7 +2846,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Local DB ''{#DBNAME}'': State'
               type: DEPENDENT
               key: 'mssql.local_db.state["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 0 = Online
@@ -3107,7 +2890,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Local DB ''{#DBNAME}'': Synchronization health'
               type: DEPENDENT
               key: 'mssql.local_db.synchronization_health["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Reflects the intersection of the synchronization state of a database that is joined to the availability group on the availability replica and the availability mode of the availability replica (synchronous-commit or asynchronous-commit mode):
@@ -3179,7 +2961,6 @@ zabbix_export:
               name: 'MSSQL Mirroring ''{#DBNAME}'': Role'
               type: DEPENDENT
               key: 'mssql.mirroring.role["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Current role of the local database plays in the database mirroring session.
@@ -3205,7 +2986,6 @@ zabbix_export:
               name: 'MSSQL Mirroring ''{#DBNAME}'': Role sequence'
               type: DEPENDENT
               key: 'mssql.mirroring.role_sequence["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: 'The number of times that mirroring partners have switched the principal and mirror roles due to a failover or forced service.'
               preprocessing:
@@ -3213,8 +2993,6 @@ zabbix_export:
                   parameters:
                     - '$[?(@.dbname==''{#DBNAME}'')].mirroring_role_sequence.first()'
                 - type: SIMPLE_CHANGE
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -3229,7 +3007,6 @@ zabbix_export:
               name: 'MSSQL Mirroring ''{#DBNAME}'': Safety level'
               type: DEPENDENT
               key: 'mssql.mirroring.safety_level["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Safety setting for updates on the mirror database:
@@ -3256,7 +3033,6 @@ zabbix_export:
               name: 'MSSQL Mirroring ''{#DBNAME}'': State'
               type: DEPENDENT
               key: 'mssql.mirroring.state["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 State of the mirror database and of the database mirroring session.
@@ -3318,7 +3094,6 @@ zabbix_export:
               name: 'MSSQL Mirroring ''{#DBNAME}'': Witness state'
               type: DEPENDENT
               key: 'mssql.mirroring.witness_state["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 State of the witness in the database mirroring session of the database:
@@ -3385,7 +3160,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Non-Local DB ''*{#REPLICA_NAME}*{#DBNAME}'': Log queue size'
               type: DEPENDENT
               key: 'mssql.non-local_db.log_send_queue_size["{#GROUP_NAME}*{#REPLICA_NAME}*{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Amount of the log records of the primary database that has not been sent to the secondary databases.'
@@ -3425,7 +3199,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Non-Local DB ''*{#REPLICA_NAME}*{#DBNAME}'': Redo log queue size'
               type: DEPENDENT
               key: 'mssql.non-local_db.redo_queue_size["{#GROUP_NAME}*{#REPLICA_NAME}*{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Amount of log records in the log files of the secondary replica that has not yet been redone.'
@@ -3485,7 +3258,6 @@ zabbix_export:
               name: 'MSSQL Cluster ''{#CLUSTER_NAME}'': Quorum state'
               type: DEPENDENT
               key: 'mssql.quorum.state.[{#CLUSTER_NAME}]'
-              delay: '0'
               history: 7d
               description: |
                 State of the WSFC quorum, one of:
@@ -3512,7 +3284,6 @@ zabbix_export:
               name: 'MSSQL Cluster ''{#CLUSTER_NAME}'': Quorum type'
               type: DEPENDENT
               key: 'mssql.quorum.type.[{#CLUSTER_NAME}]'
-              delay: '0'
               history: 7d
               description: |
                 Type of quorum used by this WSFC cluster, one of:
@@ -3558,7 +3329,6 @@ zabbix_export:
               name: 'MSSQL Cluster member ''{#MEMBER_NAME}'': Member state'
               type: DEPENDENT
               key: 'mssql.quorum_members.member_state.[{#MEMBER_NAME}]'
-              delay: '0'
               history: 7d
               description: |
                 The member state, one of:
@@ -3584,7 +3354,6 @@ zabbix_export:
               name: 'MSSQL Cluster member ''{#MEMBER_NAME}'': Member type'
               type: DEPENDENT
               key: 'mssql.quorum_members.member_type.[{#MEMBER_NAME}]'
-              delay: '0'
               history: 7d
               description: |
                 The type of member, one of:
@@ -3612,7 +3381,6 @@ zabbix_export:
               name: 'MSSQL Cluster member ''{#MEMBER_NAME}'': Number of quorum votes'
               type: DEPENDENT
               key: 'mssql.quorum_members.number_of_quorum_votes.[{#MEMBER_NAME}]'
-              delay: '0'
               history: 7d
               description: 'Number of quorum votes possessed by this quorum member.'
               preprocessing:
@@ -3649,7 +3417,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Replica ''{#REPLICA_NAME}'': Connected state'
               type: DEPENDENT
               key: 'mssql.replica.connected_state["{#GROUP_NAME}_{#REPLICA_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Whether a secondary replica is currently connected to the primary replica:
@@ -3679,7 +3446,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Replica ''{#REPLICA_NAME}'': Is local'
               type: DEPENDENT
               key: 'mssql.replica.is_local["{#GROUP_NAME}_{#REPLICA_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Whether the replica is local:
@@ -3707,7 +3473,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Replica ''{#REPLICA_NAME}'': Join state'
               type: DEPENDENT
               key: 'mssql.replica.join_state["{#GROUP_NAME}_{#REPLICA_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 0 = Not joined
@@ -3735,7 +3500,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Replica ''{#REPLICA_NAME}'': Operational state'
               type: DEPENDENT
               key: 'mssql.replica.operational_state["{#GROUP_NAME}_{#REPLICA_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Current operational state of the replica:
@@ -3805,7 +3569,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Replica ''{#REPLICA_NAME}'': Recovery health'
               type: DEPENDENT
               key: 'mssql.replica.recovery_health["{#GROUP_NAME}_{#REPLICA_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Rollup of the "database_state" column of the `sys.dm_hadr_database_replica_states` dynamic management view:
@@ -3846,7 +3609,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Replica ''{#REPLICA_NAME}'': Role'
               type: DEPENDENT
               key: 'mssql.replica.role["{#GROUP_NAME}_{#REPLICA_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Current Always On availability group role of a local replica or a connected remote replica:
@@ -3875,7 +3637,6 @@ zabbix_export:
               name: 'MSSQL AG ''{#GROUP_NAME}'' Replica ''{#REPLICA_NAME}'': Sync health'
               type: DEPENDENT
               key: 'mssql.replica.synchronization_health["{#GROUP_NAME}_{#REPLICA_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 Reflects a rollup of the database synchronization state (synchronization_state) of all joined availability databases (also known as replicas) and the availability mode of the replica (synchronous-commit or asynchronous-commit mode). The rollup will reflect the least healthy accumulated state of the databases on the replica:

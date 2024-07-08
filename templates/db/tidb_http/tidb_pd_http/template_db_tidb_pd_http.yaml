@@ -27,9 +27,7 @@ zabbix_export:
           name: 'PD: Get cluster metrics'
           type: DEPENDENT
           key: pd.cluster_status.get_metrics
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get cluster metrics.'
           preprocessing:
@@ -47,13 +45,10 @@ zabbix_export:
           type: HTTP_AGENT
           key: pd.get_metrics
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get TiDB PD instance metrics.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
             - type: PROMETHEUS_TO_JSON
               parameters:
                 - ''
@@ -66,13 +61,10 @@ zabbix_export:
           type: HTTP_AGENT
           key: pd.get_status
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get TiDB PD instance status info.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '{"status": "0"}'
           url: '{$PD.URL}:{$PD.PORT}/pd/api/v1/status'
@@ -85,7 +77,6 @@ zabbix_export:
           name: 'PD: gRPC Commands total, rate'
           type: DEPENDENT
           key: pd.grpc_command.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The rate at which gRPC commands are completed.'
@@ -95,8 +86,6 @@ zabbix_export:
                 - '$[?(@.name == "grpc_server_handling_seconds_count")].value.sum()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: pd.get_metrics
           tags:
@@ -106,9 +95,7 @@ zabbix_export:
           name: 'PD: Get gRPC command metrics'
           type: DEPENDENT
           key: pd.grpc_commands.get_metrics
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get gRPC command metrics.'
           preprocessing:
@@ -125,9 +112,7 @@ zabbix_export:
           name: 'PD: Get region metrics'
           type: DEPENDENT
           key: pd.regions.get_metrics
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get region metrics.'
           preprocessing:
@@ -144,9 +129,7 @@ zabbix_export:
           name: 'PD: Get region label metrics'
           type: DEPENDENT
           key: pd.region_labels.get_metrics
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get region label metrics.'
           preprocessing:
@@ -163,9 +146,7 @@ zabbix_export:
           name: 'PD: Get region status metrics'
           type: DEPENDENT
           key: pd.region_status.get_metrics
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get region status metrics.'
           preprocessing:
@@ -182,9 +163,7 @@ zabbix_export:
           name: 'PD: Get scheduler metrics'
           type: DEPENDENT
           key: pd.scheduler.get_metrics
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Get scheduler metrics.'
           preprocessing:
@@ -201,9 +180,7 @@ zabbix_export:
           name: 'PD: Status'
           type: DEPENDENT
           key: pd.status
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Status of PD instance.'
           valuemap:
@@ -234,7 +211,6 @@ zabbix_export:
           name: 'PD: Uptime'
           type: DEPENDENT
           key: pd.uptime
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: uptime
@@ -266,9 +242,7 @@ zabbix_export:
           name: 'PD: Version'
           type: DEPENDENT
           key: pd.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Version of the PD instance.'
           preprocessing:
@@ -306,7 +280,6 @@ zabbix_export:
               name: 'TiDB cluster: Number of regions'
               type: DEPENDENT
               key: 'pd.cluster_status.leader_count[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               description: 'The total count of cluster Regions.'
               preprocessing:
@@ -324,7 +297,6 @@ zabbix_export:
               name: 'TiDB cluster: Current peer count'
               type: DEPENDENT
               key: 'pd.cluster_status.region_count[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               description: 'The current count of all cluster peers.'
               preprocessing:
@@ -342,7 +314,6 @@ zabbix_export:
               name: 'TiDB cluster: Storage capacity'
               type: DEPENDENT
               key: 'pd.cluster_status.storage_capacity[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -365,7 +336,6 @@ zabbix_export:
               name: 'TiDB cluster: Storage size'
               type: DEPENDENT
               key: 'pd.cluster_status.storage_size[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -385,7 +355,6 @@ zabbix_export:
               name: 'TiDB cluster: Disconnect stores'
               type: DEPENDENT
               key: 'pd.cluster_status.store_disconnected[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               description: 'The count of disconnected stores.'
               preprocessing:
@@ -415,7 +384,6 @@ zabbix_export:
               name: 'TiDB cluster: Down stores'
               type: DEPENDENT
               key: 'pd.cluster_status.store_down[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               description: 'The count of down stores.'
               preprocessing:
@@ -445,7 +413,6 @@ zabbix_export:
               name: 'TiDB cluster: Lowspace stores'
               type: DEPENDENT
               key: 'pd.cluster_status.store_low_space[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               description: 'The count of low space stores.'
               preprocessing:
@@ -475,7 +442,6 @@ zabbix_export:
               name: 'TiDB cluster: Offline stores'
               type: DEPENDENT
               key: 'pd.cluster_status.store_offline[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               preprocessing:
                 - type: JSONPATH
@@ -495,7 +461,6 @@ zabbix_export:
               name: 'TiDB cluster: Tombstone stores'
               type: DEPENDENT
               key: 'pd.cluster_status.store_tombstone[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               description: 'The count of tombstone stores.'
               preprocessing:
@@ -516,7 +481,6 @@ zabbix_export:
               name: 'TiDB cluster: Unhealth stores'
               type: DEPENDENT
               key: 'pd.cluster_status.store_unhealth[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               description: 'The count of unhealthy stores.'
               preprocessing:
@@ -537,7 +501,6 @@ zabbix_export:
               name: 'TiDB cluster: Normal stores'
               type: DEPENDENT
               key: 'pd.cluster_status.store_up[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               description: 'The count of healthy storage instances.'
               preprocessing:
@@ -634,7 +597,6 @@ zabbix_export:
               name: 'PD: gRPC Commands: {#GRPC_METHOD}, rate'
               type: DEPENDENT
               key: 'pd.grpc_command.rate[{#GRPC_METHOD}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate per command type at which gRPC commands are completed.'
@@ -643,8 +605,6 @@ zabbix_export:
                   parameters:
                     - '$[?(@.labels.grpc_method == "{#GRPC_METHOD}")].value.first()'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: pd.grpc_commands.get_metrics
               tags:
@@ -684,7 +644,6 @@ zabbix_export:
               name: 'PD: Region heartbeat: error, rate'
               type: DEPENDENT
               key: 'pd.region_heartbeat.error.rate[{#STORE_ADDRESS}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The count of heartbeats with the error status per second.'
@@ -695,8 +654,6 @@ zabbix_export:
                   error_handler: CUSTOM_VALUE
                   error_handler_params: '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'pd.region_heartbeat.get_metrics[{#STORE_ADDRESS}]'
               tags:
@@ -708,9 +665,7 @@ zabbix_export:
               name: 'PD: Get metrics: {#STORE_ADDRESS}'
               type: DEPENDENT
               key: 'pd.region_heartbeat.get_metrics[{#STORE_ADDRESS}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Get region metrics for {#STORE_ADDRESS}.'
               preprocessing:
@@ -729,7 +684,6 @@ zabbix_export:
               name: 'PD: Region heartbeat: active, rate'
               type: DEPENDENT
               key: 'pd.region_heartbeat.ok.rate[{#STORE_ADDRESS}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The count of heartbeats with the ok status per second.'
@@ -740,8 +694,6 @@ zabbix_export:
                   error_handler: CUSTOM_VALUE
                   error_handler_params: '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'pd.region_heartbeat.get_metrics[{#STORE_ADDRESS}]'
               tags:
@@ -753,7 +705,6 @@ zabbix_export:
               name: 'PD: Region schedule push: total, rate'
               type: DEPENDENT
               key: 'pd.region_heartbeat.push.err.rate[{#STORE_ADDRESS}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               preprocessing:
@@ -763,8 +714,6 @@ zabbix_export:
                   error_handler: CUSTOM_VALUE
                   error_handler_params: '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'pd.region_heartbeat.get_metrics[{#STORE_ADDRESS}]'
               tags:
@@ -776,7 +725,6 @@ zabbix_export:
               name: 'PD: Region heartbeat: total, rate'
               type: DEPENDENT
               key: 'pd.region_heartbeat.rate[{#STORE_ADDRESS}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The count of heartbeats reported to PD per instance per second.'
@@ -787,8 +735,6 @@ zabbix_export:
                   error_handler: CUSTOM_VALUE
                   error_handler_params: '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'pd.region_heartbeat.get_metrics[{#STORE_ADDRESS}]'
               tags:
@@ -828,7 +774,6 @@ zabbix_export:
               name: 'TiDB cluster: Regions label: {#TYPE}'
               type: DEPENDENT
               key: 'pd.region_labels[{#TYPE}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of Regions in different label levels.'
@@ -869,7 +814,6 @@ zabbix_export:
               name: 'TiDB cluster: Regions status: {#TYPE}'
               type: DEPENDENT
               key: 'pd.region_status[{#TYPE}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The health status of Regions indicated via the count of unusual Regions including pending peers, down peers, extra peers, offline peers, missing peers, learner peers and incorrect namespaces.'
@@ -957,7 +901,6 @@ zabbix_export:
               name: 'TiDB cluster: Scheduler status: {#KIND}'
               type: DEPENDENT
               key: 'pd.scheduler[{#KIND}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The current running schedulers.'

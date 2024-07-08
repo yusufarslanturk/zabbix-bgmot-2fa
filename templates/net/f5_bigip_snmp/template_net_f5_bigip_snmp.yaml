@@ -27,7 +27,6 @@ zabbix_export:
           key: bigip.contact
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -79,7 +78,6 @@ zabbix_export:
           key: bigip.location
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -100,7 +98,6 @@ zabbix_export:
           key: bigip.model
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -125,7 +122,6 @@ zabbix_export:
           key: bigip.name
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -147,7 +143,6 @@ zabbix_export:
           key: bigip.product.build
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: F5-BIGIP-SYSTEM-MIB
@@ -166,7 +161,6 @@ zabbix_export:
           key: bigip.product.date
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: F5-BIGIP-SYSTEM-MIB
@@ -185,7 +179,6 @@ zabbix_export:
           key: bigip.product.edition
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: F5-BIGIP-SYSTEM-MIB
@@ -204,7 +197,6 @@ zabbix_export:
           key: bigip.product.name
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: F5-BIGIP-SYSTEM-MIB
@@ -223,7 +215,6 @@ zabbix_export:
           key: bigip.product.version
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: F5-BIGIP-SYSTEM-MIB
@@ -242,7 +233,6 @@ zabbix_export:
           key: bigip.serialnumber
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: F5-BIGIP-SYSTEM-MIB
@@ -1469,7 +1459,6 @@ zabbix_export:
               key: 'bigip.cpu.sensor.name[{#CPU.SENSOR.SLOT},{#CPU.SENSOR.INDEX}]'
               delay: 1h
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: F5-BIGIP-SYSTEM-MIB
@@ -1969,8 +1958,6 @@ zabbix_export:
                 The rate of bytes received on this interface.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2034,8 +2021,6 @@ zabbix_export:
                 The rate of multicast packets received on this interface.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2058,8 +2043,6 @@ zabbix_export:
                 The rate of packets received on this interface.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2082,8 +2065,6 @@ zabbix_export:
                 The rate of double tagged packets received on the specified interface.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2106,8 +2087,6 @@ zabbix_export:
                 The rate of bytes transmitted out of the specified interface.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2173,8 +2152,6 @@ zabbix_export:
                 The rate of multicast packets transmitted out of the specified interface.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2197,8 +2174,6 @@ zabbix_export:
                 The rate of packets transmitted out of the specified interface.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2221,8 +2196,6 @@ zabbix_export:
                 The rate of double tagged packets transmitted out of the specified interface.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2349,8 +2322,6 @@ zabbix_export:
                 The rate of bytes received by the specified node address from server-side.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2374,8 +2345,6 @@ zabbix_export:
                 The rate of packets received by the specified node address from server-side.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2399,8 +2368,6 @@ zabbix_export:
                 The rate of bytes sent to server-side from the specified node address.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2424,8 +2391,6 @@ zabbix_export:
                 The rate of packets sent to server-side from the specified node address.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2649,8 +2614,6 @@ zabbix_export:
                 The rate of bytes received by the specified pool from server-side.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2674,8 +2637,6 @@ zabbix_export:
                 The rate of packets received by the specified pool from server-side.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2699,8 +2660,6 @@ zabbix_export:
                 The rate of bytes sent to server-side from the specified pool.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2724,8 +2683,6 @@ zabbix_export:
                 The rate of packets sent to server-side from the specified pool.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2874,8 +2831,6 @@ zabbix_export:
                 The rate of bytes received by the specified virtual server from client-side.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2899,8 +2854,6 @@ zabbix_export:
                 The rate of packets received by the specified virtual server from client-side.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2924,8 +2877,6 @@ zabbix_export:
                 The rate of bytes sent to client-side from the specified virtual server.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2949,8 +2900,6 @@ zabbix_export:
                 The rate of packets sent to client-side from the specified virtual server.
               preprocessing:
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h

@@ -24,7 +24,6 @@ zabbix_export:
           type: INTERNAL
           key: 'zabbix[cluster,discovery,nodes]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The master item of Zabbix cluster statistics.'
           tags:
@@ -832,7 +831,6 @@ zabbix_export:
           type: INTERNAL
           key: 'zabbix[proxy,discovery]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The master item of Zabbix proxies'' statistics.'
           tags:
@@ -943,8 +941,6 @@ zabbix_export:
           description: 'The effectiveness statistics of Zabbix value cache. The number of cache hits (history values taken from the cache).'
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -958,8 +954,6 @@ zabbix_export:
           description: 'The effectiveness statistics of Zabbix value cache. The number of cache misses (history values taken from the database).'
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -990,7 +984,6 @@ zabbix_export:
           type: INTERNAL
           key: 'zabbix[version]'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'A version of Zabbix server.'
           preprocessing:
@@ -1116,8 +1109,6 @@ zabbix_export:
             The number of processed float values.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -1132,8 +1123,6 @@ zabbix_export:
             The number of processed log values.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -1148,8 +1137,6 @@ zabbix_export:
             The number of times the item processing resulted in an item becoming unsupported or keeping that state.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -1164,8 +1151,6 @@ zabbix_export:
             The number of processed character/string values.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -1180,8 +1165,6 @@ zabbix_export:
             The number of processed text values.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -1196,8 +1179,6 @@ zabbix_export:
             The number of processed numeric (unsigned) values.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -1212,8 +1193,6 @@ zabbix_export:
             The total number of values processed by Zabbix server or Zabbix proxy, except unsupported items.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: system
@@ -1229,9 +1208,7 @@ zabbix_export:
               name: 'Cluster node [{#NODE.NAME}]: Address'
               type: DEPENDENT
               key: 'zabbix.nodes.address[{#NODE.ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'The IPv4 address of a node.'
               preprocessing:
@@ -1254,7 +1231,6 @@ zabbix_export:
               name: 'Cluster node [{#NODE.NAME}]: Last access age'
               type: DEPENDENT
               key: 'zabbix.nodes.lastaccess.age[{#NODE.ID}]'
-              delay: '0'
               history: 7d
               units: uptime
               description: 'The time between the database''s `unix_timestamp()` and the last access time.'
@@ -1275,7 +1251,6 @@ zabbix_export:
               name: 'Cluster node [{#NODE.NAME}]: Last access time'
               type: DEPENDENT
               key: 'zabbix.nodes.lastaccess.time[{#NODE.ID}]'
-              delay: '0'
               history: 7d
               units: unixtime
               description: 'Last access time.'
@@ -1296,9 +1271,7 @@ zabbix_export:
               name: 'Cluster node [{#NODE.NAME}]: Stats'
               type: DEPENDENT
               key: 'zabbix.nodes.stats[{#NODE.ID}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Provides the statistics of a node.'
               preprocessing:
@@ -1320,7 +1293,6 @@ zabbix_export:
               name: 'Cluster node [{#NODE.NAME}]: Status'
               type: DEPENDENT
               key: 'zabbix.nodes.status[{#NODE.ID}]'
-              delay: '0'
               history: 7d
               description: 'The status of a node.'
               valuemap:
@@ -1370,7 +1342,6 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Certificate'
               type: DEPENDENT
               key: 'zabbix.proxy.cert[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
               description: 'The encryption status for connections from a proxy.'
               valuemap:
@@ -1396,7 +1367,6 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Compatibility'
               type: DEPENDENT
               key: 'zabbix.proxy.compatibility[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
               description: |
                 Version of proxy compared to Zabbix server version.
@@ -1445,7 +1415,6 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Compression'
               type: DEPENDENT
               key: 'zabbix.proxy.compression[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
               description: 'The compression status of a proxy.'
               valuemap:
@@ -1471,7 +1440,6 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Host count'
               type: DEPENDENT
               key: 'zabbix.proxy.hosts[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
               description: 'The number of enabled hosts assigned to a proxy.'
               preprocessing:
@@ -1492,7 +1460,6 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Item count'
               type: DEPENDENT
               key: 'zabbix.proxy.items[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
               description: 'The number of enabled items on enabled hosts assigned to a proxy.'
               preprocessing:
@@ -1513,7 +1480,6 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Last seen, in seconds'
               type: DEPENDENT
               key: 'zabbix.proxy.last_seen[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The time when a proxy was last seen by a server.'
@@ -1554,7 +1520,6 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Mode'
               type: DEPENDENT
               key: 'zabbix.proxy.mode[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
               description: 'The mode of Zabbix proxy.'
               valuemap:
@@ -1580,7 +1545,6 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: PSK'
               type: DEPENDENT
               key: 'zabbix.proxy.psk[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
               description: 'The encryption status for connections from a proxy.'
               valuemap:
@@ -1606,7 +1570,6 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Required VPS'
               type: DEPENDENT
               key: 'zabbix.proxy.requiredperformance[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!vps'
@@ -1629,9 +1592,7 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Stats'
               type: DEPENDENT
               key: 'zabbix.proxy.stats[{#PROXY.NAME}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'The statistics for the discovered proxy.'
               preprocessing:
@@ -1651,7 +1612,6 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Unencrypted'
               type: DEPENDENT
               key: 'zabbix.proxy.unencrypted[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
               description: 'The encryption status for connections from a proxy.'
               valuemap:
@@ -1677,9 +1637,7 @@ zabbix_export:
               name: 'Proxy [{#PROXY.NAME}]: Version'
               type: DEPENDENT
               key: 'zabbix.proxy.version[{#PROXY.NAME}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'A version of Zabbix proxy.'
               preprocessing:

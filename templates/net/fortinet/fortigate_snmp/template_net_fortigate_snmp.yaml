@@ -68,7 +68,6 @@ zabbix_export:
           key: 'ha.cluster.group_name[fgHaGroupName.0]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: FORTINET-FORTIGATE-MIB
@@ -122,7 +121,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.13.2.1.1]'
           key: ha.members.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering HA members from FORTINET-FORTIGATE-MIB.'
           tags:
@@ -173,7 +171,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.4.3.2.1]'
           key: hw.sensor.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering hardware sensors from FORTINET-FORTIGATE-MIB.'
           tags:
@@ -274,8 +271,6 @@ zabbix_export:
             Number of intrusions blocked per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: ips
@@ -286,7 +281,6 @@ zabbix_export:
           key: 'ips.database.version[fgSysVersionIps.0]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: FORTINET-FORTIGATE-MIB
@@ -310,8 +304,6 @@ zabbix_export:
             Number of intrusions detected as anomalies per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: ips
@@ -327,8 +319,6 @@ zabbix_export:
             Number of critical severity intrusions detected per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: ips
@@ -344,8 +334,6 @@ zabbix_export:
             Number of high severity intrusions detected per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: ips
@@ -361,8 +349,6 @@ zabbix_export:
             Number of info severity intrusions detected per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: ips
@@ -378,8 +364,6 @@ zabbix_export:
             Number of low severity intrusions detected per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: ips
@@ -395,8 +379,6 @@ zabbix_export:
             Number of medium severity intrusions detected per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: ips
@@ -412,8 +394,6 @@ zabbix_export:
             Number of intrusions detected by signature per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: ips
@@ -429,8 +409,6 @@ zabbix_export:
             Total number of intrusions detected per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           tags:
             - tag: component
               value: ips
@@ -440,7 +418,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.2.2.1.7,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.31.1.1.1.6,1.3.6.1.2.1.31.1.1.1.10,1.3.6.1.2.1.2.2.1.14,1.3.6.1.2.1.2.2.1.20,1.3.6.1.2.1.2.2.1.19,1.3.6.1.2.1.2.2.1.13,1.3.6.1.2.1.31.1.1.1.15]'
           key: net.if.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering interfaces from IF-MIB.'
           tags:
@@ -467,7 +444,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.4.9.2.1]'
           key: sdwan_health.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering SD-WAN health-checks from FORTINET-FORTIGATE-MIB.'
           tags:
@@ -477,9 +453,7 @@ zabbix_export:
           name: 'FortiGate: SNMP traps (fallback)'
           type: SNMP_TRAP
           key: snmptrap.fallback
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: LOG
           description: 'Used for collecting all SNMP traps unmatched by other `snmptrap` items.'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
@@ -493,7 +467,6 @@ zabbix_export:
           key: 'system.contact[sysContact.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -553,7 +526,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.4.4.2.1]'
           key: system.cpu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering CPU from FORTINET-FORTIGATE-MIB.'
           tags:
@@ -566,7 +538,6 @@ zabbix_export:
           key: 'system.descr[sysDescr.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -585,7 +556,6 @@ zabbix_export:
           key: system.hw.firmware
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: FORTINET-FORTIGATE-MIB
@@ -605,7 +575,6 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: ENTITY-MIB
@@ -625,7 +594,6 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: ENTITY-MIB
@@ -658,7 +626,6 @@ zabbix_export:
           key: 'system.location[sysLocation.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -678,7 +645,6 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -711,7 +677,6 @@ zabbix_export:
           key: 'system.objectid[sysObjectID.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -757,7 +722,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.3.2.1.1]'
           key: vdom.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering virtual domains from FORTINET-FORTIGATE-MIB.'
           tags:
@@ -953,7 +917,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.12.2.2.1.3,1.3.6.1.4.1.12356.101.12.2.2.1.20]'
           key: vpn.tunnel.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering VPN tunnels from FORTINET-FORTIGATE-MIB.'
           tags:
@@ -983,7 +946,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.14.4.3.1]'
           key: wireless.ap.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Used for discovering wireless access points from FORTINET-FORTIGATE-MIB.'
           tags:
@@ -1043,7 +1005,6 @@ zabbix_export:
               name: 'CPU Core {#CPU.ID}: Average system usage over 1min'
               type: DEPENDENT
               key: 'system.cpu.usage[fgProcessorSysUsage.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1067,7 +1028,6 @@ zabbix_export:
               name: 'CPU Core {#CPU.ID}: Average usage over 1min'
               type: DEPENDENT
               key: 'system.cpu.usage[fgProcessorUsage.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1091,7 +1051,6 @@ zabbix_export:
               name: 'CPU Core {#CPU.ID}: Average user usage over 1min'
               type: DEPENDENT
               key: 'system.cpu.usage[fgProcessorUserUsage.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1167,7 +1126,6 @@ zabbix_export:
               name: 'HA {#HA.ID}: Anti-virus events'
               type: DEPENDENT
               key: 'ha.av.events[fgHaStatsAvCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -1179,8 +1137,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.13.2.1.1.10.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: ha.members.walk
               tags:
@@ -1192,7 +1148,6 @@ zabbix_export:
               name: 'HA {#HA.ID}: Bytes processed'
               type: DEPENDENT
               key: 'ha.bytes.rate[fgHaStatsByteCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1205,8 +1160,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.13.2.1.1.8.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: ha.members.walk
               tags:
@@ -1218,9 +1171,7 @@ zabbix_export:
               name: 'HA {#HA.ID}: Global checksum'
               type: DEPENDENT
               key: 'ha.checksum.global[fgHaStatsGlobalChecksum.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -1244,7 +1195,6 @@ zabbix_export:
               name: 'HA {#HA.ID}: CPU usage'
               type: DEPENDENT
               key: 'ha.cpu.usage[fgHaStatsCpuUsage.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1267,9 +1217,7 @@ zabbix_export:
               name: 'HA {#HA.ID}: Hostname'
               type: DEPENDENT
               key: 'ha.hostname[fgHaStatsHostname.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -1293,7 +1241,6 @@ zabbix_export:
               name: 'HA {#HA.ID}: IPS events'
               type: DEPENDENT
               key: 'ha.ips.events[fgHaStatsIdsCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -1305,8 +1252,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.13.2.1.1.9.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: ha.members.walk
               tags:
@@ -1318,7 +1263,6 @@ zabbix_export:
               name: 'HA {#HA.ID}: Memory usage'
               type: DEPENDENT
               key: 'ha.mem.usage[fgHaStatsMemUsage.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1341,7 +1285,6 @@ zabbix_export:
               name: 'HA {#HA.ID}: Network bandwidth usage'
               type: DEPENDENT
               key: 'ha.net.usage[fgHaStatsNetUsage.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -1366,7 +1309,6 @@ zabbix_export:
               name: 'HA {#HA.ID}: Packets processed'
               type: DEPENDENT
               key: 'ha.packets.rate[fgHaStatsPktCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -1378,8 +1320,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.13.2.1.1.7.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: ha.members.walk
               tags:
@@ -1391,9 +1331,7 @@ zabbix_export:
               name: 'HA {#HA.ID}: Primary serial number'
               type: DEPENDENT
               key: 'ha.primary.serialnumber[fgHaStatsMasterSerial.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -1417,9 +1355,7 @@ zabbix_export:
               name: 'HA {#HA.ID}: Serial number'
               type: DEPENDENT
               key: 'ha.serialnumber[fgHaStatsSerial.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -1443,7 +1379,6 @@ zabbix_export:
               name: 'HA {#HA.ID}: Session count'
               type: DEPENDENT
               key: 'ha.session.count[fgHaStatsSesCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -1464,7 +1399,6 @@ zabbix_export:
               name: 'HA {#HA.ID}: Sync status'
               type: DEPENDENT
               key: 'ha.sync.status[fgHaStatsSyncStatus.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -1558,7 +1492,6 @@ zabbix_export:
               name: 'Sensor {#SENSOR.NAME}: Alarm status'
               type: DEPENDENT
               key: 'hw.sensor.status[fgHwSensorEntAlarmStatus.{#SENSOR.ID}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -1581,9 +1514,7 @@ zabbix_export:
               name: 'Sensor {#SENSOR.NAME}: Value'
               type: DEPENDENT
               key: 'hw.sensor.value[fgHwSensorEntValue.{#SENSOR.ID}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -1674,7 +1605,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets discarded'
               type: DEPENDENT
               key: 'net.if.in.discards[ifInDiscards.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1687,8 +1617,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: net.if.walk
               tags:
@@ -1702,7 +1630,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets with errors'
               type: DEPENDENT
               key: 'net.if.in.errors[ifInErrors.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1715,8 +1642,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: net.if.walk
               tags:
@@ -1730,7 +1655,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits received'
               type: DEPENDENT
               key: 'net.if.in[ifHCInOctets.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -1743,8 +1667,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1761,7 +1683,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets discarded'
               type: DEPENDENT
               key: 'net.if.out.discards[ifOutDiscards.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1786,7 +1707,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets with errors'
               type: DEPENDENT
               key: 'net.if.out.errors[ifOutErrors.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1799,8 +1719,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: net.if.walk
               tags:
@@ -1814,7 +1732,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits sent'
               type: DEPENDENT
               key: 'net.if.out[ifHCOutOctets.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -1827,8 +1744,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1845,7 +1760,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Speed'
               type: DEPENDENT
               key: 'net.if.speed[ifHighSpeed.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -1878,7 +1792,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Operational status'
               type: DEPENDENT
               key: 'net.if.status[ifOperStatus.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1928,7 +1841,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Interface type'
               type: DEPENDENT
               key: 'net.if.type[ifType.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -2114,7 +2026,6 @@ zabbix_export:
               name: 'SD-WAN [{#HNAME}]:[{#IFNAME}]: Jitter'
               type: DEPENDENT
               key: 'sdwan_health.jitter[fgVWLHealthCheckLinkJitter.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2139,7 +2050,6 @@ zabbix_export:
               name: 'SD-WAN [{#HNAME}]:[{#IFNAME}]: Latency'
               type: DEPENDENT
               key: 'sdwan_health.latency[fgVWLHealthCheckLinkLatency.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2164,7 +2074,6 @@ zabbix_export:
               name: 'SD-WAN [{#HNAME}]:[{#IFNAME}]: Packets loss'
               type: DEPENDENT
               key: 'sdwan_health.loss[fgVWLHealthCheckLinkPacketLoss.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -2199,7 +2108,6 @@ zabbix_export:
               name: 'SD-WAN [{#HNAME}]:[{#IFNAME}]: Packets received per second'
               type: DEPENDENT
               key: 'sdwan_health.received[fgVWLHealthCheckLinkPacketRecv.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -2211,8 +2119,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.4.9.2.1.8.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: sdwan_health.walk
               tags:
@@ -2226,7 +2132,6 @@ zabbix_export:
               name: 'SD-WAN [{#HNAME}]:[{#IFNAME}]: Packets sent per second'
               type: DEPENDENT
               key: 'sdwan_health.sent[fgVWLHealthCheckLinkPacketSend.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -2238,8 +2143,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.4.9.2.1.7.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: sdwan_health.walk
               tags:
@@ -2253,7 +2156,6 @@ zabbix_export:
               name: 'SD-WAN [{#HNAME}]:[{#IFNAME}]: Health check state'
               type: DEPENDENT
               key: 'sdwan_health.state[fgVWLHealthCheckLinkState.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -2358,7 +2260,6 @@ zabbix_export:
               name: 'SoC3 {#CPU.ID}: Packets dropped'
               type: DEPENDENT
               key: 'soc3.np6lite.pkt.dropped[fgProcessorPktDroppedCount.{#CPU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -2370,8 +2271,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.4.4.2.1.8.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: system.cpu.walk
               tags:
@@ -2383,7 +2282,6 @@ zabbix_export:
               name: 'SoC3 {#CPU.ID}: Packets received'
               type: DEPENDENT
               key: 'soc3.np6lite.pkt.received[fgProcessorPktRxCount.{#CPU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -2395,8 +2293,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.4.4.2.1.6.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: system.cpu.walk
               tags:
@@ -2408,7 +2304,6 @@ zabbix_export:
               name: 'SoC3 {#CPU.ID}: Packets transmitted'
               type: DEPENDENT
               key: 'soc3.np6lite.pkt.transmitted[fgProcessorPktRxCount.{#CPU.ID}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -2420,8 +2315,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.4.4.2.1.7.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: system.cpu.walk
               tags:
@@ -2483,7 +2376,6 @@ zabbix_export:
               name: 'VDOM {#VDOM.NAME}: CPU usage'
               type: DEPENDENT
               key: 'vdom.cpu.usage[fgVdEntCpuUsage.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -2508,7 +2400,6 @@ zabbix_export:
               name: 'VDOM {#VDOM.NAME}: HA member state'
               type: DEPENDENT
               key: 'vdom.ha.state[fgVdEntHaState.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -2532,7 +2423,6 @@ zabbix_export:
               name: 'VDOM {#VDOM.NAME}: Memory usage'
               type: DEPENDENT
               key: 'vdom.mem.usage[fgVdEntCpuUsage.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -2557,7 +2447,6 @@ zabbix_export:
               name: 'VDOM {#VDOM.NAME}: Operation mode'
               type: DEPENDENT
               key: 'vdom.op_mode[fgVdEntOpMode.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -2581,7 +2470,6 @@ zabbix_export:
               name: 'VDOM {#VDOM.NAME}: Sessions rate'
               type: DEPENDENT
               key: 'vdom.sessions.rate[fgVdEntSesRate.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -2603,7 +2491,6 @@ zabbix_export:
               name: 'VDOM {#VDOM.NAME}: Active sessions'
               type: DEPENDENT
               key: 'vdom.sessions[fgVdEntSesCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -2656,7 +2543,6 @@ zabbix_export:
               name: 'VPN {#VPN.NAME}: Tunnel Status'
               type: DEPENDENT
               key: 'vpn.tunnel.status[fgVpnTunEntStatus.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -2724,7 +2610,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Administrative status'
               type: DEPENDENT
               key: 'wc.admin.status[fgWcWtpConfigWtpAdmin.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -2754,7 +2639,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Background scan'
               type: DEPENDENT
               key: 'wc.background.scan[fgWcWtpConfigRadioApScan.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -2778,9 +2662,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Base MAC Address'
               type: DEPENDENT
               key: 'wc.base.mac[fgWcWtpSessionWtpBaseMacAddress.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -2805,9 +2687,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Bootloader version'
               type: DEPENDENT
               key: 'wc.boot.version[fgWcWtpSessionWtpBootVersion.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -2831,7 +2711,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Connected clients'
               type: DEPENDENT
               key: 'wc.clients.num[fgWcWtpSessionWtpStationCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -2852,7 +2731,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Connection status'
               type: DEPENDENT
               key: 'wc.conn.status[fgWcWtpSessionConnectionState.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -2929,7 +2807,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: CPU usage'
               type: DEPENDENT
               key: 'wc.cpu.usage[fgWcWtpSessionWtpCpuUsage.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -2967,7 +2844,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Daemon uptime'
               type: DEPENDENT
               key: 'wc.daemon.uptime[fgWcWtpSessionWtpDaemonUpTime.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: uptime
               description: |
@@ -2992,9 +2868,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Hardware version'
               type: DEPENDENT
               key: 'wc.hardware.version[fgWcWtpSessionWtpHwVersion.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -3018,9 +2892,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: IP Address'
               type: DEPENDENT
               key: 'wc.ip.addr[fgWcWtpSessionWtpIpAddress.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -3044,7 +2916,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: IP Address type'
               type: DEPENDENT
               key: 'wc.ip.type[fgWcWtpSessionWtpIpAddressType.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -3071,9 +2942,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Local IP Address'
               type: DEPENDENT
               key: 'wc.local_ip.addr[fgWcWtpSessionWtpLocalIpAddress.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -3098,7 +2967,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Local IP Address type'
               type: DEPENDENT
               key: 'wc.local_ip.type[fgWcWtpSessionWtpLocalIpAddressType.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -3125,9 +2993,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Location'
               type: DEPENDENT
               key: 'wc.location[fgWcWtpConfigWtpLocation.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -3151,7 +3017,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Memory capacity'
               type: DEPENDENT
               key: 'wc.mem.size[fgWcWtpSessionWtpMemoryCapacity.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: B
               description: |
@@ -3181,7 +3046,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Memory usage'
               type: DEPENDENT
               key: 'wc.mem.usage[fgWcWtpSessionWtpMemoryUsage.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -3220,9 +3084,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Model number'
               type: DEPENDENT
               key: 'wc.model[fgWcWtpSessionWtpModelNumber.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -3246,9 +3108,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Profile name'
               type: DEPENDENT
               key: 'wc.profile[fgWcWtpConfigWtpProfile.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -3272,7 +3132,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Radio ATPC high limit'
               type: DEPENDENT
               key: 'wc.radio.atpc.high_limit[fgWcWtpConfigRadioAutoTxPowerHigh.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: '!dBm'
               description: |
@@ -3297,7 +3156,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Radio ATPC low limit'
               type: DEPENDENT
               key: 'wc.radio.atpc.low_limit[fgWcWtpConfigRadioAutoTxPowerLow.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: '!dBm'
               description: |
@@ -3322,7 +3180,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Radio ATPC status'
               type: DEPENDENT
               key: 'wc.radio.atpc.status[fgWcWtpConfigRadioAutoTxPowerControl.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -3349,7 +3206,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Radio band'
               type: DEPENDENT
               key: 'wc.radio.band[fgWcWtpConfigRadioBand.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -3376,7 +3232,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Radio enabled'
               type: DEPENDENT
               key: 'wc.radio.enabled[fgWcWtpConfigRadioEnable.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -3403,7 +3258,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Radio TX power level'
               type: DEPENDENT
               key: 'wc.radio.power_level[fgWcWtpConfigRadioTxPowerLevel.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -3429,7 +3283,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Bits received'
               type: DEPENDENT
               key: 'wc.rate.in[fgWcWtpSessionWtpByteRxCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: bps
@@ -3442,8 +3295,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.14.4.4.1.18.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -3458,7 +3309,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Bits sent'
               type: DEPENDENT
               key: 'wc.rate.out[fgWcWtpSessionWtpByteTxCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: bps
@@ -3471,8 +3321,6 @@ zabbix_export:
                     - '1.3.6.1.4.1.12356.101.14.4.4.1.19.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -3487,9 +3335,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Region code'
               type: DEPENDENT
               key: 'wc.region_code[fgWcWtpSessionWtpRegionCode.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -3513,7 +3359,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Session uptime'
               type: DEPENDENT
               key: 'wc.session.uptime[fgWcWtpSessionWtpSessionUpTime.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: uptime
               description: |
@@ -3549,9 +3394,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Software version'
               type: DEPENDENT
               key: 'wc.software.version[fgWcWtpSessionWtpSwVersion.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
@@ -3575,7 +3418,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: Uptime'
               type: DEPENDENT
               key: 'wc.uptime[fgWcWtpSessionWtpUpTime.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: uptime
               description: |
@@ -3600,7 +3442,6 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: All VAPs selected'
               type: DEPENDENT
               key: 'wc.vaps.all[fgWcWtpConfigVapAll.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -3624,9 +3465,7 @@ zabbix_export:
               name: 'WTP {#WC.NAME}: VAPs list'
               type: DEPENDENT
               key: 'wc.vaps.list[fgWcWtpConfigVaps.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: FORTINET-FORTIGATE-MIB

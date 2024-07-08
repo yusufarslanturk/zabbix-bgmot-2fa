@@ -31,7 +31,6 @@ zabbix_export:
           name: 'MongoDB cluster: Configserver heartbeat'
           type: DEPENDENT
           key: mongodb.config_server_heartbeat
-          delay: '0'
           history: 7d
           units: s
           description: 'Difference between the latest optime of the CSRS primary that the mongos has seen and cluster time.'
@@ -50,7 +49,6 @@ zabbix_export:
           name: 'MongoDB cluster: Connections, active'
           type: DEPENDENT
           key: mongodb.connections.active
-          delay: '0'
           history: 7d
           description: |
             The number of active client connections to the server.
@@ -71,7 +69,6 @@ zabbix_export:
           name: 'MongoDB cluster: Connections, available'
           type: DEPENDENT
           key: mongodb.connections.available
-          delay: '0'
           history: 7d
           description: '"The number of unused incoming connections available."'
           preprocessing:
@@ -99,7 +96,6 @@ zabbix_export:
           name: 'MongoDB cluster: Connections, current'
           type: DEPENDENT
           key: mongodb.connections.current
-          delay: '0'
           history: 7d
           description: |
             The number of incoming connections from clients to the database server.
@@ -117,7 +113,6 @@ zabbix_export:
           name: 'MongoDB cluster: New connections, rate'
           type: DEPENDENT
           key: mongodb.connections.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: '"Rate of all incoming connections created to the server."'
@@ -126,8 +121,6 @@ zabbix_export:
               parameters:
                 - $.connections.totalCreated
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -137,7 +130,6 @@ zabbix_export:
           name: 'MongoDB cluster: Connection pool: available'
           type: DEPENDENT
           key: mongodb.connection_pool.available
-          delay: '0'
           history: 7d
           description: 'The total number of available outgoing connections from the current mongos instance to other members of the sharded cluster.'
           preprocessing:
@@ -153,7 +145,6 @@ zabbix_export:
           name: 'MongoDB cluster: Connection pool: client connections'
           type: DEPENDENT
           key: mongodb.connection_pool.client
-          delay: '0'
           history: 7d
           description: 'The number of active and stored outgoing synchronous connections from the current mongos instance to other members of the sharded cluster.'
           preprocessing:
@@ -169,7 +160,6 @@ zabbix_export:
           name: 'MongoDB cluster: Connection pool: created, rate'
           type: DEPENDENT
           key: mongodb.connection_pool.created.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The total number of outgoing connections created per second by the current mongos instance to other members of the sharded cluster.'
@@ -178,8 +168,6 @@ zabbix_export:
               parameters:
                 - $.totalCreated
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.connpool.stats["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -189,7 +177,6 @@ zabbix_export:
           name: 'MongoDB cluster: Connection pool: in use'
           type: DEPENDENT
           key: mongodb.connection_pool.in_use
-          delay: '0'
           history: 7d
           description: 'Reports the total number of outgoing connections from the current mongos instance to other members of the sharded cluster set that are currently in use.'
           preprocessing:
@@ -205,7 +192,6 @@ zabbix_export:
           name: 'MongoDB cluster: Connection pool: refreshing'
           type: DEPENDENT
           key: mongodb.connection_pool.refreshing
-          delay: '0'
           history: 7d
           description: 'Reports the total number of outgoing connections from the current mongos instance to other members of the sharded cluster that are currently being refreshed.'
           preprocessing:
@@ -221,7 +207,6 @@ zabbix_export:
           name: 'MongoDB cluster: Connection pool: scoped'
           type: DEPENDENT
           key: mongodb.connection_pool.scoped
-          delay: '0'
           history: 7d
           description: 'Number of active and stored outgoing scoped synchronous connections from the current mongos instance to other members of the sharded cluster.'
           preprocessing:
@@ -237,7 +222,6 @@ zabbix_export:
           name: 'MongoDB cluster: Get mongodb.connpool.stats'
           key: 'mongodb.connpool.stats["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Returns current info about connpool.stats.'
           tags:
@@ -249,7 +233,6 @@ zabbix_export:
           name: 'MongoDB cluster: Cursor: open pinned'
           type: DEPENDENT
           key: mongodb.cursor.open.pinned
-          delay: '0'
           history: 7d
           description: 'Number of pinned open cursors.'
           preprocessing:
@@ -265,7 +248,6 @@ zabbix_export:
           name: 'MongoDB cluster: Cursor: open total'
           type: DEPENDENT
           key: mongodb.cursor.open.total
-          delay: '0'
           history: 7d
           description: 'Number of cursors that MongoDB is maintaining for clients.'
           preprocessing:
@@ -290,7 +272,6 @@ zabbix_export:
           name: 'MongoDB cluster: Cursor: timed out, rate'
           type: DEPENDENT
           key: mongodb.cursor.timed_out.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of cursors that time out, per second.'
@@ -299,8 +280,6 @@ zabbix_export:
               parameters:
                 - $.metrics.cursor.timedOut
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -327,7 +306,6 @@ zabbix_export:
           name: 'MongoDB cluster: Last seen configserver'
           type: DEPENDENT
           key: mongodb.last_seen_config_server
-          delay: '0'
           history: 7d
           units: unixtime
           description: 'The latest optime of the CSRS primary that the mongos has seen.'
@@ -344,7 +322,6 @@ zabbix_export:
           name: 'MongoDB cluster: Architecture'
           type: DEPENDENT
           key: mongodb.mem.bits
-          delay: '0'
           history: 7d
           units: bit
           description: 'A number, either 64 or 32, that indicates whether the MongoDB instance is compiled for 64-bit or 32-bit architecture.'
@@ -364,7 +341,6 @@ zabbix_export:
           name: 'MongoDB cluster: Memory: resident'
           type: DEPENDENT
           key: mongodb.mem.resident
-          delay: '0'
           history: 7d
           units: B
           description: 'Amount of memory currently used by the database process.'
@@ -384,7 +360,6 @@ zabbix_export:
           name: 'MongoDB cluster: Memory: virtual'
           type: DEPENDENT
           key: mongodb.mem.virtual
-          delay: '0'
           history: 7d
           units: B
           description: 'Amount of virtual memory used by the mongos process.'
@@ -404,7 +379,6 @@ zabbix_export:
           name: 'MongoDB cluster: Cursor: open no timeout'
           type: DEPENDENT
           key: mongodb.metrics.cursor.open.no_timeout
-          delay: '0'
           history: 7d
           description: 'Number of open cursors with the option DBQuery.Option.noTimeout set to prevent timeout after a period of inactivity.'
           preprocessing:
@@ -421,7 +395,6 @@ zabbix_export:
           name: 'MongoDB cluster: Bytes in, rate'
           type: DEPENDENT
           key: mongodb.network.bytes_in.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The total number of bytes that the server has received over network connections initiated by clients or other mongod/mongos instances per second.'
@@ -430,8 +403,6 @@ zabbix_export:
               parameters:
                 - $.network.bytesIn
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -441,7 +412,6 @@ zabbix_export:
           name: 'MongoDB cluster: Bytes out, rate'
           type: DEPENDENT
           key: mongodb.network.bytes_out.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -451,8 +421,6 @@ zabbix_export:
               parameters:
                 - $.network.bytesOut
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -462,7 +430,6 @@ zabbix_export:
           name: 'MongoDB cluster: Requests, rate'
           type: DEPENDENT
           key: mongodb.network.numRequests.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!Rps'
@@ -472,8 +439,6 @@ zabbix_export:
               parameters:
                 - $.network.numRequests
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -483,7 +448,6 @@ zabbix_export:
           name: 'MongoDB cluster: Operations: command'
           type: DEPENDENT
           key: mongodb.opcounters.command.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -494,8 +458,6 @@ zabbix_export:
               parameters:
                 - $.opcounters.command
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -505,7 +467,6 @@ zabbix_export:
           name: 'MongoDB cluster: Operations: delete'
           type: DEPENDENT
           key: mongodb.opcounters.delete.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of delete operations the mongos instance per second.'
@@ -514,8 +475,6 @@ zabbix_export:
               parameters:
                 - $.opcounters.delete
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -525,7 +484,6 @@ zabbix_export:
           name: 'MongoDB cluster: Operations: getmore, rate'
           type: DEPENDENT
           key: mongodb.opcounters.getmore.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -536,8 +494,6 @@ zabbix_export:
               parameters:
                 - $.opcounters.getmore
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -547,7 +503,6 @@ zabbix_export:
           name: 'MongoDB cluster: Operations: insert, rate'
           type: DEPENDENT
           key: mongodb.opcounters.insert.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of insert operations received the mongos instance per second.'
@@ -556,8 +511,6 @@ zabbix_export:
               parameters:
                 - $.opcounters.insert
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -567,7 +520,6 @@ zabbix_export:
           name: 'MongoDB cluster: Operations: query, rate'
           type: DEPENDENT
           key: mongodb.opcounters.query.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of queries received the mongos instance per second.'
@@ -576,8 +528,6 @@ zabbix_export:
               parameters:
                 - $.opcounters.query
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -587,7 +537,6 @@ zabbix_export:
           name: 'MongoDB cluster: Operations: update, rate'
           type: DEPENDENT
           key: mongodb.opcounters.update.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of update operations the mongos instance per second.'
@@ -596,8 +545,6 @@ zabbix_export:
               parameters:
                 - $.opcounters.update
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           tags:
@@ -631,7 +578,6 @@ zabbix_export:
           name: 'MongoDB cluster: Get server status'
           key: 'mongodb.server.status["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'The mongos statistic'
           tags:
@@ -641,7 +587,6 @@ zabbix_export:
           name: 'MongoDB cluster: Uptime'
           type: DEPENDENT
           key: mongodb.uptime
-          delay: '0'
           history: 7d
           units: s
           description: 'Number of seconds since the Mongos server start.'
@@ -682,9 +627,7 @@ zabbix_export:
           name: 'MongoDB cluster: Mongos version'
           type: DEPENDENT
           key: mongodb.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Version of the Mongos server'
           preprocessing:
@@ -760,7 +703,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}.{#COLLECTION}: Objects, avg size'
               type: DEPENDENT
               key: 'mongodb.collection.avg_obj_size["{#DBNAME}","{#COLLECTION}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -783,9 +725,7 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}.{#COLLECTION}: Capped'
               type: DEPENDENT
               key: 'mongodb.collection.capped["{#DBNAME}","{#COLLECTION}"]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'Whether or not the collection is capped.'
               valuemap:
@@ -795,8 +735,6 @@ zabbix_export:
                   parameters:
                     - $.capped
                 - type: BOOL_TO_DECIMAL
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3h
@@ -813,7 +751,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}.{#COLLECTION}: Objects, count'
               type: DEPENDENT
               key: 'mongodb.collection.count["{#DBNAME}","{#COLLECTION}"]'
-              delay: '0'
               history: 7d
               description: 'Total number of objects in the collection.'
               preprocessing:
@@ -833,7 +770,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}.{#COLLECTION}: Capped, max number'
               type: DEPENDENT
               key: 'mongodb.collection.max["{#DBNAME}","{#COLLECTION}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Maximum number of documents in a capped collection.'
@@ -855,7 +791,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}.{#COLLECTION}: Capped, max size'
               type: DEPENDENT
               key: 'mongodb.collection.max_size["{#DBNAME}","{#COLLECTION}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Maximum size of a capped collection in bytes.'
@@ -877,7 +812,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}.{#COLLECTION}: Indexes'
               type: DEPENDENT
               key: 'mongodb.collection.nindexes["{#DBNAME}","{#COLLECTION}"]'
-              delay: '0'
               history: 7d
               description: 'Total number of indices on the collection.'
               preprocessing:
@@ -897,7 +831,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}.{#COLLECTION}: Size'
               type: DEPENDENT
               key: 'mongodb.collection.size["{#DBNAME}","{#COLLECTION}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'The total size in bytes of the data in the collection plus the size of every indexes on the mongodb.collection.'
@@ -918,7 +851,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}.{#COLLECTION}: Get collection stats {#DBNAME}.{#COLLECTION}'
               key: 'mongodb.collection.stats["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}","{#DBNAME}","{#COLLECTION}"]'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Returns a variety of storage statistics for a given collection.'
               tags:
@@ -932,7 +864,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}.{#COLLECTION}: Storage size'
               type: DEPENDENT
               key: 'mongodb.collection.storage_size["{#DBNAME}","{#COLLECTION}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Total storage space allocated to this collection for document storage.'
@@ -971,7 +902,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}: Size, data'
               type: DEPENDENT
               key: 'mongodb.db.data_size["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Total size of the data held in this database including the padding factor.'
@@ -990,7 +920,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}: Extents'
               type: DEPENDENT
               key: 'mongodb.db.extents["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: 'Contains a count of the number of extents in the database across all collections.'
               preprocessing:
@@ -1009,7 +938,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}: Size, file'
               type: DEPENDENT
               key: 'mongodb.db.file_size["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Total size of the data held in this database including the padding factor (only available with the mmapv1 storage engine).'
@@ -1029,7 +957,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}: Size, index'
               type: DEPENDENT
               key: 'mongodb.db.index_size["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Total size of all indexes created on this database.'
@@ -1048,7 +975,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}: Objects, count'
               type: DEPENDENT
               key: 'mongodb.db.objects["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               description: 'Number of objects (documents) in the database across all collections.'
               preprocessing:
@@ -1066,7 +992,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}: Objects, avg size'
               type: DEPENDENT
               key: 'mongodb.db.size["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1086,7 +1011,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}: Get db stats {#DBNAME}'
               key: 'mongodb.db.stats["{$MONGODB.CONNSTRING}","{$MONGODB.USER}","{$MONGODB.PASSWORD}","{#DBNAME}"]'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Returns statistics reflecting the database system''s state.'
               tags:
@@ -1100,7 +1024,6 @@ zabbix_export:
               name: 'MongoDB {#DBNAME}: Size, storage'
               type: DEPENDENT
               key: 'mongodb.db.storage_size["{#DBNAME}"]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Total amount of space allocated to collections in this database for document storage.'

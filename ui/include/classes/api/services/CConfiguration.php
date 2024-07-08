@@ -284,9 +284,7 @@ class CConfiguration extends CApiService {
 		$data = (new CDefaultImportConverter($schema))->convert($data);
 
 		// Normalize array keys and strings.
-		$data = (new CImportDataNormalizer($schema))
-			->setValueMode(CXmlConstantValue::class)
-			->normalize($data);
+		$data = (new CImportDataNormalizer($schema))->normalize($data);
 
 		$adapter = new CImportDataAdapter();
 		$adapter->load($data);
@@ -349,7 +347,7 @@ class CConfiguration extends CApiService {
 
 		// Normalize array keys and strings.
 		$data = (new CImportDataNormalizer($schema))
-			->setValueMode(CXmlConstantName::class)
+			->setPreview(true)
 			->normalize($data);
 
 		$adapter = new CImportDataAdapter();
@@ -475,7 +473,7 @@ class CConfiguration extends CApiService {
 
 		// Normalize array keys and strings.
 		$export = (new CImportDataNormalizer($schema))
-			->setValueMode(CXmlConstantName::class)
+			->setPreview(true)
 			->normalize($export);
 
 		$export = $export['zabbix_export'];
