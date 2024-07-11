@@ -1540,7 +1540,7 @@ class testFormAction extends CLegacyWebTest {
 			$this->assertEquals(1, CDBHelper::getCount($sql), 'Action has not been created in the DB.');
 
 			$this->query('link', $data['name'])->waitUntilClickable()->one()->click();
-			$dialog = COverlayDialogElement::find()->waitUntilReady();
+			COverlayDialogElement::find()->waitUntilReady();
 
 			if (array_key_exists('conditions', $data)) {
 				$condition_table = $this->query('id:conditionTable')->waitUntilVisible()->asTable()->one();
