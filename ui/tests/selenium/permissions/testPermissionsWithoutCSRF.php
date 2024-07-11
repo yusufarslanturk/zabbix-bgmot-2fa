@@ -25,7 +25,7 @@ require_once dirname(__FILE__).'/../behaviors/CMessageBehavior.php';
 /**
  * @backup token, connector
  *
- * @dataSource ScheduledReports, Proxies, Services, Sla
+ * @dataSource ScheduledReports, Proxies, Services, Sla, NetworkDiscovery
  *
  * @onBefore prepareData
  */
@@ -307,7 +307,7 @@ class testPermissionsWithoutCSRF extends CWebTest {
 			[
 				[
 					'db' => 'SELECT * FROM drules',
-					'link' => 'zabbix.php?action=discovery.edit&druleid=5',
+					'link' => 'zabbix.php?action=discovery.edit&druleid=11',
 					'return_button' => true
 				]
 			],
