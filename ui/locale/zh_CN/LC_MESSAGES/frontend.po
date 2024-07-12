@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-06-27 02:37+0000\n"
+"PO-Revision-Date: 2024-07-12 10:59+0000\n"
 "Last-Translator: NoYoWiFi <1284524409@qq.com>\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
 "Language: zh_CN\n"
@@ -657,7 +657,7 @@ msgstr "动作分组 %1$s 必须扩展 %2$s 分组。"
 #: app/controllers/CControllerActionDelete.php:79
 msgid "Action deleted"
 msgid_plural "Actions deleted"
-msgstr[0] "动作已删除"
+msgstr[0] ""
 
 #: app/controllers/CControllerActionDisable.php:84
 msgid "Action disabled"
@@ -2390,7 +2390,7 @@ msgstr "无法删除Zabbix内部用户 \"%1$s\", 试试停用这个用户."
 #: app/controllers/CControllerActionDelete.php:87
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
-msgstr[0] "无法删除动作"
+msgstr[0] ""
 
 #: include/classes/api/services/CRole.php:368
 #, c-format
@@ -3328,7 +3328,7 @@ msgstr "没有where条件，无法对表 \"%1$s\" 执行update语句。"
 #: app/controllers/CControllerUserProvision.php:69
 msgid "Cannot provision user"
 msgid_plural "Cannot provision users"
-msgstr[0] "无法配置用户"
+msgstr[0] "无法预配置用户"
 
 #: include/classes/import/readers/CJsonImportReader.php:35
 #, c-format
@@ -4528,7 +4528,7 @@ msgstr "配置数据库连接"
 #: app/views/administration.authentication.edit.php:423
 #: app/views/popup.ldap.edit.php:119
 msgid "Configure JIT provisioning"
-msgstr "配置准时(JIT)服务开通"
+msgstr "配置即时供应"
 
 #: app/views/js/administration.authentication.edit.js.php:82
 msgid "Confirm changes"
@@ -6131,20 +6131,20 @@ msgstr "将被弃用的参数“%1$s”不能与“%2$s”一起使用。"
 
 #: app/views/administration.authentication.edit.php:52
 msgid "Deprovisioned users group"
-msgstr "取消配置的用户组"
+msgstr "取消预配置的用户组"
 
 #: include/classes/api/services/CUserGroup.php:1002
 msgid "Deprovisioned users group cannot be deleted."
-msgstr "无法删除已取消配置的用户组。"
+msgstr "取消预配置的用户组不能被删除。"
 
 #: include/classes/api/services/CAuthentication.php:215
 msgid "Deprovisioned users group cannot be empty."
-msgstr "取消配置的用户组不能为空。"
+msgstr "取消预配置的用户组不能为空。"
 
 #: include/classes/api/services/CAuthentication.php:205
 #: include/classes/api/services/CUserGroup.php:321
 msgid "Deprovisioned users group cannot be enabled."
-msgstr "无法启用已取消配置的用户组。"
+msgstr "取消预配置的用户组不能被启用。"
 
 #: app/controllers/CControllerAuditLogList.php:290
 #: app/partials/configuration.host.edit.html.php:252
@@ -6999,7 +6999,7 @@ msgstr "所有用户使用HTTP认证方式"
 #: app/views/administration.authentication.edit.php:208
 #: app/views/administration.authentication.edit.php:282
 msgid "Enable JIT provisioning"
-msgstr "启用准时(JIT)服务开通"
+msgstr "启用即时供应"
 
 #: app/views/administration.authentication.edit.php:199
 msgid "Enable LDAP authentication"
@@ -7011,7 +7011,7 @@ msgstr "启用SAML身份验证"
 
 #: app/views/administration.authentication.edit.php:549
 msgid "Enable SCIM provisioning"
-msgstr "启用 SCIM 配置"
+msgstr "启用 SCIM 供应"
 
 #: app/views/administration.audit.settings.edit.php:44
 msgid "Enable audit logging"
@@ -7529,7 +7529,7 @@ msgstr "过期时间小于"
 
 #: app/views/popup.generic.php:577 include/graphs.inc.php:27
 msgid "Exploded"
-msgstr "爆发的"
+msgstr "爆炸饼图"
 
 #: include/classes/html/CButtonExport.php:32
 msgid "Export"
@@ -10719,11 +10719,11 @@ msgstr "无效的JSON. 当解析JSON文字时, 在服务器端发生了一个错
 
 #: app/controllers/CControllerAuthenticationUpdate.php:165
 msgid "Invalid LDAP JIT provisioning media type mapping configuration."
-msgstr "无效的 LDAP 准时(JIT)服务开通媒介类型映射配置。"
+msgstr "LDAP 即时供应媒体类型映射配置无效。"
 
 #: app/controllers/CControllerAuthenticationUpdate.php:158
 msgid "Invalid LDAP JIT provisioning user group mapping configuration."
-msgstr "无效的 LDAP准时(JIT)服务开通用户组映射配置。"
+msgstr "LDAP 即时供应用户组映射配置无效。"
 
 #: app/controllers/CControllerPopupLdapCheck.php:75
 #: app/controllers/CControllerPopupLdapEdit.php:68
@@ -10734,11 +10734,11 @@ msgstr "LDAP 配置无效"
 
 #: app/controllers/CControllerAuthenticationUpdate.php:208
 msgid "Invalid SAML JIT provisioning media type mapping configuration."
-msgstr "SAML准时(JIT)服务开通媒介类型映射配置无效。"
+msgstr "SAML 即时供应媒体类型映射配置无效。"
 
 #: app/controllers/CControllerAuthenticationUpdate.php:202
 msgid "Invalid SAML JIT provisioning user group mapping configuration."
-msgstr "SAML准时(JIT)服务开通用户组映射配置无效。"
+msgstr "SAML 即时供应用户组映射配置无效。"
 
 #: include/classes/import/readers/CYamlImportReader.php:55
 msgid "Invalid YAML file contents"
@@ -14063,7 +14063,7 @@ msgstr "不允许为用户“guest”设置主题。"
 #: include/classes/api/services/CUser.php:464
 #, c-format
 msgid "Not allowed to update field \"%1$s\" for provisioned user."
-msgstr "不允许为配置的用户更新字段“%1$s”。"
+msgstr "不允许更新预配置用户的字段\"%1$s\"。"
 
 #: include/classes/api/clients/CLocalApiClient.php:174
 #: include/classes/api/services/CUser.php:2049
@@ -14439,7 +14439,7 @@ msgstr "只有管理员才可以设置拓扑图的所有人。"
 
 #: app/views/administration.authentication.edit.php:53
 msgid "Only disabled group can be set for deprovisioned users."
-msgstr "只能为已取消配置的用户设置禁用组。"
+msgstr "只有禁用的组才能设置为取消预配置的用户。"
 
 #: app/partials/administration.system.info.php:56
 msgid "Only items assigned to enabled hosts are counted"
@@ -15280,7 +15280,7 @@ msgstr "波斯语 (fa_IR)"
 
 #: app/views/popup.generic.php:574 include/graphs.inc.php:26
 msgid "Pie"
-msgstr "Pie"
+msgstr "饼图"
 
 #: include/views/js/monitoring.sysmaps.js.php:134
 msgid "Placing algorithm"
@@ -15708,23 +15708,23 @@ msgstr "提供的秘密查询字符串“%1$s”无效。"
 
 #: app/views/administration.user.list.php:302
 msgid "Provision now"
-msgstr "现在开通"
+msgstr "立即预配置"
 
 #: app/views/administration.user.list.php:304
 msgid "Provision selected LDAP users?"
-msgstr "开通选定的 LDAP 用户？"
+msgstr "是否预配置选定的LDAP用户？"
 
 #: app/views/administration.user.list.php:140
 msgid "Provisioned"
-msgstr "已开通"
+msgstr "预配置的"
 
 #: app/views/administration.authentication.edit.php:257
 msgid "Provisioning period"
-msgstr "开通期限"
+msgstr "供应周期"
 
 #: app/controllers/CControllerUserProvision.php:65
 msgid "Provisioning successful."
-msgstr "开通成功。"
+msgstr "供应成功。"
 
 #: app/controllers/CControllerPopupGeneric.php:215
 #: app/views/administration.proxy.list.php:233
@@ -18139,7 +18139,7 @@ msgstr "速度"
 #: include/classes/html/widgets/CWidgetFieldGraphDataSetView.php:243
 #: include/graphs.inc.php:25 include/views/monitoring.history.php:254
 msgid "Stacked"
-msgstr "层积的"
+msgstr "堆叠图"
 
 #: include/classes/html/widgets/CWidgetFieldGraphDataSetView.php:237
 #: include/classes/html/widgets/CWidgetFieldGraphOverrideView.php:166
@@ -19252,7 +19252,7 @@ msgstr "此类信息可能与密钥不匹配。"
 
 #: app/views/administration.user.edit.php:61
 msgid "This user is IdP provisioned. Manual changes for provisioned fields are not allowed."
-msgstr "此用户已配置 IdP。不允许手动更改已提供的字段。"
+msgstr "此用户由身份提供者预配置的。不允许手动更改预配置的字段。"
 
 #: include/func.inc.php:2587
 msgid "This week"
@@ -20691,7 +20691,7 @@ msgstr ""
 #: app/controllers/CControllerUserProvision.php:61
 #, c-format
 msgid "User \"%1$s\" provisioned."
-msgstr "用户“%1$s”已开通。"
+msgstr "用户\"%1$s\"已预配置。"
 
 #: app/controllers/CControllerUserUnblock.php:61
 #, c-format
