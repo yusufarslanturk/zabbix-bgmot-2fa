@@ -145,11 +145,6 @@ class testDashboardCopyWidgets extends CWebTest {
 
 		$replaces = self::$replaced_widget_name;
 
-		// Write name for replacing widget next case.
-		if ($replace) {
-			self::$replaced_widget_name = $widget_name;
-		}
-
 		// Use the appropriate dashboard and page in case of templated dashboard widgets.
 		if ($templated) {
 			$dashboardid = CDBHelper::getValue('SELECT dashboardid FROM dashboard WHERE name ='.
@@ -247,14 +242,18 @@ class testDashboardCopyWidgets extends CWebTest {
 		$this->assertEquals($original_form, $copied_form);
 
 		// Close overlay and save dashboard to get new widget size from DB.
-		$copied_overlay = COverlayDialogElement::find()->one();
-		$copied_overlay->close();
+		COverlayDialogElement::find()->one()->close();
 
 		if ($templated) {
 			$this->query('button:Save changes')->one()->click();
 		}
 		else {
 			$dashboard->save();
+		}
+
+		// Write name for replacing widget next case.
+		if ($replace) {
+			self::$replaced_widget_name = $widget_name;
 		}
 
 		$this->page->waitUntilReady();

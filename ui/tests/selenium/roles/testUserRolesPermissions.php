@@ -1726,16 +1726,18 @@ class testUserRolesPermissions extends CWebTest {
 		// Login and select host group for testing.
 		$this->page->userLogin($data['user'], 'zabbixzabbix');
 		$this->page->open('zabbix.php?action=latest.view')->waitUntilReady();
+		$table = $this->query('xpath://table['.CXPathHelper::fromClass('list-table fixed').']')->asTable()->one();
 		$filter_form = $this->query('name:zbx_filter')->asForm()->one();
 		$filter_form->fill(['Host groups' => 'HG-for-executenow']);
 		$filter_form->submit();
+		$table->waitUntilReloaded();
 		$this->page->waitUntilReady();
 
 		foreach ($data['test_cases'] as $test_case) {
 			// Disabled "Execute now" option in context menu.
 			if (!array_key_exists('expected', $test_case)) {
 				foreach ($test_case['items'] as $item) {
-					$this->query('link', $item)->one()->click();
+					$this->query('link', $item)->waitUntilClickable()->one()->click();
 					$popup = CPopupMenuElement::find()->waitUntilVisible()->one();
 					$this->assertFalse($popup->getItem('Execute now')->isEnabled());
 					$this->page->pressKey(WebDriverKeys::ESCAPE);
@@ -1744,7 +1746,7 @@ class testUserRolesPermissions extends CWebTest {
 				continue;
 			}
 
-			$this->query('link', $test_case['items'])->one()->click();
+			$this->query('link', $test_case['items'])->waitUntilClickable()->one()->click();
 			$popup = CPopupMenuElement::find()->waitUntilVisible()->one();
 			$popup->fill('Execute now');
 
