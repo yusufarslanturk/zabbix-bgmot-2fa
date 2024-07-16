@@ -44,7 +44,6 @@ zabbix_export:
           key: yugabytedb.clusters.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var YugabyteDB = {
@@ -130,9 +129,7 @@ zabbix_export:
           name: 'YugabyteDB: Get clusters item error'
           type: DEPENDENT
           key: yugabytedb.clusters.get.errors
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Item for gathering all the cluster item errors.'
           preprocessing:
@@ -242,7 +239,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL connections average used'
           type: DEPENDENT
           key: yugabytedb.cluster.connection.count
-          delay: '0'
           history: 7d
           description: 'Cumulative number of connections to the YSQL backend for all nodes.'
           preprocessing:
@@ -260,7 +256,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL connections limit'
           type: DEPENDENT
           key: yugabytedb.cluster.connection.limit
-          delay: '0'
           history: 7d
           description: 'The limit of the number of connections to the YSQL backend for all nodes.'
           preprocessing:
@@ -281,7 +276,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL connections maximum used'
           type: DEPENDENT
           key: yugabytedb.cluster.connection.max
-          delay: '0'
           history: 7d
           description: 'Maximum of used connections to the YSQL backend for all nodes.'
           preprocessing:
@@ -337,7 +331,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: CPU utilization'
           type: DEPENDENT
           key: yugabytedb.cluster.cpu.utilization
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -381,7 +374,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Disk space provisioned'
           type: DEPENDENT
           key: yugabytedb.cluster.disk.provisioned
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -407,7 +399,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Disk read, Bps'
           type: DEPENDENT
           key: yugabytedb.cluster.disk.read.bps
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -430,7 +421,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Disk read OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.disk.read.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -450,7 +440,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Disk space usage'
           type: DEPENDENT
           key: yugabytedb.cluster.disk.usage
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -509,7 +498,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Disk write, Bps'
           type: DEPENDENT
           key: yugabytedb.cluster.disk.write.bps
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -532,7 +520,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Disk write OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.disk.write.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -554,7 +541,6 @@ zabbix_export:
           key: yugabytedb.cluster.get
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var YugabyteDB = {
@@ -642,9 +628,7 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Get cluster item error'
           type: DEPENDENT
           key: yugabytedb.cluster.get.errors
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Item for gathering all the cluster item errors.'
           preprocessing:
@@ -664,7 +648,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Health state'
           type: DEPENDENT
           key: yugabytedb.cluster.health.state
-          delay: '0'
           history: 7d
           description: |
             Current state regarding the health of the cluster:
@@ -709,7 +692,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Memory total'
           type: DEPENDENT
           key: yugabytedb.cluster.memory.total
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -735,7 +717,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Memory usage'
           type: DEPENDENT
           key: yugabytedb.cluster.memory.usage
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -797,7 +778,6 @@ zabbix_export:
           type: SCRIPT
           key: yugabytedb.cluster.metric.get
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var YugabyteDB = {
@@ -934,9 +914,7 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Get cluster metrics item error'
           type: DEPENDENT
           key: yugabytedb.cluster.metric.get.errors
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Item for gathering all the cluster item errors.'
           preprocessing:
@@ -956,7 +934,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Network receive, Bps'
           type: DEPENDENT
           key: yugabytedb.cluster.network.receive.bps
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -979,7 +956,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Network receive error, rate'
           type: DEPENDENT
           key: yugabytedb.cluster.network.receive.error.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of errors related to network packets received per second, averaged over nodes.'
@@ -998,7 +974,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Network transmit, Bps'
           type: DEPENDENT
           key: yugabytedb.cluster.network.transmit.bps
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -1021,7 +996,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Network transmit error, rate'
           type: DEPENDENT
           key: yugabytedb.cluster.network.transmit.error.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of errors related to network packets transmitted per second, averaged over nodes.'
@@ -1040,7 +1014,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Number of nodes'
           type: DEPENDENT
           key: yugabytedb.cluster.node.number
-          delay: '0'
           history: 7d
           description: 'How many nodes are in the cluster.'
           preprocessing:
@@ -1059,7 +1032,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Clock skew'
           type: DEPENDENT
           key: yugabytedb.cluster.node.skew
-          delay: '0'
           history: 7d
           units: s
           description: 'The clock drift and skew across different nodes.'
@@ -1083,7 +1055,6 @@ zabbix_export:
           type: SCRIPT
           key: yugabytedb.cluster.query.statistic.get
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var YugabyteDB = {
@@ -1223,9 +1194,7 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Get cluster query statistic item error'
           type: DEPENDENT
           key: yugabytedb.cluster.query.statistic.get.errors
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Item for gathering all the cluster query statistics item errors.'
           preprocessing:
@@ -1245,7 +1214,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Average read latency'
           type: DEPENDENT
           key: yugabytedb.cluster.read.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1270,9 +1238,7 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Software version'
           type: DEPENDENT
           key: yugabytedb.cluster.software.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'The current version of YugabyteDB installed on the cluster.'
           preprocessing:
@@ -1303,7 +1269,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: State'
           type: DEPENDENT
           key: yugabytedb.cluster.state
-          delay: '0'
           history: 7d
           description: |
             The current state of the cluster. One of the following:
@@ -1434,7 +1399,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Type'
           type: DEPENDENT
           key: yugabytedb.cluster.type
-          delay: '0'
           history: 7d
           description: 'The kind of cluster deployment: SYNCHRONOUS or GEO_PARTITIONED.'
           valuemap:
@@ -1463,7 +1427,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Average write latency'
           type: DEPENDENT
           key: yugabytedb.cluster.write.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1488,9 +1451,7 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YB controller version'
           type: DEPENDENT
           key: yugabytedb.cluster.ybc.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'The current version of the YB controller installed on the cluster.'
           preprocessing:
@@ -1521,7 +1482,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL DELETE average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.delete.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1546,7 +1506,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL DELETE OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.delete.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -1566,7 +1525,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL INSERT average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.insert.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1591,7 +1549,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL INSERT OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.insert.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -1611,7 +1568,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL OTHER average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.other.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1636,7 +1592,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL OTHER OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.other.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -1656,7 +1611,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL SELECT average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.select.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1681,7 +1635,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL SELECT OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.select.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -1701,7 +1654,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL transaction average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.transaction.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1726,7 +1678,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL transaction OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.transaction.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -1746,7 +1697,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL UPDATE average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.update.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1771,7 +1721,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YCQL UPDATE OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ycql.update.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -1791,7 +1740,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL DELETE average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.delete.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1816,7 +1764,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL DELETE OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.delete.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -1836,7 +1783,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL INSERT average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.insert.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1861,7 +1807,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL INSERT OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.insert.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -1881,7 +1826,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL OTHER average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.other.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1906,7 +1850,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL OTHER OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.other.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -1926,7 +1869,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL SELECT average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.select.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1951,7 +1893,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL SELECT OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.select.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -1971,7 +1912,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL transaction average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.transaction.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1996,7 +1936,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL transaction OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.transaction.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -2016,7 +1955,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL UPDATE average latency'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.update.latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -2041,7 +1979,6 @@ zabbix_export:
           name: 'YugabyteDB Cluster: YSQL UPDATE OPS'
           type: DEPENDENT
           key: yugabytedb.cluster.ysql.update.ops
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!OPS'
@@ -2063,7 +2000,6 @@ zabbix_export:
           key: yugabytedb.keyspace.get
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var YugabyteDB = {
@@ -2175,9 +2111,7 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Get keyspace item error'
           type: DEPENDENT
           key: yugabytedb.keyspace.get.errors
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Item for gathering all the keyspace item errors.'
           preprocessing:
@@ -2199,7 +2133,6 @@ zabbix_export:
           key: yugabytedb.node.get
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var YugabyteDB = {
@@ -2286,9 +2219,7 @@ zabbix_export:
           name: 'YugabyteDB Cluster: Get node item error'
           type: DEPENDENT
           key: yugabytedb.node.get.errors
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Item for gathering all the node item errors.'
           preprocessing:
@@ -2316,9 +2247,7 @@ zabbix_export:
               name: 'YugabyteDB Keyspace [{#KEYSPACE.NAME}]: Get keyspace info'
               type: DEPENDENT
               key: 'yugabytedb.keyspace.get[{#KEYSPACE.NAME}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Get raw data about the keyspace [{#KEYSPACE.NAME}].'
               preprocessing:
@@ -2337,7 +2266,6 @@ zabbix_export:
               name: 'YugabyteDB Keyspace [{#KEYSPACE.NAME}]: SST size'
               type: DEPENDENT
               key: 'yugabytedb.keyspace.sst.size[{#KEYSPACE.NAME}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'The size of the table''s SST.'
@@ -2356,7 +2284,6 @@ zabbix_export:
               name: 'YugabyteDB Keyspace [{#KEYSPACE.NAME}]: Type'
               type: DEPENDENT
               key: 'yugabytedb.keyspace.type[{#KEYSPACE.NAME}]'
-              delay: '0'
               history: 7d
               description: 'The type of keyspace: YSQL or YCQL.'
               valuemap:
@@ -2387,7 +2314,6 @@ zabbix_export:
               name: 'YugabyteDB Keyspace [{#KEYSPACE.NAME}]: Wal size'
               type: DEPENDENT
               key: 'yugabytedb.keyspace.wal.size[{#KEYSPACE.NAME}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'The size of the table''s WAL.'
@@ -2450,7 +2376,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Total CPU cores'
               type: DEPENDENT
               key: 'yugabytedb.node.cpu.num.cores[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               units: Cores
               description: 'The number of cores for the node [{#NODE.NAME}].'
@@ -2472,7 +2397,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Total disk size'
               type: DEPENDENT
               key: 'yugabytedb.node.disk.size.total[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               units: '!GB'
               description: 'The disk size (GB) for the node [{#NODE.NAME}].'
@@ -2494,9 +2418,7 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Get node info'
               type: DEPENDENT
               key: 'yugabytedb.node.get[{#NODE.NAME}]'
-              delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
               description: 'Get raw data about the node [{#NODE.NAME}].'
               preprocessing:
@@ -2515,7 +2437,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Disk IOPS limit'
               type: DEPENDENT
               key: 'yugabytedb.node.iops.limit[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               units: '!IOPS'
               description: 'The IOPS to provision for the node [{#NODE.NAME}] for each disk.'
@@ -2575,7 +2496,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Node is master'
               type: DEPENDENT
               key: 'yugabytedb.node.master[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               description: |
                 The current role of the node [{#NODE.NAME}]:
@@ -2609,7 +2529,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Total memory, bytes'
               type: DEPENDENT
               key: 'yugabytedb.node.memory.total[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'The amount of RAM for the node [{#NODE.NAME}].'
@@ -2634,7 +2553,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Read OPS'
               type: DEPENDENT
               key: 'yugabytedb.node.read.ops[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!OPS'
@@ -2654,7 +2572,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Node is read replica'
               type: DEPENDENT
               key: 'yugabytedb.node.read.replica[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               description: |
                 This item indicates if the node [{#NODE.NAME}] is a read replica:
@@ -2688,9 +2605,7 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Region'
               type: DEPENDENT
               key: 'yugabytedb.node.region[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'The cloud information for the node [{#NODE.NAME}] about the region.'
               preprocessing:
@@ -2711,7 +2626,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Total SST file size'
               type: DEPENDENT
               key: 'yugabytedb.node.sst.file.size.total[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'The size of all SST files.'
@@ -2730,7 +2644,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Uncompressed SST file size'
               type: DEPENDENT
               key: 'yugabytedb.node.sst.file.size.uncompressed[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               units: B
               description: 'The size of uncompressed SST files.'
@@ -2749,7 +2662,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Node status'
               type: DEPENDENT
               key: 'yugabytedb.node.status[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               description: |
                 The current status of the node [{#NODE.NAME}]:
@@ -2792,7 +2704,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Node is TServer'
               type: DEPENDENT
               key: 'yugabytedb.node.tserver[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               description: |
                 This item indicates if the node [{#NODE.NAME}] is a TServer node:
@@ -2826,7 +2737,6 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Write OPS'
               type: DEPENDENT
               key: 'yugabytedb.node.write.ops[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!OPS'
@@ -2846,9 +2756,7 @@ zabbix_export:
               name: 'YugabyteDB Node [{#NODE.NAME}]: Zone'
               type: DEPENDENT
               key: 'yugabytedb.node.zone[{#NODE.NAME}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'The cloud information for the node [{#NODE.NAME}] about the zone.'
               preprocessing:

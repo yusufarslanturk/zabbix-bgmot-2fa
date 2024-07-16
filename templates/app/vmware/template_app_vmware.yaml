@@ -27,7 +27,6 @@ zabbix_export:
           type: SIMPLE
           key: 'vmware.eventlog[{$VMWARE.URL},skip]'
           history: 7d
-          trends: '0'
           value_type: LOG
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -41,7 +40,6 @@ zabbix_export:
           key: 'vmware.fullname[{$VMWARE.URL}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -59,7 +57,6 @@ zabbix_export:
           key: 'vmware.version[{$VMWARE.URL}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -151,7 +148,7 @@ zabbix_export:
               units: '%'
               username: '{$VMWARE.USERNAME}'
               password: '{$VMWARE.PASSWORD}'
-              description: 'VMware datastore space in percentage from total.'
+              description: 'VMware datastore free space in percentage from total.'
               tags:
                 - tag: component
                   value: datastore
@@ -159,23 +156,23 @@ zabbix_export:
                   value: '{#DATASTORE}'
               trigger_prototypes:
                 - uuid: 8783e6c0bb394763afecddfd49929a01
-                  expression: 'last(/VMware/vmware.datastore.size[{$VMWARE.URL},{#DATASTORE},pfree])>{$VMWARE.DATASTORE.SPACE.CRIT}'
-                  name: 'VMware: {#DATASTORE}: Disk space is critically low'
-                  event_name: 'Datastore space is critically low ({#DATASTORE} used space > {$VMWARE.DATASTORE.SPACE.CRIT}%)'
+                  expression: 'last(/VMware/vmware.datastore.size[{$VMWARE.URL},{#DATASTORE},pfree])<{$VMWARE.DATASTORE.SPACE.CRIT}'
+                  name: 'VMware: {#DATASTORE}: Free space is critically low'
+                  event_name: 'Datastore free space is critically low ({#DATASTORE} free space < {$VMWARE.DATASTORE.SPACE.CRIT}%)'
                   priority: HIGH
-                  description: 'Datastore space exceeded critical threshold.'
+                  description: 'Datastore free space has fallen below critical threshold.'
                   tags:
                     - tag: scope
                       value: capacity
                 - uuid: 201980a75d734a42b3fbe1b0d3c9f55c
-                  expression: 'last(/VMware/vmware.datastore.size[{$VMWARE.URL},{#DATASTORE},pfree])>{$VMWARE.DATASTORE.SPACE.WARN}'
-                  name: 'VMware: {#DATASTORE}: Disk space is low'
-                  event_name: 'Datastore space is low ({#DATASTORE} used space > {$VMWARE.DATASTORE.SPACE.WARN}%)'
+                  expression: 'last(/VMware/vmware.datastore.size[{$VMWARE.URL},{#DATASTORE},pfree])<{$VMWARE.DATASTORE.SPACE.WARN}'
+                  name: 'VMware: {#DATASTORE}: Free space is low'
+                  event_name: 'Datastore free space is low ({#DATASTORE} free space < {$VMWARE.DATASTORE.SPACE.WARN}%)'
                   priority: WARNING
-                  description: 'Datastore space exceeded warning threshold.'
+                  description: 'Datastore free space has fallen below warning threshold.'
                   dependencies:
-                    - name: 'VMware: {#DATASTORE}: Disk space is critically low'
-                      expression: 'last(/VMware/vmware.datastore.size[{$VMWARE.URL},{#DATASTORE},pfree])>{$VMWARE.DATASTORE.SPACE.CRIT}'
+                    - name: 'VMware: {#DATASTORE}: Free space is critically low'
+                      expression: 'last(/VMware/vmware.datastore.size[{$VMWARE.URL},{#DATASTORE},pfree])<{$VMWARE.DATASTORE.SPACE.CRIT}'
                   tags:
                     - tag: scope
                       value: capacity
@@ -269,11 +266,11 @@ zabbix_export:
           value: vmware
       macros:
         - macro: '{$VMWARE.DATASTORE.SPACE.CRIT}'
-          value: '90'
-          description: 'The critical threshold of the datastore space utilization.'
+          value: '10'
+          description: 'The critical threshold of the datastore free space.'
         - macro: '{$VMWARE.DATASTORE.SPACE.WARN}'
-          value: '80'
-          description: 'The warning threshold of the datastore space utilization.'
+          value: '20'
+          description: 'The warning threshold of the datastore free space.'
         - macro: '{$VMWARE.HV.SENSOR.DISCOVERY}'
           value: 'false'
           description: 'Set "true"/"false" to enable or disable monitoring of hardware sensors.'
@@ -317,7 +314,6 @@ zabbix_export:
           key: 'vmware.vm.cluster.name[{$VMWARE.URL},{$VMWARE.VM.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -426,7 +422,6 @@ zabbix_export:
           key: 'vmware.vm.datacenter.name[{$VMWARE.URL},{$VMWARE.VM.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -479,7 +474,6 @@ zabbix_export:
           key: 'vmware.vm.hv.name[{$VMWARE.URL},{$VMWARE.VM.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -1019,7 +1013,6 @@ zabbix_export:
           key: 'vmware.hv.cluster.name[{$VMWARE.URL},{$VMWARE.HV.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -1075,7 +1068,6 @@ zabbix_export:
           key: 'vmware.hv.datacenter.name[{$VMWARE.URL},{$VMWARE.HV.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -1093,7 +1085,6 @@ zabbix_export:
           key: 'vmware.hv.fullname[{$VMWARE.URL},{$VMWARE.HV.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -1124,7 +1115,6 @@ zabbix_export:
           key: 'vmware.hv.hw.cpu.model[{$VMWARE.URL},{$VMWARE.HV.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -1179,7 +1169,6 @@ zabbix_export:
           key: 'vmware.hv.hw.model[{$VMWARE.URL},{$VMWARE.HV.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -1193,7 +1182,6 @@ zabbix_export:
           key: 'vmware.hv.hw.uuid[{$VMWARE.URL},{$VMWARE.HV.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -1207,7 +1195,6 @@ zabbix_export:
           key: 'vmware.hv.hw.vendor[{$VMWARE.URL},{$VMWARE.HV.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -1296,7 +1283,6 @@ zabbix_export:
           type: SIMPLE
           key: 'vmware.hv.sensors.get[{$VMWARE.URL},{$VMWARE.HV.UUID}]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -1370,7 +1356,6 @@ zabbix_export:
           key: 'vmware.hv.version[{$VMWARE.URL},{$VMWARE.HV.UUID}]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           username: '{$VMWARE.USERNAME}'
           password: '{$VMWARE.PASSWORD}'
@@ -1446,7 +1431,7 @@ zabbix_export:
               units: '%'
               username: '{$VMWARE.USERNAME}'
               password: '{$VMWARE.PASSWORD}'
-              description: 'VMware datastore space in percentage from total.'
+              description: 'VMware datastore free space in percentage from total.'
               tags:
                 - tag: component
                   value: datastore
@@ -1454,23 +1439,23 @@ zabbix_export:
                   value: '{#DATASTORE}'
               trigger_prototypes:
                 - uuid: 79c83ed72685487a9ef139c42eea1106
-                  expression: 'last(/VMware Hypervisor/vmware.hv.datastore.size[{$VMWARE.URL},{$VMWARE.HV.UUID},{#DATASTORE},pfree])>{$VMWARE.HV.DATASTORE.SPACE.CRIT}'
-                  name: 'VMware: {#DATASTORE}: Disk space is critically low'
-                  event_name: 'Datastore space is critically low ({#DATASTORE} used space > {$VMWARE.HV.DATASTORE.SPACE.CRIT}%)'
+                  expression: 'last(/VMware Hypervisor/vmware.hv.datastore.size[{$VMWARE.URL},{$VMWARE.HV.UUID},{#DATASTORE},pfree])<{$VMWARE.HV.DATASTORE.SPACE.CRIT}'
+                  name: 'VMware: {#DATASTORE}: Free space is critically low'
+                  event_name: 'Datastore free space is critically low ({#DATASTORE} free space < {$VMWARE.HV.DATASTORE.SPACE.CRIT}%)'
                   priority: HIGH
-                  description: 'Datastore space exceeded critical threshold.'
+                  description: 'Datastore free space has fallen below critical threshold.'
                   tags:
                     - tag: scope
                       value: capacity
                 - uuid: 5bc64ee899444a01a5bc315290256cdf
-                  expression: 'last(/VMware Hypervisor/vmware.hv.datastore.size[{$VMWARE.URL},{$VMWARE.HV.UUID},{#DATASTORE},pfree])>{$VMWARE.HV.DATASTORE.SPACE.WARN}'
-                  name: 'VMware: {#DATASTORE}: Disk space is low'
-                  event_name: 'Datastore space is low ({#DATASTORE} used space > {$VMWARE.HV.DATASTORE.SPACE.WARN}%)'
+                  expression: 'last(/VMware Hypervisor/vmware.hv.datastore.size[{$VMWARE.URL},{$VMWARE.HV.UUID},{#DATASTORE},pfree])<{$VMWARE.HV.DATASTORE.SPACE.WARN}'
+                  name: 'VMware: {#DATASTORE}: Free space is low'
+                  event_name: 'Datastore free space is low ({#DATASTORE} free space < {$VMWARE.HV.DATASTORE.SPACE.WARN}%)'
                   priority: WARNING
-                  description: 'Datastore space exceeded warning threshold.'
+                  description: 'Datastore free space has fallen below warning threshold.'
                   dependencies:
-                    - name: 'VMware: {#DATASTORE}: Disk space is critically low'
-                      expression: 'last(/VMware Hypervisor/vmware.hv.datastore.size[{$VMWARE.URL},{$VMWARE.HV.UUID},{#DATASTORE},pfree])>{$VMWARE.HV.DATASTORE.SPACE.CRIT}'
+                    - name: 'VMware: {#DATASTORE}: Free space is critically low'
+                      expression: 'last(/VMware Hypervisor/vmware.hv.datastore.size[{$VMWARE.URL},{$VMWARE.HV.UUID},{#DATASTORE},pfree])<{$VMWARE.HV.DATASTORE.SPACE.CRIT}'
                   tags:
                     - tag: scope
                       value: capacity
@@ -1513,9 +1498,7 @@ zabbix_export:
               name: 'VMware: Health state rollup'
               type: DEPENDENT
               key: 'vmware.hv.sensor.health.state[{#SINGLETON}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: 'The host health state rollup sensor value: gray - unknown, green - ok, red - it has a problem, yellow - it might have a problem.'
               preprocessing:
@@ -1597,7 +1580,6 @@ zabbix_export:
               name: 'VMware: Sensor [{#NAME}] health state'
               type: DEPENDENT
               key: 'vmware.hv.sensor.state["{#NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 VMware hardware sensor health state. One of the following:
@@ -1700,11 +1682,11 @@ zabbix_export:
           value: vmware-hypervisor
       macros:
         - macro: '{$VMWARE.HV.DATASTORE.SPACE.CRIT}'
-          value: '90'
-          description: 'The critical threshold of the datastore space utilization.'
+          value: '10'
+          description: 'The critical threshold of the datastore free space.'
         - macro: '{$VMWARE.HV.DATASTORE.SPACE.WARN}'
-          value: '80'
-          description: 'The warning threshold of the datastore space utilization.'
+          value: '20'
+          description: 'The warning threshold of the datastore free space.'
         - macro: '{$VMWARE.HV.SENSOR.DISCOVERY}'
           value: 'false'
           description: 'Set "true"/"false" to enable or disable monitoring of hardware sensors.'

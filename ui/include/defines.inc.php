@@ -18,8 +18,8 @@
 ** Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 **/
 
-define('ZABBIX_VERSION',		'6.4.16');
-define('ZABBIX_API_VERSION',	'6.4.16');
+define('ZABBIX_VERSION',		'6.4.17');
+define('ZABBIX_API_VERSION',	'6.4.17');
 define('ZABBIX_EXPORT_VERSION',	'6.4');
 
 define('ZABBIX_DB_VERSION',		6040000);
@@ -1451,6 +1451,8 @@ define('XML_STRING',		0x01);
 define('XML_ARRAY',			0x02);
 define('XML_INDEXED_ARRAY',	0x04);
 define('XML_REQUIRED',		0x08);
+define('XML_MULTIPLE',		0x10);
+define('XML_IGNORE_TAG',	0x20);
 
 // API validation
 // multiple types

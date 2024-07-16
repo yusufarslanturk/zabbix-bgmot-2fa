@@ -107,7 +107,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.2.2.1.7,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.31.1.1.1.6,1.3.6.1.2.1.31.1.1.1.10,1.3.6.1.2.1.2.2.1.14,1.3.6.1.2.1.2.2.1.20,1.3.6.1.2.1.2.2.1.19,1.3.6.1.2.1.2.2.1.13,1.3.6.1.2.1.31.1.1.1.15]'
           key: net.if.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Discovering interfaces from IF-MIB.'
           tags:
@@ -119,7 +118,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.14988.1.1.14.1.1.2,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.2.2.1.7,1.3.6.1.4.1.14988.1.1.16.1.1.2,1.3.6.1.4.1.14988.1.1.16.1.1.4,1.3.6.1.4.1.14988.1.1.16.1.1.3,1.3.6.1.4.1.14988.1.1.16.1.1.7,1.3.6.1.4.1.14988.1.1.1.3.1.4,1.3.6.1.4.1.14988.1.1.1.3.1.8,1.3.6.1.4.1.14988.1.1.1.3.1.9,1.3.6.1.4.1.14988.1.1.1.3.1.6,1.3.6.1.4.1.14988.1.1.1.3.1.11,1.3.6.1.4.1.14988.1.1.1.7.1.5,1.3.6.1.4.1.14988.1.1.1.7.1.4,1.3.6.1.4.1.14988.1.1.1.7.1.2,1.3.6.1.4.1.14988.1.1.1.7.1.3]'
           key: net.if.wireless.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           tags:
             - tag: component
@@ -130,7 +128,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.14988.1.1.3.11]'
           key: sensor.cpu.temp.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: |
             MIB: MIKROTIK-MIB
@@ -144,7 +141,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.14988.1.1.3.10]'
           key: sensor.temp.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: |
             MIB: MIKROTIK-MIB
@@ -156,9 +152,7 @@ zabbix_export:
           name: 'Mikrotik: SNMP traps (fallback)'
           type: SNMP_TRAP
           key: snmptrap.fallback
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: LOG
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
@@ -172,7 +166,6 @@ zabbix_export:
           key: 'system.contact[sysContact.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -191,7 +184,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.25.3.3.1.1,1.3.6.1.2.1.25.3.3.1.2]'
           key: system.cpu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: |
             MIB: HOST-RESOURCES-MIB
@@ -206,7 +198,6 @@ zabbix_export:
           key: 'system.descr[sysDescr.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -227,7 +218,6 @@ zabbix_export:
           key: system.hw.firmware
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: MIKROTIK-MIB
@@ -257,7 +247,6 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           inventory_link: MODEL
           preprocessing:
@@ -274,7 +263,6 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: MIKROTIK-MIB
@@ -312,8 +300,6 @@ zabbix_export:
             The amount of time since this host was last initialized. Note that this is different from sysUpTime in the SNMPv2-MIB [RFC1907] because sysUpTime is the uptime of the network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -329,7 +315,6 @@ zabbix_export:
           key: 'system.location[sysLocation.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -349,7 +334,6 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -401,7 +385,6 @@ zabbix_export:
           key: 'system.objectid[sysObjectID.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -420,7 +403,6 @@ zabbix_export:
           key: 'system.sw.os[mtxrLicVersion.0]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             MIB: MIKROTIK-MIB
@@ -452,7 +434,6 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.25.2.3.1.3,1.3.6.1.2.1.25.2.3.1.4,1.3.6.1.2.1.25.2.3.1.2,1.3.6.1.2.1.25.2.3.1.6,1.3.6.1.2.1.25.2.3.1.5]'
           key: vfs.fs.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: |
             MIB: HOST-RESOURCES-MIB
@@ -569,7 +550,6 @@ zabbix_export:
               name: '#{#SNMPINDEX}: CPU utilization'
               type: DEPENDENT
               key: 'system.cpu.util[hrProcessorLoad.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -632,7 +612,6 @@ zabbix_export:
               name: 'CPU: Temperature'
               type: DEPENDENT
               key: 'sensor.temp.value[mtxrHlProcessorTemperature.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: °C
@@ -727,7 +706,6 @@ zabbix_export:
               name: 'Device: Temperature'
               type: DEPENDENT
               key: 'sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: °C
@@ -831,7 +809,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): LTE modem RSRP'
               type: DEPENDENT
               key: 'lte.modem.rsrp[mtxrLTEModemSignalRSRP.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: dbm
@@ -867,7 +844,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): LTE modem RSRQ'
               type: DEPENDENT
               key: 'lte.modem.rsrq[mtxrLTEModemSignalRSRQ.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: db
@@ -903,7 +879,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): LTE modem RSSI'
               type: DEPENDENT
               key: 'lte.modem.rssi[mtxrLTEModemSignalRSSI.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: dbm
@@ -939,7 +914,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): LTE modem SINR'
               type: DEPENDENT
               key: 'lte.modem.sinr[mtxrLTEModemSignalSINR.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: db
@@ -1031,7 +1005,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): AP authenticated clients'
               type: DEPENDENT
               key: 'ssid.authclient[mtxrWlApAuthClientCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: MIKROTIK-MIB
@@ -1054,9 +1027,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): AP band'
               type: DEPENDENT
               key: 'ssid.band[mtxrWlApBand.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: MIKROTIK-MIB
@@ -1082,9 +1053,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): SSID'
               type: DEPENDENT
               key: 'ssid.name[mtxrWlApSsid.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: MIKROTIK-MIB
@@ -1110,7 +1079,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): AP noise floor'
               type: DEPENDENT
               key: 'ssid.noise[mtxrWlApNoiseFloor.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -1137,7 +1105,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): AP registered clients'
               type: DEPENDENT
               key: 'ssid.regclient[mtxrWlApClientCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: MIKROTIK-MIB
@@ -1196,7 +1163,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): AP authenticated clients'
               type: DEPENDENT
               key: 'ssid.authclient[mtxrWlCMAuthClientCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: MIKROTIK-MIB
@@ -1219,9 +1185,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): AP channel'
               type: DEPENDENT
               key: 'ssid.channel[mtxrWlCMChannel.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: MIKROTIK-MIB
@@ -1247,7 +1211,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): AP registered clients'
               type: DEPENDENT
               key: 'ssid.regclient[mtxrWlCMRegClientCount.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: MIKROTIK-MIB
@@ -1270,9 +1233,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): AP state'
               type: DEPENDENT
               key: 'ssid.state[mtxrWlCMState.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
               description: |
                 MIB: MIKROTIK-MIB
@@ -1378,7 +1339,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets discarded'
               type: DEPENDENT
               key: 'net.if.in.discards[ifInDiscards.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1393,8 +1353,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -1411,7 +1369,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets with errors'
               type: DEPENDENT
               key: 'net.if.in.errors[ifInErrors.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1422,8 +1379,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -1440,7 +1395,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits received'
               type: DEPENDENT
               key: 'net.if.in[ifHCInOctets.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -1452,8 +1406,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1470,7 +1422,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets discarded'
               type: DEPENDENT
               key: 'net.if.out.discards[ifOutDiscards.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1485,8 +1436,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -1503,7 +1452,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets with errors'
               type: DEPENDENT
               key: 'net.if.out.errors[ifOutErrors.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -1514,8 +1462,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -1532,7 +1478,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits sent'
               type: DEPENDENT
               key: 'net.if.out[ifHCOutOctets.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -1544,8 +1489,6 @@ zabbix_export:
                     - '1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1562,7 +1505,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Speed'
               type: DEPENDENT
               key: 'net.if.speed[ifHighSpeed.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               units: bps
@@ -1593,7 +1535,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Operational status'
               type: DEPENDENT
               key: 'net.if.status[ifOperStatus.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -1644,7 +1585,6 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Interface type'
               type: DEPENDENT
               key: 'net.if.type[ifType.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -1845,7 +1785,6 @@ zabbix_export:
               name: 'Disk-{#SNMPINDEX}: Total space'
               type: DEPENDENT
               key: 'vfs.fs.total[hrStorageSize.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: B
               description: |
@@ -1878,7 +1817,6 @@ zabbix_export:
               name: 'Disk-{#SNMPINDEX}: Used space'
               type: DEPENDENT
               key: 'vfs.fs.used[hrStorageSize.{#SNMPINDEX}]'
-              delay: '0'
               history: 7d
               units: B
               description: |

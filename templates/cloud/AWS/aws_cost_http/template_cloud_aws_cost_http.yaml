@@ -27,7 +27,6 @@ zabbix_export:
           key: aws.get.daily.costs
           delay: 0s;h/6
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -228,8 +227,6 @@ zabbix_export:
           description: 'Get raw data on the daily costs by service'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -251,7 +248,6 @@ zabbix_export:
           key: aws.get.monthly.costs
           delay: 0s;h9
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -484,8 +480,6 @@ zabbix_export:
             }
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -525,7 +519,6 @@ zabbix_export:
               name: 'AWS Cost: [{#AWS.BILLING.SERVICE.NAME}]: Month [{#AWS.BILLING.MONTH}] Blended cost'
               type: DEPENDENT
               key: 'aws.monthly.service.cost["{#AWS.BILLING.SERVICE.NAME}", "{#AWS.BILLING.MONTH}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#AWS.BILLING.UNIT}'
@@ -591,7 +584,6 @@ zabbix_export:
               name: 'AWS Cost: Service [{#AWS.BILLING.SERVICE.NAME}]: Blended daily cost'
               type: DEPENDENT
               key: 'aws.daily.service.cost["{#AWS.BILLING.SERVICE.NAME}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#AWS.BILLING.UNIT}'
@@ -639,7 +631,6 @@ zabbix_export:
               name: 'AWS Cost: [{#AWS.BILLING.MONTH}]: Blended cost per month'
               type: DEPENDENT
               key: 'aws.monthly.cost["{#AWS.BILLING.MONTH}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#AWS.BILLING.UNIT}'

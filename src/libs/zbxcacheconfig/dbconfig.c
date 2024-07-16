@@ -7290,6 +7290,12 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 
 	/* sync item data to support item lookups when resolving macros during configuration sync */
 
+	/* fetch prototype items before items to avoid item fetch consuming prototype changelog records */
+	sec = zbx_time();
+	if (FAIL == zbx_dbsync_compare_prototype_items(&prototype_items_sync))
+		goto out;
+	pisec = zbx_time() - sec;
+
 	sec = zbx_time();
 	if (FAIL == zbx_dbsync_compare_interfaces(&if_sync))
 		goto out;
@@ -7304,11 +7310,6 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 	if (FAIL == zbx_dbsync_compare_template_items(&template_items_sync))
 		goto out;
 	tisec = zbx_time() - sec;
-
-	sec = zbx_time();
-	if (FAIL == zbx_dbsync_compare_prototype_items(&prototype_items_sync))
-		goto out;
-	pisec = zbx_time() - sec;
 
 	sec = zbx_time();
 	if (FAIL == zbx_dbsync_compare_item_discovery(&item_discovery_sync))
@@ -7340,16 +7341,16 @@ void	DCsync_configuration(unsigned char mode, zbx_synced_new_config_t synced, zb
 	/* relies on hosts, proxies and interfaces, must be after DCsync_{hosts,interfaces}() */
 
 	sec = zbx_time();
+	DCsync_prototype_items(&prototype_items_sync);
+	pisec2 = zbx_time() - sec;
+
+	sec = zbx_time();
 	DCsync_items(&items_sync, new_revision, flags, synced, deleted_itemids, pnew_items);
 	isec2 = zbx_time() - sec;
 
 	sec = zbx_time();
 	DCsync_template_items(&template_items_sync);
 	tisec2 = zbx_time() - sec;
-
-	sec = zbx_time();
-	DCsync_prototype_items(&prototype_items_sync);
-	pisec2 = zbx_time() - sec;
 
 	sec = zbx_time();
 	DCsync_item_discovery(&item_discovery_sync);

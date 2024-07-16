@@ -18,7 +18,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Preprocessing queue'
           type: DEPENDENT
           key: preprocessing_queue
-          delay: '0'
           history: 7d
           description: 'Count of values enqueued in the preprocessing queue.'
           preprocessing:
@@ -34,7 +33,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of availability manager internal processes, in %'
           type: DEPENDENT
           key: process.availability_manager.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -65,7 +63,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of configuration syncer internal processes, in %'
           type: DEPENDENT
           key: process.configuration_syncer.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -96,7 +93,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of data sender internal processes, in %'
           type: DEPENDENT
           key: process.data_sender.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -127,7 +123,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of discoverer data collector processes, in %'
           type: DEPENDENT
           key: process.discoverer.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -158,7 +153,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of history poller data collector processes, in %'
           type: DEPENDENT
           key: process.history_poller.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -189,7 +183,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of history syncer internal processes, in %'
           type: DEPENDENT
           key: process.history_syncer.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -220,7 +213,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of housekeeper internal processes, in %'
           type: DEPENDENT
           key: process.housekeeper.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -251,7 +243,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of http poller data collector processes, in %'
           type: DEPENDENT
           key: process.http_poller.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -282,7 +273,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of icmp pinger data collector processes, in %'
           type: DEPENDENT
           key: process.icmp_pinger.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -313,7 +303,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of ipmi manager internal processes, in %'
           type: DEPENDENT
           key: process.ipmi_manager.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -344,7 +333,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of ipmi poller data collector processes, in %'
           type: DEPENDENT
           key: process.ipmi_poller.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -375,7 +363,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of java poller data collector processes, in %'
           type: DEPENDENT
           key: process.java_poller.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -406,7 +393,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of ODBC poller data collector processes, in %'
           type: DEPENDENT
           key: process.odbc_poller.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -435,7 +421,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of poller data collector processes, in %'
           type: DEPENDENT
           key: process.poller.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -466,7 +451,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of preprocessing manager internal processes, in %'
           type: DEPENDENT
           key: process.preprocessing_manager.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -497,7 +481,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of preprocessing worker internal processes, in %'
           type: DEPENDENT
           key: process.preprocessing_worker.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -528,7 +511,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of self-monitoring internal processes, in %'
           type: DEPENDENT
           key: process.self-monitoring.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -559,7 +541,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of snmp trapper data collector processes, in %'
           type: DEPENDENT
           key: process.snmp_trapper.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -590,7 +571,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of task manager internal processes, in %'
           type: DEPENDENT
           key: process.task_manager.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -621,7 +601,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of trapper data collector processes, in %'
           type: DEPENDENT
           key: process.trapper.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -652,7 +631,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of unreachable poller data collector processes, in %'
           type: DEPENDENT
           key: process.unreachable_poller.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -683,7 +661,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Utilization of vmware data collector processes, in %'
           type: DEPENDENT
           key: process.vmware_collector.avg.busy
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -714,7 +691,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Configuration cache, % used'
           type: DEPENDENT
           key: rcache.buffer.pused
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -752,7 +728,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Required performance'
           type: DEPENDENT
           key: requiredperformance
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Required performance of Zabbix proxy, in new values per second expected.'
@@ -769,7 +744,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Uptime'
           type: DEPENDENT
           key: uptime
-          delay: '0'
           history: 7d
           units: uptime
           description: 'Uptime of Zabbix proxy process in seconds.'
@@ -797,9 +771,7 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Version'
           type: DEPENDENT
           key: version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Version of Zabbix proxy.'
           preprocessing:
@@ -829,7 +801,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: VMware cache, % used'
           type: DEPENDENT
           key: vmware.buffer.pused
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -860,7 +831,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: History write cache, % used'
           type: DEPENDENT
           key: wcache.history.pused
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -891,7 +861,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: History index cache, % used'
           type: DEPENDENT
           key: wcache.index.pused
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -922,7 +891,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Number of processed values per second'
           type: DEPENDENT
           key: wcache.values
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -933,8 +901,6 @@ zabbix_export:
               parameters:
                 - $.data.wcache.values.all
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'zabbix[stats,{$ZABBIX.PROXY.ADDRESS},{$ZABBIX.PROXY.PORT}]'
           tags:
@@ -944,7 +910,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Number of processed numeric (float) values per second'
           type: DEPENDENT
           key: wcache.values.float
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -955,8 +920,6 @@ zabbix_export:
               parameters:
                 - $.data.wcache.values.float
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'zabbix[stats,{$ZABBIX.PROXY.ADDRESS},{$ZABBIX.PROXY.PORT}]'
           tags:
@@ -966,7 +929,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Number of processed log values per second'
           type: DEPENDENT
           key: wcache.values.log
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -977,8 +939,6 @@ zabbix_export:
               parameters:
                 - $.data.wcache.values.log
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'zabbix[stats,{$ZABBIX.PROXY.ADDRESS},{$ZABBIX.PROXY.PORT}]'
           tags:
@@ -988,7 +948,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Number of processed not supported values per second'
           type: DEPENDENT
           key: wcache.values.not_supported
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -999,8 +958,6 @@ zabbix_export:
               parameters:
                 - '$.data.wcache.values[''not supported'']'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'zabbix[stats,{$ZABBIX.PROXY.ADDRESS},{$ZABBIX.PROXY.PORT}]'
           tags:
@@ -1010,7 +967,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Number of processed character values per second'
           type: DEPENDENT
           key: wcache.values.str
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -1021,8 +977,6 @@ zabbix_export:
               parameters:
                 - $.data.wcache.values.str
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'zabbix[stats,{$ZABBIX.PROXY.ADDRESS},{$ZABBIX.PROXY.PORT}]'
           tags:
@@ -1032,7 +986,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Number of processed text values per second'
           type: DEPENDENT
           key: wcache.values.text
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -1043,8 +996,6 @@ zabbix_export:
               parameters:
                 - $.data.wcache.values.text
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'zabbix[stats,{$ZABBIX.PROXY.ADDRESS},{$ZABBIX.PROXY.PORT}]'
           tags:
@@ -1054,7 +1005,6 @@ zabbix_export:
           name: 'Remote Zabbix proxy: Number of processed numeric (unsigned) values per second'
           type: DEPENDENT
           key: wcache.values.uint
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -1065,8 +1015,6 @@ zabbix_export:
               parameters:
                 - $.data.wcache.values.uint
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'zabbix[stats,{$ZABBIX.PROXY.ADDRESS},{$ZABBIX.PROXY.PORT}]'
           tags:
@@ -1112,7 +1060,6 @@ zabbix_export:
           type: INTERNAL
           key: 'zabbix[stats,{$ZABBIX.PROXY.ADDRESS},{$ZABBIX.PROXY.PORT}]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Zabbix server statistics master item.'
           tags:

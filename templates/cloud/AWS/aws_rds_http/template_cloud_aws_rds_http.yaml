@@ -24,9 +24,7 @@ zabbix_export:
           name: 'AWS RDS: Get alarms check'
           type: DEPENDENT
           key: aws.rds.alarms.check
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Data collection check.'
           preprocessing:
@@ -55,7 +53,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Binlog Usage'
           type: DEPENDENT
           key: aws.rds.bin_log_disk_usage
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -78,7 +75,6 @@ zabbix_export:
           name: 'AWS RDS: Burst balance'
           type: DEPENDENT
           key: aws.rds.burst_balance
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -107,9 +103,7 @@ zabbix_export:
           name: 'AWS RDS: Class'
           type: DEPENDENT
           key: aws.rds.class
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Contains the name of the compute and memory capacity class of the DB instance.'
           preprocessing:
@@ -128,7 +122,6 @@ zabbix_export:
           name: 'AWS RDS: Credit CPU: Balance'
           type: DEPENDENT
           key: aws.rds.cpu.credit_balance
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -164,7 +157,6 @@ zabbix_export:
           name: 'AWS RDS: Credit CPU: Usage'
           type: DEPENDENT
           key: aws.rds.cpu.credit_usage
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -188,7 +180,6 @@ zabbix_export:
           name: 'AWS RDS: CPU: Utilization'
           type: DEPENDENT
           key: aws.rds.cpu.utilization
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -220,7 +211,6 @@ zabbix_export:
           name: 'AWS RDS: Create time'
           type: DEPENDENT
           key: aws.rds.create_time
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: unixtime
@@ -238,7 +228,6 @@ zabbix_export:
           name: 'AWS RDS: Connections'
           type: DEPENDENT
           key: aws.rds.database_connections
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -264,7 +253,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Queue depth'
           type: DEPENDENT
           key: aws.rds.disk_queue_depth
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of outstanding read/write requests waiting to access the disk.'
@@ -282,7 +270,6 @@ zabbix_export:
           name: 'AWS RDS: EBS: Byte balance'
           type: DEPENDENT
           key: aws.rds.ebs_byte_balance
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -313,7 +300,6 @@ zabbix_export:
           name: 'AWS RDS: EBS: IO balance'
           type: DEPENDENT
           key: aws.rds.ebs_io_balance
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -344,9 +330,7 @@ zabbix_export:
           name: 'AWS RDS: Engine'
           type: DEPENDENT
           key: aws.rds.engine
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Database engine.'
           preprocessing:
@@ -365,9 +349,7 @@ zabbix_export:
           name: 'AWS RDS: Engine version'
           type: DEPENDENT
           key: aws.rds.engine.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Indicates the database engine version.'
           preprocessing:
@@ -386,9 +368,7 @@ zabbix_export:
           name: 'AWS RDS: Get events check'
           type: DEPENDENT
           key: aws.rds.events.check
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Data collection check.'
           preprocessing:
@@ -417,7 +397,6 @@ zabbix_export:
           name: 'AWS RDS: SQLServer: Failed agent jobs'
           type: DEPENDENT
           key: aws.rds.failed_sql_server_agent_jobs_count
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Rpm
@@ -438,7 +417,6 @@ zabbix_export:
           name: 'AWS RDS: Memory, freeable'
           type: DEPENDENT
           key: aws.rds.freeable_memory
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -460,7 +438,6 @@ zabbix_export:
           name: 'AWS RDS: Storage: Local free'
           type: DEPENDENT
           key: aws.rds.free_local_storage
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -484,7 +461,6 @@ zabbix_export:
           name: 'AWS RDS: Storage: Space free'
           type: DEPENDENT
           key: aws.rds.free_storage_space
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -505,7 +481,6 @@ zabbix_export:
           key: aws.rds.get_alarms
           delay: 0s;m/1
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -728,8 +703,6 @@ zabbix_export:
           description: 'DescribeAlarms API method: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -753,7 +726,6 @@ zabbix_export:
           key: aws.rds.get_events
           delay: 0s;m/10
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -966,8 +938,6 @@ zabbix_export:
           description: 'DescribeEvents API method: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -991,7 +961,6 @@ zabbix_export:
           key: aws.rds.get_instance_info
           delay: 5m
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -1185,8 +1154,6 @@ zabbix_export:
             DescribeDBInstances API method: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -1210,7 +1177,6 @@ zabbix_export:
           key: aws.rds.get_metrics
           delay: 0s;m/5
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -1509,8 +1475,6 @@ zabbix_export:
             Full metrics list related to Amazon Aurora: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.AuroraMySQL.Monitoring.Metrics.html#Aurora.AuroraMySQL.Monitoring.Metrics.instances
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -1532,9 +1496,7 @@ zabbix_export:
           name: 'AWS RDS: Get instance info check'
           type: DEPENDENT
           key: aws.rds.instance_info.check
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Data collection check.'
           preprocessing:
@@ -1563,9 +1525,7 @@ zabbix_export:
           name: 'AWS RDS: Get metrics check'
           type: DEPENDENT
           key: aws.rds.metrics.check
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Data collection check.'
           preprocessing:
@@ -1594,7 +1554,6 @@ zabbix_export:
           name: 'AWS RDS: Network: Receive throughput'
           type: DEPENDENT
           key: aws.rds.network_receive_throughput.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -1613,7 +1572,6 @@ zabbix_export:
           name: 'AWS RDS: Network: Throughput'
           type: DEPENDENT
           key: aws.rds.network_throughput.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -1632,7 +1590,6 @@ zabbix_export:
           name: 'AWS RDS: Network: Transmit throughput'
           type: DEPENDENT
           key: aws.rds.network_transmit_throughput.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -1651,7 +1608,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Read IOPS'
           type: DEPENDENT
           key: aws.rds.read_iops.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Rps
@@ -1670,7 +1626,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Read IOPS, local storage'
           type: DEPENDENT
           key: aws.rds.read_iops_local_storage.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Rps
@@ -1689,7 +1644,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Read latency'
           type: DEPENDENT
           key: aws.rds.read_latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1708,7 +1662,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Read latency, local storage'
           type: DEPENDENT
           key: aws.rds.read_latency_local_storage
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1727,9 +1680,7 @@ zabbix_export:
           name: 'AWS RDS: Read replica: State'
           type: DEPENDENT
           key: aws.rds.read_replica_state
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             The status of a read replica. If the instance isn't a read replica, this is blank.
@@ -1742,8 +1693,6 @@ zabbix_export:
                 - $..StatusInfos..Normal.first()
               error_handler: DISCARD_VALUE
             - type: BOOL_TO_DECIMAL
-              parameters:
-                - ''
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
                 - 3h
@@ -1767,9 +1716,7 @@ zabbix_export:
           name: 'AWS RDS: Read replica: Status'
           type: DEPENDENT
           key: aws.rds.read_replica_status
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             The status of a read replica. If the instance isn't a read replica, this is blank.
@@ -1791,7 +1738,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Read throughput'
           type: DEPENDENT
           key: aws.rds.read_throughput.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -1810,7 +1756,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Read throughput, local storage'
           type: DEPENDENT
           key: aws.rds.read_throughput_local_storage.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -1829,7 +1774,6 @@ zabbix_export:
           name: 'AWS RDS: Replication: Lag'
           type: DEPENDENT
           key: aws.rds.replica_lag
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1858,9 +1802,7 @@ zabbix_export:
           name: 'AWS RDS: Status'
           type: DEPENDENT
           key: aws.rds.status
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: |
             Specifies the current state of this database.
@@ -1881,7 +1823,6 @@ zabbix_export:
           name: 'AWS RDS: Storage: Allocated'
           type: DEPENDENT
           key: aws.rds.storage.allocated
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!GiB'
@@ -1902,7 +1843,6 @@ zabbix_export:
           name: 'AWS RDS: Storage: Max allocated'
           type: DEPENDENT
           key: aws.rds.storage.max_allocated
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!GiB'
@@ -1927,7 +1867,6 @@ zabbix_export:
           name: 'AWS RDS: Network: Receive throughput'
           type: DEPENDENT
           key: aws.rds.storage_network_receive_throughput
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -1948,7 +1887,6 @@ zabbix_export:
           name: 'AWS RDS: Network: Transmit throughput'
           type: DEPENDENT
           key: aws.rds.storage_network_transmit_throughput
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -1969,9 +1907,7 @@ zabbix_export:
           name: 'AWS RDS: Storage type'
           type: DEPENDENT
           key: aws.rds.storage_type
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Specifies the storage type associated with DB instance.'
           preprocessing:
@@ -1990,7 +1926,6 @@ zabbix_export:
           name: 'AWS RDS: Swap usage'
           type: DEPENDENT
           key: aws.rds.swap_usage
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -2013,7 +1948,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Write IOPS'
           type: DEPENDENT
           key: aws.rds.write_iops.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Rps
@@ -2032,7 +1966,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Write IOPS, local storage'
           type: DEPENDENT
           key: aws.rds.write_iops_local_storage.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Rps
@@ -2051,7 +1984,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Write latency'
           type: DEPENDENT
           key: aws.rds.write_latency
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -2070,7 +2002,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Write latency, local storage'
           type: DEPENDENT
           key: aws.rds.write_latency_local_storage
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -2089,7 +2020,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Write throughput'
           type: DEPENDENT
           key: aws.rds.write_throughput.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -2108,7 +2038,6 @@ zabbix_export:
           name: 'AWS RDS: Disk: Write throughput, local storage'
           type: DEPENDENT
           key: aws.rds.write_throughput_local_storage.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -2152,7 +2081,6 @@ zabbix_export:
               name: 'AWS RDS Alarms: [{#ALARM_NAME}]: State'
               type: DEPENDENT
               key: 'aws.rds.alarm.state["{#ALARM_NAME}"]'
-              delay: '0'
               history: 7d
               description: |
                 The state value for the alarm. Possible values: 0 (OK), 1 (INSUFFICIENT_DATA), 2 (ALARM).
@@ -2189,9 +2117,7 @@ zabbix_export:
               name: 'AWS RDS Alarms: [{#ALARM_NAME}]: State reason'
               type: DEPENDENT
               key: 'aws.rds.alarm.state_reason["{#ALARM_NAME}"]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: |
                 An explanation for the alarm state, in text format.
@@ -2258,7 +2184,6 @@ zabbix_export:
               name: 'AWS RDS: Replication: Lag, max'
               type: DEPENDENT
               key: 'aws.rds.aurora_replica_lag.max[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2279,7 +2204,6 @@ zabbix_export:
               name: 'AWS RDS: Replication: Lag, min'
               type: DEPENDENT
               key: 'aws.rds.aurora_replica_lag.min[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2300,7 +2224,6 @@ zabbix_export:
               name: 'AWS RDS: Replication: Lag'
               type: DEPENDENT
               key: 'aws.rds.aurora_replica_lag[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2321,7 +2244,6 @@ zabbix_export:
               name: 'AWS RDS: Buffer Cache hit ratio'
               type: DEPENDENT
               key: 'aws.rds.buffer_cache_hit_ratio[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -2342,7 +2264,6 @@ zabbix_export:
               name: 'AWS RDS: Operations: Commit latency'
               type: DEPENDENT
               key: 'aws.rds.commit_latency[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2363,7 +2284,6 @@ zabbix_export:
               name: 'AWS RDS: Operations: Commit throughput'
               type: DEPENDENT
               key: 'aws.rds.commit_throughput.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The average number of commit operations per second.'
@@ -2383,7 +2303,6 @@ zabbix_export:
               name: 'AWS RDS: Deadlocks, rate'
               type: DEPENDENT
               key: 'aws.rds.deadlocks.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The average number of deadlocks in the database per second.'
@@ -2403,7 +2322,6 @@ zabbix_export:
               name: 'AWS RDS: Engine uptime'
               type: DEPENDENT
               key: 'aws.rds.engine_uptime[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: s
@@ -2424,7 +2342,6 @@ zabbix_export:
               name: 'AWS RDS: Rollback segment history list length'
               type: DEPENDENT
               key: 'aws.rds.rollback_segment_history_list_length[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The undo logs that record committed transactions with delete-marked records. These records are scheduled to be processed by the InnoDB purge operation.'
@@ -2444,7 +2361,6 @@ zabbix_export:
               name: 'AWS RDS: Row lock time'
               type: DEPENDENT
               key: 'aws.rds.row_locktime[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2465,7 +2381,6 @@ zabbix_export:
               name: 'AWS RDS: Operations: Select latency'
               type: DEPENDENT
               key: 'aws.rds.select_latency[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2486,7 +2401,6 @@ zabbix_export:
               name: 'AWS RDS: Operations: Select throughput'
               type: DEPENDENT
               key: 'aws.rds.select_throughput.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: rps
@@ -2507,7 +2421,6 @@ zabbix_export:
               name: 'AWS RDS: Network: Throughput'
               type: DEPENDENT
               key: 'aws.rds.storage_network_throughput[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -2586,7 +2499,6 @@ zabbix_export:
               name: 'AWS RDS Events: [{#EVENT_CATEGORY}]: {#EVENT_SOURCE_TYPE}/{#EVENT_SOURCE_ID} : Date'
               type: DEPENDENT
               key: 'aws.rds.event_date["{#EVENT_CATEGORY}/{#EVENT_SOURCE_TYPE}/{#EVENT_SOURCE_ID}"]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: unixtime
@@ -2613,9 +2525,7 @@ zabbix_export:
               name: 'AWS RDS Events: [{#EVENT_CATEGORY}]: {#EVENT_SOURCE_TYPE}/{#EVENT_SOURCE_ID}: Message'
               type: DEPENDENT
               key: 'aws.rds.event_message["{#EVENT_CATEGORY}/{#EVENT_SOURCE_TYPE}/{#EVENT_SOURCE_ID}"]'
-              delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
               description: 'Provides the text of this event.'
               preprocessing:
@@ -2676,7 +2586,6 @@ zabbix_export:
               name: 'AWS RDS: Connections: Aborted'
               type: DEPENDENT
               key: 'aws.rds.aurora_clients_aborted[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of client connections that have not been closed properly.'
@@ -2696,7 +2605,6 @@ zabbix_export:
               name: 'AWS RDS: Replication: Binlog lag'
               type: DEPENDENT
               key: 'aws.rds.aurora_replication_binlog_lag[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: s
@@ -2724,7 +2632,6 @@ zabbix_export:
               name: 'AWS RDS: Transactions: Active, rate'
               type: DEPENDENT
               key: 'aws.rds.aurora_transactions_active.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Rps
@@ -2747,7 +2654,6 @@ zabbix_export:
               name: 'AWS RDS: Backtrack: Window, actual'
               type: DEPENDENT
               key: 'aws.rds.backtrack_window_actual[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!minutes'
@@ -2768,7 +2674,6 @@ zabbix_export:
               name: 'AWS RDS: Backtrack: Window, alert'
               type: DEPENDENT
               key: 'aws.rds.backtrack_window_alert[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of times that the actual backtrack window is smaller than the target backtrack window for a given period of time.'
@@ -2788,7 +2693,6 @@ zabbix_export:
               name: 'AWS RDS: Transactions: Blocked, rate'
               type: DEPENDENT
               key: 'aws.rds.blocked_transactions.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Rps
@@ -2809,7 +2713,6 @@ zabbix_export:
               name: 'AWS RDS: DDL: Latency'
               type: DEPENDENT
               key: 'aws.rds.ddl_latency[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2830,7 +2733,6 @@ zabbix_export:
               name: 'AWS RDS: DDL: Throughput'
               type: DEPENDENT
               key: 'aws.rds.ddl_throughput.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Rps
@@ -2851,7 +2753,6 @@ zabbix_export:
               name: 'AWS RDS: Operations: Delete latency'
               type: DEPENDENT
               key: 'aws.rds.delete_latency[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2872,7 +2773,6 @@ zabbix_export:
               name: 'AWS RDS: Operations: Delete throughput'
               type: DEPENDENT
               key: 'aws.rds.delete_throughput.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Rps
@@ -2893,7 +2793,6 @@ zabbix_export:
               name: 'AWS RDS: DML: Latency'
               type: DEPENDENT
               key: 'aws.rds.dml_latency[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2914,7 +2813,6 @@ zabbix_export:
               name: 'AWS RDS: DML: Throughput'
               type: DEPENDENT
               key: 'aws.rds.dml_throughput.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: rate
@@ -2935,7 +2833,6 @@ zabbix_export:
               name: 'AWS RDS: Operations: Insert latency'
               type: DEPENDENT
               key: 'aws.rds.insert_latency[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -2956,7 +2853,6 @@ zabbix_export:
               name: 'AWS RDS: Operations: Insert throughput'
               type: DEPENDENT
               key: 'aws.rds.insert_throughput.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Rps
@@ -2977,7 +2873,6 @@ zabbix_export:
               name: 'AWS RDS: Login failures, rate'
               type: DEPENDENT
               key: 'aws.rds.login_failures.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The average number of failed login attempts per second.'
@@ -2997,7 +2892,6 @@ zabbix_export:
               name: 'AWS RDS: Binary log files, number'
               type: DEPENDENT
               key: 'aws.rds.num_binary_log_files[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of binlog files generated.'
@@ -3019,7 +2913,6 @@ zabbix_export:
               name: 'AWS RDS: Queries, rate'
               type: DEPENDENT
               key: 'aws.rds.queries.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The average number of queries executed per second.'
@@ -3039,7 +2932,6 @@ zabbix_export:
               name: 'AWS RDS: Resultset cache hit ratio'
               type: DEPENDENT
               key: 'aws.rds.result_set_cache_hit_ratio[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -3060,7 +2952,6 @@ zabbix_export:
               name: 'AWS RDS: Binary log files, size'
               type: DEPENDENT
               key: 'aws.rds.sum_binary_log_files[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -3083,7 +2974,6 @@ zabbix_export:
               name: 'AWS RDS: Operations: Update latency'
               type: DEPENDENT
               key: 'aws.rds.update_latency[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -3106,7 +2996,6 @@ zabbix_export:
               name: 'AWS RDS: Operations: Update throughput'
               type: DEPENDENT
               key: 'aws.rds.update_throughput.rate[{#SINGLETON}]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Rps

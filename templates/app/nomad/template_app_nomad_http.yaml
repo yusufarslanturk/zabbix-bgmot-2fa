@@ -28,9 +28,7 @@ zabbix_export:
           name: 'HashiCorp Nomad: Client nodes API response'
           type: DEPENDENT
           key: nomad.client.nodes.api.response
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Client nodes API response message.'
           preprocessing:
@@ -74,13 +72,10 @@ zabbix_export:
           key: nomad.client.nodes.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Nomad clients data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '{"header":{"HTTP/1.1 408 Request timeout":""}}'
           timeout: '{$NOMAD.DATA.TIMEOUT}'
@@ -102,7 +97,6 @@ zabbix_export:
           name: 'HashiCorp Nomad: Nomad clients count'
           type: DEPENDENT
           key: nomad.clients.count
-          delay: '0'
           history: 7d
           description: 'Nomad clients count.'
           preprocessing:
@@ -118,9 +112,7 @@ zabbix_export:
           name: 'HashiCorp Nomad: Region'
           type: DEPENDENT
           key: nomad.region
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Current cluster region.'
           preprocessing:
@@ -136,9 +128,7 @@ zabbix_export:
           name: 'HashiCorp Nomad: Server-related APIs response'
           type: DEPENDENT
           key: nomad.server.api.response
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Server-related (`operator/raft/configuration`, `agent/members`) APIs error response message.'
           preprocessing:
@@ -171,7 +161,6 @@ zabbix_export:
           key: nomad.server.nodes.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
           params: |
             var Nomad = {
@@ -292,7 +281,6 @@ zabbix_export:
           name: 'HashiCorp Nomad: Nomad servers count'
           type: DEPENDENT
           key: nomad.servers.count
-          delay: '0'
           history: 7d
           description: 'Nomad servers count.'
           preprocessing:
@@ -667,7 +655,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: CPU allocated'
           type: DEPENDENT
           key: nomad.client.allocated.cpu
-          delay: '0'
           history: 7d
           trends: 90d
           units: '!Mhz'
@@ -688,7 +675,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Disk allocated'
           type: DEPENDENT
           key: nomad.client.allocated.disk
-          delay: '0'
           history: 7d
           trends: 90d
           units: B
@@ -712,7 +698,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Memory allocated'
           type: DEPENDENT
           key: nomad.client.allocated.memory
-          delay: '0'
           history: 7d
           trends: 90d
           units: B
@@ -736,7 +721,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations blocked'
           type: DEPENDENT
           key: nomad.client.allocations.blocked
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of allocations waiting for previous versions.'
@@ -757,7 +741,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations completed, rate'
           type: DEPENDENT
           key: nomad.client.allocations.complete
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of allocations completed.'
@@ -770,8 +753,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
                 - 1h
@@ -784,7 +765,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations failed, rate'
           type: DEPENDENT
           key: nomad.client.allocations.failed
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of allocations failed.'
@@ -797,8 +777,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
                 - 1h
@@ -811,7 +789,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations migrating'
           type: DEPENDENT
           key: nomad.client.allocations.migrating
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of allocations migrating data from previous versions.'
@@ -832,7 +809,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations OOM killed'
           type: DEPENDENT
           key: nomad.client.allocations.oom_killed
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of allocations OOM killed.'
@@ -867,7 +843,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations pending'
           type: DEPENDENT
           key: nomad.client.allocations.pending
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of allocations pending (received by the client but not yet running).'
@@ -888,7 +863,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations restarted, rate'
           type: DEPENDENT
           key: nomad.client.allocations.restart
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of allocations restarted.'
@@ -901,8 +875,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
                 - 1h
@@ -915,7 +887,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations running'
           type: DEPENDENT
           key: nomad.client.allocations.running
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of allocations running.'
@@ -936,7 +907,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations starting'
           type: DEPENDENT
           key: nomad.client.allocations.start
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of allocations starting.'
@@ -957,7 +927,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations terminal'
           type: DEPENDENT
           key: nomad.client.allocations.terminal
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of allocations terminal.'
@@ -978,10 +947,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: CPU idle utilization'
           type: DEPENDENT
           key: nomad.client.cpu.idle
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'CPU utilization in idle state.'
           preprocessing:
@@ -1000,10 +968,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: CPU system utilization'
           type: DEPENDENT
           key: nomad.client.cpu.system
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'CPU utilization in system space.'
           preprocessing:
@@ -1022,10 +989,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: CPU total utilization'
           type: DEPENDENT
           key: nomad.client.cpu.total
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'Total CPU utilization.'
           preprocessing:
@@ -1055,10 +1021,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: CPU user utilization'
           type: DEPENDENT
           key: nomad.client.cpu.user
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'CPU utilization in user space.'
           preprocessing:
@@ -1077,9 +1042,7 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Monitoring API response'
           type: DEPENDENT
           key: nomad.client.data.api.response
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Monitoring API response message.'
           preprocessing:
@@ -1122,13 +1085,10 @@ zabbix_export:
           type: HTTP_AGENT
           key: nomad.client.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Telemetry data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '{"header":{"HTTP/1.1 408 Request timeout":""}}'
           timeout: '{$NOMAD.DATA.TIMEOUT}'
@@ -1150,9 +1110,7 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Allocations API response'
           type: DEPENDENT
           key: nomad.client.job.allocs.api.response
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Allocations API response message.'
           preprocessing:
@@ -1199,13 +1157,10 @@ zabbix_export:
           key: nomad.client.job.allocs.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Allocated jobs data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '{"header":{"HTTP/1.1 408 Request timeout":""}}'
           timeout: '{$NOMAD.DATA.TIMEOUT}'
@@ -1231,10 +1186,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Memory available'
           type: DEPENDENT
           key: nomad.client.memory.available
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Total amount of memory available to processes which includes free and cached memory.'
           preprocessing:
@@ -1253,10 +1207,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Memory free'
           type: DEPENDENT
           key: nomad.client.memory.free
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Amount of memory which is free.'
           preprocessing:
@@ -1274,10 +1227,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Memory size'
           type: DEPENDENT
           key: nomad.client.memory.total
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Total amount of physical memory on the node.'
           preprocessing:
@@ -1295,10 +1247,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Memory used'
           type: DEPENDENT
           key: nomad.client.memory.used
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Amount of memory used by processes.'
           preprocessing:
@@ -1316,9 +1267,7 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Metrics'
           type: DEPENDENT
           key: nomad.client.metrics.get
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Nomad client metrics in raw format.'
           preprocessing:
@@ -1335,9 +1284,7 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Nodes API response'
           type: DEPENDENT
           key: nomad.client.node.info.api.response
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Nodes API response message.'
           preprocessing:
@@ -1384,13 +1331,10 @@ zabbix_export:
           key: nomad.client.node.info.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Node info data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '{"header":{"HTTP/1.1 408 Request timeout":""}}'
           timeout: '{$NOMAD.DATA.TIMEOUT}'
@@ -1412,7 +1356,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: CPU unallocated'
           type: DEPENDENT
           key: nomad.client.unallocated.cpu
-          delay: '0'
           history: 7d
           trends: 90d
           units: '!Mhz'
@@ -1433,7 +1376,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Disk unallocated'
           type: DEPENDENT
           key: nomad.client.unallocated.disk
-          delay: '0'
           history: 7d
           trends: 90d
           units: B
@@ -1457,7 +1399,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Memory unallocated'
           type: DEPENDENT
           key: nomad.client.unallocated.memory
-          delay: '0'
           history: 7d
           trends: 90d
           units: B
@@ -1481,7 +1422,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Uptime'
           type: DEPENDENT
           key: nomad.client.uptime
-          delay: '0'
           history: 7d
           trends: 90d
           units: uptime
@@ -1512,9 +1452,7 @@ zabbix_export:
           name: 'HashiCorp Nomad Client: Nomad client version'
           type: DEPENDENT
           key: nomad.client.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Nomad client version.'
           preprocessing:
@@ -1581,10 +1519,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] CPU allocated'
               type: DEPENDENT
               key: 'nomad.client.allocs.cpu.allocated["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '!Mhz'
               description: 'Total CPU resources allocated by the ["{#JOB.NAME}"] job across all cores.'
               preprocessing:
@@ -1610,10 +1547,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] CPU system utilization'
               type: DEPENDENT
               key: 'nomad.client.allocs.cpu.system["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Total CPU resources consumed by the ["{#JOB.NAME}"] job in system space.'
               preprocessing:
@@ -1639,10 +1575,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] CPU throttled periods time'
               type: DEPENDENT
               key: 'nomad.client.allocs.cpu.throttled_periods["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: s
               description: 'Total number of CPU periods that the ["{#JOB.NAME}"] job was throttled.'
               preprocessing:
@@ -1671,10 +1606,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] CPU throttled time'
               type: DEPENDENT
               key: 'nomad.client.allocs.cpu.throttled_time["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: s
               description: 'Total time that the ["{#JOB.NAME}"] job was throttled.'
               preprocessing:
@@ -1704,10 +1638,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] CPU total utilization'
               type: DEPENDENT
               key: 'nomad.client.allocs.cpu.total_percent["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Total CPU resources consumed by the ["{#JOB.NAME}"] job across all cores.'
               preprocessing:
@@ -1733,10 +1666,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] CPU ticks'
               type: DEPENDENT
               key: 'nomad.client.allocs.cpu.total_ticks["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               description: 'CPU ticks consumed by the process for the ["{#JOB.NAME}"] job in the last collection interval.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN
@@ -1761,10 +1693,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] CPU user utilization'
               type: DEPENDENT
               key: 'nomad.client.allocs.cpu.user["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Total CPU resources consumed by the ["{#JOB.NAME}"] job in user space.'
               preprocessing:
@@ -1790,10 +1721,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] Memory allocated'
               type: DEPENDENT
               key: 'nomad.client.allocs.memory.allocated["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Amount of memory allocated by the ["{#JOB.NAME}"] job.'
               preprocessing:
@@ -1819,10 +1749,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] Memory cached'
               type: DEPENDENT
               key: 'nomad.client.allocs.memory.cache["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Amount of memory cached by the ["{#JOB.NAME}"] job.'
               preprocessing:
@@ -1848,10 +1777,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] Memory swapped'
               type: DEPENDENT
               key: 'nomad.client.allocs.memory.swap["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Amount of memory swapped by the ["{#JOB.NAME}"] job.'
               preprocessing:
@@ -1877,10 +1805,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Job ["{#JOB.NAME}"] Memory used'
               type: DEPENDENT
               key: 'nomad.client.allocs.memory.usage["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Total amount of memory used by the ["{#JOB.NAME}"] job.'
               preprocessing:
@@ -2031,10 +1958,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Disk ["{#DEV.NAME}"] space available'
               type: DEPENDENT
               key: 'nomad.client.disk.available["{#DEV.NAME}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Amount of space which is available on ["{#DEV.NAME}"] disk.'
               preprocessing:
@@ -2054,10 +1980,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Disk ["{#DEV.NAME}"] inodes utilization'
               type: DEPENDENT
               key: 'nomad.client.disk.inodes_percent["{#DEV.NAME}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Disk space consumed by the inodes on ["{#DEV.NAME}"] disk.'
               preprocessing:
@@ -2113,10 +2038,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Disk ["{#DEV.NAME}"] size'
               type: DEPENDENT
               key: 'nomad.client.disk.size["{#DEV.NAME}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Total size of the ["{#DEV.NAME}"] device.'
               preprocessing:
@@ -2136,10 +2060,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Disk ["{#DEV.NAME}"] space used'
               type: DEPENDENT
               key: 'nomad.client.disk.used["{#DEV.NAME}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Amount of disk ["{#DEV.NAME}"] space which has been used.'
               preprocessing:
@@ -2159,10 +2082,9 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Disk ["{#DEV.NAME}"] space utilization'
               type: DEPENDENT
               key: 'nomad.client.disk.used_percent["{#DEV.NAME}"]'
-              delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Percentage of disk ["{#DEV.NAME}"] space used.'
               preprocessing:
@@ -2272,7 +2194,6 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Driver [{#DRIVER.NAME}] detection state'
               type: DEPENDENT
               key: 'nomad.client.driver.detected["{#DRIVER.NAME}"]'
-              delay: '0'
               history: 7d
               trends: 90d
               description: 'Driver [{#DRIVER.NAME}] detection state.'
@@ -2283,8 +2204,6 @@ zabbix_export:
                   parameters:
                     - '$.body..Drivers.{#DRIVER.NAME}.Detected.first()'
                 - type: BOOL_TO_DECIMAL
-                  parameters:
-                    - ''
               master_item:
                 key: nomad.client.node.info.get
               tags:
@@ -2309,7 +2228,6 @@ zabbix_export:
               name: 'HashiCorp Nomad Client: Driver [{#DRIVER.NAME}] state'
               type: DEPENDENT
               key: 'nomad.client.driver.state["{#DRIVER.NAME}"]'
-              delay: '0'
               history: 7d
               trends: 90d
               description: 'Driver [{#DRIVER.NAME}] state.'
@@ -2320,8 +2238,6 @@ zabbix_export:
                   parameters:
                     - '$.body..Drivers.{#DRIVER.NAME}.Healthy.first()'
                 - type: BOOL_TO_DECIMAL
-                  parameters:
-                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 1h
@@ -2911,9 +2827,7 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Nomad raft version'
           type: DEPENDENT
           key: nomad.raft.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Nomad raft version.'
           preprocessing:
@@ -2930,10 +2844,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: FSM allocation client update time'
           type: DEPENDENT
           key: nomad.server.alloc_client_update
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply AllocClientUpdate raft entry.'
           preprocessing:
@@ -2955,7 +2868,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Autopilot failure tolerance'
           type: DEPENDENT
           key: nomad.server.autopilot.failure_tolerance
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'The number of redundant healthy servers that can fail without causing an outage.'
@@ -2988,7 +2900,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Autopilot state'
           type: DEPENDENT
           key: nomad.server.autopilot.state
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Current autopilot state.'
@@ -3020,10 +2931,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: CPU shares for blocked evaluations'
           type: DEPENDENT
           key: nomad.server.blocked_evals.cpu
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Amount of CPU shares requested by blocked evals.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3043,10 +2953,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: CPU shares for blocked job evaluations'
           type: DEPENDENT
           key: nomad.server.blocked_evals.job.cpu
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Amount of CPU shares requested by blocked evals of a job.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3068,10 +2977,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Memory shares for blocked job evaluations'
           type: DEPENDENT
           key: nomad.server.blocked_evals.job.memory
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Amount of memory requested by blocked evals of a job.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3093,10 +3001,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Memory shares by blocked evaluations'
           type: DEPENDENT
           key: nomad.server.blocked_evals.memory
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Amount of memory requested by blocked evals.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3116,10 +3023,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Evaluations blocked'
           type: DEPENDENT
           key: nomad.server.blocked_evals.total_blocked
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of evals in the blocked state for any reason (cluster resource exhaustion or quota limits).'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3137,10 +3043,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Evaluations escaped'
           type: DEPENDENT
           key: nomad.server.blocked_evals.total_escaped
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: |
             Count of evals that have escaped computed node classes.
             This indicates a scheduler optimization was skipped and is not usually a source of concern.
@@ -3160,10 +3065,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Evaluations blocked due to quota limit'
           type: DEPENDENT
           key: nomad.server.blocked_evals.total_quota_limit
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of blocked evals due to quota limits (the resources for these jobs are not counted in other blocked_evals metrics, except for total_blocked).'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3181,10 +3085,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Evaluations enqueue time'
           type: DEPENDENT
           key: nomad.server.broker.eval_waiting
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Average time elapsed with evaluations waiting to be enqueued.'
           preprocessing:
@@ -3206,10 +3109,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Services ready to schedule'
           type: DEPENDENT
           key: nomad.server.broker.service_ready
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of service evals ready to be scheduled.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3227,10 +3129,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Services unacknowledged'
           type: DEPENDENT
           key: nomad.server.broker.service_unacked
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of unacknowledged service evals.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3248,10 +3149,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: System evaluations ready to schedule'
           type: DEPENDENT
           key: nomad.server.broker.system_ready
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of service evals ready to be scheduled.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3269,10 +3169,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: System evaluations unacknowledged'
           type: DEPENDENT
           key: nomad.server.broker.system_unacked
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of unacknowledged system evals.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3290,10 +3189,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Evaluations pending'
           type: DEPENDENT
           key: nomad.server.broker.total_pending
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Evaluations that are pending until an existing evaluation for the same job completes.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3311,10 +3209,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Evaluations ready'
           type: DEPENDENT
           key: nomad.server.broker.total_ready
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Number of evaluations ready to be processed.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3332,10 +3229,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Evaluations unacked'
           type: DEPENDENT
           key: nomad.server.broker.total_unacked
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Evaluations dispatched for processing but incomplete.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3353,7 +3249,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Evaluations waiting'
           type: DEPENDENT
           key: nomad.server.broker.total_waiting
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of evals waiting to be enqueued.'
@@ -3373,10 +3268,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC eval dequeue time'
           type: DEPENDENT
           key: nomad.server.client.dequeue
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Eval.Dequeue RPC call.'
           preprocessing:
@@ -3400,10 +3294,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC get client allocs time'
           type: DEPENDENT
           key: nomad.server.client.get_client_allocs
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Node.GetClientAllocs RPC call.'
           preprocessing:
@@ -3427,10 +3320,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC list time'
           type: DEPENDENT
           key: nomad.server.client.list
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Node.List RPC call.'
           preprocessing:
@@ -3454,10 +3346,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC update allocations time'
           type: DEPENDENT
           key: nomad.server.client.update_alloc
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Node.UpdateAlloc RPC call.'
           preprocessing:
@@ -3481,10 +3372,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC update status time'
           type: DEPENDENT
           key: nomad.server.client.update_status
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Node.UpdateStatus RPC call.'
           preprocessing:
@@ -3508,10 +3398,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: CPU time, rate'
           type: DEPENDENT
           key: nomad.server.cpu.time
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Total user and system CPU time spent in seconds.'
           preprocessing:
@@ -3522,8 +3411,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -3533,9 +3420,7 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Monitoring API response'
           type: DEPENDENT
           key: nomad.server.data.api.response
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Monitoring API response message.'
           preprocessing:
@@ -3578,13 +3463,10 @@ zabbix_export:
           type: HTTP_AGENT
           key: nomad.server.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Telemetry data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '{"header":{"HTTP/1.1 408 Request timeout":""}}'
           timeout: '{$NOMAD.DATA.TIMEOUT}'
@@ -3606,10 +3488,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC evaluation acknowledgement time'
           type: DEPENDENT
           key: nomad.server.eval.ack
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Eval.Ack RPC call.'
           preprocessing:
@@ -3633,10 +3514,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: FSM apply plan results time'
           type: DEPENDENT
           key: nomad.server.fsm.apply_plan_results
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply ApplyPlanResults raft entry.'
           preprocessing:
@@ -3658,10 +3538,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: FSM job registration time'
           type: DEPENDENT
           key: nomad.server.fsm.register_job
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply RegisterJob raft entry.'
           preprocessing:
@@ -3683,10 +3562,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: FSM update evaluation time'
           type: DEPENDENT
           key: nomad.server.fsm.update_eval
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply UpdateEval raft entry.'
           preprocessing:
@@ -3708,7 +3586,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Heartbeats active'
           type: DEPENDENT
           key: nomad.server.heartbeat.active
-          delay: '0'
           history: 7d
           trends: 90d
           description: |
@@ -3730,10 +3607,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC job allocations time'
           type: DEPENDENT
           key: nomad.server.job.allocations
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Job.Allocations RPC call.'
           preprocessing:
@@ -3757,10 +3633,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC job evaluations time'
           type: DEPENDENT
           key: nomad.server.job.evaluations
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Job.Evaluations RPC call.'
           preprocessing:
@@ -3784,10 +3659,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC get job time'
           type: DEPENDENT
           key: nomad.server.job.get_job
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Job.GetJob RPC call.'
           preprocessing:
@@ -3811,7 +3685,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Jobs dead'
           type: DEPENDENT
           key: nomad.server.job_status.dead
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of dead jobs.'
@@ -3845,7 +3718,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Jobs pending'
           type: DEPENDENT
           key: nomad.server.job_status.pending
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of pending jobs.'
@@ -3866,7 +3738,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Jobs running'
           type: DEPENDENT
           key: nomad.server.job_status.running
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of running jobs.'
@@ -3887,7 +3758,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Job allocations completed'
           type: DEPENDENT
           key: nomad.server.job_summary.complete
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of complete allocations for a job.'
@@ -3908,7 +3778,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Job allocations failed'
           type: DEPENDENT
           key: nomad.server.job_summary.failed
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of failed allocations for a job.'
@@ -3929,10 +3798,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC job summary time'
           type: DEPENDENT
           key: nomad.server.job_summary.get_job_summary
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Job.Summary RPC call.'
           preprocessing:
@@ -3956,7 +3824,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Job allocations lost'
           type: DEPENDENT
           key: nomad.server.job_summary.lost
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of lost allocations for a job.'
@@ -3977,7 +3844,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Job allocations queued'
           type: DEPENDENT
           key: nomad.server.job_summary.queued
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of queued allocations for a job.'
@@ -3998,7 +3864,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Job allocations running'
           type: DEPENDENT
           key: nomad.server.job_summary.running
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of running allocations for a job.'
@@ -4019,7 +3884,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Job allocations starting'
           type: DEPENDENT
           key: nomad.server.job_summary.starting
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of starting allocations for a job.'
@@ -4040,7 +3904,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Job allocations unknown'
           type: DEPENDENT
           key: nomad.server.job_summary.unknown
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of unknown allocations for a job.'
@@ -4061,10 +3924,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Leader barrier time'
           type: DEPENDENT
           key: nomad.server.leader.barrier
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to establish a raft barrier during leader transition.'
           preprocessing:
@@ -4088,10 +3950,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Total reconcile time'
           type: DEPENDENT
           key: nomad.server.leader.reconcile
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to reconcile all serf peers with state store.'
           preprocessing:
@@ -4115,10 +3976,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Reconcile peer time'
           type: DEPENDENT
           key: nomad.server.leader.reconcile_member
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to reconcile a serf peer with state store.'
           preprocessing:
@@ -4142,10 +4002,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Gossip time'
           type: DEPENDENT
           key: nomad.server.memberlist.gossip
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to broadcast gossip messages.'
           preprocessing:
@@ -4167,9 +4026,7 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Metrics'
           type: DEPENDENT
           key: nomad.server.metrics.get
-          delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Nomad server metrics in raw format.'
           preprocessing:
@@ -4186,10 +4043,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Namespace list time'
           type: DEPENDENT
           key: nomad.server.namespace.list_namespace
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Namespace.ListNamespaces.'
           preprocessing:
@@ -4211,10 +4067,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Plan apply time'
           type: DEPENDENT
           key: nomad.server.plan.apply
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply a plan.'
           preprocessing:
@@ -4236,10 +4091,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Plan evaluate time'
           type: DEPENDENT
           key: nomad.server.plan.evaluate
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to evaluate a plan.'
           preprocessing:
@@ -4261,10 +4115,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Plan queue'
           type: DEPENDENT
           key: nomad.server.plan.queue_depth
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of evals in the plan queue.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -4282,10 +4135,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC plan submit time'
           type: DEPENDENT
           key: nomad.server.plan.submit
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Plan.Submit RPC call.'
           preprocessing:
@@ -4311,10 +4163,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Plan raft index processing time'
           type: DEPENDENT
           key: nomad.server.plan.wait_for_index
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed that planner waits for the raft index of the plan to be processed.'
           preprocessing:
@@ -4336,7 +4187,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Open file descriptors, max'
           type: DEPENDENT
           key: nomad.server.process_max_fds
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Maximum number of open file descriptors.'
@@ -4356,7 +4206,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Open file descriptors'
           type: DEPENDENT
           key: nomad.server.process_open_fds
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of open file descriptors.'
@@ -4376,7 +4225,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: FSM index'
           type: DEPENDENT
           key: nomad.server.raft.applied_index
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Current index applied to FSM.'
@@ -4396,7 +4244,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Raft transactions, rate'
           type: DEPENDENT
           key: nomad.server.raft.apply
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of Raft transactions.'
@@ -4409,8 +4256,6 @@ zabbix_export:
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4420,7 +4265,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Raft calls blocked, rate'
           type: DEPENDENT
           key: nomad.server.raft.barrier
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of blocking raft API calls.'
@@ -4432,8 +4276,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4443,7 +4285,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB freelist bytes'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.freelist_bytes
-          delay: '0'
           history: 7d
           trends: 90d
           units: B
@@ -4464,10 +4305,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB free page bytes'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.free_page_bytes
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Number of free page bytes.'
           preprocessing:
@@ -4486,7 +4326,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB free pages'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.num_free_pages
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of BoltDB free pages.'
@@ -4506,7 +4345,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB pending pages'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.num_pending_pages
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of BoltDB pending pages.'
@@ -4526,7 +4364,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB open read transactions'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.open_read_txn
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of current open read transactions.'
@@ -4546,7 +4383,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB read transactions, rate'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.total_read_txn
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of total read transactions.'
@@ -4558,8 +4394,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4569,7 +4403,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB cursors'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.cursor_count
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of total database cursors.'
@@ -4581,8 +4414,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4592,7 +4423,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB nodes, rate'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.node_count
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of total database nodes.'
@@ -4604,8 +4434,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4615,10 +4443,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB node dereferences, rate'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.node_deref
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of total database node dereferences.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -4628,8 +4455,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4639,10 +4464,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB page allocations, rate'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.page_alloc
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Number of page allocations.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -4652,8 +4476,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4663,7 +4485,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB pages in use'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.page_count
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of pages in use.'
@@ -4683,10 +4504,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB rebalance operations, rate'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.rebalance
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of total rebalance operations.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -4696,8 +4516,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4707,10 +4525,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB rebalance time'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.rebalance_time
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Sample of rebalance operation times.'
           preprocessing:
@@ -4732,7 +4549,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB spill operations, rate'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.spill
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of total spill operations.'
@@ -4744,8 +4560,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4755,10 +4569,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB spill time'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.spill_time
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Sample of spill operation times.'
           preprocessing:
@@ -4780,7 +4593,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB split operations, rate'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.split
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of total split operations.'
@@ -4792,8 +4604,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4803,7 +4613,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB write operations, rate'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.write
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of total write operations.'
@@ -4815,8 +4624,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -4826,10 +4633,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: BoltDB write time'
           type: DEPENDENT
           key: nomad.server.raft.boltdb.txstats.write_time
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Sample of write operation times.'
           preprocessing:
@@ -4851,7 +4657,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Cluster role'
           type: DEPENDENT
           key: nomad.server.raft.cluster_role
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Current role in the cluster.'
@@ -4891,7 +4696,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Raft commit logs enqueued'
           type: DEPENDENT
           key: nomad.server.raft.commit_num_logs
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of logs enqueued.'
@@ -4911,10 +4715,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Raft commit time'
           type: DEPENDENT
           key: nomad.server.raft.commit_time
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to commit writes.'
           preprocessing:
@@ -4936,10 +4739,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: FSM apply time'
           type: DEPENDENT
           key: nomad.server.raft.fsm.apply
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply write to FSM.'
           preprocessing:
@@ -4961,10 +4763,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: FSM autopilot time'
           type: DEPENDENT
           key: nomad.server.raft.fsm.autopilot
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply Autopilot raft entry.'
           preprocessing:
@@ -4987,10 +4788,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: FSM enqueue time'
           type: DEPENDENT
           key: nomad.server.raft.fsm.enqueue
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to enqueue write to FSM.'
           preprocessing:
@@ -5012,10 +4812,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: FSM register node time'
           type: DEPENDENT
           key: nomad.server.raft.fsm.register_node
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply RegisterNode raft entry.'
           preprocessing:
@@ -5037,7 +4836,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Raft last index'
           type: DEPENDENT
           key: nomad.server.raft.last_index
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Most recent index seen.'
@@ -5057,10 +4855,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Dispatch log time'
           type: DEPENDENT
           key: nomad.server.raft.leader.dispatch_log
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to write log, mark in flight, and start replication.'
           preprocessing:
@@ -5084,7 +4881,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Logs dispatched'
           type: DEPENDENT
           key: nomad.server.raft.leader.dispatch_num_logs
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of logs dispatched.'
@@ -5107,10 +4903,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Leader last contact'
           type: DEPENDENT
           key: nomad.server.raft.leader.lastContact
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: |
             Time since last contact to leader.
@@ -5152,7 +4947,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Raft peers'
           type: DEPENDENT
           key: nomad.server.raft.peers
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Current cluster raft peers amount.'
@@ -5170,7 +4964,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Raft transaction commit time'
           type: DEPENDENT
           key: nomad.server.raft.replication.appendEntries
-          delay: '0'
           history: 7d
           trends: 90d
           units: s
@@ -5194,7 +4987,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Heartbeat fails'
           type: DEPENDENT
           key: nomad.server.raft.transition.heartbeat_timeout
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of failing to heartbeat and starting election.'
@@ -5218,10 +5010,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Resident memory size'
           type: DEPENDENT
           key: nomad.server.resident_memory_bytes
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Resident memory size in bytes.'
           preprocessing:
@@ -5240,7 +5031,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC queries, rate'
           type: DEPENDENT
           key: nomad.server.rpc.query
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of RPC queries.'
@@ -5252,8 +5042,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -5265,7 +5053,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC requests, rate'
           type: DEPENDENT
           key: nomad.server.rpc.request
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of RPC requests being handled.'
@@ -5277,8 +5064,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -5290,7 +5075,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: RPC error requests, rate'
           type: DEPENDENT
           key: nomad.server.rpc.request_error
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of RPC requests being handled that result in an error.'
@@ -5302,8 +5086,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -5315,10 +5097,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Memory used'
           type: DEPENDENT
           key: nomad.server.runtime.alloc_bytes
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Memory utilization in bytes.'
           preprocessing:
@@ -5337,10 +5118,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Objects freed, rate'
           type: DEPENDENT
           key: nomad.server.runtime.free_count
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of objects freed from heap by go runtime GC.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -5350,8 +5130,6 @@ zabbix_export:
                 - ''
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: nomad.server.metrics.get
           tags:
@@ -5361,10 +5139,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: GC pause time'
           type: DEPENDENT
           key: nomad.server.runtime.gc_pause_ns
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Go runtime GC pause times.'
           preprocessing:
@@ -5386,7 +5163,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Heap objects'
           type: DEPENDENT
           key: nomad.server.runtime.heap_objects
-          delay: '0'
           history: 7d
           trends: 90d
           description: |
@@ -5408,7 +5184,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Goroutines'
           type: DEPENDENT
           key: nomad.server.runtime.num_goroutines
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Number of goroutines and general load pressure indicator.'
@@ -5428,10 +5203,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: GC metadata size'
           type: DEPENDENT
           key: nomad.server.runtime.sys_bytes
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Go runtime GC metadata size in bytes.'
           preprocessing:
@@ -5450,7 +5224,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: GC runs'
           type: DEPENDENT
           key: nomad.server.runtime.total_gc_runs
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of go runtime GC runs.'
@@ -5470,7 +5243,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Allocation reschedule attempts'
           type: DEPENDENT
           key: nomad.server.scheduler.allocs.rescheduled.attempted
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Count of attempts to reschedule an allocation.'
@@ -5491,10 +5263,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Memberlist events'
           type: DEPENDENT
           key: nomad.server.serf.queue.event
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of memberlist events received.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -5512,10 +5283,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Memberlist changes'
           type: DEPENDENT
           key: nomad.server.serf.queue.intent
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of memberlist changes.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -5533,10 +5303,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Memberlist queries'
           type: DEPENDENT
           key: nomad.server.serf.queue.queries
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of memberlist queries.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -5554,7 +5323,6 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Snapshot index'
           type: DEPENDENT
           key: nomad.server.state.snapshot.index
-          delay: '0'
           history: 7d
           trends: 90d
           description: 'Current snapshot index.'
@@ -5574,9 +5342,7 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Internal stats API response'
           type: DEPENDENT
           key: nomad.server.stats.api.response
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
           description: 'Internal stats API response message.'
           preprocessing:
@@ -5623,13 +5389,10 @@ zabbix_export:
           key: nomad.server.stats.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
           description: 'Internal stats data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
-              parameters:
-                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '{"header":{"HTTP/1.1 408 Request timeout":""}}'
           timeout: '{$NOMAD.DATA.TIMEOUT}'
@@ -5651,10 +5414,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Vault tokens revoked'
           type: DEPENDENT
           key: nomad.server.vault.distributed_tokens_revoked
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of revoked tokens.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -5672,10 +5434,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Vault token last renewal'
           type: DEPENDENT
           key: nomad.server.vault.token_last_renewal
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time since last successful Vault token renewal.'
           preprocessing:
@@ -5697,10 +5458,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Vault token next renewal'
           type: DEPENDENT
           key: nomad.server.vault.token_next_renewal
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time until next Vault token renewal attempt.'
           preprocessing:
@@ -5722,10 +5482,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Vault token TTL'
           type: DEPENDENT
           key: nomad.server.vault.token_ttl
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time to live for Vault token.'
           preprocessing:
@@ -5747,9 +5506,7 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Nomad server version'
           type: DEPENDENT
           key: nomad.server.version
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: 'Nomad server version.'
           preprocessing:
@@ -5776,10 +5533,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Virtual memory size'
           type: DEPENDENT
           key: nomad.server.virtual_memory_bytes
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Virtual memory size in bytes.'
           preprocessing:
@@ -5798,10 +5554,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Worker evaluation create time'
           type: DEPENDENT
           key: nomad.server.worker.create_eval
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to create an eval.'
           preprocessing:
@@ -5823,10 +5578,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Worker evaluation dequeue time'
           type: DEPENDENT
           key: nomad.server.worker.dequeue_eval
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to dequeue an eval.'
           preprocessing:
@@ -5848,10 +5602,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Worker invoke scheduler time'
           type: DEPENDENT
           key: nomad.server.worker.invoke_scheduler_service
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to invoke the scheduler.'
           preprocessing:
@@ -5873,10 +5626,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Worker acknowledgement send time'
           type: DEPENDENT
           key: nomad.server.worker.send_ack
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to send acknowledgement.'
           preprocessing:
@@ -5898,10 +5650,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Worker submit plan time'
           type: DEPENDENT
           key: nomad.server.worker.submit_plan
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to submit plan.'
           preprocessing:
@@ -5923,10 +5674,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Worker update evaluation time'
           type: DEPENDENT
           key: nomad.server.worker.update_eval
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to submit updated eval.'
           preprocessing:
@@ -5948,10 +5698,9 @@ zabbix_export:
           name: 'HashiCorp Nomad Server: Worker log replication time'
           type: DEPENDENT
           key: nomad.server.worker.wait_for_index
-          delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed that worker waits for the raft index of the eval to be processed.'
           preprocessing:

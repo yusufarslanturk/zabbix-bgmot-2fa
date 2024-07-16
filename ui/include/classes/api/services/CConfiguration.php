@@ -346,7 +346,9 @@ class CConfiguration extends CApiService {
 			->getSchema();
 
 		// Normalize array keys and strings.
-		$data = (new CImportDataNormalizer($schema))->normalize($data);
+		$data = (new CImportDataNormalizer($schema))
+			->setPreview(true)
+			->normalize($data);
 
 		$adapter = new CImportDataAdapter();
 		$adapter->load($data);
@@ -470,7 +472,10 @@ class CConfiguration extends CApiService {
 		]);
 
 		// Normalize array keys and strings.
-		$export = (new CImportDataNormalizer($schema))->normalize($export);
+		$export = (new CImportDataNormalizer($schema))
+			->setPreview(true)
+			->normalize($export);
+
 		$export = $export['zabbix_export'];
 
 		$importcompare = new CConfigurationImportcompare($params['rules']);

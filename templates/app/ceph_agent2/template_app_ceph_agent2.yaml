@@ -21,7 +21,6 @@ zabbix_export:
           name: 'Ceph: Get df'
           key: 'ceph.df.details["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           tags:
             - tag: component
@@ -32,9 +31,7 @@ zabbix_export:
           name: 'Ceph: Minimum Mon release version'
           type: DEPENDENT
           key: ceph.min_mon_release_name
-          delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
           description: min_mon_release_name
           preprocessing:
@@ -64,7 +61,6 @@ zabbix_export:
           name: 'Ceph: Number of Monitors'
           type: DEPENDENT
           key: ceph.num_mon
-          delay: '0'
           history: 7d
           description: 'The number of Monitors configured in a Ceph cluster.'
           preprocessing:
@@ -83,7 +79,6 @@ zabbix_export:
           name: 'Ceph: Number of OSDs'
           type: DEPENDENT
           key: ceph.num_osd
-          delay: '0'
           history: 7d
           description: 'The number of the known storage daemons in a Ceph cluster.'
           preprocessing:
@@ -104,7 +99,6 @@ zabbix_export:
           name: 'Ceph: Number of OSDs in state: IN'
           type: DEPENDENT
           key: ceph.num_osd_in
-          delay: '0'
           history: 7d
           description: 'The total number of the participating storage daemons in a Ceph cluster.'
           preprocessing:
@@ -125,7 +119,6 @@ zabbix_export:
           name: 'Ceph: Number of OSDs in state: UP'
           type: DEPENDENT
           key: ceph.num_osd_up
-          delay: '0'
           history: 7d
           description: 'The total number of the online storage daemons in a Ceph cluster.'
           preprocessing:
@@ -146,7 +139,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups'
           type: DEPENDENT
           key: ceph.num_pg
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a Ceph cluster.'
           preprocessing:
@@ -167,7 +159,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in Temporary state'
           type: DEPENDENT
           key: ceph.num_pg_temp
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a *pg_temp* state'
           preprocessing:
@@ -183,7 +174,6 @@ zabbix_export:
           name: 'Ceph: Number of Pools'
           type: DEPENDENT
           key: ceph.num_pools
-          delay: '0'
           history: 7d
           description: 'The total number of pools in a Ceph cluster.'
           preprocessing:
@@ -201,7 +191,6 @@ zabbix_export:
           name: 'Ceph: Get OSD dump'
           key: 'ceph.osd.dump["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           tags:
             - tag: component
@@ -212,7 +201,6 @@ zabbix_export:
           name: 'Ceph: Get OSD stats'
           key: 'ceph.osd.stats["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           tags:
             - tag: component
@@ -223,7 +211,6 @@ zabbix_export:
           name: 'Ceph: Ceph backfill full ratio'
           type: DEPENDENT
           key: ceph.osd_backfillfull_ratio
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The backfill full ratio setting of the Ceph cluster as configured on OSDMap.'
@@ -243,7 +230,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD avg fill'
           type: DEPENDENT
           key: ceph.osd_fill.avg
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -263,7 +249,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD max fill'
           type: DEPENDENT
           key: ceph.osd_fill.max
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -283,7 +268,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD min fill'
           type: DEPENDENT
           key: ceph.osd_fill.min
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -303,7 +287,6 @@ zabbix_export:
           name: 'Ceph: Ceph full ratio'
           type: DEPENDENT
           key: ceph.osd_full_ratio
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The full ratio setting of the Ceph cluster as configured on OSDMap.'
@@ -323,7 +306,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD Apply latency Avg'
           type: DEPENDENT
           key: ceph.osd_latency_apply.avg
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ms
@@ -343,7 +325,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD Apply latency Max'
           type: DEPENDENT
           key: ceph.osd_latency_apply.max
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ms
@@ -363,7 +344,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD Apply latency Min'
           type: DEPENDENT
           key: ceph.osd_latency_apply.min
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ms
@@ -383,7 +363,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD Commit latency Avg'
           type: DEPENDENT
           key: ceph.osd_latency_commit.avg
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ms
@@ -403,7 +382,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD Commit latency Max'
           type: DEPENDENT
           key: ceph.osd_latency_commit.max
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ms
@@ -423,7 +401,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD Commit latency Min'
           type: DEPENDENT
           key: ceph.osd_latency_commit.min
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ms
@@ -443,7 +420,6 @@ zabbix_export:
           name: 'Ceph: Ceph nearfull ratio'
           type: DEPENDENT
           key: ceph.osd_nearfull_ratio
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The near full ratio setting of the Ceph cluster as configured on OSDMap.'
@@ -463,7 +439,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD avg PGs'
           type: DEPENDENT
           key: ceph.osd_pgs.avg
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The average amount of Placement Groups on OSDs.'
@@ -484,7 +459,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD max PGs'
           type: DEPENDENT
           key: ceph.osd_pgs.max
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The maximum amount of Placement Groups on OSDs.'
@@ -505,7 +479,6 @@ zabbix_export:
           name: 'Ceph: Ceph OSD min PGs'
           type: DEPENDENT
           key: ceph.osd_pgs.min
-          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The minimum amount of Placement Groups on OSDs.'
@@ -526,7 +499,6 @@ zabbix_export:
           name: 'Ceph: Overall cluster status'
           type: DEPENDENT
           key: ceph.overall_status
-          delay: '0'
           history: 7d
           description: 'The overall Ceph cluster status, eg 0 - HEALTH_OK, 1 - HEALTH_WARN or 2 - HEALTH_ERR.'
           valuemap:
@@ -569,7 +541,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in Active state'
           type: DEPENDENT
           key: ceph.pg_states.active
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in an active state.'
           preprocessing:
@@ -585,7 +556,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in Backfilling state'
           type: DEPENDENT
           key: ceph.pg_states.backfilling
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a backfill state.'
           preprocessing:
@@ -601,7 +571,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in backfill_toofull state'
           type: DEPENDENT
           key: ceph.pg_states.backfill_toofull
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a *backfill_toofull state*.'
           preprocessing:
@@ -617,7 +586,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in backfill_wait state'
           type: DEPENDENT
           key: ceph.pg_states.backfill_wait
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a *backfill_wait* state.'
           preprocessing:
@@ -633,7 +601,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in Clean state'
           type: DEPENDENT
           key: ceph.pg_states.clean
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a clean state.'
           preprocessing:
@@ -649,7 +616,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in degraded state'
           type: DEPENDENT
           key: ceph.pg_states.degraded
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a degraded state.'
           preprocessing:
@@ -665,7 +631,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in inconsistent state'
           type: DEPENDENT
           key: ceph.pg_states.inconsistent
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in an inconsistent state.'
           preprocessing:
@@ -681,7 +646,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in Peering state'
           type: DEPENDENT
           key: ceph.pg_states.peering
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a peering state.'
           preprocessing:
@@ -697,7 +661,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in recovering state'
           type: DEPENDENT
           key: ceph.pg_states.recovering
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a recovering state.'
           preprocessing:
@@ -713,7 +676,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in recovery_wait state'
           type: DEPENDENT
           key: ceph.pg_states.recovery_wait
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a *recovery_wait* state.'
           preprocessing:
@@ -729,7 +691,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in remapped state'
           type: DEPENDENT
           key: ceph.pg_states.remapped
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a remapped state.'
           preprocessing:
@@ -745,7 +706,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in Scrubbing state'
           type: DEPENDENT
           key: ceph.pg_states.scrubbing
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in a scrubbing state.'
           preprocessing:
@@ -761,7 +721,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in Undersized state'
           type: DEPENDENT
           key: ceph.pg_states.undersized
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in an undersized state.'
           preprocessing:
@@ -777,7 +736,6 @@ zabbix_export:
           name: 'Ceph: Number of Placement Groups in Unknown state'
           type: DEPENDENT
           key: ceph.pg_states.unknown
-          delay: '0'
           history: 7d
           description: 'The total number of Placement Groups in an unknown state.'
           preprocessing:
@@ -817,7 +775,6 @@ zabbix_export:
           name: 'Ceph: Ceph Read bandwidth'
           type: DEPENDENT
           key: ceph.rd_bytes.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -827,8 +784,6 @@ zabbix_export:
               parameters:
                 - $.rd_bytes
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'ceph.df.details["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           tags:
@@ -840,7 +795,6 @@ zabbix_export:
           name: 'Ceph: Ceph Read operations per sec'
           type: DEPENDENT
           key: ceph.rd_ops.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ops
@@ -850,8 +804,6 @@ zabbix_export:
               parameters:
                 - $.rd_ops
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'ceph.df.details["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           tags:
@@ -863,7 +815,6 @@ zabbix_export:
           name: 'Ceph: Get overall cluster status'
           key: 'ceph.status["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
           tags:
             - tag: component
@@ -872,7 +823,6 @@ zabbix_export:
           name: 'Ceph: Total bytes available'
           type: DEPENDENT
           key: ceph.total_avail_bytes
-          delay: '0'
           history: 7d
           units: B
           description: 'The total bytes available in a Ceph cluster.'
@@ -891,7 +841,6 @@ zabbix_export:
           name: 'Ceph: Total bytes'
           type: DEPENDENT
           key: ceph.total_bytes
-          delay: '0'
           history: 7d
           units: B
           description: 'The total (RAW) capacity of a Ceph cluster in bytes.'
@@ -910,7 +859,6 @@ zabbix_export:
           name: 'Ceph: Total number of objects'
           type: DEPENDENT
           key: ceph.total_objects
-          delay: '0'
           history: 7d
           description: 'The total number of objects in a Ceph cluster.'
           preprocessing:
@@ -926,7 +874,6 @@ zabbix_export:
           name: 'Ceph: Total bytes used'
           type: DEPENDENT
           key: ceph.total_used_bytes
-          delay: '0'
           history: 7d
           units: B
           description: 'The total bytes used in a Ceph cluster.'
@@ -945,7 +892,6 @@ zabbix_export:
           name: 'Ceph: Ceph Write bandwidth'
           type: DEPENDENT
           key: ceph.wr_bytes.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -955,8 +901,6 @@ zabbix_export:
               parameters:
                 - $.wr_bytes
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'ceph.df.details["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           tags:
@@ -968,7 +912,6 @@ zabbix_export:
           name: 'Ceph: Ceph Write operations per sec'
           type: DEPENDENT
           key: ceph.wr_ops.rate
-          delay: '0'
           history: 7d
           value_type: FLOAT
           units: ops
@@ -978,8 +921,6 @@ zabbix_export:
               parameters:
                 - $.wr_ops
             - type: CHANGE_PER_SECOND
-              parameters:
-                - ''
           master_item:
             key: 'ceph.df.details["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           tags:
@@ -997,7 +938,6 @@ zabbix_export:
               name: 'Ceph: [osd.{#OSDNAME}] OSD fill'
               type: DEPENDENT
               key: 'ceph.osd[{#OSDNAME},fill]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1021,7 +961,6 @@ zabbix_export:
               name: 'Ceph: [osd.{#OSDNAME}] OSD in'
               type: DEPENDENT
               key: 'ceph.osd[{#OSDNAME},in]'
-              delay: '0'
               history: 7d
               preprocessing:
                 - type: JSONPATH
@@ -1045,7 +984,6 @@ zabbix_export:
               name: 'Ceph: [osd.{#OSDNAME}] OSD latency apply'
               type: DEPENDENT
               key: 'ceph.osd[{#OSDNAME},latency_apply]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -1070,7 +1008,6 @@ zabbix_export:
               name: 'Ceph: [osd.{#OSDNAME}] OSD latency commit'
               type: DEPENDENT
               key: 'ceph.osd[{#OSDNAME},latency_commit]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -1095,7 +1032,6 @@ zabbix_export:
               name: 'Ceph: [osd.{#OSDNAME}] OSD PGs'
               type: DEPENDENT
               key: 'ceph.osd[{#OSDNAME},num_pgs]'
-              delay: '0'
               history: 7d
               preprocessing:
                 - type: JSONPATH
@@ -1117,7 +1053,6 @@ zabbix_export:
               name: 'Ceph: [osd.{#OSDNAME}] OSD up'
               type: DEPENDENT
               key: 'ceph.osd[{#OSDNAME},up]'
-              delay: '0'
               history: 7d
               preprocessing:
                 - type: JSONPATH
@@ -1188,7 +1123,6 @@ zabbix_export:
               name: 'Ceph: [{#POOLNAME}] Pool Used'
               type: DEPENDENT
               key: 'ceph.pool["{#POOLNAME}",bytes_used]'
-              delay: '0'
               history: 7d
               units: B
               description: 'The total bytes used in a pool.'
@@ -1209,7 +1143,6 @@ zabbix_export:
               name: 'Ceph: [{#POOLNAME}] Max available'
               type: DEPENDENT
               key: 'ceph.pool["{#POOLNAME}",max_avail]'
-              delay: '0'
               history: 7d
               units: B
               description: 'The maximum available space in the given pool.'
@@ -1230,7 +1163,6 @@ zabbix_export:
               name: 'Ceph: [{#POOLNAME}] Pool objects'
               type: DEPENDENT
               key: 'ceph.pool["{#POOLNAME}",objects]'
-              delay: '0'
               history: 7d
               description: 'The number of objects in the pool.'
               preprocessing:
@@ -1250,7 +1182,6 @@ zabbix_export:
               name: 'Ceph: [{#POOLNAME}] Pool Percent Used'
               type: DEPENDENT
               key: 'ceph.pool["{#POOLNAME}",percent_used]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1272,7 +1203,6 @@ zabbix_export:
               name: 'Ceph: [{#POOLNAME}] Pool Read bandwidth'
               type: DEPENDENT
               key: 'ceph.pool["{#POOLNAME}",rd_bytes.rate]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1282,8 +1212,6 @@ zabbix_export:
                   parameters:
                     - '$.pools["{#POOLNAME}"].rd_bytes'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'ceph.df.details["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
               tags:
@@ -1297,7 +1225,6 @@ zabbix_export:
               name: 'Ceph: [{#POOLNAME}] Pool Read operations'
               type: DEPENDENT
               key: 'ceph.pool["{#POOLNAME}",rd_ops.rate]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ops
@@ -1307,8 +1234,6 @@ zabbix_export:
                   parameters:
                     - '$.pools["{#POOLNAME}"].rd_ops'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'ceph.df.details["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
               tags:
@@ -1322,7 +1247,6 @@ zabbix_export:
               name: 'Ceph: [{#POOLNAME}] Pool RAW Used'
               type: DEPENDENT
               key: 'ceph.pool["{#POOLNAME}",stored_raw]'
-              delay: '0'
               history: 7d
               units: B
               description: 'Bytes used in pool including the copies made.'
@@ -1343,7 +1267,6 @@ zabbix_export:
               name: 'Ceph: [{#POOLNAME}] Pool Write bandwidth'
               type: DEPENDENT
               key: 'ceph.pool["{#POOLNAME}",wr_bytes.rate]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1353,8 +1276,6 @@ zabbix_export:
                   parameters:
                     - '$.pools["{#POOLNAME}"].wr_bytes'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'ceph.df.details["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
               tags:
@@ -1368,7 +1289,6 @@ zabbix_export:
               name: 'Ceph: [{#POOLNAME}] Pool Write operations'
               type: DEPENDENT
               key: 'ceph.pool["{#POOLNAME}",wr_ops.rate]'
-              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ops
@@ -1378,8 +1298,6 @@ zabbix_export:
                   parameters:
                     - '$.pools["{#POOLNAME}"].wr_ops'
                 - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
               master_item:
                 key: 'ceph.df.details["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
               tags:
