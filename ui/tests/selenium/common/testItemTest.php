@@ -48,6 +48,7 @@ class testItemTest extends CWebTest {
 	 */
 	public function getCommonTestButtonStateData() {
 		return [
+				['Type' => 'Zabbix agent'],
 				['Type' => 'Zabbix agent (active)'],
 				['Type' => 'Simple check'],
 				['Type' => 'SNMP agent','SNMP OID' => '[IF-MIB::]ifInOctets.1'],
@@ -60,7 +61,8 @@ class testItemTest extends CWebTest {
 				['Type' => 'SSH agent', 'Key' => 'ssh.run[Description,127.0.0.1,50,[{#KEY}]]', 'User name' => 'Name', 'Executed script' => 'Script'],
 				['Type' => 'TELNET agent', 'Key' => 'telnet[{#KEY}]'],
 				['Type' => 'JMX agent', 'Key' => 'jmx[{#KEY}]','JMX endpoint' => 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi', 'User name' => ''],
-				['Type' => 'Dependent item', 'Key'=>'dependent[{#KEY}]', 'Master item' => 'Master item']
+				['Type' => 'Dependent item', 'Key'=>'dependent[{#KEY}]', 'Master item' => 'Master item'],
+				['Type' => 'Script', 'Script' => 'return 1;']
 		];
 	}
 
@@ -104,8 +106,7 @@ class testItemTest extends CWebTest {
 			'Type' => 'Zabbix agent',
 			'Key' => 'key[{#KEY}]'
 		]);
-		// Check Test item button.
-		$this->checkTestButtonInPreprocessing($item_type);
+
 		$this->saveFormAndCheckMessage($item_type.$success_text);
 		$itemid = CDBHelper::getValue('SELECT itemid FROM items WHERE name='.zbx_dbstr($item_name));
 
@@ -125,22 +126,14 @@ class testItemTest extends CWebTest {
 
 				$this->checkTestButtonInPreprocessing($item_type, $enabled, $i);
 
-				// Check "Execute now" button only in host case item saved form and then change type.
+				// Change item type.
 				if ($i === 0) {
-					if ($check_now) {
-						if ($type === 'Dependent item') {
-							$enabled = true;
-						}
-						$execute_button = $this->query('button:Execute now')->waitUntilVisible()->one();
-						$this->assertTrue($execute_button->isEnabled($enabled));
-					}
-
 					$item_form->fill($update);
-					// TODO: workaround for ZBXNEXT-5365
-					if ($item_type === 'Item prototype'
-						&& array_key_exists('Master item', $update)) {
-							sleep(2);
-							$item_form->getFieldContainer('Master item')->asMultiselect()->select($update['Master item']);
+
+					// TODO: workaround for DEV-3855
+					if ($item_type === 'Item prototype' && array_key_exists('Master item', $update)) {
+						sleep(2);
+						$item_form->getFieldContainer('Master item')->asMultiselect()->select($update['Master item']);
 					}
 
 					$type = $update['Type'];
@@ -148,6 +141,20 @@ class testItemTest extends CWebTest {
 			}
 
 			$this->saveFormAndCheckMessage($item_type.' updated');
+
+			/**
+			 * By design, when changing item type, the "Execute now" doesn't change its state, as these changes have not
+			 * been written to the DB yet. To check the "Execute now" button state the item needs to be saved and
+			 * its form should be opened again.
+			 */
+			if ($check_now) {
+				if ($type === 'Dependent item') {
+					$enabled = true;
+				}
+
+				$this->query('link', $item_name)->waitUntilClickable()->one()->click();
+				$this->assertTrue($this->query('id:check_now')->waitUntilVisible()->one()->isEnabled($enabled));
+			}
 		}
 	}
 
@@ -376,6 +383,16 @@ class testItemTest extends CWebTest {
 							'macro' => '{HOST.PORT}',
 							'value' => '12345'
 						]
+					]
+				]
+			],
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Type' => 'Script',
+						'Key' => 'test.script',
+						'Script' => 'return 1;'
 					]
 				]
 			],
@@ -896,6 +913,7 @@ class testItemTest extends CWebTest {
 					case 'Database monitor':
 					case 'HTTP agent':
 					case 'JMX agent':
+					case 'Script':
 						$fields_value = [
 							'address' => '',
 							'port' => '',
@@ -928,7 +946,7 @@ class testItemTest extends CWebTest {
 
 				if ($is_host || array_key_exists('interface', $data) || in_array($data['fields']['Type'],
 						['Zabbix internal', 'External check', 'Database monitor', 'HTTP agent', 'JMX agent',
-						'Calculated'])) {
+						'Calculated', 'Script'])) {
 					$details = 'Connection to Zabbix server "localhost:10051" refused. Possible reasons:';
 				}
 				else {
