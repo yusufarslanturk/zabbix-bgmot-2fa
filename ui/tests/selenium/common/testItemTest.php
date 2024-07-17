@@ -153,7 +153,7 @@ class testItemTest extends CWebTest {
 				}
 
 				$this->query('link', $item_name)->waitUntilClickable()->one()->click();
-				$this->assertTrue($this->query('id:check_now')->waitUntilVisible()->one()->isEnabled($enabled));
+				$this->assertTrue($this->query('button:Execute now')->waitUntilVisible()->one()->isEnabled($enabled));
 			}
 		}
 	}
