@@ -2153,7 +2153,7 @@ class testFormItem extends CLegacyWebTest {
 			$this->zbxTestAssertElementPresentXpath("//z-select[@id='value_type']//li[text()='$value_type']");
 
 			// "Execute now" button availability
-			if (in_array($type, ['Zabbix agent (active)', 'SNMP trap', 'Zabbix trapper', 'Dependent item'])) {
+			if (in_array($type, ['Zabbix agent (active)', 'SNMP trap', 'Zabbix trapper'])) {
 				$this->assertFalse($this->query('button:Execute now')->one()->isClickable());
 
 			}

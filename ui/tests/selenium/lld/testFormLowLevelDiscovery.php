@@ -1737,11 +1737,10 @@ class testFormLowLevelDiscovery extends CLegacyWebTest {
 
 			// "Execute now" button availability
 			if (in_array($type, ['Zabbix agent (active)', 'SNMP trap', 'Zabbix trapper', 'Dependent item'])) {
-				$this->zbxTestClickButtonText('Execute now');
-				$this->zbxTestWaitUntilMessageTextPresent('msg-good', 'Request sent successfully');
+				$this->zbxTestAssertElementPresentXpath('//button[text()="Execute now"][@disabled]');
 			}
 			else {
-				$this->zbxTestClick('check_now');
+				$this->zbxTestClickButtonText('Execute now');
 				$this->zbxTestWaitUntilMessageTextPresent('msg-good', 'Request sent successfully');
 			}
 
