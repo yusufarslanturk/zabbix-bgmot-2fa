@@ -226,6 +226,43 @@ static void zbx_odbc_connection_string_append(char **connection_str, const char 
 
 /******************************************************************************
  *                                                                            *
+ * Purpose: Appends a password to the ODBC connection string.                 *
+ *          Connection string is reallocated to fit new value.                *
+ *                                                                            *
+ * Parameters: connection_str - [IN/OUT] connection string                    *
+ *             value          - [IN] attribute value                          *
+ *                                                                            *
+ ******************************************************************************/
+static void zbx_odbc_connection_pwd_append(char **connection_str, const char *value)
+{
+	size_t	len;
+	char	last = '\0', *pwd = (char*)zbx_malloc(NULL, (strlen(value) + 1) * 2), *ptr = pwd;
+
+	if (NULL == value)
+		return;
+
+	*ptr++ = '{';
+	while (*value != '\0')
+	{
+		if (*value == '}')
+		{
+			*ptr++ = *value;
+			*ptr++ = *value++;
+		}
+		else
+			*ptr++ = *value++;
+	}
+	*ptr++ = '}';
+	*ptr++ = '\0';
+	if (0 < (len = strlen(*connection_str)))
+		last = (*connection_str)[len-1];
+
+	*connection_str = zbx_dsprintf(*connection_str, "%s%sPWD=%s", *connection_str, ';' == last ? "" : ";", pwd);
+	zbx_free(pwd);
+}
+
+/******************************************************************************
+ *                                                                            *
  * Purpose: connect to ODBC data source                                       *
  *                                                                            *
  * Parameters: dsn        - [IN] data source name                             *
@@ -260,7 +297,7 @@ zbx_odbc_data_source_t	*zbx_odbc_connect(const char *dsn, const char *connection
 		{
 			rc = SQLAllocHandle(SQL_HANDLE_DBC, data_source->henv, &data_source->hdbc);
 
-			if(SUCCEED == zbx_odbc_diag(SQL_HANDLE_ENV, data_source->henv, rc, &diag))
+			if (SUCCEED == zbx_odbc_diag(SQL_HANDLE_ENV, data_source->henv, rc, &diag))
 			{
 				rc = SQLSetConnectAttr(data_source->hdbc, (SQLINTEGER)SQL_LOGIN_TIMEOUT,
 						(SQLPOINTER)(intptr_t)timeout, (SQLINTEGER)0);
@@ -285,7 +322,7 @@ zbx_odbc_data_source_t	*zbx_odbc_connect(const char *dsn, const char *connection
 						{
 							connection_str = zbx_strdup(NULL, connection);
 							zbx_odbc_connection_string_append(&connection_str, "UID", user);
-							zbx_odbc_connection_string_append(&connection_str, "PWD", pass);
+							zbx_odbc_connection_pwd_append(&connection_str, pass);
 							connection = connection_str;
 						}
 
@@ -329,7 +366,7 @@ zbx_odbc_data_source_t	*zbx_odbc_connect(const char *dsn, const char *connection
 out:
 	zbx_free(diag);
 
-	zabbix_log(LOG_LEVEL_DEBUG, "End of %s()", __func__);
+	zabbix_log(LOG_LEVEL_WARNING, "End of %s()", __func__);
 
 	return data_source;
 }
