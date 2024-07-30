@@ -62,6 +62,7 @@ zabbix_export:
           key: zyxel.3500_8pd.contact
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -109,6 +110,7 @@ zabbix_export:
           key: zyxel.3500_8pd.fwversion
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: ZYXEL-ES3500-8PD-MIB'
           inventory_link: SOFTWARE_FULL
@@ -159,6 +161,8 @@ zabbix_export:
             network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -174,6 +178,7 @@ zabbix_export:
           key: zyxel.3500_8pd.location
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -194,6 +199,7 @@ zabbix_export:
           key: zyxel.3500_8pd.mac
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: IF-MIB
@@ -217,6 +223,7 @@ zabbix_export:
           key: zyxel.3500_8pd.model
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -250,6 +257,7 @@ zabbix_export:
           key: zyxel.3500_8pd.name
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -292,6 +300,7 @@ zabbix_export:
           key: zyxel.3500_8pd.serialnumber
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: ZYXEL-ES3500-8PD-MIB
@@ -404,6 +413,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.2.1.2.2.1.2.{#SNMPINDEX}'
               key: 'zyxel.3500_8pd.net.if.descr[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: IF-MIB
@@ -457,6 +467,8 @@ zabbix_export:
                 address at this sub-layer.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -479,6 +491,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -502,6 +516,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -523,6 +539,8 @@ zabbix_export:
                 or broadcast address at this sub-layer
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -583,6 +601,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.4.1.890.1.5.8.72.24.1.1.3.{#SNMPINDEX}'
               key: 'zyxel.3500_8pd.net.if.name[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB:  ZYXEL-ES3500-8PD-MIB
@@ -656,6 +675,8 @@ zabbix_export:
                 were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -679,6 +700,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -703,6 +726,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -725,6 +750,8 @@ zabbix_export:
                 those that were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -969,6 +996,7 @@ zabbix_export:
               key: 'zyxel.3500_8pd.sfp.datecode[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-ES3500-8PD-MIB
@@ -991,6 +1019,7 @@ zabbix_export:
               key: 'zyxel.3500_8pd.sfp.part[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-ES3500-8PD-MIB
@@ -1013,6 +1042,7 @@ zabbix_export:
               key: 'zyxel.3500_8pd.sfp.revision[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-ES3500-8PD-MIB
@@ -1035,6 +1065,7 @@ zabbix_export:
               key: 'zyxel.3500_8pd.sfp.serialnumber[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-ES3500-8PD-MIB
@@ -1091,6 +1122,7 @@ zabbix_export:
               key: 'zyxel.3500_8pd.sfp.transceiver[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-ES3500-8PD-MIB
@@ -1113,6 +1145,7 @@ zabbix_export:
               key: 'zyxel.3500_8pd.sfp.vendor[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-ES3500-8PD-MIB

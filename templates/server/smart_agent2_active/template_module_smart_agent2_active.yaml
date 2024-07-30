@@ -40,6 +40,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Bad_Block_Rate'
               type: DEPENDENT
               key: 'smart.disk.attribute.bad_block_rate[{#NAME}]'
+              delay: '0'
               history: 7d
               discover: NO_DISCOVER
               description: 'Percentage of used reserve blocks divided by total reserve blocks.'
@@ -65,6 +66,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Power_Cycle_Count'
               type: DEPENDENT
               key: 'smart.disk.attribute.power_cycle_count[{#NAME}]'
+              delay: '0'
               history: 7d
               discover: NO_DISCOVER
               description: 'This attribute indicates the count of full hard disk power on/off cycles.'
@@ -90,6 +92,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Program_Fail_Count_Chip'
               type: DEPENDENT
               key: 'smart.disk.attribute.program_fail_count_chip[{#NAME}]'
+              delay: '0'
               history: 7d
               discover: NO_DISCOVER
               description: 'The total number of flash program operation failures since the drive was deployed.'
@@ -115,6 +118,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Raw_Read_Error_Rate'
               type: DEPENDENT
               key: 'smart.disk.attribute.raw_read_error_rate[{#NAME}]'
+              delay: '0'
               history: 7d
               discover: NO_DISCOVER
               description: 'Stores data related to the rate of hardware read errors that occurred when reading data from a disk surface. The raw value has different structure for different vendors and is often not meaningful as a decimal number. For some drives, this number may increase during normal operation without necessarily signifying errors.'
@@ -140,6 +144,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Reallocated_Sector_Ct'
               type: DEPENDENT
               key: 'smart.disk.attribute.reallocated_sector_ct[{#NAME}]'
+              delay: '0'
               history: 7d
               discover: NO_DISCOVER
               description: 'Disk discovered attribute.'
@@ -165,6 +170,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Reported_Uncorrect'
               type: DEPENDENT
               key: 'smart.disk.attribute.reported_uncorrect[{#NAME}]'
+              delay: '0'
               history: 7d
               discover: NO_DISCOVER
               description: 'The count of errors that could not be recovered using hardware ECC.'
@@ -190,6 +196,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Seek_Error_Rate'
               type: DEPENDENT
               key: 'smart.disk.attribute.seek_error_rate[{#NAME}]'
+              delay: '0'
               history: 7d
               discover: NO_DISCOVER
               description: 'Rate of seek errors of the magnetic heads. If there is a partial failure in the mechanical positioning system, then seek errors will arise. Such a failure may be due to numerous factors, such as damage to a servo, or thermal widening of the hard disk. The raw value has different structure for different vendors and is often not meaningful as a decimal number. For some drives, this number may increase during normal operation without necessarily signifying errors.'
@@ -215,6 +222,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Spin_Up_Time'
               type: DEPENDENT
               key: 'smart.disk.attribute.spin_up_time[{#NAME}]'
+              delay: '0'
               history: 7d
               discover: NO_DISCOVER
               description: 'Average time of spindle spin up (from zero RPM to fully operational [milliseconds]).'
@@ -240,6 +248,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Start_Stop_Count'
               type: DEPENDENT
               key: 'smart.disk.attribute.start_stop_count[{#NAME}]'
+              delay: '0'
               history: 7d
               discover: NO_DISCOVER
               description: 'A tally of spindle start/stop cycles. The spindle turns on, and hence the count is increased, both when the hard disk is turned on after having before been turned entirely off (disconnected from power source) and when the hard disk returns from having previously been put to sleep mode.'
@@ -265,6 +274,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Critical warning'
               type: DEPENDENT
               key: 'smart.disk.critical_warning[{#NAME}]'
+              delay: '0'
               history: 7d
               description: 'This field indicates critical warnings for the state of the controller.'
               preprocessing:
@@ -287,7 +297,9 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Smartctl error'
               type: DEPENDENT
               key: 'smart.disk.error[{#NAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: TEXT
               description: 'This metric will contain smartctl errors.'
               preprocessing:
@@ -310,6 +322,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Exit status'
               type: DEPENDENT
               key: 'smart.disk.es[{#NAME}]'
+              delay: '0'
               history: 7d
               description: |
                 The exit statuses of smartctl are defined by a bitmask but in decimal value. The eight different bits in the exit status have the following  meanings  for  ATA disks; some of these values may also be returned for SCSI disks.
@@ -453,6 +466,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'smart.disk.get[{#PATH},"{#RAIDTYPE}"]'
               history: '0'
+              trends: '0'
               value_type: TEXT
               tags:
                 - tag: component
@@ -463,6 +477,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Power on hours'
               type: DEPENDENT
               key: 'smart.disk.hours[{#NAME}]'
+              delay: '0'
               history: 7d
               description: |
                 Count of hours in power-on state. The raw value of this attribute
@@ -492,6 +507,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Media errors'
               type: DEPENDENT
               key: 'smart.disk.media_errors[{#NAME}]'
+              delay: '0'
               history: 7d
               description: |
                 Contains the number of occurrences where the controller detected
@@ -517,7 +533,9 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Device model'
               type: DEPENDENT
               key: 'smart.disk.model[{#NAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               preprocessing:
                 - type: JSONPATH
@@ -539,6 +557,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Percentage used'
               type: DEPENDENT
               key: 'smart.disk.percentage_used[{#NAME}]'
+              delay: '0'
               history: 7d
               units: '%'
               description: |
@@ -577,7 +596,9 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Serial number'
               type: DEPENDENT
               key: 'smart.disk.sn[{#NAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               preprocessing:
                 - type: JSONPATH
@@ -610,6 +631,7 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Temperature'
               type: DEPENDENT
               key: 'smart.disk.temperature[{#NAME}]'
+              delay: '0'
               history: 7d
               units: °C
               description: 'Current drive temperature.'
@@ -653,7 +675,9 @@ zabbix_export:
               name: 'SMART [{#NAME}]: Self-test passed'
               type: DEPENDENT
               key: 'smart.disk.test[{#NAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'The disk is passed the SMART self-test or not.'
               preprocessing:
@@ -689,7 +713,8 @@ zabbix_export:
                     value: nvme
                     formulaid: A
               operations:
-                - operator: LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: LIKE
                   value: Self-test
                   discover: NO_DISCOVER
             - name: 'Not NVMe'
@@ -701,7 +726,8 @@ zabbix_export:
                     operator: NOT_MATCHES_REGEX
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: Media|Percentage|Critical
                   discover: NO_DISCOVER
             - name: Raw_Read_Error_Rate
@@ -712,7 +738,8 @@ zabbix_export:
                     value: Raw_Read_Error_Rate
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: Raw_Read_Error_Rate
                   discover: DISCOVER
             - name: Spin_Up_Time
@@ -723,7 +750,8 @@ zabbix_export:
                     value: Spin_Up_Time
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: Spin_Up_Time
                   discover: DISCOVER
             - name: Start_Stop_Count
@@ -734,7 +762,8 @@ zabbix_export:
                     value: Start_Stop_Count
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: Start_Stop_Count
                   discover: DISCOVER
             - name: Power_Cycle_Count
@@ -745,7 +774,8 @@ zabbix_export:
                     value: Power_Cycle_Count
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: Power_Cycle_Count
                   discover: DISCOVER
             - name: Reported_Uncorrect
@@ -756,7 +786,8 @@ zabbix_export:
                     value: Reported_Uncorrect
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: Reported_Uncorrect
                   discover: DISCOVER
             - name: Seek_Error_Rate
@@ -767,7 +798,8 @@ zabbix_export:
                     value: Seek_Error_Rate
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: Seek_Error_Rate
                   discover: DISCOVER
             - name: Bad_Block_Rate
@@ -778,7 +810,8 @@ zabbix_export:
                     value: Bad_Block_Rate
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: Bad_Block_Rate
                   discover: DISCOVER
             - name: Program_Fail_Count_Chip
@@ -789,7 +822,8 @@ zabbix_export:
                     value: Program_Fail_Count_Chip
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: Program_Fail_Count_Chip
                   discover: DISCOVER
             - name: Reallocated_Sector_Ct
@@ -800,7 +834,8 @@ zabbix_export:
                     value: Reallocated_Sector_Ct
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: Reallocated_Sector_Ct
                   discover: DISCOVER
       tags:

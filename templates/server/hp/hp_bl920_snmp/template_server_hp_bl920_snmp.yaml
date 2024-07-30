@@ -32,6 +32,7 @@ zabbix_export:
           key: 'hp.server.contact[sysContact]'
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -51,6 +52,7 @@ zabbix_export:
           key: 'hp.server.descr[sysDescr]'
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -70,6 +72,7 @@ zabbix_export:
           snmp_oid: 1.3.6.1.4.1.232.2.2.4.2.0
           key: 'hp.server.hw.model[cpqSiProductName]'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: CPQSINFO-MIB
@@ -88,6 +91,7 @@ zabbix_export:
           snmp_oid: 1.3.6.1.4.1.232.2.2.2.1.0
           key: 'hp.server.hw.serialnumber[cpqSiSysSerialNum]'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: CPQSINFO-MIB
@@ -124,6 +128,8 @@ zabbix_export:
             The amount of time since this host was last initialized. Note that this is different from sysUpTime in the SNMPv2-MIB [RFC1907] because sysUpTime is the uptime of the network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -139,6 +145,7 @@ zabbix_export:
           key: 'hp.server.location[sysLocation]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -158,6 +165,7 @@ zabbix_export:
           key: 'hp.server.name[sysName]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -206,6 +214,7 @@ zabbix_export:
           key: 'hp.server.objectid[sysObjectID]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -288,7 +297,9 @@ zabbix_export:
           name: 'HPE ProLiant BL920: SNMP traps (fallback)'
           type: SNMP_TRAP
           key: snmptrap.fallback
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: LOG
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items.'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
@@ -715,6 +726,7 @@ zabbix_export:
               snmp_oid: '1.3.6.1.4.1.232.3.2.5.1.1.3.{#SNMPINDEX}'
               key: 'hp.server.hw.physicaldisk.model[cpqDaPhyDrvModel.{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: CPQIDA-MIB
@@ -737,6 +749,7 @@ zabbix_export:
               snmp_oid: '1.3.6.1.4.1.232.3.2.5.1.1.51.{#SNMPINDEX}'
               key: 'hp.server.hw.physicaldisk.serialnumber[cpqDaPhyDrvSerialNum.{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: CPQIDA-MIB

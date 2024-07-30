@@ -24,6 +24,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: netapp.chassis.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$USERNAME}'
@@ -38,6 +39,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: netapp.cluster.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$USERNAME}'
@@ -51,7 +53,9 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster location'
           type: DEPENDENT
           key: netapp.cluster.location
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'The location of the cluster.'
           preprocessing:
@@ -70,7 +74,9 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster name'
           type: DEPENDENT
           key: netapp.cluster.name
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'The name of the cluster.'
           preprocessing:
@@ -89,6 +95,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster IOPS, other rate'
           type: DEPENDENT
           key: netapp.cluster.statistics.iops.other.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!iops'
@@ -98,6 +105,8 @@ zabbix_export:
               parameters:
                 - $.statistics.iops_raw.other
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: netapp.cluster.get
           tags:
@@ -109,6 +118,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster IOPS, read rate'
           type: DEPENDENT
           key: netapp.cluster.statistics.iops.read.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!iops'
@@ -118,6 +128,8 @@ zabbix_export:
               parameters:
                 - $.statistics.iops_raw.read
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: netapp.cluster.get
           tags:
@@ -129,6 +141,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster IOPS, total rate'
           type: DEPENDENT
           key: netapp.cluster.statistics.iops.total.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!iops'
@@ -138,6 +151,8 @@ zabbix_export:
               parameters:
                 - $.statistics.iops_raw.total
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: netapp.cluster.get
           tags:
@@ -149,6 +164,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster IOPS, write rate'
           type: DEPENDENT
           key: netapp.cluster.statistics.iops.write.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!iops'
@@ -158,6 +174,8 @@ zabbix_export:
               parameters:
                 - $.statistics.iops_raw.write
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: netapp.cluster.get
           tags:
@@ -169,6 +187,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster IOPS raw, other'
           type: DEPENDENT
           key: netapp.cluster.statistics.iops_raw.other
+          delay: '0'
           history: 7d
           units: '!iops'
           description: 'The number of I/O operations observed at the storage object. Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.'
@@ -187,6 +206,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster IOPS raw, read'
           type: DEPENDENT
           key: netapp.cluster.statistics.iops_raw.read
+          delay: '0'
           history: 7d
           units: '!iops'
           description: 'The number of I/O operations observed at the storage object. Performance metric for read I/O operations.'
@@ -205,6 +225,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster IOPS raw, total'
           type: DEPENDENT
           key: netapp.cluster.statistics.iops_raw.total
+          delay: '0'
           history: 7d
           units: '!iops'
           description: 'The number of I/O operations observed at the storage object. Performance metric aggregated over all types of I/O operations.'
@@ -223,6 +244,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster IOPS raw, write'
           type: DEPENDENT
           key: netapp.cluster.statistics.iops_raw.write
+          delay: '0'
           history: 7d
           units: '!iops'
           description: 'The number of I/O operations observed at the storage object. Performance metric for write I/O operations.'
@@ -309,6 +331,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster latency raw, other'
           type: DEPENDENT
           key: netapp.cluster.statistics.latency_raw.other
+          delay: '0'
           history: 7d
           units: '!mcs'
           description: 'The raw latency in microseconds observed at the storage object. This can be divided by the raw IOPS value to calculate the average latency per I/O operation. Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.'
@@ -327,6 +350,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster latency raw, read'
           type: DEPENDENT
           key: netapp.cluster.statistics.latency_raw.read
+          delay: '0'
           history: 7d
           units: '!mcs'
           description: 'The raw latency in microseconds observed at the storage object. This can be divided by the raw IOPS value to calculate the average latency per I/O operation. Performance metric for read I/O operations.'
@@ -345,6 +369,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster latency raw, total'
           type: DEPENDENT
           key: netapp.cluster.statistics.latency_raw.total
+          delay: '0'
           history: 7d
           units: '!mcs'
           description: 'The raw latency in microseconds observed at the storage object. This can be divided by the raw IOPS value to calculate the average latency per I/O operation. Performance metric aggregated over all types of I/O operations.'
@@ -363,6 +388,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster latency raw, write'
           type: DEPENDENT
           key: netapp.cluster.statistics.latency_raw.write
+          delay: '0'
           history: 7d
           units: '!mcs'
           description: 'The raw latency in microseconds observed at the storage object. This can be divided by the raw IOPS value to calculate the average latency per I/O operation. Performance metric for write I/O operations.'
@@ -381,6 +407,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster throughput, other rate'
           type: DEPENDENT
           key: netapp.cluster.statistics.throughput.other.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -390,6 +417,8 @@ zabbix_export:
               parameters:
                 - $.statistics.throughput_raw.other
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: netapp.cluster.get
           tags:
@@ -401,6 +430,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster throughput, read rate'
           type: DEPENDENT
           key: netapp.cluster.statistics.throughput.read.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -410,6 +440,8 @@ zabbix_export:
               parameters:
                 - $.statistics.throughput_raw.read
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: netapp.cluster.get
           tags:
@@ -421,6 +453,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster throughput, total rate'
           type: DEPENDENT
           key: netapp.cluster.statistics.throughput.total.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -430,6 +463,8 @@ zabbix_export:
               parameters:
                 - $.statistics.throughput_raw.total
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: netapp.cluster.get
           tags:
@@ -441,6 +476,7 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster throughput, write rate'
           type: DEPENDENT
           key: netapp.cluster.statistics.throughput.write.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -450,6 +486,8 @@ zabbix_export:
               parameters:
                 - $.statistics.throughput_raw.write
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: netapp.cluster.get
           tags:
@@ -461,7 +499,9 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster status'
           type: DEPENDENT
           key: netapp.cluster.status
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'The status of the cluster: ok, error, partial_no_data, partial_no_response, partial_other_error, negative_delta, backfilled_data, inconsistent_delta_time, inconsistent_old_data.'
           preprocessing:
@@ -491,7 +531,9 @@ zabbix_export:
           name: 'NetApp AFF A700: Cluster software version'
           type: DEPENDENT
           key: netapp.cluster.version
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'This returns the cluster version information. When the cluster has more than one node, the cluster version is equivalent to the lowest of generation, major, and minor versions on all nodes.'
           preprocessing:
@@ -522,6 +564,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: netapp.disks.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$USERNAME}'
@@ -536,6 +579,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: netapp.frus.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$USERNAME}'
@@ -564,6 +608,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: netapp.luns.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$USERNAME}'
@@ -578,6 +623,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: netapp.nodes.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$USERNAME}'
@@ -592,6 +638,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: netapp.ports.eth.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$USERNAME}'
@@ -606,6 +653,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: netapp.ports.fc.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$USERNAME}'
@@ -620,6 +668,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: netapp.svms.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$USERNAME}'
@@ -634,6 +683,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: netapp.volumes.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           authtype: BASIC
           username: '{$USERNAME}'
@@ -657,7 +707,9 @@ zabbix_export:
               name: '{#ID}: State'
               type: DEPENDENT
               key: 'netapp.chassis.state[{#ID}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'The chassis state: ok, error.'
               preprocessing:
@@ -712,7 +764,9 @@ zabbix_export:
               name: '{#DISKNAME}: State'
               type: DEPENDENT
               key: 'netapp.disk.state[{#NODENAME},{#DISKNAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'The state of the disk. Possible values: broken, copy, maintenance, partner, pending, present, reconstructing, removed, spare, unfail, zeroing'
               preprocessing:
@@ -766,7 +820,9 @@ zabbix_export:
               name: '{#FRUID}: State'
               type: DEPENDENT
               key: 'netapp.chassis.fru.state[{#CHASSISID},{#FRUID}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'The FRU state: ok, error.'
               preprocessing:
@@ -828,6 +884,7 @@ zabbix_export:
               name: '{#LUNNAME}: Space size'
               type: DEPENDENT
               key: 'netapp.lun.space.size[{#SVMNAME},{#LUNNAME}]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The total provisioned size of the LUN.'
@@ -851,6 +908,7 @@ zabbix_export:
               name: '{#LUNNAME}: Space used'
               type: DEPENDENT
               key: 'netapp.lun.space.used[{#SVMNAME},{#LUNNAME}]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The amount of space consumed by the main data stream of the LUN.'
@@ -874,7 +932,9 @@ zabbix_export:
               name: '{#LUNNAME}: Container state'
               type: DEPENDENT
               key: 'netapp.lun.status.container_state[{#SVMNAME},{#LUNNAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'The state of the volume and aggregate that contain the LUN: online, aggregate_offline, volume_offline. LUNs are only available when their containers are available.'
               preprocessing:
@@ -909,7 +969,9 @@ zabbix_export:
               name: '{#LUNNAME}: State'
               type: DEPENDENT
               key: 'netapp.lun.status.state[{#SVMNAME},{#LUNNAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'The state of the LUN. Normal states for a LUN are online and offline. Other states indicate errors. Possible values: foreign_lun_error, nvfail, offline, online, space_error.'
               preprocessing:
@@ -966,7 +1028,9 @@ zabbix_export:
               name: '{#NODENAME}: Software version'
               type: DEPENDENT
               key: 'netapp.node.version[{#NODENAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'This returns the cluster version information. When the cluster has more than one node, the cluster version is equivalent to the lowest of generation, major, and minor versions on all nodes.'
               preprocessing:
@@ -998,7 +1062,9 @@ zabbix_export:
               name: '{#NODENAME}: Controller over temperature'
               type: DEPENDENT
               key: 'netapp.nodes.controller.over_temperature[{#NODENAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'Specifies whether the hardware is currently operating outside of its recommended temperature range. The hardware shuts down if the temperature exceeds critical thresholds. Possible values: over, normal'
               preprocessing:
@@ -1030,7 +1096,9 @@ zabbix_export:
               name: '{#NODENAME}: Location'
               type: DEPENDENT
               key: 'netapp.nodes.location[{#NODENAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'The location of the node.'
               preprocessing:
@@ -1051,7 +1119,9 @@ zabbix_export:
               name: '{#NODENAME}: Membership'
               type: DEPENDENT
               key: 'netapp.nodes.membership[{#NODENAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 Possible values:
@@ -1076,7 +1146,9 @@ zabbix_export:
               name: '{#NODENAME}: State'
               type: DEPENDENT
               key: 'netapp.nodes.state[{#NODENAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 State of the node:
@@ -1123,6 +1195,7 @@ zabbix_export:
               name: '{#NODENAME}: Uptime'
               type: DEPENDENT
               key: 'netapp.nodes.uptime[{#NODENAME}]'
+              delay: '0'
               history: 7d
               units: s
               description: 'The total time, in seconds, that the node has been up.'
@@ -1174,7 +1247,9 @@ zabbix_export:
               name: '{#ETHPORTNAME}: State'
               type: DEPENDENT
               key: 'netapp.port.eth.state[{#NODENAME},{#ETHPORTNAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'The operational state of the port. Possible values: up, down.'
               preprocessing:
@@ -1231,7 +1306,9 @@ zabbix_export:
               name: '{#FCPORTNAME}: Description'
               type: DEPENDENT
               key: 'netapp.port.fc.description[{#NODENAME},{#FCPORTNAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'A description of the FC port.'
               preprocessing:
@@ -1254,7 +1331,9 @@ zabbix_export:
               name: '{#FCPORTNAME}: State'
               type: DEPENDENT
               key: 'netapp.port.fc.state[{#NODENAME},{#FCPORTNAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 The operational state of the FC port. Possible values:
@@ -1321,7 +1400,9 @@ zabbix_export:
               name: '{#SVMNAME}: Comment'
               type: DEPENDENT
               key: 'netapp.svm.comment[{#SVMNAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'The comment for the SVM.'
               preprocessing:
@@ -1342,7 +1423,9 @@ zabbix_export:
               name: '{#SVMNAME}: State'
               type: DEPENDENT
               key: 'netapp.svm.state[{#SVMNAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'SVM state: starting, running, stopping, stopped, deleting.'
               preprocessing:
@@ -1399,7 +1482,9 @@ zabbix_export:
               name: '{#VOLUMENAME}: Comment'
               type: DEPENDENT
               key: 'netapp.volume.comment[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'A comment for the volume.'
               preprocessing:
@@ -1420,6 +1505,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Available size'
               type: DEPENDENT
               key: 'netapp.volume.space_available[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The available space, in bytes.'
@@ -1441,6 +1527,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Space size'
               type: DEPENDENT
               key: 'netapp.volume.space_size[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: B
               description: 'Total provisioned size. The default size is equal to the minimum size of 20MB, in bytes.'
@@ -1462,6 +1549,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Used size'
               type: DEPENDENT
               key: 'netapp.volume.space_used[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The virtual space used (includes volume reserves) before storage efficiency, in bytes.'
@@ -1483,7 +1571,9 @@ zabbix_export:
               name: '{#VOLUMENAME}: State'
               type: DEPENDENT
               key: 'netapp.volume.state[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'Volume state. A volume can only be brought online if it is offline. Taking a volume offline removes its junction path. The ''mixed'' state applies to FlexGroup volumes only and cannot be specified as a target state. An ''error'' state implies that the volume is not in a state to serve data.'
               preprocessing:
@@ -1516,6 +1606,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume IOPS, other rate'
               type: DEPENDENT
               key: 'netapp.volume.statistics.iops.other.rate[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!iops'
@@ -1525,6 +1616,8 @@ zabbix_export:
                   parameters:
                     - '$.records[?(@.name==''{#VOLUMENAME}'')].statistics.iops_raw.other.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: netapp.volumes.get
               tags:
@@ -1538,6 +1631,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume IOPS, read rate'
               type: DEPENDENT
               key: 'netapp.volume.statistics.iops.read.rate[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!iops'
@@ -1547,6 +1641,8 @@ zabbix_export:
                   parameters:
                     - '$.records[?(@.name==''{#VOLUMENAME}'')].statistics.iops_raw.read.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: netapp.volumes.get
               tags:
@@ -1560,6 +1656,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume IOPS, total rate'
               type: DEPENDENT
               key: 'netapp.volume.statistics.iops.total.rate[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!iops'
@@ -1569,6 +1666,8 @@ zabbix_export:
                   parameters:
                     - '$.records[?(@.name==''{#VOLUMENAME}'')].statistics.iops_raw.total.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: netapp.volumes.get
               tags:
@@ -1582,6 +1681,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume IOPS, write rate'
               type: DEPENDENT
               key: 'netapp.volume.statistics.iops.write.rate[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!iops'
@@ -1591,6 +1691,8 @@ zabbix_export:
                   parameters:
                     - '$.records[?(@.name==''{#VOLUMENAME}'')].statistics.iops_raw.write.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: netapp.volumes.get
               tags:
@@ -1604,6 +1706,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume IOPS raw, other'
               type: DEPENDENT
               key: 'netapp.volume.statistics.iops_raw.other[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: '!iops'
               description: 'The number of I/O operations observed at the storage object. Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.'
@@ -1624,6 +1727,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume IOPS raw, read'
               type: DEPENDENT
               key: 'netapp.volume.statistics.iops_raw.read[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: '!iops'
               description: 'The number of I/O operations observed at the storage object. Performance metric for read I/O operations.'
@@ -1644,6 +1748,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume IOPS raw, total'
               type: DEPENDENT
               key: 'netapp.volume.statistics.iops_raw.total[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: '!iops'
               description: 'The number of I/O operations observed at the storage object. Performance metric aggregated over all types of I/O operations.'
@@ -1664,6 +1769,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume IOPS raw, write'
               type: DEPENDENT
               key: 'netapp.volume.statistics.iops_raw.write[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: '!iops'
               description: 'The number of I/O operations observed at the storage object. Performance metric for write I/O operations.'
@@ -1760,6 +1866,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume latency raw, other'
               type: DEPENDENT
               key: 'netapp.volume.statistics.latency_raw.other[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: '!mcs'
               description: 'The raw latency in microseconds observed at the storage object. Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.'
@@ -1780,6 +1887,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume latency raw, read'
               type: DEPENDENT
               key: 'netapp.volume.statistics.latency_raw.read[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: '!mcs'
               description: 'The raw latency in microseconds observed at the storage object. Performance metric for read I/O operations.'
@@ -1800,6 +1908,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume latency raw, total'
               type: DEPENDENT
               key: 'netapp.volume.statistics.latency_raw.total[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: '!mcs'
               description: 'The raw latency in microseconds observed at the storage object. Performance metric aggregated over all types of I/O operations.'
@@ -1820,6 +1929,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume latency raw, write'
               type: DEPENDENT
               key: 'netapp.volume.statistics.latency_raw.write[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               units: '!mcs'
               description: 'The raw latency in microseconds observed at the storage object. Performance metric for write I/O operations.'
@@ -1840,6 +1950,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume throughput, other rate'
               type: DEPENDENT
               key: 'netapp.volume.statistics.throughput.other.rate[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1849,6 +1960,8 @@ zabbix_export:
                   parameters:
                     - '$.records[?(@.name==''{#VOLUMENAME}'')].statistics.throughput_raw.other.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: netapp.volumes.get
               tags:
@@ -1862,6 +1975,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume throughput, read rate'
               type: DEPENDENT
               key: 'netapp.volume.statistics.throughput.read.rate[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1871,6 +1985,8 @@ zabbix_export:
                   parameters:
                     - '$.records[?(@.name==''{#VOLUMENAME}'')].statistics.throughput_raw.read.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: netapp.volumes.get
               tags:
@@ -1884,6 +2000,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume throughput, total rate'
               type: DEPENDENT
               key: 'netapp.volume.statistics.throughput.total.rate[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1893,6 +2010,8 @@ zabbix_export:
                   parameters:
                     - '$.records[?(@.name==''{#VOLUMENAME}'')].statistics.throughput_raw.total.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: netapp.volumes.get
               tags:
@@ -1906,6 +2025,7 @@ zabbix_export:
               name: '{#VOLUMENAME}: Volume throughput, write rate'
               type: DEPENDENT
               key: 'netapp.volume.statistics.throughput.write.rate[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1915,6 +2035,8 @@ zabbix_export:
                   parameters:
                     - '$.records[?(@.name==''{#VOLUMENAME}'')].statistics.throughput_raw.write.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: netapp.volumes.get
               tags:
@@ -1928,7 +2050,9 @@ zabbix_export:
               name: '{#VOLUMENAME}: SVM name'
               type: DEPENDENT
               key: 'netapp.volume.svm_name[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'The volume belongs this SVM.'
               preprocessing:
@@ -1949,7 +2073,9 @@ zabbix_export:
               name: '{#VOLUMENAME}: Type'
               type: DEPENDENT
               key: 'netapp.volume.type[{#VOLUMENAME}]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 Type of the volume.

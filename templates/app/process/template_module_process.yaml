@@ -23,6 +23,7 @@ zabbix_export:
           name: 'OS: Get process summary'
           key: 'proc.get[,,,summary]'
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'The summary of data metrics for all processes.'
           tags:
@@ -54,7 +55,9 @@ zabbix_export:
               name: 'Process [{#NAME}]: Get data'
               type: DEPENDENT
               key: 'custom.proc.get[{#NAME}]'
+              delay: '0'
               history: '0'
+              trends: '0'
               value_type: TEXT
               description: 'Summary metrics collected during the process {#NAME}.'
               preprocessing:
@@ -74,6 +77,7 @@ zabbix_export:
               name: 'Process [{#NAME}]: Size of locked memory'
               type: DEPENDENT
               key: 'custom.proc.mem.locked[{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -94,6 +98,7 @@ zabbix_export:
               name: 'Process [{#NAME}]: Number of running processes'
               type: DEPENDENT
               key: 'custom.proc.num[{#NAME}]'
+              delay: '0'
               history: 7d
               description: 'The number of running processes {#NAME}.'
               preprocessing:
@@ -125,6 +130,7 @@ zabbix_export:
               name: 'Process [{#NAME}]: Number of page faults'
               type: DEPENDENT
               key: 'custom.proc.page[{#NAME}]'
+              delay: '0'
               history: 7d
               description: 'The number of page faults {#NAME}.'
               preprocessing:
@@ -143,6 +149,7 @@ zabbix_export:
               name: 'Process [{#NAME}]: Memory usage, %'
               type: DEPENDENT
               key: 'custom.proc.pmem[{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -163,6 +170,7 @@ zabbix_export:
               name: 'Process [{#NAME}]: Memory usage (rss)'
               type: DEPENDENT
               key: 'custom.proc.rss[{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -183,6 +191,7 @@ zabbix_export:
               name: 'Process [{#NAME}]: Swap space used'
               type: DEPENDENT
               key: 'custom.proc.swap[{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -203,6 +212,7 @@ zabbix_export:
               name: 'Process [{#NAME}]: Number of threads'
               type: DEPENDENT
               key: 'custom.proc.thread[{#NAME}]'
+              delay: '0'
               history: 7d
               description: 'The number of threads {#NAME}.'
               preprocessing:
@@ -221,6 +231,7 @@ zabbix_export:
               name: 'Process [{#NAME}]: Memory usage (vsize)'
               type: DEPENDENT
               key: 'custom.proc.vmem[{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B

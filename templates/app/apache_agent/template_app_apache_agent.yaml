@@ -24,6 +24,7 @@ zabbix_export:
           name: 'Apache: Total bytes'
           type: DEPENDENT
           key: apache.bytes
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -44,6 +45,7 @@ zabbix_export:
           name: 'Apache: Bytes per second'
           type: DEPENDENT
           key: apache.bytes.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -59,6 +61,8 @@ zabbix_export:
               parameters:
                 - '1024'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: 'web.page.get["{$APACHE.STATUS.SCHEME}://{$APACHE.STATUS.HOST}:{$APACHE.STATUS.PORT}/{$APACHE.STATUS.PATH}"]'
           tags:
@@ -68,6 +72,7 @@ zabbix_export:
           name: 'Apache: Total requests'
           type: DEPENDENT
           key: apache.requests
+          delay: '0'
           history: 7d
           description: 'The total number of the Apache server accesses.'
           preprocessing:
@@ -83,6 +88,7 @@ zabbix_export:
           name: 'Apache: Requests per second'
           type: DEPENDENT
           key: apache.requests.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -93,6 +99,8 @@ zabbix_export:
               parameters:
                 - '$["Total Accesses"]'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: 'web.page.get["{$APACHE.STATUS.SCHEME}://{$APACHE.STATUS.HOST}:{$APACHE.STATUS.PORT}/{$APACHE.STATUS.PATH}"]'
           tags:
@@ -102,6 +110,7 @@ zabbix_export:
           name: 'Apache: Uptime'
           type: DEPENDENT
           key: apache.uptime
+          delay: '0'
           history: 7d
           units: uptime
           description: 'The service uptime expressed in seconds.'
@@ -129,7 +138,9 @@ zabbix_export:
           name: 'Apache: Version'
           type: DEPENDENT
           key: apache.version
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'The Apache service version.'
           preprocessing:
@@ -159,6 +170,7 @@ zabbix_export:
           name: 'Apache: Workers idle cleanup'
           type: DEPENDENT
           key: apache.workers.cleanup
+          delay: '0'
           history: 7d
           description: 'The number of workers in cleanup state.'
           preprocessing:
@@ -174,6 +186,7 @@ zabbix_export:
           name: 'Apache: Workers closing connection'
           type: DEPENDENT
           key: apache.workers.closing
+          delay: '0'
           history: 7d
           description: 'The number of workers in closing state.'
           preprocessing:
@@ -189,6 +202,7 @@ zabbix_export:
           name: 'Apache: Workers DNS lookup'
           type: DEPENDENT
           key: apache.workers.dnslookup
+          delay: '0'
           history: 7d
           description: 'The number of workers in `dnslookup` state.'
           preprocessing:
@@ -204,6 +218,7 @@ zabbix_export:
           name: 'Apache: Workers finishing'
           type: DEPENDENT
           key: apache.workers.finishing
+          delay: '0'
           history: 7d
           description: 'The number of workers in finishing state.'
           preprocessing:
@@ -219,6 +234,7 @@ zabbix_export:
           name: 'Apache: Workers keepalive (read)'
           type: DEPENDENT
           key: apache.workers.keepalive
+          delay: '0'
           history: 7d
           description: 'The number of workers in `keepalive` state.'
           preprocessing:
@@ -234,6 +250,7 @@ zabbix_export:
           name: 'Apache: Workers logging'
           type: DEPENDENT
           key: apache.workers.logging
+          delay: '0'
           history: 7d
           description: 'The number of workers in logging state.'
           preprocessing:
@@ -249,6 +266,7 @@ zabbix_export:
           name: 'Apache: Workers reading request'
           type: DEPENDENT
           key: apache.workers.reading
+          delay: '0'
           history: 7d
           description: 'The number of workers in reading state.'
           preprocessing:
@@ -264,6 +282,7 @@ zabbix_export:
           name: 'Apache: Workers sending reply'
           type: DEPENDENT
           key: apache.workers.sending
+          delay: '0'
           history: 7d
           description: 'The number of workers in sending state.'
           preprocessing:
@@ -279,6 +298,7 @@ zabbix_export:
           name: 'Apache: Workers slot with no current process'
           type: DEPENDENT
           key: apache.workers.slot
+          delay: '0'
           history: 7d
           description: 'The number of slots with no current process.'
           preprocessing:
@@ -294,6 +314,7 @@ zabbix_export:
           name: 'Apache: Workers starting up'
           type: DEPENDENT
           key: apache.workers.starting
+          delay: '0'
           history: 7d
           description: 'The number of workers in starting state.'
           preprocessing:
@@ -309,6 +330,7 @@ zabbix_export:
           name: 'Apache: Workers waiting for connection'
           type: DEPENDENT
           key: apache.workers.waiting
+          delay: '0'
           history: 7d
           description: 'The number of workers in waiting state.'
           preprocessing:
@@ -324,6 +346,7 @@ zabbix_export:
           name: 'Apache: Total workers busy'
           type: DEPENDENT
           key: apache.workers_total.busy
+          delay: '0'
           history: 7d
           description: 'The total number of busy worker threads/processes.'
           preprocessing:
@@ -339,6 +362,7 @@ zabbix_export:
           name: 'Apache: Total workers idle'
           type: DEPENDENT
           key: apache.workers_total.idle
+          delay: '0'
           history: 7d
           description: 'The total number of idle worker threads/processes.'
           preprocessing:
@@ -380,6 +404,7 @@ zabbix_export:
           name: 'Apache: Get processes summary'
           key: 'proc.get[{$APACHE.PROCESS.NAME.PARAMETER},,,summary]'
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'The aggregated data of summary metrics for all processes.'
           tags:
@@ -389,6 +414,7 @@ zabbix_export:
           name: 'Apache: Get status'
           key: 'web.page.get["{$APACHE.STATUS.SCHEME}://{$APACHE.STATUS.HOST}:{$APACHE.STATUS.PORT}/{$APACHE.STATUS.PATH}"]'
           history: 1h
+          trends: '0'
           value_type: TEXT
           description: |
             Getting data from a machine-readable version of the Apache status page.
@@ -449,6 +475,7 @@ zabbix_export:
               name: 'Apache: Bytes per request'
               type: DEPENDENT
               key: 'apache.bytes[per_request{#SINGLETON}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -466,6 +493,7 @@ zabbix_export:
               name: 'Apache: Connections async closing'
               type: DEPENDENT
               key: 'apache.connections[async_closing{#SINGLETON}]'
+              delay: '0'
               history: 7d
               description: 'The number of asynchronous connections in closing state (applicable only to the event MPM).'
               preprocessing:
@@ -481,6 +509,7 @@ zabbix_export:
               name: 'Apache: Connections async keepalive'
               type: DEPENDENT
               key: 'apache.connections[async_keep_alive{#SINGLETON}]'
+              delay: '0'
               history: 7d
               description: 'The number of asynchronous connections in keepalive state (applicable only to the event MPM).'
               preprocessing:
@@ -496,6 +525,7 @@ zabbix_export:
               name: 'Apache: Connections async writing'
               type: DEPENDENT
               key: 'apache.connections[async_writing{#SINGLETON}]'
+              delay: '0'
               history: 7d
               description: 'The number of asynchronous connections in writing state (applicable only to the event MPM).'
               preprocessing:
@@ -511,6 +541,7 @@ zabbix_export:
               name: 'Apache: Connections total'
               type: DEPENDENT
               key: 'apache.connections[total{#SINGLETON}]'
+              delay: '0'
               history: 7d
               description: 'The number of total connections.'
               preprocessing:
@@ -526,6 +557,7 @@ zabbix_export:
               name: 'Apache: Number of async processes'
               type: DEPENDENT
               key: 'apache.process[num{#SINGLETON}]'
+              delay: '0'
               history: 7d
               description: 'The number of asynchronous processes.'
               preprocessing:
@@ -597,7 +629,9 @@ zabbix_export:
               name: 'Apache: Get process data'
               type: DEPENDENT
               key: 'apache.proc.get[{#APACHE.NAME}]'
+              delay: '0'
               history: '0'
+              trends: '0'
               value_type: TEXT
               description: 'The summary metrics aggregated by a process {#APACHE.NAME}.'
               preprocessing:
@@ -615,6 +649,7 @@ zabbix_export:
               name: 'Apache: Number of running processes'
               type: DEPENDENT
               key: 'apache.proc.num[{#APACHE.NAME}]'
+              delay: '0'
               history: 7d
               description: 'The number of running processes {#APACHE.NAME}.'
               preprocessing:
@@ -643,6 +678,7 @@ zabbix_export:
               name: 'Apache: Memory usage, %'
               type: DEPENDENT
               key: 'apache.proc.pmem[{#APACHE.NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -661,6 +697,7 @@ zabbix_export:
               name: 'Apache: Memory usage (rss)'
               type: DEPENDENT
               key: 'apache.proc.rss[{#APACHE.NAME}]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The summary of resident set size memory used by a process {#APACHE.NAME} expressed in bytes.'
@@ -678,6 +715,7 @@ zabbix_export:
               name: 'Apache: Memory usage (vsize)'
               type: DEPENDENT
               key: 'apache.proc.vmem[{#APACHE.NAME}]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The summary of virtual memory used by a process {#APACHE.NAME} expressed in bytes.'

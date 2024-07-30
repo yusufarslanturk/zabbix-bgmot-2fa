@@ -28,9 +28,12 @@ zabbix_export:
           type: HTTP_AGENT
           key: influx.get_metrics
           history: '0'
+          trends: '0'
           value_type: TEXT
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
             - type: PROMETHEUS_TO_JSON
               parameters:
                 - ''
@@ -48,6 +51,8 @@ zabbix_export:
             name: 'InfluxDB healthcheck'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '{"status":"fail"}]}'
             - type: JAVASCRIPT
@@ -73,6 +78,7 @@ zabbix_export:
           name: 'InfluxDB: Boltdb reads, rate'
           type: DEPENDENT
           key: influxdb.boltdb_reads.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of boltdb reads per second.'
@@ -82,6 +88,8 @@ zabbix_export:
                 - '$[?(@.name=="boltdb_reads_total")].value.first()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: influx.get_metrics
           tags:
@@ -91,6 +99,7 @@ zabbix_export:
           name: 'InfluxDB: Boltdb writes, rate'
           type: DEPENDENT
           key: influxdb.boltdb_writes.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of boltdb writes per second.'
@@ -100,6 +109,8 @@ zabbix_export:
                 - '$[?(@.name=="boltdb_writes_total")].value.first()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: influx.get_metrics
           tags:
@@ -109,6 +120,7 @@ zabbix_export:
           name: 'InfluxDB: Buckets, total'
           type: DEPENDENT
           key: influxdb.buckets.total
+          delay: '0'
           history: 7d
           description: 'Number of total buckets on the server.'
           preprocessing:
@@ -128,6 +140,7 @@ zabbix_export:
           name: 'InfluxDB: Dashboards, total'
           type: DEPENDENT
           key: influxdb.dashboards.total
+          delay: '0'
           history: 7d
           description: 'Number of total dashboards on the server.'
           preprocessing:
@@ -147,6 +160,7 @@ zabbix_export:
           name: 'InfluxDB: Organizations, total'
           type: DEPENDENT
           key: influxdb.organizations.total
+          delay: '0'
           history: 7d
           description: 'Number of total organizations on the server.'
           preprocessing:
@@ -166,6 +180,7 @@ zabbix_export:
           name: 'InfluxDB: Scrapers, total'
           type: DEPENDENT
           key: influxdb.scrapers.total
+          delay: '0'
           history: 7d
           description: 'Number of total scrapers on the server.'
           preprocessing:
@@ -185,6 +200,7 @@ zabbix_export:
           name: 'InfluxDB: Task runs failed, rate'
           type: DEPENDENT
           key: influxdb.task_executor_complete.failed.rate
+          delay: '0'
           history: 7d
           description: 'Total number of failure runs across all tasks.'
           preprocessing:
@@ -193,6 +209,8 @@ zabbix_export:
                 - '$[?(@.name=="task_executor_total_runs_complete" && @.labels.status == "failed")].value.sum()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: influx.get_metrics
           tags:
@@ -212,6 +230,7 @@ zabbix_export:
           name: 'InfluxDB: Task runs successful, rate'
           type: DEPENDENT
           key: influxdb.task_executor_complete.successful.rate
+          delay: '0'
           history: 7d
           description: 'Total number of runs successful completed across all tasks.'
           preprocessing:
@@ -220,6 +239,8 @@ zabbix_export:
                 - '$[?(@.name=="task_executor_total_runs_complete" && @.labels.status == "success")].value.sum()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: influx.get_metrics
           tags:
@@ -229,6 +250,7 @@ zabbix_export:
           name: 'InfluxDB: Workers currently running'
           type: DEPENDENT
           key: influxdb.task_executor_runs_active.total
+          delay: '0'
           history: 7d
           description: 'Total number of workers currently running tasks.'
           preprocessing:
@@ -245,6 +267,7 @@ zabbix_export:
           name: 'InfluxDB: Workers busy, pct'
           type: DEPENDENT
           key: influxdb.task_executor_workers_busy.pct
+          delay: '0'
           history: 7d
           units: '%'
           description: 'Percent of total available workers that are currently busy.'
@@ -262,6 +285,7 @@ zabbix_export:
           name: 'InfluxDB: Telegrafs, total'
           type: DEPENDENT
           key: influxdb.telegrafs.total
+          delay: '0'
           history: 7d
           description: 'Number of total telegraf configurations on the server.'
           preprocessing:
@@ -281,6 +305,7 @@ zabbix_export:
           name: 'InfluxDB: Telegraf plugins, total'
           type: DEPENDENT
           key: influxdb.telegraf_plugins.total
+          delay: '0'
           history: 7d
           description: 'Number of individual telegraf plugins configured.'
           preprocessing:
@@ -300,6 +325,7 @@ zabbix_export:
           name: 'InfluxDB: Tokens, total'
           type: DEPENDENT
           key: influxdb.tokens.total
+          delay: '0'
           history: 7d
           description: 'Number of total tokens on the server.'
           preprocessing:
@@ -319,6 +345,7 @@ zabbix_export:
           name: 'InfluxDB: Uptime'
           type: DEPENDENT
           key: influxdb.uptime
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -347,6 +374,7 @@ zabbix_export:
           name: 'InfluxDB: Users, total'
           type: DEPENDENT
           key: influxdb.users.total
+          delay: '0'
           history: 7d
           description: 'Number of total users on the server.'
           preprocessing:
@@ -366,7 +394,9 @@ zabbix_export:
           name: 'InfluxDB: Version'
           type: DEPENDENT
           key: influxdb.version
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'Version of the InfluxDB instance.'
           preprocessing:
@@ -414,6 +444,7 @@ zabbix_export:
               name: 'InfluxDB: [{#ORG_NAME}] Query response bytes, failed'
               type: DEPENDENT
               key: 'influxdb.org.http_query_response_bytes.failed.rate["{#ORG_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -424,6 +455,8 @@ zabbix_export:
                     - '$[?(@.name=="http_query_response_bytes" && @.labels.status != "200" && @.labels.endpoint == "/api/v2/query" && @.labels.org_id == "{#ORG_ID}") ].value.first()'
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: influx.get_metrics
               tags:
@@ -435,6 +468,7 @@ zabbix_export:
               name: 'InfluxDB: [{#ORG_NAME}] Query response bytes, success'
               type: DEPENDENT
               key: 'influxdb.org.http_query_response_bytes.success.rate["{#ORG_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -445,6 +479,8 @@ zabbix_export:
                     - '$[?(@.name=="http_query_response_bytes" && @.labels.status == "200" && @.labels.endpoint == "/api/v2/query" && @.labels.org_id == "{#ORG_ID}") ].value.first()'
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: influx.get_metrics
               tags:
@@ -456,6 +492,7 @@ zabbix_export:
               name: 'InfluxDB: [{#ORG_NAME}] Query requests, failed'
               type: DEPENDENT
               key: 'influxdb.org.query_request.failed.rate["{#ORG_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Rps
@@ -466,6 +503,8 @@ zabbix_export:
                     - '$[?(@.name=="http_query_request_count" && @.labels.status != "200" && @.labels.endpoint == "/api/v2/query" && @.labels.org_id == "{#ORG_ID}") ].value.first()'
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: influx.get_metrics
               tags:
@@ -487,6 +526,7 @@ zabbix_export:
               name: 'InfluxDB: [{#ORG_NAME}] Query requests, success'
               type: DEPENDENT
               key: 'influxdb.org.query_request.success.rate["{#ORG_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Rps
@@ -497,6 +537,8 @@ zabbix_export:
                     - '$[?(@.name=="http_query_request_count" && @.labels.status == "200" && @.labels.endpoint == "/api/v2/query" && @.labels.org_id == "{#ORG_ID}") ].value.first()'
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: influx.get_metrics
               tags:
@@ -508,6 +550,7 @@ zabbix_export:
               name: 'InfluxDB: [{#ORG_NAME}] Query requests bytes, failed'
               type: DEPENDENT
               key: 'influxdb.org.query_request_bytes.failed.rate["{#ORG_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -518,6 +561,8 @@ zabbix_export:
                     - '$[?(@.name=="http_query_request_bytes" && @.labels.status != "200" && @.labels.endpoint == "/api/v2/query" && @.labels.org_id == "{#ORG_ID}") ].value.first()'
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: influx.get_metrics
               tags:
@@ -529,6 +574,7 @@ zabbix_export:
               name: 'InfluxDB: [{#ORG_NAME}] Query requests bytes, success'
               type: DEPENDENT
               key: 'influxdb.org.query_request_bytes.success.rate["{#ORG_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -539,6 +585,8 @@ zabbix_export:
                     - '$[?(@.name=="http_query_request_bytes" && @.labels.status == "200" && @.labels.endpoint == "/api/v2/query" && @.labels.org_id == "{#ORG_ID}") ].value.first()'
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: influx.get_metrics
               tags:

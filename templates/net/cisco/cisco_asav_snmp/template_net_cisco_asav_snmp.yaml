@@ -35,6 +35,7 @@ zabbix_export:
           key: cisco.asav.contact
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -56,6 +57,7 @@ zabbix_export:
           key: cisco.asav.location
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -76,6 +78,7 @@ zabbix_export:
           key: cisco.asav.model
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -100,6 +103,7 @@ zabbix_export:
           key: cisco.asav.name
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -346,6 +350,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.2.1.31.1.1.1.18.{#SNMPINDEX}'
               key: 'cisco.asav.net.if.descr[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: IF-MIB
@@ -399,6 +404,8 @@ zabbix_export:
                 address at this sub-layer.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -421,6 +428,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -444,6 +453,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -465,6 +476,8 @@ zabbix_export:
                 or broadcast address at this sub-layer
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -503,6 +516,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.2.1.31.1.1.1.1.{#SNMPINDEX}'
               key: 'cisco.asav.net.if.name[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: CISCO-PORT-MIB
@@ -575,6 +589,8 @@ zabbix_export:
                 were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -598,6 +614,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -622,6 +640,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -644,6 +664,8 @@ zabbix_export:
                 those that were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -794,6 +816,7 @@ zabbix_export:
               key: 'cisco.asav.phys.description[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ENTITY-MIB
@@ -818,6 +841,7 @@ zabbix_export:
               key: 'cisco.asav.phys.hw[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ENTITY-MIB
@@ -849,6 +873,7 @@ zabbix_export:
               key: 'cisco.asav.phys.mfgname[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ENTITY-MIB
@@ -879,6 +904,7 @@ zabbix_export:
               key: 'cisco.asav.phys.model[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ENTITY-MIB
@@ -905,6 +931,7 @@ zabbix_export:
               key: 'cisco.asav.phys.name[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ENTITY-MIB
@@ -938,6 +965,7 @@ zabbix_export:
               key: 'cisco.asav.phys.sn[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ENTITY-MIB
@@ -977,6 +1005,7 @@ zabbix_export:
               key: 'cisco.asav.phys.sw[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ENTITY-MIB
@@ -1180,6 +1209,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: session
@@ -1205,6 +1236,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: session

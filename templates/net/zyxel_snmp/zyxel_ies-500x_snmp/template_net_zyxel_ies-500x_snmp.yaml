@@ -63,6 +63,7 @@ zabbix_export:
           key: zyxel.ies500x.contact
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -94,6 +95,8 @@ zabbix_export:
             network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -109,6 +112,7 @@ zabbix_export:
           key: zyxel.ies500x.location
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -129,6 +133,7 @@ zabbix_export:
           key: zyxel.ies500x.mac
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: IF-MIB
@@ -152,6 +157,7 @@ zabbix_export:
           key: zyxel.ies500x.model
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -185,6 +191,7 @@ zabbix_export:
           key: zyxel.ies500x.name
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -691,6 +698,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.2.1.31.1.1.1.18.{#SNMPINDEX}'
               key: 'zyxel.ies500x.net.adsl.descr[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: IF-MIB
@@ -720,6 +728,8 @@ zabbix_export:
                 address at this sub-layer.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -742,6 +752,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -765,6 +777,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -786,6 +800,8 @@ zabbix_export:
                 or broadcast address at this sub-layer
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -799,6 +815,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.2.1.31.1.1.1.1.{#SNMPINDEX}'
               key: 'zyxel.ies500x.net.adsl.name[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: IF-MIB
@@ -872,6 +889,8 @@ zabbix_export:
                 were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -895,6 +914,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -919,6 +940,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -941,6 +964,8 @@ zabbix_export:
                 those that were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1076,6 +1101,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.2.1.31.1.1.1.18.{#SNMPINDEX}'
               key: 'zyxel.ies500x.net.if.descr[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: IF-MIB
@@ -1129,6 +1155,8 @@ zabbix_export:
                 address at this sub-layer.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1151,6 +1179,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1174,6 +1204,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1195,6 +1227,8 @@ zabbix_export:
                 or broadcast address at this sub-layer
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1233,6 +1267,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.2.1.31.1.1.1.1.{#SNMPINDEX}'
               key: 'zyxel.ies500x.net.if.name[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: IF-MIB
@@ -1306,6 +1341,8 @@ zabbix_export:
                 were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1329,6 +1366,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1353,6 +1392,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1375,6 +1416,8 @@ zabbix_export:
                 those that were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1504,6 +1547,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.4.1.890.1.5.13.5.6.3.1.8.{#SNMPINDEX}'
               key: 'zyxel.ies500x.slot.alarm[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-IES5000-MIB
@@ -1579,6 +1623,7 @@ zabbix_export:
               key: 'zyxel.ies500x.slot.cv.ver[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-IES5000-MIB
@@ -1611,6 +1656,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.4.1.890.1.5.13.5.6.3.1.3.{#SNMPINDEX}'
               key: 'zyxel.ies500x.slot.desc[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-IES5000-MIB
@@ -1631,6 +1677,7 @@ zabbix_export:
               key: 'zyxel.ies500x.slot.dv.ver[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-IES5000-MIB
@@ -1664,6 +1711,7 @@ zabbix_export:
               key: 'zyxel.ies500x.slot.fw.ver[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-IES5000-MIB
@@ -1697,6 +1745,7 @@ zabbix_export:
               key: 'zyxel.ies500x.slot.hw.ver[{#SNMPINDEX}]'
               delay: 1h
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-IES5000-MIB
@@ -1729,6 +1778,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.4.1.890.1.5.13.5.6.3.1.12.{#SNMPINDEX}'
               key: 'zyxel.ies500x.slot.mac1[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-IES5000-MIB
@@ -1748,6 +1798,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.4.1.890.1.5.13.5.6.3.1.13.{#SNMPINDEX}'
               key: 'zyxel.ies500x.slot.mac2[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-IES5000-MIB
@@ -1767,6 +1818,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.4.1.890.1.5.13.5.6.3.1.9.{#SNMPINDEX}'
               key: 'zyxel.ies500x.slot.serial[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-IES5000-MIB

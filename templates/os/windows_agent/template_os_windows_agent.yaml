@@ -24,6 +24,7 @@ zabbix_export:
           key: agent.hostname
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -47,6 +48,7 @@ zabbix_export:
           key: agent.version
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -273,6 +275,7 @@ zabbix_export:
           key: system.hostname
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'The host name of the system.'
           inventory_link: NAME
@@ -321,6 +324,7 @@ zabbix_export:
           key: system.sw.arch
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'The architecture of the operating system.'
           preprocessing:
@@ -335,6 +339,7 @@ zabbix_export:
           key: system.sw.os
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           inventory_link: OS
           preprocessing:
@@ -374,6 +379,7 @@ zabbix_export:
           name: 'Windows: Free swap space in %'
           type: DEPENDENT
           key: system.swap.pfree
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -405,6 +411,7 @@ zabbix_export:
           key: system.uname
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'System description of the host.'
           preprocessing:
@@ -440,6 +447,7 @@ zabbix_export:
           name: 'Windows: Get filesystems'
           key: vfs.fs.get
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'The `vfs.fs.get` key acquires raw information set about the filesystems. Later to be extracted by preprocessing in dependent items.'
           tags:
@@ -491,6 +499,7 @@ zabbix_export:
           name: 'Windows: Network interfaces WMI get'
           key: 'wmi.getall[root\cimv2,"select Name,Description,NetConnectionID,Speed,AdapterTypeId,NetConnectionStatus,GUID from win32_networkadapter where PhysicalAdapter=True and NetConnectionStatus>0"]'
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Raw data of `win32_networkadapter.`'
           preprocessing:
@@ -570,6 +579,8 @@ zabbix_export:
               description: 'The number of incoming packets dropped on the network interface.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -585,6 +596,8 @@ zabbix_export:
               description: 'The number of incoming packets with errors on the network interface.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -601,6 +614,8 @@ zabbix_export:
               description: 'Incoming traffic on the network interface.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -619,6 +634,8 @@ zabbix_export:
               description: 'The number of outgoing packets dropped on the network interface.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -634,6 +651,8 @@ zabbix_export:
               description: 'The number of outgoing packets with errors on the network interface.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -650,6 +669,8 @@ zabbix_export:
               description: 'Outgoing traffic on the network interface.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -664,6 +685,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Speed'
               type: DEPENDENT
               key: 'net.if.speed["{#IFGUID}"]'
+              delay: '0'
               history: 7d
               trends: '0'
               units: bps
@@ -693,6 +715,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Operational status'
               type: DEPENDENT
               key: 'net.if.status["{#IFGUID}"]'
+              delay: '0'
               history: 7d
               trends: '0'
               description: 'The operational status of the network interface.'
@@ -738,6 +761,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Interface type'
               type: DEPENDENT
               key: 'net.if.type["{#IFGUID}"]'
+              delay: '0'
               history: 7d
               trends: '0'
               description: 'The type of the network interface.'
@@ -1166,6 +1190,7 @@ zabbix_export:
               name: 'FS [{#FSLABEL}({#FSNAME})]: Space: Available'
               type: DEPENDENT
               key: 'vfs.fs.dependent.size[{#FSNAME},free]'
+              delay: '0'
               history: 7d
               units: B
               description: 'Available storage space expressed in bytes.'
@@ -1186,6 +1211,7 @@ zabbix_export:
               name: 'FS [{#FSLABEL}({#FSNAME})]: Space: Used, in %'
               type: DEPENDENT
               key: 'vfs.fs.dependent.size[{#FSNAME},pused]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1243,6 +1269,7 @@ zabbix_export:
               name: 'FS [{#FSLABEL}({#FSNAME})]: Space: Total'
               type: DEPENDENT
               key: 'vfs.fs.dependent.size[{#FSNAME},total]'
+              delay: '0'
               history: 7d
               units: B
               description: 'Total space expressed in bytes.'
@@ -1263,6 +1290,7 @@ zabbix_export:
               name: 'FS [{#FSLABEL}({#FSNAME})]: Space: Used'
               type: DEPENDENT
               key: 'vfs.fs.dependent.size[{#FSNAME},used]'
+              delay: '0'
               history: 7d
               units: B
               description: 'Used storage expressed in bytes.'
@@ -1283,7 +1311,9 @@ zabbix_export:
               name: 'FS [{#FSLABEL}({#FSNAME})]: Get data'
               type: DEPENDENT
               key: 'vfs.fs.dependent[{#FSNAME},data]'
+              delay: '0'
               history: 1h
+              trends: '0'
               value_type: TEXT
               description: 'Intermediate data of `{#FSNAME}` filesystem.'
               preprocessing:

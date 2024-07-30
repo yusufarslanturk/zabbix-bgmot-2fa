@@ -23,6 +23,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages acknowledged'
           type: DEPENDENT
           key: rabbitmq.overview.messages.ack
+          delay: '0'
           history: 7d
           description: 'The number of messages delivered to clients and acknowledged.'
           preprocessing:
@@ -40,6 +41,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages acknowledged per second'
           type: DEPENDENT
           key: rabbitmq.overview.messages.ack.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The rate of messages (per second) delivered to clients and acknowledged.'
@@ -58,6 +60,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages confirmed'
           type: DEPENDENT
           key: rabbitmq.overview.messages.confirm
+          delay: '0'
           history: 7d
           description: 'The count of confirmed messages.'
           preprocessing:
@@ -75,6 +78,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages confirmed per second'
           type: DEPENDENT
           key: rabbitmq.overview.messages.confirm.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The rate of messages confirmed per second.'
@@ -93,6 +97,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages delivered'
           type: DEPENDENT
           key: rabbitmq.overview.messages.deliver_get
+          delay: '0'
           history: 7d
           description: 'The sum of messages delivered to consumers: in acknowledgement mode and in no-acknowledgement mode; delivered to consumers in response to the `basic.get`: in acknowledgement mode and in no-acknowledgement mode.'
           preprocessing:
@@ -110,6 +115,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages delivered per second'
           type: DEPENDENT
           key: rabbitmq.overview.messages.deliver_get.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The rate of the sum of messages (per second) delivered to consumers: in acknowledgement mode and in no-acknowledgement mode; delivered to consumers in response to the `basic.get`: in acknowledgement mode and in no-acknowledgement mode.'
@@ -128,6 +134,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages published'
           type: DEPENDENT
           key: rabbitmq.overview.messages.publish
+          delay: '0'
           history: 7d
           description: 'The count of published messages.'
           preprocessing:
@@ -145,6 +152,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages published per second'
           type: DEPENDENT
           key: rabbitmq.overview.messages.publish.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The rate of messages published per second.'
@@ -163,6 +171,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages publish_in'
           type: DEPENDENT
           key: rabbitmq.overview.messages.publish_in
+          delay: '0'
           history: 7d
           description: 'The count of messages published from the channels into this overview.'
           preprocessing:
@@ -180,6 +189,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages publish_in per second'
           type: DEPENDENT
           key: rabbitmq.overview.messages.publish_in.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The rate of messages (per second) published from the channels into this overview.'
@@ -198,6 +208,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages publish_out'
           type: DEPENDENT
           key: rabbitmq.overview.messages.publish_out
+          delay: '0'
           history: 7d
           description: 'The count of messages published from this overview into queues.'
           preprocessing:
@@ -215,6 +226,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages publish_out per second'
           type: DEPENDENT
           key: rabbitmq.overview.messages.publish_out.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The rate of messages (per second) published from this overview into queues.'
@@ -233,6 +245,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages returned redeliver'
           type: DEPENDENT
           key: rabbitmq.overview.messages.redeliver
+          delay: '0'
           history: 7d
           description: 'The count of subset of messages in the `deliver_get`, which had the `redelivered` flag set.'
           preprocessing:
@@ -250,6 +263,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages returned redeliver per second'
           type: DEPENDENT
           key: rabbitmq.overview.messages.redeliver.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The rate of subset of messages (per second) in the `deliver_get`, which had the `redelivered` flag set.'
@@ -268,6 +282,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages returned unroutable'
           type: DEPENDENT
           key: rabbitmq.overview.messages.return_unroutable
+          delay: '0'
           history: 7d
           description: 'The count of messages returned to a publisher as unroutable.'
           preprocessing:
@@ -285,6 +300,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages returned unroutable per second'
           type: DEPENDENT
           key: rabbitmq.overview.messages.return_unroutable.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The rate of messages (per second) returned to a publisher as unroutable.'
@@ -303,6 +319,7 @@ zabbix_export:
           name: 'RabbitMQ: Channels total'
           type: DEPENDENT
           key: rabbitmq.overview.object_totals.channels
+          delay: '0'
           history: 7d
           description: 'The total number of channels.'
           preprocessing:
@@ -318,6 +335,7 @@ zabbix_export:
           name: 'RabbitMQ: Connections total'
           type: DEPENDENT
           key: rabbitmq.overview.object_totals.connections
+          delay: '0'
           history: 7d
           description: 'The total number of connections.'
           preprocessing:
@@ -333,6 +351,7 @@ zabbix_export:
           name: 'RabbitMQ: Consumers total'
           type: DEPENDENT
           key: rabbitmq.overview.object_totals.consumers
+          delay: '0'
           history: 7d
           description: 'The total number of consumers.'
           preprocessing:
@@ -348,6 +367,7 @@ zabbix_export:
           name: 'RabbitMQ: Exchanges total'
           type: DEPENDENT
           key: rabbitmq.overview.object_totals.exchanges
+          delay: '0'
           history: 7d
           description: 'The total number of exchanges.'
           preprocessing:
@@ -363,6 +383,7 @@ zabbix_export:
           name: 'RabbitMQ: Queues total'
           type: DEPENDENT
           key: rabbitmq.overview.object_totals.queues
+          delay: '0'
           history: 7d
           description: 'The total number of queues.'
           preprocessing:
@@ -378,6 +399,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages total'
           type: DEPENDENT
           key: rabbitmq.overview.queue_totals.messages
+          delay: '0'
           history: 7d
           description: 'The total number of messages (ready, plus unacknowledged).'
           preprocessing:
@@ -395,6 +417,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages ready for delivery'
           type: DEPENDENT
           key: rabbitmq.overview.queue_totals.messages.ready
+          delay: '0'
           history: 7d
           description: 'The number of messages ready for delivery.'
           preprocessing:
@@ -412,6 +435,7 @@ zabbix_export:
           name: 'RabbitMQ: Messages unacknowledged'
           type: DEPENDENT
           key: rabbitmq.overview.queue_totals.messages.unacknowledged
+          delay: '0'
           history: 7d
           description: 'The number of unacknowledged messages.'
           preprocessing:
@@ -429,6 +453,7 @@ zabbix_export:
           name: 'RabbitMQ: Get exchanges'
           key: 'web.page.get["{$RABBITMQ.API.SCHEME}://{$RABBITMQ.API.USER}:{$RABBITMQ.API.PASSWORD}@{$RABBITMQ.API.CLUSTER_HOST}:{$RABBITMQ.API.PORT}/api/exchanges"]'
           history: 1h
+          trends: '0'
           value_type: TEXT
           description: 'The HTTP API endpoint that returns exchanges metrics.'
           preprocessing:
@@ -443,6 +468,7 @@ zabbix_export:
           name: 'RabbitMQ: Get overview'
           key: 'web.page.get["{$RABBITMQ.API.SCHEME}://{$RABBITMQ.API.USER}:{$RABBITMQ.API.PASSWORD}@{$RABBITMQ.API.CLUSTER_HOST}:{$RABBITMQ.API.PORT}/api/overview"]'
           history: 1h
+          trends: '0'
           value_type: TEXT
           description: 'The HTTP API endpoint that returns cluster-wide metrics.'
           preprocessing:
@@ -486,6 +512,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages acknowledged per second'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.ack.rate["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of messages (per second) delivered to clients and acknowledged.'
@@ -510,6 +537,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages acknowledged'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.ack["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               description: 'The number of messages delivered to clients and acknowledged.'
               preprocessing:
@@ -533,6 +561,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages confirmed per second'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.confirm.rate["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of messages confirmed per second.'
@@ -557,6 +586,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages confirmed'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.confirm["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               description: 'The count of confirmed messages.'
               preprocessing:
@@ -580,6 +610,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages delivered per second'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.deliver_get.rate["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of the sum of messages (per second) delivered to consumers: in acknowledgement mode and in no-acknowledgement mode; delivered to consumers in response to the `basic.get`: in acknowledgement mode and in no-acknowledgement mode.'
@@ -604,6 +635,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages delivered'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.deliver_get["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               description: 'The sum of messages delivered to consumers: in acknowledgement mode and in no-acknowledgement mode; delivered to consumers in response to the `basic.get`: in acknowledgement mode and in no-acknowledgement mode.'
               preprocessing:
@@ -627,6 +659,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages published per second'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.publish.rate["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of messages published per second.'
@@ -651,6 +684,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages published'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.publish["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               description: 'The count of published messages.'
               preprocessing:
@@ -674,6 +708,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages publish_in per second'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.publish_in.rate["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of messages (per second) published from the channels into this overview.'
@@ -698,6 +733,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages publish_in'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.publish_in["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               description: 'The count of messages published from the channels into this overview.'
               preprocessing:
@@ -721,6 +757,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages publish_out per second'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.publish_out.rate["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of messages (per second) published from this overview into queues.'
@@ -745,6 +782,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages publish_out'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.publish_out["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               description: 'The count of messages published from this overview into queues.'
               preprocessing:
@@ -768,6 +806,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages redelivered per second'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.redeliver.rate["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of subset of messages (per second) in the `deliver_get`, which had the `redelivered` flag set.'
@@ -792,6 +831,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages redelivered'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.redeliver["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               description: 'The count of subset of messages in the `deliver_get`, which had the `redelivered` flag set.'
               preprocessing:
@@ -815,6 +855,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages returned unroutable per second'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.return_unroutable.rate["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of messages (per second) returned to a publisher as unroutable.'
@@ -839,6 +880,7 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Messages returned unroutable'
               type: DEPENDENT
               key: 'rabbitmq.exchange.messages.return_unroutable["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: 7d
               description: 'The count of messages returned to a publisher as unroutable.'
               preprocessing:
@@ -862,7 +904,9 @@ zabbix_export:
               name: 'RabbitMQ: Exchange [{#VHOST}][{#EXCHANGE}][{#TYPE}]: Get data'
               type: DEPENDENT
               key: 'rabbitmq.get_exchanges["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
+              delay: '0'
               history: '0'
+              trends: '0'
               value_type: TEXT
               description: 'The HTTP API endpoint that returns [{#VHOST}][{#EXCHANGE}][{#TYPE}] exchanges metrics'
               preprocessing:
@@ -1085,6 +1129,7 @@ zabbix_export:
           name: 'RabbitMQ: Get processes summary'
           key: 'proc.get[{$RABBITMQ.PROCESS.NAME.PARAMETER},,,summary]'
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'The aggregated data of summary metrics for all processes.'
           tags:
@@ -1094,6 +1139,7 @@ zabbix_export:
           name: 'RabbitMQ: Free disk space'
           type: DEPENDENT
           key: rabbitmq.node.disk_free
+          delay: '0'
           history: 7d
           units: B
           description: 'The current free disk space.'
@@ -1110,6 +1156,7 @@ zabbix_export:
           name: 'RabbitMQ: Disk free alarm'
           type: DEPENDENT
           key: rabbitmq.node.disk_free_alarm
+          delay: '0'
           history: 7d
           description: 'It checks whether the node has a disk alarm or not.'
           valuemap:
@@ -1119,6 +1166,8 @@ zabbix_export:
               parameters:
                 - $.disk_free_alarm
             - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
           master_item:
             key: 'web.page.get["{$RABBITMQ.API.SCHEME}://{$RABBITMQ.API.USER}:{$RABBITMQ.API.PASSWORD}@{$RABBITMQ.API.HOST}:{$RABBITMQ.API.PORT}/api/nodes/{$RABBITMQ.CLUSTER.NAME}@{HOST.NAME}?memory=true"]'
           tags:
@@ -1139,6 +1188,7 @@ zabbix_export:
           name: 'RabbitMQ: Disk free limit'
           type: DEPENDENT
           key: rabbitmq.node.disk_free_limit
+          delay: '0'
           history: 7d
           units: B
           description: 'The free space limit of a disk expressed in bytes.'
@@ -1155,6 +1205,7 @@ zabbix_export:
           name: 'RabbitMQ: Used file descriptors'
           type: DEPENDENT
           key: rabbitmq.node.fd_used
+          delay: '0'
           history: 7d
           description: 'The descriptors of the used file.'
           preprocessing:
@@ -1170,6 +1221,7 @@ zabbix_export:
           name: 'RabbitMQ: Memory alarm'
           type: DEPENDENT
           key: rabbitmq.node.mem_alarm
+          delay: '0'
           history: 7d
           description: 'It checks whether the host has a memory alarm or not.'
           valuemap:
@@ -1179,6 +1231,8 @@ zabbix_export:
               parameters:
                 - $.mem_alarm
             - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
           master_item:
             key: 'web.page.get["{$RABBITMQ.API.SCHEME}://{$RABBITMQ.API.USER}:{$RABBITMQ.API.PASSWORD}@{$RABBITMQ.API.HOST}:{$RABBITMQ.API.PORT}/api/nodes/{$RABBITMQ.CLUSTER.NAME}@{HOST.NAME}?memory=true"]'
           tags:
@@ -1199,6 +1253,7 @@ zabbix_export:
           name: 'RabbitMQ: Memory limit'
           type: DEPENDENT
           key: rabbitmq.node.mem_limit
+          delay: '0'
           history: 7d
           units: B
           description: 'The memory usage with high watermark properties expressed in bytes.'
@@ -1215,6 +1270,7 @@ zabbix_export:
           name: 'RabbitMQ: Memory used'
           type: DEPENDENT
           key: rabbitmq.node.mem_used
+          delay: '0'
           history: 7d
           units: B
           description: 'The memory usage expressed in bytes.'
@@ -1231,7 +1287,9 @@ zabbix_export:
           name: 'RabbitMQ: Management plugin version'
           type: DEPENDENT
           key: rabbitmq.node.overview.management_version
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'The version of the management plugin in use.'
           preprocessing:
@@ -1250,7 +1308,9 @@ zabbix_export:
           name: 'RabbitMQ: RabbitMQ version'
           type: DEPENDENT
           key: rabbitmq.node.overview.rabbitmq_version
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'The version of the RabbitMQ on the node, which processed this request.'
           preprocessing:
@@ -1280,6 +1340,7 @@ zabbix_export:
           name: 'RabbitMQ: Number of network partitions'
           type: DEPENDENT
           key: rabbitmq.node.partitions
+          delay: '0'
           history: 7d
           description: 'The number of network partitions, which this node "sees".'
           preprocessing:
@@ -1309,6 +1370,7 @@ zabbix_export:
           name: 'RabbitMQ: Is running'
           type: DEPENDENT
           key: rabbitmq.node.running
+          delay: '0'
           history: 7d
           description: 'It "sees" whether the node is running or not.'
           valuemap:
@@ -1318,6 +1380,8 @@ zabbix_export:
               parameters:
                 - $.running
             - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
           master_item:
             key: 'web.page.get["{$RABBITMQ.API.SCHEME}://{$RABBITMQ.API.USER}:{$RABBITMQ.API.PASSWORD}@{$RABBITMQ.API.HOST}:{$RABBITMQ.API.PORT}/api/nodes/{$RABBITMQ.CLUSTER.NAME}@{HOST.NAME}?memory=true"]'
           tags:
@@ -1327,6 +1391,7 @@ zabbix_export:
           name: 'RabbitMQ: Runtime run queue'
           type: DEPENDENT
           key: rabbitmq.node.run_queue
+          delay: '0'
           history: 7d
           description: 'The average number of Erlang processes waiting to run.'
           preprocessing:
@@ -1342,6 +1407,7 @@ zabbix_export:
           name: 'RabbitMQ: Sockets available'
           type: DEPENDENT
           key: rabbitmq.node.sockets_total
+          delay: '0'
           history: 7d
           description: 'The file descriptors available for use as sockets.'
           preprocessing:
@@ -1357,6 +1423,7 @@ zabbix_export:
           name: 'RabbitMQ: Sockets used'
           type: DEPENDENT
           key: rabbitmq.node.sockets_used
+          delay: '0'
           history: 7d
           description: 'The number of file descriptors used as sockets.'
           preprocessing:
@@ -1372,6 +1439,7 @@ zabbix_export:
           name: 'RabbitMQ: Uptime'
           type: DEPENDENT
           key: rabbitmq.node.uptime
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -1403,6 +1471,7 @@ zabbix_export:
           name: 'RabbitMQ: Get nodes'
           key: 'web.page.get["{$RABBITMQ.API.SCHEME}://{$RABBITMQ.API.USER}:{$RABBITMQ.API.PASSWORD}@{$RABBITMQ.API.HOST}:{$RABBITMQ.API.PORT}/api/nodes/{$RABBITMQ.CLUSTER.NAME}@{HOST.NAME}?memory=true"]'
           history: 1h
+          trends: '0'
           value_type: TEXT
           description: 'The HTTP API endpoint that returns metrics of the nodes.'
           preprocessing:
@@ -1417,6 +1486,7 @@ zabbix_export:
           name: 'RabbitMQ: Get node overview'
           key: 'web.page.get["{$RABBITMQ.API.SCHEME}://{$RABBITMQ.API.USER}:{$RABBITMQ.API.PASSWORD}@{$RABBITMQ.API.HOST}:{$RABBITMQ.API.PORT}/api/overview"]'
           history: 1h
+          trends: '0'
           value_type: TEXT
           description: 'The HTTP API endpoint that returns cluster-wide metrics.'
           preprocessing:
@@ -1434,6 +1504,7 @@ zabbix_export:
           name: 'RabbitMQ: Get queues'
           key: 'web.page.get["{$RABBITMQ.API.SCHEME}://{$RABBITMQ.API.USER}:{$RABBITMQ.API.PASSWORD}@{$RABBITMQ.API.HOST}:{$RABBITMQ.API.PORT}/api/queues"]'
           history: 1h
+          trends: '0'
           value_type: TEXT
           description: 'The HTTP API endpoint that returns metrics of the queues metrics.'
           preprocessing:
@@ -1468,6 +1539,8 @@ zabbix_export:
                   parameters:
                     - $.status
                 - type: BOOL_TO_DECIMAL
+                  parameters:
+                    - ''
                   error_handler: CUSTOM_VALUE
                   error_handler_params: '0'
               tags:
@@ -1749,7 +1822,9 @@ zabbix_export:
               name: 'RabbitMQ: Get process data'
               type: DEPENDENT
               key: 'rabbitmq.proc.get[{#RABBITMQ.NAME}]'
+              delay: '0'
               history: '0'
+              trends: '0'
               value_type: TEXT
               description: 'The summary metrics aggregated by a process {#RABBITMQ.NAME}.'
               preprocessing:
@@ -1767,6 +1842,7 @@ zabbix_export:
               name: 'RabbitMQ: Number of running processes'
               type: DEPENDENT
               key: 'rabbitmq.proc.num[{#RABBITMQ.NAME}]'
+              delay: '0'
               history: 7d
               description: 'The number of running processes {#RABBITMQ.NAME}.'
               preprocessing:
@@ -1795,6 +1871,7 @@ zabbix_export:
               name: 'RabbitMQ: Memory usage, %'
               type: DEPENDENT
               key: 'rabbitmq.proc.pmem[{#RABBITMQ.NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1813,6 +1890,7 @@ zabbix_export:
               name: 'RabbitMQ: Memory usage (rss)'
               type: DEPENDENT
               key: 'rabbitmq.proc.rss[{#RABBITMQ.NAME}]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The summary of resident set size memory used by a process {#RABBITMQ.NAME} expressed in bytes.'
@@ -1830,6 +1908,7 @@ zabbix_export:
               name: 'RabbitMQ: Memory usage (vsize)'
               type: DEPENDENT
               key: 'rabbitmq.proc.vmem[{#RABBITMQ.NAME}]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The summary of virtual memory used by a process {#RABBITMQ.NAME} expressed in bytes.'
@@ -1933,7 +2012,9 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Get data'
               type: DEPENDENT
               key: 'rabbitmq.get_exchanges["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: '0'
+              trends: '0'
               value_type: TEXT
               description: 'The HTTP API endpoint that returns [{#VHOST}][{#QUEUE}] queue metrics'
               preprocessing:
@@ -1949,6 +2030,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Consumers'
               type: DEPENDENT
               key: 'rabbitmq.queue.consumers["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               description: 'The number of consumers.'
               preprocessing:
@@ -1968,6 +2050,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Memory'
               type: DEPENDENT
               key: 'rabbitmq.queue.memory["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The bytes of memory consumed by the Erlang process associated with the queue, including stack, heap and internal structures.'
@@ -1988,6 +2071,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages acknowledged per second'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.ack.rate["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of messages (per second) delivered to clients and acknowledged.'
@@ -2010,6 +2094,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages acknowledged'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.ack["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               description: 'The number of messages delivered to clients and acknowledged.'
               preprocessing:
@@ -2031,6 +2116,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages delivered per second'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.deliver.rate["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The count of messages (per second) delivered to consumers in acknowledgement mode.'
@@ -2053,6 +2139,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages delivered'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.deliver["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               description: 'The count of messages delivered to consumers in acknowledgement mode.'
               preprocessing:
@@ -2074,6 +2161,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Sum of messages delivered per second'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.deliver_get.rate["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of delivery per second. The sum of messages delivered (per second) to consumers: in acknowledgement mode and in no-acknowledgement mode; delivered to consumers in response to `basic.get`: in acknowledgement mode and in no-acknowledgement mode.'
@@ -2096,6 +2184,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Sum of messages delivered'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.deliver_get["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               description: 'The sum of messages delivered to consumers: in acknowledgement mode and in no-acknowledgement mode; delivered to consumers in response to the `basic.get`: in acknowledgement mode and in no-acknowledgement mode.'
               preprocessing:
@@ -2117,6 +2206,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages published per second'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.publish.rate["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of published messages per second.'
@@ -2139,6 +2229,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages published'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.publish["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               description: 'The count of published messages.'
               preprocessing:
@@ -2160,6 +2251,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages per second'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.rate["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The count of total messages per second in the queue.'
@@ -2180,6 +2272,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages redelivered per second'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.redeliver.rate["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of messages redelivered per second.'
@@ -2202,6 +2295,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages redelivered'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages.redeliver["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               description: 'The count of subset of messages in the `deliver_get` queue with the `redelivered` flag set.'
               preprocessing:
@@ -2223,6 +2317,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages total'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               description: 'The count of total messages in the queue.'
               preprocessing:
@@ -2252,6 +2347,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages ready per second'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages_ready.rate["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of messages per second ready to be delivered to clients.'
@@ -2272,6 +2368,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages ready'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages_ready["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               description: 'The number of messages ready to be delivered to clients.'
               preprocessing:
@@ -2291,6 +2388,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages unacknowledged per second'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages_unacknowledged.rate["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of messages per second delivered to clients but not yet acknowledged.'
@@ -2311,6 +2409,7 @@ zabbix_export:
               name: 'RabbitMQ: Queue [{#VHOST}][{#QUEUE}]: Messages unacknowledged'
               type: DEPENDENT
               key: 'rabbitmq.queue.messages_unacknowledged["{#VHOST}/{#QUEUE}"]'
+              delay: '0'
               history: 7d
               description: 'The number of messages delivered to clients but not yet acknowledged.'
               preprocessing:

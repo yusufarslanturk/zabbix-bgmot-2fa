@@ -114,6 +114,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.10.7.2.1.19,1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2]'
           key: net.if.duplex.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Discovering interfaces from IF-MIB and EtherLike-MIB. Interfaces with up(1) Operational Status are discovered.'
           tags:
@@ -125,6 +126,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.2.2.1.7,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.31.1.1.1.6,1.3.6.1.2.1.31.1.1.1.10,1.3.6.1.2.1.2.2.1.14,1.3.6.1.2.1.2.2.1.20,1.3.6.1.2.1.2.2.1.19,1.3.6.1.2.1.2.2.1.13,1.3.6.1.2.1.31.1.1.1.15]'
           key: net.if.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Discovering interfaces from IF-MIB.'
           tags:
@@ -136,6 +138,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.4.1.2,1.3.6.1.4.1.9.9.13.1.4.1.3]'
           key: sensor.fans.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Discovering system fans.'
           tags:
@@ -147,6 +150,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.5.1.2,1.3.6.1.4.1.9.9.13.1.5.1.3]'
           key: sensor.psu.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'The table of power supply status maintained by the environmental monitor card.'
           tags:
@@ -158,6 +162,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.3.1.2,1.3.6.1.4.1.9.9.13.1.3.1.3,1.3.6.1.4.1.9.9.13.1.3.1.6]'
           key: sensor.temp.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Discovery of ciscoEnvMonTemperatureTable (ciscoEnvMonTemperatureDescr), a table of ambient temperature status maintained by the environmental monitor.'
           tags:
@@ -167,7 +172,9 @@ zabbix_export:
           name: 'Cisco IOS: SNMP traps (fallback)'
           type: SNMP_TRAP
           key: snmptrap.fallback
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: LOG
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
@@ -181,6 +188,7 @@ zabbix_export:
           key: 'system.contact[sysContact.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -199,6 +207,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.109.1.1.1.1.5,1.3.6.1.4.1.9.9.109.1.1.1.1.8]'
           key: system.cpu.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: |
             If your IOS device has several CPUs, you must use CISCO-PROCESS-MIB and its object cpmCPUTotal5minRev from the table called cpmCPUTotalTable,
@@ -216,6 +225,7 @@ zabbix_export:
           key: 'system.descr[sysDescr.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -236,6 +246,7 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: ENTITY-MIB'
           inventory_link: MODEL
@@ -253,6 +264,7 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: ENTITY-MIB'
           inventory_link: SERIALNO_A
@@ -280,6 +292,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.47.1.1.1.1.5,1.3.6.1.2.1.47.1.1.1.1.7,1.3.6.1.2.1.47.1.1.1.1.11]'
           key: system.hw.serialnumber.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: |
             MIB: ENTITY-MIB
@@ -301,6 +314,8 @@ zabbix_export:
             The amount of time since this host was last initialized. Note that this is different from sysUpTime in the SNMPv2-MIB [RFC1907] because sysUpTime is the uptime of the network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -316,6 +331,7 @@ zabbix_export:
           key: 'system.location[sysLocation.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -335,6 +351,7 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -386,6 +403,7 @@ zabbix_export:
           key: 'system.objectid[sysObjectID.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -404,6 +422,7 @@ zabbix_export:
           key: 'system.sw.os[sysDescr.0]'
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: SNMPv2-MIB'
           inventory_link: OS
@@ -437,6 +456,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.48.1.1.1.2,1.3.6.1.4.1.9.9.48.1.1.1.5,1.3.6.1.4.1.9.9.48.1.1.1.6]'
           key: vm.memory.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: |
             MIB: CISCO-MEMORY-POOL-MIB
@@ -493,6 +513,7 @@ zabbix_export:
               name: '#{#SNMPINDEX}: CPU utilization'
               type: DEPENDENT
               key: 'system.cpu.util[cpmCPUTotal5minRev.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -565,7 +586,9 @@ zabbix_export:
               name: '{#ENT_NAME}: Hardware serial number'
               type: DEPENDENT
               key: 'system.hw.serialnumber[entPhysicalSerialNum.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'MIB: ENTITY-MIB'
               preprocessing:
@@ -620,6 +643,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Fan status'
               type: DEPENDENT
               key: 'sensor.fan.status[ciscoEnvMonFanState.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -689,6 +713,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Free memory'
               type: DEPENDENT
               key: 'vm.memory.free[ciscoMemoryPoolFree.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               units: B
               description: |
@@ -709,6 +734,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Used memory'
               type: DEPENDENT
               key: 'vm.memory.used[ciscoMemoryPoolUsed.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               units: B
               description: |
@@ -827,6 +853,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets discarded'
               type: DEPENDENT
               key: 'net.if.in.discards[ifInDiscards.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -841,6 +868,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -857,6 +886,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets with errors'
               type: DEPENDENT
               key: 'net.if.in.errors[ifInErrors.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -867,6 +897,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -883,6 +915,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits received'
               type: DEPENDENT
               key: 'net.if.in[ifHCInOctets.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -894,6 +927,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -910,6 +945,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets discarded'
               type: DEPENDENT
               key: 'net.if.out.discards[ifOutDiscards.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -924,6 +960,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -940,6 +978,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets with errors'
               type: DEPENDENT
               key: 'net.if.out.errors[ifOutErrors.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -950,6 +989,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -966,6 +1007,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits sent'
               type: DEPENDENT
               key: 'net.if.out[ifHCOutOctets.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -977,6 +1019,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -993,6 +1037,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Speed'
               type: DEPENDENT
               key: 'net.if.speed[ifHighSpeed.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               trends: '0'
               units: bps
@@ -1023,6 +1068,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Operational status'
               type: DEPENDENT
               key: 'net.if.status[ifOperStatus.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -1073,6 +1119,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Interface type'
               type: DEPENDENT
               key: 'net.if.type[ifType.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -1262,6 +1309,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Duplex status'
               type: DEPENDENT
               key: 'net.if.duplex[dot3StatsDuplexStatus.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               description: |
                 MIB: EtherLike-MIB
@@ -1349,6 +1397,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Power supply status'
               type: DEPENDENT
               key: 'sensor.psu.status[ciscoEnvMonSupplyState.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -1418,6 +1467,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature status'
               type: DEPENDENT
               key: 'sensor.temp.status[ciscoEnvMonTemperatureState.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               trends: '0'
               description: |
@@ -1442,6 +1492,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature'
               type: DEPENDENT
               key: 'sensor.temp.value[ciscoEnvMonTemperatureValue.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               value_type: FLOAT
               units: °C
@@ -2366,6 +2417,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.4.1.2,1.3.6.1.4.1.9.9.13.1.4.1.3]'
           key: sensor.fans.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Discovering system fans.'
           tags:
@@ -2377,6 +2429,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.5.1.2,1.3.6.1.4.1.9.9.13.1.5.1.3]'
           key: sensor.psu.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'The table of power supply status maintained by the environmental monitor card.'
           tags:
@@ -2388,6 +2441,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.3.1.2,1.3.6.1.4.1.9.9.13.1.3.1.3,1.3.6.1.4.1.9.9.13.1.3.1.6]'
           key: sensor.temp.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Discovery of ciscoEnvMonTemperatureTable (ciscoEnvMonTemperatureDescr), a table of ambient temperature status maintained by the environmental monitor.'
           tags:
@@ -2397,7 +2451,9 @@ zabbix_export:
           name: 'Cisco IOS: SNMP traps (fallback)'
           type: SNMP_TRAP
           key: snmptrap.fallback
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: LOG
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
@@ -2411,6 +2467,7 @@ zabbix_export:
           key: 'system.contact[sysContact.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -2457,6 +2514,7 @@ zabbix_export:
           key: 'system.descr[sysDescr.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -2477,6 +2535,7 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: ENTITY-MIB'
           inventory_link: MODEL
@@ -2494,6 +2553,7 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: ENTITY-MIB'
           inventory_link: SERIALNO_A
@@ -2521,6 +2581,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.47.1.1.1.1.5,1.3.6.1.2.1.47.1.1.1.1.7,1.3.6.1.2.1.47.1.1.1.1.11]'
           key: system.hw.serialnumber.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: |
             MIB: ENTITY-MIB
@@ -2542,6 +2603,8 @@ zabbix_export:
             The amount of time since this host was last initialized. Note that this is different from sysUpTime in the SNMPv2-MIB [RFC1907] because sysUpTime is the uptime of the network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -2557,6 +2620,7 @@ zabbix_export:
           key: 'system.location[sysLocation.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -2576,6 +2640,7 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -2627,6 +2692,7 @@ zabbix_export:
           key: 'system.objectid[sysObjectID.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -2645,6 +2711,7 @@ zabbix_export:
           key: 'system.sw.os[sysDescr.0]'
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: SNMPv2-MIB'
           inventory_link: OS
@@ -2678,6 +2745,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.48.1.1.1.2,1.3.6.1.4.1.9.9.48.1.1.1.5,1.3.6.1.4.1.9.9.48.1.1.1.6]'
           key: vm.memory.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: |
             MIB: CISCO-MEMORY-POOL-MIB
@@ -2737,7 +2805,9 @@ zabbix_export:
               name: '{#ENT_NAME}: Hardware serial number'
               type: DEPENDENT
               key: 'system.hw.serialnumber[entPhysicalSerialNum.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'MIB: ENTITY-MIB'
               preprocessing:
@@ -2792,6 +2862,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Fan status'
               type: DEPENDENT
               key: 'sensor.fan.status[ciscoEnvMonFanState.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -2861,6 +2932,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Free memory'
               type: DEPENDENT
               key: 'vm.memory.free[ciscoMemoryPoolFree.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               units: B
               description: |
@@ -2881,6 +2953,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Used memory'
               type: DEPENDENT
               key: 'vm.memory.used[ciscoMemoryPoolUsed.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               units: B
               description: |
@@ -2954,6 +3027,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Power supply status'
               type: DEPENDENT
               key: 'sensor.psu.status[ciscoEnvMonSupplyState.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -3023,6 +3097,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature status'
               type: DEPENDENT
               key: 'sensor.temp.status[ciscoEnvMonTemperatureState.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               trends: '0'
               description: |
@@ -3047,6 +3122,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature'
               type: DEPENDENT
               key: 'sensor.temp.value[ciscoEnvMonTemperatureValue.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               value_type: FLOAT
               units: °C
@@ -3325,6 +3401,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.2.2.1.7,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.31.1.1.1.6,1.3.6.1.2.1.31.1.1.1.10,1.3.6.1.2.1.2.2.1.14,1.3.6.1.2.1.2.2.1.20,1.3.6.1.2.1.2.2.1.19,1.3.6.1.2.1.2.2.1.13,1.3.6.1.2.1.31.1.1.1.15]'
           key: net.if.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Discovering interfaces from IF-MIB.'
           tags:
@@ -3336,6 +3413,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.4.1.2,1.3.6.1.4.1.9.9.13.1.4.1.3]'
           key: sensor.fans.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Discovering system fans.'
           tags:
@@ -3347,6 +3425,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.5.1.2,1.3.6.1.4.1.9.9.13.1.5.1.3]'
           key: sensor.psu.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'The table of power supply status maintained by the environmental monitor card.'
           tags:
@@ -3358,6 +3437,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.3.1.2,1.3.6.1.4.1.9.9.13.1.3.1.3,1.3.6.1.4.1.9.9.13.1.3.1.6]'
           key: sensor.temp.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Discovery of ciscoEnvMonTemperatureTable (ciscoEnvMonTemperatureDescr), a table of ambient temperature status maintained by the environmental monitor.'
           tags:
@@ -3367,7 +3447,9 @@ zabbix_export:
           name: 'Cisco IOS: SNMP traps (fallback)'
           type: SNMP_TRAP
           key: snmptrap.fallback
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: LOG
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
@@ -3381,6 +3463,7 @@ zabbix_export:
           key: 'system.contact[sysContact.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -3399,6 +3482,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.109.1.1.1.1.5]'
           key: system.cpu.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: |
             If your IOS device has several CPUs, you must use CISCO-PROCESS-MIB and its object cpmCPUTotal5minRev from the table called cpmCPUTotalTable,
@@ -3416,6 +3500,7 @@ zabbix_export:
           key: 'system.descr[sysDescr.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -3436,6 +3521,7 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: ENTITY-MIB'
           inventory_link: MODEL
@@ -3453,6 +3539,7 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: ENTITY-MIB'
           inventory_link: SERIALNO_A
@@ -3480,6 +3567,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.47.1.1.1.1.5,1.3.6.1.2.1.47.1.1.1.1.7,1.3.6.1.2.1.47.1.1.1.1.11]'
           key: system.hw.serialnumber.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: |
             MIB: ENTITY-MIB
@@ -3501,6 +3589,8 @@ zabbix_export:
             The amount of time since this host was last initialized. Note that this is different from sysUpTime in the SNMPv2-MIB [RFC1907] because sysUpTime is the uptime of the network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -3516,6 +3606,7 @@ zabbix_export:
           key: 'system.location[sysLocation.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -3535,6 +3626,7 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -3586,6 +3678,7 @@ zabbix_export:
           key: 'system.objectid[sysObjectID.0]'
           delay: 15m
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: SNMPv2-MIB
@@ -3604,6 +3697,7 @@ zabbix_export:
           key: 'system.sw.os[sysDescr.0]'
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: SNMPv2-MIB'
           inventory_link: OS
@@ -3637,6 +3731,7 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.48.1.1.1.2,1.3.6.1.4.1.9.9.48.1.1.1.5,1.3.6.1.4.1.9.9.48.1.1.1.6]'
           key: vm.memory.walk
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: |
             MIB: CISCO-MEMORY-POOL-MIB
@@ -3693,6 +3788,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: CPU utilization'
               type: DEPENDENT
               key: 'system.cpu.util[cpmCPUTotal5min.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -3769,7 +3865,9 @@ zabbix_export:
               name: '{#ENT_NAME}: Hardware serial number'
               type: DEPENDENT
               key: 'system.hw.serialnumber[entPhysicalSerialNum.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: 'MIB: ENTITY-MIB'
               preprocessing:
@@ -3824,6 +3922,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Fan status'
               type: DEPENDENT
               key: 'sensor.fan.status[ciscoEnvMonFanState.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -3893,6 +3992,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Free memory'
               type: DEPENDENT
               key: 'vm.memory.free[ciscoMemoryPoolFree.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               units: B
               description: |
@@ -3913,6 +4013,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Used memory'
               type: DEPENDENT
               key: 'vm.memory.used[ciscoMemoryPoolUsed.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               units: B
               description: |
@@ -4031,6 +4132,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets discarded'
               type: DEPENDENT
               key: 'net.if.in.discards[ifInDiscards.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -4045,6 +4147,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -4061,6 +4165,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets with errors'
               type: DEPENDENT
               key: 'net.if.in.errors[ifInErrors.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -4071,6 +4176,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -4087,6 +4194,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits received'
               type: DEPENDENT
               key: 'net.if.in[ifHCInOctets.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -4098,6 +4206,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -4114,6 +4224,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets discarded'
               type: DEPENDENT
               key: 'net.if.out.discards[ifOutDiscards.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -4128,6 +4239,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -4144,6 +4257,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets with errors'
               type: DEPENDENT
               key: 'net.if.out.errors[ifOutErrors.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               description: |
                 MIB: IF-MIB
@@ -4154,6 +4268,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: DISCARD_UNCHANGED_HEARTBEAT
                   parameters:
                     - 3m
@@ -4170,6 +4286,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits sent'
               type: DEPENDENT
               key: 'net.if.out[ifHCOutOctets.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               units: bps
               description: |
@@ -4181,6 +4298,8 @@ zabbix_export:
                     - '1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}'
                     - '0'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -4197,6 +4316,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Speed'
               type: DEPENDENT
               key: 'net.if.speed[ifHighSpeed.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               trends: '0'
               units: bps
@@ -4227,6 +4347,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Operational status'
               type: DEPENDENT
               key: 'net.if.status[ifOperStatus.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -4277,6 +4398,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Interface type'
               type: DEPENDENT
               key: 'net.if.type[ifType.{#SNMPINDEX}]'
+              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -4454,6 +4576,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Power supply status'
               type: DEPENDENT
               key: 'sensor.psu.status[ciscoEnvMonSupplyState.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -4523,6 +4646,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature status'
               type: DEPENDENT
               key: 'sensor.temp.status[ciscoEnvMonTemperatureState.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               trends: '0'
               description: |
@@ -4547,6 +4671,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature'
               type: DEPENDENT
               key: 'sensor.temp.value[ciscoEnvMonTemperatureValue.{#SNMPINDEX}]'
+              delay: 0s
               history: 7d
               value_type: FLOAT
               units: °C

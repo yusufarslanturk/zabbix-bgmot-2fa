@@ -45,6 +45,8 @@ zabbix_export:
           description: 'Number of “unclean” elections per second.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -605,6 +607,7 @@ zabbix_export:
           type: JMX
           key: 'jmx["kafka.server:type=app-info","version"]'
           history: 7d
+          trends: '0'
           value_type: CHAR
           username: '{$KAFKA.USER}'
           password: '{$KAFKA.PASSWORD}'
@@ -640,6 +643,8 @@ zabbix_export:
           description: 'The rate at which data sent from producers is consumed by the broker.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -656,6 +661,8 @@ zabbix_export:
           description: 'The rate at which data is fetched and read from the broker by consumers.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -671,6 +678,8 @@ zabbix_export:
           description: 'The rate at which bytes rejected per second by the broker.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -686,6 +695,8 @@ zabbix_export:
           description: 'Number of client fetch request failures per second.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -701,6 +712,8 @@ zabbix_export:
           description: 'Number of failed produce requests per second.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -716,6 +729,8 @@ zabbix_export:
           description: 'The rate at which individual messages are consumed by the broker.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -796,6 +811,8 @@ zabbix_export:
           description: 'The rate at which the number of ISRs in the broker increases.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -811,6 +828,8 @@ zabbix_export:
           description: 'Rate of replicas leaving the ISR pool.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -910,6 +929,7 @@ zabbix_export:
           type: JMX
           key: 'jmx["kafka.server:type=SessionExpireListener,name=SessionState","Value"]'
           history: 7d
+          trends: '0'
           value_type: CHAR
           username: '{$KAFKA.USER}'
           password: '{$KAFKA.PASSWORD}'
@@ -944,6 +964,8 @@ zabbix_export:
           description: 'ZooKeeper client disconnect per second.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -960,6 +982,8 @@ zabbix_export:
           description: 'ZooKeeper client session expiration per second.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -976,6 +1000,8 @@ zabbix_export:
           description: 'ZooKeeper client readonly per second.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -992,6 +1018,8 @@ zabbix_export:
           description: 'ZooKeeper client sync per second.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -1040,6 +1068,8 @@ zabbix_export:
               description: 'The rate at which data is fetched and read from the broker by consumers (by topic).'
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -1078,6 +1108,8 @@ zabbix_export:
               description: 'Rejected bytes rate by topic.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -1117,6 +1149,8 @@ zabbix_export:
               description: 'The rate at which data sent from producers is consumed by topic.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -1136,6 +1170,8 @@ zabbix_export:
               description: 'The rate at which individual messages are consumed by topic.'
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component

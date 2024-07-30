@@ -62,6 +62,7 @@ zabbix_export:
           key: zyxel.4728f.contact
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -109,6 +110,7 @@ zabbix_export:
           key: zyxel.4728f.fwversion
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'MIB: ZYXEL-XGS4728F-MIB'
           inventory_link: SOFTWARE_FULL
@@ -159,6 +161,8 @@ zabbix_export:
             network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -174,6 +178,7 @@ zabbix_export:
           key: zyxel.4728f.location
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -194,6 +199,7 @@ zabbix_export:
           key: zyxel.4728f.mac
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: IF-MIB
@@ -217,6 +223,7 @@ zabbix_export:
           key: zyxel.4728f.model
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -250,6 +257,7 @@ zabbix_export:
           key: zyxel.4728f.name
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: RFC1213-MIB
@@ -292,6 +300,7 @@ zabbix_export:
           key: zyxel.4728f.serialnumber
           delay: 1h
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: |
             MIB: ZYXEL-XGS4728F-MIB
@@ -449,6 +458,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.2.1.2.2.1.2.{#SNMPINDEX}'
               key: 'zyxel.4728f.net.if.descr[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: IF-MIB
@@ -502,6 +512,8 @@ zabbix_export:
                 address at this sub-layer.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -524,6 +536,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -547,6 +561,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -568,6 +584,8 @@ zabbix_export:
                 or broadcast address at this sub-layer
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -628,6 +646,7 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.4.1.890.1.5.8.46.23.1.1.3.{#SNMPINDEX}'
               key: 'zyxel.4728f.net.if.name[{#SNMPINDEX}]'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB:  ZYXEL-XGS4728F-MIB
@@ -701,6 +720,8 @@ zabbix_export:
                 were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -724,6 +745,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -748,6 +771,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -770,6 +795,8 @@ zabbix_export:
                 those that were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1014,6 +1041,7 @@ zabbix_export:
               key: 'zyxel.4728f.sfp.datecode[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-XGS4728F-MIB
@@ -1036,6 +1064,7 @@ zabbix_export:
               key: 'zyxel.4728f.sfp.part[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-XGS4728F-MIB
@@ -1058,6 +1087,7 @@ zabbix_export:
               key: 'zyxel.4728f.sfp.revision[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-XGS4728F-MIB
@@ -1080,6 +1110,7 @@ zabbix_export:
               key: 'zyxel.4728f.sfp.serialnumber[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-XGS4728F-MIB
@@ -1136,6 +1167,7 @@ zabbix_export:
               key: 'zyxel.4728f.sfp.transceiver[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-XGS4728F-MIB
@@ -1158,6 +1190,7 @@ zabbix_export:
               key: 'zyxel.4728f.sfp.vendor[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
+              trends: '0'
               value_type: CHAR
               description: |
                 MIB: ZYXEL-XGS4728F-MIB

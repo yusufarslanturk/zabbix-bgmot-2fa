@@ -22,6 +22,7 @@ zabbix_export:
           name: 'Cloudflare: Total bandwidth'
           type: DEPENDENT
           key: cloudflare.bandwidth.all
+          delay: '0'
           history: 7d
           units: B
           description: 'The volume of all data.'
@@ -38,6 +39,7 @@ zabbix_export:
           name: 'Cloudflare: Cached bandwidth'
           type: DEPENDENT
           key: cloudflare.bandwidth.cached
+          delay: '0'
           history: 7d
           units: B
           description: 'The volume of cached data.'
@@ -54,6 +56,7 @@ zabbix_export:
           name: 'Cloudflare: Cache hit ratio of bandwidth'
           type: DEPENDENT
           key: cloudflare.bandwidth.cache_hit_ratio
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -81,6 +84,7 @@ zabbix_export:
           name: 'Cloudflare: SSL encrypted bandwidth'
           type: DEPENDENT
           key: cloudflare.bandwidth.ssl.encrypted
+          delay: '0'
           history: 7d
           units: B
           description: 'The volume of encrypted data.'
@@ -97,6 +101,7 @@ zabbix_export:
           name: 'Cloudflare: Unencrypted bandwidth'
           type: DEPENDENT
           key: cloudflare.bandwidth.ssl.unencrypted
+          delay: '0'
           history: 7d
           units: B
           description: 'The volume of unencrypted data.'
@@ -113,6 +118,7 @@ zabbix_export:
           name: 'Cloudflare: Uncached bandwidth'
           type: DEPENDENT
           key: cloudflare.bandwidth.uncached
+          delay: '0'
           history: 7d
           units: B
           description: 'The volume of uncached data.'
@@ -129,6 +135,7 @@ zabbix_export:
           name: 'Cloudflare: DNS queries'
           type: DEPENDENT
           key: cloudflare.dns.query.all
+          delay: '0'
           history: 7d
           units: conn
           description: 'The amount of all DNS queries.'
@@ -145,6 +152,7 @@ zabbix_export:
           name: 'Cloudflare: Stale DNS queries'
           type: DEPENDENT
           key: cloudflare.dns.query.stale
+          delay: '0'
           history: 7d
           units: conn
           description: 'The number of stale DNS queries.'
@@ -161,6 +169,7 @@ zabbix_export:
           name: 'Cloudflare: Uncached DNS queries'
           type: DEPENDENT
           key: cloudflare.dns.query.uncached
+          delay: '0'
           history: 7d
           units: conn
           description: 'The number of uncached DNS queries.'
@@ -179,6 +188,7 @@ zabbix_export:
           key: cloudflare.get
           delay: 0;m01
           history: '0'
+          trends: '0'
           value_type: TEXT
           params: |
             var Cloudflare = {
@@ -410,6 +420,7 @@ zabbix_export:
           name: 'Cloudflare: Total page views'
           type: DEPENDENT
           key: cloudflare.pageviews.all
+          delay: '0'
           history: 7d
           units: pg
           description: 'The amount of all pageviews.'
@@ -426,6 +437,7 @@ zabbix_export:
           name: 'Cloudflare: Total requests'
           type: DEPENDENT
           key: cloudflare.requests.all
+          delay: '0'
           history: 7d
           units: req
           description: 'The amount of all requests.'
@@ -442,6 +454,7 @@ zabbix_export:
           name: 'Cloudflare: Cached requests'
           type: DEPENDENT
           key: cloudflare.requests.cached
+          delay: '0'
           history: 7d
           units: req
           preprocessing:
@@ -457,6 +470,7 @@ zabbix_export:
           name: 'Cloudflare: Cache hit ratio % over time'
           type: DEPENDENT
           key: cloudflare.requests.cache_hit_ratio
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -474,6 +488,7 @@ zabbix_export:
           name: 'Cloudflare: Non-2xx responses ratio'
           type: DEPENDENT
           key: cloudflare.requests.others_ratio
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -502,6 +517,7 @@ zabbix_export:
           name: 'Cloudflare: Response codes 1xx'
           type: DEPENDENT
           key: cloudflare.requests.response_100
+          delay: '0'
           history: 7d
           units: req
           description: 'The number requests with 1xx response codes.'
@@ -518,6 +534,7 @@ zabbix_export:
           name: 'Cloudflare: Response codes 2xx'
           type: DEPENDENT
           key: cloudflare.requests.response_200
+          delay: '0'
           history: 7d
           units: req
           description: 'The number requests with 2xx response codes.'
@@ -534,6 +551,7 @@ zabbix_export:
           name: 'Cloudflare: Response codes 3xx'
           type: DEPENDENT
           key: cloudflare.requests.response_300
+          delay: '0'
           history: 7d
           units: req
           description: 'The number requests with 3xx response codes.'
@@ -550,6 +568,7 @@ zabbix_export:
           name: 'Cloudflare: Response codes 4xx'
           type: DEPENDENT
           key: cloudflare.requests.response_400
+          delay: '0'
           history: 7d
           units: req
           description: 'The number requests with 4xx response codes.'
@@ -566,6 +585,7 @@ zabbix_export:
           name: 'Cloudflare: Response codes 5xx'
           type: DEPENDENT
           key: cloudflare.requests.response_500
+          delay: '0'
           history: 7d
           units: req
           description: 'The number requests with 5xx response codes.'
@@ -582,6 +602,7 @@ zabbix_export:
           name: 'Cloudflare: SSL encrypted requests'
           type: DEPENDENT
           key: cloudflare.requests.ssl.encrypted
+          delay: '0'
           history: 7d
           units: req
           description: 'The number of encrypted requests.'
@@ -598,6 +619,7 @@ zabbix_export:
           name: 'Cloudflare: Unencrypted requests'
           type: DEPENDENT
           key: cloudflare.requests.ssl.unencrypted
+          delay: '0'
           history: 7d
           units: req
           description: 'The number of unencrypted requests.'
@@ -614,6 +636,7 @@ zabbix_export:
           name: 'Cloudflare: 2xx responses ratio'
           type: DEPENDENT
           key: cloudflare.requests.success_ratio
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -631,6 +654,7 @@ zabbix_export:
           name: 'Cloudflare: Uncached requests'
           type: DEPENDENT
           key: cloudflare.requests.uncached
+          delay: '0'
           history: 7d
           units: req
           description: 'The number of uncached requests.'
@@ -647,6 +671,7 @@ zabbix_export:
           name: 'Cloudflare: Total threats'
           type: DEPENDENT
           key: cloudflare.threats.all
+          delay: '0'
           history: 7d
           description: 'The number of all threats.'
           preprocessing:
@@ -662,6 +687,7 @@ zabbix_export:
           name: 'Cloudflare: Unique visitors'
           type: DEPENDENT
           key: cloudflare.uniques.all
+          delay: '0'
           history: 7d
           units: conn
           description: 'The number of all visitors IPs.'

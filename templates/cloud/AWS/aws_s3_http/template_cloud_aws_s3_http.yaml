@@ -24,7 +24,9 @@ zabbix_export:
           name: 'AWS S3: Get alarms check'
           type: DEPENDENT
           key: aws.s3.alarms.check
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'Data collection check.'
           preprocessing:
@@ -53,6 +55,7 @@ zabbix_export:
           name: 'AWS S3: Bucket Size'
           type: DEPENDENT
           key: aws.s3.bucket_size_bytes
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -76,6 +79,7 @@ zabbix_export:
           key: aws.s3.get_alarms
           delay: 0s;m/1
           history: '0'
+          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -329,6 +333,8 @@ zabbix_export:
             DescribeAlarms API method: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -352,6 +358,7 @@ zabbix_export:
           key: aws.s3.get_metrics
           delay: 0s;h/8
           history: '0'
+          trends: '0'
           value_type: TEXT
           params: |
             var AWS = {
@@ -657,6 +664,8 @@ zabbix_export:
             Full metrics list related to S3: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metrics-dimensions.html
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -676,7 +685,9 @@ zabbix_export:
           name: 'AWS S3: Get metrics check'
           type: DEPENDENT
           key: aws.s3.metrics.check
+          delay: '0'
           history: 7d
+          trends: '0'
           value_type: CHAR
           description: 'Data collection check.'
           preprocessing:
@@ -705,6 +716,7 @@ zabbix_export:
           name: 'AWS S3: Number of objects'
           type: DEPENDENT
           key: aws.s3.number_of_objects
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -743,6 +755,7 @@ zabbix_export:
               name: 'AWS S3 Alarms: [{#ALARM_NAME}]: State'
               type: DEPENDENT
               key: 'aws.s3.alarm.state["{#ALARM_NAME}"]'
+              delay: '0'
               history: 7d
               description: |
                 The state value for the alarm. Possible values: 0 (OK), 1 (INSUFFICIENT_DATA), 2 (ALARM).
@@ -779,7 +792,9 @@ zabbix_export:
               name: 'AWS S3 Alarms: [{#ALARM_NAME}]: State reason'
               type: DEPENDENT
               key: 'aws.s3.alarm.state_reason["{#ALARM_NAME}"]'
+              delay: '0'
               history: 7d
+              trends: '0'
               value_type: TEXT
               description: |
                 An explanation for the alarm state, in text format.
@@ -853,6 +868,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Errors, 4xx'
               type: DEPENDENT
               key: 'aws.s3.4xx_errors["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -877,6 +893,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Errors, 5xx'
               type: DEPENDENT
               key: 'aws.s3.5xx_errors["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -901,6 +918,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: All'
               type: DEPENDENT
               key: 'aws.s3.all_requests["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -920,6 +938,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Bytes downloaded'
               type: DEPENDENT
               key: 'aws.s3.bytes_downloaded["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -942,6 +961,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Replication: Bytes pending'
               type: DEPENDENT
               key: 'aws.s3.bytes_pending_replication["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -962,6 +982,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Bytes uploaded'
               type: DEPENDENT
               key: 'aws.s3.bytes_uploaded["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -984,6 +1005,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Delete'
               type: DEPENDENT
               key: 'aws.s3.delete_requests["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -1005,6 +1027,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: First byte latency, avg'
               type: DEPENDENT
               key: 'aws.s3.first_byte_latency.avg["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -1029,6 +1052,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: First byte latency, p90'
               type: DEPENDENT
               key: 'aws.s3.first_byte_latency.p90["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -1055,6 +1079,7 @@ zabbix_export:
               key: 'aws.s3.get_metrics["{#AWS.S3.FILTER.ID.NAME}"]'
               delay: '{$AWS.S3.UPDATE.INTERVAL}'
               history: '0'
+              trends: '0'
               value_type: TEXT
               params: |
                 var AWS = {
@@ -1326,6 +1351,8 @@ zabbix_export:
                 Full metrics list related to S3: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metrics-dimensions.html
               preprocessing:
                 - type: CHECK_NOT_SUPPORTED
+                  parameters:
+                    - ''
               timeout: 15s
               parameters:
                 - name: AccessKeyId
@@ -1351,6 +1378,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Get'
               type: DEPENDENT
               key: 'aws.s3.get_requests["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -1372,6 +1400,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Head'
               type: DEPENDENT
               key: 'aws.s3.head_requests["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of HTTP HEAD requests made to an Amazon S3 bucket.'
@@ -1391,6 +1420,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: List'
               type: DEPENDENT
               key: 'aws.s3.list_requests["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of HTTP requests that list the contents of a bucket.'
@@ -1410,6 +1440,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Replication: Operations pending'
               type: DEPENDENT
               key: 'aws.s3.operations_pending_replication["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of operations pending replication for a given replication rule.'
@@ -1429,6 +1460,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Post'
               type: DEPENDENT
               key: 'aws.s3.post_requests["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -1450,6 +1482,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Put'
               type: DEPENDENT
               key: 'aws.s3.put_requests["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of HTTP PUT requests made for objects in an Amazon S3 bucket.'
@@ -1469,6 +1502,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Replication: Latency'
               type: DEPENDENT
               key: 'aws.s3.replication_latency["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: s
@@ -1489,6 +1523,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Select, bytes returned'
               type: DEPENDENT
               key: 'aws.s3.select_bytes_returned["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1511,6 +1546,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Select, bytes scanned'
               type: DEPENDENT
               key: 'aws.s3.select_bytes_scanned["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1533,6 +1569,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Requests: Select'
               type: DEPENDENT
               key: 'aws.s3.select_requests["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of Amazon S3 SELECT Object Content requests made for objects in an Amazon S3 bucket.'
@@ -1552,6 +1589,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Total request latency, avg'
               type: DEPENDENT
               key: 'aws.s3.total_request_latency.avg["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms
@@ -1577,6 +1615,7 @@ zabbix_export:
               name: 'AWS S3: Filter [{#AWS.S3.FILTER.ID.NAME}]: Total request latency, p90'
               type: DEPENDENT
               key: 'aws.s3.total_request_latency.p90["{#AWS.S3.FILTER.ID.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: ms

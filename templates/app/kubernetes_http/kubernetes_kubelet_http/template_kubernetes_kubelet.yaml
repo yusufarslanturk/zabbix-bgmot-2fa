@@ -27,6 +27,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: kube.cadvisor.metrics
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Collecting raw Kubelet metrics from /metrics/cadvisor endpoint.'
           timeout: 10s
@@ -42,6 +43,7 @@ zabbix_export:
           name: 'Kubernetes: Containers restarts'
           type: DEPENDENT
           key: kube.kubelet.containers.restarts
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of times the container has been restarted.'
@@ -58,6 +60,7 @@ zabbix_export:
           name: 'Kubernetes: Containers running'
           type: DEPENDENT
           key: kube.kubelet.containers.running
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of running containers.'
@@ -74,6 +77,7 @@ zabbix_export:
           name: 'Kubernetes: CPU cores, total'
           type: DEPENDENT
           key: kube.kubelet.cpu.cores
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of cores in this machine (available until kubernetes v1.18).'
@@ -92,6 +96,7 @@ zabbix_export:
           name: 'Kubernetes: Machine memory, bytes'
           type: DEPENDENT
           key: kube.kubelet.machine.memory
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -112,6 +117,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: kube.kubelet.metrics
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Collecting raw Kubelet metrics from /metrics endpoint.'
           timeout: 10s
@@ -127,6 +133,7 @@ zabbix_export:
           name: 'Kubernetes: Pods running'
           type: DEPENDENT
           key: kube.kubelet.pods.running
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of running pods.'
@@ -143,6 +150,7 @@ zabbix_export:
           name: 'Kubernetes: File descriptors, max'
           type: DEPENDENT
           key: kube.kubelet.process_max_fds
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Maximum number of open file descriptors.'
@@ -161,6 +169,7 @@ zabbix_export:
           name: 'Kubernetes: File descriptors, open'
           type: DEPENDENT
           key: kube.kubelet.process_open_fds
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of open file descriptors.'
@@ -179,6 +188,7 @@ zabbix_export:
           name: 'Kubernetes: Virtual memory, bytes'
           type: DEPENDENT
           key: kube.kubelet.virtual.memory
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -198,6 +208,7 @@ zabbix_export:
           name: 'Kubernetes: Containers last state terminated'
           type: DEPENDENT
           key: kube.kublet.containers.terminated
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of containers that were previously terminated.'
@@ -215,6 +226,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: kube.pods
           history: '0'
+          trends: '0'
           value_type: TEXT
           description: 'Collecting raw Kubelet metrics from /pods endpoint.'
           timeout: 10s
@@ -238,6 +250,7 @@ zabbix_export:
               name: 'Kubernetes: Namespace [{#NAMESPACE}] Pod [{#POD}] Container [{#CONTAINER}]: Memory page cache'
               type: DEPENDENT
               key: 'kube.kubelet.container.memory.cache["{#CONTAINER}", "{#NAMESPACE}", "{#POD}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -266,6 +279,7 @@ zabbix_export:
               name: 'Kubernetes: Namespace [{#NAMESPACE}] Pod [{#POD}] Container [{#CONTAINER}]: Memory max usage'
               type: DEPENDENT
               key: 'kube.kubelet.container.memory.max_usage["{#CONTAINER}", "{#NAMESPACE}", "{#POD}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -294,6 +308,7 @@ zabbix_export:
               name: 'Kubernetes: Namespace [{#NAMESPACE}] Pod [{#POD}] Container [{#CONTAINER}]: RSS'
               type: DEPENDENT
               key: 'kube.kubelet.container.memory.rss["{#CONTAINER}", "{#NAMESPACE}", "{#POD}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -322,6 +337,7 @@ zabbix_export:
               name: 'Kubernetes: Namespace [{#NAMESPACE}] Pod [{#POD}] Container [{#CONTAINER}]: Swap'
               type: DEPENDENT
               key: 'kube.kubelet.container.memory.swap["{#CONTAINER}", "{#NAMESPACE}", "{#POD}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -350,6 +366,7 @@ zabbix_export:
               name: 'Kubernetes: Namespace [{#NAMESPACE}] Pod [{#POD}] Container [{#CONTAINER}]: Usage'
               type: DEPENDENT
               key: 'kube.kubelet.container.memory.usage["{#CONTAINER}", "{#NAMESPACE}", "{#POD}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -378,6 +395,7 @@ zabbix_export:
               name: 'Kubernetes: Namespace [{#NAMESPACE}] Pod [{#POD}] Container [{#CONTAINER}]: Working set'
               type: DEPENDENT
               key: 'kube.kubelet.container.memory.working_set["{#CONTAINER}", "{#NAMESPACE}", "{#POD}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -440,6 +458,7 @@ zabbix_export:
               name: 'Kubernetes: Namespace [{#NAMESPACE}] Pod [{#NAME}] CPU: Load average, 10s'
               type: DEPENDENT
               key: 'kube.pod.container_cpu_load_average_10s[{#NAMESPACE}/{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Pods cpu load average over the last 10 seconds.'
@@ -461,6 +480,7 @@ zabbix_export:
               name: 'Kubernetes: Namespace [{#NAMESPACE}] Pod [{#NAME}] CPU: System seconds, total'
               type: DEPENDENT
               key: 'kube.pod.container_cpu_system_seconds_total[{#NAMESPACE}/{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: s
@@ -473,6 +493,8 @@ zabbix_export:
                     - sum
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: kube.cadvisor.metrics
               tags:
@@ -484,6 +506,7 @@ zabbix_export:
               name: 'Kubernetes: Namespace [{#NAMESPACE}] Pod [{#NAME}] CPU: Usage seconds, total'
               type: DEPENDENT
               key: 'kube.pod.container_cpu_usage_seconds_total[{#NAMESPACE}/{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: s
@@ -496,6 +519,8 @@ zabbix_export:
                     - sum
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: kube.cadvisor.metrics
               tags:
@@ -507,6 +532,7 @@ zabbix_export:
               name: 'Kubernetes: Namespace [{#NAMESPACE}] Pod [{#NAME}] CPU: User seconds, total'
               type: DEPENDENT
               key: 'kube.pod.container_cpu_user_seconds_total[{#NAMESPACE}/{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: s
@@ -519,6 +545,8 @@ zabbix_export:
                     - sum
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: kube.cadvisor.metrics
               tags:
@@ -548,6 +576,7 @@ zabbix_export:
               name: 'Kubernetes: Host [{#HOST}] Request method [{#METHOD}] Code:[{#CODE}]'
               type: DEPENDENT
               key: 'kube.kubelet.rest.requests["{#CODE}", "{#HOST}", "{#METHOD}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Number of HTTP requests, partitioned by status code, method, and host.'
@@ -608,10 +637,11 @@ zabbix_export:
               name: 'Kubernetes: [{#OP_TYPE}] Runtime operations bucket: {#LE}'
               type: DEPENDENT
               key: 'kube.kublet.runtime_ops_duration_seconds_bucket[{#LE},"{#OP_TYPE}"]'
+              delay: '0'
               history: 1h
-              value_type: FLOAT
               trends: '0'
               discover: NO_DISCOVER
+              value_type: FLOAT
               description: 'Duration in seconds of runtime operations. Broken down by operation type.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN
@@ -629,8 +659,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kube.kublet.runtime_ops_duration_seconds_p50["{#OP_TYPE}"]'
               history: 7d
-              value_type: FLOAT
               discover: NO_DISCOVER
+              value_type: FLOAT
               units: s
               params: 'bucket_percentile(//kube.kublet.runtime_ops_duration_seconds_bucket[*,"{#OP_TYPE}"],5m,50)'
               description: '50 percentile of operation latency distribution in seconds for each verb.'
@@ -642,8 +672,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kube.kublet.runtime_ops_duration_seconds_p90["{#OP_TYPE}"]'
               history: 7d
-              value_type: FLOAT
               discover: NO_DISCOVER
+              value_type: FLOAT
               units: s
               params: 'bucket_percentile(//kube.kublet.runtime_ops_duration_seconds_bucket[*,"{#OP_TYPE}"],5m,90)'
               description: '90 percentile of operation latency distribution in seconds for each verb.'
@@ -655,8 +685,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kube.kublet.runtime_ops_duration_seconds_p95["{#OP_TYPE}"]'
               history: 7d
-              value_type: FLOAT
               discover: NO_DISCOVER
+              value_type: FLOAT
               units: s
               params: 'bucket_percentile(//kube.kublet.runtime_ops_duration_seconds_bucket[*,"{#OP_TYPE}"],5m,95)'
               description: '95 percentile of operation latency distribution in seconds for each verb.'
@@ -668,8 +698,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kube.kublet.runtime_ops_duration_seconds_p99["{#OP_TYPE}"]'
               history: 7d
-              value_type: FLOAT
               discover: NO_DISCOVER
+              value_type: FLOAT
               units: s
               params: 'bucket_percentile(//kube.kublet.runtime_ops_duration_seconds_bucket[*,"{#OP_TYPE}"],5m,99)'
               description: '99 percentile of operation latency distribution in seconds for each verb.'
@@ -680,9 +710,10 @@ zabbix_export:
               name: 'Kubernetes: [{#OP_TYPE}] Runtime operations total, rate'
               type: DEPENDENT
               key: 'kube.kublet.runtime_ops_total.rate["{#OP_TYPE}"]'
+              delay: '0'
               history: 7d
-              value_type: FLOAT
               discover: NO_DISCOVER
+              value_type: FLOAT
               description: 'Cumulative number of runtime operations by operation type.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN
@@ -692,6 +723,8 @@ zabbix_export:
                     - ''
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: kube.kubelet.metrics
               tags:
@@ -775,7 +808,8 @@ zabbix_export:
                     value: buckets
                     formulaid: A
               operations:
-                - operator: LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: LIKE
                   value: bucket
                   discover: DISCOVER
             - name: 'total item'
@@ -786,7 +820,8 @@ zabbix_export:
                     value: totals
                     formulaid: A
               operations:
-                - operator: NOT_LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: NOT_LIKE
                   value: bucket
                   discover: DISCOVER
       tags:
