@@ -236,7 +236,7 @@ static void zbx_odbc_connection_string_append(char **connection_str, const char 
 static void zbx_odbc_connection_pwd_append(char **connection_str, const char *value)
 {
 	size_t	len;
-	char	last = '\0', *pwd = NULL, *dst = NULL;
+	char	last = '\0', *pwd = NULL;
 
 	if (NULL == value)
 		return;
@@ -245,7 +245,7 @@ static void zbx_odbc_connection_pwd_append(char **connection_str, const char *va
 	if ('{' != *value || '}' != value[len-1])
 	{
 		int need_replacement = 0;
-		char *src = (char *)value;
+		char *src = (char *)value, *dst;
 
 		dst = pwd = (char *)zbx_malloc(NULL, (len + 1) * 2);
 		*dst++ = '{';
@@ -274,17 +274,15 @@ static void zbx_odbc_connection_pwd_append(char **connection_str, const char *va
 		}
 		else
 		{
-			dst = NULL;
 			zbx_free(pwd);
-			pwd = (char *)value;
 		}
 	}
 	if (0 < (len = strlen(*connection_str)))
 	last = (*connection_str)[len-1];
 
-	*connection_str = zbx_dsprintf(*connection_str, "%s%sPWD=%s", *connection_str, ';' == last ? "" : ";", pwd);
-	if (dst != NULL)
-		zbx_free(pwd);
+	*connection_str = zbx_dsprintf(*connection_str, "%s%sPWD=%s", *connection_str, ';' == last ? "" : ";",
+					(NULL != pwd) ? pwd : value);
+	zbx_free(pwd);
 }
 
 /******************************************************************************
