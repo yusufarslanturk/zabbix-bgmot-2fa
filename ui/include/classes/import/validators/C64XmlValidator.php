@@ -591,16 +591,16 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 							'delay' =>					['type' => XML_MULTIPLE, 'rules' => [
 															['if' => ['tag' => 'type', 'in' => [CXmlConstantValue::ITEM_TYPE_ZABBIX_ACTIVE => CXmlConstantName::ZABBIX_ACTIVE]], 'type' => XML_MULTIPLE, 'rules' => [
 																['if' => static fn(array $data): bool => strncmp($data['key'], 'mqtt.get', 8) != 0, 'type' => XML_STRING, 'default' => '1m'],
-																['else' => true, 'type' => XML_IGNORE_TAG]
+																['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 															]],
 															['if' => ['tag' => 'type', 'in' => $this->ITEM_TYPE_DELAY_SUBSET], 'type' => XML_STRING, 'default' => '1m'],
-															['else' => true, 'type' => XML_IGNORE_TAG]
+															['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 							]],
 							'history' =>				['type' => XML_STRING, 'default' => '90d'],
 							'value_type' =>				['type' => XML_STRING, 'default' => CXmlConstantValue::UNSIGNED, 'in' => $this->ITEM_VALUE_TYPE],
 							'trends' =>					['type' => XML_MULTIPLE, 'rules' => [
 															['if' => ['tag' => 'value_type', 'in' => [CXmlConstantValue::FLOAT => CXmlConstantName::FLOAT, CXmlConstantValue::UNSIGNED => CXmlConstantName::UNSIGNED]], 'type' => XML_STRING, 'default' => '365d'],
-															['else' => true, 'type' => XML_IGNORE_TAG]
+															['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 							]],
 							'status' =>					['type' => XML_STRING, 'default' => CXmlConstantValue::ENABLED, 'in' => [CXmlConstantValue::ENABLED => CXmlConstantName::ENABLED, CXmlConstantValue::DISABLED => CXmlConstantName::DISABLED]],
 							'allow_traps' =>			['type' => XML_MULTIPLE, 'rules' => [
@@ -684,7 +684,7 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 										['if' => ['tag' => 'type', 'in' => $this->PREPROCESSING_STEP_TYPE_PARAMS], 'type' => XML_INDEXED_ARRAY | XML_REQUIRED, 'prefix' => 'parameter', 'rules' => [
 											'parameter' =>			['type' => XML_STRING, 'flags' => CImportDataNormalizer::EOL_LF]
 										]],
-										['else' => true, 'type' => XML_IGNORE_TAG]
+										['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => ['']]
 									]],
 									'error_handler' =>			['type' => XML_MULTIPLE, 'rules' => [
 																	['if' => ['tag' => 'type', 'in' => $this->PREPROCESSING_STEP_TYPE_ERROR_HANDLING_SUBSET], 'type' => XML_STRING, 'default' => CXmlConstantValue::ORIGINAL_ERROR, 'in' => $this->ITEM_PREPROCESSING_ERROR_HANDLER],
@@ -884,16 +884,16 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 									'delay' =>					['type' => XML_MULTIPLE, 'rules' => [
 																	['if' => ['tag' => 'type', 'in' => [CXmlConstantValue::ITEM_TYPE_ZABBIX_ACTIVE => CXmlConstantName::ZABBIX_ACTIVE]], 'type' => XML_MULTIPLE, 'rules' => [
 																		['if' => static fn(array $data): bool => strncmp($data['key'], 'mqtt.get', 8) != 0, 'type' => XML_STRING, 'default' => '1m'],
-																		['else' => true, 'type' => XML_IGNORE_TAG]
+																		['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 																	]],
 																	['if' => ['tag' => 'type', 'in' => $this->ITEM_TYPE_DELAY_SUBSET], 'type' => XML_STRING, 'default' => '1m'],
-																	['else' => true, 'type' => XML_IGNORE_TAG]
+																	['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 									]],
 									'history' =>				['type' => XML_STRING, 'default' => '90d'],
 									'value_type' =>				['type' => XML_STRING, 'default' => CXmlConstantValue::UNSIGNED, 'in' => $this->ITEM_VALUE_TYPE],
 									'trends' =>					['type' => XML_MULTIPLE, 'rules' => [
 																	['if' => ['tag' => 'value_type', 'in' => [CXmlConstantValue::FLOAT => CXmlConstantName::FLOAT, CXmlConstantValue::UNSIGNED => CXmlConstantName::UNSIGNED]], 'type' => XML_STRING, 'default' => '365d'],
-																	['else' => true, 'type' => XML_IGNORE_TAG]
+																	['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 									]],
 									'status' =>					['type' => XML_STRING, 'default' => CXmlConstantValue::ENABLED, 'in' => [CXmlConstantValue::ENABLED => CXmlConstantName::ENABLED, CXmlConstantValue::DISABLED => CXmlConstantName::DISABLED]],
 									'discover' =>				['type' => XML_STRING, 'default' => CXmlConstantValue::ITEM_DISCOVER, 'in' => [CXmlConstantValue::ITEM_DISCOVER => CXmlConstantName::DISCOVER, CXmlConstantValue::ITEM_NO_DISCOVER => CXmlConstantName::NO_DISCOVER]],
@@ -974,7 +974,7 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 												['if' => ['tag' => 'type', 'in' => $this->PREPROCESSING_STEP_TYPE_PARAMS], 'type' => XML_INDEXED_ARRAY | XML_REQUIRED, 'prefix' => 'parameter', 'rules' => [
 													'parameter' =>			['type' => XML_STRING, 'flags' => CImportDataNormalizer::EOL_LF]
 												]],
-												['else' => true, 'type' => XML_IGNORE_TAG]
+												['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => ['']]
 											]],
 											'error_handler' =>			['type' => XML_MULTIPLE, 'rules' => [
 																			['if' => ['tag' => 'type', 'in' => $this->PREPROCESSING_STEP_TYPE_ERROR_HANDLING_SUBSET], 'type' => XML_STRING, 'default' => CXmlConstantValue::ORIGINAL_ERROR, 'in' => $this->ITEM_PREPROCESSING_ERROR_HANDLER],
@@ -1616,16 +1616,16 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 							'delay' =>					['type' => XML_MULTIPLE, 'rules' => [
 															['if' => ['tag' => 'type', 'in' => [CXmlConstantValue::ITEM_TYPE_ZABBIX_ACTIVE => CXmlConstantName::ZABBIX_ACTIVE]], 'type' => XML_MULTIPLE, 'rules' => [
 																['if' => static fn(array $data): bool => strncmp($data['key'], 'mqtt.get', 8) != 0, 'type' => XML_STRING, 'default' => '1m'],
-																['else' => true, 'type' => XML_IGNORE_TAG]
+																['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 															]],
 															['if' => ['tag' => 'type', 'in' => $this->ITEM_TYPE_DELAY_SUBSET], 'type' => XML_STRING, 'default' => '1m'],
-															['else' => true, 'type' => XML_IGNORE_TAG]
+															['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 							]],
 							'history' =>				['type' => XML_STRING, 'default' => '90d'],
 							'value_type' =>				['type' => XML_STRING, 'default' => CXmlConstantValue::UNSIGNED, 'in' => $this->ITEM_VALUE_TYPE],
 							'trends' =>					['type' => XML_MULTIPLE, 'rules' => [
 															['if' => ['tag' => 'value_type', 'in' => [CXmlConstantValue::FLOAT => CXmlConstantName::FLOAT, CXmlConstantValue::UNSIGNED => CXmlConstantName::UNSIGNED]], 'type' => XML_STRING, 'default' => '365d'],
-															['else' => true, 'type' => XML_IGNORE_TAG]
+															['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 							]],
 							'status' =>					['type' => XML_STRING, 'default' => CXmlConstantValue::ENABLED, 'in' => [CXmlConstantValue::ENABLED => CXmlConstantName::ENABLED, CXmlConstantValue::DISABLED => CXmlConstantName::DISABLED]],
 							'allow_traps' =>			['type' => XML_MULTIPLE, 'rules' => [
@@ -1709,7 +1709,7 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 										['if' => ['tag' => 'type', 'in' => $this->PREPROCESSING_STEP_TYPE_PARAMS], 'type' => XML_INDEXED_ARRAY | XML_REQUIRED, 'prefix' => 'parameter', 'rules' => [
 											'parameter' =>			['type' => XML_STRING, 'flags' => CImportDataNormalizer::EOL_LF]
 										]],
-										['else' => true, 'type' => XML_IGNORE_TAG]
+										['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => ['']]
 									]],
 									'error_handler' =>			['type' => XML_MULTIPLE, 'rules' => [
 																	['if' => ['tag' => 'type', 'in' => $this->PREPROCESSING_STEP_TYPE_ERROR_HANDLING_SUBSET], 'type' => XML_STRING, 'default' => CXmlConstantValue::ORIGINAL_ERROR, 'in' => $this->ITEM_PREPROCESSING_ERROR_HANDLER],
@@ -1907,16 +1907,16 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 									'delay' =>					['type' => XML_MULTIPLE, 'rules' => [
 																	['if' => ['tag' => 'type', 'in' => [CXmlConstantValue::ITEM_TYPE_ZABBIX_ACTIVE => CXmlConstantName::ZABBIX_ACTIVE]], 'type' => XML_MULTIPLE, 'rules' => [
 																		['if' => static fn(array $data): bool => strncmp($data['key'], 'mqtt.get', 8) != 0, 'type' => XML_STRING, 'default' => '1m'],
-																		['else' => true, 'type' => XML_IGNORE_TAG]
+																		['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 																	]],
 																	['if' => ['tag' => 'type', 'in' => $this->ITEM_TYPE_DELAY_SUBSET], 'type' => XML_STRING, 'default' => '1m'],
-																	['else' => true, 'type' => XML_IGNORE_TAG]
+																	['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 									]],
 									'history' =>				['type' => XML_STRING, 'default' => '90d'],
 									'value_type' =>				['type' => XML_STRING, 'default' => CXmlConstantValue::UNSIGNED, 'in' => $this->ITEM_VALUE_TYPE],
 									'trends' =>					['type' => XML_MULTIPLE, 'rules' => [
 																	['if' => ['tag' => 'value_type', 'in' => [CXmlConstantValue::FLOAT => CXmlConstantName::FLOAT, CXmlConstantValue::UNSIGNED => CXmlConstantName::UNSIGNED]], 'type' => XML_STRING, 'default' => '365d'],
-																	['else' => true, 'type' => XML_IGNORE_TAG]
+																	['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => '0']
 									]],
 									'status' =>					['type' => XML_STRING, 'default' => CXmlConstantValue::ENABLED, 'in' => [CXmlConstantValue::ENABLED => CXmlConstantName::ENABLED, CXmlConstantValue::DISABLED => CXmlConstantName::DISABLED]],
 									'discover' =>				['type' => XML_STRING, 'default' => CXmlConstantValue::ITEM_DISCOVER, 'in' => [CXmlConstantValue::ITEM_DISCOVER => CXmlConstantName::DISCOVER, CXmlConstantValue::ITEM_NO_DISCOVER => CXmlConstantName::NO_DISCOVER]],
@@ -1997,7 +1997,7 @@ class C64XmlValidator extends CXmlValidatorGeneral {
 												['if' => ['tag' => 'type', 'in' => $this->PREPROCESSING_STEP_TYPE_PARAMS], 'type' => XML_INDEXED_ARRAY | XML_REQUIRED, 'prefix' => 'parameter', 'rules' => [
 													'parameter' =>			['type' => XML_STRING, 'flags' => CImportDataNormalizer::EOL_LF]
 												]],
-												['else' => true, 'type' => XML_IGNORE_TAG]
+												['else' => true, 'type' => XML_IGNORE_TAG, 'export_default' => ['']]
 											]],
 											'error_handler' =>			['type' => XML_MULTIPLE, 'rules' => [
 																			['if' => ['tag' => 'type', 'in' => $this->PREPROCESSING_STEP_TYPE_ERROR_HANDLING_SUBSET], 'type' => XML_STRING, 'default' => CXmlConstantValue::ORIGINAL_ERROR, 'in' => $this->ITEM_PREPROCESSING_ERROR_HANDLER],

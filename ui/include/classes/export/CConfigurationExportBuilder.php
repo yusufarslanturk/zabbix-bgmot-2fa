@@ -26,11 +26,26 @@ class CConfigurationExportBuilder {
 	 */
 	protected $data = [];
 
+	private $preview = false;
+
 	/**
 	 * @param $version  current export version
 	 */
 	public function __construct() {
 		$this->data['version'] = ZABBIX_EXPORT_VERSION;
+	}
+
+	/**
+	 * Validation should not add specific default values to XML_IGNORED_TAG tags on import preview.
+	 *
+	 * @param bool $preview
+	 *
+	 * @return self
+	 */
+	public function setPreview(bool $preview): self {
+		$this->preview = $preview;
+
+		return $this;
 	}
 
 	/**
@@ -54,7 +69,7 @@ class CConfigurationExportBuilder {
 	 *
 	 * @return mixed
 	 */
-	private static function buildArrayRow(array $rule, array $row, string $tag, string $main_tag) {
+	private function buildArrayRow(array $rule, array $row, string $tag, string $main_tag) {
 		if (array_key_exists('ex_rules', $rule)) {
 			$parent_rule = array_intersect_key($rule, array_flip(['ex_default', 'default', 'rule']));
 			$rule = call_user_func($rule['ex_rules'], $row);
@@ -91,7 +106,7 @@ class CConfigurationExportBuilder {
 		}
 
 		if (($is_indexed_array || $is_array) && $has_data) {
-			$temp_store = self::build($rule, $is_array ? [$value] : $value, $tag);
+			$temp_store = $this->build($rule, $is_array ? [$value] : $value, $tag);
 
 			return ($is_required || $temp_store) ? $temp_store : null;
 		}
@@ -122,7 +137,7 @@ class CConfigurationExportBuilder {
 	 *
 	 * @return array
 	 */
-	private static function build(array $schema, array $data, string $main_tag) {
+	private function build(array $schema, array $data, string $main_tag) {
 		$n = 0;
 		$result = [];
 
@@ -162,11 +177,14 @@ class CConfigurationExportBuilder {
 						$tag_rules = $matched_multiple_rule;
 					}
 
-					if ($tag_rules['type'] & XML_IGNORE_TAG) {
+					if ($tag_rules['type'] & XML_IGNORE_TAG
+							&& ($this->preview || !array_key_exists('export_default', $tag_rules))) {
 						continue;
 					}
 
-					$value = self::buildArrayRow($tag_rules, $row, $tag, $main_tag);
+					$value = $tag_rules['type'] & XML_IGNORE_TAG
+						? $tag_rules['export_default']
+						: $this->buildArrayRow($tag_rules, $row, $tag, $main_tag);
 
 					if ($value !== null) {
 						$store[$tag] = $value;
@@ -213,7 +231,7 @@ class CConfigurationExportBuilder {
 	public function buildTemplateGroups(array $schema, array $groups) {
 		$groups = $this->formatGroups($groups);
 
-		$this->data['template_groups'] = self::build($schema, $groups, 'template_groups');
+		$this->data['template_groups'] = $this->build($schema, $groups, 'template_groups');
 	}
 
 	/**
@@ -225,7 +243,7 @@ class CConfigurationExportBuilder {
 	public function buildHostGroups(array $schema, array $groups) {
 		$groups = $this->formatGroups($groups);
 
-		$this->data['host_groups'] = self::build($schema, $groups, 'host_groups');
+		$this->data['host_groups'] = $this->build($schema, $groups, 'host_groups');
 	}
 
 	/**
@@ -238,7 +256,7 @@ class CConfigurationExportBuilder {
 	public function buildTemplates(array $schema, array $templates, array $simple_triggers) {
 		$templates = $this->formatTemplates($templates, $simple_triggers);
 
-		$this->data['templates'] = self::build($schema, $templates, 'templates');
+		$this->data['templates'] = $this->build($schema, $templates, 'templates');
 	}
 
 	/**
@@ -251,7 +269,7 @@ class CConfigurationExportBuilder {
 	public function buildHosts(array $schema, array $hosts, array $simple_triggers) {
 		$hosts = $this->formatHosts($hosts, $simple_triggers);
 
-		$this->data['hosts'] = self::build($schema, $hosts, 'hosts');
+		$this->data['hosts'] = $this->build($schema, $hosts, 'hosts');
 	}
 
 	/**
@@ -263,7 +281,7 @@ class CConfigurationExportBuilder {
 	public function buildTriggers(array $schema, array $triggers) {
 		$triggers = $this->formatTriggers($triggers);
 
-		$this->data['triggers'] = self::build($schema, $triggers, 'triggers');
+		$this->data['triggers'] = $this->build($schema, $triggers, 'triggers');
 	}
 
 	/**
@@ -275,7 +293,7 @@ class CConfigurationExportBuilder {
 	public function buildGraphs(array $schema, array $graphs) {
 		$graphs = $this->formatGraphs($graphs);
 
-		$this->data['graphs'] = self::build($schema, $graphs, 'graphs');
+		$this->data['graphs'] = $this->build($schema, $graphs, 'graphs');
 	}
 
 	/**
@@ -287,7 +305,7 @@ class CConfigurationExportBuilder {
 	public function buildMediaTypes(array $schema, array $media_types) {
 		$media_types = $this->formatMediaTypes($media_types);
 
-		$this->data['media_types'] = self::build($schema, $media_types, 'media_types');
+		$this->data['media_types'] = $this->build($schema, $media_types, 'media_types');
 	}
 
 	/**
@@ -463,7 +481,7 @@ class CConfigurationExportBuilder {
 			];
 		}
 
-		$this->data['maps'] = self::build($schema, $this->data['maps'], 'maps');
+		$this->data['maps'] = $this->build($schema, $this->data['maps'], 'maps');
 	}
 
 	/**
