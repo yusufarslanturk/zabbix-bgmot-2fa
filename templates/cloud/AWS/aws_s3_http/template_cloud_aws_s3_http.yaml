@@ -26,8 +26,8 @@ zabbix_export:
           key: aws.s3.alarms.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Data collection check.'
           preprocessing:
             - type: JSONPATH
@@ -79,8 +79,8 @@ zabbix_export:
           key: aws.s3.get_alarms
           delay: 0s;m/1
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -358,8 +358,8 @@ zabbix_export:
           key: aws.s3.get_metrics
           delay: 0s;h/8
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -687,8 +687,8 @@ zabbix_export:
           key: aws.s3.metrics.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Data collection check.'
           preprocessing:
             - type: JSONPATH
@@ -794,8 +794,8 @@ zabbix_export:
               key: 'aws.s3.alarm.state_reason["{#ALARM_NAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: |
                 An explanation for the alarm state, in text format.
                 Alarm description:
@@ -1079,8 +1079,8 @@ zabbix_export:
               key: 'aws.s3.get_metrics["{#AWS.S3.FILTER.ID.NAME}"]'
               delay: '{$AWS.S3.UPDATE.INTERVAL}'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               params: |
                 var AWS = {
                 	params: {},

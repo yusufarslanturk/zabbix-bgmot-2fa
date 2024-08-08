@@ -151,8 +151,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: tidb.get_metrics
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get TiDB instance metrics.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
@@ -170,8 +170,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: tidb.get_status
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get TiDB instance status info.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
@@ -411,8 +411,8 @@ zabbix_export:
           key: tidb.server_query.get_metrics
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get information about server queries.'
           preprocessing:
             - type: JSONPATH
@@ -528,8 +528,8 @@ zabbix_export:
           key: tidb.statement_total.get_metrics
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get SQL statements metrics.'
           preprocessing:
             - type: JSONPATH
@@ -567,8 +567,8 @@ zabbix_export:
           key: tidb.status
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Status of PD instance.'
           valuemap:
             name: 'Service state'
@@ -666,8 +666,8 @@ zabbix_export:
           key: tidb.tikvclient.get_metrics
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get TiKV client metrics.'
           preprocessing:
             - type: JSONPATH
@@ -811,8 +811,8 @@ zabbix_export:
           key: tidb.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Version of the TiDB instance.'
           preprocessing:
             - type: JSONPATH
@@ -899,8 +899,8 @@ zabbix_export:
               key: 'tidb.qps.get_metrics[{#TYPE}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get QPS metrics of {#TYPE}.'
               preprocessing:
                 - type: JSONPATH

@@ -32,8 +32,8 @@ zabbix_export:
           key: controlm.servers
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Gets a list of servers.'
           url: '{$API.URI.ENDPOINT}/config/servers'
           headers:
@@ -47,8 +47,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: controlm.services
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Gets all the SLA active services.'
           url: '{$API.URI.ENDPOINT}/run/services/sla'
           headers:
@@ -286,8 +286,8 @@ zabbix_export:
               key: 'service.stats[''{#SERVICE.NAME}'',''{#SERVICE.JOB}'']'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gets the service statistics.'
               preprocessing:
                 - type: JSONPATH
@@ -467,8 +467,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: controlm.agents
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Gets agents for the server.'
           url: '{$API.URI.ENDPOINT}/config/server/{$SERVER.NAME}/agents'
           headers:
@@ -482,8 +482,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: controlm.jobs
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Gets the status of jobs.'
           url: '{$API.URI.ENDPOINT}/run/jobs/status'
           query_fields:
@@ -501,8 +501,8 @@ zabbix_export:
           key: controlm.jobs.statistics
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Gets the statistics of jobs.'
           preprocessing:
             - type: JSONPATH
@@ -556,8 +556,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: controlm.server.stats
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Gets the statistics of the server.'
           preprocessing:
             - type: JSONPATH
@@ -578,8 +578,8 @@ zabbix_export:
           key: server.message
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Gets the metric of the server message.'
           preprocessing:
             - type: JSONPATH
@@ -666,8 +666,8 @@ zabbix_export:
           key: server.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Gets the metric of the server version.'
           preprocessing:
             - type: JSONPATH
@@ -711,8 +711,8 @@ zabbix_export:
               key: 'agent.stats[''{#AGENT.NAME}'']'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gets the statistics of an agent.'
               preprocessing:
                 - type: JSONPATH
@@ -789,8 +789,8 @@ zabbix_export:
               key: 'agent.version[''{#AGENT.NAME}'']'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gets the version number of an agent.'
               preprocessing:
                 - type: JSONPATH
@@ -912,8 +912,8 @@ zabbix_export:
               key: 'job.stats[''{#JOB.ID}'']'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gets the statistics of a job.'
               preprocessing:
                 - type: JSONPATH

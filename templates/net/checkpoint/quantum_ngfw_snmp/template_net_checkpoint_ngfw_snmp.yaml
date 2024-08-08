@@ -113,8 +113,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.2.2.1.7,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.31.1.1.1.6,1.3.6.1.2.1.31.1.1.1.10,1.3.6.1.2.1.2.2.1.14,1.3.6.1.2.1.2.2.1.20,1.3.6.1.2.1.2.2.1.19,1.3.6.1.2.1.2.2.1.13,1.3.6.1.2.1.31.1.1.1.15]'
           key: net.if.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering interfaces from IF-MIB.'
           tags:
             - tag: component
@@ -141,8 +141,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.8.2.1.2,1.3.6.1.4.1.2620.1.6.7.8.2.1.3,1.3.6.1.4.1.2620.1.6.7.8.2.1.4,1.3.6.1.4.1.2620.1.6.7.8.2.1.6]'
           key: sensor.fan.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering fan sensors from CHECKPOINT-MIB.'
           tags:
             - tag: component
@@ -153,8 +153,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.9.1.1.1,1.3.6.1.4.1.2620.1.6.7.9.1.1.2]'
           key: sensor.psu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering power supply sensors from CHECKPOINT-MIB.'
           tags:
             - tag: component
@@ -165,8 +165,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.8.1.1.2,1.3.6.1.4.1.2620.1.6.7.8.1.1.3]'
           key: sensor.temp.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering temperature sensors from CHECKPOINT-MIB.'
           tags:
             - tag: component
@@ -177,8 +177,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.8.3.1.2,1.3.6.1.4.1.2620.1.6.7.8.3.1.3]'
           key: sensor.volt.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering voltage sensors from CHECKPOINT-MIB.'
           tags:
             - tag: component
@@ -189,8 +189,8 @@ zabbix_export:
           key: snmptrap.fallback
           delay: '0'
           history: 2w
-          trends: '0'
           value_type: LOG
+          trends: '0'
           description: 'Used to collect all SNMP traps unmatched by other `snmptrap` items.'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
           tags:
@@ -202,8 +202,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.18.1.1.4,1.3.6.1.4.1.2620.1.6.18.1.1.5,1.3.6.1.4.1.2620.1.6.18.1.1.6,1.3.6.1.4.1.2620.1.6.18.1.1.8,1.3.6.1.4.1.2620.1.6.18.1.1.9,1.3.6.1.4.1.2620.1.6.18.1.1.10]'
           key: svn.feature.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering software blades and features from CHECKPOINT-MIB.'
           tags:
             - tag: component
@@ -215,8 +215,8 @@ zabbix_export:
           key: system.contact
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             Name and contact information of the contact person for the node. If not provided, the value is a zero-length string.
@@ -386,8 +386,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.5.1.1,1.3.6.1.4.1.2620.1.6.7.5.1.2,1.3.6.1.4.1.2620.1.6.7.5.1.3,1.3.6.1.4.1.2620.1.6.7.5.1.4,1.3.6.1.4.1.2620.1.6.7.5.1.5]'
           key: system.cpu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering CPU from CHECKPOINT-MIB.'
           tags:
             - tag: component
@@ -399,8 +399,8 @@ zabbix_export:
           key: system.descr
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             Full name and version identification of the system's hardware type, software operating system, and networking software.
@@ -418,8 +418,8 @@ zabbix_export:
           key: system.hw.manufacturer
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: CHECKPOINT-MIB
             Appliance manufacturer.
@@ -438,8 +438,8 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: CHECKPOINT-MIB
             Appliance product name.
@@ -458,8 +458,8 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: CHECKPOINT-MIB
             Appliance serial number.
@@ -491,8 +491,8 @@ zabbix_export:
           key: system.location
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             Physical location of the node (e.g., `equipment room`, `3rd floor`). If not provided, the value is a zero-length string.
@@ -511,8 +511,8 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             An administratively-assigned name for the node (the node's fully-qualified domain name). If not provided, the value is a zero-length string.
@@ -544,8 +544,8 @@ zabbix_export:
           key: system.objectid
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The vendor's authoritative identification of the entity as part of the vendor's SMI enterprises subtree with the prefix 1.3.6.1.4.1 (e.g., a vendor with the identifier 1.3.6.1.4.1.4242 might assign a system object with the OID 1.3.6.1.4.1.4242.1.1).
@@ -590,8 +590,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.1.6.7.6.1.2,1.3.6.1.4.1.2620.1.6.7.6.1.3,1.3.6.1.4.1.2620.1.6.7.6.1.4,1.3.6.1.4.1.2620.1.6.7.6.1.5,1.3.6.1.4.1.2620.1.6.7.6.1.6,1.3.6.1.4.1.2620.1.6.7.6.1.7]'
           key: vfs.fs.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering storage disks from CHECKPOINT-MIB.'
           tags:
             - tag: component
@@ -708,8 +708,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.2620.500.9002.1.1,1.3.6.1.4.1.2620.500.9002.1.2,1.3.6.1.4.1.2620.500.9002.1.3,1.3.6.1.4.1.2620.500.9002.1.4,1.3.6.1.4.1.2620.500.9002.1.6,1.3.6.1.4.1.2620.500.9002.1.7,1.3.6.1.4.1.2620.500.9002.1.8,1.3.6.1.4.1.2620.500.9002.1.9,1.3.6.1.4.1.2620.500.9002.1.10,1.3.6.1.4.1.2620.500.9002.1.11]'
           key: vpn.tunnel.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering VPN tunnels from CHECKPOINT-MIB.'
           tags:
             - tag: component
@@ -1047,8 +1047,8 @@ zabbix_export:
               snmp_oid: '1.3.6.1.4.1.2620.1.1.2.{#SNMPINDEX}'
               key: 'fw.filter.name[fwFilterName.{#SNMPINDEX}]'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CHECKPOINT-MIB
                 Name of the firewall filter.
@@ -1899,8 +1899,8 @@ zabbix_export:
               key: 'svn.sw.license.state[licensingState.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CHECKPOINT-MIB
                 Current license state of the software blade.
@@ -2354,8 +2354,8 @@ zabbix_export:
               key: 'vpn.tunnel.community[tunnelCommunity.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CHECKPOINT-MIB
                 VPN tunnel community.
@@ -2380,8 +2380,8 @@ zabbix_export:
               key: 'vpn.tunnel.netif[tunnelInterface.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CHECKPOINT-MIB
                 VPN tunnel interface.
@@ -2406,8 +2406,8 @@ zabbix_export:
               key: 'vpn.tunnel.peer_ip[tunnelPeerIpAddr.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CHECKPOINT-MIB
                 VPN peer IP address.
@@ -2510,8 +2510,8 @@ zabbix_export:
               key: 'vpn.tunnel.src_ip[tunnelSourceIpAddr.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CHECKPOINT-MIB
                 Source IP address.

@@ -58,8 +58,8 @@ zabbix_export:
           key: mssql.access_methods.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server information about access methods.'
           preprocessing:
             - type: JSONPATH
@@ -95,8 +95,8 @@ zabbix_export:
           name: 'MSSQL: Get availability groups'
           key: 'mssql.availability.group.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets availability group states - name, primary and secondary health, synchronization health.'
           tags:
             - tag: component
@@ -276,8 +276,8 @@ zabbix_export:
           key: mssql.buffer_manager.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server information about the buffer pool.'
           preprocessing:
             - type: JSONPATH
@@ -313,8 +313,8 @@ zabbix_export:
           key: mssql.cache_info.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server information about cache.'
           preprocessing:
             - type: JSONPATH
@@ -442,8 +442,8 @@ zabbix_export:
           key: 'mssql.db.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Getting databases - database name and recovery model.'
           tags:
             - tag: component
@@ -454,8 +454,8 @@ zabbix_export:
           key: mssql.db_info.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets summary information about databases.'
           preprocessing:
             - type: JSONPATH
@@ -586,8 +586,8 @@ zabbix_export:
           key: mssql.general_statistics.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets general statistics information.'
           preprocessing:
             - type: JSONPATH
@@ -666,8 +666,8 @@ zabbix_export:
           key: 'mssql.job.status.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets the SQL agent job status.'
           tags:
             - tag: component
@@ -699,8 +699,8 @@ zabbix_export:
           key: 'mssql.last.backup.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets information about backup processes.'
           tags:
             - tag: component
@@ -711,8 +711,8 @@ zabbix_export:
           key: mssql.latches_info.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server information about latches.'
           preprocessing:
             - type: JSONPATH
@@ -781,8 +781,8 @@ zabbix_export:
           name: 'MSSQL: Get local DB'
           key: 'mssql.local.db.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Getting the states of the local availability database.'
           tags:
             - tag: component
@@ -793,8 +793,8 @@ zabbix_export:
           key: mssql.locks_info.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server information about locks.'
           preprocessing:
             - type: JSONPATH
@@ -1066,8 +1066,8 @@ zabbix_export:
           key: mssql.mem_manager.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets memory information.'
           preprocessing:
             - type: JSONPATH
@@ -1083,8 +1083,8 @@ zabbix_export:
           name: 'MSSQL: Get DB mirroring'
           key: 'mssql.mirroring.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Getting DB mirroring.'
           tags:
             - tag: component
@@ -1093,8 +1093,8 @@ zabbix_export:
           name: 'MSSQL: Get non-local DB'
           key: 'mssql.nonlocal.db.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Getting the non-local availability database.'
           tags:
             - tag: component
@@ -1344,8 +1344,8 @@ zabbix_export:
           key: 'mssql.perfcounter.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           delay: 0;m0-59
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server global status information.'
           tags:
             - tag: component
@@ -1373,8 +1373,8 @@ zabbix_export:
           name: 'MSSQL: Get quorum'
           key: 'mssql.quorum.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Getting quorum - cluster name, type, and state.'
           tags:
             - tag: component
@@ -1383,8 +1383,8 @@ zabbix_export:
           name: 'MSSQL: Get quorum member'
           key: 'mssql.quorum.member.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Getting quorum members - member name, type, state, and number of quorum votes.'
           tags:
             - tag: component
@@ -1415,8 +1415,8 @@ zabbix_export:
           name: 'MSSQL: Get replica'
           key: 'mssql.replica.get["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Getting the database replica.'
           tags:
             - tag: component
@@ -1488,8 +1488,8 @@ zabbix_export:
           key: mssql.sql_errors.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets SQL error information.'
           preprocessing:
             - type: JSONPATH
@@ -1527,8 +1527,8 @@ zabbix_export:
           key: mssql.sql_statistics.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets SQL statistics information.'
           preprocessing:
             - type: JSONPATH
@@ -1783,8 +1783,8 @@ zabbix_export:
           name: 'MSSQL: Version'
           key: 'mssql.version["{$MSSQL.URI}","{$MSSQL.USER}","{$MSSQL.PASSWORD}"]'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MSSQL Server version.'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -1969,8 +1969,8 @@ zabbix_export:
               key: 'mssql.primary_replica["{#GROUP_NAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Name of the server instance that is hosting the current primary replica.'
               preprocessing:
                 - type: JSONPATH
@@ -2297,8 +2297,8 @@ zabbix_export:
               key: 'mssql.backup.raw["{#DBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The item gets information about backup processes for {#DBNAME}.'
               preprocessing:
                 - type: JSONPATH
@@ -2631,8 +2631,8 @@ zabbix_export:
               key: 'mssql.db.perf_raw["{#DBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The item gets server status information for {#DBNAME}.'
               preprocessing:
                 - type: JSONPATH
@@ -2876,8 +2876,8 @@ zabbix_export:
               key: 'mssql.job.lastrunstatusmessage["{#JOBNAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'An informational message about the last run of the job.'
               preprocessing:
                 - type: JSONPATH
@@ -3001,8 +3001,8 @@ zabbix_export:
               key: 'mssql.job.status_raw["{#JOBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The item gets the status of SQL agent job {#JOBNAME}.'
               preprocessing:
                 - type: JSONPATH

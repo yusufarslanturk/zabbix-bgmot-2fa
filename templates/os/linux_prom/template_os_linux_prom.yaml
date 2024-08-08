@@ -47,8 +47,8 @@ zabbix_export:
           key: 'agent.version[node_exporter]'
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: PROMETHEUS_PATTERN
               parameters:
@@ -120,8 +120,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: node_exporter.get
           history: 1h
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           url: 'http://{$NODE_EXPORTER_HOST}:{$NODE_EXPORTER_PORT}/metrics'
           tags:
             - tag: component
@@ -626,8 +626,8 @@ zabbix_export:
           key: 'system.descr[node_exporter]'
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Labeled system information as provided by the uname system call.'
           preprocessing:
             - type: PROMETHEUS_TO_JSON
@@ -687,8 +687,8 @@ zabbix_export:
           key: 'system.name[node_exporter]'
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The host name of the system.'
           inventory_link: NAME
           preprocessing:
@@ -724,8 +724,8 @@ zabbix_export:
           key: 'system.sw.arch[node_exporter]'
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: PROMETHEUS_PATTERN
               parameters:
@@ -746,8 +746,8 @@ zabbix_export:
           key: 'system.sw.os[node_exporter]'
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           inventory_link: OS
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT

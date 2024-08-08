@@ -32,8 +32,8 @@ zabbix_export:
           key: gcp.auth.err.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -63,8 +63,8 @@ zabbix_export:
           key: gcp.authorization
           delay: '{$GCP.AUTH.FREQUENCY}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var auth_url = 'https://oauth2.googleapis.com/token',
             	issued = Math.floor(new Date().getTime() / 1000),
@@ -201,8 +201,8 @@ zabbix_export:
           key: gcp.cloudsql.instances.get
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'GCP Cloud SQL: Instances get.'
           preprocessing:
             - type: JAVASCRIPT
@@ -427,8 +427,8 @@ zabbix_export:
           key: gcp.gce.instances.get
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get GCP Compute Engine instances.'
           preprocessing:
             - type: JAVASCRIPT
@@ -589,8 +589,8 @@ zabbix_export:
           key: gcp.gce.quotas.get
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'GCP Compute Engine resource quotas available for the particular project.'
           preprocessing:
             - type: JAVASCRIPT
@@ -1217,8 +1217,8 @@ zabbix_export:
               key: 'gcp.gce.quota.pused[{#GCE.QUOTA.NAME}]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'GCP Compute Engine: Percentage usage for [{#GCE.QUOTA.NAME}] quota.'
               preprocessing:
@@ -1267,8 +1267,8 @@ zabbix_export:
               key: 'gcp.gce.quota.single.raw[{#GCE.QUOTA.NAME}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'GCP Compute Engine: Get metrics for [{#GCE.QUOTA.NAME}] quota.'
               preprocessing:
                 - type: JSONPATH
@@ -1789,8 +1789,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.cpu.reserved_cores
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Number of cores reserved for the database.'
           preprocessing:
             - type: JSONPATH
@@ -1807,8 +1807,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.cpu.usage_time
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Cumulative CPU usage time in seconds.'
           preprocessing:
@@ -1826,8 +1826,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.cpu.utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'Current CPU utilization represented as a percentage of the reserved CPU that is currently in use.'
           preprocessing:
@@ -1858,8 +1858,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.db.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'cloudsql.googleapis.com/database/sqlserver/transactions/',
             	arr = [],
@@ -1991,8 +1991,8 @@ zabbix_export:
                 - 10m
           timeout: '{$GCP.DATA.TIMEOUT}'
           url: 'https://monitoring.googleapis.com/v3/projects/{$GCP.PROJECT.ID}/timeSeries:query'
-          posts: '{"query":"cloudsql.googleapis.com/database/up | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           status_codes: ''
+          posts: '{"query":"cloudsql.googleapis.com/database/up | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           headers:
             - name: Content-Type
               value: application/json
@@ -2088,8 +2088,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.disk.utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: |
             The fraction of the disk quota that is currently in use.
@@ -2178,8 +2178,8 @@ zabbix_export:
                 - 10m
           timeout: '{$GCP.DATA.TIMEOUT}'
           url: 'https://monitoring.googleapis.com/v3/projects/{$GCP.PROJECT.ID}/timeSeries:query'
-          posts: '{"query":"cloudsql.googleapis.com/database/state | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           status_codes: ''
+          posts: '{"query":"cloudsql.googleapis.com/database/state | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           headers:
             - name: Content-Type
               value: application/json
@@ -2257,8 +2257,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.memory.buffer_cache_hit_ratio
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: |
             Current percentage of pages found in the buffer cache without having to read from disk.
@@ -2470,8 +2470,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.memory.utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: |
             The fraction of the memory quota that is currently in use.
@@ -2502,8 +2502,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.metrics.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'cloudsql.googleapis.com/database/',
             	mssql_path = 'cloudsql.googleapis.com/database/sqlserver/',
@@ -2781,8 +2781,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.resources.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'cloudsql.googleapis.com/database/sqlserver/transactions/',
             	arr = [],
@@ -2900,8 +2900,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.schedulers.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'cloudsql.googleapis.com/database/sqlserver/schedulers/',
             	arr = [],
@@ -3176,8 +3176,8 @@ zabbix_export:
               key: 'gcp.cloudsql.mssql.db.raw[{#DB.NAME}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Data in raw format for the [{#DB.NAME}] database.'
               preprocessing:
                 - type: JSONPATH
@@ -3300,8 +3300,8 @@ zabbix_export:
               key: 'gcp.cloudsql.mssql.resource.raw[{#RESOURCE.NAME}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Data in raw format for the [{#RESOURCE.NAME}] resource.'
               preprocessing:
                 - type: JSONPATH
@@ -3438,8 +3438,8 @@ zabbix_export:
               key: 'gcp.cloudsql.mssql.scheduler.raw[{#SCHEDULER.ID}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Data in raw format associated with the scheduler that goes by its ID [{#SCHEDULER.ID}].'
               preprocessing:
                 - type: JSONPATH
@@ -3812,8 +3812,8 @@ zabbix_export:
           key: gcp.cloudsql.mssql.repl.metrics.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'cloudsql.googleapis.com/database/sqlserver/replication/',
             	obj = {},
@@ -4065,8 +4065,8 @@ zabbix_export:
           key: gcp.cloudsql.mysql.cpu.reserved_cores
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Number of cores reserved for the database.'
           preprocessing:
             - type: JSONPATH
@@ -4083,8 +4083,8 @@ zabbix_export:
           key: gcp.cloudsql.mysql.cpu.usage_time
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Cumulative CPU usage time in seconds.'
           preprocessing:
@@ -4102,8 +4102,8 @@ zabbix_export:
           key: gcp.cloudsql.mysql.cpu.utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'Current CPU utilization represented as a percentage of the reserved CPU that is currently in use.'
           preprocessing:
@@ -4149,8 +4149,8 @@ zabbix_export:
                 - 10m
           timeout: '{$GCP.DATA.TIMEOUT}'
           url: 'https://monitoring.googleapis.com/v3/projects/{$GCP.PROJECT.ID}/timeSeries:query'
-          posts: '{"query":"cloudsql.googleapis.com/database/up | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           status_codes: ''
+          posts: '{"query":"cloudsql.googleapis.com/database/up | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           headers:
             - name: Content-Type
               value: application/json
@@ -4246,8 +4246,8 @@ zabbix_export:
           key: gcp.cloudsql.mysql.disk.utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: |
             The fraction of the disk quota that is currently in use.
@@ -4469,8 +4469,8 @@ zabbix_export:
                 - 10m
           timeout: '{$GCP.DATA.TIMEOUT}'
           url: 'https://monitoring.googleapis.com/v3/projects/{$GCP.PROJECT.ID}/timeSeries:query'
-          posts: '{"query":"cloudsql.googleapis.com/database/state | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           status_codes: ''
+          posts: '{"query":"cloudsql.googleapis.com/database/state | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           headers:
             - name: Content-Type
               value: application/json
@@ -4608,8 +4608,8 @@ zabbix_export:
           key: gcp.cloudsql.mysql.memory.utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: |
             The fraction of the memory quota that is currently in use.
@@ -4640,8 +4640,8 @@ zabbix_export:
           key: gcp.cloudsql.mysql.metrics.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'cloudsql.googleapis.com/database/',
             	mysql_path = 'cloudsql.googleapis.com/database/mysql/',
@@ -5210,8 +5210,8 @@ zabbix_export:
           key: gcp.cloudsql.mysql.repl.metrics.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'cloudsql.googleapis.com/database/replication/',
             	mysql_path = 'cloudsql.googleapis.com/database/mysql/replication/',
@@ -5636,8 +5636,8 @@ zabbix_export:
           key: gcp.cloudsql.pgsql.cpu.reserved_cores
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Number of cores reserved for the database.'
           preprocessing:
             - type: JSONPATH
@@ -5654,8 +5654,8 @@ zabbix_export:
           key: gcp.cloudsql.pgsql.cpu.usage_time
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Cumulative CPU usage time in seconds.'
           preprocessing:
@@ -5673,8 +5673,8 @@ zabbix_export:
           key: gcp.cloudsql.pgsql.cpu.utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'Current CPU utilization represented as a percentage of the reserved CPU that is currently in use.'
           preprocessing:
@@ -5720,8 +5720,8 @@ zabbix_export:
                 - 10m
           timeout: '{$GCP.DATA.TIMEOUT}'
           url: 'https://monitoring.googleapis.com/v3/projects/{$GCP.PROJECT.ID}/timeSeries:query'
-          posts: '{"query":"cloudsql.googleapis.com/database/up | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           status_codes: ''
+          posts: '{"query":"cloudsql.googleapis.com/database/up | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           headers:
             - name: Content-Type
               value: application/json
@@ -5817,8 +5817,8 @@ zabbix_export:
           key: gcp.cloudsql.pgsql.disk.utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: |
             The fraction of the disk quota that is currently in use.
@@ -5907,8 +5907,8 @@ zabbix_export:
                 - 10m
           timeout: '{$GCP.DATA.TIMEOUT}'
           url: 'https://monitoring.googleapis.com/v3/projects/{$GCP.PROJECT.ID}/timeSeries:query'
-          posts: '{"query":"cloudsql.googleapis.com/database/state | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           status_codes: ''
+          posts: '{"query":"cloudsql.googleapis.com/database/state | within 5m | filter database_id = ''{$GCP.PROJECT.ID}:{HOST.NAME}''"}'
           headers:
             - name: Content-Type
               value: application/json
@@ -6046,8 +6046,8 @@ zabbix_export:
           key: gcp.cloudsql.pgsql.memory.utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: |
             The fraction of the memory quota that is currently in use.
@@ -6078,8 +6078,8 @@ zabbix_export:
           key: gcp.cloudsql.pgsql.metrics.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'cloudsql.googleapis.com/database/',
             	pgsql_path = 'cloudsql.googleapis.com/database/postgresql/',
@@ -6467,8 +6467,8 @@ zabbix_export:
           key: gcp.cloudsql.pgsql.transaction_id_utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'Current utilization represented as a percentage of transaction IDs consumed by the Cloud SQL PostgreSQL instance.'
           preprocessing:
@@ -6546,8 +6546,8 @@ zabbix_export:
               key: 'gcp.cloudsql.pgsql.db.metrics.get[{#PGSQL.DB.NAME}]'
               delay: '{$GCP.TIME.WINDOW}'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               params: |
                 var base_path = 'cloudsql.googleapis.com/database/postgresql/',
                 	obj = {};
@@ -7210,8 +7210,8 @@ zabbix_export:
           key: gcp.cloudsql.pgsql.repl.metrics.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'cloudsql.googleapis.com/database/replication/',
             	pgsql_path = 'cloudsql.googleapis.com/database/postgresql/replication/',
@@ -7557,8 +7557,8 @@ zabbix_export:
           key: gcp.gce.cpu.guest_visible_vcpus
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: |
             Number of vCPUs visible inside the guest.
             For many GCE machine types, the number of vCPUs visible inside the guest is equal to the `compute.googleapis.com/instance/cpu/reserved_cores` metric.
@@ -7581,8 +7581,8 @@ zabbix_export:
           key: gcp.gce.cpu.reserved_cores
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Number of vCPUs reserved on the host of the instance.'
           preprocessing:
             - type: JSONPATH
@@ -7599,8 +7599,8 @@ zabbix_export:
           key: gcp.gce.cpu.scheduler_wait_time
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: |
             Wait time is the time a vCPU is ready to run, but unexpectedly not scheduled to run.
@@ -7624,8 +7624,8 @@ zabbix_export:
           key: gcp.gce.cpu.usage_time
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: |
             Delta vCPU usage for all vCPUs, in vCPU-seconds.
@@ -7647,8 +7647,8 @@ zabbix_export:
           key: gcp.gce.cpu.utilization
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: |
             Fractional utilization of allocated CPU on this instance.
@@ -7683,8 +7683,8 @@ zabbix_export:
           key: gcp.gce.disks.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'compute.googleapis.com/instance/disk/',
             	base_paths = ['read_ops_count', 'read_bytes_count', 'write_bytes_count', 'write_ops_count'];
@@ -7927,8 +7927,8 @@ zabbix_export:
           key: gcp.gce.instance.uptime
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Elapsed time since the VM was started, in seconds.'
           preprocessing:
@@ -8010,8 +8010,8 @@ zabbix_export:
           key: gcp.gce.memory.ram_pused
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: |
             Memory usage Percentage.
@@ -8131,8 +8131,8 @@ zabbix_export:
           key: gcp.gce.metrics.get
           delay: '{$GCP.TIME.WINDOW}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var base_path = 'compute.googleapis.com/',
             	value_types = ['int64Value', 'doubleValue', 'stringValue', 'boolValue'],
@@ -8773,8 +8773,8 @@ zabbix_export:
               key: 'gcp.gce.quota.single.raw[{#GCE.DISK.NAME}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Data in raw format for the disk with the name [{#GCE.DISK.NAME}].'
               preprocessing:
                 - type: JSONPATH

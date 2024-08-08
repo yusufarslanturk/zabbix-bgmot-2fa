@@ -27,8 +27,8 @@ zabbix_export:
           key: aws.get.daily.costs
           delay: 0s;h/6
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -251,8 +251,8 @@ zabbix_export:
           key: aws.get.monthly.costs
           delay: 0s;h9
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},

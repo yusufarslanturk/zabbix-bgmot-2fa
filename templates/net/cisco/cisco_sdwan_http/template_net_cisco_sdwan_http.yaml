@@ -35,8 +35,8 @@ zabbix_export:
           key: sd_wan.auth.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering all the data item errors.'
           preprocessing:
             - type: JSONPATH
@@ -64,8 +64,8 @@ zabbix_export:
           key: sd_wan.authentication
           delay: '{$SDWAN.AUTH.FREQUENCY}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value),
             	request = new HttpRequest(),
@@ -179,8 +179,8 @@ zabbix_export:
           key: sd_wan.get.devices
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering all devices from Cisco SD-WAN API.'
           preprocessing:
             - type: JAVASCRIPT
@@ -297,8 +297,8 @@ zabbix_export:
           key: sd_wan.get.devices.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering all the data item errors.'
           preprocessing:
             - type: JSONPATH
@@ -458,6 +458,7 @@ zabbix_export:
             - uuid: 8c53a2dded4a47cba1eb3398aff888d7
               host: '{#UUID}'
               name: '[{#TYPE}] {#NAME}'
+              inventory_mode: AUTOMATIC
               group_links:
                 - group:
                     name: Applications
@@ -485,7 +486,6 @@ zabbix_export:
                   dns: internal.ip
                 - ip: '{#IP}'
                   dns: external.ip
-              inventory_mode: AUTOMATIC
           master_item:
             key: sd_wan.get.devices
           lld_macro_paths:
@@ -651,8 +651,8 @@ zabbix_export:
           key: sd_wan.device.arch
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The architecture of the operating system.'
           inventory_link: OS_SHORT
           preprocessing:
@@ -734,8 +734,8 @@ zabbix_export:
           key: 'sd_wan.device.cpu.load[avg1]'
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'The average number of processes being or waiting executed over past 1 minute.'
           preprocessing:
             - type: JSONPATH
@@ -752,8 +752,8 @@ zabbix_export:
           key: 'sd_wan.device.cpu.load[avg5]'
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'The average number of processes being or waiting executed over past 5 minutes.'
           preprocessing:
             - type: JSONPATH
@@ -770,8 +770,8 @@ zabbix_export:
           key: 'sd_wan.device.cpu.load[avg15]'
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'The average number of processes being or waiting executed over past 15 minutes.'
           preprocessing:
             - type: JSONPATH
@@ -805,8 +805,8 @@ zabbix_export:
           key: sd_wan.device.cpu.util
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'CPU utilization, expressed in %.'
           preprocessing:
@@ -841,8 +841,8 @@ zabbix_export:
           key: 'sd_wan.device.cpu.util[idle]'
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'The time the CPU has spent doing nothing.'
           preprocessing:
@@ -860,8 +860,8 @@ zabbix_export:
           key: 'sd_wan.device.cpu.util[system]'
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'The time the CPU has spent running the kernel and its processes.'
           preprocessing:
@@ -879,8 +879,8 @@ zabbix_export:
           key: 'sd_wan.device.cpu.util[user]'
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'The time the CPU has spent running users'' processes that are not niced.'
           preprocessing:
@@ -898,8 +898,8 @@ zabbix_export:
           key: sd_wan.device.hostname
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The system host name.'
           inventory_link: NAME
           preprocessing:
@@ -1020,8 +1020,8 @@ zabbix_export:
           type: CALCULATED
           key: sd_wan.device.memory.util
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           params: 'last(//sd_wan.device.memory.used)/last(//sd_wan.device.memory.total)*100'
           description: 'Calculated percentage of the memory used, in %.'
@@ -1050,8 +1050,8 @@ zabbix_export:
           key: sd_wan.device.model
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The model name of the device.'
           inventory_link: MODEL
           preprocessing:
@@ -1069,8 +1069,8 @@ zabbix_export:
           key: sd_wan.device.os
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The device operating system.'
           inventory_link: OS
           preprocessing:
@@ -1160,8 +1160,8 @@ zabbix_export:
           key: sd_wan.device.role
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The device role in the network.'
           valuemap:
             name: Unknown
@@ -1182,8 +1182,8 @@ zabbix_export:
           key: sd_wan.device.serialnumber
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The device serial number.'
           inventory_link: SERIALNO_A
           preprocessing:
@@ -1240,8 +1240,8 @@ zabbix_export:
           key: sd_wan.device.state_descr
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The description of the device current state.'
           preprocessing:
             - type: JSONPATH
@@ -1293,8 +1293,8 @@ zabbix_export:
           key: sd_wan.device.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The version of the device software.'
           inventory_link: SOFTWARE_FULL
           preprocessing:
@@ -1314,8 +1314,8 @@ zabbix_export:
           type: SCRIPT
           key: sd_wan.get.device
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value),
             	request = new HttpRequest(),
@@ -1428,8 +1428,8 @@ zabbix_export:
           key: sd_wan.get.device.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering errors of the device item.'
           preprocessing:
             - type: JSONPATH
@@ -1456,8 +1456,8 @@ zabbix_export:
           type: SCRIPT
           key: sd_wan.get.interfaces
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value),
             	request = new HttpRequest(),
@@ -1579,8 +1579,8 @@ zabbix_export:
           key: sd_wan.get.interfaces.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering errors of the device interfaces.'
           preprocessing:
             - type: JSONPATH
@@ -1608,8 +1608,8 @@ zabbix_export:
           key: sd_wan.get.routes
           delay: '{$SDWAN.ROUTES.FREQUENCY}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value),
             	request = new HttpRequest(),
@@ -1782,8 +1782,8 @@ zabbix_export:
           key: sd_wan.get.routes.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering errors of the device routes.'
           preprocessing:
             - type: JSONPATH
@@ -1858,8 +1858,8 @@ zabbix_export:
               key: 'sd_wan.device.fs.get_data["{#FSNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Item for gathering data for the {#FSNAME} filesystem.'
               preprocessing:
                 - type: JAVASCRIPT
@@ -1889,8 +1889,8 @@ zabbix_export:
               key: 'sd_wan.device.fs.pused["{#FSNAME}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Space utilization, expressed in %.'
               preprocessing:
@@ -2092,8 +2092,8 @@ zabbix_export:
               key: 'sd_wan.device.if.get_data["{#IFKEY}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Item for gathering data for the {#IFNAME} interface.'
               preprocessing:
                 - type: JSONPATH
@@ -2155,8 +2155,8 @@ zabbix_export:
               key: 'sd_wan.device.if.in.v6.discards["{#IFKEY}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               description: 'The number of inbound IPv6 packets that were chosen to be discarded.'
               valuemap:
                 name: 'Not used'
@@ -2179,8 +2179,8 @@ zabbix_export:
               key: 'sd_wan.device.if.in.v6.errors["{#IFKEY}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               description: 'The number of inbound IPv4 packets that were contain errors.'
               valuemap:
                 name: 'Not used'
@@ -2273,8 +2273,8 @@ zabbix_export:
               key: 'sd_wan.device.if.out.v6.discards["{#IFKEY}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               description: 'The number of outbound IPv6 packets that were chosen to be discarded.'
               valuemap:
                 name: 'Not used'
@@ -2297,8 +2297,8 @@ zabbix_export:
               key: 'sd_wan.device.if.out.v6.errors["{#IFKEY}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               description: 'The number of outbound IPv6 packets that were contain errors.'
               valuemap:
                 name: 'Not used'
@@ -2600,8 +2600,8 @@ zabbix_export:
               key: 'sd_wan.routes.get_data[{#LOCAL},{#REMOTE}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Item for gathering data for the route {#LOCAL} => {#REMOTE}.'
               preprocessing:
                 - type: JSONPATH
@@ -2626,8 +2626,8 @@ zabbix_export:
               key: 'sd_wan.routes.jitter[{#LOCAL},{#REMOTE}]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: ms
               description: 'A change in the time it takes for a data packet to travel through the route.'
               preprocessing:
@@ -2649,8 +2649,8 @@ zabbix_export:
               key: 'sd_wan.routes.latency[{#LOCAL},{#REMOTE}]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: ms
               description: 'The amount of time it takes for a data packet to travel through the route.'
               preprocessing:
@@ -2672,8 +2672,8 @@ zabbix_export:
               key: 'sd_wan.routes.loss[{#LOCAL},{#REMOTE}]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Lost packets of data not reached the destination after being transmitted through the route.'
               preprocessing:

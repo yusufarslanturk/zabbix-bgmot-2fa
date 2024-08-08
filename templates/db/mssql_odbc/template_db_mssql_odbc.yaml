@@ -51,8 +51,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.get[get_availability_group,"{$MSSQL.DSN}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT
               ag.name as group_name,
@@ -77,8 +77,8 @@ zabbix_export:
           key: 'db.odbc.get[get_database,{$MSSQL.DSN}]'
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT name as dbname, recovery_model
             FROM sys.databases
@@ -93,8 +93,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.get[get_db_mirroring","{$MSSQL.DSN}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT
               ISNULL(m.mirroring_role, 0) as mirroring_role,
@@ -119,8 +119,8 @@ zabbix_export:
           key: 'db.odbc.get[get_job_status,"{$MSSQL.DSN}"]'
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT sj.name AS job_name,
               sj.enabled AS enabled,
@@ -163,8 +163,8 @@ zabbix_export:
           key: 'db.odbc.get[get_last_backup,"{$MSSQL.DSN}"]'
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT bs.database_name as dbname,
               [type], 
@@ -205,8 +205,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.get[get_local_db,"{$MSSQL.DSN}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT ag.name AS group_name, 
               drs.database_state as database_state, 
@@ -234,8 +234,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.get[get_non_local_db,"{$MSSQL.DSN}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT ag.name AS group_name, 
               ISNULL(drs.log_send_queue_size, 0) as log_send_queue_size, 
@@ -262,8 +262,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.get[get_quorum,{$MSSQL.DSN}]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT quorum_type, quorum_state, cluster_name
             FROM sys.dm_hadr_cluster
@@ -278,8 +278,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.get[get_quorum_member,{$MSSQL.DSN}]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT member_name, member_type, member_state, number_of_quorum_votes
             FROM sys.dm_hadr_cluster_members
@@ -294,8 +294,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.get[get_replica","{$MSSQL.DSN}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT 
               ars.connected_state as connected_state, 
@@ -323,8 +323,8 @@ zabbix_export:
           key: 'db.odbc.get[get_status_variables,"{$MSSQL.DSN}"]'
           delay: 0;m0-59
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT object_name,
               counter_name,
@@ -404,8 +404,8 @@ zabbix_export:
           key: mssql.access_methods.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server information about access methods.'
           preprocessing:
             - type: JSONPATH
@@ -612,8 +612,8 @@ zabbix_export:
           key: mssql.buffer_manager.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server information about the buffer pool.'
           preprocessing:
             - type: JSONPATH
@@ -649,8 +649,8 @@ zabbix_export:
           key: mssql.cache_info.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server information about cache.'
           preprocessing:
             - type: JSONPATH
@@ -779,8 +779,8 @@ zabbix_export:
           key: mssql.db_info.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets summary information about databases.'
           preprocessing:
             - type: JSONPATH
@@ -911,8 +911,8 @@ zabbix_export:
           key: mssql.general_statistics.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets general statistics information.'
           preprocessing:
             - type: JSONPATH
@@ -1014,8 +1014,8 @@ zabbix_export:
           key: mssql.latches_info.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server information about latches.'
           preprocessing:
             - type: JSONPATH
@@ -1086,8 +1086,8 @@ zabbix_export:
           key: mssql.locks_info.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets server information about locks.'
           preprocessing:
             - type: JSONPATH
@@ -1359,8 +1359,8 @@ zabbix_export:
           key: mssql.mem_manager.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets memory information.'
           preprocessing:
             - type: JSONPATH
@@ -1720,8 +1720,8 @@ zabbix_export:
           key: mssql.sql_errors.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets SQL error information.'
           preprocessing:
             - type: JSONPATH
@@ -1759,8 +1759,8 @@ zabbix_export:
           key: mssql.sql_statistics.raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The item gets SQL statistics information.'
           preprocessing:
             - type: JSONPATH
@@ -2017,8 +2017,8 @@ zabbix_export:
           key: mssql.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MSSQL Server version.'
           preprocessing:
             - type: JSONPATH
@@ -2208,8 +2208,8 @@ zabbix_export:
               key: 'mssql.primary_replica["{#GROUP_NAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Name of the server instance that is hosting the current primary replica.'
               preprocessing:
                 - type: JSONPATH
@@ -2536,8 +2536,8 @@ zabbix_export:
               key: 'mssql.backup.raw["{#DBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The item gets information about backup processes for {#DBNAME}.'
               preprocessing:
                 - type: JSONPATH
@@ -2870,8 +2870,8 @@ zabbix_export:
               key: 'mssql.db.perf_raw["{#DBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The item gets server status information for {#DBNAME}.'
               preprocessing:
                 - type: JSONPATH
@@ -3115,8 +3115,8 @@ zabbix_export:
               key: 'mssql.job.lastrunstatusmessage["{#JOBNAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'An informational message about the last run of the job.'
               preprocessing:
                 - type: JSONPATH
@@ -3240,8 +3240,8 @@ zabbix_export:
               key: 'mssql.job.status_raw["{#JOBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The item gets the status of SQL agent job {#JOBNAME}.'
               preprocessing:
                 - type: JSONPATH

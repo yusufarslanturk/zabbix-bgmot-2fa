@@ -24,8 +24,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: hadoop.datanodes.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JAVASCRIPT
               parameters:
@@ -145,8 +145,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: hadoop.namenode.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           url: '{$HADOOP.NAMENODE.HOST}:{$HADOOP.NAMENODE.PORT}/jmx'
           tags:
             - tag: component
@@ -157,8 +157,8 @@ zabbix_export:
           key: hadoop.namenode.info
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -448,8 +448,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: hadoop.nodemanagers.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JAVASCRIPT
               parameters:
@@ -463,8 +463,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: hadoop.resourcemanager.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           url: '{$HADOOP.RESOURCEMANAGER.HOST}:{$HADOOP.RESOURCEMANAGER.PORT}/jmx'
           tags:
             - tag: component
@@ -475,8 +475,8 @@ zabbix_export:
           key: hadoop.resourcemanager.info
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -802,8 +802,8 @@ zabbix_export:
               key: 'hadoop.datanode.admin_state[{#HOSTNAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Administrative state.'
               preprocessing:
                 - type: JSONPATH
@@ -839,8 +839,8 @@ zabbix_export:
               type: HTTP_AGENT
               key: 'hadoop.datanode.get[{#HOSTNAME}]'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               url: '{#INFOADDR}/jmx'
               tags:
                 - tag: component
@@ -918,8 +918,8 @@ zabbix_export:
               key: 'hadoop.datanode.oper_state[{#HOSTNAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Operational state.'
               preprocessing:
                 - type: JSONPATH
@@ -948,8 +948,8 @@ zabbix_export:
               key: 'hadoop.datanode.raw_info[{#HOSTNAME}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               preprocessing:
                 - type: JSONPATH
                   parameters:
@@ -1027,8 +1027,8 @@ zabbix_export:
               key: 'hadoop.datanode.version[{#HOSTNAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'DataNode software version.'
               preprocessing:
                 - type: JSONPATH
@@ -1129,8 +1129,8 @@ zabbix_export:
               type: HTTP_AGENT
               key: 'hadoop.nodemanager.get[{#HOSTNAME}]'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               url: '{#NODEHTTPADDRESS}/jmx'
               tags:
                 - tag: component
@@ -1192,8 +1192,8 @@ zabbix_export:
               key: 'hadoop.nodemanager.numcontainers[{#HOSTNAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               preprocessing:
                 - type: JSONPATH
                   parameters:
@@ -1209,8 +1209,8 @@ zabbix_export:
               key: 'hadoop.nodemanager.raw_info[{#HOSTNAME}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               preprocessing:
                 - type: JSONPATH
                   parameters:
@@ -1244,8 +1244,8 @@ zabbix_export:
               key: 'hadoop.nodemanager.state[{#HOSTNAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'State of the node - valid values are: NEW, RUNNING, UNHEALTHY, DECOMMISSIONING, DECOMMISSIONED, LOST, REBOOTED, SHUTDOWN.'
               preprocessing:
                 - type: JSONPATH
@@ -1334,8 +1334,8 @@ zabbix_export:
               key: 'hadoop.nodemanager.version[{#HOSTNAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               preprocessing:
                 - type: JSONPATH
                   parameters:

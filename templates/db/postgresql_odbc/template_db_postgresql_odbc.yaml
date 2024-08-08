@@ -48,8 +48,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.select[pgsql.archive,,"Database={$PG.DATABASE};{$PG.CONNSTRING}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             WITH values AS (
               SELECT
@@ -98,8 +98,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.select[pgsql.bgwriter,,"Database={$PG.DATABASE};{$PG.CONNSTRING}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT row_to_json(T) FROM (
               SELECT checkpoints_timed,
@@ -126,8 +126,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.select[pgsql.connections.sum,,"Database={$PG.DATABASE};{$PG.CONNSTRING}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT row_to_json(T)
               FROM (
@@ -156,8 +156,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.select[pgsql.dbstat,,"Database={$PG.DATABASE};{$PG.CONNSTRING}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT json_object_agg(coalesce (datname,'null'), row_to_json(T)) FROM (
               SELECT datname,
@@ -191,8 +191,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.select[pgsql.dbstat.sum,,"Database={$PG.DATABASE};{$PG.CONNSTRING}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT row_to_json(T) FROM (
               SELECT sum(numbackends) AS numbackends,
@@ -225,8 +225,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.select[pgsql.locks,,"Database={$PG.DATABASE};{$PG.CONNSTRING}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             WITH T AS
               (SELECT db.datname dbname,
@@ -344,8 +344,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.select[pgsql.queries,,"Database={$PG.DATABASE};{$PG.CONNSTRING}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             WITH T AS
               (SELECT db.datname,
@@ -437,8 +437,8 @@ zabbix_export:
           type: ODBC
           key: 'db.odbc.select[pgsql.replication.process,,"Database={$PG.DATABASE};{$PG.CONNSTRING}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT json_object_agg(application_name, row_to_json(T))
               FROM (
@@ -522,8 +522,8 @@ zabbix_export:
           key: 'db.odbc.select[pgsql.version,,"Database={$PG.DATABASE};{$PG.CONNSTRING}"]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           params: 'SELECT version()'
           username: '{$PG.USER}'
           password: '{$PG.PASSWORD}'
@@ -550,8 +550,8 @@ zabbix_export:
           key: 'db.odbc.select[pgsql.wal.stat,,"Database={$PG.DATABASE};{$PG.CONNSTRING}"]'
           delay: 5m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             SELECT row_to_json(T)
               FROM (
@@ -1663,8 +1663,8 @@ zabbix_export:
               key: 'pgsql.dbstat.get_metrics["{#DBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get dbstat metrics for database "{#DBNAME}".'
               preprocessing:
                 - type: JSONPATH
@@ -1953,8 +1953,8 @@ zabbix_export:
               key: 'pgsql.locks.get_metrics["{#DBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get locks metrics for database "{#DBNAME}".'
               preprocessing:
                 - type: JSONPATH
@@ -2083,8 +2083,8 @@ zabbix_export:
               key: 'pgsql.queries.get_metrics["{#DBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get queries metrics for database "{#DBNAME}".'
               preprocessing:
                 - type: JSONPATH
@@ -2489,8 +2489,8 @@ zabbix_export:
               key: 'pgsql.replication.get_metrics["{#APPLICATION_NAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Collect metrics from the "pg_stat_replication" about the application "{#APPLICATION_NAME}" that is connected to this WAL sender, which contains information about the WAL sender process, showing statistics about replication to that sender''s connected standby server.'
               preprocessing:
                 - type: JSONPATH

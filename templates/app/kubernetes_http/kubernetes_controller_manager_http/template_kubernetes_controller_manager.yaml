@@ -163,8 +163,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: kubernetes.controller.get_metrics
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get raw metrics from Controller instance /metrics endpoint.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
@@ -335,9 +335,9 @@ zabbix_export:
               key: 'kubernetes.controller.duration_seconds_bucket[{#LE},"{#NAME}"]'
               delay: '0'
               history: 1h
+              value_type: FLOAT
               trends: '0'
               discover: NO_DISCOVER
-              value_type: FLOAT
               description: 'How long in seconds processing an item from workqueue takes.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN
@@ -359,9 +359,9 @@ zabbix_export:
               key: 'kubernetes.controller.queue_duration_seconds_bucket[{#LE},"{#NAME}"]'
               delay: '0'
               history: 1h
+              value_type: FLOAT
               trends: '0'
               discover: NO_DISCOVER
-              value_type: FLOAT
               description: 'How long in seconds an item stays in workqueue before being requested.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN
@@ -383,8 +383,8 @@ zabbix_export:
               key: 'kubernetes.controller.workqueue_adds_total["{#NAME}"]'
               delay: '0'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               description: 'Total number of adds handled by workqueue per second.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN
@@ -409,8 +409,8 @@ zabbix_export:
               key: 'kubernetes.controller.workqueue_depth["{#NAME}"]'
               delay: '0'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               description: 'Current depth of workqueue.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN
@@ -432,8 +432,8 @@ zabbix_export:
               key: 'kubernetes.controller.workqueue_longest_running_processor_seconds["{#NAME}"]'
               delay: '0'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               description: 'How many seconds has the longest running processor for workqueue been running.'
               preprocessing:
@@ -455,8 +455,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kubernetes.controller.workqueue_queue_duration_seconds_p50["{#NAME}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kubernetes.controller.queue_duration_seconds_bucket[*,"{#NAME}"],5m,50)'
               description: '50 percentile of how long in seconds an item stays in workqueue before being requested. If there are no requests for 5 minute, item value will be discarded.'
@@ -474,8 +474,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kubernetes.controller.workqueue_queue_duration_seconds_p90["{#NAME}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kubernetes.controller.queue_duration_seconds_bucket[*,"{#NAME}"],5m,90)'
               description: '90 percentile of how long in seconds an item stays in workqueue before being requested, by queue.'
@@ -489,8 +489,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kubernetes.controller.workqueue_queue_duration_seconds_p95["{#NAME}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kubernetes.controller.queue_duration_seconds_bucket[*,"{#NAME}"],5m,95)'
               description: '95 percentile of how long in seconds an item stays in workqueue before being requested, by queue.'
@@ -504,8 +504,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kubernetes.controller.workqueue_queue_duration_seconds_p99["{#NAME}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kubernetes.controller.queue_duration_seconds_bucket[*,"{#NAME}"],5m,99)'
               description: '99 percentile of how long in seconds an item stays in workqueue before being requested, by queue.'
@@ -520,8 +520,8 @@ zabbix_export:
               key: 'kubernetes.controller.workqueue_retries_total["{#NAME}"]'
               delay: '0'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               description: 'Total number of retries handled by workqueue per second.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN
@@ -546,8 +546,8 @@ zabbix_export:
               key: 'kubernetes.controller.workqueue_unfinished_work_seconds["{#NAME}"]'
               delay: '0'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               description: 'How many seconds of work has done that is in progress and hasn''t been observed by work_duration. Large values indicate stuck threads. One can deduce the number of stuck threads by observing the rate at which this increases.'
               preprocessing:
@@ -569,8 +569,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kubernetes.controller.workqueue_work_duration_seconds_p50["{#NAME}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kubernetes.controller.duration_seconds_bucket[*,"{#NAME}"],5m,50)'
               description: '50 percentiles of how long in seconds processing an item from workqueue takes, by queue.'
@@ -584,8 +584,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kubernetes.controller.workqueue_work_duration_seconds_p90["{#NAME}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kubernetes.controller.duration_seconds_bucket[*,"{#NAME}"],5m,90)'
               description: '90 percentile of how long in seconds processing an item from workqueue takes, by queue.'
@@ -599,8 +599,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kubernetes.controller.workqueue_work_duration_seconds_p95["{#NAME}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kubernetes.controller.duration_seconds_bucket[*,"{#NAME}"],5m,95)'
               description: '95 percentile of how long in seconds processing an item from workqueue takes, by queue.'
@@ -614,8 +614,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kubernetes.controller.workqueue_work_duration_seconds_p99["{#NAME}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kubernetes.controller.duration_seconds_bucket[*,"{#NAME}"],5m,99)'
               description: '99 percentile of how long in seconds processing an item from workqueue takes, by queue.'

@@ -26,8 +26,8 @@ zabbix_export:
           key: aws.ec2.alarms.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Check result of the alarm data has been got correctly.'
           preprocessing:
             - type: JSONPATH
@@ -451,8 +451,8 @@ zabbix_export:
           key: aws.ec2.get_alarms
           delay: 0s;m/1
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -732,8 +732,8 @@ zabbix_export:
           key: aws.ec2.get_metrics
           delay: 0s;m/5
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -1041,8 +1041,8 @@ zabbix_export:
           key: aws.ec2.get_volumes
           delay: 5m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -1292,8 +1292,8 @@ zabbix_export:
           key: aws.ec2.metrics.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Check result of the instance metric data has been got correctly.'
           preprocessing:
             - type: JSONPATH
@@ -1513,8 +1513,8 @@ zabbix_export:
           key: aws.ec2.volumes.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Check result of the volume information has been got correctly.'
           preprocessing:
             - type: JSONPATH
@@ -1568,8 +1568,8 @@ zabbix_export:
               key: 'aws.ec2.alarm.get_metrics["{#ALARM_NAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get alarm metrics about the state and its reason.'
               preprocessing:
                 - type: JSONPATH
@@ -1624,8 +1624,8 @@ zabbix_export:
               key: 'aws.ec2.alarm.state_reason["{#ALARM_NAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: |
                 An explanation for the alarm state, in text format.
                 Alarm description:
@@ -1733,8 +1733,8 @@ zabbix_export:
               key: 'aws.ec2.ebs.attachment_time["{#VOLUME_ID}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The time stamp when the attachment initiated.'
               valuemap:
                 name: 'Volume attachment state'
@@ -1761,8 +1761,8 @@ zabbix_export:
               key: 'aws.ec2.ebs.create_time["{#VOLUME_ID}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The time stamp when volume creation was initiated.'
               preprocessing:
                 - type: JSONPATH
@@ -1787,8 +1787,8 @@ zabbix_export:
               key: 'aws.ec2.ebs.device["{#VOLUME_ID}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The device name specified in the block device mapping (for example, /dev/sda1).'
               preprocessing:
                 - type: JSONPATH
@@ -1813,8 +1813,8 @@ zabbix_export:
               key: 'aws.ec2.ebs.get_volume["{#VOLUME_ID}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get data of the "{#VOLUME_ID}" volume.'
               preprocessing:
                 - type: JSONPATH
@@ -2169,8 +2169,8 @@ zabbix_export:
               key: 'aws.ec2.get_ebs_metrics["{#VOLUME_ID}"]'
               delay: 0s;m/5
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               params: |
                 var AWS = {
                 	params: {},

@@ -42,8 +42,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: rabbitmq.get_exchanges
           history: 1h
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           authtype: BASIC
           username: '{$RABBITMQ.API.USER}'
           password: '{$RABBITMQ.API.PASSWORD}'
@@ -57,8 +57,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: rabbitmq.get_overview
           history: 1h
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           authtype: BASIC
           username: '{$RABBITMQ.API.USER}'
           password: '{$RABBITMQ.API.PASSWORD}'
@@ -924,8 +924,8 @@ zabbix_export:
               key: 'rabbitmq.get_exchanges["{#VHOST}/{#EXCHANGE}/{#TYPE}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The HTTP API endpoint that returns [{#VHOST}][{#EXCHANGE}][{#TYPE}] exchanges metrics'
               preprocessing:
                 - type: JSONPATH
@@ -1195,8 +1195,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: rabbitmq.get_nodes
           history: 1h
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           authtype: BASIC
           username: '{$RABBITMQ.API.USER}'
           password: '{$RABBITMQ.API.PASSWORD}'
@@ -1224,8 +1224,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: rabbitmq.get_node_overview
           history: 1h
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           authtype: BASIC
           username: '{$RABBITMQ.API.USER}'
           password: '{$RABBITMQ.API.PASSWORD}'
@@ -1243,8 +1243,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: rabbitmq.get_queues
           history: 1h
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           authtype: BASIC
           username: '{$RABBITMQ.API.USER}'
           password: '{$RABBITMQ.API.PASSWORD}'
@@ -1407,8 +1407,8 @@ zabbix_export:
           key: rabbitmq.node.overview.management_version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The version of the management plugin in use.'
           preprocessing:
             - type: JSONPATH
@@ -1428,8 +1428,8 @@ zabbix_export:
           key: rabbitmq.node.overview.rabbitmq_version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The version of the RabbitMQ on the node, which processed this request.'
           preprocessing:
             - type: JSONPATH
@@ -1940,8 +1940,8 @@ zabbix_export:
               key: 'rabbitmq.get_exchanges["{#VHOST}/{#QUEUE}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The HTTP API endpoint that returns [{#VHOST}][{#QUEUE}] queue metrics'
               preprocessing:
                 - type: JSONPATH

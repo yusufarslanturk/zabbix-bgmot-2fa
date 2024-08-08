@@ -30,8 +30,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: kube.componentstatuses
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
               parameters:
@@ -50,8 +50,8 @@ zabbix_export:
           type: SCRIPT
           key: kube.control_plane.lld
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var Kube = {
             	params: {},
@@ -279,8 +279,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: kube.livez
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JAVASCRIPT
               parameters:
@@ -350,8 +350,8 @@ zabbix_export:
           type: SCRIPT
           key: kube.node.lld
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var Kube = {
             	params: {},
@@ -554,8 +554,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: kube.readyz
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JAVASCRIPT
               parameters:
@@ -606,8 +606,8 @@ zabbix_export:
           type: SCRIPT
           key: kube.state.metrics
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var Kube = {
             	params: {},
@@ -835,8 +835,8 @@ zabbix_export:
               key: 'kube.componentstatuses.healthy[{#NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Cluster component healthy.'
               preprocessing:
                 - type: JSONPATH
@@ -1810,8 +1810,8 @@ zabbix_export:
               key: 'kube.livez.healthcheck[{#NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Result of livez healthcheck for component.'
               preprocessing:
                 - type: JSONPATH
@@ -3131,8 +3131,8 @@ zabbix_export:
               key: 'kube.readyz.healthcheck[{#NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Result of readyz healthcheck for component.'
               preprocessing:
                 - type: JSONPATH

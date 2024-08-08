@@ -21,8 +21,8 @@ zabbix_export:
           name: 'Ceph: Get df'
           key: 'ceph.df.details["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           tags:
             - tag: component
               value: disk
@@ -34,8 +34,8 @@ zabbix_export:
           key: ceph.min_mon_release_name
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: min_mon_release_name
           preprocessing:
             - type: JSONPATH
@@ -201,8 +201,8 @@ zabbix_export:
           name: 'Ceph: Get OSD dump'
           key: 'ceph.osd.dump["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           tags:
             - tag: component
               value: osd
@@ -212,8 +212,8 @@ zabbix_export:
           name: 'Ceph: Get OSD stats'
           key: 'ceph.osd.stats["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           tags:
             - tag: component
               value: osd
@@ -863,8 +863,8 @@ zabbix_export:
           name: 'Ceph: Get overall cluster status'
           key: 'ceph.status["{$CEPH.CONNSTRING}","{$CEPH.USER}","{$CEPH.API.KEY}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           tags:
             - tag: component
               value: raw

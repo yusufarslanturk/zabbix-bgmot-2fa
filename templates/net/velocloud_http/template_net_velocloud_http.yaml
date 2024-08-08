@@ -24,8 +24,8 @@ zabbix_export:
           type: SCRIPT
           key: velocloud.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value);
             
@@ -127,8 +127,8 @@ zabbix_export:
           key: velocloud.get.clear_metrics
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Clear metrics for data without errors.'
           preprocessing:
             - type: CHECK_JSON_ERROR
@@ -146,8 +146,8 @@ zabbix_export:
           key: velocloud.get.edges
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The JSON with result of Velocloud edge SD Wan.'
           preprocessing:
             - type: JAVASCRIPT
@@ -258,8 +258,8 @@ zabbix_export:
           key: velocloud.get.edges.error
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Errors of aggregate script item.'
           preprocessing:
             - type: JSONPATH
@@ -288,8 +288,8 @@ zabbix_export:
           key: velocloud.get.error
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Errors of aggregate script item.'
           preprocessing:
             - type: JSONPATH
@@ -318,8 +318,8 @@ zabbix_export:
           key: velocloud.orchestrator.api_version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Version of VMware SD-WAN Orchestrator API.'
           preprocessing:
             - type: JSONPATH
@@ -347,8 +347,8 @@ zabbix_export:
           key: velocloud.orchestrator.build
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Build of VMware SD-WAN Orchestrator API.'
           preprocessing:
             - type: JSONPATH
@@ -378,8 +378,8 @@ zabbix_export:
           key: velocloud.orchestrator.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Version of VMware SD-WAN Orchestrator API.'
           preprocessing:
             - type: JSONPATH
@@ -409,8 +409,8 @@ zabbix_export:
           key: velocloud.system.properties
           delay: 6h
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'System properties of VMware SD-WAN.'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -499,8 +499,8 @@ zabbix_export:
               key: 'velocloud.edge.description[{#ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Edge description.'
               preprocessing:
                 - type: JSONPATH
@@ -577,8 +577,8 @@ zabbix_export:
               key: 'velocloud.edge.model[{#ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Edge model number.'
               preprocessing:
                 - type: JSONPATH
@@ -632,8 +632,8 @@ zabbix_export:
               key: 'velocloud.edge.software_version[{#ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Edge software version.'
               preprocessing:
                 - type: JSONPATH
@@ -746,8 +746,8 @@ zabbix_export:
               key: 'velocloud.get.edge[{#ID}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for velocloud edge.'
               preprocessing:
                 - type: JSONPATH
@@ -831,8 +831,8 @@ zabbix_export:
               key: 'velocloud.gateway.description[{#ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gateway description.'
               preprocessing:
                 - type: JSONPATH
@@ -858,8 +858,8 @@ zabbix_export:
               key: 'velocloud.gateway.ip_address[{#ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gateway ip address.'
               preprocessing:
                 - type: JSONPATH
@@ -913,8 +913,8 @@ zabbix_export:
               key: 'velocloud.gateway.state[{#ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gateway state.'
               preprocessing:
                 - type: JSONPATH
@@ -1078,8 +1078,8 @@ zabbix_export:
               key: 'velocloud.get.gateway[{#ID}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for velocloud gateway.'
               preprocessing:
                 - type: JSONPATH
@@ -1154,8 +1154,8 @@ zabbix_export:
               key: 'velocloud.get.link[{#ID}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for velocloud link.'
               preprocessing:
                 - type: JSONPATH
@@ -1547,8 +1547,8 @@ zabbix_export:
               key: 'velocloud.get.sdwan_path[{{#NAME}/{#SOURCE}/{#DESTINATION}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for velocloud sdwan peer path.'
               preprocessing:
                 - type: JSONPATH
@@ -1774,8 +1774,8 @@ zabbix_export:
               key: 'velocloud.get.sdwan_peer[{#EDGE.ID}/{#ID}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for velocloud sdwan peer.'
               preprocessing:
                 - type: JSONPATH
@@ -1814,8 +1814,8 @@ zabbix_export:
               key: 'velocloud.sdwanpeer.description[{#EDGE.ID}/{#ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Description of SDWAN peer.'
               preprocessing:
                 - type: JSONPATH

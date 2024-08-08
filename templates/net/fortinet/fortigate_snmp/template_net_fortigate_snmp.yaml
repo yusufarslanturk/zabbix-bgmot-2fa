@@ -68,8 +68,8 @@ zabbix_export:
           key: 'ha.cluster.group_name[fgHaGroupName.0]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: FORTINET-FORTIGATE-MIB
             HA cluster group name.
@@ -122,8 +122,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.13.2.1.1]'
           key: ha.members.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering HA members from FORTINET-FORTIGATE-MIB.'
           tags:
             - tag: component
@@ -173,8 +173,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.4.3.2.1]'
           key: hw.sensor.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering hardware sensors from FORTINET-FORTIGATE-MIB.'
           tags:
             - tag: component
@@ -286,8 +286,8 @@ zabbix_export:
           key: 'ips.database.version[fgSysVersionIps.0]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: FORTINET-FORTIGATE-MIB
             IPS signature database version installed on the device.
@@ -440,8 +440,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.2.2.1.7,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.31.1.1.1.6,1.3.6.1.2.1.31.1.1.1.10,1.3.6.1.2.1.2.2.1.14,1.3.6.1.2.1.2.2.1.20,1.3.6.1.2.1.2.2.1.19,1.3.6.1.2.1.2.2.1.13,1.3.6.1.2.1.31.1.1.1.15]'
           key: net.if.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering interfaces from IF-MIB.'
           tags:
             - tag: component
@@ -467,8 +467,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.4.9.2.1]'
           key: sdwan_health.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering SD-WAN health-checks from FORTINET-FORTIGATE-MIB.'
           tags:
             - tag: component
@@ -479,8 +479,8 @@ zabbix_export:
           key: snmptrap.fallback
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: LOG
+          trends: '0'
           description: 'Used for collecting all SNMP traps unmatched by other `snmptrap` items.'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
           tags:
@@ -493,8 +493,8 @@ zabbix_export:
           key: 'system.contact[sysContact.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             Name and contact information of the contact person for the node. If not provided, the value is a zero-length string.
@@ -553,8 +553,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.4.4.2.1]'
           key: system.cpu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering CPU from FORTINET-FORTIGATE-MIB.'
           tags:
             - tag: component
@@ -566,8 +566,8 @@ zabbix_export:
           key: 'system.descr[sysDescr.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             A textual description of the entity. This value should include the full name and version identification of the system's hardware type, software operating system, and networking software.
@@ -585,8 +585,8 @@ zabbix_export:
           key: system.hw.firmware
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: FORTINET-FORTIGATE-MIB
             Firmware version of the device.
@@ -605,8 +605,8 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: ENTITY-MIB
             Model of the device.
@@ -625,8 +625,8 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: ENTITY-MIB
             Serial number of the device.
@@ -658,8 +658,8 @@ zabbix_export:
           key: 'system.location[sysLocation.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             Physical location of the node (e.g., `equipment room`, `3rd floor`). If not provided, the value is a zero-length string.
@@ -678,8 +678,8 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             An administratively-assigned name for the node (the node's fully-qualified domain name). If not provided, the value is a zero-length string.
@@ -711,8 +711,8 @@ zabbix_export:
           key: 'system.objectid[sysObjectID.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The vendor's authoritative identification of the entity as part of the vendor's SMI enterprises subtree with the prefix 1.3.6.1.4.1 (e.g., a vendor with the identifier 1.3.6.1.4.1.4242 might assign a system object with the OID 1.3.6.1.4.1.4242.1.1).
@@ -757,8 +757,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.3.2.1.1]'
           key: vdom.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering virtual domains from FORTINET-FORTIGATE-MIB.'
           tags:
             - tag: component
@@ -953,8 +953,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.12.2.2.1.3,1.3.6.1.4.1.12356.101.12.2.2.1.20]'
           key: vpn.tunnel.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering VPN tunnels from FORTINET-FORTIGATE-MIB.'
           tags:
             - tag: component
@@ -983,8 +983,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.12356.101.14.4.3.1]'
           key: wireless.ap.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Used for discovering wireless access points from FORTINET-FORTIGATE-MIB.'
           tags:
             - tag: component
@@ -1220,8 +1220,8 @@ zabbix_export:
               key: 'ha.checksum.global[fgHaStatsGlobalChecksum.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Current HA global checksum value.
@@ -1269,8 +1269,8 @@ zabbix_export:
               key: 'ha.hostname[fgHaStatsHostname.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Host name of the specified cluster member.
@@ -1393,8 +1393,8 @@ zabbix_export:
               key: 'ha.primary.serialnumber[fgHaStatsMasterSerial.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Serial number of the primary HA member during the last sync attempt (successful or not).
@@ -1419,8 +1419,8 @@ zabbix_export:
               key: 'ha.serialnumber[fgHaStatsSerial.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Serial number of the HA cluster member.
@@ -1583,8 +1583,8 @@ zabbix_export:
               key: 'hw.sensor.value[fgHwSensorEntValue.{#SENSOR.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 A string representation of the value of the sensor. Because sensors can present data in different formats, string representation is the most general format. Interpretation of the value (units of measure, for example) is dependent on the individual sensor.
@@ -2780,8 +2780,8 @@ zabbix_export:
               key: 'wc.base.mac[fgWcWtpSessionWtpBaseMacAddress.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents the WTP's Base MAC Address, which MAY be assigned to the primary Ethernet interface.
@@ -2807,8 +2807,8 @@ zabbix_export:
               key: 'wc.boot.version[fgWcWtpSessionWtpBootVersion.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents the boot loader version of a WTP.
@@ -2994,8 +2994,8 @@ zabbix_export:
               key: 'wc.hardware.version[fgWcWtpSessionWtpHwVersion.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents the hardware version of a WTP.
@@ -3020,8 +3020,8 @@ zabbix_export:
               key: 'wc.ip.addr[fgWcWtpSessionWtpIpAddress.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents the IP address of a WTP that corresponds to the IP address in the IP packet header.
@@ -3073,8 +3073,8 @@ zabbix_export:
               key: 'wc.local_ip.addr[fgWcWtpSessionWtpLocalIpAddress.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents the local IP address of a WTP and models the CAPWAP Local IPv4 Address or CAPWAP Local IPv6 Address fields [RFC5415].
@@ -3127,8 +3127,8 @@ zabbix_export:
               key: 'wc.location[fgWcWtpConfigWtpLocation.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents the location of this WTP.
@@ -3222,8 +3222,8 @@ zabbix_export:
               key: 'wc.model[fgWcWtpSessionWtpModelNumber.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents the model number of a WTP.
@@ -3248,8 +3248,8 @@ zabbix_export:
               key: 'wc.profile[fgWcWtpConfigWtpProfile.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents the profile configured for this WTP.
@@ -3489,8 +3489,8 @@ zabbix_export:
               key: 'wc.region_code[fgWcWtpSessionWtpRegionCode.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents the region code programmed for this WTP.
@@ -3551,8 +3551,8 @@ zabbix_export:
               key: 'wc.software.version[fgWcWtpSessionWtpSwVersion.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents the software version of a WTP.
@@ -3626,8 +3626,8 @@ zabbix_export:
               key: 'wc.vaps.list[fgWcWtpConfigVaps.{#SNMPINDEX}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: FORTINET-FORTIGATE-MIB
                 Represents a list of wireless virtual access points (VAP) configured for this WTP.

@@ -32,8 +32,8 @@ zabbix_export:
           key: hpe.msa.disks.get.groups.statistics
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Disk groups statistics data.'
           preprocessing:
             - type: JSONPATH
@@ -51,8 +51,8 @@ zabbix_export:
           key: hpe.msa.get.controllers
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Controllers data.'
           preprocessing:
             - type: JSONPATH
@@ -70,8 +70,8 @@ zabbix_export:
           key: hpe.msa.get.controller_statistics
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Controllers statistics data.'
           preprocessing:
             - type: JSONPATH
@@ -88,8 +88,8 @@ zabbix_export:
           type: SCRIPT
           key: hpe.msa.get.data
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value),
             	fields = ['username', 'password', 'base_url'],
@@ -221,8 +221,8 @@ zabbix_export:
           key: hpe.msa.get.disks
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Disks data.'
           preprocessing:
             - type: JSONPATH
@@ -240,8 +240,8 @@ zabbix_export:
           key: hpe.msa.get.disks.groups
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Disk groups data.'
           preprocessing:
             - type: JSONPATH
@@ -259,8 +259,8 @@ zabbix_export:
           key: hpe.msa.get.enclosures
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Enclosures data.'
           preprocessing:
             - type: JSONPATH
@@ -278,8 +278,8 @@ zabbix_export:
           key: hpe.msa.get.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of method errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -311,8 +311,8 @@ zabbix_export:
           key: hpe.msa.get.fans
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Fans data.'
           preprocessing:
             - type: JSONPATH
@@ -330,8 +330,8 @@ zabbix_export:
           key: hpe.msa.get.fru
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'FRU data.'
           preprocessing:
             - type: JSONPATH
@@ -349,8 +349,8 @@ zabbix_export:
           key: hpe.msa.get.pools
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Pools data.'
           preprocessing:
             - type: JSONPATH
@@ -368,8 +368,8 @@ zabbix_export:
           key: hpe.msa.get.ports
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Ports data.'
           preprocessing:
             - type: JSONPATH
@@ -387,8 +387,8 @@ zabbix_export:
           key: hpe.msa.get.power_supplies
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Power supplies data.'
           preprocessing:
             - type: JSONPATH
@@ -406,8 +406,8 @@ zabbix_export:
           key: hpe.msa.get.system
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The system data.'
           preprocessing:
             - type: JSONPATH
@@ -425,8 +425,8 @@ zabbix_export:
           key: hpe.msa.get.volumes
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Volumes data.'
           preprocessing:
             - type: JSONPATH
@@ -444,8 +444,8 @@ zabbix_export:
           key: hpe.msa.get.volumes.statistics
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Volumes statistics data.'
           preprocessing:
             - type: JSONPATH
@@ -463,8 +463,8 @@ zabbix_export:
           key: hpe.msa.system.contact
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The name of the person who administers the system.'
           inventory_link: CONTACT
           preprocessing:
@@ -532,8 +532,8 @@ zabbix_export:
           key: hpe.msa.system.info
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'A brief description of what the system is used for or how it is configured.'
           inventory_link: NOTES
           preprocessing:
@@ -554,8 +554,8 @@ zabbix_export:
           key: hpe.msa.system.location
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The location of the system.'
           inventory_link: LOCATION
           preprocessing:
@@ -576,8 +576,8 @@ zabbix_export:
           key: hpe.msa.system.name
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The name of the storage system.'
           inventory_link: NAME
           preprocessing:
@@ -598,8 +598,8 @@ zabbix_export:
           key: hpe.msa.system.product_id
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The product model identifier.'
           inventory_link: MODEL
           preprocessing:
@@ -620,8 +620,8 @@ zabbix_export:
           key: hpe.msa.system.vendor_name
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The vendor name.'
           inventory_link: VENDOR
           preprocessing:
@@ -1003,8 +1003,8 @@ zabbix_export:
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",firmware]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Storage controller firmware version.'
               preprocessing:
                 - type: JSONPATH
@@ -1087,8 +1087,8 @@ zabbix_export:
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",ip_address]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Controller network port IP address.'
               preprocessing:
                 - type: JSONPATH
@@ -1110,8 +1110,8 @@ zabbix_export:
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",part_number]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Part number of the controller.'
               preprocessing:
                 - type: JSONPATH
@@ -1154,8 +1154,8 @@ zabbix_export:
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",serial_number]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Storage controller serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -1240,8 +1240,8 @@ zabbix_export:
               key: 'hpe.msa.get.controllers["{#CONTROLLER.ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered controller data.'
               preprocessing:
                 - type: JSONPATH
@@ -1262,8 +1262,8 @@ zabbix_export:
               key: 'hpe.msa.get.controller_statistics["{#CONTROLLER.ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered controller statistics data.'
               preprocessing:
                 - type: JSONPATH
@@ -1443,8 +1443,8 @@ zabbix_export:
               key: 'hpe.msa.disks["{#DURABLE.ID}",group]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'If the disk is in a disk group, the disk group name.'
               preprocessing:
                 - type: JSONPATH
@@ -1519,8 +1519,8 @@ zabbix_export:
               key: 'hpe.msa.disks["{#DURABLE.ID}",model]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Disk model.'
               preprocessing:
                 - type: JSONPATH
@@ -1542,8 +1542,8 @@ zabbix_export:
               key: 'hpe.msa.disks["{#DURABLE.ID}",pool]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'If the disk is in a pool, the pool name.'
               preprocessing:
                 - type: JSONPATH
@@ -1566,8 +1566,8 @@ zabbix_export:
               key: 'hpe.msa.disks["{#DURABLE.ID}",serial_number]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Disk serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -1696,8 +1696,8 @@ zabbix_export:
               key: 'hpe.msa.disks["{#DURABLE.ID}",vendor]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Disk vendor.'
               preprocessing:
                 - type: JSONPATH
@@ -1719,8 +1719,8 @@ zabbix_export:
               key: 'hpe.msa.get.disks["{#DURABLE.ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered disk data.'
               preprocessing:
                 - type: JSONPATH
@@ -2345,8 +2345,8 @@ zabbix_export:
               key: 'hpe.msa.get.disks.groups.statistics["{#NAME}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered disk group statistics data.'
               preprocessing:
                 - type: JSONPATH
@@ -2367,8 +2367,8 @@ zabbix_export:
               key: 'hpe.msa.get.disks.groups["{#NAME}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered disk group data.'
               preprocessing:
                 - type: JSONPATH
@@ -2502,8 +2502,8 @@ zabbix_export:
               key: 'hpe.msa.enclosures["{#DURABLE.ID}",midplane_serial_number]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Midplane serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -2525,8 +2525,8 @@ zabbix_export:
               key: 'hpe.msa.enclosures["{#DURABLE.ID}",model]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Enclosure model.'
               preprocessing:
                 - type: JSONPATH
@@ -2548,8 +2548,8 @@ zabbix_export:
               key: 'hpe.msa.enclosures["{#DURABLE.ID}",part_number]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Enclosure part number.'
               preprocessing:
                 - type: JSONPATH
@@ -2659,8 +2659,8 @@ zabbix_export:
               key: 'hpe.msa.get.enclosures["{#DURABLE.ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered enclosure data.'
               preprocessing:
                 - type: JSONPATH
@@ -2814,8 +2814,8 @@ zabbix_export:
               key: 'hpe.msa.get.fans["{#DURABLE.ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered fan data.'
               preprocessing:
                 - type: JSONPATH
@@ -2862,8 +2862,8 @@ zabbix_export:
               key: 'hpe.msa.frus["{#ENCLOSURE.ID}:{#LOCATION}",part_number]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: '{#DESCRIPTION}. Part number of the FRU.'
               preprocessing:
                 - type: JSONPATH
@@ -2885,8 +2885,8 @@ zabbix_export:
               key: 'hpe.msa.frus["{#ENCLOSURE.ID}:{#LOCATION}",serial_number]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: '{#DESCRIPTION}. FRU serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -2957,8 +2957,8 @@ zabbix_export:
               key: 'hpe.msa.get.frus["{#ENCLOSURE.ID}:{#LOCATION}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered FRU data.'
               preprocessing:
                 - type: JSONPATH
@@ -2997,8 +2997,8 @@ zabbix_export:
               key: 'hpe.msa.get.pools["{#NAME}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered pool data.'
               preprocessing:
                 - type: JSONPATH
@@ -3234,8 +3234,8 @@ zabbix_export:
               key: 'hpe.msa.get.ports["{#NAME}",,data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered port data.'
               preprocessing:
                 - type: JSONPATH
@@ -3395,8 +3395,8 @@ zabbix_export:
               key: 'hpe.msa.get.power_supplies["{#DURABLE.ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered power supply data.'
               preprocessing:
                 - type: JSONPATH
@@ -3469,8 +3469,8 @@ zabbix_export:
               key: 'hpe.msa.power_supplies["{#DURABLE.ID}",part_number]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Power supply part number.'
               preprocessing:
                 - type: JSONPATH
@@ -3492,8 +3492,8 @@ zabbix_export:
               key: 'hpe.msa.power_supplies["{#DURABLE.ID}",serial_number]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Power supply serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -3579,8 +3579,8 @@ zabbix_export:
               key: 'hpe.msa.get.volumes.statistics["{#NAME}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered volume statistics data.'
               preprocessing:
                 - type: JSONPATH
@@ -3601,8 +3601,8 @@ zabbix_export:
               key: 'hpe.msa.get.volumes["{#NAME}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered volume data.'
               preprocessing:
                 - type: JSONPATH
