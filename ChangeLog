@@ -4,6 +4,8 @@ New features:
 .......PS. [ZBXNEXT-9293] updated max supported MySQL version to 9.0 (mprihodko)
 
 Bug fixes:
+A........T [ZBX-24930] fixed inability to import latest official templates to minor versions up to 6.4.16 (abiba, vmaksimovs)
+..F....... [ZBX-24835] fixed case-conversion and preg functions working incorrectly with the Turkish locale (agriscenko)
 ..F....... [ZBX-24909] fixed resolving of macro functions in the "Item value" widget (Sasha)
 
 --------------------------------------------------------------------------------
