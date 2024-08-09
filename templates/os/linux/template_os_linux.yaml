@@ -32,6 +32,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
@@ -55,6 +56,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
@@ -144,6 +146,8 @@ zabbix_export:
           description: 'Number of interrupts processed.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: cpu
@@ -193,6 +197,8 @@ zabbix_export:
           description: 'The combined rate at which all processors on the computer are switched from one thread to another.'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: cpu
@@ -200,6 +206,7 @@ zabbix_export:
           name: 'Linux: CPU utilization'
           type: DEPENDENT
           key: system.cpu.util
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -336,6 +343,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'The host name of the system.'
           inventory_link: NAME
           preprocessing:
@@ -388,6 +396,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'The architecture of the operating system.'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -402,6 +411,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           inventory_link: OS
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -487,6 +497,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'The information as normally returned by `uname -a`.'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -531,6 +542,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
@@ -557,6 +569,7 @@ zabbix_export:
           key: vfs.fs.get
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The `vfs.fs.get` key acquires raw information set about the filesystems. Later to be extracted by preprocessing in dependent items.'
           tags:
             - tag: component
@@ -598,6 +611,7 @@ zabbix_export:
           name: 'Linux: Memory utilization'
           type: DEPENDENT
           key: vm.memory.utilization
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -672,6 +686,8 @@ zabbix_export:
               history: 7d
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -684,6 +700,8 @@ zabbix_export:
               history: 7d
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -697,6 +715,8 @@ zabbix_export:
               units: bps
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -712,6 +732,8 @@ zabbix_export:
               history: 7d
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -724,6 +746,8 @@ zabbix_export:
               history: 7d
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -737,6 +761,8 @@ zabbix_export:
               units: bps
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -982,6 +1008,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk average queue size (avgqu-sz)'
               type: DEPENDENT
               key: 'vfs.dev.queue_size[{#DEVNAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The current average disk queue; the number of requests outstanding on the disk while the performance data is being collected.'
@@ -990,6 +1017,8 @@ zabbix_export:
                   parameters:
                     - '$[10]'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '0.001'
@@ -1018,6 +1047,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk read rate'
               type: DEPENDENT
               key: 'vfs.dev.read.rate[{#DEVNAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!r/s'
@@ -1027,6 +1057,8 @@ zabbix_export:
                   parameters:
                     - '$[0]'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'vfs.file.contents[/sys/block/{#DEVNAME}/stat]'
               tags:
@@ -1038,6 +1070,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk read time (rate)'
               type: DEPENDENT
               key: 'vfs.dev.read.time.rate[{#DEVNAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of total read time counter; used in `r_await` calculation.'
@@ -1046,6 +1079,8 @@ zabbix_export:
                   parameters:
                     - '$[3]'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '0.001'
@@ -1060,6 +1095,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk utilization'
               type: DEPENDENT
               key: 'vfs.dev.util[{#DEVNAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1069,6 +1105,8 @@ zabbix_export:
                   parameters:
                     - '$[9]'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '0.1'
@@ -1097,6 +1135,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk write rate'
               type: DEPENDENT
               key: 'vfs.dev.write.rate[{#DEVNAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!w/s'
@@ -1106,6 +1145,8 @@ zabbix_export:
                   parameters:
                     - '$[4]'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'vfs.file.contents[/sys/block/{#DEVNAME}/stat]'
               tags:
@@ -1117,6 +1158,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk write time (rate)'
               type: DEPENDENT
               key: 'vfs.dev.write.time.rate[{#DEVNAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The rate of total write time counter; used in `w_await` calculation.'
@@ -1125,6 +1167,8 @@ zabbix_export:
                   parameters:
                     - '$[7]'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '0.001'
@@ -1140,6 +1184,7 @@ zabbix_export:
               key: 'vfs.file.contents[/sys/block/{#DEVNAME}/stat]'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The contents of get `/sys/block/{#DEVNAME}/stat` to get the disk statistics.'
               preprocessing:
                 - type: JAVASCRIPT
@@ -1232,6 +1277,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Inodes: Free, in %'
               type: DEPENDENT
               key: 'vfs.fs.dependent.inode[{#FSNAME},pfree]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1281,6 +1327,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Space: Available'
               type: DEPENDENT
               key: 'vfs.fs.dependent.size[{#FSNAME},free]'
+              delay: '0'
               history: 7d
               units: B
               description: 'Available storage space expressed in bytes.'
@@ -1301,6 +1348,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Space: Used, in %'
               type: DEPENDENT
               key: 'vfs.fs.dependent.size[{#FSNAME},pused]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1358,6 +1406,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Space: Total'
               type: DEPENDENT
               key: 'vfs.fs.dependent.size[{#FSNAME},total]'
+              delay: '0'
               history: 7d
               units: B
               description: 'Total space expressed in bytes.'
@@ -1378,6 +1427,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Space: Used'
               type: DEPENDENT
               key: 'vfs.fs.dependent.size[{#FSNAME},used]'
+              delay: '0'
               history: 7d
               units: B
               description: 'Used storage expressed in bytes.'
@@ -1398,8 +1448,10 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Get data'
               type: DEPENDENT
               key: 'vfs.fs.dependent[{#FSNAME},data]'
+              delay: '0'
               history: 1h
               value_type: TEXT
+              trends: '0'
               description: 'Intermediate data of `{#FSNAME}` filesystem.'
               preprocessing:
                 - type: JSONPATH
@@ -1420,6 +1472,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Option: Read-only'
               type: DEPENDENT
               key: 'vfs.fs.dependent[{#FSNAME},readonly]'
+              delay: '0'
               history: 7d
               description: 'The filesystem is mounted as read-only. It is available only for Zabbix agents 6.4 and higher.'
               preprocessing:
@@ -1528,7 +1581,8 @@ zabbix_export:
                     value: ^(btrfs|zfs)$
                     formulaid: A
               operations:
-                - operator: LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: LIKE
                   value: Inodes
                   discover: NO_DISCOVER
       tags:

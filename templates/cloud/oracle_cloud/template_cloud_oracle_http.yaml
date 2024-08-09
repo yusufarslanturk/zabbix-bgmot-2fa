@@ -35,6 +35,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Database availability'
           type: DEPENDENT
           key: oci.aut.db.availability
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -70,6 +71,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: DB block changes'
           type: DEPENDENT
           key: oci.aut.db.block.changes
+          delay: '0'
           history: 7d
           description: |
             The number of changes that were part of an update or delete operation that were made to all blocks in the SGA.
@@ -92,6 +94,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Failed connections'
           type: DEPENDENT
           key: oci.aut.db.conn.failed
+          delay: '0'
           history: 7d
           description: |
             The number of failed database connections.
@@ -112,6 +115,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: CPU time'
           type: DEPENDENT
           key: oci.aut.db.cpu.time
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -136,6 +140,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: CPU utilization, in %'
           type: DEPENDENT
           key: oci.aut.db.cpu.util
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -185,6 +190,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Execute count'
           type: DEPENDENT
           key: oci.aut.db.exec.count
+          delay: '0'
           history: 7d
           description: |
             The number of user and recursive calls that executed SQL statements during the selected time interval.
@@ -205,6 +211,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Connection latency'
           type: DEPENDENT
           key: oci.aut.db.latency.conn
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -230,6 +237,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Query latency'
           type: DEPENDENT
           key: oci.aut.db.latency.query
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -255,6 +263,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Session logical reads'
           type: DEPENDENT
           key: oci.aut.db.logical.reads.session
+          delay: '0'
           history: 7d
           description: |
             The sum of `db block gets` and `consistent gets` during the selected time interval. This includes logical reads of database blocks from either the buffer cache or process private memory.
@@ -275,6 +284,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Current logons'
           type: DEPENDENT
           key: oci.aut.db.logons
+          delay: '0'
           history: 7d
           description: |
             The number of successful logons during the selected time interval.
@@ -295,6 +305,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Failed logons'
           type: DEPENDENT
           key: oci.aut.db.logons.failed
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -318,6 +329,7 @@ zabbix_export:
           key: oci.aut.db.metrics.frequent.get
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             function validateZabbixParams(requiredParams, allParams) {
             	requiredParams.forEach(function (field) {
@@ -552,6 +564,7 @@ zabbix_export:
           delay: 5m
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             function validateZabbixParams(requiredParams, allParams) {
             	requiredParams.forEach(function (field) {
@@ -760,6 +773,7 @@ zabbix_export:
           delay: 60m
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             function validateZabbixParams(requiredParams, allParams) {
             	requiredParams.forEach(function (field) {
@@ -966,6 +980,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Parse count (failures)'
           type: DEPENDENT
           key: oci.aut.db.parse.count.failed
+          delay: '0'
           history: 7d
           description: |
             The number of parse failures during the selected time interval.
@@ -986,6 +1001,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Parse count (hard)'
           type: DEPENDENT
           key: oci.aut.db.parse.count.hard
+          delay: '0'
           history: 7d
           description: |
             The number of parse calls (real parses) during the selected time interval. A hard parse is an expensive operation in terms of memory use as it requires Oracle to allocate a workheap and other memory structures and then build a parse tree.
@@ -1006,6 +1022,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Parse count (total)'
           type: DEPENDENT
           key: oci.aut.db.parse.count.total
+          delay: '0'
           history: 7d
           description: |
             The number of hard and soft parses during the selected time interval.
@@ -1026,6 +1043,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Physical read total bytes'
           type: DEPENDENT
           key: oci.aut.db.physical.read.bytes
+          delay: '0'
           history: 7d
           units: B
           description: |
@@ -1047,6 +1065,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Physical reads'
           type: DEPENDENT
           key: oci.aut.db.physical.reads
+          delay: '0'
           history: 7d
           description: |
             The number of data blocks read from disk during the selected time interval.
@@ -1067,6 +1086,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Physical write total bytes'
           type: DEPENDENT
           key: oci.aut.db.physical.write.bytes
+          delay: '0'
           history: 7d
           units: B
           description: |
@@ -1088,6 +1108,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Physical writes'
           type: DEPENDENT
           key: oci.aut.db.physical.writes
+          delay: '0'
           history: 7d
           description: |
             The number of data blocks written to disk during the selected time interval.
@@ -1108,6 +1129,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Queued statements'
           type: DEPENDENT
           key: oci.aut.db.queued.statements
+          delay: '0'
           history: 7d
           description: |
             The number of queued SQL statements aggregated across all consumer groups during the selected time interval.
@@ -1128,6 +1150,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Redo generated'
           type: DEPENDENT
           key: oci.aut.db.redo.gen
+          delay: '0'
           history: 7d
           description: |
             Amount of redo generated in bytes during the selected time interval.
@@ -1148,6 +1171,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Sessions'
           type: DEPENDENT
           key: oci.aut.db.sessions
+          delay: '0'
           history: 7d
           description: |
             The number of sessions in the database.
@@ -1168,6 +1192,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Bytes received via SQL*Net from client'
           type: DEPENDENT
           key: oci.aut.db.sqlnet.bytes.recv.client
+          delay: '0'
           history: 7d
           units: B
           description: |
@@ -1189,6 +1214,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Bytes received via SQL*Net from DBLink'
           type: DEPENDENT
           key: oci.aut.db.sqlnet.bytes.recv.dblink
+          delay: '0'
           history: 7d
           units: B
           description: |
@@ -1210,6 +1236,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Bytes sent via SQL*Net to client'
           type: DEPENDENT
           key: oci.aut.db.sqlnet.bytes.sent.client
+          delay: '0'
           history: 7d
           units: B
           description: |
@@ -1231,6 +1258,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Bytes sent via SQL*Net to DBLink'
           type: DEPENDENT
           key: oci.aut.db.sqlnet.bytes.sent.dblink
+          delay: '0'
           history: 7d
           units: B
           description: |
@@ -1520,6 +1548,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Running statements'
           type: DEPENDENT
           key: oci.aut.db.statements.running
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -1541,6 +1570,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Storage space allocated'
           type: DEPENDENT
           key: oci.aut.db.storage.space.alloc
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -1566,6 +1596,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Maximum storage space'
           type: DEPENDENT
           key: oci.aut.db.storage.space.max
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -1591,6 +1622,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Storage space used'
           type: DEPENDENT
           key: oci.aut.db.storage.space.used
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -1616,6 +1648,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Storage utilization, in %'
           type: DEPENDENT
           key: oci.aut.db.storage.space.util
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -1662,6 +1695,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: DB time'
           type: DEPENDENT
           key: oci.aut.db.time
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -1687,6 +1721,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Transaction count'
           type: DEPENDENT
           key: oci.aut.db.transaction.count
+          delay: '0'
           history: 7d
           description: |
             The combined number of user commits and user rollbacks during the selected time interval.
@@ -1707,6 +1742,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: User calls'
           type: DEPENDENT
           key: oci.aut.db.user.calls
+          delay: '0'
           history: 7d
           description: |
             The combined number of logons, parses, and execute calls during the selected time interval.
@@ -1727,6 +1763,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: User commits'
           type: DEPENDENT
           key: oci.aut.db.user.commits
+          delay: '0'
           history: 7d
           description: |
             The number of user commits during the selected time interval. When a user commits a transaction, the generated redo that reflects the changes made to database blocks must be written to disk. Commits often represent the closest thing to a user transaction rate.
@@ -1747,6 +1784,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: User rollbacks'
           type: DEPENDENT
           key: oci.aut.db.user.rollbacks
+          delay: '0'
           history: 7d
           description: |
             Number of times users manually issue the `ROLLBACK` statement or an error occurs during a user's transactions during the selected time interval.
@@ -1767,6 +1805,7 @@ zabbix_export:
           name: 'OCI Autonomous DB: Wait time'
           type: DEPENDENT
           key: oci.aut.db.wait.time
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -4193,6 +4232,7 @@ zabbix_export:
           name: 'OCI Block Volume: Volume guaranteed IOPS'
           type: DEPENDENT
           key: oci.block.volume.iops
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!IOPS'
@@ -4217,6 +4257,7 @@ zabbix_export:
           key: oci.block.volume.metrics.get
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             function validateZabbixParams(requiredParams, allParams) {
             	requiredParams.forEach(function (field) {
@@ -4427,6 +4468,7 @@ zabbix_export:
           name: 'OCI Block Volume: Volume read throughput'
           type: DEPENDENT
           key: oci.block.volume.read
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -4449,6 +4491,7 @@ zabbix_export:
           name: 'OCI Block Volume: Volume read operations'
           type: DEPENDENT
           key: oci.block.volume.read.ops
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!reads'
@@ -4691,6 +4734,7 @@ zabbix_export:
           name: 'OCI Block Volume: Volume throttled operations'
           type: DEPENDENT
           key: oci.block.volume.throttled.ops
+          delay: '0'
           history: 7d
           description: |
             Total sum of all the I/O operations that were throttled during a given time interval.
@@ -4711,6 +4755,7 @@ zabbix_export:
           name: 'OCI Block Volume: Volume guaranteed throughput'
           type: DEPENDENT
           key: oci.block.volume.throughput
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -4736,6 +4781,7 @@ zabbix_export:
           name: 'OCI Block Volume: Volume guaranteed VPUs/GB'
           type: DEPENDENT
           key: oci.block.volume.vpu
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!VPUs'
@@ -4758,6 +4804,7 @@ zabbix_export:
           name: 'OCI Block Volume: Volume write throughput'
           type: DEPENDENT
           key: oci.block.volume.write
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -4780,6 +4827,7 @@ zabbix_export:
           name: 'OCI Block Volume: Volume write operations'
           type: DEPENDENT
           key: oci.block.volume.write.ops
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!writes'
@@ -5229,6 +5277,7 @@ zabbix_export:
           name: 'OCI Boot Volume: Volume guaranteed IOPS'
           type: DEPENDENT
           key: oci.boot.volume.iops
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!IOPS'
@@ -5253,6 +5302,7 @@ zabbix_export:
           key: oci.boot.volume.metrics.get
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             function validateZabbixParams(requiredParams, allParams) {
             	requiredParams.forEach(function (field) {
@@ -5463,6 +5513,7 @@ zabbix_export:
           name: 'OCI Boot Volume: Volume read throughput'
           type: DEPENDENT
           key: oci.boot.volume.read
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -5485,6 +5536,7 @@ zabbix_export:
           name: 'OCI Boot Volume: Volume read operations'
           type: DEPENDENT
           key: oci.boot.volume.read.ops
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!reads'
@@ -5727,6 +5779,7 @@ zabbix_export:
           name: 'OCI Boot Volume: Volume throttled operations'
           type: DEPENDENT
           key: oci.boot.volume.throttled.ops
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -5748,6 +5801,7 @@ zabbix_export:
           name: 'OCI Boot Volume: Volume guaranteed throughput'
           type: DEPENDENT
           key: oci.boot.volume.throughput
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -5773,6 +5827,7 @@ zabbix_export:
           name: 'OCI Boot Volume: Volume guaranteed VPUs/GB'
           type: DEPENDENT
           key: oci.boot.volume.vpu
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!VPUs'
@@ -5795,6 +5850,7 @@ zabbix_export:
           name: 'OCI Boot Volume: Volume write throughput'
           type: DEPENDENT
           key: oci.boot.volume.write
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -5817,6 +5873,7 @@ zabbix_export:
           name: 'OCI Boot Volume: Volume write operations'
           type: DEPENDENT
           key: oci.boot.volume.write.ops
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!writes'
@@ -8006,6 +8063,7 @@ zabbix_export:
           name: 'OCI Compute: CPU utilization, in %'
           type: DEPENDENT
           key: oci.compute.cpu.util
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -8055,6 +8113,7 @@ zabbix_export:
           name: 'OCI Compute: Disk read I/O'
           type: DEPENDENT
           key: oci.compute.disk.io.read
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!reads/s'
@@ -8080,6 +8139,7 @@ zabbix_export:
           name: 'OCI Compute: Disk write I/O'
           type: DEPENDENT
           key: oci.compute.disk.io.write
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!writes/s'
@@ -8105,6 +8165,7 @@ zabbix_export:
           name: 'OCI Compute: Disk bytes read'
           type: DEPENDENT
           key: oci.compute.disk.read
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -8130,6 +8191,7 @@ zabbix_export:
           name: 'OCI Compute: Disk bytes written'
           type: DEPENDENT
           key: oci.compute.disk.written
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -8155,6 +8217,7 @@ zabbix_export:
           name: 'OCI Compute: Load average'
           type: DEPENDENT
           key: oci.compute.load.avg
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!processes'
@@ -8180,6 +8243,7 @@ zabbix_export:
           name: 'OCI Compute: Memory allocation stalls'
           type: DEPENDENT
           key: oci.compute.mem.stalls
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '!stalls'
@@ -8202,6 +8266,7 @@ zabbix_export:
           name: 'OCI Compute: Memory utilization, in %'
           type: DEPENDENT
           key: oci.compute.mem.util
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -8253,6 +8318,7 @@ zabbix_export:
           key: oci.compute.metrics.get
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             function validateZabbixParams(requiredParams, allParams) {
             	requiredParams.forEach(function (field) {
@@ -8465,6 +8531,7 @@ zabbix_export:
           name: 'OCI Compute: Network bytes in'
           type: DEPENDENT
           key: oci.compute.network.in
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -8490,6 +8557,7 @@ zabbix_export:
           name: 'OCI Compute: Network bytes out'
           type: DEPENDENT
           key: oci.compute.network.out
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -8732,6 +8800,7 @@ zabbix_export:
           key: oci.compute.vnic.get
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             function validateZabbixParams(requiredParams, allParams) {
             	requiredParams.forEach(function (field) {
@@ -8943,6 +9012,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Attachment state'
               type: DEPENDENT
               key: 'oci.compute.vnic.attachment[{#ID}]'
+              delay: '0'
               history: 7d
               description: |
                 Current attachment state of the VNIC.
@@ -8987,6 +9057,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Egress packets dropped by security list'
               type: DEPENDENT
               key: 'oci.compute.vnic.egress.packets.dropped[{#ID}]'
+              delay: '0'
               history: 7d
               units: '!packets'
               description: |
@@ -9010,6 +9081,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Smartnic buffer drops from host'
               type: DEPENDENT
               key: 'oci.compute.vnic.host.smartnic.drops[{#ID}]'
+              delay: '0'
               history: 7d
               units: '!packets'
               description: |
@@ -9033,6 +9105,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Ingress packets dropped by security list'
               type: DEPENDENT
               key: 'oci.compute.vnic.ingress.packets.dropped[{#ID}]'
+              delay: '0'
               history: 7d
               units: '!packets'
               description: |
@@ -9058,6 +9131,7 @@ zabbix_export:
               key: 'oci.compute.vnic.metrics.get[{#ID}]'
               history: '0'
               value_type: TEXT
+              trends: '0'
               params: |
                 function validateZabbixParams(requiredParams, allParams) {
                 	requiredParams.forEach(function (field) {
@@ -9274,6 +9348,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Bytes to network'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.bytes.egr[{#ID}]'
+              delay: '0'
               history: 7d
               units: B
               description: |
@@ -9297,6 +9372,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Bytes from network'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.bytes.ingr[{#ID}]'
+              delay: '0'
               history: 7d
               units: B
               description: |
@@ -9320,6 +9396,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Connection tracking table full'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.conntrack.full[{#ID}]'
+              delay: '0'
               history: 7d
               description: |
                 Boolean (0/false, 1/true) that indicates the connection tracking table is full.
@@ -9353,6 +9430,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Connection tracking table utilization, in %'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.conntrack.util[{#ID}]'
+              delay: '0'
               history: 7d
               units: '%'
               description: |
@@ -9400,6 +9478,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Egress packets dropped by full connection tracking table'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.packets.egr.drop[{#ID}]'
+              delay: '0'
               history: 7d
               units: '!packets'
               description: |
@@ -9423,6 +9502,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Throttled egress packets'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.packets.egr.throttled[{#ID}]'
+              delay: '0'
               history: 7d
               units: '!packets'
               description: |
@@ -9446,6 +9526,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Packets to network'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.packets.egr[{#ID}]'
+              delay: '0'
               history: 7d
               units: '!packets'
               description: |
@@ -9469,6 +9550,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Ingress packets dropped by full connection tracking table'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.packets.ingr.drop[{#ID}]'
+              delay: '0'
               history: 7d
               units: '!packets'
               description: |
@@ -9492,6 +9574,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Throttled ingress packets'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.packets.ingr.throttled[{#ID}]'
+              delay: '0'
               history: 7d
               units: '!packets'
               description: |
@@ -9515,6 +9598,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Packets from network'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.packets.ingr[{#ID}]'
+              delay: '0'
               history: 7d
               units: '!packets'
               description: |
@@ -9538,6 +9622,7 @@ zabbix_export:
               name: 'VNIC [{#NAME}]: Smartnic buffer drops from network'
               type: DEPENDENT
               key: 'oci.compute.vnic.net.smartnic.drops[{#ID}]'
+              delay: '0'
               history: 7d
               units: '!packets'
               description: |
@@ -11256,6 +11341,7 @@ zabbix_export:
           delay: 5m
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             function validateZabbixParams(requiredParams, allParams) {
             	requiredParams.forEach(function (field) {
@@ -11465,6 +11551,7 @@ zabbix_export:
               name: 'Subnet [{#NAME}]: Get subnet state'
               type: DEPENDENT
               key: 'oci.vcn.subnet.state[{#ID}]'
+              delay: '0'
               history: 7d
               description: |
                 Current state of subnet.
@@ -11593,6 +11680,7 @@ zabbix_export:
           name: 'OCI Object Storage: Client-side error count'
           type: DEPENDENT
           key: oci.obj.storage.client.errors
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -11614,6 +11702,7 @@ zabbix_export:
           name: 'OCI Object Storage: First byte latency time'
           type: DEPENDENT
           key: oci.obj.storage.latency.byte
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -11639,6 +11728,7 @@ zabbix_export:
           name: 'OCI Object Storage: Overall latency time'
           type: DEPENDENT
           key: oci.obj.storage.latency.overall
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -11666,6 +11756,7 @@ zabbix_export:
           key: oci.obj.storage.metrics.frequent.get
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             function validateZabbixParams(requiredParams, allParams) {
             	requiredParams.forEach(function (field) {
@@ -11878,6 +11969,7 @@ zabbix_export:
           delay: 1h
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             function validateZabbixParams(requiredParams, allParams) {
             	requiredParams.forEach(function (field) {
@@ -12287,6 +12379,7 @@ zabbix_export:
           name: 'OCI Object Storage: Number of objects'
           type: DEPENDENT
           key: oci.obj.storage.objects
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -12308,6 +12401,7 @@ zabbix_export:
           name: 'OCI Object Storage: All requests count'
           type: DEPENDENT
           key: oci.obj.storage.requests
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -12329,6 +12423,7 @@ zabbix_export:
           name: 'OCI Object Storage: Post object request count'
           type: DEPENDENT
           key: oci.obj.storage.requests.post
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -12350,6 +12445,7 @@ zabbix_export:
           name: 'OCI Object Storage: Put object request count'
           type: DEPENDENT
           key: oci.obj.storage.requests.put
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -12371,6 +12467,7 @@ zabbix_export:
           name: 'OCI Object Storage: Bucket size'
           type: DEPENDENT
           key: oci.obj.storage.size
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -12393,6 +12490,7 @@ zabbix_export:
           name: 'OCI Object Storage: Incomplete multipart upload size'
           type: DEPENDENT
           key: oci.obj.storage.size.incomplete
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B

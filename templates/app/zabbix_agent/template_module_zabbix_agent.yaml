@@ -23,6 +23,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
@@ -46,6 +47,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
@@ -171,6 +173,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
@@ -207,6 +210,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:

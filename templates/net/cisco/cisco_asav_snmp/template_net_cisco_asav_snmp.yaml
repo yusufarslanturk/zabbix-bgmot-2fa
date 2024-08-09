@@ -36,6 +36,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             The textual identification of the contact person
@@ -57,6 +58,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             The physical location of this node (e.g.,
@@ -77,6 +79,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             A textual description of the entity.  This value
@@ -101,6 +104,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             An administratively-assigned name for this
@@ -347,6 +351,7 @@ zabbix_export:
               key: 'cisco.asav.net.if.descr[{#SNMPINDEX}]'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: IF-MIB
                 A textual string containing information about the interface
@@ -399,6 +404,8 @@ zabbix_export:
                 address at this sub-layer.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -421,6 +428,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -444,6 +453,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -465,6 +476,8 @@ zabbix_export:
                 or broadcast address at this sub-layer
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -504,6 +517,7 @@ zabbix_export:
               key: 'cisco.asav.net.if.name[{#SNMPINDEX}]'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CISCO-PORT-MIB
                 Descriptive name that identifies this port.
@@ -575,6 +589,8 @@ zabbix_export:
                 were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -598,6 +614,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -622,6 +640,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -644,6 +664,8 @@ zabbix_export:
                 those that were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: interface
@@ -795,6 +817,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ENTITY-MIB
                 A textual description of physical entity.  This object
@@ -819,6 +842,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ENTITY-MIB
                 The vendor-specific hardware revision string for the
@@ -850,6 +874,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ENTITY-MIB
                 The name of the manufacturer of this physical component.
@@ -880,6 +905,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ENTITY-MIB
                 The vendor-specific model name identifier string associated
@@ -906,6 +932,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ENTITY-MIB
                 The textual name of the physical entity.  The value of this
@@ -939,6 +966,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ENTITY-MIB
                 The vendor-specific serial number string for the physical
@@ -978,6 +1006,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ENTITY-MIB
                 The vendor-specific software revision string for the
@@ -1180,6 +1209,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: session
@@ -1205,6 +1236,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: session

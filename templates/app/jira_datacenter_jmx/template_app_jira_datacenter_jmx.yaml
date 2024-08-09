@@ -42,6 +42,7 @@ zabbix_export:
           key: 'jmx.discovery[attributes,"com.atlassian.jira:type=jira.license"]'
           history: '0'
           value_type: TEXT
+          trends: '0'
           username: '{$JMX.USER}'
           password: '{$JMX.PASSWORD}'
           description: 'License data for the discovery rule.'
@@ -109,6 +110,8 @@ zabbix_export:
             Units: rps - read operations per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -127,6 +130,8 @@ zabbix_export:
             Units: wps - write operations per second.
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -219,6 +224,8 @@ zabbix_export:
           description: 'Issues created per minute.'
           preprocessing:
             - type: SIMPLE_CHANGE
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -235,6 +242,8 @@ zabbix_export:
           description: 'Issue searches performed per minute.'
           preprocessing:
             - type: SIMPLE_CHANGE
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -251,6 +260,8 @@ zabbix_export:
           description: 'Issue updates performed per minute.'
           preprocessing:
             - type: SIMPLE_CHANGE
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -272,6 +283,8 @@ zabbix_export:
             Units: fpm - fails per minute.
           preprocessing:
             - type: SIMPLE_CHANGE
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -518,6 +531,8 @@ zabbix_export:
           description: 'The number of concurrent searches that are being performed in real-time by using the quick search.'
           preprocessing:
             - type: SIMPLE_CHANGE
+              parameters:
+                - ''
           jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
           tags:
             - tag: component
@@ -731,6 +746,8 @@ zabbix_export:
                 name: 'Connection availability'
               preprocessing:
                 - type: BOOL_TO_DECIMAL
+                  parameters:
+                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -758,6 +775,8 @@ zabbix_export:
               description: 'Count of failed connections to discovered mail server `{#JMXCATEGORY01}-{#JMXNAME}` per minute'
               preprocessing:
                 - type: SIMPLE_CHANGE
+                  parameters:
+                    - ''
               jmx_endpoint: 'service:jmx:rmi:///jndi/rmi://{HOST.CONN}:{HOST.PORT}/jmxrmi'
               tags:
                 - tag: component
@@ -802,6 +821,7 @@ zabbix_export:
               name: 'License [{#LICENSE.TYPE}]: Users: Current'
               type: DEPENDENT
               key: 'jmx.license.get.user.current["{#LICENSE.TYPE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Current user count for `{#LICENSE.TYPE}`.'
@@ -824,6 +844,7 @@ zabbix_export:
               name: 'License [{#LICENSE.TYPE}]: Users: Maximum'
               type: DEPENDENT
               key: 'jmx.license.get.user.max["{#LICENSE.TYPE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |

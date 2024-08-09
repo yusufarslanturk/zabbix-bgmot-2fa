@@ -47,6 +47,7 @@ zabbix_export:
           delay: 10m
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value),
             	request = new HttpRequest(),
@@ -180,8 +181,10 @@ zabbix_export:
           name: 'Openweathermap: Get data collection errors'
           type: DEPENDENT
           key: openweathermap.get.errors
+          delay: '0'
           history: 7d
           value_type: TEXT
+          trends: '0'
           description: 'Errors from get data requests by script item.'
           preprocessing:
             - type: JSONPATH
@@ -221,6 +224,7 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Cloudiness'
               type: DEPENDENT
               key: 'openweathermap.clouds[{#ID}]'
+              delay: '0'
               history: 7d
               units: '%'
               description: 'Cloudiness in %.'
@@ -244,8 +248,10 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Short weather status'
               type: DEPENDENT
               key: 'openweathermap.description[{#ID}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Short weather status description.'
               preprocessing:
                 - type: JSONPATH
@@ -267,6 +273,7 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Humidity'
               type: DEPENDENT
               key: 'openweathermap.humidity[{#ID}]'
+              delay: '0'
               history: 7d
               units: '%'
               description: 'Humidity in %.'
@@ -290,8 +297,10 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Data'
               type: DEPENDENT
               key: 'openweathermap.location.data[{#ID}]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'JSON with result of OpenWeatherMap API request by location.'
               preprocessing:
                 - type: JSONPATH
@@ -310,6 +319,7 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Atmospheric pressure'
               type: DEPENDENT
               key: 'openweathermap.pressure[{#ID}]'
+              delay: '0'
               history: 7d
               units: Pa
               description: 'Atmospheric pressure in Pa.'
@@ -336,6 +346,7 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Rain volume for the last one hour'
               type: DEPENDENT
               key: 'openweathermap.rain[{#ID}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: m
@@ -365,6 +376,7 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Snow volume for the last one hour'
               type: DEPENDENT
               key: 'openweathermap.snow[{#ID}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: m
@@ -394,6 +406,7 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Temperature'
               type: DEPENDENT
               key: 'openweathermap.temp[{#ID}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#TEMP.UNIT}'
@@ -441,6 +454,7 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Visibility'
               type: DEPENDENT
               key: 'openweathermap.visibility[{#ID}]'
+              delay: '0'
               history: 7d
               units: m
               description: 'Visibility in m.'
@@ -464,6 +478,7 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Wind direction'
               type: DEPENDENT
               key: 'openweathermap.wind.direction[{#ID}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: deg
@@ -490,6 +505,7 @@ zabbix_export:
               name: '[{#LOCATION}, {#COUNTRY}]: Wind speed'
               type: DEPENDENT
               key: 'openweathermap.wind.speed[{#ID}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '{#WIND.UNIT}'

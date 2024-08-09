@@ -64,6 +64,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             The textual identification of the contact person
@@ -85,6 +86,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'MIB: ZYXEL-IESCOMMON-MIB'
           inventory_link: SOFTWARE_FULL
           preprocessing:
@@ -122,6 +124,8 @@ zabbix_export:
             network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -138,6 +142,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             The physical location of this node (e.g.,
@@ -158,6 +163,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: IF-MIB
             The interface's address at the protocol layer
@@ -181,6 +187,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             A textual description of the entity.  This value
@@ -214,6 +221,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             An administratively-assigned name for this
@@ -256,6 +264,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: ZYXEL-IESCOMMON-MIB
             Serial number
@@ -285,6 +294,7 @@ zabbix_export:
           key: zyxel.aam1212.slot.alarm
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: ZYXEL-IESCOMMON-MIB
             This variable indicates the alarm status of the module.
@@ -613,6 +623,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -627,6 +639,7 @@ zabbix_export:
               key: 'zyxel.aam1212.net.adsl.name[{#SNMPINDEX}]'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: IF-MIB
                 A textual string containing information about the interface
@@ -701,6 +714,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -795,6 +810,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -809,6 +826,7 @@ zabbix_export:
               key: 'zyxel.aam1212.net.if.name[{#SNMPINDEX}]'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: IF-MIB
                 A textual string containing information about the interface
@@ -883,6 +901,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network

@@ -30,8 +30,10 @@ zabbix_export:
           name: 'Get disk group statistics'
           type: DEPENDENT
           key: hpe.msa.disks.get.groups.statistics
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Disk groups statistics data.'
           preprocessing:
             - type: JSONPATH
@@ -47,8 +49,10 @@ zabbix_export:
           name: 'Get controllers'
           type: DEPENDENT
           key: hpe.msa.get.controllers
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Controllers data.'
           preprocessing:
             - type: JSONPATH
@@ -64,8 +68,10 @@ zabbix_export:
           name: 'Get controller statistics'
           type: DEPENDENT
           key: hpe.msa.get.controller_statistics
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Controllers statistics data.'
           preprocessing:
             - type: JSONPATH
@@ -83,6 +89,7 @@ zabbix_export:
           key: hpe.msa.get.data
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value),
             	fields = ['username', 'password', 'base_url'],
@@ -212,8 +219,10 @@ zabbix_export:
           name: 'Get disks'
           type: DEPENDENT
           key: hpe.msa.get.disks
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Disks data.'
           preprocessing:
             - type: JSONPATH
@@ -229,8 +238,10 @@ zabbix_export:
           name: 'Get disk groups'
           type: DEPENDENT
           key: hpe.msa.get.disks.groups
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Disk groups data.'
           preprocessing:
             - type: JSONPATH
@@ -246,8 +257,10 @@ zabbix_export:
           name: 'Get enclosures'
           type: DEPENDENT
           key: hpe.msa.get.enclosures
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Enclosures data.'
           preprocessing:
             - type: JSONPATH
@@ -263,8 +276,10 @@ zabbix_export:
           name: 'Get method errors'
           type: DEPENDENT
           key: hpe.msa.get.errors
+          delay: '0'
           history: 7d
           value_type: TEXT
+          trends: '0'
           description: 'A list of method errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -294,8 +309,10 @@ zabbix_export:
           name: 'Get fans'
           type: DEPENDENT
           key: hpe.msa.get.fans
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Fans data.'
           preprocessing:
             - type: JSONPATH
@@ -311,8 +328,10 @@ zabbix_export:
           name: 'Get FRU'
           type: DEPENDENT
           key: hpe.msa.get.fru
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'FRU data.'
           preprocessing:
             - type: JSONPATH
@@ -328,8 +347,10 @@ zabbix_export:
           name: 'Get pools'
           type: DEPENDENT
           key: hpe.msa.get.pools
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Pools data.'
           preprocessing:
             - type: JSONPATH
@@ -345,8 +366,10 @@ zabbix_export:
           name: 'Get ports'
           type: DEPENDENT
           key: hpe.msa.get.ports
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Ports data.'
           preprocessing:
             - type: JSONPATH
@@ -362,8 +385,10 @@ zabbix_export:
           name: 'Get power supplies'
           type: DEPENDENT
           key: hpe.msa.get.power_supplies
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Power supplies data.'
           preprocessing:
             - type: JSONPATH
@@ -379,8 +404,10 @@ zabbix_export:
           name: 'Get system'
           type: DEPENDENT
           key: hpe.msa.get.system
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The system data.'
           preprocessing:
             - type: JSONPATH
@@ -396,8 +423,10 @@ zabbix_export:
           name: 'Get volumes'
           type: DEPENDENT
           key: hpe.msa.get.volumes
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Volumes data.'
           preprocessing:
             - type: JSONPATH
@@ -413,8 +442,10 @@ zabbix_export:
           name: 'Get volume statistics'
           type: DEPENDENT
           key: hpe.msa.get.volumes.statistics
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Volumes statistics data.'
           preprocessing:
             - type: JSONPATH
@@ -430,8 +461,10 @@ zabbix_export:
           name: 'System contact'
           type: DEPENDENT
           key: hpe.msa.system.contact
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'The name of the person who administers the system.'
           inventory_link: CONTACT
           preprocessing:
@@ -450,6 +483,7 @@ zabbix_export:
           name: 'System health'
           type: DEPENDENT
           key: hpe.msa.system.health
+          delay: '0'
           history: 7d
           description: 'System health status.'
           valuemap:
@@ -496,8 +530,10 @@ zabbix_export:
           name: 'System information'
           type: DEPENDENT
           key: hpe.msa.system.info
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'A brief description of what the system is used for or how it is configured.'
           inventory_link: NOTES
           preprocessing:
@@ -516,8 +552,10 @@ zabbix_export:
           name: 'System location'
           type: DEPENDENT
           key: hpe.msa.system.location
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'The location of the system.'
           inventory_link: LOCATION
           preprocessing:
@@ -536,8 +574,10 @@ zabbix_export:
           name: 'System name'
           type: DEPENDENT
           key: hpe.msa.system.name
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'The name of the storage system.'
           inventory_link: NAME
           preprocessing:
@@ -556,8 +596,10 @@ zabbix_export:
           name: 'Product ID'
           type: DEPENDENT
           key: hpe.msa.system.product_id
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'The product model identifier.'
           inventory_link: MODEL
           preprocessing:
@@ -576,8 +618,10 @@ zabbix_export:
           name: 'Vendor name'
           type: DEPENDENT
           key: hpe.msa.system.vendor_name
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'The vendor name.'
           inventory_link: VENDOR
           preprocessing:
@@ -628,6 +672,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Cache: Read hits, rate'
               type: DEPENDENT
               key: 'hpe.msa.controllers.cache.read.hits["{#CONTROLLER.ID}",rate]'
+              delay: '0'
               history: 7d
               description: 'For the controller that owns the volume, the number of times the block to be read is found in cache per second.'
               preprocessing:
@@ -635,6 +680,8 @@ zabbix_export:
                   parameters:
                     - '$.[''read-cache-hits'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.controller_statistics["{#CONTROLLER.ID}",data]'
               tags:
@@ -646,6 +693,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Cache: Read misses, rate'
               type: DEPENDENT
               key: 'hpe.msa.controllers.cache.read.misses["{#CONTROLLER.ID}",rate]'
+              delay: '0'
               history: 7d
               description: 'For the controller that owns the volume, the number of times the block to be read is not found in cache per second.'
               preprocessing:
@@ -653,6 +701,8 @@ zabbix_export:
                   parameters:
                     - '$.[''read-cache-misses'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.controller_statistics["{#CONTROLLER.ID}",data]'
               tags:
@@ -664,6 +714,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Cache: Write hits, rate'
               type: DEPENDENT
               key: 'hpe.msa.controllers.cache.write.hits["{#CONTROLLER.ID}",rate]'
+              delay: '0'
               history: 7d
               description: 'For the controller that owns the volume, the number of times the block written to is found in cache per second.'
               preprocessing:
@@ -671,6 +722,8 @@ zabbix_export:
                   parameters:
                     - '$.[''write-cache-hits'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.controller_statistics["{#CONTROLLER.ID}",data]'
               tags:
@@ -682,6 +735,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Cache: Write misses, rate'
               type: DEPENDENT
               key: 'hpe.msa.controllers.cache.write.misses["{#CONTROLLER.ID}",rate]'
+              delay: '0'
               history: 7d
               description: 'For the controller that owns the volume, the number of times the block written to is not found in cache per second.'
               preprocessing:
@@ -689,6 +743,8 @@ zabbix_export:
                   parameters:
                     - '$.[''write-cache-misses'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.controller_statistics["{#CONTROLLER.ID}",data]'
               tags:
@@ -700,6 +756,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Cache: Write utilization'
               type: DEPENDENT
               key: 'hpe.msa.controllers.cache.write["{#CONTROLLER.ID}",util]'
+              delay: '0'
               history: 7d
               units: '%'
               description: 'Percentage of write cache in use, from 0 to 100.'
@@ -718,6 +775,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Cache memory size'
               type: DEPENDENT
               key: 'hpe.msa.controllers.cache["{#CONTROLLER.ID}",total]'
+              delay: '0'
               history: 7d
               units: B
               description: 'Controller cache memory size.'
@@ -742,6 +800,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: CPU utilization'
               type: DEPENDENT
               key: 'hpe.msa.controllers.cpu["{#CONTROLLER.ID}",util]'
+              delay: '0'
               history: 7d
               units: '%'
               description: 'Percentage of time the CPU is busy, from 0 to 100.'
@@ -770,6 +829,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Data transfer rate: Reads'
               type: DEPENDENT
               key: 'hpe.msa.controllers.data_transfer.reads["{#CONTROLLER.ID}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -779,6 +839,8 @@ zabbix_export:
                   parameters:
                     - '$.[''data-read-numeric'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.controller_statistics["{#CONTROLLER.ID}",data]'
               tags:
@@ -790,6 +852,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Data transfer rate: Total'
               type: DEPENDENT
               key: 'hpe.msa.controllers.data_transfer.total["{#CONTROLLER.ID}",rate]'
+              delay: '0'
               history: 7d
               units: Bps
               description: 'The data transfer rate, in bytes per second, calculated over the interval since these statistics were last requested or reset. This value will be zero if it has not been requested or reset since a controller restart.'
@@ -808,6 +871,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Data transfer rate: Writes'
               type: DEPENDENT
               key: 'hpe.msa.controllers.data_transfer.writes["{#CONTROLLER.ID}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -817,6 +881,8 @@ zabbix_export:
                   parameters:
                     - '$.[''data-written-numeric'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.controller_statistics["{#CONTROLLER.ID}",data]'
               tags:
@@ -828,6 +894,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: IOPS, read rate'
               type: DEPENDENT
               key: 'hpe.msa.controllers.iops.read["{#CONTROLLER.ID}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!r/s'
@@ -837,6 +904,8 @@ zabbix_export:
                   parameters:
                     - '$.[''number-of-reads'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.controller_statistics["{#CONTROLLER.ID}",data]'
               tags:
@@ -848,6 +917,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: IOPS, total rate'
               type: DEPENDENT
               key: 'hpe.msa.controllers.iops.total["{#CONTROLLER.ID}",rate]'
+              delay: '0'
               history: 7d
               units: '!iops'
               description: 'Input/output operations per second, calculated over the interval since these statistics were last requested or reset. This value will be zero if it has not been requested or reset since a controller restart.'
@@ -866,6 +936,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: IOPS, write rate'
               type: DEPENDENT
               key: 'hpe.msa.controllers.iops.write["{#CONTROLLER.ID}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!w/s'
@@ -875,6 +946,8 @@ zabbix_export:
                   parameters:
                     - '$.[''number-of-writes'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.controller_statistics["{#CONTROLLER.ID}",data]'
               tags:
@@ -886,6 +959,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Disks'
               type: DEPENDENT
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",disks]'
+              delay: '0'
               history: 7d
               description: 'Number of disks in the storage system.'
               preprocessing:
@@ -906,6 +980,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Disk groups'
               type: DEPENDENT
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",disk_groups]'
+              delay: '0'
               history: 7d
               description: 'Number of disk groups in the storage system.'
               preprocessing:
@@ -926,8 +1001,10 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Firmware version'
               type: DEPENDENT
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",firmware]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Storage controller firmware version.'
               preprocessing:
                 - type: JSONPATH
@@ -947,6 +1024,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Health'
               type: DEPENDENT
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",health]'
+              delay: '0'
               history: 7d
               description: 'Controller health status.'
               valuemap:
@@ -1007,8 +1085,10 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: IP address'
               type: DEPENDENT
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",ip_address]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Controller network port IP address.'
               preprocessing:
                 - type: JSONPATH
@@ -1028,8 +1108,10 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Part number'
               type: DEPENDENT
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",part_number]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Part number of the controller.'
               preprocessing:
                 - type: JSONPATH
@@ -1049,6 +1131,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Pools'
               type: DEPENDENT
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",pools]'
+              delay: '0'
               history: 7d
               description: 'Number of pools in the storage system.'
               preprocessing:
@@ -1069,8 +1152,10 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Serial number'
               type: DEPENDENT
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",serial_number]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Storage controller serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -1090,6 +1175,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Status'
               type: DEPENDENT
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",status]'
+              delay: '0'
               history: 7d
               description: 'Storage controller status.'
               valuemap:
@@ -1123,6 +1209,7 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Uptime'
               type: DEPENDENT
               key: 'hpe.msa.controllers["{#CONTROLLER.ID}",uptime]'
+              delay: '0'
               history: 7d
               units: uptime
               description: 'Number of seconds since the controller was restarted.'
@@ -1151,8 +1238,10 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Get data'
               type: DEPENDENT
               key: 'hpe.msa.get.controllers["{#CONTROLLER.ID}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered controller data.'
               preprocessing:
                 - type: JSONPATH
@@ -1171,8 +1260,10 @@ zabbix_export:
               name: 'Controller [{#CONTROLLER.ID}]: Get statistics data'
               type: DEPENDENT
               key: 'hpe.msa.get.controller_statistics["{#CONTROLLER.ID}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered controller statistics data.'
               preprocessing:
                 - type: JSONPATH
@@ -1266,6 +1357,7 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Blocks size'
               type: DEPENDENT
               key: 'hpe.msa.disks.blocks["{#DURABLE.ID}",size]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The size of a block, in bytes.'
@@ -1287,6 +1379,7 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Blocks total'
               type: DEPENDENT
               key: 'hpe.msa.disks.blocks["{#DURABLE.ID}",total]'
+              delay: '0'
               history: 7d
               description: 'Total space in blocks.'
               preprocessing:
@@ -1325,6 +1418,7 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: SSD life left'
               type: DEPENDENT
               key: 'hpe.msa.disks.ssd["{#DURABLE.ID}",life_left]'
+              delay: '0'
               history: 7d
               discover: NO_DISCOVER
               units: '%'
@@ -1347,8 +1441,10 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Disk group'
               type: DEPENDENT
               key: 'hpe.msa.disks["{#DURABLE.ID}",group]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'If the disk is in a disk group, the disk group name.'
               preprocessing:
                 - type: JSONPATH
@@ -1369,6 +1465,7 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Health'
               type: DEPENDENT
               key: 'hpe.msa.disks["{#DURABLE.ID}",health]'
+              delay: '0'
               history: 7d
               description: 'Disk health status.'
               valuemap:
@@ -1420,8 +1517,10 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Model'
               type: DEPENDENT
               key: 'hpe.msa.disks["{#DURABLE.ID}",model]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Disk model.'
               preprocessing:
                 - type: JSONPATH
@@ -1441,8 +1540,10 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Storage pool'
               type: DEPENDENT
               key: 'hpe.msa.disks["{#DURABLE.ID}",pool]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'If the disk is in a pool, the pool name.'
               preprocessing:
                 - type: JSONPATH
@@ -1463,8 +1564,10 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Serial number'
               type: DEPENDENT
               key: 'hpe.msa.disks["{#DURABLE.ID}",serial_number]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Disk serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -1484,6 +1587,7 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Temperature'
               type: DEPENDENT
               key: 'hpe.msa.disks["{#DURABLE.ID}",temperature]'
+              delay: '0'
               history: 7d
               units: '!°C'
               description: 'Temperature of the disk.'
@@ -1506,6 +1610,7 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Temperature status'
               type: DEPENDENT
               key: 'hpe.msa.disks["{#DURABLE.ID}",temperature_status]'
+              delay: '0'
               history: 7d
               description: 'Disk temperature status.'
               valuemap:
@@ -1562,6 +1667,7 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Type'
               type: DEPENDENT
               key: 'hpe.msa.disks["{#DURABLE.ID}",type]'
+              delay: '0'
               history: 7d
               description: |
                 Disk type:
@@ -1588,8 +1694,10 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Vendor'
               type: DEPENDENT
               key: 'hpe.msa.disks["{#DURABLE.ID}",vendor]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Disk vendor.'
               preprocessing:
                 - type: JSONPATH
@@ -1609,8 +1717,10 @@ zabbix_export:
               name: 'Disk [{#DURABLE.ID}]: Get data'
               type: DEPENDENT
               key: 'hpe.msa.get.disks["{#DURABLE.ID}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered disk data.'
               preprocessing:
                 - type: JSONPATH
@@ -1641,7 +1751,8 @@ zabbix_export:
                     value: '8'
                     formulaid: A
               operations:
-                - operator: REGEXP
+                - operationobject: ITEM_PROTOTYPE
+                  operator: REGEXP
                   value: 'SSD life left'
                   discover: DISCOVER
         - uuid: 88aaea8c16a247559c68783ad0cd5c4d
@@ -1655,6 +1766,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Average response time: Read'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.avg_rsp_time["{#NAME}",read]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: s
@@ -1677,6 +1789,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Average response time: Total'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.avg_rsp_time["{#NAME}",total]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: s
@@ -1699,6 +1812,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Average response time: Write'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.avg_rsp_time["{#NAME}",write]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: s
@@ -1721,6 +1835,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Blocks free'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.blocks["{#NAME}",free]'
+              delay: '0'
               history: 7d
               description: 'Free space in blocks.'
               preprocessing:
@@ -1741,6 +1856,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Blocks size'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.blocks["{#NAME}",size]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The size of a block, in bytes.'
@@ -1762,6 +1878,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Blocks total'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.blocks["{#NAME}",total]'
+              delay: '0'
               history: 7d
               description: 'Total space in blocks.'
               preprocessing:
@@ -1782,6 +1899,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Data transfer rate: Reads'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.data_transfer.reads["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1791,6 +1909,8 @@ zabbix_export:
                   parameters:
                     - '$.[''data-read-numeric'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.disks.groups.statistics["{#NAME}",data]'
               tags:
@@ -1802,6 +1922,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Data transfer rate: Total'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.data_transfer.total["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               units: Bps
               description: 'The data transfer rate, in bytes per second, calculated over the interval since these statistics were last requested or reset. This value will be zero if it has not been requested or reset since a controller restart.'
@@ -1820,6 +1941,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Data transfer rate: Writes'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.data_transfer.writes["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1829,6 +1951,8 @@ zabbix_export:
                   parameters:
                     - '$.[''data-written-numeric'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.disks.groups.statistics["{#NAME}",data]'
               tags:
@@ -1840,6 +1964,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: IOPS, read rate'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.iops.read["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!r/s'
@@ -1849,6 +1974,8 @@ zabbix_export:
                   parameters:
                     - '$.[''number-of-reads'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.disks.groups.statistics["{#NAME}",data]'
               tags:
@@ -1860,6 +1987,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: IOPS, total rate'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.iops.total["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               units: '!iops'
               description: 'Input/output operations per second, calculated over the interval since these statistics were last requested or reset. This value will be zero if it has not been requested or reset since a controller restart.'
@@ -1878,6 +2006,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: IOPS, write rate'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.iops.write["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!w/s'
@@ -1887,6 +2016,8 @@ zabbix_export:
                   parameters:
                     - '$.[''number-of-writes'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.disks.groups.statistics["{#NAME}",data]'
               tags:
@@ -1898,6 +2029,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: RAID type'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.raid["{#NAME}",type]'
+              delay: '0'
               history: 7d
               description: 'The RAID level of the disk group.'
               valuemap:
@@ -1937,6 +2069,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Pool space used'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups.space["{#NAME}",pool_util]'
+              delay: '0'
               history: 7d
               units: '%'
               description: 'The percentage of pool capacity that the disk group occupies.'
@@ -2015,6 +2148,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Disks count'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups["{#NAME}",disk_count]'
+              delay: '0'
               history: 7d
               description: 'Number of disks in the disk group.'
               preprocessing:
@@ -2036,6 +2170,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Health'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups["{#NAME}",health]'
+              delay: '0'
               history: 7d
               description: 'Disk group health.'
               valuemap:
@@ -2087,6 +2222,7 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Status'
               type: DEPENDENT
               key: 'hpe.msa.disks.groups["{#NAME}",status]'
+              delay: '0'
               history: 7d
               description: |
                 The status of the disk group:
@@ -2207,8 +2343,10 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Get statistics data'
               type: DEPENDENT
               key: 'hpe.msa.get.disks.groups.statistics["{#NAME}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered disk group statistics data.'
               preprocessing:
                 - type: JSONPATH
@@ -2227,8 +2365,10 @@ zabbix_export:
               name: 'Disk group [{#NAME}]: Get data'
               type: DEPENDENT
               key: 'hpe.msa.get.disks.groups["{#NAME}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered disk group data.'
               preprocessing:
                 - type: JSONPATH
@@ -2308,6 +2448,7 @@ zabbix_export:
               name: 'Enclosure [{#DURABLE.ID}]: Health'
               type: DEPENDENT
               key: 'hpe.msa.enclosures["{#DURABLE.ID}",health]'
+              delay: '0'
               history: 7d
               description: 'Enclosure health.'
               valuemap:
@@ -2359,8 +2500,10 @@ zabbix_export:
               name: 'Enclosure [{#DURABLE.ID}]: Midplane serial number'
               type: DEPENDENT
               key: 'hpe.msa.enclosures["{#DURABLE.ID}",midplane_serial_number]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Midplane serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -2380,8 +2523,10 @@ zabbix_export:
               name: 'Enclosure [{#DURABLE.ID}]: Model'
               type: DEPENDENT
               key: 'hpe.msa.enclosures["{#DURABLE.ID}",model]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Enclosure model.'
               preprocessing:
                 - type: JSONPATH
@@ -2401,8 +2546,10 @@ zabbix_export:
               name: 'Enclosure [{#DURABLE.ID}]: Part number'
               type: DEPENDENT
               key: 'hpe.msa.enclosures["{#DURABLE.ID}",part_number]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Enclosure part number.'
               preprocessing:
                 - type: JSONPATH
@@ -2422,6 +2569,7 @@ zabbix_export:
               name: 'Enclosure [{#DURABLE.ID}]: Power'
               type: DEPENDENT
               key: 'hpe.msa.enclosures["{#DURABLE.ID}",power]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: W
@@ -2441,6 +2589,7 @@ zabbix_export:
               name: 'Enclosure [{#DURABLE.ID}]: Status'
               type: DEPENDENT
               key: 'hpe.msa.enclosures["{#DURABLE.ID}",status]'
+              delay: '0'
               history: 7d
               description: 'Enclosure status.'
               valuemap:
@@ -2508,8 +2657,10 @@ zabbix_export:
               name: 'Enclosure [{#DURABLE.ID}]: Get data'
               type: DEPENDENT
               key: 'hpe.msa.get.enclosures["{#DURABLE.ID}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered enclosure data.'
               preprocessing:
                 - type: JSONPATH
@@ -2540,6 +2691,7 @@ zabbix_export:
               name: 'Fan [{#DURABLE.ID}]: Health'
               type: DEPENDENT
               key: 'hpe.msa.fans["{#DURABLE.ID}",health]'
+              delay: '0'
               history: 7d
               description: 'Fan health status.'
               valuemap:
@@ -2591,6 +2743,7 @@ zabbix_export:
               name: 'Fan [{#DURABLE.ID}]: Speed'
               type: DEPENDENT
               key: 'hpe.msa.fans["{#DURABLE.ID}",speed]'
+              delay: '0'
               history: 7d
               units: '!RPM'
               description: 'Fan speed (revolutions per minute).'
@@ -2609,6 +2762,7 @@ zabbix_export:
               name: 'Fan [{#DURABLE.ID}]: Status'
               type: DEPENDENT
               key: 'hpe.msa.fans["{#DURABLE.ID}",status]'
+              delay: '0'
               history: 7d
               description: 'Fan status.'
               valuemap:
@@ -2658,8 +2812,10 @@ zabbix_export:
               name: 'Fan [{#DURABLE.ID}]: Get data'
               type: DEPENDENT
               key: 'hpe.msa.get.fans["{#DURABLE.ID}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered fan data.'
               preprocessing:
                 - type: JSONPATH
@@ -2704,8 +2860,10 @@ zabbix_export:
               name: 'FRU [{#ENCLOSURE.ID}: {#LOCATION}]: Part number'
               type: DEPENDENT
               key: 'hpe.msa.frus["{#ENCLOSURE.ID}:{#LOCATION}",part_number]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: '{#DESCRIPTION}. Part number of the FRU.'
               preprocessing:
                 - type: JSONPATH
@@ -2725,8 +2883,10 @@ zabbix_export:
               name: 'FRU [{#ENCLOSURE.ID}: {#LOCATION}]: Serial number'
               type: DEPENDENT
               key: 'hpe.msa.frus["{#ENCLOSURE.ID}:{#LOCATION}",serial_number]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: '{#DESCRIPTION}. FRU serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -2746,6 +2906,7 @@ zabbix_export:
               name: 'FRU [{#ENCLOSURE.ID}: {#LOCATION}]: Status'
               type: DEPENDENT
               key: 'hpe.msa.frus["{#ENCLOSURE.ID}:{#LOCATION}",status]'
+              delay: '0'
               history: 7d
               description: |
                 {#DESCRIPTION}. FRU status:
@@ -2794,8 +2955,10 @@ zabbix_export:
               name: 'FRU [{#ENCLOSURE.ID}: {#LOCATION}]: Get data'
               type: DEPENDENT
               key: 'hpe.msa.get.frus["{#ENCLOSURE.ID}:{#LOCATION}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered FRU data.'
               preprocessing:
                 - type: JSONPATH
@@ -2832,8 +2995,10 @@ zabbix_export:
               name: 'Pool [{#NAME}]: Get data'
               type: DEPENDENT
               key: 'hpe.msa.get.pools["{#NAME}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered pool data.'
               preprocessing:
                 - type: JSONPATH
@@ -2852,6 +3017,7 @@ zabbix_export:
               name: 'Pool [{#NAME}]: Blocks available'
               type: DEPENDENT
               key: 'hpe.msa.pools.blocks["{#NAME}",available]'
+              delay: '0'
               history: 7d
               description: 'Available space in blocks.'
               preprocessing:
@@ -2872,6 +3038,7 @@ zabbix_export:
               name: 'Pool [{#NAME}]: Blocks size'
               type: DEPENDENT
               key: 'hpe.msa.pools.blocks["{#NAME}",size]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The size of a block, in bytes.'
@@ -2893,6 +3060,7 @@ zabbix_export:
               name: 'Pool [{#NAME}]: Blocks total'
               type: DEPENDENT
               key: 'hpe.msa.pools.blocks["{#NAME}",total]'
+              delay: '0'
               history: 7d
               description: 'Total space in blocks.'
               preprocessing:
@@ -2987,6 +3155,7 @@ zabbix_export:
               name: 'Pool [{#NAME}]: Health'
               type: DEPENDENT
               key: 'hpe.msa.pools["{#NAME}",health]'
+              delay: '0'
               history: 7d
               description: 'Pool health.'
               valuemap:
@@ -3063,8 +3232,10 @@ zabbix_export:
               name: 'Port [{#NAME}]: Get data'
               type: DEPENDENT
               key: 'hpe.msa.get.ports["{#NAME}",,data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered port data.'
               preprocessing:
                 - type: JSONPATH
@@ -3083,6 +3254,7 @@ zabbix_export:
               name: 'Port [{#NAME}]: Health'
               type: DEPENDENT
               key: 'hpe.msa.ports["{#NAME}",health]'
+              delay: '0'
               history: 7d
               description: 'Port health status.'
               valuemap:
@@ -3134,6 +3306,7 @@ zabbix_export:
               name: 'Port [{#NAME}]: Status'
               type: DEPENDENT
               key: 'hpe.msa.ports["{#NAME}",status]'
+              delay: '0'
               history: 7d
               description: 'Port status.'
               valuemap:
@@ -3185,6 +3358,7 @@ zabbix_export:
               name: 'Port [{#NAME}]: Type'
               type: DEPENDENT
               key: 'hpe.msa.ports["{#NAME}",type]'
+              delay: '0'
               history: 7d
               description: 'Port type.'
               valuemap:
@@ -3219,8 +3393,10 @@ zabbix_export:
               name: 'Power supply [{#DURABLE.ID}]: Get data'
               type: DEPENDENT
               key: 'hpe.msa.get.power_supplies["{#DURABLE.ID}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered power supply data.'
               preprocessing:
                 - type: JSONPATH
@@ -3239,6 +3415,7 @@ zabbix_export:
               name: 'Power supply [{#DURABLE.ID}]: Health'
               type: DEPENDENT
               key: 'hpe.msa.power_supplies["{#DURABLE.ID}",health]'
+              delay: '0'
               history: 7d
               description: 'Power supply health status.'
               valuemap:
@@ -3290,8 +3467,10 @@ zabbix_export:
               name: 'Power supply [{#DURABLE.ID}]: Part number'
               type: DEPENDENT
               key: 'hpe.msa.power_supplies["{#DURABLE.ID}",part_number]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Power supply part number.'
               preprocessing:
                 - type: JSONPATH
@@ -3311,8 +3490,10 @@ zabbix_export:
               name: 'Power supply [{#DURABLE.ID}]: Serial number'
               type: DEPENDENT
               key: 'hpe.msa.power_supplies["{#DURABLE.ID}",serial_number]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Power supply serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -3332,6 +3513,7 @@ zabbix_export:
               name: 'Power supply [{#DURABLE.ID}]: Status'
               type: DEPENDENT
               key: 'hpe.msa.power_supplies["{#DURABLE.ID}",status]'
+              delay: '0'
               history: 7d
               description: 'Power supply status.'
               valuemap:
@@ -3395,8 +3577,10 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Get statistics data'
               type: DEPENDENT
               key: 'hpe.msa.get.volumes.statistics["{#NAME}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered volume statistics data.'
               preprocessing:
                 - type: JSONPATH
@@ -3415,8 +3599,10 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Get data'
               type: DEPENDENT
               key: 'hpe.msa.get.volumes["{#NAME}",data]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The discovered volume data.'
               preprocessing:
                 - type: JSONPATH
@@ -3435,6 +3621,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Blocks allocated'
               type: DEPENDENT
               key: 'hpe.msa.volumes.blocks["{#NAME}",allocated]'
+              delay: '0'
               history: 7d
               description: 'The amount of blocks currently allocated to the volume.'
               preprocessing:
@@ -3455,6 +3642,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Blocks size'
               type: DEPENDENT
               key: 'hpe.msa.volumes.blocks["{#NAME}",size]'
+              delay: '0'
               history: 7d
               units: B
               description: 'The size of a block, in bytes.'
@@ -3476,6 +3664,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Blocks total'
               type: DEPENDENT
               key: 'hpe.msa.volumes.blocks["{#NAME}",total]'
+              delay: '0'
               history: 7d
               description: 'Total space in blocks.'
               preprocessing:
@@ -3496,6 +3685,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Cache: Read hits, rate'
               type: DEPENDENT
               key: 'hpe.msa.volumes.cache.read.hits["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               description: 'For the controller that owns the volume, the number of times the block to be read is found in cache per second.'
               preprocessing:
@@ -3503,6 +3693,8 @@ zabbix_export:
                   parameters:
                     - '$.[''read-cache-hits'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.volumes.statistics["{#NAME}",data]'
               tags:
@@ -3514,6 +3706,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Cache: Read misses, rate'
               type: DEPENDENT
               key: 'hpe.msa.volumes.cache.read.misses["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               description: 'For the controller that owns the volume, the number of times the block to be read is not found in cache per second.'
               preprocessing:
@@ -3521,6 +3714,8 @@ zabbix_export:
                   parameters:
                     - '$.[''read-cache-misses'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.volumes.statistics["{#NAME}",data]'
               tags:
@@ -3532,6 +3727,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Cache: Write hits, rate'
               type: DEPENDENT
               key: 'hpe.msa.volumes.cache.write.hits["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               description: 'For the controller that owns the volume, the number of times the block written to is found in cache per second.'
               preprocessing:
@@ -3539,6 +3735,8 @@ zabbix_export:
                   parameters:
                     - '$.[''write-cache-hits'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.volumes.statistics["{#NAME}",data]'
               tags:
@@ -3550,6 +3748,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Cache: Write misses, rate'
               type: DEPENDENT
               key: 'hpe.msa.volumes.cache.write.misses["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               description: 'For the controller that owns the volume, the number of times the block written to is not found in cache per second.'
               preprocessing:
@@ -3557,6 +3756,8 @@ zabbix_export:
                   parameters:
                     - '$.[''write-cache-misses'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.volumes.statistics["{#NAME}",data]'
               tags:
@@ -3568,6 +3769,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Data transfer rate: Reads'
               type: DEPENDENT
               key: 'hpe.msa.volumes.data_transfer.reads["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -3577,6 +3779,8 @@ zabbix_export:
                   parameters:
                     - '$.[''data-read-numeric'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.volumes.statistics["{#NAME}",data]'
               tags:
@@ -3588,6 +3792,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Data transfer rate: Total'
               type: DEPENDENT
               key: 'hpe.msa.volumes.data_transfer.total["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               units: Bps
               description: 'The data transfer rate, in bytes per second, calculated over the interval since these statistics were last requested or reset. This value will be zero if it has not been requested or reset since a controller restart.'
@@ -3606,6 +3811,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Data transfer rate: Writes'
               type: DEPENDENT
               key: 'hpe.msa.volumes.data_transfer.writes["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -3615,6 +3821,8 @@ zabbix_export:
                   parameters:
                     - '$.[''data-written-numeric'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.volumes.statistics["{#NAME}",data]'
               tags:
@@ -3626,6 +3834,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: IOPS, read rate'
               type: DEPENDENT
               key: 'hpe.msa.volumes.iops.read["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!r/s'
@@ -3635,6 +3844,8 @@ zabbix_export:
                   parameters:
                     - '$.[''number-of-reads'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.volumes.statistics["{#NAME}",data]'
               tags:
@@ -3646,6 +3857,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: IOPS, total rate'
               type: DEPENDENT
               key: 'hpe.msa.volumes.iops.total["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               units: '!iops'
               description: 'Total input/output operations per second, calculated over the interval since these statistics were last requested or reset. This value will be zero if it has not been requested or reset since a controller restart.'
@@ -3664,6 +3876,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: IOPS, write rate'
               type: DEPENDENT
               key: 'hpe.msa.volumes.iops.write["{#NAME}",rate]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!w/s'
@@ -3673,6 +3886,8 @@ zabbix_export:
                   parameters:
                     - '$.[''number-of-writes'']'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'hpe.msa.get.volumes.statistics["{#NAME}",data]'
               tags:
@@ -3718,6 +3933,7 @@ zabbix_export:
               name: 'Volume [{#NAME}]: Health'
               type: DEPENDENT
               key: 'hpe.msa.volumes["{#DURABLE.ID}",health]'
+              delay: '0'
               history: 7d
               description: 'Volume health status.'
               valuemap:

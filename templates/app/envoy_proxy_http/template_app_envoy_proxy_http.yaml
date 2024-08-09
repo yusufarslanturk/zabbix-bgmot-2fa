@@ -27,6 +27,7 @@ zabbix_export:
           name: 'Envoy Proxy: Clusters, active'
           type: DEPENDENT
           key: envoy.cluster_manager.active_clusters
+          delay: '0'
           history: 7d
           description: 'Number of currently active (warmed) clusters.'
           preprocessing:
@@ -44,6 +45,7 @@ zabbix_export:
           name: 'Envoy Proxy: Clusters, added rate'
           type: DEPENDENT
           key: envoy.cluster_manager.cluster_added.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total clusters added (either via static config or CDS) per second.'
@@ -54,6 +56,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -63,6 +67,7 @@ zabbix_export:
           name: 'Envoy Proxy: Clusters, modified rate'
           type: DEPENDENT
           key: envoy.cluster_manager.cluster_modified.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total clusters modified (via CDS) per second.'
@@ -73,6 +78,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -82,6 +89,7 @@ zabbix_export:
           name: 'Envoy Proxy: Clusters, removed rate'
           type: DEPENDENT
           key: envoy.cluster_manager.cluster_removed.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total clusters removed (via CDS) per second.'
@@ -92,6 +100,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -101,6 +111,7 @@ zabbix_export:
           name: 'Envoy Proxy: Clusters, updates rate'
           type: DEPENDENT
           key: envoy.cluster_manager.cluster_updated.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total cluster updates per second.'
@@ -111,6 +122,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -120,6 +133,7 @@ zabbix_export:
           name: 'Envoy Proxy: Clusters, warming'
           type: DEPENDENT
           key: envoy.cluster_manager.warming_clusters
+          delay: '0'
           history: 7d
           description: 'Number of currently warming (not active) clusters.'
           preprocessing:
@@ -137,6 +151,7 @@ zabbix_export:
           name: 'Envoy Proxy: Filesystem, flushed by timer rate'
           type: DEPENDENT
           key: envoy.filesystem.flushed_by_timer.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of times internal flush buffers are written to a file due to flush timeout per second.'
@@ -147,6 +162,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -156,6 +173,7 @@ zabbix_export:
           name: 'Envoy Proxy: Filesystem, reopen failed rate'
           type: DEPENDENT
           key: envoy.filesystem.reopen_failed.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of times a file was failed to be opened per second.'
@@ -166,6 +184,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -175,6 +195,7 @@ zabbix_export:
           name: 'Envoy Proxy: Filesystem, write completed rate'
           type: DEPENDENT
           key: envoy.filesystem.write_completed.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of times a file was written per second.'
@@ -185,6 +206,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -194,6 +217,7 @@ zabbix_export:
           name: 'Envoy Proxy: Filesystem, write failed rate'
           type: DEPENDENT
           key: envoy.filesystem.write_failed.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of times an error occurred during a file write operation per second.'
@@ -204,6 +228,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -215,9 +241,12 @@ zabbix_export:
           key: envoy.get_metrics
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get server metrics.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
           url: '{$ENVOY.URL}{$ENVOY.METRICS.PATH}'
           tags:
             - tag: component
@@ -226,6 +255,7 @@ zabbix_export:
           name: 'Envoy Proxy: Listeners, added'
           type: DEPENDENT
           key: envoy.listener_manager.listener_added.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total listeners added (either via static config or LDS) per second.'
@@ -236,6 +266,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -245,6 +277,7 @@ zabbix_export:
           name: 'Envoy Proxy: Listeners, create failure'
           type: DEPENDENT
           key: envoy.listener_manager.listener_create_failure.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total failed listener object additions to workers per second.'
@@ -255,6 +288,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -264,6 +299,7 @@ zabbix_export:
           name: 'Envoy Proxy: Listeners, create success'
           type: DEPENDENT
           key: envoy.listener_manager.listener_create_success.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total listener objects successfully added to workers per second.'
@@ -274,6 +310,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -283,6 +321,7 @@ zabbix_export:
           name: 'Envoy Proxy: Listeners, stopped'
           type: DEPENDENT
           key: envoy.listener_manager.listener_stopped.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total listeners stopped per second.'
@@ -293,6 +332,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: envoy.get_metrics
           tags:
@@ -302,6 +343,7 @@ zabbix_export:
           name: 'Envoy Proxy: Listeners, active'
           type: DEPENDENT
           key: envoy.listener_manager.total_listeners_active
+          delay: '0'
           history: 7d
           description: 'Number of currently active listeners.'
           preprocessing:
@@ -319,6 +361,7 @@ zabbix_export:
           name: 'Envoy Proxy: Listeners, draining'
           type: DEPENDENT
           key: envoy.listener_manager.total_listeners_draining
+          delay: '0'
           history: 7d
           description: 'Number of currently draining listeners.'
           preprocessing:
@@ -336,6 +379,7 @@ zabbix_export:
           name: 'Envoy Proxy: Listener, warming'
           type: DEPENDENT
           key: envoy.listener_manager.total_listeners_warming
+          delay: '0'
           history: 7d
           description: 'Number of currently warming listeners.'
           preprocessing:
@@ -353,6 +397,7 @@ zabbix_export:
           name: 'Envoy Proxy: Listener manager, initialized'
           type: DEPENDENT
           key: envoy.listener_manager.workers_started
+          delay: '0'
           history: 7d
           description: 'A boolean (1 if started and 0 otherwise) that indicates whether listeners have been initialized on workers.'
           valuemap:
@@ -375,6 +420,7 @@ zabbix_export:
           name: 'Envoy Proxy: Server concurrency'
           type: DEPENDENT
           key: envoy.server.concurrency
+          delay: '0'
           history: 7d
           description: 'Number of worker threads.'
           preprocessing:
@@ -392,6 +438,7 @@ zabbix_export:
           name: 'Envoy Proxy: Certificate expiration, day before'
           type: DEPENDENT
           key: envoy.server.days_until_first_cert_expiring
+          delay: '0'
           history: 7d
           units: '!Days'
           description: 'Number of days until the next certificate being managed will expire.'
@@ -421,6 +468,7 @@ zabbix_export:
           name: 'Envoy Proxy: Server live'
           type: DEPENDENT
           key: envoy.server.live
+          delay: '0'
           history: 7d
           description: '1 if the server is not currently draining, 0 otherwise.'
           valuemap:
@@ -443,6 +491,7 @@ zabbix_export:
           name: 'Envoy Proxy: Memory allocated'
           type: DEPENDENT
           key: envoy.server.memory_allocated
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -462,6 +511,7 @@ zabbix_export:
           name: 'Envoy Proxy: Memory heap size'
           type: DEPENDENT
           key: envoy.server.memory_heap_size
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -481,6 +531,7 @@ zabbix_export:
           name: 'Envoy Proxy: Memory physical size'
           type: DEPENDENT
           key: envoy.server.memory_physical_size
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -500,6 +551,7 @@ zabbix_export:
           name: 'Envoy Proxy: Connections, parent'
           type: DEPENDENT
           key: envoy.server.parent_connections
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total connections of the old Envoy process on hot restart.'
@@ -518,6 +570,7 @@ zabbix_export:
           name: 'Envoy Proxy: Server state'
           type: DEPENDENT
           key: envoy.server.state
+          delay: '0'
           history: 7d
           description: |
             State of the server.
@@ -554,6 +607,7 @@ zabbix_export:
           name: 'Envoy Proxy: Connections, total'
           type: DEPENDENT
           key: envoy.server.total_connections
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total connections of both new and old Envoy processes.'
@@ -572,6 +626,7 @@ zabbix_export:
           name: 'Envoy Proxy: Uptime'
           type: DEPENDENT
           key: envoy.server.uptime
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: s
@@ -620,6 +675,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Membership, degraded'
               type: DEPENDENT
               key: 'envoy.cluster.membership_degraded["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               description: 'Current cluster degraded total.'
               preprocessing:
@@ -639,6 +695,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Membership, healthy'
               type: DEPENDENT
               key: 'envoy.cluster.membership_healthy["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               description: 'Current cluster healthy total (inclusive of both health checking and outlier detection).'
               preprocessing:
@@ -658,6 +715,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Membership, total'
               type: DEPENDENT
               key: 'envoy.cluster.membership_total["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               description: 'Current cluster membership total.'
               preprocessing:
@@ -698,6 +756,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Connections, active'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_cx_active["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               description: 'Current cluster total active connections.'
               preprocessing:
@@ -719,6 +778,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Upstream bytes in, rate'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_cx_rx_bytes_total.rate["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -730,6 +790,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -743,6 +805,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Connections, total'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_cx_total["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               description: 'Current cluster total connections.'
               preprocessing:
@@ -764,6 +827,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Upstream bytes out, rate'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_cx_tx_bytes_total.rate["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -775,6 +839,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -788,6 +854,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Requests 2xx, rate'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_rq_2x.rate["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Aggregate HTTP response codes per second.'
@@ -798,6 +865,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -811,6 +880,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Requests 3xx, rate'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_rq_3x.rate["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Aggregate HTTP response codes per second.'
@@ -821,6 +891,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -834,6 +906,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Requests 4xx, rate'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_rq_4x.rate["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Aggregate HTTP response codes per second.'
@@ -844,6 +917,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -857,6 +932,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Requests 5xx, rate'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_rq_5x.rate["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Aggregate HTTP response codes per second.'
@@ -867,6 +943,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -880,6 +958,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Requests active'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_rq_active["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total active requests.'
@@ -902,6 +981,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Requests completed, rate'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_rq_completed.rate["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total upstream requests completed per second.'
@@ -912,6 +992,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -925,6 +1007,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Requests pending'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_rq_pending_active["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total active requests pending a connection pool connection.'
@@ -947,6 +1030,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Requests timeout, rate'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_rq_timeout.rate["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Current cluster requests that timed out waiting for a response per second.'
@@ -957,6 +1041,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -970,6 +1056,7 @@ zabbix_export:
               name: 'Envoy Proxy: Cluster ["{#CLUSTER_NAME}"]: Requests total, rate'
               type: DEPENDENT
               key: 'envoy.cluster.upstream_rq_total.rate["{#CLUSTER_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Current cluster request total per second.'
@@ -980,6 +1067,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -1067,6 +1156,7 @@ zabbix_export:
               name: 'Envoy Proxy: HTTP ["{#CONN_MANAGER}"]: Connections, active'
               type: DEPENDENT
               key: 'envoy.http.downstream_cx_active["{#CONN_MANAGER}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total active connections.'
@@ -1087,6 +1177,7 @@ zabbix_export:
               name: 'Envoy Proxy: HTTP ["{#CONN_MANAGER}"]: Bytes in, rate'
               type: DEPENDENT
               key: 'envoy.http.downstream_cx_rx_bytes_total.rate["{#CONN_MANAGER}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total bytes received per second.'
@@ -1097,6 +1188,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -1108,6 +1201,7 @@ zabbix_export:
               name: 'Envoy Proxy: HTTP ["{#CONN_MANAGER}"]: Connections, rate'
               type: DEPENDENT
               key: 'envoy.http.downstream_cx_total["{#CONN_MANAGER}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Rps
@@ -1119,6 +1213,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -1130,6 +1226,7 @@ zabbix_export:
               name: 'Envoy Proxy: HTTP ["{#CONN_MANAGER}"]: Bytes out, rate'
               type: DEPENDENT
               key: 'envoy.http.downstream_cx_tx_bytes_tota.rate["{#CONN_MANAGER}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total bytes sent per second.'
@@ -1140,6 +1237,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -1151,6 +1250,7 @@ zabbix_export:
               name: 'Envoy Proxy: HTTP ["{#CONN_MANAGER}"]: Requests, active'
               type: DEPENDENT
               key: 'envoy.http.downstream_rq_active["{#CONN_MANAGER}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total active requests.'
@@ -1171,6 +1271,7 @@ zabbix_export:
               name: 'Envoy Proxy: HTTP ["{#CONN_MANAGER}"]: Requests timeout, rate'
               type: DEPENDENT
               key: 'envoy.http.downstream_rq_timeout["{#CONN_MANAGER}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total requests closed due to a timeout on the request path per second.'
@@ -1181,6 +1282,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -1192,6 +1295,7 @@ zabbix_export:
               name: 'Envoy Proxy: HTTP ["{#CONN_MANAGER}"]: Requests, rate'
               type: DEPENDENT
               key: 'envoy.http.downstream_rq_total.rate["{#CONN_MANAGER}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Rps
@@ -1203,6 +1307,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -1261,6 +1367,7 @@ zabbix_export:
               name: 'Envoy Proxy: Listener ["{#LISTENER_ADDRESS}"]: Connections, active'
               type: DEPENDENT
               key: 'envoy.listener.downstream_cx_active["{#LISTENER_ADDRESS}"]'
+              delay: '0'
               history: 7d
               description: 'Total active connections.'
               preprocessing:
@@ -1280,6 +1387,7 @@ zabbix_export:
               name: 'Envoy Proxy: Listener ["{#LISTENER_ADDRESS}"]: Connections, rate'
               type: DEPENDENT
               key: 'envoy.listener.downstream_cx_total.rate["{#LISTENER_ADDRESS}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total connections per second.'
@@ -1290,6 +1398,8 @@ zabbix_export:
                     - function
                     - sum
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: envoy.get_metrics
               tags:
@@ -1301,6 +1411,7 @@ zabbix_export:
               name: 'Envoy Proxy: Listener ["{#LISTENER_ADDRESS}"]: Sockets, undergoing'
               type: DEPENDENT
               key: 'envoy.listener.downstream_pre_cx_active["{#LISTENER_ADDRESS}"]'
+              delay: '0'
               history: 7d
               description: 'Sockets currently undergoing listener filter processing.'
               preprocessing:

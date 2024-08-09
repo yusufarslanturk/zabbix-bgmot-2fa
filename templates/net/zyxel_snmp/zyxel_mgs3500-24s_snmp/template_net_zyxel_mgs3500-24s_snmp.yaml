@@ -66,6 +66,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             The textual identification of the contact person
@@ -113,6 +114,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'MIB: ZYXEL-ES-COMMON'
           inventory_link: SOFTWARE_FULL
           preprocessing:
@@ -150,6 +152,8 @@ zabbix_export:
             network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -166,6 +170,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             The physical location of this node (e.g.,
@@ -186,6 +191,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: IF-MIB
             The interface's address at the protocol layer
@@ -233,6 +239,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             A textual description of the entity.  This value
@@ -266,6 +273,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             An administratively-assigned name for this
@@ -308,6 +316,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: ZYXEL-ES-COMMON
             Serial number
@@ -431,6 +440,7 @@ zabbix_export:
               key: 'zyxel.3500_24s.net.if.descr[{#SNMPINDEX}]'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: IF-MIB
                 A textual string containing information about the interface
@@ -483,6 +493,8 @@ zabbix_export:
                 address at this sub-layer.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -505,6 +517,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -528,6 +542,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -549,6 +565,8 @@ zabbix_export:
                 or broadcast address at this sub-layer
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -610,6 +628,7 @@ zabbix_export:
               key: 'zyxel.3500_24s.net.if.name[{#SNMPINDEX}]'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-PORT-MIB
                 Descriptive name that identifies this port.
@@ -682,6 +701,8 @@ zabbix_export:
                 were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -705,6 +726,8 @@ zabbix_export:
                 includes both Group and Functional addresses.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -729,6 +752,8 @@ zabbix_export:
                   parameters:
                     - '8'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -751,6 +776,8 @@ zabbix_export:
                 those that were discarded or not sent.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -1003,6 +1030,7 @@ zabbix_export:
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-TRANSCEIVER-MIB
                 Transceiver module vendor's manufacturing date code.
@@ -1025,6 +1053,7 @@ zabbix_export:
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-TRANSCEIVER-MIB
                 Part number provided by transceiver module vendor.
@@ -1047,6 +1076,7 @@ zabbix_export:
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-TRANSCEIVER-MIB
                 Revision level for part number provided by transceiver module vendor.
@@ -1069,6 +1099,7 @@ zabbix_export:
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-TRANSCEIVER-MIB
                 Serial number provided by transceiver module vendor.
@@ -1125,6 +1156,7 @@ zabbix_export:
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-TRANSCEIVER-MIB
                 Transceiver module type names.
@@ -1147,6 +1179,7 @@ zabbix_export:
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-TRANSCEIVER-MIB
                 Transceiver module vendor name.

@@ -23,8 +23,10 @@ zabbix_export:
           name: 'Dell R720: Firmware version'
           type: DEPENDENT
           key: dell.server.hw.firmware
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'This attribute defines the firmware version of a remote access card.'
           preprocessing:
             - type: JSONPATH
@@ -53,8 +55,10 @@ zabbix_export:
           name: 'Dell R720: Hardware model name'
           type: DEPENDENT
           key: dell.server.hw.model
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'This attribute defines the model name of the system.'
           inventory_link: MODEL
           preprocessing:
@@ -73,8 +77,10 @@ zabbix_export:
           name: 'Dell R720: Hardware serial number'
           type: DEPENDENT
           key: dell.server.hw.serialnumber
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'This attribute defines the service tag of the system.'
           inventory_link: SERIALNO_A
           preprocessing:
@@ -104,8 +110,10 @@ zabbix_export:
           name: 'Dell R720: Overall system health status'
           type: DEPENDENT
           key: dell.server.status
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'This attribute defines the overall rollup status of all components in the system being monitored by the remote access card. Includes system, storage, IO devices, iDRAC, CPU, memory, etc.'
           preprocessing:
             - type: JSONPATH
@@ -147,6 +155,7 @@ zabbix_export:
           key: dell.server.system.get
           history: '0'
           value_type: TEXT
+          trends: '0'
           authtype: BASIC
           username: '{$API.USER}'
           password: '{$API.PASSWORD}'
@@ -294,6 +303,7 @@ zabbix_export:
               key: 'dell.server.hw.diskarray.cache.battery.status[{#BATTERY_NAME}]'
               history: 7d
               value_type: CHAR
+              trends: '0'
               authtype: BASIC
               username: '{$API.USER}'
               password: '{$API.PASSWORD}'
@@ -452,6 +462,7 @@ zabbix_export:
               key: 'dell.server.hw.diskarray.status[{#CNTLR_NAME}{#SLOT}]'
               history: 7d
               value_type: CHAR
+              trends: '0'
               authtype: BASIC
               username: '{$API.USER}'
               password: '{$API.PASSWORD}'
@@ -611,6 +622,7 @@ zabbix_export:
               key: 'dell.server.sensor.fan.get[{#SENSOR_NAME}]'
               history: '0'
               value_type: TEXT
+              trends: '0'
               authtype: BASIC
               username: '{$API.USER}'
               password: '{$API.PASSWORD}'
@@ -625,6 +637,7 @@ zabbix_export:
               name: 'Dell R720: {#SENSOR_NAME} Speed'
               type: DEPENDENT
               key: 'dell.server.sensor.fan.speed[{#SENSOR_NAME}]'
+              delay: '0'
               history: 7d
               units: rpm
               description: 'The sensor value.'
@@ -641,8 +654,10 @@ zabbix_export:
               name: 'Dell R720: {#SENSOR_NAME} Status'
               type: DEPENDENT
               key: 'dell.server.sensor.fan.status[{#SENSOR_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The status of the job. Possible values: OK, Warning, Critical.'
               preprocessing:
                 - type: JSONPATH
@@ -779,6 +794,7 @@ zabbix_export:
               key: 'dell.server.net.if.get[{#IFNAME}]'
               history: '0'
               value_type: TEXT
+              trends: '0'
               authtype: BASIC
               username: '{$API.USER}'
               password: '{$API.PASSWORD}'
@@ -793,8 +809,10 @@ zabbix_export:
               name: 'Dell R720: {#IFNAME} Status'
               type: DEPENDENT
               key: 'dell.server.net.if.health[{#IFNAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The status of the job. Possible values: OK, Warning, Critical.'
               preprocessing:
                 - type: JSONPATH
@@ -834,6 +852,7 @@ zabbix_export:
               name: 'Dell R720: {#IFNAME} Speed'
               type: DEPENDENT
               key: 'dell.server.net.if.speed[{#IFNAME}]'
+              delay: '0'
               history: 7d
               units: '!Mbps'
               description: 'Network port current link speed.'
@@ -853,8 +872,10 @@ zabbix_export:
               name: 'Dell R720: {#IFNAME} State'
               type: DEPENDENT
               key: 'dell.server.net.if.state[{#IFNAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The known state of the Resource, for example, enabled. Possible values: Enabled, Disabled, StandbyOffline, StandbySpare, InTest, Starting, Absent, UnavailableOffline, Deferring, Quiesced, Updating, Qualified.'
               preprocessing:
                 - type: JSONPATH
@@ -872,8 +893,10 @@ zabbix_export:
               name: 'Dell R720: {#IFNAME} Link status'
               type: DEPENDENT
               key: 'dell.server.net.if.status[{#IFNAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The status of the link between this port and its link partner. Possible values: Down, Up, null.'
               preprocessing:
                 - type: JSONPATH
@@ -1027,6 +1050,7 @@ zabbix_export:
               key: 'dell.server.hw.physicaldisk.get[{#DISK_NAME}]'
               history: '0'
               value_type: TEXT
+              trends: '0'
               authtype: BASIC
               username: '{$API.USER}'
               password: '{$API.PASSWORD}'
@@ -1043,8 +1067,10 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} Media type'
               type: DEPENDENT
               key: 'dell.server.hw.physicaldisk.media_type[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The type of media contained in this drive. Possible values: HDD, SSD, SMR, null.'
               preprocessing:
                 - type: JSONPATH
@@ -1064,8 +1090,10 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} Model name'
               type: DEPENDENT
               key: 'dell.server.hw.physicaldisk.model[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The model number of the drive.'
               preprocessing:
                 - type: JSONPATH
@@ -1085,8 +1113,10 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} Serial number'
               type: DEPENDENT
               key: 'dell.server.hw.physicaldisk.serialnumber[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The serial number of this drive.'
               preprocessing:
                 - type: JSONPATH
@@ -1117,6 +1147,7 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} Size'
               type: DEPENDENT
               key: 'dell.server.hw.physicaldisk.size[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               trends: '0'
               units: B
@@ -1139,8 +1170,10 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} Status'
               type: DEPENDENT
               key: 'dell.server.hw.physicaldisk.status[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The status of the job. Possible values: OK, Warning, Critical.'
               preprocessing:
                 - type: JSONPATH
@@ -1299,6 +1332,7 @@ zabbix_export:
               key: 'dell.server.sensor.psu.get[{#SENSOR_NAME}]'
               history: '0'
               value_type: TEXT
+              trends: '0'
               authtype: BASIC
               username: '{$API.USER}'
               password: '{$API.PASSWORD}'
@@ -1313,8 +1347,10 @@ zabbix_export:
               name: 'Dell R720: {#SENSOR_NAME} Status'
               type: DEPENDENT
               key: 'dell.server.sensor.psu.status[{#SENSOR_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The status of the job. Possible values: OK, Warning, Critical.'
               preprocessing:
                 - type: JSONPATH
@@ -1465,6 +1501,7 @@ zabbix_export:
               key: 'dell.server.sensor.temp.get[{#SENSOR_NAME}]'
               history: '0'
               value_type: TEXT
+              trends: '0'
               authtype: BASIC
               username: '{$API.USER}'
               password: '{$API.PASSWORD}'
@@ -1479,8 +1516,10 @@ zabbix_export:
               name: 'Dell R720: {#SENSOR_NAME} Status'
               type: DEPENDENT
               key: 'dell.server.sensor.temp.status[{#SENSOR_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The status of the job. Possible values: OK, Warning, Critical.'
               preprocessing:
                 - type: JSONPATH
@@ -1520,6 +1559,7 @@ zabbix_export:
               name: 'Dell R720: {#SENSOR_NAME} Value'
               type: DEPENDENT
               key: 'dell.server.sensor.temp.value[{#SENSOR_NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: °C
@@ -1648,6 +1688,7 @@ zabbix_export:
               key: 'dell.server.hw.virtualdisk.get[{#DISK_NAME}]'
               history: '0'
               value_type: TEXT
+              trends: '0'
               authtype: BASIC
               username: '{$API.USER}'
               password: '{$API.PASSWORD}'
@@ -1662,8 +1703,10 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} RAID status'
               type: DEPENDENT
               key: 'dell.server.hw.virtualdisk.raidstatus[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'This property represents the RAID specific status. Possible values: Blocked, Degraded, Failed, Foreign, Offline, Online, Ready, Unknown, null.'
               preprocessing:
                 - type: JSONPATH
@@ -1683,8 +1726,10 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} Read policy'
               type: DEPENDENT
               key: 'dell.server.hw.virtualdisk.readpolicy[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Indicates the read cache policy setting for the Volume. Possible values: ReadAhead, AdaptiveReadAhead, Off.'
               preprocessing:
                 - type: JSONPATH
@@ -1704,6 +1749,7 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} Size'
               type: DEPENDENT
               key: 'dell.server.hw.virtualdisk.size[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               trends: '0'
               units: B
@@ -1726,8 +1772,10 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} Current state'
               type: DEPENDENT
               key: 'dell.server.hw.virtualdisk.state[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The known state of the Resource, for example, enabled. Possible values: Enabled, Disabled, StandbyOffline, StandbySpare, InTest, Starting, Absent, UnavailableOffline, Deferring, Quiesced, Updating, Qualified.'
               preprocessing:
                 - type: JSONPATH
@@ -1747,8 +1795,10 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} Status'
               type: DEPENDENT
               key: 'dell.server.hw.virtualdisk.status[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'The status of the job. Possible values: OK, Warning, Critical.'
               preprocessing:
                 - type: JSONPATH
@@ -1790,8 +1840,10 @@ zabbix_export:
               name: 'Dell R720: {#DISK_NAME} Write policy'
               type: DEPENDENT
               key: 'dell.server.hw.virtualdisk.writepolicy[{#DISK_NAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'Indicates the write cache policy setting for the Volume. Possible values: WriteThrough, ProtectedWriteBack, UnprotectedWriteBack.'
               preprocessing:
                 - type: JSONPATH
