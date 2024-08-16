@@ -113,6 +113,7 @@ A......... [ZBX-24481] fixed inability to unset value map from existing item or 
 ........S. [ZBX-25013] fixed exploit to read files using SMS (sboidenko)
 A......... [ZBX-25017] fixed sensitive data exposure from audit log (gcalenko)
 .......PS. [ZBX-25018] removed direct pointer access in custom javascript objects (wiper)
+........S. [ZBX-25016] fixed IP and DNS address validation when user macro is used for interface (vso, wiper)
 
 --------------------------------------------------------------------------------
 Changes for 6.4.15
