@@ -548,112 +548,98 @@ class CDBHelper {
 	/**
 	 * Create problem or resolved events of trigger.
 	 *
-	 * @param array|string $triggers_names    triggers names where problems should be triggered
-	 * @param int          $value 			  TRIGGER_VALUE_FALSE
-	 * @param array        $event_fields      clock, ns or acknowledged parameter with value
-	 *
-	 * @return array
+	 * @param string $trigger_name
+	 * @param int $value TRIGGER_VALUE_FALSE
+	 * @param array $event_fields
 	 */
-	public static function setTriggerProblem($triggers_names, $value = TRIGGER_VALUE_TRUE, $event_fields = []) {
-		if (!is_array($triggers_names)) {
-			$triggers_names = [$triggers_names];
-		}
+	public static function setTriggerProblem($trigger_name, $value = TRIGGER_VALUE_TRUE, $event_fields = []) {
+		$trigger = DB::find('triggers', ['description' => $trigger_name]);
 
-		$eventids = [];
-		foreach ($triggers_names as $trigger_name) {
-			$trigger = DB::find('triggers', ['description' => $trigger_name]);
+		if ($trigger) {
+			$trigger = $trigger[0];
 
-			if ($trigger) {
-				$trigger = $trigger[0];
+			$tags = DB::select('trigger_tag', [
+				'output' => ['tag', 'value'],
+				'filter' => ['triggerid' => $trigger['triggerid']],
+				'preservekeys' => true
+			]);
 
-				$tags = DB::select('trigger_tag', [
-					'output' => ['tag', 'value'],
-					'filter' => ['triggerid' => $trigger['triggerid']],
-					'preservekeys' => true
-				]);
+			$fields = [
+				'source' => EVENT_SOURCE_TRIGGERS,
+				'object' => EVENT_OBJECT_TRIGGER,
+				'objectid' => $trigger['triggerid'],
+				'value' => $value,
+				'name' => $trigger['description'],
+				'severity' => $trigger['priority'],
+				'clock' => CTestArrayHelper::get($event_fields, 'clock', time()),
+				'ns' => CTestArrayHelper::get($event_fields, 'ns', 0),
+				'acknowledged' => CTestArrayHelper::get($event_fields, 'acknowledged', EVENT_NOT_ACKNOWLEDGED)
+			];
 
-				$time = time();
+			$eventid = DB::insert('events', [$fields]);
 
-				$fields = [
-					'source' => EVENT_SOURCE_TRIGGERS,
-					'object' => EVENT_OBJECT_TRIGGER,
-					'objectid' => $trigger['triggerid'],
-					'value' => $value,
-					'name' => $trigger['description'],
-					'severity' => $trigger['priority'],
-					'clock' => CTestArrayHelper::get($event_fields, 'clock', $time),
-					'ns' => CTestArrayHelper::get($event_fields, 'ns', 0),
-					'acknowledged' => CTestArrayHelper::get($event_fields, 'acknowledged', EVENT_NOT_ACKNOWLEDGED)
-				];
+			if ($eventid) {
+				$fields['eventid'] = $eventid[0];
 
-				$eventid = DB::insert('events', [$fields]);
+				if ($value == TRIGGER_VALUE_TRUE) {
+					DB::insert('problem', [$fields], false);
+					DB::update('triggers', [
+						'values' => [
+							'value' => TRIGGER_VALUE_TRUE,
+							'lastchange' => CTestArrayHelper::get($event_fields, 'clock', time())
+						],
+						'where' => ['triggerid' => $trigger['triggerid']]
+					]);
+				}
+				else {
+					$problems = DBfetchArray(DBselect(
+						'SELECT *'.
+						' FROM problem'.
+						' WHERE objectid = '.$trigger['triggerid'].
+							' AND r_eventid IS NULL'
+					));
 
-				if ($eventid) {
-					$fields['eventid'] = $eventid[0];
-
-					if ($value == TRIGGER_VALUE_TRUE) {
-						DB::insert('problem', [$fields], false);
+					if ($problems) {
 						DB::update('triggers', [
 							'values' => [
-								'value' => TRIGGER_VALUE_TRUE,
-								'lastchange' => CTestArrayHelper::get($event_fields, 'clock', $time)
+								'value' => TRIGGER_VALUE_FALSE,
+								'lastchange' => CTestArrayHelper::get($event_fields, 'clock', time())
 							],
 							'where' => ['triggerid' => $trigger['triggerid']]
 						]);
-					} else {
-						$problems = DBfetchArray(DBselect(
-							'SELECT *' .
-							' FROM problem' .
-							' WHERE objectid = ' . $trigger['triggerid'] .
-							' AND r_eventid IS NULL'
-						));
+						DB::update('problem', [
+							'values' => [
+								'r_eventid' => $fields['eventid'],
+								'r_clock' => $fields['clock'],
+								'r_ns' => $fields['ns']
+							],
+							'where' => ['eventid' => array_column($problems, 'eventid')]
+						]);
 
-						if ($problems) {
-							DB::update('triggers', [
-								'values' => [
-									'value' => TRIGGER_VALUE_FALSE,
-									'lastchange' => CTestArrayHelper::get($event_fields, 'clock', $time)
-								],
-								'where' => ['triggerid' => $trigger['triggerid']]
-							]);
-							DB::update('problem', [
-								'values' => [
-									'r_eventid' => $fields['eventid'],
-									'r_clock' => $fields['clock'],
-									'r_ns' => $fields['ns']
-								],
-								'where' => ['eventid' => array_column($problems, 'eventid')]
-							]);
-
-							$recovery = [];
-							foreach ($problems as $problem) {
-								$recovery[] = [
-									'eventid' => $problem['eventid'],
-									'r_eventid' => $fields['eventid']
-								];
-							}
-							DB::insert('event_recovery', $recovery, false);
+						$recovery = [];
+						foreach ($problems as $problem) {
+							$recovery[] = [
+								'eventid' => $problem['eventid'],
+								'r_eventid' => $fields['eventid']
+							];
 						}
+						DB::insert('event_recovery', $recovery, false);
 					}
+				}
 
-					if ($tags) {
-						foreach ($tags as &$tag) {
-							$tag['eventid'] = $fields['eventid'];
-						}
-						unset($tag);
-
-						DB::insertBatch('event_tag', $tags);
-
-						if ($value == TRIGGER_VALUE_TRUE) {
-							DB::insertBatch('problem_tag', $tags);
-						}
+				if ($tags) {
+					foreach ($tags as &$tag) {
+						$tag['eventid'] = $fields['eventid'];
 					}
+					unset($tag);
 
-					$eventids[] = $fields['eventid'];
+					DB::insertBatch('event_tag', $tags);
+
+					if ($value == TRIGGER_VALUE_TRUE) {
+						DB::insertBatch('problem_tag', $tags);
+					}
 				}
 			}
 		}
-
-		return $eventids;
 	}
 }
