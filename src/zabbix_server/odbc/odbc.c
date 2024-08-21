@@ -245,7 +245,8 @@ static void zbx_odbc_connection_pwd_append(char **connection_str, const char *va
 	if ('{' != *value || '}' != value[len-1])
 	{
 		int need_replacement = 0;
-		char *src = (char *)value, *dst;
+		const char	*src = value;
+		char		*dst;
 
 		dst = pwd = (char *)zbx_malloc(NULL, (len + 1) * 2);
 		*dst++ = '{';
@@ -264,19 +265,18 @@ static void zbx_odbc_connection_pwd_append(char **connection_str, const char *va
 					ZBX_FALLTHROUGH;
 				default:
 					*dst++ = *src++;
-
 			}
 		}
+
 		if (0 != need_replacement)
 		{
 			*dst++ = '}';
 			*dst++ = '\0';
 		}
 		else
-		{
 			zbx_free(pwd);
-		}
 	}
+
 	if (0 < (len = strlen(*connection_str)))
 	last = (*connection_str)[len-1];
 
