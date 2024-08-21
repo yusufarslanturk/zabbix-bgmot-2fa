@@ -251,6 +251,7 @@ require_once dirname(__FILE__).'/users/testFormUser.php';
 require_once dirname(__FILE__).'/users/testFormUserMedia.php';
 require_once dirname(__FILE__).'/users/testFormUserPermissions.php';
 require_once dirname(__FILE__).'/users/testFormUserProfile.php';
+require_once dirname(__FILE__).'/users/testAlarmNotification.php';
 require_once dirname(__FILE__).'/users/testPageUsers.php';
 
 // Web scenarios.
@@ -547,6 +548,7 @@ class SeleniumTests {
 		$suite->addTestSuite('testFormUserMedia');
 		$suite->addTestSuite('testFormUserPermissions');
 		$suite->addTestSuite('testFormUserProfile');
+		$suite->addTestSuite('testAlarmNotification');
 		$suite->addTestSuite('testPageUsers');
 
 		// Web scenarios.
