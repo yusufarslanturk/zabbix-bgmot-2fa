@@ -383,6 +383,7 @@ zabbix_export:
           key: 'status.alarms[alarms.0]'
           history: 1h
           value_type: TEXT
+          trends: '0'
           description: |
             MIB: SUNSAVER-MPPT
             Description:Alarms
@@ -540,6 +541,7 @@ zabbix_export:
           key: 'status.array_faults[arrayFaults.0]'
           history: 1h
           value_type: TEXT
+          trends: '0'
           description: |
             MIB: SUNSAVER-MPPT
             Description:Array Faults
@@ -659,6 +661,8 @@ zabbix_export:
           description: 'The amount of time since this host was last initialized. Note that this is different from sysUpTime in the SNMPv2-MIB [RFC1907] because sysUpTime is the uptime of the network management portion of the system.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -674,6 +678,7 @@ zabbix_export:
           key: 'status.load_faults[loadFaults.0]'
           history: 1h
           value_type: TEXT
+          trends: '0'
           description: |
             MIB: SUNSAVER-MPPT
             Description:Array Faults

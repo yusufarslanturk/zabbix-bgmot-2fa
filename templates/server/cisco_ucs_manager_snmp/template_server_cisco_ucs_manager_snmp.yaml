@@ -37,6 +37,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The textual identification of the contact person for this managed
@@ -58,6 +59,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             A textual description of the entity. This value should
@@ -87,6 +89,8 @@ zabbix_export:
             network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -103,6 +107,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The physical location of this node (e.g., `telephone closet,
@@ -123,6 +128,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             An administratively-assigned name for this managed node.By
@@ -175,6 +181,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The vendor's authoritative identification of the network management
@@ -194,8 +201,10 @@ zabbix_export:
           name: 'Cisco UCS Manager: SNMP traps (fallback)'
           type: SNMP_TRAP
           key: snmptrap.fallback
+          delay: '0'
           history: 7d
           value_type: LOG
+          trends: '0'
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
           tags:
@@ -305,6 +314,7 @@ zabbix_export:
               delay: 1d
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: 'MIB: CISCO-UNIFIED-COMPUTING-STORAGE-MIB'
               preprocessing:
                 - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -496,6 +506,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: IF-MIB
                 A textual string containing information about the
@@ -532,6 +543,8 @@ zabbix_export:
                 times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -555,6 +568,8 @@ zabbix_export:
                 and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -574,6 +589,8 @@ zabbix_export:
                 For packet-oriented interfaces, the number of inbound packets that contained errors preventing them from being deliverable to a higher-layer protocol.  For character-oriented or fixed-length interfaces, the number of inbound transmission units that contained errors preventing them from being deliverable to a higher-layer protocol. Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -601,6 +618,8 @@ zabbix_export:
                 times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -621,6 +640,8 @@ zabbix_export:
                 The total number of octets received on the interface, including framing characters. This object is a 64-bit version of ifInOctets. Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -651,6 +672,8 @@ zabbix_export:
                 times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -674,6 +697,8 @@ zabbix_export:
                 and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -693,6 +718,8 @@ zabbix_export:
                 For packet-oriented interfaces, the number of outbound packets that contained errors preventing them from being deliverable to a higher-layer protocol.  For character-oriented or fixed-length interfaces, the number of outbound transmission units that contained errors preventing them from being deliverable to a higher-layer protocol. Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -721,6 +748,8 @@ zabbix_export:
                 times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               tags:
                 - tag: component
                   value: network
@@ -741,6 +770,8 @@ zabbix_export:
                 The total number of octets transmitted out of the interface, including framing characters. This object is a 64-bit version of ifOutOctets.Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
               preprocessing:
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -941,6 +972,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CISCO-UNIFIED-COMPUTING-STORAGE-MIB
                 Cisco UCS storage:LocalDisk:deviceType managed object property. Actually returns 'HDD' or 'SSD'.
@@ -963,6 +995,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CISCO-UNIFIED-COMPUTING-STORAGE-MIB
                 Cisco UCS storage:LocalDisk:model managed object property.
@@ -983,6 +1016,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CISCO-UNIFIED-COMPUTING-STORAGE-MIB
                 Cisco UCS storage:LocalDisk:serial managed object property. Actually returns part number code.
@@ -1420,6 +1454,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CISCO-UNIFIED-COMPUTING-COMPUTE-MIB
                 Cisco UCS compute:RackUnit:model managed object property
@@ -1438,6 +1473,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: CISCO-UNIFIED-COMPUTING-COMPUTE-MIB
                 Cisco UCS compute:RackUnit:serial managed object property

@@ -24,8 +24,10 @@ zabbix_export:
           name: 'AWS ECS Cluster: Get alarms check'
           type: DEPENDENT
           key: aws.ecs.alarms.check
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'Data collection check.'
           preprocessing:
             - type: JSONPATH
@@ -53,6 +55,7 @@ zabbix_export:
           name: 'AWS ECS Cluster: Container Instance Count'
           type: DEPENDENT
           key: aws.ecs.container_instance_count
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: '''The number of EC2 instances running the Amazon ECS agent that are registered with a cluster.'''
@@ -70,6 +73,7 @@ zabbix_export:
           name: 'AWS ECS Cluster: CPU Utilization'
           type: DEPENDENT
           key: aws.ecs.cpu_utilization
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -101,6 +105,7 @@ zabbix_export:
           name: 'AWS ECS Cluster: Ephemeral Storage Utilization'
           type: DEPENDENT
           key: aws.ecs.disk.utilization
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -119,6 +124,7 @@ zabbix_export:
           name: 'AWS ECS Cluster: Ephemeral Storage Reserved'
           type: DEPENDENT
           key: aws.ecs.ephemeral.storage.reserved
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -142,6 +148,7 @@ zabbix_export:
           name: 'AWS ECS Cluster: Ephemeral Storage Utilized'
           type: DEPENDENT
           key: aws.ecs.ephemeral.storage.utilized
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -168,6 +175,7 @@ zabbix_export:
           delay: 0s;m/1
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -392,6 +400,8 @@ zabbix_export:
             DescribeAlarms API method: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -416,6 +426,7 @@ zabbix_export:
           delay: 5m
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -655,6 +666,8 @@ zabbix_export:
             Full metrics list related to ECS: https://docs.aws.amazon.com/AmazonECS/latest/userguide/metrics-dimensions.html
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -679,6 +692,7 @@ zabbix_export:
           delay: 0s;m/1
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -961,6 +975,8 @@ zabbix_export:
             Full metrics list related to ECS: https://docs.aws.amazon.com/AmazonECS/latest/userguide/metrics-dimensions.html
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
           timeout: 15s
           parameters:
             - name: AccessKeyId
@@ -982,6 +998,7 @@ zabbix_export:
           name: 'AWS ECS Cluster: Memory Utilization'
           type: DEPENDENT
           key: aws.ecs.memory_utilization
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -1015,8 +1032,10 @@ zabbix_export:
           name: 'AWS ECS Cluster: Get metrics check'
           type: DEPENDENT
           key: aws.ecs.metrics.check
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'Data collection check.'
           preprocessing:
             - type: JSONPATH
@@ -1044,6 +1063,7 @@ zabbix_export:
           name: 'AWS ECS Cluster: Network rx bytes'
           type: DEPENDENT
           key: aws.ecs.network.rx
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -1064,6 +1084,7 @@ zabbix_export:
           name: 'AWS ECS Cluster: Network tx bytes'
           type: DEPENDENT
           key: aws.ecs.network.tx
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Bps
@@ -1084,6 +1105,7 @@ zabbix_export:
           name: 'AWS ECS Cluster: Service Count'
           type: DEPENDENT
           key: aws.ecs.service_count
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: '''The number of services in the cluster.'''
@@ -1101,6 +1123,7 @@ zabbix_export:
           name: 'AWS ECS Cluster: Task Count'
           type: DEPENDENT
           key: aws.ecs.task_count
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: '''The number of tasks running in the cluster.'''
@@ -1143,8 +1166,10 @@ zabbix_export:
               name: 'AWS ECS Cluster Alarms: [{#ALARM_NAME}]: Get metrics'
               type: DEPENDENT
               key: 'aws.ecs.alarm.get_metrics["{#ALARM_NAME}"]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get alarm metrics about the state and its reason.'
               preprocessing:
                 - type: JSONPATH
@@ -1160,6 +1185,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Alarms: [{#ALARM_NAME}]: State'
               type: DEPENDENT
               key: 'aws.ecs.alarm.state["{#ALARM_NAME}"]'
+              delay: '0'
               history: 7d
               description: |
                 The state value for the alarm. Possible values: 0 (OK), 1 (INSUFFICIENT_DATA), 2 (ALARM).
@@ -1196,8 +1222,10 @@ zabbix_export:
               name: 'AWS ECS Cluster Alarms: [{#ALARM_NAME}]: State reason'
               type: DEPENDENT
               key: 'aws.ecs.alarm.state_reason["{#ALARM_NAME}"]'
+              delay: '0'
               history: 7d
               value_type: TEXT
+              trends: '0'
               description: |
                 An explanation for the alarm state, in text format.
                 Alarm description:
@@ -1271,6 +1299,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: CPU Utilization'
               type: DEPENDENT
               key: 'aws.ecs.services.cpu.utilization["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1310,6 +1339,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: CPU Reserved'
               type: DEPENDENT
               key: 'aws.ecs.services.cpu_reserved["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: |
@@ -1335,6 +1365,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Desired Task'
               type: DEPENDENT
               key: 'aws.ecs.services.desired.task["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The desired number of tasks for an {#AWS.ECS.SERVICE.NAME} service.'
@@ -1357,6 +1388,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Ephemeral storage reserved'
               type: DEPENDENT
               key: 'aws.ecs.services.ephemeral.storage.reserved["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1384,6 +1416,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Ephemeral storage utilized'
               type: DEPENDENT
               key: 'aws.ecs.services.ephemeral.storage.utilized["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1414,6 +1447,7 @@ zabbix_export:
               delay: 0s;m/5
               history: '0'
               value_type: TEXT
+              trends: '0'
               params: |
                 var AWS = {
                 	params: {},
@@ -1689,6 +1723,8 @@ zabbix_export:
                 Full metrics list related to ECS : https://docs.aws.amazon.com/ecs/index.html
               preprocessing:
                 - type: CHECK_NOT_SUPPORTED
+                  parameters:
+                    - ''
               timeout: 15s
               parameters:
                 - name: AccessKeyId
@@ -1716,6 +1752,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Memory utilization'
               type: DEPENDENT
               key: 'aws.ecs.services.memory.utilization["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1755,6 +1792,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Memory reserved'
               type: DEPENDENT
               key: 'aws.ecs.services.memory_reserved["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1782,6 +1820,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Memory utilized'
               type: DEPENDENT
               key: 'aws.ecs.services.memory_utilized["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1809,6 +1848,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Network rx bytes'
               type: DEPENDENT
               key: 'aws.ecs.services.network.rx["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1833,6 +1873,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Network tx bytes'
               type: DEPENDENT
               key: 'aws.ecs.services.network.tx["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Bps
@@ -1857,6 +1898,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Pending Task'
               type: DEPENDENT
               key: 'aws.ecs.services.pending.task["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of tasks currently in the `pending` state.'
@@ -1879,6 +1921,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Running Task'
               type: DEPENDENT
               key: 'aws.ecs.services.running.task["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of tasks currently in the `running` state.'
@@ -1901,6 +1944,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Storage read bytes'
               type: DEPENDENT
               key: 'aws.ecs.services.storage.read.bytes["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1923,6 +1967,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Storage write bytes'
               type: DEPENDENT
               key: 'aws.ecs.services.storage.write.bytes["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1945,6 +1990,7 @@ zabbix_export:
               name: 'AWS ECS Cluster Service: [{#AWS.ECS.SERVICE.NAME}]: Task Set'
               type: DEPENDENT
               key: 'aws.ecs.services.task.set["{#AWS.ECS.SERVICE.NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of task sets in the {#AWS.ECS.SERVICE.NAME} service.'

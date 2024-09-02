@@ -28,6 +28,7 @@ zabbix_export:
           name: 'Asterisk: Active calls'
           type: DEPENDENT
           key: asterisk.active_calls
+          delay: '0'
           history: 7d
           description: 'The number of active calls at the moment.'
           preprocessing:
@@ -43,6 +44,7 @@ zabbix_export:
           name: 'Asterisk: Active channels'
           type: DEPENDENT
           key: asterisk.active_channels
+          delay: '0'
           history: 7d
           description: 'The number of active channels at the moment.'
           preprocessing:
@@ -58,6 +60,7 @@ zabbix_export:
           name: 'Asterisk: Calls processed'
           type: DEPENDENT
           key: asterisk.calls_processed
+          delay: '0'
           history: 7d
           description: 'The number of calls processed after the last service restart.'
           preprocessing:
@@ -73,6 +76,7 @@ zabbix_export:
           name: 'Asterisk: Calls processed per second'
           type: DEPENDENT
           key: asterisk.calls_processed.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of calls processed per second.'
@@ -81,6 +85,8 @@ zabbix_export:
               parameters:
                 - $.calls_processed
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: asterisk.get_stats
           tags:
@@ -92,6 +98,7 @@ zabbix_export:
           key: asterisk.get_stats
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Asterisk system information in JSON format.'
           preprocessing:
             - type: JAVASCRIPT
@@ -422,6 +429,7 @@ zabbix_export:
           name: 'Asterisk: IAX trunks active channels'
           type: DEPENDENT
           key: asterisk.iax.active_channels
+          delay: '0'
           history: 7d
           description: 'The total number of IAX trunks active channels.'
           preprocessing:
@@ -447,6 +455,7 @@ zabbix_export:
           name: 'Asterisk: IAX offline peers'
           type: DEPENDENT
           key: asterisk.iax.offline
+          delay: '0'
           history: 7d
           description: 'The number of offline IAX peers.'
           preprocessing:
@@ -462,6 +471,7 @@ zabbix_export:
           name: 'Asterisk: IAX online peers'
           type: DEPENDENT
           key: asterisk.iax.online
+          delay: '0'
           history: 7d
           description: 'The number of online IAX peers.'
           preprocessing:
@@ -477,6 +487,7 @@ zabbix_export:
           name: 'Asterisk: IAX peers'
           type: DEPENDENT
           key: asterisk.iax.total
+          delay: '0'
           history: 7d
           description: 'The total number of IAX peers.'
           preprocessing:
@@ -492,6 +503,7 @@ zabbix_export:
           name: 'Asterisk: IAX unmonitored peers'
           type: DEPENDENT
           key: asterisk.iax.unmonitored
+          delay: '0'
           history: 7d
           description: 'The number of unmonitored IAX peers.'
           preprocessing:
@@ -507,6 +519,7 @@ zabbix_export:
           name: 'Asterisk: PJSIP trunks active channels'
           type: DEPENDENT
           key: asterisk.pjsip.active_channels
+          delay: '0'
           history: 7d
           description: 'The total number of PJSIP trunks active channels.'
           preprocessing:
@@ -532,6 +545,7 @@ zabbix_export:
           name: 'Asterisk: PJSIP available endpoints'
           type: DEPENDENT
           key: asterisk.pjsip.available
+          delay: '0'
           history: 7d
           description: 'The number of available PJSIP peers.'
           preprocessing:
@@ -547,6 +561,7 @@ zabbix_export:
           name: 'Asterisk: PJSIP endpoints'
           type: DEPENDENT
           key: asterisk.pjsip.total
+          delay: '0'
           history: 7d
           description: 'The total number of PJSIP peers.'
           preprocessing:
@@ -562,6 +577,7 @@ zabbix_export:
           name: 'Asterisk: PJSIP unavailable endpoints'
           type: DEPENDENT
           key: asterisk.pjsip.unavailable
+          delay: '0'
           history: 7d
           description: 'The number of unavailable PJSIP peers.'
           preprocessing:
@@ -577,6 +593,7 @@ zabbix_export:
           name: 'Asterisk: SIP trunks active channels'
           type: DEPENDENT
           key: asterisk.sip.active_channels
+          delay: '0'
           history: 7d
           description: 'The total number of SIP trunks active channels.'
           preprocessing:
@@ -602,6 +619,7 @@ zabbix_export:
           name: 'Asterisk: SIP monitored offline'
           type: DEPENDENT
           key: asterisk.sip.monitored_offline
+          delay: '0'
           history: 7d
           description: 'The number of monitored offline SIP peers.'
           preprocessing:
@@ -617,6 +635,7 @@ zabbix_export:
           name: 'Asterisk: SIP monitored online'
           type: DEPENDENT
           key: asterisk.sip.monitored_online
+          delay: '0'
           history: 7d
           description: 'The number of monitored online SIP peers.'
           preprocessing:
@@ -632,6 +651,7 @@ zabbix_export:
           name: 'Asterisk: SIP peers'
           type: DEPENDENT
           key: asterisk.sip.total
+          delay: '0'
           history: 7d
           description: 'The total number of SIP peers.'
           preprocessing:
@@ -647,6 +667,7 @@ zabbix_export:
           name: 'Asterisk: SIP unmonitored offline'
           type: DEPENDENT
           key: asterisk.sip.unmonitored_offline
+          delay: '0'
           history: 7d
           description: 'The number of unmonitored offline SIP peers.'
           preprocessing:
@@ -662,6 +683,7 @@ zabbix_export:
           name: 'Asterisk: SIP unmonitored online'
           type: DEPENDENT
           key: asterisk.sip.unmonitored_online
+          delay: '0'
           history: 7d
           description: 'The number of unmonitored online SIP peers.'
           preprocessing:
@@ -677,6 +699,7 @@ zabbix_export:
           name: 'Asterisk: Total queues'
           type: DEPENDENT
           key: asterisk.total_queues
+          delay: '0'
           history: 7d
           description: 'The number of configured queues.'
           preprocessing:
@@ -692,6 +715,7 @@ zabbix_export:
           name: 'Asterisk: Uptime'
           type: DEPENDENT
           key: asterisk.uptime
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: uptime
@@ -733,6 +757,7 @@ zabbix_export:
           name: 'Asterisk: Uptime after reload'
           type: DEPENDENT
           key: asterisk.uptime_reload
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: uptime
@@ -761,8 +786,10 @@ zabbix_export:
           name: 'Asterisk: Version'
           type: DEPENDENT
           key: asterisk.version
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'Service version'
           preprocessing:
             - type: JSONPATH
@@ -845,6 +872,7 @@ zabbix_export:
               name: 'IAX trunk "{#OBJECTNAME}": Active channels'
               type: DEPENDENT
               key: 'asterisk.iax.trunk.active_channels[{#OBJECTNAME}]'
+              delay: '0'
               history: 7d
               description: 'The total number of active IAX trunk channels.'
               preprocessing:
@@ -872,8 +900,10 @@ zabbix_export:
               name: 'IAX trunk "{#OBJECTNAME}": Get IAX trunk'
               type: DEPENDENT
               key: 'asterisk.iax.trunk.get[{#OBJECTNAME}]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for an IAX trunk.'
               preprocessing:
                 - type: JSONPATH
@@ -890,8 +920,10 @@ zabbix_export:
               name: 'IAX trunk "{#OBJECTNAME}": Status'
               type: DEPENDENT
               key: 'asterisk.iax.trunk.status[{#OBJECTNAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 IAX trunk status. Here are the possible states that a device state may have:
                 Unmonitored
@@ -943,6 +975,7 @@ zabbix_export:
               name: 'PJSIP trunk "{#OBJECTNAME}": Active channels'
               type: DEPENDENT
               key: 'asterisk.pjsip.trunk.active_channels[{#OBJECTNAME}]'
+              delay: '0'
               history: 7d
               description: 'The total number of active PJSIP trunk channels.'
               preprocessing:
@@ -970,8 +1003,10 @@ zabbix_export:
               name: 'PJSIP trunk "{#OBJECTNAME}": Device state'
               type: DEPENDENT
               key: 'asterisk.pjsip.trunk.devicestate[{#OBJECTNAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 PJSIP trunk status. Here are the possible states that a device state may have:
                 Unavailable
@@ -1004,8 +1039,10 @@ zabbix_export:
               name: 'PJSIP trunk "{#OBJECTNAME}": Get PJSIP trunk'
               type: DEPENDENT
               key: 'asterisk.pjsip.trunk.get[{#OBJECTNAME}]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for a PJSIP trunk.'
               preprocessing:
                 - type: JSONPATH
@@ -1040,6 +1077,7 @@ zabbix_export:
               name: '"{#QUEUE}": Available'
               type: DEPENDENT
               key: 'asterisk.queue.available[{#QUEUE}]'
+              delay: '0'
               history: 7d
               description: 'The number of available queue members.'
               preprocessing:
@@ -1057,6 +1095,7 @@ zabbix_export:
               name: '"{#QUEUE}": Callers'
               type: DEPENDENT
               key: 'asterisk.queue.callers[{#QUEUE}]'
+              delay: '0'
               history: 7d
               description: 'The number incoming calls in queue.'
               preprocessing:
@@ -1084,8 +1123,10 @@ zabbix_export:
               name: '"{#QUEUE}": Get queue'
               type: DEPENDENT
               key: 'asterisk.queue.get[{#QUEUE}]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for a queue.'
               preprocessing:
                 - type: JSONPATH
@@ -1102,6 +1143,7 @@ zabbix_export:
               name: '"{#QUEUE}": Logged in'
               type: DEPENDENT
               key: 'asterisk.queue.loggedin[{#QUEUE}]'
+              delay: '0'
               history: 7d
               description: 'The number of queue members.'
               preprocessing:
@@ -1137,6 +1179,7 @@ zabbix_export:
               name: 'SIP trunk "{#OBJECTNAME}": Active channels'
               type: DEPENDENT
               key: 'asterisk.sip.trunk.active_channels[{#OBJECTNAME}]'
+              delay: '0'
               history: 7d
               description: 'The total number of active SIP trunk channels.'
               preprocessing:
@@ -1164,8 +1207,10 @@ zabbix_export:
               name: 'SIP trunk "{#OBJECTNAME}": Get SIP trunk'
               type: DEPENDENT
               key: 'asterisk.sip.trunk.get[{#OBJECTNAME}]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for a SIP trunk.'
               preprocessing:
                 - type: JSONPATH
@@ -1182,8 +1227,10 @@ zabbix_export:
               name: 'SIP trunk "{#OBJECTNAME}": Status'
               type: DEPENDENT
               key: 'asterisk.sip.trunk.status[{#OBJECTNAME}]'
+              delay: '0'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 SIP trunk status. Here are the possible states that a device state may have:
                 Unmonitored

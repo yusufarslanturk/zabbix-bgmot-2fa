@@ -372,7 +372,7 @@ class CElementQuery implements IWaitable {
 				else {
 					$elements = $this->context->findElements($this->by);
 					if (!$elements) {
-						throw new NoSuchElementException('');
+						throw new NoSuchElementException('No such element.');
 					}
 
 					$element = end($elements);
@@ -549,6 +549,17 @@ class CElementQuery implements IWaitable {
 
 		return function () use ($target) {
 			return $target->one(false)->isSelected();
+		};
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getCountCondition($count) {
+		$target = $this;
+
+		return function () use ($target, $count) {
+			return $target->count() === $count;
 		};
 	}
 

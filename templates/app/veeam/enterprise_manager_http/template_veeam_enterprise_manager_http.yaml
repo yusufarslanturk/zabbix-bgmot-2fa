@@ -35,6 +35,7 @@ zabbix_export:
           name: 'Veeam Manager: Failed Job Runs'
           type: DEPENDENT
           key: veeam.manager.failed.jobs
+          delay: '0'
           history: 7d
           description: 'Informs about the failed job runs.'
           preprocessing:
@@ -64,8 +65,10 @@ zabbix_export:
           name: 'Veeam Manager: Get errors'
           type: DEPENDENT
           key: veeam.manager.get.errors
+          delay: '0'
           history: 7d
           value_type: TEXT
+          trends: '0'
           description: 'The errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -97,6 +100,7 @@ zabbix_export:
           delay: 5m
           history: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var Veeam = {
             	params: {},
@@ -185,6 +189,7 @@ zabbix_export:
           name: 'Veeam Manager: Running Jobs'
           type: DEPENDENT
           key: veeam.manager.running.jobs
+          delay: '0'
           history: 7d
           description: 'Informs about the running jobs.'
           preprocessing:
@@ -204,6 +209,7 @@ zabbix_export:
           name: 'Veeam Manager: Scheduled Backup Jobs'
           type: DEPENDENT
           key: veeam.manager.scheduled.backup.jobs
+          delay: '0'
           history: 7d
           description: 'Informs about the scheduled backup jobs.'
           preprocessing:
@@ -223,6 +229,7 @@ zabbix_export:
           name: 'Veeam Manager: Scheduled Jobs'
           type: DEPENDENT
           key: veeam.manager.scheduled.jobs
+          delay: '0'
           history: 7d
           description: 'Informs about the scheduled jobs.'
           preprocessing:
@@ -242,6 +249,7 @@ zabbix_export:
           name: 'Veeam Manager: Scheduled Replica Jobs'
           type: DEPENDENT
           key: veeam.manager.scheduled.replica.jobs
+          delay: '0'
           history: 7d
           description: 'Informs about the scheduled replica jobs.'
           preprocessing:
@@ -261,6 +269,7 @@ zabbix_export:
           name: 'Veeam Manager: Total Job Runs'
           type: DEPENDENT
           key: veeam.manager.scheduled.total.jobs
+          delay: '0'
           history: 7d
           description: 'Informs about the total job runs.'
           preprocessing:
@@ -280,6 +289,7 @@ zabbix_export:
           name: 'Veeam Manager: Warnings Job Runs'
           type: DEPENDENT
           key: veeam.manager.warning.jobs
+          delay: '0'
           history: 7d
           description: 'Informs about the warning job runs.'
           preprocessing:
@@ -334,6 +344,7 @@ zabbix_export:
               name: 'Veeam Manager: Compression ratio [{#NAME}]'
               type: DEPENDENT
               key: 'veeam.backup.compress.ratio[{#NAME}]'
+              delay: '0'
               history: 7d
               description: 'Gets the data compression ratio with the name `[{#NAME}]`.'
               preprocessing:
@@ -352,6 +363,7 @@ zabbix_export:
               name: 'Veeam Manager: Data Size [{#NAME}]'
               type: DEPENDENT
               key: 'veeam.backup.data.size[{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -372,6 +384,7 @@ zabbix_export:
               name: 'Veeam Manager: Deduplication Ratio [{#NAME}]'
               type: DEPENDENT
               key: 'veeam.backup.deduplication.ratio[{#NAME}]'
+              delay: '0'
               history: 7d
               description: 'Gets the data deduplication ratio with the name `[{#NAME}]`.'
               preprocessing:
@@ -390,6 +403,7 @@ zabbix_export:
               name: 'Veeam Manager: Backup Size [{#NAME}]'
               type: DEPENDENT
               key: 'veeam.backup.file.size[{#NAME}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B

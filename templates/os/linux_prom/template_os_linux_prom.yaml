@@ -45,8 +45,10 @@ zabbix_export:
           name: 'Linux: Version of node_exporter running'
           type: DEPENDENT
           key: 'agent.version[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: PROMETHEUS_PATTERN
               parameters:
@@ -65,6 +67,7 @@ zabbix_export:
           name: 'Linux: Number of open file descriptors'
           type: DEPENDENT
           key: 'fd.open[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           preprocessing:
@@ -82,6 +85,7 @@ zabbix_export:
           name: 'Linux: Maximum number of open file descriptors'
           type: DEPENDENT
           key: 'kernel.maxfiles[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'May be increased by using `sysctl` utility or modifying the file `/etc/sysctl.conf`.'
@@ -117,6 +121,7 @@ zabbix_export:
           key: node_exporter.get
           history: 1h
           value_type: TEXT
+          trends: '0'
           url: 'http://{$NODE_EXPORTER_HOST}:{$NODE_EXPORTER_PORT}/metrics'
           tags:
             - tag: component
@@ -136,6 +141,7 @@ zabbix_export:
           name: 'Linux: System boot time'
           type: DEPENDENT
           key: 'system.boottime[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: unixtime
@@ -154,6 +160,7 @@ zabbix_export:
           name: 'Linux: CPU guest time'
           type: DEPENDENT
           key: 'system.cpu.guest[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -170,6 +177,8 @@ zabbix_export:
                   	return acc + parseFloat(obj['value'])
                   },0)/valueArr.length;
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -182,6 +191,7 @@ zabbix_export:
           name: 'Linux: CPU guest nice time'
           type: DEPENDENT
           key: 'system.cpu.guest_nice[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -198,6 +208,8 @@ zabbix_export:
                   	return acc + parseFloat(obj['value'])
                   },0)/valueArr.length;
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -210,6 +222,7 @@ zabbix_export:
           name: 'Linux: CPU idle time'
           type: DEPENDENT
           key: 'system.cpu.idle[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -226,6 +239,8 @@ zabbix_export:
                   	return acc + parseFloat(obj['value'])
                   },0)/valueArr.length;
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -238,6 +253,7 @@ zabbix_export:
           name: 'Linux: CPU interrupt time'
           type: DEPENDENT
           key: 'system.cpu.interrupt[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -254,6 +270,8 @@ zabbix_export:
                   	return acc + parseFloat(obj['value'])
                   },0)/valueArr.length;
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -266,6 +284,7 @@ zabbix_export:
           name: 'Linux: Interrupts per second'
           type: DEPENDENT
           key: 'system.cpu.intr[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of interrupts processed.'
@@ -276,6 +295,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: node_exporter.get
           tags:
@@ -285,6 +306,7 @@ zabbix_export:
           name: 'Linux: CPU iowait time'
           type: DEPENDENT
           key: 'system.cpu.iowait[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -301,6 +323,8 @@ zabbix_export:
                   	return acc + parseFloat(obj['value'])
                   },0)/valueArr.length;
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -313,6 +337,7 @@ zabbix_export:
           name: 'Linux: Load average (1m avg)'
           type: DEPENDENT
           key: 'system.cpu.load.avg1[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Calculated as the system CPU load divided by the number of CPU cores.'
@@ -331,6 +356,7 @@ zabbix_export:
           name: 'Linux: Load average (5m avg)'
           type: DEPENDENT
           key: 'system.cpu.load.avg5[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Calculated as the system CPU load divided by the number of CPU cores.'
@@ -349,6 +375,7 @@ zabbix_export:
           name: 'Linux: Load average (15m avg)'
           type: DEPENDENT
           key: 'system.cpu.load.avg15[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Calculated as the system CPU load divided by the number of CPU cores.'
@@ -367,6 +394,7 @@ zabbix_export:
           name: 'Linux: CPU nice time'
           type: DEPENDENT
           key: 'system.cpu.nice[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -383,6 +411,8 @@ zabbix_export:
                   	return acc + parseFloat(obj['value'])
                   },0)/valueArr.length;
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -395,6 +425,7 @@ zabbix_export:
           name: 'Linux: Number of CPUs'
           type: DEPENDENT
           key: 'system.cpu.num[node_exporter]'
+          delay: '0'
           history: 7d
           preprocessing:
             - type: PROMETHEUS_TO_JSON
@@ -412,6 +443,7 @@ zabbix_export:
           name: 'Linux: CPU softirq time'
           type: DEPENDENT
           key: 'system.cpu.softirq[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -428,6 +460,8 @@ zabbix_export:
                   	return acc + parseFloat(obj['value'])
                   },0)/valueArr.length;
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -440,6 +474,7 @@ zabbix_export:
           name: 'Linux: CPU steal time'
           type: DEPENDENT
           key: 'system.cpu.steal[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -456,6 +491,8 @@ zabbix_export:
                   	return acc + parseFloat(obj['value'])
                   },0)/valueArr.length;
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -468,6 +505,7 @@ zabbix_export:
           name: 'Linux: Context switches per second'
           type: DEPENDENT
           key: 'system.cpu.switches[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The combined rate at which all processors on the computer are switched from one thread to another.'
@@ -478,6 +516,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: node_exporter.get
           tags:
@@ -487,6 +527,7 @@ zabbix_export:
           name: 'Linux: CPU system time'
           type: DEPENDENT
           key: 'system.cpu.system[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -503,6 +544,8 @@ zabbix_export:
                   	return acc + parseFloat(obj['value'])
                   },0)/valueArr.length;
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -515,6 +558,7 @@ zabbix_export:
           name: 'Linux: CPU user time'
           type: DEPENDENT
           key: 'system.cpu.user[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -531,6 +575,8 @@ zabbix_export:
                   	return acc + parseFloat(obj['value'])
                   },0)/valueArr.length;
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -543,6 +589,7 @@ zabbix_export:
           name: 'Linux: CPU utilization'
           type: DEPENDENT
           key: 'system.cpu.util[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -577,8 +624,10 @@ zabbix_export:
           name: 'Linux: System description'
           type: DEPENDENT
           key: 'system.descr[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'Labeled system information as provided by the uname system call.'
           preprocessing:
             - type: PROMETHEUS_TO_JSON
@@ -601,6 +650,7 @@ zabbix_export:
           name: 'Linux: System local time'
           type: DEPENDENT
           key: 'system.localtime[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: unixtime
@@ -635,8 +685,10 @@ zabbix_export:
           name: 'Linux: System name'
           type: DEPENDENT
           key: 'system.name[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'The host name of the system.'
           inventory_link: NAME
           preprocessing:
@@ -670,8 +722,10 @@ zabbix_export:
           name: 'Linux: Operating system architecture'
           type: DEPENDENT
           key: 'system.sw.arch[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: PROMETHEUS_PATTERN
               parameters:
@@ -690,8 +744,10 @@ zabbix_export:
           name: 'Linux: Operating system'
           type: DEPENDENT
           key: 'system.sw.os[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           inventory_link: OS
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -719,6 +775,7 @@ zabbix_export:
           name: 'Linux: Free swap space'
           type: DEPENDENT
           key: 'system.swap.free[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -754,6 +811,7 @@ zabbix_export:
           name: 'Linux: Total swap space'
           type: DEPENDENT
           key: 'system.swap.total[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -775,6 +833,7 @@ zabbix_export:
           name: 'Linux: System uptime'
           type: DEPENDENT
           key: 'system.uptime[node_exporter]'
+          delay: '0'
           history: 7d
           trends: '0'
           units: uptime
@@ -808,6 +867,7 @@ zabbix_export:
           name: 'Linux: Available memory'
           type: DEPENDENT
           key: 'vm.memory.available[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -832,6 +892,7 @@ zabbix_export:
           name: 'Linux: Total memory'
           type: DEPENDENT
           key: 'vm.memory.total[node_exporter]'
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -910,6 +971,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets discarded'
               type: DEPENDENT
               key: 'net.if.in.discards[node_exporter,"{#IFNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               preprocessing:
@@ -919,6 +981,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: node_exporter.get
               tags:
@@ -932,6 +996,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets with errors'
               type: DEPENDENT
               key: 'net.if.in.errors[node_exporter,"{#IFNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               preprocessing:
@@ -941,6 +1006,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: node_exporter.get
               tags:
@@ -954,6 +1021,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits received'
               type: DEPENDENT
               key: 'net.if.in[node_exporter,"{#IFNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: bps
@@ -964,6 +1032,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -980,6 +1050,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets discarded'
               type: DEPENDENT
               key: 'net.if.out.discards[node_exporter,"{#IFNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               preprocessing:
@@ -989,6 +1060,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: node_exporter.get
               tags:
@@ -1002,6 +1075,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets with errors'
               type: DEPENDENT
               key: 'net.if.out.errors[node_exporter"{#IFNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               preprocessing:
@@ -1011,6 +1085,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: node_exporter.get
               tags:
@@ -1024,6 +1100,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Bits sent'
               type: DEPENDENT
               key: 'net.if.out[node_exporter,"{#IFNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: bps
@@ -1034,6 +1111,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '8'
@@ -1050,6 +1129,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Speed'
               type: DEPENDENT
               key: 'net.if.speed[node_exporter,"{#IFNAME}"]'
+              delay: '0'
               history: 7d
               trends: '0'
               units: bps
@@ -1078,6 +1158,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Operational status'
               type: DEPENDENT
               key: 'net.if.status[node_exporter,"{#IFNAME}"]'
+              delay: '0'
               history: 7d
               trends: '0'
               description: 'Reference: https://www.kernel.org/doc/Documentation/networking/operstates.txt'
@@ -1150,6 +1231,7 @@ zabbix_export:
               name: 'Interface {#IFNAME}({#IFALIAS}): Interface type'
               type: DEPENDENT
               key: 'net.if.type[node_exporter,"{#IFNAME}"]'
+              delay: '0'
               history: 7d
               trends: '0'
               description: 'node_network_protocol_type protocol_type value of /sys/class/net/<iface>.'
@@ -1343,6 +1425,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk average queue size (avgqu-sz)'
               type: DEPENDENT
               key: 'vfs.dev.queue_size[node_exporter,"{#DEVNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The current average disk queue; the number of requests outstanding on the disk while the performance data is being collected.'
@@ -1353,6 +1436,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: node_exporter.get
               tags:
@@ -1378,6 +1463,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk read rate'
               type: DEPENDENT
               key: 'vfs.dev.read.rate[node_exporter,"{#DEVNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!r/s'
@@ -1389,6 +1475,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: node_exporter.get
               tags:
@@ -1400,6 +1488,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk read time (rate)'
               type: DEPENDENT
               key: 'vfs.dev.read.time.rate[node_exporter,"{#DEVNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Rate of total read time counter. Used in `r_await` calculation.'
@@ -1410,6 +1499,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: node_exporter.get
               tags:
@@ -1421,6 +1512,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk utilization'
               type: DEPENDENT
               key: 'vfs.dev.util[node_exporter,"{#DEVNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1432,6 +1524,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
                 - type: MULTIPLIER
                   parameters:
                     - '100'
@@ -1460,6 +1554,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk write rate'
               type: DEPENDENT
               key: 'vfs.dev.write.rate[node_exporter,"{#DEVNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '!w/s'
@@ -1471,6 +1566,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: node_exporter.get
               tags:
@@ -1482,6 +1579,7 @@ zabbix_export:
               name: '{#DEVNAME}: Disk write time (rate)'
               type: DEPENDENT
               key: 'vfs.dev.write.time.rate[node_exporter,"{#DEVNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Rate of total write time counter. Used in `w_await` calculation.'
@@ -1492,6 +1590,8 @@ zabbix_export:
                     - value
                     - ''
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: node_exporter.get
               tags:
@@ -1597,6 +1697,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Space: Available'
               type: DEPENDENT
               key: 'vfs.fs.free[node_exporter,"{#FSNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1620,6 +1721,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Inodes: Free, in %'
               type: DEPENDENT
               key: 'vfs.fs.inode.pfree[node_exporter,"{#FSNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1684,6 +1786,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Space: Used, in %'
               type: DEPENDENT
               key: 'vfs.fs.pused[node_exporter,"{#FSNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -1762,6 +1865,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Space: Total'
               type: DEPENDENT
               key: 'vfs.fs.total[node_exporter,"{#FSNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1785,6 +1889,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Space: Used'
               type: DEPENDENT
               key: 'vfs.fs.used[node_exporter,"{#FSNAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: B
@@ -1823,6 +1928,7 @@ zabbix_export:
               name: 'FS [{#FSNAME}]: Filesystem is read-only'
               type: DEPENDENT
               key: 'vfs.fs.[node_exporter,"{#FSNAME}"]'
+              delay: '0'
               history: 7d
               description: 'The filesystem is mounted as read-only. It is available only for Zabbix agents 6.4 and higher.'
               preprocessing:
@@ -1932,7 +2038,8 @@ zabbix_export:
                     value: ^(btrfs|zfs)$
                     formulaid: A
               operations:
-                - operator: LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: LIKE
                   value: Inodes
                   discover: NO_DISCOVER
       tags:

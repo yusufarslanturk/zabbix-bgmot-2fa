@@ -26,6 +26,7 @@ zabbix_export:
           name: 'Kubernetes API: Request terminations, rate'
           type: DEPENDENT
           key: kubernetes.api.apiserver_request_terminations
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of requests which apiserver terminated in self-defense per second.'
@@ -37,6 +38,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -46,6 +49,7 @@ zabbix_export:
           name: 'Kubernetes API: API server requests: 0'
           type: DEPENDENT
           key: kubernetes.api.apiserver_request_total_0.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Counter of apiserver requests broken out for each HTTP response code.'
@@ -57,6 +61,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -68,6 +74,7 @@ zabbix_export:
           name: 'Kubernetes API: API server requests: 2xx, rate'
           type: DEPENDENT
           key: kubernetes.api.apiserver_request_total_200.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Counter of apiserver requests broken out for each HTTP response code.'
@@ -79,6 +86,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -90,6 +99,7 @@ zabbix_export:
           name: 'Kubernetes API: API server requests: 3xx, rate'
           type: DEPENDENT
           key: kubernetes.api.apiserver_request_total_300.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Counter of apiserver requests broken out for each HTTP response code.'
@@ -101,6 +111,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -112,6 +124,7 @@ zabbix_export:
           name: 'Kubernetes API: API server requests: 4xx, rate'
           type: DEPENDENT
           key: kubernetes.api.apiserver_request_total_400.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Counter of apiserver requests broken out for each HTTP response code.'
@@ -123,6 +136,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -134,6 +149,7 @@ zabbix_export:
           name: 'Kubernetes API: API server requests: 5xx, rate'
           type: DEPENDENT
           key: kubernetes.api.apiserver_request_total_500.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Counter of apiserver requests broken out for each HTTP response code.'
@@ -145,6 +161,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -166,6 +184,7 @@ zabbix_export:
           name: 'Kubernetes API: TLS handshake errors, rate'
           type: DEPENDENT
           key: kubernetes.api.apiserver_tls_handshake_errors_total.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of requests dropped with ''TLS handshake error from'' error per second.'
@@ -185,6 +204,7 @@ zabbix_export:
           name: 'Kubernetes API: Audit events, total'
           type: DEPENDENT
           key: kubernetes.api.audit_event_total
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Accumulated number audit events generated and sent to the audit backend.'
@@ -204,6 +224,7 @@ zabbix_export:
           name: 'Kubernetes API: CPU'
           type: DEPENDENT
           key: kubernetes.api.cpu.util
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -215,6 +236,8 @@ zabbix_export:
                 - value
                 - ''
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -229,9 +252,12 @@ zabbix_export:
           key: kubernetes.api.get_metrics
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get raw metrics from API instance /metrics endpoint.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
           timeout: 15s
           url: '{$KUBE.API.SERVER.URL}'
           headers:
@@ -244,6 +270,7 @@ zabbix_export:
           name: 'Kubernetes API: Goroutines'
           type: DEPENDENT
           key: kubernetes.api.go_goroutines
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of goroutines that currently exist.'
@@ -263,6 +290,7 @@ zabbix_export:
           name: 'Kubernetes API: Go threads'
           type: DEPENDENT
           key: kubernetes.api.go_threads
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of OS threads created.'
@@ -282,6 +310,7 @@ zabbix_export:
           name: 'Kubernetes API: gRPCs messages received, rate'
           type: DEPENDENT
           key: kubernetes.api.grpc_client_msg_received.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of gRPC stream messages received per second.'
@@ -293,6 +322,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -302,6 +333,7 @@ zabbix_export:
           name: 'Kubernetes API: gRPCs messages sent, rate'
           type: DEPENDENT
           key: kubernetes.api.grpc_client_msg_sent.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of gRPC stream messages sent per second.'
@@ -313,6 +345,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -322,6 +356,7 @@ zabbix_export:
           name: 'Kubernetes API: gRPCs client started, rate'
           type: DEPENDENT
           key: kubernetes.api.grpc_client_started.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Total number of RPCs started per second.'
@@ -333,6 +368,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -342,6 +379,7 @@ zabbix_export:
           name: 'Kubernetes API: Fds max'
           type: DEPENDENT
           key: kubernetes.api.max_fds
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Maximum allowed open file descriptors.'
@@ -361,6 +399,7 @@ zabbix_export:
           name: 'Kubernetes API: Fds open'
           type: DEPENDENT
           key: kubernetes.api.open_fds
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of open file descriptors.'
@@ -380,6 +419,7 @@ zabbix_export:
           name: 'Kubernetes API: Resident memory, bytes'
           type: DEPENDENT
           key: kubernetes.api.process_resident_memory_bytes
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -400,6 +440,7 @@ zabbix_export:
           name: 'Kubernetes API: Virtual memory, bytes'
           type: DEPENDENT
           key: kubernetes.api.process_virtual_memory_bytes
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -420,6 +461,7 @@ zabbix_export:
           name: 'Kubernetes API: HTTP requests: 2xx, rate'
           type: DEPENDENT
           key: kubernetes.api.rest_client_requests_total_200.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of HTTP requests with 2xx status code per second.'
@@ -431,6 +473,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -442,6 +486,7 @@ zabbix_export:
           name: 'Kubernetes API: HTTP requests: 3xx, rate'
           type: DEPENDENT
           key: kubernetes.api.rest_client_requests_total_300.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of HTTP requests with 3xx status code per second.'
@@ -453,6 +498,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -464,6 +511,7 @@ zabbix_export:
           name: 'Kubernetes API: HTTP requests: 4xx, rate'
           type: DEPENDENT
           key: kubernetes.api.rest_client_requests_total_400.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of HTTP requests with 4xx status code per second.'
@@ -475,6 +523,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -486,6 +536,7 @@ zabbix_export:
           name: 'Kubernetes API: HTTP requests: 5xx, rate'
           type: DEPENDENT
           key: kubernetes.api.rest_client_requests_total_500.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of HTTP requests with 5xx status code per second.'
@@ -497,6 +548,8 @@ zabbix_export:
                 - sum
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: kubernetes.api.get_metrics
           tags:
@@ -526,6 +579,7 @@ zabbix_export:
               name: 'Kubernetes API: Watchers: {#KIND}'
               type: DEPENDENT
               key: 'kubernetes.api.apiserver_registered_watchers["{#KIND}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Number of currently registered watchers for a given resource.'
@@ -577,6 +631,7 @@ zabbix_export:
               name: 'Kubernetes API: Authenticated requests: {#NAME}, rate'
               type: DEPENDENT
               key: 'kubernetes.api.authenticated_user_requests.rate["{#NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Counter of authenticated requests broken out by username per second.'
@@ -588,6 +643,8 @@ zabbix_export:
                     - ''
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: kubernetes.api.get_metrics
               tags:
@@ -629,6 +686,7 @@ zabbix_export:
               name: 'Kubernetes API: Authentication attempts: {#RESULT}, rate'
               type: DEPENDENT
               key: 'kubernetes.api.authentication_attempts.rate["{#RESULT}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Authentication attempts by result per second.'
@@ -640,6 +698,8 @@ zabbix_export:
                     - sum
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: kubernetes.api.get_metrics
               tags:
@@ -715,6 +775,7 @@ zabbix_export:
               name: 'Kubernetes API: Certificate expiration seconds bucket, {#LE}'
               type: DEPENDENT
               key: 'kubernetes.api.client_certificate_expiration_seconds_bucket[{#LE}]'
+              delay: '0'
               history: 1h
               value_type: FLOAT
               trends: '0'
@@ -773,7 +834,8 @@ zabbix_export:
                     value: buckets
                     formulaid: A
               operations:
-                - operator: LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: LIKE
                   value: bucket
                   discover: DISCOVER
             - name: 'total item'
@@ -784,7 +846,8 @@ zabbix_export:
                     value: totals
                     formulaid: A
               operations:
-                - operator: NOT_LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: NOT_LIKE
                   value: bucket
                   discover: DISCOVER
         - uuid: 8dcd7c95a9364efdb2fe64c651360ad4
@@ -798,6 +861,7 @@ zabbix_export:
               name: 'Kubernetes API: etcd objects: {#RESOURCE}'
               type: DEPENDENT
               key: 'kubernetes.api.etcd_object_counts["{#RESOURCE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Number of stored objects at the time of last check split by kind.'
@@ -849,6 +913,7 @@ zabbix_export:
               name: 'Kubernetes API: gRPCs completed: {#GRPC_CODE}, rate'
               type: DEPENDENT
               key: 'kubernetes.api.grpc_client_handled_total.rate["{#GRPC_CODE}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total number of RPCs completed by the client regardless of success or failure per second.'
@@ -860,6 +925,8 @@ zabbix_export:
                     - sum
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: kubernetes.api.get_metrics
               tags:
@@ -901,6 +968,7 @@ zabbix_export:
               name: 'Kubernetes API: Requests current: {#KIND}'
               type: DEPENDENT
               key: 'kubernetes.api.current_inflight_requests["{#KIND}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Maximal number of currently used inflight request limit of this apiserver per request kind in last second.'
@@ -952,6 +1020,7 @@ zabbix_export:
               name: 'Kubernetes API: Long-running ["{#VERB}"] requests ["{#RESOURCE}"]: {#SCOPE}'
               type: DEPENDENT
               key: 'kubernetes.api.longrunning_gauge["{#RESOURCE}","{#SCOPE}","{#VERB}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Gauge of all active long-running apiserver requests broken out by verb, resource and scope. Not all requests are tracked this way.'
@@ -1012,6 +1081,7 @@ zabbix_export:
               name: 'Kubernetes API: ["{#VERB}"] Requests bucket: {#LE}'
               type: DEPENDENT
               key: 'kubernetes.api.request_duration_seconds_bucket[{#LE},"{#VERB}"]'
+              delay: '0'
               history: 1h
               value_type: FLOAT
               trends: '0'
@@ -1168,7 +1238,8 @@ zabbix_export:
                     value: buckets
                     formulaid: A
               operations:
-                - operator: LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: LIKE
                   value: bucket
                   discover: DISCOVER
             - name: 'total item'
@@ -1179,7 +1250,8 @@ zabbix_export:
                     value: totals
                     formulaid: A
               operations:
-                - operator: NOT_LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: NOT_LIKE
                   value: bucket
                   discover: DISCOVER
         - uuid: d015cafd6e9f4707bb78125ff17cc679
@@ -1193,6 +1265,7 @@ zabbix_export:
               name: 'Kubernetes API: ["{#NAME}"] Workqueue adds total, rate'
               type: DEPENDENT
               key: 'kubernetes.api.workqueue_adds_total.rate["{#NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Total number of adds handled by workqueue per second.'
@@ -1204,6 +1277,8 @@ zabbix_export:
                     - ''
                   error_handler: DISCARD_VALUE
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: kubernetes.api.get_metrics
               tags:
@@ -1215,6 +1290,7 @@ zabbix_export:
               name: 'Kubernetes API: ["{#NAME}"] Workqueue depth'
               type: DEPENDENT
               key: 'kubernetes.api.workqueue_depth["{#NAME}"]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'Current depth of workqueue.'

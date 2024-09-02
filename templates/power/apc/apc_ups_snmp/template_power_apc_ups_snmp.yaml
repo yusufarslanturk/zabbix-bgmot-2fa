@@ -83,6 +83,7 @@ zabbix_export:
           delay: 1h
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: PowerNet-MIB
             The date when the UPS system's batteries were last replaced
@@ -528,8 +529,10 @@ zabbix_export:
           name: 'APC UPS: SNMP traps (fallback)'
           type: SNMP_TRAP
           key: snmptrap.fallback
+          delay: '0'
           history: 7d
           value_type: LOG
+          trends: '0'
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
           tags:
@@ -543,6 +546,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The textual identification of the contact person for this managed
@@ -564,6 +568,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             A textual description of the entity. This value should
@@ -590,6 +595,8 @@ zabbix_export:
             The amount of time since this host was last initialized. Note that this is different from sysUpTime in the SNMPv2-MIB [RFC1907] because sysUpTime is the uptime of the network management portion of the system.
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '0'
             - type: MULTIPLIER
@@ -606,6 +613,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The physical location of this node (e.g., `telephone closet, 3rd floor').  If the location is unknown, the value is the zero-length string.
@@ -625,6 +633,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: PowerNet-MIB
             The UPS model name (e.g. 'APC Smart-UPS 600').
@@ -643,6 +652,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             An administratively-assigned name for this managed node.By
@@ -696,6 +706,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The vendor's authoritative identification of the network management
@@ -719,6 +730,7 @@ zabbix_export:
           delay: 15m
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: PowerNet-MIB
             An 8-character string identifying the serial number of
@@ -814,6 +826,7 @@ zabbix_export:
               delay: 1h
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: PowerNet-MIB
                 The battery cartridge estimated battery replace date.
@@ -833,6 +846,7 @@ zabbix_export:
               key: 'battery.pack.cartridge_health[upsHighPrecBatteryPackCartridgeHealth.{#BATTERY_PACK}.{#CARTRIDGE_INDEX}]'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: PowerNet-MIB
                 The battery cartridge health.
@@ -877,6 +891,7 @@ zabbix_export:
               key: 'battery.pack.status[upsHighPrecBatteryPackCartridgeStatus.{#BATTERY_PACK}.{#CARTRIDGE_INDEX}]'
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: PowerNet-MIB
                 The battery cartridge status.
@@ -964,6 +979,7 @@ zabbix_export:
               delay: 15m
               history: 7d
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: PowerNet-MIB
                 The battery pack serial number.
@@ -1083,7 +1099,8 @@ zabbix_export:
                     value: Temp
                     formulaid: A
               operations:
-                - operator: LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: LIKE
                   value: Humidity
                   discover: NO_DISCOVER
         - uuid: 06a853147fe646659d066fff34f67faa
@@ -1195,7 +1212,8 @@ zabbix_export:
                     value: Temp
                     formulaid: A
               operations:
-                - operator: LIKE
+                - operationobject: ITEM_PROTOTYPE
+                  operator: LIKE
                   value: Humidity
                   discover: NO_DISCOVER
         - uuid: 16e8b3b4d38040a7961b1de4c18a4ea9

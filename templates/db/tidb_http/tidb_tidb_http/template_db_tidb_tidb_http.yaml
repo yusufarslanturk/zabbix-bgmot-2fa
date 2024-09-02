@@ -27,6 +27,7 @@ zabbix_export:
           name: 'TiDB: CPU'
           type: DEPENDENT
           key: tidb.cpu.util
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: '%'
@@ -36,6 +37,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.name=="process_cpu_seconds_total")].value.first()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
             - type: MULTIPLIER
               parameters:
                 - '100'
@@ -48,6 +51,7 @@ zabbix_export:
           name: 'TiDB: DDL waiting jobs'
           type: DEPENDENT
           key: tidb.ddl_waiting_jobs
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of TiDB operations that resolve locks per second. When TiDB''s read or write request encounters a lock, it tries to resolve the lock.'
@@ -75,6 +79,7 @@ zabbix_export:
           name: 'TiDB: Load schema failed, rate'
           type: DEPENDENT
           key: tidb.domain_load_schema.failed.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The total number of failures to reload the latest schema information in TiDB per second.'
@@ -84,6 +89,8 @@ zabbix_export:
                 - '$[?(@.name=="tidb_domain_load_schema_total && @.labels.type == "failed"")].value.first()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -102,6 +109,7 @@ zabbix_export:
           name: 'TiDB: Load schema total, rate'
           type: DEPENDENT
           key: tidb.domain_load_schema.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The statistics of the schemas that TiDB obtains from TiKV per second.'
@@ -110,6 +118,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.name=="tidb_domain_load_schema_total")].value.sum()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -119,6 +129,7 @@ zabbix_export:
           name: 'TiDB: Failed Query, rate'
           type: DEPENDENT
           key: tidb.execute_error.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of error occurred when executing SQL statements per second (such as syntax errors and primary key conflicts).'
@@ -128,6 +139,8 @@ zabbix_export:
                 - '$[?(@.name=="tidb_server_execute_error_total")].value.sum()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -139,9 +152,12 @@ zabbix_export:
           key: tidb.get_metrics
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get TiDB instance metrics.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
             - type: PROMETHEUS_TO_JSON
               parameters:
                 - ''
@@ -155,9 +171,12 @@ zabbix_export:
           key: tidb.get_status
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get TiDB instance status info.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
               error_handler: CUSTOM_VALUE
               error_handler_params: '{"status": "0"}'
           url: '{$TIDB.URL}:{$TIDB.PORT}/status'
@@ -170,6 +189,7 @@ zabbix_export:
           name: 'TiDB: Goroutine count'
           type: DEPENDENT
           key: tidb.goroutines
+          delay: '0'
           history: 7d
           description: 'The number of Goroutines on TiDB instance.'
           preprocessing:
@@ -185,6 +205,7 @@ zabbix_export:
           name: 'TiDB: Heap memory usage'
           type: DEPENDENT
           key: tidb.heap_bytes
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -211,6 +232,7 @@ zabbix_export:
           name: 'TiDB: Keep alive, rate'
           type: DEPENDENT
           key: tidb.monitor_keep_alive.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Ops
@@ -221,6 +243,8 @@ zabbix_export:
                 - '$[?(@.name=="tidb_monitor_keep_alive_total")].value.first()'
               error_handler: DISCARD_VALUE
             - type: SIMPLE_CHANGE
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -240,6 +264,7 @@ zabbix_export:
           name: 'TiDB: Time jump back, rate'
           type: DEPENDENT
           key: tidb.monitor_time_jump_back.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Ops
@@ -249,6 +274,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.name=="tidb_monitor_time_jump_back_total")].value.first()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -267,6 +294,7 @@ zabbix_export:
           name: 'TiDB: PD TSO commands, rate'
           type: DEPENDENT
           key: tidb.pd_tso_cmd.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Ops
@@ -276,6 +304,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.name=="pd_client_cmd_handle_cmds_duration_seconds_count" && @.labels.type == "tso")].value.first()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -285,6 +315,7 @@ zabbix_export:
           name: 'TiDB: PD TSO requests, rate'
           type: DEPENDENT
           key: tidb.pd_tso_request.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Ops
@@ -294,6 +325,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.name=="pd_client_request_handle_requests_duration_seconds_count" && @.labels.type == "tso")].value.first()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -303,6 +336,7 @@ zabbix_export:
           name: 'TiDB: Open file descriptors, max'
           type: DEPENDENT
           key: tidb.process_max_fds
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Maximum number of open file descriptors.'
@@ -319,6 +353,7 @@ zabbix_export:
           name: 'TiDB: Open file descriptors'
           type: DEPENDENT
           key: tidb.process_open_fds
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'Number of open file descriptors.'
@@ -335,6 +370,7 @@ zabbix_export:
           name: 'TiDB: RSS memory usage'
           type: DEPENDENT
           key: tidb.rss_bytes
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: B
@@ -352,6 +388,7 @@ zabbix_export:
           name: 'TiDB: Total "error" server query, rate'
           type: DEPENDENT
           key: tidb.server_query.error.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Qps
@@ -361,6 +398,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.labels.result == "Error")].value.sum()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.server_query.get_metrics
           tags:
@@ -370,8 +409,10 @@ zabbix_export:
           name: 'TiDB: Get total server query metrics'
           type: DEPENDENT
           key: tidb.server_query.get_metrics
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get information about server queries.'
           preprocessing:
             - type: JSONPATH
@@ -387,6 +428,7 @@ zabbix_export:
           name: 'TiDB: Total "ok" server query, rate'
           type: DEPENDENT
           key: tidb.server_query.ok.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Qps
@@ -396,6 +438,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.labels.result == "OK")].value.sum()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.server_query.get_metrics
           tags:
@@ -405,6 +449,7 @@ zabbix_export:
           name: 'TiDB: Total server query, rate'
           type: DEPENDENT
           key: tidb.server_query.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Qps
@@ -414,6 +459,8 @@ zabbix_export:
               parameters:
                 - $..value.sum()
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.server_query.get_metrics
           tags:
@@ -423,6 +470,7 @@ zabbix_export:
           name: 'TiDB: Schema lease "change" errors, rate'
           type: DEPENDENT
           key: tidb.session_schema_lease_error.change.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -434,6 +482,8 @@ zabbix_export:
                 - '$[?(@.name=="tidb_session_schema_lease_error_total && @.labels.type == "change"")].value.first()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -443,6 +493,7 @@ zabbix_export:
           name: 'TiDB: Schema lease "outdate" errors , rate'
           type: DEPENDENT
           key: tidb.session_schema_lease_error.outdate.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: |
@@ -454,6 +505,8 @@ zabbix_export:
                 - '$[?(@.name=="tidb_session_schema_lease_error_total && @.labels.type == "outdate"")].value.first()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -473,8 +526,10 @@ zabbix_export:
           name: 'TiDB: Get SQL statements metrics'
           type: DEPENDENT
           key: tidb.statement_total.get_metrics
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get SQL statements metrics.'
           preprocessing:
             - type: JSONPATH
@@ -490,6 +545,7 @@ zabbix_export:
           name: 'TiDB: SQL statements, rate'
           type: DEPENDENT
           key: tidb.statement_total.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The total number of SQL statements executed per second.'
@@ -498,6 +554,8 @@ zabbix_export:
               parameters:
                 - $..value.sum()
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.statement_total.get_metrics
           tags:
@@ -507,8 +565,10 @@ zabbix_export:
           name: 'TiDB: Status'
           type: DEPENDENT
           key: tidb.status
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'Status of PD instance.'
           valuemap:
             name: 'Service state'
@@ -538,6 +598,7 @@ zabbix_export:
           name: 'TiDB: Server connections'
           type: DEPENDENT
           key: tidb.tidb_server_connections
+          delay: '0'
           history: 7d
           description: 'The connection number of current TiDB instance.'
           preprocessing:
@@ -553,6 +614,7 @@ zabbix_export:
           name: 'TiDB: Server critical error, rate'
           type: DEPENDENT
           key: tidb.tidb_server_critical_error_total.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of critical errors occurred in TiDB per second.'
@@ -561,6 +623,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.name=="tidb_server_critical_error_total")].value.first()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -570,6 +634,7 @@ zabbix_export:
           name: 'TiDB: Server panic, rate'
           type: DEPENDENT
           key: tidb.tidb_server_panic_total.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           description: 'The number of panics occurred in TiDB per second.'
@@ -579,6 +644,8 @@ zabbix_export:
                 - '$[?(@.name=="tidb_server_panic_total")].value.first()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.get_metrics
           tags:
@@ -597,8 +664,10 @@ zabbix_export:
           name: 'TiDB: Get TiKV client metrics'
           type: DEPENDENT
           key: tidb.tikvclient.get_metrics
+          delay: '0'
           history: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get TiKV client metrics.'
           preprocessing:
             - type: JSONPATH
@@ -614,6 +683,7 @@ zabbix_export:
           name: 'TiDB: KV backoff, rate'
           type: DEPENDENT
           key: tidb.tikvclient_backoff.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Ops
@@ -624,6 +694,8 @@ zabbix_export:
                 - '$[?(@.name=="tidb_tikvclient_backoff_total")].value.sum()'
               error_handler: DISCARD_VALUE
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.tikvclient.get_metrics
           tags:
@@ -633,6 +705,7 @@ zabbix_export:
           name: 'TiDB: Lock resolves, rate'
           type: DEPENDENT
           key: tidb.tikvclient_lock_resolver_action.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Ops
@@ -642,6 +715,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.name=="tidb_tikvclient_lock_resolver_actions_total")].value.sum()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.tikvclient.get_metrics
           tags:
@@ -651,6 +726,7 @@ zabbix_export:
           name: 'TiDB: TiClient region errors, rate'
           type: DEPENDENT
           key: tidb.tikvclient_region_err.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Ops
@@ -660,6 +736,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.name=="tidb_tikvclient_region_err_total")].value.sum()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.tikvclient.get_metrics
           tags:
@@ -678,6 +756,7 @@ zabbix_export:
           name: 'TiDB: KV commands, rate'
           type: DEPENDENT
           key: tidb.tikvclient_txn.rate
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: Ops
@@ -687,6 +766,8 @@ zabbix_export:
               parameters:
                 - '$[?(@.name=="tidb_tikvclient_txn_cmd_duration_seconds_count")].value.sum()'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           master_item:
             key: tidb.tikvclient.get_metrics
           tags:
@@ -696,6 +777,7 @@ zabbix_export:
           name: 'TiDB: Uptime'
           type: DEPENDENT
           key: tidb.uptime
+          delay: '0'
           history: 7d
           value_type: FLOAT
           units: uptime
@@ -727,8 +809,10 @@ zabbix_export:
           name: 'TiDB: Version'
           type: DEPENDENT
           key: tidb.version
+          delay: '0'
           history: 7d
           value_type: CHAR
+          trends: '0'
           description: 'Version of the TiDB instance.'
           preprocessing:
             - type: JSONPATH
@@ -765,6 +849,7 @@ zabbix_export:
               name: 'TiDB: KV Commands: {#TYPE}, rate'
               type: DEPENDENT
               key: 'tidb.tikvclient_txn.rate[{#TYPE}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Ops
@@ -774,6 +859,8 @@ zabbix_export:
                   parameters:
                     - '$[?(@.name=="tidb_tikvclient_txn_cmd_duration_seconds_count" && @.labels.type == "{#TYPE}")].value.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: tidb.tikvclient.get_metrics
               tags:
@@ -810,8 +897,10 @@ zabbix_export:
               name: 'TiDB: Get QPS metrics: {#TYPE}'
               type: DEPENDENT
               key: 'tidb.qps.get_metrics[{#TYPE}]'
+              delay: '0'
               history: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get QPS metrics of {#TYPE}.'
               preprocessing:
                 - type: JSONPATH
@@ -829,6 +918,7 @@ zabbix_export:
               name: 'TiDB: Server query "Error": {#TYPE}, rate'
               type: DEPENDENT
               key: 'tidb.server_query.error.rate[{#TYPE}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Qps
@@ -838,6 +928,8 @@ zabbix_export:
                   parameters:
                     - '$[?(@.labels.result == "Error")].value.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'tidb.qps.get_metrics[{#TYPE}]'
               tags:
@@ -849,6 +941,7 @@ zabbix_export:
               name: 'TiDB: Server query "OK": {#TYPE}, rate'
               type: DEPENDENT
               key: 'tidb.server_query.ok.rate[{#TYPE}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Qps
@@ -858,6 +951,8 @@ zabbix_export:
                   parameters:
                     - '$[?(@.labels.result == "OK")].value.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: 'tidb.qps.get_metrics[{#TYPE}]'
               tags:
@@ -897,6 +992,7 @@ zabbix_export:
               name: 'TiDB: SQL statements: {#TYPE}, rate'
               type: DEPENDENT
               key: 'tidb.statement.rate[{#TYPE}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               description: 'The number of SQL statements executed per second.'
@@ -905,6 +1001,8 @@ zabbix_export:
                   parameters:
                     - '$[?(@.labels.type == "{#TYPE}")].value.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: tidb.statement_total.get_metrics
               tags:
@@ -938,6 +1036,7 @@ zabbix_export:
               name: 'TiDB: KV backoff: {#TYPE}, rate'
               type: DEPENDENT
               key: 'tidb.tikvclient_backoff.rate[{#TYPE}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Ops
@@ -947,6 +1046,8 @@ zabbix_export:
                   parameters:
                     - '$[?(@.name=="tidb_tikvclient_backoff_total" && @.labels.type == "{#TYPE}")].value.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: tidb.tikvclient.get_metrics
               tags:
@@ -984,6 +1085,7 @@ zabbix_export:
               name: 'TiDB: GC action result: {#TYPE}, rate'
               type: DEPENDENT
               key: 'tidb.tikvclient_gc_action.rate[{#TYPE}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Ops
@@ -993,6 +1095,8 @@ zabbix_export:
                   parameters:
                     - '$[?(@.name=="tidb_tikvclient_gc_action_result" && @.labels.type == "{#TYPE}")].value.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: tidb.tikvclient.get_metrics
               tags:
@@ -1054,6 +1158,7 @@ zabbix_export:
               name: 'TiDB: Lock resolves: {#TYPE}, rate'
               type: DEPENDENT
               key: 'tidb.tikvclient_lock_resolver_action.rate[{#TYPE}]'
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: Ops
@@ -1063,6 +1168,8 @@ zabbix_export:
                   parameters:
                     - '$[?(@.name=="tidb_tikvclient_lock_resolver_actions_total" && @.labels.type == "{#TYPE}")].value.first()'
                 - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
               master_item:
                 key: tidb.tikvclient.get_metrics
               tags:

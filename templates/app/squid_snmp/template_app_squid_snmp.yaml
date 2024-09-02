@@ -160,6 +160,8 @@ zabbix_export:
           description: 'Number of external dns server replies'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: dns
@@ -175,6 +177,8 @@ zabbix_export:
           description: 'Number of external dns server requests'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: dns
@@ -222,6 +226,8 @@ zabbix_export:
           description: 'Number of FQDN Cache hits'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: dns
@@ -237,6 +243,8 @@ zabbix_export:
           description: 'Number of FQDN Cache misses'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: dns
@@ -252,6 +260,8 @@ zabbix_export:
           description: 'Number of FQDN Cache requests'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: dns
@@ -299,6 +309,8 @@ zabbix_export:
           description: 'Number of HTTP Errors sent to clients'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: errors
@@ -350,6 +362,8 @@ zabbix_export:
           description: 'Number of HTTP Hits sent to clients from cache'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: hits
@@ -369,6 +383,8 @@ zabbix_export:
               parameters:
                 - '1024'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: http
@@ -424,6 +440,8 @@ zabbix_export:
               parameters:
                 - '1024'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: http
@@ -443,6 +461,8 @@ zabbix_export:
               parameters:
                 - '1024'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: icp
@@ -462,6 +482,8 @@ zabbix_export:
               parameters:
                 - '1024'
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: icp
@@ -477,6 +499,8 @@ zabbix_export:
           description: 'Number of ICP messages received'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: icp
@@ -490,6 +514,8 @@ zabbix_export:
           description: 'Number of ICP messages sent'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: icp
@@ -575,6 +601,8 @@ zabbix_export:
           description: 'Number of IP Cache hits'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: hits
@@ -590,6 +618,8 @@ zabbix_export:
           description: 'Number of IP Cache misses'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: ip
@@ -605,6 +635,8 @@ zabbix_export:
           description: 'Number of IP Cache requests'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: ip
@@ -679,6 +711,8 @@ zabbix_export:
           description: 'Number of HTTP requests received'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: http
@@ -812,6 +846,8 @@ zabbix_export:
           description: 'Page faults with physical I/O'
           preprocessing:
             - type: CHANGE_PER_SECOND
+              parameters:
+                - ''
           tags:
             - tag: component
               value: faults
@@ -849,6 +885,7 @@ zabbix_export:
           key: 'squid[cacheVersionId]'
           history: 7d
           value_type: TEXT
+          trends: '0'
           description: 'Cache Software Version'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
