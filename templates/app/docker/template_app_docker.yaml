@@ -25,8 +25,8 @@ zabbix_export:
           key: docker.architecture
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -45,8 +45,8 @@ zabbix_export:
           key: docker.cgroup_driver
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -63,8 +63,8 @@ zabbix_export:
           name: 'Docker: Get containers'
           key: docker.containers
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           tags:
             - tag: component
               value: raw
@@ -250,8 +250,8 @@ zabbix_export:
           name: 'Docker: Get data_usage'
           key: docker.data_usage
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           tags:
             - tag: component
               value: raw
@@ -284,8 +284,8 @@ zabbix_export:
           key: docker.default_runtime
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -304,8 +304,8 @@ zabbix_export:
           key: docker.driver
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             Docker storage driver.
             https://docs.docker.com/storage/storagedriver/
@@ -341,8 +341,8 @@ zabbix_export:
           name: 'Docker: Get images'
           key: docker.images
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           tags:
             - tag: component
               value: raw
@@ -400,8 +400,8 @@ zabbix_export:
           name: 'Docker: Get info'
           key: docker.info
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           tags:
             - tag: component
               value: raw
@@ -480,8 +480,8 @@ zabbix_export:
           key: docker.kernel_version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -539,8 +539,8 @@ zabbix_export:
           key: docker.logging_driver
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -598,8 +598,8 @@ zabbix_export:
           key: docker.name
           delay: '0'
           history: 1h
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -698,8 +698,8 @@ zabbix_export:
           key: docker.operating_system
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -718,8 +718,8 @@ zabbix_export:
           key: docker.os_type
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -783,8 +783,8 @@ zabbix_export:
           key: docker.root_dir
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -803,8 +803,8 @@ zabbix_export:
           key: docker.server_version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -949,8 +949,8 @@ zabbix_export:
               key: 'docker.container_info.image["{#NAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               preprocessing:
                 - type: JSONPATH
                   parameters:
@@ -1036,8 +1036,8 @@ zabbix_export:
               key: 'docker.container_info.state.error["{#NAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               preprocessing:
                 - type: JSONPATH
                   parameters:
@@ -1261,8 +1261,8 @@ zabbix_export:
               key: 'docker.container_info.state.status["{#NAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               preprocessing:
                 - type: JSONPATH
                   parameters:
@@ -1281,8 +1281,8 @@ zabbix_export:
               name: 'Container {#NAME}: Get info'
               key: 'docker.container_info["{#NAME}",full]'
               history: '0'
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Return low-level information about a container.'
               tags:
                 - tag: component
@@ -1571,8 +1571,8 @@ zabbix_export:
               name: 'Container {#NAME}: Get stats'
               key: 'docker.container_stats["{#NAME}"]'
               history: '0'
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Get container stats based on resource usage.'
               tags:
                 - tag: component

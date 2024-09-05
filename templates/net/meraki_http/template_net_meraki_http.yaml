@@ -31,8 +31,8 @@ zabbix_export:
           key: meraki.get.data
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value);
             
@@ -139,8 +139,8 @@ zabbix_export:
           key: meraki.get.data.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering all the data item errors.'
           preprocessing:
             - type: JSONPATH
@@ -332,8 +332,8 @@ zabbix_export:
           key: meraki.device.get.status
           delay: '{$MERAKI.GET.STATUS.INTERVAL}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering device status from Meraki API.'
           preprocessing:
             - type: JSONPATH
@@ -356,8 +356,8 @@ zabbix_export:
           key: meraki.device.public.ip
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             Device public IP
             Network: {$NETWORK.ID}
@@ -419,8 +419,8 @@ zabbix_export:
           key: meraki.get.device
           delay: '{$MERAKI.UPLINK.LL.TIMESPAN}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value);
             
@@ -536,8 +536,8 @@ zabbix_export:
           key: meraki.get.device.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering errors of the device item.'
           preprocessing:
             - type: JSONPATH
@@ -815,8 +815,8 @@ zabbix_export:
           key: meraki.get.adaptive.policy
           delay: 20m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for adaptive policy aggregate statistics for the organization.'
           timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/adaptivePolicy/overview'
@@ -835,8 +835,8 @@ zabbix_export:
           key: meraki.get.admins
           delay: 12h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get list of the dashboard administrators in this organization.'
           timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/admins'
@@ -855,8 +855,8 @@ zabbix_export:
           key: meraki.get.configuration.changes
           delay: '{$MERAKI.CONFIG.CHANGE.TIMESPAN}'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for viewing the change log for your organization. Gathering once per 20m by default.'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -887,8 +887,8 @@ zabbix_export:
           key: meraki.get.licenses
           delay: 12h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Return overview of the license state for the organization.'
           timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/licenses/overview'
@@ -907,8 +907,8 @@ zabbix_export:
           key: meraki.get.list.licenses
           delay: 12h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value);
             
@@ -1033,8 +1033,8 @@ zabbix_export:
           key: meraki.get.login.security
           delay: 12h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Return the login security settings for the organization.'
           timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/loginSecurity'
@@ -1053,8 +1053,8 @@ zabbix_export:
           key: meraki.get.networks
           delay: 3m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value);
             
@@ -1175,8 +1175,8 @@ zabbix_export:
           key: meraki.get.networks.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering all the networks item errors.'
           preprocessing:
             - type: JSONPATH
@@ -1231,8 +1231,8 @@ zabbix_export:
           key: meraki.get.saml.roles
           delay: 12h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get list of the SAML roles for this organization.'
           timeout: '{$MERAKI.DATA.TIMEOUT}'
           url: 'https://{$MERAKI.API.URL}/organizations/{$ID}/samlRoles'
@@ -1251,8 +1251,8 @@ zabbix_export:
           key: meraki.get.vpn.stats
           delay: '{$MERAKI.VPN.STATS.TIMESPAN}'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var params = JSON.parse(value);
             
@@ -1397,8 +1397,8 @@ zabbix_export:
           key: meraki.get.vpn.stats.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Item for gathering all the VPN item errors.'
           preprocessing:
             - type: JSONPATH
@@ -1788,8 +1788,8 @@ zabbix_export:
               key: 'meraki.admin.account.auth.method[{#ADMIN.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Admin''s authentication method.'
               preprocessing:
                 - type: JSONPATH
@@ -1808,8 +1808,8 @@ zabbix_export:
               key: 'meraki.admin.account.org.access[{#ADMIN.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Admin''s level of access to the organization.'
               preprocessing:
                 - type: JSONPATH
@@ -1828,8 +1828,8 @@ zabbix_export:
               key: 'meraki.admin.account.status[{#ADMIN.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Status of the admin''s account.'
               preprocessing:
                 - type: JSONPATH
@@ -1871,8 +1871,8 @@ zabbix_export:
               key: 'meraki.admin.get[{#ADMIN.ID}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for admin in this organization.'
               preprocessing:
                 - type: JSONPATH
@@ -1950,8 +1950,8 @@ zabbix_export:
               key: 'meraki.license.device.name[{#LICENSE.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Name of the device the license is assigned to.'
               preprocessing:
                 - type: JSONPATH
@@ -1970,8 +1970,8 @@ zabbix_export:
               key: 'meraki.license.device.serial[{#LICENSE.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Serial number of the device the license is assigned to.'
               preprocessing:
                 - type: JSONPATH
@@ -2015,8 +2015,8 @@ zabbix_export:
               key: 'meraki.license.get[{#LICENSE.ID}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for a license.'
               preprocessing:
                 - type: JSONPATH
@@ -2035,8 +2035,8 @@ zabbix_export:
               key: 'meraki.license.key[{#LICENSE.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'License key.'
               preprocessing:
                 - type: JSONPATH
@@ -2055,8 +2055,8 @@ zabbix_export:
               key: 'meraki.license.state[{#LICENSE.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The state of the license. All queued licenses have a status of ''recently queued''.'
               preprocessing:
                 - type: JSONPATH
@@ -2134,8 +2134,8 @@ zabbix_export:
               key: 'meraki.network.timezone[{#NETWORK.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Timezone of the network.'
               preprocessing:
                 - type: JSONPATH
@@ -2188,8 +2188,8 @@ zabbix_export:
               key: 'meraki.saml.get[{#SAML.ID}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Raw data for SAML roles.'
               preprocessing:
                 - type: JSONPATH
@@ -2206,8 +2206,8 @@ zabbix_export:
               key: 'meraki.saml.org.access[{#SAML.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The privilege of the SAML administrator in the organization.'
               preprocessing:
                 - type: JSONPATH
@@ -2256,8 +2256,8 @@ zabbix_export:
               key: 'meraki.uplink.interface[{#NETWORK.NAME}, {#INTERFACE}, {#UPLINK.ROLE}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Network uplink interface.'
               preprocessing:
                 - type: JSONPATH
@@ -2282,8 +2282,8 @@ zabbix_export:
               key: 'meraki.uplink.public.ip[{#NETWORK.NAME}, {#INTERFACE}, {#UPLINK.ROLE}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Network uplink public IP.'
               preprocessing:
                 - type: JSONPATH
@@ -2633,8 +2633,8 @@ zabbix_export:
               key: 'meraki.vpn.stat.raw[{#NETWORK.ID}, {#SENDER.UPLINK}, {#PEER.NETWORK.ID}, {#RECEIVER.UPLINK}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'VPN connection stats raw.'
               preprocessing:
                 - type: JSONPATH
@@ -2731,8 +2731,8 @@ zabbix_export:
               key: 'meraki.vpn.statuses.device.serial[{#NETWORK.ID}, {#NETWORK.NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'VPN network device serial.'
               preprocessing:
                 - type: JSONPATH
@@ -2749,8 +2749,8 @@ zabbix_export:
               key: 'meraki.vpn.statuses.device.status[{#NETWORK.ID}, {#NETWORK.NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'VPN network device status.'
               preprocessing:
                 - type: JSONPATH
@@ -2767,8 +2767,8 @@ zabbix_export:
               key: 'meraki.vpn.statuses.mode[{#NETWORK.ID}, {#NETWORK.NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'VPN network mode.'
               preprocessing:
                 - type: JSONPATH
@@ -2785,8 +2785,8 @@ zabbix_export:
               key: 'meraki.vpn.statuses.peers.network.id[{#NETWORK.ID}, {#NETWORK.NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'VPN network ID.'
               preprocessing:
                 - type: JSONPATH
@@ -2804,8 +2804,8 @@ zabbix_export:
               key: 'meraki.vpn.statuses.peers.network.name[{#NETWORK.ID}, {#NETWORK.NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'VPN network name Meraki VPN peers.'
               preprocessing:
                 - type: JSONPATH
@@ -2823,8 +2823,8 @@ zabbix_export:
               key: 'meraki.vpn.statuses.peers.reachability[{#NETWORK.ID}, {#NETWORK.NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'VPN network Meraki VPN peers reachability.'
               preprocessing:
                 - type: JSONPATH
@@ -2842,8 +2842,8 @@ zabbix_export:
               key: 'meraki.vpn.statuses.raw[{#NETWORK.ID}, {#NETWORK.NAME}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'VPN statuses raw.'
               preprocessing:
                 - type: JSONPATH
@@ -2860,8 +2860,8 @@ zabbix_export:
               key: 'meraki.vpn.statuses.third.party.peers.network.id[{#NETWORK.ID}, {#NETWORK.NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Return network ID of the third-party VPN peers for the organization.'
               preprocessing:
                 - type: JSONPATH
@@ -2879,8 +2879,8 @@ zabbix_export:
               key: 'meraki.vpn.statuses.third.party.peers.network.name[{#NETWORK.ID},  {#NETWORK.NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Return network name of the third-party VPN peers for the organization.'
               preprocessing:
                 - type: JSONPATH
@@ -2898,8 +2898,8 @@ zabbix_export:
               key: 'meraki.vpn.statuses.third.party.peers.reachability[{#NETWORK.ID}, {#NETWORK.NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Return network reachability of the third-party VPN peers for the organization.'
               preprocessing:
                 - type: JSONPATH

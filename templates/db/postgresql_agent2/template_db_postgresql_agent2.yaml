@@ -119,8 +119,8 @@ zabbix_export:
           name: 'PostgreSQL: Get archive'
           key: 'pgsql.archive["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Collect archive status metrics.'
           tags:
             - tag: component
@@ -346,8 +346,8 @@ zabbix_export:
           name: 'PostgreSQL: Get bgwriter'
           key: 'pgsql.bgwriter["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             Collect all metrics from pg_stat_bgwriter:
             https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-BGWRITER-VIEW
@@ -545,8 +545,8 @@ zabbix_export:
           name: 'PostgreSQL: Get connections sum'
           key: 'pgsql.connections["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             Collect all metrics from pg_stat_activity:
             https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-VIEW
@@ -557,9 +557,9 @@ zabbix_export:
           name: 'PostgreSQL: Custom queries'
           key: 'pgsql.custom.query["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}","{$PG.DATABASE}",""]'
           history: 1h
+          value_type: TEXT
           trends: '0'
           status: DISABLED
-          value_type: TEXT
           description: 'Execute custom queries from file *.sql (check for option Plugins.Postgres.CustomQueriesPath at agent configuration).'
           tags:
             - tag: component
@@ -927,8 +927,8 @@ zabbix_export:
           name: 'PostgreSQL: Get dbstat sum'
           key: 'pgsql.dbstat.sum["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             Collect all metrics from pg_stat_database as sums for all databases:
             https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-VIEW
@@ -939,8 +939,8 @@ zabbix_export:
           name: 'PostgreSQL: Get dbstat'
           key: 'pgsql.dbstat["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             Collect all metrics from pg_stat_database per database:
             https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-VIEW
@@ -951,8 +951,8 @@ zabbix_export:
           name: 'PostgreSQL: Get locks'
           key: 'pgsql.locks["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             Collect all metrics from pg_locks per database:
             https://www.postgresql.org/docs/current/explicit-locking.html#LOCKING-TABLES
@@ -1005,8 +1005,8 @@ zabbix_export:
           name: 'PostgreSQL: Get queries'
           key: 'pgsql.queries["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}","{$PG.DATABASE}","{$PG.QUERY_ETIME.MAX.WARN}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Collect all metrics by query execution time.'
           tags:
             - tag: component
@@ -1041,8 +1041,8 @@ zabbix_export:
           name: 'PostgreSQL: Get replication'
           key: 'pgsql.replication.process["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Collect metrics from the pg_stat_replication, which contains information about the WAL sender process, showing statistics about replication to that sender''s connected standby server.'
           tags:
             - tag: component
@@ -1092,8 +1092,8 @@ zabbix_export:
           key: 'pgsql.version["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}"]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'PostgreSQL version.'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -1152,8 +1152,8 @@ zabbix_export:
           key: 'pgsql.wal.stat["{$PG.CONNSTRING}","{$PG.USER}","{$PG.PASSWORD}"]'
           delay: 5m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Collect write-ahead log (WAL) metrics.'
           tags:
             - tag: component
@@ -1437,8 +1437,8 @@ zabbix_export:
               key: 'pgsql.dbstat.get_metrics["{#DBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get dbstat metrics for database "{#DBNAME}".'
               preprocessing:
                 - type: JSONPATH
@@ -1727,8 +1727,8 @@ zabbix_export:
               key: 'pgsql.locks.get_metrics["{#DBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get locks metrics for database "{#DBNAME}".'
               preprocessing:
                 - type: JSONPATH
@@ -1857,8 +1857,8 @@ zabbix_export:
               key: 'pgsql.queries.get_metrics["{#DBNAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get queries metrics for database "{#DBNAME}".'
               preprocessing:
                 - type: JSONPATH
@@ -2257,8 +2257,8 @@ zabbix_export:
               key: 'pgsql.replication.get_metrics["{#APPLICATION_NAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Collect metrics from the "pg_stat_replication" about the application "{#APPLICATION_NAME}" that is connected to this WAL sender, which contains information about the WAL sender process, showing statistics about replication to that sender''s connected standby server.'
               preprocessing:
                 - type: JSONPATH

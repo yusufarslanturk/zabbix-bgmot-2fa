@@ -24,8 +24,8 @@ zabbix_export:
           type: INTERNAL
           key: 'zabbix[cluster,discovery,nodes]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The master item of Zabbix cluster statistics.'
           tags:
             - tag: component
@@ -832,8 +832,8 @@ zabbix_export:
           type: INTERNAL
           key: 'zabbix[proxy,discovery]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The master item of Zabbix proxies'' statistics.'
           tags:
             - tag: component
@@ -990,8 +990,8 @@ zabbix_export:
           type: INTERNAL
           key: 'zabbix[version]'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'A version of Zabbix server.'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
@@ -1231,8 +1231,8 @@ zabbix_export:
               key: 'zabbix.nodes.address[{#NODE.ID}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The IPv4 address of a node.'
               preprocessing:
                 - type: JSONPATH
@@ -1298,8 +1298,8 @@ zabbix_export:
               key: 'zabbix.nodes.stats[{#NODE.ID}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Provides the statistics of a node.'
               preprocessing:
                 - type: JSONPATH
@@ -1631,8 +1631,8 @@ zabbix_export:
               key: 'zabbix.proxy.stats[{#PROXY.NAME}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The statistics for the discovered proxy.'
               preprocessing:
                 - type: JSONPATH
@@ -1679,8 +1679,8 @@ zabbix_export:
               key: 'zabbix.proxy.version[{#PROXY.NAME}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'A version of Zabbix proxy.'
               preprocessing:
                 - type: JSONPATH

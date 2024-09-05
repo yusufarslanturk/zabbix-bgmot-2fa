@@ -91,8 +91,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: apache.get_status
           history: 1h
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             Getting data from a machine-readable version of the Apache status page.
             For more information see Apache Module [mod_status](https://httpd.apache.org/docs/current/mod/mod_status.html).
@@ -226,8 +226,8 @@ zabbix_export:
           key: apache.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The Apache service version.'
           preprocessing:
             - type: JSONPATH

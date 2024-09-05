@@ -140,8 +140,8 @@ zabbix_export:
           key: apache.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The Apache service version.'
           preprocessing:
             - type: JSONPATH
@@ -404,8 +404,8 @@ zabbix_export:
           name: 'Apache: Get processes summary'
           key: 'proc.get[{$APACHE.PROCESS.NAME.PARAMETER},,,summary]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The aggregated data of summary metrics for all processes.'
           tags:
             - tag: component
@@ -414,8 +414,8 @@ zabbix_export:
           name: 'Apache: Get status'
           key: 'web.page.get["{$APACHE.STATUS.SCHEME}://{$APACHE.STATUS.HOST}:{$APACHE.STATUS.PORT}/{$APACHE.STATUS.PATH}"]'
           history: 1h
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             Getting data from a machine-readable version of the Apache status page.
             For more information see Apache Module [mod_status](https://httpd.apache.org/docs/current/mod/mod_status.html).
@@ -631,8 +631,8 @@ zabbix_export:
               key: 'apache.proc.get[{#APACHE.NAME}]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The summary metrics aggregated by a process {#APACHE.NAME}.'
               preprocessing:
                 - type: JSONPATH

@@ -27,8 +27,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: kube.cadvisor.metrics
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Collecting raw Kubelet metrics from /metrics/cadvisor endpoint.'
           timeout: 10s
           url: '{$KUBE.KUBELET.URL}{$KUBE.KUBELET.CADVISOR.ENDPOINT}'
@@ -117,8 +117,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: kube.kubelet.metrics
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Collecting raw Kubelet metrics from /metrics endpoint.'
           timeout: 10s
           url: '{$KUBE.KUBELET.URL}{$KUBE.KUBELET.METRIC.ENDPOINT}'
@@ -226,8 +226,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: kube.pods
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Collecting raw Kubelet metrics from /pods endpoint.'
           timeout: 10s
           url: '{$KUBE.KUBELET.URL}{$KUBE.KUBELET.PODS.ENDPOINT}'
@@ -639,9 +639,9 @@ zabbix_export:
               key: 'kube.kublet.runtime_ops_duration_seconds_bucket[{#LE},"{#OP_TYPE}"]'
               delay: '0'
               history: 1h
+              value_type: FLOAT
               trends: '0'
               discover: NO_DISCOVER
-              value_type: FLOAT
               description: 'Duration in seconds of runtime operations. Broken down by operation type.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN
@@ -659,8 +659,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kube.kublet.runtime_ops_duration_seconds_p50["{#OP_TYPE}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kube.kublet.runtime_ops_duration_seconds_bucket[*,"{#OP_TYPE}"],5m,50)'
               description: '50 percentile of operation latency distribution in seconds for each verb.'
@@ -672,8 +672,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kube.kublet.runtime_ops_duration_seconds_p90["{#OP_TYPE}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kube.kublet.runtime_ops_duration_seconds_bucket[*,"{#OP_TYPE}"],5m,90)'
               description: '90 percentile of operation latency distribution in seconds for each verb.'
@@ -685,8 +685,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kube.kublet.runtime_ops_duration_seconds_p95["{#OP_TYPE}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kube.kublet.runtime_ops_duration_seconds_bucket[*,"{#OP_TYPE}"],5m,95)'
               description: '95 percentile of operation latency distribution in seconds for each verb.'
@@ -698,8 +698,8 @@ zabbix_export:
               type: CALCULATED
               key: 'kube.kublet.runtime_ops_duration_seconds_p99["{#OP_TYPE}"]'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               units: s
               params: 'bucket_percentile(//kube.kublet.runtime_ops_duration_seconds_bucket[*,"{#OP_TYPE}"],5m,99)'
               description: '99 percentile of operation latency distribution in seconds for each verb.'
@@ -712,8 +712,8 @@ zabbix_export:
               key: 'kube.kublet.runtime_ops_total.rate["{#OP_TYPE}"]'
               delay: '0'
               history: 7d
-              discover: NO_DISCOVER
               value_type: FLOAT
+              discover: NO_DISCOVER
               description: 'Cumulative number of runtime operations by operation type.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN

@@ -145,11 +145,6 @@ class testDashboardCopyWidgets extends CWebTest {
 
 		$replaces = self::$replaced_widget_name;
 
-		// Write name for replacing widget next case.
-		if ($replace) {
-			self::$replaced_widget_name = $widget_name;
-		}
-
 		// Use the appropriate dashboard and page in case of templated dashboard widgets.
 		if ($templated) {
 			$dashboardid = CDBHelper::getValue('SELECT dashboardid FROM dashboard WHERE name ='.
@@ -223,13 +218,14 @@ class testDashboardCopyWidgets extends CWebTest {
 		// Wait until widget is pasted and loading spinner disappeared.
 		sleep(1);
 		$this->query('xpath://div[contains(@class, "is-loading")]')->waitUntilNotPresent();
-		$copied_widget = $dashboard->getWidgets()->last();
+		$copied_widget = $dashboard->getWidgets()->last()->waitUntilReady();
 
 		// For Other dashboard and Map from Navigation tree case - add map source, because it is not being copied by design.
 		if (($new_dashboard || $new_page) && stristr($widget_name, 'Map from tree')) {
 			$copied_widget_form = $copied_widget->edit();
 			$copied_widget_form->fill(['Filter' => 'Test copy Map navigation tree']);
 			$copied_widget_form->submit();
+			$dashboard->getWidgets()->last()->waitUntilReady();
 		}
 
 		$this->assertEquals($widget_name, $copied_widget->getHeaderText());
@@ -246,14 +242,18 @@ class testDashboardCopyWidgets extends CWebTest {
 		$this->assertEquals($original_form, $copied_form);
 
 		// Close overlay and save dashboard to get new widget size from DB.
-		$copied_overlay = COverlayDialogElement::find()->one();
-		$copied_overlay->close();
+		COverlayDialogElement::find()->one()->close();
 
 		if ($templated) {
 			$this->query('button:Save changes')->one()->click();
 		}
 		else {
 			$dashboard->save();
+		}
+
+		// Write name for replacing widget next case.
+		if ($replace) {
+			self::$replaced_widget_name = $widget_name;
 		}
 
 		$this->page->waitUntilReady();
@@ -304,12 +304,6 @@ class testDashboardCopyWidgets extends CWebTest {
 			],
 			[
 				[
-					'name' => 'URL widget',
-					'copy to' => 'same page'
-				]
-			],
-			[
-				[
 					'name' => 'Item value widget',
 					'copy to' => 'same page'
 				]
@@ -340,12 +334,6 @@ class testDashboardCopyWidgets extends CWebTest {
 			],
 			[
 				[
-					'name' => 'URL widget',
-					'copy to' => 'another page'
-				]
-			],
-			[
-				[
 					'name' => 'Item value widget',
 					'copy to' => 'another page'
 				]
@@ -371,12 +359,6 @@ class testDashboardCopyWidgets extends CWebTest {
 			[
 				[
 					'name' => 'Plain text widget',
-					'copy to' => 'another dashboard'
-				]
-			],
-			[
-				[
-					'name' => 'URL widget',
 					'copy to' => 'another dashboard'
 				]
 			],

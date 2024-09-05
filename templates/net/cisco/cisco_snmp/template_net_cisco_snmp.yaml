@@ -114,8 +114,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.10.7.2.1.19,1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2]'
           key: net.if.duplex.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Discovering interfaces from IF-MIB and EtherLike-MIB. Interfaces with up(1) Operational Status are discovered.'
           tags:
             - tag: component
@@ -126,8 +126,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.2.2.1.7,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.31.1.1.1.6,1.3.6.1.2.1.31.1.1.1.10,1.3.6.1.2.1.2.2.1.14,1.3.6.1.2.1.2.2.1.20,1.3.6.1.2.1.2.2.1.19,1.3.6.1.2.1.2.2.1.13,1.3.6.1.2.1.31.1.1.1.15]'
           key: net.if.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Discovering interfaces from IF-MIB.'
           tags:
             - tag: component
@@ -138,8 +138,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.4.1.2,1.3.6.1.4.1.9.9.13.1.4.1.3]'
           key: sensor.fans.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Discovering system fans.'
           tags:
             - tag: component
@@ -150,8 +150,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.5.1.2,1.3.6.1.4.1.9.9.13.1.5.1.3]'
           key: sensor.psu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The table of power supply status maintained by the environmental monitor card.'
           tags:
             - tag: component
@@ -162,8 +162,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.3.1.2,1.3.6.1.4.1.9.9.13.1.3.1.3,1.3.6.1.4.1.9.9.13.1.3.1.6]'
           key: sensor.temp.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Discovery of ciscoEnvMonTemperatureTable (ciscoEnvMonTemperatureDescr), a table of ambient temperature status maintained by the environmental monitor.'
           tags:
             - tag: component
@@ -174,8 +174,8 @@ zabbix_export:
           key: snmptrap.fallback
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: LOG
+          trends: '0'
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
           tags:
@@ -188,8 +188,8 @@ zabbix_export:
           key: 'system.contact[sysContact.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The textual identification of the contact person for this managed node, together with information on how to contact this person.  If no contact information is known, the value is the zero-length string.
@@ -207,8 +207,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.109.1.1.1.1.5,1.3.6.1.4.1.9.9.109.1.1.1.1.8]'
           key: system.cpu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             If your IOS device has several CPUs, you must use CISCO-PROCESS-MIB and its object cpmCPUTotal5minRev from the table called cpmCPUTotalTable,
             indexed with cpmCPUTotalIndex.
@@ -225,8 +225,8 @@ zabbix_export:
           key: 'system.descr[sysDescr.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             A textual description of the entity. This value should
@@ -246,8 +246,8 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MIB: ENTITY-MIB'
           inventory_link: MODEL
           preprocessing:
@@ -264,8 +264,8 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MIB: ENTITY-MIB'
           inventory_link: SERIALNO_A
           preprocessing:
@@ -292,8 +292,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.47.1.1.1.1.5,1.3.6.1.2.1.47.1.1.1.1.7,1.3.6.1.2.1.47.1.1.1.1.11]'
           key: system.hw.serialnumber.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             MIB: ENTITY-MIB
             Entity Serial Numbers Discovery.
@@ -331,8 +331,8 @@ zabbix_export:
           key: 'system.location[sysLocation.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The physical location of this node (e.g., `telephone closet, 3rd floor').  If the location is unknown, the value is the zero-length string.
@@ -351,8 +351,8 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             An administratively-assigned name for this managed node.By convention, this is the node's fully-qualified domain name.  If the name is unknown, the value is the zero-length string.
@@ -403,8 +403,8 @@ zabbix_export:
           key: 'system.objectid[sysObjectID.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The vendor's authoritative identification of the network management subsystem contained in the entity.  This value is allocated within the SMI enterprises subtree (1.3.6.1.4.1) and provides an easy and unambiguous means for determining`what kind of box' is being managed.  For example, if vendor`Flintstones, Inc.' was assigned the subtree1.3.6.1.4.1.4242, it could assign the identifier 1.3.6.1.4.1.4242.1.1 to its `Fred Router'.
@@ -422,8 +422,8 @@ zabbix_export:
           key: 'system.sw.os[sysDescr.0]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MIB: SNMPv2-MIB'
           inventory_link: OS
           preprocessing:
@@ -456,8 +456,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.48.1.1.1.2,1.3.6.1.4.1.9.9.48.1.1.1.5,1.3.6.1.4.1.9.9.48.1.1.1.6]'
           key: vm.memory.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             MIB: CISCO-MEMORY-POOL-MIB
             Discovery of ciscoMemoryPoolTable, a table of memory pool monitoring entries.
@@ -513,7 +513,7 @@ zabbix_export:
               name: '#{#SNMPINDEX}: CPU utilization'
               type: DEPENDENT
               key: 'system.cpu.util[cpmCPUTotal5minRev.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -586,10 +586,10 @@ zabbix_export:
               name: '{#ENT_NAME}: Hardware serial number'
               type: DEPENDENT
               key: 'system.hw.serialnumber[entPhysicalSerialNum.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'MIB: ENTITY-MIB'
               preprocessing:
                 - type: SNMP_WALK_VALUE
@@ -643,7 +643,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Fan status'
               type: DEPENDENT
               key: 'sensor.fan.status[ciscoEnvMonFanState.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -1397,7 +1397,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Power supply status'
               type: DEPENDENT
               key: 'sensor.psu.status[ciscoEnvMonSupplyState.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -1467,7 +1467,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature status'
               type: DEPENDENT
               key: 'sensor.temp.status[ciscoEnvMonTemperatureState.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -1492,7 +1492,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature'
               type: DEPENDENT
               key: 'sensor.temp.value[ciscoEnvMonTemperatureValue.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: °C
@@ -2417,8 +2417,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.4.1.2,1.3.6.1.4.1.9.9.13.1.4.1.3]'
           key: sensor.fans.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Discovering system fans.'
           tags:
             - tag: component
@@ -2429,8 +2429,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.5.1.2,1.3.6.1.4.1.9.9.13.1.5.1.3]'
           key: sensor.psu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The table of power supply status maintained by the environmental monitor card.'
           tags:
             - tag: component
@@ -2441,8 +2441,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.3.1.2,1.3.6.1.4.1.9.9.13.1.3.1.3,1.3.6.1.4.1.9.9.13.1.3.1.6]'
           key: sensor.temp.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Discovery of ciscoEnvMonTemperatureTable (ciscoEnvMonTemperatureDescr), a table of ambient temperature status maintained by the environmental monitor.'
           tags:
             - tag: component
@@ -2453,8 +2453,8 @@ zabbix_export:
           key: snmptrap.fallback
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: LOG
+          trends: '0'
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
           tags:
@@ -2467,8 +2467,8 @@ zabbix_export:
           key: 'system.contact[sysContact.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The textual identification of the contact person for this managed node, together with information on how to contact this person.  If no contact information is known, the value is the zero-length string.
@@ -2514,8 +2514,8 @@ zabbix_export:
           key: 'system.descr[sysDescr.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             A textual description of the entity. This value should
@@ -2535,8 +2535,8 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MIB: ENTITY-MIB'
           inventory_link: MODEL
           preprocessing:
@@ -2553,8 +2553,8 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MIB: ENTITY-MIB'
           inventory_link: SERIALNO_A
           preprocessing:
@@ -2581,8 +2581,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.47.1.1.1.1.5,1.3.6.1.2.1.47.1.1.1.1.7,1.3.6.1.2.1.47.1.1.1.1.11]'
           key: system.hw.serialnumber.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             MIB: ENTITY-MIB
             Entity Serial Numbers Discovery.
@@ -2620,8 +2620,8 @@ zabbix_export:
           key: 'system.location[sysLocation.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The physical location of this node (e.g., `telephone closet, 3rd floor').  If the location is unknown, the value is the zero-length string.
@@ -2640,8 +2640,8 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             An administratively-assigned name for this managed node.By convention, this is the node's fully-qualified domain name.  If the name is unknown, the value is the zero-length string.
@@ -2692,8 +2692,8 @@ zabbix_export:
           key: 'system.objectid[sysObjectID.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The vendor's authoritative identification of the network management subsystem contained in the entity.  This value is allocated within the SMI enterprises subtree (1.3.6.1.4.1) and provides an easy and unambiguous means for determining`what kind of box' is being managed.  For example, if vendor`Flintstones, Inc.' was assigned the subtree1.3.6.1.4.1.4242, it could assign the identifier 1.3.6.1.4.1.4242.1.1 to its `Fred Router'.
@@ -2711,8 +2711,8 @@ zabbix_export:
           key: 'system.sw.os[sysDescr.0]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MIB: SNMPv2-MIB'
           inventory_link: OS
           preprocessing:
@@ -2745,8 +2745,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.48.1.1.1.2,1.3.6.1.4.1.9.9.48.1.1.1.5,1.3.6.1.4.1.9.9.48.1.1.1.6]'
           key: vm.memory.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             MIB: CISCO-MEMORY-POOL-MIB
             Discovery of ciscoMemoryPoolTable, a table of memory pool monitoring entries.
@@ -2805,10 +2805,10 @@ zabbix_export:
               name: '{#ENT_NAME}: Hardware serial number'
               type: DEPENDENT
               key: 'system.hw.serialnumber[entPhysicalSerialNum.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'MIB: ENTITY-MIB'
               preprocessing:
                 - type: SNMP_WALK_VALUE
@@ -2862,7 +2862,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Fan status'
               type: DEPENDENT
               key: 'sensor.fan.status[ciscoEnvMonFanState.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -3027,7 +3027,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Power supply status'
               type: DEPENDENT
               key: 'sensor.psu.status[ciscoEnvMonSupplyState.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -3097,7 +3097,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature status'
               type: DEPENDENT
               key: 'sensor.temp.status[ciscoEnvMonTemperatureState.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -3122,7 +3122,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature'
               type: DEPENDENT
               key: 'sensor.temp.value[ciscoEnvMonTemperatureValue.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: °C
@@ -3401,8 +3401,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.2.2.1.7,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.31.1.1.1.6,1.3.6.1.2.1.31.1.1.1.10,1.3.6.1.2.1.2.2.1.14,1.3.6.1.2.1.2.2.1.20,1.3.6.1.2.1.2.2.1.19,1.3.6.1.2.1.2.2.1.13,1.3.6.1.2.1.31.1.1.1.15]'
           key: net.if.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Discovering interfaces from IF-MIB.'
           tags:
             - tag: component
@@ -3413,8 +3413,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.4.1.2,1.3.6.1.4.1.9.9.13.1.4.1.3]'
           key: sensor.fans.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Discovering system fans.'
           tags:
             - tag: component
@@ -3425,8 +3425,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.5.1.2,1.3.6.1.4.1.9.9.13.1.5.1.3]'
           key: sensor.psu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The table of power supply status maintained by the environmental monitor card.'
           tags:
             - tag: component
@@ -3437,8 +3437,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.13.1.3.1.2,1.3.6.1.4.1.9.9.13.1.3.1.3,1.3.6.1.4.1.9.9.13.1.3.1.6]'
           key: sensor.temp.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Discovery of ciscoEnvMonTemperatureTable (ciscoEnvMonTemperatureDescr), a table of ambient temperature status maintained by the environmental monitor.'
           tags:
             - tag: component
@@ -3449,8 +3449,8 @@ zabbix_export:
           key: snmptrap.fallback
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: LOG
+          trends: '0'
           description: 'The item is used to collect all SNMP traps unmatched by other snmptrap items'
           logtimefmt: 'hh:mm:sszyyyy/MM/dd'
           tags:
@@ -3463,8 +3463,8 @@ zabbix_export:
           key: 'system.contact[sysContact.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The textual identification of the contact person for this managed node, together with information on how to contact this person.  If no contact information is known, the value is the zero-length string.
@@ -3482,8 +3482,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.109.1.1.1.1.5]'
           key: system.cpu.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             If your IOS device has several CPUs, you must use CISCO-PROCESS-MIB and its object cpmCPUTotal5minRev from the table called cpmCPUTotalTable,
             indexed with cpmCPUTotalIndex.
@@ -3500,8 +3500,8 @@ zabbix_export:
           key: 'system.descr[sysDescr.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             A textual description of the entity. This value should
@@ -3521,8 +3521,8 @@ zabbix_export:
           key: system.hw.model
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MIB: ENTITY-MIB'
           inventory_link: MODEL
           preprocessing:
@@ -3539,8 +3539,8 @@ zabbix_export:
           key: system.hw.serialnumber
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MIB: ENTITY-MIB'
           inventory_link: SERIALNO_A
           preprocessing:
@@ -3567,8 +3567,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.2.1.47.1.1.1.1.5,1.3.6.1.2.1.47.1.1.1.1.7,1.3.6.1.2.1.47.1.1.1.1.11]'
           key: system.hw.serialnumber.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             MIB: ENTITY-MIB
             Entity Serial Numbers Discovery.
@@ -3606,8 +3606,8 @@ zabbix_export:
           key: 'system.location[sysLocation.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The physical location of this node (e.g., `telephone closet, 3rd floor').  If the location is unknown, the value is the zero-length string.
@@ -3626,8 +3626,8 @@ zabbix_export:
           key: system.name
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             An administratively-assigned name for this managed node.By convention, this is the node's fully-qualified domain name.  If the name is unknown, the value is the zero-length string.
@@ -3678,8 +3678,8 @@ zabbix_export:
           key: 'system.objectid[sysObjectID.0]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: SNMPv2-MIB
             The vendor's authoritative identification of the network management subsystem contained in the entity.  This value is allocated within the SMI enterprises subtree (1.3.6.1.4.1) and provides an easy and unambiguous means for determining`what kind of box' is being managed.  For example, if vendor`Flintstones, Inc.' was assigned the subtree1.3.6.1.4.1.4242, it could assign the identifier 1.3.6.1.4.1.4242.1.1 to its `Fred Router'.
@@ -3697,8 +3697,8 @@ zabbix_export:
           key: 'system.sw.os[sysDescr.0]'
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MIB: SNMPv2-MIB'
           inventory_link: OS
           preprocessing:
@@ -3731,8 +3731,8 @@ zabbix_export:
           snmp_oid: 'walk[1.3.6.1.4.1.9.9.48.1.1.1.2,1.3.6.1.4.1.9.9.48.1.1.1.5,1.3.6.1.4.1.9.9.48.1.1.1.6]'
           key: vm.memory.walk
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: |
             MIB: CISCO-MEMORY-POOL-MIB
             Discovery of ciscoMemoryPoolTable, a table of memory pool monitoring entries.
@@ -3788,7 +3788,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: CPU utilization'
               type: DEPENDENT
               key: 'system.cpu.util[cpmCPUTotal5min.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: '%'
@@ -3865,10 +3865,10 @@ zabbix_export:
               name: '{#ENT_NAME}: Hardware serial number'
               type: DEPENDENT
               key: 'system.hw.serialnumber[entPhysicalSerialNum.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'MIB: ENTITY-MIB'
               preprocessing:
                 - type: SNMP_WALK_VALUE
@@ -3922,7 +3922,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Fan status'
               type: DEPENDENT
               key: 'sensor.fan.status[ciscoEnvMonFanState.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -4576,7 +4576,7 @@ zabbix_export:
               name: '{#SENSOR_INFO}: Power supply status'
               type: DEPENDENT
               key: 'sensor.psu.status[ciscoEnvMonSupplyState.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               trends: '0'
               description: 'MIB: CISCO-ENVMON-MIB'
@@ -4646,7 +4646,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature status'
               type: DEPENDENT
               key: 'sensor.temp.status[ciscoEnvMonTemperatureState.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               trends: '0'
               description: |
@@ -4671,7 +4671,7 @@ zabbix_export:
               name: '{#SNMPVALUE}: Temperature'
               type: DEPENDENT
               key: 'sensor.temp.value[ciscoEnvMonTemperatureValue.{#SNMPINDEX}]'
-              delay: 0s
+              delay: '0'
               history: 7d
               value_type: FLOAT
               units: °C

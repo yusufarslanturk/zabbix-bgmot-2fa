@@ -57,8 +57,8 @@ zabbix_export:
           key: redis.clients.info_raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -148,8 +148,8 @@ zabbix_export:
           name: 'Redis: Get config'
           key: 'redis.config["{$REDIS.CONN.URI}"]'
           history: 1h
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
@@ -174,8 +174,8 @@ zabbix_export:
           key: redis.cpu.info_raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -262,8 +262,8 @@ zabbix_export:
           name: 'Redis: Get info'
           key: 'redis.info["{$REDIS.CONN.URI}"]'
           history: 1h
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           tags:
             - tag: component
               value: raw
@@ -287,8 +287,8 @@ zabbix_export:
           key: redis.keyspace.info_raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -346,8 +346,8 @@ zabbix_export:
           key: redis.memory.info_raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -573,8 +573,8 @@ zabbix_export:
           key: redis.persistence.info_raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -778,8 +778,8 @@ zabbix_export:
           key: redis.replication.info_raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -883,8 +883,8 @@ zabbix_export:
           key: redis.replication.role
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Value is "master" if the instance is replica of no one, or "slave" if the instance is a replica of some master instance. Note that a replica can be master of another replica (chained replication).'
           preprocessing:
             - type: JSONPATH
@@ -916,8 +916,8 @@ zabbix_export:
           key: redis.server.info_raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -953,8 +953,8 @@ zabbix_export:
           key: redis.server.redis_mode
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The server''s mode ("standalone", "sentinel" or "cluster")'
           preprocessing:
             - type: JSONPATH
@@ -974,8 +974,8 @@ zabbix_export:
           key: redis.server.redis_version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Version of the Redis server'
           preprocessing:
             - type: JSONPATH
@@ -1105,8 +1105,8 @@ zabbix_export:
           key: redis.stats.info_raw
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           preprocessing:
             - type: JSONPATH
               parameters:
@@ -1547,8 +1547,8 @@ zabbix_export:
               key: 'redis.db.info_raw["{#DB}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'The item gets information about keyspace of {#DB} database.'
               preprocessing:
                 - type: JSONPATH
@@ -1665,8 +1665,8 @@ zabbix_export:
               key: 'redis.memory.maxmemory_policy[{#SINGLETON}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The value of the maxmemory-policy configuration directive'
               preprocessing:
                 - type: JSONPATH
@@ -1852,8 +1852,8 @@ zabbix_export:
               key: 'redis.server.executable[{#SINGLETON}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The path to the server''s executable'
               preprocessing:
                 - type: JSONPATH
@@ -2486,8 +2486,8 @@ zabbix_export:
               key: 'redis.replication.master_host[{#SINGLETON}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Host or IP address of the master'
               preprocessing:
                 - type: JSONPATH
@@ -2534,8 +2534,8 @@ zabbix_export:
               key: 'redis.replication.master_link_status[{#SINGLETON}]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Status of the link (up/down)'
               preprocessing:
                 - type: JSONPATH

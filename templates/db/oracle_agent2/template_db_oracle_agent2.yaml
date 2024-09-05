@@ -260,8 +260,8 @@ zabbix_export:
           name: 'Oracle: Get FRA stats'
           key: 'oracle.fra.stats["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get FRA statistics.'
           tags:
             - tag: component
@@ -390,8 +390,8 @@ zabbix_export:
           name: 'Oracle: Get instance state'
           key: 'oracle.instance.info["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Gets the state of the current instance.'
           tags:
             - tag: component
@@ -420,8 +420,8 @@ zabbix_export:
           key: oracle.instance_hostname
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The name of the host machine.'
           preprocessing:
             - type: JSONPATH
@@ -449,8 +449,8 @@ zabbix_export:
           key: oracle.instance_name
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The name of the instance.'
           preprocessing:
             - type: JSONPATH
@@ -566,8 +566,8 @@ zabbix_export:
           name: 'Oracle: Get PGA stats'
           key: 'oracle.pga.stats["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get PGA statistics.'
           tags:
             - tag: component
@@ -800,8 +800,8 @@ zabbix_export:
           name: 'Oracle: Get sessions stats'
           key: 'oracle.sessions.stats["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}","{$ORACLE.SESSION.LOCK.MAX.TIME}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get sessions statistics. {$ORACLE.SESSION.LOCK.MAX.TIME} -- maximum seconds in the current wait condition for counting long time locked sessions. Default: 600 seconds.'
           tags:
             - tag: component
@@ -983,8 +983,8 @@ zabbix_export:
           name: 'Oracle: Get SGA stats'
           key: 'oracle.sga.stats["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get SGA statistics.'
           tags:
             - tag: component
@@ -1153,8 +1153,8 @@ zabbix_export:
           key: 'oracle.sys.metrics["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}"]'
           delay: 0;m0-59
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Gets the values of the system metrics.'
           tags:
             - tag: component
@@ -1163,8 +1163,8 @@ zabbix_export:
           name: 'Oracle: Get system parameters'
           key: 'oracle.sys.params["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}"]'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Get a set of system parameter values.'
           tags:
             - tag: component
@@ -1330,8 +1330,8 @@ zabbix_export:
           key: oracle.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The Oracle Server version.'
           preprocessing:
             - type: JSONPATH
@@ -1368,8 +1368,8 @@ zabbix_export:
               key: 'oracle.archive.info["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}","{#DEST_NAME}"]'
               delay: 5m
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gets the archive log statistics.'
               tags:
                 - tag: component
@@ -1382,8 +1382,8 @@ zabbix_export:
               key: 'oracle.archivelog_error["{#DEST_NAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Displays the error message.'
               preprocessing:
                 - type: JSONPATH
@@ -1477,8 +1477,8 @@ zabbix_export:
               name: 'Oracle Database ''{#DBNAME}'': Get CDB and No-CDB info'
               key: 'oracle.cdb.info["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}","{#DBNAME}"]'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gets the information about the CDB and non-CDB database on an instance.'
               tags:
                 - tag: component
@@ -1731,8 +1731,8 @@ zabbix_export:
               name: 'ASM ''{#DGNAME}'': Get ASM stats'
               key: 'oracle.diskgroups.stats["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}","{#DGNAME}"]'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gets the ASM disk group statistics.'
               tags:
                 - tag: component
@@ -1772,8 +1772,8 @@ zabbix_export:
               name: 'Oracle Database ''{#DBNAME}'': Get PDB info'
               key: 'oracle.pdb.info["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}","{#DBNAME}"]'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gets the information about the PDB database on an instance.'
               tags:
                 - tag: component
@@ -2112,8 +2112,8 @@ zabbix_export:
               name: 'Oracle TBS ''{#TABLESPACE}'': Get tablespaces stats'
               key: 'oracle.ts.stats["{$ORACLE.CONNSTRING}","{$ORACLE.USER}","{$ORACLE.PASSWORD}","{$ORACLE.SERVICE}","{#TABLESPACE}","{#CONTENTS}"]'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Gets the statistics of the tablespace.'
               tags:
                 - tag: component

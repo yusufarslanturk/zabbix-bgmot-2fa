@@ -31,8 +31,8 @@ zabbix_export:
           key: agent.hostname
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
@@ -55,8 +55,8 @@ zabbix_export:
           key: agent.version
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
@@ -166,8 +166,8 @@ zabbix_export:
           key: system.hostname
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The host name of the system.'
           inventory_link: NAME
           preprocessing:
@@ -406,8 +406,8 @@ zabbix_export:
           key: system.uname
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Information as normally returned by `uname -a`.'
           inventory_link: OS
           preprocessing:
@@ -455,8 +455,8 @@ zabbix_export:
           key: 'vfs.file.cksum[/etc/passwd,sha256]'
           delay: 15m
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           preprocessing:
             - type: DISCARD_UNCHANGED_HEARTBEAT
               parameters:
@@ -476,8 +476,8 @@ zabbix_export:
           name: 'AIX: Get filesystems'
           key: vfs.fs.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The `vfs.fs.get` key acquires raw information set about the filesystems. Later to be extracted by preprocessing in dependent items.'
           tags:
             - tag: component
@@ -818,8 +818,8 @@ zabbix_export:
               key: 'vfs.fs.dependent[{#FSNAME},data]'
               delay: '0'
               history: 1h
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Intermediate data of `{#FSNAME}` filesystem.'
               preprocessing:
                 - type: JSONPATH

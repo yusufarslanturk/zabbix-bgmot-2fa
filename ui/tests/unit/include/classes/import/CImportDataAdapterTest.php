@@ -2331,9 +2331,7 @@ class CImportDataAdapterTest extends TestCase {
 				]
 			]
 		];
-		$source = (new CImportDataNormalizer($schema))
-			->setValueMode(CXmlConstantValue::class)
-			->normalize($source);
+		$source = (new CImportDataNormalizer($schema))->normalize($source);
 
 		$this->assertEquals($source, [
 				'zabbix_export' => [
@@ -3339,9 +3337,7 @@ class CImportDataAdapterTest extends TestCase {
 
 		$source = (new CConstantImportConverter($schema))->convert($source);
 		$source = (new CDefaultImportConverter($schema))->convert($source);
-		$source = (new CImportDataNormalizer($schema))
-			->setValueMode(CXmlConstantValue::class)
-			->normalize($source);
+		$source = (new CImportDataNormalizer($schema))->normalize($source);
 
 		$adapter = new CImportDataAdapter();
 		$adapter->load($source);

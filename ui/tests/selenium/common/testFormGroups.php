@@ -193,6 +193,7 @@ class testFormGroups extends CWebTest {
 
 			// Open group create form.
 			$this->query('button', 'Create '.$this->object.' group')->one()->click();
+			$dialog = COverlayDialogElement::find()->one()->waitUntilReady();
 			$this->assertEquals('New '.$this->object.' group', $dialog->getTitle());
 		}
 

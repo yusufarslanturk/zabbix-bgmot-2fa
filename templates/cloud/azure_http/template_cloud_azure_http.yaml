@@ -39,8 +39,8 @@ zabbix_export:
           key: azure.get.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -70,8 +70,8 @@ zabbix_export:
           key: azure.get.resources
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var Azure = {
             	params: {},
@@ -253,8 +253,8 @@ zabbix_export:
           key: azure.get.storage.acc
           delay: 10m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var Azure = {
             	params: {},
@@ -393,8 +393,8 @@ zabbix_export:
           key: azure.get.storage.acc.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'The errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -929,8 +929,8 @@ zabbix_export:
               type: SCRIPT
               key: 'azure.get.storage.acc[{#NAME}]'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               params: |
                 var AzureStorage = {
                 	params: {},
@@ -2717,8 +2717,8 @@ zabbix_export:
           key: azure.cosmosdb.data.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -2748,8 +2748,8 @@ zabbix_export:
           type: SCRIPT
           key: azure.cosmosdb.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AzureCosmosDB = {
             	params: {},
@@ -3411,8 +3411,8 @@ zabbix_export:
           key: azure.get.daily.costs
           delay: 0s;h/5m/30
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AzureCost = {
             	params: {},
@@ -3613,8 +3613,8 @@ zabbix_export:
           key: azure.get.monthly.costs
           delay: 0s;h/12
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AzureCost = {
             	params: {},
@@ -4287,8 +4287,8 @@ zabbix_export:
           key: azure.db.mssql.availability.details
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The summary description of the availability status.'
           preprocessing:
             - type: JSONPATH
@@ -4479,8 +4479,8 @@ zabbix_export:
           key: azure.db.mssql.data.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -4509,8 +4509,8 @@ zabbix_export:
           type: SCRIPT
           key: azure.db.mssql.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AzureDB = {
             	params: {},
@@ -5559,8 +5559,8 @@ zabbix_export:
           key: azure.db.mssql.availability.details
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The summary description of the availability status.'
           preprocessing:
             - type: JSONPATH
@@ -5751,8 +5751,8 @@ zabbix_export:
           key: azure.db.mssql.data.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -5781,8 +5781,8 @@ zabbix_export:
           type: SCRIPT
           key: azure.db.mssql.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AzureDB = {
             	params: {},
@@ -6686,8 +6686,8 @@ zabbix_export:
           key: azure.db.mysql.availability.details
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The summary description of the availability status.'
           preprocessing:
             - type: JSONPATH
@@ -6905,8 +6905,8 @@ zabbix_export:
           key: azure.db.mysql.data.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -6935,8 +6935,8 @@ zabbix_export:
           type: SCRIPT
           key: azure.db.mysql.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AzureDB = {
             	params: {},
@@ -7733,8 +7733,8 @@ zabbix_export:
           key: azure.db.mysql.availability.details
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The summary description of the availability status.'
           preprocessing:
             - type: JSONPATH
@@ -7900,8 +7900,8 @@ zabbix_export:
           key: azure.db.mysql.data.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -7930,8 +7930,8 @@ zabbix_export:
           type: SCRIPT
           key: azure.db.mysql.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AzureDB = {
             	params: {},
@@ -8713,8 +8713,8 @@ zabbix_export:
           key: azure.db.pgsql.availability.details
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The summary description of the availability status.'
           preprocessing:
             - type: JSONPATH
@@ -8923,8 +8923,8 @@ zabbix_export:
           key: azure.db.pgsql.data.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -8953,8 +8953,8 @@ zabbix_export:
           type: SCRIPT
           key: azure.db.pgsql.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AzureDB = {
             	params: {},
@@ -9862,8 +9862,8 @@ zabbix_export:
           key: azure.db.pgsql.availability.details
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The summary description of the availability status.'
           preprocessing:
             - type: JSONPATH
@@ -10019,8 +10019,8 @@ zabbix_export:
           key: azure.db.pgsql.data.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -10049,8 +10049,8 @@ zabbix_export:
           type: SCRIPT
           key: azure.db.pgsql.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AzureDB = {
             	params: {},
@@ -10849,8 +10849,8 @@ zabbix_export:
           key: azure.vm.availability.details
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The summary description of availability status.'
           preprocessing:
             - type: JSONPATH
@@ -11287,8 +11287,8 @@ zabbix_export:
           key: azure.vm.data.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -11317,8 +11317,8 @@ zabbix_export:
           type: SCRIPT
           key: azure.vm.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AzureVM = {
             	params: {},
@@ -12474,8 +12474,8 @@ zabbix_export:
           key: azure.scaleset.availability.details
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The summary description of availability status.'
           preprocessing:
             - type: JSONPATH
@@ -12933,8 +12933,8 @@ zabbix_export:
           key: azure.scaleset.data.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from API requests.'
           preprocessing:
             - type: JSONPATH
@@ -12964,8 +12964,8 @@ zabbix_export:
           type: SCRIPT
           key: azure.scaleset.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var Azure = {
             	params: {},

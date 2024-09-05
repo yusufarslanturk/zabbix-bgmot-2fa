@@ -1122,10 +1122,12 @@ class testFormServicesSla extends CWebTest {
 
 						$row->query('button:Edit')->one()->click();
 
-						$downtimes_form = COverlayDialogElement::find()->all()->last()->waitUntilReady()->asForm();
+						$downtimes_overlay = COverlayDialogElement::find()->all()->last()->waitUntilReady();
+						$downtimes_form = $downtimes_overlay->asForm();
 
 						$downtimes_form->checkValue($downtime);
 						$downtimes_form->submit();
+						$downtimes_overlay->waitUntilNotVisible();
 					}
 				}
 				else {

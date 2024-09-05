@@ -62,8 +62,8 @@ zabbix_export:
           key: zyxel.3528.contact
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             The textual identification of the contact person
@@ -110,8 +110,8 @@ zabbix_export:
           key: zyxel.3528.fwversion
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'MIB: ZYXEL-MES3528-MIB'
           inventory_link: SOFTWARE_FULL
           preprocessing:
@@ -178,8 +178,8 @@ zabbix_export:
           key: zyxel.3528.location
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             The physical location of this node (e.g.,
@@ -199,8 +199,8 @@ zabbix_export:
           key: zyxel.3528.mac
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: IF-MIB
             The interface's address at the protocol layer
@@ -223,8 +223,8 @@ zabbix_export:
           key: zyxel.3528.model
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             A textual description of the entity.  This value
@@ -257,8 +257,8 @@ zabbix_export:
           key: zyxel.3528.name
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: RFC1213-MIB
             An administratively-assigned name for this
@@ -300,8 +300,8 @@ zabbix_export:
           key: zyxel.3528.serialnumber
           delay: 1h
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             MIB: ZYXEL-MES3528-MIB
             Serial number
@@ -379,8 +379,8 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.2.1.2.2.1.2.{#SNMPINDEX}'
               key: 'zyxel.3528.net.if.descr[{#SNMPINDEX}]'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: IF-MIB
                 A textual string containing information about the interface
@@ -567,8 +567,8 @@ zabbix_export:
               snmp_oid: '.1.3.6.1.4.1.890.1.5.8.51.24.1.1.3.{#SNMPINDEX}'
               key: 'zyxel.3528.net.if.name[{#SNMPINDEX}]'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB:  ZYXEL-MES3528-MIB
                 A textual string containing information about the interface
@@ -962,8 +962,8 @@ zabbix_export:
               key: 'zyxel.3528.sfp.datecode[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-MES3528-MIB
                 Transceiver module vendor's manufacturing date code.
@@ -985,8 +985,8 @@ zabbix_export:
               key: 'zyxel.3528.sfp.part[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-MES3528-MIB
                 Part number provided by transceiver module vendor.
@@ -1008,8 +1008,8 @@ zabbix_export:
               key: 'zyxel.3528.sfp.revision[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-MES3528-MIB
                 Revision level for part number provided by transceiver module vendor.
@@ -1031,8 +1031,8 @@ zabbix_export:
               key: 'zyxel.3528.sfp.serialnumber[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-MES3528-MIB
                 Serial number provided by transceiver module vendor.
@@ -1088,8 +1088,8 @@ zabbix_export:
               key: 'zyxel.3528.sfp.transceiver[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-MES3528-MIB
                 Transceiver module type names.
@@ -1111,8 +1111,8 @@ zabbix_export:
               key: 'zyxel.3528.sfp.vendor[{#SNMPINDEX}]'
               delay: '{$ZYXEL.LLD.SFP.UPDATE}'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 MIB: ZYXEL-MES3528-MIB
                 Transceiver module vendor name.

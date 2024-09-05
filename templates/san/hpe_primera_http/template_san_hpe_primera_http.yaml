@@ -57,8 +57,8 @@ zabbix_export:
           key: hpe.primera.get.cpgs
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Common provisioning groups data.'
           preprocessing:
             - type: JSONPATH
@@ -75,8 +75,8 @@ zabbix_export:
           type: SCRIPT
           key: hpe.primera.get.data
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var Primera = {
             	params: {},
@@ -249,8 +249,8 @@ zabbix_export:
           key: hpe.primera.get.disks
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Disks data.'
           preprocessing:
             - type: JSONPATH
@@ -268,8 +268,8 @@ zabbix_export:
           key: hpe.primera.get.errors
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'A list of errors from WSAPI requests.'
           preprocessing:
             - type: JSONPATH
@@ -302,8 +302,8 @@ zabbix_export:
           key: hpe.primera.get.hosts
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Hosts data.'
           preprocessing:
             - type: JSONPATH
@@ -321,8 +321,8 @@ zabbix_export:
           key: hpe.primera.get.ports
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Ports data.'
           preprocessing:
             - type: JSONPATH
@@ -340,8 +340,8 @@ zabbix_export:
           key: hpe.primera.get.system
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'System data.'
           preprocessing:
             - type: JSONPATH
@@ -359,8 +359,8 @@ zabbix_export:
           key: hpe.primera.get.tasks
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Tasks data.'
           preprocessing:
             - type: JSONPATH
@@ -378,8 +378,8 @@ zabbix_export:
           key: hpe.primera.get.volumes
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Volumes data.'
           preprocessing:
             - type: JSONPATH
@@ -522,8 +522,8 @@ zabbix_export:
           key: hpe.primera.system.contact
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Contact of the system.'
           inventory_link: CONTACT
           preprocessing:
@@ -545,8 +545,8 @@ zabbix_export:
           key: hpe.primera.system.location
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Location of the system.'
           inventory_link: LOCATION
           preprocessing:
@@ -568,8 +568,8 @@ zabbix_export:
           key: hpe.primera.system.model
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'System model.'
           inventory_link: MODEL
           preprocessing:
@@ -590,8 +590,8 @@ zabbix_export:
           key: hpe.primera.system.name
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'System name.'
           inventory_link: NAME
           preprocessing:
@@ -650,8 +650,8 @@ zabbix_export:
           key: hpe.primera.system.serial_number
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'System serial number.'
           inventory_link: SERIALNO_A
           preprocessing:
@@ -672,8 +672,8 @@ zabbix_export:
           key: hpe.primera.system.sw_version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Storage system software version number.'
           preprocessing:
             - type: JSONPATH
@@ -1244,8 +1244,8 @@ zabbix_export:
               key: 'hpe.primera.cpg.state["{#ID}",degraded]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 Detailed state of the CPG:
                 
@@ -1301,8 +1301,8 @@ zabbix_export:
               key: 'hpe.primera.cpg.state["{#ID}",failed]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 Detailed state of the CPG:
                 
@@ -1458,8 +1458,8 @@ zabbix_export:
               key: 'hpe.primera.cpg["{#ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'CPG {#NAME} data'
               preprocessing:
                 - type: JSONPATH
@@ -1619,8 +1619,8 @@ zabbix_export:
               key: 'hpe.primera.disk["{#ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Disk [{#POSITION}] data'
               preprocessing:
                 - type: JSONPATH
@@ -1668,8 +1668,8 @@ zabbix_export:
               key: 'hpe.primera.disk["{#ID}",fw_version]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Physical disk firmware version.'
               preprocessing:
                 - type: JSONPATH
@@ -1845,8 +1845,8 @@ zabbix_export:
               key: 'hpe.primera.disk["{#ID}",manufacturer]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Physical disk manufacturer.'
               preprocessing:
                 - type: JSONPATH
@@ -1870,8 +1870,8 @@ zabbix_export:
               key: 'hpe.primera.disk["{#ID}",model]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Manufacturer''s device ID for disk.'
               preprocessing:
                 - type: JSONPATH
@@ -1920,8 +1920,8 @@ zabbix_export:
               key: 'hpe.primera.disk["{#ID}",serial_number]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Disk drive serial number.'
               preprocessing:
                 - type: JSONPATH
@@ -2064,8 +2064,8 @@ zabbix_export:
               key: 'hpe.primera.host["{#ID}",comment]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'Additional information for the host.'
               preprocessing:
                 - type: JSONPATH
@@ -2088,8 +2088,8 @@ zabbix_export:
               key: 'hpe.primera.host["{#ID}",contact]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The host''s owner and contact.'
               preprocessing:
                 - type: JSONPATH
@@ -2112,8 +2112,8 @@ zabbix_export:
               key: 'hpe.primera.host["{#ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Host [{#NAME}] data'
               preprocessing:
                 - type: JSONPATH
@@ -2134,8 +2134,8 @@ zabbix_export:
               key: 'hpe.primera.host["{#ID}",ipaddress]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The host''s IP address.'
               preprocessing:
                 - type: JSONPATH
@@ -2158,8 +2158,8 @@ zabbix_export:
               key: 'hpe.primera.host["{#ID}",location]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The host''s location.'
               preprocessing:
                 - type: JSONPATH
@@ -2182,8 +2182,8 @@ zabbix_export:
               key: 'hpe.primera.host["{#ID}",model]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The host''s model.'
               preprocessing:
                 - type: JSONPATH
@@ -2206,8 +2206,8 @@ zabbix_export:
               key: 'hpe.primera.host["{#ID}",os]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: 'The operating system running on the host.'
               preprocessing:
                 - type: JSONPATH
@@ -2258,8 +2258,8 @@ zabbix_export:
               key: 'hpe.primera.port["{#NODE}:{#SLOT}:{#CARD.PORT}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Port [{#NODE}:{#SLOT}:{#CARD.PORT}] data'
               preprocessing:
                 - type: JSONPATH
@@ -2500,8 +2500,8 @@ zabbix_export:
               key: 'hpe.primera.task["{#ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Task [{#NAME}] data'
               preprocessing:
                 - type: JSONPATH
@@ -3318,8 +3318,8 @@ zabbix_export:
               key: 'hpe.primera.volume.state["{#ID}",degraded]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 Volume detailed state:
                 
@@ -3375,8 +3375,8 @@ zabbix_export:
               key: 'hpe.primera.volume.state["{#ID}",failed]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 Volume detailed state:
                 
@@ -3486,8 +3486,8 @@ zabbix_export:
               key: 'hpe.primera.volume.status["{#ID}",rcopy]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               description: |
                 Remote copy status of the volume:
                 
@@ -3519,8 +3519,8 @@ zabbix_export:
               key: 'hpe.primera.volume["{#ID}",data]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Volume [{#NAME}] data'
               preprocessing:
                 - type: JSONPATH

@@ -26,8 +26,8 @@ zabbix_export:
           key: aws.rds.alarms.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Data collection check.'
           preprocessing:
             - type: JSONPATH
@@ -109,8 +109,8 @@ zabbix_export:
           key: aws.rds.class
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Contains the name of the compute and memory capacity class of the DB instance.'
           preprocessing:
             - type: JSONPATH
@@ -346,8 +346,8 @@ zabbix_export:
           key: aws.rds.engine
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Database engine.'
           preprocessing:
             - type: JSONPATH
@@ -367,8 +367,8 @@ zabbix_export:
           key: aws.rds.engine.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Indicates the database engine version.'
           preprocessing:
             - type: JSONPATH
@@ -388,8 +388,8 @@ zabbix_export:
           key: aws.rds.events.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Data collection check.'
           preprocessing:
             - type: JSONPATH
@@ -505,8 +505,8 @@ zabbix_export:
           key: aws.rds.get_alarms
           delay: 0s;m/1
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -753,8 +753,8 @@ zabbix_export:
           key: aws.rds.get_events
           delay: 0s;m/10
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -991,8 +991,8 @@ zabbix_export:
           key: aws.rds.get_instance_info
           delay: 5m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -1210,8 +1210,8 @@ zabbix_export:
           key: aws.rds.get_metrics
           delay: 0s;m/5
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -1534,8 +1534,8 @@ zabbix_export:
           key: aws.rds.instance_info.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Data collection check.'
           preprocessing:
             - type: JSONPATH
@@ -1565,8 +1565,8 @@ zabbix_export:
           key: aws.rds.metrics.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Data collection check.'
           preprocessing:
             - type: JSONPATH
@@ -1729,8 +1729,8 @@ zabbix_export:
           key: aws.rds.read_replica_state
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             The status of a read replica. If the instance isn't a read replica, this is blank.
             Boolean value that is true if the instance is operating normally, or false if the instance is in an error state.
@@ -1769,8 +1769,8 @@ zabbix_export:
           key: aws.rds.read_replica_status
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             The status of a read replica. If the instance isn't a read replica, this is blank.
             Status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.
@@ -1860,8 +1860,8 @@ zabbix_export:
           key: aws.rds.status
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: |
             Specifies the current state of this database.
             All possible status values and their description: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/accessing-monitoring.html#Overview.DBInstance.Status
@@ -1971,8 +1971,8 @@ zabbix_export:
           key: aws.rds.storage_type
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Specifies the storage type associated with DB instance.'
           preprocessing:
             - type: JSONPATH
@@ -2191,8 +2191,8 @@ zabbix_export:
               key: 'aws.rds.alarm.state_reason["{#ALARM_NAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: |
                 An explanation for the alarm state, in text format.
                 Alarm description:
@@ -2615,8 +2615,8 @@ zabbix_export:
               key: 'aws.rds.event_message["{#EVENT_CATEGORY}/{#EVENT_SOURCE_TYPE}/{#EVENT_SOURCE_ID}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Provides the text of this event.'
               preprocessing:
                 - type: JSONPATH

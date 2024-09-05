@@ -30,8 +30,8 @@ zabbix_export:
           key: nomad.client.nodes.api.response
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Client nodes API response message.'
           preprocessing:
             - type: JAVASCRIPT
@@ -74,8 +74,8 @@ zabbix_export:
           key: nomad.client.nodes.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Nomad clients data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
@@ -120,8 +120,8 @@ zabbix_export:
           key: nomad.region
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Current cluster region.'
           preprocessing:
             - type: JSONPATH
@@ -138,8 +138,8 @@ zabbix_export:
           key: nomad.server.api.response
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Server-related (`operator/raft/configuration`, `agent/members`) APIs error response message.'
           preprocessing:
             - type: JSONPATH
@@ -171,8 +171,8 @@ zabbix_export:
           key: nomad.server.nodes.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var Nomad = {
             	setParams: function (params) {
@@ -980,8 +980,8 @@ zabbix_export:
           key: nomad.client.cpu.idle
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'CPU utilization in idle state.'
           preprocessing:
@@ -1002,8 +1002,8 @@ zabbix_export:
           key: nomad.client.cpu.system
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'CPU utilization in system space.'
           preprocessing:
@@ -1024,8 +1024,8 @@ zabbix_export:
           key: nomad.client.cpu.total
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'Total CPU utilization.'
           preprocessing:
@@ -1057,8 +1057,8 @@ zabbix_export:
           key: nomad.client.cpu.user
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: '%'
           description: 'CPU utilization in user space.'
           preprocessing:
@@ -1079,8 +1079,8 @@ zabbix_export:
           key: nomad.client.data.api.response
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Monitoring API response message.'
           preprocessing:
             - type: JAVASCRIPT
@@ -1122,8 +1122,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: nomad.client.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Telemetry data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
@@ -1152,8 +1152,8 @@ zabbix_export:
           key: nomad.client.job.allocs.api.response
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Allocations API response message.'
           preprocessing:
             - type: JAVASCRIPT
@@ -1199,8 +1199,8 @@ zabbix_export:
           key: nomad.client.job.allocs.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Allocated jobs data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
@@ -1233,8 +1233,8 @@ zabbix_export:
           key: nomad.client.memory.available
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Total amount of memory available to processes which includes free and cached memory.'
           preprocessing:
@@ -1255,8 +1255,8 @@ zabbix_export:
           key: nomad.client.memory.free
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Amount of memory which is free.'
           preprocessing:
@@ -1276,8 +1276,8 @@ zabbix_export:
           key: nomad.client.memory.total
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Total amount of physical memory on the node.'
           preprocessing:
@@ -1297,8 +1297,8 @@ zabbix_export:
           key: nomad.client.memory.used
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Amount of memory used by processes.'
           preprocessing:
@@ -1318,8 +1318,8 @@ zabbix_export:
           key: nomad.client.metrics.get
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Nomad client metrics in raw format.'
           preprocessing:
             - type: JSONPATH
@@ -1337,8 +1337,8 @@ zabbix_export:
           key: nomad.client.node.info.api.response
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Nodes API response message.'
           preprocessing:
             - type: JAVASCRIPT
@@ -1384,8 +1384,8 @@ zabbix_export:
           key: nomad.client.node.info.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Node info data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
@@ -1514,8 +1514,8 @@ zabbix_export:
           key: nomad.client.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Nomad client version.'
           preprocessing:
             - type: JSONPATH
@@ -1583,8 +1583,8 @@ zabbix_export:
               key: 'nomad.client.allocs.cpu.allocated["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '!Mhz'
               description: 'Total CPU resources allocated by the ["{#JOB.NAME}"] job across all cores.'
               preprocessing:
@@ -1612,8 +1612,8 @@ zabbix_export:
               key: 'nomad.client.allocs.cpu.system["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Total CPU resources consumed by the ["{#JOB.NAME}"] job in system space.'
               preprocessing:
@@ -1641,8 +1641,8 @@ zabbix_export:
               key: 'nomad.client.allocs.cpu.throttled_periods["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: s
               description: 'Total number of CPU periods that the ["{#JOB.NAME}"] job was throttled.'
               preprocessing:
@@ -1673,8 +1673,8 @@ zabbix_export:
               key: 'nomad.client.allocs.cpu.throttled_time["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: s
               description: 'Total time that the ["{#JOB.NAME}"] job was throttled.'
               preprocessing:
@@ -1706,8 +1706,8 @@ zabbix_export:
               key: 'nomad.client.allocs.cpu.total_percent["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Total CPU resources consumed by the ["{#JOB.NAME}"] job across all cores.'
               preprocessing:
@@ -1735,8 +1735,8 @@ zabbix_export:
               key: 'nomad.client.allocs.cpu.total_ticks["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               description: 'CPU ticks consumed by the process for the ["{#JOB.NAME}"] job in the last collection interval.'
               preprocessing:
                 - type: PROMETHEUS_PATTERN
@@ -1763,8 +1763,8 @@ zabbix_export:
               key: 'nomad.client.allocs.cpu.user["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Total CPU resources consumed by the ["{#JOB.NAME}"] job in user space.'
               preprocessing:
@@ -1792,8 +1792,8 @@ zabbix_export:
               key: 'nomad.client.allocs.memory.allocated["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Amount of memory allocated by the ["{#JOB.NAME}"] job.'
               preprocessing:
@@ -1821,8 +1821,8 @@ zabbix_export:
               key: 'nomad.client.allocs.memory.cache["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Amount of memory cached by the ["{#JOB.NAME}"] job.'
               preprocessing:
@@ -1850,8 +1850,8 @@ zabbix_export:
               key: 'nomad.client.allocs.memory.swap["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Amount of memory swapped by the ["{#JOB.NAME}"] job.'
               preprocessing:
@@ -1879,8 +1879,8 @@ zabbix_export:
               key: 'nomad.client.allocs.memory.usage["{#JOB.NAME}","{#JOB.TASK.GROUP}","{#JOB.NAMESPACE}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Total amount of memory used by the ["{#JOB.NAME}"] job.'
               preprocessing:
@@ -2033,8 +2033,8 @@ zabbix_export:
               key: 'nomad.client.disk.available["{#DEV.NAME}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Amount of space which is available on ["{#DEV.NAME}"] disk.'
               preprocessing:
@@ -2056,8 +2056,8 @@ zabbix_export:
               key: 'nomad.client.disk.inodes_percent["{#DEV.NAME}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Disk space consumed by the inodes on ["{#DEV.NAME}"] disk.'
               preprocessing:
@@ -2115,8 +2115,8 @@ zabbix_export:
               key: 'nomad.client.disk.size["{#DEV.NAME}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Total size of the ["{#DEV.NAME}"] device.'
               preprocessing:
@@ -2138,8 +2138,8 @@ zabbix_export:
               key: 'nomad.client.disk.used["{#DEV.NAME}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: B
               description: 'Amount of disk ["{#DEV.NAME}"] space which has been used.'
               preprocessing:
@@ -2161,8 +2161,8 @@ zabbix_export:
               key: 'nomad.client.disk.used_percent["{#DEV.NAME}"]'
               delay: '0'
               history: 7d
-              trends: 90d
               value_type: FLOAT
+              trends: 90d
               units: '%'
               description: 'Percentage of disk ["{#DEV.NAME}"] space used.'
               preprocessing:
@@ -2913,8 +2913,8 @@ zabbix_export:
           key: nomad.raft.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Nomad raft version.'
           preprocessing:
             - type: JSONPATH
@@ -2932,8 +2932,8 @@ zabbix_export:
           key: nomad.server.alloc_client_update
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply AllocClientUpdate raft entry.'
           preprocessing:
@@ -3022,8 +3022,8 @@ zabbix_export:
           key: nomad.server.blocked_evals.cpu
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Amount of CPU shares requested by blocked evals.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3045,8 +3045,8 @@ zabbix_export:
           key: nomad.server.blocked_evals.job.cpu
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Amount of CPU shares requested by blocked evals of a job.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3070,8 +3070,8 @@ zabbix_export:
           key: nomad.server.blocked_evals.job.memory
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Amount of memory requested by blocked evals of a job.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3095,8 +3095,8 @@ zabbix_export:
           key: nomad.server.blocked_evals.memory
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Amount of memory requested by blocked evals.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3118,8 +3118,8 @@ zabbix_export:
           key: nomad.server.blocked_evals.total_blocked
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of evals in the blocked state for any reason (cluster resource exhaustion or quota limits).'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3139,8 +3139,8 @@ zabbix_export:
           key: nomad.server.blocked_evals.total_escaped
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: |
             Count of evals that have escaped computed node classes.
             This indicates a scheduler optimization was skipped and is not usually a source of concern.
@@ -3162,8 +3162,8 @@ zabbix_export:
           key: nomad.server.blocked_evals.total_quota_limit
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of blocked evals due to quota limits (the resources for these jobs are not counted in other blocked_evals metrics, except for total_blocked).'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3183,8 +3183,8 @@ zabbix_export:
           key: nomad.server.broker.eval_waiting
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Average time elapsed with evaluations waiting to be enqueued.'
           preprocessing:
@@ -3208,8 +3208,8 @@ zabbix_export:
           key: nomad.server.broker.service_ready
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of service evals ready to be scheduled.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3229,8 +3229,8 @@ zabbix_export:
           key: nomad.server.broker.service_unacked
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of unacknowledged service evals.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3250,8 +3250,8 @@ zabbix_export:
           key: nomad.server.broker.system_ready
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of service evals ready to be scheduled.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3271,8 +3271,8 @@ zabbix_export:
           key: nomad.server.broker.system_unacked
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of unacknowledged system evals.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3292,8 +3292,8 @@ zabbix_export:
           key: nomad.server.broker.total_pending
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Evaluations that are pending until an existing evaluation for the same job completes.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3313,8 +3313,8 @@ zabbix_export:
           key: nomad.server.broker.total_ready
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Number of evaluations ready to be processed.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3334,8 +3334,8 @@ zabbix_export:
           key: nomad.server.broker.total_unacked
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Evaluations dispatched for processing but incomplete.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -3375,8 +3375,8 @@ zabbix_export:
           key: nomad.server.client.dequeue
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Eval.Dequeue RPC call.'
           preprocessing:
@@ -3402,8 +3402,8 @@ zabbix_export:
           key: nomad.server.client.get_client_allocs
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Node.GetClientAllocs RPC call.'
           preprocessing:
@@ -3429,8 +3429,8 @@ zabbix_export:
           key: nomad.server.client.list
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Node.List RPC call.'
           preprocessing:
@@ -3456,8 +3456,8 @@ zabbix_export:
           key: nomad.server.client.update_alloc
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Node.UpdateAlloc RPC call.'
           preprocessing:
@@ -3483,8 +3483,8 @@ zabbix_export:
           key: nomad.server.client.update_status
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Node.UpdateStatus RPC call.'
           preprocessing:
@@ -3510,8 +3510,8 @@ zabbix_export:
           key: nomad.server.cpu.time
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Total user and system CPU time spent in seconds.'
           preprocessing:
@@ -3535,8 +3535,8 @@ zabbix_export:
           key: nomad.server.data.api.response
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Monitoring API response message.'
           preprocessing:
             - type: JAVASCRIPT
@@ -3578,8 +3578,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: nomad.server.data.get
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Telemetry data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
@@ -3608,8 +3608,8 @@ zabbix_export:
           key: nomad.server.eval.ack
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Eval.Ack RPC call.'
           preprocessing:
@@ -3635,8 +3635,8 @@ zabbix_export:
           key: nomad.server.fsm.apply_plan_results
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply ApplyPlanResults raft entry.'
           preprocessing:
@@ -3660,8 +3660,8 @@ zabbix_export:
           key: nomad.server.fsm.register_job
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply RegisterJob raft entry.'
           preprocessing:
@@ -3685,8 +3685,8 @@ zabbix_export:
           key: nomad.server.fsm.update_eval
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply UpdateEval raft entry.'
           preprocessing:
@@ -3732,8 +3732,8 @@ zabbix_export:
           key: nomad.server.job.allocations
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Job.Allocations RPC call.'
           preprocessing:
@@ -3759,8 +3759,8 @@ zabbix_export:
           key: nomad.server.job.evaluations
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Job.Evaluations RPC call.'
           preprocessing:
@@ -3786,8 +3786,8 @@ zabbix_export:
           key: nomad.server.job.get_job
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Job.GetJob RPC call.'
           preprocessing:
@@ -3931,8 +3931,8 @@ zabbix_export:
           key: nomad.server.job_summary.get_job_summary
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Job.Summary RPC call.'
           preprocessing:
@@ -4063,8 +4063,8 @@ zabbix_export:
           key: nomad.server.leader.barrier
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to establish a raft barrier during leader transition.'
           preprocessing:
@@ -4090,8 +4090,8 @@ zabbix_export:
           key: nomad.server.leader.reconcile
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to reconcile all serf peers with state store.'
           preprocessing:
@@ -4117,8 +4117,8 @@ zabbix_export:
           key: nomad.server.leader.reconcile_member
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to reconcile a serf peer with state store.'
           preprocessing:
@@ -4144,8 +4144,8 @@ zabbix_export:
           key: nomad.server.memberlist.gossip
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to broadcast gossip messages.'
           preprocessing:
@@ -4169,8 +4169,8 @@ zabbix_export:
           key: nomad.server.metrics.get
           delay: '0'
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Nomad server metrics in raw format.'
           preprocessing:
             - type: JSONPATH
@@ -4188,8 +4188,8 @@ zabbix_export:
           key: nomad.server.namespace.list_namespace
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Namespace.ListNamespaces.'
           preprocessing:
@@ -4213,8 +4213,8 @@ zabbix_export:
           key: nomad.server.plan.apply
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply a plan.'
           preprocessing:
@@ -4238,8 +4238,8 @@ zabbix_export:
           key: nomad.server.plan.evaluate
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to evaluate a plan.'
           preprocessing:
@@ -4263,8 +4263,8 @@ zabbix_export:
           key: nomad.server.plan.queue_depth
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of evals in the plan queue.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -4284,8 +4284,8 @@ zabbix_export:
           key: nomad.server.plan.submit
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for Plan.Submit RPC call.'
           preprocessing:
@@ -4313,8 +4313,8 @@ zabbix_export:
           key: nomad.server.plan.wait_for_index
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed that planner waits for the raft index of the plan to be processed.'
           preprocessing:
@@ -4466,8 +4466,8 @@ zabbix_export:
           key: nomad.server.raft.boltdb.free_page_bytes
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Number of free page bytes.'
           preprocessing:
@@ -4617,8 +4617,8 @@ zabbix_export:
           key: nomad.server.raft.boltdb.txstats.node_deref
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of total database node dereferences.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -4641,8 +4641,8 @@ zabbix_export:
           key: nomad.server.raft.boltdb.txstats.page_alloc
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Number of page allocations.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -4685,8 +4685,8 @@ zabbix_export:
           key: nomad.server.raft.boltdb.txstats.rebalance
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of total rebalance operations.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -4709,8 +4709,8 @@ zabbix_export:
           key: nomad.server.raft.boltdb.txstats.rebalance_time
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Sample of rebalance operation times.'
           preprocessing:
@@ -4757,8 +4757,8 @@ zabbix_export:
           key: nomad.server.raft.boltdb.txstats.spill_time
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Sample of spill operation times.'
           preprocessing:
@@ -4828,8 +4828,8 @@ zabbix_export:
           key: nomad.server.raft.boltdb.txstats.write_time
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Sample of write operation times.'
           preprocessing:
@@ -4913,8 +4913,8 @@ zabbix_export:
           key: nomad.server.raft.commit_time
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to commit writes.'
           preprocessing:
@@ -4938,8 +4938,8 @@ zabbix_export:
           key: nomad.server.raft.fsm.apply
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply write to FSM.'
           preprocessing:
@@ -4963,8 +4963,8 @@ zabbix_export:
           key: nomad.server.raft.fsm.autopilot
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply Autopilot raft entry.'
           preprocessing:
@@ -4989,8 +4989,8 @@ zabbix_export:
           key: nomad.server.raft.fsm.enqueue
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to enqueue write to FSM.'
           preprocessing:
@@ -5014,8 +5014,8 @@ zabbix_export:
           key: nomad.server.raft.fsm.register_node
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to apply RegisterNode raft entry.'
           preprocessing:
@@ -5059,8 +5059,8 @@ zabbix_export:
           key: nomad.server.raft.leader.dispatch_log
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed to write log, mark in flight, and start replication.'
           preprocessing:
@@ -5109,8 +5109,8 @@ zabbix_export:
           key: nomad.server.raft.leader.lastContact
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: |
             Time since last contact to leader.
@@ -5220,8 +5220,8 @@ zabbix_export:
           key: nomad.server.resident_memory_bytes
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Resident memory size in bytes.'
           preprocessing:
@@ -5317,8 +5317,8 @@ zabbix_export:
           key: nomad.server.runtime.alloc_bytes
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Memory utilization in bytes.'
           preprocessing:
@@ -5339,8 +5339,8 @@ zabbix_export:
           key: nomad.server.runtime.free_count
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of objects freed from heap by go runtime GC.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -5363,8 +5363,8 @@ zabbix_export:
           key: nomad.server.runtime.gc_pause_ns
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Go runtime GC pause times.'
           preprocessing:
@@ -5430,8 +5430,8 @@ zabbix_export:
           key: nomad.server.runtime.sys_bytes
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Go runtime GC metadata size in bytes.'
           preprocessing:
@@ -5493,8 +5493,8 @@ zabbix_export:
           key: nomad.server.serf.queue.event
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of memberlist events received.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -5514,8 +5514,8 @@ zabbix_export:
           key: nomad.server.serf.queue.intent
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of memberlist changes.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -5535,8 +5535,8 @@ zabbix_export:
           key: nomad.server.serf.queue.queries
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of memberlist queries.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -5576,8 +5576,8 @@ zabbix_export:
           key: nomad.server.stats.api.response
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Internal stats API response message.'
           preprocessing:
             - type: JAVASCRIPT
@@ -5623,8 +5623,8 @@ zabbix_export:
           key: nomad.server.stats.get
           delay: 1h
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           description: 'Internal stats data in raw format.'
           preprocessing:
             - type: CHECK_NOT_SUPPORTED
@@ -5653,8 +5653,8 @@ zabbix_export:
           key: nomad.server.vault.distributed_tokens_revoked
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           description: 'Count of revoked tokens.'
           preprocessing:
             - type: PROMETHEUS_PATTERN
@@ -5674,8 +5674,8 @@ zabbix_export:
           key: nomad.server.vault.token_last_renewal
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time since last successful Vault token renewal.'
           preprocessing:
@@ -5699,8 +5699,8 @@ zabbix_export:
           key: nomad.server.vault.token_next_renewal
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time until next Vault token renewal attempt.'
           preprocessing:
@@ -5724,8 +5724,8 @@ zabbix_export:
           key: nomad.server.vault.token_ttl
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time to live for Vault token.'
           preprocessing:
@@ -5749,8 +5749,8 @@ zabbix_export:
           key: nomad.server.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Nomad server version.'
           preprocessing:
             - type: JSONPATH
@@ -5778,8 +5778,8 @@ zabbix_export:
           key: nomad.server.virtual_memory_bytes
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: B
           description: 'Virtual memory size in bytes.'
           preprocessing:
@@ -5800,8 +5800,8 @@ zabbix_export:
           key: nomad.server.worker.create_eval
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to create an eval.'
           preprocessing:
@@ -5825,8 +5825,8 @@ zabbix_export:
           key: nomad.server.worker.dequeue_eval
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to dequeue an eval.'
           preprocessing:
@@ -5850,8 +5850,8 @@ zabbix_export:
           key: nomad.server.worker.invoke_scheduler_service
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to invoke the scheduler.'
           preprocessing:
@@ -5875,8 +5875,8 @@ zabbix_export:
           key: nomad.server.worker.send_ack
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to send acknowledgement.'
           preprocessing:
@@ -5900,8 +5900,8 @@ zabbix_export:
           key: nomad.server.worker.submit_plan
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to submit plan.'
           preprocessing:
@@ -5925,8 +5925,8 @@ zabbix_export:
           key: nomad.server.worker.update_eval
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed for worker to submit updated eval.'
           preprocessing:
@@ -5950,8 +5950,8 @@ zabbix_export:
           key: nomad.server.worker.wait_for_index
           delay: '0'
           history: 7d
-          trends: 90d
           value_type: FLOAT
+          trends: 90d
           units: s
           description: 'Time elapsed that worker waits for the raft index of the eval to be processed.'
           preprocessing:

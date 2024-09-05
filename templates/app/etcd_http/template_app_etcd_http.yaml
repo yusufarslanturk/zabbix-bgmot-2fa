@@ -55,8 +55,8 @@ zabbix_export:
           key: etcd.cluster.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The version of the `etcd cluster`.'
           preprocessing:
             - type: JSONPATH
@@ -170,8 +170,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: etcd.get_metrics
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           authtype: BASIC
           username: '{$ETCD.USER}'
           password: '{$ETCD.PASSWORD}'
@@ -184,8 +184,8 @@ zabbix_export:
           type: HTTP_AGENT
           key: etcd.get_version
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           url: '{$ETCD.SCHEME}://{$ETCD.HOST}:{$ETCD.PORT}/version'
           tags:
             - tag: component
@@ -868,8 +868,8 @@ zabbix_export:
           key: etcd.server.version
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'The version of the `etcd server`.'
           preprocessing:
             - type: JSONPATH

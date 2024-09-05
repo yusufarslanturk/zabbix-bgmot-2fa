@@ -712,8 +712,8 @@ zabbix_export:
               type: JMX
               key: 'jmx["{#JMXOBJ}",FullVersion]'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               username: '{$GRIDGAIN.USER}'
               password: '{$GRIDGAIN.PASSWORD}'
               description: 'Version of GridGain instance.'
@@ -745,8 +745,8 @@ zabbix_export:
               type: JMX
               key: 'jmx["{#JMXOBJ}",LocalNodeId]'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               username: '{$GRIDGAIN.USER}'
               password: '{$GRIDGAIN.PASSWORD}'
               description: 'Unique identifier for this node within grid.'
@@ -933,8 +933,8 @@ zabbix_export:
               type: JMX
               key: 'jmx["{#JMXOBJ}",Coordinator]'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               username: '{$GRIDGAIN.USER}'
               password: '{$GRIDGAIN.PASSWORD}'
               description: 'Current coordinator UUID.'
@@ -1247,8 +1247,8 @@ zabbix_export:
               type: JMX
               key: 'jmx["{#JMXOBJ}",Caches]'
               history: 7d
-              trends: '0'
               value_type: CHAR
+              trends: '0'
               username: '{$GRIDGAIN.USER}'
               password: '{$GRIDGAIN.PASSWORD}'
               description: 'List of caches.'

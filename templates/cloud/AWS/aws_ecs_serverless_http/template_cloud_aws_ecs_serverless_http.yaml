@@ -26,8 +26,8 @@ zabbix_export:
           key: aws.ecs.alarms.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Data collection check.'
           preprocessing:
             - type: JSONPATH
@@ -174,8 +174,8 @@ zabbix_export:
           key: aws.ecs.get_alarms
           delay: 0s;m/1
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -425,8 +425,8 @@ zabbix_export:
           key: aws.ecs.get_cluster_services
           delay: 5m
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -691,8 +691,8 @@ zabbix_export:
           key: aws.ecs.get_metrics
           delay: 0s;m/1
           history: '0'
-          trends: '0'
           value_type: TEXT
+          trends: '0'
           params: |
             var AWS = {
             	params: {},
@@ -1034,8 +1034,8 @@ zabbix_export:
           key: aws.ecs.metrics.check
           delay: '0'
           history: 7d
-          trends: '0'
           value_type: CHAR
+          trends: '0'
           description: 'Data collection check.'
           preprocessing:
             - type: JSONPATH
@@ -1168,8 +1168,8 @@ zabbix_export:
               key: 'aws.ecs.alarm.get_metrics["{#ALARM_NAME}"]'
               delay: '0'
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: 'Get alarm metrics about the state and its reason.'
               preprocessing:
                 - type: JSONPATH
@@ -1224,8 +1224,8 @@ zabbix_export:
               key: 'aws.ecs.alarm.state_reason["{#ALARM_NAME}"]'
               delay: '0'
               history: 7d
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               description: |
                 An explanation for the alarm state, in text format.
                 Alarm description:
@@ -1446,8 +1446,8 @@ zabbix_export:
               key: 'aws.ecs.services.get_metrics["{#AWS.ECS.SERVICE.NAME}"]'
               delay: 0s;m/5
               history: '0'
-              trends: '0'
               value_type: TEXT
+              trends: '0'
               params: |
                 var AWS = {
                 	params: {},
