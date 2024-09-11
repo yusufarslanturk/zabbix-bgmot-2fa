@@ -183,7 +183,7 @@ static duk_ret_t	es_md5(duk_context *ctx)
 
 	es_bin_to_hex(hash, ZBX_MD5_DIGEST_SIZE, md5sum);
 
-	es_push_result_string(ctx, md5sum, MD5_DIGEST_SIZE * 2);
+	es_push_result_string(ctx, md5sum, ZBX_MD5_DIGEST_SIZE * 2);
 	zbx_free(md5sum);
 	zbx_free(str);
 
