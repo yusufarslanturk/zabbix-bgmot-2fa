@@ -415,11 +415,16 @@ ZBX_Notifications.prototype.handleTabFocusIn = function() {
 };
 
 /**
- * @param {MouseEvent} e
+ * Close the notification box.
  */
-ZBX_Notifications.prototype.handleCloseClicked = function(e) {
+ZBX_Notifications.prototype.handleCloseClicked = function() {
+	const data = {
+		ids: this.getEventIds(),
+		_csrf_token: this._csrf_token
+	};
+
 	this
-		.fetch('notifications.read', {ids: this.getEventIds()})
+		.fetch('notifications.read', data)
 		.then((resp) => {
 			if ('error' in resp) {
 				throw {error: resp.error};
@@ -448,9 +453,9 @@ ZBX_Notifications.prototype.handleCloseClicked = function(e) {
 };
 
 /**
- * @param {MouseEvent} e
+ * Snooze messages in the notification box.
  */
-ZBX_Notifications.prototype.handleSnoozeClicked = function(e) {
+ZBX_Notifications.prototype.handleSnoozeClicked = function() {
 	if (this.alarm.isSnoozed(this._cached_list)) {
 		return;
 	}
@@ -466,11 +471,16 @@ ZBX_Notifications.prototype.handleSnoozeClicked = function(e) {
 };
 
 /**
- * @param {MouseEvent} e
+ * Mute messages in the notification box.
  */
-ZBX_Notifications.prototype.handleMuteClicked = function(e) {
+ZBX_Notifications.prototype.handleMuteClicked = function() {
+	const data = {
+		muted: this.alarm.muted ? 0 : 1,
+		_csrf_token: this._csrf_token
+	};
+
 	this
-		.fetch('notifications.mute', {muted: this.alarm.muted ? 0 : 1})
+		.fetch('notifications.mute', data)
 		.then((resp) => {
 			if ('error' in resp) {
 				throw {error: resp.error};
@@ -516,6 +526,7 @@ ZBX_Notifications.prototype.handleMainLoopResp = function(resp) {
 
 	this.consumeUserSettings(resp.settings);
 	this.consumeList(resp.notifications);
+	this._csrf_token = resp._csrf_token;
 	this.render();
 
 	this.pushUpdates();
