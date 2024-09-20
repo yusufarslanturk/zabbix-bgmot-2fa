@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zabbix 6.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:51+0300\n"
-"PO-Revision-Date: 2024-08-08 08:33+0000\n"
+"PO-Revision-Date: 2024-04-02 14:06+0000\n"
 "Last-Translator: Tomáš Heřmánek <tomas.hermanek@initmax.cz>\n"
 "Language-Team: Zabbix translation team\n"
 "Language: sk\n"
@@ -696,8 +696,8 @@ msgstr "Trieda akcií %1$s musí rozšíriť triedu %2$s."
 msgid "Action deleted"
 msgid_plural "Actions deleted"
 msgstr[0] "Akcia bola zmazaná"
-msgstr[1] ""
-msgstr[2] ""
+msgstr[1] "Akcia bola zmazaná"
+msgstr[2] "Akcia bola zmazaná"
 
 #: app/controllers/CControllerActionDisable.php:84
 msgid "Action disabled"
@@ -2451,8 +2451,8 @@ msgstr "Nie je možné zmazať interného Zabbix používateľa \"%1$s\", skúst
 msgid "Cannot delete action"
 msgid_plural "Cannot delete actions"
 msgstr[0] "Nie je možné zmazať akciu"
-msgstr[1] ""
-msgstr[2] ""
+msgstr[1] "Nie je možné zmazať akciu"
+msgstr[2] "Nie je možné zmazať akciu"
 
 #: include/classes/api/services/CRole.php:368
 #, c-format
