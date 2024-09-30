@@ -21,10 +21,6 @@
 
 class CControllerNotificationsMute extends CController {
 
-	public function init() {
-		$this->disableCsrfValidation();
-	}
-
 	protected function checkInput() {
 		$fields = [
 			'muted' => 'required|in 0,1'

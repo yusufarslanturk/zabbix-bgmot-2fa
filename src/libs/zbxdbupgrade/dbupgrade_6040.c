@@ -372,6 +372,78 @@ static int	DBpatch_6040027(void)
 	return SUCCEED;
 }
 
+static int	DBpatch_6040028(void)
+{
+	if (FAIL == zbx_db_index_exists("items", "items_10"))
+		return DBcreate_index("items", "items_10", "uuid", 0);
+
+	return SUCCEED;
+}
+
+static int	DBpatch_6040029(void)
+{
+	if (FAIL == zbx_db_index_exists("hosts", "hosts_9"))
+		return DBcreate_index("hosts", "hosts_9", "uuid", 0);
+
+	return SUCCEED;
+}
+
+static int	DBpatch_6040030(void)
+{
+	if (FAIL == zbx_db_index_exists("hstgrp", "hstgrp_2"))
+		return DBcreate_index("hstgrp", "hstgrp_2", "uuid", 0);
+
+	return SUCCEED;
+}
+
+static int	DBpatch_6040031(void)
+{
+	if (FAIL == zbx_db_index_exists("httptest", "httptest_5"))
+		return DBcreate_index("httptest", "httptest_5", "uuid", 0);
+
+	return SUCCEED;
+}
+
+static int	DBpatch_6040032(void)
+{
+	if (FAIL == zbx_db_index_exists("valuemap", "valuemap_2"))
+		return DBcreate_index("valuemap", "valuemap_2", "uuid", 0);
+
+	return SUCCEED;
+}
+
+static int	DBpatch_6040033(void)
+{
+	if (FAIL == zbx_db_index_exists("triggers", "triggers_4"))
+		return DBcreate_index("triggers", "triggers_4", "uuid", 0);
+
+	return SUCCEED;
+}
+
+static int	DBpatch_6040034(void)
+{
+	if (FAIL == zbx_db_index_exists("graphs", "graphs_5"))
+		return DBcreate_index("graphs", "graphs_5", "uuid", 0);
+
+	return SUCCEED;
+}
+
+static int	DBpatch_6040035(void)
+{
+	if (FAIL == zbx_db_index_exists("services", "services_1"))
+		return DBcreate_index("services", "services_1", "uuid", 0);
+
+	return SUCCEED;
+}
+
+static int	DBpatch_6040036(void)
+{
+	if (FAIL == zbx_db_index_exists("dashboard", "dashboard_3"))
+		return DBcreate_index("dashboard", "dashboard_3", "uuid", 0);
+
+	return SUCCEED;
+}
+
 #endif
 
 DBPATCH_START(6040)
@@ -406,5 +478,14 @@ DBPATCH_ADD(6040024, 0, 0)
 DBPATCH_ADD(6040025, 0, 0)
 DBPATCH_ADD(6040026, 0, 0)
 DBPATCH_ADD(6040027, 0, 0)
+DBPATCH_ADD(6040028, 0, 0)
+DBPATCH_ADD(6040029, 0, 0)
+DBPATCH_ADD(6040030, 0, 0)
+DBPATCH_ADD(6040031, 0, 0)
+DBPATCH_ADD(6040032, 0, 0)
+DBPATCH_ADD(6040033, 0, 0)
+DBPATCH_ADD(6040034, 0, 0)
+DBPATCH_ADD(6040035, 0, 0)
+DBPATCH_ADD(6040036, 0, 0)
 
 DBPATCH_END()
