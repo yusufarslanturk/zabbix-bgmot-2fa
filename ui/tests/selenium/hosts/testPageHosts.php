@@ -343,8 +343,8 @@ class testPageHosts extends CLegacyWebTest {
 		$filter->getField('Name')->fill($this->HostName);
 		$filter->submit();
 		$table->waitUntilReloaded();
-		$this->zbxTestTextPresent($this->HostName);
-		$this->zbxTestTextNotPresent('Displaying 0 of 0 found');
+		$this->assertTrue($this->query('link', $this->HostName)->one()->isVisible());
+		$this->assertFalse($this->query('xpath://div[@class="table-stats"][text()="Displaying 0 of 0 found"]')->exists());
 	}
 
 	public function testPageHosts_FilterByTemplates() {
