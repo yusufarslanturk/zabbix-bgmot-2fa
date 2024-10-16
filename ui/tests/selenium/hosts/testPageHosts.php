@@ -376,8 +376,10 @@ class testPageHosts extends CLegacyWebTest {
 		$this->zbxTestClickLinkTextWait('Proxy_1 for filter');
 		$this->zbxTestClickButtonText('Apply');
 		$this->zbxTestWaitForPageToLoad();
-		$this->zbxTestAssertElementPresentXpath("//tbody//a[text()='Host_1 with proxy']");
-		$this->zbxTestAssertElementPresentXpath("//div[@class='table-stats'][text()='Displaying 1 of 1 found']");
+		$this->assertTrue($this->query('xpath://tbody//a[text()="Host_1 with proxy"]')->one()->isVisible());
+		$this->assertTrue($this->query('xpath://div[@class="table-stats"][text()="Displaying 1 of 1 found"]')
+				->one()->isVisible()
+		);
 	}
 
 	public function testPageHosts_FilterNone() {
@@ -386,11 +388,15 @@ class testPageHosts extends CLegacyWebTest {
 		$filter->query('button:Reset')->one()->click();
 		$filter->getField('Name')->fill('1928379128ksdhksdjfh');
 		$filter->submit();
-		$this->zbxTestAssertElementPresentXpath("//div[@class='table-stats'][text()='Displaying 0 of 0 found']");
+		$this->assertTrue($this->query('xpath://div[@class="table-stats"][text()="Displaying 0 of 0 found"]')
+				->one()->isVisible()
+		);
 		$filter->invalidate();
 		$filter->getField('Name')->fill('%');
 		$filter->submit();
-		$this->zbxTestAssertElementPresentXpath("//div[@class='table-stats'][text()='Displaying 0 of 0 found']");
+		$this->assertTrue($this->query('xpath://div[@class="table-stats"][text()="Displaying 0 of 0 found"]')
+				->one()->isVisible()
+		);
 	}
 
 	public function testPageHosts_FilterByAllFields() {
@@ -405,7 +411,9 @@ class testPageHosts extends CLegacyWebTest {
 		$filter->submit();
 		$table->waitUntilReloaded();
 		$this->zbxTestTextPresent($this->HostName);
-		$this->zbxTestAssertElementPresentXpath("//div[@class='table-stats'][text()='Displaying 1 of 1 found']");
+		$this->assertTrue($this->query('xpath://div[@class="table-stats"][text()="Displaying 1 of 1 found"]')
+				->one()->isVisible()
+		);
 	}
 
 	public function testPageHosts_FilterReset() {

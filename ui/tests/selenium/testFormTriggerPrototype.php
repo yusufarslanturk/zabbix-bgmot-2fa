@@ -259,7 +259,9 @@ class testFormTriggerPrototype extends CLegacyWebTest {
 
 		$this->zbxTestCheckTitle('Configuration of trigger prototypes');
 		$this->zbxTestCheckHeader('Trigger prototypes');
-		$this->zbxTestAssertElementPresentXpath("//a[@id='tab_triggersTab' and text()='Trigger prototype']");
+		$this->assertTrue($this->query('xpath://a[@id="tab_triggersTab" and text()="Trigger prototype"]')
+				->one()->isVisible()
+		);
 
 		if (isset($data['constructor'])) {
 			switch ($data['constructor']) {
@@ -271,9 +273,11 @@ class testFormTriggerPrototype extends CLegacyWebTest {
 					$this->zbxTestClickButtonText('Close expression constructor');
 					break;
 			}
-		}
 
-		$this->zbxTestTextPresent('Trigger prototype');
+			$this->assertTrue($this->query('xpath://a[@id="tab_triggersTab" and text()="Trigger prototype"]')
+					->one()->isVisible()
+			);
+		}
 
 		if (isset($data['templatedHost'])) {
 			$this->zbxTestTextPresent('Parent triggers');
